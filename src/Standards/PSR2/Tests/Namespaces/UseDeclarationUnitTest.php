@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\PSR2\Tests\Namespaces;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the UseDeclaration sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR2\Sniffs\Namespaces\UseDeclarationSniff
+ */
 class UseDeclarationUnitTest extends AbstractSniffUnitTest
 {
 

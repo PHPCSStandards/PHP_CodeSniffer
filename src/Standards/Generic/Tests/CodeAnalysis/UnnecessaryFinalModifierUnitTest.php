@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\CodeAnalysis;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the UnnecessaryFinalModifier sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UnnecessaryFinalModifierSniff
+ */
 class UnnecessaryFinalModifierUnitTest extends AbstractSniffUnitTest
 {
 

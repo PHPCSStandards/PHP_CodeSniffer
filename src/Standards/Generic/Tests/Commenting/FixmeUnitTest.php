@@ -12,6 +12,11 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Commenting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the Fixme sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Commenting\FixmeSniff
+ */
 class FixmeUnitTest extends AbstractSniffUnitTest
 {
 

@@ -12,6 +12,11 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Debug;
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 use PHP_CodeSniffer\Config;
 
+/**
+ * Unit test class for the ESLint sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Debug\ESLintSniff
+ */
 class ESLintUnitTest extends AbstractSniffUnitTest
 {
 

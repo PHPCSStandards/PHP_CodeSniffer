@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Objects;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the ObjectMemberComma sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Objects\ObjectMemberCommaSniff
+ */
 class ObjectMemberCommaUnitTest extends AbstractSniffUnitTest
 {
 

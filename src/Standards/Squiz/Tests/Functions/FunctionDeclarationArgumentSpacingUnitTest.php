@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Functions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the FunctionDeclarationArgumentSpacing sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions\FunctionDeclarationArgumentSpacingSniff
+ */
 class FunctionDeclarationArgumentSpacingUnitTest extends AbstractSniffUnitTest
 {
 

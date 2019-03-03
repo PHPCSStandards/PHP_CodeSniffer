@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\PSR1\Tests\Files;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the SideEffects sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR1\Sniffs\Files\SideEffectsSniff
+ */
 class SideEffectsUnitTest extends AbstractSniffUnitTest
 {
 

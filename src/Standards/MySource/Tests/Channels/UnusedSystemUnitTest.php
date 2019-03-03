@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\MySource\Tests\Channels;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the UnusedSystem sniff.
+ *
+ * @covers PHP_CodeSniffer\Standards\MySource\Sniffs\Channels\UnusedSystemSniff
+ */
 class UnusedSystemUnitTest extends AbstractSniffUnitTest
 {
 

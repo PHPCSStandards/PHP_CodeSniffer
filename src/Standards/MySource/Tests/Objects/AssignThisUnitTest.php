@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\MySource\Tests\Objects;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the AssignThis sniff.
+ *
+ * @covers PHP_CodeSniffer\Standards\MySource\Sniffs\Objects\AssignThisSniff
+ */
 class AssignThisUnitTest extends AbstractSniffUnitTest
 {
 
