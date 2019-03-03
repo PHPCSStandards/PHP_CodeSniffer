@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the \PHP_CodeSniffer\Files\File:isReference method.
+ * Tests for the \PHP_CodeSniffer\Files\File::isReference method.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Tests\Core\File;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 
+/**
+ * Tests for the \PHP_CodeSniffer\Files\File::isReference method.
+ *
+ * @covers \PHP_CodeSniffer\Files\File::isReference
+ */
 class IsReferenceTest extends AbstractMethodUnitTest
 {
 

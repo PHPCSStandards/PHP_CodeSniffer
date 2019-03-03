@@ -12,6 +12,11 @@ namespace PHP_CodeSniffer\Tests\Core\File;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 
+/**
+ * Tests for the \PHP_CodeSniffer\Files\File:getClassProperties method.
+ *
+ * @covers \PHP_CodeSniffer\Files\File::getClassProperties
+ */
 class GetClassPropertiesTest extends AbstractMethodUnitTest
 {
 

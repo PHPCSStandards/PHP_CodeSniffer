@@ -15,6 +15,11 @@ use PHP_CodeSniffer\Filters\Filter;
 use PHP_CodeSniffer\Ruleset;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests for the \PHP_CodeSniffer\Filters\Filter::accept method.
+ *
+ * @covers \PHP_CodeSniffer\Filters\Filter
+ */
 class AcceptTest extends TestCase
 {
 

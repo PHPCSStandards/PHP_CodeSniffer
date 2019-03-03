@@ -14,6 +14,11 @@ use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Files\DummyFile;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests for PHP_CodeSniffer error suppression tags.
+ *
+ * @coversNothing
+ */
 class ErrorSuppressionTest extends TestCase
 {
 
