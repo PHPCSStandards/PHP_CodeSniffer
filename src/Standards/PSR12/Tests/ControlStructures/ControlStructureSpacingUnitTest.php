@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\PSR12\Tests\ControlStructures;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the ControlStructureSpacing sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\ControlStructures\ControlStructureSpacingSniff
+ */
 class ControlStructureSpacingUnitTest extends AbstractSniffUnitTest
 {
 

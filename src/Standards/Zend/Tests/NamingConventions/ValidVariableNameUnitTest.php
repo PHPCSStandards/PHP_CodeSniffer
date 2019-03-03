@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Zend\Tests\NamingConventions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the ValidVariableName sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Zend\Sniffs\NamingConventions\ValidVariableNameSniff
+ */
 class ValidVariableNameUnitTest extends AbstractSniffUnitTest
 {
 

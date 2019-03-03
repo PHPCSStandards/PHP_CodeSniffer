@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Classes;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the ValidClassName sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Classes\ValidClassNameSniff
+ */
 class ValidClassNameUnitTest extends AbstractSniffUnitTest
 {
 

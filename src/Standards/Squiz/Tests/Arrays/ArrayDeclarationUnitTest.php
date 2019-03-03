@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Arrays;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the ArrayDeclaration sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Arrays\ArrayDeclarationSniff
+ */
 class ArrayDeclarationUnitTest extends AbstractSniffUnitTest
 {
 

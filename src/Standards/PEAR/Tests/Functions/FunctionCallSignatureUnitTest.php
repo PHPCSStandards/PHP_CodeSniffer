@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\PEAR\Tests\Functions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the FunctionCallSignature sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PEAR\Sniffs\Functions\FunctionCallSignatureSniff
+ */
 class FunctionCallSignatureUnitTest extends AbstractSniffUnitTest
 {
 

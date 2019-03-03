@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\VersionControl;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the GitMergeConflict sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\VersionControl\GitMergeConflictSniff
+ */
 class GitMergeConflictUnitTest extends AbstractSniffUnitTest
 {
 

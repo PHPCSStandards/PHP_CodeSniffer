@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\PSR2\Tests\Methods;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the FunctionClosingBrace sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\FunctionClosingBraceSniff
+ */
 class FunctionClosingBraceUnitTest extends AbstractSniffUnitTest
 {
 

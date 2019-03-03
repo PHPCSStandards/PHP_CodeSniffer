@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the DiscourageGoto sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DiscourageGotoSniff
+ */
 class DiscourageGotoUnitTest extends AbstractSniffUnitTest
 {
 

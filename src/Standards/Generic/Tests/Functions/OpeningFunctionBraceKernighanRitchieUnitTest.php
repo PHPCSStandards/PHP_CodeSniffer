@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Functions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the OpeningFunctionBraceKernighanRitchie sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Functions\OpeningFunctionBraceKernighanRitchieSniff
+ */
 class OpeningFunctionBraceKernighanRitchieUnitTest extends AbstractSniffUnitTest
 {
 

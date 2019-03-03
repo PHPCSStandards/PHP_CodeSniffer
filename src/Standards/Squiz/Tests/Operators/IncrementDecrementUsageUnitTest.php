@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Operators;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the IncrementDecrementUsage sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Operators\IncrementDecrementUsageSniff
+ */
 class IncrementDecrementUsageUnitTest extends AbstractSniffUnitTest
 {
 

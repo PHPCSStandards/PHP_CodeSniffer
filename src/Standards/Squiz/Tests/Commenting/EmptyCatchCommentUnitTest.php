@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Commenting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the EmptyCatchComment sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting\EmptyCatchCommentSniff
+ */
 class EmptyCatchCommentUnitTest extends AbstractSniffUnitTest
 {
 

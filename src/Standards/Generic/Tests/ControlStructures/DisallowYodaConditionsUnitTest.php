@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\ControlStructures;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the DisallowYodaConditions sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\ControlStructures\DisallowYodaConditionsSniff
+ */
 class DisallowYodaConditionsUnitTest extends AbstractSniffUnitTest
 {
 

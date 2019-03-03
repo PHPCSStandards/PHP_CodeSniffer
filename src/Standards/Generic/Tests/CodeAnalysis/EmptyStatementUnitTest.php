@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\CodeAnalysis;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the EmptyStatement sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff
+ */
 class EmptyStatementUnitTest extends AbstractSniffUnitTest
 {
 

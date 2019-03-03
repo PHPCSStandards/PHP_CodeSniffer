@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Files;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the LineEndings sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineEndingsSniff
+ */
 class LineEndingsUnitTest extends AbstractSniffUnitTest
 {
 
