@@ -74,6 +74,7 @@ final class ProcessRulesetTest extends TestCase
             "$std.SetProperty.AllowedViaStdClass"                    => "$sniffDir\SetProperty\AllowedViaStdClassSniff",
             "$std.SetProperty.NotAllowedViaAttribute"                => "$sniffDir\SetProperty\NotAllowedViaAttributeSniff",
             "$std.SetProperty.PropertyTypeHandling"                  => "$sniffDir\SetProperty\PropertyTypeHandlingSniff",
+            "$std.SetProperty.PropertyTypeHandlingOldArrayFormat"    => "$sniffDir\SetProperty\PropertyTypeHandlingOldArrayFormatSniff",
             "$std.ValidSniffs.RegisterEmptyArray"                    => "$sniffDir\ValidSniffs\RegisterEmptyArraySniff",
         ];
 

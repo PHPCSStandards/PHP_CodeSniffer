@@ -143,41 +143,6 @@ final class PropertyTypeHandlingSniff implements Sniff
      */
     public $expectsEmptyArray;
 
-    /**
-     * Used to verify that array properties passed as a string get parsed to a proper array.
-     *
-     * @var array<mixed>
-     */
-    public $expectsOldSchoolArrayWithOnlyValues;
-
-    /**
-     * Used to verify that array properties passed as a string with keys get parsed to a proper array.
-     *
-     * @var array<string, mixed>
-     */
-    public $expectsOldSchoolArrayWithKeysAndValues;
-
-    /**
-     * Used to verify that array properties passed as a string can get extended.
-     *
-     * @var array<string, mixed>
-     */
-    public $expectsOldSchoolArrayWithExtendedValues;
-
-    /**
-     * Used to verify that array properties passed as a string can get extended.
-     *
-     * @var array<string, mixed>
-     */
-    public $expectsOldSchoolArrayWithExtendedKeysAndValues;
-
-    /**
-     * Used to verify that array properties passed as a string allow for setting a property to an empty array.
-     *
-     * @var array<mixed>
-     */
-    public $expectsOldSchoolEmptyArray;
-
     public function register()
     {
         return [T_ECHO];

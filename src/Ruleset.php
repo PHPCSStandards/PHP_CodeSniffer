@@ -1199,6 +1199,17 @@ class Ruleset
                     if (isset($prop['type']) === true
                         && (string) $prop['type'] === 'array'
                     ) {
+                        if (isset($prop['value']) === true) {
+                            $message  = 'Passing an array of values to a property using a comma-separated string'.PHP_EOL;
+                            $message .= 'is no longer supported since PHP_CodeSniffer 4.0.0.'.PHP_EOL;
+                            $message .= "The unsupported syntax was used for property \"$name\"".PHP_EOL;
+                            $message .= "for sniff \"$code\".".PHP_EOL;
+                            $message .= 'Pass array values via <element [key="..." ]value="..."> nodes instead.';
+                            $this->msgCache->add($message, MessageCollector::ERROR);
+
+                            continue;
+                        }
+
                         $values = [];
                         if (isset($prop['extend']) === true
                             && (string) $prop['extend'] === 'true'
@@ -1226,27 +1237,7 @@ class Ruleset
                             }
 
                             $printValue = rtrim($printValue, ',');
-                        } else if (isset($prop['value']) === true) {
-                            $message  = 'Passing an array of values to a property using a comma-separated string'.PHP_EOL;
-                            $message .= 'was deprecated in PHP_CodeSniffer 3.3.0. Support will be removed in PHPCS 4.0.0.'.PHP_EOL;
-                            $message .= "The deprecated syntax was used for property \"$name\"".PHP_EOL;
-                            $message .= "for sniff \"$code\".".PHP_EOL;
-                            $message .= 'Pass array values via <element [key="..." ]value="..."> nodes instead.';
-                            $this->msgCache->add($message, MessageCollector::DEPRECATED);
-
-                            $value      = (string) $prop['value'];
-                            $printValue = $value;
-                            if ($value !== '') {
-                                foreach (explode(',', $value) as $val) {
-                                    list($k, $v) = explode('=>', $val.'=>');
-                                    if ($v !== '') {
-                                        $values[trim($k)] = trim($v);
-                                    } else {
-                                        $values[] = trim($k);
-                                    }
-                                }
-                            }
-                        }//end if
+                        }
 
                         $this->ruleset[$code]['properties'][$name] = [
                             'value' => $values,

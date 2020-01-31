@@ -39,35 +39,6 @@ final class PropertyTypeHandlingTest extends TestCase
 
 
     /**
-     * Verify a deprecation notice is shown when an array property is set from the ruleset using a comma-separated string.
-     *
-     * Support for this format was (soft) deprecated in PHPCS 3.3.0.
-     *
-     * @return void
-     */
-    public function testUsingOldSchoolArrayFormatShowsDeprecationNotice()
-    {
-        $regex  = '`^(';
-        $regex .= 'DEPRECATED: Passing an array of values to a property using a comma-separated string\R';
-        $regex .= 'was deprecated in PHP_CodeSniffer 3\.3\.0\. Support will be removed in PHPCS 4\.0\.0\.\R';
-        $regex .= 'The deprecated syntax was used for property "expectsOldSchool(?:EmptyArray|ArrayWith(?:Extended|Only)?(?:KeysAnd)?Values)"\R';
-        $regex .= 'for sniff "';
-        $regex .= '(?:\./tests/Core/Ruleset/Fixtures/TestStandard/Sniffs/SetProperty/PropertyTypeHandlingSniff\.php|TestStandard\.SetProperty\.PropertyTypeHandling)';
-        $regex .= '"\.\R';
-        $regex .= 'Pass array values via <element \[key="\.\.\." \]value="\.\.\."> nodes instead\.\R';
-        $regex .= '){14}\R$`';
-
-        $this->expectOutputRegex($regex);
-
-        // Set up the ruleset.
-        $standard = __DIR__.'/PropertyTypeHandlingTest.xml';
-        $config   = new ConfigDouble(["--standard=$standard"]);
-        new Ruleset($config);
-
-    }//end testUsingOldSchoolArrayFormatShowsDeprecationNotice()
-
-
-    /**
      * Test the value type handling for properties set via a ruleset.
      *
      * @param string $propertyName Property name.
@@ -186,28 +157,16 @@ final class PropertyTypeHandlingTest extends TestCase
                 'propertyName' => 'expectsBooleanFalseTrimmed',
                 'expected'     => false,
             ],
-            'Array with only values (new style)'             => [
+            'Array with only values'                         => [
                 'propertyName' => 'expectsArrayWithOnlyValues',
                 'expected'     => $expectedArrayOnlyValues,
             ],
-            'Array with keys and values (new style)'         => [
+            'Array with keys and values'                     => [
                 'propertyName' => 'expectsArrayWithKeysAndValues',
                 'expected'     => $expectedArrayKeysAndValues,
             ],
-            'Empty array (new style)'                        => [
+            'Empty array'                                    => [
                 'propertyName' => 'expectsEmptyArray',
-                'expected'     => [],
-            ],
-            'Array with only values (old style)'             => [
-                'propertyName' => 'expectsOldSchoolArrayWithOnlyValues',
-                'expected'     => $expectedArrayOnlyValues,
-            ],
-            'Array with keys and values (old style)'         => [
-                'propertyName' => 'expectsOldSchoolArrayWithKeysAndValues',
-                'expected'     => $expectedArrayKeysAndValues,
-            ],
-            'Empty array (old style)'                        => [
-                'propertyName' => 'expectsOldSchoolEmptyArray',
                 'expected'     => [],
             ],
         ];
@@ -239,20 +198,12 @@ final class PropertyTypeHandlingTest extends TestCase
         ];
 
         return [
-            'Array with only values extended (new style)'     => [
+            'Array with only values extended'     => [
                 'propertyName' => 'expectsArrayWithExtendedValues',
                 'expected'     => $expectedArrayOnlyValuesExtended,
             ],
-            'Array with keys and values extended (new style)' => [
+            'Array with keys and values extended' => [
                 'propertyName' => 'expectsArrayWithExtendedKeysAndValues',
-                'expected'     => $expectedArrayKeysAndValuesExtended,
-            ],
-            'Array with only values extended (old style)'     => [
-                'propertyName' => 'expectsOldSchoolArrayWithExtendedValues',
-                'expected'     => $expectedArrayOnlyValuesExtended,
-            ],
-            'Array with keys and values extended (old style)' => [
-                'propertyName' => 'expectsOldSchoolArrayWithExtendedKeysAndValues',
                 'expected'     => $expectedArrayKeysAndValuesExtended,
             ],
         ];
@@ -262,9 +213,6 @@ final class PropertyTypeHandlingTest extends TestCase
 
     /**
      * Test Helper.
-     *
-     * Note: the deprecations for using comma-separated string to pass an array, are silenced in this helper
-     * as that's not what's being tested here.
      *
      * @see self::testTypeHandlingWhenSetViaRuleset()
      *
@@ -277,7 +225,7 @@ final class PropertyTypeHandlingTest extends TestCase
         if (isset($sniffObject) === false) {
             // Set up the ruleset.
             $standard = __DIR__.'/PropertyTypeHandlingTest.xml';
-            $config   = new ConfigDouble(["--standard=$standard", '-q']);
+            $config   = new ConfigDouble(["--standard=$standard"]);
             $ruleset  = new Ruleset($config);
 
             // Verify that our target sniff has been registered.
