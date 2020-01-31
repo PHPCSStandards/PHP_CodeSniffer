@@ -31,7 +31,7 @@ already and if so, comment in that issue if you have additional information, ins
 Before reporting a bug, you should check what sniff an error is coming from.
 Running `phpcs` with the `-s` flag will show the name of the sniff for each error.
 
-If the error code starts with anything other than `Generic`, `MySource`, `PEAR`, `PSR1`, `PSR2`, `PSR12`, `Squiz` or `Zend`,
+If the error code starts with anything other than `Generic`, `PEAR`, `PSR1`, `PSR2`, `PSR12`, `Squiz` or `Zend`,
 the error is likely coming from an external PHP_CodeSniffer standard.
 **Please report bugs for externally maintained sniffs to the appropriate repository.**
 
