@@ -5,18 +5,21 @@
 # https://www.reddit.com/r/PHP/comments/2jzp6k/i_dont_need_your_tests_in_my_production/
 # https://blog.madewithlove.be/post/gitattributes/
 #
-.github/                export-ignore
-scripts/                export-ignore
-.cspell.json            export-ignore
-.gitattributes          export-ignore
-.gitignore              export-ignore
-.markdownlint-cli2.yaml export-ignore
-.remarkignore           export-ignore
-.remarkrc               export-ignore
-.yamllint.yml           export-ignore
-phpcs.xml.dist          export-ignore
-phpstan.neon.dist       export-ignore
-phpunit.xml.dist        export-ignore
+.github/                            export-ignore
+scripts/                            export-ignore
+src/Standards/**/Tests/             export-ignore
+tests/Core/**/                      export-ignore
+.cspell.json                        export-ignore
+.gitattributes                      export-ignore
+.gitignore                          export-ignore
+.markdownlint-cli2.yaml             export-ignore
+.remarkignore                       export-ignore
+.remarkrc                           export-ignore
+.yamllint.yml                       export-ignore
+phpcs.xml.dist                      export-ignore
+phpstan.neon.dist                   export-ignore
+phpunit.xml.dist                    export-ignore
+tests/Core/ErrorSuppressionTest.php export-ignore
 
 #
 # Declare files that should always have CRLF line endings on checkout.
