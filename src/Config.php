@@ -530,7 +530,7 @@ class Config
     public function restoreDefaults()
     {
         $this->files           = [];
-        $this->standards       = ['PEAR'];
+        $this->standards       = ['PSR12'];
         $this->verbosity       = 0;
         $this->interactive     = false;
         $this->cache           = false;

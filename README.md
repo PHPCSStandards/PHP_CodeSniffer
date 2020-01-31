@@ -98,7 +98,7 @@ php bin/phpcbf -h
 
 ## Getting Started
 
-The default coding standard used by PHP_CodeSniffer is the PEAR coding standard. To check a file against the PEAR coding standard, simply specify the file's location:
+The default coding standard used by PHP_CodeSniffer is the PSR12 coding standard. To check a file against the PSR12 coding standard, simply specify the file's location:
 ```bash
 phpcs /path/to/code/myfile.php
 ```
@@ -106,9 +106,9 @@ Or if you wish to check an entire directory you can specify the directory locati
 ```bash
 phpcs /path/to/code-directory
 ```
-If you wish to check your code against the PSR-12 coding standard, use the `--standard` command line argument:
+If you wish to check your code against the PEAR coding standard, use the `--standard` command line argument:
 ```bash
-phpcs --standard=PSR12 /path/to/code-directory
+phpcs --standard=PEAR /path/to/code-directory
 ```
 
 If PHP_CodeSniffer finds any coding standard errors, a report will be shown after running the command.
