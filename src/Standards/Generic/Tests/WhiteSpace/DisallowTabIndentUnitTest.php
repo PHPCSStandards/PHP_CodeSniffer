@@ -115,19 +115,6 @@ final class DisallowTabIndentUnitTest extends AbstractSniffUnitTest
             // PHP 7.2 or lower: PHP version which doesn't support flexible heredocs/nowdocs yet.
             return [];
 
-        case 'DisallowTabIndentUnitTest.js':
-            return [
-                3 => 1,
-                5 => 1,
-                6 => 1,
-            ];
-
-        case 'DisallowTabIndentUnitTest.css':
-            return [
-                1 => 1,
-                2 => 1,
-            ];
-
         default:
             return [];
         }//end switch

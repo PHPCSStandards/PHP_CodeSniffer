@@ -26,46 +26,38 @@ final class DocCommentAlignmentUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
-     * @param string $testFile The name of the file being tested.
-     *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList()
     {
-        $errors = [
-            3  => 1,
-            11 => 1,
-            17 => 1,
-            18 => 1,
-            19 => 1,
-            23 => 2,
-            24 => 1,
-            25 => 2,
-            26 => 1,
-            32 => 1,
-            33 => 1,
-            38 => 1,
-            39 => 1,
+        return [
+            3   => 1,
+            11  => 1,
+            17  => 1,
+            18  => 1,
+            19  => 1,
+            23  => 2,
+            24  => 1,
+            25  => 2,
+            26  => 1,
+            32  => 1,
+            33  => 1,
+            38  => 1,
+            39  => 1,
+            75  => 1,
+            83  => 1,
+            84  => 1,
+            90  => 1,
+            91  => 1,
+            95  => 1,
+            96  => 1,
+            106 => 1,
+            107 => 1,
+            111 => 2,
+            112 => 1,
+            113 => 1,
+            114 => 1,
         ];
-
-        if ($testFile === 'DocCommentAlignmentUnitTest.inc') {
-            $errors[75] = 1;
-            $errors[83] = 1;
-            $errors[84] = 1;
-            $errors[90] = 1;
-            $errors[91] = 1;
-            $errors[95] = 1;
-            $errors[96] = 1;
-
-            $errors[106] = 1;
-            $errors[107] = 1;
-            $errors[111] = 2;
-            $errors[112] = 1;
-            $errors[113] = 1;
-            $errors[114] = 1;
-        }
-
-        return $errors;
 
     }//end getErrorList()
 

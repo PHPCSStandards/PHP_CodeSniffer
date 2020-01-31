@@ -43,15 +43,6 @@ final class UnnecessaryStringConcatUnitTest extends AbstractSniffUnitTest
                 20 => 1,
             ];
 
-        case 'UnnecessaryStringConcatUnitTest.js':
-            return [
-                1  => 1,
-                8  => 1,
-                11 => 1,
-                14 => 1,
-                15 => 1,
-            ];
-
         default:
             return [];
         }//end switch

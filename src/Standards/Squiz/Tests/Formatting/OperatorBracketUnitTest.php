@@ -79,23 +79,6 @@ final class OperatorBracketUnitTest extends AbstractSniffUnitTest
                 194 => 2,
             ];
 
-        case 'OperatorBracketUnitTest.js':
-            return [
-                5   => 1,
-                8   => 1,
-                11  => 1,
-                14  => 1,
-                24  => 1,
-                30  => 1,
-                33  => 1,
-                36  => 1,
-                39  => 1,
-                46  => 1,
-                47  => 1,
-                63  => 1,
-                108 => 1,
-            ];
-
         default:
             return [];
         }//end switch

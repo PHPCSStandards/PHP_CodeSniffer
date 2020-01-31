@@ -16,16 +16,6 @@ use PHP_CodeSniffer\Util\Tokens;
 class OperatorBracketSniff implements Sniff
 {
 
-    /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
-
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -51,13 +41,6 @@ class OperatorBracketSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-
-        if ($phpcsFile->tokenizerType === 'JS' && $tokens[$stackPtr]['code'] === T_PLUS) {
-            // JavaScript uses the plus operator for string concatenation as well
-            // so we cannot accurately determine if it is a string concat or addition.
-            // So just ignore it.
-            return;
-        }
 
         // If the & is a reference, then we don't want to check for brackets.
         if ($tokens[$stackPtr]['code'] === T_BITWISE_AND && $phpcsFile->isReference($stackPtr) === true) {
@@ -139,7 +122,6 @@ class OperatorBracketSniff implements Sniff
             T_STRING                   => T_STRING,
             T_WHITESPACE               => T_WHITESPACE,
             T_NS_SEPARATOR             => T_NS_SEPARATOR,
-            T_THIS                     => T_THIS,
             T_SELF                     => T_SELF,
             T_STATIC                   => T_STATIC,
             T_PARENT                   => T_PARENT,
@@ -283,7 +265,6 @@ class OperatorBracketSniff implements Sniff
             T_DOUBLE_QUOTED_STRING     => true,
             T_WHITESPACE               => true,
             T_NS_SEPARATOR             => true,
-            T_THIS                     => true,
             T_SELF                     => true,
             T_STATIC                   => true,
             T_OBJECT_OPERATOR          => true,
@@ -297,12 +278,6 @@ class OperatorBracketSniff implements Sniff
 
         // Find the first token in the expression.
         for ($before = ($stackPtr - 1); $before > 0; $before--) {
-            // Special case for plus operators because we can't tell if they are used
-            // for addition or string contact. So assume string concat to be safe.
-            if ($phpcsFile->tokenizerType === 'JS' && $tokens[$before]['code'] === T_PLUS) {
-                break;
-            }
-
             if (isset(Tokens::$emptyTokens[$tokens[$before]['code']]) === true
                 || isset(Tokens::$operators[$tokens[$before]['code']]) === true
                 || isset(Tokens::$castTokens[$tokens[$before]['code']]) === true
@@ -337,12 +312,6 @@ class OperatorBracketSniff implements Sniff
 
         // Find the last token in the expression.
         for ($after = ($stackPtr + 1); $after < $phpcsFile->numTokens; $after++) {
-            // Special case for plus operators because we can't tell if they are used
-            // for addition or string concat. So assume string concat to be safe.
-            if ($phpcsFile->tokenizerType === 'JS' && $tokens[$after]['code'] === T_PLUS) {
-                break;
-            }
-
             if (isset(Tokens::$emptyTokens[$tokens[$after]['code']]) === true
                 || isset(Tokens::$operators[$tokens[$after]['code']]) === true
                 || isset(Tokens::$castTokens[$tokens[$after]['code']]) === true

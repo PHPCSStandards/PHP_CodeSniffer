@@ -110,20 +110,6 @@ final class FunctionDeclarationUnitTest extends AbstractSniffUnitTest
                 490 => 2,
             ];
 
-        case 'FunctionDeclarationUnitTest.js':
-            return [
-                3  => 1,
-                4  => 1,
-                5  => 1,
-                9  => 1,
-                10 => 1,
-                11 => 1,
-                14 => 1,
-                17 => 1,
-                41 => 1,
-                48 => 1,
-            ];
-
         case 'FunctionDeclarationUnitTest.4.inc':
             return [
                 7 => 1,

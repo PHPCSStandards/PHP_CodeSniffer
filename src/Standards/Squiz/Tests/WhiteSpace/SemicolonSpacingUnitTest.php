@@ -26,45 +26,24 @@ final class SemicolonSpacingUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
-     * @param string $testFile The name of the file being tested.
-     *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList()
     {
-        switch ($testFile) {
-        case 'SemicolonSpacingUnitTest.inc':
-            return [
-                3  => 1,
-                4  => 1,
-                5  => 2,
-                6  => 1,
-                8  => 1,
-                9  => 1,
-                14 => 1,
-                16 => 1,
-                18 => 1,
-                29 => 1,
-                30 => 2,
-                36 => 1,
-            ];
-
-        case 'SemicolonSpacingUnitTest.js':
-            return [
-                3  => 1,
-                4  => 1,
-                6  => 1,
-                10 => 2,
-                11 => 1,
-                13 => 1,
-                19 => 1,
-                22 => 1,
-                25 => 1,
-            ];
-
-        default:
-            return [];
-        }//end switch
+        return [
+            3  => 1,
+            4  => 1,
+            5  => 2,
+            6  => 1,
+            8  => 1,
+            9  => 1,
+            14 => 1,
+            16 => 1,
+            18 => 1,
+            29 => 1,
+            30 => 2,
+            36 => 1,
+        ];
 
     }//end getErrorList()
 

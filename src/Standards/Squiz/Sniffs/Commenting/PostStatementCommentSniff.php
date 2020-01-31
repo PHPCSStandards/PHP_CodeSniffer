@@ -16,16 +16,6 @@ class PostStatementCommentSniff implements Sniff
 {
 
     /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
-
-    /**
      * Exceptions to the rule.
      *
      * If post statement comments are found within the condition
@@ -87,7 +77,7 @@ class PostStatementCommentSniff implements Sniff
             return;
         }
 
-        // Special case for JS files and PHP closures.
+        // Special case for closures.
         if ($tokens[$lastContent]['code'] === T_COMMA
             || $tokens[$lastContent]['code'] === T_SEMICOLON
         ) {
@@ -109,9 +99,7 @@ class PostStatementCommentSniff implements Sniff
             }
         }
 
-        if ($phpcsFile->tokenizerType === 'PHP'
-            && preg_match('|^//[ \t]*@[^\s]+|', $tokens[$stackPtr]['content']) === 1
-        ) {
+        if (preg_match('|^//[ \t]*@[^\s]+|', $tokens[$stackPtr]['content']) === 1) {
             $error = 'Annotations may not appear after statements';
             $phpcsFile->addError($error, $stackPtr, 'AnnotationFound');
             return;
