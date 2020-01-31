@@ -200,7 +200,6 @@ jobs:
         if: ${{ matrix.custom_ini == false }}
         run: >
           npm install -g --fund false
-          csslint
           eslint
           jshint
 
@@ -302,7 +301,6 @@ jobs:
         if: ${{ matrix.custom_ini == false }}
         run: >
           npm install -g --fund false
-          csslint
           eslint
           jshint
 
