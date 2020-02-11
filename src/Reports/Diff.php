@@ -65,7 +65,6 @@ class Diff implements Report
         }//end if
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
-            ob_end_clean();
             StatusWriter::write('*** START FILE FIXING ***', 1);
         }
 
@@ -73,7 +72,6 @@ class Diff implements Report
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             StatusWriter::write('*** END FILE FIXING ***', 1);
-            ob_start();
         }
 
         if ($fixed === false) {

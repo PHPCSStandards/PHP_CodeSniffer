@@ -1047,9 +1047,7 @@ class File
             && $this->fixer->enabled === true
             && $fixable === true
         ) {
-            @ob_end_clean();
             StatusWriter::forceWrite("E: [Line $line] $message ($sniffCode)", 1);
-            ob_start();
         }
 
         return true;

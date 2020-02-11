@@ -155,13 +155,10 @@ class Fixer
 
         $this->loops = 0;
         while ($this->loops < 50) {
-            ob_start();
-
             // Only needed once file content has changed.
             $contents = $this->getContents();
 
             if (PHP_CODESNIFFER_VERBOSITY > 2) {
-                @ob_end_clean();
                 StatusWriter::forceWrite('---START FILE CONTENT---');
                 $lines = explode($this->currentFile->eolChar, $contents);
                 $max   = strlen(count($lines));
@@ -171,14 +168,12 @@ class Fixer
                 }
 
                 StatusWriter::forceWrite('--- END FILE CONTENT ---');
-                ob_start();
             }
 
             $this->inConflict = false;
             $this->currentFile->ruleset->populateTokenListeners();
             $this->currentFile->setContent($contents);
             $this->currentFile->process();
-            ob_end_clean();
 
             $this->loops++;
 
@@ -212,12 +207,7 @@ class Fixer
 
         if ($this->numFixes > 0 || $this->inConflict === true) {
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                if (ob_get_level() > 0) {
-                    ob_end_clean();
-                }
-
                 StatusWriter::write("*** Reached maximum number of loops with $this->numFixes violations left unfixed ***", 1);
-                ob_start();
             }
 
             return false;
@@ -417,9 +407,7 @@ class Fixer
 
             $line = $bt[0]['line'];
 
-            @ob_end_clean();
             StatusWriter::forceWrite("=> Changeset started by $sniff:$line", 1);
-            ob_start();
         }
 
         $this->changeset   = [];
@@ -459,15 +447,11 @@ class Fixer
             }
 
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                @ob_end_clean();
                 StatusWriter::forceWrite('=> Changeset failed to apply', 1);
-                ob_start();
             }
         } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
             $fixes = count($this->changeset);
-            @ob_end_clean();
             StatusWriter::forceWrite("=> Changeset ended: $fixes changes applied", 1);
-            ob_start();
         }
 
         $this->changeset = [];
@@ -501,10 +485,8 @@ class Fixer
 
                 $numChanges = count($this->changeset);
 
-                @ob_end_clean();
                 StatusWriter::forceWrite("R: $sniff:$line rolled back the changeset ($numChanges changes)", 2);
                 StatusWriter::forceWrite('=> Changeset rolled back', 1);
-                ob_start();
             }
 
             $this->changeset = [];
@@ -536,9 +518,7 @@ class Fixer
             }
 
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                @ob_end_clean();
                 StatusWriter::forceWrite("* token $stackPtr has already been modified, skipping *", $depth);
-                ob_start();
             }
 
             return false;
@@ -573,9 +553,7 @@ class Fixer
             $this->changeset[$stackPtr] = $content;
 
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                @ob_end_clean();
                 StatusWriter::forceWrite("Q: $sniff:$line replaced token $stackPtr ($type on line $tokenLine) \"$oldContent\" => \"$newContent\"", 2);
-                ob_start();
             }
 
             return true;
@@ -599,7 +577,6 @@ class Fixer
 
                     $loop = $this->oldTokenValues[$stackPtr]['loop'];
 
-                    @ob_end_clean();
                     StatusWriter::forceWrite("**** $sniff:$line has possible conflict with another sniff on loop $loop; caused by the following change ****", $depth);
                     StatusWriter::forceWrite("**** replaced token $stackPtr ($type on line $tokenLine) \"$oldContent\" => \"$newContent\" ****", $depth);
                 }
@@ -609,10 +586,6 @@ class Fixer
                     if (PHP_CODESNIFFER_VERBOSITY > 1) {
                         StatusWriter::forceWrite('**** ignoring all changes until next loop ****', $depth);
                     }
-                }
-
-                if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    ob_start();
                 }
 
                 return false;
@@ -635,12 +608,7 @@ class Fixer
                 $depth         = 2;
             }
 
-            if (ob_get_level() > 0) {
-                ob_end_clean();
-            }
-
             StatusWriter::forceWrite($statusMessage, $depth);
-            ob_start();
         }
 
         return true;
@@ -698,9 +666,7 @@ class Fixer
                 $depth         = 2;
             }
 
-            @ob_end_clean();
             StatusWriter::forceWrite($statusMessage, $depth);
-            ob_start();
         }
 
         return true;

@@ -42,7 +42,6 @@ class Cbf implements Report
         $errors = $phpcsFile->getFixableCount();
         if ($errors !== 0) {
             if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                ob_end_clean();
                 $startTime = microtime(true);
                 $newlines  = 0;
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
@@ -103,10 +102,6 @@ class Cbf implements Report
                     StatusWriter::forceWrite('=> Fixed file written to '.basename($newFilename), 1);
                 }
             }
-        }
-
-        if (PHP_CODESNIFFER_VERBOSITY > 0) {
-            ob_start();
         }
 
         $errorCount   = $phpcsFile->getErrorCount();
