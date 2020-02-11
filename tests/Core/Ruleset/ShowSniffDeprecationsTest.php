@@ -12,6 +12,7 @@ namespace PHP_CodeSniffer\Tests\Core\Ruleset;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHP_CodeSniffer\Tests\Core\Ruleset\AbstractRulesetTestCase;
+use PHP_CodeSniffer\Tests\Core\StatusWriterTestHelper;
 
 /**
  * Tests PHPCS native handling of sniff deprecations.
@@ -21,6 +22,7 @@ use PHP_CodeSniffer\Tests\Core\Ruleset\AbstractRulesetTestCase;
  */
 final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
 {
+    use StatusWriterTestHelper;
 
 
     /**
@@ -85,9 +87,11 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
         $config  = new ConfigDouble($args);
         $ruleset = new Ruleset($config);
 
-        $this->expectOutputString('');
+        $this->expectNoStdoutOutput();
 
         $ruleset->showSniffDeprecations();
+
+        $this->assertStderrOutputSameString('');
 
     }//end testDeprecatedSniffsListDoesNotShow()
 
@@ -177,9 +181,11 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
         $config   = new ConfigDouble($cliArgs);
         $ruleset  = new Ruleset($config);
 
-        $this->expectOutputString('');
+        $this->expectNoStdoutOutput();
 
         $ruleset->showSniffDeprecations();
+
+        $this->assertStderrOutputSameString('');
 
     }//end testDeprecatedSniffsListDoesNotShowWhenSelectedSniffsAreNotDeprecated()
 
@@ -208,9 +214,11 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
         $config   = new ConfigDouble($cliArgs);
         $ruleset  = new Ruleset($config);
 
-        $this->expectOutputString('');
+        $this->expectNoStdoutOutput();
 
         $ruleset->showSniffDeprecations();
+
+        $this->assertStderrOutputSameString('');
 
     }//end testDeprecatedSniffsListDoesNotShowWhenAllDeprecatedSniffsAreExcluded()
 
@@ -273,9 +281,11 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
         $expected .= 'Deprecated sniffs are still run, but will stop working at some point in the'.PHP_EOL;
         $expected .= 'future.'.PHP_EOL.PHP_EOL;
 
-        $this->expectOutputString($expected);
+        $this->expectNoStdoutOutput();
 
         $ruleset->showSniffDeprecations();
+
+        $this->assertStderrOutputSameString($expected);
 
     }//end testDeprecatedSniffsWarning()
 
@@ -303,9 +313,11 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
         $config   = new ConfigDouble(['.', "--standard=$standard", "--report-width=$reportWidth", '--no-colors']);
         $ruleset  = new Ruleset($config);
 
-        $this->expectOutputString($expectedOutput);
+        $this->expectNoStdoutOutput();
 
         $ruleset->showSniffDeprecations();
+
+        $this->assertStderrOutputSameString($expectedOutput);
 
     }//end testReportWidthIsRespected()
 
@@ -417,9 +429,11 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
         $expected .= 'Deprecated sniffs are still run, but will stop working at some point in the'.PHP_EOL;
         $expected .= 'future.'.PHP_EOL.PHP_EOL;
 
-        $this->expectOutputString($expected);
+        $this->expectNoStdoutOutput();
 
         $ruleset->showSniffDeprecations();
+
+        $this->assertStderrOutputSameString($expected);
 
         // Verify that the sniffs have been registered to run.
         $this->assertCount(2, $ruleset->sniffCodes, 'Incorrect number of sniff codes registered');

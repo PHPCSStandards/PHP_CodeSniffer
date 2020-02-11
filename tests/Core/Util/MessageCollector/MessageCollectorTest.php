@@ -8,15 +8,15 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Util\MessageCollector;
 
+use PHP_CodeSniffer\Tests\Core\AbstractWriterTestCase;
 use PHP_CodeSniffer\Util\MessageCollector;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the message caching and display functionality.
  *
  * @covers \PHP_CodeSniffer\Util\MessageCollector
  */
-final class MessageCollectorTest extends TestCase
+final class MessageCollectorTest extends AbstractWriterTestCase
 {
 
 
@@ -196,9 +196,11 @@ final class MessageCollectorTest extends TestCase
         $msgCollector = new MessageCollector();
         $this->createErrorCache($msgCollector, $messages);
 
-        $this->expectOutputString($expected);
+        $this->expectNoStdoutOutput();
 
         $msgCollector->display();
+
+        $this->assertStderrOutputSameString($expected);
 
     }//end testDisplayingNonBlockingMessages()
 
@@ -376,9 +378,12 @@ final class MessageCollectorTest extends TestCase
 
         $expected  = 'WARNING: Trying to add the same message twice'.PHP_EOL;
         $expected .= 'NOTICE: Trying to add the same message twice'.PHP_EOL.PHP_EOL;
-        $this->expectOutputString($expected);
+
+        $this->expectNoStdoutOutput();
 
         $msgCollector->display();
+
+        $this->assertStderrOutputSameString($expected);
 
     }//end testNonUniqueMessagesWithDifferentErrorLevelAreAccepted()
 
@@ -400,9 +405,12 @@ final class MessageCollectorTest extends TestCase
 
         $expected  = 'NOTICE: Trying to add the same message twice'.PHP_EOL;
         $expected .= 'NOTICE: Trying to add the same message twice'.PHP_EOL.PHP_EOL;
-        $this->expectOutputString($expected);
+
+        $this->expectNoStdoutOutput();
 
         $msgCollector->display();
+
+        $this->assertStderrOutputSameString($expected);
 
     }//end testNonUniqueMessagesWithSameErrorLevelAreAccepted()
 
@@ -428,10 +436,13 @@ final class MessageCollectorTest extends TestCase
         $expected .= 'NOTICE: First notice'.PHP_EOL;
         $expected .= 'NOTICE: Third notice'.PHP_EOL;
         $expected .= 'DEPRECATED: Second deprecation'.PHP_EOL.PHP_EOL;
-        $this->expectOutputString($expected);
+
+        $this->expectNoStdoutOutput();
 
         $msgCollector->display();
         $msgCollector->display();
+
+        $this->assertStderrOutputSameString($expected);
 
     }//end testCallingDisplayTwiceWillNotShowMessagesTwice()
 
@@ -458,9 +469,11 @@ final class MessageCollectorTest extends TestCase
         $msgCollector = new MessageCollector();
         $this->createErrorCache($msgCollector, $messages);
 
-        $this->expectOutputString($expected);
+        $this->expectNoStdoutOutput();
 
         $msgCollector->display($order);
+
+        $this->assertStderrOutputSameString($expected);
 
     }//end testDisplayOrderHandling()
 

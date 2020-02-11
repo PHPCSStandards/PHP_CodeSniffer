@@ -12,6 +12,7 @@ use PHP_CodeSniffer\Files\DummyFile;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Runner;
 use PHP_CodeSniffer\Tests\ConfigDouble;
+use PHP_CodeSniffer\Tests\Core\StatusWriterTestHelper;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -21,6 +22,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class PrintProgressDotsTest extends TestCase
 {
+    use StatusWriterTestHelper;
 
 
     /**
@@ -196,7 +198,7 @@ final class PrintProgressDotsTest extends TestCase
      */
     private function checkProgressDot($colors, $code, $sniffs, $expected, $enableFixer=false)
     {
-        $this->expectOutputString($expected);
+        $this->expectNoStdoutOutput();
 
         $config            = new ConfigDouble(['-p']);
         $config->colors    = $colors;
@@ -215,6 +217,8 @@ final class PrintProgressDotsTest extends TestCase
         }
 
         $runner->printProgress($file, 2, 1);
+
+        $this->assertStderrOutputSameString($expected);
 
     }//end checkProgressDot()
 

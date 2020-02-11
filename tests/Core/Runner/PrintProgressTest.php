@@ -12,6 +12,7 @@ use PHP_CodeSniffer\Files\DummyFile;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Runner;
 use PHP_CodeSniffer\Tests\ConfigDouble;
+use PHP_CodeSniffer\Tests\Core\StatusWriterTestHelper;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -21,6 +22,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class PrintProgressTest extends TestCase
 {
+    use StatusWriterTestHelper;
 
     /**
      * Config instance for use in the tests.
@@ -110,13 +112,15 @@ final class PrintProgressTest extends TestCase
      */
     public function testNoProgressIsShownWhenDisabled()
     {
-        $this->expectOutputString('');
+        $this->expectNoStdoutOutput();
 
         self::$config->showProgress = false;
 
         for ($i = 1; $i <= 10; $i++) {
             self::$runner->printProgress(self::$fileWithoutErrorsOrWarnings, 3, $i);
         }
+
+        $this->assertStderrOutputSameString('');
 
     }//end testNoProgressIsShownWhenDisabled()
 
@@ -128,9 +132,9 @@ final class PrintProgressTest extends TestCase
      */
     public function testProgressDotSkippedFiles()
     {
-        $nrOfFiles = 10;
-        $this->expectOutputString('.S.S.S.S.S 10 / 10 (100%)'.PHP_EOL);
+        $this->expectNoStdoutOutput();
 
+        $nrOfFiles = 10;
         for ($i = 1; $i <= $nrOfFiles; $i++) {
             if (($i % 2) === 0) {
                 self::$fileWithoutErrorsOrWarnings->ignored = true;
@@ -140,6 +144,8 @@ final class PrintProgressTest extends TestCase
 
             self::$runner->printProgress(self::$fileWithoutErrorsOrWarnings, $nrOfFiles, $i);
         }
+
+        $this->assertStderrOutputSameString('.S.S.S.S.S 10 / 10 (100%)'.PHP_EOL);
 
     }//end testProgressDotSkippedFiles()
 
@@ -156,11 +162,13 @@ final class PrintProgressTest extends TestCase
      */
     public function testEndOfLineSummary($nrOfFiles, $expected)
     {
-        $this->expectOutputString($expected);
+        $this->expectNoStdoutOutput();
 
         for ($i = 1; $i <= $nrOfFiles; $i++) {
             self::$runner->printProgress(self::$fileWithoutErrorsOrWarnings, $nrOfFiles, $i);
         }
+
+        $this->assertStderrOutputSameString($expected);
 
     }//end testEndOfLineSummary()
 

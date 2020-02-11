@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Util\Timing;
 
+use PHP_CodeSniffer\Tests\Core\StatusWriterTestHelper;
 use PHP_CodeSniffer\Util\Timing;
 use PHPUnit\Framework\TestCase;
 
@@ -26,6 +27,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class TimingTest extends TestCase
 {
+    use StatusWriterTestHelper;
 
 
     /**
@@ -65,8 +67,11 @@ final class TimingTest extends TestCase
      */
     public function testTimeIsNotPrintedIfTimerWasNeverStarted()
     {
-        $this->expectOutputString('');
+        $this->expectNoStdoutOutput();
+
         Timing::printRunTime();
+
+        $this->assertStderrOutputSameString('');
 
     }//end testTimeIsNotPrintedIfTimerWasNeverStarted()
 
@@ -78,8 +83,11 @@ final class TimingTest extends TestCase
      */
     public function testTimeIsNotPrintedIfTimerWasNeverStartedEvenWhenForced()
     {
-        $this->expectOutputString('');
+        $this->expectNoStdoutOutput();
+
         Timing::printRunTime(true);
+
+        $this->assertStderrOutputSameString('');
 
     }//end testTimeIsNotPrintedIfTimerWasNeverStartedEvenWhenForced()
 
@@ -91,13 +99,16 @@ final class TimingTest extends TestCase
      */
     public function testTimeIsPrintedOnlyOnce()
     {
-        $this->expectOutputRegex('`^Time: [0-9]+ms; Memory: [0-9\.]+MB'.PHP_EOL.PHP_EOL.'$`');
+        $this->expectNoStdoutOutput();
 
         Timing::startTiming();
         usleep(2000);
         Timing::printRunTime();
         Timing::printRunTime();
         Timing::printRunTime();
+
+        $regex = '`^Time: [0-9]+ms; Memory: [0-9\.]+MB'.PHP_EOL.'$`';
+        $this->assertStderrOutputMatchesRegex($regex);
 
     }//end testTimeIsPrintedOnlyOnce()
 
@@ -109,13 +120,16 @@ final class TimingTest extends TestCase
      */
     public function testTimeIsPrintedMultipleTimesOnlyIfForced()
     {
-        $this->expectOutputRegex('`^(Time: [0-9]+ms; Memory: [0-9\.]+MB'.PHP_EOL.PHP_EOL.'){3}$`');
+        $this->expectNoStdoutOutput();
 
         Timing::startTiming();
         usleep(2000);
         Timing::printRunTime(true);
         Timing::printRunTime(true);
         Timing::printRunTime(true);
+
+        $regex = '`^(Time: [0-9]+ms; Memory: [0-9\.]+MB'.PHP_EOL.'){3}$`';
+        $this->assertStderrOutputMatchesRegex($regex);
 
     }//end testTimeIsPrintedMultipleTimesOnlyIfForced()
 

@@ -12,6 +12,7 @@ namespace PHP_CodeSniffer\Tests\Core\Ruleset;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHP_CodeSniffer\Tests\Core\Ruleset\AbstractRulesetTestCase;
+use PHP_CodeSniffer\Tests\Core\StatusWriterTestHelper;
 use PHP_CodeSniffer\Util\MessageCollector;
 use ReflectionMethod;
 use ReflectionProperty;
@@ -26,6 +27,7 @@ use ReflectionProperty;
  */
 final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
 {
+    use StatusWriterTestHelper;
 
 
     /**
@@ -37,9 +39,11 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
     {
         $ruleset = $this->getPlainRuleset();
 
-        $this->expectOutputString('');
+        $this->expectNoStdoutOutput();
 
         $this->invokeDisplayCachedMessages($ruleset);
+
+        $this->assertStderrOutputSameString('');
 
     }//end testDisplayCachedMessagesStaysSilentWithoutErrors()
 
@@ -124,9 +128,11 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         $ruleset = $this->getPlainRuleset();
         $this->mockCachedMessages($ruleset, $messages);
 
-        $this->expectOutputString($expected);
+        $this->expectNoStdoutOutput();
 
         $this->invokeDisplayCachedMessages($ruleset);
+
+        $this->assertStderrOutputSameString($expected);
 
     }//end testNonBlockingErrorsGenerateOutput()
 
@@ -212,9 +218,11 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         $ruleset = new Ruleset($config);
         $this->mockCachedMessages($ruleset, ['Deprecation notice' => MessageCollector::DEPRECATED]);
 
-        $this->expectOutputString('');
+        $this->expectNoStdoutOutput();
 
         $this->invokeDisplayCachedMessages($ruleset);
+
+        $this->assertStderrOutputSameString('');
 
     }//end testNonBlockingErrorsDoNotShowUnderSpecificCircumstances()
 
