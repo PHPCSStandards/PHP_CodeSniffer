@@ -10,7 +10,6 @@
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Util\Timing;
 
 class Full implements Report
 {
@@ -249,10 +248,6 @@ class Full implements Report
         }
 
         echo $cachedData;
-
-        if ($toScreen === true && $interactive === false) {
-            Timing::printRunTime();
-        }
 
     }//end generate()
 
