@@ -54,22 +54,13 @@ jobs:
       #   code conditions.
       matrix:
         os: ['ubuntu-latest', 'windows-latest']
-        php: ['5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
+        php: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
         custom_ini: [false]
-
-        exclude:
-          # Installing on Windows with PHP 5.4 runs into all sorts of problems (which are not ours).
-          - php: '5.4'
-            os: 'windows-latest'
 
         include:
           # Skip test runs on builds which are also run in the coverage job.
-          # Note: the tests on PHP 7.2 will still be run as the coverage build uses custom_ini settings for that version.
-          - php: '5.4'
-            os: 'ubuntu-latest'
-            skip_tests: true
-          - php: '5.5'
-            os: 'windows-latest'
+          # Note: the tests on PHP 8.1 will still be run as the coverage build uses custom_ini settings for that version.
+          - php: '7.2'
             skip_tests: true
           - php: '8.4'
             skip_tests: true
@@ -86,10 +77,10 @@ jobs:
             libxml_minor: '2.13'
 
           # Extra builds running only the unit tests with different PHP ini settings.
-          - php: '5.5'
+          - php: '7.4'
             os: 'ubuntu-latest'
             custom_ini: true
-          - php: '7.0'
+          - php: '8.3'
             os: 'ubuntu-latest'
             custom_ini: true
           - php: '8.0'
@@ -181,9 +172,7 @@ jobs:
         run: |
           # Set the "short_open_tag" ini to make sure specific conditions are tested.
           # Also turn on error_reporting to ensure all notices are shown.
-          if [[ ${{ matrix.custom_ini }} == true && "${{ matrix.php }}" == '5.5' ]]; then
-            echo 'PHP_INI=error_reporting=-1, display_errors=On, date.timezone=Australia/Sydney, short_open_tag=On, asp_tags=On' >> "$GITHUB_OUTPUT"
-          elif [[ ${{ matrix.custom_ini }} == true && "${{ matrix.php }}" != '5.5' ]]; then
+          if [[ ${{ matrix.custom_ini }} == true ]]; then
             echo 'PHP_INI=error_reporting=-1, display_errors=On, date.timezone=Australia/Sydney, short_open_tag=On' >> "$GITHUB_OUTPUT"
           else
             echo 'PHP_INI=error_reporting=-1, display_errors=On' >> "$GITHUB_OUTPUT"
@@ -268,23 +257,12 @@ jobs:
     strategy:
       matrix:
         os: ['ubuntu-latest', 'windows-latest']
-        php: ['8.4']
+        php: ['7.2', '8.4']
         custom_ini: [false]
 
         include:
-          - php: '5.4'
-            os: 'ubuntu-latest'
-            custom_ini: false
-          # Installing on Windows with PHP 5.4 runs into all sorts of problems with Composer.
-          # Considering PHP 5.4 is ancient, I deem it acceptable to run coverage on Windows on PHP 5.5.
-          # See this issue for more context (yes, I've seen this problem before):
-          # @link https://github.com/PHPCSStandards/composer-installer/pull/213
-          - php: '5.5'
-            os: 'windows-latest'
-            custom_ini: false
-
           # Also run one coverage build with custom ini settings.
-          - php: '7.2'
+          - php: '8.1'
             os: 'ubuntu-latest'
             custom_ini: true
 

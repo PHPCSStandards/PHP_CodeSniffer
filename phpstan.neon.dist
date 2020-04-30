@@ -1,5 +1,7 @@
 parameters:
-    phpVersion: 70100 # Should be 50400, but PHPStan only accepts 70100 or higher...
+    phpVersion:
+        min: 70200
+        max: 80499
     level: 0
     paths:
         - src
