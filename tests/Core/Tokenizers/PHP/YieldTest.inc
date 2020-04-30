@@ -2,12 +2,6 @@
 
 function generator()
 {
-    /* testYield */
-    yield 1;
-
-    /* testYieldFollowedByComment */
-    YIELD/*comment*/ 2;
-
     /* testYieldFrom */
     yield from gen2();
 

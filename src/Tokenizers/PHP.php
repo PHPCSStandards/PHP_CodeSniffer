@@ -608,27 +608,6 @@ class PHP extends Tokenizer
             }
 
             /*
-                Before PHP 5.5, the yield keyword was tokenized as
-                T_STRING. So look for and change this token in
-                earlier versions.
-            */
-
-            if (PHP_VERSION_ID < 50500
-                && $tokenIsArray === true
-                && $token[0] === T_STRING
-                && strtolower($token[1]) === 'yield'
-                && isset($this->tstringContexts[$finalTokens[$lastNotEmptyToken]['code']]) === false
-            ) {
-                // Could still be a context sensitive keyword or "yield from" and potentially multi-line,
-                // so adjust the token stack in place.
-                $token[0] = T_YIELD;
-
-                if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    echo "\t\t* token $stackPtr changed from T_STRING to T_YIELD".PHP_EOL;
-                }
-            }
-
-            /*
                 Tokenize context sensitive keyword as string when it should be string.
             */
 
@@ -1562,41 +1541,10 @@ class PHP extends Tokenizer
             }//end if
 
             /*
-                Before PHP 7.0, "yield from" was tokenized as
-                T_YIELD, T_WHITESPACE and T_STRING. So look for
-                and change this token in earlier versions.
+                Deal with "yield from" in various PHP versions.
             */
 
-            if (PHP_VERSION_ID < 70000
-                && $tokenIsArray === true
-                && $token[0] === T_YIELD
-                && isset($tokens[($stackPtr + 1)]) === true
-                && isset($tokens[($stackPtr + 2)]) === true
-                && $tokens[($stackPtr + 1)][0] === T_WHITESPACE
-                && strpos($tokens[($stackPtr + 1)][1], $this->eolChar) === false
-                && $tokens[($stackPtr + 2)][0] === T_STRING
-                && strtolower($tokens[($stackPtr + 2)][1]) === 'from'
-            ) {
-                // Single-line "yield from" with only whitespace between.
-                $finalTokens[$newStackPtr] = [
-                    'code'    => T_YIELD_FROM,
-                    'type'    => 'T_YIELD_FROM',
-                    'content' => $token[1].$tokens[($stackPtr + 1)][1].$tokens[($stackPtr + 2)][1],
-                ];
-
-                if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    for ($i = ($stackPtr + 1); $i <= ($stackPtr + 2); $i++) {
-                        $type    = Tokens::tokenName($tokens[$i][0]);
-                        $content = Common::prepareForOutput($tokens[$i][1]);
-                        echo "\t\t* token $i merged into T_YIELD_FROM; was: $type => $content".PHP_EOL;
-                    }
-                }
-
-                $newStackPtr++;
-                $stackPtr += 2;
-
-                continue;
-            } else if (PHP_VERSION_ID < 80300
+            if (PHP_VERSION_ID < 80300
                 && $tokenIsArray === true
                 && $token[0] === T_STRING
                 && strtolower($token[1]) === 'from'
@@ -1625,8 +1573,7 @@ class PHP extends Tokenizer
                 }
 
                 continue;
-            } else if (PHP_VERSION_ID >= 70000
-                && $tokenIsArray === true
+            } else if ($tokenIsArray === true
                 && $token[0] === T_YIELD_FROM
                 && strpos($token[1], $this->eolChar) !== false
                 && preg_match('`^yield\s+from$`i', $token[1]) === 1
@@ -1719,92 +1666,15 @@ class PHP extends Tokenizer
             }//end if
 
             /*
-                Before PHP 5.6, the ... operator was tokenized as three
-                T_STRING_CONCAT tokens in a row. So look for and combine
-                these tokens in earlier versions.
-            */
-
-            if ($tokenIsArray === false
-                && $token[0] === '.'
-                && isset($tokens[($stackPtr + 1)]) === true
-                && isset($tokens[($stackPtr + 2)]) === true
-                && $tokens[($stackPtr + 1)] === '.'
-                && $tokens[($stackPtr + 2)] === '.'
-            ) {
-                $newToken            = [];
-                $newToken['code']    = T_ELLIPSIS;
-                $newToken['type']    = 'T_ELLIPSIS';
-                $newToken['content'] = '...';
-                $finalTokens[$newStackPtr] = $newToken;
-
-                $newStackPtr++;
-                $stackPtr += 2;
-                continue;
-            }
-
-            /*
-                Before PHP 5.6, the ** operator was tokenized as two
-                T_MULTIPLY tokens in a row. So look for and combine
-                these tokens in earlier versions.
-            */
-
-            if ($tokenIsArray === false
-                && $token[0] === '*'
-                && isset($tokens[($stackPtr + 1)]) === true
-                && $tokens[($stackPtr + 1)] === '*'
-            ) {
-                $newToken            = [];
-                $newToken['code']    = T_POW;
-                $newToken['type']    = 'T_POW';
-                $newToken['content'] = '**';
-                $finalTokens[$newStackPtr] = $newToken;
-
-                $newStackPtr++;
-                $stackPtr++;
-                continue;
-            }
-
-            /*
-                Before PHP 5.6, the **= operator was tokenized as
-                T_MULTIPLY followed by T_MUL_EQUAL. So look for and combine
-                these tokens in earlier versions.
-            */
-
-            if ($tokenIsArray === false
-                && $token[0] === '*'
-                && isset($tokens[($stackPtr + 1)]) === true
-                && is_array($tokens[($stackPtr + 1)]) === true
-                && $tokens[($stackPtr + 1)][1] === '*='
-            ) {
-                $newToken            = [];
-                $newToken['code']    = T_POW_EQUAL;
-                $newToken['type']    = 'T_POW_EQUAL';
-                $newToken['content'] = '**=';
-                $finalTokens[$newStackPtr] = $newToken;
-
-                $newStackPtr++;
-                $stackPtr++;
-                continue;
-            }
-
-            /*
-                Before PHP 7, the ??= operator was tokenized as
-                T_INLINE_THEN, T_INLINE_THEN, T_EQUAL.
                 Between PHP 7.0 and 7.3, the ??= operator was tokenized as
                 T_COALESCE, T_EQUAL.
                 So look for and combine these tokens in earlier versions.
             */
 
-            if (($tokenIsArray === false
-                && $token[0] === '?'
-                && isset($tokens[($stackPtr + 1)]) === true
-                && $tokens[($stackPtr + 1)][0] === '?'
-                && isset($tokens[($stackPtr + 2)]) === true
-                && $tokens[($stackPtr + 2)][0] === '=')
-                || ($tokenIsArray === true
+            if ($tokenIsArray === true
                 && $token[0] === T_COALESCE
                 && isset($tokens[($stackPtr + 1)]) === true
-                && $tokens[($stackPtr + 1)][0] === '=')
+                && $tokens[($stackPtr + 1)][0] === '='
             ) {
                 $newToken            = [];
                 $newToken['code']    = T_COALESCE_EQUAL;
@@ -1815,33 +1685,6 @@ class PHP extends Tokenizer
                 $newStackPtr++;
                 $stackPtr++;
 
-                if ($tokenIsArray === false) {
-                    // Pre PHP 7.
-                    $stackPtr++;
-                }
-
-                continue;
-            }
-
-            /*
-                Before PHP 7, the ?? operator was tokenized as
-                T_INLINE_THEN followed by T_INLINE_THEN.
-                So look for and combine these tokens in earlier versions.
-            */
-
-            if ($tokenIsArray === false
-                && $token[0] === '?'
-                && isset($tokens[($stackPtr + 1)]) === true
-                && $tokens[($stackPtr + 1)][0] === '?'
-            ) {
-                $newToken            = [];
-                $newToken['code']    = T_COALESCE;
-                $newToken['type']    = 'T_COALESCE';
-                $newToken['content'] = '??';
-                $finalTokens[$newStackPtr] = $newToken;
-
-                $newStackPtr++;
-                $stackPtr++;
                 continue;
             }
 
@@ -2346,28 +2189,6 @@ class PHP extends Tokenizer
             }//end if
 
             /*
-                Before PHP 7, the <=> operator was tokenized as
-                T_IS_SMALLER_OR_EQUAL followed by T_GREATER_THAN.
-                So look for and combine these tokens in earlier versions.
-            */
-
-            if ($tokenIsArray === true
-                && $token[0] === T_IS_SMALLER_OR_EQUAL
-                && isset($tokens[($stackPtr + 1)]) === true
-                && $tokens[($stackPtr + 1)][0] === '>'
-            ) {
-                $newToken            = [];
-                $newToken['code']    = T_SPACESHIP;
-                $newToken['type']    = 'T_SPACESHIP';
-                $newToken['content'] = '<=>';
-                $finalTokens[$newStackPtr] = $newToken;
-
-                $newStackPtr++;
-                $stackPtr++;
-                continue;
-            }
-
-            /*
                 PHP doesn't assign a token to goto labels, so we have to.
                 These are just string tokens with a single colon after them. Double
                 colons are already tokenized and so don't interfere with this check.
@@ -2678,16 +2499,6 @@ class PHP extends Tokenizer
                         $newToken['code'] = T_STRING;
                         $newToken['type'] = 'T_STRING';
                     }
-                }
-
-                // This is a special case when checking PHP 5.5+ code in PHP < 5.5
-                // where "finally" should be T_FINALLY instead of T_STRING.
-                if ($newToken['code'] === T_STRING
-                    && strtolower($newToken['content']) === 'finally'
-                    && $finalTokens[$lastNotEmptyToken]['code'] === T_CLOSE_CURLY_BRACKET
-                ) {
-                    $newToken['code'] = T_FINALLY;
-                    $newToken['type'] = 'T_FINALLY';
                 }
 
                 // This is a special case for PHP 5.6 use function and use const
