@@ -28,6 +28,15 @@ class Filter extends RecursiveFilterIterator
     protected $basedir = null;
 
     /**
+     * Whether the basedir is a file or a directory.
+     *
+     * TRUE if the basedir is actually a directory.
+     *
+     * @var boolean
+     */
+    protected $isBasedirDir = false;
+
+    /**
      * The config data for the run.
      *
      * @var \PHP_CodeSniffer\Config
@@ -81,6 +90,10 @@ class Filter extends RecursiveFilterIterator
         $this->basedir = $basedir;
         $this->config  = $config;
         $this->ruleset = $ruleset;
+
+        if (is_dir($basedir) === true || Common::isPharFile($basedir) === true) {
+            $this->isBasedirDir = true;
+        }
 
     }//end __construct()
 
@@ -172,7 +185,17 @@ class Filter extends RecursiveFilterIterator
         $fileName  = basename($path);
         $fileParts = explode('.', $fileName);
         if ($fileParts[0] === $fileName || $fileParts[0] === '') {
-            return false;
+            if ($this->isBasedirDir === true) {
+                // We are recursing a directory, so ignore any
+                // files with no extension.
+                return false;
+            }
+
+            // We are processing a single file, so always
+            // accept files with no extension as they have been
+            // explicitly requested and there is no config setting
+            // to ignore them.
+            return true;
         }
 
         // Checking multi-part file extensions, so need to create a
