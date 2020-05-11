@@ -28,7 +28,3 @@ $shouldNotTrigger = 'My' /* comment */ . 'string';
 $string = 'Multiline strings are allowed '
         . 'when setting is enabled.';
 // phpcs:set Generic.Strings.UnnecessaryStringConcat allowMultiline false
-
-// phpcs:set Generic.Strings.UnnecessaryStringConcat error false
-$throwWarning = 'My' . 'string';
-// phpcs:set Generic.Strings.UnnecessaryStringConcat error true
