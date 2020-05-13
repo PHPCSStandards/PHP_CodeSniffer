@@ -37,7 +37,7 @@ final class GetIgnorePatternsTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         // Set up the ruleset.
-        $standard      = __DIR__."/GetIgnorePatternsTest.xml";
+        $standard      = __DIR__.'/GetIgnorePatternsTest.xml';
         $config        = new ConfigDouble(["--standard=$standard"]);
         self::$ruleset = new Ruleset($config);
 

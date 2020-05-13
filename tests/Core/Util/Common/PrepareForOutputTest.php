@@ -79,16 +79,16 @@ final class PrepareForOutputTest extends TestCase
                 'expectedWin' => "\\r\\n\\t",
             ],
             'Spaces are replaced with a unique mark'             => [
-                'content'     => "    ",
+                'content'     => '    ',
                 'exclude'     => [],
                 'expected'    => "\033[30;1m·\033[0m\033[30;1m·\033[0m\033[30;1m·\033[0m\033[30;1m·\033[0m",
-                'expectedWin' => "    ",
+                'expectedWin' => '    ',
             ],
             'Other characters are unaffected'                    => [
-                'content'     => "{echo 1;}",
+                'content'     => '{echo 1;}',
                 'exclude'     => [],
                 'expected'    => "{echo\033[30;1m·\033[0m1;}",
-                'expectedWin' => "{echo 1;}",
+                'expectedWin' => '{echo 1;}',
             ],
             'No replacements'                                    => [
                 'content'     => 'nothing-should-be-replaced',

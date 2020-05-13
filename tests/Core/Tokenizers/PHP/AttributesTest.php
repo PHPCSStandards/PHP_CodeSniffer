@@ -540,7 +540,7 @@ final class AttributesTest extends AbstractTokenizerTestCase
                     ],
                     [
                         'T_WHITESPACE',
-                        "    ",
+                        '    ',
                     ],
                     [
                         'T_CONSTANT_ENCAPSED_STRING',

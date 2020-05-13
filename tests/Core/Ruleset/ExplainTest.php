@@ -179,7 +179,7 @@ final class ExplainTest extends TestCase
     public function testExplainWithDeprecatedSniffs()
     {
         // Set up the ruleset.
-        $standard = __DIR__."/ShowSniffDeprecationsTest.xml";
+        $standard = __DIR__.'/ShowSniffDeprecationsTest.xml';
         $config   = new ConfigDouble(["--standard=$standard", '-e']);
         $ruleset  = new Ruleset($config);
 
