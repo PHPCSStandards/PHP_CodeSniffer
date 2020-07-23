@@ -3207,6 +3207,7 @@ class PHP extends Tokenizer
                             if ($this->tokens[$this->tokens[$y]['parenthesis_owner']]['code'] === T_FUNCTION
                                 || $this->tokens[$this->tokens[$y]['parenthesis_owner']]['code'] === T_CLOSURE
                                 || $this->tokens[$this->tokens[$y]['parenthesis_owner']]['code'] === T_FN
+                                || $this->tokens[$this->tokens[$y]['parenthesis_owner']]['code'] === T_USE
                             ) {
                                 $confirmed = true;
                             }
@@ -3215,7 +3216,6 @@ class PHP extends Tokenizer
                         }
 
                         // Arrow functions may not have the parenthesis_owner set correctly yet.
-                        // Closure use tokens won't be parentheses owners until PHPCS 4.0.
                         if (isset($this->tokens[$y]['parenthesis_opener']) === true) {
                             for ($z = ($this->tokens[$y]['parenthesis_opener'] - 1); $z > 0; $z--) {
                                 if (isset(Tokens::$emptyTokens[$this->tokens[$z]['code']]) === false) {
@@ -3223,7 +3223,7 @@ class PHP extends Tokenizer
                                 }
                             }
 
-                            if ($this->tokens[$z]['code'] === T_FN || $this->tokens[$z]['code'] === T_USE) {
+                            if ($this->tokens[$z]['code'] === T_FN) {
                                 $confirmed = true;
                             }
                         }

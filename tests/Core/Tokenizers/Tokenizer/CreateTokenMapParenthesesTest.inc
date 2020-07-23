@@ -112,7 +112,7 @@ if (
     /* testNestedFunctionCallAParenthesesOpener */
     array_map(
         /* testNestedClosureParenthesesOwner */
-        function ($a, $b /* testNestedClosureParenthesesCloser */) /* testNestedClosureUseParenthesesOpener */
+        function ($a, $b /* testNestedClosureParenthesesCloser */) /* testNestedClosureUseParenthesesOwner */
             use (&$c /* testNestedClosureUseParenthesesCloser */)
         {
             /* testNestedForeachParenthesesOwner */
