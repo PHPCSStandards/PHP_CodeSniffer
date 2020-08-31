@@ -8,10 +8,10 @@ class MyClass {
     {
     }
 
-    public function validWithFQN(
+    public function validWithQualifiedNames(
         ?\MyNameSpace\MyArray $array = null,
-        ?\MyNameSpace\MyObject $object
-    ): ?\MyNameSpace\MyObject
+        ?MyNameSpace\MyObject $object
+    ): ?namespace\MyObject
     {
     }
 
@@ -26,10 +26,10 @@ class MyClass {
     {
     }
 
-    public function invalidWithFQNTooMuchWhitespace(
+    public function invalidWithQualifiedNamesTooMuchWhitespace(
         ?\MyNameSpace\MyArray $array = null,
-        ?\MyNameSpace\MyObject
-    ):?\MyNameSpace\MyObject
+        ?MyNameSpace\MyObject
+    ):?namespace\MyObject
     {
     }
 }
