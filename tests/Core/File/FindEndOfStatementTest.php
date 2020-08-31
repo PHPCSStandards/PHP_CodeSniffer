@@ -196,7 +196,7 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $start = $this->getTargetToken('/* testUseGroup */', T_USE);
         $found = self::$phpcsFile->findEndOfStatement($start);
 
-        $this->assertSame(($start + 23), $found);
+        $this->assertSame(($start + 21), $found);
 
     }//end testUseGroup()
 
