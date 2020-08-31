@@ -2778,11 +2778,8 @@ class File
             return false;
         }
 
-        $find = [
-            T_NS_SEPARATOR,
-            T_STRING,
-            T_WHITESPACE,
-        ];
+        $find   = Tokens::$nameTokens;
+        $find[] = T_WHITESPACE;
 
         $end  = $this->findNext($find, ($extendsIndex + 1), ($classOpenerIndex + 1), true);
         $name = $this->getTokensAsString(($extendsIndex + 1), ($end - $extendsIndex - 1));
