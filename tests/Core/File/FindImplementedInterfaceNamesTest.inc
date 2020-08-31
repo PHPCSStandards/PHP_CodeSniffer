@@ -21,6 +21,9 @@ class testFIINNamespacedClass implements \PHP_CodeSniffer\Tests\Core\File\testFI
 /* testImplementsPartiallyQualified */
 class testFIINQualifiedClass implements Core\File\RelativeInterface {}
 
+/* testImplementsMultipleNamespaceRelativeInterfaces */
+class testMultiImplementedNSOperator implements namespace\testInterfaceA, namespace\testInterfaceB {}
+
 /* testClassThatExtendsAndImplements */
 class testFECNClassThatExtendsAndImplements extends testFECNClass implements InterfaceA, \NameSpaced\Cat\InterfaceB {}
 
