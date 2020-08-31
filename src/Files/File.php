@@ -2085,12 +2085,10 @@ class File
                 return true;
             } else {
                 $skip   = Tokens::$emptyTokens;
-                $skip[] = T_NS_SEPARATOR;
+                $skip  += Tokens::$nameTokens;
                 $skip[] = T_SELF;
                 $skip[] = T_PARENT;
                 $skip[] = T_STATIC;
-                $skip[] = T_STRING;
-                $skip[] = T_NAMESPACE;
                 $skip[] = T_DOUBLE_COLON;
 
                 $nextSignificantAfter = $this->findNext(
