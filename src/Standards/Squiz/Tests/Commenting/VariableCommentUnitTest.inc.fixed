@@ -453,6 +453,13 @@ class MoreMissingButSupportedTypes
      * @var SomeClass
      */
     private namespace\SomeClass $variableName;
+
+    public static ?\Folder\ClassName $FQNTypeDecl_noComment = null;
+
+    /**
+     * @var \Folder\ClassName|null
+     */
+    public ?\Folder\ClassName $FQNTypeDecl_withComment = null;
 }
 
 class DNFTypes

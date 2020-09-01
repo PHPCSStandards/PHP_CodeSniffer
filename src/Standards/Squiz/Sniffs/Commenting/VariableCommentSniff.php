@@ -41,18 +41,15 @@ class VariableCommentSniff extends AbstractVariableSniff
     public function processMemberVar(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-        $ignore = [
-            T_PUBLIC                 => T_PUBLIC,
-            T_PRIVATE                => T_PRIVATE,
-            T_PROTECTED              => T_PROTECTED,
+
+        $ignore  = Tokens::$scopeModifiers;
+        $ignore += Tokens::$nameTokens;
+        $ignore += [
             T_VAR                    => T_VAR,
             T_STATIC                 => T_STATIC,
             T_READONLY               => T_READONLY,
             T_FINAL                  => T_FINAL,
             T_WHITESPACE             => T_WHITESPACE,
-            T_STRING                 => T_STRING,
-            T_NS_SEPARATOR           => T_NS_SEPARATOR,
-            T_NAMESPACE              => T_NAMESPACE,
             T_NULLABLE               => T_NULLABLE,
             T_TYPE_UNION             => T_TYPE_UNION,
             T_TYPE_INTERSECTION      => T_TYPE_INTERSECTION,
