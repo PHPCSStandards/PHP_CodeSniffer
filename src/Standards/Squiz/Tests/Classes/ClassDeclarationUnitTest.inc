@@ -56,7 +56,7 @@ class ClassOne implements ClassTwo, ClassThree
 {
 }//end class
 
-class ClassOne implements ClassFour   ,ClassFive,  ClassSix
+class ClassOne implements ClassFour   ,\ClassFive,  namespace\ClassSix
 {
 }//end class
 
