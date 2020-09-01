@@ -2771,12 +2771,11 @@ class PHP extends Tokenizer
                     && isset($this->tokens[$x]['parenthesis_closer']) === true
                 ) {
                     $ignore  = Tokens::$emptyTokens;
+                    $ignore += Tokens::$nameTokens;
                     $ignore += [
                         T_ARRAY                  => T_ARRAY,
                         T_CALLABLE               => T_CALLABLE,
                         T_COLON                  => T_COLON,
-                        T_NAMESPACE              => T_NAMESPACE,
-                        T_NS_SEPARATOR           => T_NS_SEPARATOR,
                         T_NULL                   => T_NULL,
                         T_TRUE                   => T_TRUE,
                         T_FALSE                  => T_FALSE,
@@ -2784,7 +2783,6 @@ class PHP extends Tokenizer
                         T_PARENT                 => T_PARENT,
                         T_SELF                   => T_SELF,
                         T_STATIC                 => T_STATIC,
-                        T_STRING                 => T_STRING,
                         T_TYPE_UNION             => T_TYPE_UNION,
                         T_TYPE_INTERSECTION      => T_TYPE_INTERSECTION,
                         T_TYPE_OPEN_PARENTHESIS  => T_TYPE_OPEN_PARENTHESIS,
