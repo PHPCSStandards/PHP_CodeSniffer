@@ -589,3 +589,20 @@ content
     'my_file.php'
 ); ?>
 <?php endif; ?>
+
+<?php
+$val = \functionCall($arg);
+$val = Package\functionCall($arg);
+$val = namespace\functionCall($arg);
+
+$val = \functionCall(
+    $arg
+    , $arg2 
+);
+$val = Package\functionCall(
+    $arg, $arg2
+);
+$val = namespace\functionCall(
+    $arg,
+    $arg2
+);
