@@ -59,6 +59,10 @@ final class ComparisonOperatorUsageUnitTest extends AbstractSniffTestCase
             127 => 1,
             131 => 1,
             135 => 1,
+            145 => 1,
+            146 => 1,
+            147 => 1,
+            148 => 1,
         ];
 
     }//end getErrorList()

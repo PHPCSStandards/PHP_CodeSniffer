@@ -317,7 +317,7 @@ foo(
     $e
 );
 
-test(
+Partially\Qualified\test(
         1,2,3,4
     );
 
@@ -374,7 +374,7 @@ return (function ($a, $b) {
 
 function foo()
 {
-     Bar(
+     \Bar(
         function () {
         }
     );
@@ -390,7 +390,7 @@ $deprecated_functions = [
 
 $deprecated_functions = [
     'the_category_ID'
-         => function_call( // 9 spaces, not 8. This is the problem line.
+         => namespace\function_call( // 9 spaces, not 8. This is the problem line.
         $a,
         $b
     ),

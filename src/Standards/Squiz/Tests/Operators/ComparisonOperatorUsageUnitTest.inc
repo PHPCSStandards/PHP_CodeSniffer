@@ -136,3 +136,13 @@ if (empty($argTags > 0)) {
 }
 
 myFunction($var1 === true ? "" : "foobar");
+
+if (unqualified($argTags > 0) === true) {}
+if (Partially\qualified($argTags > 0) === false) {}
+if (\Fully\qualified($argTags > 0) === true) {}
+if (namespace\relative($argTags > 0) === false) {}
+
+if (unqualified($argTags > 0)) {}
+if (Partially\qualified($argTags > 0)) {}
+if (\Fully\qualified($argTags > 0)) {}
+if (namespace\relative($argTags > 0)) {}
