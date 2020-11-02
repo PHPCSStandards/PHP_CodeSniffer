@@ -2964,14 +2964,14 @@ class PHP extends Tokenizer
                 // Unless there is a variable or a bracket before this token,
                 // it is the start of an array being defined using the short syntax.
                 $isShortArray = false;
-                $allowed      = [
+                $allowed      = Tokens::$nameTokens;
+                $allowed     += [
                     T_CLOSE_SQUARE_BRACKET     => T_CLOSE_SQUARE_BRACKET,
                     T_CLOSE_CURLY_BRACKET      => T_CLOSE_CURLY_BRACKET,
                     T_CLOSE_PARENTHESIS        => T_CLOSE_PARENTHESIS,
                     T_VARIABLE                 => T_VARIABLE,
                     T_OBJECT_OPERATOR          => T_OBJECT_OPERATOR,
                     T_NULLSAFE_OBJECT_OPERATOR => T_NULLSAFE_OBJECT_OPERATOR,
-                    T_STRING                   => T_STRING,
                     T_CONSTANT_ENCAPSED_STRING => T_CONSTANT_ENCAPSED_STRING,
                     T_DOUBLE_QUOTED_STRING     => T_DOUBLE_QUOTED_STRING,
                 ];
