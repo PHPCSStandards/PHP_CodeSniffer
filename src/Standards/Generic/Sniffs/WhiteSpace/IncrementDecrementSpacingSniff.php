@@ -52,7 +52,9 @@ class IncrementDecrementSpacingSniff implements Sniff
 
         // Is this a pre-increment/decrement ?
         $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
-        if ($nextNonEmpty !== false && $tokens[$nextNonEmpty]['code'] === T_VARIABLE) {
+        if ($nextNonEmpty !== false
+            && ($tokens[$nextNonEmpty]['code'] === T_VARIABLE || $tokens[$nextNonEmpty]['code'] === T_STRING)
+        ) {
             if ($nextNonEmpty === ($stackPtr + 1)) {
                 $phpcsFile->recordMetric($stackPtr, 'Spacing between in/decrementor and variable', 0);
                 return;
@@ -102,7 +104,11 @@ class IncrementDecrementSpacingSniff implements Sniff
 
         // Is this a post-increment/decrement ?
         $prevNonEmpty = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
-        if ($prevNonEmpty !== false && $tokens[$prevNonEmpty]['code'] === T_VARIABLE) {
+        if ($prevNonEmpty !== false
+            && ($tokens[$prevNonEmpty]['code'] === T_VARIABLE
+            || $tokens[$prevNonEmpty]['code'] === T_STRING
+            || $tokens[$prevNonEmpty]['code'] === T_CLOSE_SQUARE_BRACKET)
+        ) {
             if ($prevNonEmpty === ($stackPtr - 1)) {
                 $phpcsFile->recordMetric($stackPtr, 'Spacing between in/decrementor and variable', 0);
                 return;
