@@ -152,3 +152,10 @@ if (true) {}
 if (\true) {}
 for ($var1 = 10; FALSE; $var1--) {}
 for ($var1 = 10; \FALSE; $var1--) {}
+
+$anon = new class(!$foo ? 0 : 1, ($bar == true) ? 1 : 0) {
+    function __construct($a, $b) {}
+};
+$anon = new class($foo === false ? 0 : 1, ($bar === true) ? 1 : 0) {
+    function __construct($a, $b) {}
+};
