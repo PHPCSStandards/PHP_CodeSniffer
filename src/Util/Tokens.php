@@ -464,14 +464,15 @@ final class Tokens
      * @var array<int|string, int|string>
      */
     public const FUNCTION_NAME_TOKENS = (self::INCLUDE_TOKENS + self::NAME_TOKENS + [
-        T_EVAL   => T_EVAL,
-        T_EXIT   => T_EXIT,
-        T_ISSET  => T_ISSET,
-        T_UNSET  => T_UNSET,
-        T_EMPTY  => T_EMPTY,
-        T_SELF   => T_SELF,
-        T_PARENT => T_PARENT,
-        T_STATIC => T_STATIC,
+        T_EVAL       => T_EVAL,
+        T_EXIT       => T_EXIT,
+        T_ISSET      => T_ISSET,
+        T_UNSET      => T_UNSET,
+        T_EMPTY      => T_EMPTY,
+        T_SELF       => T_SELF,
+        T_PARENT     => T_PARENT,
+        T_STATIC     => T_STATIC,
+        T_ANON_CLASS => T_ANON_CLASS,
     ]);
 
     /**
