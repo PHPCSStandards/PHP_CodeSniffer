@@ -189,6 +189,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Tests using the PHPCS native test framework with multiple test case files will now run the test case files in numeric order.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Generic/SpreadOperatorSpacingAfter: minor message readability improvement
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 
 ### Removed
 - Removed support for installing via PEAR
