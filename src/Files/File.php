@@ -1849,6 +1849,7 @@ class File
                 T_SELF                 => T_SELF,
                 T_PARENT               => T_PARENT,
                 T_FALSE                => T_FALSE,
+                T_TRUE                 => T_TRUE,
                 T_NULL                 => T_NULL,
                 T_TYPE_INTERSECTION    => T_TYPE_INTERSECTION,
                 T_TYPE_UNION           => T_TYPE_UNION,

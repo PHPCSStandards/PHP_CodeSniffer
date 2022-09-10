@@ -802,7 +802,7 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                 ],
             ],
             [
-                '/* testPHP81NulltableIntersectionType */',
+                '/* testPHP81NullableIntersectionType */',
                 [
                     'scope'           => 'public',
                     'scope_specified' => true,
@@ -812,6 +812,51 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => true,
                 ],
             ],
+            [
+                '/* testPHP82PseudoTypeTrue */',
+                [
+                    'scope'           => 'public',
+                    'scope_specified' => true,
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'type'            => 'true',
+                    'nullable_type'   => false,
+                ],
+            ],
+            [
+                '/* testPHP82NullablePseudoTypeTrue */',
+                [
+                    'scope'           => 'protected',
+                    'scope_specified' => true,
+                    'is_static'       => true,
+                    'is_readonly'     => false,
+                    'type'            => '?true',
+                    'nullable_type'   => true,
+                ],
+            ],
+            [
+                '/* testPHP82PseudoTypeTrueInUnion */',
+                [
+                    'scope'           => 'private',
+                    'scope_specified' => true,
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'type'            => 'int|string|true',
+                    'nullable_type'   => false,
+                ],
+            ],
+            [
+                '/* testPHP82PseudoTypeFalseAndTrue */',
+                [
+                    'scope'           => 'public',
+                    'scope_specified' => false,
+                    'is_static'       => false,
+                    'is_readonly'     => true,
+                    'type'            => 'true|FALSE',
+                    'nullable_type'   => false,
+                ],
+            ],
+
         ];
 
     }//end dataGetMemberProperties()
