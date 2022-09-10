@@ -1648,6 +1648,7 @@ class File
                 T_PARENT               => T_PARENT,
                 T_STATIC               => T_STATIC,
                 T_FALSE                => T_FALSE,
+                T_TRUE                 => T_TRUE,
                 T_NULL                 => T_NULL,
                 T_TYPE_INTERSECTION    => T_TYPE_INTERSECTION,
                 T_TYPE_UNION           => T_TYPE_UNION,
