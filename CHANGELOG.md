@@ -175,6 +175,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Sniff error messages are now more informative to help bugs get reported to the correct project
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Generic.CodeAnalysis.UnusedFunctionParameter will now ignore magic methods for which the signature is defined by PHP
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Generic.Functions.OpeningFunctionBraceBsdAllman will now check the brace indent before the opening brace for empty functions
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Generic.Functions.OpeningFunctionBraceKernighanRitchie will now check the spacing before the opening brace for empty functions
