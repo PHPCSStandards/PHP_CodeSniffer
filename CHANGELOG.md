@@ -114,6 +114,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3557 : Squiz.Arrays.ArrayDeclaration will now ignore PHP 7.4 array unpacking when determining whether an array is associative
     - Thanks to Volker Dusch (@edorian) for the patch
+- Fixed bug #3715 : Generic/UnusedFunctionParameter: fixed incorrect errorcode for closures/arrow functions nested within extended classes/classes which implement.
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3717 : Squiz.Commenting.FunctionComment: fixed false positive for InvalidNoReturn when type is never
     - Thanks to Choraimy Kroonstuiver (@axlon) for the patch
 - Fixed bug #3720 : Generic/RequireStrictTypes : will now bow out silently in case of parse errors/live coding instead of throwing false positives/false negatives
