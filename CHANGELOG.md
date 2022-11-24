@@ -111,6 +111,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Choraimy Kroonstuiver (@axlon) for the patch
 - Fixed bug #3720 : Generic/RequireStrictTypes : will now bow out silently in case of parse errors/live coding instead of throwing false positives/false negatives
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Fixed bug #3720 : Generic/RequireStrictTypes : did not handle multi-directive declare statements
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3722 : Potential "Uninitialized string offset 1" in octal notation backfill
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3728 : PHP 8.2 | PSR1/SideEffects: allow for readonly classes
