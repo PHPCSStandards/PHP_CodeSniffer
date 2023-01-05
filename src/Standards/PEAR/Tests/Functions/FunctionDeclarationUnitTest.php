@@ -97,6 +97,8 @@ class FunctionDeclarationUnitTest extends AbstractSniffUnitTest
             402 => 1,
             406 => 1,
             475 => 1,
+            483 => 1,
+            490 => 2,
         ];
 
     }//end getErrorList()

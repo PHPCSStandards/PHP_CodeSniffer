@@ -213,6 +213,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3736 : PEAR/FunctionDeclaration: prevent fixer removing the close brace (and creating a parse error) when there is no space between the open brace and close brace of a function
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Fixed bug #3739 : PEAR/FunctionDeclaration: prevent fixer conflict (and potentially creating a parse error) for unconventionally formatted return types
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3770 : Squiz/NonExecutableCode: prevent false positives for switching between PHP and HTML
     - Thanks to Dan Wallis (@fredden) for the patch
 - Fixed bug #3773 : Tokenizer/PHP: tokenization of the readonly keyword when used in combination with PHP 8.2 disjunctive normal types
