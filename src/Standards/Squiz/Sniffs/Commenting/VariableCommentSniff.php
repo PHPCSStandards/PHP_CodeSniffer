@@ -42,6 +42,8 @@ class VariableCommentSniff extends AbstractVariableSniff
             T_NAME_FULLY_QUALIFIED => T_NAME_FULLY_QUALIFIED,
             T_NAME_RELATIVE        => T_NAME_RELATIVE,
             T_NULLABLE             => T_NULLABLE,
+            T_TYPE_UNION           => T_TYPE_UNION,
+            T_TYPE_INTERSECTION    => T_TYPE_INTERSECTION,
         ];
 
         for ($commentEnd = ($stackPtr - 1); $commentEnd >= 0; $commentEnd--) {
