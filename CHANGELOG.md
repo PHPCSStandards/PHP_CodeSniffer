@@ -191,6 +191,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Use composer or the phar files
 
 ### Fixed
+- Fixed bug #3386 : PSR1/SideEffects : improved recognition of disable/enable annotations
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3557 : Squiz.Arrays.ArrayDeclaration will now ignore PHP 7.4 array unpacking when determining whether an array is associative
     - Thanks to Volker Dusch (@edorian) for the patch
 - Fixed bug #3717 : Squiz.Commenting.FunctionComment: fixed false positive for InvalidNoReturn when type is never
