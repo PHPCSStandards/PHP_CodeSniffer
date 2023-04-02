@@ -231,6 +231,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3789 : Incorrect tokenization for ternary operator with match inside of it
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Fixed bug #3790 : PSR12/AnonClassDeclaration: prevent fixer creating parse error when there was no space before the open brace
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3797 : Tokenizer/PHP: more context sensitive keyword fixes
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3801 : File::getMethodParameters(): allow for readonly promoted properties without visibility
