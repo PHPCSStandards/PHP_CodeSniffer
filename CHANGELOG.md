@@ -138,6 +138,9 @@ The file documents changes to the PHP_CodeSniffer project.
     - PSR2.Methods.FunctionCallSignature
     - PSR2.Methods.FunctionClosingBrace
     - Thanks to Atsushi Okui (@blue32a) for the patch
+- Support for PHPUnit 8 and 9 to the test suite.
+    - Test suites for external standards which run via the PHPCS native test suite can now run on PHPUnit 4-9 (was 4-7).
+    - If any of these tests use the PHPUnit `setUp()`/`tearDown()` methods or overload the `setUp()` in the `AbstractSniffUnitTest` test case, they will need to be adjusted. See the [PR details for further information](https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/59/commits/26384ebfcc0b1c1651b0e1e40c9b6c8c22881832).
 
 ### Changed
 - Changes have been made to the way PHPCS handles invalid sniff properties being set in a custom ruleset

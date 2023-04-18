@@ -114,19 +114,10 @@ jobs:
 
       # Install dependencies and handle caching in one go.
       # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
-      - name: Install Composer dependencies - normal
-        if: ${{ matrix.php != '8.1' }}
+      - name: Install Composer dependencies
         uses: "ramsey/composer-install@v2"
         with:
           # Bust the cache at least once a month - output format: YYYY-MM.
-          custom-cache-suffix: $(date -u "+%Y-%m")
-
-      # For PHP > 8.0, install with ignore platform reqs as not all PHPUnit allow for it yet.
-      - name: Install Composer dependencies - with ignore platform
-        if: ${{ matrix.php == '8.1' || matrix.php == '8.2' }}
-        uses: "ramsey/composer-install@v2"
-        with:
-          composer-options: --ignore-platform-req=php+
           custom-cache-suffix: $(date -u "+%Y-%m")
 
       # Note: The code style check is run multiple times against every PHP version

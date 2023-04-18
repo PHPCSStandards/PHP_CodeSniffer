@@ -60,10 +60,6 @@
             "Composer\\Config::disableProcessTimeout",
             "@php ./vendor/phpunit/phpunit/phpunit tests/AllTests.php --no-coverage"
         ],
-        "test-php8": [
-            "Composer\\Config::disableProcessTimeout",
-            "@php ./vendor/phpunit/phpunit/phpunit tests/AllTests.php --no-configuration --bootstrap=tests/bootstrap.php --dont-report-useless-tests --no-coverage"
-        ],
         "coverage": [
             "Composer\\Config::disableProcessTimeout",
             "@php ./vendor/phpunit/phpunit/phpunit tests/AllTests.php -d max_execution_time=0"
@@ -81,7 +77,6 @@
         "cs": "Check for code style violations.",
         "cbf": "Fix code style violations.",
         "test": "Run the unit tests without code coverage.",
-        "test-php8": "Run the unit tests without code coverage on PHP 8.1 or higher.",
         "coverage": "Run the unit tests with code coverage.",
         "build": "Create PHAR files for PHPCS and PHPCBF.",
         "check-all": "Run all checks (phpcs, tests)."
