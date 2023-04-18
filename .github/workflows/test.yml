@@ -116,6 +116,19 @@ jobs:
           coverage: none
           tools: cs2pr
 
+      # This action also handles the caching of the dependencies.
+      - name: Set up node and enable caching of dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install external tools used in tests
+        run: >
+          npm install -g --fund false
+          csslint
+          eslint
+          jshint
+
       # Install dependencies and handle caching in one go.
       # @link https://github.com/marketplace/actions/install-composer-dependencies
       - name: Install Composer dependencies - normal
