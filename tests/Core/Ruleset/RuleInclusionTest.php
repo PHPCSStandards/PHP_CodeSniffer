@@ -42,9 +42,11 @@ class RuleInclusionTest extends TestCase
     /**
      * Initialize the config and ruleset objects based on the `RuleInclusionTest.xml` ruleset file.
      *
+     * @beforeClass
+     *
      * @return void
      */
-    public static function setUpBeforeClass()
+    public static function initializeConfigAndRuleset()
     {
         $standard       = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
         self::$standard = $standard;
@@ -70,19 +72,21 @@ class RuleInclusionTest extends TestCase
         $config        = new Config(["--standard=$standard"]);
         self::$ruleset = new Ruleset($config);
 
-    }//end setUpBeforeClass()
+    }//end initializeConfigAndRuleset()
 
 
     /**
      * Reset ruleset file.
      *
+     * @after
+     *
      * @return void
      */
-    public function tearDown()
+    public function resetRuleset()
     {
         file_put_contents(self::$standard, self::$contents);
 
-    }//end tearDown()
+    }//end resetRuleset()
 
 
     /**
