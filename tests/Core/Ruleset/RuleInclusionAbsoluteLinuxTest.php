@@ -91,7 +91,6 @@ class RuleInclusionAbsoluteLinuxTest extends TestCase
     public function testLinuxStylePathRuleInclusion()
     {
         // Test that the sniff is correctly registered.
-        $this->assertObjectHasAttribute('sniffCodes', $this->ruleset);
         $this->assertCount(1, $this->ruleset->sniffCodes);
         $this->assertArrayHasKey('Generic.Formatting.SpaceAfterNot', $this->ruleset->sniffCodes);
         $this->assertSame(
