@@ -1259,9 +1259,7 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
 
         foreach ($found as $i => $data) {
             foreach ($exclude as $b) {
-                if (isset($found[$i][$b]) === true) {
-                    unset($found[$i][$b]);
-                }
+                unset($found[$i][$b]);
             }
         }
 

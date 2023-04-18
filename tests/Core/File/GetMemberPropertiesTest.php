@@ -36,9 +36,7 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
         ];
 
         foreach ($exclude as $b) {
-            if (isset($found[$b]) === true) {
-                unset($found[$b]);
-            }
+            unset($found[$b]);
         }
 
         $this->assertEquals($expected, $found);
