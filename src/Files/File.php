@@ -254,6 +254,7 @@ class File
         $this->configCache['errorSeverity']   = $this->config->errorSeverity;
         $this->configCache['warningSeverity'] = $this->config->warningSeverity;
         $this->configCache['recordErrors']    = $this->config->recordErrors;
+        $this->configCache['trackTime']       = $this->config->trackTime;
         $this->configCache['ignorePatterns']  = $this->ruleset->ignorePatterns;
         $this->configCache['includePatterns'] = $this->ruleset->includePatterns;
 
@@ -506,8 +507,11 @@ class File
 
                 $this->activeListener = $class;
 
-                if (PHP_CODESNIFFER_VERBOSITY > 2) {
+                if ($this->configCache['trackTime'] === true) {
                     $startTime = microtime(true);
+                }
+
+                if (PHP_CODESNIFFER_VERBOSITY > 2) {
                     echo "\t\t\tProcessing ".$this->activeListener.'... ';
                 }
 
@@ -516,14 +520,16 @@ class File
                     $listenerIgnoreTo[$this->activeListener] = $ignoreTo;
                 }
 
-                if (PHP_CODESNIFFER_VERBOSITY > 2) {
+                if ($this->configCache['trackTime'] === true) {
                     $timeTaken = (microtime(true) - $startTime);
                     if (isset($this->listenerTimes[$this->activeListener]) === false) {
                         $this->listenerTimes[$this->activeListener] = 0;
                     }
 
                     $this->listenerTimes[$this->activeListener] += $timeTaken;
+                }
 
+                if (PHP_CODESNIFFER_VERBOSITY > 2) {
                     $timeTaken = round(($timeTaken), 4);
                     echo "DONE in $timeTaken seconds".PHP_EOL;
                 }
@@ -557,8 +563,7 @@ class File
             echo "\t*** END TOKEN PROCESSING ***".PHP_EOL;
             echo "\t*** START SNIFF PROCESSING REPORT ***".PHP_EOL;
 
-            asort($this->listenerTimes, SORT_NUMERIC);
-            $this->listenerTimes = array_reverse($this->listenerTimes, true);
+            arsort($this->listenerTimes, SORT_NUMERIC);
             foreach ($this->listenerTimes as $listener => $timeTaken) {
                 echo "\t$listener: ".round(($timeTaken), 4).' secs'.PHP_EOL;
             }
