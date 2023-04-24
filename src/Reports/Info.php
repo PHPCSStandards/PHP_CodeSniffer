@@ -44,7 +44,7 @@ class Info implements Report
 
 
     /**
-     * Prints the source of all errors and warnings.
+     * Prints the recorded metrics.
      *
      * @param string $cachedData    Any partial report data that was returned from
      *                              generateFileReport during the run.
