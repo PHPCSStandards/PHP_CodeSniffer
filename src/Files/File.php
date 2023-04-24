@@ -204,6 +204,7 @@ class File
      * An array of sniffs being processed and how long they took.
      *
      * @var array
+     * @see getListenerTimes()
      */
     protected $listenerTimes = [];
 
@@ -1176,6 +1177,18 @@ class File
         return $this->metrics;
 
     }//end getMetrics()
+
+
+    /**
+     * Returns the time taken processing this file for each invoked sniff.
+     *
+     * @return array
+     */
+    public function getListenerTimes()
+    {
+        return $this->listenerTimes;
+
+    }//end getListenerTimes()
 
 
     /**
