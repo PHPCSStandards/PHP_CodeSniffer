@@ -240,6 +240,7 @@ class File
         $this->configCache['errorSeverity']   = $this->config->errorSeverity;
         $this->configCache['warningSeverity'] = $this->config->warningSeverity;
         $this->configCache['recordErrors']    = $this->config->recordErrors;
+        $this->configCache['trackTime']       = $this->config->trackTime;
         $this->configCache['ignorePatterns']  = $this->ruleset->ignorePatterns;
         $this->configCache['includePatterns'] = $this->ruleset->includePatterns;
 
@@ -455,8 +456,11 @@ class File
 
                 $this->activeListener = $class;
 
-                if (PHP_CODESNIFFER_VERBOSITY > 2) {
+                if ($this->configCache['trackTime'] === true) {
                     $startTime = microtime(true);
+                }
+
+                if (PHP_CODESNIFFER_VERBOSITY > 2) {
                     Common::printStatusMessage('Processing '.$this->activeListener.'... ', 3, true);
                 }
 
@@ -465,14 +469,16 @@ class File
                     $listenerIgnoreTo[$this->activeListener] = $ignoreTo;
                 }
 
-                if (PHP_CODESNIFFER_VERBOSITY > 2) {
+                if ($this->configCache['trackTime'] === true) {
                     $timeTaken = (microtime(true) - $startTime);
                     if (isset($this->listenerTimes[$this->activeListener]) === false) {
                         $this->listenerTimes[$this->activeListener] = 0;
                     }
 
                     $this->listenerTimes[$this->activeListener] += $timeTaken;
+                }
 
+                if (PHP_CODESNIFFER_VERBOSITY > 2) {
                     $timeTaken = round(($timeTaken), 4);
                     Common::printStatusMessage("DONE in $timeTaken seconds");
                 }
@@ -506,8 +512,7 @@ class File
             Common::printStatusMessage('*** END TOKEN PROCESSING ***', 1);
             Common::printStatusMessage('*** START SNIFF PROCESSING REPORT ***', 1);
 
-            asort($this->listenerTimes, SORT_NUMERIC);
-            $this->listenerTimes = array_reverse($this->listenerTimes, true);
+            arsort($this->listenerTimes, SORT_NUMERIC);
             foreach ($this->listenerTimes as $listener => $timeTaken) {
                 Common::printStatusMessage("$listener: ".round(($timeTaken), 4).' secs', 1);
             }
