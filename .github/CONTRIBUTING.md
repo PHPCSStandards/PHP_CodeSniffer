@@ -152,9 +152,8 @@ To help you with this, a number of convenience scripts are available:
 * `composer cs` will check for code style violations.
 * `composer cbf` will run the autofixers for code style violations.
 * `composer test` will run the unit tests.
-* `composer coverage` will run the unit tests with code coverage.
-    Note: you may want to use a custom `phpunit.xml` overload config file to tell PHPUnit where to place an HTML report.
-    Alternative run it like so: `composer coverage -- --coverage-html /path/to/report-dir/` to specify the location for the HTML report on the command line.
+* `composer coverage` will run the unit tests with code coverage and show a text summary.
+* `composer coverage-local` will run the unit tests with code coverage and generate an HTML coverage report, which will be placed in a `build/coverage-html` subdirectory.
 * `composer build` will build the phpcs.phar and phpcbf.phar files.
 
 N.B.: You can ignore any skipped tests as these are for external tools.
