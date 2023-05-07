@@ -2,6 +2,7 @@
 /phpcs.xml
 /phpunit.xml
 .phpunit.result.cache
+/build/
 .idea/*
 /vendor/
 composer.lock
