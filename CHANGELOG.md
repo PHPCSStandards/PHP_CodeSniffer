@@ -249,6 +249,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3833 : Generic.PHP.LowerCaseType: fixed potential undefined array index notice
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Fixed bug #3846 : PSR2.Classes.ClassDeclaration.CloseBraceAfterBody : fixer will no longer remove indentation on the close brace line
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3854 : Fatal error when using Gitblame report in combination with `--basepath` and running from project subdirectory
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3867 : Tokenizer/PHP: union type and intersection type operators were not correctly tokenized for static properties without explicit visibility
