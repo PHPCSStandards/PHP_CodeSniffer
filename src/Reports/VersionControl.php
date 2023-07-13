@@ -39,7 +39,7 @@ abstract class VersionControl implements Report
      */
     public function generateFileReport($report, File $phpcsFile, $showSources=false, $width=80)
     {
-        $blames = $this->getBlameContent($report['filename']);
+        $blames = $this->getBlameContent($phpcsFile->getFilename());
 
         $authorCache = [];
         $praiseCache = [];
