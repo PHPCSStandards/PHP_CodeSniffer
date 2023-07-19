@@ -164,6 +164,9 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3854 : Fatal error when using Gitblame report in combination with `--basepath` and running from project subdirectory
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Fixed bug #3856 : PSR12.Traits.UseDeclaration was using the wrong error code - SpacingAfterAs - for spacing issues after the use keyword
+    - These will now be reported using the SpacingAfterUse error code.
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3867 : Tokenizer/PHP: union type and intersection type operators were not correctly tokenized for static properties without explicit visibility
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3877 : Filter names can be case-sensitive. The -h help text will now display the correct case for the available filters
