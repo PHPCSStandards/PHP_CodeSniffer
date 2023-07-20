@@ -285,7 +285,7 @@ class ReportWidthTest extends TestCase
     {
         $property = new ReflectionProperty('PHP_CodeSniffer\Config', $name);
         $property->setAccessible(true);
-        $property->setValue($value);
+        $property->setValue(null, $value);
         $property->setAccessible(false);
 
     }//end setStaticProperty()
