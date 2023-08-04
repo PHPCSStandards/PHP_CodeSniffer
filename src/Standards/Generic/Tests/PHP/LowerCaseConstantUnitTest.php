@@ -51,6 +51,8 @@ class LowerCaseConstantUnitTest extends AbstractSniffUnitTest
                 94  => 2,
                 95  => 1,
                 100 => 2,
+                104 => 1,
+                108 => 1,
             ];
 
         case 'LowerCaseConstantUnitTest.js':
