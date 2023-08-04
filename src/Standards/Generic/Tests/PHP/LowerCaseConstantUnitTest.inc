@@ -98,3 +98,12 @@ class TypedThings {
 }
 
 $cl = function (int|FALSE $param = NULL, Type|NULL $obj = new MyObj(FALSE)) : string|FALSE|NULL {};
+
+// Adding some extra tests to safeguard that function declarations which don't create scope are handled correctly.
+interface InterfaceMethodsWithReturnTypeNoScopeOpener {
+    private function typed($param = TRUE) : string|FALSE|NULL;
+}
+
+abstract class ClassMethodsWithReturnTypeNoScopeOpener {
+    abstract public function typed($param = FALSE) : TRUE;
+}
