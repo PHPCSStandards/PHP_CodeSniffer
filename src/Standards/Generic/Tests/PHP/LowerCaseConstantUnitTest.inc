@@ -144,6 +144,14 @@ readonly class Properties {
     }
 }
 
+// PHP 8.3 introduces typed constants.
+class TypedConstants {
+    const MyClass|NULL|TRUE|FALSE MYCONST = FALSE;
+}
+
+// Global constants can not be typed.
+const MYCONST = TRUE;
+
 // Last coding/parse error.
 // This has to be the last test in the file.
 function UnclosedCurly (): FALSE {
