@@ -203,6 +203,7 @@ The file documents changes to the PHP_CodeSniffer project.
 - Runtime performance improvement for PHPCS CLI users. The improvement should be most noticeable for users on Windows.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - The following sniffs have received performance related improvements:
+    - Generic.PHP.LowerCaseConstant
     - Generic.PHP.LowerCaseType
     - PSR12.Files.OpenTag
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patches
