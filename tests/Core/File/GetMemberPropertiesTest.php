@@ -593,7 +593,7 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'scope_specified' => true,
                     'is_static'       => false,
                     'is_readonly'     => false,
-                    'type'            => 'callable||void',
+                    'type'            => 'callable|void',
                     'nullable_type'   => false,
                 ],
             ],
