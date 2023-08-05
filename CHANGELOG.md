@@ -127,6 +127,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Dan Wallis (@fredden) for the patch
 - Fixed bug #3816 : PSR12/FileHeader: bug fix - false positives on PHP 8.2+ readonly classes
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Fixed bug #3867 : Tokenizer/PHP: union type and intersection type operators were not correctly tokenized for static properties without explicit visibility
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3877 : Filter names can be case-sensitive. The -h help text will now display the correct case for the available filters
     - Thanks to @simonsan for the patch
 - Fixed bug #3906 : Tokenizer/CSS: fixed a bug related to the unsupported slash comment syntax
