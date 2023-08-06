@@ -185,6 +185,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to @Daimona for the patch
 - Runtime performance improvement for PHPCS CLI users. The improvement should be most noticeable for users on Windows.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- The -e (explain) command will now list sniffs in natural order
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 
 ### Removed
 - Removed support for installing via PEAR
