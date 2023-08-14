@@ -260,14 +260,10 @@ class Ruleset
         $sniffs = array_keys($this->sniffCodes);
         sort($sniffs);
 
-        ob_start();
+        $sniffCount = count($sniffs);
 
-        $lastStandard = null;
-        $lastCount    = 0;
-        $sniffCount   = count($sniffs);
-
-        // Add a dummy entry to the end so we loop
-        // one last time and clear the output buffer.
+        // Add a dummy entry to the end so we loop one last time
+        // and echo out the collected info about the last standard.
         $sniffs[] = '';
 
         $summaryLine = PHP_EOL."The $this->name standard contains 1 sniff".PHP_EOL;
@@ -277,7 +273,9 @@ class Ruleset
 
         echo $summaryLine;
 
-        ob_start();
+        $lastStandard     = null;
+        $lastCount        = 0;
+        $sniffsInStandard = [];
 
         foreach ($sniffs as $i => $sniff) {
             if ($i === $sniffCount) {
@@ -289,32 +287,31 @@ class Ruleset
                 }
             }
 
+            // Reached the first item in the next standard.
+            // Echo out the info collected from the previous standard.
             if ($currentStandard !== $lastStandard) {
-                $sniffList = ob_get_contents();
-                ob_end_clean();
-
-                echo PHP_EOL.$lastStandard.' ('.$lastCount.' sniff';
+                $subTitle = $lastStandard.' ('.$lastCount.' sniff';
                 if ($lastCount > 1) {
-                    echo 's';
+                    $subTitle .= 's';
                 }
 
-                echo ')'.PHP_EOL;
-                echo str_repeat('-', (strlen($lastStandard.$lastCount) + 10));
-                echo PHP_EOL;
-                echo $sniffList;
+                $subTitle .= ')';
 
-                $lastStandard = $currentStandard;
-                $lastCount    = 0;
+                echo PHP_EOL.$subTitle.PHP_EOL;
+                echo str_repeat('-', strlen($subTitle)).PHP_EOL;
+                echo '  '.implode(PHP_EOL.'  ', $sniffsInStandard).PHP_EOL;
+
+                $lastStandard     = $currentStandard;
+                $lastCount        = 0;
+                $sniffsInStandard = [];
 
                 if ($currentStandard === null) {
                     break;
                 }
-
-                ob_start();
             }//end if
 
-            echo '  '.$sniff.PHP_EOL;
-            $lastCount++;
+            $sniffsInStandard[] = $sniff;
+            ++$lastCount;
         }//end foreach
 
     }//end explain()
