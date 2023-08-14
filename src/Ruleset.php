@@ -263,7 +263,7 @@ class Ruleset
         ob_start();
 
         $lastStandard = null;
-        $lastCount    = '';
+        $lastCount    = 0;
         $sniffCount   = count($sniffs);
 
         // Add a dummy entry to the end so we loop
