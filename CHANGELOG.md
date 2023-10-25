@@ -259,6 +259,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to @simonsan for the patch
 - Fixed bug #3893 : Generic/DocComment : the SpacingAfterTagGroup fixer could accidentally remove ignore annotations
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Fixed bug #3904 : Squiz/FunctionSpacing : prevent potential fixer conflict
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3906 : Tokenizer/CSS: fixed a bug related to the unsupported slash comment syntax
     - Thanks to Dan Wallis (@fredden) for the patch
 
