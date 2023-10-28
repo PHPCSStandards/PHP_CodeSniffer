@@ -19,7 +19,7 @@ concurrency:
 
 jobs:
   phpstan:
-    name: "PHP: 7.4 | PHPStan"
+    name: "PHPStan"
 
     runs-on: "ubuntu-latest"
 
