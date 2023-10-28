@@ -27,7 +27,7 @@ class DisallowAlternativePHPTagsSniff implements Sniff
     /**
      * The current PHP version.
      *
-     * @var integer
+     * @var integer|string|null
      */
     private $phpVersion = null;
 

@@ -193,6 +193,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Improved README syntax highlighting
     - Thanks to Benjamin Loison (@Benjamin-Loison) for the patch
+- Various documentation improvements
+    - Thanks to Andrew Dawes (@AndrewDawes) and Juliette Reinders Folmer (@jrfnl) for the patches
 
 ### Removed
 - Removed support for installing via PEAR

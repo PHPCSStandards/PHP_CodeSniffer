@@ -27,7 +27,7 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
      * @param array                       $tokens      The stack of tokens that make up
      *                                                 the file.
      *
-     * @return void
+     * @return bool
      */
     public function isMultiLineDeclaration($phpcsFile, $stackPtr, $openBracket, $tokens)
     {

@@ -40,7 +40,7 @@ class Ruleset
      * The key is the regular expression and the value is the type
      * of ignore pattern (absolute or relative).
      *
-     * @var array<string, string>
+     * @var array<string, array>
      */
     public $ignorePatterns = [];
 
