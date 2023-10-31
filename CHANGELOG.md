@@ -161,6 +161,7 @@ The file documents changes to the PHP_CodeSniffer project.
         - A descriptive error message is provided to allow users to fix their ruleset
     - Sniff properties set for complete standards/complete sniff categories will now only be set on sniffs which explicitly support the property
         - The property will be silently ignored for those sniffs which do not support the property
+    - Invalid sniff properties set for sniffs via inline annotations will result in an informative `Internal.PropertyDoesNotExist` errror on line 1 of the scanned file, but will not halt the execution of PHPCS
     - For sniff developers, it is strongly recommended for sniffs to explicitly declare any user-adjustable public properties
         - If dynamic properties need to be supported for a sniff, either declare the magic __set()/__get()/__isset()/__unset() methods on the sniff or let the sniff extend stdClass
         - Note: The #[\AllowDynamicProperties] attribute will have no effect for properties which are being set in rulesets.
