@@ -7,18 +7,26 @@
         "standards",
         "static analysis"
     ],
-    "homepage": "https://github.com/squizlabs/PHP_CodeSniffer",
+    "homepage": "https://github.com/PHPCSStandards/PHP_CodeSniffer",
     "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Greg Sherwood",
-            "role": "lead"
+            "role": "Former lead"
+        },
+        {
+            "name": "Juliette Reinders Folmer",
+            "role": "Current lead"
+        },
+        {
+            "name" : "Contributors",
+            "homepage" : "https://github.com/PHPCSStandards/PHP_CodeSniffer/graphs/contributors"
         }
     ],
     "support": {
-        "issues": "https://github.com/squizlabs/PHP_CodeSniffer/issues",
-        "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki",
-        "source": "https://github.com/squizlabs/PHP_CodeSniffer"
+        "issues": "https://github.com/PHPCSStandards/PHP_CodeSniffer/issues",
+        "wiki": "https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki",
+        "source": "https://github.com/PHPCSStandards/PHP_CodeSniffer"
     },
     "extra": {
         "branch-alias": {
