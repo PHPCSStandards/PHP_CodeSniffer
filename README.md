@@ -4,7 +4,6 @@ PHP_CodeSniffer is a set of two PHP scripts; the main `phpcs` script that tokeni
 
 [![Build Status](https://github.com/squizlabs/PHP_CodeSniffer/workflows/Validate/badge.svg?branch=master)](https://github.com/squizlabs/PHP_CodeSniffer/actions)
 [![Build Status](https://github.com/squizlabs/PHP_CodeSniffer/workflows/Test/badge.svg?branch=master)](https://github.com/squizlabs/PHP_CodeSniffer/actions)
-[![Join the chat at https://gitter.im/squizlabs/PHP_CodeSniffer](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/squizlabs/PHP_CodeSniffer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Requirements
 
