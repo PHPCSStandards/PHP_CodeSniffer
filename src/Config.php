@@ -1581,13 +1581,6 @@ class Config
                 $configFile = dirname($path).DIRECTORY_SEPARATOR.'CodeSniffer.conf';
             } else {
                 $configFile = dirname(__DIR__).DIRECTORY_SEPARATOR.'CodeSniffer.conf';
-                if (is_file($configFile) === false
-                    && strpos('@data_dir@', '@data_dir') === false
-                ) {
-                    // If data_dir was replaced, this is a PEAR install and we can
-                    // use the PEAR data dir to store the conf file.
-                    $configFile = '@data_dir@/PHP_CodeSniffer/CodeSniffer.conf';
-                }
             }
 
             if (is_file($configFile) === true
