@@ -2,14 +2,14 @@
 
 PHP_CodeSniffer is a set of two PHP scripts; the main `phpcs` script that tokenizes PHP, JavaScript and CSS files to detect violations of a defined coding standard, and a second `phpcbf` script to automatically correct coding standard violations. PHP_CodeSniffer is an essential development tool that ensures your code remains clean and consistent.
 
-[![Build Status](https://github.com/squizlabs/PHP_CodeSniffer/workflows/Validate/badge.svg?branch=master)](https://github.com/squizlabs/PHP_CodeSniffer/actions)
-[![Build Status](https://github.com/squizlabs/PHP_CodeSniffer/workflows/Test/badge.svg?branch=master)](https://github.com/squizlabs/PHP_CodeSniffer/actions)
+[![Build Status](https://github.com/PHPCSStandards/PHP_CodeSniffer/workflows/Validate/badge.svg?branch=master)](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions)
+[![Build Status](https://github.com/PHPCSStandards/PHP_CodeSniffer/workflows/Test/badge.svg?branch=master)](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions)
 
 ## Requirements
 
-PHP_CodeSniffer requires PHP version 5.4.0 or greater, although individual sniffs may have additional requirements such as external applications and scripts. See the [Configuration Options manual page](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Configuration-Options) for a list of these requirements.
+PHP_CodeSniffer requires PHP version 5.4.0 or greater, although individual sniffs may have additional requirements such as external applications and scripts. See the [Configuration Options manual page](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Configuration-Options) for a list of these requirements.
 
-If you're using PHP_CodeSniffer as part of a team, or you're running it on a [CI](https://en.wikipedia.org/wiki/Continuous_integration) server, you may want to configure your project's settings [using a configuration file](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Advanced-Usage#using-a-default-configuration-file).
+If you're using PHP_CodeSniffer as part of a team, or you're running it on a [CI](https://en.wikipedia.org/wiki/Continuous_integration) server, you may want to configure your project's settings [using a configuration file](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Advanced-Usage#using-a-default-configuration-file).
 
 
 ## Installation
@@ -70,7 +70,7 @@ pear install PHP_CodeSniffer
 ### Git Clone
 You can also download the PHP_CodeSniffer source and run the `phpcs` and `phpcbf` commands directly from the Git clone:
 ```bash
-git clone https://github.com/squizlabs/PHP_CodeSniffer.git
+git clone https://github.com/PHPCSStandards/PHP_CodeSniffer.git
 cd PHP_CodeSniffer
 php bin/phpcs -h
 php bin/phpcbf -h
@@ -92,15 +92,15 @@ phpcs --standard=PSR12 /path/to/code-directory
 
 If PHP_CodeSniffer finds any coding standard errors, a report will be shown after running the command.
 
-Full usage information and example reports are available on the [usage page](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Usage).
+Full usage information and example reports are available on the [usage page](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Usage).
 
 ## Documentation
 
-The documentation for PHP_CodeSniffer is available on the [Github wiki](https://github.com/squizlabs/PHP_CodeSniffer/wiki).
+The documentation for PHP_CodeSniffer is available on the [Github wiki](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki).
 
 ## Issues
 
-Bug reports and feature requests can be submitted on the [Github Issue Tracker](https://github.com/squizlabs/PHP_CodeSniffer/issues).
+Bug reports and feature requests can be submitted on the [Github Issue Tracker](https://github.com/PHPCSStandards/PHP_CodeSniffer/issues).
 
 ## Contributing
 
