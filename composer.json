@@ -1,5 +1,5 @@
 {
-    "name": "squizlabs/php_codesniffer",
+    "name": "phpcsstandards/php_codesniffer",
     "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
     "type": "library",
     "keywords": [
@@ -7,18 +7,26 @@
         "standards",
         "static analysis"
     ],
-    "homepage": "https://github.com/squizlabs/PHP_CodeSniffer",
+    "homepage": "https://github.com/PHPCSStandards/PHP_CodeSniffer",
     "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Greg Sherwood",
-            "role": "lead"
+            "role": "Former lead"
+        },
+        {
+            "name": "Juliette Reinders Folmer",
+            "role": "Current lead"
+        },
+        {
+            "name" : "Contributors",
+            "homepage" : "https://github.com/PHPCSStandards/PHP_CodeSniffer/graphs/contributors"
         }
     ],
     "support": {
-        "issues": "https://github.com/squizlabs/PHP_CodeSniffer/issues",
-        "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki",
-        "source": "https://github.com/squizlabs/PHP_CodeSniffer"
+        "issues": "https://github.com/PHPCSStandards/PHP_CodeSniffer/issues",
+        "wiki": "https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki",
+        "source": "https://github.com/PHPCSStandards/PHP_CodeSniffer"
     },
     "extra": {
         "branch-alias": {
@@ -33,6 +41,9 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
+    },
+    "replace": {
+        "squizlabs/php_codesniffer": "> 2.0"
     },
     "bin": [
         "bin/phpcs",

@@ -12,7 +12,7 @@ on:
 jobs:
   on-issue-close:
     runs-on: ubuntu-latest
-    if: github.repository_owner == 'squizlabs' && github.event.issue.state == 'closed'
+    if: github.repository_owner == 'PHPCSStandards' && github.event.issue.state == 'closed'
 
     name: Clean up labels on issue close
 
@@ -28,7 +28,7 @@ jobs:
 
   on-pr-merge:
     runs-on: ubuntu-latest
-    if: github.repository_owner == 'squizlabs' && github.event.pull_request.merged == true
+    if: github.repository_owner == 'PHPCSStandards' && github.event.pull_request.merged == true
 
     name: Clean up labels on PR merge
 
@@ -44,7 +44,7 @@ jobs:
 
   on-pr-close:
     runs-on: ubuntu-latest
-    if: github.repository_owner == 'squizlabs' && github.event_name == 'pull_request_target' && github.event.pull_request.merged == false
+    if: github.repository_owner == 'PHPCSStandards' && github.event_name == 'pull_request_target' && github.event.pull_request.merged == false
 
     name: Clean up labels on PR close
 
