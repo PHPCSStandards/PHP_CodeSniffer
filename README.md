@@ -2,8 +2,8 @@
 
 PHP_CodeSniffer is a set of two PHP scripts; the main `phpcs` script that tokenizes PHP, JavaScript and CSS files to detect violations of a defined coding standard, and a second `phpcbf` script to automatically correct coding standard violations. PHP_CodeSniffer is an essential development tool that ensures your code remains clean and consistent.
 
-[![Build Status](https://github.com/PHPCSStandards/PHP_CodeSniffer/workflows/Validate/badge.svg?branch=master)](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions)
-[![Build Status](https://github.com/PHPCSStandards/PHP_CodeSniffer/workflows/Test/badge.svg?branch=master)](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions)
+[![Validate](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/validate.yml/badge.svg?branch=master)](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/validate.yml)
+[![Test](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/test.yml)
 
 ## Requirements
 
