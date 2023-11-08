@@ -1,205 +1,205 @@
 <?xml version="1.0"?>
 <repository xmlns="https://phar.io/repository" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://phar.io/repository https://phar.io/data/repository.xsd">
     <phar name="phpcs">
-        <release version="3.7.2" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.7.2.phar">
+        <release version="3.7.2" url="https://phars.phpcodesniffer.com/phars/phpcs-3.7.2.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="204214c1ea5ba814fb0b2608c19cca2c10bf5ffcc9f0e3d4c34aadc0179517b7"/>
         </release>
-        <release version="3.7.1" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.7.1.phar">
+        <release version="3.7.1" url="https://phars.phpcodesniffer.com/phars/phpcs-3.7.1.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="7a14323a14af9f58302d15442492ee1076a8cd72c018a816cb44965bf3a9b015"/>
         </release>
-        <release version="3.7.0" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.7.0.phar">
+        <release version="3.7.0" url="https://phars.phpcodesniffer.com/phars/phpcs-3.7.0.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="0d515363b2125a2b24599c05c18bce903c272abfc664f148b7e8c0a38ccc1854"/>
         </release>
-        <release version="3.6.2" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.6.2.phar">
+        <release version="3.6.2" url="https://phars.phpcodesniffer.com/phars/phpcs-3.6.2.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="c0832cdce3e419c337011640ddebd08b7daac32344250ac7cfbc799309506f77"/>
         </release>
-        <release version="3.6.1" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.6.1.phar">
+        <release version="3.6.1" url="https://phars.phpcodesniffer.com/phars/phpcs-3.6.1.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="d0ce68aa469aff7e86935c6156a505c4d6dc90adcf2928d695d8331722ce706b"/>
         </release>
-        <release version="3.6.0" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.6.0.phar">
+        <release version="3.6.0" url="https://phars.phpcodesniffer.com/phars/phpcs-3.6.0.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="3f7e099bd4b03681e12f96582ce0d76e065213ba15a3b1c22d79349e213ab169"/>
         </release>
-        <release version="3.5.8" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.5.8.phar">
+        <release version="3.5.8" url="https://phars.phpcodesniffer.com/phars/phpcs-3.5.8.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="6a2ae49e677d471dbeb8a8bcf67f714611250024c15d538a543db5b7ae6df50c"/>
         </release>
-        <release version="3.5.7" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.5.7.phar">
+        <release version="3.5.7" url="https://phars.phpcodesniffer.com/phars/phpcs-3.5.7.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="47fc10905d48f75b3a4136ffc4f5e52bbd0432369a5ecccb3fa3dac2bb09702f"/>
         </release>
-        <release version="3.5.6" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.5.6.phar">
+        <release version="3.5.6" url="https://phars.phpcodesniffer.com/phars/phpcs-3.5.6.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="60493158a3484e2192c85bc7303eca4eaf8a71b4c1a68408df218b33991b3d94"/>
         </release>
-        <release version="3.5.5" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.5.5.phar">
+        <release version="3.5.5" url="https://phars.phpcodesniffer.com/phars/phpcs-3.5.5.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="4a2f6aff1b1f760216bb00c0b3070431131e3ed91307436bb1bfb252281a804a"/>
         </release>
-        <release version="3.5.4" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.5.4.phar">
+        <release version="3.5.4" url="https://phars.phpcodesniffer.com/phars/phpcs-3.5.4.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="fa518bd3ef9a365110d1a4dea541b9e70c2b658992db1147c37ebcd87b5b3ed3"/>
         </release>
-        <release version="3.5.3" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.5.3.phar">
+        <release version="3.5.3" url="https://phars.phpcodesniffer.com/phars/phpcs-3.5.3.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="b44e0ad96138e2697a97959fefb9c6f1491f4a22d5daf08aabed12e9a2869678"/>
         </release>
-        <release version="3.5.2" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.5.2.phar">
+        <release version="3.5.2" url="https://phars.phpcodesniffer.com/phars/phpcs-3.5.2.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="15ad1fe73b3e972f666bf4d0e9b51548d4b50f780c9cf0c64999c78c9a4e644f"/>
         </release>
-        <release version="3.5.1" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.5.1.phar">
+        <release version="3.5.1" url="https://phars.phpcodesniffer.com/phars/phpcs-3.5.1.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="c7d6fb8fe15602700ccfb4ec6f2e3ed65895ce7dba1c0bb4ec26c894dafb1218"/>
         </release>
-        <release version="3.5.0" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.5.0.phar">
+        <release version="3.5.0" url="https://phars.phpcodesniffer.com/phars/phpcs-3.5.0.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="ae59cacba481c09eaa48cb1fa02173efc6af7cdec5d472ca4677289385b30a1d"/>
         </release>
-        <release version="3.4.2" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.4.2.phar">
+        <release version="3.4.2" url="https://phars.phpcodesniffer.com/phars/phpcs-3.4.2.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="6966a9d41099caab6fe63728f20ff0dba4c9c5a2b157c735ece98b6367e16942"/>
         </release>
-         <release version="3.4.1" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.4.1.phar">
+         <release version="3.4.1" url="https://phars.phpcodesniffer.com/phars/phpcs-3.4.1.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="805e214829bb79139c1fa260c0fbce5e26a9178dec8d5d79b65c01af2b92fc1f"/>
         </release>
-        <release version="3.4.0" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.4.0.phar">
+        <release version="3.4.0" url="https://phars.phpcodesniffer.com/phars/phpcs-3.4.0.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="bc26904f539f17114183db3d5020cff0200f69d4866080d68a259bb31470dfb4"/>
         </release>
-        <release version="3.3.2" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.3.2.phar">
+        <release version="3.3.2" url="https://phars.phpcodesniffer.com/phars/phpcs-3.3.2.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="692a281f40b0afa3120f25e195102d0d327efef5ef16ce18cb9e5731a45ee35a"/>
         </release>
-        <release version="3.3.1" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.3.1.phar">
+        <release version="3.3.1" url="https://phars.phpcodesniffer.com/phars/phpcs-3.3.1.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="5ce1bc0dfead797a02efdb0b01f99fc4b5bb4ef42757286e648b2364b273814f"/>
         </release>
-        <release version="3.3.0" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.3.0.phar">
+        <release version="3.3.0" url="https://phars.phpcodesniffer.com/phars/phpcs-3.3.0.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="90442ce92ffccfad906f411919d26be54005064463707ea4beba3684d92e83fe"/>
         </release>
-        <release version="3.2.3" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.2.3.phar">
+        <release version="3.2.3" url="https://phars.phpcodesniffer.com/phars/phpcs-3.2.3.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="41ef9d09fca6be1dce5ee6b946a59461f4955245c3038c0ac17e0669caef6aa4"/>
         </release>
-        <release version="3.2.2" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.2.2.phar">
+        <release version="3.2.2" url="https://phars.phpcodesniffer.com/phars/phpcs-3.2.2.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="c934737207f3baf2d36187a43ed4bd005a70eae65f16cf22ca4eed32a69aca2a"/>
         </release>
-        <release version="3.2.1" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.2.1.phar">
+        <release version="3.2.1" url="https://phars.phpcodesniffer.com/phars/phpcs-3.2.1.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="2ad34eaee648a80d6431971c7d238c36e33569ca1f8020fc7ef20b4b3299bc8a"/>
         </release>
-        <release version="3.2.0" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcs-3.2.0.phar">
+        <release version="3.2.0" url="https://phars.phpcodesniffer.com/phars/phpcs-3.2.0.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="ec2d3e530e47083d430368bdfb12365ecb5aa6cb31335e527e7a43f713e8a0e1"/>
         </release>
     </phar>
     <phar name="phpcbf">
-        <release version="3.7.2" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.7.2.phar">
+        <release version="3.7.2" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.7.2.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="4eca732a997df08a4c97e43266eb8122f916d39bb002a000600fdd5393f4efe1"/>
         </release>
-        <release version="3.7.1" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.7.1.phar">
+        <release version="3.7.1" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.7.1.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="c93c0e83cbda21c21f849ccf0f4b42979d20004a5a6172ed0ea270eca7ae6fa8"/>
         </release>
-        <release version="3.7.0" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.7.0.phar">
+        <release version="3.7.0" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.7.0.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="65e865c3134355b15121576da9334431cf6ae914cb4c33a3012d877681719348"/>
         </release>
-        <release version="3.6.2" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.6.2.phar">
+        <release version="3.6.2" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.6.2.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="28d74aaaa7ad251c4ed23481e7fa18b755450ee57872d22be0ecb8fe21f50dc8"/>
         </release>
-        <release version="3.6.1" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.6.1.phar">
+        <release version="3.6.1" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.6.1.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="4fd260dd0eb4beadd6c68ae12a23e9adb15e155dfa787c9e6ba7104d3fc01471"/>
         </release>
-        <release version="3.6.0" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.6.0.phar">
+        <release version="3.6.0" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.6.0.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="e19755c44800f955cd4d234657f90ead1ecb08c4957528fcad6424526b0c8b13"/>
         </release>
-        <release version="3.5.8" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.5.8.phar">
+        <release version="3.5.8" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.5.8.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="6079de7bb0fcafe020d5a5dc44dfe88a8ff57b253a4dfd2bfde90ebe3d189195"/>
         </release>
-        <release version="3.5.7" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.5.7.phar">
+        <release version="3.5.7" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.5.7.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="43f8a6c6072a0830f3ee65ff901606ad9b6d2cdfb1bb506e00858adb64b4279f"/>
         </release>
-        <release version="3.5.6" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.5.6.phar">
+        <release version="3.5.6" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.5.6.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="f991e6000df88491b14c7b74a82ee5ea30219be9f8f9e153b9e3ecf52b8a1b28"/>
         </release>
-        <release version="3.5.5" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.5.5.phar">
+        <release version="3.5.5" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.5.5.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="6f64fe00dee53fa7b256f63656dc0154f5964666fc7e535fac86d0078e7dea41"/>
         </release>
-        <release version="3.5.4" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.5.4.phar">
+        <release version="3.5.4" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.5.4.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="993aef39bd26f2aa038d691d3231d00fa3e3914159c4c077bc41209aca74a7a3"/>
         </release>
-        <release version="3.5.3" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.5.3.phar">
+        <release version="3.5.3" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.5.3.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="db20ec9cfd434deba03f6f20c818732d477696589d5aea3df697986b6e723ad7"/>
         </release>
-        <release version="3.5.2" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.5.2.phar">
+        <release version="3.5.2" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.5.2.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="a632465994bb5e17de8722c855c539a45e6e6e1785caf644820144436afd167e"/>
         </release>
-        <release version="3.5.1" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.5.1.phar">
+        <release version="3.5.1" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.5.1.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="19487d15889c900474d989b2754f3eeaffa8d19c12e032b7d0a68cb75b65c8ac"/>
         </release>
-        <release version="3.5.0" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.5.0.phar">
+        <release version="3.5.0" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.5.0.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="d6fcbed855ea020af44fa9c775c8f15bab77bc10bc4534f00c5909c3f4c8c396"/>
         </release>
-        <release version="3.4.2" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.4.2.phar">
+        <release version="3.4.2" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.4.2.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="d7b9b36e92b674ebbaceb1d80cdf1fdd190bc8cfd00e1ce68ed2b712513e4423"/>
         </release>
-        <release version="3.4.1" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.4.1.phar">
+        <release version="3.4.1" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.4.1.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="9bb55fe7bf231535e046d7711484d7d7c3d7b0b831ec4a8697aea6c1fed34e14"/>
         </release>
-        <release version="3.4.0" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.4.0.phar">
+        <release version="3.4.0" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.4.0.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="e9a9f4ecf8d0c405f4d70f9738f07aa3bc60fbaa6dd68b524053d7f020d14c47"/>
         </release>
-        <release version="3.3.2" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.3.2.phar">
+        <release version="3.3.2" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.3.2.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="c43e2e924bf28eb48f825df12a9031ad4a96bf2e2e609ce78ad2653ce969ace3"/>
         </release>
-        <release version="3.3.1" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.3.1.phar">
+        <release version="3.3.1" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.3.1.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="353ec2717ae043917308de7c0dae4805356129c6df9638e0f7daaf4c3c82e560"/>
         </release>
-        <release version="3.3.0" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.3.0.phar">
+        <release version="3.3.0" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.3.0.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="9a9e93310a4e9de509aa06648e69fc91b8141661abb818aeb421e4fa5f3100aa"/>
         </release>
-        <release version="3.2.3" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.2.3.phar">
+        <release version="3.2.3" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.2.3.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="34a94620615b674ef4ed44ab1648a9f1c874b35b4d48239e81a177a803a0e002"/>
         </release>
-        <release version="3.2.2" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.2.2.phar">
+        <release version="3.2.2" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.2.2.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="7ad5e782411f4b8944a0bfab7d70b782c3133c921fd237b8227567186ef71f52"/>
         </release>
-        <release version="3.2.1" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.2.1.phar">
+        <release version="3.2.1" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.2.1.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="994f89105eefdf7393c861a40f673c011e4c842ebdddd7113d4079df4b9af2b6"/>
         </release>
-        <release version="3.2.0" url="https://squizlabs.github.io/PHP_CodeSniffer/phars/phpcbf-3.2.0.phar">
+        <release version="3.2.0" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.2.0.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="4b5802015b31c7f105399255f7d56c923e39c481984e2d337150096a331540e8"/>
         </release>
