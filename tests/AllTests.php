@@ -9,14 +9,8 @@
 
 namespace PHP_CodeSniffer\Tests;
 
-if ($GLOBALS['PHP_CODESNIFFER_PEAR'] === false) {
-    include_once 'Core/AllTests.php';
-    include_once 'Standards/AllSniffs.php';
-} else {
-    include_once 'CodeSniffer/Core/AllTests.php';
-    include_once 'CodeSniffer/Standards/AllSniffs.php';
-    include_once 'FileList.php';
-}
+require_once 'Core/AllTests.php';
+require_once 'Standards/AllSniffs.php';
 
 // PHPUnit 7 made the TestSuite run() method incompatible with
 // older PHPUnit versions due to return type hints, so maintain

@@ -62,11 +62,6 @@ You will then be able to run PHP_CodeSniffer from the tools directory:
 ./tools/phpcs -h
 ./tools/phpcbf -h
 ```
-### PEAR
-If you use PEAR, you can install PHP_CodeSniffer using the PEAR installer. This will make the `phpcs` and `phpcbf` commands immediately available for use. To install PHP_CodeSniffer using the PEAR installer, first ensure you have [installed PEAR](http://pear.php.net/manual/en/installation.getting.php) and then run the following command:
-```bash
-pear install PHP_CodeSniffer
-```
 ### Git Clone
 You can also download the PHP_CodeSniffer source and run the `phpcs` and `phpcbf` commands directly from the Git clone:
 ```bash

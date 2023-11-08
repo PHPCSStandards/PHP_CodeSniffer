@@ -58,23 +58,3 @@ jobs:
           diff -B ./src/Standards/PSR12/ruleset.xml <(xmllint --format "./src/Standards/PSR12/ruleset.xml")
           diff -B ./src/Standards/Squiz/ruleset.xml <(xmllint --format "./src/Standards/Squiz/ruleset.xml")
           diff -B ./src/Standards/Zend/ruleset.xml <(xmllint --format "./src/Standards/Zend/ruleset.xml")
-
-  pear:
-    name: "PHP: 7.4 | PEAR package validation"
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '7.4'
-          coverage: none
-
-      - name: Validate the PEAR package file contents
-        run: php scripts/validate-pear-package.php
-
-      - name: Validate the PEAR package
-        run: pear package-validate package.xml
