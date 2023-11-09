@@ -1,0 +1,19 @@
+name: Check PRs for merge conflicts
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  check-prs:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'PHPCSStandards'
+
+    name: Check PRs for merge conflicts
+
+    steps:
+      - uses: mschilde/auto-label-merge-conflicts@master
+        with:
+          CONFLICT_LABEL_NAME: "Status: has merge conflict"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
