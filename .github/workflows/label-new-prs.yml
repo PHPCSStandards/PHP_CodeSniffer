@@ -1,0 +1,17 @@
+name: Label new PRs
+
+on:
+  # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request_target
+  pull_request_target:
+    types:
+      - opened
+      - ready_for_review
+
+jobs:
+  label-new-prs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: srvaroa/labeler@master
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
