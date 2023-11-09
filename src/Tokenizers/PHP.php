@@ -1254,7 +1254,7 @@ class PHP extends Tokenizer
                 // Get the next non-whitespace token.
                 for ($i = ($stackPtr + 1); $i < $numTokens; $i++) {
                     if (is_array($tokens[$i]) === false
-                        || isset(Util\Tokens::$emptyTokens[$tokens[$i][0]]) === false
+                        || isset(Tokens::$emptyTokens[$tokens[$i][0]]) === false
                     ) {
                         break;
                     }
@@ -1284,7 +1284,7 @@ class PHP extends Tokenizer
                             $tokenType = $tokens[$i];
                         }
 
-                        if (isset(Util\Tokens::$emptyTokens[$tokenType]) === true) {
+                        if (isset(Tokens::$emptyTokens[$tokenType]) === true) {
                             continue;
                         }
 
@@ -1338,7 +1338,7 @@ class PHP extends Tokenizer
                     $newStackPtr++;
 
                     if (PHP_CODESNIFFER_VERBOSITY > 1 && $type !== T_READONLY) {
-                        echo "\t\t* token $stackPtr changed from $type to T_READONLY".PHP_EOL;
+                        Common::printStatusMessage("* token $stackPtr changed from $type to T_READONLY", 2);
                     }
                 } else {
                     $finalTokens[$newStackPtr] = [
@@ -1349,7 +1349,7 @@ class PHP extends Tokenizer
                     $newStackPtr++;
 
                     if (PHP_CODESNIFFER_VERBOSITY > 1 && $type !== T_STRING) {
-                        echo "\t\t* token $stackPtr changed from $type to T_STRING".PHP_EOL;
+                        Common::printStatusMessage("* token $stackPtr changed from $type to T_STRING", 2);
                     }
                 }//end if
 

@@ -88,8 +88,6 @@ namespace My\Readonly\Collection;
 $var = readonly($a, $b);
 /* testReadonlyAsNamespacedFunctionCall */
 $var = My\NS\readonly($a, $b);
-/* testReadonlyAsNamespaceRelativeFunctionCall */
-$var = namespace\ReadOnly($a, $b);
 /* testReadonlyAsMethodCall */
 $var = $obj->readonly($a, $b);
 /* testReadonlyAsNullsafeMethodCall */

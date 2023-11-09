@@ -264,11 +264,7 @@ class BackfillReadonlyTest extends AbstractMethodUnitTest
             ],
             [
                 '/* testReadonlyAsNamespacedFunctionCall */',
-                'readonly',
-            ],
-            [
-                '/* testReadonlyAsNamespaceRelativeFunctionCall */',
-                'ReadOnly',
+                'My\NS\readonly',
             ],
             [
                 '/* testReadonlyAsMethodCall */',
