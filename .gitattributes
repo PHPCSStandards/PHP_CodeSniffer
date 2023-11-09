@@ -2,7 +2,6 @@
 .gitattributes export-ignore
 .github/ export-ignore
 .gitignore export-ignore
-package.xml export-ignore
 phpcs.xml.dist export-ignore
 phpstan.neon export-ignore
 phpunit.xml.dist export-ignore
