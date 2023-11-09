@@ -1,3 +1,7 @@
+---
+labels: ['Status: triage']
+---
+
 <!-- Provide a general summary of your changes in the title above. -->
 
 <!--
@@ -11,11 +15,11 @@ Describe your changes in detail and, if relevant, explain which choices you have
 -->
 
 
-### Suggested changelog entry
+## Suggested changelog entry
 <!-- Please provide a short description of the change for the changelog. -->
 
 
-### Related issues/external references
+## Related issues/external references
 
 Fixes #
 
@@ -37,7 +41,6 @@ Fixes #
 - [ ] I have added tests to cover my changes.
 - [ ] I have verified that the code complies with the projects coding standards.
 - [ ] [Required for new sniffs] I have added XML documentation for the sniff.
-- [ ] [Required for new files] I have added any new files to the `package.xml` file.
 
 <!--
 ============================================================================================
@@ -45,7 +48,7 @@ Please make sure your pull request passes all continuous integration checks!
 
 PRs which are failing their CI checks will likely be ignored by the maintainers.
 
-PRs using atomic, descriptive commits are hugely appreciated as it will make
+Small PRs using atomic, descriptive commits are hugely appreciated as it will make
 reviewing your changes easier for the maintainers.
 ============================================================================================
 -->
