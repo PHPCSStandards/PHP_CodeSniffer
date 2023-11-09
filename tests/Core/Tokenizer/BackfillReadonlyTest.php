@@ -213,6 +213,10 @@ class BackfillReadonlyTest extends AbstractMethodUnitTest
                 'readonly',
             ],
             [
+                '/* testReadonlyUsedAsFunctionNameWithReturnByRef */',
+                'readonly',
+            ],
+            [
                 '/* testReadonlyUsedAsNamespaceName */',
                 'Readonly',
             ],
@@ -222,6 +226,26 @@ class BackfillReadonlyTest extends AbstractMethodUnitTest
             ],
             [
                 '/* testReadonlyAsFunctionCall */',
+                'readonly',
+            ],
+            [
+                '/* testReadonlyAsNamespacedFunctionCall */',
+                'readonly',
+            ],
+            [
+                '/* testReadonlyAsNamespaceRelativeFunctionCall */',
+                'ReadOnly',
+            ],
+            [
+                '/* testReadonlyAsMethodCall */',
+                'readonly',
+            ],
+            [
+                '/* testReadonlyAsNullsafeMethodCall */',
+                'readOnly',
+            ],
+            [
+                '/* testReadonlyAsStaticMethodCallWithSpace */',
                 'readonly',
             ],
             [
