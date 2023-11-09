@@ -183,6 +183,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3770 : Squiz/NonExecutableCode: prevent false positives for switching between PHP and HTML
     - Thanks to Dan Wallis (@fredden) for the patch
+- Fixed bug #3773 : Tokenizer/PHP: tokenization of the readonly keyword when used in combination with PHP 8.2 disjunctive normal types
+    - Thanks to Dan Wallis (@fredden) and Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3776 : Generic/JSHint: error when JSHint is not available
     - Thanks to Dan Wallis (@fredden) for the patch
 - Fixed bug #3777 : Squiz/NonExecutableCode: slew of bug fixes, mostly related to modern PHP
