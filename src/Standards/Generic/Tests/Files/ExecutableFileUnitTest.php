@@ -22,9 +22,7 @@ class ExecutableFileUnitTest extends AbstractSniffUnitTest
      */
     protected function shouldSkipTest()
     {
-        // PEAR doesn't preserve the executable flag, so skip
-        // tests when running in a PEAR install.
-        // Also skip on Windows which doesn't have the concept of executable files.
+        // Skip on Windows which doesn't have the concept of executable files.
         return (stripos(PHP_OS, 'WIN') === 0);
 
     }//end shouldSkipTest()
