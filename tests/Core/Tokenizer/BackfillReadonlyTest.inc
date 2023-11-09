@@ -49,9 +49,7 @@ class Foo
     public ReAdOnLy string $caseInsensitiveProperty;
 
     /* testReadonlyConstructorPropertyPromotion */
-    public function __construct(private readonly bool $constructorPropertyPromotion)
-    {
-    }
+    public function __construct(private readonly bool $constructorPropertyPromotion) {}
 
     /* testReadonlyConstructorPropertyPromotionWithReference */
     public function __construct(private ReadOnly bool &$constructorPropertyPromotion) {}
@@ -68,8 +66,6 @@ class ClassName {
 
     /* testReadonlyUsedAsMethodName */
     public function readonly() {
-        // Do something.
-
         /* testReadonlyUsedAsPropertyName */
         $this->readonly = 'foo';
 
@@ -79,9 +75,10 @@ class ClassName {
 }
 
 /* testReadonlyUsedAsFunctionName */
-function readonly()
-{
-}
+function readonly() {}
+
+/* testReadonlyUsedAsFunctionNameWithReturnByRef */
+function &readonly() {}
 
 /* testReadonlyUsedAsNamespaceName */
 namespace Readonly;
@@ -89,6 +86,16 @@ namespace Readonly;
 namespace My\Readonly\Collection;
 /* testReadonlyAsFunctionCall */
 $var = readonly($a, $b);
+/* testReadonlyAsNamespacedFunctionCall */
+$var = My\NS\readonly($a, $b);
+/* testReadonlyAsNamespaceRelativeFunctionCall */
+$var = namespace\ReadOnly($a, $b);
+/* testReadonlyAsMethodCall */
+$var = $obj->readonly($a, $b);
+/* testReadonlyAsNullsafeMethodCall */
+$var = $obj?->readOnly($a, $b);
+/* testReadonlyAsStaticMethodCallWithSpace */
+$var = ClassName::readonly ($a, $b);
 /* testClassConstantFetchWithReadonlyAsConstantName */
 echo ClassName::READONLY;
 
