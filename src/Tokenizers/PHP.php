@@ -1247,23 +1247,89 @@ class PHP extends Tokenizer
                 "readonly" keyword for PHP < 8.1
             */
 
-            if (PHP_VERSION_ID < 80100
-                && $tokenIsArray === true
+            if ($tokenIsArray === true
                 && strtolower($token[1]) === 'readonly'
                 && isset($this->tstringContexts[$finalTokens[$lastNotEmptyToken]['code']]) === false
             ) {
                 // Get the next non-whitespace token.
                 for ($i = ($stackPtr + 1); $i < $numTokens; $i++) {
                     if (is_array($tokens[$i]) === false
-                        || $tokens[$i][0] !== T_WHITESPACE
+                        || isset(Util\Tokens::$emptyTokens[$tokens[$i][0]]) === false
                     ) {
                         break;
                     }
                 }
 
+                $isReadonlyKeyword = false;
+
                 if (isset($tokens[$i]) === false
                     || $tokens[$i] !== '('
                 ) {
+                    $isReadonlyKeyword = true;
+                } else if ($tokens[$i] === '(') {
+                    /*
+                     * Skip over tokens which can be used in type declarations.
+                     * At this point, the only token types which need to be taken into consideration
+                     * as potential type declarations are identifier names, T_ARRAY, T_CALLABLE and T_NS_SEPARATOR
+                     * and the union/intersection/dnf parentheses.
+                     */
+
+                    $foundDNFParens = 1;
+                    $foundDNFPipe   = 0;
+
+                    for (++$i; $i < $numTokens; $i++) {
+                        if (is_array($tokens[$i]) === true) {
+                            $tokenType = $tokens[$i][0];
+                        } else {
+                            $tokenType = $tokens[$i];
+                        }
+
+                        if (isset(Util\Tokens::$emptyTokens[$tokenType]) === true) {
+                            continue;
+                        }
+
+                        if ($tokenType === '|') {
+                            ++$foundDNFPipe;
+                            continue;
+                        }
+
+                        if ($tokenType === ')') {
+                            ++$foundDNFParens;
+                            continue;
+                        }
+
+                        if ($tokenType === '(') {
+                            ++$foundDNFParens;
+                            continue;
+                        }
+
+                        if ($tokenType === T_STRING
+                            || $tokenType === T_NAME_FULLY_QUALIFIED
+                            || $tokenType === T_NAME_RELATIVE
+                            || $tokenType === T_NAME_QUALIFIED
+                            || $tokenType === T_ARRAY
+                            || $tokenType === T_NAMESPACE
+                            || $tokenType === T_NS_SEPARATOR
+                            || $tokenType === T_AMPERSAND_NOT_FOLLOWED_BY_VAR_OR_VARARG // PHP 8.0+.
+                            || $tokenType === '&' // PHP < 8.0.
+                        ) {
+                            continue;
+                        }
+
+                        // Reached the next token after.
+                        if (($foundDNFParens % 2) === 0
+                            && $foundDNFPipe >= 1
+                            && ($tokenType === T_VARIABLE
+                            || $tokenType === T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG)
+                        ) {
+                            $isReadonlyKeyword = true;
+                        }
+
+                        break;
+                    }//end for
+                }//end if
+
+                if ($isReadonlyKeyword === true) {
                     $finalTokens[$newStackPtr] = [
                         'code'    => T_READONLY,
                         'type'    => 'T_READONLY',
@@ -1271,8 +1337,23 @@ class PHP extends Tokenizer
                     ];
                     $newStackPtr++;
 
-                    continue;
-                }
+                    if (PHP_CODESNIFFER_VERBOSITY > 1 && $type !== T_READONLY) {
+                        echo "\t\t* token $stackPtr changed from $type to T_READONLY".PHP_EOL;
+                    }
+                } else {
+                    $finalTokens[$newStackPtr] = [
+                        'code'    => T_STRING,
+                        'type'    => 'T_STRING',
+                        'content' => $token[1],
+                    ];
+                    $newStackPtr++;
+
+                    if (PHP_CODESNIFFER_VERBOSITY > 1 && $type !== T_STRING) {
+                        echo "\t\t* token $stackPtr changed from $type to T_STRING".PHP_EOL;
+                    }
+                }//end if
+
+                continue;
             }//end if
 
             /*

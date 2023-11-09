@@ -148,7 +148,39 @@ class BackfillReadonlyTest extends AbstractMethodUnitTest
                 'readonly',
             ],
             [
-                '/* testReadonlyUsedAsFunctionCallWithSpaceBetweenKeywordAndParens */',
+                '/* testReadonlyPropertyDNFTypeUnqualified */',
+                'readonly',
+            ],
+            [
+                '/* testReadonlyPropertyDNFTypeFullyQualified */',
+                'readonly',
+            ],
+            [
+                '/* testReadonlyPropertyDNFTypePartiallyQualified */',
+                'readonly',
+            ],
+            [
+                '/* testReadonlyPropertyDNFTypeRelativeName */',
+                'readonly',
+            ],
+            [
+                '/* testReadonlyPropertyDNFTypeMultipleSets */',
+                'readonly',
+            ],
+            [
+                '/* testReadonlyPropertyDNFTypeWithArray */',
+                'readonly',
+            ],
+            [
+                '/* testReadonlyPropertyDNFTypeWithSpacesAndComments */',
+                'readonly',
+            ],
+            [
+                '/* testReadonlyConstructorPropertyPromotionWithDNF */',
+                'readonly',
+            ],
+            [
+                '/* testReadonlyConstructorPropertyPromotionWithDNFAndRefence */',
                 'readonly',
             ],
             [
@@ -253,6 +285,14 @@ class BackfillReadonlyTest extends AbstractMethodUnitTest
             [
                 '/* testClassConstantFetchWithReadonlyAsConstantName */',
                 'READONLY',
+            ],
+            [
+                '/* testReadonlyUsedAsFunctionCallWithSpaceBetweenKeywordAndParens */',
+                'readonly',
+            ],
+            [
+                '/* testReadonlyUsedAsMethodNameWithDNFParam */',
+                'readonly',
             ],
         ];
 
