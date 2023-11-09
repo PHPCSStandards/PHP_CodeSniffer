@@ -30,7 +30,7 @@ echo "A short code snippet that can be used to reproduce the bug. Do NOT paste s
 ```xml
 <?xml version="1.0"?>
 <ruleset name="My Custom Standard">
-  <description>If you are using a custom ruleset, please enter it here.</description>
+  <description>If you are using a custom ruleset, please enter the relevant part here.</description>
 </ruleset>
 ```
 
@@ -51,8 +51,8 @@ A clear and concise description of what you expected to happen.
 | | |
 |-|-|
 | Operating System | [e.g., Windows 10, MacOS 10.15]
-| PHP version | [e.g., 7.2, 7.4]
-| PHP_CodeSniffer version | [e.g., 3.5.5, master]
+| PHP version | [e.g., 7.2, 8.1]
+| PHP_CodeSniffer version | [e.g., 3.7.2, master]
 | Standard | [e.g., PSR2, PSR12, Squiz, custom]
 | Install type | [e.g. Composer (global/local), PHAR, git clone, other (please expand)]
 
