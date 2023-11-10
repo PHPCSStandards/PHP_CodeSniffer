@@ -7,10 +7,14 @@ on:
     paths-ignore:
       - '**.md'
   pull_request:
-    paths-ignore:
-      - '**.md'
   # Allow manually triggering the workflow.
   workflow_dispatch:
+
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   phpstan:
@@ -31,7 +35,7 @@ jobs:
 
       # Install dependencies and handle caching in one go.
       # Dependencies need to be installed to make sure the PHPUnit classes are recognized.
-      # @link https://github.com/marketplace/actions/install-composer-dependencies
+      # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
       - name: Install Composer dependencies
         uses: "ramsey/composer-install@v2"
         with:

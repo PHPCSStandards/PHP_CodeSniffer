@@ -7,10 +7,14 @@ on:
     paths-ignore:
       - '**.md'
   pull_request:
-    paths-ignore:
-      - '**.md'
   # Allow manually triggering the workflow.
   workflow_dispatch:
+
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -112,8 +116,21 @@ jobs:
           coverage: none
           tools: cs2pr
 
+      # This action also handles the caching of the dependencies.
+      - name: Set up node and enable caching of dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install external tools used in tests
+        run: >
+          npm install -g --fund false
+          csslint
+          eslint
+          jshint
+
       # Install dependencies and handle caching in one go.
-      # @link https://github.com/marketplace/actions/install-composer-dependencies
+      # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
       - name: Install Composer dependencies - normal
         if: ${{ matrix.php < '8.0' }}
         uses: "ramsey/composer-install@v2"
@@ -126,7 +143,7 @@ jobs:
         if: ${{ matrix.php >= '8.0' }}
         uses: "ramsey/composer-install@v2"
         with:
-          composer-options: --ignore-platform-reqs
+          composer-options: --ignore-platform-req=php+
           custom-cache-suffix: $(date -u "+%Y-%m")
 
       # Note: The code style check is run multiple times against every PHP version
@@ -151,16 +168,12 @@ jobs:
 
       - name: 'PHPCS: check code style to show results in PR'
         if: ${{ matrix.custom_ini == false && matrix.php == '7.4' }}
-        continue-on-error: true
+        id: phpcs
         run: php bin/phpcs --no-cache --parallel=1 --report-full --report-checkstyle=./phpcs-report.xml
 
       - name: Show PHPCS results in PR
-        if: ${{ matrix.custom_ini == false && matrix.php == '7.4' }}
+        if: ${{ always() && steps.phpcs.outcome == 'failure' && matrix.php == '7.4' }}
         run: cs2pr ./phpcs-report.xml
-
-      - name: 'Composer: validate config'
-        if: ${{ matrix.custom_ini == false }}
-        run: composer validate --no-check-all --strict
 
       - name: Download the PHPCS phar
         uses: actions/download-artifact@v3
