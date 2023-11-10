@@ -3,7 +3,7 @@
 .github/ export-ignore
 .gitignore export-ignore
 phpcs.xml.dist export-ignore
-phpstan.neon export-ignore
+phpstan.neon.dist export-ignore
 phpunit.xml.dist export-ignore
 scripts/ export-ignore
 
