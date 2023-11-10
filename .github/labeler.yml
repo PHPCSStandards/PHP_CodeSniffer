@@ -75,9 +75,18 @@ labels:
   files:
   - "src/Standards/Zend/.*"
 
+- label: "Type: breaking change"
+  draft: False
+  body: "x\] Breaking change"
 - label: "Type: bug"
   draft: False
-  body: ".* bug .*"
+  body: "x\] Bug fix"
+- label: "Type: enhancement"
+  draft: False
+  body: "x\] New feature"
+- label: "Type: documentation"
+  draft: False
+  body: "x\] Documentation improvement"
 - label: "Type: documentation"
   draft: False
   files:
