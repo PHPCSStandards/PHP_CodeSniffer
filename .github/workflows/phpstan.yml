@@ -6,6 +6,7 @@ on:
   push:
     paths-ignore:
       - '**.md'
+      - '**.xml'
   pull_request:
   # Allow manually triggering the workflow.
   workflow_dispatch:
@@ -18,7 +19,7 @@ concurrency:
 
 jobs:
   phpstan:
-    name: "PHP: 7.4 | PHPStan"
+    name: "PHPStan"
 
     runs-on: "ubuntu-latest"
 
@@ -43,4 +44,4 @@ jobs:
           custom-cache-suffix: $(date -u "+%Y-%m")
 
       - name: Run PHPStan
-        run: phpstan analyse --configuration=phpstan.neon
+        run: phpstan analyse
