@@ -14,7 +14,7 @@ PHP_CodeSniffer
 </div>
 
 > [!NOTE]
-> This package is the continuation of the [PHP_CodeSniffer package which was created by Squizlabs](https://github.com/squizlabs/PHP_CodeSniffer) and has been abandoned.
+> This package is the continuation of the now abandoned [PHP_CodeSniffer package which was created by Squizlabs](https://github.com/squizlabs/PHP_CodeSniffer).
 
 ## About
 
