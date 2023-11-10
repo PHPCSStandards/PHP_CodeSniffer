@@ -170,6 +170,7 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Dan Wallis (@fredden) for the patch
 - Squiz.PHP.InnerFunctions sniff no longer reports on OO methods for OO structures declared within a function or closure
     - Thanks to @Daimona for the patch
+- Runtime performance improvement for PHPCS CLI users. The improvement should be most noticeable for users on Windows.
 
 ### Removed
 - Removed support for installing via PEAR
