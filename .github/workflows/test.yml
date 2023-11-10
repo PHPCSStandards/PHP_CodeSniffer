@@ -130,7 +130,7 @@ jobs:
           jshint
 
       # Install dependencies and handle caching in one go.
-      # @link https://github.com/marketplace/actions/install-composer-dependencies
+      # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
       - name: Install Composer dependencies - normal
         if: ${{ matrix.php < '8.0' }}
         uses: "ramsey/composer-install@v2"
@@ -143,7 +143,7 @@ jobs:
         if: ${{ matrix.php >= '8.0' }}
         uses: "ramsey/composer-install@v2"
         with:
-          composer-options: --ignore-platform-reqs
+          composer-options: --ignore-platform-req=php+
           custom-cache-suffix: $(date -u "+%Y-%m")
 
       # Note: The code style check is run multiple times against every PHP version
