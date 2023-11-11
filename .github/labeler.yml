@@ -90,4 +90,8 @@ labels:
   - label: "Type: documentation"
     draft: false
     files:
-      - "/Docs/[A-Za-z0-9-]*/.*Standard.xml$"
+      - '/Docs/[A-Za-z0-9-]*/.*Standard.xml$'
+  - label: "Type: documentation"
+    draft: false
+    files:
+      - "*.md$"
