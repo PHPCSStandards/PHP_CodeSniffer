@@ -1,93 +1,97 @@
 version: 1
 appendOnly: true
 labels:
-- label: "Status: triage"
-  draft: False
-  author-can-merge: False
+  - label: "Status: triage"
+    draft: false
+    author-can-merge: false
 
-- label: "Core Component: Config & Ruleset & CLI options"
-  draft: False
-  files:
-  - "src/Config.php$"
-- label: "Core Component: Config & Ruleset & CLI options"
-  draft: False
-  files:
-  - "src/Ruleset.php$"
-- label: "Core Component: File"
-  draft: False
-  files:
-  - "src/Files/.*"
-- label: "Core Component: Fixer"
-  draft: False
-  files:
-  - "src/Fixer.php$"
-- label: "Core Component: Reports"
-  draft: False
-  files:
-  - "src/Reports/.*"
-- label: "Core Component: Tokenizer"
-  draft: False
-  files:
-  - "src/Tokenizers/.*"
-- label: "Core Component: Utils"
-  draft: False
-  files:
-  - "src/Util/.*"
+  - label: "Core Component: Config & Ruleset & CLI options"
+    draft: false
+    files:
+      - "src/Config.php$"
+  - label: "Core Component: Config & Ruleset & CLI options"
+    draft: false
+    files:
+      - "src/Ruleset.php$"
+  - label: "Core Component: File"
+    draft: false
+    files:
+      - "src/Files/.*"
+  - label: "Core Component: Fixer"
+    draft: false
+    files:
+      - "src/Fixer.php$"
+  - label: "Core Component: Reports"
+    draft: false
+    files:
+      - "src/Reports/.*"
+  - label: "Core Component: Tokenizer"
+    draft: false
+    files:
+      - "src/Tokenizers/.*"
+  - label: "Core Component: Utils"
+    draft: false
+    files:
+      - "src/Util/.*"
 
-- label: "Focus: Comments/Docblocks"
-  draft: False
-  files:
-  - "src/Standards/.*/Sniffs/Commenting/"
-- label: "Focus: Fixer Conflicts"
-  draft: False
-  body: ".* fixer conflict.*"
+  - label: "Focus: Comments/Docblocks"
+    draft: false
+    files:
+      - "src/Standards/.*/Sniffs/Commenting/"
+  - label: "Focus: Fixer Conflicts"
+    draft: false
+    body: ".* fixer conflict.*"
 
-- label: "Standard: Generic"
-  draft: False
-  files:
-  - "src/Standards/Generic/.*"
-- label: "Standard: MySource"
-  draft: False
-  files:
-  - "src/Standards/MySource/.*"
-- label: "Standard: PEAR"
-  draft: False
-  files:
-  - "src/Standards/PEAR/.*"
-- label: "Standard: PSR1"
-  draft: False
-  files:
-  - "src/Standards/PSR1/.*"
-- label: "Standard: PSR2"
-  draft: False
-  files:
-  - "src/Standards/PSR2/.*"
-- label: "Standard: PSR12"
-  draft: False
-  files:
-  - "src/Standards/PSR12/.*"
-- label: "Standard: Squiz"
-  draft: False
-  files:
-  - "src/Standards/Squiz/.*"
-- label: "Standard: Zend"
-  draft: False
-  files:
-  - "src/Standards/Zend/.*"
+  - label: "Standard: Generic"
+    draft: false
+    files:
+      - "src/Standards/Generic/.*"
+  - label: "Standard: MySource"
+    draft: false
+    files:
+      - "src/Standards/MySource/.*"
+  - label: "Standard: PEAR"
+    draft: false
+    files:
+      - "src/Standards/PEAR/.*"
+  - label: "Standard: PSR1"
+    draft: false
+    files:
+      - "src/Standards/PSR1/.*"
+  - label: "Standard: PSR2"
+    draft: false
+    files:
+      - "src/Standards/PSR2/.*"
+  - label: "Standard: PSR12"
+    draft: false
+    files:
+      - "src/Standards/PSR12/.*"
+  - label: "Standard: Squiz"
+    draft: false
+    files:
+      - "src/Standards/Squiz/.*"
+  - label: "Standard: Zend"
+    draft: false
+    files:
+      - "src/Standards/Zend/.*"
 
-- label: "Type: breaking change"
-  draft: False
-  body: "x\] Breaking change"
-- label: "Type: bug"
-  draft: False
-  body: "x\] Bug fix"
-- label: "Type: enhancement"
-  draft: False
-  body: "x\] New feature"
-- label: "Type: documentation"
-  draft: False
-  body: "x\] Documentation improvement"
-- label: "Type: documentation"
-  draft: False
-  files:
-  - "/Docs/[A-Za-z0-9-]*/.*Standard.xml$"
+  - label: "Type: breaking change"
+    draft: false
+    body: 'x\] Breaking change'
+  - label: "Type: bug"
+    draft: false
+    body: 'x\] Bug fix'
+  - label: "Type: enhancement"
+    draft: false
+    body: 'x\] New feature'
+  - label: "Type: documentation"
+    draft: false
+    body: 'x\] Documentation improvement'
+  - label: "Type: documentation"
+    draft: false
+    files:
+      - '/Docs/[A-Za-z0-9-]*/.*Standard.xml$'
+  - label: "Type: documentation"
+    draft: false
+    files:
+      - "*.md$"
