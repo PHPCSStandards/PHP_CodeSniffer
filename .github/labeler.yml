@@ -45,35 +45,35 @@ labels:
   - label: "Standard: Generic"
     draft: false
     files:
-      - "src/Standards/Generic/.*"
+      - "src/Standards/Generic/(Docs|Sniffs)/.*"
   - label: "Standard: MySource"
     draft: false
     files:
-      - "src/Standards/MySource/.*"
+      - "src/Standards/MySource/(Docs|Sniffs)/.*"
   - label: "Standard: PEAR"
     draft: false
     files:
-      - "src/Standards/PEAR/.*"
+      - "src/Standards/PEAR/(Docs|Sniffs)/.*"
   - label: "Standard: PSR1"
     draft: false
     files:
-      - "src/Standards/PSR1/.*"
+      - "src/Standards/PSR1/(Docs|Sniffs)/.*"
   - label: "Standard: PSR2"
     draft: false
     files:
-      - "src/Standards/PSR2/.*"
+      - "src/Standards/PSR2/(Docs|Sniffs)/.*"
   - label: "Standard: PSR12"
     draft: false
     files:
-      - "src/Standards/PSR12/.*"
+      - "src/Standards/PSR12/(Docs|Sniffs)/.*"
   - label: "Standard: Squiz"
     draft: false
     files:
-      - "src/Standards/Squiz/.*"
+      - "src/Standards/Squiz/(Docs|Sniffs)/.*"
   - label: "Standard: Zend"
     draft: false
     files:
-      - "src/Standards/Zend/.*"
+      - "src/Standards/Zend/(Docs|Sniffs)/.*"
 
   - label: "Type: breaking change"
     draft: false
