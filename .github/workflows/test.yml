@@ -118,7 +118,7 @@ jobs:
 
       # This action also handles the caching of the dependencies.
       - name: Set up node and enable caching of dependencies
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
