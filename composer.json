@@ -26,7 +26,8 @@
     "support": {
         "issues": "https://github.com/PHPCSStandards/PHP_CodeSniffer/issues",
         "wiki": "https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki",
-        "source": "https://github.com/PHPCSStandards/PHP_CodeSniffer"
+        "source": "https://github.com/PHPCSStandards/PHP_CodeSniffer",
+        "security": "https://github.com/PHPCSStandards/PHP_CodeSniffer/security/policy"
     },
     "extra": {
         "branch-alias": {
