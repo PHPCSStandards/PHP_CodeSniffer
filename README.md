@@ -9,7 +9,7 @@ PHP_CodeSniffer
 [![License](http://poser.pugx.org/phpcsstandards/php_codesniffer/license)](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt)
 
 ![Minimum PHP Version](https://img.shields.io/packagist/php-v/phpcsstandards/php_codesniffer.svg?maxAge=3600)
-[![Tested on PHP 5.4 to 8.2](https://img.shields.io/badge/tested%20on-PHP%205.4%20|%205.5%20|%205.6%20|%207.0%20|%207.1%20|%207.2%20|%207.3%20|%207.4%20|%208.0%20|%208.1%20|%208.2-brightgreen.svg?maxAge=2419200)](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/test.yml)
+[![Tested on PHP 5.4 to 8.3](https://img.shields.io/badge/tested%20on-PHP%205.4%20|%205.5%20|%205.6%20|%207.0%20|%207.1%20|%207.2%20|%207.3%20|%207.4%20|%208.0%20|%208.1%20|%208.2%20|%208.3-brightgreen.svg?maxAge=2419200)](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/test.yml)
 
 </div>
 
