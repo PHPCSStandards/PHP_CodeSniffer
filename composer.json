@@ -43,8 +43,8 @@
     "require-dev": {
         "phpunit/phpunit": "^8.0 || ^9.0"
     },
-    "replace": {
-        "squizlabs/php_codesniffer": "> 2.0"
+    "conflict": {
+        "squizlabs/php_codesniffer": "*"
     },
     "bin": [
         "bin/phpcs",
