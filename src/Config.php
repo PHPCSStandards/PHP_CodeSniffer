@@ -1054,15 +1054,15 @@ class Config
                     $error .= $this->printShortUsage(true);
                     throw new DeepExitException($error, 3);
                 }
-            } else if (substr($arg, 0, 13) === 'baseline-file=') {
-                if (substr($arg, 13) === '') {
-                    $this->basepath = null;
+            } else if (substr($arg, 0, 14) === 'baseline-file=') {
+                if (substr($arg, 14) === '') {
+                    $this->baselineFile = null;
                     break;
                 }
 
-                $this->baselineFile = Util\Common::realpath(substr($arg, 13));
+                $this->baselineFile = Util\Common::realpath(substr($arg, 14));
                 if (is_file($this->baselineFile) === false) {
-                    $error  = 'ERROR: The specified baselineFile "'.substr($arg, 13).'" points to a non-existent file'.PHP_EOL.PHP_EOL;
+                    $error  = 'ERROR: The specified baseline-file "'.substr($arg, 14).'" points to a non-existent file'.PHP_EOL.PHP_EOL;
                     $error .= $this->printShortUsage(true);
                     throw new DeepExitException($error, 3);
                 }
