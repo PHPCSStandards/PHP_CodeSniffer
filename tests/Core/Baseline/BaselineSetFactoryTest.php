@@ -81,6 +81,7 @@ class BaselineSetFactoryTest extends TestCase
             // PHPUnit < 5.2.0.
             $this->setExpectedException('PHP_CodeSniffer\Exceptions\RuntimeException', 'Unable to read xml from');
         }
+
         BaselineSetFactory::fromFile(__DIR__.'/TestFiles/invalid-baseline.xml');
 
     }//end testFromFileShouldThrowExceptionForOnInvalidXML()
@@ -101,6 +102,7 @@ class BaselineSetFactoryTest extends TestCase
             // PHPUnit < 5.2.0.
             $this->setExpectedException('PHP_CodeSniffer\Exceptions\RuntimeException', 'Missing `sniff` attribute in `violation`');
         }
+
         BaselineSetFactory::fromFile(__DIR__.'/TestFiles/missing-sniff-baseline.xml');
 
     }//end testFromFileViolationMissingSniffShouldThrowException()
@@ -121,6 +123,7 @@ class BaselineSetFactoryTest extends TestCase
             // PHPUnit < 5.2.0.
             $this->setExpectedException('PHP_CodeSniffer\Exceptions\RuntimeException', 'Missing `signature` attribute in `violation` in');
         }
+
         BaselineSetFactory::fromFile(__DIR__.'/TestFiles/missing-signature-baseline.xml');
 
     }//end testFromFileViolationMissingSignatureShouldThrowException()
@@ -141,6 +144,7 @@ class BaselineSetFactoryTest extends TestCase
             // PHPUnit < 5.2.0.
             $this->setExpectedException('PHP_CodeSniffer\Exceptions\RuntimeException', 'Missing `file` attribute in `violation` in');
         }
+
         BaselineSetFactory::fromFile(__DIR__.'/TestFiles/missing-file-baseline.xml');
 
     }//end testFromFileViolationMissingFileShouldThrowException()
