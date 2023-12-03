@@ -1054,7 +1054,7 @@ class Config
                     $error .= $this->printShortUsage(true);
                     throw new DeepExitException($error, 3);
                 }
-            } else if (substr($arg, 0, 13) === 'baselineFile=') {
+            } else if (substr($arg, 0, 13) === 'baseline-file=') {
                 if (substr($arg, 13) === '') {
                     $this->basepath = null;
                     break;
@@ -1389,7 +1389,7 @@ class Config
         echo 'Usage: phpcs [-nwlsaepqvi] [-d key[=value]] [--colors] [--no-colors]'.PHP_EOL;
         echo '  [--cache[=<cacheFile>]] [--no-cache] [--tab-width=<tabWidth>]'.PHP_EOL;
         echo '  [--report=<report>] [--report-file=<reportFile>] [--report-<report>=<reportFile>]'.PHP_EOL;
-        echo '  [--report-width=<reportWidth>] [--basepath=<basepath>] [--baselineFile=<baselineFile>]'.PHP_EOL;
+        echo '  [--report-width=<reportWidth>] [--basepath=<basepath>] [--baseline-file=<baselineFile>]'.PHP_EOL;
         echo '  [--bootstrap=<bootstrap>] [--severity=<severity>] [--error-severity=<severity>]'.PHP_EOL;
         echo '  [--warning-severity=<severity>] [--runtime-set key value]'.PHP_EOL;
         echo '  [--config-set key value] [--config-delete key] [--config-show]'.PHP_EOL;
