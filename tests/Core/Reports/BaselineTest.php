@@ -10,10 +10,8 @@
 namespace PHP_CodeSniffer\Tests\Core\Reports;
 
 use PHP_CodeSniffer\Config;
-use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Reports\Baseline;
 use PHP_CodeSniffer\Util;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,25 +21,6 @@ use PHPUnit\Framework\TestCase;
  */
 class BaselineTest extends TestCase
 {
-
-    /**
-     * The mock file object
-     *
-     * @var File|MockObject
-     */
-    private $file;
-
-
-    /**
-     * Setup the test mock object
-     *
-     * @return void
-     */
-    protected function setup()
-    {
-        $this->file = $this->createMock('PHP_CodeSniffer\Files\File');
-
-    }//end setup()
 
 
     /**
@@ -53,7 +32,7 @@ class BaselineTest extends TestCase
     public function testGenerateFileReportEmptyShouldReturnFalse()
     {
         $report = new Baseline();
-        static::assertFalse($report->generateFileReport(['errors' => 0, 'warnings' => 0], $this->file));
+        static::assertFalse($report->generateFileReport(['errors' => 0, 'warnings' => 0], new MockFile([])));
 
     }//end testGenerateFileReportEmptyShouldReturnFalse()
 
@@ -80,11 +59,12 @@ class BaselineTest extends TestCase
             ],
         ];
         $signature = Util\CodeSignature::createSignature($tokens, 5);
-        $this->file->method('getTokens')->willReturn($tokens);
+
+        $file = new MockFile($tokens);
 
         $report = new Baseline();
         ob_start();
-        static::assertTrue($report->generateFileReport($reportData, $this->file));
+        static::assertTrue($report->generateFileReport($reportData, $file));
         $result = ob_get_clean();
         static::assertSame('<violation file="/test/foobar.txt" sniff="MySniff" signature="'.$signature.'"/>'.PHP_EOL, $result);
 

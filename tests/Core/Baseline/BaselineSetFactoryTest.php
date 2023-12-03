@@ -74,8 +74,13 @@ class BaselineSetFactoryTest extends TestCase
      */
     public function testFromFileShouldThrowExceptionForOnInvalidXML()
     {
-        $this->expectException('PHP_CodeSniffer\Exceptions\RuntimeException');
-        $this->expectExceptionMessage('Unable to read xml from');
+        if (method_exists($this, 'expectException') === true) {
+            $this->expectException('PHP_CodeSniffer\Exceptions\RuntimeException');
+            $this->expectExceptionMessage('Unable to read xml from');
+        } else {
+            // PHPUnit < 5.2.0.
+            $this->setExpectedException('PHP_CodeSniffer\Exceptions\RuntimeException', 'Unable to read xml from');
+        }
         BaselineSetFactory::fromFile(__DIR__.'/TestFiles/invalid-baseline.xml');
 
     }//end testFromFileShouldThrowExceptionForOnInvalidXML()
@@ -89,8 +94,13 @@ class BaselineSetFactoryTest extends TestCase
      */
     public function testFromFileViolationMissingSniffShouldThrowException()
     {
-        $this->expectException('PHP_CodeSniffer\Exceptions\RuntimeException');
-        $this->expectExceptionMessage('Missing `sniff` attribute in `violation`');
+        if (method_exists($this, 'expectException') === true) {
+            $this->expectException('PHP_CodeSniffer\Exceptions\RuntimeException');
+            $this->expectExceptionMessage('Missing `sniff` attribute in `violation`');
+        } else {
+            // PHPUnit < 5.2.0.
+            $this->setExpectedException('PHP_CodeSniffer\Exceptions\RuntimeException', 'Missing `sniff` attribute in `violation`');
+        }
         BaselineSetFactory::fromFile(__DIR__.'/TestFiles/missing-sniff-baseline.xml');
 
     }//end testFromFileViolationMissingSniffShouldThrowException()
@@ -104,8 +114,13 @@ class BaselineSetFactoryTest extends TestCase
      */
     public function testFromFileViolationMissingSignatureShouldThrowException()
     {
-        $this->expectException('PHP_CodeSniffer\Exceptions\RuntimeException');
-        $this->expectExceptionMessage('Missing `signature` attribute in `violation` in');
+        if (method_exists($this, 'expectException') === true) {
+            $this->expectException('PHP_CodeSniffer\Exceptions\RuntimeException');
+            $this->expectExceptionMessage('Missing `signature` attribute in `violation` in');
+        } else {
+            // PHPUnit < 5.2.0.
+            $this->setExpectedException('PHP_CodeSniffer\Exceptions\RuntimeException', 'Missing `signature` attribute in `violation` in');
+        }
         BaselineSetFactory::fromFile(__DIR__.'/TestFiles/missing-signature-baseline.xml');
 
     }//end testFromFileViolationMissingSignatureShouldThrowException()
@@ -119,8 +134,13 @@ class BaselineSetFactoryTest extends TestCase
      */
     public function testFromFileViolationMissingFileShouldThrowException()
     {
-        $this->expectException('PHP_CodeSniffer\Exceptions\RuntimeException');
-        $this->expectExceptionMessage('Missing `file` attribute in `violation` in');
+        if (method_exists($this, 'expectException') === true) {
+            $this->expectException('PHP_CodeSniffer\Exceptions\RuntimeException');
+            $this->expectExceptionMessage('Missing `file` attribute in `violation` in');
+        } else {
+            // PHPUnit < 5.2.0.
+            $this->setExpectedException('PHP_CodeSniffer\Exceptions\RuntimeException', 'Missing `file` attribute in `violation` in');
+        }
         BaselineSetFactory::fromFile(__DIR__.'/TestFiles/missing-file-baseline.xml');
 
     }//end testFromFileViolationMissingFileShouldThrowException()
