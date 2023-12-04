@@ -16,7 +16,6 @@ namespace PHP_CodeSniffer\Reports;
 use PHP_CodeSniffer\Exceptions\DeepExitException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Common;
-use PHP_CodeSniffer\Util\Timing;
 
 class Cbf implements Report
 {

@@ -11,7 +11,6 @@
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Util\Timing;
 
 abstract class VersionControl implements Report
 {

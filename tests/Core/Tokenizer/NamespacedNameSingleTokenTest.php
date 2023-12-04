@@ -20,7 +20,6 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-use PHP_CodeSniffer\Util\Tokens;
 
 class NamespacedNameSingleTokenTest extends AbstractMethodUnitTest
 {
