@@ -117,6 +117,10 @@ The file documents changes to the PHP_CodeSniffer project.
         - Note: this does not affect the PEAR sniffs.
 
 ### Added
+- Runtime support for PHP 8.3. All known PHP 8.3 deprecation notices have been fixed.
+    - Syntax support for new PHP 8.3 features will follow in a future release.
+    - If you find any PHP 8.3 deprecation notices which were missed, please report them.
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patches
 - Added support for readonly classes to File::getClassProperties() through a new is_readonly array index in the return value
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Added support for readonly class to a number of sniffs
