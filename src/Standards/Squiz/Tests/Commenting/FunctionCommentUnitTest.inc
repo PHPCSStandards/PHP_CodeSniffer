@@ -1134,3 +1134,27 @@ public function variableOrderMismatch($bar, $baz, $foo) {
  * @return never
  */
 function foo() {}
+
+/**
+ * @param $noTypeNoComment
+ * @return void
+ */
+function paramVariation1($noTypeNoComment): void {}
+
+/**
+ * @param $noTypeWithComment This parameter has no type specified.
+ * @return void
+ */
+function paramVariation2($noTypeWithComment): void {}
+
+/**
+ * @param integer $hasTypeNoComment
+ * @return void
+ */
+function paramVariation3($hasTypeNoComment): void {}
+
+/**
+ * @param integer $hasTypehasComment This parameter has type.
+ * @return void
+ */
+function paramVariation4($hasTypehasComment): void {}
