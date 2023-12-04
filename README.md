@@ -73,7 +73,7 @@ If you use Phive, you can install PHP_CodeSniffer as a project tool using the fo
 phive install phpcs
 phive install phpcbf
 ```
-You will then be able to run PHP_CodeSniffer from the tools directory:
+You will then be able to run PHP_CodeSniffer from the `tools` directory:
 ```bash
 ./tools/phpcs -h
 ./tools/phpcbf -h
@@ -107,11 +107,11 @@ Full usage information and example reports are available on the [usage page](htt
 
 ## Documentation
 
-The documentation for PHP_CodeSniffer is available on the [Github wiki](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki).
+The documentation for PHP_CodeSniffer is available on the [GitHub wiki](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki).
 
 ## Issues
 
-Bug reports and feature requests can be submitted on the [Github Issue Tracker](https://github.com/PHPCSStandards/PHP_CodeSniffer/issues).
+Bug reports and feature requests can be submitted on the [GitHub Issue Tracker](https://github.com/PHPCSStandards/PHP_CodeSniffer/issues).
 
 ## Contributing
 
