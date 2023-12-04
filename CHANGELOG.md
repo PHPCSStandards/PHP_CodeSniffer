@@ -131,6 +131,13 @@ The file documents changes to the PHP_CodeSniffer project.
     - Squiz.Commenting.FileComment
     - Squiz.Commenting.InlineComment
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Added support for `true` as a stand-alone type declaration
+    - The `File::getMethodProperties()`, `File::getMethodParameters()` and `File::getMemberProperties()` methods now all support the `true` type.
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Added support for `true` as a stand-alone type to a number of sniffs
+    - Generic.PHP.LowerCaseType
+    - PSr12.Functions.NullableTypeDeclaration
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Squiz.Commenting.FunctionComment: new ParamNameUnexpectedAmpersandPrefix error for parameters annotated as passed by reference while the parameter is not passed by reference
     - Thanks to Dan Wallis (@fredden) for the patch
 - Documentation has been added for the following sniffs:
@@ -141,6 +148,7 @@ The file documents changes to the PHP_CodeSniffer project.
 - Support for PHPUnit 8 and 9 to the test suite.
     - Test suites for external standards which run via the PHPCS native test suite can now run on PHPUnit 4-9 (was 4-7).
     - If any of these tests use the PHPUnit `setUp()`/`tearDown()` methods or overload the `setUp()` in the `AbstractSniffUnitTest` test case, they will need to be adjusted. See the [PR details for further information](https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/59/commits/26384ebfcc0b1c1651b0e1e40c9b6c8c22881832).
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 
 ### Changed
 - Changes have been made to the way PHPCS handles invalid sniff properties being set in a custom ruleset
@@ -171,6 +179,7 @@ The file documents changes to the PHP_CodeSniffer project.
 - Squiz.PHP.InnerFunctions sniff no longer reports on OO methods for OO structures declared within a function or closure
     - Thanks to @Daimona for the patch
 - Runtime performance improvement for PHPCS CLI users. The improvement should be most noticeable for users on Windows.
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 
 ### Removed
 - Removed support for installing via PEAR
