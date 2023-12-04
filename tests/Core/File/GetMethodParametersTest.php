@@ -1026,7 +1026,6 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
             'variable_length'   => true,
             'type_hint'         => '?MyClass',
             'nullable_type'     => true,
-            'default'           => '\'default value\' . /*-*/ \'second part\' // Trailing comment.',
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
