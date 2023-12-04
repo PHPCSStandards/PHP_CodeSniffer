@@ -50,14 +50,14 @@ To find issues which need triage, look for [issues without labels](https://githu
 * Ask for additional information if it is not.
 * If you find the issue is reported to the wrong repo, ask the reporter to report it to the correct external standard repo and suggest closing the issue.
 
-Additionally for older issues:
+Additionally, for older issues:
 * Check whether an issue still exists or has been fixed in `master` since the issue was initially reported.
 * If it has been fixed, document (in a comment) which commit/PR was responsible for fixing the issue and suggest closing the ticket.
 
 
 ### Testing Open Pull Requests
 
-Testing pull requests to verify they fix the issue they are supposed to fix without side-effects is an important task.
+Testing pull requests to verify they fix the issue they are supposed to fix without side effects is an important task.
 
 To get access to a PHPCS version which includes the patch from a pull request, you can:
 * Either use a git clone of the PHP_CodeSniffer repository and check out the PR.
@@ -69,7 +69,7 @@ To get access to a PHPCS version which includes the patch from a pull request, y
 * Verify that the patch solves the originally reported problem.
 * Verify that the tests added in the PR fail without the fix and pass with the fix.
 * For a fix for false negatives: verify that the correct error message(s) are thrown by the patched code.
-* Run the patched PHPCS version against real codebases to see if the fix creates any side-effects (new false positives/false negatives).
+* Run the patched PHPCS version against real codebases to see if the fix creates any side effects (new false positives/false negatives).
 
 
 ### Writing sniff documentation
@@ -190,7 +190,7 @@ The `getErrorList()` and the `getWarningList()` methods will receive an optional
 
 If a sniff contains errors/warnings which can be auto-fixed, these fixers should also be tested.
 
-This is done by adding an additional test _case_ file with an extra `.fixed` extension for each test _case_ file which expects fixes.
+This is done by adding a test _case_ file with an extra `.fixed` extension for each test _case_ file which expects fixes.
 
 For example, if the above `Generic.NamingConventions.ConstructorName` would contain an auto-fixer, there should be an additional `src/Standards/Generic/Tests/NamingConventions/ConstructorNameUnitTest.inc.fixed` file containing the code as it is expected to be after the fixer has run.
 
@@ -203,12 +203,12 @@ Some guidelines for submitting pull requests (PRs) and improving the chance that
     If your change is complex, make sure you add a proper commit message explaining what you have done and why.
 * Please clean up your branch before pulling your PR.
     Small PRs using atomic, descriptive commits are hugely appreciated as it will make reviewing your changes easier for the maintainers.
-* Only open your PR when you've finished work on it and you are confident that it is ready for review.
+* Only open your PR when you've finished work on it, and you are confident that it is ready for review.
 * Please make sure your pull request passes all continuous integration checks.
     PRs which are failing their CI checks will likely be ignored by the maintainers or closed.
 * Please respond to PR reviews in a timely manner.
 
-Your time is valuable and we appreciate your willingness to spend it on this project.
+Your time is valuable, and we appreciate your willingness to spend it on this project.
 However, the maintainers time is also valuable and often, more scarce, so please be considerate of that.
 
 ## Licensing
