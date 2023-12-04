@@ -89,6 +89,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Generic/SpreadOperatorSpacingAfter: minor message readability improvement
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Improved README syntax highlighting
+    - Thanks to Benjamin Loison (@Benjamin-Loison) for the patch
 
 ### Removed
 - Removed support for installing via PEAR
@@ -141,6 +143,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to @simonsan for the patch
 - Fixed bug #3906 : Tokenizer/CSS: fixed a bug related to the unsupported slash comment syntax
     - Thanks to Dan Wallis (@fredden) for the patch
+
+Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) for reviewing quite a few of the PRs for this release.
 
 ## [3.7.2] - 2023-02-23
 ### Changed
