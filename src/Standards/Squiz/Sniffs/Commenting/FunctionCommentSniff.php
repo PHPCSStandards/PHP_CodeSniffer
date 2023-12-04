@@ -463,7 +463,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                     }
                 }
 
-                if ($suggestedTypeHint !== '' && isset($realParams[$pos]) === true) {
+                if ($suggestedTypeHint !== '' && isset($realParams[$pos]) === true && $param['var'] !== '') {
                     $typeHint = $realParams[$pos]['type_hint'];
 
                     // Remove namespace prefixes when comparing.
