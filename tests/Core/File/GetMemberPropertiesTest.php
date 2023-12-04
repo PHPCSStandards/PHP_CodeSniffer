@@ -30,7 +30,10 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
         $variable = $this->getTargetToken($identifier, T_VARIABLE);
         $result   = self::$phpcsFile->getMemberProperties($variable);
 
-        $this->assertArraySubset($expected, $result, true);
+        // Unset those indexes which are not being tested.
+        unset($result['type_token'], $result['type_end_token']);
+
+        $this->assertSame($expected, $result);
 
     }//end testGetMemberProperties()
 
@@ -764,6 +767,7 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
+                    'is_readonly'     => false,
                     'type'            => 'Foo&Bar',
                     'nullable_type'   => false,
                 ],
@@ -774,6 +778,7 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
+                    'is_readonly'     => false,
                     'type'            => 'Foo&Bar&Baz',
                     'nullable_type'   => false,
                 ],
@@ -784,6 +789,7 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
+                    'is_readonly'     => false,
                     'type'            => 'int&string',
                     'nullable_type'   => false,
                 ],
@@ -794,6 +800,7 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
+                    'is_readonly'     => false,
                     'type'            => '?Foo&Bar',
                     'nullable_type'   => true,
                 ],
@@ -808,15 +815,24 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
      *
      * @param string $identifier Comment which precedes the test case.
      *
-     * @expectedException        PHP_CodeSniffer\Exceptions\RuntimeException
-     * @expectedExceptionMessage $stackPtr is not a class member var
-     *
      * @dataProvider dataNotClassProperty
      *
      * @return void
      */
     public function testNotClassPropertyException($identifier)
     {
+        $msg       = '$stackPtr is not a class member var';
+        $exception = 'PHP_CodeSniffer\Exceptions\RuntimeException';
+
+        if (\method_exists($this, 'expectException') === true) {
+            // PHPUnit 5+.
+            $this->expectException($exception);
+            $this->expectExceptionMessage($msg);
+        } else {
+            // PHPUnit 4.
+            $this->setExpectedException($exception, $msg);
+        }
+
         $variable = $this->getTargetToken($identifier, T_VARIABLE);
         $result   = self::$phpcsFile->getMemberProperties($variable);
 
@@ -848,13 +864,22 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
     /**
      * Test receiving an expected exception when a non variable is passed.
      *
-     * @expectedException        PHP_CodeSniffer\Exceptions\RuntimeException
-     * @expectedExceptionMessage $stackPtr must be of type T_VARIABLE
-     *
      * @return void
      */
     public function testNotAVariableException()
     {
+        $msg       = '$stackPtr must be of type T_VARIABLE';
+        $exception = 'PHP_CodeSniffer\Exceptions\RuntimeException';
+
+        if (\method_exists($this, 'expectException') === true) {
+            // PHPUnit 5+.
+            $this->expectException($exception);
+            $this->expectExceptionMessage($msg);
+        } else {
+            // PHPUnit 4.
+            $this->setExpectedException($exception, $msg);
+        }
+
         $next   = $this->getTargetToken('/* testNotAVariable */', T_RETURN);
         $result = self::$phpcsFile->getMemberProperties($next);
 

@@ -41,9 +41,11 @@ class RuleInclusionAbsoluteWindowsTest extends TestCase
     /**
      * Initialize the config and ruleset objects.
      *
+     * @before
+     *
      * @return void
      */
-    public function setUp()
+    public function initializeConfigAndRuleset()
     {
         if (DIRECTORY_SEPARATOR === '/') {
             $this->markTestSkipped('Windows specific test');
@@ -66,21 +68,23 @@ class RuleInclusionAbsoluteWindowsTest extends TestCase
         $config        = new Config(["--standard={$this->standard}"]);
         $this->ruleset = new Ruleset($config);
 
-    }//end setUp()
+    }//end initializeConfigAndRuleset()
 
 
     /**
      * Reset ruleset file.
      *
+     * @after
+     *
      * @return void
      */
-    public function tearDown()
+    public function resetRuleset()
     {
         if (DIRECTORY_SEPARATOR !== '/') {
             file_put_contents($this->standard, $this->contents);
         }
 
-    }//end tearDown()
+    }//end resetRuleset()
 
 
     /**
@@ -92,7 +96,6 @@ class RuleInclusionAbsoluteWindowsTest extends TestCase
     public function testWindowsStylePathRuleInclusion()
     {
         // Test that the sniff is correctly registered.
-        $this->assertObjectHasAttribute('sniffCodes', $this->ruleset);
         $this->assertCount(1, $this->ruleset->sniffCodes);
         $this->assertArrayHasKey('Generic.Formatting.SpaceAfterCast', $this->ruleset->sniffCodes);
         $this->assertSame(

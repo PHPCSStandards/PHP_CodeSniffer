@@ -12,6 +12,7 @@ namespace PHP_CodeSniffer\Tests\Core\Ruleset;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
 use PHPUnit\Framework\TestCase;
+use ReflectionObject;
 
 class RuleInclusionTest extends TestCase
 {
@@ -41,9 +42,11 @@ class RuleInclusionTest extends TestCase
     /**
      * Initialize the config and ruleset objects based on the `RuleInclusionTest.xml` ruleset file.
      *
+     * @beforeClass
+     *
      * @return void
      */
-    public static function setUpBeforeClass()
+    public static function initializeConfigAndRuleset()
     {
         $standard       = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
         self::$standard = $standard;
@@ -69,19 +72,21 @@ class RuleInclusionTest extends TestCase
         $config        = new Config(["--standard=$standard"]);
         self::$ruleset = new Ruleset($config);
 
-    }//end setUpBeforeClass()
+    }//end initializeConfigAndRuleset()
 
 
     /**
      * Reset ruleset file.
      *
+     * @after
+     *
      * @return void
      */
-    public function tearDown()
+    public function resetRuleset()
     {
         file_put_contents(self::$standard, self::$contents);
 
-    }//end tearDown()
+    }//end resetRuleset()
 
 
     /**
@@ -91,7 +96,6 @@ class RuleInclusionTest extends TestCase
      */
     public function testHasSniffCodes()
     {
-        $this->assertObjectHasAttribute('sniffCodes', self::$ruleset);
         $this->assertCount(48, self::$ruleset->sniffCodes);
 
     }//end testHasSniffCodes()
@@ -336,9 +340,11 @@ class RuleInclusionTest extends TestCase
      */
     public function testSettingProperties($sniffClass, $propertyName, $expectedValue)
     {
-        $this->assertObjectHasAttribute('sniffs', self::$ruleset);
         $this->assertArrayHasKey($sniffClass, self::$ruleset->sniffs);
-        $this->assertObjectHasAttribute($propertyName, self::$ruleset->sniffs[$sniffClass]);
+
+        $hasProperty = (new ReflectionObject(self::$ruleset->sniffs[$sniffClass]))->hasProperty($propertyName);
+        $errorMsg    = sprintf('Property %s does not exist on sniff class %s', $propertyName, $sniffClass);
+        $this->assertTrue($hasProperty, $errorMsg);
 
         $actualValue = self::$ruleset->sniffs[$sniffClass]->$propertyName;
         $this->assertSame($expectedValue, $actualValue);
@@ -426,11 +432,13 @@ class RuleInclusionTest extends TestCase
      */
     public function testSettingInvalidPropertiesOnStandardsAndCategoriesSilentlyFails($sniffClass, $propertyName)
     {
-        $this->assertObjectHasAttribute('sniffs', self::$ruleset, 'Ruleset does not have property sniffs');
         $this->assertArrayHasKey($sniffClass, self::$ruleset->sniffs, 'Sniff class '.$sniffClass.' not listed in registered sniffs');
 
         $sniffObject = self::$ruleset->sniffs[$sniffClass];
-        $this->assertObjectNotHasAttribute($propertyName, $sniffObject, 'Property '.$propertyName.' registered for sniff '.$sniffClass.' which does not support it');
+
+        $hasProperty = (new ReflectionObject(self::$ruleset->sniffs[$sniffClass]))->hasProperty($propertyName);
+        $errorMsg    = sprintf('Property %s registered for sniff %s which does not support it', $propertyName, $sniffClass);
+        $this->assertFalse($hasProperty, $errorMsg);
 
     }//end testSettingInvalidPropertiesOnStandardsAndCategoriesSilentlyFails()
 

@@ -36,15 +36,17 @@ class AcceptTest extends TestCase
     /**
      * Initialize the config and ruleset objects based on the `AcceptTest.xml` ruleset file.
      *
+     * @beforeClass
+     *
      * @return void
      */
-    public static function setUpBeforeClass()
+    public static function initializeConfigAndRuleset()
     {
         $standard      = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
         self::$config  = new Config(["--standard=$standard", "--ignore=*/somethingelse/*"]);
         self::$ruleset = new Ruleset(self::$config);
 
-    }//end setUpBeforeClass()
+    }//end initializeConfigAndRuleset()
 
 
     /**

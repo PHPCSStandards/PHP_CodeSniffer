@@ -18,7 +18,7 @@ require_once 'Standards/AllSniffs.php';
 $phpunit7 = false;
 if (class_exists('\PHPUnit\Runner\Version') === true) {
     $version = \PHPUnit\Runner\Version::id();
-    if ($version[0] === '7') {
+    if (version_compare($version, '7.0', '>=') === true) {
         $phpunit7 = true;
     }
 }

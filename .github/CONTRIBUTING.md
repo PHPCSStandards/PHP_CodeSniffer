@@ -137,7 +137,6 @@ Note: There may be an issue or PR open already. If so, please join the discussio
 
 1. Fork/clone the repository.
 2. Run `composer install`.
-    When installing on PHP >= 8.0, use `composer install --ignore-platform-req=php+`.
 3. Create a new branch off the `master` branch to hold your patch.
     If there is an open issue associated with your patch, including the issue number in the branch name is good practice.
 
@@ -152,10 +151,8 @@ To help you with this, a number of convenience scripts are available:
 * `composer check-all` will run the `cs` + `test` checks in one go.
 * `composer cs` will check for code style violations.
 * `composer cbf` will run the autofixers for code style violations.
-* `composer test` will run the unit tests (only works when on PHP < 8.1).
-* `composer test-php8` will run the unit tests when you are working on PHP 8.1+.
-    Please note that using a `phpunit.xml` overload config file will not work with this script!
-* `composer coverage` will run the unit tests with code coverage (only works when on PHP < 8.1).
+* `composer test` will run the unit tests.
+* `composer coverage` will run the unit tests with code coverage.
     Note: you may want to use a custom `phpunit.xml` overload config file to tell PHPUnit where to place an HTML report.
     Alternative run it like so: `composer coverage -- --coverage-html /path/to/report-dir/` to specify the location for the HTML report on the command line.
 * `composer build` will build the phpcs.phar and phpcbf.phar files.
