@@ -82,6 +82,9 @@ class NonExecutableCodeUnitTest extends AbstractSniffUnitTest
                 386 => 1,
                 391 => 1,
                 396 => 1,
+                406 => 1,
+                412 => 1,
+                419 => 1,
             ];
 
         case 'NonExecutableCodeUnitTest.2.inc':

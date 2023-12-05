@@ -396,5 +396,28 @@ function executionStoppingThrowExpressionsE() {
     echo 'non-executable';
 }
 
+function returnNotRequiredIgnoreCommentsA()
+{
+    if ($something === TRUE) {
+        return /*comment*/;
+    }
+
+    echo 'foo';
+    return /*comment*/;
+}
+
+function returnNotRequiredIgnoreCommentsB()
+{
+    echo 'foo';
+    return;
+    /*comment*/
+}
+
+$closure = function ()
+{
+    echo 'foo';
+    return; // This return should be flagged as not required.
+};
+
 // Intentional syntax error.
 return array_map(

@@ -90,6 +90,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Dan Wallis (@fredden) for the patch
 - Squiz.PHP.InnerFunctions sniff no longer reports on OO methods for OO structures declared within a function or closure
     - Thanks to @Daimona for the patch
+- Squiz.PHP.NonExecutableCode will now also flag redundant return statements just before a closure close brace
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Runtime performance improvement for PHPCS CLI users. The improvement should be most noticeable for users on Windows.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - The -e (explain) command will now list sniffs in natural order
@@ -174,6 +176,8 @@ The file documents changes to the PHP_CodeSniffer project.
 - Fixed bug #3877 : Filter names can be case-sensitive. The -h help text will now display the correct case for the available filters
     - Thanks to @simonsan for the patch
 - Fixed bug #3893 : Generic/DocComment : the SpacingAfterTagGroup fixer could accidentally remove ignore annotations
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Fixed bug #3898 : Squiz/NonExecutableCode : the sniff could get confused over comments in unexpected places
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3904 : Squiz/FunctionSpacing : prevent potential fixer conflict
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch

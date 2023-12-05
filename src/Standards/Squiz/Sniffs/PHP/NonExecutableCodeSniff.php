@@ -94,35 +94,29 @@ class NonExecutableCodeSniff implements Sniff
             }
         }//end if
 
-        // Check if this token is actually part of a one-line IF or ELSE statement.
-        for ($i = ($stackPtr - 1); $i > 0; $i--) {
-            if ($tokens[$i]['code'] === T_CLOSE_PARENTHESIS) {
-                $i = $tokens[$i]['parenthesis_opener'];
-                continue;
-            } else if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === true) {
-                continue;
-            }
-
-            break;
-        }
-
-        if ($tokens[$i]['code'] === T_IF
-            || $tokens[$i]['code'] === T_ELSE
-            || $tokens[$i]['code'] === T_ELSEIF
+        // This token may be part of an inline condition.
+        // If we find a closing parenthesis that belongs to a condition,
+        // or an "else", we should ignore this token.
+        if ($tokens[$prev]['code'] === T_ELSE
+            || (isset($tokens[$prev]['parenthesis_owner']) === true
+            && ($tokens[$tokens[$prev]['parenthesis_owner']]['code'] === T_IF
+            || $tokens[$tokens[$prev]['parenthesis_owner']]['code'] === T_ELSEIF))
         ) {
             return;
         }
 
         if ($tokens[$stackPtr]['code'] === T_RETURN) {
-            $next = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
+            $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
             if ($tokens[$next]['code'] === T_SEMICOLON) {
-                $next = $phpcsFile->findNext(T_WHITESPACE, ($next + 1), null, true);
+                $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
                 if ($tokens[$next]['code'] === T_CLOSE_CURLY_BRACKET) {
                     // If this is the closing brace of a function
                     // then this return statement doesn't return anything
                     // and is not required anyway.
                     $owner = $tokens[$next]['scope_condition'];
-                    if ($tokens[$owner]['code'] === T_FUNCTION) {
+                    if ($tokens[$owner]['code'] === T_FUNCTION
+                        || $tokens[$owner]['code'] === T_CLOSURE
+                    ) {
                         $warning = 'Empty return statement not required here';
                         $phpcsFile->addWarning($warning, $stackPtr, 'ReturnNotRequired');
                         return;
@@ -173,21 +167,6 @@ class NonExecutableCodeSniff implements Sniff
                 return;
             }//end if
         }//end if
-
-        // This token may be part of an inline condition.
-        // If we find a closing parenthesis that belongs to a condition
-        // we should ignore this token.
-        if (isset($tokens[$prev]['parenthesis_owner']) === true) {
-            $owner  = $tokens[$prev]['parenthesis_owner'];
-            $ignore = [
-                T_IF     => true,
-                T_ELSE   => true,
-                T_ELSEIF => true,
-            ];
-            if (isset($ignore[$tokens[$owner]['code']]) === true) {
-                return;
-            }
-        }
 
         $ourConditions = array_keys($tokens[$stackPtr]['conditions']);
 
