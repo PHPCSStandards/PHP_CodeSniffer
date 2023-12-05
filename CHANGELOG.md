@@ -73,6 +73,10 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Sniff error messages are now more informative to help bugs get reported to the correct project
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Generic.Functions.OpeningFunctionBraceBsdAllman will now check the brace indent before the opening brace for empty functions
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Generic.Functions.OpeningFunctionBraceKernighanRitchie will now check the spacing before the opening brace for empty functions
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - PSR2.Classes.PropertyDeclaration now enforces that the readonly modifier comes after the visibility modifier
     - PSR2 and PSR12 do not have documented rules for this as they pre-date the readonly modifier
     - PSR-PER has been used to confirm the order of this keyword so it can be applied to PSR2 and PSR12 correctly
