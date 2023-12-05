@@ -73,6 +73,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Sniff error messages are now more informative to help bugs get reported to the correct project
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Generic.CodeAnalysis.UnusedFunctionParameter will now ignore magic methods for which the signature is defined by PHP
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Generic.Functions.OpeningFunctionBraceBsdAllman will now check the brace indent before the opening brace for empty functions
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Generic.Functions.OpeningFunctionBraceKernighanRitchie will now check the spacing before the opening brace for empty functions
@@ -114,6 +116,8 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3557 : Squiz.Arrays.ArrayDeclaration will now ignore PHP 7.4 array unpacking when determining whether an array is associative
     - Thanks to Volker Dusch (@edorian) for the patch
+- Fixed bug #3715 : Generic/UnusedFunctionParameter: fixed incorrect errorcode for closures/arrow functions nested within extended classes/classes which implement.
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Fixed bug #3717 : Squiz.Commenting.FunctionComment: fixed false positive for InvalidNoReturn when type is never
     - Thanks to Choraimy Kroonstuiver (@axlon) for the patch
 - Fixed bug #3720 : Generic/RequireStrictTypes : will now bow out silently in case of parse errors/live coding instead of throwing false positives/false negatives
