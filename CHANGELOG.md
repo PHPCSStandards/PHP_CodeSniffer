@@ -40,6 +40,9 @@ The file documents changes to the PHP_CodeSniffer project.
     - Generic.PHP.LowerCaseType
     - PSr12.Functions.NullableTypeDeclaration
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Added a Performance report, mostly useful for sniff maintainers, to allow for finding "slow" sniffs.
+    - To run this report, run PHPCS with --report=Performance.
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Squiz.Commenting.FunctionComment: new ParamNameUnexpectedAmpersandPrefix error for parameters annotated as passed by reference while the parameter is not passed by reference
     - Thanks to Dan Wallis (@fredden) for the patch
 - Documentation has been added for the following sniffs:
