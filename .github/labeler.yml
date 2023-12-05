@@ -77,16 +77,16 @@ labels:
 
   - label: "Type: breaking change"
     draft: false
-    body: 'x\] Breaking change'
+    body: '[Xx]\] Breaking change'
   - label: "Type: bug"
     draft: false
-    body: 'x\] Bug fix'
+    body: '[Xx]\] Bug fix'
   - label: "Type: enhancement"
     draft: false
-    body: 'x\] New feature'
+    body: '[Xx]\] New feature'
   - label: "Type: documentation"
     draft: false
-    body: 'x\] Documentation improvement'
+    body: '[Xx]\] Documentation improvement'
   - label: "Type: documentation"
     draft: false
     files:
