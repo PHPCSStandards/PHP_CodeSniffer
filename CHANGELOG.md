@@ -80,6 +80,8 @@ The file documents changes to the PHP_CodeSniffer project.
 - Generic.PHP.RequireStrictTypes has a new warning for when there is a declare statement, but the strict_types directive is set to 0
     - The warning can be turned off by excluding the Generic.PHP.RequireStrictTypes.Disabled error code
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Generic.WhiteSpace.IncrementDecrementSpacing now detects more spacing issues
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - PSR2.Classes.PropertyDeclaration now enforces that the readonly modifier comes after the visibility modifier
     - PSR2 and PSR12 do not have documented rules for this as they pre-date the readonly modifier
     - PSR-PER has been used to confirm the order of this keyword so it can be applied to PSR2 and PSR12 correctly
