@@ -58,6 +58,7 @@ use PHP_CodeSniffer\Util\Common;
  * @property bool     $stdin           Read content from STDIN instead of supplied files.
  * @property string   $stdinContent    Content passed directly to PHPCS on STDIN.
  * @property string   $stdinPath       The path to use for content passed on STDIN.
+ * @property bool     $trackTime       Whether or not to track sniff run time.
  *
  * @property array<string, string>      $extensions File extensions that should be checked, and what tokenizer to use.
  *                                                  E.g., array('inc' => 'PHP');
