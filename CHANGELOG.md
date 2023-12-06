@@ -109,7 +109,8 @@ The file documents changes to the PHP_CodeSniffer project.
 
 ### Breaking Changes
 - The `squizlabs/PHP_CodeSniffer` repository has been abandoned. This repository will serve as the continuation of the project.
-    - Composer users will need to `require-dev` the `phpcsstandards/php_codesniffer` package instead.
+    - For Composer users, nothing changes.
+        - **In contrast to earlier information, the `squizlabs/php_codesniffer` package will now point to the new repo and everything will continue to work as before.**
     - PHIVE users may need to clear the PHIVE URL cache.
         - PHIVE users who don't use the package alias, but refer to the package URL, will need to update the URL from `https://squizlabs.github.io/PHP_CodeSniffer/phars/` to `https://phars.phpcodesniffer.com/phars/`.
     - Users who download the PHAR files using curl or wget, will need to update the URL from `https://squizlabs.github.io/PHP_CodeSniffer/[phpcs|phpcbf].phar` to `https://phars.phpcodesniffer.com/[phpcs|phpcbf].phar`.
