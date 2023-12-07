@@ -72,6 +72,8 @@ class ControlSignatureUnitTest extends AbstractSniffUnitTest
             279 => 1,
             283 => 1,
             306 => 3,
+            309 => 1,
+            315 => 1,
         ];
 
     }//end getErrorList()
