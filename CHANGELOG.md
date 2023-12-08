@@ -210,8 +210,15 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Tests using the PHPCS native test framework with multiple test case files will now run the test case files in numeric order.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Generic/SpreadOperatorSpacingAfter: minor message readability improvement
-    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- The following sniffs have received minor message readability improvements:
+    - Generic.Arrays.ArrayIndent
+    - Generic.Formatting.SpaceAfterCast
+    - Generic.Formatting.SpaceAfterNot
+    - Generic.WhiteSpace.SpreadOperatorSpacingAfter
+    - Squiz.Arrays.ArrayDeclaration
+    - Squiz.Commenting.DocCommentAlignment
+    - Squiz.ControlStructures.ControlSignature
+    - Thanks to Danny van der Sluijs (@DannyvdSluijs) and Juliette Reinders Folmer (@jrfnl) for the patches
 - Improved README syntax highlighting
     - Thanks to Benjamin Loison (@Benjamin-Loison) for the patch
 - Various documentation improvements
