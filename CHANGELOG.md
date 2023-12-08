@@ -3,30 +3,42 @@ The file documents changes to the PHP_CodeSniffer project.
 
 ## [Unreleased]
 
+_Nothing yet._
+
+
+## [3.8.0] - 2023-12-08
+
 [Squizlabs/PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) is dead. Long live [PHPCSStandards/PHP_CodeSniffer](https://github.com/PHPCSStandards/PHP_CodeSniffer)!
 
 ### Breaking Changes
-- The `squizlabs/PHP_CodeSniffer` repository has been abandoned. This repository will serve as the continuation of the project.
+- The `squizlabs/PHP_CodeSniffer` repository has been abandoned. The `PHPCSStandards/PHP_CodeSniffer` repository will serve as the continuation of the project. For more information about this change, please read the [announcement](https://github.com/squizlabs/PHP_CodeSniffer/issues/3932).
+    - Installation of PHP_CodeSniffer via PEAR is no longer supported.
+        - Users will need to switch to another installation method.
+        - Note: this does not affect the PEAR sniffs.
     - For Composer users, nothing changes.
-        - **In contrast to earlier information, the `squizlabs/php_codesniffer` package will now point to the new repo and everything will continue to work as before.**
+        - **_In contrast to earlier information, the `squizlabs/php_codesniffer` package now points to the new repository and everything will continue to work as before._**
     - PHIVE users may need to clear the PHIVE URL cache.
         - PHIVE users who don't use the package alias, but refer to the package URL, will need to update the URL from `https://squizlabs.github.io/PHP_CodeSniffer/phars/` to `https://phars.phpcodesniffer.com/phars/`.
-    - Users who download the PHAR files using curl or wget, will need to update the URL from `https://squizlabs.github.io/PHP_CodeSniffer/[phpcs|phpcbf].phar` to `https://phars.phpcodesniffer.com/[phpcs|phpcbf].phar`.
-    - Installation of PHP_CodeSniffer via PEAR is no longer supported.
-        - Note: this does not affect the PEAR sniffs.
+    - Users who download the PHAR files using curl or wget, will need to update the download URL from `https://squizlabs.github.io/PHP_CodeSniffer/[phpcs|phpcbf].phar` or `https://github.com/squizlabs/PHP_CodeSnifffer/releases/latest/download/[phpcs|phpcbf].phar` to `https://phars.phpcodesniffer.com/[phpcs|phpcbf].phar`.
+    - For users who install PHP_CodeSniffer via the [setup-php](https://github.com/shivammathur/setup-php/) action runner for GitHub Actions, nothing changes.
+    - Users using a git clone will need to update the clone address from `git@github.com:squizlabs/PHP_CodeSniffer.git` to `git@github.com:PHPCSStandards/PHP_CodeSniffer.git`.
+        - Contributors will need to fork the new repo and add both the new fork as well as the new repo as remotes to their local git copy of PHP_CodeSniffer.
+        - Users who have (valid) open issues or pull requests in the `squizlabs/PHP_CodeSniffer` repository are invited to resubmit these to the `PHPCSStandards/PHP_CodeSniffer` repository.
 
 ### Added
-- Runtime support for PHP 8.3. All known PHP 8.3 deprecation notices have been fixed.
-    - Syntax support for new PHP 8.3 features will follow in a future release.
-    - If you find any PHP 8.3 deprecation notices which were missed, please report them.
+- Runtime support for PHP 8.3. All known PHP 8.3 deprecation notices have been fixed
+    - Syntax support for new PHP 8.3 features will follow in a future release
+    - If you find any PHP 8.3 deprecation notices which were missed, please report them
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patches
-- Added support for readonly classes to File::getClassProperties() through a new is_readonly array index in the return value
+- Added support for PHP 8.2 readonly classes to File::getClassProperties() through a new is_readonly array index in the return value
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Added support for readonly class to a number of sniffs
+- Added support for PHP 8.2 readonly classes to a number of sniffs
     - Generic.CodeAnalysis.UnnecessaryFinalModifier
     - PEAR.Commenting.ClassComment
     - PEAR.Commenting.FileComment
+    - PSR1.Files.SideEffects
     - PSR2.Classes.ClassDeclaration
+    - PSR12.Files.FileHeader
     - Squiz.Classes.ClassDeclaration
     - Squiz.Classes.LowercaseClassKeywords
     - Squiz.Commenting.ClassComment
@@ -34,26 +46,29 @@ The file documents changes to the PHP_CodeSniffer project.
     - Squiz.Commenting.FileComment
     - Squiz.Commenting.InlineComment
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Added support for `true` as a stand-alone type declaration
-    - The `File::getMethodProperties()`, `File::getMethodParameters()` and `File::getMemberProperties()` methods now all support the `true` type.
+- Added support for PHP 8.2 `true` as a stand-alone type declaration
+    - The `File::getMethodProperties()`, `File::getMethodParameters()` and `File::getMemberProperties()` methods now all support the `true` type
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Added support for `true` as a stand-alone type to a number of sniffs
+- Added support for PHP 8.2 `true` as a stand-alone type to a number of sniffs
     - Generic.PHP.LowerCaseType
     - PSr12.Functions.NullableTypeDeclaration
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Added a Performance report, mostly useful for sniff maintainers, to allow for finding "slow" sniffs.
+- Added a Performance report to allow for finding "slow" sniffs
     - To run this report, run PHPCS with --report=Performance.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Squiz.Commenting.FunctionComment: new ParamNameUnexpectedAmpersandPrefix error for parameters annotated as passed by reference while the parameter is not passed by reference
+- Generic.PHP.RequireStrictTypes : new warning for when there is a declare statement, but the strict_types directive is set to 0
+    - The warning can be turned off by excluding the `Generic.PHP.RequireStrictTypes.Disabled` error code
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Squiz.Commenting.FunctionComment : new `ParamNameUnexpectedAmpersandPrefix` error for parameters annotated as passed by reference while the parameter is not passed by reference
     - Thanks to Dan Wallis (@fredden) for the patch
 - Documentation has been added for the following sniffs:
     - PSR2.Files.ClosingTag
     - PSR2.Methods.FunctionCallSignature
     - PSR2.Methods.FunctionClosingBrace
     - Thanks to Atsushi Okui (@blue32a) for the patch
-- Support for PHPUnit 8 and 9 to the test suite.
-    - Test suites for external standards which run via the PHPCS native test suite can now run on PHPUnit 4-9 (was 4-7).
-    - If any of these tests use the PHPUnit `setUp()`/`tearDown()` methods or overload the `setUp()` in the `AbstractSniffUnitTest` test case, they will need to be adjusted. See the [PR details for further information](https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/59/commits/26384ebfcc0b1c1651b0e1e40c9b6c8c22881832).
+- Support for PHPUnit 8 and 9 to the test suite
+    - Test suites for external standards which run via the PHPCS native test suite can now run on PHPUnit 4-9 (was 4-7)
+    - If any of these tests use the PHPUnit `setUp()`/`tearDown()` methods or overload the `setUp()` in the `AbstractSniffUnitTest` test case, they will need to be adjusted. See the [PR details for further information](https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/59/commits/26384ebfcc0b1c1651b0e1e40c9b6c8c22881832)
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 
 ### Changed
@@ -66,14 +81,14 @@ The file documents changes to the PHP_CodeSniffer project.
     - Invalid sniff properties set for sniffs via inline annotations will result in an informative `Internal.PropertyDoesNotExist` errror on line 1 of the scanned file, but will not halt the execution of PHPCS
     - For sniff developers, it is strongly recommended for sniffs to explicitly declare any user-adjustable public properties
         - If dynamic properties need to be supported for a sniff, either declare the magic __set()/__get()/__isset()/__unset() methods on the sniff or let the sniff extend stdClass
-        - Note: The #[\AllowDynamicProperties] attribute will have no effect for properties which are being set in rulesets.
+        - Note: The #[\AllowDynamicProperties] attribute will have no effect for properties which are being set in rulesets
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - The third parameter for the Ruleset::setSniffProperty() method has been changed to expect an array
     - Sniff developers/integrators of PHPCS may need to make some small adjustments to allow for this change
     - Existing code will continue to work but will throw a deprecation error
     - The backwards compatiblity layer will be removed in PHPCS 4.0
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- When using auto report width (the default) a value of 80 columns will be used if an auto width cannot be determined
+- When using `auto` report width (the default) a value of 80 columns will be used if the width cannot be determined
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Sniff error messages are now more informative to help bugs get reported to the correct project
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
@@ -83,16 +98,13 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Generic.Functions.OpeningFunctionBraceKernighanRitchie will now check the spacing before the opening brace for empty functions
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Generic.PHP.RequireStrictTypes has a new warning for when there is a declare statement, but the strict_types directive is set to 0
-    - The warning can be turned off by excluding the Generic.PHP.RequireStrictTypes.Disabled error code
-    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - Generic.WhiteSpace.IncrementDecrementSpacing now detects more spacing issues
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 - PSR2.Classes.PropertyDeclaration now enforces that the readonly modifier comes after the visibility modifier
     - PSR2 and PSR12 do not have documented rules for this as they pre-date the readonly modifier
     - PSR-PER has been used to confirm the order of this keyword so it can be applied to PSR2 and PSR12 correctly
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- PEAR.Commenting.FunctionComment + Squiz.Commenting.FunctionComment: the SpacingAfter error can now be auto-fixed.
+- PEAR.Commenting.FunctionComment + Squiz.Commenting.FunctionComment: the SpacingAfter error can now be auto-fixed
     - Thanks to Dan Wallis (@fredden) for the patch
 - Squiz.PHP.InnerFunctions sniff no longer reports on OO methods for OO structures declared within a function or closure
     - Thanks to @Daimona for the patch
@@ -124,89 +136,130 @@ The file documents changes to the PHP_CodeSniffer project.
     - Thanks to Andrew Dawes (@AndrewDawes), Danny van der Sluijs (@DannyvdSluijs) and Juliette Reinders Folmer (@jrfnl) for the patches
 
 ### Removed
-- Removed support for installing via PEAR
-    - Use composer or the phar files
+- Removed support for installation via PEAR
+    - Use composer or the PHAR files instead
 
 ### Fixed
-- Fixed bug #3386 : PSR1/SideEffects : improved recognition of disable/enable annotations
+- Fixed bug [#2857] : Squiz/NonExecutableCode: prevent false positives when exit is used in a ternary expression or as default with null coalesce
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3557 : Squiz.Arrays.ArrayDeclaration will now ignore PHP 7.4 array unpacking when determining whether an array is associative
+- Fixed bug [#3386] : PSR1/SideEffects : improved recognition of disable/enable annotations
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Fixed bug [#3557] : Squiz.Arrays.ArrayDeclaration will now ignore PHP 7.4 array unpacking when determining whether an array is associative
     - Thanks to Volker Dusch (@edorian) for the patch
-- Fixed bug #3715 : Generic/UnusedFunctionParameter: fixed incorrect errorcode for closures/arrow functions nested within extended classes/classes which implement.
+- Fixed bug [#3592] : Squiz/NonExecutableCode: prevent false positives when a PHP 8.0+ inline throw expression is encountered
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3717 : Squiz.Commenting.FunctionComment: fixed false positive for InvalidNoReturn when type is never
+- Fixed bug [#3715] : Generic/UnusedFunctionParameter: fixed incorrect errorcode for closures/arrow functions nested within extended classes/classes which implement
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Fixed bug [#3717] : Squiz.Commenting.FunctionComment: fixed false positive for `InvalidNoReturn` when type is never
     - Thanks to Choraimy Kroonstuiver (@axlon) for the patch
-- Fixed bug #3720 : Generic/RequireStrictTypes : will now bow out silently in case of parse errors/live coding instead of throwing false positives/false negatives
+- Fixed bug [#3720] : Generic/RequireStrictTypes : will now bow out silently in case of parse errors/live coding instead of throwing false positives/false negatives
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3720 : Generic/RequireStrictTypes : did not handle multi-directive declare statements
+- Fixed bug [#3720] : Generic/RequireStrictTypes : did not handle multi-directive declare statements
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3722 : Potential "Uninitialized string offset 1" in octal notation backfill
+- Fixed bug [#3722] : Potential "Uninitialized string offset 1" in octal notation backfill
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3728 : PHP 8.2 | PSR1/SideEffects: allow for readonly classes
+- Fixed bug [#3736] : PEAR/FunctionDeclaration: prevent fixer removing the close brace (and creating a parse error) when there is no space between the open brace and close brace of a function
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3736 : PEAR/FunctionDeclaration: prevent fixer removing the close brace (and creating a parse error) when there is no space between the open brace and close brace of a function
+- Fixed bug [#3739] : PEAR/FunctionDeclaration: prevent fixer conflict, and potentially creating a parse error, for unconventionally formatted return types
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3739 : PEAR/FunctionDeclaration: prevent fixer conflict (and potentially creating a parse error) for unconventionally formatted return types
-    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3770 : Squiz/NonExecutableCode: prevent false positives for switching between PHP and HTML
+- Fixed bug [#3770] : Squiz/NonExecutableCode: prevent false positives for switching between PHP and HTML
     - Thanks to Dan Wallis (@fredden) for the patch
-- Fixed bug #3773 : Tokenizer/PHP: tokenization of the readonly keyword when used in combination with PHP 8.2 disjunctive normal types
+- Fixed bug [#3773] : Tokenizer/PHP: tokenization of the readonly keyword when used in combination with PHP 8.2 disjunctive normal types
     - Thanks to Dan Wallis (@fredden) and Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3776 : Generic/JSHint: error when JSHint is not available
+- Fixed bug [#3776] : Generic/JSHint: error when JSHint is not available
     - Thanks to Dan Wallis (@fredden) for the patch
-- Fixed bug #3777 : Squiz/NonExecutableCode: slew of bug fixes, mostly related to modern PHP
+- Fixed bug [#3777] : Squiz/NonExecutableCode: slew of bug fixes, mostly related to modern PHP
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3779 : Squiz/LowercasePHPFunctions + Generic/ForbiddenFunctions: bug fix for class names in attributes
+- Fixed bug [#3778] : Squiz/LowercasePHPFunctions: bug fix for class names in attributes
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3785 : Squiz.Commenting.FunctionComment: potential "Uninitialized string offset 0" when a type contains a duplicate pipe symbol
+- Fixed bug [#3779] : Generic/ForbiddenFunctions: bug fix for class names in attributes
+    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
+- Fixed bug [#3785] : Squiz.Commenting.FunctionComment: potential "Uninitialized string offset 0" when a type contains a duplicate pipe symbol
     - Thanks to Dan Wallis (@fredden) for the patch
-- Fixed bug #3787 : PEAR/Squiz/[MultiLine]FunctionDeclaration: allow for PHP 8.1 new in initializers
+- Fixed bug [#3787] : PEAR/Squiz/[MultiLine]FunctionDeclaration: allow for PHP 8.1 new in initializers
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3789 : Incorrect tokenization for ternary operator with match inside of it
+- Fixed bug [#3789] : Incorrect tokenization for ternary operator with `match` inside of it
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3790 : PSR12/AnonClassDeclaration: prevent fixer creating parse error when there was no space before the open brace
+- Fixed bug [#3790] : PSR12/AnonClassDeclaration: prevent fixer creating parse error when there was no space before the open brace
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3797 : Tokenizer/PHP: more context sensitive keyword fixes
+- Fixed bug [#3797] : Tokenizer/PHP: more context sensitive keyword fixes
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3801 : File::getMethodParameters(): allow for readonly promoted properties without visibility
+- Fixed bug [#3801] : File::getMethodParameters(): allow for readonly promoted properties without visibility
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3805 : Generic/FunctionCallArgumentSpacing: prevent fixer conflict over PHP 7.3+ trailing comma's in function calls
+- Fixed bug [#3805] : Generic/FunctionCallArgumentSpacing: prevent fixer conflict over PHP 7.3+ trailing comma's in function calls
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3806 : Squiz.PHP.InnerFunctions sniff now correctly reports inner functions declared within a closure
+- Fixed bug [#3806] : Squiz.PHP.InnerFunctions sniff now correctly reports inner functions declared within a closure
     - Thanks to @Daimona for the patch
-- Fixed bug #3809 : GitBlame report was broken when passing a basepath
+- Fixed bug [#3809] : GitBlame report was broken when passing a basepath
     - Thanks to Chris (@datengraben) for the patch
-- Fixed bug #3813 : Squiz.Commenting.FunctionComment: false positive for parameter name mismatch on parameters annotated as passed by reference
+- Fixed bug [#3813] : Squiz.Commenting.FunctionComment: false positive for parameter name mismatch on parameters annotated as passed by reference
     - Thanks to Dan Wallis (@fredden) for the patch
-- Fixed bug #3816 : PSR12/FileHeader: bug fix - false positives on PHP 8.2+ readonly classes
+- Fixed bug [#3833] : Generic.PHP.LowerCaseType: fixed potential undefined array index notice
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3833 : Generic.PHP.LowerCaseType: fixed potential undefined array index notice
+- Fixed bug [#3846] : PSR2.Classes.ClassDeclaration.CloseBraceAfterBody : fixer will no longer remove indentation on the close brace line
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3846 : PSR2.Classes.ClassDeclaration.CloseBraceAfterBody : fixer will no longer remove indentation on the close brace line
+- Fixed bug [#3854] : Fatal error when using Gitblame report in combination with `--basepath` and running from project subdirectory
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3854 : Fatal error when using Gitblame report in combination with `--basepath` and running from project subdirectory
+- Fixed bug [#3856] : PSR12.Traits.UseDeclaration was using the wrong error code - SpacingAfterAs - for spacing issues after the `use` keyword
+    - These will now be reported using the SpacingAfterUse error code
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3856 : PSR12.Traits.UseDeclaration was using the wrong error code - SpacingAfterAs - for spacing issues after the use keyword
-    - These will now be reported using the SpacingAfterUse error code.
+- Fixed bug [#3856] : PSR12.Traits.UseDeclaration did not check spacing after `use` keyword for multi-line trait use statements
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3856 : PSR12.Traits.UseDeclaration did not check spacing after use keyword for multi-line trait use statements
+- Fixed bug [#3867] : Tokenizer/PHP: union type and intersection type operators were not correctly tokenized for static properties without explicit visibility
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3867 : Tokenizer/PHP: union type and intersection type operators were not correctly tokenized for static properties without explicit visibility
-    - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3877 : Filter names can be case-sensitive. The -h help text will now display the correct case for the available filters
+- Fixed bug [#3877] : Filter names can be case-sensitive. The -h help text will now display the correct case for the available filters
     - Thanks to @simonsan for the patch
-- Fixed bug #3893 : Generic/DocComment : the SpacingAfterTagGroup fixer could accidentally remove ignore annotations
+- Fixed bug [#3893] : Generic/DocComment : the SpacingAfterTagGroup fixer could accidentally remove ignore annotations
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3898 : Squiz/NonExecutableCode : the sniff could get confused over comments in unexpected places
+- Fixed bug [#3898] : Squiz/NonExecutableCode : the sniff could get confused over comments in unexpected places
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3904 : Squiz/FunctionSpacing : prevent potential fixer conflict
+- Fixed bug [#3904] : Squiz/FunctionSpacing : prevent potential fixer conflict
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
-- Fixed bug #3906 : Tokenizer/CSS: fixed a bug related to the unsupported slash comment syntax
+- Fixed bug [#3906] : Tokenizer/CSS: bug fix related to the unsupported slash comment syntax
     - Thanks to Dan Wallis (@fredden) for the patch
-- Fixed bug #3913 : Config stored unknown "long" arguments in a (dynamic) `$values` property
+- Fixed bug [#3913] : Config did not always correctly store unknown "long" arguments in the `$unknown` property
     - Thanks to Juliette Reinders Folmer (@jrfnl) for the patch
 
-Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) for reviewing quite a few of the PRs for this release.
+Thanks go to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) for reviewing quite a few of the PRs for this release.
+Additionally, thanks to Alexander Turek (@derrabus) for consulting on the repo change over.
+
+[#2857]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2857
+[#3386]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3386
+[#3557]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3557
+[#3592]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3592
+[#3715]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3715
+[#3717]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3717
+[#3720]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3720
+[#3722]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3722
+[#3736]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3736
+[#3739]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3739
+[#3770]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3770
+[#3773]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3773
+[#3776]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3776
+[#3777]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3777
+[#3778]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3778
+[#3779]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3779
+[#3785]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3785
+[#3787]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3787
+[#3789]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3789
+[#3790]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3790
+[#3797]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3797
+[#3801]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3801
+[#3805]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3805
+[#3806]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3806
+[#3809]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3809
+[#3813]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3813
+[#3833]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3833
+[#3846]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3846
+[#3854]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3854
+[#3856]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3856
+[#3867]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3867
+[#3877]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3877
+[#3893]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3893
+[#3898]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3898
+[#3904]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3904
+[#3906]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3906
+[#3913]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3913
 
 ## [3.7.2] - 2023-02-23
 ### Changed
