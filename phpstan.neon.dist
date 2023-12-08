@@ -5,11 +5,6 @@ parameters:
         - src
     bootstrapFiles:
         - tests/bootstrap.php
-    ignoreErrors:
-        -
-            count: 1
-            message: '~^Undefined variable: \$phpCodeSnifferConfig$~'
-            path: src/Config.php
 
     dynamicConstantNames:
         - PHP_CODESNIFFER_IN_TESTS
