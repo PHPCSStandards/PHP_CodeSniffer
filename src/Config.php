@@ -81,7 +81,7 @@ class Config
      *
      * @var string
      */
-    const VERSION = '3.8.0';
+    const VERSION = '3.8.1';
 
     /**
      * Package stability; either stable, beta or alpha.
