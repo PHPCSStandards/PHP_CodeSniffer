@@ -4198,7 +4198,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
     - Adds new error message to ban empty lines in multi-line function calls
 - Fixed bug #18975 : "Closing parenthesis must be on a line by itself" also causes indentation error
 
-## [1.3.1] - 2011-11-03
+## 1.3.1 - 2011-11-03
 ### Changed
 - All report file command line arguments now work with relative paths (request #17240)
 - The extensions command line argument now supports multi-part file extensions (request #17227)
@@ -4265,7 +4265,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
     - Thanks to Bjorn Katuin for the patch
 - Fixed bug #18951 : weird behaviour with closures and multi-line use () params
 
-## [1.3.0] - 2011-03-17
+## 1.3.0 - 2011-03-17
 ### Changed
 - Add a new token T_CLOSURE that replaces T_FUNCTION if the function keyword is anonymous
 - Many Squiz sniffs no longer report errors when checking closures; they are now ignored
@@ -4285,7 +4285,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
     - Thanks to Dave Perrett for the patch
 - Fixed bug #18336 : Function isUnderscoreName gives php notices
 
-## [1.3.0RC2] - 2011-01-14
+## 1.3.0RC2 - 2011-01-14
 ### Changed
 - You can now print multiple reports for each run and print each to the screen or a file (request #12434)
     - Format is --report-[report][=file] (e.g., --report-xml=out.xml)
@@ -4353,7 +4353,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed bug #18191 : Squiz.PHP.LowercasePHPFunctions does not work with new Date()
 - Fixed bug #18193 : CodeSniffer doesn't reconize CR (\r) line endings
 
-## [1.3.0RC1] - 2010-09-03
+## 1.3.0RC1 - 2010-09-03
 ### Changed
 - Added exclude pattern support to ruleset.xml file so you can specify ignore patterns in a standard (request #17683)
     - Use new exclude-pattern tags to include the ignore rules into your ruleset.xml file
@@ -4385,7 +4385,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed bug #17742 : EmbeddedPhpSniff reacts negatively to file without closing php tag
 - Fixed bug #17823 : Notice: Please no longer include PHPUnit/Framework.php
 
-## [1.3.0a1] - 2010-07-15
+## 1.3.0a1 - 2010-07-15
 ### Changed
 - All CodingStandard.php files have been replaced by ruleset.xml files
     - Custom standards will need to be converted over to this new format to continue working
@@ -4430,7 +4430,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed bug #17420 : Uncaught exception when comment before function brace
 - Fixed bug #17503 : closures formatting is not supported
 
-## [1.2.2] - 2010-01-27
+## 1.2.2 - 2010-01-27
 ### Changed
 - The core PHP_CodeSniffer_File methods now understand the concept of closures (feature request #16866)
     - Thanks to Christian Kaps for the sample code
@@ -4498,7 +4498,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed bug #16976 : The phpcs attempts to process symbolic links that don't resolve to files
 - Fixed bug #17017 : Including one file in the files sniffed alters errors reported for another file
 
-## [1.2.1] - 2009-11-17
+## 1.2.1 - 2009-11-17
 ### Changed
 - Added a new report type --report=svnblame to show how many errors and warnings were committed by each author
     - Also shows the percentage of their code that are errors and warnings
@@ -4553,7 +4553,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
     - Thanks to Alexey Shein for the patch
 - Fixed bug #16792 : Bug in Generic_Sniffs_PHP_ForbiddenFunctionsSniff
 
-## [1.2.0] - 2009-08-17
+## 1.2.0 - 2009-08-17
 ### Changed
 - Installed standards are now favoured over custom standards when using the cmd line arg with relative paths
 - Unit tests now use a lot less memory while running
@@ -4567,7 +4567,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed bug #16453 : function declaration long line splitted error
 - Fixed bug #16482 : phpcs-svn-pre-commit ignores extensions parameter
 
-## [1.2.0RC3] - 2009-07-07
+## 1.2.0RC3 - 2009-07-07
 ### Changed
 - You can now use @codingStandardsIgnoreStart and @...End comments to suppress messages (feature request #14002)
 - A warning is now included for files without any code when short_open_tag is set to Off (feature request #12952)
@@ -4576,7 +4576,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - MySource IncludeSystemSniff now recognises widget action classes
 - MySource IncludeSystemSniff now knows about unit test classes and changes rules accordingly
 
-## [1.2.0RC2] - 2009-05-25
+## 1.2.0RC2 - 2009-05-25
 ### Changed
 - Test suite can now be run using the full path to AllTests.php (feature request #16179)
 
@@ -4589,7 +4589,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed bug #16170 : Undefined Offset -1 in MultiLineConditionSniff.php on line 68
 - Fixed bug #16175 : Bug in Squiz-IncrementDecrementUsageSniff
 
-## [1.2.0RC1] - 2009-03-09
+## 1.2.0RC1 - 2009-03-09
 ### Changed
 - Reports that are output to a file now include a trailing newline at the end of the file
 - Fixed sniff names not shown in -vvv token processing output
@@ -4614,7 +4614,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed bug #15722 : "declare(encoding = 'utf-8');" leads to "Missing file doc comment"
 - Fixed bug #15910 : Object operator indention not calculated correctly
 
-## [1.2.0a1] - 2008-12-18
+## 1.2.0a1 - 2008-12-18
 ### Changed
 - PHP_CodeSniffer now has a CSS tokenizer for checking CSS files
 - Added support for a new multi-file sniff that sniffs all processed files at once
@@ -4724,7 +4724,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed bug #15231 : Notice: Uninitialized string offset: 0 in FileCommentSniff.php on line 555
 - Fixed bug #15336 : Notice: Undefined offset: 2 in /usr/share/php/PHP/CodeSniffer/File.php on line
 
-## [1.1.0] - 2008-07-14
+## 1.1.0 - 2008-07-14
 ### Changed
 - PEAR FileCommentSniff now allows tag orders to be overridden in child classes
     - Thanks to Jeff Hodsdon for the patch
@@ -4740,7 +4740,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed bug #14250 : ArrayDeclarationSniff emit warnings at malformed array
 - Fixed bug #14251 : --extensions option doesn't work
 
-## [1.1.0RC3] - 2008-07-03
+## 1.1.0RC3 - 2008-07-03
 ### Changed
 - PEAR FileCommentSniff now allows tag orders to be overridden in child classes
     - Thanks to Jeff Hodsdon for the patch
@@ -4756,7 +4756,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed bug #14250 : ArrayDeclarationSniff emit warnings at malformed array
 - Fixed bug #14251 : --extensions option doesn't work
 
-## [1.1.0RC2] - 2008-06-13
+## 1.1.0RC2 - 2008-06-13
 ### Changed
 - Permission denied errors now stop script execution but still display current errors (feature request #14076)
 - Added Squiz ValidArrayIndexNameSniff to ensure array indexes do not use camel case
@@ -4770,7 +4770,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
     - Squiz ValidClassNameSniff now throws warning for possible parse errors
     - Squiz ClosingDeclarationCommentSniff now throws additional warnings for parse errors
 
-## [1.1.0RC1] - 2008-05-13
+## 1.1.0RC1 - 2008-05-13
 ### Changed
 - Added support for multiple tokenizers so PHP_CodeSniffer can check more than just PHP files
     - PHP_CodeSniffer now has a JS tokenizer for checking JavaScript files
@@ -4834,7 +4834,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed bug #13446 : crash with src of phpMyAdmin
     - Thanks to Manuel Pichler for the path
 
-## [1.0.1a1] - 2008-04-21
+## 1.0.1a1 - 2008-04-21
 ### Changed
 - Fixed error in PEAR ValidClassNameSniff when checking class names with double underscores
 - Moved Squiz InlineControlStructureSniff into Generic standard
@@ -4851,7 +4851,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed bug #13846 : Bug in Squiz.NonExecutableCodeSniff
 - Fixed bug #13849 : infinite loop in PHP_CodeSniffer_File::findNext()
 
-## [1.0.1] - 2008-02-04
+## 1.0.1 - 2008-02-04
 ### Changed
 - Squiz ArrayDeclarationSniff now throws error if the array keyword is followed by a space
 - Squiz ArrayDeclarationSniff now throws error for empty multi-line arrays
@@ -4880,7 +4880,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed bug #12957 : PHP 5.3 magic method __callStatic
     - Thanks to Manuel Pichler for the patch
 
-## [1.0.0] - 2007-12-21
+## 1.0.0 - 2007-12-21
 ### Changed
 - You can now specify the full path to a coding standard on the command line (feature request #11886)
     - This allows you to use standards that are stored outside of PHP_CodeSniffer's own Standard dir
@@ -4910,7 +4910,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
     - Thanks to Renoiv for the patch
 - Fixed bug #12651 : Increment/Decrement Operators Usage at -1
 
-## [1.0.0RC3] - 2007-11-30
+## 1.0.0RC3 - 2007-11-30
 ### Changed
 - Added new command line argument --tab-width that will convert tabs to spaces before testing
     - This allows you to use the existing sniffs that check for spaces even when you use tabs
@@ -4938,7 +4938,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
     - Thanks to Sebastian Bergmann for the patch.
 - Fixed bug #12517 : getNewlineAfter() and dos files
 
-## [1.0.0RC2] - 2007-11-14
+## 1.0.0RC2 - 2007-11-14
 ### Changed
 - Added a new Checkstyle report format
     - Like the current XML format but modified to look like Checkstyle output
@@ -4969,7 +4969,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
     - Thanks to Richard Quadling for the patch
 - Fixed bug #12378 : equal sign alignments problem with while()
 
-## [1.0.0RC1] - 2007-11-01
+## 1.0.0RC1 - 2007-11-01
 ### Changed
 - Main phpcs script can now be run from a CVS checkout without installing the package
 - Added a new CSV report format
@@ -5018,7 +5018,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed bug #12316 : PEAR is no longer the default standard
 - Fixed bug #12321 : wrong detection of missing function docblock
 
-## [0.9.0] - 2007-09-24
+## 0.9.0 - 2007-09-24
 ### Changed
 - Added a config system for setting config data across phpcs runs
 - You can now change the default coding standard from PEAR to something else
@@ -5029,7 +5029,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
     - Thanks to Johann-Peter Hartmann for the contribution of some sniffs
     - Thanks to Holger Kral for the Code Analyzer sniff
 
-## [0.8.0] - 2007-08-08
+## 0.8.0 - 2007-08-08
 ### Changed
 - Added new XML report format; --report=xml (feature request #11535)
     - Thanks to Brett Bieber for the patch
@@ -5054,7 +5054,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 ### Fixed
 - Fixed bug #11473 : Invalid CamelCaps name when numbers used in names
 
-## [0.7.0] - 2007-07-02
+## 0.7.0 - 2007-07-02
 ### Changed
 - BC BREAK: EOL character is now auto-detected and used instead of hard-coded \n
     - Pattern sniffs must now specify "EOL" instead of "\n" or "\r\n" to use auto-detection
@@ -5101,7 +5101,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
     - Thanks to Blair Robertson for the patch
 - Fixed bug #11120 : Uninitialized string offset in AbstractParser.php on line 200
 
-## [0.6.0] - 2007-05-15
+## 0.6.0 - 2007-05-15
 ### Changed
 - The number of errors and warnings found is now shown for each file while checking the file if verbosity is enabled
 - Now using PHP_EOL instead of hard-coded \n so output looks good on Windows (feature request #10761)
@@ -5118,7 +5118,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed bug #10983 : phpcs outputs notices when checking invalid PHP
 - Fixed bug #10980 : Incorrect warnings for equals sign
 
-## [0.5.0] - 2007-04-17
+## 0.5.0 - 2007-04-17
 ### Changed
 - BC BREAK: Coding standards now require a class to be added so PHP_CodeSniffer can get information from them
     - Please read the end user docs for info about the new class required for all coding standards
@@ -5149,7 +5149,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Errors now thrown for using ob_get_clean/flush functions to end buffers in Squiz OutputBufferingIndentSniff
 - Errors now thrown for all missing member variable comments in Squiz VariableCommentSniff
 
-## [0.4.0] - 2007-02-19
+## 0.4.0 - 2007-02-19
 ### Changed
 - Standard name specified with --standard command line argument is no longer case sensitive
 - Long error and warning messages are now wrapped to 80 characters in the full error report (thanks Endre Czirbesz)
@@ -5166,7 +5166,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed incorrect errors for arrays that only contain other arrays in Squiz ArrayDeclarationSniff
 - Fixed bug #9844 : throw new Exception(\n accidentally reported as error but it ain't
 
-## [0.3.0] - 2007-01-11
+## 0.3.0 - 2007-01-11
 ### Changed
 - Updated package.xml to version 2
 - Specifying coding standard on command line is now optional, even if you have multiple standards installed
@@ -5191,11 +5191,11 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed bug #9274 : nested_parenthesis element not set for open and close parenthesis tokens
 - Fixed bug #9411 : too few pattern characters cause incorrect error report
 
-## [0.2.1] - 2006-11-09
+## 0.2.1 - 2006-11-09
 ### Fixed
 - Fixed bug #9274 : nested_parenthesis element not set for open and close parenthesis tokens
 
-## [0.2.0] - 2006-10-13
+## 0.2.0 - 2006-10-13
 ### Changed
 - Added a generic standards package that will contain generic sniffs to be used in specific coding standards
     - thanks to Frederic Poeydomenge for the idea
@@ -5220,7 +5220,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Fixed bug #8841 : comments taken as whitespace
 - Fixed bug #8884 : another problem with nested switch() statements
 
-## [0.1.1] - 2006-09-25
+## 0.1.1 - 2006-09-25
 ### Changed
 - Added unit tests for all PEAR sniffs
 - Exception class now extends from PEAR_Exception
@@ -5228,17 +5228,17 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 ### Fixed
 - Fixed summary report so files without errors but with warnings are not shown when warnings are hidden
 
-## [0.1.0] - 2006-09-19
+## 0.1.0 - 2006-09-19
 ### Changed
 - Reorganised package contents to conform to PEAR standards
 - Changed version numbering to conform to PEAR standards
 - Removed duplicate require_once() of Exception.php from CodeSniffer.php
 
-## [0.0.5] - 2006-09-18
+## 0.0.5 - 2006-09-18
 ### Fixed
 - Fixed .bat file for situation where php.ini cannot be found so include_path is not set
 
-## [0.0.4] - 2006-08-28
+## 0.0.4 - 2006-08-28
 ### Changed
 - Added .bat file for easier running of PHP_CodeSniffer on Windows
 - Sniff that checks method names now works for PHP4 style code where there is no scope keyword
@@ -5256,7 +5256,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Sniff that checks spacing after commas in function calls no longer reports too many errors for some code
 - Sniff that checks control structure declarations now gives more descriptive error message
 
-## [0.0.3] - 2006-08-22
+## 0.0.3 - 2006-08-22
 ### Changed
 - Added sniff to check for invalid class and interface names
 - Added sniff to check for invalid function and method names
@@ -5267,7 +5267,7 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 ### Fixed
 - Fixed error where comments were not allowed on the same line as a control structure declaration
 
-## [0.0.2] - 2006-07-25
+## 0.0.2 - 2006-07-25
 ### Changed
 - Removed the including of checked files to stop errors caused by parsing them
 - Removed the use of reflection so checked files do not have to be included
@@ -5284,6 +5284,6 @@ Props also to Dan Wallis (@fredden) and Danny van der Sluijs (@DannyvdSluijs) fo
 - Reordered command line args to put switches first (although order is not enforced)
 - Switches can now be specified together (eg. php -nv) as well as separately (phpcs -n -v)
 
-## [0.0.1] - 2006-07-19
+## 0.0.1 - 2006-07-19
 ### Added
 - Initial preview release
