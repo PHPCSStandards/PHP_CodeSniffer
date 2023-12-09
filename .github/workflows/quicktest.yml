@@ -54,7 +54,7 @@ jobs:
         run: php bin/phpcs --config-set php_path php
 
       - name: 'PHPUnit: run the tests'
-        run: vendor/bin/phpunit tests/AllTests.php
+        run: vendor/bin/phpunit tests/AllTests.php --no-coverage
 
       # Note: The code style check is run as an integration test.
       - name: 'PHPCS: check code style without cache, no parallel'
