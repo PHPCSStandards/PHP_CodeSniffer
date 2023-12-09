@@ -111,11 +111,13 @@ jobs:
 
       # This action also handles the caching of the dependencies.
       - name: Set up node
+        if: ${{ matrix.custom_ini == false }}
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
       - name: Install external tools used in tests
+        if: ${{ matrix.custom_ini == false }}
         run: >
           npm install -g --fund false
           csslint
