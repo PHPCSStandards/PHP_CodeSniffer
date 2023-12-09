@@ -75,7 +75,14 @@ jobs:
         custom_ini: [false]
 
         include:
-          # Builds running the basic tests with different PHP ini settings.
+          # Skip test runs on builds which are also run for in the coverage job.
+          # Note: the tests on PHP 8.0 will still be run as the coverage build uses custom_ini for that version.
+          - php: '7.2'
+            skip_tests: true
+          - php: '8.3'
+            skip_tests: true
+
+          # Extra builds running only the unit tests with different PHP ini settings.
           - php: '7.4'
             custom_ini: true
 
@@ -119,8 +126,9 @@ jobs:
       - name: 'PHPCS: set the path to PHP'
         run: php bin/phpcs --config-set php_path php
 
-      - name: 'PHPUnit: run the tests'
-        run: vendor/bin/phpunit
+      - name: 'PHPUnit: run the tests without code coverage'
+        if: ${{ matrix.skip_tests != true }}
+        run: vendor/bin/phpunit --no-coverage
 
       - name: 'PHPCS: check code style without cache, no parallel'
         if: ${{ matrix.custom_ini == false && matrix.php != '7.4' }}
@@ -145,3 +153,75 @@ jobs:
       - name: 'PHPCS: check code style using the Phar file'
         if: ${{ matrix.custom_ini  == false }}
         run: php phpcs.phar
+
+  coverage:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        include:
+          - php: '7.2'
+            custom_ini: false
+          - php: '8.0'
+            custom_ini: true
+          - php: '8.3'
+            custom_ini: false
+
+    name: "Coverage: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }}"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup ini config
+        id: set_ini
+        run: |
+          # Set the "short_open_tag" ini to make sure specific conditions are tested.
+          # Also turn on error_reporting to ensure all notices are shown.
+          if [[ ${{ matrix.custom_ini }} == true ]]; then
+            echo 'PHP_INI=error_reporting=-1, display_errors=On, date.timezone=Australia/Sydney, short_open_tag=On' >> $GITHUB_OUTPUT
+          else
+            echo 'PHP_INI=error_reporting=-1, display_errors=On' >> $GITHUB_OUTPUT
+          fi
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          ini-values: ${{ steps.set_ini.outputs.PHP_INI }}
+          coverage: xdebug
+
+      # Install dependencies and handle caching in one go.
+      # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
+      - name: Install Composer dependencies
+        uses: "ramsey/composer-install@v2"
+        with:
+          # Bust the cache at least once a month - output format: YYYY-MM.
+          custom-cache-suffix: $(date -u "+%Y-%m")
+
+      - name: 'PHPCS: set the path to PHP'
+        run: php bin/phpcs --config-set php_path php
+
+      - name: 'PHPUnit: run the tests with code coverage'
+        run: vendor/bin/phpunit
+
+      - name: Upload coverage results to Coveralls
+        if: ${{ success() }}
+        uses: coverallsapp/github-action@v2
+        with:
+          format: clover
+          file: build/logs/clover.xml
+          flag-name: php-${{ matrix.php }}-custom-ini-${{ matrix.custom_ini }}
+          parallel: true
+
+  coveralls-finish:
+    needs: coverage
+    if: always() && needs.coverage.result == 'success'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@v2
+        with:
+          parallel-finished: true
