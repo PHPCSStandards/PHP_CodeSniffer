@@ -12,6 +12,11 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Debug;
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 use PHP_CodeSniffer\Config;
 
+/**
+ * Unit test class for the JSLint sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Debug\JSLintSniff
+ */
 class JSLintUnitTest extends AbstractSniffUnitTest
 {
 

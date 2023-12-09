@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Strings;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the UnnecessaryStringConcat sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Strings\UnnecessaryStringConcatSniff
+ */
 class UnnecessaryStringConcatUnitTest extends AbstractSniffUnitTest
 {
 

@@ -10,6 +10,11 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\NamingConventions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the TraitNameSuffix sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\TraitNameSuffixSniff
+ */
 class TraitNameSuffixUnitTest extends AbstractSniffUnitTest
 {
 

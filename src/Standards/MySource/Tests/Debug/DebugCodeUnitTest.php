@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\MySource\Tests\Debug;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the DebugCode sniff.
+ *
+ * @covers PHP_CodeSniffer\Standards\MySource\Sniffs\Debug\DebugCodeSniff
+ */
 class DebugCodeUnitTest extends AbstractSniffUnitTest
 {
 

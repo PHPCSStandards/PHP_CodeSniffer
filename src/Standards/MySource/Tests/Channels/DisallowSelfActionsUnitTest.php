@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\MySource\Tests\Channels;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the DisallowSelfActions sniff.
+ *
+ * @covers PHP_CodeSniffer\Standards\MySource\Sniffs\Channels\DisallowSelfActionsSniff
+ */
 class DisallowSelfActionsUnitTest extends AbstractSniffUnitTest
 {
 

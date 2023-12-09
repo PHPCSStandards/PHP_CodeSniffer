@@ -13,6 +13,11 @@ use PHP_CodeSniffer\Config;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
+/**
+ * Tests for the \PHP_CodeSniffer\Config reportWidth value.
+ *
+ * @covers \PHP_CodeSniffer\Config::__get
+ */
 class ReportWidthTest extends TestCase
 {
 
@@ -76,6 +81,9 @@ class ReportWidthTest extends TestCase
     /**
      * Test that report width without overrules will always be set to a non-0 positive integer.
      *
+     * @covers \PHP_CodeSniffer\Config::__set
+     * @covers \PHP_CodeSniffer\Config::restoreDefaults
+     *
      * @return void
      */
     public function testReportWidthDefault()
@@ -91,6 +99,9 @@ class ReportWidthTest extends TestCase
 
     /**
      * Test that the report width will be set to a non-0 positive integer when not found in the CodeSniffer.conf file.
+     *
+     * @covers \PHP_CodeSniffer\Config::__set
+     * @covers \PHP_CodeSniffer\Config::restoreDefaults
      *
      * @return void
      */
@@ -115,6 +126,10 @@ class ReportWidthTest extends TestCase
     /**
      * Test that the report width will be set correctly when found in the CodeSniffer.conf file.
      *
+     * @covers \PHP_CodeSniffer\Config::__set
+     * @covers \PHP_CodeSniffer\Config::getConfigData
+     * @covers \PHP_CodeSniffer\Config::restoreDefaults
+     *
      * @return void
      */
     public function testReportWidthCanBeSetFromConfFile()
@@ -135,6 +150,9 @@ class ReportWidthTest extends TestCase
     /**
      * Test that the report width will be set correctly when passed as a CLI argument.
      *
+     * @covers \PHP_CodeSniffer\Config::__set
+     * @covers \PHP_CodeSniffer\Config::processLongArgument
+     *
      * @return void
      */
     public function testReportWidthCanBeSetFromCLI()
@@ -152,6 +170,9 @@ class ReportWidthTest extends TestCase
 
     /**
      * Test that the report width will be set correctly when multiple report widths are passed on the CLI.
+     *
+     * @covers \PHP_CodeSniffer\Config::__set
+     * @covers \PHP_CodeSniffer\Config::processLongArgument
      *
      * @return void
      */
@@ -171,6 +192,10 @@ class ReportWidthTest extends TestCase
 
     /**
      * Test that a report width passed as a CLI argument will overrule a report width set in a CodeSniffer.conf file.
+     *
+     * @covers \PHP_CodeSniffer\Config::__set
+     * @covers \PHP_CodeSniffer\Config::processLongArgument
+     * @covers \PHP_CodeSniffer\Config::getConfigData
      *
      * @return void
      */
@@ -200,6 +225,8 @@ class ReportWidthTest extends TestCase
     /**
      * Test that the report width will be set to a non-0 positive integer when set to "auto".
      *
+     * @covers \PHP_CodeSniffer\Config::__set
+     *
      * @return void
      */
     public function testReportWidthInputHandlingForAuto()
@@ -221,6 +248,7 @@ class ReportWidthTest extends TestCase
      * @param int   $expected Expected report width.
      *
      * @dataProvider dataReportWidthInputHandling
+     * @covers       \PHP_CodeSniffer\Config::__set
      *
      * @return void
      */

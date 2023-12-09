@@ -283,6 +283,9 @@ class DefaultKeywordTest extends AbstractMethodUnitTest
      *
      * @link https://github.com/squizlabs/PHP_CodeSniffer/issues/3326
      *
+     * @covers PHP_CodeSniffer\Tokenizers\PHP::tokenize
+     * @covers PHP_CodeSniffer\Tokenizers\Tokenizer::recurseScopeMap
+     *
      * @return void
      */
     public function testIssue3326()

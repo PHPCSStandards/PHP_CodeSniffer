@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\PSR12\Tests\Files;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the ImportStatement sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Files\ImportStatementSniff
+ */
 class ImportStatementUnitTest extends AbstractSniffUnitTest
 {
 

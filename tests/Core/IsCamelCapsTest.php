@@ -12,6 +12,11 @@ namespace PHP_CodeSniffer\Tests\Core;
 use PHP_CodeSniffer\Util\Common;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests for the \PHP_CodeSniffer\Util\Common::isCamelCaps method.
+ *
+ * @covers \PHP_CodeSniffer\Util\Common::isCamelCaps
+ */
 class IsCamelCapsTest extends TestCase
 {
 

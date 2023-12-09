@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Zend\Tests\Files;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the ClosingTag sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Zend\Sniffs\Files\ClosingTagSniff
+ */
 class ClosingTagUnitTest extends AbstractSniffUnitTest
 {
 

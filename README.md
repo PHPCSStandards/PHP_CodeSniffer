@@ -6,6 +6,7 @@ PHP_CodeSniffer
 [![Latest Stable Version](http://poser.pugx.org/phpcsstandards/php_codesniffer/v)](https://github.com/PHPCSStandards/PHP_CodeSniffer/releases)
 [![Validate](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/validate.yml/badge.svg?branch=master)](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/validate.yml)
 [![Test](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/test.yml)
+[![Coverage Status](https://coveralls.io/repos/github/PHPCSStandards/PHP_CodeSniffer/badge.svg?branch=master)](https://coveralls.io/github/PHPCSStandards/PHP_CodeSniffer?branch=master)
 [![License](http://poser.pugx.org/phpcsstandards/php_codesniffer/license)](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt)
 
 ![Minimum PHP Version](https://img.shields.io/packagist/php-v/squizlabs/php_codesniffer.svg?maxAge=3600)

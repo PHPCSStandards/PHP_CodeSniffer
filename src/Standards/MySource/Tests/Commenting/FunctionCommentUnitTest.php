@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\MySource\Tests\Commenting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the FunctionComment sniff.
+ *
+ * @covers PHP_CodeSniffer\Standards\MySource\Sniffs\Commenting\FunctionCommentSniff
+ */
 class FunctionCommentUnitTest extends AbstractSniffUnitTest
 {
 

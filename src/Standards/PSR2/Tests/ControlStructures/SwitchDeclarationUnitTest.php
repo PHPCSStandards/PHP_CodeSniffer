@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\PSR2\Tests\ControlStructures;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the SwitchDeclaration sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR2\Sniffs\ControlStructures\SwitchDeclarationSniff
+ */
 class SwitchDeclarationUnitTest extends AbstractSniffUnitTest
 {
 

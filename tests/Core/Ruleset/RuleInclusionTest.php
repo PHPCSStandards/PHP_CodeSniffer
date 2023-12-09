@@ -14,6 +14,11 @@ use PHP_CodeSniffer\Ruleset;
 use PHPUnit\Framework\TestCase;
 use ReflectionObject;
 
+/**
+ * Tests for the \PHP_CodeSniffer\Ruleset class.
+ *
+ * @covers \PHP_CodeSniffer\Ruleset
+ */
 class RuleInclusionTest extends TestCase
 {
 

@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\MySource\Tests\Strings;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the JoinStrings sniff.
+ *
+ * @covers PHP_CodeSniffer\Standards\MySource\Sniffs\Strings\JoinStringsSniff
+ */
 class JoinStringsUnitTest extends AbstractSniffUnitTest
 {
 

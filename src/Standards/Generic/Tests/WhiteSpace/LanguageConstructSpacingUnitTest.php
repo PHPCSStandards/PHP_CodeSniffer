@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\WhiteSpace;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the LanguageConstructSpacing sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\LanguageConstructSpacingSniff
+ */
 class LanguageConstructSpacingUnitTest extends AbstractSniffUnitTest
 {
 

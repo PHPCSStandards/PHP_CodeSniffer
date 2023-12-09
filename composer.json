@@ -62,6 +62,10 @@
             "Composer\\Config::disableProcessTimeout",
             "@php ./vendor/phpunit/phpunit/phpunit tests/AllTests.php -d max_execution_time=0"
         ],
+        "coverage-local": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php ./vendor/phpunit/phpunit/phpunit tests/AllTests.php --coverage-html ./build/coverage-html -d max_execution_time=0"
+        ],
         "build": [
             "Composer\\Config::disableProcessTimeout",
             "@php -d phar.readonly=0 -f ./scripts/build-phar.php"
@@ -76,6 +80,7 @@
         "cbf": "Fix code style violations.",
         "test": "Run the unit tests without code coverage.",
         "coverage": "Run the unit tests with code coverage.",
+        "coverage-local": "Run the unit tests with code coverage and generate an HTML report in a 'build' directory.",
         "build": "Create PHAR files for PHPCS and PHPCBF.",
         "check-all": "Run all checks (phpcs, tests)."
     }

@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\MySource\Tests\Objects;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the CreateWidgetTypeCallback sniff.
+ *
+ * @covers PHP_CodeSniffer\Standards\MySource\Sniffs\Objects\CreateWidgetTypeCallbackSniff
+ */
 class CreateWidgetTypeCallbackUnitTest extends AbstractSniffUnitTest
 {
 

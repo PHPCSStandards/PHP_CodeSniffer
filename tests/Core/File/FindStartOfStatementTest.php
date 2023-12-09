@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Tests\Core\File;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 
+/**
+ * Tests for the \PHP_CodeSniffer\Files\File:findStartOfStatement method.
+ *
+ * @covers \PHP_CodeSniffer\Files\File::findStartOfStatement
+ */
 class FindStartOfStatementTest extends AbstractMethodUnitTest
 {
 

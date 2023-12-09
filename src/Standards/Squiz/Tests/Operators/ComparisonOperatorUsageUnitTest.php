@@ -11,6 +11,11 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Operators;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the ComparisonOperatorUsage sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Operators\ComparisonOperatorUsageSniff
+ */
 class ComparisonOperatorUsageUnitTest extends AbstractSniffUnitTest
 {
 
