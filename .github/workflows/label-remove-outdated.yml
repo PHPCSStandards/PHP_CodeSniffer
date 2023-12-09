@@ -39,6 +39,7 @@ jobs:
           labels: |
             Status: awaiting feedback
             Status: close candidate
+            Status: has merge conflict
             Status: needs investigation
             Status: triage
 
