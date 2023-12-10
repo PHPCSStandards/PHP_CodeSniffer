@@ -115,56 +115,49 @@ class Full implements Report
         // The maximum amount of space an error message can use.
         $maxErrorSpace = ($width - $paddingLength - 1);
 
+        $beforeMsg = '';
+        $afterMsg  = '';
         if ($showSources === true) {
             $beforeMsg = "\033[1m";
             $afterMsg  = "\033[0m";
-        } else {
-            $beforeMsg = '';
-            $afterMsg  = '';
         }
 
         foreach ($report['messages'] as $line => $lineErrors) {
             foreach ($lineErrors as $column => $colErrors) {
                 foreach ($colErrors as $error) {
-                    $message  = $error['message'];
-                    $msgLines = [$message];
-                    if (strpos($message, "\n") !== false) {
-                        $msgLines = explode("\n", $message);
-                    }
+                    $errorMsg = wordwrap(
+                        $error['message'],
+                        $maxErrorSpace
+                    );
 
-                    $errorMsg = '';
-                    $lastLine = (count($msgLines) - 1);
-                    foreach ($msgLines as $k => $msgLine) {
-                        if ($k === 0) {
-                            $errorMsg .= $beforeMsg;
+                    // Add the padding _after_ the wordwrap as the message itself may contain line breaks
+                    // and those lines will also need to receive padding.
+                    $errorMsg = str_replace("\n", $afterMsg.PHP_EOL.$paddingLine2.$beforeMsg, $errorMsg);
+                    $errorMsg = $beforeMsg.$errorMsg.$afterMsg;
+
+                    if ($showSources === true) {
+                        $lastMsg          = $errorMsg;
+                        $startPosLastLine = strrpos($errorMsg, $paddingLine2.$beforeMsg);
+                        if ($startPosLastLine !== false) {
+                            // Message is multiline.
+                            $lastMsg = substr($errorMsg, ($startPosLastLine + strlen($paddingLine2.$beforeMsg)));
+                        }
+
+                        // When show sources is used, the message itself will be bolded, so we need to correct the length.
+                        $sourceSuffix = '('.$error['source'].')';
+
+                        $lastMsgPlusSourceLength = strlen($lastMsg);
+                        // Add space + source suffix length.
+                        $lastMsgPlusSourceLength += (1 + strlen($sourceSuffix));
+                        // Correct for the color codes.
+                        $lastMsgPlusSourceLength -= 8;
+
+                        if ($lastMsgPlusSourceLength > $maxErrorSpace) {
+                            $errorMsg .= PHP_EOL.$paddingLine2.$sourceSuffix;
                         } else {
-                            $errorMsg .= $afterMsg.PHP_EOL.$paddingLine2.$beforeMsg;
+                            $errorMsg .= ' '.$sourceSuffix;
                         }
-
-                        $wrappedLines = wordwrap(
-                            $msgLine,
-                            $maxErrorSpace,
-                            $afterMsg.PHP_EOL.$paddingLine2.$beforeMsg
-                        );
-                        $errorMsg    .= $wrappedLines;
-
-                        if ($k === $lastLine) {
-                            $errorMsg .= $afterMsg;
-                            if ($showSources === true) {
-                                $lastLineLength = strlen($wrappedLines);
-                                $lastNewlinePos = strrpos($wrappedLines, PHP_EOL);
-                                if ($lastNewlinePos !== false) {
-                                    $lastLineLength -= ($lastNewlinePos + strlen(PHP_EOL.$paddingLine2.$beforeMsg));
-                                }
-
-                                if (($lastLineLength + strlen($error['source']) + 3) > $maxErrorSpace) {
-                                    $errorMsg .= PHP_EOL.$paddingLine2.'('.$error['source'].')';
-                                } else {
-                                    $errorMsg .= ' ('.$error['source'].')';
-                                }
-                            }
-                        }
-                    }//end foreach
+                    }//end if
 
                     // The padding that goes on the front of the line.
                     $padding = ($maxLineNumLength - strlen($line));
