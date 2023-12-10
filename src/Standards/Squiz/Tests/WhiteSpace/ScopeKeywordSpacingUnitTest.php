@@ -58,6 +58,9 @@ class ScopeKeywordSpacingUnitTest extends AbstractSniffUnitTest
                 140 => 3,
             ];
 
+        case 'ScopeKeywordSpacingUnitTest.3.inc':
+            return [6 => 1];
+
         default:
             return [];
         }//end switch
