@@ -63,15 +63,28 @@ class Full implements Report
         foreach ($report['messages'] as $line => $lineErrors) {
             foreach ($lineErrors as $column => $colErrors) {
                 foreach ($colErrors as $error) {
-                    $length = strlen($error['message']);
+                    // Start with the presumption of a single line error message.
+                    $length    = strlen($error['message']);
+                    $srcLength = (strlen($error['source']) + 3);
                     if ($showSources === true) {
-                        $length += (strlen($error['source']) + 3);
+                        $length += $srcLength;
+                    }
+
+                    // ... but also handle multi-line messages correctly.
+                    if (strpos($error['message'], "\n") !== false) {
+                        $errorLines = explode("\n", $error['message']);
+                        $length     = max(array_map('strlen', $errorLines));
+
+                        if ($showSources === true) {
+                            $lastLine = array_pop($errorLines);
+                            $length   = max($length, (strlen($lastLine) + $srcLength));
+                        }
                     }
 
                     $maxErrorLength = max($maxErrorLength, ($length + 1));
-                }
-            }
-        }
+                }//end foreach
+            }//end foreach
+        }//end foreach
 
         $file       = $report['filename'];
         $fileLength = strlen($file);
