@@ -95,9 +95,9 @@ public static function fCreate($attributes = []): ?static
 }
 
 // Also account for static used within union types.
-public function fCreate($attributes = []): object|static
-{
-}
+public function staticLast($attributes = []): object|static {}
+public function staticMiddle(): string|static|object {}
+public function staticFirst(): static|object {}
 
 // Ensure that static as a scope keyword when preceeded by a colon which is not for a type declaration is still handled.
 $callback = $cond ? get_fn_name() : static  function ($a) { return $a * 10; };
