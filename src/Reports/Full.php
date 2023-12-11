@@ -122,6 +122,8 @@ class Full implements Report
             $afterMsg  = "\033[0m";
         }
 
+        $beforeAfterLength = strlen($beforeMsg.$afterMsg);
+
         foreach ($report['messages'] as $line => $lineErrors) {
             foreach ($lineErrors as $column => $colErrors) {
                 foreach ($colErrors as $error) {
@@ -150,7 +152,7 @@ class Full implements Report
                         // Add space + source suffix length.
                         $lastMsgPlusSourceLength += (1 + strlen($sourceSuffix));
                         // Correct for the color codes.
-                        $lastMsgPlusSourceLength -= 8;
+                        $lastMsgPlusSourceLength -= $beforeAfterLength;
 
                         if ($lastMsgPlusSourceLength > $maxErrorSpace) {
                             $errorMsg .= PHP_EOL.$paddingLine2.$sourceSuffix;
