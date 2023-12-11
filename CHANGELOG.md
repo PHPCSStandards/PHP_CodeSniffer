@@ -108,6 +108,53 @@ The file documents changes to the PHP_CodeSniffer project.
 _Nothing yet._
 
 
+## [3.8.1] - 2024-01-11
+
+### Added
+- Documentation has been added for the following sniffs:
+    - Generic.CodeAnalysis.EmptyPHPStatement
+    - Generic.Formatting.SpaceBeforeCast
+    - Generic.PHP.Syntax
+    - Generic.WhiteSpace.LanguageConstructSpacing
+    - PSR12.Classes.ClosingBrace
+    - PSR12.Classes.OpeningBraceSpace
+    - PSR12.ControlStructures.BooleanOperatorPlacement
+    - PSR12.Files.OpenTag
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] and [Denis Å½oljom][@dingo-d] for the patches
+
+### Changed
+- GitHub releases will now always only contain unversioned release assets (PHARS + asc files) (same as it previously was in the squizlabs repo). See [#205] for context.
+    - Thanks to [Shivam Mathur][@shivammathur] for opening a discussion about this
+- Various housekeeping, includes improvements to the tests and documentation
+    - Thanks to [Dan Wallis][@fredden], [Lucas Hoffmann][@lucc], [Rodrigo Primo][@rodrigoprimo] and [Juliette Reinders Folmer][@jrfnl] for their contributions
+
+### Fixed
+- Fixed bug [#124] : Report Full : avoid unnecessarily wrapping lines when `-s` is used
+    - Thanks to [Brad Jorsch][@anomiex] for the patch
+- Fixed bug [#124] : Report Full : fix incorrect bolding of pipes when `-s` is used and messages wraps
+    - Thanks to [Brad Jorsch][@anomiex] for the patch
+- Fixed bug [#150] : Squiz.WhiteSpace.KeywordSpacing : prevent a PHP notice when run during live coding
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#154] : Report Full : delimiter line calculation could go wonky on wide screens when a report contains multi-line messages
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#178] : Squiz.Commenting.VariableComment : docblocks were incorrectly being flagged as missing when a property declaration used PHP native union/intersection type declarations
+    - Thanks to [Ferdinand Kuhl][@fcool] for the patch
+- Fixed bug [#211] : Squiz.Commenting.VariableComment : docblocks were incorrectly being flagged as missing when a property declaration used PHP 8.2+ stand-alone `true`/`false`/`null` type declarations
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#211] : Squiz.Commenting.VariableComment : docblocks were incorrectly being flagged as missing when a property declaration used PHP native `parent`, `self` or a namespace relative class name type declaration
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#226] : Generic.CodeAnalysis.ForLoopShouldBeWhileLoop : prevent a potential PHP 8.3 deprecation notice during live coding
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch
+
+[#124]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/124
+[#150]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/150
+[#154]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/154
+[#178]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/178
+[#205]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/205
+[#211]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/211
+[#226]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/226
+
+
 ## [3.8.0] - 2023-12-08
 
 [Squizlabs/PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) is dead. Long live [PHPCSStandards/PHP_CodeSniffer](https://github.com/PHPCSStandards/PHP_CodeSniffer)!
@@ -801,9 +848,9 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - The cache is no longer used if the list of loaded PHP extensions changes
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - `Generic.NamingConventions.CamelCapsFunctionName` no longer reports `__serialize` and `__unserialize` as invalid names
-    - Thanks to [Filip Å][@filips123]  for the patch
+    - Thanks to [Filip Å ][@filips123] for the patch
 - `PEAR.NamingConventions.ValidFunctionName` no longer reports `__serialize` and `__unserialize` as invalid names
-    - Thanks to [Filip Å][@filips123]  for the patch
+    - Thanks to [Filip Å ][@filips123] for the patch
 - `Squiz.Scope.StaticThisUsage` now detects usage of `$this` inside closures and arrow functions
     - Thanks to [MichaÅ‚ Bundyra][@michalbundyra] for the patch
 
@@ -5448,6 +5495,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 -->
 
 [Unreleased]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/master...HEAD
+[3.8.1]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.8.0...3.8.1
 [3.8.0]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.7.2...3.8.0
 [3.7.2]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.7.1...3.7.2
 [3.7.1]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.7.0...3.7.1
@@ -5557,6 +5605,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@AndrewDawes]:         https://github.com/AndrewDawes
 [@andygrunwald]:        https://github.com/andygrunwald
 [@annechko]:            https://github.com/annechko
+[@anomiex]:             https://github.com/anomiex
 [@arnested]:            https://github.com/arnested
 [@asnyder]:             https://github.com/asnyder
 [@Astinus-Eberhard]:    https://github.com/Astinus-Eberhard
@@ -5592,6 +5641,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@derrabus]:            https://github.com/derrabus
 [@deviantintegral]:     https://github.com/deviantintegral
 [@dhensby]:             https://github.com/dhensby
+[@dingo-d]:             https://github.com/dingo-d
 [@dominics]:            https://github.com/dominics
 [@donatj]:              https://github.com/donatj
 [@dryabkov]:            https://github.com/dryabkov
@@ -5607,6 +5657,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@exussum12]:           https://github.com/exussum12
 [@fabacino]:            https://github.com/fabacino
 [@fabre-thibaud]:       https://github.com/fabre-thibaud
+[@fcool]:               https://github.com/fcool
 [@filips123]:           https://github.com/filips123
 [@Fischer-Bjoern]:      https://github.com/Fischer-Bjoern
 [@fonsecas72]:          https://github.com/fonsecas72
@@ -5655,6 +5706,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@legoktm]:             https://github.com/legoktm
 [@lmanzke]:             https://github.com/lmanzke
 [@localheinz]:          https://github.com/localheinz
+[@lucc]:                https://github.com/lucc
 [@MacDada]:             https://github.com/MacDada
 [@Majkl578]:            https://github.com/Majkl578
 [@manuelpichler]:       https://github.com/manuelpichler
@@ -5697,6 +5749,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@rhorber]:             https://github.com/rhorber
 [@rmccue]:              https://github.com/rmccue
 [@robocoder]:           https://github.com/robocoder
+[@rodrigoprimo]:        https://github.com/rodrigoprimo
 [@rogeriopradoj]:       https://github.com/rogeriopradoj
 [@rovangju]:            https://github.com/rovangju
 [@rvanvelzen]:          https://github.com/rvanvelzen
@@ -5708,6 +5761,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@sebastianbergmann]:   https://github.com/sebastianbergmann
 [@sertand]:             https://github.com/sertand
 [@shanethehat]:         https://github.com/shanethehat
+[@shivammathur]:        https://github.com/shivammathur
 [@simonsan]:            https://github.com/simonsan
 [@sjlangley]:           https://github.com/sjlangley
 [@sserbin]:             https://github.com/sserbin
