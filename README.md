@@ -46,6 +46,9 @@ php phpcs.phar -h
 php phpcbf.phar -h
 ```
 
+These Phars are signed with the official Release key for PHPCS with the
+fingerprint `95DE 904A B800 754A 11D8 0B60 5E6D DE99 8AB7 3B8E`.
+
 ### Composer
 If you use Composer, you can install PHP_CodeSniffer system-wide with the following command:
 ```bash
@@ -71,8 +74,8 @@ You will then be able to run PHP_CodeSniffer from the vendor bin directory:
 ### Phive
 If you use Phive, you can install PHP_CodeSniffer as a project tool using the following commands:
 ```bash
-phive install phpcs
-phive install phpcbf
+phive install --trust-gpg-keys 95DE904AB800754A11D80B605E6DDE998AB73B8E phpcs
+phive install --trust-gpg-keys 95DE904AB800754A11D80B605E6DDE998AB73B8E phpcbf
 ```
 You will then be able to run PHP_CodeSniffer from the `tools` directory:
 ```bash
