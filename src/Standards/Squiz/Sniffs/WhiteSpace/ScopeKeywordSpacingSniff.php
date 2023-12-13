@@ -128,7 +128,7 @@ class ScopeKeywordSpacingSniff implements Sniff
         if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
             $spacing = 0;
         } else {
-            if ($tokens[($stackPtr + 2)]['line'] !== $tokens[$stackPtr]['line']) {
+            if (isset($tokens[($stackPtr + 2)]) === true && $tokens[($stackPtr + 2)]['line'] !== $tokens[$stackPtr]['line']) {
                 $spacing = 'newline';
             } else {
                 $spacing = $tokens[($stackPtr + 1)]['length'];
