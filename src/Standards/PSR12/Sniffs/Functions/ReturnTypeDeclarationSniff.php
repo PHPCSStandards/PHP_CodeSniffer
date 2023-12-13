@@ -86,7 +86,7 @@ class ReturnTypeDeclarationSniff implements Sniff
         }
 
         $colon = $phpcsFile->findPrevious(T_COLON, $returnType);
-        if ($tokens[($colon - 1)]['code'] !== T_CLOSE_PARENTHESIS) {
+        if (isset($colon, $tokens[($colon - 1)]) === true && $tokens[($colon - 1)]['code'] !== T_CLOSE_PARENTHESIS) {
             $error = 'There must not be a space before the colon in a return type declaration';
             $prev  = $phpcsFile->findPrevious(T_WHITESPACE, ($colon - 1), null, true);
             if ($tokens[$prev]['code'] === T_CLOSE_PARENTHESIS) {
