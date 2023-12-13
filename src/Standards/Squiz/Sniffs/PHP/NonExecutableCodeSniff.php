@@ -109,7 +109,7 @@ class NonExecutableCodeSniff implements Sniff
             $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
             if ($tokens[$next]['code'] === T_SEMICOLON) {
                 $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
-                if ($tokens[$next]['code'] === T_CLOSE_CURLY_BRACKET) {
+                if ($tokens[$next]['code'] === T_CLOSE_CURLY_BRACKET && isset($tokens[$next]['scope_condition']) === true) {
                     // If this is the closing brace of a function
                     // then this return statement doesn't return anything
                     // and is not required anyway.
