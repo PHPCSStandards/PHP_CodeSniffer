@@ -8,23 +8,13 @@
         <code title="Valid: Single space before a cast operator.">
         <![CDATA[
 $integer =<em> </em>(int) $string;
+$c = $a .<em> </em>(string) $b;
         ]]>
         </code>
-        <code title="Invalid: No space before a cast operator.">
+        <code title="Invalid: No space or multiple spaces before a cast operator.">
         <![CDATA[
 $integer =<em></em>(int) $string;
-        ]]>
-        </code>
-    </code_comparison>
-    <code_comparison>
-        <code title="Valid: Single space before a cast operator.">
-        <![CDATA[
-$c = $a +<em> </em>(int) $b;
-        ]]>
-        </code>
-        <code title="Invalid: Multiple spaces before a cast operator.">
-        <![CDATA[
-$c = $a +<em>   </em>(int) $b;
+$c = $a .<em>   </em>(string) $b;
         ]]>
         </code>
     </code_comparison>
