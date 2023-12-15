@@ -4,17 +4,18 @@ class MyClass
     public static $var = null;
     protected $var = null;
 
-    public static $var = null;
-    protected $var = null;
+    public   static  $var = null;
+    protected  $var = null;
 
     private function myFunction() {}
     public static function myFunction() {}
 
-    private function myFunction() {}
-    public static function myFunction() {}
-    private static function myFunction() {}
+    private   function myFunction() {}
+    public  static function myFunction() {}
+    private static   function myFunction() {}
 
-    private static function myFunction() {}
+    private  static
+        function myFunction() {}
 
     public static function output()
     {
@@ -22,9 +23,11 @@ class MyClass
         static::bar();
     }
 
-    public static $var = null;
+    public static$var = null;
 
-    public static $var = null;
+    public
+    static
+    $var = null;
 }
 
 abstract class Foo
@@ -58,13 +61,15 @@ abstract class Foo
 
 class MyOtherClass
 {
-    public $varK = array( 'a', 'b' );
+    public
+        $varK = array( 'a', 'b' );
 
-    protected $varK,
+    protected    $varK,
         $varL,
         $varM;
 
-    protected static $varK, $varL, $varM;
+    protected static
+        $varK, $varL, $varM;
 
     private
         $varO = true,
@@ -90,19 +95,20 @@ public static function fCreate($attributes = []): ?static
 }
 
 // Also account for static used within union types.
-public function fCreate($attributes = []): object|static
-{
-}
+public function staticLast($attributes = []): object|static {}
+public function staticMiddle(): string|static|object {}
+public function staticFirst(): static|object {}
 
 // Ensure that static as a scope keyword when preceeded by a colon which is not for a type declaration is still handled.
-$callback = $cond ? get_fn_name() : static function ($a) { return $a * 10; };
+$callback = $cond ? get_fn_name() : static  function ($a) { return $a * 10; };
 
 class TypedProperties {
-    public int $var;
+    public
+        int $var;
 
     protected string $stringA, $stringB;
 
-    private bool
+    private   bool
         $boolA,
         $boolB;
 }
@@ -110,26 +116,26 @@ class TypedProperties {
 // PHP 8.0 constructor property promotion.
 class ConstructorPropertyPromotionTest {
     public function __construct(
-        public $x = 0.0,
+        public    $x = 0.0,
         protected $y = '',
-        private $z = null,
+        private   $z = null,
         $normalParam,
     ) {}
 }
 
 class ConstructorPropertyPromotionWithTypesTest {
-    public function __construct(protected float|int $x, public ?string &$y = 'test', private mixed $z) {}
+    public function __construct(protected   float|int $x, public?string &$y = 'test', private mixed $z) {}
 }
 
 // PHP 8.1 readonly keywords.
 class ReadonlyTest {
     public readonly int $publicReadonlyProperty;
 
-    protected readonly int $protectedReadonlyProperty;
+    protected    readonly    int $protectedReadonlyProperty;
 
     readonly protected int $protectedReadonlyProperty;
 
-    readonly private int $privateReadonlyProperty;
+    readonly   private   int $privateReadonlyProperty;
 
-    public function __construct(readonly protected float|int $x, public readonly ?string &$y = 'test') {}
+    public function __construct(readonly  protected  float|int $x, public readonly?string &$y = 'test') {}
 }
