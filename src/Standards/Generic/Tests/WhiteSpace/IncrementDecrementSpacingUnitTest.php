@@ -30,7 +30,7 @@ class IncrementDecrementSpacingUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='IncrementDecrementSpacingUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         $errors = [
             5  => 1,

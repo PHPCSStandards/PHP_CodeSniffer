@@ -30,7 +30,7 @@ class DisallowSizeFunctionsInLoopsUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='DisallowSizeFunctionsInLoopsUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'DisallowSizeFunctionsInLoopsUnitTest.inc':

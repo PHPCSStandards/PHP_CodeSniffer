@@ -30,7 +30,7 @@ class UnnecessaryStringConcatUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='UnnecessaryStringConcatUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'UnnecessaryStringConcatUnitTest.inc':

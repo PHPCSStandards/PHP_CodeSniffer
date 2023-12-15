@@ -30,7 +30,7 @@ class SwitchDeclarationUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='SwitchDeclarationUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'SwitchDeclarationUnitTest.inc':

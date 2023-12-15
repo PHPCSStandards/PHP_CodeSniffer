@@ -30,7 +30,7 @@ class FunctionOpeningBraceSpaceUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='FunctionOpeningBraceSpaceUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'FunctionOpeningBraceSpaceUnitTest.inc':

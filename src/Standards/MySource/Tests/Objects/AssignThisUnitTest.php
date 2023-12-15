@@ -30,7 +30,7 @@ class AssignThisUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='AssignThisUnitTest.js')
+    public function getErrorList($testFile='')
     {
         if ($testFile !== 'AssignThisUnitTest.js') {
             return [];

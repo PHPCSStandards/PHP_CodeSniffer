@@ -49,7 +49,7 @@ class DisallowSpaceIndentUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='DisallowSpaceIndentUnitTest.1.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'DisallowSpaceIndentUnitTest.1.inc':

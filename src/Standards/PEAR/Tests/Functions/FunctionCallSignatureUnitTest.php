@@ -30,7 +30,7 @@ class FunctionCallSignatureUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='FunctionCallSignatureUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         if ($testFile === 'FunctionCallSignatureUnitTest.js') {
             return [

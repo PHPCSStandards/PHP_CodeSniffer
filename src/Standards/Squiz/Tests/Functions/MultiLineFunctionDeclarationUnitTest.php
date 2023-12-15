@@ -30,7 +30,7 @@ class MultiLineFunctionDeclarationUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='MultiLineFunctionDeclarationUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         if ($testFile === 'MultiLineFunctionDeclarationUnitTest.inc') {
             $errors = [

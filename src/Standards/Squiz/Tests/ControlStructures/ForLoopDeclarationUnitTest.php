@@ -30,7 +30,7 @@ class ForLoopDeclarationUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='ForLoopDeclarationUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'ForLoopDeclarationUnitTest.inc':

@@ -30,7 +30,7 @@ class DocCommentAlignmentUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='DocCommentAlignmentUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         $errors = [
             3  => 1,

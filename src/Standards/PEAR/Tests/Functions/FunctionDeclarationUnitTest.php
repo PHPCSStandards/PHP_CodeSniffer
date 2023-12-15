@@ -30,7 +30,7 @@ class FunctionDeclarationUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='FunctionDeclarationUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         if ($testFile === 'FunctionDeclarationUnitTest.inc') {
             $errors = [

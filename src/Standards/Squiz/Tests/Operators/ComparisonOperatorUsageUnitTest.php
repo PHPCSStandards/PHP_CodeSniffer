@@ -30,7 +30,7 @@ class ComparisonOperatorUsageUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='ComparisonOperatorUsageUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'ComparisonOperatorUsageUnitTest.inc':

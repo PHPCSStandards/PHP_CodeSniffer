@@ -30,7 +30,7 @@ class LongConditionClosingCommentUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='LongConditionClosingCommentUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'LongConditionClosingCommentUnitTest.inc':
