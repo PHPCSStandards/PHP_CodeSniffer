@@ -1,0 +1,342 @@
+<documentation title="Anonymous Class Declaration">
+    <standard>
+    <![CDATA[
+    There should be exactly one space before and after a class keyword.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Single space before and after a class keyword.">
+        <![CDATA[
+$obj = new<em> </em>class<em> </em>{
+    // Class content.
+};
+        ]]>
+        </code>
+        <code title="Invalid: No space or multiple spaces before and after a class keyword.">
+        <![CDATA[
+$obj = new<em>   </em>class<em></em>{
+    // Class content.
+};
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There must be no spaces after opening parenthesis or before closing parenthesis of a single-line argument list.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: No space after opening parenthesis or before closing parenthesis.">
+        <![CDATA[
+$obj = new class (<em></em>$arg1, <em></em>$arg2, <em></em>$arg3) {
+    // Class content.
+};
+        ]]>
+        </code>
+        <code title="Invalid: Spaces after opening parenthesis or before closing parenthesis.">
+        <![CDATA[
+$obj = new class (<em>  </em>$arg1, <em></em>$arg2, $arg3<em>  </em>) {
+    // Class content.
+};
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    In the argument list, there must not be a space before each comma, and there must be a single space after each comma.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: No space before each comma, and one space after each comma.">
+        <![CDATA[
+$obj = new class ($arg1,<em> </em>$arg2,<em> </em>$arg3) {
+    // Class content.
+};
+        ]]>
+        </code>
+        <code title="Invalid: One or multiple spaces before comma, and no or multiple spaces after comma.">
+        <![CDATA[
+$obj = new class ($arg1<em>  </em>,<em></em>$arg2<em></em>,<em>   </em>$arg3) {
+    // Class content.
+};
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There must be only one parameter per line in a multi-line argument declaration.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: One parameter per line in a multi-line argument declaration.">
+        <![CDATA[
+$obj = new class (
+    <em>$arg1</em>,
+    <em>$arg2</em>,
+    <em>$arg3</em>
+) {
+    // Class content.
+};
+        ]]>
+        </code>
+        <code title="Invalid: Multiple parameters per line in a multi-line argument declaration.">
+        <![CDATA[
+$obj = new class (
+    <em>$arg1, $arg2,</em>
+    $arg3
+) {
+    // Class content.
+};
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    The closing parenthesis of a multi-line argument declaration must be on a new line.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Closing parenthesis of a multi-line argument declaration on a new line.">
+        <![CDATA[
+$obj = new class (
+    $arg1,
+    $arg2,
+    $arg3
+<em>)</em> {
+    // Class content.
+};
+        ]]>
+        </code>
+        <code title="Invalid: Closing parenthesis of a multi-line argument declaration not on a new line.">
+        <![CDATA[
+$obj = new class (
+    $arg1,
+    $arg2,
+    $arg3<em>)</em> {
+    // Class content.
+};
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There must be no blank lines in a multi-line argument declaration.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: No blank lines in a multi-line argument declaration.">
+        <![CDATA[
+$obj = new class (
+    $arg1,
+    $arg2,
+    $arg3
+) {
+    // Class content.
+};
+        ]]>
+        </code>
+        <code title="Invalid: Blank lines in a multi-line argument declaration.">
+        <![CDATA[
+$obj = new class (
+<em></em>
+        $arg1,
+<em></em>
+<em></em>
+        $arg2,
+        $arg3
+<em></em>
+    ) {
+        // Class content.
+    };
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    First parameter of a multi-line argument declaration must be on a line after the opening bracket.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: First parameter of a multi-line argument declaration on a line after the opening bracket.">
+        <![CDATA[
+$obj = new class (
+<em>    </em>$arg1,
+<em>    </em>$arg2,
+<em>    </em>$arg3
+) {
+    // Class content.
+};
+        ]]>
+        </code>
+        <code title="Invalid: First parameter of a multi-line argument declaration not on a line after the opening bracket.">
+        <![CDATA[
+$obj = new class (<em></em>$arg1,
+$arg2,
+$arg3
+) {
+    // Class content.
+};
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    Multi-line argument declaration must be indented correctly. Default indentation is 4 spaces.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Multi-line argument declaration indented correctly.">
+        <![CDATA[
+$obj = new class (
+<em>    </em>$arg1,
+<em>    </em>$arg2,
+<em>    </em>$arg3
+) {
+    // Class content.
+};
+        ]]>
+        </code>
+        <code title="Invalid: Multi-line argument declaration not indented correctly.">
+        <![CDATA[
+$obj = new class (
+<em></em>$arg1,
+<em>  </em>$arg2,
+<em> </em>$arg3
+) {
+    // Class content.
+};
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    Opening brace must not be preceded by a blank line.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Opening brace not preceded by a blank line.">
+        <![CDATA[
+$obj = new class ($arg1) <em>{</em>
+    // Class content.
+};
+        ]]>
+        </code>
+        <code title="Invalid: Opening brace preceded by a blank line.">
+        <![CDATA[
+$obj = new class ($arg1)
+<em></em>
+{
+    // Class content.
+};
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There must be only one space before the extends keyword. And the extends keyword must be on the same line as the class keyword.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: One space before the extends keyword, and on the same line as the class keyword.">
+        <![CDATA[
+$obj = new class<em> </em>extends Foo {
+    // Class content.
+};
+        ]]>
+        </code>
+        <code title="Invalid: No space or multiple spaces before the extends keyword. extends keyword on a separate line.">
+        <![CDATA[
+$obj = new class<em>   </em>extends Foo {
+    // Class content.
+};
+
+$obj = new class
+<em>      </em>extends Foo {
+    // Class content.
+};
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There must be only one space before the extending class name.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: One space before the extending class name.">
+        <![CDATA[
+$obj = new class extends<em> </em>Foo {
+    // Class content.
+};
+        ]]>
+        </code>
+        <code title="Invalid: Multiple spaces before the extending class name.">
+        <![CDATA[
+$obj = new class extends<em>   </em>Foo {
+    // Class content.
+};
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    The implements keyword must be on the same line as the class keyword, and the closing parenthesis, unless the list of implements interfaces does not wrap. If the list of interfaces wraps, the brace must be placed on the line immediately following hte last interface.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: implements keyword on the same line as the class keyword, and the closing parenthesis.">
+        <![CDATA[
+// Brace on the same line.
+$obj = new class implements Foo, Bar {
+    // Class content.
+};
+
+// Brace on the next line.
+$instance = new class extends Foo implements
+\ArrayAccess,
+\Countable,
+\Serializable
+<em>{</em>
+    // Class content.
+};
+        ]]>
+        </code>
+        <code title="Invalid: implements keyword not on the same line as the class keyword, and the closing parenthesis.">
+        <![CDATA[
+$obj = new class
+<em>     </em>implements Foo <em>{</em>
+    // Class content.
+};
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    Only one interface may be specified per line in a multi-line implements declaration, and the interfaces must be properly indented. Default indentation is 4 spaces.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Only one interface per line in a multi-line implements declaration, and properly indented.">
+        <![CDATA[
+$obj = new class implements
+<em>    </em>Foo,
+<em>    </em>Bar,
+<em>    </em>Baz
+{
+    // Class content.
+};
+        ]]>
+        </code>
+        <code title="Invalid: Multiple interfaces per line in a multi-line implements declaration, or not properly indented.">
+        <![CDATA[
+$obj = new class implements
+<em>Foo, Bar</em>,
+<em>        </em>Baz,
+<em> </em>Bat
+{
+    // Class content.
+};
+        ]]>
+        </code>
+    </code_comparison>
+</documentation>
