@@ -36,17 +36,17 @@ The [discussion forum](https://github.com/PHPCSStandards/PHP_CodeSniffer/discuss
 
 ## Contributing Without Writing Code
 
-### Issue Triage
+### Bug Triage
 
-We welcome issue triage.
+We welcome bug triage.
 
-Issue triage is the action of verifying a reported issue is reproducible and is actually an issue.
-This includes checking whether the issue is something which should be fixed in **_this_** repository.
+Bug triage is the action of verifying a reported bug is reproducible and is actually an issue.
+This includes checking whether the bug is something which should be fixed in **_this_** repository.
 
-To find issues which need triage, look for [issues without labels](https://github.com/PHPCSStandards/PHP_CodeSniffer/issues?q=is%3Aopen+is%3Aissue+no%3Alabel) or issues with the ["Status: triage"](https://github.com/PHPCSStandards/PHP_CodeSniffer/labels/Status%3A%20triage) label.
+To find bugs which need triage, look for issues and PRs with the ["Status: triage"](https://github.com/PHPCSStandards/PHP_CodeSniffer/labels/Status%3A%20triage) label.
 
-#### Typical issue triage tasks:
-* Verify whether the issue is reproducible with the given information.
+#### Typical bug triage tasks:
+* Verify whether the bug is reproducible with the given information.
 * Ask for additional information if it is not.
 * If you find the issue is reported to the wrong repo, ask the reporter to report it to the correct external standard repo and suggest closing the issue.
 
@@ -74,7 +74,7 @@ To get access to a PHPCS version which includes the patch from a pull request, y
 
 ### Writing sniff documentation
 
-Sniffs in PHP_CodeSniffer should preferably be accompanied by documentation. There is currently still a lot of documentation missing.
+Sniffs in PHP_CodeSniffer should preferably be accompanied by documentation. There is currently still a lot of [documentation missing](https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/148).
 
 Sniff documentation is provided via XML files in the standard's `Docs` directory and is available to end-users via the command-line and/or can be compiled into an HTML or Markdown file.
 
@@ -115,6 +115,31 @@ phpcs --standard=StandardName --generator=Text --sniffs=StandardName.Category.Sn
 ```
 
 Kind request to add only one new XML file per PR to make the PR easier to review.
+
+
+### Other tasks
+
+There are also tasks looking for contributions, which don't necessarily fall into the above categories.
+
+#### Issues marked with "Status: waiting for opinions"
+
+Proposals for new features, proposals for (structural) changes to PHP_CodeSniffer itself or to the contributor workflow, will initially be marked with the ["Status: waiting for opinions"](https://github.com/PHPCSStandards/PHP_CodeSniffer/labels/Status%3A%20waiting%20for%20opinions) label.
+
+This is an open invitation for interested parties to gather their thoughts about the issue and to leave their opinion.
+
+> Kind request: If you don't have something to add to the discussion, but do want to indicate a positive or negative opinion on a topic, please add an emoji on the original post instead of leaving a comment.
+
+#### Issues marked with "Status: needs investigation"
+
+Sometimes an issue has been identified, but it has not yet been pinpointed what the exact cause of the problem is.
+
+Other times, like with syntax changes in PHP itself, PHP_CodeSniffer _may_, or _may not_, handle them correctly and this will need verification.
+
+Issues like these will be marked with the ["Status: needs investigation"](https://github.com/PHPCSStandards/PHP_CodeSniffer/labels/Status%3A%20needs%20investigation) and investigating those can be a good way to learn more about the source code of PHP_CodeSniffer.
+
+#### Issues marked with "Status: help wanted"
+
+If you don't know where to start, having a browse through issues marked with the ["Status: help wanted"](https://github.com/PHPCSStandards/PHP_CodeSniffer/labels/Status%3A%20help%20wanted) and/or the ["Status: good first issue"](https://github.com/PHPCSStandards/PHP_CodeSniffer/labels/Status%3A%20good%20first%20issue) labels.
 
 
 ## Contributing With Code
