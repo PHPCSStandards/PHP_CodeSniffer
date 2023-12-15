@@ -30,7 +30,7 @@ class FirebugConsoleUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='FirebugConsoleUnitTest.js')
+    public function getErrorList($testFile='')
     {
         if ($testFile !== 'FirebugConsoleUnitTest.js') {
             return [];

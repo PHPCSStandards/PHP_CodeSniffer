@@ -30,7 +30,7 @@ class DisallowObjectStringIndexUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='DisallowObjectStringIndexUnitTest.js')
+    public function getErrorList($testFile='')
     {
         if ($testFile !== 'DisallowObjectStringIndexUnitTest.js') {
             return [];

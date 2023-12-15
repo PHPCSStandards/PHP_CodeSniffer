@@ -30,7 +30,7 @@ class JoinStringsUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='JoinStringsUnitTest.js')
+    public function getErrorList($testFile='')
     {
         if ($testFile !== 'JoinStringsUnitTest.js') {
             return [];

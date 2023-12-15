@@ -30,7 +30,7 @@ class MultiLineConditionUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='MultiLineConditionUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         $errors = [
             21  => 1,

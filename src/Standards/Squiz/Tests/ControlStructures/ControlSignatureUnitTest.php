@@ -30,7 +30,7 @@ class ControlSignatureUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='ControlSignatureUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         $errors = [
             7   => 1,

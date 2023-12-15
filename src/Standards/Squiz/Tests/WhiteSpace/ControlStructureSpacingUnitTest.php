@@ -30,7 +30,7 @@ class ControlStructureSpacingUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='ControlStructureSpacingUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'ControlStructureSpacingUnitTest.inc':

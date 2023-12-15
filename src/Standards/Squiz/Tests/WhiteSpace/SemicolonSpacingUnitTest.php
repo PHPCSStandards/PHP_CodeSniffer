@@ -30,7 +30,7 @@ class SemicolonSpacingUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='SemicolonSpacingUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'SemicolonSpacingUnitTest.inc':
