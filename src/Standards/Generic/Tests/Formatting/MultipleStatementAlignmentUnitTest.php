@@ -45,7 +45,7 @@ class MultipleStatementAlignmentUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='MultipleStatementAlignmentUnitTest.inc')
+    public function getWarningList($testFile='')
     {
         switch ($testFile) {
         case 'MultipleStatementAlignmentUnitTest.inc':

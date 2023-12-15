@@ -45,7 +45,7 @@ class CommentedOutCodeUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='CommentedOutCodeUnitTest.inc')
+    public function getWarningList($testFile='')
     {
         switch ($testFile) {
         case 'CommentedOutCodeUnitTest.inc':
