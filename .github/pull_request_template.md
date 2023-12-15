@@ -12,7 +12,10 @@ Describe your changes in detail and, if relevant, explain which choices you have
 
 
 ## Suggested changelog entry
-<!-- Please provide a short description of the change for the changelog. -->
+<!--
+Please provide a short description of the change for the changelog.
+This is only needed when this is an end-user, integrators or external standard maintainers facing change.
+-->
 
 
 ## Related issues/external references
