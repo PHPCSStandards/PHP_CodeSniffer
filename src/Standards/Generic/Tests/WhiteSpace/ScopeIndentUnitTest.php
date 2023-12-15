@@ -50,7 +50,7 @@ class ScopeIndentUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='ScopeIndentUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         if ($testFile === 'ScopeIndentUnitTest.3.inc') {
             return [
