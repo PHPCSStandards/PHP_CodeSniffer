@@ -1,0 +1,35 @@
+<documentation title="Closing Brace">
+    <standard>
+    <![CDATA[
+    Any closing brace must not be followed by any comment or statement on the same line.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: No content on the line with the closing brace.">
+        <![CDATA[
+class Foo
+{
+    // Class content.
+}<em></em>
+
+function bar()
+{
+    // Function content.
+}<em></em>
+        ]]>
+        </code>
+        <code title="Invalid: Content on the line with the closing brace.">
+        <![CDATA[
+interface Foo2
+{
+    // Interface content.
+} <em>echo 'Hello!';</em>
+
+function bar()
+{
+    // Function content.
+} <em>//end bar()</em>
+        ]]>
+        </code>
+    </code_comparison>
+</documentation>
