@@ -167,3 +167,8 @@ class NonArbitraryParenthesesWithKeywords {
         $d = new parent( $foo,$bar );
     }
 }
+
+// Test that the match expression does not trigger the sniff.
+$b = match (  $a  ) {
+    1 => true,
+};
