@@ -26,37 +26,45 @@ class LanguageConstructSpacingUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile='')
     {
-        return [
-            3  => 1,
-            7  => 1,
-            11 => 1,
-            15 => 1,
-            19 => 1,
-            23 => 1,
-            27 => 1,
-            30 => 1,
-            33 => 1,
-            34 => 1,
-            35 => 1,
-            36 => 1,
-            38 => 1,
-            44 => 1,
-            45 => 1,
-            46 => 2,
-            49 => 1,
-            51 => 1,
-            59 => 1,
-            61 => 1,
-            63 => 1,
-            67 => 1,
-            70 => 1,
-            71 => 1,
-            75 => 1,
-        ];
+        switch ($testFile) {
+        case 'LanguageConstructSpacingUnitTest.1.inc':
+            return [
+                3  => 1,
+                7  => 1,
+                11 => 1,
+                15 => 1,
+                19 => 1,
+                23 => 1,
+                27 => 1,
+                30 => 1,
+                33 => 1,
+                34 => 1,
+                35 => 1,
+                36 => 1,
+                38 => 1,
+                44 => 1,
+                45 => 1,
+                46 => 2,
+                49 => 1,
+                51 => 1,
+                59 => 1,
+                61 => 1,
+                63 => 1,
+                67 => 1,
+                70 => 1,
+                71 => 1,
+                75 => 1,
+            ];
+
+        default:
+            return [];
+        }//end switch
 
     }//end getErrorList()
 
