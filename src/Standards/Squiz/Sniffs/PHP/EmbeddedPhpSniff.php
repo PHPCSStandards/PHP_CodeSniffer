@@ -46,9 +46,9 @@ class EmbeddedPhpSniff implements Sniff
         // then we have an inline embedded PHP block.
         $closeTag = $phpcsFile->findNext(T_CLOSE_TAG, $stackPtr);
         if ($closeTag === false || $tokens[$stackPtr]['line'] !== $tokens[$closeTag]['line']) {
-            $this->validateMultilineEmbeddedPhp($phpcsFile, $stackPtr);
+            $this->validateMultilineEmbeddedPhp($phpcsFile, $stackPtr, $closeTag);
         } else {
-            $this->validateInlineEmbeddedPhp($phpcsFile, $stackPtr);
+            $this->validateInlineEmbeddedPhp($phpcsFile, $stackPtr, $closeTag);
         }
 
     }//end process()
@@ -57,13 +57,15 @@ class EmbeddedPhpSniff implements Sniff
     /**
      * Validates embedded PHP that exists on multiple lines.
      *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param int                         $stackPtr  The position of the current token in the
-     *                                               stack passed in $tokens.
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile  The file being scanned.
+     * @param int                         $stackPtr   The position of the current token in the
+     *                                                stack passed in $tokens.
+     * @param int|false                   $closingTag The position of the PHP close tag in the
+     *                                                stack passed in $tokens.
      *
      * @return void
      */
-    private function validateMultilineEmbeddedPhp($phpcsFile, $stackPtr)
+    private function validateMultilineEmbeddedPhp($phpcsFile, $stackPtr, $closingTag)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -74,7 +76,7 @@ class EmbeddedPhpSniff implements Sniff
         }
 
         $firstContent = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
-        $closingTag   = $phpcsFile->findNext(T_CLOSE_TAG, $stackPtr);
+
         if ($closingTag !== false) {
             $nextContent = $phpcsFile->findNext(T_WHITESPACE, ($closingTag + 1), $phpcsFile->numTokens, true);
             if ($nextContent === false) {
@@ -293,21 +295,15 @@ class EmbeddedPhpSniff implements Sniff
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int                         $stackPtr  The position of the current token in the
      *                                               stack passed in $tokens.
+     * @param int                         $closeTag  The position of the PHP close tag in the
+     *                                               stack passed in $tokens.
      *
      * @return void
      */
-    private function validateInlineEmbeddedPhp($phpcsFile, $stackPtr)
+    private function validateInlineEmbeddedPhp($phpcsFile, $stackPtr, $closeTag)
     {
         $tokens = $phpcsFile->getTokens();
 
-        // We only want one line PHP sections, so return if the closing tag is
-        // on the next line.
-        $closeTag = $phpcsFile->findNext(T_CLOSE_TAG, $stackPtr, null, false);
-        if ($tokens[$stackPtr]['line'] !== $tokens[$closeTag]['line']) {
-            return;
-        }
-
-        // Check that there is one, and only one space at the start of the statement.
         $firstContent = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), $closeTag, true);
 
         if ($firstContent === false) {
@@ -325,6 +321,7 @@ class EmbeddedPhpSniff implements Sniff
             return;
         }
 
+        // Check that there is one, and only one space at the start of the statement.
         // The open tag token always contains a single space after it.
         $leadingSpace = 1;
         if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
