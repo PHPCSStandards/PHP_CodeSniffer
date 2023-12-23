@@ -15,11 +15,11 @@
     <?php
     echo $moreBody;
     ?>
-    <?php  echo 'hi'; ?>
-    <?php  echo 'hi';   ?>
-    <?php echo 'hi;' ?>
-    <?php echo 'hi'; echo 'hi;'; ?>
-    <?php  echo 'hi'; echo 'hi;';   ?>
+    <?php  echo 'one'; ?>
+    <?php  echo 'two';   ?>
+    <?php echo 'three;' ?>
+    <?php echo 'fourA'; echo 'fourB;'; ?>
+    <?php  echo 'fiveA'; echo 'fiveB;';   ?>
 
     <?php
     ?>
@@ -27,18 +27,18 @@
 
     <?php
 
-        echo $moreBody;
+        echo $start - $indent + $end;
 
     ?>
     <?php
 
-    echo $moreBody;
+    echo $blankLines;
 
         ?>
 
     <?php
-    echo $moreBody; ?>
-    <?php echo $moreBody;
+    echo $closerNeedsOwnLine; ?>
+    <?php echo $openerNeedsOwnLine;
     ?>
 
             <?php
@@ -108,12 +108,12 @@ function foo()
 <?php if ($foo) { ?>
 <?php } ?>
 
-<?php echo 'oops'; // Something. ?>
-<?php echo 'oops'; // Something.      ?>
-<?php echo 'oops'; // Something.?>
+<?php echo 'okay'; // Something. ?>
+<?php echo 'too much space before close'; // Something.      ?>
+<?php echo 'no space before close'; // Something.?>
 
-<?php /* translators: My sites label */ ?>
-<?php /* translators: My sites label */?>
-<?php /* translators: My sites label */      ?>
+<?php /* translators: okay */ ?>
+<?php /* translators: no space before close */?>
+<?php /* translators: too much space before close */      ?>
 
-<?php echo 'oops'; // phpcs:ignore Standard.Category.Sniff -- reason. ?>
+<?php echo 'okay'; // phpcs:ignore Standard.Category.Sniff -- reason. ?>
