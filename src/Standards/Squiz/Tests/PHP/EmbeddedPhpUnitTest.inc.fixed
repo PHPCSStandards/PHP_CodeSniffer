@@ -117,3 +117,5 @@ function foo()
 <?php /* translators: too much space before close */ ?>
 
 <?php echo 'okay'; // phpcs:ignore Standard.Category.Sniff -- reason. ?>
+<?php echo 'too much space before close'; // phpcs:ignore Standard.Category.Sniff -- reason. ?>
+<?php echo 'no space before close'; // phpcs:ignore Standard.Category.Sniff -- reason. ?>
