@@ -262,6 +262,13 @@ class EmbeddedPhpSniff implements Sniff
                     }
                 }
 
+                if ($tokens[$firstContentAfterBlock]['code'] === T_OPEN_TAG) {
+                    // Next token is a PHP open tag which will also have thrown an error.
+                    // Prevent both fixers running in the same loop by making sure the token is "touched" during this loop.
+                    // This prevents a stray new line being added between the close and open tags.
+                    $phpcsFile->fixer->replaceToken($firstContentAfterBlock, $tokens[$firstContentAfterBlock]['content']);
+                }
+
                 $phpcsFile->fixer->endChangeset();
             }//end if
         }//end if

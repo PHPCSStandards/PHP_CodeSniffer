@@ -168,6 +168,19 @@ Make sure the "content after closer" fixer does not leave trailing space behind.
     echo $closerNeedsOwnLine;
     ?>  <?php echo $i; ?>
 
+<!--
+Make sure the fixer does not add stray new lines when there are consecutive PHP blocks.
+-->
+<?php
+    // Do something.
+    ?><?php
+    echo 'embedded';
+    ?>  <?php
+        echo 'embedded';
+    ?><?php
+echo 'embedded';
+    ?>
+
 <?php
 // This test case file MUST always end with an unclosed long open PHP tag (with this comment) to prevent
 // the tests running into the "last PHP closing tag excepted" condition breaking tests.
