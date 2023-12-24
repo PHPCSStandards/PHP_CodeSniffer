@@ -1,6 +1,6 @@
 <?php
     // Not embedded. Do not check here.
-    echo 'hello';
+    echo 'Long open tag test case file';
 ?>
 <html>
 <head>
