@@ -120,6 +120,31 @@ function foo()
 <?php echo 'too much space before close'; // phpcs:ignore Standard.Category.Sniff -- reason.    ?>
 <?php echo 'no space before close'; // phpcs:ignore Standard.Category.Sniff -- reason.?>
 
+<!--
+Make sure the empty tag set fixer removes the complete line, including indentation for an empty tag set and ensure
+that the fixer does not remove too many tokens, like new lines tokens _before_ the affected line
+or indentation if there is code _after_ the removed empty tag.
+-->
+        <div><?php ?></div>
+    <?php ?><?php echo $i; ?>
+
+
+        <?php ?>
+
+    <?php if (true) { ?><?php echo $i; ?>  <?php ?>  <?php } ?>
+
+        <div><?php
+        ?></div>
+    <?php
+    ?><?php echo $i; ?>
+
+
+    <?php
+    ?>
+
+    <?php if (true) { ?><?php echo $i; ?>  <?php
+    ?>  <?php } ?>
+
 <?php
 // This test case file MUST always end with an unclosed long open PHP tag (with this comment) to prevent
 // the tests running into the "last PHP closing tag excepted" condition breaking tests.

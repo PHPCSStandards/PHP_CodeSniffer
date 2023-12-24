@@ -21,7 +21,7 @@
     <?php echo 'fourA'; echo 'fourB;'; ?>
     <?php echo 'fiveA'; echo 'fiveB;'; ?>
 
-        
+
     <?php
     echo $start - $indent + $end;
     ?>
@@ -119,6 +119,25 @@ function foo()
 <?php echo 'okay'; // phpcs:ignore Standard.Category.Sniff -- reason. ?>
 <?php echo 'too much space before close'; // phpcs:ignore Standard.Category.Sniff -- reason. ?>
 <?php echo 'no space before close'; // phpcs:ignore Standard.Category.Sniff -- reason. ?>
+
+<!--
+Make sure the empty tag set fixer removes the complete line, including indentation for an empty tag set and ensure
+that the fixer does not remove too many tokens, like new lines tokens _before_ the affected line
+or indentation if there is code _after_ the removed empty tag.
+-->
+        <div></div>
+    <?php echo $i; ?>
+
+
+
+    <?php if (true) { ?><?php echo $i; ?>    <?php } ?>
+
+        <div></div>
+    <?php echo $i; ?>
+
+
+
+    <?php if (true) { ?><?php echo $i; ?>    <?php } ?>
 
 <?php
 // This test case file MUST always end with an unclosed long open PHP tag (with this comment) to prevent
