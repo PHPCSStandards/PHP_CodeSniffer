@@ -86,17 +86,7 @@ class EmbeddedPhpSniff implements Sniff
 
             // We have an opening and a closing tag, that lie within other content.
             if ($firstContent === $closingTag) {
-                $error = 'Empty embedded PHP tag found';
-                $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'Empty');
-                if ($fix === true) {
-                    $phpcsFile->fixer->beginChangeset();
-                    for ($i = $stackPtr; $i <= $closingTag; $i++) {
-                        $phpcsFile->fixer->replaceToken($i, '');
-                    }
-
-                    $phpcsFile->fixer->endChangeset();
-                }
-
+                $this->reportEmptyTagSet($phpcsFile, $stackPtr, $closingTag);
                 return;
             }
         }//end if
@@ -307,17 +297,7 @@ class EmbeddedPhpSniff implements Sniff
         $firstContent = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), $closeTag, true);
 
         if ($firstContent === false) {
-            $error = 'Empty embedded PHP tag found';
-            $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'Empty');
-            if ($fix === true) {
-                $phpcsFile->fixer->beginChangeset();
-                for ($i = $stackPtr; $i <= $closeTag; $i++) {
-                    $phpcsFile->fixer->replaceToken($i, '');
-                }
-
-                $phpcsFile->fixer->endChangeset();
-            }
-
+            $this->reportEmptyTagSet($phpcsFile, $stackPtr, $closeTag);
             return;
         }
 
@@ -394,6 +374,45 @@ class EmbeddedPhpSniff implements Sniff
         }
 
     }//end validateInlineEmbeddedPhp()
+
+
+    /**
+     * Report and fix an set of empty PHP tags.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param int                         $stackPtr  The position of the current token in the
+     *                                               stack passed in $tokens.
+     * @param int                         $closeTag  The position of the PHP close tag in the
+     *                                               stack passed in $tokens.
+     *
+     * @return void
+     */
+    private function reportEmptyTagSet(File $phpcsFile, $stackPtr, $closeTag)
+    {
+        $tokens = $phpcsFile->getTokens();
+        $error  = 'Empty embedded PHP tag found';
+        $fix    = $phpcsFile->addFixableError($error, $stackPtr, 'Empty');
+        if ($fix === true) {
+            $phpcsFile->fixer->beginChangeset();
+            for ($i = $stackPtr; $i <= $closeTag; $i++) {
+                $phpcsFile->fixer->replaceToken($i, '');
+            }
+
+            // Prevent leaving indentation whitespace behind when the empty tag set is the only thing on the affected lines.
+            if (isset($tokens[($closeTag + 1)]) === true
+                && $tokens[($closeTag + 1)]['line'] !== $tokens[$closeTag]['line']
+                && $tokens[($stackPtr - 1)]['code'] === T_INLINE_HTML
+                && $tokens[($stackPtr - 1)]['line'] === $tokens[$stackPtr]['line']
+                && $tokens[($stackPtr - 1)]['column'] === 1
+                && trim($tokens[($stackPtr - 1)]['content']) === ''
+            ) {
+                $phpcsFile->fixer->replaceToken(($stackPtr - 1), '');
+            }
+
+            $phpcsFile->fixer->endChangeset();
+        }
+
+    }//end reportEmptyTagSet()
 
 
 }//end class
