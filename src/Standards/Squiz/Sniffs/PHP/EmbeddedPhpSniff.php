@@ -24,7 +24,10 @@ class EmbeddedPhpSniff implements Sniff
      */
     public function register()
     {
-        return [T_OPEN_TAG];
+        return [
+            T_OPEN_TAG,
+            T_OPEN_TAG_WITH_ECHO,
+        ];
 
     }//end register()
 
@@ -69,7 +72,7 @@ class EmbeddedPhpSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $prevTag = $phpcsFile->findPrevious(T_OPEN_TAG, ($stackPtr - 1));
+        $prevTag = $phpcsFile->findPrevious($this->register(), ($stackPtr - 1));
         if ($prevTag === false) {
             // This is the first open tag.
             return;
@@ -262,7 +265,9 @@ class EmbeddedPhpSniff implements Sniff
                     }
                 }
 
-                if ($tokens[$firstContentAfterBlock]['code'] === T_OPEN_TAG) {
+                if ($tokens[$firstContentAfterBlock]['code'] === T_OPEN_TAG
+                    || $tokens[$firstContentAfterBlock]['code'] === T_OPEN_TAG_WITH_ECHO
+                ) {
                     // Next token is a PHP open tag which will also have thrown an error.
                     // Prevent both fixers running in the same loop by making sure the token is "touched" during this loop.
                     // This prevents a stray new line being added between the close and open tags.
@@ -273,7 +278,7 @@ class EmbeddedPhpSniff implements Sniff
             }//end if
         }//end if
 
-        $next = $phpcsFile->findNext(T_OPEN_TAG, ($closingTag + 1));
+        $next = $phpcsFile->findNext($this->register(), ($closingTag + 1));
         if ($next === false) {
             return;
         }
@@ -333,10 +338,14 @@ class EmbeddedPhpSniff implements Sniff
         }
 
         // Check that there is one, and only one space at the start of the statement.
-        // The open tag token always contains a single space after it.
-        $leadingSpace = 1;
+        $leadingSpace = 0;
+        if ($tokens[$stackPtr]['code'] === T_OPEN_TAG) {
+            // The long open tag token in a single line tag set always contains a single space after it.
+            $leadingSpace = 1;
+        }
+
         if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
-            $leadingSpace = ($tokens[($stackPtr + 1)]['length'] + 1);
+            $leadingSpace += $tokens[($stackPtr + 1)]['length'];
         }
 
         if ($leadingSpace !== 1) {
@@ -344,7 +353,15 @@ class EmbeddedPhpSniff implements Sniff
             $data  = [$leadingSpace];
             $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'SpacingAfterOpen', $data);
             if ($fix === true) {
-                $phpcsFile->fixer->replaceToken(($stackPtr + 1), '');
+                if ($tokens[$stackPtr]['code'] === T_OPEN_TAG) {
+                    $phpcsFile->fixer->replaceToken(($stackPtr + 1), '');
+                } else if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
+                    // Short open tag with too much whitespace.
+                    $phpcsFile->fixer->replaceToken(($stackPtr + 1), ' ');
+                } else {
+                    // Short open tag without whitespace.
+                    $phpcsFile->fixer->addContent($stackPtr, ' ');
+                }
             }
         }
 
@@ -357,7 +374,12 @@ class EmbeddedPhpSniff implements Sniff
                 && $tokens[$prev]['code'] !== T_SEMICOLON
             ) {
                 $error = 'Inline PHP statement must end with a semicolon';
-                $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'NoSemicolon');
+                $code  = 'NoSemicolon';
+                if ($tokens[$stackPtr]['code'] === T_OPEN_TAG_WITH_ECHO) {
+                    $code = 'ShortOpenEchoNoSemicolon';
+                }
+
+                $fix = $phpcsFile->addFixableError($error, $stackPtr, $code);
                 if ($fix === true) {
                     $phpcsFile->fixer->addContent($prev, ';');
                 }
@@ -374,7 +396,7 @@ class EmbeddedPhpSniff implements Sniff
                     $data  = [$statementCount];
                     $phpcsFile->addError($error, $stackPtr, 'MultipleStatements', $data);
                 }
-            }
+            }//end if
         }//end if
 
         $trailingSpace = 0;
