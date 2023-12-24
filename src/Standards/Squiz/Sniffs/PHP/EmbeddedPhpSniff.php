@@ -97,9 +97,16 @@ class EmbeddedPhpSniff implements Sniff
             if ($fix === true) {
                 $first   = $phpcsFile->findFirstOnLine(T_WHITESPACE, $stackPtr, true);
                 $padding = (strlen($tokens[$first]['content']) - strlen(ltrim($tokens[$first]['content'])));
+
                 $phpcsFile->fixer->beginChangeset();
+                $phpcsFile->fixer->replaceToken($stackPtr, rtrim($tokens[$stackPtr]['content']));
                 $phpcsFile->fixer->addNewline($stackPtr);
                 $phpcsFile->fixer->addContent($stackPtr, str_repeat(' ', $padding));
+
+                if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
+                    $phpcsFile->fixer->replaceToken(($stackPtr + 1), '');
+                }
+
                 $phpcsFile->fixer->endChangeset();
             }
         } else {
