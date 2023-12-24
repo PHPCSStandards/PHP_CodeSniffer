@@ -233,6 +233,11 @@ class EmbeddedPhpSniff implements Sniff
             if ($fix === true) {
                 $first = $phpcsFile->findFirstOnLine(T_WHITESPACE, $closingTag, true);
                 $phpcsFile->fixer->beginChangeset();
+
+                if ($tokens[($closingTag - 1)]['code'] === T_WHITESPACE) {
+                    $phpcsFile->fixer->replaceToken(($closingTag - 1), '');
+                }
+
                 $phpcsFile->fixer->addContentBefore($closingTag, str_repeat(' ', ($tokens[$first]['column'] - 1)));
                 $phpcsFile->fixer->addNewlineBefore($closingTag);
                 $phpcsFile->fixer->endChangeset();
@@ -245,8 +250,20 @@ class EmbeddedPhpSniff implements Sniff
                 $phpcsFile->fixer->beginChangeset();
                 $phpcsFile->fixer->addNewline($closingTag);
                 $phpcsFile->fixer->addContent($closingTag, str_repeat(' ', ($tokens[$first]['column'] - 1)));
+
+                if ($tokens[$firstContentAfterBlock]['code'] === T_INLINE_HTML) {
+                    $trimmedHtmlContent = ltrim($tokens[$firstContentAfterBlock]['content']);
+                    if ($trimmedHtmlContent === '') {
+                        // HTML token contains only whitespace and the next token after is PHP, not HTML, so remove the whitespace.
+                        $phpcsFile->fixer->replaceToken($firstContentAfterBlock, '');
+                    } else {
+                        // The HTML token has content, so remove leading whitespace in favour of the indent.
+                        $phpcsFile->fixer->replaceToken($firstContentAfterBlock, $trimmedHtmlContent);
+                    }
+                }
+
                 $phpcsFile->fixer->endChangeset();
-            }
+            }//end if
         }//end if
 
         $next = $phpcsFile->findNext(T_OPEN_TAG, ($closingTag + 1));

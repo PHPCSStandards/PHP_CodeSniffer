@@ -151,6 +151,23 @@ Make sure the "content after opener" fixer does not leave trailing space behind.
     <?php   echo $openerNeedsOwnLine;
     ?>
 
+<!--
+Make sure the "content before closer" fixer does not leave trailing space behind.
+-->
+    <?php
+    echo $closerNeedsOwnLine;   ?>
+
+<!--
+Make sure the "content after closer" fixer does not leave trailing space behind.
+-->
+    <?php
+    echo $closerNeedsOwnLine;
+    ?>  </div>
+
+    <?php
+    echo $closerNeedsOwnLine;
+    ?>  <?php echo $i; ?>
+
 <?php
 // This test case file MUST always end with an unclosed long open PHP tag (with this comment) to prevent
 // the tests running into the "last PHP closing tag excepted" condition breaking tests.
