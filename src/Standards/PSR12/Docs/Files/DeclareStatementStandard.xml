@@ -1,0 +1,111 @@
+<documentation title="Declare Statement">
+    <standard>
+    <![CDATA[
+    Declare statement must be correctly formatted.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: No space after the declare statement.">
+        <![CDATA[
+declare(ticks=1);
+        ]]>
+        </code>
+        <code title="Invalid: One or more spaces after the declare statement.">
+        <![CDATA[
+declare<em>   </em>(ticks=1);
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: No space before and after the declare directive.">
+        <![CDATA[
+declare(strict_type=1);
+        ]]>
+        </code>
+        <code title="Invalid: One or more spaces before or after the declare directive.">
+        <![CDATA[
+declare(<em> </em>strict_type<em>   </em>=1);
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: No space before and after the declare directive value.">
+        <![CDATA[
+declare(encoding='ISO-8859-1');
+        ]]>
+        </code>
+        <code title="Invalid: One or more spaces before or after the declare directive value.">
+        <![CDATA[
+declare(encoding=<em> </em>'ISO-8859-1'<em>   </em>);
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: No space after the semicolon.">
+        <![CDATA[
+declare(ticks=1);
+        ]]>
+        </code>
+        <code title="Invalid: One or more spaces after the semicolon.">
+        <![CDATA[
+declare(ticks=1)<em> /* test */</em>;
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: One space after closing parenthesis and opening curly bracket in a declare statement.">
+        <![CDATA[
+declare(ticks=1)<em> </em>{
+}
+        ]]>
+        </code>
+        <code title="Invalid: More spaces after closing parenthesis and opening curly bracket in a declare statement.">
+        <![CDATA[
+declare(ticks=1)<em>     </em>{
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: The directive of a declare statement is written in lowercase letters.">
+        <![CDATA[
+declare(strict_type=1);
+        ]]>
+        </code>
+        <code title="Invalid: The directive of a declare statement is written in mixed case letters (or all upper case letters).">
+        <![CDATA[
+declare(strICt_TYpe=1);
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: There is no code after opening curly bracket.">
+        <![CDATA[
+declare(ticks=1) {
+
+}
+        ]]>
+        </code>
+        <code title="Invalid: There is code after opening curly bracket.">
+        <![CDATA[
+declare(ticks=1) {<em> $test = true;</em>
+
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: The closing curly bracket of a declare statement is on a new line and aligned with the declare keyword.">
+        <![CDATA[
+declare(ticks=1) {
+
+}
+        ]]>
+        </code>
+        <code title="Invalid: The closing curly bracket of a declare statement is not on a new line.">
+        <![CDATA[
+declare(ticks=1) {<em> }</em>
+        ]]>
+        </code>
+    </code_comparison>
+</documentation>
