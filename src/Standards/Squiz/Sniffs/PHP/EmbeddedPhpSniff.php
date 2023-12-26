@@ -79,6 +79,10 @@ class EmbeddedPhpSniff implements Sniff
         }
 
         $firstContent = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
+        if ($firstContent === false) {
+            // Unclosed PHP open tag at the end of a file. Nothing to do.
+            return;
+        }
 
         if ($closingTag !== false) {
             $firstContentAfterBlock = $phpcsFile->findNext(T_WHITESPACE, ($closingTag + 1), $phpcsFile->numTokens, true);
