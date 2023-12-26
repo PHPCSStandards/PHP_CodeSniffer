@@ -34,7 +34,7 @@ class OpeningFunctionBraceBsdAllmanSniff implements Sniff
     /**
      * Registers the tokens that this sniff wants to listen for.
      *
-     * @return int[]
+     * @return array<int|string>
      */
     public function register()
     {

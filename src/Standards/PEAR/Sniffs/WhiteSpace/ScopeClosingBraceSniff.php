@@ -24,11 +24,11 @@ class ScopeClosingBraceSniff implements Sniff
     public $indent = 4;
 
 
-     /**
-      * Returns an array of tokens this test wants to listen for.
-      *
-      * @return int[]
-      */
+    /**
+     * Returns an array of tokens this test wants to listen for.
+     *
+     * @return array<int|string>
+     */
     public function register()
     {
         return Tokens::$scopeOpeners;
