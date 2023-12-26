@@ -86,6 +86,13 @@ final class EmbeddedPhpUnitTest extends AbstractSniffUnitTest
                 181 => 1,
             ];
 
+        case 'EmbeddedPhpUnitTest.2.inc':
+            return [
+                5 => 2,
+                6 => 2,
+                7 => 2,
+            ];
+
         default:
             return [];
         }//end switch
