@@ -43,7 +43,7 @@ class Timing
     /**
      * Get the duration of the run up to "now".
      *
-     * @return int Duration in microseconds.
+     * @return float Duration in microseconds.
      */
     public static function getDuration()
     {
@@ -60,7 +60,7 @@ class Timing
     /**
      * Convert a duration in microseconds to a human readable duration string.
      *
-     * @param int $duration Duration in microseconds.
+     * @param float $duration Duration in microseconds.
      *
      * @return string
      */

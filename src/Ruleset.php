@@ -120,7 +120,7 @@ class Ruleset
      * The key is the token name being listened for and the value
      * is the sniff object.
      *
-     * @var array<int, \PHP_CodeSniffer\Sniffs\Sniff>
+     * @var array<int, array<string, array<string, mixed>>>
      */
     public $tokenListeners = [];
 
