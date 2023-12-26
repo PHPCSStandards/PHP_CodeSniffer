@@ -62,7 +62,7 @@ class ComparisonOperatorUsageSniff implements Sniff
     /**
      * Registers the token types that this sniff wishes to listen to.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {

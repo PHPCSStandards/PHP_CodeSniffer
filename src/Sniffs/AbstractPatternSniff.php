@@ -78,7 +78,7 @@ abstract class AbstractPatternSniff implements Sniff
      * Classes extending <i>AbstractPatternTest</i> should implement the
      * <i>getPatterns()</i> method to register the patterns they wish to test.
      *
-     * @return int[]
+     * @return array<int|string>
      * @see    process()
      */
     final public function register()
