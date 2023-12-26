@@ -104,7 +104,7 @@ abstract class AbstractScopeSniff implements Sniff
      * DO NOT OVERRIDE THIS METHOD. Use the constructor of this class to register
      * for the desired tokens and scope.
      *
-     * @return int[]
+     * @return array<int|string>
      * @see    __constructor()
      */
     final public function register()

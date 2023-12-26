@@ -28,13 +28,13 @@ interface Sniff
      *
      * <code>
      *    return array(
-     *            T_WHITESPACE,
-     *            T_DOC_COMMENT,
-     *            T_COMMENT,
-     *           );
+     *        T_WHITESPACE,
+     *        T_DOC_COMMENT,
+     *        T_COMMENT,
+     *    );
      * </code>
      *
-     * @return mixed[]
+     * @return array<int|string>
      * @see    Tokens.php
      */
     public function register();
