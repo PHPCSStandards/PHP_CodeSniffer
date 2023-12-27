@@ -14,6 +14,16 @@ echo 'indent is correct - first on line for open tag is open tag';
        echo 'indent is incorrect - first on line for open tag is inline HTML';
 ?>
 
+<!--
+Open tag indent calculation should not look at first token in the stack, but only at the line containing the PHP open tag for the block.
+-->
+<?php
+// This is only here so we can have a close tag as the first token on the next line.
+?><?php
+// The PHP open tag should be fixed to be at the very start of the line without indent.
+// And the indent of this comment should be seen as correct.
+?>
+
 <?php
 // This test case file MUST always end with an unclosed long open PHP tag (with this comment) to prevent
 // the tests running into the "last PHP closing tag excepted" condition breaking tests.
