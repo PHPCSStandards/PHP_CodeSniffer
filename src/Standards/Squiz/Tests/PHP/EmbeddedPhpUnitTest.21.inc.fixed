@@ -10,7 +10,7 @@ as long as it is followed by non-empty inline HTML.
 <div>
 <?=
 'too much indent and close tag not on own line';
-    ?>
+?>
 
 </div>
 <p>Some more content after the last PHP tag block.</p>
