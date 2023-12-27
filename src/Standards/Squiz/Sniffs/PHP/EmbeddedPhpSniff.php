@@ -238,17 +238,29 @@ class EmbeddedPhpSniff implements Sniff
             $error = 'Closing PHP tag must be on a line by itself';
             $fix   = $phpcsFile->addFixableError($error, $closingTag, 'ContentBeforeEnd');
             if ($fix === true) {
-                $first = $phpcsFile->findFirstOnLine(T_WHITESPACE, $closingTag, true);
+                // Calculate the indent for the close tag.
+                // If the close tag is on the same line as the first content, re-use the indent
+                // calculated for the first content line to prevent the indent being based on an
+                // "old" indent, not the _new_ (fixed) indent.
+                if ($tokens[$firstContent]['line'] === $tokens[$lastContent]['line']
+                    && isset($indent) === true
+                ) {
+                    $closerIndent = $indent;
+                } else {
+                    $first        = $phpcsFile->findFirstOnLine(T_WHITESPACE, $closingTag, true);
+                    $closerIndent = ($tokens[$first]['column'] - 1);
+                }
+
                 $phpcsFile->fixer->beginChangeset();
 
                 if ($tokens[($closingTag - 1)]['code'] === T_WHITESPACE) {
                     $phpcsFile->fixer->replaceToken(($closingTag - 1), '');
                 }
 
-                $phpcsFile->fixer->addContentBefore($closingTag, str_repeat(' ', ($tokens[$first]['column'] - 1)));
+                $phpcsFile->fixer->addContentBefore($closingTag, str_repeat(' ', $closerIndent));
                 $phpcsFile->fixer->addNewlineBefore($closingTag);
                 $phpcsFile->fixer->endChangeset();
-            }
+            }//end if
         } else if ($tokens[$firstContentAfterBlock]['line'] === $tokens[$closingTag]['line']) {
             $error = 'Closing PHP tag must be on a line by itself';
             $fix   = $phpcsFile->addFixableError($error, $closingTag, 'ContentAfterEnd');
