@@ -253,7 +253,16 @@ class EmbeddedPhpSniff implements Sniff
                 ) {
                     $closerIndent = $indent;
                 } else {
-                    $first        = $phpcsFile->findFirstOnLine(T_WHITESPACE, $closingTag, true);
+                    $first = $phpcsFile->findFirstOnLine(T_WHITESPACE, $closingTag, true);
+
+                    while ($tokens[$first]['code'] === T_COMMENT
+                        && $tokens[$first]['content'] !== ltrim($tokens[$first]['content'])
+                    ) {
+                        // This is a subsequent line in a star-slash comment containing leading indent.
+                        // We'll need the first line of the comment to correctly determine the indent.
+                        $first = $phpcsFile->findFirstOnLine(T_WHITESPACE, ($first - 1), true);
+                    }
+
                     $closerIndent = ($tokens[$first]['column'] - 1);
                 }
 

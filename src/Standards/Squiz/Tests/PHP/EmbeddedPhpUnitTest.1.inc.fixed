@@ -234,6 +234,20 @@ echo 'indent is incorrect - first on line for open tag is open tag';
     echo 'indent is incorrect - first on line for open tag is whitespace';
 ?>
 
+<!--
+Safeguard correct close tag indent calculation.
+-->
+    <?php
+    /* Single line star comments are not problematic. */
+    ?>
+
+    <?php
+    /* Subsequent lines of inline slash-star comments
+       contain the indent in the comment token.
+       This means the calculated indent would be 0 unless we
+       walk to the first line in the comment. */
+    ?>
+
 <?php
 // This test case file MUST always end with an unclosed long open PHP tag (with this comment) to prevent
 // the tests running into the "last PHP closing tag excepted" condition breaking tests.
