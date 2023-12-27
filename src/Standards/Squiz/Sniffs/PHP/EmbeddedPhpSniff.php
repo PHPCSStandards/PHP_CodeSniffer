@@ -200,11 +200,19 @@ class EmbeddedPhpSniff implements Sniff
             }
         } else {
             // Find the first token on the first non-empty line we find.
-            for ($first = ($stackPtr - 1); $first > 0; $first--) {
+            for ($first = ($lastContentBeforeBlock - 1); $first > 0; $first--) {
                 if ($tokens[$first]['line'] === $tokens[$stackPtr]['line']) {
                     continue;
                 } else if (trim($tokens[$first]['content']) !== '') {
                     $first = $phpcsFile->findFirstOnLine([], $first, true);
+                    if ($tokens[$first]['code'] === T_COMMENT
+                        && $tokens[$first]['content'] !== ltrim($tokens[$first]['content'])
+                    ) {
+                        // This is a subsequent line in a star-slash comment containing leading indent.
+                        // We'll need the first line of the comment to correctly determine the indent.
+                        continue;
+                    }
+
                     break;
                 }
             }

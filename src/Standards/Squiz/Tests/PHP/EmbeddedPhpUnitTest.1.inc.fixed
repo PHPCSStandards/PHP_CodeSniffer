@@ -248,6 +248,35 @@ Safeguard correct close tag indent calculation.
        walk to the first line in the comment. */
     ?>
 
+<!--
+Safeguard correct open tag indent calculation when the previous non-empty line contains a comment.
+-->
+    <?php
+    /* Subsequent lines of inline slash-star comments
+       contain the indent in the comment token. */
+    ?>
+<?php
+echo 'the PHP tag is correctly indented as an indent less than the previous code indent is accepted';
+
+    /* Subsequent lines of inline slash-star comments
+       contain the indent in the comment token. */
+    ?>
+    <?php
+    echo 'the PHP tag is correctly indented';
+
+    /* Subsequent lines of inline slash-star comments
+       contain the indent in the comment token. */
+    ?>
+        <?php
+        echo 'the PHP tag is correctly indented as a diff of 4 is accepted';
+
+    /* Subsequent lines of inline slash-star comments
+       contain the indent in the comment token. */
+    ?>
+        <?php
+        echo 'the PHP tag is incorrectly indented as the indent is more than 4 different from the indent of the previous code';
+    ?>
+
 <?php
 // This test case file MUST always end with an unclosed long open PHP tag (with this comment) to prevent
 // the tests running into the "last PHP closing tag excepted" condition breaking tests.
