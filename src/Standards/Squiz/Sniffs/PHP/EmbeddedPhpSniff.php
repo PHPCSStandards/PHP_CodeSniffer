@@ -147,10 +147,13 @@ class EmbeddedPhpSniff implements Sniff
                     }
                 }//end if
 
-                $first = $phpcsFile->findFirstOnLine(T_WHITESPACE, $stackPtr);
+                $indent = 0;
+                $first  = $phpcsFile->findFirstOnLine(T_WHITESPACE, $stackPtr);
                 if ($first === false) {
-                    $first  = $phpcsFile->findFirstOnLine(T_INLINE_HTML, $stackPtr);
-                    $indent = (strlen($tokens[$first]['content']) - strlen(ltrim($tokens[$first]['content'])));
+                    $first = $phpcsFile->findFirstOnLine(T_INLINE_HTML, $stackPtr);
+                    if ($first !== false) {
+                        $indent = (strlen($tokens[$first]['content']) - strlen(ltrim($tokens[$first]['content'])));
+                    }
                 } else {
                     $indent = ($tokens[($first + 1)]['column'] - 1);
                 }

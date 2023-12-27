@@ -201,6 +201,39 @@ Safeguard that blank lines between a PHP tag and a scope closer are not touched 
 }
     ?>
 
+<!--
+Safeguard correct content indent calculation.
+-->
+<?php
+echo 'indent is correct - first on line for open tag is open tag';
+?>
+
+    <?php
+    echo 'indent is correct - first on line for open tag is inline HTML without content';
+    ?>
+        <div>
+        <?php
+        echo 'indent is correct - first on line for open tag is inline HTML with content';
+    ?>
+    <?php
+    echo 'indent is correct - first on line for open tag is whitespace';
+?>
+
+<?php
+echo 'indent is incorrect - first on line for open tag is open tag';
+?>
+
+    <?php
+    echo 'indent is incorrect - first on line for open tag is inline HTML';
+    ?>
+        <div>
+        <?php
+        echo 'indent is correct - first on line for open tag is inline HTML with content';
+    ?>
+    <?php
+    echo 'indent is incorrect - first on line for open tag is whitespace';
+?>
+
 <?php
 // This test case file MUST always end with an unclosed long open PHP tag (with this comment) to prevent
 // the tests running into the "last PHP closing tag excepted" condition breaking tests.
