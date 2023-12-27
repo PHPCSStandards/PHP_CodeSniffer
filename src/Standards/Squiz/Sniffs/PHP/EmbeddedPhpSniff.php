@@ -185,10 +185,13 @@ class EmbeddedPhpSniff implements Sniff
             $error = 'Opening PHP tag must be on a line by itself';
             $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'ContentBeforeOpen');
             if ($fix === true) {
-                $first = $phpcsFile->findFirstOnLine(T_WHITESPACE, $stackPtr);
+                $padding = 0;
+                $first   = $phpcsFile->findFirstOnLine(T_WHITESPACE, $stackPtr);
                 if ($first === false) {
-                    $first   = $phpcsFile->findFirstOnLine(T_INLINE_HTML, $stackPtr);
-                    $padding = (strlen($tokens[$first]['content']) - strlen(ltrim($tokens[$first]['content'])));
+                    $first = $phpcsFile->findFirstOnLine(T_INLINE_HTML, $stackPtr);
+                    if ($first !== false) {
+                        $padding = (strlen($tokens[$first]['content']) - strlen(ltrim($tokens[$first]['content'])));
+                    }
                 } else {
                     $padding = ($tokens[($first + 1)]['column'] - 1);
                 }
