@@ -2587,15 +2587,18 @@ class File
      *
      * @param int|string|array $types   The type(s) of tokens to search for.
      * @param int              $start   The position to start searching from in the
-     *                                  token stack. The first token matching on
-     *                                  this line before this token will be returned.
+     *                                  token stack.
      * @param bool             $exclude If true, find the token that is NOT of
      *                                  the types specified in $types.
      * @param string           $value   The value that the token must be equal to.
      *                                  If value is omitted, tokens with any value will
      *                                  be returned.
      *
-     * @return int|false
+     * @return int|false The first token which matches on the line containing the start
+     *                   token, between the start of the line and the start token.
+     *                   Note: The first token matching might be the start token.
+     *                   FALSE when no matching token could be found between the start of
+     *                   the line and the start token.
      */
     public function findFirstOnLine($types, $start, $exclude=false, $value=null)
     {
