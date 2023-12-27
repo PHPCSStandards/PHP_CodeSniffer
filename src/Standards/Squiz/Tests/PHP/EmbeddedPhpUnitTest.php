@@ -95,6 +95,11 @@ final class EmbeddedPhpUnitTest extends AbstractSniffUnitTest
                 228 => 1,
                 235 => 1,
                 241 => 1,
+                248 => 1,
+                253 => 1,
+                258 => 1,
+                263 => 1,
+                264 => 1,
             ];
 
         case 'EmbeddedPhpUnitTest.2.inc':
