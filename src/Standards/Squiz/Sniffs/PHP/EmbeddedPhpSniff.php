@@ -284,7 +284,9 @@ class EmbeddedPhpSniff implements Sniff
                 $phpcsFile->fixer->addNewlineBefore($closingTag);
                 $phpcsFile->fixer->endChangeset();
             }//end if
-        } else if ($tokens[$firstContentAfterBlock]['line'] === $tokens[$closingTag]['line']) {
+        } else if ($firstContentAfterBlock !== false
+            && $tokens[$firstContentAfterBlock]['line'] === $tokens[$closingTag]['line']
+        ) {
             $error = 'Closing PHP tag must be on a line by itself';
             $fix   = $phpcsFile->addFixableError($error, $closingTag, 'ContentAfterEnd');
             if ($fix === true) {
