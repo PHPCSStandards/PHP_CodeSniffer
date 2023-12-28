@@ -3,14 +3,19 @@
  * Unit test class for the MixedBooleanOperator sniff.
  *
  * @author    Tim Duesterhus <duesterhus@woltlab.com>
- * @copyright 2021 WoltLab GmbH.
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2021, 2023 WoltLab GmbH.
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\CodeAnalysis;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the MixedBooleanOperator sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\MixedBooleanOperator
+ */
 class MixedBooleanOperatorUnitTest extends AbstractSniffUnitTest
 {
 
