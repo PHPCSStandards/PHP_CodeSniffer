@@ -21,6 +21,19 @@ class IsReferenceTest extends AbstractMethodUnitTest
 
 
     /**
+     * Test that false is returned when a non-"bitwise and" token is passed.
+     *
+     * @return void
+     */
+    public function testNotBitwiseAndToken()
+    {
+        $target = $this->getTargetToken('/* testBitwiseAndA */', T_STRING);
+        $this->assertFalse(self::$phpcsFile->isReference($target));
+
+    }//end testNotBitwiseAndToken()
+
+
+    /**
      * Test correctly identifying whether a "bitwise and" token is a reference or not.
      *
      * @param string $identifier Comment which precedes the test case.
@@ -49,6 +62,14 @@ class IsReferenceTest extends AbstractMethodUnitTest
     public function dataIsReference()
     {
         return [
+            'issue-1971-list-first-in-file'                                                                     => [
+                'testMarker' => '/* testTokenizerIssue1971PHPCSlt330gt271A */',
+                'expected'   => true,
+            ],
+            'issue-1971-list-first-in-file-nested'                                                              => [
+                'testMarker' => '/* testTokenizerIssue1971PHPCSlt330gt271B */',
+                'expected'   => true,
+            ],
             'bitwise and: param in function call'                                                               => [
                 'testMarker' => '/* testBitwiseAndA */',
                 'expected'   => false,
@@ -177,6 +198,46 @@ class IsReferenceTest extends AbstractMethodUnitTest
                 'testMarker' => '/* testAssignByReferenceE */',
                 'expected'   => true,
             ],
+            'reference: function return value, assign by reference, null coalesce assign'                       => [
+                'testMarker' => '/* testAssignByReferenceF */',
+                'expected'   => true,
+            ],
+            'reference: unkeyed short list, first var, assign by reference'                                     => [
+                'testMarker' => '/* testShortListAssignByReferenceNoKeyA */',
+                'expected'   => true,
+            ],
+            'reference: unkeyed short list, second var, assign by reference'                                    => [
+                'testMarker' => '/* testShortListAssignByReferenceNoKeyB */',
+                'expected'   => true,
+            ],
+            'reference: unkeyed short list, nested var, assign by reference'                                    => [
+                'testMarker' => '/* testNestedShortListAssignByReferenceNoKey */',
+                'expected'   => true,
+            ],
+            'reference: unkeyed long list, second var, assign by reference'                                     => [
+                'testMarker' => '/* testLongListAssignByReferenceNoKeyA */',
+                'expected'   => true,
+            ],
+            'reference: unkeyed long list, first nested var, assign by reference'                               => [
+                'testMarker' => '/* testLongListAssignByReferenceNoKeyB */',
+                'expected'   => true,
+            ],
+            'reference: unkeyed long list, last nested var, assign by reference'                                => [
+                'testMarker' => '/* testLongListAssignByReferenceNoKeyC */',
+                'expected'   => true,
+            ],
+            'reference: keyed short list, first nested var, assign by reference'                                => [
+                'testMarker' => '/* testNestedShortListAssignByReferenceWithKeyA */',
+                'expected'   => true,
+            ],
+            'reference: keyed short list, last nested var, assign by reference'                                 => [
+                'testMarker' => '/* testNestedShortListAssignByReferenceWithKeyB */',
+                'expected'   => true,
+            ],
+            'reference: keyed long list, only var, assign by reference'                                         => [
+                'testMarker' => '/* testLongListAssignByReferenceWithKeyA */',
+                'expected'   => true,
+            ],
             'reference: first param in function call, pass by reference'                                        => [
                 'testMarker' => '/* testPassByReferenceA */',
                 'expected'   => true,
@@ -217,6 +278,10 @@ class IsReferenceTest extends AbstractMethodUnitTest
                 'testMarker' => '/* testPassByReferenceJ */',
                 'expected'   => true,
             ],
+            'reference: static property in function call, last with PQN, pass by reference'                     => [
+                'testMarker' => '/* testPassByReferencePartiallyQualifiedName */',
+                'expected'   => true,
+            ],
             'reference: new by reference'                                                                       => [
                 'testMarker' => '/* testNewByReferenceA */',
                 'expected'   => true,
@@ -229,9 +294,33 @@ class IsReferenceTest extends AbstractMethodUnitTest
                 'testMarker' => '/* testUseByReference */',
                 'expected'   => true,
             ],
+            'reference: closure use by reference, first param, with comment'                                    => [
+                'testMarker' => '/* testUseByReferenceWithCommentFirstParam */',
+                'expected'   => true,
+            ],
+            'reference: closure use by reference, last param, with comment'                                     => [
+                'testMarker' => '/* testUseByReferenceWithCommentSecondParam */',
+                'expected'   => true,
+            ],
             'reference: arrow fn declared to return by reference'                                               => [
                 'testMarker' => '/* testArrowFunctionReturnByReference */',
                 'expected'   => true,
+            ],
+            'bitwise and: first param default value in closure declaration'                                     => [
+                'testMarker' => '/* testBitwiseAndExactParameterA */',
+                'expected'   => false,
+            ],
+            'reference: param in closure declaration, pass by reference'                                        => [
+                'testMarker' => '/* testPassByReferenceExactParameterB */',
+                'expected'   => true,
+            ],
+            'reference: variadic param in closure declaration, pass by reference'                               => [
+                'testMarker' => '/* testPassByReferenceExactParameterC */',
+                'expected'   => true,
+            ],
+            'bitwise and: last param default value in closure declaration'                                      => [
+                'testMarker' => '/* testBitwiseAndExactParameterD */',
+                'expected'   => false,
             ],
             'reference: typed param in arrow fn declaration, pass by reference'                                 => [
                 'testMarker' => '/* testArrowFunctionPassByReferenceA */',
@@ -243,6 +332,22 @@ class IsReferenceTest extends AbstractMethodUnitTest
             ],
             'reference: closure declared to return by reference'                                                => [
                 'testMarker' => '/* testClosureReturnByReference */',
+                'expected'   => true,
+            ],
+            'bitwise and: param default value in arrow fn declaration'                                          => [
+                'testMarker' => '/* testBitwiseAndArrowFunctionInDefault */',
+                'expected'   => false,
+            ],
+            'issue-1284-short-list-directly-after-close-curly-control-structure'                                => [
+                'testMarker' => '/* testTokenizerIssue1284PHPCSlt280A */',
+                'expected'   => true,
+            ],
+            'issue-1284-short-list-directly-after-close-curly-control-structure-second-item'                    => [
+                'testMarker' => '/* testTokenizerIssue1284PHPCSlt280B */',
+                'expected'   => true,
+            ],
+            'issue-1284-short-array-directly-after-close-curly-control-structure'                               => [
+                'testMarker' => '/* testTokenizerIssue1284PHPCSlt280C */',
                 'expected'   => true,
             ],
         ];
