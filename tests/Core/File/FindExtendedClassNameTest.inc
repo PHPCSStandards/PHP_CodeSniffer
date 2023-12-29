@@ -4,22 +4,22 @@ namespace PHP_CodeSniffer\Tests\Core\File;
 
 class testFECNClass {}
 
-/* testExtendedClass */
+/* testExtendsUnqualifiedClass */
 class testFECNExtendedClass extends testFECNClass {}
 
-/* testNamespacedClass */
+/* testExtendsFullyQualifiedClass */
 class testFECNNamespacedClass extends \PHP_CodeSniffer\Tests\Core\File\testFECNClass {}
 
 /* testNonExtendedClass */
 class testFECNNonExtendedClass {}
 
-/* testInterface */
+/* testNonExtendedInterface */
 interface testFECNInterface {}
 
-/* testInterfaceThatExtendsInterface */
+/* testInterfaceExtendsUnqualifiedInterface */
 interface testInterfaceThatExtendsInterface extends testFECNInterface{}
 
-/* testInterfaceThatExtendsFQCNInterface */
+/* testInterfaceExtendsFullyQualifiedInterface */
 interface testInterfaceThatExtendsFQCNInterface extends \PHP_CodeSniffer\Tests\Core\File\testFECNInterface{}
 
 /* testNestedExtendedClass */
