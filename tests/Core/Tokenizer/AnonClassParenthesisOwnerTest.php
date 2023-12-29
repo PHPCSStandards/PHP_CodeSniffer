@@ -70,13 +70,17 @@ final class AnonClassParenthesisOwnerTest extends AbstractMethodUnitTest
      * @see testAnonClassNoParentheses()
      * @see testAnonClassNoParenthesesNextOpenClose()
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public static function dataAnonClassNoParentheses()
     {
         return [
-            ['/* testNoParentheses */'],
-            ['/* testNoParenthesesAndEmptyTokens */'],
+            'plain'                                              => [
+                'testMarker' => '/* testNoParentheses */',
+            ],
+            'declaration contains comments and extra whitespace' => [
+                'testMarker' => '/* testNoParenthesesAndEmptyTokens */',
+            ],
         ];
 
     }//end dataAnonClassNoParentheses()
@@ -129,13 +133,17 @@ final class AnonClassParenthesisOwnerTest extends AbstractMethodUnitTest
      *
      * @see testAnonClassWithParentheses()
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public static function dataAnonClassWithParentheses()
     {
         return [
-            ['/* testWithParentheses */'],
-            ['/* testWithParenthesesAndEmptyTokens */'],
+            'plain'                                              => [
+                'testMarker' => '/* testWithParentheses */',
+            ],
+            'declaration contains comments and extra whitespace' => [
+                'testMarker' => '/* testWithParenthesesAndEmptyTokens */',
+            ],
         ];
 
     }//end dataAnonClassWithParentheses()
