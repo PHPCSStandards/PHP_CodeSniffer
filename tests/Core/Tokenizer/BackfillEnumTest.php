@@ -73,52 +73,52 @@ final class BackfillEnumTest extends AbstractMethodUnitTest
      *
      * @see testEnums()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataEnums()
     {
         return [
-            [
-                '/* testPureEnum */',
-                'enum',
-                4,
-                12,
+            'enum - pure'                                                                   => [
+                'testMarker'   => '/* testPureEnum */',
+                'testContent'  => 'enum',
+                'openerOffset' => 4,
+                'closerOffset' => 12,
             ],
-            [
-                '/* testBackedIntEnum */',
-                'enum',
-                7,
-                29,
+            'enum - backed int'                                                             => [
+                'testMarker'   => '/* testBackedIntEnum */',
+                'testContent'  => 'enum',
+                'openerOffset' => 7,
+                'closerOffset' => 29,
             ],
-            [
-                '/* testBackedStringEnum */',
-                'enum',
-                8,
-                30,
+            'enum - backed string'                                                          => [
+                'testMarker'   => '/* testBackedStringEnum */',
+                'testContent'  => 'enum',
+                'openerOffset' => 8,
+                'closerOffset' => 30,
             ],
-            [
-                '/* testComplexEnum */',
-                'enum',
-                11,
-                72,
+            'enum - backed int + implements'                                                => [
+                'testMarker'   => '/* testComplexEnum */',
+                'testContent'  => 'enum',
+                'openerOffset' => 11,
+                'closerOffset' => 72,
             ],
-            [
-                '/* testEnumWithEnumAsClassName */',
-                'enum',
-                6,
-                7,
+            'enum keyword when "enum" is the name for the construct (yes, this is allowed)' => [
+                'testMarker'   => '/* testEnumWithEnumAsClassName */',
+                'testContent'  => 'enum',
+                'openerOffset' => 6,
+                'closerOffset' => 7,
             ],
-            [
-                '/* testEnumIsCaseInsensitive */',
-                'EnUm',
-                4,
-                5,
+            'enum - keyword is case insensitive'                                            => [
+                'testMarker'   => '/* testEnumIsCaseInsensitive */',
+                'testContent'  => 'EnUm',
+                'openerOffset' => 4,
+                'closerOffset' => 5,
             ],
-            [
-                '/* testDeclarationContainingComment */',
-                'enum',
-                6,
-                14,
+            'enum - declaration containing comment'                                         => [
+                'testMarker'   => '/* testDeclarationContainingComment */',
+                'testContent'  => 'enum',
+                'openerOffset' => 6,
+                'closerOffset' => 14,
             ],
         ];
 
@@ -152,74 +152,70 @@ final class BackfillEnumTest extends AbstractMethodUnitTest
      *
      * @see testNotEnums()
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public static function dataNotEnums()
     {
         return [
-            [
-                '/* testEnumAsClassNameAfterEnumKeyword */',
-                'Enum',
+            'not enum - construct named enum'                            => [
+                'testMarker'  => '/* testEnumAsClassNameAfterEnumKeyword */',
+                'testContent' => 'Enum',
             ],
-            [
-                '/* testEnumUsedAsClassName */',
-                'Enum',
+            'not enum - class named enum'                                => [
+                'testMarker'  => '/* testEnumUsedAsClassName */',
+                'testContent' => 'Enum',
             ],
-            [
-                '/* testEnumUsedAsClassConstantName */',
-                'ENUM',
+            'not enum - class constant named enum'                       => [
+                'testMarker'  => '/* testEnumUsedAsClassConstantName */',
+                'testContent' => 'ENUM',
             ],
-            [
-                '/* testEnumUsedAsMethodName */',
-                'enum',
+            'not enum - method named enum'                               => [
+                'testMarker'  => '/* testEnumUsedAsMethodName */',
+                'testContent' => 'enum',
             ],
-            [
-                '/* testEnumUsedAsPropertyName */',
-                'enum',
+            'not enum - class property named enum'                       => [
+                'testMarker'  => '/* testEnumUsedAsPropertyName */',
+                'testContent' => 'enum',
             ],
-            [
-                '/* testEnumUsedAsFunctionName */',
-                'enum',
+            'not enum - global function named enum'                      => [
+                'testMarker'  => '/* testEnumUsedAsFunctionName */',
+                'testContent' => 'enum',
             ],
-            [
-                '/* testEnumUsedAsEnumName */',
-                'Enum',
+            'not enum - namespace named enum'                            => [
+                'testMarker'  => '/* testEnumUsedAsNamespaceName */',
+                'testContent' => 'Enum',
             ],
-            [
-                '/* testEnumUsedAsNamespaceName */',
-                'Enum',
+            'not enum - part of namespace named enum'                    => [
+                'testMarker'  => '/* testEnumUsedAsPartOfNamespaceName */',
+                'testContent' => 'Enum',
             ],
-            [
-                '/* testEnumUsedAsPartOfNamespaceName */',
-                'Enum',
+            'not enum - class instantiation for class enum'              => [
+                'testMarker'  => '/* testEnumUsedInObjectInitialization */',
+                'testContent' => 'Enum',
             ],
-            [
-                '/* testEnumUsedInObjectInitialization */',
-                'Enum',
+            'not enum - function call'                                   => [
+                'testMarker'  => '/* testEnumAsFunctionCall */',
+                'testContent' => 'enum',
             ],
-            [
-                '/* testEnumAsFunctionCall */',
-                'enum',
+            'not enum - namespace relative function call'                => [
+                'testMarker'  => '/* testEnumAsFunctionCallWithNamespace */',
+                'testContent' => 'enum',
             ],
-            [
-                '/* testEnumAsFunctionCallWithNamespace */',
-                'enum',
+            'not enum - class constant fetch with enum as class name'    => [
+                'testMarker'  => '/* testClassConstantFetchWithEnumAsClassName */',
+                'testContent' => 'Enum',
             ],
-            [
-                '/* testClassConstantFetchWithEnumAsClassName */',
-                'Enum',
+            'not enum - class constant fetch with enum as constant name' => [
+                'testMarker'  => '/* testClassConstantFetchWithEnumAsConstantName */',
+                'testContent' => 'ENUM',
             ],
-            [
-                '/* testClassConstantFetchWithEnumAsConstantName */',
-                'ENUM',
+            'parse error, not enum - enum declaration without name'      => [
+                'testMarker'  => '/* testParseErrorMissingName */',
+                'testContent' => 'enum',
             ],
-            [
-                '/* testParseErrorMissingName */',
-                'enum',
-            ],
-            [
-                '/* testParseErrorLiveCoding */',
-                'enum',
+            'parse error, not enum - enum declaration with curlies'      => [
+                'testMarker'  => '/* testParseErrorLiveCoding */',
+                'testContent' => 'enum',
             ],
         ];
 
