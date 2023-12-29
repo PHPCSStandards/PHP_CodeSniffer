@@ -14,7 +14,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 /**
  * Unit test class for the MixedBooleanOperator sniff.
  *
- * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\MixedBooleanOperator
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\MixedBooleanOperatorSniff
  */
 class MixedBooleanOperatorUnitTest extends AbstractSniffUnitTest
 {
