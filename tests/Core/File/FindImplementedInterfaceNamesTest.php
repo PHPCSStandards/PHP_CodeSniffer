@@ -23,8 +23,8 @@ class FindImplementedInterfaceNamesTest extends AbstractMethodUnitTest
     /**
      * Test retrieving the name(s) of the interfaces being implemented by a class.
      *
-     * @param string $identifier Comment which precedes the test case.
-     * @param bool   $expected   Expected function output.
+     * @param string              $identifier Comment which precedes the test case.
+     * @param array<string>|false $expected   Expected function output.
      *
      * @dataProvider dataImplementedInterface
      *
@@ -44,70 +44,70 @@ class FindImplementedInterfaceNamesTest extends AbstractMethodUnitTest
      *
      * @see testFindImplementedInterfaceNames()
      *
-     * @return array
+     * @return array<string, array<string, string|array<string>>>
      */
     public function dataImplementedInterface()
     {
         return [
-            [
-                '/* testClassImplementsSingle */',
-                ['testFIINInterface'],
+            'class implements single interface, unqualified'                     => [
+                'identifier' => '/* testClassImplementsSingle */',
+                'expected'   => ['testFIINInterface'],
             ],
-            [
-                '/* testClassImplementsMultiple */',
-                [
+            'class implements multiple interfaces'                               => [
+                'identifier' => '/* testClassImplementsMultiple */',
+                'expected'   => [
                     'testFIINInterface',
                     'testFIINInterface2',
                 ],
             ],
-            [
-                '/* testImplementsFullyQualified */',
-                ['\PHP_CodeSniffer\Tests\Core\File\testFIINInterface'],
+            'class implements single interface, fully qualified'                 => [
+                'identifier' => '/* testImplementsFullyQualified */',
+                'expected'   => ['\PHP_CodeSniffer\Tests\Core\File\testFIINInterface'],
             ],
-            [
-                '/* testNonImplementedClass */',
-                false,
+            'class does not implement'                                           => [
+                'identifier' => '/* testNonImplementedClass */',
+                'expected'   => false,
             ],
-            [
-                '/* testPlainInterface */',
-                false,
+            'interface declaration, no implements'                               => [
+                'identifier' => '/* testPlainInterface */',
+                'expected'   => false,
             ],
-            [
-                '/* testImplementsPartiallyQualified */',
-                ['Core\File\RelativeInterface'],
+            'class implements single interface, partially qualified'             => [
+                'identifier' => '/* testImplementsPartiallyQualified */',
+                'expected'   => ['Core\File\RelativeInterface'],
             ],
-            [
-                '/* testDeclarationMultiImplementedNamespaceRelative */',
-                [
+            'class implements multiple interfaces, namespace relative'           => [
+                'identifier' => '/* testDeclarationMultiImplementedNamespaceRelative */',
+                'expected'   => [
                     'namespace\testInterfaceA',
                     'namespace\testInterfaceB',
                 ],
             ],
-            [
-                '/* testClassThatExtendsAndImplements */',
-                [
+            'class extends and implements'                                       => [
+                'identifier' => '/* testClassThatExtendsAndImplements */',
+                'expected'   => [
                     'InterfaceA',
                     '\NameSpaced\Cat\InterfaceB',
                 ],
             ],
-            [
-                '/* testClassThatImplementsAndExtends */',
-                [
+            'class implements and extends'                                       => [
+                'identifier' => '/* testClassThatImplementsAndExtends */',
+                'expected'   => [
                     '\InterfaceA',
                     'InterfaceB',
                 ],
             ],
-            [
-                '/* testBackedEnumWithoutImplements */',
-                false,
+            'enum does not implement'                                            => [
+                'identifier' => '/* testBackedEnumWithoutImplements */',
+                'expected'   => false,
             ],
-            [
-                '/* testEnumImplementsSingle */',
-                ['Colorful'],
+            'enum implements single interface, unqualified'                      => [
+                'identifier' => '/* testEnumImplementsSingle */',
+                'expected'   => ['Colorful'],
             ],
-            [
-                '/* testBackedEnumImplementsMulti */',
-                [
+            'enum implements multiple interfaces, unqualified + fully qualified' => [
+                'identifier' => '/* testBackedEnumImplementsMulti */',
+                'expected'   => [
                     'Colorful',
                     '\Deck',
                 ],
