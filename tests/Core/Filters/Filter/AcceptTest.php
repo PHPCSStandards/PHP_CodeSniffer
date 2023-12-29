@@ -41,8 +41,8 @@ class AcceptTest extends AbstractFilterTestCase
     /**
      * Test filtering a file list for excluded paths.
      *
-     * @param array $inputPaths     List of file paths to be filtered.
-     * @param array $expectedOutput Expected filtering result.
+     * @param array<string> $inputPaths     List of file paths to be filtered.
+     * @param array<string> $expectedOutput Expected filtering result.
      *
      * @dataProvider dataExcludePatterns
      *
@@ -63,34 +63,34 @@ class AcceptTest extends AbstractFilterTestCase
      *
      * @see testExcludePatterns
      *
-     * @return array
+     * @return array<string, array<string, array<string>>>
      */
     public function dataExcludePatterns()
     {
         $testCases = [
             // Test top-level exclude patterns.
-            [
-                [
+            'Non-sniff specific path based excludes from ruleset and command line are respected and don\'t filter out too much' => [
+                'inputPaths'     => [
                     '/path/to/src/Main.php',
                     '/path/to/src/Something/Main.php',
                     '/path/to/src/Somethingelse/Main.php',
                     '/path/to/src/SomethingelseEvenLonger/Main.php',
                     '/path/to/src/Other/Main.php',
                 ],
-                [
+                'expectedOutput' => [
                     '/path/to/src/Main.php',
                     '/path/to/src/SomethingelseEvenLonger/Main.php',
                 ],
             ],
 
             // Test ignoring standard/sniff specific exclude patterns.
-            [
-                [
+            'Filter should not act on standard/sniff specific exclude patterns'                                                 => [
+                'inputPaths'     => [
                     '/path/to/src/generic-project/Main.php',
                     '/path/to/src/generic/Main.php',
                     '/path/to/src/anything-generic/Main.php',
                 ],
-                [
+                'expectedOutput' => [
                     '/path/to/src/generic-project/Main.php',
                     '/path/to/src/generic/Main.php',
                     '/path/to/src/anything-generic/Main.php',
