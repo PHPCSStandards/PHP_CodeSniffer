@@ -1,11 +1,13 @@
 <?php
 
-namespace PHP_CodeSniffer\Tests\Core\File;
-
-interface testFIINInterface2 {}
+/* testNotAClass */
+function notAClass() {}
 
 /* testPlainInterface */
 interface testFIINInterface {}
+
+/* testNonImplementedClass */
+class testFIINNonImplementedClass {}
 
 /* testClassImplementsSingle */
 class testFIINImplementedClass implements testFIINInterface {}
@@ -15,9 +17,6 @@ class testFIINMultiImplementedClass implements testFIINInterface, testFIINInterf
 
 /* testImplementsFullyQualified */
 class testFIINNamespacedClass implements \PHP_CodeSniffer\Tests\Core\File\testFIINInterface {}
-
-/* testNonImplementedClass */
-class testFIINNonImplementedClass {}
 
 /* testImplementsPartiallyQualified */
 class testFIINQualifiedClass implements Core\File\RelativeInterface {}
@@ -39,3 +38,13 @@ enum Suit implements Colorful {}
 
 /* testBackedEnumImplementsMulti */
 enum Suit: string implements Colorful, \Deck {}
+
+/* testAnonClassImplementsSingle */
+$anon = class() implements testFIINInterface {}
+
+/* testMissingImplementsName */
+class testMissingExtendsName implements { /* missing interface name */  } // Intentional parse error.
+
+// Intentional parse error. Has to be the last test in the file.
+/* testParseError */
+class testParseError implements testInterface

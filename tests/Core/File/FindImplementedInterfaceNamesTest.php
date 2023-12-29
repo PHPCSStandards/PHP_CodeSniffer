@@ -21,6 +21,33 @@ class FindImplementedInterfaceNamesTest extends AbstractMethodUnitTest
 
 
     /**
+     * Test getting a `false` result when a non-existent token is passed.
+     *
+     * @return void
+     */
+    public function testNonExistentToken()
+    {
+        $result = self::$phpcsFile->findImplementedInterfaceNames(100000);
+        $this->assertFalse($result);
+
+    }//end testNonExistentToken()
+
+
+    /**
+     * Test getting a `false` result when a token other than one of the supported tokens is passed.
+     *
+     * @return void
+     */
+    public function testNotAClass()
+    {
+        $token  = $this->getTargetToken('/* testNotAClass */', [T_FUNCTION]);
+        $result = self::$phpcsFile->findImplementedInterfaceNames($token);
+        $this->assertFalse($result);
+
+    }//end testNotAClass()
+
+
+    /**
      * Test retrieving the name(s) of the interfaces being implemented by a class.
      *
      * @param string              $identifier Comment which precedes the test case.
@@ -49,6 +76,14 @@ class FindImplementedInterfaceNamesTest extends AbstractMethodUnitTest
     public function dataImplementedInterface()
     {
         return [
+            'interface declaration, no implements'                               => [
+                'identifier' => '/* testPlainInterface */',
+                'expected'   => false,
+            ],
+            'class does not implement'                                           => [
+                'identifier' => '/* testNonImplementedClass */',
+                'expected'   => false,
+            ],
             'class implements single interface, unqualified'                     => [
                 'identifier' => '/* testClassImplementsSingle */',
                 'expected'   => ['testFIINInterface'],
@@ -63,14 +98,6 @@ class FindImplementedInterfaceNamesTest extends AbstractMethodUnitTest
             'class implements single interface, fully qualified'                 => [
                 'identifier' => '/* testImplementsFullyQualified */',
                 'expected'   => ['\PHP_CodeSniffer\Tests\Core\File\testFIINInterface'],
-            ],
-            'class does not implement'                                           => [
-                'identifier' => '/* testNonImplementedClass */',
-                'expected'   => false,
-            ],
-            'interface declaration, no implements'                               => [
-                'identifier' => '/* testPlainInterface */',
-                'expected'   => false,
             ],
             'class implements single interface, partially qualified'             => [
                 'identifier' => '/* testImplementsPartiallyQualified */',
@@ -111,6 +138,18 @@ class FindImplementedInterfaceNamesTest extends AbstractMethodUnitTest
                     'Colorful',
                     '\Deck',
                 ],
+            ],
+            'anon class implements single interface, unqualified'                => [
+                'identifier' => '/* testAnonClassImplementsSingle */',
+                'expected'   => ['testFIINInterface'],
+            ],
+            'parse error - implements keyword, but no interface name'            => [
+                'identifier' => '/* testMissingImplementsName */',
+                'expected'   => false,
+            ],
+            'parse error - live coding - no curly braces'                        => [
+                'identifier' => '/* testParseError */',
+                'expected'   => false,
             ],
         ];
 
