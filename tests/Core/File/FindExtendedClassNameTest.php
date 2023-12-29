@@ -21,6 +21,33 @@ class FindExtendedClassNameTest extends AbstractMethodUnitTest
 
 
     /**
+     * Test getting a `false` result when a non-existent token is passed.
+     *
+     * @return void
+     */
+    public function testNonExistentToken()
+    {
+        $result = self::$phpcsFile->findExtendedClassName(100000);
+        $this->assertFalse($result);
+
+    }//end testNonExistentToken()
+
+
+    /**
+     * Test getting a `false` result when a token other than one of the supported tokens is passed.
+     *
+     * @return void
+     */
+    public function testNotAClass()
+    {
+        $token  = $this->getTargetToken('/* testNotAClass */', [T_FUNCTION]);
+        $result = self::$phpcsFile->findExtendedClassName($token);
+        $this->assertFalse($result);
+
+    }//end testNotAClass()
+
+
+    /**
      * Test retrieving the name of the class being extended by another class
      * (or interface).
      *
@@ -50,6 +77,10 @@ class FindExtendedClassNameTest extends AbstractMethodUnitTest
     public function dataExtendedClass()
     {
         return [
+            'class does not extend'                                       => [
+                'identifier' => '/* testNonExtendedClass */',
+                'expected'   => false,
+            ],
             'class extends unqualified class'                             => [
                 'identifier' => '/* testExtendsUnqualifiedClass */',
                 'expected'   => 'testFECNClass',
@@ -58,9 +89,13 @@ class FindExtendedClassNameTest extends AbstractMethodUnitTest
                 'identifier' => '/* testExtendsFullyQualifiedClass */',
                 'expected'   => '\PHP_CodeSniffer\Tests\Core\File\testFECNClass',
             ],
-            'class does not extend'                                       => [
-                'identifier' => '/* testNonExtendedClass */',
-                'expected'   => false,
+            'class extends partially qualified class'                     => [
+                'identifier' => '/* testExtendsPartiallyQualifiedClass */',
+                'expected'   => 'Core\File\RelativeClass',
+            ],
+            'class extends namespace relative class'                      => [
+                'identifier' => '/* testExtendsNamespaceRelativeClass */',
+                'expected'   => 'namespace\Bar',
             ],
             'interface does not extend'                                   => [
                 'identifier' => '/* testNonExtendedInterface */',
@@ -74,6 +109,10 @@ class FindExtendedClassNameTest extends AbstractMethodUnitTest
                 'identifier' => '/* testInterfaceExtendsFullyQualifiedInterface */',
                 'expected'   => '\PHP_CodeSniffer\Tests\Core\File\testFECNInterface',
             ],
+            'anon class extends unqualified class'                        => [
+                'identifier' => '/* testExtendedAnonClass */',
+                'expected'   => 'testFECNExtendedAnonClass',
+            ],
             'class does not extend but contains anon class which extends' => [
                 'identifier' => '/* testNestedExtendedClass */',
                 'expected'   => false,
@@ -82,14 +121,6 @@ class FindExtendedClassNameTest extends AbstractMethodUnitTest
                 'identifier' => '/* testNestedExtendedAnonClass */',
                 'expected'   => 'testFECNAnonClass',
             ],
-            'class extends partially qualified class'                     => [
-                'identifier' => '/* testExtendsPartiallyQualifiedClass */',
-                'expected'   => 'Core\File\RelativeClass',
-            ],
-            'class extends namespace relative class'                      => [
-                'identifier' => '/* testExtendsNamespaceRelativeClass */',
-                'expected'   => 'namespace\Bar',
-            ],
             'class extends and implements'                                => [
                 'identifier' => '/* testClassThatExtendsAndImplements */',
                 'expected'   => 'testFECNClass',
@@ -97,6 +128,18 @@ class FindExtendedClassNameTest extends AbstractMethodUnitTest
             'class implements and extends'                                => [
                 'identifier' => '/* testClassThatImplementsAndExtends */',
                 'expected'   => 'testFECNClass',
+            ],
+            'interface extends multiple interfaces (not supported)'       => [
+                'identifier' => '/* testInterfaceMultiExtends */',
+                'expected'   => '\Package\FooInterface',
+            ],
+            'parse error - extends keyword, but no class name'            => [
+                'identifier' => '/* testMissingExtendsName */',
+                'expected'   => false,
+            ],
+            'parse error - live coding - no curly braces'                 => [
+                'identifier' => '/* testParseError */',
+                'expected'   => false,
             ],
         ];
 
