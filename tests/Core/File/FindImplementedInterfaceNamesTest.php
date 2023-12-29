@@ -50,18 +50,18 @@ class FindImplementedInterfaceNamesTest extends AbstractMethodUnitTest
     {
         return [
             [
-                '/* testImplementedClass */',
+                '/* testClassImplementsSingle */',
                 ['testFIINInterface'],
             ],
             [
-                '/* testMultiImplementedClass */',
+                '/* testClassImplementsMultiple */',
                 [
                     'testFIINInterface',
                     'testFIINInterface2',
                 ],
             ],
             [
-                '/* testNamespacedClass */',
+                '/* testImplementsFullyQualified */',
                 ['\PHP_CodeSniffer\Tests\Core\File\testFIINInterface'],
             ],
             [
@@ -69,7 +69,7 @@ class FindImplementedInterfaceNamesTest extends AbstractMethodUnitTest
                 false,
             ],
             [
-                '/* testInterface */',
+                '/* testPlainInterface */',
                 false,
             ],
             [
@@ -91,11 +91,11 @@ class FindImplementedInterfaceNamesTest extends AbstractMethodUnitTest
                 false,
             ],
             [
-                '/* testEnumImplements */',
+                '/* testEnumImplementsSingle */',
                 ['Colorful'],
             ],
             [
-                '/* testBackedEnumImplements */',
+                '/* testBackedEnumImplementsMulti */',
                 [
                     'Colorful',
                     '\Deck',

@@ -4,16 +4,16 @@ namespace PHP_CodeSniffer\Tests\Core\File;
 
 interface testFIINInterface2 {}
 
-/* testInterface */
+/* testPlainInterface */
 interface testFIINInterface {}
 
-/* testImplementedClass */
+/* testClassImplementsSingle */
 class testFIINImplementedClass implements testFIINInterface {}
 
-/* testMultiImplementedClass */
+/* testClassImplementsMultiple */
 class testFIINMultiImplementedClass implements testFIINInterface, testFIINInterface2 {}
 
-/* testNamespacedClass */
+/* testImplementsFullyQualified */
 class testFIINNamespacedClass implements \PHP_CodeSniffer\Tests\Core\File\testFIINInterface {}
 
 /* testNonImplementedClass */
@@ -28,8 +28,8 @@ class testFECNClassThatImplementsAndExtends implements \InterfaceA, InterfaceB e
 /* testBackedEnumWithoutImplements */
 enum Suit:string {}
 
-/* testEnumImplements */
+/* testEnumImplementsSingle */
 enum Suit implements Colorful {}
 
-/* testBackedEnumImplements */
+/* testBackedEnumImplementsMulti */
 enum Suit: string implements Colorful, \Deck {}
