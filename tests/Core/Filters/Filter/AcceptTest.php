@@ -14,6 +14,7 @@ use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Filters\Filter;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\Core\Filters\AbstractFilterTestCase;
+use RecursiveArrayIterator;
 
 /**
  * Tests for the \PHP_CodeSniffer\Filters\Filter::accept method.
@@ -32,7 +33,7 @@ class AcceptTest extends AbstractFilterTestCase
     public static function setUpBeforeClass(): void
     {
         $standard      = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
-        self::$config  = new Config(["--standard=$standard", '--ignore=*/somethingelse/*']);
+        self::$config  = new Config(["--standard=$standard", '--ignore=*/somethingelse/*', '--report-width=80']);
         self::$ruleset = new Ruleset(self::$config);
 
     }//end setUpBeforeClass()
@@ -50,7 +51,7 @@ class AcceptTest extends AbstractFilterTestCase
      */
     public function testExcludePatterns($inputPaths, $expectedOutput)
     {
-        $fakeDI = new \RecursiveArrayIterator($inputPaths);
+        $fakeDI = new RecursiveArrayIterator($inputPaths);
         $filter = new Filter($fakeDI, '/', self::$config, self::$ruleset);
 
         $this->assertEquals($expectedOutput, $this->getFilteredResultsAsArray($filter));
@@ -65,7 +66,7 @@ class AcceptTest extends AbstractFilterTestCase
      *
      * @return array<string, array<string, array<string>>>
      */
-    public function dataExcludePatterns()
+    public static function dataExcludePatterns()
     {
         $testCases = [
             // Test top-level exclude patterns.
