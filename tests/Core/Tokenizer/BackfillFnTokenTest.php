@@ -635,38 +635,38 @@ final class BackfillFnTokenTest extends AbstractMethodUnitTest
      *
      * @see testInMatchValue()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataInMatchValue()
     {
         return [
             'not_last_value'                      => [
-                '/* testInMatchNotLastValue */',
-                5,
-                11,
-                'T_COMMA',
-                'comma',
+                'testMarker'                 => '/* testInMatchNotLastValue */',
+                'openerOffset'               => 5,
+                'closerOffset'               => 11,
+                'expectedCloserType'         => 'T_COMMA',
+                'expectedCloserFriendlyName' => 'comma',
             ],
             'last_value_with_trailing_comma'      => [
-                '/* testInMatchLastValueWithTrailingComma */',
-                5,
-                11,
-                'T_COMMA',
-                'comma',
+                'testMarker'                 => '/* testInMatchLastValueWithTrailingComma */',
+                'openerOffset'               => 5,
+                'closerOffset'               => 11,
+                'expectedCloserType'         => 'T_COMMA',
+                'expectedCloserFriendlyName' => 'comma',
             ],
             'last_value_without_trailing_comma_1' => [
-                '/* testInMatchLastValueNoTrailingComma1 */',
-                5,
-                10,
-                'T_CLOSE_PARENTHESIS',
-                'close parenthesis',
+                'testMarker'                 => '/* testInMatchLastValueNoTrailingComma1 */',
+                'openerOffset'               => 5,
+                'closerOffset'               => 10,
+                'expectedCloserType'         => 'T_CLOSE_PARENTHESIS',
+                'expectedCloserFriendlyName' => 'close parenthesis',
             ],
             'last_value_without_trailing_comma_2' => [
-                '/* testInMatchLastValueNoTrailingComma2 */',
-                5,
-                11,
-                'T_VARIABLE',
-                '$y variable',
+                'testMarker'                 => '/* testInMatchLastValueNoTrailingComma2 */',
+                'openerOffset'               => 5,
+                'closerOffset'               => 11,
+                'expectedCloserType'         => 'T_VARIABLE',
+                'expectedCloserFriendlyName' => '$y variable',
             ],
         ];
 
@@ -737,52 +737,58 @@ final class BackfillFnTokenTest extends AbstractMethodUnitTest
      *
      * @see testNotAnArrowFunction()
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public static function dataNotAnArrowFunction()
     {
         return [
-            ['/* testFunctionName */'],
-            [
-                '/* testConstantDeclaration */',
-                'FN',
+            'name of a function, context: declaration'                                       => [
+                'testMarker' => '/* testFunctionName */',
             ],
-            [
-                '/* testConstantDeclarationLower */',
-                'fn',
+            'name of a constant, context: declaration using "const" keyword - uppercase'     => [
+                'testMarker'  => '/* testConstantDeclaration */',
+                'testContent' => 'FN',
             ],
-            ['/* testStaticMethodName */'],
-            ['/* testPropertyAssignment */'],
-            [
-                '/* testAnonClassMethodName */',
-                'fN',
+            'name of a constant, context: declaration using "const" keyword - lowercase'     => [
+                'testMarker'  => '/* testConstantDeclarationLower */',
+                'testContent' => 'fn',
             ],
-            ['/* testNonArrowStaticMethodCall */'],
-            [
-                '/* testNonArrowConstantAccess */',
-                'FN',
+            'name of a (static) method, context: declaration'                                => [
+                'testMarker' => '/* testStaticMethodName */',
             ],
-            [
-                '/* testNonArrowConstantAccessMixed */',
-                'Fn',
+            'name of a property, context: property access'                                   => [
+                'testMarker' => '/* testPropertyAssignment */',
             ],
-            ['/* testNonArrowObjectMethodCall */'],
-            [
-                '/* testNonArrowObjectMethodCallUpper */',
-                'FN',
+            'name of a method, context: declaration in an anon class - mixed case'           => [
+                'testMarker'  => '/* testAnonClassMethodName */',
+                'testContent' => 'fN',
             ],
-            [
-                '/* testNonArrowNamespacedFunctionCall */',
-                'MyNS\Sub\Fn',
-                'T_NAME_QUALIFIED',
+            'name of a method, context: static method call'                                  => [
+                'testMarker' => '/* testNonArrowStaticMethodCall */',
             ],
-            [
-                '/* testNonArrowNamespaceOperatorFunctionCall */',
-                'namespace\fn',
-                'T_NAME_RELATIVE',
+            'name of a method, context: method call on object - lowercase'                   => [
+                'testMarker' => '/* testNonArrowObjectMethodCall */',
             ],
-            ['/* testNonArrowFunctionNameWithUnionTypes */'],
-            ['/* testLiveCoding */'],
+            'name of a method, context: method call on object - uppercase'                   => [
+                'testMarker'  => '/* testNonArrowObjectMethodCallUpper */',
+                'testContent' => 'FN',
+            ],
+            'name of a (namespaced) function, context: partially qualified function call'    => [
+                'testMarker'   => '/* testNonArrowNamespacedFunctionCall */',
+                'testContent'  => 'MyNS\Sub\Fn',
+                'expectedType' => 'T_NAME_QUALIFIED',
+            ],
+            'name of a (namespaced) function, context: namespace relative function call'     => [
+                'testMarker'   => '/* testNonArrowNamespaceOperatorFunctionCall */',
+                'testContent'  => 'namespace\fn',
+                'expectedType' => 'T_NAME_RELATIVE',
+            ],
+            'name of a function, context: declaration with union types for param and return' => [
+                'testMarker' => '/* testNonArrowFunctionNameWithUnionTypes */',
+            ],
+            'unknown - live coding/parse error'                                              => [
+                'testMarker' => '/* testLiveCoding */',
+            ],
         ];
 
     }//end dataNotAnArrowFunction()
