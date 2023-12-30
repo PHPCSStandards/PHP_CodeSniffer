@@ -452,3 +452,21 @@ class StandaloneNullTrueFalseTypes
      */
     private false $variableName = false;
 }
+
+class MoreMissingButSupportedTypes
+{
+    /**
+     * @var parent
+     */
+    public parent $variableName;
+
+    /**
+     * @var self
+     */
+    protected self $variableName;
+
+    /**
+     * @var SomeClass
+     */
+    private namespace\SomeClass $variableName;
+}
