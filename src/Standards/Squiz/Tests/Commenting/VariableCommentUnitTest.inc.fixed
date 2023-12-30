@@ -434,3 +434,21 @@ class IntersectionTypes
      */
     private \Iterator&\Countable $variableName;
 }
+
+class StandaloneNullTrueFalseTypes
+{
+    /**
+     * @var null
+     */
+    public null $variableName = null;
+
+    /**
+     * @var true
+     */
+    protected true $variableName = true;
+
+    /**
+     * @var false
+     */
+    private false $variableName = false;
+}
