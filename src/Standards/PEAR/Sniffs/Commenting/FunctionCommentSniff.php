@@ -60,10 +60,10 @@ class FunctionCommentSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $scopeModifier = $phpcsFile->getMethodProperties($stackPtr)['scope'];
-        if ($scopeModifier === 'protected'
-            && $this->minimumVisibility === 'public'
-            || $scopeModifier === 'private'
-            && ($this->minimumVisibility === 'public' || $this->minimumVisibility === 'protected')
+        if (($scopeModifier === 'protected'
+            && $this->minimumVisibility === 'public')
+            || ($scopeModifier === 'private'
+            && ($this->minimumVisibility === 'public' || $this->minimumVisibility === 'protected'))
         ) {
             return;
         }
