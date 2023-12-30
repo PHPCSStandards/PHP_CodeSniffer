@@ -13,29 +13,15 @@ namespace PHP_CodeSniffer\Tests\Core\Filters\Filter;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Filters\Filter;
 use PHP_CodeSniffer\Ruleset;
-use PHPUnit\Framework\TestCase;
+use PHP_CodeSniffer\Tests\Core\Filters\AbstractFilterTestCase;
 
 /**
  * Tests for the \PHP_CodeSniffer\Filters\Filter::accept method.
  *
  * @covers \PHP_CodeSniffer\Filters\Filter
  */
-class AcceptTest extends TestCase
+class AcceptTest extends AbstractFilterTestCase
 {
-
-    /**
-     * The Config object.
-     *
-     * @var \PHP_CodeSniffer\Config
-     */
-    protected static $config;
-
-    /**
-     * The Ruleset object.
-     *
-     * @var \PHP_CodeSniffer\Ruleset
-     */
-    protected static $ruleset;
 
 
     /**
@@ -64,16 +50,10 @@ class AcceptTest extends TestCase
      */
     public function testExcludePatterns($inputPaths, $expectedOutput)
     {
-        $fakeDI   = new \RecursiveArrayIterator($inputPaths);
-        $filter   = new Filter($fakeDI, '/', self::$config, self::$ruleset);
-        $iterator = new \RecursiveIteratorIterator($filter);
-        $files    = [];
+        $fakeDI = new \RecursiveArrayIterator($inputPaths);
+        $filter = new Filter($fakeDI, '/', self::$config, self::$ruleset);
 
-        foreach ($iterator as $file) {
-            $files[] = $file;
-        }
-
-        $this->assertEquals($expectedOutput, $files);
+        $this->assertEquals($expectedOutput, $this->getFilteredResultsAsArray($filter));
 
     }//end testExcludePatterns()
 
@@ -119,17 +99,7 @@ class AcceptTest extends TestCase
         ];
 
         // Allow these tests to work on Windows as well.
-        if (DIRECTORY_SEPARATOR === '\\') {
-            foreach ($testCases as $key => $case) {
-                foreach ($case as $nr => $param) {
-                    foreach ($param as $file => $value) {
-                        $testCases[$key][$nr][$file] = strtr($value, '/', '\\');
-                    }
-                }
-            }
-        }
-
-        return $testCases;
+        return self::mapPathsToRuntimeOs($testCases);
 
     }//end dataExcludePatterns()
 
