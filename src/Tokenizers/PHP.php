@@ -1485,7 +1485,7 @@ class PHP extends Tokenizer
                     || (stripos($newContent, '0b') === 0 && bindec(str_replace('_', '', $newContent)) > PHP_INT_MAX)
                     || (stripos($newContent, '0o') === 0 && octdec(str_replace('_', '', $newContent)) > PHP_INT_MAX)
                     || (stripos($newContent, '0x') !== 0
-                    && stripos($newContent, 'e') !== false || strpos($newContent, '.') !== false)
+                    && (stripos($newContent, 'e') !== false || strpos($newContent, '.') !== false))
                     || (strpos($newContent, '0') === 0 && stripos($newContent, '0x') !== 0
                     && stripos($newContent, '0b') !== 0 && octdec(str_replace('_', '', $newContent)) > PHP_INT_MAX)
                     || (strpos($newContent, '0') !== 0 && str_replace('_', '', $newContent) > PHP_INT_MAX))
