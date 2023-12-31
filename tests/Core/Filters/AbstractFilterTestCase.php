@@ -45,10 +45,54 @@ abstract class AbstractFilterTestCase extends TestCase
      */
     public static function initializeConfigAndRuleset()
     {
-        self::$config  = new Config(['--standard=PSR1', '--report-width=80']);
+        self::$config  = new Config(['--standard=PSR1', '--extensions=php,inc', '--report-width=80']);
         self::$ruleset = new Ruleset(self::$config);
 
     }//end initializeConfigAndRuleset()
+
+
+    /**
+     * Helper method to retrieve a mock object for a Filter class.
+     *
+     * The `setMethods()` method was silently deprecated in PHPUnit 9 and removed in PHPUnit 10.
+     *
+     * Note: direct access to the `getMockBuilder()` method is soft deprecated as of PHPUnit 10,
+     * and expected to be hard deprecated in PHPUnit 11 and removed in PHPUnit 12.
+     * Dealing with that is something for a later iteration of the test suite.
+     *
+     * @param string             $className       Fully qualified name of the class under test.
+     * @param array<mixed>       $constructorArgs Optional. Array of parameters to pass to the class constructor.
+     * @param array<string>|null $methodsToMock   Optional. The methods to mock in the class under test.
+     *                                            Needed for PHPUnit cross-version support as PHPUnit 4.x does
+     *                                            not have a `setMethodsExcept()` method yet.
+     *                                            If not passed, no methods will be replaced.
+     *
+     * @return \PHPUnit\Framework\MockObject\MockObject
+     */
+    protected function getMockedClass($className, array $constructorArgs=[], $methodsToMock=null)
+    {
+        $mockedObj = $this->getMockBuilder($className);
+
+        if (\method_exists($mockedObj, 'onlyMethods') === true) {
+            // PHPUnit 8+.
+            if (is_array($methodsToMock) === true) {
+                return $mockedObj
+                    ->setConstructorArgs($constructorArgs)
+                    ->onlyMethods($methodsToMock)
+                    ->getMock();
+            }
+
+            return $mockedObj->getMock()
+                ->setConstructorArgs($constructorArgs);
+        }
+
+        // PHPUnit < 8.
+        return $mockedObj
+            ->setConstructorArgs($constructorArgs)
+            ->setMethods($methodsToMock)
+            ->getMock();
+
+    }//end getMockedClass()
 
 
     /**
@@ -69,6 +113,83 @@ abstract class AbstractFilterTestCase extends TestCase
         return $files;
 
     }//end getFilteredResultsAsArray()
+
+
+    /**
+     * Retrieve the basedir to use for tests using the `getFakeFileList()` method.
+     *
+     * @return string
+     */
+    protected static function getBaseDir()
+    {
+        return dirname(dirname(dirname(__DIR__)));
+
+    }//end getBaseDir()
+
+
+    /**
+     * Retrieve a file list containing a range of paths for testing purposes.
+     *
+     * This list **must** contain files which exist in this project (well, except for some which don't exist
+     * purely for testing purposes), as `realpath()` is used in the logic under test and `realpath()` will
+     * return `false` for any non-existent files, which will automatically filter them out before
+     * we get to the code under test.
+     *
+     * Note this list does not include `.` and `..` as \PHP_CodeSniffer\Files\FileList uses `SKIP_DOTS`.
+     *
+     * @return array<string>
+     */
+    protected static function getFakeFileList()
+    {
+        $basedir = self::getBaseDir();
+        return [
+            $basedir.'/.gitignore',
+            $basedir.'/.yamllint.yml',
+            $basedir.'/phpcs.xml',
+            $basedir.'/phpcs.xml.dist',
+            $basedir.'/autoload.php',
+            $basedir.'/bin',
+            $basedir.'/bin/phpcs',
+            $basedir.'/bin/phpcs.bat',
+            $basedir.'/scripts',
+            $basedir.'/scripts/build-phar.php',
+            $basedir.'/src',
+            $basedir.'/src/WillNotExist.php',
+            $basedir.'/src/WillNotExist.bak',
+            $basedir.'/src/WillNotExist.orig',
+            $basedir.'/src/Ruleset.php',
+            $basedir.'/src/Generators',
+            $basedir.'/src/Generators/Markdown.php',
+            $basedir.'/src/Standards',
+            $basedir.'/src/Standards/Generic',
+            $basedir.'/src/Standards/Generic/Docs',
+            $basedir.'/src/Standards/Generic/Docs/Classes',
+            $basedir.'/src/Standards/Generic/Docs/Classes/DuplicateClassNameStandard.xml',
+            $basedir.'/src/Standards/Generic/Sniffs',
+            $basedir.'/src/Standards/Generic/Sniffs/Classes',
+            $basedir.'/src/Standards/Generic/Sniffs/Classes/DuplicateClassNameSniff.php',
+            $basedir.'/src/Standards/Generic/Tests',
+            $basedir.'/src/Standards/Generic/Tests/Classes',
+            $basedir.'/src/Standards/Generic/Tests/Classes/DuplicateClassNameUnitTest.1.inc',
+            // Will rarely exist when running the tests.
+            $basedir.'/src/Standards/Generic/Tests/Classes/DuplicateClassNameUnitTest.1.inc.bak',
+            $basedir.'/src/Standards/Generic/Tests/Classes/DuplicateClassNameUnitTest.2.inc',
+            $basedir.'/src/Standards/Generic/Tests/Classes/DuplicateClassNameUnitTest.php',
+            $basedir.'/src/Standards/Squiz',
+            $basedir.'/src/Standards/Squiz/Docs',
+            $basedir.'/src/Standards/Squiz/Docs/WhiteSpace',
+            $basedir.'/src/Standards/Squiz/Docs/WhiteSpace/SemicolonSpacingStandard.xml',
+            $basedir.'/src/Standards/Squiz/Sniffs',
+            $basedir.'/src/Standards/Squiz/Sniffs/WhiteSpace',
+            $basedir.'/src/Standards/Squiz/Sniffs/WhiteSpace/OperatorSpacingSniff.php',
+            $basedir.'/src/Standards/Squiz/Tests',
+            $basedir.'/src/Standards/Squiz/Tests/WhiteSpace',
+            $basedir.'/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.inc',
+            $basedir.'/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.inc.fixed',
+            $basedir.'/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.php',
+        ];
+
+    }//end getFakeFileList()
 
 
     /**
