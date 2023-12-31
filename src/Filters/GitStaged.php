@@ -18,7 +18,7 @@ class GitStaged extends ExactMatch
 
 
     /**
-     * Get a list of blacklisted file paths.
+     * Get a list of file paths to exclude.
      *
      * @return array
      */
@@ -30,7 +30,7 @@ class GitStaged extends ExactMatch
 
 
     /**
-     * Get a list of whitelisted file paths.
+     * Get a list of file paths to include.
      *
      * @return array
      */
