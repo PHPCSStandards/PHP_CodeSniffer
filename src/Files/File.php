@@ -904,7 +904,7 @@ class File
                 }
             }
 
-            // If it is ignored, make sure it's not whitelisted.
+            // If it is ignored, make sure there is no exception in place.
             if ($ignored === true
                 && isset($this->tokenizer->ignoredLines[$line]['.except']) === true
             ) {
