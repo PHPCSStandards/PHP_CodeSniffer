@@ -47,22 +47,32 @@ abstract class ExactMatch extends Filter
         }
 
         if ($this->disallowedFiles === null) {
-            $this->disallowedFiles = $this->getblacklist();
+            $this->disallowedFiles = $this->getDisallowedFiles();
+
+            // BC-layer.
+            if ($this->disallowedFiles === null) {
+                $this->disallowedFiles = $this->getBlacklist();
+            }
         }
 
         if ($this->allowedFiles === null) {
-            $this->allowedFiles = $this->getwhitelist();
+            $this->allowedFiles = $this->getAllowedFiles();
+
+            // BC-layer.
+            if ($this->allowedFiles === null) {
+                $this->allowedFiles = $this->getWhitelist();
+            }
         }
 
         $filePath = Util\Common::realpath($this->current());
 
-        // If file is both disallowed and allowed, the disallowed files list takes precedence.
+        // If a file is both disallowed and allowed, the disallowed files list takes precedence.
         if (isset($this->disallowedFiles[$filePath]) === true) {
             return false;
         }
 
         if (empty($this->allowedFiles) === true && empty($this->disallowedFiles) === false) {
-            // We are only checking a disallowed files list, so everything else should be allowed.
+            // We are only checking the disallowed files list, so everything else should be allowed.
             return true;
         }
 
@@ -92,6 +102,11 @@ abstract class ExactMatch extends Filter
     /**
      * Get a list of file paths to exclude.
      *
+     * @deprecated 3.9.0 Implement the `getDisallowedFiles()` method instead.
+     *                   The `getDisallowedFiles()` method will be made abstract and therefore required
+     *                   in v4.0 and this method will be removed.
+     *                   If both methods are implemented, the new `getDisallowedFiles()` method will take precedence.
+     *
      * @return array
      */
     abstract protected function getBlacklist();
@@ -100,9 +115,42 @@ abstract class ExactMatch extends Filter
     /**
      * Get a list of file paths to include.
      *
+     * @deprecated 3.9.0 Implement the `getAllowedFiles()` method instead.
+     *                   The `getAllowedFiles()` method will be made abstract and therefore required
+     *                   in v4.0 and this method will be removed.
+     *                   If both methods are implemented, the new `getAllowedFiles()` method will take precedence.
+     *
      * @return array
      */
     abstract protected function getWhitelist();
+
+
+    /**
+     * Get a list of file paths to exclude.
+     *
+     * @since 3.9.0 Replaces the deprecated `getBlacklist()` method.
+     *
+     * @return array|null
+     */
+    protected function getDisallowedFiles()
+    {
+        return null;
+
+    }//end getDisallowedFiles()
+
+
+    /**
+     * Get a list of file paths to include.
+     *
+     * @since 3.9.0 Replaces the deprecated `getWhitelist()` method.
+     *
+     * @return array|null
+     */
+    protected function getAllowedFiles()
+    {
+        return null;
+
+    }//end getAllowedFiles()
 
 
 }//end class
