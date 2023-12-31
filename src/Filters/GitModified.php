@@ -18,11 +18,29 @@ class GitModified extends ExactMatch
     /**
      * Get a list of file paths to exclude.
      *
+     * @since 3.9.0
+     *
+     * @return array
+     */
+    protected function getDisallowedFiles()
+    {
+        return [];
+
+    }//end getDisallowedFiles()
+
+
+    /**
+     * Get a list of file paths to exclude.
+     *
+     * @deprecated 3.9.0 Overload the `getDisallowedFiles()` method instead.
+     *
+     * @codeCoverageIgnore
+     *
      * @return array
      */
     protected function getBlacklist()
     {
-        return [];
+        return $this->getDisallowedFiles();
 
     }//end getBlacklist()
 
@@ -30,9 +48,11 @@ class GitModified extends ExactMatch
     /**
      * Get a list of file paths to include.
      *
+     * @since 3.9.0
+     *
      * @return array
      */
-    protected function getWhitelist()
+    protected function getAllowedFiles()
     {
         $modified = [];
 
@@ -58,6 +78,22 @@ class GitModified extends ExactMatch
         }
 
         return $modified;
+
+    }//end getAllowedFiles()
+
+
+    /**
+     * Get a list of file paths to include.
+     *
+     * @deprecated 3.9.0 Overload the `getAllowedFiles()` method instead.
+     *
+     * @codeCoverageIgnore
+     *
+     * @return array
+     */
+    protected function getWhitelist()
+    {
+        return $this->getAllowedFiles();
 
     }//end getWhitelist()
 
