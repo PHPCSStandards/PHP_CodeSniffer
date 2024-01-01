@@ -39,7 +39,10 @@ class TestMemberProperties
     var static $varG = true;
 
     /* testPublicStatic */
-    public static $varH = true;
+    public // comment
+    // phpcs:ignore Stnd.Cat.Sniff -- For reasons.
+    static
+    $varH = true;
 
     /* testProtectedStatic */
     static protected $varI = true;
@@ -255,6 +258,16 @@ $anon = class() {
 
     /* testPHP81OnlyReadonlyWithUnionType */
     readonly string|int $onlyReadonly;
+
+    /* testPHP81OnlyReadonlyWithUnionTypeMultiple */
+    readonly \InterfaceA|\Sub\InterfaceB|false
+        $onlyReadonly;
+
+    /* testPHP81ReadonlyAndStatic */
+    readonly private static ?string $readonlyAndStatic;
+
+    /* testPHP81ReadonlyMixedCase */
+    public ReadONLY static $readonlyMixedCase;
 };
 
 $anon = class {
@@ -318,3 +331,11 @@ $anon = class() {
     // Intentional fatal error - Type contains both true and false, bool should be used instead, but that's not the concern of the method.
     readonly true|FALSE $pseudoTypeFalseAndTrue;
 };
+
+class WhitespaceAndCommentsInTypes {
+    /* testUnionTypeWithWhitespaceAndComment */
+    public int | /*comment*/ string $hasWhitespaceAndComment;
+
+    /* testIntersectionTypeWithWhitespaceAndComment */
+    public \Foo /*comment*/ & Bar $hasWhitespaceAndComment;
+}

@@ -861,6 +861,45 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
+            'php8.1-readonly-property-with-multi-union-type-no-visibility' => [
+                'identifier' => '/* testPHP81OnlyReadonlyWithUnionTypeMultiple */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => false,
+                    'is_static'       => false,
+                    'is_readonly'     => true,
+                    'type'            => '\InterfaceA|\Sub\InterfaceB|false',
+                    'type_token'      => -11,
+                    'type_end_token'  => -3,
+                    'nullable_type'   => false,
+                ],
+            ],
+            'php8.1-readonly-and-static-property'                          => [
+                'identifier' => '/* testPHP81ReadonlyAndStatic */',
+                'expected'   => [
+                    'scope'           => 'private',
+                    'scope_specified' => true,
+                    'is_static'       => true,
+                    'is_readonly'     => true,
+                    'type'            => '?string',
+                    'type_token'      => -2,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => true,
+                ],
+            ],
+            'php8.1-readonly-mixed-case-keyword'                           => [
+                'identifier' => '/* testPHP81ReadonlyMixedCase */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => true,
+                    'is_static'       => true,
+                    'is_readonly'     => true,
+                    'type'            => '',
+                    'type_token'      => false,
+                    'type_end_token'  => false,
+                    'nullable_type'   => false,
+                ],
+            ],
             'php8-property-with-single-attribute'                          => [
                 'identifier' => '/* testPHP8PropertySingleAttribute */',
                 'expected'   => [
@@ -954,6 +993,33 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'type_token'      => -4,
                     'type_end_token'  => -2,
                     'nullable_type'   => true,
+                ],
+            ],
+
+            'php8.0-union-type-with-whitespace-and-comment'                => [
+                'identifier' => '/* testUnionTypeWithWhitespaceAndComment */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => true,
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'type'            => 'int|string',
+                    'type_token'      => -8,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => false,
+                ],
+            ],
+            'php8.1-intersection-type-with-whitespace-and-comment'         => [
+                'identifier' => '/* testIntersectionTypeWithWhitespaceAndComment */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => true,
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'type'            => '\Foo&Bar',
+                    'type_token'      => -9,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => false,
                 ],
             ],
             'php8.2-pseudo-type-true'                                      => [
