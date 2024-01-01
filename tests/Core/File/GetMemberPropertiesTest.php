@@ -23,8 +23,8 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
     /**
      * Test the getMemberProperties() method.
      *
-     * @param string $identifier Comment which precedes the test case.
-     * @param bool   $expected   Expected function output.
+     * @param string                         $identifier Comment which precedes the test case.
+     * @param array<string, string|int|bool> $expected   Expected function output.
      *
      * @dataProvider dataGetMemberProperties
      *
@@ -48,14 +48,14 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
      *
      * @see testGetMemberProperties()
      *
-     * @return array
+     * @return array<string, array<string|array<string, string|int|bool>>>
      */
     public function dataGetMemberProperties()
     {
         return [
-            [
-                '/* testVar */',
-                [
+            'var-modifier'                                                 => [
+                'identifier' => '/* testVar */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
                     'is_static'       => false,
@@ -64,9 +64,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testVarType */',
-                [
+            'var-modifier-and-type'                                        => [
+                'identifier' => '/* testVarType */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
                     'is_static'       => false,
@@ -75,9 +75,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => true,
                 ],
             ],
-            [
-                '/* testPublic */',
-                [
+            'public-modifier'                                              => [
+                'identifier' => '/* testPublic */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -86,9 +86,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPublicType */',
-                [
+            'public-modifier-and-type'                                     => [
+                'identifier' => '/* testPublicType */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -97,9 +97,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testProtected */',
-                [
+            'protected-modifier'                                           => [
+                'identifier' => '/* testProtected */',
+                'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -108,9 +108,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testProtectedType */',
-                [
+            'protected-modifier-and-type'                                  => [
+                'identifier' => '/* testProtectedType */',
+                'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -119,9 +119,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPrivate */',
-                [
+            'private-modifier'                                             => [
+                'identifier' => '/* testPrivate */',
+                'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -130,9 +130,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPrivateType */',
-                [
+            'private-modifier-and-type'                                    => [
+                'identifier' => '/* testPrivateType */',
+                'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -141,9 +141,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testStatic */',
-                [
+            'static-modifier'                                              => [
+                'identifier' => '/* testStatic */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
                     'is_static'       => true,
@@ -152,9 +152,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testStaticType */',
-                [
+            'static-modifier-and-type'                                     => [
+                'identifier' => '/* testStaticType */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
                     'is_static'       => true,
@@ -163,9 +163,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => true,
                 ],
             ],
-            [
-                '/* testStaticVar */',
-                [
+            'static-and-var-modifier'                                      => [
+                'identifier' => '/* testStaticVar */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
                     'is_static'       => true,
@@ -174,9 +174,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testVarStatic */',
-                [
+            'var-and-static-modifier'                                      => [
+                'identifier' => '/* testVarStatic */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
                     'is_static'       => true,
@@ -185,9 +185,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPublicStatic */',
-                [
+            'public-static-modifiers'                                      => [
+                'identifier' => '/* testPublicStatic */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => true,
@@ -196,9 +196,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testProtectedStatic */',
-                [
+            'protected-static-modifiers'                                   => [
+                'identifier' => '/* testProtectedStatic */',
+                'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
                     'is_static'       => true,
@@ -207,9 +207,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPrivateStatic */',
-                [
+            'private-static-modifiers'                                     => [
+                'identifier' => '/* testPrivateStatic */',
+                'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
                     'is_static'       => true,
@@ -218,9 +218,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testNoPrefix */',
-                [
+            'no-modifier'                                                  => [
+                'identifier' => '/* testNoPrefix */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
                     'is_static'       => false,
@@ -229,9 +229,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPublicStaticWithDocblock */',
-                [
+            'public-and-static-modifier-with-docblock'                     => [
+                'identifier' => '/* testPublicStaticWithDocblock */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => true,
@@ -240,9 +240,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testProtectedStaticWithDocblock */',
-                [
+            'protected-and-static-modifier-with-docblock'                  => [
+                'identifier' => '/* testProtectedStaticWithDocblock */',
+                'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
                     'is_static'       => true,
@@ -251,9 +251,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPrivateStaticWithDocblock */',
-                [
+            'private-and-static-modifier-with-docblock'                    => [
+                'identifier' => '/* testPrivateStaticWithDocblock */',
+                'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
                     'is_static'       => true,
@@ -262,9 +262,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testGroupType 1 */',
-                [
+            'property-group-simple-type-prop-1'                            => [
+                'identifier' => '/* testGroupType 1 */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -273,9 +273,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testGroupType 2 */',
-                [
+            'property-group-simple-type-prop-2'                            => [
+                'identifier' => '/* testGroupType 2 */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -284,9 +284,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testGroupNullableType 1 */',
-                [
+            'property-group-nullable-type-prop-1'                          => [
+                'identifier' => '/* testGroupNullableType 1 */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => true,
@@ -295,9 +295,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => true,
                 ],
             ],
-            [
-                '/* testGroupNullableType 2 */',
-                [
+            'property-group-nullable-type-prop-2'                          => [
+                'identifier' => '/* testGroupNullableType 2 */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => true,
@@ -306,9 +306,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => true,
                 ],
             ],
-            [
-                '/* testGroupProtectedStatic 1 */',
-                [
+            'property-group-protected-static-prop-1'                       => [
+                'identifier' => '/* testGroupProtectedStatic 1 */',
+                'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
                     'is_static'       => true,
@@ -317,9 +317,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testGroupProtectedStatic 2 */',
-                [
+            'property-group-protected-static-prop-2'                       => [
+                'identifier' => '/* testGroupProtectedStatic 2 */',
+                'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
                     'is_static'       => true,
@@ -328,9 +328,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testGroupProtectedStatic 3 */',
-                [
+            'property-group-protected-static-prop-3'                       => [
+                'identifier' => '/* testGroupProtectedStatic 3 */',
+                'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
                     'is_static'       => true,
@@ -339,9 +339,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testGroupPrivate 1 */',
-                [
+            'property-group-private-prop-1'                                => [
+                'identifier' => '/* testGroupPrivate 1 */',
+                'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -350,9 +350,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testGroupPrivate 2 */',
-                [
+            'property-group-private-prop-2'                                => [
+                'identifier' => '/* testGroupPrivate 2 */',
+                'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -361,9 +361,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testGroupPrivate 3 */',
-                [
+            'property-group-private-prop-3'                                => [
+                'identifier' => '/* testGroupPrivate 3 */',
+                'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -372,9 +372,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testGroupPrivate 4 */',
-                [
+            'property-group-private-prop-4'                                => [
+                'identifier' => '/* testGroupPrivate 4 */',
+                'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -383,9 +383,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testGroupPrivate 5 */',
-                [
+            'property-group-private-prop-5'                                => [
+                'identifier' => '/* testGroupPrivate 5 */',
+                'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -394,9 +394,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testGroupPrivate 6 */',
-                [
+            'property-group-private-prop-6'                                => [
+                'identifier' => '/* testGroupPrivate 6 */',
+                'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -405,9 +405,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testGroupPrivate 7 */',
-                [
+            'property-group-private-prop-7'                                => [
+                'identifier' => '/* testGroupPrivate 7 */',
+                'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -416,9 +416,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testMessyNullableType */',
-                [
+            'messy-nullable-type'                                          => [
+                'identifier' => '/* testMessyNullableType */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -427,9 +427,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => true,
                 ],
             ],
-            [
-                '/* testNamespaceType */',
-                [
+            'fqn-type'                                                     => [
+                'identifier' => '/* testNamespaceType */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -438,9 +438,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testNullableNamespaceType 1 */',
-                [
+            'nullable-classname-type'                                      => [
+                'identifier' => '/* testNullableNamespaceType 1 */',
+                'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -449,9 +449,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => true,
                 ],
             ],
-            [
-                '/* testNullableNamespaceType 2 */',
-                [
+            'nullable-namespace-relative-class-type'                       => [
+                'identifier' => '/* testNullableNamespaceType 2 */',
+                'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -460,9 +460,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => true,
                 ],
             ],
-            [
-                '/* testMultilineNamespaceType */',
-                [
+            'multiline-namespaced-type'                                    => [
+                'identifier' => '/* testMultilineNamespaceType */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -471,9 +471,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPropertyAfterMethod */',
-                [
+            'property-after-method'                                        => [
+                'identifier' => '/* testPropertyAfterMethod */',
+                'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
                     'is_static'       => true,
@@ -482,13 +482,13 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testInterfaceProperty */',
-                [],
+            'invalid-property-in-interface'                                => [
+                'identifier' => '/* testInterfaceProperty */',
+                'expected'   => [],
             ],
-            [
-                '/* testNestedProperty 1 */',
-                [
+            'property-in-nested-class-1'                                   => [
+                'identifier' => '/* testNestedProperty 1 */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -497,9 +497,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testNestedProperty 2 */',
-                [
+            'property-in-nested-class-2'                                   => [
+                'identifier' => '/* testNestedProperty 2 */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -508,9 +508,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP8MixedTypeHint */',
-                [
+            'php8-mixed-type'                                              => [
+                'identifier' => '/* testPHP8MixedTypeHint */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => true,
@@ -519,9 +519,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP8MixedTypeHintNullable */',
-                [
+            'php8-nullable-mixed-type'                                     => [
+                'identifier' => '/* testPHP8MixedTypeHintNullable */',
+                'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -530,9 +530,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => true,
                 ],
             ],
-            [
-                '/* testNamespaceOperatorTypeHint */',
-                [
+            'namespace-operator-type-declaration'                          => [
+                'identifier' => '/* testNamespaceOperatorTypeHint */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -541,9 +541,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => true,
                 ],
             ],
-            [
-                '/* testPHP8UnionTypesSimple */',
-                [
+            'php8-union-types-simple'                                      => [
+                'identifier' => '/* testPHP8UnionTypesSimple */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -552,9 +552,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP8UnionTypesTwoClasses */',
-                [
+            'php8-union-types-two-classes'                                 => [
+                'identifier' => '/* testPHP8UnionTypesTwoClasses */',
+                'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -563,9 +563,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP8UnionTypesAllBaseTypes */',
-                [
+            'php8-union-types-all-base-types'                              => [
+                'identifier' => '/* testPHP8UnionTypesAllBaseTypes */',
+                'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -574,9 +574,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP8UnionTypesAllPseudoTypes */',
-                [
+            'php8-union-types-all-pseudo-types'                            => [
+                'identifier' => '/* testPHP8UnionTypesAllPseudoTypes */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
                     'is_static'       => false,
@@ -585,9 +585,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP8UnionTypesIllegalTypes */',
-                [
+            'php8-union-types-illegal-types'                               => [
+                'identifier' => '/* testPHP8UnionTypesIllegalTypes */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -596,9 +596,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP8UnionTypesNullable */',
-                [
+            'php8-union-types-nullable'                                    => [
+                'identifier' => '/* testPHP8UnionTypesNullable */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -607,9 +607,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => true,
                 ],
             ],
-            [
-                '/* testPHP8PseudoTypeNull */',
-                [
+            'php8-union-types-pseudo-type-null'                            => [
+                'identifier' => '/* testPHP8PseudoTypeNull */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -618,9 +618,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP8PseudoTypeFalse */',
-                [
+            'php8-union-types-pseudo-type-false'                           => [
+                'identifier' => '/* testPHP8PseudoTypeFalse */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -629,9 +629,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP8PseudoTypeFalseAndBool */',
-                [
+            'php8-union-types-pseudo-type-false-and-bool'                  => [
+                'identifier' => '/* testPHP8PseudoTypeFalseAndBool */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -640,9 +640,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP8ObjectAndClass */',
-                [
+            'php8-union-types-object-and-class'                            => [
+                'identifier' => '/* testPHP8ObjectAndClass */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -651,9 +651,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP8PseudoTypeIterableAndArray */',
-                [
+            'php8-union-types-pseudo-type-iterable-and-array'              => [
+                'identifier' => '/* testPHP8PseudoTypeIterableAndArray */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -662,9 +662,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP8DuplicateTypeInUnionWhitespaceAndComment */',
-                [
+            'php8-union-types-duplicate-type-with-whitespace-and-comments' => [
+                'identifier' => '/* testPHP8DuplicateTypeInUnionWhitespaceAndComment */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -673,9 +673,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP81Readonly */',
-                [
+            'php8.1-readonly-property'                                     => [
+                'identifier' => '/* testPHP81Readonly */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -684,9 +684,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP81ReadonlyWithNullableType */',
-                [
+            'php8.1-readonly-property-with-nullable-type'                  => [
+                'identifier' => '/* testPHP81ReadonlyWithNullableType */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -695,9 +695,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => true,
                 ],
             ],
-            [
-                '/* testPHP81ReadonlyWithUnionType */',
-                [
+            'php8.1-readonly-property-with-union-type'                     => [
+                'identifier' => '/* testPHP81ReadonlyWithUnionType */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -706,9 +706,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP81ReadonlyWithUnionTypeWithNull */',
-                [
+            'php8.1-readonly-property-with-union-type-with-null'           => [
+                'identifier' => '/* testPHP81ReadonlyWithUnionTypeWithNull */',
+                'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -717,9 +717,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP81OnlyReadonlyWithUnionType */',
-                [
+            'php8.1-readonly-property-with-union-type-no-visibility'       => [
+                'identifier' => '/* testPHP81OnlyReadonlyWithUnionType */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
                     'is_static'       => false,
@@ -728,9 +728,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP8PropertySingleAttribute */',
-                [
+            'php8-property-with-single-attribute'                          => [
+                'identifier' => '/* testPHP8PropertySingleAttribute */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -739,9 +739,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP8PropertyMultipleAttributes */',
-                [
+            'php8-property-with-multiple-attributes'                       => [
+                'identifier' => '/* testPHP8PropertyMultipleAttributes */',
+                'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -750,9 +750,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => true,
                 ],
             ],
-            [
-                '/* testPHP8PropertyMultilineAttribute */',
-                [
+            'php8-property-with-multiline-attribute'                       => [
+                'identifier' => '/* testPHP8PropertyMultilineAttribute */',
+                'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -761,13 +761,13 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testEnumProperty */',
-                [],
+            'invalid-property-in-enum'                                     => [
+                'identifier' => '/* testEnumProperty */',
+                'expected'   => [],
             ],
-            [
-                '/* testPHP81IntersectionTypes */',
-                [
+            'php8.1-single-intersection-type'                              => [
+                'identifier' => '/* testPHP81IntersectionTypes */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -776,9 +776,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP81MoreIntersectionTypes */',
-                [
+            'php8.1-multi-intersection-type'                               => [
+                'identifier' => '/* testPHP81MoreIntersectionTypes */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -787,9 +787,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP81IllegalIntersectionTypes */',
-                [
+            'php8.1-illegal-intersection-type'                             => [
+                'identifier' => '/* testPHP81IllegalIntersectionTypes */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -798,9 +798,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP81NullableIntersectionType */',
-                [
+            'php8.1-nullable-intersection-type'                            => [
+                'identifier' => '/* testPHP81NullableIntersectionType */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -809,9 +809,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => true,
                 ],
             ],
-            [
-                '/* testPHP82PseudoTypeTrue */',
-                [
+            'php8.2-pseudo-type-true'                                      => [
+                'identifier' => '/* testPHP82PseudoTypeTrue */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -820,9 +820,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP82NullablePseudoTypeTrue */',
-                [
+            'php8.2-pseudo-type-true-nullable'                             => [
+                'identifier' => '/* testPHP82NullablePseudoTypeTrue */',
+                'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
                     'is_static'       => true,
@@ -831,9 +831,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => true,
                 ],
             ],
-            [
-                '/* testPHP82PseudoTypeTrueInUnion */',
-                [
+            'php8.2-pseudo-type-true-in-union'                             => [
+                'identifier' => '/* testPHP82PseudoTypeTrueInUnion */',
+                'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
                     'is_static'       => false,
@@ -842,9 +842,9 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            [
-                '/* testPHP82PseudoTypeFalseAndTrue */',
-                [
+            'php8.2-pseudo-type-invalid-true-false-union'                  => [
+                'identifier' => '/* testPHP82PseudoTypeFalseAndTrue */',
+                'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
                     'is_static'       => false,
@@ -883,18 +883,18 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
      *
      * @see testNotClassPropertyException()
      *
-     * @return array
+     * @return array<string, array<string>>
      */
     public function dataNotClassProperty()
     {
         return [
-            ['/* testMethodParam */'],
-            ['/* testImportedGlobal */'],
-            ['/* testLocalVariable */'],
-            ['/* testGlobalVariable */'],
-            ['/* testNestedMethodParam 1 */'],
-            ['/* testNestedMethodParam 2 */'],
-            ['/* testEnumMethodParamNotProperty */'],
+            'method parameter'                                       => ['/* testMethodParam */'],
+            'variable import using global keyword'                   => ['/* testImportedGlobal */'],
+            'function local variable'                                => ['/* testLocalVariable */'],
+            'global variable'                                        => ['/* testGlobalVariable */'],
+            'method parameter in anon class nested in ternary'       => ['/* testNestedMethodParam 1 */'],
+            'method parameter in anon class nested in function call' => ['/* testNestedMethodParam 2 */'],
+            'method parameter in enum'                               => ['/* testEnumMethodParamNotProperty */'],
         ];
 
     }//end dataNotClassProperty()
