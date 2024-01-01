@@ -21,6 +21,59 @@ class GetMethodPropertiesTest extends AbstractMethodUnitTest
 
 
     /**
+     * Test receiving an expected exception when a non function token is passed.
+     *
+     * @param string                       $commentString   The comment which preceeds the test.
+     * @param string|int|array<int|string> $targetTokenType The token type to search for after $commentString.
+     *
+     * @dataProvider dataNotAFunctionException
+     *
+     * @return void
+     */
+    public function testNotAFunctionException($commentString, $targetTokenType)
+    {
+        $this->expectRunTimeException('$stackPtr must be of type T_FUNCTION or T_CLOSURE or T_FN');
+
+        $next = $this->getTargetToken($commentString, $targetTokenType);
+        self::$phpcsFile->getMethodProperties($next);
+
+    }//end testNotAFunctionException()
+
+
+    /**
+     * Data Provider.
+     *
+     * @see testNotAFunctionException() For the array format.
+     *
+     * @return array<string, array<string, string|int|array<int|string>>>
+     */
+    public static function dataNotAFunctionException()
+    {
+        return [
+            'return'                             => [
+                'commentString'   => '/* testNotAFunction */',
+                'targetTokenType' => T_RETURN,
+            ],
+            'function-call-fn-phpcs-3.5.3-3.5.4' => [
+                'commentString'   => '/* testFunctionCallFnPHPCS353-354 */',
+                'targetTokenType' => [
+                    T_FN,
+                    T_STRING,
+                ],
+            ],
+            'fn-live-coding'                     => [
+                'commentString'   => '/* testArrowFunctionLiveCoding */',
+                'targetTokenType' => [
+                    T_FN,
+                    T_STRING,
+                ],
+            ],
+        ];
+
+    }//end dataNotAFunctionException()
+
+
+    /**
      * Test a basic function.
      *
      * @return void
@@ -326,6 +379,58 @@ class GetMethodPropertiesTest extends AbstractMethodUnitTest
         $this->getMethodPropertiesTestHelper('/* '.__FUNCTION__.' */', $expected);
 
     }//end testReturnMultilineNamespace()
+
+
+    /**
+     * Test a method with an unqualified named return type.
+     *
+     * @return void
+     */
+    public function testReturnUnqualifiedName()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected = [
+            'scope'                 => 'private',
+            'scope_specified'       => true,
+            'return_type'           => '?MyClass',
+            'return_type_token'     => 8,
+            'return_type_end_token' => 8,
+            'nullable_return_type'  => true,
+            'is_abstract'           => false,
+            'is_final'              => false,
+            'is_static'             => false,
+            'has_body'              => true,
+        ];
+
+        $this->getMethodPropertiesTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testReturnUnqualifiedName()
+
+
+    /**
+     * Test a method with a partially qualified namespaced return type.
+     *
+     * @return void
+     */
+    public function testReturnPartiallyQualifiedName()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected = [
+            'scope'                 => 'public',
+            'scope_specified'       => false,
+            'return_type'           => 'Sub\Level\MyClass',
+            'return_type_token'     => 7,
+            'return_type_end_token' => 11,
+            'nullable_return_type'  => false,
+            'is_abstract'           => false,
+            'is_final'              => false,
+            'is_static'             => false,
+            'has_body'              => true,
+        ];
+
+        $this->getMethodPropertiesTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testReturnPartiallyQualifiedName()
 
 
     /**
@@ -1054,6 +1159,116 @@ class GetMethodPropertiesTest extends AbstractMethodUnitTest
         $this->getMethodPropertiesTestHelper('/* '.__FUNCTION__.' */', $expected);
 
     }//end testPHP82PseudoTypeFalseAndTrue()
+
+
+    /**
+     * Test for incorrect tokenization of array return type declarations in PHPCS < 2.8.0.
+     *
+     * @link https://github.com/squizlabs/PHP_CodeSniffer/pull/1264
+     *
+     * @return void
+     */
+    public function testPhpcsIssue1264()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected = [
+            'scope'                 => 'public',
+            'scope_specified'       => false,
+            'return_type'           => 'array',
+            'return_type_token'     => 8,
+            'return_type_end_token' => 8,
+            'nullable_return_type'  => false,
+            'is_abstract'           => false,
+            'is_final'              => false,
+            'is_static'             => false,
+            'has_body'              => true,
+        ];
+
+        $this->getMethodPropertiesTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testPhpcsIssue1264()
+
+
+    /**
+     * Test handling of incorrect tokenization of array return type declarations for arrow functions
+     * in a very specific code sample in PHPCS < 3.5.4.
+     *
+     * @link https://github.com/squizlabs/PHP_CodeSniffer/issues/2773
+     *
+     * @return void
+     */
+    public function testArrowFunctionArrayReturnValue()
+    {
+        // Offsets are relative to the T_FN token.
+        $expected = [
+            'scope'                 => 'public',
+            'scope_specified'       => false,
+            'return_type'           => 'array',
+            'return_type_token'     => 5,
+            'return_type_end_token' => 5,
+            'nullable_return_type'  => false,
+            'is_abstract'           => false,
+            'is_final'              => false,
+            'is_static'             => false,
+            'has_body'              => true,
+        ];
+
+        $this->getMethodPropertiesTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testArrowFunctionArrayReturnValue()
+
+
+    /**
+     * Test handling of an arrow function returning by reference.
+     *
+     * @return void
+     */
+    public function testArrowFunctionReturnByRef()
+    {
+        // Offsets are relative to the T_FN token.
+        $expected = [
+            'scope'                 => 'public',
+            'scope_specified'       => false,
+            'return_type'           => '?string',
+            'return_type_token'     => 12,
+            'return_type_end_token' => 12,
+            'nullable_return_type'  => true,
+            'is_abstract'           => false,
+            'is_final'              => false,
+            'is_static'             => false,
+            'has_body'              => true,
+        ];
+
+        $this->getMethodPropertiesTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testArrowFunctionReturnByRef()
+
+
+    /**
+     * Test handling of function declaration nested in a ternary, where the colon for the
+     * return type was incorrectly tokenized as T_INLINE_ELSE prior to PHPCS 3.5.7.
+     *
+     * @return void
+     */
+    public function testFunctionDeclarationNestedInTernaryPHPCS2975()
+    {
+        // Offsets are relative to the T_FN token.
+        $expected = [
+            'scope'                 => 'public',
+            'scope_specified'       => true,
+            'return_type'           => 'c',
+            'return_type_token'     => 7,
+            'return_type_end_token' => 7,
+            'nullable_return_type'  => false,
+            'is_abstract'           => false,
+            'is_final'              => false,
+            'is_static'             => false,
+            'has_body'              => true,
+        ];
+
+        $this->getMethodPropertiesTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testFunctionDeclarationNestedInTernaryPHPCS2975()
 
 
     /**
