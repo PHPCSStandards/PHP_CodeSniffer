@@ -34,13 +34,14 @@ class MyClass {
     /* testMessyNullableReturnMethod */
     public function myFunction() /* comment
         */ :
-        /* comment */ ? //comment
+        /* comment */ ? // phpcs:ignore Stnd.Cat.Sniff -- For reasons.
         array {}
 
     /* testReturnNamespace */
     function myFunction(): \MyNamespace\MyClass {}
 
     /* testReturnMultilineNamespace */
+    // Parse error in PHP 8.0.
     function myFunction(): \MyNamespace /** comment *\/ comment */
                            \MyClass /* comment */
                            \Foo {}
@@ -163,3 +164,27 @@ function pseudoTypeTrue(): ?true {}
 /* testPHP82PseudoTypeFalseAndTrue */
 // Intentional fatal error - Type contains both true and false, bool should be used instead, but that's not the concern of the method.
 function pseudoTypeFalseAndTrue(): true|false {}
+
+/* testNotAFunction */
+return true;
+
+/* testPhpcsIssue1264 */
+function foo() : array {
+    echo $foo;
+}
+
+/* testArrowFunctionArrayReturnValue */
+$fn = fn(): array => [a($a, $b)];
+
+/* testArrowFunctionReturnByRef */
+fn&(?string $a) : ?string => $b;
+
+/* testFunctionCallFnPHPCS353-354 */
+$value = $obj->fn(true);
+
+/* testFunctionDeclarationNestedInTernaryPHPCS2975 */
+return (!$a ? [ new class { public function b(): c {} } ] : []);
+
+/* testArrowFunctionLiveCoding */
+// Intentional parse error. This has to be the last test in the file.
+$fn = fn
