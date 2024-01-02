@@ -1,7 +1,7 @@
 <documentation title="Language Construct Spacing">
     <standard>
     <![CDATA[
-    Language constructs must contain a single space between themselves and their content. This sniff supports the following language constructs: echo, print, return, include, include_once, require, require_once, new, yield, yield from, throw, namespace and use.
+    Language constructs that can be used without parentheses must contain a single space between themselves and their content.
     ]]>
     </standard>
     <code_comparison>
