@@ -18,7 +18,7 @@ function bar()
 }<em></em>
         ]]>
         </code>
-        <code title="Invalid: Content on the line with the closing brace.">
+        <code title="Invalid: Comment or statement following the closing brace on the same line.">
         <![CDATA[
 interface Foo2
 {
