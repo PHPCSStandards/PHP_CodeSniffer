@@ -179,4 +179,28 @@ abstract class AbstractMethodUnitTest extends TestCase
     }//end getTargetToken()
 
 
+    /**
+     * Helper method to tell PHPUnit to expect a PHPCS RuntimeException in a PHPUnit cross-version
+     * compatible manner.
+     *
+     * @param string $message The expected exception message.
+     *
+     * @return void
+     */
+    public function expectRunTimeException($message)
+    {
+        $exception = 'PHP_CodeSniffer\Exceptions\RuntimeException';
+
+        if (method_exists($this, 'expectException') === true) {
+            // PHPUnit 5+.
+            $this->expectException($exception);
+            $this->expectExceptionMessage($message);
+        } else {
+            // PHPUnit 4.
+            $this->setExpectedException($exception, $message);
+        }
+
+    }//end expectRunTimeException()
+
+
 }//end class
