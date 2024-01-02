@@ -3,7 +3,9 @@
  * Tests for the \PHP_CodeSniffer\Files\File::getMethodParameters method.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
+ * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2019-2024 PHPCSStandards Contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
@@ -27,15 +29,22 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPassByReference()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var',
-            'content'           => '&$var',
-            'has_attributes'    => false,
-            'pass_by_reference' => true,
-            'variable_length'   => false,
-            'type_hint'         => '',
-            'nullable_type'     => false,
+            'token'               => 5,
+            'name'                => '$var',
+            'content'             => '&$var',
+            'has_attributes'      => false,
+            'pass_by_reference'   => true,
+            'reference_token'     => 4,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -50,15 +59,22 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testArrayHint()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var',
-            'content'           => 'array $var',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'array',
-            'nullable_type'     => false,
+            'token'               => 6,
+            'name'                => '$var',
+            'content'             => 'array $var',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'array',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 4,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -73,15 +89,22 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testVariable()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var',
-            'content'           => '$var',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => '',
-            'nullable_type'     => false,
+            'token'               => 4,
+            'name'                => '$var',
+            'content'             => '$var',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -96,16 +119,25 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testSingleDefaultValue()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var1',
-            'content'           => '$var1=self::CONSTANT',
-            'default'           => 'self::CONSTANT',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => '',
-            'nullable_type'     => false,
+            'token'               => 4,
+            'name'                => '$var1',
+            'content'             => '$var1=self::CONSTANT',
+            'default'             => 'self::CONSTANT',
+            'default_token'       => 6,
+            'default_equal_token' => 5,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -120,26 +152,43 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testDefaultValues()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var1',
-            'content'           => '$var1=1',
-            'default'           => '1',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => '',
-            'nullable_type'     => false,
+            'token'               => 4,
+            'name'                => '$var1',
+            'content'             => '$var1=1',
+            'default'             => '1',
+            'default_token'       => 6,
+            'default_equal_token' => 5,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => 7,
         ];
         $expected[1] = [
-            'name'              => '$var2',
-            'content'           => "\$var2='value'",
-            'default'           => "'value'",
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => '',
-            'nullable_type'     => false,
+            'token'               => 9,
+            'name'                => '$var2',
+            'content'             => "\$var2='value'",
+            'default'             => "'value'",
+            'default_token'       => 11,
+            'default_equal_token' => 10,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -154,25 +203,38 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testTypeHint()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var1',
-            'content'           => 'foo $var1',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'foo',
-            'nullable_type'     => false,
+            'token'               => 6,
+            'name'                => '$var1',
+            'content'             => 'foo $var1',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'foo',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 4,
+            'nullable_type'       => false,
+            'comma_token'         => 7,
         ];
 
         $expected[1] = [
-            'name'              => '$var2',
-            'content'           => 'bar $var2',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'bar',
-            'nullable_type'     => false,
+            'token'               => 11,
+            'name'                => '$var2',
+            'content'             => 'bar $var2',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'bar',
+            'type_hint_token'     => 9,
+            'type_hint_end_token' => 9,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -187,15 +249,22 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testSelfTypeHint()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var',
-            'content'           => 'self $var',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'self',
-            'nullable_type'     => false,
+            'token'               => 6,
+            'name'                => '$var',
+            'content'             => 'self $var',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'self',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 4,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -210,25 +279,38 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testNullableTypeHint()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var1',
-            'content'           => '?int $var1',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => '?int',
-            'nullable_type'     => true,
+            'token'               => 7,
+            'name'                => '$var1',
+            'content'             => '?int $var1',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?int',
+            'type_hint_token'     => 5,
+            'type_hint_end_token' => 5,
+            'nullable_type'       => true,
+            'comma_token'         => 8,
         ];
 
         $expected[1] = [
-            'name'              => '$var2',
-            'content'           => '?\bar $var2',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => '?\bar',
-            'nullable_type'     => true,
+            'token'               => 14,
+            'name'                => '$var2',
+            'content'             => '?\bar $var2',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?\bar',
+            'type_hint_token'     => 11,
+            'type_hint_end_token' => 12,
+            'nullable_type'       => true,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -243,16 +325,25 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testBitwiseAndConstantExpressionDefaultValue()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$a',
-            'content'           => '$a = 10 & 20',
-            'default'           => '10 & 20',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => '',
-            'nullable_type'     => false,
+            'token'               => 4,
+            'name'                => '$a',
+            'content'             => '$a = 10 & 20',
+            'default'             => '10 & 20',
+            'default_token'       => 8,
+            'default_equal_token' => 6,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -267,25 +358,38 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testArrowFunction()
     {
+        // Offsets are relative to the T_FN token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$a',
-            'content'           => 'int $a',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'int',
-            'nullable_type'     => false,
+            'token'               => 4,
+            'name'                => '$a',
+            'content'             => 'int $a',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'int',
+            'type_hint_token'     => 2,
+            'type_hint_end_token' => 2,
+            'nullable_type'       => false,
+            'comma_token'         => 5,
         ];
 
         $expected[1] = [
-            'name'              => '$b',
-            'content'           => '...$b',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => true,
-            'type_hint'         => '',
-            'nullable_type'     => false,
+            'token'               => 8,
+            'name'                => '$b',
+            'content'             => '...$b',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => true,
+            'variadic_token'      => 7,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -300,15 +404,22 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8MixedTypeHint()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var1',
-            'content'           => 'mixed &...$var1',
-            'has_attributes'    => false,
-            'pass_by_reference' => true,
-            'variable_length'   => true,
-            'type_hint'         => 'mixed',
-            'nullable_type'     => false,
+            'token'               => 8,
+            'name'                => '$var1',
+            'content'             => 'mixed &...$var1',
+            'has_attributes'      => false,
+            'pass_by_reference'   => true,
+            'reference_token'     => 6,
+            'variable_length'     => true,
+            'variadic_token'      => 7,
+            'type_hint'           => 'mixed',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 4,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -323,15 +434,22 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8MixedTypeHintNullable()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var1',
-            'content'           => '?Mixed $var1',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => '?Mixed',
-            'nullable_type'     => true,
+            'token'               => 7,
+            'name'                => '$var1',
+            'content'             => '?Mixed $var1',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?Mixed',
+            'type_hint_token'     => 5,
+            'type_hint_end_token' => 5,
+            'nullable_type'       => true,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -346,15 +464,22 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testNamespaceOperatorTypeHint()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var1',
-            'content'           => '?namespace\Name $var1',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => '?namespace\Name',
-            'nullable_type'     => true,
+            'token'               => 9,
+            'name'                => '$var1',
+            'content'             => '?namespace\Name $var1',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?namespace\Name',
+            'type_hint_token'     => 5,
+            'type_hint_end_token' => 7,
+            'nullable_type'       => true,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -369,24 +494,37 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8UnionTypesSimple()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$number',
-            'content'           => 'int|float $number',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'int|float',
-            'nullable_type'     => false,
+            'token'               => 8,
+            'name'                => '$number',
+            'content'             => 'int|float $number',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'int|float',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 6,
+            'nullable_type'       => false,
+            'comma_token'         => 9,
         ];
         $expected[1] = [
-            'name'              => '$obj',
-            'content'           => 'self|parent &...$obj',
-            'has_attributes'    => false,
-            'pass_by_reference' => true,
-            'variable_length'   => true,
-            'type_hint'         => 'self|parent',
-            'nullable_type'     => false,
+            'token'               => 17,
+            'name'                => '$obj',
+            'content'             => 'self|parent &...$obj',
+            'has_attributes'      => false,
+            'pass_by_reference'   => true,
+            'reference_token'     => 15,
+            'variable_length'     => true,
+            'variadic_token'      => 16,
+            'type_hint'           => 'self|parent',
+            'type_hint_token'     => 11,
+            'type_hint_end_token' => 13,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -401,24 +539,37 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8UnionTypesWithSpreadOperatorAndReference()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$paramA',
-            'content'           => 'float|null &$paramA',
-            'has_attributes'    => false,
-            'pass_by_reference' => true,
-            'variable_length'   => false,
-            'type_hint'         => 'float|null',
-            'nullable_type'     => false,
+            'token'               => 9,
+            'name'                => '$paramA',
+            'content'             => 'float|null &$paramA',
+            'has_attributes'      => false,
+            'pass_by_reference'   => true,
+            'reference_token'     => 8,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'float|null',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 6,
+            'nullable_type'       => false,
+            'comma_token'         => 10,
         ];
         $expected[1] = [
-            'name'              => '$paramB',
-            'content'           => 'string|int ...$paramB',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => true,
-            'type_hint'         => 'string|int',
-            'nullable_type'     => false,
+            'token'               => 17,
+            'name'                => '$paramB',
+            'content'             => 'string|int ...$paramB',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => true,
+            'variadic_token'      => 16,
+            'type_hint'           => 'string|int',
+            'type_hint_token'     => 12,
+            'type_hint_end_token' => 14,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -433,16 +584,25 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8UnionTypesSimpleWithBitwiseOrInDefault()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var',
-            'content'           => 'int|float $var = CONSTANT_A | CONSTANT_B',
-            'default'           => 'CONSTANT_A | CONSTANT_B',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'int|float',
-            'nullable_type'     => false,
+            'token'               => 6,
+            'name'                => '$var',
+            'content'             => 'int|float $var = CONSTANT_A | CONSTANT_B',
+            'default'             => 'CONSTANT_A | CONSTANT_B',
+            'default_token'       => 10,
+            'default_equal_token' => 8,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'int|float',
+            'type_hint_token'     => 2,
+            'type_hint_end_token' => 4,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -457,15 +617,22 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8UnionTypesTwoClasses()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var',
-            'content'           => 'MyClassA|\Package\MyClassB $var',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'MyClassA|\Package\MyClassB',
-            'nullable_type'     => false,
+            'token'               => 11,
+            'name'                => '$var',
+            'content'             => 'MyClassA|\Package\MyClassB $var',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'MyClassA|\Package\MyClassB',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 9,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -480,15 +647,22 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8UnionTypesAllBaseTypes()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var',
-            'content'           => 'array|bool|callable|int|float|null|object|string $var',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'array|bool|callable|int|float|null|object|string',
-            'nullable_type'     => false,
+            'token'               => 20,
+            'name'                => '$var',
+            'content'             => 'array|bool|callable|int|float|null|object|string $var',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'array|bool|callable|int|float|null|object|string',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 18,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -499,19 +673,28 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
     /**
      * Verify recognition of PHP8 union type declaration with all pseudo types.
      *
+     * Note: "Resource" is not a type, but seen as a class name.
+     *
      * @return void
      */
     public function testPHP8UnionTypesAllPseudoTypes()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var',
-            'content'           => 'false|mixed|self|parent|iterable|Resource $var',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'false|mixed|self|parent|iterable|Resource',
-            'nullable_type'     => false,
+            'token'               => 16,
+            'name'                => '$var',
+            'content'             => 'false|mixed|self|parent|iterable|Resource $var',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'false|mixed|self|parent|iterable|Resource',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 14,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -526,15 +709,22 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8UnionTypesNullable()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$number',
-            'content'           => '?int|float $number',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => '?int|float',
-            'nullable_type'     => true,
+            'token'               => 8,
+            'name'                => '$number',
+            'content'             => '?int|float $number',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?int|float',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 6,
+            'nullable_type'       => true,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -549,16 +739,25 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8PseudoTypeNull()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var',
-            'content'           => 'null $var = null',
-            'default'           => 'null',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'null',
-            'nullable_type'     => false,
+            'token'               => 6,
+            'name'                => '$var',
+            'content'             => 'null $var = null',
+            'default'             => 'null',
+            'default_token'       => 10,
+            'default_equal_token' => 8,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'null',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 4,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -573,16 +772,25 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8PseudoTypeFalse()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var',
-            'content'           => 'false $var = false',
-            'default'           => 'false',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'false',
-            'nullable_type'     => false,
+            'token'               => 6,
+            'name'                => '$var',
+            'content'             => 'false $var = false',
+            'default'             => 'false',
+            'default_token'       => 10,
+            'default_equal_token' => 8,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'false',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 4,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -597,16 +805,25 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8PseudoTypeFalseAndBool()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var',
-            'content'           => 'bool|false $var = false',
-            'default'           => 'false',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'bool|false',
-            'nullable_type'     => false,
+            'token'               => 8,
+            'name'                => '$var',
+            'content'             => 'bool|false $var = false',
+            'default'             => 'false',
+            'default_token'       => 12,
+            'default_equal_token' => 10,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'bool|false',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 6,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -621,15 +838,22 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8ObjectAndClass()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var',
-            'content'           => 'object|ClassName $var',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'object|ClassName',
-            'nullable_type'     => false,
+            'token'               => 8,
+            'name'                => '$var',
+            'content'             => 'object|ClassName $var',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'object|ClassName',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 6,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -644,15 +868,22 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8PseudoTypeIterableAndArray()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var',
-            'content'           => 'iterable|array|Traversable $var',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'iterable|array|Traversable',
-            'nullable_type'     => false,
+            'token'               => 10,
+            'name'                => '$var',
+            'content'             => 'iterable|array|Traversable $var',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'iterable|array|Traversable',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 8,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -667,15 +898,22 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8DuplicateTypeInUnionWhitespaceAndComment()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var',
-            'content'           => 'int | string /*comment*/ | INT $var',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'int|string|INT',
-            'nullable_type'     => false,
+            'token'               => 17,
+            'name'                => '$var',
+            'content'             => 'int | string /*comment*/ | INT $var',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'int|string|INT',
+            'type_hint_token'     => 5,
+            'type_hint_end_token' => 15,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -690,42 +928,70 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8ConstructorPropertyPromotionNoTypes()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
+            'token'               => 8,
             'name'                => '$x',
             'content'             => 'public $x = 0.0',
             'default'             => '0.0',
+            'default_token'       => 12,
+            'default_equal_token' => 10,
             'has_attributes'      => false,
             'pass_by_reference'   => false,
+            'reference_token'     => false,
             'variable_length'     => false,
+            'variadic_token'      => false,
             'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
             'nullable_type'       => false,
             'property_visibility' => 'public',
+            'visibility_token'    => 6,
             'property_readonly'   => false,
+            'comma_token'         => 13,
         ];
         $expected[1] = [
+            'token'               => 18,
             'name'                => '$y',
             'content'             => 'protected $y = \'\'',
             'default'             => "''",
+            'default_token'       => 22,
+            'default_equal_token' => 20,
             'has_attributes'      => false,
             'pass_by_reference'   => false,
+            'reference_token'     => false,
             'variable_length'     => false,
+            'variadic_token'      => false,
             'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
             'nullable_type'       => false,
             'property_visibility' => 'protected',
+            'visibility_token'    => 16,
             'property_readonly'   => false,
+            'comma_token'         => 23,
         ];
         $expected[2] = [
+            'token'               => 28,
             'name'                => '$z',
             'content'             => 'private $z = null',
             'default'             => 'null',
+            'default_token'       => 32,
+            'default_equal_token' => 30,
             'has_attributes'      => false,
             'pass_by_reference'   => false,
+            'reference_token'     => false,
             'variable_length'     => false,
+            'variadic_token'      => false,
             'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
             'nullable_type'       => false,
             'property_visibility' => 'private',
+            'visibility_token'    => 26,
             'property_readonly'   => false,
+            'comma_token'         => 33,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -740,40 +1006,64 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8ConstructorPropertyPromotionWithTypes()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
+            'token'               => 10,
             'name'                => '$x',
             'content'             => 'protected float|int $x',
             'has_attributes'      => false,
             'pass_by_reference'   => false,
+            'reference_token'     => false,
             'variable_length'     => false,
+            'variadic_token'      => false,
             'type_hint'           => 'float|int',
+            'type_hint_token'     => 6,
+            'type_hint_end_token' => 8,
             'nullable_type'       => false,
             'property_visibility' => 'protected',
+            'visibility_token'    => 4,
             'property_readonly'   => false,
+            'comma_token'         => 11,
         ];
         $expected[1] = [
+            'token'               => 19,
             'name'                => '$y',
             'content'             => 'public ?string &$y = \'test\'',
             'default'             => "'test'",
+            'default_token'       => 23,
+            'default_equal_token' => 21,
             'has_attributes'      => false,
             'pass_by_reference'   => true,
+            'reference_token'     => 18,
             'variable_length'     => false,
+            'variadic_token'      => false,
             'type_hint'           => '?string',
+            'type_hint_token'     => 16,
+            'type_hint_end_token' => 16,
             'nullable_type'       => true,
             'property_visibility' => 'public',
+            'visibility_token'    => 13,
             'property_readonly'   => false,
+            'comma_token'         => 24,
         ];
         $expected[2] = [
+            'token'               => 30,
             'name'                => '$z',
             'content'             => 'private mixed $z',
             'has_attributes'      => false,
             'pass_by_reference'   => false,
+            'reference_token'     => false,
             'variable_length'     => false,
+            'variadic_token'      => false,
             'type_hint'           => 'mixed',
+            'type_hint_token'     => 28,
+            'type_hint_end_token' => 28,
             'nullable_type'       => false,
             'property_visibility' => 'private',
+            'visibility_token'    => 26,
             'property_readonly'   => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -788,26 +1078,40 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8ConstructorPropertyPromotionAndNormalParam()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
+            'token'               => 8,
             'name'                => '$promotedProp',
             'content'             => 'public int $promotedProp',
             'has_attributes'      => false,
             'pass_by_reference'   => false,
+            'reference_token'     => false,
             'variable_length'     => false,
+            'variadic_token'      => false,
             'type_hint'           => 'int',
+            'type_hint_token'     => 6,
+            'type_hint_end_token' => 6,
             'nullable_type'       => false,
             'property_visibility' => 'public',
+            'visibility_token'    => 4,
             'property_readonly'   => false,
+            'comma_token'         => 9,
         ];
         $expected[1] = [
-            'name'              => '$normalArg',
-            'content'           => '?int $normalArg',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => '?int',
-            'nullable_type'     => true,
+            'token'               => 14,
+            'name'                => '$normalArg',
+            'content'             => '?int $normalArg',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?int',
+            'type_hint_token'     => 12,
+            'type_hint_end_token' => 12,
+            'nullable_type'       => true,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -822,28 +1126,45 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP81ConstructorPropertyPromotionWithReadOnly()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
+            'token'               => 11,
             'name'                => '$promotedProp',
             'content'             => 'public readonly ?int $promotedProp',
             'has_attributes'      => false,
             'pass_by_reference'   => false,
+            'reference_token'     => false,
             'variable_length'     => false,
+            'variadic_token'      => false,
             'type_hint'           => '?int',
+            'type_hint_token'     => 9,
+            'type_hint_end_token' => 9,
             'nullable_type'       => true,
             'property_visibility' => 'public',
+            'visibility_token'    => 4,
             'property_readonly'   => true,
+            'readonly_token'      => 6,
+            'comma_token'         => 12,
         ];
         $expected[1] = [
+            'token'               => 23,
             'name'                => '$promotedToo',
             'content'             => 'readonly private string|bool &$promotedToo',
             'has_attributes'      => false,
             'pass_by_reference'   => true,
+            'reference_token'     => 22,
             'variable_length'     => false,
+            'variadic_token'      => false,
             'type_hint'           => 'string|bool',
+            'type_hint_token'     => 18,
+            'type_hint_end_token' => 20,
             'nullable_type'       => false,
             'property_visibility' => 'private',
+            'visibility_token'    => 16,
             'property_readonly'   => true,
+            'readonly_token'      => 14,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -859,28 +1180,45 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP81ConstructorPropertyPromotionWithOnlyReadOnly()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
+            'token'               => 10,
             'name'                => '$promotedProp',
             'content'             => 'readonly Foo&Bar $promotedProp',
             'has_attributes'      => false,
             'pass_by_reference'   => false,
+            'reference_token'     => false,
             'variable_length'     => false,
+            'variadic_token'      => false,
             'type_hint'           => 'Foo&Bar',
+            'type_hint_token'     => 6,
+            'type_hint_end_token' => 8,
             'nullable_type'       => false,
             'property_visibility' => 'public',
+            'visibility_token'    => false,
             'property_readonly'   => true,
+            'readonly_token'      => 4,
+            'comma_token'         => 11,
         ];
         $expected[1] = [
+            'token'               => 18,
             'name'                => '$promotedToo',
             'content'             => 'readonly ?bool $promotedToo',
             'has_attributes'      => false,
             'pass_by_reference'   => false,
+            'reference_token'     => false,
             'variable_length'     => false,
+            'variadic_token'      => false,
             'type_hint'           => '?bool',
+            'type_hint_token'     => 16,
+            'type_hint_end_token' => 16,
             'nullable_type'       => true,
             'property_visibility' => 'public',
+            'visibility_token'    => false,
             'property_readonly'   => true,
+            'readonly_token'      => 13,
+            'comma_token'         => 19,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -895,17 +1233,25 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8ConstructorPropertyPromotionGlobalFunction()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
+            'token'               => 6,
             'name'                => '$x',
             'content'             => 'private $x',
             'has_attributes'      => false,
             'pass_by_reference'   => false,
+            'reference_token'     => false,
             'variable_length'     => false,
+            'variadic_token'      => false,
             'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
             'nullable_type'       => false,
             'property_visibility' => 'private',
+            'visibility_token'    => 4,
             'property_readonly'   => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -920,28 +1266,43 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8ConstructorPropertyPromotionAbstractMethod()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
+            'token'               => 8,
             'name'                => '$y',
             'content'             => 'public callable $y',
             'has_attributes'      => false,
             'pass_by_reference'   => false,
+            'reference_token'     => false,
             'variable_length'     => false,
+            'variadic_token'      => false,
             'type_hint'           => 'callable',
+            'type_hint_token'     => 6,
+            'type_hint_end_token' => 6,
             'nullable_type'       => false,
             'property_visibility' => 'public',
+            'visibility_token'    => 4,
             'property_readonly'   => false,
+            'comma_token'         => 9,
         ];
         $expected[1] = [
+            'token'               => 14,
             'name'                => '$x',
             'content'             => 'private ...$x',
             'has_attributes'      => false,
             'pass_by_reference'   => false,
+            'reference_token'     => false,
             'variable_length'     => true,
+            'variadic_token'      => 13,
             'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
             'nullable_type'       => false,
             'property_visibility' => 'private',
+            'visibility_token'    => 11,
             'property_readonly'   => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -956,17 +1317,26 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testCommentsInParameter()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$param',
-            'content'           => '// Leading comment.
+            'token'               => 19,
+            'name'                => '$param',
+            'content'             => '// Leading comment.
     ?MyClass /*-*/ & /*-*/.../*-*/ $param /*-*/ = /*-*/ \'default value\' . /*-*/ \'second part\' // Trailing comment.',
-            'default'           => '\'default value\' . /*-*/ \'second part\' // Trailing comment.',
-            'has_attributes'    => false,
-            'pass_by_reference' => true,
-            'variable_length'   => true,
-            'type_hint'         => '?MyClass',
-            'nullable_type'     => true,
+            'default'             => '\'default value\' . /*-*/ \'second part\' // Trailing comment.',
+            'default_token'       => 27,
+            'default_equal_token' => 23,
+            'has_attributes'      => false,
+            'pass_by_reference'   => true,
+            'reference_token'     => 13,
+            'variable_length'     => true,
+            'variadic_token'      => 16,
+            'type_hint'           => '?MyClass',
+            'type_hint_token'     => 9,
+            'type_hint_end_token' => 9,
+            'nullable_type'       => true,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -981,56 +1351,88 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testParameterAttributesInFunctionDeclaration()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
+            'token'               => 17,
             'name'                => '$constructorPropPromTypedParamSingleAttribute',
             'content'             => '#[\MyExample\MyAttribute] private string $constructorPropPromTypedParamSingleAttribute',
             'has_attributes'      => true,
             'pass_by_reference'   => false,
+            'reference_token'     => false,
             'variable_length'     => false,
+            'variadic_token'      => false,
             'type_hint'           => 'string',
+            'type_hint_token'     => 15,
+            'type_hint_end_token' => 15,
             'nullable_type'       => false,
             'property_visibility' => 'private',
+            'visibility_token'    => 13,
             'property_readonly'   => false,
+            'comma_token'         => 18,
         ];
         $expected[1] = [
-            'name'              => '$typedParamSingleAttribute',
-            'content'           => '#[MyAttr([1, 2])]
+            'token'               => 39,
+            'name'                => '$typedParamSingleAttribute',
+            'content'             => '#[MyAttr([1, 2])]
         Type|false
         $typedParamSingleAttribute',
-            'has_attributes'    => true,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'Type|false',
-            'nullable_type'     => false,
+            'has_attributes'      => true,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'Type|false',
+            'type_hint_token'     => 34,
+            'type_hint_end_token' => 36,
+            'nullable_type'       => false,
+            'comma_token'         => 40,
         ];
         $expected[2] = [
-            'name'              => '$nullableTypedParamMultiAttribute',
-            'content'           => '#[MyAttribute(1234), MyAttribute(5678)] ?int $nullableTypedParamMultiAttribute',
-            'has_attributes'    => true,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => '?int',
-            'nullable_type'     => true,
+            'token'               => 59,
+            'name'                => '$nullableTypedParamMultiAttribute',
+            'content'             => '#[MyAttribute(1234), MyAttribute(5678)] ?int $nullableTypedParamMultiAttribute',
+            'has_attributes'      => true,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?int',
+            'type_hint_token'     => 57,
+            'type_hint_end_token' => 57,
+            'nullable_type'       => true,
+            'comma_token'         => 60,
         ];
         $expected[3] = [
-            'name'              => '$nonTypedParamTwoAttributes',
-            'content'           => '#[WithoutArgument] #[SingleArgument(0)] $nonTypedParamTwoAttributes',
-            'has_attributes'    => true,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => '',
-            'nullable_type'     => false,
+            'token'               => 74,
+            'name'                => '$nonTypedParamTwoAttributes',
+            'content'             => '#[WithoutArgument] #[SingleArgument(0)] $nonTypedParamTwoAttributes',
+            'has_attributes'      => true,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => 75,
         ];
         $expected[4] = [
-            'name'              => '$otherParam',
-            'content'           => '#[MyAttribute(array("key" => "value"))]
+            'token'               => 95,
+            'name'                => '$otherParam',
+            'content'             => '#[MyAttribute(array("key" => "value"))]
         &...$otherParam',
-            'has_attributes'    => true,
-            'pass_by_reference' => true,
-            'variable_length'   => true,
-            'type_hint'         => '',
-            'nullable_type'     => false,
+            'has_attributes'      => true,
+            'pass_by_reference'   => true,
+            'reference_token'     => 93,
+            'variable_length'     => true,
+            'variadic_token'      => 94,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => 96,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -1045,24 +1447,37 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP8IntersectionTypes()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$obj1',
-            'content'           => 'Foo&Bar $obj1',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'Foo&Bar',
-            'nullable_type'     => false,
+            'token'               => 8,
+            'name'                => '$obj1',
+            'content'             => 'Foo&Bar $obj1',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'Foo&Bar',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 6,
+            'nullable_type'       => false,
+            'comma_token'         => 9,
         ];
         $expected[1] = [
-            'name'              => '$obj2',
-            'content'           => 'Boo&Bar $obj2',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'Boo&Bar',
-            'nullable_type'     => false,
+            'token'               => 15,
+            'name'                => '$obj2',
+            'content'             => 'Boo&Bar $obj2',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'Boo&Bar',
+            'type_hint_token'     => 11,
+            'type_hint_end_token' => 13,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -1071,30 +1486,44 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
 
 
     /**
-     * Verify recognition of PHP8 intersection type declaration when the variable has either a spread operator or a reference.
+     * Verify recognition of PHP8 intersection type declaration when the variable
+     * has either a spread operator or a reference.
      *
      * @return void
      */
     public function testPHP81IntersectionTypesWithSpreadOperatorAndReference()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$paramA',
-            'content'           => 'Boo&Bar &$paramA',
-            'has_attributes'    => false,
-            'pass_by_reference' => true,
-            'variable_length'   => false,
-            'type_hint'         => 'Boo&Bar',
-            'nullable_type'     => false,
+            'token'               => 9,
+            'name'                => '$paramA',
+            'content'             => 'Boo&Bar &$paramA',
+            'has_attributes'      => false,
+            'pass_by_reference'   => true,
+            'reference_token'     => 8,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'Boo&Bar',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 6,
+            'nullable_type'       => false,
+            'comma_token'         => 10,
         ];
         $expected[1] = [
-            'name'              => '$paramB',
-            'content'           => 'Foo&Bar ...$paramB',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => true,
-            'type_hint'         => 'Foo&Bar',
-            'nullable_type'     => false,
+            'token'               => 17,
+            'name'                => '$paramB',
+            'content'             => 'Foo&Bar ...$paramB',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => true,
+            'variadic_token'      => 16,
+            'type_hint'           => 'Foo&Bar',
+            'type_hint_token'     => 12,
+            'type_hint_end_token' => 14,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -1109,15 +1538,22 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP81MoreIntersectionTypes()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var',
-            'content'           => 'MyClassA&\Package\MyClassB&\Package\MyClassC $var',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'MyClassA&\Package\MyClassB&\Package\MyClassC',
-            'nullable_type'     => false,
+            'token'               => 16,
+            'name'                => '$var',
+            'content'             => 'MyClassA&\Package\MyClassB&\Package\MyClassC $var',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'MyClassA&\Package\MyClassB&\Package\MyClassC',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 14,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -1132,15 +1568,22 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP81IllegalIntersectionTypes()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$numeric_string',
-            'content'           => 'string&int $numeric_string',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'string&int',
-            'nullable_type'     => false,
+            'token'               => 7,
+            'name'                => '$numeric_string',
+            'content'             => 'string&int $numeric_string',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'string&int',
+            'type_hint_token'     => 3,
+            'type_hint_end_token' => 5,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -1155,15 +1598,22 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP81NullableIntersectionTypes()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$object',
-            'content'           => '?Foo&Bar $object',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => '?Foo&Bar',
-            'nullable_type'     => true,
+            'token'               => 8,
+            'name'                => '$object',
+            'content'             => '?Foo&Bar $object',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?Foo&Bar',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 6,
+            'nullable_type'       => true,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -1178,16 +1628,25 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP82PseudoTypeTrue()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var',
-            'content'           => '?true $var = true',
-            'default'           => 'true',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => '?true',
-            'nullable_type'     => true,
+            'token'               => 7,
+            'name'                => '$var',
+            'content'             => '?true $var = true',
+            'default'             => 'true',
+            'default_token'       => 11,
+            'default_equal_token' => 9,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?true',
+            'type_hint_token'     => 5,
+            'type_hint_end_token' => 5,
+            'nullable_type'       => true,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -1202,16 +1661,25 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testPHP82PseudoTypeFalseAndTrue()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
-            'name'              => '$var',
-            'content'           => 'true|false $var = true',
-            'default'           => 'true',
-            'has_attributes'    => false,
-            'pass_by_reference' => false,
-            'variable_length'   => false,
-            'type_hint'         => 'true|false',
-            'nullable_type'     => false,
+            'token'               => 8,
+            'name'                => '$var',
+            'content'             => 'true|false $var = true',
+            'default'             => 'true',
+            'default_token'       => 12,
+            'default_equal_token' => 10,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'true|false',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 6,
+            'nullable_type'       => false,
+            'comma_token'         => false,
         ];
 
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
@@ -1222,31 +1690,56 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
     /**
      * Test helper.
      *
-     * @param string $commentString The comment which preceeds the test.
-     * @param array  $expected      The expected function output.
+     * @param string                                     $commentString The comment which preceeds the test.
+     * @param array<int, array<string, int|string|bool>> $expected      The expected function output.
      *
      * @return void
      */
     private function getMethodParametersTestHelper($commentString, $expected)
     {
-        $function = $this->getTargetToken($commentString, [T_FUNCTION, T_CLOSURE, T_FN]);
-        $found    = self::$phpcsFile->getMethodParameters($function);
+        $target = $this->getTargetToken($commentString, [T_FUNCTION, T_CLOSURE, T_FN]);
+        $found  = self::$phpcsFile->getMethodParameters($target);
 
-        // Unset those indexes which are not being tested.
-        foreach ($found as $i => $param) {
-            unset(
-                $found[$i]['token'],
-                $found[$i]['reference_token'],
-                $found[$i]['variadic_token'],
-                $found[$i]['type_hint_token'],
-                $found[$i]['type_hint_end_token'],
-                $found[$i]['comma_token'],
-                $found[$i]['default_token'],
-                $found[$i]['default_equal_token'],
-                $found[$i]['visibility_token'],
-                $found[$i]['readonly_token']
-            );
-        }
+        // Convert offsets to absolute positions in the token stream.
+        foreach ($expected as $key => $param) {
+            $expected[$key]['token'] += $target;
+
+            if (is_int($param['reference_token']) === true) {
+                $expected[$key]['reference_token'] += $target;
+            }
+
+            if (is_int($param['variadic_token']) === true) {
+                $expected[$key]['variadic_token'] += $target;
+            }
+
+            if (is_int($param['type_hint_token']) === true) {
+                $expected[$key]['type_hint_token'] += $target;
+            }
+
+            if (is_int($param['type_hint_end_token']) === true) {
+                $expected[$key]['type_hint_end_token'] += $target;
+            }
+
+            if (is_int($param['comma_token']) === true) {
+                $expected[$key]['comma_token'] += $target;
+            }
+
+            if (isset($param['default_token']) === true) {
+                $expected[$key]['default_token'] += $target;
+            }
+
+            if (isset($param['default_equal_token']) === true) {
+                $expected[$key]['default_equal_token'] += $target;
+            }
+
+            if (isset($param['visibility_token']) === true && is_int($param['visibility_token']) === true) {
+                $expected[$key]['visibility_token'] += $target;
+            }
+
+            if (isset($param['readonly_token']) === true) {
+                $expected[$key]['readonly_token'] += $target;
+            }
+        }//end foreach
 
         $this->assertSame($expected, $found);
 
