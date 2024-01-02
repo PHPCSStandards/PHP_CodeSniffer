@@ -11,6 +11,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\File;
 
+use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 
 /**
@@ -20,6 +21,137 @@ use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
  */
 class GetMethodParametersTest extends AbstractMethodUnitTest
 {
+
+
+    /**
+     * Test receiving an expected exception when a non function/use token is passed.
+     *
+     * @param string                       $commentString   The comment which preceeds the test.
+     * @param int|string|array<int|string> $targetTokenType The token type to search for after $commentString.
+     *
+     * @dataProvider dataUnexpectedTokenException
+     *
+     * @return void
+     */
+    public function testUnexpectedTokenException($commentString, $targetTokenType)
+    {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('$stackPtr must be of type T_FUNCTION or T_CLOSURE or T_USE or T_FN');
+
+        $target = $this->getTargetToken($commentString, $targetTokenType);
+        self::$phpcsFile->getMethodParameters($target);
+
+    }//end testUnexpectedTokenException()
+
+
+    /**
+     * Data Provider.
+     *
+     * @see testUnexpectedTokenException() For the array format.
+     *
+     * @return array<string, array<string, int|string|array<int|string>>>
+     */
+    public static function dataUnexpectedTokenException()
+    {
+        return [
+            'interface'                          => [
+                'commentString'   => '/* testNotAFunction */',
+                'targetTokenType' => T_INTERFACE,
+            ],
+            'function-call-fn-phpcs-3.5.3-3.5.4' => [
+                'commentString'   => '/* testFunctionCallFnPHPCS353-354 */',
+                'targetTokenType' => [
+                    T_FN,
+                    T_STRING,
+                ],
+            ],
+            'fn-live-coding'                     => [
+                'commentString'   => '/* testArrowFunctionLiveCoding */',
+                'targetTokenType' => [
+                    T_FN,
+                    T_STRING,
+                ],
+            ],
+        ];
+
+    }//end dataUnexpectedTokenException()
+
+
+    /**
+     * Test receiving an empty array when a non-closure use token is passed.
+     *
+     * @param string $identifier The comment which preceeds the test.
+     *
+     * @dataProvider dataInvalidUse
+     *
+     * @return void
+     */
+    public function testInvalidUse($identifier)
+    {
+        $use = $this->getTargetToken($identifier, [T_USE]);
+        $this->assertSame([], self::$phpcsFile->getMethodParameters($use));
+
+    }//end testInvalidUse()
+
+
+    /**
+     * Data Provider.
+     *
+     * @see testInvalidUse() For the array format.
+     *
+     * @return array<string, array<string>>
+     */
+    public static function dataInvalidUse()
+    {
+        return [
+            'ImportUse'      => ['/* testImportUse */'],
+            'ImportGroupUse' => ['/* testImportGroupUse */'],
+            'TraitUse'       => ['/* testTraitUse */'],
+        ];
+
+    }//end dataInvalidUse()
+
+
+    /**
+     * Test receiving an empty array when there are no parameters.
+     *
+     * @param string                       $commentString   The comment which preceeds the test.
+     * @param int|string|array<int|string> $targetTokenType Optional. The token type to search for after $commentString.
+     *                                                      Defaults to the function/closure/arrow tokens.
+     *
+     * @dataProvider dataNoParams
+     *
+     * @return void
+     */
+    public function testNoParams($commentString, $targetTokenType=[T_FUNCTION, T_CLOSURE, T_FN])
+    {
+        $target = $this->getTargetToken($commentString, $targetTokenType);
+        $result = self::$phpcsFile->getMethodParameters($target);
+
+        $this->assertSame([], $result);
+
+    }//end testNoParams()
+
+
+    /**
+     * Data Provider.
+     *
+     * @see testNoParams() For the array format.
+     *
+     * @return array<string, array<int|string|array<int|string>>>
+     */
+    public static function dataNoParams()
+    {
+        return [
+            'FunctionNoParams'   => ['/* testFunctionNoParams */'],
+            'ClosureNoParams'    => ['/* testClosureNoParams */'],
+            'ClosureUseNoParams' => [
+                '/* testClosureUseNoParams */',
+                T_USE,
+            ],
+        ];
+
+    }//end dataNoParams()
 
 
     /**
@@ -398,6 +530,692 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
 
 
     /**
+     * Verify that arrow functions are supported.
+     *
+     * @return void
+     */
+    public function testArrowFunctionReturnByRef()
+    {
+        // Offsets are relative to the T_FN token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 6,
+            'name'                => '$a',
+            'content'             => '?string $a',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?string',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 4,
+            'nullable_type'       => true,
+            'comma_token'         => false,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testArrowFunctionReturnByRef()
+
+
+    /**
+     * Verify default value parsing with array values.
+     *
+     * @return void
+     */
+    public function testArrayDefaultValues()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 4,
+            'name'                => '$var1',
+            'content'             => '$var1 = []',
+            'default'             => '[]',
+            'default_token'       => 8,
+            'default_equal_token' => 6,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => 10,
+        ];
+        $expected[1] = [
+            'token'               => 12,
+            'name'                => '$var2',
+            'content'             => '$var2 = array(1, 2, 3)',
+            'default'             => 'array(1, 2, 3)',
+            'default_token'       => 16,
+            'default_equal_token' => 14,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => false,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testArrayDefaultValues()
+
+
+    /**
+     * Verify having a T_STRING constant as a default value for the second parameter.
+     *
+     * @return void
+     */
+    public function testConstantDefaultValueSecondParam()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 4,
+            'name'                => '$var1',
+            'content'             => '$var1',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => 5,
+        ];
+        $expected[1] = [
+            'token'               => 7,
+            'name'                => '$var2',
+            'content'             => '$var2 = M_PI',
+            'default'             => 'M_PI',
+            'default_token'       => 11,
+            'default_equal_token' => 9,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => false,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testConstantDefaultValueSecondParam()
+
+
+    /**
+     * Verify distinquishing between a nullable type and a ternary within a default expression.
+     *
+     * @return void
+     */
+    public function testScalarTernaryExpressionInDefault()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 5,
+            'name'                => '$a',
+            'content'             => '$a = FOO ? \'bar\' : 10',
+            'default'             => 'FOO ? \'bar\' : 10',
+            'default_token'       => 9,
+            'default_equal_token' => 7,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => 18,
+        ];
+        $expected[1] = [
+            'token'               => 24,
+            'name'                => '$b',
+            'content'             => '? bool $b',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?bool',
+            'type_hint_token'     => 22,
+            'type_hint_end_token' => 22,
+            'nullable_type'       => true,
+            'comma_token'         => false,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testScalarTernaryExpressionInDefault()
+
+
+    /**
+     * Verify a variadic parameter being recognized correctly.
+     *
+     * @return void
+     */
+    public function testVariadicFunction()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 9,
+            'name'                => '$a',
+            'content'             => 'int ... $a',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => true,
+            'variadic_token'      => 7,
+            'type_hint'           => 'int',
+            'type_hint_token'     => 5,
+            'type_hint_end_token' => 5,
+            'nullable_type'       => false,
+            'comma_token'         => false,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testVariadicFunction()
+
+
+    /**
+     * Verify a variadic parameter passed by reference being recognized correctly.
+     *
+     * @return void
+     */
+    public function testVariadicByRefFunction()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 7,
+            'name'                => '$a',
+            'content'             => '&...$a',
+            'has_attributes'      => false,
+            'pass_by_reference'   => true,
+            'reference_token'     => 5,
+            'variable_length'     => true,
+            'variadic_token'      => 6,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => false,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testVariadicByRefFunction()
+
+
+    /**
+     * Verify correctly recognizing all type declarations supported by PHP.
+     *
+     * @return void
+     */
+    public function testWithAllTypes()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected     = [];
+        $expected[0]  = [
+            'token'               => 9,
+            'name'                => '$a',
+            'content'             => '?ClassName $a',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?ClassName',
+            'type_hint_token'     => 7,
+            'type_hint_end_token' => 7,
+            'nullable_type'       => true,
+            'comma_token'         => 10,
+        ];
+        $expected[1]  = [
+            'token'               => 15,
+            'name'                => '$b',
+            'content'             => 'self $b',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'self',
+            'type_hint_token'     => 13,
+            'type_hint_end_token' => 13,
+            'nullable_type'       => false,
+            'comma_token'         => 16,
+        ];
+        $expected[2]  = [
+            'token'               => 21,
+            'name'                => '$c',
+            'content'             => 'parent $c',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'parent',
+            'type_hint_token'     => 19,
+            'type_hint_end_token' => 19,
+            'nullable_type'       => false,
+            'comma_token'         => 22,
+        ];
+        $expected[3]  = [
+            'token'               => 27,
+            'name'                => '$d',
+            'content'             => 'object $d',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'object',
+            'type_hint_token'     => 25,
+            'type_hint_end_token' => 25,
+            'nullable_type'       => false,
+            'comma_token'         => 28,
+        ];
+        $expected[4]  = [
+            'token'               => 34,
+            'name'                => '$e',
+            'content'             => '?int $e',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?int',
+            'type_hint_token'     => 32,
+            'type_hint_end_token' => 32,
+            'nullable_type'       => true,
+            'comma_token'         => 35,
+        ];
+        $expected[5]  = [
+            'token'               => 41,
+            'name'                => '$f',
+            'content'             => 'string &$f',
+            'has_attributes'      => false,
+            'pass_by_reference'   => true,
+            'reference_token'     => 40,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'string',
+            'type_hint_token'     => 38,
+            'type_hint_end_token' => 38,
+            'nullable_type'       => false,
+            'comma_token'         => 42,
+        ];
+        $expected[6]  = [
+            'token'               => 47,
+            'name'                => '$g',
+            'content'             => 'iterable $g',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'iterable',
+            'type_hint_token'     => 45,
+            'type_hint_end_token' => 45,
+            'nullable_type'       => false,
+            'comma_token'         => 48,
+        ];
+        $expected[7]  = [
+            'token'               => 53,
+            'name'                => '$h',
+            'content'             => 'bool $h = true',
+            'default'             => 'true',
+            'default_token'       => 57,
+            'default_equal_token' => 55,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'bool',
+            'type_hint_token'     => 51,
+            'type_hint_end_token' => 51,
+            'nullable_type'       => false,
+            'comma_token'         => 58,
+        ];
+        $expected[8]  = [
+            'token'               => 63,
+            'name'                => '$i',
+            'content'             => 'callable $i = \'is_null\'',
+            'default'             => "'is_null'",
+            'default_token'       => 67,
+            'default_equal_token' => 65,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'callable',
+            'type_hint_token'     => 61,
+            'type_hint_end_token' => 61,
+            'nullable_type'       => false,
+            'comma_token'         => 68,
+        ];
+        $expected[9]  = [
+            'token'               => 73,
+            'name'                => '$j',
+            'content'             => 'float $j = 1.1',
+            'default'             => '1.1',
+            'default_token'       => 77,
+            'default_equal_token' => 75,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'float',
+            'type_hint_token'     => 71,
+            'type_hint_end_token' => 71,
+            'nullable_type'       => false,
+            'comma_token'         => 78,
+        ];
+        $expected[10] = [
+            'token'               => 84,
+            'name'                => '$k',
+            'content'             => 'array ...$k',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => true,
+            'variadic_token'      => 83,
+            'type_hint'           => 'array',
+            'type_hint_token'     => 81,
+            'type_hint_end_token' => 81,
+            'nullable_type'       => false,
+            'comma_token'         => false,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testWithAllTypes()
+
+
+    /**
+     * Verify correctly recognizing all type declarations supported by PHP when used with an arrow function.
+     *
+     * @return void
+     */
+    public function testArrowFunctionWithAllTypes()
+    {
+        // Offsets are relative to the T_FN token.
+        $expected     = [];
+        $expected[0]  = [
+            'token'               => 7,
+            'name'                => '$a',
+            'content'             => '?ClassName $a',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?ClassName',
+            'type_hint_token'     => 5,
+            'type_hint_end_token' => 5,
+            'nullable_type'       => true,
+            'comma_token'         => 8,
+        ];
+        $expected[1]  = [
+            'token'               => 13,
+            'name'                => '$b',
+            'content'             => 'self $b',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'self',
+            'type_hint_token'     => 11,
+            'type_hint_end_token' => 11,
+            'nullable_type'       => false,
+            'comma_token'         => 14,
+        ];
+        $expected[2]  = [
+            'token'               => 19,
+            'name'                => '$c',
+            'content'             => 'parent $c',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'parent',
+            'type_hint_token'     => 17,
+            'type_hint_end_token' => 17,
+            'nullable_type'       => false,
+            'comma_token'         => 20,
+        ];
+        $expected[3]  = [
+            'token'               => 25,
+            'name'                => '$d',
+            'content'             => 'object $d',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'object',
+            'type_hint_token'     => 23,
+            'type_hint_end_token' => 23,
+            'nullable_type'       => false,
+            'comma_token'         => 26,
+        ];
+        $expected[4]  = [
+            'token'               => 32,
+            'name'                => '$e',
+            'content'             => '?int $e',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?int',
+            'type_hint_token'     => 30,
+            'type_hint_end_token' => 30,
+            'nullable_type'       => true,
+            'comma_token'         => 33,
+        ];
+        $expected[5]  = [
+            'token'               => 39,
+            'name'                => '$f',
+            'content'             => 'string &$f',
+            'has_attributes'      => false,
+            'pass_by_reference'   => true,
+            'reference_token'     => 38,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'string',
+            'type_hint_token'     => 36,
+            'type_hint_end_token' => 36,
+            'nullable_type'       => false,
+            'comma_token'         => 40,
+        ];
+        $expected[6]  = [
+            'token'               => 45,
+            'name'                => '$g',
+            'content'             => 'iterable $g',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'iterable',
+            'type_hint_token'     => 43,
+            'type_hint_end_token' => 43,
+            'nullable_type'       => false,
+            'comma_token'         => 46,
+        ];
+        $expected[7]  = [
+            'token'               => 51,
+            'name'                => '$h',
+            'content'             => 'bool $h = true',
+            'default'             => 'true',
+            'default_token'       => 55,
+            'default_equal_token' => 53,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'bool',
+            'type_hint_token'     => 49,
+            'type_hint_end_token' => 49,
+            'nullable_type'       => false,
+            'comma_token'         => 56,
+        ];
+        $expected[8]  = [
+            'token'               => 61,
+            'name'                => '$i',
+            'content'             => 'callable $i = \'is_null\'',
+            'default'             => "'is_null'",
+            'default_token'       => 65,
+            'default_equal_token' => 63,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'callable',
+            'type_hint_token'     => 59,
+            'type_hint_end_token' => 59,
+            'nullable_type'       => false,
+            'comma_token'         => 66,
+        ];
+        $expected[9]  = [
+            'token'               => 71,
+            'name'                => '$j',
+            'content'             => 'float $j = 1.1',
+            'default'             => '1.1',
+            'default_token'       => 75,
+            'default_equal_token' => 73,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'float',
+            'type_hint_token'     => 69,
+            'type_hint_end_token' => 69,
+            'nullable_type'       => false,
+            'comma_token'         => 76,
+        ];
+        $expected[10] = [
+            'token'               => 82,
+            'name'                => '$k',
+            'content'             => 'array ...$k',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => true,
+            'variadic_token'      => 81,
+            'type_hint'           => 'array',
+            'type_hint_token'     => 79,
+            'type_hint_end_token' => 79,
+            'nullable_type'       => false,
+            'comma_token'         => false,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testArrowFunctionWithAllTypes()
+
+
+    /**
+     * Verify handling of a declaration interlaced with whitespace and comments.
+     *
+     * @return void
+     */
+    public function testMessyDeclaration()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 24,
+            'name'                => '$a',
+            'content'             => '// comment
+    ?\MyNS /* comment */
+        \ SubCat // phpcs:ignore Standard.Cat.Sniff -- for reasons.
+            \  MyClass $a',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            // In PHP 8.0+, the type interlaced with comments is a parse error. Not our concern.
+            'type_hint'           => '?\MyNSSubCatMyClass',
+            'type_hint_token'     => 9,
+            'type_hint_end_token' => 22,
+            'nullable_type'       => true,
+            'comma_token'         => 25,
+        ];
+
+        $expected[1] = [
+            'token'               => 28,
+            'name'                => '$b',
+            'content'             => "\$b /* test */ = /* test */ 'default' /* test*/",
+            'default'             => "'default' /* test*/",
+            'default_token'       => 36,
+            'default_equal_token' => 32,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => 39,
+        ];
+        $expected[2] = [
+            'token'               => 61,
+            'name'                => '$c',
+            'content'             => '// phpcs:ignore Stnd.Cat.Sniff -- For reasons.
+    ? /*comment*/
+        bool // phpcs:disable Stnd.Cat.Sniff -- For reasons.
+        & /*test*/ ... /* phpcs:ignore */ $c',
+            'has_attributes'      => false,
+            'pass_by_reference'   => true,
+            'reference_token'     => 53,
+            'variable_length'     => true,
+            'variadic_token'      => 57,
+            'type_hint'           => '?bool',
+            'type_hint_token'     => 49,
+            'type_hint_end_token' => 49,
+            'nullable_type'       => true,
+            'comma_token'         => false,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testMessyDeclaration()
+
+
+    /**
      * Verify recognition of PHP8 mixed type declaration.
      *
      * @return void
@@ -494,6 +1312,7 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testVariadicFunctionClassType()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
             'token'               => 4,
@@ -538,6 +1357,7 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
      */
     public function testNameSpacedTypeDeclaration()
     {
+        // Offsets are relative to the T_FUNCTION token.
         $expected    = [];
         $expected[0] = [
             'token'               => 7,
@@ -1238,7 +2058,7 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
         $expected[1] = [
             'token'               => 23,
             'name'                => '$promotedToo',
-            'content'             => 'readonly private string|bool &$promotedToo',
+            'content'             => 'ReadOnly private string|bool &$promotedToo',
             'has_attributes'      => false,
             'pass_by_reference'   => true,
             'reference_token'     => 22,
@@ -1258,6 +2078,60 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
 
     }//end testPHP81ConstructorPropertyPromotionWithReadOnly()
+
+
+    /**
+     * Verify recognition of PHP8 constructor with property promotion using PHP 8.1 readonly keyword
+     * without a property type.
+     *
+     * @return void
+     */
+    public function testPHP81ConstructorPropertyPromotionWithReadOnlyNoTypeDeclaration()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 8,
+            'name'                => '$promotedProp',
+            'content'             => 'public readonly $promotedProp',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'property_visibility' => 'public',
+            'visibility_token'    => 4,
+            'property_readonly'   => true,
+            'readonly_token'      => 6,
+            'comma_token'         => 9,
+        ];
+        $expected[1] = [
+            'token'               => 16,
+            'name'                => '$promotedToo',
+            'content'             => 'ReadOnly private &$promotedToo',
+            'has_attributes'      => false,
+            'pass_by_reference'   => true,
+            'reference_token'     => 15,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'property_visibility' => 'private',
+            'visibility_token'    => 13,
+            'property_readonly'   => true,
+            'readonly_token'      => 11,
+            'comma_token'         => false,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testPHP81ConstructorPropertyPromotionWithReadOnlyNoTypeDeclaration()
 
 
     /**
@@ -1776,16 +2650,330 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
 
 
     /**
+     * Verify behaviour when the default value uses the "new" keyword, as is allowed per PHP 8.1.
+     *
+     * @return void
+     */
+    public function testPHP81NewInInitializers()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 8,
+            'name'                => '$new',
+            'content'             => 'TypeA $new = new TypeA(self::CONST_VALUE)',
+            'default'             => 'new TypeA(self::CONST_VALUE)',
+            'default_token'       => 12,
+            'default_equal_token' => 10,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'TypeA',
+            'type_hint_token'     => 6,
+            'type_hint_end_token' => 6,
+            'nullable_type'       => false,
+            'comma_token'         => 20,
+        ];
+        $expected[1] = [
+            'token'               => 25,
+            'name'                => '$newToo',
+            'content'             => '\Package\TypeB $newToo = new \Package\TypeB(10, \'string\')',
+            'default'             => "new \Package\TypeB(10, 'string')",
+            'default_token'       => 29,
+            'default_equal_token' => 27,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '\Package\TypeB',
+            'type_hint_token'     => 23,
+            'type_hint_end_token' => 23,
+            'nullable_type'       => false,
+            'comma_token'         => 38,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testPHP81NewInInitializers()
+
+
+    /**
+     * Verify handling of a closure.
+     *
+     * @return void
+     */
+    public function testClosure()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 3,
+            'name'                => '$a',
+            'content'             => '$a = \'test\'',
+            'default'             => "'test'",
+            'default_token'       => 7,
+            'default_equal_token' => 5,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => false,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testClosure()
+
+
+    /**
+     * Verify handling of a closure T_USE token correctly.
+     *
+     * @return void
+     */
+    public function testClosureUse()
+    {
+        // Offsets are relative to the T_USE token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 3,
+            'name'                => '$foo',
+            'content'             => '$foo',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => 4,
+        ];
+        $expected[1] = [
+            'token'               => 6,
+            'name'                => '$bar',
+            'content'             => '$bar',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => false,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected, [T_USE]);
+
+    }//end testClosureUse()
+
+
+    /**
+     * Verify function declarations with trailing commas are handled correctly.
+     *
+     * @return void
+     */
+    public function testFunctionParamListWithTrailingComma()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 9,
+            'name'                => '$foo',
+            'content'             => '?string $foo  /*comment*/',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?string',
+            'type_hint_token'     => 7,
+            'type_hint_end_token' => 7,
+            'nullable_type'       => true,
+            'comma_token'         => 13,
+        ];
+        $expected[1] = [
+            'token'               => 16,
+            'name'                => '$bar',
+            'content'             => '$bar = 0',
+            'default'             => '0',
+            'default_token'       => 20,
+            'default_equal_token' => 18,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => 21,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testFunctionParamListWithTrailingComma()
+
+
+    /**
+     * Verify closure declarations with trailing commas are handled correctly.
+     *
+     * @return void
+     */
+    public function testClosureParamListWithTrailingComma()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 4,
+            'name'                => '$foo',
+            'content'             => '$foo',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => 5,
+        ];
+        $expected[1] = [
+            'token'               => 8,
+            'name'                => '$bar',
+            'content'             => '$bar',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => 9,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testClosureParamListWithTrailingComma()
+
+
+    /**
+     * Verify arrow function declarations with trailing commas are handled correctly.
+     *
+     * @return void
+     */
+    public function testArrowFunctionParamListWithTrailingComma()
+    {
+        // Offsets are relative to the T_FN token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 6,
+            'name'                => '$a',
+            'content'             => '?int $a',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?int',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 4,
+            'nullable_type'       => true,
+            'comma_token'         => 8,
+        ];
+        $expected[1] = [
+            'token'               => 11,
+            'name'                => '$b',
+            'content'             => '...$b',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => true,
+            'variadic_token'      => 10,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => 12,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testArrowFunctionParamListWithTrailingComma()
+
+
+    /**
+     * Verify closure T_USE statements with trailing commas are handled correctly.
+     *
+     * @return void
+     */
+    public function testClosureUseWithTrailingComma()
+    {
+        // Offsets are relative to the T_USE token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 4,
+            'name'                => '$foo',
+            'content'             => '$foo  /*comment*/',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => 8,
+        ];
+        $expected[1] = [
+            'token'               => 11,
+            'name'                => '$bar',
+            'content'             => '$bar',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '',
+            'type_hint_token'     => false,
+            'type_hint_end_token' => false,
+            'nullable_type'       => false,
+            'comma_token'         => 12,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected, [T_USE]);
+
+    }//end testClosureUseWithTrailingComma()
+
+
+    /**
      * Test helper.
      *
      * @param string                                     $commentString The comment which preceeds the test.
      * @param array<int, array<string, int|string|bool>> $expected      The expected function output.
+     * @param int|string|array<int|string>               $targetType    Optional. The token type to search for after $marker.
+     *                                                                  Defaults to the function/closure/arrow tokens.
      *
      * @return void
      */
-    private function getMethodParametersTestHelper($commentString, $expected)
+    private function getMethodParametersTestHelper($commentString, $expected, $targetType=[T_FUNCTION, T_CLOSURE, T_FN])
     {
-        $target = $this->getTargetToken($commentString, [T_FUNCTION, T_CLOSURE, T_FN]);
+        $target = $this->getTargetToken($commentString, $targetType);
         $found  = self::$phpcsFile->getMethodParameters($target);
 
         // Convert offsets to absolute positions in the token stream.
