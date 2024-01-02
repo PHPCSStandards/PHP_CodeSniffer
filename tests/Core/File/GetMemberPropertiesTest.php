@@ -870,17 +870,7 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
      */
     public function testNotClassPropertyException($identifier)
     {
-        $msg       = '$stackPtr is not a class member var';
-        $exception = 'PHP_CodeSniffer\Exceptions\RuntimeException';
-
-        if (\method_exists($this, 'expectException') === true) {
-            // PHPUnit 5+.
-            $this->expectException($exception);
-            $this->expectExceptionMessage($msg);
-        } else {
-            // PHPUnit 4.
-            $this->setExpectedException($exception, $msg);
-        }
+        $this->expectRunTimeException('$stackPtr is not a class member var');
 
         $variable = $this->getTargetToken($identifier, T_VARIABLE);
         $result   = self::$phpcsFile->getMemberProperties($variable);
@@ -917,17 +907,7 @@ class GetMemberPropertiesTest extends AbstractMethodUnitTest
      */
     public function testNotAVariableException()
     {
-        $msg       = '$stackPtr must be of type T_VARIABLE';
-        $exception = 'PHP_CodeSniffer\Exceptions\RuntimeException';
-
-        if (\method_exists($this, 'expectException') === true) {
-            // PHPUnit 5+.
-            $this->expectException($exception);
-            $this->expectExceptionMessage($msg);
-        } else {
-            // PHPUnit 4.
-            $this->setExpectedException($exception, $msg);
-        }
+        $this->expectRunTimeException('$stackPtr must be of type T_VARIABLE');
 
         $next   = $this->getTargetToken('/* testNotAVariable */', T_RETURN);
         $result = self::$phpcsFile->getMemberProperties($next);

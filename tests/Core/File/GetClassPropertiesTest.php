@@ -32,17 +32,7 @@ class GetClassPropertiesTest extends AbstractMethodUnitTest
      */
     public function testNotAClassException($testMarker, $tokenType)
     {
-        $msg       = '$stackPtr must be of type T_CLASS';
-        $exception = 'PHP_CodeSniffer\Exceptions\RuntimeException';
-
-        if (\method_exists($this, 'expectException') === true) {
-            // PHPUnit 5+.
-            $this->expectException($exception);
-            $this->expectExceptionMessage($msg);
-        } else {
-            // PHPUnit 4.
-            $this->setExpectedException($exception, $msg);
-        }
+        $this->expectRunTimeException('$stackPtr must be of type T_CLASS');
 
         $target = $this->getTargetToken($testMarker, $tokenType);
         self::$phpcsFile->getClassProperties($target);
