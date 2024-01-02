@@ -5,7 +5,7 @@
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: No content on the line with the closing brace.">
+        <code title="Valid: Closing brace is the last content on the line.">
         <![CDATA[
 class Foo
 {
