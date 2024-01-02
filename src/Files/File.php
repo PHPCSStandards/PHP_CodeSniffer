@@ -2658,7 +2658,7 @@ class File
         }
 
         // Make sure the token has conditions.
-        if (isset($this->tokens[$stackPtr]['conditions']) === false) {
+        if (empty($this->tokens[$stackPtr]['conditions']) === true) {
             return false;
         }
 
@@ -2699,7 +2699,7 @@ class File
         }
 
         // Make sure the token has conditions.
-        if (isset($this->tokens[$stackPtr]['conditions']) === false) {
+        if (empty($this->tokens[$stackPtr]['conditions']) === true) {
             return false;
         }
 
