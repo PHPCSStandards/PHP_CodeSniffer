@@ -41,14 +41,21 @@ class ForLoopShouldBeWhileLoopUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
+     * @param string $testFile The name of the test file being tested.
+     *
      * @return array<int, int>
      */
-    public function getWarningList()
+    public function getWarningList($testFile='')
     {
-        return [
-            6  => 1,
-            10 => 1,
-        ];
+        switch ($testFile) {
+        case 'ForLoopShouldBeWhileLoopUnitTest.1.inc':
+            return [
+                6  => 1,
+                10 => 1,
+            ];
+        default:
+            return [];
+        }
 
     }//end getWarningList()
 
