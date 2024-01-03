@@ -63,7 +63,7 @@ final class ErrorSuppressionTest extends TestCase
      *
      * @see testSuppressError()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataSuppressError()
     {
@@ -184,7 +184,7 @@ EOD;
      *
      * @see testSuppressSomeErrors()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataSuppressSomeErrors()
     {
@@ -266,7 +266,7 @@ EOD;
      *
      * @see testSuppressWarning()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataSuppressWarning()
     {
@@ -341,7 +341,7 @@ EOD;
      *
      * @see testSuppressLine()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataSuppressLine()
     {
@@ -497,7 +497,7 @@ EOD;
      *
      * @see testNestedSuppressLine()
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public static function dataNestedSuppressLine()
     {
@@ -584,7 +584,7 @@ EOD;
      *
      * @see testSuppressScope()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataSuppressScope()
     {
@@ -669,7 +669,7 @@ EOD;
      *
      * @see testSuppressFile()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataSuppressFile()
     {
@@ -768,7 +768,7 @@ EOD;
      *
      * @see testDisableSelected()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataDisableSelected()
     {
@@ -881,7 +881,7 @@ EOD;
      *
      * @see testEnableSelected()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataEnableSelected()
     {
@@ -1061,7 +1061,7 @@ EOD;
      *
      * @see testIgnoreSelected()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataIgnoreSelected()
     {
@@ -1148,7 +1148,7 @@ EOD;
      *
      * @see testCommenting()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataCommenting()
     {
