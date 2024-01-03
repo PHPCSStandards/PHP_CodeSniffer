@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests the tokenization of goto declarations and statements.
+ * Tests the tokenization of heredoc/nowdoc closer tokens.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2020 Squiz Pty Ltd (ABN 77 084 670 600)
@@ -23,8 +23,8 @@ final class HeredocNowdocCloserTest extends AbstractMethodUnitTest
     /**
      * Verify that leading (indent) whitespace in a heredoc/nowdoc closer token get the tab replacement treatment.
      *
-     * @param string $testMarker The comment prefacing the target token.
-     * @param array  $expected   Expectations for the token array.
+     * @param string                         $testMarker The comment prefacing the target token.
+     * @param array<string, int|string|null> $expected   Expectations for the token array.
      *
      * @dataProvider dataHeredocNowdocCloserTabReplacement
      * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
@@ -55,12 +55,12 @@ final class HeredocNowdocCloserTest extends AbstractMethodUnitTest
      *
      * @see testHeredocNowdocCloserTabReplacement()
      *
-     * @return array
+     * @return array<string, array<string, string|array<string, int|string|null>>>
      */
     public static function dataHeredocNowdocCloserTabReplacement()
     {
         return [
-            [
+            'Heredoc closer without indent'      => [
                 'testMarker' => '/* testHeredocCloserNoIndent */',
                 'expected'   => [
                     'length'       => 3,
@@ -68,7 +68,7 @@ final class HeredocNowdocCloserTest extends AbstractMethodUnitTest
                     'orig_content' => null,
                 ],
             ],
-            [
+            'Nowdoc closer without indent'       => [
                 'testMarker' => '/* testNowdocCloserNoIndent */',
                 'expected'   => [
                     'length'       => 3,
@@ -76,7 +76,7 @@ final class HeredocNowdocCloserTest extends AbstractMethodUnitTest
                     'orig_content' => null,
                 ],
             ],
-            [
+            'Heredoc closer with indent, spaces' => [
                 'testMarker' => '/* testHeredocCloserSpaceIndent */',
                 'expected'   => [
                     'length'       => 7,
@@ -84,7 +84,7 @@ final class HeredocNowdocCloserTest extends AbstractMethodUnitTest
                     'orig_content' => null,
                 ],
             ],
-            [
+            'Nowdoc closer with indent, spaces'  => [
                 'testMarker' => '/* testNowdocCloserSpaceIndent */',
                 'expected'   => [
                     'length'       => 8,
@@ -92,7 +92,7 @@ final class HeredocNowdocCloserTest extends AbstractMethodUnitTest
                     'orig_content' => null,
                 ],
             ],
-            [
+            'Heredoc closer with indent, tabs'   => [
                 'testMarker' => '/* testHeredocCloserTabIndent */',
                 'expected'   => [
                     'length'       => 8,
@@ -100,7 +100,7 @@ final class HeredocNowdocCloserTest extends AbstractMethodUnitTest
                     'orig_content' => '	 END',
                 ],
             ],
-            [
+            'Nowdoc closer with indent, tabs'    => [
                 'testMarker' => '/* testNowdocCloserTabIndent */',
                 'expected'   => [
                     'length'       => 7,
