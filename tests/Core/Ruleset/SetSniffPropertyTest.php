@@ -72,7 +72,7 @@ final class SetSniffPropertyTest extends TestCase
      *
      * @see self::testSniffPropertiesGetSetWhenAllowed()
      *
-     * @return array
+     * @return array<string, array<string>>
      */
     public static function dataSniffPropertiesGetSetWhenAllowed()
     {
@@ -313,34 +313,40 @@ final class SetSniffPropertyTest extends TestCase
      *
      * @see self::testDirectCallWithOldArrayFormatSetsProperty()
      *
-     * @return array
+     * @return array<string, array<string, mixed>>
      */
     public static function dataDirectCallWithOldArrayFormatSetsProperty()
     {
         return [
-            'Property value is not an array (boolean)'                       => [false],
-            'Property value is not an array (string)'                        => ['a string'],
-            'Property value is an empty array'                               => [[]],
+            'Property value is not an array (boolean)'                       => [
+                'propertyValue' => false,
+            ],
+            'Property value is not an array (string)'                        => [
+                'propertyValue' => 'a string',
+            ],
+            'Property value is an empty array'                               => [
+                'propertyValue' => [],
+            ],
             'Property value is an array without keys'                        => [
-                [
+                'propertyValue' => [
                     'value',
                     false,
                 ],
             ],
             'Property value is an array without the "scope" or "value" keys' => [
-                [
+                'propertyValue' => [
                     'key1' => 'value',
                     'key2' => false,
                 ],
             ],
             'Property value is an array without the "scope" key'             => [
-                [
+                'propertyValue' => [
                     'key1'  => 'value',
                     'value' => true,
                 ],
             ],
             'Property value is an array without the "value" key'             => [
-                [
+                'propertyValue' => [
                     'scope' => 'value',
                     'key2'  => 1234,
                 ],
