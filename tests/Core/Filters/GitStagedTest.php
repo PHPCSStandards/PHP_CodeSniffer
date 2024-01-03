@@ -112,14 +112,18 @@ final class GitStagedTest extends AbstractFilterTestCase
 
             'single file marked as git modified - file in root dir'                => [
                 'inputPaths'      => $fakeFileList,
-                'outputGitStaged' => ['autoload.php'],
+                'outputGitStaged' => [
+                    'autoload.php',
+                ],
                 'expectedOutput'  => [
                     $basedir.'/autoload.php',
                 ],
             ],
             'single file marked as git modified - file in sub dir'                 => [
                 'inputPaths'      => $fakeFileList,
-                'outputGitStaged' => ['src/Standards/Generic/Sniffs/Classes/DuplicateClassNameSniff.php'],
+                'outputGitStaged' => [
+                    'src/Standards/Generic/Sniffs/Classes/DuplicateClassNameSniff.php',
+                ],
                 'expectedOutput'  => [
                     $basedir.'/src',
                     $basedir.'/src/Standards',
