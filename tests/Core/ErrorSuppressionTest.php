@@ -17,7 +17,8 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests for PHP_CodeSniffer error suppression tags.
  *
- * @coversNothing
+ * @covers PHP_CodeSniffer\Files\File::addMessage
+ * @covers PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
  */
 final class ErrorSuppressionTest extends TestCase
 {
@@ -32,7 +33,6 @@ final class ErrorSuppressionTest extends TestCase
      *                               Defaults to 0.
      *
      * @dataProvider dataSuppressError
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -165,7 +165,6 @@ final class ErrorSuppressionTest extends TestCase
      *                               Defaults to 1.
      *
      * @dataProvider dataSuppressSomeErrors
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -258,7 +257,6 @@ EOD;
      *                                 Defaults to 0.
      *
      * @dataProvider dataSuppressWarning
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -343,7 +341,6 @@ EOD;
      *                               Defaults to 1.
      *
      * @dataProvider dataSuppressLine
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -444,8 +441,6 @@ EOD;
     /**
      * Test suppressing a single error using a single line ignore in the middle of a line.
      *
-     * @covers PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
-     *
      * @return void
      */
     public function testSuppressLineMidLine()
@@ -468,8 +463,6 @@ EOD;
 
     /**
      * Test suppressing a single error using a single line ignore within a docblock.
-     *
-     * @covers PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -507,7 +500,6 @@ EOD;
      * @param string $after  Annotation to place after the code.
      *
      * @dataProvider dataNestedSuppressLine
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -598,7 +590,6 @@ EOD;
      *                               Defaults to 0.
      *
      * @dataProvider dataSuppressScope
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -696,7 +687,6 @@ EOD;
      *                                 Defaults to 0.
      *
      * @dataProvider dataSuppressFile
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -811,7 +801,6 @@ EOD;
      *                                 Defaults to 0.
      *
      * @dataProvider dataDisableSelected
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -929,7 +918,6 @@ EOD;
      * @param int    $expectedWarnings Number of warnings expected.
      *
      * @dataProvider dataEnableSelected
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -1104,7 +1092,6 @@ EOD;
      * @param int    $expectedWarnings Number of warnings expected.
      *
      * @dataProvider dataIgnoreSelected
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -1196,7 +1183,6 @@ EOD;
      * @param int    $expectedWarnings Number of warnings expected.
      *
      * @dataProvider dataCommenting
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
