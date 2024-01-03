@@ -87,6 +87,12 @@
         <severity>0</severity>
     </rule>
 
+    <!-- Don't enforce single line arrays for single item arrays in test files. Readability over brevity. -->
+    <rule ref="Squiz.Arrays.ArrayDeclaration.MultiLineNotAllowed">
+        <exclude-pattern>tests/*\.php$</exclude-pattern>
+        <exclude-pattern>Standards/*/Tests/*/*UnitTest\.php$</exclude-pattern>
+    </rule>
+
     <!-- Check var names, but we don't want leading underscores for private vars -->
     <rule ref="Squiz.NamingConventions.ValidVariableName"/>
     <rule ref="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore">
