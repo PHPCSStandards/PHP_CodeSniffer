@@ -391,12 +391,24 @@ EOD;
             ],
 
             // With suppression on line before.
-            'ignore: line before, slash comment'         => ['before' => '// phpcs:ignore'],
-            'ignore: line before, slash comment, with @' => ['before' => '// @phpcs:ignore'],
-            'ignore: line before, hash comment'          => ['before' => '# phpcs:ignore'],
-            'ignore: line before, hash comment, with @'  => ['before' => '# @phpcs:ignore'],
-            'ignore: line before, star comment'          => ['before' => '/* phpcs:ignore */'],
-            'ignore: line before, star comment, with @'  => ['before' => '/* @phpcs:ignore */'],
+            'ignore: line before, slash comment'         => [
+                'before' => '// phpcs:ignore',
+            ],
+            'ignore: line before, slash comment, with @' => [
+                'before' => '// @phpcs:ignore',
+            ],
+            'ignore: line before, hash comment'          => [
+                'before' => '# phpcs:ignore',
+            ],
+            'ignore: line before, hash comment, with @'  => [
+                'before' => '# @phpcs:ignore',
+            ],
+            'ignore: line before, star comment'          => [
+                'before' => '/* phpcs:ignore */',
+            ],
+            'ignore: line before, star comment, with @'  => [
+                'before' => '/* @phpcs:ignore */',
+            ],
 
             // With suppression as trailing comment on code line.
             'ignore: end of line, slash comment'         => [
@@ -417,7 +429,9 @@ EOD;
             ],
 
             // Deprecated syntax.
-            'old style: line before, slash comment'      => ['before' => '// @codingStandardsIgnoreLine'],
+            'old style: line before, slash comment'      => [
+                'before' => '// @codingStandardsIgnoreLine',
+            ],
             'old style: end of line, slash comment'      => [
                 'before' => '',
                 'after'  => ' // @codingStandardsIgnoreLine',
@@ -732,16 +746,30 @@ EOD;
             ],
 
             // Process with suppression.
-            'ignoreFile: start of file, slash comment'                => ['before' => '// phpcs:ignoreFile'],
-            'ignoreFile: start of file, slash comment, with @'        => ['before' => '// @phpcs:ignoreFile'],
-            'ignoreFile: start of file, slash comment, mixed case'    => ['before' => '// PHPCS:Ignorefile'],
-            'ignoreFile: start of file, hash comment'                 => ['before' => '# phpcs:ignoreFile'],
-            'ignoreFile: start of file, hash comment, with @'         => ['before' => '# @phpcs:ignoreFile'],
-            'ignoreFile: start of file, single-line star comment'     => ['before' => '/* phpcs:ignoreFile */'],
+            'ignoreFile: start of file, slash comment'                => [
+                'before' => '// phpcs:ignoreFile',
+            ],
+            'ignoreFile: start of file, slash comment, with @'        => [
+                'before' => '// @phpcs:ignoreFile',
+            ],
+            'ignoreFile: start of file, slash comment, mixed case'    => [
+                'before' => '// PHPCS:Ignorefile',
+            ],
+            'ignoreFile: start of file, hash comment'                 => [
+                'before' => '# phpcs:ignoreFile',
+            ],
+            'ignoreFile: start of file, hash comment, with @'         => [
+                'before' => '# @phpcs:ignoreFile',
+            ],
+            'ignoreFile: start of file, single-line star comment'     => [
+                'before' => '/* phpcs:ignoreFile */',
+            ],
             'ignoreFile: start of file, multi-line star comment'      => [
                 'before' => '/*'.PHP_EOL.' phpcs:ignoreFile'.PHP_EOL.' */',
             ],
-            'ignoreFile: start of file, single-line docblock comment' => ['before' => '/** phpcs:ignoreFile */'],
+            'ignoreFile: start of file, single-line docblock comment' => [
+                'before' => '/** phpcs:ignoreFile */',
+            ],
 
             // Process late comment.
             'ignoreFile: late comment, slash comment'                 => [
@@ -750,12 +778,18 @@ EOD;
             ],
 
             // Deprecated syntax.
-            'old style: start of file, slash comment'                 => ['before' => '// @codingStandardsIgnoreFile'],
-            'old style: start of file, single-line star comment'      => ['before' => '/* @codingStandardsIgnoreFile */'],
+            'old style: start of file, slash comment'                 => [
+                'before' => '// @codingStandardsIgnoreFile',
+            ],
+            'old style: start of file, single-line star comment'      => [
+                'before' => '/* @codingStandardsIgnoreFile */',
+            ],
             'old style: start of file, multi-line star comment'       => [
                 'before' => '/*'.PHP_EOL.' @codingStandardsIgnoreFile'.PHP_EOL.' */',
             ],
-            'old style: start of file, single-line docblock comment'  => ['before' => '/** @codingStandardsIgnoreFile */'],
+            'old style: start of file, single-line docblock comment'  => [
+                'before' => '/** @codingStandardsIgnoreFile */',
+            ],
 
             // Deprecated syntax, late comment.
             'old style: late comment, slash comment'                  => [
@@ -843,7 +877,9 @@ EOD;
             ],
 
             // Multiple sniffs.
-            'disable: multiple sniffs in one comment'      => ['before' => '// phpcs:disable Generic.Commenting.Todo,Generic.PHP.LowerCaseConstant'],
+            'disable: multiple sniffs in one comment'      => [
+                'before' => '// phpcs:disable Generic.Commenting.Todo,Generic.PHP.LowerCaseConstant',
+            ],
             'disable: multiple sniff in multiple comments' => [
                 'before' => '// phpcs:disable Generic.Commenting.Todo'.PHP_EOL.'// phpcs:disable Generic.PHP.LowerCaseConstant',
             ],
@@ -853,12 +889,16 @@ EOD;
                 'before'         => '// phpcs:disable Generic.Commenting',
                 'expectedErrors' => 1,
             ],
-            'disable: whole standard'                      => ['before' => '// phpcs:disable Generic'],
+            'disable: whole standard'                      => [
+                'before' => '// phpcs:disable Generic',
+            ],
             'disable: single errorcode'                    => [
                 'before'         => '# @phpcs:disable Generic.Commenting.Todo.TaskFound',
                 'expectedErrors' => 1,
             ],
-            'disable: single errorcode and a category'     => ['before' => '// phpcs:disable Generic.PHP.LowerCaseConstant.Found,Generic.Commenting'],
+            'disable: single errorcode and a category'     => [
+                'before' => '// phpcs:disable Generic.PHP.LowerCaseConstant.Found,Generic.Commenting',
+            ],
 
             // Wrong category/sniff/code.
             'disable: wrong error code and category'       => [
