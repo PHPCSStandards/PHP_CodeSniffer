@@ -19,14 +19,15 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
      * Test that the "readonly" keyword is tokenized as such.
      *
      * @param string $testMarker  The comment which prefaces the target token in the test file.
-     * @param string $testContent The token content to look for.
+     * @param string $testContent Optional. The token content to look for.
+     *                            Defaults to lowercase "readonly".
      *
      * @dataProvider dataReadonly
      * @covers       PHP_CodeSniffer\Tokenizers\PHP::processAdditional
      *
      * @return void
      */
-    public function testReadonly($testMarker, $testContent)
+    public function testReadonly($testMarker, $testContent='readonly')
     {
         $tokens = self::$phpcsFile->getTokens();
 
@@ -49,87 +50,66 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
         return [
             [
                 '/* testReadonlyProperty */',
-                'readonly',
             ],
             [
                 '/* testVarReadonlyProperty */',
-                'readonly',
             ],
             [
                 '/* testReadonlyVarProperty */',
-                'readonly',
             ],
             [
                 '/* testStaticReadonlyProperty */',
-                'readonly',
             ],
             [
                 '/* testReadonlyStaticProperty */',
-                'readonly',
             ],
             [
                 '/* testConstReadonlyProperty */',
-                'readonly',
             ],
             [
                 '/* testReadonlyPropertyWithoutType */',
-                'readonly',
             ],
             [
                 '/* testPublicReadonlyProperty */',
-                'readonly',
             ],
             [
                 '/* testProtectedReadonlyProperty */',
-                'readonly',
             ],
             [
                 '/* testPrivateReadonlyProperty */',
-                'readonly',
             ],
             [
                 '/* testPublicReadonlyPropertyWithReadonlyFirst */',
-                'readonly',
             ],
             [
                 '/* testProtectedReadonlyPropertyWithReadonlyFirst */',
-                'readonly',
             ],
             [
                 '/* testPrivateReadonlyPropertyWithReadonlyFirst */',
-                'readonly',
             ],
             [
                 '/* testReadonlyWithCommentsInDeclaration */',
-                'readonly',
             ],
             [
                 '/* testReadonlyWithNullableProperty */',
-                'readonly',
             ],
             [
                 '/* testReadonlyNullablePropertyWithUnionTypeHintAndNullFirst */',
-                'readonly',
             ],
             [
                 '/* testReadonlyNullablePropertyWithUnionTypeHintAndNullLast */',
-                'readonly',
             ],
             [
                 '/* testReadonlyPropertyWithArrayTypeHint */',
-                'readonly',
             ],
             [
                 '/* testReadonlyPropertyWithSelfTypeHint */',
-                'readonly',
             ],
             [
                 '/* testReadonlyPropertyWithParentTypeHint */',
-                'readonly',
             ],
             [
                 '/* testReadonlyPropertyWithFullyQualifiedTypeHint */',
-                'readonly',
             ],
             [
                 '/* testReadonlyIsCaseInsensitive */',
@@ -137,7 +117,6 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
             ],
             [
                 '/* testReadonlyConstructorPropertyPromotion */',
-                'readonly',
             ],
             [
                 '/* testReadonlyConstructorPropertyPromotionWithReference */',
@@ -145,47 +124,36 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
             ],
             [
                 '/* testReadonlyPropertyInAnonymousClass */',
-                'readonly',
             ],
             [
                 '/* testReadonlyPropertyDNFTypeUnqualified */',
-                'readonly',
             ],
             [
                 '/* testReadonlyPropertyDNFTypeFullyQualified */',
-                'readonly',
             ],
             [
                 '/* testReadonlyPropertyDNFTypePartiallyQualified */',
-                'readonly',
             ],
             [
                 '/* testReadonlyPropertyDNFTypeRelativeName */',
-                'readonly',
             ],
             [
                 '/* testReadonlyPropertyDNFTypeMultipleSets */',
-                'readonly',
             ],
             [
                 '/* testReadonlyPropertyDNFTypeWithArray */',
-                'readonly',
             ],
             [
                 '/* testReadonlyPropertyDNFTypeWithSpacesAndComments */',
-                'readonly',
             ],
             [
                 '/* testReadonlyConstructorPropertyPromotionWithDNF */',
-                'readonly',
             ],
             [
                 '/* testReadonlyConstructorPropertyPromotionWithDNFAndReference */',
-                'readonly',
             ],
             [
                 '/* testParseErrorLiveCoding */',
-                'readonly',
             ],
         ];
 
@@ -196,14 +164,15 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
      * Test that "readonly" when not used as the keyword is still tokenized as `T_STRING`.
      *
      * @param string $testMarker  The comment which prefaces the target token in the test file.
-     * @param string $testContent The token content to look for.
+     * @param string $testContent Optional. The token content to look for.
+     *                            Defaults to lowercase "readonly".
      *
      * @dataProvider dataNotReadonly
      * @covers       PHP_CodeSniffer\Tokenizers\PHP::processAdditional
      *
      * @return void
      */
-    public function testNotReadonly($testMarker, $testContent)
+    public function testNotReadonly($testMarker, $testContent='readonly')
     {
         $tokens = self::$phpcsFile->getTokens();
 
@@ -230,23 +199,18 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
             ],
             [
                 '/* testReadonlyUsedAsMethodName */',
-                'readonly',
             ],
             [
                 '/* testReadonlyUsedAsPropertyName */',
-                'readonly',
             ],
             [
                 '/* testReadonlyPropertyInTernaryOperator */',
-                'readonly',
             ],
             [
                 '/* testReadonlyUsedAsFunctionName */',
-                'readonly',
             ],
             [
                 '/* testReadonlyUsedAsFunctionNameWithReturnByRef */',
-                'readonly',
             ],
             [
                 '/* testReadonlyUsedAsNamespaceName */',
@@ -258,11 +222,9 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
             ],
             [
                 '/* testReadonlyAsFunctionCall */',
-                'readonly',
             ],
             [
                 '/* testReadonlyAsNamespacedFunctionCall */',
-                'readonly',
             ],
             [
                 '/* testReadonlyAsNamespaceRelativeFunctionCall */',
@@ -270,7 +232,6 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
             ],
             [
                 '/* testReadonlyAsMethodCall */',
-                'readonly',
             ],
             [
                 '/* testReadonlyAsNullsafeMethodCall */',
@@ -278,7 +239,6 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
             ],
             [
                 '/* testReadonlyAsStaticMethodCallWithSpace */',
-                'readonly',
             ],
             [
                 '/* testClassConstantFetchWithReadonlyAsConstantName */',
@@ -286,11 +246,9 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
             ],
             [
                 '/* testReadonlyUsedAsFunctionCallWithSpaceBetweenKeywordAndParens */',
-                'readonly',
             ],
             [
                 '/* testReadonlyUsedAsMethodNameWithDNFParam */',
-                'readonly',
             ],
         ];
 
