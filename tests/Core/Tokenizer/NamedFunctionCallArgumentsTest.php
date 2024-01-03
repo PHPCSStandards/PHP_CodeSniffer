@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests the backfilling of the T_FN token to PHP < 7.4.
+ * Tests the backfilling of the parameter labels for PHP 8.0 named parameters in function calls.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2020 Squiz Pty Ltd (ABN 77 084 670 600)
