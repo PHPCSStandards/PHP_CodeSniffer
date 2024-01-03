@@ -48,7 +48,7 @@ final class ShortArrayTest extends AbstractTokenizerTestCase
      *
      * @see testSquareBrackets()
      *
-     * @return array
+     * @return array<string, array<string>>
      */
     public static function dataSquareBrackets()
     {
@@ -116,7 +116,7 @@ final class ShortArrayTest extends AbstractTokenizerTestCase
      *
      * @see testShortArrays()
      *
-     * @return array
+     * @return array<string, array<string>>
      */
     public static function dataShortArrays()
     {

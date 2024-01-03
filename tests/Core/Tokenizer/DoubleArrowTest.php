@@ -43,7 +43,7 @@ final class DoubleArrowTest extends AbstractTokenizerTestCase
      *
      * @see testDoubleArrow()
      *
-     * @return array
+     * @return array<string, array<string>>
      */
     public static function dataDoubleArrow()
     {
@@ -128,7 +128,7 @@ final class DoubleArrowTest extends AbstractTokenizerTestCase
      *
      * @see testMatchArrow()
      *
-     * @return array
+     * @return array<string, array<string>>
      */
     public static function dataMatchArrow()
     {
@@ -215,7 +215,7 @@ final class DoubleArrowTest extends AbstractTokenizerTestCase
      *
      * @see testFnArrow()
      *
-     * @return array
+     * @return array<string, array<string>>
      */
     public static function dataFnArrow()
     {
