@@ -18,21 +18,23 @@ final class BackfillNumericSeparatorTest extends AbstractMethodUnitTest
     /**
      * Test that numbers using numeric separators are tokenized correctly.
      *
-     * @param array $testData The data required for the specific test case.
+     * @param string $marker The comment which prefaces the target token in the test file.
+     * @param string $type   The expected token type.
+     * @param string $value  The expected token content.
      *
      * @dataProvider dataTestBackfill
      * @covers       PHP_CodeSniffer\Tokenizers\PHP::tokenize
      *
      * @return void
      */
-    public function testBackfill($testData)
+    public function testBackfill($marker, $type, $value)
     {
         $tokens = self::$phpcsFile->getTokens();
-        $number = $this->getTargetToken($testData['marker'], [T_LNUMBER, T_DNUMBER]);
+        $number = $this->getTargetToken($marker, [T_LNUMBER, T_DNUMBER]);
 
-        $this->assertSame(constant($testData['type']), $tokens[$number]['code']);
-        $this->assertSame($testData['type'], $tokens[$number]['type']);
-        $this->assertSame($testData['value'], $tokens[$number]['content']);
+        $this->assertSame(constant($type), $tokens[$number]['code']);
+        $this->assertSame($type, $tokens[$number]['type']);
+        $this->assertSame($value, $tokens[$number]['content']);
 
     }//end testBackfill()
 
@@ -63,95 +65,69 @@ final class BackfillNumericSeparatorTest extends AbstractMethodUnitTest
 
         return [
             [
-                [
-                    'marker' => '/* testSimpleLNumber */',
-                    'type'   => 'T_LNUMBER',
-                    'value'  => '1_000_000_000',
-                ],
+                'marker' => '/* testSimpleLNumber */',
+                'type'   => 'T_LNUMBER',
+                'value'  => '1_000_000_000',
             ],
             [
-                [
-                    'marker' => '/* testSimpleDNumber */',
-                    'type'   => 'T_DNUMBER',
-                    'value'  => '107_925_284.88',
-                ],
+                'marker' => '/* testSimpleDNumber */',
+                'type'   => 'T_DNUMBER',
+                'value'  => '107_925_284.88',
             ],
             [
-                [
-                    'marker' => '/* testFloat */',
-                    'type'   => 'T_DNUMBER',
-                    'value'  => '6.674_083e-11',
-                ],
+                'marker' => '/* testFloat */',
+                'type'   => 'T_DNUMBER',
+                'value'  => '6.674_083e-11',
             ],
             [
-                [
-                    'marker' => '/* testFloat2 */',
-                    'type'   => 'T_DNUMBER',
-                    'value'  => '6.674_083e+11',
-                ],
+                'marker' => '/* testFloat2 */',
+                'type'   => 'T_DNUMBER',
+                'value'  => '6.674_083e+11',
             ],
             [
-                [
-                    'marker' => '/* testFloat3 */',
-                    'type'   => 'T_DNUMBER',
-                    'value'  => '1_2.3_4e1_23',
-                ],
+                'marker' => '/* testFloat3 */',
+                'type'   => 'T_DNUMBER',
+                'value'  => '1_2.3_4e1_23',
             ],
             [
-                [
-                    'marker' => '/* testHex */',
-                    'type'   => $testHexType,
-                    'value'  => '0xCAFE_F00D',
-                ],
+                'marker' => '/* testHex */',
+                'type'   => $testHexType,
+                'value'  => '0xCAFE_F00D',
             ],
             [
-                [
-                    'marker' => '/* testHexMultiple */',
-                    'type'   => $testHexMultipleType,
-                    'value'  => '0x42_72_6F_77_6E',
-                ],
+                'marker' => '/* testHexMultiple */',
+                'type'   => $testHexMultipleType,
+                'value'  => '0x42_72_6F_77_6E',
             ],
             [
-                [
-                    'marker' => '/* testHexInt */',
-                    'type'   => 'T_LNUMBER',
-                    'value'  => '0x42_72_6F',
-                ],
+                'marker' => '/* testHexInt */',
+                'type'   => 'T_LNUMBER',
+                'value'  => '0x42_72_6F',
             ],
             [
-                [
-                    'marker' => '/* testBinary */',
-                    'type'   => 'T_LNUMBER',
-                    'value'  => '0b0101_1111',
-                ],
+                'marker' => '/* testBinary */',
+                'type'   => 'T_LNUMBER',
+                'value'  => '0b0101_1111',
             ],
             [
-                [
-                    'marker' => '/* testOctal */',
-                    'type'   => 'T_LNUMBER',
-                    'value'  => '0137_041',
-                ],
+                'marker' => '/* testOctal */',
+                'type'   => 'T_LNUMBER',
+                'value'  => '0137_041',
             ],
             [
-                [
-                    'marker' => '/* testExplicitOctal */',
-                    'type'   => 'T_LNUMBER',
-                    'value'  => '0o137_041',
-                ],
+                'marker' => '/* testExplicitOctal */',
+                'type'   => 'T_LNUMBER',
+                'value'  => '0o137_041',
             ],
             [
-                [
-                    'marker' => '/* testExplicitOctalCapitalised */',
-                    'type'   => 'T_LNUMBER',
-                    'value'  => '0O137_041',
-                ],
+                'marker' => '/* testExplicitOctalCapitalised */',
+                'type'   => 'T_LNUMBER',
+                'value'  => '0O137_041',
             ],
             [
-                [
-                    'marker' => '/* testIntMoreThanMax */',
-                    'type'   => $testIntMoreThanMaxType,
-                    'value'  => '10_223_372_036_854_775_807',
-                ],
+                'marker' => '/* testIntMoreThanMax */',
+                'type'   => $testIntMoreThanMaxType,
+                'value'  => '10_223_372_036_854_775_807',
             ],
         ];
 
