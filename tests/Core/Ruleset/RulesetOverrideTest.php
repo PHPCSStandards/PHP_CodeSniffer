@@ -13,6 +13,11 @@ use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests for the \PHP_CodeSniffer\Ruleset class.
+ *
+ * @covers \PHP_CodeSniffer\Ruleset::processRuleset
+ */
 class RulesetOverrideTest extends TestCase
 {
 
