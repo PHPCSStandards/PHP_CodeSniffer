@@ -52,6 +52,7 @@ class ForLoopShouldBeWhileLoopUnitTest extends AbstractSniffUnitTest
             return [
                 6  => 1,
                 10 => 1,
+                34 => 1,
             ];
         default:
             return [];
