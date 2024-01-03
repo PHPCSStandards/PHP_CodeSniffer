@@ -1,7 +1,7 @@
 <documentation title="Closing Brace">
     <standard>
     <![CDATA[
-    Any closing brace must not be followed by any comment or statement on the same line.
+    The closing brace of object-oriented constructs and functions must not be followed by any comment or statement on the same line.
     ]]>
     </standard>
     <code_comparison>
