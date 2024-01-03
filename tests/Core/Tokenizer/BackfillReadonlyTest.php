@@ -43,117 +43,117 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
      *
      * @see testReadonly()
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public static function dataReadonly()
     {
         return [
-            [
-                '/* testReadonlyProperty */',
+            'property declaration, no visibility'                                             => [
+                'testMarker' => '/* testReadonlyProperty */',
             ],
-            [
-                '/* testVarReadonlyProperty */',
+            'property declaration, var keyword before'                                        => [
+                'testMarker' => '/* testVarReadonlyProperty */',
             ],
-            [
-                '/* testReadonlyVarProperty */',
+            'property declaration, var keyword after'                                         => [
+                'testMarker' => '/* testReadonlyVarProperty */',
             ],
-            [
-                '/* testStaticReadonlyProperty */',
+            'property declaration, static before'                                             => [
+                'testMarker' => '/* testStaticReadonlyProperty */',
             ],
-            [
-                '/* testReadonlyStaticProperty */',
+            'property declaration, static after'                                              => [
+                'testMarker' => '/* testReadonlyStaticProperty */',
             ],
-            [
-                '/* testConstReadonlyProperty */',
+            'constant declaration, with visibility'                                           => [
+                'testMarker' => '/* testConstReadonlyProperty */',
             ],
-            [
-                '/* testReadonlyPropertyWithoutType */',
+            'property declaration, missing type'                                              => [
+                'testMarker' => '/* testReadonlyPropertyWithoutType */',
             ],
-            [
-                '/* testPublicReadonlyProperty */',
+            'property declaration, public before'                                             => [
+                'testMarker' => '/* testPublicReadonlyProperty */',
             ],
-            [
-                '/* testProtectedReadonlyProperty */',
+            'property declaration, protected before'                                          => [
+                'testMarker' => '/* testProtectedReadonlyProperty */',
             ],
-            [
-                '/* testPrivateReadonlyProperty */',
+            'property declaration, private before'                                            => [
+                'testMarker' => '/* testPrivateReadonlyProperty */',
             ],
-            [
-                '/* testPublicReadonlyPropertyWithReadonlyFirst */',
+            'property declaration, public after'                                              => [
+                'testMarker' => '/* testPublicReadonlyPropertyWithReadonlyFirst */',
             ],
-            [
-                '/* testProtectedReadonlyPropertyWithReadonlyFirst */',
+            'property declaration, protected after'                                           => [
+                'testMarker' => '/* testProtectedReadonlyPropertyWithReadonlyFirst */',
             ],
-            [
-                '/* testPrivateReadonlyPropertyWithReadonlyFirst */',
+            'property declaration, private after'                                             => [
+                'testMarker' => '/* testPrivateReadonlyPropertyWithReadonlyFirst */',
             ],
-            [
-                '/* testReadonlyWithCommentsInDeclaration */',
+            'property declaration, private before, comments in declaration'                   => [
+                'testMarker' => '/* testReadonlyWithCommentsInDeclaration */',
             ],
-            [
-                '/* testReadonlyWithNullableProperty */',
+            'property declaration, private before, nullable type'                             => [
+                'testMarker' => '/* testReadonlyWithNullableProperty */',
             ],
-            [
-                '/* testReadonlyNullablePropertyWithUnionTypeHintAndNullFirst */',
+            'property declaration, private before, union type, null first'                    => [
+                'testMarker' => '/* testReadonlyNullablePropertyWithUnionTypeHintAndNullFirst */',
             ],
-            [
-                '/* testReadonlyNullablePropertyWithUnionTypeHintAndNullLast */',
+            'property declaration, private before, union type, null last'                     => [
+                'testMarker' => '/* testReadonlyNullablePropertyWithUnionTypeHintAndNullLast */',
             ],
-            [
-                '/* testReadonlyPropertyWithArrayTypeHint */',
+            'property declaration, private before, array type'                                => [
+                'testMarker' => '/* testReadonlyPropertyWithArrayTypeHint */',
             ],
-            [
-                '/* testReadonlyPropertyWithSelfTypeHint */',
+            'property declaration, private before, self type'                                 => [
+                'testMarker' => '/* testReadonlyPropertyWithSelfTypeHint */',
             ],
-            [
-                '/* testReadonlyPropertyWithParentTypeHint */',
+            'property declaration, private before, parent type'                               => [
+                'testMarker' => '/* testReadonlyPropertyWithParentTypeHint */',
             ],
-            [
-                '/* testReadonlyPropertyWithFullyQualifiedTypeHint */',
+            'property declaration, private before, FQN type'                                  => [
+                'testMarker' => '/* testReadonlyPropertyWithFullyQualifiedTypeHint */',
             ],
-            [
-                '/* testReadonlyIsCaseInsensitive */',
-                'ReAdOnLy',
+            'property declaration, public before, mixed case'                                 => [
+                'testMarker'  => '/* testReadonlyIsCaseInsensitive */',
+                'testContent' => 'ReAdOnLy',
             ],
-            [
-                '/* testReadonlyConstructorPropertyPromotion */',
+            'property declaration, constructor property promotion'                            => [
+                'testMarker' => '/* testReadonlyConstructorPropertyPromotion */',
             ],
-            [
-                '/* testReadonlyConstructorPropertyPromotionWithReference */',
-                'ReadOnly',
+            'property declaration, constructor property promotion with reference, mixed case' => [
+                'testMarker'  => '/* testReadonlyConstructorPropertyPromotionWithReference */',
+                'testContent' => 'ReadOnly',
             ],
-            [
-                '/* testReadonlyPropertyInAnonymousClass */',
+            'property declaration, in anonymous class'                                        => [
+                'testMarker' => '/* testReadonlyPropertyInAnonymousClass */',
             ],
-            [
-                '/* testReadonlyPropertyDNFTypeUnqualified */',
+            'property declaration, no visibility, DNF type, unqualified'                      => [
+                'testMarker' => '/* testReadonlyPropertyDNFTypeUnqualified */',
             ],
-            [
-                '/* testReadonlyPropertyDNFTypeFullyQualified */',
+            'property declaration, public before, DNF type, fully qualified'                  => [
+                'testMarker' => '/* testReadonlyPropertyDNFTypeFullyQualified */',
             ],
-            [
-                '/* testReadonlyPropertyDNFTypePartiallyQualified */',
+            'property declaration, protected before, DNF type, partially qualified'           => [
+                'testMarker' => '/* testReadonlyPropertyDNFTypePartiallyQualified */',
             ],
-            [
-                '/* testReadonlyPropertyDNFTypeRelativeName */',
+            'property declaration, private before, DNF type, namespace relative name'         => [
+                'testMarker' => '/* testReadonlyPropertyDNFTypeRelativeName */',
             ],
-            [
-                '/* testReadonlyPropertyDNFTypeMultipleSets */',
+            'property declaration, private before, DNF type, multiple sets'                   => [
+                'testMarker' => '/* testReadonlyPropertyDNFTypeMultipleSets */',
             ],
-            [
-                '/* testReadonlyPropertyDNFTypeWithArray */',
+            'property declaration, private before, DNF type, union with array'                => [
+                'testMarker' => '/* testReadonlyPropertyDNFTypeWithArray */',
             ],
-            [
-                '/* testReadonlyPropertyDNFTypeWithSpacesAndComments */',
+            'property declaration, private before, DNF type, with spaces and comment'         => [
+                'testMarker' => '/* testReadonlyPropertyDNFTypeWithSpacesAndComments */',
             ],
-            [
-                '/* testReadonlyConstructorPropertyPromotionWithDNF */',
+            'property declaration, constructor property promotion, DNF type'                  => [
+                'testMarker' => '/* testReadonlyConstructorPropertyPromotionWithDNF */',
             ],
-            [
-                '/* testReadonlyConstructorPropertyPromotionWithDNFAndReference */',
+            'property declaration, constructor property promotion, DNF type and reference'    => [
+                'testMarker' => '/* testReadonlyConstructorPropertyPromotionWithDNFAndReference */',
             ],
-            [
-                '/* testParseErrorLiveCoding */',
+            'live coding / parse error'                                                       => [
+                'testMarker' => '/* testParseErrorLiveCoding */',
             ],
         ];
 
@@ -190,64 +190,64 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
      *
      * @see testNotReadonly()
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public static function dataNotReadonly()
     {
         return [
-            [
-                '/* testReadonlyUsedAsClassConstantName */',
-                'READONLY',
+            'name of a constant, context: declaration using "const" keyword, uppercase'           => [
+                'testMarker'  => '/* testReadonlyUsedAsClassConstantName */',
+                'testContent' => 'READONLY',
             ],
-            [
-                '/* testReadonlyUsedAsMethodName */',
+            'name of a method, context: declaration'                                              => [
+                'testMarker' => '/* testReadonlyUsedAsMethodName */',
             ],
-            [
-                '/* testReadonlyUsedAsPropertyName */',
+            'name of a property, context: property access'                                        => [
+                'testMarker' => '/* testReadonlyUsedAsPropertyName */',
             ],
-            [
-                '/* testReadonlyPropertyInTernaryOperator */',
+            'name of a property, context: property access in ternary'                             => [
+                'testMarker' => '/* testReadonlyPropertyInTernaryOperator */',
             ],
-            [
-                '/* testReadonlyUsedAsFunctionName */',
+            'name of a function, context: declaration'                                            => [
+                'testMarker' => '/* testReadonlyUsedAsFunctionName */',
             ],
-            [
-                '/* testReadonlyUsedAsFunctionNameWithReturnByRef */',
+            'name of a function, context: declaration with return by ref'                         => [
+                'testMarker' => '/* testReadonlyUsedAsFunctionNameWithReturnByRef */',
             ],
-            [
-                '/* testReadonlyUsedAsNamespaceName */',
-                'Readonly',
+            'name of namespace, context: declaration, mixed case'                                 => [
+                'testMarker'  => '/* testReadonlyUsedAsNamespaceName */',
+                'testContent' => 'Readonly',
             ],
-            [
-                '/* testReadonlyUsedAsPartOfNamespaceName */',
-                'My\Readonly\Collection',
+            'partial name of namespace, context: declaration, mixed case'                         => [
+                'testMarker'  => '/* testReadonlyUsedAsPartOfNamespaceName */',
+                'testContent' => 'My\Readonly\Collection',
             ],
-            [
-                '/* testReadonlyAsFunctionCall */',
+            'name of a function, context: call'                                                   => [
+                'testMarker' => '/* testReadonlyAsFunctionCall */',
             ],
-            [
-                '/* testReadonlyAsNamespacedFunctionCall */',
-                'My\NS\readonly',
+            'name of a namespaced function, context: partially qualified call'                    => [
+                'testMarker'  => '/* testReadonlyAsNamespacedFunctionCall */',
+                'testContent' => 'My\NS\readonly',
             ],
-            [
-                '/* testReadonlyAsMethodCall */',
+            'name of a method, context: method call on object'                                    => [
+                'testMarker' => '/* testReadonlyAsMethodCall */',
             ],
-            [
-                '/* testReadonlyAsNullsafeMethodCall */',
-                'readOnly',
+            'name of a method, context: nullsafe method call on object'                           => [
+                'testMarker'  => '/* testReadonlyAsNullsafeMethodCall */',
+                'testContent' => 'readOnly',
             ],
-            [
-                '/* testReadonlyAsStaticMethodCallWithSpace */',
+            'name of a method, context: static method call with space after'                      => [
+                'testMarker' => '/* testReadonlyAsStaticMethodCallWithSpace */',
             ],
-            [
-                '/* testClassConstantFetchWithReadonlyAsConstantName */',
-                'READONLY',
+            'name of a constant, context: constant access - uppercase'                            => [
+                'testMarker'  => '/* testClassConstantFetchWithReadonlyAsConstantName */',
+                'testContent' => 'READONLY',
             ],
-            [
-                '/* testReadonlyUsedAsFunctionCallWithSpaceBetweenKeywordAndParens */',
+            'name of a function, context: call with space and comment between keyword and parens' => [
+                'testMarker' => '/* testReadonlyUsedAsFunctionCallWithSpaceBetweenKeywordAndParens */',
             ],
-            [
-                '/* testReadonlyUsedAsMethodNameWithDNFParam */',
+            'name of a method, context: declaration with DNF parameter'                           => [
+                'testMarker' => '/* testReadonlyUsedAsMethodNameWithDNFParam */',
             ],
         ];
 
