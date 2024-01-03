@@ -112,14 +112,18 @@ final class GitModifiedTest extends AbstractFilterTestCase
 
             'single file marked as git modified - file in root dir'                => [
                 'inputPaths'        => $fakeFileList,
-                'outputGitModified' => ['autoload.php'],
+                'outputGitModified' => [
+                    'autoload.php',
+                ],
                 'expectedOutput'    => [
                     $basedir.'/autoload.php',
                 ],
             ],
             'single file marked as git modified - file in sub dir'                 => [
                 'inputPaths'        => $fakeFileList,
-                'outputGitModified' => ['src/Standards/Generic/Sniffs/Classes/DuplicateClassNameSniff.php'],
+                'outputGitModified' => [
+                    'src/Standards/Generic/Sniffs/Classes/DuplicateClassNameSniff.php',
+                ],
                 'expectedOutput'    => [
                     $basedir.'/src',
                     $basedir.'/src/Standards',
