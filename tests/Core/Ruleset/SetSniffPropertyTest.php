@@ -72,7 +72,7 @@ final class SetSniffPropertyTest extends TestCase
      *
      * @see self::testSniffPropertiesGetSetWhenAllowed()
      *
-     * @return array
+     * @return array<string, array<string>>
      */
     public static function dataSniffPropertiesGetSetWhenAllowed()
     {
