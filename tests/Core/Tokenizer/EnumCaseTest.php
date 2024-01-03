@@ -149,6 +149,9 @@ final class EnumCaseTest extends AbstractMethodUnitTest
             ['/* testKeywordAsEnumCaseNameShouldBeString2 */'],
             ['/* testKeywordAsEnumCaseNameShouldBeString3 */'],
             ['/* testKeywordAsEnumCaseNameShouldBeString4 */'],
+            ['/* testKeywordAsEnumCaseNameShouldBeString5 */'],
+            ['/* testKeywordAsEnumCaseNameShouldBeString6 */'],
+            ['/* testKeywordAsEnumCaseNameShouldBeString7 */'],
         ];
 
     }//end dataKeywordAsEnumCaseNameShouldBeString()
