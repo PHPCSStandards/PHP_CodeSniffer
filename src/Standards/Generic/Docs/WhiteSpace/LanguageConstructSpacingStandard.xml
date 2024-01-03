@@ -1,7 +1,7 @@
 <documentation title="Language Construct Spacing">
     <standard>
     <![CDATA[
-    Language constructs that can be used without parentheses must contain a single space between themselves and their content.
+    Language constructs that can be used without parentheses, must have a single space between the language construct keyword and its content.
     ]]>
     </standard>
     <code_comparison>
