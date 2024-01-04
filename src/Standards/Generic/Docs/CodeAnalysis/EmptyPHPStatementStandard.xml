@@ -13,7 +13,7 @@
         </code>
         <code title="Invalid: There is no statement inside the PHP tag pair.">
         <![CDATA[
-<?php <em>// some comment</em> ?>
+<?php <em>;</em> ?>
 <?= <em></em> ?>
         ]]>
         </code>
