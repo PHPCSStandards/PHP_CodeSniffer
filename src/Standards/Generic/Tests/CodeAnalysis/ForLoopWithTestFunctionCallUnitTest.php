@@ -49,9 +49,12 @@ class ForLoopWithTestFunctionCallUnitTest extends AbstractSniffUnitTest
     {
         switch ($testFile) {
         case 'ForLoopWithTestFunctionCallUnitTest.1.inc':
+        case 'ForLoopWithTestFunctionCallUnitTest.2.inc':
             return [
-                4  => 1,
-                13 => 1,
+                6  => 1,
+                15 => 1,
+                19 => 1,
+                23 => 1,
             ];
         default:
             return [];
