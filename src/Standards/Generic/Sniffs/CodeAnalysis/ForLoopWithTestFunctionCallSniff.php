@@ -61,7 +61,7 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
         $token  = $tokens[$stackPtr];
 
         // Skip invalid statement.
-        if (isset($token['parenthesis_opener']) === false) {
+        if (isset($token['parenthesis_opener'], $token['parenthesis_closer']) === false) {
             return;
         }
 
