@@ -1,0 +1,157 @@
+<documentation title="File Header">
+    <standard>
+    <![CDATA[
+    Ensures that the PHP file header is properly formatted.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: The file header is the first content in the file.">
+        <![CDATA[
+<?php
+
+/**
+ * This is a file comment.
+ */
+
+// Remainder of the code in the file.
+        ]]>
+        </code>
+        <code title="Invalid: The file header is not the first content in the file.">
+        <![CDATA[
+<em><?php echo 'Some content'; ?></em>
+<?php
+
+/**
+ * The header is not the first thing
+ * in the file.
+ */
+
+// Remainder of the code in the file.
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: If the header blocks are present, they are separated by a single blank line and don't contain blank lines.">
+        <![CDATA[
+<?php
+
+/**
+ * This is a file comment.
+ */
+
+declare(strict_types=1);
+
+namespace Vendor\Package;
+
+use Vendor\Package\SomeNamespace\ClassD as D;
+use Vendor\Package\SomeNamespace\{
+    SubnamespaceOne\ClassA,
+    SubnamespaceOne\ClassB,
+    SubnamespaceTwo\ClassY,
+    ClassZ,
+};
+
+use function Vendor\Package\{funcA};
+use function Another\Vendor\funcD;
+
+use const Vendor\Package\{
+    CONST_A, CONST_B
+};
+use const Another\Vendor\CONST_D;
+
+// Remainder of the code in the file.
+        ]]>
+        </code>
+        <code title="Invalid: The header blocks are not separated by a single blank line or contain blank lines between blocks.">
+        <![CDATA[
+<?php
+
+/**
+ * This is a file comment.
+ */<em></em>
+declare(strict_types=1);
+
+namespace Vendor\Package;<em></em>
+use Vendor\Package\{ClassA as A, ClassB};
+<em></em>
+<em></em>
+use function Vendor\Package\funcA;
+// Blank line between the function imports.
+<em></em>
+use function Another\Vendor\funcD;
+
+// Remainder of the code in the file.
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: If the header blocks are present, they are ordered correctly as shown below.">
+        <![CDATA[
+<?php
+
+/**
+ * This is a file-level docblock.
+ *
+ * Only thing before it is the
+ * opening <?php tag.
+ */
+
+// One or more declare statements.
+declare(strict_types=1);
+
+// Namespace declaration of the file.
+namespace Vendor\Package;
+
+// Class-based use import statements.
+use Vendor\Package\{ClassA as A, ClassB};
+use Vendor\Package\SomeNamespace\ClassD as D;
+use Vendor\Package\SomeNamespace\{
+    SubnamespaceOne\ClassA,
+    ClassZ,
+};
+
+// Function-based use import statements.
+use function Vendor\Package\{funcA};
+use function Another\Vendor\funcD;
+
+// Constant-based use import statements.
+use const Vendor\Package\{
+    CONST_A, CONST_B
+};
+use const Another\Vendor\CONST_D;
+
+// Remainder of the code in the file.
+        ]]>
+        </code>
+        <code title="Invalid: The header blocks are not in the correct order.">
+        <![CDATA[
+<?php
+
+/**
+ * Incorrect order of the imports.
+ */
+
+declare(strict_types=1);
+
+use Vendor\Package\{ClassA as A, ClassB};
+use Vendor\Package\SomeNamespace\ClassD as D;
+
+// Namespace declaration
+// after the class-based use import statements.
+namespace Vendor\Package;
+
+use Vendor\Package\AnotherNamespace\ClassE as E;
+
+// Constant-based use imports statements
+// before the function-based ones.
+<em>use const Vendor\Package\{CONST_A, CONST_B};
+use const Another\Vendor\CONST_D;</em>
+
+use function Vendor\Package\{funcA, funcB};
+use function Another\Vendor\funcD;
+
+// Remainder of the code in the file.
+        ]]>
+        </code>
+    </code_comparison>
+</documentation>
