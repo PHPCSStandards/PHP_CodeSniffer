@@ -34,8 +34,8 @@ final class SetSniffPropertyTest extends TestCase
      */
     public function testSniffPropertiesGetSetWhenAllowed($name)
     {
-        $sniffCode  = "Fixtures.Category.{$name}";
-        $sniffClass = 'Fixtures\Sniffs\Category\\'.$name.'Sniff';
+        $sniffCode  = "Fixtures.SetProperty.{$name}";
+        $sniffClass = 'Fixtures\Sniffs\SetProperty\\'.$name.'Sniff';
         $properties = [
             'arbitrarystring' => 'arbitraryvalue',
             'arbitraryarray'  => [
@@ -45,7 +45,7 @@ final class SetSniffPropertyTest extends TestCase
         ];
 
         // Set up the ruleset.
-        $standard = __DIR__."/{$name}Test.xml";
+        $standard = __DIR__."/SetProperty{$name}Test.xml";
         $config   = new Config(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
@@ -77,9 +77,9 @@ final class SetSniffPropertyTest extends TestCase
     public static function dataSniffPropertiesGetSetWhenAllowed()
     {
         return [
-            'Property allowed as explicitly declared'            => ['SetPropertyAllowedAsDeclared'],
-            'Property allowed as sniff extends stdClass'         => ['SetPropertyAllowedViaStdClass'],
-            'Property allowed as sniff has magic __set() method' => ['SetPropertyAllowedViaMagicMethod'],
+            'Property allowed as explicitly declared'            => ['AllowedAsDeclared'],
+            'Property allowed as sniff extends stdClass'         => ['AllowedViaStdClass'],
+            'Property allowed as sniff has magic __set() method' => ['AllowedViaMagicMethod'],
         ];
 
     }//end dataSniffPropertiesGetSetWhenAllowed()
@@ -163,7 +163,7 @@ final class SetSniffPropertyTest extends TestCase
     public function testSetPropertyThrowsErrorWhenPropertyOnlyAllowedViaAttribute()
     {
         $exceptionClass = 'PHP_CodeSniffer\Exceptions\RuntimeException';
-        $exceptionMsg   = 'Ruleset invalid. Property "arbitrarystring" does not exist on sniff Fixtures.Category.SetPropertyNotAllowedViaAttribute';
+        $exceptionMsg   = 'Ruleset invalid. Property "arbitrarystring" does not exist on sniff Fixtures.SetProperty.NotAllowedViaAttribute';
         if (method_exists($this, 'expectException') === true) {
             $this->expectException($exceptionClass);
             $this->expectExceptionMessage($exceptionMsg);
@@ -224,12 +224,12 @@ final class SetSniffPropertyTest extends TestCase
      */
     public function testDirectCallWithNewArrayFormatSetsProperty()
     {
-        $name       = 'SetPropertyAllowedAsDeclared';
-        $sniffCode  = "Fixtures.Category.{$name}";
-        $sniffClass = 'Fixtures\Sniffs\Category\\'.$name.'Sniff';
+        $name       = 'AllowedAsDeclared';
+        $sniffCode  = "Fixtures.SetProperty.{$name}";
+        $sniffClass = 'Fixtures\Sniffs\SetProperty\\'.$name.'Sniff';
 
         // Set up the ruleset.
-        $standard = __DIR__."/{$name}Test.xml";
+        $standard = __DIR__."/SetProperty{$name}Test.xml";
         $config   = new Config(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
@@ -275,12 +275,12 @@ final class SetSniffPropertyTest extends TestCase
      */
     public function testDirectCallWithOldArrayFormatSetsProperty($propertyValue)
     {
-        $name       = 'SetPropertyAllowedAsDeclared';
-        $sniffCode  = "Fixtures.Category.{$name}";
-        $sniffClass = 'Fixtures\Sniffs\Category\\'.$name.'Sniff';
+        $name       = 'AllowedAsDeclared';
+        $sniffCode  = "Fixtures.SetProperty.{$name}";
+        $sniffClass = 'Fixtures\Sniffs\SetProperty\\'.$name.'Sniff';
 
         // Set up the ruleset.
-        $standard = __DIR__."/{$name}Test.xml";
+        $standard = __DIR__."/SetProperty{$name}Test.xml";
         $config   = new Config(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
@@ -376,12 +376,12 @@ final class SetSniffPropertyTest extends TestCase
             $this->setExpectedException($exceptionClass, $exceptionMsg);
         }
 
-        $name       = 'SetPropertyAllowedAsDeclared';
-        $sniffCode  = "Fixtures.Category.{$name}";
-        $sniffClass = 'Fixtures\Sniffs\Category\\'.$name.'Sniff';
+        $name       = 'AllowedAsDeclared';
+        $sniffCode  = "Fixtures.SetProperty.{$name}";
+        $sniffClass = 'Fixtures\Sniffs\SetProperty\\'.$name.'Sniff';
 
         // Set up the ruleset.
-        $standard = __DIR__."/{$name}Test.xml";
+        $standard = __DIR__."/SetProperty{$name}Test.xml";
         $config   = new Config(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 

@@ -5,14 +5,13 @@
  * @see \PHP_CodeSniffer\Tests\Core\Ruleset\SetSniffPropertyTest
  */
 
-namespace Fixtures\Sniffs\Category;
+namespace Fixtures\Sniffs\SetProperty;
 
-use AllowDynamicProperties;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use stdClass;
 
-#[AllowDynamicProperties]
-class SetPropertyNotAllowedViaAttributeSniff implements Sniff
+class AllowedViaStdClassSniff extends stdClass implements Sniff
 {
 
     public function register()
