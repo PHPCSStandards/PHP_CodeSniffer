@@ -1,0 +1,27 @@
+<documentation title="Require Strict Types">
+    <standard>
+    <![CDATA[
+    The strict_types declaration must be present and enabled.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: strict_types declaration is present and enabled.">
+        <![CDATA[
+<?php
+declare(<em>strict_types=1</em>);
+
+<?php
+declare(ticks=1, <em>strict_types=1</em>);
+        ]]>
+        </code>
+        <code title="Invalid: Missing or disabled strict_types declaration.">
+        <![CDATA[
+<?php
+declare(encoding='ISO-8859-1'<em></em>);
+
+<?php
+declare(strict_types=<em>0</em>);
+        ]]>
+        </code>
+    </code_comparison>
+</documentation>
