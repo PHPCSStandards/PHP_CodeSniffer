@@ -5,12 +5,12 @@
  * @see \PHP_CodeSniffer\Tests\Core\Ruleset\SetSniffPropertyTest
  */
 
-namespace Fixtures\Sniffs\Category;
+namespace Fixtures\Sniffs\SetProperty;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
-class SetPropertyAllowedViaMagicMethodSniff implements Sniff
+class AllowedViaMagicMethodSniff implements Sniff
 {
     private $magic = [];
 
