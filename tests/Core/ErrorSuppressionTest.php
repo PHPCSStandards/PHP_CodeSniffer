@@ -506,15 +506,15 @@ EOD;
 
             // Process with line suppression nested within disable/enable suppression.
             'disable/enable: slash comment, next line nested single line suppression'         => [
-                'before' => '// phpcs:disable'.PHP_EOL.'// phpcs:ignore',
+                'before' => '// phpcs:disable'."\n".'// phpcs:ignore',
                 'after'  => '// phpcs:enable',
             ],
             'disable/enable: slash comment, with @, next line nested single line suppression' => [
-                'before' => '// @phpcs:disable'.PHP_EOL.'// @phpcs:ignore',
+                'before' => '// @phpcs:disable'."\n".'// @phpcs:ignore',
                 'after'  => '// @phpcs:enable',
             ],
             'disable/enable: hash comment, next line nested single line suppression'          => [
-                'before' => '# @phpcs:disable'.PHP_EOL.'# @phpcs:ignore',
+                'before' => '# @phpcs:disable'."\n".'# @phpcs:ignore',
                 'after'  => '# @phpcs:enable',
             ],
         ];
@@ -676,7 +676,7 @@ EOD;
             'ignoreFile: start of file, hash comment, with @'         => ['before' => '# @phpcs:ignoreFile'],
             'ignoreFile: start of file, single-line star comment'     => ['before' => '/* phpcs:ignoreFile */'],
             'ignoreFile: start of file, multi-line star comment'      => [
-                'before' => '/*'.PHP_EOL.' phpcs:ignoreFile'.PHP_EOL.' */',
+                'before' => '/*'."\n".' phpcs:ignoreFile'."\n".' */',
             ],
             'ignoreFile: start of file, single-line docblock comment' => ['before' => '/** phpcs:ignoreFile */'],
 
@@ -757,18 +757,18 @@ EOD;
                 'expectedErrors' => 1,
             ],
             'disable: single sniff, docblock'              => [
-                'before'         => '/**'.PHP_EOL.' * phpcs:disable Generic.Commenting.Todo'.PHP_EOL.' */ ',
+                'before'         => '/**'."\n".' * phpcs:disable Generic.Commenting.Todo'."\n".' */ ',
                 'expectedErrors' => 1,
             ],
             'disable: single sniff, docblock, with @'      => [
-                'before'         => '/**'.PHP_EOL.' * @phpcs:disable Generic.Commenting.Todo'.PHP_EOL.' */ ',
+                'before'         => '/**'."\n".' * @phpcs:disable Generic.Commenting.Todo'."\n".' */ ',
                 'expectedErrors' => 1,
             ],
 
             // Multiple sniffs.
             'disable: multiple sniffs in one comment'      => ['before' => '// phpcs:disable Generic.Commenting.Todo,Generic.PHP.LowerCaseConstant'],
             'disable: multiple sniff in multiple comments' => [
-                'before' => '// phpcs:disable Generic.Commenting.Todo'.PHP_EOL.'// phpcs:disable Generic.PHP.LowerCaseConstant',
+                'before' => '// phpcs:disable Generic.Commenting.Todo'."\n".'// phpcs:disable Generic.PHP.LowerCaseConstant',
             ],
 
             // Selectiveness variations.
@@ -785,17 +785,17 @@ EOD;
 
             // Wrong category/sniff/code.
             'disable: wrong error code and category'       => [
-                'before'           => '/**'.PHP_EOL.' * phpcs:disable Generic.PHP.LowerCaseConstant.Upper,Generic.Comments'.PHP_EOL.' */ ',
+                'before'           => '/**'."\n".' * phpcs:disable Generic.PHP.LowerCaseConstant.Upper,Generic.Comments'."\n".' */ ',
                 'expectedErrors'   => 1,
                 'expectedWarnings' => 1,
             ],
             'disable: wrong category, docblock'            => [
-                'before'           => '/**'.PHP_EOL.' * phpcs:disable Generic.Files'.PHP_EOL.' */ ',
+                'before'           => '/**'."\n".' * phpcs:disable Generic.Files'."\n".' */ ',
                 'expectedErrors'   => 1,
                 'expectedWarnings' => 1,
             ],
             'disable: wrong category, docblock, with @'    => [
-                'before'           => '/**'.PHP_EOL.' * @phpcs:disable Generic.Files'.PHP_EOL.' */ ',
+                'before'           => '/**'."\n".' * @phpcs:disable Generic.Files'."\n".' */ ',
                 'expectedErrors'   => 1,
                 'expectedWarnings' => 1,
             ],
@@ -1052,7 +1052,7 @@ EOD;
                 'expectedWarnings' => 1,
             ],
             'disable: single sniff; ignore: single sniff' => [
-                'before'           => '// phpcs:disable Generic.Commenting.Todo'.PHP_EOL.'// phpcs:ignore Generic.PHP.LowerCaseConstant',
+                'before'           => '// phpcs:disable Generic.Commenting.Todo'."\n".'// phpcs:ignore Generic.PHP.LowerCaseConstant',
                 'expectedErrors'   => 1,
                 'expectedWarnings' => 0,
             ],
