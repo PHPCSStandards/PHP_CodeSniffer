@@ -1,0 +1,114 @@
+<documentation title="Control Structure Spacing">
+    <standard>
+    <![CDATA[
+    Control structures MUST have correct spacing.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: No space after the opening parenthesis.">
+        <![CDATA[
+if ($expr) {
+}
+        ]]>
+        </code>
+        <code title="Invalid: Space after the opening parenthesis.">
+        <![CDATA[
+if (<em> </em>$expr) {
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: No space before the closing parenthesis.">
+        <![CDATA[
+if ($expr) {
+}
+        ]]>
+        </code>
+        <code title="Invalid: Space before the closing parenthesis.">
+        <![CDATA[
+if ($expr<em> </em>) {
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: Each line in a multi-line control structure indented at least once. Default indentation is 4 spaces.">
+        <![CDATA[
+while (
+<em>    </em>$expr1
+<em>    </em>&& $expr2
+) {
+}
+        ]]>
+        </code>
+        <code title="Invalid: Some lines in a multi-line control structure not indented correctly.">
+        <![CDATA[
+while (
+<em></em>$expr1
+    && $expr2
+<em>  </em>&& $expr3
+) {
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: First expression of a multi-line control structure is on the line after the opening parenthesis.">
+        <![CDATA[
+while (
+    $expr1
+    && $expr2
+) {
+}
+        ]]>
+        </code>
+        <code title="Invalid: First expression of a multi-line control structure is on the same line as the opening parenthesis.">
+        <![CDATA[
+while (<em></em>$expr1
+    && $expr2
+) {
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: The closing parenthesis of a multi-line control structure is on the line after the last expression.">
+        <![CDATA[
+while (
+    $expr1
+    && $expr2
+<em>)</em> {
+}
+        ]]>
+        </code>
+        <code title="Invalid: The closing parenthesis of a multi-line control structure is on the same line as the last expression.">
+        <![CDATA[
+while (
+    $expr1
+    && $expr2<em>)</em> {
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: The closing parenthesis of a multi-line control structure is indented to the same level as start of the control structure.">
+        <![CDATA[
+while (
+    $expr1
+    && $expr2
+) {
+}
+        ]]>
+        </code>
+        <code title="Invalid: The closing parenthesis of a multi-line control structure is not indented to the same level as start of the control structure.">
+        <![CDATA[
+while (
+    $expr1
+    && $expr2
+<em>  </em>) {
+}
+        ]]>
+        </code>
+    </code_comparison>
+</documentation>
