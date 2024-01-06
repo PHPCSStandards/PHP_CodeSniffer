@@ -47,11 +47,21 @@ abstract class ExactMatch extends Filter
         }
 
         if ($this->blockedFiles === null) {
-            $this->blockedFiles = $this->getblacklist();
+            $this->blockedFiles = $this->getBlockedFiles();
+
+            // BC-layer.
+            if ($this->blockedFiles === null) {
+                $this->blockedFiles = $this->getBlacklist();
+            }
         }
 
         if ($this->allowedFiles === null) {
-            $this->allowedFiles = $this->getwhitelist();
+            $this->allowedFiles = $this->getAllowedFiles();
+
+            // BC-layer.
+            if ($this->allowedFiles === null) {
+                $this->allowedFiles = $this->getWhitelist();
+            }
         }
 
         $filePath = Util\Common::realpath($this->current());
@@ -92,6 +102,11 @@ abstract class ExactMatch extends Filter
     /**
      * Get a list of file paths to exclude.
      *
+     * @deprecated 3.9.0 Overload the `getBlockedFiles()` method instead.
+     *                   The `getBlockedFiles()` method will be made abstract and therefore required
+     *                   in v4.0 and this method will be removed.
+     *                   If both methods are implemented, the new `getBlockedFiles()` method will take precedence.
+     *
      * @return array
      */
     abstract protected function getBlacklist();
@@ -100,9 +115,42 @@ abstract class ExactMatch extends Filter
     /**
      * Get a list of file paths to include.
      *
+     * @deprecated 3.9.0 Overload the `getAllowedFiles()` method instead.
+     *                   The `getAllowedFiles()` method will be made abstract and therefore required
+     *                   in v4.0 and this method will be removed.
+     *                   If both methods are implemented, the new `getAllowedFiles()` method will take precedence.
+     *
      * @return array
      */
     abstract protected function getWhitelist();
+
+
+    /**
+     * Get a list of file paths to exclude.
+     *
+     * @since 3.9.0 Replaces the deprecated `getBlacklist()` method.
+     *
+     * @return array|null
+     */
+    protected function getBlockedFiles()
+    {
+        return null;
+
+    }//end getBlockedFiles()
+
+
+    /**
+     * Get a list of file paths to include.
+     *
+     * @since 3.9.0 Replaces the deprecated `getWhitelist()` method.
+     *
+     * @return array|null
+     */
+    protected function getAllowedFiles()
+    {
+        return null;
+
+    }//end getAllowedFiles()
 
 
 }//end class
