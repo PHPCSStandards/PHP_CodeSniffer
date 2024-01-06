@@ -41,14 +41,24 @@ class ForLoopWithTestFunctionCallUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
+     * @param string $testFile The name of the test file being tested.
+     *
      * @return array<int, int>
      */
-    public function getWarningList()
+    public function getWarningList($testFile='')
     {
-        return [
-            4  => 1,
-            13 => 1,
-        ];
+        switch ($testFile) {
+        case 'ForLoopWithTestFunctionCallUnitTest.1.inc':
+        case 'ForLoopWithTestFunctionCallUnitTest.2.inc':
+            return [
+                6  => 1,
+                15 => 1,
+                19 => 1,
+                23 => 1,
+            ];
+        default:
+            return [];
+        }
 
     }//end getWarningList()
 
