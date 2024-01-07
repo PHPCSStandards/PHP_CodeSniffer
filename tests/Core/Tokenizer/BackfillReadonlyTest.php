@@ -180,7 +180,7 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
                 'readonly',
             ],
             [
-                '/* testReadonlyConstructorPropertyPromotionWithDNFAndRefence */',
+                '/* testReadonlyConstructorPropertyPromotionWithDNFAndReference */',
                 'readonly',
             ],
             [
