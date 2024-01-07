@@ -130,7 +130,7 @@ class ReadonlyWithDisjunctiveNormalForm
     public function __construct(
         /* testReadonlyConstructorPropertyPromotionWithDNF */
         private readonly (B&C)|A $b1,
-        /* testReadonlyConstructorPropertyPromotionWithDNFAndRefence */
+        /* testReadonlyConstructorPropertyPromotionWithDNFAndReference */
         readonly (B&C)|A &$b2,
     ) {}
 
