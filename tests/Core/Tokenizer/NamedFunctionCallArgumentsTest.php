@@ -105,7 +105,9 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
             ],
             [
                 '/* testMixedPositionalAndNamedArgs */',
-                ['double_encode'],
+                [
+                    'double_encode',
+                ],
             ],
             [
                 '/* testNestedFunctionCallOuter */',
@@ -117,11 +119,15 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
             ],
             [
                 '/* testNestedFunctionCallInner1 */',
-                ['skip'],
+                [
+                    'skip',
+                ],
             ],
             [
                 '/* testNestedFunctionCallInner2 */',
-                ['array_or_countable'],
+                [
+                    'array_or_countable',
+                ],
             ],
             [
                 '/* testNamespaceRelativeFunction */',
@@ -212,23 +218,33 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
             // Coding errors which should still be handled.
             [
                 '/* testCompileErrorNamedBeforePositional */',
-                ['param'],
+                [
+                    'param',
+                ],
             ],
             [
                 '/* testDuplicateName1 */',
-                ['param'],
+                [
+                    'param',
+                ],
             ],
             [
                 '/* testDuplicateName2 */',
-                ['param'],
+                [
+                    'param',
+                ],
             ],
             [
                 '/* testIncorrectOrderWithVariadic */',
-                ['start_index'],
+                [
+                    'start_index',
+                ],
             ],
             [
                 '/* testCompileErrorIncorrectOrderWithVariadic */',
-                ['param'],
+                [
+                    'param',
+                ],
             ],
             [
                 '/* testParseErrorNoValue */',
@@ -239,19 +255,27 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
             ],
             [
                 '/* testParseErrorExit */',
-                ['status'],
+                [
+                    'status',
+                ],
             ],
             [
                 '/* testParseErrorEmpty */',
-                ['variable'],
+                [
+                    'variable',
+                ],
             ],
             [
                 '/* testParseErrorEval */',
-                ['code'],
+                [
+                    'code',
+                ],
             ],
             [
                 '/* testParseErrorArbitraryParentheses */',
-                ['something'],
+                [
+                    'something',
+                ],
             ],
         ];
 
