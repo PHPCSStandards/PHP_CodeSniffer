@@ -59,11 +59,11 @@ class TypeIntersection
         \Fully\Qualified\NameA&\Fully\Qualified\NameB $paramC,
     ) {}
 
-    /* testTypeIntersectionReturnType */
-    public function returnType() : Foo&Bar {}
-
     /* testTypeIntersectionConstructorPropertyPromotion */
     public function __construct( public Foo&Bar $property) {}
+
+    /* testTypeIntersectionReturnType */
+    public function returnType() : Foo&Bar {}
 
     /* testTypeIntersectionAbstractMethodReturnType1 */
     abstract public function abstractMethod(): Foo&Bar /* testTypeIntersectionAbstractMethodReturnType2 */ &Baz;
@@ -78,15 +78,15 @@ class TypeIntersection
     public function identifierNamesReturnFQ() : \Fully\Qualified\NameA&\Fully\Qualified\NameB {}
 }
 
-/* testTypeIntersectionClosureParamIllegalNullable */
-$closureWithParamType = function (?Foo&Bar $string) {};
-
 function globalFunctionWithSpreadAndReference(
     /* testTypeIntersectionWithReference */
     Foo&Bar /* testBitwiseAnd5 */ &$paramA,
     /* testTypeIntersectionWithSpreadOperator */
     Foo&Bar ...$paramB
 ) {}
+
+/* testTypeIntersectionClosureParamIllegalNullable */
+$closureWithParamType = function (?Foo&Bar $string) {};
 
 /* testBitwiseAndClosureParamDefault */
 $closureWithReturnType = function ($string = NONSENSE & FAKE)/* testTypeIntersectionClosureReturn */ : \Package\MyA&PackageB {};
