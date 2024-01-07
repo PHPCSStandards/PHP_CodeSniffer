@@ -71,11 +71,11 @@ class TypeUnion
         \Fully\Qualified\NameA|\Fully\Qualified\NameB $paramC,
     ) {}
 
-    /* testTypeUnionReturnType */
-    public function returnType() : int|false {}
-
     /* testTypeUnionConstructorPropertyPromotion */
     public function __construct( public bool|null $property) {}
+
+    /* testTypeUnionReturnType */
+    public function returnType() : int|false {}
 
     /* testTypeUnionAbstractMethodReturnType1 */
     abstract public function abstractMethod(): object|array /* testTypeUnionAbstractMethodReturnType2 */ |false;
@@ -90,15 +90,15 @@ class TypeUnion
     public function identifierNamesReturnFQ() : \Fully\Qualified\NameA|\Fully\Qualified\NameB {}
 }
 
-/* testTypeUnionClosureParamIllegalNullable */
-$closureWithParamType = function (?string|null $string) {};
-
 function globalFunctionWithSpreadAndReference(
     /* testTypeUnionWithReference */
     float|null &$paramA,
     /* testTypeUnionWithSpreadOperator */
     string|int ...$paramB
 ) {}
+
+/* testTypeUnionClosureParamIllegalNullable */
+$closureWithParamType = function (?string|null $string) {};
 
 /* testBitwiseOrClosureParamDefault */
 $closureWithReturnType = function ($string = NONSENSE | FAKE)/* testTypeUnionClosureReturn */ : \Package\MyA|PackageB {};
