@@ -1,0 +1,190 @@
+<documentation title="Use Declaration">
+    <standard>
+    <![CDATA[
+    Trait import use statements must be defined correctly.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Trait import statement is declared on the next line after the opening brace.">
+        <![CDATA[
+class Foo
+{
+    use Bar;
+}
+        ]]>
+        </code>
+        <code title="Invalid: Trait import statement not declared on the first non-comment line after the class opening brace.">
+        <![CDATA[
+class Foo
+{
+<em></em>
+    use Bar;
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: Each individual trait that is imported into a class is included one-per-line, and each inclusion has its own use import statement.">
+        <![CDATA[
+class Foo
+{
+    use FirstTrait;
+    use SecondTrait;
+    use ThirdTrait;
+}
+        ]]>
+        </code>
+        <code title="Invalid: Multiple trait import statements on the same line. Using one use statement to import multiple traits (when no conflict resolution rule is present).">
+        <![CDATA[
+class Foo
+{
+    use FirstTrait; <em>use SecondTrait</em>;
+    <em>use ThirdTrait, FourthTrait</em>;
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: No blank line after use import statement when the class/enum has nothing after it.">
+        <![CDATA[
+enum FooEnum
+{
+    use FirstTrait;
+    use SecondTrait;
+}
+        ]]>
+        </code>
+        <code title="Invalid: Class/enum closing brace not on the next line after the use import statement when class/enum only contains import statements.">
+        <![CDATA[
+enum FooEnum
+{
+    use FirstTrait;
+    use SecondTrait;
+    <em></em>
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: If a class has content after the trait import statement, import statement must have a blank line after it.">
+        <![CDATA[
+class Foo
+{
+    use FirstTrait;
+<em></em>
+    private $foo = 'bar';
+}
+        ]]>
+        </code>
+        <code title="Invalid: Missing blank line after the use import statement.">
+        <![CDATA[
+class Foo
+{
+    use FirstTrait;<em></em>
+    private $foo = 'bar';
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: There is only one space after the import use statement.">
+        <![CDATA[
+class Foo
+{
+    use<em> </em>FirstTrait;
+    use<em> </em>SecondTrait;
+}
+        ]]>
+        </code>
+        <code title="Invalid: There is more than one space after the import use statement.">
+        <![CDATA[
+class Foo
+{
+    use <em>    </em>FirstTrait;
+    use <em>  </em>SecondTrait;
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: When using insteadof and as operators, they are properly formatted.">
+        <![CDATA[
+class Foo
+{
+    use FirstTrait,
+    use SecondTrait {
+        B::small insteadof A;
+        A::big insteadof C;
+        C::medium as FooBar;
+    }
+}
+        ]]>
+        </code>
+        <code title="Invalid: Multiple spaces found before or after insteadof and as operators.">
+        <![CDATA[
+class Foo
+{
+    use FirstTrait,
+    use SecondTrait {
+        B::small<em>   </em>insteadof A;
+        A::big<em>  </em>insteadof<em>   </em>C;
+        C::medium as<em>   </em>FooBar;
+    }
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: When importing multiple traits and using conflict resolution operators, there must be only one space between traits after the comma, and no space before a comma. The opening brace must be on the same line as the use statement. Each conflict resolution statement must be on its own line.">
+        <![CDATA[
+class Foo
+{
+    use FirstTrait<em></em>,<em> </em>SecondTrait,
+    use ThirdTrait <em>{</em>
+        B::small insteadof A;
+        A::big insteadof C;
+        C::medium as FooBar;
+    }
+}
+        ]]>
+        </code>
+        <code title="Invalid: Multiple spaces around commas in trait import statements. Opening brace of a trait import statement not on the same line as the use keyword. Conflict resolution statement is not the its own line.">
+        <![CDATA[
+class Foo
+{
+    use FirstTrait<em> </em>,<em>     </em>SecondTrait,
+    use ThirdTrait
+    <em>{</em>
+        B::small insteadof A;
+        A::big insteadof C; <em>C::medium as FooBar</em>;
+    }
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: Imported traits are grouped together.">
+        <![CDATA[
+class Foo
+{
+    use FirstTrait;
+    use SecondTrait;
+    use ThirdTrait;
+}
+        ]]>
+        </code>
+        <code title="Invalid: Imported traits are not grouped together.">
+        <![CDATA[
+class Foo
+{
+    use FirstTrait;
+    use SecondTrait;
+
+    public $foo = 'bar';
+
+    <em>use ThirdTrait;</em>
+}
+        ]]>
+        </code>
+    </code_comparison>
+</documentation>
