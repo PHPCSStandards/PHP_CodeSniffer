@@ -72,7 +72,9 @@ final class AttributesTest extends AbstractMethodUnitTest
             [
                 '/* testAttribute */',
                 2,
-                [ T_STRING ],
+                [
+                    T_STRING,
+                ],
             ],
             [
                 '/* testAttributeWithParams */',
@@ -104,7 +106,9 @@ final class AttributesTest extends AbstractMethodUnitTest
             [
                 '/* testAttributeOnFunction */',
                 2,
-                [ T_STRING ],
+                [
+                    T_STRING,
+                ],
             ],
             [
                 '/* testAttributeOnFunctionWithParams */',
@@ -352,7 +356,9 @@ final class AttributesTest extends AbstractMethodUnitTest
                 '/* testSingleAttributeOnParameter */',
                 4,
                 2,
-                [T_STRING],
+                [
+                    T_STRING,
+                ],
             ],
             [
                 '/* testMultipleAttributesOnParameter */',
