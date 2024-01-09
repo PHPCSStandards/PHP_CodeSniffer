@@ -258,5 +258,3 @@
  *
  * @return void
  */
-
-/** No docblock close tag. Must be last test without new line.
