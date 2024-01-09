@@ -97,6 +97,8 @@ final class DocCommentUnitTest extends AbstractSniffUnitTest
                 246 => 1,
                 248 => 1,
                 249 => 1,
+                263 => 1,
+                266 => 1,
             ];
 
         default:
