@@ -41,18 +41,25 @@ final class UnnecessaryFinalModifierUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
+     * @param string $testFile The name of the test file being tested.
+     *
      * @return array<int, int>
      */
-    public function getWarningList()
+    public function getWarningList($testFile='')
     {
-        return [
-            11 => 1,
-            12 => 1,
-            15 => 1,
-            18 => 1,
-            32 => 1,
-            33 => 1,
-        ];
+        switch ($testFile) {
+        case 'UnnecessaryFinalModifierUnitTest.1.inc':
+            return [
+                11 => 1,
+                12 => 1,
+                15 => 1,
+                18 => 1,
+                32 => 1,
+                33 => 1,
+            ];
+        default:
+            return [];
+        }
 
     }//end getWarningList()
 
