@@ -1,0 +1,394 @@
+<documentation title="Doc Comment">
+    <standard>
+    <![CDATA[
+    Enforces several rules related to the formatting of doc comments in PHP code.
+    ]]>
+    </standard>
+    <standard>
+    <![CDATA[
+    Doc comment must not be empty.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Doc comment with some content.">
+        <![CDATA[
+/**
+ * <em>Some content.</em>
+ */
+        ]]>
+        </code>
+        <code title="Invalid: Empty doc comment.">
+        <![CDATA[
+/**
+ * <em></em>
+ */
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    The opening doc comment tag must be the only content on the line.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: The opening doc comment tag is the only content on the line.">
+        <![CDATA[
+<em>/**</em>
+ * Short description.
+ */
+        ]]>
+        </code>
+        <code title="Invalid: The opening doc comment tag is not the only content on the line.">
+        <![CDATA[
+<em>/** Short description.</em>
+ */
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    The closing doc comment tag must be the only content on the line.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: The closing doc comment tag is the only content on the line.">
+        <![CDATA[
+/**
+ * Short description.
+ <em>*/</em>
+        ]]>
+        </code>
+        <code title="Invalid: The closing doc comment tag is not the only content on the line.">
+        <![CDATA[
+/**
+ <em>* Short description */</em>
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There must be no additional blank lines before the closing doc comment tag.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: no additional blank lines before the closing doc comment tag.">
+        <![CDATA[
+/**
+ * Short description.
+<em></em> */
+        ]]>
+        </code>
+        <code title="Invalid: additional blank lines before the closing doc comment tag.">
+        <![CDATA[
+/**
+ * Short description.
+<em> *</em>
+ */
+
+ /**
+ * Short description.
+<em></em>
+ */
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    The doc comment must have a short description.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Doc comment with a short description.">
+        <![CDATA[
+/**
+ * <em>Short description.</em>
+ */
+        ]]>
+        </code>
+        <code title="Invalid: Doc comment without a short description.">
+        <![CDATA[
+/**
+ * <em></em>@return int
+ */
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    Short description must be on the first line of the doc comment.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: No blank lines before the short description.">
+        <![CDATA[
+/**<em></em>
+ * Short description.
+ */
+        ]]>
+        </code>
+        <code title="Invalid: Blank lines before the short description.">
+        <![CDATA[
+/**
+<em> *</em>
+ * Short description.
+ */
+
+ /**
+<em>
+</em>
+ * Short description.
+ */
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    The short description must start with a capital letter.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Short description starts with a capital letter.">
+        <![CDATA[
+/**
+ * <em>S</em>hort description.
+ */
+        ]]>
+        </code>
+        <code title="Invalid: Short description doesn't start with a capital letter.">
+        <![CDATA[
+/**
+ * <em>s</em>hort description.
+ */
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There must be exactly one blank line between the short and long descriptions.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: One blank line between the short and long descriptions.">
+        <![CDATA[
+/**
+ * Short description.
+<em> *<em>
+ * Long description.
+ */
+        ]]>
+        </code>
+        <code title="Invalid: More than one blank line between the short and long descriptions.">
+        <![CDATA[
+/**
+ * Short description.
+<em> *
+ *
+</em>
+ * Long description.
+ */
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    The long description must start with a capital letter.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Long description starts with a capital letter.">
+        <![CDATA[
+/**
+ * Short description.
+ *
+ * <em>L</em>ong description.
+ */
+        ]]>
+        </code>
+        <code title="Invalid: Long description doesn't start with a capital letter.">
+        <![CDATA[
+/**
+ * Short description.
+ *
+ * <em>l</em>ong description.
+ */
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There must be one blank line before the tags.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: One blank line before the tags.">
+        <![CDATA[
+/**
+ * Short description.
+<em> *</em>
+ * @param int $foo
+ */
+        ]]>
+        </code>
+        <code title="Invalid: More than one or no blank line before the tags.">
+        <![CDATA[
+/**
+ * Short description.
+<em> *
+ *</em>
+ * @param int $foo
+ */
+
+ /**
+ * Short description.</em></em>
+ * @return int
+ */
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    Parameter tags must be grouped together.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Parameter tags grouped together.">
+        <![CDATA[
+/**
+ * Short description.
+ *
+<em> * @param int $foo
+ * @param string $bar</em>
+ */
+        ]]>
+        </code>
+        <code title="Invalid: Parameter tags not grouped together.">
+        <![CDATA[
+/**
+ * Short description.
+ *
+ * @param int $foo
+<em> *</em>
+ * @param string $bar
+ */
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    Parameter tags must not be grouped together with other tags.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Parameter tags are not grouped together with other tags.">
+        <![CDATA[
+/**
+ * Short description.
+ *
+ * @param int $foo
+ *
+<em> * @author Some Author
+ * @return int</em>
+ */
+        ]]>
+        </code>
+        <code title="Invalid: Parameter tags grouped together with other tags.">
+        <![CDATA[
+/**
+ * Short description.
+ *
+<em> * @param  int $foo
+ * @author Some Author
+ * @return int</em>
+ */
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There must be a single blank line after a tag group.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Single blank line after a tag group.">
+        <![CDATA[
+/**
+ * Short description.
+ *
+ * @param int $foo
+ * @param string $bar
+<em> *</em>
+ * @return int
+ */
+        ]]>
+        </code>
+        <code title="Invalid: More than one blank line after a tag group.">
+        <![CDATA[
+/**
+ * Short description.
+ *
+ * @param int $foo
+ * @param string $bar
+<em> *
+ *</em>
+ * @return int
+ */
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    Tag values for different tags in the same group must be aligned with each other.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Tag values for different tags in the same tag group are aligned with each other.">
+        <![CDATA[
+/**
+ * Short description.
+ *
+ * @deprecated <em>1.0.0</em>
+ * @return     <em>bool</em>
+ */
+        ]]>
+        </code>
+        <code title="Invalid: Tag values for different tags in the same tag group are not aligned with each other.">
+        <![CDATA[
+/**
+ * Short description.
+ *
+ * @deprecated <em>1.0.0</em>
+ * @return <em>bool</em>
+ */
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    Parameter tags must be defined before other tags in a doc comment.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Parameter tags are defined first.">
+        <![CDATA[
+/**
+ * Short description.
+ *
+ * <em>@param string $foo</em>
+ *
+ * @return void
+ */
+        ]]>
+        </code>
+        <code title="Invalid: Parameter tags are not defined first.">
+        <![CDATA[
+/**
+ * Short description.
+ *
+ * @return void
+ *
+ * <em>@param string $bar</em>
+ */
+        ]]>
+        </code>
+    </code_comparison>
+</documentation>
