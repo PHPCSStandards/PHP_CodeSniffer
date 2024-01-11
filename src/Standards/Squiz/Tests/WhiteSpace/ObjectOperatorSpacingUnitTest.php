@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ObjectOperatorSpacingSniff
  */
-class ObjectOperatorSpacingUnitTest extends AbstractSniffUnitTest
+final class ObjectOperatorSpacingUnitTest extends AbstractSniffUnitTest
 {
 
 

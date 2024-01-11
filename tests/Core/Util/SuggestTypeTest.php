@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \PHP_CodeSniffer\Util\Common::suggestType
  */
-class SuggestTypeTest extends TestCase
+final class SuggestTypeTest extends TestCase
 {
 
 

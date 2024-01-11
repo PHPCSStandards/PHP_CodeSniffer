@@ -19,7 +19,7 @@ use ReflectionMethod;
  *
  * @covers \PHP_CodeSniffer\Filters\GitStaged
  */
-class GitStagedTest extends AbstractFilterTestCase
+final class GitStagedTest extends AbstractFilterTestCase
 {
 
 

@@ -21,7 +21,7 @@ use RecursiveArrayIterator;
  *
  * @covers \PHP_CodeSniffer\Filters\Filter
  */
-class AcceptTest extends AbstractFilterTestCase
+final class AcceptTest extends AbstractFilterTestCase
 {
 
 

@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \PHP_CodeSniffer\Util\Common::isCamelCaps
  */
-class IsCamelCapsTest extends TestCase
+final class IsCamelCapsTest extends TestCase
 {
 
 

@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Arrays\DisallowShortArraySyntaxSniff
  */
-class DisallowShortArraySyntaxUnitTest extends AbstractSniffUnitTest
+final class DisallowShortArraySyntaxUnitTest extends AbstractSniffUnitTest
 {
 
 

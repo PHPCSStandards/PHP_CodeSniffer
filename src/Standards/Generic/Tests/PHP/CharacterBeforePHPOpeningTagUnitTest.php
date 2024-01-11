@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\CharacterBeforePHPOpeningTagSniff
  */
-class CharacterBeforePHPOpeningTagUnitTest extends AbstractSniffUnitTest
+final class CharacterBeforePHPOpeningTagUnitTest extends AbstractSniffUnitTest
 {
 
 

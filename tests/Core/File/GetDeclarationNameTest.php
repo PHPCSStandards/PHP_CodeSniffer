@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
  *
  * @covers \PHP_CodeSniffer\Files\File::getDeclarationName
  */
-class GetDeclarationNameTest extends AbstractMethodUnitTest
+final class GetDeclarationNameTest extends AbstractMethodUnitTest
 {
 
 

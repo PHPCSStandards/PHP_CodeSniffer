@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DeprecatedFunctionsSniff
  */
-class DeprecatedFunctionsUnitTest extends AbstractSniffUnitTest
+final class DeprecatedFunctionsUnitTest extends AbstractSniffUnitTest
 {
 
 

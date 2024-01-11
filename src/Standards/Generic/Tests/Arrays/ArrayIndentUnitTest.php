@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Arrays\ArrayIndentSniff
  */
-class ArrayIndentUnitTest extends AbstractSniffUnitTest
+final class ArrayIndentUnitTest extends AbstractSniffUnitTest
 {
 
 

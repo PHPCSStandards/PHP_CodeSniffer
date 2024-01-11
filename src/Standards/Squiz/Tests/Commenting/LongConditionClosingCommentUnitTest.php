@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting\LongConditionClosingCommentSniff
  */
-class LongConditionClosingCommentUnitTest extends AbstractSniffUnitTest
+final class LongConditionClosingCommentUnitTest extends AbstractSniffUnitTest
 {
 
 

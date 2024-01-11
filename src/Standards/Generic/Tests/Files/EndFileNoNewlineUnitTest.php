@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\EndFileNoNewlineSniff
  */
-class EndFileNoNewlineUnitTest extends AbstractSniffUnitTest
+final class EndFileNoNewlineUnitTest extends AbstractSniffUnitTest
 {
 
 

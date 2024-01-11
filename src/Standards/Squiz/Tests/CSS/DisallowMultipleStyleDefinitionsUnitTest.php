@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\CSS\DisallowMultipleStyleDefinitionsSniff
  */
-class DisallowMultipleStyleDefinitionsUnitTest extends AbstractSniffUnitTest
+final class DisallowMultipleStyleDefinitionsUnitTest extends AbstractSniffUnitTest
 {
 
 

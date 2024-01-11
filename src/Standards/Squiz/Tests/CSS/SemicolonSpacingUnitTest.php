@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\CSS\SemicolonSpacingSniff
  */
-class SemicolonSpacingUnitTest extends AbstractSniffUnitTest
+final class SemicolonSpacingUnitTest extends AbstractSniffUnitTest
 {
 
 

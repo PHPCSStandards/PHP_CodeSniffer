@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\ElseIfDeclarationSniff
  */
-class ElseIfDeclarationUnitTest extends AbstractSniffUnitTest
+final class ElseIfDeclarationUnitTest extends AbstractSniffUnitTest
 {
 
 

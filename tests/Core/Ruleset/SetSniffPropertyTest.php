@@ -19,7 +19,7 @@ use ReflectionObject;
  *
  * @covers \PHP_CodeSniffer\Ruleset::setSniffProperty
  */
-class SetSniffPropertyTest extends TestCase
+final class SetSniffPropertyTest extends TestCase
 {
 
 

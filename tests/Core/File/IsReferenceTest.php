@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
  *
  * @covers \PHP_CodeSniffer\Files\File::isReference
  */
-class IsReferenceTest extends AbstractMethodUnitTest
+final class IsReferenceTest extends AbstractMethodUnitTest
 {
 
 

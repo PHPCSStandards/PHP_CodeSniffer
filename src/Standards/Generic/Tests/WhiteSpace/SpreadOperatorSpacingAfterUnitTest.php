@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\SpreadOperatorSpacingAfterSniff
  */
-class SpreadOperatorSpacingAfterUnitTest extends AbstractSniffUnitTest
+final class SpreadOperatorSpacingAfterUnitTest extends AbstractSniffUnitTest
 {
 
 

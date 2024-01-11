@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\PEAR\Sniffs\WhiteSpace\ObjectOperatorIndentSniff
  */
-class ObjectOperatorIndentUnitTest extends AbstractSniffUnitTest
+final class ObjectOperatorIndentUnitTest extends AbstractSniffUnitTest
 {
 
 

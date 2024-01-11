@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\HeredocSniff
  */
-class HeredocUnitTest extends AbstractSniffUnitTest
+final class HeredocUnitTest extends AbstractSniffUnitTest
 {
 
 

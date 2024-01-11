@@ -13,7 +13,7 @@ namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 
-class DoubleArrowTest extends AbstractMethodUnitTest
+final class DoubleArrowTest extends AbstractMethodUnitTest
 {
 
 

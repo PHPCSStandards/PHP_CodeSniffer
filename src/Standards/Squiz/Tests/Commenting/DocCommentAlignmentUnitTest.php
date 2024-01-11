@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting\DocCommentAlignmentSniff
  */
-class DocCommentAlignmentUnitTest extends AbstractSniffUnitTest
+final class DocCommentAlignmentUnitTest extends AbstractSniffUnitTest
 {
 
 

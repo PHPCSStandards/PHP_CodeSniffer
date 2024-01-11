@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Strings\ConcatenationSpacingSniff
  */
-class ConcatenationSpacingUnitTest extends AbstractSniffUnitTest
+final class ConcatenationSpacingUnitTest extends AbstractSniffUnitTest
 {
 
 

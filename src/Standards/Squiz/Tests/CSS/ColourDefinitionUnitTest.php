@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\CSS\ColourDefinitionSniff
  */
-class ColourDefinitionUnitTest extends AbstractSniffUnitTest
+final class ColourDefinitionUnitTest extends AbstractSniffUnitTest
 {
 
 

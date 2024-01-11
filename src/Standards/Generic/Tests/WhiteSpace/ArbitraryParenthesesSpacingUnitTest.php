@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\ArbitraryParenthesesSpacingSniff
  */
-class ArbitraryParenthesesSpacingUnitTest extends AbstractSniffUnitTest
+final class ArbitraryParenthesesSpacingUnitTest extends AbstractSniffUnitTest
 {
 
 

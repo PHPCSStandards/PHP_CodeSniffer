@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\PEAR\Sniffs\Formatting\MultiLineAssignmentSniff
  */
-class MultiLineAssignmentUnitTest extends AbstractSniffUnitTest
+final class MultiLineAssignmentUnitTest extends AbstractSniffUnitTest
 {
 
 

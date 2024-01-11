@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\OneInterfacePerFileSniff
  */
-class OneInterfacePerFileUnitTest extends AbstractSniffUnitTest
+final class OneInterfacePerFileUnitTest extends AbstractSniffUnitTest
 {
 
 

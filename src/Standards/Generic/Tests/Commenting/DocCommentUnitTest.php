@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Commenting\DocCommentSniff
  */
-class DocCommentUnitTest extends AbstractSniffUnitTest
+final class DocCommentUnitTest extends AbstractSniffUnitTest
 {
 
 

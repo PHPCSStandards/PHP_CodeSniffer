@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers PHP_CodeSniffer\Standards\MySource\Sniffs\Channels\UnusedSystemSniff
  */
-class UnusedSystemUnitTest extends AbstractSniffUnitTest
+final class UnusedSystemUnitTest extends AbstractSniffUnitTest
 {
 
 

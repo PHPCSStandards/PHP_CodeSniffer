@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\InlineIfDeclarationSniff
  */
-class InlineIfDeclarationUnitTest extends AbstractSniffUnitTest
+final class InlineIfDeclarationUnitTest extends AbstractSniffUnitTest
 {
 
 

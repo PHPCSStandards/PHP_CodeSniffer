@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DisallowBooleanStatementSniff
  */
-class DisallowBooleanStatementUnitTest extends AbstractSniffUnitTest
+final class DisallowBooleanStatementUnitTest extends AbstractSniffUnitTest
 {
 
 

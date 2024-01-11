@@ -12,7 +12,7 @@ namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 
-class HeredocStringTest extends AbstractMethodUnitTest
+final class HeredocStringTest extends AbstractMethodUnitTest
 {
 
 

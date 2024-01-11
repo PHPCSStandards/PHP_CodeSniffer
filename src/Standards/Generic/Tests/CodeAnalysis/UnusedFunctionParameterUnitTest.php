@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UnusedFunctionParameterSniff
  */
-class UnusedFunctionParameterUnitTest extends AbstractSniffUnitTest
+final class UnusedFunctionParameterUnitTest extends AbstractSniffUnitTest
 {
 
 

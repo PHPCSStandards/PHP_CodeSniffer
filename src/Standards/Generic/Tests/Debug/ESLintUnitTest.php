@@ -17,7 +17,7 @@ use PHP_CodeSniffer\Config;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Debug\ESLintSniff
  */
-class ESLintUnitTest extends AbstractSniffUnitTest
+final class ESLintUnitTest extends AbstractSniffUnitTest
 {
 
     /**
