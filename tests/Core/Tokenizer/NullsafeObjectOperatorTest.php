@@ -73,7 +73,7 @@ final class NullsafeObjectOperatorTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataNullsafeObjectOperator()
+    public static function dataNullsafeObjectOperator()
     {
         return [
             ['/* testNullsafeObjectOperator */'],
@@ -119,7 +119,7 @@ final class NullsafeObjectOperatorTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataTernaryThen()
+    public static function dataTernaryThen()
     {
         return [
             ['/* testTernaryThen */'],

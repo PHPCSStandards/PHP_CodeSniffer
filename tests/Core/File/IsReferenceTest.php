@@ -59,7 +59,7 @@ final class IsReferenceTest extends AbstractMethodUnitTest
      *
      * @return array<string, array<string, string|bool>>
      */
-    public function dataIsReference()
+    public static function dataIsReference()
     {
         return [
             'issue-1971-list-first-in-file'                                                                     => [

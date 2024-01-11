@@ -131,7 +131,7 @@ final class RuleInclusionTest extends TestCase
      *
      * @return array
      */
-    public function dataRegisteredSniffCodes()
+    public static function dataRegisteredSniffCodes()
     {
         return [
             [
@@ -364,7 +364,7 @@ final class RuleInclusionTest extends TestCase
      *
      * @return array
      */
-    public function dataSettingProperties()
+    public static function dataSettingProperties()
     {
         return [
             'Set property for complete standard: PSR2 ClassDeclaration'                                  => [
@@ -455,7 +455,7 @@ final class RuleInclusionTest extends TestCase
      *
      * @return array
      */
-    public function dataSettingInvalidPropertiesOnStandardsAndCategoriesSilentlyFails()
+    public static function dataSettingInvalidPropertiesOnStandardsAndCategoriesSilentlyFails()
     {
         return [
             'Set property for complete standard: PSR2 ClassDeclaration'      => [

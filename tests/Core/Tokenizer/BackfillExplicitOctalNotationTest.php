@@ -49,7 +49,7 @@ final class BackfillExplicitOctalNotationTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataExplicitOctalNotation()
+    public static function dataExplicitOctalNotation()
     {
         return [
             [

@@ -44,7 +44,7 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataReadonly()
+    public static function dataReadonly()
     {
         return [
             [
@@ -221,7 +221,7 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataNotReadonly()
+    public static function dataNotReadonly()
     {
         return [
             [

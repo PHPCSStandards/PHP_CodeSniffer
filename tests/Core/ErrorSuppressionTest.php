@@ -65,7 +65,7 @@ final class ErrorSuppressionTest extends TestCase
      *
      * @return array
      */
-    public function dataSuppressError()
+    public static function dataSuppressError()
     {
         return [
             'no suppression'                                                           => [
@@ -204,7 +204,7 @@ EOD;
      *
      * @return array
      */
-    public function dataSuppressSomeErrors()
+    public static function dataSuppressSomeErrors()
     {
         return [
             'no suppression'                               => [
@@ -296,7 +296,7 @@ EOD;
      *
      * @return array
      */
-    public function dataSuppressWarning()
+    public static function dataSuppressWarning()
     {
         return [
             'no suppression'                               => [
@@ -381,7 +381,7 @@ EOD;
      *
      * @return array
      */
-    public function dataSuppressLine()
+    public static function dataSuppressLine()
     {
         return [
             'no suppression'                             => [
@@ -532,7 +532,7 @@ EOD;
      *
      * @return array
      */
-    public function dataNestedSuppressLine()
+    public static function dataNestedSuppressLine()
     {
         return [
             // Process with disable/enable suppression and no single line suppression.
@@ -627,7 +627,7 @@ EOD;
      *
      * @return array
      */
-    public function dataSuppressScope()
+    public static function dataSuppressScope()
     {
         return [
             'no suppression'                                       => [
@@ -722,7 +722,7 @@ EOD;
      *
      * @return array
      */
-    public function dataSuppressFile()
+    public static function dataSuppressFile()
     {
         return [
             'no suppression'                                          => [
@@ -821,7 +821,7 @@ EOD;
      *
      * @return array
      */
-    public function dataDisableSelected()
+    public static function dataDisableSelected()
     {
         return [
             // Single sniff.
@@ -928,7 +928,7 @@ EOD;
      *
      * @return array
      */
-    public function dataEnableSelected()
+    public static function dataEnableSelected()
     {
         return [
             'disable/enable: a single sniff'                                                                                => [
@@ -1108,7 +1108,7 @@ EOD;
      *
      * @return array
      */
-    public function dataIgnoreSelected()
+    public static function dataIgnoreSelected()
     {
         return [
             'no suppression'                              => [
@@ -1195,7 +1195,7 @@ EOD;
      *
      * @return array
      */
-    public function dataCommenting()
+    public static function dataCommenting()
     {
         return [
             'ignore: single sniff'                                                                         => [

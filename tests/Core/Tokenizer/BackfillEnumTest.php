@@ -75,7 +75,7 @@ final class BackfillEnumTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataEnums()
+    public static function dataEnums()
     {
         return [
             [
@@ -154,7 +154,7 @@ final class BackfillEnumTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataNotEnums()
+    public static function dataNotEnums()
     {
         return [
             [

@@ -45,7 +45,7 @@ final class ContextSensitiveKeywordsTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataStrings()
+    public static function dataStrings()
     {
         return [
             ['/* testAbstract */'],
@@ -187,7 +187,7 @@ final class ContextSensitiveKeywordsTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataKeywords()
+    public static function dataKeywords()
     {
         return [
             [

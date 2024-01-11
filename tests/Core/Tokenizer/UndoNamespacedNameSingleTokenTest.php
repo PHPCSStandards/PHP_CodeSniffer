@@ -59,7 +59,7 @@ final class UndoNamespacedNameSingleTokenTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataIdentifierTokenization()
+    public static function dataIdentifierTokenization()
     {
         return [
             [
