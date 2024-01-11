@@ -41,14 +41,21 @@ final class UselessOverridingMethodUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    public function getWarningList()
+    public function getWarningList($testFile='')
     {
-        return [
-            4  => 1,
-            16 => 1,
-        ];
+        switch ($testFile) {
+        case 'UselessOverridingMethodUnitTest.1.inc':
+            return [
+                4  => 1,
+                16 => 1,
+            ];
+        default:
+            return [];
+        }
 
     }//end getWarningList()
 
