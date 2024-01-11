@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @coversNothing
  */
-class ErrorSuppressionTest extends TestCase
+final class ErrorSuppressionTest extends TestCase
 {
 
 

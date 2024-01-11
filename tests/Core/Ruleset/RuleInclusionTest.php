@@ -19,7 +19,7 @@ use ReflectionObject;
  *
  * @covers \PHP_CodeSniffer\Ruleset
  */
-class RuleInclusionTest extends TestCase
+final class RuleInclusionTest extends TestCase
 {
 
     /**

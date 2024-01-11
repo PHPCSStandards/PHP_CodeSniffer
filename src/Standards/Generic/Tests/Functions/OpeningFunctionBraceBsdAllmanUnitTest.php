@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Functions\OpeningFunctionBraceBsdAllmanSniff
  */
-class OpeningFunctionBraceBsdAllmanUnitTest extends AbstractSniffUnitTest
+final class OpeningFunctionBraceBsdAllmanUnitTest extends AbstractSniffUnitTest
 {
 
 

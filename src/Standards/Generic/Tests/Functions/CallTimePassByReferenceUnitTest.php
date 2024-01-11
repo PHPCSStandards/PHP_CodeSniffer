@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Functions\CallTimePassByReferenceSniff
  */
-class CallTimePassByReferenceUnitTest extends AbstractSniffUnitTest
+final class CallTimePassByReferenceUnitTest extends AbstractSniffUnitTest
 {
 
 

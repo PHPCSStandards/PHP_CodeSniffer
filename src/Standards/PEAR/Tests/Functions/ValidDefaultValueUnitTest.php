@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\PEAR\Sniffs\Functions\ValidDefaultValueSniff
  */
-class ValidDefaultValueUnitTest extends AbstractSniffUnitTest
+final class ValidDefaultValueUnitTest extends AbstractSniffUnitTest
 {
 
 

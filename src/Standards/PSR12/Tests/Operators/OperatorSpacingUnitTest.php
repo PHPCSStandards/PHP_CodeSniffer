@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Operators\OperatorSpacingSniff
  */
-class OperatorSpacingUnitTest extends AbstractSniffUnitTest
+final class OperatorSpacingUnitTest extends AbstractSniffUnitTest
 {
 
 

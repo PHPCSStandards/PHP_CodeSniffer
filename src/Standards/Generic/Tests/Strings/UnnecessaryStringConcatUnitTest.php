@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Strings\UnnecessaryStringConcatSniff
  */
-class UnnecessaryStringConcatUnitTest extends AbstractSniffUnitTest
+final class UnnecessaryStringConcatUnitTest extends AbstractSniffUnitTest
 {
 
 

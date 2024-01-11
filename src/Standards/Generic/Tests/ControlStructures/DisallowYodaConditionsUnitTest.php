@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\ControlStructures\DisallowYodaConditionsSniff
  */
-class DisallowYodaConditionsUnitTest extends AbstractSniffUnitTest
+final class DisallowYodaConditionsUnitTest extends AbstractSniffUnitTest
 {
 
 

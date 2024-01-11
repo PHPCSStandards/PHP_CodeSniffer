@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\PSR2\Sniffs\Namespaces\NamespaceDeclarationSniff
  */
-class NamespaceDeclarationUnitTest extends AbstractSniffUnitTest
+final class NamespaceDeclarationUnitTest extends AbstractSniffUnitTest
 {
 
 

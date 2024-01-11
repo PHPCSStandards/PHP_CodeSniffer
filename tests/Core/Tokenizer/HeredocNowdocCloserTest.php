@@ -19,7 +19,7 @@ use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
  *
  * @requires PHP 7.3
  */
-class HeredocNowdocCloserTest extends AbstractMethodUnitTest
+final class HeredocNowdocCloserTest extends AbstractMethodUnitTest
 {
 
 

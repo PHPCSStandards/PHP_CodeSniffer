@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\MultipleStatementAlignmentSniff
  */
-class MultipleStatementAlignmentUnitTest extends AbstractSniffUnitTest
+final class MultipleStatementAlignmentUnitTest extends AbstractSniffUnitTest
 {
 
 

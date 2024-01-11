@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DisallowSizeFunctionsInLoopsSniff
  */
-class DisallowSizeFunctionsInLoopsUnitTest extends AbstractSniffUnitTest
+final class DisallowSizeFunctionsInLoopsUnitTest extends AbstractSniffUnitTest
 {
 
 

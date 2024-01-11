@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \PHP_CodeSniffer\Ruleset::processRuleset
  */
-class RulesetOverrideTest extends TestCase
+final class RulesetOverrideTest extends TestCase
 {
 
     /**

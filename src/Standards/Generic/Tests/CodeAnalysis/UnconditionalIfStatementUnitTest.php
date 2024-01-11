@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UnconditionalIfStatementSniff
  */
-class UnconditionalIfStatementUnitTest extends AbstractSniffUnitTest
+final class UnconditionalIfStatementUnitTest extends AbstractSniffUnitTest
 {
 
 

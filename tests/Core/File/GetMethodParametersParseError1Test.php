@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
  *
  * @covers \PHP_CodeSniffer\Files\File::getMethodParameters
  */
-class GetMethodParametersParseError1Test extends AbstractMethodUnitTest
+final class GetMethodParametersParseError1Test extends AbstractMethodUnitTest
 {
 
 

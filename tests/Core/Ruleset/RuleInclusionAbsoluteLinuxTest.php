@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \PHP_CodeSniffer\Ruleset
  */
-class RuleInclusionAbsoluteLinuxTest extends TestCase
+final class RuleInclusionAbsoluteLinuxTest extends TestCase
 {
 
     /**

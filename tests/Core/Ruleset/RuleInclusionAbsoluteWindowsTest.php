@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \PHP_CodeSniffer\Ruleset
  */
-class RuleInclusionAbsoluteWindowsTest extends TestCase
+final class RuleInclusionAbsoluteWindowsTest extends TestCase
 {
 
     /**

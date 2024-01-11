@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions\MultiLineFunctionDeclarationSniff
  */
-class MultiLineFunctionDeclarationUnitTest extends AbstractSniffUnitTest
+final class MultiLineFunctionDeclarationUnitTest extends AbstractSniffUnitTest
 {
 
 

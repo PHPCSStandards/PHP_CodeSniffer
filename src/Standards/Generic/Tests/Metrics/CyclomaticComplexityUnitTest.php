@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\CyclomaticComplexitySniff
  */
-class CyclomaticComplexityUnitTest extends AbstractSniffUnitTest
+final class CyclomaticComplexityUnitTest extends AbstractSniffUnitTest
 {
 
 

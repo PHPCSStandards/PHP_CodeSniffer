@@ -17,7 +17,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\SyntaxSniff
  */
-class SyntaxUnitTest extends AbstractSniffUnitTest
+final class SyntaxUnitTest extends AbstractSniffUnitTest
 {
 
 

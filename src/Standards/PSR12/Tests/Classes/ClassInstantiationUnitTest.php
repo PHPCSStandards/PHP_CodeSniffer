@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Classes\ClassInstantiationSniff
  */
-class ClassInstantiationUnitTest extends AbstractSniffUnitTest
+final class ClassInstantiationUnitTest extends AbstractSniffUnitTest
 {
 
 

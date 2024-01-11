@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\PEAR\Sniffs\ControlStructures\MultiLineConditionSniff
  */
-class MultiLineConditionUnitTest extends AbstractSniffUnitTest
+final class MultiLineConditionUnitTest extends AbstractSniffUnitTest
 {
 
 

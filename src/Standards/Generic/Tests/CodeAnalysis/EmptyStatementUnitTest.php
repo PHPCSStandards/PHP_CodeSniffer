@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff
  */
-class EmptyStatementUnitTest extends AbstractSniffUnitTest
+final class EmptyStatementUnitTest extends AbstractSniffUnitTest
 {
 
 

@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Files\FileExtensionSniff
  */
-class FileExtensionUnitTest extends AbstractSniffUnitTest
+final class FileExtensionUnitTest extends AbstractSniffUnitTest
 {
 
 
