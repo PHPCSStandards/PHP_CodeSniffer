@@ -89,7 +89,7 @@ final class UseParenthesisOwnerTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataUseNotClosure()
+    public static function dataUseNotClosure()
     {
         return [
             ['/* testUseImportSimple */'],
@@ -153,7 +153,7 @@ final class UseParenthesisOwnerTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataClosureUse()
+    public static function dataClosureUse()
     {
         return [
             ['/* testClosureUse */'],

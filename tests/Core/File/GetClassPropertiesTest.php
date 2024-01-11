@@ -49,7 +49,7 @@ final class GetClassPropertiesTest extends AbstractMethodUnitTest
      *
      * @return array<string, array<string, string|int>>
      */
-    public function dataNotAClassException()
+    public static function dataNotAClassException()
     {
         return [
             'interface'  => [
@@ -95,7 +95,7 @@ final class GetClassPropertiesTest extends AbstractMethodUnitTest
      *
      * @return array<string, array<string, string|array<string, bool|int>>>
      */
-    public function dataGetClassProperties()
+    public static function dataGetClassProperties()
     {
         return [
             'no-properties'               => [

@@ -53,7 +53,7 @@ final class BackfillMatchTokenTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataMatchExpression()
+    public static function dataMatchExpression()
     {
         return [
             'simple_match'                              => [
@@ -243,7 +243,7 @@ final class BackfillMatchTokenTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataNotAMatchStructure()
+    public static function dataNotAMatchStructure()
     {
         return [
             'static_method_call'                   => ['/* testNoMatchStaticMethodCall */'],
@@ -340,7 +340,7 @@ final class BackfillMatchTokenTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataSwitchExpression()
+    public static function dataSwitchExpression()
     {
         return [
             'switch_containing_match'   => [
@@ -393,7 +393,7 @@ final class BackfillMatchTokenTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataSwitchCaseVersusMatch()
+    public static function dataSwitchCaseVersusMatch()
     {
         return [
             'switch_with_nested_match_case_1'       => [

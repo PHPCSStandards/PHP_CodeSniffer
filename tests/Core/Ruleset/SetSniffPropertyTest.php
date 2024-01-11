@@ -74,7 +74,7 @@ final class SetSniffPropertyTest extends TestCase
      *
      * @return array
      */
-    public function dataSniffPropertiesGetSetWhenAllowed()
+    public static function dataSniffPropertiesGetSetWhenAllowed()
     {
         return [
             'Property allowed as explicitly declared'            => ['SetPropertyAllowedAsDeclared'],

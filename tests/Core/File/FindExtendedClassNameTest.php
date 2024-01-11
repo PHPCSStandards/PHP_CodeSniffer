@@ -74,7 +74,7 @@ final class FindExtendedClassNameTest extends AbstractMethodUnitTest
      *
      * @return array<string, array<string, string|false>>
      */
-    public function dataExtendedClass()
+    public static function dataExtendedClass()
     {
         return [
             'class does not extend'                                       => [

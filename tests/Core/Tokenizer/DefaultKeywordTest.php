@@ -55,7 +55,7 @@ final class DefaultKeywordTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataMatchDefault()
+    public static function dataMatchDefault()
     {
         return [
             'simple_match_default'                                    => ['/* testSimpleMatchDefault */'],
@@ -171,7 +171,7 @@ final class DefaultKeywordTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataSwitchDefault()
+    public static function dataSwitchDefault()
     {
         return [
             'simple_switch_default'                  => [
@@ -246,7 +246,7 @@ final class DefaultKeywordTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataNotDefaultKeyword()
+    public static function dataNotDefaultKeyword()
     {
         return [
             'class-constant-as-short-array-key'                   => ['/* testClassConstantAsShortArrayKey */'],

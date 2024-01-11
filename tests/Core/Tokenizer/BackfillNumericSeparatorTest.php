@@ -44,7 +44,7 @@ final class BackfillNumericSeparatorTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataTestBackfill()
+    public static function dataTestBackfill()
     {
         $testHexType = 'T_LNUMBER';
         if (PHP_INT_MAX < 0xCAFEF00D) {
@@ -191,7 +191,7 @@ final class BackfillNumericSeparatorTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataNoBackfill()
+    public static function dataNoBackfill()
     {
         return [
             [

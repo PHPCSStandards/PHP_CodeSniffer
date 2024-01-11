@@ -45,7 +45,7 @@ final class GotoLabelTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataGotoStatement()
+    public static function dataGotoStatement()
     {
         return [
             [
@@ -91,7 +91,7 @@ final class GotoLabelTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataGotoDeclaration()
+    public static function dataGotoDeclaration()
     {
         return [
             [
@@ -136,7 +136,7 @@ final class GotoLabelTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataNotAGotoDeclaration()
+    public static function dataNotAGotoDeclaration()
     {
         return [
             [

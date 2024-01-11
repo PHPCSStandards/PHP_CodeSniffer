@@ -53,7 +53,7 @@ final class StableCommentWhitespaceWinTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataCommentTokenization()
+    public static function dataCommentTokenization()
     {
         return [
             [

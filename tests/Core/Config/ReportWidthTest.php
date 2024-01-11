@@ -257,7 +257,7 @@ final class ReportWidthTest extends TestCase
      *
      * @return array
      */
-    public function dataReportWidthInputHandling()
+    public static function dataReportWidthInputHandling()
     {
         return [
             'No value (empty string)'                                 => [

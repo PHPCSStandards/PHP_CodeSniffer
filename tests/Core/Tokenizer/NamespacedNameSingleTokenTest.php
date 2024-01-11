@@ -63,7 +63,7 @@ final class NamespacedNameSingleTokenTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataIdentifierTokenization()
+    public static function dataIdentifierTokenization()
     {
         return [
             [

@@ -51,7 +51,7 @@ final class ArrayKeywordTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataArrayKeyword()
+    public static function dataArrayKeyword()
     {
         return [
             'empty array'                           => ['/* testEmptyArray */'],
@@ -103,7 +103,7 @@ final class ArrayKeywordTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataArrayType()
+    public static function dataArrayType()
     {
         return [
             'closure return type'        => [
@@ -154,7 +154,7 @@ final class ArrayKeywordTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataNotArrayKeyword()
+    public static function dataNotArrayKeyword()
     {
         return [
             'class-constant-name' => [

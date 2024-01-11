@@ -76,7 +76,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataNamedFunctionCallArguments()
+    public static function dataNamedFunctionCallArguments()
     {
         return [
             [
@@ -298,7 +298,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataOtherTstringInFunctionCall()
+    public static function dataOtherTstringInFunctionCall()
     {
         return [
             [
@@ -756,7 +756,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataReservedKeywordsAsName()
+    public static function dataReservedKeywordsAsName()
     {
         $reservedKeywords = [
             // '__halt_compiler', NOT TESTABLE

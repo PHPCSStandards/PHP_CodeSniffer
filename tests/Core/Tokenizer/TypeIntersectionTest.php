@@ -44,7 +44,7 @@ final class TypeIntersectionTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataBitwiseAnd()
+    public static function dataBitwiseAnd()
     {
         return [
             ['/* testBitwiseAnd1 */'],
@@ -97,7 +97,7 @@ final class TypeIntersectionTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataTypeIntersection()
+    public static function dataTypeIntersection()
     {
         return [
             ['/* testTypeIntersectionPropertySimple */'],

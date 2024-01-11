@@ -61,7 +61,7 @@ final class ScopeSettingWithNamespaceOperatorTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataScopeSetting()
+    public static function dataScopeSetting()
     {
         return [
             [
