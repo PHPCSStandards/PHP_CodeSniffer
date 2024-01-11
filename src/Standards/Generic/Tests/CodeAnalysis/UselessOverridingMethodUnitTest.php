@@ -52,6 +52,8 @@ final class UselessOverridingMethodUnitTest extends AbstractSniffUnitTest
             return [
                 4  => 1,
                 16 => 1,
+                38 => 1,
+                56 => 1,
             ];
         default:
             return [];
