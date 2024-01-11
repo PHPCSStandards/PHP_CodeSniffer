@@ -94,7 +94,6 @@ class UnusedFunctionParameterSniff implements Sniff
 
         $errorCode  = 'Found';
         $implements = false;
-        $extends    = false;
 
         if ($token['code'] === T_FUNCTION) {
             $classPtr = $phpcsFile->getCondition($stackPtr, T_CLASS);
