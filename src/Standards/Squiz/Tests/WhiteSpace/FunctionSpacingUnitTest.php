@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\FunctionSpacingSniff
  */
-class FunctionSpacingUnitTest extends AbstractSniffUnitTest
+final class FunctionSpacingUnitTest extends AbstractSniffUnitTest
 {
 
 

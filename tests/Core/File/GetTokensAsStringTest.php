@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
  *
  * @covers \PHP_CodeSniffer\Files\File::getTokensAsString
  */
-class GetTokensAsStringTest extends AbstractMethodUnitTest
+final class GetTokensAsStringTest extends AbstractMethodUnitTest
 {
 
 

@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\ForLoopWithTestFunctionCallSniff
  */
-class ForLoopWithTestFunctionCallUnitTest extends AbstractSniffUnitTest
+final class ForLoopWithTestFunctionCallUnitTest extends AbstractSniffUnitTest
 {
 
 

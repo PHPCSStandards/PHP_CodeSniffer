@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers PHP_CodeSniffer\Standards\MySource\Sniffs\Objects\AssignThisSniff
  */
-class AssignThisUnitTest extends AbstractSniffUnitTest
+final class AssignThisUnitTest extends AbstractSniffUnitTest
 {
 
 

@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\PSR1\Sniffs\Methods\CamelCapsMethodNameSniff
  */
-class CamelCapsMethodNameUnitTest extends AbstractSniffUnitTest
+final class CamelCapsMethodNameUnitTest extends AbstractSniffUnitTest
 {
 
 

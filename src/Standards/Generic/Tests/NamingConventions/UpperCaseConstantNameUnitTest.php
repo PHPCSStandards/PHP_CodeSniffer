@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\UpperCaseConstantNameSniff
  */
-class UpperCaseConstantNameUnitTest extends AbstractSniffUnitTest
+final class UpperCaseConstantNameUnitTest extends AbstractSniffUnitTest
 {
 
 

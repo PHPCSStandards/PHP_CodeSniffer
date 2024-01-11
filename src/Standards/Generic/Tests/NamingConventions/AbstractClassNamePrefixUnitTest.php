@@ -15,7 +15,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\AbstractClassNamePrefixSniff
  */
-class AbstractClassNamePrefixUnitTest extends AbstractSniffUnitTest
+final class AbstractClassNamePrefixUnitTest extends AbstractSniffUnitTest
 {
 
 

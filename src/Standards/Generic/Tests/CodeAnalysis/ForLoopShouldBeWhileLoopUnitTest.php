@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\ForLoopShouldBeWhileLoopSniff
  */
-class ForLoopShouldBeWhileLoopUnitTest extends AbstractSniffUnitTest
+final class ForLoopShouldBeWhileLoopUnitTest extends AbstractSniffUnitTest
 {
 
 

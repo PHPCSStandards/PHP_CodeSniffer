@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\PEAR\Sniffs\ControlStructures\ControlSignatureSniff
  */
-class ControlSignatureUnitTest extends AbstractSniffUnitTest
+final class ControlSignatureUnitTest extends AbstractSniffUnitTest
 {
 
 

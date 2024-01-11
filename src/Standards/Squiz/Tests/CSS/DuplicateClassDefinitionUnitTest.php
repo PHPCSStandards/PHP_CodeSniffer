@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\CSS\DuplicateClassDefinitionSniff
  */
-class DuplicateClassDefinitionUnitTest extends AbstractSniffUnitTest
+final class DuplicateClassDefinitionUnitTest extends AbstractSniffUnitTest
 {
 
 

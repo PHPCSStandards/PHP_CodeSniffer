@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\PropertyLabelSpacingSniff
  */
-class PropertyLabelSpacingUnitTest extends AbstractSniffUnitTest
+final class PropertyLabelSpacingUnitTest extends AbstractSniffUnitTest
 {
 
 

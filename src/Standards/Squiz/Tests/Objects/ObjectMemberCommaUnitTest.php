@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Objects\ObjectMemberCommaSniff
  */
-class ObjectMemberCommaUnitTest extends AbstractSniffUnitTest
+final class ObjectMemberCommaUnitTest extends AbstractSniffUnitTest
 {
 
 

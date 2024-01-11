@@ -18,7 +18,7 @@ use ReflectionProperty;
  *
  * @covers \PHP_CodeSniffer\Config::__get
  */
-class ReportWidthTest extends TestCase
+final class ReportWidthTest extends TestCase
 {
 
 

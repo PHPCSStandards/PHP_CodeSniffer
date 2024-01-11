@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\RequireStrictTypesSniff
  */
-class RequireStrictTypesUnitTest extends AbstractSniffUnitTest
+final class RequireStrictTypesUnitTest extends AbstractSniffUnitTest
 {
 
 

@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers PHP_CodeSniffer\Standards\MySource\Sniffs\CSS\BrowserSpecificStylesSniff
  */
-class BrowserSpecificStylesUnitTest extends AbstractSniffUnitTest
+final class BrowserSpecificStylesUnitTest extends AbstractSniffUnitTest
 {
 
 

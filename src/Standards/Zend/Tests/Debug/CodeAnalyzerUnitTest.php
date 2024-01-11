@@ -17,7 +17,7 @@ use PHP_CodeSniffer\Config;
  *
  * @covers \PHP_CodeSniffer\Standards\Zend\Sniffs\Debug\CodeAnalyzerSniff
  */
-class CodeAnalyzerUnitTest extends AbstractSniffUnitTest
+final class CodeAnalyzerUnitTest extends AbstractSniffUnitTest
 {
 
 

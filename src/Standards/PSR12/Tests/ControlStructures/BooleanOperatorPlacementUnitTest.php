@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\ControlStructures\BooleanOperatorPlacementSniff
  */
-class BooleanOperatorPlacementUnitTest extends AbstractSniffUnitTest
+final class BooleanOperatorPlacementUnitTest extends AbstractSniffUnitTest
 {
 
 

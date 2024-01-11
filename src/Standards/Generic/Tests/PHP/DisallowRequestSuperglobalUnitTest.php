@@ -15,7 +15,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DisallowRequestSuperglobalSniff
  */
-class DisallowRequestSuperglobalUnitTest extends AbstractSniffUnitTest
+final class DisallowRequestSuperglobalUnitTest extends AbstractSniffUnitTest
 {
 
 

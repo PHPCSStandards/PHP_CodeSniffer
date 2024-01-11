@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Keywords\ShortFormTypeKeywordsSniff
  */
-class ShortFormTypeKeywordsUnitTest extends AbstractSniffUnitTest
+final class ShortFormTypeKeywordsUnitTest extends AbstractSniffUnitTest
 {
 
 

@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\LowerCaseConstantSniff
  */
-class LowerCaseConstantUnitTest extends AbstractSniffUnitTest
+final class LowerCaseConstantUnitTest extends AbstractSniffUnitTest
 {
 
 

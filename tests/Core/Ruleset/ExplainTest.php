@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \PHP_CodeSniffer\Ruleset::explain
  */
-class ExplainTest extends TestCase
+final class ExplainTest extends TestCase
 {
 
 

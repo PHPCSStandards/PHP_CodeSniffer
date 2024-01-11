@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\ByteOrderMarkSniff
  */
-class ByteOrderMarkUnitTest extends AbstractSniffUnitTest
+final class ByteOrderMarkUnitTest extends AbstractSniffUnitTest
 {
 
 

@@ -12,7 +12,7 @@ namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 
-class DoubleQuotedStringTest extends AbstractMethodUnitTest
+final class DoubleQuotedStringTest extends AbstractMethodUnitTest
 {
 
 

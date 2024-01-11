@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\FunctionClosingBraceSniff
  */
-class FunctionClosingBraceUnitTest extends AbstractSniffUnitTest
+final class FunctionClosingBraceUnitTest extends AbstractSniffUnitTest
 {
 
 

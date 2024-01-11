@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\CSS\EmptyStyleDefinitionSniff
  */
-class EmptyStyleDefinitionUnitTest extends AbstractSniffUnitTest
+final class EmptyStyleDefinitionUnitTest extends AbstractSniffUnitTest
 {
 
 

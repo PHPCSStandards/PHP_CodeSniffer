@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff
  */
-class ValidVariableNameUnitTest extends AbstractSniffUnitTest
+final class ValidVariableNameUnitTest extends AbstractSniffUnitTest
 {
 
 

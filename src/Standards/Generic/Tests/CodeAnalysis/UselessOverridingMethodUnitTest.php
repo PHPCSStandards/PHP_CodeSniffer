@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UselessOverridingMethodSniff
  */
-class UselessOverridingMethodUnitTest extends AbstractSniffUnitTest
+final class UselessOverridingMethodUnitTest extends AbstractSniffUnitTest
 {
 
 

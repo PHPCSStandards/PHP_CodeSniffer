@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers PHP_CodeSniffer\Standards\MySource\Sniffs\Objects\DisallowNewWidgetSniff
  */
-class DisallowNewWidgetUnitTest extends AbstractSniffUnitTest
+final class DisallowNewWidgetUnitTest extends AbstractSniffUnitTest
 {
 
 

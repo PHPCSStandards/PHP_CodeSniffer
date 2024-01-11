@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\CSS\ColonSpacingSniff
  */
-class ColonSpacingUnitTest extends AbstractSniffUnitTest
+final class ColonSpacingUnitTest extends AbstractSniffUnitTest
 {
 
 

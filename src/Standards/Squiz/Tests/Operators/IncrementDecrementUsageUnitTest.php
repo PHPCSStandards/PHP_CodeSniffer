@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Operators\IncrementDecrementUsageSniff
  */
-class IncrementDecrementUsageUnitTest extends AbstractSniffUnitTest
+final class IncrementDecrementUsageUnitTest extends AbstractSniffUnitTest
 {
 
 

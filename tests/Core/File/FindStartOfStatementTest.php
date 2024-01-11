@@ -18,7 +18,7 @@ use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
  *
  * @covers \PHP_CodeSniffer\Files\File::findStartOfStatement
  */
-class FindStartOfStatementTest extends AbstractMethodUnitTest
+final class FindStartOfStatementTest extends AbstractMethodUnitTest
 {
 
 

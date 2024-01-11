@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers PHP_CodeSniffer\Standards\MySource\Sniffs\Channels\DisallowSelfActionsSniff
  */
-class DisallowSelfActionsUnitTest extends AbstractSniffUnitTest
+final class DisallowSelfActionsUnitTest extends AbstractSniffUnitTest
 {
 
 

@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceBeforeCastSniff
  */
-class SpaceBeforeCastUnitTest extends AbstractSniffUnitTest
+final class SpaceBeforeCastUnitTest extends AbstractSniffUnitTest
 {
 
 

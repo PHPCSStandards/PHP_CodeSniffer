@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\CSS\IndentationSniff
  */
-class IndentationUnitTest extends AbstractSniffUnitTest
+final class IndentationUnitTest extends AbstractSniffUnitTest
 {
 
 

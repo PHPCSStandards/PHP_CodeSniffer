@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\JumbledIncrementerSniff
  */
-class JumbledIncrementerUnitTest extends AbstractSniffUnitTest
+final class JumbledIncrementerUnitTest extends AbstractSniffUnitTest
 {
 
 

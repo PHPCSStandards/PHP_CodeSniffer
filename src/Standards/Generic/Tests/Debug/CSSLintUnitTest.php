@@ -17,7 +17,7 @@ use PHP_CodeSniffer\Config;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Debug\CSSLintSniff
  */
-class CSSLintUnitTest extends AbstractSniffUnitTest
+final class CSSLintUnitTest extends AbstractSniffUnitTest
 {
 
 

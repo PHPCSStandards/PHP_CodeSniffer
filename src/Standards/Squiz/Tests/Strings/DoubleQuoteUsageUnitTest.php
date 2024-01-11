@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Strings\DoubleQuoteUsageSniff
  */
-class DoubleQuoteUsageUnitTest extends AbstractSniffUnitTest
+final class DoubleQuoteUsageUnitTest extends AbstractSniffUnitTest
 {
 
 

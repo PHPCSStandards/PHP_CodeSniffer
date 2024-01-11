@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\CSS\ClassDefinitionOpeningBraceSpaceSniff
  */
-class ClassDefinitionOpeningBraceSpaceUnitTest extends AbstractSniffUnitTest
+final class ClassDefinitionOpeningBraceSpaceUnitTest extends AbstractSniffUnitTest
 {
 
 

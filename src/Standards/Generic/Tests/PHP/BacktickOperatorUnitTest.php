@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\BacktickOperatorSniff
  */
-class BacktickOperatorUnitTest extends AbstractSniffUnitTest
+final class BacktickOperatorUnitTest extends AbstractSniffUnitTest
 {
 
 

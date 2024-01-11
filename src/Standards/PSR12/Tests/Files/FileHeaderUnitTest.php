@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Files\FileHeaderSniff
  */
-class FileHeaderUnitTest extends AbstractSniffUnitTest
+final class FileHeaderUnitTest extends AbstractSniffUnitTest
 {
 
 

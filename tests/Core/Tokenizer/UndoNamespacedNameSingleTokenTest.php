@@ -21,7 +21,7 @@ namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 
-class UndoNamespacedNameSingleTokenTest extends AbstractMethodUnitTest
+final class UndoNamespacedNameSingleTokenTest extends AbstractMethodUnitTest
 {
 
 

@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LowercasedFilenameSniff
  */
-class LowercasedFilenameUnitTest extends AbstractSniffUnitTest
+final class LowercasedFilenameUnitTest extends AbstractSniffUnitTest
 {
 
 

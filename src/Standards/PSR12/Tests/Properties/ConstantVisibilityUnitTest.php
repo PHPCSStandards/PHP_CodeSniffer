@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  *
  * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Properties\ConstantVisibilitySniff
  */
-class ConstantVisibilityUnitTest extends AbstractSniffUnitTest
+final class ConstantVisibilityUnitTest extends AbstractSniffUnitTest
 {
 
 
