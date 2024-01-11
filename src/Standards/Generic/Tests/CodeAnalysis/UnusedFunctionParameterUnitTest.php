@@ -65,6 +65,7 @@ final class UnusedFunctionParameterUnitTest extends AbstractSniffUnitTest
                 232 => 2,
                 244 => 2,
                 248 => 2,
+                271 => 1,
             ];
 
         default:
