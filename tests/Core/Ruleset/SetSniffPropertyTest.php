@@ -74,7 +74,7 @@ final class SetSniffPropertyTest extends TestCase
      *
      * @return array
      */
-    public function dataSniffPropertiesGetSetWhenAllowed()
+    public static function dataSniffPropertiesGetSetWhenAllowed()
     {
         return [
             'Property allowed as explicitly declared'            => ['SetPropertyAllowedAsDeclared'],
@@ -315,7 +315,7 @@ final class SetSniffPropertyTest extends TestCase
      *
      * @return array
      */
-    public function dataDirectCallWithOldArrayFormatSetsProperty()
+    public static function dataDirectCallWithOldArrayFormatSetsProperty()
     {
         return [
             'Property value is not an array (boolean)'                       => [false],

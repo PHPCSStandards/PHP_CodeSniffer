@@ -44,7 +44,7 @@ final class DoubleQuotedStringTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataDoubleQuotedString()
+    public static function dataDoubleQuotedString()
     {
         return [
             [

@@ -66,7 +66,7 @@ final class AttributesTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataAttribute()
+    public static function dataAttribute()
     {
         return [
             [
@@ -345,7 +345,7 @@ final class AttributesTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataAttributeOnParameters()
+    public static function dataAttributeOnParameters()
     {
         return [
             [
@@ -451,7 +451,7 @@ final class AttributesTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataAttributeOnTextLookingLikeCloseTag()
+    public static function dataAttributeOnTextLookingLikeCloseTag()
     {
         return [
             [

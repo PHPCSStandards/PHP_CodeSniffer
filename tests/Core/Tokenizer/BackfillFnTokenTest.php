@@ -581,7 +581,7 @@ final class BackfillFnTokenTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataInMatchValue()
+    public static function dataInMatchValue()
     {
         return [
             'not_last_value'                      => [
@@ -671,7 +671,7 @@ final class BackfillFnTokenTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataNotAnArrowFunction()
+    public static function dataNotAnArrowFunction()
     {
         return [
             ['/* testFunctionName */'],

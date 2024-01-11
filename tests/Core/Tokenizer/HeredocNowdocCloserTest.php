@@ -93,7 +93,7 @@ final class HeredocNowdocCloserTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataHeredocNowdocCloserTabReplacement()
+    public static function dataHeredocNowdocCloserTabReplacement()
     {
         return [
             [

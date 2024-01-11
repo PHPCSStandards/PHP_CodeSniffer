@@ -72,7 +72,7 @@ final class AnonClassParenthesisOwnerTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataAnonClassNoParentheses()
+    public static function dataAnonClassNoParentheses()
     {
         return [
             ['/* testNoParentheses */'],
@@ -131,7 +131,7 @@ final class AnonClassParenthesisOwnerTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataAnonClassWithParentheses()
+    public static function dataAnonClassWithParentheses()
     {
         return [
             ['/* testWithParentheses */'],

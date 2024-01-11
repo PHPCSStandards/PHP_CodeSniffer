@@ -73,7 +73,7 @@ final class FindImplementedInterfaceNamesTest extends AbstractMethodUnitTest
      *
      * @return array<string, array<string, string|array<string>>>
      */
-    public function dataImplementedInterface()
+    public static function dataImplementedInterface()
     {
         return [
             'interface declaration, no implements'                               => [

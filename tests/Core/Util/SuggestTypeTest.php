@@ -57,7 +57,7 @@ final class SuggestTypeTest extends TestCase
      *
      * @return array<string, array<string>>
      */
-    public function dataSuggestTypeAllowedType()
+    public static function dataSuggestTypeAllowedType()
     {
         $data = [];
         foreach (Common::$allowedTypes as $type) {
@@ -94,7 +94,7 @@ final class SuggestTypeTest extends TestCase
      *
      * @return array<string, array<string, string>>
      */
-    public function dataSuggestTypeAllowedTypeWrongCase()
+    public static function dataSuggestTypeAllowedTypeWrongCase()
     {
         $data = [];
         foreach (Common::$allowedTypes as $type) {
@@ -138,7 +138,7 @@ final class SuggestTypeTest extends TestCase
      *
      * @return array<string, array<string, string>>
      */
-    public function dataSuggestTypeOther()
+    public static function dataSuggestTypeOther()
     {
         return [
             // Short forms.

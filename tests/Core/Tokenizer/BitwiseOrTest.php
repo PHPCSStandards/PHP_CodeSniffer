@@ -43,7 +43,7 @@ final class BitwiseOrTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataBitwiseOr()
+    public static function dataBitwiseOr()
     {
         return [
             ['/* testBitwiseOr1 */'],
@@ -94,7 +94,7 @@ final class BitwiseOrTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataTypeUnion()
+    public static function dataTypeUnion()
     {
         return [
             ['/* testTypeUnionPropertySimple */'],

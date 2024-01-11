@@ -43,7 +43,7 @@ final class FinallyTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataFinallyKeyword()
+    public static function dataFinallyKeyword()
     {
         return [
             ['/* testTryCatchFinally */'],
@@ -82,7 +82,7 @@ final class FinallyTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataFinallyNonKeyword()
+    public static function dataFinallyNonKeyword()
     {
         return [
             ['/* testFinallyUsedAsClassConstantName */'],

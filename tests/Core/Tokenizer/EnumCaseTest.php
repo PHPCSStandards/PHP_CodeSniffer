@@ -49,7 +49,7 @@ final class EnumCaseTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataEnumCases()
+    public static function dataEnumCases()
     {
         return [
             ['/* testPureEnumCase */'],
@@ -98,7 +98,7 @@ final class EnumCaseTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataNotEnumCases()
+    public static function dataNotEnumCases()
     {
         return [
             ['/* testCaseWithSemicolonIsNotEnumCase */'],
@@ -142,7 +142,7 @@ final class EnumCaseTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataKeywordAsEnumCaseNameShouldBeString()
+    public static function dataKeywordAsEnumCaseNameShouldBeString()
     {
         return [
             ['/* testKeywordAsEnumCaseNameShouldBeString1 */'],

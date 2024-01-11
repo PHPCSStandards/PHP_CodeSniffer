@@ -66,7 +66,7 @@ final class HeredocStringTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataHeredocString()
+    public static function dataHeredocString()
     {
         return [
             [
