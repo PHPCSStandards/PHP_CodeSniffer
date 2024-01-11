@@ -174,11 +174,6 @@ class UnusedFunctionParameterSniff implements Sniff
                 // A return statement as the first content indicates an interface method.
                 if ($code === T_RETURN) {
                     $firstNonEmptyTokenAfterReturn = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
-                    if ($firstNonEmptyTokenAfterReturn === false && $implements !== false) {
-                        return;
-                    }
-
-                    // There is a return.
                     if ($tokens[$firstNonEmptyTokenAfterReturn]['code'] === T_SEMICOLON && $implements !== false) {
                         return;
                     }
