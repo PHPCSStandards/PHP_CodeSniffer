@@ -107,6 +107,123 @@ The file documents changes to the PHP_CodeSniffer project.
 
 _Nothing yet._
 
+## [3.9.0] - 2024-02-16
+
+### Added
+- Tokenizer support for PHP 8.3 typed class constants. [#321]
+    - Additionally, the following sniffs have been updated to support typed class constants:
+        - Generic.NamingConventions.UpperCaseConstantName [#332]
+        - Generic.PHP.LowerCaseConstant [#330]
+        - Generic.PHP.LowerCaseType [#331]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patches
+- Tokenizer support for PHP 8.3 readonly anonymous classes. [#309]
+    - Additionally, the following sniffs have been updated to support readonly anonymous classes:
+        - PSR12.Classes.ClassInstantiation [#324]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patches
+- New `PHP_CodeSniffer\Sniffs\DeprecatedSniff` interface to allow for marking a sniff as deprecated. [#281]
+    - If a ruleset uses deprecated sniffs, deprecation notices will be shown to the end-user before the scan starts.
+        When running in `-q` (quiet) mode, the deprecation notices will be hidden.
+    - Deprecated sniffs will still run and using them will have no impact on the exit code for a scan.
+    - In ruleset "explain"-mode (`-e`) an asterix `*` will show next to deprecated sniffs.
+    - Sniff maintainers are advised to read through the PR description for full details on how to use this feature for their own (deprecated) sniffs.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- New `Generic.CodeAnalysis.RequireExplicitBooleanOperatorPrecedence` sniff. [#197]
+    - Forbid mixing different binary boolean operators within a single expression without making precedence clear using parentheses
+    - Thanks to [Tim Düsterhus][@TimWolla] for the contribution
+- Squiz.PHP.EmbeddedPhp : the sniff will now also examine the formatting of embedded PHP statements using short open echo tags. [#27]
+    - Includes a new `ShortOpenEchoNoSemicolon` errorcode to allow for selectively ignoring missing semicolons in single line embedded PHP snippets within short open echo tags.
+    - The other error codes are the same and do not distinguish between what type of open tag was used.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Documentation for the following sniffs:
+    - Generic.WhiteSpace.IncrementDecrementSpacing
+    - PSR12.ControlStructures.ControlStructureSpacing
+    - PSR12.Files.ImportStatement
+    - PSR12.Functions.ReturnTypeDeclaration
+    - PSR12.Properties.ConstantVisibility
+    - Thanks to [Denis Žoljom][@dingo-d] and [Rodrigo Primo][@rodrigoprimo] for the patches
+
+### Changed
+- The Performance report can now also be used for a `phpcbf` run. [#308]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Sniff tests which extend the PHPCS native `AbstractSniffUnitTest` class will now show a (non-build-breaking) warning when test case files contain fixable errors/warnings, but there is no corresponding `.fixed` file available in the test suite to verify the fixes against. [#336]
+    - The warning is only displayed on PHPUnit 7.3.0 and higher.
+    - The warning will be elevated to a test failure in PHPCS 4.0.
+    - Thanks to [Dan Wallis][@fredden] for the patch
+- The following sniffs have received performance related improvements:
+    - Squiz.PHP.EmbeddedPhp
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Various housekeeping, including improvements to the tests and documentation
+    - Thanks to [Dan Wallis][@fredden], [Joachim Noreiko][@joachim-n], [Remi Collet][@remicollet], [Rodrigo Primo][@rodrigoprimo] and [Juliette Reinders Folmer][@jrfnl] for their contributions
+
+### Deprecated
+- Support for scanning JavaScript and CSS files. See [#2448].
+    - This also means that all sniffs which are only aimed at JavaScript or CSS files are now deprecated.
+    - The Javascript and CSS Tokenizers, all Javascript and CSS specific sniffs, and support for JS and CSS in select sniffs which support multiple file types, will be removed in version 4.0.0.
+- The abstract `PHP_CodeSniffer\Filters\ExactMatch::getBlacklist()` and `PHP_CodeSniffer\Filters\ExactMatch::getWhitelist()` methods are deprecated and will be removed in the 4.0 release. See [#198].
+    - In version 4.0, these methods will be replaced with abstract `ExactMatch::getDisallowedFiles()` and `ExactMatch::getAllowedFiles()` methods
+    - To make Filters extending `ExactMatch` cross-version compatible with both PHP_CodeSniffer 3.9.0+ as well as 4.0+, implement the new `getDisallowedFiles()` and `getAllowedFiles()` methods.
+        - When both the `getDisallowedFiles()` and `getAllowedFiles()` methods as well as the `getBlacklist()` and `getWhitelist()` are available, the new methods will take precedence over the old methods.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- The MySource standard and all sniffs in it. See [#2471].
+    - The MySource standard and all sniffs in it will be removed in version 4.0.0.
+- The `Zend.Debug.CodeAnalyzer` sniff. See [#277].
+    - This sniff will be removed in version 4.0.0.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+
+### Fixed
+- Fixed bug [#127] : Squiz.Commenting.FunctionComment : The `MissingParamType` error code will now be used instead of `MissingParamName` when a parameter name is provided, but not its type. Additionally, invalid type hint suggestions will no longer be provided in these cases.
+    - Thanks to [Dan Wallis][@fredden] for the patch
+- Fixed bug [#196] : Squiz.PHP.EmbeddedPhp : fixer will no longer leave behind trailing whitespace when moving code to another line.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#196] : Squiz.PHP.EmbeddedPhp : will now determine the needed indent with higher precision in multiple situations.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#196] : Squiz.PHP.EmbeddedPhp : fixer will no longer insert a stray new line when the closer of a multi-line embedded PHP block and the opener of the next multi-line embedded PHP block would be on the same line.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#235] : Generic.CodeAnalysis.ForLoopWithTestFunctionCall : prevent a potential PHP 8.3 deprecation notice during live coding
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch
+- Fixed bug [#288] : Generic.WhiteSpace.IncrementDecrementSpacing : error message for post-in/decrement will now correctly inform about new lines found before the operator.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch
+- Fixed bug [#296] : Generic.WhiteSpace.ArbitraryParenthesesSpacing : false positive for non-arbitrary parentheses when these follow the scope closer of a `switch` `case`.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#307] : PSR2.Classes.ClassDeclaration : space between a modifier keyword and the `class` keyword was not checked when the space included a new line or comment.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#325] : Squiz.Operators.IncrementDecrementUsage : the sniff was underreporting when there was (no) whitespace and/or comments in unexpected places.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#335] : PSR12.Files.DeclareStatement : bow out in a certain parse error situation to prevent incorrect auto-fixes from being made.
+    - Thanks to [Dan Wallis][@fredden] for the patch
+- Fixed bug [#340] : Squiz.Commenting.ClosingDeclarationComment : no longer adds a stray newline when adding a missing comment.
+    - Thanks to [Dan Wallis][@fredden] for the patch
+
+### Other
+- A "Community cc list" has been introduced to ping maintainers of external standards and integrators for input regarding change proposals for PHP_CodeSniffer which may impact them. [#227]
+    - For anyone who missed the discussion about this and is interested to be on this list, please feel invited to submit a PR to add yourself.
+        The list is located in the `.github` folder.
+
+[#2448]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2448
+[#2471]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2471
+[#27]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/27
+[#127]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/127
+[#196]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/196
+[#197]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/197
+[#198]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/198
+[#227]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/227
+[#235]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/235
+[#277]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/277
+[#281]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/281
+[#288]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/288
+[#296]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/296
+[#307]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/307
+[#308]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/308
+[#309]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/309
+[#321]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/321
+[#324]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/324
+[#325]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/325
+[#330]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/330
+[#331]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/331
+[#332]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/332
+[#335]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/335
+[#336]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/336
+[#340]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/340
 
 ## [3.8.1] - 2024-01-11
 
@@ -153,7 +270,6 @@ _Nothing yet._
 [#205]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/205
 [#211]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/211
 [#226]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/226
-
 
 ## [3.8.0] - 2023-12-08
 
@@ -5604,6 +5720,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 -->
 
 [Unreleased]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/master...HEAD
+[3.9.0]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.8.1...3.9.0
 [3.8.1]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.8.0...3.8.1
 [3.8.0]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.7.2...3.8.0
 [3.7.2]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.7.1...3.7.2
@@ -5796,6 +5913,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@jeffslofish]:         https://github.com/jeffslofish
 [@jmarcil]:             https://github.com/jmarcil
 [@jnrbsn]:              https://github.com/jnrbsn
+[@joachim-n]:           https://github.com/joachim-n
 [@joelposti]:           https://github.com/joelposti
 [@johanderuijter]:      https://github.com/johanderuijter
 [@johnmaguire]:         https://github.com/johnmaguire
@@ -5854,6 +5972,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@r3nat]:               https://github.com/r3nat
 [@raul338]:             https://github.com/raul338
 [@realmfoo]:            https://github.com/realmfoo
+[@remicollet]:          https://github.com/remicollet
 [@renaatdemuynck]:      https://github.com/renaatdemuynck
 [@renan]:               https://github.com/renan
 [@rhorber]:             https://github.com/rhorber
@@ -5889,6 +6008,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@thomasjfox]:          https://github.com/thomasjfox
 [@till]:                https://github.com/till
 [@timoschinkel]:        https://github.com/timoschinkel
+[@TimWolla]:            https://github.com/TimWolla
 [@uniquexor]:           https://github.com/uniquexor
 [@valorin]:             https://github.com/valorin
 [@VasekPurchart]:       https://github.com/VasekPurchart
