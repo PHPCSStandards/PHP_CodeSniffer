@@ -249,3 +249,26 @@ class MagicMethodsWithParamsNotDictatedByPHPInChildClass extends SomeParent{
         $this->foo = $foo;
     }
 }
+
+/**
+ * Methods that throw an exception or return on the first line and are part
+ * of a class that implements an interface should not trigger the sniff.
+ */
+class InterfaceMethodNotImplement implements SomeInterface {
+    public function notImplemented($param) {
+        throw new Exception('Not implemented.');
+    }
+
+    public function notImplemented2($param) {
+        return 'Not implemented.';
+    }
+}
+
+/**
+ * Should trigger the sniff as this method is not part of an interface.
+ */
+class MethodThrowsException {
+    public function throwsException($param) {
+        throw new Exception();
+    }
+}
