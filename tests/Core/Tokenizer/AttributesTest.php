@@ -69,14 +69,14 @@ final class AttributesTest extends AbstractMethodUnitTest
     public static function dataAttribute()
     {
         return [
-            'class attribute'                                                               => [
+            'class attribute'                                                                   => [
                 'testMarker' => '/* testAttribute */',
                 'length'     => 2,
                 'tokenCodes' => [
                     T_STRING
                 ],
             ],
-            'class attribute with param'                                                    => [
+            'class attribute with param'                                                        => [
                 'testMarker' => '/* testAttributeWithParams */',
                 'length'     => 7,
                 'tokenCodes' => [
@@ -88,7 +88,7 @@ final class AttributesTest extends AbstractMethodUnitTest
                     T_CLOSE_PARENTHESIS,
                 ],
             ],
-            'class attribute with named param'                                              => [
+            'class attribute with named param'                                                  => [
                 'testMarker' => '/* testAttributeWithNamedParam */',
                 'length'     => 10,
                 'tokenCodes' => [
@@ -103,14 +103,14 @@ final class AttributesTest extends AbstractMethodUnitTest
                     T_CLOSE_PARENTHESIS,
                 ],
             ],
-            'function attribute'                                                            => [
+            'function attribute'                                                                => [
                 'testMarker' => '/* testAttributeOnFunction */',
                 'length'     => 2,
                 'tokenCodes' => [
                     T_STRING
                 ],
             ],
-            'function attribute with params'                                                => [
+            'function attribute with params'                                                    => [
                 'testMarker' => '/* testAttributeOnFunctionWithParams */',
                 'length'     => 17,
                 'tokenCodes' => [
@@ -132,7 +132,7 @@ final class AttributesTest extends AbstractMethodUnitTest
                     T_CLOSE_PARENTHESIS,
                 ],
             ],
-            'function attribute with arrow function as param'                               => [
+            'function attribute with arrow function as param'                                   => [
                 'testMarker' => '/* testAttributeWithShortClosureParameter */',
                 'length'     => 17,
                 'tokenCodes' => [
@@ -154,7 +154,7 @@ final class AttributesTest extends AbstractMethodUnitTest
                     T_CLOSE_PARENTHESIS,
                 ],
             ],
-            'function attribute; multiple comma separated classes'                          => [
+            'function attribute; multiple comma separated classes'                              => [
                 'testMarker' => '/* testAttributeGrouping */',
                 'length'     => 26,
                 'tokenCodes' => [
@@ -185,7 +185,7 @@ final class AttributesTest extends AbstractMethodUnitTest
                     T_CLOSE_PARENTHESIS,
                 ],
             ],
-            'function attribute; multiple comma separated classes, one per line'            => [
+            'function attribute; multiple comma separated classes, one per line'                => [
                 'testMarker' => '/* testAttributeMultiline */',
                 'length'     => 31,
                 'tokenCodes' => [
@@ -221,7 +221,46 @@ final class AttributesTest extends AbstractMethodUnitTest
                     T_WHITESPACE,
                 ],
             ],
-            'function attribute; using partially qualified and fully qualified class names' => [
+            'function attribute; multiple comma separated classes, one per line, with comments' => [
+                'testMarker' => '/* testAttributeMultilineWithComment */',
+                'length'     => 34,
+                'tokenCodes' => [
+                    T_WHITESPACE,
+                    T_WHITESPACE,
+                    T_STRING,
+                    T_COMMA,
+                    T_WHITESPACE,
+                    T_COMMENT,
+                    T_WHITESPACE,
+                    T_STRING,
+                    T_OPEN_PARENTHESIS,
+                    T_COMMENT,
+                    T_WHITESPACE,
+                    T_CONSTANT_ENCAPSED_STRING,
+                    T_CLOSE_PARENTHESIS,
+                    T_COMMA,
+                    T_WHITESPACE,
+                    T_WHITESPACE,
+                    T_STRING,
+                    T_OPEN_PARENTHESIS,
+                    T_CONSTANT_ENCAPSED_STRING,
+                    T_COMMA,
+                    T_WHITESPACE,
+                    T_PARAM_NAME,
+                    T_COLON,
+                    T_WHITESPACE,
+                    T_OPEN_SHORT_ARRAY,
+                    T_CONSTANT_ENCAPSED_STRING,
+                    T_WHITESPACE,
+                    T_DOUBLE_ARROW,
+                    T_WHITESPACE,
+                    T_CONSTANT_ENCAPSED_STRING,
+                    T_CLOSE_SHORT_ARRAY,
+                    T_CLOSE_PARENTHESIS,
+                    T_WHITESPACE,
+                ],
+            ],
+            'function attribute; using partially qualified and fully qualified class names'     => [
                 'testMarker' => '/* testFqcnAttribute */',
                 'length'     => 13,
                 'tokenCodes' => [
