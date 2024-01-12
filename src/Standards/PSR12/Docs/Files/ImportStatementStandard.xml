@@ -5,7 +5,7 @@
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: Import statement is fully qualified and doesn't begin with a leading backslash.">
+        <code title="Valid: Import statement doesn't begin with a leading backslash.">
         <![CDATA[
 <?php
 
@@ -13,8 +13,7 @@ use Vendor\Package\ClassA as A;
 
 class FooBar extends A
 {
-    use \FirstTrait;
-    use SecondTrait;
+    // Class content.
 }
         ]]>
         </code>
@@ -26,8 +25,7 @@ use <em>\</em>Vendor\Package\ClassA as A;
 
 class FooBar extends A
 {
-    use \FirstTrait;
-    use SecondTrait;
+    // Class content.
 }
         ]]>
         </code>
