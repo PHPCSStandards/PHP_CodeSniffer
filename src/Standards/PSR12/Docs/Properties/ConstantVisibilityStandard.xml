@@ -1,7 +1,7 @@
 <documentation title="Constant Visibility">
     <standard>
     <![CDATA[
-    Visibility must be declared on all class constants if your project PHP minimum version supports class constant visibilities (PHP 7.1 or later).
+    Visibility must be declared on all class constants if your project PHP minimum version supports constant visibilities (PHP 7.1 or later).
     ]]>
     </standard>
     <code_comparison>
@@ -9,7 +9,7 @@
         <![CDATA[
 class Foo
 {
-    <em>private</em> const BAR = 'bar';
+    <em>private const</em> BAR = 'bar';
 }
         ]]>
         </code>
@@ -17,7 +17,7 @@ class Foo
         <![CDATA[
 class Foo
 {
-    <em></em>const BAR = 'bar';
+    <em>const</em> BAR = 'bar';
 }
         ]]>
         </code>
