@@ -56,6 +56,8 @@ final class UnnecessaryFinalModifierUnitTest extends AbstractSniffUnitTest
                 18 => 1,
                 32 => 1,
                 33 => 1,
+                37 => 1,
+                38 => 1,
             ];
         default:
             return [];
