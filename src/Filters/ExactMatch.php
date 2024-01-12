@@ -2,7 +2,7 @@
 /**
  * An abstract filter class for checking files and folders against exact matches.
  *
- * Supports both allowed files and blocked files.
+ * Supports both allowed files and disallowed files.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
@@ -21,12 +21,12 @@ abstract class ExactMatch extends Filter
      *
      * @var array
      */
-    private $blockedFiles = null;
+    private $disallowedFiles = null;
 
     /**
      * A list of files to include.
      *
-     * If the allowed files list is empty, only files in the blocked files list will be excluded.
+     * If the allowed files list is empty, only files in the disallowed files list will be excluded.
      *
      * @var array
      */
@@ -36,7 +36,7 @@ abstract class ExactMatch extends Filter
     /**
      * Check whether the current element of the iterator is acceptable.
      *
-     * If a file is both blocked and allowed, it will be deemed unacceptable.
+     * If a file is both disallowed and allowed, it will be deemed unacceptable.
      *
      * @return bool
      */
@@ -46,8 +46,8 @@ abstract class ExactMatch extends Filter
             return false;
         }
 
-        if ($this->blockedFiles === null) {
-            $this->blockedFiles = $this->getblacklist();
+        if ($this->disallowedFiles === null) {
+            $this->disallowedFiles = $this->getblacklist();
         }
 
         if ($this->allowedFiles === null) {
@@ -56,13 +56,13 @@ abstract class ExactMatch extends Filter
 
         $filePath = Util\Common::realpath($this->current());
 
-        // If file is both blocked and allowed, the blocked files list takes precedence.
-        if (isset($this->blockedFiles[$filePath]) === true) {
+        // If file is both disallowed and allowed, the disallowed files list takes precedence.
+        if (isset($this->disallowedFiles[$filePath]) === true) {
             return false;
         }
 
-        if (empty($this->allowedFiles) === true && empty($this->blockedFiles) === false) {
-            // We are only checking a blocked files list, so everything else should be allowed.
+        if (empty($this->allowedFiles) === true && empty($this->disallowedFiles) === false) {
+            // We are only checking a disallowed files list, so everything else should be allowed.
             return true;
         }
 
@@ -74,7 +74,7 @@ abstract class ExactMatch extends Filter
     /**
      * Returns an iterator for the current entry.
      *
-     * Ensures that the blocked files list and the allowed files list are preserved so they don't have
+     * Ensures that the disallowed files list and the allowed files list are preserved so they don't have
      * to be generated each time.
      *
      * @return \RecursiveIterator
@@ -82,8 +82,8 @@ abstract class ExactMatch extends Filter
     public function getChildren()
     {
         $children = parent::getChildren();
-        $children->blockedFiles = $this->blockedFiles;
-        $children->allowedFiles = $this->allowedFiles;
+        $children->disallowedFiles = $this->disallowedFiles;
+        $children->allowedFiles    = $this->allowedFiles;
         return $children;
 
     }//end getChildren()
