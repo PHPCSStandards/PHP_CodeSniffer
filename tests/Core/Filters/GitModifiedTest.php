@@ -211,6 +211,10 @@ final class GitModifiedTest extends AbstractFilterTestCase
      */
     public function testExecAlwaysReturnsArray($cmd, $expected)
     {
+        if (is_dir(__DIR__.'/../../../.git') === false) {
+            $this->markTestSkipped('Not a git repository');
+        }
+
         $fakeDI = new RecursiveArrayIterator(self::getFakeFileList());
         $filter = new GitModified($fakeDI, '/', self::$config, self::$ruleset);
 
