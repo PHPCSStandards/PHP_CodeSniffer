@@ -124,13 +124,6 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
                 ['array_or_countable'],
             ],
             [
-                '/* testNamespaceOperatorFunction */',
-                [
-                    'label',
-                    'more',
-                ],
-            ],
-            [
                 '/* testNamespaceRelativeFunction */',
                 [
                     'label',
@@ -138,7 +131,14 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
                 ],
             ],
             [
-                '/* testNamespacedFQNFunction */',
+                '/* testPartiallyQualifiedFunction */',
+                [
+                    'label',
+                    'more',
+                ],
+            ],
+            [
+                '/* testFullyQualifiedFunction */',
                 [
                     'label',
                     'more',

@@ -32,13 +32,13 @@ array_fill(
     value: 50
 );
 
-/* testNamespaceOperatorFunction */
+/* testNamespaceRelativeFunction */
 namespace\function_name(label:$string, more: false);
 
-/* testNamespaceRelativeFunction */
+/* testPartiallyQualifiedFunction */
 Partially\Qualified\function_name(label:$string, more: false);
 
-/* testNamespacedFQNFunction */
+/* testFullyQualifiedFunction */
 \Fully\Qualified\function_name(label: $string, more:false);
 
 /* testVariableFunction */
