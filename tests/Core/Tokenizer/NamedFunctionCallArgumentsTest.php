@@ -713,6 +713,71 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
 
 
     /**
+     * Verify whether the colons are tokenized correctly when a return type is used for an inline
+     * closure/arrow function declaration in a ternary.
+     *
+     * @param string $testMarker The comment prefacing the target token.
+     *
+     * @dataProvider dataOtherColonsInTernary
+     * @covers       PHP_CodeSniffer\Tokenizers\PHP::tokenize
+     *
+     * @return void
+     */
+    public function testOtherColonsInTernary($testMarker)
+    {
+        $tokens = self::$phpcsFile->getTokens();
+
+        $startOfStatement = $this->getTargetToken($testMarker, T_VARIABLE);
+
+        // Walk the statement and check the tokenization.
+        // There should be no T_PARAM_NAME tokens.
+        // First colon should be T_COLON for the return type.
+        // Second colon should be T_INLINE_ELSE for the ternary.
+        // Third colon should be T_COLON for the return type.
+        $colonCount = 0;
+        for ($i = ($startOfStatement + 1); $tokens[$i]['line'] === $tokens[$startOfStatement]['line']; $i++) {
+            $this->assertNotEquals(T_PARAM_NAME, $tokens[$i]['code'], "Token $i is tokenized as parameter label");
+
+            if ($tokens[$i]['content'] === ':') {
+                ++$colonCount;
+
+                if ($colonCount === 1) {
+                    $this->assertSame(T_COLON, $tokens[$i]['code'], 'First colon is not tokenized as T_COLON');
+                } else if ($colonCount === 2) {
+                    $this->assertSame(T_INLINE_ELSE, $tokens[$i]['code'], 'Second colon is not tokenized as T_INLINE_ELSE');
+                } else if ($colonCount === 3) {
+                    $this->assertSame(T_COLON, $tokens[$i]['code'], 'Third colon is not tokenized as T_COLON');
+                } else {
+                    $this->fail('Unexpected colon encountered in statement');
+                }
+            }
+        }
+
+    }//end testOtherColonsInTernary()
+
+
+    /**
+     * Data provider.
+     *
+     * @see testOtherColonsInTernary()
+     *
+     * @return array<string, array<string, string>>
+     */
+    public static function dataOtherColonsInTernary()
+    {
+        return [
+            'closures with return types in ternary'        => [
+                'testMarker' => '/* testTernaryWithClosuresAndReturnTypes */',
+            ],
+            'arrow functions with return types in ternary' => [
+                'testMarker' => '/* testTernaryWithArrowFunctionsAndReturnTypes */',
+            ],
+        ];
+
+    }//end dataOtherColonsInTernary()
+
+
+    /**
      * Verify that reserved keywords used as a parameter label are tokenized as T_PARAM_NAME
      * and that the colon after it is tokenized as a T_COLON.
      *
