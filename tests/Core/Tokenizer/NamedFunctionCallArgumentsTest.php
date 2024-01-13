@@ -20,8 +20,8 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      * Verify that parameter labels are tokenized as T_PARAM_NAME and that
      * the colon after it is tokenized as a T_COLON.
      *
-     * @param string $testMarker The comment prefacing the target token.
-     * @param array  $parameters The token content for each parameter label to look for.
+     * @param string        $testMarker The comment prefacing the target token.
+     * @param array<string> $parameters The token content for each parameter label to look for.
      *
      * @dataProvider dataNamedFunctionCallArguments
      * @covers       PHP_CodeSniffer\Tokenizers\PHP::tokenize
@@ -74,141 +74,141 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      *
      * @see testNamedFunctionCallArguments()
      *
-     * @return array
+     * @return array<string, array<string, string|array<string>>>
      */
     public static function dataNamedFunctionCallArguments()
     {
         return [
-            [
-                '/* testNamedArgs */',
-                [
+            'function call, single line, all named args'                          => [
+                'testMarker' => '/* testNamedArgs */',
+                'parameters' => [
                     'start_index',
                     'count',
                     'value',
                 ],
             ],
-            [
-                '/* testNamedArgsMultiline */',
-                [
+            'function call, multi-line, all named args'                           => [
+                'testMarker' => '/* testNamedArgsMultiline */',
+                'parameters' => [
                     'start_index',
                     'count',
                     'value',
                 ],
             ],
-            [
-                '/* testNamedArgsWithWhitespaceAndComments */',
-                [
+            'function call, single line, all named args; comments and whitespace' => [
+                'testMarker' => '/* testNamedArgsWithWhitespaceAndComments */',
+                'parameters' => [
                     'start_index',
                     'count',
                     'value',
                 ],
             ],
-            [
-                '/* testMixedPositionalAndNamedArgs */',
-                [
+            'function call, single line, mixed positional and named args'         => [
+                'testMarker' => '/* testMixedPositionalAndNamedArgs */',
+                'parameters' => [
                     'double_encode',
                 ],
             ],
-            [
-                '/* testNestedFunctionCallOuter */',
-                [
+            'function call containing nested function call values'                => [
+                'testMarker' => '/* testNestedFunctionCallOuter */',
+                'parameters' => [
                     'start_index',
                     'count',
                     'value',
                 ],
             ],
-            [
-                '/* testNestedFunctionCallInner1 */',
-                [
+            'function call nested in named arg [1]'                               => [
+                'testMarker' => '/* testNestedFunctionCallInner1 */',
+                'parameters' => [
                     'skip',
                 ],
             ],
-            [
-                '/* testNestedFunctionCallInner2 */',
-                [
+            'function call nested in named arg [2]'                               => [
+                'testMarker' => '/* testNestedFunctionCallInner2 */',
+                'parameters' => [
                     'array_or_countable',
                 ],
             ],
-            [
-                '/* testNamespaceRelativeFunction */',
-                [
+            'namespace relative function call'                                    => [
+                'testMarker' => '/* testNamespaceRelativeFunction */',
+                'parameters' => [
                     'label',
                     'more',
                 ],
             ],
-            [
-                '/* testPartiallyQualifiedFunction */',
-                [
+            'partially qualified function call'                                   => [
+                'testMarker' => '/* testPartiallyQualifiedFunction */',
+                'parameters' => [
                     'label',
                     'more',
                 ],
             ],
-            [
-                '/* testFullyQualifiedFunction */',
-                [
+            'fully qualified function call'                                       => [
+                'testMarker' => '/* testFullyQualifiedFunction */',
+                'parameters' => [
                     'label',
                     'more',
                 ],
             ],
-            [
-                '/* testVariableFunction */',
-                [
+            'variable function call'                                              => [
+                'testMarker' => '/* testVariableFunction */',
+                'parameters' => [
                     'label',
                     'more',
                 ],
             ],
-            [
-                '/* testVariableVariableFunction */',
-                [
+            'variable variable function call'                                     => [
+                'testMarker' => '/* testVariableVariableFunction */',
+                'parameters' => [
                     'label',
                     'more',
                 ],
             ],
-            [
-                '/* testMethodCall */',
-                [
+            'method call'                                                         => [
+                'testMarker' => '/* testMethodCall */',
+                'parameters' => [
                     'label',
                     'more',
                 ],
             ],
-            [
-                '/* testVariableMethodCall */',
-                [
+            'variable method call'                                                => [
+                'testMarker' => '/* testVariableMethodCall */',
+                'parameters' => [
                     'label',
                     'more',
                 ],
             ],
-            [
-                '/* testClassInstantiation */',
-                [
+            'class instantiation'                                                 => [
+                'testMarker' => '/* testClassInstantiation */',
+                'parameters' => [
                     'label',
                     'more',
                 ],
             ],
-            [
-                '/* testClassInstantiationSelf */',
-                [
+            'class instantiation with "self"'                                     => [
+                'testMarker' => '/* testClassInstantiationSelf */',
+                'parameters' => [
                     'label',
                     'more',
                 ],
             ],
-            [
-                '/* testClassInstantiationStatic */',
-                [
+            'class instantiation with "static"'                                   => [
+                'testMarker' => '/* testClassInstantiationStatic */',
+                'parameters' => [
                     'label',
                     'more',
                 ],
             ],
-            [
-                '/* testAnonClass */',
-                [
+            'anonymous class instantiation'                                       => [
+                'testMarker' => '/* testAnonClass */',
+                'parameters' => [
                     'label',
                     'more',
                 ],
             ],
-            [
-                '/* testNonAsciiNames */',
-                [
+            'function call with non-ascii characters in the variable name labels' => [
+                'testMarker' => '/* testNonAsciiNames */',
+                'parameters' => [
                     '💩💩💩',
                     'Пасха',
                     '_valid',
@@ -216,64 +216,64 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
             ],
 
             // Coding errors which should still be handled.
-            [
-                '/* testCompileErrorNamedBeforePositional */',
-                [
+            'invalid: named arg before positional (compile error)'                => [
+                'testMarker' => '/* testCompileErrorNamedBeforePositional */',
+                'parameters' => [
                     'param',
                 ],
             ],
-            [
-                '/* testDuplicateName1 */',
-                [
+            'invalid: duplicate parameter name [1]'                               => [
+                'testMarker' => '/* testDuplicateName1 */',
+                'parameters' => [
                     'param',
                 ],
             ],
-            [
-                '/* testDuplicateName2 */',
-                [
+            'invalid: duplicate parameter name [2]'                               => [
+                'testMarker' => '/* testDuplicateName2 */',
+                'parameters' => [
                     'param',
                 ],
             ],
-            [
-                '/* testIncorrectOrderWithVariadic */',
-                [
+            'invalid: named arg before variadic (error exception)'                => [
+                'testMarker' => '/* testIncorrectOrderWithVariadic */',
+                'parameters' => [
                     'start_index',
                 ],
             ],
-            [
-                '/* testCompileErrorIncorrectOrderWithVariadic */',
-                [
+            'invalid: named arg after variadic (compile error)'                   => [
+                'testMarker' => '/* testCompileErrorIncorrectOrderWithVariadic */',
+                'parameters' => [
                     'param',
                 ],
             ],
-            [
-                '/* testParseErrorNoValue */',
-                [
+            'invalid: named arg without value (parse error)'                      => [
+                'testMarker' => '/* testParseErrorNoValue */',
+                'parameters' => [
                     'param1',
                     'param2',
                 ],
             ],
-            [
-                '/* testParseErrorExit */',
-                [
+            'invalid: named arg in exit() (parse error)'                          => [
+                'testMarker' => '/* testParseErrorExit */',
+                'parameters' => [
                     'status',
                 ],
             ],
-            [
-                '/* testParseErrorEmpty */',
-                [
+            'invalid: named arg in empty() (parse error)'                         => [
+                'testMarker' => '/* testParseErrorEmpty */',
+                'parameters' => [
                     'variable',
                 ],
             ],
-            [
-                '/* testParseErrorEval */',
-                [
+            'invalid: named arg in eval() (parse error)'                          => [
+                'testMarker' => '/* testParseErrorEval */',
+                'parameters' => [
                     'code',
                 ],
             ],
-            [
-                '/* testParseErrorArbitraryParentheses */',
-                [
+            'invalid: named arg in arbitrary parentheses (parse error)'           => [
+                'testMarker' => '/* testParseErrorArbitraryParentheses */',
+                'parameters' => [
                     'something',
                 ],
             ],
@@ -320,34 +320,34 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      *
      * @see testOtherTstringInFunctionCall()
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public static function dataOtherTstringInFunctionCall()
     {
         return [
-            [
-                '/* testPositionalArgs */',
-                'START_INDEX',
-                T_STRING,
-                'T_STRING',
+            'not arg name - global constant'             => [
+                'testMarker'         => '/* testPositionalArgs */',
+                'content'            => 'START_INDEX',
+                'expectedType'       => T_STRING,
+                'expectedTypeString' => 'T_STRING',
             ],
-            [
-                '/* testPositionalArgs */',
-                '\COUNT',
-                T_NAME_FULLY_QUALIFIED,
-                'T_NAME_FULLY_QUALIFIED',
+            'not arg name - fully qualified constant'    => [
+                'testMarker'         => '/* testPositionalArgs */',
+                'content'            => '\COUNT',
+                'expectedType'       => T_NAME_FULLY_QUALIFIED,
+                'expectedTypeString' => 'T_NAME_FULLY_QUALIFIED',
             ],
-            [
-                '/* testPositionalArgs */',
-                'MyNS\VALUE',
-                T_NAME_QUALIFIED,
-                'T_NAME_QUALIFIED',
+            'not arg name - namespace relative constant' => [
+                'testMarker'         => '/* testPositionalArgs */',
+                'content'            => 'MyNS\VALUE',
+                'expectedType'       => T_NAME_QUALIFIED,
+                'expectedTypeString' => 'T_NAME_QUALIFIED',
             ],
-            [
-                '/* testNestedFunctionCallInner2 */',
-                'count',
-                T_STRING,
-                'T_STRING',
+            'not arg name - unqualified function call'   => [
+                'testMarker'         => '/* testNestedFunctionCallInner2 */',
+                'content'            => 'count',
+                'expectedType'       => T_STRING,
+                'expectedTypeString' => 'T_STRING',
             ],
         ];
 
@@ -726,9 +726,9 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      * Verify that reserved keywords used as a parameter label are tokenized as T_PARAM_NAME
      * and that the colon after it is tokenized as a T_COLON.
      *
-     * @param string $testMarker   The comment prefacing the target token.
-     * @param array  $tokenTypes   The token codes to look for.
-     * @param string $tokenContent The token content to look for.
+     * @param string            $testMarker   The comment prefacing the target token.
+     * @param array<string|int> $tokenTypes   The token codes to look for.
+     * @param string            $tokenContent The token content to look for.
      *
      * @dataProvider dataReservedKeywordsAsName
      * @covers       PHP_CodeSniffer\Tokenizers\PHP::tokenize
@@ -778,7 +778,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      *
      * @see testReservedKeywordsAsName()
      *
-     * @return array
+     * @return array<string, array<string|array<string|int>>>
      */
     public static function dataReservedKeywordsAsName()
     {
