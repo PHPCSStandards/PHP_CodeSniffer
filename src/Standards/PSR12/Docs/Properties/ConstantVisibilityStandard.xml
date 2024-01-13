@@ -3,7 +3,7 @@
     <![CDATA[
     Visibility must be declared on all class constants if your project PHP minimum version supports constant visibilities (PHP 7.1 or later).
 
-    The term "class" refers to all classes, interfaces, and traits.
+    The term "class" refers to all classes, interfaces, enums and traits.
     ]]>
     </standard>
     <code_comparison>
