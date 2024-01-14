@@ -47,18 +47,18 @@ final class EnumCaseTest extends AbstractMethodUnitTest
      *
      * @see testEnumCases()
      *
-     * @return array
+     * @return array<string, array<string>>
      */
     public static function dataEnumCases()
     {
         return [
-            ['/* testPureEnumCase */'],
-            ['/* testBackingIntegerEnumCase */'],
-            ['/* testBackingStringEnumCase */'],
-            ['/* testEnumCaseInComplexEnum */'],
-            ['/* testEnumCaseIsCaseInsensitive */'],
-            ['/* testEnumCaseAfterSwitch */'],
-            ['/* testEnumCaseAfterSwitchWithEndSwitch */'],
+            'enum case, no value'                                        => ['/* testPureEnumCase */'],
+            'enum case, integer value'                                   => ['/* testBackingIntegerEnumCase */'],
+            'enum case, string value'                                    => ['/* testBackingStringEnumCase */'],
+            'enum case, integer value in more complex enum'              => ['/* testEnumCaseInComplexEnum */'],
+            'enum case, keyword in mixed case'                           => ['/* testEnumCaseIsCaseInsensitive */'],
+            'enum case, after switch statement'                          => ['/* testEnumCaseAfterSwitch */'],
+            'enum case, after switch statement using alternative syntax' => ['/* testEnumCaseAfterSwitchWithEndSwitch */'],
         ];
 
     }//end dataEnumCases()
@@ -96,18 +96,18 @@ final class EnumCaseTest extends AbstractMethodUnitTest
      *
      * @see testNotEnumCases()
      *
-     * @return array
+     * @return array<string, array<string>>
      */
     public static function dataNotEnumCases()
     {
         return [
-            ['/* testCaseWithSemicolonIsNotEnumCase */'],
-            ['/* testCaseWithConstantIsNotEnumCase */'],
-            ['/* testCaseWithConstantAndIdenticalIsNotEnumCase */'],
-            ['/* testCaseWithAssigmentToConstantIsNotEnumCase */'],
-            ['/* testIsNotEnumCaseIsCaseInsensitive */'],
-            ['/* testCaseInSwitchWhenCreatingEnumInSwitch1 */'],
-            ['/* testCaseInSwitchWhenCreatingEnumInSwitch2 */'],
+            'switch case with constant, semicolon condition end' => ['/* testCaseWithSemicolonIsNotEnumCase */'],
+            'switch case with constant, colon condition end'     => ['/* testCaseWithConstantIsNotEnumCase */'],
+            'switch case with constant, comparison'              => ['/* testCaseWithConstantAndIdenticalIsNotEnumCase */'],
+            'switch case with constant, assignment'              => ['/* testCaseWithAssigmentToConstantIsNotEnumCase */'],
+            'switch case with constant, keyword in mixed case'   => ['/* testIsNotEnumCaseIsCaseInsensitive */'],
+            'switch case, body in curlies declares enum'         => ['/* testCaseInSwitchWhenCreatingEnumInSwitch1 */'],
+            'switch case, body after semicolon declares enum'    => ['/* testCaseInSwitchWhenCreatingEnumInSwitch2 */'],
         ];
 
     }//end dataNotEnumCases()
@@ -140,15 +140,18 @@ final class EnumCaseTest extends AbstractMethodUnitTest
      *
      * @see testKeywordAsEnumCaseNameShouldBeString()
      *
-     * @return array
+     * @return array<string, array<string>>
      */
     public static function dataKeywordAsEnumCaseNameShouldBeString()
     {
         return [
-            ['/* testKeywordAsEnumCaseNameShouldBeString1 */'],
-            ['/* testKeywordAsEnumCaseNameShouldBeString2 */'],
-            ['/* testKeywordAsEnumCaseNameShouldBeString3 */'],
-            ['/* testKeywordAsEnumCaseNameShouldBeString4 */'],
+            '"interface" as case name' => ['/* testKeywordAsEnumCaseNameShouldBeString1 */'],
+            '"trait" as case name'     => ['/* testKeywordAsEnumCaseNameShouldBeString2 */'],
+            '"enum" as case name'      => ['/* testKeywordAsEnumCaseNameShouldBeString3 */'],
+            '"function" as case name'  => ['/* testKeywordAsEnumCaseNameShouldBeString4 */'],
+            '"false" as case name'     => ['/* testKeywordAsEnumCaseNameShouldBeString5 */'],
+            '"default" as case name'   => ['/* testKeywordAsEnumCaseNameShouldBeString6 */'],
+            '"array" as case name'     => ['/* testKeywordAsEnumCaseNameShouldBeString7 */'],
         ];
 
     }//end dataKeywordAsEnumCaseNameShouldBeString()
