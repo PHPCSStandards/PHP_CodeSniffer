@@ -645,7 +645,7 @@ final class NamespacedNameSingleTokenTest extends AbstractMethodUnitTest
                 ],
             ],
             [
-                '/* testFunctionPartiallyQualified */',
+                '/* testFunctionCallPartiallyQualified */',
                 [
                     [
                         'type'    => 'T_NAME_QUALIFIED',
