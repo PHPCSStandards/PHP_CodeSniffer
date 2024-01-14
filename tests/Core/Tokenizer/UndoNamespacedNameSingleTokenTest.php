@@ -831,7 +831,7 @@ final class UndoNamespacedNameSingleTokenTest extends AbstractMethodUnitTest
                 ],
             ],
             [
-                '/* testFunctionPartiallyQualified */',
+                '/* testFunctionCallPartiallyQualified */',
                 [
                     [
                         'type'    => 'T_STRING',
