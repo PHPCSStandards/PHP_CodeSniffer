@@ -17,7 +17,8 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests for PHP_CodeSniffer error suppression tags.
  *
- * @coversNothing
+ * @covers PHP_CodeSniffer\Files\File::addMessage
+ * @covers PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
  */
 final class ErrorSuppressionTest extends TestCase
 {
@@ -32,7 +33,6 @@ final class ErrorSuppressionTest extends TestCase
      *                               Defaults to 0.
      *
      * @dataProvider dataSuppressError
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -63,7 +63,7 @@ final class ErrorSuppressionTest extends TestCase
      *
      * @see testSuppressError()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataSuppressError()
     {
@@ -165,7 +165,6 @@ final class ErrorSuppressionTest extends TestCase
      *                               Defaults to 1.
      *
      * @dataProvider dataSuppressSomeErrors
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -202,7 +201,7 @@ EOD;
      *
      * @see testSuppressSomeErrors()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataSuppressSomeErrors()
     {
@@ -258,7 +257,6 @@ EOD;
      *                                 Defaults to 0.
      *
      * @dataProvider dataSuppressWarning
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -294,7 +292,7 @@ EOD;
      *
      * @see testSuppressWarning()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataSuppressWarning()
     {
@@ -343,7 +341,6 @@ EOD;
      *                               Defaults to 1.
      *
      * @dataProvider dataSuppressLine
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -379,7 +376,7 @@ EOD;
      *
      * @see testSuppressLine()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataSuppressLine()
     {
@@ -391,12 +388,24 @@ EOD;
             ],
 
             // With suppression on line before.
-            'ignore: line before, slash comment'         => ['before' => '// phpcs:ignore'],
-            'ignore: line before, slash comment, with @' => ['before' => '// @phpcs:ignore'],
-            'ignore: line before, hash comment'          => ['before' => '# phpcs:ignore'],
-            'ignore: line before, hash comment, with @'  => ['before' => '# @phpcs:ignore'],
-            'ignore: line before, star comment'          => ['before' => '/* phpcs:ignore */'],
-            'ignore: line before, star comment, with @'  => ['before' => '/* @phpcs:ignore */'],
+            'ignore: line before, slash comment'         => [
+                'before' => '// phpcs:ignore',
+            ],
+            'ignore: line before, slash comment, with @' => [
+                'before' => '// @phpcs:ignore',
+            ],
+            'ignore: line before, hash comment'          => [
+                'before' => '# phpcs:ignore',
+            ],
+            'ignore: line before, hash comment, with @'  => [
+                'before' => '# @phpcs:ignore',
+            ],
+            'ignore: line before, star comment'          => [
+                'before' => '/* phpcs:ignore */',
+            ],
+            'ignore: line before, star comment, with @'  => [
+                'before' => '/* @phpcs:ignore */',
+            ],
 
             // With suppression as trailing comment on code line.
             'ignore: end of line, slash comment'         => [
@@ -417,7 +426,9 @@ EOD;
             ],
 
             // Deprecated syntax.
-            'old style: line before, slash comment'      => ['before' => '// @codingStandardsIgnoreLine'],
+            'old style: line before, slash comment'      => [
+                'before' => '// @codingStandardsIgnoreLine',
+            ],
             'old style: end of line, slash comment'      => [
                 'before' => '',
                 'after'  => ' // @codingStandardsIgnoreLine',
@@ -429,8 +440,6 @@ EOD;
 
     /**
      * Test suppressing a single error using a single line ignore in the middle of a line.
-     *
-     * @covers PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -454,8 +463,6 @@ EOD;
 
     /**
      * Test suppressing a single error using a single line ignore within a docblock.
-     *
-     * @covers PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -493,7 +500,6 @@ EOD;
      * @param string $after  Annotation to place after the code.
      *
      * @dataProvider dataNestedSuppressLine
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -530,7 +536,7 @@ EOD;
      *
      * @see testNestedSuppressLine()
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public static function dataNestedSuppressLine()
     {
@@ -584,7 +590,6 @@ EOD;
      *                               Defaults to 0.
      *
      * @dataProvider dataSuppressScope
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -625,7 +630,7 @@ EOD;
      *
      * @see testSuppressScope()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataSuppressScope()
     {
@@ -682,7 +687,6 @@ EOD;
      *                                 Defaults to 0.
      *
      * @dataProvider dataSuppressFile
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -720,7 +724,7 @@ EOD;
      *
      * @see testSuppressFile()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataSuppressFile()
     {
@@ -732,16 +736,30 @@ EOD;
             ],
 
             // Process with suppression.
-            'ignoreFile: start of file, slash comment'                => ['before' => '// phpcs:ignoreFile'],
-            'ignoreFile: start of file, slash comment, with @'        => ['before' => '// @phpcs:ignoreFile'],
-            'ignoreFile: start of file, slash comment, mixed case'    => ['before' => '// PHPCS:Ignorefile'],
-            'ignoreFile: start of file, hash comment'                 => ['before' => '# phpcs:ignoreFile'],
-            'ignoreFile: start of file, hash comment, with @'         => ['before' => '# @phpcs:ignoreFile'],
-            'ignoreFile: start of file, single-line star comment'     => ['before' => '/* phpcs:ignoreFile */'],
+            'ignoreFile: start of file, slash comment'                => [
+                'before' => '// phpcs:ignoreFile',
+            ],
+            'ignoreFile: start of file, slash comment, with @'        => [
+                'before' => '// @phpcs:ignoreFile',
+            ],
+            'ignoreFile: start of file, slash comment, mixed case'    => [
+                'before' => '// PHPCS:Ignorefile',
+            ],
+            'ignoreFile: start of file, hash comment'                 => [
+                'before' => '# phpcs:ignoreFile',
+            ],
+            'ignoreFile: start of file, hash comment, with @'         => [
+                'before' => '# @phpcs:ignoreFile',
+            ],
+            'ignoreFile: start of file, single-line star comment'     => [
+                'before' => '/* phpcs:ignoreFile */',
+            ],
             'ignoreFile: start of file, multi-line star comment'      => [
                 'before' => '/*'.PHP_EOL.' phpcs:ignoreFile'.PHP_EOL.' */',
             ],
-            'ignoreFile: start of file, single-line docblock comment' => ['before' => '/** phpcs:ignoreFile */'],
+            'ignoreFile: start of file, single-line docblock comment' => [
+                'before' => '/** phpcs:ignoreFile */',
+            ],
 
             // Process late comment.
             'ignoreFile: late comment, slash comment'                 => [
@@ -750,12 +768,18 @@ EOD;
             ],
 
             // Deprecated syntax.
-            'old style: start of file, slash comment'                 => ['before' => '// @codingStandardsIgnoreFile'],
-            'old style: start of file, single-line star comment'      => ['before' => '/* @codingStandardsIgnoreFile */'],
+            'old style: start of file, slash comment'                 => [
+                'before' => '// @codingStandardsIgnoreFile',
+            ],
+            'old style: start of file, single-line star comment'      => [
+                'before' => '/* @codingStandardsIgnoreFile */',
+            ],
             'old style: start of file, multi-line star comment'       => [
                 'before' => '/*'.PHP_EOL.' @codingStandardsIgnoreFile'.PHP_EOL.' */',
             ],
-            'old style: start of file, single-line docblock comment'  => ['before' => '/** @codingStandardsIgnoreFile */'],
+            'old style: start of file, single-line docblock comment'  => [
+                'before' => '/** @codingStandardsIgnoreFile */',
+            ],
 
             // Deprecated syntax, late comment.
             'old style: late comment, slash comment'                  => [
@@ -777,7 +801,6 @@ EOD;
      *                                 Defaults to 0.
      *
      * @dataProvider dataDisableSelected
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -819,7 +842,7 @@ EOD;
      *
      * @see testDisableSelected()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataDisableSelected()
     {
@@ -843,7 +866,9 @@ EOD;
             ],
 
             // Multiple sniffs.
-            'disable: multiple sniffs in one comment'      => ['before' => '// phpcs:disable Generic.Commenting.Todo,Generic.PHP.LowerCaseConstant'],
+            'disable: multiple sniffs in one comment'      => [
+                'before' => '// phpcs:disable Generic.Commenting.Todo,Generic.PHP.LowerCaseConstant',
+            ],
             'disable: multiple sniff in multiple comments' => [
                 'before' => '// phpcs:disable Generic.Commenting.Todo'.PHP_EOL.'// phpcs:disable Generic.PHP.LowerCaseConstant',
             ],
@@ -853,12 +878,16 @@ EOD;
                 'before'         => '// phpcs:disable Generic.Commenting',
                 'expectedErrors' => 1,
             ],
-            'disable: whole standard'                      => ['before' => '// phpcs:disable Generic'],
+            'disable: whole standard'                      => [
+                'before' => '// phpcs:disable Generic',
+            ],
             'disable: single errorcode'                    => [
                 'before'         => '# @phpcs:disable Generic.Commenting.Todo.TaskFound',
                 'expectedErrors' => 1,
             ],
-            'disable: single errorcode and a category'     => ['before' => '// phpcs:disable Generic.PHP.LowerCaseConstant.Found,Generic.Commenting'],
+            'disable: single errorcode and a category'     => [
+                'before' => '// phpcs:disable Generic.PHP.LowerCaseConstant.Found,Generic.Commenting',
+            ],
 
             // Wrong category/sniff/code.
             'disable: wrong error code and category'       => [
@@ -889,7 +918,6 @@ EOD;
      * @param int    $expectedWarnings Number of warnings expected.
      *
      * @dataProvider dataEnableSelected
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -926,7 +954,7 @@ EOD;
      *
      * @see testEnableSelected()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataEnableSelected()
     {
@@ -1064,7 +1092,6 @@ EOD;
      * @param int    $expectedWarnings Number of warnings expected.
      *
      * @dataProvider dataIgnoreSelected
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -1106,7 +1133,7 @@ EOD;
      *
      * @see testIgnoreSelected()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataIgnoreSelected()
     {
@@ -1156,7 +1183,6 @@ EOD;
      * @param int    $expectedWarnings Number of warnings expected.
      *
      * @dataProvider dataCommenting
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
@@ -1193,7 +1219,7 @@ EOD;
      *
      * @see testCommenting()
      *
-     * @return array
+     * @return array<string, array<string, string|int>>
      */
     public static function dataCommenting()
     {
