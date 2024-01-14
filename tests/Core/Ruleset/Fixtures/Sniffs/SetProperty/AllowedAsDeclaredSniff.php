@@ -5,14 +5,16 @@
  * @see \PHP_CodeSniffer\Tests\Core\Ruleset\SetSniffPropertyTest
  */
 
-namespace Fixtures\Sniffs\Category;
+namespace Fixtures\Sniffs\SetProperty;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use stdClass;
 
-class SetPropertyAllowedViaStdClassSniff extends stdClass implements Sniff
+class AllowedAsDeclaredSniff implements Sniff
 {
+
+    public $arbitrarystring;
+    public $arbitraryarray;
 
     public function register()
     {

@@ -5,16 +5,15 @@
  * @see \PHP_CodeSniffer\Tests\Core\Ruleset\SetSniffPropertyTest
  */
 
-namespace Fixtures\Sniffs\Category;
+namespace Fixtures\Sniffs\SetProperty;
 
+use AllowDynamicProperties;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
-class SetPropertyAllowedAsDeclaredSniff implements Sniff
+#[AllowDynamicProperties]
+class NotAllowedViaAttributeSniff implements Sniff
 {
-
-    public $arbitrarystring;
-    public $arbitraryarray;
 
     public function register()
     {
