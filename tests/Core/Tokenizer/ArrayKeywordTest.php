@@ -49,19 +49,27 @@ final class ArrayKeywordTest extends AbstractMethodUnitTest
      *
      * @see testArrayKeyword()
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public static function dataArrayKeyword()
     {
         return [
-            'empty array'                           => ['/* testEmptyArray */'],
-            'array with space before parenthesis'   => ['/* testArrayWithSpace */'],
-            'array with comment before parenthesis' => [
-                '/* testArrayWithComment */',
-                'Array',
+            'empty array'                           => [
+                'testMarker' => '/* testEmptyArray */',
             ],
-            'nested: outer array'                   => ['/* testNestingArray */'],
-            'nested: inner array'                   => ['/* testNestedArray */'],
+            'array with space before parenthesis'   => [
+                'testMarker' => '/* testArrayWithSpace */',
+            ],
+            'array with comment before parenthesis' => [
+                'testMarker'  => '/* testArrayWithComment */',
+                'testContent' => 'Array',
+            ],
+            'nested: outer array'                   => [
+                'testMarker' => '/* testNestingArray */',
+            ],
+            'nested: inner array'                   => [
+                'testMarker' => '/* testNestedArray */',
+            ],
         ];
 
     }//end dataArrayKeyword()
@@ -101,17 +109,21 @@ final class ArrayKeywordTest extends AbstractMethodUnitTest
      *
      * @see testArrayType()
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public static function dataArrayType()
     {
         return [
             'closure return type'        => [
-                '/* testClosureReturnType */',
-                'Array',
+                'testMarker'  => '/* testClosureReturnType */',
+                'testContent' => 'Array',
             ],
-            'function param type'        => ['/* testFunctionDeclarationParamType */'],
-            'function union return type' => ['/* testFunctionDeclarationReturnType */'],
+            'function param type'        => [
+                'testMarker' => '/* testFunctionDeclarationParamType */',
+            ],
+            'function union return type' => [
+                'testMarker' => '/* testFunctionDeclarationReturnType */',
+            ],
         ];
 
     }//end dataArrayType()
@@ -152,16 +164,18 @@ final class ArrayKeywordTest extends AbstractMethodUnitTest
      *
      * @see testNotArrayKeyword()
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public static function dataNotArrayKeyword()
     {
         return [
             'class-constant-name' => [
-                '/* testClassConst */',
-                'ARRAY',
+                'testMarker'  => '/* testClassConst */',
+                'testContent' => 'ARRAY',
             ],
-            'class-method-name'   => ['/* testClassMethod */'],
+            'class-method-name'   => [
+                'testMarker' => '/* testClassMethod */',
+            ],
         ];
 
     }//end dataNotArrayKeyword()

@@ -18,7 +18,7 @@ final class NullsafeObjectOperatorTest extends AbstractMethodUnitTest
     /**
      * Tokens to search for.
      *
-     * @var array
+     * @var array<int|string>
      */
     protected $find = [
         T_NULLSAFE_OBJECT_OPERATOR,
@@ -71,13 +71,13 @@ final class NullsafeObjectOperatorTest extends AbstractMethodUnitTest
      *
      * @see testNullsafeObjectOperator()
      *
-     * @return array
+     * @return array<string, array<string>>
      */
     public static function dataNullsafeObjectOperator()
     {
         return [
-            ['/* testNullsafeObjectOperator */'],
-            ['/* testNullsafeObjectOperatorWriteContext */'],
+            'nullsafe operator'                         => ['/* testNullsafeObjectOperator */'],
+            'illegal nullsafe operator (write context)' => ['/* testNullsafeObjectOperatorWriteContext */'],
         ];
 
     }//end dataNullsafeObjectOperator()
@@ -117,21 +117,25 @@ final class NullsafeObjectOperatorTest extends AbstractMethodUnitTest
      *
      * @see testTernaryThen()
      *
-     * @return array
+     * @return array<string, array<string, string|bool>>
      */
     public static function dataTernaryThen()
     {
         return [
-            ['/* testTernaryThen */'],
-            [
-                '/* testParseErrorWhitespaceNotAllowed */',
-                true,
+            'ternary then'                                         => [
+                'testMarker' => '/* testTernaryThen */',
             ],
-            [
-                '/* testParseErrorCommentNotAllowed */',
-                true,
+            'whitespace between question mark and object operator' => [
+                'testMarker'         => '/* testParseErrorWhitespaceNotAllowed */',
+                'testObjectOperator' => true,
             ],
-            ['/* testLiveCoding */'],
+            'comment between question mark and object operator'    => [
+                'testMarker'         => '/* testParseErrorCommentNotAllowed */',
+                'testObjectOperator' => true,
+            ],
+            'parse error/live coding'                              => [
+                'testMarker' => '/* testLiveCoding */',
+            ],
         ];
 
     }//end dataTernaryThen()
