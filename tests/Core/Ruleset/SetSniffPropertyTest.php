@@ -210,4 +210,49 @@ final class SetSniffPropertyTest extends TestCase
     }//end testSetPropertyDoesNotThrowErrorOnInvalidPropertyWhenSetForCategory()
 
 
+    /**
+     * Test that setting a property via a direct call to the Ruleset::setSniffProperty() method
+     * sets the property correctly when using the new $settings array format.
+     *
+     * @return void
+     */
+    public function testDirectCallSetsProperty()
+    {
+        $name       = 'AllowedAsDeclared';
+        $sniffCode  = "Fixtures.SetProperty.{$name}";
+        $sniffClass = 'Fixtures\Sniffs\SetProperty\\'.$name.'Sniff';
+
+        // Set up the ruleset.
+        $standard = __DIR__."/SetProperty{$name}Test.xml";
+        $config   = new Config(["--standard=$standard"]);
+        $ruleset  = new Ruleset($config);
+
+        $propertyName  = 'arbitrarystring';
+        $propertyValue = 'new value';
+
+        $ruleset->setSniffProperty(
+            $sniffClass,
+            $propertyName,
+            [
+                'scope' => 'sniff',
+                'value' => $propertyValue,
+            ]
+        );
+
+        // Verify that the sniff has been registered.
+        $this->assertGreaterThan(0, count($ruleset->sniffCodes), 'No sniff codes registered');
+
+        // Verify that our target sniff has been registered.
+        $this->assertArrayHasKey($sniffCode, $ruleset->sniffCodes, 'Target sniff not registered');
+        $this->assertSame($sniffClass, $ruleset->sniffCodes[$sniffCode], 'Target sniff not registered with the correct class');
+
+        // Test that the property as passed via the function call has been set on the sniff.
+        $this->assertArrayHasKey($sniffClass, $ruleset->sniffs, 'Sniff class not listed in registered sniffs');
+
+        $sniffObject = $ruleset->sniffs[$sniffClass];
+        $this->assertSame($propertyValue, $sniffObject->$propertyName, 'Property value not set to expected value');
+
+    }//end testDirectCallSetsProperty()
+
+
 }//end class
