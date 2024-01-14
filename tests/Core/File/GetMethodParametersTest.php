@@ -143,11 +143,15 @@ final class GetMethodParametersTest extends AbstractMethodUnitTest
     public static function dataNoParams()
     {
         return [
-            'FunctionNoParams'   => ['/* testFunctionNoParams */'],
-            'ClosureNoParams'    => ['/* testClosureNoParams */'],
+            'FunctionNoParams'   => [
+                'commentString' => '/* testFunctionNoParams */',
+            ],
+            'ClosureNoParams'    => [
+                'commentString' => '/* testClosureNoParams */',
+            ],
             'ClosureUseNoParams' => [
-                '/* testClosureUseNoParams */',
-                T_USE,
+                'commentString'   => '/* testClosureUseNoParams */',
+                'targetTokenType' => T_USE,
             ],
         ];
 
