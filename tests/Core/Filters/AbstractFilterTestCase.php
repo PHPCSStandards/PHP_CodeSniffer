@@ -9,9 +9,9 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Filters;
 
-use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Filters\Filter;
 use PHP_CodeSniffer\Ruleset;
+use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHPUnit\Framework\TestCase;
 use RecursiveIteratorIterator;
 
@@ -45,7 +45,7 @@ abstract class AbstractFilterTestCase extends TestCase
      */
     public static function initializeConfigAndRuleset()
     {
-        self::$config  = new Config(['--standard=PSR1', '--extensions=php,inc', '--report-width=80']);
+        self::$config  = new ConfigDouble(['--extensions=php,inc']);
         self::$ruleset = new Ruleset(self::$config);
 
     }//end initializeConfigAndRuleset()

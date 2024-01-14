@@ -9,9 +9,9 @@
 
 namespace PHP_CodeSniffer\Tests\Core;
 
-use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Files\DummyFile;
+use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -41,7 +41,7 @@ final class ErrorSuppressionTest extends TestCase
         static $config, $ruleset;
 
         if (isset($config, $ruleset) === false) {
-            $config            = new Config();
+            $config            = new ConfigDouble();
             $config->standards = ['Generic'];
             $config->sniffs    = ['Generic.PHP.LowerCaseConstant'];
 
@@ -155,7 +155,7 @@ final class ErrorSuppressionTest extends TestCase
         static $config, $ruleset;
 
         if (isset($config, $ruleset) === false) {
-            $config            = new Config();
+            $config            = new ConfigDouble();
             $config->standards = ['Generic'];
             $config->sniffs    = ['Generic.PHP.LowerCaseConstant'];
 
@@ -237,7 +237,7 @@ EOD;
         static $config, $ruleset;
 
         if (isset($config, $ruleset) === false) {
-            $config            = new Config();
+            $config            = new ConfigDouble();
             $config->standards = ['Generic'];
             $config->sniffs    = ['Generic.Commenting.Todo'];
 
@@ -311,7 +311,7 @@ EOD;
         static $config, $ruleset;
 
         if (isset($config, $ruleset) === false) {
-            $config            = new Config();
+            $config            = new ConfigDouble();
             $config->standards = ['Generic'];
             $config->sniffs    = ['Generic.PHP.LowerCaseConstant'];
 
@@ -398,7 +398,7 @@ EOD;
      */
     public function testSuppressLineMidLine()
     {
-        $config            = new Config();
+        $config            = new ConfigDouble();
         $config->standards = ['Generic'];
         $config->sniffs    = ['Generic.PHP.LowerCaseConstant'];
 
@@ -421,7 +421,7 @@ EOD;
      */
     public function testSuppressLineWithinDocblock()
     {
-        $config            = new Config();
+        $config            = new ConfigDouble();
         $config->standards = ['Generic'];
         $config->sniffs    = ['Generic.Files.LineLength'];
 
@@ -461,7 +461,7 @@ EOD;
         static $config, $ruleset;
 
         if (isset($config, $ruleset) === false) {
-            $config            = new Config();
+            $config            = new ConfigDouble();
             $config->standards = ['Generic'];
             $config->sniffs    = ['Generic.PHP.LowerCaseConstant'];
 
@@ -543,7 +543,7 @@ EOD;
         static $config, $ruleset;
 
         if (isset($config, $ruleset) === false) {
-            $config            = new Config();
+            $config            = new ConfigDouble();
             $config->standards = ['PEAR'];
             $config->sniffs    = ['PEAR.Functions.FunctionDeclaration'];
 
@@ -630,7 +630,7 @@ EOD;
         static $config, $ruleset;
 
         if (isset($config, $ruleset) === false) {
-            $config            = new Config();
+            $config            = new ConfigDouble();
             $config->standards = ['Generic'];
             $config->sniffs    = ['Generic.Commenting.Todo'];
 
@@ -724,7 +724,7 @@ EOD;
         static $config, $ruleset;
 
         if (isset($config, $ruleset) === false) {
-            $config            = new Config();
+            $config            = new ConfigDouble();
             $config->standards = ['Generic'];
             $config->sniffs    = [
                 'Generic.PHP.LowerCaseConstant',
@@ -841,7 +841,7 @@ EOD;
         static $config, $ruleset;
 
         if (isset($config, $ruleset) === false) {
-            $config            = new Config();
+            $config            = new ConfigDouble();
             $config->standards = ['Generic'];
             $config->sniffs    = [
                 'Generic.PHP.LowerCaseConstant',
@@ -1015,7 +1015,7 @@ EOD;
         static $config, $ruleset;
 
         if (isset($config, $ruleset) === false) {
-            $config            = new Config();
+            $config            = new ConfigDouble();
             $config->standards = ['Generic'];
             $config->sniffs    = [
                 'Generic.PHP.LowerCaseConstant',
@@ -1106,7 +1106,7 @@ EOD;
         static $config, $ruleset;
 
         if (isset($config, $ruleset) === false) {
-            $config            = new Config();
+            $config            = new ConfigDouble();
             $config->standards = ['Generic'];
             $config->sniffs    = [
                 'Generic.PHP.LowerCaseConstant',

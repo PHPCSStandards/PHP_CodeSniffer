@@ -9,8 +9,8 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Ruleset;
 
-use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
+use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHPUnit\Framework\TestCase;
 use ReflectionObject;
 
@@ -46,7 +46,7 @@ final class SetSniffPropertyTest extends TestCase
 
         // Set up the ruleset.
         $standard = __DIR__."/SetProperty{$name}Test.xml";
-        $config   = new Config(["--standard=$standard"]);
+        $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
         // Verify that the sniff has been registered.
@@ -102,7 +102,7 @@ final class SetSniffPropertyTest extends TestCase
 
         // Set up the ruleset.
         $standard = __DIR__.'/SetPropertyAppliesPropertyToMultipleSniffsInCategoryTest.xml';
-        $config   = new Config(["--standard=$standard"]);
+        $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
         // Test that the two sniffs which support the property have received the value.
@@ -144,7 +144,7 @@ final class SetSniffPropertyTest extends TestCase
 
         // Set up the ruleset.
         $standard = __DIR__.'/SetPropertyThrowsErrorOnInvalidPropertyTest.xml';
-        $config   = new Config(["--standard=$standard"]);
+        $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
     }//end testSetPropertyThrowsErrorOnInvalidProperty()
@@ -168,7 +168,7 @@ final class SetSniffPropertyTest extends TestCase
 
         // Set up the ruleset.
         $standard = __DIR__.'/SetPropertyNotAllowedViaAttributeTest.xml';
-        $config   = new Config(["--standard=$standard"]);
+        $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
     }//end testSetPropertyThrowsErrorWhenPropertyOnlyAllowedViaAttribute()
@@ -186,7 +186,7 @@ final class SetSniffPropertyTest extends TestCase
     {
         // Set up the ruleset.
         $standard = __DIR__.'/SetPropertyDoesNotThrowErrorOnInvalidPropertyWhenSetForStandardTest.xml';
-        $config   = new Config(["--standard=$standard"]);
+        $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
     }//end testSetPropertyDoesNotThrowErrorOnInvalidPropertyWhenSetForStandard()
@@ -204,7 +204,7 @@ final class SetSniffPropertyTest extends TestCase
     {
         // Set up the ruleset.
         $standard = __DIR__.'/SetPropertyDoesNotThrowErrorOnInvalidPropertyWhenSetForCategoryTest.xml';
-        $config   = new Config(["--standard=$standard"]);
+        $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
     }//end testSetPropertyDoesNotThrowErrorOnInvalidPropertyWhenSetForCategory()
@@ -224,7 +224,7 @@ final class SetSniffPropertyTest extends TestCase
 
         // Set up the ruleset.
         $standard = __DIR__."/SetProperty{$name}Test.xml";
-        $config   = new Config(["--standard=$standard"]);
+        $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
         $propertyName  = 'arbitrarystring';

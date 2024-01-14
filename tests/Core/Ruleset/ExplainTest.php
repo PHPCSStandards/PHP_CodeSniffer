@@ -9,9 +9,9 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Ruleset;
 
-use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Runner;
+use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -31,7 +31,7 @@ final class ExplainTest extends TestCase
     public function testExplain()
     {
         // Set up the ruleset.
-        $config  = new Config(['--standard=PSR1', '-e', '--report-width=80']);
+        $config  = new ConfigDouble(['--standard=PSR1', '-e']);
         $ruleset = new Ruleset($config);
 
         $expected  = PHP_EOL;
@@ -66,7 +66,7 @@ final class ExplainTest extends TestCase
     public function testExplainAlwaysDisplaysCompleteSniffName()
     {
         // Set up the ruleset.
-        $config  = new Config(['--standard=PSR1', '-e', '--report-width=30']);
+        $config  = new ConfigDouble(['--standard=PSR1', '-e', '--report-width=30']);
         $ruleset = new Ruleset($config);
 
         $expected  = PHP_EOL;
@@ -104,7 +104,7 @@ final class ExplainTest extends TestCase
     {
         // Set up the ruleset.
         $standard = __DIR__.'/ExplainSingleSniffTest.xml';
-        $config   = new Config(["--standard=$standard", '-e', '--report-width=80']);
+        $config   = new ConfigDouble(["--standard=$standard", '-e']);
         $ruleset  = new Ruleset($config);
 
         $expected  = PHP_EOL;
@@ -135,7 +135,7 @@ final class ExplainTest extends TestCase
     {
         // Set up the ruleset.
         $standard = __DIR__.'/ExplainCustomRulesetTest.xml';
-        $config   = new Config(["--standard=$standard", '-e', '--report-width=80']);
+        $config   = new ConfigDouble(["--standard=$standard", '-e']);
         $ruleset  = new Ruleset($config);
 
         $expected  = PHP_EOL;

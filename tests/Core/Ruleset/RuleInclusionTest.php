@@ -9,8 +9,8 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Ruleset;
 
-use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
+use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHPUnit\Framework\TestCase;
 use ReflectionObject;
 
@@ -72,7 +72,7 @@ final class RuleInclusionTest extends TestCase
             self::markTestSkipped('On the fly ruleset adjustment failed');
         }
 
-        $config        = new Config(["--standard=$standard"]);
+        $config        = new ConfigDouble(["--standard=$standard"]);
         self::$ruleset = new Ruleset($config);
 
     }//end setUpBeforeClass()
