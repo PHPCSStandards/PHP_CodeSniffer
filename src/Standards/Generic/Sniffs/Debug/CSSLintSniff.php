@@ -5,6 +5,8 @@
  * @author    Roman Levishchenko <index.0h@gmail.com>
  * @copyright 2013-2014 Roman Levishchenko
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ *
+ * @deprecated 3.9.0
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Debug;

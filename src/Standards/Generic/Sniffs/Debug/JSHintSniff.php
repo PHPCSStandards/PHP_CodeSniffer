@@ -6,6 +6,8 @@
  * @author    Alexander Wei§ <aweisswa@gmx.de>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ *
+ * @deprecated 3.9.0
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Debug;
