@@ -475,7 +475,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Jaroslav Hanslík][@kukulich] for the patch
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for additional core and sniff support
 - Added support for the PHP 8.1 readonly token
-    - Tokenzing of the readonly keyword has been backfilled for PHP versions less than 8.1
+    - Tokenizing of the readonly keyword has been backfilled for PHP versions less than 8.1
     - Thanks to [Jaroslav Hanslík][@kukulich] for the patch
 - Added support for PHP 8.1 intersection types
     - Includes a new T_TYPE_INTERSECTION token to represent the ampersand character inside intersection types
