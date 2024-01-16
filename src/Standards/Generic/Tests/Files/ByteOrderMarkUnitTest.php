@@ -34,6 +34,8 @@ final class ByteOrderMarkUnitTest extends AbstractSniffUnitTest
     {
         switch ($testFile) {
         case 'ByteOrderMarkUnitTest.1.inc':
+        case 'ByteOrderMarkUnitTest.4.inc':
+        case 'ByteOrderMarkUnitTest.5.inc':
             return [1 => 1];
 
         default:
