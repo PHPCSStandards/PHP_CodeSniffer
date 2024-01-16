@@ -26,11 +26,19 @@ final class ByteOrderMarkUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile='')
     {
-        return [1 => 1];
+        switch ($testFile) {
+        case 'ByteOrderMarkUnitTest.1.inc':
+            return [1 => 1];
+
+        default:
+            return [];
+        }
 
     }//end getErrorList()
 
