@@ -334,6 +334,10 @@ class Runner
         // should be checked and/or fixed.
         try {
             $this->ruleset = new Ruleset($this->config);
+
+            if ($this->ruleset->hasSniffDeprecations() === true) {
+                $this->ruleset->showSniffDeprecations();
+            }
         } catch (RuntimeException $e) {
             $error  = 'ERROR: '.$e->getMessage().PHP_EOL.PHP_EOL;
             $error .= $this->config->printShortUsage(true);
