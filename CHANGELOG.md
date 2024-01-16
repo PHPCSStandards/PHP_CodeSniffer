@@ -422,27 +422,39 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Squiz.Formatting.OperatorBracket no longer reports false positives in match() structures
 
 ### Fixed
-- Fixed bug #3616 : Squiz.PHP.DisallowComparisonAssignment false positive for PHP 8 match expression
+- Fixed bug [#3616] : Squiz.PHP.DisallowComparisonAssignment false positive for PHP 8 match expression
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3618 : Generic.WhiteSpace.ArbitraryParenthesesSpacing false positive for return new parent()
+- Fixed bug [#3618] : Generic.WhiteSpace.ArbitraryParenthesesSpacing false positive for return new parent()
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3632 : Short list not tokenized correctly in control structures without braces
+- Fixed bug [#3632] : Short list not tokenized correctly in control structures without braces
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3639 : Tokenizer not applying tab replacement to heredoc/nowdoc closers
+- Fixed bug [#3639] : Tokenizer not applying tab replacement to heredoc/nowdoc closers
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3640 : Generic.WhiteSpace.DisallowTabIndent not reporting errors for PHP 7.3 flexible heredoc/nowdoc syntax
+- Fixed bug [#3640] : Generic.WhiteSpace.DisallowTabIndent not reporting errors for PHP 7.3 flexible heredoc/nowdoc syntax
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3645 : PHPCS can show 0 exit code when running in parallel even if child process has fatal error
+- Fixed bug [#3645] : PHPCS can show 0 exit code when running in parallel even if child process has fatal error
     - Thanks to [Alex Panshin][@enl] for the patch
-- Fixed bug #3653 : False positives for match() in OperatorSpacingSniff
+- Fixed bug [#3653] : False positives for match() in OperatorSpacingSniff
     - Thanks to [Jaroslav Hanslík][@kukulich] for the patch
-- Fixed bug #3666 : PEAR.Functions.FunctionCallSignature incorrect indent fix when checking mixed HTML/PHP files
-- Fixed bug #3668 : PSR12.Classes.ClassInstantiation.MissingParentheses false positive when instantiating parent classes
+- Fixed bug [#3666] : PEAR.Functions.FunctionCallSignature incorrect indent fix when checking mixed HTML/PHP files
+- Fixed bug [#3668] : PSR12.Classes.ClassInstantiation.MissingParentheses false positive when instantiating parent classes
     - Similar issues also fixed in Generic.Functions.FunctionCallArgumentSpacing and Squiz.Formatting.OperatorBracket
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3672 : Incorrect ScopeIndent.IncorrectExact report for match inside array literal
-- Fixed bug #3694 : Generic.WhiteSpace.SpreadOperatorSpacingAfter does not ignore spread operator in PHP 8.1 first class   callables
+- Fixed bug [#3672] : Incorrect ScopeIndent.IncorrectExact report for match inside array literal
+- Fixed bug [#3694] : Generic.WhiteSpace.SpreadOperatorSpacingAfter does not ignore spread operator in PHP 8.1 first class   callables
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+
+[#3616]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3616
+[#3618]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3618
+[#3632]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3632
+[#3639]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3639
+[#3640]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3640
+[#3645]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3645
+[#3653]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3653
+[#3666]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3666
+[#3668]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3668
+[#3672]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3672
+[#3694]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3694
 
 ## [3.7.1] - 2022-06-18
 ### Fixed
