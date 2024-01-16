@@ -52,15 +52,15 @@ final class GetClassPropertiesTest extends AbstractMethodUnitTest
         return [
             'interface'  => [
                 'testMarker' => '/* testNotAClass */',
-                'tokenType'  => \T_INTERFACE,
+                'tokenType'  => T_INTERFACE,
             ],
             'anon-class' => [
                 'testMarker' => '/* testAnonClass */',
-                'tokenType'  => \T_ANON_CLASS,
+                'tokenType'  => T_ANON_CLASS,
             ],
             'enum'       => [
                 'testMarker' => '/* testEnum */',
-                'tokenType'  => \T_ENUM,
+                'tokenType'  => T_ENUM,
             ],
         ];
 
@@ -79,7 +79,7 @@ final class GetClassPropertiesTest extends AbstractMethodUnitTest
      */
     public function testGetClassProperties($testMarker, $expected)
     {
-        $class  = $this->getTargetToken($testMarker, \T_CLASS);
+        $class  = $this->getTargetToken($testMarker, T_CLASS);
         $result = self::$phpcsFile->getClassProperties($class);
         $this->assertSame($expected, $result);
 

@@ -56,7 +56,7 @@ class InnerFunctionsSniff implements Sniff
                 break;
             }
 
-            if (\array_key_exists($condition, Tokens::$ooScopeTokens) === true) {
+            if (array_key_exists($condition, Tokens::$ooScopeTokens) === true) {
                 // Ignore methods in OOP structures defined within functions.
                 return;
             }
