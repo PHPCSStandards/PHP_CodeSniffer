@@ -275,7 +275,7 @@ class NonExecutableCodeSniff implements Sniff
             }
 
             // Skip HTML whitespace.
-            if ($tokens[$i]['code'] === T_INLINE_HTML && \trim($tokens[$i]['content']) === '') {
+            if ($tokens[$i]['code'] === T_INLINE_HTML && trim($tokens[$i]['content']) === '') {
                 continue;
             }
 

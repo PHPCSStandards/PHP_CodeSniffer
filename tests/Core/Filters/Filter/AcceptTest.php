@@ -10,7 +10,6 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Filters\Filter;
 
-use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Filters\Filter;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;

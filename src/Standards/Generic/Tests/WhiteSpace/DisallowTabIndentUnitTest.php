@@ -101,7 +101,7 @@ final class DisallowTabIndentUnitTest extends AbstractSniffUnitTest
                 19 => 1,
             ];
         case 'DisallowTabIndentUnitTest.3.inc':
-            if (\PHP_VERSION_ID >= 70300) {
+            if (PHP_VERSION_ID >= 70300) {
                 return [
                     7  => 1,
                     13 => 1,

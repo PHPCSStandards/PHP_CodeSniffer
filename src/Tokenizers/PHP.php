@@ -2933,7 +2933,7 @@ class PHP extends Tokenizer
                 }
 
                 if ($suspectedType === 'property or parameter') {
-                    unset($allowed[\T_STATIC]);
+                    unset($allowed[T_STATIC]);
                 }
 
                 $typeTokenCount = 0;
