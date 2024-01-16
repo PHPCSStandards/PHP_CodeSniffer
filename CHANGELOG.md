@@ -356,8 +356,10 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 
 ## [3.7.1] - 2022-06-18
 ### Fixed
-- Fixed bug #3609 : Methods/constants with name empty/isset/unset are always reported as error
+- Fixed bug [#3609] : Methods/constants with name empty/isset/unset are always reported as error
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+
+[#3609]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3609
 
 ## [3.7.0] - 2022-06-13
 ### Added
