@@ -301,9 +301,17 @@ class Ruleset
                 }
             }//end if
 
+            if (isset($this->deprecatedSniffs[$sniff]) === true) {
+                $sniff .= ' *';
+            }
+
             $sniffsInStandard[] = $sniff;
             ++$lastCount;
         }//end foreach
+
+        if (count($this->deprecatedSniffs) > 0) {
+            echo PHP_EOL.'* Sniffs marked with an asterix are deprecated.'.PHP_EOL;
+        }
 
     }//end explain()
 
