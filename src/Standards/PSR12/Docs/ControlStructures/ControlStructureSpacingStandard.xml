@@ -42,7 +42,7 @@ while (
 }
         ]]>
         </code>
-        <code title="Invalid: Some lines in a multi-line control structure not indented correctly.">
+        <code title="Invalid: Some lines in a multi-line control structure condition block not indented correctly.">
         <![CDATA[
 while (
 <em></em>$expr1
