@@ -54,7 +54,7 @@ while (
         </code>
     </code_comparison>
     <code_comparison>
-        <code title="Valid: First expression of a multi-line control structure is on the line after the opening parenthesis.">
+        <code title="Valid: First expression of a multi-line control structure condition block is on the line after the opening parenthesis.">
         <![CDATA[
 while (
     $expr1
