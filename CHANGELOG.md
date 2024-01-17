@@ -440,26 +440,37 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Thiemo Kreuz][@thiemowmde] for the patch
 
 ### Fixed
-- Fixed bug #3388 : phpcs does not work when run from WSL drives
+- Fixed bug [#3388] : phpcs does not work when run from WSL drives
     - Thanks to [Juliette Reinders Folmer][@jrfnl] and [Graham Wharton][@gwharton] for the patch
-- Fixed bug #3422 : Squiz.WhiteSpace.ScopeClosingBrace fixer removes HTML content when fixing closing brace alignment
+- Fixed bug [#3422] : Squiz.WhiteSpace.ScopeClosingBrace fixer removes HTML content when fixing closing brace alignment
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3437 : PSR12 does not forbid blank lines at the start of the class body
+- Fixed bug [#3437] : PSR12 does not forbid blank lines at the start of the class body
     - Added new PSR12.Classes.OpeningBraceSpace sniff to enforce this
-- Fixed bug #3440 : Squiz.WhiteSpace.MemberVarSpacing false positives when attributes used without docblock
+- Fixed bug [#3440] : Squiz.WhiteSpace.MemberVarSpacing false positives when attributes used without docblock
     - Thanks to [Vadim Borodavko][@javer] for the patch
-- Fixed bug #3448 : PHP 8.1 deprecation notice while generating running time value
+- Fixed bug [#3448] : PHP 8.1 deprecation notice while generating running time value
     - Thanks to [Juliette Reinders Folmer][@jrfnl] and Andy Postnikov for the patch
-- Fixed bug #3456 : PSR12.Classes.ClassInstantiation.MissingParentheses false positive using attributes on anonymous class
+- Fixed bug [#3456] : PSR12.Classes.ClassInstantiation.MissingParentheses false positive using attributes on anonymous class
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3460 : Generic.Formatting.MultipleStatementAlignment false positive on closure with parameters
+- Fixed bug [#3460] : Generic.Formatting.MultipleStatementAlignment false positive on closure with parameters
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3468 : do/while loops are double-counted in Generic.Metrics.CyclomaticComplexity
+- Fixed bug [#3468] : do/while loops are double-counted in Generic.Metrics.CyclomaticComplexity
     - Thanks to [Mark Baker][@MarkBaker] for the patch
-- Fixed bug #3469 : Ternary Operator and Null Coalescing Operator are not counted in Generic.Metrics.CyclomaticComplexity
+- Fixed bug [#3469] : Ternary Operator and Null Coalescing Operator are not counted in Generic.Metrics.CyclomaticComplexity
     - Thanks to [Mark Baker][@MarkBaker] for the patch
-- Fixed bug #3472 : PHP 8 match() expression is not counted in Generic.Metrics.CyclomaticComplexity
+- Fixed bug [#3472] : PHP 8 match() expression is not counted in Generic.Metrics.CyclomaticComplexity
     - Thanks to [Mark Baker][@MarkBaker] for the patch
+
+[#3388]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3388
+[#3422]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3422
+[#3437]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3437
+[#3440]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3440
+[#3448]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3448
+[#3456]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3456
+[#3460]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3460
+[#3468]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3468
+[#3469]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3469
+[#3472]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3472
 
 ## [3.6.1] - 2021-10-11
 ### Changed
