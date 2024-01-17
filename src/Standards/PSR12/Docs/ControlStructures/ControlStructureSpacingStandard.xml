@@ -63,7 +63,7 @@ while (
 }
         ]]>
         </code>
-        <code title="Invalid: First expression of a multi-line control structure is on the same line as the opening parenthesis.">
+        <code title="Invalid: First expression of a multi-line control structure condition block is on the same line as the opening parenthesis.">
         <![CDATA[
 while (<em></em>$expr1
     && $expr2
