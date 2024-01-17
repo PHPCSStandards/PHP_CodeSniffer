@@ -25,7 +25,7 @@ if ($expr) {
 }
         ]]>
         </code>
-        <code title="Invalid: Space before the closing parenthesis.">
+        <code title="Invalid: Space before the closing parenthesis in a single-line condition.">
         <![CDATA[
 if ($expr<em> </em>) {
 }
