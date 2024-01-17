@@ -579,8 +579,8 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - PHPCS annotations can now be specified using hash-style comments
     - Previously, only slash-style and block-style comments could be used to do things like disable errors
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- The new PHP 8.1 tokenisation for ampersands has been reverted to use the existing PHP_CodeSniffer method
-    - The PHP 8.1 tokens T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG and T_AMPERSAND_NOT_FOLLOWED_BY_VAR_OR_VARARG are unsued
+- The new PHP 8.1 tokenization for ampersands has been reverted to use the existing PHP_CodeSniffer method
+    - The PHP 8.1 tokens T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG and T_AMPERSAND_NOT_FOLLOWED_BY_VAR_OR_VARARG are unused
     - Ampersands continue to be tokenized as T_BITWISE_AND for all PHP versions
     - Thanks to [Juliette Reinders Folmer][@jrfnl] and [Anna Filina][@afilina] for the patch
 - File::getMethodParameters() no longer incorrectly returns argument attributes in the type hint array index
@@ -635,7 +635,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Fixed bug [#3345] : IF statement with no braces and double catch turned into syntax error by auto-fixer
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug [#3352] : PSR2.ControlStructures.SwitchDeclaration can remove comments on the same line as the case statement while   fixing
+- Fixed bug [#3352] : PSR2.ControlStructures.SwitchDeclaration can remove comments on the same line as the case statement while fixing
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Fixed bug [#3357] : Generic.Functions.OpeningFunctionBraceBsdAllman removes return type when additional lines are present
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
