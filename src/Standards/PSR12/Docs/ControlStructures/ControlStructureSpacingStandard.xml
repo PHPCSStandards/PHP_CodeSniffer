@@ -73,7 +73,7 @@ while (<em></em>$expr1
         </code>
     </code_comparison>
     <code_comparison>
-        <code title="Valid: The closing parenthesis of a multi-line control structure is on the line after the last expression.">
+        <code title="Valid: The closing parenthesis of a multi-line control structure condition block is on the line after the last expression.">
         <![CDATA[
 while (
     $expr1
