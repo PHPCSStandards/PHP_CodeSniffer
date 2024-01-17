@@ -356,8 +356,10 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 
 ## [3.7.1] - 2022-06-18
 ### Fixed
-- Fixed bug #3609 : Methods/constants with name empty/isset/unset are always reported as error
+- Fixed bug [#3609] : Methods/constants with name empty/isset/unset are always reported as error
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+
+[#3609]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3609
 
 ## [3.7.0] - 2022-06-13
 ### Added
@@ -371,7 +373,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Jaroslav Hanslík][@kukulich] for the patch
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for additional core and sniff support
 - Added support for the PHP 8.1 readonly token
-    - Tokenzing of the readonly keyword has been backfilled for PHP versions less than 8.1
+    - Tokenizing of the readonly keyword has been backfilled for PHP versions less than 8.1
     - Thanks to [Jaroslav Hanslík][@kukulich] for the patch
 - Added support for PHP 8.1 intersection types
     - Includes a new T_TYPE_INTERSECTION token to represent the ampersand character inside intersection types
@@ -403,23 +405,34 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Jaroslav Hanslík][@kukulich] for the patch
 
 ### Fixed
-- Fixed bug #3502 : A match statement within an array produces Squiz.Arrays.ArrayDeclaration.NoKeySpecified
-- Fixed bug #3503 : Squiz.Commenting.FunctionComment.ThrowsNoFullStop false positive when one line @throw
-- Fixed bug #3505 : The nullsafe operator is not counted in Generic.Metrics.CyclomaticComplexity
+- Fixed bug [#3502] : A match statement within an array produces Squiz.Arrays.ArrayDeclaration.NoKeySpecified
+- Fixed bug [#3503] : Squiz.Commenting.FunctionComment.ThrowsNoFullStop false positive when one line @throw
+- Fixed bug [#3505] : The nullsafe operator is not counted in Generic.Metrics.CyclomaticComplexity
     - Thanks to [Mark Baker][@MarkBaker] for the patch
-- Fixed bug #3526 : PSR12.Properties.ConstantVisibility false positive when using public final const syntax
+- Fixed bug [#3526] : PSR12.Properties.ConstantVisibility false positive when using public final const syntax
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3530 : Line indented incorrectly false positive when using match-expression inside switch case
-- Fixed bug #3534 : Name of typed enum tokenized as T_GOTO_LABEL
+- Fixed bug [#3530] : Line indented incorrectly false positive when using match-expression inside switch case
+- Fixed bug [#3534] : Name of typed enum tokenized as T_GOTO_LABEL
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3546 : Tokenizer/PHP: bug fix - parent/static keywords in class instantiations
+- Fixed bug [#3546] : Tokenizer/PHP: bug fix - parent/static keywords in class instantiations
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3550 : False positive from PSR2.ControlStructures.SwitchDeclaration.TerminatingComment when using trailing   comment
+- Fixed bug [#3550] : False positive from PSR2.ControlStructures.SwitchDeclaration.TerminatingComment when using trailing   comment
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3575: Squiz.Scope.MethodScope misses visibility keyword on previous line
+- Fixed bug [#3575]: Squiz.Scope.MethodScope misses visibility keyword on previous line
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3604: Tokenizer/PHP: bug fix for double quoted strings using ${
+- Fixed bug [#3604]: Tokenizer/PHP: bug fix for double quoted strings using ${
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+
+[#3502]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3502
+[#3503]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3503
+[#3505]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3505
+[#3526]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3526
+[#3530]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3530
+[#3534]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3534
+[#3546]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3546
+[#3550]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3550
+[#3575]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3575
+[#3604]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3604
 
 ## [3.6.2] - 2021-12-13
 ### Changed
