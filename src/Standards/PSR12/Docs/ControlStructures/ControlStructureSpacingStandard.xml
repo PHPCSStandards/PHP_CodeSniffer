@@ -33,7 +33,7 @@ if ($expr<em> </em>) {
         </code>
     </code_comparison>
     <code_comparison>
-        <code title="Valid: Each line in a multi-line control structure indented at least once. Default indentation is 4 spaces.">
+        <code title="Valid: Each line in a multi-line control structure condition block indented at least once. Default indentation is 4 spaces.">
         <![CDATA[
 while (
 <em>    </em>$expr1
