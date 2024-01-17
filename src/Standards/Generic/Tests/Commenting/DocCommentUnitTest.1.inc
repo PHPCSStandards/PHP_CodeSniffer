@@ -15,28 +15,30 @@
  *
  * long description
  * over multiple lines.
- *
  * @tag1 one
  */
 
 /**
+ *
  * Short description
+ *
  *
  * Long description
  * over multiple lines
  *
+ *
  * @tag1 one
+ *
  */
 
 /*
     This is not a doc block.
  */
 
-/**
- * Short description.
+/** Short description.
  *
- * @tag      one
- * @tag2     two
+ * @tag one
+ * @tag2 two
  * @tagThree three
  * @tagFour  four
  */
@@ -48,22 +50,24 @@
  *
  * @param
  * @param
+ *
+ */
+
+/**
+ * Short description.
+ * @param
+ * @param
+ * @tag one
  */
 
 /**
  * Short description.
  *
- * @param
- * @param
- * @tag   one
- */
-
-/**
- * Short description.
  *
  * @param
  *
  * @param
+ *
  *
  * @tag one
  */
@@ -73,7 +77,7 @@
  *
  * @param
  *
- * @tag   one
+ * @tag one
  * @param
  */
 
@@ -81,13 +85,14 @@
  * Short description.
  *
  * @groupOne one
- * @groupOne two
+ * @groupOne  two
  *
  * @group2 one
  * @group2 two
  *
+ *
  * @g3
- * @g3 two
+ * @g3  two
  */
 
 /**
@@ -162,12 +167,8 @@
  * @ var Comment
  */
 
-/**
- * @var Database $mockedDatabase 
-*/
-/**
- * @var Container $mockedContainer 
-*/
+/** @var Database $mockedDatabase */
+/** @var Container $mockedContainer */
 
 /**
  * 这是一条测试评论.
@@ -175,17 +176,15 @@
 
 /**
  * I'm a function short-description
- *
  * @return boolean
  */
 
 /**
  * this is a test
- *
  * @author test
- * @param  boolean $foo blah
+ * @param boolean $foo blah
  * @return boolean
- * @param  boolean $bar Blah.
+ * @param boolean $bar Blah.
  */
 
 /**
@@ -212,21 +211,17 @@
  * étude des ...
  */
 
-/**
-* doc comment 
-*/
+/**doc comment */
 
         /**
          * Document behaviour with missing blank lines with indented docblocks.
+         * @param
+         * @param
+         * @tag one
          *
-         * @param
-         * @param
-         * @tag   one
          */
 
-        /**
- * Indented doc comment 
-*/
+        /** Indented doc comment */
 
 /**
  * Verify and document sniff behaviour when the "tag value" is indented with a mix of tabs and spaces.
@@ -245,13 +240,13 @@
  * Verify and document sniff behaviour when the "tag value" is indented with a mix of tabs and spaces.
  * The below is incorrectly aligned.
  *
- * @category  PHP
- * @package   PHP_CodeSniffer
+ * @category		PHP
+ * @package		  PHP_CodeSniffer
  * @author	  Greg Sherwood <gsherwood@squiz.net>
- * @author    Marc McIntyre <mmcintyre@squiz.net>
+ * @author	Marc McIntyre <mmcintyre@squiz.net>
  * @copyright 2006-2012 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
- * @link      http://pear.php.net/package/PHP_CodeSniffer
+ * @license	  	https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @link		http://pear.php.net/package/PHP_CodeSniffer
  */
 
 /**
@@ -264,4 +259,12 @@
  * @return void
  */
 
-/** No docblock close tag. Must be last test without new line.
+// Tests to check handling empty doc comments.
+/**
+ */
+
+/**
+		*
+ *
+   *
+ */
