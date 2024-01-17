@@ -7,7 +7,7 @@
     <code_comparison>
         <code title="Valid: No space after the opening parenthesis.">
         <![CDATA[
-if ($expr) {
+if <em>(</em>$expr) {
 }
         ]]>
         </code>
