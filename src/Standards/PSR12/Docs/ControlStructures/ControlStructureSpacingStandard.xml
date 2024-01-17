@@ -19,7 +19,7 @@ if <em>( </em>$expr) {
         </code>
     </code_comparison>
     <code_comparison>
-        <code title="Valid: No space before the closing parenthesis.">
+        <code title="Valid: No space before the closing parenthesis in a single-line condition.">
         <![CDATA[
 if ($expr) {
 }
