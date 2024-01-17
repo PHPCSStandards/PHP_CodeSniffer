@@ -446,15 +446,15 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 
 [#3616]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3616
 [#3618]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3618
-[#3632]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3632
-[#3639]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3639
-[#3640]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3640
-[#3645]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3645
-[#3653]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3653
+[#3632]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3632
+[#3639]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3639
+[#3640]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3640
+[#3645]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3645
+[#3653]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3653
 [#3666]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3666
 [#3668]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3668
 [#3672]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3672
-[#3694]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3694
+[#3694]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3694 
 
 ## [3.7.1] - 2022-06-18
 ### Fixed
