@@ -5,7 +5,7 @@
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: No space after the opening parenthesis.">
+        <code title="Valid: No space after the opening parenthesis in a single-line condition.">
         <![CDATA[
 if <em>(</em>$expr) {
 }
