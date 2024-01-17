@@ -516,20 +516,23 @@ class FunctionCallSignatureSniff implements Sniff
                         if ($tokens[$i]['code'] === T_COMMENT
                             && $tokens[($i - 1)]['code'] === T_COMMENT
                         ) {
-                            $trimmedLength = strlen(ltrim($tokens[$i]['content']));
+                            $content       = $tokens[$i]['content'];
+                            $trimmedLength = strlen(ltrim($content));
                             if ($trimmedLength === 0) {
                                 // This is a blank comment line, so indenting it is
                                 // pointless.
                                 continue;
                             }
 
-                            $foundIndent = (strlen($tokens[$i]['content']) - $trimmedLength);
+                            $content     = str_replace("\t", str_repeat(' ', $this->indent), $content);
+                            $foundIndent = (strlen($content) - $trimmedLength ) ;
                         } else {
                             $foundIndent = 0;
                         }
                     } else {
-                        $foundIndent = $tokens[$i]['length'];
-                    }
+                        $content     = str_replace("\t", str_repeat(' ', $this->indent), $tokens[$i]['content']);
+                        $foundIndent = strlen($content);
+                    }//end if
 
                     $indentCorrect = true;
 
