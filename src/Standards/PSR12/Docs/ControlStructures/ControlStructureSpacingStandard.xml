@@ -82,7 +82,7 @@ while (
 }
         ]]>
         </code>
-        <code title="Invalid: The closing parenthesis of a multi-line control structure is on the same line as the last expression.">
+        <code title="Invalid: The closing parenthesis of a multi-line control structure condition block is on the same line as the last expression.">
         <![CDATA[
 while (
     $expr1
