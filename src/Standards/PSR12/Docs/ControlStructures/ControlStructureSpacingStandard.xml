@@ -11,7 +11,7 @@ if <em>(</em>$expr) {
 }
         ]]>
         </code>
-        <code title="Invalid: Space after the opening parenthesis.">
+        <code title="Invalid: Space after the opening parenthesis in a single-line condition.">
         <![CDATA[
 if <em>( </em>$expr) {
 }
