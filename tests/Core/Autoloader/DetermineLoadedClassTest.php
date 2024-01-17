@@ -12,7 +12,12 @@ namespace PHP_CodeSniffer\Tests\Core\Autoloader;
 use PHP_CodeSniffer\Autoload;
 use PHPUnit\Framework\TestCase;
 
-class DetermineLoadedClassTest extends TestCase
+/**
+ * Tests for the \PHP_CodeSniffer\Autoload::determineLoadedClass method.
+ *
+ * @covers \PHP_CodeSniffer\Autoload::determineLoadedClass
+ */
+final class DetermineLoadedClassTest extends TestCase
 {
 
 

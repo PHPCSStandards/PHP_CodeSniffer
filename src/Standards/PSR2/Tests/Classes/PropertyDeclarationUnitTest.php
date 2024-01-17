@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\PSR2\Tests\Classes;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class PropertyDeclarationUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the PropertyDeclaration sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR2\Sniffs\Classes\PropertyDeclarationSniff
+ */
+final class PropertyDeclarationUnitTest extends AbstractSniffUnitTest
 {
 
 

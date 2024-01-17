@@ -9,12 +9,17 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Ruleset;
 
-use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
+use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHPUnit\Framework\TestCase;
 use ReflectionObject;
 
-class RuleInclusionTest extends TestCase
+/**
+ * Tests for the \PHP_CodeSniffer\Ruleset class.
+ *
+ * @covers \PHP_CodeSniffer\Ruleset
+ */
+final class RuleInclusionTest extends TestCase
 {
 
     /**
@@ -69,7 +74,7 @@ class RuleInclusionTest extends TestCase
             self::markTestSkipped('On the fly ruleset adjustment failed');
         }
 
-        $config        = new Config(["--standard=$standard"]);
+        $config        = new ConfigDouble(["--standard=$standard"]);
         self::$ruleset = new Ruleset($config);
 
     }//end initializeConfigAndRuleset()
@@ -124,9 +129,9 @@ class RuleInclusionTest extends TestCase
      *
      * @see self::testRegisteredSniffCodes()
      *
-     * @return array
+     * @return array<array<string>>
      */
-    public function dataRegisteredSniffCodes()
+    public static function dataRegisteredSniffCodes()
     {
         return [
             [
@@ -330,9 +335,9 @@ class RuleInclusionTest extends TestCase
      * Test that setting properties for standards, categories, sniffs works for all supported rule
      * inclusion methods.
      *
-     * @param string $sniffClass    The name of the sniff class.
-     * @param string $propertyName  The name of the changed property.
-     * @param mixed  $expectedValue The value expected for the property.
+     * @param string          $sniffClass    The name of the sniff class.
+     * @param string          $propertyName  The name of the changed property.
+     * @param string|int|bool $expectedValue The value expected for the property.
      *
      * @dataProvider dataSettingProperties
      *
@@ -357,62 +362,62 @@ class RuleInclusionTest extends TestCase
      *
      * @see self::testSettingProperties()
      *
-     * @return array
+     * @return array<string, array<string, string|int|bool>>
      */
-    public function dataSettingProperties()
+    public static function dataSettingProperties()
     {
         return [
             'Set property for complete standard: PSR2 ClassDeclaration'                                  => [
-                'PHP_CodeSniffer\Standards\PSR2\Sniffs\Classes\ClassDeclarationSniff',
-                'indent',
-                '20',
+                'sniffClass'    => 'PHP_CodeSniffer\Standards\PSR2\Sniffs\Classes\ClassDeclarationSniff',
+                'propertyName'  => 'indent',
+                'expectedValue' => '20',
             ],
             'Set property for complete standard: PSR2 SwitchDeclaration'                                 => [
-                'PHP_CodeSniffer\Standards\PSR2\Sniffs\ControlStructures\SwitchDeclarationSniff',
-                'indent',
-                '20',
+                'sniffClass'    => 'PHP_CodeSniffer\Standards\PSR2\Sniffs\ControlStructures\SwitchDeclarationSniff',
+                'propertyName'  => 'indent',
+                'expectedValue' => '20',
             ],
             'Set property for complete standard: PSR2 FunctionCallSignature'                             => [
-                'PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\FunctionCallSignatureSniff',
-                'indent',
-                '20',
+                'sniffClass'    => 'PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\FunctionCallSignatureSniff',
+                'propertyName'  => 'indent',
+                'expectedValue' => '20',
             ],
             'Set property for complete category: PSR12 OperatorSpacing'                                  => [
-                'PHP_CodeSniffer\Standards\PSR12\Sniffs\Operators\OperatorSpacingSniff',
-                'ignoreSpacingBeforeAssignments',
-                false,
+                'sniffClass'    => 'PHP_CodeSniffer\Standards\PSR12\Sniffs\Operators\OperatorSpacingSniff',
+                'propertyName'  => 'ignoreSpacingBeforeAssignments',
+                'expectedValue' => false,
             ],
             'Set property for individual sniff: Generic ArrayIndent'                                     => [
-                'PHP_CodeSniffer\Standards\Generic\Sniffs\Arrays\ArrayIndentSniff',
-                'indent',
-                '2',
+                'sniffClass'    => 'PHP_CodeSniffer\Standards\Generic\Sniffs\Arrays\ArrayIndentSniff',
+                'propertyName'  => 'indent',
+                'expectedValue' => '2',
             ],
             'Set property for individual sniff using sniff file inclusion: Generic LineLength'           => [
-                'PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff',
-                'lineLimit',
-                '10',
+                'sniffClass'    => 'PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff',
+                'propertyName'  => 'lineLimit',
+                'expectedValue' => '10',
             ],
             'Set property for individual sniff using sniff file inclusion: CamelCapsFunctionName'        => [
-                'PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\CamelCapsFunctionNameSniff',
-                'strict',
-                false,
+                'sniffClass'    => 'PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\CamelCapsFunctionNameSniff',
+                'propertyName'  => 'strict',
+                'expectedValue' => false,
             ],
             'Set property for individual sniff via included ruleset: NestingLevel - nestingLevel'        => [
-                'PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\NestingLevelSniff',
-                'nestingLevel',
-                '2',
+                'sniffClass'    => 'PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\NestingLevelSniff',
+                'propertyName'  => 'nestingLevel',
+                'expectedValue' => '2',
             ],
             'Set property for all sniffs in an included ruleset: NestingLevel - absoluteNestingLevel'    => [
-                'PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\NestingLevelSniff',
-                'absoluteNestingLevel',
-                true,
+                'sniffClass'    => 'PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\NestingLevelSniff',
+                'propertyName'  => 'absoluteNestingLevel',
+                'expectedValue' => true,
             ],
 
             // Testing that setting a property at error code level does *not* work.
             'Set property for error code will not change the sniff property value: CyclomaticComplexity' => [
-                'PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\CyclomaticComplexitySniff',
-                'complexity',
-                10,
+                'sniffClass'    => 'PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\CyclomaticComplexitySniff',
+                'propertyName'  => 'complexity',
+                'expectedValue' => 10,
             ],
         ];
 
@@ -448,22 +453,22 @@ class RuleInclusionTest extends TestCase
      *
      * @see self::testSettingInvalidPropertiesOnStandardsAndCategoriesSilentlyFails()
      *
-     * @return array
+     * @return array<string, array>string, string>>
      */
-    public function dataSettingInvalidPropertiesOnStandardsAndCategoriesSilentlyFails()
+    public static function dataSettingInvalidPropertiesOnStandardsAndCategoriesSilentlyFails()
     {
         return [
             'Set property for complete standard: PSR2 ClassDeclaration'      => [
-                'PHP_CodeSniffer\Standards\PSR1\Sniffs\Classes\ClassDeclarationSniff',
-                'setforallsniffs',
+                'sniffClass'   => 'PHP_CodeSniffer\Standards\PSR1\Sniffs\Classes\ClassDeclarationSniff',
+                'propertyName' => 'setforallsniffs',
             ],
             'Set property for complete standard: PSR2 FunctionCallSignature' => [
-                'PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\FunctionCallSignatureSniff',
-                'setforallsniffs',
+                'sniffClass'   => 'PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\FunctionCallSignatureSniff',
+                'propertyName' => 'setforallsniffs',
             ],
             'Set property for complete category: PSR12 OperatorSpacing'      => [
-                'PHP_CodeSniffer\Standards\PSR12\Sniffs\Operators\OperatorSpacingSniff',
-                'setforallincategory',
+                'sniffClass'   => 'PHP_CodeSniffer\Standards\PSR12\Sniffs\Operators\OperatorSpacingSniff',
+                'propertyName' => 'setforallincategory',
             ],
         ];
 

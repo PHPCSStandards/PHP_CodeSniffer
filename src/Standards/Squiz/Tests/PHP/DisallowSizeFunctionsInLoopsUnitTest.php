@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class DisallowSizeFunctionsInLoopsUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the DisallowSizeFunctionsInLoops sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DisallowSizeFunctionsInLoopsSniff
+ */
+final class DisallowSizeFunctionsInLoopsUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -25,7 +30,7 @@ class DisallowSizeFunctionsInLoopsUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='DisallowSizeFunctionsInLoopsUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'DisallowSizeFunctionsInLoopsUnitTest.inc':

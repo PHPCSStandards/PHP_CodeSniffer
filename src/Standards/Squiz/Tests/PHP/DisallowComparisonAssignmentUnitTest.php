@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class DisallowComparisonAssignmentUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the DisallowComparisonAssignment sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DisallowComparisonAssignmentSniff
+ */
+final class DisallowComparisonAssignmentUnitTest extends AbstractSniffUnitTest
 {
 
 

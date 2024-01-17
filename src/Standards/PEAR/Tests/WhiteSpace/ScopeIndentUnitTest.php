@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\PEAR\Tests\WhiteSpace;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ScopeIndentUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ScopeIndent sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PEAR\Sniffs\WhiteSpace\ScopeIndentSniff
+ */
+final class ScopeIndentUnitTest extends AbstractSniffUnitTest
 {
 
 

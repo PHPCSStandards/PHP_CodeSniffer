@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\PSR12\Tests\ControlStructures;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class BooleanOperatorPlacementUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the BooleanOperatorPlacement sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\ControlStructures\BooleanOperatorPlacementSniff
+ */
+final class BooleanOperatorPlacementUnitTest extends AbstractSniffUnitTest
 {
 
 

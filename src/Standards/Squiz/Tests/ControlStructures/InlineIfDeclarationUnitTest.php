@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\ControlStructures;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class InlineIfDeclarationUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the InlineIfDeclaration sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\InlineIfDeclarationSniff
+ */
+final class InlineIfDeclarationUnitTest extends AbstractSniffUnitTest
 {
 
 

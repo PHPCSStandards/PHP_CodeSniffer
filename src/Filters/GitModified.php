@@ -16,7 +16,7 @@ class GitModified extends ExactMatch
 
 
     /**
-     * Get a list of blacklisted file paths.
+     * Get a list of file paths to exclude.
      *
      * @return array
      */
@@ -28,7 +28,7 @@ class GitModified extends ExactMatch
 
 
     /**
-     * Get a list of whitelisted file paths.
+     * Get a list of file paths to include.
      *
      * @return array
      */
@@ -37,8 +37,7 @@ class GitModified extends ExactMatch
         $modified = [];
 
         $cmd    = 'git ls-files -o -m --exclude-standard -- '.escapeshellarg($this->basedir);
-        $output = [];
-        exec($cmd, $output);
+        $output = $this->exec($cmd);
 
         $basedir = $this->basedir;
         if (is_dir($basedir) === false) {
@@ -61,6 +60,29 @@ class GitModified extends ExactMatch
         return $modified;
 
     }//end getWhitelist()
+
+
+    /**
+     * Execute an external command.
+     *
+     * {@internal This method is only needed to allow for mocking the return value
+     * to test the class logic.}
+     *
+     * @param string $cmd Command.
+     *
+     * @return array
+     */
+    protected function exec($cmd)
+    {
+        $output   = [];
+        $lastLine = exec($cmd, $output);
+        if ($lastLine === false) {
+            return [];
+        }
+
+        return $output;
+
+    }//end exec()
 
 
 }//end class

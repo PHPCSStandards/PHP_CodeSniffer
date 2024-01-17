@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\PSR12\Tests\Files;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class DeclareStatementUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the DeclareStatement sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Files\DeclareStatementSniff
+ */
+final class DeclareStatementUnitTest extends AbstractSniffUnitTest
 {
 
 

@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Functions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class CallTimePassByReferenceUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the CallTimePassByReference sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Functions\CallTimePassByReferenceSniff
+ */
+final class CallTimePassByReferenceUnitTest extends AbstractSniffUnitTest
 {
 
 

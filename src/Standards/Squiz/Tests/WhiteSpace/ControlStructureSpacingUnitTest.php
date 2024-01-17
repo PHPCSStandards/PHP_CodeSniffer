@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\WhiteSpace;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ControlStructureSpacingUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ControlStructureSpacing sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ControlStructureSpacingSniff
+ */
+final class ControlStructureSpacingUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -25,7 +30,7 @@ class ControlStructureSpacingUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='ControlStructureSpacingUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'ControlStructureSpacingUnitTest.inc':

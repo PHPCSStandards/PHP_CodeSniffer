@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\CSS;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class SemicolonSpacingUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the SemicolonSpacing sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\CSS\SemicolonSpacingSniff
+ */
+final class SemicolonSpacingUnitTest extends AbstractSniffUnitTest
 {
 
 

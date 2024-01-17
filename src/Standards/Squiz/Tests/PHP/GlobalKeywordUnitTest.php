@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class GlobalKeywordUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the GlobalKeyword sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\GlobalKeywordSniff
+ */
+final class GlobalKeywordUnitTest extends AbstractSniffUnitTest
 {
 
 

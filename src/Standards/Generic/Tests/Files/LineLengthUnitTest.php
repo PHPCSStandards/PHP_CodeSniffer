@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Files;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class LineLengthUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the LineLength sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff
+ */
+final class LineLengthUnitTest extends AbstractSniffUnitTest
 {
 
 

@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Scope;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class MemberVarScopeUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the MemberVarScope sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Scope\MemberVarScopeSniff
+ */
+final class MemberVarScopeUnitTest extends AbstractSniffUnitTest
 {
 
 

@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\WhiteSpace;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class PropertyLabelSpacingUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the PropertyLabel sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\PropertyLabelSpacingSniff
+ */
+final class PropertyLabelSpacingUnitTest extends AbstractSniffUnitTest
 {
 
 

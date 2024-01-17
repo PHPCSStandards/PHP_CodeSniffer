@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class NoSilencedErrorsUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the NoSilencedErrors sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\NoSilencedErrorsSniff
+ */
+final class NoSilencedErrorsUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -25,7 +30,7 @@ class NoSilencedErrorsUnitTest extends AbstractSniffUnitTest
      */
     public function getErrorList()
     {
-        return [];
+        return [13 => 1];
 
     }//end getErrorList()
 
@@ -43,6 +48,7 @@ class NoSilencedErrorsUnitTest extends AbstractSniffUnitTest
         return [
             5  => 1,
             10 => 1,
+            16 => 1,
         ];
 
     }//end getWarningList()

@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class InnerFunctionsUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the InnerFunctions sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\InnerFunctionsSniff
+ */
+final class InnerFunctionsUnitTest extends AbstractSniffUnitTest
 {
 
 

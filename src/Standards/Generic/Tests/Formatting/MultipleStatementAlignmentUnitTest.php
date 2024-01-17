@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Formatting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class MultipleStatementAlignmentUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the MultipleStatementAlignment sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\MultipleStatementAlignmentSniff
+ */
+final class MultipleStatementAlignmentUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -40,7 +45,7 @@ class MultipleStatementAlignmentUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='MultipleStatementAlignmentUnitTest.inc')
+    public function getWarningList($testFile='')
     {
         switch ($testFile) {
         case 'MultipleStatementAlignmentUnitTest.inc':

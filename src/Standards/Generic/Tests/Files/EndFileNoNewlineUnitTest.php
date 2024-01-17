@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Files;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class EndFileNoNewlineUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the EndFileNoNewline sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\EndFileNoNewlineSniff
+ */
+final class EndFileNoNewlineUnitTest extends AbstractSniffUnitTest
 {
 
 

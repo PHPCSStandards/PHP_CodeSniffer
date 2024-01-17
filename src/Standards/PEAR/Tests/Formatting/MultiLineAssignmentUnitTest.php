@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\PEAR\Tests\Formatting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class MultiLineAssignmentUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the MultiLineAssignment sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PEAR\Sniffs\Formatting\MultiLineAssignmentSniff
+ */
+final class MultiLineAssignmentUnitTest extends AbstractSniffUnitTest
 {
 
 

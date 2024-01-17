@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\PEAR\Tests\Files;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class IncludingFileUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the IncludingFile sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PEAR\Sniffs\Files\IncludingFileSniff
+ */
+final class IncludingFileUnitTest extends AbstractSniffUnitTest
 {
 
 

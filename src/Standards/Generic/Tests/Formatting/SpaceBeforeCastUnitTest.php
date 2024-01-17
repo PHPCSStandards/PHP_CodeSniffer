@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Formatting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class SpaceBeforeCastUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the SpaceBeforeCast sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceBeforeCastSniff
+ */
+final class SpaceBeforeCastUnitTest extends AbstractSniffUnitTest
 {
 
 

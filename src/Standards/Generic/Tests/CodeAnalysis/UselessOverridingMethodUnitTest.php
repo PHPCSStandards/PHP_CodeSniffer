@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\CodeAnalysis;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class UselessOverridingMethodUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the UselessOverridingMethod sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UselessOverridingMethodSniff
+ */
+final class UselessOverridingMethodUnitTest extends AbstractSniffUnitTest
 {
 
 

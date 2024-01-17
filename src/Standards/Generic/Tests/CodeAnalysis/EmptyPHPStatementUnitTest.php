@@ -1,6 +1,6 @@
 <?php
 /**
- * Unit test class for the EmptyStatement sniff.
+ * Unit test class for the EmptyPHPStatement sniff.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2017 Juliette Reinders Folmer. All rights reserved.
@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\CodeAnalysis;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class EmptyPHPStatementUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the EmptyPHPStatement sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyPHPStatementSniff
+ */
+final class EmptyPHPStatementUnitTest extends AbstractSniffUnitTest
 {
 
 

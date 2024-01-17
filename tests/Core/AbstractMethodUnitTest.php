@@ -9,9 +9,9 @@
 
 namespace PHP_CodeSniffer\Tests\Core;
 
-use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Files\DummyFile;
+use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
@@ -27,6 +27,15 @@ abstract class AbstractMethodUnitTest extends TestCase
      * @var string
      */
     protected static $fileExtension = 'inc';
+
+    /**
+     * The tab width setting to use when tokenizing the file.
+     *
+     * This allows for test case files to use a different tab width than the default.
+     *
+     * @var integer
+     */
+    protected static $tabWidth = 4;
 
     /**
      * The \PHP_CodeSniffer\Files\File object containing the parsed contents of the test case file.
@@ -48,22 +57,10 @@ abstract class AbstractMethodUnitTest extends TestCase
      */
     public static function initializeFile()
     {
-        /*
-         * Set the static properties in the Config class to specific values for performance
-         * and to clear out values from other tests.
-         */
+        $config = new ConfigDouble();
+        // Also set a tab-width to enable testing tab-replaced vs `orig_content`.
+        $config->tabWidth = static::$tabWidth;
 
-        self::setStaticConfigProperty('executablePaths', []);
-
-        // Set to a usable value to circumvent Config trying to find a phpcs.xml config file.
-        self::setStaticConfigProperty('overriddenDefaults', ['standards' => ['PSR1']]);
-
-        // Set to values which prevent the test-runner user's `CodeSniffer.conf` file
-        // from being read and influencing the tests. Also prevent an `exec()` call to stty.
-        self::setStaticConfigProperty('configData', ['report_width' => 80]);
-        self::setStaticConfigProperty('configDataFile', '');
-
-        $config  = new Config();
         $ruleset = new Ruleset($config);
 
         // Default to a file with the same name as the test class. Extension is property based.
@@ -79,44 +76,6 @@ abstract class AbstractMethodUnitTest extends TestCase
         self::$phpcsFile->process();
 
     }//end initializeFile()
-
-
-    /**
-     * Clean up after finished test.
-     *
-     * @afterClass
-     *
-     * @return void
-     */
-    public static function resetFile()
-    {
-        self::$phpcsFile = null;
-
-        // Reset the static properties in the Config class to their defaults to prevent tests influencing each other.
-        self::setStaticConfigProperty('overriddenDefaults', []);
-        self::setStaticConfigProperty('executablePaths', []);
-        self::setStaticConfigProperty('configData', null);
-        self::setStaticConfigProperty('configDataFile', null);
-
-    }//end resetFile()
-
-
-    /**
-     * Helper function to set the value of a private static property on the Config class.
-     *
-     * @param string $name  The name of the property to set.
-     * @param mixed  $value The value to set the property to.
-     *
-     * @return void
-     */
-    public static function setStaticConfigProperty($name, $value)
-    {
-        $property = new ReflectionProperty('PHP_CodeSniffer\Config', $name);
-        $property->setAccessible(true);
-        $property->setValue(null, $value);
-        $property->setAccessible(false);
-
-    }//end setStaticConfigProperty()
 
 
     /**
@@ -177,6 +136,30 @@ abstract class AbstractMethodUnitTest extends TestCase
         return $target;
 
     }//end getTargetToken()
+
+
+    /**
+     * Helper method to tell PHPUnit to expect a PHPCS RuntimeException in a PHPUnit cross-version
+     * compatible manner.
+     *
+     * @param string $message The expected exception message.
+     *
+     * @return void
+     */
+    public function expectRunTimeException($message)
+    {
+        $exception = 'PHP_CodeSniffer\Exceptions\RuntimeException';
+
+        if (method_exists($this, 'expectException') === true) {
+            // PHPUnit 5+.
+            $this->expectException($exception);
+            $this->expectExceptionMessage($message);
+        } else {
+            // PHPUnit 4.
+            $this->setExpectedException($exception, $message);
+        }
+
+    }//end expectRunTimeException()
 
 
 }//end class

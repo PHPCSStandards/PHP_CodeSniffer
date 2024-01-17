@@ -1,0 +1,61 @@
+name: Quicktest
+
+on:
+  # Run on pushes to all branches except for `master`.
+  push:
+    branches-ignore:
+      - master
+    paths-ignore:
+      - '**.md'
+  # Allow manually triggering the workflow.
+  workflow_dispatch:
+
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  #### QUICK TEST ####
+  # This is a much quicker test run which only runs the unit tests against the low/medium/high
+  # supported PHP versions and skips the PHAR test and the tests for external JS/CSS tooling.
+  # These are basically the same builds as in the Test->Coverage workflow, but then without doing
+  # the code-coverage.
+  quicktest:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php: ['5.4', '7.2', 'latest']
+
+    name: "QuickTest: PHP ${{ matrix.php }}"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          ini-values: 'error_reporting=-1, display_errors=On'
+          coverage: none
+
+      # Install dependencies and handle caching in one go.
+      # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
+      - name: Install Composer dependencies
+        uses: "ramsey/composer-install@v2"
+        with:
+          # Bust the cache at least once a month - output format: YYYY-MM.
+          custom-cache-suffix: $(date -u "+%Y-%m")
+
+      - name: 'PHPCS: set the path to PHP'
+        run: php bin/phpcs --config-set php_path php
+
+      - name: 'PHPUnit: run the tests'
+        run: vendor/bin/phpunit tests/AllTests.php --no-coverage
+
+      # Note: The code style check is run as an integration test.
+      - name: 'PHPCS: check code style without cache, no parallel'
+        run: php bin/phpcs --no-cache --parallel=1

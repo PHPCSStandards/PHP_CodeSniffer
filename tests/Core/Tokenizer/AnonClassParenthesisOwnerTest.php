@@ -11,7 +11,7 @@ namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 
-class AnonClassParenthesisOwnerTest extends AbstractMethodUnitTest
+final class AnonClassParenthesisOwnerTest extends AbstractMethodUnitTest
 {
 
 
@@ -70,13 +70,17 @@ class AnonClassParenthesisOwnerTest extends AbstractMethodUnitTest
      * @see testAnonClassNoParentheses()
      * @see testAnonClassNoParenthesesNextOpenClose()
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
-    public function dataAnonClassNoParentheses()
+    public static function dataAnonClassNoParentheses()
     {
         return [
-            ['/* testNoParentheses */'],
-            ['/* testNoParenthesesAndEmptyTokens */'],
+            'plain'                                              => [
+                'testMarker' => '/* testNoParentheses */',
+            ],
+            'declaration contains comments and extra whitespace' => [
+                'testMarker' => '/* testNoParenthesesAndEmptyTokens */',
+            ],
         ];
 
     }//end dataAnonClassNoParentheses()
@@ -129,13 +133,17 @@ class AnonClassParenthesisOwnerTest extends AbstractMethodUnitTest
      *
      * @see testAnonClassWithParentheses()
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
-    public function dataAnonClassWithParentheses()
+    public static function dataAnonClassWithParentheses()
     {
         return [
-            ['/* testWithParentheses */'],
-            ['/* testWithParenthesesAndEmptyTokens */'],
+            'plain'                                              => [
+                'testMarker' => '/* testWithParentheses */',
+            ],
+            'declaration contains comments and extra whitespace' => [
+                'testMarker' => '/* testWithParenthesesAndEmptyTokens */',
+            ],
         ];
 
     }//end dataAnonClassWithParentheses()

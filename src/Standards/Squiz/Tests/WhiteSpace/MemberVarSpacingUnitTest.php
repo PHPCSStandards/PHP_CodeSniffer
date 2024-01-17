@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\WhiteSpace;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class MemberVarSpacingUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the MemberVarSpacing sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\MemberVarSpacingSniff
+ */
+final class MemberVarSpacingUnitTest extends AbstractSniffUnitTest
 {
 
 

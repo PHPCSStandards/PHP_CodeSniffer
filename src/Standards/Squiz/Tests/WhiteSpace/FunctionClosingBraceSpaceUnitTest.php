@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\WhiteSpace;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class FunctionClosingBraceSpaceUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the FunctionClosingBraceSpace sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\FunctionClosingBraceSpaceSniff
+ */
+final class FunctionClosingBraceSpaceUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -25,7 +30,7 @@ class FunctionClosingBraceSpaceUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='FunctionClosingBraceSpaceUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'FunctionClosingBraceSpaceUnitTest.inc':

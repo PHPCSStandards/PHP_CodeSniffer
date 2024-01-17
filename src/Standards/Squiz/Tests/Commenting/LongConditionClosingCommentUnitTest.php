@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Commenting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class LongConditionClosingCommentUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the LongConditionClosingComment sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting\LongConditionClosingCommentSniff
+ */
+final class LongConditionClosingCommentUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -25,7 +30,7 @@ class LongConditionClosingCommentUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='LongConditionClosingCommentUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'LongConditionClosingCommentUnitTest.inc':

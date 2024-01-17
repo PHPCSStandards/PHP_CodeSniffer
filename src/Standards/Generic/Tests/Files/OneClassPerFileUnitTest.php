@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Files;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class OneClassPerFileUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the OneClassPerFile sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\OneClassPerFileSniff
+ */
+final class OneClassPerFileUnitTest extends AbstractSniffUnitTest
 {
 
 

@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\CodeAnalysis;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class JumbledIncrementerUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the JumbledIncrementer sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\JumbledIncrementerSniff
+ */
+final class JumbledIncrementerUnitTest extends AbstractSniffUnitTest
 {
 
 

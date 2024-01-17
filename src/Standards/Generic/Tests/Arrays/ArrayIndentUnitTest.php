@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Arrays;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ArrayIndentUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ArrayIndent sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Arrays\ArrayIndentSniff
+ */
+final class ArrayIndentUnitTest extends AbstractSniffUnitTest
 {
 
 

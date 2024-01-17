@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\CodeAnalysis;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class UnconditionalIfStatementUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the UnconditionalIfStatement sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UnconditionalIfStatementSniff
+ */
+final class UnconditionalIfStatementUnitTest extends AbstractSniffUnitTest
 {
 
 

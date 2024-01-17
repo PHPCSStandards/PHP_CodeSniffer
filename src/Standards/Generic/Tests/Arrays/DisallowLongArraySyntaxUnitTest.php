@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Arrays;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class DisallowLongArraySyntaxUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the DisallowLongArraySyntax sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Arrays\DisallowLongArraySyntaxSniff
+ */
+final class DisallowLongArraySyntaxUnitTest extends AbstractSniffUnitTest
 {
 
 

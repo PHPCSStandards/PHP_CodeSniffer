@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\CodeAnalysis;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ForLoopWithTestFunctionCallUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ForLoopWithTestFunctionCall sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\ForLoopWithTestFunctionCallSniff
+ */
+final class ForLoopWithTestFunctionCallUnitTest extends AbstractSniffUnitTest
 {
 
 

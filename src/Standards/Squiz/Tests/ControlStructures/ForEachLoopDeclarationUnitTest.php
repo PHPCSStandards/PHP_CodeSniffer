@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\ControlStructures;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ForEachLoopDeclarationUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ForEachLoopDeclaration sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\ForEachLoopDeclarationSniff
+ */
+final class ForEachLoopDeclarationUnitTest extends AbstractSniffUnitTest
 {
 
 

@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Functions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class FunctionDuplicateArgumentUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the FunctionDuplicateArgument sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions\FunctionDuplicateArgumentSniff
+ */
+final class FunctionDuplicateArgumentUnitTest extends AbstractSniffUnitTest
 {
 
 

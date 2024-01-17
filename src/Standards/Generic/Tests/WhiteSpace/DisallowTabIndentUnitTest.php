@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\WhiteSpace;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class DisallowTabIndentUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the DisallowTabIndent sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\DisallowTabIndentSniff
+ */
+final class DisallowTabIndentUnitTest extends AbstractSniffUnitTest
 {
 
 

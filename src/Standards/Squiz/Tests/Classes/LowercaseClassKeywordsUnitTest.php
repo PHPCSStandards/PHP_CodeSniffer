@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Classes;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class LowercaseClassKeywordsUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the LowercaseClassKeywords sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Classes\LowercaseClassKeywordsSniff
+ */
+final class LowercaseClassKeywordsUnitTest extends AbstractSniffUnitTest
 {
 
 

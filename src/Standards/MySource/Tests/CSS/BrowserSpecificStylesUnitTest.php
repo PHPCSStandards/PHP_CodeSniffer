@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\MySource\Tests\CSS;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class BrowserSpecificStylesUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the BrowserSpecificStyles sniff.
+ *
+ * @covers PHP_CodeSniffer\Standards\MySource\Sniffs\CSS\BrowserSpecificStylesSniff
+ */
+final class BrowserSpecificStylesUnitTest extends AbstractSniffUnitTest
 {
 
 

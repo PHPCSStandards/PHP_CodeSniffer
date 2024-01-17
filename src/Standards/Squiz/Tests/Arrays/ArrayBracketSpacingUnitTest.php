@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Arrays;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ArrayBracketSpacingUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ArrayBracketSpacing sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Arrays\ArrayBracketSpacingSniff
+ */
+final class ArrayBracketSpacingUnitTest extends AbstractSniffUnitTest
 {
 
 

@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\CSS;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class OpacityUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the Opacity sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\CSS\OpacitySniff
+ */
+final class OpacityUnitTest extends AbstractSniffUnitTest
 {
 
 

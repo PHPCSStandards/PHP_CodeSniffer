@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\PSR2\Tests\Namespaces;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class NamespaceDeclarationUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the NamespaceDeclaration sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR2\Sniffs\Namespaces\NamespaceDeclarationSniff
+ */
+final class NamespaceDeclarationUnitTest extends AbstractSniffUnitTest
 {
 
 

@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class LowerCaseTypeUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the LowerCaseType sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\LowerCaseTypeSniff
+ */
+final class LowerCaseTypeUnitTest extends AbstractSniffUnitTest
 {
 
 

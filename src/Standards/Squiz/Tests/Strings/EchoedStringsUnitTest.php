@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Strings;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class EchoedStringsUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the EchoedStrings sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Strings\EchoedStringsSniff
+ */
+final class EchoedStringsUnitTest extends AbstractSniffUnitTest
 {
 
 

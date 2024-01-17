@@ -11,7 +11,7 @@ namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 
-class FinallyTest extends AbstractMethodUnitTest
+final class FinallyTest extends AbstractMethodUnitTest
 {
 
 
@@ -41,14 +41,14 @@ class FinallyTest extends AbstractMethodUnitTest
      *
      * @see testFinallyKeyword()
      *
-     * @return array
+     * @return array<string, array<string>>
      */
-    public function dataFinallyKeyword()
+    public static function dataFinallyKeyword()
     {
         return [
-            ['/* testTryCatchFinally */'],
-            ['/* testTryFinallyCatch */'],
-            ['/* testTryFinally */'],
+            'finally after try and catch'   => ['/* testTryCatchFinally */'],
+            'finally between try and catch' => ['/* testTryFinallyCatch */'],
+            'finally after try, no catch'   => ['/* testTryFinally */'],
         ];
 
     }//end dataFinallyKeyword()
@@ -80,14 +80,14 @@ class FinallyTest extends AbstractMethodUnitTest
      *
      * @see testFinallyNonKeyword()
      *
-     * @return array
+     * @return array<string, array<string>>
      */
-    public function dataFinallyNonKeyword()
+    public static function dataFinallyNonKeyword()
     {
         return [
-            ['/* testFinallyUsedAsClassConstantName */'],
-            ['/* testFinallyUsedAsMethodName */'],
-            ['/* testFinallyUsedAsPropertyName */'],
+            'finally used as class constant name' => ['/* testFinallyUsedAsClassConstantName */'],
+            'finally used as method name'         => ['/* testFinallyUsedAsMethodName */'],
+            'finally used as property name'       => ['/* testFinallyUsedAsPropertyName */'],
         ];
 
     }//end dataFinallyNonKeyword()

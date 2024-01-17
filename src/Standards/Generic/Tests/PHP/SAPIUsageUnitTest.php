@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class SAPIUsageUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the SAPIUsage sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\SAPIUsageSniff
+ */
+final class SAPIUsageUnitTest extends AbstractSniffUnitTest
 {
 
 

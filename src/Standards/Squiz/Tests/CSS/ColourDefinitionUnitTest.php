@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\CSS;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ColourDefinitionUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ColourDefinition sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\CSS\ColourDefinitionSniff
+ */
+final class ColourDefinitionUnitTest extends AbstractSniffUnitTest
 {
 
 

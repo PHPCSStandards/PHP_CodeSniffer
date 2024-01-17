@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class CharacterBeforePHPOpeningTagUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the CharacterBeforePHPOpeningTag sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\CharacterBeforePHPOpeningTagSniff
+ */
+final class CharacterBeforePHPOpeningTagUnitTest extends AbstractSniffUnitTest
 {
 
 

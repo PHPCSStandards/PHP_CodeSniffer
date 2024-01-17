@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Commenting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class FunctionCommentThrowTagUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the FunctionCommentThrowTag sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting\FunctionCommentThrowTagSniff
+ */
+final class FunctionCommentThrowTagUnitTest extends AbstractSniffUnitTest
 {
 
 

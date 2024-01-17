@@ -60,7 +60,7 @@ class UnusedFunctionParameterSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
@@ -94,7 +94,6 @@ class UnusedFunctionParameterSniff implements Sniff
 
         $errorCode  = 'Found';
         $implements = false;
-        $extends    = false;
 
         if ($token['code'] === T_FUNCTION) {
             $classPtr = $phpcsFile->getCondition($stackPtr, T_CLASS);
@@ -174,18 +173,22 @@ class UnusedFunctionParameterSniff implements Sniff
 
                 // A return statement as the first content indicates an interface method.
                 if ($code === T_RETURN) {
-                    $tmp = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
-                    if ($tmp === false && $implements !== false) {
+                    $firstNonEmptyTokenAfterReturn = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
+                    if ($tokens[$firstNonEmptyTokenAfterReturn]['code'] === T_SEMICOLON && $implements !== false) {
                         return;
                     }
 
-                    // There is a return.
-                    if ($tokens[$tmp]['code'] === T_SEMICOLON && $implements !== false) {
-                        return;
-                    }
+                    $secondNonEmptyTokenAfterReturn = $phpcsFile->findNext(
+                        Tokens::$emptyTokens,
+                        ($firstNonEmptyTokenAfterReturn + 1),
+                        null,
+                        true
+                    );
 
-                    $tmp = $phpcsFile->findNext(Tokens::$emptyTokens, ($tmp + 1), null, true);
-                    if ($tmp !== false && $tokens[$tmp]['code'] === T_SEMICOLON && $implements !== false) {
+                    if ($secondNonEmptyTokenAfterReturn !== false
+                        && $tokens[$secondNonEmptyTokenAfterReturn]['code'] === T_SEMICOLON
+                        && $implements !== false
+                    ) {
                         // There is a return <token>.
                         return;
                     }

@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\PSR12\Tests\Operators;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class OperatorSpacingUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the OperatorSpacing sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Operators\OperatorSpacingSniff
+ */
+final class OperatorSpacingUnitTest extends AbstractSniffUnitTest
 {
 
 

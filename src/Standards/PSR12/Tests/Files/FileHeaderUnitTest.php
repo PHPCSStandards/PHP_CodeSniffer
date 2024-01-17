@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\PSR12\Tests\Files;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class FileHeaderUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the FileHeader sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Files\FileHeaderSniff
+ */
+final class FileHeaderUnitTest extends AbstractSniffUnitTest
 {
 
 

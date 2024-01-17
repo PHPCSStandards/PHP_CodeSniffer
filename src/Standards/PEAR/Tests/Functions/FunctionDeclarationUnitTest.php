@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\PEAR\Tests\Functions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class FunctionDeclarationUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the FunctionDeclaration sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PEAR\Sniffs\Functions\FunctionDeclarationSniff
+ */
+final class FunctionDeclarationUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -25,7 +30,7 @@ class FunctionDeclarationUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='FunctionDeclarationUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         if ($testFile === 'FunctionDeclarationUnitTest.inc') {
             $errors = [

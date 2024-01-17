@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\MySource\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ReturnFunctionValueUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ReturnFunctionValue sniff.
+ *
+ * @covers PHP_CodeSniffer\Standards\MySource\Sniffs\PHP\ReturnFunctionValueSniff
+ */
+final class ReturnFunctionValueUnitTest extends AbstractSniffUnitTest
 {
 
 

@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class CommentedOutCodeUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the CommentedOutCode sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\CommentedOutCodeSniff
+ */
+final class CommentedOutCodeUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -40,7 +45,7 @@ class CommentedOutCodeUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='CommentedOutCodeUnitTest.inc')
+    public function getWarningList($testFile='')
     {
         switch ($testFile) {
         case 'CommentedOutCodeUnitTest.inc':

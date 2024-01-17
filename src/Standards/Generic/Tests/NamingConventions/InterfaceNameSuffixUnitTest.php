@@ -10,7 +10,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\NamingConventions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class InterfaceNameSuffixUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the InterfaceNameSuffix sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\InterfaceNameSuffixSniff
+ */
+final class InterfaceNameSuffixUnitTest extends AbstractSniffUnitTest
 {
 
 

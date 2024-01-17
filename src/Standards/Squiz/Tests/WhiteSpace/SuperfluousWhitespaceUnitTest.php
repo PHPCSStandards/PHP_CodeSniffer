@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\WhiteSpace;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class SuperfluousWhitespaceUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the SuperfluousWhitespace sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SuperfluousWhitespaceSniff
+ */
+final class SuperfluousWhitespaceUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -25,7 +30,7 @@ class SuperfluousWhitespaceUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='SuperfluousWhitespaceUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'SuperfluousWhitespaceUnitTest.1.inc':

@@ -12,7 +12,12 @@ namespace PHP_CodeSniffer\Standards\Zend\Tests\Debug;
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 use PHP_CodeSniffer\Config;
 
-class CodeAnalyzerUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the CodeAnalyzer sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Zend\Sniffs\Debug\CodeAnalyzerSniff
+ */
+final class CodeAnalyzerUnitTest extends AbstractSniffUnitTest
 {
 
 

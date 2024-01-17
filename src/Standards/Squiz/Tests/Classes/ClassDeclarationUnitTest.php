@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Classes;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ClassDeclarationUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ClassDeclaration sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Classes\ClassDeclarationSniff
+ */
+final class ClassDeclarationUnitTest extends AbstractSniffUnitTest
 {
 
 

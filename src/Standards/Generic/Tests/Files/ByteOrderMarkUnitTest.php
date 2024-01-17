@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Files;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ByteOrderMarkUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ByteOrderMark sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\ByteOrderMarkSniff
+ */
+final class ByteOrderMarkUnitTest extends AbstractSniffUnitTest
 {
 
 

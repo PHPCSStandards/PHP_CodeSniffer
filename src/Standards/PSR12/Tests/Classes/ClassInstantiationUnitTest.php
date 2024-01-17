@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\PSR12\Tests\Classes;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ClassInstantiationUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ClassInstantiation sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Classes\ClassInstantiationSniff
+ */
+final class ClassInstantiationUnitTest extends AbstractSniffUnitTest
 {
 
 

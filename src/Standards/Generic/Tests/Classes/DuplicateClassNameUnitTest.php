@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Classes;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class DuplicateClassNameUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the DuplicateClassName sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Classes\DuplicateClassNameSniff
+ */
+final class DuplicateClassNameUnitTest extends AbstractSniffUnitTest
 {
 
 

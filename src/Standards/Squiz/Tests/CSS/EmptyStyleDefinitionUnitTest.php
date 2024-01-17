@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\CSS;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class EmptyStyleDefinitionUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the EmptyStyleDefinition sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\CSS\EmptyStyleDefinitionSniff
+ */
+final class EmptyStyleDefinitionUnitTest extends AbstractSniffUnitTest
 {
 
 

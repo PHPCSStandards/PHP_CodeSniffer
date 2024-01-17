@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\ControlStructures;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class InlineControlStructureUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the InlineControlStructure sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\ControlStructures\InlineControlStructureSniff
+ */
+final class InlineControlStructureUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -25,7 +30,7 @@ class InlineControlStructureUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='InlineControlStructureUnitTest.1.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'InlineControlStructureUnitTest.1.inc':

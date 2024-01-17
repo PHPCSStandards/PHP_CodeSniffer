@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Commenting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class VariableCommentUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the VariableComment sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting\VariableCommentSniff
+ */
+final class VariableCommentUnitTest extends AbstractSniffUnitTest
 {
 
 

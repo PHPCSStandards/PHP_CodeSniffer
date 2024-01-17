@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Formatting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class SpaceAfterNotUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the SpaceAfterNot sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff
+ */
+final class SpaceAfterNotUnitTest extends AbstractSniffUnitTest
 {
 
 

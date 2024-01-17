@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\ControlStructures;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ElseIfDeclarationUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ElseIfDeclaration sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\ElseIfDeclarationSniff
+ */
+final class ElseIfDeclarationUnitTest extends AbstractSniffUnitTest
 {
 
 

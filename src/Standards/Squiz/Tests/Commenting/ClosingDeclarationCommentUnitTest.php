@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Commenting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ClosingDeclarationCommentUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ClosingDeclarationComment sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting\ClosingDeclarationCommentSniff
+ */
+final class ClosingDeclarationCommentUnitTest extends AbstractSniffUnitTest
 {
 
 

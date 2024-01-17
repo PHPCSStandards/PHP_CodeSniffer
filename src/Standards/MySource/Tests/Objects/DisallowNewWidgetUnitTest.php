@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\MySource\Tests\Objects;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class DisallowNewWidgetUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the DisallowNewWidget sniff.
+ *
+ * @covers PHP_CodeSniffer\Standards\MySource\Sniffs\Objects\DisallowNewWidgetSniff
+ */
+final class DisallowNewWidgetUnitTest extends AbstractSniffUnitTest
 {
 
 

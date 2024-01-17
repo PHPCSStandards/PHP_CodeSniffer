@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Objects;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class DisallowObjectStringIndexUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the DisallowObjectStringIndex sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Objects\DisallowObjectStringIndexSniff
+ */
+final class DisallowObjectStringIndexUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -25,7 +30,7 @@ class DisallowObjectStringIndexUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='DisallowObjectStringIndexUnitTest.js')
+    public function getErrorList($testFile='')
     {
         if ($testFile !== 'DisallowObjectStringIndexUnitTest.js') {
             return [];

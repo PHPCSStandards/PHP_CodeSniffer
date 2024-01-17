@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\WhiteSpace;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ObjectOperatorSpacingUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ObjectOperatorSpacing sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ObjectOperatorSpacingSniff
+ */
+final class ObjectOperatorSpacingUnitTest extends AbstractSniffUnitTest
 {
 
 

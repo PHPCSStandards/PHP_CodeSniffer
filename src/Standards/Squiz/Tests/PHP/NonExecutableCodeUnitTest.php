@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class NonExecutableCodeUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the NonExecutableCode sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\NonExecutableCodeSniff
+ */
+final class NonExecutableCodeUnitTest extends AbstractSniffUnitTest
 {
 
 

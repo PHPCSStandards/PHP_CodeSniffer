@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\PEAR\Tests\Functions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ValidDefaultValueUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ValidDefaultValue sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PEAR\Sniffs\Functions\ValidDefaultValueSniff
+ */
+final class ValidDefaultValueUnitTest extends AbstractSniffUnitTest
 {
 
 

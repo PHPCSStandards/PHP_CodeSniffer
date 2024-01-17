@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\WhiteSpace;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ScopeIndentUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ScopeIndent sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\ScopeIndentSniff
+ */
+final class ScopeIndentUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -45,7 +50,7 @@ class ScopeIndentUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='ScopeIndentUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         if ($testFile === 'ScopeIndentUnitTest.1.js') {
             return [

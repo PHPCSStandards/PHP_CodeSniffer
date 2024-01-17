@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\VersionControl;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class GitMergeConflictUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the GitMergeConflict sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\VersionControl\GitMergeConflictSniff
+ */
+final class GitMergeConflictUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -25,7 +30,7 @@ class GitMergeConflictUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='GitMergeConflictUnitTest.1.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'GitMergeConflictUnitTest.1.inc':

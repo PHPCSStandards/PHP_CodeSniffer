@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Commenting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class FileCommentUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the FileComment sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting\FileCommentSniff
+ */
+final class FileCommentUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -25,7 +30,7 @@ class FileCommentUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='FileCommentUnitTest.inc')
+    public function getErrorList($testFile='')
     {
         switch ($testFile) {
         case 'FileCommentUnitTest.1.inc':

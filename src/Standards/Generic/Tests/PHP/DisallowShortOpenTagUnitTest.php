@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class DisallowShortOpenTagUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the DisallowShortOpenTag sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DisallowShortOpenTagSniff
+ */
+final class DisallowShortOpenTagUnitTest extends AbstractSniffUnitTest
 {
 
 

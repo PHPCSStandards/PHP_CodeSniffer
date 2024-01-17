@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\WhiteSpace;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class LogicalOperatorSpacingUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the LogicalOperatorSpacing sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LogicalOperatorSpacingSniff
+ */
+final class LogicalOperatorSpacingUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -21,11 +26,9 @@ class LogicalOperatorSpacingUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
-     * @param string $testFile The name of the file being tested.
-     *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='LogicalOperatorSpacingUnitTest.inc')
+    public function getErrorList()
     {
         return [
             4  => 2,

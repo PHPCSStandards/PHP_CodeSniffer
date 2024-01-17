@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\MySource\Tests\Objects;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class CreateWidgetTypeCallbackUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the CreateWidgetTypeCallback sniff.
+ *
+ * @covers PHP_CodeSniffer\Standards\MySource\Sniffs\Objects\CreateWidgetTypeCallbackSniff
+ */
+final class CreateWidgetTypeCallbackUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -21,11 +26,9 @@ class CreateWidgetTypeCallbackUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
-     * @param string $testFile The name of the file being tested.
-     *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='CreateWidgetTypeCallbackUnitTest.js')
+    public function getErrorList()
     {
         return [
             18  => 1,

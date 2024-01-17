@@ -12,7 +12,12 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class SyntaxUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the Syntax sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\SyntaxSniff
+ */
+final class SyntaxUnitTest extends AbstractSniffUnitTest
 {
 
 

@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\MySource\Tests\Strings;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class JoinStringsUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the JoinStrings sniff.
+ *
+ * @covers PHP_CodeSniffer\Standards\MySource\Sniffs\Strings\JoinStringsSniff
+ */
+final class JoinStringsUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -25,7 +30,7 @@ class JoinStringsUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='JoinStringsUnitTest.js')
+    public function getErrorList($testFile='')
     {
         if ($testFile !== 'JoinStringsUnitTest.js') {
             return [];

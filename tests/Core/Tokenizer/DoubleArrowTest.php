@@ -13,7 +13,7 @@ namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 
-class DoubleArrowTest extends AbstractMethodUnitTest
+final class DoubleArrowTest extends AbstractMethodUnitTest
 {
 
 
@@ -47,7 +47,7 @@ class DoubleArrowTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataDoubleArrow()
+    public static function dataDoubleArrow()
     {
         return [
             'simple_long_array'                          => ['/* testLongArrayArrowSimple */'],
@@ -132,7 +132,7 @@ class DoubleArrowTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataMatchArrow()
+    public static function dataMatchArrow()
     {
         return [
             'single_case'                             => ['/* testMatchArrowSimpleSingleCase */'],
@@ -219,7 +219,7 @@ class DoubleArrowTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataFnArrow()
+    public static function dataFnArrow()
     {
         return [
             'simple_fn'                             => ['/* testFnArrowSimple */'],

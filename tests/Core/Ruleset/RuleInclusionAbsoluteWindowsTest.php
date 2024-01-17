@@ -9,11 +9,16 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Ruleset;
 
-use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
+use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHPUnit\Framework\TestCase;
 
-class RuleInclusionAbsoluteWindowsTest extends TestCase
+/**
+ * Tests for the \PHP_CodeSniffer\Ruleset class using a Windows-style absolute path to include a sniff.
+ *
+ * @covers \PHP_CodeSniffer\Ruleset
+ */
+final class RuleInclusionAbsoluteWindowsTest extends TestCase
 {
 
     /**
@@ -65,7 +70,7 @@ class RuleInclusionAbsoluteWindowsTest extends TestCase
         }
 
         // Initialize the config and ruleset objects for the test.
-        $config        = new Config(["--standard={$this->standard}"]);
+        $config        = new ConfigDouble(["--standard={$this->standard}"]);
         $this->ruleset = new Ruleset($config);
 
     }//end initializeConfigAndRuleset()

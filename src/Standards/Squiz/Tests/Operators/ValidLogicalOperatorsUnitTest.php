@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Operators;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ValidLogicalOperatorsUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ValidLogicalOperators sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Operators\ValidLogicalOperatorsSniff
+ */
+final class ValidLogicalOperatorsUnitTest extends AbstractSniffUnitTest
 {
 
 

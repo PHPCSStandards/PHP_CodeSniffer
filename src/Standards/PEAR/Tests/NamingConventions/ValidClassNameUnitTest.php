@@ -11,7 +11,12 @@ namespace PHP_CodeSniffer\Standards\PEAR\Tests\NamingConventions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ValidClassNameUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ValidClassName sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PEAR\Sniffs\NamingConventions\ValidClassNameSniff
+ */
+final class ValidClassNameUnitTest extends AbstractSniffUnitTest
 {
 
 

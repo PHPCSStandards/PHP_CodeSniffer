@@ -11,7 +11,7 @@ namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 
-class ShortArrayTest extends AbstractMethodUnitTest
+final class ShortArrayTest extends AbstractMethodUnitTest
 {
 
 
@@ -49,7 +49,7 @@ class ShortArrayTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataSquareBrackets()
+    public static function dataSquareBrackets()
     {
         return [
             'array access 1'                                => ['/* testArrayAccess1 */'],
@@ -114,7 +114,7 @@ class ShortArrayTest extends AbstractMethodUnitTest
      *
      * @return array
      */
-    public function dataShortArrays()
+    public static function dataShortArrays()
     {
         return [
             'short array empty'                              => ['/* testShortArrayDeclarationEmpty */'],
