@@ -92,7 +92,7 @@ while (
         </code>
     </code_comparison>
     <code_comparison>
-        <code title="Valid: The closing parenthesis of a multi-line control structure is indented to the same level as start of the control structure.">
+        <code title="Valid: The closing parenthesis of a multi-line control structure condition block is indented to the same level as start of the control structure.">
         <![CDATA[
 while (
     $expr1
