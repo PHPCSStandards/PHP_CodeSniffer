@@ -565,7 +565,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Added support for PHP 8.0 dereferencing of text strings with interpolated variables
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Added support for PHP 8.0 match expressions
-    - Match expressions are now tokenised with parenthesis and scope openers and closers
+    - Match expressions are now tokenized with parenthesis and scope openers and closers
         - Sniffs can listen for the T_MATCH token to process match expressions
         - Note that the case and default statements inside match expressions do not have scopes set
     - A new T_MATCH_ARROW token is available to represent the arrows in match expressions
@@ -640,7 +640,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Vincent Langlet][@VincentLanglet] for the patch
 - PSR2.ControlStructures.SwitchDeclaration now supports nested switch statements where every branch terminates
     - Previously, if a CASE only contained a SWITCH and no direct terminating statement, a fall-through error was displayed
-    - Now, the error is surpressed if every branch of the SWITCH has a terminating statement
+    - Now, the error is suppressed if every branch of the SWITCH has a terminating statement
     - Thanks to [Vincent Langlet][@VincentLanglet] for the patch
 - The PSR2.Methods.FunctionCallSignature.SpaceBeforeCloseBracket error message is now reported on the closing parenthesis token
     - Previously, the error was being reported on the function keyword, leading to confusing line numbers in the error report
