@@ -47,6 +47,7 @@ final class IncrementDecrementSpacingUnitTest extends AbstractSniffUnitTest
             31 => 1,
             34 => 1,
             37 => 1,
+            40 => 1,
         ];
 
     }//end getErrorList()
