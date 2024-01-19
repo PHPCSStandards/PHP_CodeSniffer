@@ -440,34 +440,45 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Thiemo Kreuz][@thiemowmde] for the patch
 
 ### Fixed
-- Fixed bug #3388 : phpcs does not work when run from WSL drives
+- Fixed bug [#3388] : phpcs does not work when run from WSL drives
     - Thanks to [Juliette Reinders Folmer][@jrfnl] and [Graham Wharton][@gwharton] for the patch
-- Fixed bug #3422 : Squiz.WhiteSpace.ScopeClosingBrace fixer removes HTML content when fixing closing brace alignment
+- Fixed bug [#3422] : Squiz.WhiteSpace.ScopeClosingBrace fixer removes HTML content when fixing closing brace alignment
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3437 : PSR12 does not forbid blank lines at the start of the class body
+- Fixed bug [#3437] : PSR12 does not forbid blank lines at the start of the class body
     - Added new PSR12.Classes.OpeningBraceSpace sniff to enforce this
-- Fixed bug #3440 : Squiz.WhiteSpace.MemberVarSpacing false positives when attributes used without docblock
+- Fixed bug [#3440] : Squiz.WhiteSpace.MemberVarSpacing false positives when attributes used without docblock
     - Thanks to [Vadim Borodavko][@javer] for the patch
-- Fixed bug #3448 : PHP 8.1 deprecation notice while generating running time value
+- Fixed bug [#3448] : PHP 8.1 deprecation notice while generating running time value
     - Thanks to [Juliette Reinders Folmer][@jrfnl] and Andy Postnikov for the patch
-- Fixed bug #3456 : PSR12.Classes.ClassInstantiation.MissingParentheses false positive using attributes on anonymous class
+- Fixed bug [#3456] : PSR12.Classes.ClassInstantiation.MissingParentheses false positive using attributes on anonymous class
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3460 : Generic.Formatting.MultipleStatementAlignment false positive on closure with parameters
+- Fixed bug [#3460] : Generic.Formatting.MultipleStatementAlignment false positive on closure with parameters
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3468 : do/while loops are double-counted in Generic.Metrics.CyclomaticComplexity
+- Fixed bug [#3468] : do/while loops are double-counted in Generic.Metrics.CyclomaticComplexity
     - Thanks to [Mark Baker][@MarkBaker] for the patch
-- Fixed bug #3469 : Ternary Operator and Null Coalescing Operator are not counted in Generic.Metrics.CyclomaticComplexity
+- Fixed bug [#3469] : Ternary Operator and Null Coalescing Operator are not counted in Generic.Metrics.CyclomaticComplexity
     - Thanks to [Mark Baker][@MarkBaker] for the patch
-- Fixed bug #3472 : PHP 8 match() expression is not counted in Generic.Metrics.CyclomaticComplexity
+- Fixed bug [#3472] : PHP 8 match() expression is not counted in Generic.Metrics.CyclomaticComplexity
     - Thanks to [Mark Baker][@MarkBaker] for the patch
+
+[#3388]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3388
+[#3422]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3422
+[#3437]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3437
+[#3440]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3440
+[#3448]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3448
+[#3456]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3456
+[#3460]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3460
+[#3468]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3468
+[#3469]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3469
+[#3472]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3472
 
 ## [3.6.1] - 2021-10-11
 ### Changed
 - PHPCS annotations can now be specified using hash-style comments
     - Previously, only slash-style and block-style comments could be used to do things like disable errors
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- The new PHP 8.1 tokenisation for ampersands has been reverted to use the existing PHP_CodeSniffer method
-    - The PHP 8.1 tokens T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG and T_AMPERSAND_NOT_FOLLOWED_BY_VAR_OR_VARARG are unsued
+- The new PHP 8.1 tokenization for ampersands has been reverted to use the existing PHP_CodeSniffer method
+    - The PHP 8.1 tokens T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG and T_AMPERSAND_NOT_FOLLOWED_BY_VAR_OR_VARARG are unused
     - Ampersands continue to be tokenized as T_BITWISE_AND for all PHP versions
     - Thanks to [Juliette Reinders Folmer][@jrfnl] and [Anna Filina][@afilina] for the patch
 - File::getMethodParameters() no longer incorrectly returns argument attributes in the type hint array index
@@ -499,44 +510,67 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Squiz.Commenting.VariableComment
     - Squiz.WhiteSpace.MemberVarSpacing
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3294 : Bug in attribute tokenization when content contains PHP end token or attribute closer on new line
+- Fixed bug [#3294] : Bug in attribute tokenization when content contains PHP end token or attribute closer on new line
     - Thanks to [Alessandro Chitolina][@alekitto] for the patch
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the tests
-- Fixed bug #3296 : PSR2.ControlStructures.SwitchDeclaration takes phpcs:ignore as content of case body
-- Fixed bug #3297 : PSR2.ControlStructures.SwitchDeclaration.TerminatingComment does not handle try/finally blocks
+- Fixed bug [#3296] : PSR2.ControlStructures.SwitchDeclaration takes phpcs:ignore as content of case body
+- Fixed bug [#3297] : PSR2.ControlStructures.SwitchDeclaration.TerminatingComment does not handle try/finally blocks
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3302 : PHP 8.0 | Tokenizer/PHP: bugfix for union types using namespace operator
+- Fixed bug [#3302] : PHP 8.0 | Tokenizer/PHP: bugfix for union types using namespace operator
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3303 : findStartOfStatement() doesn't work with T_OPEN_TAG_WITH_ECHO
-- Fixed bug #3316 : Arrow function not tokenized correctly when using null in union type
-- Fixed bug #3317 : Problem with how phpcs handles ignored files when running in parallel
+- Fixed bug [#3303] : findStartOfStatement() doesn't work with T_OPEN_TAG_WITH_ECHO
+- Fixed bug [#3316] : Arrow function not tokenized correctly when using null in union type
+- Fixed bug [#3317] : Problem with how phpcs handles ignored files when running in parallel
     - Thanks to [Emil Andersson][@emil-nasso] for the patch
-- Fixed bug #3324 : PHPCS hangs processing some nested arrow functions inside a function call
-- Fixed bug #3326 : Generic.Formatting.MultipleStatementAlignment error with const DEFAULT
+- Fixed bug [#3324] : PHPCS hangs processing some nested arrow functions inside a function call
+- Fixed bug [#3326] : Generic.Formatting.MultipleStatementAlignment error with const DEFAULT
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3333 : Squiz.Objects.ObjectInstantiation: null coalesce operators are not recognized as assignment
+- Fixed bug [#3333] : Squiz.Objects.ObjectInstantiation: null coalesce operators are not recognized as assignment
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3340 : Ensure interface and trait names are always tokenized as T_STRING
+- Fixed bug [#3340] : Ensure interface and trait names are always tokenized as T_STRING
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3342 : PSR12/Squiz/PEAR standards all error on promoted properties with docblocks
+- Fixed bug [#3342] : PSR12/Squiz/PEAR standards all error on promoted properties with docblocks
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3345 : IF statement with no braces and double catch turned into syntax error by auto-fixer
+- Fixed bug [#3345] : IF statement with no braces and double catch turned into syntax error by auto-fixer
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3352 : PSR2.ControlStructures.SwitchDeclaration can remove comments on the same line as the case statement while   fixing
+- Fixed bug [#3352] : PSR2.ControlStructures.SwitchDeclaration can remove comments on the same line as the case statement while fixing
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3357 : Generic.Functions.OpeningFunctionBraceBsdAllman removes return type when additional lines are present
+- Fixed bug [#3357] : Generic.Functions.OpeningFunctionBraceBsdAllman removes return type when additional lines are present
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3362 : Generic.WhiteSpace.ScopeIndent false positive for arrow functions inside arrays
-- Fixed bug #3384 : Squiz.Commenting.FileComment.SpacingAfterComment false positive on empty file
-- Fixed bug #3394 : Fix PHP 8.1 auto_detect_line_endings deprecation notice
-- Fixed bug #3400 : PHP 8.1: prevent deprecation notices about missing return types
+- Fixed bug [#3362] : Generic.WhiteSpace.ScopeIndent false positive for arrow functions inside arrays
+- Fixed bug [#3384] : Squiz.Commenting.FileComment.SpacingAfterComment false positive on empty file
+- Fixed bug [#3394] : Fix PHP 8.1 auto_detect_line_endings deprecation notice
+- Fixed bug [#3400] : PHP 8.1: prevent deprecation notices about missing return types
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3424 : PHPCS fails when using PHP 8 Constructor property promotion with attributes
+- Fixed bug [#3424] : PHPCS fails when using PHP 8 Constructor property promotion with attributes
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3425 : PHP 8.1 | Runner::processChildProcs(): fix passing null to non-nullable bug
+- Fixed bug [#3425] : PHP 8.1 | Runner::processChildProcs(): fix passing null to non-nullable bug
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3445 : Nullable parameter after attribute incorrectly tokenized as ternary operator
+- Fixed bug [#3445] : Nullable parameter after attribute incorrectly tokenized as ternary operator
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+
+[#3294]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3294
+[#3296]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3296
+[#3297]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3297
+[#3302]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3302
+[#3303]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3303
+[#3316]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3316
+[#3317]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3317
+[#3324]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3324
+[#3326]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3326
+[#3333]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3333
+[#3340]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3340
+[#3342]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3342
+[#3345]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3345
+[#3352]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3352
+[#3357]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3357
+[#3362]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3362
+[#3384]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3384
+[#3394]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3394
+[#3400]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3400
+[#3424]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3424
+[#3425]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3425
+[#3445]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3445
 
 ## [3.6.0] - 2021-04-09
 ### Added
