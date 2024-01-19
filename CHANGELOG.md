@@ -449,7 +449,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#3440] : Squiz.WhiteSpace.MemberVarSpacing false positives when attributes used without docblock
     - Thanks to [Vadim Borodavko][@javer] for the patch
 - Fixed bug [#3448] : PHP 8.1 deprecation notice while generating running time value
-    - Thanks to [Juliette Reinders Folmer][@jrfnl] and Andy Postnikov for the patch
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] and [Andy Postnikov][@andypost] for the patch
 - Fixed bug [#3456] : PSR12.Classes.ClassInstantiation.MissingParentheses false positive using attributes on anonymous class
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Fixed bug [#3460] : Generic.Formatting.MultipleStatementAlignment false positive on closure with parameters
@@ -649,9 +649,9 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Spaces are now correctly escaped in the paths to external on Windows
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Generic.CodeAnalysis.UnusedFunctionParameter can now be configured to ignore variable usage for specific type hints
-    -- This allows you to suppress warnings for some variables that are not required, but leave warnings for others
-    -- Set the ignoreTypeHints array property to a list of type hints to ignore
-    -- Thanks to [Petr Bugyík][@o5] for the patch
+    - This allows you to suppress warnings for some variables that are not required, but leave warnings for others
+    - Set the ignoreTypeHints array property to a list of type hints to ignore
+    - Thanks to [Petr Bugyík][@o5] for the patch
 - Generic.Formatting.MultipleStatementAlignment can now align statements at the start of the assignment token
     - Previously, the sniff enforced that the values were aligned, even if this meant the assignment tokens were not
     - Now, the sniff can enforce that the assignment tokens are aligned, even if this means the values are not
@@ -5611,6 +5611,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@andrei-propertyguru]: https://github.com/andrei-propertyguru
 [@AndrewDawes]:         https://github.com/AndrewDawes
 [@andygrunwald]:        https://github.com/andygrunwald
+[@andypost]:            https://github.com/andypost
 [@annechko]:            https://github.com/annechko
 [@anomiex]:             https://github.com/anomiex
 [@arnested]:            https://github.com/arnested
