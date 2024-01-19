@@ -366,6 +366,9 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                         $phpcsFile->addError($error, $tag, 'MissingParamComment');
                         $commentLines[] = ['comment' => ''];
                     }//end if
+                } else if ($tokens[($tag + 2)]['content'][0] === '$') {
+                    $error = 'Missing parameter type';
+                    $phpcsFile->addError($error, $tag, 'MissingParamType');
                 } else {
                     $error = 'Missing parameter name';
                     $phpcsFile->addError($error, $tag, 'MissingParamName');
@@ -460,7 +463,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                     }
                 }
 
-                if ($suggestedTypeHint !== '' && isset($realParams[$pos]) === true) {
+                if ($suggestedTypeHint !== '' && isset($realParams[$pos]) === true && $param['var'] !== '') {
                     $typeHint = $realParams[$pos]['type_hint'];
 
                     // Remove namespace prefixes when comparing.
