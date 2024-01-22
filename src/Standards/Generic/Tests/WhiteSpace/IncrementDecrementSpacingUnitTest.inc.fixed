@@ -36,3 +36,6 @@ $obj->prop['key']++;
 --ClassName::$prop;
 
 getObject()->count++;
+getObject()->count++;
+++getObject()->count;
+++getObject()->count;

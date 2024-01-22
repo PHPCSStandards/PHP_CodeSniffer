@@ -54,6 +54,7 @@ final class IncrementDecrementSpacingUnitTest extends AbstractSniffUnitTest
             $errors[34] = 1;
             $errors[37] = 1;
             $errors[40] = 1;
+            $errors[42] = 1;
 
             return $errors;
 
