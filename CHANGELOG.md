@@ -701,7 +701,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Added support for PHP 8.0 dereferencing of text strings with interpolated variables
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Added support for PHP 8.0 match expressions
-    - Match expressions are now tokenised with parenthesis and scope openers and closers
+    - Match expressions are now tokenized with parenthesis and scope openers and closers
         - Sniffs can listen for the T_MATCH token to process match expressions
         - Note that the case and default statements inside match expressions do not have scopes set
     - A new T_MATCH_ARROW token is available to represent the arrows in match expressions
@@ -776,7 +776,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Vincent Langlet][@VincentLanglet] for the patch
 - PSR2.ControlStructures.SwitchDeclaration now supports nested switch statements where every branch terminates
     - Previously, if a CASE only contained a SWITCH and no direct terminating statement, a fall-through error was displayed
-    - Now, the error is surpressed if every branch of the SWITCH has a terminating statement
+    - Now, the error is suppressed if every branch of the SWITCH has a terminating statement
     - Thanks to [Vincent Langlet][@VincentLanglet] for the patch
 - The PSR2.Methods.FunctionCallSignature.SpaceBeforeCloseBracket error message is now reported on the closing parenthesis token
     - Previously, the error was being reported on the function keyword, leading to confusing line numbers in the error report
@@ -800,33 +800,54 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Sniff no longer errors for assignments on first line of closure
     - Sniff no longer errors for assignments after a goto label
     - Thanks to [Jaroslav Hanslík][@kukulich] for the patch
-- Fixed bug #2913 : Generic.WhiteSpace.ScopeIndent false positive when opening and closing tag on same line inside conditional
-- Fixed bug #2992 : Enabling caching using a ruleset produces invalid cache files when using --sniffs and --exclude CLI args
-- Fixed bug #3003 : Squiz.Formatting.OperatorBracket autofix incorrect when assignment used with null coalescing operator
-- Fixed bug #3145 : Autoloading of sniff fails when multiple classes declared in same file
-- Fixed bug #3157 : PSR2.ControlStructures.SwitchDeclaration.BreakIndent false positive when case keyword is not indented
-- Fixed bug #3163 : Undefined index error with pre-commit hook using husky on PHP 7.4
+- Fixed bug [#2913] : Generic.WhiteSpace.ScopeIndent false positive when opening and closing tag on same line inside conditional
+- Fixed bug [#2992] : Enabling caching using a ruleset produces invalid cache files when using --sniffs and --exclude CLI args
+- Fixed bug [#3003] : Squiz.Formatting.OperatorBracket autofix incorrect when assignment used with null coalescing operator
+- Fixed bug [#3145] : Autoloading of sniff fails when multiple classes declared in same file
+- Fixed bug [#3157] : PSR2.ControlStructures.SwitchDeclaration.BreakIndent false positive when case keyword is not indented
+- Fixed bug [#3163] : Undefined index error with pre-commit hook using husky on PHP 7.4
     - Thanks to [Ismo Vuorinen][@ivuorinen] for the patch
-- Fixed bug #3165 : Squiz.PHP.DisallowComparisonAssignment false positive when comparison inside closure
-- Fixed bug #3167 : Generic.WhiteSpace.ScopeIndent false positive when using PHP 8.0 constructor property promotion
-- Fixed bug #3170 : Squiz.WhiteSpace.OperatorSpacing false positive when using negation with string concat
+- Fixed bug [#3165] : Squiz.PHP.DisallowComparisonAssignment false positive when comparison inside closure
+- Fixed bug [#3167] : Generic.WhiteSpace.ScopeIndent false positive when using PHP 8.0 constructor property promotion
+- Fixed bug [#3170] : Squiz.WhiteSpace.OperatorSpacing false positive when using negation with string concat
     - This also fixes the same issue in the PSR12.Operators.OperatorSpacing sniff
-- Fixed bug #3177 : Incorrect tokenization of GOTO statements in mixed PHP/HTML files
+- Fixed bug [#3177] : Incorrect tokenization of GOTO statements in mixed PHP/HTML files
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3184 : PSR2.Namespace.NamespaceDeclaration false positive on namespace operator
+- Fixed bug [#3184] : PSR2.Namespace.NamespaceDeclaration false positive on namespace operator
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3188 : Squiz.WhiteSpace.ScopeKeywordSpacing false positive for static return type
+- Fixed bug [#3188] : Squiz.WhiteSpace.ScopeKeywordSpacing false positive for static return type
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3192 : findStartOfStatement doesn't work correctly inside switch
+- Fixed bug [#3192] : findStartOfStatement doesn't work correctly inside switch
     - Thanks to [Vincent Langlet][@VincentLanglet] for the patch
-- Fixed bug #3195 : Generic.WhiteSpace.ScopeIndent confusing message when combination of tabs and spaces found
-- Fixed bug #3197 : Squiz.NamingConventions.ValidVariableName does not use correct error code for all member vars
-- Fixed bug #3219 : Generic.Formatting.MultipleStatementAlignment false positive for empty anonymous classes and closures
-- Fixed bug #3258 : Squiz.Formatting.OperatorBracket duplicate error messages for unary minus
+- Fixed bug [#3195] : Generic.WhiteSpace.ScopeIndent confusing message when combination of tabs and spaces found
+- Fixed bug [#3197] : Squiz.NamingConventions.ValidVariableName does not use correct error code for all member vars
+- Fixed bug [#3219] : Generic.Formatting.MultipleStatementAlignment false positive for empty anonymous classes and closures
+- Fixed bug [#3258] : Squiz.Formatting.OperatorBracket duplicate error messages for unary minus
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3273 : Squiz.Functions.FunctionDeclarationArgumentSpacing reports line break as 0 spaces between parenthesis
-- Fixed bug #3277 : Nullable static return typehint causes whitespace error
-- Fixed bug #3284 : Unused parameter false positive when using array index in arrow function
+- Fixed bug [#3273] : Squiz.Functions.FunctionDeclarationArgumentSpacing reports line break as 0 spaces between parenthesis
+- Fixed bug [#3277] : Nullable static return typehint causes whitespace error
+- Fixed bug [#3284] : Unused parameter false positive when using array index in arrow function
+
+[#2913]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2913
+[#2992]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2992
+[#3003]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3003
+[#3145]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3145
+[#3157]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3157
+[#3163]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3163
+[#3165]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3165
+[#3167]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3167
+[#3170]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3170
+[#3177]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3177
+[#3184]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3184
+[#3188]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3188
+[#3192]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3192
+[#3195]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3195
+[#3197]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3197
+[#3219]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3219
+[#3258]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3258
+[#3273]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3273
+[#3277]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3277
+[#3284]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3284
 
 ## [3.5.8] - 2020-10-23
 ### Removed
