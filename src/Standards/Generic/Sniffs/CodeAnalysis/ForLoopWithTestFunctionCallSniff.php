@@ -61,7 +61,7 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
         $token  = $tokens[$stackPtr];
 
         // Skip invalid statement.
-        if (isset($token['parenthesis_opener']) === false) {
+        if (isset($token['parenthesis_opener'], $token['parenthesis_closer']) === false) {
             return;
         }
 
@@ -84,7 +84,7 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
                 continue;
             }
 
-            // Find next non empty token, if it is a open curly brace we have a
+            // Find next non empty token, if it is a open parenthesis we have a
             // function call.
             $index = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
 
