@@ -135,7 +135,7 @@ class IncrementDecrementSpacingSniff implements Sniff
                 $fixable = false;
                 $spaces  = 'comment';
             } else {
-                if ($tokens[$stackPtr]['line'] !== $tokens[$nextNonEmpty]['line']) {
+                if ($tokens[$stackPtr]['line'] !== $tokens[$prevNonEmpty]['line']) {
                     $spaces = 'newline';
                 } else {
                     $spaces = $tokens[($stackPtr - 1)]['length'];
