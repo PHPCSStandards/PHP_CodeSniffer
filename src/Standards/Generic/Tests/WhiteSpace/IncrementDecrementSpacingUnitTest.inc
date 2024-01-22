@@ -38,3 +38,6 @@ $obj->prop['key'] ++;
 
 getObject()->count
 ++;
+getObject()->count++;
+++ getObject()->count;
+++getObject()->count;
