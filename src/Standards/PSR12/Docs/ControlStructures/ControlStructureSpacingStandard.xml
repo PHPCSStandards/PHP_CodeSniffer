@@ -1,7 +1,7 @@
 <documentation title="Control Structure Spacing">
     <standard>
     <![CDATA[
-    The control structures must have one space after the control structure keyword, no spaces after the opening parenthesis and before the closing parenthesis, and one space between the closing parenthesis and the opening brace.
+    Single line control structures must have one space after the control structure keyword, no spaces after the condition opening parenthesis and before the closing parenthesis, and one space between the closing parenthesis and the opening brace.
     ]]>
     </standard>
     <code_comparison>
