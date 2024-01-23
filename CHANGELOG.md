@@ -857,9 +857,9 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ## [3.5.7] - 2020-10-23
 ### Added
 - The PHP 8.0 T_NULLSAFE_OBJECT_OPERATOR token has been made available for older versions
-    - Existing sniffs that check for T_OBJECT_OPERATOR have been modified to apply the same rules for the nullsafe object   operator
+    - Existing sniffs that check for T_OBJECT_OPERATOR have been modified to apply the same rules for the nullsafe object operator
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- The new method of PHP 8.0 tokenizing for namespaced names has been revert to thr pre 8.0 method
+- The new method of PHP 8.0 tokenizing for namespaced names has been reverted to the pre 8.0 method
     - This maintains backwards compatible for existing sniffs on PHP 8.0
     - This change will be removed in PHPCS 4.0 as the PHP 8.0 tokenizing method will be backported for pre 8.0 versions
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
@@ -880,37 +880,57 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ### Fixed
 - Fixed Squiz.Formatting.OperatorBracket false positive when exiting with a negative number
 - Fixed Squiz.PHP.DisallowComparisonAssignment false positive for methods called on an object
-- Fixed bug #2882 : Generic.Arrays.ArrayIndent can request close brace indent to be less than the statement indent level
-- Fixed bug #2883 : Generic.WhiteSpace.ScopeIndent.Incorrect issue after NOWDOC
-- Fixed bug #2975 : Undefined offset in PSR12.Functions.ReturnTypeDeclaration when checking function return type inside ternary
-- Fixed bug #2988 : Undefined offset in Squiz.Strings.ConcatenationSpacing during live coding
+- Fixed bug [#2882] : Generic.Arrays.ArrayIndent can request close brace indent to be less than the statement indent level
+- Fixed bug [#2883] : Generic.WhiteSpace.ScopeIndent.Incorrect issue after NOWDOC
+- Fixed bug [#2975] : Undefined offset in PSR12.Functions.ReturnTypeDeclaration when checking function return type inside ternary
+- Fixed bug [#2988] : Undefined offset in Squiz.Strings.ConcatenationSpacing during live coding
     - Thanks to [Thiemo Kreuz][@thiemowmde] for the patch
-- Fixed bug #2989 : Incorrect auto-fixing in Generic.ControlStructures.InlineControlStructure during live coding
+- Fixed bug [#2989] : Incorrect auto-fixing in Generic.ControlStructures.InlineControlStructure during live coding
     - Thanks to [Thiemo Kreuz][@thiemowmde] for the patch
-- Fixed bug #3007 : Directory exclude pattern improperly excludes directories with names that start the same
+- Fixed bug [#3007] : Directory exclude pattern improperly excludes directories with names that start the same
     - Thanks to [Steve Talbot][@SteveTalbot] for the patch
-- Fixed bug #3043 : Squiz.WhiteSpace.OperatorSpacing false positive for negation in arrow function
+- Fixed bug [#3043] : Squiz.WhiteSpace.OperatorSpacing false positive for negation in arrow function
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3049 : Incorrect error with arrow function and parameter passed as reference
+- Fixed bug [#3049] : Incorrect error with arrow function and parameter passed as reference
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3053 : PSR2 incorrect fix when multiple use statements on same line do not have whitespace between them
-- Fixed bug #3058 : Progress gets unaligned when 100% happens at the end of the available dots
-- Fixed bug #3059 : Squiz.Arrays.ArrayDeclaration false positive when using type casting
+- Fixed bug [#3053] : PSR2 incorrect fix when multiple use statements on same line do not have whitespace between them
+- Fixed bug [#3058] : Progress gets unaligned when 100% happens at the end of the available dots
+- Fixed bug [#3059] : Squiz.Arrays.ArrayDeclaration false positive when using type casting
     - Thanks to [Sergei Morozov][@morozov] for the patch
-- Fixed bug #3060 : Squiz.Arrays.ArrayDeclaration false positive for static functions
+- Fixed bug [#3060] : Squiz.Arrays.ArrayDeclaration false positive for static functions
     - Thanks to [Sergei Morozov][@morozov] for the patch
-- Fixed bug #3065 : Should not fix Squiz.Arrays.ArrayDeclaration.SpaceBeforeComma if comment between element and comma
+- Fixed bug [#3065] : Should not fix Squiz.Arrays.ArrayDeclaration.SpaceBeforeComma if comment between element and comma
     - Thanks to [Sergei Morozov][@morozov] for the patch
-- Fixed bug #3066 : No support for namespace operator used in type declarations
+- Fixed bug [#3066] : No support for namespace operator used in type declarations
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3075 : PSR12.ControlStructures.BooleanOperatorPlacement false positive when operator is the only content on line
-- Fixed bug #3099 : Squiz.WhiteSpace.OperatorSpacing false positive when exiting with negative number
+- Fixed bug [#3075] : PSR12.ControlStructures.BooleanOperatorPlacement false positive when operator is the only content on line
+- Fixed bug [#3099] : Squiz.WhiteSpace.OperatorSpacing false positive when exiting with negative number
     - Thanks to [Sergei Morozov][@morozov] for the patch
-- Fixed bug #3102 : PSR12.Squiz.OperatorSpacing false positive for default values of arrow functions
+- Fixed bug [#3102] : PSR12.Squiz.OperatorSpacing false positive for default values of arrow functions
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #3124 : PSR-12 not reporting error for empty lines with only whitespace
-- Fixed bug #3135 : Ignore annotations are broken on PHP 8.0
+- Fixed bug [#3124] : PSR-12 not reporting error for empty lines with only whitespace
+- Fixed bug [#3135] : Ignore annotations are broken on PHP 8.0
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+
+[#2882]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2882
+[#2883]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2883
+[#2975]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2975
+[#2988]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2988
+[#2989]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2989
+[#3007]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3007
+[#3043]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3043
+[#3049]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3049
+[#3053]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3053
+[#3058]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3058
+[#3059]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3059
+[#3060]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3060
+[#3065]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3065
+[#3066]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3066
+[#3075]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3075
+[#3099]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3099
+[#3102]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3102
+[#3124]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3124
+[#3135]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3135
 
 ## [3.5.6] - 2020-08-10
 ### Added
@@ -935,18 +955,27 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Michał Bundyra][@michalbundyra] for the patch
 
 ### Fixed
-- Fixed bug #2877 : PEAR.Functions.FunctionCallSignature false positive for array of functions
+- Fixed bug [#2877] : PEAR.Functions.FunctionCallSignature false positive for array of functions
     - Thanks to [Vincent Langlet][@VincentLanglet] for the patch
-- Fixed bug #2888 : PSR12.Files.FileHeader blank line error with multiple namespaces in one file
-- Fixed bug #2926 : phpcs hangs when using arrow functions that return heredoc
-- Fixed bug #2943 : Redundant semicolon added to a file when fixing PSR2.Files.ClosingTag.NotAllowed
-- Fixed bug #2967 : Markdown generator does not output headings correctly
+- Fixed bug [#2888] : PSR12.Files.FileHeader blank line error with multiple namespaces in one file
+- Fixed bug [#2926] : phpcs hangs when using arrow functions that return heredoc
+- Fixed bug [#2943] : Redundant semicolon added to a file when fixing PSR2.Files.ClosingTag.NotAllowed
+- Fixed bug [#2967] : Markdown generator does not output headings correctly
     - Thanks to [Petr Bugyík][@o5] for the patch
-- Fixed bug #2977 : File::isReference() does not detect return by reference for closures
+- Fixed bug [#2977] : File::isReference() does not detect return by reference for closures
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2994 : Generic.Formatting.DisallowMultipleStatements false positive for FOR loop with no body
-- Fixed bug #3033 : Error generated during tokenizing of goto statements on PHP 8
+- Fixed bug [#2994] : Generic.Formatting.DisallowMultipleStatements false positive for FOR loop with no body
+- Fixed bug [#3033] : Error generated during tokenizing of goto statements on PHP 8
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+
+[#2877]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2877
+[#2888]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2888
+[#2926]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2926
+[#2943]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2943
+[#2967]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2967
+[#2977]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2977
+[#2994]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2994
+[#3033]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3033
 
 ## [3.5.5] - 2020-04-17
 ### Changed
