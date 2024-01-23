@@ -227,8 +227,9 @@ TEMPLATE;
                             $failureMessages[] = "Fixed version of $filename does not match expected version in $fixedFilename; the diff is\n$diff";
                         }
                     }
-                } else if (is_callable([$this, 'addWarning']) === true) {
-                    $this->addWarning("Missing fixed version of $filename to verify the accuracy of fixes, while the sniff is making fixes against the test case file");
+                } else {
+                    $diff = trim($phpcsFile->fixer->generateDiff($testFile));
+                    $failureMessages[] = "Missing fixed version of $filename to verify the accuracy of fixes, while the sniff is making fixes against the test case file; the diff is\n$diff";
                 }
             }//end if
 
