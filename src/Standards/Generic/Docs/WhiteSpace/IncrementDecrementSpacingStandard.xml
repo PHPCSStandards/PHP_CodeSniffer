@@ -29,9 +29,9 @@
     <code_comparison>
         <code title="Valid: No whitespaces between a variable and a post-increment/post-decrement operator.">
         <![CDATA[
-<em></em>$i++;
-<em></em>ClassName::$prop++;
-<em></em>$obj->prop--;
+$i<em></em>++;
+ClassName::$prop<em></em>++;
+$obj->prop<em></em>--;
         ]]>
         </code>
         <code title="Invalid: Whitespaces found between a variable and a post-increment/post-decrement operator.">
