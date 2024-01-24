@@ -122,7 +122,7 @@ Some guidelines to get you started:
 * Each line within the code sample should be max 48 characters.
 * Code used in code samples should be valid PHP.
 * To highlight the "good" and the "bad" bits in the code examples, surround those bits with `<em> ...</em>` tags.
-    These will be removed automatically when using the text generator, but ensure highlighting of the code in Markdown/HTML.
+    These will be removed automatically when using the text generator, but ensure highlighting of the code in HTML.
 * The indentation in the XML file should use spaces only. Four spaces for each indent.
 
 Make sure to test the documentation before submitting a PR by running:
@@ -162,7 +162,7 @@ and investigating those can be a good way to learn more about the source code of
 
 #### Issues marked with "Status: help wanted"
 
-If you don't know where to start, having a browse through issues marked with the
+If you don't know where to start, have a browse through issues marked with the
 ["Status: help wanted"](https://github.com/PHPCSStandards/PHP_CodeSniffer/labels/Status%3A%20help%20wanted) and/or the
 ["Status: good first issue"](https://github.com/PHPCSStandards/PHP_CodeSniffer/labels/Status%3A%20good%20first%20issue) labels.
 
@@ -236,7 +236,7 @@ For example, for the sniff named `Generic.NamingConventions.ConstructorName`:
 
 #### Multiple test case files
 
-At times, one test _case_ file is not enough, for instance when the sniff needs to behave differently depending on whether or code
+At times, one test _case_ file is not enough, for instance when the sniff needs to behave differently depending on whether code
 is namespaced or not, or when a sniff needs to check something at the top of a file.
 
 The test framework allows for multiple test _case_ files.
@@ -262,6 +262,31 @@ as it is expected to be after the fixer has run.
 
 The test framework will compare the actual fixes made with the expected fixes and will fail the tests if these don't match.
 
+#### Tests related to parse errors/live coding
+
+PHP_CodeSniffer can be, and is, regularly used during live coding via an IDE integration.
+
+This means that sniffs will often need to contain extra defensive coding related to this.
+It is common for sniffs to bow out early for parse errors/live coding when it cannot be reliably determined whether
+the code should be flagged or not. Additionally, making auto-fixes to code in a parse error state can make things worse.
+
+This defensive coding in a sniff should, of course, also be safeguarded via tests.
+
+Parse/compile errors can take various forms. Some can be handled without much problems by PHPCS, some can not.
+
+If a code snippet to be tested could lead to a broken token stream due to a parse/compile error, the code snippet should always
+be put in a separate test case file by itself and be accompanied by a comment stating the test is an intentional parse error.
+
+Example:
+```php
+<?php
+// Intentional parse error (missing open parenthesis).
+// This should be the only test in this file.
+// Testing that the sniff is *not* triggered.
+for
+```
+
+
 ### Submitting your pull request
 
 Some guidelines for submitting pull requests (PRs) and improving the chance that your PR will be merged:
@@ -277,6 +302,52 @@ Some guidelines for submitting pull requests (PRs) and improving the chance that
 
 Your time is valuable, and we appreciate your willingness to spend it on this project.
 However, the maintainers time is also valuable and often, more scarce, so please be considerate of that.
+
+#### Some git best practices
+
+While not strictly required, it is greatly appreciated if you comply with the following git best practices:
+
+* Prefix the commit short description with a hint as to what code is touched in the commit.
+    Example: If you have a bug fix for the `Squiz.WhiteSpace.OperatorSpacing` sniff, it is a good idea to prefix
+    the short description with `Squiz/OperatorSpacing: `.
+    Another example: if your PR addresses an issue with the Filter classes, prefix the short description
+    with `Filters:` or `Filters/FilterName:`.
+    Doing so will:
+    1. Allow for searches on GitHub to find all issues/PRs related to a particular sniff/area of the code more easily.
+    2. Create a more descriptive git history.
+* Being wordy in the commit message is not a bad thing.
+    It is greatly preferable to have the details about a fix in the commit message over just having those details
+    in the PR description.
+    Code hosting platforms comes and go (think: SourceForge, PEAR), commit messages are here to stay, even if the code base
+    would move to another platform at some point in the future.
+* Ensure that the tests (and docs) related to a particular fix are in the same commit.
+    It is much harder to track down what a particular code snippet in a test case file was supposed to be testing if the fix
+    and the tests are in separate commits.
+    Using atomic commits like this, also makes it much more straight forward to use tooling like `git blame` or `git bisect`
+    or to revert a patch if necessary.
+* Do not merge-back the main branch into your PR, even if your PR has been open for a while and/or has conflicts.
+    Spaghetti merges make for much harder to track down git history.
+    If your PR has not been reviewed yet, feel free to rebase at will.
+    Once a PR is under review, consult with the reviewer about rebasing the PR.
+
+#### Final words
+
+##### Do not violate copyright
+
+Only submit a PR with your own original code. Do NOT submit a PR containing code which you have largely copied from
+an externally available sniff, unless you wrote said sniff yourself.
+Open source does not mean that copyright does not apply.
+Copyright infringements will not be tolerated and can lead to you being banned from the repo.
+
+##### Do not submit AI generated PRs
+
+The same goes for (largely) AI-generated PRs. These are not welcome as they will be based on copyrighted code from others
+without accreditation and without taking the license of the original code into account, let alone getting permission
+for the use of the code or for re-licensing.
+
+Aside from that, the experience is that AI-generated PRs will be incorrect 100% of the time and cost reviewers too much time.
+Submitting a (largely) AI-generated PR will lead to you being banned from the repo.
+
 
 ## Licensing
 
