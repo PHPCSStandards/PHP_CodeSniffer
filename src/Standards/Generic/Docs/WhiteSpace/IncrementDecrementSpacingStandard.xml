@@ -1,43 +1,23 @@
 <documentation title="Increment Decrement Spacing">
     <standard>
     <![CDATA[
-    There should be no whitespaces between a pre-increment/pre-decrement operator and a variable.
+    There should be no whitespaces between variables and increment/decrement operators.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: No whitespaces between a pre-increment/pre-decrement operator and a variable.">
+        <code title="Valid: No whitespaces between variables and increment/decrement operators.">
         <![CDATA[
 ++<em></em>$i;
---<em></em>ClassName::$prop;
---<em></em>$obj->prop;
-        ]]>
-        </code>
-        <code title="Invalid: Whitespaces found between a pre-increment/pre-decrement operator and a variable.">
-        <![CDATA[
-++<em> </em>$i;
---<em>    </em>ClassName::$prop;
---<em>
-</em>$obj->prop;
-        ]]>
-        </code>
-    </code_comparison>
-    <standard>
-    <![CDATA[
-    There should be no whitespaces between a variable and a post-increment/post-decrement operator.
-    ]]>
-    </standard>
-    <code_comparison>
-        <code title="Valid: No whitespaces between a variable and a post-increment/post-decrement operator.">
-        <![CDATA[
-$i<em></em>++;
+--<em></em>$i['key']['id'];
 ClassName::$prop<em></em>++;
 $obj->prop<em></em>--;
         ]]>
         </code>
-        <code title="Invalid: Whitespaces found between a variable and a post-increment/post-decrement operator.">
+        <code title="Invalid: One or more whitespaces between variables and increment/decrement operators.">
         <![CDATA[
-$i<em> </em>++;
-ClassName::$prop<em>    </em>++;
+++<em> </em>$i;
+--<em>   </em>$i['key']['id'];
+ClassName::$prop<em>	</em>++;
 $obj->prop<em>
 </em>--;
         ]]>
