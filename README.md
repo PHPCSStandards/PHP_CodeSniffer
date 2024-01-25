@@ -9,7 +9,7 @@ PHP_CodeSniffer
 [![Coverage Status](https://coveralls.io/repos/github/PHPCSStandards/PHP_CodeSniffer/badge.svg?branch=master)](https://coveralls.io/github/PHPCSStandards/PHP_CodeSniffer?branch=master)
 [![License](http://poser.pugx.org/phpcsstandards/php_codesniffer/license)](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt)
 
-![Minimum PHP Version](https://img.shields.io/packagist/php-v/squizlabs/php_codesniffer.svg?maxAge=3600)
+![Minimum PHP Version](https://img.shields.io/packagist/php-v/phpcsstandards/php_codesniffer.svg?maxAge=3600)
 [![Tested on PHP 5.4 to 8.3](https://img.shields.io/badge/tested%20on-PHP%205.4%20|%205.5%20|%205.6%20|%207.0%20|%207.1%20|%207.2%20|%207.3%20|%207.4%20|%208.0%20|%208.1%20|%208.2%20|%208.3-brightgreen.svg?maxAge=2419200)](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/test.yml)
 
 </div>
@@ -52,16 +52,16 @@ fingerprint `95DE 904A B800 754A 11D8 0B60 5E6D DE99 8AB7 3B8E`.
 ### Composer
 If you use Composer, you can install PHP_CodeSniffer system-wide with the following command:
 ```bash
-composer global require "squizlabs/php_codesniffer=*"
+composer global require "phpcsstandards/php_codesniffer=*"
 ```
 Make sure you have the composer bin dir in your PATH. The default value is `~/.composer/vendor/bin/`, but you can check the value that you need to use by running `composer global config bin-dir --absolute`.
 
-Or alternatively, include a dependency for `squizlabs/php_codesniffer` in your `composer.json` file. For example:
+Or alternatively, include a dependency for `phpcsstandards/php_codesniffer` in your `composer.json` file. For example:
 
 ```json
 {
     "require-dev": {
-        "squizlabs/php_codesniffer": "^3.0"
+        "phpcsstandards/php_codesniffer": "^3.0"
     }
 }
 ```
