@@ -17,7 +17,7 @@ $obj->prop<em></em>--;
         <![CDATA[
 ++<em> </em>$i;
 --<em>   </em>$i['key']['id'];
-ClassName::$prop<em>	</em>++;
+ClassName::$prop<em>    </em>++;
 $obj->prop<em>
 </em>--;
         ]]>
