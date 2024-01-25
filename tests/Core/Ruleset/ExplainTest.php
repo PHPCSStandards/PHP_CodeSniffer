@@ -167,6 +167,48 @@ final class ExplainTest extends TestCase
 
 
     /**
+     * Test the output of the "explain" command for a standard containing both deprecated
+     * and non-deprecated sniffs.
+     *
+     * Tests that:
+     * - Deprecated sniffs are marked with an asterix in the list.
+     * - A footnote is displayed explaining the asterix.
+     * - And that the "standard uses # deprecated sniffs" listing is **not** displayed.
+     *
+     * @return void
+     */
+    public function testExplainWithDeprecatedSniffs()
+    {
+        // Set up the ruleset.
+        $standard = __DIR__."/ShowSniffDeprecationsTest.xml";
+        $config   = new ConfigDouble(["--standard=$standard", '-e']);
+        $ruleset  = new Ruleset($config);
+
+        $expected  = PHP_EOL;
+        $expected .= 'The SniffDeprecationTest standard contains 9 sniffs'.PHP_EOL.PHP_EOL;
+
+        $expected .= 'Fixtures (9 sniffs)'.PHP_EOL;
+        $expected .= '-------------------'.PHP_EOL;
+        $expected .= '  Fixtures.Deprecated.WithLongReplacement *'.PHP_EOL;
+        $expected .= '  Fixtures.Deprecated.WithoutReplacement *'.PHP_EOL;
+        $expected .= '  Fixtures.Deprecated.WithReplacement *'.PHP_EOL;
+        $expected .= '  Fixtures.Deprecated.WithReplacementContainingLinuxNewlines *'.PHP_EOL;
+        $expected .= '  Fixtures.Deprecated.WithReplacementContainingNewlines *'.PHP_EOL;
+        $expected .= '  Fixtures.SetProperty.AllowedAsDeclared'.PHP_EOL;
+        $expected .= '  Fixtures.SetProperty.AllowedViaMagicMethod'.PHP_EOL;
+        $expected .= '  Fixtures.SetProperty.AllowedViaStdClass'.PHP_EOL;
+        $expected .= '  Fixtures.SetProperty.NotAllowedViaAttribute'.PHP_EOL.PHP_EOL;
+
+        $expected .= '* Sniffs marked with an asterix are deprecated.'.PHP_EOL;
+
+        $this->expectOutputString($expected);
+
+        $ruleset->explain();
+
+    }//end testExplainWithDeprecatedSniffs()
+
+
+    /**
      * Test that each standard passed on the command-line is explained separately.
      *
      * @covers \PHP_CodeSniffer\Runner::runPHPCS

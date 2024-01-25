@@ -12,6 +12,7 @@
 namespace PHP_CodeSniffer;
 
 use PHP_CodeSniffer\Exceptions\RuntimeException;
+use PHP_CodeSniffer\Sniffs\DeprecatedSniff;
 use PHP_CodeSniffer\Util;
 use stdClass;
 
@@ -115,6 +116,16 @@ class Ruleset
      * @var \PHP_CodeSniffer\Config
      */
     private $config = null;
+
+    /**
+     * An array of the names of sniffs which have been marked as deprecated.
+     *
+     * The key is the sniff code and the value
+     * is the fully qualified name of the sniff class.
+     *
+     * @var array<string, string>
+     */
+    private $deprecatedSniffs = [];
 
 
     /**
@@ -290,11 +301,159 @@ class Ruleset
                 }
             }//end if
 
+            if (isset($this->deprecatedSniffs[$sniff]) === true) {
+                $sniff .= ' *';
+            }
+
             $sniffsInStandard[] = $sniff;
             ++$lastCount;
         }//end foreach
 
+        if (count($this->deprecatedSniffs) > 0) {
+            echo PHP_EOL.'* Sniffs marked with an asterix are deprecated.'.PHP_EOL;
+        }
+
     }//end explain()
+
+
+    /**
+     * Checks whether any deprecated sniffs were registered via the ruleset.
+     *
+     * @return bool
+     */
+    public function hasSniffDeprecations()
+    {
+        return (count($this->deprecatedSniffs) > 0);
+
+    }//end hasSniffDeprecations()
+
+
+    /**
+     * Prints an information block about deprecated sniffs being used.
+     *
+     * @return void
+     *
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException When the interface implementation is faulty.
+     */
+    public function showSniffDeprecations()
+    {
+        if ($this->hasSniffDeprecations() === false) {
+            return;
+        }
+
+        // Don't show deprecation notices in quiet mode, in explain mode
+        // or when the documentation is being shown.
+        // Documentation and explain will mark a sniff as deprecated natively
+        // and also call the Ruleset multiple times which would lead to duplicate
+        // display of the deprecation messages.
+        if ($this->config->quiet === true
+            || $this->config->explain === true
+            || $this->config->generator !== null
+        ) {
+            return;
+        }
+
+        $reportWidth = $this->config->reportWidth;
+        // Message takes report width minus the leading dash + two spaces, minus a one space gutter at the end.
+        $maxMessageWidth = ($reportWidth - 4);
+        $maxActualWidth  = 0;
+
+        ksort($this->deprecatedSniffs, (SORT_NATURAL | SORT_FLAG_CASE));
+
+        $messages        = [];
+        $messageTemplate = 'This sniff has been deprecated since %s and will be removed in %s. %s';
+        $errorTemplate   = 'The %s::%s() method must return a %sstring, received %s';
+
+        foreach ($this->deprecatedSniffs as $sniffCode => $className) {
+            if (isset($this->sniffs[$className]) === false) {
+                // Should only be possible in test situations, but some extra defensive coding is never a bad thing.
+                continue;
+            }
+
+            // Verify the interface was implemented correctly.
+            // Unfortunately can't be safeguarded via type declarations yet.
+            $deprecatedSince = $this->sniffs[$className]->getDeprecationVersion();
+            if (is_string($deprecatedSince) === false) {
+                throw new RuntimeException(
+                    sprintf($errorTemplate, $className, 'getDeprecationVersion', 'non-empty ', gettype($deprecatedSince))
+                );
+            }
+
+            if ($deprecatedSince === '') {
+                throw new RuntimeException(
+                    sprintf($errorTemplate, $className, 'getDeprecationVersion', 'non-empty ', '""')
+                );
+            }
+
+            $removedIn = $this->sniffs[$className]->getRemovalVersion();
+            if (is_string($removedIn) === false) {
+                throw new RuntimeException(
+                    sprintf($errorTemplate, $className, 'getRemovalVersion', 'non-empty ', gettype($removedIn))
+                );
+            }
+
+            if ($removedIn === '') {
+                throw new RuntimeException(
+                    sprintf($errorTemplate, $className, 'getRemovalVersion', 'non-empty ', '""')
+                );
+            }
+
+            $customMessage = $this->sniffs[$className]->getDeprecationMessage();
+            if (is_string($customMessage) === false) {
+                throw new RuntimeException(
+                    sprintf($errorTemplate, $className, 'getDeprecationMessage', '', gettype($customMessage))
+                );
+            }
+
+            // Truncate the error code if there is not enough report width.
+            if (strlen($sniffCode) > $maxMessageWidth) {
+                $sniffCode = substr($sniffCode, 0, ($maxMessageWidth - 3)).'...';
+            }
+
+            $message = '-  '.$sniffCode.PHP_EOL;
+            if ($this->config->colors === true) {
+                $message = '-  '."\033[36m".$sniffCode."\033[0m".PHP_EOL;
+            }
+
+            $maxActualWidth = max($maxActualWidth, strlen($sniffCode));
+
+            // Normalize new line characters in custom message.
+            $customMessage = preg_replace('`\R`', PHP_EOL, $customMessage);
+
+            $notice         = trim(sprintf($messageTemplate, $deprecatedSince, $removedIn, $customMessage));
+            $maxActualWidth = max($maxActualWidth, min(strlen($notice), $maxMessageWidth));
+            $wrapped        = wordwrap($notice, $maxMessageWidth, PHP_EOL);
+            $message       .= '   '.implode(PHP_EOL.'   ', explode(PHP_EOL, $wrapped));
+
+            $messages[] = $message;
+        }//end foreach
+
+        if (count($messages) === 0) {
+            return;
+        }
+
+        $summaryLine = "WARNING: The $this->name standard uses 1 deprecated sniff";
+        $sniffCount  = count($messages);
+        if ($sniffCount !== 1) {
+            $summaryLine = str_replace('1 deprecated sniff', "$sniffCount deprecated sniffs", $summaryLine);
+        }
+
+        $maxActualWidth = max($maxActualWidth, min(strlen($summaryLine), $maxMessageWidth));
+
+        $summaryLine = wordwrap($summaryLine, $reportWidth, PHP_EOL);
+        if ($this->config->colors === true) {
+            echo "\033[33m".$summaryLine."\033[0m".PHP_EOL;
+        } else {
+            echo $summaryLine.PHP_EOL;
+        }
+
+        echo str_repeat('-', min(($maxActualWidth + 4), $reportWidth)).PHP_EOL;
+        echo implode(PHP_EOL, $messages);
+
+        $closer = wordwrap('Deprecated sniffs are still run, but will stop working at some point in the future.', $reportWidth, PHP_EOL);
+        echo PHP_EOL.PHP_EOL.$closer.PHP_EOL.PHP_EOL;
+
+    }//end showSniffDeprecations()
 
 
     /**
@@ -1224,6 +1383,10 @@ class Ruleset
 
             $sniffCode = Util\Common::getSniffCode($sniffClass);
             $this->sniffCodes[$sniffCode] = $sniffClass;
+
+            if ($this->sniffs[$sniffClass] instanceof DeprecatedSniff) {
+                $this->deprecatedSniffs[$sniffCode] = $sniffClass;
+            }
 
             // Set custom properties.
             if (isset($this->ruleset[$sniffCode]['properties']) === true) {
