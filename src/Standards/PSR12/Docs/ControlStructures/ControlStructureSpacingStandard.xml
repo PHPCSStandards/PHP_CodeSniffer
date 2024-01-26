@@ -34,7 +34,7 @@ if ($expr<em> )</em> {
     </code_comparison>
     <standard>
     <![CDATA[
-    The condition of the multi-line control structure must be indented once, placing the first expression on the next line after the opening brace.
+    The condition of the multi-line control structure must be indented once, placing the first expression on the next line after the opening parenthesis.
     ]]>
     </standard>
     <code_comparison>
