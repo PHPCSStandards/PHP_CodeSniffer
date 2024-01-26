@@ -318,7 +318,7 @@ While not strictly required, it is greatly appreciated if you comply with the fo
 * Being wordy in the commit message is not a bad thing.
     It is greatly preferable to have the details about a fix in the commit message over just having those details
     in the PR description.
-    Code hosting platforms comes and go (think: SourceForge, PEAR), commit messages are here to stay, even if the code base
+    Code hosting platforms come and go (think: SourceForge, PEAR), commit messages are here to stay, even if the code base
     would move to another platform at some point in the future.
 * Ensure that the tests (and docs) related to a particular fix are in the same commit.
     It is much harder to track down what a particular code snippet in a test case file was supposed to be testing if the fix
