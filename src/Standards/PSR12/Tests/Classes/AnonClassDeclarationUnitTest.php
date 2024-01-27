@@ -55,6 +55,8 @@ final class AnonClassDeclarationUnitTest extends AbstractSniffUnitTest
             75 => 1,
             87 => 1,
             88 => 1,
+            94 => 1,
+            96 => 1,
         ];
 
     }//end getErrorList()
