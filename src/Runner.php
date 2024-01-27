@@ -184,7 +184,15 @@ class Runner
             $this->config->showSources  = false;
             $this->config->recordErrors = false;
             $this->config->reportFile   = null;
-            $this->config->reports      = ['cbf' => null];
+
+            // Only use the "Cbf" report, but allow for the Performance report as well.
+            $originalReports = array_change_key_case($this->config->reports, CASE_LOWER);
+            $newReports      = ['cbf' => null];
+            if (array_key_exists('performance', $originalReports) === true) {
+                $newReports['performance'] = $originalReports['performance'];
+            }
+
+            $this->config->reports = $newReports;
 
             // If a standard tries to set command line arguments itself, some
             // may be blocked because PHPCBF is running, so stop the script
