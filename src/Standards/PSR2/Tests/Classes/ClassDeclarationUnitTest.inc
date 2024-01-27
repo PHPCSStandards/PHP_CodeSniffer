@@ -257,3 +257,28 @@ if (!class_exists('IndentedDeclaration')) {
 
     }
 }
+
+// Space between modifier and class keyword would not be flagged nor fixed if newline + indentation.
+final
+    class FinalClassWithIndentation
+    {
+    }
+
+readonly
+    class ReadonlyClassWithIndentation
+    {
+    }
+
+// And would also not be flagged if there was a comment between (not auto-fixable).
+final/*comment*/class FinalClassWithComment
+{
+}
+abstract /*comment*/  class AbstractClassWithComment
+{
+}
+
+readonly
+    // comment
+    class ReadonlyClassWithComment
+    {
+    }
