@@ -99,12 +99,16 @@ namespace /* testNamespaceNameIsString1 */ my\ /* testNamespaceNameIsString2 */ 
     /* testVarIsKeyword */ var $var;
     /* testStaticIsKeyword */ static $static;
 
-    /* testReadonlyIsKeyword */ readonly $readonly;
+    /* testReadonlyIsKeywordForProperty */ readonly $readonly;
 
     /* testFinalIsKeyword */ final /* testFunctionIsKeyword */ function someFunction(
         /* testCallableIsKeyword */
         callable $callable,
     ) {
+        $anon = new /* testReadonlyIsKeywordForAnonClass */ readonly class() {
+            public function foo() {}
+        };
+
         /* testReturnIsKeyword */
         return $this;
     }
