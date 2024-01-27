@@ -235,7 +235,7 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
                 'expectedTokenType' => 'T_STATIC',
             ],
             'readonly: property declaration'         => [
-                'testMarker'        => '/* testReadonlyIsKeyword */',
+                'testMarker'        => '/* testReadonlyIsKeywordForProperty */',
                 'expectedTokenType' => 'T_READONLY',
             ],
             'final: function declaration'            => [
@@ -249,6 +249,10 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
             'callable: param type declaration'       => [
                 'testMarker'        => '/* testCallableIsKeyword */',
                 'expectedTokenType' => 'T_CALLABLE',
+            ],
+            'readonly: anon class declaration'       => [
+                'testMarker'        => '/* testReadonlyIsKeywordForAnonClass */',
+                'expectedTokenType' => 'T_READONLY',
             ],
             'return: statement'                      => [
                 'testMarker'        => '/* testReturnIsKeyword */',

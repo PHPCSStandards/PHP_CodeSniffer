@@ -76,6 +76,9 @@ final class AnonClassParenthesisOwnerTest extends AbstractTokenizerTestCase
             'plain'                                              => [
                 'testMarker' => '/* testNoParentheses */',
             ],
+            'readonly'                                           => [
+                'testMarker' => '/* testReadonlyNoParentheses */',
+            ],
             'declaration contains comments and extra whitespace' => [
                 'testMarker' => '/* testNoParenthesesAndEmptyTokens */',
             ],
@@ -138,6 +141,9 @@ final class AnonClassParenthesisOwnerTest extends AbstractTokenizerTestCase
         return [
             'plain'                                              => [
                 'testMarker' => '/* testWithParentheses */',
+            ],
+            'readonly'                                           => [
+                'testMarker' => '/* testReadonlyWithParentheses */',
             ],
             'declaration contains comments and extra whitespace' => [
                 'testMarker' => '/* testWithParenthesesAndEmptyTokens */',

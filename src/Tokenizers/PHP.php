@@ -630,6 +630,23 @@ class PHP extends Tokenizer
                         $preserveKeyword = true;
                     }
 
+                    // `new readonly class` should be preserved.
+                    if ($finalTokens[$lastNotEmptyToken]['code'] === T_NEW
+                        && strtolower($token[1]) === 'readonly'
+                    ) {
+                        for ($i = ($stackPtr + 1); $i < $numTokens; $i++) {
+                            if (is_array($tokens[$i]) === false
+                                || isset(Tokens::$emptyTokens[$tokens[$i][0]]) === false
+                            ) {
+                                break;
+                            }
+                        }
+
+                        if (is_array($tokens[$i]) === true && $tokens[$i][0] === T_CLASS) {
+                            $preserveKeyword = true;
+                        }
+                    }
+
                     // `new class extends` `new class implements` should be preserved
                     if (($token[0] === T_EXTENDS || $token[0] === T_IMPLEMENTS)
                         && $finalTokens[$lastNotEmptyToken]['code'] === T_CLASS
@@ -1249,7 +1266,8 @@ class PHP extends Tokenizer
 
             if ($tokenIsArray === true
                 && strtolower($token[1]) === 'readonly'
-                && isset($this->tstringContexts[$finalTokens[$lastNotEmptyToken]['code']]) === false
+                && (isset($this->tstringContexts[$finalTokens[$lastNotEmptyToken]['code']]) === false
+                || $finalTokens[$lastNotEmptyToken]['code'] === T_NEW)
             ) {
                 // Get the next non-whitespace token.
                 for ($i = ($stackPtr + 1); $i < $numTokens; $i++) {
