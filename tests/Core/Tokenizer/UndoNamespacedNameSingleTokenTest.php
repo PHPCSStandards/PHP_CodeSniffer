@@ -20,6 +20,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
+use PHP_CodeSniffer\Util\Tokens;
 
 final class UndoNamespacedNameSingleTokenTest extends AbstractMethodUnitTest
 {
@@ -42,8 +43,16 @@ final class UndoNamespacedNameSingleTokenTest extends AbstractMethodUnitTest
         $identifier = $this->getTargetToken($testMarker, constant($expectedTokens[0]['type']));
 
         foreach ($expectedTokens as $key => $tokenInfo) {
-            $this->assertSame(constant($tokenInfo['type']), $tokens[$identifier]['code']);
-            $this->assertSame($tokenInfo['type'], $tokens[$identifier]['type']);
+            $this->assertSame(
+                constant($tokenInfo['type']),
+                $tokens[$identifier]['code'],
+                'Token tokenized as '.Tokens::tokenName($tokens[$identifier]['code']).', not '.$tokenInfo['type'].' (code)'
+            );
+            $this->assertSame(
+                $tokenInfo['type'],
+                $tokens[$identifier]['type'],
+                'Token tokenized as '.$tokens[$identifier]['type'].', not '.$tokenInfo['type'].' (type)'
+            );
             $this->assertSame($tokenInfo['content'], $tokens[$identifier]['content']);
 
             ++$identifier;

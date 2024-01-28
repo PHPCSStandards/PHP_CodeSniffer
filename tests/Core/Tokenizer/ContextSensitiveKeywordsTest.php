@@ -28,12 +28,12 @@ final class ContextSensitiveKeywordsTest extends AbstractMethodUnitTest
      */
     public function testStrings($testMarker)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens     = self::$phpcsFile->getTokens();
+        $target     = $this->getTargetToken($testMarker, (Tokens::$contextSensitiveKeywords + [T_STRING, T_NULL, T_FALSE, T_TRUE, T_PARENT, T_SELF]));
+        $tokenArray = $tokens[$target];
 
-        $token = $this->getTargetToken($testMarker, (Tokens::$contextSensitiveKeywords + [T_STRING, T_NULL, T_FALSE, T_TRUE, T_PARENT, T_SELF]));
-
-        $this->assertSame(T_STRING, $tokens[$token]['code']);
-        $this->assertSame('T_STRING', $tokens[$token]['type']);
+        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
+        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
 
     }//end testStrings()
 
@@ -167,15 +167,23 @@ final class ContextSensitiveKeywordsTest extends AbstractMethodUnitTest
      */
     public function testKeywords($testMarker, $expectedTokenType)
     {
-        $tokens = self::$phpcsFile->getTokens();
-
-        $token = $this->getTargetToken(
+        $tokens     = self::$phpcsFile->getTokens();
+        $target     = $this->getTargetToken(
             $testMarker,
             (Tokens::$contextSensitiveKeywords + [T_ANON_CLASS, T_MATCH_DEFAULT, T_PARENT, T_SELF, T_STRING, T_NULL, T_FALSE, T_TRUE])
         );
+        $tokenArray = $tokens[$target];
 
-        $this->assertSame(constant($expectedTokenType), $tokens[$token]['code']);
-        $this->assertSame($expectedTokenType, $tokens[$token]['type']);
+        $this->assertSame(
+            constant($expectedTokenType),
+            $tokenArray['code'],
+            'Token tokenized as '.$tokenArray['type'].', not '.$expectedTokenType.' (code)'
+        );
+        $this->assertSame(
+            $expectedTokenType,
+            $tokenArray['type'],
+            'Token tokenized as '.$tokenArray['type'].', not '.$expectedTokenType.' (type)'
+        );
 
     }//end testKeywords()
 

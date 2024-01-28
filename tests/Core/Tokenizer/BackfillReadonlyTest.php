@@ -29,11 +29,12 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
      */
     public function testReadonly($testMarker, $testContent='readonly')
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens     = self::$phpcsFile->getTokens();
+        $target     = $this->getTargetToken($testMarker, [T_READONLY, T_STRING], $testContent);
+        $tokenArray = $tokens[$target];
 
-        $target = $this->getTargetToken($testMarker, [T_READONLY, T_STRING], $testContent);
-        $this->assertSame(T_READONLY, $tokens[$target]['code']);
-        $this->assertSame('T_READONLY', $tokens[$target]['type']);
+        $this->assertSame(T_READONLY, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_READONLY (code)');
+        $this->assertSame('T_READONLY', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_READONLY (type)');
 
     }//end testReadonly()
 
@@ -174,11 +175,12 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
      */
     public function testNotReadonly($testMarker, $testContent='readonly')
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens     = self::$phpcsFile->getTokens();
+        $target     = $this->getTargetToken($testMarker, [T_READONLY, T_STRING], $testContent);
+        $tokenArray = $tokens[$target];
 
-        $target = $this->getTargetToken($testMarker, [T_READONLY, T_STRING], $testContent);
-        $this->assertSame(T_STRING, $tokens[$target]['code']);
-        $this->assertSame('T_STRING', $tokens[$target]['type']);
+        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
+        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
 
     }//end testNotReadonly()
 
