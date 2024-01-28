@@ -28,6 +28,11 @@ class Text extends Generator
     {
         $this->printTitle($doc);
 
+        $code = $this->getSniffCode($doc);
+        if (! empty($code)) {
+            echo "$code".PHP_EOL.PHP_EOL;
+        }
+
         foreach ($doc->childNodes as $node) {
             if ($node->nodeName === 'standard') {
                 $this->printTextBlock($node);

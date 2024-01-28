@@ -89,6 +89,11 @@ class Markdown extends Generator
         $title = $this->getTitle($doc);
         echo PHP_EOL."## $title".PHP_EOL;
 
+        $code = $this->getSniffCode($doc);
+        if (! empty($code)) {
+            echo PHP_EOL."`$code`".PHP_EOL.PHP_EOL;
+        }
+
         foreach ($doc->childNodes as $node) {
             if ($node->nodeName === 'standard') {
                 $this->printTextBlock($node);

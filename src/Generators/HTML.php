@@ -197,6 +197,11 @@ class HTML extends Generator
         echo '  <a name="'.str_replace(' ', '-', $title).'" />'.PHP_EOL;
         echo "  <h2>$title</h2>".PHP_EOL;
 
+        $code = $this->getSniffCode($doc);
+        if (! empty($code)) {
+            echo "  <code>$code</code>".PHP_EOL;
+        }
+
         foreach ($doc->childNodes as $node) {
             if ($node->nodeName === 'standard') {
                 $this->printTextBlock($node);
