@@ -111,6 +111,9 @@ abstract class Generator
             $doc = new \DOMDocument();
             $doc->load($file);
             $documentation = $doc->getElementsByTagName('documentation')->item(0);
+            if (empty($documentation->getAttribute('code'))) {
+                $documentation->setAttribute('code', $code);
+            }
             $this->processSniff($documentation);
         }
 

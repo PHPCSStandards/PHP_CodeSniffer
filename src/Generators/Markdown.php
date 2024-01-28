@@ -26,10 +26,13 @@ class Markdown extends Generator
         ob_start();
         $this->printHeader();
 
-        foreach ($this->docFiles as $file) {
+        foreach ($this->docFiles as $code => $file) {
             $doc = new \DOMDocument();
             $doc->load($file);
             $documentation = $doc->getElementsByTagName('documentation')->item(0);
+            if (empty($documentation->getAttribute('code'))) {
+                $documentation->setAttribute('code', $code);
+            }
             $this->processSniff($documentation);
         }
 
