@@ -27,11 +27,12 @@ final class BitwiseOrTest extends AbstractMethodUnitTest
      */
     public function testBitwiseOr($testMarker)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens     = self::$phpcsFile->getTokens();
+        $target     = $this->getTargetToken($testMarker, [T_BITWISE_OR, T_TYPE_UNION]);
+        $tokenArray = $tokens[$target];
 
-        $opener = $this->getTargetToken($testMarker, [T_BITWISE_OR, T_TYPE_UNION]);
-        $this->assertSame(T_BITWISE_OR, $tokens[$opener]['code']);
-        $this->assertSame('T_BITWISE_OR', $tokens[$opener]['type']);
+        $this->assertSame(T_BITWISE_OR, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_BITWISE_OR (code)');
+        $this->assertSame('T_BITWISE_OR', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_BITWISE_OR (type)');
 
     }//end testBitwiseOr()
 
@@ -78,11 +79,12 @@ final class BitwiseOrTest extends AbstractMethodUnitTest
      */
     public function testTypeUnion($testMarker)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens     = self::$phpcsFile->getTokens();
+        $target     = $this->getTargetToken($testMarker, [T_BITWISE_OR, T_TYPE_UNION]);
+        $tokenArray = $tokens[$target];
 
-        $opener = $this->getTargetToken($testMarker, [T_BITWISE_OR, T_TYPE_UNION]);
-        $this->assertSame(T_TYPE_UNION, $tokens[$opener]['code']);
-        $this->assertSame('T_TYPE_UNION', $tokens[$opener]['type']);
+        $this->assertSame(T_TYPE_UNION, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_TYPE_UNION (code)');
+        $this->assertSame('T_TYPE_UNION', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_TYPE_UNION (type)');
 
     }//end testTypeUnion()
 

@@ -120,11 +120,12 @@ final class GotoLabelTest extends AbstractMethodUnitTest
      */
     public function testNotAGotoDeclaration($testMarker, $testContent)
     {
-        $tokens = self::$phpcsFile->getTokens();
-        $target = $this->getTargetToken($testMarker, [T_GOTO_LABEL, T_STRING], $testContent);
+        $tokens     = self::$phpcsFile->getTokens();
+        $target     = $this->getTargetToken($testMarker, [T_GOTO_LABEL, T_STRING], $testContent);
+        $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_STRING, $tokens[$target]['code']);
-        $this->assertSame('T_STRING', $tokens[$target]['type']);
+        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
+        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
 
     }//end testNotAGotoDeclaration()
 
