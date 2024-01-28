@@ -20,6 +20,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
+use PHP_CodeSniffer\Util\Tokens;
 
 final class NamespacedNameSingleTokenTest extends AbstractMethodUnitTest
 {
@@ -45,9 +46,13 @@ final class NamespacedNameSingleTokenTest extends AbstractMethodUnitTest
             $this->assertSame(
                 constant($tokenInfo['type']),
                 $tokens[$identifier]['code'],
-                'Failed asserting that '.$tokens[$identifier]['type'].' is the same as the expected type: '.$tokenInfo['type']
+                'Token tokenized as '.Tokens::tokenName($tokens[$identifier]['code']).', not '.$tokenInfo['type'].' (code)'
             );
-            $this->assertSame($tokenInfo['type'], $tokens[$identifier]['type']);
+            $this->assertSame(
+                $tokenInfo['type'],
+                $tokens[$identifier]['type'],
+                'Token tokenized as '.$tokens[$identifier]['type'].', not '.$tokenInfo['type'].' (type)'
+            );
             $this->assertSame($tokenInfo['content'], $tokens[$identifier]['content']);
 
             ++$identifier;
