@@ -46,13 +46,13 @@ abstract class Generator
         $this->ruleset = $ruleset;
 
         foreach ($ruleset->sniffs as $className => $sniffClass) {
-            $file    = Autoload::getLoadedFileName($className);
-            $docFile = str_replace(
+            $file      = Autoload::getLoadedFileName($className);
+            $docFile   = str_replace(
                 DIRECTORY_SEPARATOR.'Sniffs'.DIRECTORY_SEPARATOR,
                 DIRECTORY_SEPARATOR.'Docs'.DIRECTORY_SEPARATOR,
                 $file
             );
-            $docFile = str_replace('Sniff.php', 'Standard.xml', $docFile);
+            $docFile   = str_replace('Sniff.php', 'Standard.xml', $docFile);
             $sniffCode = Util\Common::getSniffCode($className);
 
             if (is_file($docFile) === true) {
@@ -78,6 +78,7 @@ abstract class Generator
 
     }//end getTitle()
 
+
     /**
      * Retrieves the code of the sniff from the DOMNode supplied.
      *
@@ -91,7 +92,12 @@ abstract class Generator
     {
         $code = $doc->getAttribute('code');
 
-        return ! empty($code) ? $code : '';
+        if (empty($code) === true) {
+            return '';
+        }
+
+        return $code;
+
     }//end getSniffCode()
 
 
@@ -111,9 +117,11 @@ abstract class Generator
             $doc = new \DOMDocument();
             $doc->load($file);
             $documentation = $doc->getElementsByTagName('documentation')->item(0);
-            if (empty($documentation->getAttribute('code'))) {
+
+            if (empty($documentation->getAttribute('code')) === true) {
                 $documentation->setAttribute('code', $code);
             }
+
             $this->processSniff($documentation);
         }
 

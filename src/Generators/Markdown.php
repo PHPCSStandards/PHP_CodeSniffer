@@ -30,9 +30,11 @@ class Markdown extends Generator
             $doc = new \DOMDocument();
             $doc->load($file);
             $documentation = $doc->getElementsByTagName('documentation')->item(0);
-            if (empty($documentation->getAttribute('code'))) {
+
+            if (empty($documentation->getAttribute('code')) === true) {
                 $documentation->setAttribute('code', $code);
             }
+
             $this->processSniff($documentation);
         }
 
@@ -90,7 +92,7 @@ class Markdown extends Generator
         echo PHP_EOL."## $title".PHP_EOL;
 
         $code = $this->getSniffCode($doc);
-        if (! empty($code)) {
+        if (empty($code) === false) {
             echo PHP_EOL."`$code`".PHP_EOL.PHP_EOL;
         }
 

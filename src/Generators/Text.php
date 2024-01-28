@@ -29,7 +29,7 @@ class Text extends Generator
         $this->printTitle($doc);
 
         $code = $this->getSniffCode($doc);
-        if (! empty($code)) {
+        if (empty($code) === false) {
             echo "$code".PHP_EOL.PHP_EOL;
         }
 
