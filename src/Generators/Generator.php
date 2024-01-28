@@ -14,6 +14,7 @@ namespace PHP_CodeSniffer\Generators;
 
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Autoload;
+use PHP_CodeSniffer\Util;
 
 abstract class Generator
 {
@@ -52,9 +53,10 @@ abstract class Generator
                 $file
             );
             $docFile = str_replace('Sniff.php', 'Standard.xml', $docFile);
+            $sniffCode = Util\Common::getSniffCode($className);
 
             if (is_file($docFile) === true) {
-                $this->docFiles[] = $docFile;
+                $this->docFiles[$sniffCode] = $docFile;
             }
         }
 
@@ -89,7 +91,7 @@ abstract class Generator
      */
     public function generate()
     {
-        foreach ($this->docFiles as $file) {
+        foreach ($this->docFiles as $code => $file) {
             $doc = new \DOMDocument();
             $doc->load($file);
             $documentation = $doc->getElementsByTagName('documentation')->item(0);
