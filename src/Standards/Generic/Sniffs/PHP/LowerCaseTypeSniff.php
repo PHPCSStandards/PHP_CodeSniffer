@@ -135,7 +135,7 @@ class LowerCaseTypeSniff implements Sniff
                     $error     = 'PHP property type declarations must be lowercase; expected "%s" but found "%s"';
                     $errorCode = 'PropertyTypeFound';
 
-                    if ($props['type_token'] === T_TYPE_INTERSECTION) {
+                    if (strpos($type, '&') !== false) {
                         // Intersection types don't support simple types.
                     } else if (strpos($type, '|') !== false) {
                         $this->processUnionType(
@@ -167,7 +167,7 @@ class LowerCaseTypeSniff implements Sniff
             $error     = 'PHP return type declarations must be lowercase; expected "%s" but found "%s"';
             $errorCode = 'ReturnTypeFound';
 
-            if ($props['return_type_token'] === T_TYPE_INTERSECTION) {
+            if (strpos($returnType, '&') !== false) {
                 // Intersection types don't support simple types.
             } else if (strpos($returnType, '|') !== false) {
                 $this->processUnionType(
@@ -199,7 +199,7 @@ class LowerCaseTypeSniff implements Sniff
                 $error     = 'PHP parameter type declarations must be lowercase; expected "%s" but found "%s"';
                 $errorCode = 'ParamTypeFound';
 
-                if ($param['type_hint_token'] === T_TYPE_INTERSECTION) {
+                if (strpos($typeHint, '&') !== false) {
                     // Intersection types don't support simple types.
                 } else if (strpos($typeHint, '|') !== false) {
                     $this->processUnionType(
