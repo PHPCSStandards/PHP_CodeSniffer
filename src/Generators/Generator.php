@@ -78,6 +78,22 @@ abstract class Generator
 
     }//end getTitle()
 
+    /**
+     * Retrieves the code of the sniff from the DOMNode supplied.
+     *
+     * @param \DOMNode $doc The DOMNode object for the sniff.
+     *                      It represents the "documentation" tag in the XML
+     *                      standard file.
+     *
+     * @return string
+     */
+    protected function getSniffCode(\DOMNode $doc)
+    {
+        $code = $doc->getAttribute('code');
+
+        return ! empty($code) ? $code : '';
+    }//end getSniffCode()
+
 
     /**
      * Generates the documentation for a standard.
