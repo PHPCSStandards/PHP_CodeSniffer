@@ -46,8 +46,16 @@ class UpperCaseConstantNameSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
 
         if ($tokens[$stackPtr]['code'] === T_CONST) {
-            // This is a class constant.
-            $constant = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+            // This is a constant declared with the "const" keyword.
+            // This may be an OO constant, in which case it could be typed, so we need to
+            // jump over a potential type to get to the name.
+            $assignmentOperator = $phpcsFile->findNext([T_EQUAL, T_SEMICOLON], ($stackPtr + 1));
+            if ($assignmentOperator === false || $tokens[$assignmentOperator]['code'] !== T_EQUAL) {
+                // Parse error/live coding. Nothing to do. Rest of loop is moot.
+                return;
+            }
+
+            $constant = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($assignmentOperator - 1), ($stackPtr + 1), true);
             if ($constant === false) {
                 return;
             }
