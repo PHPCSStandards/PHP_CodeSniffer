@@ -615,6 +615,7 @@ final class AttributesTest extends AbstractTokenizerTestCase
      * @covers PHP_CodeSniffer\Tokenizers\PHP::tokenize
      * @covers PHP_CodeSniffer\Tokenizers\PHP::findCloser
      * @covers PHP_CodeSniffer\Tokenizers\PHP::parsePhpAttribute
+     * @covers PHP_CodeSniffer\Tokenizers\PHP::createAttributesNestingMap
      *
      * @return void
      */
