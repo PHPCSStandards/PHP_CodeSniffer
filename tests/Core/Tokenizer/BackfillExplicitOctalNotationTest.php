@@ -9,9 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class BackfillExplicitOctalNotationTest extends AbstractMethodUnitTest
+final class BackfillExplicitOctalNotationTest extends AbstractTokenizerTestCase
 {
 
 
@@ -30,7 +28,7 @@ final class BackfillExplicitOctalNotationTest extends AbstractMethodUnitTest
      */
     public function testExplicitOctalNotation($marker, $value, $nextToken, $nextContent)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $number = $this->getTargetToken($marker, [T_LNUMBER]);
 

@@ -10,9 +10,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class TypeIntersectionTest extends AbstractMethodUnitTest
+final class TypeIntersectionTest extends AbstractTokenizerTestCase
 {
 
 
@@ -28,7 +26,7 @@ final class TypeIntersectionTest extends AbstractMethodUnitTest
      */
     public function testBitwiseAnd($testMarker)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $target     = $this->getTargetToken($testMarker, [T_BITWISE_AND, T_TYPE_INTERSECTION]);
         $tokenArray = $tokens[$target];
 
@@ -82,7 +80,7 @@ final class TypeIntersectionTest extends AbstractMethodUnitTest
      */
     public function testTypeIntersection($testMarker)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $target     = $this->getTargetToken($testMarker, [T_BITWISE_AND, T_TYPE_INTERSECTION]);
         $tokenArray = $tokens[$target];
 

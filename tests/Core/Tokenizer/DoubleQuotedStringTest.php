@@ -10,9 +10,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class DoubleQuotedStringTest extends AbstractMethodUnitTest
+final class DoubleQuotedStringTest extends AbstractTokenizerTestCase
 {
 
 
@@ -29,7 +27,7 @@ final class DoubleQuotedStringTest extends AbstractMethodUnitTest
      */
     public function testDoubleQuotedString($testMarker, $expectedContent)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $target = $this->getTargetToken($testMarker, T_DOUBLE_QUOTED_STRING);
         $this->assertSame($expectedContent, $tokens[$target]['content']);

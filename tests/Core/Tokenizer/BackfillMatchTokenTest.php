@@ -10,10 +10,9 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 use PHP_CodeSniffer\Util\Tokens;
 
-final class BackfillMatchTokenTest extends AbstractMethodUnitTest
+final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
 {
 
 
@@ -32,7 +31,7 @@ final class BackfillMatchTokenTest extends AbstractMethodUnitTest
      */
     public function testMatchExpression($testMarker, $openerOffset, $closerOffset, $testContent='match')
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $token      = $this->getTargetToken($testMarker, [T_STRING, T_MATCH], $testContent);
         $tokenArray = $tokens[$token];
@@ -213,7 +212,7 @@ final class BackfillMatchTokenTest extends AbstractMethodUnitTest
      */
     public function testNotAMatchStructure($testMarker, $testContent='match')
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $token      = $this->getTargetToken($testMarker, [T_STRING, T_MATCH], $testContent);
         $tokenArray = $tokens[$token];
@@ -228,7 +227,7 @@ final class BackfillMatchTokenTest extends AbstractMethodUnitTest
         $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is set');
         $this->assertArrayNotHasKey('parenthesis_closer', $tokenArray, 'Parenthesis closer is set');
 
-        $next = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($token + 1), null, true);
+        $next = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($token + 1), null, true);
         if ($next !== false && $tokens[$next]['code'] === T_OPEN_PARENTHESIS) {
             $this->assertArrayNotHasKey('parenthesis_owner', $tokenArray, 'Parenthesis owner is set for opener after');
         }
@@ -477,7 +476,7 @@ final class BackfillMatchTokenTest extends AbstractMethodUnitTest
      */
     private function scopeTestHelper($token, $openerOffset, $closerOffset, $skipScopeCloserCheck=false)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $tokenArray = $tokens[$token];
         $tokenType  = $tokenArray['type'];
         $expectedScopeOpener = ($token + $openerOffset);
@@ -532,7 +531,7 @@ final class BackfillMatchTokenTest extends AbstractMethodUnitTest
      */
     private function parenthesisTestHelper($token)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $tokenArray = $tokens[$token];
         $tokenType  = $tokenArray['type'];
 

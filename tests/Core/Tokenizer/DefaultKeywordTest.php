@@ -10,9 +10,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class DefaultKeywordTest extends AbstractMethodUnitTest
+final class DefaultKeywordTest extends AbstractTokenizerTestCase
 {
 
 
@@ -33,7 +31,7 @@ final class DefaultKeywordTest extends AbstractMethodUnitTest
      */
     public function testMatchDefault($testMarker, $testContent='default')
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $token      = $this->getTargetToken($testMarker, [T_MATCH_DEFAULT, T_DEFAULT, T_STRING], $testContent);
         $tokenArray = $tokens[$token];
@@ -123,7 +121,7 @@ final class DefaultKeywordTest extends AbstractMethodUnitTest
      */
     public function testSwitchDefault($testMarker, $openerOffset, $closerOffset, $conditionStop=null, $testContent='default')
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $token      = $this->getTargetToken($testMarker, [T_MATCH_DEFAULT, T_DEFAULT, T_STRING], $testContent);
         $tokenArray = $tokens[$token];
@@ -234,7 +232,7 @@ final class DefaultKeywordTest extends AbstractMethodUnitTest
      */
     public function testNotDefaultKeyword($testMarker, $testContent='DEFAULT')
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $token      = $this->getTargetToken($testMarker, [T_MATCH_DEFAULT, T_DEFAULT, T_STRING], $testContent);
         $tokenArray = $tokens[$token];
@@ -334,7 +332,7 @@ final class DefaultKeywordTest extends AbstractMethodUnitTest
      */
     public function testIssue3326()
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $token      = $this->getTargetToken('/* testClassConstant */', [T_SEMICOLON]);
         $tokenArray = $tokens[$token];

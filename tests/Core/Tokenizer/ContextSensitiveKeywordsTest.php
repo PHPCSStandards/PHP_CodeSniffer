@@ -9,10 +9,9 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 use PHP_CodeSniffer\Util\Tokens;
 
-final class ContextSensitiveKeywordsTest extends AbstractMethodUnitTest
+final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
 {
 
 
@@ -28,7 +27,7 @@ final class ContextSensitiveKeywordsTest extends AbstractMethodUnitTest
      */
     public function testStrings($testMarker)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $target     = $this->getTargetToken($testMarker, (Tokens::$contextSensitiveKeywords + [T_STRING, T_NULL, T_FALSE, T_TRUE, T_PARENT, T_SELF]));
         $tokenArray = $tokens[$target];
 
@@ -167,7 +166,7 @@ final class ContextSensitiveKeywordsTest extends AbstractMethodUnitTest
      */
     public function testKeywords($testMarker, $expectedTokenType)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $target     = $this->getTargetToken(
             $testMarker,
             (Tokens::$contextSensitiveKeywords + [T_ANON_CLASS, T_MATCH_DEFAULT, T_PARENT, T_SELF, T_STRING, T_NULL, T_FALSE, T_TRUE])

@@ -11,9 +11,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class DoubleArrowTest extends AbstractMethodUnitTest
+final class DoubleArrowTest extends AbstractTokenizerTestCase
 {
 
 
@@ -29,7 +27,7 @@ final class DoubleArrowTest extends AbstractMethodUnitTest
      */
     public function testDoubleArrow($testMarker)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $token      = $this->getTargetToken($testMarker, [T_DOUBLE_ARROW, T_MATCH_ARROW, T_FN_ARROW]);
         $tokenArray = $tokens[$token];
@@ -114,7 +112,7 @@ final class DoubleArrowTest extends AbstractMethodUnitTest
      */
     public function testMatchArrow($testMarker)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $token      = $this->getTargetToken($testMarker, [T_DOUBLE_ARROW, T_MATCH_ARROW, T_FN_ARROW]);
         $tokenArray = $tokens[$token];
@@ -201,7 +199,7 @@ final class DoubleArrowTest extends AbstractMethodUnitTest
      */
     public function testFnArrow($testMarker)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $token      = $this->getTargetToken($testMarker, [T_DOUBLE_ARROW, T_MATCH_ARROW, T_FN_ARROW]);
         $tokenArray = $tokens[$token];
