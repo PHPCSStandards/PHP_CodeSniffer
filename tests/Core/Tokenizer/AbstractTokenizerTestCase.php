@@ -17,6 +17,7 @@ use PHP_CodeSniffer\Files\DummyFile;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 use PHPUnit\Framework\TestCase;
+use ReflectionProperty;
 
 abstract class AbstractTokenizerTestCase extends TestCase
 {
@@ -100,6 +101,24 @@ abstract class AbstractTokenizerTestCase extends TestCase
         return AbstractMethodUnitTest::getTargetTokenFromFile($this->phpcsFile, $commentString, $tokenType, $tokenContent);
 
     }//end getTargetToken()
+
+
+    /**
+     * Clear the static "resolved tokens" cache property on the Tokenizer\PHP class.
+     *
+     * This method should be used selectively by tests to ensure the code under test is actually hit
+     * by the test testing the code.
+     *
+     * @return void
+     */
+    public static function clearResolvedTokensCache()
+    {
+        $property = new ReflectionProperty('PHP_CodeSniffer\Tokenizers\PHP', 'resolveTokenCache');
+        $property->setAccessible(true);
+        $property->setValue(null, []);
+        $property->setAccessible(false);
+
+    }//end clearResolvedTokensCache()
 
 
 }//end class
