@@ -9,9 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class ArrayKeywordTest extends AbstractMethodUnitTest
+final class ArrayKeywordTest extends AbstractTokenizerTestCase
 {
 
 
@@ -29,7 +27,7 @@ final class ArrayKeywordTest extends AbstractMethodUnitTest
      */
     public function testArrayKeyword($testMarker, $testContent='array')
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $token      = $this->getTargetToken($testMarker, [T_ARRAY, T_STRING], $testContent);
         $tokenArray = $tokens[$token];
@@ -89,7 +87,7 @@ final class ArrayKeywordTest extends AbstractMethodUnitTest
      */
     public function testArrayType($testMarker, $testContent='array')
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $token      = $this->getTargetToken($testMarker, [T_ARRAY, T_STRING], $testContent);
         $tokenArray = $tokens[$token];
@@ -144,7 +142,7 @@ final class ArrayKeywordTest extends AbstractMethodUnitTest
      */
     public function testNotArrayKeyword($testMarker, $testContent='array')
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $token      = $this->getTargetToken($testMarker, [T_ARRAY, T_STRING], $testContent);
         $tokenArray = $tokens[$token];

@@ -9,9 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class BackfillEnumTest extends AbstractMethodUnitTest
+final class BackfillEnumTest extends AbstractTokenizerTestCase
 {
 
 
@@ -30,7 +28,7 @@ final class BackfillEnumTest extends AbstractMethodUnitTest
      */
     public function testEnums($testMarker, $testContent, $openerOffset, $closerOffset)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $enum       = $this->getTargetToken($testMarker, [T_ENUM, T_STRING], $testContent);
         $tokenArray = $tokens[$enum];
 
@@ -138,7 +136,7 @@ final class BackfillEnumTest extends AbstractMethodUnitTest
      */
     public function testNotEnums($testMarker, $testContent)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $target     = $this->getTargetToken($testMarker, [T_ENUM, T_STRING, T_NAME_QUALIFIED, T_NAME_RELATIVE], $testContent);
         $tokenArray = $tokens[$target];
 

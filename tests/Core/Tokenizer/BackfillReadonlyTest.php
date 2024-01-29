@@ -9,9 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class BackfillReadonlyTest extends AbstractMethodUnitTest
+final class BackfillReadonlyTest extends AbstractTokenizerTestCase
 {
 
 
@@ -29,7 +27,7 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
      */
     public function testReadonly($testMarker, $testContent='readonly')
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $target     = $this->getTargetToken($testMarker, [T_READONLY, T_STRING], $testContent);
         $tokenArray = $tokens[$target];
 
@@ -175,7 +173,7 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
      */
     public function testNotReadonly($testMarker, $testContent='readonly')
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $target     = $this->getTargetToken($testMarker, [T_READONLY, T_STRING, T_NAME_QUALIFIED], $testContent);
         $tokenArray = $tokens[$target];
 

@@ -9,9 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class ScopeSettingWithNamespaceOperatorTest extends AbstractMethodUnitTest
+final class ScopeSettingWithNamespaceOperatorTest extends AbstractTokenizerTestCase
 {
 
 
@@ -30,7 +28,7 @@ final class ScopeSettingWithNamespaceOperatorTest extends AbstractMethodUnitTest
      */
     public function testScopeSetting($testMarker, $tokenTypes, $open=T_OPEN_CURLY_BRACKET, $close=T_CLOSE_CURLY_BRACKET)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $target = $this->getTargetToken($testMarker, $tokenTypes);
         $opener = $this->getTargetToken($testMarker, $open);

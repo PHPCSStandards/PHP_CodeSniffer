@@ -9,9 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class FinallyTest extends AbstractMethodUnitTest
+final class FinallyTest extends AbstractTokenizerTestCase
 {
 
 
@@ -27,7 +25,7 @@ final class FinallyTest extends AbstractMethodUnitTest
      */
     public function testFinallyKeyword($testMarker)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $target     = $this->getTargetToken($testMarker, [T_FINALLY, T_STRING]);
         $tokenArray = $tokens[$target];
 
@@ -67,7 +65,7 @@ final class FinallyTest extends AbstractMethodUnitTest
      */
     public function testFinallyNonKeyword($testMarker)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $target     = $this->getTargetToken($testMarker, [T_FINALLY, T_STRING]);
         $tokenArray = $tokens[$target];
 

@@ -10,9 +10,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class HeredocStringTest extends AbstractMethodUnitTest
+final class HeredocStringTest extends AbstractTokenizerTestCase
 {
 
 
@@ -29,7 +27,7 @@ final class HeredocStringTest extends AbstractMethodUnitTest
      */
     public function testHeredocString($testMarker, $expectedContent)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $target = $this->getTargetToken($testMarker, T_HEREDOC);
         $this->assertSame($expectedContent."\n", $tokens[$target]['content']);
@@ -50,7 +48,7 @@ final class HeredocStringTest extends AbstractMethodUnitTest
      */
     public function testHeredocStringWrapped($testMarker, $expectedContent)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $testMarker = substr($testMarker, 0, -3).'Wrapped */';
         $target     = $this->getTargetToken($testMarker, T_HEREDOC);

@@ -19,10 +19,9 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 use PHP_CodeSniffer\Util\Tokens;
 
-final class NamespacedNameSingleTokenTest extends AbstractMethodUnitTest
+final class NamespacedNameSingleTokenTest extends AbstractTokenizerTestCase
 {
 
 
@@ -39,7 +38,7 @@ final class NamespacedNameSingleTokenTest extends AbstractMethodUnitTest
      */
     public function testIdentifierTokenization($testMarker, $expectedTokens)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $identifier = $this->getTargetToken($testMarker, constant($expectedTokens[0]['type']));
 
         foreach ($expectedTokens as $key => $tokenInfo) {

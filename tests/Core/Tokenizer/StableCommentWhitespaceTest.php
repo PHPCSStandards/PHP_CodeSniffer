@@ -15,10 +15,9 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 use PHP_CodeSniffer\Util\Tokens;
 
-final class StableCommentWhitespaceTest extends AbstractMethodUnitTest
+final class StableCommentWhitespaceTest extends AbstractTokenizerTestCase
 {
 
 
@@ -35,7 +34,7 @@ final class StableCommentWhitespaceTest extends AbstractMethodUnitTest
      */
     public function testCommentTokenization($testMarker, $expectedTokens)
     {
-        $tokens  = self::$phpcsFile->getTokens();
+        $tokens  = $this->phpcsFile->getTokens();
         $comment = $this->getTargetToken($testMarker, Tokens::$commentTokens);
 
         foreach ($expectedTokens as $key => $tokenInfo) {

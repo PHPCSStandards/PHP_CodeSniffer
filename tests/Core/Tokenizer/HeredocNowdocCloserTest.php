@@ -9,14 +9,12 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
 /**
  * Heredoc/nowdoc closer token test.
  *
  * @requires PHP 7.3
  */
-final class HeredocNowdocCloserTest extends AbstractMethodUnitTest
+final class HeredocNowdocCloserTest extends AbstractTokenizerTestCase
 {
 
 
@@ -33,7 +31,7 @@ final class HeredocNowdocCloserTest extends AbstractMethodUnitTest
      */
     public function testHeredocNowdocCloserTabReplacement($testMarker, $expected)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $closer = $this->getTargetToken($testMarker, [T_END_HEREDOC, T_END_NOWDOC]);
 

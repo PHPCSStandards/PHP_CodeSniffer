@@ -9,9 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class ShortArrayTest extends AbstractMethodUnitTest
+final class ShortArrayTest extends AbstractTokenizerTestCase
 {
 
 
@@ -27,7 +25,7 @@ final class ShortArrayTest extends AbstractMethodUnitTest
      */
     public function testSquareBrackets($testMarker)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $opener     = $this->getTargetToken($testMarker, [T_OPEN_SQUARE_BRACKET, T_OPEN_SHORT_ARRAY]);
         $tokenArray = $tokens[$opener];
 
@@ -95,7 +93,7 @@ final class ShortArrayTest extends AbstractMethodUnitTest
      */
     public function testShortArrays($testMarker)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $opener     = $this->getTargetToken($testMarker, [T_OPEN_SQUARE_BRACKET, T_OPEN_SHORT_ARRAY]);
         $tokenArray = $tokens[$opener];
 
