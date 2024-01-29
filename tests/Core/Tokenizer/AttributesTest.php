@@ -9,9 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class AttributesTest extends AbstractMethodUnitTest
+final class AttributesTest extends AbstractTokenizerTestCase
 {
 
 
@@ -31,7 +29,7 @@ final class AttributesTest extends AbstractMethodUnitTest
      */
     public function testAttribute($testMarker, $length, $tokenCodes)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $attribute = $this->getTargetToken($testMarker, T_ATTRIBUTE);
         $this->assertArrayHasKey('attribute_closer', $tokens[$attribute]);
@@ -294,7 +292,7 @@ final class AttributesTest extends AbstractMethodUnitTest
      */
     public function testTwoAttributesOnTheSameLine()
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $attribute = $this->getTargetToken('/* testTwoAttributeOnTheSameLine */', T_ATTRIBUTE);
         $this->assertArrayHasKey('attribute_closer', $tokens[$attribute]);
@@ -318,7 +316,7 @@ final class AttributesTest extends AbstractMethodUnitTest
      */
     public function testAttributeAndLineComment()
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $attribute = $this->getTargetToken('/* testAttributeAndCommentOnTheSameLine */', T_ATTRIBUTE);
         $this->assertArrayHasKey('attribute_closer', $tokens[$attribute]);
@@ -348,7 +346,7 @@ final class AttributesTest extends AbstractMethodUnitTest
      */
     public function testAttributeOnParameters($testMarker, $position, $length, array $tokenCodes)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $function  = $this->getTargetToken($testMarker, T_FUNCTION);
         $attribute = ($function + $position);
@@ -455,7 +453,7 @@ final class AttributesTest extends AbstractMethodUnitTest
      */
     public function testAttributeContainingTextLookingLikeCloseTag($testMarker, $length, array $expectedTokensAttribute, array $expectedTokensAfter)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $attribute = $this->getTargetToken($testMarker, T_ATTRIBUTE);
 
@@ -601,7 +599,7 @@ final class AttributesTest extends AbstractMethodUnitTest
      */
     public function testInvalidAttribute()
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $attribute = $this->getTargetToken('/* testInvalidAttribute */', T_ATTRIBUTE);
 
@@ -622,7 +620,7 @@ final class AttributesTest extends AbstractMethodUnitTest
      */
     public function testNestedAttributes()
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $tokenCodes = [
             T_STRING,
             T_NS_SEPARATOR,

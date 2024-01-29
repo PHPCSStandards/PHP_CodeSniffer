@@ -9,10 +9,9 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 use PHP_CodeSniffer\Util\Tokens;
 
-final class NullsafeObjectOperatorTest extends AbstractMethodUnitTest
+final class NullsafeObjectOperatorTest extends AbstractTokenizerTestCase
 {
 
     /**
@@ -36,7 +35,7 @@ final class NullsafeObjectOperatorTest extends AbstractMethodUnitTest
      */
     public function testObjectOperator()
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $operator = $this->getTargetToken('/* testObjectOperator */', $this->find);
         $this->assertSame(T_OBJECT_OPERATOR, $tokens[$operator]['code'], 'Failed asserting code is object operator');
@@ -57,7 +56,7 @@ final class NullsafeObjectOperatorTest extends AbstractMethodUnitTest
      */
     public function testNullsafeObjectOperator($testMarker)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $operator = $this->getTargetToken($testMarker, $this->find);
         $this->assertSame(T_NULLSAFE_OBJECT_OPERATOR, $tokens[$operator]['code'], 'Failed asserting code is nullsafe object operator');
@@ -97,14 +96,14 @@ final class NullsafeObjectOperatorTest extends AbstractMethodUnitTest
      */
     public function testTernaryThen($testMarker, $testObjectOperator=false)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $operator = $this->getTargetToken($testMarker, $this->find);
         $this->assertSame(T_INLINE_THEN, $tokens[$operator]['code'], 'Failed asserting code is inline then');
         $this->assertSame('T_INLINE_THEN', $tokens[$operator]['type'], 'Failed asserting type is inline then');
 
         if ($testObjectOperator === true) {
-            $next = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($operator + 1), null, true);
+            $next = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($operator + 1), null, true);
             $this->assertSame(T_OBJECT_OPERATOR, $tokens[$next]['code'], 'Failed asserting code is object operator');
             $this->assertSame('T_OBJECT_OPERATOR', $tokens[$next]['type'], 'Failed asserting type is object operator');
         }

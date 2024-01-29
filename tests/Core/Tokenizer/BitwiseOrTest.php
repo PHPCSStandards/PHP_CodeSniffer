@@ -9,9 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class BitwiseOrTest extends AbstractMethodUnitTest
+final class BitwiseOrTest extends AbstractTokenizerTestCase
 {
 
 
@@ -27,7 +25,7 @@ final class BitwiseOrTest extends AbstractMethodUnitTest
      */
     public function testBitwiseOr($testMarker)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $target     = $this->getTargetToken($testMarker, [T_BITWISE_OR, T_TYPE_UNION]);
         $tokenArray = $tokens[$target];
 
@@ -79,7 +77,7 @@ final class BitwiseOrTest extends AbstractMethodUnitTest
      */
     public function testTypeUnion($testMarker)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $target     = $this->getTargetToken($testMarker, [T_BITWISE_OR, T_TYPE_UNION]);
         $tokenArray = $tokens[$target];
 

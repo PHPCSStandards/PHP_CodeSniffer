@@ -9,9 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class EnumCaseTest extends AbstractMethodUnitTest
+final class EnumCaseTest extends AbstractTokenizerTestCase
 {
 
 
@@ -28,7 +26,7 @@ final class EnumCaseTest extends AbstractMethodUnitTest
      */
     public function testEnumCases($testMarker)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $enumCase   = $this->getTargetToken($testMarker, [T_ENUM_CASE, T_CASE]);
         $tokenArray = $tokens[$enumCase];
 
@@ -77,7 +75,7 @@ final class EnumCaseTest extends AbstractMethodUnitTest
      */
     public function testNotEnumCases($testMarker)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $case       = $this->getTargetToken($testMarker, [T_ENUM_CASE, T_CASE]);
         $tokenArray = $tokens[$case];
 
@@ -125,7 +123,7 @@ final class EnumCaseTest extends AbstractMethodUnitTest
      */
     public function testKeywordAsEnumCaseNameShouldBeString($testMarker)
     {
-        $tokens       = self::$phpcsFile->getTokens();
+        $tokens       = $this->phpcsFile->getTokens();
         $enumCaseName = $this->getTargetToken($testMarker, [T_STRING, T_INTERFACE, T_TRAIT, T_ENUM, T_FUNCTION, T_FALSE, T_DEFAULT, T_ARRAY]);
         $tokenArray   = $tokens[$enumCaseName];
 

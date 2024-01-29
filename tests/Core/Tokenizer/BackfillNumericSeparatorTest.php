@@ -9,10 +9,9 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 use PHP_CodeSniffer\Util\Tokens;
 
-final class BackfillNumericSeparatorTest extends AbstractMethodUnitTest
+final class BackfillNumericSeparatorTest extends AbstractTokenizerTestCase
 {
 
 
@@ -30,7 +29,7 @@ final class BackfillNumericSeparatorTest extends AbstractMethodUnitTest
      */
     public function testBackfill($marker, $type, $value)
     {
-        $tokens     = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
         $number     = $this->getTargetToken($marker, [T_LNUMBER, T_DNUMBER]);
         $tokenArray = $tokens[$number];
 
@@ -150,7 +149,7 @@ final class BackfillNumericSeparatorTest extends AbstractMethodUnitTest
      */
     public function testNoBackfill($testMarker, $expectedTokens)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
         $number = $this->getTargetToken($testMarker, [T_LNUMBER, T_DNUMBER]);
 
         foreach ($expectedTokens as $key => $expectedToken) {
