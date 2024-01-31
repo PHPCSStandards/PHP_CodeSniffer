@@ -79,6 +79,11 @@ class ReturnMe {
     private function myFunction(): static {
         return $this;
     }
+
+    /* testReturnTypeNullableStatic */
+    function myNullableFunction(): ?static {
+        return $this;
+    }
 }
 
 /* testPHP8MixedTypeHint */
