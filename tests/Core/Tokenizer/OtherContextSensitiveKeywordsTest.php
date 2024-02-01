@@ -86,6 +86,12 @@ final class OtherContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
             'class instantiation: false'                                        => ['/* testClassInstantiationFalseIsString */'],
             'class instantiation: true'                                         => ['/* testClassInstantiationTrueIsString */'],
             'class instantiation: null'                                         => ['/* testClassInstantiationNullIsString */'],
+
+            'constant declaration: false as name after type'                    => ['/* testFalseIsNameForTypedConstant */'],
+            'constant declaration: true as name after type'                     => ['/* testTrueIsNameForTypedConstant */'],
+            'constant declaration: null as name after type'                     => ['/* testNullIsNameForTypedConstant */'],
+            'constant declaration: self as name after type'                     => ['/* testSelfIsNameForTypedConstant */'],
+            'constant declaration: parent as name after type'                   => ['/* testParentIsNameForTypedConstant */'],
         ];
 
     }//end dataStrings()
@@ -184,6 +190,90 @@ final class OtherContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
             'null: in comparison'                     => [
                 'testMarker'        => '/* testNullIsKeywordInComparison */',
                 'expectedTokenType' => 'T_NULL',
+            ],
+
+            'false: type in OO constant declaration'  => [
+                'testMarker'        => '/* testFalseIsKeywordAsConstType */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: type in OO constant declaration'   => [
+                'testMarker'        => '/* testTrueIsKeywordAsConstType */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: type in OO constant declaration'   => [
+                'testMarker'        => '/* testNullIsKeywordAsConstType */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: type in OO constant declaration'   => [
+                'testMarker'        => '/* testSelfIsKeywordAsConstType */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: type in OO constant declaration' => [
+                'testMarker'        => '/* testParentIsKeywordAsConstType */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'false: value in constant declaration'    => [
+                'testMarker'        => '/* testFalseIsKeywordAsConstDefault */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: value in constant declaration'     => [
+                'testMarker'        => '/* testTrueIsKeywordAsConstDefault */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: value in constant declaration'     => [
+                'testMarker'        => '/* testNullIsKeywordAsConstDefault */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: value in constant declaration'     => [
+                'testMarker'        => '/* testSelfIsKeywordAsConstDefault */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: value in constant declaration'   => [
+                'testMarker'        => '/* testParentIsKeywordAsConstDefault */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'false: type in property declaration'     => [
+                'testMarker'        => '/* testFalseIsKeywordAsPropertyType */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: type in property declaration'      => [
+                'testMarker'        => '/* testTrueIsKeywordAsPropertyType */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: type in property declaration'      => [
+                'testMarker'        => '/* testNullIsKeywordAsPropertyType */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: type in property declaration'      => [
+                'testMarker'        => '/* testSelfIsKeywordAsPropertyType */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: type in property declaration'    => [
+                'testMarker'        => '/* testParentIsKeywordAsPropertyType */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'false: value in property declaration'    => [
+                'testMarker'        => '/* testFalseIsKeywordAsPropertyDefault */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: value in property declaration'     => [
+                'testMarker'        => '/* testTrueIsKeywordAsPropertyDefault */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: value in property declaration'     => [
+                'testMarker'        => '/* testNullIsKeywordAsPropertyDefault */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: value in property declaration'     => [
+                'testMarker'        => '/* testSelfIsKeywordAsPropertyDefault */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: value in property declaration'   => [
+                'testMarker'        => '/* testParentIsKeywordAsPropertyDefault */',
+                'expectedTokenType' => 'T_PARENT',
             ],
         ];
 

@@ -118,6 +118,12 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
             'constant declaration: or'                        => ['/* testOr */'],
             'constant declaration: xor'                       => ['/* testXor */'],
 
+            'constant declaration: array in type'             => ['/* testArrayIsTstringInConstType */'],
+            'constant declaration: array, name after type'    => ['/* testArrayNameForTypedConstant */'],
+            'constant declaration: static, name after type'   => ['/* testStaticIsNameForTypedConstant */'],
+            'constant declaration: private, name after type'  => ['/* testPrivateNameForUnionTypedConstant */'],
+            'constant declaration: final, name after type'    => ['/* testFinalNameForIntersectionTypedConstant */'],
+
             'namespace declaration: class'                    => ['/* testKeywordAfterNamespaceShouldBeString */'],
             'namespace declaration (partial): my'             => ['/* testNamespaceNameIsString1 */'],
             'namespace declaration (partial): class'          => ['/* testNamespaceNameIsString2 */'],
@@ -182,6 +188,19 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
                 'testMarker'        => '/* testNamespaceIsKeyword */',
                 'expectedTokenType' => 'T_NAMESPACE',
             ],
+            'array: default value in const decl'     => [
+                'testMarker'        => '/* testArrayIsKeywordInConstDefault */',
+                'expectedTokenType' => 'T_ARRAY',
+            ],
+            'static: type in constant declaration'   => [
+                'testMarker'        => '/* testStaticIsKeywordAsConstType */',
+                'expectedTokenType' => 'T_STATIC',
+            ],
+            'static: value in constant declaration'  => [
+                'testMarker'        => '/* testStaticIsKeywordAsConstDefault */',
+                'expectedTokenType' => 'T_STATIC',
+            ],
+
             'abstract: class declaration'            => [
                 'testMarker'        => '/* testAbstractIsKeyword */',
                 'expectedTokenType' => 'T_ABSTRACT',

@@ -48,6 +48,7 @@ final class TypeIntersectionTest extends AbstractTokenizerTestCase
         return [
             'in simple assignment 1'                    => ['/* testBitwiseAnd1 */'],
             'in simple assignment 2'                    => ['/* testBitwiseAnd2 */'],
+            'in OO constant default value'              => ['/* testBitwiseAndOOConstDefaultValue */'],
             'in property default value'                 => ['/* testBitwiseAndPropertyDefaultValue */'],
             'in method parameter default value'         => ['/* testBitwiseAndParamDefaultValue */'],
             'reference for method parameter'            => ['/* testBitwiseAnd3 */'],
@@ -100,6 +101,14 @@ final class TypeIntersectionTest extends AbstractTokenizerTestCase
     public static function dataTypeIntersection()
     {
         return [
+            'type for OO constant'                                        => ['/* testTypeIntersectionOOConstSimple */'],
+            'type for OO constant, reversed modifier order'               => ['/* testTypeIntersectionOOConstReverseModifierOrder */'],
+            'type for OO constant, first of multi-intersect'              => ['/* testTypeIntersectionOOConstMulti1 */'],
+            'type for OO constant, middle of multi-intersect + comments'  => ['/* testTypeIntersectionOOConstMulti2 */'],
+            'type for OO constant, last of multi-intersect'               => ['/* testTypeIntersectionOOConstMulti3 */'],
+            'type for OO constant, using namespace relative names'        => ['/* testTypeIntersectionOOConstNamespaceRelative */'],
+            'type for OO constant, using partially qualified names'       => ['/* testTypeIntersectionOOConstPartiallyQualified */'],
+            'type for OO constant, using fully qualified names'           => ['/* testTypeIntersectionOOConstFullyQualified */'],
             'type for static property'                                    => ['/* testTypeIntersectionPropertySimple */'],
             'type for static property, reversed modifier order'           => ['/* testTypeIntersectionPropertyReverseModifierOrder */'],
             'type for property, first of multi-intersect'                 => ['/* testTypeIntersectionPropertyMulti1 */'],
