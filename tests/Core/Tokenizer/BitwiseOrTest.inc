@@ -9,6 +9,30 @@ $result = $value | $test /* testBitwiseOr2 */ | $another;
 
 class TypeUnion
 {
+    /* testTypeUnionOOConstSimple */
+    public const Foo|Bar SIMPLE = new Foo;
+
+    /* testTypeUnionOOConstReverseModifierOrder */
+    protected final const int|float MODIFIERS_REVERSED /* testBitwiseOrOOConstDefaultValue */ = E_WARNING | E_NOTICE;
+
+    const
+        /* testTypeUnionOOConstMulti1 */
+        array |
+        /* testTypeUnionOOConstMulti2 */
+        Traversable | // phpcs:ignore Stnd.Cat.Sniff
+        false
+        /* testTypeUnionOOConstMulti3 */
+        | null MULTI_UNION = false;
+
+    /* testTypeUnionOOConstNamespaceRelative */
+    final protected const namespace\Sub\NameA|namespace\Sub\NameB NAMESPACE_RELATIVE = new namespace\Sub\NameB;
+
+    /* testTypeUnionOOConstPartiallyQualified */
+    const Partially\Qualified\NameA|Partially\Qualified\NameB PARTIALLY_QUALIFIED = new Partially\Qualified\NameA;
+
+    /* testTypeUnionOOConstFullyQualified */
+    const \Fully\Qualified\NameA|\Fully\Qualified\NameB FULLY_QUALIFIED = new \Fully\Qualified\NameB();
+
     /* testTypeUnionPropertySimple */
     public static Foo|Bar $obj;
 

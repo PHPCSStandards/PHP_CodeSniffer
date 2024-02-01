@@ -9,6 +9,30 @@ $result = $value & $test /* testBitwiseAnd2 */ & $another;
 
 class TypeIntersection
 {
+    /* testTypeIntersectionOOConstSimple */
+    public const Foo&Bar SIMPLE = new Foo();
+
+    /* testTypeIntersectionOOConstReverseModifierOrder */
+    protected final const Something&Nothing MODIFIERS_REVERSED /* testBitwiseAndOOConstDefaultValue */ = E_WARNING & E_NOTICE;
+
+    const
+        /* testTypeIntersectionOOConstMulti1 */
+        Foo &
+        /* testTypeIntersectionOOConstMulti2 */
+        Traversable & // phpcs:ignore Stnd.Cat.Sniff
+        Boo
+        /* testTypeIntersectionOOConstMulti3 */
+        & Bar MULTI_INTERSECTION = false;
+
+    /* testTypeIntersectionOOConstNamespaceRelative */
+    const namespace\Sub\NameA&namespace\Sub\NameB NAMESPACE_RELATIVE = new namespace\Sub\NameB;
+
+    /* testTypeIntersectionOOConstPartiallyQualified */
+    const Partially\Qualified\NameA&Partially\Qualified\NameB PARTIALLY_QUALIFIED = new Partially\Qualified\NameA;
+
+    /* testTypeIntersectionOOConstFullyQualified */
+    const \Fully\Qualified\NameA&\Fully\Qualified\NameB FULLY_QUALIFIED = new \Fully\Qualified\NameB();
+
     /* testTypeIntersectionPropertySimple */
     public static Foo&Bar $obj;
 

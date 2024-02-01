@@ -51,3 +51,17 @@ function standAloneFalseTrueNullTypesAndMore(
     || $a === /* testNullIsKeywordInComparison */ null
     ) {}
 }
+
+class TypedConstProp {
+    const /* testFalseIsKeywordAsConstType */ false /* testFalseIsNameForTypedConstant */ FALSE = /* testFalseIsKeywordAsConstDefault */ false;
+    const /* testTrueIsKeywordAsConstType */ true /* testTrueIsNameForTypedConstant */ TRUE = /* testTrueIsKeywordAsConstDefault */ true;
+    const /* testNullIsKeywordAsConstType */ null /* testNullIsNameForTypedConstant */ NULL = /* testNullIsKeywordAsConstDefault */ null;
+    const /* testSelfIsKeywordAsConstType */ self /* testSelfIsNameForTypedConstant */ SELF = new /* testSelfIsKeywordAsConstDefault */ self;
+    const /* testParentIsKeywordAsConstType */ parent /* testParentIsNameForTypedConstant */ PARENT = new /* testParentIsKeywordAsConstDefault */ parent;
+
+    public /* testFalseIsKeywordAsPropertyType */ false $false = /* testFalseIsKeywordAsPropertyDefault */ false;
+    protected readonly /* testTrueIsKeywordAsPropertyType */ true $true = /* testTrueIsKeywordAsPropertyDefault */ true;
+    static private /* testNullIsKeywordAsPropertyType */ null $null = /* testNullIsKeywordAsPropertyDefault */ null;
+    var /* testSelfIsKeywordAsPropertyType */ self $self = new /* testSelfIsKeywordAsPropertyDefault */ self;
+    protected /* testParentIsKeywordAsPropertyType */ parent $parent = new /* testParentIsKeywordAsPropertyDefault */ parent;
+}
