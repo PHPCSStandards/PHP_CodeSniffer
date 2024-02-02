@@ -133,3 +133,11 @@ class ReadonlyTest {
 
     public function __construct(readonly protected float|int $x, public readonly ?string &$y = 'test') {}
 }
+
+// PHP 8.2 readonly classes.
+readonly class ReadonlyClassTest {}
+readonly class ReadonlyClassTest {}
+
+// PHP 8.3 readonly anonymous classes.
+$anon = new readonly class {};
+$anon = new readonly class {};
