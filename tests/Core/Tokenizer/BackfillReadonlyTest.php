@@ -151,6 +151,17 @@ final class BackfillReadonlyTest extends AbstractTokenizerTestCase
             'property declaration, constructor property promotion, DNF type and reference'    => [
                 'testMarker' => '/* testReadonlyConstructorPropertyPromotionWithDNFAndReference */',
             ],
+            'anon class declaration, with parentheses'                                        => [
+                'testMarker' => '/* testReadonlyAnonClassWithParens */',
+            ],
+            'anon class declaration, without parentheses'                                     => [
+                'testMarker'  => '/* testReadonlyAnonClassWithoutParens */',
+                'testContent' => 'Readonly',
+            ],
+            'anon class declaration, with comments and whitespace'                            => [
+                'testMarker'  => '/* testReadonlyAnonClassWithCommentsAndWhitespace */',
+                'testContent' => 'READONLY',
+            ],
             'live coding / parse error'                                                       => [
                 'testMarker' => '/* testParseErrorLiveCoding */',
             ],
