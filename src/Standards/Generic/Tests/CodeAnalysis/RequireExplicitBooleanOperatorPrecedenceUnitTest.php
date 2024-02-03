@@ -1,9 +1,10 @@
 <?php
 /**
- * Unit test class for the MixedBooleanOperator sniff.
+ * Unit test class for the RequireExplicitBooleanOperatorPrecedence sniff.
  *
  * @author    Tim Duesterhus <duesterhus@woltlab.com>
  * @copyright 2021-2023 WoltLab GmbH.
+ * @copyright 2024 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
@@ -12,11 +13,11 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\CodeAnalysis;
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
 /**
- * Unit test class for the MixedBooleanOperator sniff.
+ * Unit test class for the RequireExplicitBooleanOperatorPrecedence sniff.
  *
- * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\MixedBooleanOperatorSniff
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\RequireExplicitBooleanOperatorPrecedenceSniff
  */
-class MixedBooleanOperatorUnitTest extends AbstractSniffUnitTest
+final class RequireExplicitBooleanOperatorPrecedenceUnitTest extends AbstractSniffUnitTest
 {
 
 

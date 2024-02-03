@@ -9,18 +9,21 @@
  * $three = true;
  *
  * $result = $one && $two || $three;
- *
  * $result3 = $one && !$two xor $three;
- *
- *
- * if (
- *     $result && !$result3
- *     || !$result && $result3
- * ) {}
  * </code>
+ *
+ * {@internal The unary `!` operator is not handled, because its high precedence matches its visuals of
+ * applying only to the sub-expression right next to it, making it unlikely that someone would
+ * misinterpret its precedence. Requiring parentheses around it would reduce the readability of
+ * expressions due to the additional characters, especially if multiple subexpressions / variables
+ * need to be negated.}
+ *
+ * Sister-sniff to the `Squiz.ControlStructures.InlineIfDeclaration` and
+ * `Squiz.Formatting.OperatorBracket.MissingBrackets` sniffs.
  *
  * @author    Tim Duesterhus <duesterhus@woltlab.com>
  * @copyright 2021-2023 WoltLab GmbH.
+ * @copyright 2024 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
@@ -30,7 +33,7 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Util\Tokens;
 
-class MixedBooleanOperatorSniff implements Sniff
+class RequireExplicitBooleanOperatorPrecedenceSniff implements Sniff
 {
 
     /**
@@ -52,8 +55,8 @@ class MixedBooleanOperatorSniff implements Sniff
     {
         $this->searchTargets  = Tokens::$booleanOperators;
         $this->searchTargets += Tokens::$blockOpeners;
-        $this->searchTargets[\T_INLINE_THEN] = \T_INLINE_THEN;
-        $this->searchTargets[\T_INLINE_ELSE] = \T_INLINE_ELSE;
+        $this->searchTargets[T_INLINE_THEN] = T_INLINE_THEN;
+        $this->searchTargets[T_INLINE_ELSE] = T_INLINE_ELSE;
 
         return Tokens::$booleanOperators;
 
@@ -94,7 +97,7 @@ class MixedBooleanOperatorSniff implements Sniff
             return;
         }
 
-        if (\in_array($tokens[$previous]['code'], [\T_INLINE_THEN, \T_INLINE_ELSE], true) === true) {
+        if (in_array($tokens[$previous]['code'], [T_INLINE_THEN, T_INLINE_ELSE], true) === true) {
             // Beginning of the expression found for the ternary conditional operator.
             return;
         }
