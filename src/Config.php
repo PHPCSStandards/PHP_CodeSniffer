@@ -1387,7 +1387,7 @@ class Config
         echo ' -n    Do not print warnings (shortcut for --warning-severity=0)'.PHP_EOL;
         echo ' -w    Print both warnings and errors (this is the default)'.PHP_EOL;
         echo ' -l    Local directory only, no recursion'.PHP_EOL;
-        echo ' -s    Show sniff codes in all reports'.PHP_EOL;
+        echo ' -s    Show error codes in all reports'.PHP_EOL;
         echo ' -a    Run interactively'.PHP_EOL;
         echo ' -e    Explain a standard by showing the sniffs it includes'.PHP_EOL;
         echo ' -p    Show progress of the run'.PHP_EOL;
