@@ -1,0 +1,66 @@
+<documentation title="Superfluous Whitespace">
+    <standard>
+    <![CDATA[
+    There should be no extra whitespace at the start of a file.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: No whitespace preceding first content in file.">
+        <![CDATA[<?php
+echo 'hi';
+]]>
+        </code>
+        <code title="Invalid: Whitespace used before content in file.">
+        <![CDATA[
+        <em></em>
+<?php
+echo 'hi';
+]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There should be no trailing whitespace at the end of lines.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: No whitespace found at end of line.">
+        <![CDATA[
+echo 'hello';
+]]>
+        </code>
+        <code title="Invalid: Whitespace found at end of line.">
+        <![CDATA[
+echo 'hello';<em>   </em>
+]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There should be no more than one consecutive blank newline in functions.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Functions do not contain multiple empty lines in a row.">
+        <![CDATA[
+function myFunction()
+{
+    echo 'code here';
+
+    echo 'code here';
+}
+]]>
+        </code>
+        <code title="Invalid: Functions contain multiple empty lines in a row.">
+        <![CDATA[
+function myFunction()
+{
+    echo 'code here';
+    <em>
+
+    </em>echo 'code here';
+}
+]]>
+        </code>
+    </code_comparison>
+</documentation>
