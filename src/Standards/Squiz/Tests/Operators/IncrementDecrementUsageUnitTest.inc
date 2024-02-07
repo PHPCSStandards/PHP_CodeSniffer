@@ -46,3 +46,8 @@ $var-=1;
 
 $var=$var+1;
 $var=$var-1;
+
+$var /*comment*/ +=1;
+$var
+    // phpcs:ignore Something
+    -=1;
