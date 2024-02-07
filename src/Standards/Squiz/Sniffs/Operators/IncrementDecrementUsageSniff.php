@@ -165,8 +165,8 @@ class IncrementDecrementUsageSniff implements Sniff
 
         // We have only one variable, and it's the same as what is being assigned,
         // so we need to check what is being added or subtracted.
-        $nextNumber     = ($stackPtr + 1);
-        $previousNumber = ($stackPtr + 1);
+        $nextNumber     = $stackPtr;
+        $previousNumber = $stackPtr;
         $numberCount    = 0;
         while (($nextNumber = $phpcsFile->findNext([T_LNUMBER], ($nextNumber + 1), $statementEnd, false)) !== false) {
             $previousNumber = $nextNumber;
