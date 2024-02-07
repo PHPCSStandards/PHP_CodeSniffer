@@ -44,6 +44,8 @@ final class IncrementDecrementUsageUnitTest extends AbstractSniffUnitTest
             42 => 1,
             44 => 1,
             45 => 1,
+            47 => 1,
+            48 => 1,
         ];
 
     }//end getErrorList()

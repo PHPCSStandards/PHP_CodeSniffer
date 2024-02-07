@@ -145,8 +145,8 @@ class IncrementDecrementUsageSniff implements Sniff
         }
 
         if ($tokens[$stackPtr]['code'] === T_EQUAL) {
-            $nextVar          = ($stackPtr + 1);
-            $previousVariable = ($stackPtr + 1);
+            $nextVar          = $stackPtr;
+            $previousVariable = $stackPtr;
             $variableCount    = 0;
             while (($nextVar = $phpcsFile->findNext(T_VARIABLE, ($nextVar + 1), $statementEnd)) !== false) {
                 $previousVariable = $nextVar;
