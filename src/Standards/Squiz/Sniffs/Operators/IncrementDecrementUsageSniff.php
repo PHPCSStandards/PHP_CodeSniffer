@@ -129,8 +129,14 @@ class IncrementDecrementUsageSniff implements Sniff
         $statementEnd = $phpcsFile->findNext([T_SEMICOLON, T_CLOSE_PARENTHESIS, T_CLOSE_SQUARE_BRACKET, T_CLOSE_CURLY_BRACKET], $stackPtr);
 
         // If there is anything other than variables, numbers, spaces or operators we need to return.
-        $noiseTokens = $phpcsFile->findNext([T_LNUMBER, T_VARIABLE, T_WHITESPACE, T_PLUS, T_MINUS, T_OPEN_PARENTHESIS], ($stackPtr + 1), $statementEnd, true);
+        $find   = Tokens::$emptyTokens;
+        $find[] = T_LNUMBER;
+        $find[] = T_VARIABLE;
+        $find[] = T_PLUS;
+        $find[] = T_MINUS;
+        $find[] = T_OPEN_PARENTHESIS;
 
+        $noiseTokens = $phpcsFile->findNext($find, ($stackPtr + 1), $statementEnd, true);
         if ($noiseTokens !== false) {
             return;
         }
