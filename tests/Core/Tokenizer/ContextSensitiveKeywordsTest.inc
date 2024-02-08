@@ -76,6 +76,12 @@ class ContextSensitiveKeywords
     const /* testAnd */ AND = 'LOGICAL_AND';
     const /* testOr */ OR = 'LOGICAL_OR';
     const /* testXor */ XOR = 'LOGICAL_XOR';
+
+    const /* testArrayIsTstringInConstType */ array /* testArrayNameForTypedConstant */ ARRAY = /* testArrayIsKeywordInConstDefault */ array();
+    const /* testStaticIsKeywordAsConstType */ static /* testStaticIsNameForTypedConstant */ STATIC = new /* testStaticIsKeywordAsConstDefault */ static;
+
+    const int|bool /* testPrivateNameForUnionTypedConstant */ PRIVATE = 'PRIVATE';
+    const Foo&Bar /* testFinalNameForIntersectionTypedConstant */ FINAL = 'FINAL';
 }
 
 namespace /* testKeywordAfterNamespaceShouldBeString */ class;

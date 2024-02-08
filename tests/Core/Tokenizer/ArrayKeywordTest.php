@@ -68,6 +68,9 @@ final class ArrayKeywordTest extends AbstractTokenizerTestCase
             'nested: inner array'                   => [
                 'testMarker' => '/* testNestedArray */',
             ],
+            'OO constant default value'             => [
+                'testMarker' => '/* testOOConstDefault */',
+            ],
         ];
 
     }//end dataArrayKeyword()
@@ -122,6 +125,12 @@ final class ArrayKeywordTest extends AbstractTokenizerTestCase
             'function union return type' => [
                 'testMarker' => '/* testFunctionDeclarationReturnType */',
             ],
+            'OO constant type'           => [
+                'testMarker' => '/* testOOConstType */',
+            ],
+            'OO property type'           => [
+                'testMarker' => '/* testOOPropertyType */',
+            ],
         ];
 
     }//end dataArrayType()
@@ -167,12 +176,16 @@ final class ArrayKeywordTest extends AbstractTokenizerTestCase
     public static function dataNotArrayKeyword()
     {
         return [
-            'class-constant-name' => [
+            'class-constant-name'            => [
                 'testMarker'  => '/* testClassConst */',
                 'testContent' => 'ARRAY',
             ],
-            'class-method-name'   => [
+            'class-method-name'              => [
                 'testMarker' => '/* testClassMethod */',
+            ],
+            'class-constant-name-after-type' => [
+                'testMarker'  => '/* testTypedOOConstName */',
+                'testContent' => 'ARRAY',
             ],
         ];
 

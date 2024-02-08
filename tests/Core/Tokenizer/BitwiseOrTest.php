@@ -47,6 +47,7 @@ final class BitwiseOrTest extends AbstractTokenizerTestCase
         return [
             'in simple assignment 1'                    => ['/* testBitwiseOr1 */'],
             'in simple assignment 2'                    => ['/* testBitwiseOr2 */'],
+            'in OO constant default value'              => ['/* testBitwiseOrOOConstDefaultValue */'],
             'in property default value'                 => ['/* testBitwiseOrPropertyDefaultValue */'],
             'in method parameter default value'         => ['/* testBitwiseOrParamDefaultValue */'],
             'in return statement'                       => ['/* testBitwiseOr3 */'],
@@ -97,6 +98,14 @@ final class BitwiseOrTest extends AbstractTokenizerTestCase
     public static function dataTypeUnion()
     {
         return [
+            'type for OO constant'                                     => ['/* testTypeUnionOOConstSimple */'],
+            'type for OO constant, reversed modifier order'            => ['/* testTypeUnionOOConstReverseModifierOrder */'],
+            'type for OO constant, first of multi-union'               => ['/* testTypeUnionOOConstMulti1 */'],
+            'type for OO constant, middle of multi-union + comments'   => ['/* testTypeUnionOOConstMulti2 */'],
+            'type for OO constant, last of multi-union'                => ['/* testTypeUnionOOConstMulti3 */'],
+            'type for OO constant, using namespace relative names'     => ['/* testTypeUnionOOConstNamespaceRelative */'],
+            'type for OO constant, using partially qualified names'    => ['/* testTypeUnionOOConstPartiallyQualified */'],
+            'type for OO constant, using fully qualified names'        => ['/* testTypeUnionOOConstFullyQualified */'],
             'type for static property'                                 => ['/* testTypeUnionPropertySimple */'],
             'type for static property, reversed modifier order'        => ['/* testTypeUnionPropertyReverseModifierOrder */'],
             'type for property, first of multi-union'                  => ['/* testTypeUnionPropertyMulti1 */'],
