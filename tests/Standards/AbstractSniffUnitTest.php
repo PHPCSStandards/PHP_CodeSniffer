@@ -197,7 +197,7 @@ abstract class AbstractSniffUnitTest extends TestCase
                         $fixedFilename     = basename($fixedFile);
                         $failureMessages[] = "Fixed version of $filename does not match expected version in $fixedFilename; the diff is\n$diff";
                     }
-                } else {
+                } else if (is_callable([$this, 'addWarning']) === true) {
                     $this->addWarning("Unable to verify auto-fixer results. File not found: $fixedFile");
                 }
             }//end if
