@@ -58,16 +58,13 @@ class TestClass
 {
 }//end class
 
-
 abstract class TestClass
 {
 }//end class
 
-
 interface TestClass
 {
 }//end interface
-
 
 class MyClass
 {
@@ -83,7 +80,6 @@ class TestClass
 
 enum MissingClosingComment {
 }//end enum
-
 
 enum HasClosingComment {
 }//end enum
