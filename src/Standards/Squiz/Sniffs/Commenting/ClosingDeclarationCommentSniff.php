@@ -110,7 +110,7 @@ class ClosingDeclarationCommentSniff implements Sniff
             } else {
                 $fix = $phpcsFile->addFixableError('Expected %s', $closingBracket, 'Missing', $data);
                 if ($fix === true) {
-                    $phpcsFile->fixer->replaceToken($closingBracket, '}'.$comment.$phpcsFile->eolChar);
+                    $phpcsFile->fixer->replaceToken($closingBracket, '}'.$comment);
                 }
             }
 
