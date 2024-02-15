@@ -14,7 +14,6 @@ use PHP_CodeSniffer\Files\DummyFile;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHPUnit\Framework\TestCase;
-use ReflectionProperty;
 
 abstract class AbstractMethodUnitTest extends TestCase
 {

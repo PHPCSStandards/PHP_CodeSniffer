@@ -73,7 +73,7 @@ abstract class AbstractFilterTestCase extends TestCase
     {
         $mockedObj = $this->getMockBuilder($className);
 
-        if (\method_exists($mockedObj, 'onlyMethods') === true) {
+        if (method_exists($mockedObj, 'onlyMethods') === true) {
             // PHPUnit 8+.
             if (is_array($methodsToMock) === true) {
                 return $mockedObj
