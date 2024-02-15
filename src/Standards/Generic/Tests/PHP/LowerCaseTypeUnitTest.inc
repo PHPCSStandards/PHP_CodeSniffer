@@ -95,6 +95,36 @@ $arrow = fn (Int $a, String $b, BOOL $c, Array $d, Foo\Bar $e) : Float => $a * $
 
 $cl = function (False $a, TRUE $b, Null $c): ?True {};
 
+class TypedClassConstants
+{
+    const UNTYPED = null;
+    const FLOAT = 'Reserved keyword as name is valid and should not be changed';
+    const OBJECT = 'Reserved keyword as name is valid and should not be changed';
+
+    const ClassName FIRST = null;
+    public const Int SECOND = 0;
+    private const ?BOOL THIRD = false;
+    public const Self FOURTH = null;
+}
+interface TypedInterfaceConstants
+{
+    protected const PaRenT FIRST = null;
+    private const ARRAY SECOND = [];
+    public const Float THIRD = 2.5;
+    final const ?STRING FOURTH = 'fourth';
+}
+trait TypedTraitConstants {
+    const IterablE FIRST = null;
+    const Object SECOND = null;
+    const Mixed THIRD = 'third';
+}
+enum TypedEnumConstants {
+    public const Iterable|FALSE|NULL FIRST = null;
+    protected const SELF|Parent /* comment */ |\Fully\Qualified\ClassName|UnQualifiedClass SECOND = null;
+    private const ClassName|/*comment*/Float|STRING|False THIRD = 'third';
+    public const sTRing | aRRaY | FaLSe FOURTH = 'fourth';
+}
+
 // Intentional error, should be ignored by the sniff.
 interface PropertiesNotAllowed {
     public $notAllowed;
