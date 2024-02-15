@@ -265,7 +265,7 @@ final class ReportWidthTest extends TestCase
     /**
      * Data provider.
      *
-     * @return array
+     * @return array<string, array<string, mixed>>
      */
     public static function dataReportWidthInputHandling()
     {
