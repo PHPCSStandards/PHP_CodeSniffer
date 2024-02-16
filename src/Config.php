@@ -886,14 +886,7 @@ class Config
                 }
 
                 $sniffs = explode(',', substr($arg, 7));
-                foreach ($sniffs as $sniff) {
-                    if (substr_count($sniff, '.') !== 2) {
-                        $error  = 'ERROR: The specified sniff code "'.$sniff.'" is invalid'.PHP_EOL.PHP_EOL;
-                        $error .= $this->printShortUsage(true);
-                        throw new DeepExitException($error, 3);
-                    }
-                }
-
+                $this->validateSniffCodes($sniffs, 'sniffs');
                 $this->sniffs = $sniffs;
                 self::$overriddenDefaults['sniffs'] = true;
             } else if (substr($arg, 0, 8) === 'exclude=') {
@@ -902,14 +895,7 @@ class Config
                 }
 
                 $sniffs = explode(',', substr($arg, 8));
-                foreach ($sniffs as $sniff) {
-                    if (substr_count($sniff, '.') !== 2) {
-                        $error  = 'ERROR: The specified sniff code "'.$sniff.'" is invalid'.PHP_EOL.PHP_EOL;
-                        $error .= $this->printShortUsage(true);
-                        throw new DeepExitException($error, 3);
-                    }
-                }
-
+                $this->validateSniffCodes($sniffs, 'exclude');
                 $this->exclude = $sniffs;
                 self::$overriddenDefaults['exclude'] = true;
             } else if (defined('PHP_CODESNIFFER_IN_TESTS') === false
@@ -1656,6 +1642,49 @@ class Config
         }
 
     }//end printConfigData()
+
+
+    /**
+     * Assert that all supplied sniff codes have the correct number of parts
+     *
+     * @param string[] $sniffs   A list of sniffs supplied by the user, to be validated.
+     * @param string   $argument The name of the argument which is being validated.
+     *
+     * @return void
+     * @throws DeepExitException
+     */
+    private function validateSniffCodes($sniffs, $argument)
+    {
+        foreach ($sniffs as $sniff) {
+            $partCount = substr_count($sniff, '.');
+            if ($partCount === 2) {
+                // Correct number of parts.
+                continue;
+            }
+
+            $error = 'ERROR: The specified sniff code "'.$sniff.'" is invalid'.PHP_EOL.PHP_EOL;
+
+            if ($partCount === 0) {
+                $error .= 'This appears to be a Standard code, but the '.$argument.' option only supports sniff codes.'.PHP_EOL;
+            } else if ($partCount === 1) {
+                $error .= 'This appears to be a Category code, but the '.$argument.' option only supports sniff codes.'.PHP_EOL;
+            } else if ($partCount === 3) {
+                $error .= 'This appears to be a Message code, but the '.$argument.' option only supports sniff codes.'.PHP_EOL;
+            }
+
+            $error .= 'Sniff codes are in the form "Standard.Category.Sniff"'.PHP_EOL.PHP_EOL;
+
+            if ($partCount > 2) {
+                $parts  = explode('.', $sniff, 4);
+                $error .= 'Perhaps try "'.$parts[0].'.'.$parts[1].'.'.$parts[2].'" instead.'.PHP_EOL.PHP_EOL;
+            }
+
+            $error .= $this->printShortUsage(true);
+
+            throw new DeepExitException($error, 3);
+        }//end foreach
+
+    }//end validateSniffCodes()
 
 
 }//end class
