@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Sniffs;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
+use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
 
 /**
  * Tests for the \PHP_CodeSniffer\Sniffs\AbstractArraySniff.
  *
  * @covers \PHP_CodeSniffer\Sniffs\AbstractArraySniff
  */
-final class AbstractArraySniffTest extends AbstractMethodUnitTest
+final class AbstractArraySniffTest extends AbstractMethodTestCase
 {
 
     /**

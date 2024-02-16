@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHPUnit\Framework\TestCase;
 
-abstract class AbstractMethodUnitTest extends TestCase
+abstract class AbstractMethodTestCase extends TestCase
 {
 
     /**

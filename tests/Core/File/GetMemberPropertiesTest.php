@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Tests\Core\File;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
+use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
 
 /**
  * Tests for the \PHP_CodeSniffer\Files\File::getMemberProperties method.
  *
  * @covers \PHP_CodeSniffer\Files\File::getMemberProperties
  */
-final class GetMemberPropertiesTest extends AbstractMethodUnitTest
+final class GetMemberPropertiesTest extends AbstractMethodTestCase
 {
 
 

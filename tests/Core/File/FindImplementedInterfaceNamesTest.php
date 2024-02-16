@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Tests\Core\File;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
+use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
 
 /**
  * Tests for the \PHP_CodeSniffer\Files\File::findImplementedInterfaceNames method.
  *
  * @covers \PHP_CodeSniffer\Files\File::findImplementedInterfaceNames
  */
-final class FindImplementedInterfaceNamesTest extends AbstractMethodUnitTest
+final class FindImplementedInterfaceNamesTest extends AbstractMethodTestCase
 {
 
 

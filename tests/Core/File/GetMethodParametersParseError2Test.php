@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Tests\Core\File;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
+use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
 
 /**
  * Tests for the \PHP_CodeSniffer\Files\File::getMethodParameters method.
  *
  * @covers \PHP_CodeSniffer\Files\File::getMethodParameters
  */
-final class GetMethodParametersParseError2Test extends AbstractMethodUnitTest
+final class GetMethodParametersParseError2Test extends AbstractMethodTestCase
 {
 
 
