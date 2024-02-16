@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Files;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the OneTraitPerFile sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\OneTraitPerFileSniff
  */
-final class OneTraitPerFileUnitTest extends AbstractSniffUnitTest
+final class OneTraitPerFileUnitTest extends AbstractSniffTestCase
 {
 
 

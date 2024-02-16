@@ -8,14 +8,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\NamingConventions;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the AbstractClassNamePrefix sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\AbstractClassNamePrefixSniff
  */
-final class AbstractClassNamePrefixUnitTest extends AbstractSniffUnitTest
+final class AbstractClassNamePrefixUnitTest extends AbstractSniffTestCase
 {
 
 

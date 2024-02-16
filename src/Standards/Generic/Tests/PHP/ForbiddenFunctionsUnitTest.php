@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the ForbiddenFunctions sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\ForbiddenFunctionsSniff
  */
-final class ForbiddenFunctionsUnitTest extends AbstractSniffUnitTest
+final class ForbiddenFunctionsUnitTest extends AbstractSniffTestCase
 {
 
 

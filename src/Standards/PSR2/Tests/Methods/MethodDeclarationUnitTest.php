@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\PSR2\Tests\Methods;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the MethodDeclaration sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\MethodDeclarationSniff
  */
-final class MethodDeclarationUnitTest extends AbstractSniffUnitTest
+final class MethodDeclarationUnitTest extends AbstractSniffTestCase
 {
 
 

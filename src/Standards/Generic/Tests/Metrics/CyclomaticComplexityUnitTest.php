@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Metrics;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the CyclomaticComplexity sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\CyclomaticComplexitySniff
  */
-final class CyclomaticComplexityUnitTest extends AbstractSniffUnitTest
+final class CyclomaticComplexityUnitTest extends AbstractSniffTestCase
 {
 
 

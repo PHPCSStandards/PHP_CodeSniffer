@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Files;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the ExecutableFile sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\ExecutableFileSniff
  */
-final class ExecutableFileUnitTest extends AbstractSniffUnitTest
+final class ExecutableFileUnitTest extends AbstractSniffTestCase
 {
 
 

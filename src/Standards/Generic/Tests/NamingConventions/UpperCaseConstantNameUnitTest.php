@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\NamingConventions;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the ValidConstantName sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\UpperCaseConstantNameSniff
  */
-final class UpperCaseConstantNameUnitTest extends AbstractSniffUnitTest
+final class UpperCaseConstantNameUnitTest extends AbstractSniffTestCase
 {
 
 

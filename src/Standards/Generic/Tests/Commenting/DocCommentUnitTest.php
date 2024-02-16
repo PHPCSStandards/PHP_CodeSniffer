@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Commenting;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the DocCommentSniff sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Commenting\DocCommentSniff
  */
-final class DocCommentUnitTest extends AbstractSniffUnitTest
+final class DocCommentUnitTest extends AbstractSniffTestCase
 {
 
 

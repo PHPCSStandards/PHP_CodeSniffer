@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\WhiteSpace;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the FunctionOpeningBraceSpace sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\FunctionOpeningBraceSpaceSniff
  */
-final class FunctionOpeningBraceSpaceUnitTest extends AbstractSniffUnitTest
+final class FunctionOpeningBraceSpaceUnitTest extends AbstractSniffTestCase
 {
 
 

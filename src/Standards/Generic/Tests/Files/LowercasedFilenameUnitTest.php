@@ -12,14 +12,14 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Files;
 use PHP_CodeSniffer\Files\DummyFile;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the LowercasedFilename sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LowercasedFilenameSniff
  */
-final class LowercasedFilenameUnitTest extends AbstractSniffUnitTest
+final class LowercasedFilenameUnitTest extends AbstractSniffTestCase
 {
 
 

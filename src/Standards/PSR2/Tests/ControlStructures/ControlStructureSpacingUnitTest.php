@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\PSR2\Tests\ControlStructures;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the FunctionSpacing sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\PSR2\Sniffs\ControlStructures\ControlStructureSpacingSniff
  */
-final class ControlStructureSpacingUnitTest extends AbstractSniffUnitTest
+final class ControlStructureSpacingUnitTest extends AbstractSniffTestCase
 {
 
 

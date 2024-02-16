@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the BacktickOperator sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\BacktickOperatorSniff
  */
-final class BacktickOperatorUnitTest extends AbstractSniffUnitTest
+final class BacktickOperatorUnitTest extends AbstractSniffTestCase
 {
 
 

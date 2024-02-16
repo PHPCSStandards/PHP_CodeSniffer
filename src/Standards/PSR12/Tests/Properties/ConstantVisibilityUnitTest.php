@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\PSR12\Tests\Properties;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the ConstantVisibility sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Properties\ConstantVisibilitySniff
  */
-final class ConstantVisibilityUnitTest extends AbstractSniffUnitTest
+final class ConstantVisibilityUnitTest extends AbstractSniffTestCase
 {
 
 

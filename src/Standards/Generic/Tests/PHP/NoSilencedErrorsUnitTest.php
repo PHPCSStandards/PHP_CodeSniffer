@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the NoSilencedErrors sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\NoSilencedErrorsSniff
  */
-final class NoSilencedErrorsUnitTest extends AbstractSniffUnitTest
+final class NoSilencedErrorsUnitTest extends AbstractSniffTestCase
 {
 
 

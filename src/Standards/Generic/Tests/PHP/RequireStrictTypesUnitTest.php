@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the RequireStrictType sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\RequireStrictTypesSniff
  */
-final class RequireStrictTypesUnitTest extends AbstractSniffUnitTest
+final class RequireStrictTypesUnitTest extends AbstractSniffTestCase
 {
 
 

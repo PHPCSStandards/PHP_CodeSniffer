@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\VersionControl;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the SubversionProperties sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\VersionControl\SubversionPropertiesSniff
  */
-final class SubversionPropertiesUnitTest extends AbstractSniffUnitTest
+final class SubversionPropertiesUnitTest extends AbstractSniffTestCase
 {
 
 

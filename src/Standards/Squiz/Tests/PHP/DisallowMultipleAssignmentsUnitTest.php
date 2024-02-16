@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\PHP;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the DisallowMultipleAssignments sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DisallowMultipleAssignmentsSniff
  */
-final class DisallowMultipleAssignmentsUnitTest extends AbstractSniffUnitTest
+final class DisallowMultipleAssignmentsUnitTest extends AbstractSniffTestCase
 {
 
 

@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\PHP;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the DisallowObEndFlush sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DisallowInlineIfSniff
  */
-final class DisallowInlineIfUnitTest extends AbstractSniffUnitTest
+final class DisallowInlineIfUnitTest extends AbstractSniffTestCase
 {
 
 

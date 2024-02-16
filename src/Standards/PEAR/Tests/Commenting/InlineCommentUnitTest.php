@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\PEAR\Tests\Commenting;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the InlineComment sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\InlineCommentSniff
  */
-final class InlineCommentUnitTest extends AbstractSniffUnitTest
+final class InlineCommentUnitTest extends AbstractSniffTestCase
 {
 
 

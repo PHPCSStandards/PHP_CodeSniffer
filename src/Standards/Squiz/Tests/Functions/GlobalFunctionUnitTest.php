@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\Functions;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the GlobalFunction sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions\GlobalFunctionSniff
  */
-final class GlobalFunctionUnitTest extends AbstractSniffUnitTest
+final class GlobalFunctionUnitTest extends AbstractSniffTestCase
 {
 
 

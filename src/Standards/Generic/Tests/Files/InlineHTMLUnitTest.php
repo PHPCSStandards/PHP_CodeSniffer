@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Files;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the InlineHTML sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\InlineHTMLSniff
  */
-final class InlineHTMLUnitTest extends AbstractSniffUnitTest
+final class InlineHTMLUnitTest extends AbstractSniffTestCase
 {
 
 

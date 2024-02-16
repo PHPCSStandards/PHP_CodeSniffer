@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\PSR12\Tests\Keywords;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the ShortFormTypeKeywords sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Keywords\ShortFormTypeKeywordsSniff
  */
-final class ShortFormTypeKeywordsUnitTest extends AbstractSniffUnitTest
+final class ShortFormTypeKeywordsUnitTest extends AbstractSniffTestCase
 {
 
 
