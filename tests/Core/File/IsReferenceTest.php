@@ -36,16 +36,16 @@ final class IsReferenceTest extends AbstractMethodUnitTest
     /**
      * Test correctly identifying whether a "bitwise and" token is a reference or not.
      *
-     * @param string $identifier Comment which precedes the test case.
+     * @param string $testMarker Comment which precedes the test case.
      * @param bool   $expected   Expected function output.
      *
      * @dataProvider dataIsReference
      *
      * @return void
      */
-    public function testIsReference($identifier, $expected)
+    public function testIsReference($testMarker, $expected)
     {
-        $bitwiseAnd = $this->getTargetToken($identifier, T_BITWISE_AND);
+        $bitwiseAnd = $this->getTargetToken($testMarker, T_BITWISE_AND);
         $result     = self::$phpcsFile->isReference($bitwiseAnd);
         $this->assertSame($expected, $result);
 
