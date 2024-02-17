@@ -12,8 +12,8 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Files\DummyFile;
+use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 use PHPUnit\Framework\TestCase;
