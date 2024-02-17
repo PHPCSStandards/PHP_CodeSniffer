@@ -234,7 +234,7 @@ final class ReportWidthTest extends TestCase
     /**
      * Test that the report width will be set correctly for various types of input.
      *
-     * @param mixed $input    Input value received.
+     * @param mixed $value    Input value received.
      * @param int   $expected Expected report width.
      *
      * @dataProvider dataReportWidthInputHandling
@@ -242,10 +242,10 @@ final class ReportWidthTest extends TestCase
      *
      * @return void
      */
-    public function testReportWidthInputHandling($input, $expected)
+    public function testReportWidthInputHandling($value, $expected)
     {
         $config = new Config();
-        $config->reportWidth = $input;
+        $config->reportWidth = $value;
 
         $this->assertSame($expected, $config->reportWidth);
 

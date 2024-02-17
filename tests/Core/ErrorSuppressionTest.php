@@ -665,9 +665,9 @@ EOD;
     {
         return [
             'no suppression'                                          => [
-                'before'         => '',
-                'after'          => '',
-                'expectedErrors' => 1,
+                'before'           => '',
+                'after'            => '',
+                'expectedWarnings' => 1,
             ],
 
             // Process with suppression.
