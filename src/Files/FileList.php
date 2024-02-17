@@ -12,10 +12,10 @@
 namespace PHP_CodeSniffer\Files;
 
 use PHP_CodeSniffer\Autoload;
-use PHP_CodeSniffer\Util;
-use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Exceptions\DeepExitException;
+use PHP_CodeSniffer\Ruleset;
+use PHP_CodeSniffer\Util;
 use ReturnTypeWillChange;
 
 class FileList implements \Iterator, \Countable
