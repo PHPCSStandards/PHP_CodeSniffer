@@ -9,12 +9,15 @@
 
 namespace PHP_CodeSniffer\Filters;
 
+use FilesystemIterator;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Util;
+use RecursiveDirectoryIterator;
+use RecursiveFilterIterator;
 use ReturnTypeWillChange;
 
-class Filter extends \RecursiveFilterIterator
+class Filter extends RecursiveFilterIterator
 {
 
     /**
@@ -137,7 +140,7 @@ class Filter extends \RecursiveFilterIterator
     {
         $filterClass = get_called_class();
         $children    = new $filterClass(
-            new \RecursiveDirectoryIterator($this->current(), (\RecursiveDirectoryIterator::SKIP_DOTS | \FilesystemIterator::FOLLOW_SYMLINKS)),
+            new RecursiveDirectoryIterator($this->current(), (RecursiveDirectoryIterator::SKIP_DOTS | FilesystemIterator::FOLLOW_SYMLINKS)),
             $this->basedir,
             $this->config,
             $this->ruleset

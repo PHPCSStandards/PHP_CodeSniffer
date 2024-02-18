@@ -12,6 +12,7 @@
 
 namespace PHP_CodeSniffer;
 
+use Exception;
 use PHP_CodeSniffer\Exceptions\DeepExitException;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\DummyFile;
@@ -662,7 +663,7 @@ class Runner
                     echo " ($errors errors, $warnings warnings)".PHP_EOL;
                 }
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $error = 'An error occurred during processing; checking has been aborted. The error message was: '.$e->getMessage();
 
             // Determine which sniff caused the error.

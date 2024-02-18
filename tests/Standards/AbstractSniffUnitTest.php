@@ -13,6 +13,7 @@
 
 namespace PHP_CodeSniffer\Tests\Standards;
 
+use DirectoryIterator;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\LocalFile;
 use PHP_CodeSniffer\Ruleset;
@@ -78,7 +79,7 @@ abstract class AbstractSniffUnitTest extends TestCase
         $testFiles = [];
 
         $dir = substr($testFileBase, 0, strrpos($testFileBase, DIRECTORY_SEPARATOR));
-        $di  = new \DirectoryIterator($dir);
+        $di  = new DirectoryIterator($dir);
 
         foreach ($di as $file) {
             $path = $file->getPathname();

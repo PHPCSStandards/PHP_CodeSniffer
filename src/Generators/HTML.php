@@ -13,6 +13,8 @@
 
 namespace PHP_CodeSniffer\Generators;
 
+use DOMDocument;
+use DOMNode;
 use PHP_CodeSniffer\Config;
 
 class HTML extends Generator
@@ -32,7 +34,7 @@ class HTML extends Generator
         $this->printToc();
 
         foreach ($this->docFiles as $file) {
-            $doc = new \DOMDocument();
+            $doc = new DOMDocument();
             $doc->load($file);
             $documentation = $doc->getElementsByTagName('documentation')->item(0);
             $this->processSniff($documentation);
@@ -145,7 +147,7 @@ class HTML extends Generator
         echo '  <ul class="toc">'.PHP_EOL;
 
         foreach ($this->docFiles as $file) {
-            $doc = new \DOMDocument();
+            $doc = new DOMDocument();
             $doc->load($file);
             $documentation = $doc->getElementsByTagName('documentation')->item(0);
             $title         = $this->getTitle($documentation);
@@ -188,7 +190,7 @@ class HTML extends Generator
      *
      * @return void
      */
-    public function processSniff(\DOMNode $doc)
+    public function processSniff(DOMNode $doc)
     {
         $title = $this->getTitle($doc);
         echo '  <a name="'.str_replace(' ', '-', $title).'" />'.PHP_EOL;
@@ -212,7 +214,7 @@ class HTML extends Generator
      *
      * @return void
      */
-    protected function printTextBlock(\DOMNode $node)
+    protected function printTextBlock(DOMNode $node)
     {
         $content = trim($node->nodeValue);
         $content = htmlspecialchars($content);
@@ -233,7 +235,7 @@ class HTML extends Generator
      *
      * @return void
      */
-    protected function printCodeComparisonBlock(\DOMNode $node)
+    protected function printCodeComparisonBlock(DOMNode $node)
     {
         $codeBlocks = $node->getElementsByTagName('code');
 
