@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Standards\PSR2\Sniffs\Classes;
 
+use Exception;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
 use PHP_CodeSniffer\Util\Tokens;
@@ -66,7 +67,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
             if (empty($propertyInfo) === true) {
                 return;
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // Turns out not to be a property after all.
             return;
         }
