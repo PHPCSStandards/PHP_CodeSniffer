@@ -12,7 +12,7 @@ namespace PHP_CodeSniffer\Filters;
 use FilesystemIterator;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
-use PHP_CodeSniffer\Util;
+use PHP_CodeSniffer\Util\Common;
 use RecursiveDirectoryIterator;
 use RecursiveFilterIterator;
 use ReturnTypeWillChange;
@@ -89,7 +89,7 @@ class Filter extends RecursiveFilterIterator
         $this->config  = $config;
         $this->ruleset = $ruleset;
 
-        if (is_dir($basedir) === true || Util\Common::isPharFile($basedir) === true) {
+        if (is_dir($basedir) === true || Common::isPharFile($basedir) === true) {
             $this->isBasedirDir = true;
         }
 
@@ -108,7 +108,7 @@ class Filter extends RecursiveFilterIterator
     public function accept()
     {
         $filePath = $this->current();
-        $realPath = Util\Common::realpath($filePath);
+        $realPath = Common::realpath($filePath);
 
         if ($realPath !== false) {
             // It's a real path somewhere, so record it

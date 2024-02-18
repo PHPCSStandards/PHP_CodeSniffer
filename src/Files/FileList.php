@@ -18,7 +18,7 @@ use PHP_CodeSniffer\Autoload;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Exceptions\DeepExitException;
 use PHP_CodeSniffer\Ruleset;
-use PHP_CodeSniffer\Util;
+use PHP_CodeSniffer\Util\Common;
 use RecursiveArrayIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -78,7 +78,7 @@ class FileList implements Iterator, Countable
 
         $paths = $config->files;
         foreach ($paths as $path) {
-            $isPharFile = Util\Common::isPharFile($path);
+            $isPharFile = Common::isPharFile($path);
             if (is_dir($path) === true || $isPharFile === true) {
                 if ($isPharFile === true) {
                     $path = 'phar://'.$path;

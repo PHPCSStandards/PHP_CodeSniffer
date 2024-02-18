@@ -359,7 +359,7 @@ class Fixer
             if ($bt[1]['class'] === __CLASS__) {
                 $sniff = 'Fixer';
             } else {
-                $sniff = Util\Common::getSniffCode($bt[1]['class']);
+                $sniff = Common::getSniffCode($bt[1]['class']);
             }
 
             $line = $bt[0]['line'];
@@ -438,7 +438,7 @@ class Fixer
                     $line  = $bt[0]['line'];
                 }
 
-                $sniff = Util\Common::getSniffCode($sniff);
+                $sniff = Common::getSniffCode($sniff);
 
                 $numChanges = count($this->changeset);
 
@@ -491,7 +491,7 @@ class Fixer
                 $line  = $bt[0]['line'];
             }
 
-            $sniff = Util\Common::getSniffCode($sniff);
+            $sniff = Common::getSniffCode($sniff);
 
             $tokens     = $this->currentFile->getTokens();
             $type       = $tokens[$stackPtr]['type'];
@@ -596,7 +596,7 @@ class Fixer
                 $line  = $bt[0]['line'];
             }
 
-            $sniff = Util\Common::getSniffCode($sniff);
+            $sniff = Common::getSniffCode($sniff);
 
             $tokens     = $this->currentFile->getTokens();
             $type       = $tokens[$stackPtr]['type'];

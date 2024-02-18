@@ -11,7 +11,7 @@ namespace PHP_CodeSniffer\Reports;
 
 use Exception;
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Util;
+use PHP_CodeSniffer\Util\Common;
 
 class Code implements Report
 {
@@ -46,9 +46,9 @@ class Code implements Report
         if (empty($tokens) === true) {
             if (PHP_CODESNIFFER_VERBOSITY === 1) {
                 $startTime = microtime(true);
-                Util\Common::forcePrintStatusMessage('CODE report is parsing '.basename($file).' ', 0, true);
+                Common::forcePrintStatusMessage('CODE report is parsing '.basename($file).' ', 0, true);
             } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                Util\Common::forcePrintStatusMessage("CODE report is forcing parse of $file", 0);
+                Common::forcePrintStatusMessage("CODE report is forcing parse of $file", 0);
             }
 
             try {
@@ -62,10 +62,10 @@ class Code implements Report
                 $timeTaken = ((microtime(true) - $startTime) * 1000);
                 if ($timeTaken < 1000) {
                     $timeTaken = round($timeTaken);
-                    Util\Common::forcePrintStatusMessage("DONE in {$timeTaken}ms", 0);
+                    Common::forcePrintStatusMessage("DONE in {$timeTaken}ms", 0);
                 } else {
                     $timeTaken = round(($timeTaken / 1000), 2);
-                    Util\Common::forcePrintStatusMessage("DONE in $timeTaken secs", 0);
+                    Common::forcePrintStatusMessage("DONE in $timeTaken secs", 0);
                 }
             }
 
@@ -234,7 +234,7 @@ class Code implements Report
                         $tokenContent = $token['content'];
                     }
 
-                    $tokenContent = Util\Common::prepareForOutput($tokenContent, ["\r", "\n", "\t"]);
+                    $tokenContent = Common::prepareForOutput($tokenContent, ["\r", "\n", "\t"]);
                     $tokenContent = str_replace("\000", ' ', $tokenContent);
 
                     $underline = false;
