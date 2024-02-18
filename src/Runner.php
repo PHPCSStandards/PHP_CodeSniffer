@@ -12,6 +12,7 @@
 
 namespace PHP_CodeSniffer;
 
+use Exception;
 use PHP_CodeSniffer\Exceptions\DeepExitException;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\DummyFile;
@@ -20,6 +21,8 @@ use PHP_CodeSniffer\Files\FileList;
 use PHP_CodeSniffer\Util\Cache;
 use PHP_CodeSniffer\Util\Common;
 use PHP_CodeSniffer\Util\Standards;
+use PHP_CodeSniffer\Util\Timing;
+use PHP_CodeSniffer\Util\Tokens;
 
 class Runner
 {
@@ -56,7 +59,7 @@ class Runner
         $this->registerOutOfMemoryShutdownMessage('phpcs');
 
         try {
-            Util\Timing::startTiming();
+            Timing::startTiming();
             Runner::checkRequirements();
 
             if (defined('PHP_CODESNIFFER_CBF') === false) {
@@ -127,7 +130,7 @@ class Runner
                 && ($toScreen === false
                 || (($this->reporter->totalErrors + $this->reporter->totalWarnings) === 0 && $this->config->showProgress === true))
             ) {
-                Util\Timing::printRunTime();
+                Timing::printRunTime();
             }
         } catch (DeepExitException $e) {
             echo $e->getMessage();
@@ -162,7 +165,7 @@ class Runner
         }
 
         try {
-            Util\Timing::startTiming();
+            Timing::startTiming();
             Runner::checkRequirements();
 
             // Creating the Config object populates it with all required settings
@@ -213,7 +216,7 @@ class Runner
             $this->reporter->printReports();
 
             echo PHP_EOL;
-            Util\Timing::printRunTime();
+            Timing::printRunTime();
         } catch (DeepExitException $e) {
             echo $e->getMessage();
             return $e->getCode();
@@ -310,12 +313,12 @@ class Runner
 
         // Check that the standards are valid.
         foreach ($this->config->standards as $standard) {
-            if (Util\Standards::isInstalledStandard($standard) === false) {
+            if (Standards::isInstalledStandard($standard) === false) {
                 // They didn't select a valid coding standard, so help them
                 // out by letting them know which standards are installed.
                 $error = 'ERROR: the "'.$standard.'" coding standard is not installed. ';
                 ob_start();
-                Util\Standards::printInstalledStandards();
+                Standards::printInstalledStandards();
                 $error .= ob_get_contents();
                 ob_end_clean();
                 throw new DeepExitException($error, 3);
@@ -330,7 +333,7 @@ class Runner
 
         // Create this class so it is autoloaded and sets up a bunch
         // of PHP_CodeSniffer-specific token type constants.
-        $tokens = new Util\Tokens();
+        $tokens = new Tokens();
 
         // Allow autoloading of custom files inside installed standards.
         $installedStandards = Standards::getInstalledStandardDetails();
@@ -662,7 +665,7 @@ class Runner
                     echo " ($errors errors, $warnings warnings)".PHP_EOL;
                 }
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $error = 'An error occurred during processing; checking has been aborted. The error message was: '.$e->getMessage();
 
             // Determine which sniff caused the error.

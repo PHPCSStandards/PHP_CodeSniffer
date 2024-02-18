@@ -9,12 +9,13 @@
 
 namespace PHP_CodeSniffer\Files;
 
-use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Config;
-use PHP_CodeSniffer\Fixer;
-use PHP_CodeSniffer\Util;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Exceptions\TokenizerException;
+use PHP_CodeSniffer\Fixer;
+use PHP_CodeSniffer\Ruleset;
+use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\Tokens;
 
 class File
 {
@@ -276,7 +277,7 @@ class File
         $this->tokens  = [];
 
         try {
-            $this->eolChar = Util\Common::detectLineEndings($content);
+            $this->eolChar = Common::detectLineEndings($content);
         } catch (RuntimeException $e) {
             $this->addWarningOnLine($e->getMessage(), 1, 'Internal.DetectLineEndings');
             return;
@@ -430,7 +431,7 @@ class File
 
             if (PHP_CODESNIFFER_VERBOSITY > 2) {
                 $type    = $token['type'];
-                $content = Util\Common::prepareForOutput($token['content']);
+                $content = Common::prepareForOutput($token['content']);
                 echo "\t\tProcess token $stackPtr: $type => $content".PHP_EOL;
             }
 
@@ -872,7 +873,7 @@ class File
         $parts = explode('.', $code);
         if ($parts[0] === 'Internal') {
             // An internal message.
-            $listenerCode = Util\Common::getSniffCode($this->activeListener);
+            $listenerCode = Common::getSniffCode($this->activeListener);
             $sniffCode    = $code;
             $checkCodes   = [$sniffCode];
         } else {
@@ -881,7 +882,7 @@ class File
                 $sniffCode    = $code;
                 $listenerCode = substr($sniffCode, 0, strrpos($sniffCode, '.'));
             } else {
-                $listenerCode = Util\Common::getSniffCode($this->activeListener);
+                $listenerCode = Common::getSniffCode($this->activeListener);
                 $sniffCode    = $listenerCode.'.'.$code;
                 $parts        = explode('.', $sniffCode);
             }
@@ -1615,7 +1616,7 @@ class File
                 $paramCount++;
                 break;
             case T_EQUAL:
-                $defaultStart = $this->findNext(Util\Tokens::$emptyTokens, ($i + 1), null, true);
+                $defaultStart = $this->findNext(Tokens::$emptyTokens, ($i + 1), null, true);
                 $equalToken   = $i;
                 break;
             }//end switch
@@ -1885,7 +1886,7 @@ class File
             T_READONLY  => T_READONLY,
         ];
 
-        $valid += Util\Tokens::$emptyTokens;
+        $valid += Tokens::$emptyTokens;
 
         $scope          = 'public';
         $scopeSpecified = false;
@@ -2073,7 +2074,7 @@ class File
         }
 
         $tokenBefore = $this->findPrevious(
-            Util\Tokens::$emptyTokens,
+            Tokens::$emptyTokens,
             ($stackPtr - 1),
             null,
             true
@@ -2097,14 +2098,14 @@ class File
             return true;
         }
 
-        if (isset(Util\Tokens::$assignmentTokens[$this->tokens[$tokenBefore]['code']]) === true) {
+        if (isset(Tokens::$assignmentTokens[$this->tokens[$tokenBefore]['code']]) === true) {
             // This is directly after an assignment. It's a reference. Even if
             // it is part of an operation, the other tests will handle it.
             return true;
         }
 
         $tokenAfter = $this->findNext(
-            Util\Tokens::$emptyTokens,
+            Tokens::$emptyTokens,
             ($stackPtr + 1),
             null,
             true
@@ -2155,7 +2156,7 @@ class File
             if ($this->tokens[$tokenAfter]['code'] === T_VARIABLE) {
                 return true;
             } else {
-                $skip   = Util\Tokens::$emptyTokens;
+                $skip   = Tokens::$emptyTokens;
                 $skip[] = T_NS_SEPARATOR;
                 $skip[] = T_SELF;
                 $skip[] = T_PARENT;
@@ -2382,7 +2383,7 @@ class File
      */
     public function findStartOfStatement($start, $ignore=null)
     {
-        $startTokens = Util\Tokens::$blockOpeners;
+        $startTokens = Tokens::$blockOpeners;
         $startTokens[T_OPEN_SHORT_ARRAY]   = true;
         $startTokens[T_OPEN_TAG]           = true;
         $startTokens[T_OPEN_TAG_WITH_ECHO] = true;
@@ -2436,7 +2437,7 @@ class File
 
             if ($prevMatch <= $this->tokens[$matchExpression]['scope_opener']) {
                 // We're before the arrow in the first case.
-                $next = $this->findNext(Util\Tokens::$emptyTokens, ($this->tokens[$matchExpression]['scope_opener'] + 1), null, true);
+                $next = $this->findNext(Tokens::$emptyTokens, ($this->tokens[$matchExpression]['scope_opener'] + 1), null, true);
                 if ($next === false) {
                     return $start;
                 }
@@ -2449,12 +2450,12 @@ class File
                 $prevMatchArrow = $this->findPrevious(T_MATCH_ARROW, ($prevMatch - 1), $this->tokens[$matchExpression]['scope_opener']);
                 if ($prevMatchArrow === false) {
                     // We're before the arrow in the first case.
-                    $next = $this->findNext(Util\Tokens::$emptyTokens, ($this->tokens[$matchExpression]['scope_opener'] + 1), null, true);
+                    $next = $this->findNext(Tokens::$emptyTokens, ($this->tokens[$matchExpression]['scope_opener'] + 1), null, true);
                     return $next;
                 }
 
                 $end  = $this->findEndOfStatement($prevMatchArrow);
-                $next = $this->findNext(Util\Tokens::$emptyTokens, ($end + 1), null, true);
+                $next = $this->findNext(Tokens::$emptyTokens, ($end + 1), null, true);
                 return $next;
             }
         }//end if
@@ -2515,7 +2516,7 @@ class File
                 }
             }//end if
 
-            if (isset(Util\Tokens::$emptyTokens[$this->tokens[$i]['code']]) === false) {
+            if (isset(Tokens::$emptyTokens[$this->tokens[$i]['code']]) === false) {
                 $lastNotEmpty = $i;
             }
         }//end for
@@ -2610,7 +2611,7 @@ class File
                     continue;
                 }
 
-                if ($i === $start && isset(Util\Tokens::$scopeOpeners[$this->tokens[$i]['code']]) === true) {
+                if ($i === $start && isset(Tokens::$scopeOpeners[$this->tokens[$i]['code']]) === true) {
                     return $this->tokens[$i]['scope_closer'];
                 }
 
@@ -2630,7 +2631,7 @@ class File
                 }
             }//end if
 
-            if (isset(Util\Tokens::$emptyTokens[$this->tokens[$i]['code']]) === false) {
+            if (isset(Tokens::$emptyTokens[$this->tokens[$i]['code']]) === false) {
                 $lastNotEmpty = $i;
             }
         }//end for

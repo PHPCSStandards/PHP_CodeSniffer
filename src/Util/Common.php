@@ -9,6 +9,8 @@
 
 namespace PHP_CodeSniffer\Util;
 
+use Phar;
+
 class Common
 {
 
@@ -112,7 +114,7 @@ class Common
             return $path;
         }
 
-        $phar  = \Phar::running(false);
+        $phar  = Phar::running(false);
         $extra = str_replace('phar://'.$phar, '', $path);
         $path  = realpath($phar);
         if ($path === false) {

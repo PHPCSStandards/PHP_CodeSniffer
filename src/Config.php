@@ -12,9 +12,12 @@
 
 namespace PHP_CodeSniffer;
 
+use Exception;
+use Phar;
 use PHP_CodeSniffer\Exceptions\DeepExitException;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\Standards;
 
 /**
  * Stores the configuration used to run PHPCS and PHPCBF.
@@ -265,7 +268,7 @@ class Config
             $cleaned = [];
 
             // Check if the standard name is valid, or if the case is invalid.
-            $installedStandards = Util\Standards::getInstalledStandards();
+            $installedStandards = Standards::getInstalledStandards();
             foreach ($value as $standard) {
                 foreach ($installedStandards as $validStandard) {
                     if (strtolower($standard) === strtolower($validStandard)) {
@@ -420,7 +423,7 @@ class Config
 
         // Check for content on STDIN.
         if ($this->stdin === true
-            || (Util\Common::isStdinATTY() === false
+            || (Common::isStdinATTY() === false
             && feof($handle) === false)
         ) {
             $readStreams = [$handle];
@@ -649,7 +652,7 @@ class Config
             throw new DeepExitException($output, 0);
         case 'i' :
             ob_start();
-            Util\Standards::printInstalledStandards();
+            Standards::printInstalledStandards();
             $output = ob_get_contents();
             ob_end_clean();
             throw new DeepExitException($output, 0);
@@ -812,7 +815,7 @@ class Config
 
             try {
                 $this->setConfigData($key, $value);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 throw new DeepExitException($e->getMessage().PHP_EOL, 3);
             }
 
@@ -840,7 +843,7 @@ class Config
             } else {
                 try {
                     $this->setConfigData($key, null);
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     throw new DeepExitException($e->getMessage().PHP_EOL, 3);
                 }
 
@@ -922,7 +925,7 @@ class Config
                 $this->cache = true;
                 self::$overriddenDefaults['cache'] = true;
 
-                $this->cacheFile = Util\Common::realpath(substr($arg, 6));
+                $this->cacheFile = Common::realpath(substr($arg, 6));
 
                 // It may not exist and return false instead.
                 if ($this->cacheFile === false) {
@@ -941,9 +944,9 @@ class Config
                     } else {
                         if ($dir[0] === '/') {
                             // An absolute path.
-                            $dir = Util\Common::realpath($dir);
+                            $dir = Common::realpath($dir);
                         } else {
-                            $dir = Util\Common::realpath(getcwd().'/'.$dir);
+                            $dir = Common::realpath(getcwd().'/'.$dir);
                         }
 
                         if ($dir !== false) {
@@ -964,7 +967,7 @@ class Config
                 $files     = explode(',', substr($arg, 10));
                 $bootstrap = [];
                 foreach ($files as $file) {
-                    $path = Util\Common::realpath($file);
+                    $path = Common::realpath($file);
                     if ($path === false) {
                         $error  = 'ERROR: The specified bootstrap file "'.$file.'" does not exist'.PHP_EOL.PHP_EOL;
                         $error .= $this->printShortUsage(true);
@@ -978,7 +981,7 @@ class Config
                 self::$overriddenDefaults['bootstrap'] = true;
             } else if (substr($arg, 0, 10) === 'file-list=') {
                 $fileList = substr($arg, 10);
-                $path     = Util\Common::realpath($fileList);
+                $path     = Common::realpath($fileList);
                 if ($path === false) {
                     $error  = 'ERROR: The specified file list "'.$fileList.'" does not exist'.PHP_EOL.PHP_EOL;
                     $error .= $this->printShortUsage(true);
@@ -1001,7 +1004,7 @@ class Config
                     break;
                 }
 
-                $this->stdinPath = Util\Common::realpath(substr($arg, 11));
+                $this->stdinPath = Common::realpath(substr($arg, 11));
 
                 // It may not exist and return false instead, so use whatever they gave us.
                 if ($this->stdinPath === false) {
@@ -1014,13 +1017,13 @@ class Config
                     break;
                 }
 
-                $this->reportFile = Util\Common::realpath(substr($arg, 12));
+                $this->reportFile = Common::realpath(substr($arg, 12));
 
                 // It may not exist and return false instead.
                 if ($this->reportFile === false) {
                     $this->reportFile = substr($arg, 12);
 
-                    $dir = Util\Common::realpath(dirname($this->reportFile));
+                    $dir = Common::realpath(dirname($this->reportFile));
                     if (is_dir($dir) === false) {
                         $error  = 'ERROR: The specified report file path "'.$this->reportFile.'" points to a non-existent directory'.PHP_EOL.PHP_EOL;
                         $error .= $this->printShortUsage(true);
@@ -1056,7 +1059,7 @@ class Config
                     break;
                 }
 
-                $this->basepath = Util\Common::realpath(substr($arg, 9));
+                $this->basepath = Common::realpath(substr($arg, 9));
 
                 // It may not exist and return false instead.
                 if ($this->basepath === false) {
@@ -1083,7 +1086,7 @@ class Config
                         if ($output === false) {
                             $output = null;
                         } else {
-                            $dir = Util\Common::realpath(dirname($output));
+                            $dir = Common::realpath(dirname($output));
                             if (is_dir($dir) === false) {
                                 $error  = 'ERROR: The specified '.$report.' report file path "'.$output.'" points to a non-existent directory'.PHP_EOL.PHP_EOL;
                                 $error .= $this->printShortUsage(true);
@@ -1317,7 +1320,7 @@ class Config
             return;
         }
 
-        $file = Util\Common::realpath($path);
+        $file = Common::realpath($path);
         if (file_exists($file) === false) {
             if ($this->dieOnUnknownArg === false) {
                 return;
@@ -1608,7 +1611,7 @@ class Config
         if ($temp === false) {
             $path = '';
             if (is_callable('\Phar::running') === true) {
-                $path = \Phar::running(false);
+                $path = Phar::running(false);
             }
 
             if ($path !== '') {
@@ -1653,7 +1656,7 @@ class Config
         // If the installed paths are being set, make sure all known
         // standards paths are added to the autoloader.
         if ($key === 'installed_paths') {
-            $installedStandards = Util\Standards::getInstalledStandardDetails();
+            $installedStandards = Standards::getInstalledStandardDetails();
             foreach ($installedStandards as $name => $details) {
                 Autoload::addSearchPath($details['path'], $details['namespace']);
             }
@@ -1679,7 +1682,7 @@ class Config
 
         $path = '';
         if (is_callable('\Phar::running') === true) {
-            $path = \Phar::running(false);
+            $path = Phar::running(false);
         }
 
         if ($path !== '') {

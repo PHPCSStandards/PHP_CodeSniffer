@@ -26,8 +26,8 @@
 
 namespace PHP_CodeSniffer\Sniffs;
 
-use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
+use PHP_CodeSniffer\Files\File;
 
 abstract class AbstractScopeSniff implements Sniff
 {

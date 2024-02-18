@@ -9,8 +9,10 @@
 
 namespace PHP_CodeSniffer\Reports;
 
+use Exception;
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Util;
+use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\Timing;
 
 class Code implements Report
 {
@@ -52,7 +54,7 @@ class Code implements Report
 
             try {
                 $phpcsFile->parse();
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 // This is a second parse, so ignore exceptions.
                 // They would have been added to the file's error list already.
             }
@@ -235,7 +237,7 @@ class Code implements Report
                         $tokenContent = $token['content'];
                     }
 
-                    $tokenContent = Util\Common::prepareForOutput($tokenContent, ["\r", "\n", "\t"]);
+                    $tokenContent = Common::prepareForOutput($tokenContent, ["\r", "\n", "\t"]);
                     $tokenContent = str_replace("\000", ' ', $tokenContent);
 
                     $underline = false;
@@ -353,7 +355,7 @@ class Code implements Report
         echo $cachedData;
 
         if ($toScreen === true && $interactive === false) {
-            Util\Timing::printRunTime();
+            Timing::printRunTime();
         }
 
     }//end generate()

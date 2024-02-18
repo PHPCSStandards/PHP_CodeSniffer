@@ -9,6 +9,8 @@
 
 namespace PHP_CodeSniffer\Generators;
 
+use DOMDocument;
+use DOMNode;
 use PHP_CodeSniffer\Config;
 
 class Markdown extends Generator
@@ -27,7 +29,7 @@ class Markdown extends Generator
         $this->printHeader();
 
         foreach ($this->docFiles as $file) {
-            $doc = new \DOMDocument();
+            $doc = new DOMDocument();
             $doc->load($file);
             $documentation = $doc->getElementsByTagName('documentation')->item(0);
             $this->processSniff($documentation);
@@ -81,7 +83,7 @@ class Markdown extends Generator
      *
      * @return void
      */
-    protected function processSniff(\DOMNode $doc)
+    protected function processSniff(DOMNode $doc)
     {
         $title = $this->getTitle($doc);
         echo PHP_EOL."## $title".PHP_EOL;
@@ -104,7 +106,7 @@ class Markdown extends Generator
      *
      * @return void
      */
-    protected function printTextBlock(\DOMNode $node)
+    protected function printTextBlock(DOMNode $node)
     {
         $content = trim($node->nodeValue);
         $content = htmlspecialchars($content);
@@ -124,7 +126,7 @@ class Markdown extends Generator
      *
      * @return void
      */
-    protected function printCodeComparisonBlock(\DOMNode $node)
+    protected function printCodeComparisonBlock(DOMNode $node)
     {
         $codeBlocks = $node->getElementsByTagName('code');
 

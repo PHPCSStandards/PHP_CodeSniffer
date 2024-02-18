@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Util;
 
+use DirectoryIterator;
 use PHP_CodeSniffer\Config;
 
 class Standards
@@ -99,7 +100,7 @@ class Standards
                 continue;
             }
 
-            $di = new \DirectoryIterator($standardsDir);
+            $di = new DirectoryIterator($standardsDir);
             foreach ($di as $file) {
                 if ($file->isDir() === true && $file->isDot() === false) {
                     $filename = $file->getFilename();
@@ -190,7 +191,7 @@ class Standards
                 continue;
             }
 
-            $di = new \DirectoryIterator($standardsDir);
+            $di = new DirectoryIterator($standardsDir);
             $standardsInDir = [];
             foreach ($di as $file) {
                 if ($file->isDir() === true && $file->isDot() === false) {
