@@ -49,7 +49,7 @@ final class SelfMemberReferenceUnitTest extends AbstractSniffTestCase
             197 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -64,7 +64,7 @@ final class SelfMemberReferenceUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

@@ -31,7 +31,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
     {
         parent::clearResolvedTokensCache();
 
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -61,7 +61,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
-    }//end testBracesAndColon()
+    }
 
 
     /**
@@ -84,7 +84,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
-    }//end testNamedParamColon()
+    }
 
 
     /**
@@ -110,7 +110,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
-    }//end testReturnTypeColon()
+    }
 
 
     /**
@@ -130,7 +130,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
-    }//end testConcat()
+    }
 
 
     /**
@@ -160,7 +160,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
-    }//end testSimpleMathTokens()
+    }
 
 
     /**
@@ -184,7 +184,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
-    }//end testUnaryPlusMinus()
+    }
 
 
     /**
@@ -212,7 +212,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
-    }//end testBitwiseTokens()
+    }
 
 
     /**
@@ -237,7 +237,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
-    }//end testBitwiseOrInCatch()
+    }
 
 
     /**
@@ -257,7 +257,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
-    }//end testLessThan()
+    }
 
 
     /**
@@ -277,7 +277,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
-    }//end testGreaterThan()
+    }
 
 
     /**
@@ -297,7 +297,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
-    }//end testBooleanNot()
+    }
 
 
     /**
@@ -319,7 +319,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
-    }//end testComma()
+    }
 
 
     /**
@@ -341,7 +341,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
-    }//end testAsperand()
+    }
 
 
     /**
@@ -363,7 +363,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
-    }//end testDollarAndCurlies()
+    }
 
 
     /**
@@ -384,7 +384,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
-    }//end testBacktick()
+    }
 
 
     /**
@@ -425,7 +425,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             ++$sequenceKey;
         }//end for
 
-    }//end checkTokenSequence()
+    }
 
 
-}//end class
+}

@@ -41,7 +41,7 @@ final class DefaultKeywordTest extends AbstractTokenizerTestCase
         $this->assertSame(T_MATCH_DEFAULT, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_MATCH_DEFAULT (code)');
         $this->assertSame('T_MATCH_DEFAULT', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_MATCH_DEFAULT (type)');
 
-    }//end testMatchDefault()
+    }
 
 
     /**
@@ -96,7 +96,7 @@ final class DefaultKeywordTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataMatchDefault()
+    }
 
 
     /**
@@ -121,7 +121,7 @@ final class DefaultKeywordTest extends AbstractTokenizerTestCase
         $this->assertSame(T_DEFAULT, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_DEFAULT (code)');
         $this->assertSame('T_DEFAULT', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_DEFAULT (type)');
 
-    }//end testSwitchDefault()
+    }
 
 
     /**
@@ -151,7 +151,7 @@ final class DefaultKeywordTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataSwitchDefault()
+    }
 
 
     /**
@@ -184,7 +184,7 @@ final class DefaultKeywordTest extends AbstractTokenizerTestCase
         $this->assertSame(constant($expectedType), $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (code)');
         $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (type)');
 
-    }//end testNotDefaultKeyword()
+    }
 
 
     /**
@@ -265,7 +265,7 @@ final class DefaultKeywordTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataNotDefaultKeyword()
+    }
 
 
-}//end class
+}

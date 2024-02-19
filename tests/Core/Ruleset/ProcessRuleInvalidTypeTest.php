@@ -37,7 +37,7 @@ final class ProcessRuleInvalidTypeTest extends AbstractRulesetTestCase
 
         new Ruleset($config);
 
-    }//end testInvalidTypeHandling()
+    }
 
 
-}//end class
+}

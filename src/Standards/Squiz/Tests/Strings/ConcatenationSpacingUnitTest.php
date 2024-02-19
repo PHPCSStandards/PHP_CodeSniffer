@@ -50,7 +50,7 @@ final class ConcatenationSpacingUnitTest extends AbstractSniffTestCase
             49 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -65,7 +65,7 @@ final class ConcatenationSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

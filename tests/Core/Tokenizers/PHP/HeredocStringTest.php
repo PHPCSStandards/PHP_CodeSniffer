@@ -34,7 +34,7 @@ final class HeredocStringTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken($testMarker, T_HEREDOC);
         $this->assertSame($expectedContent . "\n", $tokens[$target]['content']);
 
-    }//end testHeredocString()
+    }
 
 
     /**
@@ -56,7 +56,7 @@ final class HeredocStringTest extends AbstractTokenizerTestCase
         $target     = $this->getTargetToken($testMarker, T_HEREDOC);
         $this->assertSame('Do ' . $expectedContent . " Something\n", $tokens[$target]['content']);
 
-    }//end testHeredocStringWrapped()
+    }
 
 
     /**
@@ -155,7 +155,7 @@ final class HeredocStringTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataHeredocString()
+    }
 
 
-}//end class
+}

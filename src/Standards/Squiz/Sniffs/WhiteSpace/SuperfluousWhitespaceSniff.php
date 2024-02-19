@@ -46,7 +46,7 @@ class SuperfluousWhitespaceSniff implements Sniff
             T_CLOSURE,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -208,7 +208,7 @@ class SuperfluousWhitespaceSniff implements Sniff
             }//end if
         }//end if
 
-    }//end process()
+    }
 
 
-}//end class
+}

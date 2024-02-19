@@ -43,7 +43,7 @@ class PostStatementCommentSniff implements Sniff
     {
         return [T_COMMENT];
 
-    }//end register()
+    }
 
 
     /**
@@ -111,7 +111,7 @@ class PostStatementCommentSniff implements Sniff
             $phpcsFile->fixer->addNewlineBefore($stackPtr);
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

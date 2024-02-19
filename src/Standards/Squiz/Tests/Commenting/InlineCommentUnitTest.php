@@ -51,7 +51,7 @@ final class InlineCommentUnitTest extends AbstractSniffTestCase
             189 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -66,7 +66,7 @@ final class InlineCommentUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

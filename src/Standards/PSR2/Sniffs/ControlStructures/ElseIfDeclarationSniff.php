@@ -28,7 +28,7 @@ class ElseIfDeclarationSniff implements Sniff
             T_ELSEIF,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -66,7 +66,7 @@ class ElseIfDeclarationSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

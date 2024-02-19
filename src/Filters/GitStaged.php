@@ -28,7 +28,7 @@ class GitStaged extends ExactMatch
     {
         return [];
 
-    }//end getDisallowedFiles()
+    }
 
 
     /**
@@ -65,7 +65,7 @@ class GitStaged extends ExactMatch
 
         return $modified;
 
-    }//end getAllowedFiles()
+    }
 
 
     /**
@@ -88,7 +88,7 @@ class GitStaged extends ExactMatch
 
         return $output;
 
-    }//end exec()
+    }
 
 
-}//end class
+}

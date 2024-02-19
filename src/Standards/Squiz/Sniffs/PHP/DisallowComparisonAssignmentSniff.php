@@ -26,7 +26,7 @@ class DisallowComparisonAssignmentSniff implements Sniff
     {
         return [T_EQUAL];
 
-    }//end register()
+    }
 
 
     /**
@@ -104,7 +104,7 @@ class DisallowComparisonAssignmentSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

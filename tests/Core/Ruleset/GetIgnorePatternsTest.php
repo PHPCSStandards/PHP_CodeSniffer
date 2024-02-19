@@ -41,7 +41,7 @@ final class GetIgnorePatternsTest extends TestCase
         $config        = new ConfigDouble(["--standard=$standard"]);
         self::$ruleset = new Ruleset($config);
 
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -58,7 +58,7 @@ final class GetIgnorePatternsTest extends TestCase
     {
         $this->assertSame($expected, self::$ruleset->getIgnorePatterns($listener));
 
-    }//end testGetIgnorePatterns()
+    }
 
 
     /**
@@ -103,7 +103,7 @@ final class GetIgnorePatternsTest extends TestCase
             ],
         ];
 
-    }//end dataGetIgnorePatterns()
+    }
 
 
-}//end class
+}

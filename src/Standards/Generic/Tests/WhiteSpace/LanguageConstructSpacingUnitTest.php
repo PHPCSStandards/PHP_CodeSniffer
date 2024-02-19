@@ -81,7 +81,7 @@ final class LanguageConstructSpacingUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -96,7 +96,7 @@ final class LanguageConstructSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

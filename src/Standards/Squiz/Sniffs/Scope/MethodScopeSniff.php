@@ -24,7 +24,7 @@ class MethodScopeSniff extends AbstractScopeSniff
     {
         parent::__construct(Tokens::OO_SCOPE_TOKENS, [T_FUNCTION]);
 
-    }//end __construct()
+    }
 
 
     /**
@@ -61,7 +61,7 @@ class MethodScopeSniff extends AbstractScopeSniff
             $phpcsFile->addError($error, $stackPtr, 'Missing', $data);
         }
 
-    }//end processTokenWithinScope()
+    }
 
 
     /**
@@ -77,7 +77,7 @@ class MethodScopeSniff extends AbstractScopeSniff
     protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr)
     {
 
-    }//end processTokenOutsideScope()
+    }
 
 
-}//end class
+}

@@ -25,7 +25,7 @@ final class FilterDouble extends Filter
     {
         return true;
 
-    }//end accept()
+    }
 
 
-}//end class
+}

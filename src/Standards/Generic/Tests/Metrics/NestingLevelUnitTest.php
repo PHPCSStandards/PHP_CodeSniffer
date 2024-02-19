@@ -39,7 +39,7 @@ final class NestingLevelUnitTest extends AbstractSniffTestCase
             return [];
         }
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -64,7 +64,7 @@ final class NestingLevelUnitTest extends AbstractSniffTestCase
             return [];
         }
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

@@ -35,7 +35,7 @@ final class OneInterfacePerFileUnitTest extends AbstractSniffTestCase
             10 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -50,7 +50,7 @@ final class OneInterfacePerFileUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

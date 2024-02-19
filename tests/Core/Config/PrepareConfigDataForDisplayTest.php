@@ -42,7 +42,7 @@ final class PrepareConfigDataForDisplayTest extends TestCase
 
         $this->assertSame($expected, $actual);
 
-    }//end testPrepareConfigDataForDisplay()
+    }
 
 
     /**
@@ -96,7 +96,7 @@ final class PrepareConfigDataForDisplayTest extends TestCase
         ];
         // phpcs:enable
 
-    }//end dataPrepareConfigDataForDisplay()
+    }
 
 
     /**
@@ -111,7 +111,7 @@ final class PrepareConfigDataForDisplayTest extends TestCase
         $config = new ConfigDouble();
         $config->printConfigData([]);
 
-    }//end testPrintConfigData()
+    }
 
 
-}//end class
+}

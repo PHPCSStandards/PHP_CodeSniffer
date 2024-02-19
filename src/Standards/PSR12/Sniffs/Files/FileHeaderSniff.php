@@ -26,7 +26,7 @@ class FileHeaderSniff implements Sniff
     {
         return [T_OPEN_TAG];
 
-    }//end register()
+    }
 
 
     /**
@@ -116,7 +116,7 @@ class FileHeaderSniff implements Sniff
 
         return $phpcsFile->numTokens;
 
-    }//end process()
+    }
 
 
     /**
@@ -274,7 +274,7 @@ class FileHeaderSniff implements Sniff
 
         return $headerLines;
 
-    }//end getHeaderLines()
+    }
 
 
     /**
@@ -425,7 +425,7 @@ class FileHeaderSniff implements Sniff
             }//end if
         }//end foreach
 
-    }//end processHeaderLines()
+    }
 
 
-}//end class
+}

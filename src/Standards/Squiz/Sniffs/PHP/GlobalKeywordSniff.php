@@ -25,7 +25,7 @@ class GlobalKeywordSniff implements Sniff
     {
         return [T_GLOBAL];
 
-    }//end register()
+    }
 
 
     /**
@@ -47,7 +47,7 @@ class GlobalKeywordSniff implements Sniff
         $data    = [$varName];
         $phpcsFile->addError($error, $stackPtr, 'NotAllowed', $data);
 
-    }//end process()
+    }
 
 
-}//end class
+}

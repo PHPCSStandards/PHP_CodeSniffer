@@ -45,7 +45,7 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
 
         $this->verifyOutput();
 
-    }//end testPhpcs()
+    }
 
 
     /**
@@ -72,7 +72,7 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
 
         $this->verifyOutput();
 
-    }//end testPhpcbf()
+    }
 
 
     /**
@@ -93,7 +93,7 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
             ],
         ];
 
-    }//end data()
+    }
 
 
     /**
@@ -119,7 +119,7 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
 
         $this->expectNoStdoutOutput();
 
-    }//end setupTest()
+    }
 
 
     /**
@@ -134,7 +134,7 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
 
         $this->assertStderrOutputSameString($expected);
 
-    }//end verifyOutput()
+    }
 
 
-}//end class
+}

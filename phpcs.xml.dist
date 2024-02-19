@@ -37,7 +37,7 @@
     <!-- Include some sniffs from other standards that don't conflict with PEAR -->
     <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
     <rule ref="Squiz.Arrays.ArrayDeclaration"/>
-    <rule ref="Squiz.Commenting.ClosingDeclarationComment"/>
+    <rule ref="PSR12.Classes.ClosingBrace"/>
     <rule ref="Squiz.ControlStructures.ControlSignature"/>
     <rule ref="PSR2.ControlStructures.ElseIfDeclaration"/>
     <rule ref="Squiz.Commenting.BlockComment"/>

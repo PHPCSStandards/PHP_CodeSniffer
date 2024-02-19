@@ -41,7 +41,7 @@ final class InterfaceNameSuffixUnitTest extends AbstractSniffTestCase
             return [];
         }
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -56,7 +56,7 @@ final class InterfaceNameSuffixUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

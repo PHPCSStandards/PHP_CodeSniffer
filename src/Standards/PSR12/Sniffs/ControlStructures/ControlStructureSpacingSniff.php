@@ -39,7 +39,7 @@ class ControlStructureSpacingSniff implements Sniff
     {
         $this->psr2ControlStructureSpacing = new PSR2ControlStructureSpacing();
 
-    }//end __construct()
+    }
 
 
     /**
@@ -60,7 +60,7 @@ class ControlStructureSpacingSniff implements Sniff
             T_MATCH,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -214,7 +214,7 @@ class ControlStructureSpacingSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

@@ -58,7 +58,7 @@ class ComparisonOperatorUsageSniff implements Sniff
             T_FOR,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -208,7 +208,7 @@ class ComparisonOperatorUsageSniff implements Sniff
             $phpcsFile->addError($error, $stackPtr, 'ImplicitTrue');
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

@@ -40,7 +40,7 @@ final class ConstructorTest extends AbstractRulesetTestCase
 
         $this->assertSame($expected, $ruleset->name);
 
-    }//end testHandlingStandardsPassedViaCLI()
+    }
 
 
     /**
@@ -72,7 +72,7 @@ final class ConstructorTest extends AbstractRulesetTestCase
             ],
         ];
 
-    }//end dataHandlingStandardsPassedViaCLI()
+    }
 
 
     /**
@@ -102,7 +102,7 @@ final class ConstructorTest extends AbstractRulesetTestCase
             $this->assertSame($namespacedStandardName, $autoloadPaths[$path], 'Expected (namespaced) standard name does not match');
         }
 
-    }//end testStandardsAreRegisteredWithAutoloader()
+    }
 
 
     /**
@@ -162,7 +162,7 @@ final class ConstructorTest extends AbstractRulesetTestCase
 
         return $data;
 
-    }//end dataStandardsAreRegisteredWithAutoloader()
+    }
 
 
     /**
@@ -190,7 +190,7 @@ final class ConstructorTest extends AbstractRulesetTestCase
 
         $this->assertSame($expected, $actual);
 
-    }//end testCachingVersusRestrictions()
+    }
 
 
     /**
@@ -268,7 +268,7 @@ final class ConstructorTest extends AbstractRulesetTestCase
 
         ];
 
-    }//end dataCachingVersusRestrictions()
+    }
 
 
     /**
@@ -286,7 +286,7 @@ final class ConstructorTest extends AbstractRulesetTestCase
 
         new Ruleset($config);
 
-    }//end testNoSniffsRegisteredException()
+    }
 
 
-}//end class
+}

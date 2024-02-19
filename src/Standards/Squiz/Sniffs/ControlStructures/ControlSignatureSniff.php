@@ -46,7 +46,7 @@ class ControlSignatureSniff implements Sniff
             T_MATCH,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -321,7 +321,7 @@ class ControlSignatureSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

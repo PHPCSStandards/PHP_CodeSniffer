@@ -110,7 +110,7 @@ class ForbiddenFunctionsSniff implements Sniff
 
         return $targets;
 
-    }//end register()
+    }
 
 
     /**
@@ -196,7 +196,7 @@ class ForbiddenFunctionsSniff implements Sniff
 
         $this->addError($phpcsFile, $stackPtr, $function, $pattern);
 
-    }//end process()
+    }
 
 
     /**
@@ -238,7 +238,7 @@ class ForbiddenFunctionsSniff implements Sniff
             $phpcsFile->addWarning($error, $stackPtr, $type, $data);
         }
 
-    }//end addError()
+    }
 
 
-}//end class
+}

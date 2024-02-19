@@ -52,7 +52,7 @@ final class NullableTypeDeclarationUnitTest extends AbstractSniffTestCase
             98 => 3,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -67,7 +67,7 @@ final class NullableTypeDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

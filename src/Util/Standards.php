@@ -47,7 +47,7 @@ class Standards
 
         return $resolvedInstalledPaths;
 
-    }//end getInstalledStandardPaths()
+    }
 
 
     /**
@@ -145,7 +145,7 @@ class Standards
 
         return $installedStandards;
 
-    }//end getInstalledStandardDetails()
+    }
 
 
     /**
@@ -216,7 +216,7 @@ class Standards
 
         return $installedStandards;
 
-    }//end getInstalledStandards()
+    }
 
 
     /**
@@ -263,7 +263,7 @@ class Standards
 
         return false;
 
-    }//end isInstalledStandard()
+    }
 
 
     /**
@@ -308,7 +308,7 @@ class Standards
 
         return null;
 
-    }//end getInstalledStandardPath()
+    }
 
 
     /**
@@ -337,7 +337,7 @@ class Standards
 
         return $output;
 
-    }//end prepareInstalledStandardsForDisplay()
+    }
 
 
     /**
@@ -351,7 +351,7 @@ class Standards
     {
         echo self::prepareInstalledStandardsForDisplay(), PHP_EOL;
 
-    }//end printInstalledStandards()
+    }
 
 
-}//end class
+}

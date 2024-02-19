@@ -39,7 +39,7 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
     {
         AbstractScopeSniff::__construct(Tokens::OO_SCOPE_TOKENS, [T_VARIABLE], false);
 
-    }//end __construct()
+    }
 
 
     /**
@@ -229,7 +229,7 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
             return $endOfStatement;
         }
 
-    }//end processMemberVar()
+    }
 
 
     /**
@@ -246,7 +246,7 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
             We don't care about normal variables.
         */
 
-    }//end processVariable()
+    }
 
 
     /**
@@ -263,7 +263,7 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
             We don't care about normal variables.
         */
 
-    }//end processVariableInString()
+    }
 
 
-}//end class
+}

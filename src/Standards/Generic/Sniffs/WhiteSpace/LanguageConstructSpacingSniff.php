@@ -42,7 +42,7 @@ class LanguageConstructSpacingSniff implements Sniff
             T_GOTO,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -158,7 +158,7 @@ class LanguageConstructSpacingSniff implements Sniff
             }
         }//end if
 
-    }//end process()
+    }
 
 
-}//end class
+}

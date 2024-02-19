@@ -68,7 +68,7 @@ final class MultiLineDocBlockTest extends CommentTestCase
             ],
         ];
 
-    }//end dataDocblockOpenerCloser()
+    }
 
 
     /**
@@ -91,7 +91,7 @@ final class MultiLineDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testEmptyDocblock()
+    }
 
 
     /**
@@ -204,7 +204,7 @@ final class MultiLineDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultilineDocblock()
+    }
 
 
     /**
@@ -254,7 +254,7 @@ final class MultiLineDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultilineDocblockNoStars()
+    }
 
 
     /**
@@ -332,7 +332,7 @@ final class MultiLineDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultilineDocblockIndented()
+    }
 
 
     /**
@@ -360,7 +360,7 @@ final class MultiLineDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultilineDocblockOpenerNotOnOwnLine()
+    }
 
 
     /**
@@ -389,7 +389,7 @@ final class MultiLineDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultilineDocblockCloserNotOnOwnLine()
+    }
 
 
     /**
@@ -433,7 +433,7 @@ final class MultiLineDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultilineDocblockStarsNotAligned()
+    }
 
 
-}//end class
+}

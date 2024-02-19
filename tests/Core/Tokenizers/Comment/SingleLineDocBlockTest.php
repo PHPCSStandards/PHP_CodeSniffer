@@ -60,7 +60,7 @@ final class SingleLineDocBlockTest extends CommentTestCase
             ],
         ];
 
-    }//end dataDocblockOpenerCloser()
+    }
 
 
     /**
@@ -80,7 +80,7 @@ final class SingleLineDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testEmptyBlockCommentNoWhiteSpace()
+    }
 
 
     /**
@@ -101,7 +101,7 @@ final class SingleLineDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testEmptyDocblockNoWhiteSpace()
+    }
 
 
     /**
@@ -121,7 +121,7 @@ final class SingleLineDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testEmptyDocblockWithWhiteSpace()
+    }
 
 
     /**
@@ -142,7 +142,7 @@ final class SingleLineDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testSingleLineDocblockNoTag()
+    }
 
 
     /**
@@ -165,7 +165,7 @@ final class SingleLineDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testSingleLineDocblockWithTag1()
+    }
 
 
     /**
@@ -188,7 +188,7 @@ final class SingleLineDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testSingleLineDocblockWithTag2()
+    }
 
 
     /**
@@ -211,7 +211,7 @@ final class SingleLineDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testSingleLineDocblockWithTag3()
+    }
 
 
-}//end class
+}

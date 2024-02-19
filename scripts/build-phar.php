@@ -76,7 +76,7 @@ function stripWhitespaceAndComments(string $fullpath, Config $config)
 
     return $stripped;
 
-}//end stripWhitespaceAndComments()
+}
 
 
 Timing::startTiming();

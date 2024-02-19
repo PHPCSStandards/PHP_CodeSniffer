@@ -65,7 +65,7 @@ final class ProcessRulesetIniDirectivesTest extends TestCase
             }
         }
 
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -84,7 +84,7 @@ final class ProcessRulesetIniDirectivesTest extends TestCase
             self::$initialized = true;
         }
 
-    }//end setUp()
+    }
 
 
     /**
@@ -102,7 +102,7 @@ final class ProcessRulesetIniDirectivesTest extends TestCase
             ini_set($name, $value);
         }
 
-    }//end tearDownAfterClass()
+    }
 
 
     /**
@@ -124,7 +124,7 @@ final class ProcessRulesetIniDirectivesTest extends TestCase
     {
         $this->assertSame($expected, ini_get($name));
 
-    }//end testIniDirectives()
+    }
 
 
     /**
@@ -169,7 +169,7 @@ final class ProcessRulesetIniDirectivesTest extends TestCase
             ],
         ];
 
-    }//end dataIniDirectives()
+    }
 
 
-}//end class
+}

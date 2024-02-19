@@ -48,7 +48,7 @@ final class LowercaseClassKeywordsUnitTest extends AbstractSniffTestCase
 
         return $errors;
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -63,7 +63,7 @@ final class LowercaseClassKeywordsUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

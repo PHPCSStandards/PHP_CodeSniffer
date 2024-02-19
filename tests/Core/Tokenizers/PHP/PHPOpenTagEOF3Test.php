@@ -48,7 +48,7 @@ final class PHPOpenTagEOF3Test extends AbstractTokenizerTestCase
         // Now make sure that this is the very last token in the file and there are no tokens after it.
         $this->assertArrayNotHasKey(($stackPtr + 1), $tokens);
 
-    }//end testLongOpenTagAtEndOfFile()
+    }
 
 
-}//end class
+}

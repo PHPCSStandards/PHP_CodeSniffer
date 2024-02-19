@@ -56,7 +56,7 @@ final class ControlSignatureUnitTest extends AbstractSniffTestCase
             165 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -71,7 +71,7 @@ final class ControlSignatureUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

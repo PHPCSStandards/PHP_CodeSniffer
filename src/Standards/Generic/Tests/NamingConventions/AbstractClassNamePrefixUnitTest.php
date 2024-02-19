@@ -46,7 +46,7 @@ final class AbstractClassNamePrefixUnitTest extends AbstractSniffTestCase
             return [];
         }
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -61,7 +61,7 @@ final class AbstractClassNamePrefixUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

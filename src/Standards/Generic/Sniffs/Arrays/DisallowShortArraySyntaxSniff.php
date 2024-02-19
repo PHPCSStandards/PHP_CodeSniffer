@@ -25,7 +25,7 @@ class DisallowShortArraySyntaxSniff implements Sniff
     {
         return [T_OPEN_SHORT_ARRAY];
 
-    }//end register()
+    }
 
 
     /**
@@ -55,7 +55,7 @@ class DisallowShortArraySyntaxSniff implements Sniff
             $phpcsFile->fixer->endChangeset();
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

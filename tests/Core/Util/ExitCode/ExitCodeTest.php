@@ -50,7 +50,7 @@ final class ExitCodeTest extends AbstractRunnerTestCase
         // Reset static properties on the Config class.
         AbstractRunnerTestCase::setUp();
 
-    }//end setUp()
+    }
 
 
     /**
@@ -69,7 +69,7 @@ final class ExitCodeTest extends AbstractRunnerTestCase
         // Delete the cache file between tests to prevent a cache from an earlier test run influencing the results of the tests.
         @unlink(self::CACHE_FILE);
 
-    }//end tearDown()
+    }
 
 
     /**
@@ -92,7 +92,7 @@ final class ExitCodeTest extends AbstractRunnerTestCase
 
         AbstractRunnerTestCase::tearDownAfterClass();
 
-    }//end tearDownAfterClass()
+    }
 
 
     /**
@@ -111,7 +111,7 @@ final class ExitCodeTest extends AbstractRunnerTestCase
 
         $this->runPhpcsAndCheckExitCode($extraArgs, $expected);
 
-    }//end testPhpcsNoParallel()
+    }
 
 
     /**
@@ -137,7 +137,7 @@ final class ExitCodeTest extends AbstractRunnerTestCase
 
         $this->runPhpcsAndCheckExitCode($extraArgs, $expected);
 
-    }//end testPhpcsParallel()
+    }
 
 
     /**
@@ -172,7 +172,7 @@ final class ExitCodeTest extends AbstractRunnerTestCase
         // Second run to verify the exit code is the same when the results are taking from the cache.
         $this->runPhpcsAndCheckExitCode($extraArgs, $expected);
 
-    }//end testPhpcsWithCache()
+    }
 
 
     /**
@@ -199,7 +199,7 @@ final class ExitCodeTest extends AbstractRunnerTestCase
 
         $this->assertSame($expected, $actual);
 
-    }//end runPhpcsAndCheckExitCode()
+    }
 
 
     /**
@@ -369,7 +369,7 @@ final class ExitCodeTest extends AbstractRunnerTestCase
             ],
         ];
 
-    }//end dataPhpcs()
+    }
 
 
     /**
@@ -389,7 +389,7 @@ final class ExitCodeTest extends AbstractRunnerTestCase
 
         $this->runPhpcbfAndCheckExitCode($extraArgs, $expected);
 
-    }//end testPhpcbfNoParallel()
+    }
 
 
     /**
@@ -416,7 +416,7 @@ final class ExitCodeTest extends AbstractRunnerTestCase
 
         $this->runPhpcbfAndCheckExitCode($extraArgs, $expected);
 
-    }//end testPhpcbfParallel()
+    }
 
 
     /**
@@ -443,7 +443,7 @@ final class ExitCodeTest extends AbstractRunnerTestCase
 
         $this->assertSame($expected, $actual);
 
-    }//end runPhpcbfAndCheckExitCode()
+    }
 
 
     /**
@@ -641,7 +641,7 @@ final class ExitCodeTest extends AbstractRunnerTestCase
             ],
         ];
 
-    }//end dataPhpcbf()
+    }
 
 
     /**
@@ -667,7 +667,7 @@ final class ExitCodeTest extends AbstractRunnerTestCase
             $_SERVER['argv'][] = $arg;
         }
 
-    }//end setServerArgs()
+    }
 
 
-}//end class
+}

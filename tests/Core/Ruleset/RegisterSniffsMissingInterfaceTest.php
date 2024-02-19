@@ -37,7 +37,7 @@ final class RegisterSniffsMissingInterfaceTest extends AbstractRulesetTestCase
 
         new Ruleset($config);
 
-    }//end testNoNoticesForSniffsImplementingInterface()
+    }
 
 
     /**
@@ -59,7 +59,7 @@ final class RegisterSniffsMissingInterfaceTest extends AbstractRulesetTestCase
 
         new Ruleset($config);
 
-    }//end testErrorWhenSniffDoesntImplementInterface()
+    }
 
 
-}//end class
+}

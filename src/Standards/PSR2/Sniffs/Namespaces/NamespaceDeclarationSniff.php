@@ -25,7 +25,7 @@ class NamespaceDeclarationSniff implements Sniff
     {
         return [T_NAMESPACE];
 
-    }//end register()
+    }
 
 
     /**
@@ -87,7 +87,7 @@ class NamespaceDeclarationSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

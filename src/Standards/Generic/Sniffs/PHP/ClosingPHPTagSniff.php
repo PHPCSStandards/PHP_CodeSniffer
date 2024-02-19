@@ -28,7 +28,7 @@ class ClosingPHPTagSniff implements Sniff
             T_OPEN_TAG_WITH_ECHO,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -48,7 +48,7 @@ class ClosingPHPTagSniff implements Sniff
             $phpcsFile->addError($error, $stackPtr, 'NotFound');
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

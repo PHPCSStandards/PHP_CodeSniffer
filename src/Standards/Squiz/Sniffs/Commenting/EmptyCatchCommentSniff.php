@@ -25,7 +25,7 @@ class EmptyCatchCommentSniff implements Sniff
     {
         return [T_CATCH];
 
-    }//end register()
+    }
 
 
     /**
@@ -49,7 +49,7 @@ class EmptyCatchCommentSniff implements Sniff
             $phpcsFile->addError($error, $scopeStart, 'Missing');
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

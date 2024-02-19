@@ -26,7 +26,7 @@ class InnerFunctionsSniff implements Sniff
     {
         return [T_FUNCTION];
 
-    }//end register()
+    }
 
 
     /**
@@ -70,7 +70,7 @@ class InnerFunctionsSniff implements Sniff
         $error = 'The use of inner functions is forbidden';
         $phpcsFile->addError($error, $stackPtr, 'NotAllowed');
 
-    }//end process()
+    }
 
 
-}//end class
+}

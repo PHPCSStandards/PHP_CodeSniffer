@@ -35,7 +35,7 @@ final class DisallowRequestSuperglobalUnitTest extends AbstractSniffTestCase
             13 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -50,7 +50,7 @@ final class DisallowRequestSuperglobalUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

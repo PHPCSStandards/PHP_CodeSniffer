@@ -25,7 +25,7 @@ class DisallowMultipleStatementsSniff implements Sniff
     {
         return [T_SEMICOLON];
 
-    }//end register()
+    }
 
 
     /**
@@ -99,7 +99,7 @@ class DisallowMultipleStatementsSniff implements Sniff
             $phpcsFile->recordMetric($stackPtr, 'Multiple statements on same line', 'no');
         }//end if
 
-    }//end process()
+    }
 
 
-}//end class
+}

@@ -29,7 +29,7 @@ class IncrementDecrementSpacingSniff implements Sniff
             T_INC,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -155,7 +155,7 @@ class IncrementDecrementSpacingSniff implements Sniff
             }
         }//end if
 
-    }//end process()
+    }
 
 
-}//end class
+}

@@ -80,7 +80,7 @@ final class SwitchDeclarationUnitTest extends AbstractSniffTestCase
             342 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -95,7 +95,7 @@ final class SwitchDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

@@ -39,7 +39,7 @@ final class EchoedStringsUnitTest extends AbstractSniffTestCase
             13 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -54,7 +54,7 @@ final class EchoedStringsUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

@@ -68,7 +68,7 @@ final class StatusWriter
 
         self::forceWrite($message, $indent, $newlines);
 
-    }//end write()
+    }
 
 
     /**
@@ -95,7 +95,7 @@ final class StatusWriter
 
         fwrite(self::$stream, $message);
 
-    }//end forceWrite()
+    }
 
 
     /**
@@ -110,7 +110,7 @@ final class StatusWriter
     {
         self::write('', 0, $nr);
 
-    }//end writeNewline()
+    }
 
 
     /**
@@ -125,7 +125,7 @@ final class StatusWriter
     {
         self::forceWrite('', 0, $nr);
 
-    }//end forceWriteNewline()
+    }
 
 
     /**
@@ -138,7 +138,7 @@ final class StatusWriter
         self::$paused = true;
         ++self::$pauseCount;
 
-    }//end pause()
+    }
 
 
     /**
@@ -156,7 +156,7 @@ final class StatusWriter
             self::$paused = false;
         }
 
-    }//end resume()
+    }
 
 
     /**
@@ -168,7 +168,7 @@ final class StatusWriter
     {
         return self::$paused;
 
-    }//end isPaused()
+    }
 
 
-}//end class
+}

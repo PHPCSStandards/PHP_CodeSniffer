@@ -35,7 +35,7 @@ final class GlobalKeywordUnitTest extends AbstractSniffTestCase
             9 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -50,7 +50,7 @@ final class GlobalKeywordUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

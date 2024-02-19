@@ -70,7 +70,7 @@ final class CreateParenthesisNestingMapDNFTypesTest extends AbstractTokenizerTes
             $this->assertSame($closePtr, $tokens[$i]['nested_parenthesis'][$openPtr], 'Nested parenthesis closer not set correctly');
         }
 
-    }//end testNormalParentheses()
+    }
 
 
     /**
@@ -175,7 +175,7 @@ final class CreateParenthesisNestingMapDNFTypesTest extends AbstractTokenizerTes
             ],
         ];
 
-    }//end dataNormalParentheses()
+    }
 
 
     /**
@@ -224,7 +224,7 @@ final class CreateParenthesisNestingMapDNFTypesTest extends AbstractTokenizerTes
             $this->assertSame($closePtr, $tokens[$i]['nested_parenthesis'][$openPtr], 'Nested parenthesis closer not set correctly');
         }//end for
 
-    }//end testDNFTypeParentheses()
+    }
 
 
     /**
@@ -368,7 +368,7 @@ final class CreateParenthesisNestingMapDNFTypesTest extends AbstractTokenizerTes
             ],
         ];
 
-    }//end dataDNFTypeParentheses()
+    }
 
 
-}//end class
+}

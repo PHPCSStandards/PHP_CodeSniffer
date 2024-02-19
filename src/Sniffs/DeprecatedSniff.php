@@ -60,4 +60,4 @@ interface DeprecatedSniff
     public function getDeprecationMessage();
 
 
-}//end interface
+}

@@ -43,7 +43,7 @@ final class HTMLTest extends TestCase
         $generator = new HTML($ruleset);
         $generator->generate();
 
-    }//end testGeneratingInvalidDocsResultsInException()
+    }
 
 
     /**
@@ -72,7 +72,7 @@ final class HTMLTest extends TestCase
         $generator = new HTMLDouble($ruleset);
         $generator->generate();
 
-    }//end testDocs()
+    }
 
 
     /**
@@ -97,7 +97,7 @@ final class HTMLTest extends TestCase
             ],
         ];
 
-    }//end dataDocs()
+    }
 
 
     /**
@@ -127,7 +127,7 @@ final class HTMLTest extends TestCase
         $generator = new HTMLDouble($ruleset);
         $generator->generate();
 
-    }//end testDocSpecifics()
+    }
 
 
     /**
@@ -252,7 +252,7 @@ final class HTMLTest extends TestCase
             ],
         ];
 
-    }//end dataDocSpecifics()
+    }
 
 
     /**
@@ -278,7 +278,7 @@ final class HTMLTest extends TestCase
         $generator = new HTMLDouble($ruleset);
         $generator->generate();
 
-    }//end testAnchorLinks()
+    }
 
 
     /**
@@ -308,7 +308,7 @@ final class HTMLTest extends TestCase
             $this->assertRegExp($regex, $footer);
         }
 
-    }//end testFooter()
+    }
 
 
     /**
@@ -333,7 +333,7 @@ final class HTMLTest extends TestCase
 
         $this->assertSame($expected, error_reporting());
 
-    }//end testFooterResetsErrorReportingToOriginalSetting()
+    }
 
 
     /**
@@ -373,7 +373,7 @@ final class HTMLTest extends TestCase
         // Reset the timezone to its original state.
         ini_set('date.timezone', $originalIni);
 
-    }//end testFooterDoesntThrowWarningOnMissingTimezone()
+    }
 
 
-}//end class
+}

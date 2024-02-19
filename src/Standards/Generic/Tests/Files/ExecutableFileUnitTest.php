@@ -30,7 +30,7 @@ final class ExecutableFileUnitTest extends AbstractSniffTestCase
         // Skip on Windows which doesn't have the concept of executable files.
         return PHP_OS_FAMILY === 'Windows';
 
-    }//end shouldSkipTest()
+    }
 
 
     /**
@@ -53,7 +53,7 @@ final class ExecutableFileUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -70,7 +70,7 @@ final class ExecutableFileUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

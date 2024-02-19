@@ -57,7 +57,7 @@ final class ValidClassNameUnitTest extends AbstractSniffTestCase
             90 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -72,7 +72,7 @@ final class ValidClassNameUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

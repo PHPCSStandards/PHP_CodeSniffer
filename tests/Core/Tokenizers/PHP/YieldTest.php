@@ -42,7 +42,7 @@ final class YieldTest extends AbstractTokenizerTestCase
 
         $this->assertSame($expectedContent, $tokenArray['content'], 'Token content does not match expectation');
 
-    }//end testYieldKeyword()
+    }
 
 
     /**
@@ -61,7 +61,7 @@ final class YieldTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataYieldKeyword()
+    }
 
 
     /**
@@ -90,7 +90,7 @@ final class YieldTest extends AbstractTokenizerTestCase
             $this->assertSame($expectedContent, $tokenArray['content'], 'Token content does not match expectation');
         }
 
-    }//end testYieldFromKeywordSingleToken()
+    }
 
 
     /**
@@ -117,7 +117,7 @@ final class YieldTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataYieldFromKeywordSingleToken()
+    }
 
 
     /**
@@ -156,7 +156,7 @@ final class YieldTest extends AbstractTokenizerTestCase
             ++$target;
         }
 
-    }//end testYieldFromKeywordMultiToken()
+    }
 
 
     /**
@@ -382,7 +382,7 @@ final class YieldTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataYieldFromKeywordMultiToken()
+    }
 
 
     /**
@@ -403,7 +403,7 @@ final class YieldTest extends AbstractTokenizerTestCase
         $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
         $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (type)');
 
-    }//end testYieldNonKeyword()
+    }
 
 
     /**
@@ -426,7 +426,7 @@ final class YieldTest extends AbstractTokenizerTestCase
             'yield used as method name with ref'  => ['/* testYieldUsedAsMethodNameReturnByRef */'],
         ];
 
-    }//end dataYieldNonKeyword()
+    }
 
 
-}//end class
+}

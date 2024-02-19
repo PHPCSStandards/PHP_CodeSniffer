@@ -57,7 +57,7 @@ class Common
 
         return false;
 
-    }//end isPharFile()
+    }
 
 
     /**
@@ -85,7 +85,7 @@ class Common
 
         return false;
 
-    }//end isReadable()
+    }
 
 
     /**
@@ -138,7 +138,7 @@ class Common
 
         return false;
 
-    }//end realpath()
+    }
 
 
     /**
@@ -168,7 +168,7 @@ class Common
 
         return $path;
 
-    }//end stripBasepath()
+    }
 
 
     /**
@@ -189,7 +189,7 @@ class Common
 
         return $eolChar;
 
-    }//end detectLineEndings()
+    }
 
 
     /**
@@ -248,7 +248,7 @@ class Common
 
         return $isTTY;
 
-    }//end isStdinATTY()
+    }
 
 
     /**
@@ -270,7 +270,7 @@ class Common
 
         return $cmd;
 
-    }//end escapeshellcmd()
+    }
 
 
     /**
@@ -319,7 +319,7 @@ class Common
 
         return $content;
 
-    }//end prepareForOutput()
+    }
 
 
     /**
@@ -333,7 +333,7 @@ class Common
     {
         return preg_replace('`\033\[[0-9;]+m`', '', $text);
 
-    }//end stripColors()
+    }
 
 
     /**
@@ -418,7 +418,7 @@ class Common
 
         return true;
 
-    }//end isCamelCaps()
+    }
 
 
     /**
@@ -456,7 +456,7 @@ class Common
 
         return $validName;
 
-    }//end isUnderscoreName()
+    }
 
 
     /**
@@ -530,7 +530,7 @@ class Common
             }//end if
         }//end if
 
-    }//end suggestType()
+    }
 
 
     /**
@@ -579,7 +579,7 @@ class Common
         $category = $parts[($partsCount - 2)];
         return $standard . '.' . $category . '.' . $sniff;
 
-    }//end getSniffCode()
+    }
 
 
     /**
@@ -610,7 +610,7 @@ class Common
         $newName = substr($newName, ($start + 1));
         return $newName;
 
-    }//end cleanSniffClass()
+    }
 
 
-}//end class
+}

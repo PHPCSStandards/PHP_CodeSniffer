@@ -40,7 +40,7 @@ final class GetSniffCodeTest extends TestCase
 
         Common::getSniffCode($input);
 
-    }//end testGetSniffCodeThrowsExceptionOnInvalidInput()
+    }
 
 
     /**
@@ -57,7 +57,7 @@ final class GetSniffCodeTest extends TestCase
             'Class name is empty'        => [''],
         ];
 
-    }//end dataGetSniffCodeThrowsExceptionOnInvalidInput()
+    }
 
 
     /**
@@ -79,7 +79,7 @@ final class GetSniffCodeTest extends TestCase
 
         Common::getSniffCode($input);
 
-    }//end testGetSniffCodeThrowsExceptionOnInputWhichIsNotASniffTestClass()
+    }
 
 
     /**
@@ -104,7 +104,7 @@ final class GetSniffCodeTest extends TestCase
             'Fully qualified class name, category called Sniffs'            => ['CompanyName\\Sniffs\\Sniffs\\InvalidCategorySniff'],
         ];
 
-    }//end dataGetSniffCodeThrowsExceptionOnInputWhichIsNotASniffTestClass()
+    }
 
 
     /**
@@ -121,7 +121,7 @@ final class GetSniffCodeTest extends TestCase
     {
         $this->assertSame($expected, Common::getSniffCode($fqnClass));
 
-    }//end testGetSniffCode()
+    }
 
 
     /**
@@ -160,7 +160,7 @@ final class GetSniffCodeTest extends TestCase
             ],
         ];
 
-    }//end dataGetSniffCode()
+    }
 
 
-}//end class
+}

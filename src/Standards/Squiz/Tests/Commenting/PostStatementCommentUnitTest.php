@@ -44,7 +44,7 @@ final class PostStatementCommentUnitTest extends AbstractSniffTestCase
             64 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -59,7 +59,7 @@ final class PostStatementCommentUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

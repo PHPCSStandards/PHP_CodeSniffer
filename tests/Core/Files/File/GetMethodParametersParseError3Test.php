@@ -31,7 +31,7 @@ final class GetMethodParametersParseError3Test extends AbstractMethodTestCase
         $target = $this->getTargetToken('/* testParseError */', [T_USE]);
         self::$phpcsFile->getMethodParameters($target);
 
-    }//end testParseError()
+    }
 
 
-}//end class
+}

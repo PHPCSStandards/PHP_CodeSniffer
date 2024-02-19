@@ -82,7 +82,7 @@ final class SpaceAfterCastUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -97,7 +97,7 @@ final class SpaceAfterCastUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

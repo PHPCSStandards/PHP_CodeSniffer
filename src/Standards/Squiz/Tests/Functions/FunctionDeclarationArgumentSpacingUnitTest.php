@@ -107,7 +107,7 @@ final class FunctionDeclarationArgumentSpacingUnitTest extends AbstractSniffTest
             return [];
         }//end switch
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -122,7 +122,7 @@ final class FunctionDeclarationArgumentSpacingUnitTest extends AbstractSniffTest
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

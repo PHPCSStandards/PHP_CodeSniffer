@@ -36,7 +36,7 @@ class ObjectOperatorSpacingSniff implements Sniff
             T_NULLSAFE_OBJECT_OPERATOR,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -83,7 +83,7 @@ class ObjectOperatorSpacingSniff implements Sniff
         $phpcsFile->recordMetric($stackPtr, 'Spacing after object operator', $after);
         $this->checkSpacingAfterOperator($phpcsFile, $stackPtr, $after);
 
-    }//end process()
+    }
 
 
     /**
@@ -122,7 +122,7 @@ class ObjectOperatorSpacingSniff implements Sniff
 
         return true;
 
-    }//end checkSpacingBeforeOperator()
+    }
 
 
     /**
@@ -161,7 +161,7 @@ class ObjectOperatorSpacingSniff implements Sniff
 
         return true;
 
-    }//end checkSpacingAfterOperator()
+    }
 
 
-}//end class
+}

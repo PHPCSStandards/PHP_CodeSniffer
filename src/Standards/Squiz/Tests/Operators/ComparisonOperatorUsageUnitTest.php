@@ -66,7 +66,7 @@ final class ComparisonOperatorUsageUnitTest extends AbstractSniffTestCase
             156 => 2,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -81,7 +81,7 @@ final class ComparisonOperatorUsageUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

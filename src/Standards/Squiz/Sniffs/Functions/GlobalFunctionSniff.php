@@ -25,7 +25,7 @@ class GlobalFunctionSniff implements Sniff
     {
         return [T_FUNCTION];
 
-    }//end register()
+    }
 
 
     /**
@@ -55,7 +55,7 @@ class GlobalFunctionSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

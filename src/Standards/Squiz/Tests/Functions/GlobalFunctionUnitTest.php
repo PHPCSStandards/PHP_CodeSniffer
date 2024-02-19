@@ -32,7 +32,7 @@ final class GlobalFunctionUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -55,7 +55,7 @@ final class GlobalFunctionUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

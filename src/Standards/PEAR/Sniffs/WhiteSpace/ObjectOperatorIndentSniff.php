@@ -49,7 +49,7 @@ class ObjectOperatorIndentSniff implements Sniff
     {
         return self::TARGET_TOKENS;
 
-    }//end register()
+    }
 
 
     /**
@@ -195,7 +195,7 @@ class ObjectOperatorIndentSniff implements Sniff
             );
         }//end while
 
-    }//end process()
+    }
 
 
-}//end class
+}

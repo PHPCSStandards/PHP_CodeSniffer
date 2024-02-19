@@ -45,7 +45,7 @@ class FunctionCommentSniff implements Sniff
     {
         return [T_FUNCTION];
 
-    }//end register()
+    }
 
 
     /**
@@ -176,7 +176,7 @@ class FunctionCommentSniff implements Sniff
         $this->processThrows($phpcsFile, $stackPtr, $commentStart);
         $this->processParams($phpcsFile, $stackPtr, $commentStart);
 
-    }//end process()
+    }
 
 
     /**
@@ -225,7 +225,7 @@ class FunctionCommentSniff implements Sniff
             $phpcsFile->addError($error, $tokens[$commentStart]['comment_closer'], 'MissingReturn');
         }//end if
 
-    }//end processReturn()
+    }
 
 
     /**
@@ -260,7 +260,7 @@ class FunctionCommentSniff implements Sniff
             }
         }//end foreach
 
-    }//end processThrows()
+    }
 
 
     /**
@@ -544,7 +544,7 @@ class FunctionCommentSniff implements Sniff
             $phpcsFile->addError($error, $commentStart, 'MissingParamTag', $data);
         }
 
-    }//end processParams()
+    }
 
 
-}//end class
+}

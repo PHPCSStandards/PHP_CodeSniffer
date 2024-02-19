@@ -37,7 +37,7 @@ final class IssueSquiz2675Test extends AbstractRealConfigTestCase
 
         $this->assertSame(4, $configB->tabWidth, 'Tab width not correctly set when Config is created a second time');
 
-    }//end testIssueSquiz2675()
+    }
 
 
-}//end class
+}

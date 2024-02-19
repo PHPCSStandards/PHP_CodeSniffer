@@ -58,7 +58,7 @@ class LongConditionClosingCommentSniff implements Sniff
     {
         return [T_CLOSE_CURLY_BRACKET];
 
-    }//end register()
+    }
 
 
     /**
@@ -202,7 +202,7 @@ class LongConditionClosingCommentSniff implements Sniff
             return;
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

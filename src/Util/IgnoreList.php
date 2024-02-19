@@ -39,7 +39,7 @@ final class IgnoreList
     private function __construct()
     {
 
-    }//end __construct()
+    }
 
 
     /**
@@ -51,7 +51,7 @@ final class IgnoreList
     {
         return new self();
 
-    }//end getInstanceIgnoringNothing()
+    }
 
 
     /**
@@ -65,7 +65,7 @@ final class IgnoreList
         $instance->data['.default'] = true;
         return $instance;
 
-    }//end getInstanceIgnoringAll()
+    }
 
 
     /**
@@ -85,7 +85,7 @@ final class IgnoreList
 
         return clone $ignoreList;
 
-    }//end getNewInstanceFrom()
+    }
 
 
     /**
@@ -116,7 +116,7 @@ final class IgnoreList
 
         return $this;
 
-    }//end set()
+    }
 
 
     /**
@@ -148,7 +148,7 @@ final class IgnoreList
 
         return $returnValue;
 
-    }//end isIgnored()
+    }
 
 
     /**
@@ -174,7 +174,7 @@ final class IgnoreList
 
         return true;
 
-    }//end ignoresNothing()
+    }
 
 
     /**
@@ -200,7 +200,7 @@ final class IgnoreList
 
         return true;
 
-    }//end ignoresEverything()
+    }
 
 
-}//end class
+}

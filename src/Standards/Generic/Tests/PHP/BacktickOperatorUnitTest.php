@@ -34,7 +34,7 @@ final class BacktickOperatorUnitTest extends AbstractSniffTestCase
             2 => 2,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -49,7 +49,7 @@ final class BacktickOperatorUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

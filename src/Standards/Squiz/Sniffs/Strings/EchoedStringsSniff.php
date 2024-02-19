@@ -26,7 +26,7 @@ class EchoedStringsSniff implements Sniff
     {
         return [T_ECHO];
 
-    }//end register()
+    }
 
 
     /**
@@ -82,7 +82,7 @@ class EchoedStringsSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

@@ -38,7 +38,7 @@ final class LowercasedFilenameUnitTest extends AbstractSniffTestCase
 
         return $testFiles;
 
-    }//end getTestFiles()
+    }
 
 
     /**
@@ -61,7 +61,7 @@ final class LowercasedFilenameUnitTest extends AbstractSniffTestCase
             return [];
         }
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -76,7 +76,7 @@ final class LowercasedFilenameUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
     /**
@@ -100,7 +100,7 @@ final class LowercasedFilenameUnitTest extends AbstractSniffTestCase
         $this->assertSame(0, $file->getWarningCount());
         $this->assertCount(0, $file->getErrors());
 
-    }//end testStdIn()
+    }
 
 
-}//end class
+}

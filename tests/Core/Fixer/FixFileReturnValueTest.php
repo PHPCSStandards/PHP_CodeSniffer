@@ -40,7 +40,7 @@ final class FixFileReturnValueTest extends TestCase
 
         $this->assertTrue($fixed);
 
-    }//end testReturnValueIsTrueWhenFileWasFixed()
+    }
 
 
     /**
@@ -64,7 +64,7 @@ final class FixFileReturnValueTest extends TestCase
 
         $this->assertFalse($fixed);
 
-    }//end testReturnValueIsFalse()
+    }
 
 
     /**
@@ -83,7 +83,7 @@ final class FixFileReturnValueTest extends TestCase
             ],
         ];
 
-    }//end dataReturnValueIsFalse()
+    }
 
 
-}//end class
+}

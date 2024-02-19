@@ -266,7 +266,7 @@ class Ruleset
 
         $this->displayCachedMessages();
 
-    }//end __construct()
+    }
 
 
     /**
@@ -341,7 +341,7 @@ class Ruleset
             echo PHP_EOL . '* Sniffs marked with an asterisk are deprecated.' . PHP_EOL;
         }
 
-    }//end explain()
+    }
 
 
     /**
@@ -353,7 +353,7 @@ class Ruleset
     {
         return (count($this->deprecatedSniffs) > 0);
 
-    }//end hasSniffDeprecations()
+    }
 
 
     /**
@@ -483,7 +483,7 @@ class Ruleset
         StatusWriter::writeNewline(2);
         StatusWriter::write($closer, 0, 2);
 
-    }//end showSniffDeprecations()
+    }
 
 
     /**
@@ -512,7 +512,7 @@ class Ruleset
 
         $this->msgCache->display();
 
-    }//end displayCachedMessages()
+    }
 
 
     /**
@@ -884,7 +884,7 @@ class Ruleset
 
         return $files;
 
-    }//end processRuleset()
+    }
 
 
     /**
@@ -943,7 +943,7 @@ class Ruleset
 
         return $sniffs;
 
-    }//end expandSniffDirectory()
+    }
 
 
     /**
@@ -1126,7 +1126,7 @@ class Ruleset
             }
         }//end if
 
-    }//end expandRulesetReference()
+    }
 
 
     /**
@@ -1381,7 +1381,7 @@ class Ruleset
             }//end foreach
         }//end foreach
 
-    }//end processRule()
+    }
 
 
     /**
@@ -1416,7 +1416,7 @@ class Ruleset
 
         return false;
 
-    }//end shouldProcessElement()
+    }
 
 
     /**
@@ -1510,7 +1510,7 @@ class Ruleset
 
         $this->sniffs = $listeners;
 
-    }//end registerSniffs()
+    }
 
 
     /**
@@ -1599,7 +1599,7 @@ class Ruleset
             }
         }//end foreach
 
-    }//end populateTokenListeners()
+    }
 
 
     /**
@@ -1680,7 +1680,7 @@ class Ruleset
             $sniffObject->$propertyName = $value;
         }
 
-    }//end setSniffProperty()
+    }
 
 
     /**
@@ -1724,7 +1724,7 @@ class Ruleset
 
         return $value;
 
-    }//end getRealPropertyValue()
+    }
 
 
     /**
@@ -1750,7 +1750,7 @@ class Ruleset
 
         return [];
 
-    }//end getIgnorePatterns()
+    }
 
 
     /**
@@ -1776,7 +1776,7 @@ class Ruleset
 
         return [];
 
-    }//end getIncludePatterns()
+    }
 
 
-}//end class
+}

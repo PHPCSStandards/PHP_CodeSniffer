@@ -68,7 +68,7 @@ abstract class AbstractTokenizerTestCase extends TestCase
             $this->phpcsFile->parse();
         }//end if
 
-    }//end setUp()
+    }
 
 
     /**
@@ -89,7 +89,7 @@ abstract class AbstractTokenizerTestCase extends TestCase
     {
         AbstractMethodTestCase::assertTestMarkersAreUnique($this->phpcsFile);
 
-    }//end testTestMarkersAreUnique()
+    }
 
 
     /**
@@ -108,7 +108,7 @@ abstract class AbstractTokenizerTestCase extends TestCase
     {
         return AbstractMethodTestCase::getTargetTokenFromFile($this->phpcsFile, $commentString, $tokenType, $tokenContent);
 
-    }//end getTargetToken()
+    }
 
 
     /**
@@ -126,7 +126,7 @@ abstract class AbstractTokenizerTestCase extends TestCase
         $property->setValue(null, []);
         (PHP_VERSION_ID < 80100) && $property->setAccessible(false);
 
-    }//end clearResolvedTokensCache()
+    }
 
 
-}//end class
+}

@@ -54,7 +54,7 @@ final class DisallowLongArraySyntaxUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -69,7 +69,7 @@ final class DisallowLongArraySyntaxUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

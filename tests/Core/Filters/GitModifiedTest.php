@@ -48,7 +48,7 @@ final class GitModifiedTest extends AbstractFilterTestCase
 
         $this->assertSame([$rootFile], $this->getFilteredResultsAsArray($mockObj));
 
-    }//end testFileNamePassesAsBasePathWillTranslateToDirname()
+    }
 
 
     /**
@@ -79,7 +79,7 @@ final class GitModifiedTest extends AbstractFilterTestCase
 
         $this->assertSame($expectedOutput, $this->getFilteredResultsAsArray($mockObj));
 
-    }//end testAcceptOnlyGitModified()
+    }
 
 
     /**
@@ -198,7 +198,7 @@ final class GitModifiedTest extends AbstractFilterTestCase
 
         return $testCases;
 
-    }//end dataAcceptOnlyGitModified()
+    }
 
 
     /**
@@ -230,7 +230,7 @@ final class GitModifiedTest extends AbstractFilterTestCase
 
         $this->assertSame($expected, $result);
 
-    }//end testExecAlwaysReturnsArray()
+    }
 
 
     /**
@@ -264,7 +264,7 @@ final class GitModifiedTest extends AbstractFilterTestCase
             ],
         ];
 
-    }//end dataExecAlwaysReturnsArray()
+    }
 
 
-}//end class
+}

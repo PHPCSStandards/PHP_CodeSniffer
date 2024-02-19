@@ -87,7 +87,7 @@ TEMPLATE;
     {
         @unlink(self::RULESET_FILENAME);
 
-    }//end tearDownAfterClass()
+    }
 
 
     /**
@@ -122,7 +122,7 @@ TEMPLATE;
 
         return $testFiles;
 
-    }//end getTestFiles()
+    }
 
 
     /**
@@ -134,7 +134,7 @@ TEMPLATE;
     {
         return false;
 
-    }//end shouldSkipTest()
+    }
 
 
     /**
@@ -245,7 +245,7 @@ TEMPLATE;
             $this->fail(implode(PHP_EOL, $failureMessages));
         }
 
-    }//end testSniff()
+    }
 
 
     /**
@@ -435,7 +435,7 @@ TEMPLATE;
 
         return $failureMessages;
 
-    }//end generateFailureMessages()
+    }
 
 
     /**
@@ -449,7 +449,7 @@ TEMPLATE;
     public function setCliValues(string $testFile, Config $config)
     {
 
-    }//end setCliValues()
+    }
 
 
     /**
@@ -474,4 +474,4 @@ TEMPLATE;
     abstract protected function getWarningList();
 
 
-}//end class
+}

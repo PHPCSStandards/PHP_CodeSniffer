@@ -26,7 +26,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
     {
         AbstractScopeSniff::__construct(Tokens::OO_SCOPE_TOKENS, [T_VARIABLE], false);
 
-    }//end __construct()
+    }
 
 
     /**
@@ -81,7 +81,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             return;
         }
 
-    }//end processMemberVar()
+    }
 
 
     /**
@@ -98,7 +98,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             We don't care about normal variables.
         */
 
-    }//end processVariable()
+    }
 
 
     /**
@@ -115,7 +115,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             We don't care about normal variables.
         */
 
-    }//end processVariableInString()
+    }
 
 
-}//end class
+}

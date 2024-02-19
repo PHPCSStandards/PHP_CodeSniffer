@@ -34,7 +34,7 @@ final class AnonClassParenthesisOwnerTest extends AbstractTokenizerTestCase
         $this->assertArrayNotHasKey('parenthesis_opener', $tokens[$anonClass]);
         $this->assertArrayNotHasKey('parenthesis_closer', $tokens[$anonClass]);
 
-    }//end testAnonClassNoParentheses()
+    }
 
 
     /**
@@ -61,7 +61,7 @@ final class AnonClassParenthesisOwnerTest extends AbstractTokenizerTestCase
         $this->assertArrayHasKey('parenthesis_owner', $tokens[$closer]);
         $this->assertSame($function, $tokens[$closer]['parenthesis_owner']);
 
-    }//end testAnonClassNoParenthesesNextOpenClose()
+    }
 
 
     /**
@@ -86,7 +86,7 @@ final class AnonClassParenthesisOwnerTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataAnonClassNoParentheses()
+    }
 
 
     /**
@@ -128,7 +128,7 @@ final class AnonClassParenthesisOwnerTest extends AbstractTokenizerTestCase
         $this->assertSame($opener, $tokens[$closer]['parenthesis_opener']);
         $this->assertSame($closer, $tokens[$closer]['parenthesis_closer']);
 
-    }//end testAnonClassWithParentheses()
+    }
 
 
     /**
@@ -152,7 +152,7 @@ final class AnonClassParenthesisOwnerTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataAnonClassWithParentheses()
+    }
 
 
-}//end class
+}

@@ -103,7 +103,7 @@ class FileList implements Iterator, Countable
         reset($this->files);
         $this->numFiles = count($this->files);
 
-    }//end __construct()
+    }
 
 
     /**
@@ -143,7 +143,7 @@ class FileList implements Iterator, Countable
             $this->numFiles++;
         }
 
-    }//end addFile()
+    }
 
 
     /**
@@ -175,7 +175,7 @@ class FileList implements Iterator, Countable
 
         return $filterClass;
 
-    }//end getFilterClass()
+    }
 
 
     /**
@@ -188,7 +188,7 @@ class FileList implements Iterator, Countable
     {
         reset($this->files);
 
-    }//end rewind()
+    }
 
 
     /**
@@ -206,7 +206,7 @@ class FileList implements Iterator, Countable
 
         return $this->files[$path];
 
-    }//end current()
+    }
 
 
     /**
@@ -219,7 +219,7 @@ class FileList implements Iterator, Countable
     {
         return key($this->files);
 
-    }//end key()
+    }
 
 
     /**
@@ -232,7 +232,7 @@ class FileList implements Iterator, Countable
     {
         next($this->files);
 
-    }//end next()
+    }
 
 
     /**
@@ -249,7 +249,7 @@ class FileList implements Iterator, Countable
 
         return true;
 
-    }//end valid()
+    }
 
 
     /**
@@ -262,7 +262,7 @@ class FileList implements Iterator, Countable
     {
         return $this->numFiles;
 
-    }//end count()
+    }
 
 
-}//end class
+}

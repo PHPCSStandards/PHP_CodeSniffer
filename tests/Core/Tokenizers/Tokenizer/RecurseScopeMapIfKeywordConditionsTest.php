@@ -70,7 +70,7 @@ final class RecurseScopeMapIfKeywordConditionsTest extends AbstractTokenizerTest
             )
         );
 
-    }//end testIfElseWithNestedCaseMissingBreakSharedClosers()
+    }
 
 
-}//end class
+}

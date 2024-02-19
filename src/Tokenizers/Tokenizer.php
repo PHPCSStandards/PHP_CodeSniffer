@@ -129,7 +129,7 @@ abstract class Tokenizer
         // Allow the tokenizer to do additional processing if required.
         $this->processAdditional();
 
-    }//end __construct()
+    }
 
 
     /**
@@ -153,7 +153,7 @@ abstract class Tokenizer
 
         return false;
 
-    }//end isMinifiedContent()
+    }
 
 
     /**
@@ -165,7 +165,7 @@ abstract class Tokenizer
     {
         return $this->tokens;
 
-    }//end getTokens()
+    }
 
 
     /**
@@ -483,7 +483,7 @@ abstract class Tokenizer
             $this->ignoredLines = [];
         }
 
-    }//end createPositionMap()
+    }
 
 
     /**
@@ -573,7 +573,7 @@ abstract class Tokenizer
         $token['content']      = $newContent;
         $token['length']       = $length;
 
-    }//end replaceTabsInToken()
+    }
 
 
     /**
@@ -750,7 +750,7 @@ abstract class Tokenizer
             StatusWriter::write('*** END TOKEN MAP ***', 1);
         }
 
-    }//end createTokenMap()
+    }
 
 
     /**
@@ -787,7 +787,7 @@ abstract class Tokenizer
             }//end if
         }//end for
 
-    }//end createParenthesisNestingMap()
+    }
 
 
     /**
@@ -827,7 +827,7 @@ abstract class Tokenizer
             StatusWriter::write('*** END SCOPE MAP ***', 1);
         }
 
-    }//end createScopeMap()
+    }
 
 
     /**
@@ -1357,7 +1357,7 @@ abstract class Tokenizer
 
         return $stackPtr;
 
-    }//end recurseScopeMap()
+    }
 
 
     /**
@@ -1585,7 +1585,7 @@ abstract class Tokenizer
             StatusWriter::write('*** END LEVEL MAP ***', 1);
         }
 
-    }//end createLevelMap()
+    }
 
 
-}//end class
+}

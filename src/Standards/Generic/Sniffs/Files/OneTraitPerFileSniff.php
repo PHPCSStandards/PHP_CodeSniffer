@@ -25,7 +25,7 @@ class OneTraitPerFileSniff implements Sniff
     {
         return [T_TRAIT];
 
-    }//end register()
+    }
 
 
     /**
@@ -51,7 +51,7 @@ class OneTraitPerFileSniff implements Sniff
             $phpcsFile->addError($error, $nextClass, 'MultipleFound');
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

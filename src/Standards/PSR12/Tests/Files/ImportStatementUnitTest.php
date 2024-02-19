@@ -37,7 +37,7 @@ final class ImportStatementUnitTest extends AbstractSniffTestCase
             10 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -52,7 +52,7 @@ final class ImportStatementUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

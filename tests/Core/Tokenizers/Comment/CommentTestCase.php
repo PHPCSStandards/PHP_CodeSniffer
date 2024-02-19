@@ -68,7 +68,7 @@ abstract class CommentTestCase extends AbstractTokenizerTestCase
             );
         }
 
-    }//end testDocblockOpenerCloser()
+    }
 
 
     /**
@@ -122,7 +122,7 @@ abstract class CommentTestCase extends AbstractTokenizerTestCase
             );
         }//end for
 
-    }//end checkTokenSequence()
+    }
 
 
-}//end class
+}

@@ -43,7 +43,7 @@ final class DisallowComparisonAssignmentUnitTest extends AbstractSniffTestCase
             62 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -58,7 +58,7 @@ final class DisallowComparisonAssignmentUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

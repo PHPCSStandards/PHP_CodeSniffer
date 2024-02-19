@@ -83,7 +83,7 @@ final class RegisterSniffsTest extends TestCase
 
         self::$psr1SniffAbsolutePaths = self::relativeToAbsoluteSniffFiles($standardsDir, self::$psr1SniffFiles);
 
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -105,7 +105,7 @@ final class RegisterSniffsTest extends TestCase
 
         return $fileList;
 
-    }//end relativeToAbsoluteSniffFiles()
+    }
 
 
     /**
@@ -118,7 +118,7 @@ final class RegisterSniffsTest extends TestCase
         // Clear out the Ruleset::$sniffs property.
         self::$ruleset->sniffs = [];
 
-    }//end setUp()
+    }
 
 
     /**
@@ -134,7 +134,7 @@ final class RegisterSniffsTest extends TestCase
         $this->assertSame(array_keys(self::$originalSniffs), array_keys(self::$ruleset->sniffs));
         $this->assertSame(array_keys(self::$originalSniffs), array_values(self::$ruleset->sniffs));
 
-    }//end testRegisteredSniffsShouldBeTheSame()
+    }
 
 
     /**
@@ -163,7 +163,7 @@ final class RegisterSniffsTest extends TestCase
 
         $this->assertSame($expected, $actual);
 
-    }//end testRegisteredSniffsWithRestrictions()
+    }
 
 
     /**
@@ -194,7 +194,7 @@ final class RegisterSniffsTest extends TestCase
 
         $this->assertSame($expected, $actual);
 
-    }//end testRegisteredSniffsWithExclusions()
+    }
 
 
     /**
@@ -227,7 +227,7 @@ final class RegisterSniffsTest extends TestCase
 
         $this->assertSame($expected, array_keys(self::$ruleset->sniffs));
 
-    }//end testRegisteredSniffsBothRestrictionsAndExclusions()
+    }
 
 
     /**
@@ -255,7 +255,7 @@ final class RegisterSniffsTest extends TestCase
         $this->assertSame(array_keys(self::$originalSniffs), array_keys(self::$ruleset->sniffs));
         $this->assertSame(array_keys(self::$originalSniffs), array_values(self::$ruleset->sniffs));
 
-    }//end testRegisterSniffsFiltersOutAbstractClasses()
+    }
 
 
     /**
@@ -283,7 +283,7 @@ final class RegisterSniffsTest extends TestCase
         $this->assertSame(array_keys(self::$originalSniffs), array_keys(self::$ruleset->sniffs));
         $this->assertSame(array_keys(self::$originalSniffs), array_values(self::$ruleset->sniffs));
 
-    }//end testRegisteredSniffsFiltersOutFilePathsWithoutSniffsDir()
+    }
 
 
-}//end class
+}

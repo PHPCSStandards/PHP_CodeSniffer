@@ -33,7 +33,7 @@ class SwitchDeclarationSniff implements Sniff
     {
         return [T_SWITCH];
 
-    }//end register()
+    }
 
 
     /**
@@ -288,7 +288,7 @@ class SwitchDeclarationSniff implements Sniff
             $phpcsFile->addError($error, $stackPtr, 'MissingCase');
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

@@ -43,7 +43,7 @@ final class MarkdownTest extends TestCase
         $generator = new Markdown($ruleset);
         $generator->generate();
 
-    }//end testGeneratingInvalidDocsResultsInException()
+    }
 
 
     /**
@@ -72,7 +72,7 @@ final class MarkdownTest extends TestCase
         $generator = new MarkdownDouble($ruleset);
         $generator->generate();
 
-    }//end testDocs()
+    }
 
 
     /**
@@ -97,7 +97,7 @@ final class MarkdownTest extends TestCase
             ],
         ];
 
-    }//end dataDocs()
+    }
 
 
     /**
@@ -127,7 +127,7 @@ final class MarkdownTest extends TestCase
         $generator = new MarkdownDouble($ruleset);
         $generator->generate();
 
-    }//end testDocSpecifics()
+    }
 
 
     /**
@@ -252,7 +252,7 @@ final class MarkdownTest extends TestCase
             ],
         ];
 
-    }//end dataDocSpecifics()
+    }
 
 
     /**
@@ -280,7 +280,7 @@ final class MarkdownTest extends TestCase
             $this->assertRegExp($regex, $footer);
         }
 
-    }//end testFooter()
+    }
 
 
     /**
@@ -305,7 +305,7 @@ final class MarkdownTest extends TestCase
 
         $this->assertSame($expected, error_reporting());
 
-    }//end testFooterResetsErrorReportingToOriginalSetting()
+    }
 
 
     /**
@@ -345,7 +345,7 @@ final class MarkdownTest extends TestCase
         // Reset the timezone to its original state.
         ini_set('date.timezone', $originalIni);
 
-    }//end testFooterDoesntThrowWarningOnMissingTimezone()
+    }
 
 
-}//end class
+}

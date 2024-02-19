@@ -47,7 +47,7 @@ final class CreatePositionMapYieldFromTest extends AbstractTokenizerTestCase
             $this->assertSame($value, $tokens[$target][$key], "Value for key $key does not match expectation.");
         }
 
-    }//end testYieldFromTabReplacement()
+    }
 
 
     /**
@@ -94,7 +94,7 @@ final class CreatePositionMapYieldFromTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataYieldFromTabReplacement()
+    }
 
 
-}//end class
+}

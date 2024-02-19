@@ -60,7 +60,7 @@ final class UpperCaseConstantUnitTest extends AbstractSniffTestCase
             118 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -75,7 +75,7 @@ final class UpperCaseConstantUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

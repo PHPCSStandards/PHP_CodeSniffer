@@ -276,7 +276,7 @@ class Config
 
         return $this->settings[$name];
 
-    }//end __get()
+    }
 
 
     /**
@@ -349,7 +349,7 @@ class Config
 
         $this->settings[$name] = $value;
 
-    }//end __set()
+    }
 
 
     /**
@@ -363,7 +363,7 @@ class Config
     {
         return isset($this->settings[$name]);
 
-    }//end __isset()
+    }
 
 
     /**
@@ -377,7 +377,7 @@ class Config
     {
         $this->settings[$name] = null;
 
-    }//end __unset()
+    }
 
 
     /**
@@ -389,7 +389,7 @@ class Config
     {
         return $this->settings;
 
-    }//end getSettings()
+    }
 
 
     /**
@@ -403,7 +403,7 @@ class Config
     {
         $this->settings = $settings;
 
-    }//end setSettings()
+    }
 
 
     /**
@@ -488,7 +488,7 @@ class Config
 
         fclose($handle);
 
-    }//end __construct()
+    }
 
 
     /**
@@ -539,7 +539,7 @@ class Config
             }//end if
         }//end for
 
-    }//end setCommandLineValues()
+    }
 
 
     /**
@@ -663,7 +663,7 @@ class Config
             $this->parallel = max((int) $parallel, 1);
         }
 
-    }//end restoreDefaults()
+    }
 
 
     /**
@@ -775,7 +775,7 @@ class Config
             }
         }//end switch
 
-    }//end processShortArgument()
+    }
 
 
     /**
@@ -1307,7 +1307,7 @@ class Config
             break;
         }//end switch
 
-    }//end processLongArgument()
+    }
 
 
     /**
@@ -1394,7 +1394,7 @@ class Config
 
         return $sniffs;
 
-    }//end parseSniffCodes()
+    }
 
 
     /**
@@ -1423,7 +1423,7 @@ class Config
 
         $this->processFilePath($arg);
 
-    }//end processUnknownArgument()
+    }
 
 
     /**
@@ -1459,7 +1459,7 @@ class Config
             $this->overriddenDefaults['files'] = true;
         }
 
-    }//end processFilePath()
+    }
 
 
     /**
@@ -1479,7 +1479,7 @@ class Config
 
         echo PHP_EOL;
 
-    }//end printUsage()
+    }
 
 
     /**
@@ -1506,7 +1506,7 @@ class Config
 
         echo $usage;
 
-    }//end printShortUsage()
+    }
 
 
     /**
@@ -1532,7 +1532,7 @@ class Config
 
         (new Help($this, $longOptions, $shortOptions))->display();
 
-    }//end printPHPCSUsage()
+    }
 
 
     /**
@@ -1548,7 +1548,7 @@ class Config
 
         (new Help($this, $longOptions, $shortOptions))->display();
 
-    }//end printPHPCBFUsage()
+    }
 
 
     /**
@@ -1574,7 +1574,7 @@ class Config
 
         return $phpCodeSnifferConfig[$key];
 
-    }//end getConfigData()
+    }
 
 
     /**
@@ -1615,7 +1615,7 @@ class Config
         self::$executablePaths[$name] = $result;
         return $result;
 
-    }//end getExecutablePath()
+    }
 
 
     /**
@@ -1697,7 +1697,7 @@ class Config
 
         return true;
 
-    }//end setConfigData()
+    }
 
 
     /**
@@ -1739,7 +1739,7 @@ class Config
         self::$configData     = $phpCodeSnifferConfig;
         return self::$configData;
 
-    }//end getAllConfigData()
+    }
 
 
     /**
@@ -1774,7 +1774,7 @@ class Config
 
         return $output;
 
-    }//end prepareConfigDataForDisplay()
+    }
 
 
     /**
@@ -1790,7 +1790,7 @@ class Config
     {
         echo $this->prepareConfigDataForDisplay($data);
 
-    }//end printConfigData()
+    }
 
 
-}//end class
+}

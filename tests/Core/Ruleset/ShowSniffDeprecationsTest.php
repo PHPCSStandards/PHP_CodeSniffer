@@ -42,7 +42,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
 
         $this->assertSame($expected, $ruleset->hasSniffDeprecations());
 
-    }//end testHasSniffDeprecations()
+    }
 
 
     /**
@@ -65,7 +65,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
             ],
         ];
 
-    }//end dataHasSniffDeprecations()
+    }
 
 
     /**
@@ -93,7 +93,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
 
         $this->assertStderrOutputSameString('');
 
-    }//end testDeprecatedSniffsListDoesNotShow()
+    }
 
 
     /**
@@ -119,7 +119,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
             ],
         ];
 
-    }//end dataDeprecatedSniffsListDoesNotShow()
+    }
 
 
     /**
@@ -142,7 +142,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
 
         $this->testDeprecatedSniffsListDoesNotShow($standard, $additionalArgs);
 
-    }//end testDeprecatedSniffsListDoesNotShowNeedsCsMode()
+    }
 
 
     /**
@@ -161,7 +161,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
             ],
         ];
 
-    }//end dataDeprecatedSniffsListDoesNotShowNeedsCsMode()
+    }
 
 
     /**
@@ -187,7 +187,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
 
         $this->assertStderrOutputSameString('');
 
-    }//end testDeprecatedSniffsListDoesNotShowWhenSelectedSniffsAreNotDeprecated()
+    }
 
 
     /**
@@ -220,7 +220,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
 
         $this->assertStderrOutputSameString('');
 
-    }//end testDeprecatedSniffsListDoesNotShowWhenAllDeprecatedSniffsAreExcluded()
+    }
 
 
     /**
@@ -287,7 +287,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
 
         $this->assertStderrOutputSameString($expected);
 
-    }//end testDeprecatedSniffsWarning()
+    }
 
 
     /**
@@ -319,7 +319,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
 
         $this->assertStderrOutputSameString($expectedOutput);
 
-    }//end testReportWidthIsRespected()
+    }
 
 
     /**
@@ -402,7 +402,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
         ];
         // phpcs:enable
 
-    }//end dataReportWidthIsRespected()
+    }
 
 
     /**
@@ -448,7 +448,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
             'WithReplacement sniff not registered'
         );
 
-    }//end testDeprecatedSniffsAreListedAlphabetically()
+    }
 
 
     /**
@@ -473,7 +473,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
 
         $ruleset->showSniffDeprecations();
 
-    }//end testExceptionIsThrownOnIncorrectlyImplementedInterface()
+    }
 
 
     /**
@@ -508,7 +508,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
             ],
         ];
 
-    }//end dataExceptionIsThrownOnIncorrectlyImplementedInterface()
+    }
 
 
-}//end class
+}

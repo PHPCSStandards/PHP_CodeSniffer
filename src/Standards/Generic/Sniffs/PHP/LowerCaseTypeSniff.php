@@ -57,7 +57,7 @@ class LowerCaseTypeSniff implements Sniff
         $tokens[] = T_FN;
         return $tokens;
 
-    }//end register()
+    }
 
 
     /**
@@ -250,7 +250,7 @@ class LowerCaseTypeSniff implements Sniff
             }
         }//end foreach
 
-    }//end process()
+    }
 
 
     /**
@@ -314,7 +314,7 @@ class LowerCaseTypeSniff implements Sniff
             $this->processType($phpcsFile, $typeStart, $type, $error, $errorCode);
         }
 
-    }//end processUnionType()
+    }
 
 
     /**
@@ -353,7 +353,7 @@ class LowerCaseTypeSniff implements Sniff
             $phpcsFile->fixer->replaceToken($stackPtr, $typeLower);
         }
 
-    }//end processType()
+    }
 
 
-}//end class
+}

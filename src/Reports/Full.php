@@ -213,7 +213,7 @@ class Full implements Report
         echo PHP_EOL;
         return true;
 
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -249,7 +249,7 @@ class Full implements Report
 
         echo $cachedData;
 
-    }//end generate()
+    }
 
 
-}//end class
+}

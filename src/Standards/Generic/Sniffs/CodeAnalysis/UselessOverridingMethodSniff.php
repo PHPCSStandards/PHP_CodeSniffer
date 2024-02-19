@@ -49,7 +49,7 @@ class UselessOverridingMethodSniff implements Sniff
     {
         return [T_FUNCTION];
 
-    }//end register()
+    }
 
 
     /**
@@ -178,7 +178,7 @@ class UselessOverridingMethodSniff implements Sniff
             $phpcsFile->addWarning('Possible useless method overriding detected', $stackPtr, 'Found');
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

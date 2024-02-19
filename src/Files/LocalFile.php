@@ -61,7 +61,7 @@ class LocalFile extends File
 
         parent::__construct($this->path, $ruleset, $config);
 
-    }//end __construct()
+    }
 
 
     /**
@@ -73,7 +73,7 @@ class LocalFile extends File
     {
         $this->setContent(file_get_contents($this->path));
 
-    }//end reloadContent()
+    }
 
 
     /**
@@ -151,7 +151,7 @@ class LocalFile extends File
             $this->configCache['cache'] = true;
         }
 
-    }//end process()
+    }
 
 
     /**
@@ -215,7 +215,7 @@ class LocalFile extends File
 
         $this->replayingErrors = false;
 
-    }//end replayErrors()
+    }
 
 
-}//end class
+}

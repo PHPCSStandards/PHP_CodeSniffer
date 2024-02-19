@@ -66,7 +66,7 @@ final class HelpTest extends TestCase
             }
         }
 
-    }//end testQaArgumentNamesAreWithinAcceptableBounds()
+    }
 
 
     /**
@@ -130,7 +130,7 @@ final class HelpTest extends TestCase
             }//end foreach
         }//end foreach
 
-    }//end testQaValidCategoryOptionDefinitions()
+    }
 
 
     /**
@@ -144,7 +144,7 @@ final class HelpTest extends TestCase
 
         new Help(new ConfigDouble(), [], []);
 
-    }//end testConstructorTypeError()
+    }
 
 
     /**
@@ -177,7 +177,7 @@ final class HelpTest extends TestCase
 
         $this->assertSame($expected, $activeOptions, 'Option count per category does not match');
 
-    }//end testOptionFiltering()
+    }
 
 
     /**
@@ -283,7 +283,7 @@ final class HelpTest extends TestCase
             ],
         ];
 
-    }//end dataOptionFiltering()
+    }
 
 
     /**
@@ -322,7 +322,7 @@ final class HelpTest extends TestCase
             }
         }
 
-    }//end testOptionFilteringSpacerHandling()
+    }
 
 
     /**
@@ -359,7 +359,7 @@ final class HelpTest extends TestCase
             ],
         ];
 
-    }//end dataOptionFilteringSpacerHandling()
+    }
 
 
     /**
@@ -381,7 +381,7 @@ final class HelpTest extends TestCase
         $expectedRegex = str_replace('phpc(bf|s)', 'phpcs', $expectedRegex);
         $this->verifyDisplayUsage($cliArgs, $expectedRegex);
 
-    }//end testDisplayUsageCS()
+    }
 
 
     /**
@@ -404,7 +404,7 @@ final class HelpTest extends TestCase
         $expectedRegex = str_replace('phpc(bf|s)', 'phpcbf', $expectedRegex);
         $this->verifyDisplayUsage($cliArgs, $expectedRegex);
 
-    }//end testDisplayUsageCBF()
+    }
 
 
     /**
@@ -424,7 +424,7 @@ final class HelpTest extends TestCase
 
         $help->display();
 
-    }//end verifyDisplayUsage()
+    }
 
 
     /**
@@ -445,7 +445,7 @@ final class HelpTest extends TestCase
             ],
         ];
 
-    }//end dataDisplayUsage()
+    }
 
 
     /**
@@ -474,7 +474,7 @@ final class HelpTest extends TestCase
 
         $this->expectOutputString($expectedOutput);
 
-    }//end testReportWidthCalculations()
+    }
 
 
     /**
@@ -531,7 +531,7 @@ final class HelpTest extends TestCase
         ];
         // phpcs:enable
 
-    }//end dataReportWidthCalculations()
+    }
 
 
     /**
@@ -551,7 +551,7 @@ final class HelpTest extends TestCase
 
         $this->assertSame($expected, $result);
 
-    }//end testColorizeVariableInput()
+    }
 
 
     /**
@@ -592,7 +592,7 @@ final class HelpTest extends TestCase
             ],
         ];
 
-    }//end dataColorizeVariableInput()
+    }
 
 
     /**
@@ -616,7 +616,7 @@ final class HelpTest extends TestCase
 
         $this->expectOutputRegex($expectedRegex['no-color']);
 
-    }//end testPrintCategoryOptionsNoColor()
+    }
 
 
     /**
@@ -640,7 +640,7 @@ final class HelpTest extends TestCase
 
         $this->expectOutputRegex($expectedRegex['color']);
 
-    }//end testPrintCategoryOptionsColor()
+    }
 
 
     /**
@@ -711,7 +711,7 @@ final class HelpTest extends TestCase
         ];
         // phpcs:enable
 
-    }//end dataPrintCategoryOptions()
+    }
 
 
     /**
@@ -738,7 +738,7 @@ final class HelpTest extends TestCase
 
         return $returnValue;
 
-    }//end invokeReflectionMethod()
+    }
 
 
     /**
@@ -758,7 +758,7 @@ final class HelpTest extends TestCase
 
         return $returnValue;
 
-    }//end getReflectionProperty()
+    }
 
 
     /**
@@ -777,7 +777,7 @@ final class HelpTest extends TestCase
         $reflProperty->setValue($help, $value);
         (PHP_VERSION_ID < 80100) && $reflProperty->setAccessible(false);
 
-    }//end setReflectionProperty()
+    }
 
 
-}//end class
+}

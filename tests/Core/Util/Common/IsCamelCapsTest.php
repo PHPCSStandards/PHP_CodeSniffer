@@ -35,7 +35,7 @@ final class IsCamelCapsTest extends TestCase
     {
         $this->assertTrue(Common::isCamelCaps($name, false, true, $strict));
 
-    }//end testValidNotClassFormatPublic()
+    }
 
 
     /**
@@ -62,7 +62,7 @@ final class IsCamelCapsTest extends TestCase
             ],
         ];
 
-    }//end dataValidNotClassFormatPublic()
+    }
 
 
     /**
@@ -78,7 +78,7 @@ final class IsCamelCapsTest extends TestCase
     {
         $this->assertFalse(Common::isCamelCaps($name, false, true, true));
 
-    }//end testInvalidNotClassFormatPublic()
+    }
 
 
     /**
@@ -136,7 +136,7 @@ final class IsCamelCapsTest extends TestCase
             ],
         ];
 
-    }//end dataInvalidNotClassFormatPublic()
+    }
 
 
     /**
@@ -153,7 +153,7 @@ final class IsCamelCapsTest extends TestCase
     {
         $this->assertTrue(Common::isCamelCaps($name, false, false, $strict));
 
-    }//end testValidNotClassFormatPrivate()
+    }
 
 
     /**
@@ -188,7 +188,7 @@ final class IsCamelCapsTest extends TestCase
             ],
         ];
 
-    }//end dataValidNotClassFormatPrivate()
+    }
 
 
     /**
@@ -205,7 +205,7 @@ final class IsCamelCapsTest extends TestCase
     {
         $this->assertFalse(Common::isCamelCaps($name, false, false, $strict));
 
-    }//end testInvalidNotClassFormatPrivate()
+    }
 
 
     /**
@@ -268,7 +268,7 @@ final class IsCamelCapsTest extends TestCase
             ],
         ];
 
-    }//end dataInvalidNotClassFormatPrivate()
+    }
 
 
     /**
@@ -285,7 +285,7 @@ final class IsCamelCapsTest extends TestCase
     {
         $this->assertTrue(Common::isCamelCaps($name, true, true, $strict));
 
-    }//end testValidClassFormatPublic()
+    }
 
 
     /**
@@ -332,7 +332,7 @@ final class IsCamelCapsTest extends TestCase
             ],
         ];
 
-    }//end dataValidClassFormatPublic()
+    }
 
 
     /**
@@ -348,7 +348,7 @@ final class IsCamelCapsTest extends TestCase
     {
         $this->assertFalse(Common::isCamelCaps($name, true));
 
-    }//end testInvalidClassFormat()
+    }
 
 
     /**
@@ -375,7 +375,7 @@ final class IsCamelCapsTest extends TestCase
             ],
         ];
 
-    }//end dataInvalidClassFormat()
+    }
 
 
     /**
@@ -395,7 +395,7 @@ final class IsCamelCapsTest extends TestCase
     {
         $this->assertFalse(Common::isCamelCaps($name, true, $visibilityPublic));
 
-    }//end testInvalidClassFormatWithVisibilityPublicFlag()
+    }
 
 
     /**
@@ -426,7 +426,7 @@ final class IsCamelCapsTest extends TestCase
             ],
         ];
 
-    }//end dataInvalidClassFormatWithVisibilityPublicFlag()
+    }
 
 
     /**
@@ -442,7 +442,7 @@ final class IsCamelCapsTest extends TestCase
     {
         $this->assertTrue(Common::isCamelCaps($name));
 
-    }//end testValidDefaultArguments()
+    }
 
 
     /**
@@ -463,7 +463,7 @@ final class IsCamelCapsTest extends TestCase
             ],
         ];
 
-    }//end dataValidDefaultArguments()
+    }
 
 
     /**
@@ -479,7 +479,7 @@ final class IsCamelCapsTest extends TestCase
     {
         $this->assertFalse(Common::isCamelCaps($name));
 
-    }//end testInvalidDefaultArguments()
+    }
 
 
     /**
@@ -506,7 +506,7 @@ final class IsCamelCapsTest extends TestCase
             ],
         ];
 
-    }//end dataInvalidDefaultArguments()
+    }
 
 
-}//end class
+}

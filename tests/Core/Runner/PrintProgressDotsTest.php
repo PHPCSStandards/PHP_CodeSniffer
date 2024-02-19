@@ -45,7 +45,7 @@ final class PrintProgressDotsTest extends TestCase
 
         $this->checkProgressDot($colors, $code, $sniffs, $expected);
 
-    }//end testProgressDotCs()
+    }
 
 
     /**
@@ -107,7 +107,7 @@ final class PrintProgressDotsTest extends TestCase
             ],
         ];
 
-    }//end dataProgressDotCs()
+    }
 
 
     /**
@@ -132,7 +132,7 @@ final class PrintProgressDotsTest extends TestCase
 
         $this->checkProgressDot($colors, $code, $sniffs, $expected, true);
 
-    }//end testProgressDotCbf()
+    }
 
 
     /**
@@ -182,7 +182,7 @@ final class PrintProgressDotsTest extends TestCase
             ],
         ];
 
-    }//end dataProgressDotCbf()
+    }
 
 
     /**
@@ -220,7 +220,7 @@ final class PrintProgressDotsTest extends TestCase
 
         $this->assertStderrOutputSameString($expected);
 
-    }//end checkProgressDot()
+    }
 
 
-}//end class
+}

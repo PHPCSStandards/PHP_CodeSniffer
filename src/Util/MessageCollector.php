@@ -115,7 +115,7 @@ final class MessageCollector
             'type'    => $type,
         ];
 
-    }//end add()
+    }
 
 
     /**
@@ -129,7 +129,7 @@ final class MessageCollector
         $typeFrequency = array_count_values($seenTypes);
         return isset($typeFrequency[self::ERROR]);
 
-    }//end containsBlockingErrors()
+    }
 
 
     /**
@@ -170,7 +170,7 @@ final class MessageCollector
             StatusWriter::write($allMessages, 0, 2);
         }
 
-    }//end display()
+    }
 
 
     /**
@@ -188,7 +188,7 @@ final class MessageCollector
 
         return $messages;
 
-    }//end prefixAll()
+    }
 
 
     /**
@@ -221,7 +221,7 @@ final class MessageCollector
 
         return $message;
 
-    }//end prefix()
+    }
 
 
     /**
@@ -264,7 +264,7 @@ final class MessageCollector
 
         return array_merge($errors, $warnings, $notices, $deprecations);
 
-    }//end sortBySeverity()
+    }
 
 
     /**
@@ -276,7 +276,7 @@ final class MessageCollector
     {
         $this->cache = [];
 
-    }//end clearCache()
+    }
 
 
-}//end class
+}

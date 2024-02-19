@@ -26,7 +26,7 @@ class SemicolonSpacingSniff implements Sniff
     {
         return [T_SEMICOLON];
 
-    }//end register()
+    }
 
 
     /**
@@ -100,7 +100,7 @@ class SemicolonSpacingSniff implements Sniff
             $phpcsFile->fixer->endChangeset();
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

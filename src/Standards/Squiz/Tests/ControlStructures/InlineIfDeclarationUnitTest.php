@@ -31,7 +31,7 @@ final class InlineIfDeclarationUnitTest extends AbstractSniffTestCase
     {
         return ['--encoding=utf-8'];
 
-    }//end getCliValues()
+    }
 
 
     /**
@@ -59,7 +59,7 @@ final class InlineIfDeclarationUnitTest extends AbstractSniffTestCase
             47 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -74,7 +74,7 @@ final class InlineIfDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

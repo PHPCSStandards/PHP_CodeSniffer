@@ -67,7 +67,7 @@ class Json implements Report
 
         return true;
 
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -101,7 +101,7 @@ class Json implements Report
         echo rtrim($cachedData, ',');
         echo '}}' . PHP_EOL;
 
-    }//end generate()
+    }
 
 
-}//end class
+}

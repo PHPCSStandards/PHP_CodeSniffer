@@ -32,7 +32,7 @@ final class ForLoopShouldBeWhileLoopUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -58,7 +58,7 @@ final class ForLoopShouldBeWhileLoopUnitTest extends AbstractSniffTestCase
             return [];
         }
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

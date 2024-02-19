@@ -48,7 +48,7 @@ class DisallowSizeFunctionsInLoopsSniff implements Sniff
             T_FOR,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -96,7 +96,7 @@ class DisallowSizeFunctionsInLoopsSniff implements Sniff
             }//end if
         }//end for
 
-    }//end process()
+    }
 
 
-}//end class
+}

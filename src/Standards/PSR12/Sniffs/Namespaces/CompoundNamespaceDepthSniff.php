@@ -32,7 +32,7 @@ class CompoundNamespaceDepthSniff implements Sniff
     {
         return [T_OPEN_USE_GROUP];
 
-    }//end register()
+    }
 
 
     /**
@@ -79,7 +79,7 @@ class CompoundNamespaceDepthSniff implements Sniff
             }
         }//end for
 
-    }//end process()
+    }
 
 
-}//end class
+}

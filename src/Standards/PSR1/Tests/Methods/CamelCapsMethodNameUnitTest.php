@@ -51,7 +51,7 @@ final class CamelCapsMethodNameUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -66,7 +66,7 @@ final class CamelCapsMethodNameUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

@@ -56,7 +56,7 @@ class Hgblame extends VersionControl
 
         return trim(preg_replace('|<.+>|', '', implode(' ', $parts)));
 
-    }//end getAuthor()
+    }
 
 
     /**
@@ -105,7 +105,7 @@ class Hgblame extends VersionControl
 
         return $blames;
 
-    }//end getBlameContent()
+    }
 
 
-}//end class
+}

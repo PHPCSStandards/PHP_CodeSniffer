@@ -70,7 +70,7 @@ class Checkstyle implements Report
 
         return true;
 
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -105,7 +105,7 @@ class Checkstyle implements Report
         echo $cachedData;
         echo '</checkstyle>' . PHP_EOL;
 
-    }//end generate()
+    }
 
 
-}//end class
+}

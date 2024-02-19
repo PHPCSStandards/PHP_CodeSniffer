@@ -31,7 +31,7 @@ class LowercaseFunctionKeywordsSniff implements Sniff
 
         return $tokens;
 
-    }//end register()
+    }
 
 
     /**
@@ -63,7 +63,7 @@ class LowercaseFunctionKeywordsSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

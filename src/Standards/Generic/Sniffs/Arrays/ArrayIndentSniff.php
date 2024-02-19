@@ -40,7 +40,7 @@ class ArrayIndentSniff extends AbstractArraySniff
     public function processSingleLineArray(File $phpcsFile, int $stackPtr, int $arrayStart, int $arrayEnd, array $indices)
     {
 
-    }//end processSingleLineArray()
+    }
 
 
     /**
@@ -188,7 +188,7 @@ class ArrayIndentSniff extends AbstractArraySniff
             $phpcsFile->fixer->replaceToken(($arrayEnd - 1), $padding);
         }
 
-    }//end processMultiLineArray()
+    }
 
 
-}//end class
+}

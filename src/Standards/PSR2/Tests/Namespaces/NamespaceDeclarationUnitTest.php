@@ -37,7 +37,7 @@ final class NamespaceDeclarationUnitTest extends AbstractSniffTestCase
             19 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -52,7 +52,7 @@ final class NamespaceDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

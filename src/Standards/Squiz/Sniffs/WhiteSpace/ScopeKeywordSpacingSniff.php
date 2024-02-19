@@ -29,7 +29,7 @@ class ScopeKeywordSpacingSniff implements Sniff
         $register[T_READONLY] = T_READONLY;
         return $register;
 
-    }//end register()
+    }
 
 
     /**
@@ -166,7 +166,7 @@ class ScopeKeywordSpacingSniff implements Sniff
             }//end if
         }//end if
 
-    }//end process()
+    }
 
 
-}//end class
+}

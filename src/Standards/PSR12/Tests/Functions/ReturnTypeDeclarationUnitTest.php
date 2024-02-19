@@ -45,7 +45,7 @@ final class ReturnTypeDeclarationUnitTest extends AbstractSniffTestCase
             64 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -60,7 +60,7 @@ final class ReturnTypeDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

@@ -43,7 +43,7 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
         $this->scopeTestHelper($token, $openerOffset, $closerOffset);
         $this->parenthesisTestHelper($token);
 
-    }//end testMatchExpression()
+    }
 
 
     /**
@@ -195,7 +195,7 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataMatchExpression()
+    }
 
 
     /**
@@ -237,7 +237,7 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
             $this->assertArrayNotHasKey('parenthesis_owner', $tokenArray, 'Parenthesis owner is set for opener after');
         }
 
-    }//end testNotAMatchStructure()
+    }
 
 
     /**
@@ -348,7 +348,7 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataNotAMatchStructure()
+    }
 
 
     /**
@@ -371,7 +371,7 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
         $this->scopeTestHelper($token, $openerOffset, $closerOffset);
         $this->parenthesisTestHelper($token);
 
-    }//end testSwitchExpression()
+    }
 
 
     /**
@@ -401,7 +401,7 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataSwitchExpression()
+    }
 
 
     /**
@@ -424,7 +424,7 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
 
         $this->scopeTestHelper($token, $openerOffset, $closerOffset);
 
-    }//end testSwitchCaseVersusMatch()
+    }
 
 
     /**
@@ -464,7 +464,7 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataSwitchCaseVersusMatch()
+    }
 
 
     /**
@@ -528,7 +528,7 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
             }
         }
 
-    }//end scopeTestHelper()
+    }
 
 
     /**
@@ -558,7 +558,7 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
         $this->assertArrayHasKey('parenthesis_owner', $tokens[$closer], 'Closing parenthesis owner is not set');
         $this->assertSame($token, $tokens[$closer]['parenthesis_owner'], 'Closing parenthesis owner is not the ' . $tokenType . ' token');
 
-    }//end parenthesisTestHelper()
+    }
 
 
-}//end class
+}

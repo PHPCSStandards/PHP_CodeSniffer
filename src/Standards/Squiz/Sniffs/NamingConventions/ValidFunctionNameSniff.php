@@ -48,7 +48,7 @@ class ValidFunctionNameSniff extends PEARValidFunctionNameSniff
             $phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $errorData);
         }
 
-    }//end processTokenOutsideScope()
+    }
 
 
-}//end class
+}

@@ -24,7 +24,7 @@ class AbstractClassNamePrefixSniff implements Sniff
     {
         return [T_CLASS];
 
-    }//end register()
+    }
 
 
     /**
@@ -54,7 +54,7 @@ class AbstractClassNamePrefixSniff implements Sniff
             $phpcsFile->addError('Abstract class names must be prefixed with "Abstract"; found "%s"', $stackPtr, 'Missing', [$className]);
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

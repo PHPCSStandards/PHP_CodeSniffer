@@ -75,7 +75,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
     {
         parent::__construct(Tokens::OO_SCOPE_TOKENS, [T_FUNCTION], true);
 
-    }//end __construct()
+    }
 
 
     /**
@@ -184,7 +184,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
             }
         }
 
-    }//end processTokenWithinScope()
+    }
 
 
     /**
@@ -291,7 +291,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
             $phpcsFile->addError($error, $stackPtr, 'FunctionNameInvalid', $data);
         }
 
-    }//end processTokenOutsideScope()
+    }
 
 
-}//end class
+}

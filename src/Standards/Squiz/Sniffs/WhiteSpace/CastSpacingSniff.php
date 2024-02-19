@@ -26,7 +26,7 @@ class CastSpacingSniff implements Sniff
     {
         return Tokens::CAST_TOKENS;
 
-    }//end register()
+    }
 
 
     /**
@@ -59,7 +59,7 @@ class CastSpacingSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

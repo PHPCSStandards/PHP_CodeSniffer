@@ -24,7 +24,7 @@ class InterfaceNameSuffixSniff implements Sniff
     {
         return [T_INTERFACE];
 
-    }//end register()
+    }
 
 
     /**
@@ -49,7 +49,7 @@ class InterfaceNameSuffixSniff implements Sniff
             $phpcsFile->addError('Interface names must be suffixed with "Interface"; found "%s"', $stackPtr, 'Missing', [$interfaceName]);
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

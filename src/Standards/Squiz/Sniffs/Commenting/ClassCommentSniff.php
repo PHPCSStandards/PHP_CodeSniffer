@@ -33,7 +33,7 @@ class ClassCommentSniff implements Sniff
     {
         return [T_CLASS];
 
-    }//end register()
+    }
 
 
     /**
@@ -103,7 +103,7 @@ class ClassCommentSniff implements Sniff
             $phpcsFile->addWarning($error, $tag, 'TagNotAllowed', $data);
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

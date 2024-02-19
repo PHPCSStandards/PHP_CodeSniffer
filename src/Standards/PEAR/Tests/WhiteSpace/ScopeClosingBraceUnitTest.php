@@ -52,7 +52,7 @@ final class ScopeClosingBraceUnitTest extends AbstractSniffTestCase
             170 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -67,7 +67,7 @@ final class ScopeClosingBraceUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

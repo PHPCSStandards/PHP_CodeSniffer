@@ -42,7 +42,7 @@ final class NullsafeObjectOperatorTest extends AbstractTokenizerTestCase
         $this->assertSame(T_OBJECT_OPERATOR, $tokens[$operator]['code'], 'Failed asserting code is object operator');
         $this->assertSame('T_OBJECT_OPERATOR', $tokens[$operator]['type'], 'Failed asserting type is object operator');
 
-    }//end testObjectOperator()
+    }
 
 
     /**
@@ -63,7 +63,7 @@ final class NullsafeObjectOperatorTest extends AbstractTokenizerTestCase
         $this->assertSame(T_NULLSAFE_OBJECT_OPERATOR, $tokens[$operator]['code'], 'Failed asserting code is nullsafe object operator');
         $this->assertSame('T_NULLSAFE_OBJECT_OPERATOR', $tokens[$operator]['type'], 'Failed asserting type is nullsafe object operator');
 
-    }//end testNullsafeObjectOperator()
+    }
 
 
     /**
@@ -80,7 +80,7 @@ final class NullsafeObjectOperatorTest extends AbstractTokenizerTestCase
             'illegal nullsafe operator (write context)' => ['/* testNullsafeObjectOperatorWriteContext */'],
         ];
 
-    }//end dataNullsafeObjectOperator()
+    }
 
 
     /**
@@ -109,7 +109,7 @@ final class NullsafeObjectOperatorTest extends AbstractTokenizerTestCase
             $this->assertSame('T_OBJECT_OPERATOR', $tokens[$next]['type'], 'Failed asserting type is object operator');
         }
 
-    }//end testTernaryThen()
+    }
 
 
     /**
@@ -138,7 +138,7 @@ final class NullsafeObjectOperatorTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataTernaryThen()
+    }
 
 
-}//end class
+}

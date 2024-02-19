@@ -56,7 +56,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame([], $errors);
 
-    }//end testStartIsNeverMoreThanCurrentToken()
+    }
 
 
     /**
@@ -71,7 +71,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 5), $found);
 
-    }//end testSimpleAssignment()
+    }
 
 
     /**
@@ -86,7 +86,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 6), $found);
 
-    }//end testFunctionCall()
+    }
 
 
     /**
@@ -101,7 +101,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame($start, $found);
 
-    }//end testFunctionCallArgument()
+    }
 
 
     /**
@@ -116,7 +116,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 6), $found);
 
-    }//end testControlStructure()
+    }
 
 
     /**
@@ -131,7 +131,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 11), $found);
 
-    }//end testClosureAssignment()
+    }
 
 
     /**
@@ -159,7 +159,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame($start, $found);
 
-    }//end testHeredocFunctionArg()
+    }
 
 
     /**
@@ -199,7 +199,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 1), $found);
 
-    }//end testSwitch()
+    }
 
 
     /**
@@ -233,7 +233,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 5), $found);
 
-    }//end testStatementAsArrayValue()
+    }
 
 
     /**
@@ -248,7 +248,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 21), $found);
 
-    }//end testUseGroup()
+    }
 
 
     /**
@@ -263,7 +263,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 7), $found);
 
-    }//end testArrowFunctionArrayValue()
+    }
 
 
     /**
@@ -278,7 +278,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 11), $found);
 
-    }//end testStaticArrowFunction()
+    }
 
 
     /**
@@ -293,7 +293,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 18), $found);
 
-    }//end testArrowFunctionReturnValue()
+    }
 
 
     /**
@@ -309,7 +309,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 8), $found);
 
-    }//end testArrowFunctionAsArgument()
+    }
 
 
     /**
@@ -325,7 +325,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 17), $found);
 
-    }//end testArrowFunctionWithArrayAsArgument()
+    }
 
 
     /**
@@ -340,7 +340,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 1), $found);
 
-    }//end testMatchCase()
+    }
 
 
     /**
@@ -355,7 +355,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame($start, $found);
 
-    }//end testMatchDefault()
+    }
 
 
     /**
@@ -375,7 +375,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 4), $found);
 
-    }//end testMatchMultipleCase()
+    }
 
 
     /**
@@ -395,7 +395,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame($start, $found);
 
-    }//end testMatchDefaultComma()
+    }
 
 
     /**
@@ -410,7 +410,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 6), $found);
 
-    }//end testMatchFunctionCall()
+    }
 
 
     /**
@@ -432,7 +432,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 18), $found);
 
-    }//end testMatchFunctionCallArm()
+    }
 
 
     /**
@@ -453,7 +453,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 10), $found);
 
-    }//end testMatchClosure()
+    }
 
 
     /**
@@ -483,7 +483,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findStartOfStatement($start);
         $this->assertSame(($start - 26), $found);
 
-    }//end testMatchArray()
+    }
 
 
     /**
@@ -509,7 +509,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 2), $found);
 
-    }//end testNestedMatch()
+    }
 
 
     /**
@@ -525,7 +525,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 1), $found);
 
-    }//end testOpenTag()
+    }
 
 
     /**
@@ -541,7 +541,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start - 1), $found);
 
-    }//end testOpenTagWithEcho()
+    }
 
 
     /**
@@ -561,7 +561,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame($expected, $found);
 
-    }//end testObjectCallPrecededByArrowFunctionAsFunctionCallParameterInArray()
+    }
 
 
     /**
@@ -587,7 +587,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame($expected, $found);
 
-    }//end testFindStartInsideSwitchCaseDefaultStatements()
+    }
 
 
     /**
@@ -687,7 +687,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
             ],
         ];
 
-    }//end dataFindStartInsideSwitchCaseDefaultStatements()
+    }
 
 
     /**
@@ -712,7 +712,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame($expected, $found);
 
-    }//end testFindStartInsideClosedScopeNestedWithinMatch()
+    }
 
 
     /**
@@ -769,7 +769,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
             ],
         ];
 
-    }//end dataFindStartInsideClosedScopeNestedWithinMatch()
+    }
 
 
     /**
@@ -794,7 +794,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame($expected, $found);
 
-    }//end testFindStartInsideParenthesesNestedWithinMatch()
+    }
 
 
     /**
@@ -849,7 +849,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
             ],
         ];
 
-    }//end dataFindStartInsideParenthesesNestedWithinMatch()
+    }
 
 
     /**
@@ -875,7 +875,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame($expected, $found);
 
-    }//end testFindStartInsideParenthesesNestedWithinNestedMatch()
+    }
 
 
     /**
@@ -930,7 +930,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
             ],
         ];
 
-    }//end dataFindStartInsideParenthesesNestedWithinNestedMatch()
+    }
 
 
     /**
@@ -955,7 +955,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame($expected, $found);
 
-    }//end testFindStartInsideShortArrayNestedWithinMatch()
+    }
 
 
     /**
@@ -983,7 +983,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
             ],
         ];
 
-    }//end dataFindStartInsideShortArrayNestedWithinMatch()
+    }
 
 
-}//end class
+}

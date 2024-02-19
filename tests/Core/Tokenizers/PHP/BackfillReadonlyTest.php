@@ -37,7 +37,7 @@ final class BackfillReadonlyTest extends AbstractTokenizerTestCase
         $this->assertSame(T_READONLY, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_READONLY (code)');
         $this->assertSame('T_READONLY', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_READONLY (type)');
 
-    }//end testReadonly()
+    }
 
 
     /**
@@ -170,7 +170,7 @@ final class BackfillReadonlyTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataReadonly()
+    }
 
 
     /**
@@ -199,7 +199,7 @@ final class BackfillReadonlyTest extends AbstractTokenizerTestCase
         $this->assertSame(constant($expectedType), $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (code)');
         $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (type)');
 
-    }//end testNotReadonly()
+    }
 
 
     /**
@@ -275,7 +275,7 @@ final class BackfillReadonlyTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataNotReadonly()
+    }
 
 
-}//end class
+}

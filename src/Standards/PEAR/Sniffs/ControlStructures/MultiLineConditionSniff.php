@@ -36,7 +36,7 @@ class MultiLineConditionSniff implements Sniff
             T_ELSEIF,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -267,7 +267,7 @@ class MultiLineConditionSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

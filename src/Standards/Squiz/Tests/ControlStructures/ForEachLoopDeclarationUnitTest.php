@@ -40,7 +40,7 @@ final class ForEachLoopDeclarationUnitTest extends AbstractSniffTestCase
             28 => 2,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -55,7 +55,7 @@ final class ForEachLoopDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

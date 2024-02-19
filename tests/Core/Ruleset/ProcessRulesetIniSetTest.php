@@ -48,7 +48,7 @@ final class ProcessRulesetIniSetTest extends TestCase
             @ini_set($this->currentOption, $this->originalValue);
         }
 
-    }//end tearDown()
+    }
 
 
     /**
@@ -68,7 +68,7 @@ final class ProcessRulesetIniSetTest extends TestCase
 
         $this->assertSame($expected, ini_get($this->currentOption));
 
-    }//end testIniValueIsUpdated()
+    }
 
 
     /**
@@ -103,7 +103,7 @@ final class ProcessRulesetIniSetTest extends TestCase
         // Make sure the value didn't get set.
         $this->assertNotSame($expected, ini_get($option), 'Setting the ini value should not have worked, the test is broken');
 
-    }//end testIniValueCannotBeUpdatedAtRuntime()
+    }
 
 
     /**
@@ -133,7 +133,7 @@ final class ProcessRulesetIniSetTest extends TestCase
             ],
         ];
 
-    }//end dataIniValueCannotBeUpdatedAtRuntime()
+    }
 
 
-}//end class
+}

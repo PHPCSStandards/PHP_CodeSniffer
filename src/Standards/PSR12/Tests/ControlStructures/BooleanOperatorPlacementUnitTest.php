@@ -43,7 +43,7 @@ final class BooleanOperatorPlacementUnitTest extends AbstractSniffTestCase
             125 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -58,7 +58,7 @@ final class BooleanOperatorPlacementUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

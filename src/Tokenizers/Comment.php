@@ -175,7 +175,7 @@ class Comment
 
         return $tokens;
 
-    }//end tokenizeString()
+    }
 
 
     /**
@@ -251,7 +251,7 @@ class Comment
 
         return $tokens;
 
-    }//end processLine()
+    }
 
 
     /**
@@ -284,7 +284,7 @@ class Comment
             'type'    => 'T_DOC_COMMENT_WHITESPACE',
         ];
 
-    }//end collectWhitespace()
+    }
 
 
-}//end class
+}

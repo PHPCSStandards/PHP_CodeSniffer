@@ -59,7 +59,7 @@ class RequireExplicitBooleanOperatorPrecedenceSniff implements Sniff
 
         return Tokens::BOOLEAN_OPERATORS;
 
-    }//end register()
+    }
 
 
     /**
@@ -106,7 +106,7 @@ class RequireExplicitBooleanOperatorPrecedenceSniff implements Sniff
         $error .= ' without using parentheses to clarify precedence is not allowed.';
         $phpcsFile->addError($error, $stackPtr, 'MissingParentheses');
 
-    }//end process()
+    }
 
 
-}//end class
+}

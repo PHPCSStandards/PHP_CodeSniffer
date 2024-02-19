@@ -38,7 +38,7 @@ final class OneObjectStructurePerFileUnitTest extends AbstractSniffTestCase
             22 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -53,7 +53,7 @@ final class OneObjectStructurePerFileUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

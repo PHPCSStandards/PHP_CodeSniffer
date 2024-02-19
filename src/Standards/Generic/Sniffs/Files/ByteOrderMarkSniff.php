@@ -48,7 +48,7 @@ class ByteOrderMarkSniff implements Sniff
     {
         return [T_INLINE_HTML];
 
-    }//end register()
+    }
 
 
     /**
@@ -85,7 +85,7 @@ class ByteOrderMarkSniff implements Sniff
 
         return $phpcsFile->numTokens;
 
-    }//end process()
+    }
 
 
-}//end class
+}

@@ -56,7 +56,7 @@ final class PropertyTypeHandlingTest extends TestCase
 
         $this->assertSame($expected, $sniffObject->$propertyName);
 
-    }//end testTypeHandlingWhenSetViaRuleset()
+    }
 
 
     /**
@@ -75,7 +75,7 @@ final class PropertyTypeHandlingTest extends TestCase
 
         $this->assertSame($expected, $sniffObject->$propertyName);
 
-    }//end testTypeHandlingWhenSetInline()
+    }
 
 
     /**
@@ -190,7 +190,7 @@ final class PropertyTypeHandlingTest extends TestCase
             ],
         ];
 
-    }//end dataTypeHandling()
+    }
 
 
     /**
@@ -297,7 +297,7 @@ final class PropertyTypeHandlingTest extends TestCase
             ],
         ];
 
-    }//end dataArrayPropertyExtending()
+    }
 
 
     /**
@@ -327,7 +327,7 @@ final class PropertyTypeHandlingTest extends TestCase
 
         return $sniffObject;
 
-    }//end getSniffObjectForRuleset()
+    }
 
 
     /**
@@ -364,7 +364,7 @@ final class PropertyTypeHandlingTest extends TestCase
 
         return $sniffObject;
 
-    }//end getSniffObjectAfterProcessingFile()
+    }
 
 
-}//end class
+}

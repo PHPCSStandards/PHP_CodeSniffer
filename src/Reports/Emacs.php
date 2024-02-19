@@ -53,7 +53,7 @@ class Emacs implements Report
 
         return true;
 
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -85,7 +85,7 @@ class Emacs implements Report
     ) {
         echo $cachedData;
 
-    }//end generate()
+    }
 
 
-}//end class
+}

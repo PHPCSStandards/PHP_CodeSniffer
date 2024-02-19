@@ -81,7 +81,7 @@ class Junit implements Report
         echo $out->flush();
         return true;
 
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -127,7 +127,7 @@ class Junit implements Report
         echo $cachedData;
         echo '</testsuites>' . PHP_EOL;
 
-    }//end generate()
+    }
 
 
-}//end class
+}

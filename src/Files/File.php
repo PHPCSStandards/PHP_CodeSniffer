@@ -284,7 +284,7 @@ class File
         $this->configCache['ignorePatterns']  = $this->ruleset->ignorePatterns;
         $this->configCache['includePatterns'] = $this->ruleset->includePatterns;
 
-    }//end __construct()
+    }
 
 
     /**
@@ -308,7 +308,7 @@ class File
             return;
         }
 
-    }//end setContent()
+    }
 
 
     /**
@@ -322,7 +322,7 @@ class File
     public function reloadContent()
     {
 
-    }//end reloadContent()
+    }
 
 
     /**
@@ -334,7 +334,7 @@ class File
     {
         $this->configCache['cache'] = false;
 
-    }//end disableCaching()
+    }
 
 
     /**
@@ -559,7 +559,7 @@ class File
         $this->fixedErrorCount   = ($this->firstRunCounts['fixableError'] - $this->fixableErrorCount);
         $this->fixedWarningCount = ($this->firstRunCounts['fixableWarning'] - $this->fixableWarningCount);
 
-    }//end process()
+    }
 
 
     /**
@@ -623,7 +623,7 @@ class File
             StatusWriter::write("[$this->numTokens tokens in $numLines lines]... ", 0, $newlines);
         }
 
-    }//end parse()
+    }
 
 
     /**
@@ -635,7 +635,7 @@ class File
     {
         return $this->tokens;
 
-    }//end getTokens()
+    }
 
 
     /**
@@ -654,7 +654,7 @@ class File
         $this->config        = null;
         $this->ruleset       = null;
 
-    }//end cleanUp()
+    }
 
 
     /**
@@ -688,7 +688,7 @@ class File
 
         return $this->addMessage(true, $error, $line, $column, $code, $data, $severity, $fixable);
 
-    }//end addError()
+    }
 
 
     /**
@@ -722,7 +722,7 @@ class File
 
         return $this->addMessage(false, $warning, $line, $column, $code, $data, $severity, $fixable);
 
-    }//end addWarning()
+    }
 
 
     /**
@@ -746,7 +746,7 @@ class File
     ) {
         return $this->addMessage(true, $error, $line, 1, $code, $data, $severity, false);
 
-    }//end addErrorOnLine()
+    }
 
 
     /**
@@ -770,7 +770,7 @@ class File
     ) {
         return $this->addMessage(false, $warning, $line, 1, $code, $data, $severity, false);
 
-    }//end addWarningOnLine()
+    }
 
 
     /**
@@ -801,7 +801,7 @@ class File
 
         return false;
 
-    }//end addFixableError()
+    }
 
 
     /**
@@ -832,7 +832,7 @@ class File
 
         return false;
 
-    }//end addFixableWarning()
+    }
 
 
     /**
@@ -1093,7 +1093,7 @@ class File
 
         return true;
 
-    }//end addMessage()
+    }
 
 
     /**
@@ -1121,7 +1121,7 @@ class File
 
         return true;
 
-    }//end recordMetric()
+    }
 
 
     /**
@@ -1133,7 +1133,7 @@ class File
     {
         return $this->errorCount;
 
-    }//end getErrorCount()
+    }
 
 
     /**
@@ -1145,7 +1145,7 @@ class File
     {
         return $this->warningCount;
 
-    }//end getWarningCount()
+    }
 
 
     /**
@@ -1157,7 +1157,7 @@ class File
     {
         return ($this->fixableErrorCount + $this->fixableWarningCount);
 
-    }//end getFixableCount()
+    }
 
 
     /**
@@ -1169,7 +1169,7 @@ class File
     {
         return $this->fixableErrorCount;
 
-    }//end getFixableErrorCount()
+    }
 
 
     /**
@@ -1181,7 +1181,7 @@ class File
     {
         return $this->fixableWarningCount;
 
-    }//end getFixableWarningCount()
+    }
 
 
     /**
@@ -1193,7 +1193,7 @@ class File
     {
         return $this->fixedCount;
 
-    }//end getFixedCount()
+    }
 
 
     /**
@@ -1205,7 +1205,7 @@ class File
     {
         return $this->fixedErrorCount;
 
-    }//end getFixedErrorCount()
+    }
 
 
     /**
@@ -1217,7 +1217,7 @@ class File
     {
         return $this->fixedWarningCount;
 
-    }//end getFixedWarningCount()
+    }
 
 
     /**
@@ -1233,7 +1233,7 @@ class File
     {
         return $this->firstRunCounts[$type];
 
-    }//end getFirstRunCount()
+    }
 
 
     /**
@@ -1245,7 +1245,7 @@ class File
     {
         return $this->tokenizer->ignoredLines;
 
-    }//end getIgnoredLines()
+    }
 
 
     /**
@@ -1257,7 +1257,7 @@ class File
     {
         return $this->errors;
 
-    }//end getErrors()
+    }
 
 
     /**
@@ -1269,7 +1269,7 @@ class File
     {
         return $this->warnings;
 
-    }//end getWarnings()
+    }
 
 
     /**
@@ -1281,7 +1281,7 @@ class File
     {
         return $this->metrics;
 
-    }//end getMetrics()
+    }
 
 
     /**
@@ -1293,7 +1293,7 @@ class File
     {
         return $this->listenerTimes;
 
-    }//end getListenerTimes()
+    }
 
 
     /**
@@ -1305,7 +1305,7 @@ class File
     {
         return $this->path;
 
-    }//end getFilename()
+    }
 
 
     /**
@@ -1351,7 +1351,7 @@ class File
 
         return $content;
 
-    }//end getDeclarationName()
+    }
 
 
     /**
@@ -1689,7 +1689,7 @@ class File
 
         return $vars;
 
-    }//end getMethodParameters()
+    }
 
 
     /**
@@ -1872,7 +1872,7 @@ class File
             'has_body'              => $hasBody,
         ];
 
-    }//end getMethodProperties()
+    }
 
 
     /**
@@ -2072,7 +2072,7 @@ class File
             'nullable_type'   => $nullableType,
         ];
 
-    }//end getMemberProperties()
+    }
 
 
     /**
@@ -2138,7 +2138,7 @@ class File
             'is_readonly' => $isReadonly,
         ];
 
-    }//end getClassProperties()
+    }
 
 
     /**
@@ -2249,7 +2249,7 @@ class File
 
         return false;
 
-    }//end isReference()
+    }
 
 
     /**
@@ -2292,7 +2292,7 @@ class File
 
         return $str;
 
-    }//end getTokensAsString()
+    }
 
 
     /**
@@ -2373,7 +2373,7 @@ class File
 
         return false;
 
-    }//end findPrevious()
+    }
 
 
     /**
@@ -2440,7 +2440,7 @@ class File
 
         return false;
 
-    }//end findNext()
+    }
 
 
     /**
@@ -2631,7 +2631,7 @@ class File
 
         return 0;
 
-    }//end findStartOfStatement()
+    }
 
 
     /**
@@ -2746,7 +2746,7 @@ class File
 
         return ($this->numTokens - 1);
 
-    }//end findEndOfStatement()
+    }
 
 
     /**
@@ -2808,7 +2808,7 @@ class File
 
         return $foundToken;
 
-    }//end findFirstOnLine()
+    }
 
 
     /**
@@ -2843,7 +2843,7 @@ class File
 
         return false;
 
-    }//end hasCondition()
+    }
 
 
     /**
@@ -2885,7 +2885,7 @@ class File
 
         return false;
 
-    }//end getCondition()
+    }
 
 
     /**
@@ -2935,7 +2935,7 @@ class File
 
         return $name;
 
-    }//end findExtendedClassName()
+    }
 
 
     /**
@@ -2987,7 +2987,7 @@ class File
             return $names;
         }
 
-    }//end findImplementedInterfaceNames()
+    }
 
 
-}//end class
+}

@@ -36,7 +36,7 @@ final class AcceptTest extends AbstractFilterTestCase
         self::$config  = new ConfigDouble(["--standard=$standard", '--ignore=*/somethingelse/*']);
         self::$ruleset = new Ruleset(self::$config);
 
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -56,7 +56,7 @@ final class AcceptTest extends AbstractFilterTestCase
 
         $this->assertSame($expectedOutput, $this->getFilteredResultsAsArray($filter));
 
-    }//end testExcludePatterns()
+    }
 
 
     /**
@@ -102,7 +102,7 @@ final class AcceptTest extends AbstractFilterTestCase
         // Allow these tests to work on Windows as well.
         return self::mapPathsToRuntimeOs($testCases);
 
-    }//end dataExcludePatterns()
+    }
 
 
-}//end class
+}

@@ -25,7 +25,7 @@ class DisallowLongArraySyntaxSniff implements Sniff
     {
         return [T_ARRAY];
 
-    }//end register()
+    }
 
 
     /**
@@ -66,7 +66,7 @@ class DisallowLongArraySyntaxSniff implements Sniff
             $phpcsFile->fixer->endChangeset();
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

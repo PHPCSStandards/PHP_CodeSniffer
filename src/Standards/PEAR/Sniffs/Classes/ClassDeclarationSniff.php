@@ -30,7 +30,7 @@ class ClassDeclarationSniff implements Sniff
             T_ENUM,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -143,7 +143,7 @@ class ClassDeclarationSniff implements Sniff
             }
         }//end if
 
-    }//end process()
+    }
 
 
-}//end class
+}

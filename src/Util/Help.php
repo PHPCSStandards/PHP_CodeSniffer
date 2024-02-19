@@ -149,7 +149,7 @@ final class Help
 
         $this->setMaxOptionNameLength();
 
-    }//end __construct()
+    }
 
 
     /**
@@ -162,7 +162,7 @@ final class Help
         $this->printUsage();
         $this->printCategories();
 
-    }//end display()
+    }
 
 
     /**
@@ -212,7 +212,7 @@ final class Help
 
         $this->activeOptions = $filteredOptions;
 
-    }//end filterOptions()
+    }
 
 
     /**
@@ -237,7 +237,7 @@ final class Help
             $this->maxOptionNameLength = max($lengths);
         }
 
-    }//end setMaxOptionNameLength()
+    }
 
 
     /**
@@ -252,7 +252,7 @@ final class Help
     {
         return max(self::MIN_WIDTH, $this->config->reportWidth);
 
-    }//end getMaxWidth()
+    }
 
 
     /**
@@ -264,7 +264,7 @@ final class Help
     {
         return ($this->getMaxWidth() - $this->maxOptionNameLength - $this->indentWidth - $this->gutterWidth);
 
-    }//end getDescriptionColumnWidth()
+    }
 
 
     /**
@@ -276,7 +276,7 @@ final class Help
     {
         return ($this->maxOptionNameLength + $this->indentWidth + $this->gutterWidth);
 
-    }//end getDescriptionFollowupLineIndentLength()
+    }
 
 
     /**
@@ -295,7 +295,7 @@ final class Help
 
         echo self::INDENT . $command . ' [options] <file|directory>' . PHP_EOL;
 
-    }//end printUsage()
+    }
 
 
     /**
@@ -310,7 +310,7 @@ final class Help
             $this->printCategoryOptions($options);
         }
 
-    }//end printCategories()
+    }
 
 
     /**
@@ -329,7 +329,7 @@ final class Help
 
         echo PHP_EOL . $header . PHP_EOL;
 
-    }//end printCategoryHeader()
+    }
 
 
     /**
@@ -373,7 +373,7 @@ final class Help
 
         echo $output;
 
-    }//end printCategoryOptions()
+    }
 
 
     /**
@@ -390,7 +390,7 @@ final class Help
     {
         return preg_replace('`(<(?:(?>[^<>]+)|(?R))*>)`', "\033[36m" . '$1' . "\033[32m", $text);
 
-    }//end colorizeVariableInput()
+    }
 
 
     /**
@@ -637,7 +637,7 @@ final class Help
 
         return $options;
 
-    }//end getAllOptions()
+    }
 
 
-}//end class
+}

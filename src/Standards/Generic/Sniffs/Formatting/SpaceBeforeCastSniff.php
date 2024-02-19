@@ -26,7 +26,7 @@ class SpaceBeforeCastSniff implements Sniff
     {
         return Tokens::CAST_TOKENS;
 
-    }//end register()
+    }
 
 
     /**
@@ -67,7 +67,7 @@ class SpaceBeforeCastSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

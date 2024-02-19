@@ -26,7 +26,7 @@ class RequireStrictTypesSniff implements Sniff
     {
         return [T_OPEN_TAG];
 
-    }//end register()
+    }
 
 
     /**
@@ -102,7 +102,7 @@ class RequireStrictTypesSniff implements Sniff
         // open tags, typically embedded in HTML.
         return $phpcsFile->numTokens;
 
-    }//end process()
+    }
 
 
-}//end class
+}

@@ -48,7 +48,7 @@ final class CreatePositionMapHeredocNowdocCloserTest extends AbstractTokenizerTe
             $this->assertSame($value, $tokens[$closer][$key], "Value for key $key does not match expectation.");
         }
 
-    }//end testHeredocNowdocCloserTabReplacement()
+    }
 
 
     /**
@@ -111,7 +111,7 @@ final class CreatePositionMapHeredocNowdocCloserTest extends AbstractTokenizerTe
             ],
         ];
 
-    }//end dataHeredocNowdocCloserTabReplacement()
+    }
 
 
-}//end class
+}

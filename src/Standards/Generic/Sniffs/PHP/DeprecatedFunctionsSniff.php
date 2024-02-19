@@ -44,7 +44,7 @@ class DeprecatedFunctionsSniff extends ForbiddenFunctionsSniff
             }
         }
 
-    }//end __construct()
+    }
 
 
     /**
@@ -70,7 +70,7 @@ class DeprecatedFunctionsSniff extends ForbiddenFunctionsSniff
             $phpcsFile->addWarning($error, $stackPtr, $type, $data);
         }
 
-    }//end addError()
+    }
 
 
-}//end class
+}

@@ -29,7 +29,7 @@ class ArrayDeclarationSniff implements Sniff
             T_OPEN_SHORT_ARRAY,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -147,7 +147,7 @@ class ArrayDeclarationSniff implements Sniff
             $this->processMultiLineArray($phpcsFile, $stackPtr, $arrayStart, $arrayEnd);
         }
 
-    }//end process()
+    }
 
 
     /**
@@ -321,7 +321,7 @@ class ArrayDeclarationSniff implements Sniff
             }//end foreach
         }//end if
 
-    }//end processSingleLineArray()
+    }
 
 
     /**
@@ -956,7 +956,7 @@ class ArrayDeclarationSniff implements Sniff
             }
         }//end foreach
 
-    }//end processMultiLineArray()
+    }
 
 
-}//end class
+}

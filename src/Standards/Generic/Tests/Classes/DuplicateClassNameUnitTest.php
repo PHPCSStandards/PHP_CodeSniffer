@@ -32,7 +32,7 @@ final class DuplicateClassNameUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -92,7 +92,7 @@ final class DuplicateClassNameUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

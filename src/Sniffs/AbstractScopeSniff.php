@@ -94,7 +94,7 @@ abstract class AbstractScopeSniff implements Sniff
         $this->scopeTokens   = array_flip($scopeTokens);
         $this->tokens        = $tokens;
 
-    }//end __construct()
+    }
 
 
     /**
@@ -111,7 +111,7 @@ abstract class AbstractScopeSniff implements Sniff
     {
         return $this->tokens;
 
-    }//end register()
+    }
 
 
     /**
@@ -148,7 +148,7 @@ abstract class AbstractScopeSniff implements Sniff
             return min($skipTokens);
         }
 
-    }//end process()
+    }
 
 
     /**
@@ -186,4 +186,4 @@ abstract class AbstractScopeSniff implements Sniff
     abstract protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr);
 
 
-}//end class
+}

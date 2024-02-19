@@ -26,7 +26,7 @@ class ClassInstantiationSniff implements Sniff
     {
         return [T_NEW];
 
-    }//end register()
+    }
 
 
     /**
@@ -105,7 +105,7 @@ class ClassInstantiationSniff implements Sniff
             $phpcsFile->fixer->addContent($prev, '()');
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

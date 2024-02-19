@@ -32,7 +32,7 @@ final class TodoUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -56,7 +56,7 @@ final class TodoUnitTest extends AbstractSniffTestCase
             21 => 1,
         ];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

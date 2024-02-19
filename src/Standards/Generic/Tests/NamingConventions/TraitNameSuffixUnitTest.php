@@ -42,7 +42,7 @@ final class TraitNameSuffixUnitTest extends AbstractSniffTestCase
             return [];
         }
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -57,7 +57,7 @@ final class TraitNameSuffixUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

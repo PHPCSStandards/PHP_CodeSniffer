@@ -60,7 +60,7 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
             'Token tokenized as ' . $tokenArray['type'] . ' (content)'
         );
 
-    }//end testAsymmetricVisibility()
+    }
 
 
     /**
@@ -198,7 +198,7 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataAsymmetricVisibility()
+    }
 
 
     /**
@@ -234,7 +234,7 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
             'Token tokenized as ' . $tokenArray['type'] . ' (code)'
         );
 
-    }//end testNotAsymmetricVisibility()
+    }
 
 
     /**
@@ -325,7 +325,7 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataNotAsymmetricVisibility()
+    }
 
 
-}//end class
+}

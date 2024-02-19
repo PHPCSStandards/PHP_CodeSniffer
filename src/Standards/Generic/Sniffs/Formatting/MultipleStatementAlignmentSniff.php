@@ -49,7 +49,7 @@ class MultipleStatementAlignmentSniff implements Sniff
         unset($tokens[T_DOUBLE_ARROW]);
         return $tokens;
 
-    }//end register()
+    }
 
 
     /**
@@ -66,7 +66,7 @@ class MultipleStatementAlignmentSniff implements Sniff
         $lastAssign = $this->checkAlignment($phpcsFile, $stackPtr);
         return ($lastAssign + 1);
 
-    }//end process()
+    }
 
 
     /**
@@ -398,7 +398,7 @@ class MultipleStatementAlignmentSniff implements Sniff
             return $assign;
         }
 
-    }//end checkAlignment()
+    }
 
 
-}//end class
+}

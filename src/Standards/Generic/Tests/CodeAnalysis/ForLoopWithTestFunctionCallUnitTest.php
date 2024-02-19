@@ -32,7 +32,7 @@ final class ForLoopWithTestFunctionCallUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -72,7 +72,7 @@ final class ForLoopWithTestFunctionCallUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

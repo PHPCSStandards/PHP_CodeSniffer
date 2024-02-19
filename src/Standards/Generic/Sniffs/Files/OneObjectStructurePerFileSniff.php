@@ -30,7 +30,7 @@ class OneObjectStructurePerFileSniff implements Sniff
             T_ENUM,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -56,7 +56,7 @@ class OneObjectStructurePerFileSniff implements Sniff
             $phpcsFile->addError($error, $nextClass, 'MultipleFound');
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

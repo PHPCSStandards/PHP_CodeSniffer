@@ -48,7 +48,7 @@ final class DisallowSizeFunctionsInLoopsUnitTest extends AbstractSniffTestCase
             63 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -63,7 +63,7 @@ final class DisallowSizeFunctionsInLoopsUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

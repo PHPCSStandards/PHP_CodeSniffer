@@ -35,7 +35,7 @@ final class SAPIUsageUnitTest extends AbstractSniffTestCase
             6 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -50,7 +50,7 @@ final class SAPIUsageUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

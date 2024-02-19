@@ -41,7 +41,7 @@ final class MessageCollectorTest extends AbstractWriterTestCase
         $msgCollector = new MessageCollector();
         $msgCollector->add($message);
 
-    }//end testAddingNonStringMessageResultsInException()
+    }
 
 
     /**
@@ -60,7 +60,7 @@ final class MessageCollectorTest extends AbstractWriterTestCase
             'array'   => [['something' => 'incorrect']],
         ];
 
-    }//end dataAddingNonStringMessageResultsInException()
+    }
 
 
     /**
@@ -82,7 +82,7 @@ final class MessageCollectorTest extends AbstractWriterTestCase
         $msgCollector = new MessageCollector();
         $msgCollector->add('Message', $type);
 
-    }//end testAddingMessageWithUnsupportedMessageTypeResultsInException()
+    }
 
 
     /**
@@ -106,7 +106,7 @@ final class MessageCollectorTest extends AbstractWriterTestCase
             'integer which doesn\'t match any of the message type constants: PHP_INT_MAX' => [PHP_INT_MAX],
         ];
 
-    }//end dataAddingMessageWithUnsupportedMessageTypeResultsInException()
+    }
 
 
     /**
@@ -129,7 +129,7 @@ final class MessageCollectorTest extends AbstractWriterTestCase
 
         $this->assertSame($expected, $msgCollector->containsBlockingErrors());
 
-    }//end testContainsBlockingErrors()
+    }
 
 
     /**
@@ -172,7 +172,7 @@ final class MessageCollectorTest extends AbstractWriterTestCase
             ],
         ];
 
-    }//end dataContainsBlockingErrors()
+    }
 
 
     /**
@@ -202,7 +202,7 @@ final class MessageCollectorTest extends AbstractWriterTestCase
 
         $this->assertStderrOutputSameString($expected);
 
-    }//end testDisplayingNonBlockingMessages()
+    }
 
 
     /**
@@ -279,7 +279,7 @@ final class MessageCollectorTest extends AbstractWriterTestCase
         ];
         // phpcs:enable
 
-    }//end dataDisplayingNonBlockingMessages()
+    }
 
 
     /**
@@ -307,7 +307,7 @@ final class MessageCollectorTest extends AbstractWriterTestCase
         $this->createErrorCache($msgCollector, $messages);
         $msgCollector->display();
 
-    }//end testDisplayingBlockingErrors()
+    }
 
 
     /**
@@ -356,7 +356,7 @@ final class MessageCollectorTest extends AbstractWriterTestCase
         ];
         // phpcs:enable
 
-    }//end dataDisplayingBlockingErrors()
+    }
 
 
     /**
@@ -383,7 +383,7 @@ final class MessageCollectorTest extends AbstractWriterTestCase
 
         $this->assertStderrOutputSameString($expected);
 
-    }//end testNonUniqueMessagesWithDifferentErrorLevelAreAccepted()
+    }
 
 
     /**
@@ -410,7 +410,7 @@ final class MessageCollectorTest extends AbstractWriterTestCase
 
         $this->assertStderrOutputSameString($expected);
 
-    }//end testNonUniqueMessagesWithSameErrorLevelAreAccepted()
+    }
 
 
     /**
@@ -442,7 +442,7 @@ final class MessageCollectorTest extends AbstractWriterTestCase
 
         $this->assertStderrOutputSameString($expected);
 
-    }//end testCallingDisplayTwiceWillNotShowMessagesTwice()
+    }
 
 
     /**
@@ -473,7 +473,7 @@ final class MessageCollectorTest extends AbstractWriterTestCase
 
         $this->assertStderrOutputSameString($expected);
 
-    }//end testDisplayOrderHandling()
+    }
 
 
     /**
@@ -510,7 +510,7 @@ final class MessageCollectorTest extends AbstractWriterTestCase
             ],
         ];
 
-    }//end dataDisplayOrderHandling()
+    }
 
 
     /**
@@ -528,7 +528,7 @@ final class MessageCollectorTest extends AbstractWriterTestCase
             $collector->add($msg, $type);
         }
 
-    }//end createErrorCache()
+    }
 
 
-}//end class
+}

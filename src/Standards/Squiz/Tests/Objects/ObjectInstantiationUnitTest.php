@@ -37,7 +37,7 @@ final class ObjectInstantiationUnitTest extends AbstractSniffTestCase
             39 => 2,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -52,7 +52,7 @@ final class ObjectInstantiationUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

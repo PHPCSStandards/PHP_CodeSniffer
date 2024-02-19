@@ -26,7 +26,7 @@ class UseDeclarationSniff implements Sniff
     {
         return [T_USE];
 
-    }//end register()
+    }
 
 
     /**
@@ -300,7 +300,7 @@ class UseDeclarationSniff implements Sniff
 
         return $tokens[$ooToken]['scope_closer'];
 
-    }//end process()
+    }
 
 
     /**
@@ -668,7 +668,7 @@ class UseDeclarationSniff implements Sniff
             }
         }//end if
 
-    }//end processUseGroup()
+    }
 
 
     /**
@@ -694,7 +694,7 @@ class UseDeclarationSniff implements Sniff
             }
         }
 
-    }//end processUseStatement()
+    }
 
 
-}//end class
+}

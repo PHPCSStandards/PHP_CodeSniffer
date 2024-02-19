@@ -70,4 +70,4 @@ function checkRequirements()
         exit($exitCode);
     }
 
-}//end checkRequirements()
+}

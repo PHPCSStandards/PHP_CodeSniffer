@@ -25,7 +25,7 @@ class FileExtensionSniff implements Sniff
     {
         return [T_OPEN_TAG];
 
-    }//end register()
+    }
 
 
     /**
@@ -62,7 +62,7 @@ class FileExtensionSniff implements Sniff
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
 
-    }//end process()
+    }
 
 
-}//end class
+}

@@ -54,7 +54,7 @@ final class ExplainTest extends TestCase
 
         $ruleset->explain();
 
-    }//end testExplain()
+    }
 
 
     /**
@@ -89,7 +89,7 @@ final class ExplainTest extends TestCase
 
         $ruleset->explain();
 
-    }//end testExplainAlwaysDisplaysCompleteSniffName()
+    }
 
 
     /**
@@ -116,7 +116,7 @@ final class ExplainTest extends TestCase
 
         $ruleset->explain();
 
-    }//end testExplainSingleSniff()
+    }
 
 
     /**
@@ -162,7 +162,7 @@ final class ExplainTest extends TestCase
 
         $ruleset->explain();
 
-    }//end testExplainCustomRuleset()
+    }
 
 
     /**
@@ -207,7 +207,7 @@ final class ExplainTest extends TestCase
 
         $ruleset->explain();
 
-    }//end testExplainWithDeprecatedSniffs()
+    }
 
 
-}//end class
+}

@@ -25,7 +25,7 @@ class InlineIfDeclarationSniff implements Sniff
     {
         return [T_INLINE_THEN];
 
-    }//end register()
+    }
 
 
     /**
@@ -149,7 +149,7 @@ class InlineIfDeclarationSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

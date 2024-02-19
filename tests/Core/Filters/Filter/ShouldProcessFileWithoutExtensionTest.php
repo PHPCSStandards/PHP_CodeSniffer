@@ -35,7 +35,7 @@ final class ShouldProcessFileWithoutExtensionTest extends AbstractFilterTestCase
 
         $this->assertSame([$fileWithoutExt], $this->getFilteredResultsAsArray($filter));
 
-    }//end testFileWithoutExtensionIsAcceptedWhenExplicitlyRequested()
+    }
 
 
     /**
@@ -65,7 +65,7 @@ final class ShouldProcessFileWithoutExtensionTest extends AbstractFilterTestCase
 
         $this->assertSame($expectedOutput, $this->getFilteredResultsAsArray($filter));
 
-    }//end testFileWithoutExtensionIsRejectedWhenRecursingDirectory()
+    }
 
 
-}//end class
+}

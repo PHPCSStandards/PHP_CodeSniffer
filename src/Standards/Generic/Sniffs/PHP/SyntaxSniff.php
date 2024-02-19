@@ -38,7 +38,7 @@ class SyntaxSniff implements Sniff
             T_OPEN_TAG_WITH_ECHO,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -68,7 +68,7 @@ class SyntaxSniff implements Sniff
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
 
-    }//end process()
+    }
 
 
     /**
@@ -98,7 +98,7 @@ class SyntaxSniff implements Sniff
             $fileName
         );
 
-    }//end getPhpLintCommand()
+    }
 
 
-}//end class
+}

@@ -36,7 +36,7 @@ class BlockCommentSniff implements Sniff
             T_DOC_COMMENT_OPEN_TAG,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -393,7 +393,7 @@ class BlockCommentSniff implements Sniff
             $phpcsFile->addError($error, $commentCloser, 'NoEmptyLineAfter');
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

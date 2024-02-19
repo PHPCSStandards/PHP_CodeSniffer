@@ -37,7 +37,7 @@ final class GetClassPropertiesTest extends AbstractMethodTestCase
         $target = $this->getTargetToken($testMarker, $tokenType);
         self::$phpcsFile->getClassProperties($target);
 
-    }//end testNotAClassException()
+    }
 
 
     /**
@@ -64,7 +64,7 @@ final class GetClassPropertiesTest extends AbstractMethodTestCase
             ],
         ];
 
-    }//end dataNotAClassException()
+    }
 
 
     /**
@@ -83,7 +83,7 @@ final class GetClassPropertiesTest extends AbstractMethodTestCase
         $result = self::$phpcsFile->getClassProperties($class);
         $this->assertSame($expected, $result);
 
-    }//end testGetClassProperties()
+    }
 
 
     /**
@@ -186,7 +186,7 @@ final class GetClassPropertiesTest extends AbstractMethodTestCase
             ],
         ];
 
-    }//end dataGetClassProperties()
+    }
 
 
-}//end class
+}

@@ -35,7 +35,7 @@ class LowercaseClassKeywordsSniff implements Sniff
 
         return $targets;
 
-    }//end register()
+    }
 
 
     /**
@@ -67,7 +67,7 @@ class LowercaseClassKeywordsSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

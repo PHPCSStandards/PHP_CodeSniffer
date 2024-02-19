@@ -52,7 +52,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
             T_FN,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -89,7 +89,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
     /**
@@ -562,7 +562,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
             }
         }
 
-    }//end processBracket()
+    }
 
 
-}//end class
+}

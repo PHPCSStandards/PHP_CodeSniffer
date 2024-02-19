@@ -49,7 +49,7 @@ final class TextTest extends TestCase
         $generator = new Text($ruleset);
         $generator->generate();
 
-    }//end testDocs()
+    }
 
 
     /**
@@ -74,7 +74,7 @@ final class TextTest extends TestCase
             ],
         ];
 
-    }//end dataDocs()
+    }
 
 
     /**
@@ -104,7 +104,7 @@ final class TextTest extends TestCase
         $generator = new Text($ruleset);
         $generator->generate();
 
-    }//end testDocSpecifics()
+    }
 
 
     /**
@@ -229,7 +229,7 @@ final class TextTest extends TestCase
             ],
         ];
 
-    }//end dataDocSpecifics()
+    }
 
 
-}//end class
+}

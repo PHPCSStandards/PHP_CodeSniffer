@@ -37,7 +37,7 @@ final class ClassDeclarationUnitTest extends AbstractSniffTestCase
 
         $config->tabWidth = 4;
 
-    }//end setCliValues()
+    }
 
 
     /**
@@ -74,7 +74,7 @@ final class ClassDeclarationUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -91,7 +91,7 @@ final class ClassDeclarationUnitTest extends AbstractSniffTestCase
     {
         return[];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

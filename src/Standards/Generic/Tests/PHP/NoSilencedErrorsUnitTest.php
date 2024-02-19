@@ -32,7 +32,7 @@ final class NoSilencedErrorsUnitTest extends AbstractSniffTestCase
     {
         return [13 => 1];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -51,7 +51,7 @@ final class NoSilencedErrorsUnitTest extends AbstractSniffTestCase
             16 => 1,
         ];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

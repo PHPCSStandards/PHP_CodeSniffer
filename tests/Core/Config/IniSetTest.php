@@ -47,7 +47,7 @@ final class IniSetTest extends TestCase
             @ini_set($this->currentOption, $this->originalValue);
         }
 
-    }//end tearDown()
+    }
 
 
     /**
@@ -67,7 +67,7 @@ final class IniSetTest extends TestCase
 
         $this->assertSame($this->originalValue, ini_get($this->currentOption));
 
-    }//end testIniValueHandlingWhenValueIsAlreadyCorrect()
+    }
 
 
     /**
@@ -97,7 +97,7 @@ final class IniSetTest extends TestCase
 
         $this->assertSame($expected, ini_get($this->currentOption));
 
-    }//end testIniValueIsUpdatedToTrueWhenNoValuePassed()
+    }
 
 
     /**
@@ -127,7 +127,7 @@ final class IniSetTest extends TestCase
 
         $this->assertSame($newValue, ini_get($option));
 
-    }//end testIniValueIsUpdated()
+    }
 
 
     /**
@@ -146,7 +146,7 @@ final class IniSetTest extends TestCase
             ],
         ];
 
-    }//end dataIniValueIsUpdated()
+    }
 
 
     /**
@@ -176,7 +176,7 @@ final class IniSetTest extends TestCase
 
         $this->assertSame($newValue, ini_get($this->currentOption));
 
-    }//end testIniValueIsUpdatedWhenOptionalBcmathExtensionIsAvailable()
+    }
 
 
     /**
@@ -212,7 +212,7 @@ final class IniSetTest extends TestCase
 
         $this->assertSame($newValue, ini_get($this->currentOption));
 
-    }//end testIniValueIsUpdatedWhenOptionalSqllite3ExtensionIsAvailable()
+    }
 
 
     /**
@@ -238,7 +238,7 @@ final class IniSetTest extends TestCase
 
         $this->assertFalse(ini_get($this->currentOption), 'This should be impossible: an option for a disabled extension cannot be set');
 
-    }//end testIniValueIsSilentlyIgnoredWhenOptionalExtensionIsNotAvailable()
+    }
 
 
     /**
@@ -258,7 +258,7 @@ final class IniSetTest extends TestCase
 
         $this->assertFalse(ini_get($this->currentOption), 'This should be impossible: an option which isn\'t known to PHP cannot be set');
 
-    }//end testIniValueIsSilentlyIgnoredForUnknownIniName()
+    }
 
 
     /**
@@ -287,7 +287,7 @@ final class IniSetTest extends TestCase
 
         new ConfigDouble(['-d', "$option=$newValue"]);
 
-    }//end testIniValueCannotBeUpdatedAtRuntime()
+    }
 
 
     /**
@@ -322,7 +322,7 @@ final class IniSetTest extends TestCase
             ],
         ];
 
-    }//end dataIniValueCannotBeUpdatedAtRuntime()
+    }
 
 
-}//end class
+}

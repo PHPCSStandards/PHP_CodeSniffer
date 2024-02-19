@@ -41,7 +41,7 @@ final class DisallowShortOpenTagUnitTest extends AbstractSniffTestCase
 
         return $testFiles;
 
-    }//end getTestFiles()
+    }
 
 
     /**
@@ -75,7 +75,7 @@ final class DisallowShortOpenTagUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -109,7 +109,7 @@ final class DisallowShortOpenTagUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

@@ -26,7 +26,7 @@ class ImportStatementSniff implements Sniff
     {
         return [T_USE];
 
-    }//end register()
+    }
 
 
     /**
@@ -71,7 +71,7 @@ class ImportStatementSniff implements Sniff
             $phpcsFile->fixer->replaceToken($next, ltrim($tokens[$next]['content'], '\\'));
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

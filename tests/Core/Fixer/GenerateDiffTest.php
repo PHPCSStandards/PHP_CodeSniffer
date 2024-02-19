@@ -57,7 +57,7 @@ final class GenerateDiffTest extends TestCase
         self::$phpcsFile->parse();
         self::$phpcsFile->fixer->startFile(self::$phpcsFile);
 
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -71,7 +71,7 @@ final class GenerateDiffTest extends TestCase
 
         $this->assertSame('', $diff);
 
-    }//end testGenerateDiffNoFile()
+    }
 
 
     /**
@@ -94,7 +94,7 @@ final class GenerateDiffTest extends TestCase
 
         $this->assertStringEqualsFile($expectedDiffFile, $diff);
 
-    }//end testGenerateDiff()
+    }
 
 
     /**
@@ -139,7 +139,7 @@ final class GenerateDiffTest extends TestCase
             ],
         ];
 
-    }//end dataGenerateDiff()
+    }
 
 
     /**
@@ -170,7 +170,7 @@ final class GenerateDiffTest extends TestCase
 
         $this->assertSame($expected, $diff);
 
-    }//end testGenerateDiffColoured()
+    }
 
 
     /**
@@ -219,7 +219,7 @@ final class GenerateDiffTest extends TestCase
 
         $this->assertSame($expected, $diff);
 
-    }//end testGenerateDiffDifferentLineEndings()
+    }
 
 
-}//end class
+}

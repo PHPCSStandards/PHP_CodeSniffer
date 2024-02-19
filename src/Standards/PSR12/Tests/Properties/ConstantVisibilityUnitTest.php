@@ -32,7 +32,7 @@ final class ConstantVisibilityUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -64,7 +64,7 @@ final class ConstantVisibilityUnitTest extends AbstractSniffTestCase
             return [];
         }
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

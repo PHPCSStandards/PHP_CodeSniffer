@@ -15,4 +15,4 @@ abstract class AbstractWriterTestCase extends TestCase
 {
     use StatusWriterTestHelper;
 
-}//end class
+}

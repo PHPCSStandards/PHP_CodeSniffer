@@ -37,7 +37,7 @@ final class DisallowSpaceIndentUnitTest extends AbstractSniffTestCase
 
         $config->tabWidth = 4;
 
-    }//end setCliValues()
+    }
 
 
     /**
@@ -119,7 +119,7 @@ final class DisallowSpaceIndentUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -134,7 +134,7 @@ final class DisallowSpaceIndentUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

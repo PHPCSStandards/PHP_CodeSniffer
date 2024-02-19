@@ -51,7 +51,7 @@ final class IncludingFileUnitTest extends AbstractSniffTestCase
             99 => 2,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -66,7 +66,7 @@ final class IncludingFileUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

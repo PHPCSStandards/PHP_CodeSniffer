@@ -82,7 +82,7 @@ final class ClassDeclarationUnitTest extends AbstractSniffTestCase
             344 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -97,7 +97,7 @@ final class ClassDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

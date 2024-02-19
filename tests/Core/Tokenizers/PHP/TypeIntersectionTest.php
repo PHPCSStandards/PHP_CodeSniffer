@@ -35,7 +35,7 @@ final class TypeIntersectionTest extends AbstractTokenizerTestCase
         $this->assertSame(T_BITWISE_AND, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_BITWISE_AND (code)');
         $this->assertSame('T_BITWISE_AND', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_BITWISE_AND (type)');
 
-    }//end testBitwiseAnd()
+    }
 
 
     /**
@@ -71,7 +71,7 @@ final class TypeIntersectionTest extends AbstractTokenizerTestCase
             'live coding / undetermined'                 => ['/* testLiveCoding */'],
         ];
 
-    }//end dataBitwiseAnd()
+    }
 
 
     /**
@@ -93,7 +93,7 @@ final class TypeIntersectionTest extends AbstractTokenizerTestCase
         $this->assertSame(T_TYPE_INTERSECTION, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_TYPE_INTERSECTION (code)');
         $this->assertSame('T_TYPE_INTERSECTION', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_TYPE_INTERSECTION (type)');
 
-    }//end testTypeIntersection()
+    }
 
 
     /**
@@ -162,7 +162,7 @@ final class TypeIntersectionTest extends AbstractTokenizerTestCase
             'return type for closure, includes (invalid) FQN null'        => ['/* testTypeIntersectionInvalidFQNNull */'],
         ];
 
-    }//end dataTypeIntersection()
+    }
 
 
-}//end class
+}

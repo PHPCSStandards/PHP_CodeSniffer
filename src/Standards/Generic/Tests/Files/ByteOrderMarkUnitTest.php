@@ -42,7 +42,7 @@ final class ByteOrderMarkUnitTest extends AbstractSniffTestCase
             return [];
         }
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -71,7 +71,7 @@ final class ByteOrderMarkUnitTest extends AbstractSniffTestCase
             return [];
         }
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

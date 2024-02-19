@@ -68,7 +68,7 @@ final class VariableCommentUnitTest extends AbstractSniffTestCase
             457 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -88,7 +88,7 @@ final class VariableCommentUnitTest extends AbstractSniffTestCase
             496 => 1,
         ];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

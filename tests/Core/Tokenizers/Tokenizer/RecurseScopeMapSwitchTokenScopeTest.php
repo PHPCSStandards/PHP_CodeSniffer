@@ -84,7 +84,7 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
             )
         );
 
-    }//end testSwitchScope()
+    }
 
 
     /**
@@ -154,7 +154,7 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
 
         ];
 
-    }//end dataSwitchScope()
+    }
 
 
-}//end class
+}

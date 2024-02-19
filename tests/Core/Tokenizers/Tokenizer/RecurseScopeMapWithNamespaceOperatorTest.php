@@ -51,7 +51,7 @@ final class RecurseScopeMapWithNamespaceOperatorTest extends AbstractTokenizerTe
         $this->assertSame($opener, $tokens[$closer]['scope_opener'], 'Scope opener not same for close curly');
         $this->assertSame($closer, $tokens[$closer]['scope_closer'], 'Scope closer not same for close curly');
 
-    }//end testScopeSetting()
+    }
 
 
     /**
@@ -92,7 +92,7 @@ final class RecurseScopeMapWithNamespaceOperatorTest extends AbstractTokenizerTe
             ],
         ];
 
-    }//end dataScopeSetting()
+    }
 
 
-}//end class
+}

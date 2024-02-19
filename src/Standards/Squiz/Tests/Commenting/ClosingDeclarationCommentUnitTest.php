@@ -63,7 +63,7 @@ final class ClosingDeclarationCommentUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -80,7 +80,7 @@ final class ClosingDeclarationCommentUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

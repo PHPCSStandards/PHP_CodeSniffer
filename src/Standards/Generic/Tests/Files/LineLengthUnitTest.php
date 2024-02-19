@@ -33,7 +33,7 @@ final class LineLengthUnitTest extends AbstractSniffTestCase
     {
         $config->tabWidth = 4;
 
-    }//end setCliValues()
+    }
 
 
     /**
@@ -65,7 +65,7 @@ final class LineLengthUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -109,7 +109,7 @@ final class LineLengthUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

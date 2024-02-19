@@ -40,7 +40,7 @@ class AbstractArraySniffTestable extends AbstractArraySniff
     {
         $this->indicies = $indices;
 
-    }//end processSingleLineArray()
+    }
 
 
     /**
@@ -60,7 +60,7 @@ class AbstractArraySniffTestable extends AbstractArraySniff
     {
         $this->indicies = $indices;
 
-    }//end processMultiLineArray()
+    }
 
 
-}//end class
+}

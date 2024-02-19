@@ -29,7 +29,7 @@ class ClassFileNameSniff implements Sniff
 
         return $targets;
 
-    }//end register()
+    }
 
 
     /**
@@ -69,7 +69,7 @@ class ClassFileNameSniff implements Sniff
             $phpcsFile->addError($error, $stackPtr, 'NoMatch', $data);
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

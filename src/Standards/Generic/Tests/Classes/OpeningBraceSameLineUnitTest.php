@@ -47,7 +47,7 @@ final class OpeningBraceSameLineUnitTest extends AbstractSniffTestCase
             100 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -62,7 +62,7 @@ final class OpeningBraceSameLineUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

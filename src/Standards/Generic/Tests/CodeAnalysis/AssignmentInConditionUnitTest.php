@@ -32,7 +32,7 @@ final class AssignmentInConditionUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -90,7 +90,7 @@ final class AssignmentInConditionUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

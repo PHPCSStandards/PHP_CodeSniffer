@@ -137,7 +137,7 @@ class Fixer
             }
         }
 
-    }//end startFile()
+    }
 
 
     /**
@@ -220,7 +220,7 @@ class Fixer
 
         return true;
 
-    }//end fixFile()
+    }
 
 
     /**
@@ -337,7 +337,7 @@ class Fixer
 
         return $diff;
 
-    }//end generateDiff()
+    }
 
 
     /**
@@ -352,7 +352,7 @@ class Fixer
     {
         return $this->numFixes;
 
-    }//end getFixCount()
+    }
 
 
     /**
@@ -365,7 +365,7 @@ class Fixer
         $contents = implode($this->tokens);
         return $contents;
 
-    }//end getContents()
+    }
 
 
     /**
@@ -388,7 +388,7 @@ class Fixer
             return $this->tokens[$stackPtr];
         }
 
-    }//end getTokenContent()
+    }
 
 
     /**
@@ -418,7 +418,7 @@ class Fixer
         $this->changeset   = [];
         $this->inChangeset = true;
 
-    }//end beginChangeset()
+    }
 
 
     /**
@@ -462,7 +462,7 @@ class Fixer
         $this->changeset = [];
         return true;
 
-    }//end endChangeset()
+    }
 
 
     /**
@@ -497,7 +497,7 @@ class Fixer
             $this->changeset = [];
         }//end if
 
-    }//end rollbackChangeset()
+    }
 
 
     /**
@@ -618,7 +618,7 @@ class Fixer
 
         return true;
 
-    }//end replaceToken()
+    }
 
 
     /**
@@ -676,7 +676,7 @@ class Fixer
 
         return true;
 
-    }//end revertToken()
+    }
 
 
     /**
@@ -701,7 +701,7 @@ class Fixer
 
         return $this->replaceToken($stackPtr, $newContent);
 
-    }//end substrToken()
+    }
 
 
     /**
@@ -716,7 +716,7 @@ class Fixer
         $current = $this->getTokenContent($stackPtr);
         return $this->replaceToken($stackPtr, $current . $this->currentFile->eolChar);
 
-    }//end addNewline()
+    }
 
 
     /**
@@ -731,7 +731,7 @@ class Fixer
         $current = $this->getTokenContent($stackPtr);
         return $this->replaceToken($stackPtr, $this->currentFile->eolChar . $current);
 
-    }//end addNewlineBefore()
+    }
 
 
     /**
@@ -747,7 +747,7 @@ class Fixer
         $current = $this->getTokenContent($stackPtr);
         return $this->replaceToken($stackPtr, $current . $content);
 
-    }//end addContent()
+    }
 
 
     /**
@@ -763,7 +763,7 @@ class Fixer
         $current = $this->getTokenContent($stackPtr);
         return $this->replaceToken($stackPtr, $content . $current);
 
-    }//end addContentBefore()
+    }
 
 
     /**
@@ -825,7 +825,7 @@ class Fixer
             $this->endChangeset();
         }
 
-    }//end changeCodeBlockIndent()
+    }
 
 
     /**
@@ -845,7 +845,7 @@ class Fixer
             return $className;
         }
 
-    }//end getSniffCodeForDebug()
+    }
 
 
-}//end class
+}

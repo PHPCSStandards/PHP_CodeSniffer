@@ -33,7 +33,7 @@ class IncludingFileSniff implements Sniff
             T_INCLUDE,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -130,7 +130,7 @@ class IncludingFileSniff implements Sniff
             }
         }//end if
 
-    }//end process()
+    }
 
 
-}//end class
+}

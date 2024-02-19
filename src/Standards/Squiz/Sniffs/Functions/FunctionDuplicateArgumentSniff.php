@@ -25,7 +25,7 @@ class FunctionDuplicateArgumentSniff implements Sniff
     {
         return [T_FUNCTION];
 
-    }//end register()
+    }
 
 
     /**
@@ -58,7 +58,7 @@ class FunctionDuplicateArgumentSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

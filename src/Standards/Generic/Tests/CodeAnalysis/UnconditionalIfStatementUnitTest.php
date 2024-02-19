@@ -32,7 +32,7 @@ final class UnconditionalIfStatementUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -61,7 +61,7 @@ final class UnconditionalIfStatementUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

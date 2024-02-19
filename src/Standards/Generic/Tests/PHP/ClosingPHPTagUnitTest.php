@@ -43,7 +43,7 @@ final class ClosingPHPTagUnitTest extends AbstractSniffTestCase
             return [];
         }
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -58,7 +58,7 @@ final class ClosingPHPTagUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

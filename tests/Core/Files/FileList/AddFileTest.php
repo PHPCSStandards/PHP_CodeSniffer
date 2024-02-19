@@ -37,7 +37,7 @@ final class AddFileTest extends AbstractFileListTestCase
         self::$config->files = [];
         $this->fileList      = new FileList(self::$config, self::$ruleset);
 
-    }//end setUp()
+    }
 
 
     /**
@@ -71,7 +71,7 @@ final class AddFileTest extends AbstractFileListTestCase
             );
         }
 
-    }//end testAddFile()
+    }
 
 
     /**
@@ -96,7 +96,7 @@ final class AddFileTest extends AbstractFileListTestCase
             ],
         ];
 
-    }//end dataAddFile()
+    }
 
 
     /**
@@ -128,7 +128,7 @@ final class AddFileTest extends AbstractFileListTestCase
         $this->assertCount(2, $this->fileList);
         $this->assertSame($expectedFiles, array_keys(iterator_to_array($this->fileList)));
 
-    }//end testAddFileShouldNotAddTheSameFileTwice()
+    }
 
 
-}//end class
+}

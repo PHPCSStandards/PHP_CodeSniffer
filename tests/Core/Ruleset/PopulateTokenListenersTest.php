@@ -46,7 +46,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
             self::$ruleset = new Ruleset($config);
         }
 
-    }//end setUp()
+    }
 
 
     /**
@@ -70,7 +70,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
         $this->assertArrayNotHasKey($sniffClass, self::$ruleset->sniffs, "Sniff class $sniffClass is listed in registered sniffs");
         $this->assertArrayNotHasKey('TestStandard.InvalidSniffs.RegisterNoArray', self::$ruleset->sniffCodes, 'Sniff code is registered');
 
-    }//end testSniffWhereRegisterDoesNotReturnAnArrayThrowsException()
+    }
 
 
     /**
@@ -91,7 +91,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
             );
         }
 
-    }//end testSniffWithRegisterMethodReturningEmptyArrayIsSilentlyIgnored()
+    }
 
 
     /**
@@ -116,7 +116,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
 
         $this->assertSame($expectedCount, $counter);
 
-    }//end testRegistersSniffsToListenToTokens()
+    }
 
 
     /**
@@ -155,7 +155,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
             ],
         ];
 
-    }//end dataSniffListensToTokenss()
+    }
 
 
     /**
@@ -175,7 +175,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
         $this->assertIsArray($actualValue);
         $this->assertCount(1, $actualValue);
 
-    }//end testRegistersWhenADeprecatedSniffIsLoaded()
+    }
 
 
     /**
@@ -196,7 +196,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
         // Just making sure there are no properties on the sniff object (which doesn't have declared properties).
         $this->assertSame([], $reflection->getProperties(), "Unexpected properties found on sniff class $sniffClass");
 
-    }//end testDoesntTriggerPropertySettingForNoProperties()
+    }
 
 
     /**
@@ -220,7 +220,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
         // Verify the property has been set.
         $this->assertSame($expected, $sniffObject->$propertyName, "Property on sniff class $sniffClass set to unexpected value");
 
-    }//end testTriggersPropertySettingWhenPropertiesProvided()
+    }
 
 
     /**
@@ -250,7 +250,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
             ],
         ];
 
-    }//end dataTriggersPropertySettingWhenPropertiesProvided()
+    }
 
 
     /**
@@ -297,7 +297,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
             }//end foreach
         }//end foreach
 
-    }//end testSetsClassAndSourceIndexes()
+    }
 
 
     /**
@@ -332,7 +332,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
             }
         }//end foreach
 
-    }//end testSetsIncludePatternsToEmptyArrayByDefault()
+    }
 
 
     /**
@@ -367,7 +367,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
             }
         }//end foreach
 
-    }//end testSetsIgnorePatternsToEmptyArrayByDefault()
+    }
 
 
     /**
@@ -414,7 +414,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
             sprintf('Unexpected value for "%s" key for sniff class %s for token %s', $patternType, $sniffClass, Tokens::tokenName($token))
         );
 
-    }//end testSetsIncludeAndIgnorePatterns()
+    }
 
 
     /**
@@ -444,7 +444,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
             ],
         ];
 
-    }//end dataSetsIncludeAndIgnorePatterns()
+    }
 
 
-}//end class
+}

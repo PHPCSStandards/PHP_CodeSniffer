@@ -41,7 +41,7 @@ final class ArrayBracketSpacingUnitTest extends AbstractSniffTestCase
             31 => 2,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -56,7 +56,7 @@ final class ArrayBracketSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

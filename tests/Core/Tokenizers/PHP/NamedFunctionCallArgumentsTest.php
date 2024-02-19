@@ -66,7 +66,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             );
         }//end foreach
 
-    }//end testNamedFunctionCallArguments()
+    }
 
 
     /**
@@ -297,7 +297,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataNamedFunctionCallArguments()
+    }
 
 
     /**
@@ -328,7 +328,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             'Token tokenized as ' . $tokens[$label]['type'] . ', not T_STRING (type)'
         );
 
-    }//end testOtherTstringInFunctionCall()
+    }
 
 
     /**
@@ -359,7 +359,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataOtherTstringInFunctionCall()
+    }
 
 
     /**
@@ -411,7 +411,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
 
-    }//end testMixedPositionalAndNamedArgsWithTernary()
+    }
 
 
     /**
@@ -508,7 +508,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             'Second arg ternary: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (type)'
         );
 
-    }//end testNamedArgWithTernary()
+    }
 
 
     /**
@@ -589,7 +589,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             'Function in else: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
 
-    }//end testTernaryWithFunctionCallsInThenElse()
+    }
 
 
     /**
@@ -619,7 +619,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (type)'
         );
 
-    }//end testTernaryWithConstantsInThenElse()
+    }
 
 
     /**
@@ -681,7 +681,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             'Default case: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
 
-    }//end testSwitchStatement()
+    }
 
 
     /**
@@ -727,7 +727,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
 
-    }//end testParseErrorVariableLabel()
+    }
 
 
     /**
@@ -771,7 +771,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             }
         }
 
-    }//end testOtherColonsInTernary()
+    }
 
 
     /**
@@ -792,7 +792,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataOtherColonsInTernary()
+    }
 
 
     /**
@@ -843,7 +843,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
 
-    }//end testReservedKeywordsAsName()
+    }
 
 
     /**
@@ -986,7 +986,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
 
         return $data;
 
-    }//end dataReservedKeywordsAsName()
+    }
 
 
-}//end class
+}

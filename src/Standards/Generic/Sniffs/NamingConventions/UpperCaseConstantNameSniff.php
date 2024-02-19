@@ -30,7 +30,7 @@ class UpperCaseConstantNameSniff implements Sniff
             T_CONST,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -146,7 +146,7 @@ class UpperCaseConstantNameSniff implements Sniff
             $phpcsFile->recordMetric($constPtr, 'Constant name case', 'upper');
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

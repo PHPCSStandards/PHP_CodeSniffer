@@ -36,7 +36,7 @@ class CommentedOutCodeSniff implements Sniff
     {
         return [T_COMMENT];
 
-    }//end register()
+    }
 
 
     /**
@@ -273,7 +273,7 @@ class CommentedOutCodeSniff implements Sniff
 
         return ($lastCommentBlockToken + 1);
 
-    }//end process()
+    }
 
 
-}//end class
+}

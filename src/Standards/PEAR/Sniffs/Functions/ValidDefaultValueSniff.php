@@ -29,7 +29,7 @@ class ValidDefaultValueSniff implements Sniff
             T_FN,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -75,7 +75,7 @@ class ValidDefaultValueSniff implements Sniff
             }
         }//end foreach
 
-    }//end process()
+    }
 
 
-}//end class
+}

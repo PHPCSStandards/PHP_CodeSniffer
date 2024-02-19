@@ -55,7 +55,7 @@ final class ErrorSuppressionTest extends TestCase
         $this->assertSame($expectedErrors, $file->getErrorCount());
         $this->assertCount($expectedErrors, $file->getErrors());
 
-    }//end testSuppressError()
+    }
 
 
     /**
@@ -135,7 +135,7 @@ final class ErrorSuppressionTest extends TestCase
             ],
         ];
 
-    }//end dataSuppressError()
+    }
 
 
     /**
@@ -175,7 +175,7 @@ EOD;
         $this->assertSame($expectedErrors, $file->getErrorCount());
         $this->assertCount($expectedErrors, $file->getErrors());
 
-    }//end testSuppressSomeErrors()
+    }
 
 
     /**
@@ -217,7 +217,7 @@ EOD;
             ],
         ];
 
-    }//end dataSuppressSomeErrors()
+    }
 
 
     /**
@@ -256,7 +256,7 @@ EOD;
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
 
-    }//end testSuppressWarning()
+    }
 
 
     /**
@@ -290,7 +290,7 @@ EOD;
             ],
         ];
 
-    }//end dataSuppressWarning()
+    }
 
 
     /**
@@ -330,7 +330,7 @@ EOD;
         $this->assertSame($expectedErrors, $file->getErrorCount());
         $this->assertCount($expectedErrors, $file->getErrors());
 
-    }//end testSuppressLine()
+    }
 
 
     /**
@@ -388,7 +388,7 @@ EOD;
             ],
         ];
 
-    }//end dataSuppressLine()
+    }
 
 
     /**
@@ -411,7 +411,7 @@ EOD;
         $this->assertSame(0, $file->getErrorCount());
         $this->assertCount(0, $file->getErrors());
 
-    }//end testSuppressLineMidLine()
+    }
 
 
     /**
@@ -443,7 +443,7 @@ EOD;
         $this->assertSame(0, $file->getErrorCount());
         $this->assertCount(0, $file->getErrors());
 
-    }//end testSuppressLineWithinDocblock()
+    }
 
 
     /**
@@ -481,7 +481,7 @@ EOD;
         $this->assertSame(0, $file->getErrorCount());
         $this->assertCount(0, $file->getErrors());
 
-    }//end testNestedSuppressLine()
+    }
 
 
     /**
@@ -523,7 +523,7 @@ EOD;
             ],
         ];
 
-    }//end dataNestedSuppressLine()
+    }
 
 
     /**
@@ -566,7 +566,7 @@ EOD;
         $this->assertSame($expectedErrors, $file->getErrorCount());
         $this->assertCount($expectedErrors, $file->getErrors());
 
-    }//end testSuppressScope()
+    }
 
 
     /**
@@ -608,7 +608,7 @@ EOD;
             ],
         ];
 
-    }//end dataSuppressScope()
+    }
 
 
     /**
@@ -650,7 +650,7 @@ EOD;
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
 
-    }//end testSuppressFile()
+    }
 
 
     /**
@@ -702,7 +702,7 @@ EOD;
             ],
         ];
 
-    }//end dataSuppressFile()
+    }
 
 
     /**
@@ -748,7 +748,7 @@ EOD;
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
 
-    }//end testDisableSelected()
+    }
 
 
     /**
@@ -821,7 +821,7 @@ EOD;
             ],
         ];
 
-    }//end dataDisableSelected()
+    }
 
 
     /**
@@ -860,7 +860,7 @@ EOD;
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
 
-    }//end testEnableSelected()
+    }
 
 
     /**
@@ -1069,7 +1069,7 @@ EOD;
             ],
         ];
 
-    }//end dataEnableSelected()
+    }
 
 
     /**
@@ -1113,7 +1113,7 @@ EOD;
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
 
-    }//end testIgnoreSelected()
+    }
 
 
     /**
@@ -1160,7 +1160,7 @@ EOD;
             ],
         ];
 
-    }//end dataIgnoreSelected()
+    }
 
 
     /**
@@ -1199,7 +1199,7 @@ EOD;
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
 
-    }//end testCommenting()
+    }
 
 
     /**
@@ -1260,7 +1260,7 @@ EOD;
             ],
         ];
 
-    }//end dataCommenting()
+    }
 
 
-}//end class
+}

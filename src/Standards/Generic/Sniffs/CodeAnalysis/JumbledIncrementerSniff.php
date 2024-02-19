@@ -45,7 +45,7 @@ class JumbledIncrementerSniff implements Sniff
     {
         return [T_FOR];
 
-    }//end register()
+    }
 
 
     /**
@@ -94,7 +94,7 @@ class JumbledIncrementerSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
     /**
@@ -128,7 +128,7 @@ class JumbledIncrementerSniff implements Sniff
 
         return $incrementers;
 
-    }//end findIncrementers()
+    }
 
 
-}//end class
+}

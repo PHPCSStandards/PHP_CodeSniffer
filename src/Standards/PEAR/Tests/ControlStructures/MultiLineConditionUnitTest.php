@@ -68,7 +68,7 @@ final class MultiLineConditionUnitTest extends AbstractSniffTestCase
             248 => 2,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -83,7 +83,7 @@ final class MultiLineConditionUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

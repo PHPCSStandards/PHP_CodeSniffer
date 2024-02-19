@@ -41,7 +41,7 @@ final class GetIncludePatternsTest extends TestCase
         $config        = new ConfigDouble(["--standard=$standard"]);
         self::$ruleset = new Ruleset($config);
 
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -58,7 +58,7 @@ final class GetIncludePatternsTest extends TestCase
     {
         $this->assertSame($expected, self::$ruleset->getIncludePatterns($listener));
 
-    }//end testGetIncludePatterns()
+    }
 
 
     /**
@@ -100,7 +100,7 @@ final class GetIncludePatternsTest extends TestCase
             ],
         ];
 
-    }//end dataGetIncludePatterns()
+    }
 
 
-}//end class
+}

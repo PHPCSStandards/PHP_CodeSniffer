@@ -35,7 +35,7 @@ final class LiveCoding2Test extends CommentTestCase
             ],
         ];
 
-    }//end dataDocblockOpenerCloser()
+    }
 
 
     /**
@@ -62,7 +62,7 @@ final class LiveCoding2Test extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testLiveCoding()
+    }
 
 
-}//end class
+}

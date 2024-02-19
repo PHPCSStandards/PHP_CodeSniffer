@@ -37,7 +37,7 @@ class LowercaseDeclarationSniff implements Sniff
             T_MATCH,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -69,7 +69,7 @@ class LowercaseDeclarationSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

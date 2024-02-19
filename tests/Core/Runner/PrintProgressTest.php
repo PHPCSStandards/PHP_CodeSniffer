@@ -73,7 +73,7 @@ final class PrintProgressTest extends TestCase
         self::$fileWithoutErrorsOrWarnings = new DummyFile($content, self::$ruleset, self::$config);
         self::$fileWithoutErrorsOrWarnings->process();
 
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -89,7 +89,7 @@ final class PrintProgressTest extends TestCase
         // Reset all static properties on the StatusWriter class.
         $this->resetStatusWriterProperties();
 
-    }//end tearDown()
+    }
 
 
     /**
@@ -105,7 +105,7 @@ final class PrintProgressTest extends TestCase
         // automagically triggered when this object is destroyed, but we can't definitively rely on that).
         self::$config->__destruct();
 
-    }//end tearDownAfterClass()
+    }
 
 
     /**
@@ -125,7 +125,7 @@ final class PrintProgressTest extends TestCase
 
         $this->assertStderrOutputSameString('');
 
-    }//end testNoProgressIsShownWhenDisabled()
+    }
 
 
     /**
@@ -150,7 +150,7 @@ final class PrintProgressTest extends TestCase
 
         $this->assertStderrOutputSameString('.S.S.S.S.S 10 / 10 (100%)' . PHP_EOL);
 
-    }//end testProgressDotSkippedFiles()
+    }
 
 
     /**
@@ -173,7 +173,7 @@ final class PrintProgressTest extends TestCase
 
         $this->assertStderrOutputSameString($expected);
 
-    }//end testEndOfLineSummary()
+    }
 
 
     /**
@@ -234,7 +234,7 @@ final class PrintProgressTest extends TestCase
         ];
         // phpcs:enable
 
-    }//end dataEndOfLineSummary()
+    }
 
 
-}//end class
+}

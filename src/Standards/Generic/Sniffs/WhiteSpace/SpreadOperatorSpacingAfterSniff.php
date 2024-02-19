@@ -40,7 +40,7 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
     {
         return [T_ELLIPSIS];
 
-    }//end register()
+    }
 
 
     /**
@@ -153,7 +153,7 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

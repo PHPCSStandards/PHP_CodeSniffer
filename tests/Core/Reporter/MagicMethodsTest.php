@@ -36,7 +36,7 @@ final class MagicMethodsTest extends TestCase
 
         $this->assertFalse(isset($reporter->unknown));
 
-    }//end testMagicIssetReturnsFalseForUnknownProperty()
+    }
 
 
     /**
@@ -51,7 +51,7 @@ final class MagicMethodsTest extends TestCase
 
         (new Reporter(new ConfigDouble()))->invalid;
 
-    }//end testMagicGetThrowsExceptionForUnsupportedProperty()
+    }
 
 
     /**
@@ -79,7 +79,7 @@ final class MagicMethodsTest extends TestCase
         $this->assertTrue(isset($reporter->$propertyName));
         $this->assertSame($expectedValue, $reporter->$propertyName);
 
-    }//end testMagicGetReturnsValueForSupportedProperty()
+    }
 
 
     /**
@@ -112,7 +112,7 @@ final class MagicMethodsTest extends TestCase
             ],
         ];
 
-    }//end dataMagicGetReturnsValueForSupportedProperty()
+    }
 
 
     /**
@@ -128,7 +128,7 @@ final class MagicMethodsTest extends TestCase
         $reporter = new Reporter(new ConfigDouble());
         $reporter->totalFixable = 10;
 
-    }//end testMagicSetThrowsException()
+    }
 
 
     /**
@@ -144,7 +144,7 @@ final class MagicMethodsTest extends TestCase
         $reporter = new Reporter(new ConfigDouble());
         unset($reporter->totalFixed);
 
-    }//end testMagicUnsetThrowsException()
+    }
 
 
-}//end class
+}

@@ -47,7 +47,7 @@ final class EmptyStatementUnitTest extends AbstractSniffTestCase
             74 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -62,7 +62,7 @@ final class EmptyStatementUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

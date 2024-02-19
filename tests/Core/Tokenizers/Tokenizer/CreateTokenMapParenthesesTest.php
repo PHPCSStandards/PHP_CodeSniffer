@@ -64,7 +64,7 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
         $this->assertSame($opener, $closerArray['parenthesis_opener'], $tokenType . ' closer "parenthesis_opener" key set incorrectly');
         $this->assertSame($closer, $closerArray['parenthesis_closer'], $tokenType . ' closer "parenthesis_closer" key set incorrectly');
 
-    }//end testParenthesesWithOwner()
+    }
 
 
     /**
@@ -226,7 +226,7 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataParenthesesWithOwner()
+    }
 
 
     /**
@@ -260,7 +260,7 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
         $this->assertSame($opener, $closerArray['parenthesis_opener'], 'Closer "parenthesis_opener" key set incorrectly');
         $this->assertSame($closer, $closerArray['parenthesis_closer'], 'Closer "parenthesis_closer" key set incorrectly');
 
-    }//end testParenthesesWithoutOwner()
+    }
 
 
     /**
@@ -288,7 +288,7 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataParenthesesWithoutOwner()
+    }
 
 
     /**
@@ -313,7 +313,7 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
         $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, $tokenType . ' token has "parenthesis_opener" key');
         $this->assertArrayNotHasKey('parenthesis_closer', $tokenArray, $tokenType . ' token has "parenthesis_closer" key');
 
-    }//end testParenthesesOwnerWithoutParentheses()
+    }
 
 
     /**
@@ -338,7 +338,7 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataParenthesesOwnerWithoutParentheses()
+    }
 
 
-}//end class
+}

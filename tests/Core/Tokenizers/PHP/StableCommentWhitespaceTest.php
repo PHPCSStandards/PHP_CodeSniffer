@@ -54,7 +54,7 @@ final class StableCommentWhitespaceTest extends AbstractTokenizerTestCase
             ++$comment;
         }
 
-    }//end testCommentTokenization()
+    }
 
 
     /**
@@ -1058,7 +1058,7 @@ final class StableCommentWhitespaceTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataCommentTokenization()
+    }
 
 
-}//end class
+}

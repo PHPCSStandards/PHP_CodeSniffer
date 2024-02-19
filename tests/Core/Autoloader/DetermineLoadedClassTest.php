@@ -30,7 +30,7 @@ final class DetermineLoadedClassTest extends TestCase
     {
         include __DIR__ . '/TestFiles/Sub/C.inc';
 
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -60,7 +60,7 @@ final class DetermineLoadedClassTest extends TestCase
         $className = Autoload::determineLoadedClass($classesBeforeLoad, $classesAfterLoad);
         $this->assertSame('PHP_CodeSniffer\Tests\Core\Autoloader\Sub\C', $className);
 
-    }//end testOrdered()
+    }
 
 
     /**
@@ -118,7 +118,7 @@ final class DetermineLoadedClassTest extends TestCase
         $className = Autoload::determineLoadedClass($classesBeforeLoad, $classesAfterLoad);
         $this->assertSame('PHP_CodeSniffer\Tests\Core\Autoloader\Sub\C', $className);
 
-    }//end testUnordered()
+    }
 
 
-}//end class
+}

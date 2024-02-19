@@ -60,7 +60,7 @@ final class SniffsExcludeArgsTest extends TestCase
 
         new ConfigDouble(["--$argument=$value"]);
 
-    }//end testInvalid()
+    }
 
 
     /**
@@ -196,7 +196,7 @@ final class SniffsExcludeArgsTest extends TestCase
 
         return $data;
 
-    }//end dataInvalid()
+    }
 
 
     /**
@@ -215,7 +215,7 @@ final class SniffsExcludeArgsTest extends TestCase
 
         $this->assertSame($result, $config->$argument);
 
-    }//end testValid()
+    }
 
 
     /**
@@ -277,7 +277,7 @@ final class SniffsExcludeArgsTest extends TestCase
 
         return $data;
 
-    }//end dataValid()
+    }
 
 
     /**
@@ -300,7 +300,7 @@ final class SniffsExcludeArgsTest extends TestCase
 
         $this->assertSame(['StandardOne.Category.Sniff'], $config->$argument);
 
-    }//end testOnlySetOnce()
+    }
 
 
     /**
@@ -315,7 +315,7 @@ final class SniffsExcludeArgsTest extends TestCase
             'exclude' => ['exclude'],
         ];
 
-    }//end dataOnlySetOnce()
+    }
 
 
-}//end class
+}

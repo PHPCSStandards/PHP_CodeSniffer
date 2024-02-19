@@ -40,7 +40,7 @@ final class RegisterSniffsRemovedTokenizersTest extends AbstractRulesetTestCase
         $standard     = __DIR__ . '/RegisterSniffsRemovedTokenizersTest.xml';
         self::$config = new ConfigDouble(["--standard=$standard"]);
 
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -67,7 +67,7 @@ final class RegisterSniffsRemovedTokenizersTest extends AbstractRulesetTestCase
 
         new Ruleset(self::$config);
 
-    }//end testUnsupportedTokenizersTriggerError()
+    }
 
 
     /**
@@ -100,7 +100,7 @@ final class RegisterSniffsRemovedTokenizersTest extends AbstractRulesetTestCase
             ],
         ];
 
-    }//end dataUnsupportedTokenizersTriggerError()
+    }
 
 
-}//end class
+}

@@ -32,7 +32,7 @@ final class CommentedOutCodeUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -60,7 +60,7 @@ final class CommentedOutCodeUnitTest extends AbstractSniffTestCase
             158 => 1,
         ];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

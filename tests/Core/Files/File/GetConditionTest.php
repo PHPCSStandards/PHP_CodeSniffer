@@ -139,7 +139,7 @@ final class GetConditionTest extends AbstractMethodTestCase
             }
         }
 
-    }//end setUp()
+    }
 
 
     /**
@@ -155,7 +155,7 @@ final class GetConditionTest extends AbstractMethodTestCase
         $result = self::$phpcsFile->hasCondition(100000, T_IF);
         $this->assertFalse($result);
 
-    }//end testNonExistentToken()
+    }
 
 
     /**
@@ -174,7 +174,7 @@ final class GetConditionTest extends AbstractMethodTestCase
         $result = self::$phpcsFile->hasCondition($stackPtr, Tokens::OO_SCOPE_TOKENS);
         $this->assertFalse($result);
 
-    }//end testNonConditionalToken()
+    }
 
 
     /**
@@ -208,7 +208,7 @@ final class GetConditionTest extends AbstractMethodTestCase
             );
         }
 
-    }//end testGetCondition()
+    }
 
 
     /**
@@ -279,7 +279,7 @@ final class GetConditionTest extends AbstractMethodTestCase
             ],
         ];
 
-    }//end dataGetCondition()
+    }
 
 
     /**
@@ -313,7 +313,7 @@ final class GetConditionTest extends AbstractMethodTestCase
             );
         }
 
-    }//end testGetConditionReversed()
+    }
 
 
     /**
@@ -345,7 +345,7 @@ final class GetConditionTest extends AbstractMethodTestCase
 
         return $data;
 
-    }//end dataGetConditionReversed()
+    }
 
 
     /**
@@ -375,7 +375,7 @@ final class GetConditionTest extends AbstractMethodTestCase
             );
         }
 
-    }//end testHasCondition()
+    }
 
 
     /**
@@ -446,7 +446,7 @@ final class GetConditionTest extends AbstractMethodTestCase
             ],
         ];
 
-    }//end dataHasCondition()
+    }
 
 
     /**
@@ -484,7 +484,7 @@ final class GetConditionTest extends AbstractMethodTestCase
             'Failed asserting that "testSeriouslyNestedMethod" has an OO Scope token condition'
         );
 
-    }//end testHasConditionMultipleTypes()
+    }
 
 
-}//end class
+}

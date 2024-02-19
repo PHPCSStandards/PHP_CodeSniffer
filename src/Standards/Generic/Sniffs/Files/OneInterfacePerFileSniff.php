@@ -25,7 +25,7 @@ class OneInterfacePerFileSniff implements Sniff
     {
         return [T_INTERFACE];
 
-    }//end register()
+    }
 
 
     /**
@@ -51,7 +51,7 @@ class OneInterfacePerFileSniff implements Sniff
             $phpcsFile->addError($error, $nextInterface, 'MultipleFound');
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

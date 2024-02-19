@@ -42,7 +42,7 @@ final class FixmeUnitTest extends AbstractSniffTestCase
             21 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -57,7 +57,7 @@ final class FixmeUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

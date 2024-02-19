@@ -42,7 +42,7 @@ final class ShortArrayTest extends AbstractTokenizerTestCase
             $this->assertSame('T_CLOSE_SQUARE_BRACKET', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_CLOSE_SQUARE_BRACKET (type)');
         }
 
-    }//end testSquareBrackets()
+    }
 
 
     /**
@@ -87,7 +87,7 @@ final class ShortArrayTest extends AbstractTokenizerTestCase
             'live coding'                                    => ['/* testLiveCoding */'],
         ];
 
-    }//end dataSquareBrackets()
+    }
 
 
     /**
@@ -117,7 +117,7 @@ final class ShortArrayTest extends AbstractTokenizerTestCase
             $this->assertSame('T_CLOSE_SHORT_ARRAY', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_CLOSE_SHORT_ARRAY (type)');
         }
 
-    }//end testShortArrays()
+    }
 
 
     /**
@@ -143,7 +143,7 @@ final class ShortArrayTest extends AbstractTokenizerTestCase
             'short list after class declaration'             => ['/* testShortListDeclarationAfterClassDeclaration */'],
         ];
 
-    }//end dataShortArrays()
+    }
 
 
-}//end class
+}

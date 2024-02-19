@@ -29,7 +29,7 @@ class ReturnTypeDeclarationSniff implements Sniff
             T_FN,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -104,7 +104,7 @@ class ReturnTypeDeclarationSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

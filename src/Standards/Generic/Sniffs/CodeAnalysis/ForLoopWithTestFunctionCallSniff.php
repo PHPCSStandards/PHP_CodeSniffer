@@ -43,7 +43,7 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
     {
         return [T_FOR];
 
-    }//end register()
+    }
 
 
     /**
@@ -95,7 +95,7 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
             }
         }//end for
 
-    }//end process()
+    }
 
 
-}//end class
+}

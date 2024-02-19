@@ -38,7 +38,7 @@ class UnnecessaryFinalModifierSniff implements Sniff
     {
         return [T_CLASS];
 
-    }//end register()
+    }
 
 
     /**
@@ -82,7 +82,7 @@ class UnnecessaryFinalModifierSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

@@ -38,7 +38,7 @@ final class ContextSensitiveKeywordsGotoTest extends AbstractTokenizerTestCase
         $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
         $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (type)');
 
-    }//end testStrings()
+    }
 
 
     /**
@@ -124,7 +124,7 @@ final class ContextSensitiveKeywordsGotoTest extends AbstractTokenizerTestCase
             'xor'          => ['/* testXor */'],
         ];
 
-    }//end dataStrings()
+    }
 
 
-}//end class
+}

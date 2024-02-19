@@ -28,7 +28,7 @@ class FunctionOpeningBraceSpaceSniff implements Sniff
             T_CLOSURE,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -82,7 +82,7 @@ class FunctionOpeningBraceSpaceSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

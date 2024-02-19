@@ -68,7 +68,7 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
 
         parent::__construct($scopes, $listen, true);
 
-    }//end __construct()
+    }
 
 
     /**
@@ -147,7 +147,7 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
             return $this->processMemberVar($phpcsFile, $stackPtr);
         }
 
-    }//end processTokenWithinScope()
+    }
 
 
     /**
@@ -178,7 +178,7 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
             }
         }
 
-    }//end processTokenOutsideScope()
+    }
 
 
     /**
@@ -230,4 +230,4 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
     abstract protected function processVariableInString(File $phpcsFile, int $stackPtr);
 
 
-}//end class
+}

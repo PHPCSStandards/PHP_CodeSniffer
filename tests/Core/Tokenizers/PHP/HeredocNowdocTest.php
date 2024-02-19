@@ -45,7 +45,7 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testHeredocSingleLine()
+    }
 
 
     /**
@@ -67,7 +67,7 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testNowdocSingleLine()
+    }
 
 
     /**
@@ -91,7 +91,7 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testHeredocMultiLine()
+    }
 
 
     /**
@@ -115,7 +115,7 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testNowdocMultiLine()
+    }
 
 
     /**
@@ -139,7 +139,7 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testHeredocEndsOnBlankLine()
+    }
 
 
     /**
@@ -163,7 +163,7 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testNowdocEndsOnBlankLine()
+    }
 
 
     /**
@@ -207,7 +207,7 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
             );
         }//end for
 
-    }//end checkTokenSequence()
+    }
 
 
-}//end class
+}

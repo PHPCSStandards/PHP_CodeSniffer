@@ -15,4 +15,4 @@ use DomainException;
 class GeneratorException extends DomainException
 {
 
-}//end class
+}

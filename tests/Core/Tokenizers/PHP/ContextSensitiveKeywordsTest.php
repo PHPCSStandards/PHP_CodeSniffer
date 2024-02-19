@@ -35,7 +35,7 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
         $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
         $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (type)');
 
-    }//end testStrings()
+    }
 
 
     /**
@@ -139,7 +139,7 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
             'method call: static with dnf look a like param'  => ['/* testKeywordAsFunctionCallNameShouldBeStringStaticDNFLookaLike */'],
         ];
 
-    }//end dataStrings()
+    }
 
 
     /**
@@ -178,7 +178,7 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
             'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedTokenType . ' (type)'
         );
 
-    }//end testKeywords()
+    }
 
 
     /**
@@ -566,7 +566,7 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataKeywords()
+    }
 
 
-}//end class
+}

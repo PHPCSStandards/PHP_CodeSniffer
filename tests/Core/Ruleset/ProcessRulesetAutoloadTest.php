@@ -82,7 +82,7 @@ final class ProcessRulesetAutoloadTest extends AbstractRulesetTestCase
             'ProcessRulesetAutoloadLoadPhpcbfOnly.php autoload file was loaded, while it shouldn\'t have been'
         );
 
-    }//end testShouldProcessAutoloadCsonly()
+    }
 
 
     /**
@@ -140,7 +140,7 @@ final class ProcessRulesetAutoloadTest extends AbstractRulesetTestCase
             'ProcessRulesetAutoloadLoadPhpcbfOnly.php autoload file was not loaded'
         );
 
-    }//end testShouldProcessAutoloadCbfonly()
+    }
 
 
     /**
@@ -158,7 +158,7 @@ final class ProcessRulesetAutoloadTest extends AbstractRulesetTestCase
         $config   = new ConfigDouble(["--standard=$standard"]);
         new Ruleset($config);
 
-    }//end testFileNotFoundException()
+    }
 
 
-}//end class
+}

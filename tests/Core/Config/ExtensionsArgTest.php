@@ -37,7 +37,7 @@ final class ExtensionsArgTest extends TestCase
 
         $this->assertSame($expected, $config->extensions);
 
-    }//end testValidExtensions()
+    }
 
 
     /**
@@ -98,7 +98,7 @@ final class ExtensionsArgTest extends TestCase
             ],
         ];
 
-    }//end dataValidExtensions()
+    }
 
 
     /**
@@ -117,7 +117,7 @@ final class ExtensionsArgTest extends TestCase
 
         $this->assertSame(['php' => 'PHP'], $config->extensions);
 
-    }//end testOnlySetOnce()
+    }
 
 
     /**
@@ -140,7 +140,7 @@ final class ExtensionsArgTest extends TestCase
 
         new ConfigDouble(["--extensions={$passedValue}"]);
 
-    }//end testInvalidExtensions()
+    }
 
 
     /**
@@ -164,7 +164,7 @@ final class ExtensionsArgTest extends TestCase
             ],
         ];
 
-    }//end dataInvalidExtensions()
+    }
 
 
-}//end class
+}

@@ -24,7 +24,7 @@ class StaticThisUsageSniff extends AbstractScopeSniff
     {
         parent::__construct([T_CLASS, T_TRAIT, T_ENUM, T_ANON_CLASS], [T_FUNCTION]);
 
-    }//end __construct()
+    }
 
 
     /**
@@ -70,7 +70,7 @@ class StaticThisUsageSniff extends AbstractScopeSniff
 
         $this->checkThisUsage($phpcsFile, $next, $end);
 
-    }//end processTokenWithinScope()
+    }
 
 
     /**
@@ -106,7 +106,7 @@ class StaticThisUsageSniff extends AbstractScopeSniff
             $phpcsFile->addError($error, $next, 'Found');
         } while ($next !== false);
 
-    }//end checkThisUsage()
+    }
 
 
     /**
@@ -122,7 +122,7 @@ class StaticThisUsageSniff extends AbstractScopeSniff
     protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr)
     {
 
-    }//end processTokenOutsideScope()
+    }
 
 
-}//end class
+}

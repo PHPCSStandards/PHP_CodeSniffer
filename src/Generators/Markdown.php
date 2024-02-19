@@ -55,7 +55,7 @@ class Markdown extends Generator
             echo $this->getFormattedFooter();
         }
 
-    }//end generate()
+    }
 
 
     /**
@@ -72,7 +72,7 @@ class Markdown extends Generator
 
         return "# $standard Coding Standard" . PHP_EOL;
 
-    }//end getFormattedHeader()
+    }
 
 
     /**
@@ -94,7 +94,7 @@ class Markdown extends Generator
 
         return $output;
 
-    }//end getFormattedFooter()
+    }
 
 
     /**
@@ -123,7 +123,7 @@ class Markdown extends Generator
             echo $content;
         }
 
-    }//end processSniff()
+    }
 
 
     /**
@@ -174,7 +174,7 @@ class Markdown extends Generator
 
         return implode(PHP_EOL, $lines) . PHP_EOL;
 
-    }//end getFormattedTextBlock()
+    }
 
 
     /**
@@ -234,7 +234,7 @@ class Markdown extends Generator
 
         return $output;
 
-    }//end getFormattedCodeComparisonBlock()
+    }
 
 
     /**
@@ -251,7 +251,7 @@ class Markdown extends Generator
         $title = trim($codeElm->getAttribute('title'));
         return str_replace('  ', '&nbsp;&nbsp;', $title);
 
-    }//end formatCodeTitle()
+    }
 
 
     /**
@@ -272,7 +272,7 @@ class Markdown extends Generator
 
         return $code;
 
-    }//end formatCodeSample()
+    }
 
 
-}//end class
+}

@@ -38,7 +38,7 @@ final class CastSpacingUnitTest extends AbstractSniffTestCase
             9 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -53,7 +53,7 @@ final class CastSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

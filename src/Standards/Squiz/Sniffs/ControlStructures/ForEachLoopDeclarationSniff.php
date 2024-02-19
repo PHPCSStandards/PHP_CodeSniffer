@@ -39,7 +39,7 @@ class ForEachLoopDeclarationSniff implements Sniff
     {
         return [T_FOREACH];
 
-    }//end register()
+    }
 
 
     /**
@@ -227,7 +227,7 @@ class ForEachLoopDeclarationSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

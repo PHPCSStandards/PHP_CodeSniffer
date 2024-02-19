@@ -39,7 +39,7 @@ final class AddMessageSelectiveInternalHandlingTest extends TestCase
         $added = $phpcsFile->addError('No code found', 0, 'Internal.NoCodeFound');
         $this->assertFalse($added);
 
-    }//end testRulesetIgnoredInternalErrorIsIgnored()
+    }
 
 
     /**
@@ -59,7 +59,7 @@ final class AddMessageSelectiveInternalHandlingTest extends TestCase
         $added = $phpcsFile->addError('Some other error', 0, 'Internal.SomeError');
         $this->assertTrue($added);
 
-    }//end testOtherInternalErrorIsNotIgnored()
+    }
 
 
     /**
@@ -86,7 +86,7 @@ final class AddMessageSelectiveInternalHandlingTest extends TestCase
             ],
         ];
 
-    }//end dataSniffSelection()
+    }
 
 
     /**
@@ -120,7 +120,7 @@ final class AddMessageSelectiveInternalHandlingTest extends TestCase
 
         return $phpcsFile;
 
-    }//end getPhpcsFile()
+    }
 
 
-}//end class
+}

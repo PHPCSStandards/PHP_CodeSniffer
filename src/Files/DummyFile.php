@@ -56,7 +56,7 @@ class DummyFile extends File
 
         parent::__construct($path, $ruleset, $config);
 
-    }//end __construct()
+    }
 
 
     /**
@@ -86,7 +86,7 @@ class DummyFile extends File
         $this->fixedErrorCount     = $fixedErrorCount;
         $this->fixedWarningCount   = $fixedWarningCount;
 
-    }//end setErrorCounts()
+    }
 
 
-}//end class
+}

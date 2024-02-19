@@ -26,7 +26,7 @@ class VariableCommentSniff extends AbstractVariableSniff
     {
         AbstractScopeSniff::__construct(Tokens::OO_SCOPE_TOKENS, [T_VARIABLE], false);
 
-    }//end __construct()
+    }
 
 
     /**
@@ -175,7 +175,7 @@ class VariableCommentSniff extends AbstractVariableSniff
             }
         }
 
-    }//end processMemberVar()
+    }
 
 
     /**
@@ -192,7 +192,7 @@ class VariableCommentSniff extends AbstractVariableSniff
     protected function processVariable(File $phpcsFile, int $stackPtr)
     {
 
-    }//end processVariable()
+    }
 
 
     /**
@@ -209,7 +209,7 @@ class VariableCommentSniff extends AbstractVariableSniff
     protected function processVariableInString(File $phpcsFile, int $stackPtr)
     {
 
-    }//end processVariableInString()
+    }
 
 
-}//end class
+}

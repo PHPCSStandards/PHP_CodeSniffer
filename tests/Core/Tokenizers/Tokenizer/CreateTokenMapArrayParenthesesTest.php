@@ -40,7 +40,7 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
         $this->assertArrayHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is not set');
         $this->assertArrayHasKey('parenthesis_closer', $tokenArray, 'Parenthesis closer is not set');
 
-    }//end testArrayKeyword()
+    }
 
 
     /**
@@ -74,7 +74,7 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataArrayKeyword()
+    }
 
 
     /**
@@ -102,7 +102,7 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
         $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is set');
         $this->assertArrayNotHasKey('parenthesis_closer', $tokenArray, 'Parenthesis closer is set');
 
-    }//end testArrayType()
+    }
 
 
     /**
@@ -151,7 +151,7 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataArrayType()
+    }
 
 
     /**
@@ -180,7 +180,7 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
         $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is set');
         $this->assertArrayNotHasKey('parenthesis_closer', $tokenArray, 'Parenthesis closer is set');
 
-    }//end testNotArrayKeyword()
+    }
 
 
     /**
@@ -206,7 +206,7 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataNotArrayKeyword()
+    }
 
 
-}//end class
+}

@@ -49,7 +49,7 @@ class NonExecutableCodeSniff implements Sniff
             T_GOTO,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -297,7 +297,7 @@ class NonExecutableCodeSniff implements Sniff
             }
         }//end for
 
-    }//end process()
+    }
 
 
-}//end class
+}

@@ -63,7 +63,7 @@ abstract class AbstractPatternSniff implements Sniff
     {
         $this->supplementaryTokens = $this->registerSupplementary();
 
-    }//end __construct()
+    }
 
 
     /**
@@ -104,7 +104,7 @@ abstract class AbstractPatternSniff implements Sniff
 
         return array_unique(array_merge($listenTypes, $this->supplementaryTokens));
 
-    }//end register()
+    }
 
 
     /**
@@ -136,7 +136,7 @@ abstract class AbstractPatternSniff implements Sniff
 
         return $tokenTypes;
 
-    }//end getPatternTokenTypes()
+    }
 
 
     /**
@@ -163,7 +163,7 @@ abstract class AbstractPatternSniff implements Sniff
 
         return $tokenTypes[$token];
 
-    }//end getListenerTokenPos()
+    }
 
 
     /**
@@ -229,7 +229,7 @@ abstract class AbstractPatternSniff implements Sniff
             $phpcsFile->addError($error, $stackPtr, 'Found');
         }
 
-    }//end process()
+    }
 
 
     /**
@@ -686,7 +686,7 @@ abstract class AbstractPatternSniff implements Sniff
 
         return $errors;
 
-    }//end processPattern()
+    }
 
 
     /**
@@ -710,7 +710,7 @@ abstract class AbstractPatternSniff implements Sniff
 
         return $error;
 
-    }//end prepareError()
+    }
 
 
     /**
@@ -735,7 +735,7 @@ abstract class AbstractPatternSniff implements Sniff
     {
         return [];
 
-    }//end registerSupplementary()
+    }
 
 
     /**
@@ -752,7 +752,7 @@ abstract class AbstractPatternSniff implements Sniff
     protected function processSupplementary(File $phpcsFile, int $stackPtr)
     {
 
-    }//end processSupplementary()
+    }
 
 
     /**
@@ -842,7 +842,7 @@ abstract class AbstractPatternSniff implements Sniff
 
         return $patterns;
 
-    }//end parse()
+    }
 
 
     /**
@@ -896,7 +896,7 @@ abstract class AbstractPatternSniff implements Sniff
 
         return $skip;
 
-    }//end createSkipPattern()
+    }
 
 
     /**
@@ -933,7 +933,7 @@ abstract class AbstractPatternSniff implements Sniff
 
         return $patterns;
 
-    }//end createTokenPattern()
+    }
 
 
-}//end class
+}

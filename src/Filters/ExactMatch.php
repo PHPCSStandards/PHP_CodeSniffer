@@ -68,7 +68,7 @@ abstract class ExactMatch extends Filter
 
         return isset($this->allowedFiles[$filePath]);
 
-    }//end accept()
+    }
 
 
     /**
@@ -86,7 +86,7 @@ abstract class ExactMatch extends Filter
         $children->allowedFiles    = $this->allowedFiles;
         return $children;
 
-    }//end getChildren()
+    }
 
 
     /**
@@ -109,4 +109,4 @@ abstract class ExactMatch extends Filter
     abstract protected function getAllowedFiles();
 
 
-}//end class
+}

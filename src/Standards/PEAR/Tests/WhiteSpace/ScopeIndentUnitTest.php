@@ -33,7 +33,7 @@ final class ScopeIndentUnitTest extends AbstractSniffTestCase
     {
         $config->setConfigData('scope_indent_debug', '0', true);
 
-    }//end setCliValues()
+    }
 
 
     /**
@@ -66,7 +66,7 @@ final class ScopeIndentUnitTest extends AbstractSniffTestCase
             311 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -81,7 +81,7 @@ final class ScopeIndentUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

@@ -40,7 +40,7 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
 
         return $targets;
 
-    }//end register()
+    }
 
 
     /**
@@ -122,7 +122,7 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

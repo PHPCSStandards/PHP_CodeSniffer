@@ -35,7 +35,7 @@ final class SideEffectsUnitTest extends AbstractSniffTestCase
             $config->annotations = false;
         }
 
-    }//end setCliValues()
+    }
 
 
     /**
@@ -52,7 +52,7 @@ final class SideEffectsUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -80,7 +80,7 @@ final class SideEffectsUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

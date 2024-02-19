@@ -43,7 +43,7 @@ final class RequireStrictTypesUnitTest extends AbstractSniffTestCase
             return [];
         }
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -66,7 +66,7 @@ final class RequireStrictTypesUnitTest extends AbstractSniffTestCase
             return [];
         }
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

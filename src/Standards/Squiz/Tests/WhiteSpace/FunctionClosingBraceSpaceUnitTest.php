@@ -43,7 +43,7 @@ final class FunctionClosingBraceSpaceUnitTest extends AbstractSniffTestCase
             88 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -58,7 +58,7 @@ final class FunctionClosingBraceSpaceUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

@@ -72,7 +72,7 @@ final class RuleInclusionAbsoluteLinuxTest extends TestCase
         $config        = new ConfigDouble(["--standard={$this->standard}"]);
         $this->ruleset = new Ruleset($config);
 
-    }//end setUp()
+    }
 
 
     /**
@@ -84,7 +84,7 @@ final class RuleInclusionAbsoluteLinuxTest extends TestCase
     {
         file_put_contents($this->standard, $this->contents);
 
-    }//end tearDown()
+    }
 
 
     /**
@@ -109,7 +109,7 @@ final class RuleInclusionAbsoluteLinuxTest extends TestCase
             $this->ruleset->sniffs['PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff']->spacing
         );
 
-    }//end testLinuxStylePathRuleInclusion()
+    }
 
 
-}//end class
+}

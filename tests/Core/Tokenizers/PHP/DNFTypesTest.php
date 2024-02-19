@@ -90,7 +90,7 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             );
         }
 
-    }//end testNormalParentheses()
+    }
 
 
     /**
@@ -267,7 +267,7 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataNormalParentheses()
+    }
 
 
     /**
@@ -372,7 +372,7 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             );
         }
 
-    }//end testDNFTypeParentheses()
+    }
 
 
     /**
@@ -560,7 +560,7 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataDNFTypeParentheses()
+    }
 
 
-}//end class
+}

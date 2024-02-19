@@ -38,7 +38,7 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
     {
         self::$homepath = getenv('HOME');
 
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -55,7 +55,7 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
             putenv('HOME');
         }
 
-    }//end tearDownAfterClass()
+    }
 
 
     /**
@@ -68,7 +68,7 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
         $fakeHomePath = __DIR__ . DIRECTORY_SEPARATOR . 'Fixtures' . DIRECTORY_SEPARATOR . 'FakeHomePath';
         putenv("HOME=$fakeHomePath");
 
-    }//end setUp()
+    }
 
 
     /**
@@ -88,7 +88,7 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
 
         $this->assertSame($expected, $ruleset->sniffCodes);
 
-    }//end testHomePathRefGetsExpandedAndFindsSniff()
+    }
 
 
     /**
@@ -109,7 +109,7 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
 
         new Ruleset($config);
 
-    }//end testHomePathRefGetsExpandedAndThrowsExceptionWhenPathIsInvalid()
+    }
 
 
-}//end class
+}

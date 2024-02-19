@@ -26,7 +26,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
     {
         AbstractScopeSniff::__construct(Tokens::OO_SCOPE_TOKENS, [T_VARIABLE], false);
 
-    }//end __construct()
+    }
 
 
     /**
@@ -279,7 +279,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
             }
         }//end if
 
-    }//end processMemberVar()
+    }
 
 
     /**
@@ -296,7 +296,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
             We don't care about normal variables.
         */
 
-    }//end processVariable()
+    }
 
 
     /**
@@ -313,7 +313,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
             We don't care about normal variables.
         */
 
-    }//end processVariableInString()
+    }
 
 
-}//end class
+}

@@ -39,7 +39,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
             $phpcsFile->addError($error, $nextClass, 'MultipleClasses');
         }
 
-    }//end process()
+    }
 
 
     /**
@@ -84,7 +84,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
             }//end if
         }//end if
 
-    }//end processOpen()
+    }
 
 
     /**
@@ -218,7 +218,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
             }
         }//end if
 
-    }//end processClose()
+    }
 
 
-}//end class
+}

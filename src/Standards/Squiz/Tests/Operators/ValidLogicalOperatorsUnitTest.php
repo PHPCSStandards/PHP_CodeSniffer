@@ -36,7 +36,7 @@ final class ValidLogicalOperatorsUnitTest extends AbstractSniffTestCase
             17 => 2,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -51,7 +51,7 @@ final class ValidLogicalOperatorsUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

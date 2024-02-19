@@ -52,7 +52,7 @@ final class IncrementDecrementUsageUnitTest extends AbstractSniffTestCase
             56 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -67,7 +67,7 @@ final class IncrementDecrementUsageUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

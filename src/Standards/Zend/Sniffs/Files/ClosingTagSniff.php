@@ -26,7 +26,7 @@ class ClosingTagSniff implements Sniff
     {
         return [T_OPEN_TAG];
 
-    }//end register()
+    }
 
 
     /**
@@ -73,7 +73,7 @@ class ClosingTagSniff implements Sniff
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
 
-    }//end process()
+    }
 
 
-}//end class
+}

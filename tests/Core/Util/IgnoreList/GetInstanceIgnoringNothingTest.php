@@ -31,7 +31,7 @@ final class GetInstanceIgnoringNothingTest extends TestCase
         $this->assertInstanceOf(IgnoreList::class, $ignoreList);
         $this->assertFalse($ignoreList->isIgnored('Anything'));
 
-    }//end testGetInstanceIgnoringNothingWorks()
+    }
 
 
-}//end class
+}

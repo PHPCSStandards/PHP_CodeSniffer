@@ -284,7 +284,7 @@ class Cache
 
         self::$cache['config'] = $configData;
 
-    }//end load()
+    }
 
 
     /**
@@ -296,7 +296,7 @@ class Cache
     {
         file_put_contents(self::$path, json_encode(self::$cache));
 
-    }//end save()
+    }
 
 
     /**
@@ -319,7 +319,7 @@ class Cache
 
         return false;
 
-    }//end get()
+    }
 
 
     /**
@@ -339,7 +339,7 @@ class Cache
             self::$cache[$key] = $value;
         }
 
-    }//end set()
+    }
 
 
     /**
@@ -351,7 +351,7 @@ class Cache
     {
         return (count(self::$cache) - 1);
 
-    }//end getSize()
+    }
 
 
-}//end class
+}

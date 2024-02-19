@@ -54,7 +54,7 @@ class UnnecessaryHeredocSniff implements Sniff
     {
         return [T_START_HEREDOC];
 
-    }//end register()
+    }
 
 
     /**
@@ -139,7 +139,7 @@ class UnnecessaryHeredocSniff implements Sniff
             $phpcsFile->fixer->endChangeset();
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

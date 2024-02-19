@@ -40,7 +40,7 @@ class InlineCommentSniff implements Sniff
             T_DOC_COMMENT_OPEN_TAG,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -310,7 +310,7 @@ class InlineCommentSniff implements Sniff
 
         return ($lastCommentToken + 1);
 
-    }//end process()
+    }
 
 
-}//end class
+}

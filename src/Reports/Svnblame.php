@@ -41,7 +41,7 @@ class Svnblame extends VersionControl
 
         return $blameParts[2];
 
-    }//end getAuthor()
+    }
 
 
     /**
@@ -68,7 +68,7 @@ class Svnblame extends VersionControl
 
         return $blames;
 
-    }//end getBlameContent()
+    }
 
 
-}//end class
+}

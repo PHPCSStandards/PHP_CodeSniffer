@@ -32,7 +32,7 @@ final class UselessOverridingMethodUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -66,7 +66,7 @@ final class UselessOverridingMethodUnitTest extends AbstractSniffTestCase
             return [];
         }
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

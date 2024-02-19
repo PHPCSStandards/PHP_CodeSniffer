@@ -32,7 +32,7 @@ final class NonExecutableCodeUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -120,7 +120,7 @@ final class NonExecutableCodeUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

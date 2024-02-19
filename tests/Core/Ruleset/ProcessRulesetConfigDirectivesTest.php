@@ -50,7 +50,7 @@ final class ProcessRulesetConfigDirectivesTest extends TestCase
             new Ruleset(self::$config);
         }
 
-    }//end setUp()
+    }
 
 
     /**
@@ -68,7 +68,7 @@ final class ProcessRulesetConfigDirectivesTest extends TestCase
             self::$config->__destruct();
         }
 
-    }//end tearDownAfterClass()
+    }
 
 
     /**
@@ -90,7 +90,7 @@ final class ProcessRulesetConfigDirectivesTest extends TestCase
     {
         $this->assertSame($expected, self::$config->getConfigData($name));
 
-    }//end testConfigDirectives()
+    }
 
 
     /**
@@ -147,7 +147,7 @@ final class ProcessRulesetConfigDirectivesTest extends TestCase
             ],
         ];
 
-    }//end dataConfigDirectives()
+    }
 
 
-}//end class
+}

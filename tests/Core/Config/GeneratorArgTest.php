@@ -32,7 +32,7 @@ final class GeneratorArgTest extends TestCase
             $this->markTestSkipped('This test needs CS mode to run');
         }
 
-    }//end setUp()
+    }
 
 
     /**
@@ -51,7 +51,7 @@ final class GeneratorArgTest extends TestCase
 
         $this->assertSame($expectedPropertyValue, $config->generator);
 
-    }//end testValidGenerators()
+    }
 
 
     /**
@@ -90,7 +90,7 @@ final class GeneratorArgTest extends TestCase
             ],
         ];
 
-    }//end dataValidGeneratorNames()
+    }
 
 
     /**
@@ -110,7 +110,7 @@ final class GeneratorArgTest extends TestCase
 
         $this->assertSame('Text', $config->generator);
 
-    }//end testOnlySetOnce()
+    }
 
 
     /**
@@ -131,7 +131,7 @@ final class GeneratorArgTest extends TestCase
 
         new ConfigDouble(["--generator={$generatorName}"]);
 
-    }//end testInvalidGenerator()
+    }
 
 
     /**
@@ -149,7 +149,7 @@ final class GeneratorArgTest extends TestCase
             [''],
         ];
 
-    }//end dataInvalidGeneratorNames()
+    }
 
 
-}//end class
+}

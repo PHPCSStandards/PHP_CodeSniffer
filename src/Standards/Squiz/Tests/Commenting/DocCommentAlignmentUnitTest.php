@@ -69,7 +69,7 @@ final class DocCommentAlignmentUnitTest extends AbstractSniffTestCase
             144 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -84,7 +84,7 @@ final class DocCommentAlignmentUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

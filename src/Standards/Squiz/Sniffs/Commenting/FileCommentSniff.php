@@ -37,7 +37,7 @@ class FileCommentSniff implements Sniff
     {
         return [T_OPEN_TAG];
 
-    }//end register()
+    }
 
 
     /**
@@ -215,7 +215,7 @@ class FileCommentSniff implements Sniff
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
 
-    }//end process()
+    }
 
 
-}//end class
+}

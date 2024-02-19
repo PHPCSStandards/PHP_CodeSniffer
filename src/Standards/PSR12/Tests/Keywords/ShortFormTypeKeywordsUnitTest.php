@@ -38,7 +38,7 @@ final class ShortFormTypeKeywordsUnitTest extends AbstractSniffTestCase
             14 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -53,7 +53,7 @@ final class ShortFormTypeKeywordsUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

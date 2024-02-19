@@ -25,7 +25,7 @@ class InlineCommentSniff implements Sniff
     {
         return [T_COMMENT];
 
-    }//end register()
+    }
 
 
     /**
@@ -62,7 +62,7 @@ class InlineCommentSniff implements Sniff
             $phpcsFile->recordMetric($stackPtr, 'Inline comment style', '/* ... */');
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

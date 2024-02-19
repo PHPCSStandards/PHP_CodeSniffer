@@ -55,7 +55,7 @@ class Gitblame extends VersionControl
         $author = preg_replace('|\(|', '', implode(' ', $parts));
         return $author;
 
-    }//end getAuthor()
+    }
 
 
     /**
@@ -86,7 +86,7 @@ class Gitblame extends VersionControl
 
         return $blames;
 
-    }//end getBlameContent()
+    }
 
 
-}//end class
+}

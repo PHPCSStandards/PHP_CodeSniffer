@@ -38,7 +38,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
 
         $this->assertStderrOutputSameString($expected);
 
-    }//end testStatusSentToStdErr()
+    }
 
 
     /**
@@ -59,7 +59,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
             ],
         ];
 
-    }//end dataStatusSentToStdErr()
+    }
 
 
     /**
@@ -82,7 +82,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
 
         $this->assertStderrOutputSameString($expected);
 
-    }//end testStatusSentToStdErrIndentNewlines()
+    }
 
 
     /**
@@ -131,7 +131,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
             ],
         ];
 
-    }//end dataStatusSentToStdErrIndentNewlines()
+    }
 
 
     /**
@@ -154,7 +154,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
 
         $this->assertStderrOutputSameString('');
 
-    }//end testStatusDoesNotGetPrintedWhenPaused()
+    }
 
 
     /**
@@ -185,7 +185,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
 
         $this->assertStderrOutputSameString($expected);
 
-    }//end testStatusDoesGetPrintedWhenPausedAndResumed()
+    }
 
 
     /**
@@ -209,7 +209,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
 
         $this->assertStderrOutputSameString($expected);
 
-    }//end testStatusDoesGetForcePrintedWhenPaused()
+    }
 
 
     /**
@@ -245,7 +245,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
 
         $this->assertStderrOutputSameString($expected);
 
-    }//end testStatusDoesGetForcePrintedWhenPausedAndResumed()
+    }
 
 
     /**
@@ -271,7 +271,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
 
         $this->assertStderrOutputSameString(PHP_EOL . PHP_EOL);
 
-    }//end testWriteNewline()
+    }
 
 
     /**
@@ -327,7 +327,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
 
         $this->assertStderrOutputSameString($expected);
 
-    }//end testNestedPausing()
+    }
 
 
     /**
@@ -383,7 +383,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
 
         $this->assertStderrOutputSameString($expected);
 
-    }//end testResumingMoreOftenThanPaused()
+    }
 
 
-}//end class
+}

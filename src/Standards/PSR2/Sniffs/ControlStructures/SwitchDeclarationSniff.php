@@ -47,7 +47,7 @@ class SwitchDeclarationSniff implements Sniff
     {
         return [T_SWITCH];
 
-    }//end register()
+    }
 
 
     /**
@@ -222,7 +222,7 @@ class SwitchDeclarationSniff implements Sniff
             }
         }//end while
 
-    }//end process()
+    }
 
 
     /**
@@ -251,7 +251,7 @@ class SwitchDeclarationSniff implements Sniff
 
         return $stackPtr;
 
-    }//end findNextCase()
+    }
 
 
     /**
@@ -404,7 +404,7 @@ class SwitchDeclarationSniff implements Sniff
 
         return false;
 
-    }//end findNestedTerminator()
+    }
 
 
-}//end class
+}

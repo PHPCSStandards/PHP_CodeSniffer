@@ -113,7 +113,7 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
             ],
         ];
 
-    }//end dataDocblockOpenerCloser()
+    }
 
 
     /**
@@ -136,7 +136,7 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testSingleLineDocIgnoreFileAnnotation()
+    }
 
 
     /**
@@ -157,7 +157,7 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testSingleLineDocIgnoreAnnotation()
+    }
 
 
     /**
@@ -178,7 +178,7 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testSingleLineDocDisableAnnotation()
+    }
 
 
     /**
@@ -198,7 +198,7 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testSingleLineDocEnableAnnotationNoWhitespace()
+    }
 
 
     /**
@@ -229,7 +229,7 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultiLineDocIgnoreFileAnnotationAtStart()
+    }
 
 
     /**
@@ -260,7 +260,7 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultiLineDocIgnoreAnnotationAtStart()
+    }
 
 
     /**
@@ -291,7 +291,7 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultiLineDocDisableAnnotationAtStart()
+    }
 
 
     /**
@@ -327,7 +327,7 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultiLineDocEnableAnnotationAtStart()
+    }
 
 
     /**
@@ -366,7 +366,7 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultiLineDocIgnoreFileAnnotationInMiddle()
+    }
 
 
     /**
@@ -407,7 +407,7 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultiLineDocIgnoreAnnotationInMiddle()
+    }
 
 
     /**
@@ -451,7 +451,7 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultiLineDocDisableAnnotationInMiddle()
+    }
 
 
     /**
@@ -493,7 +493,7 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultiLineDocEnableAnnotationInMiddle()
+    }
 
 
     /**
@@ -527,7 +527,7 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultiLineDocIgnoreFileAnnotationAtEnd()
+    }
 
 
     /**
@@ -561,7 +561,7 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultiLineDocIgnoreAnnotationAtEnd()
+    }
 
 
     /**
@@ -597,7 +597,7 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultiLineDocDisableAnnotationAtEnd()
+    }
 
 
     /**
@@ -631,7 +631,7 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
 
-    }//end testMultiLineDocEnableAnnotationAtEnd()
+    }
 
 
-}//end class
+}

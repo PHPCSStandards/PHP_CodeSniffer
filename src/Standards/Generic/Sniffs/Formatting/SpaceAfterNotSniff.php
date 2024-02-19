@@ -40,7 +40,7 @@ class SpaceAfterNotSniff implements Sniff
     {
         return [T_BOOLEAN_NOT];
 
-    }//end register()
+    }
 
 
     /**
@@ -127,7 +127,7 @@ class SpaceAfterNotSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

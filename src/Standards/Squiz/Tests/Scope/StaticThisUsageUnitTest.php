@@ -46,7 +46,7 @@ final class StaticThisUsageUnitTest extends AbstractSniffTestCase
             125 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -61,7 +61,7 @@ final class StaticThisUsageUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

@@ -114,7 +114,7 @@ class Cbf implements Report
 
         return $fixed;
 
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -250,7 +250,7 @@ class Cbf implements Report
 
         echo PHP_EOL . str_repeat('-', $width) . PHP_EOL . PHP_EOL;
 
-    }//end generate()
+    }
 
 
     /**
@@ -270,7 +270,7 @@ class Cbf implements Report
              */
             public function __construct()
             {
-            }//end __construct()
+            }
 
 
         };
@@ -285,7 +285,7 @@ class Cbf implements Report
 
         return $reporter;
 
-    }//end createReporterInstance()
+    }
 
 
-}//end class
+}

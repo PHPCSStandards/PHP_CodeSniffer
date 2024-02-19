@@ -70,7 +70,7 @@ final class RequireExplicitBooleanOperatorPrecedenceUnitTest extends AbstractSni
             116 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -85,7 +85,7 @@ final class RequireExplicitBooleanOperatorPrecedenceUnitTest extends AbstractSni
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

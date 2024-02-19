@@ -42,7 +42,7 @@ final class LowercaseFunctionKeywordsUnitTest extends AbstractSniffTestCase
             28 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -57,7 +57,7 @@ final class LowercaseFunctionKeywordsUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

@@ -42,7 +42,7 @@ final class EscapeshellcmdTest extends TestCase
 
         $this->assertSame($expected, Common::escapeshellcmd($command));
 
-    }//end testEscapeshellcmd()
+    }
 
 
     /**
@@ -85,7 +85,7 @@ final class EscapeshellcmdTest extends TestCase
             ],
         ];
 
-    }//end dataEscapeshellcmd()
+    }
 
 
-}//end class
+}

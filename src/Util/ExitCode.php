@@ -139,7 +139,7 @@ final class ExitCode
 
         return $exitCode;
 
-    }//end calculate()
+    }
 
 
-}//end class
+}

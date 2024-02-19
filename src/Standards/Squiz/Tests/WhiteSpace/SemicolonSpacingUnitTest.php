@@ -45,7 +45,7 @@ final class SemicolonSpacingUnitTest extends AbstractSniffTestCase
             36 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -60,7 +60,7 @@ final class SemicolonSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

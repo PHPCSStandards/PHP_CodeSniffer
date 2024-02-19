@@ -32,7 +32,7 @@ final class DiscourageGotoUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -52,7 +52,7 @@ final class DiscourageGotoUnitTest extends AbstractSniffTestCase
             16 => 1,
         ];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

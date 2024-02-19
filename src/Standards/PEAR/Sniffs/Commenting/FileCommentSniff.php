@@ -87,7 +87,7 @@ class FileCommentSniff implements Sniff
     {
         return [T_OPEN_TAG];
 
-    }//end register()
+    }
 
 
     /**
@@ -215,7 +215,7 @@ class FileCommentSniff implements Sniff
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
 
-    }//end process()
+    }
 
 
     /**
@@ -314,7 +314,7 @@ class FileCommentSniff implements Sniff
             }
         }//end foreach
 
-    }//end processTags()
+    }
 
 
     /**
@@ -356,7 +356,7 @@ class FileCommentSniff implements Sniff
             }
         }//end foreach
 
-    }//end processCategory()
+    }
 
 
     /**
@@ -409,7 +409,7 @@ class FileCommentSniff implements Sniff
             }//end if
         }//end foreach
 
-    }//end processPackage()
+    }
 
 
     /**
@@ -453,7 +453,7 @@ class FileCommentSniff implements Sniff
             $phpcsFile->addError($error, $tag, 'InvalidSubpackage', $data);
         }//end foreach
 
-    }//end processSubpackage()
+    }
 
 
     /**
@@ -483,7 +483,7 @@ class FileCommentSniff implements Sniff
             }
         }
 
-    }//end processAuthor()
+    }
 
 
     /**
@@ -524,7 +524,7 @@ class FileCommentSniff implements Sniff
             }
         }//end foreach
 
-    }//end processCopyright()
+    }
 
 
     /**
@@ -553,7 +553,7 @@ class FileCommentSniff implements Sniff
             }
         }
 
-    }//end processLicense()
+    }
 
 
     /**
@@ -585,7 +585,7 @@ class FileCommentSniff implements Sniff
             }
         }
 
-    }//end processVersion()
+    }
 
 
-}//end class
+}

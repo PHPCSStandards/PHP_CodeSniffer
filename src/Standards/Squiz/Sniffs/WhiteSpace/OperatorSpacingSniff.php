@@ -109,7 +109,7 @@ class OperatorSpacingSniff implements Sniff
 
         return $targets;
 
-    }//end register()
+    }
 
 
     /**
@@ -327,7 +327,7 @@ class OperatorSpacingSniff implements Sniff
             }//end if
         }//end if
 
-    }//end process()
+    }
 
 
     /**
@@ -393,7 +393,7 @@ class OperatorSpacingSniff implements Sniff
 
         return true;
 
-    }//end isOperator()
+    }
 
 
-}//end class
+}

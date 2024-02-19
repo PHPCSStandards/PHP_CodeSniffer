@@ -38,7 +38,7 @@ final class ExpandRulesetReferenceInternalTest extends AbstractRulesetTestCase
 
         $this->assertSame($expected, $ruleset->sniffCodes);
 
-    }//end testInternalRefDoesNotGetExpanded()
+    }
 
 
     /**
@@ -65,7 +65,7 @@ final class ExpandRulesetReferenceInternalTest extends AbstractRulesetTestCase
         // This assertion will only take effect for PHPUnit 10+.
         $this->assertSame($expected, $ruleset->sniffCodes);
 
-    }//end testInternalStandardIsNotSupported()
+    }
 
 
-}//end class
+}

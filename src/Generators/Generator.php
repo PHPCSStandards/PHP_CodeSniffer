@@ -71,7 +71,7 @@ abstract class Generator
         // Always present the docs in a consistent alphabetical order.
         sort($this->docFiles, (SORT_NATURAL | SORT_FLAG_CASE));
 
-    }//end __construct()
+    }
 
 
     /**
@@ -102,7 +102,7 @@ abstract class Generator
 
         return $title;
 
-    }//end getTitle()
+    }
 
 
     /**
@@ -133,7 +133,7 @@ abstract class Generator
             $this->processSniff($documentation);
         }
 
-    }//end generate()
+    }
 
 
     /**
@@ -151,4 +151,4 @@ abstract class Generator
     abstract protected function processSniff(DOMElement $doc);
 
 
-}//end class
+}

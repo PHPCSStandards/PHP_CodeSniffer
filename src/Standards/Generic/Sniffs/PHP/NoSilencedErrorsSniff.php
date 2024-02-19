@@ -39,7 +39,7 @@ class NoSilencedErrorsSniff implements Sniff
     {
         return [T_ASPERAND];
 
-    }//end register()
+    }
 
 
     /**
@@ -71,7 +71,7 @@ class NoSilencedErrorsSniff implements Sniff
             $phpcsFile->addWarning($error, $stackPtr, 'Discouraged', [$found]);
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

@@ -32,7 +32,7 @@ final class ElseIfDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -50,7 +50,7 @@ final class ElseIfDeclarationUnitTest extends AbstractSniffTestCase
             12 => 1,
         ];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

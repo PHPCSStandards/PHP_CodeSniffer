@@ -74,7 +74,7 @@ class LowerCaseConstantSniff implements Sniff
 
         return $targets;
 
-    }//end register()
+    }
 
 
     /**
@@ -189,7 +189,7 @@ class LowerCaseConstantSniff implements Sniff
         // Handle everything else.
         $this->processConstant($phpcsFile, $stackPtr);
 
-    }//end process()
+    }
 
 
     /**
@@ -228,7 +228,7 @@ class LowerCaseConstantSniff implements Sniff
             $phpcsFile->recordMetric($stackPtr, 'PHP constant case', 'lower');
         }
 
-    }//end processConstant()
+    }
 
 
-}//end class
+}

@@ -32,7 +32,7 @@ final class DiscouragedFunctionsUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -51,7 +51,7 @@ final class DiscouragedFunctionsUnitTest extends AbstractSniffTestCase
             4 => 1,
         ];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

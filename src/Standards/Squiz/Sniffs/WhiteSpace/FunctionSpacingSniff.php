@@ -54,7 +54,7 @@ class FunctionSpacingSniff implements Sniff
     {
         return [T_FUNCTION];
 
-    }//end register()
+    }
 
 
     /**
@@ -370,7 +370,7 @@ class FunctionSpacingSniff implements Sniff
             }//end if
         }//end if
 
-    }//end process()
+    }
 
 
-}//end class
+}

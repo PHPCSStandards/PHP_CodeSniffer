@@ -28,7 +28,7 @@ class ValidLogicalOperatorsSniff implements Sniff
             T_LOGICAL_OR,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -61,7 +61,7 @@ class ValidLogicalOperatorsSniff implements Sniff
         ];
         $phpcsFile->addError($error, $stackPtr, 'NotAllowed', $data);
 
-    }//end process()
+    }
 
 
-}//end class
+}

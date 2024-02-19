@@ -45,7 +45,7 @@ final class SyntaxUnitTest extends AbstractSniffTestCase
             return [];
         }
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -60,7 +60,7 @@ final class SyntaxUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
     /**
@@ -104,7 +104,7 @@ final class SyntaxUnitTest extends AbstractSniffTestCase
             'Error list does not match expected errors'
         );
 
-    }//end testStdIn()
+    }
 
 
     /**
@@ -164,7 +164,7 @@ final class SyntaxUnitTest extends AbstractSniffTestCase
             ],
         ];
 
-    }//end dataStdIn()
+    }
 
 
-}//end class
+}

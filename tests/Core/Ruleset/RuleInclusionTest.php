@@ -76,7 +76,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
             self::$ruleset = new Ruleset($config);
         }//end if
 
-    }//end setUp()
+    }
 
 
     /**
@@ -88,7 +88,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
     {
         file_put_contents(self::$standard, self::$contents);
 
-    }//end tearDown()
+    }
 
 
     /**
@@ -100,7 +100,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
     {
         $this->assertCount(49, self::$ruleset->sniffCodes);
 
-    }//end testHasSniffCodes()
+    }
 
 
     /**
@@ -118,7 +118,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
         $this->assertArrayHasKey($key, self::$ruleset->sniffCodes);
         $this->assertSame($value, self::$ruleset->sniffCodes[$key]);
 
-    }//end testRegisteredSniffCodes()
+    }
 
 
     /**
@@ -329,7 +329,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
             ],
         ];
 
-    }//end dataRegisteredSniffCodes()
+    }
 
 
     /**
@@ -352,7 +352,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
         $actualValue = self::$ruleset->sniffs[$sniffClass]->$propertyName;
         $this->assertSame($expectedValue, $actualValue);
 
-    }//end testSettingProperties()
+    }
 
 
     /**
@@ -419,7 +419,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
             ],
         ];
 
-    }//end dataSettingProperties()
+    }
 
 
     /**
@@ -438,7 +438,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
         $this->assertArrayHasKey($sniffClass, self::$ruleset->sniffs, 'Sniff class ' . $sniffClass . ' not listed in registered sniffs');
         $this->assertXObjectNotHasProperty($propertyName, self::$ruleset->sniffs[$sniffClass]);
 
-    }//end testSettingInvalidPropertiesOnStandardsAndCategoriesSilentlyFails()
+    }
 
 
     /**
@@ -469,7 +469,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
             ],
         ];
 
-    }//end dataSettingInvalidPropertiesOnStandardsAndCategoriesSilentlyFails()
+    }
 
 
-}//end class
+}

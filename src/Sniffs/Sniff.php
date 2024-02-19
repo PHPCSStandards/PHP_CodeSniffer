@@ -77,4 +77,4 @@ interface Sniff
     public function process(File $phpcsFile, int $stackPtr);
 
 
-}//end interface
+}

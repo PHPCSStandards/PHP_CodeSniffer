@@ -40,7 +40,7 @@ final class CharacterBeforePHPOpeningTagUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -55,7 +55,7 @@ final class CharacterBeforePHPOpeningTagUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

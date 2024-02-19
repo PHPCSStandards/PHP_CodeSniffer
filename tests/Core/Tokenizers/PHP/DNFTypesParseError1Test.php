@@ -44,7 +44,7 @@ final class DNFTypesParseError1Test extends AbstractTokenizerTestCase
         $this->assertSame(T_BITWISE_OR, $token['code'], 'Token tokenized as ' . $token['type'] . ', not T_BITWISE_OR (code)');
         $this->assertSame('T_BITWISE_OR', $token['type'], 'Token tokenized as ' . $token['type'] . ', not T_BITWISE_OR (type)');
 
-    }//end testBrokenDNFTypeCantEndOnOpenParenthesis()
+    }
 
 
     /**
@@ -63,7 +63,7 @@ final class DNFTypesParseError1Test extends AbstractTokenizerTestCase
             'Return type'      => ['/* testBrokenReturnDNFTypeEndOnOpenParenthesis */'],
         ];
 
-    }//end dataBrokenDNFTypeCantEndOnOpenParenthesis()
+    }
 
 
-}//end class
+}

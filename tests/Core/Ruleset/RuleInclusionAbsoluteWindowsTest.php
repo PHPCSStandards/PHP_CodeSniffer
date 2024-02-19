@@ -69,7 +69,7 @@ final class RuleInclusionAbsoluteWindowsTest extends TestCase
         $config        = new ConfigDouble(["--standard={$this->standard}"]);
         $this->ruleset = new Ruleset($config);
 
-    }//end setUp()
+    }
 
 
     /**
@@ -81,7 +81,7 @@ final class RuleInclusionAbsoluteWindowsTest extends TestCase
     {
         file_put_contents($this->standard, $this->contents);
 
-    }//end tearDown()
+    }
 
 
     /**
@@ -106,7 +106,7 @@ final class RuleInclusionAbsoluteWindowsTest extends TestCase
             $this->ruleset->sniffs['PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterCastSniff']->spacing
         );
 
-    }//end testWindowsStylePathRuleInclusion()
+    }
 
 
-}//end class
+}

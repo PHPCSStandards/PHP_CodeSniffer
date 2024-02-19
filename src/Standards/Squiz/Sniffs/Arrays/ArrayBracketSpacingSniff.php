@@ -28,7 +28,7 @@ class ArrayBracketSpacingSniff implements Sniff
             T_CLOSE_SQUARE_BRACKET,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -89,7 +89,7 @@ class ArrayBracketSpacingSniff implements Sniff
             }
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

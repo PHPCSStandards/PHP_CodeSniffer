@@ -49,7 +49,7 @@ final class ProcessRulesetCliArgsTest extends TestCase
             new Ruleset(self::$config);
         }
 
-    }//end setUp()
+    }
 
 
     /**
@@ -67,7 +67,7 @@ final class ProcessRulesetCliArgsTest extends TestCase
             self::$config->__destruct();
         }
 
-    }//end tearDownAfterClass()
+    }
 
 
     /**
@@ -89,7 +89,7 @@ final class ProcessRulesetCliArgsTest extends TestCase
     {
         $this->assertSame($expected, self::$config->{$name});
 
-    }//end testCliArgs()
+    }
 
 
     /**
@@ -153,7 +153,7 @@ final class ProcessRulesetCliArgsTest extends TestCase
             ],
         ];
 
-    }//end dataCliArgs()
+    }
 
 
     /**
@@ -174,7 +174,7 @@ final class ProcessRulesetCliArgsTest extends TestCase
 
         $this->assertSame($expected, $actual);
 
-    }//end testCliArgsWithPaths()
+    }
 
 
     /**
@@ -211,7 +211,7 @@ final class ProcessRulesetCliArgsTest extends TestCase
 
         return $data;
 
-    }//end dataCliArgsWithPaths()
+    }
 
 
     /**
@@ -233,7 +233,7 @@ final class ProcessRulesetCliArgsTest extends TestCase
 
         return str_replace(DIRECTORY_SEPARATOR, '/', $path);
 
-    }//end normalizeSlashes()
+    }
 
 
-}//end class
+}

@@ -26,7 +26,7 @@ class OperatorBracketSniff implements Sniff
     {
         return Tokens::OPERATORS;
 
-    }//end register()
+    }
 
 
     /**
@@ -241,7 +241,7 @@ class OperatorBracketSniff implements Sniff
             $this->addMissingBracketsError($phpcsFile, $stackPtr);
         }
 
-    }//end process()
+    }
 
 
     /**
@@ -364,7 +364,7 @@ class OperatorBracketSniff implements Sniff
             $phpcsFile->fixer->endChangeset();
         }
 
-    }//end addMissingBracketsError()
+    }
 
 
-}//end class
+}

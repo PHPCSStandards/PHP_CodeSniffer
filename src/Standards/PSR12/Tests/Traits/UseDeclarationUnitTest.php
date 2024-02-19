@@ -55,7 +55,7 @@ final class UseDeclarationUnitTest extends AbstractSniffTestCase
             219 => 3,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -70,7 +70,7 @@ final class UseDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

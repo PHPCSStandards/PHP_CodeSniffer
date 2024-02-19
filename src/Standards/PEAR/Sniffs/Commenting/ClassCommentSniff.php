@@ -29,7 +29,7 @@ class ClassCommentSniff extends FileCommentSniff
             T_ENUM,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -88,7 +88,7 @@ class ClassCommentSniff extends FileCommentSniff
         // Check each tag.
         $this->processTags($phpcsFile, $stackPtr, $tokens[$commentEnd]['comment_opener']);
 
-    }//end process()
+    }
 
 
     /**
@@ -116,7 +116,7 @@ class ClassCommentSniff extends FileCommentSniff
             }
         }
 
-    }//end processVersion()
+    }
 
 
-}//end class
+}

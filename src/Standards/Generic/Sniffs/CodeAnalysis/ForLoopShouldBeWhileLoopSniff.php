@@ -39,7 +39,7 @@ class ForLoopShouldBeWhileLoopSniff implements Sniff
     {
         return [T_FOR];
 
-    }//end register()
+    }
 
 
     /**
@@ -85,7 +85,7 @@ class ForLoopShouldBeWhileLoopSniff implements Sniff
             $phpcsFile->addWarning($error, $stackPtr, 'CanSimplify');
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

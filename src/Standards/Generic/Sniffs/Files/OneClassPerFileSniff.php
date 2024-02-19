@@ -25,7 +25,7 @@ class OneClassPerFileSniff implements Sniff
     {
         return [T_CLASS];
 
-    }//end register()
+    }
 
 
     /**
@@ -51,7 +51,7 @@ class OneClassPerFileSniff implements Sniff
             $phpcsFile->addError($error, $nextClass, 'MultipleFound');
         }
 
-    }//end process()
+    }
 
 
-}//end class
+}

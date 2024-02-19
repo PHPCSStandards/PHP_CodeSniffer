@@ -38,7 +38,7 @@ final class LogicalOperatorSpacingUnitTest extends AbstractSniffTestCase
             17 => 1,
         ];
 
-    }//end getErrorList()
+    }
 
 
     /**
@@ -53,7 +53,7 @@ final class LogicalOperatorSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
 
-    }//end getWarningList()
+    }
 
 
-}//end class
+}

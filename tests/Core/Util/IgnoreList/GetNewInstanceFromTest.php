@@ -36,7 +36,7 @@ final class GetNewInstanceFromTest extends TestCase
 
         $this->assertTrue($ignoreList2->isIgnored('Foo.Bar'), 'New instance ignores the same as the old one');
 
-    }//end testGetNewInstanceFrom()
+    }
 
 
-}//end class
+}

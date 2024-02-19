@@ -32,7 +32,7 @@ class IncrementDecrementUsageSniff implements Sniff
             T_DEC,
         ];
 
-    }//end register()
+    }
 
 
     /**
@@ -54,7 +54,7 @@ class IncrementDecrementUsageSniff implements Sniff
             $this->processAssignment($phpcsFile, $stackPtr);
         }
 
-    }//end process()
+    }
 
 
     /**
@@ -104,7 +104,7 @@ class IncrementDecrementUsageSniff implements Sniff
             $phpcsFile->addError($error, $stackPtr, 'NoBrackets');
         }
 
-    }//end processIncDec()
+    }
 
 
     /**
@@ -225,7 +225,7 @@ class IncrementDecrementUsageSniff implements Sniff
             $phpcsFile->addError($error, $stackPtr, 'Found');
         }//end if
 
-    }//end processAssignment()
+    }
 
 
-}//end class
+}

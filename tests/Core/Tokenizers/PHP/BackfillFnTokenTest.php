@@ -32,7 +32,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 5, 12);
 
-    }//end testSimple()
+    }
 
 
     /**
@@ -53,7 +53,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataSimple()
+    }
 
 
     /**
@@ -69,7 +69,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 6, 13);
 
-    }//end testWhitespace()
+    }
 
 
     /**
@@ -85,7 +85,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 8, 15);
 
-    }//end testComment()
+    }
 
 
     /**
@@ -101,7 +101,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 4, 9);
 
-    }//end testHeredoc()
+    }
 
 
     /**
@@ -117,7 +117,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 5, 25);
 
-    }//end testNestedOuter()
+    }
 
 
     /**
@@ -148,7 +148,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->assertSame(($token - 4), $tokens[$closer]['scope_opener'], 'Closer scope opener is not the arrow token of the "outer" arrow function (shared scope closer)');
         $this->assertSame($expectedScopeCloser, $tokens[$closer]['scope_closer'], 'Closer scope closer is not the semicolon token');
 
-    }//end testNestedInner()
+    }
 
 
     /**
@@ -183,7 +183,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->assertSame(($token - 4), $tokens[$closer]['scope_opener'], 'Closer scope opener for "inner" arrow function is not the arrow token of the "outer" arrow function (shared scope closer)');
         $this->assertSame($expectedScopeCloser, $tokens[$closer]['scope_closer'], 'Closer scope closer for "inner" arrow function is not the TRUE token');
 
-    }//end testNestedSharedCloser()
+    }
 
 
     /**
@@ -199,7 +199,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 5, 17);
 
-    }//end testFunctionCall()
+    }
 
 
     /**
@@ -215,7 +215,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 5, 12, 'bracket');
 
-    }//end testChainedFunctionCall()
+    }
 
 
     /**
@@ -231,7 +231,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 8, 15, 'comma');
 
-    }//end testFunctionArgument()
+    }
 
 
     /**
@@ -247,7 +247,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 5, 60, 'comma');
 
-    }//end testClosure()
+    }
 
 
     /**
@@ -263,7 +263,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 8, 17, 'comma');
 
-    }//end testArrayIndex()
+    }
 
 
     /**
@@ -279,7 +279,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 11, 18, 'comma');
 
-    }//end testReturnType()
+    }
 
 
     /**
@@ -295,7 +295,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 6, 9);
 
-    }//end testReference()
+    }
 
 
     /**
@@ -311,7 +311,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 5, 8);
 
-    }//end testGrouped()
+    }
 
 
     /**
@@ -327,7 +327,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 4, 9, 'comma');
 
-    }//end testArrayValue()
+    }
 
 
     /**
@@ -343,7 +343,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 4, 8, 'closing parenthesis');
 
-    }//end testArrayValueNoTrailingComma()
+    }
 
 
     /**
@@ -359,7 +359,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 5, 14);
 
-    }//end testYield()
+    }
 
 
     /**
@@ -375,7 +375,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 10, 13);
 
-    }//end testReturnTypeNullableFullyQualifiedClassName()
+    }
 
 
     /**
@@ -391,7 +391,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 10, 13);
 
-    }//end testReturnTypeNullablePartiallyQualifiedClassName()
+    }
 
 
     /**
@@ -407,7 +407,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 13, 16);
 
-    }//end testNullableUnqualifiedClassName()
+    }
 
 
     /**
@@ -423,7 +423,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 12, 15);
 
-    }//end testNamespaceRelativeClassNameInTypes()
+    }
 
 
     /**
@@ -442,7 +442,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 11, 14);
 
-    }//end testKeywordReturnTypes()
+    }
 
 
     /**
@@ -490,7 +490,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataKeywordReturnTypes()
+    }
 
 
     /**
@@ -506,7 +506,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 13, 21);
 
-    }//end testUnionParamType()
+    }
 
 
     /**
@@ -522,7 +522,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 11, 18);
 
-    }//end testUnionReturnType()
+    }
 
 
     /**
@@ -538,7 +538,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 11, 18);
 
-    }//end testUnionReturnTypeWithTrue()
+    }
 
 
     /**
@@ -554,7 +554,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 11, 18);
 
-    }//end testUnionReturnTypeWithFalse()
+    }
 
 
     /**
@@ -570,7 +570,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 13, 27);
 
-    }//end testIntersectionParamType()
+    }
 
 
     /**
@@ -586,7 +586,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 11, 19);
 
-    }//end testIntersectionReturnType()
+    }
 
 
     /**
@@ -602,7 +602,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 17, 29);
 
-    }//end testDNFParamType()
+    }
 
 
     /**
@@ -618,7 +618,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 15, 27);
 
-    }//end testDNFReturnType()
+    }
 
 
     /**
@@ -634,7 +634,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 15, 22);
 
-    }//end testDNFParamTypeWithReturnByRef()
+    }
 
 
     /**
@@ -686,7 +686,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->assertSame(($token - 24), $tokens[$closer]['scope_opener'], 'Closer scope opener for ELSE is not the arrow token of the "outer" arrow function (shared scope closer)');
         $this->assertSame($expectedScopeCloser, $tokens[$closer]['scope_closer'], 'Closer scope closer for ELSE is not the semicolon token');
 
-    }//end testTernary()
+    }
 
 
     /**
@@ -702,7 +702,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 15, 27);
 
-    }//end testTernaryWithTypes()
+    }
 
 
     /**
@@ -718,7 +718,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 5, 44);
 
-    }//end testWithMatchValue()
+    }
 
 
     /**
@@ -734,7 +734,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 5, 48);
 
-    }//end testWithMatchValueAndMore()
+    }
 
 
     /**
@@ -762,7 +762,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
 
         $this->assertSame($expectedCloserType, $tokens[($token + $closerOffset)]['type'], 'Mismatched scope closer type');
 
-    }//end testInMatchValue()
+    }
 
 
     /**
@@ -805,7 +805,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataInMatchValue()
+    }
 
 
     /**
@@ -821,7 +821,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 5, 17);
 
-    }//end testNestedInMethod()
+    }
 
 
     /**
@@ -857,7 +857,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is set');
         $this->assertArrayNotHasKey('parenthesis_closer', $tokenArray, 'Parenthesis closer is set');
 
-    }//end testNotAnArrowFunction()
+    }
 
 
     /**
@@ -927,7 +927,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
             ],
         ];
 
-    }//end dataNotAnArrowFunction()
+    }
 
 
     /**
@@ -979,7 +979,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->assertArrayHasKey('parenthesis_owner', $tokens[$closer], 'Closing parenthesis owner is not set');
         $this->assertSame($tokens[$closer]['parenthesis_owner'], $token, 'Closing parenthesis owner is not the T_FN token');
 
-    }//end backfillHelper()
+    }
 
 
     /**
@@ -1011,7 +1011,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->assertSame($expectedScopeOpener, $tokens[$closer]['scope_opener'], 'Closer scope opener is not the arrow token');
         $this->assertSame($expectedScopeCloser, $tokens[$closer]['scope_closer'], 'Closer scope closer is not the ' . $expectedCloserType . ' token');
 
-    }//end scopePositionTestHelper()
+    }
 
 
-}//end class
+}

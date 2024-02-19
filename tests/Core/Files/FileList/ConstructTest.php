@@ -62,7 +62,7 @@ final class ConstructTest extends AbstractFileListTestCase
             $i++;
         }
 
-    }//end testConstruct()
+    }
 
 
     /**
@@ -117,7 +117,7 @@ final class ConstructTest extends AbstractFileListTestCase
             ],
         ];
 
-    }//end dataConstruct()
+    }
 
 
-}//end class
+}
