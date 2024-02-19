@@ -1,0 +1,47 @@
+<documentation title="Scope Closing Brace">
+    <standard>
+    <![CDATA[
+    Closing brace indentation must match opening brace.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Closing brace indented correctly.">
+        <![CDATA[
+function foo()
+<em>{</em>
+    echo 'hi';
+}
+]]>
+        </code>
+        <code title="Invalid: Closing brace indented incorrectly.">
+        <![CDATA[
+function foo()
+{
+    echo 'hi';
+<em> }</em>
+]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    Closing brace must be on a line by itself.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Closing brace is on a line by itself.">
+        <![CDATA[
+function foo()
+{
+    echo 'hi';
+<em>}</em>
+]]>
+        </code>
+        <code title="Invalid: Closing brace is alongside other content.">
+        <![CDATA[
+function foo()
+{
+    echo 'hi';<em>}</em>
+]]>
+        </code>
+    </code_comparison>
+</documentation>
