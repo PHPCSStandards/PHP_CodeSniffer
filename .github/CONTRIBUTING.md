@@ -259,10 +259,14 @@ To help you with this, a number of convenience scripts are available:
 * `composer check-all` will run the `cs` + `test` checks in one go.
 * `composer cs` will check for code style violations.
 * `composer cbf` will run the autofixers for code style violations.
-* `composer test` will run the unit tests.
-* `composer coverage` will run the unit tests with code coverage and show a text summary.
+* `composer test` will run the unit tests when using PHP 8.1+/PHPUnit 10+.
+* `composer test-lte9` will run the unit tests when using PHP < 8.1/PHPUnit <= 9.
+* `composer coverage` will run the unit tests with code coverage and show a text summary (PHP 8.1+/PHPUnit 10+).
+* `composer coverage-lte9` will run the unit tests with code coverage and show a text summary (PHP < 8.1/PHPUnit <= 9).
 * `composer coverage-local` will run the unit tests with code coverage and generate an HTML coverage report,
-    which will be placed in a `build/coverage-html` subdirectory.
+    which will be placed in a `build/coverage-html` subdirectory (PHP 8.1+/PHPUnit 10+).
+* `composer coverage-lte9-local` will run the unit tests with code coverage and generate an HTML coverage report,
+    which will be placed in a `build/coverage-html` subdirectory (PHP < 8.1/PHPUnit <= 9).
 * `composer build` will build the phpcs.phar and phpcbf.phar files.
 
 
