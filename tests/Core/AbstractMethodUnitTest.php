@@ -55,7 +55,8 @@ abstract class AbstractMethodUnitTest extends TestCase
      */
     public static function setUpBeforeClass(): void
     {
-        $config = new ConfigDouble();
+        $_SERVER['argv'] = [];
+        $config          = new ConfigDouble();
 
         // Set to a usable value to circumvent Config trying to find a phpcs.xml config file.
         $config->standards = ['PSR1'];

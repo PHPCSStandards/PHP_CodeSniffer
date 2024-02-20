@@ -62,7 +62,9 @@ abstract class AbstractTokenizerTestCase extends TestCase
     protected function initializeFile()
     {
         if (isset($this->phpcsFile) === false) {
-            $config = new ConfigDouble();
+            $_SERVER['argv'] = [];
+            $config          = new ConfigDouble();
+
             // Also set a tab-width to enable testing tab-replaced vs `orig_content`.
             $config->tabWidth = $this->tabWidth;
 
@@ -79,7 +81,7 @@ abstract class AbstractTokenizerTestCase extends TestCase
 
             $this->phpcsFile = new DummyFile($contents, $ruleset, $config);
             $this->phpcsFile->parse();
-        }
+        }//end if
 
     }//end initializeFile()
 
