@@ -20,53 +20,43 @@ use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHP_CodeSniffer\Util\Common;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 
 abstract class AbstractSniffUnitTest extends TestCase
 {
 
     /**
-     * Enable or disable the backup and restoration of the $GLOBALS array.
-     * Overwrite this attribute in a child class of TestCase.
-     * Setting this attribute in setUp() has no effect!
+     * Cache for the Config object.
      *
-     * @var boolean
+     * @var \PHP_CodeSniffer\Tests\ConfigDouble
      */
-    protected $backupGlobals = false;
+    private static $config;
 
     /**
-     * The path to the standard's main directory.
+     * Cache for Ruleset objects.
      *
-     * @var string
+     * @var array<string, \PHP_CodeSniffer\Ruleset>
      */
-    public $standardsDir = null;
+    private static $rulesets = [];
 
     /**
-     * The path to the standard's test directory.
+     * Extensions to disregard when gathering the test files.
      *
-     * @var string
+     * @var array<string, string>
      */
-    public $testsDir = null;
-
-
-    /**
-     * Sets up this unit test.
-     *
-     * @return void
-     */
-    protected function setUp(): void
-    {
-        $class = get_class($this);
-        $this->standardsDir = $GLOBALS['PHP_CODESNIFFER_STANDARD_DIRS'][$class];
-        $this->testsDir     = $GLOBALS['PHP_CODESNIFFER_TEST_DIRS'][$class];
-
-    }//end setUp()
+    private $ignoreExtensions = [
+        'php'   => 'php',
+        'fixed' => 'fixed',
+        'bak'   => 'bak',
+        'orig'  => 'orig',
+    ];
 
 
     /**
      * Get a list of all test files to check.
      *
      * These will have the same base as the sniff name but different extensions.
-     * We ignore the .php file as it is the class.
+     * We ignore the .php file as it is the test class.
      *
      * @param string $testFileBase The base path that the unit tests files will have.
      *
@@ -76,13 +66,14 @@ abstract class AbstractSniffUnitTest extends TestCase
     {
         $testFiles = [];
 
-        $dir = substr($testFileBase, 0, strrpos($testFileBase, DIRECTORY_SEPARATOR));
+        $dir = dirname($testFileBase);
         $di  = new DirectoryIterator($dir);
 
         foreach ($di as $file) {
             $path = $file->getPathname();
             if (substr($path, 0, strlen($testFileBase)) === $testFileBase) {
-                if ($path !== $testFileBase.'php' && substr($path, -5) !== 'fixed' && substr($path, -4) !== '.bak') {
+                $extension = $file->getExtension();
+                if (isset($this->ignoreExtensions[$extension]) === false) {
                     $testFiles[] = $path;
                 }
             }
@@ -121,39 +112,41 @@ abstract class AbstractSniffUnitTest extends TestCase
             $this->markTestSkipped();
         }
 
-        $sniffCode = Common::getSniffCode(get_class($this));
-        list($standardName, $categoryName, $sniffName) = explode('.', $sniffCode);
+        $sniffCode      = Common::getSniffCode(get_class($this));
+        $sniffCodeParts = explode('.', $sniffCode);
+        $standardName   = $sniffCodeParts[0];
 
-        $testFileBase = $this->testsDir.$categoryName.DIRECTORY_SEPARATOR.$sniffName.'UnitTest.';
+        $testFileBase = (new ReflectionClass(static::class))->getFileName();
+        $testFileBase = substr($testFileBase, 0, -3);
 
         // Get a list of all test files to check.
         $testFiles = $this->getTestFiles($testFileBase);
-        $GLOBALS['PHP_CODESNIFFER_SNIFF_CASE_FILES'][] = $testFiles;
 
-        if (isset($GLOBALS['PHP_CODESNIFFER_CONFIG']) === true) {
-            $config = $GLOBALS['PHP_CODESNIFFER_CONFIG'];
+        if (isset(self::$config) === true) {
+            $config = self::$config;
         } else {
             $config        = new ConfigDouble();
             $config->cache = false;
-            $GLOBALS['PHP_CODESNIFFER_CONFIG'] = $config;
+            self::$config  = $config;
         }
 
         $config->standards = [$standardName];
         $config->sniffs    = [$sniffCode];
         $config->ignored   = [];
 
-        if (isset($GLOBALS['PHP_CODESNIFFER_RULESETS']) === false) {
-            $GLOBALS['PHP_CODESNIFFER_RULESETS'] = [];
-        }
-
-        if (isset($GLOBALS['PHP_CODESNIFFER_RULESETS'][$standardName]) === false) {
+        if (isset(self::$rulesets[$standardName]) === false) {
             $ruleset = new Ruleset($config);
-            $GLOBALS['PHP_CODESNIFFER_RULESETS'][$standardName] = $ruleset;
+            self::$rulesets[$standardName] = $ruleset;
         }
 
-        $ruleset = $GLOBALS['PHP_CODESNIFFER_RULESETS'][$standardName];
+        $ruleset = self::$rulesets[$standardName];
 
-        $sniffFile = $this->standardsDir.DIRECTORY_SEPARATOR.'Sniffs'.DIRECTORY_SEPARATOR.$categoryName.DIRECTORY_SEPARATOR.$sniffName.'Sniff.php';
+        $sniffFile = preg_replace('`[/\\\\]Tests[/\\\\]`', DIRECTORY_SEPARATOR.'Sniffs'.DIRECTORY_SEPARATOR, $testFileBase);
+        $sniffFile = str_replace('UnitTest.', 'Sniff.php', $sniffFile);
+
+        if (file_exists($sniffFile) === false) {
+            $this->fail(sprintf('ERROR: Sniff file %s for test %s does not appear to exist', $sniffFile, static::class));
+        }
 
         $sniffClassName = substr(get_class($this), 0, -8).'Sniff';
         $sniffClassName = str_replace('\Tests\\', '\Sniffs\\', $sniffClassName);
@@ -269,17 +262,6 @@ abstract class AbstractSniffUnitTest extends TestCase
                 $errorsTemp = [];
                 foreach ($errors as $foundError) {
                     $errorsTemp[] = $foundError['message'].' ('.$foundError['source'].')';
-
-                    $source = $foundError['source'];
-                    if (in_array($source, $GLOBALS['PHP_CODESNIFFER_SNIFF_CODES'], true) === false) {
-                        $GLOBALS['PHP_CODESNIFFER_SNIFF_CODES'][] = $source;
-                    }
-
-                    if ($foundError['fixable'] === true
-                        && in_array($source, $GLOBALS['PHP_CODESNIFFER_FIXABLE_CODES'], true) === false
-                    ) {
-                        $GLOBALS['PHP_CODESNIFFER_FIXABLE_CODES'][] = $source;
-                    }
                 }
 
                 $allProblems[$line]['found_errors'] = array_merge($foundErrorsTemp, $errorsTemp);
@@ -326,17 +308,6 @@ abstract class AbstractSniffUnitTest extends TestCase
                 $warningsTemp = [];
                 foreach ($warnings as $warning) {
                     $warningsTemp[] = $warning['message'].' ('.$warning['source'].')';
-
-                    $source = $warning['source'];
-                    if (in_array($source, $GLOBALS['PHP_CODESNIFFER_SNIFF_CODES'], true) === false) {
-                        $GLOBALS['PHP_CODESNIFFER_SNIFF_CODES'][] = $source;
-                    }
-
-                    if ($warning['fixable'] === true
-                        && in_array($source, $GLOBALS['PHP_CODESNIFFER_FIXABLE_CODES'], true) === false
-                    ) {
-                        $GLOBALS['PHP_CODESNIFFER_FIXABLE_CODES'][] = $source;
-                    }
                 }
 
                 $allProblems[$line]['found_warnings'] = array_merge($foundWarningsTemp, $warningsTemp);

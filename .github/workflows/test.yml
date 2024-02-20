@@ -204,11 +204,11 @@ jobs:
 
       - name: 'PHPUnit: run the full test suite without code coverage'
         if: ${{ matrix.skip_tests != true }}
-        run: php "vendor/bin/phpunit" tests/AllTests.php --no-coverage
+        run: php "vendor/bin/phpunit" --no-coverage
 
       - name: 'PHPUnit: run select tests in CBF mode'
         if: ${{ matrix.skip_tests != true }}
-        run: php "vendor/bin/phpunit" tests/AllTests.php --group CBF --exclude-group nothing --no-coverage
+        run: php "vendor/bin/phpunit" --group CBF --exclude-group nothing --no-coverage
         env:
           PHP_CODESNIFFER_CBF: '1'
 
@@ -307,13 +307,13 @@ jobs:
       - name: "Run the unit tests with code coverage"
         if: ${{ matrix.os != 'windows-latest' }}
         run: >
-          php "vendor/bin/phpunit" tests/AllTests.php
+          php "vendor/bin/phpunit"
           ${{ steps.phpunit_version.outputs.VERSION >= '9.3' && '--coverage-cache ./build/phpunit-cache' || '' }}
 
       - name: "Run select tests in CBF mode with code coverage"
         if: ${{ matrix.os != 'windows-latest' }}
         run: >
-          php "vendor/bin/phpunit" tests/AllTests.php
+          php "vendor/bin/phpunit"
           ${{ steps.phpunit_version.outputs.VERSION >= '9.3' && '--coverage-cache ./build/phpunit-cache' || '' }}
           --group CBF --exclude-group nothing --coverage-clover build/logs/clover-cbf.xml
         env:
@@ -322,7 +322,7 @@ jobs:
       - name: "Run the unit tests which may have different outcomes on Windows with code coverage"
         if: ${{ matrix.os == 'windows-latest' }}
         run: >
-          php "vendor/bin/phpunit" tests/AllTests.php --group Windows
+          php "vendor/bin/phpunit" --group Windows
           ${{ steps.phpunit_version.outputs.VERSION >= '9.3' && '--coverage-cache ./build/phpunit-cache' || '' }}
 
       - name: "Upload coverage results to Coveralls (normal run)"

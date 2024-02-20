@@ -7,6 +7,10 @@
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
+use PHP_CodeSniffer\Autoload;
+use PHP_CodeSniffer\Util\Standards;
+use PHP_CodeSniffer\Util\Tokens;
+
 if (defined('PHP_CODESNIFFER_IN_TESTS') === false) {
     define('PHP_CODESNIFFER_IN_TESTS', true);
 }
@@ -40,43 +44,10 @@ if (defined('PHP_CODESNIFFER_VERBOSITY') === false) {
 
 require_once __DIR__.'/../autoload.php';
 
-$tokens = new \PHP_CodeSniffer\Util\Tokens();
+// Make sure all installed standards are autoloadable.
+$installedStandards = Standards::getInstalledStandardDetails();
+foreach ($installedStandards as $standardDetails) {
+    Autoload::addSearchPath($standardDetails['path'], $standardDetails['namespace']);
+}
 
-
-/**
- * A global util function to help print unit test fixing data.
- *
- * @return void
- */
-function printPHPCodeSnifferTestOutput()
-{
-    echo PHP_EOL.PHP_EOL;
-
-    $output = 'The test files';
-    $data   = [];
-
-    $codeCount = count($GLOBALS['PHP_CODESNIFFER_SNIFF_CODES']);
-    if (empty($GLOBALS['PHP_CODESNIFFER_SNIFF_CASE_FILES']) === false) {
-        $files     = call_user_func_array('array_merge', $GLOBALS['PHP_CODESNIFFER_SNIFF_CASE_FILES']);
-        $files     = array_unique($files);
-        $fileCount = count($files);
-
-        $output = '%d sniff test files';
-        $data[] = $fileCount;
-    }
-
-    $output .= ' generated %d unique error codes';
-    $data[]  = $codeCount;
-
-    if ($codeCount > 0) {
-        $fixes   = count($GLOBALS['PHP_CODESNIFFER_FIXABLE_CODES']);
-        $percent = round(($fixes / $codeCount * 100), 2);
-
-        $output .= '; %d were fixable (%d%%)';
-        $data[]  = $fixes;
-        $data[]  = $percent;
-    }
-
-    vprintf($output, $data);
-
-}//end printPHPCodeSnifferTestOutput()
+$tokens = new Tokens();

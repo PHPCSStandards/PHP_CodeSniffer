@@ -59,15 +59,15 @@
         ],
         "test": [
             "Composer\\Config::disableProcessTimeout",
-            "@php ./vendor/phpunit/phpunit/phpunit tests/AllTests.php --no-coverage"
+            "@php ./vendor/phpunit/phpunit/phpunit --no-coverage"
         ],
         "coverage": [
             "Composer\\Config::disableProcessTimeout",
-            "@php ./vendor/phpunit/phpunit/phpunit tests/AllTests.php -d max_execution_time=0"
+            "@php ./vendor/phpunit/phpunit/phpunit -d max_execution_time=0"
         ],
         "coverage-local": [
             "Composer\\Config::disableProcessTimeout",
-            "@php ./vendor/phpunit/phpunit/phpunit tests/AllTests.php --coverage-html ./build/coverage-html -d max_execution_time=0"
+            "@php ./vendor/phpunit/phpunit/phpunit --coverage-html ./build/coverage-html -d max_execution_time=0"
         ],
         "build": [
             "Composer\\Config::disableProcessTimeout",
