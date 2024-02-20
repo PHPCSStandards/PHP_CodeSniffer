@@ -73,7 +73,7 @@ abstract class AbstractMethodUnitTest extends TestCase
         $contents .= file_get_contents($pathToTestFile);
 
         self::$phpcsFile = new DummyFile($contents, $ruleset, $config);
-        self::$phpcsFile->process();
+        self::$phpcsFile->parse();
 
     }//end initializeFile()
 
