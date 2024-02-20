@@ -21,3 +21,4 @@ phpunit.xml.dist  export-ignore
 *WinTest.inc text eol=crlf
 *WinTest.php text eol=crlf
 src/Standards/Generic/Tests/Files/LineEndingsUnitTest*.inc text eol=crlf
+tests/Core/Fixer/Fixtures/GenerateDiffTest-WindowsLineEndings.inc text eol=crlf
