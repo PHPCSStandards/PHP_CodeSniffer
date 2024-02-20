@@ -57,7 +57,8 @@ abstract class AbstractMethodUnitTest extends TestCase
      */
     public static function initializeFile()
     {
-        $config = new ConfigDouble();
+        $_SERVER['argv'] = [];
+        $config          = new ConfigDouble();
         // Also set a tab-width to enable testing tab-replaced vs `orig_content`.
         $config->tabWidth = static::$tabWidth;
 
