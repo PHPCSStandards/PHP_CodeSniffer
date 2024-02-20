@@ -78,7 +78,7 @@ abstract class AbstractTokenizerTestCase extends TestCase
             $contents .= file_get_contents($pathToTestFile);
 
             $this->phpcsFile = new DummyFile($contents, $ruleset, $config);
-            $this->phpcsFile->process();
+            $this->phpcsFile->parse();
         }
 
     }//end initializeFile()
