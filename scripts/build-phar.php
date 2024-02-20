@@ -107,8 +107,8 @@ foreach ($scripts as $script) {
     $srcDir    = realpath(__DIR__.'/../src');
     $srcDirLen = strlen($srcDir);
 
-    $rdi = new \RecursiveDirectoryIterator($srcDir, \RecursiveDirectoryIterator::FOLLOW_SYMLINKS);
-    $di  = new \RecursiveIteratorIterator($rdi, 0, \RecursiveIteratorIterator::CATCH_GET_CHILD);
+    $rdi = new RecursiveDirectoryIterator($srcDir, RecursiveDirectoryIterator::FOLLOW_SYMLINKS);
+    $di  = new RecursiveIteratorIterator($rdi, 0, RecursiveIteratorIterator::CATCH_GET_CHILD);
 
     $config    = new Config();
     $fileCount = 0;
