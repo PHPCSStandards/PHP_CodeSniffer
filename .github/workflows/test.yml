@@ -4,13 +4,13 @@ on:
   # Run on pushes to `master` and on all pull requests.
   # Prevent the build from running when there are only irrelevant changes.
   push:
-    branches:
-      - master
-      - 4.0
-    tags:
-      - '**'
-    paths-ignore:
-      - '**.md'
+#    branches:
+#      - master
+#      - 4.0
+#    tags:
+#      - '**'
+#    paths-ignore:
+#      - '**.md'
   pull_request:
   # Allow manually triggering the workflow.
   workflow_dispatch:
