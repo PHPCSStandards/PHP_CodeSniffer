@@ -164,7 +164,7 @@ jobs:
         include:
           - php: '7.2'
             custom_ini: false
-          - php: '8.1'
+          - php: '8.0'
             custom_ini: true
           - php: '8.3'
             custom_ini: false
