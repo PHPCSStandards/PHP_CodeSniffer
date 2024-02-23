@@ -1117,7 +1117,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - The double arrow becomes the scope opener, and uses a new T_FN_ARROW token type
     - The token after the statement (normally a semicolon) becomes the scope closer
     - The token is also associated with the opening and closing parenthesis of the statement
-    - Any functions named "fn" will cause have a T_FN token for the function name, but have no scope information
+    - Any functions named "fn" will have a T_FN token for the function name, but have no scope information
     - Thanks to [Michał Bundyra][@michalbundyra] for the help with this change
 - PHP 7.4 numeric separators are now tokenized in the same way when using older PHP versions
     - Previously, a number like 1_000 would tokenize as T_LNUMBER (1), T_STRING (_000)
@@ -1153,24 +1153,34 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Michał Bundyra][@michalbundyra] for the patch
 
 ### Fixed
-- Fixed bug #2586 : Generic.WhiteSpace.ScopeIndent false positives when indenting open tags at a non tab-stop
-- Fixed bug #2638 : Squiz.CSS.DuplicateClassDefinitionSniff sees comments as part of the class name
+- Fixed bug [#2586] : Generic.WhiteSpace.ScopeIndent false positives when indenting open tags at a non tab-stop
+- Fixed bug [#2638] : Squiz.CSS.DuplicateClassDefinitionSniff sees comments as part of the class name
     - Thanks to [Raphael Horber][@rhorber] for the patch
-- Fixed bug #2640 : Squiz.WhiteSpace.OperatorSpacing false positives for some negation operators
+- Fixed bug [#2640] : Squiz.WhiteSpace.OperatorSpacing false positives for some negation operators
     - Thanks to [Jakub Chábek][@grongor] and [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2674 : Squiz.Functions.FunctionDeclarationArgumentSpacing prints wrong argument name in error message
-- Fixed bug #2676 : PSR12.Files.FileHeader locks up when file ends with multiple inline comments
-- Fixed bug #2678 : PSR12.Classes.AnonClassDeclaration incorrectly enforcing that closing brace be on a line by itself
-- Fixed bug #2685 : File::getMethodParameters() setting typeHintEndToken for vars with no type hint
+- Fixed bug [#2674] : Squiz.Functions.FunctionDeclarationArgumentSpacing prints wrong argument name in error message
+- Fixed bug [#2676] : PSR12.Files.FileHeader locks up when file ends with multiple inline comments
+- Fixed bug [#2678] : PSR12.Classes.AnonClassDeclaration incorrectly enforcing that closing brace be on a line by itself
+- Fixed bug [#2685] : File::getMethodParameters() setting typeHintEndToken for vars with no type hint
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2694 : AbstractArraySniff produces invalid indices when using ternary operator
+- Fixed bug [#2694] : AbstractArraySniff produces invalid indices when using ternary operator
     - Thanks to [Michał Bundyra][@michalbundyra] for the patch
-- Fixed bug #2702 : Generic.WhiteSpace.ScopeIndent false positive when using ternary operator with short arrays
+- Fixed bug [#2702] : Generic.WhiteSpace.ScopeIndent false positive when using ternary operator with short arrays
+
+[#2586]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2586
+[#2638]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2638
+[#2640]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2640
+[#2674]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2674
+[#2676]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2676
+[#2678]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2678
+[#2685]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2685
+[#2694]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2694
+[#2702]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2702
 
 ## [3.5.2] - 2019-10-28
 ### Changed
 - Generic.ControlStructures.DisallowYodaConditions now returns less false positives
-    - False positives were being returned for array comparisions, or when performing some function calls
+    - False positives were being returned for array comparisons, or when performing some function calls
 - Squiz.WhiteSpace.SemicolonSpacing.Incorrect error message now escapes newlines and tabs
     - Provides a clearer error message as whitespace is now visible
     - Also allows for better output for report types such as CSV and XML
@@ -1179,13 +1189,20 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Craig Duncan][@duncan3dc] for the patch
 
 ### Fixed
-- Fixed bug #2654 : Incorrect indentation for arguments of multiline function calls
-- Fixed bug #2656 : Squiz.WhiteSpace.MemberVarSpacing removes comments before first member var during auto fixing
+- Fixed bug [#2654] : Incorrect indentation for arguments of multiline function calls
+- Fixed bug [#2656] : Squiz.WhiteSpace.MemberVarSpacing removes comments before first member var during auto fixing
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2663 : Generic.NamingConventions.ConstructorName complains about old constructor in interfaces
-- Fixed bug #2664 : PSR12.Files.OpenTag incorrectly identifies PHP file with only an opening tag
-- Fixed bug #2665 : PSR12.Files.ImportStatement should not apply to traits
-- Fixed bug #2673 : PSR12.Traits.UseDeclaration does not allow comments or blank lines between use statements
+- Fixed bug [#2663] : Generic.NamingConventions.ConstructorName complains about old constructor in interfaces
+- Fixed bug [#2664] : PSR12.Files.OpenTag incorrectly identifies PHP file with only an opening tag
+- Fixed bug [#2665] : PSR12.Files.ImportStatement should not apply to traits
+- Fixed bug [#2673] : PSR12.Traits.UseDeclaration does not allow comments or blank lines between use statements
+
+[#2654]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2654
+[#2656]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2656
+[#2663]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2663
+[#2664]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2664
+[#2665]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2665
+[#2673]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2673
 
 ## [3.5.1] - 2019-10-17
 ### Changed
