@@ -201,6 +201,9 @@ jobs:
           # Bust the cache at least once a month - output format: YYYY-MM.
           custom-cache-suffix: $(date -u "+%Y-%m")
 
+      - name: "DEBUG: Show installed dependencies"
+        run: composer info
+
       - name: Grab PHPUnit version
         id: phpunit_version
         # yamllint disable-line rule:line-length
