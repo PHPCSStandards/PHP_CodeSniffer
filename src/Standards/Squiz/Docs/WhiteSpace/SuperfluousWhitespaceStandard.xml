@@ -1,21 +1,21 @@
 <documentation title="Superfluous Whitespace">
     <standard>
     <![CDATA[
-    There should be no extra whitespace at the start of a file.
+    There should be no superfluous whitespace at the start of a file.
     ]]>
     </standard>
     <code_comparison>
         <code title="Valid: No whitespace preceding first content in file.">
         <![CDATA[<?php
-echo 'hi';
-]]>
+echo 'opening PHP tag at start of file';
+        ]]>
         </code>
         <code title="Invalid: Whitespace used before content in file.">
         <![CDATA[
-        <em></em>
+<em>        </em>
 <?php
-echo 'hi';
-]]>
+echo 'whitespace before opening PHP tag';
+        ]]>
         </code>
     </code_comparison>
     <standard>
@@ -26,13 +26,13 @@ echo 'hi';
     <code_comparison>
         <code title="Valid: No whitespace found at end of line.">
         <![CDATA[
-echo 'hello';
-]]>
+echo 'semicolon followed by new linechar';
+        ]]>
         </code>
         <code title="Invalid: Whitespace found at end of line.">
         <![CDATA[
-echo 'hello';<em>   </em>
-]]>
+echo 'trailing spaces after semicolon';<em>   </em>
+        ]]>
         </code>
     </code_comparison>
     <standard>
@@ -49,7 +49,7 @@ function myFunction()
 
     echo 'code here';
 }
-]]>
+        ]]>
         </code>
         <code title="Invalid: Functions contain multiple empty lines in a row.">
         <![CDATA[
@@ -60,7 +60,40 @@ function myFunction()
 
     </em>echo 'code here';
 }
-]]>
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There should be no superfluous whitespace at the end of a file.
+    A single final newline is allowed. A closing PHP tag is optional and ignored.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: A single newline appears after the last content in the file.">
+        <![CDATA[
+function myFunction()
+{
+    echo 'closing curly brace, 1 newline';
+    echo 'optional closing PHP tag';
+    echo 'then EOF';
+}<em>
+</em>
+?>
+        ]]>
+        </code>
+        <code title="Invalid: Multiple newlines appear after the last content in the file.">
+        <![CDATA[
+function myFunction()
+{
+    echo 'closing curly brace, 2 newlines';
+    echo 'optional closing PHP tag';
+    echo 'then EOF';
+}<em>
+
+</em>
+?>
+        ]]>
         </code>
     </code_comparison>
 </documentation>
