@@ -15,8 +15,6 @@ declare(encoding='UTF-8', <em>strict_types=0</em>);
         <code title="Invalid: Missing strict_types declaration.">
         <![CDATA[
 declare(encoding='ISO-8859-1'<em></em>);
-
-declare(ticks=1<em></em>);
         ]]>
         </code>
     </code_comparison>
@@ -28,7 +26,7 @@ declare(ticks=1<em></em>);
     <code_comparison>
         <code title="Valid: strict_types declaration is enabled.">
         <![CDATA[
-declare(<em>strict_types=1</em>);
+declare(strict_types=<em>1</em>);
         ]]>
         </code>
         <code title="Invalid: strict_types declaration is disabled.">
