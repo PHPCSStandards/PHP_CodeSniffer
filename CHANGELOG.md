@@ -1214,26 +1214,39 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - This check has been missing from these standards, but has now been implemented
     - When using the PEAR standard, the error code is PEAR.Functions.FunctionCallSignature.FirstArgumentPosition
     - When using PSR2 or PSR12, the error code is PSR2.Methods.FunctionCallSignature.FirstArgumentPosition
-- PSR12.ControlStructures.BooleanOperatorPlacement no longer complains when multiple expression appears on the same line
-    - Previously, boolean operators were enforce to appear at the start or end of lines only
+- PSR12.ControlStructures.BooleanOperatorPlacement no longer complains when multiple expressions appear on the same line
+    - Previously, boolean operators were enforced to appear at the start or end of lines only
     - Boolean operators can now appear in the middle of the line
 - PSR12.Files.FileHeader no longer ignores comments preceding a use, namespace, or declare statement
 - PSR12.Files.FileHeader now allows a hashbang line at the top of the file
 
 ### Fixed
-- Fixed bug #2506 : PSR2 standard can't auto fix multi-line function call inside a string concat statement
-- Fixed bug #2530 : PEAR.Commenting.FunctionComment does not support intersection types in comments
-- Fixed bug #2615 : Constant visibility false positive on non-class constants
-- Fixed bug #2616 : PSR12.Files.FileHeader false positive when file only contains docblock
-- Fixed bug #2619 : PSR12.Files.FileHeader locks up when inline comment is the last content in a file
-- Fixed bug #2621 : PSR12.Classes.AnonClassDeclaration.CloseBraceSameLine false positive for anon class passed as function argument
+- Fixed bug [#2506] : PSR2 standard can't auto fix multi-line function call inside a string concat statement
+- Fixed bug [#2530] : PEAR.Commenting.FunctionComment does not support intersection types in comments
+- Fixed bug [#2615] : Constant visibility false positive on non-class constants
+- Fixed bug [#2616] : PSR12.Files.FileHeader false positive when file only contains docblock
+- Fixed bug [#2619] : PSR12.Files.FileHeader locks up when inline comment is the last content in a file
+- Fixed bug [#2621] : PSR12.Classes.AnonClassDeclaration.CloseBraceSameLine false positive for anon class passed as function argument
     - Thanks to [Martins Sipenko][@martinssipenko] for the patch
-- Fixed bug #2623 : PSR12.ControlStructures.ControlStructureSpacing not ignoring indentation inside multi-line string arguments
-- Fixed bug #2624 : PSR12.Traits.UseDeclaration doesnt apply the correct indent during auto fixing
-- Fixed bug #2626 : PSR12.Files.FileHeader detects @var annotations as file docblocks
-- Fixed bug #2628 : PSR12.Traits.UseDeclaration does not allow comments above a USE declaration
-- Fixed bug #2632 : Incorrect indentation of lines starting with "static" inside closures
-- Fixed bug #2641 : PSR12.Functions.NullableTypeDeclaration false positive when using new static()
+- Fixed bug [#2623] : PSR12.ControlStructures.ControlStructureSpacing not ignoring indentation inside multi-line string arguments
+- Fixed bug [#2624] : PSR12.Traits.UseDeclaration doesnt apply the correct indent during auto fixing
+- Fixed bug [#2626] : PSR12.Files.FileHeader detects @var annotations as file docblocks
+- Fixed bug [#2628] : PSR12.Traits.UseDeclaration does not allow comments above a USE declaration
+- Fixed bug [#2632] : Incorrect indentation of lines starting with "static" inside closures
+- Fixed bug [#2641] : PSR12.Functions.NullableTypeDeclaration false positive when using new static()
+
+[#2506]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2506
+[#2530]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2530
+[#2615]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2615
+[#2616]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2616
+[#2619]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2619
+[#2621]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2621
+[#2623]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2623
+[#2624]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2624
+[#2626]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2626
+[#2628]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2628
+[#2632]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2632
+[#2641]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2641
 
 ## [3.5.0] - 2019-09-27
 ### Changed
@@ -1259,11 +1272,11 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - The tokenizer now correctly identifies inline control structures in more cases
 - All helper methods inside the File class now throw RuntimeException instead of TokenizerException
-    - Some tokenizer methods were also throwing RuntimeExpection but now correctly throw TokenizerException
+    - Some tokenizer methods were also throwing RuntimeException but now correctly throw TokenizerException
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - The File::getMethodParameters() method now returns more information, and supports closure USE groups
     - If a type hint is specified, the position of the last token in the hint will be set in a "type_hint_end_token" array index
-    - If a default is specified, the position of the first token in the default value will be set in a "default_token" array   index
+    - If a default is specified, the position of the first token in the default value will be set in a "default_token" array index
     - If a default is specified, the position of the equals sign will be set in a "default_equal_token" array index
     - If the param is not the last, the position of the comma will be set in a "comma_token" array index
     - If the param is passed by reference, the position of the reference operator will be set in a "reference_token" array index
@@ -1323,9 +1336,9 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Use the Squiz.WhiteSpace.OperatorSpacing sniff to enforce spacing around assignment operators
         - Note that this sniff checks spacing around all assignment operators, not just inside function calls
     - The Generic.Functions.FunctionCallArgumentSpacing.NoSpaceBeforeEquals error has been removed
-        - use Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore instead
+        - Use Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore instead
     - The Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterEquals error has been removed
-        - use Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter instead
+        - Use Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter instead
     - This also changes the PEAR/PSR2/PSR12 standards so they no longer check assignment operators inside function calls
         - They were previously checking these operators when they should not have
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
@@ -1353,7 +1366,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Squiz.Operators.IncrementDecrementUsage now suggests pre-increment of variables instead of post-increment
     - This change does not enforce pre-increment over post-increment; only the suggestion has changed
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Squiz.PHP.DisallowMultipleAssignments now has a second error code for when assignments are found inside control structure   conditions
+- Squiz.PHP.DisallowMultipleAssignments now has a second error code for when assignments are found inside control structure conditions
     - The new error code is Squiz.PHP.DisallowMultipleAssignments.FoundInControlStructure
     - All other multiple assignment cases use the existing error code Squiz.PHP.DisallowMultipleAssignments.Found
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
@@ -1371,40 +1384,63 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Jakub Chábek][@grongor] for the patch
 
 ### Fixed
-- Fixed bug #2391 : Sniff-specific ignore rules inside rulesets are filtering out too many files
+- Fixed bug [#2391] : Sniff-specific ignore rules inside rulesets are filtering out too many files
     - Thanks to [Juliette Reinders Folmer][@jrfnl] and [Willington Vega][@wvega] for the patch
-- Fixed bug #2478 : FunctionCommentThrowTag.WrongNumber when exception is thrown once but built conditionally
-- Fixed bug #2479 : Generic.WhiteSpace.ScopeIndent error when using array destructing with exact indent checking
-- Fixed bug #2498 : Squiz.Arrays.ArrayDeclaration.MultiLineNotAllowed autofix breaks heredoc
-- Fixed bug #2502 : Generic.WhiteSpace.ScopeIndent false positives with nested switch indentation and case fall-through
-- Fixed bug #2504 : Generic.WhiteSpace.ScopeIndent false positives with nested arrays and nowdoc string
-- Fixed bug #2511 : PSR2 standard not checking if closing paren of single-line function declaration is on new line
-- Fixed bug #2512 : Squiz.PHP.NonExecutableCode does not support alternate SWITCH control structure
+- Fixed bug [#2478] : FunctionCommentThrowTag.WrongNumber when exception is thrown once but built conditionally
+- Fixed bug [#2479] : Generic.WhiteSpace.ScopeIndent error when using array destructing with exact indent checking
+- Fixed bug [#2498] : Squiz.Arrays.ArrayDeclaration.MultiLineNotAllowed autofix breaks heredoc
+- Fixed bug [#2502] : Generic.WhiteSpace.ScopeIndent false positives with nested switch indentation and case fall-through
+- Fixed bug [#2504] : Generic.WhiteSpace.ScopeIndent false positives with nested arrays and nowdoc string
+- Fixed bug [#2511] : PSR2 standard not checking if closing paren of single-line function declaration is on new line
+- Fixed bug [#2512] : Squiz.PHP.NonExecutableCode does not support alternate SWITCH control structure
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2522 : Text generator throws error when code sample line is too long
+- Fixed bug [#2522] : Text generator throws error when code sample line is too long
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2526 : XML report format has bad syntax on Windows
+- Fixed bug [#2526] : XML report format has bad syntax on Windows
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2529 : Generic.Formatting.MultipleStatementAlignment wrong error for assign in string concat
-- Fixed bug #2534 : Unresolvable installed_paths can lead to open_basedir errors
+- Fixed bug [#2529] : Generic.Formatting.MultipleStatementAlignment wrong error for assign in string concat
+- Fixed bug [#2534] : Unresolvable installed_paths can lead to open_basedir errors
     - Thanks to [Oliver Nowak][@ndm2] for the patch
-- Fixed bug #2541 : Text doc generator does not allow for multi-line rule explanations
+- Fixed bug [#2541] : Text doc generator does not allow for multi-line rule explanations
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2549 : Searching for a phpcs.xml file can throw warnings due to open_basedir restrictions
+- Fixed bug [#2549] : Searching for a phpcs.xml file can throw warnings due to open_basedir restrictions
     - Thanks to [Matthew Peveler][@MasterOdin] for the patch
-- Fixed bug #2558 : PHP 7.4 throwing offset syntax with curly braces is deprecated message
+- Fixed bug [#2558] : PHP 7.4 throwing offset syntax with curly braces is deprecated message
     - Thanks to [Matthew Peveler][@MasterOdin] for the patch
-- Fixed bug #2561 : PHP 7.4 compatibility fix / implode argument order
+- Fixed bug [#2561] : PHP 7.4 compatibility fix / implode argument order
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2562 : Inline WHILE triggers SpaceBeforeSemicolon incorrectly
+- Fixed bug [#2562] : Inline WHILE triggers SpaceBeforeSemicolon incorrectly
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2565 : Generic.ControlStructures.InlineControlStructure confused by mixed short/long tags
+- Fixed bug [#2565] : Generic.ControlStructures.InlineControlStructure confused by mixed short/long tags
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2566 : Author tag email validation doesn't support all TLDs
+- Fixed bug [#2566] : Author tag email validation doesn't support all TLDs
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2575 : Custom error messages don't have data replaced when cache is enabled
-- Fixed bug #2601 : Squiz.WhiteSpace.FunctionSpacing incorrect fix when spacing is 0
-- Fixed bug #2608 : PSR2 throws errors for use statements when multiple namespaces are defined in a file
+- Fixed bug [#2575] : Custom error messages don't have data replaced when cache is enabled
+- Fixed bug [#2601] : Squiz.WhiteSpace.FunctionSpacing incorrect fix when spacing is 0
+- Fixed bug [#2608] : PSR2 throws errors for use statements when multiple namespaces are defined in a file
+
+[#2391]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2391
+[#2478]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2478
+[#2479]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2479
+[#2498]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2498
+[#2502]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2502
+[#2504]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2504
+[#2511]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2511
+[#2512]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2512
+[#2522]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2522
+[#2526]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2526
+[#2529]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2529
+[#2534]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2534
+[#2541]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2541
+[#2549]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2549
+[#2558]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2558
+[#2561]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2561
+[#2562]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2562
+[#2565]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2565
+[#2566]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2566
+[#2575]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2575
+[#2601]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2601
+[#2608]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2608
 
 ## [3.4.2] - 2019-04-11
 ### Changed
