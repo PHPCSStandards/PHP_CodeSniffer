@@ -1001,23 +1001,37 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ### Fixed
 - Error wording in PEAR.Functions.FunctionCallSignature now always uses "parenthesis" instead of sometimes using "bracket"
     - Thanks to [Vincent Langlet][@VincentLanglet] for the patch
-- Fixed bug #2787 : Squiz.PHP.DisallowMultipleAssignments not ignoring typed property declarations
+- Fixed bug [#2787] : Squiz.PHP.DisallowMultipleAssignments not ignoring typed property declarations
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2810 : PHPCBF fails to fix file with empty statement at start on control structure
-- Fixed bug #2812 : Squiz.Arrays.ArrayDeclaration not detecting some arrays with multiple arguments on the same line
+- Fixed bug [#2810] : PHPCBF fails to fix file with empty statement at start on control structure
+- Fixed bug [#2812] : Squiz.Arrays.ArrayDeclaration not detecting some arrays with multiple arguments on the same line
     - Thanks to [Jakub Chábek][@grongor] for the patch
-- Fixed bug #2826 : Generic.WhiteSpace.ArbitraryParenthesesSpacing doesn't detect issues for statements directly after a   control structure
+- Fixed bug [#2826] : Generic.WhiteSpace.ArbitraryParenthesesSpacing doesn't detect issues for statements directly after a control structure
     - Thanks to [Vincent Langlet][@VincentLanglet] for the patch
-- Fixed bug #2848 : PSR12.Files.FileHeader false positive for file with mixed PHP and HTML and no file header
-- Fixed bug #2849 : Generic.WhiteSpace.ScopeIndent false positive with arrow function inside array
-- Fixed bug #2850 : Generic.PHP.LowerCaseKeyword complains __HALT_COMPILER is uppercase
-- Fixed bug #2853 : Undefined variable error when using Info report
+- Fixed bug [#2848] : PSR12.Files.FileHeader false positive for file with mixed PHP and HTML and no file header
+- Fixed bug [#2849] : Generic.WhiteSpace.ScopeIndent false positive with arrow function inside array
+- Fixed bug [#2850] : Generic.PHP.LowerCaseKeyword complains __HALT_COMPILER is uppercase
+- Fixed bug [#2853] : Undefined variable error when using Info report
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2865 : Double arrow tokenized as T_STRING when placed after function named "fn"
-- Fixed bug #2867 : Incorrect scope matching when arrow function used inside IF condition
-- Fixed bug #2868 : phpcs:ignore annotation doesnt work inside a docblock
-- Fixed bug #2878 : PSR12.Files.FileHeader conflicts with Generic.Files.LineEndings
-- Fixed bug #2895 : PSR2.Methods.FunctionCallSignature.MultipleArguments false positive with arrow function argument
+- Fixed bug [#2865] : Double arrow tokenized as T_STRING when placed after function named "fn"
+- Fixed bug [#2867] : Incorrect scope matching when arrow function used inside IF condition
+- Fixed bug [#2868] : phpcs:ignore annotation doesn't work inside a docblock
+- Fixed bug [#2878] : PSR12.Files.FileHeader conflicts with Generic.Files.LineEndings
+- Fixed bug [#2895] : PSR2.Methods.FunctionCallSignature.MultipleArguments false positive with arrow function argument
+
+[#2787]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2787
+[#2810]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2810
+[#2812]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2812
+[#2826]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2826
+[#2848]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2848
+[#2849]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2849
+[#2850]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2850
+[#2853]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2853
+[#2865]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2865
+[#2867]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2867
+[#2868]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2868
+[#2878]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2878
+[#2895]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2895
 
 ## [3.5.4] - 2020-01-31
 ### Changed
@@ -1033,7 +1047,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Previously it required these to have curly braces, but there were no statements to enclose in them
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - PSR12.ControlStructures.BooleanOperatorPlacement can now be configured to enforce a specific operator position
-    - By default, the sniff ensures that operators are all at the begining or end of lines, but not a mix of both
+    - By default, the sniff ensures that operators are all at the beginning or end of lines, but not a mix of both
     - Set the allowOnly property to "first" to enforce all boolean operators to be at the start of a line
     - Set the allowOnly property to "last" to enforce all boolean operators to be at the end of a line
     - Thanks to [Vincent Langlet][@VincentLanglet] for the patch
@@ -1045,37 +1059,56 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Squiz.PHP.InnerFunctions now handles multiple nested anon classes correctly
 
 ### Fixed
-- Fixed bug #2497 : Sniff properties not set when referencing a sniff using relative paths or non-native slashes
+- Fixed bug [#2497] : Sniff properties not set when referencing a sniff using relative paths or non-native slashes
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2657 : Squiz.WhiteSpace.FunctionSpacing can remove spaces between comment and first/last method during auto-fixing
+- Fixed bug [#2657] : Squiz.WhiteSpace.FunctionSpacing can remove spaces between comment and first/last method during auto-fixing
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2688 : Case statements not tokenized correctly when switch is contained within ternary
-- Fixed bug #2698 : PHPCS throws errors determining auto report width when shell_exec is disabled
+- Fixed bug [#2688] : Case statements not tokenized correctly when switch is contained within ternary
+- Fixed bug [#2698] : PHPCS throws errors determining auto report width when shell_exec is disabled
     - Thanks to [Matthew Peveler][@MasterOdin] for the patch
-- Fixed bug #2730 : PSR12.ControlStructures.ControlStructureSpacing does not ignore comments between conditions
+- Fixed bug [#2730] : PSR12.ControlStructures.ControlStructureSpacing does not ignore comments between conditions
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2732 : PSR12.Files.FileHeader misidentifies file header in mixed content file
-- Fixed bug #2745 : AbstractArraySniff wrong indices when mixed coalesce and ternary values
+- Fixed bug [#2732] : PSR12.Files.FileHeader misidentifies file header in mixed content file
+- Fixed bug [#2745] : AbstractArraySniff wrong indices when mixed coalesce and ternary values
     - Thanks to [Michał Bundyra][@michalbundyra] for the patch
-- Fixed bug #2748 : Wrong end of statement for fn closures
+- Fixed bug [#2748] : Wrong end of statement for fn closures
     - Thanks to [Michał Bundyra][@michalbundyra] for the patch
-- Fixed bug #2751 : Autoload relative paths first to avoid confusion with files from the global include path
+- Fixed bug [#2751] : Autoload relative paths first to avoid confusion with files from the global include path
     - Thanks to [Klaus Purer][@klausi] for the patch
-- Fixed bug #2763 : PSR12 standard reports errors for multi-line FOR definitions
-- Fixed bug #2768 : Generic.Files.LineLength false positive for non-breakable strings at exactly the soft limit
+- Fixed bug [#2763] : PSR12 standard reports errors for multi-line FOR definitions
+- Fixed bug [#2768] : Generic.Files.LineLength false positive for non-breakable strings at exactly the soft limit
     - Thanks to [Alex Miles][@ghostal] for the patch
-- Fixed bug #2773 : PSR2.Methods.FunctionCallSignature false positive when arrow function has array return type
-- Fixed bug #2790 : PSR12.Traits.UseDeclaration ignores block comments
+- Fixed bug [#2773] : PSR2.Methods.FunctionCallSignature false positive when arrow function has array return type
+- Fixed bug [#2790] : PSR12.Traits.UseDeclaration ignores block comments
     - Thanks to [Vincent Langlet][@VincentLanglet] for the patch
-- Fixed bug #2791 : PSR12.Functions.NullableTypeDeclaration false positive when ternary operator used with instanceof
+- Fixed bug [#2791] : PSR12.Functions.NullableTypeDeclaration false positive when ternary operator used with instanceof
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2802 : Can't specify a report file path using the tilde shortcut
-- Fixed bug #2804 : PHP4-style typed properties not tokenized correctly
+- Fixed bug [#2802] : Can't specify a report file path using the tilde shortcut
+- Fixed bug [#2804] : PHP4-style typed properties not tokenized correctly
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2805 : Undefined Offset notice during live coding of arrow functions
+- Fixed bug [#2805] : Undefined Offset notice during live coding of arrow functions
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2843 : Tokenizer does not support alternative syntax for declare statements
+- Fixed bug [#2843] : Tokenizer does not support alternative syntax for declare statements
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+
+[#2497]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2497
+[#2657]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2657
+[#2688]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2688
+[#2698]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2698
+[#2730]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2730
+[#2732]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2732
+[#2745]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2745
+[#2748]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2748
+[#2751]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2751
+[#2763]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2763
+[#2768]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2768
+[#2773]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2773
+[#2790]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2790
+[#2791]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2791
+[#2802]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2802
+[#2804]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2804
+[#2805]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2805
+[#2843]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2843
 
 ## [3.5.3] - 2019-12-04
 ### Changed
