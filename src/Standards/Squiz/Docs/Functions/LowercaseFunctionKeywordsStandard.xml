@@ -11,7 +11,7 @@
 {
     return true;
 }
-]]>
+        ]]>
         </code>
         <code title="Invalid: Uppercase function keyword.">
         <![CDATA[
@@ -19,7 +19,7 @@
 {
     return true;
 }
-]]>
+        ]]>
         </code>
     </code_comparison>
 </documentation>

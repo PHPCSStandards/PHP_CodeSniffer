@@ -10,14 +10,14 @@
 <em>final</em> <em>class</em> Foo <em>extends</em> Bar
 {
 }
-]]>
+        ]]>
         </code>
         <code title="Invalid: Initial capitalization of class keywords.">
         <![CDATA[
 <em>Final</em> <em>Class</em> Foo <em>Extends</em> Bar
 {
 }
-]]>
+        ]]>
         </code>
     </code_comparison>
 </documentation>

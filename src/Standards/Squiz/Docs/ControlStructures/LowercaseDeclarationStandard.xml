@@ -10,14 +10,14 @@
 <em>if</em> ($foo) {
     $bar = true;
 }
-]]>
+        ]]>
         </code>
         <code title="Invalid: Uppercase if keyword.">
         <![CDATA[
 <em>IF</em> ($foo) {
     $bar = true;
 }
-]]>
+        ]]>
         </code>
     </code_comparison>
 </documentation>
