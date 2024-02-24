@@ -150,7 +150,7 @@ class InlineControlStructureSniff implements Sniff
             // tag in short open tags and scan run with short_open_tag=Off.
             // Bow out completely as any further detection will be unreliable
             // and create incorrect fixes or cause fixer conflicts.
-            return ($phpcsFile->numTokens + 1);
+            return $phpcsFile->numTokens;
         }
 
         unset($nextNonEmpty, $start);

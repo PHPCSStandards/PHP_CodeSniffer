@@ -54,7 +54,7 @@ class JavaScriptLintSniff implements Sniff
     {
         $jslPath = Config::getExecutablePath('jsl');
         if ($jslPath === null) {
-            return ($phpcsFile->numTokens + 1);
+            return $phpcsFile->numTokens;
         }
 
         $fileName = $phpcsFile->getFilename();
@@ -83,7 +83,7 @@ class JavaScriptLintSniff implements Sniff
         }
 
         // Ignore the rest of the file.
-        return ($phpcsFile->numTokens + 1);
+        return $phpcsFile->numTokens;
 
     }//end process()
 

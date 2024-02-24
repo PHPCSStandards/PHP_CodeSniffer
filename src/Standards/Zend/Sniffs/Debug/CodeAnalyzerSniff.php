@@ -48,7 +48,7 @@ class CodeAnalyzerSniff implements Sniff
     {
         $analyzerPath = Config::getExecutablePath('zend_ca');
         if ($analyzerPath === null) {
-            return ($phpcsFile->numTokens + 1);
+            return $phpcsFile->numTokens;
         }
 
         $fileName = $phpcsFile->getFilename();
@@ -92,7 +92,7 @@ class CodeAnalyzerSniff implements Sniff
         }
 
         // Ignore the rest of the file.
-        return ($phpcsFile->numTokens + 1);
+        return $phpcsFile->numTokens;
 
     }//end process()
 

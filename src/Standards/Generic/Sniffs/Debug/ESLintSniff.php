@@ -60,7 +60,7 @@ class ESLintSniff implements Sniff
     {
         $eslintPath = Config::getExecutablePath('eslint');
         if ($eslintPath === null) {
-            return ($phpcsFile->numTokens + 1);
+            return $phpcsFile->numTokens;
         }
 
         $filename = $phpcsFile->getFilename();
@@ -86,13 +86,13 @@ class ESLintSniff implements Sniff
 
         if ($code <= 0) {
             // No errors, continue.
-            return ($phpcsFile->numTokens + 1);
+            return $phpcsFile->numTokens;
         }
 
         $data = json_decode(implode("\n", $stdout));
         if (json_last_error() !== JSON_ERROR_NONE) {
             // Ignore any errors.
-            return ($phpcsFile->numTokens + 1);
+            return $phpcsFile->numTokens;
         }
 
         // Data is a list of files, but we only pass a single one.
@@ -107,7 +107,7 @@ class ESLintSniff implements Sniff
         }
 
         // Ignore the rest of the file.
-        return ($phpcsFile->numTokens + 1);
+        return $phpcsFile->numTokens;
 
     }//end process()
 
