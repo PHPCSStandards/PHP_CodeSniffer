@@ -8,12 +8,12 @@
         <code title="Valid: echo statement with a single space after it.">
         <![CDATA[
 echo<em> </em>"hi";
-]]>
+        ]]>
         </code>
         <code title="Invalid: echo statement with no space after it.">
         <![CDATA[
 echo<em></em>"hi";
-]]>
+        ]]>
         </code>
     </code_comparison>
 </documentation>

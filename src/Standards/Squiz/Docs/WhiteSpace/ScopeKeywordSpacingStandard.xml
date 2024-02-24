@@ -10,14 +10,14 @@
 public<em> </em>static<em> </em>function foo()
 {
 }
-]]>
+        ]]>
         </code>
         <code title="Invalid: Multiple spaces following the keywords.">
         <![CDATA[
 public<em>  </em>static<em>  </em>function foo()
 {
 }
-]]>
+        ]]>
         </code>
     </code_comparison>
 </documentation>

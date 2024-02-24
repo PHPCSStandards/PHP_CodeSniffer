@@ -10,14 +10,14 @@
 if (<em>isset</em>($foo)) {
     echo $foo;
 }
-]]>
+        ]]>
         </code>
         <code title="Invalid: isset not called as lowercase.">
         <![CDATA[
 if (<em>isSet</em>($foo)) {
     echo $foo;
 }
-]]>
+        ]]>
         </code>
     </code_comparison>
 </documentation>
