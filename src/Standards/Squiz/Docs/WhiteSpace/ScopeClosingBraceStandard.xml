@@ -12,6 +12,21 @@ function foo()
     echo 'opening brace at column 1';
     echo 'closing brace at column 1';
 <em>}</em>
+
+class Foo {
+    echo 'class keyword starts at column 1';
+    echo 'closing brace at column 1';
+<em>}</em>
+
+if ($a > $b) {
+    echo 'conditional starts at column 1';
+    echo 'closing brace at column 1';
+<em>}</em>
+
+<?php if ($something) { ?>
+    <p>conditional opening tag at column 1</p>
+    <p>conditional closing tag at column 1</p>
+<?php } ?>
         ]]>
         </code>
         <code title="Invalid: Closing brace misaligned with opening brace.">
@@ -21,42 +36,21 @@ function foo()
     echo 'opening brace at column 1';
     echo 'closing brace at column 2';
 <em> }</em>
-        ]]>
-        </code>
-    </code_comparison>
-    <code_comparison>
-        <code title="Valid: Closing brace aligned with class keyword.">
-        <![CDATA[
-class Foo {
-    echo 'class keyword starts at column 1';
-    echo 'closing brace at column 1';
-<em>}</em>
-        ]]>
-        </code>
-        <code title="Invalid: Closing brace misaligned with class keyword.">
-        <![CDATA[
+
 class Foo {
     echo 'class keyword starts at column 1';
     echo 'closing brace at column 2';
 <em> }</em>
-        ]]>
-        </code>
-    </code_comparison>
-    <code_comparison>
-        <code title="Valid: Closing brace aligned with if keyword.">
-        <![CDATA[
-if ($a > $b) {
-    echo 'conditional starts at column 1';
-    echo 'closing brace at column 1';
-<em>}</em>
-        ]]>
-        </code>
-        <code title="Invalid: Closing brace aligned with content.">
-        <![CDATA[
+
 if ($a > $b) {
     echo 'conditional starts at column 1';
     echo 'closing brace at column 5';
 <em>    }</em>
+
+<?php if ($something) { ?>
+    <p>conditional opening tag at column 1</p>
+    <p>conditional closing tag at column 2</p>
+ <?php } ?>
         ]]>
         </code>
     </code_comparison>
@@ -66,13 +60,13 @@ if ($a > $b) {
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: Newline before closing brace.">
+        <code title="Valid: Close brace on its own line.">
         <![CDATA[
 enum Foo {
 <em>}</em>
         ]]>
         </code>
-        <code title="Invalid: No newline before closing brace.">
+        <code title="Invalid: Close brace on a line containing other code.">
         <![CDATA[
 enum Foo {<em>}</em>
         ]]>
