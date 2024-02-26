@@ -1,12 +1,12 @@
 <documentation title="Nullable Type Declarations Functions">
     <standard>
-        <![CDATA[
+    <![CDATA[
     In nullable type declarations there MUST NOT be a space between the question mark and the type.
     ]]>
     </standard>
     <code_comparison>
         <code title="Valid: no whitespace used.">
-            <![CDATA[
+        <![CDATA[
 public function functionName(
     ?string $arg1,
     ?int $arg2
@@ -26,14 +26,14 @@ public function functionName(
     </code_comparison>
     <code_comparison>
         <code title="Valid: no unexpected characters.">
-            <![CDATA[
+        <![CDATA[
 public function foo(?int $arg): ?string
 {
 }
         ]]>
         </code>
         <code title="Invalid: unexpected characters used.">
-            <![CDATA[
+        <![CDATA[
 public function bar(? /* comment */ int $arg): ?
     // nullable for a reason
     string
