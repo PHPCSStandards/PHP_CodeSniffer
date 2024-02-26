@@ -5,7 +5,7 @@
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: Closing brace aligned with opening brace.">
+        <code title="Valid: Closing brace aligned with line containing opening brace.">
         <![CDATA[
 function foo()
 {
@@ -13,14 +13,9 @@ function foo()
     echo 'closing brace at column 1';
 <em>}</em>
 
-class Foo {
-    echo 'class keyword starts at column 1';
-    echo 'closing brace at column 1';
-<em>}</em>
-
-if ($a > $b) {
-    echo 'conditional starts at column 1';
-    echo 'closing brace at column 1';
+if (!class_exists('Foo')) {
+    class Foo {
+    <em>}</em>
 <em>}</em>
 
 <?php if ($something) { ?>
@@ -29,7 +24,7 @@ if ($a > $b) {
 <?php } ?>
         ]]>
         </code>
-        <code title="Invalid: Closing brace misaligned with opening brace.">
+        <code title="Invalid: Closing brace misaligned with line containing opening brace.">
         <![CDATA[
 function foo()
 {
@@ -37,15 +32,10 @@ function foo()
     echo 'closing brace at column 2';
 <em> }</em>
 
-class Foo {
-    echo 'class keyword starts at column 1';
-    echo 'closing brace at column 2';
-<em> }</em>
-
-if ($a > $b) {
-    echo 'conditional starts at column 1';
-    echo 'closing brace at column 5';
-<em>    }</em>
+if (!class_exists('Foo')) {
+    class Foo {
+    <em>  }</em>
+<em>  }</em>
 
 <?php if ($something) { ?>
     <p>conditional opening tag at column 1</p>
