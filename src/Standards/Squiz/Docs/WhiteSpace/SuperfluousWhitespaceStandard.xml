@@ -65,34 +65,33 @@ function myFunction()
     </code_comparison>
     <standard>
     <![CDATA[
-    There should be no superfluous whitespace at the end of a file.
-    A single final newline is allowed. A closing PHP tag is optional and ignored.
+    There should be no superfluous whitespace after the final closing PHP tag in a file.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: A single newline appears after the last content in the file.">
+        <code title="Valid: A single new line appears after the last content in the file.">
         <![CDATA[
 function myFunction()
 {
-    echo 'closing curly brace, 1 newline';
-    echo 'optional closing PHP tag';
-    echo 'then EOF';
-}<em>
+    echo 'Closing PHP tag, then';
+    echo 'Single new line char, then EOF';
+}
+
+?><em>
 </em>
-?>
         ]]>
         </code>
-        <code title="Invalid: Multiple newlines appear after the last content in the file.">
+        <code title="Invalid: Multiple new lines appear after the last content in the file.">
         <![CDATA[
 function myFunction()
 {
-    echo 'closing curly brace, 2 newlines';
-    echo 'optional closing PHP tag';
-    echo 'then EOF';
-}<em>
+    echo 'Closing PHP tag, then';
+    echo 'Multiple new line chars, then EOF';
+}
+
+?><em>
 
 </em>
-?>
         ]]>
         </code>
     </code_comparison>
