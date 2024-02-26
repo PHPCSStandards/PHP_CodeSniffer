@@ -64,6 +64,20 @@ class Bar {
     public function sameNumberDifferentParameters($a, $b) {
         return parent::sameNumberDifferentParameters($this->prop[$a], $this->{$b});
     }
+
+    public function differentCase() {
+        return parent::DIFFERENTcase();
+    }
+
+    public function differentCaseSameNonAnsiiCharáctêrs() {
+        // This should be flagged, only ASCII chars have changed case.
+        return parent::DIFFERENTcaseSameNonAnsiiCharáctêrs();
+    }
+
+    public function differentCaseDifferentNonAnsiiCharáctêrs() {
+        // This should not be flagged as non-ASCII chars have changed case, making this a different method name.
+        return parent::DIFFERENTcaseDifferentNonAnsiiCharÁctÊrs();
+    }
 }
 
 abstract class AbstractFoo {

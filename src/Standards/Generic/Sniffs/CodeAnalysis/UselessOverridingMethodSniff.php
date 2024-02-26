@@ -97,11 +97,11 @@ class UselessOverridingMethodSniff implements Sniff
             return;
         }
 
-        // Find next non empty token index, should be the function name.
+        // Find next non empty token index, should be the name of the method being called.
         $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
 
         // Skip for invalid code or other method.
-        if ($next === false || $tokens[$next]['content'] !== $methodName) {
+        if ($next === false || strcasecmp($tokens[$next]['content'], $methodName) !== 0) {
             return;
         }
 
