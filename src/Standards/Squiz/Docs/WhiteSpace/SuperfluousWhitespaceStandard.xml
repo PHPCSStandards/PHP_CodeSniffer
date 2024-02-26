@@ -26,7 +26,7 @@ echo 'whitespace before opening PHP tag';
     <code_comparison>
         <code title="Valid: No whitespace found at end of line.">
         <![CDATA[
-echo 'semicolon followed by new linechar';
+echo 'semicolon followed by new line char';
         ]]>
         </code>
         <code title="Invalid: Whitespace found at end of line.">
