@@ -37,7 +37,7 @@ echo 'trailing spaces after semicolon';<em>   </em>
     </code_comparison>
     <standard>
     <![CDATA[
-    There should be no more than one consecutive blank newline in functions.
+    There should be no consecutive blank lines in functions.
     ]]>
     </standard>
     <code_comparison>
