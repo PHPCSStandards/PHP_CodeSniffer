@@ -115,8 +115,7 @@ class UselessOverridingMethodSniff implements Sniff
 
         $parameters       = [''];
         $parenthesisCount = 1;
-        $count            = count($tokens);
-        for (++$next; $next < $count; ++$next) {
+        for (++$next; $next < $phpcsFile->numTokens; ++$next) {
             $code = $tokens[$next]['code'];
 
             if ($code === T_OPEN_PARENTHESIS) {
