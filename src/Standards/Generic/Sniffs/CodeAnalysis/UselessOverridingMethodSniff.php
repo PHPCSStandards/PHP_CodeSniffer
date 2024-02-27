@@ -56,7 +56,7 @@ class UselessOverridingMethodSniff implements Sniff
         $token  = $tokens[$stackPtr];
 
         // Skip function without body.
-        if (isset($token['scope_opener']) === false) {
+        if (isset($token['scope_opener'], $token['scope_closer']) === false) {
             return;
         }
 
@@ -93,7 +93,7 @@ class UselessOverridingMethodSniff implements Sniff
         $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
 
         // Skip for invalid code.
-        if ($next === false || $tokens[$next]['code'] !== T_DOUBLE_COLON) {
+        if ($tokens[$next]['code'] !== T_DOUBLE_COLON) {
             return;
         }
 
@@ -101,7 +101,7 @@ class UselessOverridingMethodSniff implements Sniff
         $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
 
         // Skip for invalid code or other method.
-        if ($next === false || strcasecmp($tokens[$next]['content'], $methodName) !== 0) {
+        if (strcasecmp($tokens[$next]['content'], $methodName) !== 0) {
             return;
         }
 
@@ -109,7 +109,7 @@ class UselessOverridingMethodSniff implements Sniff
         $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
 
         // Skip for invalid code.
-        if ($next === false || $tokens[$next]['code'] !== T_OPEN_PARENTHESIS || isset($tokens[$next]['parenthesis_closer']) === false) {
+        if ($tokens[$next]['code'] !== T_OPEN_PARENTHESIS || isset($tokens[$next]['parenthesis_closer']) === false) {
             return;
         }
 
@@ -134,7 +134,7 @@ class UselessOverridingMethodSniff implements Sniff
         }//end for
 
         $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
-        if ($next === false || $tokens[$next]['code'] !== T_SEMICOLON) {
+        if ($tokens[$next]['code'] !== T_SEMICOLON) {
             return;
         }
 
