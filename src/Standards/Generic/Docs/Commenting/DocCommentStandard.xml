@@ -1,23 +1,23 @@
 <documentation title="Doc Comment">
     <standard>
     <![CDATA[
-    Enforces several rules related to the formatting of doc comments in PHP code.
+    Enforces several rules related to the formatting of DocBlocks in PHP code.
     ]]>
     </standard>
     <standard>
     <![CDATA[
-    Doc comment must not be empty.
+    DocBlock must not be empty.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: Doc comment with some content.">
+        <code title="Valid: DocBlock with some content.">
         <![CDATA[
 /**
  * <em>Some content.</em>
  */
         ]]>
         </code>
-        <code title="Invalid: Empty doc comment.">
+        <code title="Invalid: Empty DocBlock.">
         <![CDATA[
 /**
  * <em></em>
@@ -27,18 +27,18 @@
     </code_comparison>
     <standard>
     <![CDATA[
-    The opening doc comment tag must be the only content on the line.
+    The opening DocBlock tag must be the only content on the line.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: The opening doc comment tag is the only content on the line.">
+        <code title="Valid: The opening DocBlock tag is the only content on the line.">
         <![CDATA[
 <em>/**</em>
  * Short description.
  */
         ]]>
         </code>
-        <code title="Invalid: The opening doc comment tag is not the only content on the line.">
+        <code title="Invalid: The opening DocBlock tag is not the only content on the line.">
         <![CDATA[
 <em>/** Short description.</em>
  */
@@ -47,18 +47,18 @@
     </code_comparison>
     <standard>
     <![CDATA[
-    The closing doc comment tag must be the only content on the line.
+    The closing DocBlock tag must be the only content on the line.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: The closing doc comment tag is the only content on the line.">
+        <code title="Valid: The closing DocBlock tag is the only content on the line.">
         <![CDATA[
 /**
  * Short description.
  <em>*/</em>
         ]]>
         </code>
-        <code title="Invalid: The closing doc comment tag is not the only content on the line.">
+        <code title="Invalid: The closing DocBlock tag is not the only content on the line.">
         <![CDATA[
 /**
  <em>* Short description */</em>
@@ -67,18 +67,18 @@
     </code_comparison>
     <standard>
     <![CDATA[
-    There must be no additional blank lines before the closing doc comment tag.
+    There must be no additional blank lines before the closing DocBlock tag.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: no additional blank lines before the closing doc comment tag.">
+        <code title="Valid: no additional blank lines before the closing DocBlock tag.">
         <![CDATA[
 /**
  * Short description.
 <em></em> */
         ]]>
         </code>
-        <code title="Invalid: additional blank lines before the closing doc comment tag.">
+        <code title="Invalid: additional blank lines before the closing DocBlock tag.">
         <![CDATA[
 /**
  * Short description.
@@ -89,18 +89,18 @@
     </code_comparison>
     <standard>
     <![CDATA[
-    The doc comment must have a short description.
+    The DocBlock must have a short description.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: Doc comment with a short description.">
+        <code title="Valid: DocBlock with a short description.">
         <![CDATA[
 /**
  * <em>Short description.</em>
  */
         ]]>
         </code>
-        <code title="Invalid: Doc comment without a short description.">
+        <code title="Invalid: DocBlock without a short description.">
         <![CDATA[
 /**
  * <em></em>@return int
@@ -110,7 +110,7 @@
     </code_comparison>
     <standard>
     <![CDATA[
-    Short description must be on the first line of the doc comment.
+    Short description must be on the first line of the DocBlock.
     ]]>
     </standard>
     <code_comparison>
