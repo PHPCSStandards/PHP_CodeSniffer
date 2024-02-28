@@ -1449,16 +1449,26 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ### Fixed
 - Fixed an issue where the PCRE JIT on PHP 7.3 caused PHPCS to die when using the parallel option
     - PHPCS now disables the PCRE JIT before running
-- Fixed bug #2368 : MySource.PHP.AjaxNullComparison throws error when first function has no doc comment
-- Fixed bug #2414 : Indention false positive in switch/case/if combination
-- Fixed bug #2423 : Squiz.Formatting.OperatorBracket.MissingBrackets error with static
-- Fixed bug #2450 : Indentation false positive when closure containing nested IF conditions used as function argument
-- Fixed bug #2452 : LowercasePHPFunctions sniff failing on "new \File()"
-- Fixed bug #2453 : Squiz.CSS.SemicolonSpacingSniff false positive when style name proceeded by an asterisk
+- Fixed bug [#2368] : MySource.PHP.AjaxNullComparison throws error when first function has no doc comment
+- Fixed bug [#2414] : Indention false positive in switch/case/if combination
+- Fixed bug [#2423] : Squiz.Formatting.OperatorBracket.MissingBrackets error with static
+- Fixed bug [#2450] : Indentation false positive when closure containing nested IF conditions used as function argument
+- Fixed bug [#2452] : LowercasePHPFunctions sniff failing on "new \File()"
+- Fixed bug [#2453] : Squiz.CSS.SemicolonSpacingSniff false positive when style name proceeded by an asterisk
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2464 : Fixer conflict between Generic.WhiteSpace.ScopeIndent and Squiz.WhiteSpace.ScopeClosingBrace when class   indented 1 space
-- Fixed bug #2465 : Excluding a sniff by path is not working
-- Fixed bug #2467 : PHP open/close tags inside CSS files are replaced with internal PHPCS token strings when auto fixing
+- Fixed bug [#2464] : Fixer conflict between Generic.WhiteSpace.ScopeIndent and Squiz.WhiteSpace.ScopeClosingBrace when class indented 1 space
+- Fixed bug [#2465] : Excluding a sniff by path is not working
+- Fixed bug [#2467] : PHP open/close tags inside CSS files are replaced with internal PHPCS token strings when auto fixing
+
+[#2368]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2368
+[#2414]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2414
+[#2423]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2423
+[#2450]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2450
+[#2452]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2452
+[#2453]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2453
+[#2464]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2464
+[#2465]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2465
+[#2467]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2467
 
 ## [3.4.1] - 2019-03-19
 ### Changed
@@ -1486,16 +1496,16 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Generic.Files.LineEndings no longer adds superfluous new line at the end of JS and CSS files
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Generic.Formatting.DisallowMultipleStatements no longer tries fix lines containing phpcs:ignore statements
+- Generic.Formatting.DisallowMultipleStatements no longer tries to fix lines containing phpcs:ignore statements
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Generic.Functions.FunctionCallArgumentSpacing now has improved performance and anonymous class support
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Generic.WhiteSpace.ScopeIndent now respects changes to the "exact" property using phpcs:set mid-way through a file
-    - This allows you change the "exact" rule for only some parts of a file
+    - This allows you to change the "exact" rule for only some parts of a file
 - Generic.WhiteSpace.ScopeIndent now disables exact indent checking inside all arrays
     - Previously, this was only done when using long array syntax, but it now works for short array syntax as well
 - PEAR.Classes.ClassDeclaration now has improved handling of PHPCS annotations and tab indents
-- PSR12.Classes.ClassInstantiation has changed it's error code from MissingParenthesis to MissingParentheses
+- PSR12.Classes.ClassInstantiation has changed its error code from MissingParenthesis to MissingParentheses
 - PSR12.Keywords.ShortFormTypeKeywords now ignores all spacing inside type casts during both checking and fixing
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Squiz.Classes.LowercaseClassKeywords now examines the class keyword for anonymous classes
@@ -1535,16 +1545,24 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 
 ### Fixed
-- Fixed bug #2298 : PSR2.Classes.ClassDeclaration allows extended class on new line
+- Fixed bug [#2298] : PSR2.Classes.ClassDeclaration allows extended class on new line
     - Thanks to [Michał Bundyra][@michalbundyra] for the patch
-- Fixed bug #2337 : Generic.WhiteSpace.ScopeIndent incorrect error when multi-line function call starts on same line as open   tag
-- Fixed bug #2348 : Cache not invalidated when changing a ruleset included by another
-- Fixed bug #2376 : Using __halt_compiler() breaks Generic.PHP.ForbiddenFunctions unless it's last in the function list
+- Fixed bug [#2337] : Generic.WhiteSpace.ScopeIndent incorrect error when multi-line function call starts on same line as open tag
+- Fixed bug [#2348] : Cache not invalidated when changing a ruleset included by another
+- Fixed bug [#2376] : Using __halt_compiler() breaks Generic.PHP.ForbiddenFunctions unless it's last in the function list
     - Thanks to [Sijun Zhu][@Billz95] for the patch
-- Fixed bug #2393 : The gitmodified filter will infinitely loop when encountering deleted file paths
+- Fixed bug [#2393] : The gitmodified filter will infinitely loop when encountering deleted file paths
     - Thanks to [Lucas Manzke][@lmanzke] for the patch
-- Fixed bug #2396 : Generic.WhiteSpace.ScopeIndent incorrect error when multi-line IF condition mixed with HTML
-- Fixed bug #2431 : Use function/const not tokenized as T_STRING when preceded by comment
+- Fixed bug [#2396] : Generic.WhiteSpace.ScopeIndent incorrect error when multi-line IF condition mixed with HTML
+- Fixed bug [#2431] : Use function/const not tokenized as T_STRING when preceded by comment
+
+[#2298]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2298
+[#2337]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2337
+[#2348]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2348
+[#2376]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2376
+[#2393]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2393
+[#2396]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2396
+[#2431]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2431
 
 ## [3.4.0] - 2018-12-20
 ### Deprecated
@@ -1569,7 +1587,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - This change also converts '(binary)' from T_STRING_CAST to T_BINARY_CAST
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the help with this patch
 - Array properties set inside a ruleset.xml file can now extend a previous value instead of always overwriting it
-    - e.g., if you include a ruleset that defines forbidden functions, can you now add to that list instead of having to   redefine it
+    - e.g., if you include a ruleset that defines forbidden functions, can you now add to that list instead of having to redefine it
     - To use this feature, add extends="true" to the property tag
         - e.g., property name="forbiddenFunctionNames" type="array" extend="true"
     - Thanks to [Michael Moravec][@Majkl578] for the patch
@@ -1613,7 +1631,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
         - Squiz.Scope.MethodScope
         - Squiz.Scope.StaticThisUsage
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Generic.CodeAnalysis.UnusedFunctionParameter now only skips functions with empty bodies when the class implements an   interface
+- Generic.CodeAnalysis.UnusedFunctionParameter now only skips functions with empty bodies when the class implements an interface
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Generic.CodeAnalysis.UnusedFunctionParameter now has additional error codes to indicate where unused params were found
     - The new error code prefixes are:
@@ -1686,35 +1704,52 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 
 ### Fixed
-- Fixed bug #2109 : Generic.Functions.CallTimePassByReference false positive for bitwise and used in function argument
-- Fixed bug #2165 : Conflict between Squiz.Arrays.ArrayDeclaration and ScopeIndent sniffs when heredoc used in array
-- Fixed bug #2167 : Generic.WhiteSpace.ScopeIndent shows invalid error when scope opener indented inside inline HTML
-- Fixed bug #2178 : Generic.NamingConventions.ConstructorName matches methods in anon classes with same name as containing   class
+- Fixed bug [#2109] : Generic.Functions.CallTimePassByReference false positive for bitwise and used in function argument
+- Fixed bug [#2165] : Conflict between Squiz.Arrays.ArrayDeclaration and ScopeIndent sniffs when heredoc used in array
+- Fixed bug [#2167] : Generic.WhiteSpace.ScopeIndent shows invalid error when scope opener indented inside inline HTML
+- Fixed bug [#2178] : Generic.NamingConventions.ConstructorName matches methods in anon classes with same name as containing class
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2190 : PEAR.Functions.FunctionCallSignature incorrect error when encountering trailing PHPCS annotation
+- Fixed bug [#2190] : PEAR.Functions.FunctionCallSignature incorrect error when encountering trailing PHPCS annotation
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2194 : Generic.Whitespace.LanguageConstructSpacing should not be checking namespace operators
+- Fixed bug [#2194] : Generic.Whitespace.LanguageConstructSpacing should not be checking namespace operators
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2202 : Squiz.WhiteSpace.OperatorSpacing throws error for negative index when using curly braces for string   access
+- Fixed bug [#2202] : Squiz.WhiteSpace.OperatorSpacing throws error for negative index when using curly braces for string access
     - Same issue fixed in Squiz.Formatting.OperatorBracket
     - Thanks to [Andreas Buchenrieder][@anbuc] for the patch
-- Fixed bug #2210 : Generic.NamingConventions.CamelCapsFunctionName not ignoring SoapClient __getCookies() method
+- Fixed bug [#2210] : Generic.NamingConventions.CamelCapsFunctionName not ignoring SoapClient __getCookies() method
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2211 : PSR2.Methods.MethodDeclaration gets confused over comments between modifier keywords
+- Fixed bug [#2211] : PSR2.Methods.MethodDeclaration gets confused over comments between modifier keywords
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2212 : FUNCTION and CONST in use groups being tokenised as T_FUNCTION and T_CONST
+- Fixed bug [#2212] : FUNCTION and CONST in use groups being tokenized as T_FUNCTION and T_CONST
     - Thanks to [Chris Wilkinson][@thewilkybarkid] for the patch
-- Fixed bug #2214 : File::getMemberProperties() is recognizing method params as properties
+- Fixed bug [#2214] : File::getMemberProperties() is recognizing method params as properties
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2236 : Memory info measurement unit is Mb but probably should be MB
-- Fixed bug #2246 : CSS tokenizer does not tokenize class names correctly when they contain the string NEW
+- Fixed bug [#2236] : Memory info measurement unit is Mb but probably should be MB
+- Fixed bug [#2246] : CSS tokenizer does not tokenize class names correctly when they contain the string NEW
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2278 : Squiz.Operators.ComparisonOperatorUsage false positive when inline IF contained in parentheses
+- Fixed bug [#2278] : Squiz.Operators.ComparisonOperatorUsage false positive when inline IF contained in parentheses
     - Thanks to [Arnout Boks][@aboks] for the patch
-- Fixed bug #2284 : Squiz.Functions.FunctionDeclarationArgumentSpacing removing type hint during fixing
+- Fixed bug [#2284] : Squiz.Functions.FunctionDeclarationArgumentSpacing removing type hint during fixing
     - Thanks to [Michał Bundyra][@michalbundyra] for the patch
-- Fixed bug #2297 : Anonymous class not tokenized correctly when used as argument to another anon class
+- Fixed bug [#2297] : Anonymous class not tokenized correctly when used as argument to another anon class
     - Thanks to [Michał Bundyra][@michalbundyra] for the patch
+
+[#2109]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2109
+[#2165]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2165
+[#2167]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2167
+[#2178]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2178
+[#2190]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2190
+[#2194]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2194
+[#2202]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2202
+[#2210]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2210
+[#2211]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2211
+[#2212]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2212
+[#2214]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2214
+[#2236]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2236
+[#2246]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2246
+[#2278]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2278
+[#2284]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2284
+[#2297]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2297
 
 ## [2.9.2] - 2018-11-08
 ### Changed
