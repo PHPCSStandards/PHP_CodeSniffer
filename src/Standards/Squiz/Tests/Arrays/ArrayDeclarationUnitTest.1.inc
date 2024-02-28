@@ -535,3 +535,10 @@ $x = array(
   'a',
   'b',
    );
+
+$x = array(
+      1, static fn (float $item): float => match ($item) {
+        2.0 => 3.0,
+        default => $item
+    },
+     );
