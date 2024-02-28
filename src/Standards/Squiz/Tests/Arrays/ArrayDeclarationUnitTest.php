@@ -226,6 +226,10 @@ final class ArrayDeclarationUnitTest extends AbstractSniffUnitTest
                 519 => 1,
                 526 => 1,
             ];
+        case 'ArrayDeclarationUnitTest.3.inc':
+            return [
+                6 => 1,
+            ];
         default:
             return [];
         }//end switch
