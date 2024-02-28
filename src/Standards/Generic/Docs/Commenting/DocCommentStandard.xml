@@ -84,11 +84,6 @@
  * Short description.
 <em> *</em>
  */
-
- /**
- * Short description.
-<em></em>
- */
         ]]>
         </code>
     </code_comparison>
@@ -130,12 +125,6 @@
         <![CDATA[
 /**
 <em> *</em>
- * Short description.
- */
-
- /**
-<em>
-</em>
  * Short description.
  */
         ]]>
@@ -305,11 +294,11 @@
     </code_comparison>
     <standard>
     <![CDATA[
-    There must be a single blank line after a tag group.
+    Tag groups must be separated by a single blank line.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: Single blank line after a tag group.">
+        <code title="Valid: Single blank line separating tag groups.">
         <![CDATA[
 /**
  * Short description.
@@ -321,7 +310,7 @@
  */
         ]]>
         </code>
-        <code title="Invalid: More than one blank line after a tag group.">
+        <code title="Invalid: More than one blank line separating tag groups.">
         <![CDATA[
 /**
  * Short description.
@@ -364,7 +353,7 @@
     </code_comparison>
     <standard>
     <![CDATA[
-    Parameter tags must be defined before other tags in a doc comment.
+    Parameter tags must be defined before other tags in a DocBlock.
     ]]>
     </standard>
     <code_comparison>
