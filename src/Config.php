@@ -397,6 +397,8 @@ class Config
                 'phpcs.xml',
                 '.phpcs.xml.dist',
                 'phpcs.xml.dist',
+                '.phpcs.dist.xml',
+                'phpcs.dist.xml',
             ];
 
             do {
