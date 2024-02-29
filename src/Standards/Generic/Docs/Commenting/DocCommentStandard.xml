@@ -132,71 +132,23 @@
     </code_comparison>
     <standard>
     <![CDATA[
-    The short description must start with a capital letter.
+    The short and long descriptions must start with a capital letter.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: Short description starts with a capital letter.">
+        <code title="Valid: Short and long descriptions start with a capital letter.">
         <![CDATA[
 /**
  * <em>S</em>hort description.
- */
-        ]]>
-        </code>
-        <code title="Invalid: Short description doesn't start with a capital letter.">
-        <![CDATA[
-/**
- * <em>s</em>hort description.
- */
-        ]]>
-        </code>
-    </code_comparison>
-    <standard>
-    <![CDATA[
-    There must be exactly one blank line between the short and long descriptions.
-    ]]>
-    </standard>
-    <code_comparison>
-        <code title="Valid: One blank line between the short and long descriptions.">
-        <![CDATA[
-/**
- * Short description.
-<em> *<em>
- * Long description.
- */
-        ]]>
-        </code>
-        <code title="Invalid: More than one blank line between the short and long descriptions.">
-        <![CDATA[
-/**
- * Short description.
-<em> *
- *
-</em>
- * Long description.
- */
-        ]]>
-        </code>
-    </code_comparison>
-    <standard>
-    <![CDATA[
-    The long description must start with a capital letter.
-    ]]>
-    </standard>
-    <code_comparison>
-        <code title="Valid: Long description starts with a capital letter.">
-        <![CDATA[
-/**
- * Short description.
  *
  * <em>L</em>ong description.
  */
         ]]>
         </code>
-        <code title="Invalid: Long description doesn't start with a capital letter.">
+        <code title="Invalid: Short or long descriptions don't start with a capital letter.">
         <![CDATA[
 /**
- * Short description.
+ * <em>s</em>hort description.
  *
  * <em>l</em>ong description.
  */
