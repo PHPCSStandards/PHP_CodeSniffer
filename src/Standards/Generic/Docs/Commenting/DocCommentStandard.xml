@@ -27,39 +27,22 @@
     </code_comparison>
     <standard>
     <![CDATA[
-    The opening DocBlock tag must be the only content on the line.
+    The opening and closing DocBlock tags must be the only content on the line.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: The opening DocBlock tag is the only content on the line.">
+        <code title="Valid: The opening and closing DocBlock tags are the only content on the line.">
         <![CDATA[
 <em>/**</em>
- * Short description.
- */
-        ]]>
-        </code>
-        <code title="Invalid: The opening DocBlock tag is not the only content on the line.">
-        <![CDATA[
-<em>/** Short description.</em>
- */
-        ]]>
-        </code>
-    </code_comparison>
-    <standard>
-    <![CDATA[
-    The closing DocBlock tag must be the only content on the line.
-    ]]>
-    </standard>
-    <code_comparison>
-        <code title="Valid: The closing DocBlock tag is the only content on the line.">
-        <![CDATA[
-/**
  * Short description.
  <em>*/</em>
         ]]>
         </code>
-        <code title="Invalid: The closing DocBlock tag is not the only content on the line.">
+        <code title="Invalid: The opening and closing DocBlock tags are not the only content on the line.">
         <![CDATA[
+<em>/** Short description.</em>
+ */
+
 /**
  <em>* Short description */</em>
         ]]>
