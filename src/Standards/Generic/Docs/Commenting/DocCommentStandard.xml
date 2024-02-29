@@ -72,40 +72,23 @@
     </code_comparison>
     <standard>
     <![CDATA[
-    The DocBlock must have a short description.
+    The DocBlock must have a short description, and it must be on the first line.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: DocBlock with a short description.">
+        <code title="Valid: DocBlock with a short description on the first line.">
         <![CDATA[
 /**
  * <em>Short description.</em>
  */
         ]]>
         </code>
-        <code title="Invalid: DocBlock without a short description.">
+        <code title="Invalid: DocBlock without a short description or short description not on the first line.">
         <![CDATA[
 /**
  * <em></em>@return int
  */
-        ]]>
-        </code>
-    </code_comparison>
-    <standard>
-    <![CDATA[
-    Short description must be on the first line of the DocBlock.
-    ]]>
-    </standard>
-    <code_comparison>
-        <code title="Valid: No blank lines before the short description.">
-        <![CDATA[
-/**<em></em>
- * Short description.
- */
-        ]]>
-        </code>
-        <code title="Invalid: Blank lines before the short description.">
-        <![CDATA[
+
 /**
 <em> *</em>
  * Short description.
