@@ -157,31 +157,30 @@
     </code_comparison>
     <standard>
     <![CDATA[
-    There must be one blank line before the tags.
+    There must be exactly one blank line separating the short description, the long description and tag groups.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: One blank line before the tags.">
+        <code title="Valid: One blank line separating the short description, the long description and tag groups.">
         <![CDATA[
 /**
  * Short description.
+<em> *<em>
+ * Long description.
 <em> *</em>
  * @param int $foo
  */
         ]]>
         </code>
-        <code title="Invalid: More than one or no blank line before the tags.">
+        <code title="Invalid: More than one or no blank line separating the short description, the long description and tag groups.">
         <![CDATA[
 /**
  * Short description.
 <em> *
- *</em>
+ *
+</em>
+ * Long description.
  * @param int $foo
- */
-
- /**
- * Short description.</em></em>
- * @return int
  */
         ]]>
         </code>
@@ -240,38 +239,6 @@
 <em> * @param  int $foo
  * @author Some Author
  * @return int</em>
- */
-        ]]>
-        </code>
-    </code_comparison>
-    <standard>
-    <![CDATA[
-    Tag groups must be separated by a single blank line.
-    ]]>
-    </standard>
-    <code_comparison>
-        <code title="Valid: Single blank line separating tag groups.">
-        <![CDATA[
-/**
- * Short description.
- *
- * @param int $foo
- * @param string $bar
-<em> *</em>
- * @return int
- */
-        ]]>
-        </code>
-        <code title="Invalid: More than one blank line separating tag groups.">
-        <![CDATA[
-/**
- * Short description.
- *
- * @param int $foo
- * @param string $bar
-<em> *
- *</em>
- * @return int
  */
         ]]>
         </code>
