@@ -11,10 +11,22 @@ namespace PHP_CodeSniffer\Standards\PEAR\Sniffs\NamingConventions;
 
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\AbstractScopeSniff;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
+use PHP_CodeSniffer\Util\Tokens;
 
 class ValidVariableNameSniff extends AbstractVariableSniff
 {
+
+
+    /**
+     * Only listen to variables within OO scopes.
+     */
+    public function __construct()
+    {
+        AbstractScopeSniff::__construct(Tokens::$ooScopeTokens, [T_VARIABLE], false);
+
+    }//end __construct()
 
 
     /**

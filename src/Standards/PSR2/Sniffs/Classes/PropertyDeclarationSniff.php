@@ -11,11 +11,22 @@ namespace PHP_CodeSniffer\Standards\PSR2\Sniffs\Classes;
 
 use Exception;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\AbstractScopeSniff;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
 use PHP_CodeSniffer\Util\Tokens;
 
 class PropertyDeclarationSniff extends AbstractVariableSniff
 {
+
+
+    /**
+     * Only listen to variables within OO scopes.
+     */
+    public function __construct()
+    {
+        AbstractScopeSniff::__construct(Tokens::$ooScopeTokens, [T_VARIABLE], false);
+
+    }//end __construct()
 
 
     /**
