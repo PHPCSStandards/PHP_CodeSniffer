@@ -54,7 +54,7 @@ class JSLintSniff implements Sniff
         $rhinoPath  = Config::getExecutablePath('rhino');
         $jslintPath = Config::getExecutablePath('jslint');
         if ($rhinoPath === null || $jslintPath === null) {
-            return ($phpcsFile->numTokens + 1);
+            return $phpcsFile->numTokens;
         }
 
         $fileName = $phpcsFile->getFilename();
@@ -80,7 +80,7 @@ class JSLintSniff implements Sniff
         }
 
         // Ignore the rest of the file.
-        return ($phpcsFile->numTokens + 1);
+        return $phpcsFile->numTokens;
 
     }//end process()
 

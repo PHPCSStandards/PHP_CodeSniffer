@@ -69,7 +69,7 @@ class ClosureLinterSniff implements Sniff
     {
         $lintPath = Config::getExecutablePath('gjslint');
         if ($lintPath === null) {
-            return ($phpcsFile->numTokens + 1);
+            return $phpcsFile->numTokens;
         }
 
         $fileName = $phpcsFile->getFilename();
@@ -79,7 +79,7 @@ class ClosureLinterSniff implements Sniff
         exec($cmd, $output, $retval);
 
         if (is_array($output) === false) {
-            return ($phpcsFile->numTokens + 1);
+            return $phpcsFile->numTokens;
         }
 
         foreach ($output as $finding) {
@@ -111,7 +111,7 @@ class ClosureLinterSniff implements Sniff
         }//end foreach
 
         // Ignore the rest of the file.
-        return ($phpcsFile->numTokens + 1);
+        return $phpcsFile->numTokens;
 
     }//end process()
 
