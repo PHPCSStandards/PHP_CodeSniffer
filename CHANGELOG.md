@@ -1757,11 +1757,15 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Nick Wilde][@NickDickinsonWilde] for the patch
 
 ### Fixed
-- Fixed bug #1496 : Squiz.Strings.DoubleQuoteUsage not unescaping dollar sign when fixing
+- Fixed bug [#1496] : Squiz.Strings.DoubleQuoteUsage not unescaping dollar sign when fixing
     - Thanks to [Michał Bundyra][@michalbundyra] for the patch
-- Fixed bug #1549 : Squiz.PHP.EmbeddedPhp fixer conflict with // comment before PHP close tag
+- Fixed bug [#1549] : Squiz.PHP.EmbeddedPhp fixer conflict with // comment before PHP close tag
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #1890 : Incorrect Squiz.WhiteSpace.ControlStructureSpacing.NoLineAfterClose error between catch and finally statements
+- Fixed bug [#1890] : Incorrect Squiz.WhiteSpace.ControlStructureSpacing.NoLineAfterClose error between catch and finally statements
+
+[#1496]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1496
+[#1549]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1549
+[#1890]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1890
 
 ## [3.3.2] - 2018-09-24
 ### Changed
@@ -1785,20 +1789,31 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ### Fixed
 - Fixed a problem where referencing a relative file path in a ruleset XML file could add unnecessary sniff exclusions
     - This didn't actually exclude anything, but caused verbose output to list strange exclusion rules
-- Fixed bug #2110 : Squiz.WhiteSpace.FunctionSpacing is removing indents from the start of functions when fixing
+- Fixed bug [#2110] : Squiz.WhiteSpace.FunctionSpacing is removing indents from the start of functions when fixing
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2115 : Squiz.Commenting.VariableComment not checking var types when the @var line contains a comment
-- Fixed bug #2120 : Tokenizer fails to match T_INLINE_ELSE when used after function call containing closure
-- Fixed bug #2121 : Squiz.PHP.DisallowMultipleAssignments false positive in while loop conditions
+- Fixed bug [#2115] : Squiz.Commenting.VariableComment not checking var types when the @var line contains a comment
+- Fixed bug [#2120] : Tokenizer fails to match T_INLINE_ELSE when used after function call containing closure
+- Fixed bug [#2121] : Squiz.PHP.DisallowMultipleAssignments false positive in while loop conditions
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2127 : File::findExtendedClassName() doesn't support nested classes
+- Fixed bug [#2127] : File::findExtendedClassName() doesn't support nested classes
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2138 : Tokenizer detects wrong token for php ::class feature with spaces
-- Fixed bug #2143 : PSR2.Namespaces.UseDeclaration does not properly fix "use function" and "use const" statements
+- Fixed bug [#2138] : Tokenizer detects wrong token for php ::class feature with spaces
+- Fixed bug [#2143] : PSR2.Namespaces.UseDeclaration does not properly fix "use function" and "use const" statements
     - Thanks to [Chris Wilkinson][@thewilkybarkid] for the patch
-- Fixed bug #2144 : Squiz.Arrays.ArrayDeclaration does incorrect align calculation in array with cyrillic keys
-- Fixed bug #2146 : Zend.Files.ClosingTag removes closing tag from end of file without inserting a semicolon
-- Fixed bug #2151 : XML schema not updated with the new array property syntax
+- Fixed bug [#2144] : Squiz.Arrays.ArrayDeclaration does incorrect align calculation in array with cyrillic keys
+- Fixed bug [#2146] : Zend.Files.ClosingTag removes closing tag from end of file without inserting a semicolon
+- Fixed bug [#2151] : XML schema not updated with the new array property syntax
+
+[#2110]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2110
+[#2115]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2115
+[#2120]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2120
+[#2121]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2121
+[#2127]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2127
+[#2138]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2138
+[#2143]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2143
+[#2144]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2144
+[#2146]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2146
+[#2151]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2151
 
 ## [3.3.1] - 2018-07-27
 ### Removed
@@ -1853,15 +1868,24 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 
 ### Fixed
-- Fixed bug #2029 : Squiz.Scope.MemberVarScope throws fatal error when a property is found in an interface
+- Fixed bug [#2029] : Squiz.Scope.MemberVarScope throws fatal error when a property is found in an interface
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2047 : PSR12.Classes.ClassInstantiation false positive when instantiating class from array index
-- Fixed bug #2048 : GenericFormatting.MultipleStatementAlignment false positive when assigning values inside an array
-- Fixed bug #2053 : PSR12.Classes.ClassInstantiation incorrectly fix when using member vars and some variable formats
-- Fixed bug #2065 : Generic.ControlStructures.InlineControlStructure fixing fails when inline control structure contains closure
-- Fixed bug #2072 : Squiz.Arrays.ArrayDeclaration throws NoComma error when array value is a shorthand IF statement
-- Fixed bug #2082 : File with "defined() or define()" syntax triggers PSR1.Files.SideEffects.FoundWithSymbols
-- Fixed bug #2095 : PSR2.Namespaces.NamespaceDeclaration does not handle namespaces defined over multiple lines
+- Fixed bug [#2047] : PSR12.Classes.ClassInstantiation false positive when instantiating class from array index
+- Fixed bug [#2048] : GenericFormatting.MultipleStatementAlignment false positive when assigning values inside an array
+- Fixed bug [#2053] : PSR12.Classes.ClassInstantiation incorrectly fix when using member vars and some variable formats
+- Fixed bug [#2065] : Generic.ControlStructures.InlineControlStructure fixing fails when inline control structure contains closure
+- Fixed bug [#2072] : Squiz.Arrays.ArrayDeclaration throws NoComma error when array value is a shorthand IF statement
+- Fixed bug [#2082] : File with "defined() or define()" syntax triggers PSR1.Files.SideEffects.FoundWithSymbols
+- Fixed bug [#2095] : PSR2.Namespaces.NamespaceDeclaration does not handle namespaces defined over multiple lines
+
+[#2029]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2029
+[#2047]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2047
+[#2048]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2048
+[#2053]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2053
+[#2065]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2065
+[#2072]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2072
+[#2082]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2082
+[#2095]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2095
 
 ## [3.3.0] - 2018-06-07
 ### Deprecated
@@ -2035,42 +2059,66 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - If not set, the sniff will use whatever value is set for the existing 'spacing' property
 
 ### Fixed
-- Fixed bug #1863 : File::findEndOfStatement() not working when passed a scope opener
-- Fixed bug #1876 : PSR2.Namespaces.UseDeclaration not giving error for use statements before the namespace declaration
+- Fixed bug [#1863] : File::findEndOfStatement() not working when passed a scope opener
+- Fixed bug [#1876] : PSR2.Namespaces.UseDeclaration not giving error for use statements before the namespace declaration
     - Adds a new PSR2.Namespaces.UseDeclaration.UseBeforeNamespace error message
-- Fixed bug #1881 : Generic.Arrays.ArrayIndent is indenting sub-arrays incorrectly when comma not used after the last value
-- Fixed bug #1882 : Conditional with missing braces confused by indirect variables
-- Fixed bug #1915 : JS tokenizer fails to tokenize regular expression proceeded by boolean not operator
-- Fixed bug #1920 : Directory exclude pattern improperly excludes files with names that start the same
+- Fixed bug [#1881] : Generic.Arrays.ArrayIndent is indenting sub-arrays incorrectly when comma not used after the last value
+- Fixed bug [#1882] : Conditional with missing braces confused by indirect variables
+- Fixed bug [#1915] : JS tokenizer fails to tokenize regular expression proceeded by boolean not operator
+- Fixed bug [#1920] : Directory exclude pattern improperly excludes files with names that start the same
     - Thanks to [Jeff Puckett][@jpuck] for the patch
-- Fixed bug #1922 : Equal sign alignment check broken when list syntax used before assignment operator
-- Fixed bug #1925 : Generic.Formatting.MultipleStatementAlignment skipping assignments within closures
-- Fixed bug #1931 : Generic opening brace placement sniffs do not correctly support function return types
-- Fixed bug #1932 : Generic.ControlStructures.InlineControlStructure fixer moves new PHPCS annotations
-- Fixed bug #1938 : Generic opening brace placement sniffs incorrectly move PHPCS annotations
+- Fixed bug [#1922] : Equal sign alignment check broken when list syntax used before assignment operator
+- Fixed bug [#1925] : Generic.Formatting.MultipleStatementAlignment skipping assignments within closures
+- Fixed bug [#1931] : Generic opening brace placement sniffs do not correctly support function return types
+- Fixed bug [#1932] : Generic.ControlStructures.InlineControlStructure fixer moves new PHPCS annotations
+- Fixed bug [#1938] : Generic opening brace placement sniffs incorrectly move PHPCS annotations
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #1939 : phpcs:set annotations do not cause the line they are on to be ignored
+- Fixed bug [#1939] : phpcs:set annotations do not cause the line they are on to be ignored
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #1949 : Squiz.PHP.DisallowMultipleAssignments false positive when using namespaces with static assignments
-- Fixed bug #1959 : SquizMultiLineFunctionDeclaration error when param has trailing comment
+- Fixed bug [#1949] : Squiz.PHP.DisallowMultipleAssignments false positive when using namespaces with static assignments
+- Fixed bug [#1959] : SquizMultiLineFunctionDeclaration error when param has trailing comment
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #1963 : Squiz.Scope.MemberVarScope does not work for multiline member declaration
+- Fixed bug [#1963] : Squiz.Scope.MemberVarScope does not work for multiline member declaration
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #1971 : Short array list syntax not correctly tokenized if short array is the first content in a file
-- Fixed bug #1979 : Tokenizer does not change heredoc to nowdoc token if the start tag contains spaces
-- Fixed bug #1982 : Squiz.Arrays.ArrayDeclaration fixer sometimes puts a comma in front of the last array value
-- Fixed bug #1993 : PSR1/PSR2 not reporting or fixing short open tags
-- Fixed bug #1996 : Custom report paths don't work on case-sensitive filesystems
-- Fixed bug #2006 : Squiz.Functions.FunctionDeclarationArgumentSpacing fixer removes comment between parens when no args
+- Fixed bug [#1971] : Short array list syntax not correctly tokenized if short array is the first content in a file
+- Fixed bug [#1979] : Tokenizer does not change heredoc to nowdoc token if the start tag contains spaces
+- Fixed bug [#1982] : Squiz.Arrays.ArrayDeclaration fixer sometimes puts a comma in front of the last array value
+- Fixed bug [#1993] : PSR1/PSR2 not reporting or fixing short open tags
+- Fixed bug [#1996] : Custom report paths don't work on case-sensitive filesystems
+- Fixed bug [#2006] : Squiz.Functions.FunctionDeclarationArgumentSpacing fixer removes comment between parens when no args
     - The SpacingAfterOpenHint error message has been removed
-        - It is replaced by the the existing SpacingAfterOpen message
+        - It is replaced by the existing SpacingAfterOpen message
     - The error message format for the SpacingAfterOpen and SpacingBeforeClose messages has been changed
         - These used to contain 3 pieces of data, but now only contain 2
     - If you have customised the error messages of this sniff, please review your ruleset after upgrading
-- Fixed bug #2018 : Generic.Formatting.MultipleStatementAlignment does see PHP close tag as end of statement block
+- Fixed bug [#2018] : Generic.Formatting.MultipleStatementAlignment does see PHP close tag as end of statement block
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #2027 : PEAR.NamingConventions.ValidFunctionName error when function name includes double underscore
+- Fixed bug [#2027] : PEAR.NamingConventions.ValidFunctionName error when function name includes double underscore
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+
+[#1863]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1863
+[#1876]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1876
+[#1881]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1881
+[#1882]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1882
+[#1915]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1915
+[#1920]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1920
+[#1922]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1922
+[#1925]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1925
+[#1931]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1931
+[#1932]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1932
+[#1938]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1938
+[#1939]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1939
+[#1949]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1949
+[#1959]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1959
+[#1963]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1963
+[#1971]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1971
+[#1979]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1979
+[#1982]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1982
+[#1993]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1993
+[#1996]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1996
+[#2006]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2006
+[#2018]: https://github.com/squizlabs/PHP_CodeSniffer/pull/2018
+[#2027]: https://github.com/squizlabs/PHP_CodeSniffer/issues/2027
 
 ## [3.2.3] - 2018-02-21
 ### Changed
