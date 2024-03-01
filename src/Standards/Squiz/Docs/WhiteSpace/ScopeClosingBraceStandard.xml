@@ -22,7 +22,7 @@ if (!class_exists('Foo')) {
 
 <?php if ($something) { ?>
     <p>some output</p>
-<?php } ?>
+<em></em><?php } ?>
         ]]>
         </code>
         <code title="Invalid: Closing brace misaligned with line containing opening brace.">
@@ -42,7 +42,7 @@ if (!class_exists('Foo')) {
 
 <?php if ($something) { ?>
     <p>some output</p>
- <?php } ?>
+<em> </em><?php } ?>
         ]]>
         </code>
     </code_comparison>
