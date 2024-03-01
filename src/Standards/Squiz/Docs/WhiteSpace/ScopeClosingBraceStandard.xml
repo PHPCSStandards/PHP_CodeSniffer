@@ -9,9 +9,11 @@
         <![CDATA[
 function foo()
 {
-    echo 'opening brace at column 1';
-    echo 'closing brace at column 1';
 <em>}</em>
+
+    function bar()
+    {
+<em>    }</em>
 
 if (!class_exists('Foo')) {
     class Foo {
@@ -19,8 +21,7 @@ if (!class_exists('Foo')) {
 <em>}</em>
 
 <?php if ($something) { ?>
-    <p>conditional opening tag at column 1</p>
-    <p>conditional closing tag at column 1</p>
+    <p>some output</p>
 <?php } ?>
         ]]>
         </code>
@@ -28,9 +29,11 @@ if (!class_exists('Foo')) {
         <![CDATA[
 function foo()
 {
-    echo 'opening brace at column 1';
-    echo 'closing brace at column 2';
 <em> }</em>
+
+    function bar()
+    {
+<em>   }</em>
 
 if (!class_exists('Foo')) {
     class Foo {
@@ -38,8 +41,7 @@ if (!class_exists('Foo')) {
 <em>  }</em>
 
 <?php if ($something) { ?>
-    <p>conditional opening tag at column 1</p>
-    <p>conditional closing tag at column 2</p>
+    <p>some output</p>
  <?php } ?>
         ]]>
         </code>
