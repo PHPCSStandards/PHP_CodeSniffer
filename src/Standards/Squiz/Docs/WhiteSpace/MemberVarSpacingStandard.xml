@@ -1,0 +1,142 @@
+<documentation title="Member Var Spacing">
+    <standard>
+    <![CDATA[
+    There should be one blank line before the first member var.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: One blank line before the first member var.">
+        <![CDATA[
+class MyClass
+{<em>
+
+</em>    protected $var1 = 'value';
+}
+
+interface MyInterface {<em>
+
+</em>    public $var1;
+}
+
+trait MyTrait {<em>
+
+</em>    public $var1 = 'value';
+}
+        ]]>
+        </code>
+        <code title="Invalid: Incorrect number of blank lines before the first member var.">
+        <![CDATA[
+class MyClass
+{<em>
+</em>    protected $var1 = 'value';
+}
+
+
+interface MyInterface {<em>
+</em>    public $var1;
+}
+
+
+trait MyTrait {<em>
+
+
+</em>    public $var1 = 'value';
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There should be one blank line between member vars.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: One blank line between each member var.">
+        <![CDATA[
+class MyClass
+{
+
+    protected $var1 = 'value';<em>
+
+</em>    protected $var2 = 'value2';
+}
+
+interface MyInterface {
+
+    public $var1;<em>
+
+</em>    public $var2;
+}
+
+trait MyTrait {
+
+    public $var1 = 'value';<em>
+
+</em>    public $var2 = 'value2';
+}
+        ]]>
+        </code>
+        <code title="Invalid: Incorrect number of blank lines between each member var.">
+        <![CDATA[
+class MyClass
+{
+
+    protected $var1 = 'value';<em>
+</em>    protected $var2 = 'value2';
+}
+
+
+interface MyInterface {
+
+    public $var1;<em>
+</em>    public $var2;
+}
+
+
+trait MyTrait {
+
+    public $var1 = 'value';<em>
+
+
+</em>    public $var2 = 'value2';
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There should be no blank line between a member var's comment and the member var.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: No blank lines between comment and member var.">
+        <![CDATA[
+class MyClass
+{
+
+    /**
+     * The actions that this class can perform.
+     *
+     * @var array
+     */<em>
+</em>    public $actions = array();
+}
+        ]]>
+        </code>
+        <code title="Invalid: Blank line(s) between comment and member var.">
+        <![CDATA[
+class MyClass
+{
+
+    /**
+     * The actions that this class can perform.
+     *
+     * @var array
+     */<em>
+
+</em>    public $actions = array();
+}
+        ]]>
+        </code>
+    </code_comparison>
+</documentation>
