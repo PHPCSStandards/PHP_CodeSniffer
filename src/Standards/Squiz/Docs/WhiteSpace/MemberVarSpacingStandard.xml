@@ -1,73 +1,36 @@
 <documentation title="Member Var Spacing">
     <standard>
     <![CDATA[
-    There should be one blank line before the first member var.
+    There should be one blank line before the first property (member variable).
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: One blank line before the first member var.">
+        <code title="Valid: One blank line before the first property.">
         <![CDATA[
 class MyClass
 {<em>
 
 </em>    protected $var1 = 'value';
-}
-
-interface MyInterface {<em>
-
-</em>    public $var1;
-}
-
-trait MyTrait {<em>
-
-</em>    public $var1 = 'value';
 }
         ]]>
         </code>
-        <code title="Invalid: Incorrect number of blank lines before the first member var.">
+        <code title="Invalid: Incorrect number of blank lines before the first property.">
         <![CDATA[
 class MyClass
 {<em>
 </em>    protected $var1 = 'value';
-}
-
-
-interface MyInterface {<em>
-</em>    public $var1;
-}
-
-
-trait MyTrait {<em>
-
-
-</em>    public $var1 = 'value';
 }
         ]]>
         </code>
     </code_comparison>
     <standard>
     <![CDATA[
-    There should be one blank line between member vars.
+    There should be one blank line between properties.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: One blank line between each member var.">
+        <code title="Valid: One blank line between each property.">
         <![CDATA[
-class MyClass
-{
-
-    protected $var1 = 'value';<em>
-
-</em>    protected $var2 = 'value2';
-}
-
-interface MyInterface {
-
-    public $var1;<em>
-
-</em>    public $var2;
-}
-
 trait MyTrait {
 
     public $var1 = 'value';<em>
@@ -76,23 +39,8 @@ trait MyTrait {
 }
         ]]>
         </code>
-        <code title="Invalid: Incorrect number of blank lines between each member var.">
+        <code title="Invalid: Incorrect number of blank lines between each property.">
         <![CDATA[
-class MyClass
-{
-
-    protected $var1 = 'value';<em>
-</em>    protected $var2 = 'value2';
-}
-
-
-interface MyInterface {
-
-    public $var1;<em>
-</em>    public $var2;
-}
-
-
 trait MyTrait {
 
     public $var1 = 'value';<em>
@@ -105,14 +53,13 @@ trait MyTrait {
     </code_comparison>
     <standard>
     <![CDATA[
-    There should be no blank line between a member var's comment and the member var.
+    There should be no blank lines between a property DocBlock and the property declaration the DocBlock applies to.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: No blank lines between comment and member var.">
+        <code title="Valid: No blank lines between DocBlock and its property.">
         <![CDATA[
-class MyClass
-{
+new class {
 
     /**
      * The actions that this class can perform.
@@ -123,10 +70,9 @@ class MyClass
 }
         ]]>
         </code>
-        <code title="Invalid: Blank line(s) between comment and member var.">
+        <code title="Invalid: Blank line(s) between DocBlock and its property.">
         <![CDATA[
-class MyClass
-{
+new class {
 
     /**
      * The actions that this class can perform.
