@@ -11,18 +11,14 @@ function foo()
 {
 <em>}</em>
 
-    function bar()
-    {
-<em>    }</em>
-
 if (!class_exists('Foo')) {
     class Foo {
     <em>}</em>
 <em>}</em>
 
 <?php if ($something) { ?>
-    <p>some output</p>
-<em></em><?php } ?>
+    <span>some output</span>
+<em><?php }</em> ?>
         ]]>
         </code>
         <code title="Invalid: Closing brace misaligned with line containing opening brace.">
@@ -31,18 +27,14 @@ function foo()
 {
 <em> }</em>
 
-    function bar()
-    {
-<em>   }</em>
-
 if (!class_exists('Foo')) {
     class Foo {
-    <em>  }</em>
-<em>  }</em>
+<em>}</em>
+<em>    }</em>
 
 <?php if ($something) { ?>
-    <p>some output</p>
-<em> </em><?php } ?>
+    <span>some output</span>
+<em> <?php }</em> ?>
         ]]>
         </code>
     </code_comparison>
