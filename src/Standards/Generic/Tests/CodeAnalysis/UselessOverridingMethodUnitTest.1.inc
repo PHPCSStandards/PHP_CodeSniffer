@@ -78,10 +78,26 @@ class Bar {
         // This should not be flagged as non-ASCII chars have changed case, making this a different method name.
         return parent::DIFFERENTcaseDifferentNonAnsiiCharÁctÊrs();
     }
+
+    public function nestedFunctionShouldBailEarly() {
+        function nestedFunctionShouldBailEarly() {
+            // Invalid code needed to ensure an error is NOT triggered and the sniff bails early when handling nested function.
+            parent::nestedFunctionShouldBailEarly();
+        }
+    }
 }
 
 abstract class AbstractFoo {
     abstract public function sniffShouldBailEarly();
+
+    public function uselessMethodInAbstractClass() {
+        parent::uselessMethodInAbstractClass();
+    }
+
+    public function usefulMethodInAbstractClass() {
+        $a = 1;
+        parent::usefulMethodInAbstractClass($a);
+    }
 }
 
 interface InterfaceFoo {
@@ -90,4 +106,45 @@ interface InterfaceFoo {
 
 trait TraitFoo {
     abstract public function sniffShouldBailEarly();
+
+    public function usefulMethodInTrait() {
+        parent::usefulMethodInTrait();
+
+        return 1;
+    }
+
+    public function uselessMethodInTrait() {
+        return parent::uselessMethodInTrait();
+    }
+}
+
+enum EnumFoo {
+    public function sniffShouldBailEarly() {
+        // Invalid code needed to ensure an error is NOT triggered and the sniff bails early when handling an enum method.
+        parent::sniffShouldBailEarly();
+    }
+}
+
+function shouldBailEarly() {
+    // Invalid code needed to ensure an error is NOT triggered and the sniff bails early when handling a regular function.
+    parent::shouldBailEarly();
+}
+
+$anon = new class extends ParentClass {
+    public function uselessOverridingMethod() {
+        parent::uselessOverridingMethod();
+    }
+
+    public function usefulOverridingMethod() {
+        $a = 10;
+        parent::usefulOverridingMethod($a);
+    }
+};
+
+function foo() {
+    $anon = new class extends ParentClass {
+        public function uselessOverridingMethod() {
+            parent::uselessOverridingMethod();
+        }
+    };
 }

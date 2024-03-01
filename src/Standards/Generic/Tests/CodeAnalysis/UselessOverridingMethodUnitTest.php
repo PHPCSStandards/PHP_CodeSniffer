@@ -50,12 +50,16 @@ final class UselessOverridingMethodUnitTest extends AbstractSniffUnitTest
         switch ($testFile) {
         case 'UselessOverridingMethodUnitTest.1.inc':
             return [
-                4  => 1,
-                16 => 1,
-                38 => 1,
-                56 => 1,
-                68 => 1,
-                72 => 1,
+                4   => 1,
+                16  => 1,
+                38  => 1,
+                56  => 1,
+                68  => 1,
+                72  => 1,
+                93  => 1,
+                116 => 1,
+                134 => 1,
+                146 => 1,
             ];
         default:
             return [];

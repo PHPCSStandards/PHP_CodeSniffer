@@ -28,6 +28,17 @@ use PHP_CodeSniffer\Util\Tokens;
 class UselessOverridingMethodSniff implements Sniff
 {
 
+    /**
+     * Object-Oriented scopes in which a call to parent::method() can exist.
+     *
+     * @var array<int|string, bool> Keys are the token constants, value is irrelevant.
+     */
+    private $validOOScopes = [
+        T_CLASS      => true,
+        T_ANON_CLASS => true,
+        T_TRAIT      => true,
+    ];
+
 
     /**
      * Registers the tokens that this sniff wants to listen for.
@@ -57,6 +68,14 @@ class UselessOverridingMethodSniff implements Sniff
 
         // Skip function without body.
         if (isset($token['scope_opener'], $token['scope_closer']) === false) {
+            return;
+        }
+
+        $conditions    = $token['conditions'];
+        $lastCondition = end($conditions);
+
+        // Skip functions that are not a method part of a class, anon class or trait.
+        if (isset($this->validOOScopes[$lastCondition]) === false) {
             return;
         }
 
