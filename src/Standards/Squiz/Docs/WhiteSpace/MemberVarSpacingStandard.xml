@@ -1,7 +1,7 @@
 <documentation title="Member Var Spacing">
     <standard>
     <![CDATA[
-    There should be one blank line before the first property (member variable).
+    There should be exactly one blank line before the first property (member variable).
     ]]>
     </standard>
     <code_comparison>
@@ -25,7 +25,7 @@ class MyClass
     </code_comparison>
     <standard>
     <![CDATA[
-    There should be one blank line between properties.
+    There should be exactly one blank line between properties.
     ]]>
     </standard>
     <code_comparison>
