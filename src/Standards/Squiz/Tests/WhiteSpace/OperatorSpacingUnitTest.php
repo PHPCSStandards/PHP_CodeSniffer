@@ -33,7 +33,7 @@ final class OperatorSpacingUnitTest extends AbstractSniffUnitTest
     public function getErrorList($testFile='')
     {
         switch ($testFile) {
-        case 'OperatorSpacingUnitTest.inc':
+        case 'OperatorSpacingUnitTest.1.inc':
             return [
                 4   => 1,
                 5   => 2,
