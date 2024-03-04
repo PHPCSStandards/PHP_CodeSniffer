@@ -62,7 +62,7 @@ trait MyTrait {
     <code_comparison>
         <code title="Valid: No blank lines between DocBlock and its property.">
         <![CDATA[
-new class {
+$anon = new class {
 
     /**
      * The actions that this class can perform.
@@ -70,12 +70,12 @@ new class {
      * @var array
      */<em>
 </em>    public $actions = array();
-}
+};
         ]]>
         </code>
         <code title="Invalid: Blank line(s) between DocBlock and its property.">
         <![CDATA[
-new class {
+$anon = new class {
 
     /**
      * The actions that this class can perform.
@@ -84,7 +84,7 @@ new class {
      */<em>
 
 </em>    public $actions = array();
-}
+};
         ]]>
         </code>
     </code_comparison>
