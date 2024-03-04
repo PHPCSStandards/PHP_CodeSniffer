@@ -75,3 +75,5 @@ function setDefault(#[ImportValue(
     {
         // Do something
     }
+
+declare(strict_types=1);

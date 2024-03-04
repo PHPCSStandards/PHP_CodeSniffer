@@ -114,6 +114,9 @@ class OperatorSpacingSniff implements Sniff
         $targets[] = T_INLINE_ELSE;
         $targets[] = T_INSTANCEOF;
 
+        // Also register the contexts we want to specifically skip over.
+        $targets[] = T_DECLARE;
+
         return $targets;
 
     }//end register()
@@ -126,11 +129,24 @@ class OperatorSpacingSniff implements Sniff
      * @param int                         $stackPtr  The position of the current token in
      *                                               the stack passed in $tokens.
      *
-     * @return void
+     * @return void|int Optionally returns a stack pointer. The sniff will not be
+     *                  called again on the current file until the returned stack
+     *                  pointer is reached. Return `$phpcsFile->numTokens` to skip
+     *                  the rest of the file.
      */
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
+
+        // Skip over declare statements as those should be handled by different sniffs.
+        if ($tokens[$stackPtr]['code'] === T_DECLARE) {
+            if (isset($tokens[$stackPtr]['parenthesis_closer']) === false) {
+                // Parse error / live coding.
+                return $phpcsFile->numTokens;
+            }
+
+            return $tokens[$stackPtr]['parenthesis_closer'];
+        }
 
         if ($this->isOperator($phpcsFile, $stackPtr) === false) {
             return;
@@ -327,11 +343,13 @@ class OperatorSpacingSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
+        if ($tokens[$stackPtr]['code'] === T_DECLARE) {
+            return false;
+        }
+
         // Skip default values in function declarations.
         // Skip declare statements.
-        if ($tokens[$stackPtr]['code'] === T_EQUAL
-            || $tokens[$stackPtr]['code'] === T_MINUS
-        ) {
+        if ($tokens[$stackPtr]['code'] === T_EQUAL) {
             if (isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
                 $parenthesis = array_keys($tokens[$stackPtr]['nested_parenthesis']);
                 $bracket     = array_pop($parenthesis);
@@ -340,7 +358,6 @@ class OperatorSpacingSniff implements Sniff
                     if ($tokens[$function]['code'] === T_FUNCTION
                         || $tokens[$function]['code'] === T_CLOSURE
                         || $tokens[$function]['code'] === T_FN
-                        || $tokens[$function]['code'] === T_DECLARE
                     ) {
                         return false;
                     }
