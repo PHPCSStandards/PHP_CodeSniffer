@@ -26,21 +26,29 @@ final class ClosingDeclarationCommentUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the test file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile='')
     {
-        return [
-            13 => 1,
-            17 => 1,
-            31 => 1,
-            41 => 1,
-            59 => 1,
-            63 => 1,
-            67 => 1,
-            79 => 1,
-            83 => 1,
-        ];
+        switch ($testFile) {
+        case 'ClosingDeclarationCommentUnitTest.1.inc':
+            return [
+                13 => 1,
+                17 => 1,
+                31 => 1,
+                41 => 1,
+                59 => 1,
+                63 => 1,
+                67 => 1,
+                79 => 1,
+                83 => 1,
+            ];
+
+        default:
+            return [];
+        }
 
     }//end getErrorList()
 
@@ -51,11 +59,19 @@ final class ClosingDeclarationCommentUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
+     * @param string $testFile The name of the test file being tested.
+     *
      * @return array<int, int>
      */
-    public function getWarningList()
+    public function getWarningList($testFile='')
     {
-        return [71 => 1];
+        switch ($testFile) {
+        case 'ClosingDeclarationCommentUnitTest.1.inc':
+            return [71 => 1];
+
+        default:
+            return [];
+        }
 
     }//end getWarningList()
 
