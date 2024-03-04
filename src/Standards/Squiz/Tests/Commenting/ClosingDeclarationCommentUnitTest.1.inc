@@ -84,3 +84,21 @@ enum MissingClosingComment {
 
 enum HasClosingComment {
 }//end enum
+
+function misplacedClosingCommentIndentation() {
+}       //end misplacedClosingCommentIndentation()
+
+function misplacedClosingCommentMultipleNewlines() {
+}
+
+
+//end misplacedClosingCommentMultipleNewlines()
+
+function missingClosingComment() {
+}
+
+// anonymous classes don't need end comments.
+$anon = new class {};
+
+// arrow functions don't need end comments.
+$arrow = fn($a) => $a;
