@@ -531,3 +531,8 @@ $x = [
         default => $item
     },
      ];
+
+$x = [
+      1, static::helloWorld(), $class instanceof static,
+      2,
+     ];
