@@ -35,7 +35,9 @@ trait MyTrait {
 
     public $var1 = 'value';<em>
 
-</em>    public $var2 = 'value2';
+</em>    public $var2 = 'value2';<em>
+
+</em>    public $var3 = 'value3';
 }
         ]]>
         </code>
@@ -46,7 +48,8 @@ trait MyTrait {
     public $var1 = 'value';<em>
 
 
-</em>    public $var2 = 'value2';
+</em>    public $var2 = 'value2';<em>
+</em>    public $var3 = 'value3';
 }
         ]]>
         </code>
