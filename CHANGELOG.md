@@ -2352,27 +2352,40 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - The order that the files are searched is now: .phpcs.xml, phpcs.xml, .phpcs.xml.dist, phpcs.xml.dist
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Progress output now correctly shows skipped files
-- Progress output now shows 100% when the file list has finished processing (request #1697)
+- Progress output now shows 100% when the file list has finished processing (request [#1697])
 - Stopped some IDEs complaining about testing class aliases
     - Thanks to [Vytautas Stankus][@svycka] for the patch
 - Squiz.Commenting.InlineComment incorrectly identified comment blocks in some cases, muting some errors
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 
 ### Fixed
-- Fixed bug #1512 : PEAR.Functions.FunctionCallSignature enforces spaces when no arguments if required spaces is not 0
-- Fixed bug #1522 : Squiz Arrays.ArrayDeclaration and Strings.ConcatenationSpacing fixers causing parse errors with here/  nowdocs
-- Fixed bug #1570 : Squiz.Arrays.ArrayDeclaration fixer removes comments between array keyword and open parentheses
-- Fixed bug #1604 : File::isReference has problems with some bitwise operators and class property references
+- Fixed bug [#1512] : PEAR.Functions.FunctionCallSignature enforces spaces when no arguments if required spaces is not 0
+- Fixed bug [#1522] : Squiz Arrays.ArrayDeclaration and Strings.ConcatenationSpacing fixers causing parse errors with here/nowdocs
+- Fixed bug [#1570] : Squiz.Arrays.ArrayDeclaration fixer removes comments between array keyword and open parentheses
+- Fixed bug [#1604] : File::isReference has problems with some bitwise operators and class property references
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #1645 : Squiz.Commenting.InlineComment will fail to fix comments at the end of the file
+- Fixed bug [#1645] : Squiz.Commenting.InlineComment will fail to fix comments at the end of the file
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #1656 : Using the --sniffs argument has a problem with case sensitivity
-- Fixed bug #1657 : Uninitialized string offset: 0 when sniffing CSS
-- Fixed bug #1669 : Temporary expression proceeded by curly brace is detected as function call
-- Fixed bug #1681 : Huge arrays are super slow to scan with Squiz.Arrays.ArrayDeclaration sniff
-- Fixed bug #1694 : Squiz.Arrays.ArrayBracketSpacing is removing some comments during fixing
+- Fixed bug [#1656] : Using the --sniffs argument has a problem with case sensitivity
+- Fixed bug [#1657] : Uninitialized string offset: 0 when sniffing CSS
+- Fixed bug [#1669] : Temporary expression proceeded by curly brace is detected as function call
+- Fixed bug [#1681] : Huge arrays are super slow to scan with Squiz.Arrays.ArrayDeclaration sniff
+- Fixed bug [#1694] : Squiz.Arrays.ArrayBracketSpacing is removing some comments during fixing
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #1702 : Generic.WhiteSpaceDisallowSpaceIndent fixer bug when line only contains superfluous whitespace
+- Fixed bug [#1702] : Generic.WhiteSpaceDisallowSpaceIndent fixer bug when line only contains superfluous whitespace
+
+[#1697]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1697
+[#1512]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1512
+[#1522]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1522
+[#1570]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1570
+[#1604]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1604
+[#1645]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1645
+[#1656]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1656
+[#1657]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1657
+[#1669]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1669
+[#1681]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1681
+[#1694]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1694
+[#1702]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1702
 
 ## [3.1.0] - 2017-09-20
 ### Changed
@@ -2386,7 +2399,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - A phpcs.xml or phpcs.xml.dist file now takes precedence over the default_standard config setting
     - Thanks to [Björn Fischer][@Fischer-Bjoern] for the patch
-- Both phpcs.xml and phpcs.xml.dist files can now be prefixed with a dot (request #1566)
+- Both phpcs.xml and phpcs.xml.dist files can now be prefixed with a dot (request [#1566])
     - The order that the files are searched is: .phpcs.xml, .phpcs.xml.dist, phpcs.xml, phpcs.xml.dist
 - The autoloader will now search for files during unit tests runs from the same locations as during normal phpcs runs
     - Allows for easier unit testing of custom standards that use helper classes or custom namespaces
@@ -2408,7 +2421,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Added Generic.Files.OneObjectStructurePerFile sniff to ensure there is a single class/interface/trait per file
     - Thanks to [Mponos George][@gmponos] for the contribution
 - Function call sniffs now check variable function names and self/static object creation
-    - Specific sniffs are Generic.Functions.FunctionCallArgumentSpacing, PEAR.Functions.FunctionCallSignature, and   PSR2.Methods.FunctionCallSignature
+    - Specific sniffs are Generic.Functions.FunctionCallArgumentSpacing, PEAR.Functions.FunctionCallSignature, and PSR2.Methods.FunctionCallSignature
     - Thanks to [Michał Bundyra][@michalbundyra] for the patch
 - Generic.Files.LineLength can now be configured to ignore all comment lines, no matter their length
     - Set the ignoreComments property to TRUE (default is FALSE) in your ruleset.xml file to enable this
@@ -2437,17 +2450,28 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Martin Hujer][@mhujer] for the patch
 
 ### Fixed
-- Fixed bug #1550 : Squiz.Commenting.FunctionComment false positive when function contains closure
-- Fixed bug #1577 : Generic.InlineControlStructureSniff breaks with a comment between body and condition in do while loops
-- Fixed bug #1581 : Sniffs not loaded when one-standard directories are being registered in installed_paths
-- Fixed bug #1591 : Autoloader failing to load arbitrary files when installed_paths only set via a custom ruleset
-- Fixed bug #1605 : Squiz.WhiteSpace.OperatorSpacing false positive on unary minus after comment
+- Fixed bug [#1550] : Squiz.Commenting.FunctionComment false positive when function contains closure
+- Fixed bug [#1577] : Generic.InlineControlStructureSniff breaks with a comment between body and condition in do while loops
+- Fixed bug [#1581] : Sniffs not loaded when one-standard directories are being registered in installed_paths
+- Fixed bug [#1591] : Autoloader failing to load arbitrary files when installed_paths only set via a custom ruleset
+- Fixed bug [#1605] : Squiz.WhiteSpace.OperatorSpacing false positive on unary minus after comment
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #1615 : Uncaught RuntimeException when phpcbf fails to fix files
-- Fixed bug #1637 : Generic.WhiteSpaceScopeIndent closure argument indenting incorrect with multi-line strings
-- Fixed bug #1638 : Squiz.WhiteSpace.ScopeClosingBrace closure argument indenting incorrect with multi-line strings
-- Fixed bug #1640 : Squiz.Strings.DoubleQuoteUsage replaces tabs with spaces when fixing
+- Fixed bug [#1615] : Uncaught RuntimeException when phpcbf fails to fix files
+- Fixed bug [#1637] : Generic.WhiteSpaceScopeIndent closure argument indenting incorrect with multi-line strings
+- Fixed bug [#1638] : Squiz.WhiteSpace.ScopeClosingBrace closure argument indenting incorrect with multi-line strings
+- Fixed bug [#1640] : Squiz.Strings.DoubleQuoteUsage replaces tabs with spaces when fixing
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+
+[#1566]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1566
+[#1550]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1550
+[#1577]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1577
+[#1581]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1581
+[#1591]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1591
+[#1605]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1605
+[#1615]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1615
+[#1637]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1637
+[#1638]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1638
+[#1640]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1640
 
 ## [3.0.2] - 2017-07-18
 ### Changed
