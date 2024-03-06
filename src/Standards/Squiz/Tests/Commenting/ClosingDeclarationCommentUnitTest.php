@@ -49,9 +49,12 @@ final class ClosingDeclarationCommentUnitTest extends AbstractSniffUnitTest
                 98 => 1,
             ];
 
+        case 'ClosingDeclarationCommentUnitTest.4.inc':
+            return [8 => 1];
+
         default:
             return [];
-        }
+        }//end switch
 
     }//end getErrorList()
 
