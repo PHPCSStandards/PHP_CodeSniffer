@@ -85,11 +85,11 @@ class JumbledIncrementerSniff implements Sniff
             }
 
             $inner = $this->findIncrementers($tokens, $tokens[$start]);
-            $diff  = array_intersect($outer, $inner);
+            $commonIncrementers = array_intersect($outer, $inner);
 
-            if (count($diff) !== 0) {
+            if (count($commonIncrementers) !== 0) {
                 $error = 'Loop incrementor (%s) jumbling with inner loop';
-                $data  = [join(', ', $diff)];
+                $data  = [join(', ', $commonIncrementers)];
                 $phpcsFile->addWarning($error, $stackPtr, 'Found', $data);
             }
         }
