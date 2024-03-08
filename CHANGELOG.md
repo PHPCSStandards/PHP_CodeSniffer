@@ -2476,7 +2476,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ## [3.0.2] - 2017-07-18
 ### Changed
 - The code report now gracefully handles tokenizer exceptions
-- The phpcs and phpcbf scripts and now the only places that exit() in the code
+- The phpcs and phpcbf scripts are now the only places that exit() in the code
     - This allows for easier usage of core PHPCS functions from external scripts
     - If you are calling Runner::runPHPCS() or Runner::runPHPCBF() directly, you will get back the full range of exit codes
     - If not, catch the new DeepExitException to get the error message ($e->getMessage()) and exit code ($e->getCode());
@@ -2491,20 +2491,31 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ### Fixed
 - Fixed a problem where the source report was not printing the correct number of errors found
 - Fixed a problem where the --cache=/path/to/cachefile CLI argument was not working
-- Fixed bug #1465 : Generic.WhiteSpace.ScopeIndent reports incorrect errors when indenting double arrows in short arrays
-- Fixed bug #1478 : Indentation in fallthrough CASE that contains a closure
-- Fixed bug #1497 : Fatal error if composer prepend-autoloader is set to false
+- Fixed bug [#1465] : Generic.WhiteSpace.ScopeIndent reports incorrect errors when indenting double arrows in short arrays
+- Fixed bug [#1478] : Indentation in fallthrough CASE that contains a closure
+- Fixed bug [#1497] : Fatal error if composer prepend-autoloader is set to false
     - Thanks to [Kunal Mehta][@legoktm] for the patch
-- Fixed bug #1503 : Alternative control structure syntax not always recognized as scoped
-- Fixed bug #1523 : Fatal error when using the --suffix argument
+- Fixed bug [#1503] : Alternative control structure syntax not always recognized as scoped
+- Fixed bug [#1523] : Fatal error when using the --suffix argument
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #1526 : Use of basepath setting can stop PHPCBF being able to write fixed files
-- Fixed bug #1530 : Generic.WhiteSpace.ScopeIndent can increase indent too much for lines within code blocks
-- Fixed bug #1547 : Wrong token type for backslash in use function
+- Fixed bug [#1526] : Use of basepath setting can stop PHPCBF being able to write fixed files
+- Fixed bug [#1530] : Generic.WhiteSpace.ScopeIndent can increase indent too much for lines within code blocks
+- Fixed bug [#1547] : Wrong token type for backslash in use function
     - Thanks to [Michał Bundyra][@michalbundyra] for the patch
-- Fixed bug #1549 : Squiz.PHP.EmbeddedPhp fixer conflict with // comment before PHP close tag
+- Fixed bug [#1549] : Squiz.PHP.EmbeddedPhp fixer conflict with // comment before PHP close tag
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #1560 : Squiz.Commenting.FunctionComment fatal error when fixing additional param comment lines that have no indent
+- Fixed bug [#1560] : Squiz.Commenting.FunctionComment fatal error when fixing additional param comment lines that have no indent
+
+[#1465]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1465
+[#1478]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1478
+[#1497]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1497
+[#1503]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1503
+[#1523]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1523
+[#1526]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1526
+[#1530]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1530
+[#1547]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1547
+[#1549]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1549
+[#1560]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1560
 
 ## [3.0.1] - 2017-06-14
 ### Security
@@ -2523,7 +2534,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - PHPCS now stops looking for a phpcs.xml file as soon as one is found, favoring the closest one to the current dir
 - Added missing help text for the --stdin-path CLI option to --help
 - Re-added missing help text for the --file-list and --bootstrap CLI options to --help
-- Runner::runPHPCS() and Runner::runPHPCBF() now return an exit code instead of exiting directly (request #1484)
+- Runner::runPHPCS() and Runner::runPHPCBF() now return an exit code instead of exiting directly (request [#1484])
 - The Squiz standard now enforces short array syntax by default
 - The autoloader is now working correctly with classes created with class_alias()
 - The autoloader will now search for files inside all directories in the installed_paths config var
@@ -2544,34 +2555,49 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ### Fixed
 - Fixed a problem where excluding a message from a custom standard's own sniff would exclude the whole sniff
     - This caused some PSR2 errors to be under-reported
-- Fixed bug #1442 : T_NULLABLE detection not working for nullable parameters and return type hints in some cases
-- Fixed bug #1447 : Running the unit tests with a phpunit config file breaks the test suite
+- Fixed bug [#1442] : T_NULLABLE detection not working for nullable parameters and return type hints in some cases
+- Fixed bug [#1447] : Running the unit tests with a phpunit config file breaks the test suite
     - Unknown arguments were not being handled correctly, but are now stored in $config->unknown
-- Fixed bug #1449 : Generic.Classes.OpeningBraceSameLine doesn't detect comment before opening brace
+- Fixed bug [#1449] : Generic.Classes.OpeningBraceSameLine doesn't detect comment before opening brace
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #1450 : Coding standard located under an installed_path with the same directory name throws an error
+- Fixed bug [#1450] : Coding standard located under an installed_path with the same directory name throws an error
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #1451 : Sniff exclusions/restrictions dont work with custom sniffs unless they use the PHP_CodeSniffer NS
-- Fixed bug #1454 : Squiz.WhiteSpace.OperatorSpacing is not checking spacing on either side of a short ternary operator
+- Fixed bug [#1451] : Sniff exclusions/restrictions don't work with custom sniffs unless they use the PHP_CodeSniffer NS
+- Fixed bug [#1454] : Squiz.WhiteSpace.OperatorSpacing is not checking spacing on either side of a short ternary operator
     - Thanks to [Mponos George][@gmponos] for the patch
-- Fixed bug #1495 : Setting an invalid installed path breaks all commands
-- Fixed bug #1496 : Squiz.Strings.DoubleQuoteUsage not unescaping dollar sign when fixing
+- Fixed bug [#1495] : Setting an invalid installed path breaks all commands
+- Fixed bug [#1496] : Squiz.Strings.DoubleQuoteUsage not unescaping dollar sign when fixing
     - Thanks to [Michał Bundyra][@michalbundyra] for the patch
-- Fixed bug #1501 : Interactive mode is broken
-- Fixed bug #1504 : PSR2.Namespaces.UseDeclaration hangs fixing use statement with no trailing code
+- Fixed bug [#1501] : Interactive mode is broken
+- Fixed bug [#1504] : PSR2.Namespaces.UseDeclaration hangs fixing use statement with no trailing code
+
+[#1484]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1484
+[#1442]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1442
+[#1447]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1447
+[#1449]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1449
+[#1450]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1450
+[#1451]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1451
+[#1454]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1454
+[#1495]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1495
+[#1496]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1496
+[#1501]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1501
+[#1504]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1504
 
 ## [2.9.1] - 2017-05-22
 ### Fixed
-- Fixed bug #1442 : T_NULLABLE detection not working for nullable parameters and return type hints in some cases
-- Fixed bug #1448 : Generic.Classes.OpeningBraceSameLine doesn't detect comment before opening brace
+- Fixed bug [#1442] : T_NULLABLE detection not working for nullable parameters and return type hints in some cases
+- Fixed bug [#1448] : Generic.Classes.OpeningBraceSameLine doesn't detect comment before opening brace
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+
+[#1442]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1442
+[#1448]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1448
 
 ## [3.0.0] - 2017-05-04
 ### Changed
-- Added an --ignore-annotations command line argument to ignore all @codingStandards annotations in code comments (request #811)
+- Added an --ignore-annotations command line argument to ignore all @codingStandards annotations in code comments (request [#811])
 - This allows you to force errors to be shown that would otherwise be ignored by code comments
-    - Also stop files being able to change sniff properties mid way through processing
-- An error is now reported if no sniffs were registered to be run (request #1129)
+    - Also stop files being able to change sniff properties midway through processing
+- An error is now reported if no sniffs were registered to be run (request [#1129])
 - The autoloader will now search for files inside the directory of any loaded coding standard
     - This allows autoloading of any file inside a custom coding standard without manually requiring them
     - Ensure your namespace begins with your coding standard's directory name and follows PSR-4
@@ -2586,8 +2612,12 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Includes all changes from the 2.9.0 release
 
 ### Fixed
-- Fixed bug #834 : PSR2.ControlStructures.SwitchDeclaration does not handle if branches with returns
+- Fixed bug [#834] : PSR2.ControlStructures.SwitchDeclaration does not handle if branches with returns
     - Thanks to [Fabian Wiget][@fabacino] for the patch
+
+[#811]: https://github.com/squizlabs/PHP_CodeSniffer/issues/811
+[#1129]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1129
+[#834]: https://github.com/squizlabs/PHP_CodeSniffer/issues/834
 
 ## [3.0.0RC4] - 2017-03-02
 ### Security
