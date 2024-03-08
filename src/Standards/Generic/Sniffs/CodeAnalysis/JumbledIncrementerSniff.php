@@ -108,7 +108,7 @@ class JumbledIncrementerSniff implements Sniff
     protected function findIncrementers(array $tokens, array $token)
     {
         // Skip invalid statement.
-        if (isset($token['parenthesis_opener']) === false) {
+        if (isset($token['parenthesis_opener'], $token['parenthesis_closer']) === false) {
             return [];
         }
 
