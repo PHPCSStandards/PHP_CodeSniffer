@@ -106,7 +106,7 @@ _Nothing yet._
 [#198]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/198
 [#227]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/227
 [#235]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/235
-[#277]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/277
+[#277]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/277
 [#281]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/281
 [#288]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/288
 [#296]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/296
@@ -162,8 +162,8 @@ _Nothing yet._
     - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch
 
 [#124]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/124
-[#150]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/150
-[#154]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/154
+[#150]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/150
+[#154]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/154
 [#178]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/178
 [#205]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/205
 [#211]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/211
