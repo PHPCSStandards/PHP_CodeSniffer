@@ -69,7 +69,7 @@ class CallTimePassByReferenceSniff implements Sniff
             true
         );
 
-        if ($tokens[$openBracket]['code'] !== T_OPEN_PARENTHESIS) {
+        if ($openBracket === false || $tokens[$openBracket]['code'] !== T_OPEN_PARENTHESIS) {
             return;
         }
 
