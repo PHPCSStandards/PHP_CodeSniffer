@@ -2801,7 +2801,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - PEAR.Commenting.ClassComment now supports checking of traits as well as classes and interfaces
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Squiz.Commenting.FunctionCommentThrowTag now supports re-throwing exceptions (request #946)
+- Squiz.Commenting.FunctionCommentThrowTag now supports re-throwing exceptions (request [#946])
     - Thanks to [Samuel Levy][@samlev] for the patch
 - Squiz.PHP.DisallowMultipleAssignments now ignores PHP4-style member var assignments
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
@@ -2812,20 +2812,33 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Added missing error codes for a couple of sniffs so they can now be customised as normal
 
 ### Fixed
-- Fixed bug #1266 : PEAR.WhiteSpace.ScopeClosingBrace can throw an error while fixing mixed PHP/HTML
-- Fixed bug #1364 : Yield From values are not recognised as returned values in Squiz FunctionComment sniff
-- Fixed bug #1373 : Error in tab expansion results in white-space of incorrect size
+- Fixed bug [#1266] : PEAR.WhiteSpace.ScopeClosingBrace can throw an error while fixing mixed PHP/HTML
+- Fixed bug [#1364] : Yield From values are not recognised as returned values in Squiz FunctionComment sniff
+- Fixed bug [#1373] : Error in tab expansion results in white-space of incorrect size
     - Thanks to [Mark Clements][@MarkMaldaba] for the patch
-- Fixed bug #1381 : Tokenizer: dereferencing incorrectly identified as short array
-- Fixed bug #1387 : Squiz.ControlStructures.ControlSignature does not handle alt syntax when checking space after closing   brace
-- Fixed bug #1392 : Scope indent calculated incorrectly when using array destructuring
-- Fixed bug #1394 : integer type hints appearing as TypeHintMissing instead of ScalarTypeHintMissing
+- Fixed bug [#1381] : Tokenizer: dereferencing incorrectly identified as short array
+- Fixed bug [#1387] : Squiz.ControlStructures.ControlSignature does not handle alt syntax when checking space after closing brace
+- Fixed bug [#1392] : Scope indent calculated incorrectly when using array destructuring
+- Fixed bug [#1394] : integer type hints appearing as TypeHintMissing instead of ScalarTypeHintMissing
     - PHP 7 type hints were also being shown when run under PHP 5 in some cases
-- Fixed bug #1405 : Squiz.WhiteSpace.ScopeClosingBrace fails to fix closing brace within indented PHP tags
-- Fixed bug #1421 : Ternaries used in constant scalar expression for param default misidentified by tokenizer
-- Fixed bug #1431 : PHPCBF can't fix short open tags when they are not followed by a space
+- Fixed bug [#1405] : Squiz.WhiteSpace.ScopeClosingBrace fails to fix closing brace within indented PHP tags
+- Fixed bug [#1421] : Ternaries used in constant scalar expression for param default misidentified by tokenizer
+- Fixed bug [#1431] : PHPCBF can't fix short open tags when they are not followed by a space
     - Thanks to [Gonçalo Queirós][@ghunti] for the patch
-- Fixed bug #1432 : PHPCBF can make invalid fixes to inline JS control structures that make use of JS objects
+- Fixed bug [#1432] : PHPCBF can make invalid fixes to inline JS control structures that make use of JS objects
+
+[#946]: https://github.com/squizlabs/PHP_CodeSniffer/pull/946
+[#1266]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1266
+[#1364]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1364
+[#1373]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1373
+[#1381]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1381
+[#1387]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1387
+[#1392]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1392
+[#1394]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1394
+[#1405]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1405
+[#1421]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1421
+[#1431]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1431
+[#1432]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1432
 
 ## [2.8.1] - 2017-03-02
 ### Security
@@ -2863,15 +2876,22 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Squiz.ControlStructures.InlineIfDeclaration is now able to fix the spacing errors it reports
 
 ### Fixed
-- Fixed bug #1340 : STDIN file contents not being populated in some cases
+- Fixed bug [#1340] : STDIN file contents not being populated in some cases
     - Thanks to [David Biňovec][@david-binda] for the patch
-- Fixed bug #1344 : PEAR.Functions.FunctionCallSignatureSniff throws error for blank comment lines
-- Fixed bug #1347 : PSR2.Methods.FunctionCallSignature strips some comments during fixing
+- Fixed bug [#1344] : PEAR.Functions.FunctionCallSignatureSniff throws error for blank comment lines
+- Fixed bug [#1347] : PSR2.Methods.FunctionCallSignature strips some comments during fixing
     - Thanks to [Algirdas Gurevicius][@uniquexor] for the patch
-- Fixed bug #1349 : Squiz.Strings.DoubleQuoteUsage.NotRequired message is badly formatted when string contains a CR newline char
+- Fixed bug [#1349] : Squiz.Strings.DoubleQuoteUsage.NotRequired message is badly formatted when string contains a CR newline char
     - Thanks to [Algirdas Gurevicius][@uniquexor] for the patch
-- Fixed bug #1350 : Invalid Squiz.Formatting.OperatorBracket error when using namespaces
-- Fixed bug #1369 : Empty line in multi-line function declaration cause infinite loop
+- Fixed bug [#1350] : Invalid Squiz.Formatting.OperatorBracket error when using namespaces
+- Fixed bug [#1369] : Empty line in multi-line function declaration cause infinite loop
+
+[#1340]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1340
+[#1344]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1344
+[#1347]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1347
+[#1349]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1349
+[#1350]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1350
+[#1369]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1369
 
 ## [2.8.0] - 2017-02-02
 ### Changed
@@ -2887,13 +2907,13 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - The getMethodParameters() method now supports closures
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Added more guard code for JS files with syntax errors (request #1271 and request #1272)
-- Added more guard code for CSS files with syntax errors (request #1304)
+- Added more guard code for JS files with syntax errors (request [#1271] and request [#1272])
+- Added more guard code for CSS files with syntax errors (request [#1304])
 - PEAR.Commenting.FunctionComment fixers now correctly handle multi-line param comments
 - AbstractVariableSniff now supports anonymous classes
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Generic.NamingConventions.ConstructorName and PEAR.NamingConventions.ValidVariable now support anonymous classes
-- Generic.NamingConventions.CamelCapsFunctionName and PEAR.NamingConventions.ValidFunctionName now support anonymous   classes
+- Generic.NamingConventions.CamelCapsFunctionName and PEAR.NamingConventions.ValidFunctionName now support anonymous classes
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Generic.CodeAnalysis.UnusedFunctionParameter and PEAR.Functions.ValidDefaultValue now support closures
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
@@ -2908,30 +2928,52 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Algirdas Gurevicius][@uniquexor] for the patch
 
 ### Fixed
-- Fixed bug #1230 : JS tokeniser incorrectly tokenises bitwise shifts as comparison
+- Fixed bug [#1230] : JS tokeniser incorrectly tokenises bitwise shifts as comparison
     - Thanks to [Ryan McCue][@rmccue] for the patch
-- Fixed bug #1237 : Uninitialized string offset in PHP Tokenizer on PHP 5.2
-- Fixed bug #1239 : Warning when static method name is 'default'
-- Fixed bug #1240 : False positive for function names starting with triple underscore
+- Fixed bug [#1237] : Uninitialized string offset in PHP Tokenizer on PHP 5.2
+- Fixed bug [#1239] : Warning when static method name is 'default'
+- Fixed bug [#1240] : False positive for function names starting with triple underscore
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #1245 : SELF is not recognised as T_SELF token in: return new self
-- Fixed bug #1246 : A mix of USE statements with and without braces can cause the tokenizer to mismatch brace tokens
+- Fixed bug [#1245] : SELF is not recognised as T_SELF token in: return new self
+- Fixed bug [#1246] : A mix of USE statements with and without braces can cause the tokenizer to mismatch brace tokens
     - Thanks to [Michał Bundyra][@michalbundyra] for the patch
-- Fixed bug #1249 : GitBlame report requires a .git directory
-- Fixed bug #1252 : Squiz.Strings.ConcatenationSpacing fix creates syntax error when joining a number to a string
-- Fixed bug #1253 : Generic.ControlStructures.InlineControlStructure fix creates syntax error fixing if-try/catch
-- Fixed bug #1255 : Inconsistent indentation check results when ELSE on new line
-- Fixed bug #1257 : Double dash in CSS class name can lead to "Named colours are forbidden" false positives
-- Fixed bug #1260 : Syntax errors not being shown when error_prepend_string is set
+- Fixed bug [#1249] : GitBlame report requires a .git directory
+- Fixed bug [#1252] : Squiz.Strings.ConcatenationSpacing fix creates syntax error when joining a number to a string
+- Fixed bug [#1253] : Generic.ControlStructures.InlineControlStructure fix creates syntax error fixing if-try/catch
+- Fixed bug [#1255] : Inconsistent indentation check results when ELSE on new line
+- Fixed bug [#1257] : Double dash in CSS class name can lead to "Named colours are forbidden" false positives
+- Fixed bug [#1260] : Syntax errors not being shown when error_prepend_string is set
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug #1264 : Array return type hint is sometimes detected as T_ARRAY_HINT instead of T_RETURN_TYPE
+- Fixed bug [#1264] : Array return type hint is sometimes detected as T_ARRAY_HINT instead of T_RETURN_TYPE
     - Thanks to [Jaroslav Hanslík][@kukulich] for the patch
-- Fixed bug #1265 : ES6 arrow function raises unexpected operator spacing errors
-- Fixed bug #1267 : Fixer incorrectly handles filepaths with repeated dir names
+- Fixed bug [#1265] : ES6 arrow function raises unexpected operator spacing errors
+- Fixed bug [#1267] : Fixer incorrectly handles filepaths with repeated dir names
     - Thanks to [Sergey Ovchinnikov][@orx0r] for the patch
-- Fixed bug #1276 : Commenting.FunctionComment.InvalidReturnVoid conditional issue with anonymous classes
-- Fixed bug #1277 : Squiz.PHP.DisallowMultipleAssignments.Found error when var assignment is on the same line as an   open tag
-- Fixed bug #1284 : Squiz.Arrays.ArrayBracketSpacing.SpaceBeforeBracket false positive match for short list syntax
+- Fixed bug [#1276] : Commenting.FunctionComment.InvalidReturnVoid conditional issue with anonymous classes
+- Fixed bug [#1277] : Squiz.PHP.DisallowMultipleAssignments.Found error when var assignment is on the same line as an open tag
+- Fixed bug [#1284] : Squiz.Arrays.ArrayBracketSpacing.SpaceBeforeBracket false positive match for short list syntax
+
+[#1271]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1271
+[#1272]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1272
+[#1304]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1304
+[#1230]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1230
+[#1237]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1237
+[#1239]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1239
+[#1240]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1240
+[#1245]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1245
+[#1246]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1246
+[#1249]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1249
+[#1252]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1252
+[#1253]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1253
+[#1255]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1255
+[#1257]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1257
+[#1260]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1260
+[#1264]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1264
+[#1265]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1265
+[#1267]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1267
+[#1276]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1276
+[#1277]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1277
+[#1284]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1284
 
 ## [2.7.1] - 2016-11-30
 ### Changed
