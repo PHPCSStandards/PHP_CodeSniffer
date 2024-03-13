@@ -2680,10 +2680,10 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#1233] : Can't set config data inside ruleset.xml file
 - Fixed bug [#1241] : CodeSniffer.conf not working with 3.x PHAR file
 
-[#1251]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1251
-[#1270]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1270
 [#1233]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1233
 [#1241]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1241
+[#1251]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1251
+[#1270]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1270
 
 ## [3.0.0RC2] - 2016-11-30
 ### Changed
@@ -2697,8 +2697,8 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#1167] : 3.0.0RC1 PHAR does not work with PEAR standard
 - Fixed bug [#1208] : Excluding files doesn't work when using STDIN with a filename specified
 
-[#1186]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1186
 [#1167]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1167
+[#1186]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1186
 [#1208]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1208
 
 ## [3.0.0RC1] - 2016-09-02
@@ -2799,14 +2799,14 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - The included SVN pre-commit hook has been removed
     - Hooks for version control systems will no longer be maintained within the PHPCS project
 
-[#530]: https://github.com/squizlabs/PHP_CodeSniffer/issues/530
-[#421]: https://github.com/squizlabs/PHP_CodeSniffer/issues/421
-[#760]: https://github.com/squizlabs/PHP_CodeSniffer/issues/760
 [#419]: https://github.com/squizlabs/PHP_CodeSniffer/issues/419
-[#571]: https://github.com/squizlabs/PHP_CodeSniffer/pull/571
+[#421]: https://github.com/squizlabs/PHP_CodeSniffer/issues/421
 [#470]: https://github.com/squizlabs/PHP_CodeSniffer/issues/470
-[#733]: https://github.com/squizlabs/PHP_CodeSniffer/issues/733
+[#530]: https://github.com/squizlabs/PHP_CodeSniffer/issues/530
+[#571]: https://github.com/squizlabs/PHP_CodeSniffer/pull/571
 [#656]: https://github.com/squizlabs/PHP_CodeSniffer/issues/656
+[#733]: https://github.com/squizlabs/PHP_CodeSniffer/issues/733
+[#760]: https://github.com/squizlabs/PHP_CodeSniffer/issues/760
 [#930]: https://github.com/squizlabs/PHP_CodeSniffer/issues/930
 
 ## [2.9.0] - 2017-05-04
