@@ -2649,20 +2649,23 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Includes all changes from the 2.8.1 release
 
 ### Fixed
-- Fixed bug #1333 : The new autoloader breaks some frameworks with custom autoloaders
-- Fixed bug #1334 : Undefined offset when explaining standard with custom sniffs
+- Fixed bug [#1333] : The new autoloader breaks some frameworks with custom autoloaders
+- Fixed bug [#1334] : Undefined offset when explaining standard with custom sniffs
+
+[#1333]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1333
+[#1334]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1334
 
 ## [3.0.0RC3] - 2017-02-02
 ### Changed
 - Added support for ES6 class declarations
     - Previously, these class were tokenized as JS objects but are now tokenized as normal T_CLASS structures
 - Added support for ES6 method declarations, where the "function" keyword is not used
-    - Previously, these methods were tokenized as JS objects (fixes bug #1251)
+    - Previously, these methods were tokenized as JS objects (fixes bug [#1251])
     - The name of the ES6 method is now assigned the T_FUNCTION keyword and treated like a normal function
-    - Custom sniffs that support JS and listen for T_FUNCTION tokens can't assume the token represents the word   "function"
+    - Custom sniffs that support JS and listen for T_FUNCTION tokens can't assume the token represents the word "function"
     - Check the contents of the token first, or use $phpcsFile->getDeclarationName($stackPtr) if you just want its name
     - There is no change for custom sniffs that only check PHP code
-- PHPCBF exit codes have been changed so they are now more useful (request #1270)
+- PHPCBF exit codes have been changed so they are now more useful (request [#1270])
     - Exit code 0 is now used to indicate that no fixable errors were found, and so nothing was fixed
     - Exit code 1 is now used to indicate that all fixable errors were fixed correctly
     - Exit code 2 is now used to indicate that PHPCBF failed to fix some of the fixable errors it found
@@ -2674,26 +2677,35 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed an issue where excluding a file using a @codingStandardsIgnoreFile comment would produce errors
     - For PHPCS, it would show empty files being processed
     - For PHPCBF, it would produce a PHP error
-- Fixed bug #1233 : Can't set config data inside ruleset.xml file
-- Fixed bug #1241 : CodeSniffer.conf not working with 3.x PHAR file
+- Fixed bug [#1233] : Can't set config data inside ruleset.xml file
+- Fixed bug [#1241] : CodeSniffer.conf not working with 3.x PHAR file
+
+[#1233]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1233
+[#1241]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1241
+[#1251]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1251
+[#1270]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1270
 
 ## [3.0.0RC2] - 2016-11-30
 ### Changed
 - Made the Runner class easier to use with wrapper scripts
-- Full usage information is no longer printed when a usage error is encountered (request #1186)
+- Full usage information is no longer printed when a usage error is encountered (request [#1186])
     - Makes it a lot easier to find and read the error message that was printed
 - Includes all changes from the 2.7.1 release
 
 ### Fixed
 - Fixed an undefined var name error that could be produced while running PHPCBF
-- Fixed bug #1167 : 3.0.0RC1 PHAR does not work with PEAR standard
-- Fixed bug #1208 : Excluding files doesn't work when using STDIN with a filename specified
+- Fixed bug [#1167] : 3.0.0RC1 PHAR does not work with PEAR standard
+- Fixed bug [#1208] : Excluding files doesn't work when using STDIN with a filename specified
+
+[#1167]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1167
+[#1186]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1186
+[#1208]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1208
 
 ## [3.0.0RC1] - 2016-09-02
 ### Changed
 - Progress output now shows E and W in green when a file has fixable errors or warnings
     - Only supported if colors are enabled
-- PHPCBF no longer produces verbose output by default (request #699)
+- PHPCBF no longer produces verbose output by default (request [#699])
     - Use the -v command line argument to show verbose fixing output
     - Use the -q command line argument to disable verbose information if enabled by default
 - PHPBF now prints a summary report after fixing files
@@ -2708,24 +2720,26 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ### Fixed
 - Fixed shell error appearing on some systems when trying to find executable paths
 
+[#699]: https://github.com/squizlabs/PHP_CodeSniffer/issues/699
+
 ## [3.0.0a1] - 2016-07-20
 ### Changed
 - Min PHP version increased from 5.1.2 to 5.4.0
-- Added optional caching of results between runs (request #530)
+- Added optional caching of results between runs (request [#530])
     - Enable the cache by using the --cache command line argument
     - If you want the cache file written somewhere specific, use --cache=/path/to/cacheFile
     - Use the command "phpcs --config-set cache true" to turn caching on by default
     - Use the --no-cache command line argument to disable caching if it is being turned on automatically
-- Add support for checking file in parallel (request #421)
+- Add support for checking file in parallel (request [#421])
     - Tell PHPCS how many files to check at once using the --parallel command line argument
     - To check 100 files at once, using --parallel=100
     - To disable parallel checking if it is being turned on automatically, use --parallel=1
     - Requires PHP to be compiled with the PCNTL package
-- The default encoding has been changed from iso-8859-1 to utf-8 (request #760)
+- The default encoding has been changed from iso-8859-1 to utf-8 (request [#760])
     - The --encoding command line argument still works, but you no longer have to set it to process files as utf-8
     - If encoding is being set to utf-8 in a ruleset or on the CLI, it can be safely removed
     - If the iconv PHP extension is not installed, standard non-multibyte aware functions will be used
-- Added a new "code" report type to show a code snippet for each error (request #419)
+- Added a new "code" report type to show a code snippet for each error (request [#419])
     - The line containing the error is printed, along with 2 lines above and below it to show context
     - The location of the errors is underlined in the code snippet if you also use --colors
     - Use --report=code to generate this report
@@ -2738,7 +2752,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Added support for only checking files that have been locally modified or added in a git repo
     - Use --filter=gitmodified to check these files
     - You still need to give PHPCS a list of files or directories in which to check
-- Added automatic discovery of executable paths (request #571)
+- Added automatic discovery of executable paths (request [#571])
     - Thanks to [Sergei Morozov][@morozov] for the patch
 - You must now pass "-" on the command line to have PHPCS wait for STDIN
     - E.g., phpcs --standard=PSR2 -
@@ -2748,14 +2762,14 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - This should stop bugs inside sniffs causing infinite loops
     - Also stops invalid reports being produced as errors don't print to the screen directly
 - Sniff codes are no longer optional
-    - If a sniff throws and error or a warning, it must specify an internal code for that message
+    - If a sniff throws an error or a warning, it must specify an internal code for that message
 - The installed_paths config setting can now point directly to a standard
     - Previously, it had to always point to the directory in which the standard lives
 - Multiple reports can now be specified using the --report command line argument
     - Report types are separated by commas
     - E.g., --report=full,summary,info
     - Previously, you had to use one argument for each report such as --report=full --report=summary --report=info
-- You can now set the severity, message type, and exclude patterns for and entire sniff, category, or standard
+- You can now set the severity, message type, and exclude patterns for an entire sniff, category, or standard
     - Previously, this was only available for a single message
 - You can now include a single sniff code in a ruleset instead of having to include an entire sniff
     - Including a sniff code will automatically exclude all other messages from that sniff
@@ -2763,17 +2777,17 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - PHPCBF no longer uses patch
     - Files are now always overwritten
     - The --no-patch option has been removed
-- Added a --basepath option to strip a directory from the front of file paths in output (request #470)
+- Added a --basepath option to strip a directory from the front of file paths in output (request [#470])
     - The basepath is absolute or relative to the current directory
     - E.g., to output paths relative to current dir in reports, use --basepath=.
-- Ignore rules are now checked when using STDIN (request #733)
-- Added an include-pattern tag to rulesets to include a sniff for specific files and folders only (request #656)
+- Ignore rules are now checked when using STDIN (request [#733])
+- Added an include-pattern tag to rulesets to include a sniff for specific files and folders only (request [#656])
     - This is the exact opposite of the exclude-pattern tag
     - This option is only usable within sniffs, not globally like exclude-patterns are
 - Added a new -m option to stop error messages from being recorded, which saves a lot of memory
     - PHPCBF always uses this setting to reduce memory as it never outputs error messages
     - Setting the $recordErrors member var inside custom report classes is no longer supported (use -m instead)
-- Exit code 2 is now used to indicate fixable errors were found (request #930)
+- Exit code 2 is now used to indicate fixable errors were found (request [#930])
     - Exit code 3 is now used for general script execution errors
     - Exit code 1 is used to indicate that coding standard errors were found, but none are fixable
     - Exit code 0 is unchanged and continues to mean no coding standard errors found
@@ -2784,6 +2798,16 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Running "phpcs" without any arguments from a git clone will use this ruleset
 - The included SVN pre-commit hook has been removed
     - Hooks for version control systems will no longer be maintained within the PHPCS project
+
+[#419]: https://github.com/squizlabs/PHP_CodeSniffer/issues/419
+[#421]: https://github.com/squizlabs/PHP_CodeSniffer/issues/421
+[#470]: https://github.com/squizlabs/PHP_CodeSniffer/issues/470
+[#530]: https://github.com/squizlabs/PHP_CodeSniffer/issues/530
+[#571]: https://github.com/squizlabs/PHP_CodeSniffer/pull/571
+[#656]: https://github.com/squizlabs/PHP_CodeSniffer/issues/656
+[#733]: https://github.com/squizlabs/PHP_CodeSniffer/issues/733
+[#760]: https://github.com/squizlabs/PHP_CodeSniffer/issues/760
+[#930]: https://github.com/squizlabs/PHP_CodeSniffer/issues/930
 
 ## [2.9.0] - 2017-05-04
 ### Changed
