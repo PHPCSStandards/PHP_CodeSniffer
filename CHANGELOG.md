@@ -2953,9 +2953,6 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#1277] : Squiz.PHP.DisallowMultipleAssignments.Found error when var assignment is on the same line as an open tag
 - Fixed bug [#1284] : Squiz.Arrays.ArrayBracketSpacing.SpaceBeforeBracket false positive match for short list syntax
 
-[#1271]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1271
-[#1272]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1272
-[#1304]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1304
 [#1230]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1230
 [#1237]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1237
 [#1239]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1239
@@ -2971,9 +2968,12 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [#1264]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1264
 [#1265]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1265
 [#1267]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1267
+[#1271]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1271
+[#1272]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1272
 [#1276]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1276
 [#1277]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1277
 [#1284]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1284
+[#1304]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1304
 
 ## [2.7.1] - 2016-11-30
 ### Changed
