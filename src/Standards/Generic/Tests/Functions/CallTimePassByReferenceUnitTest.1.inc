@@ -37,3 +37,15 @@ myfunc(MY_CONST&$myvar);
 
 efg( true == &$b );
 efg( true === &$b );
+
+foo($a, bar(&$b));
+foo($a, array(&$b));
+
+enum Foo {}
+interface Foo {}
+trait Foo {}
+
+$instance = new $var($a);
+$instance = new MyClass($a);
+$instance = new $var(&$a);
+$instance = new MyClass(&$a);
