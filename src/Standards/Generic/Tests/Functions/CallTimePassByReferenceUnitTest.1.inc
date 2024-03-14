@@ -37,3 +37,6 @@ myfunc(MY_CONST&$myvar);
 
 efg( true == &$b );
 efg( true === &$b );
+
+foo($a, bar(&$b));
+foo($a, array(&$b));
