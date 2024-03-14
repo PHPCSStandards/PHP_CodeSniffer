@@ -3115,36 +3115,55 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 
 ## [2.6.2] - 2016-07-14
 ### Changed
-- Added a new --exclude CLI argument to exclude a list of sniffs from checking and fixing (request #904)
+- Added a new --exclude CLI argument to exclude a list of sniffs from checking and fixing (request [#904])
     - Accepts the same sniff codes as the --sniffs command line argument, but provides the opposite functionality
-- Added a new -q command line argument to disable progress and verbose information from being printed (request #969)
+- Added a new -q command line argument to disable progress and verbose information from being printed (request [#969])
     - Useful if a coding standard hard-codes progress or verbose output but you want PHPCS to be quiet
     - Use the command "phpcs --config-set quiet true" to turn quiet mode on by default
-- Generic LineLength sniff no longer errors for comments that cannot be broken out onto a new line (request #766)
+- Generic LineLength sniff no longer errors for comments that cannot be broken out onto a new line (request [#766])
     - A typical case is a comment that contains a very long URL
-    - The comment is ignored if putting the URL on a indented new comment line would be longer than the allowed length
+    - The comment is ignored if putting the URL on an indented new comment line would be longer than the allowed length
 - Settings extensions in a ruleset no longer causes PHP notices during unit testing
     - Thanks to [Klaus Purer][@klausi] for the patch
 - Version control reports now show which errors are fixable if you are showing sources
-- Added a new sniff to enforce a single space after a NOT operator (request #1051)
+- Added a new sniff to enforce a single space after a NOT operator (request [#1051])
     - Include in a ruleset using the code Generic.Formatting.SpaceAfterNot
-- The Squiz.Commenting.BlockComment sniff now supports tabs for indenting comment lines (request #1056)
+- The Squiz.Commenting.BlockComment sniff now supports tabs for indenting comment lines (request [#1056])
 
 ### Fixed
-- Fixed bug #790 : Incorrect missing @throws error in methods that use closures
-- Fixed bug #908 : PSR2 standard is not checking that closing brace is on line following the body
-- Fixed bug #945 : Incorrect indent behavior using deep-nested function and arrays
-- Fixed bug #961 : Two anonymous functions passed as function/method arguments cause indentation false positive
-- Fixed bug #1005 : Using global composer vendor autoload breaks PHP lowercase built-in function sniff
+- Fixed bug [#790] : Incorrect missing @throws error in methods that use closures
+- Fixed bug [#908] : PSR2 standard is not checking that closing brace is on line following the body
+- Fixed bug [#945] : Incorrect indent behavior using deep-nested function and arrays
+- Fixed bug [#961] : Two anonymous functions passed as function/method arguments cause indentation false positive
+- Fixed bug [#1005] : Using global composer vendor autoload breaks PHP lowercase built-in function sniff
     - Thanks to [Michael Butler][@michaelbutler] for the patch
-- Fixed bug #1007 : Squiz Unreachable code detection is not working properly with a closure inside a case
-- Fixed bug #1023 : PSR2.Classes.ClassDeclaration fails if class extends base class and "implements" is on trailing line
-- Fixed bug #1026 : Arrays in comma delimited class properties cause ScopeIndent to increase indent
-- Fixed bug #1028 : Squiz ArrayDeclaration incorrectly fixes multi-line array where end bracket is not on a new line
-- Fixed bug #1034 : Squiz FunctionDeclarationArgumentSpacing gives incorrect error when first arg is a variadic
-- Fixed bug #1036 : Adjacent assignments aligned analysis statement wrong
-- Fixed bug #1049 : Version control reports can show notices when the report width is very small
-- Fixed bug #21050 : PEAR MultiLineCondition sniff suppresses errors on last condition line
+- Fixed bug [#1007] : Squiz Unreachable code detection is not working properly with a closure inside a case
+- Fixed bug [#1023] : PSR2.Classes.ClassDeclaration fails if class extends base class and "implements" is on trailing line
+- Fixed bug [#1026] : Arrays in comma delimited class properties cause ScopeIndent to increase indent
+- Fixed bug [#1028] : Squiz ArrayDeclaration incorrectly fixes multi-line array where end bracket is not on a new line
+- Fixed bug [#1034] : Squiz FunctionDeclarationArgumentSpacing gives incorrect error when first arg is a variadic
+- Fixed bug [#1036] : Adjacent assignments aligned analysis statement wrong
+- Fixed bug [#1049] : Version control reports can show notices when the report width is very small
+- Fixed bug [#21050] : PEAR MultiLineCondition sniff suppresses errors on last condition line
+
+[#766]: https://github.com/squizlabs/PHP_CodeSniffer/issues/766
+[#790]: https://github.com/squizlabs/PHP_CodeSniffer/issues/790
+[#904]: https://github.com/squizlabs/PHP_CodeSniffer/issues/904
+[#908]: https://github.com/squizlabs/PHP_CodeSniffer/issues/908
+[#945]: https://github.com/squizlabs/PHP_CodeSniffer/issues/945
+[#961]: https://github.com/squizlabs/PHP_CodeSniffer/issues/961
+[#969]: https://github.com/squizlabs/PHP_CodeSniffer/issues/969
+[#1005]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1005
+[#1007]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1007
+[#1023]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1023
+[#1026]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1026
+[#1028]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1028
+[#1034]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1034
+[#1036]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1036
+[#1049]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1049
+[#1051]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1051
+[#1056]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1056
+[#21050]: https://pear.php.net/bugs/bug.php?id=21050
 
 ## [2.6.1] - 2016-05-31
 ### Changed
@@ -3153,43 +3172,60 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Jaroslav Hanslík][@kukulich] for the patch
 - The default_standard config setting now allows multiple standards to be listed, like on the command line
     - Thanks to [Michael Mayer][@schnittstabil] for the patch
-- Installations done via composer now only include the composer autoloader for PHP 5.3.2+ (request #942)
+- Installations done via composer now only include the composer autoloader for PHP 5.3.2+ (request [#942])
 - Added a rollbackChangeset() method to the Fixer class to purposely rollback the active changeset
 
 ### Fixed
-- Fixed bug #940 : Auto-fixing issue encountered with inconsistent use of braces
-- Fixed bug #943 : Squiz.PHP.InnerFunctions.NotAllowed reported in anonymous classes
-- Fixed bug #944 : PHP warning when running the latest phar
-- Fixed bug #951 : InlineIfDeclaration: invalid error produced with UTF-8 string
-- Fixed bug #957 : Operator spacing sniff errors when plus is used as part of a number
+- Fixed bug [#940] : Auto-fixing issue encountered with inconsistent use of braces
+- Fixed bug [#943] : Squiz.PHP.InnerFunctions.NotAllowed reported in anonymous classes
+- Fixed bug [#944] : PHP warning when running the latest phar
+- Fixed bug [#951] : InlineIfDeclaration: invalid error produced with UTF-8 string
+- Fixed bug [#957] : Operator spacing sniff errors when plus is used as part of a number
     - Thanks to [Klaus Purer][@klausi] for the patch
-- Fixed bug #959 : Call-time pass-by-reference false positive if there is a square bracket before the ampersand
+- Fixed bug [#959] : Call-time pass-by-reference false positive if there is a square bracket before the ampersand
     - Thanks to [Konstantin Leboev][@realmfoo] for the patch
-- Fixed bug #962 : Null coalescing operator (??) not detected as a token
+- Fixed bug [#962] : Null coalescing operator (??) not detected as a token
     - Thanks to [Joel Posti][@joelposti] for the patch
-- Fixed bug #973 : Anonymous class declaration and PSR1.Files.SideEffects.FoundWithSymbols
-- Fixed bug #974 : Error when file ends with "function"
-- Fixed bug #979 : Anonymous function with return type hint is not refactored as expected
-- Fixed bug #983 : Squiz.WhiteSpace.MemberVarSpacing.AfterComment fails to fix error when comment is not a docblock
-- Fixed bug #1010 : Squiz NonExecutableCode sniff does not detect boolean OR
+- Fixed bug [#973] : Anonymous class declaration and PSR1.Files.SideEffects.FoundWithSymbols
+- Fixed bug [#974] : Error when file ends with "function"
+- Fixed bug [#979] : Anonymous function with return type hint is not refactored as expected
+- Fixed bug [#983] : Squiz.WhiteSpace.MemberVarSpacing.AfterComment fails to fix error when comment is not a docblock
+- Fixed bug [#1010] : Squiz NonExecutableCode sniff does not detect boolean OR
     - Thanks to [Derek Henderson][@2shediac] for the patch
-- Fixed bug #1015 : The Squiz.Commenting.FunctionComment sniff doesn't allow description in @return tag
+- Fixed bug [#1015] : The Squiz.Commenting.FunctionComment sniff doesn't allow description in @return tag
     - Thanks to [Alexander Obuhovich][@aik099] for the patch
-- Fixed bug #1022 : Duplicate spaces after opening bracket error with PSR2 standard
-- Fixed bug #1025 : Syntax error in JS file can cause undefined index for parenthesis_closer
+- Fixed bug [#1022] : Duplicate spaces after opening bracket error with PSR2 standard
+- Fixed bug [#1025] : Syntax error in JS file can cause undefined index for parenthesis_closer
+
+[#940]: https://github.com/squizlabs/PHP_CodeSniffer/issues/940
+[#942]: https://github.com/squizlabs/PHP_CodeSniffer/issues/942
+[#943]: https://github.com/squizlabs/PHP_CodeSniffer/issues/943
+[#944]: https://github.com/squizlabs/PHP_CodeSniffer/issues/944
+[#951]: https://github.com/squizlabs/PHP_CodeSniffer/issues/951
+[#957]: https://github.com/squizlabs/PHP_CodeSniffer/pull/957
+[#959]: https://github.com/squizlabs/PHP_CodeSniffer/issues/959
+[#962]: https://github.com/squizlabs/PHP_CodeSniffer/issues/962
+[#973]: https://github.com/squizlabs/PHP_CodeSniffer/issues/973
+[#974]: https://github.com/squizlabs/PHP_CodeSniffer/issues/974
+[#979]: https://github.com/squizlabs/PHP_CodeSniffer/issues/979
+[#983]: https://github.com/squizlabs/PHP_CodeSniffer/issues/983
+[#1010]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1010
+[#1015]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1015
+[#1022]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1022
+[#1025]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1025
 
 ## [2.6.0] - 2016-04-04
 ### Changed
-- Paths used when setting CLI arguments inside ruleset.xml files are now relative to the ruleset location (request #847)
+- Paths used when setting CLI arguments inside ruleset.xml files are now relative to the ruleset location (request [#847])
     - This change only applies to paths within ARG tags, used to set CLI arguments
     - Previously, the paths were relative to the directory PHPCS was being run from
     - Absolute paths are still allowed and work the same way they always have
     - This change allows ruleset.xml files to be more portable
 - Content passed via STDIN will now be processed even if files are specified on the command line or in a ruleset
-- When passing content via STDIN, you can now specify the file path to use on the command line (request #934)
+- When passing content via STDIN, you can now specify the file path to use on the command line (request [#934])
     - This allows sniffs that check file paths to work correctly
     - This is the same functionality provided by the phpcs_input_file line, except it is available on the command line
-- Files processed with custom tokenizers will no longer be skipped if they appear minified (request #877)
+- Files processed with custom tokenizers will no longer be skipped if they appear minified (request [#877])
     - If the custom tokenizer wants minified files skipped, it can set a $skipMinified member var to TRUE
     - See the included JS and CSS tokenizers for an example
 - Config vars set in ruleset.xml files are now processed earlier, allowing them to be used during sniff registration
@@ -3200,12 +3236,12 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - You can still manually set php_path to use a specific binary for testing
     - Thanks to [Andrew Berry][@deviantintegral] for the patch
 - The PHP-supplied T_POW_EQUAL token has been replicated for PHP versions before 5.6
-- Added support for PHP7 use group declarations (request #878)
+- Added support for PHP7 use group declarations (request [#878])
     - New tokens T_OPEN_USE_GROUP and T_CLOSE_USE_GROUP are assigned to the open and close curly braces
-- Generic ScopeIndent sniff now reports errors for every line that needs the indent changed (request #903)
+- Generic ScopeIndent sniff now reports errors for every line that needs the indent changed (request [#903])
     - Previously, it ignored lines that were indented correctly in the context of their block
     - This change produces more technically accurate error messages, but is much more verbose
-- The PSR2 and Squiz standards now allow multi-line default values in function declarations (request #542)
+- The PSR2 and Squiz standards now allow multi-line default values in function declarations (request [#542])
     - Previously, these would automatically make the function a multi-line declaration
 - Squiz InlineCommentSniff now allows docblocks on require(_once) and include(_once) statements
     - Thanks to [Gary Jones][@GaryJones] for the patch
@@ -3217,31 +3253,56 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Renamed Squiz.CSS.Opacity.SpacingAfterPoint to Squiz.CSS.Opacity.DecimalPrecision
     - Please update your ruleset if you are referencing this error code directly
 - Fixed PHP tokenizer problem that caused an infinite loop when checking a comment with specific content
-- Generic Disallow Space and Tab indent sniffs now detect and fix indents inside embedded HTML chunks (request #882)
+- Generic Disallow Space and Tab indent sniffs now detect and fix indents inside embedded HTML chunks (request [#882])
 - Squiz CSS IndentationSniff no longer assumes the class opening brace is at the end of a line
 - Squiz FunctionCommentThrowTagSniff now ignores non-docblock comments
 - Squiz ComparisonOperatorUsageSniff now allows conditions like while(true)
 - PEAR FunctionCallSignatureSniff (and the Squiz and PSR2 sniffs that use it) now correctly check the first argument
-    - Further fix for bug #698
+    - Further fix for bug [#698]
 
 ### Fixed
-- Fixed bug #791 : codingStandardsChangeSetting settings not working with namespaces
-- Fixed bug #872 : Incorrect detection of blank lines between CSS class names
-- Fixed bug #879 : Generic InlineControlStructureSniff can create parse error when case/if/elseif/else have mixed brace and braceless definitions
-- Fixed bug #883 : PSR2 is not checking for blank lines at the start and end of control structures
-- Fixed bug #884 : Incorrect indentation notice for anonymous classes
-- Fixed bug #887 : Using curly braces for a shared CASE/DEFAULT statement can generate an error in PSR2 SwitchDeclaration
-- Fixed bug #889 : Closure inside catch/else/elseif causes indentation error
-- Fixed bug #890 : Function call inside returned short array value can cause indentation error inside CASE statements
-- Fixed bug #897 : Generic.Functions.CallTimePassByReference.NotAllowed false positive when short array syntax
-- Fixed bug #900 : Squiz.Functions.FunctionDeclarationArgumentSpacing bug when no space between type hint and argument
-- Fixed bug #902 : T_OR_EQUAL and T_POW_EQUAL are not seen as assignment tokens
-- Fixed bug #910 : Unrecognized "extends" and indentation on anonymous classes
-- Fixed bug #915 : JS Tokenizer generates errors when processing some decimals
-- Fixed bug #928 : Endless loop when sniffing a PHP file with a git merge conflict inside a function
-- Fixed bug #937 : Shebang can cause PSR1 SideEffects warning
+- Fixed bug [#791] : codingStandardsChangeSetting settings not working with namespaces
+- Fixed bug [#872] : Incorrect detection of blank lines between CSS class names
+- Fixed bug [#879] : Generic InlineControlStructureSniff can create parse error when case/if/elseif/else have mixed brace and braceless definitions
+- Fixed bug [#883] : PSR2 is not checking for blank lines at the start and end of control structures
+- Fixed bug [#884] : Incorrect indentation notice for anonymous classes
+- Fixed bug [#887] : Using curly braces for a shared CASE/DEFAULT statement can generate an error in PSR2 SwitchDeclaration
+- Fixed bug [#889] : Closure inside catch/else/elseif causes indentation error
+- Fixed bug [#890] : Function call inside returned short array value can cause indentation error inside CASE statements
+- Fixed bug [#897] : Generic.Functions.CallTimePassByReference.NotAllowed false positive when short array syntax
+- Fixed bug [#900] : Squiz.Functions.FunctionDeclarationArgumentSpacing bug when no space between type hint and argument
+- Fixed bug [#902] : T_OR_EQUAL and T_POW_EQUAL are not seen as assignment tokens
+- Fixed bug [#910] : Unrecognized "extends" and indentation on anonymous classes
+- Fixed bug [#915] : JS Tokenizer generates errors when processing some decimals
+- Fixed bug [#928] : Endless loop when sniffing a PHP file with a git merge conflict inside a function
+- Fixed bug [#937] : Shebang can cause PSR1 SideEffects warning
     - Thanks to [Clay Loveless][@claylo] for the patch
-- Fixed bug #938 : CallTimePassByReferenceSniff ignores functions with return value
+- Fixed bug [#938] : CallTimePassByReferenceSniff ignores functions with return value
+
+[#542]: https://github.com/squizlabs/PHP_CodeSniffer/issues/542
+[#698]: https://github.com/squizlabs/PHP_CodeSniffer/issues/698
+[#791]: https://github.com/squizlabs/PHP_CodeSniffer/issues/791
+[#847]: https://github.com/squizlabs/PHP_CodeSniffer/issues/847
+[#872]: https://github.com/squizlabs/PHP_CodeSniffer/issues/872
+[#877]: https://github.com/squizlabs/PHP_CodeSniffer/issues/877
+[#878]: https://github.com/squizlabs/PHP_CodeSniffer/issues/878
+[#879]: https://github.com/squizlabs/PHP_CodeSniffer/issues/879
+[#882]: https://github.com/squizlabs/PHP_CodeSniffer/issues/882
+[#883]: https://github.com/squizlabs/PHP_CodeSniffer/issues/883
+[#884]: https://github.com/squizlabs/PHP_CodeSniffer/issues/884
+[#887]: https://github.com/squizlabs/PHP_CodeSniffer/issues/887
+[#889]: https://github.com/squizlabs/PHP_CodeSniffer/issues/889
+[#890]: https://github.com/squizlabs/PHP_CodeSniffer/issues/890
+[#897]: https://github.com/squizlabs/PHP_CodeSniffer/issues/897
+[#900]: https://github.com/squizlabs/PHP_CodeSniffer/issues/900
+[#902]: https://github.com/squizlabs/PHP_CodeSniffer/issues/902
+[#903]: https://github.com/squizlabs/PHP_CodeSniffer/issues/903
+[#910]: https://github.com/squizlabs/PHP_CodeSniffer/issues/910
+[#915]: https://github.com/squizlabs/PHP_CodeSniffer/issues/915
+[#928]: https://github.com/squizlabs/PHP_CodeSniffer/issues/928
+[#934]: https://github.com/squizlabs/PHP_CodeSniffer/issues/934
+[#937]: https://github.com/squizlabs/PHP_CodeSniffer/pull/937
+[#938]: https://github.com/squizlabs/PHP_CodeSniffer/issues/938
 
 ## [2.5.1] - 2016-01-20
 ### Changed
