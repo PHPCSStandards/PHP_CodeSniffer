@@ -2329,8 +2329,8 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#1777] : Generic.WhiteSpace.ScopeIndent incorrect indent errors when self called function proceeded by comment
 
 [#604]: https://github.com/squizlabs/PHP_CodeSniffer/issues/604
-[#1488]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1488
 [#1462]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1462
+[#1488]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1488
 [#1573]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1573
 [#1590]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1590
 [#1718]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1718
@@ -2374,7 +2374,6 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Fixed bug [#1702] : Generic.WhiteSpaceDisallowSpaceIndent fixer bug when line only contains superfluous whitespace
 
-[#1697]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1697
 [#1512]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1512
 [#1522]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1522
 [#1570]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1570
@@ -2385,6 +2384,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [#1669]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1669
 [#1681]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1681
 [#1694]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1694
+[#1697]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1697
 [#1702]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1702
 
 ## [3.1.0] - 2017-09-20
@@ -2462,8 +2462,8 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#1640] : Squiz.Strings.DoubleQuoteUsage replaces tabs with spaces when fixing
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 
-[#1566]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1566
 [#1550]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1550
+[#1566]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1566
 [#1577]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1577
 [#1581]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1581
 [#1591]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1591
@@ -2571,13 +2571,13 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#1501] : Interactive mode is broken
 - Fixed bug [#1504] : PSR2.Namespaces.UseDeclaration hangs fixing use statement with no trailing code
 
-[#1484]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1484
 [#1442]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1442
 [#1447]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1447
 [#1449]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1449
 [#1450]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1450
 [#1451]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1451
 [#1454]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1454
+[#1484]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1484
 [#1495]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1495
 [#1496]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1496
 [#1501]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1501
@@ -2616,8 +2616,8 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Fabian Wiget][@fabacino] for the patch
 
 [#811]: https://github.com/squizlabs/PHP_CodeSniffer/issues/811
-[#1129]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1129
 [#834]: https://github.com/squizlabs/PHP_CodeSniffer/issues/834
+[#1129]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1129
 
 ## [3.0.0RC4] - 2017-03-02
 ### Security
