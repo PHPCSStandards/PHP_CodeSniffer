@@ -86,10 +86,6 @@ class CallTimePassByReferenceSniff implements Sniff
         ];
 
         while (($nextSeparator = $phpcsFile->findNext($find, ($nextSeparator + 1), $closeBracket)) !== false) {
-            if (isset($tokens[$nextSeparator]['nested_parenthesis']) === false) {
-                continue;
-            }
-
             if ($tokens[$nextSeparator]['code'] === T_OPEN_SHORT_ARRAY) {
                 $nextSeparator = $tokens[$nextSeparator]['bracket_closer'];
                 continue;
