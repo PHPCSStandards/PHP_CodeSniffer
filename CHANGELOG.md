@@ -3352,51 +3352,77 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Squiz ComparisonOperatorUsageSniff no longer hangs on JS FOR loops that don't use semicolons
 - PHP_CodesSniffer now includes the composer autoload.php file, if there is one
     - Thanks to [Klaus Purer][@klausi] for the patch
-- Added error Squiz.Commenting.FunctionComment.ScalarTypeHintMissing for PHP7 only (request #858)
+- Added error Squiz.Commenting.FunctionComment.ScalarTypeHintMissing for PHP7 only (request [#858])
     - These errors were previously reported as Squiz.Commenting.FunctionComment.TypeHintMissing on PHP7
     - Disable this error message in a ruleset.xml file if your code needs to run on both PHP5 and PHP7
 - The PHP 5.6 __debugInfo magic method no longer produces naming convention errors
     - Thanks to [Michael Nowack][@syranez] for the patch
-- PEAR and Squiz FunctionComment sniffs now support variadic functions (request #841)
+- PEAR and Squiz FunctionComment sniffs now support variadic functions (request [#841])
 
 ### Fixed
-- Fixed bug #622 : Wrong detection of Squiz.CSS.DuplicateStyleDefinition with media queries
-- Fixed bug #752 : The missing exception error is reported in first found DocBlock
-- Fixed bug #794 : PSR2 MultiLineFunctionDeclaration forbids comments after opening parenthesis of a multiline call
-- Fixed bug #820 : PEAR/PSR2 FunctionCallSignature sniffs suggest wrong indent when there are multiple arguments on a line
-- Fixed bug #822 : Ruleset hard-coded file paths are not used if not running from the same directory as the ruleset
-- Fixed bug #825 : FunctionCallArgumentSpacing sniff complains about more than one space before comment in multi-line function call
-- Fixed bug #828 : Null classname is tokenized as T_NULL instead of T_STRING
-- Fixed bug #829 : Short array argument not fixed correctly when multiple function arguments are on the same line
-- Fixed bug #831 : PHPCS freezes in an infinite loop under Windows if no standard is passed
-- Fixed bug #832 : Tokenizer does not support context sensitive parsing
+- Fixed bug [#622] : Wrong detection of Squiz.CSS.DuplicateStyleDefinition with media queries
+- Fixed bug [#752] : The missing exception error is reported in first found DocBlock
+- Fixed bug [#794] : PSR2 MultiLineFunctionDeclaration forbids comments after opening parenthesis of a multiline call
+- Fixed bug [#820] : PEAR/PSR2 FunctionCallSignature sniffs suggest wrong indent when there are multiple arguments on a line
+- Fixed bug [#822] : Ruleset hard-coded file paths are not used if not running from the same directory as the ruleset
+- Fixed bug [#825] : FunctionCallArgumentSpacing sniff complains about more than one space before comment in multi-line function call
+- Fixed bug [#828] : Null classname is tokenized as T_NULL instead of T_STRING
+- Fixed bug [#829] : Short array argument not fixed correctly when multiple function arguments are on the same line
+- Fixed bug [#831] : PHPCS freezes in an infinite loop under Windows if no standard is passed
+- Fixed bug [#832] : Tokenizer does not support context sensitive parsing
     - Thanks to [Jaroslav Hanslík][@kukulich] for the patch
-- Fixed bug #835 : PEAR.Functions.FunctionCallSignature broken when closure uses return types
-- Fixed bug #838 : CSS indentation fixer changes color codes
+- Fixed bug [#835] : PEAR.Functions.FunctionCallSignature broken when closure uses return types
+- Fixed bug [#838] : CSS indentation fixer changes color codes
     - Thanks to [Klaus Purer][@klausi] for the patch
-- Fixed bug #839 : "__()" method is marked as not camel caps
+- Fixed bug [#839] : "__()" method is marked as not camel caps
     - Thanks to [Tim Bezhashvyly][@tim-bezhashvyly] for the patch
-- Fixed bug #852 : Generic.Commenting.DocComment not finding errors when long description is omitted
-- Fixed bug #854 : Return typehints in interfaces are not reported as T_RETURN_TYPE
+- Fixed bug [#852] : Generic.Commenting.DocComment not finding errors when long description is omitted
+- Fixed bug [#854] : Return typehints in interfaces are not reported as T_RETURN_TYPE
     - Thanks to [Jaroslav Hanslík][@kukulich] for the patch
-- Fixed bug #855 : Capital letter detection for multibyte strings doesn't work correctly
-- Fixed bug #857 : PSR2.ControlStructure.SwitchDeclaration shouldn't check indent of curly brace closers
-- Fixed bug #859 : Switch statement indention issue when returning function call with closure
-- Fixed bug #861 : Single-line arrays and function calls can generate incorrect indentation errors
-- Fixed bug #867 : Squiz.Strings.DoubleQuoteUsage broken for some escape codes
+- Fixed bug [#855] : Capital letter detection for multibyte strings doesn't work correctly
+- Fixed bug [#857] : PSR2.ControlStructure.SwitchDeclaration shouldn't check indent of curly brace closers
+- Fixed bug [#859] : Switch statement indention issue when returning function call with closure
+- Fixed bug [#861] : Single-line arrays and function calls can generate incorrect indentation errors
+- Fixed bug [#867] : Squiz.Strings.DoubleQuoteUsage broken for some escape codes
     - Thanks to [Jack Blower][@ElvenSpellmaker] for the help with the fix
-- Fixed bug #21005 : Incorrect indent detection when multiple properties are initialized to arrays
-- Fixed bug #21010 : Incorrect missing colon detection in CSS when first style is not on new line
-- Fixed bug #21011 : Incorrect error message text when newline found after opening brace
+- Fixed bug [#21005] : Incorrect indent detection when multiple properties are initialized to arrays
+- Fixed bug [#21010] : Incorrect missing colon detection in CSS when first style is not on new line
+- Fixed bug [#21011] : Incorrect error message text when newline found after opening brace
+
+[#622]: https://github.com/squizlabs/PHP_CodeSniffer/issues/622
+[#752]: https://github.com/squizlabs/PHP_CodeSniffer/issues/752
+[#794]: https://github.com/squizlabs/PHP_CodeSniffer/issues/794
+[#820]: https://github.com/squizlabs/PHP_CodeSniffer/issues/820
+[#822]: https://github.com/squizlabs/PHP_CodeSniffer/issues/822
+[#825]: https://github.com/squizlabs/PHP_CodeSniffer/issues/825
+[#828]: https://github.com/squizlabs/PHP_CodeSniffer/issues/828
+[#829]: https://github.com/squizlabs/PHP_CodeSniffer/issues/829
+[#831]: https://github.com/squizlabs/PHP_CodeSniffer/issues/831
+[#832]: https://github.com/squizlabs/PHP_CodeSniffer/issues/832
+[#835]: https://github.com/squizlabs/PHP_CodeSniffer/issues/835
+[#838]: https://github.com/squizlabs/PHP_CodeSniffer/pull/838
+[#839]: https://github.com/squizlabs/PHP_CodeSniffer/issues/839
+[#841]: https://github.com/squizlabs/PHP_CodeSniffer/issues/841
+[#852]: https://github.com/squizlabs/PHP_CodeSniffer/issues/852
+[#854]: https://github.com/squizlabs/PHP_CodeSniffer/issues/854
+[#855]: https://github.com/squizlabs/PHP_CodeSniffer/pull/855
+[#857]: https://github.com/squizlabs/PHP_CodeSniffer/issues/857
+[#858]: https://github.com/squizlabs/PHP_CodeSniffer/issues/858
+[#859]: https://github.com/squizlabs/PHP_CodeSniffer/issues/859
+[#861]: https://github.com/squizlabs/PHP_CodeSniffer/issues/861
+[#867]: https://github.com/squizlabs/PHP_CodeSniffer/issues/867
+[#21005]: https://pear.php.net/bugs/bug.php?id=21005
+[#21010]: https://pear.php.net/bugs/bug.php?id=21010
+[#21011]: https://pear.php.net/bugs/bug.php?id=21011
 
 ## [2.5.0] - 2015-12-11
 ### Changed
-- PHPCS will now look for a phpcs.xml file in parent directories as well as the current directory (request #626)
+- PHPCS will now look for a phpcs.xml file in parent directories as well as the current directory (request [#626])
 - PHPCS will now use a phpcs.xml file even if files are specified on the command line
     - This file is still only used if no standard is specified on the command line
-- Added support for a phpcs.xml.dist file (request #583)
+- Added support for a phpcs.xml.dist file (request [#583])
     - If both a phpcs.xml and phpcs.xml.dist file are present, the phpcs.xml file will be used
-- Added support for setting PHP ini values in ruleset.xml files (request #560)
+- Added support for setting PHP ini values in ruleset.xml files (request [#560])
     - Setting the value of the new ini tags to name="memory_limit" value="32M" is the same as -d memory_limit=32M
 - Added support for one or more bootstrap files to be run before processing begins
     - Use the --bootstrap=file,file,file command line argument to include bootstrap files
@@ -3407,16 +3433,30 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Arnout Boks][@aboks] for the patch
 
 ### Fixed
-- Fixed bug #660 : Syntax checks can fail on Windows with PHP5.6
-- Fixed bug #784 : $this->trait is seen as a T_TRAIT token
-- Fixed bug #786 : Switch indent issue with short array notation
-- Fixed bug #787 : SpacingAfterDefaultBreak confused by multi-line statements
-- Fixed bug #797 : Parsing CSS url() value breaks further parsing
-- Fixed bug #805 : Squiz.Commenting.FunctionComment.InvalidTypeHint on Scalar types on PHP7
-- Fixed bug #807 : Cannot fix line endings when open PHP tag is not on the first line
-- Fixed bug #808 : JS tokeniser incorrectly setting some function and class names to control structure tokens
-- Fixed bug #809 : PHPCBF can break a require_once statement with a space before the open parenthesis
-- Fixed bug #813 : PEAR FunctionCallSignature checks wrong indent when first token on line is part of a multi-line string
+- Fixed bug [#660] : Syntax checks can fail on Windows with PHP5.6
+- Fixed bug [#784] : $this->trait is seen as a T_TRAIT token
+- Fixed bug [#786] : Switch indent issue with short array notation
+- Fixed bug [#787] : SpacingAfterDefaultBreak confused by multi-line statements
+- Fixed bug [#797] : Parsing CSS url() value breaks further parsing
+- Fixed bug [#805] : Squiz.Commenting.FunctionComment.InvalidTypeHint on Scalar types on PHP7
+- Fixed bug [#807] : Cannot fix line endings when open PHP tag is not on the first line
+- Fixed bug [#808] : JS tokenizer incorrectly setting some function and class names to control structure tokens
+- Fixed bug [#809] : PHPCBF can break a require_once statement with a space before the open parenthesis
+- Fixed bug [#813] : PEAR FunctionCallSignature checks wrong indent when first token on line is part of a multi-line string
+
+[#560]: https://github.com/squizlabs/PHP_CodeSniffer/issues/560
+[#583]: https://github.com/squizlabs/PHP_CodeSniffer/issues/583
+[#626]: https://github.com/squizlabs/PHP_CodeSniffer/issues/626
+[#660]: https://github.com/squizlabs/PHP_CodeSniffer/pull/660
+[#784]: https://github.com/squizlabs/PHP_CodeSniffer/issues/784
+[#786]: https://github.com/squizlabs/PHP_CodeSniffer/issues/786
+[#787]: https://github.com/squizlabs/PHP_CodeSniffer/issues/787
+[#797]: https://github.com/squizlabs/PHP_CodeSniffer/issues/797
+[#805]: https://github.com/squizlabs/PHP_CodeSniffer/issues/805
+[#807]: https://github.com/squizlabs/PHP_CodeSniffer/issues/807
+[#808]: https://github.com/squizlabs/PHP_CodeSniffer/issues/808
+[#809]: https://github.com/squizlabs/PHP_CodeSniffer/issues/809
+[#813]: https://github.com/squizlabs/PHP_CodeSniffer/issues/813
 
 ## [2.4.0] - 2015-11-24
 ### Changed
