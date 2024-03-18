@@ -4,6 +4,25 @@ Contributing
 Thank you for your interest in contributing to PHP_CodeSniffer!
 
 
+## Table of Contents
+
+* [Reporting Bugs](#reporting-bugs)
+   - [Reporting Security Issues](#reporting-security-issues)
+   - [Support/Questions About Using PHP_CodeSniffer](#supportquestions-about-using-php_codesniffer)
+* [Contributing Without Writing Code](#contributing-without-writing-code)
+   - [Bug Triage](#bug-triage)
+   - [Testing Open Pull Requests](#testing-open-pull-requests)
+   - [Writing sniff documentation](#writing-sniff-documentation)
+   - [Other tasks](#other-tasks)
+* [Contributing With Code](#contributing-with-code)
+   - [Requesting/Submitting New Features](#requestingsubmitting-new-features)
+   - [Getting started](#getting-started)
+   - [While working on a patch](#while-working-on-a-patch)
+   - [Writing tests](#writing-tests)
+   - [Submitting your pull request](#submitting-your-pull-request)
+* [Licensing](#licensing)
+
+
 ## Reporting Bugs
 
 Please search the [open issues](https://github.com/PHPCSStandards/PHP_CodeSniffer/issues) to see if your issue has been reported
