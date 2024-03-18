@@ -168,6 +168,17 @@ This is an open invitation for interested parties to gather their thoughts about
 > Kind request: If you don't have something to add to the discussion, but do want to indicate a positive or negative opinion
 > on a topic, please add an emoji on the original post instead of leaving a comment.
 
+> :bulb: On a subset of these issues - the ones which impact maintainers or integrators -, a list of known interested parties
+> will be pinged (cc-ed) to gather their thoughts on the topic.
+>
+> This list is public and
+> [maintained in a markdown file](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/.github/community-cc-list.md).
+>
+> To add or remove yourself to/from this list, submit a PR to the repo updating the `community-cc-list.md` file.
+> PRs adding/removing _other people_ to/from the list will only be merged if the people being added/removed leave a comment
+> on the PR consenting to it.
+
+
 #### Issues marked with "Status: needs investigation"
 
 Sometimes an issue has been identified, but it has not yet been pinpointed what the exact cause of the problem is.
