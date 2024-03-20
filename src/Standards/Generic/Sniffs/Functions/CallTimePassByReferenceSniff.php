@@ -50,12 +50,12 @@ class CallTimePassByReferenceSniff implements Sniff
 
         $prev = $phpcsFile->findPrevious($findTokens, ($stackPtr - 1), null, true);
 
-        // Skip tokens that are the names of functions or classes
+        // Skip tokens that are the names of functions
         // within their definitions. For example: function myFunction...
         // "myFunction" is T_STRING but we should skip because it is not a
         // function or method *call*.
         $prevCode = $tokens[$prev]['code'];
-        if ($prevCode === T_FUNCTION || $prevCode === T_CLASS) {
+        if ($prevCode === T_FUNCTION) {
             return;
         }
 
