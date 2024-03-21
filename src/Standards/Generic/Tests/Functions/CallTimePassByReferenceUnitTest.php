@@ -42,6 +42,8 @@ final class CallTimePassByReferenceUnitTest extends AbstractSniffUnitTest
                 23 => 1,
                 30 => 1,
                 41 => 1,
+                50 => 1,
+                51 => 1,
             ];
 
         default:
