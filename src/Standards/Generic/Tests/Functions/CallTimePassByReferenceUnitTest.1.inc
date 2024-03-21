@@ -49,3 +49,6 @@ $instance = new $var($a);
 $instance = new MyClass($a);
 $instance = new $var(&$a);
 $instance = new MyClass(&$a);
+
+$anon = new class($a) {};
+$anon = new class(&$a) {};
