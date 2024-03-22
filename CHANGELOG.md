@@ -4249,7 +4249,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - PSR1 CamelCapsMethodNameSniff now ignores magic methods
     - Thanks to [Eser Ozvataf][@eser] for the patch
 - PSR1 SideEffectsSniff now ignores methods named define()
-- PSR1 and PEAR ClassDeclarationSniffs now support traits (request #20208)
+- PSR1 and PEAR ClassDeclarationSniffs now support traits (request [#20208][pear-20208])
 - PSR2 ControlStructureSpacingSniff now allows newlines before/after parentheses
     - Thanks to [Maurus Cuelenaere][@mcuelenaere] for the patch
 - Squiz LowercasePHPFunctionsSniff no longer reports errors for namespaced functions
@@ -4257,19 +4257,31 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Squiz SwitchDeclarationSniff now allows exit() as a breaking statement for case/default
 - Squiz ValidVariableNameSniff and Zend ValidVariableNameSniff now ignore additional PHP reserved vars
     - Thanks to Mikuláš Dítě and Adrian Crepaz for the patch
-- Sniff code Squiz.WhiteSpace.MemberVarSpacing.After changed to Squiz.WhiteSpace.MemberVarSpacing.Incorrect (request #20241)
+- Sniff code Squiz.WhiteSpace.MemberVarSpacing.After changed to Squiz.WhiteSpace.MemberVarSpacing.Incorrect (request [#20241][pear-20241])
 
 ### Fixed
-- Fixed bug #20200 : Invalid JSON produced with specific error message
-- Fixed bug #20204 : Ruleset exclude checks are case sensitive
-- Fixed bug #20213 : Invalid error, Inline IF must be declared on single line
-- Fixed bug #20225 : array_merge() that takes more than one line generates error
-- Fixed bug #20230 : Squiz ControlStructureSpacing sniff assumes specific condition formatting
-- Fixed bug #20240 : Squiz block comment sniff fails when newline present
-- Fixed bug #20247 : The Squiz.WhiteSpace.ControlStructureSpacing sniff and do-while
+- Fixed bug [#20200][pear-20200] : Invalid JSON produced with specific error message
+- Fixed bug [#20204][pear-20204] : Ruleset exclude checks are case sensitive
+- Fixed bug [#20213][pear-20213] : Invalid error, Inline IF must be declared on single line
+- Fixed bug [#20225][pear-20225] : array_merge() that takes more than one line generates error
+- Fixed bug [#20230][pear-20230] : Squiz ControlStructureSpacing sniff assumes specific condition formatting
+- Fixed bug [#20240][pear-20240] : Squiz block comment sniff fails when newline present
+- Fixed bug [#20247][pear-20247] : The Squiz.WhiteSpace.ControlStructureSpacing sniff and do-while
     - Thanks to [Alexander Obuhovich][@aik099] for the patch
-- Fixed bug #20248 : The Squiz_Sniffs_WhiteSpace_ControlStructureSpacingSniff sniff and empty scope
-- Fixed bug #20252 : Uninitialized string offset when package name starts with underscore
+- Fixed bug [#20248][pear-20248] : The Squiz_Sniffs_WhiteSpace_ControlStructureSpacingSniff sniff and empty scope
+- Fixed bug [#20252][pear-20252] : Uninitialized string offset when package name starts with underscore
+
+[pear-20200]: https://pear.php.net/bugs/bug.php?id=20200
+[pear-20204]: https://pear.php.net/bugs/bug.php?id=20204
+[pear-20208]: https://pear.php.net/bugs/bug.php?id=20208
+[pear-20213]: https://pear.php.net/bugs/bug.php?id=20213
+[pear-20225]: https://pear.php.net/bugs/bug.php?id=20225
+[pear-20230]: https://pear.php.net/bugs/bug.php?id=20230
+[pear-20240]: https://pear.php.net/bugs/bug.php?id=20240
+[pear-20241]: https://pear.php.net/bugs/bug.php?id=20241
+[pear-20247]: https://pear.php.net/bugs/bug.php?id=20247
+[pear-20248]: https://pear.php.net/bugs/bug.php?id=20248
+[pear-20252]: https://pear.php.net/bugs/bug.php?id=20252
 
 ## [2.0.0a1] - 2014-02-05
 ### Changed
@@ -4284,7 +4296,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - e.g., arg name="report" value="summary" (print summary report; same as --report=summary)
     - e.g., arg value="sp" (print source and progress information; same as -sp)
     - The -vvv, --sniffs, --standard and -l command line arguments cannot be set in this way
-- Sniff process() methods can not optionally return a token to ignore up to
+- Sniff process() methods can now optionally return a token to ignore up to
     - If returned, the sniff will not be executed again until the passed token is reached in the file
     - Useful if you are looking for tokens like T_OPEN_TAG but only want to process the first one
 - Removed the comment parser classes and replaced it with a simple comment tokenizer
@@ -4356,10 +4368,15 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Generic FixmeSniff and TodoSniff now work correctly with accented characters
 
 ### Fixed
-- Fixed bug #20145 : Custom ruleset preferences directory over installed standard
-- Fixed bug #20147 : phpcs-svn-pre-commit - no more default error report
-- Fixed bug #20151 : Problem handling "if(): ... else: ... endif;" syntax
-- Fixed bug #20190 : Invalid regex in Squiz_Sniffs_WhiteSpace_SuperfluousWhitespaceSniff
+- Fixed bug [#20145][pear-20145] : Custom ruleset preferences directory over installed standard
+- Fixed bug [#20147][pear-20147] : phpcs-svn-pre-commit - no more default error report
+- Fixed bug [#20151][pear-20151] : Problem handling "if(): ... else: ... endif;" syntax
+- Fixed bug [#20190][pear-20190] : Invalid regex in Squiz_Sniffs_WhiteSpace_SuperfluousWhitespaceSniff
+
+[pear-20145]: https://pear.php.net/bugs/bug.php?id=20145
+[pear-20147]: https://pear.php.net/bugs/bug.php?id=20147
+[pear-20151]: https://pear.php.net/bugs/bug.php?id=20151
+[pear-20190]: https://pear.php.net/bugs/bug.php?id=20190
 
 ## [1.5.1] - 2013-12-12
 ### Changed
@@ -4378,13 +4395,18 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - PSR2 ClassDeclarationSniff now allows a list of extended interfaces to be split across multiple lines
 - Squiz DoubleQuoteUsageSniff now allows \b in double quoted strings
 - Generic ForbiddenFunctionsSniff now ignores object creation
-    - This is a further fix for bug #20100 : incorrect Function mysql() has been deprecated report
+    - This is a further fix for bug [#20100][pear-20100] : incorrect Function mysql() has been deprecated report
 
 ### Fixed
-- Fixed bug #20136 : Squiz_Sniffs_WhiteSpace_ScopeKeywordSpacingSniff and Traits
-- Fixed bug #20138 : Protected property underscore and camel caps issue (in trait with Zend)
+- Fixed bug [#20136][pear-20136] : Squiz_Sniffs_WhiteSpace_ScopeKeywordSpacingSniff and Traits
+- Fixed bug [#20138][pear-20138] : Protected property underscore and camel caps issue (in trait with Zend)
     - Thanks to [Gaetan Rousseau][@Naelyth] for the patch
-- Fixed bug #20139 : No report file generated on success
+- Fixed bug [#20139][pear-20139] : No report file generated on success
+
+[pear-20100]: https://pear.php.net/bugs/bug.php?id=20100
+[pear-20136]: https://pear.php.net/bugs/bug.php?id=20136
+[pear-20138]: https://pear.php.net/bugs/bug.php?id=20138
+[pear-20139]: https://pear.php.net/bugs/bug.php?id=20139
 
 ## [1.5.0] - 2013-11-28
 ### Changed
@@ -4394,9 +4416,9 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - E.g., to ignore comments, override a property using:
     - name="ignoreIndentationTokens" type="array" value="T_COMMENT,T_DOC_COMMENT"
 - PSR2 standard now ignores comments when checking indentation rules
-- Generic UpperCaseConstantNameSniff no longer reports errors where constants are used (request #20090)
+- Generic UpperCaseConstantNameSniff no longer reports errors where constants are used (request [#20090][pear-20090])
     - It still reports errors where constants are defined
-- Individual messages can now be excluded in ruleset.xml files using the exclude tag (request #20091)
+- Individual messages can now be excluded in ruleset.xml files using the exclude tag (request [#20091][pear-20091])
     - Setting message severity to 0 continues to be supported
 - Squiz OperatorSpacingSniff no longer throws errors for the ?: short ternary operator
     - Thanks to [Antoine Musso][@hashar] for the patch
@@ -4409,13 +4431,23 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Maksim Kochkin][@ksimka] for the patch
 
 ### Fixed
-- Fixed bug #20093 : Bug with ternary operator token
-- Fixed bug #20097 : CLI.php throws error in php 5.2
-- Fixed bug #20100 : incorrect Function mysql() has been deprecated report
-- Fixed bug #20119 : PHP warning: invalid argument to str_repeat() in SVN blame report with -s
-- Fixed bug #20123 : PSR2 complains about an empty second statement in for-loop
-- Fixed bug #20131 : PHP errors in svnblame report, if there are files not under version control
-- Fixed bug #20133 : Allow "HG: hg_id" as value for @version tag
+- Fixed bug [#20093][pear-20093] : Bug with ternary operator token
+- Fixed bug [#20097][pear-20097] : CLI.php throws error in php 5.2
+- Fixed bug [#20100][pear-20100] : incorrect Function mysql() has been deprecated report
+- Fixed bug [#20119][pear-20119] : PHP warning: invalid argument to str_repeat() in SVN blame report with -s
+- Fixed bug [#20123][pear-20123] : PSR2 complains about an empty second statement in for-loop
+- Fixed bug [#20131][pear-20131] : PHP errors in svnblame report, if there are files not under version control
+- Fixed bug [#20133][pear-20133] : Allow "HG: hg_id" as value for @version tag
+
+[pear-20090]: https://pear.php.net/bugs/bug.php?id=20090
+[pear-20091]: https://pear.php.net/bugs/bug.php?id=20091
+[pear-20093]: https://pear.php.net/bugs/bug.php?id=20093
+[pear-20097]: https://pear.php.net/bugs/bug.php?id=20097
+[pear-20100]: https://pear.php.net/bugs/bug.php?id=20100
+[pear-20119]: https://pear.php.net/bugs/bug.php?id=20119
+[pear-20123]: https://pear.php.net/bugs/bug.php?id=20123
+[pear-20131]: https://pear.php.net/bugs/bug.php?id=20131
+[pear-20133]: https://pear.php.net/bugs/bug.php?id=20133
 
 ## [1.4.8] - 2013-11-26
 ### Changed
