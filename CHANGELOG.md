@@ -4071,7 +4071,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Improved indented PHP tag support in Generic ScopeIndentSniff
 - Generic CamelCapsFunctionNameSniff now ignores a single leading underscore
     - Thanks to [Alex Slobodiskiy][@xt99] for the patch
-- Standards can now be located within hidden directories (further fix for bug #20323)
+- Standards can now be located within hidden directories (further fix for bug [#20323][pear-20323])
     - Thanks to [Klaus Purer][@klausi] for the patch
 - Added Generic SyntaxSniff to check for syntax errors in PHP files
     - Thanks to [Blaine Schmeisser][@bayleedev] for the contribution
@@ -4081,18 +4081,26 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Generic UpperCaseConstantSniff and LowerCaseConstantSniff now ignore function names
 
 ### Fixed
-- Fixed bug #248 : FunctionCommentSniff expects ampersand on param name
-- Fixed bug #265 : False positives with type hints in ForbiddenFunctionsSniff
-- Fixed bug #20373 : Inline comment sniff tab handling way
-- Fixed bug #20378 : Report appended to existing file if no errors found in run
-- Fixed bug #20381 : Invalid "Comment closer must be on a new line"
+- Fixed bug [#248][sq-248] : FunctionCommentSniff expects ampersand on param name
+- Fixed bug [#265][sq-265] : False positives with type hints in ForbiddenFunctionsSniff
+- Fixed bug [#20373][pear-20373] : Inline comment sniff tab handling way
+- Fixed bug [#20378][pear-20378] : Report appended to existing file if no errors found in run
+- Fixed bug [#20381][pear-20381] : Invalid "Comment closer must be on a new line"
     - Thanks to [Brad Kent][@bkdotcom] for the patch
-- Fixed bug #20386 : Squiz.Commenting.ClassComment.SpacingBefore thrown if first block comment
+- Fixed bug [#20386][pear-20386] : Squiz.Commenting.ClassComment.SpacingBefore thrown if first block comment
+
+[sq-248]: https://github.com/squizlabs/PHP_CodeSniffer/issues/248
+[sq-265]: https://github.com/squizlabs/PHP_CodeSniffer/pull/265
+[pear-20323]: https://pear.php.net/bugs/bug.php?id=20323
+[pear-20373]: https://pear.php.net/bugs/bug.php?id=20373
+[pear-20378]: https://pear.php.net/bugs/bug.php?id=20378
+[pear-20381]: https://pear.php.net/bugs/bug.php?id=20381
+[pear-20386]: https://pear.php.net/bugs/bug.php?id=20386
 
 ## [2.0.0RC1] - 2014-08-06
 ### Changed
 - PHPCBF will now fix incorrect newline characters in a file
-- PHPCBF now exists cleanly when there are no errors to fix
+- PHPCBF now exits cleanly when there are no errors to fix
 - Added phpcbf.bat file for Windows
 - Verbose option no longer errors when using a phar file with a space in the path
 - Fixed a reporting error when using HHVM
@@ -4110,7 +4118,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - The filtering component of the --extensions argument is now ignored again when passing filenames
     - Can still be used to specify a custom tokenizer for each extension when passing filenames
     - If no tokenizer is specified, default values will be used for common file extensions
-- Diff report now produces relative paths on Windows, where possible (further fix for bug #20234)
+- Diff report now produces relative paths on Windows, where possible (further fix for bug [#20234][pear-20234])
 - If a token's content has been modified by the tab-width setting, it will now have an orig_content in the tokens array
 - Generic DisallowSpaceIndent and DisallowTabIndent sniffs now check original indent content even when tab-width is set
     - Previously, setting --tab-width would force both to check the indent as spaces
@@ -4134,29 +4142,46 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Ole Martin Handeland][@olemartinorg] for the patch
 - Generic LowerCaseConstantSniff and UpperCaseConstantSniff now ignore namespaces beginning with TRUE/FALSE/NULL
     - Thanks to [Renan Gonçalves][@renan] for the patch
-- Squiz InlineCommentSniff no longer requires a blank line after post-statement comments (request #20299)
+- Squiz InlineCommentSniff no longer requires a blank line after post-statement comments (request [#20299][pear-20299])
 - Squiz SelfMemberReferenceSniff now works correctly with namespaces
 - Squiz FunctionCommentSniff is now more relaxed when checking namespaced type hints
-- Tab characters are now encoded in abstract pattern errors messages
+- Tab characters are now encoded in abstract pattern error messages
     - Thanks to [Blaine Schmeisser][@bayleedev] for the patch
-- Invalid sniff codes passed to --sniffs now show a friendly error message (request #20313)
-- Generic LineLengthSniff now shows a warning if the iconv module is disabled (request #20314)
+- Invalid sniff codes passed to --sniffs now show a friendly error message (request [#20313][pear-20313])
+- Generic LineLengthSniff now shows a warning if the iconv module is disabled (request [#20314][pear-20314])
 - Source report no longer shows errors if category or sniff names ends in an uppercase error
     - Thanks to [Jonathan Marcil][@jmarcil] for the patch
 
 ### Fixed
-- Fixed bug #20261 : phpcbf has an endless fixing loop
-- Fixed bug #20268 : Incorrect documentation titles in PEAR documentation
-- Fixed bug #20296 : new array notion in function comma check fails
-- Fixed bug #20297 : phar does not work when renamed it to phpcs
-- Fixed bug #20307 : PHP_CodeSniffer_Standards_AbstractVariableSniff analyze traits
-- Fixed bug #20308 : Squiz.ValidVariableNameSniff - wrong variable usage
-- Fixed bug #20309 : Use "member variable" term in sniff "processMemberVar" method
-- Fixed bug #20310 : PSR2 does not check for space after function name
-- Fixed bug #20322 : Display rules set to type=error even when suppressing warnings
-- Fixed bug #20323 : PHPCS tries to load sniffs from hidden directories
-- Fixed bug #20346 : Fixer endless loop with Squiz.CSS sniffs
-- Fixed bug #20355 : No sniffs are registered with PHAR on Windows
+- Fixed bug [#20261][pear-20261] : phpcbf has an endless fixing loop
+- Fixed bug [#20268][pear-20268] : Incorrect documentation titles in PEAR documentation
+- Fixed bug [#20296][pear-20296] : new array notion in function comma check fails
+- Fixed bug [#20297][pear-20297] : phar does not work when renamed it to phpcs
+- Fixed bug [#20307][pear-20307] : PHP_CodeSniffer_Standards_AbstractVariableSniff analyze traits
+- Fixed bug [#20308][pear-20308] : Squiz.ValidVariableNameSniff - wrong variable usage
+- Fixed bug [#20309][pear-20309] : Use "member variable" term in sniff "processMemberVar" method
+- Fixed bug [#20310][pear-20310] : PSR2 does not check for space after function name
+- Fixed bug [#20322][pear-20322] : Display rules set to type=error even when suppressing warnings
+- Fixed bug [#20323][pear-20323] : PHPCS tries to load sniffs from hidden directories
+- Fixed bug [#20346][pear-20346] : Fixer endless loop with Squiz.CSS sniffs
+- Fixed bug [#20355][pear-20355] : No sniffs are registered with PHAR on Windows
+
+[pear-20234]: https://pear.php.net/bugs/bug.php?id=20234
+[pear-20261]: https://pear.php.net/bugs/bug.php?id=20261
+[pear-20268]: https://pear.php.net/bugs/bug.php?id=20268
+[pear-20296]: https://pear.php.net/bugs/bug.php?id=20296
+[pear-20297]: https://pear.php.net/bugs/bug.php?id=20297
+[pear-20299]: https://pear.php.net/bugs/bug.php?id=20299
+[pear-20307]: https://pear.php.net/bugs/bug.php?id=20307
+[pear-20308]: https://pear.php.net/bugs/bug.php?id=20308
+[pear-20309]: https://pear.php.net/bugs/bug.php?id=20309
+[pear-20310]: https://pear.php.net/bugs/bug.php?id=20310
+[pear-20313]: https://pear.php.net/bugs/bug.php?id=20313
+[pear-20314]: https://pear.php.net/bugs/bug.php?id=20314
+[pear-20322]: https://pear.php.net/bugs/bug.php?id=20322
+[pear-20323]: https://pear.php.net/bugs/bug.php?id=20323
+[pear-20346]: https://pear.php.net/bugs/bug.php?id=20346
+[pear-20355]: https://pear.php.net/bugs/bug.php?id=20355
 
 ## [1.5.4] - 2014-08-06
 ### Changed
@@ -4173,24 +4198,36 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Ole Martin Handeland][@olemartinorg] for the patch
 - Generic LowerCaseConstantSniff and UpperCaseConstantSniff now ignore namespaces beginning with TRUE/FALSE/NULL
     - Thanks to [Renan Gonçalves][@renan] for the patch
-- Squiz InlineCommentSniff no longer requires a blank line after post-statement comments (request #20299)
+- Squiz InlineCommentSniff no longer requires a blank line after post-statement comments (request [#20299][pear-20299])
 - Squiz SelfMemberReferenceSniff now works correctly with namespaces
-- Tab characters are now encoded in abstract pattern errors messages
+- Tab characters are now encoded in abstract pattern error messages
     - Thanks to [Blaine Schmeisser][@bayleedev] for the patch
-- Invalid sniff codes passed to --sniffs now show a friendly error message (request #20313)
-- Generic LineLengthSniff now shows a warning if the iconv module is disabled (request #20314)
+- Invalid sniff codes passed to --sniffs now show a friendly error message (request [#20313][pear-20313])
+- Generic LineLengthSniff now shows a warning if the iconv module is disabled (request [#20314][pear-20314])
 - Source report no longer shows errors if category or sniff names ends in an uppercase error
     - Thanks to [Jonathan Marcil][@jmarcil] for the patch
 
 ### Fixed
-- Fixed bug #20268 : Incorrect documentation titles in PEAR documentation
-- Fixed bug #20296 : new array notion in function comma check fails
-- Fixed bug #20307 : PHP_CodeSniffer_Standards_AbstractVariableSniff analyze traits
-- Fixed bug #20308 : Squiz.ValidVariableNameSniff - wrong variable usage
-- Fixed bug #20309 : Use "member variable" term in sniff "processMemberVar" method
-- Fixed bug #20310 : PSR2 does not check for space after function name
-- Fixed bug #20322 : Display rules set to type=error even when suppressing warnings
-- Fixed bug #20323 : PHPCS tries to load sniffs from hidden directories
+- Fixed bug [#20268][pear-20268] : Incorrect documentation titles in PEAR documentation
+- Fixed bug [#20296][pear-20296] : new array notion in function comma check fails
+- Fixed bug [#20307][pear-20307] : PHP_CodeSniffer_Standards_AbstractVariableSniff analyze traits
+- Fixed bug [#20308][pear-20308] : Squiz.ValidVariableNameSniff - wrong variable usage
+- Fixed bug [#20309][pear-20309] : Use "member variable" term in sniff "processMemberVar" method
+- Fixed bug [#20310][pear-20310] : PSR2 does not check for space after function name
+- Fixed bug [#20322][pear-20322] : Display rules set to type=error even when suppressing warnings
+- Fixed bug [#20323][pear-20323] : PHPCS tries to load sniffs from hidden directories
+
+[pear-20268]: https://pear.php.net/bugs/bug.php?id=20268
+[pear-20296]: https://pear.php.net/bugs/bug.php?id=20296
+[pear-20299]: https://pear.php.net/bugs/bug.php?id=20299
+[pear-20307]: https://pear.php.net/bugs/bug.php?id=20307
+[pear-20308]: https://pear.php.net/bugs/bug.php?id=20308
+[pear-20309]: https://pear.php.net/bugs/bug.php?id=20309
+[pear-20310]: https://pear.php.net/bugs/bug.php?id=20310
+[pear-20313]: https://pear.php.net/bugs/bug.php?id=20313
+[pear-20314]: https://pear.php.net/bugs/bug.php?id=20314
+[pear-20322]: https://pear.php.net/bugs/bug.php?id=20322
+[pear-20323]: https://pear.php.net/bugs/bug.php?id=20323
 
 ## [2.0.0a2] - 2014-05-01
 ### Changed
@@ -4216,7 +4253,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - PSR1 CamelCapsMethodNameSniff now ignores magic methods
     - Thanks to [Eser Ozvataf][@eser] for the patch
 - PSR1 SideEffectsSniff now ignores methods named define()
-- PSR1 and PEAR ClassDeclarationSniffs now support traits (request #20208)
+- PSR1 and PEAR ClassDeclarationSniffs now support traits (request [#20208][pear-20208])
 - PSR2 ControlStructureSpacingSniff now allows newlines before/after parentheses
     - Thanks to [Maurus Cuelenaere][@mcuelenaere] for the patch
 - PSR2 ControlStructureSpacingSniff now checks TRY and CATCH statements
@@ -4227,20 +4264,33 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Squiz SwitchDeclarationSniff now allows exit() as a breaking statement for case/default
 - Squiz ValidVariableNameSniff and Zend ValidVariableNameSniff now ignore additional PHP reserved vars
     - Thanks to Mikuláš Dítě and Adrian Crepaz for the patch
-- Sniff code Squiz.WhiteSpace.MemberVarSpacing.After changed to Squiz.WhiteSpace.MemberVarSpacing.Incorrect (request #20241)
+- Sniff code Squiz.WhiteSpace.MemberVarSpacing.After changed to Squiz.WhiteSpace.MemberVarSpacing.Incorrect (request [#20241][pear-20241])
 
 ### Fixed
-- Fixed bug #20200 : Invalid JSON produced with specific error message
-- Fixed bug #20204 : Ruleset exclude checks are case sensitive
-- Fixed bug #20213 : Invalid error, Inline IF must be declared on single line
-- Fixed bug #20225 : array_merge() that takes more than one line generates error
-- Fixed bug #20230 : Squiz ControlStructureSpacing sniff assumes specific condition formatting
-- Fixed bug #20234 : phpcbf patch command absolute paths
-- Fixed bug #20240 : Squiz block comment sniff fails when newline present
-- Fixed bug #20247 : The Squiz.WhiteSpace.ControlStructureSpacing sniff and do-while
+- Fixed bug [#20200][pear-20200] : Invalid JSON produced with specific error message
+- Fixed bug [#20204][pear-20204] : Ruleset exclude checks are case sensitive
+- Fixed bug [#20213][pear-20213] : Invalid error, Inline IF must be declared on single line
+- Fixed bug [#20225][pear-20225] : array_merge() that takes more than one line generates error
+- Fixed bug [#20230][pear-20230] : Squiz ControlStructureSpacing sniff assumes specific condition formatting
+- Fixed bug [#20234][pear-20234] : phpcbf patch command absolute paths
+- Fixed bug [#20240][pear-20240] : Squiz block comment sniff fails when newline present
+- Fixed bug [#20247][pear-20247] : The Squiz.WhiteSpace.ControlStructureSpacing sniff and do-while
     - Thanks to [Alexander Obuhovich][@aik099] for the patch
-- Fixed bug #20248 : The Squiz_Sniffs_WhiteSpace_ControlStructureSpacingSniff sniff and empty scope
-- Fixed bug #20252 : Unitialized string offset when package name starts with underscore
+- Fixed bug [#20248][pear-20248] : The Squiz_Sniffs_WhiteSpace_ControlStructureSpacingSniff sniff and empty scope
+- Fixed bug [#20252][pear-20252] : Unitialized string offset when package name starts with underscore
+
+[pear-20200]: https://pear.php.net/bugs/bug.php?id=20200
+[pear-20204]: https://pear.php.net/bugs/bug.php?id=20204
+[pear-20208]: https://pear.php.net/bugs/bug.php?id=20208
+[pear-20213]: https://pear.php.net/bugs/bug.php?id=20213
+[pear-20225]: https://pear.php.net/bugs/bug.php?id=20225
+[pear-20230]: https://pear.php.net/bugs/bug.php?id=20230
+[pear-20234]: https://pear.php.net/bugs/bug.php?id=20234
+[pear-20240]: https://pear.php.net/bugs/bug.php?id=20240
+[pear-20241]: https://pear.php.net/bugs/bug.php?id=20241
+[pear-20247]: https://pear.php.net/bugs/bug.php?id=20247
+[pear-20248]: https://pear.php.net/bugs/bug.php?id=20248
+[pear-20252]: https://pear.php.net/bugs/bug.php?id=20252
 
 ## [1.5.3] - 2014-05-01
 ### Changed
