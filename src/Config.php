@@ -739,10 +739,23 @@ class Config
         case 'd' :
             $ini = explode('=', $this->cliArgs[($pos + 1)]);
             $this->cliArgs[($pos + 1)] = '';
-            if (isset($ini[1]) === true) {
-                ini_set($ini[0], $ini[1]);
-            } else {
-                ini_set($ini[0], true);
+            if (isset($ini[1]) === false) {
+                // Set to true.
+                $ini[1] = '1';
+            }
+
+            $current = ini_get($ini[0]);
+            if ($current === false) {
+                // Ini setting which doesn't exist, or is from an unavailable extension.
+                // Silently ignore it.
+                break;
+            }
+
+            $changed = ini_set($ini[0], $ini[1]);
+            if ($changed === false && ini_get($ini[0]) !== $ini[1]) {
+                $error  = sprintf('ERROR: Ini option "%s" cannot be changed at runtime.', $ini[0]).PHP_EOL;
+                $error .= $this->printShortUsage(true);
+                throw new DeepExitException($error, 3);
             }
             break;
         case 'n' :
