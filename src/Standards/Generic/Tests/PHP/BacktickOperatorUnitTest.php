@@ -48,8 +48,8 @@ final class BacktickOperatorUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList()
     {
-        // Warning about incorrect annotation will be shown on line 1 once PR #3915 would be merged.
-        return [];
+        // Warning about incorrect annotation.
+        return [1 => 1];
 
     }//end getWarningList()
 
