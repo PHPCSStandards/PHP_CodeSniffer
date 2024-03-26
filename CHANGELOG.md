@@ -3987,11 +3987,17 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Thibaud Fabre][@fabre-thibaud] for the patch
 
 ### Fixed
-- Fixed bug #280 : The --config-show option generates error when there is no config file
-- Fixed bug #306 : File containing only a namespace declaration raises undefined index notice
-- Fixed bug #308 : Squiz InlineIfDeclarationSniff fails on ternary operators inside closure
-- Fixed bug #310 : Variadics not recognized by tokenizer
-- Fixed bug #311 : Suppression of function prototype breaks checking of lines within function
+- Fixed bug [#280][sq-280] : The --config-show option generates error when there is no config file
+- Fixed bug [#306][sq-306] : File containing only a namespace declaration raises undefined index notice
+- Fixed bug [#308][sq-308] : Squiz InlineIfDeclarationSniff fails on ternary operators inside closure
+- Fixed bug [#310][sq-310] : Variadics not recognized by tokenizer
+- Fixed bug [#311][sq-311] : Suppression of function prototype breaks checking of lines within function
+
+[sq-280]: https://github.com/squizlabs/PHP_CodeSniffer/issues/280
+[sq-306]: https://github.com/squizlabs/PHP_CodeSniffer/issues/306
+[sq-308]: https://github.com/squizlabs/PHP_CodeSniffer/issues/308
+[sq-310]: https://github.com/squizlabs/PHP_CodeSniffer/issues/310
+[sq-311]: https://github.com/squizlabs/PHP_CodeSniffer/issues/311
 
 ## [2.0.0RC4] - 2014-11-07
 ### Changed
@@ -4017,14 +4023,23 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Running unit tests with the -v CLI argument no longer generates PHP errors
 
 ### Fixed
-- Fixed bug #295 : ScopeIndentSniff hangs when processing nested closures
-- Fixed bug #298 : False positive in ScopeIndentSniff when anonymous functions are used with method chaining
-- Fixed bug #302 : Fixing code in Squiz InlineComment sniff can remove some comment text
-- Fixed bug #303 : Open and close tag on same line can cause a PHP notice checking scope indent
-- Fixed bug #306 : File containing only a namespace declaration raises undefined index notice
-- Fixed bug #307 : Conditional breaks in case statements get incorrect indentations
-- Fixed bug #308 : Squiz InlineIfDeclarationSniff fails on ternary operators inside closure
-- Fixed bug #310 : Variadics not recognized by tokenizer
+- Fixed bug [#295][sq-295] : ScopeIndentSniff hangs when processing nested closures
+- Fixed bug [#298][sq-298] : False positive in ScopeIndentSniff when anonymous functions are used with method chaining
+- Fixed bug [#302][sq-302] : Fixing code in Squiz InlineComment sniff can remove some comment text
+- Fixed bug [#303][sq-303] : Open and close tag on same line can cause a PHP notice checking scope indent
+- Fixed bug [#306][sq-306] : File containing only a namespace declaration raises undefined index notice
+- Fixed bug [#307][sq-307] : Conditional breaks in case statements get incorrect indentations
+- Fixed bug [#308][sq-308] : Squiz InlineIfDeclarationSniff fails on ternary operators inside closure
+- Fixed bug [#310][sq-310] : Variadics not recognized by tokenizer
+
+[sq-295]: https://github.com/squizlabs/PHP_CodeSniffer/issues/295
+[sq-298]: https://github.com/squizlabs/PHP_CodeSniffer/issues/298
+[sq-302]: https://github.com/squizlabs/PHP_CodeSniffer/issues/302
+[sq-303]: https://github.com/squizlabs/PHP_CodeSniffer/issues/303
+[sq-306]: https://github.com/squizlabs/PHP_CodeSniffer/issues/306
+[sq-307]: https://github.com/squizlabs/PHP_CodeSniffer/issues/307
+[sq-308]: https://github.com/squizlabs/PHP_CodeSniffer/issues/308
+[sq-310]: https://github.com/squizlabs/PHP_CodeSniffer/issues/310
 
 ## [2.0.0RC3] - 2014-10-16
 ### Changed
@@ -4045,26 +4060,29 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Squiz EmbeddedPhpSniff now checks open and close tag indents and fixes some errors
 - Squiz FileCommentSniff no longer throws incorrect blank line before comment errors in JS files
 - Squiz ClassDeclarationSniff now has better checking for blank lines after a closing brace
-- Removed error Squiz.Classes.ClassDeclaration.NoNewlineAfterCloseBrace (request #285)
+- Removed error Squiz.Classes.ClassDeclaration.NoNewlineAfterCloseBrace (request [#285][sq-285])
     - Already handled by Squiz.Classes.ClassDeclaration.CloseBraceSameLine
 
 ### Fixed
-- Fixed bug #280 : The --config-show option generates error when there is no config file
+- Fixed bug [#280][sq-280] : The --config-show option generates error when there is no config file
+
+[sq-280]: https://github.com/squizlabs/PHP_CodeSniffer/issues/280
+[sq-285]: https://github.com/squizlabs/PHP_CodeSniffer/issues/285
 
 ## [2.0.0RC2] - 2014-09-26
 ### Changed
-- Minified JS and CSS files are now detected and skipped (fixes bug #252 and bug #19899)
+- Minified JS and CSS files are now detected and skipped (fixes bug [#252][sq-252] and bug [#19899][pear-19899])
     - A warning will be added to the file so it can be found in the report and ignored in the future
 - Fixed incorrect length of JS object operator tokens
 - PHP tokenizer no longer converts class/function names to special tokens types
     - Class/function names such as parent and true would become special tokens such as T_PARENT and T_TRUE
-- PHPCS can now exit with 0 if only warnings were found (request #262)
+- PHPCS can now exit with 0 if only warnings were found (request [#262][sq-262])
     - Set the ignore_warnings_on_exit config variable to 1 to set this behaviour
     - Default remains at exiting with 0 only if no errors and no warnings were found
     - Also changes return value of PHP_CodeSniffer_Reporting::printReport()
 - Rulesets can now set associative array properties
     - property name="[property]" type="array" value="foo=>bar,baz=>qux"
-- Generic ForbiddenFunctionsSniff now has a public property called forbiddenFunctions (request #263)
+- Generic ForbiddenFunctionsSniff now has a public property called forbiddenFunctions (request [#263][sq-263])
     - Override the property in a ruleset.xml file to define forbidden functions and their replacements
     - A replacement of NULL indicates that no replacement is available
     - e.g., value="delete=>unset,print=>echo,create_function=>null"
@@ -4076,14 +4094,14 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - If 2 sniffs look to be conflicting, one change will be ignored to allow a fix to occur
 - Generic CamelCapsFunctionNameSniff now ignores a single leading underscore
     - Thanks to [Alex Slobodiskiy][@xt99] for the patch
-- Standards can now be located within hidden directories (further fix for bug #20323)
+- Standards can now be located within hidden directories (further fix for bug [#20323][pear-20323])
     - Thanks to [Klaus Purer][@klausi] for the patch
 - Sniff ignore patterns now replace Win dir separators like file ignore patterns already did
 - Exclude patterns now use backtick delimiters, allowing all special characters to work correctly again
     - Thanks to [Jeremy Edgell][@jedgell] for the patch
 - Errors converted to warnings in a ruleset (and vice versa) now retain their fixable status
     - Thanks to [Alexander Obuhovich][@aik099] for the patch
-- Squiz ConcatenationSpacingSniff now has a setting to specify how many spaces there should around concat operators
+- Squiz ConcatenationSpacingSniff now has a setting to specify how many spaces there should be around concat operators
     - Default remains at 0
     - Override the "spacing" setting in a ruleset.xml file to change
 - Added auto-fixes for Squiz InlineCommentSniff
@@ -4101,15 +4119,29 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Generic UpperCaseConstantSniff and LowerCaseConstantSniff now ignore function names
 
 ### Fixed
-- Fixed bug #243 : Missing DocBlock not detected
-- Fixed bug #248 : FunctionCommentSniff expects ampersand on param name
-- Fixed bug #265 : False positives with type hints in ForbiddenFunctionsSniff
-- Fixed bug #20373 : Inline comment sniff tab handling way
-- Fixed bug #20377 : Error when trying to execute phpcs with report=json
-- Fixed bug #20378 : Report appended to existing file if no errors found in run
-- Fixed bug #20381 : Invalid "Comment closer must be on a new line"
+- Fixed bug [#243][sq-243] : Missing DocBlock not detected
+- Fixed bug [#248][sq-248] : FunctionCommentSniff expects ampersand on param name
+- Fixed bug [#265][sq-265] : False positives with type hints in ForbiddenFunctionsSniff
+- Fixed bug [#20373][pear-20373] : Inline comment sniff tab handling way
+- Fixed bug [#20377][pear-20377] : Error when trying to execute phpcs with report=json
+- Fixed bug [#20378][pear-20378] : Report appended to existing file if no errors found in run
+- Fixed bug [#20381][pear-20381] : Invalid "Comment closer must be on a new line"
     - Thanks to [Brad Kent][@bkdotcom] for the patch
-- Fixed bug #20402 : SVN pre-commit hook fails due to unknown argument error
+- Fixed bug [#20402][pear-20402] : SVN pre-commit hook fails due to unknown argument error
+
+[sq-243]: https://github.com/squizlabs/PHP_CodeSniffer/issues/243
+[sq-248]: https://github.com/squizlabs/PHP_CodeSniffer/issues/248
+[sq-252]: https://github.com/squizlabs/PHP_CodeSniffer/issues/252
+[sq-262]: https://github.com/squizlabs/PHP_CodeSniffer/issues/262
+[sq-263]: https://github.com/squizlabs/PHP_CodeSniffer/issues/263
+[sq-265]: https://github.com/squizlabs/PHP_CodeSniffer/pull/265
+[pear-19899]: https://pear.php.net/bugs/bug.php?id=19899
+[pear-20323]: https://pear.php.net/bugs/bug.php?id=20323
+[pear-20373]: https://pear.php.net/bugs/bug.php?id=20373
+[pear-20377]: https://pear.php.net/bugs/bug.php?id=20377
+[pear-20378]: https://pear.php.net/bugs/bug.php?id=20378
+[pear-20381]: https://pear.php.net/bugs/bug.php?id=20381
+[pear-20402]: https://pear.php.net/bugs/bug.php?id=20402
 
 ## [1.5.5] - 2014-09-25
 ### Changed
