@@ -40,25 +40,21 @@
         </code>
         <code title="Invalid: The opening and closing DocBlock tags are not the only content on the line.">
         <![CDATA[
-<em>/** Short description.</em>
- */
-
-/**
- <em>* Short description */</em>
+<em>/** Short description. */</em>
         ]]>
         </code>
     </code_comparison>
     <standard>
     <![CDATA[
-    There must be no additional blank lines before the closing DocBlock tag.
+    There must be no additional blank (comment) lines before the closing DocBlock tag.
     ]]>
     </standard>
     <code_comparison>
         <code title="Valid: no additional blank lines before the closing DocBlock tag.">
         <![CDATA[
 /**
- * Short description.
-<em></em> */
+ * Short description.<em>
+</em> */
         ]]>
         </code>
         <code title="Invalid: additional blank lines before the closing DocBlock tag.">
@@ -98,11 +94,11 @@
     </code_comparison>
     <standard>
     <![CDATA[
-    The short and long descriptions must start with a capital letter.
+    Both the short description, as well as the long description, must start with a capital letter.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: Short and long descriptions start with a capital letter.">
+        <code title="Valid: Both the short and long description start with a capital letter.">
         <![CDATA[
 /**
  * <em>S</em>hort description.
@@ -111,7 +107,7 @@
  */
         ]]>
         </code>
-        <code title="Invalid: Short or long descriptions don't start with a capital letter.">
+        <code title="Invalid: Neither short nor long description starts with a capital letter.">
         <![CDATA[
 /**
  * <em>s</em>hort description.
@@ -145,8 +141,8 @@
 <em> *
  *
 </em>
- * Long description.
- * @param int $foo
+ * Long description.<em>
+</em> * @param int $foo
  */
         ]]>
         </code>
@@ -203,7 +199,7 @@
  * Short description.
  *
 <em> * @param  int $foo
- * @author Some Author
+ * @since 5.4.8
  * @return int</em>
  */
         ]]>
