@@ -3612,7 +3612,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ### Fixed
 - Fixed bug [#584][sq-584] : Squiz.Arrays.ArrayDeclaration sniff gives incorrect NoComma error for multiline string values
 - Fixed bug [#589][sq-589] : PEAR.Functions.FunctionCallSignature sniff not checking all function calls
-- Fixed bug [#592][sq-592] : USE statement tokenising can sometimes result in mismatched scopes
+- Fixed bug [#592][sq-592] : USE statement tokenizing can sometimes result in mismatched scopes
 - Fixed bug [#594][sq-594] : Tokenizer issue on closure that returns by reference
 - Fixed bug [#595][sq-595] : Colons in CSS selectors within media queries throw false positives
     - Thanks to [Klaus Purer][@klausi] for the patch
@@ -5444,7 +5444,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#18633][pear-18633] : CSS Tokenizer doesn't replace T_LIST tokens inside some styles
 - Fixed bug [#18657][pear-18657] : anonymous functions wrongly indented
 - Fixed bug [#18670][pear-18670] : UpperCaseConstantNameSniff fails on dynamic retrieval of class constant
-- Fixed bug [#18709][pear-18709] : Code sniffer sniffs file if even if it's in --ignore
+- Fixed bug [#18709][pear-18709] : Code sniffer sniffs file even if it's in --ignore
     - Thanks to [Artem Lopata][@biozshock] for the patch
 - Fixed bug [#18762][pear-18762] : Incorrect handling of define and constant in UpperCaseConstantNameSniff
     - Thanks to [Thomas Baker][pear-bakert] for the patch
@@ -5758,7 +5758,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Squiz VariableCommentSniff now ensures the open comment tag is the only content on the first line
 - Squiz NonExecutableCodeSniff now warns about empty return statements that are not required
 - Removed ForbiddenStylesSniff from Squiz standard
-    - It is now in in the MySource standard as BrowserSpecificStylesSniff
+    - It is now in the MySource standard as BrowserSpecificStylesSniff
     - New BrowserSpecificStylesSniff ignores files with browser-specific suffixes
 - MySource IncludeSystemSniff no longer throws errors when extending the Exception class
 - MySource IncludeSystemSniff no longer throws errors for the abstract widget class
@@ -5807,10 +5807,10 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - You can also use the -s command line argument to see the different types of errors authors are committing
     - You can use the -v command line argument to see all authors, even if they have no errors or warnings
 - Added a new command line argument --report-width to allow you to set the column width of screen reports
-    - Reports wont accept values less than 70 or else they get too small
+    - Reports won't accept values less than 70 or else they get too small
     - Can also be set via a config var: phpcs --config-set report_width 100
 - You can now get PHP_CodeSniffer to ignore a whole file by adding @codingStandardsIgnoreFile in the content
-    - If you put it in the first two lines the file wont even be tokenized, so it will be much quicker
+    - If you put it in the first two lines the file won't even be tokenized, so it will be much quicker
 - Reports now print their file lists in alphabetical order
 - PEAR FunctionDeclarationSniff now reports error for incorrect closing bracket placement in multi-line definitions
 - Added Generic CallTimePassByReferenceSniff to prohibit the passing of variables into functions by reference
@@ -6320,7 +6320,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - A value of zero (the default) tells PHP_CodeSniffer not to replace tabs with spaces
 - You can now change the default report format from "full" to something else
     - Run: phpcs --config-set report_format [format]
-- Improved performance by optimising the way the scope map is created during tokenising
+- Improved performance by optimising the way the scope map is created during tokenizing
 - Added new Squiz DisallowInlineIfSniff to disallow the usage of inline IF statements
 - Fixed incorrect errors being thrown for nested switches in Squiz SwitchDeclarationSniff
 - PEAR FunctionCommentSniff no longer complains about missing comments for @throws tags
@@ -6355,7 +6355,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Run: phpcs --config-set show_warnings 0
     - If warnings are hidden by default, use the new -w command line argument to override
 - Added new command line argument --config-delete to delete a config value and revert to the default
-- Improved overall performance by optimising tokenising and next/prev methods (feature request [#12421][pear-12421])
+- Improved overall performance by optimising tokenizing and next/prev methods (feature request [#12421][pear-12421])
     - Thanks to [Christian Weiske][@cweiske] for the patch
 - Added FunctionCallSignatureSniff to Squiz standard
 - Added @subpackage support to file and class comment sniffs in PEAR standard (feature request [#12382][pear-12382])
@@ -6518,7 +6518,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Added Squiz LowercaseClassKeywordsSniff to ensure all class declaration keywords are lowercase
 - Added Squiz LowercaseFunctionKeywordsSniff to ensure all function declaration keywords are lowercase
 - Added Squiz LowercasePHPFunctionsSniff to ensure all calls to inbuilt PHP functions are lowercase
-- Added Squiz CastSpacingSniff to ensure cast statements dont contain whitespace
+- Added Squiz CastSpacingSniff to ensure cast statements don't contain whitespace
 - Errors no longer thrown when checking 0 length files with verbosity on
 
 ### Fixed
@@ -6583,7 +6583,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Errors no longer thrown on __autoload functions in PEAR ValidFunctionNameSniff
 - Errors now thrown for __autoload methods in PEAR ValidFunctionNameSniff
 - Errors now thrown if constructors or destructors have @return tags in Squiz FunctionCommentSniff
-- Errors now thrown if @throws tags dont start with a capital and end with a full stop in Squiz FunctionCommentSniff
+- Errors now thrown if @throws tags don't start with a capital and end with a full stop in Squiz FunctionCommentSniff
 - Errors now thrown for invalid @var tag values in Squiz VariableCommentSniff
 - Errors now thrown for missing doc comment in Squiz VariableCommentSniff
 - Errors now thrown for unspaced operators in FOR loop declarations in Squiz OperatorSpacingSniff
@@ -6726,7 +6726,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Removed the including of checked files to stop errors caused by parsing them
 - Removed the use of reflection so checked files do not have to be included
 - Memory usage has been greatly reduced
-- Much faster tokenising and checking times
+- Much faster tokenizing and checking times
 - Reworked the PEAR coding standard sniffs (much faster now)
 - Fix some bugs with the PEAR scope indentation standard
 - Better checking for installed coding standards
@@ -6736,7 +6736,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Added an option to hide warnings from reports
 - Added an option to print verbose output (so you know what is going on)
 - Reordered command line args to put switches first (although order is not enforced)
-- Switches can now be specified together (eg. php -nv) as well as separately (phpcs -n -v)
+- Switches can now be specified together (e.g. php -nv) as well as separately (phpcs -n -v)
 
 ## 0.0.1 - 2006-07-19
 ### Added
