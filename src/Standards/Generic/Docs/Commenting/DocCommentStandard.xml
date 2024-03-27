@@ -1,7 +1,7 @@
 <documentation title="Doc Comment">
     <standard>
     <![CDATA[
-    Enforces several rules related to the formatting of DocBlocks in PHP code.
+    Enforces rules related to the formatting of DocBlocks in PHP code. DocBlocks are, as defined by the phpDocumentor project, a special type of comment that can provide information about a structural element. In the context of DocBlocks, structural elements are require(_once), include(_once), class, interface, trait, function, property, constant and variable. But this sniff is triggered whenever it finds a DocBlock opening tag ("/**"). The sniff name can be misleading. Despite Doc Comment being the name, this sniff is about DocBlocks.
     ]]>
     </standard>
     <standard>
@@ -31,14 +31,14 @@
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: The opening and closing DocBlock tags are the only content on the line.">
+        <code title="Valid: The opening and closing DocBlock tags have to be on a line by themselves.">
         <![CDATA[
 <em>/**</em>
  * Short description.
  <em>*/</em>
         ]]>
         </code>
-        <code title="Invalid: The opening and closing DocBlock tags are not the only content on the line.">
+        <code title="Invalid: The opening and closing DocBlock tags are not on a line by themselves.">
         <![CDATA[
 <em>/** Short description. */</em>
         ]]>
@@ -186,10 +186,10 @@
 /**
  * Short description.
  *
- * @param int $foo
+<em> * @param int $foo</em>
  *
-<em> * @author Some Author
- * @return int</em>
+ * @since      3.4.8
+ * @deprecated 6.0.0
  */
         ]]>
         </code>
@@ -198,9 +198,9 @@
 /**
  * Short description.
  *
-<em> * @param  int $foo
- * @since 5.4.8
- * @return int</em>
+<em> * @param      int $foo
+ * @since      3.4.8
+ * @deprecated 6.0.0</em>
  */
         ]]>
         </code>
@@ -216,8 +216,8 @@
 /**
  * Short description.
  *
- * @deprecated <em>1.0.0</em>
- * @return     <em>bool</em>
+ * @since<em>      0.5.0</em>
+ * @deprecated<em> 1.0.0</em>
  */
         ]]>
         </code>
@@ -226,8 +226,8 @@
 /**
  * Short description.
  *
- * @deprecated <em>1.0.0</em>
- * @return <em>bool</em>
+ * @since<em> 0.5.0</em>
+ * @deprecated<em> 1.0.0</em>
  */
         ]]>
         </code>
