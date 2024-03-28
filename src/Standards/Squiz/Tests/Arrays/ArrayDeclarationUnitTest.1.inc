@@ -542,3 +542,8 @@ $x = array(
         default => $item
     },
      );
+
+$x = array(
+      1, static::helloWorld(), $class instanceof static,
+      2,
+     );
