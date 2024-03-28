@@ -27,6 +27,7 @@ class CallTimePassByReferenceSniff implements Sniff
         return [
             T_STRING,
             T_VARIABLE,
+            T_ANON_CLASS,
         ];
 
     }//end register()
@@ -50,12 +51,12 @@ class CallTimePassByReferenceSniff implements Sniff
 
         $prev = $phpcsFile->findPrevious($findTokens, ($stackPtr - 1), null, true);
 
-        // Skip tokens that are the names of functions or classes
+        // Skip tokens that are the names of functions
         // within their definitions. For example: function myFunction...
         // "myFunction" is T_STRING but we should skip because it is not a
         // function or method *call*.
         $prevCode = $tokens[$prev]['code'];
-        if ($prevCode === T_FUNCTION || $prevCode === T_CLASS) {
+        if ($prevCode === T_FUNCTION) {
             return;
         }
 
@@ -69,7 +70,7 @@ class CallTimePassByReferenceSniff implements Sniff
             true
         );
 
-        if ($tokens[$openBracket]['code'] !== T_OPEN_PARENTHESIS) {
+        if ($openBracket === false || $tokens[$openBracket]['code'] !== T_OPEN_PARENTHESIS) {
             return;
         }
 
@@ -86,10 +87,6 @@ class CallTimePassByReferenceSniff implements Sniff
         ];
 
         while (($nextSeparator = $phpcsFile->findNext($find, ($nextSeparator + 1), $closeBracket)) !== false) {
-            if (isset($tokens[$nextSeparator]['nested_parenthesis']) === false) {
-                continue;
-            }
-
             if ($tokens[$nextSeparator]['code'] === T_OPEN_SHORT_ARRAY) {
                 $nextSeparator = $tokens[$nextSeparator]['bracket_closer'];
                 continue;
