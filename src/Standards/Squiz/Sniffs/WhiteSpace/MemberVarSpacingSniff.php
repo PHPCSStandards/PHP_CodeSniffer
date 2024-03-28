@@ -10,6 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace;
 
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\AbstractScopeSniff;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
 use PHP_CodeSniffer\Util\Tokens;
 
@@ -29,6 +30,19 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
      * @var integer
      */
     public $spacingBeforeFirst = 1;
+
+
+    /**
+     * Only listen to variables within OO scopes.
+     */
+    public function __construct()
+    {
+        $scopes = Tokens::$ooScopeTokens;
+        $listen = [T_VARIABLE];
+
+        AbstractScopeSniff::__construct($scopes, $listen, false);
+
+    }//end __construct()
 
 
     /**
