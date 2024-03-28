@@ -50,28 +50,6 @@
     </code_comparison>
     <standard>
     <![CDATA[
-    There must be no additional blank (comment) lines before the closing DocBlock tag.
-    ]]>
-    </standard>
-    <code_comparison>
-        <code title="Valid: no additional blank lines before the closing DocBlock tag.">
-        <![CDATA[
-/**
- * Short description.<em>
-</em> */
-        ]]>
-        </code>
-        <code title="Invalid: additional blank lines before the closing DocBlock tag.">
-        <![CDATA[
-/**
- * Short description.
-<em> *</em>
- */
-        ]]>
-        </code>
-    </code_comparison>
-    <standard>
-    <![CDATA[
     The DocBlock must have a short description, and it must be on the first line.
     ]]>
     </standard>
@@ -261,6 +239,28 @@
  * @return void
  *
  * <em>@param string $bar</em>
+ */
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There must be no additional blank (comment) lines before the closing DocBlock tag.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: no additional blank lines before the closing DocBlock tag.">
+        <![CDATA[
+/**
+ * Short description.<em>
+</em> */
+        ]]>
+        </code>
+        <code title="Invalid: additional blank lines before the closing DocBlock tag.">
+        <![CDATA[
+/**
+ * Short description.
+<em> *</em>
  */
         ]]>
         </code>
