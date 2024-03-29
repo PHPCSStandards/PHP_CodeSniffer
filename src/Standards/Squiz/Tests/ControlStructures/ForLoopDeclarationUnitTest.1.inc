@@ -124,6 +124,3 @@ for (
     // body here
 }
 // phpcs:set Squiz.ControlStructures.ForLoopDeclaration ignoreNewlines false
-
-// This test has to be the last one in the file! Intentional parse error check.
-for
