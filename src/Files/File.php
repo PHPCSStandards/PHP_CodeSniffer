@@ -1757,6 +1757,20 @@ class File
                     break;
                 }
 
+                if ($this->tokens[$i]['code'] === T_USE) {
+                    // Skip over closure use statements.
+                    for ($j = ($i + 1); $j < $this->numTokens && isset(Tokens::$emptyTokens[$this->tokens[$j]['code']]) === true; $j++);
+                    if ($this->tokens[$j]['code'] === T_OPEN_PARENTHESIS) {
+                        if (isset($this->tokens[$j]['parenthesis_closer']) === false) {
+                            // Live coding/parse error, stop parsing.
+                            break;
+                        }
+
+                        $i = $this->tokens[$j]['parenthesis_closer'];
+                        continue;
+                    }
+                }
+
                 if ($this->tokens[$i]['code'] === T_NULLABLE) {
                     $nullableReturnType = true;
                 }
