@@ -314,7 +314,8 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
             if ($checkingImplements === true
                 && $multiLineImplements === true
                 && ($tokens[($className - 1)]['code'] !== T_NS_SEPARATOR
-                || $tokens[($className - 2)]['code'] !== T_STRING)
+                || ($tokens[($className - 2)]['code'] !== T_STRING
+                && $tokens[($className - 2)]['code'] !== T_NAMESPACE))
             ) {
                 $prev = $phpcsFile->findPrevious(
                     [
