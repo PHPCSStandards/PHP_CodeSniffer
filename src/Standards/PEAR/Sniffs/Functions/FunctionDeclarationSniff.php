@@ -128,23 +128,25 @@ class FunctionDeclarationSniff implements Sniff
             // Must be no space before semicolon in abstract/interface methods.
             if ($methodProps['has_body'] === false) {
                 $end = $phpcsFile->findNext(T_SEMICOLON, $closeBracket);
-                if ($tokens[($end - 1)]['content'] === $phpcsFile->eolChar) {
-                    $spaces = 'newline';
-                } else if ($tokens[($end - 1)]['code'] === T_WHITESPACE) {
-                    $spaces = $tokens[($end - 1)]['length'];
-                } else {
-                    $spaces = 0;
-                }
+                if ($end !== false) {
+                    if ($tokens[($end - 1)]['content'] === $phpcsFile->eolChar) {
+                        $spaces = 'newline';
+                    } else if ($tokens[($end - 1)]['code'] === T_WHITESPACE) {
+                        $spaces = $tokens[($end - 1)]['length'];
+                    } else {
+                        $spaces = 0;
+                    }
 
-                if ($spaces !== 0) {
-                    $error = 'Expected 0 spaces before semicolon; %s found';
-                    $data  = [$spaces];
-                    $fix   = $phpcsFile->addFixableError($error, $end, 'SpaceBeforeSemicolon', $data);
-                    if ($fix === true) {
-                        $phpcsFile->fixer->replaceToken(($end - 1), '');
+                    if ($spaces !== 0) {
+                        $error = 'Expected 0 spaces before semicolon; %s found';
+                        $data  = [$spaces];
+                        $fix   = $phpcsFile->addFixableError($error, $end, 'SpaceBeforeSemicolon', $data);
+                        if ($fix === true) {
+                            $phpcsFile->fixer->replaceToken(($end - 1), '');
+                        }
                     }
                 }
-            }
+            }//end if
         }//end if
 
         // Must be one space before and after USE keyword for closures.
