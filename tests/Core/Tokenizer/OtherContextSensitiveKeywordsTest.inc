@@ -45,7 +45,7 @@ function standAloneFalseTrueNullTypesAndMore(
     /* testFalseIsKeywordAsParamType */ false $paramA,
     /* testTrueIsKeywordAsParamType */ true $paramB,
     /* testNullIsKeywordAsParamType */ null $paramC,
-) /* testFalseIsKeywordAsReturnType */ false | /* testTrueIsKeywordAsReturnType */ true | /* testNullIsKeywordAsReturnType */ null {
+): /* testFalseIsKeywordAsReturnType */ false | /* testTrueIsKeywordAsReturnType */ true | /* testNullIsKeywordAsReturnType */ null {
     if ($a === /* testFalseIsKeywordInComparison */ false
     || $a === /* testTrueIsKeywordInComparison */ true
     || $a === /* testNullIsKeywordInComparison */ null
