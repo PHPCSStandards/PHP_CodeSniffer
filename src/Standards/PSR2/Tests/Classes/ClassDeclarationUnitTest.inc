@@ -282,3 +282,8 @@ readonly
     class ReadonlyClassWithComment
     {
     }
+
+// Safeguard against fixer conflict when there are namespace relative interface names in extends.
+interface FooBar extends namespace\BarFoo
+{
+}
