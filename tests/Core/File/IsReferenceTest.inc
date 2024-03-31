@@ -169,7 +169,7 @@ functionCall( $something , &new Foobar() );
 $closure = function() use (&$var){};
 
 /* testUseByReferenceWithCommentFirstParam */
-$closure = function() use /*comment*/ (&$this->value){};
+$closure = function() use /*comment*/ (&$value){};
 
 /* testUseByReferenceWithCommentSecondParam */
 $closure = function() use /*comment*/ ($varA, &$varB){};
