@@ -378,7 +378,6 @@ class ArrayDeclarationSniff implements Sniff
 
             if ($tokens[$nextToken]['code'] === T_ARRAY
                 || $tokens[$nextToken]['code'] === T_OPEN_SHORT_ARRAY
-                || $tokens[$nextToken]['code'] === T_STATIC
                 || $tokens[$nextToken]['code'] === T_CLOSURE
                 || $tokens[$nextToken]['code'] === T_FN
                 || $tokens[$nextToken]['code'] === T_MATCH
@@ -387,10 +386,6 @@ class ArrayDeclarationSniff implements Sniff
                 if ($tokens[$lastToken]['code'] !== T_DOUBLE_ARROW) {
                     $indices[] = ['value' => $nextToken];
                     $lastToken = $nextToken;
-                }
-
-                if ($tokens[$nextToken]['code'] === T_STATIC) {
-                    $nextToken = $phpcsFile->findNext(Tokens::$emptyTokens, ($nextToken + 1), null, true);
                 }
 
                 if ($tokens[$nextToken]['code'] === T_ARRAY) {
@@ -655,6 +650,16 @@ class ArrayDeclarationSniff implements Sniff
                     T_COMMA      => T_COMMA,
                 ];
                 $ignoreTokens += Tokens::$castTokens;
+
+                if ($tokens[$valuePointer]['code'] === T_CLOSURE
+                    || $tokens[$valuePointer]['code'] === T_FN
+                ) {
+                    // Check if the closure is static, if it is, override the value pointer as indices before skip static.
+                    $staticPointer = $phpcsFile->findPrevious($ignoreTokens, ($valuePointer - 1), ($arrayStart + 1), true);
+                    if ($staticPointer !== false && $tokens[$staticPointer]['code'] === T_STATIC) {
+                        $valuePointer = $staticPointer;
+                    }
+                }
 
                 $previous = $phpcsFile->findPrevious($ignoreTokens, ($valuePointer - 1), ($arrayStart + 1), true);
                 if ($previous === false) {
