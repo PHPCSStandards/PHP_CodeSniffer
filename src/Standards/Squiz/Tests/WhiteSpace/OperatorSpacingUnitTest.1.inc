@@ -482,3 +482,29 @@ match ($a) {
     'b', 'c', 'd' => -2,
     default => -3,
 };
+
+$foo = $var
+    ? 10
+    : true;
+
+// Safeguard that a non-fixable error is thrown when there is a new line before the operator,
+// but the last non-whitespace token before the operator is a comment token.
+$foo = $var // Comment
+    ? false /* Comment */
+    : true;
+
+$foo = $var // phpcs: ignore Stnd.Cat.Sniff -- for reasons.
+
+
+    ? $something /**
+     * Don't ask, but someone might have a docblock between the lines. It's valid PHP after all.
+     */
+
+
+    : true;
+
+// phpcs:set Squiz.WhiteSpace.OperatorSpacing ignoreNewlines true
+$foo = $var // Comment
+    ? false // Comment
+    : true;
+// phpcs:set Squiz.WhiteSpace.OperatorSpacing ignoreNewlines false
