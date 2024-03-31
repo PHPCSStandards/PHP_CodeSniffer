@@ -482,6 +482,3 @@ match ($a) {
     'b', 'c', 'd' => -2,
     default => -3,
 };
-
-/* Intentional parse error. This has to be the last test in the file. */
-$a = 10 +
