@@ -5,6 +5,46 @@ The file documents changes to the PHP_CodeSniffer project.
 
 _Nothing yet._
 
+## [3.9.1] - 2024-03-31
+
+### Added
+- Documentation for the following sniffs:
+    - Generic.PHP.RequireStrictTypes
+    - Squiz.WhiteSpace.MemberVarSpacing
+    - Squiz.WhiteSpace.ScopeClosingBrace
+    - Squiz.WhiteSpace.SuperfluousWhitespace
+    - Thanks to [Jay McPartland][@jonmcp] and [Rodrigo Primo][@rodrigoprimo] for the patches.
+
+### Changed
+- The following sniffs have received performance related improvements:
+    - Generic.CodeAnalysis.UselessOverridingMethod
+    - Generic.Files.ByteOrderMark
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patches.
+- Performance improvement for the "Diff" report. Should be most notable for Windows users. [#355]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- The test suite has received some performance improvements. Should be most notable contributors using Windows. [#351]
+    - External standards with sniff tests using the PHP_CodeSniffer native test framework will also benefit from these changes.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Various housekeeping, including improvements to the tests and documentation.
+    - Thanks to [Jay McPartland][@jonmcp], [João Pedro Oliveira][@jpoliveira08], [Rodrigo Primo][@rodrigoprimo] and [Juliette Reinders Folmer][@jrfnl] for their contributions.
+
+### Fixed
+- Fixed bug [#289] : Squiz.WhiteSpace.OperatorSpacing and PSR12.Operators.OperatorSpacing : improved fixer conflict protection by more strenuously avoiding handling operators in declare statements.
+    - Thanks to [Dan Wallis][@fredden] for the patch.
+- Fixed bug [#366] : Generic.CodeAnalysis.UselessOverridingMethod : prevent false negative when the declared method name and the called method name do not use the same case.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Fixed bug [#368] : Squiz.Arrays.ArrayDeclaration fixer did not handle static closures correctly when moving array items to their own line.
+    - Thanks to [Michał Bundyra][@michalbundyra] for the patch.
+- Fixed bug [#404] : Test framework : fixed PHP 8.4 deprecation notice.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+
+[#289]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/289
+[#351]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/351
+[#355]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/355
+[#366]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/366
+[#368]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/368
+[#404]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/404
+
 ## [3.9.0] - 2024-02-16
 
 ### Added
@@ -6342,6 +6382,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 -->
 
 [Unreleased]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/master...HEAD
+[3.9.1]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.9.0...3.9.1
 [3.9.0]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.8.1...3.9.0
 [3.8.1]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.8.0...3.8.1
 [3.8.0]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.7.2...3.8.0
@@ -6540,9 +6581,11 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@johanderuijter]:      https://github.com/johanderuijter
 [@johnmaguire]:         https://github.com/johnmaguire
 [@johnpbloch]:          https://github.com/johnpbloch
+[@jonmcp]:              https://github.com/jonmcp
 [@JorisDebonnet]:       https://github.com/JorisDebonnet
 [@josephzidell]:        https://github.com/josephzidell
 [@joshdavis11]:         https://github.com/joshdavis11
+[@jpoliveira08]:        https://github.com/jpoliveira08
 [@jpuck]:               https://github.com/jpuck
 [@jrfnl]:               https://github.com/jrfnl
 [@kdebisschop]:         https://github.com/kdebisschop
