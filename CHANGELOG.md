@@ -6,6 +6,60 @@ The file documents changes to the PHP_CodeSniffer project.
 
 _Nothing yet._
 
+## [3.9.2] - 2024-04-24
+
+### Changed
+- The Generic.ControlStructures.DisallowYodaConditions sniff no longer listens for the null coalesce operator. [#458]
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Various housekeeping, including improvements to the tests and documentation.
+    - Thanks to [Dan Wallis][@fredden], [Rodrigo Primo][@rodrigoprimo] and [Juliette Reinders Folmer][@jrfnl] for their contributions.
+
+### Fixed
+- Fixed bug [#381] : Squiz.Commenting.ClosingDeclarationComment could throw the wrong error when the close brace being examined is at the very end of a file.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Fixed bug [#385] : Generic.CodeAnalysis.JumbledIncrementer improved handling of parse errors/live coding.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Fixed bug [#394] : Generic.Functions.CallTimePassByReference was not flagging call-time pass-by-reference in anonymous class instantiations
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Fixed bug [#420] : PEAR.Functions.FunctionDeclaration could run into a blocking PHP notice while fixing code containing a parse error.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#421] : File::getMethodProperties() small performance improvement & more defensive coding.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#423] : PEAR.WhiteSpace.ScopeClosingBrace would have a fixer conflict with itself when a close tag was preceded by non-empty inline HTML.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#424] : PSR2.Classes.ClassDeclaration using namespace relative interface names in the extends/implements part of a class declaration would lead to a fixer conflict.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#427] : Squiz.Operators.OperatorSpacing would have a fixer conflict with itself when an operator was preceeded by a new line and the previous line ended in a comment.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#430] : Squiz.ControlStructures.ForLoopDeclaration: fixed potential undefined array index notice
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#431] : PSR2.Classes.ClassDeclaration will no longer try to auto-fix multi-line interface implements statements if these are interlaced with comments on their own line. This prevents a potential fixer conflict.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#453] : Arrow function tokenization was broken when the return type was a stand-alone `true` or `false`; or contained `true` or `false` as part of a union type.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+
+### Other
+- [ESLint 9.0] has been released and changes the supported configuration file format.
+    The (deprecated) `Generic.Debug.ESLint` sniff only supports the "old" configuration file formats and when using the sniff to run ESLint, the `ESLINT_USE_FLAT_CONFIG=false` environment variable will need to be set when using ESLint >= 9.0.
+    For more information, see [#436].
+
+
+[ESLint 9.0]: https://eslint.org/blog/2024/04/eslint-v9.0.0-released/#flat-config-is-now-the-default-and-has-some-changes
+
+[#381]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/381
+[#385]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/385
+[#394]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/394
+[#420]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/420
+[#421]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/421
+[#423]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/423
+[#424]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/424
+[#427]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/427
+[#430]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/430
+[#431]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/431
+[#436]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/436
+[#453]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/453
+[#458]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/458
+
 ## [3.9.1] - 2024-03-31
 
 ### Added
@@ -6829,6 +6883,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 -->
 
 [Unreleased]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/master...HEAD
+[3.9.2]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.9.1...3.9.2
 [3.9.1]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.9.0...3.9.1
 [3.9.0]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.8.1...3.9.0
 [3.8.1]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.8.0...3.8.1
