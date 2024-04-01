@@ -4572,12 +4572,6 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [pear-20090]: https://pear.php.net/bugs/bug.php?id=20090
 [pear-20091]: https://pear.php.net/bugs/bug.php?id=20091
 [pear-20093]: https://pear.php.net/bugs/bug.php?id=20093
-[pear-20097]: https://pear.php.net/bugs/bug.php?id=20097
-[pear-20100]: https://pear.php.net/bugs/bug.php?id=20100
-[pear-20119]: https://pear.php.net/bugs/bug.php?id=20119
-[pear-20123]: https://pear.php.net/bugs/bug.php?id=20123
-[pear-20131]: https://pear.php.net/bugs/bug.php?id=20131
-[pear-20133]: https://pear.php.net/bugs/bug.php?id=20133
 
 ## [1.4.8] - 2013-11-26
 ### Changed
@@ -4669,12 +4663,6 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#20051][pear-20051] : Undefined index: scope_opener / scope_closer
     - Thanks to [Anthon Pang][@robocoder] for the patch
 
-[pear-20026]: https://pear.php.net/bugs/bug.php?id=20026
-[pear-20029]: https://pear.php.net/bugs/bug.php?id=20029
-[pear-20043]: https://pear.php.net/bugs/bug.php?id=20043
-[pear-20044]: https://pear.php.net/bugs/bug.php?id=20044
-[pear-20045]: https://pear.php.net/bugs/bug.php?id=20045
-[pear-20050]: https://pear.php.net/bugs/bug.php?id=20050
 [pear-20051]: https://pear.php.net/bugs/bug.php?id=20051
 
 ## [1.4.7] - 2013-09-26
@@ -4796,19 +4784,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#19969][pear-19969] : Sniffs with namespace not recognized in reports
 - Fixed bug [#19997][pear-19997] : Class names incorrectly detected as constants
 
-[pear-19811]: https://pear.php.net/bugs/bug.php?id=19811
-[pear-19892]: https://pear.php.net/bugs/bug.php?id=19892
-[pear-19897]: https://pear.php.net/bugs/bug.php?id=19897
-[pear-19908]: https://pear.php.net/bugs/bug.php?id=19908
 [pear-19930]: https://pear.php.net/bugs/bug.php?id=19930
-[pear-19935]: https://pear.php.net/bugs/bug.php?id=19935
-[pear-19944]: https://pear.php.net/bugs/bug.php?id=19944
-[pear-19953]: https://pear.php.net/bugs/bug.php?id=19953
-[pear-19956]: https://pear.php.net/bugs/bug.php?id=19956
-[pear-19957]: https://pear.php.net/bugs/bug.php?id=19957
-[pear-19968]: https://pear.php.net/bugs/bug.php?id=19968
-[pear-19969]: https://pear.php.net/bugs/bug.php?id=19969
-[pear-19997]: https://pear.php.net/bugs/bug.php?id=19997
 
 ## [1.4.6] - 2013-07-25
 ### Changed
@@ -4933,13 +4909,6 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 
 [pear-19144]: https://pear.php.net/bugs/bug.php?id=19144
 [pear-19731]: https://pear.php.net/bugs/bug.php?id=19731
-[pear-19819]: https://pear.php.net/bugs/bug.php?id=19819
-[pear-19820]: https://pear.php.net/bugs/bug.php?id=19820
-[pear-19843]: https://pear.php.net/bugs/bug.php?id=19843
-[pear-19859]: https://pear.php.net/bugs/bug.php?id=19859
-[pear-19863]: https://pear.php.net/bugs/bug.php?id=19863
-[pear-19871]: https://pear.php.net/bugs/bug.php?id=19871
-[pear-19879]: https://pear.php.net/bugs/bug.php?id=19879
 
 ## [1.4.5] - 2013-04-04
 ### Changed
@@ -6095,13 +6064,6 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#14250][pear-14250] : ArrayDeclarationSniff emit warnings at malformed array
 - Fixed bug [#14251][pear-14251] : --extensions option doesn't work
 
-[pear-14077]: https://pear.php.net/bugs/bug.php?id=14077
-[pear-14168]: https://pear.php.net/bugs/bug.php?id=14168
-[pear-14238]: https://pear.php.net/bugs/bug.php?id=14238
-[pear-14249]: https://pear.php.net/bugs/bug.php?id=14249
-[pear-14250]: https://pear.php.net/bugs/bug.php?id=14250
-[pear-14251]: https://pear.php.net/bugs/bug.php?id=14251
-
 ## 1.1.0RC3 - 2008-07-03
 ### Changed
 - PEAR FileCommentSniff now allows tag orders to be overridden in child classes
@@ -6634,7 +6596,6 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#9274][pear-9274] : nested_parenthesis element not set for open and close parenthesis tokens
 - Fixed bug [#9411][pear-9411] : too few pattern characters cause incorrect error report
 
-[pear-9274]: https://pear.php.net/bugs/bug.php?id=9274
 [pear-9411]: https://pear.php.net/bugs/bug.php?id=9411
 
 ## 0.2.1 - 2006-11-09
