@@ -1763,10 +1763,6 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Fixed bug [#1890][sq-1890] : Incorrect Squiz.WhiteSpace.ControlStructureSpacing.NoLineAfterClose error between catch and finally statements
 
-[sq-1496]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1496
-[sq-1549]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1549
-[sq-1890]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1890
-
 ## [3.3.2] - 2018-09-24
 ### Changed
 - Fixed a problem where the report cache was not being cleared when the sniffs inside a standard were updated
@@ -2571,7 +2567,6 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#1501][sq-1501] : Interactive mode is broken
 - Fixed bug [#1504][sq-1504] : PSR2.Namespaces.UseDeclaration hangs fixing use statement with no trailing code
 
-[sq-1442]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1442
 [sq-1447]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1447
 [sq-1449]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1449
 [sq-1450]: https://github.com/squizlabs/PHP_CodeSniffer/pull/1450
@@ -3318,7 +3313,6 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#938][sq-938] : CallTimePassByReferenceSniff ignores functions with return value
 
 [sq-542]: https://github.com/squizlabs/PHP_CodeSniffer/issues/542
-[sq-698]: https://github.com/squizlabs/PHP_CodeSniffer/issues/698
 [sq-791]: https://github.com/squizlabs/PHP_CodeSniffer/issues/791
 [sq-847]: https://github.com/squizlabs/PHP_CodeSniffer/issues/847
 [sq-872]: https://github.com/squizlabs/PHP_CodeSniffer/issues/872
@@ -3756,7 +3750,6 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Generic ScopeIndentSniff may now report fewer errors for closures, but perform the same fixes
 - Fixed bug [#502][sq-502] : PSR1 SideEffectsSniff sees declare() statements as side effects
 
-[sq-263]: https://github.com/squizlabs/PHP_CodeSniffer/issues/263
 [sq-415]: https://github.com/squizlabs/PHP_CodeSniffer/issues/415
 [sq-432]: https://github.com/squizlabs/PHP_CodeSniffer/issues/432
 [sq-453]: https://github.com/squizlabs/PHP_CodeSniffer/issues/453
@@ -3968,7 +3961,6 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#320][sq-320] : Code sniffer indentation issue
 - Fixed bug [#333][sq-333] : Nested ternary operators causing problems
 
-[sq-311]: https://github.com/squizlabs/PHP_CodeSniffer/issues/311
 [sq-320]: https://github.com/squizlabs/PHP_CodeSniffer/issues/320
 [sq-333]: https://github.com/squizlabs/PHP_CodeSniffer/issues/333
 
@@ -3993,10 +3985,6 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#310][sq-310] : Variadics not recognized by tokenizer
 - Fixed bug [#311][sq-311] : Suppression of function prototype breaks checking of lines within function
 
-[sq-280]: https://github.com/squizlabs/PHP_CodeSniffer/issues/280
-[sq-306]: https://github.com/squizlabs/PHP_CodeSniffer/issues/306
-[sq-308]: https://github.com/squizlabs/PHP_CodeSniffer/issues/308
-[sq-310]: https://github.com/squizlabs/PHP_CodeSniffer/issues/310
 [sq-311]: https://github.com/squizlabs/PHP_CodeSniffer/issues/311
 
 ## [2.0.0RC4] - 2014-11-07
@@ -4130,17 +4118,11 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#20402][pear-20402] : SVN pre-commit hook fails due to unknown argument error
 
 [sq-243]: https://github.com/squizlabs/PHP_CodeSniffer/issues/243
-[sq-248]: https://github.com/squizlabs/PHP_CodeSniffer/issues/248
 [sq-252]: https://github.com/squizlabs/PHP_CodeSniffer/issues/252
 [sq-262]: https://github.com/squizlabs/PHP_CodeSniffer/issues/262
 [sq-263]: https://github.com/squizlabs/PHP_CodeSniffer/issues/263
-[sq-265]: https://github.com/squizlabs/PHP_CodeSniffer/pull/265
 [pear-19899]: https://pear.php.net/bugs/bug.php?id=19899
-[pear-20323]: https://pear.php.net/bugs/bug.php?id=20323
-[pear-20373]: https://pear.php.net/bugs/bug.php?id=20373
 [pear-20377]: https://pear.php.net/bugs/bug.php?id=20377
-[pear-20378]: https://pear.php.net/bugs/bug.php?id=20378
-[pear-20381]: https://pear.php.net/bugs/bug.php?id=20381
 [pear-20402]: https://pear.php.net/bugs/bug.php?id=20402
 
 ## [1.5.5] - 2014-09-25
@@ -4171,7 +4153,6 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 
 [sq-248]: https://github.com/squizlabs/PHP_CodeSniffer/issues/248
 [sq-265]: https://github.com/squizlabs/PHP_CodeSniffer/pull/265
-[pear-20323]: https://pear.php.net/bugs/bug.php?id=20323
 [pear-20373]: https://pear.php.net/bugs/bug.php?id=20373
 [pear-20378]: https://pear.php.net/bugs/bug.php?id=20378
 [pear-20381]: https://pear.php.net/bugs/bug.php?id=20381
@@ -4246,20 +4227,8 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#20346][pear-20346] : Fixer endless loop with Squiz.CSS sniffs
 - Fixed bug [#20355][pear-20355] : No sniffs are registered with PHAR on Windows
 
-[pear-20234]: https://pear.php.net/bugs/bug.php?id=20234
 [pear-20261]: https://pear.php.net/bugs/bug.php?id=20261
-[pear-20268]: https://pear.php.net/bugs/bug.php?id=20268
-[pear-20296]: https://pear.php.net/bugs/bug.php?id=20296
 [pear-20297]: https://pear.php.net/bugs/bug.php?id=20297
-[pear-20299]: https://pear.php.net/bugs/bug.php?id=20299
-[pear-20307]: https://pear.php.net/bugs/bug.php?id=20307
-[pear-20308]: https://pear.php.net/bugs/bug.php?id=20308
-[pear-20309]: https://pear.php.net/bugs/bug.php?id=20309
-[pear-20310]: https://pear.php.net/bugs/bug.php?id=20310
-[pear-20313]: https://pear.php.net/bugs/bug.php?id=20313
-[pear-20314]: https://pear.php.net/bugs/bug.php?id=20314
-[pear-20322]: https://pear.php.net/bugs/bug.php?id=20322
-[pear-20323]: https://pear.php.net/bugs/bug.php?id=20323
 [pear-20346]: https://pear.php.net/bugs/bug.php?id=20346
 [pear-20355]: https://pear.php.net/bugs/bug.php?id=20355
 
@@ -4359,18 +4328,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#20248][pear-20248] : The Squiz_Sniffs_WhiteSpace_ControlStructureSpacingSniff sniff and empty scope
 - Fixed bug [#20252][pear-20252] : Unitialized string offset when package name starts with underscore
 
-[pear-20200]: https://pear.php.net/bugs/bug.php?id=20200
-[pear-20204]: https://pear.php.net/bugs/bug.php?id=20204
-[pear-20208]: https://pear.php.net/bugs/bug.php?id=20208
-[pear-20213]: https://pear.php.net/bugs/bug.php?id=20213
-[pear-20225]: https://pear.php.net/bugs/bug.php?id=20225
-[pear-20230]: https://pear.php.net/bugs/bug.php?id=20230
 [pear-20234]: https://pear.php.net/bugs/bug.php?id=20234
-[pear-20240]: https://pear.php.net/bugs/bug.php?id=20240
-[pear-20241]: https://pear.php.net/bugs/bug.php?id=20241
-[pear-20247]: https://pear.php.net/bugs/bug.php?id=20247
-[pear-20248]: https://pear.php.net/bugs/bug.php?id=20248
-[pear-20252]: https://pear.php.net/bugs/bug.php?id=20252
 
 ## [1.5.3] - 2014-05-01
 ### Changed
@@ -4533,7 +4491,6 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Gaetan Rousseau][@Naelyth] for the patch
 - Fixed bug [#20139][pear-20139] : No report file generated on success
 
-[pear-20100]: https://pear.php.net/bugs/bug.php?id=20100
 [pear-20136]: https://pear.php.net/bugs/bug.php?id=20136
 [pear-20138]: https://pear.php.net/bugs/bug.php?id=20138
 [pear-20139]: https://pear.php.net/bugs/bug.php?id=20139
