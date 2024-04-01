@@ -426,7 +426,7 @@ class Runner
         // debug output is clean.
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             if ($this->config->parallel > 1) {
-                echo "Parallel processing disabled for clearer output at higher verbosity levels.";
+                echo "Parallel processing disabled for clearer output at higher verbosity levels.".PHP_EOL;
             }
             $this->config->parallel = 1;
         }
@@ -434,7 +434,7 @@ class Runner
         // If the PCNTL extension isn't installed, we can't fork.
         if (function_exists('pcntl_fork') === false) {
             if ($this->config->parallel > 1) {
-                echo "Parallel processing requires the 'pcntl' PHP extension. Falling back to single-thread execution.";
+                echo "Parallel processing requires the 'pcntl' PHP extension. Falling back to single-thread execution.".PHP_EOL;
             }
             $this->config->parallel = 1;
         }
