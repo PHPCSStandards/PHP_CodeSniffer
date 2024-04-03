@@ -314,7 +314,8 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
             if ($checkingImplements === true
                 && $multiLineImplements === true
                 && ($tokens[($className - 1)]['code'] !== T_NS_SEPARATOR
-                || $tokens[($className - 2)]['code'] !== T_STRING)
+                || ($tokens[($className - 2)]['code'] !== T_STRING
+                && $tokens[($className - 2)]['code'] !== T_NAMESPACE))
             ) {
                 $prev = $phpcsFile->findPrevious(
                     [
@@ -397,9 +398,10 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                     }
                 }//end if
             } else if ($tokens[($className - 1)]['code'] !== T_NS_SEPARATOR
-                || $tokens[($className - 2)]['code'] !== T_STRING
+                || ($tokens[($className - 2)]['code'] !== T_STRING
+                && $tokens[($className - 2)]['code'] !== T_NAMESPACE)
             ) {
-                // Not part of a longer fully qualified class name.
+                // Not part of a longer fully qualified or namespace relative class name.
                 if ($tokens[($className - 1)]['code'] === T_COMMA
                     || ($tokens[($className - 1)]['code'] === T_NS_SEPARATOR
                     && $tokens[($className - 2)]['code'] === T_COMMA)
