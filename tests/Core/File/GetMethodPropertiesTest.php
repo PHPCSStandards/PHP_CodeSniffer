@@ -1298,6 +1298,111 @@ final class GetMethodPropertiesTest extends AbstractMethodUnitTest
 
 
     /**
+     * Test handling of closure declarations with a use variable import without a return type declaration.
+     *
+     * @return void
+     */
+    public function testClosureWithUseNoReturnType()
+    {
+        // Offsets are relative to the T_CLOSURE token.
+        $expected = [
+            'scope'                 => 'public',
+            'scope_specified'       => false,
+            'return_type'           => '',
+            'return_type_token'     => false,
+            'return_type_end_token' => false,
+            'nullable_return_type'  => false,
+            'is_abstract'           => false,
+            'is_final'              => false,
+            'is_static'             => false,
+            'has_body'              => true,
+        ];
+
+        $this->getMethodPropertiesTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testClosureWithUseNoReturnType()
+
+
+    /**
+     * Test handling of closure declarations with an illegal use variable for a property import (not allowed in PHP)
+     * without a return type declaration.
+     *
+     * @return void
+     */
+    public function testClosureWithUseNoReturnTypeIllegalUseProp()
+    {
+        // Offsets are relative to the T_CLOSURE token.
+        $expected = [
+            'scope'                 => 'public',
+            'scope_specified'       => false,
+            'return_type'           => '',
+            'return_type_token'     => false,
+            'return_type_end_token' => false,
+            'nullable_return_type'  => false,
+            'is_abstract'           => false,
+            'is_final'              => false,
+            'is_static'             => false,
+            'has_body'              => true,
+        ];
+
+        $this->getMethodPropertiesTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testClosureWithUseNoReturnTypeIllegalUseProp()
+
+
+    /**
+     * Test handling of closure declarations with a use variable import with a return type declaration.
+     *
+     * @return void
+     */
+    public function testClosureWithUseWithReturnType()
+    {
+        // Offsets are relative to the T_CLOSURE token.
+        $expected = [
+            'scope'                 => 'public',
+            'scope_specified'       => false,
+            'return_type'           => 'Type',
+            'return_type_token'     => 14,
+            'return_type_end_token' => 14,
+            'nullable_return_type'  => false,
+            'is_abstract'           => false,
+            'is_final'              => false,
+            'is_static'             => false,
+            'has_body'              => true,
+        ];
+
+        $this->getMethodPropertiesTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testClosureWithUseWithReturnType()
+
+
+    /**
+     * Test handling of closure declarations with a use variable import with a return type declaration.
+     *
+     * @return void
+     */
+    public function testClosureWithUseMultiParamWithReturnType()
+    {
+        // Offsets are relative to the T_CLOSURE token.
+        $expected = [
+            'scope'                 => 'public',
+            'scope_specified'       => false,
+            'return_type'           => '?array',
+            'return_type_token'     => 32,
+            'return_type_end_token' => 32,
+            'nullable_return_type'  => true,
+            'is_abstract'           => false,
+            'is_final'              => false,
+            'is_static'             => false,
+            'has_body'              => true,
+        ];
+
+        $this->getMethodPropertiesTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testClosureWithUseMultiParamWithReturnType()
+
+
+    /**
      * Test helper.
      *
      * @param string                         $commentString The comment which preceeds the test.
