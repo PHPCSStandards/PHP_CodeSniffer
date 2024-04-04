@@ -1,0 +1,101 @@
+<documentation title="Array Indent">
+    <standard>
+    <![CDATA[
+    The opening square bracket/parenthesis of a multi-line array must be indented at least to the same level of the start of the statement.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Opening square bracket/parenthesis token of a multi-line array indented at least to the same level of the start of the statement.">
+        <![CDATA[
+if ($condition) {
+    $a =
+<em>    [</em>
+        1,
+        2,
+    ];
+}
+        ]]>
+        </code>
+        <code title="Invalid: Opening square bracket/parenthesis of a multi-line array not indented at least to the same level of the start of the statement.">
+        <![CDATA[
+if ($condition) {
+    $a =
+<em>[</em>
+        1,
+        2,
+    ];
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    The elements of an array must be indented four spaces beyond the indentation level of the opening square bracket/parenthesis.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Elements of an array indented four spaces beyond the indentation level of the opening square bracket/parenthesis.">
+        <![CDATA[
+$a = array(
+<em>    1</em>,
+<em>    2</em>,
+<em>    3</em>,
+);
+        ]]>
+        </code>
+        <code title="Invalid: Elements of an array not indented four spaces beyond the indentation level of the opening square bracket/parenthesis.">
+        <![CDATA[
+$a = array(
+<em>  1</em>,
+    2,
+<em>        3</em>,
+);
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There must be a newline before the array closing square bracket/parenthesis.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Newline before the array closing square bracket/parenthesis.">
+        <![CDATA[
+$a = [
+    1,
+    2,<em>
+]</em>;
+        ]]>
+        </code>
+        <code title="Invalid: No newline before the array closing square bracket/parenthesis.">
+        <![CDATA[
+$a = [
+    1,
+    2,<em>]</em>;
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    The closing square bracket/parenthesis must be indented four spaces less than the array elements.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Closing square bracket/parenthesis indented four spaces less than the array elements.">
+        <![CDATA[
+$a = array(
+    1,
+    2,
+<em>)</em>;
+        ]]>
+        </code>
+        <code title="Invalid: Closing square bracket/parenthesis not indented four spaces less than the array elements.">
+        <![CDATA[
+$a = array(
+    1,
+    2,
+<em>  )</em>;
+        ]]>
+        </code>
+    </code_comparison>
+</documentation>
