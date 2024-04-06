@@ -76,6 +76,8 @@ final class ClassDeclarationUnitTest extends AbstractSniffUnitTest
             273 => 1,
             276 => 1,
             282 => 1,
+            310 => 1,
+            316 => 1,
         ];
 
     }//end getErrorList()

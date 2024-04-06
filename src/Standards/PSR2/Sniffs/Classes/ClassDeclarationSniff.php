@@ -349,7 +349,10 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                         $phpcsFile->fixer->addNewline($prev);
                         $phpcsFile->fixer->endChangeset();
                     }
-                } else if ($tokens[$prev]['line'] !== ($tokens[$className]['line'] - 1)) {
+                } else if ((isset(Tokens::$commentTokens[$tokens[$prev]['code']]) === false
+                    && $tokens[$prev]['line'] !== ($tokens[$className]['line'] - 1))
+                    || $tokens[$prev]['line'] === $tokens[$className]['line']
+                ) {
                     if ($keywordTokenType === T_EXTENDS) {
                         $error = 'Only one interface may be specified per line in a multi-line extends declaration';
                         $fix   = $phpcsFile->addFixableError($error, $className, 'ExtendsInterfaceSameLine');
