@@ -69,7 +69,7 @@ class CodeAnalyzerSniff implements Sniff
         // provide useful error reporting.
         if (is_numeric($exitCode) === true && $exitCode > 0) {
             if (is_array($output) === true) {
-                $msg = join('\n', $output);
+                $msg = implode('\n', $output);
             }
 
             throw new RuntimeException("Failed invoking ZendCodeAnalyzer, exitcode was [$exitCode], retval was [$retval], output was [$msg]");
