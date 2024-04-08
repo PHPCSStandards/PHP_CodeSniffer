@@ -89,7 +89,7 @@ class JumbledIncrementerSniff implements Sniff
 
             if (count($diff) !== 0) {
                 $error = 'Loop incrementor (%s) jumbling with inner loop';
-                $data  = [join(', ', $diff)];
+                $data  = [implode(', ', $diff)];
                 $phpcsFile->addWarning($error, $stackPtr, 'Found', $data);
             }
         }
