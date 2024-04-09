@@ -10,11 +10,11 @@ function myFunction()
 
 function ourFunction()
 {
-}//end ourFunction()
+}//end ourFunction
 
 function yourFunction()
 {
-}//end yourFunction()
+}//end myFunction()
 
 class TestClass
 {
@@ -28,7 +28,7 @@ class TestClass
 
     function yourFunction()
     {
-    }//end yourFunction()
+    }//end myFunction()
 
 }//end class
 
@@ -38,7 +38,7 @@ abstract class TestClass
 
     function ourFunction()
     {
-    }//end ourFunction()
+    }//end myFunction()
 
     function yourFunction()
     {
@@ -56,15 +56,15 @@ interface TestClass
 
 class TestClass
 {
-}//end class
+}
 
 abstract class TestClass
 {
-}//end class
+}
 
 interface TestClass
 {
-}//end interface
+}
 
 class MyClass
 {
@@ -76,10 +76,43 @@ echo preg_replace_callback('~-([a-z])~', function ($match) { return strtoupper($
 
 class TestClass
 {
-}//end class
+}
+//end class
 
 enum MissingClosingComment {
-}//end enum
+}
 
 enum HasClosingComment {
 }//end enum
+
+function misplacedClosingCommentWhitespace() {
+}       //end misplacedClosingCommentWhitespace()
+
+function misplacedClosingCommentMultipleNewlines() {
+}
+
+
+//end misplacedClosingCommentMultipleNewlines()
+
+function missingClosingComment() {
+}
+
+function commentHasMoreIndentationThanFunction() {
+}
+        //end commentHasMoreIndentationThanFunction()
+
+class Foo {
+    function commentHasLessIndentationThanFunction() {
+    }
+  //end commentHasLessIndentationThanFunction()
+
+    function misplacedClosingCommentWithIndentation() {
+    }
+    //end misplacedClosingCommentWithIndentation()
+}//end class
+
+// Anonymous classes don't need end comments.
+$anon = new class {};
+
+// Arrow functions don't need end comments.
+$arrow = fn($a) => $a;

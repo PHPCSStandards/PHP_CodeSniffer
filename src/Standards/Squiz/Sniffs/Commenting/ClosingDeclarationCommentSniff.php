@@ -85,15 +85,10 @@ class ClosingDeclarationCommentSniff implements Sniff
 
         $closingBracket = $tokens[$stackPtr]['scope_closer'];
 
-        if ($closingBracket === null) {
-            // Possible inline structure. Other tests will handle it.
-            return;
-        }
-
         $data = [$comment];
         if (isset($tokens[($closingBracket + 1)]) === false || $tokens[($closingBracket + 1)]['code'] !== T_COMMENT) {
             $next = $phpcsFile->findNext(T_WHITESPACE, ($closingBracket + 1), null, true);
-            if (rtrim($tokens[$next]['content']) === $comment) {
+            if ($next !== false && rtrim($tokens[$next]['content']) === $comment) {
                 // The comment isn't really missing; it is just in the wrong place.
                 $fix = $phpcsFile->addFixableError('Expected %s directly after closing brace', $closingBracket, 'Misplaced', $data);
                 if ($fix === true) {
