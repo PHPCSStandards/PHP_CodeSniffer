@@ -24,10 +24,10 @@ class ClosingDeclarationCommentSniff implements Sniff
     public function register()
     {
         return [
-            T_FUNCTION,
             T_CLASS,
-            T_INTERFACE,
             T_ENUM,
+            T_FUNCTION,
+            T_INTERFACE,
         ];
 
     }//end register()
