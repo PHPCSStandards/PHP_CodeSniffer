@@ -67,7 +67,7 @@ class JumbledIncrementerSniff implements Sniff
             return;
         }
 
-        // Find incrementors for outer loop.
+        // Find incrementers for outer loop.
         $outer = $this->findIncrementers($tokens, $token);
 
         // Skip if empty.
@@ -88,7 +88,7 @@ class JumbledIncrementerSniff implements Sniff
             $diff  = array_intersect($outer, $inner);
 
             if (count($diff) !== 0) {
-                $error = 'Loop incrementor (%s) jumbling with inner loop';
+                $error = 'Loop incrementer (%s) jumbling with inner loop';
                 $data  = [implode(', ', $diff)];
                 $phpcsFile->addWarning($error, $stackPtr, 'Found', $data);
             }
