@@ -109,8 +109,8 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
     /**
      * Test the tokens in the type of a typed constant as well as the constant name are tokenized correctly.
      *
-     * @param string $testMarker The comment prefacing the target token.
-     * @param string $sequence   The expected token sequence.
+     * @param string            $testMarker The comment prefacing the target token.
+     * @param array<int|string> $sequence   The expected token sequence.
      *
      * @dataProvider dataTypedConstant
      * @dataProvider dataNullableTypedConstant
@@ -151,7 +151,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
      *
      * @see testTypedConstant()
      *
-     * @return array<string, array<string, string>>
+     * @return array<string, array<string, string|array<int|string>>>
      */
     public static function dataTypedConstant()
     {

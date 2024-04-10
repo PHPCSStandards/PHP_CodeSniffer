@@ -298,7 +298,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
          *
          * @param string $class The name of the class.
          *
-         * @throws \Exception If the class name has not been loaded
+         * @throws \Exception If the class name has not been loaded.
          * @return string
          */
         public static function getLoadedFileName($class)

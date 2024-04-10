@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the \PHP_CodeSniffer\Util\Sniffs\Comments::suggestType() method.
+ * Tests for the \PHP_CodeSniffer\Util\Sniffs\Common::suggestType() method.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2019 Juliette Reinders Folmer. All rights reserved.
@@ -13,7 +13,7 @@ use PHP_CodeSniffer\Util\Common;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Tests for the \PHP_CodeSniffer\Util\Sniffs\Comments::suggestType() method.
+ * Tests for the \PHP_CodeSniffer\Util\Sniffs\Common::suggestType() method.
  *
  * @covers \PHP_CodeSniffer\Util\Common::suggestType
  */

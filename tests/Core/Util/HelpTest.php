@@ -462,7 +462,7 @@ final class HelpTest extends TestCase
     /**
      * Data provider.
      *
-     * @return array<string, array<string, int|string>>
+     * @return array<string, array<string, int|string|array<string>>>
      */
     public static function dataReportWidthCalculations()
     {
@@ -584,8 +584,8 @@ final class HelpTest extends TestCase
     /**
      * Test the various option types within a category get displayed correctly.
      *
-     * @param array<string, array<string, string> $input         The options to print.
-     * @param array<string, string>               $expectedRegex Regexes to validate expected output.
+     * @param array<string, array<string, string>> $input         The options to print.
+     * @param array<string, string>                $expectedRegex Regexes to validate expected output.
      *
      * @dataProvider dataPrintCategoryOptions
      *
@@ -619,8 +619,8 @@ final class HelpTest extends TestCase
     /**
      * Test the various option types within a category get displayed correctly.
      *
-     * @param array<string, array<string, string> $input         The options to print.
-     * @param array<string, string>               $expectedRegex Regexes to validate expected output.
+     * @param array<string, array<string, string>> $input         The options to print.
+     * @param array<string, string>                $expectedRegex Regexes to validate expected output.
      *
      * @dataProvider dataPrintCategoryOptions
      *

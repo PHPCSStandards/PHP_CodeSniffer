@@ -48,7 +48,7 @@ class JSHintSniff implements Sniff
      *                                               the token was found.
      *
      * @return int
-     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If jshint.js could not be run
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If jshint.js could not be run.
      */
     public function process(File $phpcsFile, $stackPtr)
     {
