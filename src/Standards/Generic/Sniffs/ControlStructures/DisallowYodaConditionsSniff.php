@@ -57,9 +57,7 @@ class DisallowYodaConditionsSniff implements Sniff
             T_CONSTANT_ENCAPSED_STRING,
         ];
 
-        if ($previousIndex === false
-            || in_array($tokens[$previousIndex]['code'], $relevantTokens, true) === false
-        ) {
+        if (in_array($tokens[$previousIndex]['code'], $relevantTokens, true) === false) {
             return;
         }
 
@@ -71,9 +69,6 @@ class DisallowYodaConditionsSniff implements Sniff
         }
 
         $prevIndex = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($previousIndex - 1), null, true);
-        if ($prevIndex === false) {
-            return;
-        }
 
         if (in_array($tokens[$prevIndex]['code'], Tokens::$arithmeticTokens, true) === true) {
             return;
@@ -150,6 +145,7 @@ class DisallowYodaConditionsSniff implements Sniff
             $start = $tokens[$arrayToken]['parenthesis_opener'];
             $end   = $tokens[$arrayToken]['parenthesis_closer'];
         } else {
+            // Shouldn't be possible but may happen if external sniffs are using this method.
             return true;
         }
 
