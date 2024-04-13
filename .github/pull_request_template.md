@@ -4,7 +4,7 @@
 Please target the `master` branch when submitting your pull request, unless your change **only** applies to PHPCS 4.x.
 -->
 
-## Description
+# Description
 <!--
 What do you want to achieve with this PR? Why did you write this code? What problem does this PR solve?
 Describe your changes in detail and, if relevant, explain which choices you have made and why.

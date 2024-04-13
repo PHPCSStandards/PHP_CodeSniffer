@@ -1,5 +1,4 @@
-Contributing
--------------
+# Contributing
 
 Thank you for your interest in contributing to PHP_CodeSniffer!
 
@@ -71,7 +70,7 @@ This includes checking whether the bug is something which should be fixed in **_
 To find bugs which need triage, look for issues and PRs with the
 ["Status: triage"](https://github.com/PHPCSStandards/PHP_CodeSniffer/labels/Status%3A%20triage) label.
 
-#### Typical bug triage tasks:
+#### Typical bug triage tasks
 * Verify whether the bug is reproducible with the given information.
 * Ask for additional information if it is not.
 * If you find the issue is reported to the wrong repo, ask the reporter to report it to the correct external standard repo
@@ -95,7 +94,7 @@ To get access to a PHPCS version which includes the patch from a pull request, y
     The PHAR files can be found on the summary page of the test workflow run for the PR.
     If the workflow has not been run (yet), the PHAR artifact may not be available (yet).
 
-#### Typical test tasks:
+#### Typical test tasks
 * Verify that the patch solves the originally reported problem.
 * Verify that the tests added in the PR fail without the fix and pass with the fix.
 * For a fix for false negatives: verify that the correct error message(s) are thrown by the patched code.

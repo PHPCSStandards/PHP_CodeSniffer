@@ -1,6 +1,6 @@
-<!--
-PHP_CodeSniffer Community CC List
+# PHP_CodeSniffer Community CC List
 
+<!--
 This list will be used on select tickets to ping the wider PHP_CodeSniffer community for input.
 
 If you want to be on this list, feel free to submit a PR to add yourself.

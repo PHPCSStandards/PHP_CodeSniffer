@@ -19,6 +19,7 @@ standard repository (not here).
 -->
 
 ## Describe the bug
+
 A clear and concise description of what the bug is.
 
 ### Code sample
@@ -44,6 +45,7 @@ PHPCS output here
 ```
 
 ## Expected behavior
+
 A clear and concise description of what you expected to happen.
 
 ## Versions (please complete the following information)
@@ -57,9 +59,10 @@ A clear and concise description of what you expected to happen.
 | Install type | [e.g. Composer (global/local), PHAR, git clone, other (please expand)]
 
 ## Additional context
+
 Add any other context about the problem here.
 
-## Please confirm:
+## Please confirm
 
 - [ ] I have searched the issue list and am not opening a duplicate issue.
 - [ ] I confirm that this bug is a bug in PHP_CodeSniffer and not in one of the external standards.

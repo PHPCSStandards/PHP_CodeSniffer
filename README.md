@@ -1,5 +1,4 @@
-PHP_CodeSniffer
-=====================================================
+# PHP_CodeSniffer
 
 <div aria-hidden="true">
 
@@ -71,6 +70,7 @@ You will then be able to run PHP_CodeSniffer from the vendor bin directory:
 ./vendor/bin/phpcs -h
 ./vendor/bin/phpcbf -h
 ```
+
 ### Phive
 If you use Phive, you can install PHP_CodeSniffer as a project tool using the following commands:
 ```bash
@@ -82,6 +82,7 @@ You will then be able to run PHP_CodeSniffer from the `tools` directory:
 ./tools/phpcs -h
 ./tools/phpcbf -h
 ```
+
 ### Git Clone
 You can also download the PHP_CodeSniffer source and run the `phpcs` and `phpcbf` commands directly from the Git clone:
 ```bash
@@ -90,6 +91,7 @@ cd PHP_CodeSniffer
 php bin/phpcs -h
 php bin/phpcbf -h
 ```
+
 ## Getting Started
 
 The default coding standard used by PHP_CodeSniffer is the PEAR coding standard. To check a file against the PEAR coding standard, simply specify the file's location:
