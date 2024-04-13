@@ -167,10 +167,11 @@ This is an open invitation for interested parties to gather their thoughts about
 > Kind request: If you don't have something to add to the discussion, but do want to indicate a positive or negative opinion
 > on a topic, please add an emoji on the original post instead of leaving a comment.
 
-> :bulb: On a subset of these issues - the ones which impact maintainers or integrators -, a list of known interested parties
-> will be pinged (cc-ed) to gather their thoughts on the topic.
->
-> This list is public and
+On a subset of these issues - the ones which impact maintainers or integrators -, a list of known interested parties
+will be pinged (cc-ed) to gather their thoughts on the topic.
+
+> [!TIP]
+> This cc-list list is public and
 > [maintained in a markdown file](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/.github/community-cc-list.md).
 >
 > To add or remove yourself to/from this list, submit a PR to the repo updating the `community-cc-list.md` file.
