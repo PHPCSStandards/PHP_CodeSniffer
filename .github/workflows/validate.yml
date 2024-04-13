@@ -2,10 +2,7 @@ name: Validate
 
 on:
   # Run on all pushes and on all pull requests.
-  # Prevent the build from running when there are only irrelevant changes.
   push:
-    paths-ignore:
-      - '**.md'
   pull_request:
   # Allow manually triggering the workflow.
   workflow_dispatch:
@@ -78,3 +75,22 @@ jobs:
       - name: Pipe Yamllint results on to GH for inline display
         if: ${{ failure() }}
         run: yamllint . --format github --strict
+
+  markdownlint:
+    name: 'Lint Markdown'
+    runs-on: ubuntu-latest
+
+    # Don't run the cronjob in this workflow on forks.
+    if: github.event_name != 'schedule' || (github.event_name == 'schedule' && github.repository_owner == 'PHPCSStandards')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # @link https://github.com/marketplace/actions/problem-matcher-for-markdownlint-cli
+      - name: Enable showing issue in PRs
+        uses: xt0rted/markdownlint-problem-matcher@v3
+
+      # @link https://github.com/marketplace/actions/markdownlint-cli2-action
+      - name: Check markdown with CLI2
+        uses: DavidAnson/markdownlint-cli2-action@v16
