@@ -1512,7 +1512,7 @@ class Config
      */
     public function printPHPCSUsage()
     {
-        $longOptions   = explode(',', Help::DEFAULT_LONG_OPTIONS);
+        $longOptions   = Help::DEFAULT_LONG_OPTIONS;
         $longOptions[] = 'cache';
         $longOptions[] = 'no-cache';
         $longOptions[] = 'report';
@@ -1538,7 +1538,7 @@ class Config
      */
     public function printPHPCBFUsage()
     {
-        $longOptions   = explode(',', Help::DEFAULT_LONG_OPTIONS);
+        $longOptions   = Help::DEFAULT_LONG_OPTIONS;
         $longOptions[] = 'suffix';
         $shortOptions  = Help::DEFAULT_SHORT_OPTIONS;
 
