@@ -39,7 +39,7 @@ Fixes #
 - [ ] I grant the project the right to include and distribute the code under the BSD-3-Clause license (and I have the right to grant these rights).
 - [ ] I have added tests to cover my changes.
 - [ ] I have verified that the code complies with the projects coding standards.
-- [ ] [Required for new sniffs] I have added XML documentation for the sniff.
+- [ ] \[Required for new sniffs\] I have added XML documentation for the sniff.
 
 <!--
 ============================================================================================

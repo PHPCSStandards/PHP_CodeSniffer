@@ -224,7 +224,7 @@ _Nothing yet._
     - PHIVE users may need to clear the PHIVE URL cache.
         - PHIVE users who don't use the package alias, but refer to the package URL, will need to update the URL from `https://squizlabs.github.io/PHP_CodeSniffer/phars/` to `https://phars.phpcodesniffer.com/phars/`.
     - Users who download the PHAR files using curl or wget, will need to update the download URL from `https://squizlabs.github.io/PHP_CodeSniffer/[phpcs|phpcbf].phar` or `https://github.com/squizlabs/PHP_CodeSnifffer/releases/latest/download/[phpcs|phpcbf].phar` to `https://phars.phpcodesniffer.com/[phpcs|phpcbf].phar`.
-    - For users who install PHP_CodeSniffer via the [setup-php](https://github.com/shivammathur/setup-php/) action runner for GitHub Actions, nothing changes.
+    - For users who install PHP_CodeSniffer via the [Setup-PHP](https://github.com/shivammathur/setup-php/) action runner for GitHub Actions, nothing changes.
     - Users using a git clone will need to update the clone address from `git@github.com:squizlabs/PHP_CodeSniffer.git` to `git@github.com:PHPCSStandards/PHP_CodeSniffer.git`.
         - Contributors will need to fork the new repo and add both the new fork as well as the new repo as remotes to their local git copy of PHP_CodeSniffer.
         - Users who have (valid) open issues or pull requests in the `squizlabs/PHP_CodeSniffer` repository are invited to resubmit these to the `PHPCSStandards/PHP_CodeSniffer` repository.
@@ -285,7 +285,7 @@ _Nothing yet._
     - Invalid sniff properties set for sniffs via inline annotations will result in an informative `Internal.PropertyDoesNotExist` errror on line 1 of the scanned file, but will not halt the execution of PHPCS
     - For sniff developers, it is strongly recommended for sniffs to explicitly declare any user-adjustable public properties
         - If dynamic properties need to be supported for a sniff, either declare the magic __set()/__get()/__isset()/__unset() methods on the sniff or let the sniff extend stdClass
-        - Note: The #[\AllowDynamicProperties] attribute will have no effect for properties which are being set in rulesets
+        - Note: The `#[\AllowDynamicProperties]` attribute will have no effect for properties which are being set in rulesets
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - The third parameter for the Ruleset::setSniffProperty() method has been changed to expect an array
     - Sniff developers/integrators of PHPCS may need to make some small adjustments to allow for this change
@@ -380,7 +380,7 @@ _Nothing yet._
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Fixed bug [#3785][sq-3785] : Squiz.Commenting.FunctionComment: potential "Uninitialized string offset 0" when a type contains a duplicate pipe symbol
     - Thanks to [Dan Wallis][@fredden] for the patch
-- Fixed bug [#3787][sq-3787] : PEAR/Squiz/[MultiLine]FunctionDeclaration: allow for PHP 8.1 new in initializers
+- Fixed bug [#3787][sq-3787] : `PEAR/Squiz/[MultiLine]FunctionDeclaration`: allow for PHP 8.1 new in initializers
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Fixed bug [#3789][sq-3789] : Incorrect tokenization for ternary operator with `match` inside of it
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
@@ -510,7 +510,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [sq-3666]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3666
 [sq-3668]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3668
 [sq-3672]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3672
-[sq-3694]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3694 
+[sq-3694]: https://github.com/squizlabs/PHP_CodeSniffer/pull/3694
 
 ## [3.7.1] - 2022-06-18
 
@@ -831,7 +831,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - The default remains at "private", so all methods are checked
     - Thanks to [Vincent Langlet][@VincentLanglet] for the patch
 - PEAR.Commenting.FunctionComment and Squiz.Commenting.FunctionComment sniffs can now ignore return tags in any method
-    - Previously, only __construct and __destruct were ignored
+    - Previously, only `__construct()` and `__destruct()` were ignored
     - Set the list of method names to ignore in the "specialMethods" sniff property
     - The default remains at "__construct" and "__destruct" only
     - Thanks to [Vincent Langlet][@VincentLanglet] for the patch
@@ -1375,7 +1375,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Added PSR12.Files.ImportStatement sniff
     - Enforces the formatting of import statements within a file
 - Added PSR12.Files.OpenTag sniff
-    - Enforces that the open tag is on a line by itself when used at the start of a php-only file
+    - Enforces that the open tag is on a line by itself when used at the start of a PHP-only file
 - Added PSR12.Functions.ReturnTypeDeclaration sniff
     - Enforces the formatting of return type declarations in functions and closures
 - Added PSR12.Properties.ConstantVisibility sniff
@@ -1854,7 +1854,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Fixed bug [#2127][sq-2127] : File::findExtendedClassName() doesn't support nested classes
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug [#2138][sq-2138] : Tokenizer detects wrong token for php ::class feature with spaces
+- Fixed bug [#2138][sq-2138] : Tokenizer detects wrong token for PHP ::class feature with spaces
 - Fixed bug [#2143][sq-2143] : PSR2.Namespaces.UseDeclaration does not properly fix "use function" and "use const" statements
     - Thanks to [Chris Wilkinson][@thewilkybarkid] for the patch
 - Fixed bug [#2144][sq-2144] : Squiz.Arrays.ArrayDeclaration does incorrect align calculation in array with cyrillic keys
@@ -1895,7 +1895,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Generic.PHP.Syntax will now use PHP_BINARY instead of trying to discover the executable path
     - This ensures that the sniff will always syntax check files using the PHP version that PHPCS is running under
-    - Setting the php_path config var will still override this value as normal
+    - Setting the `php_path` config var will still override this value as normal
     - Thanks to [Willem Stuursma-Ruwen][@willemstuursma] for the patch
 - PSR2.Namespaces.UseDeclaration now supports commas at the end of group use declarations
     - Also improves checking and fixing for use statements containing parse errors
@@ -2013,8 +2013,8 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - A new "Closure opening brace placement" metric now shows information for closures
 - Multi-line T_YIELD_FROM statements are now replicated properly for older PHP versions
 - The PSR2 standard no longer produces 2 error messages when the AS keyword in a foreach loop is not lowercase
-- Specifying a path to a non-existent dir when using the --report-[reportType]=/path/to/report CLI option no longer throws an exception
-    - This now prints a readable error message, as it does when using --report-file
+- Specifying a path to a non-existent dir when using the `--report-[reportType]=/path/to/report` CLI option no longer throws an exception
+    - This now prints a readable error message, as it does when using `--report-file`
 - The File::getMethodParamaters() method now includes a type_hint_token array index in the return value
     - Provides the position in the token stack of the first token in the type hint
 - The File::getMethodProperties() method now includes a return_type_token array index in the return value
@@ -2385,7 +2385,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#1757][sq-1757] : Unknown type hint "object" in Squiz.Commenting.FunctionComment
 - Fixed bug [#1758][sq-1758] : PHPCS gets stuck creating file list when processing circular symlinks
 - Fixed bug [#1761][sq-1761] : Generic.WhiteSpace.ScopeIndent error on multi-line function call with static closure argument
-- Fixed bug [#1762][sq-1762] : Generic.WhiteSpace.Disallow[Space/Tab]Indent not inspecting content before open tag
+- Fixed bug [#1762][sq-1762] : `Generic.WhiteSpace.Disallow[Space/Tab]Indent` not inspecting content before open tag
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Fixed bug [#1769][sq-1769] : Custom "define" function triggers a warning about declaring new symbols
 - Fixed bug [#1776][sq-1776] : Squiz.Scope.StaticThisUsage incorrectly looking inside anon classes
@@ -2458,7 +2458,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - The custom PHP_CodeSniffer test runner now requires a bootstrap file
     - Developers with custom standards using the PHP_CodeSniffer test runner will need to do one of the following:
         - run your unit tests from the PHP_CodeSniffer root dir so the bootstrap file is included
-        - specify the PHP_CodeSniffer bootstrap file on the command line: phpunit --bootstrap=/path/to/phpcs/tests/bootstrap.php
+        - specify the PHP_CodeSniffer bootstrap file on the command line: `phpunit --bootstrap=/path/to/phpcs/tests/bootstrap.php`
         - require the PHP_CodeSniffer bootstrap file from your own bootstrap file
     - If you don't run PHP_CodeSniffer unit tests, this change will not affect you
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
@@ -2623,7 +2623,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed a problem where excluding a message from a custom standard's own sniff would exclude the whole sniff
     - This caused some PSR2 errors to be under-reported
 - Fixed bug [#1442][sq-1442] : T_NULLABLE detection not working for nullable parameters and return type hints in some cases
-- Fixed bug [#1447][sq-1447] : Running the unit tests with a phpunit config file breaks the test suite
+- Fixed bug [#1447][sq-1447] : Running the unit tests with a PHPUnit config file breaks the test suite
     - Unknown arguments were not being handled correctly, but are now stored in $config->unknown
 - Fixed bug [#1449][sq-1449] : Generic.Classes.OpeningBraceSameLine doesn't detect comment before opening brace
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
@@ -2818,7 +2818,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Use --report=code to generate this report
 - Added support for custom filtering of the file list
     - Developers can write their own filter classes to perform custom filtering of the list before the run starts
-    - Use the command line arg --filter=/path/to/filter.php to specify a filter to use
+    - Use the command line arg `--filter=/path/to/filter.php` to specify a filter to use
     - Extend \PHP_CodeSniffer\Filters\Filter to also support the core PHPCS extension and path filtering
     - Extend \PHP_CodeSniffer\Filters\ExactMatch to get the core filtering and the ability to use blacklists and whitelists
     - The included \PHP_CodeSniffer\Filters\GitModified filter is a good example of an ExactMatch filter
@@ -3182,8 +3182,8 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Daniel Schniepp][@dschniepp] for the patch
 - Squiz DoubleQuoteUsageSniff is now more tolerant of syntax errors caused by mismatched string tokens
 - A few sniffs that produce errors based on the current PHP version can now be told to run using a specific PHP version
-    - Set the php_version config var using --config-set, --runtime-set, or in a ruleset to specify a specific PHP version
-    - The format of the PHP version is the same as the PHP_VERSION_ID constant (e.g., 50403 for version 5.4.3)
+    - Set the `php_version` config var using `--config-set`, `--runtime-set`, or in a ruleset to specify a specific PHP version
+    - The format of the PHP version is the same as the `PHP_VERSION_ID` constant (e.g., 50403 for version 5.4.3)
     - Supported sniffs are Generic.PHP.DisallowAlternativePHPTags, PSR1.Classes.ClassDeclaration, Squiz.Commenting.FunctionComment
     - Thanks to [Finlay Beaton][@ofbeaton] for the patch
 
@@ -3191,7 +3191,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#985][sq-985] : Duplicate class definition detection generates false-positives in media queries
     - Thanks to [Raphael Horber][@rhorber] for the patch
 - Fixed bug [#1014][sq-1014] : Squiz VariableCommentSniff doesn't always detect a missing comment
-- Fixed bug [#1066][sq-1066] : Undefined index: quiet in CLI.php during unit test run with -v command line arg
+- Fixed bug [#1066][sq-1066] : Undefined index: quiet in `CLI.php` during unit test run with `-v` command line arg
 - Fixed bug [#1072][sq-1072] : Squiz.SelfMemberReference.NotUsed not detected if leading namespace separator is used
 - Fixed bug [#1089][sq-1089] : Rulesets cannot be loaded if the path contains urlencoded characters
 - Fixed bug [#1091][sq-1091] : PEAR and Squiz FunctionComment sniffs throw errors for some invalid @param line formats
@@ -3352,7 +3352,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Pieter Frenssen][@pfrenssen] for the patch
 - Improved detection of regular expressions in the JS tokenizer
 - Generic PHP Syntax sniff now uses PHP_BINARY (if available) to determine the path to PHP if no other path is available
-    - You can still manually set php_path to use a specific binary for testing
+    - You can still manually set `php_path` to use a specific binary for testing
     - Thanks to [Andrew Berry][@deviantintegral] for the patch
 - The PHP-supplied T_POW_EQUAL token has been replicated for PHP versions before 5.6
 - Added support for PHP7 use group declarations (request [#878][sq-878])
@@ -3431,7 +3431,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Generic LowerCaseKeyword now ensures array type hints are lowercase as well
     - Thanks to [Mathieu Rochette][@mathroc] for the patch
 - Squiz ComparisonOperatorUsageSniff no longer hangs on JS FOR loops that don't use semicolons
-- PHP_CodesSniffer now includes the composer autoload.php file, if there is one
+- PHP_CodesSniffer now includes the composer `autoload.php` file, if there is one
     - Thanks to [Klaus Purer][@klausi] for the patch
 - Added error Squiz.Commenting.FunctionComment.ScalarTypeHintMissing for PHP7 only (request [#858][sq-858])
     - These errors were previously reported as Squiz.Commenting.FunctionComment.TypeHintMissing on PHP7
@@ -3799,7 +3799,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 
 ### Changed
 - The existence of the main config file is now cached to reduce is_file() calls when it doesn't exist (request [#486][sq-486])
-- Abstract classes inside the Sniffs directory are now ignored even if they are named [Name]Sniff.php (request [#476][sq-476])
+- Abstract classes inside the Sniffs directory are now ignored even if they are named `[Name]Sniff.php` (request [#476][sq-476])
     - Thanks to [David Vernet][@Decave] for the patch
 - PEAR and Squiz FileComment sniffs no longer have @ in their error codes
     - e.g., PEAR.Commenting.FileComment.Duplicate@categoryTag becomes PEAR.Commenting.FileComment.DuplicateCategoryTag
@@ -3970,12 +3970,12 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Generic DisallowTabIndentSniff now replaces tabs everywhere it finds them, except in strings and here/now docs
 - Generic EmptyStatementSniff error codes now contain the type of empty statement detected (request [#314][sq-314])
     - All messages generated by this sniff are now errors (empty CATCH was previously a warning)
-    - Message code Generic.CodeAnalysis.EmptyStatement.NotAllowed has been removed
-    - Message code Generic.CodeAnalysis.EmptyStatement.NotAllowedWarning has been removed
-    - New message codes have the format Generic.CodeAnalysis.EmptyStatement.Detected[TYPE]
-    - Example code is Generic.CodeAnalysis.EmptyStatement.DetectedCATCH
+    - Message code `Generic.CodeAnalysis.EmptyStatement.NotAllowed` has been removed
+    - Message code `Generic.CodeAnalysis.EmptyStatement.NotAllowedWarning` has been removed
+    - New message codes have the format `Generic.CodeAnalysis.EmptyStatement.Detected[TYPE]`
+    - Example code is `Generic.CodeAnalysis.EmptyStatement.DetectedCATCH`
     - You can now use a custom ruleset to change messages to warnings and to exclude them
-- PEAR and Squiz FunctionCommentSniffs no longer ban @return tags for constructors and destructors
+- PEAR and Squiz FunctionCommentSniffs no longer ban `@return` tags for constructors and destructors
     - Removed message PEAR.Commenting.FunctionComment.ReturnNotRequired
     - Removed message Squiz.Commenting.FunctionComment.ReturnNotRequired
     - Change initiated by request [#324][sq-324] and request [#369][sq-369]
@@ -4170,7 +4170,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Default remains at exiting with 0 only if no errors and no warnings were found
     - Also changes return value of PHP_CodeSniffer_Reporting::printReport()
 - Rulesets can now set associative array properties
-    - property name="[property]" type="array" value="foo=>bar,baz=>qux"
+    - property `name="[property]" type="array" value="foo=>bar,baz=>qux"`
 - Generic ForbiddenFunctionsSniff now has a public property called forbiddenFunctions (request [#263][sq-263])
     - Override the property in a ruleset.xml file to define forbidden functions and their replacements
     - A replacement of NULL indicates that no replacement is available
@@ -4486,11 +4486,11 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Use the full path to your custom report class as the report name
 - The --extensions argument is now respected when passing filenames; not just with directories
 - The --extensions argument now allows you to specify the tokenizer for each extension
-    - e.g., --extensions=module/php,es/js
+    - e.g., `--extensions=module/php,es/js`
 - Command line arguments can now be set in ruleset files
-    - e.g., arg name="report" value="summary" (print summary report; same as --report=summary)
-    - e.g., arg value="sp" (print source and progress information; same as -sp)
-    - The -vvv, --sniffs, --standard and -l command line arguments cannot be set in this way
+    - e.g., `arg name="report" value="summary"` (print summary report; same as `--report=summary`)
+    - e.g., `arg value="sp"` (print source and progress information; same as `-sp`)
+    - The `-vvv`, `--sniffs`, `--standard` and `-l` command line arguments cannot be set in this way
 - Sniff process() methods can now optionally return a token to ignore up to
     - If returned, the sniff will not be executed again until the passed token is reached in the file
     - Useful if you are looking for tokens like T_OPEN_TAG but only want to process the first one
@@ -4577,7 +4577,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ## [1.5.1] - 2013-12-12
 
 ### Changed
-- Config values can now be set at runtime using the command line argument [--runtime-set key value]
+- Config values can now be set at runtime using the command line argument `--runtime-set key value`
     - Runtime values are the same as config values, but are not written to the main config file
     - Thanks to [Wim Godden][@wimg] for the patch
 - Config values can now be set in ruleset files
@@ -4629,7 +4629,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 
 ### Fixed
 - Fixed bug [#20093][pear-20093] : Bug with ternary operator token
-- Fixed bug [#20097][pear-20097] : CLI.php throws error in php 5.2
+- Fixed bug [#20097][pear-20097] : `CLI.php` throws error in PHP 5.2
 - Fixed bug [#20100][pear-20100] : incorrect Function mysql() has been deprecated report
 - Fixed bug [#20119][pear-20119] : PHP warning: invalid argument to str_repeat() in SVN blame report with -s
 - Fixed bug [#20123][pear-20123] : PSR2 complains about an empty second statement in for-loop
@@ -4658,7 +4658,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Maksim Kochkin][@ksimka] for the patch
 
 ### Fixed
-- Fixed bug [#20097][pear-20097] : CLI.php throws error in php 5.2
+- Fixed bug [#20097][pear-20097] : `CLI.php` throws error in PHP 5.2
 - Fixed bug [#20100][pear-20100] : incorrect Function mysql() has been deprecated report
 - Fixed bug [#20119][pear-20119] : PHP warning: invalid argument to str_repeat() in SVN blame report with -s
 - Fixed bug [#20123][pear-20123] : PSR2 complains about an empty second statement in for-loop
@@ -4949,7 +4949,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - You can also pass in a path to a directory instead, if you know it
 - Added Generic LowerCaseKeywordSniff to ensure all PHP keywords are defined in lowercase
     - The PSR2 and Squiz standards now use this sniff
-- Added Generic SAPIUsageSniff to ensure the PHP_SAPI constant is used instead of php_sapi_name() (request [#19863][pear-19863])
+- Added Generic SAPIUsageSniff to ensure the `PHP_SAPI` constant is used instead of `php_sapi_name()` (request [#19863][pear-19863])
 - Squiz FunctionSpacingSniff now has a setting to specify how many lines there should between functions (request [#19843][pear-19843])
     - Default remains at 2
     - Override the "spacing" setting in a ruleset.xml file to change
@@ -4988,7 +4988,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ### Changed
 - Added Generic LowerCaseKeywordSniff to ensure all PHP keywords are defined in lowercase
     - The PSR2 and Squiz standards now use this sniff
-- Added Generic SAPIUsageSniff to ensure the PHP_SAPI constant is used instead of php_sapi_name() (request [#19863][pear-19863])
+- Added Generic SAPIUsageSniff to ensure the `PHP_SAPI` constant is used instead of `php_sapi_name()` (request [#19863][pear-19863])
 - Squiz FunctionSpacingSniff now has a setting to specify how many lines there should between functions (request [#19843][pear-19843])
     - Default remains at 2
     - Override the "spacing" setting in a ruleset.xml file to change
@@ -5035,7 +5035,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - There is no longer a need to keep the list of errors and warnings in memory during a run
 - Multi-file sniff support has been removed because they are too memory intensive
     - If you have a custom multi-file sniff, you can convert it into a standard sniff quite easily
-    - See CodeSniffer/Standards/Generic/Sniffs/Classes/DuplicateClassNameSniff.php for an example
+    - See `CodeSniffer/Standards/Generic/Sniffs/Classes/DuplicateClassNameSniff.php` for an example
 
 ## [1.4.4] - 2013-02-07
 
@@ -5112,7 +5112,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 
 ### Changed
 - PHP_CodeSniffer can now be installed using Composer
-    - Require squizlabs/php_codesniffer in your composer.json file
+    - Require `squizlabs/php_codesniffer` in your `composer.json` file
     - Thanks to [Rob Bast][@alcohol], [Stephen Rees-Carter][@valorin], [Stefano Kowalke][@Konafets] and [Ivan Habunek][@ihabunek] for help with this
 - Squiz BlockCommentSniff and InlineCommentSniff no longer report errors for trait block comments
 - Squiz SelfMemberReferenceSniff now supports namespaces
@@ -5144,7 +5144,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ### Changed
 - All ignore patterns have been reverted to being checked against the absolute path of a file
     - Patterns can be specified to be relative in a ruleset.xml file, but nowhere else
-    - e.g., [exclude-pattern type="relative"]^tests/*[/exclude-pattern] (with angle brackets, not square brackets)
+    - e.g., `<exclude-pattern type="relative">^tests/*</exclude-pattern>`
 - Added support for PHP tokenizing of T_INLINE_ELSE colons, so this token type is now available
     - Custom sniffs that rely on looking for T_COLON tokens inside inline if statements must be changed to use the new token
     - Fixes bug [#19666][pear-19666] : PSR1.Files.SideEffects throws a notice Undefined index: scope_closer
@@ -5203,8 +5203,8 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - New tokens are T_OPEN_SHORT_ARRAY and T_CLOSE_SHORT_ARRAY as PHP does not define its own
 - Added the ability to explain a coding standard by listing the sniffs that it includes
     - The sniff list includes all imported and native sniffs
-    - Explain a standard by using the -e and --standard=[standard] command line arguments
-    - E.g., phpcs -e --standard=Squiz
+    - Explain a standard by using the `-e` and `--standard=[standard]` command line arguments
+    - E.g., `phpcs -e --standard=Squiz`
     - Thanks to [Ben Selby][@benmatselby] for the idea
 - Added report to show results using notify-send
     - Use --report=notifysend to generate the report
@@ -5289,7 +5289,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 
 ### Fixed
 - Fixed duplicate message codes in Generic OpeningFunctionBraceKernighanRitchieSniff
-- Fixed bug [#18651][pear-18651] : PHPunit Test cases for custom standards are not working on Windows
+- Fixed bug [#18651][pear-18651] : PHPUnit Test cases for custom standards are not working on Windows
 - Fixed bug [#19416][pear-19416] : Shorthand arrays cause bracket spacing errors
 - Fixed bug [#19421][pear-19421] : phpcs doesn't recognize ${x} as equivalent to $x
 - Fixed bug [#19428][pear-19428] : PHPCS Report "hgblame" doesn't support windows paths
@@ -5326,7 +5326,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - In particular, allows the Drupal CS to work without needing to symlink it into the PHPCS install
     - Thanks to [Peter Philipp][@das-peter] for the patch
 - Rule references for standards, directories and specific sniffs can now be relative in ruleset.xml files
-    - For example: ref="../MyStandard/Sniffs/Commenting/DisallowHashCommentsSniff.php"
+    - For example: `ref="../MyStandard/Sniffs/Commenting/DisallowHashCommentsSniff.php"`
 - Symlinked standards now work correctly, allowing aliasing of installed standards (request [#19417][pear-19417])
     - Thanks to [Tom Klingenberg][@ktomk] for the patch
 - Squiz ObjectInstantiationSniff now allows objects to be returned without assigning them to a variable
@@ -5344,7 +5344,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed an issue in Generic UpperCaseConstantNameSniff where errors were incorrectly reported on goto statements
     - Thanks to [Tom Klingenberg][@ktomk] for the patch
 - PEAR FileCommentSniff and ClassCommentSniff now support author emails with a single character in the local part
-    - E.g., a@me.com
+    - E.g., `a@me.com`
     - Thanks to Denis Shapkin for the patch
 
 ### Fixed
@@ -5360,8 +5360,8 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#19411][pear-19411] : magic method error on __construct()
     - The fix required a rewrite of AbstractScopeSniff, so please test any sniffs that extend this class
 - Fixed bug [#19412][pear-19412] : Incorrect error about assigning objects to variables when inside inline IF
-- Fixed bug [#19413][pear-19413] : php_cs thinks I haven't used a parameter when I have
-- Fixed bug [#19414][pear-19414] : php_cs seems to not track variables correctly in heredocs
+- Fixed bug [#19413][pear-19413] : PHP_CodeSniffer thinks I haven't used a parameter when I have
+- Fixed bug [#19414][pear-19414] : PHP_CodeSniffer seems to not track variables correctly in heredocs
 
 [pear-19290]: https://pear.php.net/bugs/bug.php?id=19290
 [pear-19324]: https://pear.php.net/bugs/bug.php?id=19324
@@ -5468,7 +5468,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Also now shown for all report types if nothing is being printed to the screen
 - Generic DeprecatedFunctionSniff now reports functions as deprecated and not simply forbidden (request [#18288][pear-18288])
 - PHPCS now accepts file contents from STDIN (request [#18447][pear-18447])
-    - Example usage: cat temp.php | phpcs [options]  -OR-  phpcs [options] &lt; temp.php
+    - Example usage: `cat temp.php | phpcs [options]`  -OR-  `phpcs [options] &lt; temp.php`
     - Not every sniff will work correctly due to the lack of a valid file path
 - PHP_CodeSniffer_Exception no longer extends PEAR_Exception (request [#18483][pear-18483])
     - PEAR_Exception added a requirement that PEAR had to be installed
@@ -5506,7 +5506,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#18769][pear-18769] : CSS Tokenizer doesn't replace T_BREAK tokens inside some styles
 - Fixed bug [#18835][pear-18835] : Unreachable errors of inline returns of closure functions
     - Thanks to [Patrick Schmidt][pear-woellchen] for the patch
-- Fixed bug [#18839][pear-18839] : Fix miscount of warnings in AbstractSniffUnitTest.php
+- Fixed bug [#18839][pear-18839] : Fix miscount of warnings in `AbstractSniffUnitTest.php`
     - Thanks to [Sam Graham][@illusori] for the patch
 - Fixed bug [#18844][pear-18844] : Generic_Sniffs_CodeAnalysis_UnusedFunctionParameterSniff with empty body
     - Thanks to [Dmitri Medvedev][pear-dvino] for the patch
@@ -5566,7 +5566,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#18274][pear-18274] : Multi-line IF and function call indent rules conflict
 - Fixed bug [#18282][pear-18282] : Squiz doesn't handle final keyword before function comments
     - Thanks to [Dave Perrett][pear-recurser] for the patch
-- Fixed bug [#18336][pear-18336] : Function isUnderscoreName gives php notices
+- Fixed bug [#18336][pear-18336] : Function isUnderscoreName gives PHP notices
 
 [pear-18196]: https://pear.php.net/bugs/bug.php?id=18196
 [pear-18200]: https://pear.php.net/bugs/bug.php?id=18200
@@ -5582,12 +5582,12 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 
 ### Changed
 - You can now print multiple reports for each run and print each to the screen or a file (request [#12434][pear-12434])
-    - Format is --report-[report][=file] (e.g., --report-xml=out.xml)
-    - Printing to screen is done by leaving [file] empty (e.g., --report-xml)
-    - Multiple reports can be specified in this way (e.g., --report-summary --report-xml=out.xml)
-    - The standard --report and --report-file command line arguments are unchanged
-- Added -d command line argument to set php.ini settings while running (request [#17244][pear-17244])
-    - Usage is: phpcs -d memory_limit=32M -d ...
+    - Format is `--report-[report][=file]` (e.g., `--report-xml=out.xml`)
+    - Printing to screen is done by leaving `[file]` empty (e.g., `--report-xml`)
+    - Multiple reports can be specified in this way (e.g., `--report-summary --report-xml=out.xml`)
+    - The standard `--report` and `--report-file` command line arguments are unchanged
+- Added `-d` command line argument to set `php.ini` settings while running (request [#17244][pear-17244])
+    - Usage is: `phpcs -d memory_limit=32M -d ...`
     - Thanks to [Ben Selby][@benmatselby] for the patch
 - Added -p command line argument to show progress during a run
     - Dot means pass, E means errors found, W means only warnings found and S means skipped file
@@ -5678,7 +5678,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Added new --encoding command line argument to specify the encoding of the files being checked
     - When set to utf-8, stops the XML-based reports from double-encoding
     - When set to something else, helps the XML-based reports encode to utf-8
-    - Default value is iso-8859-1 but can be changed with --config-set encoding [value]
+    - Default value is iso-8859-1 but can be changed with `--config-set encoding [value]`
 - The report is no longer printed to screen when using the --report-file command line option (request [#17467][pear-17467])
     - If you want to print it to screen as well, use the -v command line argument
 - The SVN and GIT blame reports now also show percentage of reported errors per author (request [#17606][pear-17606])
@@ -5699,8 +5699,8 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#17699][pear-17699] : Fatal error generating code coverage with PHPUnit 5.3.0RC1
 - Fixed bug [#17718][pear-17718] : Namespace 'use' statement: used global class name is recognized as constant
 - Fixed bug [#17734][pear-17734] : Generic SubversionPropertiesSniff complains on non SVN files
-- Fixed bug [#17742][pear-17742] : EmbeddedPhpSniff reacts negatively to file without closing php tag
-- Fixed bug [#17823][pear-17823] : Notice: Please no longer include PHPUnit/Framework.php
+- Fixed bug [#17742][pear-17742] : EmbeddedPhpSniff reacts negatively to file without closing PHP tag
+- Fixed bug [#17823][pear-17823] : Notice: Please no longer include `PHPUnit/Framework.php`
 
 [pear-17092]: https://pear.php.net/bugs/bug.php?id=17092
 [pear-17467]: https://pear.php.net/bugs/bug.php?id=17467
@@ -5718,7 +5718,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ## 1.3.0a1 - 2010-07-15
 
 ### Changed
-- All CodingStandard.php files have been replaced by ruleset.xml files
+- All `CodingStandard.php` files have been replaced by `ruleset.xml` files
     - Custom standards will need to be converted over to this new format to continue working
 - You can specify a path to your own custom ruleset.xml file by using the --standard command line arg
     - e.g., phpcs --standard=/path/to/my/ruleset.xml
@@ -5750,7 +5750,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed error messages in Squiz ArrayDeclarationSniff reporting incorrect number of found and expected spaces
 - Fixed bug [#17048][pear-17048] : False positive in Squiz_WhiteSpace_ScopeKeywordSpacingSniff
 - Fixed bug [#17054][pear-17054] : phpcs more strict than PEAR CS regarding function parameter spacing
-- Fixed bug [#17096][pear-17096] : Notice: Undefined index: scope_condition in ScopeClosingBraceSniff.php
+- Fixed bug [#17096][pear-17096] : Notice: Undefined index: `scope_condition` in `ScopeClosingBraceSniff.php`
     - Moved PEAR.Functions.FunctionCallArgumentSpacing to Generic.Functions.FunctionCallArgumentSpacing
 - Fixed bug [#17144][pear-17144] : Deprecated: Function eregi() is deprecated
 - Fixed bug [#17236][pear-17236] : PHP Warning due to token_get_all() in DoubleQuoteUsageSniff
@@ -5940,7 +5940,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 
 ### Fixed
 - Fixed bug [#16424][pear-16424] : SubversionPropertiesSniff print PHP Warning
-- Fixed bug [#16450][pear-16450] : Constant PHP_CODESNIFFER_VERBOSITY already defined (unit tests)
+- Fixed bug [#16450][pear-16450] : Constant `PHP_CODESNIFFER_VERBOSITY` already defined (unit tests)
 - Fixed bug [#16453][pear-16453] : function declaration long line splitted error
 - Fixed bug [#16482][pear-16482] : phpcs-svn-pre-commit ignores extensions parameter
 
@@ -5967,15 +5967,15 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ## 1.2.0RC2 - 2009-05-25
 
 ### Changed
-- Test suite can now be run using the full path to AllTests.php (feature request [#16179][pear-16179])
+- Test suite can now be run using the full path to `AllTests.php` (feature request [#16179][pear-16179])
 
 ### Fixed
-- Fixed bug [#15980][pear-15980] : PHP_CodeSniffer change php current directory
+- Fixed bug [#15980][pear-15980] : PHP_CodeSniffer change PHP current directory
     - Thanks to [Dolly Aswin Harahap][pear-dollyaswin] for the patch
 - Fixed bug [#16001][pear-16001] : Notice triggered
 - Fixed bug [#16054][pear-16054] : phpcs-svn-pre-commit not showing any errors
 - Fixed bug [#16071][pear-16071] : Fatal error: Uncaught PHP_CodeSniffer_Exception
-- Fixed bug [#16170][pear-16170] : Undefined Offset -1 in MultiLineConditionSniff.php on line 68
+- Fixed bug [#16170][pear-16170] : Undefined Offset -1 in `MultiLineConditionSniff.php` on line 68
 - Fixed bug [#16175][pear-16175] : Bug in Squiz-IncrementDecrementUsageSniff
 
 [pear-15980]: https://pear.php.net/bugs/bug.php?id=15980
@@ -6118,18 +6118,18 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ### Fixed
 - Fixed Squiz DoubleQuoteUsageSniff so it works correctly with short_open_tag=Off
 - Fixed bug [#14409][pear-14409] : Output of warnings to log file
-- Fixed bug [#14520][pear-14520] : Notice: Undefined offset: 1 in /usr/share/php/PHP/CodeSniffer/File.php on line
+- Fixed bug [#14520][pear-14520] : Notice: Undefined offset: 1 in `CodeSniffer/File.php` on line
 - Fixed bug [#14637][pear-14637] : Call to processUnknownArguments() misses second parameter $pos
     - Thanks to [Peter Buri][pear-burci] for the patch
 - Fixed bug [#14889][pear-14889] : Lack of clarity: licence or license
 - Fixed bug [#15008][pear-15008] : Nested Parentheses in Control Structure Sniffs
 - Fixed bug [#15091][pear-15091] : pre-commit hook attempts to sniff folders
     - Thanks to [Bruce Weirdan][pear-weirdan] for the patch
-- Fixed bug [#15124][pear-15124] : AbstractParser.php uses deprecated split() function
+- Fixed bug [#15124][pear-15124] : `AbstractParser.php` uses deprecated `split()` function
     - Thanks to [Sebastian Bergmann][@sebastianbergmann] for the patch
 - Fixed bug [#15188][pear-15188] : PHPCS vs HEREDOC strings
-- Fixed bug [#15231][pear-15231] : Notice: Uninitialized string offset: 0 in FileCommentSniff.php on line 555
-- Fixed bug [#15336][pear-15336] : Notice: Undefined offset: 2 in /usr/share/php/PHP/CodeSniffer/File.php on line
+- Fixed bug [#15231][pear-15231] : Notice: Uninitialized string offset: 0 in `FileCommentSniff.php` on line 555
+- Fixed bug [#15336][pear-15336] : Notice: Undefined offset: 2 in `CodeSniffer/File.php` on line
 
 [pear-13242]: https://pear.php.net/bugs/bug.php?id=13242
 [pear-14409]: https://pear.php.net/bugs/bug.php?id=14409
@@ -6196,7 +6196,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 
 ### Fixed
 - Fixed bug [#13921][pear-13921] : js parsing fails for comments on last line of file
-- Fixed bug [#13922][pear-13922] : crash in case of malformed (but tokenized) php file
+- Fixed bug [#13922][pear-13922] : crash in case of malformed (but tokenized) PHP file
     - PEAR and Squiz ClassDeclarationSniff now throw warnings for possible parse errors
     - Squiz ValidClassNameSniff now throws warning for possible parse errors
     - Squiz ClosingDeclarationCommentSniff now throws additional warnings for parse errors
@@ -6261,11 +6261,11 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed error in Squiz FunctionSpacingSniff where functions after member vars reported incorrect spacing
 - Fixed bug [#13062][pear-13062] : Interface comments aren't handled in PEAR standard
     - Thanks to [Manuel Pichler][@manuelpichler] for the path
-- Fixed bug [#13119][pear-13119] : php minimum requirement need to be fix
+- Fixed bug [#13119][pear-13119] : PHP minimum requirement need to be fix
 - Fixed bug [#13156][pear-13156] : Bug in Squiz_Sniffs_PHP_NonExecutableCodeSniff
 - Fixed bug [#13158][pear-13158] : Strange behaviour in AbstractPatternSniff
 - Fixed bug [#13169][pear-13169] : Undefined variables
-- Fixed bug [#13178][pear-13178] : Catch exception in File.php
+- Fixed bug [#13178][pear-13178] : Catch exception in `File.php`
 - Fixed bug [#13254][pear-13254] : Notices output in checkstyle report causes XML issues
 - Fixed bug [#13446][pear-13446] : crash with src of phpMyAdmin
     - Thanks to [Manuel Pichler][@manuelpichler] for the path
@@ -6346,7 +6346,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ### Changed
 - You can now specify the full path to a coding standard on the command line (feature request [#11886][pear-11886])
     - This allows you to use standards that are stored outside of PHP_CodeSniffer's own Standard dir
-    - You can also specify full paths in the CodingStandard.php include and exclude methods
+    - You can also specify full paths in the `CodingStandard.php` include and exclude methods
     - Classes, dirs and files need to be names as if the standard was part of PHP_CodeSniffer
     - Thanks to Dirk Thomas for the doc generator patch and testing
 - Modified the scope map to keep checking after 3 lines for some tokens (feature request [#12561][pear-12561])
@@ -6386,7 +6386,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Can also be set via a config var: phpcs --config-set tab_width 4
     - A value of zero (the default) tells PHP_CodeSniffer not to replace tabs with spaces
 - You can now change the default report format from "full" to something else
-    - Run: phpcs --config-set report_format [format]
+    - Run: phpcs `--config-set report_format [format]`
 - Improved performance by optimising the way the scope map is created during tokenizing
 - Added new Squiz DisallowInlineIfSniff to disallow the usage of inline IF statements
 - Fixed incorrect errors being thrown for nested switches in Squiz SwitchDeclarationSniff
@@ -6509,7 +6509,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ### Changed
 - Added a config system for setting config data across phpcs runs
 - You can now change the default coding standard from PEAR to something else
-    - Run: phpcs --config-set default_standard [standard]
+    - Run: phpcs `--config-set default_standard [standard]`
 - Added new Zend coding standard to check code against the Zend Framework standards
     - The complete standard is not yet implemented
     - Specify --standard=Zend to use
@@ -6524,7 +6524,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Added new command line argument --ignore to specify a list of files to skip (feature request [#11556][pear-11556])
 - Added PHPCS and MySource coding standards into the core install
 - Scope map no longer gets confused by curly braces that act as string offsets
-- Removed CodeSniffer/SniffException.php as it is no longer used
+- Removed `CodeSniffer/SniffException.php` as it is no longer used
 - Unit tests can now be run directly from a CVS checkout
 - Made private vars and functions protected in PHP_CodeSniffer class so this package can be overridden
 - Added new Metrics category to Generic coding standard
@@ -6557,10 +6557,9 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Pattern sniffs must now specify "EOL" instead of "\n" or "\r\n" to use auto-detection
     - Please use $phpcsFile->eolChar to check for newlines instead of hard-coding "\n" or "\r\n"
     - Comment parser classes now require you to pass $phpcsFile as an additional argument
-- BC BREAK: Included and excluded sniffs now require .php extension
-    - Please update your coding standard classes and add ".php" to all sniff entries
-    - See CodeSniffer/Standards/PEAR/PEARCodingStandard.php for an example
-
+- BC BREAK: Included and excluded sniffs now require `.php` extension
+    - Please update your coding standard classes and add `.php` to all sniff entries
+    - See `CodeSniffer/Standards/PEAR/PEARCodingStandard.php` for an example
 - Fixed error where including a directory of sniffs in a coding standard class did not work
 - Coding standard classes can now specify a list of sniffs to exclude as well as include (feature request [#11056][pear-11056])
 - Two uppercase characters can now be placed side-by-side in class names in Squiz ValidClassNameSniff
@@ -6596,7 +6595,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ### Fixed
 - Fixed bug [#11105][pear-11105] : getIncludedSniffs() not working anymore
     - Thanks to [Blair Robertson][pear-adviva] for the patch
-- Fixed bug [#11120][pear-11120] : Uninitialized string offset in AbstractParser.php on line 200
+- Fixed bug [#11120][pear-11120] : Uninitialized string offset in `AbstractParser.php` on line 200
 
 [pear-11038]: https://pear.php.net/bugs/bug.php?id=11038
 [pear-11056]: https://pear.php.net/bugs/bug.php?id=11056
@@ -6637,7 +6636,6 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ### Changed
 - BC BREAK: Coding standards now require a class to be added so PHP_CodeSniffer can get information from them
     - Please read the end user docs for info about the new class required for all coding standards
-
 - Coding standards can now include sniffs from other standards, or whole standards, without writing new sniff files
 - PHP_CodeSniffer_File::isReference() now correctly returns for references in function declarations
 - PHP_CodeSniffer_File::isReference() now returns false if you don't pass it a T_BITWISE_AND token
@@ -6765,12 +6763,12 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ### Changed
 - Reorganised package contents to conform to PEAR standards
 - Changed version numbering to conform to PEAR standards
-- Removed duplicate require_once() of Exception.php from CodeSniffer.php
+- Removed duplicate `require_once()` of `Exception.php` from `CodeSniffer.php`
 
 ## 0.0.5 - 2006-09-18
 
 ### Fixed
-- Fixed .bat file for situation where php.ini cannot be found so include_path is not set
+- Fixed `.bat` file for situation where `php.ini` cannot be found so `include_path` is not set
 
 ## 0.0.4 - 2006-08-28
 
@@ -6819,7 +6817,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Added an option to hide warnings from reports
 - Added an option to print verbose output (so you know what is going on)
 - Reordered command line args to put switches first (although order is not enforced)
-- Switches can now be specified together (e.g. php -nv) as well as separately (phpcs -n -v)
+- Switches can now be specified together (e.g. `phpcs -nv`) as well as separately (`phpcs -n -v`)
 
 ## 0.0.1 - 2006-07-19
 

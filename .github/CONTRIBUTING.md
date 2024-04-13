@@ -339,7 +339,7 @@ While not strictly required, it is greatly appreciated if you comply with the fo
 
 * Prefix the commit short description with a hint as to what code is touched in the commit.
     Example: If you have a bug fix for the `Squiz.WhiteSpace.OperatorSpacing` sniff, it is a good idea to prefix
-    the short description with `Squiz/OperatorSpacing: `.
+    the short description with `Squiz/OperatorSpacing:`.
     Another example: if your PR addresses an issue with the Filter classes, prefix the short description
     with `Filters:` or `Filters/FilterName:`.
     Doing so will:
