@@ -138,7 +138,7 @@ class Full implements Report
         $beforeAfterLength = strlen($beforeMsg.$afterMsg);
 
         foreach ($report['messages'] as $line => $lineErrors) {
-            foreach ($lineErrors as $column => $colErrors) {
+            foreach ($lineErrors as $colErrors) {
                 foreach ($colErrors as $error) {
                     $errorMsg = wordwrap(
                         $error['message'],
