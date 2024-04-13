@@ -6,19 +6,19 @@ Thank you for your interest in contributing to PHP_CodeSniffer!
 ## Table of Contents
 
 * [Reporting Bugs](#reporting-bugs)
-   - [Reporting Security Issues](#reporting-security-issues)
-   - [Support/Questions About Using PHP_CodeSniffer](#supportquestions-about-using-php_codesniffer)
+    * [Reporting Security Issues](#reporting-security-issues)
+    * [Support/Questions About Using PHP_CodeSniffer](#supportquestions-about-using-php_codesniffer)
 * [Contributing Without Writing Code](#contributing-without-writing-code)
-   - [Bug Triage](#bug-triage)
-   - [Testing Open Pull Requests](#testing-open-pull-requests)
-   - [Writing sniff documentation](#writing-sniff-documentation)
-   - [Other tasks](#other-tasks)
+    * [Bug Triage](#bug-triage)
+    * [Testing Open Pull Requests](#testing-open-pull-requests)
+    * [Writing sniff documentation](#writing-sniff-documentation)
+    * [Other tasks](#other-tasks)
 * [Contributing With Code](#contributing-with-code)
-   - [Requesting/Submitting New Features](#requestingsubmitting-new-features)
-   - [Getting started](#getting-started)
-   - [While working on a patch](#while-working-on-a-patch)
-   - [Writing tests](#writing-tests)
-   - [Submitting your pull request](#submitting-your-pull-request)
+    * [Requesting/Submitting New Features](#requestingsubmitting-new-features)
+    * [Getting started](#getting-started)
+    * [While working on a patch](#while-working-on-a-patch)
+    * [Writing tests](#writing-tests)
+    * [Submitting your pull request](#submitting-your-pull-request)
 * [Licensing](#licensing)
 
 
@@ -255,9 +255,9 @@ For example, for the sniff named `Generic.NamingConventions.ConstructorName`:
 * The sniff lives in the `src/Standards/Generic/Sniffs/NamingConventions/` directory.
 * The tests live in the `src/Standards/Generic/Tests/NamingConventions/` directory.
 * The tests consist of two files:
-    - `src/Standards/Generic/Tests/NamingConventions/ConstructorNameUnitTest.inc` which is the test _case_ file containing
+    * `src/Standards/Generic/Tests/NamingConventions/ConstructorNameUnitTest.inc` which is the test _case_ file containing
        code for the sniff to analyse.
-    - `src/Standards/Generic/Tests/NamingConventions/ConstructorNameUnitTest.php` which is the test file, containing two methods,
+    * `src/Standards/Generic/Tests/NamingConventions/ConstructorNameUnitTest.php` which is the test file, containing two methods,
         `getErrorList()` and `getWarningList()`, which should each return an array with as the keys the line number
         in the test _case_ file and as the values the number of errors or warnings which are expected on each line.
         Only lines on which errors/warnings are expected need to be included in the lists. All other lines will automatically

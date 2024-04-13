@@ -2457,9 +2457,9 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - This release includes a change to support newer versions of PHPUnit (versions 4, 5, and 6 are now supported)
     - The custom PHP_CodeSniffer test runner now requires a bootstrap file
     - Developers with custom standards using the PHP_CodeSniffer test runner will need to do one of the following:
-      - run your unit tests from the PHP_CodeSniffer root dir so the bootstrap file is included
-      - specify the PHP_CodeSniffer bootstrap file on the command line: phpunit --bootstrap=/path/to/phpcs/tests/bootstrap.php
-      - require the PHP_CodeSniffer bootstrap file from your own bootstrap file
+        - run your unit tests from the PHP_CodeSniffer root dir so the bootstrap file is included
+        - specify the PHP_CodeSniffer bootstrap file on the command line: phpunit --bootstrap=/path/to/phpcs/tests/bootstrap.php
+        - require the PHP_CodeSniffer bootstrap file from your own bootstrap file
     - If you don't run PHP_CodeSniffer unit tests, this change will not affect you
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - A phpcs.xml or phpcs.xml.dist file now takes precedence over the default_standard config setting
@@ -3179,7 +3179,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Improved the formatting of the end brace when auto fixing InlineControlStructure errors (request [#1121][sq-1121])
 - Generic.Functions.OpeningFunctionBraceKernighanRitchie.BraceOnNewLine fix no longer leaves blank line after brace (request [#1085][sq-1085])
 - Generic UpperCaseConstantNameSniff now allows lowercase namespaces in constant definitions
-  - Thanks to [Daniel Schniepp][@dschniepp] for the patch
+    - Thanks to [Daniel Schniepp][@dschniepp] for the patch
 - Squiz DoubleQuoteUsageSniff is now more tolerant of syntax errors caused by mismatched string tokens
 - A few sniffs that produce errors based on the current PHP version can now be told to run using a specific PHP version
     - Set the php_version config var using --config-set, --runtime-set, or in a ruleset to specify a specific PHP version
