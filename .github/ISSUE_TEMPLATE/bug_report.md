@@ -24,7 +24,8 @@ A clear and concise description of what the bug is.
 
 ### Code sample
 ```php
-echo "A short code snippet that can be used to reproduce the bug. Do NOT paste screenshots of code!";
+echo 'A short code snippet that can be used to reproduce the bug.';
+echo 'Do NOT paste screenshots of code!";
 ```
 
 ### Custom ruleset
@@ -40,7 +41,7 @@ Steps to reproduce the behavior:
 1. Create a file called `test.php` with the code sample above...
 2. Run `phpcs test.php ...`
 3. See error message displayed
-```
+```text
 PHPCS output here
 ```
 
