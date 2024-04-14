@@ -1381,7 +1381,7 @@ class Ruleset
         // Construct a list of listeners indexed by token being listened for.
         $this->tokenListeners = [];
 
-        foreach ($this->sniffs as $sniffClass => $sniffObject) {
+        foreach (array_keys($this->sniffs) as $sniffClass) {
             $this->sniffs[$sniffClass] = null;
             $this->sniffs[$sniffClass] = new $sniffClass();
 
@@ -1417,7 +1417,7 @@ class Ruleset
 
             $ignorePatterns = [];
             $patterns       = $this->getIgnorePatterns($sniffCode);
-            foreach ($patterns as $pattern => $type) {
+            foreach (array_keys($patterns) as $pattern) {
                 $replacements = [
                     '\\,' => ',',
                     '*'   => '.*',
@@ -1428,7 +1428,7 @@ class Ruleset
 
             $includePatterns = [];
             $patterns        = $this->getIncludePatterns($sniffCode);
-            foreach ($patterns as $pattern => $type) {
+            foreach (array_keys($patterns) as $pattern) {
                 $replacements = [
                     '\\,' => ',',
                     '*'   => '.*',

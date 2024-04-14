@@ -55,7 +55,7 @@ class DisallowMultipleAssignmentsSniff implements Sniff
         // Ignore assignments in WHILE loop conditions.
         if (isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
             $nested = $tokens[$stackPtr]['nested_parenthesis'];
-            foreach ($nested as $opener => $closer) {
+            foreach (array_keys($nested) as $opener) {
                 if (isset($tokens[$opener]['parenthesis_owner']) === true
                     && $tokens[$tokens[$opener]['parenthesis_owner']]['code'] === T_WHILE
                 ) {
@@ -168,7 +168,7 @@ class DisallowMultipleAssignmentsSniff implements Sniff
                 T_FOR    => T_FOR,
                 T_MATCH  => T_MATCH,
             ];
-            foreach ($nested as $opener => $closer) {
+            foreach (array_keys($nested) as $opener) {
                 if (isset($tokens[$opener]['parenthesis_owner']) === true
                     && isset($controlStructures[$tokens[$tokens[$opener]['parenthesis_owner']]['code']]) === true
                 ) {

@@ -249,8 +249,8 @@ final class ExplainTest extends TestCase
 
         $this->expectOutputString($expected);
 
-        $runner   = new Runner();
-        $exitCode = $runner->runPHPCS();
+        $runner = new Runner();
+        $runner->runPHPCS();
 
     }//end testExplainWillExplainEachStandardSeparately()
 

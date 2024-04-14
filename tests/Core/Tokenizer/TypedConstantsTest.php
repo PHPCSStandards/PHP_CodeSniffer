@@ -254,7 +254,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
         ];
 
         // The constant name, as the last token in the sequence, is always T_STRING.
-        foreach ($data as $key => $value) {
+        foreach (array_keys($data) as $key) {
             $data[$key]['sequence'][] = T_STRING;
         }
 
@@ -368,7 +368,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
 
         // The nullable operator, as the first token in the sequence, is always T_NULLABLE.
         // The constant name, as the last token in the sequence, is always T_STRING.
-        foreach ($data as $key => $value) {
+        foreach (array_keys($data) as $key) {
             array_unshift($data[$key]['sequence'], T_NULLABLE);
             $data[$key]['sequence'][] = T_STRING;
         }
@@ -458,7 +458,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
         ];
 
         // The constant name, as the last token in the sequence, is always T_STRING.
-        foreach ($data as $key => $value) {
+        foreach (array_keys($data) as $key) {
             $data[$key]['sequence'][] = T_STRING;
         }
 
@@ -503,7 +503,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
         ];
 
         // The constant name, as the last token in the sequence, is always T_STRING.
-        foreach ($data as $key => $value) {
+        foreach (array_keys($data) as $key) {
             $data[$key]['sequence'][] = T_STRING;
         }
 

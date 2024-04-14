@@ -253,7 +253,7 @@ abstract class AbstractSniffUnitTest extends TestCase
         $failureMessages = [];
 
         foreach ($foundErrors as $line => $lineErrors) {
-            foreach ($lineErrors as $column => $errors) {
+            foreach ($lineErrors as $errors) {
                 if (isset($allProblems[$line]) === false) {
                     $allProblems[$line] = [
                         'expected_errors'   => 0,
@@ -310,7 +310,7 @@ abstract class AbstractSniffUnitTest extends TestCase
         }
 
         foreach ($foundWarnings as $line => $lineWarnings) {
-            foreach ($lineWarnings as $column => $warnings) {
+            foreach ($lineWarnings as $warnings) {
                 if (isset($allProblems[$line]) === false) {
                     $allProblems[$line] = [
                         'expected_errors'   => 0,

@@ -503,8 +503,6 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
      */
     public function testTernaryWithTypes()
     {
-        $tokens = $this->phpcsFile->getTokens();
-
         $token = $this->getTargetToken('/* testTernaryWithTypes */', T_FN);
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 15, 27);

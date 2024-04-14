@@ -46,7 +46,7 @@ abstract class Generator
     {
         $this->ruleset = $ruleset;
 
-        foreach ($ruleset->sniffs as $className => $sniffClass) {
+        foreach (array_keys($ruleset->sniffs) as $className) {
             $file    = Autoload::getLoadedFileName($className);
             $docFile = str_replace(
                 DIRECTORY_SEPARATOR.'Sniffs'.DIRECTORY_SEPARATOR,

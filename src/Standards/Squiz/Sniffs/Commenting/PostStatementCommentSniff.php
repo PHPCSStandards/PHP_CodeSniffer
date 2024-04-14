@@ -100,7 +100,7 @@ class PostStatementCommentSniff implements Sniff
         // Special case for (trailing) comments within multi-line control structures.
         if (isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
             $nestedParens = $tokens[$stackPtr]['nested_parenthesis'];
-            foreach ($nestedParens as $open => $close) {
+            foreach (array_keys($nestedParens) as $open) {
                 if (isset($tokens[$open]['parenthesis_owner']) === true
                     && isset($this->controlStructureExceptions[$tokens[$tokens[$open]['parenthesis_owner']]['code']]) === true
                 ) {

@@ -1014,7 +1014,7 @@ class File
                     continue;
                 }
 
-                foreach ($patterns as $pattern => $type) {
+                foreach (array_keys($patterns) as $pattern) {
                     // While there is support for a type of each pattern
                     // (absolute or relative) we don't actually support it here.
                     $replacements = [

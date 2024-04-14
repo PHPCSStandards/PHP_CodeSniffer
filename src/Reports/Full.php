@@ -62,7 +62,7 @@ class Full implements Report
         // Make sure the report width isn't too big.
         $maxErrorLength = 0;
         foreach ($report['messages'] as $line => $lineErrors) {
-            foreach ($lineErrors as $column => $colErrors) {
+            foreach ($lineErrors as $colErrors) {
                 foreach ($colErrors as $error) {
                     // Start with the presumption of a single line error message.
                     $length    = strlen($error['message']);

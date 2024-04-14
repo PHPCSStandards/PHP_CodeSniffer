@@ -116,7 +116,7 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
 
         // Just make sure this isn't a variable in a function declaration.
         if ($inFunction === false && isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
-            foreach ($tokens[$stackPtr]['nested_parenthesis'] as $opener => $closer) {
+            foreach (array_keys($tokens[$stackPtr]['nested_parenthesis']) as $opener) {
                 if (isset($tokens[$opener]['parenthesis_owner']) === false) {
                     // Check if this is a USE statement for a closure.
                     $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($opener - 1), null, true);

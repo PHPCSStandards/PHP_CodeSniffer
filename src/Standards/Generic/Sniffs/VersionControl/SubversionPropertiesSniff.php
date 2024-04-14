@@ -62,7 +62,7 @@ class SubversionPropertiesSniff implements Sniff
         }
 
         $allProperties = ($properties + $this->properties);
-        foreach ($allProperties as $key => $value) {
+        foreach (array_keys($allProperties) as $key) {
             if (isset($properties[$key]) === true
                 && isset($this->properties[$key]) === false
             ) {

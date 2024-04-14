@@ -86,7 +86,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                 // Check return type (can be multiple, separated by '|').
                 $typeNames      = explode('|', $returnType);
                 $suggestedNames = [];
-                foreach ($typeNames as $i => $typeName) {
+                foreach ($typeNames as $typeName) {
                     $suggestedName = Common::suggestType($typeName);
                     if (in_array($suggestedName, $suggestedNames, true) === false) {
                         $suggestedNames[] = $suggestedName;
@@ -531,7 +531,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                     $phpcsFile->fixer->replaceToken(($param['tag'] + 2), $content);
 
                     // Fix up the indent of additional comment lines.
-                    foreach ($param['commentLines'] as $lineNum => $line) {
+                    foreach (array_keys($param['commentLines']) as $lineNum) {
                         if ($lineNum === 0
                             || $param['commentLines'][$lineNum]['indent'] === 0
                         ) {
@@ -677,7 +677,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
 
                 // Fix up the indent of additional comment lines.
                 $diff = ($param['type_space'] - $spaces);
-                foreach ($param['commentLines'] as $lineNum => $line) {
+                foreach (array_keys($param['commentLines']) as $lineNum) {
                     if ($lineNum === 0
                         || $param['commentLines'][$lineNum]['indent'] === 0
                     ) {
@@ -735,7 +735,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                 $phpcsFile->fixer->replaceToken(($param['tag'] + 2), $content);
 
                 // Fix up the indent of additional comment lines.
-                foreach ($param['commentLines'] as $lineNum => $line) {
+                foreach (array_keys($param['commentLines']) as $lineNum) {
                     if ($lineNum === 0
                         || $param['commentLines'][$lineNum]['indent'] === 0
                     ) {

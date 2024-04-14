@@ -283,7 +283,7 @@ class JS extends Tokenizer
         }
 
         $maxTokenLength = 0;
-        foreach ($this->tokenValues as $token => $values) {
+        foreach (array_keys($this->tokenValues) as $token) {
             if (strlen($token) > $maxTokenLength) {
                 $maxTokenLength = strlen($token);
             }
@@ -1188,7 +1188,7 @@ class JS extends Tokenizer
                     }
                 }
             } else if ($this->tokens[$i]['code'] === T_CLOSE_OBJECT) {
-                $opener = array_pop($classStack);
+                array_pop($classStack);
             } else if ($this->tokens[$i]['code'] === T_COLON) {
                 // If it is a scope opener, it belongs to a
                 // DEFAULT or CASE statement.

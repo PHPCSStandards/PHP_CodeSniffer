@@ -21,7 +21,7 @@ if (defined('PHP_CODESNIFFER_VERBOSITY') === false) {
 
 require_once __DIR__.'/../autoload.php';
 
-$tokens = new \PHP_CodeSniffer\Util\Tokens();
+new \PHP_CodeSniffer\Util\Tokens();
 
 // Compatibility for PHPUnit < 6 and PHPUnit 6+.
 if (class_exists('PHPUnit_Framework_TestSuite') === true && class_exists('PHPUnit\Framework\TestSuite') === false) {
