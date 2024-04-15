@@ -7,3 +7,4 @@
 /vendor/
 composer.lock
 phpstan.neon
+/node_modules/
