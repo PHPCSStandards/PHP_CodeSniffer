@@ -80,15 +80,15 @@ class DisallowYodaConditionsSniff implements Sniff
 
         // Is it a parenthesis.
         if ($tokens[$previousIndex]['code'] === T_CLOSE_PARENTHESIS) {
-            $closeParenthesisIndex = $phpcsFile->findPrevious(
+            $beforeOpeningParenthesisIndex = $phpcsFile->findPrevious(
                 Tokens::$emptyTokens,
                 ($tokens[$previousIndex]['parenthesis_opener'] - 1),
                 null,
                 true
             );
 
-            if ($closeParenthesisIndex === false || $tokens[$closeParenthesisIndex]['code'] !== T_ARRAY) {
-                if ($tokens[$closeParenthesisIndex]['code'] === T_STRING) {
+            if ($beforeOpeningParenthesisIndex === false || $tokens[$beforeOpeningParenthesisIndex]['code'] !== T_ARRAY) {
+                if ($tokens[$beforeOpeningParenthesisIndex]['code'] === T_STRING) {
                     return;
                 }
 
@@ -110,8 +110,8 @@ class DisallowYodaConditionsSniff implements Sniff
                 if ($prev === false) {
                     return;
                 }
-            } else if ($tokens[$closeParenthesisIndex]['code'] === T_ARRAY
-                && $this->isArrayStatic($phpcsFile, $closeParenthesisIndex) === false
+            } else if ($tokens[$beforeOpeningParenthesisIndex]['code'] === T_ARRAY
+                && $this->isArrayStatic($phpcsFile, $beforeOpeningParenthesisIndex) === false
             ) {
                 return;
             }//end if
