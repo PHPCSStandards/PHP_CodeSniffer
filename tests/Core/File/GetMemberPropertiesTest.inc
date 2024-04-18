@@ -339,3 +339,18 @@ class WhitespaceAndCommentsInTypes {
     /* testIntersectionTypeWithWhitespaceAndComment */
     public \Foo /*comment*/ & Bar $hasWhitespaceAndComment;
 }
+
+trait DNFTypes {
+    /* testPHP82DNFTypeStatic */
+    public static (Foo&\Bar)|bool $propA;
+
+    /* testPHP82DNFTypeReadonlyA */
+    protected readonly float|(Partially\Qualified&Traversable) $propB;
+
+    /* testPHP82DNFTypeReadonlyB */
+    private readonly (namespace\Foo&Bar)|string $propC;
+
+    /* testPHP82DNFTypeIllegalNullable */
+    // Intentional fatal error - nullable operator cannot be combined with DNF.
+    var ?(A&\Pck\B)|bool $propD;
+}
