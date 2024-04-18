@@ -16,19 +16,41 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
     /**
      * Test simple arrow functions.
      *
-     * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
+     * @param string $testMarker The comment prefacing the target token.
+     *
+     * @dataProvider dataSimple
+     * @covers       PHP_CodeSniffer\Tokenizers\PHP::processAdditional
      *
      * @return void
      */
-    public function testSimple()
+    public function testSimple($testMarker)
     {
-        foreach (['/* testStandard */', '/* testMixedCase */'] as $comment) {
-            $token = $this->getTargetToken($comment, T_FN);
-            $this->backfillHelper($token);
-            $this->scopePositionTestHelper($token, 5, 12);
-        }
+        $token = $this->getTargetToken($testMarker, T_FN);
+        $this->backfillHelper($token);
+        $this->scopePositionTestHelper($token, 5, 12);
 
     }//end testSimple()
+
+
+    /**
+     * Data provider.
+     *
+     * @see testSimple()
+     *
+     * @return array<string, array<string, string>>
+     */
+    public static function dataSimple()
+    {
+        return [
+            'standard'   => [
+                'testMarker'  => '/* testStandard */',
+            ],
+            'mixed case' => [
+                'testMarker'  => '/* testMixedCase */',
+            ],
+        ];
+
+    }//end dataSimple()
 
 
     /**
@@ -370,44 +392,54 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
 
 
     /**
-     * Test arrow functions that use self/parent/callable/array/static return types.
+     * Test arrow functions that use keyword return types.
      *
-     * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
+     * @param string $testMarker The comment prefacing the target token.
+     *
+     * @dataProvider dataKeywordReturnTypes
+     * @covers       PHP_CodeSniffer\Tokenizers\PHP::processAdditional
      *
      * @return void
      */
-    public function testKeywordReturnTypes()
+    public function testKeywordReturnTypes($testMarker)
     {
         $tokens = $this->phpcsFile->getTokens();
 
-        $testMarkers = [
-            'Self',
-            'Parent',
-            'Callable',
-            'Array',
-            'Static',
-        ];
-
-        foreach ($testMarkers as $marker) {
-            $token = $this->getTargetToken('/* test'.$marker.'ReturnType */', T_FN);
-            $this->backfillHelper($token);
-
-            $expectedScopeOpener = ($token + 11);
-            $expectedScopeCloser = ($token + 14);
-
-            $this->assertSame($expectedScopeOpener, $tokens[$token]['scope_opener'], "Scope opener is not the arrow token (for $marker)");
-            $this->assertSame($expectedScopeCloser, $tokens[$token]['scope_closer'], "Scope closer is not the semicolon token(for $marker)");
-
-            $opener = $tokens[$token]['scope_opener'];
-            $this->assertSame($expectedScopeOpener, $tokens[$opener]['scope_opener'], "Opener scope opener is not the arrow token(for $marker)");
-            $this->assertSame($expectedScopeCloser, $tokens[$opener]['scope_closer'], "Opener scope closer is not the semicolon token(for $marker)");
-
-            $closer = $tokens[$token]['scope_closer'];
-            $this->assertSame($expectedScopeOpener, $tokens[$closer]['scope_opener'], "Closer scope opener is not the arrow token(for $marker)");
-            $this->assertSame($expectedScopeCloser, $tokens[$closer]['scope_closer'], "Closer scope closer is not the semicolon token(for $marker)");
-        }
+        $token = $this->getTargetToken($testMarker, T_FN);
+        $this->backfillHelper($token);
+        $this->scopePositionTestHelper($token, 11, 14);
 
     }//end testKeywordReturnTypes()
+
+
+    /**
+     * Data provider.
+     *
+     * @see testKeywordReturnTypes()
+     *
+     * @return array<string, array<string, string>>
+     */
+    public static function dataKeywordReturnTypes()
+    {
+        return [
+            'self'     => [
+                'testMarker'  => '/* testSelfReturnType */',
+            ],
+            'parent'   => [
+                'testMarker'  => '/* testParentReturnType */',
+            ],
+            'callable' => [
+                'testMarker'  => '/* testCallableReturnType */',
+            ],
+            'array'    => [
+                'testMarker'  => '/* testArrayReturnType */',
+            ],
+            'static'   => [
+                'testMarker'  => '/* testStaticReturnType */',
+            ],
+        ];
+
+    }//end dataKeywordReturnTypes()
 
 
     /**
