@@ -437,6 +437,15 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
             'static'   => [
                 'testMarker'  => '/* testStaticReturnType */',
             ],
+            'false'    => [
+                'testMarker'  => '/* testFalseReturnType */',
+            ],
+            'true'     => [
+                'testMarker'  => '/* testTrueReturnType */',
+            ],
+            'null'     => [
+                'testMarker'  => '/* testNullReturnType */',
+            ],
         ];
 
     }//end dataKeywordReturnTypes()
@@ -472,6 +481,38 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->scopePositionTestHelper($token, 11, 18);
 
     }//end testUnionReturnType()
+
+
+    /**
+     * Test arrow function with a union return type.
+     *
+     * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
+     *
+     * @return void
+     */
+    public function testUnionReturnTypeWithTrue()
+    {
+        $token = $this->getTargetToken('/* testUnionReturnTypeWithTrue */', T_FN);
+        $this->backfillHelper($token);
+        $this->scopePositionTestHelper($token, 11, 18);
+
+    }//end testUnionReturnTypeWithTrue()
+
+
+    /**
+     * Test arrow function with a union return type.
+     *
+     * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
+     *
+     * @return void
+     */
+    public function testUnionReturnTypeWithFalse()
+    {
+        $token = $this->getTargetToken('/* testUnionReturnTypeWithFalse */', T_FN);
+        $this->backfillHelper($token);
+        $this->scopePositionTestHelper($token, 11, 18);
+
+    }//end testUnionReturnTypeWithFalse()
 
 
     /**
