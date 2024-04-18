@@ -59,13 +59,9 @@ class DisallowLongArraySyntaxSniff implements Sniff
 
             $phpcsFile->fixer->beginChangeset();
 
-            if ($opener === null) {
-                $phpcsFile->fixer->replaceToken($stackPtr, '[]');
-            } else {
-                $phpcsFile->fixer->replaceToken($stackPtr, '');
-                $phpcsFile->fixer->replaceToken($opener, '[');
-                $phpcsFile->fixer->replaceToken($closer, ']');
-            }
+            $phpcsFile->fixer->replaceToken($stackPtr, '');
+            $phpcsFile->fixer->replaceToken($opener, '[');
+            $phpcsFile->fixer->replaceToken($closer, ']');
 
             $phpcsFile->fixer->endChangeset();
         }
