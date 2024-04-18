@@ -1204,19 +1204,14 @@ class File
      * @param int $stackPtr The position of the declaration token which
      *                      declared the class, interface, trait, or function.
      *
-     * @return string|null The name of the class, interface, trait, or function;
-     *                     or NULL if the function or class is anonymous.
+     * @return string The name of the class, interface, trait, or function or an empty string
+     *                if the name could not be determined (live coding).
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If the specified token is not of type
-     *                                                      T_FUNCTION, T_CLASS, T_ANON_CLASS,
-     *                                                      T_CLOSURE, T_TRAIT, T_ENUM, or T_INTERFACE.
+     *                                                      T_FUNCTION, T_CLASS, T_TRAIT, T_ENUM, or T_INTERFACE.
      */
     public function getDeclarationName($stackPtr)
     {
         $tokenCode = $this->tokens[$stackPtr]['code'];
-
-        if ($tokenCode === T_ANON_CLASS || $tokenCode === T_CLOSURE) {
-            return null;
-        }
 
         if ($tokenCode !== T_FUNCTION
             && $tokenCode !== T_CLASS
@@ -1236,7 +1231,7 @@ class File
             $stopPoint = $this->tokens[$stackPtr]['scope_opener'];
         }
 
-        $content = null;
+        $content = '';
         for ($i = $stackPtr; $i < $stopPoint; $i++) {
             if ($this->tokens[$i]['code'] === T_STRING) {
                 $content = $this->tokens[$i]['content'];

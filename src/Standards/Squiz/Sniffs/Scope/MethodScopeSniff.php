@@ -49,7 +49,7 @@ class MethodScopeSniff extends AbstractScopeSniff
         }
 
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($methodName === null) {
+        if ($methodName === '') {
             // Ignore live coding.
             return;
         }

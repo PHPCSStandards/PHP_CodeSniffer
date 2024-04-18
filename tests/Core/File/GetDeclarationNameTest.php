@@ -10,6 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\File;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
+use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * Tests for the \PHP_CodeSniffer\Files\File:getDeclarationName method.
@@ -23,47 +24,38 @@ final class GetDeclarationNameTest extends AbstractMethodTestCase
     /**
      * Test receiving an expected exception when a non-supported token is passed.
      *
+     * @param string     $testMarker The comment which prefaces the target token in the test file.
+     * @param int|string $targetType Token type of the token to get as stackPtr.
+     *
+     * @dataProvider dataInvalidTokenPassed
+     *
      * @return void
      */
-    public function testInvalidTokenPassed()
+    public function testInvalidTokenPassed($testMarker, $targetType)
     {
-        $this->expectRunTimeException('Token type "T_STRING" is not T_FUNCTION, T_CLASS, T_INTERFACE, T_TRAIT or T_ENUM');
+        $tokenName = Tokens::tokenName($targetType);
+        $this->expectRunTimeException('Token type "'.$tokenName.'" is not T_FUNCTION, T_CLASS, T_INTERFACE, T_TRAIT or T_ENUM');
 
-        $target = $this->getTargetToken('/* testInvalidTokenPassed */', T_STRING);
+        $target = $this->getTargetToken($testMarker, $targetType);
         self::$phpcsFile->getDeclarationName($target);
 
     }//end testInvalidTokenPassed()
 
 
     /**
-     * Test receiving "null" when passed an anonymous construct or in case of a parse error.
-     *
-     * @param string     $testMarker The comment which prefaces the target token in the test file.
-     * @param int|string $targetType Token type of the token to get as stackPtr.
-     *
-     * @dataProvider dataGetDeclarationNameNull
-     *
-     * @return void
-     */
-    public function testGetDeclarationNameNull($testMarker, $targetType)
-    {
-        $target = $this->getTargetToken($testMarker, $targetType);
-        $result = self::$phpcsFile->getDeclarationName($target);
-        $this->assertNull($result);
-
-    }//end testGetDeclarationNameNull()
-
-
-    /**
      * Data provider.
      *
-     * @see testGetDeclarationNameNull() For the array format.
+     * @see testGetInvalidTokenPassed() For the array format.
      *
      * @return array<string, array<string, int|string>>
      */
-    public static function dataGetDeclarationNameNull()
+    public static function dataInvalidTokenPassed()
     {
         return [
+            'unsupported token T_STRING'             => [
+                'testMarker' => '/* testInvalidTokenPassed */',
+                'targetType' => T_STRING,
+            ],
             'closure'                                => [
                 'testMarker' => '/* testClosure */',
                 'targetType' => T_CLOSURE,
@@ -86,7 +78,7 @@ final class GetDeclarationNameTest extends AbstractMethodTestCase
             ],
         ];
 
-    }//end dataGetDeclarationNameNull()
+    }//end dataInvalidTokenPassed()
 
 
     /**

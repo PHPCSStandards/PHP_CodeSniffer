@@ -112,14 +112,14 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
         }
 
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($methodName === null) {
+        if ($methodName === '') {
             // Live coding or parse error. Bow out.
             return;
         }
 
-        $className = $phpcsFile->getDeclarationName($currScope);
-        if (isset($className) === false) {
-            $className = '[Anonymous Class]';
+        $className = '[Anonymous Class]';
+        if ($tokens[$currScope]['code'] !== T_ANON_CLASS) {
+            $className = $phpcsFile->getDeclarationName($currScope);
         }
 
         $errorData = [$className.'::'.$methodName];
@@ -187,7 +187,7 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
     protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
     {
         $functionName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($functionName === null) {
+        if ($functionName === '') {
             // Live coding or parse error. Bow out.
             return;
         }

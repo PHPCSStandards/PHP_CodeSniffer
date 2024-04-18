@@ -39,7 +39,7 @@ class TraitNameSuffixSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $traitName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($traitName === null) {
+        if ($traitName === '') {
             // Live coding or parse error. Bow out.
             return;
         }

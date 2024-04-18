@@ -55,7 +55,7 @@ class ClassFileNameSniff implements Sniff
 
         $tokens = $phpcsFile->getTokens();
         $ooName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($ooName === null) {
+        if ($ooName === '') {
             // Probably parse error/live coding.
             return;
         }

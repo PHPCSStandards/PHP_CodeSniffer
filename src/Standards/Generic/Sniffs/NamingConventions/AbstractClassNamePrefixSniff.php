@@ -44,7 +44,7 @@ class AbstractClassNamePrefixSniff implements Sniff
         }
 
         $className = $phpcsFile->getDeclarationName($stackPtr);
-        if ($className === null) {
+        if ($className === '') {
             // Live coding or parse error.
             return;
         }

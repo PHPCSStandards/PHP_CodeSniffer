@@ -67,7 +67,7 @@ class ClosingDeclarationCommentSniff implements Sniff
             }
 
             $decName = $phpcsFile->getDeclarationName($stackPtr);
-            if ($decName === null) {
+            if ($decName === '') {
                 // Parse error or live coding.
                 return;
             }

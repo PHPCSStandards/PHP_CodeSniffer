@@ -29,7 +29,7 @@ class ValidFunctionNameSniff extends PEARValidFunctionNameSniff
     protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
     {
         $functionName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($functionName === null) {
+        if ($functionName === '') {
             return;
         }
 

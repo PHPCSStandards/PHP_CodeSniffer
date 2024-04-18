@@ -43,7 +43,7 @@ class GlobalFunctionSniff implements Sniff
 
         if (empty($tokens[$stackPtr]['conditions']) === true) {
             $functionName = $phpcsFile->getDeclarationName($stackPtr);
-            if ($functionName === null) {
+            if ($functionName === '') {
                 return;
             }
 
