@@ -548,6 +548,54 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
 
 
     /**
+     * Test arrow function with a DNF parameter type.
+     *
+     * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
+     *
+     * @return void
+     */
+    public function testDNFParamType()
+    {
+        $token = $this->getTargetToken('/* testDNFParamType */', T_FN);
+        $this->backfillHelper($token);
+        $this->scopePositionTestHelper($token, 17, 29);
+
+    }//end testDNFParamType()
+
+
+    /**
+     * Test arrow function with a DNF return type.
+     *
+     * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
+     *
+     * @return void
+     */
+    public function testDNFReturnType()
+    {
+        $token = $this->getTargetToken('/* testDNFReturnType */', T_FN);
+        $this->backfillHelper($token);
+        $this->scopePositionTestHelper($token, 16, 29);
+
+    }//end testDNFReturnType()
+
+
+    /**
+     * Test arrow function which returns by reference with a DNF parameter type.
+     *
+     * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
+     *
+     * @return void
+     */
+    public function testDNFParamTypeWithReturnByRef()
+    {
+        $token = $this->getTargetToken('/* testDNFParamTypeWithReturnByRef */', T_FN);
+        $this->backfillHelper($token);
+        $this->scopePositionTestHelper($token, 15, 22);
+
+    }//end testDNFParamTypeWithReturnByRef()
+
+
+    /**
      * Test arrow functions used in ternary operators.
      *
      * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional

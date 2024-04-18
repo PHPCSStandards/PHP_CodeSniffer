@@ -203,3 +203,45 @@ class UseInIntersectionTypes {
     function SelfIsKeywordInReturnTypeLast(): Foo&/* testSelfIsKeywordAsReturnIntersectionTypeLast */self {}
     function ParentIsKeywordInReturnTypeLast(): bool&/* testParentIsKeywordAsReturnIntersectionTypeLast */parent {}
 }
+
+// Note: self/parent/static are rarely allowed in DNF types, but that is not the concern of the tokenizer.
+class DNFTypes extends Something {
+    const (A&B)/* testFalseIsKeywordAsConstDNFType */|false NAME_FALSE = SOME_CONST;
+    const /* testTrueIsKeywordAsConstDNFType */ true|(A&B) NAME_TRUE = SOME_CONST;
+    const (A&B)|/* testNullIsKeywordAsConstDNFType */ null|(C&D) NAME_NULL = SOME_CONST;
+    const /* testSelfIsKeywordAsConstDNFType */ (self&B)|int NAME_SELF = SOME_CONST;
+    const bool|(A&/* testParentIsKeywordAsConstDNFType */ parent) NAME_PARENT = SOME_CONST;
+
+    readonly public (A&B)/* testFalseIsKeywordAsConstDNFType */ |false $false;
+    protected /* testTrueIsKeywordAsConstDNFType */ true|(A&B) $true = SOME_CONST;
+    static private (A&B)|/* testNullIsKeywordAsConstDNFType */ null|(C&D) $null = SOME_CONST;
+    var string|/* testSelfIsKeywordAsConstDNFType */ (self&Stringable) $self = SOME_CONST;
+    protected (A/* testParentIsKeywordAsConstDNFType */ &parent)|float $parent = SOME_CONST;
+
+    public function DNFWithFalse(
+        /* testFalseIsKeywordAsParamDNFType */
+        false|(A&B) $param
+    ) : (A&B)/* testFalseIsKeywordAsReturnDNFType */|false {
+
+        $closure = static function (
+            array/* testTrueIsKeywordAsParamDNFType */|true|(A&B) $param
+        ) : (A&B)/* testTrueIsKeywordAsReturnDNFType */|true {};
+    }
+
+
+    public function DNFWithNull(
+        /* testNullIsKeywordAsParamDNFType */
+        null|(A&B) $param
+    ) : (A&B)/* testNullIsKeywordAsReturnDNFType */|null|(C&D) {}
+
+    public function DNFWithSelf(
+        /* testSelfIsKeywordAsParamDNFType */
+        (self&B)|mixed $param
+    ) : (A&B)/* testSelfIsKeywordAsReturnDNFType */|self {
+
+        $arrow = fn (
+            array|(Iterable /* testParentIsKeywordAsParamDNFType */&parent) $param
+        /* testParentIsKeywordAsReturnDNFType */
+        ) : parent|(A&B) => $param->get();
+    }
+}

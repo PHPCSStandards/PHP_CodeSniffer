@@ -235,3 +235,10 @@ $obj-> /* testKeywordAsMethodCallNameShouldBeStringStatic */ static();
 
 $function = /* testStaticIsKeywordBeforeClosure */ static function(/* testStaticIsKeywordWhenParamType */ static $param) {};
 $arrow = /* testStaticIsKeywordBeforeArrow */ static fn(): /* testStaticIsKeywordWhenReturnType */ static => 10;
+
+/* testKeywordAsFunctionCallNameShouldBeStringStaticDNFLookaLike */
+$obj->static((CONST_A&CONST_B)|CONST_C | $var);
+
+class DNF {
+    public /* testStaticIsKeywordPropertyModifierBeforeDNF */ static (DN&F)|null $dnfProp;
+}

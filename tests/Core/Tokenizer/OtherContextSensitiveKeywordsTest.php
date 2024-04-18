@@ -627,6 +627,90 @@ final class OtherContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
                 'testMarker'        => '/* testParentIsKeywordAsReturnIntersectionTypeLast */',
                 'expectedTokenType' => 'T_PARENT',
             ],
+
+            'false: DNF type in OO constant declaration'                      => [
+                'testMarker'        => '/* testFalseIsKeywordAsConstDNFType */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: DNF type in OO constant declaration'                       => [
+                'testMarker'        => '/* testTrueIsKeywordAsConstDNFType */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: DNF type in OO constant declaration'                       => [
+                'testMarker'        => '/* testNullIsKeywordAsConstDNFType */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: DNF type in OO constant declaration'                       => [
+                'testMarker'        => '/* testSelfIsKeywordAsConstDNFType */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: DNF type in OO constant declaration'                     => [
+                'testMarker'        => '/* testParentIsKeywordAsConstDNFType */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'false: DNF type in property declaration'                         => [
+                'testMarker'        => '/* testFalseIsKeywordAsConstDNFType */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: DNF type in property declaration'                          => [
+                'testMarker'        => '/* testTrueIsKeywordAsConstDNFType */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: DNF type in property declaration'                          => [
+                'testMarker'        => '/* testNullIsKeywordAsConstDNFType */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: DNF type in property declaration'                          => [
+                'testMarker'        => '/* testSelfIsKeywordAsConstDNFType */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: DNF type in property declaration'                        => [
+                'testMarker'        => '/* testParentIsKeywordAsConstDNFType */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'false: DNF type in function param declaration'                   => [
+                'testMarker'        => '/* testFalseIsKeywordAsParamDNFType */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'false: DNF type in function return declaration'                  => [
+                'testMarker'        => '/* testFalseIsKeywordAsReturnDNFType */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: DNF type in function param declaration'                    => [
+                'testMarker'        => '/* testTrueIsKeywordAsParamDNFType */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'true: DNF type in function return declaration'                   => [
+                'testMarker'        => '/* testTrueIsKeywordAsReturnDNFType */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: DNF type in function param declaration'                    => [
+                'testMarker'        => '/* testNullIsKeywordAsParamDNFType */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'null: DNF type in function return declaration'                   => [
+                'testMarker'        => '/* testNullIsKeywordAsReturnDNFType */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: DNF type in function param declaration'                    => [
+                'testMarker'        => '/* testSelfIsKeywordAsParamDNFType */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'self: DNF type in function return declaration'                   => [
+                'testMarker'        => '/* testSelfIsKeywordAsReturnDNFType */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: DNF type in function param declaration'                  => [
+                'testMarker'        => '/* testParentIsKeywordAsParamDNFType */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+            'parent: DNF type in function return declaration'                 => [
+                'testMarker'        => '/* testParentIsKeywordAsReturnDNFType */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
         ];
 
     }//end dataKeywords()

@@ -130,3 +130,27 @@ enum EnumWithIntersectionTypedConstants {
     /* testEnumConstTypedIntersectFullyQualifiedPartiallyQualified */
     const \Fully\Qualified&Partially\Qualified UNION_FQN_PARTIAL = new Partial\Qualified;
 }
+
+$anonClassWithDNFTypes = new class() extends Something {
+    /* testAnonClassConstDNFTypeNullAfter */
+    const (A&B)|null DNF_OR_NULL_1 = null;
+    /* testAnonClassConstDNFTypeNullBefore */
+    public final const NULL|(A&B) DNF_OR_NULL_2 = null;
+    /* testAnonClassConstDNFTypeFalseBefore */
+    final const false|(C&D) DNF_OR_FALSE = false;
+    /* testAnonClassConstDNFTypeTrueAfter */
+    private final const ( F & G ) | true DNF_OR_ARRAY = true;
+    /* testAnonClassConstDNFTypeTrueBeforeFalseAfter */
+    public const TRUE|(SplBool&Stringable)|FALSE DNF_OR_BOOL = true;
+    /* testAnonClassConstDNFTypeArrayAfter */
+    final protected const (Traversable&Countable)|array DNF_OR_ARRAY_1 = [];
+    /* testAnonClassConstDNFTypeArrayBefore */
+    private const array /*comment*/ | ( Traversable /*comment*/ & Countable ) DNF_OR_ARRAY_2 = new MyClass;
+    /* testAnonClassConstDNFTypeInvalidNullable */
+    const ? (Invalid&Fatal)|NullableNotAllowed DNF = null;
+
+    /* testAnonClassConstDNFTypeFQNRelativePartiallyQualified */
+    const (\FQN&namespace\Relative)|Partially\Qualified DNF_CLASSNAME = MyClass::getInstance();
+    /* testAnonClassConstDNFTypeParentSelfStatic */
+    const (parent&self)|static DNF_PARENT = parent::getInstance();
+};
