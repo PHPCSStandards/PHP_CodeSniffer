@@ -164,7 +164,7 @@ class OperatorBracketSniff implements Sniff
 
                 if ($prevCode === T_ISSET) {
                     // This operation is inside an isset() call, but has
-                    // no bracket of it's own.
+                    // no bracket of its own.
                     break;
                 }
 

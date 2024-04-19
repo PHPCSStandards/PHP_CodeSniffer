@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 use ReflectionObject;
 
 /**
- * These tests specifically focus on the changes made to work around the PHP 8.2 dynamic properties deprecation.
+ * These tests specifically focus on the changes made to work around the PHP 8.2 dynamic properties' deprecation.
  *
  * @covers \PHP_CodeSniffer\Ruleset::setSniffProperty
  */

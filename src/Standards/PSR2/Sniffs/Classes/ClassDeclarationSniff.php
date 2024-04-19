@@ -519,7 +519,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
         }//end if
 
         if ($tokens[$stackPtr]['code'] !== T_ANON_CLASS) {
-            // Check the closing brace is on it's own line, but allow
+            // Check the closing brace is on its own line, but allow
             // for comments like "//end class".
             $ignoreTokens   = Tokens::$phpcsCommentTokens;
             $ignoreTokens[] = T_WHITESPACE;

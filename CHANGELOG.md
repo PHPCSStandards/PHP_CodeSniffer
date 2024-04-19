@@ -1284,7 +1284,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#2621][sq-2621] : PSR12.Classes.AnonClassDeclaration.CloseBraceSameLine false positive for anon class passed as function argument
     - Thanks to [Martins Sipenko][@martinssipenko] for the patch
 - Fixed bug [#2623][sq-2623] : PSR12.ControlStructures.ControlStructureSpacing not ignoring indentation inside multi-line string arguments
-- Fixed bug [#2624][sq-2624] : PSR12.Traits.UseDeclaration doesnt apply the correct indent during auto fixing
+- Fixed bug [#2624][sq-2624] : PSR12.Traits.UseDeclaration doesn't apply the correct indent during auto fixing
 - Fixed bug [#2626][sq-2626] : PSR12.Files.FileHeader detects @var annotations as file docblocks
 - Fixed bug [#2628][sq-2628] : PSR12.Traits.UseDeclaration does not allow comments above a USE declaration
 - Fixed bug [#2632][sq-2632] : Incorrect indentation of lines starting with "static" inside closures

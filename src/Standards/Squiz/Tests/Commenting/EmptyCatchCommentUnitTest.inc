@@ -17,7 +17,7 @@ try {
     // Try something.
     $variable = 'string';
 } catch (Exception $e) {
-    // Dont want to do anything.
+    // Don't want to do anything.
 }
 
 try {

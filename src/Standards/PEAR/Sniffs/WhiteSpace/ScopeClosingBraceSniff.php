@@ -59,7 +59,7 @@ class ScopeClosingBraceSniff implements Sniff
         $scopeEnd   = $tokens[$stackPtr]['scope_closer'];
 
         // If the scope closer doesn't think it belongs to this scope opener
-        // then the opener is sharing its closer with other tokens. We only
+        // then the opener is sharing it's closer with other tokens. We only
         // want to process the closer once, so skip this one.
         if (isset($tokens[$scopeEnd]['scope_condition']) === false
             || $tokens[$scopeEnd]['scope_condition'] !== $stackPtr
@@ -92,7 +92,7 @@ class ScopeClosingBraceSniff implements Sniff
             }
         }
 
-        // Check that the closing brace is on it's own line.
+        // Check that the closing brace is on its own line.
         for ($lastContent = ($scopeEnd - 1); $lastContent > $scopeStart; $lastContent--) {
             if ($tokens[$lastContent]['code'] === T_WHITESPACE || $tokens[$lastContent]['code'] === T_OPEN_TAG) {
                 continue;

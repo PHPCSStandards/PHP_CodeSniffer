@@ -1554,7 +1554,7 @@ abstract class Tokenizer
                     // conditions where there was none. This happens for T_CASE
                     // statements that are using the same break statement.
                     if ($lastOpener !== null && $this->tokens[$lastOpener]['scope_closer'] === $this->tokens[$i]['scope_closer']) {
-                        // This opener shares its closer with the previous opener,
+                        // This opener shares it's closer with the previous opener,
                         // but we still need to check if the two openers share their
                         // closer with each other directly (like CASE and DEFAULT)
                         // or if they are just sharing because one doesn't have a

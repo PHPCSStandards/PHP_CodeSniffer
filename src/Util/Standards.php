@@ -238,14 +238,14 @@ class Standards
             return true;
         } else {
             // This could be a custom standard, installed outside our
-            // standards directory.
+            // standards' directory.
             $standard = Common::realPath($standard);
             if ($standard === false) {
                 return false;
             }
 
             // Might be an actual ruleset file itUtil.
-            // If it has an XML extension, let's at least try it.
+            // If it has an XML extension, lets at least try it.
             if (is_file($standard) === true
                 && (substr(strtolower($standard), -4) === '.xml'
                 || substr(strtolower($standard), -9) === '.xml.dist')
