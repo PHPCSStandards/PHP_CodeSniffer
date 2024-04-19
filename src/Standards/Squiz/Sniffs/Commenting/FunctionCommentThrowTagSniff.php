@@ -216,7 +216,7 @@ class FunctionCommentThrowTagSniff implements Sniff
                 continue;
             }
 
-            foreach (array_keys($throwTags) as $tag) {
+            foreach ($throwTags as $tag => $ignore) {
                 if (strrpos($tag, $throw) === (strlen($tag) - strlen($throw))) {
                     continue 2;
                 }

@@ -196,7 +196,7 @@ class FileCommentSniff implements Sniff
 
         // Check if the tags are in the correct position.
         $pos = 0;
-        foreach (array_keys($required) as $tag) {
+        foreach ($required as $tag => $true) {
             if (in_array($tag, $foundTags, true) === false) {
                 $error = 'Missing %s tag in file comment';
                 $data  = [$tag];

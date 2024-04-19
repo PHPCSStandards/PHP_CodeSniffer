@@ -531,7 +531,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                     $phpcsFile->fixer->replaceToken(($param['tag'] + 2), $content);
 
                     // Fix up the indent of additional comment lines.
-                    foreach (array_keys($param['commentLines']) as $lineNum) {
+                    foreach ($param['commentLines'] as $lineNum => $line) {
                         if ($lineNum === 0
                             || $param['commentLines'][$lineNum]['indent'] === 0
                         ) {
@@ -677,7 +677,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
 
                 // Fix up the indent of additional comment lines.
                 $diff = ($param['type_space'] - $spaces);
-                foreach (array_keys($param['commentLines']) as $lineNum) {
+                foreach ($param['commentLines'] as $lineNum => $line) {
                     if ($lineNum === 0
                         || $param['commentLines'][$lineNum]['indent'] === 0
                     ) {
@@ -735,7 +735,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                 $phpcsFile->fixer->replaceToken(($param['tag'] + 2), $content);
 
                 // Fix up the indent of additional comment lines.
-                foreach (array_keys($param['commentLines']) as $lineNum) {
+                foreach ($param['commentLines'] as $lineNum => $line) {
                     if ($lineNum === 0
                         || $param['commentLines'][$lineNum]['indent'] === 0
                     ) {

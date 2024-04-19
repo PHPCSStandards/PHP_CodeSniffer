@@ -77,7 +77,7 @@ class IncludingFileSniff implements Sniff
         // of a condition. If that's the case then we need to process it as being
         // within a condition, as they are checking the return value.
         if (isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
-            foreach (array_keys($tokens[$stackPtr]['nested_parenthesis']) as $left) {
+            foreach ($tokens[$stackPtr]['nested_parenthesis'] as $left => $right) {
                 if (isset($tokens[$left]['parenthesis_owner']) === true) {
                     $inCondition = true;
                 }

@@ -275,7 +275,7 @@ class InlineCommentSniff implements Sniff
             if (in_array($commentCloser, $acceptedClosers, true) === false) {
                 $error = 'Inline comments must end in %s';
                 $ender = '';
-                foreach (array_keys($acceptedClosers) as $closerName) {
+                foreach ($acceptedClosers as $closerName => $symbol) {
                     $ender .= ' '.$closerName.',';
                 }
 

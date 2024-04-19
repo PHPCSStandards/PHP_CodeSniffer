@@ -283,7 +283,7 @@ class JS extends Tokenizer
         }
 
         $maxTokenLength = 0;
-        foreach (array_keys($this->tokenValues) as $token) {
+        foreach ($this->tokenValues as $token => $values) {
             if (strlen($token) > $maxTokenLength) {
                 $maxTokenLength = strlen($token);
             }
