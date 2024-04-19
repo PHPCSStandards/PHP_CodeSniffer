@@ -21,7 +21,7 @@ final class GetClassPropertiesTest extends AbstractMethodUnitTest
 
 
     /**
-     * Test receiving an expected exception when a non class token is passed.
+     * Test receiving an expected exception when a non-class token is passed.
      *
      * @param string     $testMarker The comment which prefaces the target token in the test file.
      * @param int|string $tokenType  The type of token to look for after the marker.

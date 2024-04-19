@@ -108,7 +108,7 @@ class UselessOverridingMethodSniff implements Sniff
             return;
         }
 
-        // Find next non empty token index, should be double colon.
+        // Find next non-empty token index, should be double colon.
         $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
 
         // Skip for invalid code.
@@ -116,7 +116,7 @@ class UselessOverridingMethodSniff implements Sniff
             return;
         }
 
-        // Find next non empty token index, should be the name of the method being called.
+        // Find next non-empty token index, should be the name of the method being called.
         $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
 
         // Skip for invalid code or other method.
@@ -124,7 +124,7 @@ class UselessOverridingMethodSniff implements Sniff
             return;
         }
 
-        // Find next non empty token index, should be the open parenthesis.
+        // Find next non-empty token index, should be the open parenthesis.
         $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
 
         // Skip for invalid code.

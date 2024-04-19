@@ -1,7 +1,7 @@
 <?php
 /**
- * Tests that embedded variables and expressions in double quoted strings are tokenized
- * as one double quoted string token.
+ * Tests that embedded variables and expressions in double-quoted strings are tokenized
+ * as one double-quoted string token.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2022 Squiz Pty Ltd (ABN 77 084 670 600)
@@ -15,10 +15,10 @@ final class DoubleQuotedStringTest extends AbstractTokenizerTestCase
 
 
     /**
-     * Test that double quoted strings contain the complete string.
+     * Test that double-quoted strings contain the complete string.
      *
      * @param string $testMarker      The comment which prefaces the target token in the test file.
-     * @param string $expectedContent The expected content of the double quoted string.
+     * @param string $expectedContent The expected content of the double-quoted string.
      *
      * @dataProvider dataDoubleQuotedString
      * @covers       PHP_CodeSniffer\Tokenizers\PHP::tokenize

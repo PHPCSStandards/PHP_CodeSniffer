@@ -72,12 +72,12 @@ class DoubleQuoteUsageSniff implements Sniff
 
         $skipTo = ($lastStringToken + 1);
 
-        // Check if it's a double quoted string.
+        // Check if it's a double-quoted string.
         if ($workingString[0] !== '"' || substr($workingString, -1) !== '"') {
             return $skipTo;
         }
 
-        // The use of variables in double quoted strings is not allowed.
+        // The use of variables in double-quoted strings is not allowed.
         if ($tokens[$stackPtr]['code'] === T_DOUBLE_QUOTED_STRING) {
             $stringTokens = token_get_all('<?php '.$workingString);
             foreach ($stringTokens as $token) {

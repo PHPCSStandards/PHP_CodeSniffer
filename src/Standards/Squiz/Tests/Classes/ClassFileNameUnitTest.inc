@@ -8,7 +8,7 @@ trait ClassFileNameUnitTest {}
 enum ClassFileNameUnitTest {}
 enum ClassFileNameUnitTest: int {}
 
-// Invalid filename matching class name (case sensitive).
+// Invalid filename matching class name (case-sensitive).
 class classFileNameUnitTest {}
 class classfilenameunittest {}
 class CLASSFILENAMEUNITTEST {}

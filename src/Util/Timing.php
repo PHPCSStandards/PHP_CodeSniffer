@@ -41,7 +41,7 @@ class Timing
 
 
     /**
-     * Get the duration of the run up to "now".
+     * Get the duration of the run-up to "now".
      *
      * @return float Duration in microseconds.
      */
@@ -58,7 +58,7 @@ class Timing
 
 
     /**
-     * Convert a duration in microseconds to a human readable duration string.
+     * Convert a duration in microseconds to a human-readable duration string.
      *
      * @param float $duration Duration in microseconds.
      *

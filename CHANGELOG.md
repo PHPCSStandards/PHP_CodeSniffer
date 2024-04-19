@@ -386,7 +386,7 @@ _Nothing yet._
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Fixed bug [#3790][sq-3790] : PSR12/AnonClassDeclaration: prevent fixer creating parse error when there was no space before the open brace
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug [#3797][sq-3797] : Tokenizer/PHP: more context sensitive keyword fixes
+- Fixed bug [#3797][sq-3797] : Tokenizer/PHP: more context-sensitive keyword fixes
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Fixed bug [#3801][sq-3801] : File::getMethodParameters(): allow for readonly promoted properties without visibility
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
@@ -580,7 +580,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Fixed bug [#3575][sq-3575] :  Squiz.Scope.MethodScope misses visibility keyword on previous line
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug [#3604][sq-3604] :  Tokenizer/PHP: bug fix for double quoted strings using ${
+- Fixed bug [#3604][sq-3604] :  Tokenizer/PHP: bug fix for double-quoted strings using ${
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 
 [sq-3502]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3502
@@ -1028,7 +1028,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Petr Bugyík][@o5] for the patch
 - Fixed bug [#2977][sq-2977] : File::isReference() does not detect return by reference for closures
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug [#2994][sq-2994] : Generic.Formatting.DisallowMultipleStatements false positive for FOR loop with no body
+- Fixed bug [#2994][sq-2994] : Generic.Formatting.DisallowMultipleStatements false positive for FOR-loop without a body
 - Fixed bug [#3033][sq-3033] : Error generated during tokenizing of goto statements on PHP 8
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 
@@ -1597,7 +1597,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Squiz.WhiteSpace.SuperfluousWhitespace no longer throws errors for spacing between functions and properties in anon classes
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Zend.Files.ClosingTag no longer adds a semi-colon during fixing of a file that only contains a comment
+- Zend.Files.ClosingTag no longer adds a semicolon during fixing of a file that only contains a comment
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Zend.NamingConventions.ValidVariableName now supports variables inside anonymous classes correctly
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
@@ -1969,7 +1969,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - This was not consistent and so return types are now left using their original token types so they are not skipped by sniffs
         - The exception are array return types, which are tokenized as T_STRING instead of T_ARRAY, as they are for type hints
     - Sniffs referencing this token type will continue to run without error until version 4, but will not find any T_RETUTN_TYPE tokens
-    - To get the return type of a function, use the File::getMethodProperties() method, which now contains a "return_type" array index
+    - To get the return-type of a function, use the File::getMethodProperties() method, which now contains a "return_type" array index
         - This contains the return type of the function or closer, or a blank string if not specified
         - If the return type is nullable, the return type will contain the leading ?
             - A nullable_return_type array index in the return value will also be set to true
@@ -3450,7 +3450,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#828][sq-828] : Null classname is tokenized as T_NULL instead of T_STRING
 - Fixed bug [#829][sq-829] : Short array argument not fixed correctly when multiple function arguments are on the same line
 - Fixed bug [#831][sq-831] : PHPCS freezes in an infinite loop under Windows if no standard is passed
-- Fixed bug [#832][sq-832] : Tokenizer does not support context sensitive parsing
+- Fixed bug [#832][sq-832] : Tokenizer does not support context-sensitive parsing
     - Thanks to [Jaroslav Hanslík][@kukulich] for the patch
 - Fixed bug [#835][sq-835] : PEAR.Functions.FunctionCallSignature broken when closure uses return types
 - Fixed bug [#838][sq-838] : CSS indentation fixer changes color codes
@@ -4590,7 +4590,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Installed standards appear when using the -i arg, and can be referenced in rulesets using only their name
     - Set paths by running: phpcs --config-set installed_paths /path/one,/path/two,...
 - PSR2 ClassDeclarationSniff now allows a list of extended interfaces to be split across multiple lines
-- Squiz DoubleQuoteUsageSniff now allows \b in double quoted strings
+- Squiz DoubleQuoteUsageSniff now allows \b in double-quoted strings
 - Generic ForbiddenFunctionsSniff now ignores object creation
     - This is a further fix for bug [#20100][pear-20100] : incorrect Function mysql() has been deprecated report
 
@@ -5553,7 +5553,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Add a new token T_CLOSURE that replaces T_FUNCTION if the function keyword is anonymous
 - Many Squiz sniffs no longer report errors when checking closures; they are now ignored
 - Fixed some error messages in PEAR MultiLineConditionSniff that were not using placeholders for message data
-- AbstractVariableSniff now correctly finds variable names wrapped with curly braces inside double quoted strings
+- AbstractVariableSniff now correctly finds variable names wrapped with curly braces inside double-quoted strings
 - PEAR FunctionDeclarationSniff now ignores arrays in argument default values when checking multi-line declarations
 
 ### Fixed
@@ -6665,7 +6665,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ## 0.4.0 - 2007-02-19
 
 ### Changed
-- Standard name specified with --standard command line argument is no longer case sensitive
+- Standard name specified with --standard command line argument is no longer case-sensitive
 - Long error and warning messages are now wrapped to 80 characters in the full error report (thanks Endre Czirbesz)
 - Shortened a lot of error and warning messages so they don't take up so much room
 - Squiz FunctionCommentSniff now checks that param comments start with a capital letter and end with a full stop

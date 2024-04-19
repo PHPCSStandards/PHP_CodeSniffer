@@ -604,7 +604,7 @@ class PHP extends Tokenizer
             }
 
             /*
-                Tokenize context sensitive keyword as string when it should be string.
+                Tokenize context-sensitive keyword as string when it should be string.
             */
 
             if ($tokenIsArray === true
@@ -894,7 +894,7 @@ class PHP extends Tokenizer
             }
 
             /*
-                If this is a double quoted string, PHP will tokenize the whole
+                If this is a double-quoted string, PHP will tokenize the whole
                 thing which causes problems with the scope map when braces are
                 within the string. So we need to merge the tokens together to
                 provide a single string.
@@ -936,14 +936,14 @@ class PHP extends Tokenizer
                         && $subToken[0] === '"'
                         && empty($nestedVars) === true
                     ) {
-                        // We found the other end of the double quoted string.
+                        // We found the other end of the double-quoted string.
                         break;
                     }
                 }//end for
 
                 $stackPtr = $i;
 
-                // Convert each line within the double quoted string to a
+                // Convert each line within the double-quoted string to a
                 // new token, so it conforms with other multiple line tokens.
                 $tokenLines = explode($this->eolChar, $tokenContent);
                 $numLines   = count($tokenLines);

@@ -163,7 +163,7 @@ final class GetConditionTest extends AbstractMethodUnitTest
 
 
     /**
-     * Test passing a non conditional token.
+     * Test passing a non-conditional token.
      *
      * @return void
      */

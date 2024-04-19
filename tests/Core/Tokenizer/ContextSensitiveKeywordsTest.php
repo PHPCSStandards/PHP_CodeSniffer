@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests the conversion of PHP native context sensitive keywords to T_STRING.
+ * Tests the conversion of PHP native context-sensitive keywords to T_STRING.
  *
  * @author    Jaroslav Hanslík <kukulich@kukulich.cz>
  * @copyright 2020 Squiz Pty Ltd (ABN 77 084 670 600)
@@ -16,7 +16,7 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
 
 
     /**
-     * Test that context sensitive keyword is tokenized as string when it should be string.
+     * Test that context-sensitive keyword is tokenized as string when it should be string.
      *
      * @param string $testMarker The comment which prefaces the target token in the test file.
      *
@@ -141,7 +141,7 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
 
 
     /**
-     * Test that context sensitive keyword is tokenized as keyword when it should be keyword.
+     * Test that context-sensitive keyword is tokenized as keyword when it should be keyword.
      *
      * @param string $testMarker        The comment which prefaces the target token in the test file.
      * @param string $expectedTokenType The expected token type.

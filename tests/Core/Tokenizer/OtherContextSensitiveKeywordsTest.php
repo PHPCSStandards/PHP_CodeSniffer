@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests the conversion of PHPCS native context sensitive keyword tokens to T_STRING.
+ * Tests the conversion of PHPCS native context-sensitive keyword tokens to T_STRING.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2020 Squiz Pty Ltd (ABN 77 084 670 600)
@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 /**
- * Tests the conversion of PHPCS native context sensitive keyword tokens to T_STRING.
+ * Tests the conversion of PHPCS native context-sensitive keyword tokens to T_STRING.
  *
  * @covers PHP_CodeSniffer\Tokenizers\PHP::tokenize
  * @covers PHP_CodeSniffer\Tokenizers\PHP::standardiseToken
@@ -35,7 +35,7 @@ final class OtherContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
 
 
     /**
-     * Test that context sensitive keyword is tokenized as string when it should be string.
+     * Test that context-sensitive keyword is tokenized as string when it should be string.
      *
      * @param string $testMarker The comment which prefaces the target token in the test file.
      *
@@ -98,7 +98,7 @@ final class OtherContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
 
 
     /**
-     * Test that context sensitive keyword is tokenized as keyword when it should be keyword.
+     * Test that context-sensitive keyword is tokenized as keyword when it should be keyword.
      *
      * @param string $testMarker        The comment which prefaces the target token in the test file.
      * @param string $expectedTokenType The expected token type.

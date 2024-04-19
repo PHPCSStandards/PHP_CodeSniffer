@@ -1,6 +1,6 @@
 <?php
 /**
- * This should not be recognized as a file comment, but as a enum comment.
+ * This should not be recognized as a file comment, but as an enum comment.
  *
  * @package    Package
  * @subpackage Subpackage

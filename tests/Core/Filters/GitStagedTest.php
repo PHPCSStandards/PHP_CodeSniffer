@@ -238,7 +238,7 @@ final class GitStagedTest extends AbstractFilterTestCase
      *
      * {@internal Missing: test with a command which yields a `false` return value.
      *            JRF: I've not managed to find a command which does so, let alone one, which then
-     *            doesn't have side-effects of uncatchable output while running the tests.}
+     *            doesn't have side effects of uncatchable output while running the tests.}
      *
      * @return array<string, array<string, array<string>>>
      */

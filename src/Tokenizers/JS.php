@@ -995,7 +995,7 @@ class JS extends Tokenizer
 
         while (preg_match('|[a-zA-Z]|', $chars[($next + 1)]) !== 0) {
             // The token directly after the end of the regex can
-            // be modifiers like global and case insensitive
+            // be modifiers like global and case-insensitive
             // (.e.g, /pattern/gi).
             $next++;
         }

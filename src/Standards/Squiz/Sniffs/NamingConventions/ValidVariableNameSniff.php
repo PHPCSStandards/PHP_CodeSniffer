@@ -157,10 +157,10 @@ class ValidVariableNameSniff extends AbstractVariableSniff
 
 
     /**
-     * Processes the variable found within a double quoted string.
+     * Processes the variable found within a double-quoted string.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param int                         $stackPtr  The position of the double quoted
+     * @param int                         $stackPtr  The position of the double-quoted
      *                                               string.
      *
      * @return void

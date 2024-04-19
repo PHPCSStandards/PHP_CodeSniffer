@@ -170,7 +170,7 @@ class VariableCommentSniff extends AbstractVariableSniff
      * Not required for this sniff.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The PHP_CodeSniffer file where this token was found.
-     * @param int                         $stackPtr  The position where the double quoted
+     * @param int                         $stackPtr  The position where the double-quoted
      *                                               string was found.
      *
      * @return void
@@ -182,12 +182,12 @@ class VariableCommentSniff extends AbstractVariableSniff
 
 
     /**
-     * Called to process variables found in double quoted strings.
+     * Called to process variables found in double-quoted strings.
      *
      * Not required for this sniff.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The PHP_CodeSniffer file where this token was found.
-     * @param int                         $stackPtr  The position where the double quoted
+     * @param int                         $stackPtr  The position where the double-quoted
      *                                               string was found.
      *
      * @return void
