@@ -201,6 +201,12 @@ $closure = function &($param) use ($value) {};
 /* testBitwiseAndArrowFunctionInDefault */
 $fn = fn( $one = E_NOTICE & E_STRICT) => 1;
 
+/* testIntersectionIsNotReference */
+function intersect(Foo&Bar $param) {}
+
+/* testDNFTypeIsNotReference */
+$fn = fn((Foo&\Bar)|null /* testParamPassByReference */ &$param) => $param;
+
 /* testTokenizerIssue1284PHPCSlt280A */
 if ($foo) {}
 [&$a, /* testTokenizerIssue1284PHPCSlt280B */ &$b] = $c;
