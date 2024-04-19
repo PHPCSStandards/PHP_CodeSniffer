@@ -1,5 +1,4 @@
-Contributing
--------------
+# Contributing
 
 Thank you for your interest in contributing to PHP_CodeSniffer!
 
@@ -7,19 +6,19 @@ Thank you for your interest in contributing to PHP_CodeSniffer!
 ## Table of Contents
 
 * [Reporting Bugs](#reporting-bugs)
-   - [Reporting Security Issues](#reporting-security-issues)
-   - [Support/Questions About Using PHP_CodeSniffer](#supportquestions-about-using-php_codesniffer)
+    * [Reporting Security Issues](#reporting-security-issues)
+    * [Support/Questions About Using PHP_CodeSniffer](#supportquestions-about-using-php_codesniffer)
 * [Contributing Without Writing Code](#contributing-without-writing-code)
-   - [Bug Triage](#bug-triage)
-   - [Testing Open Pull Requests](#testing-open-pull-requests)
-   - [Writing sniff documentation](#writing-sniff-documentation)
-   - [Other tasks](#other-tasks)
+    * [Bug Triage](#bug-triage)
+    * [Testing Open Pull Requests](#testing-open-pull-requests)
+    * [Writing sniff documentation](#writing-sniff-documentation)
+    * [Other tasks](#other-tasks)
 * [Contributing With Code](#contributing-with-code)
-   - [Requesting/Submitting New Features](#requestingsubmitting-new-features)
-   - [Getting started](#getting-started)
-   - [While working on a patch](#while-working-on-a-patch)
-   - [Writing tests](#writing-tests)
-   - [Submitting your pull request](#submitting-your-pull-request)
+    * [Requesting/Submitting New Features](#requestingsubmitting-new-features)
+    * [Getting started](#getting-started)
+    * [While working on a patch](#while-working-on-a-patch)
+    * [Writing tests](#writing-tests)
+    * [Submitting your pull request](#submitting-your-pull-request)
 * [Licensing](#licensing)
 
 
@@ -71,7 +70,7 @@ This includes checking whether the bug is something which should be fixed in **_
 To find bugs which need triage, look for issues and PRs with the
 ["Status: triage"](https://github.com/PHPCSStandards/PHP_CodeSniffer/labels/Status%3A%20triage) label.
 
-#### Typical bug triage tasks:
+#### Typical bug triage tasks
 * Verify whether the bug is reproducible with the given information.
 * Ask for additional information if it is not.
 * If you find the issue is reported to the wrong repo, ask the reporter to report it to the correct external standard repo
@@ -95,7 +94,7 @@ To get access to a PHPCS version which includes the patch from a pull request, y
     The PHAR files can be found on the summary page of the test workflow run for the PR.
     If the workflow has not been run (yet), the PHAR artifact may not be available (yet).
 
-#### Typical test tasks:
+#### Typical test tasks
 * Verify that the patch solves the originally reported problem.
 * Verify that the tests added in the PR fail without the fix and pass with the fix.
 * For a fix for false negatives: verify that the correct error message(s) are thrown by the patched code.
@@ -168,10 +167,11 @@ This is an open invitation for interested parties to gather their thoughts about
 > Kind request: If you don't have something to add to the discussion, but do want to indicate a positive or negative opinion
 > on a topic, please add an emoji on the original post instead of leaving a comment.
 
-> :bulb: On a subset of these issues - the ones which impact maintainers or integrators -, a list of known interested parties
-> will be pinged (cc-ed) to gather their thoughts on the topic.
->
-> This list is public and
+On a subset of these issues - the ones which impact maintainers or integrators -, a list of known interested parties
+will be pinged (cc-ed) to gather their thoughts on the topic.
+
+> [!TIP]
+> This cc-list list is public and
 > [maintained in a markdown file](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/.github/community-cc-list.md).
 >
 > To add or remove yourself to/from this list, submit a PR to the repo updating the `community-cc-list.md` file.
@@ -256,9 +256,9 @@ For example, for the sniff named `Generic.NamingConventions.ConstructorName`:
 * The sniff lives in the `src/Standards/Generic/Sniffs/NamingConventions/` directory.
 * The tests live in the `src/Standards/Generic/Tests/NamingConventions/` directory.
 * The tests consist of two files:
-    - `src/Standards/Generic/Tests/NamingConventions/ConstructorNameUnitTest.inc` which is the test _case_ file containing
+    * `src/Standards/Generic/Tests/NamingConventions/ConstructorNameUnitTest.inc` which is the test _case_ file containing
        code for the sniff to analyse.
-    - `src/Standards/Generic/Tests/NamingConventions/ConstructorNameUnitTest.php` which is the test file, containing two methods,
+    * `src/Standards/Generic/Tests/NamingConventions/ConstructorNameUnitTest.php` which is the test file, containing two methods,
         `getErrorList()` and `getWarningList()`, which should each return an array with as the keys the line number
         in the test _case_ file and as the values the number of errors or warnings which are expected on each line.
         Only lines on which errors/warnings are expected need to be included in the lists. All other lines will automatically
@@ -339,7 +339,7 @@ While not strictly required, it is greatly appreciated if you comply with the fo
 
 * Prefix the commit short description with a hint as to what code is touched in the commit.
     Example: If you have a bug fix for the `Squiz.WhiteSpace.OperatorSpacing` sniff, it is a good idea to prefix
-    the short description with `Squiz/OperatorSpacing: `.
+    the short description with `Squiz/OperatorSpacing:`.
     Another example: if your PR addresses an issue with the Filter classes, prefix the short description
     with `Filters:` or `Filters/FilterName:`.
     Doing so will:

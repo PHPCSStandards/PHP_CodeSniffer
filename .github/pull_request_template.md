@@ -4,7 +4,7 @@
 Please target the `master` branch when submitting your pull request, unless your change **only** applies to PHPCS 4.x.
 -->
 
-## Description
+# Description
 <!--
 What do you want to achieve with this PR? Why did you write this code? What problem does this PR solve?
 Describe your changes in detail and, if relevant, explain which choices you have made and why.
@@ -39,7 +39,7 @@ Fixes #
 - [ ] I grant the project the right to include and distribute the code under the BSD-3-Clause license (and I have the right to grant these rights).
 - [ ] I have added tests to cover my changes.
 - [ ] I have verified that the code complies with the projects coding standards.
-- [ ] [Required for new sniffs] I have added XML documentation for the sniff.
+- [ ] \[Required for new sniffs\] I have added XML documentation for the sniff.
 
 <!--
 ============================================================================================

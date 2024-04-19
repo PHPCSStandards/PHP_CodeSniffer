@@ -137,142 +137,494 @@ final class OtherContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
     public static function dataKeywords()
     {
         return [
-            'self: param type declaration'            => [
+            'self: param type declaration'                                    => [
                 'testMarker'        => '/* testSelfIsKeyword */',
                 'expectedTokenType' => 'T_SELF',
             ],
-            'parent: param type declaration'          => [
+            'parent: param type declaration'                                  => [
                 'testMarker'        => '/* testParentIsKeyword */',
                 'expectedTokenType' => 'T_PARENT',
             ],
 
-            'parent: class instantiation'             => [
+            'parent: class instantiation'                                     => [
                 'testMarker'        => '/* testClassInstantiationParentIsKeyword */',
                 'expectedTokenType' => 'T_PARENT',
             ],
-            'self: class instantiation'               => [
+            'self: class instantiation'                                       => [
                 'testMarker'        => '/* testClassInstantiationSelfIsKeyword */',
                 'expectedTokenType' => 'T_SELF',
             ],
 
-            'false: param type declaration'           => [
+            'false: param type declaration'                                   => [
                 'testMarker'        => '/* testFalseIsKeywordAsParamType */',
                 'expectedTokenType' => 'T_FALSE',
             ],
-            'true: param type declaration'            => [
+            'true: param type declaration'                                    => [
                 'testMarker'        => '/* testTrueIsKeywordAsParamType */',
                 'expectedTokenType' => 'T_TRUE',
             ],
-            'null: param type declaration'            => [
+            'null: param type declaration'                                    => [
                 'testMarker'        => '/* testNullIsKeywordAsParamType */',
                 'expectedTokenType' => 'T_NULL',
             ],
-            'false: return type declaration in union' => [
+            'false: return type declaration in union'                         => [
                 'testMarker'        => '/* testFalseIsKeywordAsReturnType */',
                 'expectedTokenType' => 'T_FALSE',
             ],
-            'true: return type declaration in union'  => [
+            'true: return type declaration in union'                          => [
                 'testMarker'        => '/* testTrueIsKeywordAsReturnType */',
                 'expectedTokenType' => 'T_TRUE',
             ],
-            'null: return type declaration in union'  => [
+            'null: return type declaration in union'                          => [
                 'testMarker'        => '/* testNullIsKeywordAsReturnType */',
                 'expectedTokenType' => 'T_NULL',
             ],
-            'false: in comparison'                    => [
+            'false: in comparison'                                            => [
                 'testMarker'        => '/* testFalseIsKeywordInComparison */',
                 'expectedTokenType' => 'T_FALSE',
             ],
-            'true: in comparison'                     => [
+            'true: in comparison'                                             => [
                 'testMarker'        => '/* testTrueIsKeywordInComparison */',
                 'expectedTokenType' => 'T_TRUE',
             ],
-            'null: in comparison'                     => [
+            'null: in comparison'                                             => [
                 'testMarker'        => '/* testNullIsKeywordInComparison */',
                 'expectedTokenType' => 'T_NULL',
             ],
 
-            'false: type in OO constant declaration'  => [
+            'false: type in OO constant declaration'                          => [
                 'testMarker'        => '/* testFalseIsKeywordAsConstType */',
                 'expectedTokenType' => 'T_FALSE',
             ],
-            'true: type in OO constant declaration'   => [
+            'true: type in OO constant declaration'                           => [
                 'testMarker'        => '/* testTrueIsKeywordAsConstType */',
                 'expectedTokenType' => 'T_TRUE',
             ],
-            'null: type in OO constant declaration'   => [
+            'null: type in OO constant declaration'                           => [
                 'testMarker'        => '/* testNullIsKeywordAsConstType */',
                 'expectedTokenType' => 'T_NULL',
             ],
-            'self: type in OO constant declaration'   => [
+            'self: type in OO constant declaration'                           => [
                 'testMarker'        => '/* testSelfIsKeywordAsConstType */',
                 'expectedTokenType' => 'T_SELF',
             ],
-            'parent: type in OO constant declaration' => [
+            'parent: type in OO constant declaration'                         => [
                 'testMarker'        => '/* testParentIsKeywordAsConstType */',
                 'expectedTokenType' => 'T_PARENT',
             ],
 
-            'false: value in constant declaration'    => [
+            'false: value in constant declaration'                            => [
                 'testMarker'        => '/* testFalseIsKeywordAsConstDefault */',
                 'expectedTokenType' => 'T_FALSE',
             ],
-            'true: value in constant declaration'     => [
+            'true: value in constant declaration'                             => [
                 'testMarker'        => '/* testTrueIsKeywordAsConstDefault */',
                 'expectedTokenType' => 'T_TRUE',
             ],
-            'null: value in constant declaration'     => [
+            'null: value in constant declaration'                             => [
                 'testMarker'        => '/* testNullIsKeywordAsConstDefault */',
                 'expectedTokenType' => 'T_NULL',
             ],
-            'self: value in constant declaration'     => [
+            'self: value in constant declaration'                             => [
                 'testMarker'        => '/* testSelfIsKeywordAsConstDefault */',
                 'expectedTokenType' => 'T_SELF',
             ],
-            'parent: value in constant declaration'   => [
+            'parent: value in constant declaration'                           => [
                 'testMarker'        => '/* testParentIsKeywordAsConstDefault */',
                 'expectedTokenType' => 'T_PARENT',
             ],
 
-            'false: type in property declaration'     => [
+            'false: type in property declaration'                             => [
                 'testMarker'        => '/* testFalseIsKeywordAsPropertyType */',
                 'expectedTokenType' => 'T_FALSE',
             ],
-            'true: type in property declaration'      => [
+            'true: type in property declaration'                              => [
                 'testMarker'        => '/* testTrueIsKeywordAsPropertyType */',
                 'expectedTokenType' => 'T_TRUE',
             ],
-            'null: type in property declaration'      => [
+            'null: type in property declaration'                              => [
                 'testMarker'        => '/* testNullIsKeywordAsPropertyType */',
                 'expectedTokenType' => 'T_NULL',
             ],
-            'self: type in property declaration'      => [
+            'self: type in property declaration'                              => [
                 'testMarker'        => '/* testSelfIsKeywordAsPropertyType */',
                 'expectedTokenType' => 'T_SELF',
             ],
-            'parent: type in property declaration'    => [
+            'parent: type in property declaration'                            => [
                 'testMarker'        => '/* testParentIsKeywordAsPropertyType */',
                 'expectedTokenType' => 'T_PARENT',
             ],
 
-            'false: value in property declaration'    => [
+            'false: value in property declaration'                            => [
                 'testMarker'        => '/* testFalseIsKeywordAsPropertyDefault */',
                 'expectedTokenType' => 'T_FALSE',
             ],
-            'true: value in property declaration'     => [
+            'true: value in property declaration'                             => [
                 'testMarker'        => '/* testTrueIsKeywordAsPropertyDefault */',
                 'expectedTokenType' => 'T_TRUE',
             ],
-            'null: value in property declaration'     => [
+            'null: value in property declaration'                             => [
                 'testMarker'        => '/* testNullIsKeywordAsPropertyDefault */',
                 'expectedTokenType' => 'T_NULL',
             ],
-            'self: value in property declaration'     => [
+            'self: value in property declaration'                             => [
                 'testMarker'        => '/* testSelfIsKeywordAsPropertyDefault */',
                 'expectedTokenType' => 'T_SELF',
             ],
-            'parent: value in property declaration'   => [
+            'parent: value in property declaration'                           => [
                 'testMarker'        => '/* testParentIsKeywordAsPropertyDefault */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'false: first in union type for OO constant declaration'          => [
+                'testMarker'        => '/* testFalseIsKeywordAsConstUnionTypeFirst */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: first in union type for OO constant declaration'           => [
+                'testMarker'        => '/* testTrueIsKeywordAsConstUnionTypeFirst */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: first in union type for OO constant declaration'           => [
+                'testMarker'        => '/* testNullIsKeywordAsConstUnionTypeFirst */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: first in union type for OO constant declaration'           => [
+                'testMarker'        => '/* testSelfIsKeywordAsConstUnionTypeFirst */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: first in union type for OO constant declaration'         => [
+                'testMarker'        => '/* testParentIsKeywordAsConstUnionTypeFirst */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'false: middle in union type for OO constant declaration'         => [
+                'testMarker'        => '/* testFalseIsKeywordAsConstUnionTypeMiddle */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: middle in union type for OO constant declaration'          => [
+                'testMarker'        => '/* testTrueIsKeywordAsConstUnionTypeMiddle */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: middle in union type for OO constant declaration'          => [
+                'testMarker'        => '/* testNullIsKeywordAsConstUnionTypeMiddle */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: middle in union type for OO constant declaration'          => [
+                'testMarker'        => '/* testSelfIsKeywordAsConstUnionTypeMiddle */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: middle in union type for OO constant declaration'        => [
+                'testMarker'        => '/* testParentIsKeywordAsConstUnionTypeMiddle */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'false: last in union type for OO constant declaration'           => [
+                'testMarker'        => '/* testFalseIsKeywordAsConstUnionTypeLast */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: last in union type for OO constant declaration'            => [
+                'testMarker'        => '/* testTrueIsKeywordAsConstUnionTypeLast */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: last in union type for OO constant declaration'            => [
+                'testMarker'        => '/* testNullIsKeywordAsConstUnionTypeLast */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: last in union type for OO constant declaration'            => [
+                'testMarker'        => '/* testSelfIsKeywordAsConstUnionTypeLast */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: last in union type for OO constant declaration'          => [
+                'testMarker'        => '/* testParentIsKeywordAsConstUnionTypeLast */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'false: first in union type for property declaration'             => [
+                'testMarker'        => '/* testFalseIsKeywordAsPropertyUnionTypeFirst */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: first in union type for property declaration'              => [
+                'testMarker'        => '/* testTrueIsKeywordAsPropertyUnionTypeFirst */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: first in union type for property declaration'              => [
+                'testMarker'        => '/* testNullIsKeywordAsPropertyUnionTypeFirst */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: first in union type for property declaration'              => [
+                'testMarker'        => '/* testSelfIsKeywordAsPropertyUnionTypeFirst */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: first in union type for property declaration'            => [
+                'testMarker'        => '/* testParentIsKeywordAsPropertyUnionTypeFirst */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'false: middle in union type for property declaration'            => [
+                'testMarker'        => '/* testFalseIsKeywordAsPropertyUnionTypeMiddle */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: middle in union type for property declaration'             => [
+                'testMarker'        => '/* testTrueIsKeywordAsPropertyUnionTypeMiddle */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: middle in union type for property declaration'             => [
+                'testMarker'        => '/* testNullIsKeywordAsPropertyUnionTypeMiddle */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: middle in union type for property declaration'             => [
+                'testMarker'        => '/* testSelfIsKeywordAsPropertyUnionTypeMiddle */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: middle in union type for property declaration'           => [
+                'testMarker'        => '/* testParentIsKeywordAsPropertyUnionTypeMiddle */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'false: last in union type for property declaration'              => [
+                'testMarker'        => '/* testFalseIsKeywordAsPropertyUnionTypeLast */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: last in union type for property declaration'               => [
+                'testMarker'        => '/* testTrueIsKeywordAsPropertyUnionTypeLast */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: last in union type for property declaration'               => [
+                'testMarker'        => '/* testNullIsKeywordAsPropertyUnionTypeLast */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: last in union type for property declaration'               => [
+                'testMarker'        => '/* testSelfIsKeywordAsPropertyUnionTypeLast */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: last in union type for property declaration'             => [
+                'testMarker'        => '/* testParentIsKeywordAsPropertyUnionTypeLast */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'false: first in union type for param declaration'                => [
+                'testMarker'        => '/* testFalseIsKeywordAsParamUnionTypeFirst */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: first in union type for param declaration'                 => [
+                'testMarker'        => '/* testTrueIsKeywordAsParamUnionTypeFirst */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: first in union type for param declaration'                 => [
+                'testMarker'        => '/* testNullIsKeywordAsParamUnionTypeFirst */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: first in union type for param declaration'                 => [
+                'testMarker'        => '/* testSelfIsKeywordAsParamUnionTypeFirst */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: first in union type for param declaration'               => [
+                'testMarker'        => '/* testParentIsKeywordAsParamUnionTypeFirst */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'false: middle in union type for param declaration'               => [
+                'testMarker'        => '/* testFalseIsKeywordAsParamUnionTypeMiddle */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: middle in union type for param declaration'                => [
+                'testMarker'        => '/* testTrueIsKeywordAsParamUnionTypeMiddle */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: middle in union type for param declaration'                => [
+                'testMarker'        => '/* testNullIsKeywordAsParamUnionTypeMiddle */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: middle in union type for param declaration'                => [
+                'testMarker'        => '/* testSelfIsKeywordAsParamUnionTypeMiddle */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: middle in union type for param declaration'              => [
+                'testMarker'        => '/* testParentIsKeywordAsParamUnionTypeMiddle */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'false: last in union type for param declaration'                 => [
+                'testMarker'        => '/* testFalseIsKeywordAsParamUnionTypeLast */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: last in union type for param declaration'                  => [
+                'testMarker'        => '/* testTrueIsKeywordAsParamUnionTypeLast */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: last in union type for param declaration'                  => [
+                'testMarker'        => '/* testNullIsKeywordAsParamUnionTypeLast */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: last in union type for param declaration'                  => [
+                'testMarker'        => '/* testSelfIsKeywordAsParamUnionTypeLast */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: last in union type for param declaration'                => [
+                'testMarker'        => '/* testParentIsKeywordAsParamUnionTypeLast */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'false: first in union type for return declaration'               => [
+                'testMarker'        => '/* testFalseIsKeywordAsReturnUnionTypeFirst */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: first in union type for return declaration'                => [
+                'testMarker'        => '/* testTrueIsKeywordAsReturnUnionTypeFirst */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: first in union type for return declaration'                => [
+                'testMarker'        => '/* testNullIsKeywordAsReturnUnionTypeFirst */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: first in union type for return declaration'                => [
+                'testMarker'        => '/* testSelfIsKeywordAsReturnUnionTypeFirst */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: first in union type for return declaration'              => [
+                'testMarker'        => '/* testParentIsKeywordAsReturnUnionTypeFirst */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'false: middle in union type for return declaration'              => [
+                'testMarker'        => '/* testFalseIsKeywordAsReturnUnionTypeMiddle */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: middle in union type for return declaration'               => [
+                'testMarker'        => '/* testTrueIsKeywordAsReturnUnionTypeMiddle */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: middle in union type for return declaration'               => [
+                'testMarker'        => '/* testNullIsKeywordAsReturnUnionTypeMiddle */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: middle in union type for return declaration'               => [
+                'testMarker'        => '/* testSelfIsKeywordAsReturnUnionTypeMiddle */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: middle in union type for return declaration'             => [
+                'testMarker'        => '/* testParentIsKeywordAsReturnUnionTypeMiddle */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'false: last in union type for return declaration'                => [
+                'testMarker'        => '/* testFalseIsKeywordAsReturnUnionTypeLast */',
+                'expectedTokenType' => 'T_FALSE',
+            ],
+            'true: last in union type for return declaration'                 => [
+                'testMarker'        => '/* testTrueIsKeywordAsReturnUnionTypeLast */',
+                'expectedTokenType' => 'T_TRUE',
+            ],
+            'null: last in union type for return declaration'                 => [
+                'testMarker'        => '/* testNullIsKeywordAsReturnUnionTypeLast */',
+                'expectedTokenType' => 'T_NULL',
+            ],
+            'self: last in union type for return declaration'                 => [
+                'testMarker'        => '/* testSelfIsKeywordAsReturnUnionTypeLast */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: last in union type for return declaration'               => [
+                'testMarker'        => '/* testParentIsKeywordAsReturnUnionTypeLast */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'self: first in intersection type for OO constant declaration'    => [
+                'testMarker'        => '/* testSelfIsKeywordAsConstIntersectionTypeFirst */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: first in intersection type for OO constant declaration'  => [
+                'testMarker'        => '/* testParentIsKeywordAsConstIntersectionTypeFirst */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+            'self: middle in intersection type for OO constant declaration'   => [
+                'testMarker'        => '/* testSelfIsKeywordAsConstIntersectionTypeMiddle */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: middle in intersection type for OO constant declaration' => [
+                'testMarker'        => '/* testParentIsKeywordAsConstIntersectionTypeMiddle */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+            'self: last in intersection type for OO constant declaration'     => [
+                'testMarker'        => '/* testSelfIsKeywordAsConstIntersectionTypeLast */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: last in intersection type for OO constant declaration'   => [
+                'testMarker'        => '/* testParentIsKeywordAsConstIntersectionTypeLast */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'self: first in intersection type for property declaration'       => [
+                'testMarker'        => '/* testSelfIsKeywordAsPropertyIntersectionTypeFirst */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: first in intersection type for property declaration'     => [
+                'testMarker'        => '/* testParentIsKeywordAsPropertyIntersectionTypeFirst */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+            'self: middle in intersection type for property declaration'      => [
+                'testMarker'        => '/* testSelfIsKeywordAsPropertyIntersectionTypeMiddle */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: middle in intersection type for property declaration'    => [
+                'testMarker'        => '/* testParentIsKeywordAsPropertyIntersectionTypeMiddle */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+            'self: last in intersection type for property declaration'        => [
+                'testMarker'        => '/* testSelfIsKeywordAsPropertyIntersectionTypeLast */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: last in intersection type for property declaration'      => [
+                'testMarker'        => '/* testParentIsKeywordAsPropertyIntersectionTypeLast */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'self: first in intersection type for param declaration'          => [
+                'testMarker'        => '/* testSelfIsKeywordAsParamIntersectionTypeFirst */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: first in intersection type for param declaration'        => [
+                'testMarker'        => '/* testParentIsKeywordAsParamIntersectionTypeFirst */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+            'self: middle in intersection type for param declaration'         => [
+                'testMarker'        => '/* testSelfIsKeywordAsParamIntersectionTypeMiddle */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: middle in intersection type for param declaration'       => [
+                'testMarker'        => '/* testParentIsKeywordAsParamIntersectionTypeMiddle */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+            'self: last in intersection type for param declaration'           => [
+                'testMarker'        => '/* testSelfIsKeywordAsParamIntersectionTypeLast */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: last in intersection type for param declaration'         => [
+                'testMarker'        => '/* testParentIsKeywordAsParamIntersectionTypeLast */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+
+            'self: first in intersection type for return declaration'         => [
+                'testMarker'        => '/* testSelfIsKeywordAsReturnIntersectionTypeFirst */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: first in intersection type for return declaration'       => [
+                'testMarker'        => '/* testParentIsKeywordAsReturnIntersectionTypeFirst */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+            'self: middle in intersection type for return declaration'        => [
+                'testMarker'        => '/* testSelfIsKeywordAsReturnIntersectionTypeMiddle */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: middle in intersection type for return declaration'      => [
+                'testMarker'        => '/* testParentIsKeywordAsReturnIntersectionTypeMiddle */',
+                'expectedTokenType' => 'T_PARENT',
+            ],
+            'self: last in intersection type for return declaration'          => [
+                'testMarker'        => '/* testSelfIsKeywordAsReturnIntersectionTypeLast */',
+                'expectedTokenType' => 'T_SELF',
+            ],
+            'parent: last in intersection type for return declaration'        => [
+                'testMarker'        => '/* testParentIsKeywordAsReturnIntersectionTypeLast */',
                 'expectedTokenType' => 'T_PARENT',
             ],
         ];
