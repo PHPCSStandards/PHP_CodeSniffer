@@ -68,7 +68,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
         {
             // Include the composer autoloader if there is one, but re-register it
             // so this autoloader runs before the composer one as we need to include
-            // all files so we can figure out what the class/interface/trait name is.
+            // all files, so we can figure out what the class/interface/trait name is.
             if (self::$composerAutoloader === null) {
                 // Make sure we don't try to load any of Composer's classes
                 // while the autoloader is being setup.

@@ -3351,7 +3351,7 @@ class PHP extends Tokenizer
                 unset($this->tokens[$scopeCloser]['scope_closer']);
             } else {
                 // We were using a shared closer. All tokens that were
-                // sharing this closer with us, except for the scope condition
+                // sharing this closer with us, except for the scope condition,
                 // and it's opener, need to now point to the new closer.
                 $condition = $this->tokens[$scopeCloser]['scope_condition'];
                 $start     = ($this->tokens[$condition]['scope_opener'] + 1);

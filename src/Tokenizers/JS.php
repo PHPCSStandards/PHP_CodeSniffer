@@ -498,7 +498,7 @@ class JS extends Tokenizer
                         }
 
                         if (isset($this->tokenValues[strtolower($charBuffer)]) === true) {
-                            // We've found something larger that matches
+                            // We've found something larger that matches,
                             // so we can ignore this char. Except for 1 very specific
                             // case where a comment like /**/ needs to tokenize as
                             // T_COMMENT and not T_DOC_COMMENT.
@@ -589,7 +589,7 @@ class JS extends Tokenizer
                     }
 
                     if (isset($this->tokenValues[strtolower($charBuffer)]) === true) {
-                        // We've found something larger that matches
+                        // We've found something larger that matches,
                         // so we can ignore this char.
                         if (PHP_CODESNIFFER_VERBOSITY > 1) {
                             $type = $this->tokenValues[strtolower($charBuffer)];
@@ -737,7 +737,7 @@ class JS extends Tokenizer
 
         /*
             Now that we have done some basic tokenizing, we need to
-            modify the tokens to join some together and split some apart
+            modify the tokens to join some together and split some apart,
             so they match what the PHP tokenizer does.
         */
 
@@ -765,7 +765,7 @@ class JS extends Tokenizer
                         && strpos($tokenContent, $this->eolChar) !== false
                     ) {
                         // A null end token means the comment ends at the end of
-                        // the line so we look for newlines and split the token.
+                        // the line, so we look for newlines and split the token.
                         $tokens[$stackPtr]['content'] = substr(
                             $tokenContent,
                             (strpos($tokenContent, $this->eolChar) + strlen($this->eolChar))

@@ -608,7 +608,7 @@ class File
 
         $this->numTokens = count($this->tokens);
 
-        // Check for mixed line endings as these can cause tokenizer errors and we
+        // Check for mixed line endings as these can cause tokenizer errors, and we
         // should let the user know that the results they get may be incorrect.
         // This is done by removing all backslashes, removing the newline char we
         // detected, then converting newlines chars into text. If any backslashes
@@ -1861,7 +1861,7 @@ class File
                 && ($this->tokens[$ptr]['code'] === T_INTERFACE
                 || $this->tokens[$ptr]['code'] === T_ENUM)
             ) {
-                // T_VARIABLEs in interfaces/enums can actually be method arguments
+                // T_VARIABLEs in interfaces/enums can actually be method arguments,
                 // but they won't be seen as being inside the method because there
                 // are no scope openers and closers for abstract methods. If it is in
                 // parentheses, we can be pretty sure it is a method argument.
@@ -2479,7 +2479,7 @@ class File
         // If we are starting at a token that ends a scope block, skip to
         // the start and continue from there.
         // If we are starting at a token that ends a statement, skip this
-        // token so we find the true start of the statement.
+        // token, so we find the true start of the statement.
         while (isset($endTokens[$this->tokens[$start]['code']]) === true
             || (isset($this->tokens[$start]['scope_condition']) === true
             && $start === $this->tokens[$start]['scope_closer'])
@@ -2582,7 +2582,7 @@ class File
                     $prevComma = $this->findNext(T_COMMA, ($prevMatchArrow + 1), $start);
                     if ($prevComma === false) {
                         // No comma between this token and the last match arrow,
-                        // so this token exists after the arrow and we can continue
+                        // so this token exists after the arrow, and we can continue
                         // checking as normal.
                         $beforeArrow = false;
                     }

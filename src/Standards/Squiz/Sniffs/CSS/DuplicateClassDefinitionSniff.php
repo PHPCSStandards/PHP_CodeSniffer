@@ -80,7 +80,7 @@ class DuplicateClassDefinitionSniff implements Sniff
                 $scope = 'main';
             }
 
-            // Create a sorted name for the class so we can compare classes
+            // Create a sorted name for the class, so we can compare classes
             // even when the individual names are all over the place.
             $name = '';
             for ($i = ($prev + 1); $i < $next; $i++) {

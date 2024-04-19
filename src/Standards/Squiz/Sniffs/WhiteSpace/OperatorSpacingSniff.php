@@ -257,7 +257,7 @@ class OperatorSpacingSniff implements Sniff
 
                 if (isset(Tokens::$commentTokens[$tokens[$prevNonWhitespace]['code']]) === true) {
                     // Throw a non-fixable error if the token on the previous line is a comment token,
-                    // as in that case it's not for the sniff to decide where the comment should be moved to
+                    // as in that case it's not for the sniff to decide where the comment should be moved to,
                     // and it would get us into unfixable situations as the new line char is included
                     // in the contents of the comment token.
                     $phpcsFile->addError($error, $stackPtr, 'SpacingBefore', $data);

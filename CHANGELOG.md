@@ -306,7 +306,7 @@ _Nothing yet._
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - PSR2.Classes.PropertyDeclaration now enforces that the readonly modifier comes after the visibility modifier
     - PSR2 and PSR12 do not have documented rules for this as they pre-date the readonly modifier
-    - PSR-PER has been used to confirm the order of this keyword so it can be applied to PSR2 and PSR12 correctly
+    - PSR-PER has been used to confirm the order of this keyword, so it can be applied to PSR2 and PSR12 correctly
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - PEAR.Commenting.FunctionComment + Squiz.Commenting.FunctionComment: the SpacingAfter error can now be auto-fixed
     - Thanks to [Dan Wallis][@fredden] for the patch
@@ -1538,7 +1538,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - PHPCS will now refuse to run if any of the required PHP extensions are not loaded
     - Previously, PHPCS only relied on requirements being checked by PEAR and Composer
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Ruleset XML parsing errors are now displayed in a readable format so they are easier to correct
+- Ruleset XML parsing errors are now displayed in a readable format, so they are easier to correct
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - The PSR2 standard no longer throws duplicate errors for spacing around FOR loop parentheses
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
@@ -1966,7 +1966,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - The T_RETURN_TYPE token has been deprecated and will be removed in version 4
     - The token was used to ensure array/self/parent/callable return types were tokenized consistently
     - For namespaced return types, only the last part of the string (the class name) was tokenized as T_RETURN_TYPE
-    - This was not consistent and so return types are now left using their original token types so they are not skipped by sniffs
+    - This was not consistent and so return types are now left using their original token types, so they are not skipped by sniffs
         - The exception are array return types, which are tokenized as T_STRING instead of T_ARRAY, as they are for type hints
     - Sniffs referencing this token type will continue to run without error until version 4, but will not find any T_RETUTN_TYPE tokens
     - To get the return-type of a function, use the File::getMethodProperties() method, which now contains a "return_type" array index
@@ -2104,7 +2104,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - It could previously be confused by comparisons used as function arguments
 - Squiz.PHP.CommentedOutCode now ignores simple @-style annotation comments so they are not flagged as commented out code
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Squiz.PHP.CommentedOutCode now ignores a greater number of short comments so they are not flagged as commented out code
+- Squiz.PHP.CommentedOutCode now ignores a greater number of short comments, so they are not flagged as commented out code
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Squiz.PHP.DisallowComparisonAssignment no longer errors when using the null coalescing operator
     - Given this operator is used almost exclusively to assign values, it didn't make sense to generate an error
@@ -2592,7 +2592,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
         - e.g., you run PHPCS over libraries that you did not write
         - e.g., you provide a web service that runs PHPCS over user-uploaded files or 3rd-party repositories
         - e.g., you allow external tool paths to be set by user-defined values
-    - If you are unable to upgrade but you check 3rd-party code, ensure you are not using the Git modified filter
+    - If you are unable to upgrade, but you check 3rd-party code, ensure you are not using the Git modified filter
     - This advisory does not affect PHP_CodeSniffer version 2.
     - Thanks to [Sergei Morozov][@morozov] for the report and patch
 
@@ -2697,7 +2697,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
         - e.g., you run PHPCS over libraries that you did not write
         - e.g., you provide a web service that runs PHPCS over user-uploaded files or 3rd-party repositories
         - e.g., you allow external tool paths to be set by user-defined values
-    - If you are unable to upgrade but you check 3rd-party code, ensure you are not using the following features:
+    - If you are unable to upgrade, but you check 3rd-party code, ensure you are not using the following features:
         - The diff report
         - The notify-send report
         - The Generic.PHP.Syntax sniff
@@ -2735,7 +2735,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Custom sniffs that support JS and listen for T_FUNCTION tokens can't assume the token represents the word "function"
     - Check the contents of the token first, or use $phpcsFile->getDeclarationName($stackPtr) if you just want its name
     - There is no change for custom sniffs that only check PHP code
-- PHPCBF exit codes have been changed so they are now more useful (request [#1270][sq-1270])
+- PHPCBF exit codes have been changed, so they are now more useful (request [#1270][sq-1270])
     - Exit code 0 is now used to indicate that no fixable errors were found, and so nothing was fixed
     - Exit code 1 is now used to indicate that all fixable errors were fixed correctly
     - Exit code 2 is now used to indicate that PHPCBF failed to fix some of the fixable errors it found
@@ -2907,7 +2907,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Stops conflicts between this sniff and comment spacing sniffs
 - Squiz.WhiteSpace.OperatorSpacing no longer checks the equal sign in declare statements
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Added missing error codes for a couple of sniffs so they can now be customised as normal
+- Added missing error codes for a couple of sniffs, so they can now be customised as normal
 
 ### Fixed
 - Fixed bug [#1266][sq-1266] : PEAR.WhiteSpace.ScopeClosingBrace can throw an error while fixing mixed PHP/HTML
@@ -2948,7 +2948,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
           - e.g., you run PHPCS over libraries that you did not write
           - e.g., you provide a web service that runs PHPCS over user-uploaded files or 3rd-party repositories
           - e.g., you allow external tool paths to be set by user-defined values
-    - If you are unable to upgrade but you check 3rd-party code, ensure you are not using the following features:
+    - If you are unable to upgrade, but you check 3rd-party code, ensure you are not using the following features:
           - The diff report
           - The notify-send report
           - The Generic.PHP.Syntax sniff
@@ -3235,7 +3235,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Added a new --exclude CLI argument to exclude a list of sniffs from checking and fixing (request [#904][sq-904])
     - Accepts the same sniff codes as the --sniffs command line argument, but provides the opposite functionality
 - Added a new -q command line argument to disable progress and verbose information from being printed (request [#969][sq-969])
-    - Useful if a coding standard hard-codes progress or verbose output but you want PHPCS to be quiet
+    - Useful if a coding standard hard-codes progress or verbose output, but you want PHPCS to be quiet
     - Use the command "phpcs --config-set quiet true" to turn quiet mode on by default
 - Generic LineLength sniff no longer errors for comments that cannot be broken out onto a new line (request [#766][sq-766])
     - A typical case is a comment that contains a very long URL
@@ -4161,7 +4161,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 
 ### Changed
 - Minified JS and CSS files are now detected and skipped (fixes bug [#252][sq-252] and bug [#19899][pear-19899])
-    - A warning will be added to the file so it can be found in the report and ignored in the future
+    - A warning will be added to the file, so it can be found in the report and ignored in the future
 - Fixed incorrect length of JS object operator tokens
 - PHP tokenizer no longer converts class/function names to special tokens types
     - Class/function names such as parent and true would become special tokens such as T_PARENT and T_TRUE
@@ -4393,7 +4393,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Generic DisallowTabIndent and DisallowSpaceIndent sniffs no longer error when detecting mixed indent types
     - Only the first type of indent found on a line (space or indent) is considered
 - Lots of little performance improvements that can add up to a substantial saving over large code bases
-    - Added a "length" array index to tokens so you don't need to call strlen() of them, or deal with encoding
+    - Added a "length" array index to tokens, so you don't need to call strlen() of them, or deal with encoding
     - Can now use isset() to find tokens inside the PHP_CodeSniffer_Tokens static vars instead of in_array()
 - Custom reports can now specify a $recordErrors member var; this previously only worked for built-in reports
     - When set to FALSE, error messages will not be recorded and only totals will be returned
@@ -4495,7 +4495,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - If returned, the sniff will not be executed again until the passed token is reached in the file
     - Useful if you are looking for tokens like T_OPEN_TAG but only want to process the first one
 - Removed the comment parser classes and replaced it with a simple comment tokenizer
-    - T_DOC_COMMENT tokens are now tokenized into T_DOC_COMMENT_* tokens so they can be used more easily
+    - T_DOC_COMMENT tokens are now tokenized into T_DOC_COMMENT_* tokens, so they can be used more easily
     - This change requires a significant rewrite of sniffs that use the comment parser
     - This change requires minor changes to sniffs that listen for T_DOC_COMMENT tokens directly
 - Added Generic DocCommentSniff to check generic doc block formatting
@@ -4510,7 +4510,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - NoSpaceBeforeTag becomes NoSpaceAfterStar
     - SpaceBeforeTag becomes SpaceAfterStar
     - SpaceBeforeAsterisk becomes SpaceBeforeStar
-- Generic MultipleStatementAlignment now aligns assignments within a block so they fit within their max padding setting
+- Generic MultipleStatementAlignment now aligns assignments within a block, so they fit within their max padding setting
     - The sniff previously requested the padding as 1 space if max padding was exceeded
     - It now aligns the assignment with surrounding assignments if it can
     - Removed property ignoreMultiline as multi-line assignments are now handled correctly and should not be ignored
@@ -4955,7 +4955,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Override the "spacing" setting in a ruleset.xml file to change
 - Squiz LowercasePHPFunctionSniff no longer throws errors for the limited set of PHP keywords it was checking
     - Add a rule for Generic.PHP.LowerCaseKeyword to your ruleset to replicate this functionality
-- Added support for the PHP 5.4 T_CALLABLE token so it can be used in lower PHP versions
+- Added support for the PHP 5.4 T_CALLABLE token, so it can be used in lower PHP versions
 - Generic EndFileNoNewlineSniff now supports checking of CSS and JS files
 - PSR2 SwitchDeclarationSniff now has a setting to specify how many spaces code should be indented
     - Default remains at 4; override the indent setting in a ruleset.xml file to change
@@ -4994,7 +4994,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Override the "spacing" setting in a ruleset.xml file to change
 - Squiz LowercasePHPFunctionSniff no longer throws errors for the limited set of PHP keywords it was checking
     - Add a rule for Generic.PHP.LowerCaseKeyword to your ruleset to replicate this functionality
-- Added support for the PHP 5.4 T_CALLABLE token so it can be used in lower PHP versions
+- Added support for the PHP 5.4 T_CALLABLE token, so it can be used in lower PHP versions
 - Generic EndFileNoNewlineSniff now supports checking of CSS and JS files
 - PSR2 SwitchDeclarationSniff now has a setting to specify how many spaces code should be indented
     - Default remains at 4; override the indent setting in a ruleset.xml file to change
@@ -6113,10 +6113,10 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - JavaScript tokenizer now identifies object definitions as a new token type and matches curly braces for them
 - JavaScript tokenizer now identifies DIV_EQUAL and MUL_EQUAL tokens
 - Improved regular expression detection in the JavaScript tokenizer
-- Improve AbstractPatternSniff support so it can listen for any token type, not just weighted tokens
+- Improve AbstractPatternSniff support, so it can listen for any token type, not just weighted tokens
 
 ### Fixed
-- Fixed Squiz DoubleQuoteUsageSniff so it works correctly with short_open_tag=Off
+- Fixed Squiz DoubleQuoteUsageSniff, so it works correctly with short_open_tag=Off
 - Fixed bug [#14409][pear-14409] : Output of warnings to log file
 - Fixed bug [#14520][pear-14520] : Notice: Undefined offset: 1 in `CodeSniffer/File.php` on line
 - Fixed bug [#14637][pear-14637] : Call to processUnknownArguments() misses second parameter $pos
@@ -6352,7 +6352,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Modified the scope map to keep checking after 3 lines for some tokens (feature request [#12561][pear-12561])
     - Those tokens that must have an opener (like T_CLASS) now keep looking until EOF
     - Other tokens (like T_FUNCTION) still stop after 3 lines for performance
-- You can now escape commas in ignore patterns so they can be matched in file names
+- You can now escape commas in ignore patterns, so they can be matched in file names
     - Thanks to [Carsten Wiedmann][pear-cwiedmann] for the patch
 - Config data is now cached in a global var so the file system is not hit so often
     - You can also set config data temporarily for the script if you are using your own external script
@@ -6667,7 +6667,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 ### Changed
 - Standard name specified with --standard command line argument is no longer case-sensitive
 - Long error and warning messages are now wrapped to 80 characters in the full error report (thanks Endre Czirbesz)
-- Shortened a lot of error and warning messages so they don't take up so much room
+- Shortened a lot of error and warning messages, so they don't take up so much room
 - Squiz FunctionCommentSniff now checks that param comments start with a capital letter and end with a full stop
 - Squiz FunctionSpacingSniff now reports incorrect lines below function on closing brace, not function keyword
 - Squiz FileCommentSniff now checks that there are no blank lines between the open PHP tag and the comment
@@ -6678,7 +6678,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed missing error when multiple statements are not aligned correctly with object operators
 - Fixed incorrect errors for some PHP special variables in Squiz ValidVariableNameSniff
 - Fixed incorrect errors for arrays that only contain other arrays in Squiz ArrayDeclarationSniff
-- Fixed bug [#9844][pear-9844] : throw new Exception(\n accidentally reported as error but it ain't
+- Fixed bug [#9844][pear-9844] : throw new Exception(\n accidentally reported as error, but it ain't
 
 [pear-9844]: https://pear.php.net/bugs/bug.php?id=9844
 

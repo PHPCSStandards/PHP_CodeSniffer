@@ -17,7 +17,7 @@ declare(encoding='utf-8');
 * that is available through the world-wide-web at the following URI:
 * http://www.php.net/license/3_0.txt.  If you did not receive a copy of
 * the PHP License and are unable to obtain it through the web, please
-* send a note to license@php.net so we can mail you a copy immediately.
+* send a note to license@php.net, so we can mail you a copy immediately.
 * @category   _wrong_category
 * @package    PHP_CodeSniffer
 * @package    ADDITIONAL PACKAGE TAG

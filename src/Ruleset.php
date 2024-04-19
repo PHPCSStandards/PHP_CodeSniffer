@@ -257,7 +257,7 @@ class Ruleset
 
         $sniffCount = count($sniffs);
 
-        // Add a dummy entry to the end so we loop one last time
+        // Add a dummy entry to the end, so we loop one last time
         // and echo out the collected info about the last standard.
         $sniffs[] = '';
 
@@ -1321,7 +1321,7 @@ class Ruleset
         $listeners = [];
 
         foreach ($files as $file) {
-            // Work out where the position of /StandardName/Sniffs/... is
+            // Work out where the position of /StandardName/Sniffs/... is,
             // so we can determine what the class will be called.
             $sniffPos = strrpos($file, DIRECTORY_SEPARATOR.'Sniffs'.DIRECTORY_SEPARATOR);
             if ($sniffPos === false) {

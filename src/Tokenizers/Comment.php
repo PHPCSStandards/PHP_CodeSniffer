@@ -61,7 +61,7 @@ class Comment
         }
 
         /*
-            Strip off the close tag so it doesn't interfere with any
+            Strip off the close tag, so it doesn't interfere with any
             of our comment line processing. The token will be added to the
             stack just before we return it.
         */

@@ -82,7 +82,7 @@ class Cbf implements Report
         }
 
         if ($fixed === true) {
-            // The filename in the report may be truncated due to a basepath setting
+            // The filename in the report may be truncated due to a basepath setting,
             // but we are using it for writing here and not display,
             // so find the correct path if basepath is in use.
             $newFilename = $report['filename'].$phpcsFile->config->suffix;

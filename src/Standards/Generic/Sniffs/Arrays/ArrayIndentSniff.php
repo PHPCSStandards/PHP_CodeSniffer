@@ -111,7 +111,7 @@ class ArrayIndentSniff extends AbstractArraySniff
 
             $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($start - 1), null, true);
             if ($tokens[$prev]['line'] === $tokens[$start]['line']) {
-                // This index isn't the only content on the line
+                // This index isn't the only content on the line,
                 // so we can't check indent rules.
                 continue;
             }

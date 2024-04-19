@@ -299,7 +299,7 @@ class ControlStructureSpacingSniff implements Sniff
             $owner = $tokens[$trailingContent]['scope_condition'];
             if ($tokens[$owner]['code'] === T_FUNCTION) {
                 // The next content is the closing brace of a function
-                // so normal function rules apply and we can ignore it.
+                // so normal function rules apply, and we can ignore it.
                 return;
             }
 

@@ -130,7 +130,7 @@ class Filter extends RecursiveFilterIterator
     /**
      * Returns an iterator for the current entry.
      *
-     * Ensures that the ignore patterns are preserved so they don't have
+     * Ensures that the ignore patterns are preserved, so they don't have
      * to be generated each time.
      *
      * @return \RecursiveIterator
@@ -146,7 +146,7 @@ class Filter extends RecursiveFilterIterator
             $this->ruleset
         );
 
-        // Set the ignore patterns so we don't have to generate them again.
+        // Set the ignore patterns, so we don't have to generate them again.
         $children->ignoreDirPatterns  = $this->ignoreDirPatterns;
         $children->ignoreFilePatterns = $this->ignoreFilePatterns;
         $children->acceptedPaths      = $this->acceptedPaths;
@@ -167,7 +167,7 @@ class Filter extends RecursiveFilterIterator
     protected function shouldProcessFile($path)
     {
         // Check that the file's extension is one we are checking.
-        // We are strict about checking the extension and we don't
+        // We are strict about checking the extension, and we don't
         // let files through with no extension or that start with a dot.
         $fileName  = basename($path);
         $fileParts = explode('.', $fileName);
@@ -175,7 +175,7 @@ class Filter extends RecursiveFilterIterator
             return false;
         }
 
-        // Checking multi-part file extensions, so need to create a
+        // Checking multipart file extensions, so need to create a
         // complete extension list and make sure one is allowed.
         $extensions = [];
         array_shift($fileParts);

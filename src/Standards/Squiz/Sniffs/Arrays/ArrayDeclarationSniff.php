@@ -637,7 +637,7 @@ class ArrayDeclarationSniff implements Sniff
 
             foreach ($indices as $valuePosition => $value) {
                 if (empty($value['value']) === true) {
-                    // Array was malformed and we couldn't figure out
+                    // Array was malformed, and we couldn't figure out
                     // the array value correctly, so we have to ignore it.
                     // Other parts of this sniff will correct the error.
                     continue;

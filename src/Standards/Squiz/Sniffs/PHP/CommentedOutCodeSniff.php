@@ -104,7 +104,7 @@ class CommentedOutCodeSniff implements Sniff
             }
 
             /*
-                Trim as much off the comment as possible so we don't
+                Trim as much off the comment as possible, so we don't
                 have additional whitespace tokens or comment tokens
             */
 

@@ -84,7 +84,7 @@ abstract class ExactMatch extends Filter
     /**
      * Returns an iterator for the current entry.
      *
-     * Ensures that the disallowed files list and the allowed files list are preserved so they don't have
+     * Ensures that the disallowed files list and the allowed files list are preserved, so they don't have
      * to be generated each time.
      *
      * @return \RecursiveIterator

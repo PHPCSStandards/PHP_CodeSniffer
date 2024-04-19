@@ -82,7 +82,7 @@ abstract class Generator
     /**
      * Generates the documentation for a standard.
      *
-     * It's probably wise for doc generators to override this method so they
+     * It's probably wise for doc generators to override this method, so they
      * have control over how the docs are produced. Otherwise, the processSniff
      * method should be overridden to output content for each sniff.
      *

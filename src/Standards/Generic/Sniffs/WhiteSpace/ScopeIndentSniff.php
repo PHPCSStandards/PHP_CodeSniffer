@@ -901,7 +901,7 @@ class ScopeIndentSniff implements Sniff
                 $exact = true;
             }
 
-            // Open PHP tags needs to be indented to exact column positions
+            // Open PHP tags needs to be indented to exact column positions,
             // so they don't cause problems with indent checks for the code
             // within them, but they don't need to line up with the current indent
             // in most cases.
@@ -941,7 +941,7 @@ class ScopeIndentSniff implements Sniff
 
             // Special case for ELSE statements that are not on the same
             // line as the previous IF statements closing brace. They still need
-            // to have the same indent or it will break code after the block.
+            // to have the same indent, or it will break code after the block.
             if ($checkToken !== null && $tokens[$checkToken]['code'] === T_ELSE) {
                 $exact = true;
             }

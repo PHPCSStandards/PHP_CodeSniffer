@@ -138,7 +138,7 @@ class Text extends Generator
         foreach ($words as $word) {
             if (strlen($tempTitle.$word) >= 45) {
                 if (strlen($tempTitle.$word) === 45) {
-                    // Adding the extra space will push us to the edge
+                    // Adding the extra space will push us to the edge,
                     // so we are done.
                     $firstTitleLines[] = $tempTitle.$word;
                     $tempTitle         = '';
@@ -173,7 +173,7 @@ class Text extends Generator
         foreach ($words as $word) {
             if (strlen($tempTitle.$word) >= 45) {
                 if (strlen($tempTitle.$word) === 45) {
-                    // Adding the extra space will push us to the edge
+                    // Adding the extra space will push us to the edge,
                     // so we are done.
                     $secondTitleLines[] = $tempTitle.$word;
                     $tempTitle          = '';

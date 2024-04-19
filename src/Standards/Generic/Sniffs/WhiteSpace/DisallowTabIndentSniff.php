@@ -156,7 +156,7 @@ class DisallowTabIndentSniff implements Sniff
                     }
                 }//end if
             } else {
-                // Look for tabs so we can report and replace, but don't
+                // Look for tabs, so we can report and replace, but don't
                 // record any metrics about them because they aren't
                 // line indent tokens.
                 if ($foundTabs > 0) {

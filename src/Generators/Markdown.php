@@ -65,7 +65,7 @@ class Markdown extends Generator
      */
     protected function printFooter()
     {
-        // Turn off errors so we don't get timezone warnings if people
+        // Turn off errors, so we don't get timezone warnings if people
         // don't have their timezone set.
         error_reporting(0);
         echo 'Documentation generated on '.date('r');

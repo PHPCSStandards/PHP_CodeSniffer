@@ -203,7 +203,7 @@ class ComparisonOperatorUsageSniff implements Sniff
                     $foundOps = $requiredOps;
                 }
 
-                // If we get to here and we have not found the right number of
+                // If we get to here, and we have not found the right number of
                 // comparison operators, then we must have had an implicit
                 // true operation i.e., if ($a) instead of the required
                 // if ($a === true), so let's add an error.

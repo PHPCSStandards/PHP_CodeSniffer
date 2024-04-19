@@ -53,7 +53,7 @@ class OperatorBracketSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
 
         if ($phpcsFile->tokenizerType === 'JS' && $tokens[$stackPtr]['code'] === T_PLUS) {
-            // JavaScript uses the plus operator for string concatenation as well
+            // JavaScript uses the plus operator for string concatenation as well,
             // so we cannot accurately determine if it is a string concat or addition.
             // So just ignore it.
             return;
@@ -206,7 +206,7 @@ class OperatorBracketSniff implements Sniff
 
                 if (in_array($prevCode, Tokens::$scopeOpeners, true) === true) {
                     // This operation is inside a control structure like FOREACH
-                    // or IF, but has no bracket of it's own.
+                    // or IF, but has no bracket of its own.
                     // The only control structures allowed to do this are SWITCH and MATCH.
                     if ($prevCode !== T_SWITCH && $prevCode !== T_MATCH) {
                         break;

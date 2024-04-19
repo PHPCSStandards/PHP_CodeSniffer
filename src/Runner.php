@@ -101,7 +101,7 @@ class Runner
                 return 0;
             }
 
-            // Other report formats don't really make sense in interactive mode
+            // Other report formats don't really make sense in interactive mode,
             // so we hard-code the full report here and when outputting.
             // We also ensure parallel processing is off because we need to do one file at a time.
             if ($this->config->interactive === true) {
@@ -122,7 +122,7 @@ class Runner
             $toScreen = $this->reporter->printReports();
 
             // Only print timer output if no reports were
-            // printed to the screen so we don't put additional output
+            // printed to the screen, so we don't put additional output
             // in something like an XML report. If we are printing to screen,
             // the report types would have already worked out who should
             // print the timer info.
@@ -173,7 +173,7 @@ class Runner
             // values the user has set.
             $this->config = new Config();
 
-            // When processing STDIN, we can't output anything to the screen
+            // When processing STDIN, we can't output anything to the screen,
             // or it will end up mixed in with the file output.
             if ($this->config->stdin === true) {
                 $this->config->verbosity = 0;
@@ -182,7 +182,7 @@ class Runner
             // Init the run and load the rulesets to set additional config vars.
             $this->init();
 
-            // When processing STDIN, we only process one file at a time and
+            // When processing STDIN, we only process one file at a time, and
             // we don't process all the way through, so we can't use the parallel
             // running system.
             if ($this->config->stdin === true) {
@@ -525,7 +525,7 @@ class Runner
                     $debugOutput = ob_get_contents();
                     ob_end_clean();
 
-                    // Write information about the run to the filesystem
+                    // Write information about the run to the filesystem,
                     // so it can be picked up by the main process.
                     $childOutput = [
                         'totalFiles'    => $this->reporter->totalFiles,

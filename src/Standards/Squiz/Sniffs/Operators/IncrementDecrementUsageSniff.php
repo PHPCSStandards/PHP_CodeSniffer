@@ -70,7 +70,7 @@ class IncrementDecrementUsageSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        // Work out where the variable is so we know where to
+        // Work out where the variable is, so we know where to
         // start looking for other operators.
         if ($tokens[($stackPtr - 1)]['code'] === T_VARIABLE
             || ($tokens[($stackPtr - 1)]['code'] === T_STRING

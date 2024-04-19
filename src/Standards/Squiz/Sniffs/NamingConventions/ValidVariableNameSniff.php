@@ -32,7 +32,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
         $tokens  = $phpcsFile->getTokens();
         $varName = ltrim($tokens[$stackPtr]['content'], '$');
 
-        // If it's a php reserved var, then its ok.
+        // If it's a php reserved var, then it's ok.
         if (isset($this->phpReservedVars[$varName]) === true) {
             return;
         }
@@ -171,7 +171,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
 
         if (preg_match_all('|[^\\\]\${?([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)|', $tokens[$stackPtr]['content'], $matches) !== 0) {
             foreach ($matches[1] as $varName) {
-                // If it's a php reserved var, then its ok.
+                // If it's a php reserved var, then it's ok.
                 if (isset($this->phpReservedVars[$varName]) === true) {
                     continue;
                 }

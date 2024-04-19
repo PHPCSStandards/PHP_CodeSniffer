@@ -430,7 +430,7 @@ abstract class AbstractPatternSniff implements Sniff
                             continue;
                         }
 
-                        // If the next token is a comment, the we need to skip the
+                        // If the next token is a comment, then we need to skip the
                         // current token as we should allow a space before a
                         // comment for readability.
                         if (isset($tokens[($stackPtr + 1)]) === true
@@ -812,7 +812,7 @@ abstract class AbstractPatternSniff implements Sniff
                     // if any, to the start of this special pattern.
                     if ($lastToken === 0) {
                         // Note that if the last special token was zero characters ago,
-                        // there will be nothing to process so we can skip this bit.
+                        // there will be nothing to process, so we can skip this bit.
                         // This happens if you have something like: EOL... in your pattern.
                         $str = '';
                     } else {

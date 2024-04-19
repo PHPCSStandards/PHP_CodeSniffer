@@ -3,7 +3,7 @@
  * This sniff class detected empty statement.
  *
  * This sniff implements the common algorithm for empty statement body detection.
- * A body is considered as empty if it is completely empty or it only contains
+ * A body is considered as empty if it is completely empty, or it only contains
  * whitespace characters and/or comments.
  *
  * <code>

@@ -80,8 +80,8 @@ class CSS extends PHP
         for ($stackPtr = 1; $stackPtr < $numTokens; $stackPtr++) {
             $token = $tokens[$stackPtr];
 
-            // CSS files don't have lists, breaks etc, so convert these to
-            // standard strings early so they can be converted into T_STYLE
+            // CSS files don't have lists, breaks etc., so convert these to
+            // standard strings early, so they can be converted into T_STYLE
             // tokens and joined with other strings if needed.
             if ($token['code'] === T_BREAK
                 || $token['code'] === T_LIST
@@ -140,7 +140,7 @@ class CSS extends PHP
             }//end if
 
             if ($token['code'] === T_GOTO_LABEL) {
-                // Convert these back to T_STRING followed by T_COLON so we can
+                // Convert these back to T_STRING followed by T_COLON, so we can
                 // more easily process style definitions.
                 $finalTokens[$newStackPtr] = [
                     'type'    => 'T_STRING',
@@ -441,7 +441,7 @@ class CSS extends PHP
                     $stackPtr = $i;
 
                     // If the content inside the "url()" is in double quotes
-                    // there will only be one token and so we don't have to do
+                    // there will only be one token, and so we don't have to do
                     // anything except change its type. If it is not empty,
                     // we need to do some token merging.
                     $finalTokens[($x + 1)]['type'] = 'T_URL';

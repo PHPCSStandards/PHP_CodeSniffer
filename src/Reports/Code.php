@@ -94,7 +94,7 @@ class Code implements Report
         }
 
         // Make sure the last token in the file sits on an imaginary
-        // last line so it is easier to generate code snippets at the
+        // last line, so it is easier to generate code snippets at the
         // end of the file.
         $lineTokens[$lastLine]['end'] = $stackPtr;
 

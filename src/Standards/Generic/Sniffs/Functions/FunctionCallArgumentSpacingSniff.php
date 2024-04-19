@@ -55,7 +55,7 @@ class FunctionCallArgumentSpacingSniff implements Sniff
         // Skip tokens that are the names of functions or classes
         // within their definitions. For example:
         // function myFunction...
-        // "myFunction" is T_STRING but we should skip because it is not a
+        // "myFunction" is T_STRING, but we should skip because it is not a
         // function or method *call*.
         $functionName    = $stackPtr;
         $ignoreTokens    = Tokens::$emptyTokens;

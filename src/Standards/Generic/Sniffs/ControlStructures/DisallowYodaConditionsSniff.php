@@ -107,7 +107,7 @@ class DisallowYodaConditionsSniff implements Sniff
                     return;
                 }
 
-                // If there is nothing inside the parenthesis, it it not a Yoda.
+                // If there is nothing inside the parenthesis, it is not a Yoda.
                 $opener = $tokens[$previousIndex]['parenthesis_opener'];
                 $prev   = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($previousIndex - 1), ($opener + 1), true);
                 if ($prev === false) {

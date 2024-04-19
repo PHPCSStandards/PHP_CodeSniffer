@@ -76,7 +76,7 @@ class CharacterBeforePHPOpeningTagSniff implements Sniff
             $phpcsFile->addError($error, $stackPtr, 'Found');
         }
 
-        // Skip the rest of the file so we don't pick up additional
+        // Skip the rest of the file, so we don't pick up additional
         // open tags, typically embedded in HTML.
         return $phpcsFile->numTokens;
 

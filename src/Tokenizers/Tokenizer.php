@@ -1461,7 +1461,7 @@ abstract class Tokenizer
 
                         $ignore--;
                     } else {
-                        // We found a token that closes the scope but it doesn't
+                        // We found a token that closes the scope, but it doesn't
                         // have a condition, so it belongs to another token and
                         // our token doesn't have a closer, so pretend this is
                         // the closer.

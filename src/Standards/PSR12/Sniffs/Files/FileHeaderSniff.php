@@ -401,7 +401,7 @@ class FileHeaderSniff implements Sniff
             if ($orderedType === false) {
                 // We didn't find the block type in the rest of the
                 // ordered array, so it is out of place.
-                // Error and reset the array to the correct position
+                // Error and reset the array to the correct position,
                 // so we can check the next block.
                 reset($blockOrder);
                 $prevValidType = 'tag';

@@ -166,7 +166,7 @@ class HTML extends Generator
      */
     protected function printFooter()
     {
-        // Turn off errors so we don't get timezone warnings if people
+        // Turn off errors, so we don't get timezone warnings if people
         // don't have their timezone set.
         $errorLevel = error_reporting(0);
         echo '  <div class="tag-line">';

@@ -89,7 +89,7 @@ class IncludingFileSniff implements Sniff
         // it's conditional.
         $previous = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
         if (isset(Tokens::$assignmentTokens[$tokens[$previous]['code']]) === true) {
-            // The have assigned the return value to it, so its conditional.
+            // They have assigned the return value to it, so its conditional.
             $inCondition = true;
         }
 
