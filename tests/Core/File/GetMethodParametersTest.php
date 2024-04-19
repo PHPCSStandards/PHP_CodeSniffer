@@ -2450,7 +2450,7 @@ final class GetMethodParametersTest extends AbstractMethodUnitTest
 
 
     /**
-     * Verify recognition of PHP8 intersection type declaration when the variable
+     * Verify recognition of PHP8.1 intersection type declaration when the variable
      * has either a spread operator or a reference.
      *
      * @return void
@@ -2700,6 +2700,161 @@ final class GetMethodParametersTest extends AbstractMethodUnitTest
         $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
 
     }//end testPHP81NewInInitializers()
+
+
+    /**
+     * Verify recognition of 8.2 DNF parameter type declarations.
+     *
+     * @return void
+     */
+    public function testPHP82DNFTypes()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 21,
+            'name'                => '$obj1',
+            'content'             => '#[MyAttribute]
+    false|(Foo&Bar)|true $obj1',
+            'has_attributes'      => true,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'false|(Foo&Bar)|true',
+            'type_hint_token'     => 11,
+            'type_hint_end_token' => 19,
+            'nullable_type'       => false,
+            'comma_token'         => 22,
+        ];
+        $expected[1] = [
+            'token'               => 41,
+            'name'                => '$obj2',
+            'content'             => '(\Boo&\Pck\Bar)|(Boo&Baz) $obj2 = new Boo()',
+            'default'             => 'new Boo()',
+            'default_token'       => 45,
+            'default_equal_token' => 43,
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '(\Boo&\Pck\Bar)|(Boo&Baz)',
+            'type_hint_token'     => 25,
+            'type_hint_end_token' => 39,
+            'nullable_type'       => false,
+            'comma_token'         => false,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testPHP82DNFTypes()
+
+
+    /**
+     * Verify recognition of PHP 8.2 DNF parameter type declarations when the variable
+     * has either a spread operator or a reference.
+     *
+     * @return void
+     */
+    public function testPHP82DNFTypesWithSpreadOperatorAndReference()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 13,
+            'name'                => '$paramA',
+            'content'             => '(Countable&MeMe)|iterable &$paramA',
+            'has_attributes'      => false,
+            'pass_by_reference'   => true,
+            'reference_token'     => 12,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '(Countable&MeMe)|iterable',
+            'type_hint_token'     => 4,
+            'type_hint_end_token' => 10,
+            'nullable_type'       => false,
+            'comma_token'         => 14,
+        ];
+        $expected[1] = [
+            'token'               => 25,
+            'name'                => '$paramB',
+            'content'             => 'true|(Foo&Bar) ...$paramB',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => true,
+            'variadic_token'      => 24,
+            'type_hint'           => 'true|(Foo&Bar)',
+            'type_hint_token'     => 16,
+            'type_hint_end_token' => 22,
+            'nullable_type'       => false,
+            'comma_token'         => false,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testPHP82DNFTypesWithSpreadOperatorAndReference()
+
+
+    /**
+     * Verify recognition of PHP 8.2 DNF parameter type declarations using the nullability operator (not allowed).
+     *
+     * @return void
+     */
+    public function testPHP82DNFTypesIllegalNullable()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 27,
+            'name'                => '$var',
+            'content'             => '? ( MyClassA & /*comment*/ \Package\MyClassB & \Package\MyClassC ) $var',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => '?(MyClassA&\Package\MyClassB&\Package\MyClassC)',
+            'type_hint_token'     => 5,
+            'type_hint_end_token' => 25,
+            'nullable_type'       => true,
+            'comma_token'         => false,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testPHP82DNFTypesIllegalNullable()
+
+
+    /**
+     * Verify recognition of PHP 8.2 DNF parameter type declarations in an arrow function.
+     *
+     * @return void
+     */
+    public function testPHP82DNFTypesInArrow()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 12,
+            'name'                => '$range',
+            'content'             => '(Hi&Ho)|FALSE &...$range',
+            'has_attributes'      => false,
+            'pass_by_reference'   => true,
+            'reference_token'     => 10,
+            'variable_length'     => true,
+            'variadic_token'      => 11,
+            'type_hint'           => '(Hi&Ho)|FALSE',
+            'type_hint_token'     => 2,
+            'type_hint_end_token' => 8,
+            'nullable_type'       => false,
+            'comma_token'         => false,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testPHP82DNFTypesInArrow()
 
 
     /**
