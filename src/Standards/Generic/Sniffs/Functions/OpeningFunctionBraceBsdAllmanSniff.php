@@ -186,7 +186,7 @@ class OpeningFunctionBraceBsdAllmanSniff implements Sniff
         }
 
         // We need to actually find the first piece of content on this line,
-        // as if this is a method with tokens before it (public, static etc)
+        // as if this is a method with tokens before it (public, static etc.)
         // or an if with an else before it, then we need to start the scope
         // checking from there, rather than the current token.
         $lineStart = $phpcsFile->findFirstOnLine(T_WHITESPACE, $stackPtr, true);

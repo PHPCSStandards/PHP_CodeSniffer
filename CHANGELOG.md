@@ -3107,7 +3107,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#1190][sq-1190] : phpcbf on if/else with trailing comment generates erroneous code
 - Fixed bug [#1191][sq-1191] : Javascript sniffer fails with function called "Function"
 - Fixed bug [#1203][sq-1203] : Inconsistent behavior of PHP_CodeSniffer_File::findEndOfStatement
-- Fixed bug [#1218][sq-1218] : CASE conditions using class constants named NAMESPACE/INTERFACE/TRAIT etc are incorrectly tokenized
+- Fixed bug [#1218][sq-1218] : CASE conditions using class constants named NAMESPACE/INTERFACE/TRAIT etc. are incorrectly tokenized
 - Fixed bug [#1221][sq-1221] : Indented function call with multiple closure arguments can cause scope indent error
 - Fixed bug [#1224][sq-1224] : PHPCBF fails to fix code with heredoc/nowdoc as first argument to a function
 
@@ -6567,7 +6567,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Torsten Roehr][pear-troehr] for the patch
 - Private methods in commenting sniffs and comment parser are now protected (feature request [#11087][pear-11087])
 - Added Generic LineEndingsSniff to check the EOL character of a file
-- PEAR standard now only throws one error per file for incorrect line endings (eg. /r/n)
+- PEAR standard now only throws one error per file for incorrect line endings (e.g. /r/n)
 - Command line arg -v now shows number of registered sniffs
 - Command line arg -vvv now shows list of registered sniffs
 - Squiz ControlStructureSpacingSniff no longer throws errors if the control structure is at the end of the script

@@ -296,7 +296,7 @@ class InlineCommentSniff implements Sniff
 
             if ($tokens[$next]['code'] === T_DOC_COMMENT_OPEN_TAG) {
                 // If this inline comment is followed by a docblock,
-                // ignore spacing as docblock/function etc spacing rules
+                // ignore spacing as docblock/function etc. spacing rules
                 // are likely to conflict with our rules.
                 return ($lastCommentToken + 1);
             }

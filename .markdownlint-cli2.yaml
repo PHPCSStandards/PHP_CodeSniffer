@@ -64,7 +64,7 @@ config:
     heading_line_length: 100
     # Number of characters for code blocks.
     code_block_line_length: 100
-    # Stern length checking (applies to tables, code blocks etc which have their own max line length).
+    # Stern length checking (applies to tables, code blocks etc. which have their own max line length).
     stern: true
 
   # MD022/blanks-around-headings : Headings should be surrounded by blank lines : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md022.md

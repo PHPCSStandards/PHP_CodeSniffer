@@ -924,7 +924,7 @@ abstract class Tokenizer
      * Recurses though the scope openers to build a scope map.
      *
      * @param int $stackPtr The position in the stack of the token that
-     *                      opened the scope (eg. an IF token or FOR token).
+     *                      opened the scope (e.g. an IF token or FOR token).
      * @param int $depth    How many scope levels down we are.
      * @param int $ignore   How many curly braces we are ignoring.
      *
@@ -1393,7 +1393,7 @@ abstract class Tokenizer
                         && isset($this->tokens[$i]['parenthesis_closer']) === true
                     ) {
                         // If we get into here, then we opened a parenthesis for
-                        // a scope (eg. an if or else if) so we need to update the
+                        // a scope (e.g. an if or else if) so we need to update the
                         // start of the line so that when we check to see
                         // if the closing parenthesis is more than n lines away from
                         // the statement, we check from the closing parenthesis.

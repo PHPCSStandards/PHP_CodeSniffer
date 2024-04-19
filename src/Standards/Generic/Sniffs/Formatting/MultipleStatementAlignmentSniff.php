@@ -242,7 +242,7 @@ class MultipleStatementAlignmentSniff implements Sniff
                     continue;
                 }
 
-                // Make sure it is not assigned inside a condition (eg. IF, FOR).
+                // Make sure it is not assigned inside a condition (e.g. IF, FOR).
                 if (isset($tokens[$assign]['nested_parenthesis']) === true) {
                     // If the parenthesis is on the same line as the assignment,
                     // then it should be ignored as it is specifically being grouped.

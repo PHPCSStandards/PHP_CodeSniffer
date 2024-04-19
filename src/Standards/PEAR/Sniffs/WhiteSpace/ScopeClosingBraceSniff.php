@@ -49,7 +49,7 @@ class ScopeClosingBraceSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        // If this is an inline condition (ie. there is no scope opener), then
+        // If this is an inline condition (i.e. there is no scope opener), then
         // return, as this is not a new scope.
         if (isset($tokens[$stackPtr]['scope_closer']) === false) {
             return;
@@ -68,7 +68,7 @@ class ScopeClosingBraceSniff implements Sniff
         }
 
         // We need to actually find the first piece of content on this line,
-        // because if this is a method with tokens before it (public, static etc)
+        // because if this is a method with tokens before it (public, static etc.)
         // or an if with an else before it, then we need to start the scope
         // checking from there, rather than the current token.
         $lineStart = ($stackPtr - 1);
