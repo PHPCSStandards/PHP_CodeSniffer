@@ -113,6 +113,12 @@ $arrowWithUnionReturn = fn($param) : int|true => $param | 10;
 /* testUnionReturnTypeWithFalse */
 $arrowWithUnionReturn = fn($param) : string|FALSE => $param | 10;
 
+/* testIntersectionParamType */
+$arrowWithUnionParam = fn(Traversable&Countable $param) : int => (new SomeClass($param))->getValue();
+
+/* testIntersectionReturnType */
+$arrowWithUnionReturn = fn($param) : \MyFoo&SomeInterface => new SomeClass($param);
+
 /* testTernary */
 $fn = fn($a) => $a ? /* testTernaryThen */ fn() : string => 'a' : /* testTernaryElse */ fn() : string => 'b';
 

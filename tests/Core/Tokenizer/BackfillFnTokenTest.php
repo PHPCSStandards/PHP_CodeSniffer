@@ -516,6 +516,38 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
 
 
     /**
+     * Test arrow function with an intersection parameter type.
+     *
+     * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
+     *
+     * @return void
+     */
+    public function testIntersectionParamType()
+    {
+        $token = $this->getTargetToken('/* testIntersectionParamType */', T_FN);
+        $this->backfillHelper($token);
+        $this->scopePositionTestHelper($token, 13, 27);
+
+    }//end testIntersectionParamType()
+
+
+    /**
+     * Test arrow function with an intersection return type.
+     *
+     * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
+     *
+     * @return void
+     */
+    public function testIntersectionReturnType()
+    {
+        $token = $this->getTargetToken('/* testIntersectionReturnType */', T_FN);
+        $this->backfillHelper($token);
+        $this->scopePositionTestHelper($token, 12, 20);
+
+    }//end testIntersectionReturnType()
+
+
+    /**
      * Test arrow functions used in ternary operators.
      *
      * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
