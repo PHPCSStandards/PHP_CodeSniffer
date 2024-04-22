@@ -2718,6 +2718,8 @@ class PHP extends Tokenizer
                         T_NAMESPACE         => T_NAMESPACE,
                         T_NS_SEPARATOR      => T_NS_SEPARATOR,
                         T_NULL              => T_NULL,
+                        T_TRUE              => T_TRUE,
+                        T_FALSE             => T_FALSE,
                         T_NULLABLE          => T_NULLABLE,
                         T_PARENT            => T_PARENT,
                         T_SELF              => T_SELF,
