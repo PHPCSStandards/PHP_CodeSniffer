@@ -8,7 +8,7 @@
  *
  * This class is a "double" of the Config class which prevents this from happening.
  * In _most_ cases, tests should be using this class instead of the "normal" Config,
- * with the exception of select tests for the Config class itself.
+ * except select tests for the Config class itself.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2024 Juliette Reinders Folmer. All rights reserved.
@@ -24,7 +24,7 @@ final class ConfigDouble extends Config
 {
 
     /**
-     * Whether or not the setting of a standard should be skipped.
+     * Whether the setting of a standard should be skipped.
      *
      * @var boolean
      */

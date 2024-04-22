@@ -58,7 +58,7 @@ class OperatorSpacingSniff implements Sniff
     public function register()
     {
         /*
-            First we setup an array of all the tokens that can come before
+            First we set up an array of all the tokens that can come before
             a T_MINUS or T_PLUS token to indicate that the token is not being
             used as an operator.
         */

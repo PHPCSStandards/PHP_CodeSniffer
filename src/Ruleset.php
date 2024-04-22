@@ -944,7 +944,7 @@ class Ruleset
 
                 if ($newRef === false) {
                     // The sniff is not locally installed, so check if it is being
-                    // referenced as a remote sniff outside the install. We do this
+                    // referenced as a remote sniff outside the installation. We do this
                     // by looking through all directories where we have found ruleset
                     // files before, looking for ones for this particular standard,
                     // and seeing if it is in there.

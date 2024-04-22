@@ -49,7 +49,7 @@ abstract class AbstractMethodUnitTest extends TestCase
      * Initialize & tokenize \PHP_CodeSniffer\Files\File with code from the test case file.
      *
      * The test case file for a unit test class has to be in the same directory
-     * directory and use the same file name as the test class, using the .inc extension.
+     * and use the same file name as the test class, using the .inc extension.
      *
      * @beforeClass
      *

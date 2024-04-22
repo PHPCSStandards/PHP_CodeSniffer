@@ -1355,7 +1355,7 @@ abstract class Tokenizer
                         || ($openerNested === true
                         && $this->tokens[$i]['nested_parenthesis'] !== $this->tokens[$stackPtr]['nested_parenthesis'])
                     ) {
-                        // We found the a token that looks like the opener, but it's nested differently.
+                        // We found the token that looks like the opener, but it's nested differently.
                         if (PHP_CODESNIFFER_VERBOSITY > 1) {
                             $type = $this->tokens[$i]['type'];
                             echo str_repeat("\t", $depth);

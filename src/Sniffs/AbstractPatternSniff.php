@@ -39,7 +39,7 @@ abstract class AbstractPatternSniff implements Sniff
     private $parsedPatterns = [];
 
     /**
-     * Tokens that this sniff wishes to process outside of the patterns.
+     * Tokens that this sniff wishes to process outside the patterns.
      *
      * @var int[]
      * @see registerSupplementary()
@@ -337,7 +337,7 @@ abstract class AbstractPatternSniff implements Sniff
                     );
 
                     if ($next === false || isset($tokens[$next][$to]) === false) {
-                        // If there was not opener, then we must be
+                        // If there was no opener, then we must be
                         // using the wrong pattern.
                         return false;
                     }
@@ -598,7 +598,7 @@ abstract class AbstractPatternSniff implements Sniff
                     if ($next === false
                         || isset($tokens[$next][$pattern[$i]['to']]) === false
                     ) {
-                        // If there was not opener, then we must
+                        // If there was no opener, then we must
                         // be using the wrong pattern.
                         return false;
                     }

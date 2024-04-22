@@ -23,7 +23,7 @@ _Nothing yet._
     - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patches.
 - Performance improvement for the "Diff" report. Should be most notable for Windows users. [#355]
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
-- The test suite has received some performance improvements. Should be most notable contributors using Windows. [#351]
+- The test suite has received some performance improvements. Should be the most notable for contributors using Windows. [#351]
     - External standards with sniff tests using the PHP_CodeSniffer native test framework will also benefit from these changes.
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
 - Various housekeeping, including improvements to the tests and documentation.
@@ -100,7 +100,7 @@ _Nothing yet._
     - The Javascript and CSS Tokenizers, all Javascript and CSS specific sniffs, and support for JS and CSS in select sniffs which support multiple file types, will be removed in version 4.0.0.
 - The abstract `PHP_CodeSniffer\Filters\ExactMatch::getBlacklist()` and `PHP_CodeSniffer\Filters\ExactMatch::getWhitelist()` methods are deprecated and will be removed in the 4.0 release. See [#198].
     - In version 4.0, these methods will be replaced with abstract `ExactMatch::getDisallowedFiles()` and `ExactMatch::getAllowedFiles()` methods
-    - To make Filters extending `ExactMatch` cross-version compatible with both PHP_CodeSniffer 3.9.0+ as well as 4.0+, implement the new `getDisallowedFiles()` and `getAllowedFiles()` methods.
+    - To make Filters extending `ExactMatch` cross-version compatible with both PHP_CodeSniffer 3.9.0+ and 4.0+, implement the new `getDisallowedFiles()` and `getAllowedFiles()` methods.
         - When both the `getDisallowedFiles()` and `getAllowedFiles()` methods as well as the `getBlacklist()` and `getWhitelist()` are available, the new methods will take precedence over the old methods.
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - The MySource standard and all sniffs in it. See [#2471][sq-2471].
@@ -226,7 +226,7 @@ _Nothing yet._
     - Users who download the PHAR files using curl or wget, will need to update the download URL from `https://squizlabs.github.io/PHP_CodeSniffer/[phpcs|phpcbf].phar` or `https://github.com/squizlabs/PHP_CodeSnifffer/releases/latest/download/[phpcs|phpcbf].phar` to `https://phars.phpcodesniffer.com/[phpcs|phpcbf].phar`.
     - For users who install PHP_CodeSniffer via the [Setup-PHP](https://github.com/shivammathur/setup-php/) action runner for GitHub Actions, nothing changes.
     - Users using a git clone will need to update the clone address from `git@github.com:squizlabs/PHP_CodeSniffer.git` to `git@github.com:PHPCSStandards/PHP_CodeSniffer.git`.
-        - Contributors will need to fork the new repo and add both the new fork as well as the new repo as remotes to their local git copy of PHP_CodeSniffer.
+        - Contributors will need to fork the new repo and add both the new fork and the new repo as remotes to their local git copy of PHP_CodeSniffer.
         - Users who have (valid) open issues or pull requests in the `squizlabs/PHP_CodeSniffer` repository are invited to resubmit these to the `PHPCSStandards/PHP_CodeSniffer` repository.
 
 ### Added
@@ -807,7 +807,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Include patterns are now ignored when processing STDIN
     - Previously, checks using include patterns were excluded when processing STDIN when no file path was provided via --stdin-path
     - Now, all include and exclude rules are ignored when no file path is provided, allowing all checks to run
-    - If you want include and exclude rules enforced when checking STDIN, use --stdin-path to set the file path
+    - If you want to include and exclude rules enforced when checking STDIN, use --stdin-path to set the file path
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Spaces are now correctly escaped in the paths to external on Windows
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
@@ -966,7 +966,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Sergei Morozov][@morozov] for the patch
 - Fixed bug [#3066][sq-3066] : No support for namespace operator used in type declarations
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug [#3075][sq-3075] : PSR12.ControlStructures.BooleanOperatorPlacement false positive when operator is the only content on line
+- Fixed bug [#3075][sq-3075] : PSR12.ControlStructures.BooleanOperatorPlacement false positive when operator is the only content on the line
 - Fixed bug [#3099][sq-3099] : Squiz.WhiteSpace.OperatorSpacing false positive when exiting with negative number
     - Thanks to [Sergei Morozov][@morozov] for the patch
 - Fixed bug [#3102][sq-3102] : PSR12.Squiz.OperatorSpacing false positive for default values of arrow functions
@@ -1734,9 +1734,9 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Default remains FALSE, so newlines are not allowed
     - Override the "ignoreNewlines" setting in a ruleset.xml file to change
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- PEAR.Functions.FunctionDeclaration now checks spacing before the opening parenthesis of functions with no body
+- PEAR.Functions.FunctionDeclaration now checks spacing before the opening parenthesis of functions without body
     - Thanks to [Chris Wilkinson][@thewilkybarkid] for the patch
-- PEAR.Functions.FunctionDeclaration now enforces no space before the semicolon in functions with no body
+- PEAR.Functions.FunctionDeclaration now enforces no space before the semicolon in functions without body
     - Thanks to [Chris Wilkinson][@thewilkybarkid] for the patch
 - PSR2.Classes.PropertyDeclaration now checks the order of property modifier keywords
     - This is a rule that is documented in PSR-2 but was not enforced by the included PSR2 standard until now
@@ -3085,7 +3085,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Developers of custom standards with custom test runners can now have their standards ignored by the built-in test runner
     - Set the value of an environment variable called PHPCS_IGNORE_TESTS with a comma separated list of your standard names
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- The unit test runner now loads the test sniff outside of the standard's ruleset so that exclude rules do not get applied
+- The unit test runner now loads the test sniff outside the standard's ruleset so that exclude rules do not get applied
     - This may have caused problems when testing custom sniffs inside custom standards
     - Also makes the unit tests runs a little faster
 - The SVN pre-commit hook now works correctly when installed via composer
@@ -3093,7 +3093,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 
 ### Fixed
 - Fixed bug [#1135][sq-1135] : PEAR.ControlStructures.MultiLineCondition.CloseBracketNewLine not detected if preceded by multiline function call
-- Fixed bug [#1138][sq-1138] : PEAR.ControlStructures.MultiLineCondition.Alignment not detected if closing brace is first token on line
+- Fixed bug [#1138][sq-1138] : PEAR.ControlStructures.MultiLineCondition.Alignment not detected if closing brace is first token on the line
 - Fixed bug [#1141][sq-1141] : Sniffs that check EOF newlines don't detect newlines properly when the last token is a doc block
 - Fixed bug [#1150][sq-1150] : Squiz.Strings.EchoedStrings does not properly fix bracketed statements
 - Fixed bug [#1156][sq-1156] : Generic.Formatting.DisallowMultipleStatements errors when multiple short echo tags are used on the same line
@@ -3249,7 +3249,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 
 ### Fixed
 - Fixed bug [#790][sq-790] : Incorrect missing @throws error in methods that use closures
-- Fixed bug [#908][sq-908] : PSR2 standard is not checking that closing brace is on line following the body
+- Fixed bug [#908][sq-908] : PSR2 standard is not checking that closing brace is on the line following the body
 - Fixed bug [#945][sq-945] : Incorrect indent behavior using deep-nested function and arrays
 - Fixed bug [#961][sq-961] : Two anonymous functions passed as function/method arguments cause indentation false positive
 - Fixed bug [#1005][sq-1005] : Using global composer vendor autoload breaks PHP lowercase built-in function sniff
@@ -3524,7 +3524,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed bug [#807][sq-807] : Cannot fix line endings when open PHP tag is not on the first line
 - Fixed bug [#808][sq-808] : JS tokenizer incorrectly setting some function and class names to control structure tokens
 - Fixed bug [#809][sq-809] : PHPCBF can break a require_once statement with a space before the open parenthesis
-- Fixed bug [#813][sq-813] : PEAR FunctionCallSignature checks wrong indent when first token on line is part of a multi-line string
+- Fixed bug [#813][sq-813] : PEAR FunctionCallSignature checks wrong indent when first token on the line is part of a multi-line string
 
 [sq-560]: https://github.com/squizlabs/PHP_CodeSniffer/issues/560
 [sq-583]: https://github.com/squizlabs/PHP_CodeSniffer/issues/583
@@ -6096,7 +6096,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Squiz SwitchDeclarationSniff now supports checking of JS files
 - Squiz CommentedOutCodeSniff now supports checking of CSS files
 - Squiz DisallowSizeFunctionsInLoopsSniff now supports checking of JS files for the use of object.length
-- Squiz DisallowSizeFunctionsInLoopsSniff no longer complains about size functions outside of the FOR condition
+- Squiz DisallowSizeFunctionsInLoopsSniff no longer complains about size functions outside the FOR condition
 - Squiz ControlStructureSpacingSniff now bans blank lines at the end of a control structure
 - Squiz ForLoopDeclarationSniff no longer throws errors for JS FOR loops without semicolons
 - Squiz MultipleStatementAlignmentSniff no longer throws errors if a statement would take more than 8 spaces to align
@@ -6261,7 +6261,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 - Fixed error in Squiz FunctionSpacingSniff where functions after member vars reported incorrect spacing
 - Fixed bug [#13062][pear-13062] : Interface comments aren't handled in PEAR standard
     - Thanks to [Manuel Pichler][@manuelpichler] for the path
-- Fixed bug [#13119][pear-13119] : PHP minimum requirement need to be fix
+- Fixed bug [#13119][pear-13119] : PHP minimum requirement need to be fixed
 - Fixed bug [#13156][pear-13156] : Bug in Squiz_Sniffs_PHP_NonExecutableCodeSniff
 - Fixed bug [#13158][pear-13158] : Strange behaviour in AbstractPatternSniff
 - Fixed bug [#13169][pear-13169] : Undefined variables

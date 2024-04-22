@@ -84,7 +84,7 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
                 continue;
             }
 
-            // Find next non empty token, if it is a open parenthesis we have a
+            // Find next non-empty token, if it is an open parenthesis we have a
             // function call.
             $index = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
 

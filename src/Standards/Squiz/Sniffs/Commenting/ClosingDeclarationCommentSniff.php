@@ -38,7 +38,7 @@ class ClosingDeclarationCommentSniff implements Sniff
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int                         $stackPtr  The position of the current token in the
-     *                                               stack passed in $tokens..
+     *                                               stack passed in $tokens.
      *
      * @return void
      */

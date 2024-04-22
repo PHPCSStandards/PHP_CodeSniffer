@@ -11,7 +11,7 @@ if (($reallyLongVarName === true) || (is_array($anotherLongVarName) === false)) 
 }
 
 
-// This line is is too long.
+// This line is too long.
 if (($anotherReallyLongVarName === true) || (is_array($anotherReallyLongVarName) === false)) {
     // Do something.
 }

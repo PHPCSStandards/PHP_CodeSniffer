@@ -895,7 +895,7 @@ class ScopeIndentSniff implements Sniff
                 }//end if
             }//end if
 
-            // JS property indentation has to be exact or else if will break
+            // JS property indentation has to be exact or else it will break
             // things like function and object indentation.
             if ($checkToken !== null && $tokens[$checkToken]['code'] === T_PROPERTY) {
                 $exact = true;

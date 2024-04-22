@@ -114,7 +114,7 @@ class IncludeSystemSniff extends AbstractScopeSniff
             $name = $this->getIncludedClassFromToken($phpcsFile, $tokens, $i);
             if ($name !== false) {
                 $includedClasses[$name] = true;
-                // Special case for Widgets cause they are, well, special.
+                // Special case for Widgets because they are, well, special.
             } else if (strtolower($tokens[$i]['content']) === 'includewidget') {
                 $typeName = $phpcsFile->findNext(T_CONSTANT_ENCAPSED_STRING, ($i + 1));
                 $typeName = trim($tokens[$typeName]['content'], " '");
@@ -257,7 +257,7 @@ class IncludeSystemSniff extends AbstractScopeSniff
             $name = $this->getIncludedClassFromToken($phpcsFile, $tokens, $i);
             if ($name !== false) {
                 $includedClasses[$name] = true;
-                // Special case for Widgets cause they are, well, special.
+                // Special case for Widgets because they are, well, special.
             } else if (strtolower($tokens[$i]['content']) === 'includewidget') {
                 $typeName = $phpcsFile->findNext(T_CONSTANT_ENCAPSED_STRING, ($i + 1));
                 $typeName = trim($tokens[$typeName]['content'], " '");

@@ -197,7 +197,7 @@ abstract class AbstractFilterTestCase extends TestCase
     /**
      * Translate Linux paths to Windows paths, when necessary.
      *
-     * These type of tests should be able to run and pass on both *nix as well as Windows
+     * These type of tests should be able to run and pass on both *nix and Windows
      * based dev systems. This method is a helper to allow for this.
      *
      * @param array<string|array> $paths A single or multi-dimensional array containing

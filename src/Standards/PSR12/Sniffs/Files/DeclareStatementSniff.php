@@ -167,7 +167,7 @@ class DeclareStatementSniff implements Sniff
                 }
             } else if ($tokens[$token]['type'] === 'T_CLOSE_TAG') {
                 if ($tokens[($parenthesis)]['line'] !== $tokens[$token]['line']) {
-                    // Close tag must be on the same line..
+                    // Close tag must be on the same line.
                     $error = 'The close tag must be on the same line as the declare statement';
                     $fix   = $phpcsFile->addFixableError($error, $parenthesis, 'CloseTagOnNewLine');
                     if ($fix === true) {

@@ -387,7 +387,7 @@ EOD;
                 'expectedErrors' => 2,
             ],
 
-            // With suppression on line before.
+            // With suppression on the line before.
             'ignore: line before, slash comment'         => [
                 'before' => '// phpcs:ignore',
             ],
@@ -474,7 +474,7 @@ EOD;
 
         $ruleset = new Ruleset($config);
 
-        // Process with @ suppression on line before inside docblock.
+        // Process with @ suppression on the line before inside docblock.
         $comment = str_repeat('a ', 50);
         $content = <<<EOD
 <?php

@@ -119,7 +119,7 @@ jobs:
         run: npm install --global remark-cli --foreground-scripts true --fund false
 
       # To allow for creating a custom config which references rules which are included
-      # in the presets, without having to install all rules individually, a local install
+      # in the presets, without having to install all rules individually, a local installation
       # works best (and installing the presets in the first place, of course).
       #
       # Note: the first group of packages are all part of the mono "Remark lint" repo.

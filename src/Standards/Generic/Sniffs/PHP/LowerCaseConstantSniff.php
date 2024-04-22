@@ -121,7 +121,7 @@ class LowerCaseConstantSniff implements Sniff
          * Skip over type declarations for properties.
          *
          * Note: for other uses of the visibility modifiers (functions, constants, trait use),
-         * nothing relevant will be skipped as the next non-empty token will be an "non-skippable"
+         * nothing relevant will be skipped as the next non-empty token will be a "non-skippable"
          * one.
          * Functions are handled separately below (and then skip to their scope opener), so
          * this should also not cause any confusion for constructor property promotion.

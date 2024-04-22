@@ -265,7 +265,7 @@ class CommentedOutCodeSniff implements Sniff
         }
 
         // Ignore comments with only two or less non-whitespace tokens.
-        // Sample size too small for a reliably determination.
+        // Sample size too small for a reliable determination.
         if ($numNonWhitespace <= 2) {
             return ($lastCommentBlockToken + 1);
         }

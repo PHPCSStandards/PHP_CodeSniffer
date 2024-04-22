@@ -47,7 +47,7 @@ abstract class AbstractScopeSniff implements Sniff
     private $scopeTokens = [];
 
     /**
-     * True if this test should fire on tokens outside of the scope.
+     * True if this test should fire on tokens outside the scope.
      *
      * @var boolean
      */

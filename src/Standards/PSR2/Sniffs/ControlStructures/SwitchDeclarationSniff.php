@@ -333,7 +333,7 @@ class SwitchDeclarationSniff implements Sniff
                     $endOfSwitch     = $tokens[$prevToken]['scope_closer'];
                     $nextCase        = $prevToken;
 
-                    // We look for a terminating statement within every blocks.
+                    // We look for a terminating statement within every block.
                     while (($nextCase = $this->findNextCase($phpcsFile, ($nextCase + 1), $endOfSwitch)) !== false) {
                         if ($tokens[$nextCase]['code'] === T_DEFAULT) {
                             $hasDefaultBlock = true;

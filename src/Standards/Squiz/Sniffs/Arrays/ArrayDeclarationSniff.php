@@ -48,7 +48,7 @@ class ArrayDeclarationSniff implements Sniff
         if ($tokens[$stackPtr]['code'] === T_ARRAY) {
             $phpcsFile->recordMetric($stackPtr, 'Short array syntax used', 'no');
 
-            // Array keyword should be lower case.
+            // Array keyword should be lowercase.
             if ($tokens[$stackPtr]['content'] !== strtolower($tokens[$stackPtr]['content'])) {
                 if ($tokens[$stackPtr]['content'] === strtoupper($tokens[$stackPtr]['content'])) {
                     $phpcsFile->recordMetric($stackPtr, 'Array keyword case', 'upper');
@@ -718,7 +718,7 @@ class ArrayDeclarationSniff implements Sniff
             a double arrow is not aligned, and when a value is not
             aligned correctly.
             If an error is found in one of the above areas, then errors
-            are not reported for the rest of the line to avoid reporting
+            will not be reported for the rest of the line to avoid reporting
             spaces and columns incorrectly. Often fixing the first
             problem will fix the other 2 anyway.
 

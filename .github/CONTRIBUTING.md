@@ -302,7 +302,7 @@ the code should be flagged or not. Additionally, making auto-fixes to code in a 
 
 This defensive coding in a sniff should, of course, also be safeguarded via tests.
 
-Parse/compile errors can take various forms. Some can be handled without much problems by PHPCS, some can not.
+Parse/compile errors can take various forms. Some can be handled without many problems by PHPCS, some can not.
 
 If a code snippet to be tested could lead to a broken token stream due to a parse/compile error, the code snippet should always
 be put in a separate test case file by itself and be accompanied by a comment stating the test is an intentional parse error.

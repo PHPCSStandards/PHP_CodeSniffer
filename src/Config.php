@@ -61,7 +61,7 @@ use PHP_CodeSniffer\Util\Standards;
  * @property bool       $stdin           Read content from STDIN instead of supplied files.
  * @property string     $stdinContent    Content passed directly to PHPCS on STDIN.
  * @property string     $stdinPath       The path to use for content passed on STDIN.
- * @property bool       $trackTime       Whether or not to track sniff run time.
+ * @property bool       $trackTime       Whether to track sniff run time.
  *
  * @property array<string, string>      $extensions File extensions that should be checked, and what tokenizer to use.
  *                                                  E.g., array('inc' => 'PHP');
@@ -152,7 +152,7 @@ class Config
     ];
 
     /**
-     * Whether or not to kill the process when an unknown command line arg is found.
+     * Whether to kill the process when an unknown command line arg is found.
      *
      * If FALSE, arguments that are not command line options or file/directory paths
      * will be ignored and execution will continue. These values will be stored in
@@ -364,7 +364,7 @@ class Config
      * Creates a Config object and populates it with command line values.
      *
      * @param array $cliArgs         An array of values gathered from CLI args.
-     * @param bool  $dieOnUnknownArg Whether or not to kill the process when an
+     * @param bool  $dieOnUnknownArg Whether to kill the process when an
      *                               unknown command line arg is found.
      *
      * @return void

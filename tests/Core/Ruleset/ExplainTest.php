@@ -126,7 +126,7 @@ final class ExplainTest extends TestCase
      * Verifies that:
      * - The "standard" name is taken from the custom ruleset.
      * - Any and all sniff additions and exclusions in the ruleset are taken into account correctly.
-     * - That the displayed list will have both the standards as well as the sniff names
+     * - That the displayed list will have both the standards and the sniff names
      *   ordered alphabetically.
      *
      * @return void

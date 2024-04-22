@@ -70,7 +70,7 @@ final class TypeIntersectionTest extends AbstractTokenizerTestCase
 
 
     /**
-     * Test that bitwise and tokens when used as part of a intersection type are tokenized as `T_TYPE_INTERSECTION`.
+     * Test that bitwise and tokens when used as part of an intersection type are tokenized as `T_TYPE_INTERSECTION`.
      *
      * @param string $testMarker The comment which prefaces the target token in the test file.
      *

@@ -1200,7 +1200,7 @@ class PHP extends Tokenizer
             /*
                 As of PHP 8.0 fully qualified, partially qualified and namespace relative
                 identifier names are tokenized differently.
-                This "undoes" the new tokenization so the tokenization will be the same in
+                This "undoes" the new tokenization so the tokenization will be the same
                 in PHP 5, 7 and 8.
             */
 
@@ -1538,7 +1538,7 @@ class PHP extends Tokenizer
                     && $tokens[($stackPtr + 2)][0] === T_STRING
                     && strtolower($tokens[($stackPtr + 2)][1]) === 'from'
                 ) {
-                    // Could be multi-line, so just just the token stack.
+                    // Could be multi-line, so just the token stack.
                     $token[0]  = T_YIELD_FROM;
                     $token[1] .= $tokens[($stackPtr + 1)][1].$tokens[($stackPtr + 2)][1];
 

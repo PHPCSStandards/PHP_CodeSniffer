@@ -37,7 +37,7 @@ class LineLengthSniff implements Sniff
     public $absoluteLineLimit = 100;
 
     /**
-     * Whether or not to ignore trailing comments.
+     * Whether to ignore trailing comments.
      *
      * This has the effect of also ignoring all lines
      * that only contain comments.

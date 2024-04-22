@@ -24,7 +24,7 @@ should also be detected.
 EOT;
 >>>>>>> ref/heads/other-branchname
 
-// Merge conflict starter outside with a closer inside of the heredoc.
+// Merge conflict starter outside with a closer inside the heredoc.
 // This breaks the tokenizer.
 <<<<<<< HEAD
 $string =

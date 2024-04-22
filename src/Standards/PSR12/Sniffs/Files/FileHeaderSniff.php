@@ -190,7 +190,7 @@ class FileHeaderSniff implements Sniff
                     && isset(Tokens::$methodPrefixes[$tokens[$docToken]['code']]) === false
                     && $tokens[$docToken]['code'] !== T_READONLY
                 ) {
-                    // Check for an @var annotation.
+                    // Check for a @var annotation.
                     $annotation = false;
                     for ($i = $next; $i < $end; $i++) {
                         if ($tokens[$i]['code'] === T_DOC_COMMENT_TAG

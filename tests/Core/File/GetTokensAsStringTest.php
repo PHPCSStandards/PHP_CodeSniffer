@@ -102,7 +102,7 @@ final class GetTokensAsStringTest extends AbstractMethodUnitTest
      * Test getting a token set as a string.
      *
      * @param string     $testMarker     The comment which prefaces the target token in the test file.
-     * @param int|string $startTokenType The type of token(s) to look for for the start of the string.
+     * @param int|string $startTokenType The type of token(s) to look for the start of the string.
      * @param int        $length         Token length to get.
      * @param string     $expected       The expected function return value.
      *
@@ -277,7 +277,7 @@ final class GetTokensAsStringTest extends AbstractMethodUnitTest
      * Test getting a token set as a string with the original, non tab-replaced content.
      *
      * @param string     $testMarker     The comment which prefaces the target token in the test file.
-     * @param int|string $startTokenType The type of token(s) to look for for the start of the string.
+     * @param int|string $startTokenType The type of token(s) to look for the start of the string.
      * @param int        $length         Token length to get.
      * @param string     $expected       The expected function return value.
      *

@@ -1,9 +1,9 @@
 <?php
 /**
- * Detects unnecessary final modifiers inside of final classes.
+ * Detects unnecessary final modifiers inside final classes.
  *
  * This rule is based on the PMD rule catalogue. The Unnecessary Final Modifier
- * sniff detects the use of the final modifier inside of a final class which
+ * sniff detects the use of the final modifier inside a final class which
  * is unnecessary.
  *
  * <code>

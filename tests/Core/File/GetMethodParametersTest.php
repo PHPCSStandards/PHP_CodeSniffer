@@ -1982,7 +1982,7 @@ final class GetMethodParametersTest extends AbstractMethodUnitTest
 
 
     /**
-     * Verify recognition of PHP8 constructor with both property promotion as well as normal parameters.
+     * Verify recognition of PHP8 constructor with both property promotion and normal parameters.
      *
      * @return void
      */

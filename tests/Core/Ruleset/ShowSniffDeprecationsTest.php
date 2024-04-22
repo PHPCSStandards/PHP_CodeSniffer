@@ -373,7 +373,7 @@ final class ShowSniffDeprecationsTest extends TestCase
                     .'future.'.PHP_EOL.PHP_EOL,
             ],
             'Report width matches longest line: 666; the message should not wrap'                   => [
-                // Length = 4 padding + 75 base line + 587 custom message.
+                // Length = 4 padding + 75 baseline + 587 custom message.
                 'reportWidth'    => 666,
                 'expectedOutput' => $summaryLine.str_repeat('-', 666).PHP_EOL
                     .'-  Fixtures.Deprecated.WithLongReplacement'.PHP_EOL
