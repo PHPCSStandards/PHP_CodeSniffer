@@ -313,6 +313,20 @@ class Common
 
 
     /**
+     * Strip colors from a text for output to screen.
+     *
+     * @param string $text The text to process.
+     *
+     * @return string
+     */
+    public static function stripColors($text)
+    {
+        return preg_replace('`\033\[[0-9;]+m`', '', $text);
+
+    }//end stripColors()
+
+
+    /**
      * Returns true if the specified string is in the camel caps format.
      *
      * @param string  $string      The string the verify.

@@ -414,11 +414,7 @@ class Ruleset
                 $sniffCode = substr($sniffCode, 0, ($maxMessageWidth - 3)).'...';
             }
 
-            $message = '-  '.$sniffCode.PHP_EOL;
-            if ($this->config->colors === true) {
-                $message = '-  '."\033[36m".$sniffCode."\033[0m".PHP_EOL;
-            }
-
+            $message        = '-  '."\033[36m".$sniffCode."\033[0m".PHP_EOL;
             $maxActualWidth = max($maxActualWidth, strlen($sniffCode));
 
             // Normalize new line characters in custom message.
@@ -451,8 +447,13 @@ class Ruleset
             echo $summaryLine.PHP_EOL;
         }
 
+        $messages = implode(PHP_EOL, $messages);
+        if ($this->config->colors === false) {
+            $messages = Common::stripColors($messages);
+        }
+
         echo str_repeat('-', min(($maxActualWidth + 4), $reportWidth)).PHP_EOL;
-        echo implode(PHP_EOL, $messages);
+        echo $messages;
 
         $closer = wordwrap('Deprecated sniffs are still run, but will stop working at some point in the future.', $reportWidth, PHP_EOL);
         echo PHP_EOL.PHP_EOL.$closer.PHP_EOL.PHP_EOL;
