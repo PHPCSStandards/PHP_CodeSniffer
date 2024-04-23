@@ -50,6 +50,7 @@ final class ClosingDeclarationCommentUnitTest extends AbstractSniffUnitTest
                 101 => 1,
                 106 => 1,
                 110 => 1,
+                124 => 1,
             ];
 
         case 'ClosingDeclarationCommentUnitTest.4.inc':

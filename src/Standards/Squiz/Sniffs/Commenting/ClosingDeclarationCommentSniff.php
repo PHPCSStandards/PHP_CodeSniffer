@@ -1,6 +1,6 @@
 <?php
 /**
- * Checks the //end ... comments on classes, interfaces and functions.
+ * Checks the //end ... comments on classes, enums, functions, interfaces and traits.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
@@ -24,10 +24,11 @@ class ClosingDeclarationCommentSniff implements Sniff
     public function register()
     {
         return [
-            T_FUNCTION,
             T_CLASS,
-            T_INTERFACE,
             T_ENUM,
+            T_FUNCTION,
+            T_INTERFACE,
+            T_TRAIT,
         ];
 
     }//end register()
@@ -72,6 +73,8 @@ class ClosingDeclarationCommentSniff implements Sniff
             $comment = '//end class';
         } else if ($tokens[$stackPtr]['code'] === T_INTERFACE) {
             $comment = '//end interface';
+        } else if ($tokens[$stackPtr]['code'] === T_TRAIT) {
+            $comment = '//end trait';
         } else {
             $comment = '//end enum';
         }//end if
