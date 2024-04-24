@@ -111,7 +111,7 @@ for (
 // phpcs:set Squiz.ControlStructures.ForLoopDeclaration requiredSpacesAfterOpen 0
 // phpcs:set Squiz.ControlStructures.ForLoopDeclaration requiredSpacesBeforeClose 0
 
-// Test with semi-colon not belonging to for.
+// Test with semicolon not belonging to for.
 for ($i = function() { return $this->i  ;    }; $i < function() { return $this->max; }; $i++) {}
 for ($i = function() { return $this->i; }; $i < function() { return $this->max; }  ;   $i++) {}
 
