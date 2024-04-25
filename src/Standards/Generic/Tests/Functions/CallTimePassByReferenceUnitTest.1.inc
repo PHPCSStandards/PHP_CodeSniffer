@@ -52,3 +52,15 @@ $instance = new MyClass(&$a);
 
 $anon = new class($a) {};
 $anon = new class(&$a) {};
+
+class Foo extends Bar {
+    function myMethod() {
+        $a = new static($var);
+        $b = new self($var);
+        $c = new parent($var);
+
+        $d = new static(&$var);
+        $e = new self(&$var);
+        $f = new parent(&$var);
+    }
+}

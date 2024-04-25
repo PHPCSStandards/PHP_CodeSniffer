@@ -28,6 +28,9 @@ class CallTimePassByReferenceSniff implements Sniff
             T_STRING,
             T_VARIABLE,
             T_ANON_CLASS,
+            T_PARENT,
+            T_SELF,
+            T_STATIC,
         ];
 
     }//end register()
