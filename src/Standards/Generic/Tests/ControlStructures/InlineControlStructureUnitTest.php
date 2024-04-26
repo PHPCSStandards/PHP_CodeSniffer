@@ -80,6 +80,14 @@ final class InlineControlStructureUnitTest extends AbstractSniffUnitTest
                 269 => 1,
                 278 => 1,
                 289 => 1,
+                293 => 1,
+                299 => 1,
+                301 => 1,
+            ];
+
+        case 'InlineControlStructureUnitTest.10.inc':
+            return [
+                6 => 1,
             ];
 
         case 'InlineControlStructureUnitTest.1.js':
@@ -108,11 +116,21 @@ final class InlineControlStructureUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    public function getWarningList()
+    public function getWarningList($testFile='')
     {
-        return [];
+        switch ($testFile) {
+        case 'InlineControlStructureUnitTest.1.inc':
+            return [
+                296 => 1,
+            ];
+
+        default:
+            return [];
+        }
 
     }//end getWarningList()
 

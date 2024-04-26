@@ -289,3 +289,13 @@ if (false) {
 } else ($shouldTriggerSniff);
 
 foreach ($array as $shouldNotTriggerSniff);
+
+do echo $i++; while ($i < 5);
+
+// phpcs:set Generic.ControlStructures.InlineControlStructure error false
+if ($something) echo 'hello';
+// phpcs:set Generic.ControlStructures.InlineControlStructure error true
+
+if ($noSpaceAfterClosingParenthesis)echo 'hello';
+
+do ; while ($i > 5);
