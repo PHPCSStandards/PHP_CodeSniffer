@@ -336,3 +336,26 @@ foreach ($array as $sniffShouldBailEarly)
 	/* some comment */;
 
 do ; while ($sniffShouldBailEarly > 5);
+
+do { echo $i++;
+} while ($i < 5);
+
+// phpcs:set Generic.ControlStructures.InlineControlStructure error false
+if ($something) { echo 'hello';
+}
+// phpcs:set Generic.ControlStructures.InlineControlStructure error true
+
+for ($i = 0; $i < 5; $i++) {
+    if ($i === 3) {
+        echo 'three';
+    } elseif ($i === 4) {
+        echo 'four';
+    } elseif ($i === 5) {
+        echo 'five';
+    }
+}
+
+if ($noSpaceAfterClosingParenthesis) { echo 'hello';
+} ?>
+
+<?php if ( $model->scenario == 'simple' ) { $widget->renderPager(); } ?>
