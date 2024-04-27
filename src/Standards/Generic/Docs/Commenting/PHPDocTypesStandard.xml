@@ -1,0 +1,66 @@
+<documentation title="PHPDoc Types">
+    <standard>
+    <![CDATA[
+    This sniff aims to check that PHPDoc types will be parsed by both PHPStan and Psalm.
+    Type checking checks only that the PHPDoc type and native type (if any)
+    for function parameters and return values, and class properties match.
+    Type checking is not aware of class heirarchies from other files, or global constants.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Correct PHPDoc types.">
+        <![CDATA[
+/**
+ * A class
+ */
+class C {
+
+    /**
+     * A property
+     *
+     * @var int|null
+     */
+    public ?int $prop = 0;
+
+    /**
+     * A function
+     *
+     * @param int $p
+     * @return string
+     */
+    public function f(int $p): string {
+        return strval($p);
+    }
+
+}
+        ]]>
+        </code>
+        <code title="Invalid: Incorrect PHPDoc types.">
+        <![CDATA[
+/**
+ * A class
+ */
+class C {
+
+    /**
+     * A property with a malformed type
+     *
+     * @var int||null
+     */
+    public ?int $prop = 0;
+
+    /**
+     * A function
+     *
+     * @param $p missing parameter type
+     * @return int mismatched return type
+     */
+    public function f(int $p): string {
+        return strval($p);
+    }
+
+}
+        ]]>
+        </code>
+    </code_comparison>
+</documentation>

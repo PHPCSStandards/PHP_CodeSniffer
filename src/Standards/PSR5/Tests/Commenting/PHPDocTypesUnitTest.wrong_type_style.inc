@@ -1,0 +1,67 @@
+<?php
+/**
+ * A collection of types not in recommended style for testing
+ *
+ * This file should have no errors when checked with either PHPStan or Psalm (but a warning about an unused var).
+ * But all should give errors when checked with the PHPDoc types sniff with checkTypeStyle enabled.
+ *
+ * @author    James Calder <jeg+accounts.github@cloudy.kiwi.nz>
+ * @copyright 2024 Otago Polytechnic
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ *            CC BY-SA 4.0 or later
+ */
+
+/**
+ * A collection of types not in recommended style for testing
+ *
+ * @property integer $p PHPDoc class property type doesn't conform to recommended style
+ */
+class WarnStyle
+{
+
+    /**
+     * PHPDoc var type doesn't conform to recommended style
+     *
+     * @var integer
+     */
+    public int $v1 = 0;
+
+    /**
+     * Multiline type, no line break at end
+     *
+     * @var integer
+     *      | boolean */
+    public int|bool $v2 = 0;
+
+    /**
+     * Multiline type, line break at end
+     *
+     * @var integer
+     *      | boolean
+     */
+    public int|bool $v3 = 0;
+
+
+    /**
+     * Function style
+     *
+     * @param Bool|T $p PHPDoc function parameter type doesn't conform to recommended style
+     *
+     * @return   Int PHPDoc function return type doesn't conform to recommended style
+     * @template T of Int PHPDoc tempate type doesn't conform to recommended style
+     */
+    public function funWrong($p): int
+    {
+        return 0;
+
+    }//end funWrong()
+
+
+}//end class
+
+/**
+ * PHPDoc var type doesn't conform to recommended style (not class var)
+ *
+ * @var Int
+ */
+$v4 = 0;
