@@ -17,6 +17,7 @@ use Phar;
 use PHP_CodeSniffer\Exceptions\DeepExitException;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\Help;
 use PHP_CodeSniffer\Util\Standards;
 
 /**
@@ -1395,71 +1396,21 @@ class Config
      */
     public function printPHPCSUsage()
     {
-        echo 'Usage: phpcs [-nwlsaepqvi] [-d key[=value]] [--colors] [--no-colors]'.PHP_EOL;
-        echo '  [--cache[=<cacheFile>]] [--no-cache] [--tab-width=<tabWidth>]'.PHP_EOL;
-        echo '  [--report=<report>] [--report-file=<reportFile>] [--report-<report>=<reportFile>]'.PHP_EOL;
-        echo '  [--report-width=<reportWidth>] [--basepath=<basepath>] [--bootstrap=<bootstrap>]'.PHP_EOL;
-        echo '  [--severity=<severity>] [--error-severity=<severity>] [--warning-severity=<severity>]'.PHP_EOL;
-        echo '  [--runtime-set key value] [--config-set key value] [--config-delete key] [--config-show]'.PHP_EOL;
-        echo '  [--standard=<standard>] [--sniffs=<sniffs>] [--exclude=<sniffs>]'.PHP_EOL;
-        echo '  [--encoding=<encoding>] [--parallel=<processes>] [--generator=<generator>]'.PHP_EOL;
-        echo '  [--extensions=<extensions>] [--ignore=<patterns>] [--ignore-annotations]'.PHP_EOL;
-        echo '  [--stdin-path=<stdinPath>] [--file-list=<fileList>] [--filter=<filter>] <file> - ...'.PHP_EOL;
-        echo PHP_EOL;
-        echo ' -     Check STDIN instead of local files and directories'.PHP_EOL;
-        echo ' -n    Do not print warnings (shortcut for --warning-severity=0)'.PHP_EOL;
-        echo ' -w    Print both warnings and errors (this is the default)'.PHP_EOL;
-        echo ' -l    Local directory only, no recursion'.PHP_EOL;
-        echo ' -s    Show error codes in all reports'.PHP_EOL;
-        echo ' -a    Run interactively'.PHP_EOL;
-        echo ' -e    Explain a standard by showing the sniffs it includes'.PHP_EOL;
-        echo ' -p    Show progress of the run'.PHP_EOL;
-        echo ' -q    Quiet mode; disables progress and verbose output'.PHP_EOL;
-        echo ' -m    Stop error messages from being recorded'.PHP_EOL;
-        echo '       (saves a lot of memory, but stops many reports from being used)'.PHP_EOL;
-        echo ' -v    Print processed files'.PHP_EOL;
-        echo ' -vv   Print ruleset and token output'.PHP_EOL;
-        echo ' -vvv  Print sniff processing information'.PHP_EOL;
-        echo ' -i    Show a list of installed coding standards'.PHP_EOL;
-        echo ' -d    Set the [key] php.ini value to [value] or [true] if value is omitted'.PHP_EOL;
-        echo PHP_EOL;
-        echo ' --help                Print this help message'.PHP_EOL;
-        echo ' --version             Print version information'.PHP_EOL;
-        echo ' --colors              Use colors in output'.PHP_EOL;
-        echo ' --no-colors           Do not use colors in output (this is the default)'.PHP_EOL;
-        echo ' --cache               Cache results between runs'.PHP_EOL;
-        echo ' --no-cache            Do not cache results between runs (this is the default)'.PHP_EOL;
-        echo ' --ignore-annotations  Ignore all phpcs: annotations in code comments'.PHP_EOL;
-        echo PHP_EOL;
-        echo ' <cacheFile>    Use a specific file for caching (uses a temporary file by default)'.PHP_EOL;
-        echo ' <basepath>     A path to strip from the front of file paths inside reports'.PHP_EOL;
-        echo ' <bootstrap>    A comma separated list of files to run before processing begins'.PHP_EOL;
-        echo ' <encoding>     The encoding of the files being checked (default is utf-8)'.PHP_EOL;
-        echo ' <extensions>   A comma separated list of file extensions to check'.PHP_EOL;
-        echo '                The type of the file can be specified using: ext/type'.PHP_EOL;
-        echo '                e.g., module/php,es/js'.PHP_EOL;
-        echo ' <file>         One or more files and/or directories to check'.PHP_EOL;
-        echo ' <fileList>     A file containing a list of files and/or directories to check (one per line)'.PHP_EOL;
-        echo ' <filter>       Use either the "GitModified" or "GitStaged" filter,'.PHP_EOL;
-        echo '                or specify the path to a custom filter class'.PHP_EOL;
-        echo ' <generator>    Use either the "HTML", "Markdown" or "Text" generator'.PHP_EOL;
-        echo '                (forces documentation generation instead of checking)'.PHP_EOL;
-        echo ' <patterns>     A comma separated list of patterns to ignore files and directories'.PHP_EOL;
-        echo ' <processes>    How many files should be checked simultaneously (default is 1)'.PHP_EOL;
-        echo ' <report>       Print either the "full", "xml", "checkstyle", "csv"'.PHP_EOL;
-        echo '                "json", "junit", "emacs", "source", "summary", "diff"'.PHP_EOL;
-        echo '                "svnblame", "gitblame", "hgblame", "notifysend" or "performance",'.PHP_EOL;
-        echo '                report or specify the path to a custom report class'.PHP_EOL;
-        echo '                (the "full" report is printed by default)'.PHP_EOL;
-        echo ' <reportFile>   Write the report to the specified file path'.PHP_EOL;
-        echo ' <reportWidth>  How many columns wide screen reports should be printed'.PHP_EOL;
-        echo '                or set to "auto" to use current screen width, where supported'.PHP_EOL;
-        echo ' <severity>     The minimum severity required to display an error or warning'.PHP_EOL;
-        echo ' <sniffs>       A comma separated list of sniff codes to include or exclude from checking'.PHP_EOL;
-        echo '                (all sniffs must be part of the specified standard)'.PHP_EOL;
-        echo ' <standard>     The name or path of the coding standard to use'.PHP_EOL;
-        echo ' <stdinPath>    If processing STDIN, the file path that STDIN will be processed as'.PHP_EOL;
-        echo ' <tabWidth>     The number of spaces each tab represents'.PHP_EOL;
+        $longOptions   = explode(',', Help::DEFAULT_LONG_OPTIONS);
+        $longOptions[] = 'cache';
+        $longOptions[] = 'no-cache';
+        $longOptions[] = 'report';
+        $longOptions[] = 'report-file';
+        $longOptions[] = 'report-report';
+        $longOptions[] = 'config-explain';
+        $longOptions[] = 'config-set';
+        $longOptions[] = 'config-delete';
+        $longOptions[] = 'config-show';
+        $longOptions[] = 'generator';
+
+        $shortOptions = Help::DEFAULT_SHORT_OPTIONS.'aems';
+
+        (new Help($this, $longOptions, $shortOptions))->display();
 
     }//end printPHPCSUsage()
 
@@ -1471,49 +1422,11 @@ class Config
      */
     public function printPHPCBFUsage()
     {
-        echo 'Usage: phpcbf [-nwli] [-d key[=value]] [--ignore-annotations] [--bootstrap=<bootstrap>]'.PHP_EOL;
-        echo '  [--standard=<standard>] [--sniffs=<sniffs>] [--exclude=<sniffs>] [--suffix=<suffix>]'.PHP_EOL;
-        echo '  [--severity=<severity>] [--error-severity=<severity>] [--warning-severity=<severity>]'.PHP_EOL;
-        echo '  [--tab-width=<tabWidth>] [--encoding=<encoding>] [--parallel=<processes>]'.PHP_EOL;
-        echo '  [--basepath=<basepath>] [--extensions=<extensions>] [--ignore=<patterns>]'.PHP_EOL;
-        echo '  [--stdin-path=<stdinPath>] [--file-list=<fileList>] [--filter=<filter>] <file> - ...'.PHP_EOL;
-        echo PHP_EOL;
-        echo ' -     Fix STDIN instead of local files and directories'.PHP_EOL;
-        echo ' -n    Do not fix warnings (shortcut for --warning-severity=0)'.PHP_EOL;
-        echo ' -w    Fix both warnings and errors (on by default)'.PHP_EOL;
-        echo ' -l    Local directory only, no recursion'.PHP_EOL;
-        echo ' -p    Show progress of the run'.PHP_EOL;
-        echo ' -q    Quiet mode; disables progress and verbose output'.PHP_EOL;
-        echo ' -v    Print processed files'.PHP_EOL;
-        echo ' -vv   Print ruleset and token output'.PHP_EOL;
-        echo ' -vvv  Print sniff processing information'.PHP_EOL;
-        echo ' -i    Show a list of installed coding standards'.PHP_EOL;
-        echo ' -d    Set the [key] php.ini value to [value] or [true] if value is omitted'.PHP_EOL;
-        echo PHP_EOL;
-        echo ' --help                Print this help message'.PHP_EOL;
-        echo ' --version             Print version information'.PHP_EOL;
-        echo ' --ignore-annotations  Ignore all phpcs: annotations in code comments'.PHP_EOL;
-        echo PHP_EOL;
-        echo ' <basepath>    A path to strip from the front of file paths inside reports'.PHP_EOL;
-        echo ' <bootstrap>   A comma separated list of files to run before processing begins'.PHP_EOL;
-        echo ' <encoding>    The encoding of the files being fixed (default is utf-8)'.PHP_EOL;
-        echo ' <extensions>  A comma separated list of file extensions to fix'.PHP_EOL;
-        echo '               The type of the file can be specified using: ext/type'.PHP_EOL;
-        echo '               e.g., module/php,es/js'.PHP_EOL;
-        echo ' <file>        One or more files and/or directories to fix'.PHP_EOL;
-        echo ' <fileList>    A file containing a list of files and/or directories to fix (one per line)'.PHP_EOL;
-        echo ' <filter>      Use either the "GitModified" or "GitStaged" filter,'.PHP_EOL;
-        echo '               or specify the path to a custom filter class'.PHP_EOL;
-        echo ' <patterns>    A comma separated list of patterns to ignore files and directories'.PHP_EOL;
-        echo ' <processes>   How many files should be fixed simultaneously (default is 1)'.PHP_EOL;
-        echo ' <severity>    The minimum severity required to fix an error or warning'.PHP_EOL;
-        echo ' <sniffs>      A comma separated list of sniff codes to include or exclude from fixing'.PHP_EOL;
-        echo '               (all sniffs must be part of the specified standard)'.PHP_EOL;
-        echo ' <standard>    The name or path of the coding standard to use'.PHP_EOL;
-        echo ' <stdinPath>   If processing STDIN, the file path that STDIN will be processed as'.PHP_EOL;
-        echo ' <suffix>      Write modified files to a filename using this suffix'.PHP_EOL;
-        echo '               ("diff" and "patch" are not used in this mode)'.PHP_EOL;
-        echo ' <tabWidth>    The number of spaces each tab represents'.PHP_EOL;
+        $longOptions   = explode(',', Help::DEFAULT_LONG_OPTIONS);
+        $longOptions[] = 'suffix';
+        $shortOptions  = Help::DEFAULT_SHORT_OPTIONS;
+
+        (new Help($this, $longOptions, $shortOptions))->display();
 
     }//end printPHPCBFUsage()
 
