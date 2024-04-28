@@ -121,6 +121,19 @@ function globalFunctionWithSpreadAndReference(
     string|int ...$paramB
 ) {}
 
+$dnfTypes = new class {
+    /* testTypeUnionConstantTypeUnionBeforeDNF */
+    const Foo|(A&B) UNION_BEFORE = /* testBitwiseOrOOConstDefaultValueDNF */ Foo|(A&B);
+
+    /* testTypeUnionPropertyTypeUnionAfterDNF */
+    protected (\FQN&namespace\Relative)|Partially\Qualified $union_after = /* testBitwiseOrPropertyDefaultValueDNF */ (A&B)|Foo;
+
+    public function unionBeforeAndAfter(
+        /* testTypeUnionParamUnionBeforeAndAfterDNF */
+        string|(Stringable&\Countable)|int $param = /* testBitwiseOrParamDefaultValueDNF */ ( CONST_A & CONST_B) | CONST_C
+    ): /* testTypeUnionReturnTypeUnionAfterDNF */ (A&B)|null {}
+};
+
 /* testTypeUnionClosureParamIllegalNullable */
 $closureWithParamType = function (?string|null $string) {};
 

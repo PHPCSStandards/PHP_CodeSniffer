@@ -109,6 +109,20 @@ function globalFunctionWithSpreadAndReference(
     Foo&Bar ...$paramB
 ) {}
 
+
+$dnfTypes = new class {
+    /* testTypeIntersectionConstantTypeUnionBeforeDNF */
+    const Foo|(A&B) UNION_BEFORE = /* testBitwiseAndOOConstDefaultValueDNF */ Foo|(A&B);
+
+    /* testTypeIntersectionPropertyTypeUnionAfterDNF */
+    protected (\FQN&namespace\Relative)|Partially\Qualified $union_after = /* testBitwiseAndPropertyDefaultValueDNF */ (A&B)|Foo;
+
+    public function unionBeforeAndAfter(
+        /* testTypeIntersectionParamUnionBeforeAndAfterDNF */
+        string|(Stringable&\Countable)|int $param = /* testBitwiseAndParamDefaultValueDNF */ ( CONST_A & CONST_B) | CONST_C
+    ): /* testTypeIntersectionReturnTypeUnionAfterDNF */ (A&B)|null {}
+};
+
 /* testTypeIntersectionClosureParamIllegalNullable */
 $closureWithParamType = function (?Foo&Bar $string) {};
 

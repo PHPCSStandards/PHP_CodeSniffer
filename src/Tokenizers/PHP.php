@@ -464,6 +464,8 @@ class PHP extends Tokenizer
         T_CLOSE_SHORT_ARRAY        => 1,
         T_TYPE_UNION               => 1,
         T_TYPE_INTERSECTION        => 1,
+        T_TYPE_OPEN_PARENTHESIS    => 1,
+        T_TYPE_CLOSE_PARENTHESIS   => 1,
     ];
 
     /**
@@ -747,6 +749,9 @@ class PHP extends Tokenizer
 
             /*
                 Special case for `static` used as a function name, i.e. `static()`.
+
+                Note: this may incorrectly change the static keyword directly before a DNF property type.
+                If so, this will be caught and corrected for in the additional processing.
             */
 
             if ($tokenIsArray === true
@@ -2712,21 +2717,23 @@ class PHP extends Tokenizer
                 if (isset($this->tokens[$x]) === true && $this->tokens[$x]['code'] === T_OPEN_PARENTHESIS) {
                     $ignore  = Tokens::$emptyTokens;
                     $ignore += [
-                        T_ARRAY             => T_ARRAY,
-                        T_CALLABLE          => T_CALLABLE,
-                        T_COLON             => T_COLON,
-                        T_NAMESPACE         => T_NAMESPACE,
-                        T_NS_SEPARATOR      => T_NS_SEPARATOR,
-                        T_NULL              => T_NULL,
-                        T_TRUE              => T_TRUE,
-                        T_FALSE             => T_FALSE,
-                        T_NULLABLE          => T_NULLABLE,
-                        T_PARENT            => T_PARENT,
-                        T_SELF              => T_SELF,
-                        T_STATIC            => T_STATIC,
-                        T_STRING            => T_STRING,
-                        T_TYPE_UNION        => T_TYPE_UNION,
-                        T_TYPE_INTERSECTION => T_TYPE_INTERSECTION,
+                        T_ARRAY                  => T_ARRAY,
+                        T_CALLABLE               => T_CALLABLE,
+                        T_COLON                  => T_COLON,
+                        T_NAMESPACE              => T_NAMESPACE,
+                        T_NS_SEPARATOR           => T_NS_SEPARATOR,
+                        T_NULL                   => T_NULL,
+                        T_TRUE                   => T_TRUE,
+                        T_FALSE                  => T_FALSE,
+                        T_NULLABLE               => T_NULLABLE,
+                        T_PARENT                 => T_PARENT,
+                        T_SELF                   => T_SELF,
+                        T_STATIC                 => T_STATIC,
+                        T_STRING                 => T_STRING,
+                        T_TYPE_UNION             => T_TYPE_UNION,
+                        T_TYPE_INTERSECTION      => T_TYPE_INTERSECTION,
+                        T_TYPE_OPEN_PARENTHESIS  => T_TYPE_OPEN_PARENTHESIS,
+                        T_TYPE_CLOSE_PARENTHESIS => T_TYPE_CLOSE_PARENTHESIS,
                     ];
 
                     $closer = $this->tokens[$x]['parenthesis_closer'];
@@ -3029,10 +3036,15 @@ class PHP extends Tokenizer
                 continue;
             } else if ($this->tokens[$i]['code'] === T_BITWISE_OR
                 || $this->tokens[$i]['code'] === T_BITWISE_AND
+                || $this->tokens[$i]['code'] === T_OPEN_PARENTHESIS
+                || $this->tokens[$i]['code'] === T_CLOSE_PARENTHESIS
             ) {
                 /*
                     Convert "|" to T_TYPE_UNION or leave as T_BITWISE_OR.
                     Convert "&" to T_TYPE_INTERSECTION or leave as T_BITWISE_AND.
+                    Convert "(" and ")" to T_TYPE_(OPEN|CLOSE)_PARENTHESIS or leave as T_(OPEN|CLOSE)_PARENTHESIS.
+
+                    All type related tokens will be converted in one go as soon as this section is hit.
                 */
 
                 $allowed = [
@@ -3048,8 +3060,8 @@ class PHP extends Tokenizer
                     T_NS_SEPARATOR => T_NS_SEPARATOR,
                 ];
 
-                $suspectedType  = null;
-                $typeTokenCount = 0;
+                $suspectedType       = null;
+                $typeTokenCountAfter = 0;
 
                 for ($x = ($i + 1); $x < $numTokens; $x++) {
                     if (isset(Tokens::$emptyTokens[$this->tokens[$x]['code']]) === true) {
@@ -3057,11 +3069,13 @@ class PHP extends Tokenizer
                     }
 
                     if (isset($allowed[$this->tokens[$x]['code']]) === true) {
-                        ++$typeTokenCount;
+                        ++$typeTokenCountAfter;
                         continue;
                     }
 
-                    if ($typeTokenCount > 0
+                    if (($typeTokenCountAfter > 0
+                        || ($this->tokens[$i]['code'] === T_CLOSE_PARENTHESIS
+                        && isset($this->tokens[$i]['parenthesis_owner']) === false))
                         && ($this->tokens[$x]['code'] === T_BITWISE_AND
                         || $this->tokens[$x]['code'] === T_ELLIPSIS)
                     ) {
@@ -3092,6 +3106,7 @@ class PHP extends Tokenizer
                         && $this->tokens[$this->tokens[$x]['scope_condition']]['code'] === T_FUNCTION
                     ) {
                         $suspectedType = 'return';
+                        break;
                     }
 
                     if ($this->tokens[$x]['code'] === T_EQUAL) {
@@ -3103,8 +3118,12 @@ class PHP extends Tokenizer
                     break;
                 }//end for
 
-                if ($typeTokenCount === 0 || isset($suspectedType) === false) {
-                    // Definitely not a union or intersection type, move on.
+                if (($typeTokenCountAfter === 0
+                    && ($this->tokens[$i]['code'] !== T_CLOSE_PARENTHESIS
+                    || isset($this->tokens[$i]['parenthesis_owner']) === true))
+                    || isset($suspectedType) === false
+                ) {
+                    // Definitely not a union, intersection or DNF type, move on.
                     continue;
                 }
 
@@ -3112,26 +3131,82 @@ class PHP extends Tokenizer
                     unset($allowed[T_STATIC]);
                 }
 
-                $typeTokenCount = 0;
-                $typeOperators  = [$i];
-                $confirmed      = false;
+                $typeTokenCountBefore = 0;
+                $typeOperators        = [$i];
+                $confirmed            = false;
+                $maybeNullable        = null;
 
                 for ($x = ($i - 1); $x >= 0; $x--) {
                     if (isset(Tokens::$emptyTokens[$this->tokens[$x]['code']]) === true) {
                         continue;
                     }
 
+                    if ($suspectedType === 'property or parameter'
+                        && $this->tokens[$x]['code'] === T_STRING
+                        && strtolower($this->tokens[$x]['content']) === 'static'
+                    ) {
+                        // Static keyword followed directly by an open parenthesis for a DNF type.
+                        // This token should be T_STATIC and was incorrectly identified as a function call before.
+                        $this->tokens[$x]['code'] = T_STATIC;
+                        $this->tokens[$x]['type'] = 'T_STATIC';
+
+                        if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                            $line = $this->tokens[$x]['line'];
+                            echo "\t* token $x on line $line changed back from T_STRING to T_STATIC".PHP_EOL;
+                        }
+                    }
+
+                    if ($suspectedType === 'property or parameter'
+                        && $this->tokens[$x]['code'] === T_OPEN_PARENTHESIS
+                    ) {
+                        // We need to prevent the open parenthesis for a function/fn declaration from being retokenized
+                        // to T_TYPE_OPEN_PARENTHESIS if this is the first parameter in the declaration.
+                        if (isset($this->tokens[$x]['parenthesis_owner']) === true
+                            && $this->tokens[$this->tokens[$x]['parenthesis_owner']]['code'] === T_FUNCTION
+                        ) {
+                            $confirmed = true;
+                            break;
+                        } else {
+                            // This may still be an arrow function which hasn't be handled yet.
+                            for ($y = ($x - 1); $y > 0; $y--) {
+                                if (isset(Tokens::$emptyTokens[$this->tokens[$y]['code']]) === false
+                                    && $this->tokens[$y]['code'] !== T_BITWISE_AND
+                                ) {
+                                    // Non-whitespace content.
+                                    break;
+                                }
+                            }
+
+                            if ($this->tokens[$y]['code'] === T_FN) {
+                                $confirmed = true;
+                                break;
+                            }
+                        }
+                    }//end if
+
                     if (isset($allowed[$this->tokens[$x]['code']]) === true) {
-                        ++$typeTokenCount;
+                        ++$typeTokenCountBefore;
                         continue;
                     }
 
-                    // Union and intersection types can't use the nullable operator, but be tolerant to parse errors.
-                    if ($typeTokenCount > 0 && $this->tokens[$x]['code'] === T_NULLABLE) {
+                    // Union, intersection and DNF types can't use the nullable operator, but be tolerant to parse errors.
+                    if (($typeTokenCountBefore > 0
+                        || ($this->tokens[$x]['code'] === T_OPEN_PARENTHESIS && isset($this->tokens[$x]['parenthesis_owner']) === false))
+                        && ($this->tokens[$x]['code'] === T_NULLABLE
+                        || $this->tokens[$x]['code'] === T_INLINE_THEN)
+                    ) {
+                        if ($this->tokens[$x]['code'] === T_INLINE_THEN) {
+                            $maybeNullable = $x;
+                        }
+
                         continue;
                     }
 
-                    if ($this->tokens[$x]['code'] === T_BITWISE_OR || $this->tokens[$x]['code'] === T_BITWISE_AND) {
+                    if ($this->tokens[$x]['code'] === T_BITWISE_OR
+                        || $this->tokens[$x]['code'] === T_BITWISE_AND
+                        || $this->tokens[$x]['code'] === T_OPEN_PARENTHESIS
+                        || $this->tokens[$x]['code'] === T_CLOSE_PARENTHESIS
+                    ) {
                         $typeOperators[] = $x;
                         continue;
                     }
@@ -3217,7 +3292,7 @@ class PHP extends Tokenizer
                             $line = $this->tokens[$x]['line'];
                             echo "\t* token $x on line $line changed from T_BITWISE_OR to T_TYPE_UNION".PHP_EOL;
                         }
-                    } else {
+                    } else if ($this->tokens[$x]['code'] === T_BITWISE_AND) {
                         $this->tokens[$x]['code'] = T_TYPE_INTERSECTION;
                         $this->tokens[$x]['type'] = 'T_TYPE_INTERSECTION';
 
@@ -3225,6 +3300,32 @@ class PHP extends Tokenizer
                             $line = $this->tokens[$x]['line'];
                             echo "\t* token $x on line $line changed from T_BITWISE_AND to T_TYPE_INTERSECTION".PHP_EOL;
                         }
+                    } else if ($this->tokens[$x]['code'] === T_OPEN_PARENTHESIS) {
+                        $this->tokens[$x]['code'] = T_TYPE_OPEN_PARENTHESIS;
+                        $this->tokens[$x]['type'] = 'T_TYPE_OPEN_PARENTHESIS';
+
+                        if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                            $line = $this->tokens[$x]['line'];
+                            echo "\t* token $x on line $line changed from T_OPEN_PARENTHESIS to T_TYPE_OPEN_PARENTHESIS".PHP_EOL;
+                        }
+                    } else if ($this->tokens[$x]['code'] === T_CLOSE_PARENTHESIS) {
+                        $this->tokens[$x]['code'] = T_TYPE_CLOSE_PARENTHESIS;
+                        $this->tokens[$x]['type'] = 'T_TYPE_CLOSE_PARENTHESIS';
+
+                        if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                            $line = $this->tokens[$x]['line'];
+                            echo "\t* token $x on line $line changed from T_CLOSE_PARENTHESIS to T_TYPE_CLOSE_PARENTHESIS".PHP_EOL;
+                        }
+                    }//end if
+                }//end foreach
+
+                if (isset($maybeNullable) === true) {
+                    $this->tokens[$maybeNullable]['code'] = T_NULLABLE;
+                    $this->tokens[$maybeNullable]['type'] = 'T_NULLABLE';
+
+                    if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                        $line = $this->tokens[$maybeNullable]['line'];
+                        echo "\t* token $maybeNullable on line $line changed from T_INLINE_THEN to T_NULLABLE".PHP_EOL;
                     }
                 }
 

@@ -131,6 +131,24 @@ final class ArrayKeywordTest extends AbstractTokenizerTestCase
             'OO property type'           => [
                 'testMarker' => '/* testOOPropertyType */',
             ],
+
+            'OO constant DNF type'       => [
+                'testMarker' => '/* testOOConstDNFType */',
+            ],
+            'OO property DNF type'       => [
+                'testMarker'  => '/* testOOPropertyDNFType */',
+                'testContent' => 'ARRAY',
+            ],
+            'function param DNF type'    => [
+                'testMarker' => '/* testFunctionDeclarationParamDNFType */',
+            ],
+            'closure param DNF type'     => [
+                'testMarker'  => '/* testClosureDeclarationParamDNFType */',
+            ],
+            'arrow return DNF type'      => [
+                'testMarker'  => '/* testArrowDeclarationReturnDNFType */',
+                'testContent' => 'Array',
+            ],
         ];
 
     }//end dataArrayType()

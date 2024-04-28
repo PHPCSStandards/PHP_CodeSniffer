@@ -135,6 +135,7 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
 
             'function call: static'                           => ['/* testKeywordAsFunctionCallNameShouldBeStringStatic */'],
             'method call: static'                             => ['/* testKeywordAsMethodCallNameShouldBeStringStatic */'],
+            'method call: static with dnf look a like param'  => ['/* testKeywordAsFunctionCallNameShouldBeStringStaticDNFLookaLike */'],
         ];
 
     }//end dataStrings()
@@ -532,6 +533,10 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
             ],
             'static: return type for arrow function' => [
                 'testMarker'        => '/* testStaticIsKeywordWhenReturnType */',
+                'expectedTokenType' => 'T_STATIC',
+            ],
+            'static: property modifier before DNF'   => [
+                'testMarker'        => '/* testStaticIsKeywordPropertyModifierBeforeDNF */',
                 'expectedTokenType' => 'T_STATIC',
             ],
         ];

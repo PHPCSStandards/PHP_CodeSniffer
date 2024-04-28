@@ -119,6 +119,15 @@ $arrowWithUnionParam = fn(Traversable&Countable $param) : int => (new SomeClass(
 /* testIntersectionReturnType */
 $arrowWithUnionReturn = fn($param) : \MyFoo&SomeInterface => new SomeClass($param);
 
+/* testDNFParamType */
+$arrowWithUnionParam = fn((Traversable&Countable)|null $param) : SomeClass => new SomeClass($param) ?? null;
+
+/* testDNFReturnType */
+$arrowWithUnionReturn = fn($param) : false|(\MyFoo&SomeInterface) => new \MyFoo($param) ?? false;
+
+/* testDNFParamTypeWithReturnByRef */
+$arrowWithParamReturnByRef = fn &((A&B)|null $param) => $param * 10;
+
 /* testTernary */
 $fn = fn($a) => $a ? /* testTernaryThen */ fn() : string => 'a' : /* testTernaryElse */ fn() : string => 'b';
 
