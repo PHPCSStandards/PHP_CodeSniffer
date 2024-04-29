@@ -2260,7 +2260,7 @@ class File
      *                                  be returned.
      * @param bool             $local   If true, tokens outside the current statement
      *                                  will not be checked. IE. checking will stop
-     *                                  at the previous semi-colon found.
+     *                                  at the previous semicolon found.
      *
      * @return int|false
      * @see    findNext()
@@ -2341,7 +2341,7 @@ class File
      *                                  be returned.
      * @param bool             $local   If true, tokens outside the current statement
      *                                  will not be checked. i.e., checking will stop
-     *                                  at the next semi-colon found.
+     *                                  at the next semicolon found.
      *
      * @return int|false
      * @see    findPrevious()

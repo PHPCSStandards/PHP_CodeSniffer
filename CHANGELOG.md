@@ -1651,7 +1651,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Squiz.WhiteSpace.SuperfluousWhitespace no longer throws errors for spacing between functions and properties in anon classes
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Zend.Files.ClosingTag no longer adds a semi-colon during fixing of a file that only contains a comment
+- Zend.Files.ClosingTag no longer adds a semicolon during fixing of a file that only contains a comment
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 - Zend.NamingConventions.ValidVariableName now supports variables inside anonymous classes correctly
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch

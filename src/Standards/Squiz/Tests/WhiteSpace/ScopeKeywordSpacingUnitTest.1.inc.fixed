@@ -72,7 +72,7 @@ class MyOtherClass
         $varQ = 'string',
         $varR = 123;
 
-    // Intentionally missing a semi-colon for testing.
+    // Intentionally missing a semicolon for testing.
     public
         $varS,
         $varT
