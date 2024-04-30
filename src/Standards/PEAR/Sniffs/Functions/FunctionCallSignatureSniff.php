@@ -339,7 +339,7 @@ class FunctionCallSignatureSniff implements Sniff
         // We need to work out how far indented the function
         // call itself is, so we can work out how far to
         // indent the arguments.
-        $first = $phpcsFile->findFirstOnLine(T_WHITESPACE, $stackPtr, true);
+        $first = $phpcsFile->findFirstOnLine([T_WHITESPACE, T_INLINE_HTML], $stackPtr, true);
         if ($first !== false
             && $tokens[$first]['code'] === T_CONSTANT_ENCAPSED_STRING
             && $tokens[($first - 1)]['code'] === T_CONSTANT_ENCAPSED_STRING
@@ -666,6 +666,14 @@ class FunctionCallSignatureSniff implements Sniff
             return;
         }
 
+        $firstToken = $tokens[$first];
+        if ($firstToken['code'] === T_OPEN_TAG || $firstToken['code'] === T_OPEN_TAG_WITH_ECHO) {
+            $prevToken = $tokens[($first - 1)];
+            if ($prevToken !== false && $firstToken['line'] === $prevToken['line']) {
+                return;
+            }
+        }
+
         $error = 'Opening statement of multi-line function call not indented correctly; expected %s spaces but found %s';
         $data  = [
             $functionIndent,
@@ -684,7 +692,7 @@ class FunctionCallSignatureSniff implements Sniff
         } else if ($tokens[$first]['code'] === T_INLINE_HTML) {
             $newContent = $padding.ltrim($tokens[$first]['content']);
             $phpcsFile->fixer->replaceToken($first, $newContent);
-        } else {
+        } else if ($tokens[($first - 1)]['code'] === T_WHITESPACE) {
             $phpcsFile->fixer->replaceToken(($first - 1), $padding);
         }
 
