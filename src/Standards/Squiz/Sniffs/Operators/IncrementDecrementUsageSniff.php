@@ -120,7 +120,7 @@ class IncrementDecrementUsageSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $assignedVar = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
+        $assignedVar = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
         // Not an assignment, return.
         if ($tokens[$assignedVar]['code'] !== T_VARIABLE) {
             return;
@@ -129,8 +129,14 @@ class IncrementDecrementUsageSniff implements Sniff
         $statementEnd = $phpcsFile->findNext([T_SEMICOLON, T_CLOSE_PARENTHESIS, T_CLOSE_SQUARE_BRACKET, T_CLOSE_CURLY_BRACKET], $stackPtr);
 
         // If there is anything other than variables, numbers, spaces or operators we need to return.
-        $noiseTokens = $phpcsFile->findNext([T_LNUMBER, T_VARIABLE, T_WHITESPACE, T_PLUS, T_MINUS, T_OPEN_PARENTHESIS], ($stackPtr + 1), $statementEnd, true);
+        $find   = Tokens::$emptyTokens;
+        $find[] = T_LNUMBER;
+        $find[] = T_VARIABLE;
+        $find[] = T_PLUS;
+        $find[] = T_MINUS;
+        $find[] = T_OPEN_PARENTHESIS;
 
+        $noiseTokens = $phpcsFile->findNext($find, ($stackPtr + 1), $statementEnd, true);
         if ($noiseTokens !== false) {
             return;
         }
@@ -145,8 +151,8 @@ class IncrementDecrementUsageSniff implements Sniff
         }
 
         if ($tokens[$stackPtr]['code'] === T_EQUAL) {
-            $nextVar          = ($stackPtr + 1);
-            $previousVariable = ($stackPtr + 1);
+            $nextVar          = $stackPtr;
+            $previousVariable = $stackPtr;
             $variableCount    = 0;
             while (($nextVar = $phpcsFile->findNext(T_VARIABLE, ($nextVar + 1), $statementEnd)) !== false) {
                 $previousVariable = $nextVar;
@@ -165,8 +171,8 @@ class IncrementDecrementUsageSniff implements Sniff
 
         // We have only one variable, and it's the same as what is being assigned,
         // so we need to check what is being added or subtracted.
-        $nextNumber     = ($stackPtr + 1);
-        $previousNumber = ($stackPtr + 1);
+        $nextNumber     = $stackPtr;
+        $previousNumber = $stackPtr;
         $numberCount    = 0;
         while (($nextNumber = $phpcsFile->findNext([T_LNUMBER], ($nextNumber + 1), $statementEnd, false)) !== false) {
             $previousNumber = $nextNumber;

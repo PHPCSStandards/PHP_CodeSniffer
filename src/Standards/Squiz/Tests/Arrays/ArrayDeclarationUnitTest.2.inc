@@ -524,3 +524,15 @@ $x = [
   'a',
   'b',
    ];
+
+$x = [
+      1, static fn (float $item): float => match ($item) {
+        2.0 => 3.0,
+        default => $item
+    },
+     ];
+
+$x = [
+      1, static::helloWorld(), $class instanceof static,
+      2,
+     ];

@@ -9,9 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class BackfillEnumTest extends AbstractMethodUnitTest
+final class BackfillEnumTest extends AbstractTokenizerTestCase
 {
 
 
@@ -30,21 +28,21 @@ final class BackfillEnumTest extends AbstractMethodUnitTest
      */
     public function testEnums($testMarker, $testContent, $openerOffset, $closerOffset)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
+        $enum       = $this->getTargetToken($testMarker, [T_ENUM, T_STRING], $testContent);
+        $tokenArray = $tokens[$enum];
 
-        $enum = $this->getTargetToken($testMarker, [T_ENUM, T_STRING], $testContent);
+        $this->assertSame(T_ENUM, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_ENUM (code)');
+        $this->assertSame('T_ENUM', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_ENUM (type)');
 
-        $this->assertSame(T_ENUM, $tokens[$enum]['code']);
-        $this->assertSame('T_ENUM', $tokens[$enum]['type']);
+        $this->assertArrayHasKey('scope_condition', $tokenArray);
+        $this->assertArrayHasKey('scope_opener', $tokenArray);
+        $this->assertArrayHasKey('scope_closer', $tokenArray);
 
-        $this->assertArrayHasKey('scope_condition', $tokens[$enum]);
-        $this->assertArrayHasKey('scope_opener', $tokens[$enum]);
-        $this->assertArrayHasKey('scope_closer', $tokens[$enum]);
+        $this->assertSame($enum, $tokenArray['scope_condition']);
 
-        $this->assertSame($enum, $tokens[$enum]['scope_condition']);
-
-        $scopeOpener = $tokens[$enum]['scope_opener'];
-        $scopeCloser = $tokens[$enum]['scope_closer'];
+        $scopeOpener = $tokenArray['scope_opener'];
+        $scopeCloser = $tokenArray['scope_closer'];
 
         $expectedScopeOpener = ($enum + $openerOffset);
         $expectedScopeCloser = ($enum + $closerOffset);
@@ -138,11 +136,12 @@ final class BackfillEnumTest extends AbstractMethodUnitTest
      */
     public function testNotEnums($testMarker, $testContent)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
+        $target     = $this->getTargetToken($testMarker, [T_ENUM, T_STRING], $testContent);
+        $tokenArray = $tokens[$target];
 
-        $target = $this->getTargetToken($testMarker, [T_ENUM, T_STRING], $testContent);
-        $this->assertSame(T_STRING, $tokens[$target]['code']);
-        $this->assertSame('T_STRING', $tokens[$target]['type']);
+        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
+        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
 
     }//end testNotEnums()
 

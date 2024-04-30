@@ -10,13 +10,13 @@
 function foo()
 <em>{</em>
 }
-]]>
+        ]]>
         </code>
         <code title="Invalid: Opening brace is on the same line as the function declaration.">
         <![CDATA[
 function foo() <em>{</em>
 }
-]]>
+        ]]>
         </code>
     </code_comparison>
     <code_comparison>
@@ -26,7 +26,7 @@ function foo()
 {
 <em>    return 42;</em>
 }
-]]>
+        ]]>
         </code>
         <code title="Invalid: A blank line after the opening brace.">
         <![CDATA[
@@ -35,7 +35,7 @@ function foo()
 <em></em>
     return 42;
 }
-]]>
+        ]]>
         </code>
     </code_comparison>
 </documentation>

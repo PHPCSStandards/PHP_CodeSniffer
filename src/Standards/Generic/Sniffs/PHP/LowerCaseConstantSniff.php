@@ -81,6 +81,9 @@ class LowerCaseConstantSniff implements Sniff
         $targets[] = T_CLOSURE;
         $targets[] = T_FN;
 
+        // Register constant keyword to filter out type declarations.
+        $targets[] = T_CONST;
+
         return $targets;
 
     }//end register()
@@ -100,6 +103,19 @@ class LowerCaseConstantSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
+
+        // Skip over potential type declarations for constants.
+        if ($tokens[$stackPtr]['code'] === T_CONST) {
+            // Constant must always have a value assigned to it, so we can just look for the assignment
+            // operator. Anything between the const keyword and the assignment can be safely ignored.
+            $skipTo = $phpcsFile->findNext(T_EQUAL, ($stackPtr + 1));
+            if ($skipTo !== false) {
+                return $skipTo;
+            }
+
+            // If we're at the end of the file, just return.
+            return;
+        }
 
         /*
          * Skip over type declarations for properties.

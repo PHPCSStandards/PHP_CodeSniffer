@@ -15,10 +15,9 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 use PHP_CodeSniffer\Util\Tokens;
 
-final class StableCommentWhitespaceTest extends AbstractMethodUnitTest
+final class StableCommentWhitespaceTest extends AbstractTokenizerTestCase
 {
 
 
@@ -35,12 +34,20 @@ final class StableCommentWhitespaceTest extends AbstractMethodUnitTest
      */
     public function testCommentTokenization($testMarker, $expectedTokens)
     {
-        $tokens  = self::$phpcsFile->getTokens();
+        $tokens  = $this->phpcsFile->getTokens();
         $comment = $this->getTargetToken($testMarker, Tokens::$commentTokens);
 
         foreach ($expectedTokens as $key => $tokenInfo) {
-            $this->assertSame(constant($tokenInfo['type']), $tokens[$comment]['code']);
-            $this->assertSame($tokenInfo['type'], $tokens[$comment]['type']);
+            $this->assertSame(
+                constant($tokenInfo['type']),
+                $tokens[$comment]['code'],
+                'Token tokenized as '.Tokens::tokenName($tokens[$comment]['code']).', not '.$tokenInfo['type'].' (code)'
+            );
+            $this->assertSame(
+                $tokenInfo['type'],
+                $tokens[$comment]['type'],
+                'Token tokenized as '.$tokens[$comment]['type'].', not '.$tokenInfo['type'].' (type)'
+            );
             $this->assertSame($tokenInfo['content'], $tokens[$comment]['content']);
 
             ++$comment;

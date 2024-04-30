@@ -169,7 +169,7 @@ functionCall( $something , &new Foobar() );
 $closure = function() use (&$var){};
 
 /* testUseByReferenceWithCommentFirstParam */
-$closure = function() use /*comment*/ (&$this->value){};
+$closure = function() use /*comment*/ (&$value){};
 
 /* testUseByReferenceWithCommentSecondParam */
 $closure = function() use /*comment*/ ($varA, &$varB){};
@@ -200,6 +200,12 @@ $closure = function &($param) use ($value) {};
 
 /* testBitwiseAndArrowFunctionInDefault */
 $fn = fn( $one = E_NOTICE & E_STRICT) => 1;
+
+/* testIntersectionIsNotReference */
+function intersect(Foo&Bar $param) {}
+
+/* testDNFTypeIsNotReference */
+$fn = fn((Foo&\Bar)|null /* testParamPassByReference */ &$param) => $param;
 
 /* testTokenizerIssue1284PHPCSlt280A */
 if ($foo) {}

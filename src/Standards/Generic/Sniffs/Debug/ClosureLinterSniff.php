@@ -5,6 +5,8 @@
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ *
+ * @deprecated 3.9.0
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Debug;
@@ -67,7 +69,7 @@ class ClosureLinterSniff implements Sniff
     {
         $lintPath = Config::getExecutablePath('gjslint');
         if ($lintPath === null) {
-            return ($phpcsFile->numTokens + 1);
+            return $phpcsFile->numTokens;
         }
 
         $fileName = $phpcsFile->getFilename();
@@ -77,7 +79,7 @@ class ClosureLinterSniff implements Sniff
         exec($cmd, $output, $retval);
 
         if (is_array($output) === false) {
-            return ($phpcsFile->numTokens + 1);
+            return $phpcsFile->numTokens;
         }
 
         foreach ($output as $finding) {
@@ -109,7 +111,7 @@ class ClosureLinterSniff implements Sniff
         }//end foreach
 
         // Ignore the rest of the file.
-        return ($phpcsFile->numTokens + 1);
+        return $phpcsFile->numTokens;
 
     }//end process()
 

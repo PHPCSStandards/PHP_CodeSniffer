@@ -9,10 +9,9 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 use PHP_CodeSniffer\Util\Tokens;
 
-final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
+final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
 {
 
 
@@ -30,7 +29,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      */
     public function testNamedFunctionCallArguments($testMarker, $parameters)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         foreach ($parameters as $content) {
             $label = $this->getTargetToken($testMarker, [T_STRING, T_PARAM_NAME], $content);
@@ -47,7 +46,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
             );
 
             // Get the next non-empty token.
-            $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
+            $colon = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
 
             $this->assertSame(
                 ':',
@@ -295,7 +294,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      */
     public function testOtherTstringInFunctionCall($testMarker, $content)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $label = $this->getTargetToken($testMarker, [T_STRING, T_PARAM_NAME], $content);
 
@@ -354,12 +353,12 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      */
     public function testMixedPositionalAndNamedArgsWithTernary()
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $true = $this->getTargetToken('/* testMixedPositionalAndNamedArgsWithTernary */', T_TRUE);
 
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($true + 1), null, true);
+        $colon = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($true + 1), null, true);
 
         $this->assertSame(
             T_INLINE_ELSE,
@@ -375,7 +374,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
         $label = $this->getTargetToken('/* testMixedPositionalAndNamedArgsWithTernary */', T_PARAM_NAME, 'name');
 
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
+        $colon = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
 
         $this->assertSame(
             ':',
@@ -406,7 +405,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      */
     public function testNamedArgWithTernary()
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         /*
          * First argument.
@@ -415,7 +414,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
         $label = $this->getTargetToken('/* testNamedArgWithTernary */', T_PARAM_NAME, 'label');
 
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
+        $colon = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
 
         $this->assertSame(
             ':',
@@ -436,7 +435,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
         $true = $this->getTargetToken('/* testNamedArgWithTernary */', T_TRUE);
 
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($true + 1), null, true);
+        $colon = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($true + 1), null, true);
 
         $this->assertSame(
             T_INLINE_ELSE,
@@ -456,7 +455,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
         $label = $this->getTargetToken('/* testNamedArgWithTernary */', T_PARAM_NAME, 'more');
 
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
+        $colon = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
 
         $this->assertSame(
             ':',
@@ -477,7 +476,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
         $true = $this->getTargetToken('/* testNamedArgWithTernary */', T_STRING, 'CONSTANT_A');
 
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($true + 1), null, true);
+        $colon = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($true + 1), null, true);
 
         $this->assertSame(
             T_INLINE_ELSE,
@@ -503,7 +502,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      */
     public function testTernaryWithFunctionCallsInThenElse()
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         /*
          * Then.
@@ -512,7 +511,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
         $label = $this->getTargetToken('/* testTernaryWithFunctionCallsInThenElse */', T_PARAM_NAME, 'label');
 
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
+        $colon = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
 
         $this->assertSame(
             ':',
@@ -533,7 +532,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
         $closeParens = $this->getTargetToken('/* testTernaryWithFunctionCallsInThenElse */', T_CLOSE_PARENTHESIS);
 
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($closeParens + 1), null, true);
+        $colon = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($closeParens + 1), null, true);
 
         $this->assertSame(
             T_INLINE_ELSE,
@@ -553,7 +552,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
         $label = $this->getTargetToken('/* testTernaryWithFunctionCallsInThenElse */', T_PARAM_NAME, 'more');
 
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
+        $colon = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
 
         $this->assertSame(
             ':',
@@ -583,12 +582,12 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      */
     public function testTernaryWithConstantsInThenElse()
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $constant = $this->getTargetToken('/* testTernaryWithConstantsInThenElse */', T_STRING, 'CONSTANT_NAME');
 
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($constant + 1), null, true);
+        $colon = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($constant + 1), null, true);
 
         $this->assertSame(
             T_INLINE_ELSE,
@@ -613,12 +612,12 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      */
     public function testSwitchStatement()
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $label = $this->getTargetToken('/* testSwitchCaseWithConstant */', T_STRING, 'MY_CONSTANT');
 
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
+        $colon = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
 
         $this->assertSame(
             T_COLON,
@@ -634,7 +633,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
         $label = $this->getTargetToken('/* testSwitchCaseWithClassProperty */', T_STRING, 'property');
 
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
+        $colon = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
 
         $this->assertSame(
             T_COLON,
@@ -650,7 +649,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
         $default = $this->getTargetToken('/* testSwitchDefault */', T_DEFAULT);
 
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($default + 1), null, true);
+        $colon = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($default + 1), null, true);
 
         $this->assertSame(
             T_COLON,
@@ -675,7 +674,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      */
     public function testParseErrorVariableLabel()
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $label = $this->getTargetToken('/* testParseErrorDynamicName */', [T_VARIABLE, T_PARAM_NAME], '$variableStoringParamName');
 
@@ -691,7 +690,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
         );
 
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
+        $colon = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
 
         $this->assertSame(
             ':',
@@ -725,7 +724,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      */
     public function testOtherColonsInTernary($testMarker)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
 
         $startOfStatement = $this->getTargetToken($testMarker, T_VARIABLE);
 
@@ -792,7 +791,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
      */
     public function testReservedKeywordsAsName($testMarker, $tokenTypes, $tokenContent)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens = $this->phpcsFile->getTokens();
         $label  = $this->getTargetToken($testMarker, $tokenTypes, $tokenContent);
 
         $this->assertSame(
@@ -807,7 +806,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
         );
 
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
+        $colon = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
 
         $this->assertSame(
             ':',

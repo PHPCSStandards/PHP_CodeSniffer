@@ -25,7 +25,10 @@ class DisallowYodaConditionsSniff implements Sniff
      */
     public function register()
     {
-        return Tokens::$comparisonTokens;
+        $tokens = Tokens::$comparisonTokens;
+        unset($tokens[T_COALESCE]);
+
+        return $tokens;
 
     }//end register()
 

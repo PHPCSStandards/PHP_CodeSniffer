@@ -79,6 +79,11 @@ class ReturnMe {
     private function myFunction(): static {
         return $this;
     }
+
+    /* testReturnTypeNullableStatic */
+    function myNullableFunction(): ?static {
+        return $this;
+    }
 }
 
 /* testPHP8MixedTypeHint */
@@ -184,6 +189,18 @@ $value = $obj->fn(true);
 
 /* testFunctionDeclarationNestedInTernaryPHPCS2975 */
 return (!$a ? [ new class { public function b(): c {} } ] : []);
+
+/* testClosureWithUseNoReturnType */
+$closure = function () use($a) /*comment*/ {};
+
+/* testClosureWithUseNoReturnTypeIllegalUseProp */
+$closure = function () use ($this->prop){};
+
+/* testClosureWithUseWithReturnType */
+$closure = function () use /*comment*/ ($a): Type {};
+
+/* testClosureWithUseMultiParamWithReturnType */
+$closure = function () use ($a, &$b, $c, $d, $e, $f, $g): ?array {};
 
 /* testArrowFunctionLiveCoding */
 // Intentional parse error. This has to be the last test in the file.

@@ -88,3 +88,9 @@ $instance = new class() extends SomeClass implements
     SomeInterface{
     public function __construct() {}
 };
+
+// PHP 8.3 readonly anonymous classes.
+$anon = new readonly class {};
+$anon = new readonly    class {};
+$anon = new readonly
+        class {};

@@ -11,6 +11,7 @@ namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Files\File;
+use XMLWriter;
 
 class Xml implements Report
 {
@@ -32,7 +33,7 @@ class Xml implements Report
      */
     public function generateFileReport($report, File $phpcsFile, $showSources=false, $width=80)
     {
-        $out = new \XMLWriter;
+        $out = new XMLWriter;
         $out->openMemory();
         $out->setIndent(true);
         $out->setIndentString('    ');

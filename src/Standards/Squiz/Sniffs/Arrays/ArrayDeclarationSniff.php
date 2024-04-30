@@ -654,7 +654,11 @@ class ArrayDeclarationSniff implements Sniff
                 if ($tokens[$valuePointer]['code'] === T_CLOSURE
                     || $tokens[$valuePointer]['code'] === T_FN
                 ) {
-                    $ignoreTokens += [T_STATIC => T_STATIC];
+                    // Check if the closure is static, if it is, override the value pointer as indices before skip static.
+                    $staticPointer = $phpcsFile->findPrevious($ignoreTokens, ($valuePointer - 1), ($arrayStart + 1), true);
+                    if ($staticPointer !== false && $tokens[$staticPointer]['code'] === T_STATIC) {
+                        $valuePointer = $staticPointer;
+                    }
                 }
 
                 $previous = $phpcsFile->findPrevious($ignoreTokens, ($valuePointer - 1), ($arrayStart + 1), true);

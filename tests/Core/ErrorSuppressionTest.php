@@ -9,8 +9,8 @@
 
 namespace PHP_CodeSniffer\Tests\Core;
 
-use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Files\DummyFile;
+use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHPUnit\Framework\TestCase;
 
@@ -730,9 +730,9 @@ EOD;
     {
         return [
             'no suppression'                                          => [
-                'before'         => '',
-                'after'          => '',
-                'expectedErrors' => 1,
+                'before'           => '',
+                'after'            => '',
+                'expectedWarnings' => 1,
             ],
 
             // Process with suppression.

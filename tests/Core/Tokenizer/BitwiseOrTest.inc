@@ -9,6 +9,30 @@ $result = $value | $test /* testBitwiseOr2 */ | $another;
 
 class TypeUnion
 {
+    /* testTypeUnionOOConstSimple */
+    public const Foo|Bar SIMPLE = new Foo;
+
+    /* testTypeUnionOOConstReverseModifierOrder */
+    protected final const int|float MODIFIERS_REVERSED /* testBitwiseOrOOConstDefaultValue */ = E_WARNING | E_NOTICE;
+
+    const
+        /* testTypeUnionOOConstMulti1 */
+        array |
+        /* testTypeUnionOOConstMulti2 */
+        Traversable | // phpcs:ignore Stnd.Cat.Sniff
+        false
+        /* testTypeUnionOOConstMulti3 */
+        | null MULTI_UNION = false;
+
+    /* testTypeUnionOOConstNamespaceRelative */
+    final protected const namespace\Sub\NameA|namespace\Sub\NameB NAMESPACE_RELATIVE = new namespace\Sub\NameB;
+
+    /* testTypeUnionOOConstPartiallyQualified */
+    const Partially\Qualified\NameA|Partially\Qualified\NameB PARTIALLY_QUALIFIED = new Partially\Qualified\NameA;
+
+    /* testTypeUnionOOConstFullyQualified */
+    const \Fully\Qualified\NameA|\Fully\Qualified\NameB FULLY_QUALIFIED = new \Fully\Qualified\NameB();
+
     /* testTypeUnionPropertySimple */
     public static Foo|Bar $obj;
 
@@ -96,6 +120,19 @@ function globalFunctionWithSpreadAndReference(
     /* testTypeUnionWithSpreadOperator */
     string|int ...$paramB
 ) {}
+
+$dnfTypes = new class {
+    /* testTypeUnionConstantTypeUnionBeforeDNF */
+    const Foo|(A&B) UNION_BEFORE = /* testBitwiseOrOOConstDefaultValueDNF */ Foo|(A&B);
+
+    /* testTypeUnionPropertyTypeUnionAfterDNF */
+    protected (\FQN&namespace\Relative)|Partially\Qualified $union_after = /* testBitwiseOrPropertyDefaultValueDNF */ (A&B)|Foo;
+
+    public function unionBeforeAndAfter(
+        /* testTypeUnionParamUnionBeforeAndAfterDNF */
+        string|(Stringable&\Countable)|int $param = /* testBitwiseOrParamDefaultValueDNF */ ( CONST_A & CONST_B) | CONST_C
+    ): /* testTypeUnionReturnTypeUnionAfterDNF */ (A&B)|null {}
+};
 
 /* testTypeUnionClosureParamIllegalNullable */
 $closureWithParamType = function (?string|null $string) {};

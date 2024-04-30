@@ -21,10 +21,10 @@ $var = array(
 );
 
 /* testFunctionDeclarationParamType */
-function foo(array $a) {}
+function typedParam(array $a) {}
 
 /* testFunctionDeclarationReturnType */
-function foo($a) : int|array|null {}
+function returnType($a) : int|array|null {}
 
 class Bar {
     /* testClassConst */
@@ -32,4 +32,27 @@ class Bar {
 
     /* testClassMethod */
     public function array() {}
+
+    /* testOOConstType */
+    const array /* testTypedOOConstName */ ARRAY = /* testOOConstDefault */ array();
+
+    /* testOOPropertyType */
+    protected array $property;
+}
+
+class DNFTypes {
+    /* testOOConstDNFType */
+    const (A&B)|array|(C&D) NAME = [];
+
+    /* testOOPropertyDNFType */
+    protected (A&B)|ARRAY|null $property;
+
+    /* testFunctionDeclarationParamDNFType */
+    public function name(null|array|(A&B) $param) {
+        /* testClosureDeclarationParamDNFType */
+        $cl = function ( array|(A&B) $param) {};
+
+        /* testArrowDeclarationReturnDNFType */
+        $arrow = fn($a): (A&B)|Array => new $a;
+    }
 }

@@ -53,7 +53,6 @@ class ContextSensitiveKeywords
     const /* testMatch */ MATCH = 'MATCH';
     const /* testNamespace */ NAMESPACE = 'NAMESPACE';
     const /* testNew */ NEW = 'NEW';
-    const /* testParent */ PARENT = 'PARENT';
     const /* testPrint */ PRINT = 'PRINT';
     const /* testPrivate */ PRIVATE = 'PRIVATE';
     const /* testProtected */ PROTECTED = 'PROTECTED';
@@ -62,7 +61,6 @@ class ContextSensitiveKeywords
     const /* testRequire */ REQUIRE = 'REQUIRE';
     const /* testRequireOnce */ REQUIRE_ONCE = 'REQUIRE_ONCE';
     const /* testReturn */ RETURN = 'RETURN';
-    const /* testSelf */ SELF = 'SELF';
     const /* testStatic */ STATIC = 'STATIC';
     const /* testSwitch */ SWITCH = 'SWITCH';
     const /* testThrows */ THROW = 'THROW';
@@ -79,9 +77,11 @@ class ContextSensitiveKeywords
     const /* testOr */ OR = 'LOGICAL_OR';
     const /* testXor */ XOR = 'LOGICAL_XOR';
 
-    const /* testFalse */ FALSE = 'FALSE',
-    const /* testTrue */ TRUE = 'TRUE',
-    const /* testNull */ NULL = 'NULL',
+    const /* testArrayIsTstringInConstType */ array /* testArrayNameForTypedConstant */ ARRAY = /* testArrayIsKeywordInConstDefault */ array();
+    const /* testStaticIsKeywordAsConstType */ static /* testStaticIsNameForTypedConstant */ STATIC = new /* testStaticIsKeywordAsConstDefault */ static;
+
+    const int|bool /* testPrivateNameForUnionTypedConstant */ PRIVATE = 'PRIVATE';
+    const Foo&Bar /* testFinalNameForIntersectionTypedConstant */ FINAL = 'FINAL';
 }
 
 namespace /* testKeywordAfterNamespaceShouldBeString */ class;
@@ -105,16 +105,16 @@ namespace /* testNamespaceNameIsString1 */ my\ /* testNamespaceNameIsString2 */ 
     /* testVarIsKeyword */ var $var;
     /* testStaticIsKeyword */ static $static;
 
-    /* testReadonlyIsKeyword */ readonly $readonly;
+    /* testReadonlyIsKeywordForProperty */ readonly $readonly;
 
     /* testFinalIsKeyword */ final /* testFunctionIsKeyword */ function someFunction(
         /* testCallableIsKeyword */
         callable $callable,
-        /* testSelfIsKeyword */
-        self $self,
-        /* testParentIsKeyword */
-        parent $parent
     ) {
+        $anon = new /* testReadonlyIsKeywordForAnonClass */ readonly class() {
+            public function foo() {}
+        };
+
         /* testReturnIsKeyword */
         return $this;
     }
@@ -220,9 +220,7 @@ $anonymousClass = new /* testAnonymousClassIsKeyword */ class {};
 $anonymousClass2 = new class /* testExtendsInAnonymousClassIsKeyword */ extends SomeParent {};
 $anonymousClass3 = new class /* testImplementsInAnonymousClassIsKeyword */ implements SomeInterface {};
 
-$instantiated1 = new /* testClassInstantiationParentIsKeyword */ parent();
-$instantiated2 = new /* testClassInstantiationSelfIsKeyword */ SELF;
-$instantiated3 = new /* testClassInstantiationStaticIsKeyword */ static($param);
+$instantiated = new /* testClassInstantiationStaticIsKeyword */ static($param);
 
 class Foo extends /* testNamespaceInNameIsKeyword */ namespace\Exception
 {}
@@ -230,35 +228,17 @@ class Foo extends /* testNamespaceInNameIsKeyword */ namespace\Exception
 function /* testKeywordAfterFunctionShouldBeString */ eval() {}
 function /* testKeywordAfterFunctionByRefShouldBeString */ &switch() {}
 
-function /* testKeywordSelfAfterFunctionByRefShouldBeString */ &self() {}
 function /* testKeywordStaticAfterFunctionByRefShouldBeString */ &static() {}
-function /* testKeywordParentAfterFunctionByRefShouldBeString */ &parent() {}
-function /* testKeywordFalseAfterFunctionByRefShouldBeString */ &false() {}
-function /* testKeywordTrueAfterFunctionByRefShouldBeString */ & true () {}
-function /* testKeywordNullAfterFunctionByRefShouldBeString */ &NULL() {}
 
-/* testKeywordAsFunctionCallNameShouldBeStringSelf */ self();
 /* testKeywordAsFunctionCallNameShouldBeStringStatic */ static();
 $obj-> /* testKeywordAsMethodCallNameShouldBeStringStatic */ static();
-/* testKeywordAsFunctionCallNameShouldBeStringParent */ parent();
-/* testKeywordAsFunctionCallNameShouldBeStringFalse */ false();
-/* testKeywordAsFunctionCallNameShouldBeStringTrue */ True ();
-/* testKeywordAsFunctionCallNameShouldBeStringNull */ null /*comment*/ ();
-
-$instantiated4 = new /* testClassInstantiationFalseIsString */ False();
-$instantiated5 = new /* testClassInstantiationTrueIsString */ true ();
-$instantiated6 = new /* testClassInstantiationNullIsString */ null();
 
 $function = /* testStaticIsKeywordBeforeClosure */ static function(/* testStaticIsKeywordWhenParamType */ static $param) {};
 $arrow = /* testStaticIsKeywordBeforeArrow */ static fn(): /* testStaticIsKeywordWhenReturnType */ static => 10;
 
-function standAloneFalseTrueNullTypesAndMore(
-    /* testFalseIsKeywordAsParamType */ false $paramA,
-    /* testTrueIsKeywordAsParamType */ true $paramB,
-    /* testNullIsKeywordAsParamType */ null $paramC,
-) /* testFalseIsKeywordAsReturnType */ false | /* testTrueIsKeywordAsReturnType */ true | /* testNullIsKeywordAsReturnType */ null {
-    if ($a === /* testFalseIsKeywordInComparison */ false
-    || $a === /* testTrueIsKeywordInComparison */ true
-    || $a === /* testNullIsKeywordInComparison */ null
-    ) {}
+/* testKeywordAsFunctionCallNameShouldBeStringStaticDNFLookaLike */
+$obj->static((CONST_A&CONST_B)|CONST_C | $var);
+
+class DNF {
+    public /* testStaticIsKeywordPropertyModifierBeforeDNF */ static (DN&F)|null $dnfProp;
 }

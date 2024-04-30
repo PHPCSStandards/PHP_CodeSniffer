@@ -108,8 +108,8 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
 
                                     // Remove the newline after the docblock, and any entirely
                                     // empty lines before the member var.
-                                    if ($tokens[$i]['code'] === T_WHITESPACE
-                                        && $tokens[$i]['line'] === $tokens[$prev]['line']
+                                    if (($tokens[$i]['code'] === T_WHITESPACE
+                                        && $tokens[$i]['line'] === $tokens[$prev]['line'])
                                         || ($tokens[$i]['column'] === 1
                                         && $tokens[$i]['line'] !== $tokens[($i + 1)]['line'])
                                     ) {

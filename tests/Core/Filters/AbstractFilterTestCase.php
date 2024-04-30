@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the \PHP_CodeSniffer\Filters\GitModified class.
+ * Abstract Testcase class for testing Filters.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2023 PHPCSStandards Contributors
@@ -73,7 +73,7 @@ abstract class AbstractFilterTestCase extends TestCase
     {
         $mockedObj = $this->getMockBuilder($className);
 
-        if (\method_exists($mockedObj, 'onlyMethods') === true) {
+        if (method_exists($mockedObj, 'onlyMethods') === true) {
             // PHPUnit 8+.
             if (is_array($methodsToMock) === true) {
                 return $mockedObj
@@ -184,8 +184,8 @@ abstract class AbstractFilterTestCase extends TestCase
             $basedir.'/src/Standards/Squiz/Sniffs/WhiteSpace/OperatorSpacingSniff.php',
             $basedir.'/src/Standards/Squiz/Tests',
             $basedir.'/src/Standards/Squiz/Tests/WhiteSpace',
-            $basedir.'/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.inc',
-            $basedir.'/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.inc.fixed',
+            $basedir.'/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.1.inc',
+            $basedir.'/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.1.inc.fixed',
             $basedir.'/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.js',
             $basedir.'/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.js.fixed',
             $basedir.'/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.php',

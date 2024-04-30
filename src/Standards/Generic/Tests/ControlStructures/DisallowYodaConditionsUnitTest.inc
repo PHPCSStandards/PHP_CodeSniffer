@@ -173,3 +173,5 @@ echo match ($text) {
     'foo' => 10 === $y,
     10 === $y => 'bar',
 };
+
+1 ?? $nullCoalescingShouldNotTriggerSniff;

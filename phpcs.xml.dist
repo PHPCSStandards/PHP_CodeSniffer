@@ -129,6 +129,9 @@
     <!-- Do not allow unreachable code. -->
     <rule ref="Squiz.PHP.NonExecutableCode"/>
 
+    <!-- Do not allow ambiguous conditions. -->
+    <rule ref="Generic.CodeAnalysis.RequireExplicitBooleanOperatorPrecedence"/>
+
     <!-- The testing bootstrap file uses string concats to stop IDEs seeing the class aliases -->
     <rule ref="Generic.Strings.UnnecessaryStringConcat">
         <exclude-pattern>tests/bootstrap\.php</exclude-pattern>

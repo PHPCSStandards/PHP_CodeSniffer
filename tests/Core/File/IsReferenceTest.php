@@ -23,29 +23,63 @@ final class IsReferenceTest extends AbstractMethodUnitTest
     /**
      * Test that false is returned when a non-"bitwise and" token is passed.
      *
+     * @param string            $testMarker   Comment which precedes the test case.
+     * @param array<int|string> $targetTokens Type of tokens to look for.
+     *
+     * @dataProvider dataNotBitwiseAndToken
+     *
      * @return void
      */
-    public function testNotBitwiseAndToken()
+    public function testNotBitwiseAndToken($testMarker, $targetTokens)
     {
-        $target = $this->getTargetToken('/* testBitwiseAndA */', T_STRING);
+        $targetTokens[] = T_BITWISE_AND;
+
+        $target = $this->getTargetToken($testMarker, $targetTokens);
         $this->assertFalse(self::$phpcsFile->isReference($target));
 
     }//end testNotBitwiseAndToken()
 
 
     /**
+     * Data provider.
+     *
+     * @see testNotBitwiseAndToken()
+     *
+     * @return array<string, array<string, string|array<int|string>>>
+     */
+    public static function dataNotBitwiseAndToken()
+    {
+        return [
+            'Not ampersand token at all'     => [
+                'testMarker'   => '/* testBitwiseAndA */',
+                'targetTokens' => [T_STRING],
+            ],
+            'ampersand in intersection type' => [
+                'testMarker'   => '/* testIntersectionIsNotReference */',
+                'targetTokens' => [T_TYPE_INTERSECTION],
+            ],
+            'ampersand in DNF type'          => [
+                'testMarker'   => '/* testDNFTypeIsNotReference */',
+                'targetTokens' => [T_TYPE_INTERSECTION],
+            ],
+        ];
+
+    }//end dataNotBitwiseAndToken()
+
+
+    /**
      * Test correctly identifying whether a "bitwise and" token is a reference or not.
      *
-     * @param string $identifier Comment which precedes the test case.
+     * @param string $testMarker Comment which precedes the test case.
      * @param bool   $expected   Expected function output.
      *
      * @dataProvider dataIsReference
      *
      * @return void
      */
-    public function testIsReference($identifier, $expected)
+    public function testIsReference($testMarker, $expected)
     {
-        $bitwiseAnd = $this->getTargetToken($identifier, T_BITWISE_AND);
+        $bitwiseAnd = $this->getTargetToken($testMarker, T_BITWISE_AND);
         $result     = self::$phpcsFile->isReference($bitwiseAnd);
         $this->assertSame($expected, $result);
 
@@ -337,6 +371,10 @@ final class IsReferenceTest extends AbstractMethodUnitTest
             'bitwise and: param default value in arrow fn declaration'                                          => [
                 'testMarker' => '/* testBitwiseAndArrowFunctionInDefault */',
                 'expected'   => false,
+            ],
+            'reference: param pass by ref in arrow function'                                                    => [
+                'testMarker' => '/* testParamPassByReference */',
+                'expected'   => true,
             ],
             'issue-1284-short-list-directly-after-close-curly-control-structure'                                => [
                 'testMarker' => '/* testTokenizerIssue1284PHPCSlt280A */',

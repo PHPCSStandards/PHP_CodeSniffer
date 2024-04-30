@@ -168,3 +168,13 @@ class NonArbitraryParenthesesWithKeywords {
 $b = match (  $a  ) {
     1 => true,
 };
+
+// Parentheses after die/exit in a switch case should be ignored.
+switch ( $type ) {
+    case A:
+        exit(    1    );
+    case B:
+        die();
+    default:
+        break;
+}

@@ -19,11 +19,13 @@ standard repository (not here).
 -->
 
 ## Describe the bug
+
 A clear and concise description of what the bug is.
 
 ### Code sample
 ```php
-echo "A short code snippet that can be used to reproduce the bug. Do NOT paste screenshots of code!";
+echo 'A short code snippet that can be used to reproduce the bug.';
+echo 'Do NOT paste screenshots of code!";
 ```
 
 ### Custom ruleset
@@ -39,27 +41,29 @@ Steps to reproduce the behavior:
 1. Create a file called `test.php` with the code sample above...
 2. Run `phpcs test.php ...`
 3. See error message displayed
-```
+```text
 PHPCS output here
 ```
 
 ## Expected behavior
+
 A clear and concise description of what you expected to happen.
 
 ## Versions (please complete the following information)
 
-| | |
-|-|-|
-| Operating System | [e.g., Windows 10, MacOS 10.15]
-| PHP version | [e.g., 7.2, 8.1]
-| PHP_CodeSniffer version | [e.g., 3.7.2, master]
-| Standard | [e.g., PSR2, PSR12, Squiz, custom]
-| Install type | [e.g. Composer (global/local), PHAR, git clone, other (please expand)]
+|                                       |                                                                                                           |
+|--------------------------|----------------------------------------------------------------------  |
+| Operating System           | [e.g., Windows 10, MacOS 10.15]                                                       |
+| PHP version                    | [e.g., 7.2, 8.1]                                                                                     |
+| PHP_CodeSniffer version | [e.g., 3.7.2, master]                                                                            |
+| Standard                         | [e.g., PSR2, PSR12, Squiz, custom]                                                      |
+| Install type                      | [e.g. Composer (global/local), PHAR, git clone, other (please expand)] |
 
 ## Additional context
+
 Add any other context about the problem here.
 
-## Please confirm:
+## Please confirm
 
 - [ ] I have searched the issue list and am not opening a duplicate issue.
 - [ ] I confirm that this bug is a bug in PHP_CodeSniffer and not in one of the external standards.

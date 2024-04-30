@@ -98,7 +98,7 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
                 $indent = str_repeat(' ', ($tokens[$first]['column'] - 1));
                 $phpcsFile->fixer->beginChangeset();
 
-                if ($tokens[($prev + 1)]['code'] === \T_WHITESPACE) {
+                if ($tokens[($prev + 1)]['code'] === T_WHITESPACE) {
                     $phpcsFile->fixer->replaceToken(($prev + 1), '');
                 }
 

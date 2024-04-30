@@ -9,9 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class FinallyTest extends AbstractMethodUnitTest
+final class FinallyTest extends AbstractTokenizerTestCase
 {
 
 
@@ -27,11 +25,12 @@ final class FinallyTest extends AbstractMethodUnitTest
      */
     public function testFinallyKeyword($testMarker)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
+        $target     = $this->getTargetToken($testMarker, [T_FINALLY, T_STRING]);
+        $tokenArray = $tokens[$target];
 
-        $target = $this->getTargetToken($testMarker, [T_FINALLY, T_STRING]);
-        $this->assertSame(T_FINALLY, $tokens[$target]['code']);
-        $this->assertSame('T_FINALLY', $tokens[$target]['type']);
+        $this->assertSame(T_FINALLY, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_FINALLY (code)');
+        $this->assertSame('T_FINALLY', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_FINALLY (type)');
 
     }//end testFinallyKeyword()
 
@@ -66,11 +65,12 @@ final class FinallyTest extends AbstractMethodUnitTest
      */
     public function testFinallyNonKeyword($testMarker)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
+        $target     = $this->getTargetToken($testMarker, [T_FINALLY, T_STRING]);
+        $tokenArray = $tokens[$target];
 
-        $target = $this->getTargetToken($testMarker, [T_FINALLY, T_STRING]);
-        $this->assertSame(T_STRING, $tokens[$target]['code']);
-        $this->assertSame('T_STRING', $tokens[$target]['type']);
+        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
+        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
 
     }//end testFinallyNonKeyword()
 

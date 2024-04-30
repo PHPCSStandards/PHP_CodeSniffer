@@ -9,9 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class BackfillReadonlyTest extends AbstractMethodUnitTest
+final class BackfillReadonlyTest extends AbstractTokenizerTestCase
 {
 
 
@@ -29,11 +27,12 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
      */
     public function testReadonly($testMarker, $testContent='readonly')
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
+        $target     = $this->getTargetToken($testMarker, [T_READONLY, T_STRING], $testContent);
+        $tokenArray = $tokens[$target];
 
-        $target = $this->getTargetToken($testMarker, [T_READONLY, T_STRING], $testContent);
-        $this->assertSame(T_READONLY, $tokens[$target]['code']);
-        $this->assertSame('T_READONLY', $tokens[$target]['type']);
+        $this->assertSame(T_READONLY, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_READONLY (code)');
+        $this->assertSame('T_READONLY', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_READONLY (type)');
 
     }//end testReadonly()
 
@@ -152,6 +151,17 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
             'property declaration, constructor property promotion, DNF type and reference'    => [
                 'testMarker' => '/* testReadonlyConstructorPropertyPromotionWithDNFAndReference */',
             ],
+            'anon class declaration, with parentheses'                                        => [
+                'testMarker' => '/* testReadonlyAnonClassWithParens */',
+            ],
+            'anon class declaration, without parentheses'                                     => [
+                'testMarker'  => '/* testReadonlyAnonClassWithoutParens */',
+                'testContent' => 'Readonly',
+            ],
+            'anon class declaration, with comments and whitespace'                            => [
+                'testMarker'  => '/* testReadonlyAnonClassWithCommentsAndWhitespace */',
+                'testContent' => 'READONLY',
+            ],
             'live coding / parse error'                                                       => [
                 'testMarker' => '/* testParseErrorLiveCoding */',
             ],
@@ -174,11 +184,12 @@ final class BackfillReadonlyTest extends AbstractMethodUnitTest
      */
     public function testNotReadonly($testMarker, $testContent='readonly')
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
+        $target     = $this->getTargetToken($testMarker, [T_READONLY, T_STRING], $testContent);
+        $tokenArray = $tokens[$target];
 
-        $target = $this->getTargetToken($testMarker, [T_READONLY, T_STRING], $testContent);
-        $this->assertSame(T_STRING, $tokens[$target]['code']);
-        $this->assertSame('T_STRING', $tokens[$target]['type']);
+        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
+        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
 
     }//end testNotReadonly()
 

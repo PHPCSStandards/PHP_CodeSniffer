@@ -9,9 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class ShortArrayTest extends AbstractMethodUnitTest
+final class ShortArrayTest extends AbstractTokenizerTestCase
 {
 
 
@@ -27,16 +25,19 @@ final class ShortArrayTest extends AbstractMethodUnitTest
      */
     public function testSquareBrackets($testMarker)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
+        $opener     = $this->getTargetToken($testMarker, [T_OPEN_SQUARE_BRACKET, T_OPEN_SHORT_ARRAY]);
+        $tokenArray = $tokens[$opener];
 
-        $opener = $this->getTargetToken($testMarker, [T_OPEN_SQUARE_BRACKET, T_OPEN_SHORT_ARRAY]);
-        $this->assertSame(T_OPEN_SQUARE_BRACKET, $tokens[$opener]['code']);
-        $this->assertSame('T_OPEN_SQUARE_BRACKET', $tokens[$opener]['type']);
+        $this->assertSame(T_OPEN_SQUARE_BRACKET, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_OPEN_SQUARE_BRACKET (code)');
+        $this->assertSame('T_OPEN_SQUARE_BRACKET', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_OPEN_SQUARE_BRACKET (type)');
 
         if (isset($tokens[$opener]['bracket_closer']) === true) {
-            $closer = $tokens[$opener]['bracket_closer'];
-            $this->assertSame(T_CLOSE_SQUARE_BRACKET, $tokens[$closer]['code']);
-            $this->assertSame('T_CLOSE_SQUARE_BRACKET', $tokens[$closer]['type']);
+            $closer     = $tokens[$opener]['bracket_closer'];
+            $tokenArray = $tokens[$closer];
+
+            $this->assertSame(T_CLOSE_SQUARE_BRACKET, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_CLOSE_SQUARE_BRACKET (code)');
+            $this->assertSame('T_CLOSE_SQUARE_BRACKET', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_CLOSE_SQUARE_BRACKET (type)');
         }
 
     }//end testSquareBrackets()
@@ -47,7 +48,7 @@ final class ShortArrayTest extends AbstractMethodUnitTest
      *
      * @see testSquareBrackets()
      *
-     * @return array
+     * @return array<string, array<string>>
      */
     public static function dataSquareBrackets()
     {
@@ -92,16 +93,19 @@ final class ShortArrayTest extends AbstractMethodUnitTest
      */
     public function testShortArrays($testMarker)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
+        $opener     = $this->getTargetToken($testMarker, [T_OPEN_SQUARE_BRACKET, T_OPEN_SHORT_ARRAY]);
+        $tokenArray = $tokens[$opener];
 
-        $opener = $this->getTargetToken($testMarker, [T_OPEN_SQUARE_BRACKET, T_OPEN_SHORT_ARRAY]);
-        $this->assertSame(T_OPEN_SHORT_ARRAY, $tokens[$opener]['code']);
-        $this->assertSame('T_OPEN_SHORT_ARRAY', $tokens[$opener]['type']);
+        $this->assertSame(T_OPEN_SHORT_ARRAY, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_OPEN_SHORT_ARRAY (code)');
+        $this->assertSame('T_OPEN_SHORT_ARRAY', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_OPEN_SHORT_ARRAY (type)');
 
         if (isset($tokens[$opener]['bracket_closer']) === true) {
-            $closer = $tokens[$opener]['bracket_closer'];
-            $this->assertSame(T_CLOSE_SHORT_ARRAY, $tokens[$closer]['code']);
-            $this->assertSame('T_CLOSE_SHORT_ARRAY', $tokens[$closer]['type']);
+            $closer     = $tokens[$opener]['bracket_closer'];
+            $tokenArray = $tokens[$closer];
+
+            $this->assertSame(T_CLOSE_SHORT_ARRAY, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_CLOSE_SHORT_ARRAY (code)');
+            $this->assertSame('T_CLOSE_SHORT_ARRAY', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_CLOSE_SHORT_ARRAY (type)');
         }
 
     }//end testShortArrays()
@@ -112,7 +116,7 @@ final class ShortArrayTest extends AbstractMethodUnitTest
      *
      * @see testShortArrays()
      *
-     * @return array
+     * @return array<string, array<string>>
      */
     public static function dataShortArrays()
     {

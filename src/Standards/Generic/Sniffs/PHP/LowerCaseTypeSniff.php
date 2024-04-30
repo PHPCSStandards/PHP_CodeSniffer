@@ -87,7 +87,7 @@ class LowerCaseTypeSniff implements Sniff
         }
 
         /*
-         * Check property types.
+         * Check OO constant and property types.
          */
 
         if (isset(Tokens::$ooScopeTokens[$tokens[$stackPtr]['code']]) === true) {
@@ -97,7 +97,7 @@ class LowerCaseTypeSniff implements Sniff
 
             for ($i = ($tokens[$stackPtr]['scope_opener'] + 1); $i < $tokens[$stackPtr]['scope_closer']; $i++) {
                 // Skip over potentially large docblocks.
-                if ($tokens[$i]['code'] === \T_DOC_COMMENT_OPEN_TAG
+                if ($tokens[$i]['code'] === T_DOC_COMMENT_OPEN_TAG
                     && isset($tokens[$i]['comment_closer']) === true
                 ) {
                     $i = $tokens[$i]['comment_closer'];
@@ -105,14 +105,74 @@ class LowerCaseTypeSniff implements Sniff
                 }
 
                 // Skip over function declarations and everything nested within.
-                if ($tokens[$i]['code'] === \T_FUNCTION
+                if ($tokens[$i]['code'] === T_FUNCTION
                     && isset($tokens[$i]['scope_closer']) === true
                 ) {
                     $i = $tokens[$i]['scope_closer'];
                     continue;
                 }
 
-                if ($tokens[$i]['code'] !== \T_VARIABLE) {
+                if ($tokens[$i]['code'] === T_CONST) {
+                    $ignore = Tokens::$emptyTokens;
+                    $ignore[T_NULLABLE] = T_NULLABLE;
+
+                    $startOfType = $phpcsFile->findNext($ignore, ($i + 1), null, true);
+                    if ($startOfType === false) {
+                        // Parse error/live coding. Nothing to do. Rest of loop is moot.
+                        return;
+                    }
+
+                    $assignmentOperator = $phpcsFile->findNext([T_EQUAL, T_SEMICOLON], ($startOfType + 1));
+                    if ($assignmentOperator === false || $tokens[$assignmentOperator]['code'] !== T_EQUAL) {
+                        // Parse error/live coding. Nothing to do. Rest of loop is moot.
+                        return;
+                    }
+
+                    $constName = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($assignmentOperator - 1), null, true);
+                    if ($startOfType !== $constName) {
+                        $endOfType = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($constName - 1), null, true);
+
+                        $type        = '';
+                        $isUnionType = false;
+                        $isIntersectionType = false;
+                        for ($j = $startOfType; $j <= $endOfType; $j++) {
+                            if (isset($ignore[$tokens[$j]['code']]) === true) {
+                                continue;
+                            }
+
+                            if ($tokens[$j]['code'] === T_TYPE_UNION) {
+                                $isUnionType = true;
+                            }
+
+                            if ($tokens[$j]['code'] === T_TYPE_INTERSECTION) {
+                                $isIntersectionType = true;
+                            }
+
+                            $type .= $tokens[$j]['content'];
+                        }
+
+                        $error     = 'PHP constant type declarations must be lowercase; expected "%s" but found "%s"';
+                        $errorCode = 'ConstantTypeFound';
+
+                        if ($isIntersectionType === true) {
+                            // Intersection types don't support simple types.
+                        } else if ($isUnionType === true) {
+                            $this->processUnionType(
+                                $phpcsFile,
+                                $startOfType,
+                                $endOfType,
+                                $error,
+                                $errorCode
+                            );
+                        } else if (isset($this->phpTypes[strtolower($type)]) === true) {
+                            $this->processType($phpcsFile, $startOfType, $type, $error, $errorCode);
+                        }
+                    }//end if
+
+                    continue;
+                }//end if
+
+                if ($tokens[$i]['code'] !== T_VARIABLE) {
                     continue;
                 }
 
@@ -135,7 +195,7 @@ class LowerCaseTypeSniff implements Sniff
                     $error     = 'PHP property type declarations must be lowercase; expected "%s" but found "%s"';
                     $errorCode = 'PropertyTypeFound';
 
-                    if ($props['type_token'] === T_TYPE_INTERSECTION) {
+                    if (strpos($type, '&') !== false) {
                         // Intersection types don't support simple types.
                     } else if (strpos($type, '|') !== false) {
                         $this->processUnionType(
@@ -167,7 +227,7 @@ class LowerCaseTypeSniff implements Sniff
             $error     = 'PHP return type declarations must be lowercase; expected "%s" but found "%s"';
             $errorCode = 'ReturnTypeFound';
 
-            if ($props['return_type_token'] === T_TYPE_INTERSECTION) {
+            if (strpos($returnType, '&') !== false) {
                 // Intersection types don't support simple types.
             } else if (strpos($returnType, '|') !== false) {
                 $this->processUnionType(
@@ -199,7 +259,7 @@ class LowerCaseTypeSniff implements Sniff
                 $error     = 'PHP parameter type declarations must be lowercase; expected "%s" but found "%s"';
                 $errorCode = 'ParamTypeFound';
 
-                if ($param['type_hint_token'] === T_TYPE_INTERSECTION) {
+                if (strpos($typeHint, '&') !== false) {
                     // Intersection types don't support simple types.
                 } else if (strpos($typeHint, '|') !== false) {
                     $this->processUnionType(

@@ -77,7 +77,7 @@ class MyOtherClass
         $varQ = 'string',
         $varR = 123;
 
-    // Intentionally missing a semi-colon for testing.
+    // Intentionally missing a semicolon for testing.
     public
         $varS,
         $varT
@@ -139,3 +139,11 @@ class ReadonlyTest {
 
     public function __construct(readonly  protected  float|int $x, public readonly?string &$y = 'test') {}
 }
+
+// PHP 8.2 readonly classes.
+readonly class ReadonlyClassTest {}
+readonly    class ReadonlyClassTest {}
+
+// PHP 8.3 readonly anonymous classes.
+$anon = new readonly class {};
+$anon = new readonly    class {};

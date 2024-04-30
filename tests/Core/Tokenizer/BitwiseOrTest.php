@@ -9,9 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-
-final class BitwiseOrTest extends AbstractMethodUnitTest
+final class BitwiseOrTest extends AbstractTokenizerTestCase
 {
 
 
@@ -27,11 +25,12 @@ final class BitwiseOrTest extends AbstractMethodUnitTest
      */
     public function testBitwiseOr($testMarker)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
+        $target     = $this->getTargetToken($testMarker, [T_BITWISE_OR, T_TYPE_UNION]);
+        $tokenArray = $tokens[$target];
 
-        $opener = $this->getTargetToken($testMarker, [T_BITWISE_OR, T_TYPE_UNION]);
-        $this->assertSame(T_BITWISE_OR, $tokens[$opener]['code']);
-        $this->assertSame('T_BITWISE_OR', $tokens[$opener]['type']);
+        $this->assertSame(T_BITWISE_OR, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_BITWISE_OR (code)');
+        $this->assertSame('T_BITWISE_OR', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_BITWISE_OR (type)');
 
     }//end testBitwiseOr()
 
@@ -46,21 +45,25 @@ final class BitwiseOrTest extends AbstractMethodUnitTest
     public static function dataBitwiseOr()
     {
         return [
-            'in simple assignment 1'                    => ['/* testBitwiseOr1 */'],
-            'in simple assignment 2'                    => ['/* testBitwiseOr2 */'],
-            'in property default value'                 => ['/* testBitwiseOrPropertyDefaultValue */'],
-            'in method parameter default value'         => ['/* testBitwiseOrParamDefaultValue */'],
-            'in return statement'                       => ['/* testBitwiseOr3 */'],
-            'in closure parameter default value'        => ['/* testBitwiseOrClosureParamDefault */'],
-            'in arrow function parameter default value' => ['/* testBitwiseOrArrowParamDefault */'],
-            'in arrow function return expression'       => ['/* testBitwiseOrArrowExpression */'],
-            'in long array key'                         => ['/* testBitwiseOrInArrayKey */'],
-            'in long array value'                       => ['/* testBitwiseOrInArrayValue */'],
-            'in short array key'                        => ['/* testBitwiseOrInShortArrayKey */'],
-            'in short array value'                      => ['/* testBitwiseOrInShortArrayValue */'],
-            'in catch condition'                        => ['/* testBitwiseOrTryCatch */'],
-            'in parameter in function call'             => ['/* testBitwiseOrNonArrowFnFunctionCall */'],
-            'live coding / undetermined'                => ['/* testLiveCoding */'],
+            'in simple assignment 1'                     => ['/* testBitwiseOr1 */'],
+            'in simple assignment 2'                     => ['/* testBitwiseOr2 */'],
+            'in OO constant default value'               => ['/* testBitwiseOrOOConstDefaultValue */'],
+            'in property default value'                  => ['/* testBitwiseOrPropertyDefaultValue */'],
+            'in method parameter default value'          => ['/* testBitwiseOrParamDefaultValue */'],
+            'in return statement'                        => ['/* testBitwiseOr3 */'],
+            'in closure parameter default value'         => ['/* testBitwiseOrClosureParamDefault */'],
+            'in OO constant default value DNF-like'      => ['/* testBitwiseOrOOConstDefaultValueDNF */'],
+            'in property default value DNF-like'         => ['/* testBitwiseOrPropertyDefaultValueDNF */'],
+            'in method parameter default value DNF-like' => ['/* testBitwiseOrParamDefaultValueDNF */'],
+            'in arrow function parameter default value'  => ['/* testBitwiseOrArrowParamDefault */'],
+            'in arrow function return expression'        => ['/* testBitwiseOrArrowExpression */'],
+            'in long array key'                          => ['/* testBitwiseOrInArrayKey */'],
+            'in long array value'                        => ['/* testBitwiseOrInArrayValue */'],
+            'in short array key'                         => ['/* testBitwiseOrInShortArrayKey */'],
+            'in short array value'                       => ['/* testBitwiseOrInShortArrayValue */'],
+            'in catch condition'                         => ['/* testBitwiseOrTryCatch */'],
+            'in parameter in function call'              => ['/* testBitwiseOrNonArrowFnFunctionCall */'],
+            'live coding / undetermined'                 => ['/* testLiveCoding */'],
         ];
 
     }//end dataBitwiseOr()
@@ -78,11 +81,12 @@ final class BitwiseOrTest extends AbstractMethodUnitTest
      */
     public function testTypeUnion($testMarker)
     {
-        $tokens = self::$phpcsFile->getTokens();
+        $tokens     = $this->phpcsFile->getTokens();
+        $target     = $this->getTargetToken($testMarker, [T_BITWISE_OR, T_TYPE_UNION]);
+        $tokenArray = $tokens[$target];
 
-        $opener = $this->getTargetToken($testMarker, [T_BITWISE_OR, T_TYPE_UNION]);
-        $this->assertSame(T_TYPE_UNION, $tokens[$opener]['code']);
-        $this->assertSame('T_TYPE_UNION', $tokens[$opener]['type']);
+        $this->assertSame(T_TYPE_UNION, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_TYPE_UNION (code)');
+        $this->assertSame('T_TYPE_UNION', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_TYPE_UNION (type)');
 
     }//end testTypeUnion()
 
@@ -97,6 +101,14 @@ final class BitwiseOrTest extends AbstractMethodUnitTest
     public static function dataTypeUnion()
     {
         return [
+            'type for OO constant'                                     => ['/* testTypeUnionOOConstSimple */'],
+            'type for OO constant, reversed modifier order'            => ['/* testTypeUnionOOConstReverseModifierOrder */'],
+            'type for OO constant, first of multi-union'               => ['/* testTypeUnionOOConstMulti1 */'],
+            'type for OO constant, middle of multi-union + comments'   => ['/* testTypeUnionOOConstMulti2 */'],
+            'type for OO constant, last of multi-union'                => ['/* testTypeUnionOOConstMulti3 */'],
+            'type for OO constant, using namespace relative names'     => ['/* testTypeUnionOOConstNamespaceRelative */'],
+            'type for OO constant, using partially qualified names'    => ['/* testTypeUnionOOConstPartiallyQualified */'],
+            'type for OO constant, using fully qualified names'        => ['/* testTypeUnionOOConstFullyQualified */'],
             'type for static property'                                 => ['/* testTypeUnionPropertySimple */'],
             'type for static property, reversed modifier order'        => ['/* testTypeUnionPropertyReverseModifierOrder */'],
             'type for property, first of multi-union'                  => ['/* testTypeUnionPropertyMulti1 */'],
@@ -126,6 +138,10 @@ final class BitwiseOrTest extends AbstractMethodUnitTest
             'return type for method with fully qualified names'        => ['/* testTypeUnionReturnFullyQualified */'],
             'type for function parameter with reference'               => ['/* testTypeUnionWithReference */'],
             'type for function parameter with spread operator'         => ['/* testTypeUnionWithSpreadOperator */'],
+            'DNF type for OO constant, union before DNF'               => ['/* testTypeUnionConstantTypeUnionBeforeDNF */'],
+            'DNF type for property, union after DNF'                   => ['/* testTypeUnionPropertyTypeUnionAfterDNF */'],
+            'DNF type for function param, union before and after DNF'  => ['/* testTypeUnionParamUnionBeforeAndAfterDNF */'],
+            'DNF type for function return, union after DNF with null'  => ['/* testTypeUnionReturnTypeUnionAfterDNF */'],
             'type for closure parameter with illegal nullable'         => ['/* testTypeUnionClosureParamIllegalNullable */'],
             'return type for closure'                                  => ['/* testTypeUnionClosureReturn */'],
             'type for arrow function parameter'                        => ['/* testTypeUnionArrowParam */'],

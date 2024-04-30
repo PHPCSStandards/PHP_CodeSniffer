@@ -12,3 +12,5 @@ ReadOnly class MyClass
 }
 
 $a = new CLASS() {};
+
+$anon = new ReadOnly class() {};

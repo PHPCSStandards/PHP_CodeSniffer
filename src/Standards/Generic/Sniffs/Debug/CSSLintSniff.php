@@ -5,6 +5,8 @@
  * @author    Roman Levishchenko <index.0h@gmail.com>
  * @copyright 2013-2014 Roman Levishchenko
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ *
+ * @deprecated 3.9.0
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Debug;
@@ -50,7 +52,7 @@ class CSSLintSniff implements Sniff
     {
         $csslintPath = Config::getExecutablePath('csslint');
         if ($csslintPath === null) {
-            return ($phpcsFile->numTokens + 1);
+            return $phpcsFile->numTokens;
         }
 
         $fileName = $phpcsFile->getFilename();
@@ -59,7 +61,7 @@ class CSSLintSniff implements Sniff
         exec($cmd, $output, $retval);
 
         if (is_array($output) === false) {
-            return ($phpcsFile->numTokens + 1);
+            return $phpcsFile->numTokens;
         }
 
         $count = count($output);
@@ -88,7 +90,7 @@ class CSSLintSniff implements Sniff
         }//end for
 
         // Ignore the rest of the file.
-        return ($phpcsFile->numTokens + 1);
+        return $phpcsFile->numTokens;
 
     }//end process()
 

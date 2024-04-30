@@ -64,12 +64,14 @@ class ClassInstantiationSniff implements Sniff
                 continue;
             }
 
-            // Skip over potential attributes for anonymous classes.
+            // Bow out when this is an anonymous class.
+            // Anonymous classes are the only situation which would allow for an attribute
+            // or for the readonly keyword between "new" and the class "name".
             if ($tokens[$i]['code'] === T_ATTRIBUTE
-                && isset($tokens[$i]['attribute_closer']) === true
+                || $tokens[$i]['code'] === T_READONLY
+                || $tokens[$i]['code'] === T_ANON_CLASS
             ) {
-                $i = $tokens[$i]['attribute_closer'];
-                continue;
+                return;
             }
 
             if ($tokens[$i]['code'] === T_OPEN_SQUARE_BRACKET
@@ -84,11 +86,6 @@ class ClassInstantiationSniff implements Sniff
         }//end for
 
         if ($classNameEnd === null) {
-            return;
-        }
-
-        if ($tokens[$classNameEnd]['code'] === T_ANON_CLASS) {
-            // Ignore anon classes.
             return;
         }
 
