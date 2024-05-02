@@ -280,6 +280,23 @@ function newInInitializers(
     \Package\TypeB $newToo = new \Package\TypeB(10, 'string'),
 ) {}
 
+/* testPHP82DNFTypes */
+function dnfTypes(
+    #[MyAttribute]
+    false|(Foo&Bar)|true $obj1,
+    (\Boo&\Pck\Bar)|(Boo&Baz) $obj2 = new Boo()
+) {}
+
+/* testPHP82DNFTypesWithSpreadOperatorAndReference */
+function dnfInGlobalFunctionWithSpreadAndReference((Countable&MeMe)|iterable &$paramA, true|(Foo&Bar) ...$paramB) {}
+
+/* testPHP82DNFTypesIllegalNullable */
+// Intentional fatal error - nullable operator cannot be combined with DNF.
+$dnf_closure = function (? ( MyClassA & /*comment*/ \Package\MyClassB & \Package\MyClassC ) $var): void {};
+
+/* testPHP82DNFTypesInArrow */
+$dnf_arrow = fn((Hi&Ho)|FALSE &...$range): string => $a;
+
 /* testFunctionCallFnPHPCS353-354 */
 $value = $obj->fn(true);
 
