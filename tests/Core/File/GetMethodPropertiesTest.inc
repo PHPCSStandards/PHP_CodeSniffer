@@ -170,6 +170,25 @@ function pseudoTypeTrue(): ?true {}
 // Intentional fatal error - Type contains both true and false, bool should be used instead, but that's not the concern of the method.
 function pseudoTypeFalseAndTrue(): true|false {}
 
+/* testPHP82DNFType */
+function hasDNFType() : bool|(Foo&Bar)|string {}
+
+abstract class AbstractClass {
+    /* testPHP82DNFTypeAbstractMethod */
+    abstract protected function abstractMethodDNFType() : float|(Foo&Bar);
+}
+
+/* testPHP82DNFTypeIllegalNullable */
+// Intentional fatal error - nullable operator cannot be combined with DNF.
+function illegalNullableDNF(): ?(A&\Pck\B)|bool {}
+
+/* testPHP82DNFTypeClosure */
+$closure = function() : object|(namespace\Foo&Countable) {};
+
+/* testPHP82DNFTypeFn */
+// Intentional fatal error - void type cannot be combined with DNF.
+$arrow = fn() : null|(Partially\Qualified&Traversable)|void => do_something();
+
 /* testNotAFunction */
 return true;
 

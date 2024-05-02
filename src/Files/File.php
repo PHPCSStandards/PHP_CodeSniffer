@@ -1739,18 +1739,20 @@ class File
             }
 
             $valid = [
-                T_STRING            => T_STRING,
-                T_CALLABLE          => T_CALLABLE,
-                T_SELF              => T_SELF,
-                T_PARENT            => T_PARENT,
-                T_STATIC            => T_STATIC,
-                T_FALSE             => T_FALSE,
-                T_TRUE              => T_TRUE,
-                T_NULL              => T_NULL,
-                T_NAMESPACE         => T_NAMESPACE,
-                T_NS_SEPARATOR      => T_NS_SEPARATOR,
-                T_TYPE_UNION        => T_TYPE_UNION,
-                T_TYPE_INTERSECTION => T_TYPE_INTERSECTION,
+                T_STRING                 => T_STRING,
+                T_CALLABLE               => T_CALLABLE,
+                T_SELF                   => T_SELF,
+                T_PARENT                 => T_PARENT,
+                T_STATIC                 => T_STATIC,
+                T_FALSE                  => T_FALSE,
+                T_TRUE                   => T_TRUE,
+                T_NULL                   => T_NULL,
+                T_NAMESPACE              => T_NAMESPACE,
+                T_NS_SEPARATOR           => T_NS_SEPARATOR,
+                T_TYPE_UNION             => T_TYPE_UNION,
+                T_TYPE_INTERSECTION      => T_TYPE_INTERSECTION,
+                T_TYPE_OPEN_PARENTHESIS  => T_TYPE_OPEN_PARENTHESIS,
+                T_TYPE_CLOSE_PARENTHESIS => T_TYPE_CLOSE_PARENTHESIS,
             ];
 
             for ($i = $this->tokens[$stackPtr]['parenthesis_closer']; $i < $this->numTokens; $i++) {
