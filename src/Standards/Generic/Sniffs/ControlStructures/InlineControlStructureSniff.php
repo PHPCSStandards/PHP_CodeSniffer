@@ -80,8 +80,8 @@ class InlineControlStructureSniff implements Sniff
             }
         }
 
-        if ($tokens[$stackPtr]['code'] === T_WHILE || $tokens[$stackPtr]['code'] === T_FOR) {
-            // This could be from a DO WHILE, which doesn't have an opening brace or a while/for without body.
+        if (in_array($tokens[$stackPtr]['code'], [T_ELSEIF, T_IF, T_FOR, T_FOREACH, T_WHILE], true) === true) {
+            // This could be from a DO WHILE, which doesn't have an opening brace, or an elseif/if/for/foreach/while without body.
             if (isset($tokens[$stackPtr]['parenthesis_closer']) === true) {
                 $afterParensCloser = $phpcsFile->findNext(Tokens::$emptyTokens, ($tokens[$stackPtr]['parenthesis_closer'] + 1), null, true);
                 if ($afterParensCloser === false) {

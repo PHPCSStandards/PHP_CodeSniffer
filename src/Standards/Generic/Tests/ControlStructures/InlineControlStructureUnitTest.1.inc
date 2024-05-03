@@ -276,3 +276,16 @@ function testFinally()
 if ($something) {
     echo 'hello';
 } else /* comment */ if ($somethingElse) echo 'hi';
+
+if ($shouldNotTriggerSniff);
+
+if (false) {
+} elseif ($shouldNotTriggerSniff);
+
+if (false) {
+} else if ($shouldNotTriggerSniff);
+
+if (false) {
+} else ($shouldTriggerSniff);
+
+foreach ($array as $shouldNotTriggerSniff);
