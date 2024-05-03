@@ -269,10 +269,6 @@ class InlineControlStructureSniff implements Sniff
             }
         }//end for
 
-        if ($end === $phpcsFile->numTokens) {
-            $end = $lastNonEmpty;
-        }
-
         $nextContent = $phpcsFile->findNext(Tokens::$emptyTokens, ($end + 1), null, true);
         if ($nextContent === false || $tokens[$nextContent]['line'] !== $tokens[$end]['line']) {
             // Looks for completely empty statements.
