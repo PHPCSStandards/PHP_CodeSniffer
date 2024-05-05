@@ -23,7 +23,7 @@ final class SniffListTest extends TestCase
     /**
      * Ensure that the expected error message is returned for invalid arguments
      *
-     * @param string $argument sniffs or exclude
+     * @param string $argument 'sniffs' or 'exclude'
      * @param string $value    List of sniffs to include / exclude
      * @param string $message  Expected error message text
      *
@@ -97,7 +97,7 @@ final class SniffListTest extends TestCase
     /**
      * Ensure that the valid data does not throw an exception
      *
-     * @param string $argument sniffs or exclude
+     * @param string $argument 'sniffs' or 'exclude'
      * @param string $value    List of sniffs to include or exclude
      *
      * @return       void
