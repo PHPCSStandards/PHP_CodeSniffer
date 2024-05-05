@@ -50,7 +50,7 @@ final class SniffListTest extends TestCase
 
 
     /**
-     * Date provider for testInvalid()
+     * Data provider for testInvalid()
      *
      * @see    self::testInvalid()
      * @return array
