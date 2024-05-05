@@ -1419,7 +1419,9 @@ class File
             // it's likely to be an array which might have arguments in it. This
             // could cause problems in our parsing below, so lets just skip to the
             // end of it.
-            if (isset($this->tokens[$i]['parenthesis_opener']) === true) {
+            if ($this->tokens[$i]['code'] !== T_TYPE_OPEN_PARENTHESIS
+                && isset($this->tokens[$i]['parenthesis_opener']) === true
+            ) {
                 // Don't do this if it's the close parenthesis for the method.
                 if ($i !== $this->tokens[$i]['parenthesis_closer']) {
                     $i = $this->tokens[$i]['parenthesis_closer'];
@@ -1513,6 +1515,8 @@ class File
             case T_NS_SEPARATOR:
             case T_TYPE_UNION:
             case T_TYPE_INTERSECTION:
+            case T_TYPE_OPEN_PARENTHESIS:
+            case T_TYPE_CLOSE_PARENTHESIS:
             case T_FALSE:
             case T_TRUE:
             case T_NULL:
@@ -1735,18 +1739,20 @@ class File
             }
 
             $valid = [
-                T_STRING            => T_STRING,
-                T_CALLABLE          => T_CALLABLE,
-                T_SELF              => T_SELF,
-                T_PARENT            => T_PARENT,
-                T_STATIC            => T_STATIC,
-                T_FALSE             => T_FALSE,
-                T_TRUE              => T_TRUE,
-                T_NULL              => T_NULL,
-                T_NAMESPACE         => T_NAMESPACE,
-                T_NS_SEPARATOR      => T_NS_SEPARATOR,
-                T_TYPE_UNION        => T_TYPE_UNION,
-                T_TYPE_INTERSECTION => T_TYPE_INTERSECTION,
+                T_STRING                 => T_STRING,
+                T_CALLABLE               => T_CALLABLE,
+                T_SELF                   => T_SELF,
+                T_PARENT                 => T_PARENT,
+                T_STATIC                 => T_STATIC,
+                T_FALSE                  => T_FALSE,
+                T_TRUE                   => T_TRUE,
+                T_NULL                   => T_NULL,
+                T_NAMESPACE              => T_NAMESPACE,
+                T_NS_SEPARATOR           => T_NS_SEPARATOR,
+                T_TYPE_UNION             => T_TYPE_UNION,
+                T_TYPE_INTERSECTION      => T_TYPE_INTERSECTION,
+                T_TYPE_OPEN_PARENTHESIS  => T_TYPE_OPEN_PARENTHESIS,
+                T_TYPE_CLOSE_PARENTHESIS => T_TYPE_CLOSE_PARENTHESIS,
             ];
 
             for ($i = $this->tokens[$stackPtr]['parenthesis_closer']; $i < $this->numTokens; $i++) {
@@ -1952,17 +1958,19 @@ class File
         if ($i < $stackPtr) {
             // We've found a type.
             $valid = [
-                T_STRING            => T_STRING,
-                T_CALLABLE          => T_CALLABLE,
-                T_SELF              => T_SELF,
-                T_PARENT            => T_PARENT,
-                T_FALSE             => T_FALSE,
-                T_TRUE              => T_TRUE,
-                T_NULL              => T_NULL,
-                T_NAMESPACE         => T_NAMESPACE,
-                T_NS_SEPARATOR      => T_NS_SEPARATOR,
-                T_TYPE_UNION        => T_TYPE_UNION,
-                T_TYPE_INTERSECTION => T_TYPE_INTERSECTION,
+                T_STRING                 => T_STRING,
+                T_CALLABLE               => T_CALLABLE,
+                T_SELF                   => T_SELF,
+                T_PARENT                 => T_PARENT,
+                T_FALSE                  => T_FALSE,
+                T_TRUE                   => T_TRUE,
+                T_NULL                   => T_NULL,
+                T_NAMESPACE              => T_NAMESPACE,
+                T_NS_SEPARATOR           => T_NS_SEPARATOR,
+                T_TYPE_UNION             => T_TYPE_UNION,
+                T_TYPE_INTERSECTION      => T_TYPE_INTERSECTION,
+                T_TYPE_OPEN_PARENTHESIS  => T_TYPE_OPEN_PARENTHESIS,
+                T_TYPE_CLOSE_PARENTHESIS => T_TYPE_CLOSE_PARENTHESIS,
             ];
 
             for ($i; $i < $stackPtr; $i++) {
@@ -2260,7 +2268,7 @@ class File
      *                                  be returned.
      * @param bool             $local   If true, tokens outside the current statement
      *                                  will not be checked. IE. checking will stop
-     *                                  at the previous semi-colon found.
+     *                                  at the previous semicolon found.
      *
      * @return int|false
      * @see    findNext()
@@ -2341,7 +2349,7 @@ class File
      *                                  be returned.
      * @param bool             $local   If true, tokens outside the current statement
      *                                  will not be checked. i.e., checking will stop
-     *                                  at the next semi-colon found.
+     *                                  at the next semicolon found.
      *
      * @return int|false
      * @see    findPrevious()

@@ -1188,6 +1188,136 @@ final class GetMethodPropertiesTest extends AbstractMethodUnitTest
 
 
     /**
+     * Verify recognition of PHP 8.2 DNF return type declaration.
+     *
+     * @return void
+     */
+    public function testPHP82DNFType()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected = [
+            'scope'                 => 'public',
+            'scope_specified'       => false,
+            'return_type'           => 'bool|(Foo&Bar)|string',
+            'return_type_token'     => 8,
+            'return_type_end_token' => 16,
+            'nullable_return_type'  => false,
+            'is_abstract'           => false,
+            'is_final'              => false,
+            'is_static'             => false,
+            'has_body'              => true,
+        ];
+
+        $this->getMethodPropertiesTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testPHP82DNFType()
+
+
+    /**
+     * Verify recognition of PHP 8.2 DNF return type declaration on an abstract method.
+     *
+     * @return void
+     */
+    public function testPHP82DNFTypeAbstractMethod()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected = [
+            'scope'                 => 'protected',
+            'scope_specified'       => true,
+            'return_type'           => 'float|(Foo&Bar)',
+            'return_type_token'     => 8,
+            'return_type_end_token' => 14,
+            'nullable_return_type'  => false,
+            'is_abstract'           => true,
+            'is_final'              => false,
+            'is_static'             => false,
+            'has_body'              => false,
+        ];
+
+        $this->getMethodPropertiesTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testPHP82DNFTypeAbstractMethod()
+
+
+    /**
+     * Verify recognition of PHP 8.2 DNF return type declaration with illegal nullability.
+     *
+     * @return void
+     */
+    public function testPHP82DNFTypeIllegalNullable()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected = [
+            'scope'                 => 'public',
+            'scope_specified'       => false,
+            'return_type'           => '?(A&\Pck\B)|bool',
+            'return_type_token'     => 8,
+            'return_type_end_token' => 17,
+            'nullable_return_type'  => true,
+            'is_abstract'           => false,
+            'is_final'              => false,
+            'is_static'             => false,
+            'has_body'              => true,
+        ];
+
+        $this->getMethodPropertiesTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testPHP82DNFTypeIllegalNullable()
+
+
+    /**
+     * Verify recognition of PHP 8.2 DNF return type declaration on a closure.
+     *
+     * @return void
+     */
+    public function testPHP82DNFTypeClosure()
+    {
+        // Offsets are relative to the T_CLOSURE token.
+        $expected = [
+            'scope'                 => 'public',
+            'scope_specified'       => false,
+            'return_type'           => 'object|(namespace\Foo&Countable)',
+            'return_type_token'     => 6,
+            'return_type_end_token' => 14,
+            'nullable_return_type'  => false,
+            'is_abstract'           => false,
+            'is_final'              => false,
+            'is_static'             => false,
+            'has_body'              => true,
+        ];
+
+        $this->getMethodPropertiesTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testPHP82DNFTypeClosure()
+
+
+    /**
+     * Verify recognition of PHP 8.2 DNF return type declaration on an arrow function.
+     *
+     * @return void
+     */
+    public function testPHP82DNFTypeFn()
+    {
+        // Offsets are relative to the T_FN token.
+        $expected = [
+            'scope'                 => 'public',
+            'scope_specified'       => false,
+            'return_type'           => 'null|(Partially\Qualified&Traversable)|void',
+            'return_type_token'     => 6,
+            'return_type_end_token' => 16,
+            'nullable_return_type'  => false,
+            'is_abstract'           => false,
+            'is_final'              => false,
+            'is_static'             => false,
+            'has_body'              => true,
+        ];
+
+        $this->getMethodPropertiesTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testPHP82DNFTypeFn()
+
+
+    /**
      * Test for incorrect tokenization of array return type declarations in PHPCS < 2.8.0.
      *
      * @link https://github.com/squizlabs/PHP_CodeSniffer/pull/1264
