@@ -63,31 +63,42 @@ final class SniffListTest extends TestCase
         ];
         $data      = [];
 
-        $sniffs = [];
-
-        $types = [
-            'Standard',
-            'Standard.Category',
-            'Standard.Category.Sniff.Code',
-        ];
-        foreach ($types as $value) {
-            $sniffs[$value] = $value;
-            $sniffs['Standard.Category.Sniff,B'.$value] = 'B'.$value;
-            foreach ($types as $extra) {
-                $sniffs['A'.$value.',B'.$extra] = 'A'.$value;
-            }
-        }
-
         $messageTemplate = 'ERROR: The specified sniff code "%s" is invalid'.PHP_EOL.PHP_EOL;
+
         foreach ($arguments as $argument) {
-            foreach ($sniffs as $input => $output) {
-                $data[] = [
-                    'argument' => $argument,
-                    'value'    => $input,
-                    'message'  => sprintf($messageTemplate, $output),
-                ];
-            }
-        }
+            // A standard is not a valid sniff.
+            $data[] = [
+                'argument' => $argument,
+                'value'    => 'Standard',
+                'message'  => sprintf($messageTemplate, 'Standard'),
+            ];
+
+            // A category is not a valid sniff.
+            $data[] = [
+                'argument' => $argument,
+                'value'    => 'Standard.Category',
+                'message'  => sprintf($messageTemplate, 'Standard.Category'),
+            ];
+
+            // An error-code is not a valid sniff.
+            $data[] = [
+                'argument' => $argument,
+                'value'    => 'Standard.Category',
+                'message'  => sprintf($messageTemplate, 'Standard.Category'),
+            ];
+
+            // Only the first error is reported.
+            $data[] = [
+                'argument' => $argument,
+                'value'    => 'StandardOne,StandardTwo',
+                'message'  => sprintf($messageTemplate, 'StandardOne'),
+            ];
+            $data[] = [
+                'argument' => $argument,
+                'value'    => 'StandardOne.Category.Sniff,StandardTwo.Category',
+                'message'  => sprintf($messageTemplate, 'StandardTwo.Category'),
+            ];
+        }//end foreach
 
         return $data;
 
