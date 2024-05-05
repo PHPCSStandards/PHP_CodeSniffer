@@ -21,11 +21,11 @@ final class SniffListTest extends TestCase
 
 
     /**
-     * Ensure that the expected error message is returned for invalid arguments
+     * Ensure that the expected error message is returned for invalid arguments.
      *
-     * @param string $argument 'sniffs' or 'exclude'
-     * @param string $value    List of sniffs to include / exclude
-     * @param string $message  Expected error message text
+     * @param string $argument 'sniffs' or 'exclude'.
+     * @param string $value    List of sniffs to include / exclude.
+     * @param string $message  Expected error message text.
      *
      * @return       void
      * @dataProvider dataInvalidSniffs
@@ -50,7 +50,7 @@ final class SniffListTest extends TestCase
 
 
     /**
-     * Data provider for testInvalid()
+     * Data provider for testInvalid().
      *
      * @see    self::testInvalid()
      * @return array
@@ -95,10 +95,10 @@ final class SniffListTest extends TestCase
 
 
     /**
-     * Ensure that the valid data does not throw an exception
+     * Ensure that the valid data does not throw an exception.
      *
-     * @param string $argument 'sniffs' or 'exclude'
-     * @param string $value    List of sniffs to include or exclude
+     * @param string $argument 'sniffs' or 'exclude'.
+     * @param string $value    List of sniffs to include or exclude.
      *
      * @return       void
      * @dataProvider dataValidSniffs
@@ -112,7 +112,7 @@ final class SniffListTest extends TestCase
 
 
     /**
-     * Data provider for testValid()
+     * Data provider for testValid().
      *
      * @see    self::testValid()
      * @return array
