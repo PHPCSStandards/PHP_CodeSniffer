@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \PHP_CodeSniffer\Config::processLongArgument
  */
-final class SniffListTest extends TestCase
+final class SniffListValidationTest extends TestCase
 {
 
 
