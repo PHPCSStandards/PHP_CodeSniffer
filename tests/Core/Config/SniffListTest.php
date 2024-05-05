@@ -67,6 +67,13 @@ final class SniffListTest extends TestCase
 
         foreach ($arguments as $argument) {
             // A standard is not a valid sniff.
+            $data[$argument.'; empty string'] = [
+              'argument' => $argument,
+              'value'    => '',
+              'message'  => sprintf($messageTemplate, ''),
+            ];
+
+            // A standard is not a valid sniff.
             $data[$argument.'; standard'] = [
                 'argument' => $argument,
                 'value'    => 'Standard',
