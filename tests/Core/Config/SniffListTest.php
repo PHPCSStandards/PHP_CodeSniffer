@@ -67,33 +67,33 @@ final class SniffListTest extends TestCase
 
         foreach ($arguments as $argument) {
             // A standard is not a valid sniff.
-            $data[] = [
+            $data[$argument.'; standard'] = [
                 'argument' => $argument,
                 'value'    => 'Standard',
                 'message'  => sprintf($messageTemplate, 'Standard'),
             ];
 
             // A category is not a valid sniff.
-            $data[] = [
+            $data[$argument.'; category'] = [
                 'argument' => $argument,
                 'value'    => 'Standard.Category',
                 'message'  => sprintf($messageTemplate, 'Standard.Category'),
             ];
 
             // An error-code is not a valid sniff.
-            $data[] = [
+            $data[$argument.'; error-code'] = [
                 'argument' => $argument,
                 'value'    => 'Standard.Category',
                 'message'  => sprintf($messageTemplate, 'Standard.Category'),
             ];
 
             // Only the first error is reported.
-            $data[] = [
+            $data[$argument.'; two errors'] = [
                 'argument' => $argument,
                 'value'    => 'StandardOne,StandardTwo',
                 'message'  => sprintf($messageTemplate, 'StandardOne'),
             ];
-            $data[] = [
+            $data[$argument.'; valid followed by invalid'] = [
                 'argument' => $argument,
                 'value'    => 'StandardOne.Category.Sniff,StandardTwo.Category',
                 'message'  => sprintf($messageTemplate, 'StandardTwo.Category'),
@@ -137,7 +137,7 @@ final class SniffListTest extends TestCase
         $data      = [];
 
         foreach ($arguments as $argument) {
-                $data[] = [
+                $data[$argument.'; one valid sniff'] = [
                     'argument' => $argument,
                     'value'    => 'Standard.Category.Sniff',
                 ];
