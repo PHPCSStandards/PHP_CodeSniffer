@@ -73,7 +73,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
                 // Make sure we don't try to load any of Composer's classes
                 // while the autoloader is being setup.
                 if (strpos($class, 'Composer\\') === 0) {
-                    return;
+                    return false;
                 }
 
                 if (strpos(__DIR__, 'phar://') !== 0
