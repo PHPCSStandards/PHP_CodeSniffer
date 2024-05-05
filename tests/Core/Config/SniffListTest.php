@@ -61,7 +61,7 @@ final class SniffListTest extends TestCase
             'sniffs',
             'exclude',
         ];
-        $result    = [];
+        $data      = [];
 
         $sniffs = [];
 
@@ -81,7 +81,7 @@ final class SniffListTest extends TestCase
         $messageTemplate = 'ERROR: The specified sniff code "%s" is invalid'.PHP_EOL.PHP_EOL;
         foreach ($arguments as $argument) {
             foreach ($sniffs as $input => $output) {
-                $result[] = [
+                $data[] = [
                     'argument' => $argument,
                     'value'    => $input,
                     'message'  => sprintf($messageTemplate, $output),
@@ -89,7 +89,7 @@ final class SniffListTest extends TestCase
             }
         }
 
-        return $result;
+        return $data;
 
     }//end dataInvalidSniffs()
 
@@ -123,16 +123,16 @@ final class SniffListTest extends TestCase
             'sniffs',
             'exclude',
         ];
-        $result    = [];
+        $data      = [];
 
         foreach ($arguments as $argument) {
-                $result[] = [
+                $data[] = [
                     'argument' => $argument,
                     'value'    => 'Standard.Category.Sniff',
                 ];
         }
 
-        return $result;
+        return $data;
 
     }//end dataValidSniffs()
 
