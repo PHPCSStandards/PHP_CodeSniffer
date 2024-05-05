@@ -8,8 +8,8 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Config;
 
-use PHPUnit\Framework\TestCase;
 use PHP_CodeSniffer\Tests\ConfigDouble;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for the \PHP_CodeSniffer\Config --sniffs and --exclude arguments.
