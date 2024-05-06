@@ -190,13 +190,11 @@ class Runner
             }
 
             // Override some of the command line settings that might break the fixes.
-            $this->config->generator    = null;
-            $this->config->explain      = false;
-            $this->config->interactive  = false;
-            $this->config->cache        = false;
-            $this->config->showSources  = false;
-            $this->config->recordErrors = false;
-            $this->config->reportFile   = null;
+            $this->config->generator   = null;
+            $this->config->explain     = false;
+            $this->config->interactive = false;
+            $this->config->showSources = false;
+            $this->config->reportFile  = null;
 
             // Only use the "Cbf" report, but allow for the Performance report as well.
             $originalReports = array_change_key_case($this->config->reports, CASE_LOWER);

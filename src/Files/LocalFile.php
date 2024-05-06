@@ -96,7 +96,10 @@ class LocalFile extends File
         $hash  = md5_file($this->path);
         $hash .= fileperms($this->path);
         $cache = Cache::get($this->path);
-        if ($cache !== false && $cache['hash'] === $hash) {
+
+        if ($cache !== false && $cache['hash'] === $hash
+            && (PHP_CODESNIFFER_CBF === false || $cache['fixableCount'] === 0)
+        ) {
             // We can't filter metrics, so just load all of them.
             $this->metrics = $cache['metrics'];
 
@@ -112,9 +115,7 @@ class LocalFile extends File
                 $this->fixableCount = $cache['fixableCount'];
             }
 
-            if (PHP_CODESNIFFER_VERBOSITY > 0
-                || (PHP_CODESNIFFER_CBF === true && empty($this->config->files) === false)
-            ) {
+            if (PHP_CODESNIFFER_VERBOSITY > 0) {
                 echo "[loaded from cache]... ";
             }
 
@@ -129,18 +130,22 @@ class LocalFile extends File
 
         parent::process();
 
-        $cache = [
-            'hash'         => $hash,
-            'errors'       => $this->errors,
-            'warnings'     => $this->warnings,
-            'metrics'      => $this->metrics,
-            'errorCount'   => $this->errorCount,
-            'warningCount' => $this->warningCount,
-            'fixableCount' => $this->fixableCount,
-            'numTokens'    => $this->numTokens,
-        ];
+        if (PHP_CODESNIFFER_CBF === false || $this->fixedCount === 0) {
+            $cache = [
+                'hash'         => $hash,
+                'errors'       => $this->errors,
+                'warnings'     => $this->warnings,
+                'metrics'      => $this->metrics,
+                'errorCount'   => $this->errorCount,
+                'warningCount' => $this->warningCount,
+                'fixableCount' => $this->fixableCount,
+                'numTokens'    => $this->numTokens,
+            ];
 
-        Cache::set($this->path, $cache);
+            Cache::set($this->path, $cache);
+        } else {
+            Cache::set($this->path, false);
+        }
 
         // During caching, we don't filter out errors in any way, so
         // we need to do that manually now by replaying them.

@@ -146,6 +146,8 @@ class Fixer
             return false;
         }
 
+        $this->currentFile->disableCaching();
+
         $this->enabled = true;
 
         $this->loops = 0;
