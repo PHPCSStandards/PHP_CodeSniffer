@@ -68,9 +68,9 @@ final class SniffListValidationTest extends TestCase
         foreach ($arguments as $argument) {
             // A standard is not a valid sniff.
             $data[$argument.'; empty string'] = [
-              'argument' => $argument,
-              'value'    => '',
-              'message'  => sprintf($messageTemplate, ''),
+                'argument' => $argument,
+                'value'    => '',
+                'message'  => sprintf($messageTemplate, ''),
             ];
 
             // A standard is not a valid sniff.
@@ -144,14 +144,14 @@ final class SniffListValidationTest extends TestCase
         $data      = [];
 
         foreach ($arguments as $argument) {
-                $data[$argument.'; one valid sniff']  = [
-                    'argument' => $argument,
-                    'value'    => 'Standard.Category.Sniff',
-                ];
-                $data[$argument.'; two valid sniffs'] = [
-                    'argument' => $argument,
-                    'value'    => 'StandardOne.Category.Sniff,StandardTwo.Category.Sniff',
-                ];
+            $data[$argument.'; one valid sniff']  = [
+                'argument' => $argument,
+                'value'    => 'Standard.Category.Sniff',
+            ];
+            $data[$argument.'; two valid sniffs'] = [
+                'argument' => $argument,
+                'value'    => 'StandardOne.Category.Sniff,StandardTwo.Category.Sniff',
+            ];
         }
 
         return $data;
