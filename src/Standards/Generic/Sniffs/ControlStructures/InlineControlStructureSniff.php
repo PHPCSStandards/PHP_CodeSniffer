@@ -263,94 +263,66 @@ class InlineControlStructureSniff implements Sniff
             $endLine = $end;
         }
 
-        if ($next !== $end) {
-            if ($nextContent === false || $tokens[$nextContent]['line'] !== $tokens[$end]['line']) {
-                // Account for a comment on the end of the line.
-                for ($endLine = $end; $endLine < $phpcsFile->numTokens; $endLine++) {
-                    if (isset($tokens[($endLine + 1)]) === false
-                        || $tokens[$endLine]['line'] !== $tokens[($endLine + 1)]['line']
-                    ) {
-                        break;
-                    }
-                }
-
-                if (isset(Tokens::$commentTokens[$tokens[$endLine]['code']]) === false
-                    && ($tokens[$endLine]['code'] !== T_WHITESPACE
-                    || isset(Tokens::$commentTokens[$tokens[($endLine - 1)]['code']]) === false)
+        if ($nextContent === false || $tokens[$nextContent]['line'] !== $tokens[$end]['line']) {
+            // Account for a comment on the end of the line.
+            for ($endLine = $end; $endLine < $phpcsFile->numTokens; $endLine++) {
+                if (isset($tokens[($endLine + 1)]) === false
+                    || $tokens[$endLine]['line'] !== $tokens[($endLine + 1)]['line']
                 ) {
-                    $endLine = $end;
+                    break;
                 }
             }
 
-            if ($endLine !== $end) {
-                $endToken     = $endLine;
-                $addedContent = '';
-            } else {
-                $endToken     = $end;
-                $addedContent = $phpcsFile->eolChar;
-
-                if ($tokens[$end]['code'] !== T_SEMICOLON
-                    && $tokens[$end]['code'] !== T_CLOSE_CURLY_BRACKET
-                ) {
-                    $phpcsFile->fixer->addContent($end, '; ');
-                }
-            }
-
-            $next = $phpcsFile->findNext(T_WHITESPACE, ($endToken + 1), null, true);
-            if ($next !== false
-                && ($tokens[$next]['code'] === T_ELSE
-                || $tokens[$next]['code'] === T_ELSEIF)
+            if (isset(Tokens::$commentTokens[$tokens[$endLine]['code']]) === false
+                && ($tokens[$endLine]['code'] !== T_WHITESPACE
+                || isset(Tokens::$commentTokens[$tokens[($endLine - 1)]['code']]) === false)
             ) {
-                $phpcsFile->fixer->addContentBefore($next, '} ');
-            } else {
-                $indent = '';
-                for ($first = $stackPtr; $first > 0; $first--) {
-                    if ($tokens[$first]['column'] === 1) {
-                        break;
-                    }
-                }
+                $endLine = $end;
+            }
+        }
 
-                if ($tokens[$first]['code'] === T_WHITESPACE) {
-                    $indent = $tokens[$first]['content'];
-                } else if ($tokens[$first]['code'] === T_INLINE_HTML
-                    || $tokens[$first]['code'] === T_OPEN_TAG
-                ) {
-                    $addedContent = '';
-                }
-
-                $addedContent .= $indent.'}';
-                if ($next !== false && $tokens[$endToken]['code'] === T_COMMENT) {
-                    $addedContent .= $phpcsFile->eolChar;
-                }
-
-                $phpcsFile->fixer->addContent($endToken, $addedContent);
-            }//end if
+        if ($endLine !== $end) {
+            $endToken     = $endLine;
+            $addedContent = '';
         } else {
-            if ($nextContent === false || $tokens[$nextContent]['line'] !== $tokens[$end]['line']) {
-                // Account for a comment on the end of the line.
-                for ($endLine = $end; $endLine < $phpcsFile->numTokens; $endLine++) {
-                    if (isset($tokens[($endLine + 1)]) === false
-                        || $tokens[$endLine]['line'] !== $tokens[($endLine + 1)]['line']
-                    ) {
-                        break;
-                    }
-                }
+            $endToken     = $end;
+            $addedContent = $phpcsFile->eolChar;
 
-                if ($tokens[$endLine]['code'] !== T_COMMENT
-                    && ($tokens[$endLine]['code'] !== T_WHITESPACE
-                    || $tokens[($endLine - 1)]['code'] !== T_COMMENT)
-                ) {
-                    $endLine = $end;
+            if ($tokens[$end]['code'] !== T_SEMICOLON
+                && $tokens[$end]['code'] !== T_CLOSE_CURLY_BRACKET
+            ) {
+                $phpcsFile->fixer->addContent($end, '; ');
+            }
+        }
+
+        $next = $phpcsFile->findNext(T_WHITESPACE, ($endToken + 1), null, true);
+        if ($next !== false
+            && ($tokens[$next]['code'] === T_ELSE
+            || $tokens[$next]['code'] === T_ELSEIF)
+        ) {
+            $phpcsFile->fixer->addContentBefore($next, '} ');
+        } else {
+            $indent = '';
+            for ($first = $stackPtr; $first > 0; $first--) {
+                if ($tokens[$first]['column'] === 1) {
+                    break;
                 }
             }
 
-            if ($endLine !== $end) {
-                $phpcsFile->fixer->replaceToken($end, '');
-                $phpcsFile->fixer->addNewlineBefore($endLine);
-                $phpcsFile->fixer->addContent($endLine, '}');
-            } else {
-                $phpcsFile->fixer->replaceToken($end, '}');
+            if ($tokens[$first]['code'] === T_WHITESPACE) {
+                $indent = $tokens[$first]['content'];
+            } else if ($tokens[$first]['code'] === T_INLINE_HTML
+                || $tokens[$first]['code'] === T_OPEN_TAG
+            ) {
+                $addedContent = '';
             }
+
+            $addedContent .= $indent.'}';
+            if ($next !== false && $tokens[$endToken]['code'] === T_COMMENT) {
+                $addedContent .= $phpcsFile->eolChar;
+            }
+
+            $phpcsFile->fixer->addContent($endToken, $addedContent);
         }//end if
 
         $phpcsFile->fixer->endChangeset();
