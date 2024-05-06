@@ -228,7 +228,7 @@ class Fixer
      *
      * @return string
      *
-     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException when the diff command fails.
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException When the diff command fails.
      */
     public function generateDiff($filePath=null, $colors=true)
     {

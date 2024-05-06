@@ -17,7 +17,7 @@ final class BackfillExplicitOctalNotationTest extends AbstractTokenizerTestCase
      * Test that explicitly-defined octal values are tokenized as a single number and not as a number and a string.
      *
      * @param string     $marker      The comment which prefaces the target token in the test file.
-     * @param string     $value       The expected content of the token
+     * @param string     $value       The expected content of the token.
      * @param int|string $nextToken   The expected next token.
      * @param string     $nextContent The expected content of the next token.
      *

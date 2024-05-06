@@ -3712,10 +3712,10 @@ class PHP extends Tokenizer
      * Finds a "closer" token (closing parenthesis or square bracket for example)
      * Handle parenthesis balancing while searching for closing token
      *
-     * @param array           $tokens       The list of tokens to iterate searching the closing token (as returned by token_get_all)
-     * @param int             $start        The starting position
-     * @param string|string[] $openerTokens The opening character
-     * @param string          $closerChar   The closing character
+     * @param array           $tokens       The list of tokens to iterate searching the closing token (as returned by token_get_all).
+     * @param int             $start        The starting position.
+     * @param string|string[] $openerTokens The opening character.
+     * @param string          $closerChar   The closing character.
      *
      * @return int|null The position of the closing token, if found. NULL otherwise.
      */
@@ -3749,8 +3749,8 @@ class PHP extends Tokenizer
      * PHP 8 attributes parser for PHP < 8
      * Handles single-line and multiline attributes.
      *
-     * @param array $tokens   The original array of tokens (as returned by token_get_all)
-     * @param int   $stackPtr The current position in token array
+     * @param array $tokens   The original array of tokens (as returned by token_get_all).
+     * @param int   $stackPtr The current position in token array.
      *
      * @return array|null The array of parsed attribute tokens
      */
