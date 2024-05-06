@@ -113,20 +113,20 @@ final class SniffListValidationTest extends TestCase
 
 
     /**
-     * Ensure that the valid data does not throw an exception.
+     * Ensure that the valid data does not throw an exception, and the value is stored.
      *
      * @param string $argument 'sniffs' or 'exclude'.
      * @param string $value    List of sniffs to include or exclude.
      *
      * @return       void
      * @dataProvider dataValidSniffs
-     *
-     * @doesNotPerformAssertions
      */
     public function testValid($argument, $value)
     {
         $config = new ConfigDouble();
         $config->processLongArgument($argument.'='.$value, 0);
+
+        $this->assertSame(explode(',', $value), $config->$argument);
 
     }//end testValid()
 
