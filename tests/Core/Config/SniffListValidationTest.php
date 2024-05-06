@@ -161,4 +161,39 @@ final class SniffListValidationTest extends TestCase
     }//end dataValidSniffs()
 
 
+    /**
+     * Ensure that only the first argument is processed and others are ignored.
+     *
+     * @param string $argument 'sniffs' or 'exclude'.
+     *
+     * @return       void
+     * @dataProvider dataOnlySetOnce
+     */
+    public function testOnlySetOnce($argument)
+    {
+        $config = new ConfigDouble();
+        $config->processLongArgument($argument.'=StandardOne.Category.Sniff', 0);
+        $config->processLongArgument($argument.'=StandardTwo.Category.Sniff', 0);
+        $config->processLongArgument($argument.'=Standard.AnotherCategory.Sniff', 0);
+
+        $this->assertSame(['StandardOne.Category.Sniff'], $config->$argument);
+
+    }//end testOnlySetOnce()
+
+
+    /**
+     * Data provider for testOnlySetOnce().
+     *
+     * @return string[]
+     */
+    public static function dataOnlySetOnce()
+    {
+        return [
+            'sniffs'  => ['sniffs'],
+            'exclude' => ['exclude'],
+        ];
+
+    }//end dataOnlySetOnce()
+
+
 }//end class
