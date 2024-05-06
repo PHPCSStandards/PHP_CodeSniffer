@@ -53,7 +53,7 @@ final class SniffListValidationTest extends TestCase
      * Data provider for testInvalid().
      *
      * @see    self::testInvalid()
-     * @return array
+     * @return array<array<string>>
      */
     public static function dataInvalidSniffs()
     {
@@ -135,7 +135,7 @@ final class SniffListValidationTest extends TestCase
      * Data provider for testValid().
      *
      * @see    self::testValid()
-     * @return array
+     * @return array<array<string>>
      */
     public static function dataValidSniffs()
     {
