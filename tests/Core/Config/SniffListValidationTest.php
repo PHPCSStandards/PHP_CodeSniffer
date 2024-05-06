@@ -120,6 +120,8 @@ final class SniffListValidationTest extends TestCase
      *
      * @return       void
      * @dataProvider dataValidSniffs
+     *
+     * @doesNotPerformAssertions
      */
     public function testValid($argument, $value)
     {
