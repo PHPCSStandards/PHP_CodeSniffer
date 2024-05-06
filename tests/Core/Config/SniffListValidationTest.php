@@ -144,9 +144,13 @@ final class SniffListValidationTest extends TestCase
         $data      = [];
 
         foreach ($arguments as $argument) {
-                $data[$argument.'; one valid sniff'] = [
+                $data[$argument.'; one valid sniff']  = [
                     'argument' => $argument,
                     'value'    => 'Standard.Category.Sniff',
+                ];
+                $data[$argument.'; two valid sniffs'] = [
+                    'argument' => $argument,
+                    'value'    => 'StandardOne.Category.Sniff,StandardTwo.Category.Sniff',
                 ];
         }
 
