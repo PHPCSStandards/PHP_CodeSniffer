@@ -994,6 +994,11 @@ class File
             return false;
         }
 
+        if ($severity === 0) {
+            // Do not remember / record any messages which will be hidden always.
+            return false;
+        }
+
         // Make sure we are not ignoring this file.
         $included = null;
         if (trim($this->path, '\'"') === 'STDIN') {
