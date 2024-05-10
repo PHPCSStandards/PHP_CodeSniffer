@@ -93,3 +93,8 @@ $var = (int)
 	$var1 + (bool)  $var2;
 // phpcs:set Generic.Formatting.SpaceAfterCast ignoreNewlines false
 // phpcs:set Generic.Formatting.SpaceAfterCast spacing 1
+
+$var = (boolean)/* comment */ $var2;
+
+$var = (  int )$spacesInsideParenthesis;
+$var = (	int		)$tabsInsideParenthesis;
