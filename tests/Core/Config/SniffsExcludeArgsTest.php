@@ -171,10 +171,11 @@ final class SniffsExcludeArgsTest extends TestCase
      */
     public function testOnlySetOnce($argument)
     {
-        $config = new ConfigDouble();
-        $config->processLongArgument($argument.'=StandardOne.Category.Sniff', 0);
-        $config->processLongArgument($argument.'=StandardTwo.Category.Sniff', 0);
-        $config->processLongArgument($argument.'=Standard.AnotherCategory.Sniff', 0);
+        $position = 0;
+        $config   = new ConfigDouble();
+        $config->processLongArgument($argument.'=StandardOne.Category.Sniff', $position++);
+        $config->processLongArgument($argument.'=StandardTwo.Category.Sniff', $position++);
+        $config->processLongArgument($argument.'=Standard.AnotherCategory.Sniff', $position++);
 
         $this->assertSame(['StandardOne.Category.Sniff'], $config->$argument);
 
