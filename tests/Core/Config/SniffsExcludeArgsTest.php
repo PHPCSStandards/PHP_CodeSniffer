@@ -135,7 +135,7 @@ final class SniffsExcludeArgsTest extends TestCase
      * Data provider for testValid().
      *
      * @see    self::testValid()
-     * @return array<array<string>>
+     * @return array<string, array<string, string>>
      */
     public static function dataValidSniffs()
     {
