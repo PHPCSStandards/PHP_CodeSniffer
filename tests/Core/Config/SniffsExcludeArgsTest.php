@@ -66,7 +66,7 @@ final class SniffsExcludeArgsTest extends TestCase
         $messageTemplate = 'ERROR: The specified sniff code "%s" is invalid'.PHP_EOL.PHP_EOL;
 
         foreach ($arguments as $argument) {
-            // A standard is not a valid sniff.
+            // An empty string is not a valid sniff.
             $data[$argument.'; empty string'] = [
                 'argument' => $argument,
                 'value'    => '',
