@@ -1275,4 +1275,31 @@ EOD;
     }//end dataCommenting()
 
 
+    /**
+     * Ensure that when the cache is enabled, and we are recording error messages, issues with serverity=0 are not included in the results.
+     *
+     * @return void
+     */
+    public function testErrorSeverityZeroWithCacheEnabled()
+    {
+        $config            = new ConfigDouble();
+        $config->standards = ['Generic'];
+        $config->sniffs    = ['Generic.PHP.LowerCaseConstant'];
+        $config->cache     = true;
+        $config->recordErrors = true;
+
+        $ruleset = new Ruleset($config);
+        $ruleset->ruleset['Generic.PHP.LowerCaseConstant.Found']['severity'] = 0;
+
+        $content = '<?php $var = FALSE;';
+
+        $file = new DummyFile($content, $ruleset, $config);
+        $file->process();
+
+        $this->assertSame(0, $file->getErrorCount());
+        $this->assertSame([], $file->getErrors());
+
+    }//end testErrorSeverityZeroWithCacheEnabled()
+
+
 }//end class
