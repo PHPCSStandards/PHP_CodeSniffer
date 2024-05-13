@@ -184,7 +184,7 @@ final class SniffsExcludeArgsTest extends TestCase
     /**
      * Data provider for testOnlySetOnce().
      *
-     * @return string[]
+     * @return array<string, array<string>>
      */
     public static function dataOnlySetOnce()
     {
