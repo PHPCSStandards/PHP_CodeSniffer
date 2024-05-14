@@ -31,6 +31,15 @@ class Common
         'callable',
     ];
 
+    /**
+     * An array of variable types for param/var we will check.
+     *
+     * @var string[]
+     */
+    public static $allowedShortTypes = [
+        'boolean' => 'bool',
+        'integer' => 'int',
+    ];
 
     /**
      * Return TRUE if the path is a PHAR file.
@@ -520,7 +529,26 @@ class Common
             }//end if
         }//end if
 
-    }//end suggestType()
+    } //end suggestType()
+
+    /**
+     * Returns a valid short form variable type for param/var tags.
+     *
+     * If type is not one of the standard types, it must be a custom type.
+     * Returns the correct type name suggestion if type name is invalid.
+     *
+     * @param string $varType The variable type to process.
+     *
+     * @return string
+     */
+    public static function suggestShortType($varType)
+    {
+        $varType = static::suggestType($varType);
+        if (!empty(static::$allowedShortTypes[$varType])) {
+            return static::$allowedShortTypes[$varType];
+        }
+        return $varType;
+    } //end suggestShortType()
 
 
     /**
