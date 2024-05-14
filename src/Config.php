@@ -745,11 +745,6 @@ class Config
      *
      * @return void
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException
-     *
-     * @internal This method is not intended to be used outside of this class.
-     *           Its visibility will be restricted in a future version. Those
-     *           wishing to pass / process command-line arguments should pass
-     *           these to the __construct() method instead.
      */
     public function processLongArgument($arg, $pos)
     {
