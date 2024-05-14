@@ -32,7 +32,6 @@ final class SniffsExcludeArgsTest extends TestCase
      */
     public function testInvalid($argument, $value, $message)
     {
-        $config    = new ConfigDouble();
         $exception = 'PHP_CodeSniffer\Exceptions\DeepExitException';
 
         if (method_exists($this, 'expectException') === true) {
@@ -44,7 +43,7 @@ final class SniffsExcludeArgsTest extends TestCase
             $this->setExpectedException($exception, $message);
         }
 
-        $config->processLongArgument($argument.'='.$value, 0);
+        new ConfigDouble(["--$argument=$value"]);
 
     }//end testInvalid()
 
@@ -123,8 +122,7 @@ final class SniffsExcludeArgsTest extends TestCase
      */
     public function testValid($argument, $value)
     {
-        $config = new ConfigDouble();
-        $config->processLongArgument($argument.'='.$value, 0);
+        $config = new ConfigDouble(["--$argument=$value"]);
 
         $this->assertSame(explode(',', $value), $config->$argument);
 
@@ -171,11 +169,13 @@ final class SniffsExcludeArgsTest extends TestCase
      */
     public function testOnlySetOnce($argument)
     {
-        $position = 0;
-        $config   = new ConfigDouble();
-        $config->processLongArgument($argument.'=StandardOne.Category.Sniff', $position++);
-        $config->processLongArgument($argument.'=StandardTwo.Category.Sniff', $position++);
-        $config->processLongArgument($argument.'=Standard.AnotherCategory.Sniff', $position++);
+        $config = new ConfigDouble(
+            [
+                "--$argument=StandardOne.Category.Sniff",
+                "--$argument=StandardTwo.Category.Sniff",
+                "--$argument=Standard.AnotherCategory.Sniff",
+            ]
+        );
 
         $this->assertSame(['StandardOne.Category.Sniff'], $config->$argument);
 
