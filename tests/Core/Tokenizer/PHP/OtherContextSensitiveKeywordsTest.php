@@ -7,7 +7,9 @@
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
-namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
+namespace PHP_CodeSniffer\Tests\Core\Tokenizer\PHP;
+
+use PHP_CodeSniffer\Tests\Core\Tokenizer\AbstractTokenizerTestCase;
 
 /**
  * Tests the conversion of PHPCS native context sensitive keyword tokens to T_STRING.

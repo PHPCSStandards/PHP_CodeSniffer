@@ -7,7 +7,9 @@
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
-namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
+namespace PHP_CodeSniffer\Tests\Core\Tokenizer\Tokenizer;
+
+use PHP_CodeSniffer\Tests\Core\Tokenizer\AbstractTokenizerTestCase;
 
 /**
  * Heredoc/nowdoc closer token test.
