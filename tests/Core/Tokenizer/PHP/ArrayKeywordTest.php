@@ -7,7 +7,9 @@
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
-namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
+namespace PHP_CodeSniffer\Tests\Core\Tokenizer\PHP;
+
+use PHP_CodeSniffer\Tests\Core\Tokenizer\AbstractTokenizerTestCase;
 
 final class ArrayKeywordTest extends AbstractTokenizerTestCase
 {
@@ -21,7 +23,6 @@ final class ArrayKeywordTest extends AbstractTokenizerTestCase
      *
      * @dataProvider dataArrayKeyword
      * @covers       PHP_CodeSniffer\Tokenizers\PHP::tokenize
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createTokenMap
      *
      * @return void
      */
@@ -34,10 +35,6 @@ final class ArrayKeywordTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_ARRAY, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_ARRAY (code)');
         $this->assertSame('T_ARRAY', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_ARRAY (type)');
-
-        $this->assertArrayHasKey('parenthesis_owner', $tokenArray, 'Parenthesis owner is not set');
-        $this->assertArrayHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is not set');
-        $this->assertArrayHasKey('parenthesis_closer', $tokenArray, 'Parenthesis closer is not set');
 
     }//end testArrayKeyword()
 
@@ -84,7 +81,6 @@ final class ArrayKeywordTest extends AbstractTokenizerTestCase
      *
      * @dataProvider dataArrayType
      * @covers       PHP_CodeSniffer\Tokenizers\PHP::tokenize
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createTokenMap
      *
      * @return void
      */
@@ -97,10 +93,6 @@ final class ArrayKeywordTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
         $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
-
-        $this->assertArrayNotHasKey('parenthesis_owner', $tokenArray, 'Parenthesis owner is set');
-        $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is set');
-        $this->assertArrayNotHasKey('parenthesis_closer', $tokenArray, 'Parenthesis closer is set');
 
     }//end testArrayType()
 
@@ -163,7 +155,6 @@ final class ArrayKeywordTest extends AbstractTokenizerTestCase
      *
      * @dataProvider dataNotArrayKeyword
      * @covers       PHP_CodeSniffer\Tokenizers\PHP::tokenize
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createTokenMap
      *
      * @return void
      */
@@ -176,10 +167,6 @@ final class ArrayKeywordTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
         $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
-
-        $this->assertArrayNotHasKey('parenthesis_owner', $tokenArray, 'Parenthesis owner is set');
-        $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is set');
-        $this->assertArrayNotHasKey('parenthesis_closer', $tokenArray, 'Parenthesis closer is set');
 
     }//end testNotArrayKeyword()
 
