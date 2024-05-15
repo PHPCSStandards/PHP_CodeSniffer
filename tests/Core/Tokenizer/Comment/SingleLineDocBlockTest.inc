@@ -1,5 +1,8 @@
 <?php
 
+/* testEmptyBlockCommentNoWhiteSpace */
+/**/
+
 /* testEmptyDocblockWithWhiteSpace */
 /** */
 

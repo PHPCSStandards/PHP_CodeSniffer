@@ -59,6 +59,26 @@ final class SingleLineDocBlockTest extends CommentTestCase
 
 
     /**
+     * Verify an empty block comment is tokenized as T_COMMENT, not as a docblock.
+     *
+     * @covers PHP_CodeSniffer\Tokenizers\PHP::tokenize
+     *
+     * @return void
+     */
+    public function testEmptyBlockCommentNoWhiteSpace()
+    {
+        $expectedSequence = [
+            [T_COMMENT => '/**/'],
+        ];
+
+        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', [T_COMMENT, T_DOC_COMMENT_OPEN_TAG]);
+
+        $this->checkTokenSequence($target, $expectedSequence);
+
+    }//end testEmptyBlockCommentNoWhiteSpace()
+
+
+    /**
      * Verify tokenization of an empty, single line DocBlock.
      *
      * @phpcs:disable Squiz.Arrays.ArrayDeclaration.SpaceBeforeDoubleArrow -- Readability is better with alignment.
