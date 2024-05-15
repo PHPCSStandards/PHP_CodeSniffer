@@ -7,9 +7,11 @@
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
-namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
+namespace PHP_CodeSniffer\Tests\Core\Tokenizer\Tokenizer;
 
-final class EnumCaseTest extends AbstractTokenizerTestCase
+use PHP_CodeSniffer\Tests\Core\Tokenizer\AbstractTokenizerTestCase;
+
+final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTestCase
 {
 
 
@@ -19,7 +21,6 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
      * @param string $testMarker The comment which prefaces the target token in the test file.
      *
      * @dataProvider dataEnumCases
-     * @covers       PHP_CodeSniffer\Tokenizers\PHP::tokenize
      * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::recurseScopeMap
      *
      * @return void
@@ -30,8 +31,8 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
         $enumCase   = $this->getTargetToken($testMarker, [T_ENUM_CASE, T_CASE]);
         $tokenArray = $tokens[$enumCase];
 
+        // Make sure we're looking at the right token.
         $this->assertSame(T_ENUM_CASE, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_ENUM_CASE (code)');
-        $this->assertSame('T_ENUM_CASE', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_ENUM_CASE (type)');
 
         $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
         $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');
@@ -68,7 +69,6 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
      * @param string $testMarker The comment which prefaces the target token in the test file.
      *
      * @dataProvider dataNotEnumCases
-     * @covers       PHP_CodeSniffer\Tokenizers\PHP::tokenize
      * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::recurseScopeMap
      *
      * @return void
@@ -79,8 +79,8 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
         $case       = $this->getTargetToken($testMarker, [T_ENUM_CASE, T_CASE]);
         $tokenArray = $tokens[$case];
 
+        // Make sure we're looking at the right token.
         $this->assertSame(T_CASE, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_CASE (code)');
-        $this->assertSame('T_CASE', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_CASE (type)');
 
         $this->assertArrayHasKey('scope_condition', $tokenArray, 'Scope condition is not set');
         $this->assertArrayHasKey('scope_opener', $tokenArray, 'Scope opener is not set');
@@ -117,7 +117,7 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
      * @param string $testMarker The comment which prefaces the target token in the test file.
      *
      * @dataProvider dataKeywordAsEnumCaseNameShouldBeString
-     * @covers       PHP_CodeSniffer\Tokenizers\PHP::tokenize
+     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::recurseScopeMap
      *
      * @return void
      */
@@ -127,8 +127,12 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
         $enumCaseName = $this->getTargetToken($testMarker, [T_STRING, T_INTERFACE, T_TRAIT, T_ENUM, T_FUNCTION, T_FALSE, T_DEFAULT, T_ARRAY]);
         $tokenArray   = $tokens[$enumCaseName];
 
+        // Make sure we're looking at the right token.
         $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
-        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
+
+        $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
+        $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');
+        $this->assertArrayNotHasKey('scope_closer', $tokenArray, 'Scope closer is set');
 
     }//end testKeywordAsEnumCaseNameShouldBeString()
 
