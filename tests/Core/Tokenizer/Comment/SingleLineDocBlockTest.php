@@ -28,6 +28,11 @@ final class SingleLineDocBlockTest extends CommentTestCase
     public static function dataDocblockOpenerCloser()
     {
         return [
+            'Single line docblock: empty, no whitespace'  => [
+                'marker'       => '/* testEmptyDocblockNoWhiteSpace */',
+                'closerOffset' => 1,
+                'expectedTags' => [],
+            ],
             'Single line docblock: only whitespace'       => [
                 'marker'       => '/* testEmptyDocblockWithWhiteSpace */',
                 'closerOffset' => 2,
@@ -79,9 +84,28 @@ final class SingleLineDocBlockTest extends CommentTestCase
 
 
     /**
-     * Verify tokenization of an empty, single line DocBlock.
+     * Verify tokenization of an empty, single line DocBlock without whitespace between the opener and closer.
      *
      * @phpcs:disable Squiz.Arrays.ArrayDeclaration.SpaceBeforeDoubleArrow -- Readability is better with alignment.
+     *
+     * @return void
+     */
+    public function testEmptyDocblockNoWhiteSpace()
+    {
+        $expectedSequence = [
+            [T_DOC_COMMENT_OPEN_TAG   => '/**'],
+            [T_DOC_COMMENT_CLOSE_TAG  => '*/'],
+        ];
+
+        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_DOC_COMMENT_OPEN_TAG);
+
+        $this->checkTokenSequence($target, $expectedSequence);
+
+    }//end testEmptyDocblockNoWhiteSpace()
+
+
+    /**
+     * Verify tokenization of an empty, single line DocBlock.
      *
      * @return void
      */

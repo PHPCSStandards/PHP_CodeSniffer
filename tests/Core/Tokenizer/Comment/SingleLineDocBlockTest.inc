@@ -3,6 +3,9 @@
 /* testEmptyBlockCommentNoWhiteSpace */
 /**/
 
+/* testEmptyDocblockNoWhiteSpace */
+/***/
+
 /* testEmptyDocblockWithWhiteSpace */
 /** */
 

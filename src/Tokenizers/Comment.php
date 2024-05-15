@@ -41,9 +41,16 @@ class Comment
             extra star when they are used for function and class comments.
         */
 
-        $char    = ($numChars - strlen(ltrim($string, '/*')));
-        $openTag = substr($string, 0, $char);
-        $string  = ltrim($string, '/*');
+        $char      = ($numChars - strlen(ltrim($string, '/*')));
+        $lastChars = substr($string, -2);
+        if ($char === $numChars && $lastChars === '*/') {
+            // Edge case: docblock without whitespace or contents.
+            $openTag = substr($string, 0, -2);
+            $string  = $lastChars;
+        } else {
+            $openTag = substr($string, 0, $char);
+            $string  = ltrim($string, '/*');
+        }
 
         $tokens[$stackPtr] = [
             'content'      => $openTag,
