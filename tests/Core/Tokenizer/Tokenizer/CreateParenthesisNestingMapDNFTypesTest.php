@@ -7,37 +7,34 @@
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
-namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
+namespace PHP_CodeSniffer\Tests\Core\Tokenizer\Tokenizer;
 
-use PHP_CodeSniffer\Util\Tokens;
+use PHP_CodeSniffer\Tests\Core\Tokenizer\AbstractTokenizerTestCase;
 
-final class DNFTypesTest extends AbstractTokenizerTestCase
+final class CreateParenthesisNestingMapDNFTypesTest extends AbstractTokenizerTestCase
 {
 
 
     /**
      * Test that parentheses when **not** used in a type declaration are correctly tokenized.
      *
-     * @param string    $testMarker      The comment prefacing the target token.
-     * @param int|false $owner           Optional. The parentheses owner or false when no parentheses owner is expected.
-     * @param bool      $skipCheckInside Optional. Skip checking correct token type inside the parentheses.
-     *                                   Use judiciously for combined normal + DNF tests only.
+     * @param string    $testMarker The comment prefacing the target token.
+     * @param int|false $owner      Optional. The parentheses owner or false when no parentheses owner is expected.
      *
      * @dataProvider dataNormalParentheses
      * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createParenthesisNestingMap
      *
      * @return void
      */
-    public function testNormalParentheses($testMarker, $owner=false, $skipCheckInside=false)
+    public function testNormalParentheses($testMarker, $owner=false)
     {
         $tokens = $this->phpcsFile->getTokens();
 
         $openPtr = $this->getTargetToken($testMarker, [T_OPEN_PARENTHESIS, T_TYPE_OPEN_PARENTHESIS]);
         $opener  = $tokens[$openPtr];
 
-        $this->assertSame('(', $opener['content'], 'Content of type open parenthesis is not "("');
+        // Make sure we're looking at the right token.
         $this->assertSame(T_OPEN_PARENTHESIS, $opener['code'], 'Token tokenized as '.$opener['type'].', not T_OPEN_PARENTHESIS (code)');
-        $this->assertSame('T_OPEN_PARENTHESIS', $opener['type'], 'Token tokenized as '.$opener['type'].', not T_OPEN_PARENTHESIS (type)');
 
         if ($owner !== false) {
             $this->assertArrayHasKey('parenthesis_owner', $opener, 'Parenthesis owner is not set');
@@ -53,9 +50,8 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
         $closePtr = $opener['parenthesis_closer'];
         $closer   = $tokens[$closePtr];
 
-        $this->assertSame(')', $closer['content'], 'Content of type close parenthesis is not ")"');
+        // Make sure we're looking at the right token.
         $this->assertSame(T_CLOSE_PARENTHESIS, $closer['code'], 'Token tokenized as '.$closer['type'].', not T_CLOSE_PARENTHESIS (code)');
-        $this->assertSame('T_CLOSE_PARENTHESIS', $closer['type'], 'Token tokenized as '.$closer['type'].', not T_CLOSE_PARENTHESIS (type)');
 
         if ($owner !== false) {
             $this->assertArrayHasKey('parenthesis_owner', $closer, 'Parenthesis owner is not set');
@@ -72,40 +68,6 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             $this->assertArrayHasKey('nested_parenthesis', $tokens[$i], "Nested parenthesis key not set on token $i ({$tokens[$i]['type']})");
             $this->assertArrayHasKey($openPtr, $tokens[$i]['nested_parenthesis'], 'Nested parenthesis is missing target parentheses set');
             $this->assertSame($closePtr, $tokens[$i]['nested_parenthesis'][$openPtr], 'Nested parenthesis closer not set correctly');
-
-            // If there are ampersands, make sure these are tokenized as bitwise and.
-            if ($skipCheckInside === false && $tokens[$i]['content'] === '&') {
-                $this->assertSame(T_BITWISE_AND, $tokens[$i]['code'], 'Token tokenized as '.$tokens[$i]['type'].', not T_BITWISE_AND (code)');
-                $this->assertSame('T_BITWISE_AND', $tokens[$i]['type'], 'Token tokenized as '.$tokens[$i]['type'].', not T_BITWISE_AND (type)');
-            }
-        }
-
-        $before = $this->phpcsFile->findPrevious(Tokens::$emptyTokens, ($openPtr - 1), null, true);
-        if ($before !== false && $tokens[$before]['content'] === '|') {
-            $this->assertSame(
-                T_BITWISE_OR,
-                $tokens[$before]['code'],
-                'Token before tokenized as '.$tokens[$before]['type'].', not T_BITWISE_OR (code)'
-            );
-            $this->assertSame(
-                'T_BITWISE_OR',
-                $tokens[$before]['type'],
-                'Token before tokenized as '.$tokens[$before]['type'].', not T_BITWISE_OR (type)'
-            );
-        }
-
-        $after = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($closePtr + 1), null, true);
-        if ($after !== false && $tokens[$after]['content'] === '|') {
-            $this->assertSame(
-                T_BITWISE_OR,
-                $tokens[$after]['code'],
-                'Token after tokenized as '.$tokens[$after]['type'].', not T_BITWISE_OR (code)'
-            );
-            $this->assertSame(
-                'T_BITWISE_OR',
-                $tokens[$after]['type'],
-                'Token after tokenized as '.$tokens[$after]['type'].', not T_BITWISE_OR (type)'
-            );
         }
 
     }//end testNormalParentheses()
@@ -202,9 +164,8 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
                 'owner'      => -2,
             ],
             'parens with owner: fn; dnf used within'                          => [
-                'testMarker'      => '/* testParensOwnerArrowDNFUsedWithin */',
-                'owner'           => -2,
-                'skipCheckInside' => true,
+                'testMarker' => '/* testParensOwnerArrowDNFUsedWithin */',
+                'owner'      => -2,
             ],
             'parens without owner: default value for param in arrow function' => [
                 'testMarker' => '/* testParensNoOwnerAmpersandInDefaultValue */',
@@ -227,7 +188,6 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
      * @param string $testMarker The comment prefacing the target token.
      *
      * @dataProvider dataDNFTypeParentheses
-     * @covers       PHP_CodeSniffer\Tokenizers\PHP::processAdditional
      * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createParenthesisNestingMap
      *
      * @return void
@@ -239,9 +199,8 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
         $openPtr = $this->getTargetToken($testMarker, [T_OPEN_PARENTHESIS, T_TYPE_OPEN_PARENTHESIS]);
         $opener  = $tokens[$openPtr];
 
-        $this->assertSame('(', $opener['content'], 'Content of type open parenthesis is not "("');
+        // Make sure we're looking at the right token.
         $this->assertSame(T_TYPE_OPEN_PARENTHESIS, $opener['code'], 'Token tokenized as '.$opener['type'].', not T_TYPE_OPEN_PARENTHESIS (code)');
-        $this->assertSame('T_TYPE_OPEN_PARENTHESIS', $opener['type'], 'Token tokenized as '.$opener['type'].', not T_TYPE_OPEN_PARENTHESIS (type)');
 
         $this->assertArrayNotHasKey('parenthesis_owner', $opener, 'Parenthesis owner is set');
         $this->assertArrayHasKey('parenthesis_opener', $opener, 'Parenthesis opener is not set');
@@ -251,9 +210,8 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
         $closePtr = $opener['parenthesis_closer'];
         $closer   = $tokens[$closePtr];
 
-        $this->assertSame(')', $closer['content'], 'Content of type close parenthesis is not ")"');
+        // Make sure we're looking at the right token.
         $this->assertSame(T_TYPE_CLOSE_PARENTHESIS, $closer['code'], 'Token tokenized as '.$closer['type'].', not T_TYPE_CLOSE_PARENTHESIS (code)');
-        $this->assertSame('T_TYPE_CLOSE_PARENTHESIS', $closer['type'], 'Token tokenized as '.$closer['type'].', not T_TYPE_CLOSE_PARENTHESIS (type)');
 
         $this->assertArrayNotHasKey('parenthesis_owner', $closer, 'Parenthesis owner is set');
         $this->assertArrayHasKey('parenthesis_opener', $closer, 'Parenthesis opener is not set');
@@ -265,74 +223,7 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             $this->assertArrayHasKey('nested_parenthesis', $tokens[$i], "Nested parenthesis key not set on token $i ({$tokens[$i]['type']})");
             $this->assertArrayHasKey($openPtr, $tokens[$i]['nested_parenthesis'], 'Nested parenthesis is missing target parentheses set');
             $this->assertSame($closePtr, $tokens[$i]['nested_parenthesis'][$openPtr], 'Nested parenthesis closer not set correctly');
-
-            if ($tokens[$i]['content'] === '&') {
-                $this->assertSame(
-                    T_TYPE_INTERSECTION,
-                    $tokens[$i]['code'],
-                    'Token tokenized as '.$tokens[$i]['type'].', not T_TYPE_INTERSECTION (code)'
-                );
-                $this->assertSame(
-                    'T_TYPE_INTERSECTION',
-                    $tokens[$i]['type'],
-                    'Token tokenized as '.$tokens[$i]['type'].', not T_TYPE_INTERSECTION (type)'
-                );
-                ++$intersectionCount;
-            }
-
-            // Not valid, but that's irrelevant for the tokenization.
-            if ($tokens[$i]['content'] === '|') {
-                $this->assertSame(T_TYPE_UNION, $tokens[$i]['code'], 'Token tokenized as '.$tokens[$i]['type'].', not T_TYPE_UNION (code)');
-                $this->assertSame('T_TYPE_UNION', $tokens[$i]['type'], 'Token tokenized as '.$tokens[$i]['type'].', not T_TYPE_UNION (type)');
-
-                // For the purposes of this test, presume it was intended as an intersection.
-                ++$intersectionCount;
-            }
         }//end for
-
-        $this->assertGreaterThanOrEqual(1, $intersectionCount, 'Did not find an intersection "&" between the DNF type parentheses');
-
-        $before = $this->phpcsFile->findPrevious(Tokens::$emptyTokens, ($openPtr - 1), null, true);
-        if ($before !== false && $tokens[$before]['content'] === '|') {
-            $this->assertSame(
-                T_TYPE_UNION,
-                $tokens[$before]['code'],
-                'Token before tokenized as '.$tokens[$before]['type'].', not T_TYPE_UNION (code)'
-            );
-            $this->assertSame(
-                'T_TYPE_UNION',
-                $tokens[$before]['type'],
-                'Token before tokenized as '.$tokens[$before]['type'].', not T_TYPE_UNION (type)'
-            );
-        }
-
-        // Invalid, but that's not relevant for the tokenization.
-        if ($before !== false && $tokens[$before]['content'] === '?') {
-            $this->assertSame(
-                T_NULLABLE,
-                $tokens[$before]['code'],
-                'Token before tokenized as '.$tokens[$before]['type'].', not T_NULLABLE (code)'
-            );
-            $this->assertSame(
-                'T_NULLABLE',
-                $tokens[$before]['type'],
-                'Token before tokenized as '.$tokens[$before]['type'].', not T_NULLABLE (type)'
-            );
-        }
-
-        $after = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($closePtr + 1), null, true);
-        if ($after !== false && $tokens[$after]['content'] === '|') {
-            $this->assertSame(
-                T_TYPE_UNION,
-                $tokens[$after]['code'],
-                'Token after tokenized as '.$tokens[$after]['type'].', not T_TYPE_UNION (code)'
-            );
-            $this->assertSame(
-                'T_TYPE_UNION',
-                $tokens[$after]['type'],
-                'Token after tokenized as '.$tokens[$after]['type'].', not T_TYPE_UNION (type)'
-            );
-        }
 
     }//end testDNFTypeParentheses()
 
