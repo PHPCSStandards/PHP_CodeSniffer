@@ -172,3 +172,8 @@ $foo = new MyClass(
     $obj,
     'getMethod',
 );
+
+#[AttributeName(1, 2)]
+#[AttributeName(1, 2)]
+
+$callable = myCallable(...);
