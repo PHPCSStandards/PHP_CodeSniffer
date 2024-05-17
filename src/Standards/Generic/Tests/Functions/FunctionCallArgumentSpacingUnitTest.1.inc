@@ -189,3 +189,11 @@ $foobar = functionCallFnParamA(
 
 $foobar = functionCallFnParamB(fn ($foo,$bar) => [1,2,3]  ,$args);
 $foobar = functionCallFnParamC($args, fn ($foo,$bar) => [1,2,3]  ,  );
+
+// Ignore spacing within PHP 8.0 match control structures, which may have their own rules.
+$foobar = functionCallMatchParam(
+    match($foo) {
+        1,2,3 => 'something',4,5,6 => 'else',default => 'works'
+    }  , // But check the spacing again once the match expression has finished.
+    $args
+);

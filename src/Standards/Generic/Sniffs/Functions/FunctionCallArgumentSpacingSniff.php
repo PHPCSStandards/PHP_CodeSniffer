@@ -112,13 +112,15 @@ class FunctionCallArgumentSpacingSniff implements Sniff
             T_FN,
             T_ANON_CLASS,
             T_OPEN_SHORT_ARRAY,
+            T_MATCH,
         ];
 
         while (($nextSeparator = $phpcsFile->findNext($find, ($nextSeparator + 1), $closeBracket)) !== false) {
             if ($tokens[$nextSeparator]['code'] === T_CLOSURE
                 || $tokens[$nextSeparator]['code'] === T_ANON_CLASS
+                || $tokens[$nextSeparator]['code'] === T_MATCH
             ) {
-                // Skip closures.
+                // Skip closures, anon class declarations and match control structures.
                 $nextSeparator = $tokens[$nextSeparator]['scope_closer'];
                 continue;
             } else if ($tokens[$nextSeparator]['code'] === T_FN) {
