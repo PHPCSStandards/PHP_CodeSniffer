@@ -177,3 +177,15 @@ $foo = new MyClass(
 #[AttributeName(1,2)]
 
 $callable = myCallable(...);
+
+// Skip over PHP 7.4 arrow functions.
+// While any commas belonging to the code within the arrow function would always need to be within parentheses
+// or within a short array, so there aren't any false positives, the sniff also does not need to examine these,
+// so will be more efficient skipping over arrow functions.
+$foobar = functionCallFnParamA(
+    fn ($foo,$bar) => [1,2,3],
+    $args,
+);
+
+$foobar = functionCallFnParamB(fn ($foo,$bar) => [1,2,3]  ,$args);
+$foobar = functionCallFnParamC($args, fn ($foo,$bar) => [1,2,3]  ,  );
