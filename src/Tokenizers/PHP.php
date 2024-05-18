@@ -786,7 +786,7 @@ class PHP extends Tokenizer
 
             if ($tokenIsArray === true
                 && ($token[0] === T_DOC_COMMENT
-                || ($token[0] === T_COMMENT && strpos($token[1], '/**') === 0))
+                || ($token[0] === T_COMMENT && strpos($token[1], '/**') === 0 && $token[1] !== '/**/'))
             ) {
                 $commentTokens = $commentTokenizer->tokenizeString($token[1], $this->eolChar, $newStackPtr);
                 foreach ($commentTokens as $commentToken) {
