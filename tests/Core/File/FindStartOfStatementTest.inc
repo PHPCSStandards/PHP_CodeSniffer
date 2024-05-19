@@ -192,3 +192,9 @@ callMe($paramA, match ($var) {
     'c' => fn($p1, /* test437FnSecondParamWithinNestedMatch */ $p2) => $p1 + $p2,
     default => false
 });
+
+match ($var) {
+    /* test437NestedShortArrayWithinMatch */
+    'a' => [ 1, 2.5, $var],
+    default => false
+};

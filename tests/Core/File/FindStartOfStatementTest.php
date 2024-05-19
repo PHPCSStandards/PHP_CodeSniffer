@@ -880,4 +880,57 @@ final class FindStartOfStatementTest extends AbstractMethodUnitTest
     }//end dataFindStartInsideParenthesesNestedWithinNestedMatch()
 
 
+    /**
+     * Test finding the start of a statement for a token within a short array within a match expressions.
+     *
+     * @param string     $testMarker     The comment which prefaces the target token in the test file.
+     * @param int|string $target         The token to search for after the test marker.
+     * @param int|string $expectedTarget Token code of the expected start of statement stack pointer.
+     *
+     * @link https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/437
+     *
+     * @dataProvider dataFindStartInsideShortArrayNestedWithinMatch
+     *
+     * @return void
+     */
+    public function testFindStartInsideShortArrayNestedWithinMatch($testMarker, $target, $expectedTarget)
+    {
+        $testToken = $this->getTargetToken($testMarker, $target);
+        $expected  = $this->getTargetToken($testMarker, $expectedTarget);
+
+        $found = self::$phpcsFile->findStartOfStatement($testToken);
+
+        $this->assertSame($expected, $found);
+
+    }//end testFindStartInsideShortArrayNestedWithinMatch()
+
+
+    /**
+     * Data provider.
+     *
+     * @return array<string, array<string, int|string>>
+     */
+    public static function dataFindStartInsideShortArrayNestedWithinMatch()
+    {
+        return [
+            'Array item itself should be start for first array item'  => [
+                'testMarker'     => '/* test437NestedShortArrayWithinMatch */',
+                'targets'        => T_LNUMBER,
+                'expectedTarget' => T_LNUMBER,
+            ],
+            'Array item itself should be start for second array item' => [
+                'testMarker'     => '/* test437NestedShortArrayWithinMatch */',
+                'targets'        => T_DNUMBER,
+                'expectedTarget' => T_DNUMBER,
+            ],
+            'Array item itself should be start for third array item'  => [
+                'testMarker'     => '/* test437NestedShortArrayWithinMatch */',
+                'targets'        => T_VARIABLE,
+                'expectedTarget' => T_VARIABLE,
+            ],
+        ];
+
+    }//end dataFindStartInsideShortArrayNestedWithinMatch()
+
+
 }//end class
