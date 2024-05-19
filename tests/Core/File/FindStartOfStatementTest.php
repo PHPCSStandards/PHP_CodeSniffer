@@ -12,6 +12,7 @@
 namespace PHP_CodeSniffer\Tests\Core\File;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
+use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * Tests for the \PHP_CodeSniffer\Files\File:findStartOfStatement method.
@@ -20,6 +21,42 @@ use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
  */
 final class FindStartOfStatementTest extends AbstractMethodUnitTest
 {
+
+
+    /**
+     * Test that start of statement is NEVER beyond the "current" token.
+     *
+     * @return void
+     */
+    public function testStartIsNeverMoreThanCurrentToken()
+    {
+        $tokens = self::$phpcsFile->getTokens();
+        $errors = [];
+
+        for ($i = 0; $i < self::$phpcsFile->numTokens; $i++) {
+            if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === true) {
+                continue;
+            }
+
+            $start = self::$phpcsFile->findStartOfStatement($i);
+
+            // Collect all the errors.
+            if ($start > $i) {
+                $errors[] = sprintf(
+                    'Start of statement for token %1$d (%2$s: %3$s) on line %4$d is %5$d (%6$s), which is more than %1$d',
+                    $i,
+                    $tokens[$i]['type'],
+                    $tokens[$i]['content'],
+                    $tokens[$i]['line'],
+                    $start,
+                    $tokens[$start]['type']
+                );
+            }
+        }
+
+        $this->assertSame([], $errors);
+
+    }//end testStartIsNeverMoreThanCurrentToken()
 
 
     /**
