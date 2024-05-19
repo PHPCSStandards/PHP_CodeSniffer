@@ -162,3 +162,13 @@ switch ($foo) {
         /* testInsideDefaultContinueStatement */
         continue $var;
 }
+
+match ($var) {
+    true =>
+        /* test437ClosureDeclaration */
+        function ($var) {
+            /* test437EchoNestedWithinClosureWithinMatch */
+            echo $var, 'text', PHP_EOL;
+        },
+    default => false
+};

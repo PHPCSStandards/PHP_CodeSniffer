@@ -637,4 +637,86 @@ final class FindStartOfStatementTest extends AbstractMethodUnitTest
     }//end dataFindStartInsideSwitchCaseDefaultStatements()
 
 
+    /**
+     * Test finding the start of a statement inside a closed scope nested within a match expressions.
+     *
+     * @param string     $testMarker     The comment which prefaces the target token in the test file.
+     * @param int|string $target         The token to search for after the test marker.
+     * @param int|string $expectedTarget Token code of the expected start of statement stack pointer.
+     *
+     * @link https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/437
+     *
+     * @dataProvider dataFindStartInsideClosedScopeNestedWithinMatch
+     *
+     * @return void
+     */
+    public function testFindStartInsideClosedScopeNestedWithinMatch($testMarker, $target, $expectedTarget)
+    {
+        $testToken = $this->getTargetToken($testMarker, $target);
+        $expected  = $this->getTargetToken($testMarker, $expectedTarget);
+
+        $found = self::$phpcsFile->findStartOfStatement($testToken);
+
+        $this->assertSame($expected, $found);
+
+    }//end testFindStartInsideClosedScopeNestedWithinMatch()
+
+
+    /**
+     * Data provider.
+     *
+     * @return array<string, array<string, int|string>>
+     */
+    public static function dataFindStartInsideClosedScopeNestedWithinMatch()
+    {
+        return [
+            // These were already working correctly.
+            'Closure function keyword should be start of closure - closure keyword'                   => [
+                'testMarker'     => '/* test437ClosureDeclaration */',
+                'targets'        => T_CLOSURE,
+                'expectedTarget' => T_CLOSURE,
+            ],
+            'Open curly is a statement/expression opener - open curly'                                => [
+                'testMarker'     => '/* test437ClosureDeclaration */',
+                'targets'        => T_OPEN_CURLY_BRACKET,
+                'expectedTarget' => T_OPEN_CURLY_BRACKET,
+            ],
+
+            'Echo should be start for expression - echo keyword'                                      => [
+                'testMarker'     => '/* test437EchoNestedWithinClosureWithinMatch */',
+                'targets'        => T_ECHO,
+                'expectedTarget' => T_ECHO,
+            ],
+            'Echo should be start for expression - variable'                                          => [
+                'testMarker'     => '/* test437EchoNestedWithinClosureWithinMatch */',
+                'targets'        => T_VARIABLE,
+                'expectedTarget' => T_ECHO,
+            ],
+            'Echo should be start for expression - comma'                                             => [
+                'testMarker'     => '/* test437EchoNestedWithinClosureWithinMatch */',
+                'targets'        => T_COMMA,
+                'expectedTarget' => T_ECHO,
+            ],
+
+            // These were not working correctly and would previously return the close curly of the match expression.
+            'First token after comma in echo expression should be start for expression - text string' => [
+                'testMarker'     => '/* test437EchoNestedWithinClosureWithinMatch */',
+                'targets'        => T_CONSTANT_ENCAPSED_STRING,
+                'expectedTarget' => T_CONSTANT_ENCAPSED_STRING,
+            ],
+            'First token after comma in echo expression - PHP_EOL constant'                           => [
+                'testMarker'     => '/* test437EchoNestedWithinClosureWithinMatch */',
+                'targets'        => T_STRING,
+                'expectedTarget' => T_STRING,
+            ],
+            'First token after comma in echo expression - semicolon'                                  => [
+                'testMarker'     => '/* test437EchoNestedWithinClosureWithinMatch */',
+                'targets'        => T_SEMICOLON,
+                'expectedTarget' => T_STRING,
+            ],
+        ];
+
+    }//end dataFindStartInsideClosedScopeNestedWithinMatch()
+
+
 }//end class
