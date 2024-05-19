@@ -92,7 +92,7 @@ final class FindStartOfStatementTest extends AbstractMethodUnitTest
         $start = $this->getTargetToken('/* testClosureAssignment */', T_CLOSE_CURLY_BRACKET);
         $found = self::$phpcsFile->findStartOfStatement($start);
 
-        $this->assertSame(($start - 12), $found);
+        $this->assertSame(($start - 11), $found);
 
     }//end testClosureAssignment()
 
@@ -224,7 +224,7 @@ final class FindStartOfStatementTest extends AbstractMethodUnitTest
         $start = $this->getTargetToken('/* testArrowFunctionArrayValue */', T_COMMA);
         $found = self::$phpcsFile->findStartOfStatement($start);
 
-        $this->assertSame(($start - 9), $found);
+        $this->assertSame(($start - 7), $found);
 
     }//end testArrowFunctionArrayValue()
 

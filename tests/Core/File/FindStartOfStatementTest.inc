@@ -14,7 +14,7 @@ while(true) {}
 $a = 1;
 
 /* testClosureAssignment */
-$a = function($b=false;){};
+$a = function($b=false){};
 
 /* testHeredocFunctionArg */
 myFunction(<<<END
@@ -39,8 +39,8 @@ use Vendor\Package\{ClassA as A, ClassB, ClassC as C};
 
 $a = [
     /* testArrowFunctionArrayValue */
-    'a' => fn() => return 1,
-    'b' => fn() => return 1,
+    'a' => fn() => 1,
+    'b' => fn() => 1,
 ];
 
 /* testStaticArrowFunction */
@@ -139,11 +139,11 @@ switch ($foo) {
         /* testInsideCaseStatement */
         $var = doSomething();
         /* testInsideCaseBreakStatement */
-        break 2;
+        break 1;
 
     case 2:
         /* testInsideCaseContinueStatement */
-        continue 2;
+        continue 1;
 
     case 3:
         /* testInsideCaseReturnStatement */
