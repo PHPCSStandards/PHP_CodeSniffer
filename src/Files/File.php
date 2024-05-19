@@ -2438,9 +2438,16 @@ class File
         if (empty($this->tokens[$start]['conditions']) === false) {
             $conditions         = $this->tokens[$start]['conditions'];
             $lastConditionOwner = end($conditions);
+            $matchExpression    = key($conditions);
 
-            if ($lastConditionOwner === T_MATCH) {
-                $matchExpression = key($conditions);
+            if ($lastConditionOwner === T_MATCH
+                // Check if the $start token is at the same parentheses nesting level as the match token.
+                && ((empty($this->tokens[$matchExpression]['nested_parenthesis']) === true
+                && empty($this->tokens[$start]['nested_parenthesis']) === true)
+                || ((empty($this->tokens[$matchExpression]['nested_parenthesis']) === false
+                && empty($this->tokens[$start]['nested_parenthesis']) === false)
+                && $this->tokens[$matchExpression]['nested_parenthesis'] === $this->tokens[$start]['nested_parenthesis']))
+            ) {
                 for ($prevMatch = $start; $prevMatch > $this->tokens[$matchExpression]['scope_opener']; $prevMatch--) {
                     if ($prevMatch !== $start
                         && ($this->tokens[$prevMatch]['code'] === T_MATCH_ARROW

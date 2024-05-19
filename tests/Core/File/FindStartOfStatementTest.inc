@@ -172,3 +172,23 @@ match ($var) {
         },
     default => false
 };
+
+match ($var) {
+    /* test437NestedLongArrayWithinMatch */
+    'a' => array( 1, 2.5, $var),
+    /* test437NestedFunctionCallWithinMatch */
+    'b' => functionCall( 11, $var, 50.50),
+    /* test437NestedArrowFunctionWithinMatch */
+    'c' => fn($p1, /* test437FnSecondParamWithinMatch */ $p2) => $p1 + $p2,
+    default => false
+};
+
+callMe($paramA, match ($var) {
+    /* test437NestedLongArrayWithinNestedMatch */
+    'a' => array( 1, 2.5, $var),
+    /* test437NestedFunctionCallWithinNestedMatch */
+    'b' => functionCall( 11, $var, 50.50),
+    /* test437NestedArrowFunctionWithinNestedMatch */
+    'c' => fn($p1, /* test437FnSecondParamWithinNestedMatch */ $p2) => $p1 + $p2,
+    default => false
+});
