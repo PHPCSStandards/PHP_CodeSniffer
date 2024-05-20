@@ -3,7 +3,8 @@
     <![CDATA[
     Enforces rules related to the formatting of DocBlocks ("Doc Comments") in PHP code.
 
-    DocBlocks are a special type of comment that can provide information about a structural element. In the context of DocBlocks, the following are considered structural elements: require(_once) and include(_once) statements, class, interface, trait, function, property, constant and variable declarations.
+    DocBlocks are a special type of comment that can provide information about a structural element. In the context of DocBlocks, the following are considered structural elements:
+    class, interface, trait, enum, function, property, constant, variable declarations and require/include[_once] statements.
 
     DocBlocks start with a `/**` marker and end on `*/`. This sniff will check the formatting of all DocBlocks, independently of whether or not they are attached to a structural element.
     ]]>
