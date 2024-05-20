@@ -6,6 +6,57 @@ The file documents changes to the PHP_CodeSniffer project.
 
 _Nothing yet._
 
+## [3.10.0] - 2024-05-20
+
+### Added
+- Tokenizer support for PHP 8.2 Disjunctive Normal Form (DNF) types. [#3731][sq-3731], [#387], [#461]
+    - Includes new `T_TYPE_OPEN_PARENTHESIS` and `T_TYPE_CLOSE_PARENTHESIS` tokens to represent the parentheses in DNF types.
+    - These new tokens, like other parentheses, will have the `parenthesis_opener` and `parenthesis_closer` token array indexes set and the tokens between them will have the `nested_parenthesis` index.
+    - The `File::getMethodProperties()`, `File::getMethodParameters()` and `File::getMemberProperties()` methods now all support DNF types. [#471], [#472], [#473]
+    - Additionally, the following sniff has been updated to support DNF types:
+        - Generic.PHP.LowerCaseType [#478]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patches.
+- Documentation for the following sniffs:
+    - Squiz.WhiteSpace.FunctionClosingBraceSpace
+    - Thanks to [Przemek Hernik][@przemekhernik] for the patch.
+
+### Changed
+- The help screens have received a face-lift for improved usability and readability. [#447]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch and thanks to [Colin Stewart][@costdev], [Gary Jones][@GaryJones] and [@mbomb007] for reviewing.
+- The Squiz.Commenting.ClosingDeclarationComment sniff will now also examine and flag closing comments for traits. [#442]
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- The following sniff(s) have efficiency improvements:
+    - Generic.Arrays.ArrayIndent
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- The autoloader will now always return a boolean value indicating whether it has loaded a class or not. [#479]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Various housekeeping, including improvements to the tests and documentation.
+    - Thanks to [Dan Wallis][@fredden], [Danny van der Sluijs][@DannyvdSluijs], [Rodrigo Primo][@rodrigoprimo] and [Juliette Reinders Folmer][@jrfnl] for their contributions.
+
+### Fixed
+- Fixed bug [#466] : Generic.Functions.CallTimePassByReference was not flagging call-time pass-by-reference in class instantiations using the self/parent/static keywords.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Fixed bug [#494] : edge case bug in tokenization of an empty block comment.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#494] : edge case bug in tokenization of an empty single-line DocBlock.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#499] : Generic.ControlStructures.InlineControlStructure now handles statements with a comment between `else` and `if` correctly.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+
+[sq-3731]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3731
+[#387]:    https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/387
+[#442]:    https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/442
+[#447]:    https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/447
+[#461]:    https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/461
+[#466]:    https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/466
+[#471]:    https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/471
+[#472]:    https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/472
+[#473]:    https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/473
+[#478]:    https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/478
+[#479]:    https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/479
+[#494]:    https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/494
+[#499]:    https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/499
+
 ## [3.9.2] - 2024-04-24
 
 ### Changed
@@ -6883,6 +6934,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 -->
 
 [Unreleased]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/master...HEAD
+[3.10.0]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.9.2...3.10.0
 [3.9.2]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.9.1...3.9.2
 [3.9.1]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.9.0...3.9.1
 [3.9.0]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.8.1...3.9.0
@@ -7020,6 +7072,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@cixtor]:              https://github.com/cixtor
 [@claylo]:              https://github.com/claylo
 [@codebymikey]:         https://github.com/codebymikey
+[@costdev]:             https://github.com/costdev
 [@covex-nn]:            https://github.com/covex-nn
 [@cweiske]:             https://github.com/cweiske
 [@Daimona]:             https://github.com/Daimona
@@ -7118,6 +7171,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@michaelbutler]:       https://github.com/michaelbutler
 [@michalbundyra]:       https://github.com/michalbundyra
 [@Morerice]:            https://github.com/Morerice
+[@mbomb007]:            https://github.com/mbomb007
 [@morozov]:             https://github.com/morozov
 [@mrkrstphr]:           https://github.com/mrkrstphr
 [@mythril]:             https://github.com/mythril
@@ -7136,6 +7190,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@pfrenssen]:           https://github.com/pfrenssen
 [@phil-davis]:          https://github.com/phil-davis
 [@photodude]:           https://github.com/photodude
+[@przemekhernik]:       https://github.com/przemekhernik
 [@r3nat]:               https://github.com/r3nat
 [@raul338]:             https://github.com/raul338
 [@realmfoo]:            https://github.com/realmfoo
