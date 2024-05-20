@@ -6,6 +6,36 @@ The file documents changes to the PHP_CodeSniffer project.
 
 _Nothing yet._
 
+## [3.10.1] - 2024-05-22
+
+### Added
+- Documentation for the following sniffs:
+    - Generic.Commenting.DocComment
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+
+### Changed
+- The following have received efficiency improvements:
+    - Type handling in the PHP Tokenizer
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Various housekeeping, including improvements to the tests and documentation.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for their contributions.
+
+### Fixed
+- Fixed bug [#110], [#437], [#475]: `File::findStartOfStatement()`: the start of statement/expression determination for tokens in parentheses/short array brackets/others scopes, nested within match expressions, was incorrect in most cases.
+    The trickle down effect of the bug fixes made to the `File::findStartOfStatement()` method, is that the Generic.WhiteSpace.ScopeIndent and the PEAR.WhiteSpace.ScopeIndent sniffs should now be able to correctly determine and fix the indent for match expressions containing nested expressions.
+    These fixes also fix an issue with the `Squiz.Arrays.ArrayDeclaration` sniff and possibly other, unreported bugs.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#504]: The tokenizer could inadvertently mistake the last parameter in a function call using named arguments for a DNF type.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#508]: Tokenizer/PHP: extra hardening against handling parse errors in the type handling layer.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+
+[#110]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/110
+[#437]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/437
+[#475]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/475
+[#504]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/504
+[#508]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/508
+
 ## [3.10.0] - 2024-05-20
 
 ### Added
@@ -6934,6 +6964,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 -->
 
 [Unreleased]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/master...HEAD
+[3.10.1]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.10.0...3.10.1
 [3.10.0]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.9.2...3.10.0
 [3.9.2]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.9.1...3.9.2
 [3.9.1]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.9.0...3.9.1
