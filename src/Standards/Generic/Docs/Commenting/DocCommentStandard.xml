@@ -11,7 +11,7 @@
     </standard>
     <standard>
     <![CDATA[
-    DocBlock must not be empty.
+    A DocBlock must not be empty.
     ]]>
     </standard>
     <code_comparison>
@@ -250,14 +250,14 @@
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: no additional blank lines before the closing DocBlock tag.">
+        <code title="Valid: No additional blank lines before the closing DocBlock tag.">
         <![CDATA[
 /**
  * Short description.<em>
 </em> */
         ]]>
         </code>
-        <code title="Invalid: additional blank lines before the closing DocBlock tag.">
+        <code title="Invalid: Additional blank lines before the closing DocBlock tag.">
         <![CDATA[
 /**
  * Short description.
