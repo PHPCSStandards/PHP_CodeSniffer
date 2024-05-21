@@ -3179,7 +3179,7 @@ class PHP extends Tokenizer
                             $confirmed = true;
                             break;
                         } else {
-                            // This may still be an arrow function which hasn't be handled yet.
+                            // This may still be an arrow function which hasn't been handled yet.
                             for ($y = ($x - 1); $y > 0; $y--) {
                                 if (isset(Tokens::$emptyTokens[$this->tokens[$y]['code']]) === false
                                     && $this->tokens[$y]['code'] !== T_BITWISE_AND
