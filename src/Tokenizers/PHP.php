@@ -2602,7 +2602,9 @@ class PHP extends Tokenizer
 
         $this->createAttributesNestingMap();
 
-        $numTokens = count($this->tokens);
+        $numTokens         = count($this->tokens);
+        $lastSeenTypeToken = $numTokens;
+
         for ($i = ($numTokens - 1); $i >= 0; $i--) {
             // Check for any unset scope conditions due to alternate IF/ENDIF syntax.
             if (isset($this->tokens[$i]['scope_opener']) === true
@@ -3038,6 +3040,12 @@ class PHP extends Tokenizer
                 || $this->tokens[$i]['code'] === T_BITWISE_AND
                 || $this->tokens[$i]['code'] === T_CLOSE_PARENTHESIS
             ) {
+                if ($lastSeenTypeToken < $i) {
+                    // We've already examined this code to check if it is a type declaration and concluded it wasn't.
+                    // No need to do it again.
+                    continue;
+                }
+
                 /*
                     Convert "|" to T_TYPE_UNION or leave as T_BITWISE_OR.
                     Convert "&" to T_TYPE_INTERSECTION or leave as T_BITWISE_AND.
@@ -3249,6 +3257,9 @@ class PHP extends Tokenizer
 
                     break;
                 }//end for
+
+                // Remember the last token we examined as part of the (non-)"type declaration".
+                $lastSeenTypeToken = $x;
 
                 if ($confirmed === false
                     && $suspectedType === 'property or parameter'
