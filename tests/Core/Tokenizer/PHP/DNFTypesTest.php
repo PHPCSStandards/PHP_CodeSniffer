@@ -141,6 +141,15 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             'parens without owner, function call with DNF look-a-like param'  => [
                 'testMarker' => '/* testParensNoOwnerFunctionCallwithDNFLookALikeParam */',
             ],
+            'parens without owner, function call, named param'                => [
+                'testMarker' => '/* testParensNoOwnerFunctionCallWithDNFLookALikeNamedParamPlain */',
+            ],
+            'parens without owner, function call, named param + bitwise or'   => [
+                'testMarker' => '/* testParensNoOwnerFunctionCallWithDNFLookALikeNamedParamUnion */',
+            ],
+            'parens without owner, function call, named param + bitwise and'  => [
+                'testMarker' => '/* testParensNoOwnerFunctionCallWithDNFLookALikeNamedParamIntersect */',
+            ],
 
             'parens without owner in OO const default value'                  => [
                 'testMarker' => '/* testParensNoOwnerOOConstDefaultValue */',

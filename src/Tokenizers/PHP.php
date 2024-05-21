@@ -3212,7 +3212,17 @@ class PHP extends Tokenizer
                     }
 
                     if ($suspectedType === 'return' && $this->tokens[$x]['code'] === T_COLON) {
-                        $confirmed = true;
+                        // Make sure this is not the colon from a parameter name.
+                        for ($y = ($x - 1); $y > 0; $y--) {
+                            if (isset(Tokens::$emptyTokens[$this->tokens[$y]['code']]) === false) {
+                                break;
+                            }
+                        }
+
+                        if ($this->tokens[$y]['code'] !== T_PARAM_NAME) {
+                            $confirmed = true;
+                        }
+
                         break;
                     }
 
