@@ -3132,8 +3132,13 @@ class PHP extends Tokenizer
 
                 $typeTokenCountBefore = 0;
                 $typeOperators        = [$i];
+                $parenthesesCount     = 0;
                 $confirmed            = false;
                 $maybeNullable        = null;
+
+                if ($this->tokens[$i]['code'] === T_OPEN_PARENTHESIS || $this->tokens[$i]['code'] === T_CLOSE_PARENTHESIS) {
+                    ++$parenthesesCount;
+                }
 
                 for ($x = ($i - 1); $x >= 0; $x--) {
                     if (isset(Tokens::$emptyTokens[$this->tokens[$x]['code']]) === true) {
@@ -3201,11 +3206,13 @@ class PHP extends Tokenizer
                         continue;
                     }
 
-                    if ($this->tokens[$x]['code'] === T_BITWISE_OR
-                        || $this->tokens[$x]['code'] === T_BITWISE_AND
-                        || $this->tokens[$x]['code'] === T_OPEN_PARENTHESIS
-                        || $this->tokens[$x]['code'] === T_CLOSE_PARENTHESIS
-                    ) {
+                    if ($this->tokens[$x]['code'] === T_BITWISE_OR || $this->tokens[$x]['code'] === T_BITWISE_AND) {
+                        $typeOperators[] = $x;
+                        continue;
+                    }
+
+                    if ($this->tokens[$x]['code'] === T_OPEN_PARENTHESIS || $this->tokens[$x]['code'] === T_CLOSE_PARENTHESIS) {
+                        ++$parenthesesCount;
                         $typeOperators[] = $x;
                         continue;
                     }
@@ -3287,8 +3294,8 @@ class PHP extends Tokenizer
                     unset($parens, $last);
                 }//end if
 
-                if ($confirmed === false) {
-                    // Not a union or intersection type after all, move on.
+                if ($confirmed === false || ($parenthesesCount % 2) !== 0) {
+                    // Not a (valid) union, intersection or DNF type after all, move on.
                     continue;
                 }
 
