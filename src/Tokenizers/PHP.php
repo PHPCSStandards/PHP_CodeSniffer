@@ -3036,7 +3036,6 @@ class PHP extends Tokenizer
                 continue;
             } else if ($this->tokens[$i]['code'] === T_BITWISE_OR
                 || $this->tokens[$i]['code'] === T_BITWISE_AND
-                || $this->tokens[$i]['code'] === T_OPEN_PARENTHESIS
                 || $this->tokens[$i]['code'] === T_CLOSE_PARENTHESIS
             ) {
                 /*
