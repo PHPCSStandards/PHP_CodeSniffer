@@ -44,6 +44,14 @@ list(&$a, &$b) = $array;
 /* testParensNoOwnerFunctionCallwithDNFLookALikeParam */
 $obj->static((CONST_A&CONST_B)|CONST_C | $var);
 
+/* testParensNoOwnerFunctionCallWithDNFLookALikeNamedParamPlain */
+callMe(label: false);
+
+/* testParensNoOwnerFunctionCallWithDNFLookALikeNamedParamUnion */
+callMe(label: CONST_A | CONST_B);
+
+/* testParensNoOwnerFunctionCallWithDNFLookALikeNamedParamIntersect */
+callMe(label: CONST_A & CONST_B);
 
 /*
  * DNF parentheses.
