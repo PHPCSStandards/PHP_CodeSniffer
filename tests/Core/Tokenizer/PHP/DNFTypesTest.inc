@@ -49,7 +49,7 @@ $obj->static((CONST_A&CONST_B)|CONST_C | $var);
  * DNF parentheses.
  */
 
-class DNFTypes {
+abstract class DNFTypes {
     /* testDNFTypeOOConstUnqualifiedClasses */
     public const (A&B)|D UNQUALIFIED = new Foo;
 
@@ -63,7 +63,7 @@ class DNFTypes {
         (C&D) | // phpcs:ignore Stnd.Cat.Sniff
         /* testDNFTypeOOConstMulti3 */
         (Y&D)
-        | null MULTI_DNF = false;
+        | null MULTI_DNF = null;
 
     /* testDNFTypeOOConstNamespaceRelative */
     final protected const (namespace\Sub\NameA&namespace\Sub\NameB)|namespace\Sub\NameC NAMESPACE_RELATIVE = new namespace\Sub\NameB;
@@ -75,10 +75,10 @@ class DNFTypes {
     const (\Fully\Qualified\NameA&\Fully\Qualified\NameB)|\Fully\Qualified\NameC FULLY_QUALIFIED = new \Fully\Qualified\NameB();
 
     /* testDNFTypePropertyUnqualifiedClasses */
-    public static (Foo&Bar)|object $obj;
+    public static (Foo&Bar)|array $obj;
 
     /* testDNFTypePropertyReverseModifierOrder */
-    static protected string|(A&B)|bool $dnf /* testParensNoOwnerPropertyDefaultValue1 */ = ( E_WARNING & E_NOTICE ) | /* testParensNoOwnerPropertyDefaultValue2 */ (E_ALL & E_DEPRECATED);
+    static protected string|(A&B)|int $dnf /* testParensNoOwnerPropertyDefaultValue1 */ = ( E_WARNING & E_NOTICE ) | /* testParensNoOwnerPropertyDefaultValue2 */ (E_ALL & E_DEPRECATED);
 
     private
         /* testDNFTypePropertyMultiNamespaceRelative */
@@ -96,7 +96,7 @@ class DNFTypes {
     static readonly (A&B&C)|array $staticReadonly;
 
     /* testDNFTypePropertyWithOnlyStaticKeyword */
-    static (A&B&C)|true $obj;
+    static (A&B&C)|true $onlyStaticModified;
 
     public function paramTypes(
         /* testDNFTypeParam1WithAttribute */
@@ -104,7 +104,7 @@ class DNFTypes {
         (\Foo&Bar)|int|float $paramA /* testParensNoOwnerParamDefaultValue */ = SOMETHING | (CONSTANT_A & CONSTANT_B),
 
         /* testDNFTypeParam2 */
-        (Foo&\Bar) /* testDNFTypeParam3 */ |(Baz&Fop) &...$paramB = null,
+        (Foo&\Bar) /* testDNFTypeParam3 */ |(Baz&Fop) &...$paramB,
     ) {
         /* testParensNoOwnerInReturnValue1 */
         return (
@@ -148,7 +148,7 @@ function globalFunctionWithSpreadAndReference(
     /* testDNFTypeWithReference */
     float|(B&A) &$paramA,
     /* testDNFTypeWithSpreadOperator */
-    string|(B|D) ...$paramB
+    string|(B&D) ...$paramB
 ) {}
 
 
@@ -160,7 +160,7 @@ $closureWithReturnType = function ($string = NONSENSE & FAKE) /* testDNFTypeClos
 /* testParensOwnerArrowDNFUsedWithin */
 $arrowWithParamType = fn (
     /* testDNFTypeArrowParam */
-    object|(A&B&C)|array $param,
+    int|(A&B&C)|array $param,
     /* testParensNoOwnerAmpersandInDefaultValue */ ?int $int = (CONSTA & CONSTB )| CONST_C
 )
     /* testParensNoOwnerInArrowReturnExpression */
@@ -175,11 +175,11 @@ $arrowWithParamReturnByRef = fn &(
 
 function InvalidSyntaxes(
     /* testDNFTypeParamIllegalUnnecessaryParens */
-    (A&B) $parensNotNeeded
+    (A&B) $parensNotNeeded,
 
     /* testDNFTypeParamIllegalIntersectUnionReversed */
-    A&(B|D) $onlyIntersectAllowedWithinParensAndUnionOutside
+    A&(B|D) $onlyIntersectAllowedWithinParensAndUnionOutside,
 
     /* testDNFTypeParamIllegalNestedParens */
-    A|(B&(D|W)|null) $nestedParensNotAllowed
+    A|(B&(D|W)|null) $nestedParensNotAllowed,
 ) {}
