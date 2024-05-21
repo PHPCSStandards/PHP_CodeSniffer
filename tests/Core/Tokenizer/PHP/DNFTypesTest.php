@@ -46,11 +46,19 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
         $this->assertSame(T_CLOSE_PARENTHESIS, $closer['code'], 'Token tokenized as '.$closer['type'].', not T_CLOSE_PARENTHESIS (code)');
         $this->assertSame('T_CLOSE_PARENTHESIS', $closer['type'], 'Token tokenized as '.$closer['type'].', not T_CLOSE_PARENTHESIS (type)');
 
-        for ($i = ($openPtr + 1); $i < $closePtr; $i++) {
-            // If there are ampersands, make sure these are tokenized as bitwise and.
-            if ($skipCheckInside === false && $tokens[$i]['content'] === '&') {
-                $this->assertSame(T_BITWISE_AND, $tokens[$i]['code'], 'Token tokenized as '.$tokens[$i]['type'].', not T_BITWISE_AND (code)');
-                $this->assertSame('T_BITWISE_AND', $tokens[$i]['type'], 'Token tokenized as '.$tokens[$i]['type'].', not T_BITWISE_AND (type)');
+        if ($skipCheckInside === false) {
+            for ($i = ($openPtr + 1); $i < $closePtr; $i++) {
+                // If there are ampersands, make sure these are tokenized as bitwise and.
+                if ($tokens[$i]['content'] === '&') {
+                    $this->assertSame(T_BITWISE_AND, $tokens[$i]['code'], 'Token tokenized as '.$tokens[$i]['type'].', not T_BITWISE_AND (code)');
+                    $this->assertSame('T_BITWISE_AND', $tokens[$i]['type'], 'Token tokenized as '.$tokens[$i]['type'].', not T_BITWISE_AND (type)');
+                }
+
+                // If there are pipes, make sure these are tokenized as bitwise or.
+                if ($tokens[$i]['content'] === '|') {
+                    $this->assertSame(T_BITWISE_OR, $tokens[$i]['code'], 'Token tokenized as '.$tokens[$i]['type'].', not T_BITWISE_OR (code)');
+                    $this->assertSame('T_BITWISE_OR', $tokens[$i]['type'], 'Token tokenized as '.$tokens[$i]['type'].', not T_BITWISE_OR (type)');
+                }
             }
         }
 
