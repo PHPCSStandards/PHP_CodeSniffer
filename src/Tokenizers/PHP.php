@@ -2602,7 +2602,9 @@ class PHP extends Tokenizer
 
         $this->createAttributesNestingMap();
 
-        $numTokens = count($this->tokens);
+        $numTokens         = count($this->tokens);
+        $lastSeenTypeToken = $numTokens;
+
         for ($i = ($numTokens - 1); $i >= 0; $i--) {
             // Check for any unset scope conditions due to alternate IF/ENDIF syntax.
             if (isset($this->tokens[$i]['scope_opener']) === true
@@ -3036,9 +3038,14 @@ class PHP extends Tokenizer
                 continue;
             } else if ($this->tokens[$i]['code'] === T_BITWISE_OR
                 || $this->tokens[$i]['code'] === T_BITWISE_AND
-                || $this->tokens[$i]['code'] === T_OPEN_PARENTHESIS
                 || $this->tokens[$i]['code'] === T_CLOSE_PARENTHESIS
             ) {
+                if ($lastSeenTypeToken < $i) {
+                    // We've already examined this code to check if it is a type declaration and concluded it wasn't.
+                    // No need to do it again.
+                    continue;
+                }
+
                 /*
                     Convert "|" to T_TYPE_UNION or leave as T_BITWISE_OR.
                     Convert "&" to T_TYPE_INTERSECTION or leave as T_BITWISE_AND.
@@ -3133,8 +3140,13 @@ class PHP extends Tokenizer
 
                 $typeTokenCountBefore = 0;
                 $typeOperators        = [$i];
+                $parenthesesCount     = 0;
                 $confirmed            = false;
                 $maybeNullable        = null;
+
+                if ($this->tokens[$i]['code'] === T_OPEN_PARENTHESIS || $this->tokens[$i]['code'] === T_CLOSE_PARENTHESIS) {
+                    ++$parenthesesCount;
+                }
 
                 for ($x = ($i - 1); $x >= 0; $x--) {
                     if (isset(Tokens::$emptyTokens[$this->tokens[$x]['code']]) === true) {
@@ -3167,7 +3179,7 @@ class PHP extends Tokenizer
                             $confirmed = true;
                             break;
                         } else {
-                            // This may still be an arrow function which hasn't be handled yet.
+                            // This may still be an arrow function which hasn't been handled yet.
                             for ($y = ($x - 1); $y > 0; $y--) {
                                 if (isset(Tokens::$emptyTokens[$this->tokens[$y]['code']]) === false
                                     && $this->tokens[$y]['code'] !== T_BITWISE_AND
@@ -3202,11 +3214,13 @@ class PHP extends Tokenizer
                         continue;
                     }
 
-                    if ($this->tokens[$x]['code'] === T_BITWISE_OR
-                        || $this->tokens[$x]['code'] === T_BITWISE_AND
-                        || $this->tokens[$x]['code'] === T_OPEN_PARENTHESIS
-                        || $this->tokens[$x]['code'] === T_CLOSE_PARENTHESIS
-                    ) {
+                    if ($this->tokens[$x]['code'] === T_BITWISE_OR || $this->tokens[$x]['code'] === T_BITWISE_AND) {
+                        $typeOperators[] = $x;
+                        continue;
+                    }
+
+                    if ($this->tokens[$x]['code'] === T_OPEN_PARENTHESIS || $this->tokens[$x]['code'] === T_CLOSE_PARENTHESIS) {
+                        ++$parenthesesCount;
                         $typeOperators[] = $x;
                         continue;
                     }
@@ -3243,6 +3257,9 @@ class PHP extends Tokenizer
 
                     break;
                 }//end for
+
+                // Remember the last token we examined as part of the (non-)"type declaration".
+                $lastSeenTypeToken = $x;
 
                 if ($confirmed === false
                     && $suspectedType === 'property or parameter'
@@ -3288,8 +3305,8 @@ class PHP extends Tokenizer
                     unset($parens, $last);
                 }//end if
 
-                if ($confirmed === false) {
-                    // Not a union or intersection type after all, move on.
+                if ($confirmed === false || ($parenthesesCount % 2) !== 0) {
+                    // Not a (valid) union, intersection or DNF type after all, move on.
                     continue;
                 }
 
