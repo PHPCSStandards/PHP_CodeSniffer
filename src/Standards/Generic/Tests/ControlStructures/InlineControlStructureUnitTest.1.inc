@@ -79,14 +79,14 @@ if ($a)
 </div>
 
 <?php
-switch ($this->error):
-    case Shop_Customer :: ERROR_INVALID_GENDER: ?>
-        Ung&uuml;ltiges Geschlecht!
-    <?php break;
-    case Shop_Customer :: ERROR_EMAIL_IN_USE: ?>
-        Die eingetragene E-Mail-Adresse ist bereits registriert.
-    <?php break;
-endswitch;
+
+if ($error === ERROR_ONE): ?>
+    Error one!
+<?php elseif ($error === ERROR_TWO): ?>
+    Error two!
+<?php endif;
+
+
 
 if ($this->allowShopping !== true):
     if ($this->status != Shop_Cart :: OK):

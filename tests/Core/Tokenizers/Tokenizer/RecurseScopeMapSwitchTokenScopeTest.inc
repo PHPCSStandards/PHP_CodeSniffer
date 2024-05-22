@@ -1,0 +1,24 @@
+<?php
+
+/* testSwitchNormalSyntax */
+switch ($value) {
+    case 1:
+        echo 'one';
+        break;
+    default :
+        echo 'other';
+        break;
+}
+
+// Test for https://github.com/squizlabs/PHP_CodeSniffer/issues/497
+/* testSwitchAlternativeSyntax */
+switch ($value):
+    /* testSwitchAlternativeSyntaxEnsureTestWillNotPickUpWrongColon */
+    case 1:
+        echo 'one';
+        break;
+    default:
+        echo 'other';
+        break;
+/* testSwitchAlternativeSyntaxEnd */
+endswitch;
