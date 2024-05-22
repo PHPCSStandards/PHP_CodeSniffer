@@ -6,6 +6,44 @@ The file documents changes to the PHP_CodeSniffer project.
 
 _Nothing yet._
 
+## [3.10.2] - 2024-07-22
+
+### Changed
+- The following sniff(s) have received efficiency improvements:
+    - Generic.Functions.FunctionCallArgumentSpacing
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- The array format of the information passed to the `Reports::generateFileReport()` method is now documented in the Reports interface. [#523]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Various housekeeping, including improvements to the tests and documentation.
+    - Thanks to [Bill Ruddock][@biinari], [Dan Wallis][@fredden], [Klaus Purer][@klausi], [Rodrigo Primo][@rodrigoprimo] and [Juliette Reinders Folmer][@jrfnl] for their contributions.
+
+### Fixed
+- Fixed bug [#513] : Generic.Functions.FunctionCallArgumentSpacing did not ignore the body of a match expressions passed as a function argument, which could lead to false positives.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#533] : Generic.WhiteSpace.DisallowTabIndent: tab indentation for heredoc/nowdoc closers will no longer be auto-fixed to prevent parse errors. The issue will still be reported.
+    - The error code for heredoc/nowdoc indentation using tabs has been made more specific - `TabsUsedHeredocCloser` - to allow for selectively excluding the indentation check for heredoc/nowdoc closers.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#534] : Generic.WhiteSpace.DisallowSpaceIndent did not report on space indentation for PHP 7.3 flexible heredoc/nowdoc closers.
+    - Closers using space indentation will be reported with a dedicated error code: `SpacesUsedHeredocCloser`.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#537] : Squiz.PHP.DisallowMultipleAssignments false positive for list assignments at the start of a new PHP block after an embedded PHP statement.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#551] : Squiz.PHP.DisallowMultipleAssignments prevent false positive for function parameters during live coding.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Fixed bug [#554] : Generic.CodeAnalysis.UselessOverridingMethod edge case false negative when the call to the parent method would end on a PHP close tag.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#555] : Squiz.Classes.SelfMemberReference edge case false negative when the namespace declaration would end on a PHP close tag.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+
+[#513]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/513
+[#523]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/523
+[#533]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/533
+[#534]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/534
+[#537]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/537
+[#551]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/551
+[#554]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/554
+[#555]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/555
+
 ## [3.10.1] - 2024-05-22
 
 ### Added
@@ -21,13 +59,13 @@ _Nothing yet._
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for their contributions.
 
 ### Fixed
-- Fixed bug [#110], [#437], [#475]: `File::findStartOfStatement()`: the start of statement/expression determination for tokens in parentheses/short array brackets/others scopes, nested within match expressions, was incorrect in most cases.
+- Fixed bug [#110], [#437], [#475] : `File::findStartOfStatement()`: the start of statement/expression determination for tokens in parentheses/short array brackets/others scopes, nested within match expressions, was incorrect in most cases.
     The trickle down effect of the bug fixes made to the `File::findStartOfStatement()` method, is that the Generic.WhiteSpace.ScopeIndent and the PEAR.WhiteSpace.ScopeIndent sniffs should now be able to correctly determine and fix the indent for match expressions containing nested expressions.
     These fixes also fix an issue with the `Squiz.Arrays.ArrayDeclaration` sniff and possibly other, unreported bugs.
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug [#504]: The tokenizer could inadvertently mistake the last parameter in a function call using named arguments for a DNF type.
+- Fixed bug [#504] : The tokenizer could inadvertently mistake the last parameter in a function call using named arguments for a DNF type.
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
-- Fixed bug [#508]: Tokenizer/PHP: extra hardening against handling parse errors in the type handling layer.
+- Fixed bug [#508] : Tokenizer/PHP: extra hardening against handling parse errors in the type handling layer.
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
 
 [#110]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/110
@@ -6964,6 +7002,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 -->
 
 [Unreleased]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/master...HEAD
+[3.10.2]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.10.1...3.10.2
 [3.10.1]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.10.0...3.10.1
 [3.10.0]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.9.2...3.10.0
 [3.9.2]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.9.1...3.9.2
@@ -7089,6 +7128,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@becoded]:             https://github.com/becoded
 [@Benjamin-Loison]:     https://github.com/Benjamin-Loison
 [@benmatselby]:         https://github.com/benmatselby
+[@biinari]:             https://github.com/biinari
 [@Billz95]:             https://github.com/Billz95
 [@biozshock]:           https://github.com/biozshock
 [@bkdotcom]:            https://github.com/bkdotcom
