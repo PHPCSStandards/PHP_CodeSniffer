@@ -73,7 +73,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
                 // Make sure we don't try to load any of Composer's classes
                 // while the autoloader is being setup.
                 if (strpos($class, 'Composer\\') === 0) {
-                    return;
+                    return false;
                 }
 
                 if (strpos(__DIR__, 'phar://') !== 0
@@ -298,7 +298,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
          *
          * @param string $class The name of the class.
          *
-         * @throws \Exception If the class name has not been loaded
+         * @throws \Exception If the class name has not been loaded.
          * @return string
          */
         public static function getLoadedFileName($class)

@@ -236,7 +236,7 @@ class Reporter
         ob_end_clean();
 
         if ($this->config->colors !== true || $reportFile !== null) {
-            $generatedReport = preg_replace('`\033\[[0-9;]+m`', '', $generatedReport);
+            $generatedReport = Common::stripColors($generatedReport);
         }
 
         if ($reportFile !== null) {

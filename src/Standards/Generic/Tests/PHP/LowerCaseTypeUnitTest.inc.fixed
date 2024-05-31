@@ -125,6 +125,20 @@ enum TypedEnumConstants {
     public const string | array | false FOURTH = 'fourth';
 }
 
+class DNFTypes {
+    const (parent&Something)|float CONST_NAME = 1.5;
+
+    public readonly true|(\A&B) $prop;
+
+    function DNFParamTypes (
+        null|(\Package\ClassName&\Package\Other_Class)|int $DNFinMiddle,
+        (\Package\ClassName&\Package\Other_Class)|array $parensAtStart,
+        false|(\Package\ClassName&\Package\Other_Class) $parentAtEnd,
+    ) {}
+
+    function DNFReturnTypes ($var): object|(self&\Package\Other_Class)|string|false {}
+}
+
 // Intentional error, should be ignored by the sniff.
 interface PropertiesNotAllowed {
     public $notAllowed;

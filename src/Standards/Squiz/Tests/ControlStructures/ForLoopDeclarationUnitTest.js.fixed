@@ -83,7 +83,7 @@ for ( i = 0; i < 10; i++ ) {}
 // phpcs:set Squiz.ControlStructures.ForLoopDeclaration requiredSpacesAfterOpen 0
 // phpcs:set Squiz.ControlStructures.ForLoopDeclaration requiredSpacesBeforeClose 0
 
-// Test with semi-colon not belonging to for.
+// Test with semicolon not belonging to for.
 for (i = function() {self.widgetLoaded(widget.id)  ;  }; i < function() {self.widgetLoaded(widget.id);}; i++) {}
 for (i = function() {self.widgetLoaded(widget.id);}; i < function() {self.widgetLoaded(widget.id);}; i++) {}
 

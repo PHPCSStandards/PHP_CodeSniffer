@@ -1419,7 +1419,9 @@ class File
             // it's likely to be an array which might have arguments in it. This
             // could cause problems in our parsing below, so lets just skip to the
             // end of it.
-            if (isset($this->tokens[$i]['parenthesis_opener']) === true) {
+            if ($this->tokens[$i]['code'] !== T_TYPE_OPEN_PARENTHESIS
+                && isset($this->tokens[$i]['parenthesis_opener']) === true
+            ) {
                 // Don't do this if it's the close parenthesis for the method.
                 if ($i !== $this->tokens[$i]['parenthesis_closer']) {
                     $i = $this->tokens[$i]['parenthesis_closer'];
@@ -1513,6 +1515,8 @@ class File
             case T_NS_SEPARATOR:
             case T_TYPE_UNION:
             case T_TYPE_INTERSECTION:
+            case T_TYPE_OPEN_PARENTHESIS:
+            case T_TYPE_CLOSE_PARENTHESIS:
             case T_FALSE:
             case T_TRUE:
             case T_NULL:
@@ -1735,18 +1739,20 @@ class File
             }
 
             $valid = [
-                T_STRING            => T_STRING,
-                T_CALLABLE          => T_CALLABLE,
-                T_SELF              => T_SELF,
-                T_PARENT            => T_PARENT,
-                T_STATIC            => T_STATIC,
-                T_FALSE             => T_FALSE,
-                T_TRUE              => T_TRUE,
-                T_NULL              => T_NULL,
-                T_NAMESPACE         => T_NAMESPACE,
-                T_NS_SEPARATOR      => T_NS_SEPARATOR,
-                T_TYPE_UNION        => T_TYPE_UNION,
-                T_TYPE_INTERSECTION => T_TYPE_INTERSECTION,
+                T_STRING                 => T_STRING,
+                T_CALLABLE               => T_CALLABLE,
+                T_SELF                   => T_SELF,
+                T_PARENT                 => T_PARENT,
+                T_STATIC                 => T_STATIC,
+                T_FALSE                  => T_FALSE,
+                T_TRUE                   => T_TRUE,
+                T_NULL                   => T_NULL,
+                T_NAMESPACE              => T_NAMESPACE,
+                T_NS_SEPARATOR           => T_NS_SEPARATOR,
+                T_TYPE_UNION             => T_TYPE_UNION,
+                T_TYPE_INTERSECTION      => T_TYPE_INTERSECTION,
+                T_TYPE_OPEN_PARENTHESIS  => T_TYPE_OPEN_PARENTHESIS,
+                T_TYPE_CLOSE_PARENTHESIS => T_TYPE_CLOSE_PARENTHESIS,
             ];
 
             for ($i = $this->tokens[$stackPtr]['parenthesis_closer']; $i < $this->numTokens; $i++) {
@@ -1952,17 +1958,19 @@ class File
         if ($i < $stackPtr) {
             // We've found a type.
             $valid = [
-                T_STRING            => T_STRING,
-                T_CALLABLE          => T_CALLABLE,
-                T_SELF              => T_SELF,
-                T_PARENT            => T_PARENT,
-                T_FALSE             => T_FALSE,
-                T_TRUE              => T_TRUE,
-                T_NULL              => T_NULL,
-                T_NAMESPACE         => T_NAMESPACE,
-                T_NS_SEPARATOR      => T_NS_SEPARATOR,
-                T_TYPE_UNION        => T_TYPE_UNION,
-                T_TYPE_INTERSECTION => T_TYPE_INTERSECTION,
+                T_STRING                 => T_STRING,
+                T_CALLABLE               => T_CALLABLE,
+                T_SELF                   => T_SELF,
+                T_PARENT                 => T_PARENT,
+                T_FALSE                  => T_FALSE,
+                T_TRUE                   => T_TRUE,
+                T_NULL                   => T_NULL,
+                T_NAMESPACE              => T_NAMESPACE,
+                T_NS_SEPARATOR           => T_NS_SEPARATOR,
+                T_TYPE_UNION             => T_TYPE_UNION,
+                T_TYPE_INTERSECTION      => T_TYPE_INTERSECTION,
+                T_TYPE_OPEN_PARENTHESIS  => T_TYPE_OPEN_PARENTHESIS,
+                T_TYPE_CLOSE_PARENTHESIS => T_TYPE_CLOSE_PARENTHESIS,
             ];
 
             for ($i; $i < $stackPtr; $i++) {
@@ -2260,7 +2268,7 @@ class File
      *                                  be returned.
      * @param bool             $local   If true, tokens outside the current statement
      *                                  will not be checked. IE. checking will stop
-     *                                  at the previous semi-colon found.
+     *                                  at the previous semicolon found.
      *
      * @return int|false
      * @see    findNext()
@@ -2341,7 +2349,7 @@ class File
      *                                  be returned.
      * @param bool             $local   If true, tokens outside the current statement
      *                                  will not be checked. i.e., checking will stop
-     *                                  at the next semi-colon found.
+     *                                  at the next semicolon found.
      *
      * @return int|false
      * @see    findPrevious()
@@ -2427,51 +2435,88 @@ class File
         // If the start token is inside the case part of a match expression,
         // find the start of the condition. If it's in the statement part, find
         // the token that comes after the match arrow.
-        $matchExpression = $this->getCondition($start, T_MATCH);
-        if ($matchExpression !== false) {
-            for ($prevMatch = $start; $prevMatch > $this->tokens[$matchExpression]['scope_opener']; $prevMatch--) {
-                if ($prevMatch !== $start
-                    && ($this->tokens[$prevMatch]['code'] === T_MATCH_ARROW
-                    || $this->tokens[$prevMatch]['code'] === T_COMMA)
-                ) {
-                    break;
-                }
+        if (empty($this->tokens[$start]['conditions']) === false) {
+            $conditions         = $this->tokens[$start]['conditions'];
+            $lastConditionOwner = end($conditions);
+            $matchExpression    = key($conditions);
 
-                // Skip nested statements.
-                if (isset($this->tokens[$prevMatch]['bracket_opener']) === true
-                    && $prevMatch === $this->tokens[$prevMatch]['bracket_closer']
-                ) {
-                    $prevMatch = $this->tokens[$prevMatch]['bracket_opener'];
-                } else if (isset($this->tokens[$prevMatch]['parenthesis_opener']) === true
-                    && $prevMatch === $this->tokens[$prevMatch]['parenthesis_closer']
-                ) {
-                    $prevMatch = $this->tokens[$prevMatch]['parenthesis_opener'];
-                }
-            }
+            if ($lastConditionOwner === T_MATCH
+                // Check if the $start token is at the same parentheses nesting level as the match token.
+                && ((empty($this->tokens[$matchExpression]['nested_parenthesis']) === true
+                && empty($this->tokens[$start]['nested_parenthesis']) === true)
+                || ((empty($this->tokens[$matchExpression]['nested_parenthesis']) === false
+                && empty($this->tokens[$start]['nested_parenthesis']) === false)
+                && $this->tokens[$matchExpression]['nested_parenthesis'] === $this->tokens[$start]['nested_parenthesis']))
+            ) {
+                // Walk back to the previous match arrow (if it exists).
+                $lastComma          = null;
+                $inNestedExpression = false;
+                for ($prevMatch = $start; $prevMatch > $this->tokens[$matchExpression]['scope_opener']; $prevMatch--) {
+                    if ($prevMatch !== $start && $this->tokens[$prevMatch]['code'] === T_MATCH_ARROW) {
+                        break;
+                    }
 
-            if ($prevMatch <= $this->tokens[$matchExpression]['scope_opener']) {
-                // We're before the arrow in the first case.
-                $next = $this->findNext(Tokens::$emptyTokens, ($this->tokens[$matchExpression]['scope_opener'] + 1), null, true);
-                if ($next === false) {
-                    return $start;
-                }
+                    if ($prevMatch !== $start && $this->tokens[$prevMatch]['code'] === T_COMMA) {
+                        $lastComma = $prevMatch;
+                        continue;
+                    }
 
-                return $next;
-            }
+                    // Skip nested statements.
+                    if (isset($this->tokens[$prevMatch]['bracket_opener']) === true
+                        && $prevMatch === $this->tokens[$prevMatch]['bracket_closer']
+                    ) {
+                        $prevMatch = $this->tokens[$prevMatch]['bracket_opener'];
+                        continue;
+                    }
 
-            if ($this->tokens[$prevMatch]['code'] === T_COMMA) {
-                // We're before the arrow, but not in the first case.
-                $prevMatchArrow = $this->findPrevious(T_MATCH_ARROW, ($prevMatch - 1), $this->tokens[$matchExpression]['scope_opener']);
-                if ($prevMatchArrow === false) {
-                    // We're before the arrow in the first case.
-                    $next = $this->findNext(Tokens::$emptyTokens, ($this->tokens[$matchExpression]['scope_opener'] + 1), null, true);
+                    if (isset($this->tokens[$prevMatch]['parenthesis_opener']) === true
+                        && $prevMatch === $this->tokens[$prevMatch]['parenthesis_closer']
+                    ) {
+                        $prevMatch = $this->tokens[$prevMatch]['parenthesis_opener'];
+                        continue;
+                    }
+
+                    // Stop if we're _within_ a nested short array statement, which may contain comma's too.
+                    // No need to deal with parentheses, those are handled above via the `nested_parenthesis` checks.
+                    if (isset($this->tokens[$prevMatch]['bracket_opener']) === true
+                        && $this->tokens[$prevMatch]['bracket_closer'] > $start
+                    ) {
+                        $inNestedExpression = true;
+                        break;
+                    }
+                }//end for
+
+                if ($inNestedExpression === false) {
+                    // $prevMatch will now either be the scope opener or a match arrow.
+                    // If it is the scope opener, go the first non-empty token after. $start will have been part of the first condition.
+                    if ($prevMatch <= $this->tokens[$matchExpression]['scope_opener']) {
+                        // We're before the arrow in the first case.
+                        $next = $this->findNext(Tokens::$emptyTokens, ($this->tokens[$matchExpression]['scope_opener'] + 1), null, true);
+                        if ($next === false) {
+                            // Shouldn't be possible.
+                            return $start;
+                        }
+
+                        return $next;
+                    }
+
+                    // Okay, so we found a match arrow.
+                    // If $start was part of the "next" condition, the last comma will be set.
+                    // Otherwise, $start must have been part of a return expression.
+                    if (isset($lastComma) === true && $lastComma > $prevMatch) {
+                        $prevMatch = $lastComma;
+                    }
+
+                    // In both cases, go to the first non-empty token after.
+                    $next = $this->findNext(Tokens::$emptyTokens, ($prevMatch + 1), null, true);
+                    if ($next === false) {
+                        // Shouldn't be possible.
+                        return $start;
+                    }
+
                     return $next;
-                }
-
-                $end  = $this->findEndOfStatement($prevMatchArrow);
-                $next = $this->findNext(Tokens::$emptyTokens, ($end + 1), null, true);
-                return $next;
-            }
+                }//end if
+            }//end if
         }//end if
 
         $lastNotEmpty = $start;

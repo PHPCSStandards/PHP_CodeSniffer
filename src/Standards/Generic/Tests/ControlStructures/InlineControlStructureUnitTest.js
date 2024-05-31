@@ -29,3 +29,7 @@ if ($("#myid").rotationDegrees()=='90')
 
 if ($("#myid").rotationDegrees()=='90')
     $foo = {'transform': 'rotate(90deg)'};
+
+if (something) {
+    alert('hello');
+} else /* comment */ if (somethingElse) alert('hi');

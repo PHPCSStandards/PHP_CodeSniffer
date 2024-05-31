@@ -116,3 +116,9 @@ $anon = new class {};
 
 // Arrow functions don't need end comments.
 $arrow = fn($a) => $a;
+
+trait TestTrait {
+}//end trait
+
+trait TestTrait {
+}

@@ -182,7 +182,7 @@ class SelfMemberReferenceSniff extends AbstractScopeSniff
     /**
      * Returns the declaration names for classes/interfaces/functions with a namespace.
      *
-     * @param array $tokens   Token stack for this file
+     * @param array $tokens   Token stack for this file.
      * @param int   $stackPtr The position where the namespace building will start.
      *
      * @return string
