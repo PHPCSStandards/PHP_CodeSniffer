@@ -65,7 +65,7 @@ abstract class VersionControl implements Report
 
             $praiseCache[$author]['bad']++;
 
-            foreach ($lineErrors as $colErrors) {
+            foreach ($lineErrors as $column => $colErrors) {
                 foreach ($colErrors as $error) {
                     $authorCache[$author]++;
 

@@ -62,7 +62,7 @@ class Full implements Report
         // Make sure the report width isn't too big.
         $maxErrorLength = 0;
         foreach ($report['messages'] as $line => $lineErrors) {
-            foreach ($lineErrors as $colErrors) {
+            foreach ($lineErrors as $column => $colErrors) {
                 foreach ($colErrors as $error) {
                     // Start with the presumption of a single line error message.
                     $length    = strlen($error['message']);
@@ -138,7 +138,7 @@ class Full implements Report
         $beforeAfterLength = strlen($beforeMsg.$afterMsg);
 
         foreach ($report['messages'] as $line => $lineErrors) {
-            foreach ($lineErrors as $colErrors) {
+            foreach ($lineErrors as $column => $colErrors) {
                 foreach ($colErrors as $error) {
                     $errorMsg = wordwrap(
                         $error['message'],

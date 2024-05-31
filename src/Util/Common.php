@@ -544,8 +544,7 @@ class Common
         }
 
         $category = array_pop($parts);
-        // Remove Sniff directory.
-        array_pop($parts);
+        $sniffDir = array_pop($parts);
         $standard = array_pop($parts);
         $code     = $standard.'.'.$category.'.'.$sniff;
         return $code;
