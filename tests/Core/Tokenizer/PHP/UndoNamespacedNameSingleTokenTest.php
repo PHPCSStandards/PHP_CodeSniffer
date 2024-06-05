@@ -42,7 +42,7 @@ final class UndoNamespacedNameSingleTokenTest extends AbstractTokenizerTestCase
         $tokens     = $this->phpcsFile->getTokens();
         $identifier = $this->getTargetToken($testMarker, constant($expectedTokens[0]['type']));
 
-        foreach ($expectedTokens as $key => $tokenInfo) {
+        foreach ($expectedTokens as $tokenInfo) {
             $this->assertSame(
                 constant($tokenInfo['type']),
                 $tokens[$identifier]['code'],

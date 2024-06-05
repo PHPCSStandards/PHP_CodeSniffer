@@ -48,8 +48,6 @@ class AllSniffs
 
         $suite = new TestSuite('PHP CodeSniffer Standards');
 
-        $isInstalled = !is_file(__DIR__.'/../../autoload.php');
-
         // Optionally allow for ignoring the tests for one or more standards.
         $ignoreTestsForStandards = getenv('PHPCS_IGNORE_TESTS');
         if ($ignoreTestsForStandards === false) {

@@ -439,8 +439,6 @@ final class RuleInclusionTest extends TestCase
     {
         $this->assertArrayHasKey($sniffClass, self::$ruleset->sniffs, 'Sniff class '.$sniffClass.' not listed in registered sniffs');
 
-        $sniffObject = self::$ruleset->sniffs[$sniffClass];
-
         $hasProperty = (new ReflectionObject(self::$ruleset->sniffs[$sniffClass]))->hasProperty($propertyName);
         $errorMsg    = sprintf('Property %s registered for sniff %s which does not support it', $propertyName, $sniffClass);
         $this->assertFalse($hasProperty, $errorMsg);

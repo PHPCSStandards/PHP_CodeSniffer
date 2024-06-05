@@ -135,7 +135,7 @@ class VariableCommentSniff extends AbstractVariableSniff
         // Check var type (can be multiple, separated by '|').
         $typeNames      = explode('|', $varType);
         $suggestedNames = [];
-        foreach ($typeNames as $i => $typeName) {
+        foreach ($typeNames as $typeName) {
             $suggestedName = Common::suggestType($typeName);
             if (in_array($suggestedName, $suggestedNames, true) === false) {
                 $suggestedNames[] = $suggestedName;

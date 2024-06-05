@@ -86,7 +86,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                 // Check return type (can be multiple, separated by '|').
                 $typeNames      = explode('|', $returnType);
                 $suggestedNames = [];
-                foreach ($typeNames as $i => $typeName) {
+                foreach ($typeNames as $typeName) {
                     $suggestedName = Common::suggestType($typeName);
                     if (in_array($suggestedName, $suggestedNames, true) === false) {
                         $suggestedNames[] = $suggestedName;

@@ -1570,7 +1570,7 @@ class Config
         // standards paths are added to the autoloader.
         if ($key === 'installed_paths') {
             $installedStandards = Standards::getInstalledStandardDetails();
-            foreach ($installedStandards as $name => $details) {
+            foreach ($installedStandards as $details) {
                 Autoload::addSearchPath($details['path'], $details['namespace']);
             }
         }

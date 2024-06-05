@@ -225,7 +225,6 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
         }//end if
 
         // Each line between the brackets should contain a single parameter.
-        $lastComma = null;
         for ($i = ($openBracket + 1); $i < $closeBracket; $i++) {
             // Skip brackets, like arrays, as they can contain commas.
             if (isset($tokens[$i]['bracket_opener']) === true) {

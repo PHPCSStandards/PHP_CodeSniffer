@@ -333,11 +333,11 @@ class Runner
 
         // Create this class so it is autoloaded and sets up a bunch
         // of PHP_CodeSniffer-specific token type constants.
-        $tokens = new Tokens();
+        new Tokens();
 
         // Allow autoloading of custom files inside installed standards.
         $installedStandards = Standards::getInstalledStandardDetails();
-        foreach ($installedStandards as $name => $details) {
+        foreach ($installedStandards as $details) {
             Autoload::addSearchPath($details['path'], $details['namespace']);
         }
 
