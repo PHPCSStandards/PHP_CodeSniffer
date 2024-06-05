@@ -20,7 +20,8 @@ jobs:
     name: Check PRs for merge conflicts
 
     steps:
-      - uses: mschilde/auto-label-merge-conflicts@master
+      - name: Check PRs for merge conflicts
+        uses: eps1lon/actions-label-merge-conflict@v3
         with:
-          CONFLICT_LABEL_NAME: "Status: has merge conflict"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          dirtyLabel: "Status: has merge conflict"
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
