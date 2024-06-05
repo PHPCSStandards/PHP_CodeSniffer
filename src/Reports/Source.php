@@ -40,8 +40,8 @@ class Source implements Report
 
         $sources = [];
 
-        foreach ($report['messages'] as $line => $lineErrors) {
-            foreach ($lineErrors as $column => $colErrors) {
+        foreach ($report['messages'] as $lineErrors) {
+            foreach ($lineErrors as $colErrors) {
                 foreach ($colErrors as $error) {
                     $src = $error['source'];
                     if (isset($sources[$src]) === false) {
