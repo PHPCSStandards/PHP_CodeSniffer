@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Util;
 
+use InvalidArgumentException;
 use Phar;
 
 class Common
@@ -529,9 +530,15 @@ class Common
      * @param string $sniffClass The fully qualified sniff class name.
      *
      * @return string
+     *
+     * @throws \InvalidArgumentException When $sniffClass is not a non-empty string.
      */
     public static function getSniffCode($sniffClass)
     {
+        if (is_string($sniffClass) === false || $sniffClass === '') {
+            throw new InvalidArgumentException('The $sniffClass parameter must be a non-empty string');
+        }
+
         $parts = explode('\\', $sniffClass);
         $sniff = array_pop($parts);
 

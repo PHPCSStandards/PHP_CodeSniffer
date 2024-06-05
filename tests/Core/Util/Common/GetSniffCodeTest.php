@@ -22,6 +22,51 @@ final class GetSniffCodeTest extends TestCase
 
 
     /**
+     * Test receiving an expected exception when the $sniffClass parameter is not passed a string value or is passed an empty string.
+     *
+     * @param string $input NOT a fully qualified sniff class name.
+     *
+     * @dataProvider dataGetSniffCodeThrowsExceptionOnInvalidInput
+     *
+     * @return void
+     */
+    public function testGetSniffCodeThrowsExceptionOnInvalidInput($input)
+    {
+        $exception = 'InvalidArgumentException';
+        $message   = 'The $sniffClass parameter must be a non-empty string';
+
+        if (method_exists($this, 'expectException') === true) {
+            // PHPUnit 5+.
+            $this->expectException($exception);
+            $this->expectExceptionMessage($message);
+        } else {
+            // PHPUnit 4.
+            $this->setExpectedException($exception, $message);
+        }
+
+        Common::getSniffCode($input);
+
+    }//end testGetSniffCodeThrowsExceptionOnInvalidInput()
+
+
+    /**
+     * Data provider.
+     *
+     * @see testGetSniffCodeThrowsExceptionOnInvalidInput()
+     *
+     * @return array<string, array<string>>
+     */
+    public static function dataGetSniffCodeThrowsExceptionOnInvalidInput()
+    {
+        return [
+            'Class name is not a string' => [true],
+            'Class name is empty'        => [''],
+        ];
+
+    }//end dataGetSniffCodeThrowsExceptionOnInvalidInput()
+
+
+    /**
      * Test transforming a sniff class name to a sniff code.
      *
      * @param string $fqnClass A fully qualified sniff class name.
