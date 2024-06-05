@@ -540,14 +540,15 @@ class Common
             throw new InvalidArgumentException('The $sniffClass parameter must be a non-empty string');
         }
 
-        $parts = explode('\\', $sniffClass);
-        if (count($parts) < 4) {
+        $parts      = explode('\\', $sniffClass);
+        $partsCount = count($parts);
+        if ($partsCount < 4) {
             throw new InvalidArgumentException(
                 'The $sniffClass parameter was not passed a fully qualified sniff(test) class name. Received: '.$sniffClass
             );
         }
 
-        $sniff = array_pop($parts);
+        $sniff = $parts[($partsCount - 1)];
 
         if (substr($sniff, -5) === 'Sniff') {
             // Sniff class name.
@@ -561,11 +562,9 @@ class Common
             );
         }
 
-        $category = array_pop($parts);
-        $sniffDir = array_pop($parts);
-        $standard = array_pop($parts);
-        $code     = $standard.'.'.$category.'.'.$sniff;
-        return $code;
+        $standard = $parts[($partsCount - 4)];
+        $category = $parts[($partsCount - 2)];
+        return $standard.'.'.$category.'.'.$sniff;
 
     }//end getSniffCode()
 
