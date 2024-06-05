@@ -627,7 +627,7 @@ class Common
         $parts = explode('\\', $sniffClass);
         if (count($parts) < 4) {
             throw new InvalidArgumentException(
-                'The $sniffClass parameter was not passed a fully qualified sniff class name. Received: '.$sniffClass
+                'The $sniffClass parameter was not passed a fully qualified sniff(test) class name. Received: '.$sniffClass
             );
         }
 
@@ -636,9 +636,13 @@ class Common
         if (substr($sniff, -5) === 'Sniff') {
             // Sniff class name.
             $sniff = substr($sniff, 0, -5);
-        } else {
+        } else if (substr($sniff, -8) === 'UnitTest') {
             // Unit test class name.
             $sniff = substr($sniff, 0, -8);
+        } else {
+            throw new InvalidArgumentException(
+                'The $sniffClass parameter was not passed a fully qualified sniff(test) class name. Received: '.$sniffClass
+            );
         }
 
         $category = array_pop($parts);
