@@ -67,6 +67,52 @@ final class GetSniffCodeTest extends TestCase
 
 
     /**
+     * Test receiving an expected exception when the $sniffClass parameter is not passed a value which
+     * could be a fully qualified sniff(test) class name.
+     *
+     * @param string $input String input which can not be a fully qualified sniff(test) class name.
+     *
+     * @dataProvider dataGetSniffCodeThrowsExceptionOnInputWhichIsNotASniffTestClass
+     *
+     * @return void
+     */
+    public function testGetSniffCodeThrowsExceptionOnInputWhichIsNotASniffTestClass($input)
+    {
+        $exception = 'InvalidArgumentException';
+        $message   = 'The $sniffClass parameter was not passed a fully qualified sniff class name. Received:';
+
+        if (method_exists($this, 'expectException') === true) {
+            // PHPUnit 5+.
+            $this->expectException($exception);
+            $this->expectExceptionMessage($message);
+        } else {
+            // PHPUnit 4.
+            $this->setExpectedException($exception, $message);
+        }
+
+        Common::getSniffCode($input);
+
+    }//end testGetSniffCodeThrowsExceptionOnInputWhichIsNotASniffTestClass()
+
+
+    /**
+     * Data provider.
+     *
+     * @see testGetSniffCodeThrowsExceptionOnInputWhichIsNotASniffTestClass()
+     *
+     * @return array<string, array<string>>
+     */
+    public static function dataGetSniffCodeThrowsExceptionOnInputWhichIsNotASniffTestClass()
+    {
+        return [
+            'Unqualified class name'                       => ['ClassName'],
+            'Fully qualified class name, not enough parts' => ['Fully\\Qualified\\ClassName'],
+        ];
+
+    }//end dataGetSniffCodeThrowsExceptionOnInputWhichIsNotASniffTestClass()
+
+
+    /**
      * Test transforming a sniff class name to a sniff code.
      *
      * @param string $fqnClass A fully qualified sniff class name.
