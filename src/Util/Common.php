@@ -532,6 +532,7 @@ class Common
      * @return string
      *
      * @throws \InvalidArgumentException When $sniffClass is not a non-empty string.
+     * @throws \InvalidArgumentException When $sniffClass is not a FQN for a sniff(test) class.
      */
     public static function getSniffCode($sniffClass)
     {
@@ -540,6 +541,12 @@ class Common
         }
 
         $parts = explode('\\', $sniffClass);
+        if (count($parts) < 4) {
+            throw new InvalidArgumentException(
+                'The $sniffClass parameter was not passed a fully qualified sniff class name. Received: '.$sniffClass
+            );
+        }
+
         $sniff = array_pop($parts);
 
         if (substr($sniff, -5) === 'Sniff') {
