@@ -1579,6 +1579,41 @@ foo(function ($foo) {
 	];
 });
 
+// Issue #110.
+echo match (1) {
+	0 => match (2) {
+		2 => match (3) {
+			3 => 3,
+			default => -1,
+		},
+	},
+	1 => match (2) {
+		1 => match (3) {
+			3 => 3,
+			default => -1,
+		},
+		2 => match (3) {
+			3 => 3,
+			default => -1,
+		},
+	},
+};
+
+// Issue #437.
+match (true) {
+	default => [
+		'unrelated' => '',
+		'example' => array_filter(
+			array_map(
+				function () {
+					return null;
+				},
+				[]
+			)
+		)
+	]
+};
+
 /* ADD NEW TESTS ABOVE THIS LINE AND MAKE SURE THAT THE 1 (space-based) AND 2 (tab-based) FILES ARE IN SYNC! */
 ?>
 

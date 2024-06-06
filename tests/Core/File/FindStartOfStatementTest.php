@@ -12,6 +12,7 @@
 namespace PHP_CodeSniffer\Tests\Core\File;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
+use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * Tests for the \PHP_CodeSniffer\Files\File:findStartOfStatement method.
@@ -20,6 +21,42 @@ use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
  */
 final class FindStartOfStatementTest extends AbstractMethodUnitTest
 {
+
+
+    /**
+     * Test that start of statement is NEVER beyond the "current" token.
+     *
+     * @return void
+     */
+    public function testStartIsNeverMoreThanCurrentToken()
+    {
+        $tokens = self::$phpcsFile->getTokens();
+        $errors = [];
+
+        for ($i = 0; $i < self::$phpcsFile->numTokens; $i++) {
+            if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === true) {
+                continue;
+            }
+
+            $start = self::$phpcsFile->findStartOfStatement($i);
+
+            // Collect all the errors.
+            if ($start > $i) {
+                $errors[] = sprintf(
+                    'Start of statement for token %1$d (%2$s: %3$s) on line %4$d is %5$d (%6$s), which is more than %1$d',
+                    $i,
+                    $tokens[$i]['type'],
+                    $tokens[$i]['content'],
+                    $tokens[$i]['line'],
+                    $start,
+                    $tokens[$start]['type']
+                );
+            }
+        }
+
+        $this->assertSame([], $errors);
+
+    }//end testStartIsNeverMoreThanCurrentToken()
 
 
     /**
@@ -92,7 +129,7 @@ final class FindStartOfStatementTest extends AbstractMethodUnitTest
         $start = $this->getTargetToken('/* testClosureAssignment */', T_CLOSE_CURLY_BRACKET);
         $found = self::$phpcsFile->findStartOfStatement($start);
 
-        $this->assertSame(($start - 12), $found);
+        $this->assertSame(($start - 11), $found);
 
     }//end testClosureAssignment()
 
@@ -224,7 +261,7 @@ final class FindStartOfStatementTest extends AbstractMethodUnitTest
         $start = $this->getTargetToken('/* testArrowFunctionArrayValue */', T_COMMA);
         $found = self::$phpcsFile->findStartOfStatement($start);
 
-        $this->assertSame(($start - 9), $found);
+        $this->assertSame(($start - 7), $found);
 
     }//end testArrowFunctionArrayValue()
 
@@ -635,6 +672,302 @@ final class FindStartOfStatementTest extends AbstractMethodUnitTest
         ];
 
     }//end dataFindStartInsideSwitchCaseDefaultStatements()
+
+
+    /**
+     * Test finding the start of a statement inside a closed scope nested within a match expressions.
+     *
+     * @param string     $testMarker     The comment which prefaces the target token in the test file.
+     * @param int|string $target         The token to search for after the test marker.
+     * @param int|string $expectedTarget Token code of the expected start of statement stack pointer.
+     *
+     * @link https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/437
+     *
+     * @dataProvider dataFindStartInsideClosedScopeNestedWithinMatch
+     *
+     * @return void
+     */
+    public function testFindStartInsideClosedScopeNestedWithinMatch($testMarker, $target, $expectedTarget)
+    {
+        $testToken = $this->getTargetToken($testMarker, $target);
+        $expected  = $this->getTargetToken($testMarker, $expectedTarget);
+
+        $found = self::$phpcsFile->findStartOfStatement($testToken);
+
+        $this->assertSame($expected, $found);
+
+    }//end testFindStartInsideClosedScopeNestedWithinMatch()
+
+
+    /**
+     * Data provider.
+     *
+     * @return array<string, array<string, int|string>>
+     */
+    public static function dataFindStartInsideClosedScopeNestedWithinMatch()
+    {
+        return [
+            // These were already working correctly.
+            'Closure function keyword should be start of closure - closure keyword'                   => [
+                'testMarker'     => '/* test437ClosureDeclaration */',
+                'targets'        => T_CLOSURE,
+                'expectedTarget' => T_CLOSURE,
+            ],
+            'Open curly is a statement/expression opener - open curly'                                => [
+                'testMarker'     => '/* test437ClosureDeclaration */',
+                'targets'        => T_OPEN_CURLY_BRACKET,
+                'expectedTarget' => T_OPEN_CURLY_BRACKET,
+            ],
+
+            'Echo should be start for expression - echo keyword'                                      => [
+                'testMarker'     => '/* test437EchoNestedWithinClosureWithinMatch */',
+                'targets'        => T_ECHO,
+                'expectedTarget' => T_ECHO,
+            ],
+            'Echo should be start for expression - variable'                                          => [
+                'testMarker'     => '/* test437EchoNestedWithinClosureWithinMatch */',
+                'targets'        => T_VARIABLE,
+                'expectedTarget' => T_ECHO,
+            ],
+            'Echo should be start for expression - comma'                                             => [
+                'testMarker'     => '/* test437EchoNestedWithinClosureWithinMatch */',
+                'targets'        => T_COMMA,
+                'expectedTarget' => T_ECHO,
+            ],
+
+            // These were not working correctly and would previously return the close curly of the match expression.
+            'First token after comma in echo expression should be start for expression - text string' => [
+                'testMarker'     => '/* test437EchoNestedWithinClosureWithinMatch */',
+                'targets'        => T_CONSTANT_ENCAPSED_STRING,
+                'expectedTarget' => T_CONSTANT_ENCAPSED_STRING,
+            ],
+            'First token after comma in echo expression - PHP_EOL constant'                           => [
+                'testMarker'     => '/* test437EchoNestedWithinClosureWithinMatch */',
+                'targets'        => T_STRING,
+                'expectedTarget' => T_STRING,
+            ],
+            'First token after comma in echo expression - semicolon'                                  => [
+                'testMarker'     => '/* test437EchoNestedWithinClosureWithinMatch */',
+                'targets'        => T_SEMICOLON,
+                'expectedTarget' => T_STRING,
+            ],
+        ];
+
+    }//end dataFindStartInsideClosedScopeNestedWithinMatch()
+
+
+    /**
+     * Test finding the start of a statement for a token within a set of parentheses within a match expressions.
+     *
+     * @param string     $testMarker     The comment which prefaces the target token in the test file.
+     * @param int|string $target         The token to search for after the test marker.
+     * @param int|string $expectedTarget Token code of the expected start of statement stack pointer.
+     *
+     * @link https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/437
+     *
+     * @dataProvider dataFindStartInsideParenthesesNestedWithinMatch
+     *
+     * @return void
+     */
+    public function testFindStartInsideParenthesesNestedWithinMatch($testMarker, $target, $expectedTarget)
+    {
+        $testToken = $this->getTargetToken($testMarker, $target);
+        $expected  = $this->getTargetToken($testMarker, $expectedTarget);
+
+        $found = self::$phpcsFile->findStartOfStatement($testToken);
+
+        $this->assertSame($expected, $found);
+
+    }//end testFindStartInsideParenthesesNestedWithinMatch()
+
+
+    /**
+     * Data provider.
+     *
+     * @return array<string, array<string, int|string>>
+     */
+    public static function dataFindStartInsideParenthesesNestedWithinMatch()
+    {
+        return [
+            'Array item itself should be start for first array item'                       => [
+                'testMarker'     => '/* test437NestedLongArrayWithinMatch */',
+                'targets'        => T_LNUMBER,
+                'expectedTarget' => T_LNUMBER,
+            ],
+            'Array item itself should be start for second array item'                      => [
+                'testMarker'     => '/* test437NestedLongArrayWithinMatch */',
+                'targets'        => T_DNUMBER,
+                'expectedTarget' => T_DNUMBER,
+            ],
+            'Array item itself should be start for third array item'                       => [
+                'testMarker'     => '/* test437NestedLongArrayWithinMatch */',
+                'targets'        => T_VARIABLE,
+                'expectedTarget' => T_VARIABLE,
+            ],
+
+            'Parameter itself should be start for first param passed to function call'     => [
+                'testMarker'     => '/* test437NestedFunctionCallWithinMatch */',
+                'targets'        => T_LNUMBER,
+                'expectedTarget' => T_LNUMBER,
+            ],
+            'Parameter itself should be start for second param passed to function call'    => [
+                'testMarker'     => '/* test437NestedFunctionCallWithinMatch */',
+                'targets'        => T_VARIABLE,
+                'expectedTarget' => T_VARIABLE,
+            ],
+            'Parameter itself should be start for third param passed to function call'     => [
+                'testMarker'     => '/* test437NestedFunctionCallWithinMatch */',
+                'targets'        => T_DNUMBER,
+                'expectedTarget' => T_DNUMBER,
+            ],
+
+            'Parameter itself should be start for first param declared in arrow function'  => [
+                'testMarker'     => '/* test437NestedArrowFunctionWithinMatch */',
+                'targets'        => T_VARIABLE,
+                'expectedTarget' => T_VARIABLE,
+            ],
+            'Parameter itself should be start for second param declared in arrow function' => [
+                'testMarker'     => '/* test437FnSecondParamWithinMatch */',
+                'targets'        => T_VARIABLE,
+                'expectedTarget' => T_VARIABLE,
+            ],
+        ];
+
+    }//end dataFindStartInsideParenthesesNestedWithinMatch()
+
+
+    /**
+     * Test finding the start of a statement for a token within a set of parentheses within a match expressions,
+     * which itself is nested within parentheses.
+     *
+     * @param string     $testMarker     The comment which prefaces the target token in the test file.
+     * @param int|string $target         The token to search for after the test marker.
+     * @param int|string $expectedTarget Token code of the expected start of statement stack pointer.
+     *
+     * @link https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/437
+     *
+     * @dataProvider dataFindStartInsideParenthesesNestedWithinNestedMatch
+     *
+     * @return void
+     */
+    public function testFindStartInsideParenthesesNestedWithinNestedMatch($testMarker, $target, $expectedTarget)
+    {
+        $testToken = $this->getTargetToken($testMarker, $target);
+        $expected  = $this->getTargetToken($testMarker, $expectedTarget);
+
+        $found = self::$phpcsFile->findStartOfStatement($testToken);
+
+        $this->assertSame($expected, $found);
+
+    }//end testFindStartInsideParenthesesNestedWithinNestedMatch()
+
+
+    /**
+     * Data provider.
+     *
+     * @return array<string, array<string, int|string>>
+     */
+    public static function dataFindStartInsideParenthesesNestedWithinNestedMatch()
+    {
+        return [
+            'Array item itself should be start for first array item'                       => [
+                'testMarker'     => '/* test437NestedLongArrayWithinNestedMatch */',
+                'targets'        => T_LNUMBER,
+                'expectedTarget' => T_LNUMBER,
+            ],
+            'Array item itself should be start for second array item'                      => [
+                'testMarker'     => '/* test437NestedLongArrayWithinNestedMatch */',
+                'targets'        => T_DNUMBER,
+                'expectedTarget' => T_DNUMBER,
+            ],
+            'Array item itself should be start for third array item'                       => [
+                'testMarker'     => '/* test437NestedLongArrayWithinNestedMatch */',
+                'targets'        => T_VARIABLE,
+                'expectedTarget' => T_VARIABLE,
+            ],
+
+            'Parameter itself should be start for first param passed to function call'     => [
+                'testMarker'     => '/* test437NestedFunctionCallWithinNestedMatch */',
+                'targets'        => T_LNUMBER,
+                'expectedTarget' => T_LNUMBER,
+            ],
+            'Parameter itself should be start for second param passed to function call'    => [
+                'testMarker'     => '/* test437NestedFunctionCallWithinNestedMatch */',
+                'targets'        => T_VARIABLE,
+                'expectedTarget' => T_VARIABLE,
+            ],
+            'Parameter itself should be start for third param passed to function call'     => [
+                'testMarker'     => '/* test437NestedFunctionCallWithinNestedMatch */',
+                'targets'        => T_DNUMBER,
+                'expectedTarget' => T_DNUMBER,
+            ],
+
+            'Parameter itself should be start for first param declared in arrow function'  => [
+                'testMarker'     => '/* test437NestedArrowFunctionWithinNestedMatch */',
+                'targets'        => T_VARIABLE,
+                'expectedTarget' => T_VARIABLE,
+            ],
+            'Parameter itself should be start for second param declared in arrow function' => [
+                'testMarker'     => '/* test437FnSecondParamWithinNestedMatch */',
+                'targets'        => T_VARIABLE,
+                'expectedTarget' => T_VARIABLE,
+            ],
+        ];
+
+    }//end dataFindStartInsideParenthesesNestedWithinNestedMatch()
+
+
+    /**
+     * Test finding the start of a statement for a token within a short array within a match expressions.
+     *
+     * @param string     $testMarker     The comment which prefaces the target token in the test file.
+     * @param int|string $target         The token to search for after the test marker.
+     * @param int|string $expectedTarget Token code of the expected start of statement stack pointer.
+     *
+     * @link https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/437
+     *
+     * @dataProvider dataFindStartInsideShortArrayNestedWithinMatch
+     *
+     * @return void
+     */
+    public function testFindStartInsideShortArrayNestedWithinMatch($testMarker, $target, $expectedTarget)
+    {
+        $testToken = $this->getTargetToken($testMarker, $target);
+        $expected  = $this->getTargetToken($testMarker, $expectedTarget);
+
+        $found = self::$phpcsFile->findStartOfStatement($testToken);
+
+        $this->assertSame($expected, $found);
+
+    }//end testFindStartInsideShortArrayNestedWithinMatch()
+
+
+    /**
+     * Data provider.
+     *
+     * @return array<string, array<string, int|string>>
+     */
+    public static function dataFindStartInsideShortArrayNestedWithinMatch()
+    {
+        return [
+            'Array item itself should be start for first array item'  => [
+                'testMarker'     => '/* test437NestedShortArrayWithinMatch */',
+                'targets'        => T_LNUMBER,
+                'expectedTarget' => T_LNUMBER,
+            ],
+            'Array item itself should be start for second array item' => [
+                'testMarker'     => '/* test437NestedShortArrayWithinMatch */',
+                'targets'        => T_DNUMBER,
+                'expectedTarget' => T_DNUMBER,
+            ],
+            'Array item itself should be start for third array item'  => [
+                'testMarker'     => '/* test437NestedShortArrayWithinMatch */',
+                'targets'        => T_VARIABLE,
+                'expectedTarget' => T_VARIABLE,
+            ],
+        ];
+
+    }//end dataFindStartInsideShortArrayNestedWithinMatch()
 
 
 }//end class
