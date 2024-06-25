@@ -536,3 +536,14 @@ $x = [
       1, static::helloWorld(), $class instanceof static,
       2,
      ];
+
+$noSpaceBeforeDoubleArrow = [
+                             'width'=> '',
+                             'height' => '',
+                            ];
+
+$newlineAfterDoubleArrow = [
+                            'width'  =>
+                            '',
+                            'height' => '',
+                           ];
