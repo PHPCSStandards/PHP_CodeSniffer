@@ -573,3 +573,13 @@ $x = [
       $class instanceof static,
       2,
      ];
+
+$noSpaceBeforeDoubleArrow = [
+                             'width'  => '',
+                             'height' => '',
+                            ];
+
+$newlineAfterDoubleArrow = [
+                            'width'  => '',
+                            'height' => '',
+                           ];
