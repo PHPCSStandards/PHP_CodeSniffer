@@ -265,3 +265,75 @@ array_fill_keys(
     ), value: true,
 );
 // phpcs:set PSR2.Methods.FunctionCallSignature allowMultipleArguments false
+
+// https://github.com/squizlabs/PHP_CodeSniffer/issues/2078#issuecomment-401641650
+// This sniff should accept both of these styles. Generic.WhiteSpace.ScopeIndent can complain & fix this if enabled.
+$repository->foo()
+           ->bar(
+                function () {
+                    return true;
+                }
+           );
+$repository->foo()
+           ->bar(
+               function () {
+                   return true;
+               }
+           );
+
+// Initial call spaces only, params mixed.
+    $result = doThing($one, $two ,
+    $three,
+  	$four,
+	  $five,
+	  	$six,
+	  	  $seven,
+	$eight);
+
+// Initial call tab only, param spaces.
+	$result = doThing($one,
+    $two);
+
+// Initial call tab only, param tab.
+	$result = doThing($one,
+	$two);
+
+// Initial call tab and space, param tab and space.
+	  $result = doThing($one,
+	  $two);
+
+// Initial call space only, param tab and space.
+    $result = doThing($one,
+	  $two);
+
+// Initial call space only, param tab only.
+    $result = doThing($one,
+	$two);
+
+// Real example of mixed tab/space indention from WordPress codebase.
+    $v_binary_data = pack("VvvvvvVVVvv", 0x04034b50,
+	                      $p_header['version_extracted'], $p_header['flag'],
+                          $p_header['compression'], $v_mtime, $v_mdate,
+                          $p_header['crc'], $p_header['compressed_size'],
+						  $p_header['size'],
+                          strlen($p_header['stored_filename']),
+						  $p_header['extra_len']);
+
+// Real example of mixed tab/space indention from WordPress codebase.
+              PclZip::privErrorLog(PCLZIP_ERR_UNSUPPORTED_COMPRESSION,
+			                       "Filename '".$v_header['stored_filename']."' is "
+				  	    	  	   ."compressed by an unsupported compression "
+				  	    	  	   ."method (".$v_header['compression'].") ");
+
+// Real example of mixed tab/space indention from WordPress codebase.
+        if ($v_size > 2) {
+          PclZip::privErrorLog(PCLZIP_ERR_INVALID_PARAMETER,
+		                       "Invalid number / type of arguments");
+          return 0;
+        }
+
+// Real example of mixed tab/space indention from WordPress codebase.
+// Not aligned on a 4-space indent
+                return chr(0x07 & (ord($utf8[0]) >> 2))
+                     . chr((0xC0 & (ord($utf8[0]) << 6))
+                         | (0x3F & ord($utf8[1])));
