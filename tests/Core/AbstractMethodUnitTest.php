@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core;
 
+use Exception;
 use PHP_CodeSniffer\Files\DummyFile;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Ruleset;
@@ -110,6 +111,9 @@ abstract class AbstractMethodUnitTest extends TestCase
      * @param string                      $tokenContent  Optional. The token content for the target token.
      *
      * @return int
+     *
+     * @throws Exception When the test delimiter comment is not found.
+     * @throws Exception When the test target token is not found.
      */
     public static function getTargetTokenFromFile(File $phpcsFile, $commentString, $tokenType, $tokenContent=null)
     {
@@ -121,6 +125,12 @@ abstract class AbstractMethodUnitTest extends TestCase
             false,
             $commentString
         );
+
+        if ($comment === false) {
+            throw new Exception(
+                sprintf('Failed to find the test marker: %s in test case file %s', $commentString, $phpcsFile->getFilename())
+            );
+        }
 
         $tokens = $phpcsFile->getTokens();
         $end    = ($start + 1);
@@ -148,10 +158,10 @@ abstract class AbstractMethodUnitTest extends TestCase
         if ($target === false) {
             $msg = 'Failed to find test target token for comment string: '.$commentString;
             if ($tokenContent !== null) {
-                $msg .= ' With token content: '.$tokenContent;
+                $msg .= ' with token content: '.$tokenContent;
             }
 
-            self::assertFalse(true, $msg);
+            throw new Exception($msg);
         }
 
         return $target;
