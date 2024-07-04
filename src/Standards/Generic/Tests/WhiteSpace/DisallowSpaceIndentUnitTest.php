@@ -89,6 +89,7 @@ final class DisallowSpaceIndentUnitTest extends AbstractSniffUnitTest
                 115 => 1,
                 117 => 1,
                 118 => 1,
+                123 => 1,
             ];
 
         case 'DisallowSpaceIndentUnitTest.3.inc':
