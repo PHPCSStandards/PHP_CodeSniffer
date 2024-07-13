@@ -9,12 +9,15 @@ function foo( &...$spread ) {
     );
 }
 
-function bar( &   ...$spread ) {
-    bar(...$spread
+function bar( &   ... $spread ) {
+    bar(...
+
+
+        $spread
     );
 
     bar(
-        [...$foo ],.../*comment*/array_values($keyedArray)
+        [...  $foo ],.../*comment*/array_values($keyedArray)
     );
 }
 
@@ -34,12 +37,13 @@ function foo( &... $spread ) {
     );
 }
 
-function bar( &   ... $spread ) {
-    bar(... $spread
+function bar( &   ...$spread ) {
+    bar(...
+        $spread
     );
 
     bar(
-        [... $foo ],.../*comment*/array_values($keyedArray)
+        [...  $foo ],.../*comment*/array_values($keyedArray)
     );
 }
 
@@ -53,12 +57,13 @@ function foo( &...  $spread ) {
     );
 }
 
-function bar( &   ...  $spread ) {
-    bar(...  $spread
+function bar( &   ... $spread ) {
+    bar(...
+        $spread
     );
 
     bar(
-        [...  $foo ],.../*comment*/array_values($keyedArray)
+        [...    $foo ],.../*comment*/array_values($keyedArray)
     );
 }
 
@@ -69,6 +74,3 @@ $map = array_map(strtolower(...), $map);
 
 // Ignore PHP 8.1 first class callable declarations.
 $map = array_map(strtolower( ... ), $map);
-
-// Intentional parse error. This has to be the last test in the file.
-function bar( ...
