@@ -83,9 +83,8 @@ class DisallowMultipleAssignmentsSniff implements Sniff
         */
 
         for ($varToken = ($stackPtr - 1); $varToken >= 0; $varToken--) {
-            if (in_array($tokens[$varToken]['code'], [T_SEMICOLON, T_OPEN_CURLY_BRACKET], true) === true) {
-                // We've reached the next statement, so we
-                // didn't find a variable.
+            if (in_array($tokens[$varToken]['code'], [T_SEMICOLON, T_OPEN_CURLY_BRACKET, T_CLOSE_TAG], true) === true) {
+                // We've reached the previous statement, so we didn't find a variable.
                 return;
             }
 

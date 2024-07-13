@@ -108,3 +108,29 @@ function () {
     $b = getB();
 };
 
+?>
+<?= $var = false; ?>
+
+// Issue PHPCSStandards/PHP_CodeSniffer#537.
+<?php $a * $b ?>
+<?php
+list ($c, $d) = explode(',', '1,2');
+?>
+<?= $a * $b ?>
+<?php
+list ($c, $d) = explode(',', '1,2');
+?>
+<?= $a * $b ?>
+<?= list ($c, $d) = explode(',', '1,2');
+?>
+<?php $a * $b ?>
+<?php
+[$c, $d] = explode(',', '1,2');
+?>
+<?= $a * $b ?>
+<?php
+[$c, $d] = explode(',', '1,2');
+?>
+<?= $a * $b ?>
+<?= [$c, $d] = explode(',', '1,2');
+?>
