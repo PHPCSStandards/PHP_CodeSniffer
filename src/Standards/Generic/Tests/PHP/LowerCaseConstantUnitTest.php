@@ -33,7 +33,7 @@ final class LowerCaseConstantUnitTest extends AbstractSniffUnitTest
     public function getErrorList($testFile='')
     {
         switch ($testFile) {
-        case 'LowerCaseConstantUnitTest.inc':
+        case 'LowerCaseConstantUnitTest.1.inc':
             return [
                 7   => 1,
                 10  => 1,
