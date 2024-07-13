@@ -35,7 +35,3 @@
         2px /* phpcs:disable Standard.Category.SniffName -- for reasons */
         4px;
 }
-
-/* Intentional parse error. Live coding resilience. This has to be the last test in the file. */
-#live-coding {
-    margin: 8px 8px 8px 8px
