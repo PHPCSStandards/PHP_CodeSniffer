@@ -120,6 +120,3 @@ for (
 // Test with semicolon not belonging to for.
 for (i = function() {self.widgetLoaded(widget.id)  ;  }; i < function() {self.widgetLoaded(widget.id);}; i++) {}
 for (i = function() {self.widgetLoaded(widget.id);}; i < function() {self.widgetLoaded(widget.id);}  ;   i++) {}
-
-// This test has to be the last one in the file! Intentional parse error check.
-for

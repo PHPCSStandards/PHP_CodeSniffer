@@ -125,8 +125,8 @@ final class ForLoopDeclarationUnitTest extends AbstractSniffUnitTest
         case 'ForLoopDeclarationUnitTest.3.inc':
             return [6 => 1];
 
-        case 'ForLoopDeclarationUnitTest.1.js':
-            return [125 => 1];
+        case 'ForLoopDeclarationUnitTest.2.js':
+            return [2 => 1];
 
         default:
             return [];
