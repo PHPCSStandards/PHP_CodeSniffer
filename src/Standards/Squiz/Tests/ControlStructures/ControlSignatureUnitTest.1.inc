@@ -318,7 +318,3 @@ endif;
 
 // Reset property.
 // phpcs:set Squiz.ControlStructures.ControlSignature requiredSpacesBeforeColon 1
-
-// Intentional parse error. This should be the last test in the file.
-foreach
-   // Some unrelated comment.
