@@ -67,7 +67,7 @@ final class ForLoopDeclarationUnitTest extends AbstractSniffUnitTest
                 116 => 2,
             ];
 
-        case 'ForLoopDeclarationUnitTest.js':
+        case 'ForLoopDeclarationUnitTest.1.js':
             return [
                 6   => 2,
                 9   => 2,
@@ -125,7 +125,7 @@ final class ForLoopDeclarationUnitTest extends AbstractSniffUnitTest
         case 'ForLoopDeclarationUnitTest.3.inc':
             return [6 => 1];
 
-        case 'ForLoopDeclarationUnitTest.js':
+        case 'ForLoopDeclarationUnitTest.1.js':
             return [125 => 1];
 
         default:
