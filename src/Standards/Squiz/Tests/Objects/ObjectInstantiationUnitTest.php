@@ -26,16 +26,24 @@ final class ObjectInstantiationUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile='')
     {
-        return [
-            5  => 1,
-            8  => 1,
-            31 => 1,
-            39 => 2,
-        ];
+        switch ($testFile) {
+        case 'ObjectInstantiationUnitTest.1.inc':
+            return [
+                5  => 1,
+                8  => 1,
+                31 => 1,
+                39 => 2,
+            ];
+
+        default:
+            return [];
+        }//end switch
 
     }//end getErrorList()
 
