@@ -84,7 +84,7 @@ class UnnecessaryStringConcatSniff implements Sniff
 
         $prev = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
         $next = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
-        if ($prev === false || $next === false) {
+        if ($next === false) {
             return;
         }
 
