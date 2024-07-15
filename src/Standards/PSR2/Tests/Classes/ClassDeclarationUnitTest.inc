@@ -338,3 +338,9 @@ $foo->bar(
         // ...
     },
 );
+
+enum BraceNotOnLineByItselfCloseTagError
+{
+} ?>
+
+<?php
