@@ -305,3 +305,18 @@ class ClassWithMultiLineImplementsAndCommentOnSameLineAsInterfaceName implements
     AnotherInterface
 {
 }
+
+// Verify the `CloseBraceSameLine` error code is thrown when expected.
+class ClassBraceNotOnLineByItselfError
+{
+    public $prop;
+} $foo = new ClassBraceNotOnLineByItselfError;
+
+interface ClassBraceNotOnLineByItselfTrailingCommentIsAllowed
+{
+    public function myMethod();
+} //end interface -- this comment is allowed.
+
+trait ClassBraceNotOnLineByItselfTrailingAnnotationIsAllowed
+{
+} // phpcs:ignore Stnd.Cat.Sniff -- this comment is also allowed.
