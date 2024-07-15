@@ -331,3 +331,10 @@ interface ClassBraceNotOnLineByItselfTrailingCommentIsAllowed
 trait ClassBraceNotOnLineByItselfTrailingAnnotationIsAllowed
 {
 } // phpcs:ignore Stnd.Cat.Sniff -- this comment is also allowed.
+
+// Issue squizlabs/PHP_CodeSniffer#2621 - fix was superseded by fix for #2678.
+$foo->bar(
+    new class implements Bar {
+        // ...
+    },
+);
