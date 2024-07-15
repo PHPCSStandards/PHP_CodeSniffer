@@ -114,6 +114,3 @@ class ConstructorPropertyPromotionMixedWithNormalParams {
         mixed $requiredParam,
     ) {}
 }
-
-// Intentional syntax error. Must be last thing in the file.
-function
