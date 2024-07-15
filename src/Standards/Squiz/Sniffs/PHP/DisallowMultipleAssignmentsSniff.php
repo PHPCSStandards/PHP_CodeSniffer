@@ -47,7 +47,7 @@ class DisallowMultipleAssignmentsSniff implements Sniff
         if ($function !== false) {
             $opener = $tokens[$function]['parenthesis_opener'];
             $closer = $tokens[$function]['parenthesis_closer'];
-            if ($opener < $stackPtr && $closer > $stackPtr) {
+            if ($closer === null || ($opener < $stackPtr && $closer > $stackPtr)) {
                 return;
             }
         }
