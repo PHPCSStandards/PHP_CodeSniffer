@@ -70,16 +70,14 @@ class UnnecessaryStringConcatSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        // Work out which type of file this is for.
         $tokens = $phpcsFile->getTokens();
-        if ($tokens[$stackPtr]['code'] === T_STRING_CONCAT) {
-            if ($phpcsFile->tokenizerType === 'JS') {
-                return;
-            }
-        } else {
-            if ($phpcsFile->tokenizerType === 'PHP') {
-                return;
-            }
+
+        if ($tokens[$stackPtr]['code'] === T_STRING_CONCAT && $phpcsFile->tokenizerType === 'JS') {
+            // JS uses T_PLUS for string concatenation, not T_STRING_CONCAT.
+            return;
+        } else if ($tokens[$stackPtr]['code'] === T_PLUS && $phpcsFile->tokenizerType === 'PHP') {
+            // PHP uses T_STRING_CONCAT for string concatenation, not T_PLUS.
+            return;
         }
 
         $prev = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
