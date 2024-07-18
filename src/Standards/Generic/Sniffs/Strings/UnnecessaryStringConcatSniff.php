@@ -88,36 +88,42 @@ class UnnecessaryStringConcatSniff implements Sniff
             return;
         }
 
-        if (isset(Tokens::$stringTokens[$tokens[$prev]['code']]) === true
-            && isset(Tokens::$stringTokens[$tokens[$next]['code']]) === true
+        if (isset(Tokens::$stringTokens[$tokens[$prev]['code']]) === false
+            || isset(Tokens::$stringTokens[$tokens[$next]['code']]) === false
         ) {
-            if ($tokens[$prev]['content'][0] === $tokens[$next]['content'][0]) {
-                // Before we throw an error for PHP, allow strings to be
-                // combined if they would have < and ? next to each other because
-                // this trick is sometimes required in PHP strings.
-                if ($phpcsFile->tokenizerType === 'PHP') {
-                    $prevChar = substr($tokens[$prev]['content'], -2, 1);
-                    $nextChar = $tokens[$next]['content'][1];
-                    $combined = $prevChar.$nextChar;
-                    if ($combined === '?'.'>' || $combined === '<'.'?') {
-                        return;
-                    }
-                }
+            // Bow out as at least one of the two tokens being concatenated is not a string.
+            return;
+        }
 
-                if ($this->allowMultiline === true
-                    && $tokens[$prev]['line'] !== $tokens[$next]['line']
-                ) {
-                    return;
-                }
+        if ($tokens[$prev]['content'][0] !== $tokens[$next]['content'][0]) {
+            // Bow out as the two strings are not of the same type.
+            return;
+        }
 
-                $error = 'String concat is not required here; use a single string instead';
-                if ($this->error === true) {
-                    $phpcsFile->addError($error, $stackPtr, 'Found');
-                } else {
-                    $phpcsFile->addWarning($error, $stackPtr, 'Found');
-                }
-            }//end if
-        }//end if
+        // Before we throw an error for PHP, allow strings to be
+        // combined if they would have < and ? next to each other because
+        // this trick is sometimes required in PHP strings.
+        if ($phpcsFile->tokenizerType === 'PHP') {
+            $prevChar = substr($tokens[$prev]['content'], -2, 1);
+            $nextChar = $tokens[$next]['content'][1];
+            $combined = $prevChar.$nextChar;
+            if ($combined === '?'.'>' || $combined === '<'.'?') {
+                return;
+            }
+        }
+
+        if ($this->allowMultiline === true
+            && $tokens[$prev]['line'] !== $tokens[$next]['line']
+        ) {
+            return;
+        }
+
+        $error = 'String concat is not required here; use a single string instead';
+        if ($this->error === true) {
+            $phpcsFile->addError($error, $stackPtr, 'Found');
+        } else {
+            $phpcsFile->addWarning($error, $stackPtr, 'Found');
+        }
 
     }//end process()
 
