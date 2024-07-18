@@ -45,9 +45,14 @@ class DisallowMultipleAssignmentsSniff implements Sniff
         // Ignore default value assignments in function definitions.
         $function = $phpcsFile->findPrevious([T_FUNCTION, T_CLOSURE, T_FN], ($stackPtr - 1), null, false, null, true);
         if ($function !== false) {
+            if (isset($tokens[$function]['parenthesis_closer']) === false) {
+                // Live coding/parse error. Bow out.
+                return;
+            }
+
             $opener = $tokens[$function]['parenthesis_opener'];
             $closer = $tokens[$function]['parenthesis_closer'];
-            if ($closer === null || ($opener < $stackPtr && $closer > $stackPtr)) {
+            if ($opener < $stackPtr && $closer > $stackPtr) {
                 return;
             }
         }
