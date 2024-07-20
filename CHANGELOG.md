@@ -6,6 +6,50 @@ The file documents changes to the PHP_CodeSniffer project.
 
 _Nothing yet._
 
+## [3.10.3] - 2024-09-18
+
+### Changed
+- Various housekeeping, including improvements to the tests and documentation.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] and [Juliette Reinders Folmer][@jrfnl] for their contributions.
+
+### Fixed
+- Fixed bug [#553] : Squiz.Classes.SelfMemberReference: false negative(s) when namespace operator was encountered between the namespace declaration and the OO declaration.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#579] : AbstractPatternSniff: potential PHP notice during live coding.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#580] : Squiz.Formatting.OperatorBracket: potential PHP notice during live coding.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#581] : PSR12.ControlStructures.ControlStructureSpacing: prevent fixer conflict by correctly handling multiple empty newlines before the first condition in a multi-line control structure.
+    - Thanks to [Dan Wallis][@fredden] for the patch.
+- Fixed bug [#585] : Tokenizer not applying tab replacement in heredoc/nowdoc openers.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#588] : Squiz.PHP.EmbeddedPhp false positive when checking spaces after a PHP short open tag.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Fixed bug [#597] : Generic.PHP.LowerCaseKeyword did not flag nor fix non-lowercase anonymous class keywords.
+    - Thanks to [Marek Štípek][@maryo] for the patch.
+- Fixed bug [#598] : Squiz.PHP.DisallowMultipleAssignments: false positive on assignments to variable property on object stored in array.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+- Fixed bug [#608] : Squiz.Functions.MultiLineFunctionDeclaration did not take (parameter) attributes into account when checking for one parameter per line.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch
+
+### Other
+- The provenance of PHAR files associated with a release can now be verified via [GitHub Artifact Attestations][ghattest] using the [GitHub CLI tool][ghcli] with the following command: `gh attestation verify [phpcs|phpcbf].phar -o PHPCSStandards`. [#574]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+
+[#553]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/553
+[#574]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/574
+[#579]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/579
+[#580]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/580
+[#581]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/581
+[#585]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/585
+[#588]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/588
+[#597]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/597
+[#598]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/598
+[#608]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/608
+
+[ghcli]:    https://cli.github.com/
+[ghattest]: https://docs.github.com/en/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds
+
 ## [3.10.2] - 2024-07-22
 
 ### Changed
@@ -7002,6 +7046,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 -->
 
 [Unreleased]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/master...HEAD
+[3.10.3]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.10.2...3.10.3
 [3.10.2]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.10.1...3.10.2
 [3.10.1]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.10.0...3.10.1
 [3.10.0]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.9.2...3.10.0
@@ -7234,6 +7279,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@MarkMaldaba]:         https://github.com/MarkMaldaba
 [@martinssipenko]:      https://github.com/martinssipenko
 [@marvasDE]:            https://github.com/marvasDE
+[@maryo]:               https://github.com/maryo
 [@MasterOdin]:          https://github.com/MasterOdin
 [@mathroc]:             https://github.com/mathroc
 [@maxgalbu]:            https://github.com/maxgalbu
