@@ -15,6 +15,7 @@ Thank you for your interest in contributing to PHP_CodeSniffer!
     * [Other tasks](#other-tasks)
 * [Contributing With Code](#contributing-with-code)
     * [Requesting/Submitting New Features](#requestingsubmitting-new-features)
+    * [Finding Something to Work on](#finding-something-to-work-on)
     * [Getting started](#getting-started)
     * [While working on a patch](#while-working-on-a-patch)
     * [Writing tests](#writing-tests)
@@ -24,7 +25,7 @@ Thank you for your interest in contributing to PHP_CodeSniffer!
 
 ## Reporting Bugs
 
-Please search the [open issues](https://github.com/PHPCSStandards/PHP_CodeSniffer/issues) to see if your issue has been reported
+Please search the [open issues][issuelist] to see if your issue has been reported
 already and if so, comment in that issue if you have additional information, instead of opening a new one.
 
 Before reporting a bug, you should check what sniff an error is coming from.
@@ -217,6 +218,28 @@ a duplicate issue/PR.
 > in PHP_CodeSniffer and may be better suited to an external standard.
 
 
+### Finding Something to Work on
+
+The [open issue list][issuelist] is a good place to start :wink:
+
+As a rule of thumb, you can use the following to find an issue to work on:
+* Issues which have been triaged already and are not marked as "blocked", "close candidate" or "waiting for opinions".
+* Issues which don't have anyone assigned to them (nor a comment in the ticket from someone saying
+    they are working on the ticket).
+* Issues which have no (far in the future) milestone attached.
+
+This largely translates to this [filtered issue list](https://github.com/PHPCSStandards/PHP_CodeSniffer/issues?q=is%3Aopen+is%3Aissue+no%3Aassignee+-label%3A%22Status%3A+triage%22+-label%3A%22Status%3A+close+candidate%22+-label%3A%22Status%3A+blocked%22+-label%3A%22Status%3A+waiting+for+opinions%22+no%3Amilestone+).
+
+You can, of course, filter this list down further by selecting/excluding additional labels, like, for example,
+filtering on "Type: bug", "Status: good first issue" or "Status: help wanted".
+
+If you expect the work on the ticket to take a little while, please leave a comment on the ticket to indicate that
+you will be working on it. This is a good practice to prevents duplicate work/multiple people working on the same ticket.
+
+When in doubt how to proceed with a ticket, feel free to leave a comment with specific questions and ask for guidance
+(if still needed after you have read the rest of the contributing guide).
+
+
 ### Getting started
 
 1. Fork/clone the repository.
@@ -383,3 +406,5 @@ Submitting a (largely) AI-generated PR will lead to you being banned from the re
 
 By contributing code to this repository, you agree to license your code for use under the
 [BSD-3-Clause license](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt).
+
+[issuelist]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues
