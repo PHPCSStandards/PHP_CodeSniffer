@@ -148,3 +148,26 @@ function foo() {
         }
     };
 }
+
+class SniffShouldHandlePHPOpenCloseTagsCorrectly {
+    public function thisIsStillAUselessOverride($a, $b) {
+        return parent::thisIsStillAUselessOverride($a, $b) ?><?php
+        // Even with a comment here.
+    }
+
+    public function butNotWithANewLineBetweenThePHPTagsAsThenWeEchoOutTheNewLine($a, $b) {
+        parent::butNotWithANewLineBetweenThePHPTagsAsThenWeEchoOutTheNewLine($a, $b) ?>
+        <?php
+    }
+
+    public function embeddedHTMLAfterCallingParent() {
+        parent::embeddedHTMLAfterCallingParent() ?>
+        <div>HTML</div>
+        <?php
+    }
+
+    public function contentAfterUselessEmbedBlock() {
+        parent::contentAfterUselessEmbedBlock() ?><?php
+        return 1;
+    }
+}

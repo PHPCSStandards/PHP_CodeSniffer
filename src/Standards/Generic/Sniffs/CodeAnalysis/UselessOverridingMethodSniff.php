@@ -153,15 +153,20 @@ class UselessOverridingMethodSniff implements Sniff
         }//end for
 
         $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
-        if ($tokens[$next]['code'] !== T_SEMICOLON) {
+        if ($tokens[$next]['code'] !== T_SEMICOLON && $tokens[$next]['code'] !== T_CLOSE_TAG) {
             return;
         }
+
+        // This list deliberately does not include the `T_OPEN_TAG_WITH_ECHO` as that token implicitly is an echo statement, i.e. content.
+        $nonContent = Tokens::$emptyTokens;
+        $nonContent[T_OPEN_TAG]  = T_OPEN_TAG;
+        $nonContent[T_CLOSE_TAG] = T_CLOSE_TAG;
 
         // Check rest of the scope.
         for (++$next; $next <= $end; ++$next) {
             $code = $tokens[$next]['code'];
             // Skip for any other content.
-            if (isset(Tokens::$emptyTokens[$code]) === false) {
+            if (isset($nonContent[$code]) === false) {
                 return;
             }
         }
