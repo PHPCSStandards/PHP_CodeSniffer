@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the \PHP_CodeSniffer\Util\Sniffs\Common::stripColors() method.
+ * Tests for the \PHP_CodeSniffer\Util\Common::stripColors() method.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2024 Juliette Reinders Folmer. All rights reserved.
@@ -13,7 +13,7 @@ use PHP_CodeSniffer\Util\Common;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Tests for the \PHP_CodeSniffer\Util\Sniffs\Common::stripColors() method.
+ * Tests for the \PHP_CodeSniffer\Util\Common::stripColors() method.
  *
  * @covers \PHP_CodeSniffer\Util\Common::stripColors
  */

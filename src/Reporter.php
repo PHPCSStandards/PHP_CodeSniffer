@@ -364,7 +364,7 @@ class Reporter
         ];
 
         if ($report['errors'] === 0 && $report['warnings'] === 0) {
-            // Prefect score!
+            // Perfect score!
             return $report;
         }
 
