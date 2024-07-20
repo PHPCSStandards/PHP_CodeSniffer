@@ -50,6 +50,8 @@ php phpcbf.phar -h
 These Phars are signed with the official Release key for PHPCS with the
 fingerprint `689D AD77 8FF0 8760 E046 228B A978 2203 05CD 5C32`.
 
+As of PHP_CodeSniffer 3.10.3, the provenance of PHAR files associated with a release can be verified via [GitHub Artifact Attestations](https://docs.github.com/en/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds) using the [GitHub CLI tool](https://cli.github.com/) with the following command: `gh attestation verify [phpcs|phpcbf].phar -o PHPCSStandards`.
+
 ### Composer
 If you use Composer, you can install PHP_CodeSniffer system-wide with the following command:
 ```bash
