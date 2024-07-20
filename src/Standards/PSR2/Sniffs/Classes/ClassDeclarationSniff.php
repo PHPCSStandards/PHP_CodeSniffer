@@ -525,11 +525,8 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
             $ignoreTokens[] = T_WHITESPACE;
             $ignoreTokens[] = T_COMMENT;
             $ignoreTokens[] = T_SEMICOLON;
-            $ignoreTokens[] = T_COMMA;
             $nextContent    = $phpcsFile->findNext($ignoreTokens, ($closeBrace + 1), null, true);
-            if ($tokens[$nextContent]['content'] !== $phpcsFile->eolChar
-                && $tokens[$nextContent]['line'] === $tokens[$closeBrace]['line']
-            ) {
+            if ($tokens[$nextContent]['line'] === $tokens[$closeBrace]['line']) {
                 $type  = strtolower($tokens[$stackPtr]['content']);
                 $error = 'Closing %s brace must be on a line by itself';
                 $data  = [$type];
