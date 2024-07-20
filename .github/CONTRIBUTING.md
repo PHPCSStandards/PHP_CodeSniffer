@@ -11,15 +11,15 @@ Thank you for your interest in contributing to PHP_CodeSniffer!
 * [Contributing Without Writing Code](#contributing-without-writing-code)
     * [Bug Triage](#bug-triage)
     * [Testing Open Pull Requests](#testing-open-pull-requests)
-    * [Writing sniff documentation](#writing-sniff-documentation)
-    * [Other tasks](#other-tasks)
+    * [Writing Sniff Documentation](#writing-sniff-documentation)
+    * [Other Tasks](#other-tasks)
 * [Contributing With Code](#contributing-with-code)
     * [Requesting/Submitting New Features](#requestingsubmitting-new-features)
     * [Finding Something to Work on](#finding-something-to-work-on)
-    * [Getting started](#getting-started)
-    * [While working on a patch](#while-working-on-a-patch)
-    * [Writing tests](#writing-tests)
-    * [Submitting your pull request](#submitting-your-pull-request)
+    * [Getting Started](#getting-started)
+    * [While Working on a Patch](#while-working-on-a-patch)
+    * [Writing Tests](#writing-tests)
+    * [Submitting Your Pull Request](#submitting-your-pull-request)
 * [Licensing](#licensing)
 
 
@@ -71,7 +71,7 @@ This includes checking whether the bug is something which should be fixed in **_
 To find bugs which need triage, look for issues and PRs with the
 ["Status: triage"](https://github.com/PHPCSStandards/PHP_CodeSniffer/labels/Status%3A%20triage) label.
 
-#### Typical bug triage tasks
+#### Typical Bug Triage Tasks
 * Verify whether the bug is reproducible with the given information.
 * Ask for additional information if it is not.
 * If you find the issue is reported to the wrong repo, ask the reporter to report it to the correct external standard repo
@@ -95,7 +95,7 @@ To get access to a PHPCS version which includes the patch from a pull request, y
     The PHAR files can be found on the summary page of the test workflow run for the PR.
     If the workflow has not been run (yet), the PHAR artifact may not be available (yet).
 
-#### Typical test tasks
+#### Typical Test Tasks
 * Verify that the patch solves the originally reported problem.
 * Verify that the tests added in the PR fail without the fix and pass with the fix.
 * For a fix for false negatives: verify that the correct error message(s) are thrown by the patched code.
@@ -103,7 +103,7 @@ To get access to a PHPCS version which includes the patch from a pull request, y
     (new false positives/false negatives).
 
 
-### Writing sniff documentation
+### Writing Sniff Documentation
 
 Sniffs in PHP_CodeSniffer should preferably be accompanied by documentation. There is currently still a lot of
 [documentation missing](https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/148).
@@ -152,11 +152,11 @@ phpcs --standard=StandardName --generator=Text --sniffs=StandardName.Category.Sn
 Kind request to add only one new XML file per PR to make the PR easier to review.
 
 
-### Other tasks
+### Other Tasks
 
 There are also tasks looking for contributions, which don't necessarily fall into the above categories.
 
-#### Issues marked with "Status: waiting for opinions"
+#### Issues Marked with "Status: waiting for opinions"
 
 Proposals for new features, proposals for (structural) changes to PHP_CodeSniffer itself or to the contributor workflow,
 will initially be marked with the
@@ -180,7 +180,7 @@ will be pinged (cc-ed) to gather their thoughts on the topic.
 > on the PR consenting to it.
 
 
-#### Issues marked with "Status: needs investigation"
+#### Issues Marked with "Status: needs investigation"
 
 Sometimes an issue has been identified, but it has not yet been pinpointed what the exact cause of the problem is.
 
@@ -191,7 +191,7 @@ Issues like these will be marked with the
 ["Status: needs investigation"](https://github.com/PHPCSStandards/PHP_CodeSniffer/labels/Status%3A%20needs%20investigation)
 and investigating those can be a good way to learn more about the source code of PHP_CodeSniffer.
 
-#### Issues marked with "Status: help wanted"
+#### Issues Marked with "Status: help wanted"
 
 If you don't know where to start, have a browse through issues marked with the
 ["Status: help wanted"](https://github.com/PHPCSStandards/PHP_CodeSniffer/labels/Status%3A%20help%20wanted) and/or the
@@ -240,7 +240,7 @@ When in doubt how to proceed with a ticket, feel free to leave a comment with sp
 (if still needed after you have read the rest of the contributing guide).
 
 
-### Getting started
+### Getting Started
 
 1. Fork/clone the repository.
 2. Run `composer install`.
@@ -248,7 +248,7 @@ When in doubt how to proceed with a ticket, feel free to leave a comment with sp
     If there is an open issue associated with your patch, including the issue number in the branch name is good practice.
 
 
-### While working on a patch
+### While Working on a Patch
 
 Please make sure your code conforms to the PHPCS coding standard, is covered by tests and that all the PHP_CodeSniffer
 unit tests still pass.
@@ -268,7 +268,7 @@ To help you with this, a number of convenience scripts are available:
 N.B.: You can ignore any skipped tests as these are for external tools.
 
 
-### Writing tests
+### Writing Tests
 
 Tests for the PHP_CodeSniffer engine can be found in the `tests/Core` directory.
 Tests for individual sniffs can be found in the `src/Standards/[StandardName]/Tests/[Category]/` directory.
@@ -287,7 +287,7 @@ For example, for the sniff named `Generic.NamingConventions.ConstructorName`:
         Only lines on which errors/warnings are expected need to be included in the lists. All other lines will automatically
         be set to expect no errors and no warnings.
 
-#### Multiple test case files
+#### Multiple Test Case Files
 
 At times, one test _case_ file is not enough, for instance when the sniff needs to behave differently depending on whether code
 is namespaced or not, or when a sniff needs to check something at the top of a file.
@@ -303,7 +303,7 @@ sequentially like `src/Standards/Generic/Tests/NamingConventions/ConstructorName
 The `getErrorList()` and the `getWarningList()` methods will receive an optional `$testFile=''` parameter with the file name
 of the file being scanned - `ConstructorNameUnitTest.2.inc` - and should return the appropriate array for each file.
 
-#### Testing fixers
+#### Testing Fixers
 
 If a sniff contains errors/warnings which can be auto-fixed, these fixers should also be tested.
 
@@ -315,7 +315,7 @@ as it is expected to be after the fixer has run.
 
 The test framework will compare the actual fixes made with the expected fixes and will fail the tests if these don't match.
 
-#### Tests related to parse errors/live coding
+#### Tests Related to Parse Errors/Live Coding
 
 PHP_CodeSniffer can be, and is, regularly used during live coding via an IDE integration.
 
@@ -340,7 +340,7 @@ for
 ```
 
 
-### Submitting your pull request
+### Submitting Your Pull Request
 
 Some guidelines for submitting pull requests (PRs) and improving the chance that your PR will be merged:
 * Please keep your PR as small as possible, but no smaller than that.
@@ -356,7 +356,7 @@ Some guidelines for submitting pull requests (PRs) and improving the chance that
 Your time is valuable, and we appreciate your willingness to spend it on this project.
 However, the maintainers time is also valuable and often, more scarce, so please be considerate of that.
 
-#### Some git best practices
+#### Some Git Best Practices
 
 While not strictly required, it is greatly appreciated if you comply with the following git best practices:
 
@@ -383,16 +383,16 @@ While not strictly required, it is greatly appreciated if you comply with the fo
     If your PR has not been reviewed yet, feel free to rebase at will.
     Once a PR is under review, consult with the reviewer about rebasing the PR.
 
-#### Final words
+#### Final Words
 
-##### Do not violate copyright
+##### Do Not Violate Copyright
 
 Only submit a PR with your own original code. Do NOT submit a PR containing code which you have largely copied from
 an externally available sniff, unless you wrote said sniff yourself.
 Open source does not mean that copyright does not apply.
 Copyright infringements will not be tolerated and can lead to you being banned from the repo.
 
-##### Do not submit AI generated PRs
+##### Do Not Submit AI Generated PRs
 
 The same goes for (largely) AI-generated PRs. These are not welcome as they will be based on copyrighted code from others
 without accreditation and without taking the license of the original code into account, let alone getting permission
