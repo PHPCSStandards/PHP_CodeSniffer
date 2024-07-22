@@ -5,14 +5,14 @@
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: brace on same line">
+        <code title="Valid: Brace on same line.">
         <![CDATA[
 function fooFunction($arg1, $arg2 = '')<em> {</em>
     ...
 }
         ]]>
         </code>
-        <code title="Invalid: brace on next line">
+        <code title="Invalid: Brace on next line.">
         <![CDATA[
 function fooFunction($arg1, $arg2 = '')
 <em>{</em>
