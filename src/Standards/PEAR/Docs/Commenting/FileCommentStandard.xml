@@ -231,16 +231,14 @@
  */
         ]]>
         </code>
-        <code title="Invalid: Category and package tags are swapped in order.">
+        <code title="Invalid: No PHP version specified.">
         <![CDATA[
 <?php
 /**
  * Short description here.
  *
- * PHP version 5
- *
- * <em>@package</em> Foo_Helpers
- * <em>@category</em> Foo
+ * @category Foo
+ * @package Foo_Helpers
  * @author Marty McFly <mmcfly@example.com>
  * @copyright 2013-2014 Foo Inc.
  * @license MIT License
@@ -267,14 +265,16 @@
  */
         ]]>
         </code>
-        <code title="Invalid: No PHP version specified.">
+        <code title="Invalid: Category and package tags are swapped in order.">
         <![CDATA[
 <?php
 /**
  * Short description here.
  *
- * @category Foo
- * @package Foo_Helpers
+ * PHP version 5
+ *
+ * <em>@package</em> Foo_Helpers
+ * <em>@category</em> Foo
  * @author Marty McFly <mmcfly@example.com>
  * @copyright 2013-2014 Foo Inc.
  * @license MIT License
