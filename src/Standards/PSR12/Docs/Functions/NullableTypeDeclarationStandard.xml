@@ -5,7 +5,7 @@
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: no whitespace used.">
+        <code title="Valid: No whitespace used.">
         <![CDATA[
 public function functionName(
     ?string $arg1,
@@ -14,7 +14,7 @@ public function functionName(
 }
         ]]>
         </code>
-        <code title="Invalid: superfluous whitespace used.">
+        <code title="Invalid: Superfluous whitespace used.">
         <![CDATA[
 public function functionName(
     ? string $arg1,
@@ -25,14 +25,14 @@ public function functionName(
         </code>
     </code_comparison>
     <code_comparison>
-        <code title="Valid: no unexpected characters.">
+        <code title="Valid: No unexpected characters.">
         <![CDATA[
 public function foo(?int $arg): ?string
 {
 }
         ]]>
         </code>
-        <code title="Invalid: unexpected characters used.">
+        <code title="Invalid: Unexpected characters used.">
         <![CDATA[
 public function bar(? /* comment */ int $arg): ?
     // nullable for a reason
