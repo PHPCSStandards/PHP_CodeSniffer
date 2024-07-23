@@ -1,7 +1,7 @@
 <documentation title="Lowercase Class Keywords">
     <standard>
     <![CDATA[
-    The php keywords class, interface, trait, extends, implements, abstract, final, var, and const should be lowercase.
+    The PHP keywords class, interface, trait, extends, implements, abstract, final, var, and const should be lowercase.
     ]]>
     </standard>
     <code_comparison>
