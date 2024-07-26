@@ -93,3 +93,10 @@ enum Foo: string {
     /* testKeywordAsEnumCaseNameShouldBeString7 */
     case ARRAY = 'array';
 }
+
+// Test for https://github.com/squizlabs/PHP_CodeSniffer/issues/497
+switch ($value):
+    /* testSwitchCaseScopeCloserSharedWithSwitch */
+    case 1:
+        echo 'one';
+endswitch;

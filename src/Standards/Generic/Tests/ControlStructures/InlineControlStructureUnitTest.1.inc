@@ -88,16 +88,16 @@ if ($error === ERROR_ONE): ?>
 
 
 
-if ($this->allowShopping !== true):
-    if ($this->status != Shop_Cart :: OK):
-        switch ($this->status):
-            case Shop_Cart :: NOT_FOUND:
-            echo 'foo';
-        endswitch;
+if ($value):
+    if ($anotherValue):
+        foreach ($array as $element):
+            echo (function($element): string { return $element; } )($element);
+        endforeach;
     endif;
 else:
     echo 'foo';
 endif;
+
 
 // ELSE IF split over multiple lines (not inline)
 if ($test) {
