@@ -106,6 +106,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
             'switch case with constant, keyword in mixed case'   => ['/* testIsNotEnumCaseIsCaseInsensitive */'],
             'switch case, body in curlies declares enum'         => ['/* testCaseInSwitchWhenCreatingEnumInSwitch1 */'],
             'switch case, body after semicolon declares enum'    => ['/* testCaseInSwitchWhenCreatingEnumInSwitch2 */'],
+            'switch case, shared closer with switch'             => ['/* testSwitchCaseScopeCloserSharedWithSwitch */'],
         ];
 
     }//end dataNotEnumCases()
