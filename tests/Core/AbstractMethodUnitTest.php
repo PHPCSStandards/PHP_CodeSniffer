@@ -81,6 +81,25 @@ abstract class AbstractMethodUnitTest extends TestCase
 
 
     /**
+     * Clean up after finished test by resetting all static properties on the class to their default values.
+     *
+     * Note: This is a PHPUnit cross-version compatible {@see \PHPUnit\Framework\TestCase::tearDownAfterClass()}
+     * method.
+     *
+     * @afterClass
+     *
+     * @return void
+     */
+    public static function reset()
+    {
+        self::$fileExtension = 'inc';
+        self::$tabWidth      = 4;
+        self::$phpcsFile     = null;
+
+    }//end reset()
+
+
+    /**
      * Get the token pointer for a target token based on a specific comment found on the line before.
      *
      * Note: the test delimiter comment MUST start with "/* test" to allow this function to
