@@ -83,6 +83,20 @@ abstract class AbstractMethodUnitTest extends TestCase
 
 
     /**
+     * Clean up after finished test by resetting all static properties on the class to their default values.
+     *
+     * @return void
+     */
+    public static function tearDownAfterClass(): void
+    {
+        self::$fileExtension = 'inc';
+        self::$tabWidth      = 4;
+        self::$phpcsFile     = null;
+
+    }//end tearDownAfterClass()
+
+
+    /**
      * Get the token pointer for a target token based on a specific comment found on the line before.
      *
      * Note: the test delimiter comment MUST start with "/* test" to allow this function to
