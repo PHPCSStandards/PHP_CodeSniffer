@@ -13,10 +13,10 @@ declare(/* test */ ticks /* test */ =1);
 declare(  ticks
 =1   );
 
-    declare(ticks=1) { }
+    declare(ticks=1) { $test = true; }
 
   declare(ticks=1)
-{ }
+{ $test = true; }
 
 declare(ticks=1)
 {
@@ -48,3 +48,7 @@ declare(ticks=1) {$test = true;
 
 declare(ticks=1) {  $test = true;
 }
+
+// Ensure that we handle non-number values properly.
+declare(encoding='ISO-8859-1');
+declare ( encoding = 'ISO-8859-1' ) ;
