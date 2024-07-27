@@ -73,6 +73,22 @@ final class ConfigDouble extends Config
 
 
     /**
+     * Ensures the static properties in the Config class are reset to their default values
+     * when the ConfigDouble is no longer used.
+     *
+     * @return void
+     */
+    public function __destruct()
+    {
+        $this->setStaticConfigProperty('overriddenDefaults', []);
+        $this->setStaticConfigProperty('executablePaths', []);
+        $this->setStaticConfigProperty('configData', null);
+        $this->setStaticConfigProperty('configDataFile', null);
+
+    }//end __destruct()
+
+
+    /**
      * Sets the command line values and optionally prevents a file system search for a custom ruleset.
      *
      * @param array<string> $args An array of command line arguments to set.
