@@ -26,54 +26,62 @@ final class OperatorBracketUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile='')
     {
-        return [
-            3   => 1,
-            6   => 1,
-            9   => 1,
-            12  => 1,
-            15  => 1,
-            18  => 2,
-            20  => 1,
-            25  => 1,
-            28  => 1,
-            31  => 1,
-            34  => 1,
-            37  => 1,
-            40  => 1,
-            43  => 2,
-            45  => 1,
-            47  => 5,
-            48  => 1,
-            50  => 2,
-            55  => 2,
-            56  => 1,
-            63  => 2,
-            64  => 1,
-            67  => 1,
-            86  => 1,
-            90  => 1,
-            109 => 1,
-            130 => 1,
-            134 => 1,
-            135 => 2,
-            137 => 1,
-            139 => 1,
-            150 => 1,
-            161 => 1,
-            163 => 2,
-            165 => 2,
-            169 => 1,
-            174 => 1,
-            176 => 1,
-            185 => 1,
-            189 => 1,
-            193 => 1,
-            194 => 2,
-        ];
+        switch ($testFile) {
+        case 'OperatorBracketUnitTest.1.inc':
+            return [
+                3   => 1,
+                6   => 1,
+                9   => 1,
+                12  => 1,
+                15  => 1,
+                18  => 2,
+                20  => 1,
+                25  => 1,
+                28  => 1,
+                31  => 1,
+                34  => 1,
+                37  => 1,
+                40  => 1,
+                43  => 2,
+                45  => 1,
+                47  => 5,
+                48  => 1,
+                50  => 2,
+                55  => 2,
+                56  => 1,
+                63  => 2,
+                64  => 1,
+                67  => 1,
+                86  => 1,
+                90  => 1,
+                109 => 1,
+                130 => 1,
+                134 => 1,
+                135 => 2,
+                137 => 1,
+                139 => 1,
+                150 => 1,
+                161 => 1,
+                163 => 2,
+                165 => 2,
+                169 => 1,
+                174 => 1,
+                176 => 1,
+                185 => 1,
+                189 => 1,
+                193 => 1,
+                194 => 2,
+            ];
+
+        default:
+            return [];
+        }//end switch
 
     }//end getErrorList()
 
