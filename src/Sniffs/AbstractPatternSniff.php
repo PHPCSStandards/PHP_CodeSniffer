@@ -416,6 +416,11 @@ abstract class AbstractPatternSniff implements Sniff
         $lastAddedStackPtr = null;
         $patternLen        = count($pattern);
 
+        if (($stackPtr + $patternLen - $patternInfo['listen_pos']) > $phpcsFile->numTokens) {
+            // Pattern can never match as there are not enough tokens left in the file.
+            return false;
+        }
+
         for ($i = $patternInfo['listen_pos']; $i < $patternLen; $i++) {
             if (isset($tokens[$stackPtr]) === false) {
                 break;
