@@ -193,6 +193,8 @@ abstract class Tokenizer
             T_DOC_COMMENT_STRING       => true,
             T_CONSTANT_ENCAPSED_STRING => true,
             T_DOUBLE_QUOTED_STRING     => true,
+            T_START_HEREDOC            => true,
+            T_START_NOWDOC             => true,
             T_HEREDOC                  => true,
             T_NOWDOC                   => true,
             T_END_HEREDOC              => true,
