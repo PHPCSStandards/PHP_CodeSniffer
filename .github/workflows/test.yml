@@ -25,6 +25,11 @@ jobs:
     runs-on: ubuntu-latest
     name: "Build Phar on PHP: 8.0"
 
+    permissions:
+      id-token: write
+      contents: read
+      attestations: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -38,6 +43,17 @@ jobs:
 
       - name: Build the phar
         run: php scripts/build-phar.php
+
+      # Provide provenance for generated binaries.
+      # Only attests the build artifacts which will be used in the published releases as per the guidelines in "what to attest".
+      # https://docs.github.com/en/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds
+      - name: Generate artifact attestations
+        if: ${{ github.ref_type == 'tag' }}
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: |
+            ${{ github.workspace }}/phpcs.phar
+            ${{ github.workspace }}/phpcbf.phar
 
       - name: Upload the PHPCS phar
         uses: actions/upload-artifact@v4
