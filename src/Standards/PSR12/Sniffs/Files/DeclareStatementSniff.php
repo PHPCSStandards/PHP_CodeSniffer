@@ -82,70 +82,81 @@ class DeclareStatementSniff implements Sniff
 
         $closeParen = $tokens[$openParen]['parenthesis_closer'];
 
-        $directive = $phpcsFile->findNext(T_STRING, ($openParen + 1), $closeParen);
+        $tokenBeforeDirective = $openParen;
 
-        if ($directive === false) {
-            // Live coding / parse error.
-            return;
-        }
+        do {
+            $directive = $phpcsFile->findNext(T_STRING, ($tokenBeforeDirective + 1), $closeParen);
 
-        // There should be no space between open parenthesis and the directive.
-        $this->complainIfTokensNotAdjacent(
-            $phpcsFile,
-            $openParen,
-            $directive,
-            'SpaceFoundBeforeDirective'
-        );
-
-        // The directive must be in lowercase.
-        if ($tokens[$directive]['content'] !== strtolower($tokens[$directive]['content'])) {
-            $error = 'The directive of a declare statement must be in lowercase';
-            $fix   = $phpcsFile->addFixableError($error, $directive, 'DirectiveNotLowercase');
-            if ($fix === true) {
-                $phpcsFile->fixer->replaceToken($directive, strtolower($tokens[$directive]['content']));
+            if ($directive === false) {
+                // Live coding / parse error.
+                return;
             }
-        }
 
-        // When wishing to declare strict types in files containing markup outside PHP opening
-        // and closing tags, the declaration MUST be on the first line of the file and include
-        // an opening PHP tag, the strict types declaration and closing tag.
-        if ($tokens[$stackPtr]['line'] !== 1 && strtolower($tokens[$directive]['content']) === 'strict_types') {
-            $nonPHP = $phpcsFile->findNext(T_INLINE_HTML, 0);
-            if ($nonPHP !== false) {
-                $error = 'When declaring strict_types in a file with markup outside PHP tags, the declare statement must be on the first line';
-                $phpcsFile->addError($error, $stackPtr, 'DeclareNotOnFirstLine');
+            if ($tokens[$tokenBeforeDirective]['code'] === T_OPEN_PARENTHESIS) {
+                // There should be no space between open parenthesis and the directive.
+                $this->complainIfTokensNotAdjacent(
+                    $phpcsFile,
+                    $tokenBeforeDirective,
+                    $directive,
+                    'SpaceFoundBeforeDirective'
+                );
+                // There's no 'else' clause here, because PSR12 makes no mention of
+                // formatting of the comma in a multi-directive statement.
             }
-        }
 
-        $equals = $phpcsFile->findNext(T_EQUAL, ($directive + 1), $closeParen);
+            // The directive must be in lowercase.
+            if ($tokens[$directive]['content'] !== strtolower($tokens[$directive]['content'])) {
+                $error = 'The directive of a declare statement must be in lowercase';
+                $fix   = $phpcsFile->addFixableError($error, $directive, 'DirectiveNotLowercase');
+                if ($fix === true) {
+                    $phpcsFile->fixer->replaceToken($directive, strtolower($tokens[$directive]['content']));
+                }
+            }
 
-        if ($equals === false) {
-            // Live coding / parse error.
-            return;
-        }
+            // When wishing to declare strict types in files containing markup outside PHP opening
+            // and closing tags, the declaration MUST be on the first line of the file and include
+            // an opening PHP tag, the strict types declaration and closing tag.
+            if ($tokens[$stackPtr]['line'] !== 1 && strtolower($tokens[$directive]['content']) === 'strict_types') {
+                $nonPHP = $phpcsFile->findNext(T_INLINE_HTML, 0);
+                if ($nonPHP !== false) {
+                    $error = 'When declaring strict_types in a file with markup outside PHP tags, the declare statement must be on the first line';
+                    $phpcsFile->addError($error, $stackPtr, 'DeclareNotOnFirstLine');
+                }
+            }
 
-        // There should be no space between directive and the equal sign.
-        $this->complainIfTokensNotAdjacent(
-            $phpcsFile,
-            $directive,
-            $equals,
-            'SpaceFoundAfterDirective'
-        );
+            $equals = $phpcsFile->findNext(T_EQUAL, ($directive + 1), $closeParen);
 
-        $value = $phpcsFile->findNext([T_LNUMBER, T_CONSTANT_ENCAPSED_STRING], ($equals + 1), $closeParen);
+            if ($equals === false) {
+                // Live coding / parse error.
+                return;
+            }
 
-        if ($value === false) {
-            // Live coding / parse error.
-            return;
-        }
+            // There should be no space between directive and the equal sign.
+            $this->complainIfTokensNotAdjacent(
+                $phpcsFile,
+                $directive,
+                $equals,
+                'SpaceFoundAfterDirective'
+            );
 
-        // There should be no space between equals sign and directive value.
-        $this->complainIfTokensNotAdjacent(
-            $phpcsFile,
-            $equals,
-            $value,
-            'SpaceFoundBeforeDirectiveValue'
-        );
+            $value = $phpcsFile->findNext([T_LNUMBER, T_CONSTANT_ENCAPSED_STRING], ($equals + 1), $closeParen);
+
+            if ($value === false) {
+                // Live coding / parse error.
+                return;
+            }
+
+            // There should be no space between equals sign and directive value.
+            $this->complainIfTokensNotAdjacent(
+                $phpcsFile,
+                $equals,
+                $value,
+                'SpaceFoundBeforeDirectiveValue'
+            );
+
+            // Handle multi-directive statements.
+            $tokenBeforeDirective = $phpcsFile->findNext(T_COMMA, ($value + 1), $closeParen);
+        } while ($tokenBeforeDirective !== false);
 
         // $closeParen was defined earlier as $closeParen = $tokens[$openParen]['parenthesis_closer'];
         // There should be no space between directive value and closing parenthesis.
