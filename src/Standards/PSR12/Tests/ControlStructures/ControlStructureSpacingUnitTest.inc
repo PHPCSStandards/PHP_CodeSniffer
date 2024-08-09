@@ -98,3 +98,24 @@ $expr2 &&
   $expr3) {
       // structure body
 };
+
+// Ensure the sniff handles too many newlines (not just too few). This was copied from src/Standards/Squiz/Tests/ControlStructures/ForLoopDeclarationUnitTest.1.inc
+for (
+
+
+    $i = 0
+
+
+    ;
+
+
+    $i < 10
+
+
+    ;
+
+
+    $i++
+
+
+) {}
