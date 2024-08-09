@@ -873,9 +873,13 @@ class File
         $parts = explode('.', $code);
         if ($parts[0] === 'Internal') {
             // An internal message.
-            $listenerCode = Common::getSniffCode($this->activeListener);
-            $sniffCode    = $code;
-            $checkCodes   = [$sniffCode];
+            $listenerCode = '';
+            if ($this->activeListener !== '') {
+                $listenerCode = Common::getSniffCode($this->activeListener);
+            }
+
+            $sniffCode  = $code;
+            $checkCodes = [$sniffCode];
         } else {
             if ($parts[0] !== $code) {
                 // The full message code has been passed in.

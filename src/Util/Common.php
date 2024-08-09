@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Util;
 
+use InvalidArgumentException;
 use Phar;
 
 class Common
@@ -529,25 +530,41 @@ class Common
      * @param string $sniffClass The fully qualified sniff class name.
      *
      * @return string
+     *
+     * @throws \InvalidArgumentException When $sniffClass is not a non-empty string.
+     * @throws \InvalidArgumentException When $sniffClass is not a FQN for a sniff(test) class.
      */
     public static function getSniffCode($sniffClass)
     {
-        $parts = explode('\\', $sniffClass);
-        $sniff = array_pop($parts);
+        if (is_string($sniffClass) === false || $sniffClass === '') {
+            throw new InvalidArgumentException('The $sniffClass parameter must be a non-empty string');
+        }
+
+        $parts      = explode('\\', $sniffClass);
+        $partsCount = count($parts);
+        if ($partsCount < 4) {
+            throw new InvalidArgumentException(
+                'The $sniffClass parameter was not passed a fully qualified sniff(test) class name. Received: '.$sniffClass
+            );
+        }
+
+        $sniff = $parts[($partsCount - 1)];
 
         if (substr($sniff, -5) === 'Sniff') {
             // Sniff class name.
             $sniff = substr($sniff, 0, -5);
-        } else {
+        } else if (substr($sniff, -8) === 'UnitTest') {
             // Unit test class name.
             $sniff = substr($sniff, 0, -8);
+        } else {
+            throw new InvalidArgumentException(
+                'The $sniffClass parameter was not passed a fully qualified sniff(test) class name. Received: '.$sniffClass
+            );
         }
 
-        $category = array_pop($parts);
-        $sniffDir = array_pop($parts);
-        $standard = array_pop($parts);
-        $code     = $standard.'.'.$category.'.'.$sniff;
-        return $code;
+        $standard = $parts[($partsCount - 4)];
+        $category = $parts[($partsCount - 2)];
+        return $standard.'.'.$category.'.'.$sniff;
 
     }//end getSniffCode()
 
