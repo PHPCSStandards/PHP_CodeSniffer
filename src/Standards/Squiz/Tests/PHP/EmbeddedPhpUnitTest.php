@@ -100,6 +100,7 @@ final class EmbeddedPhpUnitTest extends AbstractSniffUnitTest
                 258 => 1,
                 263 => 1,
                 264 => 1,
+                270 => 1,
             ];
 
         case 'EmbeddedPhpUnitTest.2.inc':
@@ -189,6 +190,16 @@ final class EmbeddedPhpUnitTest extends AbstractSniffUnitTest
                 14 => 1,
                 22 => 2,
             ];
+
+        case 'EmbeddedPhpUnitTest.24.inc':
+            $shortOpenTagDirective = (bool) ini_get('short_open_tag');
+            if ($shortOpenTagDirective === true) {
+                return [
+                    18 => 1,
+                    20 => 1,
+                ];
+            }
+            return [];
 
         default:
             return [];
