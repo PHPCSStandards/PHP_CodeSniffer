@@ -20,6 +20,8 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
      *
      * @param string                    $testMarker       The comment which prefaces the target token in the test file.
      * @param array<string, int|string> $expectedTokens   The expected token codes for the scope opener/closer.
+     * @param string|null               $testOpenerMarker Optional. The comment which prefaces the scope opener if different
+     *                                                    from the test marker.
      * @param string|null               $testCloserMarker Optional. The comment which prefaces the scope closer if different
      *                                                    from the test marker.
      *
@@ -30,11 +32,16 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
      *
      * @return void
      */
-    public function testSwitchScope($testMarker, $expectedTokens, $testCloserMarker=null)
+    public function testSwitchScope($testMarker, $expectedTokens, $testOpenerMarker=null, $testCloserMarker=null)
     {
         $tokens      = $this->phpcsFile->getTokens();
         $switchIndex = $this->getTargetToken($testMarker, [T_SWITCH]);
         $tokenArray  = $tokens[$switchIndex];
+
+        $scopeOpenerMarker = $testMarker;
+        if (isset($testOpenerMarker) === true) {
+            $scopeOpenerMarker = $testOpenerMarker;
+        }
 
         $scopeCloserMarker = $testMarker;
         if (isset($testCloserMarker) === true) {
@@ -42,7 +49,7 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
         }
 
         $expectedScopeCondition = $switchIndex;
-        $expectedScopeOpener    = $this->getTargetToken($testMarker, $expectedTokens['scope_opener']);
+        $expectedScopeOpener    = $this->getTargetToken($scopeOpenerMarker, $expectedTokens['scope_opener']);
         $expectedScopeCloser    = $this->getTargetToken($scopeCloserMarker, $expectedTokens['scope_closer']);
 
         $this->assertArrayHasKey('scope_condition', $tokenArray, 'Scope condition not set');
@@ -90,20 +97,30 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
     public static function dataSwitchScope()
     {
         return [
-            'switch normal syntax'      => [
+            'switch normal syntax'                 => [
                 'testMarker'     => '/* testSwitchNormalSyntax */',
                 'expectedTokens' => [
                     'scope_opener' => T_OPEN_CURLY_BRACKET,
                     'scope_closer' => T_CLOSE_CURLY_BRACKET,
                 ],
             ],
-            'switch alternative syntax' => [
+            'switch alternative syntax'            => [
                 'testMarker'       => '/* testSwitchAlternativeSyntax */',
                 'expectedTokens'   => [
                     'scope_opener' => T_COLON,
                     'scope_closer' => T_ENDSWITCH,
                 ],
+                'testOpenerMarker' => null,
                 'testCloserMarker' => '/* testSwitchAlternativeSyntaxEnd */',
+            ],
+            'switch with closure in the condition' => [
+                'testMarker'       => '/* testSwitchClosureWithinCondition */',
+                'expectedTokens'   => [
+                    'scope_opener' => T_OPEN_CURLY_BRACKET,
+                    'scope_closer' => T_CLOSE_CURLY_BRACKET,
+                ],
+                'testOpenerMarker' => '/* testSwitchClosureWithinConditionScopeOpener */',
+                'testCloserMarker' => '/* testSwitchClosureWithinConditionScopeOpener */',
             ],
         ];
 

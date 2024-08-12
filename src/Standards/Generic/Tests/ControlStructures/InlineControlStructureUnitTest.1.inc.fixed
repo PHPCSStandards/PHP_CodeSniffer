@@ -118,15 +118,16 @@ if ($test) {
     } else {
     }
 
-switch($response = \Bar::baz('bat', function ($foo) {
+if ((function () {
     return 'bar';
-})) {
-    case 1:
-        return 'test';
-
-    case 2:
-        return 'other';
+})()) {
+    echo 'one';
 }
+
+
+
+
+
 
 $stuff = [1,2,3];
 foreach($stuff as $num) {
