@@ -117,3 +117,16 @@ switch ($type) {
         }
         break;
 }
+
+// Test for https://github.com/squizlabs/PHP_CodeSniffer/issues/1590
+switch ($num) {
+    /* testSwitchCaseNestedInlineIfWithMoreThanThreeLines */
+    case 0:
+        if (1 > $num)
+            return bar(
+                baz(
+                    "foobarbaz"
+                )
+            );
+        break;
+}
