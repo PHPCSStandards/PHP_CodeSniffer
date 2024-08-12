@@ -22,3 +22,12 @@ switch ($value):
         break;
 /* testSwitchAlternativeSyntaxEnd */
 endswitch;
+
+// Test for https://github.com/squizlabs/PHP_CodeSniffer/issues/543
+/* testSwitchClosureWithinCondition */
+switch((function () {
+    return 'bar';
+})()) /* testSwitchClosureWithinConditionScopeOpener */ {
+    case 1:
+        return 'test';
+}
