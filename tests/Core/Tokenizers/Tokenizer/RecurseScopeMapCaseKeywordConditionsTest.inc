@@ -62,6 +62,7 @@ switch (true) {
     case CONSTANT = 1:
     /* testIsNotEnumCaseIsCaseInsensitive */
     cAsE CONSTANT:
+/* testCaseConstantCloserMarker */
 }
 
 switch ($x) {
@@ -69,11 +70,13 @@ switch ($x) {
     case 'a': {
         enum Foo {}
         break;
+    /* testCaseInSwitchWhenCreatingEnumInSwitch1CloserMarker */
     }
 
     /* testCaseInSwitchWhenCreatingEnumInSwitch2 */
     case 'b';
         enum Bar {}
+        /* testCaseInSwitchWhenCreatingEnumInSwitch2CloserMarker */
         break;
 }
 
