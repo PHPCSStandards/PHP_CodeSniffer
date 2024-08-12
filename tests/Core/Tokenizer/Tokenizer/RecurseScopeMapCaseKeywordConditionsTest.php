@@ -208,6 +208,13 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
                     'scope_closer' => T_BREAK,
                 ],
             ],
+            'switch case, nested inline if'                                     => [
+                'testMarker'     => '/* testSwitchCaseNestedInlineIfWithMoreThanThreeLines */',
+                'expectedTokens' => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_BREAK,
+                ],
+            ],
         ];
 
     }//end dataNotEnumCases()
