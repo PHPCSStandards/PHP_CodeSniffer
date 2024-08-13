@@ -199,7 +199,6 @@ final class EmbeddedPhpUnitTest extends AbstractSniffUnitTest
                     20 => 1,
                 ];
             }
-
             return [];
 
         default:
