@@ -380,12 +380,13 @@ class EmbeddedPhpSniff implements Sniff
 
         // Check that there is one, and only one space at the start of the statement.
         $leadingSpace  = 0;
-        $isLongOpenTag = $tokens[$stackPtr]['code'] === T_OPEN_TAG
-                         && stripos($tokens[$stackPtr]['content'], '<?php') === 0;
-
-        if ($isLongOpenTag === true) {
+        $isLongOpenTag = false;
+        if ($tokens[$stackPtr]['code'] === T_OPEN_TAG
+            && stripos($tokens[$stackPtr]['content'], '<?php') === 0
+        ) {
             // The long open tag token in a single line tag set always contains a single space after it.
-            $leadingSpace = 1;
+            $leadingSpace  = 1;
+            $isLongOpenTag = true;
         }
 
         if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
