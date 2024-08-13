@@ -103,3 +103,17 @@ switch ($value):
     case 1:
         echo 'one';
 endswitch;
+
+// Test for https://github.com/squizlabs/PHP_CodeSniffer/issues/879
+switch ($type) {
+    /* testSwitchCaseNestedIfWithAndWithoutBraces */
+    case 1:
+        if ($foo) {
+            return true;
+        } elseif ($baz)
+            return true;
+        else {
+            echo 'else';
+        }
+        break;
+}

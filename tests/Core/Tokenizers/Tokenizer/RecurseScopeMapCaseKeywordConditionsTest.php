@@ -139,14 +139,14 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
     public static function dataNotEnumCases()
     {
         return [
-            'switch case with constant, semicolon condition end' => [
+            'switch case with constant, semicolon condition end'                => [
                 'testMarker'     => '/* testCaseWithSemicolonIsNotEnumCase */',
                 'expectedTokens' => [
                     'scope_opener' => T_SEMICOLON,
                     'scope_closer' => T_CLOSE_CURLY_BRACKET,
                 ],
             ],
-            'switch case with constant, colon condition end'     => [
+            'switch case with constant, colon condition end'                    => [
                 'testMarker'       => '/* testCaseWithConstantIsNotEnumCase */',
                 'expectedTokens'   => [
                     'scope_opener' => T_COLON,
@@ -154,7 +154,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
                 ],
                 'testCloserMarker' => '/* testCaseConstantCloserMarker */',
             ],
-            'switch case with constant, comparison'              => [
+            'switch case with constant, comparison'                             => [
                 'testMarker'       => '/* testCaseWithConstantAndIdenticalIsNotEnumCase */',
                 'expectedTokens'   => [
                     'scope_opener' => T_COLON,
@@ -162,7 +162,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
                 ],
                 'testCloserMarker' => '/* testCaseConstantCloserMarker */',
             ],
-            'switch case with constant, assignment'              => [
+            'switch case with constant, assignment'                             => [
                 'testMarker'       => '/* testCaseWithAssigmentToConstantIsNotEnumCase */',
                 'expectedTokens'   => [
                     'scope_opener' => T_COLON,
@@ -170,7 +170,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
                 ],
                 'testCloserMarker' => '/* testCaseConstantCloserMarker */',
             ],
-            'switch case with constant, keyword in mixed case'   => [
+            'switch case with constant, keyword in mixed case'                  => [
                 'testMarker'       => '/* testIsNotEnumCaseIsCaseInsensitive */',
                 'expectedTokens'   => [
                     'scope_opener' => T_COLON,
@@ -178,7 +178,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
                 ],
                 'testCloserMarker' => '/* testCaseConstantCloserMarker */',
             ],
-            'switch case, body in curlies declares enum'         => [
+            'switch case, body in curlies declares enum'                        => [
                 'testMarker'       => '/* testCaseInSwitchWhenCreatingEnumInSwitch1 */',
                 'expectedTokens'   => [
                     'scope_opener' => T_OPEN_CURLY_BRACKET,
@@ -186,7 +186,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
                 ],
                 'testCloserMarker' => '/* testCaseInSwitchWhenCreatingEnumInSwitch1CloserMarker */',
             ],
-            'switch case, body after semicolon declares enum'    => [
+            'switch case, body after semicolon declares enum'                   => [
                 'testMarker'       => '/* testCaseInSwitchWhenCreatingEnumInSwitch2 */',
                 'expectedTokens'   => [
                     'scope_opener' => T_SEMICOLON,
@@ -194,11 +194,18 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
                 ],
                 'testCloserMarker' => '/* testCaseInSwitchWhenCreatingEnumInSwitch2CloserMarker */',
             ],
-            'switch case, shared closer with switch'             => [
+            'switch case, shared closer with switch'                            => [
                 'testMarker'     => '/* testSwitchCaseScopeCloserSharedWithSwitch */',
                 'expectedTokens' => [
                     'scope_opener' => T_COLON,
                     'scope_closer' => T_ENDSWITCH,
+                ],
+            ],
+            'switch case, nested inline if/elseif/else with and without braces' => [
+                'testMarker'     => '/* testSwitchCaseNestedIfWithAndWithoutBraces */',
+                'expectedTokens' => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_BREAK,
                 ],
             ],
         ];
