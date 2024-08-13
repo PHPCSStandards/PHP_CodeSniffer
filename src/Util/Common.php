@@ -420,7 +420,7 @@ class Common
      */
     public static function isUnderscoreName($string)
     {
-        // If there are space in the name, it can't be valid.
+        // If there is whitespace in the name, it can't be valid.
         if (strpos($string, ' ') !== false) {
             return false;
         }
