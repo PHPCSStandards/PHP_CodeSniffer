@@ -93,6 +93,7 @@ final class EmptyPHPStatementUnitTest extends AbstractSniffTestCase
             ];
         case 'EmptyPHPStatementUnitTest.2.inc':
             return [
+                2  => 1,
                 3  => 1,
                 4  => 1,
                 13 => 1,

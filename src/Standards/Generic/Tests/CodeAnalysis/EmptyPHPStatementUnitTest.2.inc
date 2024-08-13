@@ -1,5 +1,5 @@
 <!-- Tests with short open tag. -->
-
+<input name="<? ;something_else(); ?>" />
 <input name="<? ; something_else(); ?>" />
 <input name="<? something_else(); ; ?>" />
 

@@ -113,19 +113,15 @@ class EmptyPHPStatementSniff implements Sniff
         if ($fix === true) {
             $phpcsFile->fixer->beginChangeset();
 
-            if ($tokens[$prevNonEmpty]['code'] === T_OPEN_TAG
-                || $tokens[$prevNonEmpty]['code'] === T_OPEN_TAG_WITH_ECHO
-            ) {
-                // Check for superfluous whitespace after the semicolon which should be
-                // removed as the `<?php ` open tag token already contains whitespace,
-                // either a space or a new line.
-                if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
-                    $replacement = str_replace(' ', '', $tokens[($stackPtr + 1)]['content']);
-                    $phpcsFile->fixer->replaceToken(($stackPtr + 1), $replacement);
-                }
+            // Make sure there always remains one space between the open tag and the next content.
+            $replacement = ' ';
+            if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
+                $replacement = '';
             }
 
-            for ($i = $stackPtr; $i > $prevNonEmpty; $i--) {
+            $phpcsFile->fixer->replaceToken($stackPtr, $replacement);
+
+            for ($i = ($stackPtr - 1); $i > $prevNonEmpty; $i--) {
                 if ($tokens[$i]['code'] !== T_SEMICOLON
                     && $tokens[$i]['code'] !== T_WHITESPACE
                 ) {

@@ -56,8 +56,8 @@ class OpenTagSniff implements Sniff
             return $phpcsFile->numTokens;
         }
 
-        $next = $phpcsFile->findNext(T_INLINE_HTML, 0);
-        if ($next !== false) {
+        $hasInlineHTML = $phpcsFile->findNext(T_INLINE_HTML, 0);
+        if ($hasInlineHTML !== false) {
             // This rule only applies to PHP-only files.
             return $phpcsFile->numTokens;
         }
@@ -65,7 +65,15 @@ class OpenTagSniff implements Sniff
         $error = 'Opening PHP tag must be on a line by itself';
         $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'NotAlone');
         if ($fix === true) {
+            $phpcsFile->fixer->beginChangeset();
+
+            // Remove whitespace between the open tag and the next non-empty token.
+            for ($i = ($stackPtr + 1); $i < $next; $i++) {
+                $phpcsFile->fixer->replaceToken($i, '');
+            }
+
             $phpcsFile->fixer->addNewline($stackPtr);
+            $phpcsFile->fixer->endChangeset();
         }
 
         return $phpcsFile->numTokens;
