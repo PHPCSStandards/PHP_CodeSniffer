@@ -44,5 +44,9 @@ enum ENUM: string
     case HEARTS;
 }
 
+new class {};
+new class extends stdClass {};
+new class {};
+
 __HALT_COMPILER(); // An exception due to phar support.
 function
