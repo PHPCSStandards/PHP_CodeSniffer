@@ -50,6 +50,8 @@ final class LowerCaseKeywordUnitTest extends AbstractSniffUnitTest
             44 => 1,
             47 => 1,
             48 => 1,
+            52 => 3,
+            54 => 1,
         ];
 
     }//end getErrorList()
