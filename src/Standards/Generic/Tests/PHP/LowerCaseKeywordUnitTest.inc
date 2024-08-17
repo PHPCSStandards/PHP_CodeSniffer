@@ -48,5 +48,10 @@ new Class {};
 new clasS extends stdClass {};
 new class {};
 
+if (isset($a) && !empty($a)) { unset($a); }
+if (ISSET($a) && !Empty($a)) { UnSeT($a); }
+eval('foo');
+eVaL('foo');
+
 __HALT_COMPILER(); // An exception due to phar support.
 function
