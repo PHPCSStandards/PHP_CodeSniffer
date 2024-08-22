@@ -1483,12 +1483,12 @@ class Config
     /**
      * Prints out the short usage information for this script.
      *
-     * @param bool $return If TRUE, the usage string is returned
-     *                     instead of output to screen.
+     * @param bool $returnOutput If TRUE, the usage string is returned
+     *                           instead of output to screen.
      *
      * @return string|void
      */
-    public function printShortUsage($return=false)
+    public function printShortUsage($returnOutput=false)
     {
         if (PHP_CODESNIFFER_CBF === true) {
             $usage = 'Run "phpcbf --help" for usage information';
@@ -1498,7 +1498,7 @@ class Config
 
         $usage .= PHP_EOL.PHP_EOL;
 
-        if ($return === true) {
+        if ($returnOutput === true) {
             return $usage;
         }
 

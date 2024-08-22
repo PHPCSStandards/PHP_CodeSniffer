@@ -379,54 +379,54 @@ final class IsCamelCapsTest extends TestCase
 
 
     /**
-     * Test invalid class names with the public flag set.
+     * Test invalid class names with the "visibilityPublic" flag set.
      *
-     * Note that the public flag is ignored if the class format
+     * Note that the visibilityPublic flag is ignored if the class format
      * flag is set, so these names are all invalid.
      *
-     * @param string $name   The tested name.
-     * @param bool   $public Value of the $public flag.
+     * @param string $name             The tested name.
+     * @param bool   $visibilityPublic Value of the $visibilityPublic flag.
      *
-     * @dataProvider dataInvalidClassFormatWithPublicFlag
+     * @dataProvider dataInvalidClassFormatWithVisibilityPublicFlag
      *
      * @return void
      */
-    public function testInvalidClassFormatWithPublicFlag($name, $public)
+    public function testInvalidClassFormatWithVisibilityPublicFlag($name, $visibilityPublic)
     {
-        $this->assertFalse(Common::isCamelCaps($name, true, $public));
+        $this->assertFalse(Common::isCamelCaps($name, true, $visibilityPublic));
 
-    }//end testInvalidClassFormatWithPublicFlag()
+    }//end testInvalidClassFormatWithVisibilityPublicFlag()
 
 
     /**
      * Data provider.
      *
-     * @see testInvalidClassFormatWithPublicFlag()
+     * @see testInvalidClassFormatWithVisibilityPublicFlag()
      *
      * @return array<string, array<string, string|bool>>
      */
-    public static function dataInvalidClassFormatWithPublicFlag()
+    public static function dataInvalidClassFormatWithVisibilityPublicFlag()
     {
         return [
             'PascalCase string with initial underscore (public)'  => [
-                'name'   => '_ThisIsCamelCaps',
-                'public' => true,
+                'name'             => '_ThisIsCamelCaps',
+                'visibilityPublic' => true,
             ],
             'PascalCase string with initial underscore (private)' => [
-                'name'   => '_ThisIsCamelCaps',
-                'public' => false,
+                'name'             => '_ThisIsCamelCaps',
+                'visibilityPublic' => false,
             ],
             'empty string (public)'                               => [
-                'name'   => '',
-                'public' => true,
+                'name'             => '',
+                'visibilityPublic' => true,
             ],
             'empty string (private)'                              => [
-                'name'   => '',
-                'public' => false,
+                'name'             => '',
+                'visibilityPublic' => false,
             ],
         ];
 
-    }//end dataInvalidClassFormatWithPublicFlag()
+    }//end dataInvalidClassFormatWithVisibilityPublicFlag()
 
 
     /**
