@@ -263,6 +263,7 @@ class Filter extends RecursiveFilterIterator
             // most developers write, so we need a special case for any system
             // that is different.
             if (DIRECTORY_SEPARATOR === '\\') {
+                $replacements['\\'] = '\\\\';
                 $replacements['/'] = '\\\\';
             }
 
