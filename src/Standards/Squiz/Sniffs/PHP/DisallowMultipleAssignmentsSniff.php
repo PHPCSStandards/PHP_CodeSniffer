@@ -105,6 +105,13 @@ class DisallowMultipleAssignmentsSniff implements Sniff
             }
 
             if ($tokens[$varToken]['code'] === T_VARIABLE) {
+                $prevNonEmpty = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($varToken - 1), null, true);
+                if ($tokens[$prevNonEmpty]['code'] === T_OBJECT_OPERATOR) {
+                    // Dynamic property access, the real "start" variable still needs to be found.
+                    $varToken = $prevNonEmpty;
+                    continue;
+                }
+
                 // We found our variable.
                 break;
             }
@@ -124,7 +131,6 @@ class DisallowMultipleAssignmentsSniff implements Sniff
         $allowed[T_NAME_FULLY_QUALIFIED] = T_NAME_FULLY_QUALIFIED;
         $allowed[T_NAME_RELATIVE]        = T_NAME_RELATIVE;
         $allowed[T_DOUBLE_COLON]         = T_DOUBLE_COLON;
-        $allowed[T_OBJECT_OPERATOR]      = T_OBJECT_OPERATOR;
         $allowed[T_ASPERAND] = T_ASPERAND;
         $allowed[T_DOLLAR]   = T_DOLLAR;
         $allowed[T_SELF]     = T_SELF;
