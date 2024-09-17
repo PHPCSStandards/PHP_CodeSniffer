@@ -2,19 +2,19 @@
 if ($value === TRUE || $other === FALSE) {
 }
 
-if ($value === TRUE OR $other === FALSE) {
+if ($value === TRUE || $other === FALSE) {
 }
 
 if ($value === TRUE && $other === FALSE) {
 }
 
-if ($value === TRUE and $other === FALSE) {
+if ($value === TRUE && $other === FALSE) {
 }
 
 if ($one === TRUE && ($two === TRUE || $three === TRUE)) {
 }
 
-if ($one === TRUE AND ($two === TRUE or $three === TRUE)) {
+if ($one === TRUE && ($two === TRUE || $three === TRUE)) {
 }
 
 if ($a ^ $b) {
@@ -42,16 +42,16 @@ $c ??= $a and $b;
 $c <<= $a and $b;
 $c >>= $a and $b;
 
-$c = ($a and $b);
-$c = ($a and $c ?? ($c or $d));
-$c = ($a and ($b ?? $c));
+$c = ($a && $b);
+$c = ($a and $c ?? ($c || $d));
+$c = ($a && ($b ?? $c));
 $foo = ($a and ($b ?? $c) ?? $d);
-$foo = ($a and ($b ?? $c) or $d);
+$foo = ($a && ($b ?? $c) || $d);
 $foo = ($a and ($b ?? $c) or $d ?? $e);
 
 $foo = ($a and $b || $c);
 $foo = ($a or $b xor $c);
-$foo = ($a and $b or $c);
+$foo = ($a && $b || $c);
 print $a and $b;
 yield $a and $b;
 ?>
