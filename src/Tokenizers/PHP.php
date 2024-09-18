@@ -737,7 +737,7 @@ class PHP extends Tokenizer
             }
 
             /*
-                Close an open "inside constant declaration" marker when no keyword convertion was needed.
+                Close an open "inside constant declaration" marker when no keyword conversion was needed.
             */
 
             if ($insideConstDeclaration === true
