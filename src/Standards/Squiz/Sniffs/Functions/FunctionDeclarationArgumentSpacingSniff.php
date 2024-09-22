@@ -11,6 +11,7 @@ namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Common;
 use PHP_CodeSniffer\Util\Tokens;
 
 class FunctionDeclarationArgumentSpacingSniff implements Sniff
@@ -235,26 +236,37 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
             if ($param['type_hint_token'] !== false) {
                 $typeHintToken = $param['type_hint_end_token'];
 
-                $gap = 0;
-                if ($tokens[($typeHintToken + 1)]['code'] === T_WHITESPACE) {
-                    $gap = $tokens[($typeHintToken + 1)]['length'];
+                $gap = '';
+                $i   = $typeHintToken;
+                while ($tokens[++$i]['code'] === T_WHITESPACE) {
+                    $gap .= $tokens[$i]['content'];
                 }
 
-                if ($gap !== 1) {
+                if ($gap !== ' ') {
                     $error = 'Expected 1 space between type hint and argument "%s"; %s found';
                     $data  = [
                         $param['name'],
-                        $gap,
                     ];
-                    $fix   = $phpcsFile->addFixableError($error, $typeHintToken, 'SpacingAfterHint', $data);
-                    if ($fix === true) {
-                        if ($gap === 0) {
-                            $phpcsFile->fixer->addContent($typeHintToken, ' ');
-                        } else {
-                            $phpcsFile->fixer->replaceToken(($typeHintToken + 1), ' ');
-                        }
+                    if (trim($gap, ' ') === '') {
+                        // Gap contains only space characters: report the number of spaces.
+                        $data[] = strlen($gap);
+                    } else {
+                        // Gap contains more than just spaces: render these for better clarity.
+                        $data[] = '"'.Common::prepareForOutput($gap).'"';
                     }
-                }
+
+                    $fix = $phpcsFile->addFixableError($error, $typeHintToken, 'SpacingAfterHint', $data);
+                    if ($fix === true) {
+                        $phpcsFile->fixer->beginChangeset();
+                        $phpcsFile->fixer->addContent($typeHintToken, ' ');
+
+                        for ($i = ($typeHintToken + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                            $phpcsFile->fixer->replaceToken($i, '');
+                        }
+
+                        $phpcsFile->fixer->endChangeset();
+                    }
+                }//end if
             }//end if
 
             $commaToken = false;

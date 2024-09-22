@@ -109,3 +109,7 @@ $a = function ($var1, $var2=false) use (
 ) {};
 
 fn ($a,$b = null) => $a($b);
+
+function multipleWhitespaceTokensAfterType(int
+
+    $number) {}
