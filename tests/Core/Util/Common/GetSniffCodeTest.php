@@ -108,6 +108,7 @@ final class GetSniffCodeTest extends TestCase
             'Unqualified class name'                                        => ['ClassName'],
             'Fully qualified class name, not enough parts'                  => ['Fully\\Qualified\\ClassName'],
             'Fully qualified class name, doesn\'t end on Sniff or UnitTest' => ['Fully\\Sniffs\\Qualified\\ClassName'],
+            'Fully qualified class name, ends on Sniff, but isn\'t'         => ['Fully\\Sniffs\\AbstractSomethingSniff'],
         ];
 
     }//end dataGetSniffCodeThrowsExceptionOnInputWhichIsNotASniffTestClass()
