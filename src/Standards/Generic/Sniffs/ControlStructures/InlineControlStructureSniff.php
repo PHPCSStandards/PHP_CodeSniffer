@@ -38,7 +38,6 @@ class InlineControlStructureSniff implements Sniff
             T_FOREACH,
             T_WHILE,
             T_DO,
-            T_SWITCH,
             T_FOR,
         ];
 
