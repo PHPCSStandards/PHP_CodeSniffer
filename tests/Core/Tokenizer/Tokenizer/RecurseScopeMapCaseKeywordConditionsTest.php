@@ -66,25 +66,65 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
     /**
      * Test that "case" that is not enum case is still tokenized as `T_CASE`.
      *
-     * @param string $testMarker The comment which prefaces the target token in the test file.
+     * @param string                    $testMarker       The comment which prefaces the target token in the test file.
+     * @param array<string, int|string> $expectedTokens   The expected token codes for the scope opener/closer.
+     * @param string|null               $testCloserMarker Optional. The comment which prefaces the scope closer if different
+     *                                                    from the test marker.
      *
      * @dataProvider dataNotEnumCases
      * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::recurseScopeMap
      *
      * @return void
      */
-    public function testNotEnumCases($testMarker)
+    public function testNotEnumCases($testMarker, $expectedTokens, $testCloserMarker=null)
     {
         $tokens     = $this->phpcsFile->getTokens();
-        $case       = $this->getTargetToken($testMarker, [T_ENUM_CASE, T_CASE]);
-        $tokenArray = $tokens[$case];
+        $caseIndex  = $this->getTargetToken($testMarker, [T_ENUM_CASE, T_CASE]);
+        $tokenArray = $tokens[$caseIndex];
+
+        $scopeCloserMarker = $testMarker;
+        if (isset($testCloserMarker) === true) {
+            $scopeCloserMarker = $testCloserMarker;
+        }
+
+        $expectedScopeCondition = $caseIndex;
+        $expectedScopeOpener    = $this->getTargetToken($testMarker, $expectedTokens['scope_opener']);
+        $expectedScopeCloser    = $this->getTargetToken($scopeCloserMarker, $expectedTokens['scope_closer']);
 
         // Make sure we're looking at the right token.
         $this->assertSame(T_CASE, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_CASE (code)');
 
         $this->assertArrayHasKey('scope_condition', $tokenArray, 'Scope condition is not set');
+        $this->assertSame(
+            $expectedScopeCondition,
+            $tokenArray['scope_condition'],
+            sprintf(
+                'Scope condition not set correctly; expected T_CASE, found %s.',
+                $tokens[$tokenArray['scope_condition']]['type']
+            )
+        );
+
         $this->assertArrayHasKey('scope_opener', $tokenArray, 'Scope opener is not set');
+        $this->assertSame(
+            $expectedScopeOpener,
+            $tokenArray['scope_opener'],
+            sprintf(
+                'Scope opener not set correctly; expected %s, found %s.',
+                $tokens[$expectedScopeOpener]['type'],
+                $tokens[$tokenArray['scope_opener']]['type']
+            )
+        );
+
         $this->assertArrayHasKey('scope_closer', $tokenArray, 'Scope closer is not set');
+        $this->assertSame(
+            $expectedScopeCloser,
+            $tokenArray['scope_closer'],
+            sprintf(
+                'Scope closer not set correctly; expected %s, found %s.',
+                $tokens[$expectedScopeCloser]['type'],
+                $tokens[$tokenArray['scope_closer']]['type']
+            )
+        );
 
     }//end testNotEnumCases()
 
@@ -94,18 +134,87 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
      *
      * @see testNotEnumCases()
      *
-     * @return array<string, array<string>>
+     * @return array<string, array<string, string|array<string, int|string>>>
      */
     public static function dataNotEnumCases()
     {
         return [
-            'switch case with constant, semicolon condition end' => ['/* testCaseWithSemicolonIsNotEnumCase */'],
-            'switch case with constant, colon condition end'     => ['/* testCaseWithConstantIsNotEnumCase */'],
-            'switch case with constant, comparison'              => ['/* testCaseWithConstantAndIdenticalIsNotEnumCase */'],
-            'switch case with constant, assignment'              => ['/* testCaseWithAssigmentToConstantIsNotEnumCase */'],
-            'switch case with constant, keyword in mixed case'   => ['/* testIsNotEnumCaseIsCaseInsensitive */'],
-            'switch case, body in curlies declares enum'         => ['/* testCaseInSwitchWhenCreatingEnumInSwitch1 */'],
-            'switch case, body after semicolon declares enum'    => ['/* testCaseInSwitchWhenCreatingEnumInSwitch2 */'],
+            'switch case with constant, semicolon condition end'                => [
+                'testMarker'     => '/* testCaseWithSemicolonIsNotEnumCase */',
+                'expectedTokens' => [
+                    'scope_opener' => T_SEMICOLON,
+                    'scope_closer' => T_CLOSE_CURLY_BRACKET,
+                ],
+            ],
+            'switch case with constant, colon condition end'                    => [
+                'testMarker'       => '/* testCaseWithConstantIsNotEnumCase */',
+                'expectedTokens'   => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_CLOSE_CURLY_BRACKET,
+                ],
+                'testCloserMarker' => '/* testCaseConstantCloserMarker */',
+            ],
+            'switch case with constant, comparison'                             => [
+                'testMarker'       => '/* testCaseWithConstantAndIdenticalIsNotEnumCase */',
+                'expectedTokens'   => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_CLOSE_CURLY_BRACKET,
+                ],
+                'testCloserMarker' => '/* testCaseConstantCloserMarker */',
+            ],
+            'switch case with constant, assignment'                             => [
+                'testMarker'       => '/* testCaseWithAssigmentToConstantIsNotEnumCase */',
+                'expectedTokens'   => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_CLOSE_CURLY_BRACKET,
+                ],
+                'testCloserMarker' => '/* testCaseConstantCloserMarker */',
+            ],
+            'switch case with constant, keyword in mixed case'                  => [
+                'testMarker'       => '/* testIsNotEnumCaseIsCaseInsensitive */',
+                'expectedTokens'   => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_CLOSE_CURLY_BRACKET,
+                ],
+                'testCloserMarker' => '/* testCaseConstantCloserMarker */',
+            ],
+            'switch case, body in curlies declares enum'                        => [
+                'testMarker'       => '/* testCaseInSwitchWhenCreatingEnumInSwitch1 */',
+                'expectedTokens'   => [
+                    'scope_opener' => T_OPEN_CURLY_BRACKET,
+                    'scope_closer' => T_CLOSE_CURLY_BRACKET,
+                ],
+                'testCloserMarker' => '/* testCaseInSwitchWhenCreatingEnumInSwitch1CloserMarker */',
+            ],
+            'switch case, body after semicolon declares enum'                   => [
+                'testMarker'       => '/* testCaseInSwitchWhenCreatingEnumInSwitch2 */',
+                'expectedTokens'   => [
+                    'scope_opener' => T_SEMICOLON,
+                    'scope_closer' => T_BREAK,
+                ],
+                'testCloserMarker' => '/* testCaseInSwitchWhenCreatingEnumInSwitch2CloserMarker */',
+            ],
+            'switch case, shared closer with switch'                            => [
+                'testMarker'     => '/* testSwitchCaseScopeCloserSharedWithSwitch */',
+                'expectedTokens' => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_ENDSWITCH,
+                ],
+            ],
+            'switch case, nested inline if/elseif/else with and without braces' => [
+                'testMarker'     => '/* testSwitchCaseNestedIfWithAndWithoutBraces */',
+                'expectedTokens' => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_BREAK,
+                ],
+            ],
+            'switch case, nested inline if'                                     => [
+                'testMarker'     => '/* testSwitchCaseNestedInlineIfWithMoreThanThreeLines */',
+                'expectedTokens' => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_BREAK,
+                ],
+            ],
         ];
 
     }//end dataNotEnumCases()
