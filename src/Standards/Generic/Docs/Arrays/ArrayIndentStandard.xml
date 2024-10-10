@@ -1,11 +1,11 @@
 <documentation title="Array Indent">
     <standard>
     <![CDATA[
-    The opening square bracket/parenthesis of a multi-line array must be indented at least to the same level of the start of the statement.
+    The opening brace of a multi-line array must be indented at least to the same level as the start of the statement.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: Opening square bracket/parenthesis token of a multi-line array indented at least to the same level as the start of the statement.">
+        <code title="Valid: Opening brace of a multi-line array indented at least to the same level as the start of the statement.">
         <![CDATA[
 if ($condition) {
     $a =
@@ -14,9 +14,14 @@ if ($condition) {
         2,
     ];
 }
+
+$b = <em>[</em>
+    1,
+    2,
+];
         ]]>
         </code>
-        <code title="Invalid: Opening square bracket/parenthesis of a multi-line array not indented at least to the same level as the start of the statement.">
+        <code title="Invalid: Opening brace of a multi-line array not indented at least to the same level as the start of the statement.">
         <![CDATA[
 if ($condition) {
     $a =
@@ -30,36 +35,36 @@ if ($condition) {
     </code_comparison>
     <standard>
     <![CDATA[
-    The elements of an array must be indented four spaces beyond the indentation level of the opening square bracket/parenthesis.
+    The first line of each array element must be indented exactly four spaces more than the start of the statement.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: Elements of an array indented four spaces beyond the indentation level of the opening square bracket/parenthesis.">
+        <code title="Valid: First line of each array element indented exactly four spaces more than the start of the statement.">
         <![CDATA[
 $a = array(
-<em>    1</em>,
-<em>    2</em>,
-<em>    3</em>,
+<em>    </em>1,
+<em>    </em>2,
+<em>    </em>3,
 );
         ]]>
         </code>
-        <code title="Invalid: Elements of an array not indented four spaces beyond the indentation level of the opening square bracket/parenthesis.">
+        <code title="Invalid: First line of each array element not indented exactly four spaces more than the start of the statement.">
         <![CDATA[
 $a = array(
-<em>  1</em>,
+<em>  </em>1,
     2,
-<em>        3</em>,
+<em>        </em>3,
 );
         ]]>
         </code>
     </code_comparison>
     <standard>
     <![CDATA[
-    There must be a newline before the array closing square bracket/parenthesis.
+    There must be a newline before the array closing brace.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: Newline before the array closing square bracket/parenthesis.">
+        <code title="Valid: Newline before the array closing brace.">
         <![CDATA[
 $a = [
     1,
@@ -67,7 +72,7 @@ $a = [
 ]</em>;
         ]]>
         </code>
-        <code title="Invalid: No newline before the array closing square bracket/parenthesis.">
+        <code title="Invalid: No newline before the array closing brace.">
         <![CDATA[
 $a = [
     1,
@@ -77,11 +82,11 @@ $a = [
     </code_comparison>
     <standard>
     <![CDATA[
-    The closing square bracket/parenthesis must be indented four spaces less than the array elements.
+    The closing brace must be on the same level of indentation as the start of the statement containing the array opener.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: Closing square bracket/parenthesis indented four spaces less than the array elements.">
+        <code title="Valid: Closing brace on the same level of indentation as the start of the statement containing the array opener.">
         <![CDATA[
 $a = array(
     1,
@@ -89,7 +94,7 @@ $a = array(
 <em>)</em>;
         ]]>
         </code>
-        <code title="Invalid: Closing square bracket/parenthesis not indented four spaces less than the array elements.">
+        <code title="Invalid: Closing brace not on the same level of indentation as the start of the statement containing the array opener.">
         <![CDATA[
 $a = array(
     1,
