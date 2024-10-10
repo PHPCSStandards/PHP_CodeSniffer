@@ -5,7 +5,7 @@
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: Opening square bracket/parenthesis token of a multi-line array indented at least to the same level of the start of the statement.">
+        <code title="Valid: Opening square bracket/parenthesis token of a multi-line array indented at least to the same level as the start of the statement.">
         <![CDATA[
 if ($condition) {
     $a =
@@ -16,7 +16,7 @@ if ($condition) {
 }
         ]]>
         </code>
-        <code title="Invalid: Opening square bracket/parenthesis of a multi-line array not indented at least to the same level of the start of the statement.">
+        <code title="Invalid: Opening square bracket/parenthesis of a multi-line array not indented at least to the same level as the start of the statement.">
         <![CDATA[
 if ($condition) {
     $a =
