@@ -52,3 +52,7 @@ $match = match($foo // comment
 ) {
     1 => 1, // comment
 };
+
+$a = 1; // @codeCoverageIgnore
+$b = 2; //@phpstan-ignore variable.undefined
+$c = 3; //  @thisIsNotAnAnnotation - more than one space before the @ symbol.
