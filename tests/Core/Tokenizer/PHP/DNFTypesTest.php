@@ -193,6 +193,33 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             'parens without owner in arrow function return expression'        => [
                 'testMarker' => '/* testParensNoOwnerInArrowReturnExpression */',
             ],
+            'parens with owner: switch condition'                             => [
+                'testMarker' => '/* testSwitchControlStructureCondition */',
+            ],
+            'parens without owner in switch-case condition'                   => [
+                'testMarker' => '/* testFunctionCallInSwitchCaseCondition */',
+            ],
+            'parens without owner in switch-case body'                        => [
+                'testMarker' => '/* testFunctionCallInSwitchCaseBody */',
+            ],
+            'parens without owner in switch-default body'                     => [
+                'testMarker' => '/* testFunctionCallInSwitchDefaultBody */',
+            ],
+            'parens with owner: if condition, alternative syntax'             => [
+                'testMarker' => '/* testIfAlternativeSyntaxCondition */',
+            ],
+            'parens without owner in if body, alternative syntax'             => [
+                'testMarker' => '/* testFunctionCallInIfBody */',
+            ],
+            'parens with owner: elseif condition, alternative syntax'         => [
+                'testMarker' => '/* testElseIfAlternativeSyntaxCondition */',
+            ],
+            'parens without owner in elseif body, alternative syntax'         => [
+                'testMarker' => '/* testFunctionCallInElseIfBody */',
+            ],
+            'parens without owner in goto body'                               => [
+                'testMarker' => '/* testFunctionCallInGotoBody */',
+            ],
         ];
 
     }//end dataNormalParentheses()
@@ -423,6 +450,10 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             'closure return type'                                         => [
                 'testMarker'  => '/* testDNFTypeClosureReturn */',
             ],
+            'closure with use return type'                                => [
+                'testMarker'  => '/* testDNFTypeClosureWithUseReturn */',
+            ],
+
             'arrow function param type'                                   => [
                 'testMarker'  => '/* testDNFTypeArrowParam */',
             ],
