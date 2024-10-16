@@ -3226,19 +3226,45 @@ class PHP extends Tokenizer
                     }
 
                     if ($suspectedType === 'return' && $this->tokens[$x]['code'] === T_COLON) {
-                        // Make sure this is not the colon from a parameter name.
+                        // Make sure this is the colon for a return type.
                         for ($y = ($x - 1); $y > 0; $y--) {
                             if (isset(Tokens::$emptyTokens[$this->tokens[$y]['code']]) === false) {
                                 break;
                             }
                         }
 
-                        if ($this->tokens[$y]['code'] !== T_PARAM_NAME) {
-                            $confirmed = true;
+                        if ($this->tokens[$y]['code'] !== T_CLOSE_PARENTHESIS) {
+                            // Definitely not a union, intersection or DNF return type, move on.
+                            continue 2;
+                        }
+
+                        if (isset($this->tokens[$y]['parenthesis_owner']) === true) {
+                            if ($this->tokens[$this->tokens[$y]['parenthesis_owner']]['code'] === T_FUNCTION
+                                || $this->tokens[$this->tokens[$y]['parenthesis_owner']]['code'] === T_CLOSURE
+                                || $this->tokens[$this->tokens[$y]['parenthesis_owner']]['code'] === T_FN
+                            ) {
+                                $confirmed = true;
+                            }
+
+                            break;
+                        }
+
+                        // Arrow functions may not have the parenthesis_owner set correctly yet.
+                        // Closure use tokens won't be parentheses owners until PHPCS 4.0.
+                        if (isset($this->tokens[$y]['parenthesis_opener']) === true) {
+                            for ($z = ($this->tokens[$y]['parenthesis_opener'] - 1); $z > 0; $z--) {
+                                if (isset(Tokens::$emptyTokens[$this->tokens[$z]['code']]) === false) {
+                                    break;
+                                }
+                            }
+
+                            if ($this->tokens[$z]['code'] === T_FN || $this->tokens[$z]['code'] === T_USE) {
+                                $confirmed = true;
+                            }
                         }
 
                         break;
-                    }
+                    }//end if
 
                     if ($suspectedType === 'constant' && $this->tokens[$x]['code'] === T_CONST) {
                         $confirmed = true;
