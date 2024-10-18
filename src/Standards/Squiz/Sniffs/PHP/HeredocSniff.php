@@ -42,8 +42,19 @@ class HeredocSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $error = 'Use of heredoc and nowdoc syntax ("<<<") is not allowed; use standard strings or inline HTML instead';
-        $phpcsFile->addError($error, $stackPtr, 'NotAllowed');
+        $tokens = $phpcsFile->getTokens();
+
+        $codePrefix = 'Heredoc';
+        $data       = ['heredoc'];
+        if ($tokens[$stackPtr]['code'] === T_START_NOWDOC) {
+            $codePrefix = 'Nowdoc';
+            $data       = ['nowdoc'];
+        }
+
+        $data[] = trim($tokens[$stackPtr]['content']);
+
+        $error = 'Use of %s syntax (%s) is not allowed; use standard strings or inline HTML instead';
+        $phpcsFile->addError($error, $stackPtr, $codePrefix.'NotAllowed', $data);
 
     }//end process()
 
