@@ -12,7 +12,7 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\WhiteSpace;
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
 /**
- * Unit test class for the LanguageConstructSpacing sniff.
+ * Unit test class for the HereNowdocIdentifierSpacing sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\HereNowdocIdentifierSpacingSniff
  */
