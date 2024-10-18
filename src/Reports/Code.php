@@ -40,7 +40,7 @@ class Code implements Report
             return false;
         }
 
-        // How many lines to show about and below the error line.
+        // How many lines to show above and below the error line.
         $surroundingLines = 2;
 
         $file   = $report['filename'];
