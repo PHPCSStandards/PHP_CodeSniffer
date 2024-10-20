@@ -65,6 +65,7 @@ class UnnecessaryHeredocSniff implements Sniff
                 || $bodyToken[0] === T_VARIABLE
             ) {
                 // Contains interpolation or expression.
+                $phpcsFile->recordMetric($stackPtr, 'Heredoc contains interpolation or expression', 'yes');
                 return;
             }
 
@@ -73,9 +74,12 @@ class UnnecessaryHeredocSniff implements Sniff
                 && $tokenizedBody[($ptr + 1)] === '$'
             ) {
                 // Contains interpolation or expression.
+                $phpcsFile->recordMetric($stackPtr, 'Heredoc contains interpolation or expression', 'yes');
                 return;
             }
-        }
+        }//end foreach
+
+        $phpcsFile->recordMetric($stackPtr, 'Heredoc contains interpolation or expression', 'no');
 
         $warning = 'Detected heredoc without interpolation or expressions. Use nowdoc syntax instead';
 
