@@ -1,6 +1,6 @@
 // Test warning for when short_open_tag is off.
 
-Some content <? echo $var; ?> Some more content
+Some content <? echo $var; ?> Some more content after PHP code
 
 // Test multi-line.
 Some content <?
