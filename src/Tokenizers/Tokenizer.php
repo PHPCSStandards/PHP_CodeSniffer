@@ -620,7 +620,7 @@ abstract class Tokenizer
                 if ($content !== '') {
                     $newContent .= $content;
                     if ($checkEncoding === true) {
-                        // Not using the default encoding, so take a bit more care.
+                        // Not using ASCII encoding, so take a bit more care.
                         $oldLevel = error_reporting();
                         error_reporting(0);
                         $contentLength = iconv_strlen($content, $this->config->encoding);
