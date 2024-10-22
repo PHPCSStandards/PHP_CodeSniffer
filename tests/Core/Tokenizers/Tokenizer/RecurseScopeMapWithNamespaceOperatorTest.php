@@ -11,7 +11,7 @@ namespace PHP_CodeSniffer\Tests\Core\Tokenizers\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\Tokenizers\AbstractTokenizerTestCase;
 
-final class ScopeSettingWithNamespaceOperatorTest extends AbstractTokenizerTestCase
+final class RecurseScopeMapWithNamespaceOperatorTest extends AbstractTokenizerTestCase
 {
 
 
