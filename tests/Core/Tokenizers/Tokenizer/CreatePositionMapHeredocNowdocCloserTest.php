@@ -15,8 +15,10 @@ use PHP_CodeSniffer\Tests\Core\Tokenizers\AbstractTokenizerTestCase;
  * Heredoc/nowdoc closer token test.
  *
  * @requires PHP 7.3
+ *
+ * @covers PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
  */
-final class HeredocNowdocCloserTest extends AbstractTokenizerTestCase
+final class CreatePositionMapHeredocNowdocCloserTest extends AbstractTokenizerTestCase
 {
 
 
@@ -27,7 +29,6 @@ final class HeredocNowdocCloserTest extends AbstractTokenizerTestCase
      * @param array<string, int|string|null> $expected   Expectations for the token array.
      *
      * @dataProvider dataHeredocNowdocCloserTabReplacement
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
