@@ -13,8 +13,10 @@ use PHP_CodeSniffer\Tests\Core\Tokenizers\AbstractTokenizerTestCase;
 
 /**
  * Heredoc/nowdoc opener token test.
+ *
+ * @covers PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
  */
-final class HeredocNowdocOpenerTest extends AbstractTokenizerTestCase
+final class CreatePositionMapHeredocNowdocOpenerTest extends AbstractTokenizerTestCase
 {
 
 
@@ -25,7 +27,6 @@ final class HeredocNowdocOpenerTest extends AbstractTokenizerTestCase
      * @param array<string, int|string|null> $expected   Expectations for the token array.
      *
      * @dataProvider dataHeredocNowdocOpenerTabReplacement
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::createPositionMap
      *
      * @return void
      */
