@@ -74,3 +74,5 @@ $map = array_map(strtolower(...), $map);
 
 // Ignore PHP 8.1 first class callable declarations.
 $map = array_map(strtolower( ... ), $map);
+
+bar(... /*comment*/$array);
