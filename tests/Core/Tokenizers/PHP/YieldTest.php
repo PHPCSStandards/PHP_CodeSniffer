@@ -100,7 +100,11 @@ final class YieldTest extends AbstractTokenizerTestCase
         $this->assertSame(T_YIELD_FROM, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_YIELD_FROM (code)');
         $this->assertSame('T_YIELD_FROM', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_YIELD_FROM (type)');
 
-        $this->assertSame($expectedContent, $tokenArray['content'], 'Token content does not match expectation');
+        if (isset($tokenArray['orig_content']) === true) {
+            $this->assertSame($expectedContent, $tokenArray['orig_content'], 'Token (orig) content does not match expectation');
+        } else {
+            $this->assertSame($expectedContent, $tokenArray['content'], 'Token content does not match expectation');
+        }
 
     }//end testYieldFromKeywordSingleToken()
 
