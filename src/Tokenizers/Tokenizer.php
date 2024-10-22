@@ -200,6 +200,7 @@ abstract class Tokenizer
             T_END_HEREDOC              => true,
             T_END_NOWDOC               => true,
             T_INLINE_HTML              => true,
+            T_YIELD_FROM               => true,
         ];
 
         $this->numTokens = count($this->tokens);
