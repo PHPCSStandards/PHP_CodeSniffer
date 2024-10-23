@@ -1493,13 +1493,32 @@ class PHP extends Tokenizer
             }//end if
 
             /*
+                Before PHP 5.5, the yield keyword was tokenized as
+                T_STRING. So look for and change this token in
+                earlier versions.
+            */
+
+            if (PHP_VERSION_ID < 50500
+                && $tokenIsArray === true
+                && $token[0] === T_STRING
+                && strtolower($token[1]) === 'yield'
+                && isset($this->tstringContexts[$finalTokens[$lastNotEmptyToken]['code']]) === false
+            ) {
+                // Could still be "yield from" and potentially multi-line, so adjust the token stack.
+                $token[0] = T_YIELD;
+
+                if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                    echo "\t\t* token $stackPtr changed from T_STRING to T_YIELD".PHP_EOL;
+                }
+            }
+
+            /*
                 Before PHP 7.0, the "yield from" was tokenized as
                 T_YIELD, T_WHITESPACE and T_STRING. So look for
                 and change this token in earlier versions.
             */
 
             if (PHP_VERSION_ID < 70000
-                && PHP_VERSION_ID >= 50500
                 && $tokenIsArray === true
                 && $token[0] === T_YIELD
                 && isset($tokens[($stackPtr + 1)]) === true
@@ -1523,51 +1542,6 @@ class PHP extends Tokenizer
                 $tokens[($stackPtr + 1)] = null;
                 $tokens[($stackPtr + 2)] = null;
             }
-
-            /*
-                Before PHP 5.5, the yield keyword was tokenized as
-                T_STRING. So look for and change this token in
-                earlier versions.
-                Checks also if it is just "yield" or "yield from".
-            */
-
-            if (PHP_VERSION_ID < 50500
-                && $tokenIsArray === true
-                && $token[0] === T_STRING
-                && strtolower($token[1]) === 'yield'
-                && isset($this->tstringContexts[$finalTokens[$lastNotEmptyToken]['code']]) === false
-            ) {
-                if (isset($tokens[($stackPtr + 1)]) === true
-                    && isset($tokens[($stackPtr + 2)]) === true
-                    && $tokens[($stackPtr + 1)][0] === T_WHITESPACE
-                    && $tokens[($stackPtr + 2)][0] === T_STRING
-                    && strtolower($tokens[($stackPtr + 2)][1]) === 'from'
-                ) {
-                    // Could be multi-line, so just just the token stack.
-                    $token[0]  = T_YIELD_FROM;
-                    $token[1] .= $tokens[($stackPtr + 1)][1].$tokens[($stackPtr + 2)][1];
-
-                    if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                        for ($i = ($stackPtr + 1); $i <= ($stackPtr + 2); $i++) {
-                            $type    = Tokens::tokenName($tokens[$i][0]);
-                            $content = Common::prepareForOutput($tokens[$i][1]);
-                            echo "\t\t* token $i merged into T_YIELD_FROM; was: $type => $content".PHP_EOL;
-                        }
-                    }
-
-                    $tokens[($stackPtr + 1)] = null;
-                    $tokens[($stackPtr + 2)] = null;
-                } else {
-                    $newToken            = [];
-                    $newToken['code']    = T_YIELD;
-                    $newToken['type']    = 'T_YIELD';
-                    $newToken['content'] = $token[1];
-                    $finalTokens[$newStackPtr] = $newToken;
-
-                    $newStackPtr++;
-                    continue;
-                }//end if
-            }//end if
 
             /*
                 Before PHP 5.6, the ... operator was tokenized as three
