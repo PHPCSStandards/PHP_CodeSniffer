@@ -1614,6 +1614,12 @@ match (true) {
     ]
 };
 
+// Issue squizlabs/PHP_CodeSniffer#3808
+function test() {
+    yield
+        from [ 3, 4 ];
+}
+
 /* ADD NEW TESTS ABOVE THIS LINE AND MAKE SURE THAT THE 1 (space-based) AND 2 (tab-based) FILES ARE IN SYNC! */
 ?>
 
