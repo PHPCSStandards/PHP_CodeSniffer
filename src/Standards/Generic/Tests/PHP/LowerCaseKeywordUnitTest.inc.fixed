@@ -53,5 +53,12 @@ if (isset($a) && !empty($a)) { unset($a); }
 eval('foo');
 eval('foo');
 
+$c = function() {
+    yield /*comment*/ from fun();
+    yield
+    /*comment*/
+    from fun();
+}
+
 __HALT_COMPILER(); // An exception due to phar support.
 function
