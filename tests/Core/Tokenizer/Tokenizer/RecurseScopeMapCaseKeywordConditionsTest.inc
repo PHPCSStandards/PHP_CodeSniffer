@@ -62,6 +62,7 @@ switch (true) {
     case CONSTANT = 1:
     /* testIsNotEnumCaseIsCaseInsensitive */
     cAsE CONSTANT:
+/* testCaseConstantCloserMarker */
 }
 
 switch ($x) {
@@ -69,11 +70,13 @@ switch ($x) {
     case 'a': {
         enum Foo {}
         break;
+    /* testCaseInSwitchWhenCreatingEnumInSwitch1CloserMarker */
     }
 
     /* testCaseInSwitchWhenCreatingEnumInSwitch2 */
     case 'b';
         enum Bar {}
+        /* testCaseInSwitchWhenCreatingEnumInSwitch2CloserMarker */
         break;
 }
 
@@ -92,4 +95,38 @@ enum Foo: string {
     case DEFAULT = 'default';
     /* testKeywordAsEnumCaseNameShouldBeString7 */
     case ARRAY = 'array';
+}
+
+// Test for https://github.com/squizlabs/PHP_CodeSniffer/issues/497
+switch ($value):
+    /* testSwitchCaseScopeCloserSharedWithSwitch */
+    case 1:
+        echo 'one';
+endswitch;
+
+// Test for https://github.com/squizlabs/PHP_CodeSniffer/issues/879
+switch ($type) {
+    /* testSwitchCaseNestedIfWithAndWithoutBraces */
+    case 1:
+        if ($foo) {
+            return true;
+        } elseif ($baz)
+            return true;
+        else {
+            echo 'else';
+        }
+        break;
+}
+
+// Test for https://github.com/squizlabs/PHP_CodeSniffer/issues/1590
+switch ($num) {
+    /* testSwitchCaseNestedInlineIfWithMoreThanThreeLines */
+    case 0:
+        if (1 > $num)
+            return bar(
+                baz(
+                    "foobarbaz"
+                )
+            );
+        break;
 }
