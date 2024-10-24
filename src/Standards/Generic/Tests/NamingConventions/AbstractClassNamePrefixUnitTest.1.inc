@@ -1,59 +1,45 @@
 <?php
 
-abstract class IncorrectName // error
-{
+abstract class IncorrectName {} // Error.
 
-}
+abstract class AbstractCorrectName {}
 
-abstract class AbstractCorrectName
-{
+abstract class IncorrectNameAbstract {} // Error.
 
-}
+abstract
+    /*comment*/
+    class
+    InvalidNameabstract
+    extends
+    BarClass {} // Error.
 
-abstract class IncorrectNameAbstract // error
-{
+abstract class /*comment*/ IncorrectAbstractName {} // Error.
 
-}
-
-abstract class InvalidNameabstract // error
-{
-
-}
-
-abstract class IncorrectAbstractName // error
-{
-
-}
-
+// Anonymous classes can't be declared as abstract (and don't have a name anyhow).
 $anon = new class {};
 
-class AbstractClassName
-{
+// Make sure that if the class is not abstract, the sniff does not check the name.
+class AbstractClassName {}
 
-}
-
+// Class name is always checked, doesn't matter if the class is declared conditionally.
 if (!class_exists('AbstractClassCorrectName')) {
-    abstract class AbstractClassCorrectName
-    {
-
-    }
+    abstract class AbstractClassCorrectName {}
 }
 if (!class_exists('ClassAbstractIncorrectName')) {
-    abstract class ClassAbstractIncorrectName // error
-    {
-
-    }
+    abstract class ClassAbstractIncorrectName implements FooInterface {} // Error.
 }
 
-$abstractVar = '';
+$var = 'abstract class TextStringsAreDisregarded';
 
-$var = 'abstract class IncorrectNameButOk';
+class NotAnAbstractClassSoNoPrefixRequired {}
 
-$abstracVar = '';
+abstract class abstractOkCaseOfPrefixIsNotEnforced {}
 
-class NameAbstractBar {}
+final class FinalClassShouldNotTriggerWarning {}
 
-abstract class abstractOkName
-{
+readonly class ReadonlyClassShouldNotTriggerWarning {}
 
-}
+abstract readonly class AbstractReadonlyClassWithPrefixShouldNotTriggerWarning {}
+
+abstract readonly class ReadonlyAbstractClassShouldTriggerWarningWhenPrefixIsMissingA {} // Error.
+readonly abstract class ReadonlyAbstractClassShouldTriggerWarningWhenPrefixIsMissingB {} // Error.
