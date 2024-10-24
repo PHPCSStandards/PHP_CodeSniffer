@@ -113,7 +113,6 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
 
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
         if ($methodName === null) {
-            // Ignore closures.
             return;
         }
 
@@ -189,7 +188,6 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
     {
         $functionName = $phpcsFile->getDeclarationName($stackPtr);
         if ($functionName === null) {
-            // Ignore closures.
             return;
         }
 
