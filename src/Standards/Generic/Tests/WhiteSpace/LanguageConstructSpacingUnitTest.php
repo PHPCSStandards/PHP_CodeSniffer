@@ -71,6 +71,9 @@ final class LanguageConstructSpacingUnitTest extends AbstractSniffUnitTest
                 85 => 1,
                 86 => 1,
                 90 => 1,
+                94 => 1,
+                95 => 1,
+                98 => 1,
             ];
 
         default:
