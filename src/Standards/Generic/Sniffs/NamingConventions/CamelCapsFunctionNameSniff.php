@@ -149,7 +149,7 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
             return;
         }
 
-        // Ignore first underscore in methods prefixed with "_".
+        // Ignore leading underscores in the method name.
         $methodName = ltrim($methodName, '_');
 
         $methodProps = $phpcsFile->getMethodProperties($stackPtr);
