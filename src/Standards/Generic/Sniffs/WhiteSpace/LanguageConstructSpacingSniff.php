@@ -93,6 +93,10 @@ class LanguageConstructSpacingSniff implements Sniff
                         break;
                     }
 
+                    if (isset(Tokens::$commentTokens[$tokens[$i]['code']]) === true) {
+                        $hasComment = true;
+                    }
+
                     $found .= $tokens[$i]['content'];
 
                     if ($tokens[$i]['code'] === T_YIELD_FROM
@@ -107,19 +111,24 @@ class LanguageConstructSpacingSniff implements Sniff
 
             $error = 'Language constructs must be followed by a single space; expected 1 space between YIELD FROM found "%s"';
             $data  = [Common::prepareForOutput($found)];
-            $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'IncorrectYieldFrom', $data);
-            if ($fix === true) {
-                preg_match('/yield/i', $found, $yield);
-                preg_match('/from/i', $found, $from);
-                $phpcsFile->fixer->beginChangeset();
-                $phpcsFile->fixer->replaceToken($stackPtr, $yield[0].' '.$from[0]);
 
-                for ($i = ($stackPtr + 1); $i <= $yieldFromEnd; $i++) {
-                    $phpcsFile->fixer->replaceToken($i, '');
+            if ($hasComment === true) {
+                $phpcsFile->addError($error, $stackPtr, 'IncorrectYieldFromWithComment', $data);
+            } else {
+                $fix = $phpcsFile->addFixableError($error, $stackPtr, 'IncorrectYieldFrom', $data);
+                if ($fix === true) {
+                    preg_match('/yield/i', $found, $yield);
+                    preg_match('/from/i', $found, $from);
+                    $phpcsFile->fixer->beginChangeset();
+                    $phpcsFile->fixer->replaceToken($stackPtr, $yield[0].' '.$from[0]);
+
+                    for ($i = ($stackPtr + 1); $i <= $yieldFromEnd; $i++) {
+                        $phpcsFile->fixer->replaceToken($i, '');
+                    }
+
+                    $phpcsFile->fixer->endChangeset();
                 }
-
-                $phpcsFile->fixer->endChangeset();
-            }
+            }//end if
 
             return ($yieldFromEnd + 1);
         }//end if
