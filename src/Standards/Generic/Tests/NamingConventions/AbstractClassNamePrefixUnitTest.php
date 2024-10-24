@@ -35,10 +35,12 @@ final class AbstractClassNamePrefixUnitTest extends AbstractSniffUnitTest
         case 'AbstractClassNamePrefixUnitTest.1.inc':
             return [
                 3  => 1,
-                13 => 1,
-                18 => 1,
-                23 => 1,
-                42 => 1,
+                7  => 1,
+                11 => 1,
+                16 => 1,
+                29 => 1,
+                44 => 1,
+                45 => 1,
             ];
         default:
             return [];
