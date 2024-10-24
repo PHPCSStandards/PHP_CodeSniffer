@@ -53,6 +53,35 @@ callMe(label: CONST_A | CONST_B);
 /* testParensNoOwnerFunctionCallWithDNFLookALikeNamedParamIntersect */
 callMe(label: CONST_A & CONST_B);
 
+/* testSwitchControlStructureCondition */
+switch (CONST_A | CONST_B) {
+    /* testFunctionCallInSwitchCaseCondition */
+    case get_bool():
+        /* testFunctionCallInSwitchCaseBody */
+        \Name\functionInSwitch();
+        break;
+
+    default:
+        /* testFunctionCallInSwitchDefaultBody */
+        functionInSwitch();
+        break;
+}
+
+/* testIfAlternativeSyntaxCondition */
+if (true):
+    /* testFunctionCallInIfBody */
+     \B\call();
+/* testElseIfAlternativeSyntaxCondition */
+elseif (10):
+    /* testFunctionCallInElseIfBody */
+     C\call();
+endif;
+
+gotolabel:
+    /* testFunctionCallInGotoBody */
+    \doSomething();
+
+
 /*
  * DNF parentheses.
  */
@@ -164,6 +193,8 @@ $closureWithParamType = function ( /* testDNFTypeClosureParamIllegalNullable */ 
 
 /* testParensOwnerClosureAmpersandInDefaultValue */
 $closureWithReturnType = function ($string = NONSENSE & FAKE) /* testDNFTypeClosureReturn */ : (\Package\MyA&PackageB)|null {};
+
+$closureWithUseAndReturnType = function ($foo) use ($a) /* testDNFTypeClosureWithUseReturn */ : null|(Foo&\Bar)|false {};
 
 /* testParensOwnerArrowDNFUsedWithin */
 $arrowWithParamType = fn (
