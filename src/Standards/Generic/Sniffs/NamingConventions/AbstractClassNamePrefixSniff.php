@@ -45,7 +45,6 @@ class AbstractClassNamePrefixSniff implements Sniff
 
         $className = $phpcsFile->getDeclarationName($stackPtr);
         if ($className === null) {
-            // We are not interested in anonymous classes.
             return;
         }
 
