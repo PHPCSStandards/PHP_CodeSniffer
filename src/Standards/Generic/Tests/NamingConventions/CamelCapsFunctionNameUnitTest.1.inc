@@ -183,3 +183,22 @@ enum Suit: string implements Colorful, CardGame {
     public function parseMyDSN() {}
     public function get_some_value() {}
 }
+
+interface MyInterface {
+    public function getSomeValue();
+    public function get_some_value();
+}
+
+class MyClass {
+    // phpcs:set Generic.NamingConventions.CamelCapsFunctionName strict false
+    function strictFOrmatDIsabled() {}  // Ok.
+    // phpcs:set Generic.NamingConventions.CamelCapsFunctionName strict true
+
+    function strictFOrmatIsENabled() {}  // Not ok.
+}
+
+// phpcs:set Generic.NamingConventions.CamelCapsFunctionName strict false
+function strictFOrmatDIsabled() {}  // Ok.
+// phpcs:set Generic.NamingConventions.CamelCapsFunctionName strict true
+
+function strictFOrmatIsENabled() {}  // Not ok.

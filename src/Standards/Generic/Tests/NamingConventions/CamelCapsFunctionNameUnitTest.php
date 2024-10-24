@@ -76,6 +76,9 @@ final class CamelCapsFunctionNameUnitTest extends AbstractSniffUnitTest
                 180 => 2,
                 183 => 1,
                 184 => 1,
+                189 => 1,
+                197 => 1,
+                204 => 1,
             ];
         default:
             return [];
