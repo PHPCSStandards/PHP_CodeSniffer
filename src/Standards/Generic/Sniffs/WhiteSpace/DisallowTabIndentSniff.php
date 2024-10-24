@@ -78,6 +78,7 @@ class DisallowTabIndentSniff implements Sniff
             T_COMMENT                => true,
             T_END_HEREDOC            => true,
             T_END_NOWDOC             => true,
+            T_YIELD_FROM             => true,
         ];
 
         for ($i = 0; $i < $phpcsFile->numTokens; $i++) {
