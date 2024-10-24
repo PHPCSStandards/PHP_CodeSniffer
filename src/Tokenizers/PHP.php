@@ -606,6 +606,27 @@ class PHP extends Tokenizer
             }
 
             /*
+                Before PHP 5.5, the yield keyword was tokenized as
+                T_STRING. So look for and change this token in
+                earlier versions.
+            */
+
+            if (PHP_VERSION_ID < 50500
+                && $tokenIsArray === true
+                && $token[0] === T_STRING
+                && strtolower($token[1]) === 'yield'
+                && isset($this->tstringContexts[$finalTokens[$lastNotEmptyToken]['code']]) === false
+            ) {
+                // Could still be a context sensitive keyword or "yield from" and potentially multi-line,
+                // so adjust the token stack in place.
+                $token[0] = T_YIELD;
+
+                if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                    echo "\t\t* token $stackPtr changed from T_STRING to T_YIELD".PHP_EOL;
+                }
+            }
+
+            /*
                 Tokenize context sensitive keyword as string when it should be string.
             */
 
@@ -1491,26 +1512,6 @@ class PHP extends Tokenizer
 
                 continue;
             }//end if
-
-            /*
-                Before PHP 5.5, the yield keyword was tokenized as
-                T_STRING. So look for and change this token in
-                earlier versions.
-            */
-
-            if (PHP_VERSION_ID < 50500
-                && $tokenIsArray === true
-                && $token[0] === T_STRING
-                && strtolower($token[1]) === 'yield'
-                && isset($this->tstringContexts[$finalTokens[$lastNotEmptyToken]['code']]) === false
-            ) {
-                // Could still be "yield from" and potentially multi-line, so adjust the token stack.
-                $token[0] = T_YIELD;
-
-                if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    echo "\t\t* token $stackPtr changed from T_STRING to T_YIELD".PHP_EOL;
-                }
-            }
 
             /*
                 Before PHP 7.0, the "yield from" was tokenized as

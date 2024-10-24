@@ -42,6 +42,9 @@ class Yield {
         /* testFromUsedForClassConstantAccess1 */
         echo MyClass::FROM;
     }
+
+    /* testYieldUsedAsMethodNameReturnByRef */
+    public function &yield() {}
 }
 
 function myGen() {

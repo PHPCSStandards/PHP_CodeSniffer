@@ -232,6 +232,7 @@ final class YieldTest extends AbstractTokenizerTestCase
             'yield used as property access 2'     => ['/* testYieldUsedAsPropertyName2 */'],
             'yield used as class constant access' => ['/* testYieldUsedForClassConstantAccess1 */'],
             'from used as class constant access'  => ['/* testFromUsedForClassConstantAccess1 */'],
+            'yield used as method name with ref'  => ['/* testYieldUsedAsMethodNameReturnByRef */'],
         ];
 
     }//end dataYieldNonKeyword()
