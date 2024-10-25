@@ -113,7 +113,6 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
 
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
         if ($methodName === null) {
-            // Ignore closures.
             return;
         }
 
@@ -150,7 +149,7 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
             return;
         }
 
-        // Ignore first underscore in methods prefixed with "_".
+        // Ignore leading underscores in the method name.
         $methodName = ltrim($methodName, '_');
 
         $methodProps = $phpcsFile->getMethodProperties($stackPtr);
@@ -168,7 +167,6 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
             }
 
             $phpcsFile->recordMetric($stackPtr, 'CamelCase method name', 'no');
-            return;
         } else {
             $phpcsFile->recordMetric($stackPtr, 'CamelCase method name', 'yes');
         }
@@ -189,7 +187,6 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
     {
         $functionName = $phpcsFile->getDeclarationName($stackPtr);
         if ($functionName === null) {
-            // Ignore closures.
             return;
         }
 
