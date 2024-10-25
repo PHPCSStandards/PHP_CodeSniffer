@@ -98,6 +98,7 @@ final class DisallowShortOpenTagUnitTest extends AbstractSniffUnitTest
                 3  => 1,
                 6  => 1,
                 11 => 1,
+                16 => 1,
             ];
         default:
             return [];
