@@ -24,13 +24,14 @@ final class YieldTest extends AbstractTokenizerTestCase
     /**
      * Test that the yield keyword is tokenized as such.
      *
-     * @param string $testMarker The comment which prefaces the target token in the test file.
+     * @param string $testMarker      The comment which prefaces the target token in the test file.
+     * @param string $expectedContent Expected token content.
      *
      * @dataProvider dataYieldKeyword
      *
      * @return void
      */
-    public function testYieldKeyword($testMarker)
+    public function testYieldKeyword($testMarker, $expectedContent)
     {
         $tokens     = $this->phpcsFile->getTokens();
         $target     = $this->getTargetToken($testMarker, [T_YIELD, T_YIELD_FROM, T_STRING]);
@@ -47,6 +48,8 @@ final class YieldTest extends AbstractTokenizerTestCase
             $this->assertSame('T_YIELD', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_YIELD (type)');
         }
 
+        $this->assertSame($expectedContent, $tokenArray['content'], 'Token content does not match expectation');
+
     }//end testYieldKeyword()
 
 
@@ -60,9 +63,18 @@ final class YieldTest extends AbstractTokenizerTestCase
     public static function dataYieldKeyword()
     {
         return [
-            'yield'                             => ['/* testYield */'],
-            'yield followed by comment'         => ['/* testYieldFollowedByComment */'],
-            'yield at end of file, live coding' => ['/* testYieldLiveCoding */'],
+            'yield'                             => [
+                'testMarker'      => '/* testYield */',
+                'expectedContent' => 'yield',
+            ],
+            'yield followed by comment'         => [
+                'testMarker'      => '/* testYieldFollowedByComment */',
+                'expectedContent' => 'YIELD',
+            ],
+            'yield at end of file, live coding' => [
+                'testMarker'      => '/* testYieldLiveCoding */',
+                'expectedContent' => 'yield',
+            ],
         ];
 
     }//end dataYieldKeyword()
@@ -72,22 +84,23 @@ final class YieldTest extends AbstractTokenizerTestCase
      * Test that the yield from keyword is tokenized as a single token when it in on a single line
      * and only has whitespace between the words.
      *
-     * @param string $testMarker The comment which prefaces the target token in the test file.
-     * @param string $content    Optional. The test token content to search for.
-     *                           Defaults to null.
+     * @param string $testMarker      The comment which prefaces the target token in the test file.
+     * @param string $expectedContent Expected token content.
      *
      * @dataProvider dataYieldFromKeywordSingleToken
      *
      * @return void
      */
-    public function testYieldFromKeywordSingleToken($testMarker, $content=null)
+    public function testYieldFromKeywordSingleToken($testMarker, $expectedContent)
     {
         $tokens     = $this->phpcsFile->getTokens();
-        $target     = $this->getTargetToken($testMarker, [T_YIELD, T_YIELD_FROM, T_STRING], $content);
+        $target     = $this->getTargetToken($testMarker, [T_YIELD, T_YIELD_FROM, T_STRING]);
         $tokenArray = $tokens[$target];
 
         $this->assertSame(T_YIELD_FROM, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_YIELD_FROM (code)');
         $this->assertSame('T_YIELD_FROM', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_YIELD_FROM (type)');
+
+        $this->assertSame($expectedContent, $tokenArray['content'], 'Token content does not match expectation');
 
     }//end testYieldFromKeywordSingleToken()
 
@@ -103,13 +116,16 @@ final class YieldTest extends AbstractTokenizerTestCase
     {
         return [
             'yield from'                          => [
-                'testMarker' => '/* testYieldFrom */',
+                'testMarker'      => '/* testYieldFrom */',
+                'expectedContent' => 'yield from',
             ],
             'yield from with extra space between' => [
-                'testMarker' => '/* testYieldFromWithExtraSpacesBetween */',
+                'testMarker'      => '/* testYieldFromWithExtraSpacesBetween */',
+                'expectedContent' => 'Yield           From',
             ],
             'yield from with tab between'         => [
-                'testMarker' => '/* testYieldFromWithTabBetween */',
+                'testMarker'      => '/* testYieldFromWithTabBetween */',
+                'expectedContent' => 'yield	from',
             ],
         ];
 
