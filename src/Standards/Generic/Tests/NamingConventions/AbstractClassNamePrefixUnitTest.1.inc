@@ -57,3 +57,9 @@ abstract class abstractOkName
 {
 
 }
+
+final class FinalClassShouldNotTriggerWarning {}
+
+class ChildClassShouldNotTriggerWarning extends AbstractClassName {}
+
+class ClassImplementingInterfaceShouldNotTriggerWarning implements InterfaceName {}

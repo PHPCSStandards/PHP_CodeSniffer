@@ -25,17 +25,24 @@ final class AbstractClassNamePrefixUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the test file.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile='')
     {
-        return [
-            3  => 1,
-            13 => 1,
-            18 => 1,
-            23 => 1,
-            42 => 1,
-        ];
+        switch ($testFile) {
+        case 'AbstractClassNamePrefixUnitTest.1.inc':
+            return [
+                3  => 1,
+                13 => 1,
+                18 => 1,
+                23 => 1,
+                42 => 1,
+            ];
+        default:
+            return [];
+        }
 
     }//end getErrorList()
 
