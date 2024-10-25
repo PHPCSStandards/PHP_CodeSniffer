@@ -46,6 +46,13 @@ class LineLengthSniff implements Sniff
      */
     public $ignoreComments = false;
 
+    /**
+     * Whether or not to ignore use statements.
+     *
+     * @var boolean
+     */
+    public $ignoreUseStatements = false;
+
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -139,6 +146,16 @@ class LineLengthSniff implements Sniff
             }
 
             $lineLength -= $tokens[$stackPtr]['length'];
+        }
+
+        if ($this->ignoreUseStatements === true
+            && $lineLength > $this->lineLimit
+        ) {
+            $prevUseStatement = $phpcsFile->findPrevious([T_USE], ($stackPtr - 1));
+            if ($tokens[$stackPtr]['line'] === $tokens[$prevUseStatement]['line']) {
+                // Ignore use statements as these can only be on one line
+                return;
+            }
         }
 
         // Record metrics for common line length groupings.
