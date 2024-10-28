@@ -41,7 +41,9 @@
     <rule ref="Squiz.Commenting.EmptyCatchComment"/>
     <rule ref="Squiz.Commenting.InlineComment"/>
     <rule ref="Squiz.Commenting.LongConditionClosingComment"/>
-    <rule ref="Squiz.Commenting.PostStatementComment"/>
+    <rule ref="Squiz.Commenting.PostStatementComment">
+        <exclude name="Squiz.Commenting.PostStatementComment.AnnotationFound"/>
+    </rule>
     <rule ref="Squiz.Commenting.VariableComment"/>
     <rule ref="Squiz.Formatting.OperatorBracket"/>
     <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing"/>
