@@ -53,6 +53,12 @@ $match = match($foo // comment
     1 => 1, // comment
 };
 
-$a = 1; // @codeCoverageIgnore
-$b = 2; //@phpstan-ignore variable.undefined
-$c = 3; //  @thisIsNotAnAnnotation - more than one space before the @ symbol.
+// Comments recognized as annotations by PHPCS.
+$a = 1; //@codeCoverageIgnore
+$b = 2; // @phpstan-ignore variable.undefined
+$c = 3; //  @phpstan-ignore variable.undefined
+$d = 4; //	@tabInsteadOfSpace
+
+// Comments that include `@`, but are not recognized as annotations by PHPCS.
+$a = 1; // @ = add tag.
+$b = 2; // Some comment. // @username

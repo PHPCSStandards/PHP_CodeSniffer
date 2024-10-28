@@ -110,7 +110,7 @@ class PostStatementCommentSniff implements Sniff
         }
 
         if ($phpcsFile->tokenizerType === 'PHP'
-            && preg_match('|//\s?@[^\s]+|', $tokens[$stackPtr]['content']) === 1
+            && preg_match('|^//[ \t]*@[^\s]+|', $tokens[$stackPtr]['content']) === 1
         ) {
             $error = 'Annotations may not appear after statements';
             $phpcsFile->addError($error, $stackPtr, 'AnnotationFound');
