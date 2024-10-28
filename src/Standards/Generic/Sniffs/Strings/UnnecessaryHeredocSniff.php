@@ -44,7 +44,7 @@ class UnnecessaryHeredocSniff implements Sniff
         if (isset($tokens[$stackPtr]['scope_closer']) === false) {
             // Just to be safe. Shouldn't be possible as in that case, the opener shouldn't be tokenized
             // to T_START_HEREDOC by PHP.
-            return;
+            return; // @codeCoverageIgnore
         }
 
         $closer = $tokens[$stackPtr]['scope_closer'];
