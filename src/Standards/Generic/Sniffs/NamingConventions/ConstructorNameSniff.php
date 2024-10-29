@@ -94,16 +94,18 @@ class ConstructorNameSniff extends AbstractScopeSniff
             return;
         }
 
-        $parentClassName = strtolower($phpcsFile->findExtendedClassName($currScope));
+        $parentClassName = $phpcsFile->findExtendedClassName($currScope);
         if ($parentClassName === false) {
             return;
         }
+
+        $parentClassNameLc = strtolower($parentClassName);
 
         $endFunctionIndex = $tokens[$stackPtr]['scope_closer'];
         $startIndex       = $stackPtr;
         while (($doubleColonIndex = $phpcsFile->findNext(T_DOUBLE_COLON, $startIndex, $endFunctionIndex)) !== false) {
             if ($tokens[($doubleColonIndex + 1)]['code'] === T_STRING
-                && strtolower($tokens[($doubleColonIndex + 1)]['content']) === $parentClassName
+                && strtolower($tokens[($doubleColonIndex + 1)]['content']) === $parentClassNameLc
             ) {
                 $error = 'PHP4 style calls to parent constructors are not allowed; use "parent::__construct()" instead';
                 $phpcsFile->addError($error, ($doubleColonIndex + 1), 'OldStyleCall');
