@@ -33,7 +33,10 @@ final class InterfaceNameSuffixUnitTest extends AbstractSniffUnitTest
     {
         switch ($testFile) {
         case 'InterfaceNameSuffixUnitTest.1.inc':
-            return [5 => 1];
+            return [
+                5 => 1,
+                9 => 1,
+            ];
         default:
             return [];
         }
