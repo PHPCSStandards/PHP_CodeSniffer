@@ -29,7 +29,7 @@ final class InterfaceNameSuffixUnitTest extends AbstractSniffUnitTest
      */
     public function getErrorList()
     {
-        return [8 => 1];
+        return [5 => 1];
 
     }//end getErrorList()
 

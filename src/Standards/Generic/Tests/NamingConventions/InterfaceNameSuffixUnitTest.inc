@@ -1,27 +1,7 @@
 <?php
 
-interface SomeNameInterface
-{
+interface SomeNameInterface {}
 
-}
+interface MissingInterfaceSuffix {} // Error.
 
-interface ISomeName // error
-{
-
-}
-
-interface ISomeNameInterface
-{
-
-}
-
-
-interface ISomeOtherNameinterface
-{
-
-}
-
-interface mInterface
-{
-
-}
+interface CaseOfSuffixIsNotEnforced_interFACE {}
