@@ -99,6 +99,12 @@ class PostStatementCommentSniff implements Sniff
             }
         }
 
+        if (preg_match('|^//[ \t]*@[^\s]+|', $tokens[$stackPtr]['content']) === 1) {
+            $error = 'Annotations may not appear after statements';
+            $phpcsFile->addError($error, $stackPtr, 'AnnotationFound');
+            return;
+        }
+
         $error = 'Comments may not appear after statements';
         $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'Found');
         if ($fix === true) {
