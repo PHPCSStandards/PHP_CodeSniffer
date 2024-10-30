@@ -109,6 +109,10 @@ class DuplicateClassNameSniff implements Sniff
                         ];
                     }
                 }//end if
+
+                if (isset($tokens[$stackPtr]['scope_closer']) === true) {
+                    $stackPtr = $tokens[$stackPtr]['scope_closer'];
+                }
             }//end if
 
             $stackPtr = $phpcsFile->findNext($findTokens, ($stackPtr + 1));
