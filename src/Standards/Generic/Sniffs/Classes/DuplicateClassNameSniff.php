@@ -83,31 +83,32 @@ class DuplicateClassNameSniff implements Sniff
                     $stackPtr = $i;
                 }
             } else {
-                $nameToken = $phpcsFile->findNext(T_STRING, $stackPtr);
-                $name      = $tokens[$nameToken]['content'];
-                if ($namespace !== '') {
-                    $name = $namespace.'\\'.$name;
-                }
+                $name = $phpcsFile->getDeclarationName($stackPtr);
+                if (empty($name) === false) {
+                    if ($namespace !== '') {
+                        $name = $namespace.'\\'.$name;
+                    }
 
-                $compareName = strtolower($name);
-                if (isset($this->foundClasses[$compareName]) === true) {
-                    $type  = strtolower($tokens[$stackPtr]['content']);
-                    $file  = $this->foundClasses[$compareName]['file'];
-                    $line  = $this->foundClasses[$compareName]['line'];
-                    $error = 'Duplicate %s name "%s" found; first defined in %s on line %s';
-                    $data  = [
-                        $type,
-                        $name,
-                        $file,
-                        $line,
-                    ];
-                    $phpcsFile->addWarning($error, $stackPtr, 'Found', $data);
-                } else {
-                    $this->foundClasses[$compareName] = [
-                        'file' => $phpcsFile->getFilename(),
-                        'line' => $tokens[$stackPtr]['line'],
-                    ];
-                }
+                    $compareName = strtolower($name);
+                    if (isset($this->foundClasses[$compareName]) === true) {
+                        $type  = strtolower($tokens[$stackPtr]['content']);
+                        $file  = $this->foundClasses[$compareName]['file'];
+                        $line  = $this->foundClasses[$compareName]['line'];
+                        $error = 'Duplicate %s name "%s" found; first defined in %s on line %s';
+                        $data  = [
+                            $type,
+                            $name,
+                            $file,
+                            $line,
+                        ];
+                        $phpcsFile->addWarning($error, $stackPtr, 'Found', $data);
+                    } else {
+                        $this->foundClasses[$compareName] = [
+                            'file' => $phpcsFile->getFilename(),
+                            'line' => $tokens[$stackPtr]['line'],
+                        ];
+                    }
+                }//end if
             }//end if
 
             $stackPtr = $phpcsFile->findNext($findTokens, ($stackPtr + 1));
