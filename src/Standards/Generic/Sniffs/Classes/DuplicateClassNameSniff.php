@@ -74,19 +74,20 @@ class DuplicateClassNameSniff implements Sniff
                     // Ignore namespace keyword used as operator.
                     && $tokens[$nextNonEmpty]['code'] !== T_NS_SEPARATOR
                 ) {
-                    $nsEnd = $phpcsFile->findNext(
-                        [
-                            T_NS_SEPARATOR,
-                            T_STRING,
-                            T_WHITESPACE,
-                        ],
-                        ($stackPtr + 1),
-                        null,
-                        true
-                    );
+                    $namespace = '';
+                    for ($i = $nextNonEmpty; $i < $phpcsFile->numTokens; $i++) {
+                        if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === true) {
+                            continue;
+                        }
 
-                    $namespace = trim($phpcsFile->getTokensAsString(($stackPtr + 1), ($nsEnd - $stackPtr - 1)));
-                    $stackPtr  = $nsEnd;
+                        if ($tokens[$i]['code'] !== T_STRING && $tokens[$i]['code'] !== T_NS_SEPARATOR) {
+                            break;
+                        }
+
+                        $namespace .= $tokens[$i]['content'];
+                    }
+
+                    $stackPtr = $i;
                 }
             } else {
                 $nameToken = $phpcsFile->findNext(T_STRING, $stackPtr);
