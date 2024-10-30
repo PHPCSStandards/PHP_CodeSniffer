@@ -56,17 +56,10 @@ class DuplicateClassNameSniff implements Sniff
             T_TRAIT,
             T_ENUM,
             T_NAMESPACE,
-            T_CLOSE_TAG,
         ];
 
         $stackPtr = $phpcsFile->findNext($findTokens, ($stackPtr + 1));
         while ($stackPtr !== false) {
-            if ($tokens[$stackPtr]['code'] === T_CLOSE_TAG) {
-                // We can stop here. The sniff will continue from the next open
-                // tag when PHPCS reaches that token, if there is one.
-                return;
-            }
-
             // Keep track of what namespace we are in.
             if ($tokens[$stackPtr]['code'] === T_NAMESPACE) {
                 $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
@@ -119,6 +112,8 @@ class DuplicateClassNameSniff implements Sniff
 
             $stackPtr = $phpcsFile->findNext($findTokens, ($stackPtr + 1));
         }//end while
+
+        return $phpcsFile->numTokens;
 
     }//end process()
 
