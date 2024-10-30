@@ -71,19 +71,24 @@ class DuplicateClassNameSniff implements Sniff
             if ($tokens[$stackPtr]['code'] === T_NAMESPACE) {
                 $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
                 if ($nextNonEmpty !== false) {
-                    $find   = Tokens::$emptyTokens;
-                    $find[] = T_STRING;
-                    $find[] = T_NAME_QUALIFIED;
+                    $namespace = '';
+                    for ($i = $nextNonEmpty; $i < $phpcsFile->numTokens; $i++) {
+                        if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === true) {
+                            continue;
+                        }
 
-                    $nsEnd = $phpcsFile->findNext(
-                        $find,
-                        ($stackPtr + 1),
-                        null,
-                        true
-                    );
+                        if ($tokens[$i]['code'] !== T_NAME_QUALIFIED
+                            // Allow for pre-PHP 8.0 style declarations containing comments and whitespace.
+                            && $tokens[$i]['code'] !== T_STRING
+                            && $tokens[$i]['code'] !== T_NS_SEPARATOR
+                        ) {
+                            break;
+                        }
 
-                    $namespace = trim($phpcsFile->getTokensAsString(($stackPtr + 1), ($nsEnd - $stackPtr - 1)));
-                    $stackPtr  = $nsEnd;
+                        $namespace .= $tokens[$i]['content'];
+                    }
+
+                    $stackPtr = $i;
                 }
             } else {
                 $nameToken = $phpcsFile->findNext(T_STRING, $stackPtr);
