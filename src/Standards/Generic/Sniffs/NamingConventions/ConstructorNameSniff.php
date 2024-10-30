@@ -106,15 +106,26 @@ class ConstructorNameSniff extends AbstractScopeSniff
         $startIndex       = $stackPtr;
         while (($doubleColonIndex = $phpcsFile->findNext(T_DOUBLE_COLON, $startIndex, $endFunctionIndex)) !== false) {
             $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($doubleColonIndex + 1), null, true);
-            if ($tokens[$nextNonEmpty]['code'] === T_STRING
-                && strtolower($tokens[$nextNonEmpty]['content']) === $parentClassNameLc
+            if ($tokens[$nextNonEmpty]['code'] !== T_STRING
+                || strtolower($tokens[$nextNonEmpty]['content']) !== $parentClassNameLc
+            ) {
+                $startIndex = $nextNonEmpty;
+                continue;
+            }
+
+            $prevNonEmpty = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($doubleColonIndex - 1), null, true);
+            if ($tokens[$prevNonEmpty]['code'] === T_PARENT
+                || $tokens[$prevNonEmpty]['code'] === T_SELF
+                || $tokens[$prevNonEmpty]['code'] === T_STATIC
+                || ($tokens[$prevNonEmpty]['code'] === T_STRING
+                && strtolower($tokens[$prevNonEmpty]['content']) === $parentClassNameLc)
             ) {
                 $error = 'PHP4 style calls to parent constructors are not allowed; use "parent::__construct()" instead';
                 $phpcsFile->addError($error, $nextNonEmpty, 'OldStyleCall');
             }
 
             $startIndex = $nextNonEmpty;
-        }
+        }//end while
 
     }//end processTokenWithinScope()
 
