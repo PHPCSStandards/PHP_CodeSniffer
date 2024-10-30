@@ -101,7 +101,7 @@ class UnconventionalSpacing extends MyParent
 {
     public function UnconventionalSpacing() {
         self   ::   MyParent();
-        static/*comment*/::/*comment*/MyParent();
+        MyParent/*comment*/::/*comment*/MyParent();
     }
 
     public function __construct() {
@@ -110,5 +110,21 @@ class UnconventionalSpacing extends MyParent
         ::
         // phpcs:ignore Stnd.Cat.SniffName -- for reasons.
         MyParent();
+    }
+}
+
+// Bug: calling a method with the same name as the class being extended on another class, should not be flagged.
+class HierarchyKeywordBeforeColon extends MyParent
+{
+    public function HierarchyKeywordBeforeColon() {
+        parent::MyParent();
+        MyParent::MyParent();
+        SomeOtherClass::MyParent();
+    }
+
+    public function __construct() {
+        self::MyParent();
+        static::MyParent();
+        SomeOtherClass::MyParent();
     }
 }

@@ -39,6 +39,10 @@ final class ConstructorNameUnitTest extends AbstractSniffUnitTest
             103 => 1,
             104 => 1,
             112 => 1,
+            120 => 1,
+            121 => 1,
+            126 => 1,
+            127 => 1,
         ];
 
     }//end getErrorList()
