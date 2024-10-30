@@ -95,3 +95,20 @@ interface CustomChildCreator
 {
     public function customChildCreator($elementName, Project $project);
 }
+
+// Bug: unconventional spacing and unexpected comments were not handled correctly.
+class UnconventionalSpacing extends MyParent
+{
+    public function UnconventionalSpacing() {
+        self   ::   MyParent();
+        static/*comment*/::/*comment*/MyParent();
+    }
+
+    public function __construct() {
+        parent
+        //comment
+        ::
+        // phpcs:ignore Stnd.Cat.SniffName -- for reasons.
+        MyParent();
+    }
+}
