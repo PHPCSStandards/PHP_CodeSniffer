@@ -91,7 +91,7 @@ class ConstructorNameSniff extends AbstractScopeSniff
         }
 
         // Stop if the constructor doesn't have a body, like when it is abstract.
-        if (isset($tokens[$stackPtr]['scope_closer']) === false) {
+        if (isset($tokens[$stackPtr]['scope_opener'], $tokens[$stackPtr]['scope_closer']) === false) {
             return;
         }
 
@@ -103,8 +103,8 @@ class ConstructorNameSniff extends AbstractScopeSniff
         $parentClassNameLc = strtolower($parentClassName);
 
         $endFunctionIndex = $tokens[$stackPtr]['scope_closer'];
-        $startIndex       = $stackPtr;
-        while (($doubleColonIndex = $phpcsFile->findNext(T_DOUBLE_COLON, $startIndex, $endFunctionIndex)) !== false) {
+        $startIndex       = $tokens[$stackPtr]['scope_opener'];
+        while (($doubleColonIndex = $phpcsFile->findNext(T_DOUBLE_COLON, ($startIndex + 1), $endFunctionIndex)) !== false) {
             $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($doubleColonIndex + 1), null, true);
             if ($tokens[$nextNonEmpty]['code'] !== T_STRING
                 || strtolower($tokens[$nextNonEmpty]['content']) !== $parentClassNameLc
