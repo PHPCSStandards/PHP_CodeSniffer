@@ -35,6 +35,7 @@ final class TraitNameSuffixUnitTest extends AbstractSniffUnitTest
         case 'TraitNameSuffixUnitTest.1.inc':
             return [
                 3 => 1,
+                9 => 1,
             ];
 
         default:
