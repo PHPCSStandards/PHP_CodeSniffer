@@ -1,13 +1,7 @@
 <?php
 
-trait BadName {} // error
+trait MissingTraitSuffix {} // Error.
 
 trait GoodTrait {}
 
-trait GoodTraitTrait {}
-
-trait BadTraitName {} // error
-
-trait BadTraitNametrait {}
-
-trait NormalTraitNameTrait {}
+trait SuffixCaseIsNotEnforced_tRaIt {}
