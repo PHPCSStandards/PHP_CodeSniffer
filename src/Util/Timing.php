@@ -67,14 +67,14 @@ class Timing
     public static function getHumanReadableDuration($duration)
     {
         $timeString = '';
-        if ($duration > 60000) {
+        if ($duration >= 60000) {
             $mins       = floor($duration / 60000);
             $secs       = round((fmod($duration, 60000) / 1000), 2);
             $timeString = $mins.' mins';
-            if ($secs !== 0) {
+            if ($secs >= 0.01) {
                 $timeString .= ", $secs secs";
             }
-        } else if ($duration > 1000) {
+        } else if ($duration >= 1000) {
             $timeString = round(($duration / 1000), 2).' secs';
         } else {
             $timeString = round($duration).'ms';
