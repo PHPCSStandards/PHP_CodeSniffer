@@ -31,7 +31,6 @@ final class TraitNameSuffixUnitTest extends AbstractSniffUnitTest
     {
         return [
             3 => 1,
-            9 => 1,
         ];
 
     }//end getErrorList()
