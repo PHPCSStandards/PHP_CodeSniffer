@@ -100,7 +100,11 @@ final class YieldTest extends AbstractTokenizerTestCase
         $this->assertSame(T_YIELD_FROM, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_YIELD_FROM (code)');
         $this->assertSame('T_YIELD_FROM', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_YIELD_FROM (type)');
 
-        $this->assertSame($expectedContent, $tokenArray['content'], 'Token content does not match expectation');
+        if (isset($tokenArray['orig_content']) === true) {
+            $this->assertSame($expectedContent, $tokenArray['orig_content'], 'Token (orig) content does not match expectation');
+        } else {
+            $this->assertSame($expectedContent, $tokenArray['content'], 'Token content does not match expectation');
+        }
 
     }//end testYieldFromKeywordSingleToken()
 
@@ -181,22 +185,209 @@ final class YieldTest extends AbstractTokenizerTestCase
     public static function dataYieldFromKeywordMultiToken()
     {
         return [
-            'yield from with new line' => [
+            'yield from with new line'                => [
                 'testMarker'     => '/* testYieldFromSplitByNewLines */',
                 'expectedTokens' => [
                     [
                         'type'    => 'T_YIELD_FROM',
-                        'content' => 'yield
-',
+                        'content' => 'yield',
                     ],
                     [
-                        'type'    => 'T_YIELD_FROM',
+                        'type'    => 'T_WHITESPACE',
                         'content' => '
 ',
                     ],
                     [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => '
+',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => '    ',
+                    ],
+                    [
                         'type'    => 'T_YIELD_FROM',
-                        'content' => '    FROM',
+                        'content' => 'FROM',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => '
+',
+                    ],
+                ],
+            ],
+            'yield from with comment'                 => [
+                'testMarker'     => '/* testYieldFromSplitByComment */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_YIELD_FROM',
+                        'content' => 'yield',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => ' ',
+                    ],
+                    [
+                        'type'    => 'T_COMMENT',
+                        'content' => '/* comment */',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => ' ',
+                    ],
+                    [
+                        'type'    => 'T_YIELD_FROM',
+                        'content' => 'from',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => ' ',
+                    ],
+                ],
+            ],
+            'yield from with trailing comment'        => [
+                'testMarker'     => '/* testYieldFromWithTrailingComment */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_YIELD_FROM',
+                        'content' => 'yield',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => ' ',
+                    ],
+                    [
+                        'type'    => 'T_COMMENT',
+                        'content' => '// comment
+',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => '    ',
+                    ],
+                    [
+                        'type'    => 'T_YIELD_FROM',
+                        'content' => 'from',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => ' ',
+                    ],
+                ],
+            ],
+            'yield from with trailing annotation'     => [
+                'testMarker'     => '/* testYieldFromWithTrailingAnnotation */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_YIELD_FROM',
+                        'content' => 'yield',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => ' ',
+                    ],
+                    [
+                        'type'    => 'T_PHPCS_IGNORE',
+                        'content' => '// phpcs:ignore Stnd.Cat.Sniff -- for reasons.
+',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => '    ',
+                    ],
+                    [
+                        'type'    => 'T_YIELD_FROM',
+                        'content' => 'from',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => ' ',
+                    ],
+                ],
+            ],
+            'yield from with new line and comment'    => [
+                'testMarker'     => '/* testYieldFromSplitByNewLineAndComments */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_YIELD_FROM',
+                        'content' => 'yield',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => '
+',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => '    ',
+                    ],
+                    [
+                        'type'    => 'T_COMMENT',
+                        'content' => '/* comment line 1
+',
+                    ],
+                    [
+                        'type'    => 'T_COMMENT',
+                        'content' => '       line 2 */',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => '
+',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => '    ',
+                    ],
+                    [
+                        'type'    => 'T_COMMENT',
+                        'content' => '// another comment
+',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => '    ',
+                    ],
+                    [
+                        'type'    => 'T_YIELD_FROM',
+                        'content' => 'from',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => '
+',
+                    ],
+                ],
+            ],
+            'yield from with new line and annotation' => [
+                'testMarker'     => '/* testYieldFromSplitByNewLineAndAnnotation */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_YIELD_FROM',
+                        'content' => 'YIELD',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => '
+',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => '    ',
+                    ],
+                    [
+                        'type'    => 'T_PHPCS_DISABLE',
+                        'content' => '// @phpcs:disable Stnd.Cat.Sniff -- for reasons.
+',
+                    ],
+                    [
+                        'type'    => 'T_WHITESPACE',
+                        'content' => '    ',
+                    ],
+                    [
+                        'type'    => 'T_YIELD_FROM',
+                        'content' => 'From',
                     ],
                     [
                         'type'    => 'T_WHITESPACE',

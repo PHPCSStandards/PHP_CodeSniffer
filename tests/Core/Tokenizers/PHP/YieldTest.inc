@@ -22,6 +22,31 @@ function generator()
 
     FROM
     gen2();
+
+    /* testYieldFromSplitByComment */
+    yield /* comment */ from gen2();
+
+    /* testYieldFromWithTrailingComment */
+    yield // comment
+    from gen2();
+
+    /* testYieldFromWithTrailingAnnotation */
+    yield // phpcs:ignore Stnd.Cat.Sniff -- for reasons.
+    from gen2();
+
+    /* testYieldFromSplitByNewLineAndComments */
+    yield
+    /* comment line 1
+       line 2 */
+    // another comment
+    from
+    gen2();
+
+    /* testYieldFromSplitByNewLineAndAnnotation */
+    YIELD
+    // @phpcs:disable Stnd.Cat.Sniff -- for reasons.
+    From
+    gen2();
 }
 
 /* testYieldUsedAsClassName */

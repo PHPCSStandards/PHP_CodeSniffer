@@ -1514,7 +1514,7 @@ class PHP extends Tokenizer
             }//end if
 
             /*
-                Before PHP 7.0, the "yield from" was tokenized as
+                Before PHP 7.0, "yield from" was tokenized as
                 T_YIELD, T_WHITESPACE and T_STRING. So look for
                 and change this token in earlier versions.
             */
@@ -1525,12 +1525,16 @@ class PHP extends Tokenizer
                 && isset($tokens[($stackPtr + 1)]) === true
                 && isset($tokens[($stackPtr + 2)]) === true
                 && $tokens[($stackPtr + 1)][0] === T_WHITESPACE
+                && strpos($tokens[($stackPtr + 1)][1], $this->eolChar) === false
                 && $tokens[($stackPtr + 2)][0] === T_STRING
                 && strtolower($tokens[($stackPtr + 2)][1]) === 'from'
             ) {
-                // Could be multi-line, so adjust the token stack.
-                $token[0]  = T_YIELD_FROM;
-                $token[1] .= $tokens[($stackPtr + 1)][1].$tokens[($stackPtr + 2)][1];
+                // Single-line "yield from" with only whitespace between.
+                $finalTokens[$newStackPtr] = [
+                    'code'    => T_YIELD_FROM,
+                    'type'    => 'T_YIELD_FROM',
+                    'content' => $token[1].$tokens[($stackPtr + 1)][1].$tokens[($stackPtr + 2)][1],
+                ];
 
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
                     for ($i = ($stackPtr + 1); $i <= ($stackPtr + 2); $i++) {
@@ -1540,9 +1544,131 @@ class PHP extends Tokenizer
                     }
                 }
 
-                $tokens[($stackPtr + 1)] = null;
-                $tokens[($stackPtr + 2)] = null;
-            }
+                $newStackPtr++;
+                $stackPtr += 2;
+
+                continue;
+            } else if (PHP_VERSION_ID < 80300
+                && $tokenIsArray === true
+                && $token[0] === T_STRING
+                && strtolower($token[1]) === 'from'
+                && $finalTokens[$lastNotEmptyToken]['code'] === T_YIELD
+            ) {
+                /*
+                    Before PHP 8.3, if there was a comment between the "yield" and "from" keywords,
+                    it was tokenized as T_YIELD, T_WHITESPACE, T_COMMENT... and T_STRING.
+                    We want to keep the tokenization of the tokens between, but need to change the
+                    `T_YIELD` and `T_STRING` (from) keywords to `T_YIELD_FROM.
+                */
+
+                $finalTokens[$lastNotEmptyToken]['code'] = T_YIELD_FROM;
+                $finalTokens[$lastNotEmptyToken]['type'] = 'T_YIELD_FROM';
+
+                $finalTokens[$newStackPtr] = [
+                    'code'    => T_YIELD_FROM,
+                    'type'    => 'T_YIELD_FROM',
+                    'content' => $token[1],
+                ];
+                $newStackPtr++;
+
+                if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                    echo "\t\t* token $lastNotEmptyToken (new stack) changed into T_YIELD_FROM; was: T_YIELD".PHP_EOL;
+                    echo "\t\t* token $stackPtr changed into T_YIELD_FROM; was: T_STRING".PHP_EOL;
+                }
+
+                continue;
+            } else if (PHP_VERSION_ID >= 70000
+                && $tokenIsArray === true
+                && $token[0] === T_YIELD_FROM
+                && strpos($token[1], $this->eolChar) !== false
+                && preg_match('`^yield\s+from$`i', $token[1]) === 1
+            ) {
+                /*
+                    In PHP 7.0+, a multi-line "yield from" (without comment) tokenizes as a single
+                    T_YIELD_FROM token, but we want to split it and tokenize the whitespace
+                    separately for consistency.
+                */
+
+                $finalTokens[$newStackPtr] = [
+                    'code'    => T_YIELD_FROM,
+                    'type'    => 'T_YIELD_FROM',
+                    'content' => substr($token[1], 0, 5),
+                ];
+                $newStackPtr++;
+
+                $tokenLines = explode($this->eolChar, substr($token[1], 5, -4));
+                $numLines   = count($tokenLines);
+                $newToken   = [
+                    'type'    => 'T_WHITESPACE',
+                    'code'    => T_WHITESPACE,
+                    'content' => '',
+                ];
+
+                foreach ($tokenLines as $i => $line) {
+                    $newToken['content'] = $line;
+                    if ($i === ($numLines - 1)) {
+                        if ($line === '') {
+                            break;
+                        }
+                    } else {
+                        $newToken['content'] .= $this->eolChar;
+                    }
+
+                    $finalTokens[$newStackPtr] = $newToken;
+                    $newStackPtr++;
+                }
+
+                $finalTokens[$newStackPtr] = [
+                    'code'    => T_YIELD_FROM,
+                    'type'    => 'T_YIELD_FROM',
+                    'content' => substr($token[1], -4),
+                ];
+                $newStackPtr++;
+
+                if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                    echo "\t\t* token $stackPtr split into 'yield', one or more whitespace tokens and 'from'".PHP_EOL;
+                }
+
+                continue;
+            } else if (PHP_VERSION_ID >= 80300
+                && $tokenIsArray === true
+                && $token[0] === T_YIELD_FROM
+                && preg_match('`^yield[ \t]+from$`i', $token[1]) !== 1
+                && stripos($token[1], 'yield') === 0
+            ) {
+                /*
+                    Since PHP 8.3, "yield from" allows for comments and will
+                    swallow the comment in the `T_YIELD_FROM` token.
+                    We need to split this up to allow for sniffs handling comments.
+                */
+
+                $finalTokens[$newStackPtr] = [
+                    'code'    => T_YIELD_FROM,
+                    'type'    => 'T_YIELD_FROM',
+                    'content' => substr($token[1], 0, 5),
+                ];
+                $newStackPtr++;
+
+                $yieldFromSubtokens = @token_get_all("<?php\n".substr($token[1], 5, -4));
+                // Remove the PHP open tag token.
+                array_shift($yieldFromSubtokens);
+                // Add the "from" keyword.
+                $yieldFromSubtokens[] = [
+                    0 => T_YIELD_FROM,
+                    1 => substr($token[1], -4),
+                ];
+
+                // Inject the new tokens into the token stack.
+                array_splice($tokens, ($stackPtr + 1), 0, $yieldFromSubtokens);
+                $numTokens = count($tokens);
+
+                if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                    echo "\t\t* token $stackPtr split into parts (yield from with comment)".PHP_EOL;
+                }
+
+                unset($yieldFromSubtokens);
+                continue;
+            }//end if
 
             /*
                 Before PHP 5.6, the ... operator was tokenized as three
