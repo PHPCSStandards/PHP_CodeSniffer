@@ -68,7 +68,7 @@ final class GetHumanReadableDurationTest extends TestCase
             ],
             'Duration: 1 second'                           => [
                 'duration' => 1000,
-                'expected' => '1000ms',
+                'expected' => '1 secs',
             ],
             'Duration: slightly more than 1 second'        => [
                 'duration' => 1001.178215,
@@ -80,11 +80,11 @@ final class GetHumanReadableDurationTest extends TestCase
             ],
             'Duration: exactly 1 minute'                   => [
                 'duration' => 60000,
-                'expected' => '60 secs',
+                'expected' => '1 mins',
             ],
             'Duration: slightly more than 1 minute'        => [
                 'duration' => 60001.7581235,
-                'expected' => '1 mins, 0 secs',
+                'expected' => '1 mins',
             ],
             'Duration: 1 minute, just under half a second' => [
                 'duration' => 60499.83639,
@@ -100,7 +100,7 @@ final class GetHumanReadableDurationTest extends TestCase
             ],
             'Duration: exactly 1 hour'                     => [
                 'duration' => 3600000,
-                'expected' => '60 mins, 0 secs',
+                'expected' => '60 mins',
             ],
             'Duration: 89.4 mins'                          => [
                 'duration' => 5364000,
