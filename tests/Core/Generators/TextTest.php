@@ -157,6 +157,22 @@ final class TextTest extends TestCase
                 'sniffs'         => 'StandardWithDocs.Content.CodeTitleWhitespace',
                 'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeTitleWhitespace.txt',
             ],
+            'Code Comparison: blank line handling'             => [
+                'sniffs'         => 'StandardWithDocs.Content.CodeComparisonBlankLines',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonBlankLines.txt',
+            ],
+            'Code Comparison: different block lengths'         => [
+                'sniffs'         => 'StandardWithDocs.Content.CodeComparisonBlockLength',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonBlockLength.txt',
+            ],
+            'Code Comparison: encoding of special characters'  => [
+                'sniffs'         => 'StandardWithDocs.Content.CodeComparisonEncoding',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonEncoding.txt',
+            ],
+            'Code Comparison: line length handling'            => [
+                'sniffs'         => 'StandardWithDocs.Content.CodeComparisonLineLength',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonLineLength.txt',
+            ],
         ];
 
     }//end dataDocSpecifics()
