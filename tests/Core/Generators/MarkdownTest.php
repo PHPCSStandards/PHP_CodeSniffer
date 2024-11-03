@@ -157,6 +157,22 @@ final class MarkdownTest extends TestCase
                 'sniffs'         => 'StandardWithDocs.Content.CodeTitleWhitespace',
                 'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeTitleWhitespace.md',
             ],
+            'Code Comparison: blank line handling'             => [
+                'sniffs'         => 'StandardWithDocs.Content.CodeComparisonBlankLines',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonBlankLines.md',
+            ],
+            'Code Comparison: different block lengths'         => [
+                'sniffs'         => 'StandardWithDocs.Content.CodeComparisonBlockLength',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonBlockLength.md',
+            ],
+            'Code Comparison: encoding of special characters'  => [
+                'sniffs'         => 'StandardWithDocs.Content.CodeComparisonEncoding',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonEncoding.md',
+            ],
+            'Code Comparison: line length handling'            => [
+                'sniffs'         => 'StandardWithDocs.Content.CodeComparisonLineLength',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonLineLength.md',
+            ],
         ];
 
     }//end dataDocSpecifics()
