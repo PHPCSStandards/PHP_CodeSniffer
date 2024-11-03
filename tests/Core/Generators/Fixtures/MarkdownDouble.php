@@ -20,7 +20,7 @@ class MarkdownDouble extends Markdown
      */
     protected function printFooter()
     {
-        echo 'Documentation generated on *REDACTED*';
+        echo PHP_EOL.'Documentation generated on *REDACTED*';
         echo ' by [PHP_CodeSniffer *VERSION*](https://github.com/PHPCSStandards/PHP_CodeSniffer)'.PHP_EOL;
     }
 
