@@ -281,7 +281,8 @@ class HTML extends Generator
     {
         $codeBlocks = $node->getElementsByTagName('code');
 
-        $firstTitle = $codeBlocks->item(0)->getAttribute('title');
+        $firstTitle = trim($codeBlocks->item(0)->getAttribute('title'));
+        $firstTitle = str_replace('  ', '&nbsp;&nbsp;', $firstTitle);
         $first      = trim($codeBlocks->item(0)->nodeValue);
         $first      = str_replace('<?php', '&lt;?php', $first);
         $first      = str_replace("\n", '</br>', $first);
@@ -289,7 +290,8 @@ class HTML extends Generator
         $first      = str_replace('<em>', '<span class="code-comparison-highlight">', $first);
         $first      = str_replace('</em>', '</span>', $first);
 
-        $secondTitle = $codeBlocks->item(1)->getAttribute('title');
+        $secondTitle = trim($codeBlocks->item(1)->getAttribute('title'));
+        $secondTitle = str_replace('  ', '&nbsp;&nbsp;', $secondTitle);
         $second      = trim($codeBlocks->item(1)->nodeValue);
         $second      = str_replace('<?php', '&lt;?php', $second);
         $second      = str_replace("\n", '</br>', $second);
