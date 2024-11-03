@@ -6,15 +6,13 @@
 This is a standard block.
 
 ----------------------------------------- CODE COMPARISON ------------------------------------------
-|   Valid: spaces at start of description.       | Invalid: spaces at end making line > 46 chars.  |
-|                                                |                                                 |
+| Valid: spaces at start of description.         | Invalid: spaces at end making line > 46 chars.  |
 ----------------------------------------------------------------------------------------------------
 | // Dummy.                                      | // Dummy.                                       |
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------- CODE COMPARISON ------------------------------------------
-|   Valid: spaces at start + end of description. | Invalid: spaces '     ' in description.         |
-|                                                |                                                 |
+| Valid: spaces at start + end of description.   | Invalid: spaces '     ' in description.         |
 ----------------------------------------------------------------------------------------------------
 | // Note: description above without the         | // Dummy.                                       |
 | // trailing whitespace fits in 46 chars.       |                                                 |
