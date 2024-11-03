@@ -78,6 +78,67 @@ final class HTMLTest extends TestCase
 
 
     /**
+     * Test the generated docs for the handling of specific parts of the documentation.
+     *
+     * @param string $sniffs         The specific fixture sniffs to verify the docs for.
+     * @param string $pathToExpected Path to a file containing the expected function output.
+     *
+     * @dataProvider dataDocSpecifics
+     *
+     * @return void
+     */
+    public function testDocSpecifics($sniffs, $pathToExpected)
+    {
+        // Set up the ruleset.
+        $standard = __DIR__.'/AllValidDocsTest.xml';
+        $config   = new ConfigDouble(["--standard=$standard", "--sniffs=$sniffs"]);
+        $ruleset  = new Ruleset($config);
+
+        // In tests, the `--sniffs` setting doesn't work out of the box.
+        $sniffParts = explode('.', $sniffs);
+        $sniffFile  = __DIR__.DIRECTORY_SEPARATOR.'Fixtures'.DIRECTORY_SEPARATOR.$sniffParts[0].DIRECTORY_SEPARATOR;
+        $sniffFile .= 'Sniffs'.DIRECTORY_SEPARATOR.$sniffParts[1].DIRECTORY_SEPARATOR.$sniffParts[2].'Sniff.php';
+
+        $sniffParts   = array_map('strtolower', $sniffParts);
+        $sniffName    = $sniffParts[0].'\sniffs\\'.$sniffParts[1].'\\'.$sniffParts[2].'sniff';
+        $restrictions = [$sniffName => true];
+        $ruleset->registerSniffs([$sniffFile], $restrictions, []);
+
+        $expected = file_get_contents($pathToExpected);
+        $this->assertNotFalse($expected, 'Output expectation file could not be found');
+
+        // Make the test OS independent.
+        $expected = str_replace("\n", PHP_EOL, $expected);
+        $this->expectOutputString($expected);
+
+        $generator = new HTMLDouble($ruleset);
+        $generator->generate();
+
+    }//end testDocSpecifics()
+
+
+    /**
+     * Data provider.
+     *
+     * @return array<string, array<string, string>>
+     */
+    public static function dataDocSpecifics()
+    {
+        return [
+            'Documentation title: case'   => [
+                'sniffs'         => 'StandardWithDocs.Content.DocumentationTitleCase',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputDocumentationTitleCase.html',
+            ],
+            'Documentation title: length' => [
+                'sniffs'         => 'StandardWithDocs.Content.DocumentationTitleLength',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputDocumentationTitleLength.html',
+            ],
+        ];
+
+    }//end dataDocSpecifics()
+
+
+    /**
      * Test the generated footer.
      *
      * @return void
