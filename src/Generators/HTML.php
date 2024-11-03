@@ -7,7 +7,9 @@
  * to each sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
+ * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2024 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
@@ -133,7 +135,7 @@ class HTML extends Generator
         echo '<html>'.PHP_EOL;
         echo ' <head>'.PHP_EOL;
         echo "  <title>$standard Coding Standards</title>".PHP_EOL;
-        echo '  '.self::STYLESHEET.PHP_EOL;
+        echo '  '.str_replace("\n", PHP_EOL, self::STYLESHEET).PHP_EOL;
         echo ' </head>'.PHP_EOL;
         echo ' <body>'.PHP_EOL;
         echo "  <h1>$standard Coding Standards</h1>".PHP_EOL;
@@ -225,6 +227,9 @@ class HTML extends Generator
     {
         $content = trim($node->nodeValue);
         $content = htmlspecialchars($content);
+
+        // Use the correct line endings based on the OS.
+        $content = str_replace("\n", PHP_EOL, $content);
 
         // Allow em tags only.
         $content = str_replace('&lt;em&gt;', '<em>', $content);
