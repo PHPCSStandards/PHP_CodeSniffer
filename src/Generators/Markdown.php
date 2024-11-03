@@ -74,7 +74,7 @@ class Markdown extends Generator
         // Turn off errors so we don't get timezone warnings if people
         // don't have their timezone set.
         $errorLevel = error_reporting(0);
-        echo 'Documentation generated on '.date('r');
+        echo PHP_EOL.'Documentation generated on '.date('r');
         echo ' by [PHP_CodeSniffer '.Config::VERSION.'](https://github.com/PHPCSStandards/PHP_CodeSniffer)'.PHP_EOL;
         error_reporting($errorLevel);
 
