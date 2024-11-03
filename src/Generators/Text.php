@@ -133,7 +133,7 @@ class Text extends Generator
     {
         $codeBlocks = $node->getElementsByTagName('code');
         $first      = trim($codeBlocks->item(0)->nodeValue);
-        $firstTitle = $codeBlocks->item(0)->getAttribute('title');
+        $firstTitle = trim($codeBlocks->item(0)->getAttribute('title'));
 
         $firstTitleLines = [];
         $tempTitle       = '';
@@ -168,7 +168,7 @@ class Text extends Generator
         $firstLines = explode("\n", $first);
 
         $second      = trim($codeBlocks->item(1)->nodeValue);
-        $secondTitle = $codeBlocks->item(1)->getAttribute('title');
+        $secondTitle = trim($codeBlocks->item(1)->getAttribute('title'));
 
         $secondTitleLines = [];
         $tempTitle        = '';
