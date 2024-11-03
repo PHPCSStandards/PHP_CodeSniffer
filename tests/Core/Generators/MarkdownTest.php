@@ -99,4 +99,32 @@ final class MarkdownTest extends TestCase
     }//end testFooter()
 
 
+    /**
+     * Safeguard that the footer logic doesn't permanently change the error level.
+     *
+     * @runInSeparateProcess
+     * @preserveGlobalState  disabled
+     *
+     * @return void
+     */
+    public function testFooterResetsErrorReportingToOriginalSetting()
+    {
+        $expected = error_reporting();
+
+        // Set up the ruleset.
+        $standard = __DIR__.'/OneDocTest.xml';
+        $config   = new ConfigDouble(["--standard=$standard"]);
+        $ruleset  = new Ruleset($config);
+
+        // We know there will be output, but we're not interested in the output for this test.
+        ob_start();
+        $generator = new MarkdownDouble($ruleset);
+        $generator->printRealFooter();
+        ob_end_clean();
+
+        $this->assertSame($expected, error_reporting());
+
+    }//end testFooterResetsErrorReportingToOriginalSetting()
+
+
 }//end class
