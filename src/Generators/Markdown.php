@@ -117,14 +117,34 @@ class Markdown extends Generator
     {
         $content = trim($node->nodeValue);
         $content = htmlspecialchars($content, (ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401));
-
-        // Use the correct line endings based on the OS.
-        $content = str_replace("\n", PHP_EOL, $content);
-
         $content = str_replace('&lt;em&gt;', '*', $content);
         $content = str_replace('&lt;/em&gt;', '*', $content);
 
-        echo $content.PHP_EOL;
+        $nodeLines = explode("\n", $content);
+        $lineCount = count($nodeLines);
+        $lines     = [];
+
+        for ($i = 0; $i < $lineCount; $i++) {
+            $currentLine = trim($nodeLines[$i]);
+            if ($currentLine === '') {
+                // The text contained a blank line. Respect this.
+                $lines[] = '';
+                continue;
+            }
+
+            // Check if the _next_ line is blank.
+            if (isset($nodeLines[($i + 1)]) === false
+                || trim($nodeLines[($i + 1)]) === ''
+            ) {
+                // Next line is blank, just add the line.
+                $lines[] = $currentLine;
+            } else {
+                // Ensure that line breaks are respected in markdown.
+                $lines[] = $currentLine.'  ';
+            }
+        }
+
+        echo implode(PHP_EOL, $lines).PHP_EOL;
 
     }//end printTextBlock()
 
