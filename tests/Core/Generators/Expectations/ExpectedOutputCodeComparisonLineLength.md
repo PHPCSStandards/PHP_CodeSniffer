@@ -2,8 +2,8 @@
 
 ## Code Comparison, line length
 
-Ensure there is no PHP &quot;Warning: str_repeat(): Second argument has to be greater than or equal to 0&quot;.
-    Ref: squizlabs/PHP_CodeSniffer#2522
+Ensure there is no PHP &quot;Warning: str_repeat(): Second argument has to be greater than or equal to 0&quot;.  
+Ref: squizlabs/PHP_CodeSniffer#2522
   <table>
    <tr>
     <th>Valid: contains line which is too long.</th>
