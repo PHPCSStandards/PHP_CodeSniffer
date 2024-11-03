@@ -5,8 +5,8 @@
 This is a standard block.
   <table>
    <tr>
-    <th>  Valid: spaces at start of description.</th>
-    <th>Invalid: spaces at end making line > 46 chars.   </th>
+    <th>Valid: spaces at start of description.</th>
+    <th>Invalid: spaces at end making line > 46 chars.</th>
    </tr>
    <tr>
 <td>
@@ -23,8 +23,8 @@ This is a standard block.
   </table>
   <table>
    <tr>
-    <th>  Valid: spaces at start + end of description.   </th>
-    <th>Invalid: spaces '     ' in description.</th>
+    <th>Valid: spaces at start + end of description.</th>
+    <th>Invalid: spaces '&nbsp;&nbsp;&nbsp;&nbsp; ' in description.</th>
    </tr>
    <tr>
 <td>
