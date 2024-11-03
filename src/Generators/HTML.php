@@ -237,14 +237,35 @@ class HTML extends Generator
         $content = trim($node->nodeValue);
         $content = htmlspecialchars($content, (ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401));
 
-        // Use the correct line endings based on the OS.
-        $content = str_replace("\n", PHP_EOL, $content);
-
-        // Allow em tags only.
+        // Allow only em tags.
         $content = str_replace('&lt;em&gt;', '<em>', $content);
         $content = str_replace('&lt;/em&gt;', '</em>', $content);
 
-        echo "  <p class=\"text\">$content</p>".PHP_EOL;
+        $nodeLines = explode("\n", $content);
+        $lineCount = count($nodeLines);
+        $lines     = [];
+
+        for ($i = 0; $i < $lineCount; $i++) {
+            $currentLine = trim($nodeLines[$i]);
+
+            if (isset($nodeLines[($i + 1)]) === false) {
+                // We're at the end of the text, just add the line.
+                $lines[] = $currentLine;
+            } else {
+                $nextLine = trim($nodeLines[($i + 1)]);
+                if ($nextLine === '') {
+                    // Next line is a blank line, end the paragraph and start a new one.
+                    // Also skip over the blank line.
+                    $lines[] = $currentLine.'</p>'.PHP_EOL.'  <p class="text">';
+                    ++$i;
+                } else {
+                    // Next line is not blank, so just add a line break.
+                    $lines[] = $currentLine.'<br/>'.PHP_EOL;
+                }
+            }
+        }
+
+        echo '  <p class="text">'.implode('', $lines).'</p>'.PHP_EOL;
 
     }//end printTextBlock()
 
