@@ -149,6 +149,14 @@ final class MarkdownTest extends TestCase
                 'sniffs'         => 'StandardWithDocs.Content.StandardLineWrapping',
                 'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputStandardLineWrapping.md',
             ],
+            'Code Title: line wrapping'                        => [
+                'sniffs'         => 'StandardWithDocs.Content.CodeTitleLineWrapping',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeTitleLineWrapping.md',
+            ],
+            'Code Title: whitespace handling'                  => [
+                'sniffs'         => 'StandardWithDocs.Content.CodeTitleWhitespace',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeTitleWhitespace.md',
+            ],
         ];
 
     }//end dataDocSpecifics()
