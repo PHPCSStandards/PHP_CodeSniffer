@@ -11,7 +11,6 @@
 
 namespace PHP_CodeSniffer\Generators;
 
-use DOMDocument;
 use DOMNode;
 use PHP_CodeSniffer\Config;
 
@@ -32,12 +31,7 @@ class Markdown extends Generator
         }
 
         ob_start();
-        foreach ($this->docFiles as $file) {
-            $doc = new DOMDocument();
-            $doc->load($file);
-            $documentation = $doc->getElementsByTagName('documentation')->item(0);
-            $this->processSniff($documentation);
-        }
+        parent::generate();
 
         $content = ob_get_contents();
         ob_end_clean();
