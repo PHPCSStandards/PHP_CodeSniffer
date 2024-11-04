@@ -173,6 +173,22 @@ final class HTMLTest extends TestCase
                 'sniffs'         => 'StandardWithDocs.Content.CodeComparisonLineLength',
                 'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonLineLength.html',
             ],
+            'Unsupported: <code> element at the wrong level'   => [
+                'sniffs'         => 'StandardWithDocs.Unsupported.ElementAtWrongLevel',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputUnsupportedElementAtWrongLevel.html',
+            ],
+            'Unsupported: one correct elm, one at wrong level' => [
+                'sniffs'         => 'StandardWithDocs.Unsupported.OneElmAtWrongLevel',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputUnsupportedOneElmAtWrongLevel.html',
+            ],
+            'Unsupported: superfluous code element'            => [
+                'sniffs'         => 'StandardWithDocs.Unsupported.SuperfluousCodeElement',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputUnsupportedSuperfluousCodeElement.html',
+            ],
+            'Unsupported: unknown element'                     => [
+                'sniffs'         => 'StandardWithDocs.Unsupported.UnknownElement',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputUnsupportedUnknownElement.html',
+            ],
         ];
 
     }//end dataDocSpecifics()
