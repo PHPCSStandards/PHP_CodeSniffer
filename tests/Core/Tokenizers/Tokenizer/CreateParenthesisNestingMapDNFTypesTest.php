@@ -218,7 +218,6 @@ final class CreateParenthesisNestingMapDNFTypesTest extends AbstractTokenizerTes
         $this->assertArrayHasKey('parenthesis_closer', $closer, 'Parenthesis closer is not set');
         $this->assertSame($closePtr, $closer['parenthesis_closer'], 'Parenthesis closer is not the expected token');
 
-        $intersectionCount = 0;
         for ($i = ($openPtr + 1); $i < $closePtr; $i++) {
             $this->assertArrayHasKey('nested_parenthesis', $tokens[$i], "Nested parenthesis key not set on token $i ({$tokens[$i]['type']})");
             $this->assertArrayHasKey($openPtr, $tokens[$i]['nested_parenthesis'], 'Nested parenthesis is missing target parentheses set');
