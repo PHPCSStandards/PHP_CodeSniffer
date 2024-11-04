@@ -1,8 +1,5 @@
 # GeneratorTest Coding Standard
 
-## No Content
-
-
 ## Code Comparison Only, Missing Standard Block
 
   <table>

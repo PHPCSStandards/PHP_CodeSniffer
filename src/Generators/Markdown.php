@@ -32,8 +32,6 @@ class Markdown extends Generator
         }
 
         ob_start();
-        $this->printHeader();
-
         foreach ($this->docFiles as $file) {
             $doc = new DOMDocument();
             $doc->load($file);
@@ -41,11 +39,14 @@ class Markdown extends Generator
             $this->processSniff($documentation);
         }
 
-        $this->printFooter();
         $content = ob_get_contents();
         ob_end_clean();
 
-        echo $content;
+        if (trim($content) !== '') {
+            echo $this->getFormattedHeader();
+            echo $content;
+            echo $this->getFormattedFooter();
+        }
 
     }//end generate()
 
@@ -53,32 +54,70 @@ class Markdown extends Generator
     /**
      * Print the markdown header.
      *
+     * @deprecated 3.12.0 Use Markdown::getFormattedHeader() instead.
+     *
+     * @codeCoverageIgnore
+     *
      * @return void
      */
     protected function printHeader()
     {
-        $standard = $this->ruleset->name;
-
-        echo "# $standard Coding Standard".PHP_EOL;
+        echo $this->getFormattedHeader();
 
     }//end printHeader()
 
 
     /**
+     * Format the markdown header.
+     *
+     * @since 3.12.0 Replaces the deprecated Markdown::printHeader() method.
+     *
+     * @return string
+     */
+    protected function getFormattedHeader()
+    {
+        $standard = $this->ruleset->name;
+
+        return "# $standard Coding Standard".PHP_EOL;
+
+    }//end getFormattedHeader()
+
+
+    /**
      * Print the markdown footer.
+     *
+     * @deprecated 3.12.0 Use Markdown::getFormattedFooter() instead.
+     *
+     * @codeCoverageIgnore
      *
      * @return void
      */
     protected function printFooter()
     {
+        echo $this->getFormattedFooter();
+
+    }//end printFooter()
+
+
+    /**
+     * Format the markdown footer.
+     *
+     * @since 3.12.0 Replaces the deprecated Markdown::printFooter() method.
+     *
+     * @return string
+     */
+    protected function getFormattedFooter()
+    {
         // Turn off errors so we don't get timezone warnings if people
         // don't have their timezone set.
         $errorLevel = error_reporting(0);
-        echo PHP_EOL.'Documentation generated on '.date('r');
-        echo ' by [PHP_CodeSniffer '.Config::VERSION.'](https://github.com/PHPCSStandards/PHP_CodeSniffer)'.PHP_EOL;
+        $output     = PHP_EOL.'Documentation generated on '.date('r');
+        $output    .= ' by [PHP_CodeSniffer '.Config::VERSION.'](https://github.com/PHPCSStandards/PHP_CodeSniffer)'.PHP_EOL;
         error_reporting($errorLevel);
 
-    }//end printFooter()
+        return $output;
+
+    }//end getFormattedFooter()
 
 
     /**
@@ -92,15 +131,19 @@ class Markdown extends Generator
      */
     protected function processSniff(DOMNode $doc)
     {
-        $title = $this->getTitle($doc);
-        echo PHP_EOL."## $title".PHP_EOL.PHP_EOL;
-
+        $content = '';
         foreach ($doc->childNodes as $node) {
             if ($node->nodeName === 'standard') {
-                $this->printTextBlock($node);
+                $content .= $this->getFormattedTextBlock($node);
             } else if ($node->nodeName === 'code_comparison') {
-                $this->printCodeComparisonBlock($node);
+                $content .= $this->getFormattedCodeComparisonBlock($node);
             }
+        }
+
+        if (trim($content) !== '') {
+            $title = $this->getTitle($doc);
+            echo PHP_EOL."## $title".PHP_EOL.PHP_EOL;
+            echo $content;
         }
 
     }//end processSniff()
@@ -111,9 +154,29 @@ class Markdown extends Generator
      *
      * @param \DOMNode $node The DOMNode object for the text block.
      *
+     * @deprecated 3.12.0 Use Markdown::getFormattedTextBlock() instead.
+     *
+     * @codeCoverageIgnore
+     *
      * @return void
      */
     protected function printTextBlock(DOMNode $node)
+    {
+        echo $this->getFormattedTextBlock($node);
+
+    }//end printTextBlock()
+
+
+    /**
+     * Format a text block found in a standard.
+     *
+     * @param \DOMNode $node The DOMNode object for the text block.
+     *
+     * @since 3.12.0 Replaces the deprecated Markdown::printTextBlock() method.
+     *
+     * @return string
+     */
+    protected function getFormattedTextBlock(DOMNode $node)
     {
         $content = trim($node->nodeValue);
         $content = htmlspecialchars($content, (ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401));
@@ -144,9 +207,9 @@ class Markdown extends Generator
             }
         }
 
-        echo implode(PHP_EOL, $lines).PHP_EOL;
+        return implode(PHP_EOL, $lines).PHP_EOL;
 
-    }//end printTextBlock()
+    }//end getFormattedTextBlock()
 
 
     /**
@@ -154,9 +217,29 @@ class Markdown extends Generator
      *
      * @param \DOMNode $node The DOMNode object for the code comparison block.
      *
+     * @deprecated 3.12.0 Use Markdown::getFormattedCodeComparisonBlock() instead.
+     *
+     * @codeCoverageIgnore
+     *
      * @return void
      */
     protected function printCodeComparisonBlock(DOMNode $node)
+    {
+        echo $this->getFormattedCodeComparisonBlock($node);
+
+    }//end printCodeComparisonBlock()
+
+
+    /**
+     * Format a code comparison block found in a standard.
+     *
+     * @param \DOMNode $node The DOMNode object for the code comparison block.
+     *
+     * @since 3.12.0 Replaces the deprecated Markdown::printCodeComparisonBlock() method.
+     *
+     * @return string
+     */
+    protected function getFormattedCodeComparisonBlock(DOMNode $node)
     {
         $codeBlocks = $node->getElementsByTagName('code');
 
@@ -174,22 +257,24 @@ class Markdown extends Generator
         $second      = str_replace('<em>', '', $second);
         $second      = str_replace('</em>', '', $second);
 
-        echo '  <table>'.PHP_EOL;
-        echo '   <tr>'.PHP_EOL;
-        echo "    <th>$firstTitle</th>".PHP_EOL;
-        echo "    <th>$secondTitle</th>".PHP_EOL;
-        echo '   </tr>'.PHP_EOL;
-        echo '   <tr>'.PHP_EOL;
-        echo '<td>'.PHP_EOL.PHP_EOL;
-        echo "    $first".PHP_EOL.PHP_EOL;
-        echo '</td>'.PHP_EOL;
-        echo '<td>'.PHP_EOL.PHP_EOL;
-        echo "    $second".PHP_EOL.PHP_EOL;
-        echo '</td>'.PHP_EOL;
-        echo '   </tr>'.PHP_EOL;
-        echo '  </table>'.PHP_EOL;
+        $output  = '  <table>'.PHP_EOL;
+        $output .= '   <tr>'.PHP_EOL;
+        $output .= "    <th>$firstTitle</th>".PHP_EOL;
+        $output .= "    <th>$secondTitle</th>".PHP_EOL;
+        $output .= '   </tr>'.PHP_EOL;
+        $output .= '   <tr>'.PHP_EOL;
+        $output .= '<td>'.PHP_EOL.PHP_EOL;
+        $output .= "    $first".PHP_EOL.PHP_EOL;
+        $output .= '</td>'.PHP_EOL;
+        $output .= '<td>'.PHP_EOL.PHP_EOL;
+        $output .= "    $second".PHP_EOL.PHP_EOL;
+        $output .= '</td>'.PHP_EOL;
+        $output .= '   </tr>'.PHP_EOL;
+        $output .= '  </table>'.PHP_EOL;
 
-    }//end printCodeComparisonBlock()
+        return $output;
+
+    }//end getFormattedCodeComparisonBlock()
 
 
 }//end class
