@@ -125,13 +125,29 @@ final class HTMLTest extends TestCase
     public static function dataDocSpecifics()
     {
         return [
-            'Documentation title: case'   => [
+            'Documentation title: case'                        => [
                 'sniffs'         => 'StandardWithDocs.Content.DocumentationTitleCase',
                 'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputDocumentationTitleCase.html',
             ],
-            'Documentation title: length' => [
+            'Documentation title: length'                      => [
                 'sniffs'         => 'StandardWithDocs.Content.DocumentationTitleLength',
                 'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputDocumentationTitleLength.html',
+            ],
+            'Standard Element: blank line handling'            => [
+                'sniffs'         => 'StandardWithDocs.Content.StandardBlankLines',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputStandardBlankLines.html',
+            ],
+            'Standard Element: encoding of special characters' => [
+                'sniffs'         => 'StandardWithDocs.Content.StandardEncoding',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputStandardEncoding.html',
+            ],
+            'Standard Element: indent handling'                => [
+                'sniffs'         => 'StandardWithDocs.Content.StandardIndent',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputStandardIndent.html',
+            ],
+            'Standard Element: line wrapping'                  => [
+                'sniffs'         => 'StandardWithDocs.Content.StandardLineWrapping',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputStandardLineWrapping.html',
             ],
         ];
 
