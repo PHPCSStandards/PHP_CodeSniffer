@@ -175,7 +175,7 @@ final class HTMLTest extends TestCase
             ],
             'Unsupported: <code> element at the wrong level'   => [
                 'sniffs'         => 'StandardWithDocs.Unsupported.ElementAtWrongLevel',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputUnsupportedElementAtWrongLevel.html',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputEmpty.txt',
             ],
             'Unsupported: one correct elm, one at wrong level' => [
                 'sniffs'         => 'StandardWithDocs.Unsupported.OneElmAtWrongLevel',
@@ -187,7 +187,7 @@ final class HTMLTest extends TestCase
             ],
             'Unsupported: unknown element'                     => [
                 'sniffs'         => 'StandardWithDocs.Unsupported.UnknownElement',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputUnsupportedUnknownElement.html',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputEmpty.txt',
             ],
         ];
 
@@ -210,10 +210,16 @@ final class HTMLTest extends TestCase
         $regex .= 'Documentation generated on [A-Z][a-z]{2}, [0-9]{2} [A-Z][a-z]{2} 20[0-9]{2} [0-2][0-9](?::[0-5][0-9]){2} [+-][0-9]{4}';
         $regex .= ' by <a href="https://github\.com/PHPCSStandards/PHP_CodeSniffer">PHP_CodeSniffer [3-9]\.[0-9]+.[0-9]+</a>';
         $regex .= '</div>\R </body>\R</html>\R$`';
-        $this->expectOutputRegex($regex);
 
         $generator = new HTMLDouble($ruleset);
-        $generator->printRealFooter();
+        $footer    = $generator->getRealFooter();
+
+        if (method_exists($this, 'assertMatchesRegularExpression') === true) {
+            $this->assertMatchesRegularExpression($regex, $footer);
+        } else {
+            // PHPUnit < 9.1.0.
+            $this->assertRegExp($regex, $footer);
+        }
 
     }//end testFooter()
 
@@ -235,11 +241,8 @@ final class HTMLTest extends TestCase
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
-        // We know there will be output, but we're not interested in the output for this test.
-        ob_start();
         $generator = new HTMLDouble($ruleset);
-        $generator->printRealFooter();
-        ob_end_clean();
+        $generator->getRealFooter();
 
         $this->assertSame($expected, error_reporting());
 
@@ -277,11 +280,8 @@ final class HTMLTest extends TestCase
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
-        // We know there will be output, but we're not interested in the output for this test.
-        ob_start();
         $generator = new HTMLDouble($ruleset);
-        $generator->printRealFooter();
-        ob_end_clean();
+        $generator->getRealFooter();
 
         // Reset the timezone to its original state.
         ini_set('date.timezone', $originalIni);
