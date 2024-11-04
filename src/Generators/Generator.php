@@ -60,6 +60,9 @@ abstract class Generator
             }
         }
 
+        // Always present the docs in a consistent alphabetical order.
+        sort($this->docFiles, (SORT_NATURAL | SORT_FLAG_CASE));
+
     }//end __construct()
 
 
