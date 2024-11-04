@@ -62,7 +62,7 @@ final class HTMLTest extends TestCase
         return [
             'Standard without docs'            => [
                 'standard'       => __DIR__.'/NoDocsTest.xml',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputNoDocs.html',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputEmpty.txt',
             ],
             'Standard with one doc file'       => [
                 'standard'       => __DIR__.'/OneDocTest.xml',
