@@ -116,7 +116,7 @@ class Markdown extends Generator
     protected function printTextBlock(DOMNode $node)
     {
         $content = trim($node->nodeValue);
-        $content = htmlspecialchars($content);
+        $content = htmlspecialchars($content, (ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401));
 
         // Use the correct line endings based on the OS.
         $content = str_replace("\n", PHP_EOL, $content);
