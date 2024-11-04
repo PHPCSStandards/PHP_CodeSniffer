@@ -108,9 +108,6 @@ class HTML extends Generator
         }
 
         ob_start();
-        $this->printHeader();
-        $this->printToc();
-
         foreach ($this->docFiles as $file) {
             $doc = new DOMDocument();
             $doc->load($file);
@@ -118,12 +115,15 @@ class HTML extends Generator
             $this->processSniff($documentation);
         }
 
-        $this->printFooter();
-
         $content = ob_get_contents();
         ob_end_clean();
 
-        echo $content;
+        if (trim($content) !== '') {
+            echo $this->getFormattedHeader();
+            echo $this->getFormattedToc();
+            echo $content;
+            echo $this->getFormattedFooter();
+        }
 
     }//end generate()
 
@@ -131,72 +131,132 @@ class HTML extends Generator
     /**
      * Print the header of the HTML page.
      *
+     * @deprecated 3.12.0 Use HTML::getFormattedHeader() instead.
+     *
+     * @codeCoverageIgnore
+     *
      * @return void
      */
     protected function printHeader()
     {
-        $standard = $this->ruleset->name;
-        echo '<html>'.PHP_EOL;
-        echo ' <head>'.PHP_EOL;
-        echo "  <title>$standard Coding Standards</title>".PHP_EOL;
-        echo '  '.str_replace("\n", PHP_EOL, self::STYLESHEET).PHP_EOL;
-        echo ' </head>'.PHP_EOL;
-        echo ' <body>'.PHP_EOL;
-        echo "  <h1>$standard Coding Standards</h1>".PHP_EOL;
+        echo $this->getFormattedHeader();
 
     }//end printHeader()
 
 
     /**
+     * Format the header of the HTML page.
+     *
+     * @since 3.12.0 Replaces the deprecated HTML::printHeader() method.
+     *
+     * @return string
+     */
+    protected function getFormattedHeader()
+    {
+        $standard = $this->ruleset->name;
+        $output   = '<html>'.PHP_EOL;
+        $output  .= ' <head>'.PHP_EOL;
+        $output  .= "  <title>$standard Coding Standards</title>".PHP_EOL;
+        $output  .= '  '.str_replace("\n", PHP_EOL, self::STYLESHEET).PHP_EOL;
+        $output  .= ' </head>'.PHP_EOL;
+        $output  .= ' <body>'.PHP_EOL;
+        $output  .= "  <h1>$standard Coding Standards</h1>".PHP_EOL;
+
+        return $output;
+
+    }//end getFormattedHeader()
+
+
+    /**
      * Print the table of contents for the standard.
      *
-     * The TOC is just an unordered list of bookmarks to sniffs on the page.
+     * @deprecated 3.12.0 Use HTML::getFormattedToc() instead.
+     *
+     * @codeCoverageIgnore
      *
      * @return void
      */
     protected function printToc()
     {
+        echo $this->getFormattedToc();
+
+    }//end printToc()
+
+
+    /**
+     * Format the table of contents for the standard.
+     *
+     * The TOC is just an unordered list of bookmarks to sniffs on the page.
+     *
+     * @since 3.12.0 Replaces the deprecated HTML::printToc() method.
+     *
+     * @return string
+     */
+    protected function getFormattedToc()
+    {
         // Only show a TOC when there are two or more docs to display.
         if (count($this->docFiles) < 2) {
-            return;
+            return '';
         }
 
-        echo '  <h2>Table of Contents</h2>'.PHP_EOL;
-        echo '  <ul class="toc">'.PHP_EOL;
+        $output  = '  <h2>Table of Contents</h2>'.PHP_EOL;
+        $output .= '  <ul class="toc">'.PHP_EOL;
 
         foreach ($this->docFiles as $file) {
             $doc = new DOMDocument();
             $doc->load($file);
             $documentation = $doc->getElementsByTagName('documentation')->item(0);
             $title         = $this->getTitle($documentation);
-            echo '   <li><a href="#'.str_replace(' ', '-', $title)."\">$title</a></li>".PHP_EOL;
+            $output       .= '   <li><a href="#'.str_replace(' ', '-', $title).'">'.$title.'</a></li>'.PHP_EOL;
         }
 
-        echo '  </ul>'.PHP_EOL;
+        $output .= '  </ul>'.PHP_EOL;
 
-    }//end printToc()
+        return $output;
+
+    }//end getFormattedToc()
 
 
     /**
      * Print the footer of the HTML page.
      *
+     * @deprecated 3.12.0 Use HTML::getFormattedFooter() instead.
+     *
+     * @codeCoverageIgnore
+     *
      * @return void
      */
     protected function printFooter()
     {
+        echo $this->getFormattedFooter();
+
+    }//end printFooter()
+
+
+    /**
+     * Format the footer of the HTML page.
+     *
+     * @since 3.12.0 Replaces the deprecated HTML::printFooter() method.
+     *
+     * @return string
+     */
+    protected function getFormattedFooter()
+    {
         // Turn off errors so we don't get timezone warnings if people
         // don't have their timezone set.
         $errorLevel = error_reporting(0);
-        echo '  <div class="tag-line">';
-        echo 'Documentation generated on '.date('r');
-        echo ' by <a href="https://github.com/PHPCSStandards/PHP_CodeSniffer">PHP_CodeSniffer '.Config::VERSION.'</a>';
-        echo '</div>'.PHP_EOL;
+        $output     = '  <div class="tag-line">';
+        $output    .= 'Documentation generated on '.date('r');
+        $output    .= ' by <a href="https://github.com/PHPCSStandards/PHP_CodeSniffer">PHP_CodeSniffer '.Config::VERSION.'</a>';
+        $output    .= '</div>'.PHP_EOL;
         error_reporting($errorLevel);
 
-        echo ' </body>'.PHP_EOL;
-        echo '</html>'.PHP_EOL;
+        $output .= ' </body>'.PHP_EOL;
+        $output .= '</html>'.PHP_EOL;
 
-    }//end printFooter()
+        return $output;
+
+    }//end getFormattedFooter()
 
 
     /**
@@ -210,16 +270,20 @@ class HTML extends Generator
      */
     public function processSniff(DOMNode $doc)
     {
-        $title = $this->getTitle($doc);
-        echo '  <a name="'.str_replace(' ', '-', $title).'" />'.PHP_EOL;
-        echo "  <h2>$title</h2>".PHP_EOL;
-
+        $content = '';
         foreach ($doc->childNodes as $node) {
             if ($node->nodeName === 'standard') {
-                $this->printTextBlock($node);
+                $content .= $this->getFormattedTextBlock($node);
             } else if ($node->nodeName === 'code_comparison') {
-                $this->printCodeComparisonBlock($node);
+                $content .= $this->getFormattedCodeComparisonBlock($node);
             }
+        }
+
+        if (trim($content) !== '') {
+            $title = $this->getTitle($doc);
+            echo '  <a name="'.str_replace(' ', '-', $title).'" />'.PHP_EOL;
+            echo '  <h2>'.$title.'</h2>'.PHP_EOL;
+            echo $content;
         }
 
     }//end processSniff()
@@ -230,9 +294,29 @@ class HTML extends Generator
      *
      * @param \DOMNode $node The DOMNode object for the text block.
      *
+     * @deprecated 3.12.0 Use HTML::getFormattedTextBlock() instead.
+     *
+     * @codeCoverageIgnore
+     *
      * @return void
      */
     protected function printTextBlock(DOMNode $node)
+    {
+        echo $this->getFormattedTextBlock($node);
+
+    }//end printTextBlock()
+
+
+    /**
+     * Format a text block found in a standard.
+     *
+     * @param \DOMNode $node The DOMNode object for the text block.
+     *
+     * @since 3.12.0 Replaces the deprecated HTML::printTextBlock() method.
+     *
+     * @return string
+     */
+    protected function getFormattedTextBlock(DOMNode $node)
     {
         $content = trim($node->nodeValue);
         $content = htmlspecialchars($content, (ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401));
@@ -265,9 +349,9 @@ class HTML extends Generator
             }
         }
 
-        echo '  <p class="text">'.implode('', $lines).'</p>'.PHP_EOL;
+        return '  <p class="text">'.implode('', $lines).'</p>'.PHP_EOL;
 
-    }//end printTextBlock()
+    }//end getFormattedTextBlock()
 
 
     /**
@@ -275,9 +359,29 @@ class HTML extends Generator
      *
      * @param \DOMNode $node The DOMNode object for the code comparison block.
      *
+     * @deprecated 3.12.0 Use HTML::getFormattedCodeComparisonBlock() instead.
+     *
+     * @codeCoverageIgnore
+     *
      * @return void
      */
     protected function printCodeComparisonBlock(DOMNode $node)
+    {
+        echo $this->getFormattedCodeComparisonBlock($node);
+
+    }//end printCodeComparisonBlock()
+
+
+    /**
+     * Format a code comparison block found in a standard.
+     *
+     * @param \DOMNode $node The DOMNode object for the code comparison block.
+     *
+     * @since 3.12.0 Replaces the deprecated HTML::printCodeComparisonBlock() method.
+     *
+     * @return string
+     */
+    protected function getFormattedCodeComparisonBlock(DOMNode $node)
     {
         $codeBlocks = $node->getElementsByTagName('code');
 
@@ -299,18 +403,20 @@ class HTML extends Generator
         $second      = str_replace('<em>', '<span class="code-comparison-highlight">', $second);
         $second      = str_replace('</em>', '</span>', $second);
 
-        echo '  <table class="code-comparison">'.PHP_EOL;
-        echo '   <tr>'.PHP_EOL;
-        echo "    <td class=\"code-comparison-title\">$firstTitle</td>".PHP_EOL;
-        echo "    <td class=\"code-comparison-title\">$secondTitle</td>".PHP_EOL;
-        echo '   </tr>'.PHP_EOL;
-        echo '   <tr>'.PHP_EOL;
-        echo "    <td class=\"code-comparison-code\">$first</td>".PHP_EOL;
-        echo "    <td class=\"code-comparison-code\">$second</td>".PHP_EOL;
-        echo '   </tr>'.PHP_EOL;
-        echo '  </table>'.PHP_EOL;
+        $output  = '  <table class="code-comparison">'.PHP_EOL;
+        $output .= '   <tr>'.PHP_EOL;
+        $output .= "    <td class=\"code-comparison-title\">$firstTitle</td>".PHP_EOL;
+        $output .= "    <td class=\"code-comparison-title\">$secondTitle</td>".PHP_EOL;
+        $output .= '   </tr>'.PHP_EOL;
+        $output .= '   <tr>'.PHP_EOL;
+        $output .= "    <td class=\"code-comparison-code\">$first</td>".PHP_EOL;
+        $output .= "    <td class=\"code-comparison-code\">$second</td>".PHP_EOL;
+        $output .= '   </tr>'.PHP_EOL;
+        $output .= '  </table>'.PHP_EOL;
 
-    }//end printCodeComparisonBlock()
+        return $output;
+
+    }//end getFormattedCodeComparisonBlock()
 
 
 }//end class
