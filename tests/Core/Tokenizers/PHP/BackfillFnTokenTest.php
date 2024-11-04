@@ -405,8 +405,6 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
      */
     public function testKeywordReturnTypes($testMarker)
     {
-        $tokens = $this->phpcsFile->getTokens();
-
         $token = $this->getTargetToken($testMarker, T_FN);
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 11, 14);
