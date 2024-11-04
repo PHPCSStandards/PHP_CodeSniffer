@@ -15,8 +15,10 @@
 namespace PHP_CodeSniffer\Generators;
 
 use DOMDocument;
+use DOMElement;
 use DOMNode;
 use PHP_CodeSniffer\Autoload;
+use PHP_CodeSniffer\Exceptions\GeneratorException;
 use PHP_CodeSniffer\Ruleset;
 
 abstract class Generator
@@ -112,6 +114,9 @@ abstract class Generator
      *
      * @return void
      * @see    processSniff()
+     *
+     * @throws \PHP_CodeSniffer\Exceptions\GeneratorException If there is no <documentation> element
+     *                                                        in the XML document.
      */
     public function generate()
     {
@@ -119,6 +124,12 @@ abstract class Generator
             $doc = new DOMDocument();
             $doc->load($file);
             $documentation = $doc->getElementsByTagName('documentation')->item(0);
+            if (($documentation instanceof DOMNode) === false) {
+                throw new GeneratorException(
+                    'Missing top-level <documentation> element in XML documentation file '.$file
+                );
+            }
+
             $this->processSniff($documentation);
         }
 

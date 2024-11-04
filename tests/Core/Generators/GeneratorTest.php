@@ -8,6 +8,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Generators;
 
+use PHP_CodeSniffer\Exceptions\GeneratorException;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHP_CodeSniffer\Tests\Core\Generators\Fixtures\MockGenerator;
@@ -94,8 +95,6 @@ final class GeneratorTest extends TestCase
     /**
      * Verify that an XML doc which isn't valid documentation yields an Exception to warn devs.
      *
-     * This should not be hidden via defensive coding!
-     *
      * @return void
      */
     public function testGeneratingInvalidDocsResultsInException()
@@ -105,14 +104,8 @@ final class GeneratorTest extends TestCase
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
-        if (PHP_VERSION_ID >= 80000) {
-            $message = 'processSniff(): Argument #1 ($doc) must be of type DOMNode, null given';
-        } else {
-            $message = 'processSniff() must be an instance of DOMNode, null given';
-        }
-
-        $this->expectException('TypeError');
-        $this->expectExceptionMessage($message);
+        $this->expectException(GeneratorException::class);
+        $this->expectExceptionMessage('Missing top-level <documentation> element in XML documentation file');
 
         $generator = new MockGenerator($ruleset);
         $generator->generate();

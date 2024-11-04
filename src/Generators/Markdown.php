@@ -14,6 +14,7 @@ namespace PHP_CodeSniffer\Generators;
 use DOMElement;
 use DOMNode;
 use PHP_CodeSniffer\Config;
+use PHP_CodeSniffer\Exceptions\GeneratorException;
 
 class Markdown extends Generator
 {
@@ -24,6 +25,9 @@ class Markdown extends Generator
      *
      * @return void
      * @see    processSniff()
+     *
+     * @throws \PHP_CodeSniffer\Exceptions\GeneratorException If there is no <documentation> element
+     *                                                        in the XML document.
      */
     public function generate()
     {
@@ -32,10 +36,18 @@ class Markdown extends Generator
         }
 
         ob_start();
-        parent::generate();
+        try {
+            parent::generate();
+            $content = ob_get_clean();
+        } catch (GeneratorException $e) {
+            ob_end_clean();
+            $content = '';
+        }
 
-        $content = ob_get_contents();
-        ob_end_clean();
+        // If an exception was caught, rethrow it outside of the output buffer.
+        if (isset($e) === true) {
+            throw $e;
+        }
 
         if (trim($content) !== '') {
             echo $this->getFormattedHeader();
