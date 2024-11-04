@@ -48,38 +48,14 @@ class Text extends Generator
 
 
     /**
-     * Prints the title area for a single sniff.
-     *
-     * @param \DOMNode $doc The DOMNode object for the sniff.
-     *                      It represents the "documentation" tag in the XML
-     *                      standard file.
-     *
-     * @deprecated 3.12.0 Use Text::getFormattedTitle() instead.
-     *
-     * @codeCoverageIgnore
-     *
-     * @return void
-     */
-    protected function printTitle(DOMNode $doc)
-    {
-        trigger_error(
-            'The '.__METHOD__.'() method is deprecated. Use "echo '.__CLASS__.'::getFormattedTitle()" instead.',
-            E_USER_DEPRECATED
-        );
-
-        echo $this->getFormattedTitle($doc);
-
-    }//end printTitle()
-
-
-    /**
      * Format the title area for a single sniff.
      *
      * @param \DOMNode $doc The DOMNode object for the sniff.
      *                      It represents the "documentation" tag in the XML
      *                      standard file.
      *
-     * @since 3.12.0 Replaces the deprecated Text::printTitle() method.
+     * @since 3.12.0 Replaces the Text::printTitle() method,
+     *               which was deprecated in 3.12.0 and removed in 4.0.0.
      *
      * @return string
      */
@@ -102,34 +78,12 @@ class Text extends Generator
 
 
     /**
-     * Print a text block found in a standard.
-     *
-     * @param \DOMNode $node The DOMNode object for the text block.
-     *
-     * @deprecated 3.12.0 Use Text::getFormattedTextBlock() instead.
-     *
-     * @codeCoverageIgnore
-     *
-     * @return void
-     */
-    protected function printTextBlock(DOMNode $node)
-    {
-        trigger_error(
-            'The '.__METHOD__.'() method is deprecated. Use "echo '.__CLASS__.'::getFormattedTextBlock()" instead.',
-            E_USER_DEPRECATED
-        );
-
-        echo $this->getFormattedTextBlock($node);
-
-    }//end printTextBlock()
-
-
-    /**
      * Format a text block found in a standard.
      *
      * @param \DOMNode $node The DOMNode object for the text block.
      *
-     * @since 3.12.0 Replaces the deprecated Text::printTextBlock() method.
+     * @since 3.12.0 Replaces the Text::printTextBlock() method,
+     *               which was deprecated in 3.12.0 and removed in 4.0.0.
      *
      * @return string
      */
@@ -153,34 +107,12 @@ class Text extends Generator
 
 
     /**
-     * Print a code comparison block found in a standard.
-     *
-     * @param \DOMNode $node The DOMNode object for the code comparison block.
-     *
-     * @deprecated 3.12.0 Use Text::getFormattedCodeComparisonBlock() instead.
-     *
-     * @codeCoverageIgnore
-     *
-     * @return void
-     */
-    protected function printCodeComparisonBlock(DOMNode $node)
-    {
-        trigger_error(
-            'The '.__METHOD__.'() method is deprecated. Use "echo '.__CLASS__.'::getFormattedCodeComparisonBlock()" instead.',
-            E_USER_DEPRECATED
-        );
-
-        echo $this->getFormattedCodeComparisonBlock($node);
-
-    }//end printCodeComparisonBlock()
-
-
-    /**
      * Format a code comparison block found in a standard.
      *
      * @param \DOMNode $node The DOMNode object for the code comparison block.
      *
-     * @since 3.12.0 Replaces the deprecated Text::printCodeComparisonBlock() method.
+     * @since 3.12.0 Replaces the Text::printCodeComparisonBlock() method,
+     *               which was deprecated in 3.12.0 and removed in 4.0.0.
      *
      * @return string
      */
