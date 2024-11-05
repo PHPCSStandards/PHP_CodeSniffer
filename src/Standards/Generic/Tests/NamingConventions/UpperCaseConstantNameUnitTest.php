@@ -41,7 +41,7 @@ final class UpperCaseConstantNameUnitTest extends AbstractSniffUnitTest
             40 => 1,
             41 => 1,
             45 => 1,
-            47 => 1,
+            51 => 1,
         ];
 
     }//end getErrorList()

@@ -133,9 +133,9 @@ class UpperCaseConstantNameSniff implements Sniff
 
         if (strtoupper($constName) !== $constName) {
             if (strtolower($constName) === $constName) {
-                $phpcsFile->recordMetric($stackPtr, 'Constant name case', 'lower');
+                $phpcsFile->recordMetric($constPtr, 'Constant name case', 'lower');
             } else {
-                $phpcsFile->recordMetric($stackPtr, 'Constant name case', 'mixed');
+                $phpcsFile->recordMetric($constPtr, 'Constant name case', 'mixed');
             }
 
             $error = 'Constants must be uppercase; expected %s but found %s';
@@ -143,9 +143,9 @@ class UpperCaseConstantNameSniff implements Sniff
                 $prefix.strtoupper($constName),
                 $prefix.$constName,
             ];
-            $phpcsFile->addError($error, $stackPtr, 'ConstantNotUpperCase', $data);
+            $phpcsFile->addError($error, $constPtr, 'ConstantNotUpperCase', $data);
         } else {
-            $phpcsFile->recordMetric($stackPtr, 'Constant name case', 'upper');
+            $phpcsFile->recordMetric($constPtr, 'Constant name case', 'upper');
         }
 
     }//end process()
