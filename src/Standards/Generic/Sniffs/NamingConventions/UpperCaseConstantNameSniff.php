@@ -103,8 +103,8 @@ class UpperCaseConstantNameSniff implements Sniff
             return;
         }
 
-        // The next non-whitespace token must be the constant name.
-        $constPtr = $phpcsFile->findNext(T_WHITESPACE, ($openBracket + 1), null, true);
+        // The next non-empty token must be the constant name.
+        $constPtr = $phpcsFile->findNext(Tokens::$emptyTokens, ($openBracket + 1), null, true);
         if ($tokens[$constPtr]['code'] !== T_CONSTANT_ENCAPSED_STRING) {
             return;
         }
