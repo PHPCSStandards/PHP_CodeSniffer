@@ -1,6 +1,7 @@
 # GeneratorTest Coding Standard
 
 ## Superfluous code element
+
 This is a standard block.
   <table>
    <tr>

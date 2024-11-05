@@ -1,6 +1,7 @@
 # GeneratorTest Coding Standard
 
 ## Code Title, line wrapping
+
 This is a standard block.
   <table>
    <tr>

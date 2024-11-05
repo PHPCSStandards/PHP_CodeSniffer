@@ -1,6 +1,7 @@
 # GeneratorTest Coding Standard
 
 ## Code Title, whitespace handling
+
 This is a standard block.
   <table>
    <tr>
