@@ -3,8 +3,6 @@
 | GENERATORTEST CODING STANDARD: STANDARD ELEMENT, NO CONTENT |
 ---------------------------------------------------------------
 
-
-
 ----------------------------------------- CODE COMPARISON ------------------------------------------
 | Valid: Lorem ipsum dolor sit amet.             | Invalid: Maecenas non rutrum dolor.             |
 ----------------------------------------------------------------------------------------------------

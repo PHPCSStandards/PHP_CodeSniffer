@@ -124,7 +124,12 @@ class Text extends Generator
      */
     protected function getFormattedTextBlock(DOMNode $node)
     {
-        $text = trim($node->nodeValue);
+        $text = $node->nodeValue;
+        if (empty($text) === true) {
+            return '';
+        }
+
+        $text = trim($text);
         $text = str_replace('<em>', '*', $text);
         $text = str_replace('</em>', '*', $text);
 
