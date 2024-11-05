@@ -156,6 +156,11 @@ class HTML extends Generator
      */
     protected function printToc()
     {
+        // Only show a TOC when there are two or more docs to display.
+        if (count($this->docFiles) < 2) {
+            return;
+        }
+
         echo '  <h2>Table of Contents</h2>'.PHP_EOL;
         echo '  <ul class="toc">'.PHP_EOL;
 
