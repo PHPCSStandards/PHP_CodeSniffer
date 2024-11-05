@@ -2,7 +2,6 @@
 
 ## Standard Element, no content
 
-
   <table>
    <tr>
     <th>Valid: Lorem ipsum dolor sit amet.</th>

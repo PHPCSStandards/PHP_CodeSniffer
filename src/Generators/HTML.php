@@ -318,7 +318,12 @@ class HTML extends Generator
      */
     protected function getFormattedTextBlock(DOMNode $node)
     {
-        $content = trim($node->nodeValue);
+        $content = $node->nodeValue;
+        if (empty($content) === true) {
+            return '';
+        }
+
+        $content = trim($content);
         $content = htmlspecialchars($content, (ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401));
 
         // Allow only em tags.
