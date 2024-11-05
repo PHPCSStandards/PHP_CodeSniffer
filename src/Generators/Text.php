@@ -198,9 +198,17 @@ class Text extends Generator
      */
     protected function getFormattedCodeComparisonBlock(DOMNode $node)
     {
-        $codeBlocks = $node->getElementsByTagName('code');
-        $first      = trim($codeBlocks->item(0)->nodeValue);
-        $firstTitle = trim($codeBlocks->item(0)->getAttribute('title'));
+        $codeBlocks    = $node->getElementsByTagName('code');
+        $firstCodeElm  = $codeBlocks->item(0);
+        $secondCodeElm = $codeBlocks->item(1);
+
+        if (isset($firstCodeElm, $secondCodeElm) === false) {
+            // Missing at least one code block.
+            return '';
+        }
+
+        $first      = trim($firstCodeElm->nodeValue);
+        $firstTitle = trim($firstCodeElm->getAttribute('title'));
 
         $firstTitleLines = [];
         $tempTitle       = '';
@@ -234,8 +242,8 @@ class Text extends Generator
         $first      = str_replace('</em>', '', $first);
         $firstLines = explode("\n", $first);
 
-        $second      = trim($codeBlocks->item(1)->nodeValue);
-        $secondTitle = trim($codeBlocks->item(1)->getAttribute('title'));
+        $second      = trim($secondCodeElm->nodeValue);
+        $secondTitle = trim($secondCodeElm->getAttribute('title'));
 
         $secondTitleLines = [];
         $tempTitle        = '';

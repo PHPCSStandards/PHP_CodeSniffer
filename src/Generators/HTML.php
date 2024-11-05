@@ -383,20 +383,27 @@ class HTML extends Generator
      */
     protected function getFormattedCodeComparisonBlock(DOMNode $node)
     {
-        $codeBlocks = $node->getElementsByTagName('code');
+        $codeBlocks    = $node->getElementsByTagName('code');
+        $firstCodeElm  = $codeBlocks->item(0);
+        $secondCodeElm = $codeBlocks->item(1);
 
-        $firstTitle = trim($codeBlocks->item(0)->getAttribute('title'));
+        if (isset($firstCodeElm, $secondCodeElm) === false) {
+            // Missing at least one code block.
+            return '';
+        }
+
+        $firstTitle = trim($firstCodeElm->getAttribute('title'));
         $firstTitle = str_replace('  ', '&nbsp;&nbsp;', $firstTitle);
-        $first      = trim($codeBlocks->item(0)->nodeValue);
+        $first      = trim($firstCodeElm->nodeValue);
         $first      = str_replace('<?php', '&lt;?php', $first);
         $first      = str_replace("\n", '</br>', $first);
         $first      = str_replace(' ', '&nbsp;', $first);
         $first      = str_replace('<em>', '<span class="code-comparison-highlight">', $first);
         $first      = str_replace('</em>', '</span>', $first);
 
-        $secondTitle = trim($codeBlocks->item(1)->getAttribute('title'));
+        $secondTitle = trim($secondCodeElm->getAttribute('title'));
         $secondTitle = str_replace('  ', '&nbsp;&nbsp;', $secondTitle);
-        $second      = trim($codeBlocks->item(1)->nodeValue);
+        $second      = trim($secondCodeElm->nodeValue);
         $second      = str_replace('<?php', '&lt;?php', $second);
         $second      = str_replace("\n", '</br>', $second);
         $second      = str_replace(' ', '&nbsp;', $second);
