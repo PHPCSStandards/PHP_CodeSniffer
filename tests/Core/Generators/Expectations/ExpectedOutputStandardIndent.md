@@ -1,6 +1,7 @@
 # GeneratorTest Coding Standard
 
 ## Standard Element, indentation should be ignored
+
 This line has no indentation.
     This line has 4 spaces indentation.
         This line has 8 spaces indentation.
