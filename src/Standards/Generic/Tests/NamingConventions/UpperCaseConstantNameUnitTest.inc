@@ -41,3 +41,13 @@ class TypedConstants {
     const FALSE false = false; // Yes, false can be used as a constant name, don't ask.
     const array ARRAY = array(); // Same goes for array.
 }
+
+define /* comment */ ( /* comment */ 'CommentsInUnconventionalPlaces', 'value' );
+
+define
+// comment
+(
+    // phpcs:ignore Stnd.Cat.SniffName -- for reasons.
+    'CommentsInUnconventionalPlaces',
+    'value'
+);
