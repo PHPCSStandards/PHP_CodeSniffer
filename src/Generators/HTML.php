@@ -149,15 +149,20 @@ class HTML extends Generator
     protected function getFormattedHeader()
     {
         $standard = $this->ruleset->name;
-        $output   = '<html>'.PHP_EOL;
-        $output  .= ' <head>'.PHP_EOL;
-        $output  .= "  <title>$standard Coding Standards</title>".PHP_EOL;
-        $output  .= '  '.str_replace("\n", PHP_EOL, self::STYLESHEET).PHP_EOL;
-        $output  .= ' </head>'.PHP_EOL;
-        $output  .= ' <body>'.PHP_EOL;
-        $output  .= "  <h1>$standard Coding Standards</h1>".PHP_EOL;
+        $output   = sprintf(
+            '<html>
+ <head>
+  <title>%1$s Coding Standards</title>
+  %2$s
+ </head>
+ <body>
+  <h1>%1$s Coding Standards</h1>',
+            $standard,
+            self::STYLESHEET
+        );
 
-        return $output;
+        // Use the correct line endings based on the OS.
+        return str_replace("\n", PHP_EOL, $output).PHP_EOL;
 
     }//end getFormattedHeader()
 
