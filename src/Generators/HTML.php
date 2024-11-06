@@ -72,6 +72,11 @@ class HTML extends Generator
             line-height: 15px;
         }
 
+        .code-comparison-title {
+            text-align: left;
+            font-weight: 600;
+        }
+
         .code-comparison-code {
             font-family: Courier;
             background-color: #F9F9F9;
@@ -410,8 +415,8 @@ class HTML extends Generator
         $titleRow = '';
         if ($firstTitle !== '' || $secondTitle !== '') {
             $titleRow .= '   <tr>'.PHP_EOL;
-            $titleRow .= "    <td class=\"code-comparison-title\">$firstTitle</td>".PHP_EOL;
-            $titleRow .= "    <td class=\"code-comparison-title\">$secondTitle</td>".PHP_EOL;
+            $titleRow .= "    <th class=\"code-comparison-title\">$firstTitle</th>".PHP_EOL;
+            $titleRow .= "    <th class=\"code-comparison-title\">$secondTitle</th>".PHP_EOL;
             $titleRow .= '   </tr>'.PHP_EOL;
         }
 

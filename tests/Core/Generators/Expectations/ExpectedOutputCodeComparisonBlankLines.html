@@ -45,6 +45,11 @@
             line-height: 15px;
         }
 
+        .code-comparison-title {
+            text-align: left;
+            font-weight: 600;
+        }
+
         .code-comparison-code {
             font-family: Courier;
             background-color: #F9F9F9;
@@ -75,8 +80,8 @@
   <p class="text">This is a standard block.</p>
   <table class="code-comparison">
    <tr>
-    <td class="code-comparison-title">Valid: Checking handling of blank lines.</td>
-    <td class="code-comparison-title">Invalid: Checking handling of blank lines.</td>
+    <th class="code-comparison-title">Valid: Checking handling of blank lines.</th>
+    <th class="code-comparison-title">Invalid: Checking handling of blank lines.</th>
    </tr>
    <tr>
     <td class="code-comparison-code">//&nbsp;First&nbsp;line&nbsp;of&nbsp;the&nbsp;code&nbsp;sample&nbsp;is</br>//&nbsp;deliberately&nbsp;empty.</br></br>//&nbsp;We&nbsp;also&nbsp;have&nbsp;a&nbsp;blank&nbsp;line&nbsp;in&nbsp;the&nbsp;middle.</br></br>//&nbsp;And&nbsp;a&nbsp;blank&nbsp;line&nbsp;at&nbsp;the&nbsp;end.</td>

@@ -45,6 +45,11 @@
             line-height: 15px;
         }
 
+        .code-comparison-title {
+            text-align: left;
+            font-weight: 600;
+        }
+
         .code-comparison-code {
             font-family: Courier;
             background-color: #F9F9F9;
@@ -76,8 +81,8 @@
 Ref: squizlabs/PHP_CodeSniffer#2522</p>
   <table class="code-comparison">
    <tr>
-    <td class="code-comparison-title">Valid: contains line which is too long.</td>
-    <td class="code-comparison-title">Invalid: contains line which is too long.</td>
+    <th class="code-comparison-title">Valid: contains line which is too long.</th>
+    <th class="code-comparison-title">Invalid: contains line which is too long.</th>
    </tr>
    <tr>
     <td class="code-comparison-code">class&nbsp;Foo&nbsp;extends&nbsp;Bar&nbsp;implements&nbsp;<span class="code-comparison-highlight">Countable</span>,&nbsp;Serializable</br>{</br>}</td>
