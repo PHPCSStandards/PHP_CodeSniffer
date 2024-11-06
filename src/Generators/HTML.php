@@ -245,16 +245,17 @@ class HTML extends Generator
         // Turn off errors so we don't get timezone warnings if people
         // don't have their timezone set.
         $errorLevel = error_reporting(0);
-        $output     = '  <div class="tag-line">';
-        $output    .= 'Documentation generated on '.date('r');
-        $output    .= ' by <a href="https://github.com/PHPCSStandards/PHP_CodeSniffer">PHP_CodeSniffer '.Config::VERSION.'</a>';
-        $output    .= '</div>'.PHP_EOL;
+        $output     = sprintf(
+            '  <div class="tag-line">Documentation generated on %s by <a href="https://github.com/PHPCSStandards/PHP_CodeSniffer">PHP_CodeSniffer %s</a></div>
+ </body>
+</html>',
+            date('r'),
+            Config::VERSION
+        );
         error_reporting($errorLevel);
 
-        $output .= ' </body>'.PHP_EOL;
-        $output .= '</html>'.PHP_EOL;
-
-        return $output;
+        // Use the correct line endings based on the OS.
+        return str_replace("\n", PHP_EOL, $output).PHP_EOL;
 
     }//end getFormattedFooter()
 
