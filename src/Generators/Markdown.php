@@ -264,20 +264,33 @@ class Markdown extends Generator
         $second      = str_replace('<em>', '', $second);
         $second      = str_replace('</em>', '', $second);
 
-        $output  = '  <table>'.PHP_EOL;
-        $output .= '   <tr>'.PHP_EOL;
-        $output .= "    <th>$firstTitle</th>".PHP_EOL;
-        $output .= "    <th>$secondTitle</th>".PHP_EOL;
-        $output .= '   </tr>'.PHP_EOL;
-        $output .= '   <tr>'.PHP_EOL;
-        $output .= '<td>'.PHP_EOL.PHP_EOL;
-        $output .= "    $first".PHP_EOL.PHP_EOL;
-        $output .= '</td>'.PHP_EOL;
-        $output .= '<td>'.PHP_EOL.PHP_EOL;
-        $output .= "    $second".PHP_EOL.PHP_EOL;
-        $output .= '</td>'.PHP_EOL;
-        $output .= '   </tr>'.PHP_EOL;
-        $output .= '  </table>'.PHP_EOL;
+        $titleRow = '';
+        if ($firstTitle !== '' || $secondTitle !== '') {
+            $titleRow .= '   <tr>'.PHP_EOL;
+            $titleRow .= "    <th>$firstTitle</th>".PHP_EOL;
+            $titleRow .= "    <th>$secondTitle</th>".PHP_EOL;
+            $titleRow .= '   </tr>'.PHP_EOL;
+        }
+
+        $codeRow = '';
+        if ($first !== '' || $second !== '') {
+            $codeRow .= '   <tr>'.PHP_EOL;
+            $codeRow .= '<td>'.PHP_EOL.PHP_EOL;
+            $codeRow .= "    $first".PHP_EOL.PHP_EOL;
+            $codeRow .= '</td>'.PHP_EOL;
+            $codeRow .= '<td>'.PHP_EOL.PHP_EOL;
+            $codeRow .= "    $second".PHP_EOL.PHP_EOL;
+            $codeRow .= '</td>'.PHP_EOL;
+            $codeRow .= '   </tr>'.PHP_EOL;
+        }
+
+        $output = '';
+        if ($titleRow !== '' || $codeRow !== '') {
+            $output .= '  <table>'.PHP_EOL;
+            $output .= $titleRow;
+            $output .= $codeRow;
+            $output .= '  </table>'.PHP_EOL;
+        }
 
         return $output;
 
