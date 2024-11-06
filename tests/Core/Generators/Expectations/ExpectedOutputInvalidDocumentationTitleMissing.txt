@@ -1,7 +1,7 @@
 
------------------------------------
-| GENERATORTEST CODING STANDARD:  |
------------------------------------
+--------------------------------------------------------------
+| GENERATORTEST CODING STANDARD: DOCUMENTATION TITLE MISSING |
+--------------------------------------------------------------
 
 The above "documentation" element is missing the title attribute.
 

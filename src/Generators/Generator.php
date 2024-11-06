@@ -83,7 +83,22 @@ abstract class Generator
      */
     protected function getTitle(DOMNode $doc)
     {
-        return $doc->getAttribute('title');
+        $title = $doc->getAttribute('title');
+
+        if (empty($title) === true) {
+            // Fall back to the sniff name if no title was supplied.
+            $fileName  = $doc->ownerDocument->documentURI;
+            $lastSlash = strrpos($fileName, '/');
+            if (is_int($lastSlash) === true) {
+                // Get the sniff name without "Standard.xml".
+                $title = substr($fileName, ($lastSlash + 1), -12);
+
+                // Split the sniff name to individual words.
+                $title = preg_replace('`[-._]|(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])`', '$1 $2', $title);
+            }
+        }
+
+        return $title;
 
     }//end getTitle()
 

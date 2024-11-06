@@ -1,6 +1,6 @@
 # GeneratorTest Coding Standard
 
-## 
+## Documentation Title Missing
 
 The above &quot;documentation&quot; element is missing the title attribute.
   <table>
