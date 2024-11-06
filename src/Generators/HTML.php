@@ -16,6 +16,7 @@
 namespace PHP_CodeSniffer\Generators;
 
 use DOMDocument;
+use DOMElement;
 use DOMNode;
 use PHP_CodeSniffer\Config;
 
@@ -400,23 +401,11 @@ class HTML extends Generator
             return '';
         }
 
-        $firstTitle = trim($firstCodeElm->getAttribute('title'));
-        $firstTitle = str_replace('  ', '&nbsp;&nbsp;', $firstTitle);
-        $first      = trim($firstCodeElm->nodeValue);
-        $first      = str_replace('<?php', '&lt;?php', $first);
-        $first      = str_replace("\n", '</br>', $first);
-        $first      = str_replace(' ', '&nbsp;', $first);
-        $first      = str_replace('<em>', '<span class="code-comparison-highlight">', $first);
-        $first      = str_replace('</em>', '</span>', $first);
+        $firstTitle = $this->formatCodeTitle($firstCodeElm);
+        $first      = $this->formatCodeSample($firstCodeElm);
 
-        $secondTitle = trim($secondCodeElm->getAttribute('title'));
-        $secondTitle = str_replace('  ', '&nbsp;&nbsp;', $secondTitle);
-        $second      = trim($secondCodeElm->nodeValue);
-        $second      = str_replace('<?php', '&lt;?php', $second);
-        $second      = str_replace("\n", '</br>', $second);
-        $second      = str_replace(' ', '&nbsp;', $second);
-        $second      = str_replace('<em>', '<span class="code-comparison-highlight">', $second);
-        $second      = str_replace('</em>', '</span>', $second);
+        $secondTitle = $this->formatCodeTitle($secondCodeElm);
+        $second      = $this->formatCodeSample($secondCodeElm);
 
         $titleRow = '';
         if ($firstTitle !== '' || $secondTitle !== '') {
@@ -445,6 +434,45 @@ class HTML extends Generator
         return $output;
 
     }//end getFormattedCodeComparisonBlock()
+
+
+    /**
+     * Retrieve a code block title and prepare it for output as HTML.
+     *
+     * @param \DOMElement $codeElm The DOMElement object for a code block.
+     *
+     * @since 3.12.0
+     *
+     * @return string
+     */
+    private function formatCodeTitle(DOMElement $codeElm)
+    {
+        $title = trim($codeElm->getAttribute('title'));
+        return str_replace('  ', '&nbsp;&nbsp;', $title);
+
+    }//end formatCodeTitle()
+
+
+    /**
+     * Retrieve a code block contents and prepare it for output as HTML.
+     *
+     * @param \DOMElement $codeElm The DOMElement object for a code block.
+     *
+     * @since 3.12.0
+     *
+     * @return string
+     */
+    private function formatCodeSample(DOMElement $codeElm)
+    {
+        $code = (string) $codeElm->nodeValue;
+        $code = trim($code);
+        $code = str_replace('<?php', '&lt;?php', $code);
+        $code = str_replace(["\n", ' '], ['</br>', '&nbsp;'], $code);
+        $code = str_replace(['<em>', '</em>'], ['<span class="code-comparison-highlight">', '</span>'], $code);
+
+        return $code;
+
+    }//end formatCodeSample()
 
 
 }//end class
