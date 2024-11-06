@@ -5,10 +5,6 @@
 This is a standard block.
   <table>
    <tr>
-    <th></th>
-    <th></th>
-   </tr>
-   <tr>
 <td>
 
     // Dummy.
