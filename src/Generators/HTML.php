@@ -215,7 +215,7 @@ class HTML extends Generator
             $doc->load($file);
             $documentation = $doc->getElementsByTagName('documentation')->item(0);
             $title         = $this->getTitle($documentation);
-            $output       .= sprintf($listItemTemplate, str_replace(' ', '-', $title), $title);
+            $output       .= sprintf($listItemTemplate, $this->titleToAnchor($title), $title);
         }
 
         $output .= '  </ul>'.PHP_EOL;
@@ -290,12 +290,28 @@ class HTML extends Generator
 
         if (trim($content) !== '') {
             $title = $this->getTitle($doc);
-            echo '  <a name="'.str_replace(' ', '-', $title).'" />'.PHP_EOL;
+            echo '  <a name="'.$this->titleToAnchor($title).'" />'.PHP_EOL;
             echo '  <h2>'.$title.'</h2>'.PHP_EOL;
             echo $content;
         }
 
     }//end processSniff()
+
+
+    /**
+     * Transform a title to a string which can be used as an HTML anchor.
+     *
+     * @param string $title The title.
+     *
+     * @since 3.12.0
+     *
+     * @return string
+     */
+    private function titleToAnchor($title)
+    {
+        return str_replace(' ', '-', $title);
+
+    }//end titleToAnchor()
 
 
     /**
