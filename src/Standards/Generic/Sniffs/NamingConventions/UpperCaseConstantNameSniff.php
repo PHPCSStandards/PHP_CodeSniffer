@@ -108,7 +108,10 @@ class UpperCaseConstantNameSniff implements Sniff
             return;
         }
 
-        // The next non-empty token must be the constant name.
+        // Bow out if next non-empty token after the opening parenthesis is not a string (the
+        // constant name). This could happen when live coding, if the constant is a variable or an
+        // expression, or if handling a first-class callable or a function definition outside the
+        // global scope.
         $constPtr = $phpcsFile->findNext(Tokens::$emptyTokens, ($openBracket + 1), null, true);
         if ($constPtr === false || $tokens[$constPtr]['code'] !== T_CONSTANT_ENCAPSED_STRING) {
             return;

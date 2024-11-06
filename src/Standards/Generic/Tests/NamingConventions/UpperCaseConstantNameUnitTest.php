@@ -46,6 +46,8 @@ final class UpperCaseConstantNameUnitTest extends AbstractSniffUnitTest
                 41 => 1,
                 45 => 1,
                 51 => 1,
+                71 => 1,
+                73 => 1,
             ];
         default:
             return [];
