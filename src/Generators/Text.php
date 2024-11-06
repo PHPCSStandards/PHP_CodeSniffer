@@ -13,6 +13,7 @@
 
 namespace PHP_CodeSniffer\Generators;
 
+use DOMElement;
 use DOMNode;
 
 class Text extends Generator
@@ -179,76 +180,14 @@ class Text extends Generator
             return '';
         }
 
-        $first      = trim($firstCodeElm->nodeValue);
-        $firstTitle = trim($firstCodeElm->getAttribute('title'));
+        $firstTitleLines = $this->codeTitleToLines($firstCodeElm);
+        $firstLines      = $this->codeToLines($firstCodeElm);
 
-        $firstTitleLines = [];
-        $tempTitle       = '';
-        $words           = explode(' ', $firstTitle);
-
-        foreach ($words as $word) {
-            if (strlen($tempTitle.$word) >= 45) {
-                if (strlen($tempTitle.$word) === 45) {
-                    // Adding the extra space will push us to the edge
-                    // so we are done.
-                    $firstTitleLines[] = $tempTitle.$word;
-                    $tempTitle         = '';
-                } else if (strlen($tempTitle.$word) === 46) {
-                    // We are already at the edge, so we are done.
-                    $firstTitleLines[] = $tempTitle.$word;
-                    $tempTitle         = '';
-                } else {
-                    $firstTitleLines[] = $tempTitle;
-                    $tempTitle         = $word.' ';
-                }
-            } else {
-                $tempTitle .= $word.' ';
-            }
-        }//end foreach
-
-        if ($tempTitle !== '') {
-            $firstTitleLines[] = $tempTitle;
-        }
-
-        $first      = str_replace(['<em>', '</em>'], '', $first);
-        $firstLines = explode("\n", $first);
-
-        $second      = trim($secondCodeElm->nodeValue);
-        $secondTitle = trim($secondCodeElm->getAttribute('title'));
-
-        $secondTitleLines = [];
-        $tempTitle        = '';
-        $words            = explode(' ', $secondTitle);
-
-        foreach ($words as $word) {
-            if (strlen($tempTitle.$word) >= 45) {
-                if (strlen($tempTitle.$word) === 45) {
-                    // Adding the extra space will push us to the edge
-                    // so we are done.
-                    $secondTitleLines[] = $tempTitle.$word;
-                    $tempTitle          = '';
-                } else if (strlen($tempTitle.$word) === 46) {
-                    // We are already at the edge, so we are done.
-                    $secondTitleLines[] = $tempTitle.$word;
-                    $tempTitle          = '';
-                } else {
-                    $secondTitleLines[] = $tempTitle;
-                    $tempTitle          = $word.' ';
-                }
-            } else {
-                $tempTitle .= $word.' ';
-            }
-        }//end foreach
-
-        if ($tempTitle !== '') {
-            $secondTitleLines[] = $tempTitle;
-        }
-
-        $second      = str_replace(['<em>', '</em>'], '', $second);
-        $secondLines = explode("\n", $second);
+        $secondTitleLines = $this->codeTitleToLines($secondCodeElm);
+        $secondLines      = $this->codeToLines($secondCodeElm);
 
         $titleRow = '';
-        if ($firstTitle !== '' || $secondTitle !== '') {
+        if ($firstTitleLines !== [] || $secondTitleLines !== []) {
             $maxTitleLines = max(count($firstTitleLines), count($secondTitleLines));
             for ($i = 0; $i < $maxTitleLines; $i++) {
                 if (isset($firstTitleLines[$i]) === true) {
@@ -274,7 +213,7 @@ class Text extends Generator
         }//end if
 
         $codeRow = '';
-        if ($first !== '' || $second !== '') {
+        if ($firstLines !== [] || $secondLines !== []) {
             $maxCodeLines = max(count($firstLines), count($secondLines));
             for ($i = 0; $i < $maxCodeLines; $i++) {
                 if (isset($firstLines[$i]) === true) {
@@ -311,6 +250,77 @@ class Text extends Generator
         return $output;
 
     }//end getFormattedCodeComparisonBlock()
+
+
+    /**
+     * Retrieve a code block title and split it into lines for use in an ASCII table.
+     *
+     * @param \DOMElement $codeElm The DOMElement object for a code block.
+     *
+     * @since 3.12.0
+     *
+     * @return array<string>
+     */
+    private function codeTitleToLines(DOMElement $codeElm)
+    {
+        $title = trim($codeElm->getAttribute('title'));
+        if ($title === '') {
+            return [];
+        }
+
+        $titleLines = [];
+        $tempTitle  = '';
+        $words      = explode(' ', $title);
+
+        foreach ($words as $word) {
+            if (strlen($tempTitle.$word) >= 45) {
+                if (strlen($tempTitle.$word) === 45) {
+                    // Adding the extra space will push us to the edge
+                    // so we are done.
+                    $titleLines[] = $tempTitle.$word;
+                    $tempTitle    = '';
+                } else if (strlen($tempTitle.$word) === 46) {
+                    // We are already at the edge, so we are done.
+                    $titleLines[] = $tempTitle.$word;
+                    $tempTitle    = '';
+                } else {
+                    $titleLines[] = $tempTitle;
+                    $tempTitle    = $word.' ';
+                }
+            } else {
+                $tempTitle .= $word.' ';
+            }
+        }//end foreach
+
+        if ($tempTitle !== '') {
+            $titleLines[] = $tempTitle;
+        }
+
+        return $titleLines;
+
+    }//end codeTitleToLines()
+
+
+    /**
+     * Retrieve a code block contents and split it into lines for use in an ASCII table.
+     *
+     * @param \DOMElement $codeElm The DOMElement object for a code block.
+     *
+     * @since 3.12.0
+     *
+     * @return array<string>
+     */
+    private function codeToLines(DOMElement $codeElm)
+    {
+        $code = trim($codeElm->nodeValue);
+        if ($code === '') {
+            return [];
+        }
+
+        $code = str_replace(['<em>', '</em>'], '', $code);
+        return explode("\n", $code);
+
+    }//end codeToLines()
 
 
 }//end class
