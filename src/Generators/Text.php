@@ -268,35 +268,9 @@ class Text extends Generator
             return [];
         }
 
-        $titleLines = [];
-        $tempTitle  = '';
-        $words      = explode(' ', $title);
+        $title = wordwrap($title, 46, "\n");
 
-        foreach ($words as $word) {
-            if (strlen($tempTitle.$word) >= 45) {
-                if (strlen($tempTitle.$word) === 45) {
-                    // Adding the extra space will push us to the edge
-                    // so we are done.
-                    $titleLines[] = $tempTitle.$word;
-                    $tempTitle    = '';
-                } else if (strlen($tempTitle.$word) === 46) {
-                    // We are already at the edge, so we are done.
-                    $titleLines[] = $tempTitle.$word;
-                    $tempTitle    = '';
-                } else {
-                    $titleLines[] = $tempTitle;
-                    $tempTitle    = $word.' ';
-                }
-            } else {
-                $tempTitle .= $word.' ';
-            }
-        }//end foreach
-
-        if ($tempTitle !== '') {
-            $titleLines[] = $tempTitle;
-        }
-
-        return $titleLines;
+        return explode("\n", $title);
 
     }//end codeTitleToLines()
 
