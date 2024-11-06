@@ -202,12 +202,14 @@ class HTML extends Generator
         $output  = '  <h2>Table of Contents</h2>'.PHP_EOL;
         $output .= '  <ul class="toc">'.PHP_EOL;
 
+        $listItemTemplate = '   <li><a href="#%s">%s</a></li>'.PHP_EOL;
+
         foreach ($this->docFiles as $file) {
             $doc = new DOMDocument();
             $doc->load($file);
             $documentation = $doc->getElementsByTagName('documentation')->item(0);
             $title         = $this->getTitle($documentation);
-            $output       .= '   <li><a href="#'.str_replace(' ', '-', $title).'">'.$title.'</a></li>'.PHP_EOL;
+            $output       .= sprintf($listItemTemplate, str_replace(' ', '-', $title), $title);
         }
 
         $output .= '  </ul>'.PHP_EOL;
