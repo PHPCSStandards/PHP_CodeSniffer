@@ -56,3 +56,5 @@ $foo-> /* comment */ define('bar');
 $foo?->
 // phpcs:ignore Stnd.Cat.SniffName -- for reasons.
 define('bar');
+
+const DEFINE = 'value';
