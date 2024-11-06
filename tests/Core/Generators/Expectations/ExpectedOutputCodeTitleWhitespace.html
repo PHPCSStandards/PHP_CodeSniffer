@@ -45,6 +45,11 @@
             line-height: 15px;
         }
 
+        .code-comparison-title {
+            text-align: left;
+            font-weight: 600;
+        }
+
         .code-comparison-code {
             font-family: Courier;
             background-color: #F9F9F9;
@@ -75,8 +80,8 @@
   <p class="text">This is a standard block.</p>
   <table class="code-comparison">
    <tr>
-    <td class="code-comparison-title">Valid: spaces at start of description.</td>
-    <td class="code-comparison-title">Invalid: spaces at end making line > 46 chars.</td>
+    <th class="code-comparison-title">Valid: spaces at start of description.</th>
+    <th class="code-comparison-title">Invalid: spaces at end making line > 46 chars.</th>
    </tr>
    <tr>
     <td class="code-comparison-code">//&nbsp;Dummy.</td>
@@ -85,8 +90,8 @@
   </table>
   <table class="code-comparison">
    <tr>
-    <td class="code-comparison-title">Valid: spaces at start + end of description.</td>
-    <td class="code-comparison-title">Invalid: spaces '&nbsp;&nbsp;&nbsp;&nbsp; ' in description.</td>
+    <th class="code-comparison-title">Valid: spaces at start + end of description.</th>
+    <th class="code-comparison-title">Invalid: spaces '&nbsp;&nbsp;&nbsp;&nbsp; ' in description.</th>
    </tr>
    <tr>
     <td class="code-comparison-code">//&nbsp;Note:&nbsp;description&nbsp;above&nbsp;without&nbsp;the</br>//&nbsp;trailing&nbsp;whitespace&nbsp;fits&nbsp;in&nbsp;46&nbsp;chars.</td>
