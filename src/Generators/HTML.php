@@ -53,6 +53,19 @@ class HTML extends Generator
             margin-top: 50px;
         }
 
+        h2 a.sniffanchor,
+        h2 a.sniffanchor {
+            color: #006C95;
+            opacity: 0;
+            padding: 0 3px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        h2:hover a.sniffanchor,
+        h2:focus a.sniffanchor {
+            opacity: 1;
+        }
+
         .code-comparison {
             width: 100%;
         }
@@ -290,8 +303,11 @@ class HTML extends Generator
 
         if (trim($content) !== '') {
             $title = $this->getTitle($doc);
-            echo '  <a name="'.$this->titleToAnchor($title).'" />'.PHP_EOL;
-            echo '  <h2>'.$title.'</h2>'.PHP_EOL;
+            printf(
+                '  <h2 id="%1$s">%2$s<a class="sniffanchor" href="#%1$s"> &sect; </a></h2>'.PHP_EOL,
+                $this->titleToAnchor($title),
+                $title
+            );
             echo $content;
         }
 

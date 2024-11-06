@@ -26,6 +26,19 @@
             margin-top: 50px;
         }
 
+        h2 a.sniffanchor,
+        h2 a.sniffanchor {
+            color: #006C95;
+            opacity: 0;
+            padding: 0 3px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        h2:hover a.sniffanchor,
+        h2:focus a.sniffanchor {
+            opacity: 1;
+        }
+
         .code-comparison {
             width: 100%;
         }
@@ -75,8 +88,7 @@
  </head>
  <body>
   <h1>GeneratorTest Coding Standards</h1>
-  <a name="Standard-Element,-no-content" />
-  <h2>Standard Element, no content</h2>
+  <h2 id="Standard-Element,-no-content">Standard Element, no content<a class="sniffanchor" href="#Standard-Element,-no-content"> &sect; </a></h2>
   <table class="code-comparison">
    <tr>
     <th class="code-comparison-title">Valid: Lorem ipsum dolor sit amet.</th>

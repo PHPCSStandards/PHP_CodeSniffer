@@ -26,6 +26,19 @@
             margin-top: 50px;
         }
 
+        h2 a.sniffanchor,
+        h2 a.sniffanchor {
+            color: #006C95;
+            opacity: 0;
+            padding: 0 3px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        h2:hover a.sniffanchor,
+        h2:focus a.sniffanchor {
+            opacity: 1;
+        }
+
         .code-comparison {
             width: 100%;
         }
@@ -75,8 +88,7 @@
  </head>
  <body>
   <h1>GeneratorTest Coding Standards</h1>
-  <a name="Code-Comparison,-two-empty-code-elements" />
-  <h2>Code Comparison, two empty code elements</h2>
+  <h2 id="Code-Comparison,-two-empty-code-elements">Code Comparison, two empty code elements<a class="sniffanchor" href="#Code-Comparison,-two-empty-code-elements"> &sect; </a></h2>
   <p class="text">This doc has two code elements, but neither of them contain any information.</p>
   <div class="tag-line">Documentation generated on #REDACTED# by <a href="https://github.com/PHPCSStandards/PHP_CodeSniffer">PHP_CodeSniffer #VERSION#</a></div>
  </body>
