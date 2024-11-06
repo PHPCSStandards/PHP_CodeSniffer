@@ -1,6 +1,6 @@
 # GeneratorTest Coding Standard
 
-## 
+## Documentation Title Empty
 
 The above &quot;documentation&quot; element has an empty title attribute.
   <table>
