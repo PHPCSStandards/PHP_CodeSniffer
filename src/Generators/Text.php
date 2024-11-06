@@ -188,53 +188,13 @@ class Text extends Generator
 
         $titleRow = '';
         if ($firstTitleLines !== [] || $secondTitleLines !== []) {
-            $maxTitleLines = max(count($firstTitleLines), count($secondTitleLines));
-            for ($i = 0; $i < $maxTitleLines; $i++) {
-                if (isset($firstTitleLines[$i]) === true) {
-                    $firstLineText = $firstTitleLines[$i];
-                } else {
-                    $firstLineText = '';
-                }
-
-                if (isset($secondTitleLines[$i]) === true) {
-                    $secondLineText = $secondTitleLines[$i];
-                } else {
-                    $secondLineText = '';
-                }
-
-                $titleRow .= '| ';
-                $titleRow .= $firstLineText.str_repeat(' ', (46 - strlen($firstLineText)));
-                $titleRow .= ' | ';
-                $titleRow .= $secondLineText.str_repeat(' ', (47 - strlen($secondLineText)));
-                $titleRow .= ' |'.PHP_EOL;
-            }//end for
-
+            $titleRow  = $this->linesToTableRows($firstTitleLines, $secondTitleLines);
             $titleRow .= str_repeat('-', 100).PHP_EOL;
         }//end if
 
         $codeRow = '';
         if ($firstLines !== [] || $secondLines !== []) {
-            $maxCodeLines = max(count($firstLines), count($secondLines));
-            for ($i = 0; $i < $maxCodeLines; $i++) {
-                if (isset($firstLines[$i]) === true) {
-                    $firstLineText = $firstLines[$i];
-                } else {
-                    $firstLineText = '';
-                }
-
-                if (isset($secondLines[$i]) === true) {
-                    $secondLineText = $secondLines[$i];
-                } else {
-                    $secondLineText = '';
-                }
-
-                $codeRow .= '| ';
-                $codeRow .= $firstLineText.str_repeat(' ', max(0, (47 - strlen($firstLineText))));
-                $codeRow .= '| ';
-                $codeRow .= $secondLineText.str_repeat(' ', max(0, (48 - strlen($secondLineText))));
-                $codeRow .= '|'.PHP_EOL;
-            }//end for
-
+            $codeRow  = $this->linesToTableRows($firstLines, $secondLines);
             $codeRow .= str_repeat('-', 100).PHP_EOL.PHP_EOL;
         }//end if
 
@@ -295,6 +255,44 @@ class Text extends Generator
         return explode("\n", $code);
 
     }//end codeToLines()
+
+
+    /**
+     * Transform two sets of text lines into rows for use in an ASCII table.
+     *
+     * The sets may not contains an equal amount of lines, while the resulting rows should.
+     *
+     * @param array<string> $column1Lines Lines of text to place in column 1.
+     * @param array<string> $column2Lines Lines of text to place in column 2.
+     *
+     * @return string
+     */
+    private function linesToTableRows(array $column1Lines, array $column2Lines)
+    {
+        $maxLines = max(count($column1Lines), count($column2Lines));
+
+        $rows = '';
+        for ($i = 0; $i < $maxLines; $i++) {
+            $column1Text = '';
+            if (isset($column1Lines[$i]) === true) {
+                $column1Text = $column1Lines[$i];
+            }
+
+            $column2Text = '';
+            if (isset($column2Lines[$i]) === true) {
+                $column2Text = $column2Lines[$i];
+            }
+
+            $rows .= '| ';
+            $rows .= $column1Text.str_repeat(' ', max(0, (47 - strlen($column1Text))));
+            $rows .= '| ';
+            $rows .= $column2Text.str_repeat(' ', max(0, (48 - strlen($column2Text))));
+            $rows .= '|'.PHP_EOL;
+        }//end for
+
+        return $rows;
+
+    }//end linesToTableRows()
 
 
 }//end class
