@@ -99,7 +99,7 @@ class UpperCaseConstantNameSniff implements Sniff
         // If the next non-whitespace token after this token
         // is not an opening parenthesis then it is not a function call.
         $openBracket = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
-        if ($openBracket === false) {
+        if ($openBracket === false || $tokens[$openBracket]['code'] !== T_OPEN_PARENTHESIS) {
             return;
         }
 
