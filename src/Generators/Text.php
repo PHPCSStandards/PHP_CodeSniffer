@@ -130,8 +130,7 @@ class Text extends Generator
         }
 
         $text = trim($text);
-        $text = str_replace('<em>', '*', $text);
-        $text = str_replace('</em>', '*', $text);
+        $text = str_replace(['<em>', '</em>'], '*', $text);
 
         $nodeLines = explode("\n", $text);
         $lines     = [];
@@ -243,8 +242,7 @@ class Text extends Generator
             $firstTitleLines[] = $tempTitle;
         }
 
-        $first      = str_replace('<em>', '', $first);
-        $first      = str_replace('</em>', '', $first);
+        $first      = str_replace(['<em>', '</em>'], '', $first);
         $firstLines = explode("\n", $first);
 
         $second      = trim($secondCodeElm->nodeValue);
@@ -278,8 +276,7 @@ class Text extends Generator
             $secondTitleLines[] = $tempTitle;
         }
 
-        $second      = str_replace('<em>', '', $second);
-        $second      = str_replace('</em>', '', $second);
+        $second      = str_replace(['<em>', '</em>'], '', $second);
         $secondLines = explode("\n", $second);
 
         $titleRow = '';
