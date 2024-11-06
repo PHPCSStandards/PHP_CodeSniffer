@@ -96,6 +96,11 @@ class UpperCaseConstantNameSniff implements Sniff
             return;
         }
 
+        // Make sure this is not an attribute.
+        if (empty($tokens[$stackPtr]['nested_attributes']) === false) {
+            return;
+        }
+
         // If the next non-whitespace token after this token
         // is not an opening parenthesis then it is not a function call.
         $openBracket = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);

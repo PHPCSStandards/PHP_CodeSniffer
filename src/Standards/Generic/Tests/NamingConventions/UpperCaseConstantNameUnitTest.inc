@@ -58,3 +58,12 @@ $foo?->
 define('bar');
 
 const DEFINE = 'value';
+
+#[Define('some param')]
+class MyClass {}
+
+#[
+    AttributeA,
+    define('some param')
+]
+class MyClass {}
