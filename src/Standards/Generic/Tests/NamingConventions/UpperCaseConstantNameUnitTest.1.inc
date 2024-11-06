@@ -5,7 +5,7 @@ namespace foo\bar;
 namespace bar\foo\baz;
 
 define('VALID_NAME', true);
-define('invalidName', true);
+DEFINE('invalidName', true);
 define("VALID_NAME", true);
 define("invalidName", true);
 define('bar\foo\baz\VALID_NAME_WITH_NAMESPACE', true);
@@ -37,9 +37,9 @@ class TypedConstants {
     const MISSING_VALUE; // Parse error.
     const MyClass MYCONST = new MyClass;
     const int VALID_NAME = 0;
-    const INT invalid_name = 0;
+    final public const INT invalid_name = 0;
     const FALSE false = false; // Yes, false can be used as a constant name, don't ask.
-    const array ARRAY = array(); // Same goes for array.
+    final protected const array ARRAY = array(); // Same goes for array.
 }
 
 define /* comment */ ( /* comment */ 'CommentsInUnconventionalPlaces', 'value' );
@@ -67,3 +67,16 @@ class MyClass {}
     define('some param')
 ]
 class MyClass {}
+
+const MixedCase = 1;
+
+define('lower_case_name', 'value');
+define($var, 'sniff should bow out');
+define(constantName(), 'sniff should bow out');
+define($obj->constantName(), 'sniff should bow out');
+define(MyClass::constantName(), 'sniff should bow out');
+define(condition() ? 'name1' : 'name2', 'sniff should bow out');
+
+// Valid if outside the global namespace. Sniff should bow out.
+function define($param) {}
+$callable = define(...);
