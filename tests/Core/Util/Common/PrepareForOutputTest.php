@@ -76,7 +76,7 @@ final class PrepareForOutputTest extends TestCase
                 'content'     => "\r\n\t",
                 'exclude'     => [],
                 'expected'    => "\033[30;1m\\r\\n\\t\033[0m",
-                'expectedWin' => "\\r\\n\\t",
+                'expectedWin' => "\033[30;1m\\r\\n\\t\033[0m",
             ],
             'Spaces are replaced with a unique mark'             => [
                 'content'     => "    ",
@@ -103,7 +103,7 @@ final class PrepareForOutputTest extends TestCase
                     "\n",
                 ],
                 'expected'    => "\r\n\033[30;1m\\t·\033[0m",
-                'expectedWin' => "\r\n\\t ",
+                'expectedWin' => "\r\n\033[30;1m\\t\033[0m ",
             ],
         ];
 

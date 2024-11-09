@@ -267,8 +267,7 @@ class Common
     /**
      * Prepares token content for output to screen.
      *
-     * Replaces invisible characters so they are visible. On non-Windows
-     * operating systems it will also colour the invisible characters.
+     * Replaces invisible characters so they are visible, and colour them.
      *
      * @param string   $content The content to prepare.
      * @param string[] $exclude A list of characters to leave invisible.
@@ -291,11 +290,9 @@ class Common
 
         $replacements = array_diff_key($replacements, array_fill_keys($exclude, true));
 
-        if (stripos(PHP_OS, 'WIN') !== 0) {
-            // On non-Windows, colour runs of invisible characters.
-            $match   = implode('', array_keys($replacements));
-            $content = preg_replace("/([$match]+)/", "\033[30;1m$1\033[0m", $content);
-        }
+        // Colour runs of invisible characters.
+        $match   = implode('', array_keys($replacements));
+        $content = preg_replace("/([$match]+)/", "\033[30;1m$1\033[0m", $content);
 
         $content = strtr($content, $replacements);
 
