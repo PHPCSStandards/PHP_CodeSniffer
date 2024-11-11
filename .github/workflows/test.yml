@@ -88,6 +88,7 @@ jobs:
       # - custom_ini: Whether to run with specific custom ini settings to hit very specific
       #   code conditions.
       matrix:
+        os: ['ubuntu-latest', 'windows-latest']
         php: ['5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
         custom_ini: [false]
 
@@ -95,17 +96,24 @@ jobs:
           # Skip test runs on builds which are also run in the coverage job.
           # Note: the tests on PHP 7.2 will still be run as the coverage build uses custom_ini settings for that version.
           - php: '5.4'
+            os: 'ubuntu-latest'
+            skip_tests: true
+          - php: '5.5'
+            os: 'windows-latest'
             skip_tests: true
           - php: '8.4'
             skip_tests: true
 
           # Extra builds running only the unit tests with different PHP ini settings.
           - php: '5.5'
+            os: 'ubuntu-latest'
             custom_ini: true
           - php: '7.0'
+            os: 'ubuntu-latest'
             custom_ini: true
 
-    name: "PHP: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }}"
+    # yamllint disable-line rule:line-length
+    name: "PHP: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }} (${{ matrix.os == 'ubuntu-latest' && 'Linux' || 'Win'  }})"
 
     continue-on-error: ${{ matrix.php == '8.5' }}
 
@@ -115,6 +123,7 @@ jobs:
 
       - name: Setup ini config
         id: set_ini
+        shell: bash
         run: |
           # Set the "short_open_tag" ini to make sure specific conditions are tested.
           # Also turn on error_reporting to ensure all notices are shown.
@@ -160,20 +169,20 @@ jobs:
       # Note: The code style check is run multiple times against every PHP version
       # as it also acts as an integration test.
       - name: 'PHPCS: set the path to PHP'
-        run: php bin/phpcs --config-set php_path php
+        run: php "bin/phpcs" --config-set php_path php
 
-      - name: 'PHPUnit: run the tests without code coverage'
+      - name: 'PHPUnit: run the full test suite without code coverage'
         if: ${{ matrix.skip_tests != true }}
-        run: vendor/bin/phpunit tests/AllTests.php --no-coverage
+        run: php "vendor/bin/phpunit" tests/AllTests.php --no-coverage
 
       - name: 'PHPCS: check code style without cache, no parallel'
         if: ${{ matrix.custom_ini == false && matrix.php != '7.4' }}
-        run: php bin/phpcs --no-cache --parallel=1
+        run: php "bin/phpcs" --no-cache --parallel=1
 
       - name: 'PHPCS: check code style to show results in PR'
         if: ${{ matrix.custom_ini == false && matrix.php == '7.4' }}
         id: phpcs
-        run: php bin/phpcs --no-cache --parallel=1 --report-full --report-checkstyle=./phpcs-report.xml
+        run: php "bin/phpcs" --no-cache --parallel=1 --report-full --report-checkstyle=./phpcs-report.xml
 
       - name: Show PHPCS results in PR
         if: ${{ always() && steps.phpcs.outcome == 'failure' && matrix.php == '7.4' }}
@@ -191,42 +200,53 @@ jobs:
         run: php phpcs.phar
 
   coverage:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
+        os: ['ubuntu-latest', 'windows-latest']
+        php: ['8.4']
+        custom_ini: [false]
+
         include:
           - php: '5.4'
+            os: 'ubuntu-latest'
             custom_ini: false
-          - php: '7.2'
-            custom_ini: true
-          - php: '8.4'
+          # Installing on Windows with PHP 5.4 runs into all sorts of problems with Composer.
+          # Considering PHP 5.4 is ancient, I deem it acceptable to run coverage on Windows on PHP 5.5.
+          # See this issue for more context (yes, I've seen this problem before):
+          # @link https://github.com/PHPCSStandards/composer-installer/pull/213
+          - php: '5.5'
+            os: 'windows-latest'
             custom_ini: false
 
-    name: "Coverage: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }}"
+          # Also run one coverage build with custom ini settings.
+          - php: '7.2'
+            os: 'ubuntu-latest'
+            custom_ini: true
+
+    # yamllint disable-line rule:line-length
+    name: "Coverage: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }} (${{ matrix.os == 'ubuntu-latest' && 'Linux' || 'Win'  }})"
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Setup ini config
+        if: ${{ matrix.os != 'windows-latest' }}
         id: set_ini
+        shell: bash
         run: |
           # Set the "short_open_tag" ini to make sure specific conditions are tested.
-          # Also turn on error_reporting to ensure all notices are shown.
-          if [[ ${{ matrix.custom_ini }} == true && "${{ startsWith( matrix.php, '5.' ) }}" == true ]]; then
-            echo 'PHP_INI=error_reporting=-1, display_errors=On, date.timezone=Australia/Sydney, short_open_tag=On, asp_tags=On' >> "$GITHUB_OUTPUT"
-          elif [[ ${{ matrix.custom_ini }} == true && "${{ startsWith( matrix.php, '7.' ) }}" == true ]]; then
-            echo 'PHP_INI=error_reporting=-1, display_errors=On, date.timezone=Australia/Sydney, short_open_tag=On' >> "$GITHUB_OUTPUT"
-          else
-            echo 'PHP_INI=error_reporting=-1, display_errors=On' >> "$GITHUB_OUTPUT"
+          if [[ ${{ matrix.custom_ini }} == true && "${{ matrix.php }}" == '5.4' ]]; then
+            echo 'PHP_INI=, date.timezone=Australia/Sydney, short_open_tag=On, asp_tags=On' >> "$GITHUB_OUTPUT"
           fi
 
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          ini-values: ${{ steps.set_ini.outputs.PHP_INI }}
+          ini-values: error_reporting=-1, display_errors=On${{ steps.set_ini.outputs.PHP_INI }}
           coverage: xdebug
 
       # This action also handles the caching of the dependencies.
@@ -254,14 +274,15 @@ jobs:
 
       - name: Grab PHPUnit version
         id: phpunit_version
+        shell: bash
         # yamllint disable-line rule:line-length
-        run: echo "VERSION=$(vendor/bin/phpunit --version | grep --only-matching --max-count=1 --extended-regexp '\b[0-9]+\.[0-9]+')" >> "$GITHUB_OUTPUT"
+        run: echo "VERSION=$(php "vendor/bin/phpunit" --version | grep --only-matching --max-count=1 --extended-regexp '\b[0-9]+\.[0-9]+')" >> "$GITHUB_OUTPUT"
 
       - name: "DEBUG: Show grabbed version"
         run: echo ${{ steps.phpunit_version.outputs.VERSION }}
 
       - name: 'PHPCS: set the path to PHP'
-        run: php bin/phpcs --config-set php_path php
+        run: php "bin/phpcs" --config-set php_path php
 
       # PHPUnit 9.3 started using PHP-Parser for code coverage, which can cause issues due to Parser
       # also polyfilling PHP tokens.
@@ -269,15 +290,23 @@ jobs:
       # Using that option prevents issues with PHP-Parser backfilling PHP tokens during our test runs.
       - name: "Warm the PHPUnit cache (PHPUnit 9.3+)"
         if: ${{ steps.phpunit_version.outputs.VERSION >= '9.3' }}
-        run: vendor/bin/phpunit --coverage-cache ./build/phpunit-cache --warm-coverage-cache
+        run: php "vendor/bin/phpunit" --coverage-cache ./build/phpunit-cache --warm-coverage-cache
 
       - name: "Run the unit tests with code coverage (PHPUnit < 9.3)"
-        if: ${{ steps.phpunit_version.outputs.VERSION < '9.3' }}
-        run: vendor/bin/phpunit tests/AllTests.php
+        if: ${{ matrix.os != 'windows-latest' && steps.phpunit_version.outputs.VERSION < '9.3' }}
+        run: php "vendor/bin/phpunit" tests/AllTests.php
 
       - name: "Run the unit tests with code coverage (PHPUnit 9.3+)"
-        if: ${{ steps.phpunit_version.outputs.VERSION >= '9.3' }}
-        run: vendor/bin/phpunit tests/AllTests.php --coverage-cache ./build/phpunit-cache
+        if: ${{ matrix.os != 'windows-latest' && steps.phpunit_version.outputs.VERSION >= '9.3' }}
+        run: php "vendor/bin/phpunit" tests/AllTests.php --coverage-cache ./build/phpunit-cache
+
+      - name: "Run the unit tests which may have different outcomes on Windows with code coverage (PHPUnit < 9.3)"
+        if: ${{ matrix.os == 'windows-latest' && steps.phpunit_version.outputs.VERSION < '9.3' }}
+        run: php "vendor/bin/phpunit" tests/AllTests.php --group Windows
+
+      - name: "Run the unit tests which may have different outcomes on Windows with code coverage (PHPUnit 9.3+)"
+        if: ${{ matrix.os == 'windows-latest' && steps.phpunit_version.outputs.VERSION >= '9.3' }}
+        run: php "vendor/bin/phpunit" tests/AllTests.php --group Windows --coverage-cache ./build/phpunit-cache
 
       - name: Upload coverage results to Coveralls
         if: ${{ success() }}
@@ -285,7 +314,7 @@ jobs:
         with:
           format: clover
           file: build/logs/clover.xml
-          flag-name: php-${{ matrix.php }}-custom-ini-${{ matrix.custom_ini }}
+          flag-name: os-${{ matrix.os }}-php-${{ matrix.php }}-custom-ini-${{ matrix.custom_ini }}
           parallel: true
 
   coveralls-finish:
