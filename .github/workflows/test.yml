@@ -88,15 +88,15 @@ jobs:
       # - custom_ini: Whether to run with specific custom ini settings to hit very specific
       #   code conditions.
       matrix:
-        php: ['5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
+        php: ['5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
         custom_ini: [false]
 
         include:
-          # Skip test runs on builds which are also run for in the coverage job.
-          # Note: the tests on PHP 7.2 will still be run as the coverage build is uses custom_ini for that version.
+          # Skip test runs on builds which are also run in the coverage job.
+          # Note: the tests on PHP 7.2 will still be run as the coverage build uses custom_ini settings for that version.
           - php: '5.4'
             skip_tests: true
-          - php: '8.3'
+          - php: '8.4'
             skip_tests: true
 
           # Extra builds running only the unit tests with different PHP ini settings.
@@ -107,7 +107,7 @@ jobs:
 
     name: "PHP: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }}"
 
-    continue-on-error: ${{ matrix.php == '8.4' }}
+    continue-on-error: ${{ matrix.php == '8.5' }}
 
     steps:
       - name: Checkout code
@@ -154,7 +154,7 @@ jobs:
       - name: Install Composer dependencies
         uses: "ramsey/composer-install@v3"
         with:
-          composer-options: ${{ matrix.php == '8.4' && '--ignore-platform-req=php' || '' }}
+          composer-options: ${{ matrix.php == '8.5' && '--ignore-platform-req=php' || '' }}
           custom-cache-suffix: $(date -u "+%Y-%m")
 
       # Note: The code style check is run multiple times against every PHP version
@@ -200,7 +200,7 @@ jobs:
             custom_ini: false
           - php: '7.2'
             custom_ini: true
-          - php: '8.3'
+          - php: '8.4'
             custom_ini: false
 
     name: "Coverage: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }}"
