@@ -72,6 +72,10 @@ jobs:
           diff -B ./src/Standards/Squiz/ruleset.xml <(xmllint --format "./src/Standards/Squiz/ruleset.xml")
           diff -B ./src/Standards/Zend/ruleset.xml <(xmllint --format "./src/Standards/Zend/ruleset.xml")
 
+      # Validate the basic well-formedness of the Documentation XML files.
+      - name: Validate documentation XML
+        run: xmllint --noout ./src/Standards/*/Docs/*/*Standard.xml
+
   yamllint:
     name: 'Lint Yaml'
     # Don't run the cronjob in this workflow on forks.
