@@ -147,8 +147,6 @@ final class GeneratorTest extends TestCase
         $config  = new ConfigDouble(["--standard=$standard"]);
         $ruleset = new Ruleset($config);
 
-        // Make the test OS independent.
-        $expected = str_replace("\n", PHP_EOL, $expected);
         $this->expectOutputString($expected);
 
         $generator = new MockGenerator($ruleset);
@@ -164,14 +162,16 @@ final class GeneratorTest extends TestCase
      */
     public static function dataGeneratingDocs()
     {
-        $multidocExpected  = "No Content\n";
-        $multidocExpected .= "Code Comparison Only, Missing Standard Block\n";
-        $multidocExpected .= "One Standard Block, Code Comparison\n";
-        $multidocExpected .= "One Standard Block, No Code\n";
-        $multidocExpected .= "One Standard Block, Two Code Comparisons\n";
-        $multidocExpected .= "Two Standard Blocks, No Code\n";
-        $multidocExpected .= "Two Standard Blocks, One Code Comparison\n";
-        $multidocExpected .= "Two Standard Blocks, Three Code Comparisons\n";
+        $multidocExpected   = [];
+        $multidocExpected[] = 'No Content';
+        $multidocExpected[] = 'Code Comparison Only, Missing Standard Block';
+        $multidocExpected[] = 'One Standard Block, Code Comparison';
+        $multidocExpected[] = 'One Standard Block, No Code';
+        $multidocExpected[] = 'One Standard Block, Two Code Comparisons';
+        $multidocExpected[] = 'Two Standard Blocks, No Code';
+        $multidocExpected[] = 'Two Standard Blocks, One Code Comparison';
+        $multidocExpected[] = 'Two Standard Blocks, Three Code Comparisons';
+        $multidocExpected   = implode(PHP_EOL, $multidocExpected).PHP_EOL;
 
         return [
             'Standard without docs'            => [
@@ -180,7 +180,7 @@ final class GeneratorTest extends TestCase
             ],
             'Standard with one doc file'       => [
                 'standard' => __DIR__.'/OneDocTest.xml',
-                'expected' => "One Standard Block, No Code\n",
+                'expected' => 'One Standard Block, No Code'.PHP_EOL,
             ],
             'Standard with multiple doc files' => [
                 'standard' => __DIR__.'/StructureDocsTest.xml',
@@ -226,7 +226,7 @@ final class GeneratorTest extends TestCase
                     (?:.+?(?P>delimiter)\R){2}                       # Arbitrary text followed by a delimiter line.
                 )*                                                   # Code comparison is optional and can exist multiple times.
                 \R+
-            ){3,}                                                    # This complete group should occur at least six times.
+            ){3,}                                                    # This complete group should occur at least three times.
             `sx';
 
         $this->expectOutputRegex($regex);
