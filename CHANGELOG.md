@@ -6,6 +6,25 @@ The file documents changes to the PHP_CodeSniffer project.
 
 _Nothing yet._
 
+## [3.11.1] - 2024-11-16
+
+### Changed
+- Output from the `--generator=...` feature will respect the OS-expected EOL char in more places. [#671]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Various housekeeping, including improvements to the tests and documentation.
+    - Thanks to [Bartosz Dziewoński][@MatmaRex] and [Juliette Reinders Folmer][@jrfnl] for their contributions.
+
+### Fixed
+- Fixed bug [#674] : Generic.WhiteSpace.HereNowdocIdentifierSpacing broken XML documentation
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Fixed bug [#675] : InvalidArgumentException when a ruleset includes a sniff by file name and the included sniff does not comply with the PHPCS naming conventions.
+    - Notwithstanding this fix, it is strongly recommended to ensure custom sniff classes comply with the PHPCS naming conventions.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+
+[#671]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/671
+[#674]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/674
+[#675]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/675
+
 ## [3.11.0] - 2024-11-12
 
 ### Added
@@ -7133,6 +7152,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 -->
 
 [Unreleased]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/master...HEAD
+[3.11.1]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.11.0...3.11.1
 [3.11.0]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.10.3...3.11.0
 [3.10.3]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.10.2...3.10.3
 [3.10.2]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.10.1...3.10.2
@@ -7370,6 +7390,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@maryo]:               https://github.com/maryo
 [@MasterOdin]:          https://github.com/MasterOdin
 [@mathroc]:             https://github.com/mathroc
+[@MatmaRex]:            https://github.com/MatmaRex
 [@maxgalbu]:            https://github.com/maxgalbu
 [@mcuelenaere]:         https://github.com/mcuelenaere
 [@mhujer]:              https://github.com/mhujer
