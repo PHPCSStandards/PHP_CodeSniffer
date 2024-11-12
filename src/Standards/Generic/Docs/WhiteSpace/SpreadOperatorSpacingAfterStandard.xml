@@ -25,7 +25,7 @@ function bar(<em>... </em>$spread) {
     );
 
     bar(
-        [<em>...  </em>$foo ],<em>.../*comment*/</em>array_values($keyedArray)
+        [<em>... </em>$foo ],<em>.../*@*/</em>array_values($keyed)
     );
 }
         ]]>
