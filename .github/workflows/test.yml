@@ -118,6 +118,9 @@ jobs:
     continue-on-error: ${{ matrix.php == '8.5' }}
 
     steps:
+      - name: Prepare git to leave line endings alone
+        run: git config --global core.autocrlf input
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -229,6 +232,9 @@ jobs:
     name: "Coverage: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }} (${{ matrix.os == 'ubuntu-latest' && 'Linux' || 'Win'  }})"
 
     steps:
+      - name: Prepare git to leave line endings alone
+        run: git config --global core.autocrlf input
+
       - name: Checkout code
         uses: actions/checkout@v4
 
