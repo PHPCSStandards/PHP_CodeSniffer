@@ -21,6 +21,7 @@ use PHPUnit\Framework\TestCase;
  * test running the fixer itself, nor generating a diff based on a fixer run.
  *
  * @covers PHP_CodeSniffer\Fixer::generateDiff
+ * @group  Windows
  */
 final class GenerateDiffTest extends TestCase
 {
