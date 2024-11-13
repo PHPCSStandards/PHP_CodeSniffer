@@ -17,6 +17,7 @@ use PHPUnit\Framework\TestCase;
  * Test the Text documentation generation.
  *
  * @covers \PHP_CodeSniffer\Generators\Text
+ * @group  Windows
  */
 final class TextTest extends TestCase
 {

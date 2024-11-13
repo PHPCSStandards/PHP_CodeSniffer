@@ -17,6 +17,7 @@ use PHPUnit\Framework\TestCase;
  * Test the HTML documentation generation.
  *
  * @covers \PHP_CodeSniffer\Generators\HTML
+ * @group  Windows
  */
 final class HTMLTest extends TestCase
 {

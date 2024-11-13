@@ -17,6 +17,7 @@ use PHPUnit\Framework\TestCase;
  * Test the Markdown documentation generation.
  *
  * @covers \PHP_CodeSniffer\Generators\Markdown
+ * @group  Windows
  */
 final class MarkdownTest extends TestCase
 {

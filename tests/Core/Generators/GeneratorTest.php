@@ -18,6 +18,7 @@ use PHPUnit\Framework\TestCase;
  * Tests the functionality in the abstract Generator class.
  *
  * @covers \PHP_CodeSniffer\Generators\Generator
+ * @group  Windows
  */
 final class GeneratorTest extends TestCase
 {
