@@ -28,11 +28,25 @@ jobs:
     strategy:
       matrix:
         os: ['ubuntu-latest', 'windows-latest']
-        php: ['5.4', '7.2', 'latest']
+        php: ['7.2', 'latest']
+
+        include:
+          - php: '5.4'
+            os: 'ubuntu-latest'
+            custom_ini: false
+          # Installing on Windows with PHP 5.4 runs into all sorts of problems with Composer.
+          # See this issue for more context (yes, I've seen this problem before):
+          # @link https://github.com/PHPCSStandards/composer-installer/pull/213
+          - php: '5.5'
+            os: 'windows-latest'
+            custom_ini: false
 
     name: "QuickTest: PHP ${{ matrix.php }} (${{ matrix.os == 'ubuntu-latest' && 'Linux' || 'Win'  }})"
 
     steps:
+      - name: Prepare git to leave line endings alone
+        run: git config --global core.autocrlf input
+
       - name: Checkout code
         uses: actions/checkout@v4
 
