@@ -21,6 +21,24 @@ final class LowercasedFilenameUnitTest extends AbstractSniffUnitTest
 
 
     /**
+     * Get a list of all test files to check.
+     *
+     * @param string $testFileBase The base path that the unit tests files will have.
+     *
+     * @return string[]
+     */
+    protected function getTestFiles($testFileBase)
+    {
+        $testFileDir = dirname($testFileBase);
+        $testFiles   = parent::getTestFiles($testFileBase);
+        $testFiles[] = $testFileDir.DIRECTORY_SEPARATOR.'lowercased_filename_unit_test.inc';
+
+        return $testFiles;
+
+    }//end getTestFiles()
+
+
+    /**
      * Returns the lines where errors should occur.
      *
      * The key of the array should represent the line number and the value
