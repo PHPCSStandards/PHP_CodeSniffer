@@ -542,13 +542,7 @@ class Common
 
         $parts      = explode('\\', $sniffClass);
         $partsCount = count($parts);
-        if ($partsCount < 4) {
-            throw new InvalidArgumentException(
-                'The $sniffClass parameter was not passed a fully qualified sniff(test) class name. Received: '.$sniffClass
-            );
-        }
-
-        $sniff = $parts[($partsCount - 1)];
+        $sniff      = $parts[($partsCount - 1)];
 
         if (substr($sniff, -5) === 'Sniff') {
             // Sniff class name.
@@ -562,8 +556,16 @@ class Common
             );
         }
 
-        $standard = $parts[($partsCount - 4)];
-        $category = $parts[($partsCount - 2)];
+        $standard = '';
+        if (isset($parts[($partsCount - 4)]) === true) {
+            $standard = $parts[($partsCount - 4)];
+        }
+
+        $category = '';
+        if (isset($parts[($partsCount - 2)]) === true) {
+            $category = $parts[($partsCount - 2)];
+        }
+
         return $standard.'.'.$category.'.'.$sniff;
 
     }//end getSniffCode()
