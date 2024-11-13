@@ -339,6 +339,13 @@ Example:
 for
 ```
 
+#### Tests covering code which has OS-specific behaviour
+
+Most code in PHP_CodeSniffer is operating system agnostic.
+However, there are a few places which include OS-specific conditions, most notably for Windows.
+
+Tests which cover code which have Windows specific conditions should be marked with a `@group Windows` annotation to allow for running those tests separately/selectively in CI.
+
 
 ### Submitting Your Pull Request
 
