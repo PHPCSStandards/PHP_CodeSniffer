@@ -60,7 +60,7 @@ class CyclomaticComplexitySniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        // Ignore abstract methods.
+        // Ignore abstract and interface methods. Bail early when live coding.
         if (isset($tokens[$stackPtr]['scope_opener']) === false) {
             return;
         }
