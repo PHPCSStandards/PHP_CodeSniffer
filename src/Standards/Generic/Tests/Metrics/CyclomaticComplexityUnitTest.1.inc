@@ -46,7 +46,7 @@ function complexityEleven()
 {
     while ($condition === true) {
         if ($condition) {
-        } else if ($cond) {
+        } elseif ($cond) {
         }
     }
 
@@ -61,11 +61,11 @@ function complexityEleven()
                 echo 'hi';
             }
         break;
-        case '3':
-        break;
         default:
         break;
     }
+
+    foreach ($array as $element) {}
 }
 
 
@@ -136,14 +136,6 @@ function complexityTwentyOne()
                 echo 'hi';
             }
         break;
-        case '3':
-            switch ($cond) {
-                case '1':
-                break;
-                case '2':
-                break;
-            }
-        break;
         case '4':
             do {
                 if ($condition) {
@@ -159,8 +151,16 @@ function complexityTwentyOne()
             }
         break;
     }
-}
 
+    try {
+        for ($i = 0; $i < 10; $i++) {
+            if ($i % 2) {
+                doSomething();
+            }
+        }
+    } catch (Exception $e) {
+    }
+}
 
 function complexityTenWithTernaries()
 {
@@ -451,4 +451,10 @@ function complexityElevenWithNullSafeOperator()
     $bits = $object5->getX()?->getY()?->getZ();
 }
 
-?>
+abstract class AbstractClass {
+    abstract public function sniffShouldIgnoreAbstractMethods();
+}
+
+interface MyInterface {
+    public function sniffShouldIgnoreInterfaceMethods();
+}
