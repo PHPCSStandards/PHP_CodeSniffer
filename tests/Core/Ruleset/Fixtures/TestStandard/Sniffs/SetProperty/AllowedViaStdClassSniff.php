@@ -5,7 +5,7 @@
  * @see \PHP_CodeSniffer\Tests\Core\Ruleset\SetSniffPropertyTest
  */
 
-namespace Fixtures\Sniffs\SetProperty;
+namespace Fixtures\TestStandard\Sniffs\SetProperty;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;

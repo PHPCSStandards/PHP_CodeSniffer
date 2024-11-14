@@ -5,13 +5,14 @@
  * @see \PHP_CodeSniffer\Tests\Core\Ruleset\SniffDeprecationTest
  */
 
-namespace Fixtures\Sniffs\DeprecatedInvalid;
+namespace Fixtures\TestStandard\Sniffs\DeprecatedInvalid;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\DeprecatedSniff;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use stdClass;
 
-class InvalidRemovalVersionSniff implements Sniff,DeprecatedSniff
+class InvalidDeprecationMessageSniff implements Sniff,DeprecatedSniff
 {
 
     public function getDeprecationVersion()
@@ -21,12 +22,12 @@ class InvalidRemovalVersionSniff implements Sniff,DeprecatedSniff
 
     public function getRemovalVersion()
     {
-        return ['4.0'];
+        return 'dummy';
     }
 
     public function getDeprecationMessage()
     {
-        return 'dummy';
+        return new stdClass;
     }
 
     public function register()
