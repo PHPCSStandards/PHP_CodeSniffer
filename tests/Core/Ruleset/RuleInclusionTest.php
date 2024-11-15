@@ -49,33 +49,35 @@ final class RuleInclusionTest extends TestCase
      *
      * @return void
      */
-    public static function setUpBeforeClass(): void
+    public function setUp(): void
     {
-        $standard       = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
-        self::$standard = $standard;
+        if (self::$standard === '') {
+            $standard       = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
+            self::$standard = $standard;
 
-        // On-the-fly adjust the ruleset test file to be able to test
-        // sniffs included with relative paths.
-        $contents       = file_get_contents($standard);
-        self::$contents = $contents;
+            // On-the-fly adjust the ruleset test file to be able to test
+            // sniffs included with relative paths.
+            $contents       = file_get_contents($standard);
+            self::$contents = $contents;
 
-        $repoRootDir = basename(dirname(dirname(dirname(__DIR__))));
+            $repoRootDir = basename(dirname(dirname(dirname(__DIR__))));
 
-        $newPath = $repoRootDir;
-        if (DIRECTORY_SEPARATOR === '\\') {
-            $newPath = str_replace('\\', '/', $repoRootDir);
-        }
+            $newPath = $repoRootDir;
+            if (DIRECTORY_SEPARATOR === '\\') {
+                $newPath = str_replace('\\', '/', $repoRootDir);
+            }
 
-        $adjusted = str_replace('%path_root_dir%', $newPath, $contents);
+            $adjusted = str_replace('%path_root_dir%', $newPath, $contents);
 
-        if (file_put_contents($standard, $adjusted) === false) {
-            self::markTestSkipped('On the fly ruleset adjustment failed');
-        }
+            if (file_put_contents($standard, $adjusted) === false) {
+                self::markTestSkipped('On the fly ruleset adjustment failed');
+            }
 
-        $config        = new ConfigDouble(["--standard=$standard"]);
-        self::$ruleset = new Ruleset($config);
+            $config        = new ConfigDouble(["--standard=$standard"]);
+            self::$ruleset = new Ruleset($config);
+        }//end if
 
-    }//end setUpBeforeClass()
+    }//end setUp()
 
 
     /**
