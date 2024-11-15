@@ -27,6 +27,14 @@
         </properties>
     </rule>
 
+    <!-- Sniff directory include. -->
+    <rule ref="./src/Standards/Squiz/Sniffs/Files/">
+        <properties>
+            <property name="setforsquizfilessniffs" value="true" />
+        </properties>
+    </rule>
+
+    <!-- Sniff file include. -->
     <rule ref="./src/Standards/Generic/Sniffs/Files/LineLengthSniff.php">
         <properties>
             <property name="lineLimit" value="10" />
@@ -39,6 +47,7 @@
         </properties>
     </rule>
 
+    <!-- Ruleset file include. -->
     <rule ref="./RuleInclusionTest-include.xml">
         <!-- Property being set for all sniffs included in this ruleset. -->
         <properties>
