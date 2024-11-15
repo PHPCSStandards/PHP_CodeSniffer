@@ -103,7 +103,7 @@ final class RuleInclusionTest extends TestCase
      */
     public function testHasSniffCodes()
     {
-        $this->assertCount(48, self::$ruleset->sniffCodes);
+        $this->assertCount(49, self::$ruleset->sniffCodes);
 
     }//end testHasSniffCodes()
 
@@ -321,6 +321,10 @@ final class RuleInclusionTest extends TestCase
                 'PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\CyclomaticComplexitySniff',
             ],
             [
+                'Squiz.Files.FileExtension',
+                'PHP_CodeSniffer\Standards\Squiz\Sniffs\Files\FileExtensionSniff',
+            ],
+            [
                 'Generic.NamingConventions.CamelCapsFunctionName',
                 'PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\CamelCapsFunctionNameSniff',
             ],
@@ -469,6 +473,10 @@ final class RuleInclusionTest extends TestCase
             'Set property for complete category: PSR12 OperatorSpacing'      => [
                 'sniffClass'   => 'PHP_CodeSniffer\Standards\PSR12\Sniffs\Operators\OperatorSpacingSniff',
                 'propertyName' => 'setforallincategory',
+            ],
+            'Set property for all sniffs in included category directory'     => [
+                'sniffClass'   => 'PHP_CodeSniffer\Standards\Squiz\Sniffs\Files\FileExtensionSniff',
+                'propertyName' => 'setforsquizfilessniffs',
             ],
         ];
 
