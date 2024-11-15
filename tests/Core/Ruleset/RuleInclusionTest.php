@@ -47,35 +47,37 @@ final class RuleInclusionTest extends TestCase
     /**
      * Initialize the config and ruleset objects based on the `RuleInclusionTest.xml` ruleset file.
      *
-     * @beforeClass
+     * @before
      *
      * @return void
      */
     public static function initializeConfigAndRuleset()
     {
-        $standard       = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
-        self::$standard = $standard;
+        if (self::$standard === '') {
+            $standard       = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
+            self::$standard = $standard;
 
-        // On-the-fly adjust the ruleset test file to be able to test
-        // sniffs included with relative paths.
-        $contents       = file_get_contents($standard);
-        self::$contents = $contents;
+            // On-the-fly adjust the ruleset test file to be able to test
+            // sniffs included with relative paths.
+            $contents       = file_get_contents($standard);
+            self::$contents = $contents;
 
-        $repoRootDir = basename(dirname(dirname(dirname(__DIR__))));
+            $repoRootDir = basename(dirname(dirname(dirname(__DIR__))));
 
-        $newPath = $repoRootDir;
-        if (DIRECTORY_SEPARATOR === '\\') {
-            $newPath = str_replace('\\', '/', $repoRootDir);
-        }
+            $newPath = $repoRootDir;
+            if (DIRECTORY_SEPARATOR === '\\') {
+                $newPath = str_replace('\\', '/', $repoRootDir);
+            }
 
-        $adjusted = str_replace('%path_root_dir%', $newPath, $contents);
+            $adjusted = str_replace('%path_root_dir%', $newPath, $contents);
 
-        if (file_put_contents($standard, $adjusted) === false) {
-            self::markTestSkipped('On the fly ruleset adjustment failed');
-        }
+            if (file_put_contents($standard, $adjusted) === false) {
+                self::markTestSkipped('On the fly ruleset adjustment failed');
+            }
 
-        $config        = new ConfigDouble(["--standard=$standard"]);
-        self::$ruleset = new Ruleset($config);
+            $config        = new ConfigDouble(["--standard=$standard"]);
+            self::$ruleset = new Ruleset($config);
+        }//end if
 
     }//end initializeConfigAndRuleset()
 
@@ -101,7 +103,7 @@ final class RuleInclusionTest extends TestCase
      */
     public function testHasSniffCodes()
     {
-        $this->assertCount(48, self::$ruleset->sniffCodes);
+        $this->assertCount(49, self::$ruleset->sniffCodes);
 
     }//end testHasSniffCodes()
 
@@ -319,6 +321,10 @@ final class RuleInclusionTest extends TestCase
                 'PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\CyclomaticComplexitySniff',
             ],
             [
+                'Squiz.Files.FileExtension',
+                'PHP_CodeSniffer\Standards\Squiz\Sniffs\Files\FileExtensionSniff',
+            ],
+            [
                 'Generic.NamingConventions.CamelCapsFunctionName',
                 'PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\CamelCapsFunctionNameSniff',
             ],
@@ -467,6 +473,10 @@ final class RuleInclusionTest extends TestCase
             'Set property for complete category: PSR12 OperatorSpacing'      => [
                 'sniffClass'   => 'PHP_CodeSniffer\Standards\PSR12\Sniffs\Operators\OperatorSpacingSniff',
                 'propertyName' => 'setforallincategory',
+            ],
+            'Set property for all sniffs in included category directory'     => [
+                'sniffClass'   => 'PHP_CodeSniffer\Standards\Squiz\Sniffs\Files\FileExtensionSniff',
+                'propertyName' => 'setforsquizfilessniffs',
             ],
         ];
 
