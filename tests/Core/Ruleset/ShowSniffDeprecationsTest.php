@@ -234,7 +234,7 @@ final class ShowSniffDeprecationsTest extends TestCase
         $config   = new ConfigDouble(["--standard=$standard", '--no-colors']);
         $ruleset  = new Ruleset($config);
 
-        $expected  = 'WARNING: The SniffDeprecationTest standard uses 5 deprecated sniffs'.PHP_EOL;
+        $expected  = 'WARNING: The ShowSniffDeprecationsTest standard uses 5 deprecated sniffs'.PHP_EOL;
         $expected .= '--------------------------------------------------------------------------------'.PHP_EOL;
         $expected .= '-  Fixtures.Deprecated.WithLongReplacement'.PHP_EOL;
         $expected .= '   This sniff has been deprecated since v3.8.0 and will be removed in v4.0.0.'.PHP_EOL;
@@ -321,13 +321,13 @@ final class ShowSniffDeprecationsTest extends TestCase
      */
     public static function dataReportWidthIsRespected()
     {
-        $summaryLine = 'WARNING: The SniffDeprecationTest standard uses 1 deprecated sniff'.PHP_EOL;
+        $summaryLine = 'WARNING: The ShowSniffDeprecationsTest standard uses 1 deprecated sniff'.PHP_EOL;
 
         // phpcs:disable Squiz.Strings.ConcatenationSpacing.PaddingFound -- Test readability is more important.
         return [
             'Report width small: 40; with truncated sniff name and wrapped header and footer lines' => [
                 'reportWidth'    => 40,
-                'expectedOutput' => 'WARNING: The SniffDeprecationTest'.PHP_EOL
+                'expectedOutput' => 'WARNING: The ShowSniffDeprecationsTest'.PHP_EOL
                     .'standard uses 1 deprecated sniff'.PHP_EOL
                     .'----------------------------------------'.PHP_EOL
                     .'-  Fixtures.Deprecated.WithLongRepla...'.PHP_EOL
@@ -409,7 +409,7 @@ final class ShowSniffDeprecationsTest extends TestCase
         $config   = new ConfigDouble(["--standard=$standard", '--no-colors']);
         $ruleset  = new Ruleset($config);
 
-        $expected  = 'WARNING: The SniffDeprecationTest standard uses 2 deprecated sniffs'.PHP_EOL;
+        $expected  = 'WARNING: The ShowSniffDeprecationsTest standard uses 2 deprecated sniffs'.PHP_EOL;
         $expected .= '--------------------------------------------------------------------------------'.PHP_EOL;
         $expected .= '-  Fixtures.Deprecated.WithoutReplacement'.PHP_EOL;
         $expected .= '   This sniff has been deprecated since v3.4.0 and will be removed in v4.0.0.'.PHP_EOL;
