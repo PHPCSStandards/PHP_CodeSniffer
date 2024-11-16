@@ -185,10 +185,10 @@ final class ExplainTest extends TestCase
         $ruleset  = new Ruleset($config);
 
         $expected  = PHP_EOL;
-        $expected .= 'The ShowSniffDeprecationsTest standard contains 9 sniffs'.PHP_EOL.PHP_EOL;
+        $expected .= 'The ShowSniffDeprecationsTest standard contains 10 sniffs'.PHP_EOL.PHP_EOL;
 
-        $expected .= 'TestStandard (9 sniffs)'.PHP_EOL;
-        $expected .= '-----------------------'.PHP_EOL;
+        $expected .= 'TestStandard (10 sniffs)'.PHP_EOL;
+        $expected .= '------------------------'.PHP_EOL;
         $expected .= '  TestStandard.Deprecated.WithLongReplacement *'.PHP_EOL;
         $expected .= '  TestStandard.Deprecated.WithoutReplacement *'.PHP_EOL;
         $expected .= '  TestStandard.Deprecated.WithReplacement *'.PHP_EOL;
@@ -197,7 +197,8 @@ final class ExplainTest extends TestCase
         $expected .= '  TestStandard.SetProperty.AllowedAsDeclared'.PHP_EOL;
         $expected .= '  TestStandard.SetProperty.AllowedViaMagicMethod'.PHP_EOL;
         $expected .= '  TestStandard.SetProperty.AllowedViaStdClass'.PHP_EOL;
-        $expected .= '  TestStandard.SetProperty.NotAllowedViaAttribute'.PHP_EOL.PHP_EOL;
+        $expected .= '  TestStandard.SetProperty.NotAllowedViaAttribute'.PHP_EOL;
+        $expected .= '  TestStandard.SetProperty.PropertyTypeHandling'.PHP_EOL.PHP_EOL;
 
         $expected .= '* Sniffs marked with an asterix are deprecated.'.PHP_EOL;
 
