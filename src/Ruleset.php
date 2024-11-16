@@ -1673,41 +1673,72 @@ class Ruleset
             return;
         }
 
-        $value = $settings['value'];
+        $value = $this->getRealPropertyValue($settings['value']);
 
-        if (is_string($value) === true) {
-            $value = trim($value);
-        }
-
-        if ($value === '') {
-            $value = null;
-        }
-
-        // Special case for booleans.
-        if ($value === 'true') {
-            $value = true;
-        } else if ($value === 'false') {
-            $value = false;
-        } else if (substr($name, -2) === '[]') {
-            $name   = $propertyName;
+        // Handle properties set inline via phpcs:set.
+        if (substr($name, -2) === '[]') {
             $values = [];
-            if ($value !== null) {
+            if (is_string($value) === true) {
                 foreach (explode(',', $value) as $val) {
                     list($k, $v) = explode('=>', $val.'=>');
                     if ($v !== '') {
-                        $values[trim($k)] = trim($v);
+                        $values[trim($k)] = $v;
                     } else {
-                        $values[] = trim($k);
+                        $values[] = $k;
                     }
                 }
             }
 
-            $value = $values;
+            $value = $this->getRealPropertyValue($values);
         }
 
-        $sniffObject->$name = $value;
+        $sniffObject->$propertyName = $value;
 
     }//end setSniffProperty()
+
+
+    /**
+     * Transform a property value received via a ruleset or inline annotation to a typed value.
+     *
+     * @param string|array<int|string, string> $value The current property value.
+     *
+     * @return mixed
+     */
+    private function getRealPropertyValue($value)
+    {
+        if (is_array($value) === true) {
+            foreach ($value as $k => $v) {
+                $value[$k] = $this->getRealPropertyValue($v);
+            }
+
+            return $value;
+        }
+
+        if (is_string($value) === true) {
+            $value = trim($value);
+
+            if ($value === '') {
+                return null;
+            }
+
+            $valueLc = strtolower($value);
+
+            if ($valueLc === 'true') {
+                return true;
+            }
+
+            if ($valueLc === 'false') {
+                return false;
+            }
+
+            if ($valueLc === 'null') {
+                return null;
+            }
+        }//end if
+
+        return $value;
+
+    }//end getRealPropertyValue()
 
 
     /**

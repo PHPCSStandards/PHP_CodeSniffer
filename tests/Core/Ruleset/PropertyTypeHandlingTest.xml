@@ -12,6 +12,7 @@
 
             <property name="expectsNull" value="null"/>
             <property name="expectsNullCase" value="NULL"/>
+            <property name="expectsNullTrimmed" value="   null"/>
 
             <!-- Also tests that property names get cleaned of surrounding whitespace. -->
             <property name="  expectsBooleanTrue " value="true"/>

@@ -226,9 +226,7 @@ class ForbiddenFunctionsSniff implements Sniff
             $pattern = strtolower($function);
         }
 
-        if ($this->forbiddenFunctions[$pattern] !== null
-            && $this->forbiddenFunctions[$pattern] !== 'null'
-        ) {
+        if ($this->forbiddenFunctions[$pattern] !== null) {
             $type  .= 'WithAlternative';
             $data[] = $this->forbiddenFunctions[$pattern];
             $error .= '; use %s() instead';

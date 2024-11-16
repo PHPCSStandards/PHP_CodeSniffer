@@ -12,6 +12,7 @@
 
 // phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsNull null
 // phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsNullCase NULL
+// phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsNullTrimmed   null
 
 // phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsBooleanTrue true
 // phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsBooleanTrueCase True

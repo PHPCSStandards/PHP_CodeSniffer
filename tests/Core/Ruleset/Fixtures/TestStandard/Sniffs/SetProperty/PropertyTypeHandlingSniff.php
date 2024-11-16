@@ -53,18 +53,25 @@ final class PropertyTypeHandlingSniff implements Sniff
     public $expectsFloatButAcceptsString;
 
     /**
-     * Used to verify that null gets set as a string.
+     * Used to verify that null gets set as a proper null value.
      *
      * @var null
      */
     public $expectsNull;
 
     /**
-     * Used to verify that null gets set as a string.
+     * Used to verify that null gets set as a proper null value.
      *
      * @var null
      */
     public $expectsNullCase;
+
+    /**
+     * Used to verify that null gets set as a proper null value.
+     *
+     * @var null
+     */
+    public $expectsNullTrimmed;
 
     /**
      * Used to verify that booleans get set as proper boolean values.
