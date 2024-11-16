@@ -5,6 +5,7 @@
 
     <rule ref="TestStandard">
         <exclude name="TestStandard.InvalidSniffs"/>
+        <exclude name="TestStandard.InvalidSniffError"/>
     </rule>
 
 </ruleset>
