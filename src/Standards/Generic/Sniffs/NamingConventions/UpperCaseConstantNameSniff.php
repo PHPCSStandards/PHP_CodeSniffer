@@ -121,7 +121,7 @@ class UpperCaseConstantNameSniff implements Sniff
         $constName = $tokens[$constPtr]['content'];
         $prefix    = '';
 
-        // Strip namespace from constant like /foo/bar/CONSTANT.
+        // Strip namespace from constant like \foo\bar\CONSTANT.
         $splitPos = strrpos($constName, '\\');
         if ($splitPos !== false) {
             $prefix    = substr($constName, 0, ($splitPos + 1));
