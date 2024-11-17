@@ -217,6 +217,10 @@ final class ExplainTest extends TestCase
      */
     public function testExplainWillExplainEachStandardSeparately()
     {
+        if (PHP_CODESNIFFER_CBF === true) {
+            $this->markTestSkipped('This test needs CS mode to run');
+        }
+
         $standard        = __DIR__.'/ExplainSingleSniffTest.xml';
         $_SERVER['argv'] = [
             'phpcs',
