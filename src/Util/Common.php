@@ -283,8 +283,9 @@ class Common
             "\t" => '\t',
             " "  => '·',
         ];
-        if (stripos(PHP_OS, 'WIN') === 0) {
-            // Do not replace spaces on Windows.
+        if (stripos(PHP_OS, 'WIN') === 0 && PHP_VERSION_ID < 70100) {
+            // Do not replace spaces on old PHP on Windows.
+            // Printing Unicode characters like '·' to Windows console only works since PHP 7.1.
             unset($replacements[" "]);
         }
 
