@@ -75,13 +75,13 @@ final class PrepareForOutputTest extends TestCase
             'Special characters are replaced with their escapes' => [
                 'content'     => "\r\n\t",
                 'exclude'     => [],
-                'expected'    => "\033[30;1m\\r\033[0m\033[30;1m\\n\033[0m\033[30;1m\\t\033[0m",
+                'expected'    => "\033[30;1m\\r\\n\\t\033[0m",
                 'expectedWin' => "\\r\\n\\t",
             ],
             'Spaces are replaced with a unique mark'             => [
                 'content'     => "    ",
                 'exclude'     => [],
-                'expected'    => "\033[30;1m·\033[0m\033[30;1m·\033[0m\033[30;1m·\033[0m\033[30;1m·\033[0m",
+                'expected'    => "\033[30;1m····\033[0m",
                 'expectedWin' => "    ",
             ],
             'Other characters are unaffected'                    => [
@@ -102,7 +102,7 @@ final class PrepareForOutputTest extends TestCase
                     "\r",
                     "\n",
                 ],
-                'expected'    => "\r\n\033[30;1m\\t\033[0m\033[30;1m·\033[0m",
+                'expected'    => "\r\n\033[30;1m\\t·\033[0m",
                 'expectedWin' => "\r\n\\t ",
             ],
         ];
