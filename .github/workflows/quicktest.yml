@@ -76,6 +76,11 @@ jobs:
         if: ${{ matrix.os == 'windows-latest' }}
         run: php "vendor/bin/phpunit" tests/AllTests.php --group Windows --no-coverage
 
+      - name: 'PHPUnit: run select tests in CBF mode'
+        run: php "vendor/bin/phpunit" tests/AllTests.php --group CBF --exclude-group nothing --no-coverage
+        env:
+          PHP_CODESNIFFER_CBF: '1'
+
       # Note: The code style check is run as an integration test.
       - name: 'PHPCS: check code style without cache, no parallel'
         run: php "bin/phpcs" --no-cache --parallel=1
