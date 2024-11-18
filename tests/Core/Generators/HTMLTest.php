@@ -129,4 +129,47 @@ final class HTMLTest extends TestCase
     }//end testFooterResetsErrorReportingToOriginalSetting()
 
 
+    /**
+     * Safeguard that users won't see a PHP warning about the timezone not being set when calling date().
+     *
+     * The warning we don't want to see is:
+     *   "date(): It is not safe to rely on the system's timezone settings. You are *required* to use
+     *    the date.timezone setting or the date_default_timezone_set() function. In case you used any of
+     *    those methods and you are still getting this warning, you most likely misspelled the timezone
+     *    identifier. We selected the timezone 'UTC' for now, but please set date.timezone to select
+     *    your timezone."
+     *
+     * JRF: Based on my tests, the warning only occurs on PHP < 7.0, but never a bad thing to safeguard this
+     * on a wider range of PHP versions.
+     *
+     * Note: as of PHP 8.2, PHP no longer accepts an empty string as timezone and will use `UTC` instead,
+     * so the warning on calling date() in the code itself would not display anyway.
+     *
+     * @requires PHP < 8.2
+     *
+     * @doesNotPerformAssertions
+     *
+     * @return void
+     */
+    public function testFooterDoesntThrowWarningOnMissingTimezone()
+    {
+        $originalIni = @ini_set('date.timezone', '');
+
+        // Set up the ruleset.
+        $standard = __DIR__.'/OneDocTest.xml';
+        $config   = new ConfigDouble(["--standard=$standard"]);
+        $ruleset  = new Ruleset($config);
+
+        // We know there will be output, but we're not interested in the output for this test.
+        ob_start();
+        $generator = new HTMLDouble($ruleset);
+        $generator->printRealFooter();
+        ob_end_clean();
+
+        // Reset the timezone to its original state.
+        ini_set('date.timezone', $originalIni);
+
+    }//end testFooterDoesntThrowWarningOnMissingTimezone()
+
+
 }//end class
