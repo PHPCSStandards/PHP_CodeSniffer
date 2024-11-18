@@ -103,6 +103,10 @@ class HTML extends Generator
      */
     public function generate()
     {
+        if (empty($this->docFiles) === true) {
+            return;
+        }
+
         ob_start();
         $this->printHeader();
         $this->printToc();
