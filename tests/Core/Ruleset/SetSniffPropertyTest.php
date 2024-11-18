@@ -203,6 +203,39 @@ final class SetSniffPropertyTest extends AbstractRulesetTestCase
 
 
     /**
+     * Test that attempting to set a property for a sniff which isn't registered will be ignored.
+     *
+     * @return void
+     */
+    public function testDirectCallIgnoredPropertyForUnusedSniff()
+    {
+        $sniffCode  = 'Generic.Formatting.SpaceAfterCast';
+        $sniffClass = 'PHP_CodeSniffer\\Standards\\Generic\\Sniffs\\Formatting\\SpaceAfterCastSniff';
+
+        // Set up the ruleset.
+        $config  = new ConfigDouble(['--standard=PSR1']);
+        $ruleset = new Ruleset($config);
+
+        $ruleset->setSniffProperty(
+            $sniffClass,
+            'ignoreNewlines',
+            [
+                'scope' => 'sniff',
+                'value' => true,
+            ]
+        );
+
+        // Verify that there are sniffs registered.
+        $this->assertGreaterThan(0, count($ruleset->sniffCodes), 'No sniff codes registered');
+
+        // Verify that our target sniff has NOT been registered after attempting to set the property.
+        $this->assertArrayNotHasKey($sniffCode, $ruleset->sniffCodes, 'Unused sniff was registered in sniffCodes, but shouldn\'t have been');
+        $this->assertArrayNotHasKey($sniffClass, $ruleset->sniffs, 'Unused sniff was registered in sniffs, but shouldn\'t have been');
+
+    }//end testDirectCallIgnoredPropertyForUnusedSniff()
+
+
+    /**
      * Test that setting a property via a direct call to the Ruleset::setSniffProperty() method
      * sets the property correctly when using the new $settings array format.
      *
