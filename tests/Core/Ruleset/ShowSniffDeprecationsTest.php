@@ -147,7 +147,7 @@ final class ShowSniffDeprecationsTest extends TestCase
         ];
         foreach ($sniffs as $sniffCode) {
             $parts     = explode('.', strtolower($sniffCode));
-            $sniffName = $parts[0].'\sniffs\\'.$parts[1].'\\'.$parts[2].'sniff';
+            $sniffName = $parts[0].'\\sniffs\\'.$parts[1].'\\'.$parts[2].'sniff';
             $restrictions[strtolower($sniffName)] = true;
         }
 
@@ -159,7 +159,7 @@ final class ShowSniffDeprecationsTest extends TestCase
             $sniffFiles[] = $sniffFile;
         }
 
-        $ruleset->registerSniffs($allSniffs, $restrictions, []);
+        $ruleset->registerSniffs($sniffFiles, $restrictions, []);
         $ruleset->populateTokenListeners();
 
         $this->expectOutputString('');
@@ -196,7 +196,7 @@ final class ShowSniffDeprecationsTest extends TestCase
         ];
         foreach ($exclude as $sniffCode) {
             $parts     = explode('.', strtolower($sniffCode));
-            $sniffName = $parts[0].'\sniffs\\'.$parts[1].'\\'.$parts[2].'sniff';
+            $sniffName = $parts[0].'\\sniffs\\'.$parts[1].'\\'.$parts[2].'sniff';
             $exclusions[strtolower($sniffName)] = true;
         }
 
@@ -208,7 +208,7 @@ final class ShowSniffDeprecationsTest extends TestCase
             $sniffFiles[] = $sniffFile;
         }
 
-        $ruleset->registerSniffs($allSniffs, [], $exclusions);
+        $ruleset->registerSniffs($sniffFiles, [], $exclusions);
         $ruleset->populateTokenListeners();
 
         $this->expectOutputString('');
