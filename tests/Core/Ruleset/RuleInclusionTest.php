@@ -11,15 +11,14 @@ namespace PHP_CodeSniffer\Tests\Core\Ruleset;
 
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
-use PHPUnit\Framework\TestCase;
-use ReflectionObject;
+use PHP_CodeSniffer\Tests\Core\Ruleset\AbstractRulesetTestCase;
 
 /**
  * Tests for the \PHP_CodeSniffer\Ruleset class.
  *
  * @covers \PHP_CodeSniffer\Ruleset
  */
-final class RuleInclusionTest extends TestCase
+final class RuleInclusionTest extends AbstractRulesetTestCase
 {
 
     /**
@@ -352,10 +351,7 @@ final class RuleInclusionTest extends TestCase
     public function testSettingProperties($sniffClass, $propertyName, $expectedValue)
     {
         $this->assertArrayHasKey($sniffClass, self::$ruleset->sniffs);
-
-        $hasProperty = (new ReflectionObject(self::$ruleset->sniffs[$sniffClass]))->hasProperty($propertyName);
-        $errorMsg    = sprintf('Property %s does not exist on sniff class %s', $propertyName, $sniffClass);
-        $this->assertTrue($hasProperty, $errorMsg);
+        $this->assertXObjectHasProperty($propertyName, self::$ruleset->sniffs[$sniffClass]);
 
         $actualValue = self::$ruleset->sniffs[$sniffClass]->$propertyName;
         $this->assertSame($expectedValue, $actualValue);
@@ -444,10 +440,7 @@ final class RuleInclusionTest extends TestCase
     public function testSettingInvalidPropertiesOnStandardsAndCategoriesSilentlyFails($sniffClass, $propertyName)
     {
         $this->assertArrayHasKey($sniffClass, self::$ruleset->sniffs, 'Sniff class '.$sniffClass.' not listed in registered sniffs');
-
-        $hasProperty = (new ReflectionObject(self::$ruleset->sniffs[$sniffClass]))->hasProperty($propertyName);
-        $errorMsg    = sprintf('Property %s registered for sniff %s which does not support it', $propertyName, $sniffClass);
-        $this->assertFalse($hasProperty, $errorMsg);
+        $this->assertXObjectNotHasProperty($propertyName, self::$ruleset->sniffs[$sniffClass]);
 
     }//end testSettingInvalidPropertiesOnStandardsAndCategoriesSilentlyFails()
 

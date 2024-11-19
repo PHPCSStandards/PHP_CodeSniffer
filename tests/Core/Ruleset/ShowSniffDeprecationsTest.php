@@ -11,7 +11,7 @@ namespace PHP_CodeSniffer\Tests\Core\Ruleset;
 
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
-use PHPUnit\Framework\TestCase;
+use PHP_CodeSniffer\Tests\Core\Ruleset\AbstractRulesetTestCase;
 
 /**
  * Tests PHPCS native handling of sniff deprecations.
@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
  * @covers \PHP_CodeSniffer\Ruleset::hasSniffDeprecations
  * @covers \PHP_CodeSniffer\Ruleset::showSniffDeprecations
  */
-final class ShowSniffDeprecationsTest extends TestCase
+final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
 {
 
 
@@ -452,15 +452,7 @@ final class ShowSniffDeprecationsTest extends TestCase
      */
     public function testExceptionIsThrownOnIncorrectlyImplementedInterface($standard, $exceptionMessage)
     {
-        $exception = 'PHP_CodeSniffer\Exceptions\RuntimeException';
-        if (method_exists($this, 'expectException') === true) {
-            // PHPUnit 5+.
-            $this->expectException($exception);
-            $this->expectExceptionMessage($exceptionMessage);
-        } else {
-            // PHPUnit 4.
-            $this->setExpectedException($exception, $exceptionMessage);
-        }
+        $this->expectRuntimeExceptionMessage($exceptionMessage);
 
         // Set up the ruleset.
         $standard = __DIR__.'/'.$standard;
