@@ -21,6 +21,23 @@ final class OpeningFunctionBraceKernighanRitchieUnitTest extends AbstractSniffUn
 
 
     /**
+     * Get a list of CLI values to set before the file is tested.
+     *
+     * @param string                  $testFile The name of the file being tested.
+     * @param \PHP_CodeSniffer\Config $config   The config data for the test run.
+     *
+     * @return void
+     */
+    public function setCliValues($testFile, $config)
+    {
+        if ($testFile === 'OpeningFunctionBraceKernighanRitchieUnitTest.2.inc') {
+            $config->tabWidth = 4;
+        }
+
+    }//end setCliValues()
+
+
+    /**
      * Returns the lines where errors should occur.
      *
      * The key of the array should represent the line number and the value
@@ -63,6 +80,14 @@ final class OpeningFunctionBraceKernighanRitchieUnitTest extends AbstractSniffUn
                 203 => 1,
                 213 => 1,
                 214 => 1,
+                222 => 1,
+                224 => 1,
+                227 => 1,
+            ];
+        case 'OpeningFunctionBraceKernighanRitchieUnitTest.2.inc':
+            return [
+                6  => 1,
+                10 => 1,
             ];
         default:
             return [];
