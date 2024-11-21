@@ -185,7 +185,7 @@ final class ExplainTest extends TestCase
         $ruleset  = new Ruleset($config);
 
         $expected  = PHP_EOL;
-        $expected .= 'The SniffDeprecationTest standard contains 9 sniffs'.PHP_EOL.PHP_EOL;
+        $expected .= 'The ShowSniffDeprecationsTest standard contains 9 sniffs'.PHP_EOL.PHP_EOL;
 
         $expected .= 'Fixtures (9 sniffs)'.PHP_EOL;
         $expected .= '-------------------'.PHP_EOL;
