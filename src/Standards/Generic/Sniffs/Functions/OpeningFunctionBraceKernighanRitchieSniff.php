@@ -167,7 +167,7 @@ class OpeningFunctionBraceKernighanRitchieSniff implements Sniff
             $data  = [$length];
             $fix   = $phpcsFile->addFixableError($error, $openingBrace, 'SpaceBeforeBrace', $data);
             if ($fix === true) {
-                if ($length === 0 || $length === '\t') {
+                if ($length === 0) {
                     $phpcsFile->fixer->addContentBefore($openingBrace, ' ');
                 } else {
                     $phpcsFile->fixer->replaceToken(($openingBrace - 1), ' ');
