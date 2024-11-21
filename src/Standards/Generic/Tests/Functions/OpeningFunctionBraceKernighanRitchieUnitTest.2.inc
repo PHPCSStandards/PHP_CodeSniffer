@@ -1,0 +1,11 @@
+<?php
+
+// Tests with tabs and the tabWidth config set to 4.
+
+// Uses one tab.
+function myFunction()	{
+}
+
+// Uses three tabs.
+function myFunction()			{
+}

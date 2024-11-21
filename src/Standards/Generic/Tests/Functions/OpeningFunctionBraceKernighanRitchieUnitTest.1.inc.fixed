@@ -22,15 +22,15 @@ class myClass
     // Good.
     function myFunction() {
     }
-    
+
     // Brace should be on same line.
     function myFunction() {
     }
-    
+
     // Too many spaces.
     function myFunction() {
     }
-    
+
     // Uses tab.
     function myFunction() {
     }
@@ -67,17 +67,17 @@ class myClass
     function myFunction($variable1, $variable2,
         $variable3, $variable4) {
     }
-    
+
     // Brace should be on same line.
     function myFunction($variable1, $variable2,
         $variable3, $variable4) {
     }
-    
+
     // Too many spaces.
     function myFunction($variable1, $variable2,
         $variable3, $variable4) {
     }
-    
+
     // Uses tab.
     function myFunction($variable1, $variable2,
         $variable3, $variable4) {
@@ -200,3 +200,23 @@ function myFunction($a, $lot, $of, $params)
 function myFunction() {}
 function myFunction() {} // Too many spaces with an empty function.
 function myFunction() {} // Too many spaces (tab) with an empty function.
+
+// phpcs:set Generic.Functions.OpeningFunctionBraceKernighanRitchie checkFunctions 0
+function shouldBeIgnored()
+{}
+// phpcs:set Generic.Functions.OpeningFunctionBraceKernighanRitchie checkFunctions 1
+
+function dnfReturnType(): (Response&SuccessResponse)|AnotherResponse|string {
+}
+
+function commentAfterOpeningBrace() {
+ // Some comment.
+}
+
+function variableAssignmentAfterOpeningBrace() {
+ $a = 1;
+}
+
+abstract class MyClass {
+    abstract public function abstractMethod();
+}
