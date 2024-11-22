@@ -30,7 +30,7 @@ final class DisallowAlternativePHPTagsUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
         case 'DisallowAlternativePHPTagsUnitTest.1.inc':
@@ -58,7 +58,7 @@ final class DisallowAlternativePHPTagsUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         if ($testFile === 'DisallowAlternativePHPTagsUnitTest.2.inc') {
             // Check if the Internal.NoCodeFound error can be expected on line 1.

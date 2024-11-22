@@ -30,7 +30,7 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testMatchExpression($testMarker, $openerOffset, $closerOffset, $testContent='match')
+    public function testMatchExpression($testMarker, $openerOffset, $closerOffset, $testContent = 'match')
     {
         $tokens = $this->phpcsFile->getTokens();
 
@@ -213,7 +213,7 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testNotAMatchStructure($testMarker, $testContent='match', $expectedType='T_STRING')
+    public function testNotAMatchStructure($testMarker, $testContent = 'match', $expectedType = 'T_STRING')
     {
         $targetTypes  = Tokens::NAME_TOKENS;
         $targetTypes += [T_MATCH => T_MATCH];
@@ -484,7 +484,7 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    private function scopeTestHelper($token, $openerOffset, $closerOffset, $skipScopeCloserCheck=false)
+    private function scopeTestHelper($token, $openerOffset, $closerOffset, $skipScopeCloserCheck = false)
     {
         $tokens     = $this->phpcsFile->getTokens();
         $tokenArray = $tokens[$token];

@@ -31,7 +31,7 @@ final class DefaultKeywordTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testMatchDefault($testMarker, $testContent='default')
+    public function testMatchDefault($testMarker, $testContent = 'default')
     {
         $tokens = $this->phpcsFile->getTokens();
 
@@ -111,7 +111,7 @@ final class DefaultKeywordTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testSwitchDefault($testMarker, $testContent='default')
+    public function testSwitchDefault($testMarker, $testContent = 'default')
     {
         $tokens = $this->phpcsFile->getTokens();
 
@@ -169,7 +169,7 @@ final class DefaultKeywordTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testNotDefaultKeyword($testMarker, $testContent='DEFAULT', $expectedType='T_STRING')
+    public function testNotDefaultKeyword($testMarker, $testContent = 'DEFAULT', $expectedType = 'T_STRING')
     {
         $targetTypes  = Tokens::NAME_TOKENS;
         $targetTypes += [

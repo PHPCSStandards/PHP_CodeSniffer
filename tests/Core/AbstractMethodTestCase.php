@@ -149,7 +149,7 @@ abstract class AbstractMethodTestCase extends TestCase
      *
      * @return int
      */
-    public function getTargetToken($commentString, $tokenType, $tokenContent=null)
+    public function getTargetToken($commentString, $tokenType, $tokenContent = null)
     {
         return self::getTargetTokenFromFile(self::$phpcsFile, $commentString, $tokenType, $tokenContent);
 
@@ -172,7 +172,7 @@ abstract class AbstractMethodTestCase extends TestCase
      * @throws \Exception When the test delimiter comment is not found.
      * @throws \Exception When the test target token is not found.
      */
-    public static function getTargetTokenFromFile(File $phpcsFile, $commentString, $tokenType, $tokenContent=null)
+    public static function getTargetTokenFromFile(File $phpcsFile, $commentString, $tokenType, $tokenContent = null)
     {
         $start   = ($phpcsFile->numTokens - 1);
         $comment = $phpcsFile->findPrevious(

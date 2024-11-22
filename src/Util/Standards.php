@@ -77,8 +77,8 @@ class Standards
      * @see    getInstalledStandardPaths()
      */
     public static function getInstalledStandardDetails(
-        bool $includeGeneric=false,
-        string $standardsDir=''
+        bool $includeGeneric = false,
+        string $standardsDir = ''
     ) {
         $rulesets = [];
 
@@ -166,8 +166,8 @@ class Standards
      * @see    isInstalledStandard()
      */
     public static function getInstalledStandards(
-        bool $includeGeneric=false,
-        string $standardsDir=''
+        bool $includeGeneric = false,
+        string $standardsDir = ''
     ) {
         $installedStandards = [];
 

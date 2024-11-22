@@ -45,7 +45,7 @@ final class UselessOverridingMethodUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         switch ($testFile) {
         case 'UselessOverridingMethodUnitTest.1.inc':

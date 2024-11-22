@@ -45,7 +45,7 @@ final class AssignmentInConditionUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         switch ($testFile) {
         case 'AssignmentInConditionUnitTest.1.inc':

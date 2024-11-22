@@ -104,7 +104,7 @@ abstract class AbstractTokenizerTestCase extends TestCase
      *
      * @return int
      */
-    protected function getTargetToken($commentString, $tokenType, $tokenContent=null)
+    protected function getTargetToken($commentString, $tokenType, $tokenContent = null)
     {
         return AbstractMethodTestCase::getTargetTokenFromFile($this->phpcsFile, $commentString, $tokenType, $tokenContent);
 

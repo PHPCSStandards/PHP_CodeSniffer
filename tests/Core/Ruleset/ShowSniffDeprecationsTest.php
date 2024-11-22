@@ -78,7 +78,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
      *
      * @return void
      */
-    public function testDeprecatedSniffsListDoesNotShow($standard, $additionalArgs=[])
+    public function testDeprecatedSniffsListDoesNotShow($standard, $additionalArgs = [])
     {
         $args   = $additionalArgs;
         $args[] = '.';
@@ -134,7 +134,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
      *
      * @return void
      */
-    public function testDeprecatedSniffsListDoesNotShowNeedsCsMode($standard, $additionalArgs=[])
+    public function testDeprecatedSniffsListDoesNotShowNeedsCsMode($standard, $additionalArgs = [])
     {
         if (PHP_CODESNIFFER_CBF === true) {
             $this->markTestSkipped('This test needs CS mode to run');

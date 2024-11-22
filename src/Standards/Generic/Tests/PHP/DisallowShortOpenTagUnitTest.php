@@ -54,7 +54,7 @@ final class DisallowShortOpenTagUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
         case 'DisallowShortOpenTagUnitTest.1.inc':
@@ -88,7 +88,7 @@ final class DisallowShortOpenTagUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         switch ($testFile) {
         case 'DisallowShortOpenTagUnitTest.3.inc':

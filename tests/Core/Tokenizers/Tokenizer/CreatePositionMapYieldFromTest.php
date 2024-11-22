@@ -32,7 +32,7 @@ final class CreatePositionMapYieldFromTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testYieldFromTabReplacement($testMarker, $expected, $content=null)
+    public function testYieldFromTabReplacement($testMarker, $expected, $content = null)
     {
         $tokens = $this->phpcsFile->getTokens();
         $target = $this->getTargetToken($testMarker, [T_YIELD_FROM], $content);

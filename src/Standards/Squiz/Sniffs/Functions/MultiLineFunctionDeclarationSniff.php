@@ -175,7 +175,7 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
      *
      * @return void
      */
-    public function processBracket(File $phpcsFile, int $openBracket, array $tokens, string $type='function')
+    public function processBracket(File $phpcsFile, int $openBracket, array $tokens, string $type = 'function')
     {
         $errorPrefix = '';
         if ($type === 'use') {

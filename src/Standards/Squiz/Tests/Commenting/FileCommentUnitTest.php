@@ -30,7 +30,7 @@ final class FileCommentUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
         case 'FileCommentUnitTest.1.inc':

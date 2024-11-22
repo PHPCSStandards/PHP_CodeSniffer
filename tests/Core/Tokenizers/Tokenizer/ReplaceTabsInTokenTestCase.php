@@ -78,7 +78,7 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testNoReplacementsAreMadeWhenNoTabsAreFound($testMarker, $testTarget, $expected, $offset=0)
+    public function testNoReplacementsAreMadeWhenNoTabsAreFound($testMarker, $testTarget, $expected, $offset = 0)
     {
         $tokens  = $this->phpcsFile->getTokens();
         $target  = $this->getTargetToken($testMarker, $testTarget);
@@ -145,7 +145,7 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testTabReplacement($testMarker, $testTarget, $expected, $offset=0)
+    public function testTabReplacement($testMarker, $testTarget, $expected, $offset = 0)
     {
         $tokens  = $this->phpcsFile->getTokens();
         $target  = $this->getTargetToken($testMarker, $testTarget);

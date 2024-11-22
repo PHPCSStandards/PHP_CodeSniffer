@@ -256,7 +256,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
          *
          * @return void
          */
-        public static function addSearchPath(string $path, string $nsPrefix='')
+        public static function addSearchPath(string $path, string $nsPrefix = '')
         {
             self::$searchPaths[$path] = rtrim(trim((string) $nsPrefix), '\\');
 

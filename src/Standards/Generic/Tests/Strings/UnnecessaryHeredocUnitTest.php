@@ -45,7 +45,7 @@ final class UnnecessaryHeredocUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         $warnings = [
             100 => 1,

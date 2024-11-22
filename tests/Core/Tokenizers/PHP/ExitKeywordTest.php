@@ -123,7 +123,7 @@ final class ExitKeywordTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testNotExitKeyword($testMarker, $testContent, $expected='T_STRING')
+    public function testNotExitKeyword($testMarker, $testContent, $expected = 'T_STRING')
     {
         $tokens    = $this->phpcsFile->getTokens();
         $tokenCode = constant($expected);

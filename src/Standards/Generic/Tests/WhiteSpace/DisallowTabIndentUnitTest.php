@@ -46,7 +46,7 @@ final class DisallowTabIndentUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
         case 'DisallowTabIndentUnitTest.1.inc':

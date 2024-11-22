@@ -210,7 +210,7 @@ class ForbiddenFunctionsSniff implements Sniff
      *
      * @return void
      */
-    protected function addError(File $phpcsFile, int $stackPtr, string $functionName, ?string $pattern=null)
+    protected function addError(File $phpcsFile, int $stackPtr, string $functionName, ?string $pattern = null)
     {
         $data  = [$functionName];
         $error = 'The use of function %s() is ';

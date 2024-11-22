@@ -235,7 +235,7 @@ class Fixer
      *
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException When the diff command fails.
      */
-    public function generateDiff(?string $filePath=null, bool $colors=true)
+    public function generateDiff(?string $filePath = null, bool $colors = true)
     {
         if ($filePath === null) {
             $filePath = $this->currentFile->getFilename();
@@ -689,7 +689,7 @@ class Fixer
      *
      * @return bool If the change was accepted.
      */
-    public function substrToken(int $stackPtr, int $start, ?int $length=null)
+    public function substrToken(int $stackPtr, int $start, ?int $length = null)
     {
         $current = $this->getTokenContent($stackPtr);
 

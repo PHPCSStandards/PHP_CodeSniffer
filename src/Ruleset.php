@@ -529,7 +529,7 @@ class Ruleset
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException - If the ruleset path is invalid.
      *                                                      - If a specified autoload file could not be found.
      */
-    public function processRuleset(string $rulesetPath, int $depth=0)
+    public function processRuleset(string $rulesetPath, int $depth = 0)
     {
         $rulesetPath = Common::realpath($rulesetPath);
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
@@ -896,7 +896,7 @@ class Ruleset
      *
      * @return array
      */
-    private function expandSniffDirectory(string $directory, int $depth=0)
+    private function expandSniffDirectory(string $directory, int $depth = 0)
     {
         $sniffs = [];
 
@@ -958,7 +958,7 @@ class Ruleset
      * @return array
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If the reference is invalid.
      */
-    private function expandRulesetReference(string $ref, string $rulesetDir, int $depth=0)
+    private function expandRulesetReference(string $ref, string $rulesetDir, int $depth = 0)
     {
         // Naming an (external) standard "Internal" is not supported.
         if (strtolower($ref) === 'internal') {
@@ -1140,7 +1140,7 @@ class Ruleset
      * @return void
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If rule settings are invalid.
      */
-    private function processRule(SimpleXMLElement $rule, array $newSniffs, int $depth=0)
+    private function processRule(SimpleXMLElement $rule, array $newSniffs, int $depth = 0)
     {
         $ref  = (string) $rule['ref'];
         $todo = [$ref];
@@ -1738,7 +1738,7 @@ class Ruleset
      *
      * @return array
      */
-    public function getIgnorePatterns(?string $listener=null)
+    public function getIgnorePatterns(?string $listener = null)
     {
         if ($listener === null) {
             return $this->ignorePatterns;
@@ -1764,7 +1764,7 @@ class Ruleset
      *
      * @return array
      */
-    public function getIncludePatterns(?string $listener=null)
+    public function getIncludePatterns(?string $listener = null)
     {
         if ($listener === null) {
             return $this->includePatterns;

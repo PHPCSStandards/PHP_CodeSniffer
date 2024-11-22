@@ -32,7 +32,7 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
      *
      * @return void
      */
-    public function testSwitchScope($testMarker, $expectedTokens, $testOpenerMarker=null, $testCloserMarker=null)
+    public function testSwitchScope($testMarker, $expectedTokens, $testOpenerMarker = null, $testCloserMarker = null)
     {
         $tokens      = $this->phpcsFile->getTokens();
         $switchIndex = $this->getTargetToken($testMarker, [T_SWITCH]);

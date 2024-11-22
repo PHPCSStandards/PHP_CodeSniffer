@@ -30,7 +30,7 @@ final class CharacterBeforePHPOpeningTagUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
         case 'CharacterBeforePHPOpeningTagUnitTest.1.inc':

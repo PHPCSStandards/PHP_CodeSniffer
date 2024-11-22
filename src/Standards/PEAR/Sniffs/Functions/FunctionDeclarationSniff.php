@@ -371,7 +371,7 @@ class FunctionDeclarationSniff implements Sniff
      *
      * @return void
      */
-    public function processArgumentList(File $phpcsFile, int $stackPtr, int $indent, string $type='function')
+    public function processArgumentList(File $phpcsFile, int $stackPtr, int $indent, string $type = 'function')
     {
         $tokens = $phpcsFile->getTokens();
 

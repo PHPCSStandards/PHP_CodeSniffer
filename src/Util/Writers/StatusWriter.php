@@ -60,7 +60,7 @@ final class StatusWriter
      *
      * @return void
      */
-    public static function write(string $message, int $indent=0, int $newlines=1)
+    public static function write(string $message, int $indent = 0, int $newlines = 1)
     {
         if (self::$paused === true) {
             return;
@@ -83,7 +83,7 @@ final class StatusWriter
      *
      * @return void
      */
-    public static function forceWrite(string $message, int $indent=0, int $newlines=1)
+    public static function forceWrite(string $message, int $indent = 0, int $newlines = 1)
     {
         if ($indent > 0) {
             $message = str_repeat("\t", $indent).$message;
@@ -106,7 +106,7 @@ final class StatusWriter
      *
      * @return void
      */
-    public static function writeNewline(int $nr=1)
+    public static function writeNewline(int $nr = 1)
     {
         self::write('', 0, $nr);
 
@@ -121,7 +121,7 @@ final class StatusWriter
      *
      * @return void
      */
-    public static function forceWriteNewline(int $nr=1)
+    public static function forceWriteNewline(int $nr = 1)
     {
         self::forceWrite('', 0, $nr);
 

@@ -28,7 +28,7 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testNormalParentheses($testMarker, $skipCheckInside=false)
+    public function testNormalParentheses($testMarker, $skipCheckInside = false)
     {
         $tokens = $this->phpcsFile->getTokens();
 

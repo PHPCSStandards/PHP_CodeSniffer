@@ -76,7 +76,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
      *
      * @return void
      */
-    public function testNotEnumCases($testMarker, $expectedTokens, $testCloserMarker=null)
+    public function testNotEnumCases($testMarker, $expectedTokens, $testCloserMarker = null)
     {
         $tokens     = $this->phpcsFile->getTokens();
         $caseIndex  = $this->getTargetToken($testMarker, [T_ENUM_CASE, T_CASE]);

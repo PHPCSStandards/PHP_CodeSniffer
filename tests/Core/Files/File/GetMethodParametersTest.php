@@ -123,7 +123,7 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
      *
      * @return void
      */
-    public function testNoParams($commentString, $targetTokenType=[T_FUNCTION, T_CLOSURE, T_FN])
+    public function testNoParams($commentString, $targetTokenType = [T_FUNCTION, T_CLOSURE, T_FN])
     {
         $target = $this->getTargetToken($commentString, $targetTokenType);
         $result = self::$phpcsFile->getMethodParameters($target);
@@ -3289,7 +3289,7 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
      *
      * @return void
      */
-    private function getMethodParametersTestHelper($commentString, $expected, $targetType=[T_FUNCTION, T_CLOSURE, T_FN])
+    private function getMethodParametersTestHelper($commentString, $expected, $targetType = [T_FUNCTION, T_CLOSURE, T_FN])
     {
         $target = $this->getTargetToken($commentString, $targetType);
         $found  = self::$phpcsFile->getMethodParameters($target);

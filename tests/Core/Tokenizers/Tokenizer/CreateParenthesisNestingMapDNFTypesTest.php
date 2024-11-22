@@ -26,7 +26,7 @@ final class CreateParenthesisNestingMapDNFTypesTest extends AbstractTokenizerTes
      *
      * @return void
      */
-    public function testNormalParentheses($testMarker, $owner=false)
+    public function testNormalParentheses($testMarker, $owner = false)
     {
         $tokens = $this->phpcsFile->getTokens();
 

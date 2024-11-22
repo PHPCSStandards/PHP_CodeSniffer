@@ -272,7 +272,7 @@ final class IniSetTest extends TestCase
      *
      * @return void
      */
-    public function testIniValueCannotBeUpdatedAtRuntime($option, $newValue, $alternativeValue='')
+    public function testIniValueCannotBeUpdatedAtRuntime($option, $newValue, $alternativeValue = '')
     {
         $this->expectException(DeepExitException::class);
         $this->expectExceptionMessage("ERROR: Ini option \"$option\" cannot be changed at runtime.");

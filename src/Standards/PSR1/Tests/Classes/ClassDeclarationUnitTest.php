@@ -30,7 +30,7 @@ final class ClassDeclarationUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         if ($testFile === 'ClassDeclarationUnitTest.2.inc') {
             return [];

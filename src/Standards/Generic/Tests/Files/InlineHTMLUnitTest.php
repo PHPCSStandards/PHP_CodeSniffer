@@ -30,7 +30,7 @@ final class InlineHTMLUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
         case 'InlineHTMLUnitTest.3.inc':
@@ -59,7 +59,7 @@ final class InlineHTMLUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         return [];
 

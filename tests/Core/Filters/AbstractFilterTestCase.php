@@ -85,7 +85,7 @@ abstract class AbstractFilterTestCase extends TestCase
      *
      * @return \PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getMockedClass($className, array $constructorArgs=[], $methodsToMock=null)
+    protected function getMockedClass($className, array $constructorArgs = [], $methodsToMock = null)
     {
         $mockedObj = $this->getMockBuilder($className);
 

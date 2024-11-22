@@ -51,7 +51,7 @@ final class LowercasedFilenameUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
         case 'LowercasedFilenameUnitTest.1.inc':

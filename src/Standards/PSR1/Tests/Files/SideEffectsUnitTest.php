@@ -48,7 +48,7 @@ final class SideEffectsUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         return [];
 
@@ -65,7 +65,7 @@ final class SideEffectsUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         switch ($testFile) {
         case 'SideEffectsUnitTest.3.inc':

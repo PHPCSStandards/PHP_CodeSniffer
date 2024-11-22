@@ -139,7 +139,7 @@ final class BackfillEnumTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testNotEnums($testMarker, $testContent, $expectedType='T_STRING')
+    public function testNotEnums($testMarker, $testContent, $expectedType = 'T_STRING')
     {
         $targetTypes  = Tokens::NAME_TOKENS;
         $targetTypes += [T_ENUM => T_ENUM];

@@ -25,7 +25,7 @@ abstract class AbstractRulesetTestCase extends TestCase
      *
      * @return void
      */
-    protected function assertXObjectHasProperty($propertyName, $object, $message='')
+    protected function assertXObjectHasProperty($propertyName, $object, $message = '')
     {
         if (method_exists($this, 'assertObjectHasProperty') === true) {
             $this->assertObjectHasProperty($propertyName, $object, $message);
@@ -47,7 +47,7 @@ abstract class AbstractRulesetTestCase extends TestCase
      *
      * @return void
      */
-    protected function assertXObjectNotHasProperty($propertyName, $object, $message='')
+    protected function assertXObjectNotHasProperty($propertyName, $object, $message = '')
     {
         if (method_exists($this, 'assertObjectNotHasProperty') === true) {
             $this->assertObjectNotHasProperty($propertyName, $object, $message);
