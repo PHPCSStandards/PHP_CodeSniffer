@@ -11,7 +11,7 @@ namespace PHP_CodeSniffer\Tests\Core\Ruleset;
 
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
-use PHPUnit\Framework\TestCase;
+use PHP_CodeSniffer\Tests\Core\Ruleset\AbstractRulesetTestCase;
 use ReflectionObject;
 
 /**
@@ -19,7 +19,7 @@ use ReflectionObject;
  *
  * @covers \PHP_CodeSniffer\Ruleset::setSniffProperty
  */
-final class SetSniffPropertyTest extends TestCase
+final class SetSniffPropertyTest extends AbstractRulesetTestCase
 {
 
 
@@ -135,15 +135,8 @@ final class SetSniffPropertyTest extends TestCase
      */
     public function testSetPropertyThrowsErrorOnInvalidProperty()
     {
-        $exceptionClass = 'PHP_CodeSniffer\Exceptions\RuntimeException';
-        $exceptionMsg   = 'Ruleset invalid. Property "indentation" does not exist on sniff Generic.Arrays.ArrayIndent';
-        if (method_exists($this, 'expectException') === true) {
-            $this->expectException($exceptionClass);
-            $this->expectExceptionMessage($exceptionMsg);
-        } else {
-            // PHPUnit < 5.2.0.
-            $this->setExpectedException($exceptionClass, $exceptionMsg);
-        }
+        $exceptionMsg = 'Ruleset invalid. Property "indentation" does not exist on sniff Generic.Arrays.ArrayIndent';
+        $this->expectRuntimeExceptionMessage($exceptionMsg);
 
         // Set up the ruleset.
         $standard = __DIR__.'/SetPropertyThrowsErrorOnInvalidPropertyTest.xml';
@@ -162,15 +155,8 @@ final class SetSniffPropertyTest extends TestCase
      */
     public function testSetPropertyThrowsErrorWhenPropertyOnlyAllowedViaAttribute()
     {
-        $exceptionClass = 'PHP_CodeSniffer\Exceptions\RuntimeException';
-        $exceptionMsg   = 'Ruleset invalid. Property "arbitrarystring" does not exist on sniff TestStandard.SetProperty.NotAllowedViaAttribute';
-        if (method_exists($this, 'expectException') === true) {
-            $this->expectException($exceptionClass);
-            $this->expectExceptionMessage($exceptionMsg);
-        } else {
-            // PHPUnit < 5.2.0.
-            $this->setExpectedException($exceptionClass, $exceptionMsg);
-        }
+        $exceptionMsg = 'Ruleset invalid. Property "arbitrarystring" does not exist on sniff TestStandard.SetProperty.NotAllowedViaAttribute';
+        $this->expectRuntimeExceptionMessage($exceptionMsg);
 
         // Set up the ruleset.
         $standard = __DIR__.'/SetPropertyNotAllowedViaAttributeTest.xml';
