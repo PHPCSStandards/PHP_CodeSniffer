@@ -67,7 +67,7 @@ final class ShowSniffDeprecationsTest extends TestCase
 
 
     /**
-     * Test that the listing with deprecated sniffs will not show when specific command-line options are being used.
+     * Test that the listing with deprecated sniffs will not show when specific command-line options are being used [1].
      *
      * @param string        $standard       The standard to use for the test.
      * @param array<string> $additionalArgs Optional. Additional arguments to pass.
@@ -102,24 +102,62 @@ final class ShowSniffDeprecationsTest extends TestCase
     public static function dataDeprecatedSniffsListDoesNotShow()
     {
         return [
-            'Standard not using deprecated sniffs: PSR1'                   => [
+            'Standard not using deprecated sniffs: PSR1'     => [
                 'standard' => 'PSR1',
             ],
-            'Standard using deprecated sniffs; explain mode'               => [
+            'Standard using deprecated sniffs; explain mode' => [
                 'standard'       => __DIR__.'/ShowSniffDeprecationsTest.xml',
                 'additionalArgs' => ['-e'],
             ],
-            'Standard using deprecated sniffs; quiet mode'                 => [
+            'Standard using deprecated sniffs; quiet mode'   => [
                 'standard'       => __DIR__.'/ShowSniffDeprecationsTest.xml',
                 'additionalArgs' => ['-q'],
             ],
+        ];
+
+    }//end dataDeprecatedSniffsListDoesNotShow()
+
+
+    /**
+     * Test that the listing with deprecated sniffs will not show when specific command-line options are being used [2].
+     *
+     * {@internal Separate test method for the same thing as this test will only work in CS mode.}
+     *
+     * @param string        $standard       The standard to use for the test.
+     * @param array<string> $additionalArgs Optional. Additional arguments to pass.
+     *
+     * @dataProvider dataDeprecatedSniffsListDoesNotShowNeedsCsMode
+     *
+     * @return void
+     */
+    public function testDeprecatedSniffsListDoesNotShowNeedsCsMode($standard, $additionalArgs=[])
+    {
+        if (PHP_CODESNIFFER_CBF === true) {
+            $this->markTestSkipped('This test needs CS mode to run');
+        }
+
+        $this->testDeprecatedSniffsListDoesNotShow($standard, $additionalArgs);
+
+    }//end testDeprecatedSniffsListDoesNotShowNeedsCsMode()
+
+
+    /**
+     * Data provider.
+     *
+     * @see testDeprecatedSniffsListDoesNotShowNeedsCsMode()
+     *
+     * @return array<string, array<string, string|array<string>>>
+     */
+    public static function dataDeprecatedSniffsListDoesNotShowNeedsCsMode()
+    {
+        return [
             'Standard using deprecated sniffs; documentation is requested' => [
                 'standard'       => __DIR__.'/ShowSniffDeprecationsTest.xml',
                 'additionalArgs' => ['--generator=text'],
             ],
         ];
 
-    }//end dataDeprecatedSniffsListDoesNotShow()
+    }//end dataDeprecatedSniffsListDoesNotShowNeedsCsMode()
 
 
     /**

@@ -201,6 +201,10 @@ final class GeneratorTest extends TestCase
      */
     public function testGeneratorWillShowEachStandardSeparately()
     {
+        if (PHP_CODESNIFFER_CBF === true) {
+            $this->markTestSkipped('This test needs CS mode to run');
+        }
+
         $standard        = __DIR__.'/OneDocTest.xml';
         $_SERVER['argv'] = [
             'phpcs',

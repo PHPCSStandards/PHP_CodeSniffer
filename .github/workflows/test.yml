@@ -183,6 +183,11 @@ jobs:
         if: ${{ matrix.skip_tests != true }}
         run: php "vendor/bin/phpunit" tests/AllTests.php --no-coverage
 
+      - name: 'PHPUnit: run select tests in CBF mode'
+        run: php "vendor/bin/phpunit" tests/AllTests.php --group CBF --exclude-group nothing --no-coverage
+        env:
+          PHP_CODESNIFFER_CBF: '1'
+
       - name: 'PHPCS: check code style without cache, no parallel'
         if: ${{ matrix.custom_ini == false && matrix.php != '7.4' }}
         run: php "bin/phpcs" --no-cache --parallel=1
@@ -311,6 +316,22 @@ jobs:
         if: ${{ matrix.os != 'windows-latest' && steps.phpunit_version.outputs.VERSION >= '9.3' }}
         run: php "vendor/bin/phpunit" tests/AllTests.php --coverage-cache ./build/phpunit-cache
 
+      - name: "Run select tests in CBF mode with code coverage (PHPUnit < 9.3)"
+        if: ${{ matrix.os != 'windows-latest' && steps.phpunit_version.outputs.VERSION < '9.3' }}
+        run: >
+          php "vendor/bin/phpunit" tests/AllTests.php
+          --group CBF --exclude-group nothing --coverage-clover build/logs/clover-cbf.xml
+        env:
+          PHP_CODESNIFFER_CBF: '1'
+
+      - name: "Run select tests in CBF mode with code coverage (PHPUnit 9.3+)"
+        if: ${{ matrix.os != 'windows-latest' && steps.phpunit_version.outputs.VERSION >= '9.3' }}
+        run: >
+          php "vendor/bin/phpunit" tests/AllTests.php --coverage-cache ./build/phpunit-cache
+          --group CBF --exclude-group nothing --coverage-clover build/logs/clover-cbf.xml
+        env:
+          PHP_CODESNIFFER_CBF: '1'
+
       - name: "Run the unit tests which may have different outcomes on Windows with code coverage (PHPUnit < 9.3)"
         if: ${{ matrix.os == 'windows-latest' && steps.phpunit_version.outputs.VERSION < '9.3' }}
         run: php "vendor/bin/phpunit" tests/AllTests.php --group Windows
@@ -319,13 +340,22 @@ jobs:
         if: ${{ matrix.os == 'windows-latest' && steps.phpunit_version.outputs.VERSION >= '9.3' }}
         run: php "vendor/bin/phpunit" tests/AllTests.php --group Windows --coverage-cache ./build/phpunit-cache
 
-      - name: Upload coverage results to Coveralls
+      - name: "Upload coverage results to Coveralls (normal run)"
         if: ${{ success() }}
         uses: coverallsapp/github-action@v2
         with:
           format: clover
           file: build/logs/clover.xml
           flag-name: os-${{ matrix.os }}-php-${{ matrix.php }}-custom-ini-${{ matrix.custom_ini }}
+          parallel: true
+
+      - name: "Upload coverage results to Coveralls (CBF run)"
+        if: ${{ matrix.os != 'windows-latest' && success() }}
+        uses: coverallsapp/github-action@v2
+        with:
+          format: clover
+          file: build/logs/clover-cbf.xml
+          flag-name: cbf-os-${{ matrix.os }}-ubuntu-latest-php-${{ matrix.php }}-custom-ini-${{ matrix.custom_ini }}
           parallel: true
 
   coveralls-finish:
