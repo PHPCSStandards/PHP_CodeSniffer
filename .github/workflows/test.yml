@@ -14,11 +14,13 @@ on:
   # Allow manually triggering the workflow.
   workflow_dispatch:
 
-# Cancels all previous workflow runs for the same branch that have not yet completed.
+# Cancels all previous workflow runs for the same branch that have not yet completed,
+# but don't cancel when it's one of the "main" branches as that prevents
+# accurate monitoring of code coverage.
 concurrency:
   # The concurrency group contains the workflow name and the branch name.
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.ref_name != 'master' && github.ref_name != '4.0' }}
 
 jobs:
   build:
