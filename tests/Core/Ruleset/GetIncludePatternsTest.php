@@ -78,7 +78,7 @@ final class GetIncludePatternsTest extends TestCase
                 'expected' => [
                     'PSR1.Classes.ClassDeclaration'     => [
                         './src/*/file.php' => 'absolute',
-                        './bin/'           => 'absolute',
+                        './bin/'           => 'relative',
                     ],
                     'Generic.Formatting.SpaceAfterCast' => [
                         './src/*/test\\.php$' => 'absolute',
@@ -89,7 +89,7 @@ final class GetIncludePatternsTest extends TestCase
                 'listener' => 'PSR1.Classes.ClassDeclaration',
                 'expected' => [
                     './src/*/file.php' => 'absolute',
-                    './bin/'           => 'absolute',
+                    './bin/'           => 'relative',
                 ],
             ],
             'Include patterns for Generic.Formatting.SpaceAfterCast' => [

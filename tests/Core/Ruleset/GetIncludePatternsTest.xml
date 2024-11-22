@@ -4,8 +4,8 @@
     <rule ref="PSR1"/>
 
     <rule ref="PSR1.Classes.ClassDeclaration">
-        <include-pattern>./src/*/file.php</include-pattern>
-        <include-pattern>./bin/</include-pattern>
+        <include-pattern type="absolute">./src/*/file.php</include-pattern>
+        <include-pattern type="relative">./bin/</include-pattern>
     </rule>
 
     <rule ref="Generic.Formatting.SpaceAfterCast">
