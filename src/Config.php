@@ -1215,7 +1215,20 @@ class Config
                     break;
                 }
 
-                $this->generator = substr($arg, 10);
+                $generatorName   = substr($arg, 10);
+                $validGenerators = [
+                    'Text',
+                    'HTML',
+                    'Markdown',
+                ];
+
+                if (in_array($generatorName, $validGenerators, true) === false) {
+                    $error  = 'ERROR: "'.$generatorName.'" is not a valid generator. Valid options are: Text, HTML, and Markdown.'.PHP_EOL.PHP_EOL;
+                    $error .= $this->printShortUsage(true);
+                    throw new DeepExitException($error, 3);
+                }
+
+                $this->generator = $generatorName;
                 self::$overriddenDefaults['generator'] = true;
             } else if (substr($arg, 0, 9) === 'encoding=') {
                 if (isset(self::$overriddenDefaults['encoding']) === true) {
