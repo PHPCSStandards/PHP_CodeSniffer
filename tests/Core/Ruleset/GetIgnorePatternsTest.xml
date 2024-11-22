@@ -8,8 +8,8 @@
     <rule ref="PSR1"/>
 
     <rule ref="PSR1.Classes.ClassDeclaration">
-        <exclude-pattern>./src/*/file.php</exclude-pattern>
-        <exclude-pattern>./bin/</exclude-pattern>
+        <exclude-pattern type="absolute">./src/*/file.php</exclude-pattern>
+        <exclude-pattern type="relative">./bin/</exclude-pattern>
     </rule>
 
     <rule ref="Generic.Formatting.SpaceAfterCast">

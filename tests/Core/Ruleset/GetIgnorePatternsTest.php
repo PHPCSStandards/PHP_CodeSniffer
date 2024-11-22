@@ -78,7 +78,7 @@ final class GetIgnorePatternsTest extends TestCase
                 'expected' => [
                     'PSR1.Classes.ClassDeclaration'     => [
                         './src/*/file.php' => 'absolute',
-                        './bin/'           => 'absolute',
+                        './bin/'           => 'relative',
                     ],
                     'Generic.Formatting.SpaceAfterCast' => [
                         './src/*/test\\.php$' => 'absolute',
@@ -92,7 +92,7 @@ final class GetIgnorePatternsTest extends TestCase
                 'listener' => 'PSR1.Classes.ClassDeclaration',
                 'expected' => [
                     './src/*/file.php' => 'absolute',
-                    './bin/'           => 'absolute',
+                    './bin/'           => 'relative',
                 ],
             ],
             'Ignore patterns for Generic.Formatting.SpaceAfterCast' => [
