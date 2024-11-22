@@ -89,7 +89,7 @@ final class MarkdownTest extends TestCase
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
-        $regex  = '`^Documentation generated on [A-Z][a-z]{2}, [0-9]{2} [A-Z][a-z]{2} 20[0-9]{2} [0-2][0-9](?::[0-5][0-9]){2} [+-][0-9]{4}';
+        $regex  = '`^\RDocumentation generated on [A-Z][a-z]{2}, [0-9]{2} [A-Z][a-z]{2} 20[0-9]{2} [0-2][0-9](?::[0-5][0-9]){2} [+-][0-9]{4}';
         $regex .= ' by \[PHP_CodeSniffer [3-9]\.[0-9]+.[0-9]+\]\(https://github\.com/PHPCSStandards/PHP_CodeSniffer\)\R$`';
         $this->expectOutputRegex($regex);
 
