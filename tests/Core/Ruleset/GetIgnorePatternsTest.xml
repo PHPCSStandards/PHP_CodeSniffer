@@ -2,8 +2,8 @@
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="GetIgnorePatternsTest" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/PHPCSStandards/PHP_CodeSniffer/master/phpcs.xsd">
 
     <exclude-pattern>./tests/</exclude-pattern>
-    <exclude-pattern>./vendor/*</exclude-pattern>
-    <exclude-pattern>*/node-modules/*</exclude-pattern>
+    <exclude-pattern type="absolute">./vendor/*</exclude-pattern>
+    <exclude-pattern type="relative">*/node-modules/*</exclude-pattern>
 
     <rule ref="PSR1"/>
 

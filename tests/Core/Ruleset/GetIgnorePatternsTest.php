@@ -85,7 +85,7 @@ final class GetIgnorePatternsTest extends TestCase
                     ],
                     './tests/'                          => 'absolute',
                     './vendor/*'                        => 'absolute',
-                    '*/node-modules/*'                  => 'absolute',
+                    '*/node-modules/*'                  => 'relative',
                 ],
             ],
             'Ignore patterns for PSR1.Classes.ClassDeclaration'     => [
