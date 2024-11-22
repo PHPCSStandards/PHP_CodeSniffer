@@ -58,7 +58,13 @@ final class GetIgnorePatternsTest extends TestCase
      */
     public function testGetIgnorePatterns($listener, $expected)
     {
-        $this->assertSame($expected, self::$ruleset->getIgnorePatterns($listener));
+        $actual = self::$ruleset->getIgnorePatterns($listener);
+
+        // Prevent differences in the order of the array from failing the test.
+        ksort($expected);
+        ksort($actual);
+
+        $this->assertSame($expected, $actual);
 
     }//end testGetIgnorePatterns()
 
