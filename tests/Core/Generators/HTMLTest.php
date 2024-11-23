@@ -157,6 +157,22 @@ final class HTMLTest extends TestCase
                 'sniffs'         => 'StandardWithDocs.Content.CodeTitleWhitespace',
                 'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeTitleWhitespace.html',
             ],
+            'Code Comparison: blank line handling'             => [
+                'sniffs'         => 'StandardWithDocs.Content.CodeComparisonBlankLines',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonBlankLines.html',
+            ],
+            'Code Comparison: different block lengths'         => [
+                'sniffs'         => 'StandardWithDocs.Content.CodeComparisonBlockLength',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonBlockLength.html',
+            ],
+            'Code Comparison: encoding of special characters'  => [
+                'sniffs'         => 'StandardWithDocs.Content.CodeComparisonEncoding',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonEncoding.html',
+            ],
+            'Code Comparison: line length handling'            => [
+                'sniffs'         => 'StandardWithDocs.Content.CodeComparisonLineLength',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonLineLength.html',
+            ],
         ];
 
     }//end dataDocSpecifics()
