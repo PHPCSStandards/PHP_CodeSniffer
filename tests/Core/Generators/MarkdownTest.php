@@ -173,6 +173,22 @@ final class MarkdownTest extends TestCase
                 'sniffs'         => 'StandardWithDocs.Content.CodeComparisonLineLength',
                 'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonLineLength.md',
             ],
+            'Unsupported: <code> element at the wrong level'   => [
+                'sniffs'         => 'StandardWithDocs.Unsupported.ElementAtWrongLevel',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputUnsupportedElementAtWrongLevel.md',
+            ],
+            'Unsupported: one correct elm, one at wrong level' => [
+                'sniffs'         => 'StandardWithDocs.Unsupported.OneElmAtWrongLevel',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputUnsupportedOneElmAtWrongLevel.md',
+            ],
+            'Unsupported: superfluous code element'            => [
+                'sniffs'         => 'StandardWithDocs.Unsupported.SuperfluousCodeElement',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputUnsupportedSuperfluousCodeElement.md',
+            ],
+            'Unsupported: unknown element'                     => [
+                'sniffs'         => 'StandardWithDocs.Unsupported.UnknownElement',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputUnsupportedUnknownElement.md',
+            ],
         ];
 
     }//end dataDocSpecifics()
