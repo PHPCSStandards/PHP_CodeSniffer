@@ -149,6 +149,14 @@ final class TextTest extends TestCase
                 'sniffs'         => 'StandardWithDocs.Content.StandardLineWrapping',
                 'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputStandardLineWrapping.txt',
             ],
+            'Code Title: line wrapping'                        => [
+                'sniffs'         => 'StandardWithDocs.Content.CodeTitleLineWrapping',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeTitleLineWrapping.txt',
+            ],
+            'Code Title: whitespace handling'                  => [
+                'sniffs'         => 'StandardWithDocs.Content.CodeTitleWhitespace',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeTitleWhitespace.txt',
+            ],
         ];
 
     }//end dataDocSpecifics()
