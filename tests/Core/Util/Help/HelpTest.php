@@ -3,7 +3,7 @@
  * Tests to verify that the "help" command functions as expected.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
- * @copyright 2024 Juliette Reinders Folmer. All rights reserved.
+ * @copyright 2024 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
@@ -386,7 +386,7 @@ final class HelpTest extends TestCase
 
 
     /**
-     * Test that if no short/long options are passed, only usage information is displayed (and displayed correctly).
+     * Test that if no short/long options are passed, only usage information is displayed (CS mode).
      *
      * @param array<string> $cliArgs       Command line arguments.
      * @param string        $expectedRegex Regex to validate expected output.
@@ -395,7 +395,51 @@ final class HelpTest extends TestCase
      *
      * @return void
      */
-    public function testDisplayUsage($cliArgs, $expectedRegex)
+    public function testDisplayUsageCS($cliArgs, $expectedRegex)
+    {
+        if (PHP_CODESNIFFER_CBF === true) {
+            $this->markTestSkipped('This test needs CS mode to run');
+        }
+
+        $expectedRegex = str_replace('phpc(bf|s)', 'phpcs', $expectedRegex);
+        $this->verifyDisplayUsage($cliArgs, $expectedRegex);
+
+    }//end testDisplayUsageCS()
+
+
+    /**
+     * Test that if no short/long options are passed, only usage information is displayed (CBF mode).
+     *
+     * @param array<string> $cliArgs       Command line arguments.
+     * @param string        $expectedRegex Regex to validate expected output.
+     *
+     * @dataProvider dataDisplayUsage
+     * @group        CBF
+     *
+     * @return void
+     */
+    public function testDisplayUsageCBF($cliArgs, $expectedRegex)
+    {
+        if (PHP_CODESNIFFER_CBF === false) {
+            $this->markTestSkipped('This test needs CBF mode to run');
+        }
+
+        $expectedRegex = str_replace('phpc(bf|s)', 'phpcbf', $expectedRegex);
+        $this->verifyDisplayUsage($cliArgs, $expectedRegex);
+
+    }//end testDisplayUsageCBF()
+
+
+    /**
+     * Helper method to test that if no short/long options are passed, only usage information is displayed
+     * (and displayed correctly).
+     *
+     * @param array<string> $cliArgs       Command line arguments.
+     * @param string        $expectedRegex Regex to validate expected output.
+     *
+     * @return void
+     */
+    private function verifyDisplayUsage($cliArgs, $expectedRegex)
     {
         $help = new Help(new ConfigDouble($cliArgs), []);
 
@@ -403,7 +447,7 @@ final class HelpTest extends TestCase
 
         $help->display();
 
-    }//end testDisplayUsage()
+    }//end verifyDisplayUsage()
 
 
     /**
