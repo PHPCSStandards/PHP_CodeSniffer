@@ -270,7 +270,7 @@ final class Help
     {
         $command = 'phpcs';
         if (defined('PHP_CODESNIFFER_CBF') === true && PHP_CODESNIFFER_CBF === true) {
-            $command = 'phpcbf'; // @codeCoverageIgnore
+            $command = 'phpcbf';
         }
 
         $this->printCategoryHeader('Usage');
