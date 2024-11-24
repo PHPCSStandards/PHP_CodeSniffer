@@ -124,7 +124,7 @@ final class MessageCollector
      */
     public function containsBlockingErrors()
     {
-        $seenTypes     = $this->arrayColumn($this->cache, 'type');
+        $seenTypes     = array_column($this->cache, 'type');
         $typeFrequency = array_count_values($seenTypes);
         return isset($typeFrequency[self::ERROR]);
 
@@ -156,7 +156,7 @@ final class MessageCollector
         $this->clearCache();
 
         if ($order === self::ORDERBY_RECEIVED) {
-            $messages = $this->arrayColumn($messageInfo, 'message');
+            $messages = array_column($messageInfo, 'message');
         } else {
             $messages = $this->sortBySeverity($messageInfo);
         }
@@ -276,35 +276,6 @@ final class MessageCollector
         $this->cache = [];
 
     }//end clearCache()
-
-
-    /**
-     * Return the values from a single column in the input array.
-     *
-     * Polyfill for the PHP 5.5+ native array_column() function (for the functionality needed here).
-     *
-     * @param array<array<string, string|int>> $input     A multi-dimensional array from which to pull a column of values.
-     * @param string                           $columnKey The name of the column of values to return.
-     *
-     * @link https://www.php.net/function.array-column
-     *
-     * @return array<string|int>
-     */
-    private function arrayColumn(array $input, $columnKey)
-    {
-        if (function_exists('array_column') === true) {
-            // PHP 5.5+.
-            return array_column($input, $columnKey);
-        }
-
-        // PHP 5.4.
-        $callback = function ($row) use ($columnKey) {
-            return $row[$columnKey];
-        };
-
-        return array_map($callback, $input);
-
-    }//end arrayColumn()
 
 
 }//end class
