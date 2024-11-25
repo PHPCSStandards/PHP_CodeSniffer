@@ -19,7 +19,7 @@ function_call();
 
 ?>
 <input name="<?php ; something_else(); ?>" />
-<input name="<?php something_else(); ; ?>" />
+<input name="<?php something_else(); ; ; ?>" />
 
 /*
  * Test empty statement: no code between PHP open and close tag.
@@ -42,7 +42,7 @@ function_call();
 -->
 <?php ; ?>
 
-<input name="<?php ; ?>" /> <!-- Bad. -->
+<input name="<?php ;; ?>" /> <!-- Bad. -->
 
 <!-- Tests with short open echo tag. -->
 <input name="<?= 'some text' ?>" /> <!-- OK. -->
@@ -53,7 +53,7 @@ function_call();
 // Guard against false positives for two consecutive semicolons in a for statement.
 for ( $i = 0; ; $i++ ) {}
 
-// Test for useless semicolons
+// Test for useless semicolons.
 for ( $i = 0; ; $i++ ) {};
 
 if (true) {};
@@ -80,7 +80,7 @@ if ($foo) {
 ;
 }
 
-// Do not remove semicolon after match
+// Do not remove semicolon after match.
 $c = match ($a) {
     1 => true,
 };

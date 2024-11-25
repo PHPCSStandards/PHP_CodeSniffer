@@ -48,7 +48,7 @@ function_call();
 // Guard against false positives for two consecutive semicolons in a for statement.
 for ( $i = 0; ; $i++ ) {}
 
-// Test for useless semicolons
+// Test for useless semicolons.
 for ( $i = 0; ; $i++ ) {}
 
 if (true) {}
@@ -74,7 +74,7 @@ echo $a{0};
 if ($foo) {
 }
 
-// Do not remove semicolon after match
+// Do not remove semicolon after match.
 $c = match ($a) {
     1 => true,
 };
