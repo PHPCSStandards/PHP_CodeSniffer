@@ -44,7 +44,7 @@ class LowercasedFilenameSniff implements Sniff
     {
         $filename = $phpcsFile->getFilename();
         if ($filename === 'STDIN') {
-            return $phpcsFile->numTokens; // @codeCoverageIgnore
+            return $phpcsFile->numTokens;
         }
 
         $filename          = basename($filename);
