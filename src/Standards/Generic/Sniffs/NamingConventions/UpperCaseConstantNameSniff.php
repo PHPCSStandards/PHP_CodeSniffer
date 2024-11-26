@@ -87,11 +87,12 @@ class UpperCaseConstantNameSniff implements Sniff
             return;
         }
 
-        // Make sure this is not a method call.
+        // Make sure this is not a method call or class instantiation.
         $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
         if ($tokens[$prev]['code'] === T_OBJECT_OPERATOR
             || $tokens[$prev]['code'] === T_DOUBLE_COLON
             || $tokens[$prev]['code'] === T_NULLSAFE_OBJECT_OPERATOR
+            || $tokens[$prev]['code'] === T_NEW
         ) {
             return;
         }
