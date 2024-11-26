@@ -77,6 +77,13 @@ define($obj->constantName(), 'sniff should bow out');
 define(MyClass::constantName(), 'sniff should bow out');
 define(condition() ? 'name1' : 'name2', 'sniff should bow out');
 
+$callable = define(...);
+
 // Valid if outside the global namespace. Sniff should bow out.
 function define($param) {}
-$callable = define(...);
+
+class MyClass {
+    public function define($param) {}
+}
+
+$a = ($cond) ? DEFINE : SOMETHING_ELSE;
