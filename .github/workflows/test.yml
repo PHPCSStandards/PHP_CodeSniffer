@@ -256,8 +256,8 @@ jobs:
         shell: bash
         run: |
           # Set the "short_open_tag" ini to make sure specific conditions are tested.
-          if [[ ${{ matrix.custom_ini }} == true && "${{ matrix.php }}" == '5.4' ]]; then
-            echo 'PHP_INI=, date.timezone=Australia/Sydney, short_open_tag=On, asp_tags=On' >> "$GITHUB_OUTPUT"
+          if [[ ${{ matrix.custom_ini }} == true && "${{ matrix.php }}" == '7.2' ]]; then
+            echo 'PHP_INI=, date.timezone=Australia/Sydney, short_open_tag=On' >> "$GITHUB_OUTPUT"
           fi
 
       - name: Install PHP
