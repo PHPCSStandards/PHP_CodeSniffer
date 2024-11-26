@@ -1,14 +1,31 @@
 name: Build PHARs
 
 on:
-  # Run on pushes to master and on all pull requests.
+  # Run on pushes to master and on pull requests which touch files used when building the PHARs.
   # Prevent the build from running when there are only irrelevant changes.
   push:
     branches:
       - master
-    paths-ignore:
-      - '**.md'
+    paths:
+      - '.github/workflows/build-phar.yml'
+      - 'scripts/build-phar.php'
+      - 'autoload.php'
+      - 'src/Config.php'
+      - 'src/Exceptions/RuntimeException.php'
+      - 'src/Exceptions/TokenizerException.php'
+      - 'src/Tokenizers/PHP.php'
+      - 'src/Util/Tokens.php'
   pull_request:
+    paths:
+      - '.github/workflows/build-phar.yml'
+      - 'scripts/build-phar.php'
+      - 'autoload.php'
+      - 'src/Config.php'
+      - 'src/Exceptions/RuntimeException.php'
+      - 'src/Exceptions/TokenizerException.php'
+      - 'src/Tokenizers/PHP.php'
+      - 'src/Util/Tokens.php'
+
   # Allow manually triggering the workflow.
   workflow_dispatch:
 
