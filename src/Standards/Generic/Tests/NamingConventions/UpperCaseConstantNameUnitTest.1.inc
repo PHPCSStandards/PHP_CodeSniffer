@@ -34,7 +34,7 @@ $foo->getBar()?->define('foo');
 
 // PHP 8.3 introduces typed constants.
 class TypedConstants {
-    const MISSING_VALUE; // Parse error.
+
     const MyClass MYCONST = new MyClass;
     const int VALID_NAME = 0;
     final public const INT invalid_name = 0;
