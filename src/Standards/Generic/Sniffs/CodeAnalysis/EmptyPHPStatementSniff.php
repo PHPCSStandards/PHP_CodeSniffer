@@ -53,10 +53,6 @@ class EmptyPHPStatementSniff implements Sniff
         case 'T_SEMICOLON':
             $prevNonEmpty = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
 
-            if ($prevNonEmpty === false) {
-                return;
-            }
-
             if ($tokens[$prevNonEmpty]['code'] !== T_SEMICOLON
                 && $tokens[$prevNonEmpty]['code'] !== T_OPEN_TAG
                 && $tokens[$prevNonEmpty]['code'] !== T_OPEN_TAG_WITH_ECHO
@@ -128,9 +124,8 @@ class EmptyPHPStatementSniff implements Sniff
         case 'T_CLOSE_TAG':
             $prevNonEmpty = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
 
-            if ($prevNonEmpty === false
-                || ($tokens[$prevNonEmpty]['code'] !== T_OPEN_TAG
-                && $tokens[$prevNonEmpty]['code'] !== T_OPEN_TAG_WITH_ECHO)
+            if ($tokens[$prevNonEmpty]['code'] !== T_OPEN_TAG
+                && $tokens[$prevNonEmpty]['code'] !== T_OPEN_TAG_WITH_ECHO
             ) {
                 return;
             }
@@ -149,10 +144,6 @@ class EmptyPHPStatementSniff implements Sniff
 
                 $phpcsFile->fixer->endChangeset();
             }
-            break;
-
-        default:
-            // Deliberately left empty.
             break;
         }//end switch
 

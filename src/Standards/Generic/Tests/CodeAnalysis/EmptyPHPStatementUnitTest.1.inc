@@ -6,19 +6,20 @@
 function_call(); // OK.
 
 // The below examples are all bad.
-function_call();
+function_call();;
 
 function_call();
+;
 
 function_call();
-/* some comment */
+/* some comment */;
 
 function_call();
-/* some comment */
+/* some comment */     ;
 
 ?>
-<input name="<?php something_else(); ?>" />
-<input name="<?php something_else(); ?>" />
+<input name="<?php ; something_else(); ?>" />
+<input name="<?php something_else(); ; ; ?>" />
 
 /*
  * Test empty statement: no code between PHP open and close tag.
@@ -27,35 +28,39 @@ function_call();
 <input name="<?php something_else(); ?>" /> <!-- OK. -->
 <input name="<?php /* comment */ ?>" /> <!-- OK. -->
 
-<input name="" /> <!-- Bad. -->
+<input name="<?php ?>" /> <!-- Bad. -->
 
-<input name="" /> <!-- Bad. -->
+<input name="<?php
+
+
+?>" /> <!-- Bad. -->
 
 <!--
 /*
  * Test detecting & fixing a combination of the two above checks.
  */
 -->
+<?php ; ?>
 
-<input name="" /> <!-- Bad. -->
+<input name="<?php ;; ?>" /> <!-- Bad. -->
 
 <!-- Tests with short open echo tag. -->
 <input name="<?= 'some text' ?>" /> <!-- OK. -->
-<input name="" /> <!-- Bad. -->
-<input name="" /> <!-- Bad. -->
+<input name="<?= ?>" /> <!-- Bad. -->
+<input name="<?= ; ?>" /> <!-- Bad. -->
 
 <?php
 // Guard against false positives for two consecutive semicolons in a for statement.
 for ( $i = 0; ; $i++ ) {}
 
-// Test for useless semicolons
-for ( $i = 0; ; $i++ ) {}
+// Test for useless semicolons.
+for ( $i = 0; ; $i++ ) {};
 
-if (true) {}
+if (true) {};
 
-while (true) {}
+while (true) {};
 
-class ABC {}
+class ABC {}   ;  ;
 
 switch ( $a ) {
     case 1:
@@ -63,8 +68,8 @@ switch ( $a ) {
     case 2:
         break;
     default:
-        break;
-}
+        break;  ;
+};
 
 // Do not break closures and anonymous classes and curlies without scope owners.
 $a = function () {};
@@ -72,9 +77,10 @@ $b = new class {};
 echo $a{0};
 
 if ($foo) {
+;
 }
 
-// Do not remove semicolon after match
+// Do not remove semicolon after match.
 $c = match ($a) {
     1 => true,
 };
