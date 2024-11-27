@@ -2,6 +2,7 @@
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="SetSniffPropertyTest" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/PHPCSStandards/PHP_CodeSniffer/master/phpcs.xsd">
 
     <rule ref="Generic">
+        <exclude name="Generic.Debug"/>
         <properties>
             <property name="doesnotexist" value="2"/>
         </properties>

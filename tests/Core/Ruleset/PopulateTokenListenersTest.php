@@ -131,31 +131,31 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
     public static function dataSniffListensToTokenss()
     {
         return [
-            'Generic.Files.EndFileNewline'                     => [
-                'sniffClass'    => 'PHP_CodeSniffer\\Standards\\Generic\\Sniffs\\Files\\EndFileNewlineSniff',
+            'TestStandard.SupportedTokenizers.ListensForPHPAndCSSAndJS' => [
+                'sniffClass'    => 'Fixtures\\TestStandard\\Sniffs\\SupportedTokenizers\\ListensForPHPAndCSSAndJSSniff',
                 'expectedCount' => 2,
             ],
-            'Generic.NamingConventions.UpperCaseConstantName'  => [
+            'Generic.NamingConventions.UpperCaseConstantName'           => [
                 'sniffClass'    => 'PHP_CodeSniffer\\Standards\\Generic\\Sniffs\\NamingConventions\\UpperCaseConstantNameSniff',
                 'expectedCount' => 2,
             ],
-            'PSR1.Files.SideEffects'                           => [
+            'PSR1.Files.SideEffects'                                    => [
                 'sniffClass'    => 'PHP_CodeSniffer\\Standards\\PSR1\\Sniffs\\Files\\SideEffectsSniff',
                 'expectedCount' => 1,
             ],
-            'PSR12.ControlStructures.BooleanOperatorPlacement' => [
+            'PSR12.ControlStructures.BooleanOperatorPlacement'          => [
                 'sniffClass'    => 'PHP_CodeSniffer\\Standards\\PSR12\\Sniffs\\ControlStructures\\BooleanOperatorPlacementSniff',
                 'expectedCount' => 5,
             ],
-            'Squiz.ControlStructures.ForEachLoopDeclaration'   => [
+            'Squiz.ControlStructures.ForEachLoopDeclaration'            => [
                 'sniffClass'    => 'PHP_CodeSniffer\\Standards\\Squiz\\Sniffs\\ControlStructures\\ForEachLoopDeclarationSniff',
                 'expectedCount' => 1,
             ],
-            'TestStandard.Deprecated.WithReplacement'          => [
+            'TestStandard.Deprecated.WithReplacement'                   => [
                 'sniffClass'    => 'Fixtures\\TestStandard\\Sniffs\\Deprecated\\WithReplacementSniff',
                 'expectedCount' => 1,
             ],
-            'TestStandard.ValidSniffs.RegisterEmptyArray'      => [
+            'TestStandard.ValidSniffs.RegisterEmptyArray'               => [
                 'sniffClass'    => 'Fixtures\\TestStandard\\Sniffs\\ValidSniffs\\RegisterEmptyArraySniff',
                 'expectedCount' => 0,
             ],
@@ -313,7 +313,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
      */
     public function testSetsSupportedTokenizersToPHPByDefault()
     {
-        $exclude  = 'PHP_CodeSniffer\\Standards\\Generic\\Sniffs\\Files\\EndFileNewlineSniff';
+        $exclude  = 'Fixtures\\TestStandard\\Sniffs\\SupportedTokenizers\\ListensForPHPAndCSSAndJSSniff';
         $expected = ['PHP' => 'PHP'];
 
         foreach (self::$ruleset->tokenListeners as $token => $listeners) {
@@ -354,7 +354,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
      */
     public function testSetsSupportedTokenizersWhenProvidedBySniff($token)
     {
-        $sniffClass = 'PHP_CodeSniffer\\Standards\\Generic\\Sniffs\\Files\\EndFileNewlineSniff';
+        $sniffClass = 'Fixtures\\TestStandard\\Sniffs\\SupportedTokenizers\\ListensForPHPAndCSSAndJSSniff';
         $expected   = [
             'PHP' => 'PHP',
             'JS'  => 'JS',

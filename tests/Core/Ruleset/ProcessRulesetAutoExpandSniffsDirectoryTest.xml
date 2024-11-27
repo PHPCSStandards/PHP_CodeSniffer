@@ -4,6 +4,7 @@
     <config name="installed_paths" value="./tests/Core/Ruleset/Fixtures/TestStandard/"/>
 
     <rule ref="TestStandard">
+        <exclude name="TestStandard.SupportedTokenizers"/>
         <exclude name="TestStandard.InvalidSniffs"/>
         <exclude name="TestStandard.InvalidSniffError"/>
     </rule>
