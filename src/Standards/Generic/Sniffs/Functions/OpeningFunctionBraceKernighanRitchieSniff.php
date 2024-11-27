@@ -138,20 +138,24 @@ class OpeningFunctionBraceKernighanRitchieSniff implements Sniff
             return;
         }
 
-        // We are looking for tabs, even if they have been replaced, because
-        // we enforce a space here.
-        if (isset($tokens[($openingBrace - 1)]['orig_content']) === true) {
-            $spacing = $tokens[($openingBrace - 1)]['orig_content'];
-        } else {
-            $spacing = $tokens[($openingBrace - 1)]['content'];
-        }
-
+        // Enforce a single space. Tabs not allowed.
+        $spacing = $tokens[($openingBrace - 1)]['content'];
         if ($tokens[($openingBrace - 1)]['code'] !== T_WHITESPACE) {
             $length = 0;
         } else if ($spacing === "\t") {
+            // Tab without tab-width set, so no tab replacement has taken place.
             $length = '\t';
         } else {
             $length = strlen($spacing);
+        }
+
+        // If tab replacement is on, avoid confusing the user with a "expected 1 space, found 1"
+        // message when the "1" found is actually a tab, not a space.
+        if ($length === 1
+            && isset($tokens[($openingBrace - 1)]['orig_content']) === true
+            && $tokens[($openingBrace - 1)]['orig_content'] === "\t"
+        ) {
+            $length = '\t';
         }
 
         if ($length !== 1) {

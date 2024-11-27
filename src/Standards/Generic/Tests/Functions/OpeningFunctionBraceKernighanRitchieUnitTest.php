@@ -88,6 +88,8 @@ final class OpeningFunctionBraceKernighanRitchieUnitTest extends AbstractSniffUn
             return [
                 6  => 1,
                 10 => 1,
+                14 => 1,
+                18 => 1,
             ];
         default:
             return [];
