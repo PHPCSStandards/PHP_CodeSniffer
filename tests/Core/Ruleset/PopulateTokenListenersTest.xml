@@ -21,7 +21,7 @@
     </rule>
 
     <!-- Test setting supported Tokenizers when provided. -->
-    <rule ref="Generic.Files.EndFileNewline"/>
+    <rule ref="TestStandard.SupportedTokenizers.ListensForPHPAndCSSAndJS"/>
 
     <!-- Test that a sniff which doesn't register any tokens is accepted without errors. -->
     <rule ref="TestStandard.ValidSniffs.RegisterEmptyArray"/>
