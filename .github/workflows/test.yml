@@ -14,16 +14,14 @@ on:
   # Allow manually triggering the workflow.
   workflow_dispatch:
 
-# Cancels all previous workflow runs for the same branch that have not yet completed,
-# but don't cancel when it's one of the "main" branches as that prevents
-# accurate monitoring of code coverage.
-concurrency:
-  # The concurrency group contains the workflow name and the branch name.
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.ref_name != 'master' && github.ref_name != '4.0' }}
-
 jobs:
   build:
+    # Cancels all previous runs of this particular job for the same branch that have not yet completed.
+    concurrency:
+      # The concurrency group contains the workflow name, job name and the branch name.
+      group: ${{ github.workflow }}-${{ github.job }}-${{ github.ref }}
+      cancel-in-progress: true
+
     runs-on: ubuntu-latest
     name: "Build Phar on PHP: 8.0"
 
@@ -82,6 +80,12 @@ jobs:
         run: php phpcbf.phar ./scripts
 
   test:
+    # Cancels all previous runs of this particular job for the same branch that have not yet completed.
+    concurrency:
+      # The concurrency group contains the workflow name, job name, job index and the branch name.
+      group: ${{ github.workflow }}-${{ github.job }}-${{ strategy.job-index }}-${{ github.ref }}
+      cancel-in-progress: true
+
     runs-on: ubuntu-latest
     needs: build
 
@@ -215,6 +219,8 @@ jobs:
         run: php phpcs.phar
 
   coverage:
+    # Explicitly *NOT* setting "concurrency" for this job to allow for monitoring code coverage for all merges.
+
     runs-on: ${{ matrix.os }}
 
     strategy:
