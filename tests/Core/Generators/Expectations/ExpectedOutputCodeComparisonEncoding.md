@@ -1,6 +1,7 @@
 # GeneratorTest Coding Standard
 
 ## Code Comparison, char encoding
+
 This is a standard block.
   <table>
    <tr>

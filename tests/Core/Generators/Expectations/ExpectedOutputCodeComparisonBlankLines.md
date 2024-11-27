@@ -1,6 +1,7 @@
 # GeneratorTest Coding Standard
 
 ## Code Comparison, blank lines
+
 This is a standard block.
   <table>
    <tr>
