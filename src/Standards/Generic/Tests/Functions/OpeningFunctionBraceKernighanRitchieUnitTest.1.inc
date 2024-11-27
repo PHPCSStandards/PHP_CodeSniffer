@@ -5,15 +5,16 @@ function myFunction() {
 }
 
 // Brace should be on same line.
-function myFunction() {
+function myFunction()
+{
 }
 
 // Too many spaces.
-function myFunction() {
+function myFunction()   {
 }
 
 // Uses tab.
-function myFunction() {
+function myFunction()	{
 }
 
 
@@ -22,17 +23,18 @@ class myClass
     // Good.
     function myFunction() {
     }
-    
+
     // Brace should be on same line.
-    function myFunction() {
+    function myFunction()
+    {
     }
-    
+
     // Too many spaces.
-    function myFunction() {
+    function myFunction()   {
     }
-    
+
     // Uses tab.
-    function myFunction() {
+    function myFunction()	{
     }
 }
 
@@ -47,17 +49,18 @@ function myFunction($variable1, $variable2,
 
 // Brace should be on same line.
 function myFunction($variable1, $variable2,
-    $variable3, $variable4) {
+    $variable3, $variable4)
+{
 }
 
 // Too many spaces.
 function myFunction($variable1, $variable2,
-    $variable3, $variable4) {
+    $variable3, $variable4)   {
 }
 
 // Uses tab.
 function myFunction($variable1, $variable2,
-    $variable3, $variable4) {
+    $variable3, $variable4)	{
 }
 
 
@@ -67,20 +70,21 @@ class myClass
     function myFunction($variable1, $variable2,
         $variable3, $variable4) {
     }
-    
+
     // Brace should be on same line.
     function myFunction($variable1, $variable2,
-        $variable3, $variable4) {
+        $variable3, $variable4)
+    {
     }
-    
+
     // Too many spaces.
     function myFunction($variable1, $variable2,
-        $variable3, $variable4) {
+        $variable3, $variable4)   {
     }
-    
+
     // Uses tab.
     function myFunction($variable1, $variable2,
-        $variable3, $variable4) {
+        $variable3, $variable4)	{
     }
 }
 
@@ -96,7 +100,8 @@ function myFunction(
                     $arg4,
                     $arg5,
                     $arg6
-                    ) {
+                    )
+{
 }
 
 function myFunction(
@@ -110,28 +115,31 @@ function myFunction(
 }
 
 function myFunction() {}
-function myFunction() {
-}
+function myFunction()
+{}
 
 // phpcs:set Generic.Functions.OpeningFunctionBraceKernighanRitchie checkClosures 1
 
-$closureWithArgs = function ($arg1, $arg2) {
+$closureWithArgs = function ($arg1, $arg2){
     // body
 };
 
-$closureWithArgsAndVars = function ($arg1, $arg2) use ($var1, $var2) {
+$closureWithArgsAndVars = function ($arg1, $arg2) use ($var1, $var2){
     // body
 };
 
-$test = function ($param) use ($result) {
+$test = function ($param) use ($result)
+{
     return null;
 };
 
-$test = function ($param) use ($result) : Something {
+$test = function ($param) use ($result) : Something
+{
     return null;
 };
 
-$test = function ($param) use ($result): Something {
+$test = function ($param) use ($result): Something
+{
     return null;
 };
 
@@ -145,12 +153,13 @@ $closureWithArgs = function ($arg1, $arg2){
     // body
 };
 
-function myFunction() : Something {
+function myFunction() : Something
+{
     return null;
 }
 
-function myFunction() : Something {
- // Break me
+function myFunction() : Something // Break me
+{
     return null;
 }
 
@@ -158,7 +167,8 @@ function myFunction(): Something {
     return null;
 }
 
-function myFunction(): Something {
+function myFunction(): Something
+{
     return null;
 }
 
@@ -167,7 +177,8 @@ function myFunction($bar) { ?>
 <?php }
 
 function myFunction($a, $lot, $of, $params)
-    : array {
+    : array
+{
     return null;
 }
 
@@ -176,19 +187,20 @@ function myFunction($a, $lot, $of, $params)
     return null;
 }
 
-function myFunction($a, $lot, $of, $params) {
- // comment
+function myFunction($a, $lot, $of, $params) // comment
+{
     return null;
 }
 
 function myFunction($a, $lot, $of, $params)
-    : array {
- // comment
+    : array // comment
+{
     return null;
 }
 
 function myFunction($a, $lot, $of, $params)
-    : array { // phpcs:ignore Standard.Category.Sniff -- for reasons.
+    : array // phpcs:ignore Standard.Category.Sniff -- for reasons.
+{
     return null;
 }
 
@@ -198,5 +210,23 @@ function myFunction($a, $lot, $of, $params)
 }
 
 function myFunction() {}
-function myFunction() {} // Too many spaces with an empty function.
-function myFunction() {} // Too many spaces (tab) with an empty function.
+function myFunction()      {} // Too many spaces with an empty function.
+function myFunction()	{} // Too many spaces (tab) with an empty function.
+
+// phpcs:set Generic.Functions.OpeningFunctionBraceKernighanRitchie checkFunctions 0
+function shouldBeIgnored()
+{}
+// phpcs:set Generic.Functions.OpeningFunctionBraceKernighanRitchie checkFunctions 1
+
+function dnfReturnType(): (Response&SuccessResponse)|AnotherResponse|string
+{}
+
+function commentAfterOpeningBrace() { // Some comment.
+}
+
+function variableAssignmentAfterOpeningBrace() { $a = 1;
+}
+
+abstract class MyClass {
+    abstract public function abstractMethod();
+}
