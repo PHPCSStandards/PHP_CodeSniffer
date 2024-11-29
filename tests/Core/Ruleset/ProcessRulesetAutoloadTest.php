@@ -52,9 +52,24 @@ final class ProcessRulesetAutoloadTest extends AbstractRulesetTestCase
         $diff          = array_diff($finalIncludes, $originallyIncludes);
 
         $this->assertContains(
-            __DIR__.str_replace('/', DIRECTORY_SEPARATOR, '/Fixtures/ProcessRulesetAutoloadLoadAlways.php'),
+            __DIR__.str_replace('/', DIRECTORY_SEPARATOR, '/Fixtures/ProcessRulesetAutoloadLoadAlways.1.php'),
             $diff,
-            'ProcessRulesetAutoloadLoadAlways.php autoload file was not loaded'
+            'ProcessRulesetAutoloadLoadAlways.1.php autoload file was not loaded'
+        );
+        $this->assertContains(
+            __DIR__.str_replace('/', DIRECTORY_SEPARATOR, '/Fixtures/ProcessRulesetAutoloadLoadAlways.2.php'),
+            $diff,
+            'ProcessRulesetAutoloadLoadAlways.2.php autoload file was not loaded'
+        );
+        $this->assertContains(
+            __DIR__.str_replace('/', DIRECTORY_SEPARATOR, '/Fixtures/ProcessRulesetAutoloadLoadAlways.3.php'),
+            $diff,
+            'ProcessRulesetAutoloadLoadAlways.3.php autoload file was not loaded'
+        );
+        $this->assertContains(
+            __DIR__.str_replace('/', DIRECTORY_SEPARATOR, '/Fixtures/ProcessRulesetAutoloadLoadAlways.4.php'),
+            $diff,
+            'ProcessRulesetAutoloadLoadAlways.4.php autoload file was not loaded'
         );
         $this->assertContains(
             __DIR__.str_replace('/', DIRECTORY_SEPARATOR, '/Fixtures/ProcessRulesetAutoloadLoadPhpcsOnly.php'),
@@ -95,9 +110,24 @@ final class ProcessRulesetAutoloadTest extends AbstractRulesetTestCase
         $diff          = array_diff($finalIncludes, $originallyIncludes);
 
         $this->assertContains(
-            __DIR__.str_replace('/', DIRECTORY_SEPARATOR, '/Fixtures/ProcessRulesetAutoloadLoadAlways.php'),
+            __DIR__.str_replace('/', DIRECTORY_SEPARATOR, '/Fixtures/ProcessRulesetAutoloadLoadAlways.1.php'),
             $diff,
-            'ProcessRulesetAutoloadLoadAlways.php autoload file was not loaded'
+            'ProcessRulesetAutoloadLoadAlways.1.php autoload file was not loaded'
+        );
+        $this->assertContains(
+            __DIR__.str_replace('/', DIRECTORY_SEPARATOR, '/Fixtures/ProcessRulesetAutoloadLoadAlways.2.php'),
+            $diff,
+            'ProcessRulesetAutoloadLoadAlways.2.php autoload file was not loaded'
+        );
+        $this->assertContains(
+            __DIR__.str_replace('/', DIRECTORY_SEPARATOR, '/Fixtures/ProcessRulesetAutoloadLoadAlways.3.php'),
+            $diff,
+            'ProcessRulesetAutoloadLoadAlways.3.php autoload file was not loaded'
+        );
+        $this->assertContains(
+            __DIR__.str_replace('/', DIRECTORY_SEPARATOR, '/Fixtures/ProcessRulesetAutoloadLoadAlways.4.php'),
+            $diff,
+            'ProcessRulesetAutoloadLoadAlways.4.php autoload file was not loaded'
         );
         $this->assertNotContains(
             __DIR__.str_replace('/', DIRECTORY_SEPARATOR, '/Fixtures/ProcessRulesetAutoloadLoadPhpcsOnly.php'),
