@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="ProcessRuleShouldProcessElementTest" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/PHPCSStandards/PHP_CodeSniffer/master/phpcs.xsd">
 
-	<!--
-	################
-	# Neither set. #
-	################
-	-->
+    <!--
+    ################
+    # Neither set. #
+    ################
+    -->
     <rule ref="PSR1.Files.SideEffects">
         <severity>3</severity>
         <type>warning</type>
@@ -22,11 +22,11 @@
 
     <!-- Properties with neither set are tested in the SetSniffPropertyTest. -->
 
-	<!--
-	###################
-	# phpcs-only set. #
-	###################
-	-->
+    <!--
+    ###################
+    # phpcs-only set. #
+    ###################
+    -->
     <rule ref="Generic.Metrics.CyclomaticComplexity">
         <severity phpcs-only="true">2</severity>
         <type phpcs-only="true">warning</type>
@@ -47,11 +47,11 @@
         </properties>
     </rule>
 
-	<!--
-	####################
-	# phpcbf-only set. #
-	####################
-	-->
+    <!--
+    ####################
+    # phpcbf-only set. #
+    ####################
+    -->
     <rule ref="PSR2.Namespaces.NamespaceDeclaration">
         <severity phpcbf-only="true">4</severity>
         <type phpcbf-only="true">error</type>
@@ -72,11 +72,11 @@
         </properties>
     </rule>
 
-	<!--
-	####################
-	# Property details. #
-	####################
-	-->
+    <!--
+    ####################
+    # Property details. #
+    ####################
+    -->
     <rule ref="Generic.WhiteSpace.ScopeIndent">
         <properties>
             <property name="exact" value="true"/>
