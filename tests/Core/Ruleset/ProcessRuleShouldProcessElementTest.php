@@ -582,7 +582,7 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
      *
      * @return void
      */
-    public function verifyShouldProcessElement($expected)
+    private function verifyShouldProcessElement($expected)
     {
         // Verify the sniff is registed.
         $sniffClass = 'PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\ScopeIndentSniff';
