@@ -245,8 +245,8 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
         }
 
         $this->assertSame('2', ini_get('bcmath.scale'), 'Non-selective ini directive was not applied.');
-        $this->assertSame('', ini_get('docref_root'), 'CS-only ini directive was not applied.');
-        $this->assertSame('Never mind', ini_get('user_agent'), 'CBF-only ini directive was applied, while it shouldn\'t have been.');
+        $this->assertSame('', ini_get('docref_root'), 'CS-only ini directive was applied, while it shouldn\'t have been..');
+        $this->assertSame('Never mind', ini_get('user_agent'), 'CBF-only ini directive was not applied.');
 
     }//end testShouldProcessIniCbfonly()
 
