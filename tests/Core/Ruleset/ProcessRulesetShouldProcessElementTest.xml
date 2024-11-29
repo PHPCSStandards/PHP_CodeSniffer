@@ -3,11 +3,11 @@
 
     <file>.</file>
 
-	<!--
-	################
-	# Neither set. #
-	################
-	-->
+    <!--
+    ################
+    # Neither set. #
+    ################
+    -->
     <config name="neither" value="true"/>
     <arg value="ps" />
     <arg name="extensions" value="php,phpt" />
@@ -17,11 +17,11 @@
 
     <rule ref="PEAR.Formatting.MultiLineAssignment"/>
 
-	<!--
-	###################
-	# phpcs-only set. #
-	###################
-	-->
+    <!--
+    ###################
+    # phpcs-only set. #
+    ###################
+    -->
     <config phpcs-only="true" name="csOnly" value="true"/>
     <arg phpcs-only="true" name="colors"/>
     <ini phpcs-only="true" name="docref_root" value="path/to/docs/"/>
@@ -34,11 +34,11 @@
         <exclude phpcs-only="true" name="PEAR.Formatting.MultiLineAssignment.Indent"/>
     </rule>
 
-	<!--
-	####################
-	# phpcbf-only set. #
-	####################
-	-->
+    <!--
+    ####################
+    # phpcbf-only set. #
+    ####################
+    -->
     <config phpcbf-only="true" name="cbfOnly" value="true"/>
     <arg phpcbf-only="true" name="report" value="summary"/>
     <ini phpcbf-only="true" name="user_agent" value="Never mind"/>
