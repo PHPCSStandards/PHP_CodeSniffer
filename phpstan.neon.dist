@@ -4,6 +4,7 @@ parameters:
         max: 80499
     level: 0
     paths:
+        - requirements.php
         - src
     bootstrapFiles:
         - tests/bootstrap.php

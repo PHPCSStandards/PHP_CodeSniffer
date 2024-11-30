@@ -61,7 +61,6 @@ class Runner
 
         try {
             Timing::startTiming();
-            Runner::checkRequirements();
 
             if (defined('PHP_CODESNIFFER_CBF') === false) {
                 define('PHP_CODESNIFFER_CBF', false);
@@ -167,7 +166,6 @@ class Runner
 
         try {
             Timing::startTiming();
-            Runner::checkRequirements();
 
             // Creating the Config object populates it with all required settings
             // based on the CLI arguments provided to the script and any config
@@ -243,54 +241,6 @@ class Runner
         return 2;
 
     }//end runPHPCBF()
-
-
-    /**
-     * Exits if the minimum requirements of PHP_CodeSniffer are not met.
-     *
-     * @return void
-     * @throws \PHP_CodeSniffer\Exceptions\DeepExitException If the requirements are not met.
-     */
-    public function checkRequirements()
-    {
-        // Check the PHP version.
-        if (PHP_VERSION_ID < 50400) {
-            $error = 'ERROR: PHP_CodeSniffer requires PHP version 5.4.0 or greater.'.PHP_EOL;
-            throw new DeepExitException($error, 3);
-        }
-
-        $requiredExtensions = [
-            'tokenizer',
-            'xmlwriter',
-            'SimpleXML',
-        ];
-        $missingExtensions  = [];
-
-        foreach ($requiredExtensions as $extension) {
-            if (extension_loaded($extension) === false) {
-                $missingExtensions[] = $extension;
-            }
-        }
-
-        if (empty($missingExtensions) === false) {
-            $last      = array_pop($requiredExtensions);
-            $required  = implode(', ', $requiredExtensions);
-            $required .= ' and '.$last;
-
-            if (count($missingExtensions) === 1) {
-                $missing = $missingExtensions[0];
-            } else {
-                $last     = array_pop($missingExtensions);
-                $missing  = implode(', ', $missingExtensions);
-                $missing .= ' and '.$last;
-            }
-
-            $error = 'ERROR: PHP_CodeSniffer requires the %s extensions to be enabled. Please enable %s.'.PHP_EOL;
-            $error = sprintf($error, $required, $missing);
-            throw new DeepExitException($error, 3);
-        }
-
-    }//end checkRequirements()
 
 
     /**

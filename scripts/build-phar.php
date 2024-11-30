@@ -138,6 +138,9 @@ foreach ($scripts as $script) {
         ++$fileCount;
     }//end foreach
 
+    // Add requirements check.
+    $phar->addFromString('requirements.php', stripWhitespaceAndComments(realpath(__DIR__.'/../requirements.php'), $config));
+
     // Add autoloader.
     $phar->addFromString('autoload.php', stripWhitespaceAndComments(realpath(__DIR__.'/../autoload.php'), $config));
 
@@ -155,6 +158,8 @@ foreach ($scripts as $script) {
     $stub  = '#!/usr/bin/env php'."\n";
     $stub .= '<?php'."\n";
     $stub .= 'Phar::mapPhar(\''.$pharName.'\');'."\n";
+    $stub .= 'require_once "phar://'.$pharName.'/requirements.php";'."\n";
+    $stub .= 'PHP_CodeSniffer\checkRequirements();'."\n";
     $stub .= 'require_once "phar://'.$pharName.'/autoload.php";'."\n";
     $stub .= '$runner = new PHP_CodeSniffer\Runner();'."\n";
     $stub .= '$exitCode = $runner->run'.$script.'();'."\n";

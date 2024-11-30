@@ -1,0 +1,210 @@
+name: Test requirements check
+
+on:
+  # Run on pushes to the main branches and on pull requests which touch files related to the requirements check.
+  # No need to run this workflow when there are only irrelevant changes.
+  push:
+    branches:
+      - 4.x
+    tags:
+      - '**'
+    paths:
+      - '.github/workflows/test-requirements-check.yml'
+      - '.github/workflows/reusable-build-phar.yml'
+      - 'bin/phpcs'
+      - 'bin/phpcbf'
+      - 'phpcs.xml.dist'
+      - 'requirements.php'
+      - 'scripts/**'
+  pull_request:
+    paths:
+      - '.github/workflows/test-requirements-check.yml'
+      - '.github/workflows/reusable-build-phar.yml'
+      - 'bin/phpcs'
+      - 'bin/phpcbf'
+      - 'phpcs.xml.dist'
+      - 'requirements.php'
+      - 'scripts/**'
+
+  # Allow manually triggering the workflow.
+  workflow_dispatch:
+
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Make sure that the files involved in the requirements check don't contain parse errors
+  # for the PHP versions supported by the requirements check to prevent the tests being run
+  # failing on the parse errors instead of on the requirements check
+  # (which would easily go unnoticed).
+  lint:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php: ['5.3', '5.4', '5.5', '5.6', '7.0', '7.1']
+
+    name: "Lint: PHP ${{ matrix.php }}"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+
+      - name: "Lint bin/phpcs"
+        run: php -l ./bin/phpcs
+
+      - name: "Lint bin/phpcbf"
+        run: php -l ./bin/phpcbf
+
+      - name: "Lint requirements.php"
+        run: php -l ./requirements.php
+
+  # The matrix for these tests should be the same for the "plain" file test as for the PHAR test.
+  # This matrix, however, is quite complex, making maintaining it manually pretty error prone.
+  # So this job uses a PHP script to generate the matrix based on a fixed set of variables.
+  #
+  # The resulting matrix contains builds which combine the following variables:
+  # - os: ubuntu / windows
+  # - cmd: phpcs / phpcbf
+  # - php: 7.2 (minimum PHP version for 4.x), latest and nightly with the required extensions (should pass the check).
+  # - php: 5.3 (minimum for the requirements check) and 7.1 with the required extension (should fail the PHP version check).
+  # - php: 7.2 (minimum PHP version for 4.x), latest and nightly WITHOUT required extensions (should fail the check for extensions).
+  #
+  # Each combination also contains a "expect" key to set the expectations for success / failure.
+  #
+  # The scripts involved in generating the matrix can be found in the `/scripts/` directory.
+  prepare-matrix:
+    needs: lint
+
+    name: Get test matrix
+    runs-on: ubuntu-latest
+
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.MATRIX }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 'latest'
+          ini-values: 'error_reporting=-1, display_errors=On'
+          coverage: none
+
+      - name: Set matrix
+        id: set-matrix
+        run: echo "MATRIX=$(php scripts/get-requirements-check-matrix.php)" >> "$GITHUB_OUTPUT"
+
+      - name: "DEBUG: show generated matrix"
+        run: echo ${{ steps.set-matrix.outputs.MATRIX }}
+
+  # Test that the requirements check works correctly when using a Composer install or git clone of PHPCS.
+  test-plain:
+    needs: prepare-matrix
+
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.prepare-matrix.outputs.MATRIX) }}
+
+    # yamllint disable-line rule:line-length
+    name: "Plain: ${{ matrix.cmd == 'phpcs' && 'cs' || 'cbf' }} / ${{ matrix.php }} / ${{ matrix.name }} (${{ matrix.os == 'ubuntu-latest' && 'nix' || 'Win' }})"
+
+    continue-on-error: ${{ matrix.php == 'nightly' }}
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          ini-values: 'error_reporting=-1, display_errors=On'
+          extensions: ${{ matrix.extensions }}
+          coverage: none
+        env:
+          fail-fast: true
+
+      # We're only testing the requirements check here, so we just need to verify that PHPCS/PHPCBF starts. Nothing more.
+      - name: Run the test
+        id: check
+        continue-on-error: true
+        run: php "bin/${{ matrix.cmd }}" --version
+
+      - name: Check the result of a successful test against expectation
+        if: ${{ steps.check.outcome == 'success' && matrix.expect == 'fail' }}
+        run: exit 1
+
+      - name: Check the result of a failed test against expectation
+        if: ${{ steps.check.outcome != 'success' && matrix.expect == 'success' }}
+        run: exit 1
+
+  build-phars:
+    needs: lint
+
+    name: "Build Phar on PHP 8.0"
+
+    uses: ./.github/workflows/reusable-build-phar.yml
+    with:
+      uploadArtifacts: true
+
+  # Test that the requirements check works correctly when using a PHPCS/PHPCBF PHAR file.
+  test-phar:
+    needs: [prepare-matrix, build-phars]
+
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.prepare-matrix.outputs.MATRIX) }}
+
+    # yamllint disable-line rule:line-length
+    name: "PHAR: ${{ matrix.cmd == 'phpcs' && 'cs' || 'cbf' }} / ${{ matrix.php }} / ${{ matrix.name }} (${{ matrix.os == 'ubuntu-latest' && 'nix' || 'Win' }})"
+
+    continue-on-error: ${{ matrix.php == 'nightly' }}
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          ini-values: 'error_reporting=-1, display_errors=On'
+          extensions: ${{ matrix.extensions }}
+          coverage: none
+        env:
+          fail-fast: true
+
+      - name: Download the phar
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ matrix.cmd }}-phar
+
+      # We're only testing the requirements check here, so we just need to verify that PHPCS/PHPCBF starts. Nothing more.
+      - name: Run the test
+        id: check
+        continue-on-error: true
+        run: php ${{ matrix.cmd }}.phar --version
+
+      - name: Check the result of a successful test against expectation
+        if: ${{ steps.check.outcome == 'success' && matrix.expect == 'fail' }}
+        run: exit 1
+
+      - name: Check the result of a failed test against expectation
+        if: ${{ steps.check.outcome != 'success' && matrix.expect == 'success' }}
+        run: exit 1
