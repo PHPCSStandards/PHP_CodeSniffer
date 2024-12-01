@@ -160,13 +160,15 @@ class Markdown extends Generator
     {
         $codeBlocks = $node->getElementsByTagName('code');
 
-        $firstTitle = $codeBlocks->item(0)->getAttribute('title');
+        $firstTitle = trim($codeBlocks->item(0)->getAttribute('title'));
+        $firstTitle = str_replace('  ', '&nbsp;&nbsp;', $firstTitle);
         $first      = trim($codeBlocks->item(0)->nodeValue);
         $first      = str_replace("\n", PHP_EOL.'    ', $first);
         $first      = str_replace('<em>', '', $first);
         $first      = str_replace('</em>', '', $first);
 
-        $secondTitle = $codeBlocks->item(1)->getAttribute('title');
+        $secondTitle = trim($codeBlocks->item(1)->getAttribute('title'));
+        $secondTitle = str_replace('  ', '&nbsp;&nbsp;', $secondTitle);
         $second      = trim($codeBlocks->item(1)->nodeValue);
         $second      = str_replace("\n", PHP_EOL.'    ', $second);
         $second      = str_replace('<em>', '', $second);
