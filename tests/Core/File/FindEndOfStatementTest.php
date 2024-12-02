@@ -1,18 +1,60 @@
 <?php
 /**
- * Tests for the \PHP_CodeSniffer\Files\File:findEndOfStatement method.
+ * Tests for the \PHP_CodeSniffer\Files\File::findEndOfStatement method.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Tests\Core\File;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
+use PHP_CodeSniffer\Util\Tokens;
 
-class FindEndOfStatementTest extends AbstractMethodUnitTest
+/**
+ * Tests for the \PHP_CodeSniffer\Files\File::findEndOfStatement method.
+ *
+ * @covers \PHP_CodeSniffer\Files\File::findEndOfStatement
+ */
+final class FindEndOfStatementTest extends AbstractMethodUnitTest
 {
+
+
+    /**
+     * Test that end of statement is NEVER before the "current" token.
+     *
+     * @return void
+     */
+    public function testEndIsNeverLessThanCurrentToken()
+    {
+        $tokens = self::$phpcsFile->getTokens();
+        $errors = [];
+
+        for ($i = 0; $i < self::$phpcsFile->numTokens; $i++) {
+            if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === true) {
+                continue;
+            }
+
+            $end = self::$phpcsFile->findEndOfStatement($i);
+
+            // Collect all the errors.
+            if ($end < $i) {
+                $errors[] = sprintf(
+                    'End of statement for token %1$d (%2$s: %3$s) on line %4$d is %5$d (%6$s), which is less than %1$d',
+                    $i,
+                    $tokens[$i]['type'],
+                    $tokens[$i]['content'],
+                    $tokens[$i]['line'],
+                    $end,
+                    $tokens[$end]['type']
+                );
+            }
+        }
+
+        $this->assertSame([], $errors);
+
+    }//end testEndIsNeverLessThanCurrentToken()
 
 
     /**

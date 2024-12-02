@@ -4,13 +4,13 @@
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Util;
+use PHP_CodeSniffer\Util\Timing;
 
 class Summary implements Report
 {
@@ -23,10 +23,11 @@ class Summary implements Report
      * and FALSE if it ignored the file. Returning TRUE indicates that the file and
      * its data should be counted in the grand totals.
      *
-     * @param array                 $report      Prepared report data.
-     * @param \PHP_CodeSniffer\File $phpcsFile   The file being reported on.
-     * @param bool                  $showSources Show sources?
-     * @param int                   $width       Maximum allowed line width.
+     * @param array<string, string|int|array> $report      Prepared report data.
+     *                                                     See the {@see Report} interface for a detailed specification.
+     * @param \PHP_CodeSniffer\Files\File     $phpcsFile   The file being reported on.
+     * @param bool                            $showSources Show sources?
+     * @param int                             $width       Maximum allowed line width.
      *
      * @return bool
      */
@@ -174,7 +175,7 @@ class Summary implements Report
         echo PHP_EOL.str_repeat('-', $width).PHP_EOL.PHP_EOL;
 
         if ($toScreen === true && $interactive === false) {
-            Util\Timing::printRunTime();
+            Timing::printRunTime();
         }
 
     }//end generate()

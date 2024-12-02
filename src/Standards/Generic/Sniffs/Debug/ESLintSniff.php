@@ -4,7 +4,9 @@
  *
  * @author    Ryan McCue <ryan+gh@hmn.md>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ *
+ * @deprecated 3.9.0
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Debug;
@@ -35,7 +37,7 @@ class ESLintSniff implements Sniff
     /**
      * Returns the token types that this sniff is interested in.
      *
-     * @return int[]
+     * @return array<int|string>
      */
     public function register()
     {
@@ -51,14 +53,14 @@ class ESLintSniff implements Sniff
      * @param int                         $stackPtr  The position in the stack where
      *                                               the token was found.
      *
-     * @return void
-     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If jshint.js could not be run
+     * @return int
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If jshint.js could not be run.
      */
     public function process(File $phpcsFile, $stackPtr)
     {
         $eslintPath = Config::getExecutablePath('eslint');
         if ($eslintPath === null) {
-            return;
+            return $phpcsFile->numTokens;
         }
 
         $filename = $phpcsFile->getFilename();
@@ -84,13 +86,13 @@ class ESLintSniff implements Sniff
 
         if ($code <= 0) {
             // No errors, continue.
-            return ($phpcsFile->numTokens + 1);
+            return $phpcsFile->numTokens;
         }
 
         $data = json_decode(implode("\n", $stdout));
         if (json_last_error() !== JSON_ERROR_NONE) {
             // Ignore any errors.
-            return ($phpcsFile->numTokens + 1);
+            return $phpcsFile->numTokens;
         }
 
         // Data is a list of files, but we only pass a single one.
@@ -105,7 +107,7 @@ class ESLintSniff implements Sniff
         }
 
         // Ignore the rest of the file.
-        return ($phpcsFile->numTokens + 1);
+        return $phpcsFile->numTokens;
 
     }//end process()
 

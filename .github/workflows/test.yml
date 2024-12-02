@@ -1,46 +1,62 @@
 name: Test
 
 on:
-  # Run on all pushes and on all pull requests.
+  # Run on pushes to `master` and on all pull requests.
   # Prevent the build from running when there are only irrelevant changes.
   push:
+    branches:
+      - master
+    tags:
+      - '**'
     paths-ignore:
       - '**.md'
   pull_request:
-    paths-ignore:
-      - '**.md'
   # Allow manually triggering the workflow.
   workflow_dispatch:
 
 jobs:
   build:
+    # Cancels all previous runs of this particular job for the same branch that have not yet completed.
+    concurrency:
+      # The concurrency group contains the workflow name, job name and the branch name.
+      group: ${{ github.workflow }}-${{ github.job }}-${{ github.ref }}
+      cancel-in-progress: true
+
     runs-on: ubuntu-latest
+    name: "Build Phar on PHP: 8.0"
 
-    strategy:
-      matrix:
-        php: ['5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2']
-
-    name: "Build Phar on PHP: ${{ matrix.php }}"
-
-    continue-on-error: ${{ matrix.php == '8.2' }}
+    permissions:
+      id-token: write
+      contents: read
+      attestations: write
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
+          php-version: '8.0'
           coverage: none
           ini-values: phar.readonly=Off, error_reporting=-1, display_errors=On
 
       - name: Build the phar
         run: php scripts/build-phar.php
 
+      # Provide provenance for generated binaries.
+      # Only attests the build artifacts which will be used in the published releases as per the guidelines in "what to attest".
+      # https://docs.github.com/en/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds
+      - name: Generate artifact attestations
+        if: ${{ github.ref_type == 'tag' }}
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: |
+            ${{ github.workspace }}/phpcs.phar
+            ${{ github.workspace }}/phpcbf.phar
+
       - name: Upload the PHPCS phar
-        uses: actions/upload-artifact@v3
-        if: ${{ success() && matrix.php == '8.0' }}
+        uses: actions/upload-artifact@v4
         with:
           name: phpcs-phar
           path: ./phpcs.phar
@@ -48,15 +64,14 @@ jobs:
           retention-days: 28
 
       - name: Upload the PHPCBF phar
-        uses: actions/upload-artifact@v3
-        if: ${{ success() && matrix.php == '8.0' }}
+        uses: actions/upload-artifact@v4
         with:
           name: phpcbf-phar
           path: ./phpcbf.phar
           if-no-files-found: error
           retention-days: 28
 
-      # Both the below only check a few files which are rarely changed and therefore unlikely to have issues.
+      # Both the below only check a file which is rarely changed and therefore unlikely to have issues.
       # This test is about testing that the phars are functional, *not* about whether the code style complies.
       - name: 'PHPCS: check code style using the Phar file to test the Phar is functional'
         run: php phpcs.phar ./scripts
@@ -65,6 +80,12 @@ jobs:
         run: php phpcbf.phar ./scripts
 
   test:
+    # Cancels all previous runs of this particular job for the same branch that have not yet completed.
+    concurrency:
+      # The concurrency group contains the workflow name, job name, job index and the branch name.
+      group: ${{ github.workflow }}-${{ github.job }}-${{ strategy.job-index }}-${{ github.ref }}
+      cancel-in-progress: true
+
     runs-on: ubuntu-latest
     needs: build
 
@@ -73,35 +94,59 @@ jobs:
       # - custom_ini: Whether to run with specific custom ini settings to hit very specific
       #   code conditions.
       matrix:
-        php: ['5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2']
+        os: ['ubuntu-latest', 'windows-latest']
+        php: ['5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
         custom_ini: [false]
 
+        exclude:
+          # Installing on Windows with PHP 5.4 runs into all sorts of problems (which are not ours).
+          - php: '5.4'
+            os: 'windows-latest'
+
         include:
-          # Builds running the basic tests with different PHP ini settings.
+          # Skip test runs on builds which are also run in the coverage job.
+          # Note: the tests on PHP 7.2 will still be run as the coverage build uses custom_ini settings for that version.
+          - php: '5.4'
+            os: 'ubuntu-latest'
+            skip_tests: true
           - php: '5.5'
+            os: 'windows-latest'
+            skip_tests: true
+          - php: '8.4'
+            skip_tests: true
+
+          # Extra builds running only the unit tests with different PHP ini settings.
+          - php: '5.5'
+            os: 'ubuntu-latest'
             custom_ini: true
           - php: '7.0'
+            os: 'ubuntu-latest'
             custom_ini: true
 
-    name: "PHP: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }}"
+    # yamllint disable-line rule:line-length
+    name: "PHP: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }} (${{ matrix.os == 'ubuntu-latest' && 'Linux' || 'Win'  }})"
 
-    continue-on-error: ${{ matrix.php == '8.2' }}
+    continue-on-error: ${{ matrix.php == '8.5' }}
 
     steps:
+      - name: Prepare git to leave line endings alone
+        run: git config --global core.autocrlf input
+
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup ini config
         id: set_ini
+        shell: bash
         run: |
           # Set the "short_open_tag" ini to make sure specific conditions are tested.
           # Also turn on error_reporting to ensure all notices are shown.
           if [[ ${{ matrix.custom_ini }} == true && "${{ matrix.php }}" == '5.5' ]]; then
-            echo 'PHP_INI=error_reporting=-1, display_errors=On, date.timezone=Australia/Sydney, short_open_tag=On, asp_tags=On' >> $GITHUB_OUTPUT
+            echo 'PHP_INI=error_reporting=-1, display_errors=On, date.timezone=Australia/Sydney, short_open_tag=On, asp_tags=On' >> "$GITHUB_OUTPUT"
           elif [[ ${{ matrix.custom_ini }} == true && "${{ matrix.php }}" == '7.0' ]]; then
-            echo 'PHP_INI=error_reporting=-1, display_errors=On, date.timezone=Australia/Sydney, short_open_tag=On' >> $GITHUB_OUTPUT
+            echo 'PHP_INI=error_reporting=-1, display_errors=On, date.timezone=Australia/Sydney, short_open_tag=On' >> "$GITHUB_OUTPUT"
           else
-            echo 'PHP_INI=error_reporting=-1, display_errors=On' >> $GITHUB_OUTPUT
+            echo 'PHP_INI=error_reporting=-1, display_errors=On' >> "$GITHUB_OUTPUT"
           fi
 
       - name: Install PHP
@@ -112,54 +157,59 @@ jobs:
           coverage: none
           tools: cs2pr
 
-      # Install dependencies and handle caching in one go.
-      # @link https://github.com/marketplace/actions/install-composer-dependencies
-      - name: Install Composer dependencies - normal
-        if: ${{ matrix.php < '8.0' }}
-        uses: "ramsey/composer-install@v2"
-
-      # For PHP 8.0+, we need to install with ignore platform reqs as PHPUnit 7 is still used.
-      - name: Install Composer dependencies - with ignore platform
-        if: ${{ matrix.php >= '8.0' }}
-        uses: "ramsey/composer-install@v2"
+      # This action also handles the caching of the dependencies.
+      - name: Set up node
+        if: ${{ matrix.custom_ini == false }}
+        uses: actions/setup-node@v4
         with:
-          composer-options: --ignore-platform-reqs
+          node-version: '20'
+
+      - name: Install external tools used in tests
+        if: ${{ matrix.custom_ini == false }}
+        run: >
+          npm install -g --fund false
+          csslint
+          eslint
+          jshint
+
+      # Install dependencies and handle caching in one go.
+      # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
+      - name: Install Composer dependencies
+        uses: "ramsey/composer-install@v3"
+        with:
+          composer-options: ${{ matrix.php == '8.5' && '--ignore-platform-req=php' || '' }}
+          custom-cache-suffix: $(date -u "+%Y-%m")
 
       # Note: The code style check is run multiple times against every PHP version
       # as it also acts as an integration test.
       - name: 'PHPCS: set the path to PHP'
-        run: php bin/phpcs --config-set php_path php
+        run: php "bin/phpcs" --config-set php_path php
 
-      - name: 'PHPUnit: run the tests'
-        if: ${{ matrix.php != '8.1' && matrix.php != '8.2' }}
-        run: vendor/bin/phpunit tests/AllTests.php
+      - name: 'PHPUnit: run the full test suite without code coverage'
+        if: ${{ matrix.skip_tests != true }}
+        run: php "vendor/bin/phpunit" tests/AllTests.php --no-coverage
 
-      # We need to ignore the config file so that PHPUnit doesn't try to read it.
-      # The config file causes an error on PHP 8.1+ with PHPunit 7, but it's not needed here anyway
-      # as we can pass all required settings in the phpunit command.
-      - name: 'PHPUnit: run the tests on PHP > 8.0'
-        if: ${{ matrix.php == '8.1' || matrix.php == '8.2' }}
-        run: vendor/bin/phpunit tests/AllTests.php --no-configuration --bootstrap=tests/bootstrap.php --dont-report-useless-tests
+      - name: 'PHPUnit: run select tests in CBF mode'
+        run: php "vendor/bin/phpunit" tests/AllTests.php --group CBF --exclude-group nothing --no-coverage
+        env:
+          PHP_CODESNIFFER_CBF: '1'
 
       - name: 'PHPCS: check code style without cache, no parallel'
         if: ${{ matrix.custom_ini == false && matrix.php != '7.4' }}
-        run: php bin/phpcs --no-cache --parallel=1
+        run: php "bin/phpcs" --no-cache --parallel=1
 
       - name: 'PHPCS: check code style to show results in PR'
         if: ${{ matrix.custom_ini == false && matrix.php == '7.4' }}
-        continue-on-error: true
-        run: php bin/phpcs --no-cache --parallel=1 --report-full --report-checkstyle=./phpcs-report.xml
+        id: phpcs
+        run: php "bin/phpcs" --no-cache --parallel=1 --report-full --report-checkstyle=./phpcs-report.xml
 
       - name: Show PHPCS results in PR
-        if: ${{ matrix.custom_ini == false && matrix.php == '7.4' }}
+        if: ${{ always() && steps.phpcs.outcome == 'failure' && matrix.php == '7.4' }}
         run: cs2pr ./phpcs-report.xml
 
-      - name: 'Composer: validate config'
-        if: ${{ matrix.custom_ini == false }}
-        run: composer validate --no-check-all --strict
-
       - name: Download the PHPCS phar
-        uses: actions/download-artifact@v3
+        if: ${{ matrix.custom_ini == false }}
+        uses: actions/download-artifact@v4
         with:
           name: phpcs-phar
 
@@ -167,3 +217,163 @@ jobs:
       - name: 'PHPCS: check code style using the Phar file'
         if: ${{ matrix.custom_ini == false }}
         run: php phpcs.phar
+
+  coverage:
+    # Explicitly *NOT* setting "concurrency" for this job to allow for monitoring code coverage for all merges.
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: ['ubuntu-latest', 'windows-latest']
+        php: ['8.4']
+        custom_ini: [false]
+
+        include:
+          - php: '5.4'
+            os: 'ubuntu-latest'
+            custom_ini: false
+          # Installing on Windows with PHP 5.4 runs into all sorts of problems with Composer.
+          # Considering PHP 5.4 is ancient, I deem it acceptable to run coverage on Windows on PHP 5.5.
+          # See this issue for more context (yes, I've seen this problem before):
+          # @link https://github.com/PHPCSStandards/composer-installer/pull/213
+          - php: '5.5'
+            os: 'windows-latest'
+            custom_ini: false
+
+          # Also run one coverage build with custom ini settings.
+          - php: '7.2'
+            os: 'ubuntu-latest'
+            custom_ini: true
+
+    # yamllint disable-line rule:line-length
+    name: "Coverage: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }} (${{ matrix.os == 'ubuntu-latest' && 'Linux' || 'Win'  }})"
+
+    steps:
+      - name: Prepare git to leave line endings alone
+        run: git config --global core.autocrlf input
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup ini config
+        if: ${{ matrix.os != 'windows-latest' }}
+        id: set_ini
+        shell: bash
+        run: |
+          # Set the "short_open_tag" ini to make sure specific conditions are tested.
+          if [[ ${{ matrix.custom_ini }} == true && "${{ matrix.php }}" == '7.2' ]]; then
+            echo 'PHP_INI=, date.timezone=Australia/Sydney, short_open_tag=On' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          ini-values: error_reporting=-1, display_errors=On${{ steps.set_ini.outputs.PHP_INI }}
+          coverage: xdebug
+
+      # This action also handles the caching of the dependencies.
+      - name: Set up node
+        if: ${{ matrix.custom_ini == false }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install external tools used in tests
+        if: ${{ matrix.custom_ini == false }}
+        run: >
+          npm install -g --fund false
+          csslint
+          eslint
+          jshint
+
+      # Install dependencies and handle caching in one go.
+      # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
+      - name: Install Composer dependencies
+        uses: "ramsey/composer-install@v3"
+        with:
+          # Bust the cache at least once a month - output format: YYYY-MM.
+          custom-cache-suffix: $(date -u "+%Y-%m")
+
+      - name: Grab PHPUnit version
+        id: phpunit_version
+        shell: bash
+        # yamllint disable-line rule:line-length
+        run: echo "VERSION=$(php "vendor/bin/phpunit" --version | grep --only-matching --max-count=1 --extended-regexp '\b[0-9]+\.[0-9]+')" >> "$GITHUB_OUTPUT"
+
+      - name: "DEBUG: Show grabbed version"
+        run: echo ${{ steps.phpunit_version.outputs.VERSION }}
+
+      - name: 'PHPCS: set the path to PHP'
+        run: php "bin/phpcs" --config-set php_path php
+
+      # PHPUnit 9.3 started using PHP-Parser for code coverage, which can cause issues due to Parser
+      # also polyfilling PHP tokens.
+      # As of PHPUnit 9.3.4, a cache warming option is available.
+      # Using that option prevents issues with PHP-Parser backfilling PHP tokens during our test runs.
+      - name: "Warm the PHPUnit cache (PHPUnit 9.3+)"
+        if: ${{ steps.phpunit_version.outputs.VERSION >= '9.3' }}
+        run: php "vendor/bin/phpunit" --coverage-cache ./build/phpunit-cache --warm-coverage-cache
+
+      - name: "Run the unit tests with code coverage (PHPUnit < 9.3)"
+        if: ${{ matrix.os != 'windows-latest' && steps.phpunit_version.outputs.VERSION < '9.3' }}
+        run: php "vendor/bin/phpunit" tests/AllTests.php
+
+      - name: "Run the unit tests with code coverage (PHPUnit 9.3+)"
+        if: ${{ matrix.os != 'windows-latest' && steps.phpunit_version.outputs.VERSION >= '9.3' }}
+        run: php "vendor/bin/phpunit" tests/AllTests.php --coverage-cache ./build/phpunit-cache
+
+      - name: "Run select tests in CBF mode with code coverage (PHPUnit < 9.3)"
+        if: ${{ matrix.os != 'windows-latest' && steps.phpunit_version.outputs.VERSION < '9.3' }}
+        run: >
+          php "vendor/bin/phpunit" tests/AllTests.php
+          --group CBF --exclude-group nothing --coverage-clover build/logs/clover-cbf.xml
+        env:
+          PHP_CODESNIFFER_CBF: '1'
+
+      - name: "Run select tests in CBF mode with code coverage (PHPUnit 9.3+)"
+        if: ${{ matrix.os != 'windows-latest' && steps.phpunit_version.outputs.VERSION >= '9.3' }}
+        run: >
+          php "vendor/bin/phpunit" tests/AllTests.php --coverage-cache ./build/phpunit-cache
+          --group CBF --exclude-group nothing --coverage-clover build/logs/clover-cbf.xml
+        env:
+          PHP_CODESNIFFER_CBF: '1'
+
+      - name: "Run the unit tests which may have different outcomes on Windows with code coverage (PHPUnit < 9.3)"
+        if: ${{ matrix.os == 'windows-latest' && steps.phpunit_version.outputs.VERSION < '9.3' }}
+        run: php "vendor/bin/phpunit" tests/AllTests.php --group Windows
+
+      - name: "Run the unit tests which may have different outcomes on Windows with code coverage (PHPUnit 9.3+)"
+        if: ${{ matrix.os == 'windows-latest' && steps.phpunit_version.outputs.VERSION >= '9.3' }}
+        run: php "vendor/bin/phpunit" tests/AllTests.php --group Windows --coverage-cache ./build/phpunit-cache
+
+      - name: "Upload coverage results to Coveralls (normal run)"
+        if: ${{ success() }}
+        uses: coverallsapp/github-action@v2
+        with:
+          format: clover
+          file: build/logs/clover.xml
+          flag-name: os-${{ matrix.os }}-php-${{ matrix.php }}-custom-ini-${{ matrix.custom_ini }}
+          parallel: true
+
+      - name: "Upload coverage results to Coveralls (CBF run)"
+        if: ${{ matrix.os != 'windows-latest' && success() }}
+        uses: coverallsapp/github-action@v2
+        with:
+          format: clover
+          file: build/logs/clover-cbf.xml
+          flag-name: cbf-os-${{ matrix.os }}-ubuntu-latest-php-${{ matrix.php }}-custom-ini-${{ matrix.custom_ini }}
+          parallel: true
+
+  coveralls-finish:
+    needs: coverage
+    if: always() && needs.coverage.result == 'success'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@v2
+        with:
+          parallel-finished: true

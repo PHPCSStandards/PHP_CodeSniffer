@@ -4,15 +4,17 @@
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Tests\Standards;
 
-use PHP_CodeSniffer\Util\Standards;
 use PHP_CodeSniffer\Autoload;
-use PHPUnit\TextUI\TestRunner;
+use PHP_CodeSniffer\Util\Standards;
 use PHPUnit\Framework\TestSuite;
+use PHPUnit\TextUI\TestRunner;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 class AllSniffs
 {
@@ -46,8 +48,6 @@ class AllSniffs
 
         $suite = new TestSuite('PHP CodeSniffer Standards');
 
-        $isInstalled = !is_file(__DIR__.'/../../autoload.php');
-
         // Optionally allow for ignoring the tests for one or more standards.
         $ignoreTestsForStandards = getenv('PHPCS_IGNORE_TESTS');
         if ($ignoreTestsForStandards === false) {
@@ -61,26 +61,17 @@ class AllSniffs
         foreach ($installedStandards as $standard => $details) {
             Autoload::addSearchPath($details['path'], $details['namespace']);
 
-            // If the test is running PEAR installed, the built-in standards
-            // are split into different directories; one for the sniffs and
-            // a different file system location for tests.
-            if ($isInstalled === true && is_dir(dirname($details['path']).DIRECTORY_SEPARATOR.'Generic') === true) {
-                $testPath = realpath(__DIR__.'/../../src/Standards/'.$standard);
-            } else {
-                $testPath = $details['path'];
-            }
-
             if (in_array($standard, $ignoreTestsForStandards, true) === true) {
                 continue;
             }
 
-            $testsDir = $testPath.DIRECTORY_SEPARATOR.'Tests'.DIRECTORY_SEPARATOR;
+            $testsDir = $details['path'].DIRECTORY_SEPARATOR.'Tests'.DIRECTORY_SEPARATOR;
             if (is_dir($testsDir) === false) {
                 // No tests for this standard.
                 continue;
             }
 
-            $di = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($testsDir));
+            $di = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($testsDir));
 
             foreach ($di as $file) {
                 // Skip hidden files.

@@ -10,8 +10,7 @@
  * @author    Benjamin Pearson <bpearson@squiz.com.au>
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2014 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
- * @link      http://pear.php.net/package/PHP_CodeSniffer
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 use PHP_CodeSniffer\Config;
@@ -20,7 +19,7 @@ use PHP_CodeSniffer\Exceptions\TokenizerException;
 use PHP_CodeSniffer\Tokenizers\PHP;
 use PHP_CodeSniffer\Util\Tokens;
 
-error_reporting(E_ALL | E_STRICT);
+error_reporting(E_ALL);
 
 if (ini_get('phar.readonly') === '1') {
     echo 'Unable to build, phar.readonly in php.ini is set to read only.'.PHP_EOL;
@@ -108,8 +107,8 @@ foreach ($scripts as $script) {
     $srcDir    = realpath(__DIR__.'/../src');
     $srcDirLen = strlen($srcDir);
 
-    $rdi = new \RecursiveDirectoryIterator($srcDir, \RecursiveDirectoryIterator::FOLLOW_SYMLINKS);
-    $di  = new \RecursiveIteratorIterator($rdi, 0, \RecursiveIteratorIterator::CATCH_GET_CHILD);
+    $rdi = new RecursiveDirectoryIterator($srcDir, RecursiveDirectoryIterator::FOLLOW_SYMLINKS);
+    $di  = new RecursiveIteratorIterator($rdi, 0, RecursiveIteratorIterator::CATCH_GET_CHILD);
 
     $config    = new Config();
     $fileCount = 0;

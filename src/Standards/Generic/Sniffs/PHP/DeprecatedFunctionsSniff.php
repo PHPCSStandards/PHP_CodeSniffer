@@ -5,10 +5,12 @@
  * @author    Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\PHP;
+
+use ReflectionFunction;
 
 class DeprecatedFunctionsSniff extends ForbiddenFunctionsSniff
 {
@@ -34,7 +36,7 @@ class DeprecatedFunctionsSniff extends ForbiddenFunctionsSniff
         $functions = get_defined_functions();
 
         foreach ($functions['internal'] as $functionName) {
-            $function = new \ReflectionFunction($functionName);
+            $function = new ReflectionFunction($functionName);
 
             if ($function->isDeprecated() === true) {
                 $this->forbiddenFunctions[$functionName] = null;

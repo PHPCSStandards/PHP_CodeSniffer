@@ -9,7 +9,7 @@
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Sniffs;
@@ -28,13 +28,13 @@ interface Sniff
      *
      * <code>
      *    return array(
-     *            T_WHITESPACE,
-     *            T_DOC_COMMENT,
-     *            T_COMMENT,
-     *           );
+     *        T_WHITESPACE,
+     *        T_DOC_COMMENT,
+     *        T_COMMENT,
+     *    );
      * </code>
      *
-     * @return mixed[]
+     * @return array<int|string>
      * @see    Tokens.php
      */
     public function register();
@@ -71,7 +71,7 @@ interface Sniff
      *
      * @return void|int Optionally returns a stack pointer. The sniff will not be
      *                  called again on the current file until the returned stack
-     *                  pointer is reached. Return (count($tokens) + 1) to skip
+     *                  pointer is reached. Return `$phpcsFile->numTokens` to skip
      *                  the rest of the file.
      */
     public function process(File $phpcsFile, $stackPtr);

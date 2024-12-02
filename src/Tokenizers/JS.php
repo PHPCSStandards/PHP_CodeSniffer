@@ -4,7 +4,7 @@
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Tokenizers;
@@ -251,7 +251,7 @@ class JS extends Tokenizer
      *
      * Pre-checks the content to see if it looks minified.
      *
-     * @param string                  $content The content to tokenize,
+     * @param string                  $content The content to tokenize.
      * @param \PHP_CodeSniffer\Config $config  The config data for the run.
      * @param string                  $eolChar The EOL char used in the content.
      *
@@ -905,10 +905,10 @@ class JS extends Tokenizer
      *
      * If a regular expression is not found, NULL is returned.
      *
-     * @param string $char   The index of the possible regex start character.
+     * @param int    $char   The index of the possible regex start character.
      * @param string $string The complete content of the string being tokenized.
-     * @param string $chars  An array of characters being tokenized.
-     * @param string $tokens The current array of tokens found in the string.
+     * @param array  $chars  An array of characters being tokenized.
+     * @param array  $tokens The current array of tokens found in the string.
      *
      * @return array<string, string>|null
      */
@@ -1188,7 +1188,7 @@ class JS extends Tokenizer
                     }
                 }
             } else if ($this->tokens[$i]['code'] === T_CLOSE_OBJECT) {
-                $opener = array_pop($classStack);
+                array_pop($classStack);
             } else if ($this->tokens[$i]['code'] === T_COLON) {
                 // If it is a scope opener, it belongs to a
                 // DEFAULT or CASE statement.

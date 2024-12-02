@@ -4,7 +4,7 @@
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR2\Sniffs\Namespaces;
@@ -20,7 +20,7 @@ class UseDeclarationSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
@@ -152,10 +152,10 @@ class UseDeclarationSniff implements Sniff
                             }
                         } while ($next !== false);
 
-                        // Remove closing curly,semi-colon and any whitespace between last child and closing curly.
+                        // Remove closing curly, semicolon and any whitespace between last child and closing curly.
                         $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($closingCurly + 1), null, true);
                         if ($next === false || $tokens[$next]['code'] !== T_SEMICOLON) {
-                            // Parse error, forgotten semi-colon.
+                            // Parse error, forgotten semicolon.
                             $next = $closingCurly;
                         }
 

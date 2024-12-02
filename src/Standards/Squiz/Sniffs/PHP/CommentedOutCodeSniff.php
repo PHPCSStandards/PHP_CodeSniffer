@@ -4,7 +4,7 @@
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP;
@@ -38,7 +38,7 @@ class CommentedOutCodeSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
@@ -238,23 +238,18 @@ class CommentedOutCodeSniff implements Sniff
         ];
         $emptyTokens += Tokens::$phpcsCommentTokens;
 
-        $numComment       = 0;
-        $numPossible      = 0;
         $numCode          = 0;
         $numNonWhitespace = 0;
 
         for ($i = 0; $i < $numTokens; $i++) {
-            if (isset($emptyTokens[$stringTokens[$i]['code']]) === true) {
-                // Looks like comment.
-                $numComment++;
-            } else if (isset(Tokens::$comparisonTokens[$stringTokens[$i]['code']]) === true
-                || isset(Tokens::$arithmeticTokens[$stringTokens[$i]['code']]) === true
-                || $stringTokens[$i]['code'] === T_GOTO_LABEL
-            ) {
+            // Do not count comments.
+            if (isset($emptyTokens[$stringTokens[$i]['code']]) === false
                 // Commented out HTML/XML and other docs contain a lot of these
                 // characters, so it is best to not use them directly.
-                $numPossible++;
-            } else {
+                && isset(Tokens::$comparisonTokens[$stringTokens[$i]['code']]) === false
+                && isset(Tokens::$arithmeticTokens[$stringTokens[$i]['code']]) === false
+                && $stringTokens[$i]['code'] !== T_GOTO_LABEL
+            ) {
                 // Looks like code.
                 $numCode++;
             }

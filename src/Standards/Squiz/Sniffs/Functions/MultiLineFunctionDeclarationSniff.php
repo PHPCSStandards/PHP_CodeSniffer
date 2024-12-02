@@ -4,7 +4,7 @@
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions;
@@ -37,7 +37,7 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
      * @param array                       $tokens      The stack of tokens that make up
      *                                                 the file.
      *
-     * @return void
+     * @return bool
      */
     public function isMultiLineDeclaration($phpcsFile, $stackPtr, $openBracket, $tokens)
     {
@@ -225,16 +225,20 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
         }//end if
 
         // Each line between the brackets should contain a single parameter.
-        $lastComma = null;
         for ($i = ($openBracket + 1); $i < $closeBracket; $i++) {
             // Skip brackets, like arrays, as they can contain commas.
-            if (isset($tokens[$i]['bracket_opener']) === true) {
+            if (isset($tokens[$i]['bracket_closer']) === true) {
                 $i = $tokens[$i]['bracket_closer'];
                 continue;
             }
 
-            if (isset($tokens[$i]['parenthesis_opener']) === true) {
+            if (isset($tokens[$i]['parenthesis_closer']) === true) {
                 $i = $tokens[$i]['parenthesis_closer'];
+                continue;
+            }
+
+            if (isset($tokens[$i]['attribute_closer']) === true) {
+                $i = $tokens[$i]['attribute_closer'];
                 continue;
             }
 

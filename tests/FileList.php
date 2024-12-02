@@ -4,10 +4,14 @@
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2019 Juliette Reinders Folmer. All rights reserved.
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Tests;
+
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use RegexIterator;
 
 class FileList
 {
@@ -52,21 +56,21 @@ class FileList
     {
         $this->rootPath = $rootPath;
 
-        $directory = new \RecursiveDirectoryIterator(
+        $directory = new RecursiveDirectoryIterator(
             $directory,
-            \RecursiveDirectoryIterator::UNIX_PATHS
+            RecursiveDirectoryIterator::UNIX_PATHS
         );
-        $flattened = new \RecursiveIteratorIterator(
+        $flattened = new RecursiveIteratorIterator(
             $directory,
-            \RecursiveIteratorIterator::LEAVES_ONLY,
-            \RecursiveIteratorIterator::CATCH_GET_CHILD
+            RecursiveIteratorIterator::LEAVES_ONLY,
+            RecursiveIteratorIterator::CATCH_GET_CHILD
         );
 
         if ($filter === '') {
             $filter = sprintf($this->baseRegex, preg_quote($this->rootPath));
         }
 
-        $this->fileIterator = new \RegexIterator($flattened, $filter);
+        $this->fileIterator = new RegexIterator($flattened, $filter);
 
         return $this;
 

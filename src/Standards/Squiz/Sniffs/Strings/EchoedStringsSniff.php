@@ -4,7 +4,7 @@
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Strings;
@@ -20,7 +20,7 @@ class EchoedStringsSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
@@ -51,7 +51,7 @@ class EchoedStringsSniff implements Sniff
 
         $end = $phpcsFile->findNext([T_SEMICOLON, T_CLOSE_TAG], $stackPtr, null, false);
 
-        // If the token before the semi-colon is not a closing parenthesis, then we are not concerned.
+        // If the token before the semicolon is not a closing parenthesis, then we are not concerned.
         $prev = $phpcsFile->findPrevious(T_WHITESPACE, ($end - 1), null, true);
         if ($tokens[$prev]['code'] !== T_CLOSE_PARENTHESIS) {
             $phpcsFile->recordMetric($stackPtr, 'Brackets around echoed strings', 'no');

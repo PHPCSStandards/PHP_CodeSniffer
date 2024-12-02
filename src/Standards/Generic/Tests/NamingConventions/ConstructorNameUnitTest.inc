@@ -95,3 +95,36 @@ interface CustomChildCreator
 {
     public function customChildCreator($elementName, Project $project);
 }
+
+// Bug: unconventional spacing and unexpected comments were not handled correctly.
+class UnconventionalSpacing extends MyParent
+{
+    public function UnconventionalSpacing() {
+        self   ::   MyParent();
+        MyParent/*comment*/::/*comment*/MyParent();
+    }
+
+    public function __construct() {
+        parent
+        //comment
+        ::
+        // phpcs:ignore Stnd.Cat.SniffName -- for reasons.
+        MyParent();
+    }
+}
+
+// Bug: calling a method with the same name as the class being extended on another class, should not be flagged.
+class HierarchyKeywordBeforeColon extends MyParent
+{
+    public function HierarchyKeywordBeforeColon() {
+        parent::MyParent();
+        MyParent::MyParent();
+        SomeOtherClass::MyParent();
+    }
+
+    public function __construct() {
+        self::MyParent();
+        static::MyParent();
+        SomeOtherClass::MyParent();
+    }
+}

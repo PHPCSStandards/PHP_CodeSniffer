@@ -41,6 +41,9 @@ function nonAssignmentTernary() {
     }
 }
 
-// Intentional parse error. This must be the last test in the file.
-function new
-?>
+// Test for tokenizer issue #3789.
+$a = $b !== null
+    ? match ($c) {
+        default => 5,
+    }
+    : new Foo;

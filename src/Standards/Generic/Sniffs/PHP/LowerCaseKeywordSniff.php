@@ -4,7 +4,7 @@
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\PHP;
@@ -21,21 +21,18 @@ class LowerCaseKeywordSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
         $targets  = Tokens::$contextSensitiveKeywords;
         $targets += [
+            T_ANON_CLASS    => T_ANON_CLASS,
             T_CLOSURE       => T_CLOSURE,
-            T_EMPTY         => T_EMPTY,
             T_ENUM_CASE     => T_ENUM_CASE,
-            T_EVAL          => T_EVAL,
-            T_ISSET         => T_ISSET,
             T_MATCH_DEFAULT => T_MATCH_DEFAULT,
             T_PARENT        => T_PARENT,
             T_SELF          => T_SELF,
-            T_UNSET         => T_UNSET,
         ];
 
         return $targets;

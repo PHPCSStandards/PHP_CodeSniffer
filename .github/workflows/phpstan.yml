@@ -6,34 +6,18 @@ on:
   push:
     paths-ignore:
       - '**.md'
+      - '**.xml'
   pull_request:
-    paths-ignore:
-      - '**.md'
   # Allow manually triggering the workflow.
   workflow_dispatch:
 
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   phpstan:
-    name: "PHP: 7.4 | PHPStan"
-
-    runs-on: "ubuntu-latest"
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '7.4'
-          coverage: none
-          tools: phpstan
-
-      # Install dependencies and handle caching in one go.
-      # Dependencies need to be installed to make sure the PHPUnit classes are recognized.
-      # @link https://github.com/marketplace/actions/install-composer-dependencies
-      - name: Install Composer dependencies
-        uses: "ramsey/composer-install@v2"
-
-      - name: Run PHPStan
-        run: phpstan analyse --configuration=phpstan.neon
+    name: "PHPStan"
+    uses: PHPCSStandards/.github/.github/workflows/reusable-phpstan.yml@main

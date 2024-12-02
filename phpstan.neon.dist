@@ -1,0 +1,12 @@
+parameters:
+    phpVersion: 70100 # Should be 50400, but PHPStan only accepts 70100 or higher...
+    level: 0
+    paths:
+        - src
+    bootstrapFiles:
+        - tests/bootstrap.php
+
+    dynamicConstantNames:
+        - PHP_CODESNIFFER_IN_TESTS
+        - PHP_CODESNIFFER_CBF
+        - PHP_CODESNIFFER_VERBOSITY

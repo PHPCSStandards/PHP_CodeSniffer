@@ -4,7 +4,7 @@
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions;
@@ -113,7 +113,7 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
 
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
         if ($methodName === null) {
-            // Ignore closures.
+            // Live coding or parse error. Bow out.
             return;
         }
 
@@ -150,7 +150,7 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
             return;
         }
 
-        // Ignore first underscore in methods prefixed with "_".
+        // Ignore leading underscores in the method name.
         $methodName = ltrim($methodName, '_');
 
         $methodProps = $phpcsFile->getMethodProperties($stackPtr);
@@ -168,7 +168,6 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
             }
 
             $phpcsFile->recordMetric($stackPtr, 'CamelCase method name', 'no');
-            return;
         } else {
             $phpcsFile->recordMetric($stackPtr, 'CamelCase method name', 'yes');
         }
@@ -189,7 +188,7 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
     {
         $functionName = $phpcsFile->getDeclarationName($stackPtr);
         if ($functionName === null) {
-            // Ignore closures.
+            // Live coding or parse error. Bow out.
             return;
         }
 
@@ -206,7 +205,7 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
             $phpcsFile->addError($error, $stackPtr, 'FunctionDoubleUnderscore', $errorData);
         }
 
-        // Ignore first underscore in functions prefixed with "_".
+        // Ignore leading underscores in the method name.
         $functionName = ltrim($functionName, '_');
 
         if (Common::isCamelCaps($functionName, false, true, $this->strict) === false) {

@@ -1,0 +1,86 @@
+name: Quicktest
+
+on:
+  # Run on pushes to all branches except for `master`.
+  push:
+    branches-ignore:
+      - master
+    paths-ignore:
+      - '**.md'
+  # Allow manually triggering the workflow.
+  workflow_dispatch:
+
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  #### QUICK TEST ####
+  # This is a much quicker test run which only runs the unit tests against the low/medium/high
+  # supported PHP versions and skips the PHAR test and the tests for external JS/CSS tooling.
+  # These are basically the same builds as in the Test->Coverage workflow, but then without doing
+  # the code-coverage.
+  quicktest:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: ['ubuntu-latest', 'windows-latest']
+        php: ['7.2', 'latest']
+
+        include:
+          - php: '5.4'
+            os: 'ubuntu-latest'
+            custom_ini: false
+          # Installing on Windows with PHP 5.4 runs into all sorts of problems with Composer.
+          # See this issue for more context (yes, I've seen this problem before):
+          # @link https://github.com/PHPCSStandards/composer-installer/pull/213
+          - php: '5.5'
+            os: 'windows-latest'
+            custom_ini: false
+
+    name: "QuickTest: PHP ${{ matrix.php }} (${{ matrix.os == 'ubuntu-latest' && 'Linux' || 'Win'  }})"
+
+    steps:
+      - name: Prepare git to leave line endings alone
+        run: git config --global core.autocrlf input
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          ini-values: 'error_reporting=-1, display_errors=On'
+          coverage: none
+
+      # Install dependencies and handle caching in one go.
+      # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
+      - name: Install Composer dependencies
+        uses: "ramsey/composer-install@v3"
+        with:
+          # Bust the cache at least once a month - output format: YYYY-MM.
+          custom-cache-suffix: $(date -u "+%Y-%m")
+
+      - name: 'PHPCS: set the path to PHP'
+        run: php "bin/phpcs" --config-set php_path php
+
+      - name: 'PHPUnit: run the full test suite'
+        if: ${{ matrix.os != 'windows-latest' }}
+        run: php "vendor/bin/phpunit" tests/AllTests.php --no-coverage
+
+      - name: 'PHPUnit: run tests which may have different outcomes on Windows'
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: php "vendor/bin/phpunit" tests/AllTests.php --group Windows --no-coverage
+
+      - name: 'PHPUnit: run select tests in CBF mode'
+        run: php "vendor/bin/phpunit" tests/AllTests.php --group CBF --exclude-group nothing --no-coverage
+        env:
+          PHP_CODESNIFFER_CBF: '1'
+
+      # Note: The code style check is run as an integration test.
+      - name: 'PHPCS: check code style without cache, no parallel'
+        run: php "bin/phpcs" --no-cache --parallel=1

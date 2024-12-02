@@ -267,3 +267,104 @@ class ConstructorPropertyPromotionMultiLineDocblockAndAttributeIncorrectIndent
     ) {
     }
 }
+
+// PHP 8.1: new in initializers means that class instantiations with parameters can occur in a function declaration.
+function usingNewInInitializersCallParamsIndented(
+    int $paramA,
+    string $paramB,
+    object $paramC = new SomeClass(
+        new InjectedDependencyA(),
+        new InjectedDependencyB
+    )
+) {}
+
+function usingNewInInitializersCallParamsNotIndented(
+    int $paramA,
+    string $paramB,
+    object $paramC = new SomeClass(
+    new InjectedDependencyA,
+    new InjectedDependencyB()
+    )
+) {}
+
+function usingNewInInitializersCallParamsIncorrectlyIndentedShouldNotBeFlaggedNorFixed(
+    int $paramA,
+    string $paramB,
+    object $paramC = new SomeClass(
+new InjectedDependencyA(), new InjectedDependencyB()
+)
+) {}
+
+class UsingNewInInitializers {
+    public function doSomething(
+        object $paramA,
+        stdClass $paramB = new stdClass(),
+        Exception $paramC = new Exception(
+            new ExceptionMessage(),
+            new ExceptionCode(),
+        ),
+    ) {
+    }
+
+    public function callParamsIncorrectlyIndentedShouldNotBeFlaggedNorFixed(
+        Exception $param = new Exception(
+new ExceptionMessage(),
+    new ExceptionCode(),
+  ),
+    ) {
+    }
+}
+
+// Issue #608 - multi-attributes are not handled correctly.
+function ParamWithMultiAttributeOnSameLine(
+    #[AttributeA, AttributeB] string $param,
+) {
+}
+
+function ParamWithMultiAttributeOnSameLineWithParamsShouldNotBeSeenAsMultipleFnParams(
+    #[AttributeA(10, 'test'), AttributeB([1, 2, 3,])] string $param,
+) {
+}
+
+function ParamWithMultiAttributeOnSameLine(
+    #[AttributeA, AttributeB] string $paramA,
+    int $paramB
+) {
+}
+
+function ParamWithMultiAttributeOnSameLineWithParamsShouldNotBeSeenAsMultipleFnParams(
+    #[AttributeA(10, 'test'), AttributeB([1, 2, 3,])] string $param,
+    int $paramB
+) {
+}
+
+function ParamWithAttributeOnOwnLineShouldNotBeSeenAsMultipleFnParams(
+    #[Attribute]
+    string $param,
+) {
+}
+
+function ParamWithMultipleAttributesOnOwnLineShouldNotBeSeenAsMultipleFnParams(
+    #[AttributeA]
+    #[AttributeB]
+    string $param,
+) {
+}
+
+function ParamWithAttributeOnOwnLineWithParamsShouldNotBeSeenAsMultipleFnParamse(
+    #[Attribute(10, 20)]
+    string $param,
+) {
+}
+
+function ParamWithMultiAttributeOnOwnLineShouldNotBeSeenAsMultipleFnParams(
+    #[AttributeA, AttributeB]
+    string $param,
+) {
+}
+
+function ParamWithMultiAttributeOnOwnLineWithParamsShouldNotBeSeenAsMultipleFnParams(
+    #[AttributeA(10, 'test'), AttributeB([1, 2, 3,])]
+    string $param,
+) {
+}

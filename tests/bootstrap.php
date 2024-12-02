@@ -4,26 +4,41 @@
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2017 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 if (defined('PHP_CODESNIFFER_IN_TESTS') === false) {
     define('PHP_CODESNIFFER_IN_TESTS', true);
 }
 
+/*
+ * Determine whether the test suite should be run in CBF mode.
+ *
+ * Use `<php><env name="PHP_CODESNIFFER_CBF" value="1"/></php>` in a `phpunit.xml` file
+ * or set the ENV variable at an OS-level to enable CBF mode.
+ *
+ * To run the CBF specific tests, use the following command:
+ * vendor/bin/phpunit --group CBF --exclude-group nothing
+ *
+ * If the ENV variable has not been set, or is set to "false", the tests will run in CS mode.
+ */
+
 if (defined('PHP_CODESNIFFER_CBF') === false) {
-    define('PHP_CODESNIFFER_CBF', false);
+    $cbfMode = getenv('PHP_CODESNIFFER_CBF');
+    if ($cbfMode === '1') {
+        define('PHP_CODESNIFFER_CBF', true);
+        echo 'Note: Tests are running in "CBF" mode'.PHP_EOL.PHP_EOL;
+    } else {
+        define('PHP_CODESNIFFER_CBF', false);
+        echo 'Note: Tests are running in "CS" mode'.PHP_EOL.PHP_EOL;
+    }
 }
 
 if (defined('PHP_CODESNIFFER_VERBOSITY') === false) {
     define('PHP_CODESNIFFER_VERBOSITY', 0);
 }
 
-if (is_file(__DIR__.'/../autoload.php') === true) {
-    include_once __DIR__.'/../autoload.php';
-} else {
-    include_once 'PHP/CodeSniffer/autoload.php';
-}
+require_once __DIR__.'/../autoload.php';
 
 $tokens = new \PHP_CodeSniffer\Util\Tokens();
 
@@ -42,13 +57,6 @@ if (class_exists('PHPUnit_TextUI_TestRunner') === true && class_exists('PHPUnit\
 
 if (class_exists('PHPUnit_Framework_TestResult') === true && class_exists('PHPUnit\Framework\TestResult') === false) {
     class_alias('PHPUnit_Framework_TestResult', 'PHPUnit'.'\Framework\TestResult');
-}
-
-// Determine whether this is a PEAR install or not.
-$GLOBALS['PHP_CODESNIFFER_PEAR'] = false;
-
-if (is_file(__DIR__.'/../autoload.php') === false) {
-    $GLOBALS['PHP_CODESNIFFER_PEAR'] = true;
 }
 
 

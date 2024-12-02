@@ -4,14 +4,19 @@
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Formatting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class SpaceAfterNotUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the SpaceAfterNot sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff
+ */
+final class SpaceAfterNotUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -28,7 +33,7 @@ class SpaceAfterNotUnitTest extends AbstractSniffUnitTest
     public function getErrorList($testFile='')
     {
         switch ($testFile) {
-        case 'SpaceAfterNotUnitTest.inc':
+        case 'SpaceAfterNotUnitTest.1.inc':
             return [
                 3  => 2,
                 4  => 2,
