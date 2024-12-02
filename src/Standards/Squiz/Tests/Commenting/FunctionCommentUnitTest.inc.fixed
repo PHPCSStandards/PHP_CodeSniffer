@@ -1048,6 +1048,18 @@ public function ignored() {
 function throwCommentOneLine() {}
 
 /**
+ * Using generic as a type hint should satisfy a specified object parameter type.
+ * @see https://phpstan.org/blog/generics-in-php-using-phpdocs
+ *
+ * @param Collection<int, string> $values An object with int, string pairs.
+ *
+ * @return void
+ */
+public function genericType(Collection $values) {
+
+}// end genericType()
+
+/**
  * When two adjacent pipe symbols are used (by mistake), the sniff should not throw a PHP Fatal error
  *
  * @param stdClass|null $object While invalid, this should not throw a PHP Fatal error.
