@@ -175,7 +175,7 @@ final class TextTest extends TestCase
             ],
             'Unsupported: <code> element at the wrong level'   => [
                 'sniffs'         => 'StandardWithDocs.Unsupported.ElementAtWrongLevel',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputUnsupportedElementAtWrongLevel.txt',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputEmpty.txt',
             ],
             'Unsupported: one correct elm, one at wrong level' => [
                 'sniffs'         => 'StandardWithDocs.Unsupported.OneElmAtWrongLevel',
@@ -187,7 +187,7 @@ final class TextTest extends TestCase
             ],
             'Unsupported: unknown element'                     => [
                 'sniffs'         => 'StandardWithDocs.Unsupported.UnknownElement',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputUnsupportedUnknownElement.txt',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputEmpty.txt',
             ],
         ];
 
