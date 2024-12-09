@@ -49,7 +49,7 @@ jobs:
       # https://docs.github.com/en/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds
       - name: Generate artifact attestations
         if: ${{ github.ref_type == 'tag' }}
-        uses: actions/attest-build-provenance@v1
+        uses: actions/attest-build-provenance@v2
         with:
           subject-path: |
             ${{ github.workspace }}/phpcs.phar
