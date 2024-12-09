@@ -99,4 +99,10 @@ function nestingEleven()
     }
 }
 
-?>
+abstract class AbstractClass {
+    abstract public function sniffShouldIgnoreAbstractMethods();
+}
+
+interface MyInterface {
+    public function sniffShouldIgnoreInterfaceMethods();
+}
