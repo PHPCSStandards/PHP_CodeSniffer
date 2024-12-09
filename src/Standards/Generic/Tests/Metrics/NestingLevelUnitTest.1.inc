@@ -27,16 +27,16 @@ function nestingFive()
 function nestingSix()
 {
     if ($condition) {
-        echo 'hi';
-        switch ($condition)
-        {
+    } else {
+        switch ($condition) {
             case '1':
                 if ($condition === '1') {
-                    if ($cond) {
+                } elseif ($condition === '2') {
+                    do {
                         foreach ($conds as $cond) {
                             echo 'hi';
                         }
-                    }
+                    } while ($cond > 5);
                 }
             break;
         }
@@ -79,19 +79,19 @@ function nestingEleven()
             case '1':
                 if ($condition === '1') {
                     if ($cond) {
-                        switch ($cond) {
-                            case '1':
-                                if ($cond === '1') {
-                                    foreach ($conds as $cond) {
-                                        if ($cond === 'hi') {
-                                            if ($cond !== 'bye') {
-                                                echo 'hi';
-                                            }
+                        try {
+                            if ( $cond === '1' ) {
+                                for ( $i = 0; $i < 10; $i ++ ) {
+                                    while ($i < 5) {
+                                        if ( $cond === 'hi' ) {
+                                            match ( $cond ) {
+                                                'hi' => 'something',
+                                            };
                                         }
                                     }
                                 }
-                            break;
-                        }
+                            }
+                        } catch (Exception $e) {}
                     }
                 }
             break;
@@ -99,4 +99,10 @@ function nestingEleven()
     }
 }
 
-?>
+abstract class AbstractClass {
+    abstract public function sniffShouldIgnoreAbstractMethods();
+}
+
+interface MyInterface {
+    public function sniffShouldIgnoreInterfaceMethods();
+}
