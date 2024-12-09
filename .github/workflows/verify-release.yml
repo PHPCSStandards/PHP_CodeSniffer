@@ -27,6 +27,9 @@ jobs:
   verify-available-downloads:
     runs-on: ubuntu-latest
 
+    # Only run this workflow in the context of this repo.
+    if: github.repository_owner == 'PHPCSStandards'
+
     strategy:
       fail-fast: false
       matrix:
@@ -128,6 +131,9 @@ jobs:
   # #########################################
   verify-phive:
     runs-on: ubuntu-latest
+
+    # Only run this workflow in the context of this repo.
+    if: github.repository_owner == 'PHPCSStandards'
 
     strategy:
       fail-fast: false
