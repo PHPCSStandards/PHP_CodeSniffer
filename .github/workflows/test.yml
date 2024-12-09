@@ -22,7 +22,6 @@ jobs:
       group: ${{ github.workflow }}-${{ github.job }}-${{ github.ref }}
       cancel-in-progress: true
 
-    runs-on: ubuntu-latest
     name: "Build Phar on PHP: 8.0"
 
     permissions:
@@ -30,54 +29,13 @@ jobs:
       contents: read
       attestations: write
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.0'
-          coverage: none
-          ini-values: phar.readonly=Off, error_reporting=-1, display_errors=On
-
-      - name: Build the phar
-        run: php scripts/build-phar.php
-
-      # Provide provenance for generated binaries.
+    uses: ./.github/workflows/reusable-build-phar.yml
+    with:
+      uploadArtifacts: true
+      retentionDays: 28
       # Only attests the build artifacts which will be used in the published releases as per the guidelines in "what to attest".
       # https://docs.github.com/en/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds
-      - name: Generate artifact attestations
-        if: ${{ github.ref_type == 'tag' }}
-        uses: actions/attest-build-provenance@v1
-        with:
-          subject-path: |
-            ${{ github.workspace }}/phpcs.phar
-            ${{ github.workspace }}/phpcbf.phar
-
-      - name: Upload the PHPCS phar
-        uses: actions/upload-artifact@v4
-        with:
-          name: phpcs-phar
-          path: ./phpcs.phar
-          if-no-files-found: error
-          retention-days: 28
-
-      - name: Upload the PHPCBF phar
-        uses: actions/upload-artifact@v4
-        with:
-          name: phpcbf-phar
-          path: ./phpcbf.phar
-          if-no-files-found: error
-          retention-days: 28
-
-      # Both the below only check a file which is rarely changed and therefore unlikely to have issues.
-      # This test is about testing that the phars are functional, *not* about whether the code style complies.
-      - name: 'PHPCS: check code style using the Phar file to test the Phar is functional'
-        run: php phpcs.phar ./scripts
-
-      - name: 'PHPCBF: fix code style using the Phar file to test the Phar is functional'
-        run: php phpcbf.phar ./scripts
+      createAttestations: ${{ github.ref_type == 'tag' }}
 
   test:
     # Cancels all previous runs of this particular job for the same branch that have not yet completed.
