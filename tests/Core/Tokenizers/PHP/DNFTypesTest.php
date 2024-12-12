@@ -113,6 +113,15 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             'parens without owner in short ternary'                           => [
                 'testMarker' => '/* testParensNoOwnerInShortTernary */',
             ],
+            'parens without owner in ternary then (fn call in inline then)'   => [
+                'testMarker' => '/* testFnCallParensNoOwnerInTernaryA */',
+            ],
+            'parens without owner in ternary then (fn call in inline else)'   => [
+                'testMarker' => '/* testFnCallParensNoOwnerInTernaryB */',
+            ],
+            'parens without owner in short ternary (fn call)'                 => [
+                'testMarker' => '/* testPFnCallarensNoOwnerInShortTernary */',
+            ],
             'parens with owner: function; & in default value'                 => [
                 'testMarker' => '/* testParensOwnerFunctionAmpersandInDefaultValue */',
             ],
@@ -158,6 +167,69 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             'parens without owner, function call, named param + bitwise and'  => [
                 'testMarker' => '/* testParensNoOwnerFunctionCallWithDNFLookALikeNamedParamIntersect */',
             ],
+            'parens without owner, function call in named param'              => [
+                'testMarker' => '/* testParensNoOwnerFunctionCallInNamedParam */',
+            ],
+            'parens with owner: fn; in named param'                           => [
+                'testMarker' => '/* testParensOwnerArrowFunctionInNamedParam */',
+            ],
+            'parens without owner, function call in named param arrow return' => [
+                'testMarker' => '/* testParensNoOwnerFunctionCallInArrowFnReturn */',
+            ],
+            'parens with owner: closure; in named param'                      => [
+                'testMarker' => '/* testParensOwnerClosureInNamedParam */',
+            ],
+            'parens without owner, function call, named param closure return' => [
+                'testMarker' => '/* testParensNoOwnerFunctionCallInClosureReturn */',
+            ],
+            'parens with owner: switch condition'                             => [
+                'testMarker' => '/* testSwitchControlStructureCondition */',
+            ],
+            'parens without owner in switch-case condition'                   => [
+                'testMarker' => '/* testFunctionCallInSwitchCaseCondition */',
+            ],
+            'parens without owner in switch-case body'                        => [
+                'testMarker' => '/* testFunctionCallInSwitchCaseBody */',
+            ],
+            'parens without owner in switch-default body'                     => [
+                'testMarker' => '/* testFunctionCallInSwitchDefaultBody */',
+            ],
+            'parens with owner: if condition, alternative syntax'             => [
+                'testMarker' => '/* testIfAlternativeSyntaxCondition */',
+            ],
+            'parens without owner in if body, alternative syntax'             => [
+                'testMarker' => '/* testFunctionCallInIfBody */',
+            ],
+            'parens with owner: elseif condition, alternative syntax'         => [
+                'testMarker' => '/* testElseIfAlternativeSyntaxCondition */',
+            ],
+            'parens without owner in elseif body, alternative syntax'         => [
+                'testMarker' => '/* testFunctionCallInElseIfBody */',
+            ],
+            'parens without owner in else body, alternative syntax'           => [
+                'testMarker' => '/* testFunctionCallInElseBody */',
+            ],
+            'parens without owner in goto body'                               => [
+                'testMarker' => '/* testFunctionCallInGotoBody */',
+            ],
+            'parens with owner: while condition, alternative syntax'          => [
+                'testMarker' => '/* testWhileAlternativeSyntaxCondition */',
+            ],
+            'parens without owner in while body, alternative syntax'          => [
+                'testMarker' => '/* testFunctionCallInWhileBody */',
+            ],
+            'parens with owner: for condition, alternative syntax'            => [
+                'testMarker' => '/* testForAlternativeSyntaxCondition */',
+            ],
+            'parens without owner in for body, alternative syntax'            => [
+                'testMarker' => '/* testFunctionCallInForBody */',
+            ],
+            'parens with owner: foreach condition, alternative syntax'        => [
+                'testMarker' => '/* testForEachAlternativeSyntaxCondition */',
+            ],
+            'parens without owner in foreach body, alternative syntax'        => [
+                'testMarker' => '/* testFunctionCallInForeachBody */',
+            ],
 
             'parens without owner in OO const default value'                  => [
                 'testMarker' => '/* testParensNoOwnerOOConstDefaultValue */',
@@ -192,33 +264,6 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             ],
             'parens without owner in arrow function return expression'        => [
                 'testMarker' => '/* testParensNoOwnerInArrowReturnExpression */',
-            ],
-            'parens with owner: switch condition'                             => [
-                'testMarker' => '/* testSwitchControlStructureCondition */',
-            ],
-            'parens without owner in switch-case condition'                   => [
-                'testMarker' => '/* testFunctionCallInSwitchCaseCondition */',
-            ],
-            'parens without owner in switch-case body'                        => [
-                'testMarker' => '/* testFunctionCallInSwitchCaseBody */',
-            ],
-            'parens without owner in switch-default body'                     => [
-                'testMarker' => '/* testFunctionCallInSwitchDefaultBody */',
-            ],
-            'parens with owner: if condition, alternative syntax'             => [
-                'testMarker' => '/* testIfAlternativeSyntaxCondition */',
-            ],
-            'parens without owner in if body, alternative syntax'             => [
-                'testMarker' => '/* testFunctionCallInIfBody */',
-            ],
-            'parens with owner: elseif condition, alternative syntax'         => [
-                'testMarker' => '/* testElseIfAlternativeSyntaxCondition */',
-            ],
-            'parens without owner in elseif body, alternative syntax'         => [
-                'testMarker' => '/* testFunctionCallInElseIfBody */',
-            ],
-            'parens without owner in goto body'                               => [
-                'testMarker' => '/* testFunctionCallInGotoBody */',
             ],
         ];
 
@@ -340,6 +385,13 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
     public static function dataDNFTypeParentheses()
     {
         return [
+            'arrow function return type: in named parameter'              => [
+                'testMarker'  => '/* testDNFTypeArrowFnReturnInNamedParam */',
+            ],
+            'closure return type: in named parameter'                     => [
+                'testMarker'  => '/* testDNFTypeClosureReturnInNamedParam */',
+            ],
+
             'OO const type: unqualified classes'                          => [
                 'testMarker'  => '/* testDNFTypeOOConstUnqualifiedClasses */',
             ],
