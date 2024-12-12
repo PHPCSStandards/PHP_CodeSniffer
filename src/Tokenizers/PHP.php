@@ -516,10 +516,6 @@ class PHP extends Tokenizer
     {
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             echo "\t*** START PHP TOKENIZING ***".PHP_EOL;
-            $isWin = false;
-            if (stripos(PHP_OS, 'WIN') === 0) {
-                $isWin = true;
-            }
         }
 
         $tokens      = @token_get_all($string);
@@ -584,11 +580,7 @@ class PHP extends Tokenizer
                 ) {
                     $token[1] .= "\n";
                     if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                        if ($isWin === true) {
-                            echo '\n';
-                        } else {
-                            echo "\033[30;1m\\n\033[0m";
-                        }
+                        echo "\033[30;1m\\n\033[0m";
                     }
 
                     if ($tokens[($stackPtr + 1)][1] === "\n") {
