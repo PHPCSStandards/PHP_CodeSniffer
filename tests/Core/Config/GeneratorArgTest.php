@@ -2,7 +2,8 @@
 /**
  * Tests for the \PHP_CodeSniffer\Config --generator argument.
  *
- * @license https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2024 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Tests\Core\Config;
@@ -20,7 +21,7 @@ final class GeneratorArgTest extends TestCase
 
 
     /**
-     * Ensure that the generator property is set when the parameter is passed.
+     * Ensure that the generator property is set when the parameter is passed a valid value.
      *
      * @param string $generatorName Generator name.
      *
@@ -62,9 +63,9 @@ final class GeneratorArgTest extends TestCase
     {
         $config = new ConfigDouble(
             [
-                "--generator=Text",
-                "--generator=HTML",
-                "--generator=InvalidGenerator",
+                '--generator=Text',
+                '--generator=HTML',
+                '--generator=InvalidGenerator',
             ]
         );
 
