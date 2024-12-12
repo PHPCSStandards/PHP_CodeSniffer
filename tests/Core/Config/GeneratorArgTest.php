@@ -25,8 +25,9 @@ final class GeneratorArgTest extends TestCase
      *
      * @param string $generatorName Generator name.
      *
-     * @return       void
      * @dataProvider dataGeneratorNames
+     *
+     * @return void
      */
     public function testGenerators($generatorName)
     {
@@ -40,8 +41,9 @@ final class GeneratorArgTest extends TestCase
     /**
      * Data provider for testGenerators().
      *
+     * @see self::testGenerators()
+     *
      * @return array<int, array<string>>
-     * @see    self::testGenerators()
      */
     public static function dataGeneratorNames()
     {
