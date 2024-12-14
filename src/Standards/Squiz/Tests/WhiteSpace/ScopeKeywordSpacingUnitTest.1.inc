@@ -147,3 +147,7 @@ readonly    class ReadonlyClassTest {}
 // PHP 8.3 readonly anonymous classes.
 $anon = new readonly class {};
 $anon = new readonly    class {};
+
+class FinalTest {
+    final      public static function create(ContainerInterface $container) {}
+}
