@@ -274,7 +274,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
                 $this->assertSame(
                     $className,
                     $details['class'],
-                    sprintf('Unexepcted value for "class" key for sniff class %s for token %s', $className, Tokens::tokenName($token))
+                    sprintf('Unexpected value for "class" key for sniff class %s for token %s', $className, Tokens::tokenName($token))
                 );
 
                 $this->assertArrayHasKey(
@@ -283,12 +283,17 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
                     sprintf('"source" key missing for sniff class %s for token %s', $className, Tokens::tokenName($token))
                 );
 
+                $this->assertTrue(
+                    is_string($details['source']),
+                    sprintf('Value for "source" key is not a string for token %s', Tokens::tokenName($token))
+                );
+
                 $expected = '.'.substr($className, (strrpos($className, '\\') + 1), -5);
 
                 $this->assertStringEndsWith(
                     $expected,
                     $details['source'],
-                    sprintf('Unexepcted value for "source" key for sniff class %s for token %s', $className, Tokens::tokenName($token))
+                    sprintf('Unexpected value for "source" key for sniff class %s for token %s', $className, Tokens::tokenName($token))
                 );
             }//end foreach
         }//end foreach
@@ -324,7 +329,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
                 $this->assertSame(
                     $expected,
                     $details['tokenizers'],
-                    sprintf('Unexepcted value for "tokenizers" key for sniff class %s for token %s', $className, Tokens::tokenName($token))
+                    sprintf('Unexpected value for "tokenizers" key for sniff class %s for token %s', $className, Tokens::tokenName($token))
                 );
             }
         }//end foreach
