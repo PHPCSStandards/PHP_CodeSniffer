@@ -91,7 +91,7 @@ if ($error === ERROR_ONE): ?>
 if ($value):
     if ($anotherValue):
         foreach ($array as $element):
-            echo $element;
+            echo !is_null($element) ? $element : 'default';
         endforeach;
     endif;
 else:
