@@ -119,8 +119,8 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
                     'scope_opener' => T_OPEN_CURLY_BRACKET,
                     'scope_closer' => T_CLOSE_CURLY_BRACKET,
                 ],
-                'testOpenerMarker' => '/* testSwitchAfterConditionMarker */',
-                'testCloserMarker' => '/* testSwitchAfterConditionMarker */',
+                'testOpenerMarker' => '/* testSwitchClosureWithinConditionScopeOpener */',
+                'testCloserMarker' => '/* testSwitchClosureWithinConditionScopeOpener */',
             ],
         ];
 

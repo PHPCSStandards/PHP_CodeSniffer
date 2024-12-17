@@ -27,7 +27,7 @@ endswitch;
 /* testSwitchClosureWithinCondition */
 switch((function () {
     return 'bar';
-})()) /* testSwitchAfterConditionMarker */ {
+})()) /* testSwitchClosureWithinConditionScopeOpener */ {
     case 1:
         return 'test';
 }
