@@ -13,7 +13,7 @@ switch ($value) {
 // Test for https://github.com/squizlabs/PHP_CodeSniffer/issues/497
 /* testSwitchAlternativeSyntax */
 switch ($value):
-    /* testEnsureTestWillNotPickUpWrongColon */
+    /* testSwitchAlternativeSyntaxEnsureTestWillNotPickUpWrongColon */
     case 1:
         echo 'one';
         break;

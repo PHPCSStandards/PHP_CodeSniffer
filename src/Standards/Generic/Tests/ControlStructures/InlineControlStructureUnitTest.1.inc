@@ -80,10 +80,10 @@ if ($a)
 
 <?php
 
-if ($error === ERROR_INVALID_GENDER): ?>
-    Invalid gender!
-<?php elseif ($error === ERROR_EMAIL_IN_USE): ?>
-    Invalid email!
+if ($error === ERROR_ONE): ?>
+    Error one!
+<?php elseif ($error === ERROR_TWO): ?>
+    Error two!
 <?php endif;
 
 
