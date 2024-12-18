@@ -198,6 +198,23 @@ class Config
      */
     private static $executablePaths = [];
 
+    /**
+     * A list of valid generators.
+     *
+     * - Keys: lowercase version of the generator name.
+     * - Values: name of the generator PHP class.
+     *
+     * Note: once support for PHP < 5.6 is dropped, this property should be refactored into a class
+     * constant.
+     *
+     * @var array<string, string>
+     */
+    private static $validGenerators = [
+        'text'     => 'Text',
+        'html'     => 'HTML',
+        'markdown' => 'Markdown',
+    ];
+
 
     /**
      * Get the value of an inaccessible property.
@@ -1233,7 +1250,21 @@ class Config
                     break;
                 }
 
-                $this->generator = substr($arg, 10);
+                $generatorName          = substr($arg, 10);
+                $lowerCaseGeneratorName = strtolower($generatorName);
+
+                if (isset(self::$validGenerators[$lowerCaseGeneratorName]) === false) {
+                    $validOptions = implode(', ', array_values(self::$validGenerators));
+                    $error        = sprintf(
+                        'ERROR: "%s" is not a valid generator. Valid options are: %s.'.PHP_EOL.PHP_EOL,
+                        $generatorName,
+                        $validOptions
+                    );
+                    $error       .= $this->printShortUsage(true);
+                    throw new DeepExitException($error, 3);
+                }
+
+                $this->generator = self::$validGenerators[$lowerCaseGeneratorName];
                 self::$overriddenDefaults['generator'] = true;
             } else if (substr($arg, 0, 9) === 'encoding=') {
                 if (isset(self::$overriddenDefaults['encoding']) === true) {
