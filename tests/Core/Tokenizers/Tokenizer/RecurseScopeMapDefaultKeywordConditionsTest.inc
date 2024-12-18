@@ -201,3 +201,26 @@ class Foo {
     /* testMethodDeclaration */
     public function default() {}
 }
+
+function switchAndDefaultSharingScopeCloser($i) {
+    switch ($i):
+        /* testSwitchAndDefaultSharingScopeCloser */
+        default:
+            echo 'one';
+    endswitch;
+}
+
+function switchDefaultNestedIfWithAndWithoutBraces($i, $foo, $baz) {
+    switch ($i) {
+        /* testSwitchDefaultNestedIfWithAndWithoutBraces */
+        default:
+            if ($foo) {
+                return true;
+            } elseif ($baz) {
+                return true;
+            } else {
+                echo 'else';
+            }
+            break;
+    }
+}
