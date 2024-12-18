@@ -23,17 +23,18 @@ final class GeneratorArgTest extends TestCase
     /**
      * Ensure that the generator property is set when the parameter is passed a valid value.
      *
-     * @param string $generatorName Generator name.
+     * @param string $argumentValue         Generator name passed in the command line.
+     * @param string $expectedPropertyValue Expected value of the generator property.
      *
      * @dataProvider dataValidGeneratorNames
      *
      * @return void
      */
-    public function testValidGenerators($generatorName)
+    public function testValidGenerators($argumentValue, $expectedPropertyValue)
     {
-        $config = new ConfigDouble(["--generator=$generatorName"]);
+        $config = new ConfigDouble(["--generator=$argumentValue"]);
 
-        $this->assertSame($generatorName, $config->generator);
+        $this->assertSame($expectedPropertyValue, $config->generator);
 
     }//end testValidGenerators()
 
@@ -48,9 +49,30 @@ final class GeneratorArgTest extends TestCase
     public static function dataValidGeneratorNames()
     {
         return [
-            ['Text'],
-            ['HTML'],
-            ['Markdown'],
+            [
+                'Text',
+                'Text',
+            ],
+            [
+                'HTML',
+                'HTML',
+            ],
+            [
+                'Markdown',
+                'Markdown',
+            ],
+            [
+                'TEXT',
+                'Text',
+            ],
+            [
+                'tEXt',
+                'Text',
+            ],
+            [
+                'html',
+                'HTML',
+            ],
         ];
 
     }//end dataValidGeneratorNames()
@@ -88,7 +110,7 @@ final class GeneratorArgTest extends TestCase
     public function testInvalidGenerator($generatorName)
     {
         $exception = 'PHP_CodeSniffer\Exceptions\DeepExitException';
-        $message   = 'ERROR: "'.$generatorName.'" is not a valid generator. Valid options are: Text, HTML, and Markdown.';
+        $message   = 'ERROR: "'.$generatorName.'" is not a valid generator. Valid options are: Text, HTML, Markdown.';
 
         if (method_exists($this, 'expectException') === true) {
             // PHPUnit 5+.
@@ -116,7 +138,6 @@ final class GeneratorArgTest extends TestCase
         return [
             ['InvalidGenerator'],
             ['Text,HTML'],
-            ['TEXT'],
             [''],
         ];
 
