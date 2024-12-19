@@ -13,6 +13,12 @@ $a = $var ? $something : CONST_C | ( CONST_A & CONST_B );
 /* testParensNoOwnerInShortTernary */
 $a = $var ?: ( CONST_A & CONST_B );
 
+/* testFnCallParensNoOwnerInTernaryA */
+$var1 ? \X\call8() : /* testFnCallParensNoOwnerInTernaryB */ \Y\call9();
+
+/* testPFnCallarensNoOwnerInShortTernary */
+$var2 ?: \Z\call10();
+
 /* testParensOwnerFunctionAmpersandInDefaultValue */
 function defaultValueLooksLikeDNF( mixed $param = (CONST_A&CONST_B) ) {}
 
@@ -53,6 +59,20 @@ callMe(label: CONST_A | CONST_B);
 /* testParensNoOwnerFunctionCallWithDNFLookALikeNamedParamIntersect */
 callMe(label: CONST_A & CONST_B);
 
+\Z1\call11(
+    /* testParensNoOwnerFunctionCallInNamedParam */
+    param1: \Z2\call12(),
+    /* testParensOwnerArrowFunctionInNamedParam */
+    param2: fn (): /* testDNFTypeArrowFnReturnInNamedParam */ int|(\Countable&\Iterable)
+        /* testParensNoOwnerFunctionCallInArrowFnReturn */
+        => \Z3\call13(),
+    /* testParensOwnerClosureInNamedParam */
+    param3: function (): /* testDNFTypeClosureReturnInNamedParam */ int|(\DateTime&\ArrayObject) {
+        /* testParensNoOwnerFunctionCallInClosureReturn */
+        return \Z4\call14();
+    },
+);
+
 /* testSwitchControlStructureCondition */
 switch (CONST_A | CONST_B) {
     /* testFunctionCallInSwitchCaseCondition */
@@ -70,17 +90,37 @@ switch (CONST_A | CONST_B) {
 /* testIfAlternativeSyntaxCondition */
 if (true):
     /* testFunctionCallInIfBody */
-     \B\call();
+    \B\call();
 /* testElseIfAlternativeSyntaxCondition */
 elseif (10):
     /* testFunctionCallInElseIfBody */
-     C\call();
+    C\call();
+else:
+    /* testFunctionCallInElseBody */
+    \C\call3();
 endif;
 
 gotolabel:
     /* testFunctionCallInGotoBody */
     \doSomething();
 
+/* testWhileAlternativeSyntaxCondition */
+while ($c3):
+    /* testFunctionCallInWhileBody */
+    \D\call4();
+endwhile;
+
+/* testForAlternativeSyntaxCondition */
+for ($i = 0; $i < 10; $i++):
+    /* testFunctionCallInForBody */
+    \F\call5();
+endfor;
+
+/* testForEachAlternativeSyntaxCondition */
+foreach ($array as $key => $value):
+    /* testFunctionCallInForeachBody */
+    \G\call6();
+endforeach;
 
 /*
  * DNF parentheses.
