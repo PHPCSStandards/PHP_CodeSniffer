@@ -23,7 +23,7 @@ final class GeneratorArgTest extends TestCase
     /**
      * Ensure that the generator property is set when the parameter is passed a valid value.
      *
-     * @param string $argumentValue         Generator name passed in the command line.
+     * @param string $argumentValue         Generator name passed on the command line.
      * @param string $expectedPropertyValue Expected value of the generator property.
      *
      * @dataProvider dataValidGeneratorNames
@@ -49,29 +49,29 @@ final class GeneratorArgTest extends TestCase
     public static function dataValidGeneratorNames()
     {
         return [
-            [
-                'Text',
-                'Text',
+            'Text generator passed'            => [
+                'argumentValue'         => 'Text',
+                'expectedPropertyValue' => 'Text',
             ],
-            [
-                'HTML',
-                'HTML',
+            'HTML generator passed'            => [
+                'argumentValue'         => 'HTML',
+                'expectedPropertyValue' => 'HTML',
             ],
-            [
-                'Markdown',
-                'Markdown',
+            'Markdown generator passed'        => [
+                'argumentValue'         => 'Markdown',
+                'expectedPropertyValue' => 'Markdown',
             ],
-            [
-                'TEXT',
-                'Text',
+            'Uppercase Text generator passed'  => [
+                'argumentValue'         => 'TEXT',
+                'expectedPropertyValue' => 'Text',
             ],
-            [
-                'tEXt',
-                'Text',
+            'Mixed case Text generator passed' => [
+                'argumentValue'         => 'tEXt',
+                'expectedPropertyValue' => 'Text',
             ],
-            [
-                'html',
-                'HTML',
+            'Lowercase HTML generator passed'  => [
+                'argumentValue'         => 'html',
+                'expectedPropertyValue' => 'HTML',
             ],
         ];
 
@@ -110,7 +110,7 @@ final class GeneratorArgTest extends TestCase
     public function testInvalidGenerator($generatorName)
     {
         $exception = 'PHP_CodeSniffer\Exceptions\DeepExitException';
-        $message   = 'ERROR: "'.$generatorName.'" is not a valid generator. Valid options are: Text, HTML, Markdown.';
+        $message   = 'ERROR: "'.$generatorName.'" is not a valid generator. The following generators are supported: Text, HTML and Markdown.';
 
         if (method_exists($this, 'expectException') === true) {
             // PHPUnit 5+.
