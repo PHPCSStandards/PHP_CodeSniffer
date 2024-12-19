@@ -5,6 +5,7 @@
 
     <rule ref="TestStandard">
         <exclude name="TestStandard.DeprecatedInvalid"/>
+        <exclude name="TestStandard.InvalidSniffs"/>
     </rule>
 
 </ruleset>

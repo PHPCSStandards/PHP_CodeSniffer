@@ -3,6 +3,8 @@
 
     <config name="installed_paths" value="./tests/Core/Ruleset/Fixtures/TestStandard/"/>
 
-    <rule ref="TestStandard"/>
+    <rule ref="TestStandard">
+        <exclude name="TestStandard.InvalidSniffs"/>
+    </rule>
 
 </ruleset>
