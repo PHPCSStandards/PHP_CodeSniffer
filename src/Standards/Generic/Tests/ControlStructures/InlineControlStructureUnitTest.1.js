@@ -20,7 +20,7 @@ do {
 
 do i++; while (i < 5);
 
-SomeClass.prototype.switch = function() {
+SomeClass.prototype.for = function() {
     // do something
 };
 
