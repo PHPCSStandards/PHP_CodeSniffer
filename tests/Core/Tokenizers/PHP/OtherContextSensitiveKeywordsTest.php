@@ -652,23 +652,23 @@ final class OtherContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
             ],
 
             'false: DNF type in property declaration'                         => [
-                'testMarker'        => '/* testFalseIsKeywordAsConstDNFType */',
+                'testMarker'        => '/* testFalseIsKeywordAsPropertyDNFType */',
                 'expectedTokenType' => 'T_FALSE',
             ],
             'true: DNF type in property declaration'                          => [
-                'testMarker'        => '/* testTrueIsKeywordAsConstDNFType */',
+                'testMarker'        => '/* testTrueIsKeywordAsPropertyDNFType */',
                 'expectedTokenType' => 'T_TRUE',
             ],
             'null: DNF type in property declaration'                          => [
-                'testMarker'        => '/* testNullIsKeywordAsConstDNFType */',
+                'testMarker'        => '/* testNullIsKeywordAsPropertyDNFType */',
                 'expectedTokenType' => 'T_NULL',
             ],
             'self: DNF type in property declaration'                          => [
-                'testMarker'        => '/* testSelfIsKeywordAsConstDNFType */',
+                'testMarker'        => '/* testSelfIsKeywordAsPropertyDNFType */',
                 'expectedTokenType' => 'T_SELF',
             ],
             'parent: DNF type in property declaration'                        => [
-                'testMarker'        => '/* testParentIsKeywordAsConstDNFType */',
+                'testMarker'        => '/* testParentIsKeywordAsPropertyDNFType */',
                 'expectedTokenType' => 'T_PARENT',
             ],
 

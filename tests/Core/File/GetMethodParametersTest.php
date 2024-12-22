@@ -1268,8 +1268,8 @@ final class GetMethodParametersTest extends AbstractMethodUnitTest
         $expected[1] = [
             'token'               => 29,
             'name'                => '$b',
-            'content'             => "\$b /* test */ = /* test */ 'default' /* test*/",
-            'default'             => "'default' /* test*/",
+            'content'             => "\$b /* comment */ = /* comment */ 'default' /* comment*/",
+            'default'             => "'default' /* comment*/",
             'default_token'       => 37,
             'default_equal_token' => 33,
             'has_attributes'      => false,
