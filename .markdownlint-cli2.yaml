@@ -19,6 +19,7 @@ showFound: true
 ignores:
   - "node_modules/"
   - "vendor/"
+  - "tests/Core/Generators/Expectations/"
 
 # Disable inline config comments.
 noInlineConfig: true

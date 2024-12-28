@@ -339,6 +339,43 @@ Example:
 for
 ```
 
+#### Tests covering code which has OS-specific behaviour
+
+Most code in PHP_CodeSniffer is operating system agnostic.
+However, there are a few places which include OS-specific conditions, most notably for Windows.
+
+Tests which cover code which have Windows specific conditions should be marked with a `@group Windows` annotation to allow for running those tests separately/selectively in CI.
+
+#### Tests covering code which has CS/CBF specific behaviour
+
+There are a few places in PHPCS where code uses a global `PHP_CODESNIFFER_CBF` constant to determine what to do.
+This makes testing this code more complicated.
+
+Tests which will only work correctly when `PHP_CODESNIFFER_CBF === false` should get the following test skip condition at the top of the test method:
+```php
+if (PHP_CODESNIFFER_CBF === true) {
+    $this->markTestSkipped('This test needs CS mode to run');
+}
+```
+
+Tests which are specifically intended to cover code run when `PHP_CODESNIFFER_CBF === true` should:
+1. Be annotated with `@group CBF`.
+2. Have a test skip condition at the top of the test method like so:
+    ```php
+    if (PHP_CODESNIFFER_CBF === false) {
+        $this->markTestSkipped('This test needs CBF mode to run');
+    }
+    ```
+
+By default, the tests are run with the `PHP_CODESNIFFER_CBF` constant set to `false` and tests in the `@group CBF` will not be run.
+
+To run the tests specific to the use of `PHP_CODESNIFFER_CBF === true`:
+1. Set `<php><env name="PHP_CODESNIFFER_CBF" value="1"/></php>` in a `phpunit.xml` file or set the ENV variable on an OS-level.
+2. Run the tests like so:
+    ```bash
+    vendor/bin/phpunit --group CBF --exclude-group nothing
+    ```
+
 
 ### Submitting Your Pull Request
 

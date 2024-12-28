@@ -185,19 +185,21 @@ final class ExplainTest extends TestCase
         $ruleset  = new Ruleset($config);
 
         $expected  = PHP_EOL;
-        $expected .= 'The SniffDeprecationTest standard contains 9 sniffs'.PHP_EOL.PHP_EOL;
+        $expected .= 'The ShowSniffDeprecationsTest standard contains 11 sniffs'.PHP_EOL.PHP_EOL;
 
-        $expected .= 'Fixtures (9 sniffs)'.PHP_EOL;
-        $expected .= '-------------------'.PHP_EOL;
-        $expected .= '  Fixtures.Deprecated.WithLongReplacement *'.PHP_EOL;
-        $expected .= '  Fixtures.Deprecated.WithoutReplacement *'.PHP_EOL;
-        $expected .= '  Fixtures.Deprecated.WithReplacement *'.PHP_EOL;
-        $expected .= '  Fixtures.Deprecated.WithReplacementContainingLinuxNewlines *'.PHP_EOL;
-        $expected .= '  Fixtures.Deprecated.WithReplacementContainingNewlines *'.PHP_EOL;
-        $expected .= '  Fixtures.SetProperty.AllowedAsDeclared'.PHP_EOL;
-        $expected .= '  Fixtures.SetProperty.AllowedViaMagicMethod'.PHP_EOL;
-        $expected .= '  Fixtures.SetProperty.AllowedViaStdClass'.PHP_EOL;
-        $expected .= '  Fixtures.SetProperty.NotAllowedViaAttribute'.PHP_EOL.PHP_EOL;
+        $expected .= 'TestStandard (11 sniffs)'.PHP_EOL;
+        $expected .= '------------------------'.PHP_EOL;
+        $expected .= '  TestStandard.Deprecated.WithLongReplacement *'.PHP_EOL;
+        $expected .= '  TestStandard.Deprecated.WithoutReplacement *'.PHP_EOL;
+        $expected .= '  TestStandard.Deprecated.WithReplacement *'.PHP_EOL;
+        $expected .= '  TestStandard.Deprecated.WithReplacementContainingLinuxNewlines *'.PHP_EOL;
+        $expected .= '  TestStandard.Deprecated.WithReplacementContainingNewlines *'.PHP_EOL;
+        $expected .= '  TestStandard.SetProperty.AllowedAsDeclared'.PHP_EOL;
+        $expected .= '  TestStandard.SetProperty.AllowedViaMagicMethod'.PHP_EOL;
+        $expected .= '  TestStandard.SetProperty.AllowedViaStdClass'.PHP_EOL;
+        $expected .= '  TestStandard.SetProperty.NotAllowedViaAttribute'.PHP_EOL;
+        $expected .= '  TestStandard.SetProperty.PropertyTypeHandling'.PHP_EOL;
+        $expected .= '  TestStandard.ValidSniffs.RegisterEmptyArray'.PHP_EOL.PHP_EOL;
 
         $expected .= '* Sniffs marked with an asterix are deprecated.'.PHP_EOL;
 
@@ -217,6 +219,10 @@ final class ExplainTest extends TestCase
      */
     public function testExplainWillExplainEachStandardSeparately()
     {
+        if (PHP_CODESNIFFER_CBF === true) {
+            $this->markTestSkipped('This test needs CS mode to run');
+        }
+
         $standard        = __DIR__.'/ExplainSingleSniffTest.xml';
         $_SERVER['argv'] = [
             'phpcs',

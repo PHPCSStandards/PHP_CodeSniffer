@@ -23,6 +23,7 @@ jobs:
           labels: |
             Status: awaiting feedback
             Status: close candidate
+            Status: help wanted
             Status: needs investigation
             Status: triage
 
@@ -40,8 +41,10 @@ jobs:
             Status: awaiting feedback
             Status: close candidate
             Status: has merge conflict
+            Status: help wanted
             Status: needs investigation
             Status: triage
+            Status: waiting for opinions
 
   on-pr-close:
     runs-on: ubuntu-latest
@@ -56,5 +59,6 @@ jobs:
           labels: |
             Status: awaiting feedback
             Status: close candidate
+            Status: help wanted
             Status: needs investigation
             Status: triage

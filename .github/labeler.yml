@@ -21,6 +21,10 @@ labels:
     draft: false
     files:
       - "src/Fixer.php$"
+  - label: "Core Component: Generators"
+    draft: false
+    files:
+      - "src/Generators/.*"
   - label: "Core Component: Reports"
     draft: false
     files:
@@ -90,7 +94,7 @@ labels:
   - label: "Type: documentation"
     draft: false
     files:
-      - '/Docs/[A-Za-z0-9-]*/.*Standard.xml$'
+      - 'src/Standards/.*/Docs/[A-Za-z0-9-]*/.*Standard.xml$'
   - label: "Type: documentation"
     draft: false
     files:

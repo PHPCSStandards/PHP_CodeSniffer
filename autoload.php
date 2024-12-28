@@ -204,7 +204,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
             }
 
             // Since PHP 7.4 get_declared_classes() does not guarantee any order, making
-            // it impossible to use order to determine which is the parent an which is the child.
+            // it impossible to use order to determine which is the parent and which is the child.
             // Let's reduce the list of candidates by removing all the classes known to be "parents".
             // That way, at the end, only the "main" class just included will remain.
             $newClasses = array_reduce(

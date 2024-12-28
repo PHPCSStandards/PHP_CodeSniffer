@@ -5,7 +5,9 @@
  * Output is designed to be displayed in a terminal and is wrapped to 100 characters.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
+ * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2024 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
@@ -52,13 +54,15 @@ class Text extends Generator
      */
     protected function printTitle(DOMNode $doc)
     {
-        $title    = $this->getTitle($doc);
-        $standard = $this->ruleset->name;
+        $title        = $this->getTitle($doc);
+        $standard     = $this->ruleset->name;
+        $displayTitle = "$standard CODING STANDARD: $title";
+        $titleLength  = strlen($displayTitle);
 
         echo PHP_EOL;
-        echo str_repeat('-', (strlen("$standard CODING STANDARD: $title") + 4));
-        echo strtoupper(PHP_EOL."| $standard CODING STANDARD: $title |".PHP_EOL);
-        echo str_repeat('-', (strlen("$standard CODING STANDARD: $title") + 4));
+        echo str_repeat('-', ($titleLength + 4));
+        echo strtoupper(PHP_EOL."| $displayTitle |".PHP_EOL);
+        echo str_repeat('-', ($titleLength + 4));
         echo PHP_EOL.PHP_EOL;
 
     }//end printTitle()
@@ -129,7 +133,7 @@ class Text extends Generator
     {
         $codeBlocks = $node->getElementsByTagName('code');
         $first      = trim($codeBlocks->item(0)->nodeValue);
-        $firstTitle = $codeBlocks->item(0)->getAttribute('title');
+        $firstTitle = trim($codeBlocks->item(0)->getAttribute('title'));
 
         $firstTitleLines = [];
         $tempTitle       = '';
@@ -164,7 +168,7 @@ class Text extends Generator
         $firstLines = explode("\n", $first);
 
         $second      = trim($codeBlocks->item(1)->nodeValue);
-        $secondTitle = $codeBlocks->item(1)->getAttribute('title');
+        $secondTitle = trim($codeBlocks->item(1)->getAttribute('title'));
 
         $secondTitleLines = [];
         $tempTitle        = '';

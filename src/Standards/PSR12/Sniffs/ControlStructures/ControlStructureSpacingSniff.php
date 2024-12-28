@@ -101,7 +101,19 @@ class ControlStructureSpacingSniff implements Sniff
             $error = 'The first expression of a multi-line control structure must be on the line after the opening parenthesis';
             $fix   = $phpcsFile->addFixableError($error, $next, 'FirstExpressionLine');
             if ($fix === true) {
+                $phpcsFile->fixer->beginChangeset();
+                if ($tokens[$next]['line'] > ($tokens[$parenOpener]['line'] + 1)) {
+                    for ($i = ($parenOpener + 1); $i < $next; $i++) {
+                        if ($tokens[$next]['line'] === $tokens[$i]['line']) {
+                            break;
+                        }
+
+                        $phpcsFile->fixer->replaceToken($i, '');
+                    }
+                }
+
                 $phpcsFile->fixer->addNewline($parenOpener);
+                $phpcsFile->fixer->endChangeset();
             }
         }
 
