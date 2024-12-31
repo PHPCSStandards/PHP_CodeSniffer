@@ -138,13 +138,52 @@ class ScopeKeywordSpacingSniff implements Sniff
         }
 
         if ($spacing !== 1) {
+            // Set a context error code by checking if this is a class property,
+            // method, closure or class declaration.
+            $ignoreTokens  = (Tokens::$emptyTokens + Tokens::$methodPrefixes + [
+                T_READONLY               => T_READONLY,
+                // Ignore all the tokens in type hints.
+                T_STRING                 => T_STRING,
+                T_NULLABLE               => T_NULLABLE,
+                T_BITWISE_AND            => T_BITWISE_AND,
+                T_TYPE_INTERSECTION      => T_TYPE_INTERSECTION,
+                T_TYPE_UNION             => T_TYPE_UNION,
+                T_TYPE_OPEN_PARENTHESIS  => T_TYPE_OPEN_PARENTHESIS,
+                T_TYPE_CLOSE_PARENTHESIS => T_TYPE_CLOSE_PARENTHESIS,
+            ]);
+            $targetContext = $phpcsFile->findNext($ignoreTokens, ($stackPtr + 1), null, true, null, true);
+            $errorCode     = 'Incorrect';
+            if (isset($tokens[$targetContext]['code']) === true) {
+                switch ($tokens[$targetContext]['code']) {
+                case T_VARIABLE:
+                    $errorCode = 'Property';
+                    break;
+
+                case T_FUNCTION:
+                    $errorCode = 'Method';
+                    break;
+
+                case T_CLOSURE:
+                    $errorCode = 'Closure';
+                    break;
+
+                case T_CLASS:
+                    $errorCode = 'Class';
+                    break;
+
+                case T_ANON_CLASS:
+                    $errorCode = 'AnonymousClass';
+                    break;
+                }//end switch
+            }//end if
+
             $error = 'Scope keyword "%s" must be followed by a single space; found %s';
             $data  = [
                 $tokens[$stackPtr]['content'],
                 $spacing,
             ];
 
-            $fix = $phpcsFile->addFixableError($error, $stackPtr, 'Incorrect', $data);
+            $fix = $phpcsFile->addFixableError($error, $stackPtr, $errorCode, $data);
             if ($fix === true) {
                 if ($spacing === 0) {
                     $phpcsFile->fixer->addContent($stackPtr, ' ');
