@@ -162,3 +162,7 @@ class FinalTest4 {
     final     const X = "foo";
     final     public const Y = "bar";
 }
+
+abstract    class AbstractTest {
+    abstract    public function foo();
+}
