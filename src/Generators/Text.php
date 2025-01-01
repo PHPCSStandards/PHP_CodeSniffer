@@ -30,14 +30,17 @@ class Text extends Generator
      */
     public function processSniff(DOMNode $doc)
     {
-        $this->printTitle($doc);
-
+        $content = '';
         foreach ($doc->childNodes as $node) {
             if ($node->nodeName === 'standard') {
-                $this->printTextBlock($node);
+                $content .= $this->getFormattedTextBlock($node);
             } else if ($node->nodeName === 'code_comparison') {
-                $this->printCodeComparisonBlock($node);
+                $content .= $this->getFormattedCodeComparisonBlock($node);
             }
+        }
+
+        if (trim($content) !== '') {
+            echo $this->getFormattedTitle($doc), $content;
         }
 
     }//end processSniff()
@@ -50,22 +53,46 @@ class Text extends Generator
      *                      It represents the "documentation" tag in the XML
      *                      standard file.
      *
+     * @deprecated 3.12.0 Use Text::getFormattedTitle() instead.
+     *
+     * @codeCoverageIgnore
+     *
      * @return void
      */
     protected function printTitle(DOMNode $doc)
+    {
+        echo $this->getFormattedTitle($doc);
+
+    }//end printTitle()
+
+
+    /**
+     * Format the title area for a single sniff.
+     *
+     * @param \DOMNode $doc The DOMNode object for the sniff.
+     *                      It represents the "documentation" tag in the XML
+     *                      standard file.
+     *
+     * @since 3.12.0 Replaces the deprecated Text::printTitle() method.
+     *
+     * @return string
+     */
+    protected function getFormattedTitle(DOMNode $doc)
     {
         $title        = $this->getTitle($doc);
         $standard     = $this->ruleset->name;
         $displayTitle = "$standard CODING STANDARD: $title";
         $titleLength  = strlen($displayTitle);
 
-        echo PHP_EOL;
-        echo str_repeat('-', ($titleLength + 4));
-        echo strtoupper(PHP_EOL."| $displayTitle |".PHP_EOL);
-        echo str_repeat('-', ($titleLength + 4));
-        echo PHP_EOL.PHP_EOL;
+        $output  = PHP_EOL;
+        $output .= str_repeat('-', ($titleLength + 4));
+        $output .= strtoupper(PHP_EOL."| $displayTitle |".PHP_EOL);
+        $output .= str_repeat('-', ($titleLength + 4));
+        $output .= PHP_EOL.PHP_EOL;
 
-    }//end printTitle()
+        return $output;
+
+    }//end getFormattedTitle()
 
 
     /**
@@ -73,9 +100,29 @@ class Text extends Generator
      *
      * @param \DOMNode $node The DOMNode object for the text block.
      *
+     * @deprecated 3.12.0 Use Text::getFormattedTextBlock() instead.
+     *
+     * @codeCoverageIgnore
+     *
      * @return void
      */
     protected function printTextBlock(DOMNode $node)
+    {
+        echo $this->getFormattedTextBlock($node);
+
+    }//end printTextBlock()
+
+
+    /**
+     * Format a text block found in a standard.
+     *
+     * @param \DOMNode $node The DOMNode object for the text block.
+     *
+     * @since 3.12.0 Replaces the deprecated Text::printTextBlock() method.
+     *
+     * @return string
+     */
+    protected function getFormattedTextBlock(DOMNode $node)
     {
         $text = trim($node->nodeValue);
         $text = str_replace('<em>', '*', $text);
@@ -117,9 +164,9 @@ class Text extends Generator
             }
         }//end foreach
 
-        echo implode(PHP_EOL, $lines).PHP_EOL.PHP_EOL;
+        return implode(PHP_EOL, $lines).PHP_EOL.PHP_EOL;
 
-    }//end printTextBlock()
+    }//end getFormattedTextBlock()
 
 
     /**
@@ -127,9 +174,29 @@ class Text extends Generator
      *
      * @param \DOMNode $node The DOMNode object for the code comparison block.
      *
+     * @deprecated 3.12.0 Use Text::getFormattedCodeComparisonBlock() instead.
+     *
+     * @codeCoverageIgnore
+     *
      * @return void
      */
     protected function printCodeComparisonBlock(DOMNode $node)
+    {
+        echo $this->getFormattedCodeComparisonBlock($node);
+
+    }//end printCodeComparisonBlock()
+
+
+    /**
+     * Format a code comparison block found in a standard.
+     *
+     * @param \DOMNode $node The DOMNode object for the code comparison block.
+     *
+     * @since 3.12.0 Replaces the deprecated Text::printCodeComparisonBlock() method.
+     *
+     * @return string
+     */
+    protected function getFormattedCodeComparisonBlock(DOMNode $node)
     {
         $codeBlocks = $node->getElementsByTagName('code');
         $first      = trim($codeBlocks->item(0)->nodeValue);
@@ -205,9 +272,9 @@ class Text extends Generator
         $maxCodeLines  = max(count($firstLines), count($secondLines));
         $maxTitleLines = max(count($firstTitleLines), count($secondTitleLines));
 
-        echo str_repeat('-', 41);
-        echo ' CODE COMPARISON ';
-        echo str_repeat('-', 42).PHP_EOL;
+        $output  = str_repeat('-', 41);
+        $output .= ' CODE COMPARISON ';
+        $output .= str_repeat('-', 42).PHP_EOL;
 
         for ($i = 0; $i < $maxTitleLines; $i++) {
             if (isset($firstTitleLines[$i]) === true) {
@@ -222,14 +289,14 @@ class Text extends Generator
                 $secondLineText = '';
             }
 
-            echo '| ';
-            echo $firstLineText.str_repeat(' ', (46 - strlen($firstLineText)));
-            echo ' | ';
-            echo $secondLineText.str_repeat(' ', (47 - strlen($secondLineText)));
-            echo ' |'.PHP_EOL;
+            $output .= '| ';
+            $output .= $firstLineText.str_repeat(' ', (46 - strlen($firstLineText)));
+            $output .= ' | ';
+            $output .= $secondLineText.str_repeat(' ', (47 - strlen($secondLineText)));
+            $output .= ' |'.PHP_EOL;
         }//end for
 
-        echo str_repeat('-', 100).PHP_EOL;
+        $output .= str_repeat('-', 100).PHP_EOL;
 
         for ($i = 0; $i < $maxCodeLines; $i++) {
             if (isset($firstLines[$i]) === true) {
@@ -244,16 +311,18 @@ class Text extends Generator
                 $secondLineText = '';
             }
 
-            echo '| ';
-            echo $firstLineText.str_repeat(' ', max(0, (47 - strlen($firstLineText))));
-            echo '| ';
-            echo $secondLineText.str_repeat(' ', max(0, (48 - strlen($secondLineText))));
-            echo '|'.PHP_EOL;
+            $output .= '| ';
+            $output .= $firstLineText.str_repeat(' ', max(0, (47 - strlen($firstLineText))));
+            $output .= '| ';
+            $output .= $secondLineText.str_repeat(' ', max(0, (48 - strlen($secondLineText))));
+            $output .= '|'.PHP_EOL;
         }//end for
 
-        echo str_repeat('-', 100).PHP_EOL.PHP_EOL;
+        $output .= str_repeat('-', 100).PHP_EOL.PHP_EOL;
 
-    }//end printCodeComparisonBlock()
+        return $output;
+
+    }//end getFormattedCodeComparisonBlock()
 
 
 }//end class
