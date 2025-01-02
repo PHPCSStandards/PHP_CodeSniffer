@@ -53,7 +53,10 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
 
         if ($tokens[$prev]['code'] === T_VAR) {
             $error = 'The var keyword must not be used to declare a property';
-            $phpcsFile->addError($error, $stackPtr, 'VarUsed');
+            $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'VarUsed');
+            if ($fix === true) {
+                $phpcsFile->fixer->replaceToken($prev, 'public');
+            }
         }
 
         $next = $phpcsFile->findNext([T_VARIABLE, T_SEMICOLON], ($stackPtr + 1));

@@ -6,9 +6,9 @@ class MyClass
     private $var = null;
     $var = null;
 
-    var $var = null;
+    public $var = null;
     static $var = null;
-    public var $var = null; // Parse error.
+    public public $var = null; // Parse error.
 
     public $_var = null;
     protected $_var = null;
@@ -46,7 +46,7 @@ class MyClass
     public string $var = null;
     protected ?Folder\ClassName $var = null;
 
-    var int $var = null;
+    public int $var = null;
     static int $var = null;
 
     private int $_var = null;
