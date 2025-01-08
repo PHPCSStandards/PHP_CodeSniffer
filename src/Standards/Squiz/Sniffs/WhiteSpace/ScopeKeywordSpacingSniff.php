@@ -44,7 +44,9 @@ class ScopeKeywordSpacingSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        if (isset($tokens[($stackPtr + 1)]) === false) {
+        $nextNonWhitespace = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
+        if ($nextNonWhitespace === false) {
+            // Parse error/live coding. Bow out.
             return;
         }
 
@@ -126,9 +128,6 @@ class ScopeKeywordSpacingSniff implements Sniff
 
         if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
             $spacing = 0;
-        } else if (isset($tokens[($stackPtr + 2)]) === false) {
-            // Parse error/live coding. Bow out.
-            return;
         } else {
             if ($tokens[($stackPtr + 2)]['line'] !== $tokens[$stackPtr]['line']) {
                 $spacing = 'newline';
