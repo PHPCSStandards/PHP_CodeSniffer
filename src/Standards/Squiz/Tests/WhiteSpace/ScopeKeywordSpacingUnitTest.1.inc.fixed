@@ -167,3 +167,16 @@ final class FinalSpacingCorrect {
 abstract class AbstractSpacingCorrect {
     public abstract function spacingCorrect() {}
 }
+
+$closure = static function() { return 'spacing correct'; };
+$closure =   static function() { return 'spacing incorrect'; };
+
+class ConstantVisibility {
+    public const PUBLIC_SPACING_CORRECT = true;
+    protected const PROTECTED_SPACING_CORRECT = true;
+    private const PRIVATE_SPACING_CORRECT = true;
+
+    public const PUBLIC_SPACING_INCORRECT = true;
+    protected const PROTECTED_SPACING_INCORRECT = true;
+    private const PRIVATE_SPACING_INCORRECT = true;
+}
