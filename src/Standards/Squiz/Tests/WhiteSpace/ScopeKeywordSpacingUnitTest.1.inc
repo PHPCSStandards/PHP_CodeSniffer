@@ -77,10 +77,10 @@ class MyOtherClass
         $varQ = 'string',
         $varR = 123;
 
-    // Intentionally missing a semicolon for testing.
     public
         $varS,
-        $varT
+        $varT,
+        $varU;
 }
 
 // Issue #3188 - static as return type.
