@@ -152,17 +152,25 @@ class FinalTest {
     final      public static function create(ContainerInterface $container) {}
 }
 
-final     class FinalTest2 {
+final 	  class FinalTest2 {
 }
 
-final     abstract class FinalTest3 {
-}
+final
+    readonly class FinalTest3 {}
 
 class FinalTest4 {
     final     const X = "foo";
-    final     public const Y = "bar";
+    final   public const Y = "bar";
 }
 
 abstract    class AbstractTest {
     abstract    public function foo();
+}
+
+final class FinalSpacingCorrect {
+    public final const SPACING_CORRECT = true;
+}
+
+abstract class AbstractSpacingCorrect {
+    public abstract function spacingCorrect() {}
 }
