@@ -149,12 +149,12 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
             if ($param['pass_by_reference'] === true) {
                 $refToken = $param['reference_token'];
 
-                $gap = 0;
                 if ($tokens[($refToken + 1)]['code'] === T_WHITESPACE) {
                     $gap = $tokens[($refToken + 1)]['length'];
-                }
+                    if ($tokens[$refToken]['line'] !== $tokens[($refToken + 2)]['line']) {
+                        $gap = 'newline';
+                    }
 
-                if ($gap !== 0) {
                     $error = 'Expected 0 spaces after reference operator for argument "%s"; %s found';
                     $data  = [
                         $param['name'],

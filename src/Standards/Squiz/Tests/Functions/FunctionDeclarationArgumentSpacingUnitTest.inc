@@ -118,3 +118,15 @@ function spacingBetweenParenthesesShouldBeFixedInOneGo(
 
 
     ) {}
+
+function newlineAfterReferenceShouldBeFlaggedAndFixed(
+    &
+
+    $param
+) {}
+
+function newlineAfterReferenceFixerRespectsComment(
+    &
+    // comment
+    $param
+) {}
