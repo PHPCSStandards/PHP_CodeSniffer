@@ -188,9 +188,14 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                     ];
                     $fix   = $phpcsFile->addFixableError($error, $variadicToken, 'SpacingAfterVariadic', $data);
                     if ($fix === true) {
-                        $phpcsFile->fixer->replaceToken(($variadicToken + 1), '');
+                        $phpcsFile->fixer->beginChangeset();
+                        for ($i = ($variadicToken + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                            $phpcsFile->fixer->replaceToken($i, '');
+                        }
+
+                        $phpcsFile->fixer->endChangeset();
                     }
-                }
+                }//end if
             }//end if
 
             if (isset($param['default_equal_token']) === true) {
