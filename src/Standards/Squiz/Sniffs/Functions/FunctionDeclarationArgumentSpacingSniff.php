@@ -312,11 +312,20 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
             }
 
             if ($commaToken !== false) {
-                if ($tokens[($commaToken - 1)]['code'] === T_WHITESPACE) {
+                $endOfPreviousParam = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($commaToken - 1), null, true);
+
+                $spaceBeforeComma = 0;
+                if ($tokens[$endOfPreviousParam]['line'] !== $tokens[$commaToken]['line']) {
+                    $spaceBeforeComma = 'newline';
+                } else if ($tokens[($commaToken - 1)]['code'] === T_WHITESPACE) {
+                    $spaceBeforeComma = $tokens[($commaToken - 1)]['length'];
+                }
+
+                if ($spaceBeforeComma !== 0) {
                     $error = 'Expected 0 spaces between argument "%s" and comma; %s found';
                     $data  = [
                         $params[($paramNumber - 1)]['name'],
-                        $tokens[($commaToken - 1)]['length'],
+                        $spaceBeforeComma,
                     ];
 
                     $fix = $phpcsFile->addFixableError($error, $commaToken, 'SpaceBeforeComma', $data);

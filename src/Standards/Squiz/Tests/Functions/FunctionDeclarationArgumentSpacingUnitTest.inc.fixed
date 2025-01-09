@@ -157,3 +157,9 @@ function newlineBeforeAndAfterEqualsSignShouldBeFixedForSpacing1(
     $param = true
 ) {}
 // phpcs:set Squiz.Functions.FunctionDeclarationArgumentSpacing equalsSpacing 0
+
+function newlineBeforeCommaShouldBeFixedInOneGo(
+    $paramA,
+    $paramB,
+    $paramC
+) {}
