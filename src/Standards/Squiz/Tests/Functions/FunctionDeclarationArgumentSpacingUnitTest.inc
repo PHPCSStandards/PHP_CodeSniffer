@@ -150,3 +150,19 @@ function newlineBeforeAndAfterEqualsSignShouldBeFixedForSpacing0(
 
     true
 ) {}
+
+function commentBeforeOrAfterEqualsSignShouldBeFlaggedNotFixed(
+    $param   /*comment*/   =   /*comment*/ true
+) {}
+
+function newlineAndCommentBeforeAndAfterEqualsSignShouldBeFlaggedNotFixed(
+    $param
+
+    //comment
+
+        =
+
+    //comment
+
+    true
+) {}

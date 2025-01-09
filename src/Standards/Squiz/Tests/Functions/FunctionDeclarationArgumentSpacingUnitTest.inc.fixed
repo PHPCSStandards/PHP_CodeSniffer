@@ -135,3 +135,19 @@ function newlineAfterVariadicFixerRespectsComment(
 function newlineBeforeAndAfterEqualsSignShouldBeFixedForSpacing0(
     $param=true
 ) {}
+
+function commentBeforeOrAfterEqualsSignShouldBeFlaggedNotFixed(
+    $param   /*comment*/   =   /*comment*/ true
+) {}
+
+function newlineAndCommentBeforeAndAfterEqualsSignShouldBeFlaggedNotFixed(
+    $param
+
+    //comment
+
+        =
+
+    //comment
+
+    true
+) {}
