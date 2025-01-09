@@ -215,13 +215,18 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                         $spacesBefore,
                     ];
 
-                    $fix = $phpcsFile->addFixableError($error, $equalToken, 'SpaceBeforeEquals', $data);
-                    if ($fix === true) {
-                        $padding = str_repeat(' ', $this->equalsSpacing);
-                        if ($spacesBefore === 0) {
-                            $phpcsFile->fixer->addContentBefore($equalToken, $padding);
-                        } else {
-                            $phpcsFile->fixer->replaceToken(($equalToken - 1), $padding);
+                    $nextNonWhitespace = $phpcsFile->findNext(T_WHITESPACE, ($param['token'] + 1), $equalToken, true);
+                    if ($nextNonWhitespace !== false) {
+                        $phpcsFile->addError($error, $equalToken, 'SpaceBeforeEquals', $data);
+                    } else {
+                        $fix = $phpcsFile->addFixableError($error, $equalToken, 'SpaceBeforeEquals', $data);
+                        if ($fix === true) {
+                            $padding = str_repeat(' ', $this->equalsSpacing);
+                            if ($spacesBefore === 0) {
+                                $phpcsFile->fixer->addContentBefore($equalToken, $padding);
+                            } else {
+                                $phpcsFile->fixer->replaceToken(($equalToken - 1), $padding);
+                            }
                         }
                     }
                 }//end if
@@ -240,13 +245,18 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                         $spacesAfter,
                     ];
 
-                    $fix = $phpcsFile->addFixableError($error, $equalToken, 'SpaceAfterEquals', $data);
-                    if ($fix === true) {
-                        $padding = str_repeat(' ', $this->equalsSpacing);
-                        if ($spacesAfter === 0) {
-                            $phpcsFile->fixer->addContent($equalToken, $padding);
-                        } else {
-                            $phpcsFile->fixer->replaceToken(($equalToken + 1), $padding);
+                    $nextNonWhitespace = $phpcsFile->findNext(T_WHITESPACE, ($equalToken + 1), $param['default_token'], true);
+                    if ($nextNonWhitespace !== false) {
+                        $phpcsFile->addError($error, $equalToken, 'SpaceAfterEquals', $data);
+                    } else {
+                        $fix = $phpcsFile->addFixableError($error, $equalToken, 'SpaceAfterEquals', $data);
+                        if ($fix === true) {
+                            $padding = str_repeat(' ', $this->equalsSpacing);
+                            if ($spacesAfter === 0) {
+                                $phpcsFile->fixer->addContent($equalToken, $padding);
+                            } else {
+                                $phpcsFile->fixer->replaceToken(($equalToken + 1), $padding);
+                            }
                         }
                     }
                 }//end if
