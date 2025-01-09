@@ -162,9 +162,14 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                     ];
                     $fix   = $phpcsFile->addFixableError($error, $refToken, 'SpacingAfterReference', $data);
                     if ($fix === true) {
-                        $phpcsFile->fixer->replaceToken(($refToken + 1), '');
+                        $phpcsFile->fixer->beginChangeset();
+                        for ($i = ($refToken + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                            $phpcsFile->fixer->replaceToken($i, '');
+                        }
+
+                        $phpcsFile->fixer->endChangeset();
                     }
-                }
+                }//end if
             }//end if
 
             if ($param['variable_length'] === true) {
