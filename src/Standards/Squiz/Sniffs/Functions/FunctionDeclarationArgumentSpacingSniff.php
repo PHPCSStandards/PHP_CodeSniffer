@@ -131,13 +131,18 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                     $data  = [$found];
                     $fix   = $phpcsFile->addFixableError($error, $openBracket, 'SpacingBetween', $data);
                     if ($fix === true) {
-                        $phpcsFile->fixer->replaceToken(($openBracket + 1), '');
+                        $phpcsFile->fixer->beginChangeset();
+                        for ($i = ($openBracket + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                            $phpcsFile->fixer->replaceToken($i, '');
+                        }
+
+                        $phpcsFile->fixer->endChangeset();
                     }
                 }
 
                 // No params, so we don't check normal spacing rules.
                 return;
-            }
+            }//end if
         }//end if
 
         foreach ($params as $paramNumber => $param) {

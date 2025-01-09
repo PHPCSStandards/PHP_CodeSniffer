@@ -113,3 +113,8 @@ fn ($a,$b = null) => $a($b);
 function multipleWhitespaceTokensAfterType(int
 
     $number) {}
+
+function spacingBetweenParenthesesShouldBeFixedInOneGo(
+
+
+    ) {}
