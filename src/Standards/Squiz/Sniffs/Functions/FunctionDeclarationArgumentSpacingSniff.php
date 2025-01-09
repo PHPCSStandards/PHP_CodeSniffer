@@ -202,7 +202,9 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                 $equalToken = $param['default_equal_token'];
 
                 $spacesBefore = 0;
-                if (($equalToken - $param['token']) > 1) {
+                if ($tokens[$param['token']]['line'] !== $tokens[$equalToken]['line']) {
+                    $spacesBefore = 'newline';
+                } else if ($tokens[($param['token'] + 1)]['code'] === T_WHITESPACE) {
                     $spacesBefore = $tokens[($param['token'] + 1)]['length'];
                 }
 
@@ -225,7 +227,9 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                 }//end if
 
                 $spacesAfter = 0;
-                if ($tokens[($equalToken + 1)]['code'] === T_WHITESPACE) {
+                if ($tokens[$equalToken]['line'] !== $tokens[$param['default_token']]['line']) {
+                    $spacesAfter = 'newline';
+                } else if ($tokens[($equalToken + 1)]['code'] === T_WHITESPACE) {
                     $spacesAfter = $tokens[($equalToken + 1)]['length'];
                 }
 
