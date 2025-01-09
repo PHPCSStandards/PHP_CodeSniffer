@@ -130,3 +130,15 @@ function newlineAfterReferenceFixerRespectsComment(
     // comment
     $param
 ) {}
+
+function newlineAfterVariadicShouldBeFlaggedAndFixed(
+    ...
+
+    $param
+) {}
+
+function newlineAfterVariadicFixerRespectsComment(
+    ...
+    //comment
+    $param
+) {}

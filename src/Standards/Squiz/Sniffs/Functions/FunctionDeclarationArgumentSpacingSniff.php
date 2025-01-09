@@ -175,12 +175,12 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
             if ($param['variable_length'] === true) {
                 $variadicToken = $param['variadic_token'];
 
-                $gap = 0;
                 if ($tokens[($variadicToken + 1)]['code'] === T_WHITESPACE) {
                     $gap = $tokens[($variadicToken + 1)]['length'];
-                }
+                    if ($tokens[$variadicToken]['line'] !== $tokens[($variadicToken + 2)]['line']) {
+                        $gap = 'newline';
+                    }
 
-                if ($gap !== 0) {
                     $error = 'Expected 0 spaces after variadic operator for argument "%s"; %s found';
                     $data  = [
                         $param['name'],
