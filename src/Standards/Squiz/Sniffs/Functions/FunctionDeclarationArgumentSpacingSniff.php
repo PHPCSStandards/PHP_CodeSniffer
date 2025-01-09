@@ -222,11 +222,15 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                         $fix = $phpcsFile->addFixableError($error, $equalToken, 'SpaceBeforeEquals', $data);
                         if ($fix === true) {
                             $padding = str_repeat(' ', $this->equalsSpacing);
-                            if ($spacesBefore === 0) {
-                                $phpcsFile->fixer->addContentBefore($equalToken, $padding);
-                            } else {
-                                $phpcsFile->fixer->replaceToken(($equalToken - 1), $padding);
+
+                            $phpcsFile->fixer->beginChangeset();
+                            $phpcsFile->fixer->addContent($param['token'], $padding);
+
+                            for ($i = ($param['token'] + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                                $phpcsFile->fixer->replaceToken($i, '');
                             }
+
+                            $phpcsFile->fixer->endChangeset();
                         }
                     }
                 }//end if
@@ -252,11 +256,15 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                         $fix = $phpcsFile->addFixableError($error, $equalToken, 'SpaceAfterEquals', $data);
                         if ($fix === true) {
                             $padding = str_repeat(' ', $this->equalsSpacing);
-                            if ($spacesAfter === 0) {
-                                $phpcsFile->fixer->addContent($equalToken, $padding);
-                            } else {
-                                $phpcsFile->fixer->replaceToken(($equalToken + 1), $padding);
+
+                            $phpcsFile->fixer->beginChangeset();
+                            $phpcsFile->fixer->addContent($equalToken, $padding);
+
+                            for ($i = ($equalToken + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                                $phpcsFile->fixer->replaceToken($i, '');
                             }
+
+                            $phpcsFile->fixer->endChangeset();
                         }
                     }
                 }//end if

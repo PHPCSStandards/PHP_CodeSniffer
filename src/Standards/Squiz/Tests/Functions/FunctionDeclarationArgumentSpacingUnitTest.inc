@@ -166,3 +166,13 @@ function newlineAndCommentBeforeAndAfterEqualsSignShouldBeFlaggedNotFixed(
 
     true
 ) {}
+
+// phpcs:set Squiz.Functions.FunctionDeclarationArgumentSpacing equalsSpacing 1
+function newlineBeforeAndAfterEqualsSignShouldBeFixedForSpacing1(
+    $param
+
+        =
+
+    true
+) {}
+// phpcs:set Squiz.Functions.FunctionDeclarationArgumentSpacing equalsSpacing 0
