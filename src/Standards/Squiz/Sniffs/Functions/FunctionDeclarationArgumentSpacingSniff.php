@@ -330,9 +330,35 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
 
                     $fix = $phpcsFile->addFixableError($error, $commaToken, 'SpaceBeforeComma', $data);
                     if ($fix === true) {
-                        $phpcsFile->fixer->replaceToken(($commaToken - 1), '');
-                    }
-                }
+                        $startOfCurrentParam = $phpcsFile->findNext(Tokens::$emptyTokens, ($commaToken + 1), null, true);
+
+                        $phpcsFile->fixer->beginChangeset();
+                        $phpcsFile->fixer->addContent($endOfPreviousParam, ',');
+                        $phpcsFile->fixer->replaceToken($commaToken, '');
+
+                        if ($tokens[$commaToken]['line'] === $tokens[$startOfCurrentParam]['line']) {
+                            for ($i = ($commaToken + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                                $phpcsFile->fixer->replaceToken($i, '');
+                            }
+                        } else {
+                            for ($i = ($commaToken - 1);
+                                $tokens[$i]['code'] === T_WHITESPACE && $tokens[$endOfPreviousParam]['line'] !== $tokens[$i]['line'];
+                                $i--
+                            ) {
+                                $phpcsFile->fixer->replaceToken($i, '');
+                            }
+
+                            for ($i = ($commaToken + 1);
+                                $tokens[$i]['code'] === T_WHITESPACE && $tokens[$commaToken]['line'] === $tokens[$i]['line'];
+                                $i++
+                            ) {
+                                $phpcsFile->fixer->replaceToken($i, '');
+                            }
+                        }
+
+                        $phpcsFile->fixer->endChangeset();
+                    }//end if
+                }//end if
 
                 // Don't check spacing after the comma if it is the last content on the line.
                 $checkComma = true;

@@ -185,3 +185,13 @@ function newlineBeforeCommaShouldBeFixedInOneGo(
     ,
     $paramC
 ) {}
+
+function newlineBeforeCommaFixerRespectsComments(
+    $paramA // comment
+    ,
+    $paramB=10 /* comment */
+,
+    $paramC=20 # comment
+    , $paramC=30
+    , string $paramC='foo'
+) {}
