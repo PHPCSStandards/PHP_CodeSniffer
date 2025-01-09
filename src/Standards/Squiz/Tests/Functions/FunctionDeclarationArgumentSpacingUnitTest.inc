@@ -142,3 +142,11 @@ function newlineAfterVariadicFixerRespectsComment(
     //comment
     $param
 ) {}
+
+function newlineBeforeAndAfterEqualsSignShouldBeFixedForSpacing0(
+    $param
+
+        =
+
+    true
+) {}
