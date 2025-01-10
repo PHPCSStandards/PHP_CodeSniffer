@@ -184,7 +184,7 @@ final class SniffsExcludeArgsTest extends TestCase
                 ],
                 'suggestion' => 'Standard.Category.Sniff',
             ];
-            $data[$argument.'; case mismatch - same error'] = [
+            $data[$argument.'; case mismatch - same error']       = [
                 'argument'   => $argument,
                 'value'      => 'sTANDARD.cATEGORY.sNIFF.cODE,Standard.Category.Sniff.Code',
                 'errors'     => [
@@ -264,12 +264,12 @@ final class SniffsExcludeArgsTest extends TestCase
             ];
 
             // Duplicates are reduced silently.
-            $data[$argument.'; one valid sniff twice']  = [
+            $data[$argument.'; one valid sniff twice'] = [
                 'argument' => $argument,
                 'value'    => 'Standard.Category.Sniff,Standard.Category.Sniff',
                 'result'   => ['Standard.Category.Sniff'],
             ];
-            $data[$argument.'; one valid sniff in different cases']  = [
+            $data[$argument.'; one valid sniff in different cases'] = [
                 'argument' => $argument,
                 'value'    => 'Standard.Category.Sniff, standard.category.sniff, STANDARD.CATEGORY.SNIFF',
                 'result'   => ['Standard.Category.Sniff'],
