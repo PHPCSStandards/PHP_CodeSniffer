@@ -374,7 +374,12 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                     $typeOfNextShort = 'Arg';
                     $contentOfNext   = $param['name'];
 
-                    if ($param['type_hint_token'] !== false) {
+                    if (isset($param['property_visibility']) === true) {
+                        $typeOfNext      = 'property modifier';
+                        $typeOfNextShort = 'PropertyModifier';
+                        $modifier        = $phpcsFile->findNext(Tokens::$emptyTokens, ($commaToken + 1), $param['token'], true);
+                        $contentOfNext   = $tokens[$modifier]['content'];
+                    } else if ($param['type_hint_token'] !== false) {
                         $typeOfNext      = 'type hint';
                         $typeOfNextShort = 'Hint';
                         $contentOfNext   = $param['type_hint'];
