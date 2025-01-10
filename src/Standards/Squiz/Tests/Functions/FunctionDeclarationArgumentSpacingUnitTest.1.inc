@@ -100,7 +100,7 @@ function functionName(  ?string  $arg1 = 'foo' ,  ?int  & $arg2   ,  $arg3  ) {}
 function functionName(string $arg1,  ... $arg2) {}
 function functionName(string $arg1, int  ... $arg2) {}
 function functionName(string $arg1, & ... $arg2) {}
-
+function functionName(string $arg1,int $arg2) {}
 
 $a = function ($var1, $var2=false) use (
     $longVar1, & $longerVar1,
