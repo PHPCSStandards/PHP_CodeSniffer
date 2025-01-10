@@ -370,55 +370,46 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                 }
 
                 if ($checkComma === true) {
-                    if ($param['type_hint_token'] === false) {
-                        $spacesAfter = 0;
-                        if ($tokens[($commaToken + 1)]['code'] === T_WHITESPACE) {
-                            $spacesAfter = $tokens[($commaToken + 1)]['length'];
+                    $typeOfNext      = 'argument';
+                    $typeOfNextShort = 'Arg';
+                    $contentOfNext   = $param['name'];
+
+                    if ($param['type_hint_token'] !== false) {
+                        $typeOfNext      = 'type hint';
+                        $typeOfNextShort = 'Hint';
+                        $contentOfNext   = $param['type_hint'];
+                    }
+
+                    $spacesAfter = 0;
+                    if ($tokens[($commaToken + 1)]['code'] === T_WHITESPACE) {
+                        $spacesAfter = $tokens[($commaToken + 1)]['length'];
+                    }
+
+                    if ($spacesAfter === 0) {
+                        $error     = 'Expected 1 space between comma and %s "%s"; 0 found';
+                        $errorCode = 'NoSpaceBefore'.$typeOfNextShort;
+                        $data      = [
+                            $typeOfNext,
+                            $contentOfNext,
+                        ];
+
+                        $fix = $phpcsFile->addFixableError($error, $commaToken, $errorCode, $data);
+                        if ($fix === true) {
+                            $phpcsFile->fixer->addContent($commaToken, ' ');
                         }
+                    } else if ($spacesAfter !== 1) {
+                        $error     = 'Expected 1 space between comma and %s "%s"; %s found';
+                        $errorCode = 'SpacingBefore'.$typeOfNextShort;
+                        $data      = [
+                            $typeOfNext,
+                            $contentOfNext,
+                            $spacesAfter,
+                        ];
 
-                        if ($spacesAfter === 0) {
-                            $error = 'Expected 1 space between comma and argument "%s"; 0 found';
-                            $data  = [$param['name']];
-                            $fix   = $phpcsFile->addFixableError($error, $commaToken, 'NoSpaceBeforeArg', $data);
-                            if ($fix === true) {
-                                $phpcsFile->fixer->addContent($commaToken, ' ');
-                            }
-                        } else if ($spacesAfter !== 1) {
-                            $error = 'Expected 1 space between comma and argument "%s"; %s found';
-                            $data  = [
-                                $param['name'],
-                                $spacesAfter,
-                            ];
-
-                            $fix = $phpcsFile->addFixableError($error, $commaToken, 'SpacingBeforeArg', $data);
-                            if ($fix === true) {
-                                $phpcsFile->fixer->replaceToken(($commaToken + 1), ' ');
-                            }
-                        }//end if
-                    } else {
-                        $hint = $param['type_hint'];
-
-                        if ($tokens[($commaToken + 1)]['code'] !== T_WHITESPACE) {
-                            $error = 'Expected 1 space between comma and type hint "%s"; 0 found';
-                            $data  = [$hint];
-                            $fix   = $phpcsFile->addFixableError($error, $commaToken, 'NoSpaceBeforeHint', $data);
-                            if ($fix === true) {
-                                $phpcsFile->fixer->addContent($commaToken, ' ');
-                            }
-                        } else {
-                            $gap = $tokens[($commaToken + 1)]['length'];
-                            if ($gap !== 1) {
-                                $error = 'Expected 1 space between comma and type hint "%s"; %s found';
-                                $data  = [
-                                    $hint,
-                                    $gap,
-                                ];
-                                $fix   = $phpcsFile->addFixableError($error, $commaToken, 'SpacingBeforeHint', $data);
-                                if ($fix === true) {
-                                    $phpcsFile->fixer->replaceToken(($commaToken + 1), ' ');
-                                }
-                            }
-                        }//end if
+                        $fix = $phpcsFile->addFixableError($error, $commaToken, $errorCode, $data);
+                        if ($fix === true) {
+                            $phpcsFile->fixer->replaceToken(($commaToken + 1), ' ');
+                        }
                     }//end if
                 }//end if
             }//end if
