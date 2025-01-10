@@ -396,10 +396,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                             }
                         }//end if
                     } else {
-                        $hint = $phpcsFile->getTokensAsString($param['type_hint_token'], (($param['type_hint_end_token'] - $param['type_hint_token']) + 1));
-                        if ($param['nullable_type'] === true) {
-                            $hint = '?'.$hint;
-                        }
+                        $hint = $param['type_hint'];
 
                         if ($tokens[($commaToken + 1)]['code'] !== T_WHITESPACE) {
                             $error = 'Expected 1 space between comma and type hint "%s"; 0 found';
