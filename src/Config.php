@@ -1686,20 +1686,24 @@ class Config
             }
         }//end foreach
 
-        $sniffs = array_reduce($sniffs, static function ($carry, $item) {
-            $lower = strtolower($item);
+        $sniffs = array_reduce(
+            $sniffs,
+            static function ($carry, $item) {
+                $lower = strtolower($item);
 
-            foreach ($carry as $found) {
-                if ($lower === strtolower($found)) {
-                    // This sniff is already in our list.
-                    return $carry;
+                foreach ($carry as $found) {
+                    if ($lower === strtolower($found)) {
+                        // This sniff is already in our list.
+                        return $carry;
+                    }
                 }
-            }
 
-            $carry[] = $item;
+                $carry[] = $item;
 
-            return $carry;
-        }, []);
+                return $carry;
+            },
+            []
+        );
 
         if ($errors !== []) {
             $error  = 'ERROR: The --'.$argument.' option only supports sniff codes.'.PHP_EOL;

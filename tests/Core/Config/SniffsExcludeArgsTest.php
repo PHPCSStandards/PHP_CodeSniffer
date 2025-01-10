@@ -81,25 +81,25 @@ final class SniffsExcludeArgsTest extends TestCase
         foreach ($arguments as $argument) {
             // Empty values are errors.
             $data[$argument.'; empty string']     = [
-                'argument' => $argument,
-                'value'    => '',
-                'errors'   => [
+                'argument'   => $argument,
+                'value'      => '',
+                'errors'     => [
                     'No codes specified / empty argument',
                 ],
                 'suggestion' => null,
             ];
             $data[$argument.'; one comma alone']  = [
-                'argument' => $argument,
-                'value'    => ',',
-                'errors'   => [
+                'argument'   => $argument,
+                'value'      => ',',
+                'errors'     => [
                     'No codes specified / empty argument',
                 ],
                 'suggestion' => null,
             ];
             $data[$argument.'; two commas alone'] = [
-                'argument' => $argument,
-                'value'    => ',,',
-                'errors'   => [
+                'argument'   => $argument,
+                'value'      => ',,',
+                'errors'     => [
                     'No codes specified / empty argument',
                 ],
                 'suggestion' => null,
@@ -229,7 +229,7 @@ final class SniffsExcludeArgsTest extends TestCase
             ];
 
             // Rogue commas are quietly ignored.
-            $data[$argument.'; trailing comma']   = [
+            $data[$argument.'; trailing comma'] = [
                 'argument' => $argument,
                 'value'    => 'Standard.Category.Sniff,',
                 'result'   => ['Standard.Category.Sniff'],
