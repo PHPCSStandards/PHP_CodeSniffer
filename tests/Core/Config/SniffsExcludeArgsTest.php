@@ -81,6 +81,32 @@ final class SniffsExcludeArgsTest extends TestCase
         $messageTemplate = 'ERROR: The specified sniff code "%s" is invalid'.PHP_EOL;
 
         foreach ($arguments as $argument) {
+            // Empty values are errors.
+            $data[$argument.'; empty string']     = [
+                'argument' => $argument,
+                'value'    => '',
+                'errors'   => [
+                    'No codes specified / empty argument',
+                ],
+                'suggestion' => null,
+            ];
+            $data[$argument.'; one comma alone']  = [
+                'argument' => $argument,
+                'value'    => ',',
+                'errors'   => [
+                    'No codes specified / empty argument',
+                ],
+                'suggestion' => null,
+            ];
+            $data[$argument.'; two commas alone'] = [
+                'argument' => $argument,
+                'value'    => ',,',
+                'errors'   => [
+                    'No codes specified / empty argument',
+                ],
+                'suggestion' => null,
+            ];
+
             // A standard is not a valid sniff.
             $data[$argument.'; standard'] = [
                 'argument'   => $argument,
@@ -190,11 +216,6 @@ final class SniffsExcludeArgsTest extends TestCase
         $data      = [];
 
         foreach ($arguments as $argument) {
-            $data[$argument.'; empty string']     = [
-                'argument' => $argument,
-                'value'    => '',
-                'result'   => [],
-            ];
             $data[$argument.'; one valid sniff']  = [
                 'argument' => $argument,
                 'value'    => 'Standard.Category.Sniff',
@@ -210,16 +231,6 @@ final class SniffsExcludeArgsTest extends TestCase
             ];
 
             // Rogue commas are quietly ignored.
-            $data[$argument.'; one comma alone']  = [
-                'argument' => $argument,
-                'value'    => ',',
-                'result'   => [],
-            ];
-            $data[$argument.'; two commas alone'] = [
-                'argument' => $argument,
-                'value'    => ',,',
-                'result'   => [],
-            ];
             $data[$argument.'; trailing comma']   = [
                 'argument' => $argument,
                 'value'    => 'Standard.Category.Sniff,',
