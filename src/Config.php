@@ -1708,7 +1708,7 @@ class Config
 
         if ($errors !== []) {
             $error  = 'ERROR: The --'.$argument.' option only supports sniff codes.'.PHP_EOL;
-            $error .= 'Sniff codes are in the form "Standard.Category.Sniff"'.PHP_EOL;
+            $error .= 'Sniff codes are in the form "Standard.Category.Sniff".'.PHP_EOL;
             $error .= PHP_EOL;
             $error .= 'The following problems were detected:'.PHP_EOL;
             $error .= '* '.implode(PHP_EOL.'* ', $errors).PHP_EOL;
