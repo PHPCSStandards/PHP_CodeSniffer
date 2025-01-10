@@ -1691,6 +1691,21 @@ class Config
             }
         }//end foreach
 
+        $sniffs = array_reduce($sniffs, static function ($carry, $item) {
+            $lower = strtolower($item);
+
+            foreach ($carry as $found) {
+                if ($lower === strtolower($found)) {
+                    // This sniff is already in our list.
+                    return $carry;
+                }
+            }
+
+            $carry[] = $item;
+
+            return $carry;
+        }, []);
+
         if ($errors !== []) {
             $error  = 'ERROR: The --'.$argument.' option only supports sniff codes.'.PHP_EOL;
             $error .= 'Sniff codes are in the form "Standard.Category.Sniff"'.PHP_EOL;
@@ -1699,7 +1714,6 @@ class Config
             $error .= '* '.implode(PHP_EOL.'* ', $errors).PHP_EOL;
 
             if ($sniffs !== []) {
-                $sniffs = array_unique($sniffs);
                 $error .= PHP_EOL;
                 $error .= 'Perhaps try --'.$argument.'="'.implode(',', $sniffs).'" instead.'.PHP_EOL;
             }
