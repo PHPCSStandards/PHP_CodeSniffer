@@ -171,3 +171,7 @@ function newlineBeforeCommaFixerRespectsComments(
     $paramC=30,
     string $paramC='foo'
 ) {}
+
+class PropertyPromotionSpacingAfterComma {
+    public function __construct(private string|int $propA, protected bool $correctSpace, public MyClass $tooMuchSpace, readonly string $noSpace) {}
+}
