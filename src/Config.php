@@ -1654,15 +1654,10 @@ class Config
         $errors = [];
         $sniffs = [];
 
-        $possibleSniffs = explode(',', $input);
+        $possibleSniffs = array_filter(explode(',', $input));
 
         foreach ($possibleSniffs as $sniff) {
             $sniff = trim($sniff);
-
-            if ($sniff === '') {
-                // Empty values can be safely ignored.
-                continue;
-            }
 
             if (preg_match('{[^A-Za-z0-9.]}', $sniff) === 1) {
                 $errors[] = 'Unsupported character detected: '.$sniff;
