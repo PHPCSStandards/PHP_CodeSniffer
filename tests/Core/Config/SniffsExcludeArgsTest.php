@@ -36,7 +36,7 @@ final class SniffsExcludeArgsTest extends TestCase
     {
         $exception = 'PHP_CodeSniffer\Exceptions\DeepExitException';
         $message   = 'ERROR: The --'.$argument.' option only supports sniff codes.'.PHP_EOL;
-        $message  .= 'Sniff codes are in the form "Standard.Category.Sniff"'.PHP_EOL;
+        $message  .= 'Sniff codes are in the form "Standard.Category.Sniff".'.PHP_EOL;
         $message  .= PHP_EOL;
         $message  .= 'The following problems were detected:'.PHP_EOL;
         $message  .= '* '.implode(PHP_EOL.'* ', $errors).PHP_EOL;
