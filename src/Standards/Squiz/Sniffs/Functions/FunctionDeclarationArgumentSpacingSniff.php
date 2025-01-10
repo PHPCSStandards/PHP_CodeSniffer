@@ -306,6 +306,71 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                 }//end if
             }//end if
 
+            if (isset($param['visibility_token']) === true && $param['visibility_token'] !== false) {
+                $visibilityToken      = $param['visibility_token'];
+                $afterVisibilityToken = $phpcsFile->findNext(T_WHITESPACE, ($visibilityToken + 1), $param['token'], true);
+
+                $spacesAfter = 0;
+                if ($afterVisibilityToken !== false
+                    && $tokens[$visibilityToken]['line'] !== $tokens[$afterVisibilityToken]['line']
+                ) {
+                    $spacesAfter = 'newline';
+                } else if ($tokens[($visibilityToken + 1)]['code'] === T_WHITESPACE) {
+                    $spacesAfter = $tokens[($visibilityToken + 1)]['length'];
+                }
+
+                if ($spacesAfter !== 1) {
+                    $error = 'Expected 1 space after visibility modifier "%s"; %s found';
+                    $data  = [
+                        $tokens[$visibilityToken]['content'],
+                        $spacesAfter,
+                    ];
+
+                    $fix = $phpcsFile->addFixableError($error, $visibilityToken, 'SpacingAfterVisbility', $data);
+                    if ($fix === true) {
+                        $phpcsFile->fixer->beginChangeset();
+                        $phpcsFile->fixer->addContent($visibilityToken, ' ');
+
+                        for ($i = ($visibilityToken + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                            $phpcsFile->fixer->replaceToken($i, '');
+                        }
+
+                        $phpcsFile->fixer->endChangeset();
+                    }
+                }//end if
+            }//end if
+
+            if (isset($param['readonly_token']) === true) {
+                $readonlyToken      = $param['readonly_token'];
+                $afterReadonlyToken = $phpcsFile->findNext(T_WHITESPACE, ($readonlyToken + 1), $param['token'], true);
+
+                $spacesAfter = 0;
+                if ($afterReadonlyToken !== false
+                    && $tokens[$readonlyToken]['line'] !== $tokens[$afterReadonlyToken]['line']
+                ) {
+                    $spacesAfter = 'newline';
+                } else if ($tokens[($readonlyToken + 1)]['code'] === T_WHITESPACE) {
+                    $spacesAfter = $tokens[($readonlyToken + 1)]['length'];
+                }
+
+                if ($spacesAfter !== 1) {
+                    $error = 'Expected 1 space after readonly modifier; %s found';
+                    $data  = [$spacesAfter];
+
+                    $fix = $phpcsFile->addFixableError($error, $readonlyToken, 'SpacingAfterReadonly', $data);
+                    if ($fix === true) {
+                        $phpcsFile->fixer->beginChangeset();
+                        $phpcsFile->fixer->addContent($readonlyToken, ' ');
+
+                        for ($i = ($readonlyToken + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                            $phpcsFile->fixer->replaceToken($i, '');
+                        }
+
+                        $phpcsFile->fixer->endChangeset();
+                    }
+                }//end if
+            }//end if
+
             $commaToken = false;
             if ($paramNumber > 0 && $params[($paramNumber - 1)]['comma_token'] !== false) {
                 $commaToken = $params[($paramNumber - 1)]['comma_token'];
