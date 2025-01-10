@@ -173,6 +173,26 @@ final class SniffsExcludeArgsTest extends TestCase
                 ],
                 'suggestion' => 'StandardTwo.Category.Sniff',
             ];
+
+            // Different cases are reported individually (in duplicate), but suggestions are reduced.
+            $data[$argument.'; case mismatch - different errors'] = [
+                'argument'   => $argument,
+                'value'      => 'Standard.Category.Sniff.Code,sTANDARD.cATEGORY.sNIFF.cODE.eXTRA',
+                'errors'     => [
+                    'Message codes are not supported: Standard.Category.Sniff.Code',
+                    'Too many parts: sTANDARD.cATEGORY.sNIFF.cODE.eXTRA',
+                ],
+                'suggestion' => 'Standard.Category.Sniff',
+            ];
+            $data[$argument.'; case mismatch - same error'] = [
+                'argument'   => $argument,
+                'value'      => 'sTANDARD.cATEGORY.sNIFF.cODE,Standard.Category.Sniff.Code',
+                'errors'     => [
+                    'Message codes are not supported: sTANDARD.cATEGORY.sNIFF.cODE',
+                    'Message codes are not supported: Standard.Category.Sniff.Code',
+                ],
+                'suggestion' => 'sTANDARD.cATEGORY.sNIFF',
+            ];
         }//end foreach
 
         return $data;
@@ -241,6 +261,18 @@ final class SniffsExcludeArgsTest extends TestCase
                     'StandardOne.Category.Sniff',
                     'StandardTwo.Category.Sniff',
                 ],
+            ];
+
+            // Duplicates are reduced silently.
+            $data[$argument.'; one valid sniff twice']  = [
+                'argument' => $argument,
+                'value'    => 'Standard.Category.Sniff,Standard.Category.Sniff',
+                'result'   => ['Standard.Category.Sniff'],
+            ];
+            $data[$argument.'; one valid sniff in different cases']  = [
+                'argument' => $argument,
+                'value'    => 'Standard.Category.Sniff, standard.category.sniff, STANDARD.CATEGORY.SNIFF',
+                'result'   => ['Standard.Category.Sniff'],
             ];
         }//end foreach
 
