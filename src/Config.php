@@ -1641,7 +1641,7 @@ class Config
 
 
     /**
-     * Parse supplied string into a list of sniff codes.
+     * Parse supplied string into a list of validated sniff codes.
      *
      * @param string $input    Comma-separated string of sniff codes.
      * @param string $argument The name of the argument which is being processed.
