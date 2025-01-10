@@ -1656,6 +1656,10 @@ class Config
 
         $possibleSniffs = array_filter(explode(',', $input));
 
+        if ($possibleSniffs === []) {
+            $errors[] = 'No codes specified / empty argument';
+        }
+
         foreach ($possibleSniffs as $sniff) {
             $sniff = trim($sniff);
 
