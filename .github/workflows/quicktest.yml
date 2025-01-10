@@ -23,15 +23,30 @@ jobs:
   # These are basically the same builds as in the Test->Coverage workflow, but then without doing
   # the code-coverage.
   quicktest:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
-        php: ['5.4', '7.2', 'latest']
+        os: ['ubuntu-latest', 'windows-latest']
+        php: ['7.2', 'latest']
 
-    name: "QuickTest: PHP ${{ matrix.php }}"
+        include:
+          - php: '5.4'
+            os: 'ubuntu-latest'
+            custom_ini: false
+          # Installing on Windows with PHP 5.4 runs into all sorts of problems with Composer.
+          # See this issue for more context (yes, I've seen this problem before):
+          # @link https://github.com/PHPCSStandards/composer-installer/pull/213
+          - php: '5.5'
+            os: 'windows-latest'
+            custom_ini: false
+
+    name: "QuickTest: PHP ${{ matrix.php }} (${{ matrix.os == 'ubuntu-latest' && 'Linux' || 'Win'  }})"
 
     steps:
+      - name: Prepare git to leave line endings alone
+        run: git config --global core.autocrlf input
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -51,11 +66,21 @@ jobs:
           custom-cache-suffix: $(date -u "+%Y-%m")
 
       - name: 'PHPCS: set the path to PHP'
-        run: php bin/phpcs --config-set php_path php
+        run: php "bin/phpcs" --config-set php_path php
 
-      - name: 'PHPUnit: run the tests'
-        run: vendor/bin/phpunit tests/AllTests.php --no-coverage
+      - name: 'PHPUnit: run the full test suite'
+        if: ${{ matrix.os != 'windows-latest' }}
+        run: php "vendor/bin/phpunit" tests/AllTests.php --no-coverage
+
+      - name: 'PHPUnit: run tests which may have different outcomes on Windows'
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: php "vendor/bin/phpunit" tests/AllTests.php --group Windows --no-coverage
+
+      - name: 'PHPUnit: run select tests in CBF mode'
+        run: php "vendor/bin/phpunit" tests/AllTests.php --group CBF --exclude-group nothing --no-coverage
+        env:
+          PHP_CODESNIFFER_CBF: '1'
 
       # Note: The code style check is run as an integration test.
       - name: 'PHPCS: check code style without cache, no parallel'
-        run: php bin/phpcs --no-cache --parallel=1
+        run: php "bin/phpcs" --no-cache --parallel=1

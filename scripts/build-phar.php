@@ -19,7 +19,7 @@ use PHP_CodeSniffer\Exceptions\TokenizerException;
 use PHP_CodeSniffer\Tokenizers\PHP;
 use PHP_CodeSniffer\Util\Tokens;
 
-error_reporting(E_ALL | E_STRICT);
+error_reporting(E_ALL);
 
 if (ini_get('phar.readonly') === '1') {
     echo 'Unable to build, phar.readonly in php.ini is set to read only.'.PHP_EOL;

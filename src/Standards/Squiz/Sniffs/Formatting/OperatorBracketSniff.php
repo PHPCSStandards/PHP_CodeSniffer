@@ -354,16 +354,23 @@ class OperatorBracketSniff implements Sniff
             }
 
             if ($tokens[$after]['code'] === T_OPEN_PARENTHESIS) {
+                if (isset($tokens[$after]['parenthesis_closer']) === false) {
+                    // Live coding/parse error. Ignore.
+                    return;
+                }
+
                 $after = $tokens[$after]['parenthesis_closer'];
                 continue;
             }
 
-            if ($tokens[$after]['code'] === T_OPEN_SQUARE_BRACKET) {
-                $after = $tokens[$after]['bracket_closer'];
-                continue;
-            }
+            if (($tokens[$after]['code'] === T_OPEN_SQUARE_BRACKET
+                || $tokens[$after]['code'] === T_OPEN_SHORT_ARRAY)
+            ) {
+                if (isset($tokens[$after]['bracket_closer']) === false) {
+                    // Live coding/parse error. Ignore.
+                    return;
+                }
 
-            if ($tokens[$after]['code'] === T_OPEN_SHORT_ARRAY) {
                 $after = $tokens[$after]['bracket_closer'];
                 continue;
             }

@@ -35,15 +35,15 @@ jobs:
       - name: Set branches to use
         id: branches
         run: |
-          echo "BASE=master" >> $GITHUB_OUTPUT
-          echo "PR_BRANCH=feature/squiz-filecomment-update-copyright-year" >> $GITHUB_OUTPUT
+          echo "BASE=master" >> "$GITHUB_OUTPUT"
+          echo "PR_BRANCH=feature/squiz-filecomment-update-copyright-year" >> "$GITHUB_OUTPUT"
 
       # Using "Tomorrow" to prevent accidentally getting last year if the server is not using UTC.
       - name: Grab the new year
         id: year
         run: |
-          echo "PREVIOUS_YEAR=$(date --date="last month" -u "+%Y")" >> $GITHUB_OUTPUT
-          echo "NEW_YEAR=$(date --date="tomorrow" -u "+%Y")" >> $GITHUB_OUTPUT
+          echo "PREVIOUS_YEAR=$(date --date="last month" -u "+%Y")" >> "$GITHUB_OUTPUT"
+          echo "NEW_YEAR=$(date --date="tomorrow" -u "+%Y")" >> "$GITHUB_OUTPUT"
 
       - name: "Debug info: Show years"
         run: "echo current year: ${{ steps.year.outputs.NEW_YEAR }} - previous year: ${{ steps.year.outputs.PREVIOUS_YEAR }}"
@@ -73,11 +73,12 @@ jobs:
         run: exit 1
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           base: ${{ steps.branches.outputs.BASE }}
           branch: ${{ steps.branches.outputs.PR_BRANCH }}
           delete-branch: true
+          sign-commits: true
           commit-message: "Squiz/FileComment: update year in test case fixed file"
           title: "Squiz/FileComment: update year in test case fixed file"
           # yamllint disable rule:line-length

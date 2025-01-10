@@ -21,6 +21,9 @@ jobs:
     name: Check XML files
     runs-on: ubuntu-latest
 
+    # Don't run the cronjob in this workflow on forks.
+    if: github.event_name != 'schedule' || (github.event_name == 'schedule' && github.repository_owner == 'PHPCSStandards')
+
     env:
       XMLLINT_INDENT: '    '
 
@@ -69,101 +72,29 @@ jobs:
           diff -B ./src/Standards/Squiz/ruleset.xml <(xmllint --format "./src/Standards/Squiz/ruleset.xml")
           diff -B ./src/Standards/Zend/ruleset.xml <(xmllint --format "./src/Standards/Zend/ruleset.xml")
 
+      # Validate the basic well-formedness of the Documentation XML files.
+      - name: Validate documentation XML
+        run: xmllint --noout ./src/Standards/*/Docs/*/*Standard.xml
+
   yamllint:
     name: 'Lint Yaml'
-    runs-on: ubuntu-latest
+    # Don't run the cronjob in this workflow on forks.
+    if: github.event_name != 'schedule' || (github.event_name == 'schedule' && github.repository_owner == 'PHPCSStandards')
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Run Yamllint on all yaml files in repo
-        run: yamllint . --format colored --strict
-
-      - name: Pipe Yamllint results on to GH for inline display
-        if: ${{ failure() }}
-        run: yamllint . --format github --strict
+    uses: PHPCSStandards/.github/.github/workflows/reusable-yamllint.yml@main
+    with:
+      strict: true
 
   markdownlint:
     name: 'Lint Markdown'
-    runs-on: ubuntu-latest
-
     # Don't run the cronjob in this workflow on forks.
     if: github.event_name != 'schedule' || (github.event_name == 'schedule' && github.repository_owner == 'PHPCSStandards')
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # @link https://github.com/marketplace/actions/problem-matcher-for-markdownlint-cli
-      - name: Enable showing issue in PRs
-        uses: xt0rted/markdownlint-problem-matcher@v3
-
-      # @link https://github.com/marketplace/actions/markdownlint-cli2-action
-      - name: Check markdown with CLI2
-        uses: DavidAnson/markdownlint-cli2-action@v16
+    uses: PHPCSStandards/.github/.github/workflows/reusable-markdownlint.yml@main
 
   remark:
     name: 'QA Markdown'
-    runs-on: ubuntu-latest
-
     # Don't run the cronjob in this workflow on forks.
     if: github.event_name != 'schedule' || (github.event_name == 'schedule' && github.repository_owner == 'PHPCSStandards')
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up node and enable caching of dependencies
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      # To make the command available on CLI, it needs to be installed globally.
-      - name: Install Remark CLI globally
-        run: npm install --global remark-cli --foreground-scripts true --fund false
-
-      # To allow for creating a custom config which references rules which are included
-      # in the presets, without having to install all rules individually, a local install
-      # works best (and installing the presets in the first place, of course).
-      #
-      # Note: the first group of packages are all part of the mono "Remark lint" repo.
-      # The second group of packages (heading-whitespace and down) are additional
-      # "external" rules/plugins.
-      - name: Install Remark rules locally
-        run: >
-          npm install --foreground-scripts true --fund false
-          remark-lint
-          remark-gfm
-          remark-preset-lint-consistent
-          remark-preset-lint-recommended
-          remark-preset-lint-markdown-style-guide
-          remark-lint-checkbox-content-indent
-          remark-lint-linebreak-style
-          remark-lint-no-dead-urls
-          remark-lint-no-duplicate-defined-urls
-          remark-lint-no-empty-url
-          remark-lint-no-heading-like-paragraph
-          remark-lint-no-reference-like-url
-          remark-lint-no-unneeded-full-reference-image
-          remark-lint-no-unneeded-full-reference-link
-          remark-lint-strikethrough-marker
-          remark-lint-heading-whitespace
-          remark-lint-list-item-punctuation
-          remark-lint-match-punctuation
-          remark-lint-no-hr-after-heading
-          remark-lint-are-links-valid-duplicate
-          remark-validate-links
-
-      - name: Run Remark-lint
-        run: remark . --frail
-
-      # @link https://github.com/reviewdog/action-remark-lint
-      - name: Show Remark-lint annotations in PR
-        if: ${{ failure() && github.event_name == 'pull_request' }}
-        uses: reviewdog/action-remark-lint@v5
-        with:
-          fail_on_error: true
-          install_deps: false
-          level: info
-          reporter: github-pr-check
+    uses: PHPCSStandards/.github/.github/workflows/reusable-remark.yml@main

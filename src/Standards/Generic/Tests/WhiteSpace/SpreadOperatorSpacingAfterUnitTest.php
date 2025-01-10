@@ -44,6 +44,7 @@ final class SpreadOperatorSpacingAfterUnitTest extends AbstractSniffUnitTest
                 60 => 1,
                 61 => 1,
                 66 => 2,
+                78 => 1,
             ];
 
         default:
