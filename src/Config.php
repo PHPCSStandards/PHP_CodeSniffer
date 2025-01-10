@@ -1655,7 +1655,6 @@ class Config
         $sniffs = [];
 
         $possibleSniffs = explode(',', $input);
-        $possibleSniffs = array_unique($possibleSniffs);
 
         foreach ($possibleSniffs as $sniff) {
             $sniff = trim($sniff);
