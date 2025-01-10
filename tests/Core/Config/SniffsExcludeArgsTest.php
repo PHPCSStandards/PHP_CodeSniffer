@@ -14,6 +14,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests for the \PHP_CodeSniffer\Config --sniffs and --exclude arguments.
  *
+ * @covers \PHP_CodeSniffer\Config::parseSniffCodes
  * @covers \PHP_CodeSniffer\Config::processLongArgument
  */
 final class SniffsExcludeArgsTest extends TestCase
