@@ -1663,11 +1663,6 @@ class Config
         foreach ($possibleSniffs as $sniff) {
             $sniff = trim($sniff);
 
-            if (preg_match('{[^A-Za-z0-9.]}', $sniff) === 1) {
-                $errors[] = 'Unsupported character detected: '.$sniff;
-                continue;
-            }
-
             $partCount = substr_count($sniff, '.');
             if ($partCount === 2) {
                 // Correct number of parts.
