@@ -68,6 +68,7 @@ final class FunctionDeclarationArgumentSpacingUnitTest extends AbstractSniffUnit
             106 => 1,
             107 => 2,
             111 => 3,
+            113 => 1,
         ];
 
     }//end getErrorList()
