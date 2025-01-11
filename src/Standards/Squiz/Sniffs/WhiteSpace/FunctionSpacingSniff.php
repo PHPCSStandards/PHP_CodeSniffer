@@ -154,6 +154,7 @@ class FunctionSpacingSniff implements Sniff
             if ($tokens[$nextLineToken]['code'] === T_DOC_COMMENT_OPEN_TAG) {
                 break;
             }
+
             if ($tokens[$nextLineToken]['line'] !== $tokens[$closer]['line']) {
                 break;
             }
