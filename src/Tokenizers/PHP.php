@@ -2817,7 +2817,10 @@ class PHP extends Tokenizer
                     }
                 }
 
-                if (isset($this->tokens[$x]) === true && $this->tokens[$x]['code'] === T_OPEN_PARENTHESIS) {
+                if (isset($this->tokens[$x]) === true
+                    && $this->tokens[$x]['code'] === T_OPEN_PARENTHESIS
+                    && isset($this->tokens[$x]['parenthesis_closer']) === true
+                ) {
                     $ignore  = Tokens::$emptyTokens;
                     $ignore += [
                         T_ARRAY                  => T_ARRAY,
@@ -2995,7 +2998,7 @@ class PHP extends Tokenizer
                     }//end if
                 }//end if
 
-                // If after all that, the extra tokens are not set, this is not an arrow function.
+                // If after all that, the extra tokens are not set, this is not a (valid) arrow function.
                 if (isset($this->tokens[$i]['scope_closer']) === false) {
                     if (PHP_CODESNIFFER_VERBOSITY > 1) {
                         $line = $this->tokens[$i]['line'];
