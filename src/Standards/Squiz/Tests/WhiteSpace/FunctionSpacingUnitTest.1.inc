@@ -582,3 +582,14 @@ echo 'this line belongs with the #3904 test';
 
 function Foo() {} function bar($name){}
 echo 'this line belongs with the #3904 test';
+
+
+/**
+ * foo.
+ */
+function a() {
+}/**
+ * foo.
+ */
+function b() {
+}
