@@ -149,6 +149,12 @@ class FunctionSpacingSniff implements Sniff
 
         // Allow for comments on the same line as the closer.
         for ($nextLineToken = ($closer + 1); $nextLineToken < $phpcsFile->numTokens; $nextLineToken++) {
+            // A doc comment belongs to the next statement and must not be on
+            // this line.
+            if ($tokens[$nextLineToken]['code'] === T_DOC_COMMENT_OPEN_TAG) {
+                break;
+            }
+
             if ($tokens[$nextLineToken]['line'] !== $tokens[$closer]['line']) {
                 break;
             }
