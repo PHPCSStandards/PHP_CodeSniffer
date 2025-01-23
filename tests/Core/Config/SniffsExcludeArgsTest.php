@@ -24,10 +24,10 @@ final class SniffsExcludeArgsTest extends TestCase
     /**
      * Ensure that the expected error message is returned for invalid arguments.
      *
-     * @param string                $argument   'sniffs' or 'exclude'.
-     * @param string                $value      List of sniffs to include / exclude.
-     * @param array<string, string> $errors     Sniff code and associated help text.
-     * @param string|null           $suggestion Help text shown to end user with correct syntax for argument.
+     * @param string        $argument   'sniffs' or 'exclude'.
+     * @param string        $value      List of sniffs to include / exclude.
+     * @param array<string> $errors     Sniff code and associated help text.
+     * @param string|null   $suggestion Help text shown to end user with correct syntax for argument.
      *
      * @return       void
      * @dataProvider dataInvalidSniffs
