@@ -1260,6 +1260,93 @@ class Config
 
 
     /**
+     * Parse supplied string into a list of validated sniff codes.
+     *
+     * @param string $input    Comma-separated string of sniff codes.
+     * @param string $argument The name of the argument which is being processed.
+     *
+     * @return string[]
+     * @throws DeepExitException When any of the provided codes are not valid as sniff codes.
+     */
+    private function parseSniffCodes($input, $argument)
+    {
+        $errors = [];
+        $sniffs = [];
+
+        $possibleSniffs = array_filter(explode(',', $input));
+
+        if ($possibleSniffs === []) {
+            $errors[] = 'No codes specified / empty argument';
+        }
+
+        foreach ($possibleSniffs as $sniff) {
+            $sniff = trim($sniff);
+
+            $partCount = substr_count($sniff, '.');
+            if ($partCount === 2) {
+                // Correct number of parts.
+                $sniffs[] = $sniff;
+                continue;
+            }
+
+            if ($partCount === 0) {
+                $errors[] = 'Standard codes are not supported: '.$sniff;
+            } else if ($partCount === 1) {
+                $errors[] = 'Category codes are not supported: '.$sniff;
+            } else if ($partCount === 3) {
+                $errors[] = 'Message codes are not supported: '.$sniff;
+            } else {
+                $errors[] = 'Too many parts: '.$sniff;
+            }
+
+            if ($partCount > 2) {
+                $parts    = explode('.', $sniff, 4);
+                $sniffs[] = $parts[0].'.'.$parts[1].'.'.$parts[2];
+            }
+        }//end foreach
+
+        $sniffs = array_reduce(
+            $sniffs,
+            static function ($carry, $item) {
+                $lower = strtolower($item);
+
+                foreach ($carry as $found) {
+                    if ($lower === strtolower($found)) {
+                        // This sniff is already in our list.
+                        return $carry;
+                    }
+                }
+
+                $carry[] = $item;
+
+                return $carry;
+            },
+            []
+        );
+
+        if ($errors !== []) {
+            $error  = 'ERROR: The --'.$argument.' option only supports sniff codes.'.PHP_EOL;
+            $error .= 'Sniff codes are in the form "Standard.Category.Sniff".'.PHP_EOL;
+            $error .= PHP_EOL;
+            $error .= 'The following problems were detected:'.PHP_EOL;
+            $error .= '* '.implode(PHP_EOL.'* ', $errors).PHP_EOL;
+
+            if ($sniffs !== []) {
+                $error .= PHP_EOL;
+                $error .= 'Perhaps try --'.$argument.'="'.implode(',', $sniffs).'" instead.'.PHP_EOL;
+            }
+
+            $error .= PHP_EOL;
+            $error .= $this->printShortUsage(true);
+            throw new DeepExitException(ltrim($error), 3);
+        }
+
+        return $sniffs;
+
+    }//end parseSniffCodes()
+
+
+    /**
      * Processes an unknown command line argument.
      *
      * Assumes all unknown arguments are files and folders to check.
@@ -1638,93 +1725,6 @@ class Config
         }
 
     }//end printConfigData()
-
-
-    /**
-     * Parse supplied string into a list of validated sniff codes.
-     *
-     * @param string $input    Comma-separated string of sniff codes.
-     * @param string $argument The name of the argument which is being processed.
-     *
-     * @return string[]
-     * @throws DeepExitException When any of the provided codes are not valid as sniff codes.
-     */
-    private function parseSniffCodes($input, $argument)
-    {
-        $errors = [];
-        $sniffs = [];
-
-        $possibleSniffs = array_filter(explode(',', $input));
-
-        if ($possibleSniffs === []) {
-            $errors[] = 'No codes specified / empty argument';
-        }
-
-        foreach ($possibleSniffs as $sniff) {
-            $sniff = trim($sniff);
-
-            $partCount = substr_count($sniff, '.');
-            if ($partCount === 2) {
-                // Correct number of parts.
-                $sniffs[] = $sniff;
-                continue;
-            }
-
-            if ($partCount === 0) {
-                $errors[] = 'Standard codes are not supported: '.$sniff;
-            } else if ($partCount === 1) {
-                $errors[] = 'Category codes are not supported: '.$sniff;
-            } else if ($partCount === 3) {
-                $errors[] = 'Message codes are not supported: '.$sniff;
-            } else {
-                $errors[] = 'Too many parts: '.$sniff;
-            }
-
-            if ($partCount > 2) {
-                $parts    = explode('.', $sniff, 4);
-                $sniffs[] = $parts[0].'.'.$parts[1].'.'.$parts[2];
-            }
-        }//end foreach
-
-        $sniffs = array_reduce(
-            $sniffs,
-            static function ($carry, $item) {
-                $lower = strtolower($item);
-
-                foreach ($carry as $found) {
-                    if ($lower === strtolower($found)) {
-                        // This sniff is already in our list.
-                        return $carry;
-                    }
-                }
-
-                $carry[] = $item;
-
-                return $carry;
-            },
-            []
-        );
-
-        if ($errors !== []) {
-            $error  = 'ERROR: The --'.$argument.' option only supports sniff codes.'.PHP_EOL;
-            $error .= 'Sniff codes are in the form "Standard.Category.Sniff".'.PHP_EOL;
-            $error .= PHP_EOL;
-            $error .= 'The following problems were detected:'.PHP_EOL;
-            $error .= '* '.implode(PHP_EOL.'* ', $errors).PHP_EOL;
-
-            if ($sniffs !== []) {
-                $error .= PHP_EOL;
-                $error .= 'Perhaps try --'.$argument.'="'.implode(',', $sniffs).'" instead.'.PHP_EOL;
-            }
-
-            $error .= PHP_EOL;
-            $error .= $this->printShortUsage(true);
-            throw new DeepExitException(ltrim($error), 3);
-        }
-
-        return $sniffs;
-
-    }//end parseSniffCodes()
 
 
 }//end class
