@@ -131,25 +131,30 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                     $data  = [$found];
                     $fix   = $phpcsFile->addFixableError($error, $openBracket, 'SpacingBetween', $data);
                     if ($fix === true) {
-                        $phpcsFile->fixer->replaceToken(($openBracket + 1), '');
+                        $phpcsFile->fixer->beginChangeset();
+                        for ($i = ($openBracket + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                            $phpcsFile->fixer->replaceToken($i, '');
+                        }
+
+                        $phpcsFile->fixer->endChangeset();
                     }
                 }
 
                 // No params, so we don't check normal spacing rules.
                 return;
-            }
+            }//end if
         }//end if
 
         foreach ($params as $paramNumber => $param) {
             if ($param['pass_by_reference'] === true) {
                 $refToken = $param['reference_token'];
 
-                $gap = 0;
                 if ($tokens[($refToken + 1)]['code'] === T_WHITESPACE) {
                     $gap = $tokens[($refToken + 1)]['length'];
-                }
+                    if ($tokens[$refToken]['line'] !== $tokens[($refToken + 2)]['line']) {
+                        $gap = 'newline';
+                    }
 
-                if ($gap !== 0) {
                     $error = 'Expected 0 spaces after reference operator for argument "%s"; %s found';
                     $data  = [
                         $param['name'],
@@ -157,20 +162,25 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                     ];
                     $fix   = $phpcsFile->addFixableError($error, $refToken, 'SpacingAfterReference', $data);
                     if ($fix === true) {
-                        $phpcsFile->fixer->replaceToken(($refToken + 1), '');
+                        $phpcsFile->fixer->beginChangeset();
+                        for ($i = ($refToken + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                            $phpcsFile->fixer->replaceToken($i, '');
+                        }
+
+                        $phpcsFile->fixer->endChangeset();
                     }
-                }
+                }//end if
             }//end if
 
             if ($param['variable_length'] === true) {
                 $variadicToken = $param['variadic_token'];
 
-                $gap = 0;
                 if ($tokens[($variadicToken + 1)]['code'] === T_WHITESPACE) {
                     $gap = $tokens[($variadicToken + 1)]['length'];
-                }
+                    if ($tokens[$variadicToken]['line'] !== $tokens[($variadicToken + 2)]['line']) {
+                        $gap = 'newline';
+                    }
 
-                if ($gap !== 0) {
                     $error = 'Expected 0 spaces after variadic operator for argument "%s"; %s found';
                     $data  = [
                         $param['name'],
@@ -178,16 +188,23 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                     ];
                     $fix   = $phpcsFile->addFixableError($error, $variadicToken, 'SpacingAfterVariadic', $data);
                     if ($fix === true) {
-                        $phpcsFile->fixer->replaceToken(($variadicToken + 1), '');
+                        $phpcsFile->fixer->beginChangeset();
+                        for ($i = ($variadicToken + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                            $phpcsFile->fixer->replaceToken($i, '');
+                        }
+
+                        $phpcsFile->fixer->endChangeset();
                     }
-                }
+                }//end if
             }//end if
 
             if (isset($param['default_equal_token']) === true) {
                 $equalToken = $param['default_equal_token'];
 
                 $spacesBefore = 0;
-                if (($equalToken - $param['token']) > 1) {
+                if ($tokens[$param['token']]['line'] !== $tokens[$equalToken]['line']) {
+                    $spacesBefore = 'newline';
+                } else if ($tokens[($param['token'] + 1)]['code'] === T_WHITESPACE) {
                     $spacesBefore = $tokens[($param['token'] + 1)]['length'];
                 }
 
@@ -198,19 +215,30 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                         $spacesBefore,
                     ];
 
-                    $fix = $phpcsFile->addFixableError($error, $equalToken, 'SpaceBeforeEquals', $data);
-                    if ($fix === true) {
-                        $padding = str_repeat(' ', $this->equalsSpacing);
-                        if ($spacesBefore === 0) {
-                            $phpcsFile->fixer->addContentBefore($equalToken, $padding);
-                        } else {
-                            $phpcsFile->fixer->replaceToken(($equalToken - 1), $padding);
+                    $nextNonWhitespace = $phpcsFile->findNext(T_WHITESPACE, ($param['token'] + 1), $equalToken, true);
+                    if ($nextNonWhitespace !== false) {
+                        $phpcsFile->addError($error, $equalToken, 'SpaceBeforeEquals', $data);
+                    } else {
+                        $fix = $phpcsFile->addFixableError($error, $equalToken, 'SpaceBeforeEquals', $data);
+                        if ($fix === true) {
+                            $padding = str_repeat(' ', $this->equalsSpacing);
+
+                            $phpcsFile->fixer->beginChangeset();
+                            $phpcsFile->fixer->addContent($param['token'], $padding);
+
+                            for ($i = ($param['token'] + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                                $phpcsFile->fixer->replaceToken($i, '');
+                            }
+
+                            $phpcsFile->fixer->endChangeset();
                         }
                     }
                 }//end if
 
                 $spacesAfter = 0;
-                if ($tokens[($equalToken + 1)]['code'] === T_WHITESPACE) {
+                if ($tokens[$equalToken]['line'] !== $tokens[$param['default_token']]['line']) {
+                    $spacesAfter = 'newline';
+                } else if ($tokens[($equalToken + 1)]['code'] === T_WHITESPACE) {
                     $spacesAfter = $tokens[($equalToken + 1)]['length'];
                 }
 
@@ -221,13 +249,22 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                         $spacesAfter,
                     ];
 
-                    $fix = $phpcsFile->addFixableError($error, $equalToken, 'SpaceAfterEquals', $data);
-                    if ($fix === true) {
-                        $padding = str_repeat(' ', $this->equalsSpacing);
-                        if ($spacesAfter === 0) {
+                    $nextNonWhitespace = $phpcsFile->findNext(T_WHITESPACE, ($equalToken + 1), $param['default_token'], true);
+                    if ($nextNonWhitespace !== false) {
+                        $phpcsFile->addError($error, $equalToken, 'SpaceAfterEquals', $data);
+                    } else {
+                        $fix = $phpcsFile->addFixableError($error, $equalToken, 'SpaceAfterEquals', $data);
+                        if ($fix === true) {
+                            $padding = str_repeat(' ', $this->equalsSpacing);
+
+                            $phpcsFile->fixer->beginChangeset();
                             $phpcsFile->fixer->addContent($equalToken, $padding);
-                        } else {
-                            $phpcsFile->fixer->replaceToken(($equalToken + 1), $padding);
+
+                            for ($i = ($equalToken + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                                $phpcsFile->fixer->replaceToken($i, '');
+                            }
+
+                            $phpcsFile->fixer->endChangeset();
                         }
                     }
                 }//end if
@@ -275,18 +312,53 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
             }
 
             if ($commaToken !== false) {
-                if ($tokens[($commaToken - 1)]['code'] === T_WHITESPACE) {
+                $endOfPreviousParam = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($commaToken - 1), null, true);
+
+                $spaceBeforeComma = 0;
+                if ($tokens[$endOfPreviousParam]['line'] !== $tokens[$commaToken]['line']) {
+                    $spaceBeforeComma = 'newline';
+                } else if ($tokens[($commaToken - 1)]['code'] === T_WHITESPACE) {
+                    $spaceBeforeComma = $tokens[($commaToken - 1)]['length'];
+                }
+
+                if ($spaceBeforeComma !== 0) {
                     $error = 'Expected 0 spaces between argument "%s" and comma; %s found';
                     $data  = [
                         $params[($paramNumber - 1)]['name'],
-                        $tokens[($commaToken - 1)]['length'],
+                        $spaceBeforeComma,
                     ];
 
                     $fix = $phpcsFile->addFixableError($error, $commaToken, 'SpaceBeforeComma', $data);
                     if ($fix === true) {
-                        $phpcsFile->fixer->replaceToken(($commaToken - 1), '');
-                    }
-                }
+                        $startOfCurrentParam = $phpcsFile->findNext(Tokens::$emptyTokens, ($commaToken + 1), null, true);
+
+                        $phpcsFile->fixer->beginChangeset();
+                        $phpcsFile->fixer->addContent($endOfPreviousParam, ',');
+                        $phpcsFile->fixer->replaceToken($commaToken, '');
+
+                        if ($tokens[$commaToken]['line'] === $tokens[$startOfCurrentParam]['line']) {
+                            for ($i = ($commaToken + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                                $phpcsFile->fixer->replaceToken($i, '');
+                            }
+                        } else {
+                            for ($i = ($commaToken - 1);
+                                $tokens[$i]['code'] === T_WHITESPACE && $tokens[$endOfPreviousParam]['line'] !== $tokens[$i]['line'];
+                                $i--
+                            ) {
+                                $phpcsFile->fixer->replaceToken($i, '');
+                            }
+
+                            for ($i = ($commaToken + 1);
+                                $tokens[$i]['code'] === T_WHITESPACE && $tokens[$commaToken]['line'] === $tokens[$i]['line'];
+                                $i++
+                            ) {
+                                $phpcsFile->fixer->replaceToken($i, '');
+                            }
+                        }
+
+                        $phpcsFile->fixer->endChangeset();
+                    }//end if
+                }//end if
 
                 // Don't check spacing after the comma if it is the last content on the line.
                 $checkComma = true;
@@ -324,10 +396,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                             }
                         }//end if
                     } else {
-                        $hint = $phpcsFile->getTokensAsString($param['type_hint_token'], (($param['type_hint_end_token'] - $param['type_hint_token']) + 1));
-                        if ($param['nullable_type'] === true) {
-                            $hint = '?'.$hint;
-                        }
+                        $hint = $param['type_hint'];
 
                         if ($tokens[($commaToken + 1)]['code'] !== T_WHITESPACE) {
                             $error = 'Expected 1 space between comma and type hint "%s"; 0 found';
