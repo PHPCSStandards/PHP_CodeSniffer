@@ -28,10 +28,10 @@ jobs:
 
     strategy:
       matrix:
-        os: ['ubuntu-latest', 'windows-latest']
+        os: ['ubuntu-24.04-arm', 'windows-latest']
         php: ['7.2', 'latest']
 
-    name: "QuickTest: PHP ${{ matrix.php }} (${{ matrix.os == 'ubuntu-latest' && 'Linux' || 'Win'  }})"
+    name: "QuickTest: PHP ${{ matrix.php }} (${{ matrix.os == 'windows-latest' && 'Win' || 'Linux ARM' }})"
 
     steps:
       - name: Prepare git to leave line endings alone
