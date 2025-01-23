@@ -450,7 +450,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
      *
      * @see self::testSettingInvalidPropertiesOnStandardsAndCategoriesSilentlyFails()
      *
-     * @return array<string, array>string, string>>
+     * @return array<string, array<string, string>>
      */
     public static function dataSettingInvalidPropertiesOnStandardsAndCategoriesSilentlyFails()
     {
