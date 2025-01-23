@@ -30,7 +30,7 @@ final class SniffsExcludeArgsTest extends TestCase
      * @param string|null   $suggestion Help text shown to end user with correct syntax for argument.
      *
      * @return       void
-     * @dataProvider dataInvalidSniffs
+     * @dataProvider dataInvalid
      */
     public function testInvalid($argument, $value, $errors, $suggestion)
     {
@@ -70,7 +70,7 @@ final class SniffsExcludeArgsTest extends TestCase
      * @see    self::testInvalid()
      * @return non-empty-array<string, array{argument: string, value: string, errors: string[], suggestion: string|null}>
      */
-    public static function dataInvalidSniffs()
+    public static function dataInvalid()
     {
         $arguments = [
             'sniffs',
@@ -197,7 +197,7 @@ final class SniffsExcludeArgsTest extends TestCase
 
         return $data;
 
-    }//end dataInvalidSniffs()
+    }//end dataInvalid()
 
 
     /**
@@ -208,7 +208,7 @@ final class SniffsExcludeArgsTest extends TestCase
      * @param string[] $result   Expected sniffs to be set on the Config object.
      *
      * @return       void
-     * @dataProvider dataValidSniffs
+     * @dataProvider dataValid
      */
     public function testValid($argument, $value, $result)
     {
@@ -225,7 +225,7 @@ final class SniffsExcludeArgsTest extends TestCase
      * @see    self::testValid()
      * @return non-empty-array<string, array{argument: string, value: string, result: string[]}>
      */
-    public static function dataValidSniffs()
+    public static function dataValid()
     {
         $arguments = [
             'sniffs',
@@ -278,7 +278,7 @@ final class SniffsExcludeArgsTest extends TestCase
 
         return $data;
 
-    }//end dataValidSniffs()
+    }//end dataValid()
 
 
     /**
