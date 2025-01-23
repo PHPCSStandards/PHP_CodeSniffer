@@ -68,7 +68,7 @@ final class SniffsExcludeArgsTest extends TestCase
      * Data provider for testInvalid().
      *
      * @see    self::testInvalid()
-     * @return array<string, array<string, string, string[], string>>
+     * @return non-empty-array<string, array{argument: string, value: string, errors: string[], suggestion: string|null}>
      */
     public static function dataInvalidSniffs()
     {
@@ -223,7 +223,7 @@ final class SniffsExcludeArgsTest extends TestCase
      * Data provider for testValid().
      *
      * @see    self::testValid()
-     * @return array<string, array<string, string, string[]>
+     * @return non-empty-array<string, array{argument: string, value: string, result: string[]}>
      */
     public static function dataValidSniffs()
     {
