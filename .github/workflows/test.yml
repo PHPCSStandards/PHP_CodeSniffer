@@ -93,6 +93,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # This is a temporary solution.
+      # Once ubuntu-latest includes the latest libxml2 version, this step can be removed.
+      - name: Install latest libxml2 on PHP 8.4 (linux only)
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.php == '8.4' }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget build-essential
+          wget https://download.gnome.org/sources/libxml2/2.12/libxml2-2.12.9.tar.xz
+          tar -xf libxml2-2.12.9.tar.xz
+          cd libxml2-2.12.9
+          ./configure --prefix=/usr/local
+          make
+          sudo make install
+          sudo ldconfig
+
       - name: Setup ini config
         id: set_ini
         shell: bash
