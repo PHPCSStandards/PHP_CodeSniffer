@@ -39,7 +39,7 @@ final class ProcessRulesetBrokenRulesetTest extends AbstractRulesetTestCase
         $standard = __DIR__.'/ProcessRulesetBrokenRulesetEmptyFileTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
-        $regex = '#^Ruleset \S+ProcessRulesetBrokenRulesetEmptyFileTest\.xml is not valid\R';
+        $regex  = '#^Ruleset \S+ProcessRulesetBrokenRulesetEmptyFileTest\.xml is not valid\R';
         $regex .= '(- On line 1, column 1: Document is empty\R)?$#';
 
         $this->expectRuntimeExceptionRegex($regex);
