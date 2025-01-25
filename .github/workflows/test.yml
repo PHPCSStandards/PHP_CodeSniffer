@@ -51,6 +51,9 @@ jobs:
       # Keys:
       # - custom_ini: Whether to run with specific custom ini settings to hit very specific
       #   code conditions.
+
+      # Don't cancel in-progress matrix jobs
+      fail-fast: false
       matrix:
         os: ['ubuntu-latest', 'windows-latest']
         php: ['5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
@@ -92,6 +95,20 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v4
+
+    # A temporary solution
+    - name: Install libxml2 >= 2.12 (PHP 8.1+ on linux only)
+      if: ${{ matrix.os == 'ubuntu-latest' && contains(fromJSON('["8.1", "8.2", "8.3"]'), matrix.php) }}
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget build-essential
+        wget https://download.gnome.org/sources/libxml2/2.12/libxml2-2.12.9.tar.xz
+        tar -xf libxml2-2.12.9.tar.xz
+        cd libxml2-2.12.9
+        ./configure --prefix=/usr/local
+        make
+        sudo make install
+        sudo ldconfig
 
       - name: Setup ini config
         id: set_ini
