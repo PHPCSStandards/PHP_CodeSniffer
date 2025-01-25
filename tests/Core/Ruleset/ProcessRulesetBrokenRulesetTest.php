@@ -39,8 +39,8 @@ final class ProcessRulesetBrokenRulesetTest extends AbstractRulesetTestCase
         $standard = __DIR__.'/ProcessRulesetBrokenRulesetEmptyFileTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
-        $regex  = '#^Ruleset \S+ProcessRulesetBrokenRulesetEmptyFileTest\.xml is not valid\R';
-        $regex .= '(- On line 1, column 1: Document is empty\R)?$#';
+        $regex  = '`^Ruleset \S+ProcessRulesetBrokenRulesetEmptyFileTest\.xml is not valid\R';
+        $regex .= '(- On line 1, column 1: Document is empty\R)?$`';
 
         $this->expectRuntimeExceptionRegex($regex);
 
@@ -79,10 +79,10 @@ final class ProcessRulesetBrokenRulesetTest extends AbstractRulesetTestCase
         $standard = __DIR__.'/ProcessRulesetBrokenRulesetMultiErrorTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
-        $regex  = '#^Ruleset \S+ProcessRulesetBrokenRulesetMultiErrorTest\.xml is not valid\R';
+        $regex  = '`^Ruleset \S+ProcessRulesetBrokenRulesetMultiErrorTest\.xml is not valid\R';
         $regex .= '- On line 8, column 12: Opening and ending tag mismatch: property line 7 and rule\R';
         $regex .= '- On line 10, column 11: Opening and ending tag mismatch: properties line 5 and ruleset\R';
-        $regex .= '(- On line 11, column 1: Premature end of data in tag rule line 4\R)?$#';
+        $regex .= '(- On line 11, column 1: Premature end of data in tag rule line 4\R)?$`';
 
         $this->expectRuntimeExceptionRegex($regex);
 
