@@ -93,19 +93,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # A temporary solution
-      - name: Install libxml2 >= 2.12 (PHP 8.1+ on linux only)
-        if: ${{ matrix.os == 'ubuntu-latest' && contains(fromJSON('["8.1", "8.2", "8.3"]'), matrix.php) }}
+      # This is a temporary solution.
+      # Once ubuntu-latest includes the latest libxml2 version, this step can be removed.
+      - name: Install latest libxml2 on PHP 8.4 (linux only)
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.php == '8.4' }}
         run: |
-          sudo apt-get update
-          sudo apt-get install -y wget build-essential
-          wget https://download.gnome.org/sources/libxml2/2.12/libxml2-2.12.9.tar.xz
-          tar -xf libxml2-2.12.9.tar.xz
-          cd libxml2-2.12.9
-          ./configure --prefix=/usr/local
-          make
-          sudo make install
-          sudo ldconfig
+          export HOMEBREW_NO_ANALYTICS=1
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          echo "/home/linuxbrew/.linuxbrew/bin" >> $GITHUB_PATH
+          brew install libxml2
 
       - name: Setup ini config
         id: set_ini
