@@ -36,17 +36,44 @@ final class ProcessRulesetBrokenRulesetTest extends AbstractRulesetTestCase
      */
     public function testBrokenRulesetEmptyFile()
     {
+        if (version_compare(LIBXML_DOTTED_VERSION, '2.12.0', '>=') === false) {
+            $this->markTestSkipped('Test requires libxml2 2.12.0 or higher');
+        }
+
         $standard = __DIR__.'/ProcessRulesetBrokenRulesetEmptyFileTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
         $regex  = '`^Ruleset \S+ProcessRulesetBrokenRulesetEmptyFileTest\.xml is not valid\R';
-        $regex .= '(- On line 1, column 1: Document is empty\R)?$`';
+        $regex .= '- On line 1, column 1: Document is empty\R$`';
 
         $this->expectRuntimeExceptionRegex($regex);
 
         new Ruleset($config);
 
     }//end testBrokenRulesetEmptyFile()
+
+
+    /**
+     * Test displaying an informative error message when an empty XML ruleset file is encountered.
+     *
+     * @return void
+     */
+    public function testBrokenRulesetEmptyFileWithOldLibxml2()
+    {
+        if (version_compare(LIBXML_DOTTED_VERSION, '2.12.0', '<') === false) {
+            $this->markTestSkipped('Test requires libxml2 < 2.12.0');
+        }
+
+        $standard = __DIR__.'/ProcessRulesetBrokenRulesetEmptyFileTest.xml';
+        $config   = new ConfigDouble(["--standard=$standard"]);
+
+        $regex = '`^Ruleset \S+ProcessRulesetBrokenRulesetEmptyFileTest\.xml is not valid\R$`';
+
+        $this->expectRuntimeExceptionRegex($regex);
+
+        new Ruleset($config);
+
+    }//end testBrokenRulesetEmptyFileWithOldLibxml2()
 
 
     /**
@@ -76,19 +103,48 @@ final class ProcessRulesetBrokenRulesetTest extends AbstractRulesetTestCase
      */
     public function testBrokenRulesetMultiError()
     {
+        if (version_compare(LIBXML_DOTTED_VERSION, '2.12.0', '>=') === false) {
+            $this->markTestSkipped('Test requires libxml2 >= v2.12.0');
+        }
+
         $standard = __DIR__.'/ProcessRulesetBrokenRulesetMultiErrorTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
         $regex  = '`^Ruleset \S+ProcessRulesetBrokenRulesetMultiErrorTest\.xml is not valid\R';
         $regex .= '- On line 8, column 12: Opening and ending tag mismatch: property line 7 and rule\R';
-        $regex .= '- On line 10, column 11: Opening and ending tag mismatch: properties line 5 and ruleset\R';
-        $regex .= '(- On line 11, column 1: Premature end of data in tag rule line 4\R)?$`';
+        $regex .= '- On line 10, column 11: Opening and ending tag mismatch: properties line 5 and ruleset\R$`';
 
         $this->expectRuntimeExceptionRegex($regex);
 
         new Ruleset($config);
 
     }//end testBrokenRulesetMultiError()
+
+
+    /**
+     * Test displaying an informative error message for a broken XML ruleset with multiple XML errors.
+     *
+     * @return void
+     */
+    public function testBrokenRulesetMultiErrorWithOldLibxml2()
+    {
+        if (version_compare(LIBXML_DOTTED_VERSION, '2.12.0', '<') === false) {
+            $this->markTestSkipped('Test requires libxml2 < v2.12.0');
+        }
+
+        $standard = __DIR__.'/ProcessRulesetBrokenRulesetMultiErrorTest.xml';
+        $config   = new ConfigDouble(["--standard=$standard"]);
+
+        $regex  = '`^Ruleset \S+ProcessRulesetBrokenRulesetMultiErrorTest\.xml is not valid\R';
+        $regex .= '- On line 8, column 12: Opening and ending tag mismatch: property line 7 and rule\R';
+        $regex .= '- On line 10, column 11: Opening and ending tag mismatch: properties line 5 and ruleset\R';
+        $regex .= '- On line 11, column 1: Premature end of data in tag rule line 4\R$`';
+
+        $this->expectRuntimeExceptionRegex($regex);
+
+        new Ruleset($config);
+
+    }//end testBrokenRulesetMultiErrorWithOldLibxml2()
 
 
 }//end class
