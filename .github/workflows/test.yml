@@ -94,12 +94,12 @@ jobs:
         uses: actions/checkout@v4
 
       # This is a temporary solution.
-      # Once ubuntu-latest includes the latest libxml2 version, this step can be removed.
+      # Once ubuntu-latest includes libxml2 >= v2.12.0, this and the following steps can be removed.
       - name: Install homebrew
         if: ${{ matrix.os == 'ubuntu-latest' && matrix.php == '8.4' }}
         run: |
           export HOMEBREW_NO_ANALYTICS=1
-          echo "/home/linuxbrew/.linuxbrew/bin" >> $GITHUB_PATH
+          echo "/home/linuxbrew/.linuxbrew/bin" >> "$GITHUB_PATH"
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       - name: Install latest libxml2 on PHP 8.4 (linux only)
         if: ${{ matrix.os == 'ubuntu-latest' && matrix.php == '8.4' }}
