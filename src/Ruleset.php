@@ -1575,9 +1575,9 @@ class Ruleset
 
         if ($isSettable === false) {
             if ($settings['scope'] === 'sniff') {
-                $notice  = "ERROR: Ruleset invalid. Property \"$propertyName\" does not exist on sniff ";
-                $notice .= array_search($sniffClass, $this->sniffCodes, true);
-                throw new RuntimeException($notice);
+                $notice  = "Property \"$propertyName\" does not exist on sniff ";
+                $notice .= array_search($sniffClass, $this->sniffCodes, true).'.';
+                $this->msgCache->add($notice, MsgCollector::ERROR);
             }
 
             return;
