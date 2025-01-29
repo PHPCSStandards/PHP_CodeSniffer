@@ -255,7 +255,7 @@ class Ruleset
         }
 
         if ($numSniffs === 0) {
-            throw new RuntimeException('ERROR: No sniffs were registered');
+            $this->msgCache->add('No sniffs were registered.', MsgCollector::ERROR);
         }
 
         $this->displayCachedMessages();
