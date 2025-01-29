@@ -202,11 +202,11 @@ class Ruleset
 
             if (defined('PHP_CODESNIFFER_IN_TESTS') === true && empty($restrictions) === false) {
                 // In unit tests, only register the sniffs that the test wants and not the entire standard.
-                try {
-                    foreach ($restrictions as $restriction) {
-                        $sniffs = array_merge($sniffs, $this->expandRulesetReference($restriction, dirname($standard)));
-                    }
-                } catch (RuntimeException $e) {
+                foreach ($restrictions as $restriction) {
+                    $sniffs = array_merge($sniffs, $this->expandRulesetReference($restriction, dirname($standard)));
+                }
+
+                if (empty($sniffs) === true) {
                     // Sniff reference could not be expanded, which probably means this
                     // is an installed standard. Let the unit test system take care of
                     // setting the correct sniff for testing.
@@ -255,7 +255,7 @@ class Ruleset
         }
 
         if ($numSniffs === 0) {
-            throw new RuntimeException('ERROR: No sniffs were registered');
+            $this->msgCache->add('No sniffs were registered.', MessageCollector::ERROR);
         }
 
         $this->displayCachedMessages();
@@ -1040,8 +1040,8 @@ class Ruleset
             }
         } else {
             if (is_file($ref) === false) {
-                $error = "ERROR: Referenced sniff \"$ref\" does not exist";
-                throw new RuntimeException($error);
+                $this->msgCache->add("Referenced sniff \"$ref\" does not exist.", MessageCollector::ERROR);
+                return [];
             }
 
             if (substr($ref, -9) === 'Sniff.php') {
@@ -1130,18 +1130,19 @@ class Ruleset
 
                 $type = strtolower((string) $rule->type);
                 if ($type !== 'error' && $type !== 'warning') {
-                    throw new RuntimeException("ERROR: Message type \"$type\" is invalid; must be \"error\" or \"warning\"");
-                }
+                    $message = "Message type \"$type\" for \"$code\" is invalid; must be \"error\" or \"warning\".";
+                    $this->msgCache->add($message, MessageCollector::ERROR);
+                } else {
+                    $this->ruleset[$code]['type'] = $type;
+                    if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                        echo str_repeat("\t", $depth);
+                        echo "\t\t=> message type set to ".(string) $rule->type;
+                        if ($code !== $ref) {
+                            echo " for $code";
+                        }
 
-                $this->ruleset[$code]['type'] = $type;
-                if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    echo str_repeat("\t", $depth);
-                    echo "\t\t=> message type set to ".(string) $rule->type;
-                    if ($code !== $ref) {
-                        echo " for $code";
+                        echo PHP_EOL;
                     }
-
-                    echo PHP_EOL;
                 }
             }//end if
 
@@ -1459,8 +1460,12 @@ class Ruleset
 
             $tokens = $this->sniffs[$sniffClass]->register();
             if (is_array($tokens) === false) {
-                $msg = "ERROR: Sniff $sniffClass register() method must return an array";
-                throw new RuntimeException($msg);
+                $msg = "The sniff {$sniffClass}::register() method must return an array.";
+                $this->msgCache->add($msg, MessageCollector::ERROR);
+
+                // Unregister the sniff.
+                unset($this->sniffs[$sniffClass], $this->sniffCodes[$sniffCode], $this->deprecatedSniffs[$sniffCode]);
+                continue;
             }
 
             $ignorePatterns = [];
@@ -1570,9 +1575,9 @@ class Ruleset
 
         if ($isSettable === false) {
             if ($settings['scope'] === 'sniff') {
-                $notice  = "ERROR: Ruleset invalid. Property \"$propertyName\" does not exist on sniff ";
-                $notice .= array_search($sniffClass, $this->sniffCodes, true);
-                throw new RuntimeException($notice);
+                $notice  = "Property \"$propertyName\" does not exist on sniff ";
+                $notice .= array_search($sniffClass, $this->sniffCodes, true).'.';
+                $this->msgCache->add($notice, MessageCollector::ERROR);
             }
 
             return;

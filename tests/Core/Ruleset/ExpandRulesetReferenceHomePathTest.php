@@ -109,7 +109,8 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
         $standard = __DIR__.'/ExpandRulesetReferenceHomePathFailTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
-        $exceptionMessage = 'ERROR: Referenced sniff "~/src/MyStandard/Sniffs/DoesntExist/" does not exist';
+        $exceptionMessage  = 'ERROR: Referenced sniff "~/src/MyStandard/Sniffs/DoesntExist/" does not exist.'.PHP_EOL;
+        $exceptionMessage .= 'ERROR: No sniffs were registered.'.PHP_EOL.PHP_EOL;
         $this->expectRuntimeExceptionMessage($exceptionMessage);
 
         new Ruleset($config);

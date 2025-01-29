@@ -62,10 +62,15 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
         $config   = new ConfigDouble(["--standard=$standard"]);
 
         $sniffClass = 'Fixtures\\TestStandard\\Sniffs\\InvalidSniffs\\RegisterNoArraySniff';
-        $message    = "ERROR: Sniff $sniffClass register() method must return an array";
+        $message    = "ERROR: The sniff {$sniffClass}::register() method must return an array.".PHP_EOL.PHP_EOL;
         $this->expectRuntimeExceptionMessage($message);
 
         new Ruleset($config);
+
+        // Verify that the sniff has not been registered/has been unregistered.
+        // These assertions will only take effect for PHPUnit 10+.
+        $this->assertArrayNotHasKey($sniffClass, self::$ruleset->sniffs, "Sniff class $sniffClass is listed in registered sniffs");
+        $this->assertArrayNotHasKey('TestStandard.InvalidSniffs.RegisterNoArray', self::$ruleset->sniffCodes, 'Sniff code is registered');
 
     }//end testSniffWhereRegisterDoesNotReturnAnArrayThrowsException()
 
