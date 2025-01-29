@@ -1460,8 +1460,12 @@ class Ruleset
 
             $tokens = $this->sniffs[$sniffClass]->register();
             if (is_array($tokens) === false) {
-                $msg = "ERROR: Sniff $sniffClass register() method must return an array";
-                throw new RuntimeException($msg);
+                $msg = "The sniff $sniffClass register() method must return an array.";
+                $this->msgCache->add($msg, MsgCollector::ERROR);
+
+                // Unregister the sniff.
+                unset($this->sniffs[$sniffClass], $this->sniffCodes[$sniffCode], $this->deprecatedSniffs[$sniffCode]);
+                continue;
             }
 
             $ignorePatterns = [];

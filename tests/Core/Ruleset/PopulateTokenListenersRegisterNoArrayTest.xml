@@ -5,4 +5,6 @@
 
     <rule ref="TestStandard.InvalidSniffs.RegisterNoArray"/>
 
+    <!-- Prevent a "no sniff were registered" error. -->
+    <rule ref="Generic.PHP.BacktickOperator"/>
 </ruleset>
