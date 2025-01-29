@@ -202,11 +202,11 @@ class Ruleset
 
             if (defined('PHP_CODESNIFFER_IN_TESTS') === true && empty($restrictions) === false) {
                 // In unit tests, only register the sniffs that the test wants and not the entire standard.
-                try {
-                    foreach ($restrictions as $restriction) {
-                        $sniffs = array_merge($sniffs, $this->expandRulesetReference($restriction, dirname($standard)));
-                    }
-                } catch (RuntimeException $e) {
+                foreach ($restrictions as $restriction) {
+                    $sniffs = array_merge($sniffs, $this->expandRulesetReference($restriction, dirname($standard)));
+                }
+
+                if (empty($sniffs) === true) {
                     // Sniff reference could not be expanded, which probably means this
                     // is an installed standard. Let the unit test system take care of
                     // setting the correct sniff for testing.
@@ -1040,8 +1040,8 @@ class Ruleset
             }
         } else {
             if (is_file($ref) === false) {
-                $error = "ERROR: Referenced sniff \"$ref\" does not exist";
-                throw new RuntimeException($error);
+                $this->msgCache->add("Referenced sniff \"$ref\" does not exist.", MsgCollector::ERROR);
+                return [];
             }
 
             if (substr($ref, -9) === 'Sniff.php') {
