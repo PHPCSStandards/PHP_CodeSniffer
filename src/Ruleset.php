@@ -1130,18 +1130,19 @@ class Ruleset
 
                 $type = strtolower((string) $rule->type);
                 if ($type !== 'error' && $type !== 'warning') {
-                    throw new RuntimeException("ERROR: Message type \"$type\" is invalid; must be \"error\" or \"warning\"");
-                }
+                    $message = "Message type \"$type\" for \"$code\" is invalid; must be \"error\" or \"warning\".";
+                    $this->msgCache->add($message, MsgCollector::ERROR);
+                } else {
+                    $this->ruleset[$code]['type'] = $type;
+                    if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                        echo str_repeat("\t", $depth);
+                        echo "\t\t=> message type set to ".(string) $rule->type;
+                        if ($code !== $ref) {
+                            echo " for $code";
+                        }
 
-                $this->ruleset[$code]['type'] = $type;
-                if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    echo str_repeat("\t", $depth);
-                    echo "\t\t=> message type set to ".(string) $rule->type;
-                    if ($code !== $ref) {
-                        echo " for $code";
+                        echo PHP_EOL;
                     }
-
-                    echo PHP_EOL;
                 }
             }//end if
 
