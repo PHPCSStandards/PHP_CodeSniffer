@@ -14,6 +14,7 @@ namespace PHP_CodeSniffer;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Sniffs\DeprecatedSniff;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\MessageCollector;
 use PHP_CodeSniffer\Util\Standards;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -131,6 +132,20 @@ class Ruleset
      */
     private $deprecatedSniffs = [];
 
+    /**
+     * Message collector object.
+     *
+     * User-facing messages should be collected via this object for display once the ruleset processing has finished.
+     *
+     * The following type of errors should *NOT* be collected, but should still throw their own `RuntimeException`:
+     * - Errors which could cause other (uncollectable) errors further into the ruleset processing, like a missing autoload file.
+     * - Errors which are directly aimed at and only intended for sniff developers or integrators
+     *   (in contrast to ruleset maintainers or end-users).
+     *
+     * @var \PHP_CodeSniffer\Util\MessageCollector
+     */
+    private $msgCache;
+
 
     /**
      * Initialise the ruleset that the run will use.
@@ -138,14 +153,15 @@ class Ruleset
      * @param \PHP_CodeSniffer\Config $config The config data for the run.
      *
      * @return void
-     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If no sniffs were registered.
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If blocking errors were encountered when processing the ruleset.
      */
     public function __construct(Config $config)
     {
-        $this->config = $config;
-        $restrictions = $config->sniffs;
-        $exclusions   = $config->exclude;
-        $sniffs       = [];
+        $this->config   = $config;
+        $restrictions   = $config->sniffs;
+        $exclusions     = $config->exclude;
+        $sniffs         = [];
+        $this->msgCache = new MessageCollector();
 
         $standardPaths = [];
         foreach ($config->standards as $standard) {
@@ -241,6 +257,8 @@ class Ruleset
         if ($numSniffs === 0) {
             throw new RuntimeException('ERROR: No sniffs were registered');
         }
+
+        $this->displayCachedMessages();
 
     }//end __construct()
 
@@ -459,6 +477,35 @@ class Ruleset
         echo PHP_EOL.PHP_EOL.$closer.PHP_EOL.PHP_EOL;
 
     }//end showSniffDeprecations()
+
+
+    /**
+     * Print any notices encountered while processing the ruleset(s).
+     *
+     * Note: these messages aren't shown at the time they are encountered to avoid "one error hiding behind another".
+     * This way the (end-)user gets to see all of them in one go.
+     *
+     * @return void
+     *
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If blocking errors were encountered.
+     */
+    private function displayCachedMessages()
+    {
+        // Don't show deprecations/notices/warnings in quiet mode, in explain mode
+        // or when the documentation is being shown.
+        // Documentation and explain will call the Ruleset multiple times which
+        // would lead to duplicate display of the messages.
+        if ($this->msgCache->containsBlockingErrors() === false
+            && ($this->config->quiet === true
+            || $this->config->explain === true
+            || $this->config->generator !== null)
+        ) {
+            return;
+        }
+
+        $this->msgCache->display();
+
+    }//end displayCachedMessages()
 
 
     /**
