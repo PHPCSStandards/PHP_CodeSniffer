@@ -253,7 +253,7 @@ class Common
     {
         $cmd = escapeshellcmd($cmd);
 
-        if (stripos(PHP_OS, 'WIN') === 0) {
+        if (PHP_OS_FAMILY === 'Windows') {
             // Spaces are not escaped by escapeshellcmd on Windows, but need to be
             // for the command to be able to execute.
             $cmd = preg_replace('`(?<!^) `', '^ ', $cmd);
@@ -278,7 +278,7 @@ class Common
      */
     public static function prepareForOutput($content, $exclude=[])
     {
-        if (stripos(PHP_OS, 'WIN') === 0) {
+        if (PHP_OS_FAMILY === 'Windows') {
             if (in_array("\r", $exclude, true) === false) {
                 $content = str_replace("\r", '\r', $content);
             }

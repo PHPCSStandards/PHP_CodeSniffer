@@ -450,7 +450,7 @@ class Config
         }//end if
 
         if (defined('STDIN') === false
-            || stripos(PHP_OS, 'WIN') === 0
+            || PHP_OS_FAMILY === 'Windows'
         ) {
             return;
         }
@@ -1614,7 +1614,7 @@ class Config
             return self::$executablePaths[$name];
         }
 
-        if (stripos(PHP_OS, 'WIN') === 0) {
+        if (PHP_OS_FAMILY === 'Windows') {
             $cmd = 'where '.escapeshellarg($name).' 2> nul';
         } else {
             $cmd = 'which '.escapeshellarg($name).' 2> /dev/null';

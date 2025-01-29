@@ -36,7 +36,7 @@ final class EscapeshellcmdTest extends TestCase
      */
     public function testEscapeshellcmd($command, $expected, $expectedWin=null)
     {
-        if (stripos(PHP_OS, 'WIN') === 0 && empty($expectedWin) === false) {
+        if (PHP_OS_FAMILY === 'Windows' && empty($expectedWin) === false) {
             $expected = $expectedWin;
         }
 
