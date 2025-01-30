@@ -171,6 +171,21 @@ class Config
     private $cliArgs = [];
 
     /**
+     * A list of valid generators.
+     *
+     * {@internal Once support for PHP < 5.6 is dropped, this property should be refactored into a
+     * class constant.}
+     *
+     * @var array<string, string> Keys are the lowercase version of the generator name, while values
+     *                            are the associated PHP generator class.
+     */
+    private $validGenerators = [
+        'text'     => 'Text',
+        'html'     => 'HTML',
+        'markdown' => 'Markdown',
+    ];
+
+    /**
      * Command line values that the user has supplied directly.
      *
      * @var array<string, true|array<string, true>>
@@ -1233,7 +1248,23 @@ class Config
                     break;
                 }
 
-                $this->generator = substr($arg, 10);
+                $generatorName          = substr($arg, 10);
+                $lowerCaseGeneratorName = strtolower($generatorName);
+
+                if (isset($this->validGenerators[$lowerCaseGeneratorName]) === false) {
+                    $lastOption    = array_pop($this->validGenerators);
+                    $validOptions  = implode(', ', $this->validGenerators);
+                    $validOptions .= ' and '.$lastOption;
+                    $error         = sprintf(
+                        'ERROR: "%s" is not a valid generator. The following generators are supported: %s.'.PHP_EOL.PHP_EOL,
+                        $generatorName,
+                        $validOptions
+                    );
+                    $error        .= $this->printShortUsage(true);
+                    throw new DeepExitException($error, 3);
+                }
+
+                $this->generator = $this->validGenerators[$lowerCaseGeneratorName];
                 self::$overriddenDefaults['generator'] = true;
             } else if (substr($arg, 0, 9) === 'encoding=') {
                 if (isset(self::$overriddenDefaults['encoding']) === true) {
