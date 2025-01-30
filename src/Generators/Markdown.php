@@ -241,18 +241,25 @@ class Markdown extends Generator
      */
     protected function getFormattedCodeComparisonBlock(DOMNode $node)
     {
-        $codeBlocks = $node->getElementsByTagName('code');
+        $codeBlocks    = $node->getElementsByTagName('code');
+        $firstCodeElm  = $codeBlocks->item(0);
+        $secondCodeElm = $codeBlocks->item(1);
 
-        $firstTitle = trim($codeBlocks->item(0)->getAttribute('title'));
+        if (isset($firstCodeElm, $secondCodeElm) === false) {
+            // Missing at least one code block.
+            return '';
+        }
+
+        $firstTitle = trim($firstCodeElm->getAttribute('title'));
         $firstTitle = str_replace('  ', '&nbsp;&nbsp;', $firstTitle);
-        $first      = trim($codeBlocks->item(0)->nodeValue);
+        $first      = trim($firstCodeElm->nodeValue);
         $first      = str_replace("\n", PHP_EOL.'    ', $first);
         $first      = str_replace('<em>', '', $first);
         $first      = str_replace('</em>', '', $first);
 
-        $secondTitle = trim($codeBlocks->item(1)->getAttribute('title'));
+        $secondTitle = trim($secondCodeElm->getAttribute('title'));
         $secondTitle = str_replace('  ', '&nbsp;&nbsp;', $secondTitle);
-        $second      = trim($codeBlocks->item(1)->nodeValue);
+        $second      = trim($secondCodeElm->nodeValue);
         $second      = str_replace("\n", PHP_EOL.'    ', $second);
         $second      = str_replace('<em>', '', $second);
         $second      = str_replace('</em>', '', $second);
