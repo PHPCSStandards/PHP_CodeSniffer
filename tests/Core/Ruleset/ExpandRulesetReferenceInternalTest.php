@@ -42,30 +42,30 @@ final class ExpandRulesetReferenceInternalTest extends AbstractRulesetTestCase
 
 
     /**
-     * While definitely not recommended, including a standard named "Internal", _does_ allow for sniffs to be registered.
+     * As of PHPCS 4.0, a standard can no longer be named "Internal".
      *
-     * Note: customizations (exclusions/property setting etc) for individual sniffs may not always be handled correctly,
-     * which is why naming a standard "Internal" is definitely not recommended.
+     * Standards with this name will be ignored.
      *
      * @return void
      */
-    public function testInternalStandardDoesGetExpanded()
+    public function testInternalStandardIsNotSupported()
     {
-        $message  = 'DEPRECATED: The name "Internal" is reserved for internal use. A PHP_CodeSniffer standard should not be called "Internal".'.PHP_EOL;
+        $message  = 'ERROR: The name "Internal" is reserved for internal use. A PHP_CodeSniffer standard should not be called "Internal".'.PHP_EOL;
         $message .= 'Contact the maintainer of the standard to fix this.'.PHP_EOL.PHP_EOL;
 
-        $this->expectOutputString($message);
+        $this->expectRuntimeExceptionMessage($message);
 
         // Set up the ruleset.
         $standard = __DIR__.'/ExpandRulesetReferenceInternalStandardTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
-        $expected = ['Internal.Valid.Valid' => 'Fixtures\\Internal\\Sniffs\\Valid\\ValidSniff'];
+        $expected = ['Generic.PHP.BacktickOperator' => 'PHP_CodeSniffer\\Standards\\Generic\\Sniffs\\PHP\\BacktickOperatorSniff'];
 
+        // This assertion will only take effect for PHPUnit 10+.
         $this->assertSame($expected, $ruleset->sniffCodes);
 
-    }//end testInternalStandardDoesGetExpanded()
+    }//end testInternalStandardIsNotSupported()
 
 
 }//end class
