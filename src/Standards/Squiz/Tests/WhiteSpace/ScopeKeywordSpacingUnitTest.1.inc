@@ -77,27 +77,27 @@ class MyOtherClass
         $varQ = 'string',
         $varR = 123;
 
-    // Intentionally missing a semicolon for testing.
     public
         $varS,
-        $varT
-}
+        $varT,
+        $varU;
 
-// Issue #3188 - static as return type.
-public static function fCreate($attributes = []): static
-{
-    return static::factory()->create($attributes);
-}
+    // Issue #3188 - static as return type.
+    public static function staticAsReturnType($attributes = []): static
+    {
+        return static::factory()->create($attributes);
+    }
 
-public static function fCreate($attributes = []): ?static
-{
-    return static::factory()->create($attributes);
-}
+    public static function nullableStaticReturnType($attributes = []): ?static
+    {
+        return static::factory()->create($attributes);
+    }
 
-// Also account for static used within union types.
-public function staticLast($attributes = []): object|static {}
-public function staticMiddle(): string|static|object {}
-public function staticFirst(): static|object {}
+    // Also account for static used within union types.
+    public function staticLast($attributes = []): object|static {}
+    public function staticMiddle(): string|static|object {}
+    public function staticFirst(): static|object {}
+}
 
 // Ensure that static as a scope keyword when preceeded by a colon which is not for a type declaration is still handled.
 $callback = $cond ? get_fn_name() : static  function ($a) { return $a * 10; };
@@ -173,4 +173,17 @@ final class FinalSpacingCorrect {
 
 abstract class AbstractSpacingCorrect {
     public abstract function spacingCorrect() {}
+}
+
+$closure = static function() { return 'spacing correct'; };
+$closure =   static     function() { return 'spacing incorrect'; };
+
+class ConstantVisibility {
+    public const PUBLIC_SPACING_CORRECT = true;
+    protected const PROTECTED_SPACING_CORRECT = true;
+    private const PRIVATE_SPACING_CORRECT = true;
+
+    public     const PUBLIC_SPACING_INCORRECT = true;
+    protected  const PROTECTED_SPACING_INCORRECT = true;
+    private    const PRIVATE_SPACING_INCORRECT = true;
 }
