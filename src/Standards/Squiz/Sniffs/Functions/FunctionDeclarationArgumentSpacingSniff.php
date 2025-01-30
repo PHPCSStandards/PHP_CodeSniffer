@@ -306,6 +306,71 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                 }//end if
             }//end if
 
+            if (isset($param['visibility_token']) === true && $param['visibility_token'] !== false) {
+                $visibilityToken      = $param['visibility_token'];
+                $afterVisibilityToken = $phpcsFile->findNext(T_WHITESPACE, ($visibilityToken + 1), $param['token'], true);
+
+                $spacesAfter = 0;
+                if ($afterVisibilityToken !== false
+                    && $tokens[$visibilityToken]['line'] !== $tokens[$afterVisibilityToken]['line']
+                ) {
+                    $spacesAfter = 'newline';
+                } else if ($tokens[($visibilityToken + 1)]['code'] === T_WHITESPACE) {
+                    $spacesAfter = $tokens[($visibilityToken + 1)]['length'];
+                }
+
+                if ($spacesAfter !== 1) {
+                    $error = 'Expected 1 space after visibility modifier "%s"; %s found';
+                    $data  = [
+                        $tokens[$visibilityToken]['content'],
+                        $spacesAfter,
+                    ];
+
+                    $fix = $phpcsFile->addFixableError($error, $visibilityToken, 'SpacingAfterVisbility', $data);
+                    if ($fix === true) {
+                        $phpcsFile->fixer->beginChangeset();
+                        $phpcsFile->fixer->addContent($visibilityToken, ' ');
+
+                        for ($i = ($visibilityToken + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                            $phpcsFile->fixer->replaceToken($i, '');
+                        }
+
+                        $phpcsFile->fixer->endChangeset();
+                    }
+                }//end if
+            }//end if
+
+            if (isset($param['readonly_token']) === true) {
+                $readonlyToken      = $param['readonly_token'];
+                $afterReadonlyToken = $phpcsFile->findNext(T_WHITESPACE, ($readonlyToken + 1), $param['token'], true);
+
+                $spacesAfter = 0;
+                if ($afterReadonlyToken !== false
+                    && $tokens[$readonlyToken]['line'] !== $tokens[$afterReadonlyToken]['line']
+                ) {
+                    $spacesAfter = 'newline';
+                } else if ($tokens[($readonlyToken + 1)]['code'] === T_WHITESPACE) {
+                    $spacesAfter = $tokens[($readonlyToken + 1)]['length'];
+                }
+
+                if ($spacesAfter !== 1) {
+                    $error = 'Expected 1 space after readonly modifier; %s found';
+                    $data  = [$spacesAfter];
+
+                    $fix = $phpcsFile->addFixableError($error, $readonlyToken, 'SpacingAfterReadonly', $data);
+                    if ($fix === true) {
+                        $phpcsFile->fixer->beginChangeset();
+                        $phpcsFile->fixer->addContent($readonlyToken, ' ');
+
+                        for ($i = ($readonlyToken + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                            $phpcsFile->fixer->replaceToken($i, '');
+                        }
+
+                        $phpcsFile->fixer->endChangeset();
+                    }
+                }//end if
+            }//end if
+
             $commaToken = false;
             if ($paramNumber > 0 && $params[($paramNumber - 1)]['comma_token'] !== false) {
                 $commaToken = $params[($paramNumber - 1)]['comma_token'];
@@ -370,55 +435,51 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                 }
 
                 if ($checkComma === true) {
-                    if ($param['type_hint_token'] === false) {
-                        $spacesAfter = 0;
-                        if ($tokens[($commaToken + 1)]['code'] === T_WHITESPACE) {
-                            $spacesAfter = $tokens[($commaToken + 1)]['length'];
+                    $typeOfNext      = 'argument';
+                    $typeOfNextShort = 'Arg';
+                    $contentOfNext   = $param['name'];
+
+                    if (isset($param['property_visibility']) === true) {
+                        $typeOfNext      = 'property modifier';
+                        $typeOfNextShort = 'PropertyModifier';
+                        $modifier        = $phpcsFile->findNext(Tokens::$emptyTokens, ($commaToken + 1), $param['token'], true);
+                        $contentOfNext   = $tokens[$modifier]['content'];
+                    } else if ($param['type_hint_token'] !== false) {
+                        $typeOfNext      = 'type hint';
+                        $typeOfNextShort = 'Hint';
+                        $contentOfNext   = $param['type_hint'];
+                    }
+
+                    $spacesAfter = 0;
+                    if ($tokens[($commaToken + 1)]['code'] === T_WHITESPACE) {
+                        $spacesAfter = $tokens[($commaToken + 1)]['length'];
+                    }
+
+                    if ($spacesAfter === 0) {
+                        $error     = 'Expected 1 space between comma and %s "%s"; 0 found';
+                        $errorCode = 'NoSpaceBefore'.$typeOfNextShort;
+                        $data      = [
+                            $typeOfNext,
+                            $contentOfNext,
+                        ];
+
+                        $fix = $phpcsFile->addFixableError($error, $commaToken, $errorCode, $data);
+                        if ($fix === true) {
+                            $phpcsFile->fixer->addContent($commaToken, ' ');
                         }
+                    } else if ($spacesAfter !== 1) {
+                        $error     = 'Expected 1 space between comma and %s "%s"; %s found';
+                        $errorCode = 'SpacingBefore'.$typeOfNextShort;
+                        $data      = [
+                            $typeOfNext,
+                            $contentOfNext,
+                            $spacesAfter,
+                        ];
 
-                        if ($spacesAfter === 0) {
-                            $error = 'Expected 1 space between comma and argument "%s"; 0 found';
-                            $data  = [$param['name']];
-                            $fix   = $phpcsFile->addFixableError($error, $commaToken, 'NoSpaceBeforeArg', $data);
-                            if ($fix === true) {
-                                $phpcsFile->fixer->addContent($commaToken, ' ');
-                            }
-                        } else if ($spacesAfter !== 1) {
-                            $error = 'Expected 1 space between comma and argument "%s"; %s found';
-                            $data  = [
-                                $param['name'],
-                                $spacesAfter,
-                            ];
-
-                            $fix = $phpcsFile->addFixableError($error, $commaToken, 'SpacingBeforeArg', $data);
-                            if ($fix === true) {
-                                $phpcsFile->fixer->replaceToken(($commaToken + 1), ' ');
-                            }
-                        }//end if
-                    } else {
-                        $hint = $param['type_hint'];
-
-                        if ($tokens[($commaToken + 1)]['code'] !== T_WHITESPACE) {
-                            $error = 'Expected 1 space between comma and type hint "%s"; 0 found';
-                            $data  = [$hint];
-                            $fix   = $phpcsFile->addFixableError($error, $commaToken, 'NoSpaceBeforeHint', $data);
-                            if ($fix === true) {
-                                $phpcsFile->fixer->addContent($commaToken, ' ');
-                            }
-                        } else {
-                            $gap = $tokens[($commaToken + 1)]['length'];
-                            if ($gap !== 1) {
-                                $error = 'Expected 1 space between comma and type hint "%s"; %s found';
-                                $data  = [
-                                    $hint,
-                                    $gap,
-                                ];
-                                $fix   = $phpcsFile->addFixableError($error, $commaToken, 'SpacingBeforeHint', $data);
-                                if ($fix === true) {
-                                    $phpcsFile->fixer->replaceToken(($commaToken + 1), ' ');
-                                }
-                            }
-                        }//end if
+                        $fix = $phpcsFile->addFixableError($error, $commaToken, $errorCode, $data);
+                        if ($fix === true) {
+                            $phpcsFile->fixer->replaceToken(($commaToken + 1), ' ');
+                        }
                     }//end if
                 }//end if
             }//end if
