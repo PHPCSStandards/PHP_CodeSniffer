@@ -148,6 +148,7 @@ jobs:
         run: php "vendor/bin/phpunit" tests/AllTests.php --no-coverage
 
       - name: 'PHPUnit: run select tests in CBF mode'
+        if: ${{ matrix.skip_tests != true }}
         run: php "vendor/bin/phpunit" tests/AllTests.php --group CBF --exclude-group nothing --no-coverage
         env:
           PHP_CODESNIFFER_CBF: '1'
