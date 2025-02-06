@@ -153,7 +153,7 @@ final class GetSniffCodeTest extends TestCase
                 'expected' => 'MyStandard.PHP.MyName',
             ],
             'Test in external standard without namespace prefix'                              => [
-                'fqnClass' => 'MyStandard\\Tests\\PHP\\MyNameSniff',
+                'fqnClass' => 'MyStandard\\Tests\\PHP\\MyNameUnitTest',
                 'expected' => 'MyStandard.PHP.MyName',
             ],
             'Sniff in external standard with namespace prefix'                                => [
@@ -191,6 +191,18 @@ final class GetSniffCodeTest extends TestCase
             'Sniff provided via file include and doesn\'t comply with naming conventions [4]' => [
                 'fqnClass' => 'CompanyName\\CustomSniffs\\Whatever\\CheckMeSniff',
                 'expected' => 'CompanyName.Whatever.CheckMe',
+            ],
+            'Sniff provided via file include and doesn\'t comply with naming conventions [5]' => [
+                'fqnClass' => 'CompanyName\\Sniffs\\Category\\Sniff',
+                'expected' => 'CompanyName.Category.',
+            ],
+            'Sniff provided via file include and doesn\'t comply with naming conventions [6]' => [
+                'fqnClass' => 'CompanyName\\Tests\\Category\\UnitTest',
+                'expected' => 'CompanyName.Category.',
+            ],
+            'Sniff provided via file include and doesn\'t comply with naming conventions [7]' => [
+                'fqnClass' => 'Sniffs\\Category\\NamedSniff',
+                'expected' => '.Category.Named',
             ],
         ];
 
