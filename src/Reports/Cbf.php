@@ -150,7 +150,7 @@ class Cbf implements Report
 
         if (empty($lines) === true) {
             if (($totalErrors + $totalWarnings) === 0) {
-                echo PHP_EOL.'No errors were found'.PHP_EOL;
+                echo PHP_EOL.'No violations were found'.PHP_EOL;
             } else {
                 echo PHP_EOL.'No fixable errors were found'.PHP_EOL;
             }
