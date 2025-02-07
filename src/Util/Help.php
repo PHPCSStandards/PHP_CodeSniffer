@@ -573,7 +573,7 @@ final class Help
 
             'config-explain' => [
                 'text' => 'Default values for a selection of options can be stored in a user-specific CodeSniffer.conf configuration file.'."\n"
-                    .'This applies to the following options: "default_standard", "report_format", "tab_width", "encoding", "severity", "error_severity", "warning_severity", "show_warnings", "report_width", "show_progress", "quiet", "colors", "cache", "parallel".',
+                    .'This applies to the following options: "default_standard", "report_format", "tab_width", "encoding", "severity", "error_severity", "warning_severity", "show_warnings", "report_width", "show_progress", "quiet", "colors", "cache", "parallel", "installed_paths", "php_version", "ignore_errors_on_exit", "ignore_warnings_on_exit".',
             ],
             'config-show'    => [
                 'argument'    => '--config-show',
