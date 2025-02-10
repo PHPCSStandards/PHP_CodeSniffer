@@ -351,7 +351,7 @@ class Runner
                 $this->ruleset->showSniffDeprecations();
             }
         } catch (RuntimeException $e) {
-            $error  = 'ERROR: '.$e->getMessage().PHP_EOL.PHP_EOL;
+            $error  = rtrim($e->getMessage(), "\r\n").PHP_EOL.PHP_EOL;
             $error .= $this->config->printShortUsage(true);
             throw new DeepExitException($error, 3);
         }
