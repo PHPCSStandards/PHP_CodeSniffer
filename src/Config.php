@@ -1265,7 +1265,7 @@ class Config
      * @param string $input    Comma-separated string of sniff codes.
      * @param string $argument The name of the argument which is being processed.
      *
-     * @return string[]
+     * @return array<string>
      * @throws DeepExitException When any of the provided codes are not valid as sniff codes.
      */
     private function parseSniffCodes($input, $argument)

@@ -68,7 +68,7 @@ final class SniffsExcludeArgsTest extends TestCase
      * Data provider for testInvalid().
      *
      * @see    self::testInvalid()
-     * @return non-empty-array<string, array{argument: string, value: string, errors: string[], suggestion: string|null}>
+     * @return array<string, array<string, array<string>|string|null>>
      */
     public static function dataInvalid()
     {
@@ -203,9 +203,9 @@ final class SniffsExcludeArgsTest extends TestCase
     /**
      * Ensure that the valid data does not throw an exception, and the value is stored.
      *
-     * @param string   $argument 'sniffs' or 'exclude'.
-     * @param string   $value    List of sniffs to include or exclude.
-     * @param string[] $result   Expected sniffs to be set on the Config object.
+     * @param string        $argument 'sniffs' or 'exclude'.
+     * @param string        $value    List of sniffs to include or exclude.
+     * @param array<string> $result   Expected sniffs to be set on the Config object.
      *
      * @return       void
      * @dataProvider dataValid
@@ -223,7 +223,7 @@ final class SniffsExcludeArgsTest extends TestCase
      * Data provider for testValid().
      *
      * @see    self::testValid()
-     * @return non-empty-array<string, array{argument: string, value: string, result: string[]}>
+     * @return array<string, array<string, array<string>|string>>
      */
     public static function dataValid()
     {
