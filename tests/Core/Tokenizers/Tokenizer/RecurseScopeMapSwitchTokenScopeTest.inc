@@ -32,3 +32,26 @@ switch((function () {
         return 'test';
 /* testSwitchClosureWithinConditionScopeCloser */
 }
+
+/* testSwitchClosureWithReturnTypeWithinCondition */
+switch((function (): string {
+    return 'bar';
+})()) /* testSwitchClosureWithReturnTypeWithinConditionScopeOpener */ {
+    case 1:
+        return 'test';
+/* testSwitchClosureWithReturnTypeWithinConditionScopeCloser */
+}
+
+/* testSwitchArrowFunctionWithinCondition */
+switch((fn() => 'bar')()) /* testSwitchArrowFunctionWithinConditionScopeOpener */ {
+    case 1:
+        return 'test';
+/* testSwitchArrowFunctionWithinConditionScopeCloser */
+}
+
+/* testSwitchArrowFunctionWithReturnTypeWithinCondition */
+switch((fn(): string => 'bar')()) /* testSwitchArrowFunctionWithReturnTypeWithinConditionScopeOpener */ {
+    case 1:
+        return 'test';
+/* testSwitchArrowFunctionWithReturnTypeWithinConditionScopeCloser */
+}

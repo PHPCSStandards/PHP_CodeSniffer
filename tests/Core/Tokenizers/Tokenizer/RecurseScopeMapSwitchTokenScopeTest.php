@@ -97,7 +97,7 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
     public static function dataSwitchScope()
     {
         return [
-            'switch normal syntax'                 => [
+            'switch normal syntax'                                               => [
                 'testMarker'       => '/* testSwitchNormalSyntax */',
                 'expectedTokens'   => [
                     'scope_opener' => T_OPEN_CURLY_BRACKET,
@@ -106,7 +106,7 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
                 'testOpenerMarker' => '/* testSwitchNormalSyntaxScopeOpener */',
                 'testCloserMarker' => '/* testSwitchNormalSyntaxScopeCloser */',
             ],
-            'switch alternative syntax'            => [
+            'switch alternative syntax'                                          => [
                 'testMarker'       => '/* testSwitchAlternativeSyntax */',
                 'expectedTokens'   => [
                     'scope_opener' => T_COLON,
@@ -115,7 +115,7 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
                 'testOpenerMarker' => '/* testSwitchAlternativeSyntaxScopeOpener */',
                 'testCloserMarker' => '/* testSwitchAlternativeSyntaxScopeCloser */',
             ],
-            'switch with closure in the condition' => [
+            'switch with closure in the condition'                               => [
                 'testMarker'       => '/* testSwitchClosureWithinCondition */',
                 'expectedTokens'   => [
                     'scope_opener' => T_OPEN_CURLY_BRACKET,
@@ -124,6 +124,34 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
                 'testOpenerMarker' => '/* testSwitchClosureWithinConditionScopeOpener */',
                 'testCloserMarker' => '/* testSwitchClosureWithinConditionScopeCloser */',
             ],
+            'switch with closure containing return type in the condition'        => [
+                'testMarker'       => '/* testSwitchClosureWithReturnTypeWithinCondition */',
+                'expectedTokens'   => [
+                    'scope_opener' => T_OPEN_CURLY_BRACKET,
+                    'scope_closer' => T_CLOSE_CURLY_BRACKET,
+                ],
+                'testOpenerMarker' => '/* testSwitchClosureWithReturnTypeWithinConditionScopeOpener */',
+                'testCloserMarker' => '/* testSwitchClosureWithReturnTypeWithinConditionScopeCloser */',
+            ],
+            'switch with arrow function in the condition'                        => [
+                'testMarker'       => '/* testSwitchArrowFunctionWithinCondition */',
+                'expectedTokens'   => [
+                    'scope_opener' => T_OPEN_CURLY_BRACKET,
+                    'scope_closer' => T_CLOSE_CURLY_BRACKET,
+                ],
+                'testOpenerMarker' => '/* testSwitchArrowFunctionWithinConditionScopeOpener */',
+                'testCloserMarker' => '/* testSwitchArrowFunctionWithinConditionScopeCloser */',
+            ],
+            'switch with arrow function containing return type in the condition' => [
+                'testMarker'       => '/* testSwitchArrowFunctionWithReturnTypeWithinCondition */',
+                'expectedTokens'   => [
+                    'scope_opener' => T_OPEN_CURLY_BRACKET,
+                    'scope_closer' => T_CLOSE_CURLY_BRACKET,
+                ],
+                'testOpenerMarker' => '/* testSwitchArrowFunctionWithReturnTypeWithinConditionScopeOpener */',
+                'testCloserMarker' => '/* testSwitchArrowFunctionWithReturnTypeWithinConditionScopeCloser */',
+            ],
+
         ];
 
     }//end dataSwitchScope()
