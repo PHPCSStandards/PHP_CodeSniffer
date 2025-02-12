@@ -78,8 +78,13 @@ class ConstructorNameSniff extends AbstractScopeSniff
             $this->currentClass = $className;
         }
 
-        $methodName = strtolower($phpcsFile->getDeclarationName($stackPtr));
+        $methodName = $phpcsFile->getDeclarationName($stackPtr);
+        if ($methodName === null) {
+            // Live coding or parse error. Bow out.
+            return;
+        }
 
+        $methodName = strtolower($methodName);
         if ($methodName === $className) {
             if (in_array('__construct', $this->functionList, true) === false) {
                 $error = 'PHP4 style constructors are not allowed; use "__construct()" instead';
@@ -164,7 +169,13 @@ class ConstructorNameSniff extends AbstractScopeSniff
                 continue;
             }
 
-            $this->functionList[] = trim(strtolower($phpcsFile->getDeclarationName($i)));
+            $methodName = $phpcsFile->getDeclarationName($i);
+            if ($methodName === null) {
+                // Live coding or parse error. Ignore.
+                continue;
+            }
+
+            $this->functionList[] = trim(strtolower($methodName));
 
             if (isset($tokens[$i]['scope_closer']) !== false) {
                 // Skip past nested functions and such.
