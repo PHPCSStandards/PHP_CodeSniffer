@@ -8,11 +8,12 @@ switch ($value) {
     default :
         echo 'other';
         break;
+/* testSwitchNormalSyntaxScopeCloser */
 }
 
 // Test for https://github.com/squizlabs/PHP_CodeSniffer/issues/497
 /* testSwitchAlternativeSyntax */
-switch ($value):
+switch ($value) :
     /* testSwitchAlternativeSyntaxEnsureTestWillNotPickUpWrongColon */
     case 1:
         echo 'one';
@@ -20,7 +21,7 @@ switch ($value):
     default:
         echo 'other';
         break;
-/* testSwitchAlternativeSyntaxEnd */
+/* testSwitchAlternativeSyntaxScopeCloser */
 endswitch;
 
 // Test for https://github.com/squizlabs/PHP_CodeSniffer/issues/543
@@ -30,4 +31,5 @@ switch((function () {
 })()) /* testSwitchClosureWithinConditionScopeOpener */ {
     case 1:
         return 'test';
+/* testSwitchClosureWithinConditionScopeCloser */
 }

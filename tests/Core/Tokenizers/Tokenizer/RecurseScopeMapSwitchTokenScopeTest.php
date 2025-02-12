@@ -98,11 +98,13 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
     {
         return [
             'switch normal syntax'                 => [
-                'testMarker'     => '/* testSwitchNormalSyntax */',
-                'expectedTokens' => [
+                'testMarker'       => '/* testSwitchNormalSyntax */',
+                'expectedTokens'   => [
                     'scope_opener' => T_OPEN_CURLY_BRACKET,
                     'scope_closer' => T_CLOSE_CURLY_BRACKET,
                 ],
+                'testOpenerMarker' => null,
+                'testCloserMarker' => '/* testSwitchNormalSyntaxScopeCloser */',
             ],
             'switch alternative syntax'            => [
                 'testMarker'       => '/* testSwitchAlternativeSyntax */',
@@ -111,7 +113,7 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
                     'scope_closer' => T_ENDSWITCH,
                 ],
                 'testOpenerMarker' => null,
-                'testCloserMarker' => '/* testSwitchAlternativeSyntaxEnd */',
+                'testCloserMarker' => '/* testSwitchAlternativeSyntaxScopeCloser */',
             ],
             'switch with closure in the condition' => [
                 'testMarker'       => '/* testSwitchClosureWithinCondition */',
@@ -120,7 +122,7 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
                     'scope_closer' => T_CLOSE_CURLY_BRACKET,
                 ],
                 'testOpenerMarker' => '/* testSwitchClosureWithinConditionScopeOpener */',
-                'testCloserMarker' => '/* testSwitchClosureWithinConditionScopeOpener */',
+                'testCloserMarker' => '/* testSwitchClosureWithinConditionScopeCloser */',
             ],
         ];
 
