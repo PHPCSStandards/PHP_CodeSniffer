@@ -1042,7 +1042,7 @@ public function ignored() {
 
 // phpcs:set Squiz.Commenting.FunctionComment specialMethods[] __construct,__destruct
 
-/**
+/** 
  * @return void
  * @throws Exception If any other error occurs. */
 function throwCommentOneLine() {}
