@@ -33,3 +33,28 @@ switch((function () {
         return 'test';
 /* testSwitchClosureWithinConditionScopeCloser */
 }
+
+/* testSwitchClosureWithReturnTypeWithinCondition */
+switch((function (): string {
+    return 'bar';
+})()) /* testSwitchClosureWithReturnTypeWithinConditionScopeOpener */ :
+    /* testSwitchClosureWithReturnTypeWithinConditionEnsureTestWillNotPickUpWrongColon */
+    case 1:
+        return 'test';
+/* testSwitchClosureWithReturnTypeWithinConditionScopeCloser */
+endswitch;
+
+/* testSwitchArrowFunctionWithinCondition */
+switch((fn() => $obj->{$foo . $bar})()) /* testSwitchArrowFunctionWithinConditionScopeOpener */ {
+    case 1:
+        return 'test';
+/* testSwitchArrowFunctionWithinConditionScopeCloser */
+}
+
+/* testSwitchArrowFunctionWithReturnTypeWithinCondition */
+switch((fn(): string => $condition ? 'foo' : 'bar')()) /* testSwitchArrowFunctionWithReturnTypeWithinConditionScopeOpener */ :
+    /* testSwitchArrowFunctionWithReturnTypeWithinConditionEnsureTestWillNotPickUpWrongColon */
+    case 1:
+        return 'test';
+/* testSwitchArrowFunctionWithReturnTypeWithinConditionScopeCloser */
+endswitch;
