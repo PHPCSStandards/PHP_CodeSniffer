@@ -96,7 +96,3 @@ function &self() {}
 
 /* testFunctionReturnByRefWithReservedKeywordStatic */
 function &static() {}
-
-/* testLiveCoding */
-// Intentional parse error. This has to be the last test in the file.
-function // Comment.
