@@ -100,7 +100,7 @@ function functionName(  ?string  $arg1 = 'foo' ,  ?int  & $arg2   ,  $arg3  ) {}
 function functionName(string $arg1,  ... $arg2) {}
 function functionName(string $arg1, int  ... $arg2) {}
 function functionName(string $arg1, & ... $arg2) {}
-
+function functionName(string $arg1,int $arg2) {}
 
 $a = function ($var1, $var2=false) use (
     $longVar1, & $longerVar1,
@@ -109,3 +109,104 @@ $a = function ($var1, $var2=false) use (
 ) {};
 
 fn ($a,$b = null) => $a($b);
+
+function multipleWhitespaceTokensAfterType(int
+
+    $number) {}
+
+function spacingBetweenParenthesesShouldBeFixedInOneGo(
+
+
+    ) {}
+
+function newlineAfterReferenceShouldBeFlaggedAndFixed(
+    &
+
+    $param
+) {}
+
+function newlineAfterReferenceFixerRespectsComment(
+    &
+    // comment
+    $param
+) {}
+
+function newlineAfterVariadicShouldBeFlaggedAndFixed(
+    ...
+
+    $param
+) {}
+
+function newlineAfterVariadicFixerRespectsComment(
+    ...
+    //comment
+    $param
+) {}
+
+function newlineBeforeAndAfterEqualsSignShouldBeFixedForSpacing0(
+    $param
+
+        =
+
+    true
+) {}
+
+function commentBeforeOrAfterEqualsSignShouldBeFlaggedNotFixed(
+    $param   /*comment*/   =   /*comment*/ true
+) {}
+
+function newlineAndCommentBeforeAndAfterEqualsSignShouldBeFlaggedNotFixed(
+    $param
+
+    //comment
+
+        =
+
+    //comment
+
+    true
+) {}
+
+// phpcs:set Squiz.Functions.FunctionDeclarationArgumentSpacing equalsSpacing 1
+function newlineBeforeAndAfterEqualsSignShouldBeFixedForSpacing1(
+    $param
+
+        =
+
+    true
+) {}
+// phpcs:set Squiz.Functions.FunctionDeclarationArgumentSpacing equalsSpacing 0
+
+function newlineBeforeCommaShouldBeFixedInOneGo(
+    $paramA
+,
+    $paramB
+
+    ,
+    $paramC
+) {}
+
+function newlineBeforeCommaFixerRespectsComments(
+    $paramA // comment
+    ,
+    $paramB=10 /* comment */
+,
+    $paramC=20 # comment
+    , $paramC=30
+    , string $paramC='foo'
+) {}
+
+class PropertyPromotionSpacingAfterComma {
+    public function __construct(private string|int $propA, protected bool $correctSpace,  public MyClass $tooMuchSpace,readonly string $noSpace) {}
+}
+
+class PropertyPromotionSpacingAfterModifier {
+    public function __construct(
+        private$noSpace,
+        public    MyClass $tooMuchSpace,
+        protected   readonly   string $tooMuchSpaceX2,
+        readonly
+        public
+        string $tooMuchSpaceNewLines,
+    ) {}
+}

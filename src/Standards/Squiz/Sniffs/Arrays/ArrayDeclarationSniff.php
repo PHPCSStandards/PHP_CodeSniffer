@@ -45,6 +45,26 @@ class ArrayDeclarationSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
+        // Prevent acting on short lists inside a foreach (see
+        // https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/527).
+        if ($tokens[$stackPtr]['code'] === T_OPEN_SHORT_ARRAY
+            && isset($tokens[$stackPtr]['nested_parenthesis']) === true
+        ) {
+            $nestedParens          = $tokens[$stackPtr]['nested_parenthesis'];
+            $lastParenthesisCloser = end($nestedParens);
+            $lastParenthesisOpener = key($nestedParens);
+
+            if (isset($tokens[$lastParenthesisCloser]['parenthesis_owner']) === true
+                && $tokens[$tokens[$lastParenthesisCloser]['parenthesis_owner']]['code'] === T_FOREACH
+            ) {
+                $asKeyword = $phpcsFile->findNext(T_AS, ($lastParenthesisOpener + 1), $lastParenthesisCloser);
+
+                if ($asKeyword !== false && $asKeyword < $stackPtr) {
+                    return;
+                }
+            }
+        }
+
         if ($tokens[$stackPtr]['code'] === T_ARRAY) {
             $phpcsFile->recordMetric($stackPtr, 'Short array syntax used', 'no');
 

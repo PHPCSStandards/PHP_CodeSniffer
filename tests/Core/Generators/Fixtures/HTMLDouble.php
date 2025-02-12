@@ -14,27 +14,29 @@ class HTMLDouble extends HTML
 {
 
     /**
-     * Print the footer of the HTML page without the date or version nr to make the expectation fixtures stable.
+     * Format the footer of the HTML page without the date or version nr to make the expectation fixtures stable.
      *
-     * @return void
+     * @return string
      */
-    protected function printFooter()
+    protected function getFormattedFooter()
     {
-        echo '  <div class="tag-line">';
-        echo 'Documentation generated on #REDACTED#';
-        echo ' by <a href="https://github.com/PHPCSStandards/PHP_CodeSniffer">PHP_CodeSniffer #VERSION#</a>';
-        echo '</div>'.PHP_EOL;
-        echo ' </body>'.PHP_EOL;
-        echo '</html>'.PHP_EOL;
+        $output     = '  <div class="tag-line">';
+        $output    .= 'Documentation generated on #REDACTED#';
+        $output    .= ' by <a href="https://github.com/PHPCSStandards/PHP_CodeSniffer">PHP_CodeSniffer #VERSION#</a>';
+        $output    .= '</div>'.PHP_EOL;
+        $output .= ' </body>'.PHP_EOL;
+        $output .= '</html>'.PHP_EOL;
+
+        return $output;
     }
 
     /**
-     * Print the _real_ footer of the HTML page.
+     * Retrieve the _real_ footer of the HTML page.
      *
-     * @return void
+     * @return string
      */
-    public function printRealFooter()
+    public function getRealFooter()
     {
-        parent::printFooter();
+        return parent::getFormattedFooter();
     }
 }

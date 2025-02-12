@@ -212,11 +212,11 @@ class DNFTypes extends Something {
     const /* testSelfIsKeywordAsConstDNFType */ (self&B)|int NAME_SELF = SOME_CONST;
     const bool|(A&/* testParentIsKeywordAsConstDNFType */ parent) NAME_PARENT = SOME_CONST;
 
-    readonly public (A&B)/* testFalseIsKeywordAsConstDNFType */ |false $false;
-    protected /* testTrueIsKeywordAsConstDNFType */ true|(A&B) $true = SOME_CONST;
-    static private (A&B)|/* testNullIsKeywordAsConstDNFType */ null|(C&D) $null = SOME_CONST;
-    var string|/* testSelfIsKeywordAsConstDNFType */ (self&Stringable) $self = SOME_CONST;
-    protected (A/* testParentIsKeywordAsConstDNFType */ &parent)|float $parent = SOME_CONST;
+    readonly public (A&B)/* testFalseIsKeywordAsPropertyDNFType */ |false $false;
+    protected /* testTrueIsKeywordAsPropertyDNFType */ true|(A&B) $true = SOME_CONST;
+    static private (A&B)|/* testNullIsKeywordAsPropertyDNFType */ null|(C&D) $null = SOME_CONST;
+    var string|/* testSelfIsKeywordAsPropertyDNFType */ (self&Stringable) $self = SOME_CONST;
+    protected (A/* testParentIsKeywordAsPropertyDNFType */ &parent)|float $parent = SOME_CONST;
 
     public function DNFWithFalse(
         /* testFalseIsKeywordAsParamDNFType */

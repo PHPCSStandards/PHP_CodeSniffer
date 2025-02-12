@@ -256,7 +256,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
 
 
     /**
-     * Test deprecated sniffs are listed alphabetically in the deprecated sniffs warning.
+     * Test various aspects of the deprecated sniffs warning.
      *
      * This tests a number of different aspects:
      * 1. That the summary line uses the correct grammar when there is are multiple deprecated sniffs.
@@ -321,7 +321,7 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
 
 
     /**
-     * Test deprecated sniffs are listed alphabetically in the deprecated sniffs warning.
+     * Test the report width is respected when displaying the deprecated sniffs warning.
      *
      * This tests the following aspects:
      * 1. That the summary line uses the correct grammar when there is a single deprecated sniff.

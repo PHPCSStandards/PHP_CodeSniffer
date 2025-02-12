@@ -6,6 +6,99 @@ The file documents changes to the PHP_CodeSniffer project.
 
 _Nothing yet._
 
+## [3.11.3] - 2025-01-23
+
+### Changed
+- Generic.ControlStructures.InlineControlStructure no longer unnecessarily listens for T_SWITCH tokens. [#595]
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Squiz.Functions.FunctionDeclarationArgumentSpacing: improvements to error message for `SpaceBeforeComma` error. [#783]
+- The following sniff(s) have received efficiency improvements:
+    - Squiz.Functions.FunctionDeclarationArgumentSpacing
+    - Thanks to [Dan Wallis][@fredden] and [Juliette Reinders Folmer][@jrfnl] for the patches.
+- Various housekeeping, including improvements to the tests and documentation.
+    - Thanks to [Michał Bundyra][@michalbundyra], [Rodrigo Primo][@rodrigoprimo] and [Juliette Reinders Folmer][@jrfnl] for their contributions.
+
+### Fixed
+- Fixed bug [#620] : Squiz.Functions.FunctionDeclarationArgumentSpacing: newlines after type will now be handled by the fixer. This also prevents a potential fixer conflict.
+    - Thanks to [Dan Wallis][@fredden] for the patch.
+- Fixed bug [#782] : Tokenizer/PHP: prevent an "Undefined array key" notice during live coding for unfinished arrow functions.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Fixed bug [#783] : Squiz.Functions.FunctionDeclarationArgumentSpacing: new line after reference token was not flagged nor fixed.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Fixed bug [#783] : Squiz.Functions.FunctionDeclarationArgumentSpacing: new line after variadic token was not flagged nor fixed.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Fixed bug [#783] : Squiz.Functions.FunctionDeclarationArgumentSpacing: new line before/after the equal sign for default values was not flagged nor fixed when `equalsSpacing` was set to `0`.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Fixed bug [#783] : Squiz.Functions.FunctionDeclarationArgumentSpacing: fixer conflict when a new line is found before/after the equal sign for default values and `equalsSpacing` was set to `1`.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Fixed bug [#783] : Squiz.Functions.FunctionDeclarationArgumentSpacing: fixer for spacing before/after equal sign could inadvertently remove comment.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Fixed bug [#783] : Squiz.Functions.FunctionDeclarationArgumentSpacing: fixer will now handle comments between the end of a parameter and a comma more cleanly.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Fixed bug [#784] : Squiz.WhiteSpace.FunctionSpacing: prevent fixer conflict when a multi-line docblock would start on the same line as the function close curly being examined.
+    - Thanks to [Klaus Purer][@klausi] for the patch
+
+[#595]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/595
+[#620]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/620
+[#782]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/782
+[#783]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/783
+[#784]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/784
+
+## [3.11.2] - 2024-12-11
+
+### Changed
+- Generators/HTML + Markdown: the output will now be empty (no page header/footer) when there are no docs to display. [#687]
+    - This is in line with the Text Generator which already didn't produce output if there are no docs.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Generators/HTML: only display a Table of Contents when there is more than one sniff with documentation. [#697]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Generators/HTML: improved handling of line breaks in `<standard>` blocks. [#723]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Generators/Markdown: improved compatibility with the variety of available markdown parsers. [#722]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Generators/Markdown: improved handling of line breaks in `<standard>` blocks. [#737]
+    - This prevents additional paragraphs from being displayed as code blocks.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Generic.NamingConventions.UpperCaseConstantName: the exact token containing the non-uppercase constant name will now be identified with more accuracy. [#665]
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Generic.Functions.OpeningFunctionBraceKernighanRitchie: minor improvement to the error message wording. [#736]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Various housekeeping, including improvements to the tests and documentation.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] and [Juliette Reinders Folmer][@jrfnl] for their contributions.
+
+### Fixed
+- Fixed bug [#527] : Squiz.Arrays.ArrayDeclaration: short lists within a foreach condition should be ignored.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Fixed bug [#665] : Generic.NamingConventions.UpperCaseConstantName: false positives and false negatives when code uses unconventional spacing and comments when calling `define()`.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Fixed bug [#665] : Generic.NamingConventions.UpperCaseConstantName: false positive when a constant named `DEFINE` is encountered.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Fixed bug [#665] : Generic.NamingConventions.UpperCaseConstantName: false positive for attribute class called `define`.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Fixed bug [#665] : Generic.NamingConventions.UpperCaseConstantName: false positive when handling the instantiation of a class named `define`.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Fixed bug [#688] : Generators/Markdown could leave error_reporting in an incorrect state.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Fixed bug [#698] : Generators/Markdown : link in the documentation footer would not parse as a link.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Fixed bug [#738] : Generators/Text: stray blank lines after code sample titles.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Fixed bug [#739] : Generators/HTML + Markdown: multi-space whitespace within a code sample title was folded into a single space.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+
+[#527]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/527
+[#665]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/665
+[#687]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/687
+[#688]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/688
+[#697]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/697
+[#698]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/698
+[#722]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/722
+[#723]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/723
+[#736]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/736
+[#737]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/737
+[#738]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/738
+[#739]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/739
+
 ## [3.11.1] - 2024-11-16
 
 ### Changed
@@ -337,7 +430,7 @@ _Nothing yet._
     - Squiz.WhiteSpace.MemberVarSpacing
     - Squiz.WhiteSpace.ScopeClosingBrace
     - Squiz.WhiteSpace.SuperfluousWhitespace
-    - Thanks to [Jay McPartland][@jonmcp] and [Rodrigo Primo][@rodrigoprimo] for the patches.
+    - Thanks to [Jay McPartland][@jaymcp] and [Rodrigo Primo][@rodrigoprimo] for the patches.
 
 ### Changed
 - The following sniffs have received performance related improvements:
@@ -350,7 +443,7 @@ _Nothing yet._
     - External standards with sniff tests using the PHP_CodeSniffer native test framework will also benefit from these changes.
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
 - Various housekeeping, including improvements to the tests and documentation.
-    - Thanks to [Jay McPartland][@jonmcp], [João Pedro Oliveira][@jpoliveira08], [Rodrigo Primo][@rodrigoprimo] and [Juliette Reinders Folmer][@jrfnl] for their contributions.
+    - Thanks to [Jay McPartland][@jaymcp], [João Pedro Oliveira][@jpoliveira08], [Rodrigo Primo][@rodrigoprimo] and [Juliette Reinders Folmer][@jrfnl] for their contributions.
 
 ### Fixed
 - Fixed bug [#289] : Squiz.WhiteSpace.OperatorSpacing and PSR12.Operators.OperatorSpacing : improved fixer conflict protection by more strenuously avoiding handling operators in declare statements.
@@ -7152,6 +7245,8 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 -->
 
 [Unreleased]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/master...HEAD
+[3.11.3]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.11.2...3.11.3
+[3.11.2]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.11.1...3.11.2
 [3.11.1]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.11.0...3.11.1
 [3.11.0]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.10.3...3.11.0
 [3.10.3]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.10.2...3.10.3
@@ -7350,6 +7445,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@ivuorinen]:           https://github.com/ivuorinen
 [@jasonmccreary]:       https://github.com/jasonmccreary
 [@javer]:               https://github.com/javer
+[@jaymcp]:              https://github.com/jaymcp
 [@JDGrimes]:            https://github.com/JDGrimes
 [@jedgell]:             https://github.com/jedgell
 [@jeffslofish]:         https://github.com/jeffslofish
@@ -7360,7 +7456,6 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@johanderuijter]:      https://github.com/johanderuijter
 [@johnmaguire]:         https://github.com/johnmaguire
 [@johnpbloch]:          https://github.com/johnpbloch
-[@jonmcp]:              https://github.com/jonmcp
 [@JorisDebonnet]:       https://github.com/JorisDebonnet
 [@josephzidell]:        https://github.com/josephzidell
 [@joshdavis11]:         https://github.com/joshdavis11
