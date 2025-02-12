@@ -1234,15 +1234,14 @@ class Config
                 $lowerCaseGeneratorName = strtolower($generatorName);
 
                 if (isset($this->validGenerators[$lowerCaseGeneratorName]) === false) {
-                    $lastOption    = array_pop($this->validGenerators);
-                    $validOptions  = implode(', ', $this->validGenerators);
-                    $validOptions .= ' and '.$lastOption;
-                    $error         = sprintf(
+                    $validOptions = implode(', ', $this->validGenerators);
+                    $validOptions = substr_replace($validOptions, ' and', strrpos($validOptions, ','), 1);
+                    $error        = sprintf(
                         'ERROR: "%s" is not a valid generator. The following generators are supported: %s.'.PHP_EOL.PHP_EOL,
                         $generatorName,
                         $validOptions
                     );
-                    $error        .= $this->printShortUsage(true);
+                    $error       .= $this->printShortUsage(true);
                     throw new DeepExitException($error, 3);
                 }
 
