@@ -110,6 +110,11 @@ final class FunctionDeclarationUnitTest extends AbstractSniffUnitTest
                 490 => 2,
             ];
 
+        case 'FunctionDeclarationUnitTest.4.inc':
+            return [
+                7 => 1,
+            ];
+
         default:
             return [];
         }//end switch
