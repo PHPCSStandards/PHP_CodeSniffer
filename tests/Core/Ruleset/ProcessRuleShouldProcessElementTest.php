@@ -64,6 +64,9 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         $key = 'severity';
 
         // Verify that the non-selective severity directive IS applied.
+        $sniffCode = 'Internal.NoCodeFound';
+        $this->assertRulesetPropertySame(0, $sniffCode, $key);
+
         $sniffCode = 'PSR1.Files.SideEffects';
         $this->assertRulesetPropertySame(3, $sniffCode, $key);
 
@@ -215,6 +218,9 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         $key = 'message';
 
         // Verify that the non-selective message directive IS applied.
+        $sniffCode = 'Internal.NoCodeFound';
+        $this->assertRulesetPropertySame("We don't to be notified if files don't contain code", $sniffCode, $key);
+
         $sniffCode = 'PSR1.Files.SideEffects';
         $this->assertRulesetPropertySame('A different warning message', $sniffCode, $key);
 
