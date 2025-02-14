@@ -6,6 +6,11 @@
     # Neither set. #
     ################
     -->
+    <rule ref="Internal.NoCodeFound">
+        <severity>0</severity>
+        <message>We don't to be notified if files don't contain code</message>
+    </rule>
+
     <rule ref="PSR1.Files.SideEffects">
         <severity>3</severity>
         <type>warning</type>
