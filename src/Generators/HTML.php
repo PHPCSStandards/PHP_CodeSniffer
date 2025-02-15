@@ -415,16 +415,29 @@ class HTML extends Generator
         $second      = str_replace('<em>', '<span class="code-comparison-highlight">', $second);
         $second      = str_replace('</em>', '</span>', $second);
 
-        $output  = '  <table class="code-comparison">'.PHP_EOL;
-        $output .= '   <tr>'.PHP_EOL;
-        $output .= "    <td class=\"code-comparison-title\">$firstTitle</td>".PHP_EOL;
-        $output .= "    <td class=\"code-comparison-title\">$secondTitle</td>".PHP_EOL;
-        $output .= '   </tr>'.PHP_EOL;
-        $output .= '   <tr>'.PHP_EOL;
-        $output .= "    <td class=\"code-comparison-code\">$first</td>".PHP_EOL;
-        $output .= "    <td class=\"code-comparison-code\">$second</td>".PHP_EOL;
-        $output .= '   </tr>'.PHP_EOL;
-        $output .= '  </table>'.PHP_EOL;
+        $titleRow = '';
+        if ($firstTitle !== '' || $secondTitle !== '') {
+            $titleRow .= '   <tr>'.PHP_EOL;
+            $titleRow .= "    <td class=\"code-comparison-title\">$firstTitle</td>".PHP_EOL;
+            $titleRow .= "    <td class=\"code-comparison-title\">$secondTitle</td>".PHP_EOL;
+            $titleRow .= '   </tr>'.PHP_EOL;
+        }
+
+        $codeRow = '';
+        if ($first !== '' || $second !== '') {
+            $codeRow .= '   <tr>'.PHP_EOL;
+            $codeRow .= "    <td class=\"code-comparison-code\">$first</td>".PHP_EOL;
+            $codeRow .= "    <td class=\"code-comparison-code\">$second</td>".PHP_EOL;
+            $codeRow .= '   </tr>'.PHP_EOL;
+        }
+
+        $output = '';
+        if ($titleRow !== '' || $codeRow !== '') {
+            $output  = '  <table class="code-comparison">'.PHP_EOL;
+            $output .= $titleRow;
+            $output .= $codeRow;
+            $output .= '  </table>'.PHP_EOL;
+        }
 
         return $output;
 

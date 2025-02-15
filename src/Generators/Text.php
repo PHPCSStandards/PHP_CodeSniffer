@@ -282,56 +282,66 @@ class Text extends Generator
         $second      = str_replace('</em>', '', $second);
         $secondLines = explode("\n", $second);
 
-        $maxCodeLines  = max(count($firstLines), count($secondLines));
-        $maxTitleLines = max(count($firstTitleLines), count($secondTitleLines));
+        $titleRow = '';
+        if ($firstTitle !== '' || $secondTitle !== '') {
+            $maxTitleLines = max(count($firstTitleLines), count($secondTitleLines));
+            for ($i = 0; $i < $maxTitleLines; $i++) {
+                if (isset($firstTitleLines[$i]) === true) {
+                    $firstLineText = $firstTitleLines[$i];
+                } else {
+                    $firstLineText = '';
+                }
 
-        $output  = str_repeat('-', 41);
-        $output .= ' CODE COMPARISON ';
-        $output .= str_repeat('-', 42).PHP_EOL;
+                if (isset($secondTitleLines[$i]) === true) {
+                    $secondLineText = $secondTitleLines[$i];
+                } else {
+                    $secondLineText = '';
+                }
 
-        for ($i = 0; $i < $maxTitleLines; $i++) {
-            if (isset($firstTitleLines[$i]) === true) {
-                $firstLineText = $firstTitleLines[$i];
-            } else {
-                $firstLineText = '';
-            }
+                $titleRow .= '| ';
+                $titleRow .= $firstLineText.str_repeat(' ', (46 - strlen($firstLineText)));
+                $titleRow .= ' | ';
+                $titleRow .= $secondLineText.str_repeat(' ', (47 - strlen($secondLineText)));
+                $titleRow .= ' |'.PHP_EOL;
+            }//end for
 
-            if (isset($secondTitleLines[$i]) === true) {
-                $secondLineText = $secondTitleLines[$i];
-            } else {
-                $secondLineText = '';
-            }
+            $titleRow .= str_repeat('-', 100).PHP_EOL;
+        }//end if
 
-            $output .= '| ';
-            $output .= $firstLineText.str_repeat(' ', (46 - strlen($firstLineText)));
-            $output .= ' | ';
-            $output .= $secondLineText.str_repeat(' ', (47 - strlen($secondLineText)));
-            $output .= ' |'.PHP_EOL;
-        }//end for
+        $codeRow = '';
+        if ($first !== '' || $second !== '') {
+            $maxCodeLines = max(count($firstLines), count($secondLines));
+            for ($i = 0; $i < $maxCodeLines; $i++) {
+                if (isset($firstLines[$i]) === true) {
+                    $firstLineText = $firstLines[$i];
+                } else {
+                    $firstLineText = '';
+                }
 
-        $output .= str_repeat('-', 100).PHP_EOL;
+                if (isset($secondLines[$i]) === true) {
+                    $secondLineText = $secondLines[$i];
+                } else {
+                    $secondLineText = '';
+                }
 
-        for ($i = 0; $i < $maxCodeLines; $i++) {
-            if (isset($firstLines[$i]) === true) {
-                $firstLineText = $firstLines[$i];
-            } else {
-                $firstLineText = '';
-            }
+                $codeRow .= '| ';
+                $codeRow .= $firstLineText.str_repeat(' ', max(0, (47 - strlen($firstLineText))));
+                $codeRow .= '| ';
+                $codeRow .= $secondLineText.str_repeat(' ', max(0, (48 - strlen($secondLineText))));
+                $codeRow .= '|'.PHP_EOL;
+            }//end for
 
-            if (isset($secondLines[$i]) === true) {
-                $secondLineText = $secondLines[$i];
-            } else {
-                $secondLineText = '';
-            }
+            $codeRow .= str_repeat('-', 100).PHP_EOL.PHP_EOL;
+        }//end if
 
-            $output .= '| ';
-            $output .= $firstLineText.str_repeat(' ', max(0, (47 - strlen($firstLineText))));
-            $output .= '| ';
-            $output .= $secondLineText.str_repeat(' ', max(0, (48 - strlen($secondLineText))));
-            $output .= '|'.PHP_EOL;
-        }//end for
-
-        $output .= str_repeat('-', 100).PHP_EOL.PHP_EOL;
+        $output = '';
+        if ($titleRow !== '' || $codeRow !== '') {
+            $output  = str_repeat('-', 41);
+            $output .= ' CODE COMPARISON ';
+            $output .= str_repeat('-', 42).PHP_EOL;
+            $output .= $titleRow;
+            $output .= $codeRow;
+        }
 
         return $output;
 
