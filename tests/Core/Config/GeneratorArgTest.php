@@ -23,37 +23,59 @@ final class GeneratorArgTest extends TestCase
     /**
      * Ensure that the generator property is set when the parameter is passed a valid value.
      *
-     * @param string $generatorName Generator name.
+     * @param string $argumentValue         Generator name passed on the command line.
+     * @param string $expectedPropertyValue Expected value of the generator property.
      *
-     * @dataProvider dataGeneratorNames
+     * @dataProvider dataValidGeneratorNames
      *
      * @return void
      */
-    public function testGenerators($generatorName)
+    public function testValidGenerators($argumentValue, $expectedPropertyValue)
     {
-        $config = new ConfigDouble(["--generator=$generatorName"]);
+        $config = new ConfigDouble(["--generator=$argumentValue"]);
 
-        $this->assertSame($generatorName, $config->generator);
+        $this->assertSame($expectedPropertyValue, $config->generator);
 
-    }//end testGenerators()
+    }//end testValidGenerators()
 
 
     /**
-     * Data provider for testGenerators().
+     * Data provider for testValidGenerators().
      *
-     * @see self::testGenerators()
+     * @see self::testValidGenerators()
      *
      * @return array<int, array<string>>
      */
-    public static function dataGeneratorNames()
+    public static function dataValidGeneratorNames()
     {
         return [
-            ['Text'],
-            ['HTML'],
-            ['Markdown'],
+            'Text generator passed'            => [
+                'argumentValue'         => 'Text',
+                'expectedPropertyValue' => 'Text',
+            ],
+            'HTML generator passed'            => [
+                'argumentValue'         => 'HTML',
+                'expectedPropertyValue' => 'HTML',
+            ],
+            'Markdown generator passed'        => [
+                'argumentValue'         => 'Markdown',
+                'expectedPropertyValue' => 'Markdown',
+            ],
+            'Uppercase Text generator passed'  => [
+                'argumentValue'         => 'TEXT',
+                'expectedPropertyValue' => 'Text',
+            ],
+            'Mixed case Text generator passed' => [
+                'argumentValue'         => 'tEXt',
+                'expectedPropertyValue' => 'Text',
+            ],
+            'Lowercase HTML generator passed'  => [
+                'argumentValue'         => 'html',
+                'expectedPropertyValue' => 'HTML',
+            ],
         ];
 
-    }//end dataGeneratorNames()
+    }//end dataValidGeneratorNames()
 
 
     /**
@@ -74,6 +96,52 @@ final class GeneratorArgTest extends TestCase
         $this->assertSame('Text', $config->generator);
 
     }//end testOnlySetOnce()
+
+
+    /**
+     * Ensure that an exception is thrown for an invalid generator.
+     *
+     * @param string $generatorName Generator name.
+     *
+     * @dataProvider dataInvalidGeneratorNames
+     *
+     * @return void
+     */
+    public function testInvalidGenerator($generatorName)
+    {
+        $exception = 'PHP_CodeSniffer\Exceptions\DeepExitException';
+        $message   = 'ERROR: "'.$generatorName.'" is not a valid generator. The following generators are supported: Text, HTML and Markdown.';
+
+        if (method_exists($this, 'expectException') === true) {
+            // PHPUnit 5+.
+            $this->expectException($exception);
+            $this->expectExceptionMessage($message);
+        } else {
+            // PHPUnit 4.
+            $this->setExpectedException($exception, $message);
+        }
+
+        new ConfigDouble(["--generator={$generatorName}"]);
+
+    }//end testInvalidGenerator()
+
+
+    /**
+     * Data provider for testInvalidGenerator().
+     *
+     * @see self::testInvalidGenerator()
+     *
+     * @return array<int, array<string>>
+     */
+    public static function dataInvalidGeneratorNames()
+    {
+        return [
+            ['InvalidGenerator'],
+            ['Text,HTML'],
+            [''],
+        ];
+
+    }//end dataInvalidGeneratorNames()
 
 
 }//end class
