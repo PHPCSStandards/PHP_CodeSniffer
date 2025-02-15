@@ -193,6 +193,39 @@ final class GeneratorTest extends TestCase
 
 
     /**
+     * Verify that if the `<documentation>` title is missing, it will fallback to the file name
+     * and split the CamelCaps name correctly.
+     *
+     * @return void
+     */
+    public function testGetTitleFallbackToFilename()
+    {
+        // Set up the ruleset.
+        $standard = __DIR__.'/AllValidDocsTest.xml';
+        $sniffs   = 'StandardWithDocs.Content.DocumentationTitlePCREFallback';
+        $config   = new ConfigDouble(["--standard=$standard", "--sniffs=$sniffs"]);
+        $ruleset  = new Ruleset($config);
+
+        // In tests, the `--sniffs` setting doesn't work out of the box.
+        $sniffParts = explode('.', $sniffs);
+        $sniffFile  = __DIR__.DIRECTORY_SEPARATOR.'Fixtures'.DIRECTORY_SEPARATOR.$sniffParts[0].DIRECTORY_SEPARATOR;
+        $sniffFile .= 'Sniffs'.DIRECTORY_SEPARATOR.$sniffParts[1].DIRECTORY_SEPARATOR.$sniffParts[2].'Sniff.php';
+
+        $sniffParts   = array_map('strtolower', $sniffParts);
+        $sniffName    = $sniffParts[0].'\sniffs\\'.$sniffParts[1].'\\'.$sniffParts[2].'sniff';
+        $restrictions = [$sniffName => true];
+        $ruleset->registerSniffs([$sniffFile], $restrictions, []);
+
+        // Make the test OS independent.
+        $this->expectOutputString('Documentation Title PCRE Fallback'.PHP_EOL);
+
+        $generator = new MockGenerator($ruleset);
+        $generator->generate();
+
+    }//end testGetTitleFallbackToFilename()
+
+
+    /**
      * Test that the documentation for each standard passed on the command-line is shown separately.
      *
      * @covers \PHP_CodeSniffer\Runner::runPHPCS

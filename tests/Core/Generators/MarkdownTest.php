@@ -133,6 +133,10 @@ final class MarkdownTest extends TestCase
                 'sniffs'         => 'StandardWithDocs.Content.DocumentationTitleLength',
                 'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputDocumentationTitleLength.md',
             ],
+            'Documentation title: fallback to file name'        => [
+                'sniffs'         => 'StandardWithDocs.Content.DocumentationTitlePCREFallback',
+                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputDocumentationTitlePCREFallback.md',
+            ],
             'Standard Element: blank line handling'             => [
                 'sniffs'         => 'StandardWithDocs.Content.StandardBlankLines',
                 'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputStandardBlankLines.md',
