@@ -84,10 +84,6 @@ final class GetDeclarationNameTest extends AbstractMethodUnitTest
                 'testMarker' => '/* testAnonClassExtendsWithoutParens */',
                 'targetType' => T_ANON_CLASS,
             ],
-            'live-coding'                            => [
-                'testMarker' => '/* testLiveCoding */',
-                'targetType' => T_FUNCTION,
-            ],
         ];
 
     }//end dataGetDeclarationNameNull()

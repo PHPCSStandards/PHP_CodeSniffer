@@ -1304,8 +1304,17 @@ class File
             return $this->tokens[$stackPtr]['content'];
         }
 
+        $stopPoint = $this->numTokens;
+        if (isset($this->tokens[$stackPtr]['parenthesis_opener']) === true) {
+            // For functions, stop searching at the parenthesis opener.
+            $stopPoint = $this->tokens[$stackPtr]['parenthesis_opener'];
+        } else if (isset($this->tokens[$stackPtr]['scope_opener']) === true) {
+            // For OO tokens, stop searching at the open curly.
+            $stopPoint = $this->tokens[$stackPtr]['scope_opener'];
+        }
+
         $content = null;
-        for ($i = $stackPtr; $i < $this->numTokens; $i++) {
+        for ($i = $stackPtr; $i < $stopPoint; $i++) {
             if ($this->tokens[$i]['code'] === T_STRING) {
                 $content = $this->tokens[$i]['content'];
                 break;
