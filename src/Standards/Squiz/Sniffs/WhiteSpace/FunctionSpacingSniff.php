@@ -116,14 +116,23 @@ class FunctionSpacingSniff implements Sniff
 
         $prev = $phpcsFile->findPrevious($ignore, ($stackPtr - 1), null, true);
 
-        while ($tokens[$prev]['code'] === T_ATTRIBUTE_END) {
-            // Skip past function attributes.
-            $prev = $phpcsFile->findPrevious($ignore, ($tokens[$prev]['attribute_opener'] - 1), null, true);
-        }
+        // Skip past function docblocks and attributes.
+        for ($prev; $prev > 0; $prev--) {
+            if ($tokens[$prev]['code'] === T_WHITESPACE) {
+                continue;
+            }
 
-        if ($tokens[$prev]['code'] === T_DOC_COMMENT_CLOSE_TAG) {
-            // Skip past function docblocks.
-            $prev = $phpcsFile->findPrevious($ignore, ($tokens[$prev]['comment_opener'] - 1), null, true);
+            if ($tokens[$prev]['code'] === T_DOC_COMMENT_CLOSE_TAG) {
+                $prev = $tokens[$prev]['comment_opener'];
+                continue;
+            }
+
+            if ($tokens[$prev]['code'] === T_ATTRIBUTE_END) {
+                $prev = $tokens[$prev]['attribute_opener'];
+                continue;
+            }
+
+            break;
         }
 
         if ($tokens[$prev]['code'] === T_OPEN_CURLY_BRACKET) {
@@ -253,20 +262,30 @@ class FunctionSpacingSniff implements Sniff
                 return;
             }
 
-            while ($tokens[$prevContent]['code'] === T_ATTRIBUTE_END
-                && $tokens[$prevContent]['line'] === ($currentLine - 1)
-            ) {
-                // Account for function attributes.
-                $currentLine = $tokens[$tokens[$prevContent]['attribute_opener']]['line'];
-                $prevContent = $phpcsFile->findPrevious(T_WHITESPACE, ($tokens[$prevContent]['attribute_opener'] - 1), null, true);
-            }
+            // Skip past function docblocks and attributes.
+            for ($prevContent; $prevContent > 0; $prevContent--) {
+                if ($tokens[$prevContent]['code'] === T_WHITESPACE) {
+                    continue;
+                }
 
-            if ($tokens[$prevContent]['code'] === T_DOC_COMMENT_CLOSE_TAG
-                && $tokens[$prevContent]['line'] === ($currentLine - 1)
-            ) {
-                // Account for function comments.
-                $prevContent = $phpcsFile->findPrevious(T_WHITESPACE, ($tokens[$prevContent]['comment_opener'] - 1), null, true);
-            }
+                if ($tokens[$prevContent]['code'] === T_DOC_COMMENT_CLOSE_TAG
+                    && $tokens[$prevContent]['line'] >= ($currentLine - 1)
+                ) {
+                    $currentLine = $tokens[$tokens[$prevContent]['comment_opener']]['line'];
+                    $prevContent = $tokens[$prevContent]['comment_opener'];
+                    continue;
+                }
+
+                if ($tokens[$prevContent]['code'] === T_ATTRIBUTE_END
+                    && $tokens[$prevContent]['line'] >= ($currentLine - 1)
+                ) {
+                    $currentLine = $tokens[$tokens[$prevContent]['attribute_opener']]['line'];
+                    $prevContent = $tokens[$prevContent]['attribute_opener'];
+                    continue;
+                }
+
+                break;
+            }//end for
 
             // Before we throw an error, check that we are not throwing an error
             // for another function. We don't want to error for no blank lines after
