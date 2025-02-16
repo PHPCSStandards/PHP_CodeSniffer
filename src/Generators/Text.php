@@ -130,46 +130,13 @@ class Text extends Generator
         }
 
         $text = trim($text);
-        $text = str_replace('<em>', '*', $text);
-        $text = str_replace('</em>', '*', $text);
+        $text = str_replace(['<em>', '</em>'], '*', $text);
 
         $nodeLines = explode("\n", $text);
-        $lines     = [];
+        $nodeLines = array_map('trim', $nodeLines);
+        $text      = implode(PHP_EOL, $nodeLines);
 
-        foreach ($nodeLines as $currentLine) {
-            $currentLine = trim($currentLine);
-            if ($currentLine === '') {
-                // The text contained a blank line. Respect this.
-                $lines[] = '';
-                continue;
-            }
-
-            $tempLine = '';
-            $words    = explode(' ', $currentLine);
-
-            foreach ($words as $word) {
-                $currentLength = strlen($tempLine.$word);
-                if ($currentLength < 99) {
-                    $tempLine .= $word.' ';
-                    continue;
-                }
-
-                if ($currentLength === 99 || $currentLength === 100) {
-                    // We are already at the edge, so we are done.
-                    $lines[]  = $tempLine.$word;
-                    $tempLine = '';
-                } else {
-                    $lines[]  = rtrim($tempLine);
-                    $tempLine = $word.' ';
-                }
-            }//end foreach
-
-            if ($tempLine !== '') {
-                $lines[] = rtrim($tempLine);
-            }
-        }//end foreach
-
-        return implode(PHP_EOL, $lines).PHP_EOL.PHP_EOL;
+        return wordwrap($text, 100, PHP_EOL).PHP_EOL.PHP_EOL;
 
     }//end getFormattedTextBlock()
 
@@ -243,8 +210,7 @@ class Text extends Generator
             $firstTitleLines[] = $tempTitle;
         }
 
-        $first      = str_replace('<em>', '', $first);
-        $first      = str_replace('</em>', '', $first);
+        $first      = str_replace(['<em>', '</em>'], '', $first);
         $firstLines = explode("\n", $first);
 
         $second      = trim($secondCodeElm->nodeValue);
@@ -278,8 +244,7 @@ class Text extends Generator
             $secondTitleLines[] = $tempTitle;
         }
 
-        $second      = str_replace('<em>', '', $second);
-        $second      = str_replace('</em>', '', $second);
+        $second      = str_replace(['<em>', '</em>'], '', $second);
         $secondLines = explode("\n", $second);
 
         $titleRow = '';
