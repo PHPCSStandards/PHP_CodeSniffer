@@ -372,3 +372,10 @@ enum SomeEnum
 
     case ONE = 'one';
 }
+
+class SupportReadonlyProperties {
+    readonly int $readonlyA;
+    public readonly string $publicReadonly;
+    readonly bool $readonlyB;
+    readonly private bool $readonlyPrivate;
+}
