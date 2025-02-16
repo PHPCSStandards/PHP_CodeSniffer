@@ -75,6 +75,7 @@ final class MemberVarSpacingUnitTest extends AbstractSniffUnitTest
                 378 => 1,
                 379 => 1,
                 380 => 1,
+                384 => 1,
             ];
 
         default:

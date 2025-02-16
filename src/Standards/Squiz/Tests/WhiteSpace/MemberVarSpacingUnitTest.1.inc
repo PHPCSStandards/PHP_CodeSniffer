@@ -379,3 +379,9 @@ class SupportReadonlyProperties {
     readonly bool $readonlyB;
     readonly private bool $readonlyPrivate;
 }
+
+class NoPreambleMultilineDeclaration {
+    public
+    static
+    int $prop = 1;
+}
