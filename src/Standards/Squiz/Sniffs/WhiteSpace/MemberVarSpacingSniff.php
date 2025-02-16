@@ -45,23 +45,29 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
     {
         $tokens = $phpcsFile->getTokens();
 
+        $stopPoints = [
+            T_SEMICOLON,
+            T_OPEN_CURLY_BRACKET,
+            T_CLOSE_CURLY_BRACKET,
+        ];
+
+        $endOfPreviousStatement = $phpcsFile->findPrevious($stopPoints, ($stackPtr - 1), null, false, null, true);
+
         $validPrefixes   = Tokens::$methodPrefixes;
         $validPrefixes[] = T_VAR;
         $validPrefixes[] = T_READONLY;
 
-        $startOfStatement = $phpcsFile->findPrevious($validPrefixes, ($stackPtr - 1), null, false, null, true);
+        $startOfStatement = $phpcsFile->findNext($validPrefixes, ($endOfPreviousStatement + 1), $stackPtr, false, null, true);
         if ($startOfStatement === false) {
+            // Parse error/live coding - property without modifier. Bow out.
             return;
         }
 
         $endOfStatement = $phpcsFile->findNext(T_SEMICOLON, ($stackPtr + 1), null, false, null, true);
 
-        $ignore = $validPrefixes;
-        $ignore[T_WHITESPACE] = T_WHITESPACE;
-
         $start = $startOfStatement;
         for ($prev = ($startOfStatement - 1); $prev >= 0; $prev--) {
-            if (isset($ignore[$tokens[$prev]['code']]) === true) {
+            if ($tokens[$prev]['code'] === T_WHITESPACE) {
                 continue;
             }
 
