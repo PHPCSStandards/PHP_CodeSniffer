@@ -382,7 +382,11 @@ class MultipleBlankLinesInPreAmble {
      * Docblock.
      */
     #[MyAttribute]
-    #[MyOtherAttribute]
+    #[
+
+        BlankLinesWithinAnAttributeShouldBeLeftAlone
+
+    ]
     public $prop;
 }
 
