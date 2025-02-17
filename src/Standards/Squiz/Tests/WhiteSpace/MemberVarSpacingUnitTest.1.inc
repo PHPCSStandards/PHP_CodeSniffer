@@ -385,3 +385,29 @@ class NoPreambleMultilineDeclaration {
     static
     int $prop = 1;
 }
+
+class MultipleBlankLinesInPreAmble {
+
+    /**
+     * Docblock.
+     */
+
+    #[MyAttribute]
+
+
+    #[MyOtherAttribute]
+
+    public $prop;
+}
+
+final class BlankLinesBetweenVsAttributesWithoutCommentIssueSquiz3594
+{
+
+    // phpcs can fix this but not the next one
+    #[SingleAttribute]
+
+    public $property1;
+    #[SingleAttribute]
+
+    public $property2;
+}
