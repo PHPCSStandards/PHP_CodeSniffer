@@ -82,60 +82,51 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
             break;
         }
 
-        if (isset(Tokens::$commentTokens[$tokens[$prev]['code']]) === true) {
+        if ($tokens[$prev]['code'] === T_DOC_COMMENT_CLOSE_TAG) {
+            $start = $prev;
+        } else if (isset(Tokens::$commentTokens[$tokens[$prev]['code']]) === true) {
             // Assume the comment belongs to the member var if it is on a line by itself.
             $prevContent = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($prev - 1), null, true);
             if ($tokens[$prevContent]['line'] !== $tokens[$prev]['line']) {
-                // Check the spacing, but then skip it.
-                $foundLines = ($tokens[$startOfStatement]['line'] - $tokens[$prev]['line'] - 1);
-                if ($foundLines > 0) {
-                    for ($i = ($prev + 1); $i < $startOfStatement; $i++) {
-                        if ($tokens[$i]['column'] !== 1) {
-                            continue;
-                        }
-
-                        if ($tokens[$i]['code'] === T_WHITESPACE
-                            && $tokens[$i]['line'] !== $tokens[($i + 1)]['line']
-                        ) {
-                            $error = 'Expected 0 blank lines after member var comment; %s found';
-                            $data  = [$foundLines];
-                            $fix   = $phpcsFile->addFixableError($error, $prev, 'AfterComment', $data);
-                            if ($fix === true) {
-                                $phpcsFile->fixer->beginChangeset();
-                                // Inline comments have the newline included in the content but
-                                // docblocks do not.
-                                if ($tokens[$prev]['code'] === T_COMMENT) {
-                                    $phpcsFile->fixer->replaceToken($prev, rtrim($tokens[$prev]['content']));
-                                }
-
-                                for ($i = ($prev + 1); $i <= $startOfStatement; $i++) {
-                                    if ($tokens[$i]['line'] === $tokens[$startOfStatement]['line']) {
-                                        break;
-                                    }
-
-                                    // Remove the newline after the docblock, and any entirely
-                                    // empty lines before the member var.
-                                    if (($tokens[$i]['code'] === T_WHITESPACE
-                                        && $tokens[$i]['line'] === $tokens[$prev]['line'])
-                                        || ($tokens[$i]['column'] === 1
-                                        && $tokens[$i]['line'] !== $tokens[($i + 1)]['line'])
-                                    ) {
-                                        $phpcsFile->fixer->replaceToken($i, '');
-                                    }
-                                }
-
-                                $phpcsFile->fixer->addNewline($prev);
-                                $phpcsFile->fixer->endChangeset();
-                            }//end if
-
-                            break;
-                        }//end if
-                    }//end for
-                }//end if
-
                 $start = $prev;
-            }//end if
-        }//end if
+            }
+        }
+
+        // Check for blank lines between the docblock/comment and the property declaration.
+        for ($i = ($start + 1); $i < $startOfStatement; $i++) {
+            if ($tokens[$i]['column'] !== 1
+                || $tokens[$i]['code'] !== T_WHITESPACE
+                || $tokens[$i]['line'] === $tokens[($i + 1)]['line']
+                // Do not report blank lines after a PHPCS annotation as removing the blank lines could change the meaning.
+                || isset(Tokens::$phpcsCommentTokens[$tokens[($i - 1)]['code']]) === true
+            ) {
+                continue;
+            }
+
+            // We found a blank line which should be reported.
+            $nextNonWhitespace = $phpcsFile->findNext(T_WHITESPACE, ($i + 1), null, true);
+            $foundLines        = ($tokens[$nextNonWhitespace]['line'] - $tokens[$i]['line']);
+
+            $error = 'Expected no blank lines between the member var comment and the declaration; %s found';
+            $data  = [$foundLines];
+            $fix   = $phpcsFile->addFixableError($error, $i, 'AfterComment', $data);
+
+            if ($fix === true) {
+                $phpcsFile->fixer->beginChangeset();
+
+                for ($j = $i; $j < $nextNonWhitespace; $j++) {
+                    if ($tokens[$j]['line'] === $tokens[$nextNonWhitespace]['line']) {
+                        break;
+                    }
+
+                    $phpcsFile->fixer->replaceToken($j, '');
+                }
+
+                $phpcsFile->fixer->endChangeset();
+            }
+
+            $i = $nextNonWhitespace;
+        }//end for
 
         // There needs to be n blank lines before the var, not counting comments.
         if ($start === $startOfStatement) {
