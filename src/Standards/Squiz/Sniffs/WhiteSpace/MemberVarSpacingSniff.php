@@ -94,6 +94,11 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
 
         // Check for blank lines between the docblock/comment and the property declaration.
         for ($i = ($start + 1); $i < $startOfStatement; $i++) {
+            if (isset($tokens[$i]['attribute_closer']) === true) {
+                $i = $tokens[$i]['attribute_closer'];
+                continue;
+            }
+
             if ($tokens[$i]['column'] !== 1
                 || $tokens[$i]['code'] !== T_WHITESPACE
                 || $tokens[$i]['line'] === $tokens[($i + 1)]['line']

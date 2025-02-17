@@ -395,7 +395,11 @@ class MultipleBlankLinesInPreAmble {
     #[MyAttribute]
 
 
-    #[MyOtherAttribute]
+    #[
+
+        BlankLinesWithinAnAttributeShouldBeLeftAlone
+
+    ]
 
     public $prop;
 }
