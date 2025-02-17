@@ -783,3 +783,42 @@ class DocblockPrecededByAttributesTooLittleSpacing {
 // Reset properties to their default value.
 // phpcs:set Squiz.WhiteSpace.FunctionSpacing spacingBeforeFirst 2
 // phpcs:set Squiz.WhiteSpace.FunctionSpacing spacingAfterLast 2
+
+class SilenceBeforeErrorIfPreviousThingWasAFunctionBug
+{
+
+
+    /**
+     * Docblock.
+     */
+
+    #[ReturnTypeWillChange]
+
+
+
+
+
+    #[
+
+        AnotherAttribute
+
+    ]#[AndAThirdAsWell]
+
+    public function blankLineDetectionA()
+    {
+
+    }//end blankLineDetectionA()
+
+
+    /**
+     * Docblock.
+     */
+    #[ReturnTypeWillChange]
+
+    public function blankLineDetectionB()
+    {
+
+    }//end blankLineDetectionB()
+
+
+}//end class
