@@ -80,7 +80,7 @@ final class EmbeddedPhpUnitTest extends AbstractSniffUnitTest
                 169 => 1,
                 175 => 1,
                 176 => 2,
-                178 => 1,
+                178 => 2,
                 179 => 1,
                 180 => 2,
                 181 => 1,
@@ -101,6 +101,10 @@ final class EmbeddedPhpUnitTest extends AbstractSniffUnitTest
                 263 => 1,
                 264 => 1,
                 270 => 1,
+                272 => 1,
+                276 => 1,
+                279 => 2,
+                282 => 2,
             ];
 
         case 'EmbeddedPhpUnitTest.2.inc':
@@ -148,7 +152,7 @@ final class EmbeddedPhpUnitTest extends AbstractSniffUnitTest
                 105 => 1,
                 111 => 1,
                 112 => 2,
-                114 => 1,
+                114 => 2,
                 115 => 1,
                 116 => 2,
                 117 => 1,
@@ -188,7 +192,7 @@ final class EmbeddedPhpUnitTest extends AbstractSniffUnitTest
         case 'EmbeddedPhpUnitTest.22.inc':
             return [
                 14 => 1,
-                22 => 2,
+                22 => 1,
             ];
 
         case 'EmbeddedPhpUnitTest.24.inc':
@@ -199,6 +203,17 @@ final class EmbeddedPhpUnitTest extends AbstractSniffUnitTest
                     20 => 1,
                 ];
             }
+            return [];
+
+        case 'EmbeddedPhpUnitTest.25.inc':
+            if (PHP_VERSION_ID >= 70300) {
+                return [
+                    12 => 2,
+                    14 => 2,
+                ];
+            }
+
+            // PHP 7.2 or lower: PHP version which doesn't support flexible heredocs/nowdocs yet.
             return [];
 
         default:
