@@ -1966,7 +1966,7 @@ class File
             case T_FINAL:
                 $isFinal = true;
                 break;
-            }
+            }//end switch
         }//end for
 
         $type         = '';
