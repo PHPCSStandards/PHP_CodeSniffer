@@ -356,6 +356,16 @@ trait DNFTypes {
 }
 
 class WithFinalProperties {
-    /* testPHP84FinaProperty */
-    final public string $val;
+    /* testPHP84FinalPublicTypedProp */
+    final public string $val1;
+    /* testPHP84FinalProtectedTypedProp */
+    final protected string $val2;
+    /* testPHP84FinalMiddleTypedProp */
+    public final string $val3;
+    /* testPHP84FinalLastTypedProp */
+    public readonly final string $val4;
+    /* testPHP84FinalImplicitVisibilityTypedProp */
+    final string $val5;
+    /* testPHP84FinalImplicitVisibilityProp */
+    final $val6;
 }
