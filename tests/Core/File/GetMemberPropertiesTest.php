@@ -1208,7 +1208,7 @@ final class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => true,
                 ],
             ],
-            'php8.4-final-public-property'                                        => [
+            'php8.4-final-public-property'                                 => [
                 'identifier' => '/* testPHP84FinalPublicTypedProp */',
                 'expected'   => [
                     'scope'           => 'public',
@@ -1222,7 +1222,7 @@ final class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            'php8.4-final-protected-property'                                        => [
+            'php8.4-final-protected-property'                              => [
                 'identifier' => '/* testPHP84FinalProtectedTypedProp */',
                 'expected'   => [
                     'scope'           => 'protected',
@@ -1236,7 +1236,7 @@ final class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            'php8.4-final-middle-keyword-property'                                        => [
+            'php8.4-final-middle-keyword-property'                         => [
                 'identifier' => '/* testPHP84FinalMiddleTypedProp */',
                 'expected'   => [
                     'scope'           => 'public',
@@ -1250,7 +1250,7 @@ final class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            'php8.4-final-last-keyword-property'                                        => [
+            'php8.4-final-last-keyword-property'                           => [
                 'identifier' => '/* testPHP84FinalLastTypedProp */',
                 'expected'   => [
                     'scope'           => 'public',
@@ -1264,7 +1264,7 @@ final class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            'php8.4-final-implicit-public-typed-property'                                        => [
+            'php8.4-final-implicit-public-typed-property'                  => [
                 'identifier' => '/* testPHP84FinalImplicitVisibilityTypedProp */',
                 'expected'   => [
                     'scope'           => 'public',
@@ -1278,7 +1278,7 @@ final class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            'php8.4-final-implicit-public-untyped-property'                                        => [
+            'php8.4-final-implicit-public-untyped-property'                => [
                 'identifier' => '/* testPHP84FinalImplicitVisibilityProp */',
                 'expected'   => [
                     'scope'           => 'public',
