@@ -1965,6 +1965,7 @@ class File
                 break;
             case T_FINAL:
                 $isFinal = true;
+                break;
             }
         }//end for
 
