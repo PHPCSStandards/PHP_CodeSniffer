@@ -475,7 +475,7 @@ class EmbeddedPhpSniff implements Sniff
 
 
     /**
-     * Report and fix an set of empty PHP tags.
+     * Report and fix a set of empty PHP tags.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int                         $stackPtr  The position of the current token in the
