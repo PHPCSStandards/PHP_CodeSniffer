@@ -1250,6 +1250,20 @@ final class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
+            'php8.4-final-middle-keyword-static-property'                  => [
+                'identifier' => '/* testPHP84FinalMiddleStaticTypedProp */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => true,
+                    'is_static'       => true,
+                    'is_readonly'     => false,
+                    'is_final'        => true,
+                    'type'            => 'string',
+                    'type_token'      => -2,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => false,
+                ],
+            ],
             'php8.4-final-last-keyword-property'                           => [
                 'identifier' => '/* testPHP84FinalLastTypedProp */',
                 'expected'   => [
@@ -1290,6 +1304,34 @@ final class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'type_token'      => false,
                     'type_end_token'  => false,
                     'nullable_type'   => false,
+                ],
+            ],
+            'php8.4-final-public-complex-type-property'                    => [
+                'identifier' => '/* testPHP84FinalNullableTypedProp */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => true,
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'is_final'        => true,
+                    'type'            => '(Foo&\Bar)|bool',
+                    'type_token'      => -9,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => false,
+                ],
+            ],
+            'php8.4-final-public-nullable-typed-property'                  => [
+                'identifier' => '/* testPHP84FinalComplexTypedProp */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => true,
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'is_final'        => true,
+                    'type'            => '?string',
+                    'type_token'      => -2,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => true,
                 ],
             ],
         ];

@@ -362,10 +362,16 @@ class WithFinalProperties {
     final protected string $val2;
     /* testPHP84FinalMiddleTypedProp */
     public final string $val3;
+    /* testPHP84FinalMiddleStaticTypedProp */
+    public final static string $val4;
     /* testPHP84FinalLastTypedProp */
-    public readonly final string $val4;
+    public readonly final string $val5;
     /* testPHP84FinalImplicitVisibilityTypedProp */
-    final string $val5;
+    final string $val6;
     /* testPHP84FinalImplicitVisibilityProp */
-    final $val6;
+    final $val7;
+    /* testPHP84FinalNullableTypedProp */
+    final public ?string $val8;
+    /* testPHP84FinalComplexTypedProp */
+    final public (Foo&\Bar)|bool $val9;
 }
