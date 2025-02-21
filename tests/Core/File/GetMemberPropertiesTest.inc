@@ -354,3 +354,24 @@ trait DNFTypes {
     // Intentional fatal error - nullable operator cannot be combined with DNF.
     var ?(A&\Pck\B)|bool $propD;
 }
+
+class WithFinalProperties {
+    /* testPHP84FinalPublicTypedProp */
+    final public string $val1;
+    /* testPHP84FinalProtectedTypedProp */
+    final protected string $val2;
+    /* testPHP84FinalMiddleTypedProp */
+    public final string $val3;
+    /* testPHP84FinalMiddleStaticTypedProp */
+    public final static string $val4;
+    /* testPHP84FinalLastTypedProp */
+    public readonly final string $val5;
+    /* testPHP84FinalImplicitVisibilityTypedProp */
+    final string $val6;
+    /* testPHP84FinalImplicitVisibilityProp */
+    final $val7;
+    /* testPHP84FinalNullableTypedProp */
+    final public ?string $val8;
+    /* testPHP84FinalComplexTypedProp */
+    final public (Foo&\Bar)|bool $val9;
+}
