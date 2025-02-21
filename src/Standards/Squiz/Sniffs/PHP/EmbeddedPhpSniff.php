@@ -292,8 +292,9 @@ class EmbeddedPhpSniff implements Sniff
         }
 
         // Check for a blank line at the bottom.
-        if ((isset($tokens[$lastContent]['scope_closer']) === false
-            || $tokens[$lastContent]['scope_closer'] !== $lastContent)
+        $lastNonEmpty = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($closingTag - 1), ($stackPtr + 1), true);
+        if ((isset($tokens[$lastNonEmpty]['scope_closer']) === false
+            || $tokens[$lastNonEmpty]['scope_closer'] !== $lastNonEmpty)
             && $tokens[$lastContent]['line'] < ($tokens[$closingTag]['line'] - 1)
         ) {
             // Find a token on the blank line to throw the error on.
