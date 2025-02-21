@@ -149,7 +149,12 @@ class Cbf implements Report
         array_pop($lines);
 
         if (empty($lines) === true) {
-            echo PHP_EOL.'No fixable errors were found'.PHP_EOL;
+            if (($totalErrors + $totalWarnings) === 0) {
+                echo PHP_EOL.'No violations were found'.PHP_EOL;
+            } else {
+                echo PHP_EOL.'No fixable errors were found'.PHP_EOL;
+            }
+
             return;
         }
 
