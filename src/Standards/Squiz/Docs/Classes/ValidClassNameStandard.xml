@@ -1,0 +1,23 @@
+<documentation title="Valid Class Name">
+    <standard>
+    <![CDATA[
+    Class names must be written in Pascal case.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Class name is written in Pascal case.">
+        <![CDATA[
+class PascalCaseStandard
+{
+}
+        ]]>
+        </code>
+        <code title="Invalid: Class name does not start with a capital letter.">
+        <![CDATA[
+class notPascalCaseStandard
+{
+}
+        ]]>
+        </code>
+        </code_comparison>
+</documentation>
