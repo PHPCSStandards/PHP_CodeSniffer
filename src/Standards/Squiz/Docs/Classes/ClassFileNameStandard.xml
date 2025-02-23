@@ -1,0 +1,47 @@
+<documentation title="Class File Name">
+    <standard>
+    <![CDATA[
+    The file name and the name of the class defined within the file must match exactly, including case.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Defined class name and filename match.">
+        <![CDATA[
+        <em>/* ./src/Foo.php contents: */</em>
+
+class Foo
+{
+}
+        ]]>
+        </code>
+        <code title="Invalid: Class name does not match filename.">
+        <![CDATA[
+        <em>/* ./src/Foo.php contents: */</em>
+
+class MyFoo
+{
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: Class name and filename use the same casing.">
+        <![CDATA[
+        <em>/* ./src/MyFoo.php contents: */</em>
+
+class MyFoo
+{
+}
+        ]]>
+        </code>
+        <code title="Invalid: Class name case does not match filename case.">
+        <![CDATA[
+        <em>/* ./src/myFoo.php contents: */</em>
+
+class MyFoo
+{
+}
+        ]]>
+        </code>
+    </code_comparison>
+</documentation>
