@@ -233,7 +233,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
             'switch_and_default_with_nested_if_with_and_without_braces' => [
                 'testMarker'   => '/* testSwitchDefaultNestedIfWithAndWithoutBraces */',
                 'openerOffset' => 1,
-                'closerOffset' => 52,
+                'closerOffset' => 48,
             ],
         ];
 

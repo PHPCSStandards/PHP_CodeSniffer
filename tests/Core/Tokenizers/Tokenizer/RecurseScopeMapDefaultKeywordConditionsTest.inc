@@ -216,9 +216,9 @@ function switchDefaultNestedIfWithAndWithoutBraces($i, $foo, $baz) {
         default:
             if ($foo) {
                 return true;
-            } elseif ($baz) {
+            } elseif ($baz)
                 return true;
-            } else {
+            else {
                 echo 'else';
             }
             break;
