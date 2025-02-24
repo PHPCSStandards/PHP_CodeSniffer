@@ -62,7 +62,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
         $config   = new ConfigDouble(["--standard=$standard"]);
 
         $sniffClass = 'Fixtures\\TestStandard\\Sniffs\\InvalidSniffs\\RegisterNoArraySniff';
-        $message    = "Sniff $sniffClass register() method must return an array";
+        $message    = "ERROR: Sniff $sniffClass register() method must return an array";
         $this->expectRuntimeExceptionMessage($message);
 
         new Ruleset($config);

@@ -514,23 +514,23 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
         return [
             'getDeprecationVersion() does not return a string' => [
                 'standard'         => 'ShowSniffDeprecationsInvalidDeprecationVersionTest.xml',
-                'exceptionMessage' => 'The Fixtures\TestStandard\Sniffs\DeprecatedInvalid\InvalidDeprecationVersionSniff::getDeprecationVersion() method must return a non-empty string, received double',
+                'exceptionMessage' => 'ERROR: The Fixtures\TestStandard\Sniffs\DeprecatedInvalid\InvalidDeprecationVersionSniff::getDeprecationVersion() method must return a non-empty string, received double',
             ],
             'getRemovalVersion() does not return a string'     => [
                 'standard'         => 'ShowSniffDeprecationsInvalidRemovalVersionTest.xml',
-                'exceptionMessage' => 'The Fixtures\TestStandard\Sniffs\DeprecatedInvalid\InvalidRemovalVersionSniff::getRemovalVersion() method must return a non-empty string, received array',
+                'exceptionMessage' => 'ERROR: The Fixtures\TestStandard\Sniffs\DeprecatedInvalid\InvalidRemovalVersionSniff::getRemovalVersion() method must return a non-empty string, received array',
             ],
             'getDeprecationMessage() does not return a string' => [
                 'standard'         => 'ShowSniffDeprecationsInvalidDeprecationMessageTest.xml',
-                'exceptionMessage' => 'The Fixtures\TestStandard\Sniffs\DeprecatedInvalid\InvalidDeprecationMessageSniff::getDeprecationMessage() method must return a string, received object',
+                'exceptionMessage' => 'ERROR: The Fixtures\TestStandard\Sniffs\DeprecatedInvalid\InvalidDeprecationMessageSniff::getDeprecationMessage() method must return a string, received object',
             ],
             'getDeprecationVersion() returns an empty string'  => [
                 'standard'         => 'ShowSniffDeprecationsEmptyDeprecationVersionTest.xml',
-                'exceptionMessage' => 'The Fixtures\TestStandard\Sniffs\DeprecatedInvalid\EmptyDeprecationVersionSniff::getDeprecationVersion() method must return a non-empty string, received ""',
+                'exceptionMessage' => 'ERROR: The Fixtures\TestStandard\Sniffs\DeprecatedInvalid\EmptyDeprecationVersionSniff::getDeprecationVersion() method must return a non-empty string, received ""',
             ],
             'getRemovalVersion() returns an empty string'      => [
                 'standard'         => 'ShowSniffDeprecationsEmptyRemovalVersionTest.xml',
-                'exceptionMessage' => 'The Fixtures\TestStandard\Sniffs\DeprecatedInvalid\EmptyRemovalVersionSniff::getRemovalVersion() method must return a non-empty string, received ""',
+                'exceptionMessage' => 'ERROR: The Fixtures\TestStandard\Sniffs\DeprecatedInvalid\EmptyRemovalVersionSniff::getRemovalVersion() method must return a non-empty string, received ""',
             ],
         ];
 

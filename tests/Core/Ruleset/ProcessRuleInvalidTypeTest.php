@@ -32,7 +32,7 @@ final class ProcessRuleInvalidTypeTest extends AbstractRulesetTestCase
         $standard = __DIR__.'/ProcessRuleInvalidTypeTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
-        $message = 'Message type "notice" is invalid; must be "error" or "warning"';
+        $message = 'ERROR: Message type "notice" is invalid; must be "error" or "warning"';
         $this->expectRuntimeExceptionMessage($message);
 
         new Ruleset($config);

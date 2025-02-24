@@ -239,7 +239,7 @@ class Ruleset
         }
 
         if ($numSniffs === 0) {
-            throw new RuntimeException('No sniffs were registered');
+            throw new RuntimeException('ERROR: No sniffs were registered');
         }
 
     }//end __construct()
@@ -366,7 +366,7 @@ class Ruleset
 
         $messages        = [];
         $messageTemplate = 'This sniff has been deprecated since %s and will be removed in %s. %s';
-        $errorTemplate   = 'The %s::%s() method must return a %sstring, received %s';
+        $errorTemplate   = 'ERROR: The %s::%s() method must return a %sstring, received %s';
 
         foreach ($this->deprecatedSniffs as $sniffCode => $className) {
             if (isset($this->sniffs[$className]) === false) {
@@ -486,7 +486,7 @@ class Ruleset
         libxml_use_internal_errors(true);
         $ruleset = simplexml_load_string(file_get_contents($rulesetPath));
         if ($ruleset === false) {
-            $errorMsg = "Ruleset $rulesetPath is not valid".PHP_EOL;
+            $errorMsg = "ERROR: Ruleset $rulesetPath is not valid".PHP_EOL;
             $errors   = libxml_get_errors();
             foreach ($errors as $error) {
                 $errorMsg .= '- On line '.$error->line.', column '.$error->column.': '.$error->message;
@@ -530,7 +530,7 @@ class Ruleset
             if ($relativePath !== false && is_file($relativePath) === true) {
                 $autoloadPath = $relativePath;
             } else if (is_file($autoloadPath) === false) {
-                throw new RuntimeException('The specified autoload file "'.$autoload.'" does not exist');
+                throw new RuntimeException('ERROR: The specified autoload file "'.$autoload.'" does not exist');
             }
 
             include_once $autoloadPath;
@@ -993,7 +993,7 @@ class Ruleset
             }
         } else {
             if (is_file($ref) === false) {
-                $error = "Referenced sniff \"$ref\" does not exist";
+                $error = "ERROR: Referenced sniff \"$ref\" does not exist";
                 throw new RuntimeException($error);
             }
 
@@ -1083,7 +1083,7 @@ class Ruleset
 
                 $type = strtolower((string) $rule->type);
                 if ($type !== 'error' && $type !== 'warning') {
-                    throw new RuntimeException("Message type \"$type\" is invalid; must be \"error\" or \"warning\"");
+                    throw new RuntimeException("ERROR: Message type \"$type\" is invalid; must be \"error\" or \"warning\"");
                 }
 
                 $this->ruleset[$code]['type'] = $type;
@@ -1412,7 +1412,7 @@ class Ruleset
 
             $tokens = $this->sniffs[$sniffClass]->register();
             if (is_array($tokens) === false) {
-                $msg = "Sniff $sniffClass register() method must return an array";
+                $msg = "ERROR: Sniff $sniffClass register() method must return an array";
                 throw new RuntimeException($msg);
             }
 
@@ -1523,7 +1523,7 @@ class Ruleset
 
         if ($isSettable === false) {
             if ($settings['scope'] === 'sniff') {
-                $notice  = "Ruleset invalid. Property \"$propertyName\" does not exist on sniff ";
+                $notice  = "ERROR: Ruleset invalid. Property \"$propertyName\" does not exist on sniff ";
                 $notice .= array_search($sniffClass, $this->sniffCodes, true);
                 throw new RuntimeException($notice);
             }
