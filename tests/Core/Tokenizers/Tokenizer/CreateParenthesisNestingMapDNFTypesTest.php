@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests the conversion of parentheses tokens to type parentheses tokens.
+ * Tests the parenthesis indexes get set correctly.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2024 PHPCSStandards and contributors

@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests converting enum "case" to T_ENUM_CASE.
+ * Tests that switch "case" statements get scope indexes, while enum "case" statements do not.
  *
  * @author    Jaroslav Hanslík <kukulich@kukulich.cz>
  * @copyright 2021 Squiz Pty Ltd (ABN 77 084 670 600)
@@ -16,7 +16,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
 
 
     /**
-     * Test that the enum "case" is converted to T_ENUM_CASE.
+     * Test that enum "case" tokens does not get scope indexes.
      *
      * @param string $testMarker The comment which prefaces the target token in the test file.
      *
@@ -64,7 +64,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
 
 
     /**
-     * Test that "case" that is not enum case is still tokenized as `T_CASE`.
+     * Test that switch "case" tokens do get the scope indexes.
      *
      * @param string                    $testMarker       The comment which prefaces the target token in the test file.
      * @param array<string, int|string> $expectedTokens   The expected token codes for the scope opener/closer.
@@ -221,7 +221,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
 
 
     /**
-     * Test that "case" that is not enum case is still tokenized as `T_CASE`.
+     * Test that a "case" keyword which is not a switch or enum case, does not get the scope indexes.
      *
      * @param string $testMarker The comment which prefaces the target token in the test file.
      *
