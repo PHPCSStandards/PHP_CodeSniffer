@@ -11,6 +11,7 @@ namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Classes;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
 
 class ClassFileNameSniff implements Sniff
 {
@@ -23,12 +24,10 @@ class ClassFileNameSniff implements Sniff
      */
     public function register()
     {
-        return [
-            T_CLASS,
-            T_INTERFACE,
-            T_TRAIT,
-            T_ENUM,
-        ];
+        $targets = Tokens::$ooScopeTokens;
+        unset($targets[T_ANON_CLASS]);
+
+        return $targets;
 
     }//end register()
 
