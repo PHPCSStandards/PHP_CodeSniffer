@@ -1,7 +1,6 @@
 <?php
 /**
- * Tests the retokenization of the `default` keyword to T_MATCH_DEFAULT for PHP 8.0 match structures
- * and makes sure that the tokenization of switch `T_DEFAULT` structures is not aversely affected.
+ * Tests that switch "default" statements get scope indexes, while match "default" statements do not.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2020-2021 Squiz Pty Ltd (ABN 77 084 670 600)
@@ -17,7 +16,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
 
 
     /**
-     * Test the retokenization of the `default` keyword for match structure to `T_MATCH_DEFAULT`.
+     * Test that match "default" tokens does not get scope indexes.
      *
      * Note: Cases and default structures within a match structure do *NOT* get case/default scope
      * conditions, in contrast to case and default structures in switch control structures.
@@ -103,8 +102,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
 
 
     /**
-     * Verify that the retokenization of `T_DEFAULT` tokens in match constructs, doesn't negatively
-     * impact the tokenization of `T_DEFAULT` tokens in switch control structures.
+     * Test that switch "default" tokens do get the scope indexes.
      *
      * Note: Cases and default structures within a switch control structure *do* get case/default scope
      * conditions.
@@ -220,9 +218,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
 
 
     /**
-     * Verify that the retokenization of `T_DEFAULT` tokens in match constructs, doesn't negatively
-     * impact the tokenization of `T_STRING` tokens with the contents 'default' which aren't in
-     * actual fact the default keyword.
+     * Test that a "default" keyword which is not a switch or match default, does not get the scope indexes.
      *
      * @param string $testMarker  The comment prefacing the target token.
      * @param string $testContent The token content to look for.

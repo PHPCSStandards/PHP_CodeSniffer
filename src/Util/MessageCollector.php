@@ -179,7 +179,7 @@ final class MessageCollector
      *
      * @return array<array<string, string|int>>
      */
-    private function prefixAll($messages)
+    private function prefixAll(array $messages)
     {
         foreach ($messages as $i => $details) {
             $messages[$i]['message'] = $this->prefix($details['message'], $details['type']);
@@ -230,7 +230,7 @@ final class MessageCollector
      *
      * @return array<string> A single dimensional array of only messages, sorted by severity.
      */
-    private function sortBySeverity($messages)
+    private function sortBySeverity(array $messages)
     {
         if (count($messages) === 1) {
             return [$messages[0]['message']];

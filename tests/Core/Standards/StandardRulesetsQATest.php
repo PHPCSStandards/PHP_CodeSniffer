@@ -2,8 +2,7 @@
 /**
  * Tests that pre-defined standards do not throw errors.
  *
- * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
- * @copyright 2025 Juliette Reinders Folmer. All rights reserved.
+ * @copyright 2025 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 

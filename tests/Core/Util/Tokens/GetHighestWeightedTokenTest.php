@@ -41,7 +41,7 @@ final class GetHighestWeightedTokenTest extends TestCase
     /**
      * Data provider.
      *
-     * @return array<string, array<string, int|false|array<int|string>>
+     * @return array<string, array<string, int|false|array<int|string>>>
      */
     public static function dataGetHighestWeightedToken()
     {
