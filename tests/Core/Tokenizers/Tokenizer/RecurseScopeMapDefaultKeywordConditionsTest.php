@@ -37,11 +37,27 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
         $tokenArray = $tokens[$token];
 
         // Make sure we're looking at the right token.
-        $this->assertSame(T_MATCH_DEFAULT, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_MATCH_DEFAULT (code)');
+        $this->assertSame(
+            T_MATCH_DEFAULT,
+            $tokenArray['code'],
+            sprintf('Token tokenized as %s, not T_MATCH_DEFAULT (code). Marker: %s.', $tokenArray['type'], $testMarker)
+        );
 
-        $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
-        $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');
-        $this->assertArrayNotHasKey('scope_closer', $tokenArray, 'Scope closer is set');
+        $this->assertArrayNotHasKey(
+            'scope_condition',
+            $tokenArray,
+            sprintf('Scope condition is set. Marker: %s.', $testMarker)
+        );
+        $this->assertArrayNotHasKey(
+            'scope_opener',
+            $tokenArray,
+            sprintf('Scope opener is set. Marker: %s.', $testMarker)
+        );
+        $this->assertArrayNotHasKey(
+            'scope_closer',
+            $tokenArray,
+            sprintf('Scope closer is set. Marker: %s.', $testMarker)
+        );
 
     }//end testMatchDefault()
 
@@ -133,34 +149,110 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
         $expectedScopeCloser = ($token + $closerOffset);
 
         // Make sure we're looking at the right token.
-        $this->assertSame(T_DEFAULT, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_DEFAULT (code)');
+        $this->assertSame(
+            T_DEFAULT,
+            $tokenArray['code'],
+            sprintf('Token tokenized as %s, not T_DEFAULT (code). Marker: %s.', $tokenArray['type'], $testMarker)
+        );
 
-        $this->assertArrayHasKey('scope_condition', $tokenArray, 'Scope condition is not set');
-        $this->assertArrayHasKey('scope_opener', $tokenArray, 'Scope opener is not set');
-        $this->assertArrayHasKey('scope_closer', $tokenArray, 'Scope closer is not set');
-        $this->assertSame($token, $tokenArray['scope_condition'], 'Scope condition is not the T_DEFAULT token');
-        $this->assertSame($expectedScopeOpener, $tokenArray['scope_opener'], 'Scope opener of the T_DEFAULT token incorrect');
-        $this->assertSame($expectedScopeCloser, $tokenArray['scope_closer'], 'Scope closer of the T_DEFAULT token incorrect');
+        $this->assertArrayHasKey(
+            'scope_condition',
+            $tokenArray,
+            sprintf('Scope condition is not set. Marker: %s.', $testMarker)
+        );
+        $this->assertArrayHasKey(
+            'scope_opener',
+            $tokenArray,
+            sprintf('Scope opener is not set. Marker: %s.', $testMarker)
+        );
+        $this->assertArrayHasKey(
+            'scope_closer',
+            $tokenArray,
+            sprintf('Scope closer is not set. Marker: %s.', $testMarker)
+        );
+        $this->assertSame(
+            $token,
+            $tokenArray['scope_condition'],
+            sprintf('Scope condition is not the T_DEFAULT token. Marker: %s.', $testMarker)
+        );
+        $this->assertSame(
+            $expectedScopeOpener,
+            $tokenArray['scope_opener'],
+            sprintf('Scope opener of the T_DEFAULT token incorrect. Marker: %s.', $testMarker)
+        );
+        $this->assertSame(
+            $expectedScopeCloser,
+            $tokenArray['scope_closer'],
+            sprintf('Scope closer of the T_DEFAULT token incorrect. Marker: %s.', $testMarker)
+        );
 
         $opener = $tokenArray['scope_opener'];
-        $this->assertArrayHasKey('scope_condition', $tokens[$opener], 'Opener scope condition is not set');
-        $this->assertArrayHasKey('scope_opener', $tokens[$opener], 'Opener scope opener is not set');
-        $this->assertArrayHasKey('scope_closer', $tokens[$opener], 'Opener scope closer is not set');
-        $this->assertSame($token, $tokens[$opener]['scope_condition'], 'Opener scope condition is not the T_DEFAULT token');
-        $this->assertSame($expectedScopeOpener, $tokens[$opener]['scope_opener'], 'T_DEFAULT opener scope opener token incorrect');
-        $this->assertSame($expectedScopeCloser, $tokens[$opener]['scope_closer'], 'T_DEFAULT opener scope closer token incorrect');
+        $this->assertArrayHasKey(
+            'scope_condition',
+            $tokens[$opener],
+            sprintf('Opener scope condition is not set. Marker: %s.', $testMarker)
+        );
+        $this->assertArrayHasKey(
+            'scope_opener',
+            $tokens[$opener],
+            sprintf('Opener scope opener is not set. Marker: %s.', $testMarker)
+        );
+        $this->assertArrayHasKey(
+            'scope_closer',
+            $tokens[$opener],
+            sprintf('Opener scope closer is not set. Marker: %s.', $testMarker)
+        );
+        $this->assertSame(
+            $token,
+            $tokens[$opener]['scope_condition'],
+            sprintf('Opener scope condition is not the T_DEFAULT token. Marker: %s.', $testMarker)
+        );
+        $this->assertSame(
+            $expectedScopeOpener,
+            $tokens[$opener]['scope_opener'],
+            sprintf('T_DEFAULT opener scope opener token incorrect. Marker: %s.', $testMarker)
+        );
+        $this->assertSame(
+            $expectedScopeCloser,
+            $tokens[$opener]['scope_closer'],
+            sprintf('T_DEFAULT opener scope closer token incorrect. Marker: %s.', $testMarker)
+        );
 
         $closer = $expectedScopeCloser;
 
         if ($sharedScopeCloser === false) {
             $closer = $tokenArray['scope_closer'];
-            $this->assertArrayHasKey('scope_condition', $tokens[$closer], 'Closer scope condition is not set');
-            $this->assertArrayHasKey('scope_opener', $tokens[$closer], 'Closer scope opener is not set');
-            $this->assertArrayHasKey('scope_closer', $tokens[$closer], 'Closer scope closer is not set');
-            $this->assertSame($token, $tokens[$closer]['scope_condition'], 'Closer scope condition is not the T_DEFAULT token');
-            $this->assertSame($expectedScopeOpener, $tokens[$closer]['scope_opener'], 'T_DEFAULT closer scope opener token incorrect');
-            $this->assertSame($expectedScopeCloser, $tokens[$closer]['scope_closer'], 'T_DEFAULT closer scope closer token incorrect');
-        }
+            $this->assertArrayHasKey(
+                'scope_condition',
+                $tokens[$closer],
+                sprintf('Closer scope condition is not set. Marker: %s.', $testMarker)
+            );
+            $this->assertArrayHasKey(
+                'scope_opener',
+                $tokens[$closer],
+                sprintf('Closer scope opener is not set. Marker: %s.', $testMarker)
+            );
+            $this->assertArrayHasKey(
+                'scope_closer',
+                $tokens[$closer],
+                sprintf('Closer scope closer is not set. Marker: %s.', $testMarker)
+            );
+            $this->assertSame(
+                $token,
+                $tokens[$closer]['scope_condition'],
+                sprintf('Closer scope condition is not the T_DEFAULT token. Marker: %s.', $testMarker)
+            );
+            $this->assertSame(
+                $expectedScopeOpener,
+                $tokens[$closer]['scope_opener'],
+                sprintf('T_DEFAULT closer scope opener token incorrect. Marker: %s.', $testMarker)
+            );
+            $this->assertSame(
+                $expectedScopeCloser,
+                $tokens[$closer]['scope_closer'],
+                sprintf('T_DEFAULT closer scope closer token incorrect. Marker: %s.', $testMarker)
+            );
+        }//end if
 
         if (($opener + 1) !== $closer) {
             $end = $closer;
@@ -172,7 +264,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
                 $this->assertArrayHasKey(
                     $token,
                     $tokens[$i]['conditions'],
-                    'T_DEFAULT condition not added for token belonging to the T_DEFAULT structure'
+                    sprintf('T_DEFAULT condition not added for token belonging to the T_DEFAULT structure. Marker: %s.', $testMarker)
                 );
             }
         }
@@ -257,11 +349,27 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
         $tokenArray = $tokens[$token];
 
         // Make sure we're looking at the right token.
-        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
+        $this->assertSame(
+            T_STRING,
+            $tokenArray['code'],
+            sprintf('Token tokenized as %s, not T_STRING (code). Marker: %s.', $tokenArray['type'], $testMarker)
+        );
 
-        $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
-        $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');
-        $this->assertArrayNotHasKey('scope_closer', $tokenArray, 'Scope closer is set');
+        $this->assertArrayNotHasKey(
+            'scope_condition',
+            $tokenArray,
+            sprintf('Scope condition is set. Marker: %s.', $testMarker)
+        );
+        $this->assertArrayNotHasKey(
+            'scope_opener',
+            $tokenArray,
+            sprintf('Scope opener is set. Marker: %s.', $testMarker)
+        );
+        $this->assertArrayNotHasKey(
+            'scope_closer',
+            $tokenArray,
+            sprintf('Scope closer is set. Marker: %s.', $testMarker)
+        );
 
     }//end testNotDefaultKeyword()
 
