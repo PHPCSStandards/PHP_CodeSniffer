@@ -111,6 +111,16 @@ final class ClassFileNameUnitTest extends AbstractSniffUnitTest
                 6 => 1,
             ];
 
+        case 'ClassFileName Spaces In FilenameUnitTest.inc':
+            return [
+                7 => 1,
+            ];
+
+        case 'ClassFileName-Dashes-In-FilenameUnitTest.inc':
+            return [
+                7 => 1,
+            ];
+
         default:
             return [];
         }//end switch

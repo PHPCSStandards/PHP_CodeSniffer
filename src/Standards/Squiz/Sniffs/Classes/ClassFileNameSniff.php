@@ -48,8 +48,9 @@ class ClassFileNameSniff implements Sniff
             return $phpcsFile->numTokens;
         }
 
-        $fullPath = basename($filename);
-        $fileName = substr($fullPath, 0, strrpos($fullPath, '.'));
+        $fullPath  = basename($filename);
+        $fileName  = substr($fullPath, 0, strrpos($fullPath, '.'));
+        $extension = substr($fullPath, (strrpos($fullPath, '.') + 1));
 
         $tokens = $phpcsFile->getTokens();
         $ooName = $phpcsFile->getDeclarationName($stackPtr);
@@ -59,11 +60,10 @@ class ClassFileNameSniff implements Sniff
         }
 
         if ($ooName !== $fileName) {
-            $error = '%s name doesn\'t match filename; expected "%s %s"';
+            $error = 'Filename doesn\'t match %s name; expected file name "%s"';
             $data  = [
-                ucfirst($tokens[$stackPtr]['content']),
                 $tokens[$stackPtr]['content'],
-                $fileName,
+                $ooName.'.'.$extension,
             ];
             $phpcsFile->addError($error, $stackPtr, 'NoMatch', $data);
         }
