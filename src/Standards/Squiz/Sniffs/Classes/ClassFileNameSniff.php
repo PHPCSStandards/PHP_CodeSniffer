@@ -51,10 +51,14 @@ class ClassFileNameSniff implements Sniff
         $fullPath = basename($filename);
         $fileName = substr($fullPath, 0, strrpos($fullPath, '.'));
 
-        $tokens  = $phpcsFile->getTokens();
-        $decName = $phpcsFile->findNext(T_STRING, $stackPtr);
+        $tokens = $phpcsFile->getTokens();
+        $ooName = $phpcsFile->getDeclarationName($stackPtr);
+        if ($ooName === null) {
+            // Probably parse error/live coding.
+            return;
+        }
 
-        if ($tokens[$decName]['content'] !== $fileName) {
+        if ($ooName !== $fileName) {
             $error = '%s name doesn\'t match filename; expected "%s %s"';
             $data  = [
                 ucfirst($tokens[$stackPtr]['content']),
