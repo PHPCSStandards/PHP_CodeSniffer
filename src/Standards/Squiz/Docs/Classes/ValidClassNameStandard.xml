@@ -7,14 +7,14 @@
     <code_comparison>
         <code title="Valid: Class name is written in Pascal case.">
         <![CDATA[
-class PascalCaseStandard
+class <em>PascalCaseStandard</em>
 {
 }
         ]]>
         </code>
         <code title="Invalid: Class name does not start with a capital letter.">
         <![CDATA[
-class notPascalCaseStandard
+class <em>notPascalCaseStandard</em>
 {
 }
         ]]>
