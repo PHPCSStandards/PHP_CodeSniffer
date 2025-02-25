@@ -43,12 +43,13 @@ class ClassFileNameSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $fullPath = basename($phpcsFile->getFilename());
-        $fileName = substr($fullPath, 0, strrpos($fullPath, '.'));
-        if ($fileName === '') {
-            // No filename probably means STDIN, so we can't do this check.
-            return;
+        $filename = $phpcsFile->getFilename();
+        if ($filename === 'STDIN') {
+            return $phpcsFile->numTokens;
         }
+
+        $fullPath = basename($filename);
+        $fileName = substr($fullPath, 0, strrpos($fullPath, '.'));
 
         $tokens  = $phpcsFile->getTokens();
         $decName = $phpcsFile->findNext(T_STRING, $stackPtr);
