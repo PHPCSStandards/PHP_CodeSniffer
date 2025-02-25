@@ -7,18 +7,18 @@
     <code_comparison>
         <code title="Valid: Defined class name and filename match.">
         <![CDATA[
-        <em>/* ./src/Foo.php contents: */</em>
+        /* ./src/<em>Foo.php</em> contents: */
 
-class Foo
+class <em>Foo</em>
 {
 }
         ]]>
         </code>
         <code title="Invalid: Class name does not match filename.">
         <![CDATA[
-        <em>/* ./src/Foo.php contents: */</em>
+        /* ./src/<em>Foo.php</em> contents: */
 
-class MyFoo
+class <em>MyFoo</em>
 {
 }
         ]]>
@@ -27,18 +27,18 @@ class MyFoo
     <code_comparison>
         <code title="Valid: Class name and filename use the same casing.">
         <![CDATA[
-        <em>/* ./src/MyFoo.php contents: */</em>
+        /* ./src/<em>MyFoo.php</em> contents: */
 
-class MyFoo
+class <em>MyFoo</em>
 {
 }
         ]]>
         </code>
         <code title="Invalid: Class name case does not match filename case.">
         <![CDATA[
-        <em>/* ./src/myFoo.php contents: */</em>
+        /* ./src/<em>myFoo.php</em> contents: */
 
-class MyFoo
+class <em>MyFoo</em>
 {
 }
         ]]>
