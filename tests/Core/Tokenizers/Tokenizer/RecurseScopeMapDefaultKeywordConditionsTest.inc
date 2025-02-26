@@ -28,8 +28,10 @@ function switchWithDefaultAndCurlies($i) {
         case 2:
             return 2;
         /* testSimpleSwitchDefaultWithCurlies */
-        default: {
+        default: /* testSimpleSwitchDefaultWithCurliesScopeOpener */ {
+            /* testSimpleSwitchDefaultWithCurliesConditionStop */
             return 'default';
+        /* testSimpleSwitchDefaultWithCurliesScopeCloser */
         }
     }
 }
@@ -60,6 +62,7 @@ function matchWithDefaultInSwitch() {
                 /* testMatchDefaultNestedInSwitchDefault */
                 default, => 'default',
             };
+            /* testSwitchDefaultCloserMarker */
             break;
     }
 }
@@ -207,6 +210,7 @@ function switchAndDefaultSharingScopeCloser($i) {
         /* testSwitchAndDefaultSharingScopeCloser */
         default:
             echo 'one';
+    /* testSwitchAndDefaultSharingScopeCloserScopeCloser */
     endswitch;
 }
 
@@ -221,6 +225,7 @@ function switchDefaultNestedIfWithAndWithoutBraces($i, $foo, $baz) {
             else {
                 echo 'else';
             }
+            /* testSwitchDefaultNestedIfWithAndWithoutBracesScopeCloser */
             break;
     }
 }
