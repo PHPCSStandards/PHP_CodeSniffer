@@ -166,7 +166,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
         if (($opener + 1) !== $closer) {
             $end = $closer;
             if (isset($conditionStop) === true) {
-                $end = $conditionStop;
+                $end = ($opener + $conditionStop);
             }
 
             for ($i = ($opener + 1); $i < $end; $i++) {
@@ -204,7 +204,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
                 'testMarker'    => '/* testSimpleSwitchDefaultWithCurlies */',
                 'openerOffset'  => 3,
                 'closerOffset'  => 12,
-                'conditionStop' => 6,
+                'conditionStop' => 3,
             ],
             'switch_default_toplevel'                                   => [
                 'testMarker'   => '/* testSwitchDefault */',
