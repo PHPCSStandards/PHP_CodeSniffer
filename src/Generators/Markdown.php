@@ -11,6 +11,7 @@
 
 namespace PHP_CodeSniffer\Generators;
 
+use DOMElement;
 use DOMNode;
 use PHP_CodeSniffer\Config;
 
@@ -249,19 +250,11 @@ class Markdown extends Generator
             return '';
         }
 
-        $firstTitle = trim($firstCodeElm->getAttribute('title'));
-        $firstTitle = str_replace('  ', '&nbsp;&nbsp;', $firstTitle);
-        $first      = trim($firstCodeElm->nodeValue);
-        $first      = str_replace("\n", PHP_EOL.'    ', $first);
-        $first      = str_replace('<em>', '', $first);
-        $first      = str_replace('</em>', '', $first);
+        $firstTitle = $this->formatCodeTitle($firstCodeElm);
+        $first      = $this->formatCodeSample($firstCodeElm);
 
-        $secondTitle = trim($secondCodeElm->getAttribute('title'));
-        $secondTitle = str_replace('  ', '&nbsp;&nbsp;', $secondTitle);
-        $second      = trim($secondCodeElm->nodeValue);
-        $second      = str_replace("\n", PHP_EOL.'    ', $second);
-        $second      = str_replace('<em>', '', $second);
-        $second      = str_replace('</em>', '', $second);
+        $secondTitle = $this->formatCodeTitle($secondCodeElm);
+        $second      = $this->formatCodeSample($secondCodeElm);
 
         $titleRow = '';
         if ($firstTitle !== '' || $secondTitle !== '') {
@@ -294,6 +287,44 @@ class Markdown extends Generator
         return $output;
 
     }//end getFormattedCodeComparisonBlock()
+
+
+    /**
+     * Retrieve a code block title and prepare it for output as HTML.
+     *
+     * @param \DOMElement $codeElm The DOMElement object for a code block.
+     *
+     * @since 3.12.0
+     *
+     * @return string
+     */
+    private function formatCodeTitle(DOMElement $codeElm)
+    {
+        $title = trim($codeElm->getAttribute('title'));
+        return str_replace('  ', '&nbsp;&nbsp;', $title);
+
+    }//end formatCodeTitle()
+
+
+    /**
+     * Retrieve a code block contents and prepare it for output as HTML.
+     *
+     * @param \DOMElement $codeElm The DOMElement object for a code block.
+     *
+     * @since 3.12.0
+     *
+     * @return string
+     */
+    private function formatCodeSample(DOMElement $codeElm)
+    {
+        $code = (string) $codeElm->nodeValue;
+        $code = trim($code);
+        $code = str_replace("\n", PHP_EOL.'    ', $code);
+        $code = str_replace(['<em>', '</em>'], '', $code);
+
+        return $code;
+
+    }//end formatCodeSample()
 
 
 }//end class
