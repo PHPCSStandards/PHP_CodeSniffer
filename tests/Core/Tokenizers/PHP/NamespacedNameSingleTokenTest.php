@@ -868,6 +868,45 @@ final class NamespacedNameSingleTokenTest extends AbstractTokenizerTestCase
                     ],
                 ],
             ],
+            'fully qualified "null"'                                                                      => [
+                'testMarker'     => '/* testFullyQualifiedNull */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_NAME_FULLY_QUALIFIED',
+                        'content' => '\NULL',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'fully qualified "false"'                                                                     => [
+                'testMarker'     => '/* testFullyQualifiedFalse */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_NAME_FULLY_QUALIFIED',
+                        'content' => '\false',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'fully qualified "true"'                                                                      => [
+                'testMarker'     => '/* testFullyQualifiedTrue */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_NAME_FULLY_QUALIFIED',
+                        'content' => '\True',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
             'function call, namespace relative, with whitespace (invalid in PHP 8)'                       => [
                 'testMarker'     => '/* testInvalidInPHP8Whitespace */',
                 'expectedTokens' => [
