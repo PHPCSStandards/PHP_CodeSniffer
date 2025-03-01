@@ -177,3 +177,7 @@ abstract class SkipOverPHP84AbstractProperties {
     abstract MyType|TRUE $propA {get;}
     protected abstract NULL|MyClass $propB {set;}
 }
+
+$a = \NULL;
+$a = \falSe;
+$a = \True;
