@@ -42,11 +42,24 @@ jobs:
           pattern: "./src/Standards/*/ruleset.xml"
           xsd-file: "phpcs.xsd"
 
-      # Validate the basic well-formedness of the Documentation XML files.
+      # Validate the Documentation XML files.
       - name: Validate documentation XML
         uses: phpcsstandards/xmllint-validate@v1
         with:
           pattern: "./src/Standards/*/Docs/*/*Standard.xml"
+          xsd-url: "https://phpcsstandards.github.io/PHPCSDevTools/phpcsdocs.xsd"
+
+      # Validate dev tool related XML files.
+      - name: Validate Project PHPCS ruleset against schema
+        uses: phpcsstandards/xmllint-validate@v1
+        with:
+          pattern: "phpcs.xml.dist"
+          xsd-file: "phpcs.xsd"
+
+      - name: "Validate PHPUnit config for well-formedness"
+        uses: phpcsstandards/xmllint-validate@v1
+        with:
+          pattern: "phpunit.xml.dist"
 
   xml-cs:
     name: 'XML Code style'
