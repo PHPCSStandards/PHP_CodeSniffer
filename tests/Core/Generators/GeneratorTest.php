@@ -249,23 +249,23 @@ final class GeneratorTest extends TestCase
         $regex = '`^
             \R*                                                      # Optional blank line at the start.
             (?:
-                (?P<delimiter>-+\R)                                  # Line with dashes.
+                (?P<delimiter>-++\R)                                 # Line with dashes.
                 \|[ ]GENERATORTEST[ ]CODING[ ]STANDARD:[ ][^\|]+\|\R # Doc title line with prefix expected for first standard.
                 (?P>delimiter)                                       # Line with dashes.
-                .+?\R{2}                                             # Standard description.
+                \R(?:[^\r\n]+\R)+\R{2}                               # Standard description.
             )                                                        # Only expect this group once.
             (?:
                 (?P>delimiter)                                       # Line with dashes.
                 \|[ ]PSR1[ ]CODING[ ]STANDARD:[ ][^\|]+\|\R          # Doc title line with prefix expected for second standard.
                 (?P>delimiter)                                       # Line with dashes.
-                .+?\R+                                               # Standard description.
+                \R(?:[^\r\n]+\R)+\R                                  # Standard description.
                 (?:
                     -+[ ]CODE[ ]COMPARISON[ ]-+\R                    # Code Comparison starter line with dashes.
-                    (?:.+?(?P>delimiter)\R){2}                       # Arbitrary text followed by a delimiter line.
+                    (?:(?:[^\r\n]+\R)+(?P>delimiter)){2}             # Arbitrary text followed by a delimiter line.
                 )*                                                   # Code comparison is optional and can exist multiple times.
                 \R+
             ){3,}                                                    # This complete group should occur at least three times.
-            `sx';
+            `x';
 
         $this->expectOutputRegex($regex);
 
