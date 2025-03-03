@@ -28,37 +28,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Updating the lists can fail intermittently, typically after Microsoft has released a new package.
-      # This should not be blocking for this job, so ignore any errors from this step.
-      # Ref: https://github.com/dotnet/core/issues/4167
-      - name: Update the available packages list
-        continue-on-error: true
-        run: sudo apt-get update
-
-      - name: Install xmllint
-        run: sudo apt-get install --no-install-recommends -y libxml2-utils
-
-      - name: Retrieve XML Schema
-        run: curl -O https://www.w3.org/2012/04/XMLSchema.xsd
-
-      # Show XML violations inline in the file diff.
-      # @link https://github.com/marketplace/actions/xmllint-problem-matcher
-      - name: Enable showing XML issues inline
-        uses: korelstar/xmllint-problem-matcher@v1
+      # Validate the XSD file.
+      - name: Validate XSD against schema
+        uses: phpcsstandards/xmllint-validate@v1
+        with:
+          pattern: "phpcs.xsd"
+          xsd-url: "https://www.w3.org/2012/04/XMLSchema.xsd"
 
       # Validate the XML ruleset files.
-      # @link http://xmlsoft.org/xmllint.html
       - name: Validate rulesets against schema
-        run: xmllint --noout --schema phpcs.xsd ./src/Standards/*/ruleset.xml
-
-      # Validate the XSD file.
-      # @link http://xmlsoft.org/xmllint.html
-      - name: Validate XSD against schema
-        run: xmllint --noout --schema ./XMLSchema.xsd ./phpcs.xsd
+        uses: phpcsstandards/xmllint-validate@v1
+        with:
+          pattern: "./src/Standards/*/ruleset.xml"
+          xsd-file: "phpcs.xsd"
 
       # Validate the basic well-formedness of the Documentation XML files.
       - name: Validate documentation XML
-        run: xmllint --noout ./src/Standards/*/Docs/*/*Standard.xml
+        uses: phpcsstandards/xmllint-validate@v1
+        with:
+          pattern: "./src/Standards/*/Docs/*/*Standard.xml"
 
   xml-cs:
     name: 'XML Code style'
