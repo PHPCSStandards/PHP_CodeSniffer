@@ -24,6 +24,50 @@ jobs:
     # Don't run the cronjob in this workflow on forks.
     if: github.event_name != 'schedule' || (github.event_name == 'schedule' && github.repository_owner == 'PHPCSStandards')
 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Validate the XSD file.
+      - name: Validate XSD against schema
+        uses: phpcsstandards/xmllint-validate@v1
+        with:
+          pattern: "phpcs.xsd"
+          xsd-url: "https://www.w3.org/2012/04/XMLSchema.xsd"
+
+      # Validate the XML ruleset files.
+      - name: Validate rulesets against schema
+        uses: phpcsstandards/xmllint-validate@v1
+        with:
+          pattern: "./src/Standards/*/ruleset.xml"
+          xsd-file: "phpcs.xsd"
+
+      # Validate the Documentation XML files.
+      - name: Validate documentation XML
+        uses: phpcsstandards/xmllint-validate@v1
+        with:
+          pattern: "./src/Standards/*/Docs/*/*Standard.xml"
+          xsd-url: "https://phpcsstandards.github.io/PHPCSDevTools/phpcsdocs.xsd"
+
+      # Validate dev tool related XML files.
+      - name: Validate Project PHPCS ruleset against schema
+        uses: phpcsstandards/xmllint-validate@v1
+        with:
+          pattern: "phpcs.xml.dist"
+          xsd-file: "phpcs.xsd"
+
+      - name: "Validate PHPUnit config for well-formedness"
+        uses: phpcsstandards/xmllint-validate@v1
+        with:
+          pattern: "phpunit.xml.dist"
+
+  xml-cs:
+    name: 'XML Code style'
+    runs-on: ubuntu-latest
+
+    # Don't run the cronjob in this workflow on forks.
+    if: github.event_name != 'schedule' || (github.event_name == 'schedule' && github.repository_owner == 'PHPCSStandards')
+
     env:
       XMLLINT_INDENT: '    '
 
@@ -41,23 +85,9 @@ jobs:
       - name: Install xmllint
         run: sudo apt-get install --no-install-recommends -y libxml2-utils
 
-      - name: Retrieve XML Schema
-        run: curl -O https://www.w3.org/2012/04/XMLSchema.xsd
-
       # Show XML violations inline in the file diff.
-      # @link https://github.com/marketplace/actions/xmllint-problem-matcher
       - name: Enable showing XML issues inline
         uses: korelstar/xmllint-problem-matcher@v1
-
-      # Validate the XML ruleset files.
-      # @link http://xmlsoft.org/xmllint.html
-      - name: Validate rulesets against schema
-        run: xmllint --noout --schema phpcs.xsd ./src/Standards/*/ruleset.xml
-
-      # Validate the XSD file.
-      # @link http://xmlsoft.org/xmllint.html
-      - name: Validate XSD against schema
-        run: xmllint --noout --schema ./XMLSchema.xsd ./phpcs.xsd
 
       # Check the code-style consistency of the XML files.
       - name: Check XML code style
@@ -71,10 +101,6 @@ jobs:
           diff -B ./src/Standards/PSR12/ruleset.xml <(xmllint --format "./src/Standards/PSR12/ruleset.xml")
           diff -B ./src/Standards/Squiz/ruleset.xml <(xmllint --format "./src/Standards/Squiz/ruleset.xml")
           diff -B ./src/Standards/Zend/ruleset.xml <(xmllint --format "./src/Standards/Zend/ruleset.xml")
-
-      # Validate the basic well-formedness of the Documentation XML files.
-      - name: Validate documentation XML
-        run: xmllint --noout ./src/Standards/*/Docs/*/*Standard.xml
 
   yamllint:
     name: 'Lint Yaml'
