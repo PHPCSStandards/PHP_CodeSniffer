@@ -24,9 +24,6 @@ jobs:
     # Don't run the cronjob in this workflow on forks.
     if: github.event_name != 'schedule' || (github.event_name == 'schedule' && github.repository_owner == 'PHPCSStandards')
 
-    env:
-      XMLLINT_INDENT: '    '
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -59,6 +56,38 @@ jobs:
       - name: Validate XSD against schema
         run: xmllint --noout --schema ./XMLSchema.xsd ./phpcs.xsd
 
+      # Validate the basic well-formedness of the Documentation XML files.
+      - name: Validate documentation XML
+        run: xmllint --noout ./src/Standards/*/Docs/*/*Standard.xml
+
+  xml-cs:
+    name: 'XML Code style'
+    runs-on: ubuntu-latest
+
+    # Don't run the cronjob in this workflow on forks.
+    if: github.event_name != 'schedule' || (github.event_name == 'schedule' && github.repository_owner == 'PHPCSStandards')
+
+    env:
+      XMLLINT_INDENT: '    '
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Updating the lists can fail intermittently, typically after Microsoft has released a new package.
+      # This should not be blocking for this job, so ignore any errors from this step.
+      # Ref: https://github.com/dotnet/core/issues/4167
+      - name: Update the available packages list
+        continue-on-error: true
+        run: sudo apt-get update
+
+      - name: Install xmllint
+        run: sudo apt-get install --no-install-recommends -y libxml2-utils
+
+      # Show XML violations inline in the file diff.
+      - name: Enable showing XML issues inline
+        uses: korelstar/xmllint-problem-matcher@v1
+
       # Check the code-style consistency of the XML files.
       - name: Check XML code style
         run: |
@@ -71,10 +100,6 @@ jobs:
           diff -B ./src/Standards/PSR12/ruleset.xml <(xmllint --format "./src/Standards/PSR12/ruleset.xml")
           diff -B ./src/Standards/Squiz/ruleset.xml <(xmllint --format "./src/Standards/Squiz/ruleset.xml")
           diff -B ./src/Standards/Zend/ruleset.xml <(xmllint --format "./src/Standards/Zend/ruleset.xml")
-
-      # Validate the basic well-formedness of the Documentation XML files.
-      - name: Validate documentation XML
-        run: xmllint --noout ./src/Standards/*/Docs/*/*Standard.xml
 
   yamllint:
     name: 'Lint Yaml'
