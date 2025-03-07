@@ -112,7 +112,8 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
      * @param string   $testMarker    The comment prefacing the target token.
      * @param int      $openerOffset  The expected offset of the scope opener in relation to the testMarker.
      * @param int      $closerOffset  The expected offset of the scope closer in relation to the testMarker.
-     * @param int|null $conditionStop The expected offset at which tokens stop having T_DEFAULT as a scope condition.
+     * @param int|null $conditionStop The expected offset in relation to the testMarker, at which tokens stop
+     *                                having T_DEFAULT as a scope condition.
      * @param string   $testContent   The token content to look for.
      *
      * @dataProvider dataSwitchDefault
@@ -158,7 +159,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
         if (($opener + 1) !== $closer) {
             $end = $closer;
             if (isset($conditionStop) === true) {
-                $end = $conditionStop;
+                $end = ($token + $conditionStop);
             }
 
             for ($i = ($opener + 1); $i < $end; $i++) {
