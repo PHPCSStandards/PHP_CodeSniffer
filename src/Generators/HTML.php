@@ -113,6 +113,13 @@ class HTML extends Generator
         }
     </style>';
 
+    /**
+     * List of seen slugified anchors to ensure uniqueness.
+     *
+     * @var array<string, true>
+     */
+    private $seenAnchors = [];
+
 
     /**
      * Generates the documentation for a standard.
@@ -131,6 +138,10 @@ class HTML extends Generator
 
         $content = ob_get_contents();
         ob_end_clean();
+
+        // Clear anchor cache after Documentation generation.
+        // The anchor generation for the TOC anchor links will use the same logic, so should end up with the same unique slugs.
+        $this->seenAnchors = [];
 
         if (trim($content) !== '') {
             echo $this->getFormattedHeader();
@@ -325,7 +336,20 @@ class HTML extends Generator
      */
     private function titleToAnchor($title)
     {
-        return str_replace(' ', '-', $title);
+        // Slugify the text.
+        $title = strtolower($title);
+        $title = preg_replace('`[^a-z0-9\._-]`', '-', $title);
+
+        if (isset($this->seenAnchors[$title]) === true) {
+            // Try to find a unique anchor for this title.
+            for ($i = 2; (isset($this->seenAnchors[$title.'-'.$i]) === true); $i++);
+            $title .= '-'.$i;
+        }
+
+        // Add to "seen" list.
+        $this->seenAnchors[$title] = true;
+
+        return $title;
 
     }//end titleToAnchor()
 
