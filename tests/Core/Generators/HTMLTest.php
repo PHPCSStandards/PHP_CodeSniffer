@@ -243,6 +243,32 @@ final class HTMLTest extends TestCase
 
 
     /**
+     * Test anchor links in the generated docs are slugified and unique.
+     *
+     * @return void
+     */
+    public function testAnchorLinks()
+    {
+        // Set up the ruleset.
+        $standard = __DIR__.'/AnchorLinksTest.xml';
+        $config   = new ConfigDouble(["--standard=$standard"]);
+        $ruleset  = new Ruleset($config);
+
+        $pathToExpected = __DIR__.'/Expectations/ExpectedOutputDocumentationTitleToAnchorSlug.html';
+        $expected       = file_get_contents($pathToExpected);
+        $this->assertNotFalse($expected, 'Output expectation file could not be found');
+
+        // Make the test OS independent.
+        $expected = str_replace("\n", PHP_EOL, $expected);
+        $this->expectOutputString($expected);
+
+        $generator = new HTMLDouble($ruleset);
+        $generator->generate();
+
+    }//end testAnchorLinks()
+
+
+    /**
      * Test the generated footer.
      *
      * @return void
