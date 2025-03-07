@@ -43,14 +43,14 @@ class ClassFileNameSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $filename = $phpcsFile->getFilename();
-        if ($filename === 'STDIN') {
+        $fullPath = $phpcsFile->getFilename();
+        if ($fullPath === 'STDIN') {
             return $phpcsFile->numTokens;
         }
 
-        $fullPath  = basename($filename);
-        $fileName  = substr($fullPath, 0, strrpos($fullPath, '.'));
-        $extension = substr($fullPath, (strrpos($fullPath, '.') + 1));
+        $fileName  = basename($fullPath);
+        $fileNoExt = substr($fileName, 0, strrpos($fileName, '.'));
+        $extension = substr($fileName, (strrpos($fileName, '.') + 1));
 
         $tokens = $phpcsFile->getTokens();
         $ooName = $phpcsFile->getDeclarationName($stackPtr);
@@ -59,7 +59,7 @@ class ClassFileNameSniff implements Sniff
             return;
         }
 
-        if ($ooName !== $fileName) {
+        if ($ooName !== $fileNoExt) {
             $error = 'Filename doesn\'t match %s name; expected file name "%s"';
             $data  = [
                 $tokens[$stackPtr]['content'],
