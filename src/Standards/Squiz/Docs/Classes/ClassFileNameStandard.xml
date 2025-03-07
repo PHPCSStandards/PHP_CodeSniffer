@@ -14,7 +14,7 @@ class <em>Foo</em>
 }
         ]]>
         </code>
-        <code title="Invalid: Class name does not match filename.">
+        <code title="Invalid: Filename does not match class name.">
         <![CDATA[
         /* ./src/<em>Foo.php</em> contents: */
 
@@ -34,7 +34,7 @@ class <em>MyFoo</em>
 }
         ]]>
         </code>
-        <code title="Invalid: Class name case does not match filename case.">
+        <code title="Invalid: Filename case does not match class name case.">
         <![CDATA[
         /* ./src/<em>myFoo.php</em> contents: */
 
