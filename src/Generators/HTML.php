@@ -61,8 +61,8 @@ class HTML extends Generator
             text-decoration: none;
             font-weight: bold;
         }
-        h2:hover > a.sniffanchor,
-        h2:focus > a.sniffanchor {
+        h2:hover a.sniffanchor,
+        h2:focus a.sniffanchor {
             opacity: 1;
         }
 
