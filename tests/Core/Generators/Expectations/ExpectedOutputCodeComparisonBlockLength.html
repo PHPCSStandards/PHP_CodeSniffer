@@ -45,6 +45,11 @@
             line-height: 15px;
         }
 
+        .code-comparison-title {
+            text-align: left;
+            font-weight: 600;
+        }
+
         .code-comparison-code {
             font-family: Courier;
             background-color: #F9F9F9;
@@ -75,8 +80,8 @@
   <p class="text">This is a standard block.</p>
   <table class="code-comparison">
    <tr>
-    <td class="code-comparison-title">Valid: code sample A has more lines than B.</td>
-    <td class="code-comparison-title">Invalid: shorter.</td>
+    <th class="code-comparison-title">Valid: code sample A has more lines than B.</th>
+    <th class="code-comparison-title">Invalid: shorter.</th>
    </tr>
    <tr>
     <td class="code-comparison-code">//&nbsp;This&nbsp;code&nbsp;sample&nbsp;has&nbsp;more&nbsp;lines</br>//&nbsp;than&nbsp;the&nbsp;"invalid"&nbsp;one.</br><span class="code-comparison-highlight">$one</span>&nbsp;=&nbsp;10;</td>
@@ -85,8 +90,8 @@
   </table>
   <table class="code-comparison">
    <tr>
-    <td class="code-comparison-title">Valid: shorter.</td>
-    <td class="code-comparison-title">Invalid: code sample B has more lines than A.</td>
+    <th class="code-comparison-title">Valid: shorter.</th>
+    <th class="code-comparison-title">Invalid: code sample B has more lines than A.</th>
    </tr>
    <tr>
     <td class="code-comparison-code"><span class="code-comparison-highlight">echo</span>&nbsp;$foo;</td>

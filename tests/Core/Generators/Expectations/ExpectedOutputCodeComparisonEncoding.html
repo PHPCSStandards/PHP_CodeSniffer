@@ -45,6 +45,11 @@
             line-height: 15px;
         }
 
+        .code-comparison-title {
+            text-align: left;
+            font-weight: 600;
+        }
+
         .code-comparison-code {
             font-family: Courier;
             background-color: #F9F9F9;
@@ -75,8 +80,8 @@
   <p class="text">This is a standard block.</p>
   <table class="code-comparison">
    <tr>
-    <td class="code-comparison-title">Valid: Vestibulum et orci condimentum.</td>
-    <td class="code-comparison-title">Invalid: Donec in nisl ut tortor convallis interdum.</td>
+    <th class="code-comparison-title">Valid: Vestibulum et orci condimentum.</th>
+    <th class="code-comparison-title">Invalid: Donec in nisl ut tortor convallis interdum.</th>
    </tr>
    <tr>
     <td class="code-comparison-code">&lt;?php</br></br>//&nbsp;The&nbsp;above&nbsp;PHP&nbsp;tag&nbsp;is&nbsp;specifically&nbsp;testing</br>//&nbsp;handling&nbsp;of&nbsp;that&nbsp;in&nbsp;generated&nbsp;HTML&nbsp;doc.</br></br>//&nbsp;Now&nbsp;let's&nbsp;also&nbsp;check&nbsp;the&nbsp;handling&nbsp;of</br>//&nbsp;comparison&nbsp;operators&nbsp;in&nbsp;code&nbsp;samples...</br>$a&nbsp;=&nbsp;$b&nbsp;<&nbsp;$c;</br>$d&nbsp;=&nbsp;$e&nbsp;>&nbsp;$f;</br>$g&nbsp;=&nbsp;$h&nbsp;<=&nbsp;$i;</br>$j&nbsp;=&nbsp;$k&nbsp;>=&nbsp;$l;</br>$m&nbsp;=&nbsp;$n&nbsp;<=>&nbsp;$o;</td>
