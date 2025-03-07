@@ -232,16 +232,13 @@ jobs:
           PHP_CODESNIFFER_CBF: '1'
 
       - name: 'PHPCS: check code style without cache, no parallel'
-        if: ${{ matrix.custom_ini == false && matrix.php != '7.4' }}
-        run: php "bin/phpcs" --no-cache --parallel=1
-
-      - name: 'PHPCS: check code style to show results in PR'
-        if: ${{ matrix.custom_ini == false && matrix.php == '7.4' }}
         id: phpcs
-        run: php "bin/phpcs" --no-cache --parallel=1 --report-full --report-checkstyle=./phpcs-report.xml
+        run: >
+          php "bin/phpcs" --no-cache --parallel=1
+          ${{ matrix.custom_ini == false && matrix.php == '8.4' && '--report-full --report-checkstyle=./phpcs-report.xml' || '' }}
 
       - name: Show PHPCS results in PR
-        if: ${{ always() && steps.phpcs.outcome == 'failure' && matrix.php == '7.4' }}
+        if: ${{ always() && steps.phpcs.outcome == 'failure' && matrix.php == '8.4' }}
         run: cs2pr ./phpcs-report.xml
 
       - name: Download the PHPCS phar
