@@ -5,11 +5,11 @@ labels:
     draft: false
     author-can-merge: false
 
-  - label: "Core Component: Config & Ruleset & CLI options"
+  - label: "Core Component: Config & CLI options"
     draft: false
     files:
       - "src/Config.php$"
-  - label: "Core Component: Config & Ruleset & CLI options"
+  - label: "Core Component: Ruleset"
     draft: false
     files:
       - "src/Ruleset.php$"
