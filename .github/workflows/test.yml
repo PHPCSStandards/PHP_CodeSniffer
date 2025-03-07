@@ -291,14 +291,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup ini config
-        if: ${{ matrix.os != 'windows-latest' }}
+        if: ${{ matrix.custom_ini == true && matrix.os != 'windows-latest' }}
         id: set_ini
         shell: bash
         run: |
           # Set the "short_open_tag" ini to make sure specific conditions are tested.
-          if [[ ${{ matrix.custom_ini }} == true && "${{ matrix.php }}" == '7.2' ]]; then
-            echo 'PHP_INI=, date.timezone=Australia/Sydney, short_open_tag=On' >> "$GITHUB_OUTPUT"
-          fi
+          echo 'PHP_INI=, date.timezone=Australia/Sydney, short_open_tag=On' >> "$GITHUB_OUTPUT"
 
       - name: Install PHP
         uses: shivammathur/setup-php@v2
