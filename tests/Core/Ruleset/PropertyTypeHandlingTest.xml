@@ -34,6 +34,25 @@
                 <element key="true" value="true"/>
                 <element key="false" value="false"/>
             </property>
+
+            <property name="expectsArrayWithExtendedValues" type="array">
+                <element value="string"/>
+            </property>
+
+            <property name="expectsArrayWithExtendedValues" type="array" extend="true">
+                <element value="15"/>
+                <element value="another string"/>
+            </property>
+
+            <property name="expectsArrayWithExtendedKeysAndValues" type="array">
+                <element key="10" value="10"/>
+                <element key="string" value="string"/>
+            </property>
+
+            <property name="expectsArrayWithExtendedKeysAndValues" type="array" extend="true">
+                <element key="15" value="15"/>
+                <element key="another string" value="another string"/>
+            </property>
         </properties>
     </rule>
 

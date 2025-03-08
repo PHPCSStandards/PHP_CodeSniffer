@@ -102,6 +102,18 @@ final class PropertyTypeHandlingTest extends TestCase
             'false'  => 'false',
         ];
 
+        $expectedArrayOnlyValuesExtended    = [
+            'string',
+            '15',
+            'another string',
+        ];
+        $expectedArrayKeysAndValuesExtended = [
+            10               => '10',
+            'string'         => 'string',
+            15               => '15',
+            'another string' => 'another string',
+        ];
+
         return [
             'String value (default)'                         => [
                 'propertyName' => 'expectsString',
@@ -151,6 +163,15 @@ final class PropertyTypeHandlingTest extends TestCase
                 'propertyName' => 'expectsArrayWithKeysAndValues',
                 'expected'     => $expectedArrayKeysAndValues,
             ],
+            'Array with only values extended'                => [
+                'propertyName' => 'expectsArrayWithExtendedValues',
+                'expected'     => $expectedArrayOnlyValuesExtended,
+            ],
+            'Array with keys and values extended'            => [
+                'propertyName' => 'expectsArrayWithExtendedKeysAndValues',
+                'expected'     => $expectedArrayKeysAndValuesExtended,
+            ],
+
         ];
 
     }//end dataTypeHandling()
