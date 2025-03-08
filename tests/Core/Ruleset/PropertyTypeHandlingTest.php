@@ -171,7 +171,10 @@ final class PropertyTypeHandlingTest extends TestCase
                 'propertyName' => 'expectsArrayWithExtendedKeysAndValues',
                 'expected'     => $expectedArrayKeysAndValuesExtended,
             ],
-
+            'Empty array'                                    => [
+                'propertyName' => 'expectsEmptyArray',
+                'expected'     => [],
+            ],
         ];
 
     }//end dataTypeHandling()

@@ -53,6 +53,8 @@
                 <element key="15" value="15"/>
                 <element key="another string" value="another string"/>
             </property>
+
+            <property name="expectsEmptyArray" type="array"/>
         </properties>
     </rule>
 
