@@ -90,7 +90,7 @@
     </code_comparison>
     <standard>
     <![CDATA[
-    If asterisks are not used, the contents should be indented by at least 4 spaces.
+    If there are no asterisks at the start of each line, the contents of the docblock should be indented by at least 4 spaces.
     ]]>
     </standard>
     <code_comparison>
@@ -98,8 +98,8 @@
         <![CDATA[
 /*
     A block comment
-      with
-        multiple lines.
+      with multiple lines.
+    And a second paragraph.
 */
         ]]>
         </code>
@@ -165,14 +165,14 @@
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: Uses multiple lines.">
+        <code title="Valid: Multi-line block comment.">
         <![CDATA[
 /*
     A block comment.
 */
         ]]>
         </code>
-        <code title="Invalid: Uses a single line.">
+        <code title="Invalid: Single line block comment.">
         <![CDATA[
 <em>/* A block comment. */</em>
         ]]>
