@@ -102,62 +102,90 @@ final class PropertyTypeHandlingTest extends TestCase
             'false'  => 'false',
         ];
 
+        $expectedArrayOnlyValuesExtended    = [
+            'string',
+            '15',
+            'another string',
+        ];
+        $expectedArrayKeysAndValuesExtended = [
+            10               => '10',
+            'string'         => 'string',
+            15               => '15',
+            'another string' => 'another string',
+        ];
+
         return [
-            'String value (default)'                         => [
+            'String value (default)'                          => [
                 'propertyName' => 'expectsString',
                 'expected'     => 'arbitraryvalue',
             ],
-            'String with whitespace only value becomes null' => [
+            'String with whitespace only value becomes null'  => [
                 'propertyName' => 'emptyStringBecomesNull',
                 'expected'     => null,
             ],
-            'Integer value gets set as string'               => [
+            'Integer value gets set as string'                => [
                 'propertyName' => 'expectsIntButAcceptsString',
                 'expected'     => '12345',
             ],
-            'Float value gets set as string'                 => [
+            'Float value gets set as string'                  => [
                 'propertyName' => 'expectsFloatButAcceptsString',
                 'expected'     => '12.345',
             ],
-            'Null value gets set as string'                  => [
+            'Null value gets set as string'                   => [
                 'propertyName' => 'expectsNull',
                 'expected'     => 'null',
             ],
-            'Null (uppercase) value gets set as string'      => [
+            'Null (uppercase) value gets set as string'       => [
                 'propertyName' => 'expectsNullCase',
                 'expected'     => 'NULL',
             ],
-            'True value gets set as boolean'                 => [
+            'True value gets set as boolean'                  => [
                 'propertyName' => 'expectsBooleanTrue',
                 'expected'     => true,
             ],
-            'True (mixed case) value gets set as string'     => [
+            'True (mixed case) value gets set as string'      => [
                 'propertyName' => 'expectsBooleanTrueCase',
                 'expected'     => 'True',
             ],
-            'False value gets set as boolean'                => [
+            'False value gets set as boolean'                 => [
                 'propertyName' => 'expectsBooleanFalse',
                 'expected'     => false,
             ],
-            'False (mixed case) value gets set as string'    => [
+            'False (mixed case) value gets set as string'     => [
                 'propertyName' => 'expectsBooleanFalseCase',
                 'expected'     => 'fALSe',
             ],
-            'Array with only values (new style)'             => [
+            'Array with only values (new style)'              => [
                 'propertyName' => 'expectsArrayWithOnlyValues',
                 'expected'     => $expectedArrayOnlyValues,
             ],
-            'Array with keys and values (new style)'         => [
+            'Array with keys and values (new style)'          => [
                 'propertyName' => 'expectsArrayWithKeysAndValues',
                 'expected'     => $expectedArrayKeysAndValues,
             ],
-            'Array with only values (old style)'             => [
+            'Array with only values extended (new style)'     => [
+                'propertyName' => 'expectsArrayWithExtendedValues',
+                'expected'     => $expectedArrayOnlyValuesExtended,
+            ],
+            'Array with keys and values extended (new style)' => [
+                'propertyName' => 'expectsArrayWithExtendedKeysAndValues',
+                'expected'     => $expectedArrayKeysAndValuesExtended,
+            ],
+            'Array with only values (old style)'              => [
                 'propertyName' => 'expectsOldSchoolArrayWithOnlyValues',
                 'expected'     => $expectedArrayOnlyValues,
             ],
-            'Array with keys and values (old style)'         => [
+            'Array with keys and values (old style)'          => [
                 'propertyName' => 'expectsOldSchoolArrayWithKeysAndValues',
                 'expected'     => $expectedArrayKeysAndValues,
+            ],
+            'Array with only values extended (old style)'     => [
+                'propertyName' => 'expectsOldSchoolArrayWithExtendedValues',
+                'expected'     => $expectedArrayOnlyValuesExtended,
+            ],
+            'Array with keys and values extended (old style)' => [
+                'propertyName' => 'expectsOldSchoolArrayWithExtendedKeysAndValues',
+                'expected'     => $expectedArrayKeysAndValuesExtended,
             ],
         ];
 
