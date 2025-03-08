@@ -407,7 +407,7 @@ class MultipleBlankLinesInPreAmble {
 final class BlankLinesBetweenVsAttributesWithoutCommentIssueSquiz3594
 {
 
-    // phpcs can fix this but not the next one
+    // PHPCS can fix blank lines for the first property, but not for the second. (fixed now)
     #[SingleAttribute]
 
     public $property1;
