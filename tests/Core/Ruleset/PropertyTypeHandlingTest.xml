@@ -35,9 +35,34 @@
                 <element key="false" value="false"/>
             </property>
 
+            <property name="expectsArrayWithExtendedValues" type="array">
+                <element value="string"/>
+            </property>
+
+            <property name="expectsArrayWithExtendedValues" type="array" extend="true">
+                <element value="15"/>
+                <element value="another string"/>
+            </property>
+
+            <property name="expectsArrayWithExtendedKeysAndValues" type="array">
+                <element key="10" value="10"/>
+                <element key="string" value="string"/>
+            </property>
+
+            <property name="expectsArrayWithExtendedKeysAndValues" type="array" extend="true">
+                <element key="15" value="15"/>
+                <element key="another string" value="another string"/>
+            </property>
+
             <property name="expectsOldSchoolArrayWithOnlyValues" type="array" value="string, 10, 1.5, null, true, false" />
 
             <property name="expectsOldSchoolArrayWithKeysAndValues" type="array" value="string=>string,10=>10,float=>1.5,null=>null,true=>true,false=>false" />
+
+            <property name="expectsOldSchoolArrayWithExtendedValues" type="array" value="string" />
+            <property name="expectsOldSchoolArrayWithExtendedValues" type="array" extend="true" value="15,another string" />
+
+            <property name="expectsOldSchoolArrayWithExtendedKeysAndValues" type="array" value="10=>10,string=>string" />
+            <property name="expectsOldSchoolArrayWithExtendedKeysAndValues" type="array" extend="true" value="15=>15,another string=>another string" />
         </properties>
     </rule>
 
