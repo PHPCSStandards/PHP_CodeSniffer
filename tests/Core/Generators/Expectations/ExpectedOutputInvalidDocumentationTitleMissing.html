@@ -26,6 +26,19 @@
             margin-top: 50px;
         }
 
+        h2 a.sniffanchor,
+        h2 a.sniffanchor {
+            color: #006C95;
+            opacity: 0;
+            padding: 0 3px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        h2:hover a.sniffanchor,
+        h2:focus a.sniffanchor {
+            opacity: 1;
+        }
+
         .code-comparison {
             width: 100%;
         }
@@ -75,8 +88,7 @@
  </head>
  <body>
   <h1>GeneratorTest Coding Standards</h1>
-  <a name="Documentation-Title-Missing" />
-  <h2>Documentation Title Missing</h2>
+  <h2 id="documentation-title-missing">Documentation Title Missing<a class="sniffanchor" href="#documentation-title-missing"> &sect; </a></h2>
   <p class="text">The above &quot;documentation&quot; element is missing the title attribute.</p>
   <table class="code-comparison">
    <tr>
