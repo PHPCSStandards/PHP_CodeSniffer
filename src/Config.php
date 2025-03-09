@@ -85,14 +85,14 @@ class Config
      *
      * @var string
      */
-    const VERSION = '3.13.0';
+    const VERSION = '4.0.0';
 
     /**
      * Package stability; either stable, beta or alpha.
      *
      * @var string
      */
-    const STABILITY = 'stable';
+    const STABILITY = 'alpha';
 
     /**
      * Default report width when no report width is provided and 'auto' does not yield a valid width.
