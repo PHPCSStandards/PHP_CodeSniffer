@@ -171,6 +171,10 @@ final class PropertyTypeHandlingTest extends TestCase
                 'propertyName' => 'expectsArrayWithExtendedKeysAndValues',
                 'expected'     => $expectedArrayKeysAndValuesExtended,
             ],
+            'Empty array (new style)'                         => [
+                'propertyName' => 'expectsEmptyArray',
+                'expected'     => [],
+            ],
             'Array with only values (old style)'              => [
                 'propertyName' => 'expectsOldSchoolArrayWithOnlyValues',
                 'expected'     => $expectedArrayOnlyValues,
@@ -186,6 +190,10 @@ final class PropertyTypeHandlingTest extends TestCase
             'Array with keys and values extended (old style)' => [
                 'propertyName' => 'expectsOldSchoolArrayWithExtendedKeysAndValues',
                 'expected'     => $expectedArrayKeysAndValuesExtended,
+            ],
+            'Empty array (old style)'                         => [
+                'propertyName' => 'expectsOldSchoolEmptyArray',
+                'expected'     => [],
             ],
         ];
 
