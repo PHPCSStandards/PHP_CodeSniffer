@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - master
+      - 4.0
     paths:
       - '.github/workflows/build-phar.yml'
       - '.github/workflows/reusable-build-phar.yml'
