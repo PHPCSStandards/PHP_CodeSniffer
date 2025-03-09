@@ -62,7 +62,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
         $config   = new ConfigDouble(["--standard=$standard"]);
 
         $sniffClass = 'Fixtures\\TestStandard\\Sniffs\\InvalidSniffs\\RegisterNoArraySniff';
-        $message    = "ERROR: The sniff $sniffClass register() method must return an array.".PHP_EOL.PHP_EOL;
+        $message    = "ERROR: The sniff {$sniffClass}::register() method must return an array.".PHP_EOL.PHP_EOL;
         $this->expectRuntimeExceptionMessage($message);
 
         new Ruleset($config);
