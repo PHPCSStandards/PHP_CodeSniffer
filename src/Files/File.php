@@ -1249,14 +1249,6 @@ class File
             throw new RuntimeException('Token type "'.$this->tokens[$stackPtr]['type'].'" is not T_FUNCTION, T_CLASS, T_INTERFACE, T_TRAIT or T_ENUM');
         }
 
-        if ($tokenCode === T_FUNCTION
-            && strtolower($this->tokens[$stackPtr]['content']) !== 'function'
-        ) {
-            // This is a function declared without the "function" keyword.
-            // So this token is the function name.
-            return $this->tokens[$stackPtr]['content'];
-        }
-
         $stopPoint = $this->numTokens;
         if (isset($this->tokens[$stackPtr]['parenthesis_opener']) === true) {
             // For functions, stop searching at the parenthesis opener.
