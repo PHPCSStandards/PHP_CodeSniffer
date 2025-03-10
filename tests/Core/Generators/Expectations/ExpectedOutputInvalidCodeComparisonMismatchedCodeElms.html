@@ -26,6 +26,19 @@
             margin-top: 50px;
         }
 
+        h2 a.sniffanchor,
+        h2 a.sniffanchor {
+            color: #006C95;
+            opacity: 0;
+            padding: 0 3px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        h2:hover a.sniffanchor,
+        h2:focus a.sniffanchor {
+            opacity: 1;
+        }
+
         .code-comparison {
             width: 100%;
         }
@@ -75,8 +88,7 @@
  </head>
  <body>
   <h1>GeneratorTest Coding Standards</h1>
-  <a name="Code-Comparison,-mismatched-code-blocks" />
-  <h2>Code Comparison, mismatched code blocks</h2>
+  <h2 id="code-comparison--mismatched-code-blocks">Code Comparison, mismatched code blocks<a class="sniffanchor" href="#code-comparison--mismatched-code-blocks"> &sect; </a></h2>
   <p class="text">This doc has two code elements, one only has a title, one has actual code. Unbalanced</p>
   <table class="code-comparison">
    <tr>
