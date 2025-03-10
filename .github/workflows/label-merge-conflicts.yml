@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - master
-      - 4.0
+      - 4.x
   # Check conflicts in new PRs and for resolved conflicts due to an open PR being updated.
   pull_request_target:
     types:

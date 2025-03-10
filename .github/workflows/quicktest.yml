@@ -1,11 +1,11 @@
 name: Quicktest
 
 on:
-  # Run on pushes to all branches except for `master`/`4.0`.
+  # Run on pushes to all branches except for `master`/`4.x`.
   push:
     branches-ignore:
       - master
-      - 4.0
+      - 4.x
     paths-ignore:
       - '**.md'
   # Allow manually triggering the workflow.
