@@ -26,11 +26,8 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testAsymmetricVisibility(
-        string $testMarker,
-        string $testType,
-        string $testContent
-    ) {
+    public function testAsymmetricVisibility($testMarker, $testType, $testContent)
+    {
         $tokens     = $this->phpcsFile->getTokens();
         $target     = $this->getTargetToken(
             $testMarker,
