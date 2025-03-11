@@ -159,7 +159,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
         if (($opener + 1) !== $closer) {
             $end = $closer;
             if (isset($conditionStop) === true) {
-                $end = ($token + $conditionStop);
+                $end = ($token + $conditionStop + 1);
             }
 
             for ($i = ($opener + 1); $i < $end; $i++) {
