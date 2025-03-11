@@ -26,42 +26,50 @@ final class ValidVariableNameUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile='')
     {
-        return [
-            3   => 1,
-            5   => 1,
-            11  => 1,
-            13  => 1,
-            17  => 1,
-            19  => 1,
-            23  => 1,
-            25  => 1,
-            29  => 1,
-            31  => 1,
-            36  => 1,
-            38  => 1,
-            42  => 1,
-            44  => 1,
-            48  => 1,
-            50  => 1,
-            61  => 1,
-            67  => 1,
-            72  => 1,
-            74  => 1,
-            75  => 1,
-            76  => 1,
-            79  => 1,
-            96  => 1,
-            99  => 1,
-            113 => 1,
-            116 => 1,
-            121 => 1,
-            126 => 1,
-            129 => 1,
-        ];
+        switch ($testFile) {
+        case 'ValidVariableNameUnitTest.1.inc':
+            return [
+                3   => 1,
+                5   => 1,
+                11  => 1,
+                13  => 1,
+                17  => 1,
+                19  => 1,
+                23  => 1,
+                25  => 1,
+                29  => 1,
+                31  => 1,
+                36  => 1,
+                38  => 1,
+                42  => 1,
+                44  => 1,
+                48  => 1,
+                50  => 1,
+                61  => 1,
+                67  => 1,
+                72  => 1,
+                74  => 1,
+                75  => 1,
+                76  => 1,
+                79  => 1,
+                96  => 1,
+                99  => 1,
+                113 => 1,
+                116 => 1,
+                121 => 1,
+                126 => 1,
+                129 => 1,
+            ];
+
+        default:
+            return [];
+        }//end switch
 
     }//end getErrorList()
 
@@ -72,29 +80,37 @@ final class ValidVariableNameUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    public function getWarningList()
+    public function getWarningList($testFile='')
     {
-        return [
-            6   => 1,
-            14  => 1,
-            20  => 1,
-            26  => 1,
-            32  => 1,
-            39  => 1,
-            45  => 1,
-            51  => 1,
-            64  => 1,
-            70  => 1,
-            73  => 1,
-            76  => 1,
-            79  => 1,
-            82  => 1,
-            94  => 1,
-            // Warning from getMemberProperties() about parse error.
-            107 => 1,
-        ];
+        switch ($testFile) {
+        case 'ValidVariableNameUnitTest.1.inc':
+            return [
+                6   => 1,
+                14  => 1,
+                20  => 1,
+                26  => 1,
+                32  => 1,
+                39  => 1,
+                45  => 1,
+                51  => 1,
+                64  => 1,
+                70  => 1,
+                73  => 1,
+                76  => 1,
+                79  => 1,
+                82  => 1,
+                94  => 1,
+                // Warning from getMemberProperties() about parse error.
+                107 => 1,
+            ];
+
+        default:
+            return [];
+        }//end switch
 
     }//end getWarningList()
 
