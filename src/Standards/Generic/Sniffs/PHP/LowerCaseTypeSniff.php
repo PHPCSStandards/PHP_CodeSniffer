@@ -162,13 +162,8 @@ class LowerCaseTypeSniff implements Sniff
                 try {
                     $props = $phpcsFile->getMemberProperties($i);
                 } catch (RuntimeException $e) {
-                    // Not an OO property.
+                    // Parse error: property in enum. Ignore.
                     continue;
-                }
-
-                if (empty($props) === true) {
-                    // Parse error - property in interface or enum. Ignore.
-                    return;
                 }
 
                 // Strip off potential nullable indication.

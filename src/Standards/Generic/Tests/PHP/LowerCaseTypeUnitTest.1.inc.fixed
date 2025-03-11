@@ -139,7 +139,6 @@ class DNFTypes {
     function DNFReturnTypes ($var): object|(self&\Package\Other_Class)|string|false {}
 }
 
-// Intentional error, should be ignored by the sniff.
-interface PropertiesNotAllowed {
-    public $notAllowed;
+interface PHP84HookedProperty {
+    public string $readable { get; }
 }

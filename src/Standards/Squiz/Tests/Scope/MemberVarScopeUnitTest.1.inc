@@ -68,7 +68,7 @@ class MyClass {
 }
 
 interface Base {
-    protected $anonymous;
+    var $anonymous;
 }
 
 class PHP84FinalProperties {

@@ -72,6 +72,7 @@ final class ValidVariableNameUnitTest extends AbstractSniffUnitTest
                 146 => 1,
                 152 => 1,
                 155 => 1,
+                161 => 1,
             ];
 
         default:

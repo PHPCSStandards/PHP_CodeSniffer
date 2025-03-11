@@ -97,6 +97,7 @@ final class LowerCaseTypeUnitTest extends AbstractSniffUnitTest
                 135 => 1,
                 136 => 1,
                 139 => 2,
+                143 => 1,
             ];
 
         default:
@@ -112,20 +113,11 @@ final class LowerCaseTypeUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
-     * @param string $testFile The name of the file being tested.
-     *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList()
     {
-        switch ($testFile) {
-        case 'LowerCaseTypeUnitTest.1.inc':
-            // Warning from getMemberProperties() about parse error.
-            return [144 => 1];
-
-        default:
-            return [];
-        }//end switch
+        return [];
 
     }//end getWarningList()
 

@@ -43,6 +43,7 @@ final class MemberVarScopeUnitTest extends AbstractSniffUnitTest
                 41 => 1,
                 66 => 2,
                 67 => 1,
+                71 => 1,
                 75 => 1,
             ];
 
@@ -59,20 +60,11 @@ final class MemberVarScopeUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
-     * @param string $testFile The name of the file being tested.
-     *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList()
     {
-        switch ($testFile) {
-        case 'MemberVarScopeUnitTest.1.inc':
-            // Warning from getMemberProperties() about parse error.
-            return [71 => 1];
-
-        default:
-            return [];
-        }//end switch
+        return [];
 
     }//end getWarningList()
 

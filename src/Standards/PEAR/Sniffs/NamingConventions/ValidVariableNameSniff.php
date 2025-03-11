@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Standards\PEAR\Sniffs\NamingConventions;
 
+use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
 
@@ -27,13 +28,14 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      */
     protected function processMemberVar(File $phpcsFile, $stackPtr)
     {
-        $tokens = $phpcsFile->getTokens();
-
-        $memberProps = $phpcsFile->getMemberProperties($stackPtr);
-        if (empty($memberProps) === true) {
+        try {
+            $memberProps = $phpcsFile->getMemberProperties($stackPtr);
+        } catch (RuntimeException $e) {
+            // Parse error: property in enum. Ignore.
             return;
         }
 
+        $tokens         = $phpcsFile->getTokens();
         $memberName     = ltrim($tokens[$stackPtr]['content'], '$');
         $scope          = $memberProps['scope'];
         $scopeSpecified = $memberProps['scope_specified'];

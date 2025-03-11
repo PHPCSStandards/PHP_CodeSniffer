@@ -155,3 +155,8 @@ enum SomeEnum
         $bar_foo = 3;
     }
 }
+
+interface PHP84HookedProperty {
+    public $thisisfine { get; }
+    public $_underscore { get; }
+}

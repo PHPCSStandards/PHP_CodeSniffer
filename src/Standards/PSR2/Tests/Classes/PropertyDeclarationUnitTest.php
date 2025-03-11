@@ -89,10 +89,11 @@ final class PropertyDeclarationUnitTest extends AbstractSniffUnitTest
         switch ($testFile) {
         case 'PropertyDeclarationUnitTest.1.inc':
             return [
-                13 => 1,
-                14 => 1,
-                15 => 1,
-                53 => 1,
+                13  => 1,
+                14  => 1,
+                15  => 1,
+                53  => 1,
+                102 => 1,
             ];
 
         default:

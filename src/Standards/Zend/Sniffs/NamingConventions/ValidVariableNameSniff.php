@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Standards\Zend\Sniffs\NamingConventions;
 
+use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
 use PHP_CodeSniffer\Util\Common;
@@ -114,15 +115,16 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      */
     protected function processMemberVar(File $phpcsFile, $stackPtr)
     {
-        $tokens      = $phpcsFile->getTokens();
-        $varName     = ltrim($tokens[$stackPtr]['content'], '$');
-        $memberProps = $phpcsFile->getMemberProperties($stackPtr);
-        if (empty($memberProps) === true) {
-            // Exception encountered.
+        try {
+            $memberProps = $phpcsFile->getMemberProperties($stackPtr);
+        } catch (RuntimeException $e) {
+            // Parse error: property in enum. Ignore.
             return;
         }
 
-        $public = ($memberProps['scope'] === 'public');
+        $tokens  = $phpcsFile->getTokens();
+        $varName = ltrim($tokens[$stackPtr]['content'], '$');
+        $public  = ($memberProps['scope'] === 'public');
 
         if ($public === true) {
             if (substr($varName, 0, 1) === '_') {

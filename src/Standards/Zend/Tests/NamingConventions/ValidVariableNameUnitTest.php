@@ -60,11 +60,13 @@ final class ValidVariableNameUnitTest extends AbstractSniffUnitTest
                 79  => 1,
                 96  => 1,
                 99  => 1,
+                107 => 1,
                 113 => 1,
                 116 => 1,
                 121 => 1,
                 126 => 1,
                 129 => 1,
+                135 => 1,
             ];
 
         default:
@@ -89,23 +91,21 @@ final class ValidVariableNameUnitTest extends AbstractSniffUnitTest
         switch ($testFile) {
         case 'ValidVariableNameUnitTest.1.inc':
             return [
-                6   => 1,
-                14  => 1,
-                20  => 1,
-                26  => 1,
-                32  => 1,
-                39  => 1,
-                45  => 1,
-                51  => 1,
-                64  => 1,
-                70  => 1,
-                73  => 1,
-                76  => 1,
-                79  => 1,
-                82  => 1,
-                94  => 1,
-                // Warning from getMemberProperties() about parse error.
-                107 => 1,
+                6  => 1,
+                14 => 1,
+                20 => 1,
+                26 => 1,
+                32 => 1,
+                39 => 1,
+                45 => 1,
+                51 => 1,
+                64 => 1,
+                70 => 1,
+                73 => 1,
+                76 => 1,
+                79 => 1,
+                82 => 1,
+                94 => 1,
             ];
 
         default:

@@ -35,13 +35,14 @@ final class ValidVariableNameUnitTest extends AbstractSniffUnitTest
         switch ($testFile) {
         case 'ValidVariableNameUnitTest.1.inc':
             return [
-                12 => 1,
-                17 => 1,
-                22 => 1,
-                92 => 1,
-                93 => 1,
-                94 => 1,
-                99 => 1,
+                12  => 1,
+                17  => 1,
+                22  => 1,
+                92  => 1,
+                93  => 1,
+                94  => 1,
+                99  => 1,
+                105 => 1,
             ];
 
         default:
