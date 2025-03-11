@@ -236,13 +236,25 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
                 'testMarker'        => '/* testPrivateIsKeyword */',
                 'expectedTokenType' => 'T_PRIVATE',
             ],
+            'private(set): property declaration'     => [
+                'testMarker'        => '/* testPrivateSetIsKeyword */',
+                'expectedTokenType' => 'T_PRIVATE_SET',
+            ],
             'protected: property declaration'        => [
                 'testMarker'        => '/* testProtectedIsKeyword */',
                 'expectedTokenType' => 'T_PROTECTED',
             ],
+            'protected(set): property declaration'   => [
+                'testMarker'        => '/* testProtectedSetIsKeyword */',
+                'expectedTokenType' => 'T_PROTECTED_SET',
+            ],
             'public: property declaration'           => [
                 'testMarker'        => '/* testPublicIsKeyword */',
                 'expectedTokenType' => 'T_PUBLIC',
+            ],
+            'public(set): property declaration'      => [
+                'testMarker'        => '/* testPublicSetIsKeyword */',
+                'expectedTokenType' => 'T_PUBLIC_SET',
             ],
             'var: property declaration'              => [
                 'testMarker'        => '/* testVarIsKeyword */',
