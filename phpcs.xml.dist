@@ -9,8 +9,8 @@
     <file>src</file>
     <file>tests</file>
 
-    <exclude-pattern>*/src/Standards/*/Tests/*\.(inc|css|js)$</exclude-pattern>
-    <exclude-pattern>*/tests/Core/*/*\.(inc|css|js)$</exclude-pattern>
+    <exclude-pattern>*/src/Standards/*/Tests/*\.inc$</exclude-pattern>
+    <exclude-pattern>*/tests/Core/*/*\.inc$</exclude-pattern>
     <exclude-pattern>*/tests/Core/*/Fixtures/*\.php$</exclude-pattern>
 
     <arg name="basepath" value="."/>

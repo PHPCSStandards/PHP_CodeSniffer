@@ -390,7 +390,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
         $expected = [
             '/no-transformation/',
             '/simple.*transformation/.*',
-            '/escaped\\,comma/becomes/comma/to/allow/commas/in/filenames.css',
+            '/escaped\\,comma/becomes/comma/to/allow/commas/in/filenames.inc',
             '/pat?tern(is|regex)\\.php$',
         ];
 

@@ -20,7 +20,7 @@ concurrency:
 jobs:
   #### QUICK TEST ####
   # This is a much quicker test run which only runs the unit tests against the low/medium/high
-  # supported PHP versions and skips the PHAR test and the tests for external JS/CSS tooling.
+  # supported PHP versions and skips the PHAR test.
   # These are basically the same builds as in the Test->Coverage workflow, but then without doing
   # the code-coverage.
   quicktest:
