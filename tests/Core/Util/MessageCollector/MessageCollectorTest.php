@@ -33,14 +33,9 @@ final class MessageCollectorTest extends TestCase
     {
         $exception    = 'InvalidArgumentException';
         $exceptionMsg = 'The $message should be of type string. Received: ';
-        if (method_exists($this, 'expectException') === true) {
-            // PHPUnit 5+.
-            $this->expectException($exception);
-            $this->expectExceptionMessage($exceptionMsg);
-        } else {
-            // PHPUnit 4.
-            $this->setExpectedException($exception, $exceptionMsg);
-        }
+
+        $this->expectException($exception);
+        $this->expectExceptionMessage($exceptionMsg);
 
         $msgCollector = new MessageCollector();
         $msgCollector->add($message);
@@ -80,14 +75,9 @@ final class MessageCollectorTest extends TestCase
     {
         $exception    = 'InvalidArgumentException';
         $exceptionMsg = 'The message $type should be one of the predefined MessageCollector constants. Received: ';
-        if (method_exists($this, 'expectException') === true) {
-            // PHPUnit 5+.
-            $this->expectException($exception);
-            $this->expectExceptionMessage($exceptionMsg);
-        } else {
-            // PHPUnit 4.
-            $this->setExpectedException($exception, $exceptionMsg);
-        }
+
+        $this->expectException($exception);
+        $this->expectExceptionMessage($exceptionMsg);
 
         $msgCollector = new MessageCollector();
         $msgCollector->add('Message', $type);
@@ -309,14 +299,9 @@ final class MessageCollectorTest extends TestCase
     public function testDisplayingBlockingErrors($messages, $expected)
     {
         $exception = 'PHP_CodeSniffer\Exceptions\RuntimeException';
-        if (method_exists($this, 'expectException') === true) {
-            // PHPUnit 5+.
-            $this->expectException($exception);
-            $this->expectExceptionMessage($expected);
-        } else {
-            // PHPUnit 4.
-            $this->setExpectedException($exception, $expected);
-        }
+
+        $this->expectException($exception);
+        $this->expectExceptionMessage($expected);
 
         $msgCollector = new MessageCollector();
         $this->createErrorCache($msgCollector, $messages);

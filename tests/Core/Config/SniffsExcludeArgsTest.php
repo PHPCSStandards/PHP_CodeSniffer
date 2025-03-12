@@ -50,14 +50,8 @@ final class SniffsExcludeArgsTest extends TestCase
         $message .= 'Run "phpcs --help" for usage information'.PHP_EOL;
         $message .= PHP_EOL;
 
-        if (method_exists($this, 'expectException') === true) {
-            // PHPUnit 5+.
-            $this->expectException($exception);
-            $this->expectExceptionMessage($message);
-        } else {
-            // PHPUnit 4.
-            $this->setExpectedException($exception, $message);
-        }
+        $this->expectException($exception);
+        $this->expectExceptionMessage($message);
 
         new ConfigDouble(["--$argument=$value"]);
 

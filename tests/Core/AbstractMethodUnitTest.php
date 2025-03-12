@@ -246,16 +246,8 @@ abstract class AbstractMethodUnitTest extends TestCase
      */
     public function expectRunTimeException($message)
     {
-        $exception = 'PHP_CodeSniffer\Exceptions\RuntimeException';
-
-        if (method_exists($this, 'expectException') === true) {
-            // PHPUnit 5+.
-            $this->expectException($exception);
-            $this->expectExceptionMessage($message);
-        } else {
-            // PHPUnit 4.
-            $this->setExpectedException($exception, $message);
-        }
+        $this->expectException('PHP_CodeSniffer\Exceptions\RuntimeException');
+        $this->expectExceptionMessage($message);
 
     }//end expectRunTimeException()
 
