@@ -14,6 +14,7 @@ namespace PHP_CodeSniffer;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Sniffs\DeprecatedSniff;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\MessageCollector;
 use PHP_CodeSniffer\Util\Standards;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -131,6 +132,20 @@ class Ruleset
      */
     private $deprecatedSniffs = [];
 
+    /**
+     * Message collector object.
+     *
+     * User-facing messages should be collected via this object for display once the ruleset processing has finished.
+     *
+     * The following type of errors should *NOT* be collected, but should still throw their own `RuntimeException`:
+     * - Errors which could cause other (uncollectable) errors further into the ruleset processing, like a missing autoload file.
+     * - Errors which are directly aimed at and only intended for sniff developers or integrators
+     *   (in contrast to ruleset maintainers or end-users).
+     *
+     * @var \PHP_CodeSniffer\Util\MessageCollector
+     */
+    private $msgCache;
+
 
     /**
      * Initialise the ruleset that the run will use.
@@ -138,14 +153,15 @@ class Ruleset
      * @param \PHP_CodeSniffer\Config $config The config data for the run.
      *
      * @return void
-     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If no sniffs were registered.
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If blocking errors were encountered when processing the ruleset.
      */
     public function __construct(Config $config)
     {
-        $this->config = $config;
-        $restrictions = $config->sniffs;
-        $exclusions   = $config->exclude;
-        $sniffs       = [];
+        $this->config   = $config;
+        $restrictions   = $config->sniffs;
+        $exclusions     = $config->exclude;
+        $sniffs         = [];
+        $this->msgCache = new MessageCollector();
 
         $standardPaths = [];
         foreach ($config->standards as $standard) {
@@ -186,11 +202,11 @@ class Ruleset
 
             if (defined('PHP_CODESNIFFER_IN_TESTS') === true && empty($restrictions) === false) {
                 // In unit tests, only register the sniffs that the test wants and not the entire standard.
-                try {
-                    foreach ($restrictions as $restriction) {
-                        $sniffs = array_merge($sniffs, $this->expandRulesetReference($restriction, dirname($standard)));
-                    }
-                } catch (RuntimeException $e) {
+                foreach ($restrictions as $restriction) {
+                    $sniffs = array_merge($sniffs, $this->expandRulesetReference($restriction, dirname($standard)));
+                }
+
+                if (empty($sniffs) === true) {
                     // Sniff reference could not be expanded, which probably means this
                     // is an installed standard. Let the unit test system take care of
                     // setting the correct sniff for testing.
@@ -239,8 +255,10 @@ class Ruleset
         }
 
         if ($numSniffs === 0) {
-            throw new RuntimeException('ERROR: No sniffs were registered');
+            $this->msgCache->add('No sniffs were registered.', MessageCollector::ERROR);
         }
+
+        $this->displayCachedMessages();
 
     }//end __construct()
 
@@ -459,6 +477,35 @@ class Ruleset
         echo PHP_EOL.PHP_EOL.$closer.PHP_EOL.PHP_EOL;
 
     }//end showSniffDeprecations()
+
+
+    /**
+     * Print any notices encountered while processing the ruleset(s).
+     *
+     * Note: these messages aren't shown at the time they are encountered to avoid "one error hiding behind another".
+     * This way the (end-)user gets to see all of them in one go.
+     *
+     * @return void
+     *
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If blocking errors were encountered.
+     */
+    private function displayCachedMessages()
+    {
+        // Don't show deprecations/notices/warnings in quiet mode, in explain mode
+        // or when the documentation is being shown.
+        // Documentation and explain will call the Ruleset multiple times which
+        // would lead to duplicate display of the messages.
+        if ($this->msgCache->containsBlockingErrors() === false
+            && ($this->config->quiet === true
+            || $this->config->explain === true
+            || $this->config->generator !== null)
+        ) {
+            return;
+        }
+
+        $this->msgCache->display();
+
+    }//end displayCachedMessages()
 
 
     /**
@@ -993,8 +1040,8 @@ class Ruleset
             }
         } else {
             if (is_file($ref) === false) {
-                $error = "ERROR: Referenced sniff \"$ref\" does not exist";
-                throw new RuntimeException($error);
+                $this->msgCache->add("Referenced sniff \"$ref\" does not exist.", MessageCollector::ERROR);
+                return [];
             }
 
             if (substr($ref, -9) === 'Sniff.php') {
@@ -1083,18 +1130,19 @@ class Ruleset
 
                 $type = strtolower((string) $rule->type);
                 if ($type !== 'error' && $type !== 'warning') {
-                    throw new RuntimeException("ERROR: Message type \"$type\" is invalid; must be \"error\" or \"warning\"");
-                }
+                    $message = "Message type \"$type\" for \"$code\" is invalid; must be \"error\" or \"warning\".";
+                    $this->msgCache->add($message, MessageCollector::ERROR);
+                } else {
+                    $this->ruleset[$code]['type'] = $type;
+                    if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                        echo str_repeat("\t", $depth);
+                        echo "\t\t=> message type set to ".(string) $rule->type;
+                        if ($code !== $ref) {
+                            echo " for $code";
+                        }
 
-                $this->ruleset[$code]['type'] = $type;
-                if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    echo str_repeat("\t", $depth);
-                    echo "\t\t=> message type set to ".(string) $rule->type;
-                    if ($code !== $ref) {
-                        echo " for $code";
+                        echo PHP_EOL;
                     }
-
-                    echo PHP_EOL;
                 }
             }//end if
 
@@ -1414,8 +1462,12 @@ class Ruleset
 
             $tokens = $this->sniffs[$sniffClass]->register();
             if (is_array($tokens) === false) {
-                $msg = "ERROR: Sniff $sniffClass register() method must return an array";
-                throw new RuntimeException($msg);
+                $msg = "The sniff {$sniffClass}::register() method must return an array.";
+                $this->msgCache->add($msg, MessageCollector::ERROR);
+
+                // Unregister the sniff.
+                unset($this->sniffs[$sniffClass], $this->sniffCodes[$sniffCode], $this->deprecatedSniffs[$sniffCode]);
+                continue;
             }
 
             $ignorePatterns = [];
@@ -1525,9 +1577,9 @@ class Ruleset
 
         if ($isSettable === false) {
             if ($settings['scope'] === 'sniff') {
-                $notice  = "ERROR: Ruleset invalid. Property \"$propertyName\" does not exist on sniff ";
-                $notice .= array_search($sniffClass, $this->sniffCodes, true);
-                throw new RuntimeException($notice);
+                $notice  = "Property \"$propertyName\" does not exist on sniff ";
+                $notice .= array_search($sniffClass, $this->sniffCodes, true).'.';
+                $this->msgCache->add($notice, MessageCollector::ERROR);
             }
 
             return;
