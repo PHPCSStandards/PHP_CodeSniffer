@@ -114,6 +114,13 @@ final class PropertyTypeHandlingSniff implements Sniff
     public $expectsArrayWithExtendedKeysAndValues;
 
     /**
+     * Used to verify that array properties allow for setting a property to an empty array.
+     *
+     * @var array<mixed>
+     */
+    public $expectsEmptyArray;
+
+    /**
      * Used to verify that array properties passed as a string get parsed to a proper array.
      *
      * @var array<mixed>
@@ -140,6 +147,13 @@ final class PropertyTypeHandlingSniff implements Sniff
      * @var array<string, mixed>
      */
     public $expectsOldSchoolArrayWithExtendedKeysAndValues;
+
+    /**
+     * Used to verify that array properties passed as a string allow for setting a property to an empty array.
+     *
+     * @var array<mixed>
+     */
+    public $expectsOldSchoolEmptyArray;
 
     public function register()
     {
