@@ -1139,7 +1139,13 @@ class Config
                     break;
                 }
 
-                $this->extensions = explode(',', substr($arg, 11));
+                $extensionsString = substr($arg, 11);
+                $newExtensions    = [];
+                if (empty($extensionsString) === false) {
+                    $newExtensions = explode(',', $extensionsString);
+                }
+
+                $this->extensions = $newExtensions;
                 $this->overriddenDefaults['extensions'] = true;
             } else if (substr($arg, 0, 7) === 'suffix=') {
                 if (isset($this->overriddenDefaults['suffix']) === true) {
