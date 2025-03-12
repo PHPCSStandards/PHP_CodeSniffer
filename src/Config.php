@@ -1141,21 +1141,24 @@ class Config
                     break;
                 }
 
-                $extensions    = explode(',', substr($arg, 11));
-                $newExtensions = [];
-                foreach ($extensions as $ext) {
-                    $slash = strpos($ext, '/');
-                    if ($slash !== false) {
-                        // They specified the tokenizer too.
-                        list($ext, $tokenizer) = explode('/', $ext);
-                        $newExtensions[$ext]   = strtoupper($tokenizer);
-                        continue;
-                    }
+                $extensionsString = substr($arg, 11);
+                $newExtensions    = [];
+                if (empty($extensionsString) === false) {
+                    $extensions = explode(',', $extensionsString);
+                    foreach ($extensions as $ext) {
+                        $slash = strpos($ext, '/');
+                        if ($slash !== false) {
+                            // They specified the tokenizer too.
+                            list($ext, $tokenizer) = explode('/', $ext);
+                            $newExtensions[$ext]   = strtoupper($tokenizer);
+                            continue;
+                        }
 
-                    if (isset($this->extensions[$ext]) === true) {
-                        $newExtensions[$ext] = $this->extensions[$ext];
-                    } else {
-                        $newExtensions[$ext] = 'PHP';
+                        if (isset($this->extensions[$ext]) === true) {
+                            $newExtensions[$ext] = $this->extensions[$ext];
+                        } else {
+                            $newExtensions[$ext] = 'PHP';
+                        }
                     }
                 }
 
