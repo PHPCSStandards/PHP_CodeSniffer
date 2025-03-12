@@ -45,7 +45,7 @@ abstract class AbstractFilterTestCase extends TestCase
      */
     public static function initializeConfigAndRuleset()
     {
-        self::$config  = new ConfigDouble(['--extensions=php,inc/php,js,css']);
+        self::$config  = new ConfigDouble();
         self::$ruleset = new Ruleset(self::$config);
 
     }//end initializeConfigAndRuleset()

@@ -69,29 +69,23 @@ final class ExtensionsArgTest extends TestCase
                     'py' => 'PHP',
                 ],
             ],
-            // This would likely result in a problem when PHPCS can't find a "PY" tokenizer class,
-            // but that's not our concern at this moment. Support for non-PHP tokenizers is being dropped soon anyway.
-            'Single extension passed with language: py/py'                                   => [
-                'passedValue' => 'py/py',
-                'expected'    => [
-                    'py' => 'PY',
-                ],
-            ],
             'Multiple extensions passed: php,js,css'                                         => [
                 'passedValue' => 'php,js,css',
                 'expected'    => [
                     'php' => 'PHP',
-                    'js'  => 'JS',
-                    'css' => 'CSS',
+                    'js'  => 'PHP',
+                    'css' => 'PHP',
                 ],
             ],
-            'Multiple extensions passed, some with language: php,inc/php,phpt/php,js'        => [
+            // While setting the language is no longer supported, we are being tolerant to the language
+            // being set to PHP as that doesn't break anything.
+            'Multiple extensions passed, some with language PHP: php,inc/php,phpt/php,js'    => [
                 'passedValue' => 'php,inc/php,phpt/php,js',
                 'expected'    => [
                     'php'  => 'PHP',
                     'inc'  => 'PHP',
                     'phpt' => 'PHP',
-                    'js'   => 'JS',
+                    'js'   => 'PHP',
                 ],
             ],
             'File extensions are set case sensitively (and filtering is case sensitive too)' => [
@@ -123,6 +117,53 @@ final class ExtensionsArgTest extends TestCase
         $this->assertSame(['php' => 'PHP'], $config->extensions);
 
     }//end testOnlySetOnce()
+
+
+    /**
+     * Ensure that an exception is thrown for an invalid extension.
+     *
+     * @param string $passedValue Extensions as passed on the command line.
+     *
+     * @dataProvider dataInvalidExtensions
+     *
+     * @return void
+     */
+    public function testInvalidExtensions($passedValue)
+    {
+        $message  = 'ERROR: Specifying the tokenizer to use for an extension is no longer supported.'.PHP_EOL;
+        $message .= 'PHP_CodeSniffer >= 4.0 only supports scanning PHP files.'.PHP_EOL;
+        $message .= 'Received: '.$passedValue.PHP_EOL.PHP_EOL;
+
+        $this->expectException('PHP_CodeSniffer\Exceptions\DeepExitException');
+        $this->expectExceptionMessage($message);
+
+        new ConfigDouble(["--extensions={$passedValue}"]);
+
+    }//end testInvalidExtensions()
+
+
+    /**
+     * Data provider.
+     *
+     * @see self::testInvalidExtensions()
+     *
+     * @return array<string, array<string, string>>
+     */
+    public static function dataInvalidExtensions()
+    {
+        return [
+            'Single extension passed with language: py/py'                             => [
+                'passedValue' => 'py/py',
+            ],
+            'Multiple extensions passed, all setting non-PHP language: ts/js,less/css' => [
+                'passedValue' => 'ts/js,less/css',
+            ],
+            'Multiple extensions passed, some with non-PHP language: js/js,phpt/php'   => [
+                'passedValue' => 'php,js/js,phpt/php',
+            ],
+        ];
+
+    }//end dataInvalidExtensions()
 
 
 }//end class

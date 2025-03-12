@@ -412,8 +412,7 @@ final class Help
             ],
             'extensions' => [
                 'argument'    => '--extensions=<extensions>',
-                'description' => 'Check files with the specified file extensions (comma-separated list). Defaults to php,inc/php,js,css.'."\n"
-                    .'The type of the file can be specified using: ext/type; e.g. module/php,es/js.',
+                'description' => 'Check files with the specified file extensions (comma-separated list). Defaults to "php,inc".',
             ],
             'l'          => [
                 'argument'    => '-l',
