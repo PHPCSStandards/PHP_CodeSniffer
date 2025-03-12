@@ -459,7 +459,6 @@ class PHP extends Tokenizer
         T_SELF                     => 4,
         T_PARENT                   => 6,
         T_COMMA                    => 1,
-        T_THIS                     => 4,
         T_CLOSURE                  => 8,
         T_BACKTICK                 => 1,
         T_OPEN_SHORT_ARRAY         => 1,
