@@ -36,9 +36,9 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
      *
      * @return void
      */
-    protected function storeHomePath()
+    public static function storeHomePath()
     {
-        $this->homepath = getenv('HOME');
+        self::$homepath = getenv('HOME');
 
     }//end storeHomePath()
 
@@ -50,10 +50,10 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
      *
      * @return void
      */
-    protected function restoreHomePath()
+    public static function restoreHomePath()
     {
-        if (is_string($this->homepath) === true) {
-            putenv('HOME='.$this->homepath);
+        if (is_string(self::$homepath) === true) {
+            putenv('HOME='.self::$homepath);
         } else {
             // Remove the environment variable as it didn't exist before.
             putenv('HOME');
