@@ -30,9 +30,9 @@ final class AnonClassParenthesisOwnerTest extends AbstractTokenizerTestCase
         $tokens = $this->phpcsFile->getTokens();
 
         $anonClass = $this->getTargetToken($testMarker, T_ANON_CLASS);
-        $this->assertFalse(array_key_exists('parenthesis_owner', $tokens[$anonClass]));
-        $this->assertFalse(array_key_exists('parenthesis_opener', $tokens[$anonClass]));
-        $this->assertFalse(array_key_exists('parenthesis_closer', $tokens[$anonClass]));
+        $this->assertArrayNotHasKey('parenthesis_owner', $tokens[$anonClass]);
+        $this->assertArrayNotHasKey('parenthesis_opener', $tokens[$anonClass]);
+        $this->assertArrayNotHasKey('parenthesis_closer', $tokens[$anonClass]);
 
     }//end testAnonClassNoParentheses()
 
@@ -54,11 +54,11 @@ final class AnonClassParenthesisOwnerTest extends AbstractTokenizerTestCase
         $function = $this->getTargetToken($testMarker, T_FUNCTION);
 
         $opener = $this->getTargetToken($testMarker, T_OPEN_PARENTHESIS);
-        $this->assertTrue(array_key_exists('parenthesis_owner', $tokens[$opener]));
+        $this->assertArrayHasKey('parenthesis_owner', $tokens[$opener]);
         $this->assertSame($function, $tokens[$opener]['parenthesis_owner']);
 
         $closer = $this->getTargetToken($testMarker, T_CLOSE_PARENTHESIS);
-        $this->assertTrue(array_key_exists('parenthesis_owner', $tokens[$closer]));
+        $this->assertArrayHasKey('parenthesis_owner', $tokens[$closer]);
         $this->assertSame($function, $tokens[$closer]['parenthesis_owner']);
 
     }//end testAnonClassNoParenthesesNextOpenClose()
@@ -107,23 +107,23 @@ final class AnonClassParenthesisOwnerTest extends AbstractTokenizerTestCase
         $opener    = $this->getTargetToken($testMarker, T_OPEN_PARENTHESIS);
         $closer    = $this->getTargetToken($testMarker, T_CLOSE_PARENTHESIS);
 
-        $this->assertTrue(array_key_exists('parenthesis_owner', $tokens[$anonClass]));
-        $this->assertTrue(array_key_exists('parenthesis_opener', $tokens[$anonClass]));
-        $this->assertTrue(array_key_exists('parenthesis_closer', $tokens[$anonClass]));
+        $this->assertArrayHasKey('parenthesis_owner', $tokens[$anonClass]);
+        $this->assertArrayHasKey('parenthesis_opener', $tokens[$anonClass]);
+        $this->assertArrayHasKey('parenthesis_closer', $tokens[$anonClass]);
         $this->assertSame($anonClass, $tokens[$anonClass]['parenthesis_owner']);
         $this->assertSame($opener, $tokens[$anonClass]['parenthesis_opener']);
         $this->assertSame($closer, $tokens[$anonClass]['parenthesis_closer']);
 
-        $this->assertTrue(array_key_exists('parenthesis_owner', $tokens[$opener]));
-        $this->assertTrue(array_key_exists('parenthesis_opener', $tokens[$opener]));
-        $this->assertTrue(array_key_exists('parenthesis_closer', $tokens[$opener]));
+        $this->assertArrayHasKey('parenthesis_owner', $tokens[$opener]);
+        $this->assertArrayHasKey('parenthesis_opener', $tokens[$opener]);
+        $this->assertArrayHasKey('parenthesis_closer', $tokens[$opener]);
         $this->assertSame($anonClass, $tokens[$opener]['parenthesis_owner']);
         $this->assertSame($opener, $tokens[$opener]['parenthesis_opener']);
         $this->assertSame($closer, $tokens[$opener]['parenthesis_closer']);
 
-        $this->assertTrue(array_key_exists('parenthesis_owner', $tokens[$closer]));
-        $this->assertTrue(array_key_exists('parenthesis_opener', $tokens[$closer]));
-        $this->assertTrue(array_key_exists('parenthesis_closer', $tokens[$closer]));
+        $this->assertArrayHasKey('parenthesis_owner', $tokens[$closer]);
+        $this->assertArrayHasKey('parenthesis_opener', $tokens[$closer]);
+        $this->assertArrayHasKey('parenthesis_closer', $tokens[$closer]);
         $this->assertSame($anonClass, $tokens[$closer]['parenthesis_owner']);
         $this->assertSame($opener, $tokens[$closer]['parenthesis_opener']);
         $this->assertSame($closer, $tokens[$closer]['parenthesis_closer']);
