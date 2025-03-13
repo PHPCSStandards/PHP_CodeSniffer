@@ -48,7 +48,7 @@ final class RuleInclusionAbsoluteLinuxTest extends TestCase
      *
      * @return void
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->standard = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
         $repoRootDir    = dirname(dirname(dirname(__DIR__)));
@@ -80,7 +80,7 @@ final class RuleInclusionAbsoluteLinuxTest extends TestCase
      *
      * @return void
      */
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         file_put_contents($this->standard, $this->contents);
 

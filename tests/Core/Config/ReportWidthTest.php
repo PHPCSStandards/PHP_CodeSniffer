@@ -27,7 +27,7 @@ final class ReportWidthTest extends TestCase
      *
      * @return void
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         // Set to the property's default value to clear out potentially set values from other tests.
         self::setStaticProperty('executablePaths', []);
@@ -45,7 +45,7 @@ final class ReportWidthTest extends TestCase
      *
      * @return void
      */
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         $_SERVER['argv'] = [];
 
