@@ -616,7 +616,7 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
     private function assertHasRulesetDirective($sniffCode, $key)
     {
         $this->assertArrayHasKey($sniffCode, self::$ruleset->ruleset, "Sniff $sniffCode not registered");
-        $this->assertTrue(is_array(self::$ruleset->ruleset[$sniffCode]), "Sniff $sniffCode is not an array");
+        $this->assertIsArray(self::$ruleset->ruleset[$sniffCode], "Sniff $sniffCode is not an array");
         $this->assertArrayHasKey($key, self::$ruleset->ruleset[$sniffCode], "Directive $key not registered for sniff $sniffCode");
 
     }//end assertHasRulesetDirective()

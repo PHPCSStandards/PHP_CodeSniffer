@@ -36,7 +36,7 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
 
         $label = $this->getTargetToken($testMarker, T_STRING);
 
-        $this->assertTrue(is_int($label));
+        $this->assertIsInt($label);
         $this->assertSame($testContent, $tokens[$label]['content']);
 
     }//end testGotoStatement()
@@ -89,7 +89,7 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
 
         $label = $this->getTargetToken($testMarker, T_GOTO_LABEL);
 
-        $this->assertTrue(is_int($label));
+        $this->assertIsInt($label);
         $this->assertSame($testContent, $tokens[$label]['content']);
 
     }//end testGotoDeclaration()
