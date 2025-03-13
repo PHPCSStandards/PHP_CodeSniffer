@@ -54,7 +54,7 @@ final class AcceptTest extends AbstractFilterTestCase
         $fakeDI = new RecursiveArrayIterator($inputPaths);
         $filter = new Filter($fakeDI, '/', self::$config, self::$ruleset);
 
-        $this->assertEquals($expectedOutput, $this->getFilteredResultsAsArray($filter));
+        $this->assertSame($expectedOutput, $this->getFilteredResultsAsArray($filter));
 
     }//end testExcludePatterns()
 

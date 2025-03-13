@@ -229,7 +229,7 @@ final class RegisterSniffsTest extends TestCase
 
         self::$ruleset->registerSniffs(self::$psr1SniffAbsolutePaths, $restrictions, $exclusions);
 
-        $this->assertEquals($expected, array_keys(self::$ruleset->sniffs));
+        $this->assertSame($expected, array_keys(self::$ruleset->sniffs));
 
     }//end testRegisteredSniffsBothRestrictionsAndExclusions()
 
