@@ -736,7 +736,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         // Third colon should be T_COLON for the return type.
         $colonCount = 0;
         for ($i = ($startOfStatement + 1); $tokens[$i]['line'] === $tokens[$startOfStatement]['line']; $i++) {
-            $this->assertNotEquals(T_PARAM_NAME, $tokens[$i]['code'], "Token $i is tokenized as parameter label");
+            $this->assertNotSame(T_PARAM_NAME, $tokens[$i]['code'], "Token $i is tokenized as parameter label");
 
             if ($tokens[$i]['content'] === ':') {
                 ++$colonCount;
