@@ -1006,7 +1006,7 @@ class Ruleset
         if (is_file($ref) === true) {
             if (substr($ref, -9) === 'Sniff.php') {
                 // A single external sniff.
-                $this->rulesetDirs[] = dirname(dirname(dirname($ref)));
+                $this->rulesetDirs[] = dirname($ref, 3);
                 return [$ref];
             }
         } else {

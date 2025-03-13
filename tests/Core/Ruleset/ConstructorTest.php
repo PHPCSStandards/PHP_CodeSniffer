@@ -114,7 +114,7 @@ final class ConstructorTest extends AbstractRulesetTestCase
      */
     public static function dataStandardsAreRegisteredWithAutoloader()
     {
-        $basePath     = dirname(dirname(dirname(__DIR__))).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'Standards'.DIRECTORY_SEPARATOR;
+        $basePath     = dirname(__DIR__, 3).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'Standards'.DIRECTORY_SEPARATOR;
         $defaultPaths = [
             $basePath.'PEAR'  => 'PEAR',
             $basePath.'PSR1'  => 'PSR1',

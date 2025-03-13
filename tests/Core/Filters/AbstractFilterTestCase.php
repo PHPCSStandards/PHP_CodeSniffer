@@ -129,7 +129,7 @@ abstract class AbstractFilterTestCase extends TestCase
      */
     protected static function getBaseDir()
     {
-        return dirname(dirname(dirname(__DIR__)));
+        return dirname(__DIR__, 3);
 
     }//end getBaseDir()
 

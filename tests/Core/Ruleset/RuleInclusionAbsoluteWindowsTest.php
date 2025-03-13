@@ -53,7 +53,7 @@ final class RuleInclusionAbsoluteWindowsTest extends TestCase
     protected function setUp(): void
     {
         $this->standard = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
-        $repoRootDir    = dirname(dirname(dirname(__DIR__)));
+        $repoRootDir    = dirname(__DIR__, 3);
 
         // On-the-fly adjust the ruleset test file to be able to test sniffs included with absolute paths.
         $contents       = file_get_contents($this->standard);
