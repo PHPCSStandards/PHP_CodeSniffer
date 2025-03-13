@@ -52,7 +52,7 @@ final class RuleInclusionAbsoluteWindowsTest extends TestCase
      *
      * @return void
      */
-    public function initializeConfigAndRuleset()
+    protected function initializeConfigAndRuleset()
     {
         $this->standard = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
         $repoRootDir    = dirname(dirname(dirname(__DIR__)));
@@ -81,7 +81,7 @@ final class RuleInclusionAbsoluteWindowsTest extends TestCase
      *
      * @return void
      */
-    public function resetRuleset()
+    protected function resetRuleset()
     {
         file_put_contents($this->standard, $this->contents);
 

@@ -50,7 +50,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
      *
      * @return void
      */
-    public static function initializeConfigAndRuleset()
+    protected function initializeConfigAndRuleset()
     {
         if (self::$standard === '') {
             $standard       = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
