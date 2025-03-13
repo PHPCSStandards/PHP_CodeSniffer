@@ -46,11 +46,9 @@ final class RuleInclusionAbsoluteLinuxTest extends TestCase
     /**
      * Initialize the config and ruleset objects.
      *
-     * @before
-     *
      * @return void
      */
-    protected function initializeConfigAndRuleset()
+    protected function setUp(): void
     {
         $this->standard = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
         $repoRootDir    = dirname(dirname(dirname(__DIR__)));
@@ -74,21 +72,19 @@ final class RuleInclusionAbsoluteLinuxTest extends TestCase
         $config        = new ConfigDouble(["--standard={$this->standard}"]);
         $this->ruleset = new Ruleset($config);
 
-    }//end initializeConfigAndRuleset()
+    }//end setUp()
 
 
     /**
      * Reset ruleset file.
      *
-     * @after
-     *
      * @return void
      */
-    protected function resetRuleset()
+    protected function tearDown(): void
     {
         file_put_contents($this->standard, $this->contents);
 
-    }//end resetRuleset()
+    }//end tearDown()
 
 
     /**

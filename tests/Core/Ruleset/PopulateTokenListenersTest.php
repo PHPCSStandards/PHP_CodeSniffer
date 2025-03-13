@@ -35,11 +35,9 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
     /**
      * Initialize the config and ruleset objects for this test only once (but do allow recording code coverage).
      *
-     * @before
-     *
      * @return void
      */
-    protected function initializeConfigAndRuleset()
+    protected function setUp(): void
     {
         if (isset(self::$ruleset) === false) {
             // Set up the ruleset.
@@ -48,7 +46,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
             self::$ruleset = new Ruleset($config);
         }
 
-    }//end initializeConfigAndRuleset()
+    }//end setUp()
 
 
     /**

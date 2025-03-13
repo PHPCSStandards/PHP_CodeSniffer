@@ -31,13 +31,11 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
     /**
      * Make a copy the test case file we want to use for this test (as the file will be used by multiple tests).
      *
-     * @beforeClass
-     *
      * @return void
      *
      * @throws \Exception In case the base test case file would not be available.
      */
-    public static function copyCaseFile()
+    public static function setUpBeforeClass(): void
     {
         $relativeCN         = str_replace(__NAMESPACE__.'\\', '', get_called_class());
         self::$caseFileName = __DIR__.DIRECTORY_SEPARATOR.$relativeCN.'.inc';
@@ -51,21 +49,19 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
             throw new Exception(sprintf('Failed to copy test case file "ReplaceTabsInTokenTest.inc" to %s', self::$caseFileName));
         }
 
-    }//end copyCaseFile()
+    }//end setUpBeforeClass()
 
 
     /**
      * Delete the copied test case file after use.
      *
-     * @afterClass
-     *
      * @return void
      */
-    public static function deleteCaseFile()
+    public static function tearDownAfterClass(): void
     {
         @unlink(self::$caseFileName);
 
-    }//end deleteCaseFile()
+    }//end tearDownAfterClass()
 
 
     /**

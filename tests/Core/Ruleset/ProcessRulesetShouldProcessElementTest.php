@@ -52,11 +52,9 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
     /**
      * Store the original ini values to allow for restoring them after the tests.
      *
-     * @beforeClass
-     *
      * @return void
      */
-    public static function saveOriginalIniValues()
+    public static function setUpBeforeClass(): void
     {
         foreach (self::$originalIniValues as $name => $null) {
             $value = ini_get($name);
@@ -65,17 +63,15 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
             }
         }
 
-    }//end saveOriginalIniValues()
+    }//end setUpBeforeClass()
 
 
     /**
      * Initialize the config and ruleset objects for this test only once (but do allow recording code coverage).
      *
-     * @before
-     *
      * @return void
      */
-    protected function initializeConfigAndRuleset()
+    protected function setUp(): void
     {
         if (isset(self::$ruleset) === false) {
             // Set up the ruleset.
@@ -84,17 +80,15 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
             self::$ruleset = new Ruleset(self::$config);
         }
 
-    }//end initializeConfigAndRuleset()
+    }//end setUp()
 
 
     /**
      * Destroy the Config object and restore the ini values after the tests.
      *
-     * @afterClass
-     *
      * @return void
      */
-    public static function restoreOriginalValues()
+    public static function tearDownAfterClass(): void
     {
         // Explicitly trigger __destruct() on the ConfigDouble to reset the Config statics.
         // The explicit method call prevents potential stray test-local references to the $config object
@@ -112,7 +106,7 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
             ini_set($name, $value);
         }
 
-    }//end restoreOriginalValues()
+    }//end tearDownAfterClass()
 
 
     /**

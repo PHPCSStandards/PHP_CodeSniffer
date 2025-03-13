@@ -32,25 +32,21 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
     /**
      * Store the user's home path.
      *
-     * @beforeClass
-     *
      * @return void
      */
-    public static function storeHomePath()
+    public static function setUpBeforeClass(): void
     {
         self::$homepath = getenv('HOME');
 
-    }//end storeHomePath()
+    }//end setUpBeforeClass()
 
 
     /**
      * Restore the user's home path environment variable in case the test changed it or created it.
      *
-     * @afterClass
-     *
      * @return void
      */
-    public static function restoreHomePath()
+    public static function tearDownAfterClass(): void
     {
         if (is_string(self::$homepath) === true) {
             putenv('HOME='.self::$homepath);
@@ -59,22 +55,20 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
             putenv('HOME');
         }
 
-    }//end restoreHomePath()
+    }//end tearDownAfterClass()
 
 
     /**
      * Set the home path to an alternative location.
      *
-     * @before
-     *
      * @return void
      */
-    protected function setHomePath()
+    protected function setUp(): void
     {
         $fakeHomePath = __DIR__.DIRECTORY_SEPARATOR.'Fixtures'.DIRECTORY_SEPARATOR.'FakeHomePath';
         putenv("HOME=$fakeHomePath");
 
-    }//end setHomePath()
+    }//end setUp()
 
 
     /**

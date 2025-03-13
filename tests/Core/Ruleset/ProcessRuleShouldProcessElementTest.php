@@ -33,11 +33,9 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
     /**
      * Initialize the config and ruleset objects for this test.
      *
-     * @before
-     *
      * @return void
      */
-    protected function initializeConfigAndRuleset()
+    protected function setUp(): void
     {
         if (isset(self::$ruleset) === false) {
             // Set up the ruleset.
@@ -46,7 +44,7 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
             self::$ruleset = new Ruleset($config);
         }
 
-    }//end initializeConfigAndRuleset()
+    }//end setUp()
 
 
     /**

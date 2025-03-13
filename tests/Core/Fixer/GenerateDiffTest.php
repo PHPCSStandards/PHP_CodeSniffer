@@ -46,11 +46,9 @@ final class GenerateDiffTest extends TestCase
      * prevent doing tab replacement when parsing the file. This is to allow for testing a
      * diff with tabs vs spaces (which wouldn't yield a diff if tabs had already been replaced).
      *
-     * @beforeClass
-     *
      * @return void
      */
-    public static function initializeFile()
+    public static function setUpBeforeClass(): void
     {
         $config  = new ConfigDouble();
         $ruleset = new Ruleset($config);
@@ -59,7 +57,7 @@ final class GenerateDiffTest extends TestCase
         self::$phpcsFile->parse();
         self::$phpcsFile->fixer->startFile(self::$phpcsFile);
 
-    }//end initializeFile()
+    }//end setUpBeforeClass()
 
 
     /**

@@ -46,11 +46,9 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
     /**
      * Initialize the config and ruleset objects based on the `RuleInclusionTest.xml` ruleset file.
      *
-     * @before
-     *
      * @return void
      */
-    protected function initializeConfigAndRuleset()
+    protected function setUp(): void
     {
         if (self::$standard === '') {
             $standard       = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
@@ -78,21 +76,19 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
             self::$ruleset = new Ruleset($config);
         }//end if
 
-    }//end initializeConfigAndRuleset()
+    }//end setUp()
 
 
     /**
      * Reset ruleset file.
      *
-     * @after
-     *
      * @return void
      */
-    public function resetRuleset()
+    public function tearDown(): void
     {
         file_put_contents(self::$standard, self::$contents);
 
-    }//end resetRuleset()
+    }//end tearDown()
 
 
     /**

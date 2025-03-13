@@ -36,16 +36,14 @@ final class AbstractArraySniffTest extends AbstractMethodUnitTest
      * The test case file for a unit test class has to be in the same directory
      * directory and use the same file name as the test class, using the .inc extension.
      *
-     * @beforeClass
-     *
      * @return void
      */
-    public static function initializeFile()
+    public static function setUpBeforeClass(): void
     {
         self::$sniff = new AbstractArraySniffTestable();
-        parent::initializeFile();
+        parent::setUpBeforeClass();
 
-    }//end initializeFile()
+    }//end setUpBeforeClass()
 
 
     /**

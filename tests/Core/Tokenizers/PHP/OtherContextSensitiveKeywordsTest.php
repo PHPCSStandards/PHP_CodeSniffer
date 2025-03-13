@@ -25,15 +25,13 @@ final class OtherContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
      * Clear the "resolved tokens" cache before running this test as otherwise the code
      * under test may not be run during the test.
      *
-     * @beforeClass
-     *
      * @return void
      */
-    public static function clearTokenCache()
+    public static function setUpBeforeClass(): void
     {
         parent::clearResolvedTokensCache();
 
-    }//end clearTokenCache()
+    }//end setUpBeforeClass()
 
 
     /**

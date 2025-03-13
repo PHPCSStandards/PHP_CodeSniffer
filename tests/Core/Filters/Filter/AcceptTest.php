@@ -28,17 +28,15 @@ final class AcceptTest extends AbstractFilterTestCase
     /**
      * Initialize the config and ruleset objects based on the `AcceptTest.xml` ruleset file.
      *
-     * @beforeClass
-     *
      * @return void
      */
-    public static function initializeConfigAndRuleset()
+    public static function setUpBeforeClass(): void
     {
         $standard      = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
         self::$config  = new ConfigDouble(["--standard=$standard", '--ignore=*/somethingelse/*']);
         self::$ruleset = new Ruleset(self::$config);
 
-    }//end initializeConfigAndRuleset()
+    }//end setUpBeforeClass()
 
 
     /**
