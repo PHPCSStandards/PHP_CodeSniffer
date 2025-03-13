@@ -210,7 +210,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
             // That way, at the end, only the "main" class just included will remain.
             $newClasses = array_reduce(
                 $newClasses,
-                function ($remaining, $current) {
+                static function ($remaining, $current) {
                     return array_diff($remaining, class_parents($current));
                 },
                 $newClasses
