@@ -70,21 +70,25 @@ class InlineControlStructureSniff implements Sniff
             }
         }
 
-        if ($tokens[$stackPtr]['code'] === T_WHILE || $tokens[$stackPtr]['code'] === T_FOR) {
-            // This could be from a DO WHILE, which doesn't have an opening brace or a while/for without body.
-            if (isset($tokens[$stackPtr]['parenthesis_closer']) === true) {
-                $afterParensCloser = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($tokens[$stackPtr]['parenthesis_closer'] + 1), null, true);
-                if ($afterParensCloser === false) {
-                    // Live coding.
-                    return;
-                }
+        if (isset($tokens[$stackPtr]['parenthesis_closer']) === true) {
+            $nextTokenIndex = ($tokens[$stackPtr]['parenthesis_closer'] + 1);
+        } else if (in_array($tokens[$stackPtr]['code'], [T_ELSE, T_DO], true) === true) {
+            $nextTokenIndex = ($stackPtr + 1);
+        }
 
-                if ($tokens[$afterParensCloser]['code'] === T_SEMICOLON) {
-                    $phpcsFile->recordMetric($stackPtr, 'Control structure defined inline', 'no');
-                    return;
-                }
+        if (isset($nextTokenIndex) === true) {
+            $firstNonEmptyToken = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, $nextTokenIndex, null, true);
+            if ($firstNonEmptyToken === false) {
+                // Live coding.
+                return;
             }
-        }//end if
+
+            if ($tokens[$firstNonEmptyToken]['code'] === T_SEMICOLON) {
+                // This is a control structure without a body. Bow out.
+                $phpcsFile->recordMetric($stackPtr, 'Control structure defined inline', 'no');
+                return;
+            }
+        }
 
         if (isset($tokens[$stackPtr]['parenthesis_opener'], $tokens[$stackPtr]['parenthesis_closer']) === false
             && $tokens[$stackPtr]['code'] !== T_ELSE
