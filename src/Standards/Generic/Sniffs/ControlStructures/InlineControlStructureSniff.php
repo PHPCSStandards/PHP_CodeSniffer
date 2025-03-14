@@ -80,16 +80,23 @@ class InlineControlStructureSniff implements Sniff
             }
         }
 
-        if ($tokens[$stackPtr]['code'] === T_WHILE || $tokens[$stackPtr]['code'] === T_FOR) {
-            // This could be from a DO WHILE, which doesn't have an opening brace or a while/for without body.
+        if ($tokens[$stackPtr]['code'] !== T_DO) {
+            // This could be from a DO WHILE, which doesn't have an opening brace, or an
+            // else/elseif/if/for/foreach/while without body.
             if (isset($tokens[$stackPtr]['parenthesis_closer']) === true) {
-                $afterParensCloser = $phpcsFile->findNext(Tokens::$emptyTokens, ($tokens[$stackPtr]['parenthesis_closer'] + 1), null, true);
-                if ($afterParensCloser === false) {
+                $nextTokenIndex = ($tokens[$stackPtr]['parenthesis_closer'] + 1);
+            } else if ($tokens[$stackPtr]['code'] === T_ELSE) {
+                $nextTokenIndex = ($stackPtr + 1);
+            }
+
+            if (isset($nextTokenIndex) === true) {
+                $afterElseOrParensCloser = $phpcsFile->findNext(Tokens::$emptyTokens, $nextTokenIndex, null, true);
+                if ($afterElseOrParensCloser === false) {
                     // Live coding.
                     return;
                 }
 
-                if ($tokens[$afterParensCloser]['code'] === T_SEMICOLON) {
+                if ($tokens[$afterElseOrParensCloser]['code'] === T_SEMICOLON) {
                     $phpcsFile->recordMetric($stackPtr, 'Control structure defined inline', 'no');
                     return;
                 }

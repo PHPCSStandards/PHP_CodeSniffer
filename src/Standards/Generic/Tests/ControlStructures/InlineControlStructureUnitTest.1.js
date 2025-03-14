@@ -33,3 +33,18 @@ if ($("#myid").rotationDegrees()=='90')
 if (something) {
     alert('hello');
 } else /* comment */ if (somethingElse) alert('hi');
+
+if (sniffShouldBailEarly);
+
+if (false) {
+} else if (sniffShouldBailEarly);
+
+if (false) {
+} else (sniffShouldGenerateError);
+
+if (false) {
+} else; // Sniff should bail early.
+
+while (sniffShouldBailEarly);
+
+for (sniffShouldBailEarly; sniffShouldBailEarly > 0; sniffShouldBailEarly--);
