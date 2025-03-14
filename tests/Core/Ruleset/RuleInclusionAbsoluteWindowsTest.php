@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
  * Tests for the \PHP_CodeSniffer\Ruleset class using a Windows-style absolute path to include a sniff.
  *
  * @covers   \PHP_CodeSniffer\Ruleset
- * @requires OS ^WIN.*.
+ * @requires OSFAMILY Windows
  * @group    Windows
  */
 final class RuleInclusionAbsoluteWindowsTest extends TestCase

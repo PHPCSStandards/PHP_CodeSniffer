@@ -49,7 +49,7 @@ final class PrepareForOutputTest extends TestCase
      * @param string   $expected    Expected function output (unused in this test).
      * @param string   $expectedWin Expected function output on Windows.
      *
-     * @requires     OS ^WIN.*.
+     * @requires     OSFAMILY Windows
      * @dataProvider dataPrepareForOutput
      *
      * @return void
