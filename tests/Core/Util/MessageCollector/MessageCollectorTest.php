@@ -56,7 +56,7 @@ final class MessageCollectorTest extends TestCase
      *
      * @return array<string, array<mixed>>
      */
-    public function dataAddingNonStringMessageResultsInException()
+    public static function dataAddingNonStringMessageResultsInException()
     {
         return [
             'null'    => [null],
@@ -103,7 +103,7 @@ final class MessageCollectorTest extends TestCase
      *
      * @return array<string, array<mixed>>
      */
-    public function dataAddingMessageWithUnsupportedMessageTypeResultsInException()
+    public static function dataAddingMessageWithUnsupportedMessageTypeResultsInException()
     {
         return [
             'null'                                                                        => [null],
@@ -150,7 +150,7 @@ final class MessageCollectorTest extends TestCase
      *
      * @return array<string, array<string, array<string, int>|bool>>
      */
-    public function dataContainsBlockingErrors()
+    public static function dataContainsBlockingErrors()
     {
         return [
             'No messages'                               => [
@@ -221,7 +221,7 @@ final class MessageCollectorTest extends TestCase
      *
      * @return array<string, array<string, array<string, int>|string>>
      */
-    public function dataDisplayingNonBlockingMessages()
+    public static function dataDisplayingNonBlockingMessages()
     {
         // phpcs:disable Squiz.Strings.ConcatenationSpacing.PaddingFound -- Test readability is more important.
         return [
@@ -333,7 +333,7 @@ final class MessageCollectorTest extends TestCase
      *
      * @return array<string, array<string, array<string, int>|string>>
      */
-    public function dataDisplayingBlockingErrors()
+    public static function dataDisplayingBlockingErrors()
     {
         // phpcs:disable Squiz.Strings.ConcatenationSpacing.PaddingFound -- Test readability is more important.
         return [
@@ -488,7 +488,7 @@ final class MessageCollectorTest extends TestCase
      *
      * @return array<string, array<string, string>>
      */
-    public function dataDisplayOrderHandling()
+    public static function dataDisplayOrderHandling()
     {
         $expectedForSeverity  = 'WARNING: Fourth warning'.PHP_EOL;
         $expectedForSeverity .= 'NOTICE: First notice'.PHP_EOL;
