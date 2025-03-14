@@ -349,37 +349,26 @@ jobs:
         if: ${{ steps.phpunit_version.outputs.VERSION >= '9.3' }}
         run: php "vendor/bin/phpunit" --coverage-cache ./build/phpunit-cache --warm-coverage-cache
 
-      - name: "Run the unit tests with code coverage (PHPUnit < 9.3)"
-        if: ${{ matrix.os != 'windows-latest' && steps.phpunit_version.outputs.VERSION < '9.3' }}
-        run: php "vendor/bin/phpunit" tests/AllTests.php
-
-      - name: "Run the unit tests with code coverage (PHPUnit 9.3+)"
-        if: ${{ matrix.os != 'windows-latest' && steps.phpunit_version.outputs.VERSION >= '9.3' }}
-        run: php "vendor/bin/phpunit" tests/AllTests.php --coverage-cache ./build/phpunit-cache
-
-      - name: "Run select tests in CBF mode with code coverage (PHPUnit < 9.3)"
-        if: ${{ matrix.os != 'windows-latest' && steps.phpunit_version.outputs.VERSION < '9.3' }}
+      - name: "Run the unit tests with code coverage"
+        if: ${{ matrix.os != 'windows-latest' }}
         run: >
           php "vendor/bin/phpunit" tests/AllTests.php
-          --group CBF --exclude-group nothing --coverage-clover build/logs/clover-cbf.xml
-        env:
-          PHP_CODESNIFFER_CBF: '1'
+          ${{ steps.phpunit_version.outputs.VERSION >= '9.3' && '--coverage-cache ./build/phpunit-cache' || '' }}
 
-      - name: "Run select tests in CBF mode with code coverage (PHPUnit 9.3+)"
-        if: ${{ matrix.os != 'windows-latest' && steps.phpunit_version.outputs.VERSION >= '9.3' }}
+      - name: "Run select tests in CBF mode with code coverage"
+        if: ${{ matrix.os != 'windows-latest' }}
         run: >
-          php "vendor/bin/phpunit" tests/AllTests.php --coverage-cache ./build/phpunit-cache
+          php "vendor/bin/phpunit" tests/AllTests.php
+          ${{ steps.phpunit_version.outputs.VERSION >= '9.3' && '--coverage-cache ./build/phpunit-cache' || '' }}
           --group CBF --exclude-group nothing --coverage-clover build/logs/clover-cbf.xml
         env:
           PHP_CODESNIFFER_CBF: '1'
 
-      - name: "Run the unit tests which may have different outcomes on Windows with code coverage (PHPUnit < 9.3)"
-        if: ${{ matrix.os == 'windows-latest' && steps.phpunit_version.outputs.VERSION < '9.3' }}
-        run: php "vendor/bin/phpunit" tests/AllTests.php --group Windows
-
-      - name: "Run the unit tests which may have different outcomes on Windows with code coverage (PHPUnit 9.3+)"
-        if: ${{ matrix.os == 'windows-latest' && steps.phpunit_version.outputs.VERSION >= '9.3' }}
-        run: php "vendor/bin/phpunit" tests/AllTests.php --group Windows --coverage-cache ./build/phpunit-cache
+      - name: "Run the unit tests which may have different outcomes on Windows with code coverage"
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: >
+          php "vendor/bin/phpunit" tests/AllTests.php --group Windows
+          ${{ steps.phpunit_version.outputs.VERSION >= '9.3' && '--coverage-cache ./build/phpunit-cache' || '' }}
 
       - name: "Upload coverage results to Coveralls (normal run)"
         if: ${{ success() }}
