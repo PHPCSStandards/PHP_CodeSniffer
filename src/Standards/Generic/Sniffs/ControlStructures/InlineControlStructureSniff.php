@@ -155,9 +155,7 @@ class InlineControlStructureSniff implements Sniff
             $closer = $stackPtr;
         }
 
-        if ($tokens[($closer + 1)]['code'] === T_WHITESPACE
-            || $tokens[($closer + 1)]['code'] === T_SEMICOLON
-        ) {
+        if ($tokens[($closer + 1)]['code'] === T_WHITESPACE) {
             $phpcsFile->fixer->addContent($closer, ' {');
         } else {
             $phpcsFile->fixer->addContent($closer, ' { ');
