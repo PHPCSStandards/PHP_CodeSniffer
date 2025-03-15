@@ -26,16 +26,24 @@ final class MethodScopeUnitTest extends AbstractSniffTestCase
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the test file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile='')
     {
-        return [
-            6  => 1,
-            30 => 1,
-            39 => 1,
-            46 => 1,
-        ];
+        switch ($testFile) {
+        case 'MethodScopeUnitTest.1.inc':
+            return [
+                6  => 1,
+                30 => 1,
+                39 => 1,
+                46 => 1,
+            ];
+
+        default:
+            return [];
+        }//end switch
 
     }//end getErrorList()
 

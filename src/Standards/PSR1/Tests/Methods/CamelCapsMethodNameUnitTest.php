@@ -26,22 +26,30 @@ final class CamelCapsMethodNameUnitTest extends AbstractSniffTestCase
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the test file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile='')
     {
-        return [
-            6  => 1,
-            7  => 1,
-            11 => 1,
-            12 => 1,
-            13 => 1,
-            17 => 1,
-            21 => 1,
-            25 => 1,
-            26 => 1,
-            77 => 1,
-        ];
+        switch ($testFile) {
+        case 'CamelCapsMethodNameUnitTest.1.inc':
+            return [
+                6  => 1,
+                7  => 1,
+                11 => 1,
+                12 => 1,
+                13 => 1,
+                17 => 1,
+                21 => 1,
+                25 => 1,
+                26 => 1,
+                77 => 1,
+            ];
+
+        default:
+            return [];
+        }//end switch
 
     }//end getErrorList()
 

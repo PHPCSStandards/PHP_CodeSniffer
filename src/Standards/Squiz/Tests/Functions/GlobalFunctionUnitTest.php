@@ -41,11 +41,19 @@ final class GlobalFunctionUnitTest extends AbstractSniffTestCase
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
+     * @param string $testFile The name of the test file being tested.
+     *
      * @return array<int, int>
      */
-    public function getWarningList()
+    public function getWarningList($testFile='')
     {
-        return [2 => 1];
+        switch ($testFile) {
+        case 'GlobalFunctionUnitTest.1.inc':
+            return [2 => 1];
+
+        default:
+            return [];
+        }//end switch
 
     }//end getWarningList()
 

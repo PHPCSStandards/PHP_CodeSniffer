@@ -26,33 +26,41 @@ final class ClassCommentUnitTest extends AbstractSniffTestCase
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the test file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile='')
     {
-        return [
-            4   => 1,
-            15  => 1,
-            51  => 1,
-            63  => 1,
-            65  => 2,
-            66  => 1,
-            68  => 1,
-            70  => 1,
-            71  => 1,
-            72  => 1,
-            74  => 2,
-            75  => 1,
-            76  => 1,
-            77  => 1,
-            85  => 1,
-            96  => 5,
-            106 => 5,
-            116 => 5,
-            126 => 5,
-            161 => 1,
-            163 => 1,
-        ];
+        switch ($testFile) {
+        case 'ClassCommentUnitTest.1.inc':
+            return [
+                4   => 1,
+                15  => 1,
+                51  => 1,
+                63  => 1,
+                65  => 2,
+                66  => 1,
+                68  => 1,
+                70  => 1,
+                71  => 1,
+                72  => 1,
+                74  => 2,
+                75  => 1,
+                76  => 1,
+                77  => 1,
+                85  => 1,
+                96  => 5,
+                106 => 5,
+                116 => 5,
+                126 => 5,
+                161 => 1,
+                163 => 1,
+            ];
+
+        default:
+            return [];
+        }//end switch
 
     }//end getErrorList()
 
@@ -63,14 +71,22 @@ final class ClassCommentUnitTest extends AbstractSniffTestCase
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
+     * @param string $testFile The name of the test file being tested.
+     *
      * @return array<int, int>
      */
-    public function getWarningList()
+    public function getWarningList($testFile='')
     {
-        return [
-            71 => 1,
-            73 => 1,
-        ];
+        switch ($testFile) {
+        case 'ClassCommentUnitTest.1.inc':
+            return [
+                71 => 1,
+                73 => 1,
+            ];
+
+        default:
+            return [];
+        }//end switch
 
     }//end getWarningList()
 
