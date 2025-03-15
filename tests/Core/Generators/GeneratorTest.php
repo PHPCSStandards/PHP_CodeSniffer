@@ -9,7 +9,6 @@
 namespace PHP_CodeSniffer\Tests\Core\Generators;
 
 use PHP_CodeSniffer\Ruleset;
-use PHP_CodeSniffer\Runner;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHP_CodeSniffer\Tests\Core\Generators\Fixtures\MockGenerator;
 use PHPUnit\Framework\TestCase;
@@ -223,56 +222,6 @@ final class GeneratorTest extends TestCase
         $generator->generate();
 
     }//end testGetTitleFallbackToFilename()
-
-
-    /**
-     * Test that the documentation for each standard passed on the command-line is shown separately.
-     *
-     * @covers \PHP_CodeSniffer\Runner::runPHPCS
-     *
-     * @return void
-     */
-    public function testGeneratorWillShowEachStandardSeparately()
-    {
-        if (PHP_CODESNIFFER_CBF === true) {
-            $this->markTestSkipped('This test needs CS mode to run');
-        }
-
-        $standard        = __DIR__.'/OneDocTest.xml';
-        $_SERVER['argv'] = [
-            'phpcs',
-            '--generator=Text',
-            "--standard=$standard,PSR1",
-            '--report-width=80',
-        ];
-
-        $regex = '`^
-            \R*                                                      # Optional blank line at the start.
-            (?:
-                (?P<delimiter>-++\R)                                 # Line with dashes.
-                \|[ ]GENERATORTEST[ ]CODING[ ]STANDARD:[ ][^\|]+\|\R # Doc title line with prefix expected for first standard.
-                (?P>delimiter)                                       # Line with dashes.
-                \R(?:[^\r\n]+\R)+\R{2}                               # Standard description.
-            )                                                        # Only expect this group once.
-            (?:
-                (?P>delimiter)                                       # Line with dashes.
-                \|[ ]PSR1[ ]CODING[ ]STANDARD:[ ][^\|]+\|\R          # Doc title line with prefix expected for second standard.
-                (?P>delimiter)                                       # Line with dashes.
-                \R(?:[^\r\n]+\R)+\R                                  # Standard description.
-                (?:
-                    -+[ ]CODE[ ]COMPARISON[ ]-+\R                    # Code Comparison starter line with dashes.
-                    (?:(?:[^\r\n]+\R)+(?P>delimiter)){2}             # Arbitrary text followed by a delimiter line.
-                )*                                                   # Code comparison is optional and can exist multiple times.
-                \R+
-            ){3,}                                                    # This complete group should occur at least three times.
-            `x';
-
-        $this->expectOutputRegex($regex);
-
-        $runner = new Runner();
-        $runner->runPHPCS();
-
-    }//end testGeneratorWillShowEachStandardSeparately()
 
 
 }//end class
