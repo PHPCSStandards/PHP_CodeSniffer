@@ -1,7 +1,7 @@
 <documentation title="Block Comment">
     <standard>
     <![CDATA[
-    A block comment should use /* */.
+    A block comment is a multiline comment delimited by an opener "/*" and a closer "*/" which are each on their own line and the content is in between.
     ]]>
     </standard>
     <code_comparison>
