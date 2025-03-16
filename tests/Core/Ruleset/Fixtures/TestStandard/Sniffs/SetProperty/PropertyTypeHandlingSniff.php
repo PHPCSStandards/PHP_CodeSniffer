@@ -23,6 +23,15 @@ final class PropertyTypeHandlingSniff implements Sniff
     public $expectsString;
 
     /**
+     * Used to verify that string properties are set as string, with surrounding whitespace trimmed.
+     *
+     * This is the default behaviour.
+     *
+     * @var string
+     */
+    public $expectsTrimmedString;
+
+    /**
      * Used to verify that a string value with only whitespace will end up being set as null.
      *
      * @var string|null
@@ -44,14 +53,14 @@ final class PropertyTypeHandlingSniff implements Sniff
     public $expectsFloatButAcceptsString;
 
     /**
-     * Used to verify that null gets set as a proper null value.
+     * Used to verify that null gets set as a string.
      *
      * @var null
      */
     public $expectsNull;
 
     /**
-     * Used to verify that null gets set as a proper null value.
+     * Used to verify that null gets set as a string.
      *
      * @var null
      */
@@ -76,6 +85,13 @@ final class PropertyTypeHandlingSniff implements Sniff
      *
      * @var bool
      */
+    public $expectsBooleanTrueTrimmed;
+
+    /**
+     * Used to verify that booleans get set as proper boolean values.
+     *
+     * @var bool
+     */
     public $expectsBooleanFalse;
 
     /**
@@ -84,6 +100,13 @@ final class PropertyTypeHandlingSniff implements Sniff
      * @var bool
      */
     public $expectsBooleanFalseCase;
+
+    /**
+     * Used to verify that booleans get set as proper boolean values.
+     *
+     * @var bool
+     */
+    public $expectsBooleanFalseTrimmed;
 
     /**
      * Used to verify that array properties get parsed to a proper array.

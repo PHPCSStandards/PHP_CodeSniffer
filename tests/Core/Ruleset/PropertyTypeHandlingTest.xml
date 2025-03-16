@@ -4,6 +4,7 @@
     <rule ref="./tests/Core/Ruleset/Fixtures/TestStandard/Sniffs/SetProperty/PropertyTypeHandlingSniff.php">
         <properties>
             <property name="expectsString" value="arbitraryvalue"/>
+            <property name="expectsTrimmedString" value="   some value    "/>
             <property name="emptyStringBecomesNull" value="   	"/>
 
             <property name="expectsIntButAcceptsString" value="12345"/>
@@ -12,10 +13,13 @@
             <property name="expectsNull" value="null"/>
             <property name="expectsNullCase" value="NULL"/>
 
-            <property name="expectsBooleanTrue" value="true"/>
+            <!-- Also tests that property names get cleaned of surrounding whitespace. -->
+            <property name="  expectsBooleanTrue " value="true"/>
             <property name="expectsBooleanTrueCase" value="True"/>
+            <property name="expectsBooleanTrueTrimmed" value="true   "/>
             <property name="expectsBooleanFalse" value="false"/>
             <property name="expectsBooleanFalseCase" value="fALSe"/>
+            <property name="expectsBooleanFalseTrimmed" value="  false  "/>
 
             <property name="expectsArrayWithOnlyValues" type="array">
                 <element value="string"/>
