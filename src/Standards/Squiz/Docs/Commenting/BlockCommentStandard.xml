@@ -151,6 +151,27 @@
     </code_comparison>
     <standard>
     <![CDATA[
+    A block comment should start with a capital letter.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Starts with a capital letter.">
+        <![CDATA[
+/*
+    A block comment.
+*/
+        ]]>
+        </code>
+        <code title="Invalid: Does not start with a capital letter.">
+        <![CDATA[
+/*
+    <em>a</em> block comment.
+*/
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
     The block comment closer should be on a new line.
     ]]>
     </standard>
@@ -190,27 +211,6 @@ echo 'Content';
     A block comment.
 */
 <em>echo 'Content';</em>
-        ]]>
-        </code>
-    </code_comparison>
-    <standard>
-    <![CDATA[
-    A block comment should start with a capital letter.
-    ]]>
-    </standard>
-    <code_comparison>
-        <code title="Valid: Starts with a capital letter.">
-        <![CDATA[
-/*
-    A block comment.
-*/
-        ]]>
-        </code>
-        <code title="Invalid: Does not start with a capital letter.">
-        <![CDATA[
-/*
-    <em>a</em> block comment.
-*/
         ]]>
         </code>
     </code_comparison>
