@@ -60,6 +60,27 @@
     </code_comparison>
     <standard>
     <![CDATA[
+    A block comment should not be empty.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: A block comment with contents.">
+        <![CDATA[
+/*
+    A block comment.
+*/
+        ]]>
+        </code>
+        <code title="Invalid: An empty block comment.">
+        <![CDATA[
+/*
+<em></em>
+*/
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
     If there are no asterisks at the start of each line, the contents of the docblock should be indented by at least 4 spaces.
     ]]>
     </standard>
@@ -105,27 +126,6 @@
   <em>* with</em>
  * multiple lines.
 <em>*/</em>
-        ]]>
-        </code>
-    </code_comparison>
-    <standard>
-    <![CDATA[
-    A block comment should not be empty.
-    ]]>
-    </standard>
-    <code_comparison>
-        <code title="Valid: A block comment with contents.">
-        <![CDATA[
-/*
-    A block comment.
-*/
-        ]]>
-        </code>
-        <code title="Invalid: An empty block comment.">
-        <![CDATA[
-/*
-<em></em>
-*/
         ]]>
         </code>
     </code_comparison>
