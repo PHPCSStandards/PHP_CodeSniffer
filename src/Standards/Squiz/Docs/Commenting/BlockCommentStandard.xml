@@ -251,7 +251,7 @@ echo 'Content';
     </code_comparison>
     <standard>
     <![CDATA[
-    A block comment immediately after an open tag should not have a preceeding blank line.
+    A block comment immediately after a PHP open tag should not have a preceeding blank line.
     ]]>
     </standard>
     <code_comparison>
