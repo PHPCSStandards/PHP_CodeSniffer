@@ -81,6 +81,26 @@
     </code_comparison>
     <standard>
     <![CDATA[
+    Block comment text should start on a new line immediately after the opener.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Text starts on a new line.">
+        <![CDATA[
+/*
+    A block comment.
+*/
+        ]]>
+        </code>
+        <code title="Invalid: Text starts on the same line.">
+        <![CDATA[
+/* <em>A block comment.</em>
+*/
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
     If there are no asterisks at the start of each line, the contents of the docblock should be indented by at least 4 spaces.
     ]]>
     </standard>
@@ -126,26 +146,6 @@
   <em>* with</em>
  * multiple lines.
 <em>*/</em>
-        ]]>
-        </code>
-    </code_comparison>
-    <standard>
-    <![CDATA[
-    Block comment text should start on a new line immediately after the opener.
-    ]]>
-    </standard>
-    <code_comparison>
-        <code title="Valid: Text starts on a new line.">
-        <![CDATA[
-/*
-    A block comment.
-*/
-        ]]>
-        </code>
-        <code title="Invalid: Text starts on the same line.">
-        <![CDATA[
-/* <em>A block comment.</em>
-*/
         ]]>
         </code>
     </code_comparison>
