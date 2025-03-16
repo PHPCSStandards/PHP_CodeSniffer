@@ -242,4 +242,39 @@ echo 'Content';
         ]]>
         </code>
     </code_comparison>
+    <standard>
+    If asterisks are used, the closer's asterisk should be aligned with these. Otherwise, the closer's asterisk should be aligned with the opener's slash.
+    </standard>
+    <code_comparison>
+        <code title="Valid: The closer's asterisk is aligned with other asterisks.">
+        <![CDATA[
+/*
+ * A block comment
+<em> </em>*/
+        ]]>
+        </code>
+        <code title="Invalid: The closer's asterisk is not aligned with other asterisks.">
+        <![CDATA[
+/*
+ * A block comment.
+<em></em>*/
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: The closer's asterisk is aligned with the opener's slash.">
+        <![CDATA[
+/*
+    A block comment.
+<em></em>*/
+        ]]>
+        </code>
+        <code title="Invalid: The closer's asterisk is not aligned with the opener's slash.">
+        <![CDATA[
+/*
+    A block comment.
+<em> </em>*/
+        ]]>
+        </code>
+    </code_comparison>
 </documentation>
