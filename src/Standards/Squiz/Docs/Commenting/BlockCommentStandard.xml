@@ -131,7 +131,7 @@
     </code_comparison>
     <standard>
     <![CDATA[
-    Block comment text should start on a new line.
+    Block comment text should start on a new line immediately after the opener.
     ]]>
     </standard>
     <code_comparison>
@@ -166,28 +166,6 @@
         <![CDATA[
 /*
     <em>A block comment. */</em>
-        ]]>
-        </code>
-    </code_comparison>
-    <standard>
-    <![CDATA[
-    The first line should not be empty.
-    ]]>
-    </standard>
-    <code_comparison>
-        <code title="Valid: The first line is not empty.">
-        <![CDATA[
-/*
-    A block comment.
-*/
-        ]]>
-        </code>
-        <code title="Invalid: The first line is empty.">
-        <![CDATA[
-/*
-<em></em>
-    A block comment.
-*/
         ]]>
         </code>
     </code_comparison>
