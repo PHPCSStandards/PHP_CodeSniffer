@@ -58,6 +58,11 @@ final class ClassCommentUnitTest extends AbstractSniffTestCase
                 163 => 1,
             ];
 
+        case 'ClassCommentUnitTest.2.inc':
+            return [
+                7 => 1,
+            ];
+
         default:
             return [];
         }//end switch

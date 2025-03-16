@@ -84,7 +84,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
 
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
         if ($methodName === null) {
-            // Ignore closures.
+            // Ignore live coding.
             return;
         }
 
@@ -182,7 +182,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
     {
         $functionName = $phpcsFile->getDeclarationName($stackPtr);
         if ($functionName === null) {
-            // Ignore closures.
+            // Ignore live coding.
             return;
         }
 

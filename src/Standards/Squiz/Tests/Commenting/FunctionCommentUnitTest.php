@@ -172,6 +172,11 @@ final class FunctionCommentUnitTest extends AbstractSniffTestCase
             }
             return $errors;
 
+        case 'FunctionCommentUnitTest.2.inc':
+            return [
+                8 => 1,
+            ];
+
         default:
             return [];
         }//end switch
