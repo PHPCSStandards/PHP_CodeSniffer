@@ -119,6 +119,10 @@ final class PropertyTypeHandlingTest extends TestCase
                 'propertyName' => 'expectsString',
                 'expected'     => 'arbitraryvalue',
             ],
+            'String value with whitespace gets trimmed'       => [
+                'propertyName' => 'expectsTrimmedString',
+                'expected'     => 'some value',
+            ],
             'String with whitespace only value becomes null'  => [
                 'propertyName' => 'emptyStringBecomesNull',
                 'expected'     => null,
@@ -147,6 +151,10 @@ final class PropertyTypeHandlingTest extends TestCase
                 'propertyName' => 'expectsBooleanTrueCase',
                 'expected'     => 'True',
             ],
+            'True (with spaces) value gets set as boolean'    => [
+                'propertyName' => 'expectsBooleanTrueTrimmed',
+                'expected'     => true,
+            ],
             'False value gets set as boolean'                 => [
                 'propertyName' => 'expectsBooleanFalse',
                 'expected'     => false,
@@ -154,6 +162,10 @@ final class PropertyTypeHandlingTest extends TestCase
             'False (mixed case) value gets set as string'     => [
                 'propertyName' => 'expectsBooleanFalseCase',
                 'expected'     => 'fALSe',
+            ],
+            'False (with spaces) value gets set as boolean'   => [
+                'propertyName' => 'expectsBooleanFalseTrimmed',
+                'expected'     => false,
             ],
             'Array with only values (new style)'              => [
                 'propertyName' => 'expectsArrayWithOnlyValues',
