@@ -229,10 +229,19 @@ final class EmbeddedPhpUnitTest extends AbstractSniffTestCase
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    public function getWarningList()
+    public function getWarningList($testFile='')
     {
+        if ($testFile === 'EmbeddedPhpUnitTest.24.inc'
+            && (bool) ini_get('short_open_tag') === false
+        ) {
+            // Warning about "no code found in file".
+            return [1 => 1];
+        }
+
         return [];
 
     }//end getWarningList()

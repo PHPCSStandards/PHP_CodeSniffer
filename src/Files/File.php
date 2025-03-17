@@ -865,9 +865,11 @@ class File
         }
 
         // Filter out any messages for sniffs that shouldn't have run
-        // due to the use of the --sniffs command line argument.
+        // due to the use of the --sniffs or --exclude command line argument,
+        // but don't filter out "Internal" messages.
         if ($includeAll === false
-            && ((empty($this->configCache['sniffs']) === false
+            && (($parts[0] !== 'Internal'
+            && empty($this->configCache['sniffs']) === false
             && in_array(strtolower($listenerCode), $this->configCache['sniffs'], true) === false)
             || (empty($this->configCache['exclude']) === false
             && in_array(strtolower($listenerCode), $this->configCache['exclude'], true) === true))

@@ -91,10 +91,15 @@ final class DisallowShortOpenTagUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile='')
     {
         switch ($testFile) {
-        case 'DisallowShortOpenTagUnitTest.1.inc':
-            return [];
         case 'DisallowShortOpenTagUnitTest.3.inc':
+            // Check if the Internal.NoCodeFound error can be expected on line 1.
+            $option = (bool) ini_get('short_open_tag');
+            $line1  = 1;
+            if ($option === true) {
+                $line1 = 0;
+            }
             return [
+                1  => $line1,
                 3  => 1,
                 6  => 1,
                 11 => 1,
