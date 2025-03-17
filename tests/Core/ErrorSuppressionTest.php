@@ -605,7 +605,6 @@ EOD;
             $ruleset = new Ruleset($config);
         }
 
-        $content = '<?php '.PHP_EOL.$before.'$var = FALSE;'.$after.PHP_EOL.'$var = FALSE;';
         $content = <<<EOD
 <?php
 class MyClass() {
