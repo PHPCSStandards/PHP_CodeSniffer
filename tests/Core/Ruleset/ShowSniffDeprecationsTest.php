@@ -169,35 +169,13 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
     public function testDeprecatedSniffsListDoesNotShowWhenSelectedSniffsAreNotDeprecated()
     {
         $standard = __DIR__.'/ShowSniffDeprecationsTest.xml';
-        $config   = new ConfigDouble(['.', "--standard=$standard"]);
-        $ruleset  = new Ruleset($config);
-
-        /*
-         * Apply sniff restrictions.
-         * For tests we need to manually trigger this if the standard is "installed", like with the fixtures these tests use.
-         */
-
-        $restrictions = [];
-        $sniffs       = [
-            'TestStandard.SetProperty.AllowedAsDeclared',
-            'TestStandard.SetProperty.AllowedViaStdClass',
+        $cliArgs  = [
+            '.',
+            "--standard=$standard",
+            '--sniffs=TestStandard.SetProperty.AllowedAsDeclared,TestStandard.SetProperty.AllowedViaStdClass',
         ];
-        foreach ($sniffs as $sniffCode) {
-            $parts     = explode('.', strtolower($sniffCode));
-            $sniffName = $parts[0].'\\sniffs\\'.$parts[1].'\\'.$parts[2].'sniff';
-            $restrictions[strtolower($sniffName)] = true;
-        }
-
-        $sniffFiles = [];
-        $allSniffs  = $ruleset->sniffCodes;
-        foreach ($allSniffs as $sniffName) {
-            $sniffFile    = str_replace('\\', DIRECTORY_SEPARATOR, $sniffName);
-            $sniffFile    = __DIR__.DIRECTORY_SEPARATOR.$sniffFile.'.php';
-            $sniffFiles[] = $sniffFile;
-        }
-
-        $ruleset->registerSniffs($sniffFiles, $restrictions, []);
-        $ruleset->populateTokenListeners();
+        $config   = new ConfigDouble($cliArgs);
+        $ruleset  = new Ruleset($config);
 
         $this->expectOutputString('');
 
@@ -215,38 +193,20 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
     public function testDeprecatedSniffsListDoesNotShowWhenAllDeprecatedSniffsAreExcluded()
     {
         $standard = __DIR__.'/ShowSniffDeprecationsTest.xml';
-        $config   = new ConfigDouble(['.', "--standard=$standard"]);
-        $ruleset  = new Ruleset($config);
-
-        /*
-         * Apply sniff restrictions.
-         * For tests we need to manually trigger this if the standard is "installed", like with the fixtures these tests use.
-         */
-
-        $exclusions = [];
-        $exclude    = [
+        $exclude  = [
             'TestStandard.Deprecated.WithLongReplacement',
             'TestStandard.Deprecated.WithoutReplacement',
             'TestStandard.Deprecated.WithReplacement',
             'TestStandard.Deprecated.WithReplacementContainingLinuxNewlines',
             'TestStandard.Deprecated.WithReplacementContainingNewlines',
         ];
-        foreach ($exclude as $sniffCode) {
-            $parts     = explode('.', strtolower($sniffCode));
-            $sniffName = $parts[0].'\\sniffs\\'.$parts[1].'\\'.$parts[2].'sniff';
-            $exclusions[strtolower($sniffName)] = true;
-        }
-
-        $sniffFiles = [];
-        $allSniffs  = $ruleset->sniffCodes;
-        foreach ($allSniffs as $sniffName) {
-            $sniffFile    = str_replace('\\', DIRECTORY_SEPARATOR, $sniffName);
-            $sniffFile    = __DIR__.DIRECTORY_SEPARATOR.$sniffFile.'.php';
-            $sniffFiles[] = $sniffFile;
-        }
-
-        $ruleset->registerSniffs($sniffFiles, [], $exclusions);
-        $ruleset->populateTokenListeners();
+        $cliArgs  = [
+            '.',
+            "--standard=$standard",
+            '--exclude='.implode(',', $exclude),
+        ];
+        $config   = new ConfigDouble($cliArgs);
+        $ruleset  = new Ruleset($config);
 
         $this->expectOutputString('');
 
