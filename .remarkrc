@@ -14,8 +14,12 @@
             "skipUrlPatterns": [
                 "^https?://github\\.com/PHPCSStandards/PHP_CodeSniffer/compare/[0-9\\.]+?\\.{3}[0-9\\.]+",
                 "^https?://github\\.com/[A-Za-z0-9-]+",
+                "^https?://pear\\.php\\.net/bugs/bug\\.php\\?id=[0-9]+",
                 "^https?://x\\.com/PHP_CodeSniffer"
-            ]
+            ],
+            "deadOrAliveOptions": {
+                "maxRetries": 3
+            }
         }
     ],
     "remark-lint-no-duplicate-defined-urls",
