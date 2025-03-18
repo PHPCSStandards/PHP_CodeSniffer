@@ -15,6 +15,12 @@ class PropertyDemo {
     /* testPrivateSetPropertyUC */ PRIVATE(SET) mixed $priv2;
     public /* testPublicPrivateSetProperty */ private(set) mixed $priv3;
     public /* testPublicPrivateSetPropertyUC */ PRIVATE(SET) mixed $priv4;
+
+    /* testInvalidUnsetProperty */ public mixed $invalid1;
+    /* testInvalidSpaceProperty */ public (set) mixed $invalid2;
+    /* testInvalidCommentProperty */ protected/* foo */(set) mixed $invalid3;
+    /* testInvalidGetProperty */ private(get) mixed $invalid4;
+    /* testInvalidNoParenProperty */ private set mixed $invalid5;
 }
 
 class ConstructorPromotionDemo {
@@ -33,5 +39,14 @@ class ConstructorPromotionDemo {
         /* testPrivateSetCPPUC */ PRIVATE(SET) mixed $priv2,
         public /* testPublicPrivateSetCPP */ private(set) mixed $priv3,
         public /* testPublicPrivateSetCPPUC */ PRIVATE(SET) mixed $priv4,
+
+        /* testInvalidUnsetCPP */ public(unset) mixed $invalid1,
+        /* testInvalidSpaceCPP */ public (set) mixed $invalid2,
+        /* testInvalidCommentCPP */ protected/* foo */(set) mixed $invalid3,
+        /* testInvalidGetCPP */ private(get) mixed $invalid4,
+        /* testInvalidNoParenCPP */ private set mixed $invalid5,
     ) {}
 }
+
+class LiveCodingDemo {
+    /* testLiveCoding */ private(set
