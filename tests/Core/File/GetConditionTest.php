@@ -153,7 +153,7 @@ final class GetConditionTest extends AbstractMethodUnitTest
      */
     public function testNonExistentToken()
     {
-        $result = self::$phpcsFile->getCondition(100000, Tokens::$ooScopeTokens);
+        $result = self::$phpcsFile->getCondition(100000, T_CLASS);
         $this->assertFalse($result);
 
         $result = self::$phpcsFile->hasCondition(100000, T_IF);
