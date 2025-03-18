@@ -1276,7 +1276,7 @@ class PHP extends Tokenizer
                 && in_array($token[0], [T_PUBLIC, T_PROTECTED, T_PRIVATE], true) === true
                 && ($stackPtr + 3) < $numTokens
                 && $tokens[($stackPtr + 1)] === '('
-                && is_array($tokens[($stackPtr + 2)])
+                && is_array($tokens[($stackPtr + 2)]) === true
                 && $tokens[($stackPtr + 2)][0] === T_STRING
                 && strtolower($tokens[($stackPtr + 2)][1]) === 'set'
                 && $tokens[($stackPtr + 3)] === ')'
