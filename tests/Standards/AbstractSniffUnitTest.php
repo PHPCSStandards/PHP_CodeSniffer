@@ -26,18 +26,43 @@ abstract class AbstractSniffUnitTest extends TestCase
 {
 
     /**
+     * Ruleset template with placeholders.
+     *
+     * @var string
+     */
+    private const RULESET_TEMPLATE = <<<'TEMPLATE'
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="[STANDARDNAME]" xsi:noNamespaceSchemaLocation="../../phpcs.xsd">
+    <description>Temporary ruleset used by the AbstractSniffUnitTest class.</description>
+
+    <rule ref="[SNIFFFILEREF]"/>
+
+</ruleset>
+TEMPLATE;
+
+    /**
+     * Placeholders used in the ruleset template which need to be replaced.
+     *
+     * @var array<string>
+     */
+    private const SEARCH_FOR = [
+        '[STANDARDNAME]',
+        '[SNIFFFILEREF]',
+    ];
+
+    /**
+     * Location where the temporary ruleset file will be saved.
+     *
+     * @var string
+     */
+    private const RULESET_FILENAME = __DIR__.'/sniffStnd.xml';
+
+    /**
      * Cache for the Config object.
      *
      * @var \PHP_CodeSniffer\Tests\ConfigDouble
      */
     private static $config;
-
-    /**
-     * Cache for Ruleset objects.
-     *
-     * @var array<string, \PHP_CodeSniffer\Ruleset>
-     */
-    private static $rulesets = [];
 
     /**
      * Extensions to disregard when gathering the test files.
@@ -50,6 +75,18 @@ abstract class AbstractSniffUnitTest extends TestCase
         'bak'   => 'bak',
         'orig'  => 'orig',
     ];
+
+
+    /**
+     * Clean up temporary ruleset file.
+     *
+     * @return void
+     */
+    public static function tearDownAfterClass(): void
+    {
+        @unlink(self::RULESET_FILENAME);
+
+    }//end tearDownAfterClass()
 
 
     /**
@@ -103,7 +140,8 @@ abstract class AbstractSniffUnitTest extends TestCase
      * Tests the extending classes Sniff class.
      *
      * @return void
-     * @throws \PHPUnit\Framework\Exception
+     *
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException
      */
     final public function testSniff()
     {
@@ -122,6 +160,23 @@ abstract class AbstractSniffUnitTest extends TestCase
         // Get a list of all test files to check.
         $testFiles = $this->getTestFiles($testFileBase);
 
+        $sniffFile = preg_replace('`[/\\\\]Tests[/\\\\]`', DIRECTORY_SEPARATOR.'Sniffs'.DIRECTORY_SEPARATOR, $testFileBase);
+        $sniffFile = str_replace('UnitTest.', 'Sniff.php', $sniffFile);
+
+        if (file_exists($sniffFile) === false) {
+            $this->fail(sprintf('ERROR: Sniff file %s for test %s does not appear to exist', $sniffFile, static::class));
+        }
+
+        $replacements    = [
+            $standardName,
+            $sniffFile,
+        ];
+        $rulesetContents = str_replace(self::SEARCH_FOR, $replacements, self::RULESET_TEMPLATE);
+
+        if (file_put_contents(self::RULESET_FILENAME, $rulesetContents) === false) {
+            throw new RuntimeException('Failed to write custom ruleset file');
+        }
+
         if (isset(self::$config) === true) {
             $config = self::$config;
         } else {
@@ -130,31 +185,11 @@ abstract class AbstractSniffUnitTest extends TestCase
             self::$config  = $config;
         }
 
-        $config->standards = [$standardName];
+        $config->standards = [self::RULESET_FILENAME];
         $config->sniffs    = [$sniffCode];
         $config->ignored   = [];
 
-        if (isset(self::$rulesets[$standardName]) === false) {
-            $ruleset = new Ruleset($config);
-            self::$rulesets[$standardName] = $ruleset;
-        }
-
-        $ruleset = self::$rulesets[$standardName];
-
-        $sniffFile = preg_replace('`[/\\\\]Tests[/\\\\]`', DIRECTORY_SEPARATOR.'Sniffs'.DIRECTORY_SEPARATOR, $testFileBase);
-        $sniffFile = str_replace('UnitTest.', 'Sniff.php', $sniffFile);
-
-        if (file_exists($sniffFile) === false) {
-            $this->fail(sprintf('ERROR: Sniff file %s for test %s does not appear to exist', $sniffFile, static::class));
-        }
-
-        $sniffClassName = substr(get_class($this), 0, -8).'Sniff';
-        $sniffClassName = str_replace('\Tests\\', '\Sniffs\\', $sniffClassName);
-        $sniffClassName = Common::cleanSniffClass($sniffClassName);
-
-        $restrictions = [strtolower($sniffClassName) => true];
-        $ruleset->registerSniffs([$sniffFile], $restrictions, []);
-        $ruleset->populateTokenListeners();
+        $ruleset = new Ruleset($config);
 
         $failureMessages = [];
         foreach ($testFiles as $testFile) {
