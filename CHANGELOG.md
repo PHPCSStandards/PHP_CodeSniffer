@@ -6,6 +6,44 @@ The file documents changes to the PHP_CodeSniffer project.
 
 _Nothing yet._
 
+## [3.12.1] - 2025-04-04
+
+### Added
+- Documentation for the following sniffs:
+    - Squiz.Commenting.BlockComment
+    - Thanks to [Colin Stewart][@costdev] for the patch.
+
+### Changed
+- Generic.WhiteSpace.HereNowdocIdentifierSpacing: improved error message text.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Various housekeeping, including improvements to the tests and documentation.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] and [Juliette Reinders Folmer][@jrfnl] for their contributions.
+
+### Deprecated
+- The `Generic.Functions.CallTimePassByReference` sniff. See [#921].
+    - This sniff will be removed in version 4.0.0.
+
+### Fixed
+- Fixed bug [#906] : Fixer: prevent `InvalidArgumentException`s when displaying verbose information.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Fixed bug [#907] : Tokenizer/PHP: tokenization of tokens related to union, intersection and DNF types in combination with PHP 8.4 final properties.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Fixed bug [#908] : Tokenizer/PHP: tokenization of `?` in nullable types for readonly properties.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Fixed bug [#916] : Tokenizer/PHP: `goto` was not recognized as a terminating statement for a case/default in a switch control structure.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+
+### Other
+- PHP_CodeSniffer 4.0 is coming soon! Interested in a sneak peek ? Join the live stream at any time on April 14, 15, 17 or 18.
+    Read the open invitation ([#924]) for all the details.
+
+[#906]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/906
+[#907]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/907
+[#908]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/908
+[#916]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/916
+[#921]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/921
+[#924]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/924
+
 ## [3.12.0] - 2025-03-18
 
 ### Added
@@ -7412,6 +7450,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 -->
 
 [Unreleased]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/master...HEAD
+[3.12.1]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.12.0...3.12.1
 [3.12.0]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.11.3...3.12.0
 [3.11.3]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.11.2...3.11.3
 [3.11.2]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.11.1...3.11.2
@@ -7765,4 +7804,3 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [pear-wloche]:          https://pear.php.net/user/wloche
 [pear-woellchen]:       https://pear.php.net/user/woellchen
 [pear-youngian]:        https://pear.php.net/user/youngian
-
