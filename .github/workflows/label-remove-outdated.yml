@@ -8,6 +8,7 @@ on:
   pull_request_target:
     types:
       - closed
+      - review_requested
 
 jobs:
   on-issue-close:
@@ -26,6 +27,19 @@ jobs:
             Status: help wanted
             Status: needs investigation
             Status: triage
+
+  on-pr-review-request:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'PHPCSStandards' && github.event.action == 'review_requested'
+
+    name: "Clean up labels on PR (re-)review request"
+
+    steps:
+      - uses: mondeja/remove-labels-gh-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            Status: awaiting feedback
 
   on-pr-merge:
     runs-on: ubuntu-latest
