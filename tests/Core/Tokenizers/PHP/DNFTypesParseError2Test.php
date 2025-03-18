@@ -61,7 +61,7 @@ final class DNFTypesParseError2Test extends AbstractTokenizerTestCase
      *
      * @see testBrokenDNFTypeParensShouldAlwaysBeAPairMissingCloseParens()
      *
-     * @return array<string, array<string, string>>
+     * @return array<string, array<string>>
      */
     public static function dataBrokenDNFTypeParensShouldAlwaysBeAPairMissingCloseParens()
     {
@@ -120,7 +120,7 @@ final class DNFTypesParseError2Test extends AbstractTokenizerTestCase
      *
      * @see testBrokenDNFTypeParensShouldAlwaysBeAPairMissingOpenParens()
      *
-     * @return array<string, array<string, string>>
+     * @return array<string, array<string>>
      */
     public static function dataBrokenDNFTypeParensShouldAlwaysBeAPairMissingOpenParens()
     {
@@ -201,7 +201,7 @@ final class DNFTypesParseError2Test extends AbstractTokenizerTestCase
      *
      * @see testBrokenDNFTypeParensShouldAlwaysBeAPairMatchedAndUnmatched()
      *
-     * @return array<string, array<string, string>>
+     * @return array<string, array<string>>
      */
     public static function dataBrokenDNFTypeParensShouldAlwaysBeAPairMatchedAndUnmatched()
     {

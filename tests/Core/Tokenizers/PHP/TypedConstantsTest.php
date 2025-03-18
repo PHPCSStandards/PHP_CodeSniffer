@@ -266,7 +266,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
      *
      * @see testTypedConstant()
      *
-     * @return array<string, array<string, string>>
+     * @return array<string, array<string, string|array<int|string>>>
      */
     public static function dataNullableTypedConstant()
     {
@@ -376,7 +376,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
      *
      * @see testTypedConstant()
      *
-     * @return array<string, array<string, string>>
+     * @return array<string, array<string, string|array<int|string>>>
      */
     public static function dataUnionTypedConstant()
     {
@@ -458,7 +458,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
      *
      * @see testTypedConstant()
      *
-     * @return array<string, array<string, string>>
+     * @return array<string, array<string, string|array<int|string>>>
      */
     public static function dataIntersectionTypedConstant()
     {
@@ -496,7 +496,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
      *
      * @see testTypedConstant()
      *
-     * @return array<string, array<string, string>>
+     * @return array<string, array<string, string|array<int|string>>>
      */
     public static function dataDNFTypedConstant()
     {

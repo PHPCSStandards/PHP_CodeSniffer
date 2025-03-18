@@ -44,7 +44,7 @@ final class GeneratorArgTest extends TestCase
      *
      * @see self::testValidGenerators()
      *
-     * @return array<int, array<string>>
+     * @return array<string, array<string, string>>
      */
     public static function dataValidGeneratorNames()
     {
@@ -131,7 +131,7 @@ final class GeneratorArgTest extends TestCase
      *
      * @see self::testInvalidGenerator()
      *
-     * @return array<int, array<string>>
+     * @return array<array<string>>
      */
     public static function dataInvalidGeneratorNames()
     {
