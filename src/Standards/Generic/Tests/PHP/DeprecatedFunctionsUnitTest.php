@@ -32,7 +32,7 @@ final class DeprecatedFunctionsUnitTest extends AbstractSniffUnitTest
     {
         $errors = [];
 
-        if (PHP_VERSION_ID >= 70200 && PHP_VERSION_ID < 80000) {
+        if (PHP_VERSION_ID < 80000) {
             $errors[3] = 1;
         }
 
