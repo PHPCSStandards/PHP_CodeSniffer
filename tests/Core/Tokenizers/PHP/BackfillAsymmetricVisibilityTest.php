@@ -35,6 +35,8 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
                 T_PUBLIC_SET,
                 T_PROTECTED_SET,
                 T_PRIVATE_SET,
+                // For error cases
+                constant($testType),
             ],
             $testContent
         );
@@ -125,6 +127,31 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
                 'testType'    => 'T_PRIVATE_SET',
                 'testContent' => 'PRIVATE(SET)',
             ],
+            'property, invalid case 1'                                 => [
+                'testMarker'  => '/* testInvalidUnsetProperty */',
+                'testType'    => 'T_PUBLIC',
+                'testContent' => 'public',
+            ],
+            'property, invalid case 2'                                 => [
+                'testMarker'  => '/* testInvalidSpaceProperty */',
+                'testType'    => 'T_PUBLIC',
+                'testContent' => 'public',
+            ],
+            'property, invalid case 3'                                 => [
+                'testMarker'  => '/* testInvalidCommentProperty */',
+                'testType'    => 'T_PROTECTED',
+                'testContent' => 'protected',
+            ],
+            'property, invalid case 4'                                 => [
+                'testMarker'  => '/* testInvalidGetProperty */',
+                'testType'    => 'T_PRIVATE',
+                'testContent' => 'private',
+            ],
+            'property, invalid case 5'                                 => [
+                'testMarker'  => '/* testInvalidNoParenProperty */',
+                'testType'    => 'T_PRIVATE',
+                'testContent' => 'private',
+            ],
 
             // Constructor property promotion.
             'promotion, public set, no read visibility, lowercase'     => [
@@ -187,6 +214,38 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
                 'testType'    => 'T_PRIVATE_SET',
                 'testContent' => 'PRIVATE(SET)',
             ],
+            'promotion, invalid case 1'                                => [
+                'testMarker'  => '/* testInvalidUnsetCPP */',
+                'testType'    => 'T_PUBLIC',
+                'testContent' => 'public',
+            ],
+            'promotion, invalid case 2'                                => [
+                'testMarker'  => '/* testInvalidSpaceCPP */',
+                'testType'    => 'T_PUBLIC',
+                'testContent' => 'public',
+            ],
+            'promotion, invalid case 3'                                => [
+                'testMarker'  => '/* testInvalidCommentCPP */',
+                'testType'    => 'T_PROTECTED',
+                'testContent' => 'protected',
+            ],
+            'promotion, invalid case 4'                                => [
+                'testMarker'  => '/* testInvalidGetCPP */',
+                'testType'    => 'T_PRIVATE',
+                'testContent' => 'private',
+            ],
+            'promotion, invalid case 5'                                => [
+                'testMarker'  => '/* testInvalidNoParenCPP */',
+                'testType'    => 'T_PRIVATE',
+                'testContent' => 'private',
+            ],
+
+            // Live coding.
+            'live coding'                                              => [
+                'testMarker'  => '/* testLiveCoding */',
+                'testType'    => 'T_PRIVATE',
+                'testContent' => 'private',
+            ]
         ];
 
     }//end dataAsymmetricVisibility()
