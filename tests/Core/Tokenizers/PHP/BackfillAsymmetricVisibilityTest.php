@@ -35,7 +35,7 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
                 T_PUBLIC_SET,
                 T_PROTECTED_SET,
                 T_PRIVATE_SET,
-                // For error cases
+                // For error cases.
                 constant($testType),
             ],
             $testContent
@@ -245,7 +245,7 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
                 'testMarker'  => '/* testLiveCoding */',
                 'testType'    => 'T_PRIVATE',
                 'testContent' => 'private',
-            ]
+            ],
         ];
 
     }//end dataAsymmetricVisibility()
