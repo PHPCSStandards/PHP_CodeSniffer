@@ -21,6 +21,29 @@ use PHP_CodeSniffer\Tests\Core\Ruleset\AbstractRulesetTestCase;
 final class PopulateTokenListenersSupportedTokenizersTest extends AbstractRulesetTestCase
 {
 
+    /**
+     * The Config object.
+     *
+     * @var \PHP_CodeSniffer\Config
+     */
+    private static $config;
+
+
+    /**
+     * Initialize the config and ruleset objects for this test.
+     *
+     * @beforeClass
+     *
+     * @return void
+     */
+    public static function initializeConfig()
+    {
+        // Set up the ruleset.
+        $standard     = __DIR__.'/PopulateTokenListenersSupportedTokenizersTest.xml';
+        self::$config = new ConfigDouble(["--standard=$standard"]);
+
+    }//end initializeConfig()
+
 
     /**
      * Verify that a deprecation notice is shown if a non-deprecated sniff supports the JS/CSS tokenizer(s).
@@ -30,44 +53,59 @@ final class PopulateTokenListenersSupportedTokenizersTest extends AbstractRulese
      * - No deprecation notice is thrown when the sniff _also_ supports PHP.
      * - No deprecation notice is thrown when no tokenizers are supported (not sure why anyone would do that, but :shrug:).
      *
+     * {@internal The test uses a data provider to verify the messages as the _order_ of the messages depends
+     * on the OS on which the tests are run (order in which files are retrieved), which makes the order within the
+     * complete message to unpredictable to test in one go.}
+     *
+     * @param string $expected The expected message output in regex format.
+     *
+     * @dataProvider dataDeprecatedTokenizersTriggerDeprecationNotice
+     *
      * @return void
      */
-    public function testDeprecatedTokenizersTriggerDeprecationNotice()
+    public function testDeprecatedTokenizersTriggerDeprecationNotice($expected)
     {
-        // Set up the ruleset.
-        $standard = __DIR__.'/PopulateTokenListenersSupportedTokenizersTest.xml';
-        $config   = new ConfigDouble(["--standard=$standard"]);
+        $this->expectOutputRegex($expected);
 
-        // Using different expectations per OS as the order in which files are gathered differs per OS.
-        if (stripos(PHP_OS, 'WIN') === 0) {
-            $expected  = 'DEPRECATED: Scanning CSS/JS files is deprecated and support will be removed in PHP_CodeSniffer 4.0.'.PHP_EOL;
-            $expected .= 'The TestStandard.SupportedTokenizers.ListensForCSSAndJS sniff is listening for CSS, JS.'.PHP_EOL;
-            $expected .= 'DEPRECATED: Scanning CSS/JS files is deprecated and support will be removed in PHP_CodeSniffer 4.0.'.PHP_EOL;
-            $expected .= 'The TestStandard.SupportedTokenizers.ListensForCSSAndUnrecognized sniff is listening for CSS, Unrecognized.'.PHP_EOL;
-            $expected .= 'DEPRECATED: Scanning CSS/JS files is deprecated and support will be removed in PHP_CodeSniffer 4.0.'.PHP_EOL;
-            $expected .= 'The TestStandard.SupportedTokenizers.ListensForCSS sniff is listening for CSS.'.PHP_EOL;
-            $expected .= 'DEPRECATED: Scanning CSS/JS files is deprecated and support will be removed in PHP_CodeSniffer 4.0.'.PHP_EOL;
-            $expected .= 'The TestStandard.SupportedTokenizers.ListensForJS sniff is listening for JS.'.PHP_EOL;
-            $expected .= 'DEPRECATED: Support for custom tokenizers will be removed in PHP_CodeSniffer 4.0.'.PHP_EOL;
-            $expected .= 'The TestStandard.SupportedTokenizers.ListensForUnrecognizedTokenizers sniff is listening for SCSS, TypeScript.'.PHP_EOL.PHP_EOL;
-        } else {
-            $expected  = 'DEPRECATED: Scanning CSS/JS files is deprecated and support will be removed in PHP_CodeSniffer 4.0.'.PHP_EOL;
-            $expected .= 'The TestStandard.SupportedTokenizers.ListensForJS sniff is listening for JS.'.PHP_EOL;
-            $expected .= 'DEPRECATED: Scanning CSS/JS files is deprecated and support will be removed in PHP_CodeSniffer 4.0.'.PHP_EOL;
-            $expected .= 'The TestStandard.SupportedTokenizers.ListensForCSSAndJS sniff is listening for CSS, JS.'.PHP_EOL;
-            $expected .= 'DEPRECATED: Scanning CSS/JS files is deprecated and support will be removed in PHP_CodeSniffer 4.0.'.PHP_EOL;
-            $expected .= 'The TestStandard.SupportedTokenizers.ListensForCSSAndUnrecognized sniff is listening for CSS, Unrecognized.'.PHP_EOL;
-            $expected .= 'DEPRECATED: Scanning CSS/JS files is deprecated and support will be removed in PHP_CodeSniffer 4.0.'.PHP_EOL;
-            $expected .= 'The TestStandard.SupportedTokenizers.ListensForCSS sniff is listening for CSS.'.PHP_EOL;
-            $expected .= 'DEPRECATED: Support for custom tokenizers will be removed in PHP_CodeSniffer 4.0.'.PHP_EOL;
-            $expected .= 'The TestStandard.SupportedTokenizers.ListensForUnrecognizedTokenizers sniff is listening for SCSS, TypeScript.'.PHP_EOL.PHP_EOL;
-        }//end if
-
-        $this->expectOutputString($expected);
-
-        new Ruleset($config);
+        new Ruleset(self::$config);
 
     }//end testDeprecatedTokenizersTriggerDeprecationNotice()
+
+
+    /**
+     * Data provider.
+     *
+     * @see testDeprecatedTokenizersTriggerDeprecationNotice()
+     *
+     * @return array<string, array<string, string>>
+     */
+    public static function dataDeprecatedTokenizersTriggerDeprecationNotice()
+    {
+        $cssJsDeprecated  = '`DEPRECATED: Scanning CSS/JS files is deprecated and support will be removed in PHP_CodeSniffer 4\.0\.\R';
+        $cssJsDeprecated .= 'The %1$s sniff is listening for %2$s\.\R`';
+
+        $customTokenizer  = '`DEPRECATED: Support for custom tokenizers will be removed in PHP_CodeSniffer 4\.0\.\R';
+        $customTokenizer .= 'The %1$s sniff is listening for %2$s\.\R`';
+
+        return [
+            'Listens for CSS'                            => [
+                'expected' => sprintf($cssJsDeprecated, 'TestStandard.SupportedTokenizers.ListensForCSS', 'CSS'),
+            ],
+            'Listens for JS'                             => [
+                'expected' => sprintf($cssJsDeprecated, 'TestStandard.SupportedTokenizers.ListensForJS', 'JS'),
+            ],
+            'Listens for both CSS and JS'                => [
+                'expected' => sprintf($cssJsDeprecated, 'TestStandard.SupportedTokenizers.ListensForCSSAndJS', 'CSS, JS'),
+            ],
+            'Listens for CSS and something unrecognized' => [
+                'expected' => sprintf($cssJsDeprecated, 'TestStandard.SupportedTokenizers.ListensForCSSAndUnrecognized', 'CSS, Unrecognized'),
+            ],
+            'Listens for only unrecognized tokenizers'   => [
+                'expected' => sprintf($customTokenizer, 'TestStandard.SupportedTokenizers.ListensForUnrecognizedTokenizers', 'SCSS, TypeScript'),
+            ],
+        ];
+
+    }//end dataDeprecatedTokenizersTriggerDeprecationNotice()
 
 
 }//end class
