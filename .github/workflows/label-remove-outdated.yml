@@ -62,7 +62,8 @@ jobs:
 
   on-pr-close:
     runs-on: ubuntu-latest
-    if: github.repository_owner == 'PHPCSStandards' && github.event_name == 'pull_request_target' && github.event.pull_request.merged == false
+    # yamllint disable-line rule:line-length
+    if: github.repository_owner == 'PHPCSStandards' && github.event_name == 'pull_request_target' && github.event.action == 'closed' && github.event.pull_request.merged == false
 
     name: Clean up labels on PR close
 
