@@ -45,6 +45,7 @@ final class PropertyTypeHandlingTest extends TestCase
      * @param mixed  $expected     Expected property value.
      *
      * @dataProvider dataTypeHandling
+     * @dataProvider dataArrayPropertyExtending
      *
      * @return void
      */
@@ -80,6 +81,7 @@ final class PropertyTypeHandlingTest extends TestCase
      * Data provider.
      *
      * @see self::testTypeHandlingWhenSetViaRuleset()
+     * @see self::testTypeHandlingWhenSetInline()
      *
      * @return array<string, array<string, mixed>>
      */
@@ -100,18 +102,6 @@ final class PropertyTypeHandlingTest extends TestCase
             'null'   => 'null',
             'true'   => 'true',
             'false'  => 'false',
-        ];
-
-        $expectedArrayOnlyValuesExtended    = [
-            'string',
-            '15',
-            'another string',
-        ];
-        $expectedArrayKeysAndValuesExtended = [
-            10               => '10',
-            'string'         => 'string',
-            15               => '15',
-            'another string' => 'another string',
         ];
 
         return [
@@ -175,14 +165,6 @@ final class PropertyTypeHandlingTest extends TestCase
                 'propertyName' => 'expectsArrayWithKeysAndValues',
                 'expected'     => $expectedArrayKeysAndValues,
             ],
-            'Array with only values extended'                => [
-                'propertyName' => 'expectsArrayWithExtendedValues',
-                'expected'     => $expectedArrayOnlyValuesExtended,
-            ],
-            'Array with keys and values extended'            => [
-                'propertyName' => 'expectsArrayWithExtendedKeysAndValues',
-                'expected'     => $expectedArrayKeysAndValuesExtended,
-            ],
             'Empty array'                                    => [
                 'propertyName' => 'expectsEmptyArray',
                 'expected'     => [],
@@ -190,6 +172,43 @@ final class PropertyTypeHandlingTest extends TestCase
         ];
 
     }//end dataTypeHandling()
+
+
+    /**
+     * Data provider.
+     *
+     * Array property extending is a feature which is only supported from a ruleset, not for inline property setting.
+     *
+     * @see self::testTypeHandlingWhenSetViaRuleset()
+     *
+     * @return array<string, array<string, mixed>>
+     */
+    public static function dataArrayPropertyExtending()
+    {
+        $expectedArrayOnlyValuesExtended    = [
+            'string',
+            '15',
+            'another string',
+        ];
+        $expectedArrayKeysAndValuesExtended = [
+            10               => '10',
+            'string'         => 'string',
+            15               => '15',
+            'another string' => 'another string',
+        ];
+
+        return [
+            'Array with only values extended'     => [
+                'propertyName' => 'expectsArrayWithExtendedValues',
+                'expected'     => $expectedArrayOnlyValuesExtended,
+            ],
+            'Array with keys and values extended' => [
+                'propertyName' => 'expectsArrayWithExtendedKeysAndValues',
+                'expected'     => $expectedArrayKeysAndValuesExtended,
+            ],
+        ];
+
+    }//end dataArrayPropertyExtending()
 
 
     /**
