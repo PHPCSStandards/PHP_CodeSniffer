@@ -55,7 +55,7 @@ final class PopulateTokenListenersSupportedTokenizersTest extends AbstractRulese
      *
      * {@internal The test uses a data provider to verify the messages as the _order_ of the messages depends
      * on the OS on which the tests are run (order in which files are retrieved), which makes the order within the
-     * complete message to unpredictable to test in one go.}
+     * complete message too unpredictable to test in one go.}
      *
      * @param string $expected The expected message output in regex format.
      *
