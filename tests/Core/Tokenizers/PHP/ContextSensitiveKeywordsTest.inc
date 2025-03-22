@@ -102,6 +102,10 @@ namespace /* testNamespaceNameIsString1 */ my\ /* testNamespaceNameIsString2 */ 
     /* testProtectedIsKeyword */ protected $protected;
     /* testPublicIsKeyword */ public $public;
 
+    /* testPrivateSetIsKeyword */ private(set) mixed $privateSet;
+    /* testProtectedSetIsKeyword */ protected(set) mixed $protectedSet;
+    /* testPublicSetIsKeyword */ public(set) mixed $publicSet;
+
     /* testVarIsKeyword */ var $var;
     /* testStaticIsKeyword */ static $static;
 
