@@ -45,6 +45,7 @@ final class PropertyTypeHandlingTest extends TestCase
      * @param mixed  $expected     Expected property value.
      *
      * @dataProvider dataTypeHandling
+     * @dataProvider dataArrayPropertyExtending
      *
      * @return void
      */
@@ -80,6 +81,7 @@ final class PropertyTypeHandlingTest extends TestCase
      * Data provider.
      *
      * @see self::testTypeHandlingWhenSetViaRuleset()
+     * @see self::testTypeHandlingWhenSetInline()
      *
      * @return array<string, array<string, mixed>>
      */
@@ -102,6 +104,99 @@ final class PropertyTypeHandlingTest extends TestCase
             'false'  => 'false',
         ];
 
+        return [
+            'String value (default)'                         => [
+                'propertyName' => 'expectsString',
+                'expected'     => 'arbitraryvalue',
+            ],
+            'String value with whitespace gets trimmed'      => [
+                'propertyName' => 'expectsTrimmedString',
+                'expected'     => 'some value',
+            ],
+            'String with whitespace only value becomes null' => [
+                'propertyName' => 'emptyStringBecomesNull',
+                'expected'     => null,
+            ],
+            'Integer value gets set as string'               => [
+                'propertyName' => 'expectsIntButAcceptsString',
+                'expected'     => '12345',
+            ],
+            'Float value gets set as string'                 => [
+                'propertyName' => 'expectsFloatButAcceptsString',
+                'expected'     => '12.345',
+            ],
+            'Null value gets set as string'                  => [
+                'propertyName' => 'expectsNull',
+                'expected'     => 'null',
+            ],
+            'Null (uppercase) value gets set as string'      => [
+                'propertyName' => 'expectsNullCase',
+                'expected'     => 'NULL',
+            ],
+            'True value gets set as boolean'                 => [
+                'propertyName' => 'expectsBooleanTrue',
+                'expected'     => true,
+            ],
+            'True (mixed case) value gets set as string'     => [
+                'propertyName' => 'expectsBooleanTrueCase',
+                'expected'     => 'True',
+            ],
+            'True (with spaces) value gets set as boolean'   => [
+                'propertyName' => 'expectsBooleanTrueTrimmed',
+                'expected'     => true,
+            ],
+            'False value gets set as boolean'                => [
+                'propertyName' => 'expectsBooleanFalse',
+                'expected'     => false,
+            ],
+            'False (mixed case) value gets set as string'    => [
+                'propertyName' => 'expectsBooleanFalseCase',
+                'expected'     => 'fALSe',
+            ],
+            'False (with spaces) value gets set as boolean'  => [
+                'propertyName' => 'expectsBooleanFalseTrimmed',
+                'expected'     => false,
+            ],
+            'Array with only values (new style)'             => [
+                'propertyName' => 'expectsArrayWithOnlyValues',
+                'expected'     => $expectedArrayOnlyValues,
+            ],
+            'Array with keys and values (new style)'         => [
+                'propertyName' => 'expectsArrayWithKeysAndValues',
+                'expected'     => $expectedArrayKeysAndValues,
+            ],
+            'Empty array (new style)'                        => [
+                'propertyName' => 'expectsEmptyArray',
+                'expected'     => [],
+            ],
+            'Array with only values (old style)'             => [
+                'propertyName' => 'expectsOldSchoolArrayWithOnlyValues',
+                'expected'     => $expectedArrayOnlyValues,
+            ],
+            'Array with keys and values (old style)'         => [
+                'propertyName' => 'expectsOldSchoolArrayWithKeysAndValues',
+                'expected'     => $expectedArrayKeysAndValues,
+            ],
+            'Empty array (old style)'                        => [
+                'propertyName' => 'expectsOldSchoolEmptyArray',
+                'expected'     => [],
+            ],
+        ];
+
+    }//end dataTypeHandling()
+
+
+    /**
+     * Data provider.
+     *
+     * Array property extending is a feature which is only supported from a ruleset, not for inline property setting.
+     *
+     * @see self::testTypeHandlingWhenSetViaRuleset()
+     *
+     * @return array<string, array<string, mixed>>
+     */
+    public static function dataArrayPropertyExtending()
+    {
         $expectedArrayOnlyValuesExtended    = [
             'string',
             '15',
@@ -115,66 +210,6 @@ final class PropertyTypeHandlingTest extends TestCase
         ];
 
         return [
-            'String value (default)'                          => [
-                'propertyName' => 'expectsString',
-                'expected'     => 'arbitraryvalue',
-            ],
-            'String value with whitespace gets trimmed'       => [
-                'propertyName' => 'expectsTrimmedString',
-                'expected'     => 'some value',
-            ],
-            'String with whitespace only value becomes null'  => [
-                'propertyName' => 'emptyStringBecomesNull',
-                'expected'     => null,
-            ],
-            'Integer value gets set as string'                => [
-                'propertyName' => 'expectsIntButAcceptsString',
-                'expected'     => '12345',
-            ],
-            'Float value gets set as string'                  => [
-                'propertyName' => 'expectsFloatButAcceptsString',
-                'expected'     => '12.345',
-            ],
-            'Null value gets set as string'                   => [
-                'propertyName' => 'expectsNull',
-                'expected'     => 'null',
-            ],
-            'Null (uppercase) value gets set as string'       => [
-                'propertyName' => 'expectsNullCase',
-                'expected'     => 'NULL',
-            ],
-            'True value gets set as boolean'                  => [
-                'propertyName' => 'expectsBooleanTrue',
-                'expected'     => true,
-            ],
-            'True (mixed case) value gets set as string'      => [
-                'propertyName' => 'expectsBooleanTrueCase',
-                'expected'     => 'True',
-            ],
-            'True (with spaces) value gets set as boolean'    => [
-                'propertyName' => 'expectsBooleanTrueTrimmed',
-                'expected'     => true,
-            ],
-            'False value gets set as boolean'                 => [
-                'propertyName' => 'expectsBooleanFalse',
-                'expected'     => false,
-            ],
-            'False (mixed case) value gets set as string'     => [
-                'propertyName' => 'expectsBooleanFalseCase',
-                'expected'     => 'fALSe',
-            ],
-            'False (with spaces) value gets set as boolean'   => [
-                'propertyName' => 'expectsBooleanFalseTrimmed',
-                'expected'     => false,
-            ],
-            'Array with only values (new style)'              => [
-                'propertyName' => 'expectsArrayWithOnlyValues',
-                'expected'     => $expectedArrayOnlyValues,
-            ],
-            'Array with keys and values (new style)'          => [
-                'propertyName' => 'expectsArrayWithKeysAndValues',
-                'expected'     => $expectedArrayKeysAndValues,
-            ],
             'Array with only values extended (new style)'     => [
                 'propertyName' => 'expectsArrayWithExtendedValues',
                 'expected'     => $expectedArrayOnlyValuesExtended,
@@ -182,18 +217,6 @@ final class PropertyTypeHandlingTest extends TestCase
             'Array with keys and values extended (new style)' => [
                 'propertyName' => 'expectsArrayWithExtendedKeysAndValues',
                 'expected'     => $expectedArrayKeysAndValuesExtended,
-            ],
-            'Empty array (new style)'                         => [
-                'propertyName' => 'expectsEmptyArray',
-                'expected'     => [],
-            ],
-            'Array with only values (old style)'              => [
-                'propertyName' => 'expectsOldSchoolArrayWithOnlyValues',
-                'expected'     => $expectedArrayOnlyValues,
-            ],
-            'Array with keys and values (old style)'          => [
-                'propertyName' => 'expectsOldSchoolArrayWithKeysAndValues',
-                'expected'     => $expectedArrayKeysAndValues,
             ],
             'Array with only values extended (old style)'     => [
                 'propertyName' => 'expectsOldSchoolArrayWithExtendedValues',
@@ -203,13 +226,9 @@ final class PropertyTypeHandlingTest extends TestCase
                 'propertyName' => 'expectsOldSchoolArrayWithExtendedKeysAndValues',
                 'expected'     => $expectedArrayKeysAndValuesExtended,
             ],
-            'Empty array (old style)'                         => [
-                'propertyName' => 'expectsOldSchoolEmptyArray',
-                'expected'     => [],
-            ],
         ];
 
-    }//end dataTypeHandling()
+    }//end dataArrayPropertyExtending()
 
 
     /**
@@ -225,7 +244,7 @@ final class PropertyTypeHandlingTest extends TestCase
 
         if (isset($sniffObject) === false) {
             // Set up the ruleset.
-            $standard = __DIR__."/PropertyTypeHandlingTest.xml";
+            $standard = __DIR__.'/PropertyTypeHandlingTest.xml';
             $config   = new ConfigDouble(["--standard=$standard"]);
             $ruleset  = new Ruleset($config);
 
@@ -255,7 +274,7 @@ final class PropertyTypeHandlingTest extends TestCase
 
         if (isset($sniffObject) === false) {
             // Set up the ruleset.
-            $standard = __DIR__."/PropertyTypeHandlingInlineTest.xml";
+            $standard = __DIR__.'/PropertyTypeHandlingInlineTest.xml';
             $config   = new ConfigDouble(["--standard=$standard"]);
             $ruleset  = new Ruleset($config);
 

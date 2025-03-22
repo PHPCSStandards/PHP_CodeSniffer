@@ -22,14 +22,10 @@
 
 // phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsArrayWithOnlyValues[] string, 10, 1.5, null, true, false
 // phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsArrayWithKeysAndValues[] string=>string,10=>10,float=>1.5,null=>null,true=>true,false=>false
-// phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsArrayWithExtendedValues[] string, 15, another string
-// phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsArrayWithExtendedKeysAndValues[] 10=>10,string=>string,15=>15,another string=>another string
 // phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsEmptyArray[]
 
 // phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsOldSchoolArrayWithOnlyValues[] string, 10, 1.5, null, true, false
 // phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsOldSchoolArrayWithKeysAndValues[] string=>string,10=>10,float=>1.5,null=>null,true=>true,false=>false
-// phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsOldSchoolArrayWithExtendedValues[] string, 15, another string
-// phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsOldSchoolArrayWithExtendedKeysAndValues[] 10=>10,string=>string,15=>15,another string=>another string
 // phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsOldSchoolEmptyArray[]
 
 echo 'hello!';
