@@ -98,7 +98,7 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
      *
      * @see testNormalParentheses()
      *
-     * @return array<string, array<string, string|int|false>>
+     * @return array<string, array<string, string|bool>>
      */
     public static function dataNormalParentheses()
     {

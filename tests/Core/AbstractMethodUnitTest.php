@@ -164,9 +164,9 @@ abstract class AbstractMethodUnitTest extends TestCase
      * Note: the test delimiter comment MUST start with "/* test" to allow this function to
      * distinguish between comments used *in* a test and test delimiters.
      *
-     * @param string           $commentString The delimiter comment to look for.
-     * @param int|string|array $tokenType     The type of token(s) to look for.
-     * @param string           $tokenContent  Optional. The token content for the target token.
+     * @param string                       $commentString The delimiter comment to look for.
+     * @param int|string|array<int|string> $tokenType     The type of token(s) to look for.
+     * @param string                       $tokenContent  Optional. The token content for the target token.
      *
      * @return int
      */
@@ -183,10 +183,10 @@ abstract class AbstractMethodUnitTest extends TestCase
      * Note: the test delimiter comment MUST start with "/* test" to allow this function to
      * distinguish between comments used *in* a test and test delimiters.
      *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile     The file to find the token in.
-     * @param string                      $commentString The delimiter comment to look for.
-     * @param int|string|array            $tokenType     The type of token(s) to look for.
-     * @param string                      $tokenContent  Optional. The token content for the target token.
+     * @param \PHP_CodeSniffer\Files\File  $phpcsFile     The file to find the token in.
+     * @param string                       $commentString The delimiter comment to look for.
+     * @param int|string|array<int|string> $tokenType     The type of token(s) to look for.
+     * @param string                       $tokenContent  Optional. The token content for the target token.
      *
      * @return int
      *
