@@ -1,7 +1,7 @@
 <documentation title="Block Comment">
     <standard>
     <![CDATA[
-    A block comment is a multiline comment delimited by an opener "/*" and a closer "*/" which are each on their own line with the comment text in between.
+    A block comment is a multi-line comment delimited by an opener "/*" and a closer "*/" which are each on their own line with the comment text in between.
     ]]>
     </standard>
     <code_comparison>
