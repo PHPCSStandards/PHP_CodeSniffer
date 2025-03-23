@@ -36,7 +36,7 @@ class Standards
         $resolvedInstalledPaths = [];
         foreach ($installedPaths as $installedPath) {
             if (substr($installedPath, 0, 1) === '.') {
-                $installedPath = Common::realPath(__DIR__.$ds.'..'.$ds.'..'.$ds.$installedPath);
+                $installedPath = Common::realpath(__DIR__.$ds.'..'.$ds.'..'.$ds.$installedPath);
                 if ($installedPath === false) {
                     continue;
                 }
@@ -239,7 +239,7 @@ class Standards
         } else {
             // This could be a custom standard, installed outside our
             // standards directory.
-            $standard = Common::realPath($standard);
+            $standard = Common::realpath($standard);
             if ($standard === false) {
                 return false;
             }

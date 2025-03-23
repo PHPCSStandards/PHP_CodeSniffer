@@ -28,7 +28,7 @@ final class RecurseScopeMapWithNamespaceOperatorTest extends AbstractTokenizerTe
      *
      * @return void
      */
-    public function testScopeSetting($testMarker, $tokenTypes, $open=T_OPEN_CURLY_BRACKET, $close=T_CLOSE_CURLY_BRACKET)
+    public function testScopeSetting($testMarker, $tokenTypes, $open=[T_OPEN_CURLY_BRACKET], $close=[T_CLOSE_CURLY_BRACKET])
     {
         $tokens = $this->phpcsFile->getTokens();
 
