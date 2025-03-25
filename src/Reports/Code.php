@@ -153,10 +153,6 @@ class Code implements Report
 
         // The maximum amount of space an error message can use.
         $maxErrorSpace = ($width - $errorPaddingLength);
-        if ($showSources === true) {
-            // Account for the chars used to print colors.
-            $maxErrorSpace += 8;
-        }
 
         // Figure out the max report width we need and can use.
         $fileLength = strlen($file);
@@ -291,19 +287,33 @@ class Code implements Report
                         echo '] ';
                     }
 
-                    $message = $error['message'];
-                    $message = str_replace("\n", "\n".$errorPadding, $message);
-                    if ($showSources === true) {
-                        $message = "\033[1m".$message."\033[0m".' ('.$error['source'].')';
+                    $message       = wordwrap($error['message'], $maxErrorSpace, PHP_EOL);
+                    $paddedMessage = '';
+                    // Add padding and colors to each line of the output.
+                    foreach (explode(PHP_EOL, $message) as $i => $msgLine) {
+                        if ($i !== 0) {
+                            $paddedMessage .= PHP_EOL.$errorPadding;
+                        }
+
+                        if ($showSources === true) {
+                            $paddedMessage .= "\033[1m".$msgLine."\033[0m";
+                        } else {
+                            $paddedMessage .= $msgLine;
+                        }
                     }
 
-                    $errorMsg = wordwrap(
-                        $message,
-                        $maxErrorSpace,
-                        PHP_EOL.$errorPadding
-                    );
+                    if ($showSources === true) {
+                        // Add sniff code, taking care to manually wrap the line if needed.
+                        if ((strlen($msgLine) + strlen($error['source']) + 3) > $maxErrorSpace) {
+                            $paddedMessage .= PHP_EOL.$errorPadding;
+                        } else {
+                            $paddedMessage .= ' ';
+                        }
 
-                    echo $errorMsg.PHP_EOL;
+                        $paddedMessage .= '('.$error['source'].')';
+                    }
+
+                    echo $paddedMessage.PHP_EOL;
                 }//end foreach
             }//end foreach
 
