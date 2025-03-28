@@ -124,6 +124,8 @@ final class TypeIntersectionTest extends AbstractTokenizerTestCase
             'type for property using fully qualified names'               => ['/* testTypeIntersectionPropertyFullyQualified */'],
             'type for readonly property'                                  => ['/* testTypeIntersectionPropertyWithReadOnlyKeyword */'],
             'type for static readonly property'                           => ['/* testTypeIntersectionPropertyWithStaticKeyword */'],
+            'type for final property'                                     => ['/* testTypeIntersectionWithPHP84FinalKeyword */'],
+            'type for final property reversed modifier order'             => ['/* testTypeIntersectionWithPHP84FinalKeywordFirst */'],
             'type for method parameter'                                   => ['/* testTypeIntersectionParam1 */'],
             'type for method parameter, first in multi-intersect'         => ['/* testTypeIntersectionParam2 */'],
             'type for method parameter, last in multi-intersect'          => ['/* testTypeIntersectionParam3 */'],
