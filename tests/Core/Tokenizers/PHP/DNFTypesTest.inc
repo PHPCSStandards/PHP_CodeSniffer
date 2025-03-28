@@ -175,6 +175,12 @@ abstract class DNFTypes {
     /* testDNFTypePropertyWithOnlyStaticKeyword */
     static (A&B&C)|true $onlyStaticModified;
 
+    /* testDNFTypeWithPHP84FinalKeyword */
+    final (className&InterfaceName)|false $finalKeywordA;
+
+    /* testDNFTypeWithPHP84FinalKeywordAndStatic */
+    final static (\className&\InterfaceName)|false $finalKeywordB;
+
     public function paramTypes(
         /* testDNFTypeParam1WithAttribute */
         #[MyAttribute]

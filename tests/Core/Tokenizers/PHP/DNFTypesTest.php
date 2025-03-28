@@ -432,7 +432,6 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             'OO property type: multi-dnf fully qualified classes'         => [
                 'testMarker'  => '/* testDNFTypePropertyMultiFullyQualified */',
             ],
-
             'OO property type: multi-dnf with readonly keyword 1'         => [
                 'testMarker'  => '/* testDNFTypePropertyWithReadOnlyKeyword1 */',
             ],
@@ -445,6 +444,13 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             'OO property type: with only static keyword'                  => [
                 'testMarker'  => '/* testDNFTypePropertyWithOnlyStaticKeyword */',
             ],
+            'OO property type: with only final keyword'                   => [
+                'testMarker'  => '/* testDNFTypeWithPHP84FinalKeyword */',
+            ],
+            'OO property type: with final and static keyword'             => [
+                'testMarker'  => '/* testDNFTypeWithPHP84FinalKeywordAndStatic */',
+            ],
+
             'OO method param type: first param'                           => [
                 'testMarker'  => '/* testDNFTypeParam1WithAttribute */',
             ],
