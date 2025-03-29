@@ -1406,6 +1406,12 @@ class PHP extends Tokenizer
                     ];
                     $newStackPtr++;
 
+                    // Also modify the original token stack so that
+                    // future checks (like looking for T_NULLABLE) can
+                    // detect the T_READONLY token more easily.
+                    $tokens[$stackPtr][0] = T_READONLY;
+                    $token[0] = T_READONLY;
+
                     if (PHP_CODESNIFFER_VERBOSITY > 1 && $type !== T_READONLY) {
                         Common::printStatusMessage("* token $stackPtr changed from $type to T_READONLY", 2);
                     }
@@ -2006,6 +2012,7 @@ class PHP extends Tokenizer
                         || $tokenType === T_FN
                         || isset(Tokens::$methodPrefixes[$tokenType]) === true
                         || $tokenType === T_VAR
+                        || $tokenType === T_READONLY
                     ) {
                         if (PHP_CODESNIFFER_VERBOSITY > 1) {
                             Common::printStatusMessage("* token $stackPtr changed from ? to T_NULLABLE", 2);
