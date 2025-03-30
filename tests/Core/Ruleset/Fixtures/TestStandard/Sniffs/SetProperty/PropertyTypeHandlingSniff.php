@@ -2,7 +2,7 @@
 /**
  * Test fixture.
  *
- * @see \PHP_CodeSniffer\Tests\Core\Ruleset\SetSniffPropertyTest
+ * @see \PHP_CodeSniffer\Tests\Core\Ruleset\PropertyTypeHandlingTest
  */
 
 namespace Fixtures\TestStandard\Sniffs\SetProperty;

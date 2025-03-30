@@ -62,7 +62,7 @@ function multiple_attributes_on_parameter_test(#[ParamAttribute, AttributeWithPa
 
 /* testFqcnAttribute */
 #[Boo\QualifiedName, \Foo\FullyQualifiedName('foo')]
-function fqcn_attrebute_test() {}
+function fqcn_attribute_test() {}
 
 /* testNestedAttributes */
 #[Boo\QualifiedName(fn (#[AttributeOne('boo')] $value) => (string) $value)]

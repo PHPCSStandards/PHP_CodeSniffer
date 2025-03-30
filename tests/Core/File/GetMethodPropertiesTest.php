@@ -358,7 +358,7 @@ final class GetMethodPropertiesTest extends AbstractMethodUnitTest
 
 
     /**
-     * Test a method with a messy namespaces return type.
+     * Test a method with a messy namespaced return type.
      *
      * @return void
      */
