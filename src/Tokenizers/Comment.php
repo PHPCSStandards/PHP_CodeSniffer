@@ -16,14 +16,11 @@ class Comment
 
 
     /**
-     * Creates an array of tokens when given some PHP code.
+     * Splits a single doc block comment token up into something that can be easily iterated over.
      *
-     * Starts by using token_get_all() but does a lot of extra processing
-     * to insert information about the context of the token.
-     *
-     * @param string $string   The string to tokenize.
+     * @param string $string   The doc block comment string to parse.
      * @param string $eolChar  The EOL character to use for splitting strings.
-     * @param int    $stackPtr The position of the first token in the file.
+     * @param int    $stackPtr The position of the token in the "new"/final token stream.
      *
      * @return array<int, array<string, string|int|array<int>>>
      */

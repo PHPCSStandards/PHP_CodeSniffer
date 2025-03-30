@@ -14,7 +14,7 @@
  *     protected function processTokenWithinScope(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr, $currScope)
  *     {
  *         $className = $phpcsFile->getDeclarationName($currScope);
- *         echo 'encountered a method within class '.$className;
+ *         $phpcsFile->addWarning('encountered a method within class '.$className, $stackPtr, 'MethodFound');
  *     }
  * }
  * </code>

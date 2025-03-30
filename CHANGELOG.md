@@ -2268,7 +2268,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the help with this patch
 - Array properties set inside a ruleset.xml file can now extend a previous value instead of always overwriting it
     - e.g., if you include a ruleset that defines forbidden functions, can you now add to that list instead of having to redefine it
-    - To use this feature, add extends="true" to the property tag
+    - To use this feature, add extend="true" to the property tag
         - e.g., property name="forbiddenFunctionNames" type="array" extend="true"
     - Thanks to [Michael Moravec][@Majkl578] for the patch
 - If $XDG_CACHE_HOME is set and points to a valid directory, it will be used for caching instead of the system temp directory
