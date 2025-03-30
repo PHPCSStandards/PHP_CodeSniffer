@@ -214,7 +214,7 @@ jobs:
       - name: Install Composer dependencies
         uses: "ramsey/composer-install@v3"
         with:
-          composer-options: ${{ matrix.php == '8.5' && '--ignore-platform-req=php' || '' }}
+          composer-options: ${{ matrix.php == '8.5' && '--ignore-platform-req=php+' || '' }}
           custom-cache-suffix: $(date -u "+%Y-%m")
 
       # Note: The code style check is run multiple times against every PHP version
