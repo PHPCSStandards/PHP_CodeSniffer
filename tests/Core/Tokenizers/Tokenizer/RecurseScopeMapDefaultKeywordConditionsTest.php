@@ -283,9 +283,9 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
     {
         return [
             'simple_switch_default'                                     => [
-                'testMarker'       => '/* testSimpleSwitchDefault */',
-                'testOpenerMarker' => '/* testSimpleSwitchDefault */',
-                'testCloserMarker' => '/* testSimpleSwitchDefault */',
+                'testMarker'   => '/* testSimpleSwitchDefault */',
+                'openerMarker' => '/* testSimpleSwitchDefault */',
+                'closerMarker' => '/* testSimpleSwitchDefault */',
             ],
             'simple_switch_default_with_curlies'                        => [
                 // For a default structure with curly braces, the scope opener
@@ -293,37 +293,37 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
                 // However, scope conditions will not be set for open to close,
                 // but only for the open token up to the "break/return/continue" etc.
                 'testMarker'          => '/* testSimpleSwitchDefaultWithCurlies */',
-                'testOpenerMarker'    => '/* testSimpleSwitchDefaultWithCurliesScopeOpener */',
-                'testCloserMarker'    => '/* testSimpleSwitchDefaultWithCurliesScopeCloser */',
+                'openerMarker'        => '/* testSimpleSwitchDefaultWithCurliesScopeOpener */',
+                'closerMarker'        => '/* testSimpleSwitchDefaultWithCurliesScopeCloser */',
                 'conditionStopMarker' => '/* testSimpleSwitchDefaultWithCurliesConditionStop */',
             ],
             'switch_default_toplevel'                                   => [
-                'testMarker'       => '/* testSwitchDefault */',
-                'testOpenerMarker' => '/* testSwitchDefault */',
-                'testCloserMarker' => '/* testSwitchDefaultCloserMarker */',
+                'testMarker'   => '/* testSwitchDefault */',
+                'openerMarker' => '/* testSwitchDefault */',
+                'closerMarker' => '/* testSwitchDefaultCloserMarker */',
             ],
             'switch_default_nested_in_match_case'                       => [
-                'testMarker'       => '/* testSwitchDefaultNestedInMatchCase */',
-                'testOpenerMarker' => '/* testSwitchDefaultNestedInMatchCase */',
-                'testCloserMarker' => '/* testSwitchDefaultNestedInMatchCase */',
+                'testMarker'   => '/* testSwitchDefaultNestedInMatchCase */',
+                'openerMarker' => '/* testSwitchDefaultNestedInMatchCase */',
+                'closerMarker' => '/* testSwitchDefaultNestedInMatchCase */',
             ],
             'switch_default_nested_in_match_default'                    => [
-                'testMarker'       => '/* testSwitchDefaultNestedInMatchDefault */',
-                'testOpenerMarker' => '/* testSwitchDefaultNestedInMatchDefault */',
-                'testCloserMarker' => '/* testSwitchDefaultNestedInMatchDefault */',
+                'testMarker'   => '/* testSwitchDefaultNestedInMatchDefault */',
+                'openerMarker' => '/* testSwitchDefaultNestedInMatchDefault */',
+                'closerMarker' => '/* testSwitchDefaultNestedInMatchDefault */',
             ],
             'switch_and_default_sharing_scope_closer'                   => [
                 'testMarker'        => '/* testSwitchAndDefaultSharingScopeCloser */',
-                'testOpenerMarker'  => '/* testSwitchAndDefaultSharingScopeCloser */',
-                'testCloserMarker'  => '/* testSwitchAndDefaultSharingScopeCloserScopeCloser */',
+                'openerMarker'      => '/* testSwitchAndDefaultSharingScopeCloser */',
+                'closerMarker'      => '/* testSwitchAndDefaultSharingScopeCloserScopeCloser */',
                 'conditionStop'     => null,
                 'testContent'       => 'default',
                 'sharedScopeCloser' => true,
             ],
             'switch_and_default_with_nested_if_with_and_without_braces' => [
-                'testMarker'       => '/* testSwitchDefaultNestedIfWithAndWithoutBraces */',
-                'testOpenerMarker' => '/* testSwitchDefaultNestedIfWithAndWithoutBraces */',
-                'testCloserMarker' => '/* testSwitchDefaultNestedIfWithAndWithoutBracesScopeCloser */',
+                'testMarker'   => '/* testSwitchDefaultNestedIfWithAndWithoutBraces */',
+                'openerMarker' => '/* testSwitchDefaultNestedIfWithAndWithoutBraces */',
+                'closerMarker' => '/* testSwitchDefaultNestedIfWithAndWithoutBracesScopeCloser */',
             ],
         ];
 
