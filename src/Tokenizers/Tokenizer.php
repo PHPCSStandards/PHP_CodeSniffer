@@ -628,8 +628,7 @@ abstract class Tokenizer
         $curlyOpeners    = [];
         $this->numTokens = count($this->tokens);
 
-        $openers   = [];
-        $openOwner = null;
+        $openers = [];
 
         for ($i = 0; $i < $this->numTokens; $i++) {
             /*
@@ -637,26 +636,35 @@ abstract class Tokenizer
             */
 
             if (isset(Tokens::$parenthesisOpeners[$this->tokens[$i]['code']]) === true) {
-                $this->tokens[$i]['parenthesis_opener'] = null;
-                $this->tokens[$i]['parenthesis_closer'] = null;
-                $this->tokens[$i]['parenthesis_owner']  = $i;
-                $openOwner = $i;
+                // Find the next non-empty token.
+                $find = Tokens::$emptyTokens;
+                if ($this->tokens[$i]['code'] === T_FUNCTION) {
+                    $find[T_STRING]      = T_STRING;
+                    $find[T_BITWISE_AND] = T_BITWISE_AND;
+                }
 
-                if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    StatusWriter::write("=> Found parenthesis owner at $i", (count($openers) + 1));
+                for ($j = ($i + 1); isset($this->tokens[$j], $find[$this->tokens[$j]['code']]) === true; $j++);
+                if ($j < $this->numTokens && $this->tokens[$j]['code'] === T_OPEN_PARENTHESIS) {
+                    $openers[] = $j;
+                    $this->tokens[$i]['parenthesis_opener'] = $j;
+                    $this->tokens[$i]['parenthesis_closer'] = null;
+                    $this->tokens[$i]['parenthesis_owner']  = $i;
+
+                    $this->tokens[$j]['parenthesis_opener'] = $j;
+                    $this->tokens[$j]['parenthesis_owner']  = $i;
+
+                    if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                        StatusWriter::write("=> Found parenthesis owner at $i", (count($openers) + 1));
+                        StatusWriter::write("=> Found parenthesis opener at $j for $i", count($openers));
+                    }
+
+                    $i = $j;
                 }
             } else if ($this->tokens[$i]['code'] === T_OPEN_PARENTHESIS) {
                 $openers[] = $i;
                 $this->tokens[$i]['parenthesis_opener'] = $i;
-                if ($openOwner !== null) {
-                    if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                        StatusWriter::write("=> Found parenthesis opener at $i for $openOwner", count($openers));
-                    }
 
-                    $this->tokens[$openOwner]['parenthesis_opener'] = $i;
-                    $this->tokens[$i]['parenthesis_owner']          = $openOwner;
-                    $openOwner = null;
-                } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                if (PHP_CODESNIFFER_VERBOSITY > 1) {
                     StatusWriter::write("=> Found unowned parenthesis opener at $i", count($openers));
                 }
             } else if ($this->tokens[$i]['code'] === T_CLOSE_PARENTHESIS) {
