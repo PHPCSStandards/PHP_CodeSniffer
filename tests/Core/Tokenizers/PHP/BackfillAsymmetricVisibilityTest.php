@@ -35,9 +35,48 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
                 T_PUBLIC_SET,
                 T_PROTECTED_SET,
                 T_PRIVATE_SET,
-                // For error cases.
-                constant($testType),
-            ],
+            ]
+        );
+        $tokenArray = $tokens[$target];
+
+        $this->assertSame(
+            $testType,
+            $tokenArray['type'],
+            'Token tokenized as '.$tokenArray['type'].' (type)'
+        );
+        $this->assertSame(
+            constant($testType),
+            $tokenArray['code'],
+            'Token tokenized as '.$tokenArray['type'].' (code)'
+        );
+        $this->assertSame(
+            $testContent,
+            $tokenArray['content'],
+            'Token tokenized as '.$tokenArray['type'].' (content)'
+        );
+
+    }//end testAsymmetricVisibility()
+
+
+    /**
+     * Test that things that are not asymmetric visibility keywords are not
+     * tokenized as such.
+     *
+     * @param string $testMarker  The comment which prefaces the target token in the test file.
+     * @param string $testType    The expected token type
+     * @param string $testContent The token content to look for
+     *
+     * @dataProvider dataNotAsymmetricVisibility
+     * @covers       PHP_CodeSniffer\Tokenizers\PHP::processAdditional
+     *
+     * @return void
+     */
+    public function testNotAsymmetricVisibility($testMarker, $testType, $testContent)
+    {
+        $tokens     = $this->phpcsFile->getTokens();
+        $target     = $this->getTargetToken(
+            $testMarker,
+            [ constant($testType) ],
             $testContent
         );
         $tokenArray = $tokens[$target];
@@ -53,7 +92,7 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
             'Token tokenized as '.$tokenArray['type'].' (code)'
         );
 
-    }//end testAsymmetricVisibility()
+    }//end testNotAsymmetricVisibility()
 
 
     /**
@@ -127,31 +166,6 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
                 'testType'    => 'T_PRIVATE_SET',
                 'testContent' => 'PRIVATE(SET)',
             ],
-            'property, invalid case 1'                                 => [
-                'testMarker'  => '/* testInvalidUnsetProperty */',
-                'testType'    => 'T_PUBLIC',
-                'testContent' => 'public',
-            ],
-            'property, invalid case 2'                                 => [
-                'testMarker'  => '/* testInvalidSpaceProperty */',
-                'testType'    => 'T_PUBLIC',
-                'testContent' => 'public',
-            ],
-            'property, invalid case 3'                                 => [
-                'testMarker'  => '/* testInvalidCommentProperty */',
-                'testType'    => 'T_PROTECTED',
-                'testContent' => 'protected',
-            ],
-            'property, invalid case 4'                                 => [
-                'testMarker'  => '/* testInvalidGetProperty */',
-                'testType'    => 'T_PRIVATE',
-                'testContent' => 'private',
-            ],
-            'property, invalid case 5'                                 => [
-                'testMarker'  => '/* testInvalidNoParenProperty */',
-                'testType'    => 'T_PRIVATE',
-                'testContent' => 'private',
-            ],
 
             // Constructor property promotion.
             'promotion, public set, no read visibility, lowercase'     => [
@@ -214,6 +228,48 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
                 'testType'    => 'T_PRIVATE_SET',
                 'testContent' => 'PRIVATE(SET)',
             ],
+        ];
+
+    }//end dataAsymmetricVisibility()
+
+
+    /**
+     * Data provider.
+     *
+     * @see testNotAsymmetricVisibility()
+     *
+     * @return array<string, array<string, string>>
+     */
+    public static function dataNotAsymmetricVisibility()
+    {
+        return [
+            'property, invalid case 1'                                 => [
+                'testMarker'  => '/* testInvalidUnsetProperty */',
+                'testType'    => 'T_PUBLIC',
+                'testContent' => 'public',
+            ],
+            'property, invalid case 2'                                 => [
+                'testMarker'  => '/* testInvalidSpaceProperty */',
+                'testType'    => 'T_PUBLIC',
+                'testContent' => 'public',
+            ],
+            'property, invalid case 3'                                 => [
+                'testMarker'  => '/* testInvalidCommentProperty */',
+                'testType'    => 'T_PROTECTED',
+                'testContent' => 'protected',
+            ],
+            'property, invalid case 4'                                 => [
+                'testMarker'  => '/* testInvalidGetProperty */',
+                'testType'    => 'T_PRIVATE',
+                'testContent' => 'private',
+            ],
+            'property, invalid case 5'                                 => [
+                'testMarker'  => '/* testInvalidNoParenProperty */',
+                'testType'    => 'T_PRIVATE',
+                'testContent' => 'private',
+            ],
+
+            // Constructor property promotion.
             'promotion, invalid case 1'                                => [
                 'testMarker'  => '/* testInvalidUnsetCPP */',
                 'testType'    => 'T_PUBLIC',
@@ -238,6 +294,23 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
                 'testMarker'  => '/* testInvalidNoParenCPP */',
                 'testType'    => 'T_PRIVATE',
                 'testContent' => 'private',
+            ],
+
+            // Context sensitivitiy.
+            'protected as function name'                               => [
+                'testMarker'  => '/* testProtectedFunctionName */',
+                'testType'    => 'T_STRING',
+                'testContent' => 'protected',
+            ],
+            'public as function name'                                  => [
+                'testMarker'  => '/* testPublicFunctionName */',
+                'testType'    => 'T_STRING',
+                'testContent' => 'public',
+            ],
+            'set as parameter type'                                    => [
+                'testMarker'  => '/* testSetParameterType */',
+                'testType'    => 'T_STRING',
+                'testContent' => 'Set',
             ],
 
             // Live coding.

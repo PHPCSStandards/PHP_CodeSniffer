@@ -16,7 +16,7 @@ class PropertyDemo {
     public /* testPublicPrivateSetProperty */ private(set) mixed $priv3;
     public /* testPublicPrivateSetPropertyUC */ PRIVATE(SET) mixed $priv4;
 
-    /* testInvalidUnsetProperty */ public mixed $invalid1;
+    /* testInvalidUnsetProperty */ public(unset) mixed $invalid1;
     /* testInvalidSpaceProperty */ public (set) mixed $invalid2;
     /* testInvalidCommentProperty */ protected/* foo */(set) mixed $invalid3;
     /* testInvalidGetProperty */ private(get) mixed $invalid4;
@@ -45,6 +45,13 @@ class ConstructorPromotionDemo {
         /* testInvalidCommentCPP */ protected/* foo */(set) mixed $invalid3,
         /* testInvalidGetCPP */ private(get) mixed $invalid4,
         /* testInvalidNoParenCPP */ private set mixed $invalid5,
+    ) {}
+}
+
+class NonVisibilityCases {
+    function /* testProtectedFunctionName */ protected() {}
+    function /* testPublicFunctionName */ public(
+        /* testSetParameterType */ Set $setter
     ) {}
 }
 
