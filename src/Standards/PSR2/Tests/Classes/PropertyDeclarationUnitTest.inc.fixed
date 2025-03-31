@@ -103,7 +103,7 @@ class AsymmetricVisibility {
 
     protected(set) array $unfixed;
 
-    public protected(set) int $wrongOrder1;
+    protected(set) public int $wrongOrder1;
 
-    protected private(set) ?string $wrongOrder2;
+    private(set) protected ?string $wrongOrder2;
 }
