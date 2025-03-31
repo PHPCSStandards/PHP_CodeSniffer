@@ -223,9 +223,7 @@ class FunctionDeclarationSniff implements Sniff
             if ($use !== false) {
                 // If the opening and closing parenthesis of the use statement
                 // are also on the same line, this is a single line declaration.
-                $open  = $phpcsFile->findNext(T_OPEN_PARENTHESIS, ($use + 1));
-                $close = $tokens[$open]['parenthesis_closer'];
-                if ($tokens[$open]['line'] !== $tokens[$close]['line']) {
+                if ($tokens[$tokens[$use]['parenthesis_opener']]['line'] !== $tokens[$tokens[$use]['parenthesis_closer']]['line']) {
                     return true;
                 }
             }
@@ -281,9 +279,8 @@ class FunctionDeclarationSniff implements Sniff
         $closeBracket = $tokens[$stackPtr]['parenthesis_closer'];
         if ($tokens[$stackPtr]['code'] === T_CLOSURE) {
             $use = $phpcsFile->findNext(T_USE, ($closeBracket + 1), $tokens[$stackPtr]['scope_opener']);
-            if ($use !== false) {
-                $open         = $phpcsFile->findNext(T_OPEN_PARENTHESIS, ($use + 1));
-                $closeBracket = $tokens[$open]['parenthesis_closer'];
+            if ($use !== false && isset($tokens[$use]['parenthesis_closer']) === true) {
+                $closeBracket = $tokens[$use]['parenthesis_closer'];
             }
         }
 
@@ -420,9 +417,8 @@ class FunctionDeclarationSniff implements Sniff
         // of the USE statement.
         if ($tokens[$stackPtr]['code'] === T_CLOSURE) {
             $use = $phpcsFile->findNext(T_USE, ($closeBracket + 1), $tokens[$stackPtr]['scope_opener']);
-            if ($use !== false) {
-                $open         = $phpcsFile->findNext(T_OPEN_PARENTHESIS, ($use + 1));
-                $closeBracket = $tokens[$open]['parenthesis_closer'];
+            if ($use !== false && isset($tokens[$use]['parenthesis_closer']) === true) {
+                $closeBracket = $tokens[$use]['parenthesis_closer'];
 
                 $prev = $phpcsFile->findPrevious(
                     T_WHITESPACE,

@@ -84,9 +84,8 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
 
         if ($tokens[$stackPtr]['code'] === T_CLOSURE) {
             $use = $phpcsFile->findNext(T_USE, ($tokens[$stackPtr]['parenthesis_closer'] + 1), $tokens[$stackPtr]['scope_opener']);
-            if ($use !== false) {
-                $openBracket = $phpcsFile->findNext(T_OPEN_PARENTHESIS, ($use + 1), null);
-                $this->processBracket($phpcsFile, $openBracket);
+            if ($use !== false && isset($tokens[$use]['parenthesis_opener']) === true) {
+                $this->processBracket($phpcsFile, $tokens[$use]['parenthesis_opener']);
             }
         }
 
@@ -108,13 +107,8 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
         $closeBracket = $tokens[$openBracket]['parenthesis_closer'];
         $multiLine    = ($tokens[$openBracket]['line'] !== $tokens[$closeBracket]['line']);
 
-        if (isset($tokens[$openBracket]['parenthesis_owner']) === true) {
-            $stackPtr = $tokens[$openBracket]['parenthesis_owner'];
-        } else {
-            $stackPtr = $phpcsFile->findPrevious(T_USE, ($openBracket - 1));
-        }
-
-        $params = $phpcsFile->getMethodParameters($stackPtr);
+        $stackPtr = $tokens[$openBracket]['parenthesis_owner'];
+        $params   = $phpcsFile->getMethodParameters($stackPtr);
 
         if (empty($params) === true) {
             // Check spacing around parenthesis.

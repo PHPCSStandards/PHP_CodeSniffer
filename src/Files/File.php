@@ -1698,18 +1698,15 @@ class File
                     break;
                 }
 
+                // Skip over closure use statements.
                 if ($this->tokens[$i]['code'] === T_USE) {
-                    // Skip over closure use statements.
-                    for ($j = ($i + 1); $j < $this->numTokens && isset(Tokens::$emptyTokens[$this->tokens[$j]['code']]) === true; $j++);
-                    if ($this->tokens[$j]['code'] === T_OPEN_PARENTHESIS) {
-                        if (isset($this->tokens[$j]['parenthesis_closer']) === false) {
-                            // Live coding/parse error, stop parsing.
-                            break;
-                        }
-
-                        $i = $this->tokens[$j]['parenthesis_closer'];
-                        continue;
+                    if (isset($this->tokens[$i]['parenthesis_closer']) === false) {
+                        // Live coding/parse error, stop parsing.
+                        break;
                     }
+
+                    $i = $this->tokens[$i]['parenthesis_closer'];
+                    continue;
                 }
 
                 if ($this->tokens[$i]['code'] === T_NULLABLE) {
@@ -2067,6 +2064,7 @@ class File
                 if ($owner['code'] === T_FUNCTION
                     || $owner['code'] === T_CLOSURE
                     || $owner['code'] === T_FN
+                    || $owner['code'] === T_USE
                 ) {
                     $params = $this->getMethodParameters($this->tokens[$lastBracket]['parenthesis_owner']);
                     foreach ($params as $param) {
@@ -2076,19 +2074,6 @@ class File
                         }
                     }
                 }//end if
-            } else {
-                $prev = false;
-                for ($t = ($this->tokens[$lastBracket]['parenthesis_opener'] - 1); $t >= 0; $t--) {
-                    if ($this->tokens[$t]['code'] !== T_WHITESPACE) {
-                        $prev = $t;
-                        break;
-                    }
-                }
-
-                if ($prev !== false && $this->tokens[$prev]['code'] === T_USE) {
-                    // Closure use by reference.
-                    return true;
-                }
             }//end if
         }//end if
 
