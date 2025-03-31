@@ -243,85 +243,85 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
     public static function dataNotAsymmetricVisibility()
     {
         return [
-            'property, invalid case 1'                                 => [
+            'property, invalid case 1'   => [
                 'testMarker'  => '/* testInvalidUnsetProperty */',
                 'testType'    => 'T_PUBLIC',
                 'testContent' => 'public',
             ],
-            'property, invalid case 2'                                 => [
+            'property, invalid case 2'   => [
                 'testMarker'  => '/* testInvalidSpaceProperty */',
                 'testType'    => 'T_PUBLIC',
                 'testContent' => 'public',
             ],
-            'property, invalid case 3'                                 => [
+            'property, invalid case 3'   => [
                 'testMarker'  => '/* testInvalidCommentProperty */',
                 'testType'    => 'T_PROTECTED',
                 'testContent' => 'protected',
             ],
-            'property, invalid case 4'                                 => [
+            'property, invalid case 4'   => [
                 'testMarker'  => '/* testInvalidGetProperty */',
                 'testType'    => 'T_PRIVATE',
                 'testContent' => 'private',
             ],
-            'property, invalid case 5'                                 => [
+            'property, invalid case 5'   => [
                 'testMarker'  => '/* testInvalidNoParenProperty */',
                 'testType'    => 'T_PRIVATE',
                 'testContent' => 'private',
             ],
 
             // Constructor property promotion.
-            'promotion, invalid case 1'                                => [
+            'promotion, invalid case 1'  => [
                 'testMarker'  => '/* testInvalidUnsetCPP */',
                 'testType'    => 'T_PUBLIC',
                 'testContent' => 'public',
             ],
-            'promotion, invalid case 2'                                => [
+            'promotion, invalid case 2'  => [
                 'testMarker'  => '/* testInvalidSpaceCPP */',
                 'testType'    => 'T_PUBLIC',
                 'testContent' => 'public',
             ],
-            'promotion, invalid case 3'                                => [
+            'promotion, invalid case 3'  => [
                 'testMarker'  => '/* testInvalidCommentCPP */',
                 'testType'    => 'T_PROTECTED',
                 'testContent' => 'protected',
             ],
-            'promotion, invalid case 4'                                => [
+            'promotion, invalid case 4'  => [
                 'testMarker'  => '/* testInvalidGetCPP */',
                 'testType'    => 'T_PRIVATE',
                 'testContent' => 'private',
             ],
-            'promotion, invalid case 5'                                => [
+            'promotion, invalid case 5'  => [
                 'testMarker'  => '/* testInvalidNoParenCPP */',
                 'testType'    => 'T_PRIVATE',
                 'testContent' => 'private',
             ],
 
             // Context sensitivitiy.
-            'protected as function name'                               => [
+            'protected as function name' => [
                 'testMarker'  => '/* testProtectedFunctionName */',
                 'testType'    => 'T_STRING',
                 'testContent' => 'protected',
             ],
-            'public as function name'                                  => [
+            'public as function name'    => [
                 'testMarker'  => '/* testPublicFunctionName */',
                 'testType'    => 'T_STRING',
                 'testContent' => 'public',
             ],
-            'set as parameter type'                                    => [
+            'set as parameter type'      => [
                 'testMarker'  => '/* testSetParameterType */',
                 'testType'    => 'T_STRING',
                 'testContent' => 'Set',
             ],
 
             // Live coding.
-            'live coding'                                              => [
+            'live coding'                => [
                 'testMarker'  => '/* testLiveCoding */',
                 'testType'    => 'T_PRIVATE',
                 'testContent' => 'private',
             ],
         ];
 
-    }//end dataAsymmetricVisibility()
+    }//end dataNotAsymmetricVisibility()
 
 
 }//end class
