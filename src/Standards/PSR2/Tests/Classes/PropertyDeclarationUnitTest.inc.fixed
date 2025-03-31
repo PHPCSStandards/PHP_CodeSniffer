@@ -93,3 +93,17 @@ class FinalProperties {
     FINAL public ?int $wrongOrder1;
     final protected static ?string $wrongOrder2;
 }
+
+class AsymmetricVisibility {
+    private(set) int $foo,
+        $bar,
+        $var = 5;
+
+    public private(set) readonly ?string $spaces;
+
+    protected(set) array $unfixed;
+
+    public protected(set) int $wrongOrder1;
+
+    protected private(set) ?string $wrongOrder2;
+}
