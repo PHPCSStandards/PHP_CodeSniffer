@@ -63,6 +63,18 @@ class TypeIntersection
     /* testTypeIntersectionPropertyWithStaticKeyword */
     static Foo&Bar $obj;
 
+    /* testTypeIntersectionPropertyWithPrivateSet */
+    private(set) Foo&Bar $asym1;
+
+    /* testTypeIntersectionPropertyWithPublicPrivateSet */
+    public private(set) Foo&Bar $asym2;
+
+    /* testTypeIntersectionPropertyWithProtectedSet */
+    protected(set) Foo&Bar $asym3;
+
+    /* testTypeIntersectionPropertyWithPublicProtectedSet */
+    public protected(set) Foo&Bar $asym4;
+
     public function paramTypes(
         /* testTypeIntersectionParam1 */
         Foo&Bar $paramA /* testBitwiseAndParamDefaultValue */ = CONSTANT_A & CONSTANT_B,
