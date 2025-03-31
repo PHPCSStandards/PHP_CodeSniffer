@@ -151,3 +151,15 @@ class TypedConstants {
 
 // Global constants can not be typed.
 const MYCONST = true;
+
+// PHP 8.4 asymmetric visibility
+class WithAsym {
+
+    private(set) NULL|TRUE $asym1 = true;
+
+    public private(set) ?bool $asym2 = false;
+
+    protected(set) FALSE|string|null $asym3 = null;
+
+    public protected(set) Type|NULL|bool $asym4 = true;
+}
