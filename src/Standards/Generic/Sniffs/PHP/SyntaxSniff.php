@@ -56,10 +56,9 @@ class SyntaxSniff implements Sniff
             $this->phpPath = Config::getExecutablePath('php');
         }
 
-        $fileName = escapeshellarg($phpcsFile->getFilename());
-        $cmd      = Common::escapeshellcmd($this->phpPath)." -l -d display_errors=1 -d error_prepend_string='' $fileName 2>&1";
-        $output   = shell_exec($cmd);
-        $matches  = [];
+        $cmd     = $this->getPhpLintCommand($phpcsFile);
+        $output  = shell_exec($cmd);
+        $matches = [];
         if (preg_match('/^.*error:(.*) in .* on line ([0-9]+)/m', trim($output), $matches) === 1) {
             $error = trim($matches[1]);
             $line  = (int) $matches[2];
@@ -70,6 +69,27 @@ class SyntaxSniff implements Sniff
         return $phpcsFile->numTokens;
 
     }//end process()
+
+
+    /**
+     * Returns the command used to lint PHP code. Uses a different command when the content is
+     * provided via STDIN.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The File object.
+     *
+     * @return string The command used to lint PHP code.
+     */
+    private function getPhpLintCommand(File $phpcsFile)
+    {
+        if ($phpcsFile->getFilename() === 'STDIN') {
+            $content = $phpcsFile->getTokensAsString(0, $phpcsFile->numTokens);
+            return "echo ".escapeshellarg($content)." | ".Common::escapeshellcmd($this->phpPath)." -l -d display_errors=1 -d error_prepend_string='' 2>&1";
+        }
+
+        $fileName = escapeshellarg($phpcsFile->getFilename());
+        return Common::escapeshellcmd($this->phpPath)." -l -d display_errors=1 -d error_prepend_string='' $fileName 2>&1";
+
+    }//end getPhpLintCommand()
 
 
 }//end class
