@@ -23,6 +23,35 @@ echo "i = $i";
 end:
 echo 'j hit 17';
 
+switch($x){
+    case 3:
+        print($x);
+        if($x)
+            /* testGotoStatementInSwitch */
+            goto def;
+    default:
+        /* testGotoDeclarationInSwitch */
+        def:
+        print($x);
+}
+
+function hasGoto() {
+    if ($hide_form_and_script) {
+        /* testGotoStatementInFunction */
+        goto label;
+    }
+    ?>
+
+    <form action="" method="post">
+    <!-- some HTML here -->
+    </form>
+
+    <?php
+    /* testGotoDeclarationInFunction */
+    label:
+    do_something();
+}
+
 switch ($x) {
     /* testNotGotoDeclarationGlobalConstant */
     case CONSTANT:
