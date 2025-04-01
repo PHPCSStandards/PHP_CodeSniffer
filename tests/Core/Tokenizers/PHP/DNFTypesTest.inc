@@ -175,6 +175,18 @@ abstract class DNFTypes {
     /* testDNFTypePropertyWithOnlyStaticKeyword */
     static (A&B&C)|true $onlyStaticModified;
 
+    /* testDNFTypePropertyWithPrivateSet */
+    private(set) (A&B&C)|true $asym1;
+
+    /* testDNFTypePropertyWithPublicPrivateSet */
+    public private(set) (A&B&C)|true $asym2;
+
+    /* testDNFTypePropertyWithProtectedSet */
+    protected(set) (A&B&C)|true $asym3;
+
+    /* testDNFTypePropertyWithPublicProtectedSet */
+    public protected(set) (A&B&C)|true $asym4;
+
     public function paramTypes(
         /* testDNFTypeParam1WithAttribute */
         #[MyAttribute]

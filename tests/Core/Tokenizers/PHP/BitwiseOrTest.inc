@@ -75,6 +75,18 @@ class TypeUnion
     /* testTypeUnionPropertyWithOnlyStaticKeyword */
     static Foo|Bar $obj;
 
+    /* testTypeUnionPropertyPrivateSet */
+    private(set) Foo|Bar $asym1;
+
+    /* testTypeUnionPropertyPublicPrivateSet */
+    public private(set) Foo|Bar $asym2;
+
+    /* testTypeUnionPropertyProtected */
+    protected(set) Foo|Bar $asym3;
+
+    /* testTypeUnionPropertyPublicProtected */
+    public protected(set) Foo|Bar $asym4;
+
     public function paramTypes(
         /* testTypeUnionParam1 */
         int|float $paramA /* testBitwiseOrParamDefaultValue */ = CONSTANT_A | CONSTANT_B,
