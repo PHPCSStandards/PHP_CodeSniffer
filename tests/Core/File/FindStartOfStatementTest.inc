@@ -157,11 +157,19 @@ switch ($foo) {
         /* testInsideCaseThrowStatement */
         throw new Exception();
 
+    case 6:
+        $var = doSomething();
+        /* testInsideCaseGotoStatement */
+        goto myLabel;
+
     /* testDefaultStatement */
     default:
         /* testInsideDefaultContinueStatement */
         continue $var;
 }
+
+myLabel:
+do_something();
 
 match ($var) {
     true =>

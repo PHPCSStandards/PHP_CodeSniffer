@@ -659,6 +659,16 @@ final class FindStartOfStatementTest extends AbstractMethodUnitTest
                 'targets'        => T_CLOSE_PARENTHESIS,
                 'expectedTarget' => T_THROW,
             ],
+            'Goto should be start for contents of the goto statement - goto label'                    => [
+                'testMarker'     => '/* testInsideCaseGotoStatement */',
+                'targets'        => T_STRING,
+                'expectedTarget' => T_GOTO,
+            ],
+            'Goto should be start for contents of the goto statement - semicolon'                     => [
+                'testMarker'     => '/* testInsideCaseGotoStatement */',
+                'targets'        => T_SEMICOLON,
+                'expectedTarget' => T_GOTO,
+            ],
             'Default keyword should be start of default statement - default itself'                   => [
                 'testMarker'     => '/* testDefaultStatement */',
                 'targets'        => T_DEFAULT,
