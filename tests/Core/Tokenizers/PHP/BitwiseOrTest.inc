@@ -75,6 +75,15 @@ class TypeUnion
     /* testTypeUnionPropertyWithOnlyStaticKeyword */
     static Foo|Bar $obj;
 
+    /* testTypeUnionWithPHP84FinalKeyword */
+    final int|string $finalKeywordA;
+
+    /* testTypeUnionWithPHP84FinalKeywordFirst */
+    final private float|null $finalKeywordB;
+
+    /* testTypeUnionWithPHP84FinalKeywordAndFQN */
+    final \MyClass|false $finalKeywordC;
+
     public function paramTypes(
         /* testTypeUnionParam1 */
         int|float $paramA /* testBitwiseOrParamDefaultValue */ = CONSTANT_A | CONSTANT_B,
