@@ -52,6 +52,39 @@ function hasGoto() {
     do_something();
 }
 
+// The "other" keywords are perfectly valid to be used as goto labels (just really confusing).
+function gotoLabels() {
+    /* testParentAsGotoTargetShouldBeString */
+    goto parent;
+    /* testParentAsGotoLabelShouldBeGotoLabel */
+    parent:
+        doSomething();
+
+    /* testSelfAsGotoTargetShouldBeString */
+    goto self;
+    /* testSelfAsGotoLabelShouldBeGotoLabel */
+    self:
+        doSomething();
+
+    /* testTrueAsGotoTargetShouldBeString */
+    goto true;
+    /* testTrueAsGotoLabelShouldBeGotoLabel */
+    true:
+        doSomething();
+
+    /* testFalseAsGotoTargetShouldBeString */
+    goto false;
+    /* testFalseAsGotoLabelShouldBeGotoLabel */
+    false:
+        doSomething();
+
+    /* testNullAsGotoTargetShouldBeString */
+    goto null;
+    /* testNullAsGotoLabelShouldBeGotoLabel */
+    null:
+        doSomething();
+}
+
 switch ($x) {
     /* testNotGotoDeclarationGlobalConstant */
     case CONSTANT:
@@ -70,6 +103,21 @@ switch ($x) {
 
     /* testNotGotoDeclarationClassProperty */
     case $obj->property:
+        // Do something.
+        break;
+
+    /* testNotGotoDeclarationTrueInCase */
+    case true:
+        // Do something.
+        break;
+
+    /* testNotGotoDeclarationFalseInCase */
+    case false:
+        // Do something.
+        break;
+
+    /* testNotGotoDeclarationNullInCase */
+    case null:
         // Do something.
         break;
 }

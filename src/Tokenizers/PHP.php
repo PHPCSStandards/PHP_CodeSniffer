@@ -494,6 +494,7 @@ class PHP extends Tokenizer
         T_USE                      => true,
         T_NAMESPACE                => true,
         T_PAAMAYIM_NEKUDOTAYIM     => true,
+        T_GOTO                     => true,
     ];
 
     /**

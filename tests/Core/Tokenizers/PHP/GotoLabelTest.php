@@ -69,6 +69,27 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
                 'testMarker'  => '/* testGotoStatementInFunction */',
                 'testContent' => 'label',
             ],
+
+            'goto parent'                                           => [
+                'testMarker'  => '/* testParentAsGotoTargetShouldBeString */',
+                'testContent' => 'parent',
+            ],
+            'goto self'                                             => [
+                'testMarker'  => '/* testSelfAsGotoTargetShouldBeString */',
+                'testContent' => 'self',
+            ],
+            'goto true'                                             => [
+                'testMarker'  => '/* testTrueAsGotoTargetShouldBeString */',
+                'testContent' => 'true',
+            ],
+            'goto false'                                            => [
+                'testMarker'  => '/* testFalseAsGotoTargetShouldBeString */',
+                'testContent' => 'false',
+            ],
+            'goto null'                                             => [
+                'testMarker'  => '/* testNullAsGotoTargetShouldBeString */',
+                'testContent' => 'null',
+            ],
         ];
 
     }//end dataGotoStatement()
@@ -130,6 +151,27 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
                 'testMarker'  => '/* testGotoDeclarationInFunction */',
                 'testContent' => 'label',
             ],
+
+            'label in goto declaration - parent' => [
+                'testMarker'  => '/* testParentAsGotoLabelShouldBeGotoLabel */',
+                'testContent' => 'parent',
+            ],
+            'label in goto declaration - self'   => [
+                'testMarker'  => '/* testSelfAsGotoLabelShouldBeGotoLabel */',
+                'testContent' => 'self',
+            ],
+            'label in goto declaration - true'   => [
+                'testMarker'  => '/* testTrueAsGotoLabelShouldBeGotoLabel */',
+                'testContent' => 'true',
+            ],
+            'label in goto declaration - false'  => [
+                'testMarker'  => '/* testFalseAsGotoLabelShouldBeGotoLabel */',
+                'testContent' => 'false',
+            ],
+            'label in goto declaration - null'   => [
+                'testMarker'  => '/* testNullAsGotoLabelShouldBeGotoLabel */',
+                'testContent' => 'null',
+            ],
         ];
 
     }//end dataGotoDeclaration()
@@ -138,21 +180,35 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
     /**
      * Verify that the constant used in a switch - case statement is not confused with a goto label.
      *
-     * @param string $testMarker  The comment prefacing the target token.
-     * @param string $testContent The token content to expect.
+     * @param string $testMarker   The comment prefacing the target token.
+     * @param string $testContent  The token content to expect.
+     * @param string $expectedType Optional. The token type which is expected (not T_GOTO_LABEL).
+     *                             Defaults to `T_STRING`.
      *
      * @dataProvider dataNotAGotoDeclaration
      *
      * @return void
      */
-    public function testNotAGotoDeclaration($testMarker, $testContent)
+    public function testNotAGotoDeclaration($testMarker, $testContent, $expectedType='T_STRING')
     {
+        $targetTypes  = [
+            T_STRING     => T_STRING,
+            T_GOTO_LABEL => T_GOTO_LABEL,
+        ];
+        $expectedCode = T_STRING;
+
+        if ($expectedType !== 'T_STRING') {
+            $expectedCode = constant($expectedType);
+            $targetTypes[$expectedCode] = $expectedCode;
+        }
+
+        $target = $this->getTargetToken($testMarker, $targetTypes, $testContent);
+
         $tokens     = $this->phpcsFile->getTokens();
-        $target     = $this->getTargetToken($testMarker, [T_GOTO_LABEL, T_STRING], $testContent);
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
-        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
+        $this->assertSame($expectedCode, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (code)');
+        $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (type)');
 
     }//end testNotAGotoDeclaration()
 
@@ -182,6 +238,21 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
             'not goto label - class property use followed by switch-case colon'  => [
                 'testMarker'  => '/* testNotGotoDeclarationClassProperty */',
                 'testContent' => 'property',
+            ],
+            'not goto label - true followed by switch-case colon'                => [
+                'testMarker'   => '/* testNotGotoDeclarationTrueInCase */',
+                'testContent'  => 'true',
+                'expectedType' => 'T_TRUE',
+            ],
+            'not goto label - false followed by switch-case colon'               => [
+                'testMarker'   => '/* testNotGotoDeclarationFalseInCase */',
+                'testContent'  => 'false',
+                'expectedType' => 'T_FALSE',
+            ],
+            'not goto label - null followed by switch-case colon'                => [
+                'testMarker'   => '/* testNotGotoDeclarationNullInCase */',
+                'testContent'  => 'null',
+                'expectedType' => 'T_NULL',
             ],
             'not goto label - global constant followed by ternary else'          => [
                 'testMarker'  => '/* testNotGotoDeclarationGlobalConstantInTernary */',
