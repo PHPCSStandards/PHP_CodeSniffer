@@ -7,16 +7,12 @@
     <code_comparison>
         <code title="Valid: Single spaces after a comma.">
         <![CDATA[
-function foo($bar,<em> </em>$baz)
-{
-}
+foo($bar,<em> </em>$baz);
         ]]>
         </code>
         <code title="Invalid: No spaces after a comma.">
         <![CDATA[
-function foo($bar,<em></em>$baz)
-{
-}
+foo($bar,<em></em>$baz);
         ]]>
         </code>
     </code_comparison>
