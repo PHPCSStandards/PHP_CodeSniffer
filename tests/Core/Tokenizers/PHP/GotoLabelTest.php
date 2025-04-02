@@ -176,8 +176,16 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
                 'testContent' => 'CONSTANT',
             ],
             'not goto label - class constant followed by switch-case colon'      => [
-                'testMarker'  => '/* testNotGotoDeclarationClassConstant */',
+                'testMarker'  => '/* testNotGotoDeclarationClassConstantInCase */',
                 'testContent' => 'CONSTANT',
+            ],
+            'not goto label - spacey class constant in switch-case'              => [
+                'testMarker'  => '/* testNotGotoDeclarationClassConstantWithSpace */',
+                'testContent' => 'MY_CONST',
+            ],
+            'not goto label - class constant with comment in switch-case'        => [
+                'testMarker'  => '/* testNotGotoDeclarationClassConstantWithComment */',
+                'testContent' => 'OTHER_CONST',
             ],
             'not goto label - class property use followed by switch-case colon'  => [
                 'testMarker'  => '/* testNotGotoDeclarationClassProperty */',
