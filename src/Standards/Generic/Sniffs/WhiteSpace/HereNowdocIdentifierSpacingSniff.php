@@ -54,7 +54,7 @@ class HereNowdocIdentifierSpacingSniff implements Sniff
 
         $phpcsFile->recordMetric($stackPtr, 'Heredoc/nowdoc identifier', 'space between <<< and ID');
 
-        $error = 'There should be no space between the <<< and the heredoc/nowdoc identifier string';
+        $error = 'There should be no space between the <<< and the heredoc/nowdoc identifier string. Found: %s';
         $data  = [$tokens[$stackPtr]['content']];
 
         $fix = $phpcsFile->addFixableError($error, $stackPtr, 'SpaceFound', $data);
