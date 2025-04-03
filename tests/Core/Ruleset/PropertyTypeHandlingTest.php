@@ -203,13 +203,83 @@ final class PropertyTypeHandlingTest extends TestCase
         ];
 
         return [
-            'Array with only values extended'     => [
+            'Array with only values extended'                                   => [
                 'propertyName' => 'expectsArrayWithExtendedValues',
                 'expected'     => $expectedArrayOnlyValuesExtended,
             ],
-            'Array with keys and values extended' => [
+            'Array with keys and values extended'                               => [
                 'propertyName' => 'expectsArrayWithExtendedKeysAndValues',
                 'expected'     => $expectedArrayKeysAndValuesExtended,
+            ],
+
+            'Empty array in ruleset overrules existing value'                   => [
+                'propertyName' => 'expectsNonEmptyArrayOverruledToEmpty',
+                'expected'     => [],
+            ],
+            'Non empty array in ruleset overrules existing value'               => [
+                'propertyName' => 'expectsNonEmptyArrayOverruledToNewValue',
+                'expected'     => ['another key' => 'another value'],
+            ],
+
+            'Extending pre-existing value when there is no value'               => [
+                'propertyName' => 'expectsExtendsWillJustSetToArrayWhenNoDefaultValuePresent',
+                'expected'     => ['foo' => 'bar'],
+            ],
+            'Extending pre-existing non-array value will overrule'              => [
+                'propertyName' => 'expectsExtendsWillOverruleNonArrayToNewArrayValue',
+                'expected'     => ['phpcbf'],
+            ],
+            'Non empty array extended by non-empty array'                       => [
+                'propertyName' => 'expectsNonEmptyArrayExtendedWithNonEmptyArray',
+                'expected'     => [
+                    'key'         => 'value',
+                    'another key' => 'another value',
+                ],
+            ],
+            'Non empty array keeps value when extended by empty array'          => [
+                'propertyName' => 'expectsNonEmptyArrayKeepsValueWhenExtendedWithEmptyArray',
+                'expected'     => ['key' => 'value'],
+            ],
+
+            'Non empty array double extended get both additions'                => [
+                'propertyName' => 'expectsNonEmptyArrayDoubleExtendedWithNonEmptyArray',
+                'expected'     => [
+                    'key' => 'value',
+                    'foo' => 'bar',
+                    'bar' => 'baz',
+                    'baz' => 'boo',
+                ],
+            ],
+
+            'Values in non empty associative array can be redefined'            => [
+                'propertyName' => 'expectsValuesInNonEmptyAssociativeArrayCanBeRedefined',
+                'expected'     => [
+                    'foo' => 'bar',
+                    'bar' => 'foo',
+                ],
+            ],
+            'Values in non empty numerically indexed array are not overwritten' => [
+                'propertyName' => 'expectsValuesInNonEmptyNumericallyIndexedArrayAreNotOverwritten',
+                'expected'     => [
+                    'valueA',
+                    'valueB',
+                    'valueC',
+                ],
+            ],
+            'Original values are untouched, while new values get cleaned'       => [
+                'propertyName' => 'expectsPreexistingValuesStayTheSameWhileNewValuesGetCleaned',
+                'expected'     => [
+                    'predefinedA' => 'true',
+                    'predefinedB' => '  null  ',
+                    'newValueA' => false,
+                    'newValueB' => null,
+                    '1.5', // phpcs:ignore Squiz.Arrays.ArrayDeclaration.NoKeySpecified -- That is largely what we are testing...
+                    true,
+                ],
+            ],
+            'Invalid "extend" used on a non-array property'                     => [
+                'propertyName' => 'expectsStringNotArray',
+                'expected'     => 'some value',
             ],
         ];
 

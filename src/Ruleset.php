@@ -1267,11 +1267,14 @@ class Ruleset
                         }
 
                         $values = [];
-                        if (isset($prop['extend']) === true
-                            && (string) $prop['extend'] === 'true'
-                            && isset($this->ruleset[$code]['properties'][$name]['value']) === true
-                        ) {
-                            $values = $this->ruleset[$code]['properties'][$name]['value'];
+                        $extend = false;
+                        if (isset($prop['extend']) === true && (string) $prop['extend'] === 'true') {
+                            if (isset($this->ruleset[$code]['properties'][$name]['value']) === true) {
+                                $values = $this->ruleset[$code]['properties'][$name]['value'];
+                                $extend = $this->ruleset[$code]['properties'][$name]['extend'];
+                            } else {
+                                $extend = true;
+                            }
                         }
 
                         if (isset($prop->element) === true) {
@@ -1296,8 +1299,9 @@ class Ruleset
                         }
 
                         $this->ruleset[$code]['properties'][$name] = [
-                            'value' => $values,
-                            'scope' => $propertyScope,
+                            'value'  => $values,
+                            'scope'  => $propertyScope,
+                            'extend' => $extend,
                         ];
                         if (PHP_CODESNIFFER_VERBOSITY > 1) {
                             $statusMessage = "=> array property \"$name\" set to \"$printValue\"";
@@ -1602,6 +1606,7 @@ class Ruleset
      * @param string $sniffClass The class name of the sniff.
      * @param string $name       The name of the property to change.
      * @param array  $settings   Array with the new value of the property and the scope of the property being set.
+     *                           May optionally include an `extend` key to indicate a pre-existing array value should be extended.
      *
      * @return void
      *
@@ -1660,7 +1665,16 @@ class Ruleset
             $value = $this->getRealPropertyValue($values);
         }
 
-        $sniffObject->$propertyName = $value;
+        if (isset($settings['extend']) === true
+            && $settings['extend'] === true
+            && isset($sniffObject->$propertyName) === true
+            && is_array($sniffObject->$propertyName) === true
+            && is_array($value) === true
+        ) {
+            $sniffObject->$propertyName = array_merge($sniffObject->$propertyName, $value);
+        } else {
+            $sniffObject->$propertyName = $value;
+        }
 
     }//end setSniffProperty()
 
