@@ -124,6 +124,14 @@ class Ruleset
     private $config = null;
 
     /**
+     * The `<config>` directives which have been applied.
+     *
+     * @var array<string, int> Key is the name of the config. Value is the ruleset depth
+     *                         at which this config was applied (if not overruled from the CLI).
+     */
+    private $configDirectivesApplied = [];
+
+    /**
      * An array of the names of sniffs which have been marked as deprecated.
      *
      * The key is the sniff code and the value
@@ -574,17 +582,36 @@ class Ruleset
         }//end foreach
 
         // Process custom sniff config settings.
+        // Processing rules:
+        // - Highest level ruleset take precedence.
+        // - If the same config is being set from two rulesets at the same level, *last* one "wins".
         foreach ($ruleset->{'config'} as $config) {
             if ($this->shouldProcessElement($config) === false) {
                 continue;
             }
 
-            $this->config->setConfigData((string) $config['name'], (string) $config['value'], true);
-            if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                echo str_repeat("\t", $depth);
-                echo "\t=> set config value ".(string) $config['name'].': '.(string) $config['value'].PHP_EOL;
+            $name = (string) $config['name'];
+
+            if (isset($this->configDirectivesApplied[$name]) === true
+                && $this->configDirectivesApplied[$name] < $depth
+            ) {
+                // Ignore this config. A higher level ruleset has already set a value for this directive.
+                if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                    echo str_repeat("\t", $depth);
+                    echo "\t=> ignoring config value ".$name.': '.(string) $config['value'].' => already changed by a higher level ruleset '.PHP_EOL;
+                }
+
+                continue;
             }
-        }
+
+            $this->configDirectivesApplied[$name] = $depth;
+
+            $applied = $this->config->setConfigData($name, (string) $config['value'], true);
+            if ($applied === true && PHP_CODESNIFFER_VERBOSITY > 1) {
+                echo str_repeat("\t", $depth);
+                echo "\t=> set config value ".$name.': '.(string) $config['value'].PHP_EOL;
+            }
+        }//end foreach
 
         foreach ($ruleset->rule as $rule) {
             if (isset($rule['ref']) === false
