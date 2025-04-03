@@ -2558,6 +2558,7 @@ class File
                 && $this->tokens[$i]['code'] !== T_CONTINUE
                 && $this->tokens[$i]['code'] !== T_THROW
                 && $this->tokens[$i]['code'] !== T_EXIT
+                && $this->tokens[$i]['code'] !== T_GOTO
             ) {
                 // Found the end of the previous scope block.
                 return $lastNotEmpty;

@@ -380,6 +380,7 @@ class SwitchDeclarationSniff implements Sniff
                 T_CONTINUE => T_CONTINUE,
                 T_THROW    => T_THROW,
                 T_EXIT     => T_EXIT,
+                T_GOTO     => T_GOTO,
             ];
 
             $terminator = $phpcsFile->findStartOfStatement(($lastToken - 1));
