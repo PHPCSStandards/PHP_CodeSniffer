@@ -71,10 +71,10 @@ $a = [
 /* testYield */
 $a = fn($x) => yield 'k' => $x;
 
-/* testNullableNamespace */
+/* testNullableUnqualifiedClassName */
 $a = fn(?\DateTime $x) : ?\DateTime => $x;
 
-/* testNamespaceOperatorInTypes */
+/* testNamespaceRelativeClassNameInTypes */
 $fn = fn(namespace\Foo $a) : ?namespace\Foo => $a;
 
 /* testSelfReturnType */
