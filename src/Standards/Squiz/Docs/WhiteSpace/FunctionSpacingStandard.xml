@@ -1,0 +1,185 @@
+<documentation title="Function Spacing">
+    <standard>
+    <![CDATA[
+    There should be exactly 2 blank lines before a function within a statement group or control structure when it is the first block of code.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Exactly 2 blank lines before the first function.">
+        <![CDATA[
+class MyClass
+{<em>
+
+
+</em>    public function foo() {
+    }
+
+
+}
+        ]]>
+        </code>
+        <code title="Invalid: Too few blank lines before the first function.">
+        <![CDATA[
+class MyClass
+{<em>
+
+</em>    public function foo() {
+    }
+
+
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: Exactly 2 blank lines before the first function.">
+        <![CDATA[
+if ($something) {<em>
+
+
+</em>    function foo() {
+    }
+
+
+    function bar() {
+    }
+
+
+}
+        ]]>
+        </code>
+        <code title="Invalid: Too many blank lines before the first function.">
+        <![CDATA[
+if ($something) {<em>
+
+
+
+</em>    function foo() {
+    }
+
+
+    function bar() {
+    }
+
+
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There should be exactly 2 blank lines before and after a function declaration.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Exactly 2 blank lines before and after function declarations.">
+        <![CDATA[
+interface MyInterface
+{
+
+
+    public function foo();<em>
+
+
+</em>    public function bar();<em>
+
+
+</em>    public function baz();
+
+
+}
+        ]]>
+        </code>
+        <code title="Invalid: Incorrect number of blank lines before/after function declarations.">
+        <![CDATA[
+interface MyInterface
+{
+
+
+    public function foo();<em>
+</em>    public function bar();<em>
+
+
+
+</em>    public function baz();
+
+
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    There should be exactly two blank lines after a function within a statement group or control structure when it is the last block of code.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Exactly 2 blank lines after the last function.">
+        <![CDATA[
+trait MyTrait
+{
+
+
+    public function foo() {
+    }
+
+
+    public function bar() {
+    }<em>
+
+
+</em>}
+        ]]>
+        </code>
+        <code title="Invalid: Too few blank lines after the last function.">
+        <![CDATA[
+trait MyTrait
+{
+
+
+    public function foo() {
+    }
+
+
+    public function bar() {
+    }<em>
+</em>}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: Exactly 2 blank lines after the last function.">
+        <![CDATA[
+if ($something) {
+
+
+    function foo() {
+    }
+
+
+    function bar() {
+    }<em>
+
+
+</em>}
+        ]]>
+        </code>
+        <code title="Invalid: Too many blank lines after the last function.">
+        <![CDATA[
+if ($something) {
+
+
+    function foo() {
+    }
+
+
+    function bar() {
+    }<em>
+
+
+
+</em>}
+        ]]>
+        </code>
+    </code_comparison>
+</documentation>
