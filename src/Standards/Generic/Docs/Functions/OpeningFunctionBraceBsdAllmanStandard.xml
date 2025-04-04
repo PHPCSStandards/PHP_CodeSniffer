@@ -9,14 +9,14 @@
         <![CDATA[
 function fooFunction($arg1, $arg2 = '')
 <em>{</em>
-    ...
+    // Do something
 }
         ]]>
         </code>
         <code title="Invalid: Brace on same line.">
         <![CDATA[
 function fooFunction($arg1, $arg2 = '') <em>{</em>
-    ...
+    // Do something
 }
         ]]>
         </code>
