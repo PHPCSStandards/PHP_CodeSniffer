@@ -1607,22 +1607,20 @@ class File
 
         if ($this->tokens[$stackPtr]['code'] === T_FUNCTION) {
             $valid = [
-                T_PUBLIC      => T_PUBLIC,
-                T_PRIVATE     => T_PRIVATE,
-                T_PROTECTED   => T_PROTECTED,
-                T_STATIC      => T_STATIC,
-                T_FINAL       => T_FINAL,
-                T_ABSTRACT    => T_ABSTRACT,
-                T_WHITESPACE  => T_WHITESPACE,
-                T_COMMENT     => T_COMMENT,
-                T_DOC_COMMENT => T_DOC_COMMENT,
+                T_PUBLIC     => T_PUBLIC,
+                T_PRIVATE    => T_PRIVATE,
+                T_PROTECTED  => T_PROTECTED,
+                T_STATIC     => T_STATIC,
+                T_FINAL      => T_FINAL,
+                T_ABSTRACT   => T_ABSTRACT,
+                T_WHITESPACE => T_WHITESPACE,
+                T_COMMENT    => T_COMMENT,
             ];
         } else {
             $valid = [
-                T_STATIC      => T_STATIC,
-                T_WHITESPACE  => T_WHITESPACE,
-                T_COMMENT     => T_COMMENT,
-                T_DOC_COMMENT => T_DOC_COMMENT,
+                T_STATIC     => T_STATIC,
+                T_WHITESPACE => T_WHITESPACE,
+                T_COMMENT    => T_COMMENT,
             ];
         }
 
@@ -1981,12 +1979,11 @@ class File
         }
 
         $valid = [
-            T_FINAL       => T_FINAL,
-            T_ABSTRACT    => T_ABSTRACT,
-            T_READONLY    => T_READONLY,
-            T_WHITESPACE  => T_WHITESPACE,
-            T_COMMENT     => T_COMMENT,
-            T_DOC_COMMENT => T_DOC_COMMENT,
+            T_FINAL      => T_FINAL,
+            T_ABSTRACT   => T_ABSTRACT,
+            T_READONLY   => T_READONLY,
+            T_WHITESPACE => T_WHITESPACE,
+            T_COMMENT    => T_COMMENT,
         ];
 
         $isAbstract = false;
