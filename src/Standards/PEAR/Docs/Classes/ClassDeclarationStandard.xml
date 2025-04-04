@@ -19,4 +19,78 @@ class Foo <em>{</em>
         ]]>
         </code>
     </code_comparison>
+    <code_comparison>
+        <code title="Valid: Opening brace on the correct line.">
+        <![CDATA[
+class Foo
+<em>{</em>
+}
+        ]]>
+        </code>
+        <code title="Invalid: Newline between declaration and opening brace.">
+        <![CDATA[
+class Foo
+<em></em>
+{
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: Opening brace is on a line by itself.">
+        <![CDATA[
+class Foo
+<em>{</em>
+}
+        ]]>
+        </code>
+        <code title="Invalid: Opening brace is not alone on its line.">
+        <![CDATA[
+class Foo
+{<em> public function __construct() {}</em>
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    The opening brace must be indented to the same depth as the class declaration.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Opening brace indentation depth matches the class definition.">
+        <![CDATA[
+if (!class_exists('Foo')) {
+    abstract class Foo
+    <em>{</em>
+    }
+}
+        ]]>
+        </code>
+        <code title="Invalid: Expected 4 spaces before opening brace; 0 found.">
+        <![CDATA[
+if (!class_exists('Foo')) {
+    abstract class Foo
+<em>{</em>
+}
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <code_comparison>
+        <code title="Valid: Opening brace indentation depth matches the class definition.">
+        <![CDATA[
+class Foo
+<em>{</em>
+}
+        ]]>
+        </code>
+        <code title="Invalid: Expected 0 spaces before opening brace; 4 found.">
+        <![CDATA[
+class Foo
+    <em>{</em>
+    }
+        ]]>
+        </code>
+    </code_comparison>
 </documentation>
