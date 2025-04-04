@@ -8,7 +8,6 @@
         <code title="Valid: Brace on same line.">
         <![CDATA[
 function fooFunction($arg1, $arg2 = '')<em> {</em>
-    ...
 }
         ]]>
         </code>
@@ -16,7 +15,6 @@ function fooFunction($arg1, $arg2 = '')<em> {</em>
         <![CDATA[
 function fooFunction($arg1, $arg2 = '')
 <em>{</em>
-    ...
 }
         ]]>
         </code>
