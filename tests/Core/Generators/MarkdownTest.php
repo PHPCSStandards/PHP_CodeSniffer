@@ -335,4 +335,63 @@ final class MarkdownTest extends TestCase
     }//end testFooterDoesntThrowWarningOnMissingTimezone()
 
 
+    /**
+     * Perfunctory test to verify that extenders which call deprecated methods will see a deprecation notice.
+     *
+     * Note: not all deprecated methods are tested as some need arguments.
+     *
+     * @param string $methodName Name of the deprecated method to test.
+     *
+     * @dataProvider dataCallingDeprecatedMethodThrowsDeprecationNotice
+     *
+     * @return void
+     */
+    public function testCallingDeprecatedMethodThrowsDeprecationNotice($methodName)
+    {
+        $exceptionClass = 'PHPUnit\Framework\Error\Deprecated';
+        if (class_exists($exceptionClass) === false) {
+            $exceptionClass = 'PHPUnit_Framework_Error_Deprecated';
+        }
+
+        $regex = '`^The PHP_CodeSniffer\\\\Generators\\\\Markdown::%s\(\) method is deprecated\. Use "echo [^\s]+::%s\(\)" instead\.$`';
+        $regex = sprintf($regex, preg_quote($methodName, '`'), str_replace('print', 'getFormatted', $methodName));
+
+        if (method_exists($this, 'expectExceptionMessageMatches') === true) {
+            $this->expectException($exceptionClass);
+            $this->expectExceptionMessageMatches($regex);
+        } else if (method_exists($this, 'expectExceptionMessageRegExp') === true) {
+            // PHPUnit < 8.4.0.
+            $this->expectException($exceptionClass);
+            $this->expectExceptionMessageRegExp($regex);
+        } else {
+            // PHPUnit < 5.2.0.
+            $this->setExpectedExceptionRegExp($exceptionClass, $regex);
+        }
+
+        // Set up the ruleset.
+        $standard = __DIR__.'/OneDocTest.xml';
+        $config   = new ConfigDouble(["--standard=$standard"]);
+        $ruleset  = new Ruleset($config);
+
+        $generator = new MarkdownDouble($ruleset);
+        $generator->$methodName();
+
+    }//end testCallingDeprecatedMethodThrowsDeprecationNotice()
+
+
+    /**
+     * Data provider.
+     *
+     * @return array<string, array<string, string>>
+     */
+    public static function dataCallingDeprecatedMethodThrowsDeprecationNotice()
+    {
+        return [
+            'printHeader()' => ['printHeader'],
+            'printFooter()' => ['printFooter'],
+        ];
+
+    }//end dataCallingDeprecatedMethodThrowsDeprecationNotice()
+
+
 }//end class
