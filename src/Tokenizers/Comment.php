@@ -51,10 +51,11 @@ class Comment
         }
 
         $tokens[$stackPtr] = [
-            'content'      => $openTag,
-            'code'         => T_DOC_COMMENT_OPEN_TAG,
-            'type'         => 'T_DOC_COMMENT_OPEN_TAG',
-            'comment_tags' => [],
+            'content'        => $openTag,
+            'code'           => T_DOC_COMMENT_OPEN_TAG,
+            'type'           => 'T_DOC_COMMENT_OPEN_TAG',
+            'comment_opener' => $stackPtr,
+            'comment_tags'   => [],
         ];
 
         $openPtr = $stackPtr;
@@ -103,6 +104,7 @@ class Comment
             $space = $this->collectWhitespace($string, $char, $numChars);
             if ($space !== null) {
                 $tokens[$stackPtr] = $space;
+                $tokens[$stackPtr]['comment_opener'] = $openPtr;
                 $stackPtr++;
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
                     $content = Common::prepareForOutput($space['content']);
@@ -123,9 +125,10 @@ class Comment
                 // This is a function or class doc block line.
                 $char++;
                 $tokens[$stackPtr] = [
-                    'content' => '*',
-                    'code'    => T_DOC_COMMENT_STAR,
-                    'type'    => 'T_DOC_COMMENT_STAR',
+                    'content'        => '*',
+                    'code'           => T_DOC_COMMENT_STAR,
+                    'type'           => 'T_DOC_COMMENT_STAR',
+                    'comment_opener' => $openPtr,
                 ];
 
                 $stackPtr++;
@@ -139,6 +142,7 @@ class Comment
             $lineTokens = $this->processLine($string, $eolChar, $char, $numChars);
             foreach ($lineTokens as $lineToken) {
                 $tokens[$stackPtr] = $lineToken;
+                $tokens[$stackPtr]['comment_opener'] = $openPtr;
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
                     $content = Common::prepareForOutput($lineToken['content']);
                     $type    = $lineToken['type'];
@@ -154,10 +158,15 @@ class Comment
         }//end foreach
 
         $tokens[$stackPtr] = $closeTag;
-        $tokens[$openPtr]['comment_closer'] = $stackPtr;
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             $content = Common::prepareForOutput($closeTag['content']);
             StatusWriter::write("Create comment token: T_DOC_COMMENT_CLOSE_TAG => $content", 2);
+        }
+
+        // Only now do we know the stack pointer to the docblock closer,
+        // so add it to all previously created comment tokens.
+        foreach ($tokens as $ptr => $token) {
+            $tokens[$ptr]['comment_closer'] = $stackPtr;
         }
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {

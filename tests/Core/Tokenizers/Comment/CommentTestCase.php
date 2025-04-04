@@ -22,7 +22,8 @@ abstract class CommentTestCase extends AbstractTokenizerTestCase
 
 
     /**
-     * Test whether the docblock opener and closer have the expected extra keys.
+     * Test whether the docblock tokens have the extra `comment_opener` and `comment_closer` keys,
+     * and the docblock opener has the `comment_tags` key.
      *
      * @param string     $marker       The comment prefacing the target token.
      * @param int        $closerOffset The offset of the closer from the opener.
@@ -34,28 +35,38 @@ abstract class CommentTestCase extends AbstractTokenizerTestCase
      */
     public function testDocblockOpenerCloser($marker, $closerOffset, $expectedTags)
     {
-        $tokens = $this->phpcsFile->getTokens();
-        $target = $this->getTargetToken($marker, [T_DOC_COMMENT_OPEN_TAG]);
+        $tokens         = $this->phpcsFile->getTokens();
+        $expectedOpener = $this->getTargetToken($marker, [T_DOC_COMMENT_OPEN_TAG]);
+        $expectedCloser = ($expectedOpener + $closerOffset);
 
-        $opener = $tokens[$target];
-
-        $this->assertArrayHasKey('comment_closer', $opener, 'Comment opener: comment_closer index is not set');
-        $this->assertArrayHasKey('comment_tags', $opener, 'Comment opener: comment_tags index is not set');
-
-        $expectedCloser = ($target + $closerOffset);
-        $this->assertSame($expectedCloser, $opener['comment_closer'], 'Comment opener: comment_closer not set to the expected stack pointer');
+        $opener = $tokens[$expectedOpener];
 
         // Update the tags expectations.
         foreach ($expectedTags as $i => $ptr) {
-            $expectedTags[$i] += $target;
+            $expectedTags[$i] += $expectedOpener;
         }
 
+        // Verify that the comment opener has the `comment_tags` key.
+        $this->assertArrayHasKey('comment_tags', $opener, 'Comment opener: comment_tags index is not set');
         $this->assertSame($expectedTags, $opener['comment_tags'], 'Comment opener: recorded tags do not match expected tags');
 
-        $closer = $tokens[$opener['comment_closer']];
+        // Check that the comment_opener and comment_closer keys have been added to all docblock tokens.
+        for ($i = $expectedOpener; $i <= $expectedCloser; $i++) {
+            $token = $tokens[$i];
+            $this->assertArrayHasKey('comment_opener', $token, 'Comment_opener index is not set (for stackPtr '.$i.')');
+            $this->assertArrayHasKey('comment_closer', $token, 'Comment_closer index is not set (for stackPtr '.$i.')');
 
-        $this->assertArrayHasKey('comment_opener', $closer, 'Comment closer: comment_opener index is not set');
-        $this->assertSame($target, $closer['comment_opener'], 'Comment closer: comment_opener not set to the expected stack pointer');
+            $this->assertSame(
+                $expectedOpener,
+                $token['comment_opener'],
+                'Comment_opener not set to the expected stack pointer (for stackPtr '.$i.')'
+            );
+            $this->assertSame(
+                $expectedCloser,
+                $token['comment_closer'],
+                'Comment_closer not set to the expected stack pointer (for stackPtr '.$i.')'
+            );
+        }
 
     }//end testDocblockOpenerCloser()
 
