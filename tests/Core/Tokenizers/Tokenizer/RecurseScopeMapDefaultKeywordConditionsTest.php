@@ -178,12 +178,12 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
         $this->assertSame(
             $expectedScopeOpener,
             $tokenArray['scope_opener'],
-            sprintf('Scope opener of the T_DEFAULT token incorrect. Marker: %s.', $openerMarker)
+            sprintf('Scope opener of the T_DEFAULT token incorrect. Marker: %s.', $testMarker)
         );
         $this->assertSame(
             $expectedScopeCloser,
             $tokenArray['scope_closer'],
-            sprintf('Scope closer of the T_DEFAULT token incorrect. Marker: %s.', $closerMarker)
+            sprintf('Scope closer of the T_DEFAULT token incorrect. Marker: %s.', $testMarker)
         );
 
         $opener = $tokenArray['scope_opener'];
