@@ -77,10 +77,10 @@ $fn = fn($x) : ?\My\NS\ClassName => $x;
 /* testReturnTypePartiallyQualifiedClass */
 $fn = fn($x) : ?NS\ClassName => $x;
 
-/* testNullableNamespace */
+/* testNullableUnqualifiedClassName */
 $a = fn(?\DateTime $x) : ?\DateTime => $x;
 
-/* testNamespaceOperatorInTypes */
+/* testNamespaceRelativeClassNameInTypes */
 $fn = fn(namespace\Foo $a) : ?namespace\Foo => $a;
 
 /* testSelfReturnType */
