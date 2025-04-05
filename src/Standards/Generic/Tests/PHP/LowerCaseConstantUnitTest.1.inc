@@ -84,15 +84,15 @@ $input->getFilterChain()->attachByName('Null', ['type' => Null::TYPE_STRING]);
 
 // Issue #3332 - ignore type declarations, but not default values.
 class TypedThings {
-	const MYCONST = FALSE;
+    const MYCONST = FALSE;
 
-	public int|FALSE $int = FALSE;
-	public Type|NULL $int = new MyObj(NULL);
+    public int|FALSE $int = FALSE;
+    public Type|NULL $int = new MyObj(NULL);
 
-	private function typed(int|FALSE $param = NULL, Type|NULL $obj = new MyObj(FALSE)) : string|FALSE|NULL
-	{
-		if (TRUE === FALSE) {
-			return NULL;
+    private function typed(int|FALSE $param = NULL, Type|NULL $obj = new MyObj(FALSE)) : string|FALSE|NULL
+    {
+        if (TRUE === FALSE) {
+            return NULL;
         }
     }
 }

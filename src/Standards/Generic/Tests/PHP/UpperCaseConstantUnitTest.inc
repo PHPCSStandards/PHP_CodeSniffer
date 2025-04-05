@@ -82,15 +82,15 @@ function true() {}
 
 // Issue #3332 - ignore type declarations, but not default values.
 class TypedThings {
-	const MYCONST = false;
+    const MYCONST = false;
 
-	public int|false $int = false;
-	public Type|null $int = new MyObj(null);
+    public int|false $int = false;
+    public Type|null $int = new MyObj(null);
 
-	private function typed(int|false $param = null, Type|null $obj = new MyObj(false)) : string|false|null
-	{
-		if (true === false) {
-			return null;
+    private function typed(int|false $param = null, Type|null $obj = new MyObj(false)) : string|false|null
+    {
+        if (true === false) {
+            return null;
         }
     }
 }
