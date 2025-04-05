@@ -43,8 +43,6 @@ class LowerCaseConstantSniff implements Sniff
         T_NAME_QUALIFIED         => T_NAME_QUALIFIED,
         T_NAME_FULLY_QUALIFIED   => T_NAME_FULLY_QUALIFIED,
         T_NAME_RELATIVE          => T_NAME_RELATIVE,
-        T_NS_SEPARATOR           => T_NS_SEPARATOR,
-        T_NAMESPACE              => T_NAMESPACE,
         T_TYPE_UNION             => T_TYPE_UNION,
         T_TYPE_INTERSECTION      => T_TYPE_INTERSECTION,
         T_TYPE_OPEN_PARENTHESIS  => T_TYPE_OPEN_PARENTHESIS,
