@@ -151,3 +151,7 @@ class TypedConstants {
 
 // Global constants can not be typed.
 const MYCONST = TRUE;
+
+class SkipOverPHP82DNFTypes {
+    protected (\FullyQualified&Partially\Qualified)|TRUE $propertyC;
+}

@@ -96,3 +96,7 @@ class TypedThings {
 }
 
 $cl = function (int|false $param = null, Type|null $obj = new MyObj(false)) : string|false|null {};
+
+class SkipOverPHP82DNFTypes {
+    protected (\FullyQualified&Partially\Qualified)|false $propertyC;
+}
