@@ -155,3 +155,8 @@ const MYCONST = TRUE;
 class SkipOverPHP82DNFTypes {
     protected (\FullyQualified&Partially\Qualified)|TRUE $propertyC;
 }
+
+class SkipOverPHP84FinalProperties {
+    final MyType|FALSE $propA;
+    private static final NULL|MyClass $propB;
+}
