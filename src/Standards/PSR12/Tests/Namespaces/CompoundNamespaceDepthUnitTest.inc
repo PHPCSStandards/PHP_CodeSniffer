@@ -30,3 +30,6 @@ use Vendor\Package\SomeNamespace\{
     SubnamespaceOne\ClassB,
     ClassZ,
 };
+
+// Reset the property to its default value.
+// phpcs:set PSR12.Namespaces.CompoundNamespaceDepth maxDepth 2
