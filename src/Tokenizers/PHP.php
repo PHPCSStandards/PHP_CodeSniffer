@@ -3107,17 +3107,15 @@ class PHP extends Tokenizer
                     All type related tokens will be converted in one go as soon as this section is hit.
                 */
 
-                $allowed = [
-                    T_STRING       => T_STRING,
-                    T_CALLABLE     => T_CALLABLE,
-                    T_SELF         => T_SELF,
-                    T_PARENT       => T_PARENT,
-                    T_STATIC       => T_STATIC,
-                    T_FALSE        => T_FALSE,
-                    T_TRUE         => T_TRUE,
-                    T_NULL         => T_NULL,
-                    T_NAMESPACE    => T_NAMESPACE,
-                    T_NS_SEPARATOR => T_NS_SEPARATOR,
+                $allowed  = Tokens::$nameTokens;
+                $allowed += [
+                    T_CALLABLE => T_CALLABLE,
+                    T_SELF     => T_SELF,
+                    T_PARENT   => T_PARENT,
+                    T_STATIC   => T_STATIC,
+                    T_FALSE    => T_FALSE,
+                    T_TRUE     => T_TRUE,
+                    T_NULL     => T_NULL,
                 ];
 
                 $suspectedType       = null;

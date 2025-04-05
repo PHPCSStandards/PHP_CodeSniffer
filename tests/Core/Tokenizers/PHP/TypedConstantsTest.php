@@ -208,24 +208,19 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
             'simple type: fully qualified name'        => [
                 'testMarker' => '/* testClassConstTypedClassFullyQualified */',
                 'sequence'   => [
-                    T_NS_SEPARATOR,
-                    T_STRING,
+                    T_NAME_FULLY_QUALIFIED,
                 ],
             ],
             'simple type: namespace relative name'     => [
                 'testMarker' => '/* testClassConstTypedClassNamespaceRelative */',
                 'sequence'   => [
-                    T_NAMESPACE,
-                    T_NS_SEPARATOR,
-                    T_STRING,
+                    T_NAME_RELATIVE,
                 ],
             ],
             'simple type: partially qualified name'    => [
                 'testMarker' => '/* testClassConstTypedClassPartiallyQualified */',
                 'sequence'   => [
-                    T_STRING,
-                    T_NS_SEPARATOR,
-                    T_STRING,
+                    T_NAME_QUALIFIED,
                 ],
             ],
             'simple type: parent'                      => [
@@ -334,24 +329,19 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
             'nullable type: fully qualified name'        => [
                 'testMarker' => '/* testTraitConstTypedNullableClassFullyQualified */',
                 'sequence'   => [
-                    T_NS_SEPARATOR,
-                    T_STRING,
+                    T_NAME_FULLY_QUALIFIED,
                 ],
             ],
             'nullable type: namespace relative name'     => [
                 'testMarker' => '/* testTraitConstTypedNullableClassNamespaceRelative */',
                 'sequence'   => [
-                    T_NAMESPACE,
-                    T_NS_SEPARATOR,
-                    T_STRING,
+                    T_NAME_RELATIVE,
                 ],
             ],
             'nullable type: partially qualified name'    => [
                 'testMarker' => '/* testTraitConstTypedNullableClassPartiallyQualified */',
                 'sequence'   => [
-                    T_STRING,
-                    T_NS_SEPARATOR,
-                    T_STRING,
+                    T_NAME_QUALIFIED,
                 ],
             ],
             'nullable type: parent'                      => [
@@ -440,22 +430,15 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
                 'sequence'   => [
                     T_STRING,
                     T_TYPE_UNION,
-                    T_NAMESPACE,
-                    T_NS_SEPARATOR,
-                    T_STRING,
+                    T_NAME_RELATIVE,
                 ],
             ],
             'union type: FQN|Partial'                    => [
                 'testMarker' => '/* testInterfaceConstTypedUnionFullyQualifiedPartiallyQualified */',
                 'sequence'   => [
-                    T_NS_SEPARATOR,
-                    T_STRING,
-                    T_NS_SEPARATOR,
-                    T_STRING,
+                    T_NAME_FULLY_QUALIFIED,
                     T_TYPE_UNION,
-                    T_STRING,
-                    T_NS_SEPARATOR,
-                    T_STRING,
+                    T_NAME_QUALIFIED,
                 ],
             ],
         ];
@@ -485,22 +468,15 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
                 'sequence'   => [
                     T_STRING,
                     T_TYPE_INTERSECTION,
-                    T_NAMESPACE,
-                    T_NS_SEPARATOR,
-                    T_STRING,
+                    T_NAME_RELATIVE,
                 ],
             ],
             'intersection type: FQN&Partial'                    => [
                 'testMarker' => '/* testEnumConstTypedIntersectFullyQualifiedPartiallyQualified */',
                 'sequence'   => [
-                    T_NS_SEPARATOR,
-                    T_STRING,
-                    T_NS_SEPARATOR,
-                    T_STRING,
+                    T_NAME_FULLY_QUALIFIED,
                     T_TYPE_INTERSECTION,
-                    T_STRING,
-                    T_NS_SEPARATOR,
-                    T_STRING,
+                    T_NAME_QUALIFIED,
                 ],
             ],
         ];
@@ -628,17 +604,12 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testAnonClassConstDNFTypeFQNRelativePartiallyQualified */',
                 'sequence'   => [
                     T_TYPE_OPEN_PARENTHESIS,
-                    T_NS_SEPARATOR,
-                    T_STRING,
+                    T_NAME_FULLY_QUALIFIED,
                     T_TYPE_INTERSECTION,
-                    T_NAMESPACE,
-                    T_NS_SEPARATOR,
-                    T_STRING,
+                    T_NAME_RELATIVE,
                     T_TYPE_CLOSE_PARENTHESIS,
                     T_TYPE_UNION,
-                    T_STRING,
-                    T_NS_SEPARATOR,
-                    T_STRING,
+                    T_NAME_QUALIFIED,
                 ],
             ],
             'DNF type: invalid self/parent/static'                       => [
