@@ -362,35 +362,35 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
 
 
     /**
-     * Test arrow functions that use nullable namespace types.
+     * Test arrow functions that use nullable type with unqualified class name.
      *
      * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
      *
      * @return void
      */
-    public function testNullableNamespace()
+    public function testNullableUnqualifiedClassName()
     {
-        $token = $this->getTargetToken('/* testNullableNamespace */', T_FN);
+        $token = $this->getTargetToken('/* testNullableUnqualifiedClassName */', T_FN);
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 15, 18);
 
-    }//end testNullableNamespace()
+    }//end testNullableUnqualifiedClassName()
 
 
     /**
-     * Test arrow functions that use the namespace operator in the return type.
+     * Test arrow functions that use namespace relative class name in the return type.
      *
      * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
      *
      * @return void
      */
-    public function testNamespaceOperatorInTypes()
+    public function testNamespaceRelativeClassNameInTypes()
     {
-        $token = $this->getTargetToken('/* testNamespaceOperatorInTypes */', T_FN);
+        $token = $this->getTargetToken('/* testNamespaceRelativeClassNameInTypes */', T_FN);
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 16, 19);
 
-    }//end testNamespaceOperatorInTypes()
+    }//end testNamespaceRelativeClassNameInTypes()
 
 
     /**
