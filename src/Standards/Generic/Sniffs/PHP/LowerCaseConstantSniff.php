@@ -67,6 +67,7 @@ class LowerCaseConstantSniff implements Sniff
         $targets[] = T_VAR;
         $targets[] = T_STATIC;
         $targets[] = T_READONLY;
+        $targets[] = T_FINAL;
 
         // Register function keywords to filter out param/return type declarations.
         $targets[] = T_FUNCTION;
@@ -127,6 +128,7 @@ class LowerCaseConstantSniff implements Sniff
             || $tokens[$stackPtr]['code'] === T_VAR
             || $tokens[$stackPtr]['code'] === T_STATIC
             || $tokens[$stackPtr]['code'] === T_READONLY
+            || $tokens[$stackPtr]['code'] === T_FINAL
         ) {
             $skipOver = (Tokens::$emptyTokens + $this->propertyTypeTokens);
             $skipTo   = $phpcsFile->findNext($skipOver, ($stackPtr + 1), null, true);
