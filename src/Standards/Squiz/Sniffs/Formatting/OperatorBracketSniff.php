@@ -116,25 +116,25 @@ class OperatorBracketSniff implements Sniff
 
         // Tokens that are allowed inside a bracketed operation.
         $allowed = [
-            T_VARIABLE,
-            T_LNUMBER,
-            T_DNUMBER,
-            T_STRING,
-            T_NAME_QUALIFIED,
-            T_NAME_FULLY_QUALIFIED,
-            T_NAME_RELATIVE,
-            T_WHITESPACE,
-            T_THIS,
-            T_SELF,
-            T_STATIC,
-            T_PARENT,
-            T_OBJECT_OPERATOR,
-            T_NULLSAFE_OBJECT_OPERATOR,
-            T_DOUBLE_COLON,
-            T_OPEN_SQUARE_BRACKET,
-            T_CLOSE_SQUARE_BRACKET,
-            T_NONE,
-            T_BITWISE_NOT,
+            T_VARIABLE                 => T_VARIABLE,
+            T_LNUMBER                  => T_LNUMBER,
+            T_DNUMBER                  => T_DNUMBER,
+            T_STRING                   => T_STRING,
+            T_NAME_QUALIFIED           => T_NAME_QUALIFIED,
+            T_NAME_FULLY_QUALIFIED     => T_NAME_FULLY_QUALIFIED,
+            T_NAME_RELATIVE            => T_NAME_RELATIVE,
+            T_WHITESPACE               => T_WHITESPACE,
+            T_THIS                     => T_THIS,
+            T_SELF                     => T_SELF,
+            T_STATIC                   => T_STATIC,
+            T_PARENT                   => T_PARENT,
+            T_OBJECT_OPERATOR          => T_OBJECT_OPERATOR,
+            T_NULLSAFE_OBJECT_OPERATOR => T_NULLSAFE_OBJECT_OPERATOR,
+            T_DOUBLE_COLON             => T_DOUBLE_COLON,
+            T_OPEN_SQUARE_BRACKET      => T_OPEN_SQUARE_BRACKET,
+            T_CLOSE_SQUARE_BRACKET     => T_CLOSE_SQUARE_BRACKET,
+            T_NONE                     => T_NONE,
+            T_BITWISE_NOT              => T_BITWISE_NOT,
         ];
 
         $allowed += Tokens::$operators;
@@ -162,7 +162,7 @@ class OperatorBracketSniff implements Sniff
                     // We allow simple operations to not be bracketed.
                     // For example, ceil($one / $two).
                     for ($prev = ($stackPtr - 1); $prev > $bracket; $prev--) {
-                        if (in_array($tokens[$prev]['code'], $allowed, true) === true) {
+                        if (isset($allowed[$tokens[$prev]['code']]) === true) {
                             continue;
                         }
 
@@ -178,7 +178,7 @@ class OperatorBracketSniff implements Sniff
                     }
 
                     for ($next = ($stackPtr + 1); $next < $endBracket; $next++) {
-                        if (in_array($tokens[$next]['code'], $allowed, true) === true) {
+                        if (isset($allowed[$tokens[$next]['code']]) === true) {
                             continue;
                         }
 
