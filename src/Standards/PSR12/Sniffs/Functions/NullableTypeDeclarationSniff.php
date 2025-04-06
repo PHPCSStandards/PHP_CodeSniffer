@@ -11,6 +11,7 @@ namespace PHP_CodeSniffer\Standards\PSR12\Sniffs\Functions;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
 
 class NullableTypeDeclarationSniff implements Sniff
 {
@@ -18,21 +19,17 @@ class NullableTypeDeclarationSniff implements Sniff
     /**
      * An array of valid tokens after `T_NULLABLE` occurrences.
      *
-     * @var array
+     * @var array<int|string, int|string>
      */
-    private $validTokens = [
-        T_STRING               => true,
-        T_NAME_QUALIFIED       => true,
-        T_NAME_FULLY_QUALIFIED => true,
-        T_NAME_RELATIVE        => true,
-        T_CALLABLE             => true,
-        T_SELF                 => true,
-        T_PARENT               => true,
-        T_STATIC               => true,
-        T_NULL                 => true,
-        T_FALSE                => true,
-        T_TRUE                 => true,
-    ];
+    private const VALID_TOKENS = (Tokens::NAME_TOKENS + [
+        T_CALLABLE => T_CALLABLE,
+        T_SELF     => T_SELF,
+        T_PARENT   => T_PARENT,
+        T_STATIC   => T_STATIC,
+        T_NULL     => T_NULL,
+        T_FALSE    => T_FALSE,
+        T_TRUE     => T_TRUE,
+    ]);
 
 
     /**
@@ -66,7 +63,7 @@ class NullableTypeDeclarationSniff implements Sniff
 
         $tokens           = $phpcsFile->getTokens();
         $nextNonEmptyCode = $tokens[$nextNonEmptyPtr]['code'];
-        $validTokenFound  = isset($this->validTokens[$nextNonEmptyCode]);
+        $validTokenFound  = isset(self::VALID_TOKENS[$nextNonEmptyCode]);
 
         if ($validTokenFound === true && $nextNonEmptyPtr === ($stackPtr + 1)) {
             // Valid structure.
