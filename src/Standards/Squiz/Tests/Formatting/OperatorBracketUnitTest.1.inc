@@ -146,7 +146,7 @@ $cntPages = ceil(count($items) / self::ON_PAGE);
 
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 error_reporting(E_ALL & ~E_NOTICE | ~E_WARNING);
-$results = $stmt->fetchAll(\PDO::FETCH_ASSOC | \PDO::FETCH_GROUP | \PDO::FETCH_UNIQUE);
+$results = $stmt->fetchAll(\PDO::FETCH_ASSOC | Relative\PDO::FETCH_GROUP | namespace\PDO::FETCH_UNIQUE);
 $di = new \RecursiveDirectoryIterator($path, \RecursiveDirectoryIterator::SKIP_DOTS | \FilesystemIterator::FOLLOW_SYMLINKS);
 foo(1 + 2 + 3);
 
@@ -201,3 +201,7 @@ match ($a) {
 };
 
 $cntPages = ceil(count($items) / parent::ON_PAGE);
+
+$nsRelative = namespace\doSomething($items + 10);
+$partiallyQualified = Partially\qualified($items + 10);
+$fullyQualified = \Fully\qualified($items + 10);

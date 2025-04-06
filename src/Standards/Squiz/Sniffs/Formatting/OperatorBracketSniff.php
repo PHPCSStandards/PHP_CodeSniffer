@@ -115,13 +115,13 @@ class OperatorBracketSniff implements Sniff
         }
 
         // Tokens that are allowed inside a bracketed operation.
-        $allowed = [
+        $allowed  = Tokens::$nameTokens;
+        $allowed += Tokens::$operators;
+        $allowed += [
             T_VARIABLE                 => T_VARIABLE,
             T_LNUMBER                  => T_LNUMBER,
             T_DNUMBER                  => T_DNUMBER,
-            T_STRING                   => T_STRING,
             T_WHITESPACE               => T_WHITESPACE,
-            T_NS_SEPARATOR             => T_NS_SEPARATOR,
             T_SELF                     => T_SELF,
             T_STATIC                   => T_STATIC,
             T_PARENT                   => T_PARENT,
@@ -133,8 +133,6 @@ class OperatorBracketSniff implements Sniff
             T_NONE                     => T_NONE,
             T_BITWISE_NOT              => T_BITWISE_NOT,
         ];
-
-        $allowed += Tokens::$operators;
 
         $lastBracket = false;
         if (isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
@@ -149,7 +147,10 @@ class OperatorBracketSniff implements Sniff
                     break;
                 }
 
-                if ($prevCode === T_STRING || $prevCode === T_SWITCH || $prevCode === T_MATCH) {
+                if (isset(Tokens::$nameTokens[$prevCode]) === true
+                    || $prevCode === T_SWITCH
+                    || $prevCode === T_MATCH
+                ) {
                     // We allow simple operations to not be bracketed.
                     // For example, ceil($one / $two).
                     for ($prev = ($stackPtr - 1); $prev > $bracket; $prev--) {
@@ -260,11 +261,9 @@ class OperatorBracketSniff implements Sniff
             T_VARIABLE                 => true,
             T_LNUMBER                  => true,
             T_DNUMBER                  => true,
-            T_STRING                   => true,
             T_CONSTANT_ENCAPSED_STRING => true,
             T_DOUBLE_QUOTED_STRING     => true,
             T_WHITESPACE               => true,
-            T_NS_SEPARATOR             => true,
             T_SELF                     => true,
             T_STATIC                   => true,
             T_OBJECT_OPERATOR          => true,
@@ -281,6 +280,7 @@ class OperatorBracketSniff implements Sniff
             if (isset(Tokens::$emptyTokens[$tokens[$before]['code']]) === true
                 || isset(Tokens::$operators[$tokens[$before]['code']]) === true
                 || isset(Tokens::$castTokens[$tokens[$before]['code']]) === true
+                || isset(Tokens::$nameTokens[$tokens[$before]['code']]) === true
                 || isset($allowed[$tokens[$before]['code']]) === true
             ) {
                 continue;
@@ -315,6 +315,7 @@ class OperatorBracketSniff implements Sniff
             if (isset(Tokens::$emptyTokens[$tokens[$after]['code']]) === true
                 || isset(Tokens::$operators[$tokens[$after]['code']]) === true
                 || isset(Tokens::$castTokens[$tokens[$after]['code']]) === true
+                || isset(Tokens::$nameTokens[$tokens[$after]['code']]) === true
                 || isset($allowed[$tokens[$after]['code']]) === true
             ) {
                 continue;
