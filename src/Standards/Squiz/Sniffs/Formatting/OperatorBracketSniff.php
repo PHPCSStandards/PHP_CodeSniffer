@@ -148,7 +148,6 @@ class OperatorBracketSniff implements Sniff
             T_DOUBLE_COLON,
             T_OPEN_SQUARE_BRACKET,
             T_CLOSE_SQUARE_BRACKET,
-            T_MODULUS,
             T_NONE,
             T_BITWISE_NOT,
         ];
@@ -290,7 +289,6 @@ class OperatorBracketSniff implements Sniff
             T_OBJECT_OPERATOR          => true,
             T_NULLSAFE_OBJECT_OPERATOR => true,
             T_DOUBLE_COLON             => true,
-            T_MODULUS                  => true,
             T_ISSET                    => true,
             T_ARRAY                    => true,
             T_NONE                     => true,
