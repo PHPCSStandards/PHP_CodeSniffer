@@ -804,6 +804,46 @@ class PHP extends Tokenizer
             }//end if
 
             /*
+                Prior to PHP 7.4, PHP didn't support stand-alone PHP open tags at the end of a file
+                (without a new line), so we need to make sure that the tokenization in PHPCS is consistent
+                cross-version PHP by retokenizing to T_OPEN_TAG.
+            */
+
+            if (PHP_VERSION_ID < 70400
+                && $tokenIsArray === true
+                // PHP < 7.4 with short open tags off.
+                && (($stackPtr === ($numTokens - 1)
+                && $token[0] === T_INLINE_HTML
+                && stripos($token[1], '<?php') === 0)
+                // PHP < 7.4 with short open tags on.
+                || ($stackPtr === ($numTokens - 2)
+                && $token[0] === T_OPEN_TAG
+                && $token[1] === '<?'
+                && is_array($tokens[($stackPtr + 1)]) === true
+                && $tokens[($stackPtr + 1)][0] === T_STRING
+                && strtolower($tokens[($stackPtr + 1)][1]) === 'php'))
+            ) {
+                if ($token[0] === T_INLINE_HTML) {
+                    $finalTokens[$newStackPtr] = [
+                        'code'    => T_OPEN_TAG,
+                        'type'    => 'T_OPEN_TAG',
+                        'content' => $token[1],
+                    ];
+                } else {
+                    $finalTokens[$newStackPtr] = [
+                        'code'    => T_OPEN_TAG,
+                        'type'    => 'T_OPEN_TAG',
+                        'content' => $token[1].$tokens[($stackPtr + 1)][1],
+                    ];
+
+                    $stackPtr++;
+                }
+
+                $newStackPtr++;
+                continue;
+            }//end if
+
+            /*
                 Parse doc blocks into something that can be easily iterated over.
             */
 
