@@ -80,6 +80,9 @@ jobs:
           - php: '7.4'
             os: 'ubuntu-latest'
             custom_ini: true
+          - php: '8.3'
+            os: 'ubuntu-latest'
+            custom_ini: true
 
     # yamllint disable-line rule:line-length
     name: "PHP: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }}${{ matrix.libxml_minor && format( ' with libxml {0}', matrix.libxml_minor ) || '' }} (${{ matrix.os == 'ubuntu-latest' && 'Linux' || 'Win'  }})"
@@ -204,6 +207,7 @@ jobs:
           PHP_CODESNIFFER_CBF: '1'
 
       - name: 'PHPCS: check code style without cache, no parallel'
+        if: ${{ matrix.custom_ini == false }}
         id: phpcs
         run: >
           php "bin/phpcs" --no-cache --parallel=1
