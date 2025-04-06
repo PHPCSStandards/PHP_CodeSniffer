@@ -567,6 +567,18 @@ final class Tokens
     ];
 
     /**
+     * Tokens used for "names", be it namespace, OO, function or constant names.
+     *
+     * @var array<int|string, int|string>
+     */
+    public static $nameTokens = [
+        T_STRING               => T_STRING,
+        T_NAME_QUALIFIED       => T_NAME_QUALIFIED,
+        T_NAME_FULLY_QUALIFIED => T_NAME_FULLY_QUALIFIED,
+        T_NAME_RELATIVE        => T_NAME_RELATIVE,
+    ];
+
+    /**
      * Tokens that represent the names of called functions.
      *
      * Mostly, these are just strings. But PHP tokenizes some language
