@@ -51,6 +51,8 @@ final class NullableVsInlineThenTest extends AbstractTokenizerTestCase
     {
         return [
             'property declaration, readonly, no visibility' => ['/* testNullableReadonlyOnly */'],
+            'property declaration, private set'             => ['/* testNullablePrivateSetOnly */'],
+            'property declaration, public and private set'  => ['/* testNullablePublicPrivateSetOnly */'],
         ];
 
     }//end dataNullable()
