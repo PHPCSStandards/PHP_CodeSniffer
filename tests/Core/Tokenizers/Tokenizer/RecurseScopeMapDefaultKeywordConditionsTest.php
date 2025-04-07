@@ -14,6 +14,20 @@ use PHP_CodeSniffer\Tests\Core\Tokenizers\AbstractTokenizerTestCase;
 final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenizerTestCase
 {
 
+    /**
+     * Condition stop tokens when `default` is used with curlies.
+     *
+     * @var array<int>
+     */
+    protected $conditionStopTokens = [
+        T_BREAK,
+        T_CONTINUE,
+        T_EXIT,
+        T_GOTO,
+        T_RETURN,
+        T_THROW,
+    ];
+
 
     /**
      * Test that match "default" tokens does not get scope indexes.
@@ -257,15 +271,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
         if (($opener + 1) !== $closer) {
             $end = $closer;
             if (isset($conditionStopMarker) === true) {
-                $tokenTypes = [
-                    T_BREAK,
-                    T_CONTINUE,
-                    T_EXIT,
-                    T_GOTO,
-                    T_RETURN,
-                    T_THROW,
-                ];
-                $end        = ($this->getTargetToken($conditionStopMarker, $tokenTypes) + 1);
+                $end = ( $this->getTargetToken($conditionStopMarker, $this->conditionStopTokens) + 1);
             }
 
             for ($i = ($opener + 1); $i < $end; $i++) {
