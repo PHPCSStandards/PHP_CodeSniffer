@@ -257,7 +257,15 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
         if (($opener + 1) !== $closer) {
             $end = $closer;
             if (isset($conditionStopMarker) === true) {
-                $end = ($this->getTargetToken($conditionStopMarker, [T_RETURN]) + 1);
+                $tokenTypes = [
+                    T_BREAK,
+                    T_CONTINUE,
+                    T_EXIT,
+                    T_GOTO,
+                    T_RETURN,
+                    T_THROW,
+                ];
+                $end        = ($this->getTargetToken($conditionStopMarker, $tokenTypes) + 1);
             }
 
             for ($i = ($opener + 1); $i < $end; $i++) {
@@ -267,7 +275,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
                     sprintf('T_DEFAULT condition not added for token belonging to the T_DEFAULT structure. Marker: %s.', $testMarker)
                 );
             }
-        }
+        }//end if
 
     }//end testSwitchDefault()
 
