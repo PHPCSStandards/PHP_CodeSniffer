@@ -20,6 +20,24 @@ class ArbitraryParenthesesSpacingSniff implements Sniff
 {
 
     /**
+     * Tokens which when they precede an open parenthesis indicate
+     * that this is a type of structure this sniff should ignore.
+     *
+     * @var array<int|string, int|string>
+     */
+    private const IGNORE_TOKENS = (Tokens::FUNCTION_NAME_TOKENS + [
+        T_VARIABLE             => T_VARIABLE,
+        T_CLOSE_PARENTHESIS    => T_CLOSE_PARENTHESIS,
+        T_CLOSE_CURLY_BRACKET  => T_CLOSE_CURLY_BRACKET,
+        T_CLOSE_SQUARE_BRACKET => T_CLOSE_SQUARE_BRACKET,
+        T_CLOSE_SHORT_ARRAY    => T_CLOSE_SHORT_ARRAY,
+        T_THROW                => T_THROW,
+        T_YIELD                => T_YIELD,
+        T_YIELD_FROM           => T_YIELD_FROM,
+        T_CLONE                => T_CLONE,
+    ]);
+
+    /**
      * The number of spaces desired on the inside of the parentheses.
      *
      * @var integer
@@ -33,14 +51,6 @@ class ArbitraryParenthesesSpacingSniff implements Sniff
      */
     public $ignoreNewlines = false;
 
-    /**
-     * Tokens which when they precede an open parenthesis indicate
-     * that this is a type of structure this sniff should ignore.
-     *
-     * @var array
-     */
-    private $ignoreTokens = [];
-
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -49,19 +59,6 @@ class ArbitraryParenthesesSpacingSniff implements Sniff
      */
     public function register()
     {
-        $this->ignoreTokens = Tokens::FUNCTION_NAME_TOKENS;
-
-        $this->ignoreTokens[T_VARIABLE]            = T_VARIABLE;
-        $this->ignoreTokens[T_CLOSE_PARENTHESIS]   = T_CLOSE_PARENTHESIS;
-        $this->ignoreTokens[T_CLOSE_CURLY_BRACKET] = T_CLOSE_CURLY_BRACKET;
-        $this->ignoreTokens[T_CLOSE_SQUARE_BRACKET] = T_CLOSE_SQUARE_BRACKET;
-        $this->ignoreTokens[T_CLOSE_SHORT_ARRAY]    = T_CLOSE_SHORT_ARRAY;
-
-        $this->ignoreTokens[T_THROW]      = T_THROW;
-        $this->ignoreTokens[T_YIELD]      = T_YIELD;
-        $this->ignoreTokens[T_YIELD_FROM] = T_YIELD_FROM;
-        $this->ignoreTokens[T_CLONE]      = T_CLONE;
-
         return [
             T_OPEN_PARENTHESIS,
             T_CLOSE_PARENTHESIS,
@@ -101,7 +98,7 @@ class ArbitraryParenthesesSpacingSniff implements Sniff
 
         $preOpener = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($opener - 1), null, true);
         if ($preOpener !== false
-            && isset($this->ignoreTokens[$tokens[$preOpener]['code']]) === true
+            && isset(self::IGNORE_TOKENS[$tokens[$preOpener]['code']]) === true
             && ($tokens[$preOpener]['code'] !== T_CLOSE_CURLY_BRACKET
             || isset($tokens[$preOpener]['scope_condition']) === false )
         ) {
