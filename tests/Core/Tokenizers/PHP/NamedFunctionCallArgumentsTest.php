@@ -329,7 +329,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             ],
             'not arg name - fully qualified constant'    => [
                 'testMarker' => '/* testPositionalArgs */',
-                'content'    => 'COUNT',
+                'content'    => 'count',
             ],
             'not arg name - namespace relative constant' => [
                 'testMarker' => '/* testPositionalArgs */',

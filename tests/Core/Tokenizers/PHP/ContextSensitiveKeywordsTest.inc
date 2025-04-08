@@ -222,9 +222,6 @@ $anonymousClass3 = new class /* testImplementsInAnonymousClassIsKeyword */ imple
 
 $instantiated = new /* testClassInstantiationStaticIsKeyword */ static($param);
 
-class Foo extends /* testNamespaceInNameIsKeyword */ namespace\Exception
-{}
-
 function /* testKeywordAfterFunctionShouldBeString */ eval() {}
 function /* testKeywordAfterFunctionByRefShouldBeString */ &switch() {}
 

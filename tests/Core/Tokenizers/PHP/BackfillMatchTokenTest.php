@@ -199,11 +199,13 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
 
 
     /**
-     * Verify that "match" keywords which are not match control structures get tokenized as T_STRING
+     * Verify that "match" keywords which are not match control structures get tokenized as identifier names
      * and don't have the extra token array indexes.
      *
-     * @param string $testMarker  The comment prefacing the target token.
-     * @param string $testContent The token content to look for.
+     * @param string $testMarker   The comment prefacing the target token.
+     * @param string $testContent  The token content to look for.
+     * @param string $expectedType Optional. The token type which is expected (not T_FN).
+     *                             Defaults to `T_STRING`.
      *
      * @dataProvider dataNotAMatchStructure
      * @covers       PHP_CodeSniffer\Tokenizers\PHP::tokenize
@@ -211,15 +213,17 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testNotAMatchStructure($testMarker, $testContent='match')
+    public function testNotAMatchStructure($testMarker, $testContent='match', $expectedType='T_STRING')
     {
-        $tokens = $this->phpcsFile->getTokens();
+        $targetTypes  = Tokens::$nameTokens;
+        $targetTypes += [T_MATCH => T_MATCH];
+        $target       = $this->getTargetToken($testMarker, $targetTypes, $testContent);
 
-        $token      = $this->getTargetToken($testMarker, [T_STRING, T_MATCH], $testContent);
-        $tokenArray = $tokens[$token];
+        $tokens     = $this->phpcsFile->getTokens();
+        $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
-        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
+        $this->assertSame(constant($expectedType), $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (code)');
+        $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (type)');
 
         $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
         $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');
@@ -228,7 +232,7 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
         $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is set');
         $this->assertArrayNotHasKey('parenthesis_closer', $tokenArray, 'Parenthesis closer is set');
 
-        $next = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($token + 1), null, true);
+        $next = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($target + 1), null, true);
         if ($next !== false && $tokens[$next]['code'] === T_OPEN_PARENTHESIS) {
             $this->assertArrayNotHasKey('parenthesis_owner', $tokenArray, 'Parenthesis owner is set for opener after');
         }
@@ -268,10 +272,14 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testNoMatchPropertyAccess */',
             ],
             'namespaced_function_call'             => [
-                'testMarker' => '/* testNoMatchNamespacedFunctionCall */',
+                'testMarker'   => '/* testNoMatchNamespacedFunctionCall */',
+                'testContent'  => 'MyNS\Sub\match',
+                'expectedType' => 'T_NAME_QUALIFIED',
             ],
             'namespace_operator_function_call'     => [
-                'testMarker' => '/* testNoMatchNamespaceOperatorFunctionCall */',
+                'testMarker'   => '/* testNoMatchNamespaceOperatorFunctionCall */',
+                'testContent'  => 'namespace\match',
+                'expectedType' => 'T_NAME_RELATIVE',
             ],
             'interface_method_declaration'         => [
                 'testMarker' => '/* testNoMatchInterfaceMethodDeclaration */',
@@ -325,8 +333,9 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
                 'testContent' => 'Match',
             ],
             'use_statement'                        => [
-                'testMarker'  => '/* testNoMatchInUseStatement */',
-                'testContent' => 'Match',
+                'testMarker'   => '/* testNoMatchInUseStatement */',
+                'testContent'  => 'Match\me',
+                'expectedType' => 'T_NAME_QUALIFIED',
             ],
             'unsupported_inline_control_structure' => [
                 'testMarker' => '/* testNoMatchMissingCurlies */',

@@ -256,15 +256,10 @@ final class AttributesTest extends AbstractTokenizerTestCase
             'function attribute; using partially qualified and fully qualified class names'     => [
                 'testMarker' => '/* testFqcnAttribute */',
                 'tokenCodes' => [
-                    T_STRING,
-                    T_NS_SEPARATOR,
-                    T_STRING,
+                    T_NAME_QUALIFIED,
                     T_COMMA,
                     T_WHITESPACE,
-                    T_NS_SEPARATOR,
-                    T_STRING,
-                    T_NS_SEPARATOR,
-                    T_STRING,
+                    T_NAME_FULLY_QUALIFIED,
                     T_OPEN_PARENTHESIS,
                     T_CONSTANT_ENCAPSED_STRING,
                     T_CLOSE_PARENTHESIS,
@@ -616,9 +611,7 @@ final class AttributesTest extends AbstractTokenizerTestCase
     {
         $tokens     = $this->phpcsFile->getTokens();
         $tokenCodes = [
-            T_STRING,
-            T_NS_SEPARATOR,
-            T_STRING,
+            T_NAME_QUALIFIED,
             T_OPEN_PARENTHESIS,
             T_FN,
             T_WHITESPACE,
@@ -642,7 +635,8 @@ final class AttributesTest extends AbstractTokenizerTestCase
         ];
 
         // Calculate the number of tokens between opener and closer (excluding the opener, including the closer).
-        $outerAttributeLength = (count($tokenCodes) + 1);
+        $outerAttributeLength  = (count($tokenCodes) + 1);
+        $nestedAttributeOffset = 6;
 
         $attribute = $this->getTargetToken('/* testNestedAttributes */', T_ATTRIBUTE);
         $this->assertArrayHasKey('attribute_closer', $tokens[$attribute]);
@@ -656,8 +650,8 @@ final class AttributesTest extends AbstractTokenizerTestCase
         $this->assertSame($tokens[$attribute]['attribute_closer'], $tokens[$closer]['attribute_closer']);
 
         $this->assertArrayNotHasKey('nested_attributes', $tokens[$attribute]);
-        $this->assertArrayHasKey('nested_attributes', $tokens[($attribute + 8)]);
-        $this->assertSame([$attribute => ($attribute + $outerAttributeLength)], $tokens[($attribute + 8)]['nested_attributes']);
+        $this->assertArrayHasKey('nested_attributes', $tokens[($attribute + $nestedAttributeOffset)]);
+        $this->assertSame([$attribute => ($attribute + $outerAttributeLength)], $tokens[($attribute + $nestedAttributeOffset)]['nested_attributes']);
 
         $test = function (array $tokens, $outerAttributeLength, $nestedMap) use ($attribute) {
             foreach ($tokens as $token) {
@@ -667,23 +661,23 @@ final class AttributesTest extends AbstractTokenizerTestCase
             }
         };
 
-        // Length here is 8 (nested attribute offset) + 5 (real length).
-        $innerAttributeLength = (8 + 5);
+        // Length here is 6 (nested attribute offset) + 5 (real length).
+        $innerAttributeLength = ($nestedAttributeOffset + 5);
 
-        $test(array_slice($tokens, ($attribute + 1), 7), $outerAttributeLength, [$attribute => $attribute + $outerAttributeLength]);
-        $test(array_slice($tokens, ($attribute + 8), 1), $innerAttributeLength, [$attribute => $attribute + $outerAttributeLength]);
+        $test(array_slice($tokens, ($attribute + 1), 5), $outerAttributeLength, [$attribute => $attribute + $outerAttributeLength]);
+        $test(array_slice($tokens, ($attribute + $nestedAttributeOffset), 1), $innerAttributeLength, [$attribute => $attribute + $outerAttributeLength]);
 
         $test(
-            array_slice($tokens, ($attribute + 9), 4),
+            array_slice($tokens, ($attribute + 7), 4),
             $innerAttributeLength,
             [
-                $attribute     => $attribute + $outerAttributeLength,
-                $attribute + 8 => $attribute + 13,
+                $attribute                          => $attribute + $outerAttributeLength,
+                $attribute + $nestedAttributeOffset => $attribute + $innerAttributeLength,
             ]
         );
 
-        $test(array_slice($tokens, ($attribute + 13), 1), $innerAttributeLength, [$attribute => $attribute + $outerAttributeLength]);
-        $test(array_slice($tokens, ($attribute + 14), 10), $outerAttributeLength, [$attribute => $attribute + $outerAttributeLength]);
+        $test(array_slice($tokens, ($attribute + 11), 1), $innerAttributeLength, [$attribute => $attribute + $outerAttributeLength]);
+        $test(array_slice($tokens, ($attribute + 12), 10), $outerAttributeLength, [$attribute => $attribute + $outerAttributeLength]);
 
         $map = array_map(
             static function ($token) {

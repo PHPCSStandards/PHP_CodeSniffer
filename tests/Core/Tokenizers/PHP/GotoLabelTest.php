@@ -191,10 +191,8 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
      */
     public function testNotAGotoDeclaration($testMarker, $testContent, $expectedType='T_STRING')
     {
-        $targetTypes  = [
-            T_STRING     => T_STRING,
-            T_GOTO_LABEL => T_GOTO_LABEL,
-        ];
+        $targetTypes  = Tokens::$nameTokens;
+        $targetTypes += [T_GOTO_LABEL => T_GOTO_LABEL];
         $expectedCode = T_STRING;
 
         if ($expectedType !== 'T_STRING') {
@@ -228,8 +226,9 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
                 'testContent' => 'CONSTANT',
             ],
             'not goto label - namespaced constant followed by switch-case colon' => [
-                'testMarker'  => '/* testNotGotoDeclarationNamespacedConstant */',
-                'testContent' => 'CONSTANT',
+                'testMarker'   => '/* testNotGotoDeclarationNamespacedConstant */',
+                'testContent'  => 'MyNS\CONSTANT',
+                'expectedType' => 'T_NAME_QUALIFIED',
             ],
             'not goto label - class constant followed by switch-case colon'      => [
                 'testMarker'  => '/* testNotGotoDeclarationClassConstantInCase */',

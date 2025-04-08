@@ -10,6 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizers\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\Tokenizers\AbstractTokenizerTestCase;
+use PHP_CodeSniffer\Util\Tokens;
 
 final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenizerTestCase
 {
@@ -357,16 +358,21 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
      */
     public function testNotDefaultKeyword($testMarker, $testContent='DEFAULT')
     {
-        $tokens = $this->phpcsFile->getTokens();
+        $targetTypes  = Tokens::$nameTokens;
+        $targetTypes += [
+            T_MATCH_DEFAULT => T_MATCH_DEFAULT,
+            T_DEFAULT       => T_DEFAULT,
+        ];
+        $target       = $this->getTargetToken($testMarker, $targetTypes, $testContent);
 
-        $token      = $this->getTargetToken($testMarker, [T_MATCH_DEFAULT, T_DEFAULT, T_STRING], $testContent);
-        $tokenArray = $tokens[$token];
+        $tokens     = $this->phpcsFile->getTokens();
+        $tokenArray = $tokens[$target];
 
         // Make sure we're looking at the right token.
-        $this->assertSame(
-            T_STRING,
+        $this->assertArrayHasKey(
             $tokenArray['code'],
-            sprintf('Token tokenized as %s, not T_STRING (code). Marker: %s.', $tokenArray['type'], $testMarker)
+            Tokens::$nameTokens,
+            sprintf('Token tokenized as %s, not identifier name (code). Marker: %s.', $tokenArray['type'], $testMarker)
         );
 
         $this->assertArrayNotHasKey(
@@ -405,10 +411,12 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
                 'testMarker' => '/* testClassPropertyAsShortArrayKey */',
             ],
             'namespaced-constant-as-short-array-key'              => [
-                'testMarker' => '/* testNamespacedConstantAsShortArrayKey */',
+                'testMarker'  => '/* testNamespacedConstantAsShortArrayKey */',
+                'testContent' => 'SomeNamespace\DEFAULT',
             ],
             'fqn-global-constant-as-short-array-key'              => [
-                'testMarker' => '/* testFQNGlobalConstantAsShortArrayKey */',
+                'testMarker'  => '/* testFQNGlobalConstantAsShortArrayKey */',
+                'testContent' => '\DEFAULT',
             ],
             'class-constant-as-long-array-key'                    => [
                 'testMarker' => '/* testClassConstantAsLongArrayKey */',
@@ -443,10 +451,12 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
                 'testMarker' => '/* testClassPropertyInSwitchCase */',
             ],
             'namespaced-constant-in-switch-case'                  => [
-                'testMarker' => '/* testNamespacedConstantInSwitchCase */',
+                'testMarker'  => '/* testNamespacedConstantInSwitchCase */',
+                'testContent' => 'SomeNamespace\DEFAULT',
             ],
             'namespace-relative-constant-in-switch-case'          => [
-                'testMarker' => '/* testNamespaceRelativeConstantInSwitchCase */',
+                'testMarker'  => '/* testNamespaceRelativeConstantInSwitchCase */',
+                'testContent' => 'namespace\DEFAULT',
             ],
 
             'class-constant-declaration'                          => [

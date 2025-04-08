@@ -1,7 +1,7 @@
 <?php
 
 /* testPositionalArgs */
-array_fill(START_INDEX, \COUNT, MyNS\VALUE);
+array_fill(START_INDEX, $this->count, self::VALUE);
 
 /* testNamedArgs */
 array_fill(start_index: 0, count: 100, value: 50);

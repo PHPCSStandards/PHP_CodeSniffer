@@ -515,10 +515,6 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
                 'testMarker'        => '/* testClassInstantiationStaticIsKeyword */',
                 'expectedTokenType' => 'T_STATIC',
             ],
-            'namespace: operator'                    => [
-                'testMarker'        => '/* testNamespaceInNameIsKeyword */',
-                'expectedTokenType' => 'T_NAMESPACE',
-            ],
 
             'static: closure declaration'            => [
                 'testMarker'        => '/* testStaticIsKeywordBeforeClosure */',
