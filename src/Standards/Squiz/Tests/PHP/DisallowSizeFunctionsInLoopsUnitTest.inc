@@ -56,3 +56,8 @@ do {
 
 for ($i = 0; $i < $a->count; $i++) {}
 for ($i = 0; $i < $a?->count; $i++) {}
+
+for ($i = 0; $i < \sizeof($this->children); $i++) {}
+while ($i < \count($array)) {}
+do {
+} while ($i < \strlen($string));

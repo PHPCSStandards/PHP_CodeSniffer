@@ -67,8 +67,8 @@ class DisallowSizeFunctionsInLoopsSniff implements Sniff
         }
 
         for ($i = ($start + 1); $i < $end; $i++) {
-            if ($tokens[$i]['code'] === T_STRING
-                && isset($this->forbiddenFunctions[$tokens[$i]['content']]) === true
+            if (($tokens[$i]['code'] === T_STRING || $tokens[$i]['code'] === T_NAME_FULLY_QUALIFIED)
+                && isset($this->forbiddenFunctions[ltrim($tokens[$i]['content'], '\\')]) === true
             ) {
                 $functionName = $tokens[$i]['content'];
 
