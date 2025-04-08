@@ -85,6 +85,11 @@ define('T_TYPE_INTERSECTION', 'PHPCS_T_TYPE_INTERSECTION');
 define('T_TYPE_OPEN_PARENTHESIS', 'PHPCS_T_TYPE_OPEN_PARENTHESIS');
 define('T_TYPE_CLOSE_PARENTHESIS', 'PHPCS_T_TYPE_CLOSE_PARENTHESIS');
 
+/*
+ * {@internal IMPORTANT: all PHP native polyfilled tokens MUST be added to the
+ * `PHP_CodeSniffer\Tests\Core\Util\Tokens\TokenNameTest::dataPolyfilledPHPNativeTokens()` test method!}
+ */
+
 // Some PHP 5.5 tokens, replicated for lower versions.
 if (defined('T_FINALLY') === false) {
     define('T_FINALLY', 'PHPCS_T_FINALLY');
