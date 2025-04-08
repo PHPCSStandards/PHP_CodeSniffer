@@ -131,7 +131,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
         return [
             'Generic.NamingConventions.UpperCaseConstantName'  => [
                 'sniffClass'    => 'PHP_CodeSniffer\\Standards\\Generic\\Sniffs\\NamingConventions\\UpperCaseConstantNameSniff',
-                'expectedCount' => 2,
+                'expectedCount' => 3,
             ],
             'PSR1.Files.SideEffects'                           => [
                 'sniffClass'    => 'PHP_CodeSniffer\\Standards\\PSR1\\Sniffs\\Files\\SideEffectsSniff',

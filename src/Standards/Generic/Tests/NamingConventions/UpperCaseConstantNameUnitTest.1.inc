@@ -89,3 +89,6 @@ class MyClass {
 $a = ($cond) ? DEFINE : SOMETHING_ELSE;
 
 $object = new Define('value');
+
+\define('VALID_NAME', true);
+\define('invalidName', true);
