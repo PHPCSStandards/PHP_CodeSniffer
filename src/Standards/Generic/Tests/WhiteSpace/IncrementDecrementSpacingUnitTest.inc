@@ -41,3 +41,18 @@ getObject()->count
 getObject()->count++;
 ++ getObject()->count;
 ++getObject()->count;
+
+++
+\Fully\Qualified()->count;
+++\Fully\Qualified()->count;
+-- Partially\Qualified()->count;
+--Partially\Qualified()->count;
+++    namespace\relative()->count;
+++namespace\relative()->count;
+
+++\ClassName::$prop;
+++ \ClassName::$prop;
+++Relative\ClassName::$prop;
+++    Relative\ClassName::$prop;
+--namespace\Relative\ClassName::$prop;
+-- /*comment*/ namespace\Relative\ClassName::$prop;
