@@ -327,12 +327,12 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
                 'closerMarker' => '/* testSwitchDefaultNestedInMatchDefault */',
             ],
             'switch_and_default_sharing_scope_closer'                   => [
-                'testMarker'        => '/* testSwitchAndDefaultSharingScopeCloser */',
-                'openerMarker'      => '/* testSwitchAndDefaultSharingScopeCloser */',
-                'closerMarker'      => '/* testSwitchAndDefaultSharingScopeCloserScopeCloser */',
-                'conditionStop'     => null,
-                'testContent'       => 'default',
-                'sharedScopeCloser' => true,
+                'testMarker'          => '/* testSwitchAndDefaultSharingScopeCloser */',
+                'openerMarker'        => '/* testSwitchAndDefaultSharingScopeCloser */',
+                'closerMarker'        => '/* testSwitchAndDefaultSharingScopeCloserScopeCloser */',
+                'conditionStopMarker' => null,
+                'testContent'         => 'default',
+                'sharedScopeCloser'   => true,
             ],
             'switch_and_default_with_nested_if_with_and_without_braces' => [
                 'testMarker'   => '/* testSwitchDefaultNestedIfWithAndWithoutBraces */',
