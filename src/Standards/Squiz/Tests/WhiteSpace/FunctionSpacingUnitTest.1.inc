@@ -726,3 +726,27 @@ class SilenceBeforeErrorIfPreviousThingWasAFunctionBug
 
     }//end blankLineDetectionB()
 }//end class
+
+// Issue #945.
+class OnlyAcceptFirstDocblockAsBelongingWithFunction {
+    /**
+     * Superfluous docblock
+     */
+
+
+    /**
+     * Function docblock
+     */
+    function correctSpacing($x) {}
+
+
+    /**
+     * Superfluous docblock
+     */
+    /**
+     * Function docblock
+     */
+    function incorrectSpacing($x) {}
+
+
+}
