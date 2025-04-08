@@ -14,6 +14,20 @@ use PHP_CodeSniffer\Tests\Core\Tokenizers\AbstractTokenizerTestCase;
 final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenizerTestCase
 {
 
+    /**
+     * Condition stop tokens when `default` is used with curlies.
+     *
+     * @var array<int>
+     */
+    protected $conditionStopTokens = [
+        T_BREAK,
+        T_CONTINUE,
+        T_EXIT,
+        T_GOTO,
+        T_RETURN,
+        T_THROW,
+    ];
+
 
     /**
      * Test that match "default" tokens does not get scope indexes.
@@ -123,30 +137,30 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
      * Note: Cases and default structures within a switch control structure *do* get case/default scope
      * conditions.
      *
-     * @param string   $testMarker        The comment prefacing the target token.
-     * @param int      $openerOffset      The expected offset of the scope opener in relation to the testMarker.
-     * @param int      $closerOffset      The expected offset of the scope closer in relation to the testMarker.
-     * @param int|null $conditionStop     The expected offset in relation to the testMarker, at which tokens stop
-     *                                    having T_DEFAULT as a scope condition.
-     * @param string   $testContent       The token content to look for.
-     * @param bool     $sharedScopeCloser Whether to skip checking for the `scope_condition` of the
-     *                                    scope closer. Needed when the default and switch
-     *                                    structures share a scope closer. See
-     *                                    https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/810.
+     * @param string      $testMarker          The comment prefacing the target token.
+     * @param string      $openerMarker        The comment prefacing the scope opener token.
+     * @param string      $closerMarker        The comment prefacing the scope closer token.
+     * @param string|null $conditionStopMarker The expected offset in relation to the testMarker, after which tokens stop
+     *                                         having T_DEFAULT as a scope condition.
+     * @param string      $testContent         The token content to look for.
+     * @param bool        $sharedScopeCloser   Whether to skip checking for the `scope_condition` of the
+     *                                         scope closer. Needed when the default and switch
+     *                                         structures share a scope closer. See
+     *                                         https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/810.
      *
      * @dataProvider dataSwitchDefault
      * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::recurseScopeMap
      *
      * @return void
      */
-    public function testSwitchDefault($testMarker, $openerOffset, $closerOffset, $conditionStop=null, $testContent='default', $sharedScopeCloser=false)
+    public function testSwitchDefault($testMarker, $openerMarker, $closerMarker, $conditionStopMarker=null, $testContent='default', $sharedScopeCloser=false)
     {
         $tokens = $this->phpcsFile->getTokens();
 
         $token      = $this->getTargetToken($testMarker, [T_MATCH_DEFAULT, T_DEFAULT, T_STRING], $testContent);
         $tokenArray = $tokens[$token];
-        $expectedScopeOpener = ($token + $openerOffset);
-        $expectedScopeCloser = ($token + $closerOffset);
+        $expectedScopeOpener = $this->getTargetToken($openerMarker, [T_COLON, T_OPEN_CURLY_BRACKET, T_SEMICOLON]);
+        $expectedScopeCloser = $this->getTargetToken($closerMarker, [T_BREAK, T_CLOSE_CURLY_BRACKET, T_RETURN, T_ENDSWITCH]);
 
         // Make sure we're looking at the right token.
         $this->assertSame(
@@ -190,32 +204,32 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
         $this->assertArrayHasKey(
             'scope_condition',
             $tokens[$opener],
-            sprintf('Opener scope condition is not set. Marker: %s.', $testMarker)
+            sprintf('Opener scope condition is not set. Marker: %s.', $openerMarker)
         );
         $this->assertArrayHasKey(
             'scope_opener',
             $tokens[$opener],
-            sprintf('Opener scope opener is not set. Marker: %s.', $testMarker)
+            sprintf('Opener scope opener is not set. Marker: %s.', $openerMarker)
         );
         $this->assertArrayHasKey(
             'scope_closer',
             $tokens[$opener],
-            sprintf('Opener scope closer is not set. Marker: %s.', $testMarker)
+            sprintf('Opener scope closer is not set. Marker: %s.', $openerMarker)
         );
         $this->assertSame(
             $token,
             $tokens[$opener]['scope_condition'],
-            sprintf('Opener scope condition is not the T_DEFAULT token. Marker: %s.', $testMarker)
+            sprintf('Opener scope condition is not the T_DEFAULT token. Marker: %s.', $openerMarker)
         );
         $this->assertSame(
             $expectedScopeOpener,
             $tokens[$opener]['scope_opener'],
-            sprintf('T_DEFAULT opener scope opener token incorrect. Marker: %s.', $testMarker)
+            sprintf('T_DEFAULT opener scope opener token incorrect. Marker: %s.', $openerMarker)
         );
         $this->assertSame(
             $expectedScopeCloser,
             $tokens[$opener]['scope_closer'],
-            sprintf('T_DEFAULT opener scope closer token incorrect. Marker: %s.', $testMarker)
+            sprintf('T_DEFAULT opener scope closer token incorrect. Marker: %s.', $openerMarker)
         );
 
         $closer = $expectedScopeCloser;
@@ -225,39 +239,39 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
             $this->assertArrayHasKey(
                 'scope_condition',
                 $tokens[$closer],
-                sprintf('Closer scope condition is not set. Marker: %s.', $testMarker)
+                sprintf('Closer scope condition is not set. Marker: %s.', $closerMarker)
             );
             $this->assertArrayHasKey(
                 'scope_opener',
                 $tokens[$closer],
-                sprintf('Closer scope opener is not set. Marker: %s.', $testMarker)
+                sprintf('Closer scope opener is not set. Marker: %s.', $closerMarker)
             );
             $this->assertArrayHasKey(
                 'scope_closer',
                 $tokens[$closer],
-                sprintf('Closer scope closer is not set. Marker: %s.', $testMarker)
+                sprintf('Closer scope closer is not set. Marker: %s.', $closerMarker)
             );
             $this->assertSame(
                 $token,
                 $tokens[$closer]['scope_condition'],
-                sprintf('Closer scope condition is not the T_DEFAULT token. Marker: %s.', $testMarker)
+                sprintf('Closer scope condition is not the T_DEFAULT token. Marker: %s.', $closerMarker)
             );
             $this->assertSame(
                 $expectedScopeOpener,
                 $tokens[$closer]['scope_opener'],
-                sprintf('T_DEFAULT closer scope opener token incorrect. Marker: %s.', $testMarker)
+                sprintf('T_DEFAULT closer scope opener token incorrect. Marker: %s.', $closerMarker)
             );
             $this->assertSame(
                 $expectedScopeCloser,
                 $tokens[$closer]['scope_closer'],
-                sprintf('T_DEFAULT closer scope closer token incorrect. Marker: %s.', $testMarker)
+                sprintf('T_DEFAULT closer scope closer token incorrect. Marker: %s.', $closerMarker)
             );
         }//end if
 
         if (($opener + 1) !== $closer) {
             $end = $closer;
-            if (isset($conditionStop) === true) {
-                $end = ($token + $conditionStop + 1);
+            if (isset($conditionStopMarker) === true) {
+                $end = ( $this->getTargetToken($conditionStopMarker, $this->conditionStopTokens) + 1);
             }
 
             for ($i = ($opener + 1); $i < $end; $i++) {
@@ -267,7 +281,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
                     sprintf('T_DEFAULT condition not added for token belonging to the T_DEFAULT structure. Marker: %s.', $testMarker)
                 );
             }
-        }
+        }//end if
 
     }//end testSwitchDefault()
 
@@ -284,46 +298,46 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
         return [
             'simple_switch_default'                                     => [
                 'testMarker'   => '/* testSimpleSwitchDefault */',
-                'openerOffset' => 1,
-                'closerOffset' => 4,
+                'openerMarker' => '/* testSimpleSwitchDefault */',
+                'closerMarker' => '/* testSimpleSwitchDefault */',
             ],
             'simple_switch_default_with_curlies'                        => [
                 // For a default structure with curly braces, the scope opener
                 // will be the open curly and the closer the close curly.
                 // However, scope conditions will not be set for open to close,
                 // but only for the open token up to the "break/return/continue" etc.
-                'testMarker'    => '/* testSimpleSwitchDefaultWithCurlies */',
-                'openerOffset'  => 3,
-                'closerOffset'  => 12,
-                'conditionStop' => 6,
+                'testMarker'          => '/* testSimpleSwitchDefaultWithCurlies */',
+                'openerMarker'        => '/* testSimpleSwitchDefaultWithCurliesScopeOpener */',
+                'closerMarker'        => '/* testSimpleSwitchDefaultWithCurliesScopeCloser */',
+                'conditionStopMarker' => '/* testSimpleSwitchDefaultWithCurliesConditionStop */',
             ],
             'switch_default_toplevel'                                   => [
                 'testMarker'   => '/* testSwitchDefault */',
-                'openerOffset' => 1,
-                'closerOffset' => 43,
+                'openerMarker' => '/* testSwitchDefault */',
+                'closerMarker' => '/* testSwitchDefaultCloserMarker */',
             ],
             'switch_default_nested_in_match_case'                       => [
                 'testMarker'   => '/* testSwitchDefaultNestedInMatchCase */',
-                'openerOffset' => 1,
-                'closerOffset' => 20,
+                'openerMarker' => '/* testSwitchDefaultNestedInMatchCase */',
+                'closerMarker' => '/* testSwitchDefaultNestedInMatchCase */',
             ],
             'switch_default_nested_in_match_default'                    => [
                 'testMarker'   => '/* testSwitchDefaultNestedInMatchDefault */',
-                'openerOffset' => 1,
-                'closerOffset' => 18,
+                'openerMarker' => '/* testSwitchDefaultNestedInMatchDefault */',
+                'closerMarker' => '/* testSwitchDefaultNestedInMatchDefault */',
             ],
             'switch_and_default_sharing_scope_closer'                   => [
                 'testMarker'        => '/* testSwitchAndDefaultSharingScopeCloser */',
-                'openerOffset'      => 1,
-                'closerOffset'      => 10,
+                'openerMarker'      => '/* testSwitchAndDefaultSharingScopeCloser */',
+                'closerMarker'      => '/* testSwitchAndDefaultSharingScopeCloserScopeCloser */',
                 'conditionStop'     => null,
                 'testContent'       => 'default',
                 'sharedScopeCloser' => true,
             ],
             'switch_and_default_with_nested_if_with_and_without_braces' => [
                 'testMarker'   => '/* testSwitchDefaultNestedIfWithAndWithoutBraces */',
-                'openerOffset' => 1,
-                'closerOffset' => 48,
+                'openerMarker' => '/* testSwitchDefaultNestedIfWithAndWithoutBraces */',
+                'closerMarker' => '/* testSwitchDefaultNestedIfWithAndWithoutBracesScopeCloser */',
             ],
         ];
 
