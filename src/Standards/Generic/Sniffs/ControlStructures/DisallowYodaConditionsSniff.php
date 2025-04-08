@@ -88,7 +88,7 @@ class DisallowYodaConditionsSniff implements Sniff
             );
 
             if ($beforeOpeningParenthesisIndex === false || $tokens[$beforeOpeningParenthesisIndex]['code'] !== T_ARRAY) {
-                if ($tokens[$beforeOpeningParenthesisIndex]['code'] === T_STRING) {
+                if (isset(Tokens::$nameTokens[$tokens[$beforeOpeningParenthesisIndex]['code']]) === true) {
                     return;
                 }
 
