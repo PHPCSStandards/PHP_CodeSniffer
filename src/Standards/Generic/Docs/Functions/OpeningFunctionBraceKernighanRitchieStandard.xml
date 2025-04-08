@@ -1,8 +1,9 @@
 <documentation title="Opening Function Brace Kerninghan Ritchie">
     <standard>
     <![CDATA[
-    The function opening brace must be on the same line as the end of the function declaration, with exactly
-    one space between them, and must be the last content on the line.
+    The function opening brace must be on the same line as the end of the function declaration, with
+    exactly one space between the end of the declaration and the brace. The brace must be the last
+    content on the line.
     ]]>
     </standard>
     <code_comparison>
