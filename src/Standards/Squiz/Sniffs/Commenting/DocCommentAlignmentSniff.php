@@ -72,6 +72,7 @@ class DocCommentAlignmentSniff implements Sniff
             T_PROTECTED => true,
             T_STATIC    => true,
             T_ABSTRACT  => true,
+            T_FINAL     => true,
             T_PROPERTY  => true,
             T_OBJECT    => true,
             T_PROTOTYPE => true,

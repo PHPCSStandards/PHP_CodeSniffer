@@ -101,3 +101,16 @@ enum Suits: string
  * Example with no errors.
  **************************************************************************/
 function example() {}
+
+/**
+  *  Some info about the class here.
+    */
+final class FinalClassWithFinalProp
+{
+    /**
+   *Some info about the property here.
+    *
+     *  @var int
+      */
+    final $property = 10;
+}
