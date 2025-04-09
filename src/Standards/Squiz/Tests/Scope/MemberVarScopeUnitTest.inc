@@ -70,3 +70,7 @@ class MyClass {
 interface Base {
     protected $anonymous;
 }
+
+class PHP84FinalProperties {
+    final int $final;
+}
