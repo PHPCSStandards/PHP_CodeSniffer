@@ -462,3 +462,10 @@ class DNFTypes
      */
     private (\Iterator&namespace\Countable)|false|null $variableName;
 }
+
+class PHP84FinalProperties {
+    /**
+     * @var integer
+     */
+    final int $hasDocblock;
+}
