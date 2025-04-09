@@ -860,15 +860,6 @@ final class Tokens
     public static $heredocTokens = self::HEREDOC_TOKENS;
 
     /**
-     * Tokens used for "names", be it namespace, OO, function or constant names.
-     *
-     * @deprecated 4.0 Use the Tokens::NAME_TOKENS constant instead.
-     *
-     * @var array<int|string, int|string>
-     */
-    public static $nameTokens = self::NAME_TOKENS;
-
-    /**
      * Tokens that represent the names of called functions.
      *
      * Mostly, these are just strings. But PHP tokenizes some language
