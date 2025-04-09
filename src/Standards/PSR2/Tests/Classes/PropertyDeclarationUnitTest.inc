@@ -85,3 +85,14 @@ class ReadOnlyProp {
 
     readonly protected ?string $wrongOrder2;
 }
+
+class FinalProperties {
+    final public int $foo,
+        $bar,
+        $var = null;
+
+    final protected (D|N)|false  $foo;
+    final array $foo;
+    public FINAL ?int $wrongOrder1;
+    static protected final ?string $wrongOrder2;
+}
