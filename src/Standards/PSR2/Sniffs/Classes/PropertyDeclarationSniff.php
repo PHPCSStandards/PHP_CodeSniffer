@@ -43,6 +43,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
         $find[] = T_VARIABLE;
         $find[] = T_VAR;
         $find[] = T_READONLY;
+        $find[] = T_FINAL;
         $find[] = T_SEMICOLON;
         $find[] = T_OPEN_CURLY_BRACKET;
 
@@ -130,11 +131,35 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
          *
          * Ref: https://www.php-fig.org/per/coding-style/#46-modifier-keywords
          *
-         * At this time (PHP 8.2), inheritance modifiers cannot be applied to properties and
-         * the `static` and `readonly` modifiers are mutually exclusive and cannot be used together.
+         * The `static` and `readonly` modifiers are mutually exclusive and cannot be used together.
          *
          * Based on that, the below modifier keyword order checks are sufficient (for now).
          */
+
+        if ($propertyInfo['scope_specified'] === true && $propertyInfo['is_final'] === true) {
+            $scopePtr = $phpcsFile->findPrevious(Tokens::$scopeModifiers, ($stackPtr - 1));
+            $finalPtr = $phpcsFile->findPrevious(T_FINAL, ($stackPtr - 1));
+            if ($finalPtr > $scopePtr) {
+                $error = 'The final declaration must come before the visibility declaration';
+                $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'FinalAfterVisibility');
+                if ($fix === true) {
+                    $phpcsFile->fixer->beginChangeset();
+
+                    for ($i = ($finalPtr + 1); $finalPtr < $stackPtr; $i++) {
+                        if ($tokens[$i]['code'] !== T_WHITESPACE) {
+                            break;
+                        }
+
+                        $phpcsFile->fixer->replaceToken($i, '');
+                    }
+
+                    $phpcsFile->fixer->replaceToken($finalPtr, '');
+                    $phpcsFile->fixer->addContentBefore($scopePtr, $tokens[$finalPtr]['content'].' ');
+
+                    $phpcsFile->fixer->endChangeset();
+                }
+            }
+        }//end if
 
         if ($propertyInfo['scope_specified'] === true && $propertyInfo['is_static'] === true) {
             $scopePtr  = $phpcsFile->findPrevious(Tokens::$scopeModifiers, ($stackPtr - 1));
