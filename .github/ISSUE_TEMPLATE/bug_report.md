@@ -51,13 +51,13 @@ A clear and concise description of what you expected to happen.
 
 ## Versions (please complete the following information)
 
-|                                       |                                                                                                           |
-|--------------------------|----------------------------------------------------------------------  |
-| Operating System           | [e.g., Windows 10, MacOS 10.15]                                                       |
-| PHP version                    | [e.g., 7.2, 8.1]                                                                                     |
-| PHP_CodeSniffer version | [e.g., 3.7.2, master]                                                                            |
-| Standard                         | [e.g., PSR2, PSR12, Squiz, custom]                                                      |
-| Install type                      | [e.g. Composer (global/local), PHAR, git clone, other (please expand)] |
+|                                          |                                                                                                                |
+|-----------------------------|---------------------------------------------------------------------------- |
+| Operating System            | (e.g., Windows 10, MacOS 10.15)                                                           |
+| PHP version                      | (e.g., 7.2, 8.1)                                                                                          |
+| PHP_CodeSniffer version | (e.g., 3.7.2, master)                                                                                  |
+| Standard                          | (e.g., PSR2, PSR12, Squiz, custom)                                                          |
+| Install type                       | (e.g. Composer (global/local), PHAR, git clone, other (please expand)) |
 
 ## Additional context
 
