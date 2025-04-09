@@ -94,7 +94,7 @@ class UselessOverridingMethodSniff implements Sniff
         for (; $next <= $end; ++$next) {
             $code = $tokens[$next]['code'];
 
-            if (isset(Tokens::$emptyTokens[$code]) === true) {
+            if (isset(Tokens::EMPTY_TOKENS[$code]) === true) {
                 continue;
             } else if ($code === T_RETURN) {
                 continue;
@@ -109,7 +109,7 @@ class UselessOverridingMethodSniff implements Sniff
         }
 
         // Find next non empty token index, should be double colon.
-        $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
+        $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($next + 1), null, true);
 
         // Skip for invalid code.
         if ($tokens[$next]['code'] !== T_DOUBLE_COLON) {
@@ -117,7 +117,7 @@ class UselessOverridingMethodSniff implements Sniff
         }
 
         // Find next non empty token index, should be the name of the method being called.
-        $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
+        $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($next + 1), null, true);
 
         // Skip for invalid code or other method.
         if (strcasecmp($tokens[$next]['content'], $methodName) !== 0) {
@@ -125,7 +125,7 @@ class UselessOverridingMethodSniff implements Sniff
         }
 
         // Find next non empty token index, should be the open parenthesis.
-        $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
+        $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($next + 1), null, true);
 
         // Skip for invalid code.
         if ($tokens[$next]['code'] !== T_OPEN_PARENTHESIS || isset($tokens[$next]['parenthesis_closer']) === false) {
@@ -143,7 +143,7 @@ class UselessOverridingMethodSniff implements Sniff
                 --$parenthesisCount;
             } else if ($parenthesisCount === 1 && $code === T_COMMA) {
                 $parameters[] = '';
-            } else if (isset(Tokens::$emptyTokens[$code]) === false) {
+            } else if (isset(Tokens::EMPTY_TOKENS[$code]) === false) {
                 $parameters[(count($parameters) - 1)] .= $tokens[$next]['content'];
             }
 
@@ -152,13 +152,13 @@ class UselessOverridingMethodSniff implements Sniff
             }
         }//end for
 
-        $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
+        $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($next + 1), null, true);
         if ($tokens[$next]['code'] !== T_SEMICOLON && $tokens[$next]['code'] !== T_CLOSE_TAG) {
             return;
         }
 
         // This list deliberately does not include the `T_OPEN_TAG_WITH_ECHO` as that token implicitly is an echo statement, i.e. content.
-        $nonContent = Tokens::$emptyTokens;
+        $nonContent = Tokens::EMPTY_TOKENS;
         $nonContent[T_OPEN_TAG]  = T_OPEN_TAG;
         $nonContent[T_CLOSE_TAG] = T_CLOSE_TAG;
 

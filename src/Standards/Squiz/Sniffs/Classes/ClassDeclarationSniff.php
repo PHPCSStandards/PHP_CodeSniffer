@@ -111,7 +111,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
             if ($tokens[$nextContent]['line'] === $tokens[$closeBrace]['line']
                 && ($tokens[$nextContent]['code'] === T_WHITESPACE
                 || $tokens[$nextContent]['code'] === T_COMMENT
-                || isset(Tokens::$phpcsCommentTokens[$tokens[$nextContent]['code']]) === true)
+                || isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[$nextContent]['code']]) === true)
             ) {
                 continue;
             }

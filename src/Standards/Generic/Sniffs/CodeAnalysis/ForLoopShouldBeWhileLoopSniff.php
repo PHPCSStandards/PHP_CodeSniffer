@@ -75,7 +75,7 @@ class ForLoopShouldBeWhileLoopSniff implements Sniff
             $code = $tokens[$next]['code'];
             if ($code === T_SEMICOLON) {
                 ++$index;
-            } else if (isset(Tokens::$emptyTokens[$code]) === false) {
+            } else if (isset(Tokens::EMPTY_TOKENS[$code]) === false) {
                 ++$parts[$index];
             }
         }

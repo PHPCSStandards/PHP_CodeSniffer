@@ -115,7 +115,7 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
         $this->assertIsInt($label);
         $this->assertSame($testContent, $tokens[$label]['content']);
 
-        $next = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
+        $next = $this->phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($label + 1), null, true);
 
         $this->assertIsInt($next);
         $this->assertSame(T_GOTO_COLON, $tokens[$next]['code']);
@@ -191,7 +191,7 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
      */
     public function testNotAGotoDeclaration($testMarker, $testContent, $expectedType='T_STRING')
     {
-        $targetTypes  = Tokens::$nameTokens;
+        $targetTypes  = Tokens::NAME_TOKENS;
         $targetTypes += [T_GOTO_LABEL => T_GOTO_LABEL];
         $expectedCode = T_STRING;
 

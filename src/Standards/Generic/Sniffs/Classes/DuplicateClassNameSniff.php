@@ -62,7 +62,7 @@ class DuplicateClassNameSniff implements Sniff
         while ($stackPtr !== false) {
             // Keep track of what namespace we are in.
             if ($tokens[$stackPtr]['code'] === T_NAMESPACE) {
-                $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+                $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
                 if ($nextNonEmpty !== false) {
                     if ($tokens[$nextNonEmpty]['code'] === T_STRING
                         || $tokens[$nextNonEmpty]['code'] === T_NAME_QUALIFIED

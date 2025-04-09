@@ -75,7 +75,7 @@ class ComparisonOperatorUsageSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
 
         if ($tokens[$stackPtr]['code'] === T_INLINE_THEN) {
-            $end = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+            $end = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
             if ($tokens[$end]['code'] !== T_CLOSE_PARENTHESIS) {
                 // This inline IF statement does not have its condition
                 // bracketed, so we need to guess where it starts.
@@ -111,7 +111,7 @@ class ComparisonOperatorUsageSniff implements Sniff
                     }//end if
                 }//end for
 
-                $start = $phpcsFile->findNext(Tokens::$emptyTokens, ($i + 1), null, true);
+                $start = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($i + 1), null, true);
             } else {
                 if (isset($tokens[$end]['parenthesis_opener']) === false) {
                     return;
@@ -163,7 +163,7 @@ class ComparisonOperatorUsageSniff implements Sniff
 
             if ($type === T_OPEN_PARENTHESIS
                 && isset($tokens[$i]['parenthesis_closer']) === true
-                && isset(Tokens::$functionNameTokens[$tokens[$lastNonEmpty]['code']]) === true
+                && isset(Tokens::FUNCTION_NAME_TOKENS[$tokens[$lastNonEmpty]['code']]) === true
             ) {
                 $i            = $tokens[$i]['parenthesis_closer'];
                 $lastNonEmpty = $i;
@@ -196,7 +196,7 @@ class ComparisonOperatorUsageSniff implements Sniff
                 }
             }
 
-            if (isset(Tokens::$emptyTokens[$type]) === false) {
+            if (isset(Tokens::EMPTY_TOKENS[$type]) === false) {
                 $lastNonEmpty = $i;
             }
         }//end for

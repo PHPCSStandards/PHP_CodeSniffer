@@ -107,7 +107,7 @@ class UseDeclarationSniff implements Sniff
 
                         // Convert grouped use statements into full use statements.
                         do {
-                            $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), $closingCurly, true);
+                            $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($next + 1), $closingCurly, true);
                             if ($next === false) {
                                 // Group use statement with trailing comma after last item.
                                 break;
@@ -125,7 +125,7 @@ class UseDeclarationSniff implements Sniff
 
                             if ($tokens[$next]['content'] === 'const' || $tokens[$next]['content'] === 'function') {
                                 $phpcsFile->fixer->addContentBefore($next, 'use ');
-                                $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), $closingCurly, true);
+                                $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($next + 1), $closingCurly, true);
                                 $phpcsFile->fixer->addContentBefore($next, str_replace('use ', '', $baseUse));
                             } else {
                                 $phpcsFile->fixer->addContentBefore($next, $baseUse);
@@ -133,7 +133,7 @@ class UseDeclarationSniff implements Sniff
 
                             $next = $phpcsFile->findNext(T_COMMA, ($next + 1), $closingCurly);
                             if ($next !== false) {
-                                $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), $closingCurly, true);
+                                $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($next + 1), $closingCurly, true);
                                 if ($nextNonEmpty !== false && $tokens[$nextNonEmpty]['line'] === $tokens[$next]['line']) {
                                     $prevNonWhitespace = $phpcsFile->findPrevious(T_WHITESPACE, ($nextNonEmpty - 1), $next, true);
                                     if ($prevNonWhitespace === $next) {
@@ -153,7 +153,7 @@ class UseDeclarationSniff implements Sniff
                         } while ($next !== false);
 
                         // Remove closing curly, semicolon and any whitespace between last child and closing curly.
-                        $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($closingCurly + 1), null, true);
+                        $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($closingCurly + 1), null, true);
                         if ($next === false || $tokens[$next]['code'] !== T_SEMICOLON) {
                             // Parse error, forgotten semicolon.
                             $next = $closingCurly;
@@ -198,7 +198,7 @@ class UseDeclarationSniff implements Sniff
         }
 
         if ($tokens[$end]['code'] === T_CLOSE_USE_GROUP) {
-            $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($end + 1), null, true);
+            $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($end + 1), null, true);
             if ($tokens[$nextNonEmpty]['code'] === T_SEMICOLON) {
                 $end = $nextNonEmpty;
             }
@@ -207,7 +207,7 @@ class UseDeclarationSniff implements Sniff
         // Find either the start of the next line or the beginning of the next statement,
         // whichever comes first.
         for ($end = ++$end; $end < $phpcsFile->numTokens; $end++) {
-            if (isset(Tokens::$emptyTokens[$tokens[$end]['code']]) === false) {
+            if (isset(Tokens::EMPTY_TOKENS[$tokens[$end]['code']]) === false) {
                 break;
             }
 
@@ -220,7 +220,7 @@ class UseDeclarationSniff implements Sniff
         --$end;
 
         if (($tokens[$end]['code'] === T_COMMENT
-            || isset(Tokens::$phpcsCommentTokens[$tokens[$end]['code']]) === true)
+            || isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[$end]['code']]) === true)
             && substr($tokens[$end]['content'], 0, 2) === '/*'
             && substr($tokens[$end]['content'], -2) !== '*/'
         ) {
@@ -284,7 +284,7 @@ class UseDeclarationSniff implements Sniff
         }
 
         // Ignore USE keywords during live coding.
-        $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
         if ($next === false) {
             return true;
         }

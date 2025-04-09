@@ -71,7 +71,7 @@ class BlockCommentSniff implements Sniff
         if ($tokens[$stackPtr]['code'] === T_DOC_COMMENT_OPEN_TAG) {
             $nextToken = $stackPtr;
             do {
-                $nextToken = $phpcsFile->findNext(Tokens::$emptyTokens, ($nextToken + 1), null, true);
+                $nextToken = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($nextToken + 1), null, true);
                 if ($tokens[$nextToken]['code'] === T_ATTRIBUTE) {
                     $nextToken = $tokens[$nextToken]['attribute_closer'];
                     continue;
@@ -100,7 +100,7 @@ class BlockCommentSniff implements Sniff
                 return;
             }
 
-            $prevToken = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+            $prevToken = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
             if ($tokens[$prevToken]['code'] === T_OPEN_TAG) {
                 return;
             }
@@ -131,7 +131,7 @@ class BlockCommentSniff implements Sniff
         // Construct the comment into an array.
         while (($nextComment = $phpcsFile->findNext(T_WHITESPACE, ($nextComment + 1), null, true)) !== false) {
             if ($tokens[$nextComment]['code'] !== $tokens[$stackPtr]['code']
-                && isset(Tokens::$phpcsCommentTokens[$tokens[$nextComment]['code']]) === false
+                && isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[$nextComment]['code']]) === false
             ) {
                 // Found the next bit of code.
                 break;
@@ -175,7 +175,7 @@ class BlockCommentSniff implements Sniff
             $error = 'Single line block comment not allowed; use inline ("// text") comment instead';
 
             // Only fix comments when they are the last token on a line.
-            $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+            $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
             if ($tokens[$stackPtr]['line'] !== $tokens[$nextNonEmpty]['line']) {
                 $fix = $phpcsFile->addFixableError($error, $stackPtr, 'SingleLine');
                 if ($fix === true) {

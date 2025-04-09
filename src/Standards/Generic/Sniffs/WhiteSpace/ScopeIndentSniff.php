@@ -684,7 +684,7 @@ class ScopeIndentSniff implements Sniff
             }//end if
 
             if ($checkToken !== null
-                && isset(Tokens::$scopeOpeners[$tokens[$checkToken]['code']]) === true
+                && isset(Tokens::SCOPE_OPENERS[$tokens[$checkToken]['code']]) === true
                 && in_array($tokens[$checkToken]['code'], $this->nonIndentingScopes, true) === false
                 && isset($tokens[$checkToken]['scope_opener']) === true
             ) {
@@ -747,10 +747,10 @@ class ScopeIndentSniff implements Sniff
             // Method prefix indentation has to be exact or else it will break
             // the rest of the function declaration, and potentially future ones.
             if ($checkToken !== null
-                && isset(Tokens::$methodPrefixes[$tokens[$checkToken]['code']]) === true
+                && isset(Tokens::METHOD_MODIFIERS[$tokens[$checkToken]['code']]) === true
                 && $tokens[($checkToken + 1)]['code'] !== T_DOUBLE_COLON
             ) {
-                $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($checkToken + 1), null, true);
+                $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($checkToken + 1), null, true);
                 if ($next === false
                     || ($tokens[$next]['code'] !== T_CLOSURE
                     && $tokens[$next]['code'] !== T_VARIABLE
@@ -950,7 +950,7 @@ class ScopeIndentSniff implements Sniff
                 }
 
                 $i    = $phpcsFile->findNext([T_END_HEREDOC, T_END_NOWDOC], ($i + 1));
-                $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($i + 1), null, true);
+                $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($i + 1), null, true);
                 if ($tokens[$next]['code'] === T_COMMA) {
                     $i = $next;
                 }
@@ -1148,7 +1148,7 @@ class ScopeIndentSniff implements Sniff
                     continue;
                 }
 
-                if (isset(Tokens::$scopeOpeners[$condition]) === true
+                if (isset(Tokens::SCOPE_OPENERS[$condition]) === true
                     && in_array($condition, $this->nonIndentingScopes, true) === false
                 ) {
                     if ($this->debug === true) {
@@ -1228,7 +1228,7 @@ class ScopeIndentSniff implements Sniff
                         StatusWriter::write('* using parenthesis *', 1);
                     }
 
-                    $prev      = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($parens - 1), null, true);
+                    $prev      = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($parens - 1), null, true);
                     $condition = 0;
                 } else if ($condition > 0) {
                     if ($this->debug === true) {

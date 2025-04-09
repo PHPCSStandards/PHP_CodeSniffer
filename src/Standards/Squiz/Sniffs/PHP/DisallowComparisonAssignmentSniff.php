@@ -54,7 +54,7 @@ class DisallowComparisonAssignmentSniff implements Sniff
 
         // Ignore values in array definitions or match structures.
         $nextNonEmpty = $phpcsFile->findNext(
-            Tokens::$emptyTokens,
+            Tokens::EMPTY_TOKENS,
             ($stackPtr + 1),
             null,
             true
@@ -68,7 +68,7 @@ class DisallowComparisonAssignmentSniff implements Sniff
         }
 
         // Ignore function calls.
-        $ignore   = Tokens::$nameTokens;
+        $ignore   = Tokens::NAME_TOKENS;
         $ignore[] = T_NULLSAFE_OBJECT_OPERATOR;
         $ignore[] = T_OBJECT_OPERATOR;
         $ignore[] = T_VARIABLE;
@@ -77,7 +77,7 @@ class DisallowComparisonAssignmentSniff implements Sniff
         $next = $phpcsFile->findNext($ignore, ($stackPtr + 1), null, true);
         if ($tokens[$next]['code'] === T_CLOSURE
             || ($tokens[$next]['code'] === T_OPEN_PARENTHESIS
-            && isset(Tokens::$nameTokens[$tokens[($next - 1)]['code']]) === true)
+            && isset(Tokens::NAME_TOKENS[$tokens[($next - 1)]['code']]) === true)
         ) {
             // Code will look like: $var = myFunction(
             // and will be ignored.
@@ -86,7 +86,7 @@ class DisallowComparisonAssignmentSniff implements Sniff
 
         $endStatement = $phpcsFile->findEndOfStatement($stackPtr);
         for ($i = ($stackPtr + 1); $i < $endStatement; $i++) {
-            if ((isset(Tokens::$comparisonTokens[$tokens[$i]['code']]) === true
+            if ((isset(Tokens::COMPARISON_TOKENS[$tokens[$i]['code']]) === true
                 && $tokens[$i]['code'] !== T_COALESCE)
                 || $tokens[$i]['code'] === T_INLINE_THEN
             ) {
@@ -95,7 +95,7 @@ class DisallowComparisonAssignmentSniff implements Sniff
                 break;
             }
 
-            if (isset(Tokens::$booleanOperators[$tokens[$i]['code']]) === true
+            if (isset(Tokens::BOOLEAN_OPERATORS[$tokens[$i]['code']]) === true
                 || $tokens[$i]['code'] === T_BOOLEAN_NOT
             ) {
                 $error = 'The value of a boolean operation must not be assigned to a variable';

@@ -24,7 +24,7 @@ class MemberVarScopeSniff extends AbstractVariableSniff
      */
     public function __construct()
     {
-        AbstractScopeSniff::__construct(Tokens::$ooScopeTokens, [T_VARIABLE], false);
+        AbstractScopeSniff::__construct(Tokens::OO_SCOPE_TOKENS, [T_VARIABLE], false);
 
     }//end __construct()
 

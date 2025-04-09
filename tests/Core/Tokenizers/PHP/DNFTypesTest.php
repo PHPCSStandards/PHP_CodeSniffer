@@ -62,7 +62,7 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             }
         }
 
-        $before = $this->phpcsFile->findPrevious(Tokens::$emptyTokens, ($openPtr - 1), null, true);
+        $before = $this->phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($openPtr - 1), null, true);
         if ($before !== false && $tokens[$before]['content'] === '|') {
             $this->assertSame(
                 T_BITWISE_OR,
@@ -76,7 +76,7 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             );
         }
 
-        $after = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($closePtr + 1), null, true);
+        $after = $this->phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($closePtr + 1), null, true);
         if ($after !== false && $tokens[$after]['content'] === '|') {
             $this->assertSame(
                 T_BITWISE_OR,
@@ -330,7 +330,7 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
 
         $this->assertGreaterThanOrEqual(1, $intersectionCount, 'Did not find an intersection "&" between the DNF type parentheses');
 
-        $before = $this->phpcsFile->findPrevious(Tokens::$emptyTokens, ($openPtr - 1), null, true);
+        $before = $this->phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($openPtr - 1), null, true);
         if ($before !== false && $tokens[$before]['content'] === '|') {
             $this->assertSame(
                 T_TYPE_UNION,
@@ -358,7 +358,7 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             );
         }
 
-        $after = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($closePtr + 1), null, true);
+        $after = $this->phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($closePtr + 1), null, true);
         if ($after !== false && $tokens[$after]['content'] === '|') {
             $this->assertSame(
                 T_TYPE_UNION,

@@ -24,7 +24,7 @@ class FunctionCallArgumentSpacingSniff implements Sniff
      */
     public function register()
     {
-        $targets   = Tokens::$nameTokens;
+        $targets   = Tokens::NAME_TOKENS;
         $targets[] = T_ISSET;
         $targets[] = T_UNSET;
         $targets[] = T_SELF;
@@ -58,7 +58,7 @@ class FunctionCallArgumentSpacingSniff implements Sniff
         // "myFunction" is T_STRING but we should skip because it is not a
         // function or method *call*.
         $functionName    = $stackPtr;
-        $ignoreTokens    = Tokens::$emptyTokens;
+        $ignoreTokens    = Tokens::EMPTY_TOKENS;
         $ignoreTokens[]  = T_BITWISE_AND;
         $functionKeyword = $phpcsFile->findPrevious($ignoreTokens, ($stackPtr - 1), null, true);
         if ($tokens[$functionKeyword]['code'] === T_FUNCTION || $tokens[$functionKeyword]['code'] === T_CLASS) {
@@ -74,7 +74,7 @@ class FunctionCallArgumentSpacingSniff implements Sniff
 
         // If the next non-whitespace token after the function or method call
         // is not an opening parenthesis then it can't really be a *call*.
-        $openBracket = $phpcsFile->findNext(Tokens::$emptyTokens, ($functionName + 1), null, true);
+        $openBracket = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($functionName + 1), null, true);
         if ($tokens[$openBracket]['code'] !== T_OPEN_PARENTHESIS) {
             return;
         }
@@ -144,8 +144,8 @@ class FunctionCallArgumentSpacingSniff implements Sniff
 
             if ($tokens[$nextSeparator]['code'] === T_COMMA) {
                 if ($tokens[($nextSeparator - 1)]['code'] === T_WHITESPACE) {
-                    $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($nextSeparator - 2), null, true);
-                    if (isset(Tokens::$heredocTokens[$tokens[$prev]['code']]) === false) {
+                    $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($nextSeparator - 2), null, true);
+                    if (isset(Tokens::HEREDOC_TOKENS[$tokens[$prev]['code']]) === false) {
                         $error = 'Space found before comma in argument list';
                         $fix   = $phpcsFile->addFixableError($error, $nextSeparator, 'SpaceBeforeComma');
                         if ($fix === true) {
@@ -175,7 +175,7 @@ class FunctionCallArgumentSpacingSniff implements Sniff
                 } else {
                     // If there is a newline in the space, then they must be formatting
                     // each argument on a newline, which is valid, so ignore it.
-                    $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($nextSeparator + 1), null, true);
+                    $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($nextSeparator + 1), null, true);
                     if ($tokens[$next]['line'] === $tokens[$nextSeparator]['line']) {
                         $space = $tokens[($nextSeparator + 1)]['length'];
                         if ($space > 1) {

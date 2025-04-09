@@ -76,7 +76,7 @@ class EmptyStatementSniff implements Sniff
         }
 
         $next = $phpcsFile->findNext(
-            Tokens::$emptyTokens,
+            Tokens::EMPTY_TOKENS,
             ($token['scope_opener'] + 1),
             ($token['scope_closer'] - 1),
             true

@@ -635,9 +635,9 @@ abstract class Tokenizer
                 Parenthesis mapping.
             */
 
-            if (isset(Tokens::$parenthesisOpeners[$this->tokens[$i]['code']]) === true) {
+            if (isset(Tokens::PARENTHESIS_OPENERS[$this->tokens[$i]['code']]) === true) {
                 // Find the next non-empty token.
-                $find = Tokens::$emptyTokens;
+                $find = Tokens::EMPTY_TOKENS;
                 if ($this->tokens[$i]['code'] === T_FUNCTION) {
                     $find[T_STRING]      = T_STRING;
                     $find[T_BITWISE_AND] = T_BITWISE_AND;
@@ -1234,13 +1234,13 @@ abstract class Tokenizer
                         // Make sure this is actually an opener and not a
                         // string offset (e.g., $var{0}).
                         for ($x = ($i - 1); $x > 0; $x--) {
-                            if (isset(Tokens::$emptyTokens[$this->tokens[$x]['code']]) === true) {
+                            if (isset(Tokens::EMPTY_TOKENS[$this->tokens[$x]['code']]) === true) {
                                 continue;
                             } else {
                                 // If the first non-whitespace/comment token looks like this
                                 // brace is a string offset, or this brace is mid-way through
                                 // a new statement, it isn't a scope opener.
-                                $disallowed  = Tokens::$assignmentTokens;
+                                $disallowed  = Tokens::ASSIGNMENT_TOKENS;
                                 $disallowed += [
                                     T_DOLLAR                   => true,
                                     T_VARIABLE                 => true,
@@ -1304,7 +1304,7 @@ abstract class Tokenizer
             } else if ($tokenType === T_OPEN_PARENTHESIS) {
                 if (isset($this->tokens[$i]['parenthesis_owner']) === true) {
                     $owner = $this->tokens[$i]['parenthesis_owner'];
-                    if (isset(Tokens::$scopeOpeners[$this->tokens[$owner]['code']]) === true
+                    if (isset(Tokens::SCOPE_OPENERS[$this->tokens[$owner]['code']]) === true
                         && isset($this->tokens[$i]['parenthesis_closer']) === true
                     ) {
                         // If we get into here, then we opened a parenthesis for
@@ -1341,7 +1341,7 @@ abstract class Tokenizer
                 // token was empty (in which case we'll just confirm there is
                 // more code in this file and not just a big comment).
                 if ($this->tokens[$i]['line'] >= ($startLine + 30)
-                    && isset(Tokens::$emptyTokens[$this->tokens[($i - 1)]['code']]) === false
+                    && isset(Tokens::EMPTY_TOKENS[$this->tokens[($i - 1)]['code']]) === false
                 ) {
                     if ($this->scopeOpeners[$currType]['strict'] === true) {
                         if (PHP_CODESNIFFER_VERBOSITY > 1) {

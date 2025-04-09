@@ -171,7 +171,7 @@ final class DefaultKeywordTest extends AbstractTokenizerTestCase
      */
     public function testNotDefaultKeyword($testMarker, $testContent='DEFAULT', $expectedType='T_STRING')
     {
-        $targetTypes  = Tokens::$nameTokens;
+        $targetTypes  = Tokens::NAME_TOKENS;
         $targetTypes += [
             T_MATCH_DEFAULT => T_MATCH_DEFAULT,
             T_DEFAULT       => T_DEFAULT,

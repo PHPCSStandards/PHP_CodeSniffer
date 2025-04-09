@@ -239,7 +239,7 @@ class SwitchDeclarationSniff implements Sniff
                                 continue;
                             }
 
-                            if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === false) {
+                            if (isset(Tokens::EMPTY_TOKENS[$tokens[$i]['code']]) === false) {
                                 $foundContent = true;
                                 break;
                             }

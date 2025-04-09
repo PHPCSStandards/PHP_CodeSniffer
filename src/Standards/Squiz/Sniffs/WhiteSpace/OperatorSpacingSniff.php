@@ -54,16 +54,16 @@ class OperatorSpacingSniff implements Sniff
         */
 
         // Trying to operate on a negative value; eg. ($var * -1).
-        $this->nonOperandTokens = Tokens::$operators;
+        $this->nonOperandTokens = Tokens::OPERATORS;
 
         // Trying to compare a negative value; eg. ($var === -1).
-        $this->nonOperandTokens += Tokens::$comparisonTokens;
+        $this->nonOperandTokens += Tokens::COMPARISON_TOKENS;
 
         // Trying to compare a negative value; eg. ($var || -1 === $b).
-        $this->nonOperandTokens += Tokens::$booleanOperators;
+        $this->nonOperandTokens += Tokens::BOOLEAN_OPERATORS;
 
         // Trying to assign a negative value; eg. ($var = -1).
-        $this->nonOperandTokens += Tokens::$assignmentTokens;
+        $this->nonOperandTokens += Tokens::ASSIGNMENT_TOKENS;
 
         // Returning/printing a negative value; eg. (return -1).
         $this->nonOperandTokens += [
@@ -91,15 +91,15 @@ class OperatorSpacingSniff implements Sniff
         ];
 
         // Casting a negative value; eg. (array) -$a.
-        $this->nonOperandTokens += Tokens::$castTokens;
+        $this->nonOperandTokens += Tokens::CAST_TOKENS;
 
         /*
             These are the tokens the sniff is looking for.
         */
 
-        $targets   = Tokens::$comparisonTokens;
-        $targets  += Tokens::$operators;
-        $targets  += Tokens::$assignmentTokens;
+        $targets   = Tokens::COMPARISON_TOKENS;
+        $targets  += Tokens::OPERATORS;
+        $targets  += Tokens::ASSIGNMENT_TOKENS;
         $targets[] = T_INLINE_THEN;
         $targets[] = T_INLINE_ELSE;
         $targets[] = T_INSTANCEOF;
@@ -223,7 +223,7 @@ class OperatorSpacingSniff implements Sniff
             }
 
             $phpcsFile->recordMetric($stackPtr, 'Space before operator', 0);
-        } else if (isset(Tokens::$assignmentTokens[$tokens[$stackPtr]['code']]) === false
+        } else if (isset(Tokens::ASSIGNMENT_TOKENS[$tokens[$stackPtr]['code']]) === false
             || $this->ignoreSpacingBeforeAssignments === false
         ) {
             // Throw an error for assignments only if enabled using the sniff property
@@ -245,7 +245,7 @@ class OperatorSpacingSniff implements Sniff
                     $found,
                 ];
 
-                if (isset(Tokens::$commentTokens[$tokens[$prevNonWhitespace]['code']]) === true) {
+                if (isset(Tokens::COMMENT_TOKENS[$tokens[$prevNonWhitespace]['code']]) === true) {
                     // Throw a non-fixable error if the token on the previous line is a comment token,
                     // as in that case it's not for the sniff to decide where the comment should be moved to
                     // and it would get us into unfixable situations as the new line char is included
@@ -312,7 +312,7 @@ class OperatorSpacingSniff implements Sniff
 
                 $nextNonWhitespace = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
                 if ($nextNonWhitespace !== false
-                    && isset(Tokens::$commentTokens[$tokens[$nextNonWhitespace]['code']]) === true
+                    && isset(Tokens::COMMENT_TOKENS[$tokens[$nextNonWhitespace]['code']]) === true
                     && $found === 'newline'
                 ) {
                     // Don't auto-fix when it's a comment or PHPCS annotation on a new line as
@@ -385,7 +385,7 @@ class OperatorSpacingSniff implements Sniff
         if ($tokens[$stackPtr]['code'] === T_MINUS || $tokens[$stackPtr]['code'] === T_PLUS) {
             // Check minus spacing, but make sure we aren't just assigning
             // a minus value or returning one.
-            $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+            $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
             if (isset($this->nonOperandTokens[$tokens[$prev]['code']]) === true) {
                 return false;
             }

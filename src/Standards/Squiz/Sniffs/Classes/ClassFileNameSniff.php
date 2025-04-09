@@ -24,7 +24,7 @@ class ClassFileNameSniff implements Sniff
      */
     public function register()
     {
-        $targets = Tokens::$ooScopeTokens;
+        $targets = Tokens::OO_SCOPE_TOKENS;
         unset($targets[T_ANON_CLASS]);
 
         return $targets;

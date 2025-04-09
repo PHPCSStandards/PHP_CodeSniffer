@@ -292,7 +292,7 @@ class EmbeddedPhpSniff implements Sniff
         }
 
         // Check for a blank line at the bottom.
-        $lastNonEmpty = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($closingTag - 1), ($stackPtr + 1), true);
+        $lastNonEmpty = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($closingTag - 1), ($stackPtr + 1), true);
         if ((isset($tokens[$lastNonEmpty]['scope_closer']) === false
             || $tokens[$lastNonEmpty]['scope_closer'] !== $lastNonEmpty)
             && $tokens[$lastContent]['line'] < ($tokens[$closingTag]['line'] - 1)
@@ -367,7 +367,7 @@ class EmbeddedPhpSniff implements Sniff
             }
         }
 
-        $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($closeTag - 1), $stackPtr, true);
+        $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($closeTag - 1), $stackPtr, true);
         if ($prev !== $stackPtr) {
             if ((isset($tokens[$prev]['scope_opener']) === false
                 || $tokens[$prev]['scope_opener'] !== $prev)
@@ -405,7 +405,7 @@ class EmbeddedPhpSniff implements Sniff
         if ($tokens[($closeTag - 1)]['code'] === T_WHITESPACE) {
             $trailingSpace = $tokens[($closeTag - 1)]['length'];
         } else if (($tokens[($closeTag - 1)]['code'] === T_COMMENT
-            || isset(Tokens::$phpcsCommentTokens[$tokens[($closeTag - 1)]['code']]) === true)
+            || isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[($closeTag - 1)]['code']]) === true)
             && substr($tokens[($closeTag - 1)]['content'], -1) === ' '
         ) {
             $trailingSpace = (strlen($tokens[($closeTag - 1)]['content']) - strlen(rtrim($tokens[($closeTag - 1)]['content'])));
@@ -419,7 +419,7 @@ class EmbeddedPhpSniff implements Sniff
                 if ($trailingSpace === 0) {
                     $phpcsFile->fixer->addContentBefore($closeTag, ' ');
                 } else if ($tokens[($closeTag - 1)]['code'] === T_COMMENT
-                    || isset(Tokens::$phpcsCommentTokens[$tokens[($closeTag - 1)]['code']]) === true
+                    || isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[($closeTag - 1)]['code']]) === true
                 ) {
                     $phpcsFile->fixer->replaceToken(($closeTag - 1), rtrim($tokens[($closeTag - 1)]['content']).' ');
                 } else {

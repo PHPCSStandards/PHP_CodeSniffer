@@ -43,11 +43,11 @@ class SemicolonSpacingSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
 
         $prevType = $tokens[($stackPtr - 1)]['code'];
-        if (isset(Tokens::$emptyTokens[$prevType]) === false) {
+        if (isset(Tokens::EMPTY_TOKENS[$prevType]) === false) {
             return;
         }
 
-        $nonSpace = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 2), null, true);
+        $nonSpace = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 2), null, true);
 
         // Detect whether this is a semicolon for a condition in a `for()` control structure.
         $forCondition = false;

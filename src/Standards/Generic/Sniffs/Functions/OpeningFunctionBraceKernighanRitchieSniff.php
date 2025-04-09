@@ -74,7 +74,7 @@ class OpeningFunctionBraceKernighanRitchieSniff implements Sniff
         $openingBrace = $tokens[$stackPtr]['scope_opener'];
 
         // Find the end of the function declaration.
-        $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($openingBrace - 1), null, true);
+        $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($openingBrace - 1), null, true);
 
         $functionLine = $tokens[$prev]['line'];
         $braceLine    = $tokens[$openingBrace]['line'];
@@ -117,7 +117,7 @@ class OpeningFunctionBraceKernighanRitchieSniff implements Sniff
             $phpcsFile->recordMetric($stackPtr, "$metricType opening brace placement", 'same line');
         }//end if
 
-        $ignore   = Tokens::$phpcsCommentTokens;
+        $ignore   = Tokens::PHPCS_ANNOTATION_TOKENS;
         $ignore[] = T_WHITESPACE;
         $next     = $phpcsFile->findNext($ignore, ($openingBrace + 1), null, true);
         if ($tokens[$next]['line'] === $tokens[$openingBrace]['line']) {

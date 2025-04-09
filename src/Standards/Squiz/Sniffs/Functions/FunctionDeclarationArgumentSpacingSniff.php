@@ -371,7 +371,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
             }
 
             if ($commaToken !== false) {
-                $endOfPreviousParam = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($commaToken - 1), null, true);
+                $endOfPreviousParam = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($commaToken - 1), null, true);
 
                 $spaceBeforeComma = 0;
                 if ($tokens[$endOfPreviousParam]['line'] !== $tokens[$commaToken]['line']) {
@@ -389,7 +389,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
 
                     $fix = $phpcsFile->addFixableError($error, $commaToken, 'SpaceBeforeComma', $data);
                     if ($fix === true) {
-                        $startOfCurrentParam = $phpcsFile->findNext(Tokens::$emptyTokens, ($commaToken + 1), null, true);
+                        $startOfCurrentParam = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($commaToken + 1), null, true);
 
                         $phpcsFile->fixer->beginChangeset();
                         $phpcsFile->fixer->addContent($endOfPreviousParam, ',');
@@ -422,7 +422,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                 // Don't check spacing after the comma if it is the last content on the line.
                 $checkComma = true;
                 if ($multiLine === true) {
-                    $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($commaToken + 1), $closeBracket, true);
+                    $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($commaToken + 1), $closeBracket, true);
                     if ($tokens[$next]['line'] !== $tokens[$commaToken]['line']) {
                         $checkComma = false;
                     }
@@ -436,7 +436,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                     if (isset($param['property_visibility']) === true) {
                         $typeOfNext      = 'property modifier';
                         $typeOfNextShort = 'PropertyModifier';
-                        $modifier        = $phpcsFile->findNext(Tokens::$emptyTokens, ($commaToken + 1), $param['token'], true);
+                        $modifier        = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($commaToken + 1), $param['token'], true);
                         $contentOfNext   = $tokens[$modifier]['content'];
                     } else if ($param['type_hint_token'] !== false) {
                         $typeOfNext      = 'type hint';

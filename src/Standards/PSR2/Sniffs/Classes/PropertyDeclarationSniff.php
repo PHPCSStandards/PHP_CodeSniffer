@@ -24,7 +24,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
      */
     public function __construct()
     {
-        AbstractScopeSniff::__construct(Tokens::$ooScopeTokens, [T_VARIABLE], false);
+        AbstractScopeSniff::__construct(Tokens::OO_SCOPE_TOKENS, [T_VARIABLE], false);
 
     }//end __construct()
 
@@ -57,7 +57,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
         // Detect multiple properties defined at the same time. Throw an error
         // for this, but also only process the first property in the list so we don't
         // repeat errors.
-        $find   = Tokens::$scopeModifiers;
+        $find   = Tokens::SCOPE_MODIFIERS;
         $find[] = T_VARIABLE;
         $find[] = T_VAR;
         $find[] = T_READONLY;
@@ -100,7 +100,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
 
                 $data = [$found];
 
-                $nextNonWs = $phpcsFile->findNext(Tokens::$emptyTokens, ($typeToken + 1), null, true);
+                $nextNonWs = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($typeToken + 1), null, true);
                 if ($nextNonWs !== $next) {
                     $phpcsFile->addError($error, $typeToken, 'SpacingAfterType', $data);
                 } else {
@@ -145,7 +145,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
          */
 
         if ($propertyInfo['scope_specified'] === true && $propertyInfo['is_final'] === true) {
-            $scopePtr = $phpcsFile->findPrevious(Tokens::$scopeModifiers, ($stackPtr - 1));
+            $scopePtr = $phpcsFile->findPrevious(Tokens::SCOPE_MODIFIERS, ($stackPtr - 1));
             $finalPtr = $phpcsFile->findPrevious(T_FINAL, ($stackPtr - 1));
             if ($finalPtr > $scopePtr) {
                 $error = 'The final declaration must come before the visibility declaration';
@@ -170,7 +170,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
         }//end if
 
         if ($propertyInfo['scope_specified'] === true && $propertyInfo['is_static'] === true) {
-            $scopePtr  = $phpcsFile->findPrevious(Tokens::$scopeModifiers, ($stackPtr - 1));
+            $scopePtr  = $phpcsFile->findPrevious(Tokens::SCOPE_MODIFIERS, ($stackPtr - 1));
             $staticPtr = $phpcsFile->findPrevious(T_STATIC, ($stackPtr - 1));
             if ($scopePtr > $staticPtr) {
                 $error = 'The static declaration must come after the visibility declaration';
@@ -195,7 +195,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
         }//end if
 
         if ($propertyInfo['scope_specified'] === true && $propertyInfo['is_readonly'] === true) {
-            $scopePtr    = $phpcsFile->findPrevious(Tokens::$scopeModifiers, ($stackPtr - 1));
+            $scopePtr    = $phpcsFile->findPrevious(Tokens::SCOPE_MODIFIERS, ($stackPtr - 1));
             $readonlyPtr = $phpcsFile->findPrevious(T_READONLY, ($stackPtr - 1));
             if ($scopePtr > $readonlyPtr) {
                 $error = 'The readonly declaration must come after the visibility declaration';

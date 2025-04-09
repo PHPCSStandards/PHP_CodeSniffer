@@ -24,7 +24,7 @@ class LowercaseFunctionKeywordsSniff implements Sniff
      */
     public function register()
     {
-        $tokens   = Tokens::$methodPrefixes;
+        $tokens   = Tokens::METHOD_MODIFIERS;
         $tokens[] = T_FUNCTION;
         $tokens[] = T_CLOSURE;
         $tokens[] = T_FN;

@@ -113,15 +113,15 @@ class LineLengthSniff implements Sniff
         }
 
         $onlyComment = false;
-        if (isset(Tokens::$commentTokens[$tokens[$stackPtr]['code']]) === true) {
-            $prevNonWhiteSpace = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+        if (isset(Tokens::COMMENT_TOKENS[$tokens[$stackPtr]['code']]) === true) {
+            $prevNonWhiteSpace = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
             if ($tokens[$stackPtr]['line'] !== $tokens[$prevNonWhiteSpace]['line']) {
                 $onlyComment = true;
             }
         }
 
         if ($onlyComment === true
-            && isset(Tokens::$phpcsCommentTokens[$tokens[$stackPtr]['code']]) === true
+            && isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[$stackPtr]['code']]) === true
         ) {
             // Ignore PHPCS annotation comments that are on a line by themselves.
             return;
@@ -130,7 +130,7 @@ class LineLengthSniff implements Sniff
         $lineLength = ($tokens[$stackPtr]['column'] + $tokens[$stackPtr]['length'] - 1);
 
         if ($this->ignoreComments === true
-            && isset(Tokens::$commentTokens[$tokens[$stackPtr]['code']]) === true
+            && isset(Tokens::COMMENT_TOKENS[$tokens[$stackPtr]['code']]) === true
         ) {
             // Trailing comments are being ignored in line length calculations.
             if ($onlyComment === true) {

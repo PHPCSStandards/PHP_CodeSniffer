@@ -296,7 +296,7 @@ class FunctionDeclarationSniff implements Sniff
             $error = 'The closing parenthesis and the opening brace of a multi-line function declaration must be on the same line';
             $code  = 'NewlineBeforeOpenBrace';
 
-            $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($opener - 1), $closeBracket, true);
+            $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($opener - 1), $closeBracket, true);
             if ($tokens[$prev]['line'] === $tokens[$opener]['line']) {
                 // End of the return type is not on the same line as the close parenthesis.
                 $phpcsFile->addError($error, $opener, $code);
@@ -500,7 +500,7 @@ class FunctionDeclarationSniff implements Sniff
             if ($tokens[$i]['code'] === T_OPEN_PARENTHESIS
                 && isset($tokens[$i]['parenthesis_closer']) === true
             ) {
-                $prevNonEmpty = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($i - 1), null, true);
+                $prevNonEmpty = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($i - 1), null, true);
                 if ($tokens[$prevNonEmpty]['code'] !== T_USE) {
                     // Since PHP 8.1, a default value can contain a class instantiation.
                     // Skip over these "function calls" as they have their own indentation rules.

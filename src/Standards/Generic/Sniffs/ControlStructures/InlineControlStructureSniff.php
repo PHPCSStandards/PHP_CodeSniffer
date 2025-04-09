@@ -64,7 +64,7 @@ class InlineControlStructureSniff implements Sniff
 
         // Ignore the ELSE in ELSE IF. We'll process the IF part later.
         if ($tokens[$stackPtr]['code'] === T_ELSE) {
-            $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+            $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
             if ($tokens[$next]['code'] === T_IF) {
                 return;
             }
@@ -73,7 +73,7 @@ class InlineControlStructureSniff implements Sniff
         if ($tokens[$stackPtr]['code'] === T_WHILE || $tokens[$stackPtr]['code'] === T_FOR) {
             // This could be from a DO WHILE, which doesn't have an opening brace or a while/for without body.
             if (isset($tokens[$stackPtr]['parenthesis_closer']) === true) {
-                $afterParensCloser = $phpcsFile->findNext(Tokens::$emptyTokens, ($tokens[$stackPtr]['parenthesis_closer'] + 1), null, true);
+                $afterParensCloser = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($tokens[$stackPtr]['parenthesis_closer'] + 1), null, true);
                 if ($afterParensCloser === false) {
                     // Live coding.
                     return;
@@ -110,7 +110,7 @@ class InlineControlStructureSniff implements Sniff
             $start = $tokens[$stackPtr]['parenthesis_closer'];
         }
 
-        $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($start + 1), null, true);
+        $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($start + 1), null, true);
         if ($nextNonEmpty === false) {
             // Live coding or parse error.
             return;
@@ -188,7 +188,7 @@ class InlineControlStructureSniff implements Sniff
                     || $type === T_IF || $type === T_ELSEIF
                     || $type === T_TRY || $type === T_CATCH || $type === T_FINALLY
                 ) {
-                    $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($end + 1), null, true);
+                    $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($end + 1), null, true);
                     if ($next === false) {
                         break;
                     }
@@ -220,7 +220,7 @@ class InlineControlStructureSniff implements Sniff
                     }
                 } else if ($type === T_CLOSURE) {
                     // There should be a semicolon after the closing brace.
-                    $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($end + 1), null, true);
+                    $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($end + 1), null, true);
                     if ($next !== false && $tokens[$next]['code'] === T_SEMICOLON) {
                         $end = $next;
                     }
@@ -248,7 +248,7 @@ class InlineControlStructureSniff implements Sniff
             $end = $lastNonEmpty;
         }
 
-        $nextContent = $phpcsFile->findNext(Tokens::$emptyTokens, ($end + 1), null, true);
+        $nextContent = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($end + 1), null, true);
         if ($nextContent === false || $tokens[$nextContent]['line'] !== $tokens[$end]['line']) {
             // Looks for completely empty statements.
             $next = $phpcsFile->findNext(T_WHITESPACE, ($closer + 1), ($end + 1), true);
@@ -268,9 +268,9 @@ class InlineControlStructureSniff implements Sniff
                     }
                 }
 
-                if (isset(Tokens::$commentTokens[$tokens[$endLine]['code']]) === false
+                if (isset(Tokens::COMMENT_TOKENS[$tokens[$endLine]['code']]) === false
                     && ($tokens[$endLine]['code'] !== T_WHITESPACE
-                    || isset(Tokens::$commentTokens[$tokens[($endLine - 1)]['code']]) === false)
+                    || isset(Tokens::COMMENT_TOKENS[$tokens[($endLine - 1)]['code']]) === false)
                 ) {
                     $endLine = $end;
                 }

@@ -49,7 +49,7 @@ class ArbitraryParenthesesSpacingSniff implements Sniff
      */
     public function register()
     {
-        $this->ignoreTokens = Tokens::$functionNameTokens;
+        $this->ignoreTokens = Tokens::FUNCTION_NAME_TOKENS;
 
         $this->ignoreTokens[T_VARIABLE]            = T_VARIABLE;
         $this->ignoreTokens[T_CLOSE_PARENTHESIS]   = T_CLOSE_PARENTHESIS;
@@ -99,7 +99,7 @@ class ArbitraryParenthesesSpacingSniff implements Sniff
             $opener = $tokens[$stackPtr]['parenthesis_opener'];
         }
 
-        $preOpener = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($opener - 1), null, true);
+        $preOpener = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($opener - 1), null, true);
         if ($preOpener !== false
             && isset($this->ignoreTokens[$tokens[$preOpener]['code']]) === true
             && ($tokens[$preOpener]['code'] !== T_CLOSE_CURLY_BRACKET

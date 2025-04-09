@@ -70,7 +70,7 @@ class EmptyPHPStatementSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $prevNonEmpty = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+        $prevNonEmpty = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
         if ($tokens[$prevNonEmpty]['code'] !== T_SEMICOLON
             && $tokens[$prevNonEmpty]['code'] !== T_OPEN_TAG
             && $tokens[$prevNonEmpty]['code'] !== T_OPEN_TAG_WITH_ECHO

@@ -65,14 +65,14 @@ class NonExecutableCodeSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+        $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
 
         // Tokens which can be used in inline expressions need special handling.
         if (isset($this->expressionTokens[$tokens[$stackPtr]['code']]) === true) {
             // If this token is preceded by a logical operator, it only relates to one line
             // and should be ignored. For example: fopen() or die().
             // Note: There is one exception: throw expressions can not be used with xor.
-            if (isset(Tokens::$booleanOperators[$tokens[$prev]['code']]) === true
+            if (isset(Tokens::BOOLEAN_OPERATORS[$tokens[$prev]['code']]) === true
                 && ($tokens[$stackPtr]['code'] === T_THROW && $tokens[$prev]['code'] === T_LOGICAL_XOR) === false
             ) {
                 return;
@@ -106,9 +106,9 @@ class NonExecutableCodeSniff implements Sniff
         }
 
         if ($tokens[$stackPtr]['code'] === T_RETURN) {
-            $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+            $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
             if ($tokens[$next]['code'] === T_SEMICOLON) {
-                $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
+                $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($next + 1), null, true);
                 if ($tokens[$next]['code'] === T_CLOSE_CURLY_BRACKET) {
                     // If this is the closing brace of a function
                     // then this return statement doesn't return anything
@@ -145,7 +145,7 @@ class NonExecutableCodeSniff implements Sniff
                 if ($next !== false) {
                     $lastLine = $tokens[$end]['line'];
                     for ($i = ($stackPtr + 1); $i < $next; $i++) {
-                        if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === true) {
+                        if (isset(Tokens::EMPTY_TOKENS[$tokens[$i]['code']]) === true) {
                             continue;
                         }
 
@@ -252,8 +252,8 @@ class NonExecutableCodeSniff implements Sniff
 
         $lastLine = $tokens[$start]['line'];
         for ($i = ($start + 1); $i < $end; $i++) {
-            if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === true
-                || isset(Tokens::$bracketTokens[$tokens[$i]['code']]) === true
+            if (isset(Tokens::EMPTY_TOKENS[$tokens[$i]['code']]) === true
+                || isset(Tokens::BRACKET_TOKENS[$tokens[$i]['code']]) === true
                 || $tokens[$i]['code'] === T_SEMICOLON
             ) {
                 continue;
@@ -261,7 +261,7 @@ class NonExecutableCodeSniff implements Sniff
 
             // Skip whole functions and classes/interfaces because they are not
             // technically executed code, but rather declarations that may be used.
-            if (isset(Tokens::$ooScopeTokens[$tokens[$i]['code']]) === true
+            if (isset(Tokens::OO_SCOPE_TOKENS[$tokens[$i]['code']]) === true
                 || $tokens[$i]['code'] === T_FUNCTION
                 || $tokens[$i]['code'] === T_CLOSURE
             ) {

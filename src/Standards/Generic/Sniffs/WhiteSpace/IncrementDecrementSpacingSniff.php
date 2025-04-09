@@ -51,10 +51,10 @@ class IncrementDecrementSpacingSniff implements Sniff
         }
 
         // Is this a pre-increment/decrement ?
-        $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
         if ($nextNonEmpty !== false
             && ($tokens[$nextNonEmpty]['code'] === T_VARIABLE
-            || isset(Tokens::$nameTokens[$tokens[$nextNonEmpty]['code']]) === true)
+            || isset(Tokens::NAME_TOKENS[$tokens[$nextNonEmpty]['code']]) === true)
         ) {
             if ($nextNonEmpty === ($stackPtr + 1)) {
                 $phpcsFile->recordMetric($stackPtr, 'Spacing between in/decrementor and variable', 0);
@@ -104,10 +104,10 @@ class IncrementDecrementSpacingSniff implements Sniff
         }//end if
 
         // Is this a post-increment/decrement ?
-        $prevNonEmpty = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+        $prevNonEmpty = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
         if ($prevNonEmpty !== false
             && ($tokens[$prevNonEmpty]['code'] === T_VARIABLE
-            || isset(Tokens::$nameTokens[$tokens[$prevNonEmpty]['code']]) === true
+            || isset(Tokens::NAME_TOKENS[$tokens[$prevNonEmpty]['code']]) === true
             || $tokens[$prevNonEmpty]['code'] === T_CLOSE_SQUARE_BRACKET)
         ) {
             if ($prevNonEmpty === ($stackPtr - 1)) {

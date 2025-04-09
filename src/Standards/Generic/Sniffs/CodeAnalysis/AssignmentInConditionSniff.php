@@ -44,10 +44,10 @@ class AssignmentInConditionSniff implements Sniff
      */
     public function register()
     {
-        $this->assignmentTokens = Tokens::$assignmentTokens;
+        $this->assignmentTokens = Tokens::ASSIGNMENT_TOKENS;
         unset($this->assignmentTokens[T_DOUBLE_ARROW]);
 
-        $starters = Tokens::$booleanOperators;
+        $starters = Tokens::BOOLEAN_OPERATORS;
         $starters[T_SEMICOLON]        = T_SEMICOLON;
         $starters[T_OPEN_PARENTHESIS] = T_OPEN_PARENTHESIS;
 
@@ -133,7 +133,7 @@ class AssignmentInConditionSniff implements Sniff
             }
 
             for ($i = $hasAssignment; $i > $conditionStart; $i--) {
-                if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === true) {
+                if (isset(Tokens::EMPTY_TOKENS[$tokens[$i]['code']]) === true) {
                     continue;
                 }
 

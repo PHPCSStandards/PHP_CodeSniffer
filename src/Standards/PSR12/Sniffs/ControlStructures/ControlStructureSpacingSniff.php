@@ -124,7 +124,7 @@ class ControlStructureSpacingSniff implements Sniff
         for ($i = $parenOpener; $i < $parenCloser; $i++) {
             if ($tokens[$i]['column'] !== 1
                 || $tokens[($i + 1)]['line'] > $tokens[$i]['line']
-                || isset(Tokens::$commentTokens[$tokens[$i]['code']]) === true
+                || isset(Tokens::COMMENT_TOKENS[$tokens[$i]['code']]) === true
             ) {
                 continue;
             }
@@ -134,8 +134,8 @@ class ControlStructureSpacingSniff implements Sniff
             }
 
             // Leave indentation inside multi-line strings.
-            if (isset(Tokens::$textStringTokens[$tokens[$i]['code']]) === true
-                || isset(Tokens::$heredocTokens[$tokens[$i]['code']]) === true
+            if (isset(Tokens::TEXT_STRING_TOKENS[$tokens[$i]['code']]) === true
+                || isset(Tokens::HEREDOC_TOKENS[$tokens[$i]['code']]) === true
             ) {
                 continue;
             }

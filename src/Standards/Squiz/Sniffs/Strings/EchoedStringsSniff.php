@@ -66,7 +66,7 @@ class EchoedStringsSniff implements Sniff
 
         $phpcsFile->recordMetric($stackPtr, 'Brackets around echoed strings', 'yes');
 
-        if (($phpcsFile->findNext(Tokens::$operators, $stackPtr, $end, false)) === false) {
+        if (($phpcsFile->findNext(Tokens::OPERATORS, $stackPtr, $end, false)) === false) {
             // There are no arithmetic operators in this.
             $error = 'Echoed strings should not be bracketed';
             $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'HasBracket');

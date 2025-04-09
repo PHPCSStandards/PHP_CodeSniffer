@@ -256,7 +256,7 @@ abstract class AbstractPatternSniff implements Sniff
 
         $ignoreTokens = [T_WHITESPACE => T_WHITESPACE];
         if ($this->ignoreComments === true) {
-            $ignoreTokens += Tokens::$commentTokens;
+            $ignoreTokens += Tokens::COMMENT_TOKENS;
         }
 
         $origStackPtr = $stackPtr;
@@ -350,10 +350,10 @@ abstract class AbstractPatternSniff implements Sniff
                     $found = 'abc';
                 } else if ($pattern[$i]['type'] === 'newline') {
                     if ($this->ignoreComments === true
-                        && isset(Tokens::$commentTokens[$tokens[$stackPtr]['code']]) === true
+                        && isset(Tokens::COMMENT_TOKENS[$tokens[$stackPtr]['code']]) === true
                     ) {
                         $startComment = $phpcsFile->findPrevious(
-                            Tokens::$commentTokens,
+                            Tokens::COMMENT_TOKENS,
                             ($stackPtr - 1),
                             null,
                             true
@@ -381,7 +381,7 @@ abstract class AbstractPatternSniff implements Sniff
                             // can ignore the error here.
                             if (($tokens[($stackPtr - 1)]['content'] !== $phpcsFile->eolChar)
                                 && ($this->ignoreComments === true
-                                && isset(Tokens::$commentTokens[$tokens[($stackPtr - 1)]['code']]) === false)
+                                && isset(Tokens::COMMENT_TOKENS[$tokens[($stackPtr - 1)]['code']]) === false)
                             ) {
                                 $hasError = true;
                             } else {
@@ -425,7 +425,7 @@ abstract class AbstractPatternSniff implements Sniff
                     if ($this->ignoreComments === true) {
                         // If we are ignoring comments, check to see if this current
                         // token is a comment. If so skip it.
-                        if (isset(Tokens::$commentTokens[$tokens[$stackPtr]['code']]) === true) {
+                        if (isset(Tokens::COMMENT_TOKENS[$tokens[$stackPtr]['code']]) === true) {
                             continue;
                         }
 
@@ -433,7 +433,7 @@ abstract class AbstractPatternSniff implements Sniff
                         // current token as we should allow a space before a
                         // comment for readability.
                         if (isset($tokens[($stackPtr + 1)]) === true
-                            && isset(Tokens::$commentTokens[$tokens[($stackPtr + 1)]['code']]) === true
+                            && isset(Tokens::COMMENT_TOKENS[$tokens[($stackPtr + 1)]['code']]) === true
                         ) {
                             continue;
                         }
@@ -448,7 +448,7 @@ abstract class AbstractPatternSniff implements Sniff
                         } else {
                             // Get all the whitespace to the next token.
                             $next = $phpcsFile->findNext(
-                                Tokens::$emptyTokens,
+                                Tokens::EMPTY_TOKENS,
                                 $stackPtr,
                                 null,
                                 true
@@ -535,7 +535,7 @@ abstract class AbstractPatternSniff implements Sniff
                         $hasComment = false;
                         for ($j = $stackPtr; $j < $next; $j++) {
                             $found .= $tokens[$j]['content'];
-                            if (isset(Tokens::$commentTokens[$tokens[$j]['code']]) === true) {
+                            if (isset(Tokens::COMMENT_TOKENS[$tokens[$j]['code']]) === true) {
                                 $hasComment = true;
                             }
                         }
@@ -590,7 +590,7 @@ abstract class AbstractPatternSniff implements Sniff
                 } else {
                     // Find the previous opener.
                     $next = $phpcsFile->findPrevious(
-                        Tokens::$blockOpeners,
+                        Tokens::BLOCK_OPENERS,
                         $stackPtr
                     );
 
@@ -640,7 +640,7 @@ abstract class AbstractPatternSniff implements Sniff
                 } else {
                     if ($this->ignoreComments === false) {
                         // The newline character cannot be part of a comment.
-                        if (isset(Tokens::$commentTokens[$tokens[$newline]['code']]) === true) {
+                        if (isset(Tokens::COMMENT_TOKENS[$tokens[$newline]['code']]) === true) {
                             $hasError = true;
                         }
                     }

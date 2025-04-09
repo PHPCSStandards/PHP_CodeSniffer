@@ -29,7 +29,7 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
     public function testStrings($testMarker)
     {
         $tokens     = $this->phpcsFile->getTokens();
-        $target     = $this->getTargetToken($testMarker, (Tokens::$contextSensitiveKeywords + [T_STRING]));
+        $target     = $this->getTargetToken($testMarker, (Tokens::CONTEXT_SENSITIVE_KEYWORDS + [T_STRING]));
         $tokenArray = $tokens[$target];
 
         $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
@@ -156,7 +156,7 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
     public function testKeywords($testMarker, $expectedTokenType)
     {
         $tokens     = $this->phpcsFile->getTokens();
-        $target     = $this->getTargetToken($testMarker, (Tokens::$contextSensitiveKeywords + [T_ANON_CLASS, T_MATCH_DEFAULT, T_STRING]));
+        $target     = $this->getTargetToken($testMarker, (Tokens::CONTEXT_SENSITIVE_KEYWORDS + [T_ANON_CLASS, T_MATCH_DEFAULT, T_STRING]));
         $tokenArray = $tokens[$target];
 
         $this->assertSame(

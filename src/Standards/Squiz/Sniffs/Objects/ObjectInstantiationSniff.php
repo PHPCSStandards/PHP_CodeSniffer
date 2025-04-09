@@ -42,7 +42,7 @@ class ObjectInstantiationSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $allowedTokens   = Tokens::$emptyTokens;
+        $allowedTokens   = Tokens::EMPTY_TOKENS;
         $allowedTokens[] = T_BITWISE_AND;
 
         $prev = $phpcsFile->findPrevious($allowedTokens, ($stackPtr - 1), null, true);

@@ -24,7 +24,7 @@ class OperatorBracketSniff implements Sniff
      */
     public function register()
     {
-        return Tokens::$operators;
+        return Tokens::OPERATORS;
 
     }//end register()
 
@@ -51,7 +51,7 @@ class OperatorBracketSniff implements Sniff
         // the minus sign being used to assign a negative number to a variable.
         if ($tokens[$stackPtr]['code'] === T_MINUS) {
             // Check to see if we are trying to return -n.
-            $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+            $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
             if ($tokens[$prev]['code'] === T_RETURN) {
                 return;
             }
@@ -60,10 +60,10 @@ class OperatorBracketSniff implements Sniff
             if ($tokens[$number]['code'] === T_LNUMBER || $tokens[$number]['code'] === T_DNUMBER) {
                 $previous = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
                 if ($previous !== false) {
-                    $isAssignment = isset(Tokens::$assignmentTokens[$tokens[$previous]['code']]);
-                    $isEquality   = isset(Tokens::$equalityTokens[$tokens[$previous]['code']]);
-                    $isComparison = isset(Tokens::$comparisonTokens[$tokens[$previous]['code']]);
-                    $isUnary      = isset(Tokens::$operators[$tokens[$previous]['code']]);
+                    $isAssignment = isset(Tokens::ASSIGNMENT_TOKENS[$tokens[$previous]['code']]);
+                    $isEquality   = isset(Tokens::EQUALITY_TOKENS[$tokens[$previous]['code']]);
+                    $isComparison = isset(Tokens::COMPARISON_TOKENS[$tokens[$previous]['code']]);
+                    $isUnary      = isset(Tokens::OPERATORS[$tokens[$previous]['code']]);
                     if ($isAssignment === true || $isEquality === true || $isComparison === true || $isUnary === true) {
                         // This is a negative assignment or comparison.
                         // We need to check that the minus and the number are
@@ -115,8 +115,8 @@ class OperatorBracketSniff implements Sniff
         }
 
         // Tokens that are allowed inside a bracketed operation.
-        $allowed  = Tokens::$nameTokens;
-        $allowed += Tokens::$operators;
+        $allowed  = Tokens::NAME_TOKENS;
+        $allowed += Tokens::OPERATORS;
         $allowed += [
             T_VARIABLE                 => T_VARIABLE,
             T_LNUMBER                  => T_LNUMBER,
@@ -147,7 +147,7 @@ class OperatorBracketSniff implements Sniff
                     break;
                 }
 
-                if (isset(Tokens::$nameTokens[$prevCode]) === true
+                if (isset(Tokens::NAME_TOKENS[$prevCode]) === true
                     || $prevCode === T_SWITCH
                     || $prevCode === T_MATCH
                 ) {
@@ -186,7 +186,7 @@ class OperatorBracketSniff implements Sniff
                     }
                 }//end if
 
-                if (in_array($prevCode, Tokens::$scopeOpeners, true) === true) {
+                if (in_array($prevCode, Tokens::SCOPE_OPENERS, true) === true) {
                     // This operation is inside a control structure like FOREACH
                     // or IF, but has no bracket of it's own.
                     // The only control structures allowed to do this are SWITCH and MATCH.
@@ -236,7 +236,7 @@ class OperatorBracketSniff implements Sniff
             return;
         }//end if
 
-        $lastAssignment = $phpcsFile->findPrevious(Tokens::$assignmentTokens, $stackPtr, null, false, null, true);
+        $lastAssignment = $phpcsFile->findPrevious(Tokens::ASSIGNMENT_TOKENS, $stackPtr, null, false, null, true);
         if ($lastAssignment !== false && $lastAssignment > $lastBracket) {
             $this->addMissingBracketsError($phpcsFile, $stackPtr);
         }
@@ -277,10 +277,10 @@ class OperatorBracketSniff implements Sniff
 
         // Find the first token in the expression.
         for ($before = ($stackPtr - 1); $before > 0; $before--) {
-            if (isset(Tokens::$emptyTokens[$tokens[$before]['code']]) === true
-                || isset(Tokens::$operators[$tokens[$before]['code']]) === true
-                || isset(Tokens::$castTokens[$tokens[$before]['code']]) === true
-                || isset(Tokens::$nameTokens[$tokens[$before]['code']]) === true
+            if (isset(Tokens::EMPTY_TOKENS[$tokens[$before]['code']]) === true
+                || isset(Tokens::OPERATORS[$tokens[$before]['code']]) === true
+                || isset(Tokens::CAST_TOKENS[$tokens[$before]['code']]) === true
+                || isset(Tokens::NAME_TOKENS[$tokens[$before]['code']]) === true
                 || isset($allowed[$tokens[$before]['code']]) === true
             ) {
                 continue;
@@ -304,7 +304,7 @@ class OperatorBracketSniff implements Sniff
             break;
         }//end for
 
-        $before = $phpcsFile->findNext(Tokens::$emptyTokens, ($before + 1), null, true);
+        $before = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($before + 1), null, true);
 
         // A few extra tokens are allowed to be on the right side of the expression.
         $allowed[T_EQUAL] = true;
@@ -312,10 +312,10 @@ class OperatorBracketSniff implements Sniff
 
         // Find the last token in the expression.
         for ($after = ($stackPtr + 1); $after < $phpcsFile->numTokens; $after++) {
-            if (isset(Tokens::$emptyTokens[$tokens[$after]['code']]) === true
-                || isset(Tokens::$operators[$tokens[$after]['code']]) === true
-                || isset(Tokens::$castTokens[$tokens[$after]['code']]) === true
-                || isset(Tokens::$nameTokens[$tokens[$after]['code']]) === true
+            if (isset(Tokens::EMPTY_TOKENS[$tokens[$after]['code']]) === true
+                || isset(Tokens::OPERATORS[$tokens[$after]['code']]) === true
+                || isset(Tokens::CAST_TOKENS[$tokens[$after]['code']]) === true
+                || isset(Tokens::NAME_TOKENS[$tokens[$after]['code']]) === true
                 || isset($allowed[$tokens[$after]['code']]) === true
             ) {
                 continue;
@@ -346,7 +346,7 @@ class OperatorBracketSniff implements Sniff
             break;
         }//end for
 
-        $after = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($after - 1), null, true);
+        $after = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($after - 1), null, true);
 
         $error = 'Operation must be bracketed';
         if ($before === $after || $before === $stackPtr || $after === $stackPtr) {

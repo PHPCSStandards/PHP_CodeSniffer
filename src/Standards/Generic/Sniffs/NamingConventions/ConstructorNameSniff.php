@@ -109,7 +109,7 @@ class ConstructorNameSniff extends AbstractScopeSniff
         $endFunctionIndex = $tokens[$stackPtr]['scope_closer'];
         $startIndex       = $tokens[$stackPtr]['scope_opener'];
         while (($doubleColonIndex = $phpcsFile->findNext(T_DOUBLE_COLON, ($startIndex + 1), $endFunctionIndex)) !== false) {
-            $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($doubleColonIndex + 1), null, true);
+            $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($doubleColonIndex + 1), null, true);
             if ($tokens[$nextNonEmpty]['code'] !== T_STRING
                 || strtolower($tokens[$nextNonEmpty]['content']) !== $parentClassNameLc
             ) {
@@ -117,7 +117,7 @@ class ConstructorNameSniff extends AbstractScopeSniff
                 continue;
             }
 
-            $prevNonEmpty = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($doubleColonIndex - 1), null, true);
+            $prevNonEmpty = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($doubleColonIndex - 1), null, true);
             if ($tokens[$prevNonEmpty]['code'] === T_PARENT
                 || $tokens[$prevNonEmpty]['code'] === T_SELF
                 || $tokens[$prevNonEmpty]['code'] === T_STATIC

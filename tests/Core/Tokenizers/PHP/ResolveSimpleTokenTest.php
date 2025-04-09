@@ -403,7 +403,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
         $sequenceCount = count($expectedSequence);
 
         for ($i = $startPtr; $sequenceKey < $sequenceCount; $i++) {
-            if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === true) {
+            if (isset(Tokens::EMPTY_TOKENS[$tokens[$i]['code']]) === true) {
                 // Ignore whitespace and comments, not interested in the tokenization of those for these tests.
                 continue;
             }

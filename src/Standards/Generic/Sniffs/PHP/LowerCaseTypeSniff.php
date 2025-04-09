@@ -50,8 +50,8 @@ class LowerCaseTypeSniff implements Sniff
      */
     public function register()
     {
-        $tokens   = Tokens::$castTokens;
-        $tokens  += Tokens::$ooScopeTokens;
+        $tokens   = Tokens::CAST_TOKENS;
+        $tokens  += Tokens::OO_SCOPE_TOKENS;
         $tokens[] = T_FUNCTION;
         $tokens[] = T_CLOSURE;
         $tokens[] = T_FN;
@@ -73,7 +73,7 @@ class LowerCaseTypeSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        if (isset(Tokens::$castTokens[$tokens[$stackPtr]['code']]) === true) {
+        if (isset(Tokens::CAST_TOKENS[$tokens[$stackPtr]['code']]) === true) {
             // A cast token.
             $this->processType(
                 $phpcsFile,
@@ -90,7 +90,7 @@ class LowerCaseTypeSniff implements Sniff
          * Check OO constant and property types.
          */
 
-        if (isset(Tokens::$ooScopeTokens[$tokens[$stackPtr]['code']]) === true) {
+        if (isset(Tokens::OO_SCOPE_TOKENS[$tokens[$stackPtr]['code']]) === true) {
             if (isset($tokens[$stackPtr]['scope_opener'], $tokens[$stackPtr]['scope_closer']) === false) {
                 return;
             }
@@ -113,7 +113,7 @@ class LowerCaseTypeSniff implements Sniff
                 }
 
                 if ($tokens[$i]['code'] === T_CONST) {
-                    $ignore = Tokens::$emptyTokens;
+                    $ignore = Tokens::EMPTY_TOKENS;
                     $ignore[T_NULLABLE] = T_NULLABLE;
 
                     $startOfType = $phpcsFile->findNext($ignore, ($i + 1), null, true);
@@ -128,9 +128,9 @@ class LowerCaseTypeSniff implements Sniff
                         return;
                     }
 
-                    $constName = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($assignmentOperator - 1), null, true);
+                    $constName = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($assignmentOperator - 1), null, true);
                     if ($startOfType !== $constName) {
-                        $endOfType = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($constName - 1), null, true);
+                        $endOfType = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($constName - 1), null, true);
 
                         $error     = 'PHP constant type declarations must be lowercase; expected "%s" but found "%s"';
                         $errorCode = 'ConstantTypeFound';
@@ -274,7 +274,7 @@ class LowerCaseTypeSniff implements Sniff
         $type           = '';
 
         for ($i = $typeDeclStart; $i <= $typeDeclEnd; $i++) {
-            if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === true) {
+            if (isset(Tokens::EMPTY_TOKENS[$tokens[$i]['code']]) === true) {
                 continue;
             }
 

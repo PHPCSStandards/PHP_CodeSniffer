@@ -31,7 +31,7 @@ class ScopeClosingBraceSniff implements Sniff
      */
     public function register()
     {
-        return Tokens::$scopeOpeners;
+        return Tokens::SCOPE_OPENERS;
 
     }//end register()
 

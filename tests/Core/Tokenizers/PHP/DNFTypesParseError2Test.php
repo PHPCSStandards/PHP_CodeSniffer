@@ -151,7 +151,7 @@ final class DNFTypesParseError2Test extends AbstractTokenizerTestCase
         $startPtr = $this->getTargetToken($testMarker, [T_OPEN_PARENTHESIS, T_TYPE_OPEN_PARENTHESIS], '(');
 
         for ($i = $startPtr; $i < $this->phpcsFile->numTokens; $i++) {
-            if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === true) {
+            if (isset(Tokens::EMPTY_TOKENS[$tokens[$i]['code']]) === true) {
                 continue;
             }
 

@@ -57,8 +57,8 @@ class ValidClassNameSniff implements Sniff
         // simply look for the first T_STRING because a class name
         // starting with the number will be multiple tokens.
         $opener    = $tokens[$stackPtr]['scope_opener'];
-        $nameStart = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), $opener, true);
-        $nameEnd   = $phpcsFile->findNext((Tokens::$emptyTokens + [T_COLON => T_COLON]), $nameStart, $opener);
+        $nameStart = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), $opener, true);
+        $nameEnd   = $phpcsFile->findNext((Tokens::EMPTY_TOKENS + [T_COLON => T_COLON]), $nameStart, $opener);
         if ($nameEnd === false) {
             $name = $tokens[$nameStart]['content'];
         } else {

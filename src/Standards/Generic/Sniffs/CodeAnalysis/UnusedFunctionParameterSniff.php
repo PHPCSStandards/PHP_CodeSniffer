@@ -152,14 +152,14 @@ class UnusedFunctionParameterSniff implements Sniff
             T_END_NOWDOC           => T_END_NOWDOC,
             T_DOUBLE_QUOTED_STRING => T_DOUBLE_QUOTED_STRING,
         ];
-        $validTokens += Tokens::$emptyTokens;
+        $validTokens += Tokens::EMPTY_TOKENS;
 
         for (; $next <= $end; ++$next) {
             $token = $tokens[$next];
             $code  = $token['code'];
 
             // Ignorable tokens.
-            if (isset(Tokens::$emptyTokens[$code]) === true) {
+            if (isset(Tokens::EMPTY_TOKENS[$code]) === true) {
                 continue;
             }
 
@@ -171,13 +171,13 @@ class UnusedFunctionParameterSniff implements Sniff
 
                 // A return statement as the first content indicates an interface method.
                 if ($code === T_RETURN) {
-                    $firstNonEmptyTokenAfterReturn = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
+                    $firstNonEmptyTokenAfterReturn = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($next + 1), null, true);
                     if ($tokens[$firstNonEmptyTokenAfterReturn]['code'] === T_SEMICOLON && $implements !== false) {
                         return;
                     }
 
                     $secondNonEmptyTokenAfterReturn = $phpcsFile->findNext(
-                        Tokens::$emptyTokens,
+                        Tokens::EMPTY_TOKENS,
                         ($firstNonEmptyTokenAfterReturn + 1),
                         null,
                         true

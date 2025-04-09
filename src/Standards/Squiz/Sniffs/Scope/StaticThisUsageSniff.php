@@ -54,7 +54,7 @@ class StaticThisUsageSniff extends AbstractScopeSniff
             return;
         }
 
-        $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
         if ($next === false || $tokens[$next]['code'] !== T_STRING) {
             // Not a function declaration, or incomplete.
             return;

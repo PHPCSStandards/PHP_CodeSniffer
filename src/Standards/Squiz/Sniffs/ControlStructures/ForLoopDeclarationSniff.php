@@ -134,7 +134,7 @@ class ForLoopDeclarationSniff implements Sniff
         $prevNonWhiteSpace  = $phpcsFile->findPrevious(T_WHITESPACE, ($closingBracket - 1), $openingBracket, true);
         $beforeClosefixable = true;
         if ($tokens[$prevNonWhiteSpace]['line'] !== $tokens[$closingBracket]['line']
-            && isset(Tokens::$emptyTokens[$tokens[$prevNonWhiteSpace]['code']]) === true
+            && isset(Tokens::EMPTY_TOKENS[$tokens[$prevNonWhiteSpace]['code']]) === true
         ) {
             $beforeClosefixable = false;
         }

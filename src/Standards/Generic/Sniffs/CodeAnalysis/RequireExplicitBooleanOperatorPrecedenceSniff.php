@@ -53,11 +53,11 @@ class RequireExplicitBooleanOperatorPrecedenceSniff implements Sniff
      */
     public function register()
     {
-        $this->searchTargets = Tokens::$booleanOperators;
+        $this->searchTargets = Tokens::BOOLEAN_OPERATORS;
         $this->searchTargets[T_INLINE_THEN] = T_INLINE_THEN;
         $this->searchTargets[T_INLINE_ELSE] = T_INLINE_ELSE;
 
-        return Tokens::$booleanOperators;
+        return Tokens::BOOLEAN_OPERATORS;
 
     }//end register()
 

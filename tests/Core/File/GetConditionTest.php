@@ -71,7 +71,7 @@ final class GetConditionTest extends AbstractMethodTestCase
      * This array is merged with expected result arrays for various unit tests
      * to make sure all possible conditions are tested.
      *
-     * This array should be kept in sync with the Tokens::$scopeOpeners array.
+     * This array should be kept in sync with the Tokens::SCOPE_OPENERS array.
      * This array isn't auto-generated based on the array in Tokens as for these
      * tests we want to have access to the token constant names, not just their values.
      *
@@ -135,7 +135,7 @@ final class GetConditionTest extends AbstractMethodTestCase
 
         if (empty(self::$markerTokens) === true) {
             foreach ($this->conditionMarkers as $marker) {
-                self::$markerTokens[$marker] = $this->getTargetToken($marker, Tokens::$scopeOpeners);
+                self::$markerTokens[$marker] = $this->getTargetToken($marker, Tokens::SCOPE_OPENERS);
             }
         }
 
@@ -171,7 +171,7 @@ final class GetConditionTest extends AbstractMethodTestCase
         $result = self::$phpcsFile->getCondition($stackPtr, T_IF);
         $this->assertFalse($result);
 
-        $result = self::$phpcsFile->hasCondition($stackPtr, Tokens::$ooScopeTokens);
+        $result = self::$phpcsFile->hasCondition($stackPtr, Tokens::OO_SCOPE_TOKENS);
         $this->assertFalse($result);
 
     }//end testNonConditionalToken()
@@ -478,7 +478,7 @@ final class GetConditionTest extends AbstractMethodTestCase
             'Failed asserting that "testSeriouslyNestedMethod" does not have an anonymous class nor a closure condition'
         );
 
-        $result = self::$phpcsFile->hasCondition($stackPtr, Tokens::$ooScopeTokens);
+        $result = self::$phpcsFile->hasCondition($stackPtr, Tokens::OO_SCOPE_TOKENS);
         $this->assertTrue(
             $result,
             'Failed asserting that "testSeriouslyNestedMethod" has an OO Scope token condition'

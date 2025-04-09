@@ -831,7 +831,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
      */
     public function testNotAnArrowFunction($testMarker, $testContent='fn', $expectedType='T_STRING')
     {
-        $targetTypes  = Tokens::$nameTokens;
+        $targetTypes  = Tokens::NAME_TOKENS;
         $targetTypes += [T_FN => T_FN];
         $target       = $this->getTargetToken($testMarker, $targetTypes, $testContent);
 

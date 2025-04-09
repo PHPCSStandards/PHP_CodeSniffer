@@ -74,7 +74,7 @@ class DisallowMultipleAssignmentsSniff implements Sniff
             $conditions = $tokens[$stackPtr]['conditions'];
             end($conditions);
             $deepestScope = key($conditions);
-            if (isset(Tokens::$ooScopeTokens[$tokens[$deepestScope]['code']]) === true) {
+            if (isset(Tokens::OO_SCOPE_TOKENS[$tokens[$deepestScope]['code']]) === true) {
                 return;
             }
         }
@@ -105,7 +105,7 @@ class DisallowMultipleAssignmentsSniff implements Sniff
             }
 
             if ($tokens[$varToken]['code'] === T_VARIABLE) {
-                $prevNonEmpty = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($varToken - 1), null, true);
+                $prevNonEmpty = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($varToken - 1), null, true);
                 if ($tokens[$prevNonEmpty]['code'] === T_OBJECT_OPERATOR) {
                     // Dynamic property access, the real "start" variable still needs to be found.
                     $varToken = $prevNonEmpty;
@@ -124,8 +124,8 @@ class DisallowMultipleAssignmentsSniff implements Sniff
 
         $start = $phpcsFile->findStartOfStatement($varToken);
 
-        $allowed  = Tokens::$emptyTokens;
-        $allowed += Tokens::$nameTokens;
+        $allowed  = Tokens::EMPTY_TOKENS;
+        $allowed += Tokens::NAME_TOKENS;
 
         $allowed[T_DOUBLE_COLON] = T_DOUBLE_COLON;
         $allowed[T_ASPERAND]     = T_ASPERAND;

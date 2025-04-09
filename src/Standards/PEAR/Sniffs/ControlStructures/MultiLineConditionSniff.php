@@ -108,11 +108,11 @@ class MultiLineConditionSniff implements Sniff
                         // Account for a comment at the end of the line.
                         $next = $phpcsFile->findNext(T_WHITESPACE, ($closeBracket + 1), null, true);
                         if ($tokens[$next]['code'] !== T_COMMENT
-                            && isset(Tokens::$phpcsCommentTokens[$tokens[$next]['code']]) === false
+                            && isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[$next]['code']]) === false
                         ) {
                             $phpcsFile->fixer->addNewlineBefore($closeBracket);
                         } else {
-                            $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
+                            $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($next + 1), null, true);
                             $phpcsFile->fixer->beginChangeset();
                             $phpcsFile->fixer->replaceToken($closeBracket, '');
                             $phpcsFile->fixer->addContentBefore($next, ')');
@@ -137,7 +137,7 @@ class MultiLineConditionSniff implements Sniff
                 }//end if
 
                 if ($tokens[$i]['code'] === T_COMMENT
-                    || isset(Tokens::$phpcsCommentTokens[$tokens[$i]['code']]) === true
+                    || isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[$i]['code']]) === true
                 ) {
                     $prevLine = $tokens[$i]['line'];
                     continue;
@@ -168,12 +168,12 @@ class MultiLineConditionSniff implements Sniff
                     }
                 }
 
-                $next = $phpcsFile->findNext(Tokens::$emptyTokens, $i, null, true);
+                $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, $i, null, true);
                 if ($next !== $closeBracket && $tokens[$next]['line'] === $tokens[$i]['line']) {
-                    if (isset(Tokens::$booleanOperators[$tokens[$next]['code']]) === false) {
-                        $prev    = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($i - 1), $openBracket, true);
+                    if (isset(Tokens::BOOLEAN_OPERATORS[$tokens[$next]['code']]) === false) {
+                        $prev    = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($i - 1), $openBracket, true);
                         $fixable = true;
-                        if (isset(Tokens::$booleanOperators[$tokens[$prev]['code']]) === false
+                        if (isset(Tokens::BOOLEAN_OPERATORS[$tokens[$prev]['code']]) === false
                             && $phpcsFile->findNext(T_WHITESPACE, ($prev + 1), $next, true) !== false
                         ) {
                             // Condition spread over multi-lines interspersed with comments.
@@ -186,7 +186,7 @@ class MultiLineConditionSniff implements Sniff
                         } else {
                             $fix = $phpcsFile->addFixableError($error, $next, 'StartWithBoolean');
                             if ($fix === true) {
-                                if (isset(Tokens::$booleanOperators[$tokens[$prev]['code']]) === true) {
+                                if (isset(Tokens::BOOLEAN_OPERATORS[$tokens[$prev]['code']]) === true) {
                                     $phpcsFile->fixer->beginChangeset();
                                     $phpcsFile->fixer->replaceToken($prev, '');
                                     $phpcsFile->fixer->addContentBefore($next, $tokens[$prev]['content'].' ');
@@ -204,7 +204,7 @@ class MultiLineConditionSniff implements Sniff
                 $prevLine = $tokens[$i]['line'];
             }//end if
 
-            if (isset(Tokens::$nameTokens[$tokens[$i]['code']]) === true) {
+            if (isset(Tokens::NAME_TOKENS[$tokens[$i]['code']]) === true) {
                 $next = $phpcsFile->findNext(T_WHITESPACE, ($i + 1), null, true);
                 if ($tokens[$next]['code'] === T_OPEN_PARENTHESIS) {
                     // This is a function call, so skip to the end as they

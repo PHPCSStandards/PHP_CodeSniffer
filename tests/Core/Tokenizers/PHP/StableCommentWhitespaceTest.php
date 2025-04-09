@@ -36,7 +36,7 @@ final class StableCommentWhitespaceTest extends AbstractTokenizerTestCase
     public function testCommentTokenization($testMarker, $expectedTokens)
     {
         $tokens  = $this->phpcsFile->getTokens();
-        $comment = $this->getTargetToken($testMarker, Tokens::$commentTokens);
+        $comment = $this->getTargetToken($testMarker, Tokens::COMMENT_TOKENS);
 
         foreach ($expectedTokens as $tokenInfo) {
             $this->assertSame(
