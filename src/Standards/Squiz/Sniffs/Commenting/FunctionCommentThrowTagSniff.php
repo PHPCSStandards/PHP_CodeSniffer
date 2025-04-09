@@ -104,7 +104,7 @@ class FunctionCommentThrowTagSniff implements Sniff
                 don't know the exception class.
             */
 
-            $nextToken = $phpcsFile->findNext(T_WHITESPACE, ($currPos + 1), null, true);
+            $nextToken = $phpcsFile->findNext(Tokens::$emptyTokens, ($currPos + 1), null, true);
             if ($tokens[$nextToken]['code'] === T_NEW
                 || $tokens[$nextToken]['code'] === T_NS_SEPARATOR
                 || $tokens[$nextToken]['code'] === T_STRING

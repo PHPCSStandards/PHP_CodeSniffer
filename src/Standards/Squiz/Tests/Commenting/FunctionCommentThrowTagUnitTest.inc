@@ -523,3 +523,11 @@ $anon = new class {
         throw new PHP_Exception1('Error');
     }
 };
+
+
+/**
+ * @throws Wrong_Exception
+ */
+public function ImproveCommentTolerance() {
+    throw /*comment*/ new /*comment*/ Right_Exception('Error');
+}
