@@ -454,3 +454,11 @@ class MoreMissingButSupportedTypes
      */
     private namespace\SomeClass $variableName;
 }
+
+class DNFTypes
+{
+    /**
+     * @var mixed
+     */
+    private (\Iterator&namespace\Countable)|false|null $variableName;
+}
