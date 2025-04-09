@@ -323,7 +323,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                     }
                 }
 
-                if ($type === '') {
+                if ($tokens[($tag + 2)]['content'][0] === '$') {
                     $error = 'Missing parameter type';
                     $phpcsFile->addError($error, $tag, 'MissingParamType');
                 } else if (isset($matches[2]) === true) {
