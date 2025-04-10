@@ -1,0 +1,31 @@
+<?php
+
+namespace TestMe\Really;
+
+#[SomeAttribute]
+readonly   class   Foo {
+
+    /**
+     * This is a docblock.
+     *
+     * @param Type $param Description.
+     *
+     * @return void
+     */
+    public function echo ( (D&N)|false $param ) {
+        $var ??= '';
+
+        switch ( true ) {
+            case 1:
+                $brackets = [$var];
+                break;
+            default:
+                $brackets[] = <<<'NOW'
+Some text
+NOW;
+                break;
+        }
+    }
+}
+
+(new Foo)->echo(param: false);
