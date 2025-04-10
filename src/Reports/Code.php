@@ -55,6 +55,10 @@ class Code implements Report
 
             try {
                 $phpcsFile->parse();
+
+                // Make sure the fixer is aware of the reparsed file to prevent a race-condition
+                // with the Diff report also re-parsing the file.
+                $phpcsFile->fixer->startFile($phpcsFile);
             } catch (Exception $e) {
                 // This is a second parse, so ignore exceptions.
                 // They would have been added to the file's error list already.
