@@ -161,7 +161,7 @@ class ScopeIndentSniff implements Sniff
 
         if ($this->debug === true) {
             $line = $tokens[$stackPtr]['line'];
-            echo "Start with token $stackPtr on line $line with indent $currentIndent".PHP_EOL;
+            echo PHP_EOL."Start with token $stackPtr on line $line with indent $currentIndent".PHP_EOL;
         }
 
         if (empty($this->ignoreIndentation) === true) {
