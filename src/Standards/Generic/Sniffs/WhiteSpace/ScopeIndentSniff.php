@@ -635,7 +635,7 @@ class ScopeIndentSniff implements Sniff
                 }
 
                 $conditionToken = array_pop($openScopes);
-                if ($this->debug === true) {
+                if ($this->debug === true && $conditionToken !== null) {
                     $line = $tokens[$conditionToken]['line'];
                     $type = $tokens[$conditionToken]['type'];
                     Common::printStatusMessage("=> removed open scope $conditionToken ($type) on line $line", 1);
