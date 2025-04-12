@@ -848,9 +848,14 @@ class Runner
             return;
         }
 
+        $showColors  = $this->config->colors;
+        $colorOpen   = '';
+        $progressDot = '.';
+        $colorClose  = '';
+
         // Show progress information.
         if ($file->ignored === true) {
-            Common::printStatusMessage('S', 0, true);
+            $progressDot = 'S';
         } else {
             $errors   = $file->getErrorCount();
             $warnings = $file->getWarningCount();
@@ -862,27 +867,19 @@ class Runner
                 // Files with unfixable errors or warnings are E (red).
                 // Files with no errors or warnings are . (black).
                 if ($fixable > 0) {
-                    if ($this->config->colors === true) {
-                        Common::printStatusMessage("\033[31m", 0, true);
-                    }
+                    $progressDot = 'E';
 
-                    Common::printStatusMessage('E', 0, true);
-
-                    if ($this->config->colors === true) {
-                        Common::printStatusMessage("\033[0m", 0, true);
+                    if ($showColors === true) {
+                        $colorOpen  = "\033[31m";
+                        $colorClose = "\033[0m";
                     }
                 } else if ($fixed > 0) {
-                    if ($this->config->colors === true) {
-                        Common::printStatusMessage("\033[32m", 0, true);
-                    }
+                    $progressDot = 'F';
 
-                    Common::printStatusMessage('F', 0, true);
-
-                    if ($this->config->colors === true) {
-                        Common::printStatusMessage("\033[0m", 0, true);
+                    if ($showColors === true) {
+                        $colorOpen  = "\033[32m";
+                        $colorClose = "\033[0m";
                     }
-                } else {
-                    Common::printStatusMessage('.', 0, true);
                 }//end if
             } else {
                 // Files with errors are E (red).
@@ -891,38 +888,34 @@ class Runner
                 // Files with fixable warnings are W (green).
                 // Files with no errors or warnings are . (black).
                 if ($errors > 0) {
-                    if ($this->config->colors === true) {
+                    $progressDot = 'E';
+
+                    if ($showColors === true) {
                         if ($fixable > 0) {
-                            Common::printStatusMessage("\033[32m", 0, true);
+                            $colorOpen = "\033[32m";
                         } else {
-                            Common::printStatusMessage("\033[31m", 0, true);
+                            $colorOpen = "\033[31m";
                         }
-                    }
 
-                    Common::printStatusMessage('E', 0, true);
-
-                    if ($this->config->colors === true) {
-                        Common::printStatusMessage("\033[0m", 0, true);
+                        $colorClose = "\033[0m";
                     }
                 } else if ($warnings > 0) {
-                    if ($this->config->colors === true) {
+                    $progressDot = 'W';
+
+                    if ($showColors === true) {
                         if ($fixable > 0) {
-                            Common::printStatusMessage("\033[32m", 0, true);
+                            $colorOpen = "\033[32m";
                         } else {
-                            Common::printStatusMessage("\033[33m", 0, true);
+                            $colorOpen = "\033[33m";
                         }
-                    }
 
-                    Common::printStatusMessage('W', 0, true);
-
-                    if ($this->config->colors === true) {
-                        Common::printStatusMessage("\033[0m", 0, true);
+                        $colorClose = "\033[0m";
                     }
-                } else {
-                    Common::printStatusMessage('.', 0, true);
                 }//end if
             }//end if
         }//end if
+
+        Common::printStatusMessage($colorOpen.$progressDot.$colorClose, 0, true);
 
         $numPerLine = 60;
         if ($numProcessed !== $numFiles && ($numProcessed % $numPerLine) !== 0) {
