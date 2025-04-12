@@ -922,7 +922,7 @@ class Runner
             ) {
                 $errorArray = error_get_last();
                 if (is_array($errorArray) === true && strpos($errorArray['message'], $memoryError) !== false) {
-                    echo $errorMsg;
+                    fwrite(STDERR, $errorMsg);
                 }
             }
         );
