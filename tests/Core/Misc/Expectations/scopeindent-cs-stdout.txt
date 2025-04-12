@@ -1,0 +1,88 @@
+
+Start with token 0 on line 1 with indent 0
+Open scope (T_CLASS) on line 6
+	=> added open scope 143 (T_CLOSE_CURLY_BRACKET) on line 29, pointing to condition 16 (T_CLASS) on line 6
+	=> indent set to 4 by token 20 (T_OPEN_CURLY_BRACKET)
+	* method prefix (T_PUBLIC) found on line 15; indent set to exact *
+Opening parenthesis found on line 15
+	=> disabling exact indent checking until 73 (T_CLOSE_PARENTHESIS)
+Closing parenthesis found on line 15
+	 * ignoring single-line definition *
+Open scope (T_FUNCTION) on line 15
+	=> added open scope 141 (T_CLOSE_CURLY_BRACKET) on line 28, pointing to condition 57 (T_FUNCTION) on line 15
+	=> indent set to 8 by token 75 (T_OPEN_CURLY_BRACKET)
+Opening parenthesis found on line 18
+	=> disabling exact indent checking until 93 (T_CLOSE_PARENTHESIS)
+Closing parenthesis found on line 18
+	 * ignoring single-line definition *
+Open scope (T_SWITCH) on line 18
+	=> added open scope 138 (T_CLOSE_CURLY_BRACKET) on line 27, pointing to condition 87 (T_SWITCH) on line 18
+	=> indent set to 12 by token 95 (T_OPEN_CURLY_BRACKET)
+Open scope (T_CASE) on line 19
+	=> added open scope 114 (T_BREAK) on line 21, pointing to condition 98 (T_CASE) on line 19
+	=> indent set to 16 by token 101 (T_COLON)
+Opening short array bracket found on line 20
+	=> disabling exact indent checking until 110 (T_CLOSE_SHORT_ARRAY) on line 20
+Closing short array bracket found on line 20
+	 * ignoring single-line definition *
+Close scope (T_CASE) on line 21
+	=> removed open scope 98 (T_CASE) on line 19
+	* first token is 98 (T_CASE) on line 19 *
+	=> indent set to 12 by token 114 (T_BREAK)
+Open scope (T_DEFAULT) on line 22
+	=> added open scope 134 (T_BREAK) on line 26, pointing to condition 118 (T_DEFAULT) on line 22
+	=> indent set to 16 by token 119 (T_COLON)
+Here/nowdoc found on line 23
+	* skipping to token 130 (T_END_NOWDOC) on line 25 *
+Close scope (T_DEFAULT) on line 26
+	=> removed open scope 118 (T_DEFAULT) on line 22
+	* first token is 118 (T_DEFAULT) on line 22 *
+	=> indent set to 12 by token 134 (T_BREAK)
+Close scope (T_SWITCH) on line 27
+	=> removed open scope 87 (T_SWITCH) on line 18
+	* first token is 87 (T_SWITCH) on line 18 *
+	=> indent set to 8 by token 138 (T_CLOSE_CURLY_BRACKET)
+Close scope (T_FUNCTION) on line 28
+	=> removed open scope 57 (T_FUNCTION) on line 15
+	* first token is 55 (T_PUBLIC) on line 15 *
+	=> indent set to 4 by token 141 (T_CLOSE_CURLY_BRACKET)
+Close scope (T_CLASS) on line 29
+	=> removed open scope 16 (T_CLASS) on line 6
+	* first token is 14 (T_READONLY) on line 6 *
+	=> indent set to 0 by token 143 (T_CLOSE_CURLY_BRACKET)
+Opening parenthesis found on line 31
+	=> disabling exact indent checking until 150 (T_CLOSE_PARENTHESIS)
+Closing parenthesis found on line 31
+	 * ignoring single-line definition *
+Opening parenthesis found on line 31
+	=> disabling exact indent checking until 158 (T_CLOSE_PARENTHESIS)
+Closing parenthesis found on line 31
+	 * ignoring single-line definition *
+E 1 / 1 (100%)
+
+
+
+FILE: tests\Core\Misc\Fixtures\test.inc
+------------------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 11 ERRORS AND 1 WARNING AFFECTING 4 LINES
+------------------------------------------------------------------------------------------------------------------------------------------------------
+  1 | WARNING | [ ] A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+    |         |     logic with side effects, but should not do both. The first symbol is defined on line 6 and the first side effect is on line 31.
+    |         |     (PSR1.Files.SideEffects.FoundWithSymbols)
+  6 | ERROR   | [x] Scope keyword "readonly" must be followed by a single space; found 3 (Squiz.WhiteSpace.ScopeKeywordSpacing.Incorrect)
+  6 | ERROR   | [x] Expected 1 space between readonly and class keywords; 3 found (PSR2.Classes.ClassDeclaration.SpaceBeforeKeyword)
+  6 | ERROR   | [x] Expected 1 space after class keyword; 3 found (PSR2.Classes.ClassDeclaration.SpaceAfterKeyword)
+  6 | ERROR   | [x] Opening brace of a class must be on the line after the definition (PSR2.Classes.ClassDeclaration.OpenBraceNewLine)
+ 15 | ERROR   | [ ] Expected "function abc(...)"; found "function abc (...)" (Squiz.Functions.FunctionDeclaration.Found)
+ 15 | ERROR   | [x] Expected 0 spaces after opening parenthesis; 1 found (Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterOpen)
+ 15 | ERROR   | [x] Expected 0 spaces before opening parenthesis; 1 found (Squiz.Functions.MultiLineFunctionDeclaration.SpaceBeforeOpenParen)
+ 15 | ERROR   | [x] Expected 0 spaces before closing parenthesis; 1 found (Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingBeforeClose)
+ 15 | ERROR   | [x] Opening brace should be on a new line (Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine)
+ 18 | ERROR   | [x] Expected 0 spaces after opening bracket; 1 found (PSR2.ControlStructures.ControlStructureSpacing.SpacingAfterOpenBrace)
+ 18 | ERROR   | [x] Expected 0 spaces before closing bracket; 1 found (PSR2.ControlStructures.ControlStructureSpacing.SpaceBeforeCloseBrace)
+------------------------------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 10 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Time: 179ms; Memory: 6MB
+

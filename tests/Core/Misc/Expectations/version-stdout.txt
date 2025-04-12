@@ -1,0 +1,1 @@
+PHP_CodeSniffer version 4.0.0 (alpha) by Squiz and PHPCSStandards

@@ -1,0 +1,31 @@
+
+-------------------------------------
+| PSR2 CODING STANDARD: CLOSING TAG |
+-------------------------------------
+
+Checks that the file does not end with a closing tag.
+
+----------------------------------------- CODE COMPARISON ------------------------------------------
+| Valid: Closing tag not used.                   | Invalid: Closing tag used.                      |
+----------------------------------------------------------------------------------------------------
+| <?php                                          | <?php                                           |
+| echo 'Foo';                                    | echo 'Foo';                                     |
+|                                                | ?>                                              |
+----------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------
+| PSR2 CODING STANDARD: NAMESPACE DECLARATIONS |
+------------------------------------------------
+
+There must be one blank line after the namespace declaration.
+
+----------------------------------------- CODE COMPARISON ------------------------------------------
+| Valid: One blank line after the namespace      | Invalid: No blank line after the namespace      |
+| declaration.                                   | declaration.                                    |
+----------------------------------------------------------------------------------------------------
+| namespace \Foo\Bar;                            | namespace \Foo\Bar;                             |
+|                                                | use \Baz;                                       |
+| use \Baz;                                      |                                                 |
+----------------------------------------------------------------------------------------------------
+

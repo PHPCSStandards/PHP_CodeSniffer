@@ -1,0 +1,196 @@
+
+FILE: tests\Core\Misc\Fixtures\test.inc
+------------------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 11 ERRORS AND 1 WARNING AFFECTING 4 LINES
+------------------------------------------------------------------------------------------------------------------------------------------------------
+  1 | WARNING | [ ] A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+    |         |     logic with side effects, but should not do both. The first symbol is defined on line 6 and the first side effect is on line 31.
+  6 | ERROR   | [x] Scope keyword "readonly" must be followed by a single space; found 3
+  6 | ERROR   | [x] Expected 1 space between readonly and class keywords; 3 found
+  6 | ERROR   | [x] Expected 1 space after class keyword; 3 found
+  6 | ERROR   | [x] Opening brace of a class must be on the line after the definition
+ 15 | ERROR   | [ ] Expected "function abc(...)"; found "function abc (...)"
+ 15 | ERROR   | [x] Expected 0 spaces after opening parenthesis; 1 found
+ 15 | ERROR   | [x] Expected 0 spaces before opening parenthesis; 1 found
+ 15 | ERROR   | [x] Expected 0 spaces before closing parenthesis; 1 found
+ 15 | ERROR   | [x] Opening brace should be on a new line
+ 18 | ERROR   | [x] Expected 0 spaces after opening bracket; 1 found
+ 18 | ERROR   | [x] Expected 0 spaces before closing bracket; 1 found
+------------------------------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 10 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Time: 543ms; Memory: 6MB
+
+
+PHP CODE SNIFFER REPORT SUMMARY
+----------------------------------------------------------------------
+FILE                                                  ERRORS  WARNINGS
+----------------------------------------------------------------------
+tests\Core\Misc\Fixtures\test.inc                     11      1
+----------------------------------------------------------------------
+A TOTAL OF 11 ERRORS AND 1 WARNING WERE FOUND IN 1 FILE
+----------------------------------------------------------------------
+PHPCBF CAN FIX 10 OF THESE SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+
+PHP CODE SNIFFER VIOLATION SOURCE SUMMARY
+---------------------------------------------------------------------------------------------------
+    STANDARD  CATEGORY            SNIFF                                                       COUNT
+---------------------------------------------------------------------------------------------------
+[ ] PSR1      Files               Side effects found with symbols                             1
+[x] PSR2      Classes             Class declaration open brace new line                       1
+[x] PSR2      Classes             Class declaration space after keyword                       1
+[x] PSR2      Classes             Class declaration space before keyword                      1
+[x] PSR2      Control structures  Control structure spacing space before close brace          1
+[x] PSR2      Control structures  Control structure spacing spacing after open brace          1
+[ ] Squiz     Functions           Function declaration found                                  1
+[x] Squiz     Functions           Function declaration argument spacing spacing after open    1
+[x] Squiz     Functions           Function declaration argument spacing spacing before close  1
+[x] Squiz     Functions           Multi line function declaration brace on same line          1
+[x] Squiz     Functions           Multi line function declaration space before open paren     1
+[x] Squiz     White space         Scope keyword spacing incorrect                             1
+---------------------------------------------------------------------------------------------------
+A TOTAL OF 12 SNIFF VIOLATIONS WERE FOUND IN 12 SOURCES
+---------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 10 MARKED SOURCES AUTOMATICALLY (10 VIOLATIONS IN TOTAL)
+---------------------------------------------------------------------------------------------------
+
+
+FILE: tests\Core\Misc\Fixtures\test.inc
+------------------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 11 ERRORS AND 1 WARNING AFFECTING 4 LINES
+------------------------------------------------------------------------------------------------------------------------------------------------------
+LINE  1: WARNING [ ] A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+                     logic with side effects, but should not do both. The first symbol is defined on line 6 and the first side effect is on line 31.
+------------------------------------------------------------------------------------------------------------------------------------------------------
+>>  1:  <?php
+    2:  
+    3:  namespace TestMe\Really;
+------------------------------------------------------------------------------------------------------------------------------------------------------
+LINE  6: ERROR   [x] Scope keyword "readonly" must be followed by a single space; found 3
+LINE  6: ERROR   [x] Expected 1 space between readonly and class keywords; 3 found
+LINE  6: ERROR   [x] Expected 1 space after class keyword; 3 found
+LINE  6: ERROR   [x] Opening brace of a class must be on the line after the definition
+------------------------------------------------------------------------------------------------------------------------------------------------------
+    4:  
+    5:  #[SomeAttribute]
+>>  6:  readonly   class   Foo {
+    7:  
+    8:      /**
+------------------------------------------------------------------------------------------------------------------------------------------------------
+LINE 15: ERROR   [ ] Expected "function abc(...)"; found "function abc (...)"
+LINE 15: ERROR   [x] Expected 0 spaces after opening parenthesis; 1 found
+LINE 15: ERROR   [x] Expected 0 spaces before opening parenthesis; 1 found
+LINE 15: ERROR   [x] Expected 0 spaces before closing parenthesis; 1 found
+LINE 15: ERROR   [x] Opening brace should be on a new line
+------------------------------------------------------------------------------------------------------------------------------------------------------
+   13:       * @return void
+   14:       */
+>> 15:      public function echo ( (D&N)|false $param ) {
+   16:          $var ??= '';
+   17:
+------------------------------------------------------------------------------------------------------------------------------------------------------
+LINE 18: ERROR   [x] Expected 0 spaces after opening bracket; 1 found
+LINE 18: ERROR   [x] Expected 0 spaces before closing bracket; 1 found
+------------------------------------------------------------------------------------------------------------------------------------------------------
+   16:          $var ??= '';
+   17:  
+>> 18:          switch (  true  ) {
+   19:              case 1:
+   20:                  $brackets = [$var];
+------------------------------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 10 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------------------------------------------------------------
+--- tests\Core\Misc\Fixtures\test.inc
++++ PHP_CodeSniffer
+@@ -3,7 +3,8 @@
+ namespace TestMe\Really;
+ 
+ #[SomeAttribute]
+-readonly   class   Foo {
++readonly class Foo
++{
+ 
+     /**
+      * This is a docblock.
+@@ -12,10 +13,11 @@
+      *
+      * @return void
+      */
+-    public function echo ( (D&N)|false $param ) {
++    public function echo((D&N)|false $param)
++    {
+         $var ??= '';
+ 
+-        switch ( true ) {
++        switch (true) {
+             case 1:
+                 $brackets = [$var];
+                 break;
+
+
+PHP CODE SNIFFER GIT BLAME SUMMARY
+----------------------------------------------------------------------
+AUTHOR                                    (Author %) (Overall %) COUNT
+----------------------------------------------------------------------
+jrfnl                                         (12.9)       (100)    12
+----------------------------------------------------------------------
+A TOTAL OF 12 SNIFF VIOLATIONS WERE COMMITTED BY 1 AUTHOR
+----------------------------------------------------------------------
+PHPCBF CAN FIX 10 OF THESE SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+
+PHP CODE SNIFFER INFORMATION REPORT
+----------------------------------------------------------------------
+Blank lines at end of control structure: 0 [3/3, 100%]
+
+Blank lines at start of control structure: 0 [3/3, 100%]
+
+CamelCase method name: yes [1/1, 100%]
+
+Class defined in namespace: yes [1/1, 100%]
+
+Class opening brace placement: same line [1/1, 100%]
+
+Declarations and side effects mixed: yes [1/1, 100%]
+
+EOL char: \n [1/1, 100%]
+
+Function opening brace placement: same line [1/1, 100%]
+
+Line indent: spaces [36/36, 100%]
+
+Line length: 80 or less [53/53, 100%]
+
+Multiple statements on same line: no [17/17, 100%]
+
+Number of newlines at EOF: 1 [1/1, 100%]
+
+One class per file: yes [1/1, 100%]
+
+PHP closing tag at end of PHP-only file: no [1/1, 100%]
+
+PHP constant case: lower [6/6, 100%]
+
+PHP keyword case: lower [22/22, 100%]
+
+PHP short open tag used: no [1/1, 100%]
+
+PascalCase class name: yes [1/1, 100%]
+
+Spaces after control structure open parenthesis:
+	0     => 2 ( 66.67%)
+	1     => 1 ( 33.33%)
+	---------------------
+	total => 3 (100.00%)
+
+Spaces before control structure close parenthesis:
+	0     => 2 ( 66.67%)
+	1     => 1 ( 33.33%)
+	---------------------
+	total => 3 (100.00%)
+
+----------------------------------------------------------------------

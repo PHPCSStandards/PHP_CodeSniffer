@@ -1,0 +1,60 @@
+
+The PSR2 standard contains 43 sniffs
+
+Generic (13 sniffs)
+-------------------
+  Generic.ControlStructures.InlineControlStructure
+  Generic.Files.ByteOrderMark
+  Generic.Files.LineEndings
+  Generic.Files.LineLength
+  Generic.Formatting.DisallowMultipleStatements
+  Generic.Functions.FunctionCallArgumentSpacing
+  Generic.NamingConventions.UpperCaseConstantName
+  Generic.PHP.DisallowAlternativePHPTags
+  Generic.PHP.DisallowShortOpenTag
+  Generic.PHP.LowerCaseConstant
+  Generic.PHP.LowerCaseKeyword
+  Generic.WhiteSpace.DisallowTabIndent
+  Generic.WhiteSpace.ScopeIndent
+
+PEAR (1 sniff)
+--------------
+  PEAR.Functions.ValidDefaultValue
+
+PSR1 (3 sniffs)
+---------------
+  PSR1.Classes.ClassDeclaration
+  PSR1.Files.SideEffects
+  PSR1.Methods.CamelCapsMethodName
+
+PSR2 (12 sniffs)
+----------------
+  PSR2.Classes.ClassDeclaration
+  PSR2.Classes.PropertyDeclaration
+  PSR2.ControlStructures.ControlStructureSpacing
+  PSR2.ControlStructures.ElseIfDeclaration
+  PSR2.ControlStructures.SwitchDeclaration
+  PSR2.Files.ClosingTag
+  PSR2.Files.EndFileNewline
+  PSR2.Methods.FunctionCallSignature
+  PSR2.Methods.FunctionClosingBrace
+  PSR2.Methods.MethodDeclaration
+  PSR2.Namespaces.NamespaceDeclaration
+  PSR2.Namespaces.UseDeclaration
+
+Squiz (14 sniffs)
+-----------------
+  Squiz.Classes.ValidClassName
+  Squiz.ControlStructures.ControlSignature
+  Squiz.ControlStructures.ForEachLoopDeclaration
+  Squiz.ControlStructures.ForLoopDeclaration
+  Squiz.ControlStructures.LowercaseDeclaration
+  Squiz.Functions.FunctionDeclaration
+  Squiz.Functions.FunctionDeclarationArgumentSpacing
+  Squiz.Functions.LowercaseFunctionKeywords
+  Squiz.Functions.MultiLineFunctionDeclaration
+  Squiz.Scope.MethodScope
+  Squiz.WhiteSpace.ControlStructureSpacing
+  Squiz.WhiteSpace.ScopeClosingBrace
+  Squiz.WhiteSpace.ScopeKeywordSpacing
+  Squiz.WhiteSpace.SuperfluousWhitespace

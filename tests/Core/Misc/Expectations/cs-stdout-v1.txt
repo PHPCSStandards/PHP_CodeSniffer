@@ -1,0 +1,215 @@
+Registering sniffs in the PSR2 standard... DONE (43 sniffs registered)
+Creating file list... DONE (1 files in queue)
+Changing into directory tests\Core\Misc\Fixtures
+Processing test.inc [161 tokens in 31 lines]... DONE in 3ms (11 errors, 1 warnings)
+
+FILE: tests\Core\Misc\Fixtures\test.inc
+------------------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 11 ERRORS AND 1 WARNING AFFECTING 4 LINES
+------------------------------------------------------------------------------------------------------------------------------------------------------
+  1 | WARNING | [ ] A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+    |         |     logic with side effects, but should not do both. The first symbol is defined on line 6 and the first side effect is on line 31.
+    |         |     (PSR1.Files.SideEffects.FoundWithSymbols)
+  6 | ERROR   | [x] Scope keyword "readonly" must be followed by a single space; found 3 (Squiz.WhiteSpace.ScopeKeywordSpacing.Incorrect)
+  6 | ERROR   | [x] Expected 1 space between readonly and class keywords; 3 found (PSR2.Classes.ClassDeclaration.SpaceBeforeKeyword)
+  6 | ERROR   | [x] Expected 1 space after class keyword; 3 found (PSR2.Classes.ClassDeclaration.SpaceAfterKeyword)
+  6 | ERROR   | [x] Opening brace of a class must be on the line after the definition (PSR2.Classes.ClassDeclaration.OpenBraceNewLine)
+ 15 | ERROR   | [ ] Expected "function abc(...)"; found "function abc (...)" (Squiz.Functions.FunctionDeclaration.Found)
+ 15 | ERROR   | [x] Expected 0 spaces after opening parenthesis; 1 found (Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterOpen)
+ 15 | ERROR   | [x] Expected 0 spaces before opening parenthesis; 1 found (Squiz.Functions.MultiLineFunctionDeclaration.SpaceBeforeOpenParen)
+ 15 | ERROR   | [x] Expected 0 spaces before closing parenthesis; 1 found (Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingBeforeClose)
+ 15 | ERROR   | [x] Opening brace should be on a new line (Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine)
+ 18 | ERROR   | [x] Expected 0 spaces after opening bracket; 1 found (PSR2.ControlStructures.ControlStructureSpacing.SpacingAfterOpenBrace)
+ 18 | ERROR   | [x] Expected 0 spaces before closing bracket; 1 found (PSR2.ControlStructures.ControlStructureSpacing.SpaceBeforeCloseBrace)
+------------------------------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 10 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Time: 521ms; Memory: 6MB
+
+
+PHP CODE SNIFFER REPORT SUMMARY
+----------------------------------------------------------------------
+FILE                                                  ERRORS  WARNINGS
+----------------------------------------------------------------------
+tests\Core\Misc\Fixtures\test.inc                     11      1
+----------------------------------------------------------------------
+A TOTAL OF 11 ERRORS AND 1 WARNING WERE FOUND IN 1 FILE
+----------------------------------------------------------------------
+PHPCBF CAN FIX 10 OF THESE SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+
+PHP CODE SNIFFER VIOLATION SOURCE SUMMARY
+--------------------------------------------------------------------------------
+    SOURCE                                                                 COUNT
+--------------------------------------------------------------------------------
+[ ] PSR1.Files.SideEffects.FoundWithSymbols                                1
+[x] PSR2.Classes.ClassDeclaration.OpenBraceNewLine                         1
+[x] PSR2.Classes.ClassDeclaration.SpaceAfterKeyword                        1
+[x] PSR2.Classes.ClassDeclaration.SpaceBeforeKeyword                       1
+[x] PSR2.ControlStructures.ControlStructureSpacing.SpaceBeforeCloseBrace   1
+[x] PSR2.ControlStructures.ControlStructureSpacing.SpacingAfterOpenBrace   1
+[ ] Squiz.Functions.FunctionDeclaration.Found                              1
+[x] Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterOpen    1
+[x] Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingBeforeClose  1
+[x] Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine           1
+[x] Squiz.Functions.MultiLineFunctionDeclaration.SpaceBeforeOpenParen      1
+[x] Squiz.WhiteSpace.ScopeKeywordSpacing.Incorrect                         1
+--------------------------------------------------------------------------------
+A TOTAL OF 12 SNIFF VIOLATIONS WERE FOUND IN 12 SOURCES
+--------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 10 MARKED SOURCES AUTOMATICALLY (10 VIOLATIONS IN TOTAL)
+--------------------------------------------------------------------------------
+
+
+FILE: tests\Core\Misc\Fixtures\test.inc
+------------------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 11 ERRORS AND 1 WARNING AFFECTING 4 LINES
+------------------------------------------------------------------------------------------------------------------------------------------------------
+LINE  1: WARNING [ ] A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute logic
+                     with side effects, but should not do both. The first symbol is defined on line 6 and the first side effect is on line 31.
+                     (PSR1.Files.SideEffects.FoundWithSymbols)
+------------------------------------------------------------------------------------------------------------------------------------------------------
+>>  1:  <?php
+    2:  
+    3:  namespace TestMe\Really;
+------------------------------------------------------------------------------------------------------------------------------------------------------
+LINE  6: ERROR   [x] Scope keyword "readonly" must be followed by a single space; found 3 (Squiz.WhiteSpace.ScopeKeywordSpacing.Incorrect)
+LINE  6: ERROR   [x] Expected 1 space between readonly and class keywords; 3 found (PSR2.Classes.ClassDeclaration.SpaceBeforeKeyword)
+LINE  6: ERROR   [x] Expected 1 space after class keyword; 3 found (PSR2.Classes.ClassDeclaration.SpaceAfterKeyword)
+LINE  6: ERROR   [x] Opening brace of a class must be on the line after the definition (PSR2.Classes.ClassDeclaration.OpenBraceNewLine)
+------------------------------------------------------------------------------------------------------------------------------------------------------
+    4:  
+    5:  #[SomeAttribute]
+>>  6:  readonly   class   Foo {
+    7:  
+    8:      /**
+------------------------------------------------------------------------------------------------------------------------------------------------------
+LINE 15: ERROR   [ ] Expected "function abc(...)"; found "function abc (...)" (Squiz.Functions.FunctionDeclaration.Found)
+LINE 15: ERROR   [x] Expected 0 spaces after opening parenthesis; 1 found (Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterOpen)
+LINE 15: ERROR   [x] Expected 0 spaces before opening parenthesis; 1 found (Squiz.Functions.MultiLineFunctionDeclaration.SpaceBeforeOpenParen)
+LINE 15: ERROR   [x] Expected 0 spaces before closing parenthesis; 1 found (Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingBeforeClose)
+LINE 15: ERROR   [x] Opening brace should be on a new line (Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine)
+------------------------------------------------------------------------------------------------------------------------------------------------------
+   13:       * @return void
+   14:       */
+>> 15:      public function echo ( (D&N)|false $param ) {
+   16:          $var ??= '';
+   17:
+------------------------------------------------------------------------------------------------------------------------------------------------------
+LINE 18: ERROR   [x] Expected 0 spaces after opening bracket; 1 found (PSR2.ControlStructures.ControlStructureSpacing.SpacingAfterOpenBrace)
+LINE 18: ERROR   [x] Expected 0 spaces before closing bracket; 1 found (PSR2.ControlStructures.ControlStructureSpacing.SpaceBeforeCloseBrace)
+------------------------------------------------------------------------------------------------------------------------------------------------------
+   16:          $var ??= '';
+   17:  
+>> 18:          switch (  true  ) {
+   19:              case 1:
+   20:                  $brackets = [$var];
+------------------------------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 10 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------------------------------------------------------------
+--- tests\Core\Misc\Fixtures\test.inc
++++ PHP_CodeSniffer
+@@ -3,7 +3,8 @@
+ namespace TestMe\Really;
+ 
+ #[SomeAttribute]
+-readonly   class   Foo {
++readonly class Foo
++{
+ 
+     /**
+      * This is a docblock.
+@@ -12,10 +13,11 @@
+      *
+      * @return void
+      */
+-    public function echo ( (D&N)|false $param ) {
++    public function echo((D&N)|false $param)
++    {
+         $var ??= '';
+ 
+-        switch ( true ) {
++        switch (true) {
+             case 1:
+                 $brackets = [$var];
+                 break;
+
+
+PHP CODE SNIFFER GIT BLAME SUMMARY
+------------------------------------------------------------------------------------------------------------
+AUTHOR   SOURCE                                                                 (Author %) (Overall %) COUNT
+------------------------------------------------------------------------------------------------------------
+jrfnl                                                                               (12.9)       (100)    12
+         [x] PSR2.ControlStructures.ControlStructureSpacing.SpaceBeforeCloseBrace                          1
+         [x] PSR2.ControlStructures.ControlStructureSpacing.SpacingAfterOpenBrace                          1
+         [x] Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine                                  1
+         [x] Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingBeforeClose                         1
+         [x] Squiz.Functions.MultiLineFunctionDeclaration.SpaceBeforeOpenParen                             1
+         [x] Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterOpen                           1
+         [x] PSR2.Classes.ClassDeclaration.OpenBraceNewLine                                                1
+         [x] PSR2.Classes.ClassDeclaration.SpaceAfterKeyword                                               1
+         [x] PSR2.Classes.ClassDeclaration.SpaceBeforeKeyword                                              1
+         [x] Squiz.WhiteSpace.ScopeKeywordSpacing.Incorrect                                                1
+         [ ] Squiz.Functions.FunctionDeclaration.Found                                                     1
+         [ ] PSR1.Files.SideEffects.FoundWithSymbols                                                       1
+Unknown                                                                                (0)         (0)     0
+------------------------------------------------------------------------------------------------------------
+A TOTAL OF 12 SNIFF VIOLATIONS WERE COMMITTED BY 2 AUTHORS
+------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 10 MARKED SOURCES AUTOMATICALLY (10 VIOLATIONS IN TOTAL)
+------------------------------------------------------------------------------------------------------------
+
+
+PHP CODE SNIFFER INFORMATION REPORT
+----------------------------------------------------------------------
+Blank lines at end of control structure: 0 [3/3, 100%]
+
+Blank lines at start of control structure: 0 [3/3, 100%]
+
+CamelCase method name: yes [1/1, 100%]
+
+Class defined in namespace: yes [1/1, 100%]
+
+Class opening brace placement: same line [1/1, 100%]
+
+Declarations and side effects mixed: yes [1/1, 100%]
+
+EOL char: \n [1/1, 100%]
+
+Function opening brace placement: same line [1/1, 100%]
+
+Line indent: spaces [36/36, 100%]
+
+Line length: 80 or less [53/53, 100%]
+
+Multiple statements on same line: no [17/17, 100%]
+
+Number of newlines at EOF: 1 [1/1, 100%]
+
+One class per file: yes [1/1, 100%]
+
+PHP closing tag at end of PHP-only file: no [1/1, 100%]
+
+PHP constant case: lower [6/6, 100%]
+
+PHP keyword case: lower [22/22, 100%]
+
+PHP short open tag used: no [1/1, 100%]
+
+PascalCase class name: yes [1/1, 100%]
+
+Spaces after control structure open parenthesis:
+	0     => 2 ( 66.67%)
+	1     => 1 ( 33.33%)
+	---------------------
+	total => 3 (100.00%)
+
+Spaces before control structure close parenthesis:
+	0     => 2 ( 66.67%)
+	1     => 1 ( 33.33%)
+	---------------------
+	total => 3 (100.00%)
+
+----------------------------------------------------------------------

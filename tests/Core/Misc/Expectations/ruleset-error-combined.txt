@@ -1,0 +1,4 @@
+ERROR: No sniffs were registered.
+
+Run "phpcs --help" for usage information
+

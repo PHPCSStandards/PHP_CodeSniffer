@@ -1,0 +1,4 @@
+ERROR: "unknown" is not a valid generator. The following generators are supported: Text, HTML and Markdown.
+
+Run "phpcs --help" for usage information
+
