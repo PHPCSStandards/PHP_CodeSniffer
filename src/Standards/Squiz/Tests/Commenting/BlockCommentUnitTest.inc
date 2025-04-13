@@ -307,3 +307,10 @@ abstract class MyClass
 enum MyEnum {
 
 }
+
+class FinalProperties {
+    /**
+     * Comment should be ignored.
+     */
+    final int $prop = 1;
+}
