@@ -100,3 +100,8 @@ $cl = function (int|false $param = NULL, Type|null $obj = new MyObj(FALSE)) : st
 class SkipOverPHP82DNFTypes {
     protected (\FullyQualified&Partially\Qualified)|false $propertyC;
 }
+
+class SkipOverPHP84FinalProperties {
+    final MyType|false $propA;
+    private static final null|MyClass $propB;
+}
