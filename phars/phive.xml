@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 <repository xmlns="https://phar.io/repository" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://phar.io/repository https://phar.io/data/repository.xsd">
     <phar name="phpcs">
+        <release version="3.12.2" url="https://phars.phpcodesniffer.com/phars/phpcs-3.12.2.phar">
+            <signature type="gpg"/>
+            <hash type="sha-256" value="5549f650025d12a6ee6bf1b7dc4685f3f92fe18897b77b456bb126d020477405"/>
+        </release>
         <release version="3.12.1" url="https://phars.phpcodesniffer.com/phars/phpcs-3.12.1.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="7d714f6ebea0c9a257cbbb1a912a607c68f03f0d3b688f489efbd2eaa72f9261"/>
@@ -163,6 +167,10 @@
         </release>
     </phar>
     <phar name="phpcbf">
+        <release version="3.12.2" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.12.2.phar">
+            <signature type="gpg"/>
+            <hash type="sha-256" value="0f4db6b61f407fa6179840ef4fd1c77191988c61534807a7c34d34782ad258b9"/>
+        </release>
         <release version="3.12.1" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.12.1.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="8dcf5337b077812e4266bef5f23c04d2513cb23c95b29478f12faedc096dcec7"/>
