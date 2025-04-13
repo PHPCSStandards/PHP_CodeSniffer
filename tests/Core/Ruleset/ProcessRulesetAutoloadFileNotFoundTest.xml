@@ -3,6 +3,6 @@
 
     <autoload>./tests/Core/Ruleset/Fixtures/ThisFileDoesNotExist.php</autoload>
 
-    <!-- Prevent a "no sniff were registered" error. -->
+    <!-- Prevent a "no sniffs were registered" error. -->
     <rule ref="Generic.PHP.BacktickOperator"/>
 </ruleset>

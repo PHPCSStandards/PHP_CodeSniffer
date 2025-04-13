@@ -10,6 +10,6 @@
     <!-- While this references a valid sniff category, it will be ignored anyway as the ref starts with "Internal". -->
     <rule ref="Internal.Valid"/>
 
-    <!-- Prevent a "no sniff were registered" error. -->
+    <!-- Prevent a "no sniffs were registered" error. -->
     <rule ref="Generic.PHP.BacktickOperator"/>
 </ruleset>
