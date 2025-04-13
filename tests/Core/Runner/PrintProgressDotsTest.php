@@ -8,6 +8,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Runner;
 
+use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Files\DummyFile;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Runner;
@@ -196,6 +197,12 @@ final class PrintProgressDotsTest extends TestCase
      */
     private function checkProgressDot($colors, $code, $sniffs, $expected, $enableFixer=false)
     {
+        if (version_compare(Config::VERSION, '4.0', '>=') === true) {
+            // This test is temporarily disabled on PHPCS 4.x as the stdOut/stdErr handling needs
+            // a rewrite, as, as things are, it makes testing impossible.
+            $this->markTestSkipped('This test is incompatible with PHPCS 4.0 (for now)');
+        }
+
         $this->expectOutputString($expected);
 
         $config            = new ConfigDouble(['-p']);

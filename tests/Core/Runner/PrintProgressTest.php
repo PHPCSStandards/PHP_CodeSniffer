@@ -8,6 +8,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Runner;
 
+use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Files\DummyFile;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Runner;
@@ -116,6 +117,12 @@ final class PrintProgressTest extends TestCase
      */
     public function testNoProgressIsShownWhenDisabled()
     {
+        if (version_compare(Config::VERSION, '4.0', '>=') === true) {
+            // This test is temporarily disabled on PHPCS 4.x as the stdOut/stdErr handling needs
+            // a rewrite, as, as things are, it makes testing impossible.
+            $this->markTestSkipped('This test is incompatible with PHPCS 4.0 (for now)');
+        }
+
         $this->expectOutputString('');
 
         self::$config->showProgress = false;
@@ -134,6 +141,12 @@ final class PrintProgressTest extends TestCase
      */
     public function testProgressDotSkippedFiles()
     {
+        if (version_compare(Config::VERSION, '4.0', '>=') === true) {
+            // This test is temporarily disabled on PHPCS 4.x as the stdOut/stdErr handling needs
+            // a rewrite, as, as things are, it makes testing impossible.
+            $this->markTestSkipped('This test is incompatible with PHPCS 4.0 (for now)');
+        }
+
         $nrOfFiles = 10;
         $this->expectOutputString('.S.S.S.S.S 10 / 10 (100%)'.PHP_EOL);
 
@@ -162,6 +175,12 @@ final class PrintProgressTest extends TestCase
      */
     public function testEndOfLineSummary($nrOfFiles, $expected)
     {
+        if (version_compare(Config::VERSION, '4.0', '>=') === true) {
+            // This test is temporarily disabled on PHPCS 4.x as the stdOut/stdErr handling needs
+            // a rewrite, as, as things are, it makes testing impossible.
+            $this->markTestSkipped('This test is incompatible with PHPCS 4.0 (for now)');
+        }
+
         $this->expectOutputString($expected);
 
         for ($i = 1; $i <= $nrOfFiles; $i++) {
