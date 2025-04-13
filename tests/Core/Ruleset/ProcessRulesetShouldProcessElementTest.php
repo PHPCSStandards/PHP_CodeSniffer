@@ -88,7 +88,7 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
 
 
     /**
-     * Destroy the Config object and restor the ini values after the tests.
+     * Destroy the Config object and restore the ini values after the tests.
      *
      * @afterClass
      *

@@ -41,7 +41,7 @@ final class TimingTest extends TestCase
 
 
     /**
-     * Verify that getDuration() returns 0 when the timer wasn't started.
+     * Verify that getDuration() returns the time in milliseconds.
      *
      * @return void
      */
