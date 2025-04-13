@@ -32,6 +32,6 @@
     <autoload phpcbf-only="true">./tests/Core/Ruleset/Fixtures/ProcessRulesetAutoloadLoadPhpcbfOnly.php</autoload>
 
 
-    <!-- Prevent a "no sniff were registered" error. -->
+    <!-- Prevent a "no sniffs were registered" error. -->
     <rule ref="Generic.PHP.BacktickOperator"/>
 </ruleset>

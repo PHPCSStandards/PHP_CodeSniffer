@@ -3,6 +3,6 @@
 
     <rule ref="./tests/Core/Ruleset/Fixtures/TestStandard/Sniffs/InvalidSniffError/NoImplementsNoRegisterSniff.php"/>
 
-    <!-- Prevent a "no sniff were registered" error. -->
+    <!-- Prevent a "no sniffs were registered" error. -->
     <rule ref="Generic.PHP.BacktickOperator"/>
 </ruleset>
