@@ -108,6 +108,10 @@ final class ProcessRulesetCliArgsTest extends TestCase
                 'name'     => 'warningSeverity',
                 'expected' => 5,
             ],
+            'Issue squiz#2395: "cache" set to file in parent before includes; "no-cache" set in child; parent should win [1]'        => [
+                'name'     => 'cache',
+                'expected' => true,
+            ],
             'Issue squiz#2395: "q" in child A before includes; "p" set in grandchild A, child A should win'                          => [
                 'name'     => 'showProgress',
                 'expected' => false,
@@ -194,6 +198,10 @@ final class ProcessRulesetCliArgsTest extends TestCase
                 'expected' => [
                     self::FIXTURE_DIR.'/vendor/OrgName/ExtStandard/bootstrap.php',
                 ],
+            ],
+            'Paths should be resolved based on the ruleset location: cacheFile'  => [
+                'name'     => 'cacheFile',
+                'expected' => self::FIXTURE_DIR.'/config/phpcs/.cache.phpcs',
             ],
         ];
 

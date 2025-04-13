@@ -8,6 +8,7 @@
 
     <!-- Issue squizlabs/PHP_CodeSniffer#2395: allow overruling CLI args when they have different CLI flag names. -->
     <arg name="no-colors"/>
+    <arg name="cache" value="./config/phpcs/.cache.phpcs"/>
 
     <!-- Miscellaneous other settings. -->
     <arg name="report" value="full,summary,source"/>
