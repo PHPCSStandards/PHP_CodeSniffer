@@ -87,41 +87,6 @@ final class TokenNameTest extends TestCase
     public static function dataPolyfilledPHPNativeTokens()
     {
         return [
-            'PHP 5.5 native token, polyfilled: T_FINALLY'                                 => [
-                'tokenCode' => T_FINALLY,
-                'expected'  => 'T_FINALLY',
-            ],
-            'PHP 5.5 native token, polyfilled: T_YIELD'                                   => [
-                'tokenCode' => T_YIELD,
-                'expected'  => 'T_YIELD',
-            ],
-
-            'PHP 5.6 native token, polyfilled: T_ELLIPSIS'                                => [
-                'tokenCode' => T_ELLIPSIS,
-                'expected'  => 'T_ELLIPSIS',
-            ],
-            'PHP 5.6 native token, polyfilled: T_POW'                                     => [
-                'tokenCode' => T_POW,
-                'expected'  => 'T_POW',
-            ],
-            'PHP 5.6 native token, polyfilled: T_POW_EQUAL'                               => [
-                'tokenCode' => T_POW_EQUAL,
-                'expected'  => 'T_POW_EQUAL',
-            ],
-
-            'PHP 7.0 native token, polyfilled: T_SPACESHIP'                               => [
-                'tokenCode' => T_SPACESHIP,
-                'expected'  => 'T_SPACESHIP',
-            ],
-            'PHP 7.0 native token, polyfilled: T_COALESCE'                                => [
-                'tokenCode' => T_COALESCE,
-                'expected'  => 'T_COALESCE',
-            ],
-            'PHP 7.0 native token, polyfilled: T_YIELD_FROM'                              => [
-                'tokenCode' => T_YIELD_FROM,
-                'expected'  => 'T_YIELD_FROM',
-            ],
-
             'PHP 7.4 native token, polyfilled: T_COALESCE_EQUAL'                          => [
                 'tokenCode' => T_COALESCE_EQUAL,
                 'expected'  => 'T_COALESCE_EQUAL',

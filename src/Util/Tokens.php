@@ -90,46 +90,11 @@ define('T_TYPE_CLOSE_PARENTHESIS', 'PHPCS_T_TYPE_CLOSE_PARENTHESIS');
  * `PHP_CodeSniffer\Tests\Core\Util\Tokens\TokenNameTest::dataPolyfilledPHPNativeTokens()` test method!}
  */
 
-// Some PHP 5.5 tokens, replicated for lower versions.
-if (defined('T_FINALLY') === false) {
-    define('T_FINALLY', 'PHPCS_T_FINALLY');
-}
-
-if (defined('T_YIELD') === false) {
-    define('T_YIELD', 'PHPCS_T_YIELD');
-}
-
-// Some PHP 5.6 tokens, replicated for lower versions.
-if (defined('T_ELLIPSIS') === false) {
-    define('T_ELLIPSIS', 'PHPCS_T_ELLIPSIS');
-}
-
-if (defined('T_POW') === false) {
-    define('T_POW', 'PHPCS_T_POW');
-}
-
-if (defined('T_POW_EQUAL') === false) {
-    define('T_POW_EQUAL', 'PHPCS_T_POW_EQUAL');
-}
-
-// Some PHP 7 tokens, replicated for lower versions.
-if (defined('T_SPACESHIP') === false) {
-    define('T_SPACESHIP', 'PHPCS_T_SPACESHIP');
-}
-
-if (defined('T_COALESCE') === false) {
-    define('T_COALESCE', 'PHPCS_T_COALESCE');
-}
-
+// Some PHP 7.4 tokens, replicated for lower versions.
 if (defined('T_COALESCE_EQUAL') === false) {
     define('T_COALESCE_EQUAL', 'PHPCS_T_COALESCE_EQUAL');
 }
 
-if (defined('T_YIELD_FROM') === false) {
-    define('T_YIELD_FROM', 'PHPCS_T_YIELD_FROM');
-}
-
-// Some PHP 7.4 tokens, replicated for lower versions.
 if (defined('T_BAD_CHARACTER') === false) {
     define('T_BAD_CHARACTER', 'PHPCS_T_BAD_CHARACTER');
 }

@@ -38,15 +38,7 @@ final class YieldTest extends AbstractTokenizerTestCase
         $tokenArray = $tokens[$target];
 
         $this->assertSame(T_YIELD, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_YIELD (code)');
-
-        // This assertion would fail on PHP 5.4 with PHPUnit 4 as PHPUnit polyfills the `T_YIELD` token too, but
-        // with a different value, which causes the token 'type' to be set to `UNKNOWN`.
-        // This issue _only_ occurs when running the tests, not when running PHPCS outside of a test situation.
-        // The PHPUnit polyfilled token is declared in the PHP_CodeCoverage_Report_HTML_Renderer_File class
-        // in vendor/phpunit/php-code-coverage/src/CodeCoverage/Report/HTML/Renderer/File.php.
-        if (PHP_VERSION_ID >= 50500) {
-            $this->assertSame('T_YIELD', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_YIELD (type)');
-        }
+        $this->assertSame('T_YIELD', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_YIELD (type)');
 
         $this->assertSame($expectedContent, $tokenArray['content'], 'Token content does not match expectation');
 
@@ -63,14 +55,6 @@ final class YieldTest extends AbstractTokenizerTestCase
     public static function dataYieldKeyword()
     {
         return [
-            'yield'                             => [
-                'testMarker'      => '/* testYield */',
-                'expectedContent' => 'yield',
-            ],
-            'yield followed by comment'         => [
-                'testMarker'      => '/* testYieldFollowedByComment */',
-                'expectedContent' => 'YIELD',
-            ],
             'yield at end of file, live coding' => [
                 'testMarker'      => '/* testYieldLiveCoding */',
                 'expectedContent' => 'yield',
