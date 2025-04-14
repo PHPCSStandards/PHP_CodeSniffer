@@ -7,7 +7,6 @@
         <exclude name="TestStandard.DeprecatedInvalid"/>
         <exclude name="TestStandard.SupportedTokenizers"/>
         <exclude name="TestStandard.InvalidSniffs"/>
-        <exclude name="TestStandard.InvalidSniffError"/>
         <exclude name="TestStandard.MissingInterface"/>
     </rule>
 
