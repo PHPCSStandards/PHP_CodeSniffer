@@ -3,6 +3,8 @@ Creating file list... DONE (1 files in queue)
 Loading cache... DONE (1 files in cache)
 Changing into directory tests\Core\Misc\Fixtures
 Processing test.inc [loaded from cache]... DONE in 0ms (11 errors, 1 warnings)
+CODE report is parsing test.inc [161 tokens in 31 lines]... DONE in 1ms
+Time: 709ms; Memory: 6MB
 
 FILE: tests\Core\Misc\Fixtures\test.inc
 ------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -25,8 +27,6 @@ FOUND 11 ERRORS AND 1 WARNING AFFECTING 4 LINES
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 10 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Time: 515ms; Memory: 6MB
 
 
 PHP CODE SNIFFER REPORT SUMMARY
@@ -63,7 +63,6 @@ A TOTAL OF 12 SNIFF VIOLATIONS WERE FOUND IN 12 SOURCES
 PHPCBF CAN FIX THE 10 MARKED SOURCES AUTOMATICALLY (10 VIOLATIONS IN TOTAL)
 --------------------------------------------------------------------------------
 
-CODE report is parsing test.inc [161 tokens in 31 lines]... DONE in 1ms
 
 FILE: tests\Core\Misc\Fixtures\test.inc
 ------------------------------------------------------------------------------------------------------------------------------------------------------

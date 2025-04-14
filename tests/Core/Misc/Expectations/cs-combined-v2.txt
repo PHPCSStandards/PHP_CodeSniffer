@@ -12,6 +12,7 @@ Processing ruleset src\Standards\PSR2\ruleset.xml
 		=> src\Standards\PSR2\Sniffs\Methods\MethodDeclarationSniff.php
 		=> src\Standards\PSR2\Sniffs\Namespaces\NamespaceDeclarationSniff.php
 		=> src\Standards\PSR2\Sniffs\Namespaces\UseDeclarationSniff.php
+	=> set command line value --tab-width=4
 	Processing rule "PSR1"
 		=> src\Standards\PSR1\ruleset.xml
 		* rule is referencing a standard using ruleset path; processing *
@@ -127,53 +128,7 @@ Processing ruleset src\Standards\PSR2\ruleset.xml
 		=> severity set to 0
 	Processing rule "Generic.ControlStructures.InlineControlStructure"
 		=> src\Standards\Generic\Sniffs\ControlStructures\InlineControlStructureSniff.php
-	=> set command line value --tab-width=4
 => Ruleset processing complete; included 43 sniffs and excluded 0
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token [1]: T_FUNCTION => function
-	Process token [2]: T_WHITESPACE =>  
-	Process token [3]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token  1 : T_OPEN_PARENTHESIS => (
-	Process token [2]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token  1 : T_SEMICOLON => ;
-	Process token [2]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token [1]: T_FUNCTION => function
-	Process token [2]: T_WHITESPACE =>  
-	Process token [3]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token  1 : T_OPEN_PARENTHESIS => (
-	Process token [2]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token [1]: T_ABSTRACT => abstract
-	Process token [2]: T_WHITESPACE =>  
-	Process token [3]: T_FUNCTION => function
-	Process token [4]: T_WHITESPACE =>  
-	Process token [5]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token  1 : T_OPEN_PARENTHESIS => (
-	Process token [2]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token  1 : T_SEMICOLON => ;
-	Process token [2]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
 Creating file list... DONE (1 files in queue)
 Changing into directory tests\Core\Misc\Fixtures
 Processing test.inc 
@@ -756,7 +711,7 @@ Processing test.inc
 	* token 63 on line 15 changed from T_OPEN_PARENTHESIS to T_TYPE_OPEN_PARENTHESIS
 	*** END ADDITIONAL PHP PROCESSING ***
 [161 tokens in 31 lines]... 
-DONE in 9ms (11 errors, 1 warnings)
+DONE in 6ms (11 errors, 1 warnings)
 	*** START FILE FIXING ***
 	E: [Line 6] Scope keyword "readonly" must be followed by a single space; found 3 (Squiz.WhiteSpace.ScopeKeywordSpacing.Incorrect)
 	=> Changeset started by Squiz.WhiteSpace.ScopeKeywordSpacing:151
@@ -796,11 +751,12 @@ DONE in 9ms (11 errors, 1 warnings)
 	PSR2.ControlStructures.ControlStructureSpacing:132 replaced token 92 (T_WHITESPACE on line 18) " )" => ")"
 	* fixed 11 violations, starting loop 2 *
 	E: [Line 17] Line indented incorrectly; expected at least 4 spaces, found 0 (Generic.WhiteSpace.ScopeIndent.Incorrect)
-	Generic.WhiteSpace.ScopeIndent:1352 replaced token 72 (T_OPEN_CURLY_BRACKET on line 17) "{" => "    {"
+	Generic.WhiteSpace.ScopeIndent:1353 replaced token 72 (T_OPEN_CURLY_BRACKET on line 17) "{" => "    {"
 	E: [Line 17] Opening brace indented incorrectly; expected 4 spaces, found 0 (Squiz.Functions.MultiLineFunctionDeclaration.BraceIndent)
 	* token 72 has already been modified, skipping *
 	* fixed 1 violations, starting loop 3 *
 	*** END FILE FIXING ***
+Time: 678ms; Memory: 6MB
 
 FILE: tests\Core\Misc\Fixtures\test.inc
 ------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -823,8 +779,6 @@ FOUND 11 ERRORS AND 1 WARNING AFFECTING 4 LINES
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 10 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Time: 549ms; Memory: 6MB
 
 
 PHP CODE SNIFFER REPORT SUMMARY

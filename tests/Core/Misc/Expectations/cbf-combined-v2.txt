@@ -12,6 +12,7 @@ Processing ruleset src\Standards\PSR2\ruleset.xml
 		=> src\Standards\PSR2\Sniffs\Methods\MethodDeclarationSniff.php
 		=> src\Standards\PSR2\Sniffs\Namespaces\NamespaceDeclarationSniff.php
 		=> src\Standards\PSR2\Sniffs\Namespaces\UseDeclarationSniff.php
+	=> set command line value --tab-width=4
 	Processing rule "PSR1"
 		=> src\Standards\PSR1\ruleset.xml
 		* rule is referencing a standard using ruleset path; processing *
@@ -127,53 +128,7 @@ Processing ruleset src\Standards\PSR2\ruleset.xml
 		=> severity set to 0
 	Processing rule "Generic.ControlStructures.InlineControlStructure"
 		=> src\Standards\Generic\Sniffs\ControlStructures\InlineControlStructureSniff.php
-	=> set command line value --tab-width=4
 => Ruleset processing complete; included 43 sniffs and excluded 0
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token [1]: T_FUNCTION => function
-	Process token [2]: T_WHITESPACE =>  
-	Process token [3]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token  1 : T_OPEN_PARENTHESIS => (
-	Process token [2]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token  1 : T_SEMICOLON => ;
-	Process token [2]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token [1]: T_FUNCTION => function
-	Process token [2]: T_WHITESPACE =>  
-	Process token [3]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token  1 : T_OPEN_PARENTHESIS => (
-	Process token [2]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token [1]: T_ABSTRACT => abstract
-	Process token [2]: T_WHITESPACE =>  
-	Process token [3]: T_FUNCTION => function
-	Process token [4]: T_WHITESPACE =>  
-	Process token [5]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token  1 : T_OPEN_PARENTHESIS => (
-	Process token [2]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token  1 : T_SEMICOLON => ;
-	Process token [2]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
 Creating file list... DONE (1 files in queue)
 Changing into directory tests\Core\Misc\Fixtures
 Processing test.inc 
@@ -756,7 +711,7 @@ Processing test.inc
 	* token 63 on line 15 changed from T_OPEN_PARENTHESIS to T_TYPE_OPEN_PARENTHESIS
 	*** END ADDITIONAL PHP PROCESSING ***
 [161 tokens in 31 lines]... 
-DONE in 9ms (10 fixable violations)
+DONE in 6ms (10 fixable violations)
 	=> Fixing file: 10/10 violations remaining
 	=> Changeset started by Squiz.WhiteSpace.ScopeKeywordSpacing:151
 		Q: Squiz.WhiteSpace.ScopeKeywordSpacing:161 replaced token 15 (T_WHITESPACE on line 6) "   class" => " class"
@@ -786,13 +741,14 @@ DONE in 9ms (10 fixable violations)
 	PSR2.ControlStructures.ControlStructureSpacing:132 replaced token 92 (T_WHITESPACE on line 18) " )" => ")"
                                                                                 	=> Fixing file: 11/10 violations remaining [made 1 pass]... 
 	* fixed 11 violations, starting loop 2 *
-	Generic.WhiteSpace.ScopeIndent:1352 replaced token 72 (T_OPEN_CURLY_BRACKET on line 17) "{" => "    {"
+	Generic.WhiteSpace.ScopeIndent:1353 replaced token 72 (T_OPEN_CURLY_BRACKET on line 17) "{" => "    {"
 	* token 72 has already been modified, skipping *
                                                                                 	=> Fixing file: 1/10 violations remaining [made 2 passes]... 
 	* fixed 1 violations, starting loop 3 *
                                                                                 	=> Fixing file: 0/10 violations remaining [made 3 passes]... 
-DONE in 10ms
+DONE in 9ms
 	=> Fixed file written to test.inc.fixed
+Time: 191ms; Memory: 6MB
 
 PHPCBF RESULT SUMMARY
 ----------------------------------------------------------------------
@@ -802,7 +758,5 @@ tests\Core\Misc\Fixtures\test.inc                     10     1
 ----------------------------------------------------------------------
 A TOTAL OF 10 ERRORS WERE FIXED IN 1 FILE
 ----------------------------------------------------------------------
-
-Time: 196ms; Memory: 6MB
 
 

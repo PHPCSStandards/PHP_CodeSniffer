@@ -1,9 +1,3 @@
-Registering sniffs in the PSR2 standard... DONE (43 sniffs registered)
-Creating file list... DONE (1 files in queue)
-Changing into directory tests\Core\Misc\Fixtures
-Processing test.inc [161 tokens in 31 lines]... DONE in 3ms (10 fixable violations)
-	=> Fixing file: 10/10 violations remaining                                                                                	=> Fixing file: 11/10 violations remaining [made 1 pass]...                                                                                 	=> Fixing file: 1/10 violations remaining [made 2 passes]...                                                                                 	=> Fixing file: 0/10 violations remaining [made 3 passes]... DONE in 7ms
-	=> Fixed file written to test.inc.fixed
 
 PHPCBF RESULT SUMMARY
 ----------------------------------------------------------------------
@@ -13,7 +7,5 @@ tests\Core\Misc\Fixtures\test.inc                     10     1
 ----------------------------------------------------------------------
 A TOTAL OF 10 ERRORS WERE FIXED IN 1 FILE
 ----------------------------------------------------------------------
-
-Time: 182ms; Memory: 6MB
 
 

@@ -2,6 +2,7 @@ Registering sniffs in the PSR2 standard... DONE (43 sniffs registered)
 Creating file list... DONE (1 files in queue)
 Changing into directory tests\Core\Misc\Fixtures
 Processing test.inc [161 tokens in 31 lines]... DONE in 3ms (11 errors, 1 warnings)
+Time: 535ms; Memory: 6MB
 
 FILE: tests\Core\Misc\Fixtures\test.inc
 ------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -24,8 +25,6 @@ FOUND 11 ERRORS AND 1 WARNING AFFECTING 4 LINES
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 10 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Time: 535ms; Memory: 6MB
 
 
 PHP CODE SNIFFER REPORT SUMMARY

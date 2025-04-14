@@ -12,6 +12,7 @@ Processing ruleset src\Standards\PSR2\ruleset.xml
 		=> src\Standards\PSR2\Sniffs\Methods\MethodDeclarationSniff.php
 		=> src\Standards\PSR2\Sniffs\Namespaces\NamespaceDeclarationSniff.php
 		=> src\Standards\PSR2\Sniffs\Namespaces\UseDeclarationSniff.php
+	=> set command line value --tab-width=4
 	Processing rule "PSR1"
 		=> src\Standards\PSR1\ruleset.xml
 		* rule is referencing a standard using ruleset path; processing *
@@ -127,7 +128,6 @@ Processing ruleset src\Standards\PSR2\ruleset.xml
 		=> severity set to 0
 	Processing rule "Generic.ControlStructures.InlineControlStructure"
 		=> src\Standards\Generic\Sniffs\ControlStructures\InlineControlStructureSniff.php
-	=> set command line value --tab-width=4
 => Ruleset processing complete; included 43 sniffs and excluded 0
 Registered PHP_CodeSniffer\Standards\PSR2\Sniffs\Classes\ClassDeclarationSniff
 Registered PHP_CodeSniffer\Standards\PSR2\Sniffs\Classes\PropertyDeclarationSniff
@@ -172,51 +172,6 @@ Registered PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\ForEachLoopD
 Registered PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\ForLoopDeclarationSniff
 Registered PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\LowercaseDeclarationSniff
 Registered PHP_CodeSniffer\Standards\Generic\Sniffs\ControlStructures\InlineControlStructureSniff
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token [1]: T_FUNCTION => function
-	Process token [2]: T_WHITESPACE =>  
-	Process token [3]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token  1 : T_OPEN_PARENTHESIS => (
-	Process token [2]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token  1 : T_SEMICOLON => ;
-	Process token [2]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token [1]: T_FUNCTION => function
-	Process token [2]: T_WHITESPACE =>  
-	Process token [3]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token  1 : T_OPEN_PARENTHESIS => (
-	Process token [2]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token [1]: T_ABSTRACT => abstract
-	Process token [2]: T_WHITESPACE =>  
-	Process token [3]: T_FUNCTION => function
-	Process token [4]: T_WHITESPACE =>  
-	Process token [5]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token  1 : T_OPEN_PARENTHESIS => (
-	Process token [2]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
-	*** START PHP TOKENIZING ***
-	Process token [0]: T_OPEN_TAG => <?php 
-	Process token  1 : T_SEMICOLON => ;
-	Process token [2]: T_CLOSE_TAG => ?>
-	*** END PHP TOKENIZING ***
 Creating file list... DONE (1 files in queue)
 Changing into directory tests\Core\Misc\Fixtures
 Processing test.inc 
@@ -927,7 +882,7 @@ Processing test.inc
 			Processing PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SuperfluousWhitespaceSniff... DONE in 0 seconds
 		Process token 57: T_FUNCTION => function
 			Processing PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\FunctionClosingBraceSniff... DONE in 0 seconds
-			Processing PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\MethodDeclarationSniff... DONE in 0.0001 seconds
+			Processing PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\MethodDeclarationSniff... DONE in 0 seconds
 			Processing PHP_CodeSniffer\Standards\PSR1\Sniffs\Methods\CamelCapsMethodNameSniff... DONE in 0 seconds
 			Processing PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\LowerCaseKeywordSniff... DONE in 0 seconds
 			Processing PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\LowerCaseConstantSniff... DONE in 0 seconds
@@ -1155,43 +1110,43 @@ Processing test.inc
 	*** END TOKEN PROCESSING ***
 	*** START SNIFF PROCESSING REPORT ***
 	PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions\MultiLineFunctionDeclarationSniff: 0.0005 secs
-	PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SuperfluousWhitespaceSniff: 0.0003 secs
+	PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SuperfluousWhitespaceSniff: 0.0004 secs
 	PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\ScopeIndentSniff: 0.0002 secs
-	PHP_CodeSniffer\Standards\Generic\Sniffs\Functions\FunctionCallArgumentSpacingSniff: 0.0002 secs
+	PHP_CodeSniffer\Standards\Generic\Sniffs\Functions\FunctionCallArgumentSpacingSniff: 0.0001 secs
 	PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\FunctionCallSignatureSniff: 0.0001 secs
 	PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff: 0.0001 secs
 	PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\DisallowMultipleStatementsSniff: 0.0001 secs
 	PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\DisallowTabIndentSniff: 0.0001 secs
-	PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\MethodDeclarationSniff: 0.0001 secs
 	PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\LowerCaseKeywordSniff: 0.0001 secs
-	PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\LowerCaseConstantSniff: 0 secs
+	PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\LowerCaseConstantSniff: 0.0001 secs
 	PHP_CodeSniffer\Standards\PSR2\Sniffs\Classes\ClassDeclarationSniff: 0 secs
 	PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ScopeClosingBraceSniff: 0 secs
-	PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ScopeKeywordSpacingSniff: 0 secs
 	PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions\FunctionDeclarationSniff: 0 secs
+	PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\MethodDeclarationSniff: 0 secs
 	PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\UpperCaseConstantNameSniff: 0 secs
 	PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions\FunctionDeclarationArgumentSpacingSniff: 0 secs
+	PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ScopeKeywordSpacingSniff: 0 secs
 	PHP_CodeSniffer\Standards\PSR1\Sniffs\Files\SideEffectsSniff: 0 secs
 	PHP_CodeSniffer\Standards\PSR2\Sniffs\Classes\PropertyDeclarationSniff: 0 secs
 	PHP_CodeSniffer\Standards\PSR2\Sniffs\ControlStructures\SwitchDeclarationSniff: 0 secs
-	PHP_CodeSniffer\Standards\PSR2\Sniffs\ControlStructures\ControlStructureSpacingSniff: 0 secs
-	PHP_CodeSniffer\Standards\PSR2\Sniffs\Files\EndFileNewlineSniff: 0 secs
 	PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ControlStructureSpacingSniff: 0 secs
+	PHP_CodeSniffer\Standards\PSR2\Sniffs\Files\EndFileNewlineSniff: 0 secs
+	PHP_CodeSniffer\Standards\PSR2\Sniffs\ControlStructures\ControlStructureSpacingSniff: 0 secs
 	PHP_CodeSniffer\Standards\PSR2\Sniffs\Files\ClosingTagSniff: 0 secs
-	PHP_CodeSniffer\Standards\Squiz\Sniffs\Classes\ValidClassNameSniff: 0 secs
 	PHP_CodeSniffer\Standards\PSR1\Sniffs\Methods\CamelCapsMethodNameSniff: 0 secs
-	PHP_CodeSniffer\Standards\Squiz\Sniffs\Scope\MethodScopeSniff: 0 secs
+	PHP_CodeSniffer\Standards\Squiz\Sniffs\Classes\ValidClassNameSniff: 0 secs
 	PHP_CodeSniffer\Standards\PEAR\Sniffs\Functions\ValidDefaultValueSniff: 0 secs
-	PHP_CodeSniffer\Standards\PSR2\Sniffs\Namespaces\NamespaceDeclarationSniff: 0 secs
+	PHP_CodeSniffer\Standards\Squiz\Sniffs\Scope\MethodScopeSniff: 0 secs
 	PHP_CodeSniffer\Standards\PSR1\Sniffs\Classes\ClassDeclarationSniff: 0 secs
+	PHP_CodeSniffer\Standards\PSR2\Sniffs\Namespaces\NamespaceDeclarationSniff: 0 secs
 	PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\ControlSignatureSniff: 0 secs
 	PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions\LowercaseFunctionKeywordsSniff: 0 secs
+	PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DisallowShortOpenTagSniff: 0 secs
 	PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\FunctionClosingBraceSniff: 0 secs
 	PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineEndingsSniff: 0 secs
-	PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DisallowShortOpenTagSniff: 0 secs
 	PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\LowercaseDeclarationSniff: 0 secs
 	*** END SNIFF PROCESSING REPORT ***
-DONE in 11ms (11 errors, 1 warnings)
+DONE in 8ms (11 errors, 1 warnings)
 	*** START FILE FIXING ***
 ---START FILE CONTENT---
  1|<?php
@@ -1301,7 +1256,7 @@ DONE in 11ms (11 errors, 1 warnings)
 34|
 --- END FILE CONTENT ---
 	E: [Line 17] Line indented incorrectly; expected at least 4 spaces, found 0 (Generic.WhiteSpace.ScopeIndent.Incorrect)
-	Generic.WhiteSpace.ScopeIndent:1352 replaced token 72 (T_OPEN_CURLY_BRACKET on line 17) "{" => "    {"
+	Generic.WhiteSpace.ScopeIndent:1353 replaced token 72 (T_OPEN_CURLY_BRACKET on line 17) "{" => "    {"
 	E: [Line 17] Opening brace indented incorrectly; expected 4 spaces, found 0 (Squiz.Functions.MultiLineFunctionDeclaration.BraceIndent)
 	* token 72 has already been modified, skipping *
 	* fixed 1 violations, starting loop 3 *
@@ -1342,6 +1297,7 @@ DONE in 11ms (11 errors, 1 warnings)
 34|
 --- END FILE CONTENT ---
 	*** END FILE FIXING ***
+Time: 540ms; Memory: 6MB
 
 FILE: tests\Core\Misc\Fixtures\test.inc
 ------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1364,8 +1320,6 @@ FOUND 11 ERRORS AND 1 WARNING AFFECTING 4 LINES
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 PHPCBF CAN FIX THE 10 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Time: 639ms; Memory: 6MB
 
 
 PHP CODE SNIFFER REPORT SUMMARY

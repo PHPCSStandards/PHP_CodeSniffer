@@ -8,6 +8,4 @@ tests\Core\Misc\Fixtures\test.inc                     10     1
 A TOTAL OF 10 ERRORS WERE FIXED IN 1 FILE
 ----------------------------------------------------------------------
 
-Time: 187ms; Memory: 6MB
-
 

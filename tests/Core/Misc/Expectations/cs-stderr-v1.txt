@@ -1,0 +1,5 @@
+Registering sniffs in the PSR2 standard... DONE (43 sniffs registered)
+Creating file list... DONE (1 files in queue)
+Changing into directory tests\Core\Misc\Fixtures
+Processing test.inc [161 tokens in 31 lines]... DONE in 3ms (11 errors, 1 warnings)
+Time: 541ms; Memory: 6MB

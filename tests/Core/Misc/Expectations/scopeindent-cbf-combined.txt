@@ -61,6 +61,7 @@ Closing parenthesis found on line 31
 F 1 / 1 (100%)
 
 
+Time: 179ms; Memory: 6MB
 
 PHPCBF RESULT SUMMARY
 ----------------------------------------------------------------------
@@ -70,7 +71,5 @@ tests\Core\Misc\Fixtures\test.inc                     10     1
 ----------------------------------------------------------------------
 A TOTAL OF 10 ERRORS WERE FIXED IN 1 FILE
 ----------------------------------------------------------------------
-
-Time: 179ms; Memory: 6MB
 
 
