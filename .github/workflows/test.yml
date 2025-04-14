@@ -1,12 +1,12 @@
 name: Test
 
 on:
-  # Run on pushes to `master`/`4.0` and on all pull requests.
+  # Run on pushes to `master`/`4.x` and on all pull requests.
   # Prevent the build from running when there are only irrelevant changes.
   push:
     branches:
       - master
-      - 4.0
+      - 4.x
     tags:
       - '**'
     paths-ignore:
