@@ -893,11 +893,13 @@ class Ruleset
      */
     private function expandRulesetReference($ref, $rulesetDir, $depth=0)
     {
-        // Naming an (external) standard "Internal" is deprecated.
+        // Naming an (external) standard "Internal" is not supported.
         if (strtolower($ref) === 'internal') {
             $message  = 'The name "Internal" is reserved for internal use. A PHP_CodeSniffer standard should not be called "Internal".'.PHP_EOL;
             $message .= 'Contact the maintainer of the standard to fix this.';
-            $this->msgCache->add($message, MessageCollector::DEPRECATED);
+            $this->msgCache->add($message, MessageCollector::ERROR);
+
+            return [];
         }
 
         // Ignore internal sniffs codes as they are used to only
