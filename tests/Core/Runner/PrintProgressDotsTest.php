@@ -57,50 +57,50 @@ final class PrintProgressDotsTest extends TestCase
             'No colors: Dot: no errors, no warnings' => [
                 'colors'   => false,
                 'code'     => '<?php'."\n".'$var = false;'."\n",
-                'sniff'    => 'Generic.PHP.LowerCaseConstant',
+                'sniffs'   => 'Generic.PHP.LowerCaseConstant',
                 'expected' => '.',
             ],
             'No colors: E: has error'                => [
                 'colors'   => false,
                 'code'     => '<?php'."\n".'if ($a && $b || $c) {}'."\n",
-                'sniff'    => 'Generic.CodeAnalysis.RequireExplicitBooleanOperatorPrecedence',
+                'sniffs'   => 'Generic.CodeAnalysis.RequireExplicitBooleanOperatorPrecedence',
                 'expected' => 'E',
             ],
             'No colors: W: has warning'              => [
                 'colors'   => false,
                 'code'     => '<?php'."\n".'// TODO: something'."\n",
-                'sniff'    => 'Generic.Commenting.Todo',
+                'sniffs'   => 'Generic.Commenting.Todo',
                 'expected' => 'W',
             ],
 
             'Colors: Dot: no errors, no warnings'    => [
                 'colors'   => true,
                 'code'     => '<?php'."\n".'$var = false;'."\n",
-                'sniff'    => 'Generic.PHP.LowerCaseConstant',
+                'sniffs'   => 'Generic.PHP.LowerCaseConstant',
                 'expected' => '.',
             ],
             'Colors: E: has error (red)'             => [
                 'colors'   => true,
                 'code'     => '<?php'."\n".'if ($a && $b || $c) {}'."\n",
-                'sniff'    => 'Generic.CodeAnalysis.RequireExplicitBooleanOperatorPrecedence',
+                'sniffs'   => 'Generic.CodeAnalysis.RequireExplicitBooleanOperatorPrecedence',
                 'expected' => "\033[31m".'E'."\033[0m",
             ],
             'Colors: E: has fixable error (green)'   => [
                 'colors'   => true,
                 'code'     => '<?php'."\n".'$a = array();'."\n",
-                'sniff'    => 'Generic.Arrays.DisallowLongArraySyntax',
+                'sniffs'   => 'Generic.Arrays.DisallowLongArraySyntax',
                 'expected' => "\033[32m".'E'."\033[0m",
             ],
             'Colors: W: has warning (yellow)'        => [
                 'colors'   => true,
                 'code'     => '<?php'."\n".'// TODO: something'."\n",
-                'sniff'    => 'Generic.Commenting.Todo',
+                'sniffs'   => 'Generic.Commenting.Todo',
                 'expected' => "\033[33m".'W'."\033[0m",
             ],
             'Colors: W: has fixable warning (green)' => [
                 'colors'   => true,
                 'code'     => '<?php'."\n".'echo \'hello\';;'."\n",
-                'sniff'    => 'Generic.CodeAnalysis.EmptyPHPStatement',
+                'sniffs'   => 'Generic.CodeAnalysis.EmptyPHPStatement',
                 'expected' => "\033[32m".'W'."\033[0m",
             ],
         ];
@@ -144,38 +144,38 @@ final class PrintProgressDotsTest extends TestCase
             'No colors: Dot: no errors, no warnings'         => [
                 'colors'   => false,
                 'code'     => '<?php'."\n".'$var = false;'."\n",
-                'sniff'    => 'Generic.PHP.LowerCaseConstant',
+                'sniffs'   => 'Generic.PHP.LowerCaseConstant',
                 'expected' => '.',
             ],
             'No colors: F: fixes made'                       => [
                 'colors'   => false,
                 'code'     => '<?php'."\n".'$a = array();'."\n",
-                'sniff'    => 'Generic.Arrays.DisallowLongArraySyntax',
+                'sniffs'   => 'Generic.Arrays.DisallowLongArraySyntax',
                 'expected' => 'F',
             ],
             'No colors: E: has fixer conflict'               => [
                 'colors'   => false,
                 'code'     => '<?php'."\n".'$a = array();'."\n",
-                'sniff'    => 'Generic.Arrays.DisallowLongArraySyntax,Generic.Arrays.DisallowShortArraySyntax',
+                'sniffs'   => 'Generic.Arrays.DisallowLongArraySyntax,Generic.Arrays.DisallowShortArraySyntax',
                 'expected' => 'E',
             ],
 
             'Colors: Dot: no errors, no warnings (no color)' => [
                 'colors'   => true,
                 'code'     => '<?php'."\n".'$var = false;'."\n",
-                'sniff'    => 'Generic.PHP.LowerCaseConstant',
+                'sniffs'   => 'Generic.PHP.LowerCaseConstant',
                 'expected' => '.',
             ],
             'Colors: F: fixes made (green)'                  => [
                 'colors'   => true,
                 'code'     => '<?php'."\n".'$a = array();'."\n",
-                'sniff'    => 'Generic.Arrays.DisallowLongArraySyntax',
+                'sniffs'   => 'Generic.Arrays.DisallowLongArraySyntax',
                 'expected' => "\033[32m".'F'."\033[0m",
             ],
             'Colors: E: has fixer conflict (red)'            => [
                 'colors'   => true,
                 'code'     => '<?php'."\n".'$a = array();'."\n",
-                'sniff'    => 'Generic.Arrays.DisallowLongArraySyntax,Generic.Arrays.DisallowShortArraySyntax',
+                'sniffs'   => 'Generic.Arrays.DisallowLongArraySyntax,Generic.Arrays.DisallowShortArraySyntax',
                 'expected' => "\033[31m".'E'."\033[0m",
             ],
         ];
