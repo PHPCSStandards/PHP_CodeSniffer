@@ -1467,6 +1467,19 @@ class Ruleset
             $this->sniffs[$sniffClass] = new $sniffClass();
 
             $sniffCode = Common::getSniffCode($sniffClass);
+
+            if (substr($sniffCode, 0, 1) === '.'
+                || substr($sniffCode, -1) === '.'
+                || strpos($sniffCode, '..') !== false
+                || preg_match('`(^|\.)Sniffs\.`', $sniffCode) === 1
+                || preg_match('`[^\s\.-]+\\\\Sniffs\\\\[^\s\.-]+\\\\[^\s\.-]+Sniff`', $sniffClass) !== 1
+            ) {
+                $message  = "The sniff $sniffClass does not comply with the PHP_CodeSniffer naming conventions.";
+                $message .= ' This will no longer be supported in PHPCS 4.0.'.PHP_EOL;
+                $message .= 'Contact the sniff author to fix the sniff.';
+                $this->msgCache->add($message, MessageCollector::DEPRECATED);
+            }
+
             $this->sniffCodes[$sniffCode] = $sniffClass;
 
             if ($this->sniffs[$sniffClass] instanceof DeprecatedSniff) {

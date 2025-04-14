@@ -49,20 +49,9 @@ final class ExpandSniffDirectoryTest extends TestCase
         $this->assertNotFalse($expectedPathToRuleset, 'Ruleset file could not be found');
         $this->assertContains($expectedPathToRuleset, $ruleset->paths, 'Ruleset file not included in the "seen ruleset paths"');
 
-        /*
-         * Take note: the expectation includes some "undesirables" related to the convoluted directory structure
-         * in the "standard" used as a test fixture.
-         *
-         * That is okay as (for now) non-standard directory layouts are supported.
-         *
-         * This test is not about the standard directory layout.
-         */
-
         $expectedSniffCodes = [
-            '.Sniffs.IncorrectLevelShouldStillBeFound'       => 'MyStandard\\Sniffs\\IncorrectLevelShouldStillBeFoundSniff',
-            'MyStandard.CategoryA.FindMe'                    => 'MyStandard\\Sniffs\\CategoryA\\FindMeSniff',
-            'MyStandard.CategoryB.FindMe'                    => 'MyStandard\\Sniffs\\CategoryB\\FindMeSniff',
-            'Sniffs.SubDir.IncorrectLevelShouldStillBeFound' => 'MyStandard\\Sniffs\\CategoryA\\SubDir\\IncorrectLevelShouldStillBeFoundSniff',
+            'MyStandard.CategoryA.FindMe' => 'MyStandard\\Sniffs\\CategoryA\\FindMeSniff',
+            'MyStandard.CategoryB.FindMe' => 'MyStandard\\Sniffs\\CategoryB\\FindMeSniff',
         ];
 
         // Sort the value to make the tests stable as different OSes will read directories
