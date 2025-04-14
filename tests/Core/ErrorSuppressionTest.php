@@ -133,24 +133,6 @@ final class ErrorSuppressionTest extends TestCase
                 'before' => '/** phpcs:disable */'.PHP_EOL,
                 'after'  => '/** phpcs:enable */',
             ],
-
-            // Deprecated syntax.
-            'old style: slash comment'                                                 => [
-                'before' => '// @codingStandardsIgnoreStart'.PHP_EOL,
-                'after'  => '// @codingStandardsIgnoreEnd',
-            ],
-            'old style: star comment'                                                  => [
-                'before' => '/* @codingStandardsIgnoreStart */'.PHP_EOL,
-                'after'  => '/* @codingStandardsIgnoreEnd */',
-            ],
-            'old style: multi-line star comment'                                       => [
-                'before' => '/*'.PHP_EOL.' @codingStandardsIgnoreStart'.PHP_EOL.' */'.PHP_EOL,
-                'after'  => '/*'.PHP_EOL.' @codingStandardsIgnoreEnd'.PHP_EOL.' */',
-            ],
-            'old style: single line docblock comment'                                  => [
-                'before' => '/** @codingStandardsIgnoreStart */'.PHP_EOL,
-                'after'  => '/** @codingStandardsIgnoreEnd */',
-            ],
         ];
 
     }//end dataSuppressError()
@@ -233,16 +215,6 @@ EOD;
                 'before'  => '/** phpcs:disable */',
                 'between' => '/** phpcs:enable */',
             ],
-
-            // Deprecated syntax.
-            'old style: slash comment'                     => [
-                'before'  => '// @codingStandardsIgnoreStart',
-                'between' => '// @codingStandardsIgnoreEnd',
-            ],
-            'old style: single line docblock comment'      => [
-                'before'  => '/** @codingStandardsIgnoreStart */',
-                'between' => '/** @codingStandardsIgnoreEnd */',
-            ],
         ];
 
     }//end dataSuppressSomeErrors()
@@ -315,16 +287,6 @@ EOD;
             'disable/enable: single line docblock comment' => [
                 'before' => '/** phpcs:disable */',
                 'after'  => '/** phpcs:enable */',
-            ],
-
-            // Deprecated syntax.
-            'old style: slash comment'                     => [
-                'before' => '// @codingStandardsIgnoreStart',
-                'after'  => '// @codingStandardsIgnoreEnd',
-            ],
-            'old style: single line docblock comment'      => [
-                'before' => '/** @codingStandardsIgnoreStart */',
-                'after'  => '/** @codingStandardsIgnoreEnd */',
             ],
         ];
 
@@ -423,15 +385,6 @@ EOD;
             'ignore: end of line, hash comment, with @'  => [
                 'before' => '',
                 'after'  => ' # @phpcs:ignore',
-            ],
-
-            // Deprecated syntax.
-            'old style: line before, slash comment'      => [
-                'before' => '// @codingStandardsIgnoreLine',
-            ],
-            'old style: end of line, slash comment'      => [
-                'before' => '',
-                'after'  => ' // @codingStandardsIgnoreLine',
             ],
         ];
 
@@ -554,10 +507,6 @@ EOD;
                 'before' => '# phpcs:disable',
                 'after'  => '# phpcs:enable',
             ],
-            'old style: slash comment, no single line suppression'                            => [
-                'before' => '// @codingStandardsIgnoreStart',
-                'after'  => '// @codingStandardsIgnoreEnd',
-            ],
 
             // Process with line suppression nested within disable/enable suppression.
             'disable/enable: slash comment, next line nested single line suppression'         => [
@@ -571,10 +520,6 @@ EOD;
             'disable/enable: hash comment, next line nested single line suppression'          => [
                 'before' => '# @phpcs:disable'.PHP_EOL.'# @phpcs:ignore',
                 'after'  => '# @phpcs:enable',
-            ],
-            'old style: slash comment, next line nested single line suppression'              => [
-                'before' => '// @codingStandardsIgnoreStart'.PHP_EOL.'// @codingStandardsIgnoreLine',
-                'after'  => '// @codingStandardsIgnoreEnd',
             ],
         ];
 
@@ -660,16 +605,6 @@ EOD;
             'disable/enable: single line docblock comment, with @' => [
                 'before' => '/** @phpcs:disable */',
                 'after'  => '/** @phpcs:enable */',
-            ],
-
-            // Deprecated syntax.
-            'old style: start/end, slash comment'                  => [
-                'before' => '//@codingStandardsIgnoreStart',
-                'after'  => '//@codingStandardsIgnoreEnd',
-            ],
-            'old style: start/end, single line docblock comment'   => [
-                'before' => '/** @codingStandardsIgnoreStart */',
-                'after'  => '/** @codingStandardsIgnoreEnd */',
             ],
         ];
 
@@ -764,26 +699,6 @@ EOD;
             'ignoreFile: late comment, slash comment'                 => [
                 'before' => '',
                 'after'  => '// phpcs:ignoreFile',
-            ],
-
-            // Deprecated syntax.
-            'old style: start of file, slash comment'                 => [
-                'before' => '// @codingStandardsIgnoreFile',
-            ],
-            'old style: start of file, single-line star comment'      => [
-                'before' => '/* @codingStandardsIgnoreFile */',
-            ],
-            'old style: start of file, multi-line star comment'       => [
-                'before' => '/*'.PHP_EOL.' @codingStandardsIgnoreFile'.PHP_EOL.' */',
-            ],
-            'old style: start of file, single-line docblock comment'  => [
-                'before' => '/** @codingStandardsIgnoreFile */',
-            ],
-
-            // Deprecated syntax, late comment.
-            'old style: late comment, slash comment'                  => [
-                'before' => '',
-                'after'  => '// @codingStandardsIgnoreFile',
             ],
         ];
 
