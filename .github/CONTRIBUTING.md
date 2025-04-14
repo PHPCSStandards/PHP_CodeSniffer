@@ -253,7 +253,7 @@ When in doubt how to proceed with a ticket, feel free to leave a comment with sp
 Please make sure your code conforms to the PHPCS coding standard, is covered by tests and that all the PHP_CodeSniffer
 unit tests still pass.
 
-Also, please make sure your code is compatible with the PHP_CodeSniffer minimum supported PHP version, PHP 5.4.
+Also, please make sure your code is compatible with the PHP_CodeSniffer minimum supported PHP version, PHP 7.2.
 
 To help you with this, a number of convenience scripts are available:
 * `composer check-all` will run the `cs` + `test` checks in one go.

@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/github/license/PHPCSStandards/PHP_CodeSniffer)](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt)
 
 ![Minimum PHP Version](https://img.shields.io/packagist/dependency-v/squizlabs/php_codesniffer/php.svg)
-[![Tested on PHP 5.4 to 8.4](https://img.shields.io/badge/tested%20on-PHP%205.4%20|%205.5%20|%205.6%20|%207.0%20|%207.1%20|%207.2%20|%207.3%20|%207.4%20|%208.0%20|%208.1%20|%208.2%20|%208.3%20|%208.4-brightgreen.svg?maxAge=2419200)][GHA-test]
+[![Tested on PHP 7.2 to 8.4](https://img.shields.io/badge/tested%20on-PHP%207.2%20|%207.3%20|%207.4%20|%208.0%20|%208.1%20|%208.2%20|%208.3%20|%208.4-brightgreen.svg?maxAge=2419200)][GHA-test]
 
 [GHA-test]: https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/test.yml
 
@@ -25,7 +25,7 @@ PHP_CodeSniffer is a set of two PHP scripts; the main `phpcs` script that tokeni
 
 ## Requirements
 
-PHP_CodeSniffer requires PHP version 5.4.0 or greater, although individual sniffs may have additional requirements such as external applications and scripts. See the [Configuration Options manual page](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Configuration-Options) for a list of these requirements.
+PHP_CodeSniffer requires PHP version 7.2.0 or greater, although individual sniffs may have additional requirements such as external applications and scripts. See the [Configuration Options manual page](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Configuration-Options) for a list of these requirements.
 
 If you're using PHP_CodeSniffer as part of a team, or you're running it on a [CI](https://en.wikipedia.org/wiki/Continuous_integration) server, you may want to configure your project's settings [using a configuration file](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Advanced-Usage#using-a-default-configuration-file).
 

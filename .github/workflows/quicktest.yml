@@ -29,18 +29,7 @@ jobs:
     strategy:
       matrix:
         os: ['ubuntu-24.04-arm', 'windows-latest']
-        php: ['7.2', 'latest']
-
-        include:
-          - php: '5.4'
-            os: 'ubuntu-24.04-arm'
-            custom_ini: false
-          # Installing on Windows with PHP 5.4 runs into all sorts of problems with Composer.
-          # See this issue for more context (yes, I've seen this problem before):
-          # @link https://github.com/PHPCSStandards/composer-installer/pull/213
-          - php: '5.5'
-            os: 'windows-latest'
-            custom_ini: false
+        php: ['7.2', '8.1', 'latest']
 
     name: "QuickTest: PHP ${{ matrix.php }} (${{ matrix.os == 'windows-latest' && 'Win' || 'Linux ARM' }})"
 
