@@ -11,6 +11,7 @@
 
 namespace PHP_CodeSniffer;
 
+use InvalidArgumentException;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Sniffs\DeprecatedSniff;
 use PHP_CodeSniffer\Util\Common;
@@ -1446,23 +1447,19 @@ class Ruleset
         $this->tokenListeners = [];
 
         foreach ($this->sniffs as $sniffClass => $sniffObject) {
-            $this->sniffs[$sniffClass] = null;
-            $this->sniffs[$sniffClass] = new $sniffClass();
-
-            $sniffCode = Common::getSniffCode($sniffClass);
-
-            if (substr($sniffCode, 0, 1) === '.'
-                || substr($sniffCode, -1) === '.'
-                || strpos($sniffCode, '..') !== false
-                || preg_match('`(^|\.)Sniffs\.`', $sniffCode) === 1
-                || preg_match('`[^\s\.-]+\\\\Sniffs\\\\[^\s\.-]+\\\\[^\s\.-]+Sniff`', $sniffClass) !== 1
-            ) {
-                $message  = "The sniff $sniffClass does not comply with the PHP_CodeSniffer naming conventions.";
-                $message .= ' This will no longer be supported in PHPCS 4.0.'.PHP_EOL;
+            try {
+                $sniffCode = Common::getSniffCode($sniffClass);
+            } catch (InvalidArgumentException $e) {
+                $message  = "The sniff $sniffClass does not comply with the PHP_CodeSniffer naming conventions.".PHP_EOL;
                 $message .= 'Contact the sniff author to fix the sniff.';
-                $this->msgCache->add($message, MessageCollector::DEPRECATED);
+                $this->msgCache->add($message, MessageCollector::ERROR);
+
+                // Unregister the sniff.
+                unset($this->sniffs[$sniffClass]);
+                continue;
             }
 
+            $this->sniffs[$sniffClass]    = new $sniffClass();
             $this->sniffCodes[$sniffCode] = $sniffClass;
 
             $isDeprecated = false;

@@ -643,7 +643,6 @@ class Runner
                 try {
                     if (empty($nextStack) === false
                         && isset($nextStack['class']) === true
-                        && substr($nextStack['class'], -5) === 'Sniff'
                     ) {
                         $sniffCode = 'the '.Common::getSniffCode($nextStack['class']).' sniff';
                     }

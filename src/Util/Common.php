@@ -532,7 +532,7 @@ class Common
      * @return string
      *
      * @throws \InvalidArgumentException When $sniffClass is not a non-empty string.
-     * @throws \InvalidArgumentException When $sniffClass is not a FQN for a sniff(test) class.
+     * @throws \InvalidArgumentException When $sniffClass is not a valid FQN for a sniff(test) class.
      */
     public static function getSniffCode($sniffClass)
     {
@@ -542,12 +542,22 @@ class Common
 
         $parts      = explode('\\', $sniffClass);
         $partsCount = count($parts);
-        $sniff      = $parts[($partsCount - 1)];
+        if ($partsCount < 4
+            || ($parts[($partsCount - 3)] !== 'Sniffs'
+            && $parts[($partsCount - 3)] !== 'Tests')
+            || $parts[($partsCount - 2)] === 'Sniffs'
+        ) {
+            throw new InvalidArgumentException(
+                'The $sniffClass parameter was not passed a fully qualified sniff(test) class name. Received: '.$sniffClass
+            );
+        }
 
-        if (substr($sniff, -5) === 'Sniff') {
+        $sniff = $parts[($partsCount - 1)];
+
+        if ($sniff !== 'Sniff' && substr($sniff, -5) === 'Sniff') {
             // Sniff class name.
             $sniff = substr($sniff, 0, -5);
-        } else if (substr($sniff, -8) === 'UnitTest') {
+        } else if ($sniff !== 'UnitTest' && substr($sniff, -8) === 'UnitTest') {
             // Unit test class name.
             $sniff = substr($sniff, 0, -8);
         } else {
@@ -556,16 +566,8 @@ class Common
             );
         }
 
-        $standard = '';
-        if (isset($parts[($partsCount - 4)]) === true) {
-            $standard = $parts[($partsCount - 4)];
-        }
-
-        $category = '';
-        if (isset($parts[($partsCount - 2)]) === true) {
-            $category = $parts[($partsCount - 2)];
-        }
-
+        $standard = $parts[($partsCount - 4)];
+        $category = $parts[($partsCount - 2)];
         return $standard.'.'.$category.'.'.$sniff;
 
     }//end getSniffCode()
