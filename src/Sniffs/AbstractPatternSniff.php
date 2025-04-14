@@ -57,16 +57,9 @@ abstract class AbstractPatternSniff implements Sniff
 
     /**
      * Constructs a AbstractPatternSniff.
-     *
-     * @param boolean $ignoreComments If true, comments will be ignored.
      */
-    public function __construct($ignoreComments=null)
+    public function __construct()
     {
-        // This is here for backwards compatibility.
-        if ($ignoreComments !== null) {
-            $this->ignoreComments = $ignoreComments;
-        }
-
         $this->supplementaryTokens = $this->registerSupplementary();
 
     }//end __construct()
