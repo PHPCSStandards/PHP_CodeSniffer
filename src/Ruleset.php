@@ -1489,7 +1489,9 @@ class Ruleset
 
             $this->sniffCodes[$sniffCode] = $sniffClass;
 
+            $isDeprecated = false;
             if ($this->sniffs[$sniffClass] instanceof DeprecatedSniff) {
+                $isDeprecated = true;
                 $this->deprecatedSniffs[$sniffCode] = $sniffClass;
             }
 
@@ -1502,6 +1504,24 @@ class Ruleset
 
             $tokenizers = [];
             $vars       = get_class_vars($sniffClass);
+            if (empty($vars['supportedTokenizers']) === false
+                && $isDeprecated === false
+                && in_array('PHP', $vars['supportedTokenizers'], true) === false
+            ) {
+                if (in_array('CSS', $vars['supportedTokenizers'], true) === true
+                    || in_array('JS', $vars['supportedTokenizers'], true) === true
+                ) {
+                    $message = 'Scanning CSS/JS files is deprecated and support will be removed in PHP_CodeSniffer 4.0.'.PHP_EOL;
+                } else {
+                    // Just in case someone has an integration with a custom tokenizer.
+                    $message = 'Support for custom tokenizers will be removed in PHP_CodeSniffer 4.0.'.PHP_EOL;
+                }
+
+                $message .= 'The %s sniff is listening for %s.';
+                $message  = sprintf($message, $sniffCode, implode(', ', $vars['supportedTokenizers']));
+                $this->msgCache->add($message, MessageCollector::DEPRECATED);
+            }
+
             if (isset($vars['supportedTokenizers']) === true) {
                 foreach ($vars['supportedTokenizers'] as $tokenizer) {
                     $tokenizers[$tokenizer] = $tokenizer;
