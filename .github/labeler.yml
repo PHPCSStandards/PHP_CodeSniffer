@@ -50,10 +50,6 @@ labels:
     draft: false
     files:
       - "src/Standards/Generic/(Docs|Sniffs)/.*"
-  - label: "Standard: MySource"
-    draft: false
-    files:
-      - "src/Standards/MySource/(Docs|Sniffs)/.*"
   - label: "Standard: PEAR"
     draft: false
     files:

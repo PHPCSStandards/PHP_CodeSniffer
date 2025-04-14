@@ -10,9 +10,9 @@ assignees: ''
 <!--
 Before reporting a sniff related bug, please check the error code using `phpcs -s`.
 
-If the error code starts with anything other than `Generic`, `MySource`, `PEAR`,
-`PSR1`, `PSR2`, `PSR12`, `Squiz` or `Zend`, the error is likely coming from an
-external PHP_CodeSniffer standard.
+If the error code starts with anything other than `Generic`, `PEAR`, `PSR1`,
+`PSR2`, `PSR12`, `Squiz` or `Zend`, the error is likely coming from an
+PHP_CodeSniffer standard.
 
 Please report bugs for externally maintained sniffs to the appropriate external
 standard repository (not here).

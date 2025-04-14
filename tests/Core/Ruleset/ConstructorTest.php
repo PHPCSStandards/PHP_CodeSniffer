@@ -116,13 +116,12 @@ final class ConstructorTest extends AbstractRulesetTestCase
     {
         $basePath     = dirname(dirname(dirname(__DIR__))).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'Standards'.DIRECTORY_SEPARATOR;
         $defaultPaths = [
-            $basePath.'MySource' => 'MySource',
-            $basePath.'PEAR'     => 'PEAR',
-            $basePath.'PSR1'     => 'PSR1',
-            $basePath.'PSR12'    => 'PSR12',
-            $basePath.'PSR2'     => 'PSR2',
-            $basePath.'Squiz'    => 'Squiz',
-            $basePath.'Zend'     => 'Zend',
+            $basePath.'PEAR'  => 'PEAR',
+            $basePath.'PSR1'  => 'PSR1',
+            $basePath.'PSR12' => 'PSR12',
+            $basePath.'PSR2'  => 'PSR2',
+            $basePath.'Squiz' => 'Squiz',
+            $basePath.'Zend'  => 'Zend',
         ];
 
         $data = [
