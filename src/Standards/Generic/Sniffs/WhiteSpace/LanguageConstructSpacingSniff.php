@@ -39,6 +39,7 @@ class LanguageConstructSpacingSniff implements Sniff
             T_THROW,
             T_NAMESPACE,
             T_USE,
+            T_GOTO,
         ];
 
     }//end register()
