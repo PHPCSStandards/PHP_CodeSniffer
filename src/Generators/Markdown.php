@@ -47,30 +47,10 @@ class Markdown extends Generator
 
 
     /**
-     * Print the markdown header.
-     *
-     * @deprecated 3.12.0 Use Markdown::getFormattedHeader() instead.
-     *
-     * @codeCoverageIgnore
-     *
-     * @return void
-     */
-    protected function printHeader()
-    {
-        trigger_error(
-            'The '.__METHOD__.'() method is deprecated. Use "echo '.__CLASS__.'::getFormattedHeader()" instead.',
-            E_USER_DEPRECATED
-        );
-
-        echo $this->getFormattedHeader();
-
-    }//end printHeader()
-
-
-    /**
      * Format the markdown header.
      *
-     * @since 3.12.0 Replaces the deprecated Markdown::printHeader() method.
+     * @since 3.12.0 Replaces the Markdown::printHeader() method,
+     *               which was deprecated in 3.12.0 and removed in 4.0.0.
      *
      * @return string
      */
@@ -84,30 +64,10 @@ class Markdown extends Generator
 
 
     /**
-     * Print the markdown footer.
-     *
-     * @deprecated 3.12.0 Use Markdown::getFormattedFooter() instead.
-     *
-     * @codeCoverageIgnore
-     *
-     * @return void
-     */
-    protected function printFooter()
-    {
-        trigger_error(
-            'The '.__METHOD__.'() method is deprecated. Use "echo '.__CLASS__.'::getFormattedFooter()" instead.',
-            E_USER_DEPRECATED
-        );
-
-        echo $this->getFormattedFooter();
-
-    }//end printFooter()
-
-
-    /**
      * Format the markdown footer.
      *
-     * @since 3.12.0 Replaces the deprecated Markdown::printFooter() method.
+     * @since 3.12.0 Replaces the Markdown::printFooter() method,
+     *               which was deprecated in 3.12.0 and removed in 4.0.0.
      *
      * @return string
      */
@@ -155,34 +115,12 @@ class Markdown extends Generator
 
 
     /**
-     * Print a text block found in a standard.
-     *
-     * @param \DOMNode $node The DOMNode object for the text block.
-     *
-     * @deprecated 3.12.0 Use Markdown::getFormattedTextBlock() instead.
-     *
-     * @codeCoverageIgnore
-     *
-     * @return void
-     */
-    protected function printTextBlock(DOMNode $node)
-    {
-        trigger_error(
-            'The '.__METHOD__.'() method is deprecated. Use "echo '.__CLASS__.'::getFormattedTextBlock()" instead.',
-            E_USER_DEPRECATED
-        );
-
-        echo $this->getFormattedTextBlock($node);
-
-    }//end printTextBlock()
-
-
-    /**
      * Format a text block found in a standard.
      *
      * @param \DOMNode $node The DOMNode object for the text block.
      *
-     * @since 3.12.0 Replaces the deprecated Markdown::printTextBlock() method.
+     * @since 3.12.0 Replaces the Markdown::printTextBlock() method,
+     *               which was deprecated in 3.12.0 and removed in 4.0.0.
      *
      * @return string
      */
@@ -228,34 +166,12 @@ class Markdown extends Generator
 
 
     /**
-     * Print a code comparison block found in a standard.
-     *
-     * @param \DOMNode $node The DOMNode object for the code comparison block.
-     *
-     * @deprecated 3.12.0 Use Markdown::getFormattedCodeComparisonBlock() instead.
-     *
-     * @codeCoverageIgnore
-     *
-     * @return void
-     */
-    protected function printCodeComparisonBlock(DOMNode $node)
-    {
-        trigger_error(
-            'The '.__METHOD__.'() method is deprecated. Use "echo '.__CLASS__.'::getFormattedCodeComparisonBlock()" instead.',
-            E_USER_DEPRECATED
-        );
-
-        echo $this->getFormattedCodeComparisonBlock($node);
-
-    }//end printCodeComparisonBlock()
-
-
-    /**
      * Format a code comparison block found in a standard.
      *
      * @param \DOMNode $node The DOMNode object for the code comparison block.
      *
-     * @since 3.12.0 Replaces the deprecated Markdown::printCodeComparisonBlock() method.
+     * @since 3.12.0 Replaces the Markdown::printCodeComparisonBlock() method,
+     *               which was deprecated in 3.12.0 and removed in 4.0.0.
      *
      * @return string
      */
