@@ -23,16 +23,6 @@ abstract class AbstractTokenizerTestCase extends TestCase
 {
 
     /**
-     * The file extension of the test case file (without leading dot).
-     *
-     * This allows child classes to overrule the default `inc` with, for instance,
-     * `js` or `css` when applicable.
-     *
-     * @var string
-     */
-    protected $fileExtension = 'inc';
-
-    /**
      * The tab width setting to use when tokenizing the file.
      *
      * This allows for test case files to use a different tab width than the default.
@@ -73,7 +63,7 @@ abstract class AbstractTokenizerTestCase extends TestCase
             // Default to a file with the same name as the test class. Extension is property based.
             $relativeCN     = str_replace(__NAMESPACE__, '', get_called_class());
             $relativePath   = str_replace('\\', DIRECTORY_SEPARATOR, $relativeCN);
-            $pathToTestFile = realpath(__DIR__).$relativePath.'.'.$this->fileExtension;
+            $pathToTestFile = realpath(__DIR__).$relativePath.'.inc';
 
             // Make sure the file gets parsed correctly based on the file type.
             $contents  = 'phpcs_input_file: '.$pathToTestFile.PHP_EOL;

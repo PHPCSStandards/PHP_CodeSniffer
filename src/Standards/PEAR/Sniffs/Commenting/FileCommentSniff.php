@@ -172,7 +172,6 @@ class FileCommentSniff implements Sniff
             T_ABSTRACT,
             T_READONLY,
             T_CONST,
-            T_PROPERTY,
         ];
 
         if (in_array($tokens[$nextToken]['code'], $ignore, true) === true) {

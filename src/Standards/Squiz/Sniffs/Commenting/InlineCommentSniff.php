@@ -16,16 +16,6 @@ use PHP_CodeSniffer\Util\Tokens;
 class InlineCommentSniff implements Sniff
 {
 
-    /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
-
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -85,7 +75,6 @@ class InlineCommentSniff implements Sniff
                 T_ABSTRACT,
                 T_READONLY,
                 T_CONST,
-                T_PROPERTY,
                 T_INCLUDE,
                 T_INCLUDE_ONCE,
                 T_REQUIRE,
@@ -94,23 +83,6 @@ class InlineCommentSniff implements Sniff
 
             if (in_array($tokens[$nextToken]['code'], $ignore, true) === true) {
                 return;
-            }
-
-            if ($phpcsFile->tokenizerType === 'JS') {
-                // We allow block comments if a function or object
-                // is being assigned to a variable.
-                $ignore    = Tokens::$emptyTokens;
-                $ignore[]  = T_EQUAL;
-                $ignore[]  = T_STRING;
-                $ignore[]  = T_OBJECT_OPERATOR;
-                $nextToken = $phpcsFile->findNext($ignore, ($nextToken + 1), null, true);
-                if ($tokens[$nextToken]['code'] === T_FUNCTION
-                    || $tokens[$nextToken]['code'] === T_CLOSURE
-                    || $tokens[$nextToken]['code'] === T_OBJECT
-                    || $tokens[$nextToken]['code'] === T_PROTOTYPE
-                ) {
-                    return;
-                }
             }
 
             $prevToken = $phpcsFile->findPrevious(
@@ -145,16 +117,6 @@ class InlineCommentSniff implements Sniff
         if ($tokens[$previousContent]['line'] === $tokens[$stackPtr]['line']) {
             if ($tokens[$previousContent]['code'] === T_CLOSE_CURLY_BRACKET) {
                 return;
-            }
-
-            // Special case for JS files.
-            if ($tokens[$previousContent]['code'] === T_COMMA
-                || $tokens[$previousContent]['code'] === T_SEMICOLON
-            ) {
-                $lastContent = $phpcsFile->findPrevious(T_WHITESPACE, ($previousContent - 1), null, true);
-                if ($tokens[$lastContent]['code'] === T_CLOSE_CURLY_BRACKET) {
-                    return;
-                }
             }
         }
 

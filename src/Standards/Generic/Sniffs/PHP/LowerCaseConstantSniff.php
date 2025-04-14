@@ -17,16 +17,6 @@ class LowerCaseConstantSniff implements Sniff
 {
 
     /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
-
-    /**
      * The tokens this sniff is targetting.
      *
      * @var array

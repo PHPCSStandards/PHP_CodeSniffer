@@ -265,8 +265,6 @@ To help you with this, a number of convenience scripts are available:
     which will be placed in a `build/coverage-html` subdirectory.
 * `composer build` will build the phpcs.phar and phpcbf.phar files.
 
-N.B.: You can ignore any skipped tests as these are for external tools.
-
 
 ### Writing Tests
 

@@ -1425,6 +1425,27 @@ class Ruleset
                 continue;
             }
 
+            if ($reflection->hasProperty('supportedTokenizers') === true) {
+                // Using the default value as the class is not yet instantiated and this is not a property which should get changed anyway.
+                $value = $reflection->getDefaultProperties()['supportedTokenizers'];
+
+                if (is_array($value) === true
+                    && empty($value) === false
+                    && in_array('PHP', $value, true) === false
+                ) {
+                    if ($reflection->implementsInterface('PHP_CodeSniffer\\Sniffs\\DeprecatedSniff') === true) {
+                        // Silently ignore the sniff if the sniff is marked as deprecated.
+                        continue;
+                    }
+
+                    $message  = 'Support for scanning files other than PHP, like CSS/JS files, has been removed in PHP_CodeSniffer 4.0.'.PHP_EOL;
+                    $message .= 'The %s sniff is listening for %s.';
+                    $message  = sprintf($message, Common::getSniffCode($className), implode(', ', $value));
+                    $this->msgCache->add($message, MessageCollector::ERROR);
+                    continue;
+                }
+            }//end if
+
             $listeners[$className] = $className;
 
             if (PHP_CODESNIFFER_VERBOSITY > 2) {
@@ -1464,9 +1485,7 @@ class Ruleset
             $this->sniffs[$sniffClass]    = new $sniffClass();
             $this->sniffCodes[$sniffCode] = $sniffClass;
 
-            $isDeprecated = false;
             if ($this->sniffs[$sniffClass] instanceof DeprecatedSniff) {
-                $isDeprecated = true;
                 $this->deprecatedSniffs[$sniffCode] = $sniffClass;
             }
 
@@ -1475,34 +1494,6 @@ class Ruleset
                 foreach ($this->ruleset[$sniffCode]['properties'] as $name => $settings) {
                     $this->setSniffProperty($sniffClass, $name, $settings);
                 }
-            }
-
-            $tokenizers = [];
-            $vars       = get_class_vars($sniffClass);
-            if (empty($vars['supportedTokenizers']) === false
-                && $isDeprecated === false
-                && in_array('PHP', $vars['supportedTokenizers'], true) === false
-            ) {
-                if (in_array('CSS', $vars['supportedTokenizers'], true) === true
-                    || in_array('JS', $vars['supportedTokenizers'], true) === true
-                ) {
-                    $message = 'Scanning CSS/JS files is deprecated and support will be removed in PHP_CodeSniffer 4.0.'.PHP_EOL;
-                } else {
-                    // Just in case someone has an integration with a custom tokenizer.
-                    $message = 'Support for custom tokenizers will be removed in PHP_CodeSniffer 4.0.'.PHP_EOL;
-                }
-
-                $message .= 'The %s sniff is listening for %s.';
-                $message  = sprintf($message, $sniffCode, implode(', ', $vars['supportedTokenizers']));
-                $this->msgCache->add($message, MessageCollector::DEPRECATED);
-            }
-
-            if (isset($vars['supportedTokenizers']) === true) {
-                foreach ($vars['supportedTokenizers'] as $tokenizer) {
-                    $tokenizers[$tokenizer] = $tokenizer;
-                }
-            } else {
-                $tokenizers = ['PHP' => 'PHP'];
             }
 
             $tokens = $this->sniffs[$sniffClass]->register();
@@ -1544,11 +1535,10 @@ class Ruleset
 
                 if (isset($this->tokenListeners[$token][$sniffClass]) === false) {
                     $this->tokenListeners[$token][$sniffClass] = [
-                        'class'      => $sniffClass,
-                        'source'     => $sniffCode,
-                        'tokenizers' => $tokenizers,
-                        'ignore'     => $ignorePatterns,
-                        'include'    => $includePatterns,
+                        'class'   => $sniffClass,
+                        'source'  => $sniffCode,
+                        'ignore'  => $ignorePatterns,
+                        'include' => $includePatterns,
                     ];
                 }
             }

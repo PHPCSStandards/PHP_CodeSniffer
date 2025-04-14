@@ -2,7 +2,7 @@
 /**
  * Test fixture.
  *
- * @see \PHP_CodeSniffer\Tests\Core\Ruleset\PopulateTokenListenersSupportedTokenizersTest
+ * @see \PHP_CodeSniffer\Tests\Core\Ruleset\RegisterSniffsRemovedTokenizersTest
  */
 
 namespace Fixtures\TestStandard\Sniffs\SupportedTokenizers;

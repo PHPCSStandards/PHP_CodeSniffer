@@ -15,16 +15,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class FileCommentSniff implements Sniff
 {
 
-    /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
-
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -106,7 +96,6 @@ class FileCommentSniff implements Sniff
             T_ABSTRACT,
             T_READONLY,
             T_CONST,
-            T_PROPERTY,
             T_INCLUDE,
             T_INCLUDE_ONCE,
             T_REQUIRE,

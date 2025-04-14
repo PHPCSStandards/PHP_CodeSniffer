@@ -49,7 +49,6 @@ final class DocCommentUnitTest extends AbstractSniffUnitTest
     {
         switch ($testFile) {
         case 'DocCommentUnitTest.1.inc':
-        case 'DocCommentUnitTest.1.js':
             return [
                 14  => 1,
                 16  => 1,

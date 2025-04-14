@@ -64,13 +64,6 @@ final class SpaceAfterNotUnitTest extends AbstractSniffUnitTest
                 79 => 1,
             ];
 
-        case 'SpaceAfterNotUnitTest.js':
-            return [
-                2 => 2,
-                4 => 2,
-                5 => 1,
-            ];
-
         default:
             return [];
         }//end switch

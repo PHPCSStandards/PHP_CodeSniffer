@@ -131,31 +131,27 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
     public static function dataSniffListensToTokenss()
     {
         return [
-            'TestStandard.SupportedTokenizers.ListensForPHPAndCSSAndJS' => [
-                'sniffClass'    => 'Fixtures\\TestStandard\\Sniffs\\SupportedTokenizers\\ListensForPHPAndCSSAndJSSniff',
-                'expectedCount' => 2,
-            ],
-            'Generic.NamingConventions.UpperCaseConstantName'           => [
+            'Generic.NamingConventions.UpperCaseConstantName'  => [
                 'sniffClass'    => 'PHP_CodeSniffer\\Standards\\Generic\\Sniffs\\NamingConventions\\UpperCaseConstantNameSniff',
                 'expectedCount' => 2,
             ],
-            'PSR1.Files.SideEffects'                                    => [
+            'PSR1.Files.SideEffects'                           => [
                 'sniffClass'    => 'PHP_CodeSniffer\\Standards\\PSR1\\Sniffs\\Files\\SideEffectsSniff',
                 'expectedCount' => 1,
             ],
-            'PSR12.ControlStructures.BooleanOperatorPlacement'          => [
+            'PSR12.ControlStructures.BooleanOperatorPlacement' => [
                 'sniffClass'    => 'PHP_CodeSniffer\\Standards\\PSR12\\Sniffs\\ControlStructures\\BooleanOperatorPlacementSniff',
                 'expectedCount' => 5,
             ],
-            'Squiz.ControlStructures.ForEachLoopDeclaration'            => [
+            'Squiz.ControlStructures.ForEachLoopDeclaration'   => [
                 'sniffClass'    => 'PHP_CodeSniffer\\Standards\\Squiz\\Sniffs\\ControlStructures\\ForEachLoopDeclarationSniff',
                 'expectedCount' => 1,
             ],
-            'TestStandard.Deprecated.WithReplacement'                   => [
+            'TestStandard.Deprecated.WithReplacement'          => [
                 'sniffClass'    => 'Fixtures\\TestStandard\\Sniffs\\Deprecated\\WithReplacementSniff',
                 'expectedCount' => 1,
             ],
-            'TestStandard.ValidSniffs.RegisterEmptyArray'               => [
+            'TestStandard.ValidSniffs.RegisterEmptyArray'      => [
                 'sniffClass'    => 'Fixtures\\TestStandard\\Sniffs\\ValidSniffs\\RegisterEmptyArraySniff',
                 'expectedCount' => 0,
             ],
@@ -307,103 +303,6 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
 
 
     /**
-     * Verifies that sniffs by default are listening for PHP files only.
-     *
-     * @return void
-     */
-    public function testSetsSupportedTokenizersToPHPByDefault()
-    {
-        $exclude  = 'Fixtures\\TestStandard\\Sniffs\\SupportedTokenizers\\ListensForPHPAndCSSAndJSSniff';
-        $expected = ['PHP' => 'PHP'];
-
-        foreach (self::$ruleset->tokenListeners as $token => $listeners) {
-            $this->assertTrue(is_array($listeners), 'No listeners registered for token'.Tokens::tokenName($token));
-
-            foreach ($listeners as $className => $details) {
-                if ($className === $exclude) {
-                    // Skip this one as it is the one sniff for which things will be different.
-                    continue;
-                }
-
-                $this->assertArrayHasKey(
-                    'tokenizers',
-                    $details,
-                    sprintf('"tokenizers" key missing for sniff class %s for token %s', $className, Tokens::tokenName($token))
-                );
-
-                $this->assertSame(
-                    $expected,
-                    $details['tokenizers'],
-                    sprintf('Unexpected value for "tokenizers" key for sniff class %s for token %s', $className, Tokens::tokenName($token))
-                );
-            }
-        }//end foreach
-
-    }//end testSetsSupportedTokenizersToPHPByDefault()
-
-
-    /**
-     * Test that if a sniff has the $supportedTokenizers property set, the tokenizers listed there
-     * will be registered in the listeners array.
-     *
-     * @param int $token The token constant for which the sniff should be registered.
-     *
-     * @dataProvider dataSetsSupportedTokenizersWhenProvidedBySniff
-     *
-     * @return void
-     */
-    public function testSetsSupportedTokenizersWhenProvidedBySniff($token)
-    {
-        $sniffClass = 'Fixtures\\TestStandard\\Sniffs\\SupportedTokenizers\\ListensForPHPAndCSSAndJSSniff';
-        $expected   = [
-            'PHP' => 'PHP',
-            'JS'  => 'JS',
-            'CSS' => 'CSS',
-        ];
-
-        $this->assertArrayHasKey(
-            $token,
-            self::$ruleset->tokenListeners,
-            sprintf('The token constant %s is not registered to the listeners array', Tokens::tokenName($token))
-        );
-        $this->assertArrayHasKey(
-            $sniffClass,
-            self::$ruleset->tokenListeners[$token],
-            sprintf('The sniff class %s is not registered for token %s', $sniffClass, Tokens::tokenName($token))
-        );
-        $this->assertArrayHasKey(
-            'tokenizers',
-            self::$ruleset->tokenListeners[$token][$sniffClass],
-            sprintf('"tokenizers" key missing for sniff class %s for token %s', $sniffClass, Tokens::tokenName($token))
-        );
-
-        $this->assertSame(
-            $expected,
-            self::$ruleset->tokenListeners[$token][$sniffClass]['tokenizers'],
-            sprintf('Unexpected value for "tokenizers" key for sniff class %s for token %s', $sniffClass, Tokens::tokenName($token))
-        );
-
-    }//end testSetsSupportedTokenizersWhenProvidedBySniff()
-
-
-    /**
-     * Data provider.
-     *
-     * @see testSetsSupportedTokenizersWhenProvidedBySniff()
-     *
-     * @return array<string, array<int>>
-     */
-    public static function dataSetsSupportedTokenizersWhenProvidedBySniff()
-    {
-        return [
-            'T_OPEN_TAG'           => [T_OPEN_TAG],
-            'T_OPEN_TAG_WITH_ECHO' => [T_OPEN_TAG_WITH_ECHO],
-        ];
-
-    }//end dataSetsSupportedTokenizersWhenProvidedBySniff()
-
-
-    /**
      * Verifies that by default no explicit include patterns are registered for sniffs.
      *
      * @return void
@@ -491,7 +390,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
         $expected = [
             '/no-transformation/',
             '/simple.*transformation/.*',
-            '/escaped\\,comma/becomes/comma/to/allow/commas/in/filenames.css',
+            '/escaped\\,comma/becomes/comma/to/allow/commas/in/filenames.inc',
             '/pat?tern(is|regex)\\.php$',
         ];
 

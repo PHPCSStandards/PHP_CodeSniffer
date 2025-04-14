@@ -69,29 +69,6 @@ final class SuperfluousWhitespaceUnitTest extends AbstractSniffUnitTest
                 4 => 1,
             ];
 
-        case 'SuperfluousWhitespaceUnitTest.1.js':
-            return [
-                1  => 1,
-                3  => 1,
-                4  => 1,
-                5  => 1,
-                6  => 1,
-                15 => 1,
-                22 => 1,
-                29 => 1,
-                38 => 1,
-                56 => 1,
-            ];
-
-        case 'SuperfluousWhitespaceUnitTest.1.css':
-            return [
-                1  => 1,
-                8  => 1,
-                9  => 1,
-                11 => 1,
-                32 => 1,
-            ];
-
         default:
             return [];
         }//end switch

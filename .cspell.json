@@ -3,8 +3,8 @@
     "dictionaries": ["php"],
     "allowCompoundWords": true,
     "ignorePaths": [
-        "src/Standards/*/Tests/*/*.{inc,js,css}",
-        "src/Standards/*/Tests/*/*.{inc,js,css}.fixed"
+        "src/Standards/*/Tests/*/*.inc",
+        "src/Standards/*/Tests/*/*.inc.fixed"
     ],
     "ignoreRegExpList": ["email", "^\\s+\\*\\s+@(author|copyright)\\s+.*$"],
     "words": [
@@ -28,9 +28,7 @@
         "dnumber",
         "docblock",
         "encapsed",
-        "gjslint",
         "groupid",
-        "gsjlint",
         "hashbang",
         "heredoc",
         "hgblame",

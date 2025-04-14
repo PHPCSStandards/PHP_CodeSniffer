@@ -1,6 +1,6 @@
 {
     "name": "squizlabs/php_codesniffer",
-    "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
+    "description": "PHP_CodeSniffer tokenizes PHP files and detects violations of a defined set of coding standards.",
     "license": "BSD-3-Clause",
     "type": "library",
     "keywords": [

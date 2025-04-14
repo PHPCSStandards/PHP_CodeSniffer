@@ -64,8 +64,11 @@ use PHP_CodeSniffer\Util\Standards;
  * @property string     $stdinPath       The path to use for content passed on STDIN.
  * @property bool       $trackTime       Whether or not to track sniff run time.
  *
- * @property array<string, string>      $extensions File extensions that should be checked, and what tokenizer to use.
+ * @property array<string, string>      $extensions File extensions that should be checked, and what tokenizer is used.
  *                                                  E.g., array('inc' => 'PHP');
+ *                                                  Note: since PHPCS 4.0.0, the tokenizer used will always be 'PHP',
+ *                                                  but the array format of the property has not been changed to prevent
+ *                                                  breaking integrations which may be accessing this property.
  * @property array<string, string|null> $reports    The reports to use for printing output after the run.
  *                                                  The format of the array is:
  *                                                      array(
@@ -545,8 +548,6 @@ class Config
         $this->extensions      = [
             'php' => 'PHP',
             'inc' => 'PHP',
-            'js'  => 'JS',
-            'css' => 'CSS',
         ];
         $this->sniffs          = [];
         $this->exclude         = [];
@@ -1146,19 +1147,19 @@ class Config
                 if (empty($extensionsString) === false) {
                     $extensions = explode(',', $extensionsString);
                     foreach ($extensions as $ext) {
-                        $slash = strpos($ext, '/');
-                        if ($slash !== false) {
+                        if (strpos($ext, '/') !== false) {
                             // They specified the tokenizer too.
                             list($ext, $tokenizer) = explode('/', $ext);
-                            $newExtensions[$ext]   = strtoupper($tokenizer);
-                            continue;
+                            if (strtoupper($tokenizer) !== 'PHP') {
+                                $error  = 'ERROR: Specifying the tokenizer to use for an extension is no longer supported.'.PHP_EOL;
+                                $error .= 'PHP_CodeSniffer >= 4.0 only supports scanning PHP files.'.PHP_EOL;
+                                $error .= 'Received: '.substr($arg, 11).PHP_EOL.PHP_EOL;
+                                $error .= $this->printShortUsage(true);
+                                throw new DeepExitException($error, 3);
+                            }
                         }
 
-                        if (isset($this->extensions[$ext]) === true) {
-                            $newExtensions[$ext] = $this->extensions[$ext];
-                        } else {
-                            $newExtensions[$ext] = 'PHP';
-                        }
+                        $newExtensions[$ext] = 'PHP';
                     }
                 }
 

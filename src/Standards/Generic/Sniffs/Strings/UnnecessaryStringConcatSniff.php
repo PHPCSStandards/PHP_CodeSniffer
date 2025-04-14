@@ -17,16 +17,6 @@ class UnnecessaryStringConcatSniff implements Sniff
 {
 
     /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
-
-    /**
      * If true, an error will be thrown; otherwise a warning.
      *
      * @var boolean
@@ -51,10 +41,7 @@ class UnnecessaryStringConcatSniff implements Sniff
      */
     public function register()
     {
-        return [
-            T_STRING_CONCAT,
-            T_PLUS,
-        ];
+        return [T_STRING_CONCAT];
 
     }//end register()
 
@@ -71,14 +58,6 @@ class UnnecessaryStringConcatSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-
-        if ($tokens[$stackPtr]['code'] === T_STRING_CONCAT && $phpcsFile->tokenizerType === 'JS') {
-            // JS uses T_PLUS for string concatenation, not T_STRING_CONCAT.
-            return;
-        } else if ($tokens[$stackPtr]['code'] === T_PLUS && $phpcsFile->tokenizerType === 'PHP') {
-            // PHP uses T_STRING_CONCAT for string concatenation, not T_PLUS.
-            return;
-        }
 
         $prev = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
         $next = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
@@ -98,16 +77,14 @@ class UnnecessaryStringConcatSniff implements Sniff
             return;
         }
 
-        // Before we throw an error for PHP, allow strings to be
+        // Before we throw an error, allow strings to be
         // combined if they would have < and ? next to each other because
         // this trick is sometimes required in PHP strings.
-        if ($phpcsFile->tokenizerType === 'PHP') {
-            $prevChar = substr($tokens[$prev]['content'], -2, 1);
-            $nextChar = $tokens[$next]['content'][1];
-            $combined = $prevChar.$nextChar;
-            if ($combined === '?'.'>' || $combined === '<'.'?') {
-                return;
-            }
+        $prevChar = substr($tokens[$prev]['content'], -2, 1);
+        $nextChar = $tokens[$next]['content'][1];
+        $combined = $prevChar.$nextChar;
+        if ($combined === '?'.'>' || $combined === '<'.'?') {
+            return;
         }
 
         if ($this->allowMultiline === true

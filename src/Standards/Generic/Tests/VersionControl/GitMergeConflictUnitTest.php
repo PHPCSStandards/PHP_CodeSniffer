@@ -114,42 +114,6 @@ final class GitMergeConflictUnitTest extends AbstractSniffUnitTest
                 16 => 1,
             ];
 
-        case 'GitMergeConflictUnitTest.1.css':
-            return [
-                3  => 1,
-                5  => 1,
-                7  => 1,
-                12 => 1,
-                14 => 1,
-                16 => 1,
-                30 => 1,
-                32 => 1,
-                34 => 1,
-            ];
-
-        case 'GitMergeConflictUnitTest.2.css':
-            return [
-                3  => 1,
-                8  => 1,
-                13 => 1,
-                27 => 1,
-                29 => 1,
-                31 => 1,
-            ];
-
-        case 'GitMergeConflictUnitTest.js':
-            return [
-                5  => 1,
-                7  => 1,
-                9  => 1,
-                12 => 1,
-                14 => 1,
-                16 => 1,
-                24 => 1,
-                30 => 1,
-                32 => 1,
-            ];
-
         default:
             return [];
         }//end switch

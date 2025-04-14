@@ -43,20 +43,8 @@ define('T_PARENT', 'PHPCS_T_PARENT');
 define('T_DOUBLE_QUOTED_STRING', 'PHPCS_T_DOUBLE_QUOTED_STRING');
 define('T_COMMA', 'PHPCS_T_COMMA');
 define('T_HEREDOC', 'PHPCS_T_HEREDOC');
-define('T_PROTOTYPE', 'PHPCS_T_PROTOTYPE');
-define('T_THIS', 'PHPCS_T_THIS');
-define('T_REGULAR_EXPRESSION', 'PHPCS_T_REGULAR_EXPRESSION');
-define('T_PROPERTY', 'PHPCS_T_PROPERTY');
-define('T_LABEL', 'PHPCS_T_LABEL');
-define('T_OBJECT', 'PHPCS_T_OBJECT');
-define('T_CLOSE_OBJECT', 'PHPCS_T_CLOSE_OBJECT');
-define('T_COLOUR', 'PHPCS_T_COLOUR');
-define('T_HASH', 'PHPCS_T_HASH');
-define('T_URL', 'PHPCS_T_URL');
-define('T_STYLE', 'PHPCS_T_STYLE');
 define('T_ASPERAND', 'PHPCS_T_ASPERAND');
 define('T_DOLLAR', 'PHPCS_T_DOLLAR');
-define('T_TYPEOF', 'PHPCS_T_TYPEOF');
 define('T_CLOSURE', 'PHPCS_T_CLOSURE');
 define('T_ANON_CLASS', 'PHPCS_T_ANON_CLASS');
 define('T_BACKTICK', 'PHPCS_T_BACKTICK');
@@ -67,11 +55,8 @@ define('T_OPEN_SHORT_ARRAY', 'PHPCS_T_OPEN_SHORT_ARRAY');
 define('T_CLOSE_SHORT_ARRAY', 'PHPCS_T_CLOSE_SHORT_ARRAY');
 define('T_GOTO_LABEL', 'PHPCS_T_GOTO_LABEL');
 define('T_BINARY_CAST', 'PHPCS_T_BINARY_CAST');
-define('T_EMBEDDED_PHP', 'PHPCS_T_EMBEDDED_PHP');
 define('T_OPEN_USE_GROUP', 'PHPCS_T_OPEN_USE_GROUP');
 define('T_CLOSE_USE_GROUP', 'PHPCS_T_CLOSE_USE_GROUP');
-define('T_ZSR', 'PHPCS_T_ZSR');
-define('T_ZSR_EQUAL', 'PHPCS_T_ZSR_EQUAL');
 define('T_FN_ARROW', 'PHPCS_T_FN_ARROW');
 define('T_TYPE_UNION', 'PHPCS_T_TYPE_UNION');
 define('T_PARAM_NAME', 'PHPCS_T_PARAM_NAME');
@@ -265,7 +250,6 @@ final class Tokens
         T_SL_EQUAL       => T_SL_EQUAL,
         T_SR_EQUAL       => T_SR_EQUAL,
         T_COALESCE_EQUAL => T_COALESCE_EQUAL,
-        T_ZSR_EQUAL      => T_ZSR_EQUAL,
     ];
 
     /**
@@ -414,8 +398,6 @@ final class Tokens
         T_TRY        => T_TRY,
         T_CATCH      => T_CATCH,
         T_FINALLY    => T_FINALLY,
-        T_PROPERTY   => T_PROPERTY,
-        T_OBJECT     => T_OBJECT,
         T_USE        => T_USE,
         T_MATCH      => T_MATCH,
     ];
@@ -454,7 +436,6 @@ final class Tokens
         T_OPEN_CURLY_BRACKET  => T_OPEN_CURLY_BRACKET,
         T_OPEN_SQUARE_BRACKET => T_OPEN_SQUARE_BRACKET,
         T_OPEN_PARENTHESIS    => T_OPEN_PARENTHESIS,
-        T_OBJECT              => T_OBJECT,
     ];
 
     /**

@@ -20,9 +20,6 @@
         </properties>
     </rule>
 
-    <!-- Test setting supported Tokenizers when provided. -->
-    <rule ref="TestStandard.SupportedTokenizers.ListensForPHPAndCSSAndJS"/>
-
     <!-- Test that a sniff which doesn't register any tokens is accepted without errors. -->
     <rule ref="TestStandard.ValidSniffs.RegisterEmptyArray"/>
 
@@ -30,7 +27,7 @@
     <rule ref="Generic.NamingConventions.UpperCaseConstantName">
         <include-pattern>/no-transformation/</include-pattern>
         <include-pattern>/simple*transformation/*</include-pattern>
-        <include-pattern>/escaped\\,comma/becomes/comma/to/allow/commas/in/filenames.css</include-pattern>
+        <include-pattern>/escaped\\,comma/becomes/comma/to/allow/commas/in/filenames.inc</include-pattern>
         <include-pattern>/pat?tern(is|regex)\.php$</include-pattern>
     </rule>
 
@@ -38,7 +35,7 @@
     <rule ref="PSR1.Files.SideEffects">
         <exclude-pattern>/no-transformation/</exclude-pattern>
         <exclude-pattern>/simple*transformation/*</exclude-pattern>
-        <exclude-pattern>/escaped\\,comma/becomes/comma/to/allow/commas/in/filenames.css</exclude-pattern>
+        <exclude-pattern>/escaped\\,comma/becomes/comma/to/allow/commas/in/filenames.inc</exclude-pattern>
         <exclude-pattern>/pat?tern(is|regex)\.php$</exclude-pattern>
     </rule>
 

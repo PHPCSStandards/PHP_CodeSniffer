@@ -14,6 +14,7 @@ use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Exceptions\TokenizerException;
 use PHP_CodeSniffer\Fixer;
 use PHP_CodeSniffer\Ruleset;
+use PHP_CodeSniffer\Tokenizers\PHP;
 use PHP_CodeSniffer\Util\Common;
 use PHP_CodeSniffer\Util\Tokens;
 
@@ -72,16 +73,9 @@ class File
     /**
      * The tokenizer being used for this file.
      *
-     * @var \PHP_CodeSniffer\Tokenizers\Tokenizer
+     * @var \PHP_CodeSniffer\Tokenizers\PHP
      */
     public $tokenizer = null;
-
-    /**
-     * The name of the tokenizer being used for this file.
-     *
-     * @var string
-     */
-    public $tokenizerType = 'PHP';
 
     /**
      * Was the file loaded from cache?
@@ -239,15 +233,6 @@ class File
         $this->ruleset = $ruleset;
         $this->config  = $config;
         $this->fixer   = new Fixer();
-
-        $parts     = explode('.', $path);
-        $extension = array_pop($parts);
-        if (isset($config->extensions[$extension]) === true) {
-            $this->tokenizerType = $config->extensions[$extension];
-        } else {
-            // Revert to default.
-            $this->tokenizerType = 'PHP';
-        }
 
         $this->configCache['cache']           = $this->config->cache;
         $this->configCache['sniffs']          = array_map('strtolower', $this->config->sniffs);
@@ -412,13 +397,7 @@ class File
                     continue;
                 }
 
-                // Make sure this sniff supports the tokenizer
-                // we are currently using.
                 $class = $listenerData['class'];
-
-                if (isset($listenerData['tokenizers'][$this->tokenizerType]) === false) {
-                    continue;
-                }
 
                 if (trim($this->path, '\'"') !== 'STDIN') {
                     // If the file path matches one of our ignore patterns, skip it.
@@ -505,7 +484,7 @@ class File
         // We don't show this error for STDIN because we can't be sure the content
         // actually came directly from the user. It could be something like
         // refs from a Git pre-push hook.
-        if ($foundCode === false && $this->tokenizerType === 'PHP' && $this->path !== 'STDIN') {
+        if ($foundCode === false && $this->path !== 'STDIN') {
             $shortTags = (bool) ini_get('short_open_tag');
             if ($shortTags === false) {
                 $error = 'No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.';
@@ -543,14 +522,13 @@ class File
         }
 
         try {
-            $tokenizerClass  = 'PHP_CodeSniffer\Tokenizers\\'.$this->tokenizerType;
-            $this->tokenizer = new $tokenizerClass($this->content, $this->config, $this->eolChar);
+            $this->tokenizer = new PHP($this->content, $this->config, $this->eolChar);
             $this->tokens    = $this->tokenizer->getTokens();
         } catch (TokenizerException $e) {
             $this->ignored = true;
             $this->addWarning($e->getMessage(), null, 'Internal.Tokenizer.Exception');
             if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                echo "[$this->tokenizerType => tokenizer error]... ";
+                echo '[tokenizer error]... ';
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
                     echo PHP_EOL;
                 }
@@ -582,7 +560,7 @@ class File
                 $numLines = $this->tokens[($this->numTokens - 1)]['line'];
             }
 
-            echo "[$this->tokenizerType => $this->numTokens tokens in $numLines lines]... ";
+            echo "[$this->numTokens tokens in $numLines lines]... ";
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
                 echo PHP_EOL;
             }
@@ -1249,14 +1227,6 @@ class File
             throw new RuntimeException('Token type "'.$this->tokens[$stackPtr]['type'].'" is not T_FUNCTION, T_CLASS, T_INTERFACE, T_TRAIT or T_ENUM');
         }
 
-        if ($tokenCode === T_FUNCTION
-            && strtolower($this->tokens[$stackPtr]['content']) !== 'function'
-        ) {
-            // This is a function declared without the "function" keyword.
-            // So this token is the function name.
-            return $this->tokens[$stackPtr]['content'];
-        }
-
         $stopPoint = $this->numTokens;
         if (isset($this->tokens[$stackPtr]['parenthesis_opener']) === true) {
             // For functions, stop searching at the parenthesis opener.
@@ -1637,22 +1607,20 @@ class File
 
         if ($this->tokens[$stackPtr]['code'] === T_FUNCTION) {
             $valid = [
-                T_PUBLIC      => T_PUBLIC,
-                T_PRIVATE     => T_PRIVATE,
-                T_PROTECTED   => T_PROTECTED,
-                T_STATIC      => T_STATIC,
-                T_FINAL       => T_FINAL,
-                T_ABSTRACT    => T_ABSTRACT,
-                T_WHITESPACE  => T_WHITESPACE,
-                T_COMMENT     => T_COMMENT,
-                T_DOC_COMMENT => T_DOC_COMMENT,
+                T_PUBLIC     => T_PUBLIC,
+                T_PRIVATE    => T_PRIVATE,
+                T_PROTECTED  => T_PROTECTED,
+                T_STATIC     => T_STATIC,
+                T_FINAL      => T_FINAL,
+                T_ABSTRACT   => T_ABSTRACT,
+                T_WHITESPACE => T_WHITESPACE,
+                T_COMMENT    => T_COMMENT,
             ];
         } else {
             $valid = [
-                T_STATIC      => T_STATIC,
-                T_WHITESPACE  => T_WHITESPACE,
-                T_COMMENT     => T_COMMENT,
-                T_DOC_COMMENT => T_DOC_COMMENT,
+                T_STATIC     => T_STATIC,
+                T_WHITESPACE => T_WHITESPACE,
+                T_COMMENT    => T_COMMENT,
             ];
         }
 
@@ -2011,12 +1979,11 @@ class File
         }
 
         $valid = [
-            T_FINAL       => T_FINAL,
-            T_ABSTRACT    => T_ABSTRACT,
-            T_READONLY    => T_READONLY,
-            T_WHITESPACE  => T_WHITESPACE,
-            T_COMMENT     => T_COMMENT,
-            T_DOC_COMMENT => T_DOC_COMMENT,
+            T_FINAL      => T_FINAL,
+            T_ABSTRACT   => T_ABSTRACT,
+            T_READONLY   => T_READONLY,
+            T_WHITESPACE => T_WHITESPACE,
+            T_COMMENT    => T_COMMENT,
         ];
 
         $isAbstract = false;

@@ -189,21 +189,6 @@ jobs:
       - name: "DEBUG: show libxml loaded version (php)"
         run: php -r 'echo "libxml loaded version = ", LIBXML_LOADED_VERSION, PHP_EOL;'
 
-      # This action also handles the caching of the dependencies.
-      - name: Set up node
-        if: ${{ matrix.custom_ini == false }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install external tools used in tests
-        if: ${{ matrix.custom_ini == false }}
-        run: >
-          npm install -g --fund false
-          csslint
-          eslint
-          jshint
-
       # Install dependencies and handle caching in one go.
       # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
       - name: Install Composer dependencies
@@ -290,21 +275,6 @@ jobs:
           php-version: ${{ matrix.php }}
           ini-values: error_reporting=-1, display_errors=On${{ steps.set_ini.outputs.PHP_INI }}
           coverage: xdebug
-
-      # This action also handles the caching of the dependencies.
-      - name: Set up node
-        if: ${{ matrix.custom_ini == false }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install external tools used in tests
-        if: ${{ matrix.custom_ini == false }}
-        run: >
-          npm install -g --fund false
-          csslint
-          eslint
-          jshint
 
       # Install dependencies and handle caching in one go.
       # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
