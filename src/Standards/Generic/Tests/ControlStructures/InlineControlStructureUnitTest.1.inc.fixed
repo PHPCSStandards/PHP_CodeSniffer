@@ -314,3 +314,25 @@ if ($something) {
     echo 'hello';
 } else /* comment */ if ($somethingElse) { echo 'hi';
 }
+
+if ($sniffShouldBailEarly);
+
+if (false) {
+} elseif ($sniffShouldBailEarly);
+
+if (false) {
+} else if ($sniffShouldBailEarly);
+
+if (false) {
+} else { ($sniffShouldGenerateError);
+}
+
+if (false) {
+} else; // Sniff should bail early.
+
+foreach ($array as $sniffShouldBailEarly);
+
+foreach ($array as $sniffShouldBailEarly)
+	/* some comment */;
+
+do ; while ($sniffShouldBailEarly > 5);
