@@ -184,9 +184,9 @@ final class ExplainTest extends TestCase
         $ruleset  = new Ruleset($config);
 
         $expected  = PHP_EOL;
-        $expected .= 'The ShowSniffDeprecationsTest standard contains 11 sniffs'.PHP_EOL.PHP_EOL;
+        $expected .= 'The ShowSniffDeprecationsTest standard contains 12 sniffs'.PHP_EOL.PHP_EOL;
 
-        $expected .= 'TestStandard (11 sniffs)'.PHP_EOL;
+        $expected .= 'TestStandard (12 sniffs)'.PHP_EOL;
         $expected .= '------------------------'.PHP_EOL;
         $expected .= '  TestStandard.Deprecated.WithLongReplacement *'.PHP_EOL;
         $expected .= '  TestStandard.Deprecated.WithoutReplacement *'.PHP_EOL;
@@ -198,6 +198,7 @@ final class ExplainTest extends TestCase
         $expected .= '  TestStandard.SetProperty.AllowedViaStdClass'.PHP_EOL;
         $expected .= '  TestStandard.SetProperty.NotAllowedViaAttribute'.PHP_EOL;
         $expected .= '  TestStandard.SetProperty.PropertyTypeHandling'.PHP_EOL;
+        $expected .= '  TestStandard.SetProperty.PropertyTypeHandlingOldArrayFormat'.PHP_EOL;
         $expected .= '  TestStandard.ValidSniffs.RegisterEmptyArray'.PHP_EOL.PHP_EOL;
 
         $expected .= '* Sniffs marked with an asterix are deprecated.'.PHP_EOL;
