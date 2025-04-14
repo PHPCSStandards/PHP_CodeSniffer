@@ -1416,7 +1416,12 @@ class Ruleset
                 continue;
             }
 
-            if ($reflection->implementsInterface('PHP_CodeSniffer\Sniffs\Sniff') === false) {
+            if ($reflection->implementsInterface('PHP_CodeSniffer\\Sniffs\\Sniff') === false) {
+                $message  = 'All sniffs must implement the PHP_CodeSniffer\\Sniffs\\Sniff interface.'.PHP_EOL;
+                $message .= "Interface not implemented for sniff $className.".PHP_EOL;
+                $message .= 'Contact the sniff author to fix the sniff.';
+                $this->msgCache->add($message, MessageCollector::DEPRECATED);
+
                 // Skip classes which don't implement the register() or process() methods.
                 if (method_exists($className, 'register') === false
                     || method_exists($className, 'process') === false
