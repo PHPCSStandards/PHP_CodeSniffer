@@ -3,6 +3,7 @@
     <description>The coding standard for PHP_CodeSniffer itself.</description>
 
     <file>autoload.php</file>
+    <file>requirements.php</file>
     <file>bin</file>
     <file>scripts</file>
     <file>src</file>
@@ -58,7 +59,11 @@
     <rule ref="Squiz.WhiteSpace.MemberVarSpacing"/>
     <rule ref="Squiz.WhiteSpace.OperatorSpacing"/>
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
-    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax">
+        <!-- Files involved in the requirements check should stay compatible with PHP 5.3. -->
+        <exclude-pattern>bin/phpc(s|bf)$</exclude-pattern>
+        <exclude-pattern>requirements\.php$</exclude-pattern>
+    </rule>
     <rule ref="Generic.Commenting.Todo"/>
     <rule ref="Generic.ControlStructures.DisallowYodaConditions"/>
     <rule ref="Generic.ControlStructures.InlineControlStructure"/>
