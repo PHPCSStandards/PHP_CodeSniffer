@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\ControlStructures;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the InlineControlStructure sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\ControlStructures\InlineControlStructureSniff
  */
-final class InlineControlStructureUnitTest extends AbstractSniffUnitTest
+final class InlineControlStructureUnitTest extends AbstractSniffTestCase
 {
 
 

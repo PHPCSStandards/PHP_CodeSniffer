@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\Objects;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the ObjectInstantiation sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Objects\ObjectInstantiationSniff
  */
-final class ObjectInstantiationUnitTest extends AbstractSniffUnitTest
+final class ObjectInstantiationUnitTest extends AbstractSniffTestCase
 {
 
 

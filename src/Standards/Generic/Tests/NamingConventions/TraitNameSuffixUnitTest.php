@@ -8,14 +8,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\NamingConventions;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the TraitNameSuffix sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\TraitNameSuffixSniff
  */
-final class TraitNameSuffixUnitTest extends AbstractSniffUnitTest
+final class TraitNameSuffixUnitTest extends AbstractSniffTestCase
 {
 
 

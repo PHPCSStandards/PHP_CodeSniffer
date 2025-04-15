@@ -197,6 +197,27 @@ jobs:
           composer-options: ${{ matrix.php == '8.5' && '--ignore-platform-req=php+' || '' }}
           custom-cache-suffix: $(date -u "+%Y-%m")
 
+      - name: Grab PHPUnit version
+        id: phpunit_version
+        shell: bash
+        # yamllint disable-line rule:line-length
+        run: echo "VERSION=$(php "vendor/bin/phpunit" --version | grep --only-matching --max-count=1 --extended-regexp '\b[0-9]+\.[0-9]+')" >> "$GITHUB_OUTPUT"
+
+      - name: "DEBUG: Show grabbed version"
+        run: echo ${{ steps.phpunit_version.outputs.VERSION }}
+
+      - name: Determine PHPUnit config file to use
+        id: phpunit_config
+        shell: bash
+        run: |
+          if [ "${{ startsWith( steps.phpunit_version.outputs.VERSION, '11.' ) }}" == "true" ]; then
+            echo 'FILE=phpunit.xml.dist' >> "$GITHUB_OUTPUT"
+          elif [ "${{ startsWith( steps.phpunit_version.outputs.VERSION, '10.' ) }}" == "true" ]; then
+            echo 'FILE=phpunit.xml.dist' >> "$GITHUB_OUTPUT"
+          else
+            echo 'FILE=phpunit-lte9.xml.dist' >> "$GITHUB_OUTPUT"
+          fi
+
       # Note: The code style check is run multiple times against every PHP version
       # as it also acts as an integration test.
       - name: 'PHPCS: set the path to PHP'
@@ -204,11 +225,13 @@ jobs:
 
       - name: 'PHPUnit: run the full test suite without code coverage'
         if: ${{ matrix.skip_tests != true }}
-        run: php "vendor/bin/phpunit" --no-coverage
+        run: php "vendor/bin/phpunit" -c ${{ steps.phpunit_config.outputs.FILE }} --no-coverage
 
       - name: 'PHPUnit: run select tests in CBF mode'
         if: ${{ matrix.skip_tests != true }}
-        run: php "vendor/bin/phpunit" --group CBF --exclude-group nothing --no-coverage
+        run: >
+          php "vendor/bin/phpunit" -c ${{ steps.phpunit_config.outputs.FILE }} --no-coverage
+          --group CBF --exclude-group nothing
         env:
           PHP_CODESNIFFER_CBF: '1'
 
@@ -293,6 +316,18 @@ jobs:
       - name: "DEBUG: Show grabbed version"
         run: echo ${{ steps.phpunit_version.outputs.VERSION }}
 
+      - name: Determine PHPUnit config file to use
+        id: phpunit_config
+        shell: bash
+        run: |
+          if [ "${{ startsWith( steps.phpunit_version.outputs.VERSION, '11.' ) }}" == "true" ]; then
+            echo 'FILE=phpunit.xml.dist' >> "$GITHUB_OUTPUT"
+          elif [ "${{ startsWith( steps.phpunit_version.outputs.VERSION, '10.' ) }}" == "true" ]; then
+            echo 'FILE=phpunit.xml.dist' >> "$GITHUB_OUTPUT"
+          else
+            echo 'FILE=phpunit-lte9.xml.dist' >> "$GITHUB_OUTPUT"
+          fi
+
       - name: 'PHPCS: set the path to PHP'
         run: php "bin/phpcs" --config-set php_path php
 
@@ -302,18 +337,20 @@ jobs:
       # Using that option prevents issues with PHP-Parser backfilling PHP tokens during our test runs.
       - name: "Warm the PHPUnit cache (PHPUnit 9.3+)"
         if: ${{ steps.phpunit_version.outputs.VERSION >= '9.3' }}
-        run: php "vendor/bin/phpunit" --coverage-cache ./build/phpunit-cache --warm-coverage-cache
+        run: >
+          php "vendor/bin/phpunit" -c ${{ steps.phpunit_config.outputs.FILE }}
+          --coverage-cache ./build/phpunit-cache --warm-coverage-cache
 
       - name: "Run the unit tests with code coverage"
         if: ${{ matrix.os != 'windows-latest' }}
         run: >
-          php "vendor/bin/phpunit"
+          php "vendor/bin/phpunit" -c ${{ steps.phpunit_config.outputs.FILE }}
           ${{ steps.phpunit_version.outputs.VERSION >= '9.3' && '--coverage-cache ./build/phpunit-cache' || '' }}
 
       - name: "Run select tests in CBF mode with code coverage"
         if: ${{ matrix.os != 'windows-latest' }}
         run: >
-          php "vendor/bin/phpunit"
+          php "vendor/bin/phpunit" -c ${{ steps.phpunit_config.outputs.FILE }}
           ${{ steps.phpunit_version.outputs.VERSION >= '9.3' && '--coverage-cache ./build/phpunit-cache' || '' }}
           --group CBF --exclude-group nothing --coverage-clover build/logs/clover-cbf.xml
         env:
@@ -322,8 +359,9 @@ jobs:
       - name: "Run the unit tests which may have different outcomes on Windows with code coverage"
         if: ${{ matrix.os == 'windows-latest' }}
         run: >
-          php "vendor/bin/phpunit" --group Windows
+          php "vendor/bin/phpunit" -c ${{ steps.phpunit_config.outputs.FILE }}
           ${{ steps.phpunit_version.outputs.VERSION >= '9.3' && '--coverage-cache ./build/phpunit-cache' || '' }}
+          --group Windows
 
       - name: "Upload coverage results to Coveralls (normal run)"
         if: ${{ success() }}

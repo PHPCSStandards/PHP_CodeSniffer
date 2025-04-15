@@ -55,19 +55,44 @@ jobs:
           # Bust the cache at least once a month - output format: YYYY-MM.
           custom-cache-suffix: $(date -u "+%Y-%m")
 
+      - name: Grab PHPUnit version
+        id: phpunit_version
+        shell: bash
+        # yamllint disable-line rule:line-length
+        run: echo "VERSION=$(php "vendor/bin/phpunit" --version | grep --only-matching --max-count=1 --extended-regexp '\b[0-9]+\.[0-9]+')" >> "$GITHUB_OUTPUT"
+
+      - name: "DEBUG: Show grabbed version"
+        run: echo ${{ steps.phpunit_version.outputs.VERSION }}
+
+      - name: Determine PHPUnit config file to use
+        id: phpunit_config
+        shell: bash
+        run: |
+          if [ "${{ startsWith( steps.phpunit_version.outputs.VERSION, '11.' ) }}" == "true" ]; then
+            echo 'FILE=phpunit.xml.dist' >> "$GITHUB_OUTPUT"
+          elif [ "${{ startsWith( steps.phpunit_version.outputs.VERSION, '10.' ) }}" == "true" ]; then
+            echo 'FILE=phpunit.xml.dist' >> "$GITHUB_OUTPUT"
+          else
+            echo 'FILE=phpunit-lte9.xml.dist' >> "$GITHUB_OUTPUT"
+          fi
+
       - name: 'PHPCS: set the path to PHP'
         run: php "bin/phpcs" --config-set php_path php
 
       - name: 'PHPUnit: run the full test suite'
         if: ${{ matrix.os != 'windows-latest' }}
-        run: php "vendor/bin/phpunit" --no-coverage
+        run: php "vendor/bin/phpunit" -c ${{ steps.phpunit_config.outputs.FILE }} --no-coverage
 
       - name: 'PHPUnit: run tests which may have different outcomes on Windows'
         if: ${{ matrix.os == 'windows-latest' }}
-        run: php "vendor/bin/phpunit" --group Windows --no-coverage
+        run: >
+          php "vendor/bin/phpunit" -c ${{ steps.phpunit_config.outputs.FILE }} --no-coverage
+          --group Windows
 
       - name: 'PHPUnit: run select tests in CBF mode'
-        run: php "vendor/bin/phpunit" --group CBF --exclude-group nothing --no-coverage
+        run: >
+          php "vendor/bin/phpunit" -c ${{ steps.phpunit_config.outputs.FILE }} --no-coverage
+          --group CBF --exclude-group nothing
         env:
           PHP_CODESNIFFER_CBF: '1'
 

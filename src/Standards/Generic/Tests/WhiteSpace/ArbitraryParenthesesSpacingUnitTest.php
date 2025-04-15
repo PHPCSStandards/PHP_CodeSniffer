@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\WhiteSpace;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the ArbitraryParenthesesSpacing sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\ArbitraryParenthesesSpacingSniff
  */
-final class ArbitraryParenthesesSpacingUnitTest extends AbstractSniffUnitTest
+final class ArbitraryParenthesesSpacingUnitTest extends AbstractSniffTestCase
 {
 
 

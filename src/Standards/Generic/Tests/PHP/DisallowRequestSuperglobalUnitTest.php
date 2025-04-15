@@ -8,14 +8,14 @@
  */
 namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the DisallowRequestSuperglobal sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DisallowRequestSuperglobalSniff
  */
-final class DisallowRequestSuperglobalUnitTest extends AbstractSniffUnitTest
+final class DisallowRequestSuperglobalUnitTest extends AbstractSniffTestCase
 {
 
 

@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\PSR12\Tests\Functions;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the NullableWhitespace sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Functions\NullableTypeDeclarationSniff
  */
-final class NullableTypeDeclarationUnitTest extends AbstractSniffUnitTest
+final class NullableTypeDeclarationUnitTest extends AbstractSniffTestCase
 {
 
 

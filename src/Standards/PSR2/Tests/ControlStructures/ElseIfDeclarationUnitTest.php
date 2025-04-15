@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\PSR2\Tests\ControlStructures;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the ElseIfDeclaration sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\PSR2\Sniffs\ControlStructures\ElseIfDeclarationSniff
  */
-final class ElseIfDeclarationUnitTest extends AbstractSniffUnitTest
+final class ElseIfDeclarationUnitTest extends AbstractSniffTestCase
 {
 
 

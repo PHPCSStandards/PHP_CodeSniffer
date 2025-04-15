@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\PHP;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the Heredoc sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\HeredocSniff
  */
-final class HeredocUnitTest extends AbstractSniffUnitTest
+final class HeredocUnitTest extends AbstractSniffTestCase
 {
 
 

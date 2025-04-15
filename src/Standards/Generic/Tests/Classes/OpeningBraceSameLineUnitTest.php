@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Classes;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the OpeningBraceSameLine sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Classes\OpeningBraceSameLineSniff
  */
-final class OpeningBraceSameLineUnitTest extends AbstractSniffUnitTest
+final class OpeningBraceSameLineUnitTest extends AbstractSniffTestCase
 {
 
 

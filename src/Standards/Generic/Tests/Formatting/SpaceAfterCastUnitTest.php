@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Formatting;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the SpaceAfterCast sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterCastSniff
  */
-final class SpaceAfterCastUnitTest extends AbstractSniffUnitTest
+final class SpaceAfterCastUnitTest extends AbstractSniffTestCase
 {
 
 

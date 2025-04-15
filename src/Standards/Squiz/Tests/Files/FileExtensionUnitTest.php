@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\Files;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the FileExtension sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Files\FileExtensionSniff
  */
-final class FileExtensionUnitTest extends AbstractSniffUnitTest
+final class FileExtensionUnitTest extends AbstractSniffTestCase
 {
 
 

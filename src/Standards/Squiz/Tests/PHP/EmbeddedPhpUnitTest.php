@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\PHP;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the EmbeddedPhp sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\EmbeddedPhpSniff
  */
-final class EmbeddedPhpUnitTest extends AbstractSniffUnitTest
+final class EmbeddedPhpUnitTest extends AbstractSniffTestCase
 {
 
 

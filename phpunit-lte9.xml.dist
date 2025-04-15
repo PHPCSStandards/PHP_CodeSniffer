@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.2/phpunit.xsd"
     backupGlobals="true"
     beStrictAboutOutputDuringTests="true"
     beStrictAboutTestsThatDoNotTestAnything="false"
     bootstrap="tests/bootstrap.php"
-    cacheDirectory="build/phpunit-cache"
-    displayDetailsOnTestsThatTriggerErrors="true"
-    displayDetailsOnTestsThatTriggerWarnings="true"
-    displayDetailsOnTestsThatTriggerNotices="true"
-    displayDetailsOnTestsThatTriggerDeprecations="true"
-    displayDetailsOnPhpunitDeprecations="false"
-    failOnWarning="true"
-    failOnNotice="true"
-    failOnDeprecation="true"
-    failOnPhpunitDeprecation="false"
-    requireCoverageMetadata="true"
+    convertErrorsToExceptions="true"
+    convertWarningsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertDeprecationsToExceptions="true"
+    forceCoversAnnotation="true"
     >
     <testsuites>
         <testsuite name="PHPCS_Core">
@@ -39,22 +33,20 @@
         </exclude>
     </groups>
 
-    <source>
-        <include>
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true" processUncoveredFilesFromWhitelist="false">
             <directory suffix=".php">./src</directory>
             <file>./autoload.php</file>
-        </include>
-        <exclude>
-            <directory suffix="UnitTest.php">./src/Standards</directory>
-        </exclude>
-    </source>
+            <exclude>
+                <directory suffix="UnitTest.php">./src/Standards</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 
-    <coverage includeUncoveredFiles="true">
-        <report>
-            <clover outputFile="build/logs/clover.xml"/>
-            <text outputFile="php://stdout" showOnlySummary="true"/>
-        </report>
-    </coverage>
+    <logging>
+        <log type="coverage-text" target="php://stdout" showOnlySummary="true"/>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+    </logging>
 
     <php>
         <env name="PHP_CODESNIFFER_CBF" value="0"/>

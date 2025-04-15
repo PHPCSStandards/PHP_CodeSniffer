@@ -19,6 +19,7 @@ tests/Core/**/                      export-ignore
 phpcs.xml.dist                      export-ignore
 phpstan.neon.dist                   export-ignore
 phpunit.xml.dist                    export-ignore
+phpunit-lte9.xml.dist               export-ignore
 tests/Core/ErrorSuppressionTest.php export-ignore
 
 #

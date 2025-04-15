@@ -2,7 +2,7 @@
 /**
  * Base class to use when testing parts of the tokenizer.
  *
- * This is a near duplicate of the AbstractMethodUnitTest class, with the
+ * This is a near duplicate of the AbstractMethodTestCase class, with the
  * difference being that it allows for recording code coverage for tokenizer tests.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
@@ -15,7 +15,7 @@ namespace PHP_CodeSniffer\Tests\Core\Tokenizers;
 use PHP_CodeSniffer\Files\DummyFile;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
+use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
@@ -90,7 +90,7 @@ abstract class AbstractTokenizerTestCase extends TestCase
      */
     public function testTestMarkersAreUnique()
     {
-        AbstractMethodUnitTest::assertTestMarkersAreUnique($this->phpcsFile);
+        AbstractMethodTestCase::assertTestMarkersAreUnique($this->phpcsFile);
 
     }//end testTestMarkersAreUnique()
 
@@ -109,7 +109,7 @@ abstract class AbstractTokenizerTestCase extends TestCase
      */
     protected function getTargetToken($commentString, $tokenType, $tokenContent=null)
     {
-        return AbstractMethodUnitTest::getTargetTokenFromFile($this->phpcsFile, $commentString, $tokenType, $tokenContent);
+        return AbstractMethodTestCase::getTargetTokenFromFile($this->phpcsFile, $commentString, $tokenType, $tokenContent);
 
     }//end getTargetToken()
 

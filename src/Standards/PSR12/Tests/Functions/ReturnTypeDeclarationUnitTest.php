@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\PSR12\Tests\Functions;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the ReturnTypeDeclaration sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Functions\ReturnTypeDeclarationSniff
  */
-final class ReturnTypeDeclarationUnitTest extends AbstractSniffUnitTest
+final class ReturnTypeDeclarationUnitTest extends AbstractSniffTestCase
 {
 
 

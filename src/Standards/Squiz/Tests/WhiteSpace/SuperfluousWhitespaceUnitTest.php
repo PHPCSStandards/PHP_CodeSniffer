@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\WhiteSpace;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the SuperfluousWhitespace sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SuperfluousWhitespaceSniff
  */
-final class SuperfluousWhitespaceUnitTest extends AbstractSniffUnitTest
+final class SuperfluousWhitespaceUnitTest extends AbstractSniffTestCase
 {
 
 

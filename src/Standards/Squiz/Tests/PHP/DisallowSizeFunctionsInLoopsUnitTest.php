@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\PHP;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the DisallowSizeFunctionsInLoops sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DisallowSizeFunctionsInLoopsSniff
  */
-final class DisallowSizeFunctionsInLoopsUnitTest extends AbstractSniffUnitTest
+final class DisallowSizeFunctionsInLoopsUnitTest extends AbstractSniffTestCase
 {
 
 

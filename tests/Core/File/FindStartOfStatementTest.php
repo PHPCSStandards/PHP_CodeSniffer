@@ -11,7 +11,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\File;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
+use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
 use PHP_CodeSniffer\Util\Tokens;
 
 /**
@@ -19,7 +19,7 @@ use PHP_CodeSniffer\Util\Tokens;
  *
  * @covers \PHP_CodeSniffer\Files\File::findStartOfStatement
  */
-final class FindStartOfStatementTest extends AbstractMethodUnitTest
+final class FindStartOfStatementTest extends AbstractMethodTestCase
 {
 
 

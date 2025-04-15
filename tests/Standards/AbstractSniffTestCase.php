@@ -22,7 +22,7 @@ use PHP_CodeSniffer\Util\Common;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
-abstract class AbstractSniffUnitTest extends TestCase
+abstract class AbstractSniffTestCase extends TestCase
 {
 
     /**

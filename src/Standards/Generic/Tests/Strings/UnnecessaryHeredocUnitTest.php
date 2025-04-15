@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Strings;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the UnnecessaryHeredoc sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Strings\UnnecessaryHeredocSniff
  */
-final class UnnecessaryHeredocUnitTest extends AbstractSniffUnitTest
+final class UnnecessaryHeredocUnitTest extends AbstractSniffTestCase
 {
 
 

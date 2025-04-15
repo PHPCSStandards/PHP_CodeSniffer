@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\NamingConventions;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the ConstructorName sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\ConstructorNameSniff
  */
-final class ConstructorNameUnitTest extends AbstractSniffUnitTest
+final class ConstructorNameUnitTest extends AbstractSniffTestCase
 {
 
 

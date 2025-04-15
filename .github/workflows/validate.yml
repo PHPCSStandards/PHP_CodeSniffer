@@ -56,7 +56,12 @@ jobs:
           pattern: "phpcs.xml.dist"
           xsd-file: "phpcs.xsd"
 
-      - name: "Validate PHPUnit config for well-formedness"
+      - name: "Validate PHPUnit <= 9 config for well-formedness"
+        uses: phpcsstandards/xmllint-validate@v1
+        with:
+          pattern: "phpunit-lte9.xml.dist"
+
+      - name: "Validate PHPUnit 10+ config for well-formedness"
         uses: phpcsstandards/xmllint-validate@v1
         with:
           pattern: "phpunit.xml.dist"

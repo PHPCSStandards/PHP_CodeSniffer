@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\WhiteSpace;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the SpreadOperatorSpacingAfter sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\SpreadOperatorSpacingAfterSniff
  */
-final class SpreadOperatorSpacingAfterUnitTest extends AbstractSniffUnitTest
+final class SpreadOperatorSpacingAfterUnitTest extends AbstractSniffTestCase
 {
 
 

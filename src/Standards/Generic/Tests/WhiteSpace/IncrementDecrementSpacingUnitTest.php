@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\WhiteSpace;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the IncrementDecrementSpacing sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\IncrementDecrementSpacingSniff
  */
-final class IncrementDecrementSpacingUnitTest extends AbstractSniffUnitTest
+final class IncrementDecrementSpacingUnitTest extends AbstractSniffTestCase
 {
 
 

@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\ControlStructures;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the LowercaseDeclaration sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\LowercaseDeclarationSniff
  */
-final class LowercaseDeclarationUnitTest extends AbstractSniffUnitTest
+final class LowercaseDeclarationUnitTest extends AbstractSniffTestCase
 {
 
 

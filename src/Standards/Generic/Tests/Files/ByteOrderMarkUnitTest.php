@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Files;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the ByteOrderMark sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\ByteOrderMarkSniff
  */
-final class ByteOrderMarkUnitTest extends AbstractSniffUnitTest
+final class ByteOrderMarkUnitTest extends AbstractSniffTestCase
 {
 
 

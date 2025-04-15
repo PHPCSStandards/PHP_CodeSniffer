@@ -9,7 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\File;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
+use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
 use PHP_CodeSniffer\Util\Tokens;
 
 /**
@@ -18,7 +18,7 @@ use PHP_CodeSniffer\Util\Tokens;
  * @covers \PHP_CodeSniffer\Files\File::getCondition
  * @covers \PHP_CodeSniffer\Files\File::hasCondition
  */
-final class GetConditionTest extends AbstractMethodUnitTest
+final class GetConditionTest extends AbstractMethodTestCase
 {
 
     /**

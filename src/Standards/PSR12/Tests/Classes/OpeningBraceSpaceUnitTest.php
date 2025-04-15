@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\PSR12\Tests\Classes;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the OpeningBraceSpace sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Classes\OpeningBraceSpaceSniff
  */
-final class OpeningBraceSpaceUnitTest extends AbstractSniffUnitTest
+final class OpeningBraceSpaceUnitTest extends AbstractSniffTestCase
 {
 
 

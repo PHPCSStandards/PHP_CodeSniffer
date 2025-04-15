@@ -10,14 +10,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\CodeAnalysis;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the RequireExplicitBooleanOperatorPrecedence sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\RequireExplicitBooleanOperatorPrecedenceSniff
  */
-final class RequireExplicitBooleanOperatorPrecedenceUnitTest extends AbstractSniffUnitTest
+final class RequireExplicitBooleanOperatorPrecedenceUnitTest extends AbstractSniffTestCase
 {
 
 

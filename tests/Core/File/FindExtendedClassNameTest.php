@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Tests\Core\File;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
+use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
 
 /**
  * Tests for the \PHP_CodeSniffer\Files\File::findExtendedClassName method.
  *
  * @covers \PHP_CodeSniffer\Files\File::findExtendedClassName
  */
-final class FindExtendedClassNameTest extends AbstractMethodUnitTest
+final class FindExtendedClassNameTest extends AbstractMethodTestCase
 {
 
 

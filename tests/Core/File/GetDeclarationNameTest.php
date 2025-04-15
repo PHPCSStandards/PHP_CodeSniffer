@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Tests\Core\File;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
+use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
 
 /**
  * Tests for the \PHP_CodeSniffer\Files\File:getDeclarationName method.
  *
  * @covers \PHP_CodeSniffer\Files\File::getDeclarationName
  */
-final class GetDeclarationNameTest extends AbstractMethodUnitTest
+final class GetDeclarationNameTest extends AbstractMethodTestCase
 {
 
 

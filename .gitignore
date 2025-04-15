@@ -1,6 +1,8 @@
 /CodeSniffer.conf
 /phpcs.xml
 /phpunit.xml
+/phpunitlte9.xml
+/phpunit-lte9.xml
 .phpunit.result.cache
 /build/
 .idea/*

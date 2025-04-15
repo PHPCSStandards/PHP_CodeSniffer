@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Metrics;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the NestingLevel sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\NestingLevelSniff
  */
-final class NestingLevelUnitTest extends AbstractSniffUnitTest
+final class NestingLevelUnitTest extends AbstractSniffTestCase
 {
 
 

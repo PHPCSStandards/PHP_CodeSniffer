@@ -9,14 +9,14 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Formatting;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the DisallowMultipleStatements sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\DisallowMultipleStatementsSniff
  */
-final class DisallowMultipleStatementsUnitTest extends AbstractSniffUnitTest
+final class DisallowMultipleStatementsUnitTest extends AbstractSniffTestCase
 {
 
 
