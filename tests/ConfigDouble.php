@@ -80,7 +80,6 @@ final class ConfigDouble extends Config
      */
     public function __destruct()
     {
-        $this->setStaticConfigProperty('overriddenDefaults', []);
         $this->setStaticConfigProperty('executablePaths', []);
         $this->setStaticConfigProperty('configData', null);
         $this->setStaticConfigProperty('configDataFile', null);
@@ -107,13 +106,12 @@ final class ConfigDouble extends Config
 
 
     /**
-     * Reset a few properties on the Config class to their default values.
+     * Reset select properties on the Config class to their default values.
      *
      * @return void
      */
     private function resetSelectProperties()
     {
-        $this->setStaticConfigProperty('overriddenDefaults', []);
         $this->setStaticConfigProperty('executablePaths', []);
 
     }//end resetSelectProperties()
@@ -186,6 +184,11 @@ final class ConfigDouble extends Config
     {
         $property = new ReflectionProperty('PHP_CodeSniffer\Config', $name);
         $property->setAccessible(true);
+
+        if ($name === 'overriddenDefaults') {
+            return $property->getValue($this);
+        }
+
         return $property->getValue();
 
     }//end getStaticConfigProperty()
@@ -203,7 +206,13 @@ final class ConfigDouble extends Config
     {
         $property = new ReflectionProperty('PHP_CodeSniffer\Config', $name);
         $property->setAccessible(true);
-        $property->setValue(null, $value);
+
+        if ($name === 'overriddenDefaults') {
+            $property->setValue($this, $value);
+        } else {
+            $property->setValue(null, $value);
+        }
+
         $property->setAccessible(false);
 
     }//end setStaticConfigProperty()

@@ -25,7 +25,6 @@ abstract class AbstractRealConfigTestCase extends TestCase
     protected function setUp(): void
     {
         // Set to the property's default value to clear out potentially set values from other tests.
-        self::setStaticConfigProperty('overriddenDefaults', []);
         self::setStaticConfigProperty('executablePaths', []);
 
         // Set to values which prevent the test-runner user's `CodeSniffer.conf` file
@@ -56,7 +55,6 @@ abstract class AbstractRealConfigTestCase extends TestCase
      */
     public static function tearDownAfterClass(): void
     {
-        self::setStaticConfigProperty('overriddenDefaults', []);
         self::setStaticConfigProperty('executablePaths', []);
         self::setStaticConfigProperty('configData', null);
         self::setStaticConfigProperty('configDataFile', null);
