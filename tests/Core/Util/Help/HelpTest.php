@@ -150,14 +150,8 @@ final class HelpTest extends TestCase
         $exception = 'InvalidArgumentException';
         $message   = 'The $shortOptions parameter must be a string';
 
-        if (method_exists($this, 'expectException') === true) {
-            // PHPUnit 5+.
-            $this->expectException($exception);
-            $this->expectExceptionMessage($message);
-        } else {
-            // PHPUnit 4.
-            $this->setExpectedException($exception, $message);
-        }
+        $this->expectException($exception);
+        $this->expectExceptionMessage($message);
 
         new Help(new ConfigDouble(), [], []);
 

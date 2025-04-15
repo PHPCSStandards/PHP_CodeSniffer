@@ -106,24 +106,13 @@ final class GeneratorTest extends TestCase
         $ruleset  = new Ruleset($config);
 
         if (PHP_VERSION_ID >= 80000) {
-            $exception = 'TypeError';
-            $message   = 'processSniff(): Argument #1 ($doc) must be of type DOMNode, null given';
-        } else if (PHP_VERSION_ID >= 70000) {
-            $exception = 'TypeError';
-            $message   = 'processSniff() must be an instance of DOMNode, null given';
+            $message = 'processSniff(): Argument #1 ($doc) must be of type DOMNode, null given';
         } else {
-            $exception = 'PHPUnit_Framework_Error';
-            $message   = 'processSniff() must be an instance of DOMNode, null given';
+            $message = 'processSniff() must be an instance of DOMNode, null given';
         }
 
-        if (method_exists($this, 'expectExceptionMessage') === true) {
-            // PHPUnit 5.2.0+.
-            $this->expectException($exception);
-            $this->expectExceptionMessage($message);
-        } else {
-            // Ancient PHPUnit.
-            $this->setExpectedException($exception, $message);
-        }
+        $this->expectException('TypeError');
+        $this->expectExceptionMessage($message);
 
         $generator = new MockGenerator($ruleset);
         $generator->generate();

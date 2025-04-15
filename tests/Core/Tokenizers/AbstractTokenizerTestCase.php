@@ -45,11 +45,9 @@ abstract class AbstractTokenizerTestCase extends TestCase
      * The test case file for a unit test class has to be in the same directory
      * directory and use the same file name as the test class, using the .inc extension.
      *
-     * @before
-     *
      * @return void
      */
-    protected function initializeFile()
+    protected function setUp(): void
     {
         if (isset($this->phpcsFile) === false) {
             $_SERVER['argv'] = [];
@@ -73,7 +71,7 @@ abstract class AbstractTokenizerTestCase extends TestCase
             $this->phpcsFile->parse();
         }//end if
 
-    }//end initializeFile()
+    }//end setUp()
 
 
     /**

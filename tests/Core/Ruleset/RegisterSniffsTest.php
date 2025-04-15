@@ -62,11 +62,9 @@ final class RegisterSniffsTest extends TestCase
     /**
      * Initialize the config and ruleset objects which will be used for some of these tests.
      *
-     * @beforeClass
-     *
      * @return void
      */
-    public static function initializeConfigAndRuleset()
+    public static function setUpBeforeClass(): void
     {
         // Set up the ruleset.
         $config        = new ConfigDouble(['--standard=PSR1']);
@@ -85,7 +83,7 @@ final class RegisterSniffsTest extends TestCase
 
         self::$psr1SniffAbsolutePaths = self::relativeToAbsoluteSniffFiles($standardsDir, self::$psr1SniffFiles);
 
-    }//end initializeConfigAndRuleset()
+    }//end setUpBeforeClass()
 
 
     /**
@@ -113,16 +111,14 @@ final class RegisterSniffsTest extends TestCase
     /**
      * Clear out the Ruleset::$sniffs property.
      *
-     * @before
-     *
      * @return void
      */
-    protected function clearOutSniffs()
+    protected function setUp(): void
     {
         // Clear out the Ruleset::$sniffs property.
         self::$ruleset->sniffs = [];
 
-    }//end clearOutSniffs()
+    }//end setUp()
 
 
     /**

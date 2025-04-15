@@ -51,7 +51,7 @@ final class TimingTest extends TestCase
         usleep(1500);
         $duration = Timing::getDuration();
 
-        $this->assertTrue(is_float($duration));
+        $this->assertIsFloat($duration);
         $this->assertGreaterThan(1, $duration);
         $this->assertLessThan(15, $duration);
 

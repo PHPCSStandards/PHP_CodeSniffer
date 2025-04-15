@@ -20,11 +20,9 @@ abstract class AbstractRealConfigTestCase extends TestCase
     /**
      * Set static properties in the Config class to prevent tests influencing each other.
      *
-     * @before
-     *
      * @return void
      */
-    protected function setConfigStatics()
+    protected function setUp(): void
     {
         // Set to the property's default value to clear out potentially set values from other tests.
         self::setStaticConfigProperty('overriddenDefaults', []);
@@ -35,32 +33,28 @@ abstract class AbstractRealConfigTestCase extends TestCase
         self::setStaticConfigProperty('configData', []);
         self::setStaticConfigProperty('configDataFile', '');
 
-    }//end setConfigStatics()
+    }//end setUp()
 
 
     /**
      * Clean up after each finished test.
      *
-     * @after
-     *
      * @return void
      */
-    protected function clearArgv()
+    protected function tearDown(): void
     {
         $_SERVER['argv'] = [];
 
-    }//end clearArgv()
+    }//end tearDown()
 
 
     /**
      * Reset the static properties in the Config class to their true defaults to prevent this class
      * from influencing other tests.
      *
-     * @afterClass
-     *
      * @return void
      */
-    public static function resetConfigToDefaults()
+    public static function tearDownAfterClass(): void
     {
         self::setStaticConfigProperty('overriddenDefaults', []);
         self::setStaticConfigProperty('executablePaths', []);
@@ -68,7 +62,7 @@ abstract class AbstractRealConfigTestCase extends TestCase
         self::setStaticConfigProperty('configDataFile', null);
         $_SERVER['argv'] = [];
 
-    }//end resetConfigToDefaults()
+    }//end tearDownAfterClass()
 
 
     /**

@@ -123,11 +123,9 @@ final class GetConditionTest extends AbstractMethodUnitTest
      * Retrieves the test tokens and marker token stack pointer positions
      * only once and caches them as they won't change between the tests anyway.
      *
-     * @before
-     *
      * @return void
      */
-    protected function setUpCaches()
+    protected function setUp(): void
     {
         if (empty(self::$testTokens) === true) {
             foreach (self::$testTargets as $targetToken => $marker) {
@@ -141,7 +139,7 @@ final class GetConditionTest extends AbstractMethodUnitTest
             }
         }
 
-    }//end setUpCaches()
+    }//end setUp()
 
 
     /**

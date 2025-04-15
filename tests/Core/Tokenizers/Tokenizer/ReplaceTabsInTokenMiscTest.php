@@ -44,7 +44,7 @@ EOD;
         $target = $phpcsFile->findNext(T_WHITESPACE, 0);
 
         // Verify initial state.
-        $this->assertTrue(is_int($target), 'Target token was not found');
+        $this->assertIsInt($target, 'Target token was not found');
         $this->assertSame('		', $tokens[$target]['content'], 'Content after initial parsing does not contain tabs');
         $this->assertSame(2, $tokens[$target]['length'], 'Length after initial parsing is not as expected');
         $this->assertArrayNotHasKey('orig_content', $tokens[$target], "Key 'orig_content' found in the initial token array.");
@@ -82,7 +82,7 @@ EOD;
         $tokens = $phpcsFile->getTokens();
         $target = $phpcsFile->findNext(T_CONSTANT_ENCAPSED_STRING, 0);
 
-        $this->assertTrue(is_int($target), 'Target token was not found');
+        $this->assertIsInt($target, 'Target token was not found');
         $this->assertSame("'пасха     пасха'", $tokens[$target]['content'], 'Content is not as expected');
         $this->assertSame(17, $tokens[$target]['length'], 'Length is not as expected');
         $this->assertArrayHasKey('orig_content', $tokens[$target], "Key 'orig_content' not found in the token array.");
@@ -114,7 +114,7 @@ EOD;
         $tokens = $phpcsFile->getTokens();
         $target = $phpcsFile->findNext(T_CONSTANT_ENCAPSED_STRING, 0);
 
-        $this->assertTrue(is_int($target), 'Target token was not found');
+        $this->assertIsInt($target, 'Target token was not found');
         $this->assertSame(11, $tokens[$target]['length'], 'Length is not as expected');
         $this->assertArrayHasKey('orig_content', $tokens[$target], "Key 'orig_content' not found in the token array.");
 

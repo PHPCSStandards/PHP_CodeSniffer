@@ -35,11 +35,9 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
     /**
      * Initialize the config and ruleset objects for this test only once (but do allow recording code coverage).
      *
-     * @before
-     *
      * @return void
      */
-    protected function initializeConfigAndRuleset()
+    protected function setUp(): void
     {
         if (isset(self::$ruleset) === false) {
             // Set up the ruleset.
@@ -48,7 +46,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
             self::$ruleset = new Ruleset($config);
         }
 
-    }//end initializeConfigAndRuleset()
+    }//end setUp()
 
 
     /**
@@ -85,7 +83,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
         $target = 'Fixtures\\TestStandard\\Sniffs\\ValidSniffs\\RegisterEmptyArraySniff';
 
         foreach (self::$ruleset->tokenListeners as $token => $listeners) {
-            $this->assertTrue(is_array($listeners), 'No listeners registered for token'.Tokens::tokenName($token));
+            $this->assertIsArray($listeners, 'No listeners registered for token'.Tokens::tokenName($token));
             $this->assertArrayNotHasKey(
                 $target,
                 $listeners,
@@ -174,7 +172,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
 
         // Only verify there is one deprecated sniff registered.
         // There are other tests which test the deprecated sniff handling in more detail.
-        $this->assertTrue(is_array($actualValue));
+        $this->assertIsArray($actualValue);
         $this->assertCount(1, $actualValue);
 
     }//end testRegistersWhenADeprecatedSniffIsLoaded()
@@ -263,7 +261,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
     public function testSetsClassAndSourceIndexes()
     {
         foreach (self::$ruleset->tokenListeners as $token => $listeners) {
-            $this->assertTrue(is_array($listeners), 'No listeners registered for token'.Tokens::tokenName($token));
+            $this->assertIsArray($listeners, 'No listeners registered for token'.Tokens::tokenName($token));
 
             foreach ($listeners as $className => $details) {
                 $this->assertArrayHasKey(
@@ -284,8 +282,8 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
                     sprintf('"source" key missing for sniff class %s for token %s', $className, Tokens::tokenName($token))
                 );
 
-                $this->assertTrue(
-                    is_string($details['source']),
+                $this->assertIsString(
+                    $details['source'],
                     sprintf('Value for "source" key is not a string for token %s', Tokens::tokenName($token))
                 );
 
@@ -312,7 +310,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
         $exclude = 'PHP_CodeSniffer\\Standards\\Generic\\Sniffs\\NamingConventions\\UpperCaseConstantNameSniff';
 
         foreach (self::$ruleset->tokenListeners as $token => $listeners) {
-            $this->assertTrue(is_array($listeners), 'No listeners registered for token'.Tokens::tokenName($token));
+            $this->assertIsArray($listeners, 'No listeners registered for token'.Tokens::tokenName($token));
 
             foreach ($listeners as $className => $details) {
                 if ($className === $exclude) {
@@ -347,7 +345,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
         $exclude = 'PHP_CodeSniffer\\Standards\\PSR1\\Sniffs\\Files\\SideEffectsSniff';
 
         foreach (self::$ruleset->tokenListeners as $token => $listeners) {
-            $this->assertTrue(is_array($listeners), 'No listeners registered for token'.Tokens::tokenName($token));
+            $this->assertIsArray($listeners, 'No listeners registered for token'.Tokens::tokenName($token));
 
             foreach ($listeners as $className => $details) {
                 if ($className === $exclude) {

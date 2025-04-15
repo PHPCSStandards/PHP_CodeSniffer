@@ -75,14 +75,8 @@ abstract class AbstractRulesetTestCase extends TestCase
      */
     protected function expectRuntimeExceptionMessage($message)
     {
-        if (method_exists($this, 'expectException') === true) {
-            // PHPUnit 5+.
-            $this->expectException(self::RUNTIME_EXCEPTION);
-            $this->expectExceptionMessage($message);
-        } else {
-            // PHPUnit 4.
-            $this->setExpectedException(self::RUNTIME_EXCEPTION, $message);
-        }
+        $this->expectException(self::RUNTIME_EXCEPTION);
+        $this->expectExceptionMessage($message);
 
     }//end expectRuntimeExceptionMessage()
 
@@ -100,13 +94,10 @@ abstract class AbstractRulesetTestCase extends TestCase
         if (method_exists($this, 'expectExceptionMessageMatches') === true) {
             $this->expectException(self::RUNTIME_EXCEPTION);
             $this->expectExceptionMessageMatches($regex);
-        } else if (method_exists($this, 'expectExceptionMessageRegExp') === true) {
+        } else {
             // PHPUnit < 8.4.0.
             $this->expectException(self::RUNTIME_EXCEPTION);
             $this->expectExceptionMessageRegExp($regex);
-        } else {
-            // PHPUnit < 5.2.0.
-            $this->setExpectedExceptionRegExp(self::RUNTIME_EXCEPTION, $regex);
         }
 
     }//end expectRuntimeExceptionRegex()

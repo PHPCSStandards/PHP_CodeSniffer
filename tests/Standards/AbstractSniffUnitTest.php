@@ -51,17 +51,15 @@ abstract class AbstractSniffUnitTest extends TestCase
     /**
      * Sets up this unit test.
      *
-     * @before
-     *
      * @return void
      */
-    protected function setUpPrerequisites()
+    protected function setUp(): void
     {
         $class = get_class($this);
         $this->standardsDir = $GLOBALS['PHP_CODESNIFFER_STANDARD_DIRS'][$class];
         $this->testsDir     = $GLOBALS['PHP_CODESNIFFER_TEST_DIRS'][$class];
 
-    }//end setUpPrerequisites()
+    }//end setUp()
 
 
     /**

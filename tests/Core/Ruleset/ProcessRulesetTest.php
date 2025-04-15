@@ -159,13 +159,13 @@ final class ProcessRulesetTest extends TestCase
 
         $sniffCode = 'Generic.PHP.RequireStrictTypes';
         $this->assertArrayHasKey($sniffCode, $ruleset->ruleset, "Sniff $sniffCode not registered");
-        $this->assertTrue(is_array($ruleset->ruleset[$sniffCode]), "Sniff $sniffCode is not an array");
+        $this->assertIsArray($ruleset->ruleset[$sniffCode], "Sniff $sniffCode is not an array");
         $this->assertArrayHasKey($key, $ruleset->ruleset[$sniffCode], "Directive $key not registered for sniff $sniffCode");
         $this->assertSame(0, $ruleset->ruleset[$sniffCode][$key], "$key has unexpected value for sniff $sniffCode");
 
         $sniffCode = 'Generic.PHP.RequireStrictTypes.MissingDeclaration';
         $this->assertArrayHasKey($sniffCode, $ruleset->ruleset, "Sniff $sniffCode not registered");
-        $this->assertTrue(is_array($ruleset->ruleset[$sniffCode]), "Sniff $sniffCode is not an array");
+        $this->assertIsArray($ruleset->ruleset[$sniffCode], "Sniff $sniffCode is not an array");
         $this->assertArrayHasKey($key, $ruleset->ruleset[$sniffCode], "Directive $key not registered for sniff $sniffCode");
         $this->assertSame(5, $ruleset->ruleset[$sniffCode][$key], "$key has unexpected value for sniff $sniffCode");
 
@@ -187,19 +187,19 @@ final class ProcessRulesetTest extends TestCase
 
         $sniffCode = 'PEAR.Files.IncludingFile';
         $this->assertArrayHasKey($sniffCode, $ruleset->ruleset, "Sniff $sniffCode not registered");
-        $this->assertTrue(is_array($ruleset->ruleset[$sniffCode]), "Sniff $sniffCode is not an array");
+        $this->assertIsArray($ruleset->ruleset[$sniffCode], "Sniff $sniffCode is not an array");
         $this->assertArrayHasKey($key, $ruleset->ruleset[$sniffCode], "Directive $key not registered for sniff $sniffCode");
         $this->assertSame(0, $ruleset->ruleset[$sniffCode][$key], "$key has unexpected value for sniff $sniffCode");
 
         $sniffCode = 'PEAR.Files.IncludingFile.BracketsNotRequired';
         $this->assertArrayHasKey($sniffCode, $ruleset->ruleset, "Sniff $sniffCode not registered");
-        $this->assertTrue(is_array($ruleset->ruleset[$sniffCode]), "Sniff $sniffCode is not an array");
+        $this->assertIsArray($ruleset->ruleset[$sniffCode], "Sniff $sniffCode is not an array");
         $this->assertArrayHasKey($key, $ruleset->ruleset[$sniffCode], "Directive $key not registered for sniff $sniffCode");
         $this->assertSame(5, $ruleset->ruleset[$sniffCode][$key], "$key has unexpected value for sniff $sniffCode");
 
         $sniffCode = 'PEAR.Files.IncludingFile.UseRequire';
         $this->assertArrayHasKey($sniffCode, $ruleset->ruleset, "Sniff $sniffCode not registered");
-        $this->assertTrue(is_array($ruleset->ruleset[$sniffCode]), "Sniff $sniffCode is not an array");
+        $this->assertIsArray($ruleset->ruleset[$sniffCode], "Sniff $sniffCode is not an array");
         $this->assertArrayHasKey($key, $ruleset->ruleset[$sniffCode], "Directive $key not registered for sniff $sniffCode");
         $this->assertSame(5, $ruleset->ruleset[$sniffCode][$key], "$key has unexpected value for sniff $sniffCode");
 

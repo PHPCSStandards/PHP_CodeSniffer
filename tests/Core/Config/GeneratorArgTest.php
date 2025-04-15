@@ -112,14 +112,8 @@ final class GeneratorArgTest extends TestCase
         $exception = 'PHP_CodeSniffer\Exceptions\DeepExitException';
         $message   = 'ERROR: "'.$generatorName.'" is not a valid generator. The following generators are supported: Text, HTML and Markdown.';
 
-        if (method_exists($this, 'expectException') === true) {
-            // PHPUnit 5+.
-            $this->expectException($exception);
-            $this->expectExceptionMessage($message);
-        } else {
-            // PHPUnit 4.
-            $this->setExpectedException($exception, $message);
-        }
+        $this->expectException($exception);
+        $this->expectExceptionMessage($message);
 
         new ConfigDouble(["--generator={$generatorName}"]);
 

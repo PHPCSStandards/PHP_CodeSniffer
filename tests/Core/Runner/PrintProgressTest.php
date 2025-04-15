@@ -54,11 +54,9 @@ final class PrintProgressTest extends TestCase
     /**
      * Create some re-usable objects for use in the tests.
      *
-     * @beforeClass
-     *
      * @return void
      */
-    public static function initializeConfigRulesetRunner()
+    public static function setUpBeforeClass(): void
     {
         self::$config            = new ConfigDouble(['-p']);
         self::$config->standards = ['Generic'];
@@ -73,32 +71,28 @@ final class PrintProgressTest extends TestCase
         self::$fileWithoutErrorsOrWarnings = new DummyFile($content, self::$ruleset, self::$config);
         self::$fileWithoutErrorsOrWarnings->process();
 
-    }//end initializeConfigRulesetRunner()
+    }//end setUpBeforeClass()
 
 
     /**
      * Reset some flags between tests.
      *
-     * @after
-     *
      * @return void
      */
-    protected function resetObjectFlags()
+    protected function tearDown(): void
     {
         self::$config->showProgress = true;
         self::$fileWithoutErrorsOrWarnings->ignored = false;
 
-    }//end resetObjectFlags()
+    }//end tearDown()
 
 
     /**
      * Destroy the Config object after the test to reset statics.
      *
-     * @afterClass
-     *
      * @return void
      */
-    public static function reset()
+    public static function tearDownAfterClass(): void
     {
         // Explicitly trigger __destruct() on the ConfigDouble to reset the Config statics.
         // The explicit method call prevents potential stray test-local references to the $config object
@@ -106,7 +100,7 @@ final class PrintProgressTest extends TestCase
         // automagically triggered when this object is destroyed, but we can't definitively rely on that).
         self::$config->__destruct();
 
-    }//end reset()
+    }//end tearDownAfterClass()
 
 
     /**

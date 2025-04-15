@@ -35,14 +35,8 @@ final class GetSniffCodeTest extends TestCase
         $exception = 'InvalidArgumentException';
         $message   = 'The $sniffClass parameter must be a non-empty string';
 
-        if (method_exists($this, 'expectException') === true) {
-            // PHPUnit 5+.
-            $this->expectException($exception);
-            $this->expectExceptionMessage($message);
-        } else {
-            // PHPUnit 4.
-            $this->setExpectedException($exception, $message);
-        }
+        $this->expectException($exception);
+        $this->expectExceptionMessage($message);
 
         Common::getSniffCode($input);
 
@@ -81,14 +75,8 @@ final class GetSniffCodeTest extends TestCase
         $exception = 'InvalidArgumentException';
         $message   = 'The $sniffClass parameter was not passed a fully qualified sniff(test) class name. Received:';
 
-        if (method_exists($this, 'expectException') === true) {
-            // PHPUnit 5+.
-            $this->expectException($exception);
-            $this->expectExceptionMessage($message);
-        } else {
-            // PHPUnit 4.
-            $this->setExpectedException($exception, $message);
-        }
+        $this->expectException($exception);
+        $this->expectExceptionMessage($message);
 
         Common::getSniffCode($input);
 
