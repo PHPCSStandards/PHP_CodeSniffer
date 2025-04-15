@@ -13,8 +13,17 @@
     forceCoversAnnotation="true"
     >
     <testsuites>
-        <testsuite name="PHP_CodeSniffer Test Suite">
-            <file>tests/AllTests.php</file>
+        <testsuite name="PHPCS_Core">
+            <directory>./tests/Core/</directory>
+        </testsuite>
+        <testsuite name="PHPCS_Sniffs">
+            <directory>./src/Standards/Generic/Tests/</directory>
+            <directory>./src/Standards/PEAR/Tests/</directory>
+            <directory>./src/Standards/PSR1/Tests/</directory>
+            <directory>./src/Standards/PSR2/Tests/</directory>
+            <directory>./src/Standards/PSR12/Tests/</directory>
+            <directory>./src/Standards/Squiz/Tests/</directory>
+            <directory>./src/Standards/Zend/Tests/</directory>
         </testsuite>
     </testsuites>
 

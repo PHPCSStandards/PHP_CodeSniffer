@@ -60,14 +60,14 @@ jobs:
 
       - name: 'PHPUnit: run the full test suite'
         if: ${{ matrix.os != 'windows-latest' }}
-        run: php "vendor/bin/phpunit" tests/AllTests.php --no-coverage
+        run: php "vendor/bin/phpunit" --no-coverage
 
       - name: 'PHPUnit: run tests which may have different outcomes on Windows'
         if: ${{ matrix.os == 'windows-latest' }}
-        run: php "vendor/bin/phpunit" tests/AllTests.php --group Windows --no-coverage
+        run: php "vendor/bin/phpunit" --group Windows --no-coverage
 
       - name: 'PHPUnit: run select tests in CBF mode'
-        run: php "vendor/bin/phpunit" tests/AllTests.php --group CBF --exclude-group nothing --no-coverage
+        run: php "vendor/bin/phpunit" --group CBF --exclude-group nothing --no-coverage
         env:
           PHP_CODESNIFFER_CBF: '1'
 
