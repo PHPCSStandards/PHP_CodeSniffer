@@ -16,6 +16,7 @@ on:
       - 'src/Exceptions/RuntimeException.php'
       - 'src/Exceptions/TokenizerException.php'
       - 'src/Tokenizers/PHP.php'
+      - 'src/Util/Timing.php'
       - 'src/Util/Tokens.php'
   pull_request:
     paths:
@@ -27,6 +28,7 @@ on:
       - 'src/Exceptions/RuntimeException.php'
       - 'src/Exceptions/TokenizerException.php'
       - 'src/Tokenizers/PHP.php'
+      - 'src/Util/Timing.php'
       - 'src/Util/Tokens.php'
 
   # Allow manually triggering the workflow.

@@ -17,6 +17,7 @@ use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Exceptions\TokenizerException;
 use PHP_CodeSniffer\Tokenizers\PHP;
+use PHP_CodeSniffer\Util\Timing;
 use PHP_CodeSniffer\Util\Tokens;
 
 error_reporting(E_ALL);
@@ -78,7 +79,7 @@ function stripWhitespaceAndComments($fullpath, $config)
 }//end stripWhitespaceAndComments()
 
 
-$startTime = microtime(true);
+Timing::startTiming();
 
 $scripts = [
     'phpcs',
@@ -170,14 +171,7 @@ foreach ($scripts as $script) {
     echo 'done'.PHP_EOL;
 }//end foreach
 
-$timeTaken = ((microtime(true) - $startTime) * 1000);
-if ($timeTaken < 1000) {
-    $timeTaken = round($timeTaken);
-    echo "DONE in {$timeTaken}ms".PHP_EOL;
-} else {
-    $timeTaken = round(($timeTaken / 1000), 2);
-    echo "DONE in $timeTaken secs".PHP_EOL;
-}
+Timing::printRunTime();
 
 echo PHP_EOL;
 echo 'Filesize generated phpcs.phar file: '.filesize(dirname(__DIR__).'/phpcs.phar').' bytes'.PHP_EOL;
