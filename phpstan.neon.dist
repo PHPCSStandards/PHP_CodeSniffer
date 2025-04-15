@@ -6,6 +6,14 @@ parameters:
     paths:
         - requirements.php
         - src
+    excludePaths:
+        - src/Standards/Generic/Tests/*
+        - src/Standards/PEAR/Tests/*
+        - src/Standards/PSR1/Tests/*
+        - src/Standards/PSR2/Tests/*
+        - src/Standards/PSR12/Tests/*
+        - src/Standards/Squiz/Tests/*
+        - src/Standards/Zend/Tests/*
     bootstrapFiles:
         - tests/bootstrap.php
 
