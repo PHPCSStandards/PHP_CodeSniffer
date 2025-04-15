@@ -86,14 +86,7 @@ final class ForLoopDeclarationUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList($testFile='')
     {
-        switch ($testFile) {
-        case 'ForLoopDeclarationUnitTest.2.inc':
-        case 'ForLoopDeclarationUnitTest.3.inc':
-            return [6 => 1];
-
-        default:
-            return [];
-        }//end switch
+        return [];
 
     }//end getWarningList()
 

@@ -78,17 +78,7 @@ final class ClosingDeclarationCommentUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList($testFile='')
     {
-        switch ($testFile) {
-        case 'ClosingDeclarationCommentUnitTest.1.inc':
-            return [71 => 1];
-
-        case 'ClosingDeclarationCommentUnitTest.2.inc':
-        case 'ClosingDeclarationCommentUnitTest.3.inc':
-            return [7 => 1];
-
-        default:
-            return [];
-        }
+        return [];
 
     }//end getWarningList()
 

@@ -47,7 +47,7 @@ class Test_Class_Bad_H extends Test_Class_Bad_G			{
 class Test_Class_Bad_I implements Test_Interface_Bad_C{
 }
 
-// This one should be flagged as a potential parse error.
+// This one should be ignored as a potential parse error.
 class Test_Class_Bad_H
 
 // This is OK.

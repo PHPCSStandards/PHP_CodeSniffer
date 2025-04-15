@@ -88,10 +88,6 @@ final class ClassDeclarationUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList($testFile='')
     {
-        if ($testFile === 'ClassDeclarationUnitTest.2.inc') {
-            return [11 => 1];
-        }
-
         return[];
 
     }//end getWarningList()
