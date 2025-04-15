@@ -140,18 +140,17 @@ final class RegisterSniffsTest extends TestCase
     /**
      * Test that if only specific sniffs are requested, only those are registered.
      *
-     * {@internal Can't test this via the CLI arguments due to some code in the Ruleset class
-     * related to sniff tests.}
-     *
      * @return void
      */
     public function testRegisteredSniffsWithRestrictions()
     {
-        $restrictions = [
-            'psr1\\sniffs\\classes\\classdeclarationsniff'    => true,
-            'psr1\\sniffs\\files\\sideeffectssniff'           => true,
-            'psr1\\sniffs\\methods\\camelcapsmethodnamesniff' => true,
+        // Set up the ruleset.
+        $args    = [
+            '--standard=PSR1',
+            '--sniffs=PSR1.Classes.ClassDeclaration,PSR1.Files.SideEffects,PSR1.Methods.CamelCapsMethodName',
         ];
+        $config  = new ConfigDouble($args);
+        $ruleset = new Ruleset($config);
 
         $expected = [
             'PHP_CodeSniffer\\Standards\\PSR1\\Sniffs\\Classes\\ClassDeclarationSniff',
@@ -159,9 +158,10 @@ final class RegisterSniffsTest extends TestCase
             'PHP_CodeSniffer\\Standards\\PSR1\\Sniffs\\Methods\\CamelCapsMethodNameSniff',
         ];
 
-        self::$ruleset->registerSniffs(self::$psr1SniffAbsolutePaths, $restrictions, []);
+        $actual = array_keys($ruleset->sniffs);
+        sort($actual);
 
-        $this->assertSame($expected, array_keys(self::$ruleset->sniffs));
+        $this->assertSame($expected, $actual);
 
     }//end testRegisteredSniffsWithRestrictions()
 

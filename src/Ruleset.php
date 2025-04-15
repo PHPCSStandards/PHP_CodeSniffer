@@ -201,22 +201,6 @@ class Ruleset
                 Autoload::addSearchPath(dirname($standard), $namespace);
             }
 
-            if (defined('PHP_CODESNIFFER_IN_TESTS') === true && empty($restrictions) === false) {
-                // In unit tests, only register the sniffs that the test wants and not the entire standard.
-                foreach ($restrictions as $restriction) {
-                    $sniffs = array_merge($sniffs, $this->expandRulesetReference($restriction, dirname($standard)));
-                }
-
-                if (empty($sniffs) === true) {
-                    // Sniff reference could not be expanded, which probably means this
-                    // is an installed standard. Let the unit test system take care of
-                    // setting the correct sniff for testing.
-                    return;
-                }
-
-                break;
-            }
-
             if (PHP_CODESNIFFER_VERBOSITY === 1) {
                 echo "Registering sniffs in the $standardName standard... ";
                 if (count($config->standards) > 1 || PHP_CODESNIFFER_VERBOSITY > 2) {

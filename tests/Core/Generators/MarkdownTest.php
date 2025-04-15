@@ -94,16 +94,6 @@ final class MarkdownTest extends TestCase
         $config   = new ConfigDouble(["--standard=$standard", "--sniffs=$sniffs"]);
         $ruleset  = new Ruleset($config);
 
-        // In tests, the `--sniffs` setting doesn't work out of the box.
-        $sniffParts = explode('.', $sniffs);
-        $sniffFile  = __DIR__.DIRECTORY_SEPARATOR.'Fixtures'.DIRECTORY_SEPARATOR.$sniffParts[0].DIRECTORY_SEPARATOR;
-        $sniffFile .= 'Sniffs'.DIRECTORY_SEPARATOR.$sniffParts[1].DIRECTORY_SEPARATOR.$sniffParts[2].'Sniff.php';
-
-        $sniffParts   = array_map('strtolower', $sniffParts);
-        $sniffName    = $sniffParts[0].'\sniffs\\'.$sniffParts[1].'\\'.$sniffParts[2].'sniff';
-        $restrictions = [$sniffName => true];
-        $ruleset->registerSniffs([$sniffFile], $restrictions, []);
-
         $expected = file_get_contents($pathToExpected);
         $this->assertNotFalse($expected, 'Output expectation file could not be found');
 
