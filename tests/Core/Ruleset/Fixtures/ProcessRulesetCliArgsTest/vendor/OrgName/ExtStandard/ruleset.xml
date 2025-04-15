@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="ProcessRulesetCliArgsTest" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/PHPCSStandards/PHP_CodeSniffer/master/phpcs.xsd">
+
+    <!-- Issue squizlabs/PHP_CodeSniffer#2395. -->
+    <arg name="warning-severity" value="3"/>
+    <arg value="p"/>
+
+    <!-- Paths must be resolved based on the ruleset location which included the directive. -->
+    <arg name="bootstrap" value="./bootstrap.php"/>
+
+    <!-- Miscellaneous other settings. -->
+    <arg name="parallel" value="2"/>
+    <arg name="report" value="code,summary"/>
+
+</ruleset>

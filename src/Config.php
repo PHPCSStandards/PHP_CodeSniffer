@@ -105,6 +105,23 @@ class Config
     const DEFAULT_REPORT_WIDTH = 80;
 
     /**
+     * Translation table for config settings which can be changed via multiple CLI flags.
+     *
+     * If the flag name matches the setting name, there is no need to add it to this translation table.
+     * Similarly, if there is only one flag which can change a setting, there is no need to include
+     * it in this table, even if the flag name and the setting name don't match.
+     *
+     * @var array<string, string> Key is the CLI flag name, value the corresponding config setting name.
+     */
+    public const CLI_FLAGS_TO_SETTING_NAME = [
+        'n'                => 'warningSeverity',
+        'w'                => 'warningSeverity',
+        'warning-severity' => 'warningSeverity',
+        'no-colors'        => 'colors',
+        'no-cache'         => 'cache',
+    ];
+
+    /**
      * An array of settings that PHPCS and PHPCBF accept.
      *
      * This array is not meant to be accessed directly. Instead, use the settings

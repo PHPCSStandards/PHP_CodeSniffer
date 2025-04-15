@@ -132,6 +132,14 @@ class Ruleset
     private $configDirectivesApplied = [];
 
     /**
+     * The `<arg>` directives which have been applied.
+     *
+     * @var array<string, int> Key is the name of the setting. Value is the ruleset depth
+     *                         at which this setting was applied (if not overruled from the CLI).
+     */
+    private $cliSettingsApplied = [];
+
+    /**
      * An array of the names of sniffs which have been marked as deprecated.
      *
      * The key is the sniff code and the value
@@ -613,6 +621,92 @@ class Ruleset
             }
         }//end foreach
 
+        // Process custom command line arguments.
+        // Processing rules:
+        // - Highest level ruleset take precedence.
+        // - If the same CLI flag is being set from two rulesets at the same level, *first* one "wins".
+        $cliArgs = [];
+        foreach ($ruleset->{'arg'} as $arg) {
+            if ($this->shouldProcessElement($arg) === false) {
+                continue;
+            }
+
+            // "Long" CLI argument. Arg is in the format `<arg name="name" [value="value"]/>`.
+            if (isset($arg['name']) === true) {
+                $name           = (string) $arg['name'];
+                $cliSettingName = $name;
+                if (isset($this->config::CLI_FLAGS_TO_SETTING_NAME[$name]) === true) {
+                    $cliSettingName = $this->config::CLI_FLAGS_TO_SETTING_NAME[$name];
+                }
+
+                if (isset($this->cliSettingsApplied[$cliSettingName]) === true
+                    && $this->cliSettingsApplied[$cliSettingName] < $depth
+                ) {
+                    // Ignore this CLI flag. A higher level ruleset has already set a value for this setting.
+                    if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                        $statusMessage  = str_repeat("\t", $depth);
+                        $statusMessage .= "\t=> ignoring command line arg --".$name;
+                        if (isset($arg['value']) === true) {
+                            $statusMessage .= '='.(string) $arg['value'];
+                        }
+
+                        echo $statusMessage.' => already changed by a higher level ruleset '.PHP_EOL;
+                    }
+
+                    continue;
+                }
+
+                // Remember which settings we've seen.
+                $this->cliSettingsApplied[$cliSettingName] = $depth;
+
+                $argString = '--'.$name;
+                if (isset($arg['value']) === true) {
+                    $argString .= '='.(string) $arg['value'];
+                }
+            } else {
+                // "Short" CLI flag. Arg is in the format `<arg value="value"/>` and
+                // value can contain multiple flags, like `<arg value="ps"/>`.
+                $cleanedValue    = '';
+                $cliFlagsAsArray = str_split((string) $arg['value']);
+                foreach ($cliFlagsAsArray as $flag) {
+                    $cliSettingName = $flag;
+                    if (isset($this->config::CLI_FLAGS_TO_SETTING_NAME[$flag]) === true) {
+                        $cliSettingName = $this->config::CLI_FLAGS_TO_SETTING_NAME[$flag];
+                    }
+
+                    if (isset($this->cliSettingsApplied[$cliSettingName]) === true
+                        && $this->cliSettingsApplied[$cliSettingName] < $depth
+                    ) {
+                        // Ignore this CLI flag. A higher level ruleset has already set a value for this setting.
+                        if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                            echo str_repeat("\t", $depth);
+                            echo "\t=> ignoring command line flag -".$flag.' => already changed by a higher level ruleset '.PHP_EOL;
+                        }
+
+                        continue;
+                    }
+
+                    // Remember which settings we've seen.
+                    $cleanedValue .= $flag;
+                    $this->cliSettingsApplied[$cliSettingName] = $depth;
+                }//end foreach
+
+                if ($cleanedValue === '') {
+                    // No flags found which should be applied.
+                    continue;
+                }
+
+                $argString = '-'.$cleanedValue;
+            }//end if
+
+            $cliArgs[] = $argString;
+
+            if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                echo str_repeat("\t", $depth);
+                echo "\t=> set command line value $argString".PHP_EOL;
+            }
+        }//end foreach
+
         foreach ($ruleset->rule as $rule) {
             if (isset($rule['ref']) === false
                 || $this->shouldProcessElement($rule) === false
@@ -704,30 +798,6 @@ class Ruleset
             }//end if
 
             $this->processRule($rule, $newSniffs, $depth);
-        }//end foreach
-
-        // Process custom command line arguments.
-        $cliArgs = [];
-        foreach ($ruleset->{'arg'} as $arg) {
-            if ($this->shouldProcessElement($arg) === false) {
-                continue;
-            }
-
-            if (isset($arg['name']) === true) {
-                $argString = '--'.(string) $arg['name'];
-                if (isset($arg['value']) === true) {
-                    $argString .= '='.(string) $arg['value'];
-                }
-            } else {
-                $argString = '-'.(string) $arg['value'];
-            }
-
-            $cliArgs[] = $argString;
-
-            if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                echo str_repeat("\t", $depth);
-                echo "\t=> set command line value $argString".PHP_EOL;
-            }
         }//end foreach
 
         // Set custom php ini values as CLI args.
