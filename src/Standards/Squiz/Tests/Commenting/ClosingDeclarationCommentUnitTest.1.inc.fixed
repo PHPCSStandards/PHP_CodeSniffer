@@ -68,7 +68,7 @@ interface TestClass
 
 class MyClass
 {
-    public function myFunction();
+    public function parseErrorMustBeIgnored();
 }//end class
 
 // Closures don't need end comments.
