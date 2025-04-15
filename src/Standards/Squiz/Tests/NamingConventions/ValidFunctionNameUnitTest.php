@@ -26,22 +26,30 @@ final class ValidFunctionNameUnitTest extends AbstractSniffTestCase
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the test file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile='')
     {
-        return [
-            4  => 1,
-            5  => 1,
-            6  => 1,
-            7  => 1,
-            8  => 1,
-            9  => 1,
-            11 => 1,
-            12 => 1,
-            13 => 1,
-            14 => 2,
-        ];
+        switch ($testFile) {
+        case 'ValidFunctionNameUnitTest.1.inc':
+            return [
+                4  => 1,
+                5  => 1,
+                6  => 1,
+                7  => 1,
+                8  => 1,
+                9  => 1,
+                11 => 1,
+                12 => 1,
+                13 => 1,
+                14 => 2,
+            ];
+
+        default:
+            return [];
+        }//end switch
 
     }//end getErrorList()
 

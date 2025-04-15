@@ -40,8 +40,8 @@ class CamelCapsMethodNameSniff extends GenericCamelCapsFunctionNameSniff
         }
 
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($methodName === null) {
-            // Ignore closures.
+        if ($methodName === '') {
+            // Ignore live coding.
             return;
         }
 
@@ -58,9 +58,9 @@ class CamelCapsMethodNameSniff extends GenericCamelCapsFunctionNameSniff
         $testName = ltrim($methodName, '_');
         if ($testName !== '' &&  Common::isCamelCaps($testName, false, true, false) === false) {
             $error     = 'Method name "%s" is not in camel caps format';
-            $className = $phpcsFile->getDeclarationName($currScope);
-            if (isset($className) === false) {
-                $className = '[Anonymous Class]';
+            $className = '[Anonymous Class]';
+            if ($tokens[$currScope]['code'] !== T_ANON_CLASS) {
+                $className = $phpcsFile->getDeclarationName($currScope);
             }
 
             $errorData = [$className.'::'.$methodName];

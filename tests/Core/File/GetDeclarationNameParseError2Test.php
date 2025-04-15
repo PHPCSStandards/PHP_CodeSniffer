@@ -21,17 +21,17 @@ final class GetDeclarationNameParseError2Test extends AbstractMethodTestCase
 
 
     /**
-     * Test receiving "null" in case of a parse error.
+     * Test receiving an empty string in case of a parse error.
      *
      * @return void
      */
-    public function testGetDeclarationNameNull()
+    public function testGetDeclarationName()
     {
         $target = $this->getTargetToken('/* testLiveCoding */', T_FUNCTION);
         $result = self::$phpcsFile->getDeclarationName($target);
-        $this->assertNull($result);
+        $this->assertSame('', $result);
 
-    }//end testGetDeclarationNameNull()
+    }//end testGetDeclarationName()
 
 
 }//end class

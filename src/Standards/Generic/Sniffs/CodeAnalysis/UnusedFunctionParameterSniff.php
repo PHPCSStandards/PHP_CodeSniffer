@@ -99,12 +99,10 @@ class UnusedFunctionParameterSniff implements Sniff
             $classPtr = $phpcsFile->getCondition($stackPtr, T_CLASS);
             if ($classPtr !== false) {
                 // Check for magic methods and ignore these as the method signature cannot be changed.
-                $methodName = $phpcsFile->getDeclarationName($stackPtr);
-                if (empty($methodName) === false) {
-                    $methodNameLc = strtolower($methodName);
-                    if (isset($this->magicMethods[$methodNameLc]) === true) {
-                        return;
-                    }
+                $methodName   = $phpcsFile->getDeclarationName($stackPtr);
+                $methodNameLc = strtolower($methodName);
+                if (isset($this->magicMethods[$methodNameLc]) === true) {
+                    return;
                 }
 
                 // Check for extends/implements and adjust the error code when found.

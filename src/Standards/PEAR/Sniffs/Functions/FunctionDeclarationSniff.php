@@ -94,47 +94,49 @@ class FunctionDeclarationSniff implements Sniff
         // and the opening parenthesis.
         // Unfinished closures are tokenized as T_FUNCTION however, and can be excluded
         // by checking if the function has a name.
-        $methodProps = $phpcsFile->getMethodProperties($stackPtr);
-        $methodName  = $phpcsFile->getDeclarationName($stackPtr);
-        if ($tokens[$stackPtr]['code'] === T_FUNCTION && $methodName !== null) {
-            if ($tokens[($openBracket - 1)]['content'] === $phpcsFile->eolChar) {
-                $spaces = 'newline';
-            } else if ($tokens[($openBracket - 1)]['code'] === T_WHITESPACE) {
-                $spaces = $tokens[($openBracket - 1)]['length'];
-            } else {
-                $spaces = 0;
-            }
-
-            if ($spaces !== 0) {
-                $error = 'Expected 0 spaces before opening parenthesis; %s found';
-                $data  = [$spaces];
-                $fix   = $phpcsFile->addFixableError($error, $openBracket, 'SpaceBeforeOpenParen', $data);
-                if ($fix === true) {
-                    $phpcsFile->fixer->replaceToken(($openBracket - 1), '');
+        if ($tokens[$stackPtr]['code'] === T_FUNCTION) {
+            $methodProps = $phpcsFile->getMethodProperties($stackPtr);
+            $methodName  = $phpcsFile->getDeclarationName($stackPtr);
+            if ($methodName !== '') {
+                if ($tokens[($openBracket - 1)]['content'] === $phpcsFile->eolChar) {
+                    $spaces = 'newline';
+                } else if ($tokens[($openBracket - 1)]['code'] === T_WHITESPACE) {
+                    $spaces = $tokens[($openBracket - 1)]['length'];
+                } else {
+                    $spaces = 0;
                 }
-            }
 
-            // Must be no space before semicolon in abstract/interface methods.
-            if ($methodProps['has_body'] === false) {
-                $end = $phpcsFile->findNext(T_SEMICOLON, $closeBracket);
-                if ($end !== false) {
-                    if ($tokens[($end - 1)]['content'] === $phpcsFile->eolChar) {
-                        $spaces = 'newline';
-                    } else if ($tokens[($end - 1)]['code'] === T_WHITESPACE) {
-                        $spaces = $tokens[($end - 1)]['length'];
-                    } else {
-                        $spaces = 0;
+                if ($spaces !== 0) {
+                    $error = 'Expected 0 spaces before opening parenthesis; %s found';
+                    $data  = [$spaces];
+                    $fix   = $phpcsFile->addFixableError($error, $openBracket, 'SpaceBeforeOpenParen', $data);
+                    if ($fix === true) {
+                        $phpcsFile->fixer->replaceToken(($openBracket - 1), '');
                     }
+                }
 
-                    if ($spaces !== 0) {
-                        $error = 'Expected 0 spaces before semicolon; %s found';
-                        $data  = [$spaces];
-                        $fix   = $phpcsFile->addFixableError($error, $end, 'SpaceBeforeSemicolon', $data);
-                        if ($fix === true) {
-                            $phpcsFile->fixer->replaceToken(($end - 1), '');
+                // Must be no space before semicolon in abstract/interface methods.
+                if ($methodProps['has_body'] === false) {
+                    $end = $phpcsFile->findNext(T_SEMICOLON, $closeBracket);
+                    if ($end !== false) {
+                        if ($tokens[($end - 1)]['content'] === $phpcsFile->eolChar) {
+                            $spaces = 'newline';
+                        } else if ($tokens[($end - 1)]['code'] === T_WHITESPACE) {
+                            $spaces = $tokens[($end - 1)]['length'];
+                        } else {
+                            $spaces = 0;
+                        }
+
+                        if ($spaces !== 0) {
+                            $error = 'Expected 0 spaces before semicolon; %s found';
+                            $data  = [$spaces];
+                            $fix   = $phpcsFile->addFixableError($error, $end, 'SpaceBeforeSemicolon', $data);
+                            if ($fix === true) {
+                                $phpcsFile->fixer->replaceToken(($end - 1), '');
+                            }
                         }
                     }
-                }
+                }//end if
             }//end if
         }//end if
 

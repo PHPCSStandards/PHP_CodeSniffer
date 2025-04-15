@@ -39,7 +39,7 @@ class InterfaceNameSuffixSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $interfaceName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($interfaceName === null) {
+        if ($interfaceName === '') {
             // Live coding or parse error. Bow out.
             return;
         }

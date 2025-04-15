@@ -67,10 +67,9 @@ class ConstructorNameSniff extends AbstractScopeSniff
             return;
         }
 
-        $className = $phpcsFile->getDeclarationName($currScope);
-        if (empty($className) === false) {
-            // Not an anonymous class.
-            $className = strtolower($className);
+        $className = '[Anonymous Class]';
+        if ($tokens[$currScope]['code'] !== T_ANON_CLASS) {
+            $className = strtolower($phpcsFile->getDeclarationName($currScope));
         }
 
         if ($className !== $this->currentClass) {
@@ -79,7 +78,7 @@ class ConstructorNameSniff extends AbstractScopeSniff
         }
 
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($methodName === null) {
+        if ($methodName === '') {
             // Live coding or parse error. Bow out.
             return;
         }
@@ -170,7 +169,7 @@ class ConstructorNameSniff extends AbstractScopeSniff
             }
 
             $methodName = $phpcsFile->getDeclarationName($i);
-            if ($methodName === null) {
+            if ($methodName === '') {
                 // Live coding or parse error. Ignore.
                 continue;
             }
