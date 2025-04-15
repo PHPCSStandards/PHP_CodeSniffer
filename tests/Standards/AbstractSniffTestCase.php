@@ -159,6 +159,9 @@ TEMPLATE;
 
         // Get a list of all test files to check.
         $testFiles = $this->getTestFiles($testFileBase);
+        if (empty($testFiles) === true) {
+            $this->markTestIncomplete('No test case files found for '.static::class);
+        }
 
         $sniffFile = preg_replace('`[/\\\\]Tests[/\\\\]`', DIRECTORY_SEPARATOR.'Sniffs'.DIRECTORY_SEPARATOR, $testFileBase);
         $sniffFile = str_replace('UnitTest.', 'Sniff.php', $sniffFile);
