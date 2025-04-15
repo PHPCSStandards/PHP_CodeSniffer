@@ -19,6 +19,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \PHP_CodeSniffer\Ruleset::processRule
  * @covers \PHP_CodeSniffer\Ruleset::setSniffProperty
+ * @covers \PHP_CodeSniffer\Ruleset::getRealPropertyValue
  */
 final class PropertyTypeHandlingTest extends TestCase
 {
@@ -91,17 +92,17 @@ final class PropertyTypeHandlingTest extends TestCase
             'string',
             '10',
             '1.5',
-            'null',
-            'true',
-            'false',
+            null,
+            true,
+            false,
         ];
         $expectedArrayKeysAndValues = [
             'string' => 'string',
             10       => '10',
             'float'  => '1.5',
-            'null'   => 'null',
-            'true'   => 'true',
-            'false'  => 'false',
+            'null'   => null,
+            'true'   => true,
+            'false'  => false,
         ];
 
         return [
@@ -125,13 +126,17 @@ final class PropertyTypeHandlingTest extends TestCase
                 'propertyName' => 'expectsFloatButAcceptsString',
                 'expected'     => '12.345',
             ],
-            'Null value gets set as string'                  => [
+            'Null value gets set as null'                    => [
                 'propertyName' => 'expectsNull',
-                'expected'     => 'null',
+                'expected'     => null,
             ],
-            'Null (uppercase) value gets set as string'      => [
+            'Null (uppercase) value gets set as null'        => [
                 'propertyName' => 'expectsNullCase',
-                'expected'     => 'NULL',
+                'expected'     => null,
+            ],
+            'Null (with spaces) value gets set as null'      => [
+                'propertyName' => 'expectsNullTrimmed',
+                'expected'     => null,
             ],
             'True value gets set as boolean'                 => [
                 'propertyName' => 'expectsBooleanTrue',
@@ -139,7 +144,7 @@ final class PropertyTypeHandlingTest extends TestCase
             ],
             'True (mixed case) value gets set as string'     => [
                 'propertyName' => 'expectsBooleanTrueCase',
-                'expected'     => 'True',
+                'expected'     => true,
             ],
             'True (with spaces) value gets set as boolean'   => [
                 'propertyName' => 'expectsBooleanTrueTrimmed',
@@ -151,7 +156,7 @@ final class PropertyTypeHandlingTest extends TestCase
             ],
             'False (mixed case) value gets set as string'    => [
                 'propertyName' => 'expectsBooleanFalseCase',
-                'expected'     => 'fALSe',
+                'expected'     => false,
             ],
             'False (with spaces) value gets set as boolean'  => [
                 'propertyName' => 'expectsBooleanFalseTrimmed',
