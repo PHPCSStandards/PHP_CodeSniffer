@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions;
 
+use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
 use PHP_CodeSniffer\Util\Common;
@@ -114,18 +115,15 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      */
     protected function processMemberVar(File $phpcsFile, $stackPtr)
     {
-        $tokens = $phpcsFile->getTokens();
-
-        $varName     = ltrim($tokens[$stackPtr]['content'], '$');
-        $memberProps = $phpcsFile->getMemberProperties($stackPtr);
-        if (empty($memberProps) === true) {
-            // Couldn't get any info about this variable, which
-            // generally means it is invalid or possibly has a parse
-            // error. Any errors will be reported by the core, so
-            // we can ignore it.
+        try {
+            $memberProps = $phpcsFile->getMemberProperties($stackPtr);
+        } catch (RuntimeException $e) {
+            // Parse error: property in enum. Ignore.
             return;
         }
 
+        $tokens    = $phpcsFile->getTokens();
+        $varName   = ltrim($tokens[$stackPtr]['content'], '$');
         $public    = ($memberProps['scope'] !== 'private');
         $errorData = [$varName];
 

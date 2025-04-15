@@ -609,9 +609,19 @@ final class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            'invalid-property-in-interface'                                => [
+            'property-in-interface'                                        => [
                 'identifier' => '/* testInterfaceProperty */',
-                'expected'   => [],
+                'expected'   => [
+                    'scope'           => 'protected',
+                    'scope_specified' => true,
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'is_final'        => false,
+                    'type'            => '',
+                    'type_token'      => false,
+                    'type_end_token'  => false,
+                    'nullable_type'   => false,
+                ],
             ],
             'property-in-nested-class-1'                                   => [
                 'identifier' => '/* testNestedProperty 1 */',
@@ -1006,10 +1016,6 @@ final class GetMemberPropertiesTest extends AbstractMethodUnitTest
                     'nullable_type'   => false,
                 ],
             ],
-            'invalid-property-in-enum'                                     => [
-                'identifier' => '/* testEnumProperty */',
-                'expected'   => [],
-            ],
             'php8.1-single-intersection-type'                              => [
                 'identifier' => '/* testPHP81IntersectionTypes */',
                 'expected'   => [
@@ -1375,6 +1381,7 @@ final class GetMemberPropertiesTest extends AbstractMethodUnitTest
             'method parameter in anon class nested in ternary'       => ['/* testNestedMethodParam 1 */'],
             'method parameter in anon class nested in function call' => ['/* testNestedMethodParam 2 */'],
             'method parameter in enum'                               => ['/* testEnumMethodParamNotProperty */'],
+            'property in enum (parse error)'                         => ['/* testEnumProperty */'],
         ];
 
     }//end dataNotClassProperty()

@@ -96,3 +96,8 @@ class FinalProperties {
     public FINAL ?int $wrongOrder1;
     static protected final ?string $wrongOrder2;
 }
+
+interface PHP84HookedProperty {
+    public $thisisfine { get; }
+    public $_underscore { get; }
+}

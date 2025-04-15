@@ -3,6 +3,7 @@ $varName  = 'hello';
 $var_name = 'hello';
 $varname  = 'hello';
 $_varName = 'hello';
+$varname2 = 'hello';
 
 class MyClass
 {
@@ -10,128 +11,102 @@ class MyClass
     $var_name = 'hello';
     $varname  = 'hello';
     $_varName = 'hello';
+    $varName2 = 'hello';
 
     public $varName  = 'hello';
-    public bool $var_name = false;
+    public $var_name = 'hello';
     public $varname  = 'hello';
     public $_varName = 'hello';
+    public $varName2 = 'hello';
 
-    protected $varName  = 'hello';
-    protected string $var_name = 'hello';
-    protected $varname  = 'hello';
-    protected ?string $_varName = 'hello';
+    protected $_varName  = 'hello';
+    protected $_var_name = 'hello';
+    protected $_varname  = 'hello';
+    protected $varName   = 'hello';
+    protected $_varName2 = 'hello';
 
     private $_varName  = 'hello';
     private $_var_name = 'hello';
-    private int $_varname  = 1;
+    private $_varname  = 'hello';
     private $varName   = 'hello';
+    private $_varName2 = 'hello';
 }
 
 echo $varName;
 echo $var_name;
 echo $varname;
 echo $_varName;
+echo $varName2;
 
 echo "Hello $varName";
 echo "Hello $var_name";
-echo "Hello ${var_name}";
 echo "Hello $varname";
 echo "Hello $_varName";
+echo "Hello $varName2";
 
 echo 'Hello '.$varName;
 echo 'Hello '.$var_name;
 echo 'Hello '.$varname;
 echo 'Hello '.$_varName;
+echo 'Hello '.$varName2;
 
 echo $_SERVER['var_name'];
 echo $_REQUEST['var_name'];
 echo $_GET['var_name'];
 echo $_POST['var_name'];
 echo $GLOBALS['var_name'];
+echo $GLOBALS['var_name2'];
 
 echo MyClass::$varName;
 echo MyClass::$var_name;
 echo MyClass::$varname;
 echo MyClass::$_varName;
+echo MyClass::$varName2;
 
+echo $this->varName;
+echo $this->var_name;
+echo $this->varname;
+echo $this->_varName;
 echo $this->varName2;
-echo $this->var_name2;
-echo $this->varname2;
-echo $this->_varName2;
+echo $object->varName;
+echo $object->var_name;
 echo $object->varName2;
-echo $object->var_name2;
-echo $object_name->varname2;
-echo $object_name->_varName2;
+echo $object_name->varname;
+echo $object_name->_varName;
+echo $object_name->varName2;
 
 echo $this->myFunction($one, $two);
-echo $object->myFunction($one_two);
+echo $object->myFunction($one_two, $var2);
 
 $error = "format is \$GLOBALS['$varName']";
+$error = "format is \$GLOBALS['$varName2']";
 
 echo $_SESSION['var_name'];
 echo $_FILES['var_name'];
 echo $_ENV['var_name'];
 echo $_COOKIE['var_name'];
+echo $_COOKIE['var_name2'];
 
-$XML       = 'hello';
-$myXML     = 'hello';
-$XMLParser = 'hello';
-$xmlParser = 'hello';
+$XML        = 'hello';
+$myXML      = 'hello';
+$XMLParser  = 'hello';
+$xmlParser  = 'hello';
+$xmlParser2 = 'hello';
 
 echo "{$_SERVER['HOSTNAME']} $var_name";
 
-// Need to be the last thing in this test file.
-$obj->$classVar = $prefix.'-'.$type;
-
-class foo
-{
-    const bar = <<<BAZ
-qux
-BAZ;
-}
-
-$foo = <<<'BAR'
-$123
-"$456"
-BAR;
-
-$foo = <<<BAR
-$123
-"$456"
-BAR;
-
-class a
-{
-    protected
-        $_sheet,
-        $_FieldParser,
-        $_key;
-
-    private
-        $varN = true,
-        $varO = array( 'a', 'b' ),
-        $varP = 'string',
-        $varQ = 123;
-}
+$someObject->{$name};
+$someObject->my_function($var_name);
 
 var_dump($http_response_header);
 var_dump($HTTP_RAW_POST_DATA);
 var_dump($php_errormsg);
 
-trait MyTrait
+interface Base
 {
-    public $_varName = 'hello';
-    private $_varName = 'hello';
-}
+    protected $anonymous;
 
-class TestClass
-{
-    /**
-     * Comment goes here.
-     *
-     * @var array
-     */
-    private static $_foo = [];
+    public function __construct();
 }
 
 $anonClass = new class() {
@@ -144,8 +119,7 @@ $anonClass = new class() {
 
 echo $obj?->varName;
 echo $obj?->var_name;
-echo $obj?->varname;
-echo $obj?->_varName;
+echo $obj?->varName;
 
 enum SomeEnum
 {
@@ -154,4 +128,9 @@ enum SomeEnum
         $_bar = 2;
         $bar_foo = 3;
     }
+}
+
+interface PHP84HookedProperty {
+    public $thisisfine { get; }
+    public $_underscore { get; }
 }

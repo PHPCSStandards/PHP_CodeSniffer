@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Scope;
 
+use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
 
@@ -26,15 +27,20 @@ class MemberVarScopeSniff extends AbstractVariableSniff
      */
     protected function processMemberVar(File $phpcsFile, $stackPtr)
     {
-        $tokens     = $phpcsFile->getTokens();
-        $properties = $phpcsFile->getMemberProperties($stackPtr);
-
-        if ($properties === [] || $properties['scope_specified'] !== false) {
+        try {
+            $properties = $phpcsFile->getMemberProperties($stackPtr);
+        } catch (RuntimeException $e) {
+            // Parse error: property in enum. Ignore.
             return;
         }
 
-        $error = 'Scope modifier not specified for member variable "%s"';
-        $data  = [$tokens[$stackPtr]['content']];
+        if ($properties['scope_specified'] !== false) {
+            return;
+        }
+
+        $tokens = $phpcsFile->getTokens();
+        $error  = 'Scope modifier not specified for member variable "%s"';
+        $data   = [$tokens[$stackPtr]['content']];
         $phpcsFile->addError($error, $stackPtr, 'Missing', $data);
 
     }//end processMemberVar()

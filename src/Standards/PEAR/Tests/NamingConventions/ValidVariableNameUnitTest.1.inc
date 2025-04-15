@@ -99,3 +99,8 @@ $util->setLogger(
         private $varName  = 'hello';
         private $_varName = 'hello';
 });
+
+interface PHP84HookedProperty {
+    public $thisisfine { get; }
+    public $_underscore { get; }
+}

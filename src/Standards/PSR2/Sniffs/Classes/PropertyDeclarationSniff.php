@@ -28,6 +28,13 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
      */
     protected function processMemberVar(File $phpcsFile, $stackPtr)
     {
+        try {
+            $propertyInfo = $phpcsFile->getMemberProperties($stackPtr);
+        } catch (Exception $e) {
+            // Parse error: property in enum. Ignore.
+            return;
+        }
+
         $tokens = $phpcsFile->getTokens();
 
         if ($tokens[$stackPtr]['content'][1] === '_') {
@@ -61,16 +68,6 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
         if ($next !== false && $tokens[$next]['code'] === T_VARIABLE) {
             $error = 'There must not be more than one property declared per statement';
             $phpcsFile->addError($error, $stackPtr, 'Multiple');
-        }
-
-        try {
-            $propertyInfo = $phpcsFile->getMemberProperties($stackPtr);
-            if (empty($propertyInfo) === true) {
-                return;
-            }
-        } catch (Exception $e) {
-            // Turns out not to be a property after all.
-            return;
         }
 
         if ($propertyInfo['type'] !== '') {

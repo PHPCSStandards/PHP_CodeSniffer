@@ -1791,34 +1791,15 @@ class File
             throw new RuntimeException('$stackPtr must be of type T_VARIABLE');
         }
 
-        $conditions = array_keys($this->tokens[$stackPtr]['conditions']);
+        $conditions = $this->tokens[$stackPtr]['conditions'];
+        $conditions = array_keys($conditions);
         $ptr        = array_pop($conditions);
         if (isset($this->tokens[$ptr]) === false
-            || ($this->tokens[$ptr]['code'] !== T_CLASS
-            && $this->tokens[$ptr]['code'] !== T_ANON_CLASS
-            && $this->tokens[$ptr]['code'] !== T_TRAIT)
+            || isset(Tokens::$ooScopeTokens[$this->tokens[$ptr]['code']]) === false
+            || $this->tokens[$ptr]['code'] === T_ENUM
         ) {
-            if (isset($this->tokens[$ptr]) === true
-                && ($this->tokens[$ptr]['code'] === T_INTERFACE
-                || $this->tokens[$ptr]['code'] === T_ENUM)
-            ) {
-                // T_VARIABLEs in interfaces/enums can actually be method arguments
-                // but they won't be seen as being inside the method because there
-                // are no scope openers and closers for abstract methods. If it is in
-                // parentheses, we can be pretty sure it is a method argument.
-                if (isset($this->tokens[$stackPtr]['nested_parenthesis']) === false
-                    || empty($this->tokens[$stackPtr]['nested_parenthesis']) === true
-                ) {
-                    $error = 'Possible parse error: %ss may not include member vars';
-                    $code  = sprintf('Internal.ParseError.%sHasMemberVar', ucfirst($this->tokens[$ptr]['content']));
-                    $data  = [strtolower($this->tokens[$ptr]['content'])];
-                    $this->addWarning($error, $stackPtr, $code, $data);
-                    return [];
-                }
-            } else {
-                throw new RuntimeException('$stackPtr is not a class member var');
-            }
-        }//end if
+            throw new RuntimeException('$stackPtr is not a class member var');
+        }
 
         // Make sure it's not a method parameter.
         if (empty($this->tokens[$stackPtr]['nested_parenthesis']) === false) {

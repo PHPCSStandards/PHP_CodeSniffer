@@ -26,51 +26,58 @@ final class ValidVariableNameUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile='')
     {
-        $errors = [
-            3   => 1,
-            5   => 1,
-            10  => 1,
-            12  => 1,
-            15  => 1,
-            17  => 1,
-            20  => 1,
-            22  => 1,
-            25  => 1,
-            27  => 1,
-            31  => 1,
-            33  => 1,
-            36  => 1,
-            37  => 1,
-            39  => 1,
-            42  => 1,
-            44  => 1,
-            53  => 1,
-            58  => 1,
-            62  => 1,
-            63  => 1,
-            64  => 1,
-            67  => 1,
-            81  => 1,
-            106 => 1,
-            107 => 2,
-            108 => 1,
-            111 => 1,
-            112 => 1,
-            113 => 1,
-            114 => 1,
-            123 => 1,
-            138 => 1,
-            141 => 1,
-            146 => 1,
-            152 => 1,
-            155 => 1,
-        ];
+        switch ($testFile) {
+        case 'ValidVariableNameUnitTest.1.inc':
+            return [
+                3   => 1,
+                5   => 1,
+                10  => 1,
+                12  => 1,
+                15  => 1,
+                17  => 1,
+                20  => 1,
+                22  => 1,
+                25  => 1,
+                27  => 1,
+                31  => 1,
+                33  => 1,
+                36  => 1,
+                37  => 1,
+                39  => 1,
+                42  => 1,
+                44  => 1,
+                53  => 1,
+                58  => 1,
+                62  => 1,
+                63  => 1,
+                64  => 1,
+                67  => 1,
+                81  => 1,
+                106 => 1,
+                107 => 2,
+                108 => 1,
+                111 => 1,
+                112 => 1,
+                113 => 1,
+                114 => 1,
+                123 => 1,
+                138 => 1,
+                141 => 1,
+                146 => 1,
+                152 => 1,
+                155 => 1,
+                161 => 1,
+            ];
 
-        return $errors;
+        default:
+            return [];
+        }//end switch
 
     }//end getErrorList()
 
