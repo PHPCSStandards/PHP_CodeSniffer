@@ -403,8 +403,11 @@ class PHP extends Tokenizer
         T_PLUS_EQUAL               => 2,
         T_PRINT                    => 5,
         T_PRIVATE                  => 7,
+        T_PRIVATE_SET              => 12,
         T_PUBLIC                   => 6,
+        T_PUBLIC_SET               => 11,
         T_PROTECTED                => 9,
+        T_PROTECTED_SET            => 14,
         T_READONLY                 => 8,
         T_REQUIRE                  => 7,
         T_REQUIRE_ONCE             => 12,
@@ -1263,6 +1266,49 @@ class PHP extends Tokenizer
                     $newStackPtr++;
                     continue;
                 }
+            }//end if
+
+            /*
+                Asymmetric visibility for PHP < 8.4
+            */
+
+            if ($tokenIsArray === true
+                && in_array($token[0], [T_PUBLIC, T_PROTECTED, T_PRIVATE], true) === true
+                && ($stackPtr + 3) < $numTokens
+                && $tokens[($stackPtr + 1)] === '('
+                && is_array($tokens[($stackPtr + 2)]) === true
+                && $tokens[($stackPtr + 2)][0] === T_STRING
+                && strtolower($tokens[($stackPtr + 2)][1]) === 'set'
+                && $tokens[($stackPtr + 3)] === ')'
+            ) {
+                $newToken = [];
+                if ($token[0] === T_PUBLIC) {
+                    $oldCode          = 'T_PUBLIC';
+                    $newToken['code'] = T_PUBLIC_SET;
+                    $newToken['type'] = 'T_PUBLIC_SET';
+                } else if ($token[0] === T_PROTECTED) {
+                    $oldCode          = 'T_PROTECTED';
+                    $newToken['code'] = T_PROTECTED_SET;
+                    $newToken['type'] = 'T_PROTECTED_SET';
+                } else {
+                    $oldCode          = 'T_PRIVATE';
+                    $newToken['code'] = T_PRIVATE_SET;
+                    $newToken['type'] = 'T_PRIVATE_SET';
+                }
+
+                $newToken['content']       = $token[1].'('.$tokens[($stackPtr + 2)][1].')';
+                $finalTokens[$newStackPtr] = $newToken;
+                $newStackPtr++;
+
+                if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                    $newCode = $newToken['type'];
+                    echo "\t\t* tokens from $stackPtr changed from $oldCode to $newCode".PHP_EOL;
+                }
+
+                // We processed an extra 3 tokens, for `(`, `set`, and `)`.
+                $stackPtr += 3;
+
+                continue;
             }//end if
 
             /*
@@ -2189,6 +2235,7 @@ class PHP extends Tokenizer
                     if ($tokenType === T_FUNCTION
                         || $tokenType === T_FN
                         || isset(Tokens::$methodPrefixes[$tokenType]) === true
+                        || isset(Tokens::$scopeModifiers[$tokenType]) === true
                         || $tokenType === T_VAR
                         || $tokenType === T_READONLY
                     ) {
