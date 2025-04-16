@@ -56,7 +56,7 @@ final class PropertyDeclarationUnitTest extends AbstractSniffUnitTest
             82  => 1,
             84  => 1,
             86  => 1,
-            90  => 2,
+            90  => 1,
             94  => 1,
             95  => 1,
             96  => 1,
