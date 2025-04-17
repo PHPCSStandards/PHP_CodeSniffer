@@ -75,9 +75,8 @@ class OpeningFunctionBraceBsdAllmanSniff implements Sniff
         $closeBracket = $tokens[$stackPtr]['parenthesis_closer'];
         if ($tokens[$stackPtr]['code'] === T_CLOSURE) {
             $use = $phpcsFile->findNext(T_USE, ($closeBracket + 1), $tokens[$stackPtr]['scope_opener']);
-            if ($use !== false) {
-                $openBracket  = $phpcsFile->findNext(T_OPEN_PARENTHESIS, ($use + 1));
-                $closeBracket = $tokens[$openBracket]['parenthesis_closer'];
+            if ($use !== false && isset($tokens[$use]['parenthesis_closer']) === true) {
+                $closeBracket = $tokens[$use]['parenthesis_closer'];
             }
         }
 

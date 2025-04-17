@@ -1313,19 +1313,18 @@ class File
             throw new RuntimeException('$stackPtr must be of type T_FUNCTION or T_CLOSURE or T_USE or T_FN');
         }
 
-        if ($this->tokens[$stackPtr]['code'] === T_USE) {
-            $opener = $this->findNext(T_OPEN_PARENTHESIS, ($stackPtr + 1));
-            if ($opener === false || isset($this->tokens[$opener]['parenthesis_owner']) === true) {
-                throw new RuntimeException('$stackPtr was not a valid T_USE');
-            }
-        } else {
-            if (isset($this->tokens[$stackPtr]['parenthesis_opener']) === false) {
-                // Live coding or syntax error, so no params to find.
-                return [];
-            }
-
-            $opener = $this->tokens[$stackPtr]['parenthesis_opener'];
+        if ($this->tokens[$stackPtr]['code'] === T_USE
+            && isset($this->tokens[$stackPtr]['parenthesis_owner']) === false
+        ) {
+            throw new RuntimeException('$stackPtr was not a valid T_USE');
         }
+
+        if (isset($this->tokens[$stackPtr]['parenthesis_opener']) === false) {
+            // Live coding or syntax error, so no params to find.
+            return [];
+        }
+
+        $opener = $this->tokens[$stackPtr]['parenthesis_opener'];
 
         if (isset($this->tokens[$opener]['parenthesis_closer']) === false) {
             // Live coding or syntax error, so no params to find.
@@ -1699,18 +1698,15 @@ class File
                     break;
                 }
 
+                // Skip over closure use statements.
                 if ($this->tokens[$i]['code'] === T_USE) {
-                    // Skip over closure use statements.
-                    for ($j = ($i + 1); $j < $this->numTokens && isset(Tokens::$emptyTokens[$this->tokens[$j]['code']]) === true; $j++);
-                    if ($this->tokens[$j]['code'] === T_OPEN_PARENTHESIS) {
-                        if (isset($this->tokens[$j]['parenthesis_closer']) === false) {
-                            // Live coding/parse error, stop parsing.
-                            break;
-                        }
-
-                        $i = $this->tokens[$j]['parenthesis_closer'];
-                        continue;
+                    if (isset($this->tokens[$i]['parenthesis_closer']) === false) {
+                        // Live coding/parse error, stop parsing.
+                        break;
                     }
+
+                    $i = $this->tokens[$i]['parenthesis_closer'];
+                    continue;
                 }
 
                 if ($this->tokens[$i]['code'] === T_NULLABLE) {
@@ -2068,6 +2064,7 @@ class File
                 if ($owner['code'] === T_FUNCTION
                     || $owner['code'] === T_CLOSURE
                     || $owner['code'] === T_FN
+                    || $owner['code'] === T_USE
                 ) {
                     $params = $this->getMethodParameters($this->tokens[$lastBracket]['parenthesis_owner']);
                     foreach ($params as $param) {
@@ -2077,19 +2074,6 @@ class File
                         }
                     }
                 }//end if
-            } else {
-                $prev = false;
-                for ($t = ($this->tokens[$lastBracket]['parenthesis_opener'] - 1); $t >= 0; $t--) {
-                    if ($this->tokens[$t]['code'] !== T_WHITESPACE) {
-                        $prev = $t;
-                        break;
-                    }
-                }
-
-                if ($prev !== false && $this->tokens[$prev]['code'] === T_USE) {
-                    // Closure use by reference.
-                    return true;
-                }
             }//end if
         }//end if
 

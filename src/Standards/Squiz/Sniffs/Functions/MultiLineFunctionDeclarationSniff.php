@@ -36,11 +36,8 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
         // Closures may use the USE keyword and so be multi-line in this way.
         if ($tokens[$stackPtr]['code'] === T_CLOSURE) {
             $use = $phpcsFile->findNext(T_USE, ($tokens[$openBracket]['parenthesis_closer'] + 1), $tokens[$stackPtr]['scope_opener']);
-            if ($use !== false) {
-                $open = $phpcsFile->findNext(T_OPEN_PARENTHESIS, ($use + 1));
-                if ($open !== false) {
-                    $bracketsToCheck[$use] = $open;
-                }
+            if ($use !== false && isset($tokens[$use]['parenthesis_opener']) === true) {
+                $bracketsToCheck[$use] = $tokens[$use]['parenthesis_opener'];
             }
         }
 
@@ -155,12 +152,11 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
         }
 
         $use = $phpcsFile->findNext(T_USE, ($tokens[$stackPtr]['parenthesis_closer'] + 1), $tokens[$stackPtr]['scope_opener']);
-        if ($use === false) {
+        if ($use === false || isset($tokens[$use]['parenthesis_opener']) === false) {
             return;
         }
 
-        $openBracket = $phpcsFile->findNext(T_OPEN_PARENTHESIS, ($use + 1), null);
-        $this->processBracket($phpcsFile, $openBracket, $tokens, 'use');
+        $this->processBracket($phpcsFile, $tokens[$use]['parenthesis_opener'], $tokens, 'use');
 
     }//end processMultiLineDeclaration()
 

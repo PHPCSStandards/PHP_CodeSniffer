@@ -278,9 +278,14 @@ class UseDeclarationSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        // Ignore USE keywords inside closures and during live coding.
+        // Ignore USE keywords for closures.
+        if (isset($tokens[$stackPtr]['parenthesis_owner']) === true) {
+            return true;
+        }
+
+        // Ignore USE keywords during live coding.
         $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
-        if ($next === false || $tokens[$next]['code'] === T_OPEN_PARENTHESIS) {
+        if ($next === false) {
             return true;
         }
 

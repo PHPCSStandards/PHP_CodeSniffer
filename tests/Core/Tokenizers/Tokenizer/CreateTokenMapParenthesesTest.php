@@ -160,6 +160,10 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testNestedClosureParenthesesOwner */',
                 'tokenCode'  => T_CLOSURE,
             ],
+            'closure use - nested'                           => [
+                'testMarker' => '/* testNestedClosureUseParenthesesOwner */',
+                'tokenCode'  => T_USE,
+            ],
             'foreach - nested'                               => [
                 'testMarker' => '/* testNestedForeachParenthesesOwner */',
                 'tokenCode'  => T_FOREACH,
@@ -253,9 +257,6 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
             ],
             'function call - nested 1'          => [
                 'testMarker' => '/* testNestedFunctionCallAParenthesesOpener */',
-            ],
-            'closure use - nested'              => [
-                'testMarker' => '/* testNestedClosureUseParenthesesOpener */',
             ],
             'function call - nested 2'          => [
                 'testMarker' => '/* testNestedFunctionCallBParenthesesOpener */',

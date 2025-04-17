@@ -43,8 +43,7 @@ class ImportStatementSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
 
         // Make sure this is not a closure USE group.
-        $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
-        if ($tokens[$next]['code'] === T_OPEN_PARENTHESIS) {
+        if (isset($tokens[$stackPtr]['parenthesis_owner']) === true) {
             return;
         }
 
@@ -53,6 +52,7 @@ class ImportStatementSniff implements Sniff
             return;
         }
 
+        $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
         if ($tokens[$next]['code'] === T_STRING
             && (strtolower($tokens[$next]['content']) === 'function'
             || strtolower($tokens[$next]['content']) === 'const')
