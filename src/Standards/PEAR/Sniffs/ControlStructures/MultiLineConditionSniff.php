@@ -204,7 +204,7 @@ class MultiLineConditionSniff implements Sniff
                 $prevLine = $tokens[$i]['line'];
             }//end if
 
-            if ($tokens[$i]['code'] === T_STRING) {
+            if (isset(Tokens::$nameTokens[$tokens[$i]['code']]) === true) {
                 $next = $phpcsFile->findNext(T_WHITESPACE, ($i + 1), null, true);
                 if ($tokens[$next]['code'] === T_OPEN_PARENTHESIS) {
                     // This is a function call, so skip to the end as they

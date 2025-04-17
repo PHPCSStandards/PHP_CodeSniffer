@@ -65,6 +65,7 @@ final class VariableCommentUnitTest extends AbstractSniffTestCase
             364 => 1,
             399 => 1,
             403 => 1,
+            457 => 1,
         ];
 
     }//end getErrorList()

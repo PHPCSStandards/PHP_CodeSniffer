@@ -43,9 +43,8 @@ class ClassInstantiationSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
 
         // Find the class name.
-        $allowed = [
-            T_STRING                   => T_STRING,
-            T_NS_SEPARATOR             => T_NS_SEPARATOR,
+        $allowed  = Tokens::$nameTokens;
+        $allowed += [
             T_SELF                     => T_SELF,
             T_STATIC                   => T_STATIC,
             T_PARENT                   => T_PARENT,

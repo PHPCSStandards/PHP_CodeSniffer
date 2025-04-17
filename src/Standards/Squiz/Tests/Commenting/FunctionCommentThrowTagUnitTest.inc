@@ -281,7 +281,7 @@ class NamespacedException {
     public function fooBar2() {
         throw new \Foo\Bar\FooBarException();
     }
-    
+
     /**
      * @throws FooBarException
      */
@@ -530,4 +530,22 @@ $anon = new class {
  */
 public function ImproveCommentTolerance() {
     throw /*comment*/ new /*comment*/ Right_Exception('Error');
+}
+
+namespace Namespaced\Names {
+    class NamespacedNames {
+        /**
+         * @throws Namespaced\Names\Exception
+         */
+        public function foo() {
+            throw new namespace\Exception();
+        }
+
+        /**
+         * @throws Namespaced\Names\Bar\FooBarException
+         */
+        public function fooBar2() {
+            throw new Bar\FooBarException();
+        }
+    }
 }

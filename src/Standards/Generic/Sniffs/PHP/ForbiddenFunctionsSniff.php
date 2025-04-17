@@ -70,7 +70,10 @@ class ForbiddenFunctionsSniff implements Sniff
                 $this->forbiddenFunctionNames[$i] = '/'.$name.'/i';
             }
 
-            return [T_STRING];
+            return [
+                T_STRING,
+                T_NAME_FULLY_QUALIFIED,
+            ];
         }
 
         // If we are not pattern matching, we need to work out what
@@ -102,7 +105,10 @@ class ForbiddenFunctionsSniff implements Sniff
         $this->forbiddenFunctionNames = array_map('strtolower', $this->forbiddenFunctionNames);
         $this->forbiddenFunctions     = array_combine($this->forbiddenFunctionNames, $this->forbiddenFunctions);
 
-        return array_unique($register);
+        $targets   = array_unique($register);
+        $targets[] = T_NAME_FULLY_QUALIFIED;
+
+        return $targets;
 
     }//end register()
 
@@ -132,21 +138,10 @@ class ForbiddenFunctionsSniff implements Sniff
             T_AS                       => true,
             T_NEW                      => true,
             T_INSTEADOF                => true,
-            T_NS_SEPARATOR             => true,
             T_IMPLEMENTS               => true,
         ];
 
         $prevToken = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
-
-        // If function call is directly preceded by a NS_SEPARATOR it points to the
-        // global namespace, so we should still catch it.
-        if ($tokens[$prevToken]['code'] === T_NS_SEPARATOR) {
-            $prevToken = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($prevToken - 1), null, true);
-            if ($tokens[$prevToken]['code'] === T_STRING) {
-                // Not in the global namespace.
-                return;
-            }
-        }
 
         if (isset($ignore[$tokens[$prevToken]['code']]) === true) {
             // Not a call to a PHP function.
@@ -159,7 +154,9 @@ class ForbiddenFunctionsSniff implements Sniff
             return;
         }
 
-        if ($tokens[$stackPtr]['code'] === T_STRING && $tokens[$nextToken]['code'] !== T_OPEN_PARENTHESIS) {
+        if (($tokens[$stackPtr]['code'] === T_STRING || $tokens[$stackPtr]['code'] === T_NAME_FULLY_QUALIFIED)
+            && $tokens[$nextToken]['code'] !== T_OPEN_PARENTHESIS
+        ) {
             // Not a call to a PHP function.
             return;
         }
@@ -170,8 +167,11 @@ class ForbiddenFunctionsSniff implements Sniff
         }
 
         $function = strtolower($tokens[$stackPtr]['content']);
-        $pattern  = null;
+        if ($tokens[$stackPtr]['code'] === T_NAME_FULLY_QUALIFIED) {
+            $function = ltrim($function, '\\');
+        }
 
+        $pattern = null;
         if ($this->patternMatch === true) {
             $count   = 0;
             $pattern = preg_replace(
@@ -194,7 +194,7 @@ class ForbiddenFunctionsSniff implements Sniff
             }
         }//end if
 
-        $this->addError($phpcsFile, $stackPtr, $tokens[$stackPtr]['content'], $pattern);
+        $this->addError($phpcsFile, $stackPtr, $function, $pattern);
 
     }//end process()
 

@@ -26,6 +26,7 @@ class UpperCaseConstantNameSniff implements Sniff
     {
         return [
             T_STRING,
+            T_NAME_FULLY_QUALIFIED,
             T_CONST,
         ];
 
@@ -83,7 +84,7 @@ class UpperCaseConstantNameSniff implements Sniff
         }//end if
 
         // Only interested in define statements now.
-        if (strtolower($tokens[$stackPtr]['content']) !== 'define') {
+        if (strtolower(ltrim($tokens[$stackPtr]['content'], '\\')) !== 'define') {
             return;
         }
 

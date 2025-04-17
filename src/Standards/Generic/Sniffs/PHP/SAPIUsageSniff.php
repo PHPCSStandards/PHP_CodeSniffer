@@ -23,7 +23,10 @@ class SAPIUsageSniff implements Sniff
      */
     public function register()
     {
-        return [T_STRING];
+        return [
+            T_STRING,
+            T_NAME_FULLY_QUALIFIED,
+        ];
 
     }//end register()
 
@@ -41,6 +44,11 @@ class SAPIUsageSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
+        $function = strtolower(ltrim($tokens[$stackPtr]['content'], '\\'));
+        if ($function !== 'php_sapi_name') {
+            return;
+        }
+
         $ignore = [
             T_DOUBLE_COLON             => true,
             T_OBJECT_OPERATOR          => true,
@@ -55,11 +63,8 @@ class SAPIUsageSniff implements Sniff
             return;
         }
 
-        $function = strtolower($tokens[$stackPtr]['content']);
-        if ($function === 'php_sapi_name') {
-            $error = 'Use the PHP_SAPI constant instead of calling php_sapi_name()';
-            $phpcsFile->addError($error, $stackPtr, 'FunctionFound');
-        }
+        $error = 'Use the PHP_SAPI constant instead of calling php_sapi_name()';
+        $phpcsFile->addError($error, $stackPtr, 'FunctionFound');
 
     }//end process()
 

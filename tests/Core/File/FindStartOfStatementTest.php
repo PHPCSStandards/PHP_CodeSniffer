@@ -246,7 +246,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $start = $this->getTargetToken('/* testUseGroup */', T_SEMICOLON);
         $found = self::$phpcsFile->findStartOfStatement($start);
 
-        $this->assertSame(($start - 23), $found);
+        $this->assertSame(($start - 21), $found);
 
     }//end testUseGroup()
 

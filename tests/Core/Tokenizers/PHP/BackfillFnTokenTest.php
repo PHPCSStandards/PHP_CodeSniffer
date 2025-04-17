@@ -10,6 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizers\PHP;
 
 use PHP_CodeSniffer\Tests\Core\Tokenizers\AbstractTokenizerTestCase;
+use PHP_CodeSniffer\Util\Tokens;
 
 final class BackfillFnTokenTest extends AbstractTokenizerTestCase
 {
@@ -362,6 +363,38 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
 
 
     /**
+     * Test arrow functions that use nullable type with FQN class name.
+     *
+     * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
+     *
+     * @return void
+     */
+    public function testReturnTypeNullableFullyQualifiedClassName()
+    {
+        $token = $this->getTargetToken('/* testReturnTypeNullableFullyQualifiedClassName */', T_FN);
+        $this->backfillHelper($token);
+        $this->scopePositionTestHelper($token, 10, 13);
+
+    }//end testReturnTypeNullableFullyQualifiedClassName()
+
+
+    /**
+     * Test arrow functions that use nullable type with partially qualified class name.
+     *
+     * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
+     *
+     * @return void
+     */
+    public function testReturnTypeNullablePartiallyQualifiedClassName()
+    {
+        $token = $this->getTargetToken('/* testReturnTypeNullablePartiallyQualifiedClassName */', T_FN);
+        $this->backfillHelper($token);
+        $this->scopePositionTestHelper($token, 10, 13);
+
+    }//end testReturnTypeNullablePartiallyQualifiedClassName()
+
+
+    /**
      * Test arrow functions that use nullable type with unqualified class name.
      *
      * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
@@ -372,7 +405,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
     {
         $token = $this->getTargetToken('/* testNullableUnqualifiedClassName */', T_FN);
         $this->backfillHelper($token);
-        $this->scopePositionTestHelper($token, 15, 18);
+        $this->scopePositionTestHelper($token, 13, 16);
 
     }//end testNullableUnqualifiedClassName()
 
@@ -388,7 +421,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
     {
         $token = $this->getTargetToken('/* testNamespaceRelativeClassNameInTypes */', T_FN);
         $this->backfillHelper($token);
-        $this->scopePositionTestHelper($token, 16, 19);
+        $this->scopePositionTestHelper($token, 12, 15);
 
     }//end testNamespaceRelativeClassNameInTypes()
 
@@ -542,7 +575,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
     {
         $token = $this->getTargetToken('/* testIntersectionReturnType */', T_FN);
         $this->backfillHelper($token);
-        $this->scopePositionTestHelper($token, 12, 20);
+        $this->scopePositionTestHelper($token, 11, 19);
 
     }//end testIntersectionReturnType()
 
@@ -574,7 +607,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
     {
         $token = $this->getTargetToken('/* testDNFReturnType */', T_FN);
         $this->backfillHelper($token);
-        $this->scopePositionTestHelper($token, 16, 29);
+        $this->scopePositionTestHelper($token, 15, 27);
 
     }//end testDNFReturnType()
 
@@ -783,25 +816,30 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
 
 
     /**
-     * Verify that "fn" keywords which are not arrow functions get tokenized as T_STRING and don't
+     * Verify that "fn" keywords which are not arrow functions get tokenized as identifier names and don't
      * have the extra token array indexes.
      *
-     * @param string $testMarker  The comment prefacing the target token.
-     * @param string $testContent The token content to look for.
+     * @param string $testMarker   The comment prefacing the target token.
+     * @param string $testContent  The token content to look for.
+     * @param string $expectedType Optional. The token type which is expected (not T_FN).
+     *                             Defaults to `T_STRING`.
      *
      * @dataProvider dataNotAnArrowFunction
      * @covers       PHP_CodeSniffer\Tokenizers\PHP::processAdditional
      *
      * @return void
      */
-    public function testNotAnArrowFunction($testMarker, $testContent='fn')
+    public function testNotAnArrowFunction($testMarker, $testContent='fn', $expectedType='T_STRING')
     {
-        $tokens = $this->phpcsFile->getTokens();
+        $targetTypes  = Tokens::$nameTokens;
+        $targetTypes += [T_FN => T_FN];
+        $target       = $this->getTargetToken($testMarker, $targetTypes, $testContent);
 
-        $token      = $this->getTargetToken($testMarker, [T_STRING, T_FN], $testContent);
-        $tokenArray = $tokens[$token];
+        $tokens     = $this->phpcsFile->getTokens();
+        $tokenArray = $tokens[$target];
 
-        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING');
+        $this->assertSame(constant($expectedType), $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (code)');
+        $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (type)');
 
         $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
         $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');
@@ -863,11 +901,14 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
                 'testContent' => 'FN',
             ],
             'name of a (namespaced) function, context: partially qualified function call'    => [
-                'testMarker'  => '/* testNonArrowNamespacedFunctionCall */',
-                'testContent' => 'Fn',
+                'testMarker'   => '/* testNonArrowNamespacedFunctionCall */',
+                'testContent'  => 'MyNS\Sub\Fn',
+                'expectedType' => 'T_NAME_QUALIFIED',
             ],
             'name of a (namespaced) function, context: namespace relative function call'     => [
-                'testMarker' => '/* testNonArrowNamespaceOperatorFunctionCall */',
+                'testMarker'   => '/* testNonArrowNamespaceOperatorFunctionCall */',
+                'testContent'  => 'namespace\fn',
+                'expectedType' => 'T_NAME_RELATIVE',
             ],
             'name of a function, context: declaration with union types for param and return' => [
                 'testMarker' => '/* testNonArrowFunctionNameWithUnionTypes */',

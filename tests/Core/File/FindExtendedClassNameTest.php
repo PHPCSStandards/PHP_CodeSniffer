@@ -93,6 +93,10 @@ final class FindExtendedClassNameTest extends AbstractMethodTestCase
                 'identifier' => '/* testExtendsPartiallyQualifiedClass */',
                 'expected'   => 'Core\File\RelativeClass',
             ],
+            'class extends namespace relative class'                      => [
+                'identifier' => '/* testExtendsNamespaceRelativeClass */',
+                'expected'   => 'namespace\Bar',
+            ],
             'interface does not extend'                                   => [
                 'identifier' => '/* testNonExtendedInterface */',
                 'expected'   => false,

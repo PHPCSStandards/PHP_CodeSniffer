@@ -280,10 +280,8 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
             }
         }
 
-        $find = [
-            T_STRING,
-            $keywordTokenType,
-        ];
+        $find = Tokens::$nameTokens;
+        $find[$keywordTokenType] = $keywordTokenType;
 
         if ($className !== null) {
             $start = $className;
@@ -311,17 +309,9 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                 continue;
             }
 
-            if ($checkingImplements === true
-                && $multiLineImplements === true
-                && ($tokens[($className - 1)]['code'] !== T_NS_SEPARATOR
-                || ($tokens[($className - 2)]['code'] !== T_STRING
-                && $tokens[($className - 2)]['code'] !== T_NAMESPACE))
-            ) {
+            if ($checkingImplements === true && $multiLineImplements === true) {
                 $prev = $phpcsFile->findPrevious(
-                    [
-                        T_NS_SEPARATOR,
-                        T_WHITESPACE,
-                    ],
+                    T_WHITESPACE,
                     ($className - 1),
                     $implements,
                     true
@@ -400,15 +390,8 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                         }
                     }
                 }//end if
-            } else if ($tokens[($className - 1)]['code'] !== T_NS_SEPARATOR
-                || ($tokens[($className - 2)]['code'] !== T_STRING
-                && $tokens[($className - 2)]['code'] !== T_NAMESPACE)
-            ) {
-                // Not part of a longer fully qualified or namespace relative class name.
-                if ($tokens[($className - 1)]['code'] === T_COMMA
-                    || ($tokens[($className - 1)]['code'] === T_NS_SEPARATOR
-                    && $tokens[($className - 2)]['code'] === T_COMMA)
-                ) {
+            } else {
+                if ($tokens[($className - 1)]['code'] === T_COMMA) {
                     $error = 'Expected 1 space before "%s"; 0 found';
                     $data  = [$tokens[$className]['content']];
                     $fix   = $phpcsFile->addFixableError($error, ($nextComma + 1), 'NoSpaceBeforeName', $data);
@@ -416,11 +399,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                         $phpcsFile->fixer->addContentBefore(($nextComma + 1), ' ');
                     }
                 } else {
-                    if ($tokens[($className - 1)]['code'] === T_NS_SEPARATOR) {
-                        $prev = ($className - 2);
-                    } else {
-                        $prev = ($className - 1);
-                    }
+                    $prev = ($className - 1);
 
                     $last    = $phpcsFile->findPrevious(T_WHITESPACE, $prev, null, true);
                     $content = $phpcsFile->getTokensAsString(($last + 1), ($prev - $last));
@@ -452,7 +431,6 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
             }//end if
 
             if ($checkingImplements === true
-                && $tokens[($className + 1)]['code'] !== T_NS_SEPARATOR
                 && $tokens[($className + 1)]['code'] !== T_COMMA
             ) {
                 if ($n !== ($classCount - 1)) {

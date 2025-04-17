@@ -178,3 +178,13 @@ switch ( $type ) {
     default:
         break;
 }
+
+function NonArbitraryParenthesesNameSpacedNames( $foo, $bar ) {
+    $b = \Fully\Qualified( $something );
+    $b = Partially\Qualified( $something ) {};
+    $c = namespace\Relative( $arg1 , $arg2 = array( ) );
+
+    $a = new \Fully\Qualified( $something );
+    $b = new Partially\Qualified( $something );
+    $c = new namespace\Relative( $something );
+}

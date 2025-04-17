@@ -10,6 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizers\PHP;
 
 use PHP_CodeSniffer\Tests\Core\Tokenizers\AbstractTokenizerTestCase;
+use PHP_CodeSniffer\Util\Tokens;
 
 final class BackfillEnumTest extends AbstractTokenizerTestCase
 {
@@ -126,24 +127,29 @@ final class BackfillEnumTest extends AbstractTokenizerTestCase
 
 
     /**
-     * Test that "enum" when not used as the keyword is still tokenized as `T_STRING`.
+     * Test that "enum" when not used as the keyword is still tokenized as identifier names.
      *
-     * @param string $testMarker  The comment which prefaces the target token in the test file.
-     * @param string $testContent The token content to look for.
+     * @param string $testMarker   The comment which prefaces the target token in the test file.
+     * @param string $testContent  The token content to look for.
+     * @param string $expectedType Optional. The token type which is expected (not T_FN).
+     *                             Defaults to `T_STRING`.
      *
      * @dataProvider dataNotEnums
      * @covers       PHP_CodeSniffer\Tokenizers\PHP::tokenize
      *
      * @return void
      */
-    public function testNotEnums($testMarker, $testContent)
+    public function testNotEnums($testMarker, $testContent, $expectedType='T_STRING')
     {
+        $targetTypes  = Tokens::$nameTokens;
+        $targetTypes += [T_ENUM => T_ENUM];
+        $target       = $this->getTargetToken($testMarker, $targetTypes, $testContent);
+
         $tokens     = $this->phpcsFile->getTokens();
-        $target     = $this->getTargetToken($testMarker, [T_ENUM, T_STRING], $testContent);
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
-        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
+        $this->assertSame(constant($expectedType), $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (code)');
+        $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (type)');
 
     }//end testNotEnums()
 
@@ -187,8 +193,9 @@ final class BackfillEnumTest extends AbstractTokenizerTestCase
                 'testContent' => 'Enum',
             ],
             'not enum - part of namespace named enum'                    => [
-                'testMarker'  => '/* testEnumUsedAsPartOfNamespaceName */',
-                'testContent' => 'Enum',
+                'testMarker'   => '/* testEnumUsedAsPartOfNamespaceName */',
+                'testContent'  => 'My\Enum\Collection',
+                'expectedType' => 'T_NAME_QUALIFIED',
             ],
             'not enum - class instantiation for class enum'              => [
                 'testMarker'  => '/* testEnumUsedInObjectInitialization */',
@@ -199,8 +206,9 @@ final class BackfillEnumTest extends AbstractTokenizerTestCase
                 'testContent' => 'enum',
             ],
             'not enum - namespace relative function call'                => [
-                'testMarker'  => '/* testEnumAsFunctionCallWithNamespace */',
-                'testContent' => 'enum',
+                'testMarker'   => '/* testEnumAsFunctionCallWithNamespace */',
+                'testContent'  => 'namespace\enum',
+                'expectedType' => 'T_NAME_RELATIVE',
             ],
             'not enum - class constant fetch with enum as class name'    => [
                 'testMarker'  => '/* testClassConstantFetchWithEnumAsClassName */',

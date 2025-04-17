@@ -15,6 +15,9 @@ class testFECNNamespacedClass extends \PHP_CodeSniffer\Tests\Core\File\testFECNC
 /* testExtendsPartiallyQualifiedClass */
 class testFECNQualifiedClass extends Core\File\RelativeClass {}
 
+/* testExtendsNamespaceRelativeClass */
+class testWithNSOperator extends namespace\Bar {}
+
 /* testNonExtendedInterface */
 interface testFECNInterface {}
 

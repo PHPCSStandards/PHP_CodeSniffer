@@ -124,10 +124,9 @@ class DisallowMultipleAssignmentsSniff implements Sniff
 
         $start = $phpcsFile->findStartOfStatement($varToken);
 
-        $allowed = Tokens::$emptyTokens;
+        $allowed  = Tokens::$emptyTokens;
+        $allowed += Tokens::$nameTokens;
 
-        $allowed[T_STRING]       = T_STRING;
-        $allowed[T_NS_SEPARATOR] = T_NS_SEPARATOR;
         $allowed[T_DOUBLE_COLON] = T_DOUBLE_COLON;
         $allowed[T_ASPERAND]     = T_ASPERAND;
         $allowed[T_DOLLAR]       = T_DOLLAR;

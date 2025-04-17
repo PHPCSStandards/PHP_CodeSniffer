@@ -10,6 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizers\PHP;
 
 use PHP_CodeSniffer\Tests\Core\Tokenizers\AbstractTokenizerTestCase;
+use PHP_CodeSniffer\Util\Tokens;
 
 final class BackfillReadonlyTest extends AbstractTokenizerTestCase
 {
@@ -173,25 +174,30 @@ final class BackfillReadonlyTest extends AbstractTokenizerTestCase
 
 
     /**
-     * Test that "readonly" when not used as the keyword is still tokenized as `T_STRING`.
+     * Test that "readonly" when not used as the keyword is still tokenized as identifier names.
      *
-     * @param string $testMarker  The comment which prefaces the target token in the test file.
-     * @param string $testContent Optional. The token content to look for.
-     *                            Defaults to lowercase "readonly".
+     * @param string $testMarker   The comment which prefaces the target token in the test file.
+     * @param string $testContent  Optional. The token content to look for.
+     *                             Defaults to lowercase "readonly".
+     * @param string $expectedType Optional. The token type which is expected (not T_FN).
+     *                             Defaults to `T_STRING`.
      *
      * @dataProvider dataNotReadonly
      * @covers       PHP_CodeSniffer\Tokenizers\PHP::processAdditional
      *
      * @return void
      */
-    public function testNotReadonly($testMarker, $testContent='readonly')
+    public function testNotReadonly($testMarker, $testContent='readonly', $expectedType='T_STRING')
     {
+        $targetTypes  = Tokens::$nameTokens;
+        $targetTypes += [T_READONLY => T_READONLY];
+        $target       = $this->getTargetToken($testMarker, $targetTypes, $testContent);
+
         $tokens     = $this->phpcsFile->getTokens();
-        $target     = $this->getTargetToken($testMarker, [T_READONLY, T_STRING], $testContent);
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
-        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
+        $this->assertSame(constant($expectedType), $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (code)');
+        $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (type)');
 
     }//end testNotReadonly()
 
@@ -230,18 +236,22 @@ final class BackfillReadonlyTest extends AbstractTokenizerTestCase
                 'testContent' => 'Readonly',
             ],
             'partial name of namespace, context: declaration, mixed case'                         => [
-                'testMarker'  => '/* testReadonlyUsedAsPartOfNamespaceName */',
-                'testContent' => 'Readonly',
+                'testMarker'   => '/* testReadonlyUsedAsPartOfNamespaceName */',
+                'testContent'  => 'My\Readonly\Collection',
+                'expectedType' => 'T_NAME_QUALIFIED',
             ],
             'name of a function, context: call'                                                   => [
                 'testMarker' => '/* testReadonlyAsFunctionCall */',
             ],
             'name of a namespaced function, context: partially qualified call'                    => [
-                'testMarker' => '/* testReadonlyAsNamespacedFunctionCall */',
+                'testMarker'   => '/* testReadonlyAsNamespacedFunctionCall */',
+                'testContent'  => 'My\NS\readonly',
+                'expectedType' => 'T_NAME_QUALIFIED',
             ],
             'name of a function, context: namespace relative call, mixed case'                    => [
-                'testMarker'  => '/* testReadonlyAsNamespaceRelativeFunctionCall */',
-                'testContent' => 'ReadOnly',
+                'testMarker'   => '/* testReadonlyAsNamespaceRelativeFunctionCall */',
+                'testContent'  => 'namespace\ReadOnly',
+                'expectedType' => 'T_NAME_RELATIVE',
             ],
             'name of a method, context: method call on object'                                    => [
                 'testMarker' => '/* testReadonlyAsMethodCall */',

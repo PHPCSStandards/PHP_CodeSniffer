@@ -201,8 +201,9 @@ class SideEffectsSniff implements Sniff
 
                 $i = $tokens[$i]['scope_closer'];
                 continue;
-            } else if ($tokens[$i]['code'] === T_STRING
-                && strtolower($tokens[$i]['content']) === 'define'
+            } else if (($tokens[$i]['code'] === T_STRING
+                || $tokens[$i]['code'] === T_NAME_FULLY_QUALIFIED)
+                && strtolower(ltrim($tokens[$i]['content'], '\\')) === 'define'
             ) {
                 $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($i - 1), null, true);
                 if ($tokens[$prev]['code'] !== T_OBJECT_OPERATOR
@@ -226,8 +227,9 @@ class SideEffectsSniff implements Sniff
             // Special case for defined() as it can be used to see
             // if a constant (a symbol) should be defined or not and
             // doesn't need to use a full conditional block.
-            if ($tokens[$i]['code'] === T_STRING
-                && strtolower($tokens[$i]['content']) === 'defined'
+            if (($tokens[$i]['code'] === T_STRING
+                || $tokens[$i]['code'] === T_NAME_FULLY_QUALIFIED)
+                && strtolower(ltrim($tokens[$i]['content'], '\\')) === 'defined'
             ) {
                 $openBracket = $phpcsFile->findNext(Tokens::$emptyTokens, ($i + 1), null, true);
                 if ($openBracket !== false

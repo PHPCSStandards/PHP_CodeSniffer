@@ -30,7 +30,10 @@ final class SAPIUsageUnitTest extends AbstractSniffTestCase
      */
     public function getErrorList()
     {
-        return [2 => 1];
+        return [
+            2 => 1,
+            6 => 1,
+        ];
 
     }//end getErrorList()
 

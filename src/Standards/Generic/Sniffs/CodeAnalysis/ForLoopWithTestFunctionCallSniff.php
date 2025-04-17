@@ -80,7 +80,7 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
                 continue;
             } else if ($position > 1) {
                 break;
-            } else if ($code !== T_VARIABLE && $code !== T_STRING) {
+            } else if ($code !== T_VARIABLE && isset(Tokens::$nameTokens[$code]) === false) {
                 continue;
             }
 

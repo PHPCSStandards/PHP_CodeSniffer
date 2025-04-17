@@ -45,7 +45,6 @@ final class SelfMemberReferenceUnitTest extends AbstractSniffTestCase
             140 => 1,
             143 => 2,
             162 => 1,
-            171 => 1,
             183 => 1,
             197 => 1,
         ];

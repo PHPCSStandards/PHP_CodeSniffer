@@ -43,6 +43,9 @@ final class DisallowSizeFunctionsInLoopsUnitTest extends AbstractSniffTestCase
             40 => 1,
             44 => 1,
             46 => 1,
+            60 => 1,
+            61 => 1,
+            63 => 1,
         ];
 
     }//end getErrorList()

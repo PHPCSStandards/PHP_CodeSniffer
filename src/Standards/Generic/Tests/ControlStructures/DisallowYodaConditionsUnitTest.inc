@@ -185,3 +185,10 @@ echo match ($text) {
 1 >= $value;
 1 <= $value;
 1 <=> $value;
+
+if(\Fully\qualified('foo') === false){}
+if(true === \Fully\qualified(10)){}
+if(Partially\qualified('foo') === 10){}
+if(1.5 === Partially\qualified(true)){}
+if(namespace\relative(false) === null){}
+if('string' === namespace\relative(null)){}

@@ -11,6 +11,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizers\PHP;
 
 use PHP_CodeSniffer\Tests\Core\Tokenizers\AbstractTokenizerTestCase;
+use PHP_CodeSniffer\Util\Tokens;
 
 final class DefaultKeywordTest extends AbstractTokenizerTestCase
 {
@@ -155,26 +156,33 @@ final class DefaultKeywordTest extends AbstractTokenizerTestCase
 
     /**
      * Verify that the retokenization of `T_DEFAULT` tokens in match constructs, doesn't negatively
-     * impact the tokenization of `T_STRING` tokens with the contents 'default' which aren't in
+     * impact the tokenization of identifier name tokens with the contents 'default' which aren't in
      * actual fact the default keyword.
      *
-     * @param string $testMarker  The comment prefacing the target token.
-     * @param string $testContent The token content to look for.
+     * @param string $testMarker   The comment prefacing the target token.
+     * @param string $testContent  The token content to look for.
+     * @param string $expectedType Optional. The token type which is expected (not T_FN).
+     *                             Defaults to `T_STRING`.
      *
      * @dataProvider dataNotDefaultKeyword
      * @covers       PHP_CodeSniffer\Tokenizers\PHP::processAdditional
      *
      * @return void
      */
-    public function testNotDefaultKeyword($testMarker, $testContent='DEFAULT')
+    public function testNotDefaultKeyword($testMarker, $testContent='DEFAULT', $expectedType='T_STRING')
     {
-        $tokens = $this->phpcsFile->getTokens();
+        $targetTypes  = Tokens::$nameTokens;
+        $targetTypes += [
+            T_MATCH_DEFAULT => T_MATCH_DEFAULT,
+            T_DEFAULT       => T_DEFAULT,
+        ];
+        $target       = $this->getTargetToken($testMarker, $targetTypes, $testContent);
 
-        $token      = $this->getTargetToken($testMarker, [T_MATCH_DEFAULT, T_DEFAULT, T_STRING], $testContent);
-        $tokenArray = $tokens[$token];
+        $tokens     = $this->phpcsFile->getTokens();
+        $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
-        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
+        $this->assertSame(constant($expectedType), $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (code)');
+        $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (type)');
 
     }//end testNotDefaultKeyword()
 
@@ -196,10 +204,14 @@ final class DefaultKeywordTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testClassPropertyAsShortArrayKey */',
             ],
             'namespaced-constant-as-short-array-key'              => [
-                'testMarker' => '/* testNamespacedConstantAsShortArrayKey */',
+                'testMarker'   => '/* testNamespacedConstantAsShortArrayKey */',
+                'testContent'  => 'SomeNamespace\DEFAULT',
+                'expectedType' => 'T_NAME_QUALIFIED',
             ],
             'fqn-global-constant-as-short-array-key'              => [
-                'testMarker' => '/* testFQNGlobalConstantAsShortArrayKey */',
+                'testMarker'   => '/* testFQNGlobalConstantAsShortArrayKey */',
+                'testContent'  => '\DEFAULT',
+                'expectedType' => 'T_NAME_FULLY_QUALIFIED',
             ],
             'class-constant-as-long-array-key'                    => [
                 'testMarker' => '/* testClassConstantAsLongArrayKey */',
@@ -234,10 +246,14 @@ final class DefaultKeywordTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testClassPropertyInSwitchCase */',
             ],
             'namespaced-constant-in-switch-case'                  => [
-                'testMarker' => '/* testNamespacedConstantInSwitchCase */',
+                'testMarker'   => '/* testNamespacedConstantInSwitchCase */',
+                'testContent'  => 'SomeNamespace\DEFAULT',
+                'expectedType' => 'T_NAME_QUALIFIED',
             ],
             'namespace-relative-constant-in-switch-case'          => [
-                'testMarker' => '/* testNamespaceRelativeConstantInSwitchCase */',
+                'testMarker'   => '/* testNamespaceRelativeConstantInSwitchCase */',
+                'testContent'  => 'namespace\DEFAULT',
+                'expectedType' => 'T_NAME_RELATIVE',
             ],
 
             'class-constant-declaration'                          => [

@@ -567,6 +567,18 @@ final class Tokens
     ];
 
     /**
+     * Tokens used for "names", be it namespace, OO, function or constant names.
+     *
+     * @var array<int|string, int|string>
+     */
+    public static $nameTokens = [
+        T_STRING               => T_STRING,
+        T_NAME_QUALIFIED       => T_NAME_QUALIFIED,
+        T_NAME_FULLY_QUALIFIED => T_NAME_FULLY_QUALIFIED,
+        T_NAME_RELATIVE        => T_NAME_RELATIVE,
+    ];
+
+    /**
      * Tokens that represent the names of called functions.
      *
      * Mostly, these are just strings. But PHP tokenizes some language
@@ -575,19 +587,22 @@ final class Tokens
      * @var array<int|string, int|string>
      */
     public static $functionNameTokens = [
-        T_STRING       => T_STRING,
-        T_EVAL         => T_EVAL,
-        T_EXIT         => T_EXIT,
-        T_INCLUDE      => T_INCLUDE,
-        T_INCLUDE_ONCE => T_INCLUDE_ONCE,
-        T_REQUIRE      => T_REQUIRE,
-        T_REQUIRE_ONCE => T_REQUIRE_ONCE,
-        T_ISSET        => T_ISSET,
-        T_UNSET        => T_UNSET,
-        T_EMPTY        => T_EMPTY,
-        T_SELF         => T_SELF,
-        T_PARENT       => T_PARENT,
-        T_STATIC       => T_STATIC,
+        T_STRING               => T_STRING,
+        T_NAME_QUALIFIED       => T_NAME_QUALIFIED,
+        T_NAME_FULLY_QUALIFIED => T_NAME_FULLY_QUALIFIED,
+        T_NAME_RELATIVE        => T_NAME_RELATIVE,
+        T_EVAL                 => T_EVAL,
+        T_EXIT                 => T_EXIT,
+        T_INCLUDE              => T_INCLUDE,
+        T_INCLUDE_ONCE         => T_INCLUDE_ONCE,
+        T_REQUIRE              => T_REQUIRE,
+        T_REQUIRE_ONCE         => T_REQUIRE_ONCE,
+        T_ISSET                => T_ISSET,
+        T_UNSET                => T_UNSET,
+        T_EMPTY                => T_EMPTY,
+        T_SELF                 => T_SELF,
+        T_PARENT               => T_PARENT,
+        T_STATIC               => T_STATIC,
     ];
 
     /**

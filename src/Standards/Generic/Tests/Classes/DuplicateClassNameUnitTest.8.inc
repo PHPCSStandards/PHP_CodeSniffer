@@ -3,6 +3,6 @@ namespace Foo\Bar;
 class MyClass {}
 interface YourInterface {}
 
-namespace Foo /*comment*/ \ /*comment*/ Bar;
+namespace /*comment*/ Foo\Bar;
 class MyClass {}
 interface YourInterface {}

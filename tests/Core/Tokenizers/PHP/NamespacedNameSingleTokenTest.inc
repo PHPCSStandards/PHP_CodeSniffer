@@ -6,6 +6,9 @@ namespace Package;
 /* testNamespaceDeclarationWithLevels */
 namespace Vendor\SubLevel\Domain;
 
+/* testNamespaceDeclarationWithReservedKeywords */
+namespace For\Include\Fn;
+
 /* testUseStatement */
 use ClassName;
 
@@ -49,8 +52,8 @@ class MyClass
         \Fully\Qualified,
         /* testImplementsUnqualified */
         Unqualified,
-        /* testImplementsPartiallyQualified */
-        Sub\Level\Name
+        /* testImplementsPartiallyQualifiedWithReservedKeyword */
+        Exit\Level\Name
 {
     /* testFunctionName */
     public function function_name(
@@ -73,8 +76,8 @@ class MyClass
             /* testFunctionCallRelative */
             echo NameSpace\function_name();
 
-            /* testFunctionCallFQN */
-            echo \Vendor\Package\function_name();
+            /* testFunctionCallFQNWithReservedKeyword */
+            echo \Vendor\Foreach\function_name();
 
             /* testFunctionCallUnqualified */
             echo function_name();
@@ -118,7 +121,7 @@ class MyClass
 
         /* testDoubleColonPartiallyQualified */
         $value = Level\ClassName::CONSTANT_NAME['key'];
-        
+
         /* testInstanceOfRelative */
         $is = $obj instanceof namespace\ClassName;
 
@@ -145,3 +148,7 @@ $value = \Fully
     \Name
     // comment
     :: function_name();
+
+/* testInvalidDoubleBackslash */
+// Intentional parse error.
+$obj = new \\SomeClass();

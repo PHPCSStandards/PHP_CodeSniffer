@@ -1415,7 +1415,10 @@ class File
                 }
                 break;
             case T_STRING:
-                // This is a string, so it may be a type hint, but it could
+            case T_NAME_QUALIFIED:
+            case T_NAME_FULLY_QUALIFIED:
+            case T_NAME_RELATIVE:
+                // This is an identifier name, so it may be a type declaration, but it could
                 // also be a constant used as a default value.
                 $prevComma = false;
                 for ($t = $i; $t >= $opener; $t--) {
@@ -1673,8 +1676,8 @@ class File
                 $scopeOpener = $this->tokens[$stackPtr]['scope_opener'];
             }
 
-            $valid = [
-                T_STRING                 => T_STRING,
+            $valid  = Tokens::$nameTokens;
+            $valid += [
                 T_CALLABLE               => T_CALLABLE,
                 T_SELF                   => T_SELF,
                 T_PARENT                 => T_PARENT,
@@ -1682,8 +1685,6 @@ class File
                 T_FALSE                  => T_FALSE,
                 T_TRUE                   => T_TRUE,
                 T_NULL                   => T_NULL,
-                T_NAMESPACE              => T_NAMESPACE,
-                T_NS_SEPARATOR           => T_NS_SEPARATOR,
                 T_TYPE_UNION             => T_TYPE_UNION,
                 T_TYPE_INTERSECTION      => T_TYPE_INTERSECTION,
                 T_TYPE_OPEN_PARENTHESIS  => T_TYPE_OPEN_PARENTHESIS,
@@ -1876,16 +1877,14 @@ class File
 
         if ($i < $stackPtr) {
             // We've found a type.
-            $valid = [
-                T_STRING                 => T_STRING,
+            $valid  = Tokens::$nameTokens;
+            $valid += [
                 T_CALLABLE               => T_CALLABLE,
                 T_SELF                   => T_SELF,
                 T_PARENT                 => T_PARENT,
                 T_FALSE                  => T_FALSE,
                 T_TRUE                   => T_TRUE,
                 T_NULL                   => T_NULL,
-                T_NAMESPACE              => T_NAMESPACE,
-                T_NS_SEPARATOR           => T_NS_SEPARATOR,
                 T_TYPE_UNION             => T_TYPE_UNION,
                 T_TYPE_INTERSECTION      => T_TYPE_INTERSECTION,
                 T_TYPE_OPEN_PARENTHESIS  => T_TYPE_OPEN_PARENTHESIS,
@@ -2086,12 +2085,10 @@ class File
                 return true;
             } else {
                 $skip   = Tokens::$emptyTokens;
-                $skip[] = T_NS_SEPARATOR;
+                $skip  += Tokens::$nameTokens;
                 $skip[] = T_SELF;
                 $skip[] = T_PARENT;
                 $skip[] = T_STATIC;
-                $skip[] = T_STRING;
-                $skip[] = T_NAMESPACE;
                 $skip[] = T_DOUBLE_COLON;
 
                 $nextSignificantAfter = $this->findNext(
@@ -2781,11 +2778,8 @@ class File
             return false;
         }
 
-        $find = [
-            T_NS_SEPARATOR,
-            T_STRING,
-            T_WHITESPACE,
-        ];
+        $find   = Tokens::$nameTokens;
+        $find[] = T_WHITESPACE;
 
         $end  = $this->findNext($find, ($extendsIndex + 1), ($classOpenerIndex + 1), true);
         $name = $this->getTokensAsString(($extendsIndex + 1), ($end - $extendsIndex - 1));
@@ -2833,12 +2827,9 @@ class File
             return false;
         }
 
-        $find = [
-            T_NS_SEPARATOR,
-            T_STRING,
-            T_WHITESPACE,
-            T_COMMA,
-        ];
+        $find   = Tokens::$nameTokens;
+        $find[] = T_WHITESPACE;
+        $find[] = T_COMMA;
 
         $end  = $this->findNext($find, ($implementsIndex + 1), ($classOpenerIndex + 1), true);
         $name = $this->getTokensAsString(($implementsIndex + 1), ($end - $implementsIndex - 1));

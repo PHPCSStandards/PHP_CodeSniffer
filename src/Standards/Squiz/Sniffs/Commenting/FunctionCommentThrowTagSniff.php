@@ -106,44 +106,30 @@ class FunctionCommentThrowTagSniff implements Sniff
 
             $nextToken = $phpcsFile->findNext(Tokens::$emptyTokens, ($currPos + 1), null, true);
             if ($tokens[$nextToken]['code'] === T_NEW
-                || $tokens[$nextToken]['code'] === T_NS_SEPARATOR
-                || $tokens[$nextToken]['code'] === T_STRING
+                || isset(Tokens::$nameTokens[$tokens[$nextToken]['code']]) === true
             ) {
                 if ($tokens[$nextToken]['code'] === T_NEW) {
                     $currException = $phpcsFile->findNext(
-                        [
-                            T_NS_SEPARATOR,
-                            T_STRING,
-                        ],
-                        $currPos,
+                        Tokens::$emptyTokens,
+                        ($nextToken + 1),
                         $stackPtrEnd,
-                        false,
-                        null,
                         true
                     );
                 } else {
                     $currException = $nextToken;
                 }
 
-                if ($currException !== false) {
-                    $endException = $phpcsFile->findNext(
-                        [
-                            T_NS_SEPARATOR,
-                            T_STRING,
-                        ],
-                        ($currException + 1),
-                        $stackPtrEnd,
-                        true,
-                        null,
-                        true
-                    );
-
-                    if ($endException === false) {
-                        $thrownExceptions[] = $tokens[$currException]['content'];
+                if ($currException !== false
+                    && isset(Tokens::$nameTokens[$tokens[$currException]['code']]) === true
+                ) {
+                    if ($tokens[$currException]['code'] === T_NAME_RELATIVE) {
+                        // Strip the `namespace\` prefix off the exception name
+                        // to prevent confusing the name comparison.
+                        $thrownExceptions[] = substr($tokens[$currException]['content'], 10);
                     } else {
-                        $thrownExceptions[] = $phpcsFile->getTokensAsString($currException, ($endException - $currException));
+                        $thrownExceptions[] = $tokens[$currException]['content'];
                     }
-                }//end if
+                }
             } else if ($tokens[$nextToken]['code'] === T_VARIABLE) {
                 // Find the nearest catch block in this scope and, if the caught var
                 // matches our re-thrown var, use the exception types being caught as

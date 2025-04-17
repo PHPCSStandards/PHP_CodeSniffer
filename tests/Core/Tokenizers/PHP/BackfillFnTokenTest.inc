@@ -71,6 +71,12 @@ $a = [
 /* testYield */
 $a = fn($x) => yield 'k' => $x;
 
+/* testReturnTypeNullableFullyQualifiedClassName */
+$fn = fn($x) : ?\My\NS\ClassName => $x;
+
+/* testReturnTypeNullablePartiallyQualifiedClassName */
+$fn = fn($x) : ?NS\ClassName => $x;
+
 /* testNullableUnqualifiedClassName */
 $a = fn(?\DateTime $x) : ?\DateTime => $x;
 

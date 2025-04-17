@@ -243,7 +243,7 @@ final class GetTokensAsStringTest extends AbstractMethodTestCase
             'namespace'         => [
                 'testMarker'     => '/* testNamespace */',
                 'startTokenType' => T_NAMESPACE,
-                'length'         => 8,
+                'length'         => 4,
                 'expected'       => 'namespace Foo\Bar\Baz;',
             ],
             'use-with-comments' => [

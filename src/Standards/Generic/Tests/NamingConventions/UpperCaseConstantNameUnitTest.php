@@ -48,10 +48,12 @@ final class UpperCaseConstantNameUnitTest extends AbstractSniffTestCase
                 51 => 1,
                 71 => 1,
                 73 => 1,
+                94 => 1,
             ];
+
         default:
             return [];
-        }
+        }//end switch
 
     }//end getErrorList()
 
