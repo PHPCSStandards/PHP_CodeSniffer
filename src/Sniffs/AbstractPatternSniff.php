@@ -13,6 +13,7 @@ use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Tokenizers\PHP;
 use PHP_CodeSniffer\Util\Tokens;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 abstract class AbstractPatternSniff implements Sniff
 {
@@ -909,9 +910,13 @@ abstract class AbstractPatternSniff implements Sniff
      */
     private function createTokenPattern($str)
     {
+        // Pause the StatusWriter to silence Tokenizer debug info about the patterns being parsed (which only confuses things).
+        StatusWriter::pause();
+
         // Don't add a space after the closing php tag as it will add a new
         // whitespace token.
         $tokenizer = new PHP('<?php '.$str.'?>', null);
+        StatusWriter::resume();
 
         // Remove the <?php tag from the front and the end php tag from the back.
         $tokens = $tokenizer->getTokens();

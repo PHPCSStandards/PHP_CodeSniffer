@@ -17,6 +17,7 @@ use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tokenizers\PHP;
 use PHP_CodeSniffer\Util\Common;
 use PHP_CodeSniffer\Util\Tokens;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 class File
 {
@@ -324,7 +325,7 @@ class File
         $this->fixer->startFile($this);
 
         if (PHP_CODESNIFFER_VERBOSITY > 2) {
-            echo "\t*** START TOKEN PROCESSING ***".PHP_EOL;
+            StatusWriter::write('*** START TOKEN PROCESSING ***', 1);
         }
 
         $foundCode        = false;
@@ -377,7 +378,7 @@ class File
             if (PHP_CODESNIFFER_VERBOSITY > 2) {
                 $type    = $token['type'];
                 $content = Common::prepareForOutput($token['content']);
-                echo "\t\tProcess token $stackPtr: $type => $content".PHP_EOL;
+                StatusWriter::write("Process token $stackPtr: $type => $content", 2);
             }
 
             if ($token['code'] !== T_INLINE_HTML) {
@@ -452,7 +453,7 @@ class File
                 }
 
                 if (PHP_CODESNIFFER_VERBOSITY > 2) {
-                    echo "\t\t\tProcessing ".$this->activeListener.'... ';
+                    StatusWriter::write('Processing '.$this->activeListener.'... ', 3, 0);
                 }
 
                 $ignoreTo = $this->ruleset->sniffs[$class]->process($this, $stackPtr);
@@ -471,7 +472,7 @@ class File
 
                 if (PHP_CODESNIFFER_VERBOSITY > 2) {
                     $timeTaken = round(($timeTaken), 4);
-                    echo "DONE in $timeTaken seconds".PHP_EOL;
+                    StatusWriter::write("DONE in $timeTaken seconds");
                 }
 
                 $this->activeListener = '';
@@ -493,15 +494,15 @@ class File
         }
 
         if (PHP_CODESNIFFER_VERBOSITY > 2) {
-            echo "\t*** END TOKEN PROCESSING ***".PHP_EOL;
-            echo "\t*** START SNIFF PROCESSING REPORT ***".PHP_EOL;
+            StatusWriter::write('*** END TOKEN PROCESSING ***', 1);
+            StatusWriter::write('*** START SNIFF PROCESSING REPORT ***', 1);
 
             arsort($this->listenerTimes, SORT_NUMERIC);
             foreach ($this->listenerTimes as $listener => $timeTaken) {
-                echo "\t$listener: ".round(($timeTaken), 4).' secs'.PHP_EOL;
+                StatusWriter::write("$listener: ".round(($timeTaken), 4).' secs', 1);
             }
 
-            echo "\t*** END SNIFF PROCESSING REPORT ***".PHP_EOL;
+            StatusWriter::write('*** END SNIFF PROCESSING REPORT ***', 1);
         }
 
         $this->fixedCount += $this->fixer->getFixCount();
@@ -528,10 +529,12 @@ class File
             $this->ignored = true;
             $this->addWarning($e->getMessage(), null, 'Internal.Tokenizer.Exception');
             if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                echo '[tokenizer error]... ';
+                $newlines = 0;
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    echo PHP_EOL;
+                    $newlines = 1;
                 }
+
+                StatusWriter::write('[tokenizer error]... ', 0, $newlines);
             }
 
             return;
@@ -560,10 +563,12 @@ class File
                 $numLines = $this->tokens[($this->numTokens - 1)]['line'];
             }
 
-            echo "[$this->numTokens tokens in $numLines lines]... ";
+            $newlines = 0;
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                echo PHP_EOL;
+                $newlines = 1;
             }
+
+            StatusWriter::write("[$this->numTokens tokens in $numLines lines]... ", 0, $newlines);
         }
 
     }//end parse()
@@ -1043,7 +1048,7 @@ class File
             && $fixable === true
         ) {
             @ob_end_clean();
-            echo "\tE: [Line $line] $message ($sniffCode)".PHP_EOL;
+            StatusWriter::forceWrite("E: [Line $line] $message ($sniffCode)", 1);
             ob_start();
         }
 

@@ -9,6 +9,8 @@
 
 namespace PHP_CodeSniffer\Util;
 
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
+
 class Timing
 {
 
@@ -123,7 +125,7 @@ class Timing
         $duration = self::getHumanReadableDuration($duration);
 
         $mem = round((memory_get_peak_usage(true) / (1024 * 1024)), 2).'MB';
-        echo "Time: $duration; Memory: $mem".PHP_EOL.PHP_EOL;
+        StatusWriter::write("Time: $duration; Memory: $mem");
 
         self::$printed = true;
 

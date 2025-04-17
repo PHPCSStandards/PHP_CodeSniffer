@@ -24,6 +24,7 @@ use PHP_CodeSniffer\Util\Common;
 use PHP_CodeSniffer\Util\Standards;
 use PHP_CodeSniffer\Util\Timing;
 use PHP_CodeSniffer\Util\Tokens;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 class Runner
 {
@@ -342,26 +343,26 @@ class Runner
             }
 
             if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                echo 'Creating file list... ';
+                StatusWriter::write('Creating file list... ', 0, 0);
             }
 
             $todo = new FileList($this->config, $this->ruleset);
 
             if (PHP_CODESNIFFER_VERBOSITY > 0) {
                 $numFiles = count($todo);
-                echo "DONE ($numFiles files in queue)".PHP_EOL;
+                StatusWriter::write("DONE ($numFiles files in queue)");
             }
 
             if ($this->config->cache === true) {
                 if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                    echo 'Loading cache... ';
+                    StatusWriter::write('Loading cache... ', 0, 0);
                 }
 
                 Cache::load($this->ruleset, $this->config);
 
                 if (PHP_CODESNIFFER_VERBOSITY > 0) {
                     $size = Cache::getSize();
-                    echo "DONE ($size files in cache)".PHP_EOL;
+                    StatusWriter::write("DONE ($size files in cache)");
                 }
             }
         }//end if
@@ -391,7 +392,7 @@ class Runner
                     $currDir = dirname($path);
                     if ($lastDir !== $currDir) {
                         if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                            echo 'Changing into directory '.Common::stripBasepath($currDir, $this->config->basepath).PHP_EOL;
+                            StatusWriter::write('Changing into directory '.Common::stripBasepath($currDir, $this->config->basepath));
                         }
 
                         $lastDir = $currDir;
@@ -399,7 +400,7 @@ class Runner
 
                     $this->processFile($file);
                 } else if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                    echo 'Skipping '.basename($file->path).PHP_EOL;
+                    StatusWriter::write('Skipping '.basename($file->path));
                 }
 
                 $numProcessed++;
@@ -457,7 +458,7 @@ class Runner
                         $currDir = dirname($path);
                         if ($lastDir !== $currDir) {
                             if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                                echo 'Changing into directory '.Common::stripBasepath($currDir, $this->config->basepath).PHP_EOL;
+                                StatusWriter::write('Changing into directory '.Common::stripBasepath($currDir, $this->config->basepath));
                             }
 
                             $lastDir = $currDir;
@@ -515,7 +516,7 @@ class Runner
             && $this->config->interactive === false
             && $this->config->showProgress === true
         ) {
-            echo PHP_EOL.PHP_EOL;
+            StatusWriter::writeNewline(2);
         }
 
         if ($this->config->cache === true) {
@@ -584,10 +585,12 @@ class Runner
     {
         if (PHP_CODESNIFFER_VERBOSITY > 0) {
             $startTime = microtime(true);
-            echo 'Processing '.basename($file->path).' ';
+            $newlines  = 0;
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                echo PHP_EOL;
+                $newlines = 1;
             }
+
+            StatusWriter::write('Processing '.basename($file->path).' ', 0, $newlines);
         }
 
         try {
@@ -597,19 +600,19 @@ class Runner
                 $timeTaken = ((microtime(true) - $startTime) * 1000);
                 if ($timeTaken < 1000) {
                     $timeTaken = round($timeTaken);
-                    echo "DONE in {$timeTaken}ms";
+                    StatusWriter::write("DONE in {$timeTaken}ms", 0, 0);
                 } else {
                     $timeTaken = round(($timeTaken / 1000), 2);
-                    echo "DONE in $timeTaken secs";
+                    StatusWriter::write("DONE in $timeTaken secs", 0, 0);
                 }
 
                 if (PHP_CODESNIFFER_CBF === true) {
                     $errors = $file->getFixableCount();
-                    echo " ($errors fixable violations)".PHP_EOL;
+                    StatusWriter::write(" ($errors fixable violations)");
                 } else {
                     $errors   = $file->getErrorCount();
                     $warnings = $file->getWarningCount();
-                    echo " ($errors errors, $warnings warnings)".PHP_EOL;
+                    StatusWriter::write(" ($errors errors, $warnings warnings)");
                 }
             }
         } catch (Exception $e) {
@@ -868,7 +871,7 @@ class Runner
             }//end if
         }//end if
 
-        echo $colorOpen.$progressDot.$colorClose;
+        StatusWriter::write($colorOpen.$progressDot.$colorClose, 0, 0);
 
         $numPerLine = 60;
         if ($numProcessed !== $numFiles && ($numProcessed % $numPerLine) !== 0) {
@@ -884,7 +887,7 @@ class Runner
             $padding += ($numPerLine - ($numFiles - (floor($numFiles / $numPerLine) * $numPerLine)));
         }
 
-        echo str_repeat(' ', $padding)." $numProcessed / $numFiles ($percent%)".PHP_EOL;
+        StatusWriter::write(str_repeat(' ', $padding)." $numProcessed / $numFiles ($percent%)");
 
     }//end printProgress()
 
@@ -919,7 +922,7 @@ class Runner
             ) {
                 $errorArray = error_get_last();
                 if (is_array($errorArray) === true && strpos($errorArray['message'], $memoryError) !== false) {
-                    echo $errorMsg;
+                    fwrite(STDERR, $errorMsg);
                 }
             }
         );

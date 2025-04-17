@@ -10,6 +10,7 @@
 namespace PHP_CodeSniffer\Tokenizers;
 
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 class Comment
 {
@@ -27,7 +28,7 @@ class Comment
     public function tokenizeString($string, $eolChar, $stackPtr)
     {
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
-            echo "\t\t*** START COMMENT TOKENIZING ***".PHP_EOL;
+            StatusWriter::write('*** START COMMENT TOKENIZING ***', 2);
         }
 
         $tokens   = [];
@@ -61,7 +62,7 @@ class Comment
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             $content = Common::prepareForOutput($openTag);
-            echo "\t\tCreate comment token: T_DOC_COMMENT_OPEN_TAG => $content".PHP_EOL;
+            StatusWriter::write("Create comment token: T_DOC_COMMENT_OPEN_TAG => $content", 2);
         }
 
         /*
@@ -105,7 +106,7 @@ class Comment
                 $stackPtr++;
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
                     $content = Common::prepareForOutput($space['content']);
-                    echo "\t\tCreate comment token: T_DOC_COMMENT_WHITESPACE => $content".PHP_EOL;
+                    StatusWriter::write("Create comment token: T_DOC_COMMENT_WHITESPACE => $content", 2);
                 }
 
                 $char += strlen($space['content']);
@@ -130,7 +131,7 @@ class Comment
                 $stackPtr++;
 
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    echo "\t\tCreate comment token: T_DOC_COMMENT_STAR => *".PHP_EOL;
+                    StatusWriter::write('Create comment token: T_DOC_COMMENT_STAR => *', 2);
                 }
             }
 
@@ -141,7 +142,7 @@ class Comment
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
                     $content = Common::prepareForOutput($lineToken['content']);
                     $type    = $lineToken['type'];
-                    echo "\t\tCreate comment token: $type => $content".PHP_EOL;
+                    StatusWriter::write("Create comment token: $type => $content", 2);
                 }
 
                 if ($lineToken['code'] === T_DOC_COMMENT_TAG) {
@@ -156,11 +157,11 @@ class Comment
         $tokens[$openPtr]['comment_closer'] = $stackPtr;
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             $content = Common::prepareForOutput($closeTag['content']);
-            echo "\t\tCreate comment token: T_DOC_COMMENT_CLOSE_TAG => $content".PHP_EOL;
+            StatusWriter::write("Create comment token: T_DOC_COMMENT_CLOSE_TAG => $content", 2);
         }
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
-            echo "\t\t*** END COMMENT TOKENIZING ***".PHP_EOL;
+            StatusWriter::write('*** END COMMENT TOKENIZING ***', 2);
         }
 
         return $tokens;

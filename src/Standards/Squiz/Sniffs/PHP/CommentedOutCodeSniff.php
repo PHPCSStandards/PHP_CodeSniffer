@@ -14,6 +14,7 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Tokenizers\PHP;
 use PHP_CodeSniffer\Util\Tokens;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 class CommentedOutCodeSniff implements Sniff
 {
@@ -165,14 +166,21 @@ class CommentedOutCodeSniff implements Sniff
         // of errors that don't mean anything, so ignore them.
         $oldErrors = ini_get('error_reporting');
         ini_set('error_reporting', 0);
+
+        // Pause the StatusWriter to silence Tokenizer debug info about the comments being parsed (which only confuses things).
+        StatusWriter::pause();
+
         try {
             $tokenizer    = new PHP($content, $phpcsFile->config, $phpcsFile->eolChar);
             $stringTokens = $tokenizer->getTokens();
         } catch (TokenizerException $e) {
             // We couldn't check the comment, so ignore it.
+            StatusWriter::resume();
             ini_set('error_reporting', $oldErrors);
             return ($lastCommentBlockToken + 1);
         }
+
+        StatusWriter::resume();
 
         ini_set('error_reporting', $oldErrors);
 

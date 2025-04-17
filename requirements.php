@@ -33,7 +33,8 @@ function checkRequirements()
 
     // Check the PHP version.
     if (PHP_VERSION_ID < 70200) {
-        echo 'ERROR: PHP_CodeSniffer requires PHP version 7.2.0 or greater.'.PHP_EOL;
+        $error = 'ERROR: PHP_CodeSniffer requires PHP version 7.2.0 or greater.'.PHP_EOL;
+        fwrite(STDERR, $error);
         exit($exitCode);
     }
 
@@ -64,7 +65,7 @@ function checkRequirements()
         }
 
         $error = 'ERROR: PHP_CodeSniffer requires the %s extensions to be enabled. Please enable %s.'.PHP_EOL;
-        printf($error, $required, $missing);
+        fwrite(STDERR, sprintf($error, $required, $missing));
         exit($exitCode);
     }
 

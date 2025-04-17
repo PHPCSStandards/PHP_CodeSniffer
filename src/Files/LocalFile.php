@@ -13,6 +13,7 @@ use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Util\Cache;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 class LocalFile extends File
 {
@@ -113,7 +114,7 @@ class LocalFile extends File
             if (PHP_CODESNIFFER_VERBOSITY > 0
                 || (PHP_CODESNIFFER_CBF === true && empty($this->config->files) === false)
             ) {
-                echo "[loaded from cache]... ";
+                StatusWriter::write('[loaded from cache]... ', 0, 0);
             }
 
             $this->numTokens = $cache['numTokens'];
@@ -122,7 +123,7 @@ class LocalFile extends File
         }//end if
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
-            echo PHP_EOL;
+            StatusWriter::writeNewline();
         }
 
         parent::process();

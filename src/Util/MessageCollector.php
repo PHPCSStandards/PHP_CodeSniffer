@@ -23,6 +23,7 @@ namespace PHP_CodeSniffer\Util;
 
 use InvalidArgumentException;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 final class MessageCollector
 {
@@ -161,12 +162,12 @@ final class MessageCollector
             $messages = $this->sortBySeverity($messageInfo);
         }
 
-        $allMessages = implode(PHP_EOL, $messages).PHP_EOL.PHP_EOL;
+        $allMessages = implode(PHP_EOL, $messages);
 
         if ($blocking === true) {
-            throw new RuntimeException($allMessages);
+            throw new RuntimeException($allMessages.PHP_EOL.PHP_EOL);
         } else {
-            echo $allMessages;
+            StatusWriter::write($allMessages, 0, 2);
         }
 
     }//end display()

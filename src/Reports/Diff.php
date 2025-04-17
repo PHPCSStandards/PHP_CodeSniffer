@@ -10,6 +10,7 @@
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 class Diff implements Report
 {
@@ -42,9 +43,9 @@ class Diff implements Report
         if (empty($tokens) === true) {
             if (PHP_CODESNIFFER_VERBOSITY === 1) {
                 $startTime = microtime(true);
-                echo 'DIFF report is parsing '.basename($report['filename']).' ';
+                StatusWriter::write('DIFF report is parsing '.basename($report['filename']).' ', 0, 0);
             } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                echo 'DIFF report is forcing parse of '.$report['filename'].PHP_EOL;
+                StatusWriter::write('DIFF report is forcing parse of '.$report['filename']);
             }
 
             $phpcsFile->parse();
@@ -53,13 +54,11 @@ class Diff implements Report
                 $timeTaken = ((microtime(true) - $startTime) * 1000);
                 if ($timeTaken < 1000) {
                     $timeTaken = round($timeTaken);
-                    echo "DONE in {$timeTaken}ms";
+                    StatusWriter::write("DONE in {$timeTaken}ms");
                 } else {
                     $timeTaken = round(($timeTaken / 1000), 2);
-                    echo "DONE in $timeTaken secs";
+                    StatusWriter::write("DONE in $timeTaken secs");
                 }
-
-                echo PHP_EOL;
             }
 
             $phpcsFile->fixer->startFile($phpcsFile);
@@ -67,13 +66,13 @@ class Diff implements Report
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             ob_end_clean();
-            echo "\t*** START FILE FIXING ***".PHP_EOL;
+            StatusWriter::write('*** START FILE FIXING ***', 1);
         }
 
         $fixed = $phpcsFile->fixer->fixFile();
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
-            echo "\t*** END FILE FIXING ***".PHP_EOL;
+            StatusWriter::write('*** END FILE FIXING ***', 1);
             ob_start();
         }
 

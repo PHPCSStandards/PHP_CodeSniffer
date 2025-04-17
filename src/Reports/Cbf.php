@@ -16,6 +16,7 @@ namespace PHP_CodeSniffer\Reports;
 use PHP_CodeSniffer\Exceptions\DeepExitException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Timing;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 class Cbf implements Report
 {
@@ -44,10 +45,12 @@ class Cbf implements Report
             if (PHP_CODESNIFFER_VERBOSITY > 0) {
                 ob_end_clean();
                 $startTime = microtime(true);
-                echo "\t=> Fixing file: $errors/$errors violations remaining";
+                $newlines  = 0;
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    echo PHP_EOL;
+                    $newlines = 1;
                 }
+
+                StatusWriter::forceWrite("=> Fixing file: $errors/$errors violations remaining", 1, $newlines);
             }
 
             $fixed = $phpcsFile->fixer->fixFile();
@@ -67,18 +70,18 @@ class Cbf implements Report
 
         if (PHP_CODESNIFFER_VERBOSITY > 0) {
             if ($fixed === false) {
-                echo 'ERROR';
+                StatusWriter::forceWrite('ERROR', 0, 0);
             } else {
-                echo 'DONE';
+                StatusWriter::forceWrite('DONE', 0, 0);
             }
 
             $timeTaken = ((microtime(true) - $startTime) * 1000);
             if ($timeTaken < 1000) {
                 $timeTaken = round($timeTaken);
-                echo " in {$timeTaken}ms".PHP_EOL;
+                StatusWriter::forceWrite(" in {$timeTaken}ms");
             } else {
                 $timeTaken = round(($timeTaken / 1000), 2);
-                echo " in $timeTaken secs".PHP_EOL;
+                StatusWriter::forceWrite(" in $timeTaken secs");
             }
         }
 
@@ -96,9 +99,9 @@ class Cbf implements Report
 
             if (PHP_CODESNIFFER_VERBOSITY > 0) {
                 if ($newFilename === $report['filename']) {
-                    echo "\t=> File was overwritten".PHP_EOL;
+                    StatusWriter::forceWrite('=> File was overwritten', 1);
                 } else {
-                    echo "\t=> Fixed file written to ".basename($newFilename).PHP_EOL;
+                    StatusWriter::forceWrite('=> Fixed file written to '.basename($newFilename), 1);
                 }
             }
         }
@@ -150,9 +153,11 @@ class Cbf implements Report
 
         if (empty($lines) === true) {
             if (($totalErrors + $totalWarnings) === 0) {
-                echo PHP_EOL.'No violations were found'.PHP_EOL;
+                StatusWriter::writeNewline();
+                StatusWriter::write('No violations were found');
             } else {
-                echo PHP_EOL.'No fixable errors were found'.PHP_EOL;
+                StatusWriter::writeNewline();
+                StatusWriter::write('No fixable errors were found');
             }
 
             return;

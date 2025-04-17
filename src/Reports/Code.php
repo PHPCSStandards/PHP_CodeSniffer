@@ -13,6 +13,7 @@ use Exception;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Common;
 use PHP_CodeSniffer\Util\Timing;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 class Code implements Report
 {
@@ -48,9 +49,9 @@ class Code implements Report
         if (empty($tokens) === true) {
             if (PHP_CODESNIFFER_VERBOSITY === 1) {
                 $startTime = microtime(true);
-                echo 'CODE report is parsing '.basename($file).' ';
+                StatusWriter::forceWrite('CODE report is parsing '.basename($file).' ', 0, 0);
             } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                echo "CODE report is forcing parse of $file".PHP_EOL;
+                StatusWriter::forceWrite("CODE report is forcing parse of $file");
             }
 
             try {
@@ -68,13 +69,11 @@ class Code implements Report
                 $timeTaken = ((microtime(true) - $startTime) * 1000);
                 if ($timeTaken < 1000) {
                     $timeTaken = round($timeTaken);
-                    echo "DONE in {$timeTaken}ms";
+                    StatusWriter::forceWrite("DONE in {$timeTaken}ms");
                 } else {
                     $timeTaken = round(($timeTaken / 1000), 2);
-                    echo "DONE in $timeTaken secs";
+                    StatusWriter::forceWrite("DONE in $timeTaken secs");
                 }
-
-                echo PHP_EOL;
             }
 
             $tokens = $phpcsFile->getTokens();

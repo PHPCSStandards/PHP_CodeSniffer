@@ -386,6 +386,13 @@ To run the tests specific to the use of `PHP_CODESNIFFER_CBF === true`:
     In such cases, the `PHP_CodeSniffer\Tests\Core\Config\AbstractRealConfigTestCase` should be used as the base test class.
 * Tests for the `Runner` class often can't create their own `Config` object in the tests, so run into the same issue.
     Those tests should use the `PHP_CodeSniffer\Tests\Core\Runner\AbstractRunnerTestCase` base class, which will ensure the Config is clean.
+* Testing output sent to `stdErr` via the `StatusWriter` class is not possible by default using PHPUnit.
+    A work-around is available, however, as the `StatusWriter` is a "static class", that work-around involves static properties which need to be (re-)set between tests to ensure tests are pure.
+    So, to test output sent to `stdErr` via the `StatusWriter`, use the `PHP_CodeSniffer\Tests\Core\AbstractWriterTestCase` base class if your tests do not need their own `setUp()` and `tearDown()` methods.
+    If your tests **_do_** need their own `setUp()` and `tearDown()` methods, or would benefit more from using one of the other base TestCase classes, use the `PHP_CodeSniffer\Tests\Core\StatusWriterTestHelper` trait and call the appropriate setup/teardown helper methods from within your own `setUp()` and `tearDown()` methods.
+    Tests using the `AbstractWriterTestCase` class or the trait, also get access to the following test helpers for use when testing output sent to `stdErr`: `expectNoStdoutOutput()`, `assertStderrOutputSameString($expected)` and `assertStderrOutputMatchesRegex($regex)`.
+    Generally speaking, it is a good idea to always add a call to `expectNoStdoutOutput()` in any test using the `assertStderrOutput*()` assertions to make sure there is no output leaking to `stdOut`.
+
 
 ### Submitting Your Pull Request
 
