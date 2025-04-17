@@ -10,7 +10,6 @@
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Util\Timing;
 
 class Info implements Report
 {
@@ -162,10 +161,6 @@ class Info implements Report
         }//end foreach
 
         echo str_repeat('-', 70).PHP_EOL;
-
-        if ($toScreen === true && $interactive === false) {
-            Timing::printRunTime();
-        }
 
     }//end generate()
 

@@ -11,7 +11,6 @@
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Util\Timing;
 
 abstract class VersionControl implements Report
 {
@@ -346,10 +345,6 @@ abstract class VersionControl implements Report
         }
 
         echo PHP_EOL.str_repeat('-', $width).PHP_EOL.PHP_EOL;
-
-        if ($toScreen === true && $interactive === false) {
-            Timing::printRunTime();
-        }
 
     }//end generate()
 

@@ -120,17 +120,9 @@ class Runner
             $numErrors = $this->run();
 
             // Print all the reports for this run.
-            $toScreen = $this->reporter->printReports();
+            $this->reporter->printReports();
 
-            // Only print timer output if no reports were
-            // printed to the screen so we don't put additional output
-            // in something like an XML report. If we are printing to screen,
-            // the report types would have already worked out who should
-            // print the timer info.
-            if ($this->config->interactive === false
-                && ($toScreen === false
-                || (($this->reporter->totalErrors + $this->reporter->totalWarnings) === 0 && $this->config->showProgress === true))
-            ) {
+            if ($this->config->quiet === false) {
                 Timing::printRunTime();
             }
         } catch (DeepExitException $e) {
@@ -215,8 +207,10 @@ class Runner
             $this->run();
             $this->reporter->printReports();
 
-            echo PHP_EOL;
-            Timing::printRunTime();
+            if ($this->config->quiet === false) {
+                StatusWriter::write('');
+                Timing::printRunTime();
+            }
         } catch (DeepExitException $e) {
             echo $e->getMessage();
             return $e->getCode();

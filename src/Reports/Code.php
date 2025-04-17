@@ -12,7 +12,6 @@ namespace PHP_CodeSniffer\Reports;
 use Exception;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Common;
-use PHP_CodeSniffer\Util\Timing;
 use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 class Code implements Report
@@ -357,10 +356,6 @@ class Code implements Report
         }
 
         echo $cachedData;
-
-        if ($toScreen === true && $interactive === false) {
-            Timing::printRunTime();
-        }
 
     }//end generate()
 
