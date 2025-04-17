@@ -60,7 +60,7 @@ abstract class AbstractArraySniff implements Sniff
             $arrayEnd   = $tokens[$stackPtr]['bracket_closer'];
         }
 
-        $lastContent = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($arrayEnd - 1), null, true);
+        $lastContent = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($arrayEnd - 1), null, true);
         if ($tokens[$lastContent]['code'] === T_COMMA) {
             // Last array item ends with a comma.
             $phpcsFile->recordMetric($stackPtr, 'Array end comma', 'yes');
@@ -71,12 +71,12 @@ abstract class AbstractArraySniff implements Sniff
         $indices = [];
 
         $current = $arrayStart;
-        while (($next = $phpcsFile->findNext(Tokens::$emptyTokens, ($current + 1), $arrayEnd, true)) !== false) {
+        while (($next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($current + 1), $arrayEnd, true)) !== false) {
             $end = $this->getNext($phpcsFile, $next, $arrayEnd);
 
             if ($tokens[$end]['code'] === T_DOUBLE_ARROW) {
                 $indexEnd   = $phpcsFile->findPrevious(T_WHITESPACE, ($end - 1), null, true);
-                $valueStart = $phpcsFile->findNext(Tokens::$emptyTokens, ($end + 1), null, true);
+                $valueStart = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($end + 1), null, true);
 
                 $indices[] = [
                     'index_start' => $next,

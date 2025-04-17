@@ -87,16 +87,16 @@ class LowercasePHPFunctionsSniff implements Sniff
             return;
         }
 
-        $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
         if ($next === false) {
             // Not a function call.
             return;
         }
 
-        $ignore   = Tokens::$emptyTokens;
+        $ignore   = Tokens::EMPTY_TOKENS;
         $ignore[] = T_BITWISE_AND;
         $prev     = $phpcsFile->findPrevious($ignore, ($stackPtr - 1), null, true);
-        $prevPrev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($prev - 1), null, true);
+        $prevPrev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($prev - 1), null, true);
 
         if ($tokens[$next]['code'] !== T_OPEN_PARENTHESIS) {
             // Is this a use statement importing a PHP native function ?

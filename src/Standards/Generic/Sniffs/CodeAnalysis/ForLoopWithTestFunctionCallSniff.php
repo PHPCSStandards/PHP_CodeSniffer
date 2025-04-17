@@ -80,13 +80,13 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
                 continue;
             } else if ($position > 1) {
                 break;
-            } else if ($code !== T_VARIABLE && isset(Tokens::$nameTokens[$code]) === false) {
+            } else if ($code !== T_VARIABLE && isset(Tokens::NAME_TOKENS[$code]) === false) {
                 continue;
             }
 
             // Find next non empty token, if it is a open parenthesis we have a
             // function call.
-            $index = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
+            $index = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($next + 1), null, true);
 
             if ($tokens[$index]['code'] === T_OPEN_PARENTHESIS) {
                 $error = 'Avoid function calls in a FOR loop test part';

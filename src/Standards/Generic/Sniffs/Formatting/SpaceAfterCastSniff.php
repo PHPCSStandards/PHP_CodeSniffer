@@ -38,7 +38,7 @@ class SpaceAfterCastSniff implements Sniff
      */
     public function register()
     {
-        return Tokens::$castTokens;
+        return Tokens::CAST_TOKENS;
 
     }//end register()
 
@@ -68,7 +68,7 @@ class SpaceAfterCastSniff implements Sniff
             return;
         }
 
-        $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
         if ($nextNonEmpty === false) {
             return;
         }

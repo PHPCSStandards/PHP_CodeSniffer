@@ -63,7 +63,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken($testMarker, T_CONST);
 
         for ($i = ($target + 1); $tokens[$i]['code'] !== T_EQUAL; $i++) {
-            if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === true) {
+            if (isset(Tokens::EMPTY_TOKENS[$tokens[$i]['code']]) === true) {
                 // Ignore whitespace and comments, not interested in the tokenization of those.
                 continue;
             }
@@ -130,7 +130,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
 
         $current = 0;
         for ($i = ($target + 1); $tokens[$i]['code'] !== T_EQUAL; $i++) {
-            if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === true) {
+            if (isset(Tokens::EMPTY_TOKENS[$tokens[$i]['code']]) === true) {
                 // Ignore whitespace and comments, not interested in the tokenization of those.
                 continue;
             }

@@ -24,7 +24,7 @@ class LogicalOperatorSpacingSniff implements Sniff
      */
     public function register()
     {
-        return Tokens::$booleanOperators;
+        return Tokens::BOOLEAN_OPERATORS;
 
     }//end register()
 

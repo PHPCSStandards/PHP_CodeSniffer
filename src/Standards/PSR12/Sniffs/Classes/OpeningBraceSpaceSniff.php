@@ -24,7 +24,7 @@ class OpeningBraceSpaceSniff implements Sniff
      */
     public function register()
     {
-        return Tokens::$ooScopeTokens;
+        return Tokens::OO_SCOPE_TOKENS;
 
     }//end register()
 

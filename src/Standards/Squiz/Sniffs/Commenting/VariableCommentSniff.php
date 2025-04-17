@@ -24,7 +24,7 @@ class VariableCommentSniff extends AbstractVariableSniff
      */
     public function __construct()
     {
-        AbstractScopeSniff::__construct(Tokens::$ooScopeTokens, [T_VARIABLE], false);
+        AbstractScopeSniff::__construct(Tokens::OO_SCOPE_TOKENS, [T_VARIABLE], false);
 
     }//end __construct()
 
@@ -42,8 +42,8 @@ class VariableCommentSniff extends AbstractVariableSniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $ignore  = Tokens::$scopeModifiers;
-        $ignore += Tokens::$nameTokens;
+        $ignore  = Tokens::SCOPE_MODIFIERS;
+        $ignore += Tokens::NAME_TOKENS;
         $ignore += [
             T_VAR                    => T_VAR,
             T_STATIC                 => T_STATIC,

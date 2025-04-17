@@ -82,18 +82,18 @@ class IncrementDecrementUsageSniff implements Sniff
             $start = ($stackPtr + 2);
         }
 
-        $next = $phpcsFile->findNext(Tokens::$emptyTokens, $start, null, true);
+        $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, $start, null, true);
         if ($next === false) {
             return;
         }
 
-        if (isset(Tokens::$arithmeticTokens[$tokens[$next]['code']]) === true) {
+        if (isset(Tokens::ARITHMETIC_TOKENS[$tokens[$next]['code']]) === true) {
             $error = 'Increment and decrement operators cannot be used in an arithmetic operation';
             $phpcsFile->addError($error, $stackPtr, 'NotAllowed');
             return;
         }
 
-        $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($start - 3), null, true);
+        $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($start - 3), null, true);
         if ($prev === false) {
             return;
         }
@@ -120,7 +120,7 @@ class IncrementDecrementUsageSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $assignedVar = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+        $assignedVar = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
         // Not an assignment, return.
         if ($tokens[$assignedVar]['code'] !== T_VARIABLE) {
             return;
@@ -129,7 +129,7 @@ class IncrementDecrementUsageSniff implements Sniff
         $statementEnd = $phpcsFile->findNext([T_SEMICOLON, T_CLOSE_PARENTHESIS, T_CLOSE_SQUARE_BRACKET, T_CLOSE_CURLY_BRACKET], $stackPtr);
 
         // If there is anything other than variables, numbers, spaces or operators we need to return.
-        $find   = Tokens::$emptyTokens;
+        $find   = Tokens::EMPTY_TOKENS;
         $find[] = T_LNUMBER;
         $find[] = T_VARIABLE;
         $find[] = T_PLUS;

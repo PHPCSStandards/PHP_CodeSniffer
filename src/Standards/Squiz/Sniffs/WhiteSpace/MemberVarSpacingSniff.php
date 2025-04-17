@@ -37,7 +37,7 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
      */
     public function __construct()
     {
-        AbstractScopeSniff::__construct(Tokens::$ooScopeTokens, [T_VARIABLE], false);
+        AbstractScopeSniff::__construct(Tokens::OO_SCOPE_TOKENS, [T_VARIABLE], false);
 
     }//end __construct()
 
@@ -64,7 +64,7 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
 
         $endOfPreviousStatement = $phpcsFile->findPrevious($stopPoints, ($stackPtr - 1), null, false, null, true);
 
-        $validPrefixes   = Tokens::$methodPrefixes;
+        $validPrefixes   = Tokens::METHOD_MODIFIERS;
         $validPrefixes[] = T_VAR;
         $validPrefixes[] = T_READONLY;
 
@@ -95,9 +95,9 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
 
         if ($tokens[$prev]['code'] === T_DOC_COMMENT_CLOSE_TAG) {
             $start = $prev;
-        } else if (isset(Tokens::$commentTokens[$tokens[$prev]['code']]) === true) {
+        } else if (isset(Tokens::COMMENT_TOKENS[$tokens[$prev]['code']]) === true) {
             // Assume the comment belongs to the member var if it is on a line by itself.
-            $prevContent = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($prev - 1), null, true);
+            $prevContent = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($prev - 1), null, true);
             if ($tokens[$prevContent]['line'] !== $tokens[$prev]['line']) {
                 $start = $prev;
             }
@@ -114,7 +114,7 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
                 || $tokens[$i]['code'] !== T_WHITESPACE
                 || $tokens[$i]['line'] === $tokens[($i + 1)]['line']
                 // Do not report blank lines after a PHPCS annotation as removing the blank lines could change the meaning.
-                || isset(Tokens::$phpcsCommentTokens[$tokens[($i - 1)]['code']]) === true
+                || isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[($i - 1)]['code']]) === true
             ) {
                 continue;
             }
@@ -147,15 +147,15 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
         // There needs to be n blank lines before the var, not counting comments.
         if ($start === $startOfStatement) {
             // No comment found.
-            $first = $phpcsFile->findFirstOnLine(Tokens::$emptyTokens, $start, true);
+            $first = $phpcsFile->findFirstOnLine(Tokens::EMPTY_TOKENS, $start, true);
             if ($first === false) {
                 $first = $start;
             }
         } else if ($tokens[$start]['code'] === T_DOC_COMMENT_CLOSE_TAG) {
             $first = $tokens[$start]['comment_opener'];
         } else {
-            $first = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($start - 1), null, true);
-            $first = $phpcsFile->findNext(array_merge(Tokens::$commentTokens, [T_ATTRIBUTE]), ($first + 1));
+            $first = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($start - 1), null, true);
+            $first = $phpcsFile->findNext(array_merge(Tokens::COMMENT_TOKENS, [T_ATTRIBUTE]), ($first + 1));
         }
 
         // Determine if this is the first member var.
@@ -168,7 +168,7 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
         }
 
         if ($tokens[$prev]['code'] === T_OPEN_CURLY_BRACKET
-            && isset(Tokens::$ooScopeTokens[$tokens[$tokens[$prev]['scope_condition']]['code']]) === true
+            && isset(Tokens::OO_SCOPE_TOKENS[$tokens[$tokens[$prev]['scope_condition']]['code']]) === true
         ) {
             $errorMsg  = 'Expected %s blank line(s) before first member var; %s found';
             $errorCode = 'FirstIncorrect';

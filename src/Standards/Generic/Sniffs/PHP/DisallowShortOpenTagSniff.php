@@ -73,7 +73,7 @@ class DisallowShortOpenTagSniff implements Sniff
         }
 
         if ($token['code'] === T_OPEN_TAG_WITH_ECHO) {
-            $nextVar = $tokens[$phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true)];
+            $nextVar = $tokens[$phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true)];
             if ($nextVar['code'] !== T_CLOSE_TAG) {
                 $error = 'Short PHP opening tag used with echo; expected "<?php echo %s ..." but found "%s %s ..."';
                 $data  = [

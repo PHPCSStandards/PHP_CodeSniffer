@@ -58,8 +58,8 @@ class UnnecessaryStringConcatSniff implements Sniff
             return;
         }
 
-        if (isset(Tokens::$stringTokens[$tokens[$prev]['code']]) === false
-            || isset(Tokens::$stringTokens[$tokens[$next]['code']]) === false
+        if (isset(Tokens::STRING_TOKENS[$tokens[$prev]['code']]) === false
+            || isset(Tokens::STRING_TOKENS[$tokens[$next]['code']]) === false
         ) {
             // Bow out as at least one of the two tokens being concatenated is not a string.
             return;

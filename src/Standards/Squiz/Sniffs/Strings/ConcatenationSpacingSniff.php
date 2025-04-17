@@ -61,7 +61,7 @@ class ConcatenationSpacingSniff implements Sniff
         }
 
         $ignoreBefore = false;
-        $prev         = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+        $prev         = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
         if ($tokens[$prev]['code'] === T_END_HEREDOC || $tokens[$prev]['code'] === T_END_NOWDOC) {
             // Spacing before must be preserved due to the here/nowdoc closing tag.
             $ignoreBefore = true;

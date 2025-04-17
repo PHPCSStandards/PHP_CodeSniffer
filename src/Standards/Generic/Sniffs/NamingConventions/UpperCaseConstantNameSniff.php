@@ -56,7 +56,7 @@ class UpperCaseConstantNameSniff implements Sniff
                 return;
             }
 
-            $constant = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($assignmentOperator - 1), ($stackPtr + 1), true);
+            $constant = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($assignmentOperator - 1), ($stackPtr + 1), true);
             if ($constant === false) {
                 return;
             }
@@ -89,7 +89,7 @@ class UpperCaseConstantNameSniff implements Sniff
         }
 
         // Make sure this is not a method call or class instantiation.
-        $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+        $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
         if ($tokens[$prev]['code'] === T_OBJECT_OPERATOR
             || $tokens[$prev]['code'] === T_DOUBLE_COLON
             || $tokens[$prev]['code'] === T_NULLSAFE_OBJECT_OPERATOR
@@ -105,7 +105,7 @@ class UpperCaseConstantNameSniff implements Sniff
 
         // If the next non-whitespace token after this token
         // is not an opening parenthesis then it is not a function call.
-        $openBracket = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $openBracket = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
         if ($openBracket === false || $tokens[$openBracket]['code'] !== T_OPEN_PARENTHESIS) {
             return;
         }
@@ -114,7 +114,7 @@ class UpperCaseConstantNameSniff implements Sniff
         // constant name). This could happen when live coding, if the constant is a variable or an
         // expression, or if handling a first-class callable or a function definition outside the
         // global scope.
-        $constPtr = $phpcsFile->findNext(Tokens::$emptyTokens, ($openBracket + 1), null, true);
+        $constPtr = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($openBracket + 1), null, true);
         if ($constPtr === false || $tokens[$constPtr]['code'] !== T_CONSTANT_ENCAPSED_STRING) {
             return;
         }

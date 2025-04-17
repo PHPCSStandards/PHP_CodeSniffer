@@ -1560,7 +1560,7 @@ class File
                 $paramCount++;
                 break;
             case T_EQUAL:
-                $defaultStart = $this->findNext(Tokens::$emptyTokens, ($i + 1), null, true);
+                $defaultStart = $this->findNext(Tokens::EMPTY_TOKENS, ($i + 1), null, true);
                 $equalToken   = $i;
                 break;
             }//end switch
@@ -1676,7 +1676,7 @@ class File
                 $scopeOpener = $this->tokens[$stackPtr]['scope_opener'];
             }
 
-            $valid  = Tokens::$nameTokens;
+            $valid  = Tokens::NAME_TOKENS;
             $valid += [
                 T_CALLABLE               => T_CALLABLE,
                 T_SELF                   => T_SELF,
@@ -1794,7 +1794,7 @@ class File
         $conditions = array_keys($conditions);
         $ptr        = array_pop($conditions);
         if (isset($this->tokens[$ptr]) === false
-            || isset(Tokens::$ooScopeTokens[$this->tokens[$ptr]['code']]) === false
+            || isset(Tokens::OO_SCOPE_TOKENS[$this->tokens[$ptr]['code']]) === false
             || $this->tokens[$ptr]['code'] === T_ENUM
         ) {
             throw new RuntimeException('$stackPtr is not a class member var');
@@ -1822,7 +1822,7 @@ class File
             T_FINAL     => T_FINAL,
         ];
 
-        $valid += Tokens::$emptyTokens;
+        $valid += Tokens::EMPTY_TOKENS;
 
         $scope          = 'public';
         $scopeSpecified = false;
@@ -1877,7 +1877,7 @@ class File
 
         if ($i < $stackPtr) {
             // We've found a type.
-            $valid  = Tokens::$nameTokens;
+            $valid  = Tokens::NAME_TOKENS;
             $valid += [
                 T_CALLABLE               => T_CALLABLE,
                 T_SELF                   => T_SELF,
@@ -2014,7 +2014,7 @@ class File
         }
 
         $tokenBefore = $this->findPrevious(
-            Tokens::$emptyTokens,
+            Tokens::EMPTY_TOKENS,
             ($stackPtr - 1),
             null,
             true
@@ -2038,14 +2038,14 @@ class File
             return true;
         }
 
-        if (isset(Tokens::$assignmentTokens[$this->tokens[$tokenBefore]['code']]) === true) {
+        if (isset(Tokens::ASSIGNMENT_TOKENS[$this->tokens[$tokenBefore]['code']]) === true) {
             // This is directly after an assignment. It's a reference. Even if
             // it is part of an operation, the other tests will handle it.
             return true;
         }
 
         $tokenAfter = $this->findNext(
-            Tokens::$emptyTokens,
+            Tokens::EMPTY_TOKENS,
             ($stackPtr + 1),
             null,
             true
@@ -2084,8 +2084,8 @@ class File
             if ($this->tokens[$tokenAfter]['code'] === T_VARIABLE) {
                 return true;
             } else {
-                $skip   = Tokens::$emptyTokens;
-                $skip  += Tokens::$nameTokens;
+                $skip   = Tokens::EMPTY_TOKENS;
+                $skip  += Tokens::NAME_TOKENS;
                 $skip[] = T_SELF;
                 $skip[] = T_PARENT;
                 $skip[] = T_STATIC;
@@ -2309,7 +2309,7 @@ class File
      */
     public function findStartOfStatement($start, $ignore=null)
     {
-        $startTokens = Tokens::$blockOpeners;
+        $startTokens = Tokens::BLOCK_OPENERS;
         $startTokens[T_OPEN_SHORT_ARRAY]   = true;
         $startTokens[T_OPEN_TAG]           = true;
         $startTokens[T_OPEN_TAG_WITH_ECHO] = true;
@@ -2395,7 +2395,7 @@ class File
                     // If it is the scope opener, go the first non-empty token after. $start will have been part of the first condition.
                     if ($prevMatch <= $this->tokens[$matchExpression]['scope_opener']) {
                         // We're before the arrow in the first case.
-                        $next = $this->findNext(Tokens::$emptyTokens, ($this->tokens[$matchExpression]['scope_opener'] + 1), null, true);
+                        $next = $this->findNext(Tokens::EMPTY_TOKENS, ($this->tokens[$matchExpression]['scope_opener'] + 1), null, true);
                         if ($next === false) {
                             // Shouldn't be possible.
                             return $start;
@@ -2412,7 +2412,7 @@ class File
                     }
 
                     // In both cases, go to the first non-empty token after.
-                    $next = $this->findNext(Tokens::$emptyTokens, ($prevMatch + 1), null, true);
+                    $next = $this->findNext(Tokens::EMPTY_TOKENS, ($prevMatch + 1), null, true);
                     if ($next === false) {
                         // Shouldn't be possible.
                         return $start;
@@ -2480,7 +2480,7 @@ class File
                 }
             }//end if
 
-            if (isset(Tokens::$emptyTokens[$this->tokens[$i]['code']]) === false) {
+            if (isset(Tokens::EMPTY_TOKENS[$this->tokens[$i]['code']]) === false) {
                 $lastNotEmpty = $i;
             }
         }//end for
@@ -2575,7 +2575,7 @@ class File
                     continue;
                 }
 
-                if ($i === $start && isset(Tokens::$scopeOpeners[$this->tokens[$i]['code']]) === true) {
+                if ($i === $start && isset(Tokens::SCOPE_OPENERS[$this->tokens[$i]['code']]) === true) {
                     return $this->tokens[$i]['scope_closer'];
                 }
 
@@ -2595,7 +2595,7 @@ class File
                 }
             }//end if
 
-            if (isset(Tokens::$emptyTokens[$this->tokens[$i]['code']]) === false) {
+            if (isset(Tokens::EMPTY_TOKENS[$this->tokens[$i]['code']]) === false) {
                 $lastNotEmpty = $i;
             }
         }//end for
@@ -2778,7 +2778,7 @@ class File
             return false;
         }
 
-        $find   = Tokens::$nameTokens;
+        $find   = Tokens::NAME_TOKENS;
         $find[] = T_WHITESPACE;
 
         $end  = $this->findNext($find, ($extendsIndex + 1), ($classOpenerIndex + 1), true);
@@ -2827,7 +2827,7 @@ class File
             return false;
         }
 
-        $find   = Tokens::$nameTokens;
+        $find   = Tokens::NAME_TOKENS;
         $find[] = T_WHITESPACE;
         $find[] = T_COMMA;
 

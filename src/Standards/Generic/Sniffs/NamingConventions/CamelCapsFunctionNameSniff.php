@@ -84,7 +84,7 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
      */
     public function __construct()
     {
-        parent::__construct(Tokens::$ooScopeTokens, [T_FUNCTION], true);
+        parent::__construct(Tokens::OO_SCOPE_TOKENS, [T_FUNCTION], true);
 
     }//end __construct()
 

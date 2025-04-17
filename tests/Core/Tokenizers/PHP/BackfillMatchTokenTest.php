@@ -215,7 +215,7 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
      */
     public function testNotAMatchStructure($testMarker, $testContent='match', $expectedType='T_STRING')
     {
-        $targetTypes  = Tokens::$nameTokens;
+        $targetTypes  = Tokens::NAME_TOKENS;
         $targetTypes += [T_MATCH => T_MATCH];
         $target       = $this->getTargetToken($testMarker, $targetTypes, $testContent);
 
@@ -232,7 +232,7 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
         $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is set');
         $this->assertArrayNotHasKey('parenthesis_closer', $tokenArray, 'Parenthesis closer is set');
 
-        $next = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($target + 1), null, true);
+        $next = $this->phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($target + 1), null, true);
         if ($next !== false && $tokens[$next]['code'] === T_OPEN_PARENTHESIS) {
             $this->assertArrayNotHasKey('parenthesis_owner', $tokenArray, 'Parenthesis owner is set for opener after');
         }

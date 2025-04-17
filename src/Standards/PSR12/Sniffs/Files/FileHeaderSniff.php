@@ -44,7 +44,7 @@ class FileHeaderSniff implements Sniff
 
         $possibleHeaders = [];
 
-        $searchFor = Tokens::$ooScopeTokens;
+        $searchFor = Tokens::OO_SCOPE_TOKENS;
         $searchFor[T_OPEN_TAG] = T_OPEN_TAG;
 
         $openTag = $stackPtr;
@@ -61,7 +61,7 @@ class FileHeaderSniff implements Sniff
             }
 
             $next = $phpcsFile->findNext($searchFor, ($openTag + 1));
-            if (isset(Tokens::$ooScopeTokens[$tokens[$next]['code']]) === true) {
+            if (isset(Tokens::OO_SCOPE_TOKENS[$tokens[$next]['code']]) === true) {
                 // Once we find an OO token, the file content has
                 // definitely started.
                 break;
@@ -146,7 +146,7 @@ class FileHeaderSniff implements Sniff
 
         $foundDocblock = false;
 
-        $commentOpeners = Tokens::$scopeOpeners;
+        $commentOpeners = Tokens::SCOPE_OPENERS;
         unset($commentOpeners[T_NAMESPACE]);
         unset($commentOpeners[T_DECLARE]);
         unset($commentOpeners[T_USE]);
@@ -168,7 +168,7 @@ class FileHeaderSniff implements Sniff
                 // Make sure this is not a code-level docblock.
                 $end = $tokens[$next]['comment_closer'];
                 for ($docToken = ($end + 1); $docToken < $phpcsFile->numTokens; $docToken++) {
-                    if (isset(Tokens::$emptyTokens[$tokens[$docToken]['code']]) === true) {
+                    if (isset(Tokens::EMPTY_TOKENS[$tokens[$docToken]['code']]) === true) {
                         continue;
                     }
 
@@ -187,7 +187,7 @@ class FileHeaderSniff implements Sniff
                 }
 
                 if (isset($commentOpeners[$tokens[$docToken]['code']]) === false
-                    && isset(Tokens::$methodPrefixes[$tokens[$docToken]['code']]) === false
+                    && isset(Tokens::METHOD_MODIFIERS[$tokens[$docToken]['code']]) === false
                     && $tokens[$docToken]['code'] !== T_READONLY
                 ) {
                     // Check for an @var annotation.
@@ -234,7 +234,7 @@ class FileHeaderSniff implements Sniff
                 break;
             case T_USE:
                 $type    = 'use';
-                $useType = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
+                $useType = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($next + 1), null, true);
                 if ($useType !== false && $tokens[$useType]['code'] === T_STRING) {
                     $content = strtolower($tokens[$useType]['content']);
                     if ($content === 'function' || $content === 'const') {
@@ -254,8 +254,8 @@ class FileHeaderSniff implements Sniff
                 break;
             default:
                 // Skip comments as PSR-12 doesn't say if these are allowed or not.
-                if (isset(Tokens::$commentTokens[$tokens[$next]['code']]) === true) {
-                    $next = $phpcsFile->findNext(Tokens::$commentTokens, ($next + 1), null, true);
+                if (isset(Tokens::COMMENT_TOKENS[$tokens[$next]['code']]) === true) {
+                    $next = $phpcsFile->findNext(Tokens::COMMENT_TOKENS, ($next + 1), null, true);
                     if ($next === false) {
                         // We reached the end of the file.
                         break(2);

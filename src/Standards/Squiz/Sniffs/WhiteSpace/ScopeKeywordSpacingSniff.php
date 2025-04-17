@@ -24,7 +24,7 @@ class ScopeKeywordSpacingSniff implements Sniff
      */
     public function register()
     {
-        $register   = Tokens::$methodPrefixes;
+        $register   = Tokens::METHOD_MODIFIERS;
         $register[] = T_READONLY;
         return $register;
 
@@ -50,8 +50,8 @@ class ScopeKeywordSpacingSniff implements Sniff
             return;
         }
 
-        $prevToken = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
-        $nextToken = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $prevToken = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
+        $nextToken = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
 
         if ($tokens[$stackPtr]['code'] === T_STATIC) {
             if (($nextToken === false || $tokens[$nextToken]['code'] === T_DOUBLE_COLON)
@@ -79,7 +79,7 @@ class ScopeKeywordSpacingSniff implements Sniff
             if ($prevToken !== false
                 && $tokens[$prevToken]['code'] === T_COLON
             ) {
-                $prevPrevToken = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($prevToken - 1), null, true);
+                $prevPrevToken = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($prevToken - 1), null, true);
                 if ($prevPrevToken !== false
                     && $tokens[$prevPrevToken]['code'] === T_CLOSE_PARENTHESIS
                 ) {

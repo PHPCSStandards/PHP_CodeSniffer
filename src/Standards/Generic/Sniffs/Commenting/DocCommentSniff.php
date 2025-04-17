@@ -272,7 +272,7 @@ class DocCommentSniff implements Sniff
 
             // Check that there was single blank line after the tag block
             // but account for multi-line tag comments.
-            $find = Tokens::$phpcsCommentTokens;
+            $find = Tokens::PHPCS_ANNOTATION_TOKENS;
             $find[T_DOC_COMMENT_TAG] = T_DOC_COMMENT_TAG;
 
             $lastTag = $group[$pos];

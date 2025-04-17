@@ -47,17 +47,17 @@ class ImportStatementSniff implements Sniff
             return;
         }
 
-        if ($phpcsFile->hasCondition($stackPtr, Tokens::$ooScopeTokens) === true) {
+        if ($phpcsFile->hasCondition($stackPtr, Tokens::OO_SCOPE_TOKENS) === true) {
             // This rule only applies to import statements.
             return;
         }
 
-        $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
         if ($tokens[$next]['code'] === T_STRING
             && (strtolower($tokens[$next]['content']) === 'function'
             || strtolower($tokens[$next]['content']) === 'const')
         ) {
-            $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
+            $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($next + 1), null, true);
         }
 
         if ($tokens[$next]['code'] !== T_NAME_FULLY_QUALIFIED) {

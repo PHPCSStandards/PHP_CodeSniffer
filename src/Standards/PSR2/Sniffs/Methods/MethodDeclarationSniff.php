@@ -22,7 +22,7 @@ class MethodDeclarationSniff extends AbstractScopeSniff
      */
     public function __construct()
     {
-        parent::__construct(Tokens::$ooScopeTokens, [T_FUNCTION]);
+        parent::__construct(Tokens::OO_SCOPE_TOKENS, [T_FUNCTION]);
 
     }//end __construct()
 
@@ -65,11 +65,11 @@ class MethodDeclarationSniff extends AbstractScopeSniff
         $abstract   = 0;
         $final      = 0;
 
-        $find = (Tokens::$methodPrefixes + Tokens::$emptyTokens);
+        $find = (Tokens::METHOD_MODIFIERS + Tokens::EMPTY_TOKENS);
         $prev = $phpcsFile->findPrevious($find, ($stackPtr - 1), null, true);
 
         $prefix = $stackPtr;
-        while (($prefix = $phpcsFile->findPrevious(Tokens::$methodPrefixes, ($prefix - 1), $prev)) !== false) {
+        while (($prefix = $phpcsFile->findPrevious(Tokens::METHOD_MODIFIERS, ($prefix - 1), $prev)) !== false) {
             switch ($tokens[$prefix]['code']) {
             case T_STATIC:
                 $static = $prefix;

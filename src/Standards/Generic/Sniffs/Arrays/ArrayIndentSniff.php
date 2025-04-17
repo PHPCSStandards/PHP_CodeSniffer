@@ -60,7 +60,7 @@ class ArrayIndentSniff extends AbstractArraySniff
         $tokens = $phpcsFile->getTokens();
 
         // Determine how far indented the entire array declaration should be.
-        $ignore     = Tokens::$emptyTokens;
+        $ignore     = Tokens::EMPTY_TOKENS;
         $ignore[]   = T_DOUBLE_ARROW;
         $prev       = $phpcsFile->findPrevious($ignore, ($stackPtr - 1), null, true);
         $start      = $phpcsFile->findStartOfStatement($prev);
@@ -108,7 +108,7 @@ class ArrayIndentSniff extends AbstractArraySniff
                 $start = $index['value_start'];
             }
 
-            $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($start - 1), null, true);
+            $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($start - 1), null, true);
             if ($tokens[$prev]['line'] === $tokens[$start]['line']) {
                 // This index isn't the only content on the line
                 // so we can't check indent rules.

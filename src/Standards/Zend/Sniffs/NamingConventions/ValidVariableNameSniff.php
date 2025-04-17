@@ -83,7 +83,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                 // this: MyClass::$_variable, so we don't know its scope.
                 $inClass = true;
             } else {
-                $inClass = $phpcsFile->hasCondition($stackPtr, Tokens::$ooScopeTokens);
+                $inClass = $phpcsFile->hasCondition($stackPtr, Tokens::OO_SCOPE_TOKENS);
             }
 
             if ($inClass === true) {

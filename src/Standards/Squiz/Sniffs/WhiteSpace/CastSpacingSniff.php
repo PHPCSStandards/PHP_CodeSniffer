@@ -24,7 +24,7 @@ class CastSpacingSniff implements Sniff
      */
     public function register()
     {
-        return Tokens::$castTokens;
+        return Tokens::CAST_TOKENS;
 
     }//end register()
 

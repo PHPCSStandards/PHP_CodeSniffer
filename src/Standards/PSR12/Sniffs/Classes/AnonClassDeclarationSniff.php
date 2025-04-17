@@ -195,7 +195,7 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
                     // We want to jump over any whitespace or inline comment and
                     // move the closing parenthesis after any other token.
                     $prev = ($closeBracket - 1);
-                    while (isset(Tokens::$emptyTokens[$tokens[$prev]['code']]) === true) {
+                    while (isset(Tokens::EMPTY_TOKENS[$tokens[$prev]['code']]) === true) {
                         if (($tokens[$prev]['code'] === T_COMMENT)
                             && (strpos($tokens[$prev]['content'], '*/') !== false)
                         ) {

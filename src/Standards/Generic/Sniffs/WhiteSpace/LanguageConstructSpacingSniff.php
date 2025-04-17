@@ -72,7 +72,7 @@ class LanguageConstructSpacingSniff implements Sniff
 
         $content = $tokens[$stackPtr]['content'];
         if ($tokens[$stackPtr]['code'] === T_NAMESPACE) {
-            $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+            $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
             if ($nextNonEmpty !== false && $tokens[$nextNonEmpty]['code'] === T_NAME_FULLY_QUALIFIED) {
                 // Namespace keyword used as operator, not as the language construct.
                 // Note: in PHP >= 8 namespaced names no longer allow for whitespace/comments between the parts (parse error).
@@ -90,13 +90,13 @@ class LanguageConstructSpacingSniff implements Sniff
             // Handle potentially multi-line/multi-token "yield from" expressions.
             if (preg_match('`yield\s+from`i', $content) !== 1) {
                 for ($i = ($stackPtr + 1); $i < $phpcsFile->numTokens; $i++) {
-                    if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === false
+                    if (isset(Tokens::EMPTY_TOKENS[$tokens[$i]['code']]) === false
                         && $tokens[$i]['code'] !== T_YIELD_FROM
                     ) {
                         break;
                     }
 
-                    if (isset(Tokens::$commentTokens[$tokens[$i]['code']]) === true) {
+                    if (isset(Tokens::COMMENT_TOKENS[$tokens[$i]['code']]) === true) {
                         $hasComment = true;
                     }
 

@@ -72,7 +72,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
         ];
 
         $prevNonSpace = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
-        $prevNonEmpty = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+        $prevNonEmpty = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
 
         if (isset($classModifiers[$tokens[$prevNonEmpty]['code']]) === true) {
             $spaces    = 0;
@@ -274,13 +274,13 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
         $implements          = $phpcsFile->findNext($keywordTokenType, ($stackPtr + 1), $openingBrace);
         $multiLineImplements = false;
         if ($implements !== false) {
-            $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($openingBrace - 1), $implements, true);
+            $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($openingBrace - 1), $implements, true);
             if ($tokens[$prev]['line'] !== $tokens[$implements]['line']) {
                 $multiLineImplements = true;
             }
         }
 
-        $find = Tokens::$nameTokens;
+        $find = Tokens::NAME_TOKENS;
         $find[$keywordTokenType] = $keywordTokenType;
 
         if ($className !== null) {
@@ -339,7 +339,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                         $phpcsFile->fixer->addNewline($prev);
                         $phpcsFile->fixer->endChangeset();
                     }
-                } else if ((isset(Tokens::$commentTokens[$tokens[$prev]['code']]) === false
+                } else if ((isset(Tokens::COMMENT_TOKENS[$tokens[$prev]['code']]) === false
                     && $tokens[$prev]['line'] !== ($tokens[$className]['line'] - 1))
                     || $tokens[$prev]['line'] === $tokens[$className]['line']
                 ) {
@@ -499,7 +499,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
         if ($tokens[$stackPtr]['code'] !== T_ANON_CLASS) {
             // Check the closing brace is on it's own line, but allow
             // for comments like "//end class".
-            $ignoreTokens   = Tokens::$phpcsCommentTokens;
+            $ignoreTokens   = Tokens::PHPCS_ANNOTATION_TOKENS;
             $ignoreTokens[] = T_WHITESPACE;
             $ignoreTokens[] = T_COMMENT;
             $ignoreTokens[] = T_SEMICOLON;

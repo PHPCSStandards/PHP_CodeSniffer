@@ -81,7 +81,7 @@ class OpeningFunctionBraceBsdAllmanSniff implements Sniff
         }
 
         // Find the end of the function declaration.
-        $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($openingBrace - 1), $closeBracket, true);
+        $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($openingBrace - 1), $closeBracket, true);
 
         $functionLine = $tokens[$prev]['line'];
         $braceLine    = $tokens[$openingBrace]['line'];
@@ -103,7 +103,7 @@ class OpeningFunctionBraceBsdAllmanSniff implements Sniff
                         break;
                     }
 
-                    if (isset(Tokens::$phpcsCommentTokens[$tokens[$nextLine]['code']]) === true) {
+                    if (isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[$nextLine]['code']]) === true) {
                         $hasTrailingAnnotation = true;
                     }
                 }
@@ -165,7 +165,7 @@ class OpeningFunctionBraceBsdAllmanSniff implements Sniff
             }//end if
         }//end if
 
-        $ignore   = Tokens::$phpcsCommentTokens;
+        $ignore   = Tokens::PHPCS_ANNOTATION_TOKENS;
         $ignore[] = T_WHITESPACE;
         $next     = $phpcsFile->findNext($ignore, ($openingBrace + 1), null, true);
         if ($tokens[$next]['line'] === $tokens[$openingBrace]['line']) {

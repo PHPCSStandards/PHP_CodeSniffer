@@ -69,7 +69,7 @@ class FunctionCommentSniff implements Sniff
         }
 
         $tokens = $phpcsFile->getTokens();
-        $ignore = Tokens::$methodPrefixes;
+        $ignore = Tokens::METHOD_MODIFIERS;
         $ignore[T_WHITESPACE] = T_WHITESPACE;
 
         for ($commentEnd = ($stackPtr - 1); $commentEnd >= 0; $commentEnd--) {
@@ -133,7 +133,7 @@ class FunctionCommentSniff implements Sniff
                     || $tokens[$i]['code'] !== T_WHITESPACE
                     || $tokens[$i]['line'] === $tokens[($i + 1)]['line']
                     // Do not report blank lines after a PHPCS annotation as removing the blank lines could change the meaning.
-                    || isset(Tokens::$phpcsCommentTokens[$tokens[($i - 1)]['code']]) === true
+                    || isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[($i - 1)]['code']]) === true
                 ) {
                     continue;
                 }

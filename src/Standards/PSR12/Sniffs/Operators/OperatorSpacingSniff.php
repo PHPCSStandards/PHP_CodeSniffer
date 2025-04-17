@@ -26,10 +26,10 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
     {
         parent::register();
 
-        $targets   = Tokens::$comparisonTokens;
-        $targets  += Tokens::$operators;
-        $targets  += Tokens::$assignmentTokens;
-        $targets  += Tokens::$booleanOperators;
+        $targets   = Tokens::COMPARISON_TOKENS;
+        $targets  += Tokens::OPERATORS;
+        $targets  += Tokens::ASSIGNMENT_TOKENS;
+        $targets  += Tokens::BOOLEAN_OPERATORS;
         $targets[] = T_INLINE_THEN;
         $targets[] = T_INLINE_ELSE;
         $targets[] = T_STRING_CONCAT;

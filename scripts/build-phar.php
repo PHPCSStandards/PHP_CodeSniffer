@@ -63,7 +63,7 @@ function stripWhitespaceAndComments($fullpath, $config)
             continue;
         }
 
-        if (isset(Tokens::$emptyTokens[$token['code']]) === false) {
+        if (isset(Tokens::EMPTY_TOKENS[$token['code']]) === false) {
             $stripped .= $token['content'];
             continue;
         }

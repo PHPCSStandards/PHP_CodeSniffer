@@ -58,7 +58,7 @@ class SelfMemberReferenceSniff extends AbstractScopeSniff
             return;
         }
 
-        $calledClassName = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+        $calledClassName = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
         if ($calledClassName === false) {
             // Parse error.
             return;
@@ -75,7 +75,7 @@ class SelfMemberReferenceSniff extends AbstractScopeSniff
 
                 return;
             }
-        } else if (isset(Tokens::$nameTokens[$tokens[$calledClassName]['code']]) === true) {
+        } else if (isset(Tokens::NAME_TOKENS[$tokens[$calledClassName]['code']]) === true) {
             // Work out the fully qualified name for both the class declaration
             // as well as the class usage to see if they match.
             $namespaceName = $this->getNamespaceName($phpcsFile, $currScope);
@@ -187,7 +187,7 @@ class SelfMemberReferenceSniff extends AbstractScopeSniff
 
         if ($namespaceDeclaration !== false) {
             $tokens       = $phpcsFile->getTokens();
-            $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($namespaceDeclaration + 1), null, true);
+            $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($namespaceDeclaration + 1), null, true);
             if ($nextNonEmpty !== false
                 && ($tokens[$nextNonEmpty]['code'] === T_NAME_QUALIFIED
                 || $tokens[$nextNonEmpty]['code'] === T_STRING)

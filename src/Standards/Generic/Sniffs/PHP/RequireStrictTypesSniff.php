@@ -55,7 +55,7 @@ class RequireStrictTypesSniff implements Sniff
 
             do {
                 $next = $phpcsFile->findNext(
-                    Tokens::$emptyTokens,
+                    Tokens::EMPTY_TOKENS,
                     ($next + 1),
                     $tokens[$declare]['parenthesis_closer'],
                     true
@@ -82,7 +82,7 @@ class RequireStrictTypesSniff implements Sniff
         }
 
         // Strict types declaration found, make sure strict types is enabled.
-        $skip     = Tokens::$emptyTokens;
+        $skip     = Tokens::EMPTY_TOKENS;
         $skip[]   = T_EQUAL;
         $valuePtr = $phpcsFile->findNext($skip, ($next + 1), null, true);
 

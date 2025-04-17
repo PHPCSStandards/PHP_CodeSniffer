@@ -47,7 +47,7 @@ class FunctionCommentThrowTagSniff implements Sniff
             return;
         }
 
-        $ignore = Tokens::$methodPrefixes;
+        $ignore = Tokens::METHOD_MODIFIERS;
         $ignore[T_WHITESPACE] = T_WHITESPACE;
 
         for ($commentEnd = ($stackPtr - 1); $commentEnd >= 0; $commentEnd--) {
@@ -104,13 +104,13 @@ class FunctionCommentThrowTagSniff implements Sniff
                 don't know the exception class.
             */
 
-            $nextToken = $phpcsFile->findNext(Tokens::$emptyTokens, ($currPos + 1), null, true);
+            $nextToken = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($currPos + 1), null, true);
             if ($tokens[$nextToken]['code'] === T_NEW
-                || isset(Tokens::$nameTokens[$tokens[$nextToken]['code']]) === true
+                || isset(Tokens::NAME_TOKENS[$tokens[$nextToken]['code']]) === true
             ) {
                 if ($tokens[$nextToken]['code'] === T_NEW) {
                     $currException = $phpcsFile->findNext(
-                        Tokens::$emptyTokens,
+                        Tokens::EMPTY_TOKENS,
                         ($nextToken + 1),
                         $stackPtrEnd,
                         true
@@ -120,7 +120,7 @@ class FunctionCommentThrowTagSniff implements Sniff
                 }
 
                 if ($currException !== false
-                    && isset(Tokens::$nameTokens[$tokens[$currException]['code']]) === true
+                    && isset(Tokens::NAME_TOKENS[$tokens[$currException]['code']]) === true
                 ) {
                     if ($tokens[$currException]['code'] === T_NAME_RELATIVE) {
                         // Strip the `namespace\` prefix off the exception name

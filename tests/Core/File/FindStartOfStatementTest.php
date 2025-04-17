@@ -34,7 +34,7 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $errors = [];
 
         for ($i = 0; $i < self::$phpcsFile->numTokens; $i++) {
-            if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === true) {
+            if (isset(Tokens::EMPTY_TOKENS[$tokens[$i]['code']]) === true) {
                 continue;
             }
 

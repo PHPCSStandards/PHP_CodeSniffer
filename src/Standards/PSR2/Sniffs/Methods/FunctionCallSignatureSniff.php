@@ -41,7 +41,7 @@ class FunctionCallSignatureSniff extends PEARFunctionCallSignatureSniff
     {
         // If the first argument is on a new line, this is a multi-line
         // function call, even if there is only one argument.
-        $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($openBracket + 1), null, true);
+        $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($openBracket + 1), null, true);
         if ($tokens[$next]['line'] !== $tokens[$stackPtr]['line']) {
             return true;
         }
@@ -52,7 +52,7 @@ class FunctionCallSignatureSniff extends PEARFunctionCallSignatureSniff
         while ($tokens[$end]['code'] === T_COMMA) {
             // If the next bit of code is not on the same line, this is a
             // multi-line function call.
-            $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($end + 1), $closeBracket, true);
+            $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($end + 1), $closeBracket, true);
             if ($next === false) {
                 return false;
             }
@@ -66,7 +66,7 @@ class FunctionCallSignatureSniff extends PEARFunctionCallSignatureSniff
 
         // We've reached the last argument, so see if the next content
         // (should be the close bracket) is also on the same line.
-        $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($end + 1), $closeBracket, true);
+        $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($end + 1), $closeBracket, true);
         if ($next !== false && $tokens[$next]['line'] !== $tokens[$end]['line']) {
             return true;
         }

@@ -49,7 +49,7 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
      */
     public function __construct()
     {
-        $scopes = Tokens::$ooScopeTokens;
+        $scopes = Tokens::OO_SCOPE_TOKENS;
 
         $listen = [
             T_VARIABLE,
@@ -97,7 +97,7 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
         $conditions = array_reverse($tokens[$stackPtr]['conditions'], true);
         $inFunction = false;
         foreach ($conditions as $scope => $code) {
-            if (isset(Tokens::$ooScopeTokens[$code]) === true) {
+            if (isset(Tokens::OO_SCOPE_TOKENS[$code]) === true) {
                 break;
             }
 

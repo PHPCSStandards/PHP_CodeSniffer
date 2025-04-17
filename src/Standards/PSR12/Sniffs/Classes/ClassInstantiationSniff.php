@@ -43,7 +43,7 @@ class ClassInstantiationSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
 
         // Find the class name.
-        $allowed  = Tokens::$nameTokens;
+        $allowed  = Tokens::NAME_TOKENS;
         $allowed += [
             T_SELF                     => T_SELF,
             T_STATIC                   => T_STATIC,
@@ -55,7 +55,7 @@ class ClassInstantiationSniff implements Sniff
             T_DOUBLE_COLON             => T_DOUBLE_COLON,
         ];
 
-        $allowed += Tokens::$emptyTokens;
+        $allowed += Tokens::EMPTY_TOKENS;
 
         $classNameEnd = null;
         for ($i = ($stackPtr + 1); $i < $phpcsFile->numTokens; $i++) {
@@ -101,7 +101,7 @@ class ClassInstantiationSniff implements Sniff
         $error = 'Parentheses must be used when instantiating a new class';
         $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'MissingParentheses');
         if ($fix === true) {
-            $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($classNameEnd - 1), null, true);
+            $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($classNameEnd - 1), null, true);
             $phpcsFile->fixer->addContent($prev, '()');
         }
 

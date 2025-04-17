@@ -358,7 +358,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
      */
     public function testNotDefaultKeyword($testMarker, $testContent='DEFAULT')
     {
-        $targetTypes  = Tokens::$nameTokens;
+        $targetTypes  = Tokens::NAME_TOKENS;
         $targetTypes += [
             T_MATCH_DEFAULT => T_MATCH_DEFAULT,
             T_DEFAULT       => T_DEFAULT,
@@ -371,7 +371,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
         // Make sure we're looking at the right token.
         $this->assertArrayHasKey(
             $tokenArray['code'],
-            Tokens::$nameTokens,
+            Tokens::NAME_TOKENS,
             sprintf('Token tokenized as %s, not identifier name (code). Marker: %s.', $tokenArray['type'], $testMarker)
         );
 

@@ -89,7 +89,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
         // check the main part of the variable name.
         $originalVarName = $varName;
         if (substr($varName, 0, 1) === '_') {
-            $inClass = $phpcsFile->hasCondition($stackPtr, Tokens::$ooScopeTokens);
+            $inClass = $phpcsFile->hasCondition($stackPtr, Tokens::OO_SCOPE_TOKENS);
             if ($inClass === true) {
                 $varName = substr($varName, 1);
             }

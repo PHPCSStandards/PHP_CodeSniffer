@@ -97,7 +97,7 @@ class ArrayDeclarationSniff implements Sniff
                 $error = 'There must be no space between the "array" keyword and the opening parenthesis';
 
                 $next = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), $arrayStart, true);
-                if (isset(Tokens::$commentTokens[$tokens[$next]['code']]) === true) {
+                if (isset(Tokens::COMMENT_TOKENS[$tokens[$next]['code']]) === true) {
                     // We don't have anywhere to put the comment, so don't attempt to fix it.
                     $phpcsFile->addError($error, $stackPtr, 'SpaceAfterKeyword');
                 } else {
@@ -456,7 +456,7 @@ class ArrayDeclarationSniff implements Sniff
                 }
 
                 if ($keyUsed === true && $tokens[$lastToken]['code'] === T_COMMA) {
-                    $nextToken = $phpcsFile->findNext(Tokens::$emptyTokens, ($lastToken + 1), null, true);
+                    $nextToken = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($lastToken + 1), null, true);
                     // Allow for PHP 7.4+ array unpacking within an array declaration.
                     if ($tokens[$nextToken]['code'] !== T_ELLIPSIS) {
                         $error = 'No key specified for array entry; first entry specifies key';
@@ -467,7 +467,7 @@ class ArrayDeclarationSniff implements Sniff
 
                 if ($keyUsed === false) {
                     if ($tokens[($nextToken - 1)]['code'] === T_WHITESPACE) {
-                        $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($nextToken - 1), null, true);
+                        $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($nextToken - 1), null, true);
                         if (($tokens[$prev]['code'] !== T_END_HEREDOC
                             && $tokens[$prev]['code'] !== T_END_NOWDOC)
                             || $tokens[($nextToken - 1)]['line'] === $tokens[$nextToken]['line']
@@ -494,7 +494,7 @@ class ArrayDeclarationSniff implements Sniff
                     }//end if
 
                     $valueContent = $phpcsFile->findNext(
-                        Tokens::$emptyTokens,
+                        Tokens::EMPTY_TOKENS,
                         ($lastToken + 1),
                         $nextToken,
                         true
@@ -502,7 +502,7 @@ class ArrayDeclarationSniff implements Sniff
 
                     $indices[]          = ['value' => $valueContent];
                     $usesArrayUnpacking = $phpcsFile->findPrevious(
-                        Tokens::$emptyTokens,
+                        Tokens::EMPTY_TOKENS,
                         ($nextToken - 2),
                         null,
                         true
@@ -551,7 +551,7 @@ class ArrayDeclarationSniff implements Sniff
 
                 // Find the value of this index.
                 $nextContent = $phpcsFile->findNext(
-                    Tokens::$emptyTokens,
+                    Tokens::EMPTY_TOKENS,
                     ($nextToken + 1),
                     $arrayEnd,
                     true
@@ -570,7 +570,7 @@ class ArrayDeclarationSniff implements Sniff
             $singleValue = true;
         } else if (count($indices) === 1 && $tokens[$lastToken]['code'] === T_COMMA) {
             // There may be another array value without a comma.
-            $exclude     = Tokens::$emptyTokens;
+            $exclude     = Tokens::EMPTY_TOKENS;
             $exclude[]   = T_COMMA;
             $nextContent = $phpcsFile->findNext($exclude, ($indices[0]['value'] + 1), $arrayEnd, true);
             if ($nextContent === false) {
@@ -580,14 +580,14 @@ class ArrayDeclarationSniff implements Sniff
 
         if ($singleValue === true) {
             // Before we complain, make sure the single value isn't a here/nowdoc.
-            $next = $phpcsFile->findNext(Tokens::$heredocTokens, ($arrayStart + 1), ($arrayEnd - 1));
+            $next = $phpcsFile->findNext(Tokens::HEREDOC_TOKENS, ($arrayStart + 1), ($arrayEnd - 1));
             if ($next === false) {
                 // Array cannot be empty, so this is a multi-line array with
                 // a single value. It should be defined on single line.
                 $error     = 'Multi-line array contains a single value; use single-line array instead';
                 $errorCode = 'MultiLineNotAllowed';
 
-                $find    = Tokens::$phpcsCommentTokens;
+                $find    = Tokens::PHPCS_ANNOTATION_TOKENS;
                 $find[]  = T_COMMENT;
                 $comment = $phpcsFile->findNext($find, ($arrayStart + 1), $arrayEnd);
                 if ($comment === false) {
@@ -638,7 +638,7 @@ class ArrayDeclarationSniff implements Sniff
             $lastIndex = $indices[($count - 1)]['value'];
 
             $trailingContent = $phpcsFile->findPrevious(
-                Tokens::$emptyTokens,
+                Tokens::EMPTY_TOKENS,
                 ($arrayEnd - 1),
                 $lastIndex,
                 true
@@ -669,7 +669,7 @@ class ArrayDeclarationSniff implements Sniff
                     T_WHITESPACE => T_WHITESPACE,
                     T_COMMA      => T_COMMA,
                 ];
-                $ignoreTokens += Tokens::$castTokens;
+                $ignoreTokens += Tokens::CAST_TOKENS;
 
                 if ($tokens[$valuePointer]['code'] === T_CLOSURE
                     || $tokens[$valuePointer]['code'] === T_FN
@@ -898,11 +898,11 @@ class ArrayDeclarationSniff implements Sniff
             if ($end === false) {
                 $valueEnd = $valueStart;
             } else if ($tokens[$end]['code'] === T_COMMA) {
-                $valueEnd  = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($end - 1), $valueStart, true);
+                $valueEnd  = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($end - 1), $valueStart, true);
                 $nextComma = $end;
             } else {
                 $valueEnd = $end;
-                $next     = $phpcsFile->findNext(Tokens::$emptyTokens, ($end + 1), $arrayEnd, true);
+                $next     = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($end + 1), $arrayEnd, true);
                 if ($next !== false && $tokens[$next]['code'] === T_COMMA) {
                     $nextComma = $next;
                 }
@@ -938,7 +938,7 @@ class ArrayDeclarationSniff implements Sniff
             // Check that there is no space before the comma.
             if ($nextComma !== false && $tokens[($nextComma - 1)]['code'] === T_WHITESPACE) {
                 // Here/nowdoc closing tags must have the comma on the next line.
-                $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($nextComma - 1), null, true);
+                $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($nextComma - 1), null, true);
                 if ($tokens[$prev]['code'] !== T_END_HEREDOC && $tokens[$prev]['code'] !== T_END_NOWDOC) {
                     $content     = $tokens[($nextComma - 2)]['content'];
                     $spaceLength = $tokens[($nextComma - 1)]['length'];

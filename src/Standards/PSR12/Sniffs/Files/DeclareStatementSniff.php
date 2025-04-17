@@ -236,7 +236,7 @@ class DeclareStatementSniff implements Sniff
             }
 
             // The open curly bracket must be the last code on the line.
-            $token = $phpcsFile->findNext(Tokens::$emptyTokens, ($curlyBracket + 1), null, true);
+            $token = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($curlyBracket + 1), null, true);
             if ($tokens[$curlyBracket]['line'] === $tokens[$token]['line']) {
                 $error = 'The open curly bracket of a declare statement must be the last code on the line';
                 $fix   = $phpcsFile->addFixableError($error, $token, 'CodeFoundAfterCurlyBracket');

@@ -104,7 +104,7 @@ final class NullsafeObjectOperatorTest extends AbstractTokenizerTestCase
         $this->assertSame('T_INLINE_THEN', $tokens[$operator]['type'], 'Failed asserting type is inline then');
 
         if ($testObjectOperator === true) {
-            $next = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($operator + 1), null, true);
+            $next = $this->phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($operator + 1), null, true);
             $this->assertSame(T_OBJECT_OPERATOR, $tokens[$next]['code'], 'Failed asserting code is object operator');
             $this->assertSame('T_OBJECT_OPERATOR', $tokens[$next]['type'], 'Failed asserting type is object operator');
         }

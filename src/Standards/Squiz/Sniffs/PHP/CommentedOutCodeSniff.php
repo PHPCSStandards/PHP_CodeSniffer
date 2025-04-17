@@ -67,7 +67,7 @@ class CommentedOutCodeSniff implements Sniff
 
         $lastCommentBlockToken = $stackPtr;
         for ($i = $stackPtr; $i < $phpcsFile->numTokens; $i++) {
-            if (isset(Tokens::$emptyTokens[$tokens[$i]['code']]) === false) {
+            if (isset(Tokens::EMPTY_TOKENS[$tokens[$i]['code']]) === false) {
                 break;
             }
 
@@ -75,7 +75,7 @@ class CommentedOutCodeSniff implements Sniff
                 continue;
             }
 
-            if (isset(Tokens::$phpcsCommentTokens[$tokens[$i]['code']]) === true) {
+            if (isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[$i]['code']]) === true) {
                 $lastLineSeen = $tokens[$i]['line'];
                 continue;
             }
@@ -215,7 +215,7 @@ class CommentedOutCodeSniff implements Sniff
 
         // The second last token is always whitespace or a comment, depending
         // on the code inside the comment.
-        if (isset(Tokens::$emptyTokens[$stringTokens[($numTokens - 1)]['code']]) === false) {
+        if (isset(Tokens::EMPTY_TOKENS[$stringTokens[($numTokens - 1)]['code']]) === false) {
             return ($lastCommentBlockToken + 1);
         }
 
@@ -232,7 +232,7 @@ class CommentedOutCodeSniff implements Sniff
             T_NONE                    => true,
             T_COMMENT                 => true,
         ];
-        $emptyTokens += Tokens::$phpcsCommentTokens;
+        $emptyTokens += Tokens::PHPCS_ANNOTATION_TOKENS;
 
         $numCode          = 0;
         $numNonWhitespace = 0;
@@ -242,8 +242,8 @@ class CommentedOutCodeSniff implements Sniff
             if (isset($emptyTokens[$stringTokens[$i]['code']]) === false
                 // Commented out HTML/XML and other docs contain a lot of these
                 // characters, so it is best to not use them directly.
-                && isset(Tokens::$comparisonTokens[$stringTokens[$i]['code']]) === false
-                && isset(Tokens::$arithmeticTokens[$stringTokens[$i]['code']]) === false
+                && isset(Tokens::COMPARISON_TOKENS[$stringTokens[$i]['code']]) === false
+                && isset(Tokens::ARITHMETIC_TOKENS[$stringTokens[$i]['code']]) === false
                 && $stringTokens[$i]['code'] !== T_GOTO_LABEL
             ) {
                 // Looks like code.

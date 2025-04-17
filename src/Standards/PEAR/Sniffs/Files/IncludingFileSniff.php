@@ -49,7 +49,7 @@ class IncludingFileSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $nextToken = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $nextToken = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
         if ($tokens[$nextToken]['code'] === T_OPEN_PARENTHESIS) {
             $error = '"%s" is a statement not a function; no parentheses are required';
             $data  = [$tokens[$stackPtr]['content']];
@@ -87,8 +87,8 @@ class IncludingFileSniff implements Sniff
         // Check to see if they are assigning the return value of this
         // including call. If they are then they are probably checking it, so
         // it's conditional.
-        $previous = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
-        if (isset(Tokens::$assignmentTokens[$tokens[$previous]['code']]) === true) {
+        $previous = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
+        if (isset(Tokens::ASSIGNMENT_TOKENS[$tokens[$previous]['code']]) === true) {
             // The have assigned the return value to it, so its conditional.
             $inCondition = true;
         }

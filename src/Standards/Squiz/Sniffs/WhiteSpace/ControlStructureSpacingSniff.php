@@ -120,7 +120,7 @@ class ControlStructureSpacingSniff implements Sniff
 
             // Skip all empty tokens on the same line as the opener.
             if ($tokens[$firstContent]['line'] === $tokens[$scopeOpener]['line']
-                && (isset(Tokens::$emptyTokens[$code]) === true
+                && (isset(Tokens::EMPTY_TOKENS[$code]) === true
                 || $code === T_CLOSE_TAG)
             ) {
                 continue;
@@ -175,7 +175,7 @@ class ControlStructureSpacingSniff implements Sniff
             );
 
             $lastNonEmptyContent = $phpcsFile->findPrevious(
-                Tokens::$emptyTokens,
+                Tokens::EMPTY_TOKENS,
                 ($scopeCloser - 1),
                 null,
                 true
@@ -226,7 +226,7 @@ class ControlStructureSpacingSniff implements Sniff
 
         if ($tokens[$stackPtr]['code'] === T_MATCH) {
             // Move the scope closer to the semicolon/comma.
-            $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($scopeCloser + 1), null, true);
+            $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($scopeCloser + 1), null, true);
             if ($next !== false
                 && ($tokens[$next]['code'] === T_SEMICOLON || $tokens[$next]['code'] === T_COMMA)
             ) {
@@ -242,12 +242,12 @@ class ControlStructureSpacingSniff implements Sniff
         );
 
         if ($tokens[$trailingContent]['code'] === T_COMMENT
-            || isset(Tokens::$phpcsCommentTokens[$tokens[$trailingContent]['code']]) === true
+            || isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[$trailingContent]['code']]) === true
         ) {
             // Special exception for code where the comment about
             // an ELSE or ELSEIF is written between the control structures.
             $nextCode = $phpcsFile->findNext(
-                Tokens::$emptyTokens,
+                Tokens::EMPTY_TOKENS,
                 ($scopeCloser + 1),
                 null,
                 true
@@ -333,7 +333,7 @@ class ControlStructureSpacingSniff implements Sniff
                 );
 
                 if (($tokens[$trailingContent]['code'] === T_COMMENT
-                    || isset(Tokens::$phpcsCommentTokens[$tokens[$trailingContent]['code']]) === true)
+                    || isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[$trailingContent]['code']]) === true)
                     && $tokens[$trailingContent]['line'] === $tokens[$scopeCloser]['line']
                 ) {
                     $phpcsFile->fixer->addNewline($trailingContent);
