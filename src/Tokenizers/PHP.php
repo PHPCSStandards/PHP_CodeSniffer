@@ -887,11 +887,8 @@ class PHP extends Tokenizer
                 || ($token[0] === T_COMMENT && strpos($token[1], '/**') === 0 && $token[1] !== '/**/'))
             ) {
                 $commentTokens = $commentTokenizer->tokenizeString($token[1], $this->eolChar, $newStackPtr);
-                foreach ($commentTokens as $commentToken) {
-                    $finalTokens[$newStackPtr] = $commentToken;
-                    $newStackPtr++;
-                }
-
+                $finalTokens  += $commentTokens;
+                $newStackPtr  += count($commentTokens);
                 continue;
             }
 
