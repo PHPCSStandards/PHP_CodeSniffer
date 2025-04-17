@@ -364,6 +364,7 @@ class PHP extends Tokenizer
         T_FUNC_C                   => 12,
         T_GLOBAL                   => 6,
         T_GOTO                     => 4,
+        T_GOTO_COLON               => 1,
         T_HALT_COMPILER            => 15,
         T_IF                       => 2,
         T_IMPLEMENTS               => 10,
@@ -2252,45 +2253,67 @@ class PHP extends Tokenizer
 
             if ($tokenIsArray === true
                 && $token[0] === T_STRING
-                && isset($tokens[($stackPtr + 1)]) === true
-                && $tokens[($stackPtr + 1)] === ':'
                 && (is_array($tokens[($stackPtr - 1)]) === false
                 || $tokens[($stackPtr - 1)][0] !== T_PAAMAYIM_NEKUDOTAYIM)
             ) {
-                $stopTokens = [
-                    T_CASE               => true,
-                    T_SEMICOLON          => true,
-                    T_OPEN_TAG           => true,
-                    T_OPEN_CURLY_BRACKET => true,
-                    T_INLINE_THEN        => true,
-                    T_ENUM               => true,
-                ];
-
-                for ($x = ($newStackPtr - 1); $x > 0; $x--) {
-                    if (isset($stopTokens[$finalTokens[$x]['code']]) === true) {
-                        break;
+                // Find next non-empty token.
+                for ($i = ($stackPtr + 1); $i < $numTokens; $i++) {
+                    if (is_array($tokens[$i]) === true
+                        && isset(Tokens::$emptyTokens[$tokens[$i][0]]) === true
+                    ) {
+                        continue;
                     }
+
+                    break;
                 }
 
-                if ($finalTokens[$x]['code'] !== T_CASE
-                    && $finalTokens[$x]['code'] !== T_INLINE_THEN
-                    && $finalTokens[$x]['code'] !== T_ENUM
-                ) {
-                    $finalTokens[$newStackPtr] = [
-                        'content' => $token[1].':',
-                        'code'    => T_GOTO_LABEL,
-                        'type'    => 'T_GOTO_LABEL',
+                if (isset($tokens[$i]) === true && $tokens[$i] === ':') {
+                    // Okay, so we have a colon, now we need to make sure that this is not
+                    // class constant access, a ternary, enum or switch case.
+                    $stopTokens = [
+                        T_CASE               => true,
+                        T_SEMICOLON          => true,
+                        T_OPEN_TAG           => true,
+                        T_OPEN_CURLY_BRACKET => true,
+                        T_INLINE_THEN        => true,
+                        T_ENUM               => true,
                     ];
 
-                    if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                        StatusWriter::write("* token $stackPtr changed from T_STRING to T_GOTO_LABEL", 2);
-                        StatusWriter::write('* skipping T_COLON token '.($stackPtr + 1), 2);
+                    for ($x = ($newStackPtr - 1); $x > 0; $x--) {
+                        if (isset($stopTokens[$finalTokens[$x]['code']]) === true) {
+                            break;
+                        }
                     }
 
-                    $newStackPtr++;
-                    $stackPtr++;
-                    continue;
-                }
+                    if ($finalTokens[$x]['code'] !== T_CASE
+                        && $finalTokens[$x]['code'] !== T_INLINE_THEN
+                        && $finalTokens[$x]['code'] !== T_ENUM
+                    ) {
+                        $finalTokens[$newStackPtr] = [
+                            'content' => $token[1],
+                            'code'    => T_GOTO_LABEL,
+                            'type'    => 'T_GOTO_LABEL',
+                        ];
+
+                        if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                            StatusWriter::write("* token $stackPtr changed from T_STRING to T_GOTO_LABEL", 2);
+                        }
+
+                        // Modify the original token stack for the colon as potential
+                        // whitespace/comments between still needs to get the normal treatment.
+                        $tokens[$i] = [
+                            0 => T_GOTO_COLON,
+                            1 => ':',
+                        ];
+
+                        if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                            StatusWriter::write("* token $i changed from \":\" to T_GOTO_COLON in the original token stack", 2);
+                        }
+
+                        $newStackPtr++;
+                        continue;
+                    }//end if
+                }//end if
             }//end if
 
             /*

@@ -10,6 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizers\PHP;
 
 use PHP_CodeSniffer\Tests\Core\Tokenizers\AbstractTokenizerTestCase;
+use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * Tests the tokenization of goto declarations and statements.
@@ -74,7 +75,8 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
 
 
     /**
-     * Verify that the label in a goto declaration is tokenized as T_GOTO_LABEL.
+     * Verify that the label in a goto declaration is tokenized as T_GOTO_LABEL
+     * and that the next non-empty token is always T_GOTO_COLON.
      *
      * @param string $testMarker  The comment prefacing the target token.
      * @param string $testContent The token content to expect.
@@ -92,6 +94,13 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
         $this->assertIsInt($label);
         $this->assertSame($testContent, $tokens[$label]['content']);
 
+        $next = $this->phpcsFile->findNext(Tokens::$emptyTokens, ($label + 1), null, true);
+
+        $this->assertIsInt($next);
+        $this->assertSame(T_GOTO_COLON, $tokens[$next]['code']);
+        $this->assertSame('T_GOTO_COLON', $tokens[$next]['type']);
+        $this->assertSame(':', $tokens[$next]['content']);
+
     }//end testGotoDeclaration()
 
 
@@ -107,19 +116,19 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
         return [
             'label in goto declaration - marker' => [
                 'testMarker'  => '/* testGotoDeclaration */',
-                'testContent' => 'marker:',
+                'testContent' => 'marker',
             ],
             'label in goto declaration - end'    => [
                 'testMarker'  => '/* testGotoDeclarationOutsideLoop */',
-                'testContent' => 'end:',
+                'testContent' => 'end',
             ],
             'label in goto declaration - def'    => [
                 'testMarker'  => '/* testGotoDeclarationInSwitch */',
-                'testContent' => 'def:',
+                'testContent' => 'def',
             ],
             'label in goto declaration - label'  => [
                 'testMarker'  => '/* testGotoDeclarationInFunction */',
-                'testContent' => 'label:',
+                'testContent' => 'label',
             ],
         ];
 

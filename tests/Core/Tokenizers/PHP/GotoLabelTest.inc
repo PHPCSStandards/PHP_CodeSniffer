@@ -20,7 +20,7 @@ echo "i = $i";
 
 <?php
 /* testGotoDeclarationOutsideLoop */
-end:
+end  /*comment*/  :
 echo 'j hit 17';
 
 switch($x){
@@ -31,7 +31,7 @@ switch($x){
             goto def;
     default:
         /* testGotoDeclarationInSwitch */
-        def:
+        def  :
         print($x);
 }
 
