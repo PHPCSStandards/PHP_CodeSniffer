@@ -347,16 +347,7 @@ class EmbeddedPhpSniff implements Sniff
         }
 
         // Check that there is one, and only one space at the start of the statement.
-        $leadingSpace  = 0;
-        $isLongOpenTag = false;
-        if ($tokens[$stackPtr]['code'] === T_OPEN_TAG
-            && stripos($tokens[$stackPtr]['content'], '<?php') === 0
-        ) {
-            // The long open tag token in a single line tag set always contains a single space after it.
-            $leadingSpace  = 1;
-            $isLongOpenTag = true;
-        }
-
+        $leadingSpace = 0;
         if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
             $leadingSpace += $tokens[($stackPtr + 1)]['length'];
         }
@@ -366,13 +357,11 @@ class EmbeddedPhpSniff implements Sniff
             $data  = [$leadingSpace];
             $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'SpacingAfterOpen', $data);
             if ($fix === true) {
-                if ($isLongOpenTag === true) {
-                    $phpcsFile->fixer->replaceToken(($stackPtr + 1), '');
-                } else if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
-                    // Short open tag with too much whitespace.
+                if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
+                    // Open tag with too much whitespace.
                     $phpcsFile->fixer->replaceToken(($stackPtr + 1), ' ');
                 } else {
-                    // Short open tag without whitespace.
+                    // Open tag without whitespace.
                     $phpcsFile->fixer->addContent($stackPtr, ' ');
                 }
             }

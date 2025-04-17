@@ -824,6 +824,59 @@ class PHP extends Tokenizer
             }//end if
 
             /*
+                Split whitespace off from long PHP open tag tokens and potentially join the whitespace
+                with a subsequent whitespace token.
+            */
+
+            if ($tokenIsArray === true
+                && $token[0] === T_OPEN_TAG
+                && stripos($token[1], '<?php') === 0
+            ) {
+                $openTagAndWhiteSpace = str_split($token[1], 5);
+
+                $finalTokens[$newStackPtr] = [
+                    'code'    => T_OPEN_TAG,
+                    'type'    => 'T_OPEN_TAG',
+                    'content' => $openTagAndWhiteSpace[0],
+                ];
+                $newStackPtr++;
+
+                if (isset($openTagAndWhiteSpace[1]) === true) {
+                    // The original open tag token included whitespace.
+                    // Check whether a new whitespace token needs to be inserted or if the
+                    // whitespace needs to be joined with a pre-existing whitespace
+                    // token on the same line as the open tag.
+                    if (isset($tokens[($stackPtr + 1)]) === true
+                        && $openTagAndWhiteSpace[1] === ' '
+                        && is_array($tokens[($stackPtr + 1)]) === true
+                        && $tokens[($stackPtr + 1)][0] === T_WHITESPACE
+                    ) {
+                        // Adjusting the original token stack as the "new line may be split over two tokens"
+                        // check should still be run on this token.
+                        $tokens[($stackPtr + 1)][1] = $openTagAndWhiteSpace[1].$tokens[($stackPtr + 1)][1];
+
+                        if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                            StatusWriter::write("* removed whitespace from T_OPEN_TAG token $stackPtr and merged it with the next token T_WHITESPACE", 2);
+                        }
+                    } else {
+                        $finalTokens[$newStackPtr] = [
+                            'code'    => T_WHITESPACE,
+                            'type'    => 'T_WHITESPACE',
+                            'content' => $openTagAndWhiteSpace[1],
+                        ];
+
+                        if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                            StatusWriter::write("* T_OPEN_TAG token $stackPtr split into T_OPEN_TAG (without whitespace) and new T_WHITESPACE token", 2);
+                        }
+
+                        $newStackPtr++;
+                    }//end if
+                }//end if
+
+                continue;
+            }//end if
+
+            /*
                 Parse doc blocks into something that can be easily iterated over.
             */
 

@@ -43,10 +43,18 @@ final class PHPOpenTagEOF1Test extends AbstractTokenizerTestCase
             $tokens[$stackPtr]['type'],
             'Token tokenized as '.$tokens[$stackPtr]['type'].', not T_OPEN_TAG (type)'
         );
-        $this->assertSame('<?php ', $tokens[$stackPtr]['content']);
+        $this->assertSame('<?php', $tokens[$stackPtr]['content']);
+
+        $this->assertArrayHasKey(($stackPtr + 1), $tokens, 'Missing whitespace token after open tag');
+        $this->assertSame(
+            T_WHITESPACE,
+            $tokens[($stackPtr + 1)]['code'],
+            'Missing whitespace token after open tag (code)'
+        );
+        $this->assertSame(' ', $tokens[($stackPtr + 1)]['content'], 'Missing whitespace token after open tag (content)');
 
         // Now make sure that this is the very last token in the file and there are no tokens after it.
-        $this->assertArrayNotHasKey(($stackPtr + 1), $tokens);
+        $this->assertArrayNotHasKey(($stackPtr + 2), $tokens);
 
     }//end testLongOpenTagAtEndOfFile()
 

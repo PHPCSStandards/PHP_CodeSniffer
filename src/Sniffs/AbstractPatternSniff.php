@@ -915,12 +915,12 @@ abstract class AbstractPatternSniff implements Sniff
 
         // Don't add a space after the closing php tag as it will add a new
         // whitespace token.
-        $tokenizer = new PHP('<?php '.$str.'?>', null);
+        $tokenizer = new PHP('<?php'."\n".$str.'?>', null);
         StatusWriter::resume();
 
         // Remove the <?php tag from the front and the end php tag from the back.
         $tokens = $tokenizer->getTokens();
-        $tokens = array_slice($tokens, 1, (count($tokens) - 2));
+        $tokens = array_slice($tokens, 2, (count($tokens) - 3));
 
         $patterns = [];
         foreach ($tokens as $patternInfo) {
