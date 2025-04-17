@@ -63,8 +63,18 @@ switch ($x) {
         // Do something.
         break;
 
-    /* testNotGotoDeclarationClassConstant */
+    /* testNotGotoDeclarationClassConstantInCase */
     case MyClass::CONSTANT:
+        // Do something.
+        break;
+
+    /* testNotGotoDeclarationClassConstantWithSpace */
+    case MyClass   ::   MY_CONST:
+        // Do something.
+        break;
+
+    /* testNotGotoDeclarationClassConstantWithComment */
+    case  MyClass::/*comment*/OTHER_CONST:
         // Do something.
         break;
 

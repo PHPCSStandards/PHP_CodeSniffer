@@ -2271,6 +2271,7 @@ class PHP extends Tokenizer
                     // Okay, so we have a colon, now we need to make sure that this is not
                     // class constant access, a ternary, enum or switch case.
                     $stopTokens = [
+                        T_DOUBLE_COLON       => true,
                         T_CASE               => true,
                         T_SEMICOLON          => true,
                         T_OPEN_TAG           => true,
@@ -2285,7 +2286,8 @@ class PHP extends Tokenizer
                         }
                     }
 
-                    if ($finalTokens[$x]['code'] !== T_CASE
+                    if ($finalTokens[$x]['code'] !== T_DOUBLE_COLON
+                        && $finalTokens[$x]['code'] !== T_CASE
                         && $finalTokens[$x]['code'] !== T_INLINE_THEN
                         && $finalTokens[$x]['code'] !== T_ENUM
                     ) {
