@@ -369,6 +369,11 @@ final class Tokens
         T_CATCH      => T_CATCH,
         T_DECLARE    => T_DECLARE,
         T_MATCH      => T_MATCH,
+        T_ISSET      => T_ISSET,
+        T_EMPTY      => T_EMPTY,
+        T_UNSET      => T_UNSET,
+        T_EVAL       => T_EVAL,
+        T_EXIT       => T_EXIT,
     ];
 
     /**

@@ -84,24 +84,29 @@ $a = ($b + $c/* testArbitraryParenthesesCloser */);
 /* testFunctionCallParenthesesOpener */
 do_something($b + $c, $d, false /* testFunctionCallParenthesesCloser */);
 
-/* testIssetParenthesesOpener */
+/* testIssetParenthesesOwner */
 $set = isset($b, $c/* testIssetParenthesesCloser */);
 
-/* testEmptyParenthesesOpener */
+/* testEmptyParenthesesOwner */
 $empty = empty($b /* testEmptyParenthesesCloser */);
 
-/* testUnsetParenthesesOpener */
+/* testUnsetParenthesesOwner */
 unset ($b, $c /* testUnsetParenthesesCloser */);
 
-/* testEvalParenthesesOpener */
+/* testEvalParenthesesOwner */
 $eval = eval("\$str = \"$str\";"/* testEvalParenthesesCloser */);
 
-/* testExitParenthesesOpener */
+/* testExitParenthesesOwner */
 exit ( 101 /* testExitParenthesesCloser */);
 
-/* testDieParenthesesOpener */
+/* testDieParenthesesOwner */
 die ('oopsie' /* testDieParenthesesCloser */);
 
+/* testExitNoParentheses */
+exit;
+
+/* testDieNoParentheses */
+die;
 
 /*
  * All together now, let's make things a little more interesting....

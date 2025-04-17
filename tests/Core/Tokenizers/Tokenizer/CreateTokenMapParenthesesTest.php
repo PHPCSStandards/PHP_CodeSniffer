@@ -151,6 +151,30 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testAnonClassParenthesesOwner */',
                 'tokenCode'  => T_ANON_CLASS,
             ],
+            'isset'                                          => [
+                'testMarker' => '/* testIssetParenthesesOwner */',
+                'tokenCode'  => T_ISSET,
+            ],
+            'empty'                                          => [
+                'testMarker' => '/* testEmptyParenthesesOwner */',
+                'tokenCode'  => T_EMPTY,
+            ],
+            'unset'                                          => [
+                'testMarker' => '/* testUnsetParenthesesOwner */',
+                'tokenCode'  => T_UNSET,
+            ],
+            'eval'                                           => [
+                'testMarker' => '/* testEvalParenthesesOwner */',
+                'tokenCode'  => T_EVAL,
+            ],
+            'exit'                                           => [
+                'testMarker' => '/* testExitParenthesesOwner */',
+                'tokenCode'  => T_EXIT,
+            ],
+            'die'                                            => [
+                'testMarker' => '/* testDieParenthesesOwner */',
+                'tokenCode'  => T_EXIT,
+            ],
 
             'if - nested outer'                              => [
                 'testMarker' => '/* testNestedOuterIfParenthesesOwner */',
@@ -237,24 +261,6 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
             'function call'                     => [
                 'testMarker' => '/* testFunctionCallParenthesesOpener */',
             ],
-            'isset'                             => [
-                'testMarker' => '/* testIssetParenthesesOpener */',
-            ],
-            'empty'                             => [
-                'testMarker' => '/* testEmptyParenthesesOpener */',
-            ],
-            'unset'                             => [
-                'testMarker' => '/* testUnsetParenthesesOpener */',
-            ],
-            'eval'                              => [
-                'testMarker' => '/* testEvalParenthesesOpener */',
-            ],
-            'exit'                              => [
-                'testMarker' => '/* testExitParenthesesOpener */',
-            ],
-            'die'                               => [
-                'testMarker' => '/* testDieParenthesesOpener */',
-            ],
             'function call - nested 1'          => [
                 'testMarker' => '/* testNestedFunctionCallAParenthesesOpener */',
             ],
@@ -305,6 +311,14 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
             'anonymous class without parentheses' => [
                 'testMarker' => '/* testAnonClassNoParentheses */',
                 'tokenCode'  => T_ANON_CLASS,
+            ],
+            'exit without parentheses'            => [
+                'testMarker' => '/* testExitNoParentheses */',
+                'tokenCode'  => T_EXIT,
+            ],
+            'die without parentheses'             => [
+                'testMarker' => '/* testDieNoParentheses */',
+                'tokenCode'  => T_EXIT,
             ],
         ];
 
