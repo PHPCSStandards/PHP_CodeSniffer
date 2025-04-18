@@ -284,7 +284,7 @@ class Fixer
         ];
 
         $options = null;
-        if (stripos(PHP_OS, 'WIN') === 0) {
+        if (PHP_OS_FAMILY === 'Windows') {
             $options = ['bypass_shell' => true];
         }
 

@@ -528,7 +528,7 @@ class PHP extends Tokenizer
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             StatusWriter::write('*** START PHP TOKENIZING ***', 1);
             $isWin = false;
-            if (stripos(PHP_OS, 'WIN') === 0) {
+            if (PHP_OS_FAMILY === 'Windows') {
                 $isWin = true;
             }
         }

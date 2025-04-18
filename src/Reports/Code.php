@@ -230,7 +230,7 @@ class Code implements Report
                     if (strpos($tokenContent, "\t") !== false) {
                         $token            = $tokens[$i];
                         $token['content'] = $tokenContent;
-                        if (stripos(PHP_OS, 'WIN') === 0) {
+                        if (PHP_OS_FAMILY === 'Windows') {
                             $tab = "\000";
                         } else {
                             $tab = "\033[30;1m»\033[0m";
