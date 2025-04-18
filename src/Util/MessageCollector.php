@@ -182,8 +182,8 @@ final class MessageCollector
      */
     private function prefixAll(array $messages)
     {
-        foreach ($messages as $i => $details) {
-            $messages[$i]['message'] = $this->prefix($details['message'], $details['type']);
+        foreach ($messages as $i => list('message' => $message, 'type' => $type)) {
+            $messages[$i]['message'] = $this->prefix($message, $type);
         }
 
         return $messages;
@@ -242,22 +242,22 @@ final class MessageCollector
         $notices      = [];
         $deprecations = [];
 
-        foreach ($messages as $details) {
-            switch ($details['type']) {
+        foreach ($messages as list('message' => $message, 'type' => $type)) {
+            switch ($type) {
             case self::ERROR:
-                $errors[] = $details['message'];
+                $errors[] = $message;
                 break;
 
             case self::WARNING:
-                $warnings[] = $details['message'];
+                $warnings[] = $message;
                 break;
 
             case self::DEPRECATED:
-                $deprecations[] = $details['message'];
+                $deprecations[] = $message;
                 break;
 
             default:
-                $notices[] = $details['message'];
+                $notices[] = $message;
                 break;
             }
         }
