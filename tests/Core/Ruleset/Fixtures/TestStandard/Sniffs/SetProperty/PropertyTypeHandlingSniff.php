@@ -150,6 +150,102 @@ final class PropertyTypeHandlingSniff implements Sniff
      */
     public $expectsEmptyArray;
 
+    /**
+     * Used to verify that array properties with a default value allow for (re-)setting the property to an empty array.
+     *
+     * @var array<string, string>
+     */
+    public $expectsNonEmptyArrayOverruledToEmpty = [
+        'key' => 'value',
+    ];
+
+    /**
+     * Used to verify that array properties with a default value allow for (re-)setting the property value.
+     *
+     * @var array<string, string>
+     */
+    public $expectsNonEmptyArrayOverruledToNewValue = [
+        'key' => 'value',
+    ];
+
+    /**
+     * Used to safeguard that if `extend=true` is used on a property without pre-existing value, this will not cause errors.
+     *
+     * @var array<mixed>
+     */
+    public $expectsExtendsWillJustSetToArrayWhenNoDefaultValuePresent;
+
+    /**
+     * Used to document that if `extend=true` is used on a property which doesn't have an array value, the value will be overruled.
+     * (= original behaviour, no change)
+     *
+     * @var array<mixed>
+     */
+    public $expectsExtendsWillOverruleNonArrayToNewArrayValue = true;
+
+    /**
+     * Used to verify that array properties with a default value can get extended.
+     *
+     * @var array<string, mixed>
+     */
+    public $expectsNonEmptyArrayExtendedWithNonEmptyArray = [
+        'key' => 'value',
+    ];
+
+    /**
+     * Used to verify that array properties with a default value which are extended by an empty array do not get reset.
+     *
+     * @var array<string, mixed>
+     */
+    public $expectsNonEmptyArrayKeepsValueWhenExtendedWithEmptyArray = [
+        'key' => 'value',
+    ];
+
+    /**
+     * Used to verify that array properties with a default value can get extended multiple times.
+     *
+     * @var array<string, mixed>
+     */
+    public $expectsNonEmptyArrayDoubleExtendedWithNonEmptyArray = [
+        'key' => 'value',
+    ];
+
+    /**
+     * Used to verify the value for a specific array key can be overwritten from the ruleset.
+     *
+     * @var array<string, mixed>
+     */
+    public $expectsValuesInNonEmptyAssociativeArrayCanBeRedefined = [
+        'foo' => 'foo',
+        'bar' => 'bar',
+    ];
+
+    /**
+     * Used to verify that non-keyed values are added to the array and do not overwrite existing values.
+     *
+     * @var array<mixed>
+     */
+    public $expectsValuesInNonEmptyNumericallyIndexedArrayAreNotOverwritten = [
+        'valueA',
+    ];
+
+    /**
+     * Used to verify that a default value for an array does not get the cleaning/type juggling treatment, while the ruleset added values do.
+     *
+     * @var array<string|int, mixed>
+     */
+    public $expectsPreexistingValuesStayTheSameWhileNewValuesGetCleaned = [
+        'predefinedA' => 'true',
+        'predefinedB' => '  null  ',
+    ];
+
+    /**
+     * Used to verify that if `extend` is used on a non-array property, the value still gets set, but not as an array.
+     *
+     * @var array<mixed>
+     */
+    public $expectsStringNotArray;
+
     public function register()
     {
         return [T_ECHO];
