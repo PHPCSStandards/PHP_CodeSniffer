@@ -948,7 +948,7 @@ final class Tokens
         $highest     = -1;
         $highestType = false;
 
-        $weights = self::$weightings;
+        $weights = self::WEIGHTINGS;
 
         foreach ($tokens as $token) {
             if (isset($weights[$token]) === true) {
