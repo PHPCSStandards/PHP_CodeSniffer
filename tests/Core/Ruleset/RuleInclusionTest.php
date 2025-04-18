@@ -59,7 +59,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
             $contents       = file_get_contents($standard);
             self::$contents = $contents;
 
-            $repoRootDir = basename(dirname(dirname(dirname(__DIR__))));
+            $repoRootDir = basename(dirname(__DIR__, 3));
 
             $newPath = $repoRootDir;
             if (DIRECTORY_SEPARATOR === '\\') {

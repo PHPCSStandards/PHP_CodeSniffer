@@ -27,7 +27,7 @@ class Standards
     {
         $ds = DIRECTORY_SEPARATOR;
 
-        $installedPaths = [dirname(dirname(__DIR__)).$ds.'src'.$ds.'Standards'];
+        $installedPaths = [dirname(__DIR__, 2).$ds.'src'.$ds.'Standards'];
         $configPaths    = Config::getConfigData('installed_paths');
         if ($configPaths !== null) {
             $installedPaths = array_merge($installedPaths, explode(',', $configPaths));

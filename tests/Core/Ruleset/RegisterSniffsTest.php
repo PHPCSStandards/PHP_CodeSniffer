@@ -78,7 +78,7 @@ final class RegisterSniffsTest extends TestCase
         ksort(self::$originalSniffs);
 
         // Update the sniff file list.
-        $standardsDir  = dirname(dirname(dirname(__DIR__))).DIRECTORY_SEPARATOR;
+        $standardsDir  = dirname(__DIR__, 3).DIRECTORY_SEPARATOR;
         $standardsDir .= 'src'.DIRECTORY_SEPARATOR.'Standards'.DIRECTORY_SEPARATOR;
 
         self::$psr1SniffAbsolutePaths = self::relativeToAbsoluteSniffFiles($standardsDir, self::$psr1SniffFiles);
