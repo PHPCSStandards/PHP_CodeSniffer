@@ -107,7 +107,7 @@ class Cache
         );
         $filter = new RecursiveCallbackFilterIterator(
             $di,
-            function ($file, $key, $iterator) {
+            static function ($file, $key, $iterator) {
                 // Skip non-php files.
                 $filename = $file->getFilename();
                 if ($file->isFile() === true && substr($filename, -4) !== '.php') {
