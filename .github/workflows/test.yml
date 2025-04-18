@@ -65,6 +65,15 @@ jobs:
           - php: '8.4'
             skip_tests: true
 
+          # Run a couple of builds with custom extensions to allow for testing ini handling within PHPCS.
+          # Ref: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/416
+          - php: '7.3'
+            os: 'ubuntu-latest'
+            extensions: ':mysqli' # Run with mysqli disabled.
+          - php: '8.2'
+            os: 'ubuntu-latest'
+            extensions: ':mysqli' # Run with mysqli disabled.
+
           # The default libxml library on Ubuntu images is a little out of date.
           # To safeguard support for the latest libxml we need to update the library on the fly.
           # This only needs to be tested with one PHP version for each libxml minor to verify support.
@@ -183,6 +192,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           ini-values: ${{ steps.set_ini.outputs.PHP_INI }}
+          extensions: ${{ matrix.extensions }}
           coverage: none
           tools: cs2pr
 
@@ -269,10 +279,12 @@ jobs:
         custom_ini: [false]
 
         include:
-          # Also run one coverage build with custom ini settings.
+          # Also run one coverage build with custom ini settings for testing the DisallowShortOpenTag sniff.
+          # Also run with a disabled extension for testing the handling of unsettable ini settings by PHPCS.
           - php: '8.1'
             os: 'ubuntu-latest'
             custom_ini: true
+            extensions: ':mysqli' # Run with mysqli disabled.
 
     # yamllint disable-line rule:line-length
     name: "Coverage: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }} (${{ matrix.os == 'ubuntu-latest' && 'Linux' || 'Win'  }})"
@@ -297,6 +309,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           ini-values: error_reporting=-1, display_errors=On${{ steps.set_ini.outputs.PHP_INI }}
+          extensions: ${{ matrix.extensions }}
           coverage: xdebug
 
       # Install dependencies and handle caching in one go.
