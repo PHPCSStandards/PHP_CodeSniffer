@@ -47,7 +47,10 @@
     <rule ref="Squiz.Commenting.PostStatementComment">
         <exclude name="Squiz.Commenting.PostStatementComment.AnnotationFound"/>
     </rule>
-    <rule ref="Squiz.Commenting.VariableComment"/>
+    <rule ref="Squiz.Commenting.VariableComment">
+        <exclude name="Squiz.Commenting.VariableComment.DeprecatedTagNotAllowed"/>
+        <exclude name="Squiz.Commenting.VariableComment.LinkTagNotAllowed"/>
+    </rule>
     <rule ref="Squiz.Formatting.OperatorBracket"/>
     <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing"/>
     <rule ref="Squiz.Operators.ComparisonOperatorUsage"/>
@@ -153,10 +156,5 @@
     <rule ref="Generic.Commenting.Todo">
         <exclude-pattern>src/Standards/Generic/Sniffs/Commenting/TodoSniff\.php</exclude-pattern>
         <exclude-pattern>src/Standards/Generic/Tests/Commenting/TodoUnitTest\.php</exclude-pattern>
-    </rule>
-
-    <!-- @see https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/122#discussion_r1414167897 -->
-    <rule ref="Squiz.Commenting.VariableComment">
-        <exclude-pattern>src/Util/Tokens\.php</exclude-pattern>
     </rule>
 </ruleset>
