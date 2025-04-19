@@ -88,21 +88,21 @@ class Config
      *
      * @var string
      */
-    const VERSION = '4.0.0';
+    public const VERSION = '4.0.0';
 
     /**
      * Package stability; either stable, beta or alpha.
      *
      * @var string
      */
-    const STABILITY = 'alpha';
+    public const STABILITY = 'alpha';
 
     /**
      * Default report width when no report width is provided and 'auto' does not yield a valid width.
      *
      * @var int
      */
-    const DEFAULT_REPORT_WIDTH = 80;
+    public const DEFAULT_REPORT_WIDTH = 80;
 
     /**
      * Translation table for config settings which can be changed via multiple CLI flags.

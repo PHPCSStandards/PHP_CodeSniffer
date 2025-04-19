@@ -19,7 +19,7 @@ abstract class AbstractRulesetTestCase extends TestCase
      *
      * @var string
      */
-    const RUNTIME_EXCEPTION = 'PHP_CodeSniffer\Exceptions\RuntimeException';
+    private const RUNTIME_EXCEPTION = 'PHP_CodeSniffer\Exceptions\RuntimeException';
 
 
     /**
