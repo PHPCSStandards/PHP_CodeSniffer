@@ -671,144 +671,144 @@ final class Tokens
     /**
      * The token weightings.
      *
-     * @deprecated 4.0 Use the Tokens::getHighestWeightedToken() method instead.
-     *
      * @var array<int|string, int>
+     *
+     * @deprecated 4.0.0 Use the Tokens::getHighestWeightedToken() method instead.
      */
     public static $weightings = self::WEIGHTINGS;
 
     /**
      * Tokens that represent assignments.
      *
-     * @deprecated 4.0 Use the Tokens::ASSIGNMENT_TOKENS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::ASSIGNMENT_TOKENS constant instead.
      */
     public static $assignmentTokens = self::ASSIGNMENT_TOKENS;
 
     /**
      * Tokens that represent equality comparisons.
      *
-     * @deprecated 4.0 Use the Tokens::EQUALITY_TOKENS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::EQUALITY_TOKENS constant instead.
      */
     public static $equalityTokens = self::EQUALITY_TOKENS;
 
     /**
      * Tokens that represent comparison operator.
      *
-     * @deprecated 4.0 Use the Tokens::COMPARISON_TOKENS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::COMPARISON_TOKENS constant instead.
      */
     public static $comparisonTokens = self::COMPARISON_TOKENS;
 
     /**
      * Tokens that represent arithmetic operators.
      *
-     * @deprecated 4.0 Use the Tokens::ARITHMETIC_TOKENS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::ARITHMETIC_TOKENS constant instead.
      */
     public static $arithmeticTokens = self::ARITHMETIC_TOKENS;
 
     /**
      * Tokens that perform operations.
      *
-     * @deprecated 4.0 Use the Tokens::OPERATORS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::OPERATORS constant instead.
      */
     public static $operators = self::OPERATORS;
 
     /**
      * Tokens that perform boolean operations.
      *
-     * @deprecated 4.0 Use the Tokens::BOOLEAN_OPERATORS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::BOOLEAN_OPERATORS constant instead.
      */
     public static $booleanOperators = self::BOOLEAN_OPERATORS;
 
     /**
      * Tokens that represent casting.
      *
-     * @deprecated 4.0 Use the Tokens::CAST_TOKENS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::CAST_TOKENS constant instead.
      */
     public static $castTokens = self::CAST_TOKENS;
 
     /**
      * Token types that open parenthesis.
      *
-     * @deprecated 4.0 Use the Tokens::PARENTHESIS_OPENERS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::PARENTHESIS_OPENERS constant instead.
      */
     public static $parenthesisOpeners = self::PARENTHESIS_OPENERS;
 
     /**
      * Tokens that are allowed to open scopes.
      *
-     * @deprecated 4.0 Use the Tokens::SCOPE_OPENERS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::SCOPE_OPENERS constant instead.
      */
     public static $scopeOpeners = self::SCOPE_OPENERS;
 
     /**
      * Tokens that represent scope modifiers.
      *
-     * @deprecated 4.0 Use the Tokens::SCOPE_MODIFIERS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::SCOPE_MODIFIERS constant instead.
      */
     public static $scopeModifiers = self::SCOPE_MODIFIERS;
 
     /**
      * Tokens that can prefix a method name
      *
-     * @deprecated 4.0 Use the Tokens::METHOD_MODIFIERS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::METHOD_MODIFIERS constant instead.
      */
     public static $methodPrefixes = self::METHOD_MODIFIERS;
 
     /**
      * Tokens that open code blocks.
      *
-     * @deprecated 4.0 Use the Tokens::BLOCK_OPENERS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::BLOCK_OPENERS constant instead.
      */
     public static $blockOpeners = self::BLOCK_OPENERS;
 
     /**
      * Tokens that don't represent code.
      *
-     * @deprecated 4.0 Use the Tokens::EMPTY_TOKENS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::EMPTY_TOKENS constant instead.
      */
     public static $emptyTokens = self::EMPTY_TOKENS;
 
     /**
      * Tokens that are comments.
      *
-     * @deprecated 4.0 Use the Tokens::COMMENT_TOKENS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::COMMENT_TOKENS constant instead.
      */
     public static $commentTokens = self::COMMENT_TOKENS;
 
     /**
      * Tokens that are comments containing PHPCS instructions.
      *
-     * @deprecated 4.0 Use the Tokens::PHPCS_ANNOTATION_TOKENS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::PHPCS_ANNOTATION_TOKENS constant instead.
      */
     public static $phpcsCommentTokens = self::PHPCS_ANNOTATION_TOKENS;
 
@@ -817,45 +817,45 @@ final class Tokens
      *
      * Note that T_STRINGS are NOT represented in this list.
      *
-     * @deprecated 4.0 Use the Tokens::STRING_TOKENS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::STRING_TOKENS constant instead.
      */
     public static $stringTokens = self::STRING_TOKENS;
 
     /**
      * Tokens that represent text strings.
      *
-     * @deprecated 4.0 Use the Tokens::TEXT_STRINGS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::TEXT_STRINGS constant instead.
      */
     public static $textStringTokens = self::TEXT_STRING_TOKENS;
 
     /**
      * Tokens that represent brackets and parenthesis.
      *
-     * @deprecated 4.0 Use the Tokens::BRACKET_TOKENS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::BRACKET_TOKENS constant instead.
      */
     public static $bracketTokens = self::BRACKET_TOKENS;
 
     /**
      * Tokens that include files.
      *
-     * @deprecated 4.0 Use the Tokens::INCLUDE_TOKENS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::INCLUDE_TOKENS constant instead.
      */
     public static $includeTokens = self::INCLUDE_TOKENS;
 
     /**
      * Tokens that make up a heredoc string.
      *
-     * @deprecated 4.0 Use the Tokens::HEREDOC_TOKENS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::HEREDOC_TOKENS constant instead.
      */
     public static $heredocTokens = self::HEREDOC_TOKENS;
 
@@ -865,40 +865,40 @@ final class Tokens
      * Mostly, these are just strings. But PHP tokenizes some language
      * constructs and functions using their own tokens.
      *
-     * @deprecated 4.0 Use the Tokens::FUNCTION_NAME_TOKENS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::FUNCTION_NAME_TOKENS constant instead.
      */
     public static $functionNameTokens = self::FUNCTION_NAME_TOKENS;
 
     /**
      * Tokens that open class and object scopes.
      *
-     * @deprecated 4.0 Use the Tokens::OO_SCOPE_TOKENS constant instead.
-     *
      * @var array<int|string, int|string>
+     *
+     * @deprecated 4.0.0 Use the Tokens::OO_SCOPE_TOKENS constant instead.
      */
     public static $ooScopeTokens = self::OO_SCOPE_TOKENS;
 
     /**
      * Tokens representing PHP magic constants.
      *
-     * @deprecated 4.0 Use the Tokens::MAGIC_CONSTANTS constant instead.
-     *
      * @var array <int|string> => <int|string>
      *
      * @link https://www.php.net/language.constants.predefined PHP Manual on magic constants
+     *
+     * @deprecated 4.0.0 Use the Tokens::MAGIC_CONSTANTS constant instead.
      */
     public static $magicConstants = self::MAGIC_CONSTANTS;
 
     /**
      * Tokens representing context sensitive keywords in PHP.
      *
-     * @deprecated 4.0 Use the Tokens::CONTEXT_SENSITIVE_KEYWORDS constant instead.
-     *
      * @var array<int|string, int|string>
      *
      * @link https://wiki.php.net/rfc/context_sensitive_lexer
+     *
+     * @deprecated 4.0.0 Use the Tokens::CONTEXT_SENSITIVE_KEYWORDS constant instead.
      */
     public static $contextSensitiveKeywords = self::CONTEXT_SENSITIVE_KEYWORDS;
 
