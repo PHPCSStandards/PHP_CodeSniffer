@@ -33,7 +33,7 @@ class UselessOverridingMethodSniff implements Sniff
      *
      * @var array<int|string, bool> Keys are the token constants, value is irrelevant.
      */
-    private $validOOScopes = [
+    private const VALID_OO_SCOPES = [
         T_CLASS      => true,
         T_ANON_CLASS => true,
         T_TRAIT      => true,
@@ -74,8 +74,8 @@ class UselessOverridingMethodSniff implements Sniff
         $conditions    = $token['conditions'];
         $lastCondition = end($conditions);
 
-        // Skip functions that are not a method part of a class, anon class or trait.
-        if (isset($this->validOOScopes[$lastCondition]) === false) {
+        // Skip functions that are not a method, i.e. part of a class, anon class or trait.
+        if (isset(self::VALID_OO_SCOPES[$lastCondition]) === false) {
             return;
         }
 
