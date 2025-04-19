@@ -81,7 +81,12 @@ final class VariableCommentUnitTest extends AbstractSniffTestCase
      */
     public function getWarningList()
     {
-        return [93 => 1];
+        return [
+            93  => 1,
+            494 => 1,
+            495 => 1,
+            496 => 1,
+        ];
 
     }//end getWarningList()
 

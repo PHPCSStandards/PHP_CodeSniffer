@@ -111,7 +111,8 @@ class VariableCommentSniff extends AbstractVariableSniff
             } else {
                 $error = '%s tag is not allowed in member variable comment';
                 $data  = [$tokens[$tag]['content']];
-                $phpcsFile->addWarning($error, $tag, 'TagNotAllowed', $data);
+                $code  = ucwords(ltrim($tokens[$tag]['content'], '@')).'TagNotAllowed';
+                $phpcsFile->addWarning($error, $tag, $code, $data);
             }//end if
         }//end foreach
 

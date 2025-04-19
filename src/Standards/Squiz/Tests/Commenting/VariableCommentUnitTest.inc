@@ -476,3 +476,26 @@ class PHP84FinalProperties {
      */
     final int $hasDocblock;
 }
+
+// phpcs:disable Squiz.Commenting.VariableComment.SinceTagNotAllowed
+// phpcs:disable Squiz.Commenting.VariableComment.DeprecatedTagNotAllowed
+class AllowMoreForSelectivelyIgnoringDisallowedTags {
+    /**
+     * @var string
+     *
+     * @since      3.1
+     * @deprecated 10.5
+     */
+    public string $propertyWithExtraTags;
+
+    /**
+     * @var string
+     *
+     * @link       https://example.org/some-link
+     * @api
+     * @param string This tag is not allowed.
+     */
+    public $theAboveExtraTagsAreStillNotAllowed;
+}
+
+// phpcs:enable Squiz.Commenting.VariableComment
