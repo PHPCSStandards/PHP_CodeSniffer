@@ -20,7 +20,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
      *
      * @var array<int>
      */
-    protected $conditionStopTokens = [
+    private const CONDITION_STOP_TOKENS = [
         T_BREAK,
         T_CONTINUE,
         T_EXIT,
@@ -272,7 +272,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
         if (($opener + 1) !== $closer) {
             $end = $closer;
             if (isset($conditionStopMarker) === true) {
-                $end = ( $this->getTargetToken($conditionStopMarker, $this->conditionStopTokens) + 1);
+                $end = ( $this->getTargetToken($conditionStopMarker, self::CONDITION_STOP_TOKENS) + 1);
             }
 
             for ($i = ($opener + 1); $i < $end; $i++) {
