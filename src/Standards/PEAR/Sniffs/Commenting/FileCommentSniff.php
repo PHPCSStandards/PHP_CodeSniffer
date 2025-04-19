@@ -19,9 +19,9 @@ class FileCommentSniff implements Sniff
     /**
      * Tags in correct order and related info.
      *
-     * @var array
+     * @var array<string, array<string, bool>>
      */
-    protected $tags = [
+    protected const EXPECTED_TAGS = [
         '@category'   => [
             'required'       => true,
             'allow_multiple' => false,
@@ -67,6 +67,15 @@ class FileCommentSniff implements Sniff
             'allow_multiple' => false,
         ],
     ];
+
+    /**
+     * Tags in correct order and related info.
+     *
+     * @var array<string, array<string, bool>>
+     *
+     * @deprecated 4.0.0 Use the FileCommentSniff::EXPECTED_TAGS constant instead.
+     */
+    protected $tags = self::EXPECTED_TAGS;
 
 
     /**
@@ -235,11 +244,11 @@ class FileCommentSniff implements Sniff
         $tagTokens = [];
         foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
             $name = $tokens[$tag]['content'];
-            if (isset($this->tags[$name]) === false) {
+            if (isset(static::EXPECTED_TAGS[$name]) === false) {
                 continue;
             }
 
-            if ($this->tags[$name]['allow_multiple'] === false && isset($tagTokens[$name]) === true) {
+            if (static::EXPECTED_TAGS[$name]['allow_multiple'] === false && isset($tagTokens[$name]) === true) {
                 $error = 'Only one %s tag is allowed in a %s comment';
                 $data  = [
                     $name,
@@ -265,7 +274,7 @@ class FileCommentSniff implements Sniff
 
         // Check if the tags are in the correct position.
         $pos = 0;
-        foreach ($this->tags as $tag => $tagData) {
+        foreach (static::EXPECTED_TAGS as $tag => $tagData) {
             if (isset($tagTokens[$tag]) === false) {
                 if ($tagData['required'] === true) {
                     $error = 'Missing %s tag in %s comment';
