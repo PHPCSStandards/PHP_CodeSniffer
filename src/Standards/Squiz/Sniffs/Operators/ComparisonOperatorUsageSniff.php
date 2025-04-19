@@ -19,9 +19,9 @@ class ComparisonOperatorUsageSniff implements Sniff
     /**
      * A list of valid comparison operators.
      *
-     * @var array
+     * @var array<int|string, true>
      */
-    private static $validOps = [
+    private const VALID_OPERATIONS = [
         T_IS_IDENTICAL        => true,
         T_IS_NOT_IDENTICAL    => true,
         T_LESS_THAN           => true,
@@ -36,7 +36,7 @@ class ComparisonOperatorUsageSniff implements Sniff
      *
      * @var array<int|string, string>
      */
-    private static $invalidOps = [
+    private const INVALID_OPERATIONS = [
         T_IS_EQUAL     => '===',
         T_IS_NOT_EQUAL => '!==',
         T_BOOLEAN_NOT  => '=== FALSE',
@@ -149,15 +149,15 @@ class ComparisonOperatorUsageSniff implements Sniff
 
         for ($i = $start; $i <= $end; $i++) {
             $type = $tokens[$i]['code'];
-            if (isset(self::$invalidOps[$type]) === true) {
+            if (isset(self::INVALID_OPERATIONS[$type]) === true) {
                 $error = 'Operator %s prohibited; use %s instead';
                 $data  = [
                     $tokens[$i]['content'],
-                    self::$invalidOps[$type],
+                    self::INVALID_OPERATIONS[$type],
                 ];
                 $phpcsFile->addError($error, $i, 'NotAllowed', $data);
                 $foundOps++;
-            } else if (isset(self::$validOps[$type]) === true) {
+            } else if (isset(self::VALID_OPERATIONS[$type]) === true) {
                 $foundOps++;
             }
 
