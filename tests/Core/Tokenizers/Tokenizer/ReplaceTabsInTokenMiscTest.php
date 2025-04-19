@@ -33,7 +33,7 @@ final class ReplaceTabsInTokenMiscTest extends TestCase
         $config  = new ConfigDouble();
         $ruleset = new Ruleset($config);
 
-        $content   = <<<EOD
+        $content   = <<<'EOD'
 <?php
 		echo 'foo';
 EOD;
@@ -71,7 +71,7 @@ EOD;
         $config->tabWidth = 4;
         $ruleset          = new Ruleset($config);
 
-        $content   = <<<EOD
+        $content   = <<<'EOD'
 <?php
 echo 'пасха		пасха';
 EOD;
