@@ -16,6 +16,16 @@ class ObjectOperatorIndentSniff implements Sniff
 {
 
     /**
+     * Tokens to listen for.
+     *
+     * @var array<int|string>
+     */
+    private const TARGET_TOKENS = [
+        T_OBJECT_OPERATOR,
+        T_NULLSAFE_OBJECT_OPERATOR,
+    ];
+
+    /**
      * The number of spaces code should be indented.
      *
      * @var integer
@@ -29,16 +39,6 @@ class ObjectOperatorIndentSniff implements Sniff
      */
     public $multilevel = false;
 
-    /**
-     * Tokens to listen for.
-     *
-     * @var array
-     */
-    private $targets = [
-        T_OBJECT_OPERATOR,
-        T_NULLSAFE_OBJECT_OPERATOR,
-    ];
-
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -47,7 +47,7 @@ class ObjectOperatorIndentSniff implements Sniff
      */
     public function register()
     {
-        return $this->targets;
+        return self::TARGET_TOKENS;
 
     }//end register()
 
@@ -67,14 +67,14 @@ class ObjectOperatorIndentSniff implements Sniff
 
         // Make sure this is the first object operator in a chain of them.
         $start = $phpcsFile->findStartOfStatement($stackPtr);
-        $prev  = $phpcsFile->findPrevious($this->targets, ($stackPtr - 1), $start);
+        $prev  = $phpcsFile->findPrevious(self::TARGET_TOKENS, ($stackPtr - 1), $start);
         if ($prev !== false) {
             return;
         }
 
         // Make sure this is a chained call.
         $end  = $phpcsFile->findEndOfStatement($stackPtr);
-        $next = $phpcsFile->findNext($this->targets, ($stackPtr + 1), $end);
+        $next = $phpcsFile->findNext(self::TARGET_TOKENS, ($stackPtr + 1), $end);
         if ($next === false) {
             // Not a chained call.
             return;
@@ -189,7 +189,7 @@ class ObjectOperatorIndentSniff implements Sniff
             }//end if
 
             $next = $phpcsFile->findNext(
-                $this->targets,
+                self::TARGET_TOKENS,
                 ($next + 1),
                 $end
             );
