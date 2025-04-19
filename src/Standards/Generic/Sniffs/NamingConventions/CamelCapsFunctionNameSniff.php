@@ -20,9 +20,9 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
     /**
      * A list of all PHP magic methods.
      *
-     * @var array
+     * @var array<string, true>
      */
-    protected $magicMethods = [
+    protected const MAGIC_METHODS = [
         'construct'   => true,
         'destruct'    => true,
         'call'        => true,
@@ -47,9 +47,9 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
      *
      * These come from PHP modules such as SOAPClient.
      *
-     * @var array
+     * @var array<string, true>
      */
-    protected $methodsDoubleUnderscore = [
+    protected const DOUBLE_UNDERSCORE_METHODS = [
         'dorequest'              => true,
         'getcookies'             => true,
         'getfunctions'           => true,
@@ -67,9 +67,9 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
     /**
      * A list of all PHP magic functions.
      *
-     * @var array
+     * @var array<string, true>
      */
-    protected $magicFunctions = ['autoload' => true];
+    protected const MAGIC_FUNCTIONS = ['autoload' => true];
 
     /**
      * If TRUE, the string must not have two capital letters next to each other.
@@ -77,6 +77,33 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
      * @var boolean
      */
     public $strict = true;
+
+    /**
+     * A list of all PHP magic methods.
+     *
+     * @var array<string, true>
+     *
+     * @deprecated 4.0.0 Use the CamelCapsFunctionNameSniff::MAGIC_METHODS constant instead.
+     */
+    protected $magicMethods = self::MAGIC_METHODS;
+
+    /**
+     * A list of all PHP non-magic methods starting with a double underscore.
+     *
+     * @var array<string, true>
+     *
+     * @deprecated 4.0.0 Use the CamelCapsFunctionNameSniff::DOUBLE_UNDERSCORE_METHODS constant instead.
+     */
+    protected $methodsDoubleUnderscore = self::DOUBLE_UNDERSCORE_METHODS;
+
+    /**
+     * A list of all PHP magic functions.
+     *
+     * @var array<string, true>
+     *
+     * @deprecated 4.0.0 Use the CamelCapsFunctionNameSniff::MAGIC_FUNCTIONS constant instead.
+     */
+    protected $magicFunctions = self::MAGIC_FUNCTIONS;
 
 
     /**
@@ -130,8 +157,8 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
         // Is this a magic method. i.e., is prefixed with "__" ?
         if (preg_match('|^__[^_]|', $methodName) !== 0) {
             $magicPart = substr($methodNameLc, 2);
-            if (isset($this->magicMethods[$magicPart]) === true
-                || isset($this->methodsDoubleUnderscore[$magicPart]) === true
+            if (isset(static::MAGIC_METHODS[$magicPart]) === true
+                || isset(static::DOUBLE_UNDERSCORE_METHODS[$magicPart]) === true
             ) {
                 return;
             }
@@ -197,7 +224,7 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
         // Is this a magic function. i.e., it is prefixed with "__".
         if (preg_match('|^__[^_]|', $functionName) !== 0) {
             $magicPart = strtolower(substr($functionName, 2));
-            if (isset($this->magicFunctions[$magicPart]) === true) {
+            if (isset(static::MAGIC_FUNCTIONS[$magicPart]) === true) {
                 return;
             }
 
