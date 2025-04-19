@@ -752,13 +752,13 @@ final class Tokens
 
 
     /**
-     * Given a token, returns the name of the token.
+     * Given a token constant, returns the name of the token.
      *
      * If passed an integer, the token name is sourced from PHP's token_name()
      * function. If passed a string, it is assumed to be a PHPCS-supplied token
      * that begins with PHPCS_T_, so the name is sourced from the token value itself.
      *
-     * @param int|string $token The token to get the name for.
+     * @param int|string $token The token constant to get the name for.
      *
      * @return string
      */
