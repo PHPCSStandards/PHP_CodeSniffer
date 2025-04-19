@@ -60,7 +60,7 @@ final class SuggestTypeTest extends TestCase
     public static function dataSuggestTypeAllowedType()
     {
         $data = [];
-        foreach (Common::$allowedTypes as $type) {
+        foreach (Common::ALLOWED_TYPES as $type) {
             $data['Type: '.$type] = [$type];
         }
 
@@ -97,7 +97,7 @@ final class SuggestTypeTest extends TestCase
     public static function dataSuggestTypeAllowedTypeWrongCase()
     {
         $data = [];
-        foreach (Common::$allowedTypes as $type) {
+        foreach (Common::ALLOWED_TYPES as $type) {
             $data['Mixed case: '.$type] = [
                 'varType'  => ucfirst($type),
                 'expected' => $type,

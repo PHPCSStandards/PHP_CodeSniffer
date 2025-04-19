@@ -435,7 +435,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                     $suggestedTypeHint = 'callable';
                 } else if (strpos($suggestedName, 'callback') !== false) {
                     $suggestedTypeHint = 'callable';
-                } else if (in_array($suggestedName, Common::$allowedTypes, true) === false) {
+                } else if (isset(Common::ALLOWED_TYPES[$suggestedName]) === false) {
                     $suggestedTypeHint = $suggestedName;
                 }
 
