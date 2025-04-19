@@ -24,21 +24,14 @@ class UnusedFunctionParameterSniff implements Sniff
 {
 
     /**
-     * The list of class type hints which will be ignored.
-     *
-     * @var array
-     */
-    public $ignoreTypeHints = [];
-
-    /**
      * A list of all PHP magic methods with fixed method signatures.
      *
      * Note: `__construct()` and `__invoke()` are excluded on purpose
      * as their method signature is not fixed.
      *
-     * @var array
+     * @var array<string, true>
      */
-    private $magicMethods = [
+    private const MAGIC_METHODS = [
         '__destruct'    => true,
         '__call'        => true,
         '__callstatic'  => true,
@@ -55,6 +48,13 @@ class UnusedFunctionParameterSniff implements Sniff
         '__clone'       => true,
         '__debuginfo'   => true,
     ];
+
+    /**
+     * The list of class type hints which will be ignored.
+     *
+     * @var array
+     */
+    public $ignoreTypeHints = [];
 
 
     /**
@@ -101,7 +101,7 @@ class UnusedFunctionParameterSniff implements Sniff
                 // Check for magic methods and ignore these as the method signature cannot be changed.
                 $methodName   = $phpcsFile->getDeclarationName($stackPtr);
                 $methodNameLc = strtolower($methodName);
-                if (isset($this->magicMethods[$methodNameLc]) === true) {
+                if (isset(self::MAGIC_METHODS[$methodNameLc]) === true) {
                     return;
                 }
 
