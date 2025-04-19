@@ -291,7 +291,7 @@ class PHP extends Tokenizer
      * from the scopeOpeners array. The data is duplicated here to
      * save time during parsing of the file.
      *
-     * @var array
+     * @var array<int|string, int|string>
      */
     public $endScopeTokens = [
         T_CLOSE_CURLY_BRACKET => T_CLOSE_CURLY_BRACKET,
