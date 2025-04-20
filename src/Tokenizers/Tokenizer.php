@@ -55,7 +55,7 @@ abstract class Tokenizer
     /**
      * A list of tokens that end the scope.
      *
-     * @var array
+     * @var array<int|string, int|string>
      */
     public $endScopeTokens = [];
 
