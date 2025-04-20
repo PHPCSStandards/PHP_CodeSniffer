@@ -85,10 +85,22 @@ class UnnecessaryHeredocSniff implements Sniff
 
         $fix = $phpcsFile->addFixableWarning($warning, $stackPtr, 'Found');
         if ($fix === true) {
+            $phpcsFile->fixer->beginChangeset();
+
             $identifier  = trim(ltrim($tokens[$stackPtr]['content'], '<'));
             $replaceWith = "'".trim($identifier, '"')."'";
             $replacement = str_replace($identifier, $replaceWith, $tokens[$stackPtr]['content']);
             $phpcsFile->fixer->replaceToken($stackPtr, $replacement);
+
+            for ($i = ($stackPtr + 1); $i < $closer; $i++) {
+                $content = $tokens[$i]['content'];
+                $content = str_replace(['\\$', '\\\\'], ['$', '\\'], $content);
+                if ($tokens[$i]['content'] !== $content) {
+                    $phpcsFile->fixer->replaceToken($i, $content);
+                }
+            }
+
+            $phpcsFile->fixer->endChangeset();
         }
 
     }//end process()

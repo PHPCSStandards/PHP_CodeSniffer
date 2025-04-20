@@ -104,5 +104,5 @@ END;
 $heredoc = <<< "END"
 some text
 some \$text
-some text
+some text \\ including a backslash
 END;
