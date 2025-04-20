@@ -20,7 +20,7 @@ class UnnecessaryHeredocSniff implements Sniff
      *
      * @var array<string>
      */
-    private $escapeChars = [
+    private const ESCAPE_CHARS = [
         // Octal sequences.
         '\0',
         '\1',
@@ -111,7 +111,7 @@ class UnnecessaryHeredocSniff implements Sniff
         $phpcsFile->recordMetric($stackPtr, 'Heredoc contains interpolation or expression', 'no');
 
         // Check for escape sequences which aren't supported in nowdocs.
-        foreach ($this->escapeChars as $testChar) {
+        foreach (self::ESCAPE_CHARS as $testChar) {
             if (strpos($body, $testChar) !== false) {
                 return;
             }
