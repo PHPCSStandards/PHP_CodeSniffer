@@ -135,6 +135,18 @@ class Config
     ];
 
     /**
+     * The default configuration file names supported by PHPCS.
+     *
+     * @var array<string> The supported file names in order of precedence (highest first).
+     */
+    private const CONFIG_FILENAMES = [
+        '.phpcs.xml',
+        'phpcs.xml',
+        '.phpcs.xml.dist',
+        'phpcs.xml.dist',
+    ];
+
+    /**
      * An array of settings that PHPCS and PHPCBF accept.
      *
      * This array is not meant to be accessed directly. Instead, use the settings
@@ -426,15 +438,8 @@ class Config
             // Look for a default ruleset in the current directory or higher.
             $currentDir = getcwd();
 
-            $defaultFiles = [
-                '.phpcs.xml',
-                'phpcs.xml',
-                '.phpcs.xml.dist',
-                'phpcs.xml.dist',
-            ];
-
             do {
-                foreach ($defaultFiles as $defaultFilename) {
+                foreach (self::CONFIG_FILENAMES as $defaultFilename) {
                     $default = $currentDir.DIRECTORY_SEPARATOR.$defaultFilename;
                     if (is_file($default) === true) {
                         $this->standards = [$default];
