@@ -15,6 +15,32 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class DoubleQuoteUsageSniff implements Sniff
 {
 
+    /**
+     * Escape chars which are supported in double quoted strings, but not in single quoted strings.
+     *
+     * @var array<string>
+     */
+    private const ESCAPE_CHARS = [
+        '\0',
+        '\1',
+        '\2',
+        '\3',
+        '\4',
+        '\5',
+        '\6',
+        '\7',
+        '\n',
+        '\r',
+        '\f',
+        '\t',
+        '\v',
+        '\x',
+        '\b',
+        '\e',
+        '\u',
+        '\'',
+    ];
+
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -91,28 +117,7 @@ class DoubleQuoteUsageSniff implements Sniff
             return $skipTo;
         }//end if
 
-        $allowedChars = [
-            '\0',
-            '\1',
-            '\2',
-            '\3',
-            '\4',
-            '\5',
-            '\6',
-            '\7',
-            '\n',
-            '\r',
-            '\f',
-            '\t',
-            '\v',
-            '\x',
-            '\b',
-            '\e',
-            '\u',
-            '\'',
-        ];
-
-        foreach ($allowedChars as $testChar) {
+        foreach (self::ESCAPE_CHARS as $testChar) {
             if (strpos($workingString, $testChar) !== false) {
                 return $skipTo;
             }
