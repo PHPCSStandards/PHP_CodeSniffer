@@ -16,6 +16,17 @@ use PHP_CodeSniffer\Util\Tokens;
 class InlineCommentSniff implements Sniff
 {
 
+    /**
+     * Characters which are accepted to end a sentence.
+     *
+     * @var array<string, string>
+     */
+    private const VALID_SENTENCE_END_CHARS = [
+        'full-stops'        => '.',
+        'exclamation marks' => '!',
+        'or question marks' => '?',
+    ];
+
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -227,17 +238,11 @@ class InlineCommentSniff implements Sniff
         // Only check the end of comment character if the start of the comment
         // is a letter, indicating that the comment is just standard text.
         if (preg_match('/^\p{L}/u', $commentText) === 1) {
-            $commentCloser   = $commentText[(strlen($commentText) - 1)];
-            $acceptedClosers = [
-                'full-stops'        => '.',
-                'exclamation marks' => '!',
-                'or question marks' => '?',
-            ];
-
-            if (in_array($commentCloser, $acceptedClosers, true) === false) {
+            $commentCloser = $commentText[(strlen($commentText) - 1)];
+            if (in_array($commentCloser, self::VALID_SENTENCE_END_CHARS, true) === false) {
                 $error = 'Inline comments must end in %s';
                 $ender = '';
-                foreach ($acceptedClosers as $closerName => $symbol) {
+                foreach (self::VALID_SENTENCE_END_CHARS as $closerName => $symbol) {
                     $ender .= ' '.$closerName.',';
                 }
 
