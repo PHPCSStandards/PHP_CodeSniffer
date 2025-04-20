@@ -77,6 +77,13 @@ class UnconditionalIfStatementSniff implements Sniff
 
             if (isset(Tokens::EMPTY_TOKENS[$code]) === true) {
                 continue;
+            }
+
+            if ($code === T_NAME_FULLY_QUALIFIED) {
+                $compareReadyKeyword = strtolower($tokens[$next]['content']);
+                if ($compareReadyKeyword !== '\true' && $compareReadyKeyword !== '\false') {
+                    $goodCondition = true;
+                }
             } else if ($code !== T_TRUE && $code !== T_FALSE) {
                 $goodCondition = true;
             }
