@@ -225,6 +225,12 @@ abstract class DNFTypes {
     // Illegal type: segments which are strict subsets of others are disallowed, but that's not the concern of the tokenizer.
     public function identifierNamesReturnFQ(
     ) /* testDNFTypeReturnFullyQualified */ : (\Fully\Qualified\NameA&\Fully\Qualified\NameB)|\Fully\Qualified\NameB {}
+
+    public function FQNTrueTypeParam(/* testDNFTypeFQNTrue */ \True|(A&D) $param) {}
+
+    public function FQNFalseTypeReturn($param) /* testDNFTypeFQNFalse */ : (A&D)|\false|null {
+        $closure = function ($param): /* testDNFTypeFQNNull */ (A&D)|\NULL {};
+    }
 }
 
 function globalFunctionWithSpreadAndReference(

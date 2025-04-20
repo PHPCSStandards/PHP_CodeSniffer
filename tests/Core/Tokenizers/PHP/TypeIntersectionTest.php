@@ -151,6 +151,9 @@ final class TypeIntersectionTest extends AbstractTokenizerTestCase
             'return type for arrow function'                              => ['/* testTypeIntersectionArrowReturnType */'],
             'type for function parameter, return by ref'                  => ['/* testTypeIntersectionNonArrowFunctionDeclaration */'],
             'type for function parameter with invalid types'              => ['/* testTypeIntersectionWithInvalidTypes */'],
+            'type for method parameter, includes (invalid) FQN true'      => ['/* testTypeIntersectionInvalidFQNTrue */'],
+            'return type for method, includes (invalid) FQN false'        => ['/* testTypeIntersectionInvalidFQNFalse */'],
+            'return type for closure, includes (invalid) FQN null'        => ['/* testTypeIntersectionInvalidFQNNull */'],
         ];
 
     }//end dataTypeIntersection()

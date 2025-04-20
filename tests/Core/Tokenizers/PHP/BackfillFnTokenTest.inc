@@ -107,6 +107,15 @@ fn(array $a) : True => $a;
 /* testNullReturnType */
 fn(array $a) : null => $a;
 
+/* testFQNFalseReturnType */
+fn(array $a) : \FALSE => $a;
+
+/* testFQNTrueReturnType */
+fn(array $a) : \true => $a;
+
+/* testFQNNullReturnType */
+fn(array $a) : \Null => $a;
+
 /* testUnionParamType */
 $arrowWithUnionParam = fn(int|float $param) : SomeClass => new SomeClass($param);
 
