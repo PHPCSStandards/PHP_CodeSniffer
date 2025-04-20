@@ -190,8 +190,8 @@ abstract class AbstractMethodUnitTest extends TestCase
      *
      * @return int
      *
-     * @throws Exception When the test delimiter comment is not found.
-     * @throws Exception When the test target token is not found.
+     * @throws \Exception When the test delimiter comment is not found.
+     * @throws \Exception When the test target token is not found.
      */
     public static function getTargetTokenFromFile(File $phpcsFile, $commentString, $tokenType, $tokenContent=null)
     {
