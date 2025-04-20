@@ -17,6 +17,17 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
 {
 
     /**
+     * Modifier keywords which can be used in class declarations.
+     *
+     * @var array<int|string, int|string>
+     */
+    private const CLASS_MODIFIERS = [
+        T_ABSTRACT => T_ABSTRACT,
+        T_FINAL    => T_FINAL,
+        T_READONLY => T_READONLY,
+    ];
+
+    /**
      * The number of spaces code should be indented.
      *
      * @var integer
@@ -65,16 +76,10 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
         $stackPtrType = strtolower($tokens[$stackPtr]['content']);
 
         // Check alignment of the keyword and braces.
-        $classModifiers = [
-            T_ABSTRACT => T_ABSTRACT,
-            T_FINAL    => T_FINAL,
-            T_READONLY => T_READONLY,
-        ];
-
         $prevNonSpace = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
         $prevNonEmpty = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
 
-        if (isset($classModifiers[$tokens[$prevNonEmpty]['code']]) === true) {
+        if (isset(self::CLASS_MODIFIERS[$tokens[$prevNonEmpty]['code']]) === true) {
             $spaces    = 0;
             $errorCode = 'SpaceBeforeKeyword';
             if ($tokens[$prevNonEmpty]['line'] !== $tokens[$stackPtr]['line']) {
