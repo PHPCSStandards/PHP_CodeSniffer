@@ -15,6 +15,35 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class UnnecessaryHeredocSniff implements Sniff
 {
 
+    /**
+     * Escape chars which are supported in heredocs, but not in nowdocs.
+     *
+     * @var array<string>
+     */
+    private $escapeChars = [
+        // Octal sequences.
+        '\0',
+        '\1',
+        '\2',
+        '\3',
+        '\4',
+        '\5',
+        '\6',
+        '\7',
+
+        // Various whitespace and the escape char.
+        '\n',
+        '\r',
+        '\t',
+        '\v',
+        '\e',
+        '\f',
+
+        // Hex and unicode sequences.
+        '\x',
+        '\u',
+    ];
+
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -80,6 +109,13 @@ class UnnecessaryHeredocSniff implements Sniff
         }//end foreach
 
         $phpcsFile->recordMetric($stackPtr, 'Heredoc contains interpolation or expression', 'no');
+
+        // Check for escape sequences which aren't supported in nowdocs.
+        foreach ($this->escapeChars as $testChar) {
+            if (strpos($body, $testChar) !== false) {
+                return;
+            }
+        }
 
         $warning = 'Detected heredoc without interpolation or expressions. Use nowdoc syntax instead';
 
