@@ -16,6 +16,22 @@ class DisallowTabIndentSniff implements Sniff
 {
 
     /**
+     * Tokens which can include indentation.
+     *
+     * @var array<int|string, true>
+     */
+    private const TOKENS_CONTAINING_INDENT = [
+        T_WHITESPACE             => true,
+        T_INLINE_HTML            => true,
+        T_DOC_COMMENT_WHITESPACE => true,
+        T_DOC_COMMENT_STRING     => true,
+        T_COMMENT                => true,
+        T_END_HEREDOC            => true,
+        T_END_NOWDOC             => true,
+        T_YIELD_FROM             => true,
+    ];
+
+    /**
      * The --tab-width CLI value that is being used.
      *
      * @var integer
@@ -58,20 +74,10 @@ class DisallowTabIndentSniff implements Sniff
             }
         }
 
-        $tokens      = $phpcsFile->getTokens();
-        $checkTokens = [
-            T_WHITESPACE             => true,
-            T_INLINE_HTML            => true,
-            T_DOC_COMMENT_WHITESPACE => true,
-            T_DOC_COMMENT_STRING     => true,
-            T_COMMENT                => true,
-            T_END_HEREDOC            => true,
-            T_END_NOWDOC             => true,
-            T_YIELD_FROM             => true,
-        ];
+        $tokens = $phpcsFile->getTokens();
 
         for ($i = 0; $i < $phpcsFile->numTokens; $i++) {
-            if (isset($checkTokens[$tokens[$i]['code']]) === false) {
+            if (isset(self::TOKENS_CONTAINING_INDENT[$tokens[$i]['code']]) === false) {
                 continue;
             }
 
