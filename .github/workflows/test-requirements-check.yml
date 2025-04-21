@@ -142,7 +142,14 @@ jobs:
       - name: Run the test
         id: check
         continue-on-error: true
-        run: php "bin/${{ matrix.cmd }}" --version
+        shell: bash
+        run: |
+          set +e
+          php "bin/${{ matrix.cmd }}" --version
+          exitcode="$?"
+          echo "EXITCODE=$exitcode" >> "$GITHUB_OUTPUT"
+          echo "Exitcode is: $exitcode"
+          exit "$exitcode"
 
       - name: Check the result of a successful test against expectation
         if: ${{ steps.check.outcome == 'success' && matrix.expect == 'fail' }}
@@ -150,6 +157,14 @@ jobs:
 
       - name: Check the result of a failed test against expectation
         if: ${{ steps.check.outcome != 'success' && matrix.expect == 'success' }}
+        run: exit 1
+
+      - name: Verify the exit code is 0 when requirements are met
+        if: ${{ matrix.expect == 'success' && steps.check.outputs.EXITCODE != 0 }}
+        run: exit 1
+
+      - name: Verify the exit code is 64 when requirements are not met
+        if: ${{ matrix.expect == 'fail' && steps.check.outputs.EXITCODE != 64 }}
         run: exit 1
 
   build-phars:
@@ -199,7 +214,14 @@ jobs:
       - name: Run the test
         id: check
         continue-on-error: true
-        run: php ${{ matrix.cmd }}.phar --version
+        shell: bash
+        run: |
+          set +e
+          php ${{ matrix.cmd }}.phar --version
+          exitcode="$?"
+          echo "EXITCODE=$exitcode" >> "$GITHUB_OUTPUT"
+          echo "Exitcode is: $exitcode"
+          exit "$exitcode"
 
       - name: Check the result of a successful test against expectation
         if: ${{ steps.check.outcome == 'success' && matrix.expect == 'fail' }}
@@ -207,4 +229,12 @@ jobs:
 
       - name: Check the result of a failed test against expectation
         if: ${{ steps.check.outcome != 'success' && matrix.expect == 'success' }}
+        run: exit 1
+
+      - name: Verify the exit code is 0 when requirements are met
+        if: ${{ matrix.expect == 'success' && steps.check.outputs.EXITCODE != 0 }}
+        run: exit 1
+
+      - name: Verify the exit code is 64 when requirements are not met
+        if: ${{ matrix.expect == 'fail' && steps.check.outputs.EXITCODE != 64 }}
         run: exit 1
