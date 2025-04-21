@@ -16,6 +16,20 @@ class DisallowSpaceIndentSniff implements Sniff
 {
 
     /**
+     * Tokens which can include indentation.
+     *
+     * @var array<int|string, true>
+     */
+    private const TOKENS_CONTAINING_INDENT = [
+        T_WHITESPACE             => true,
+        T_INLINE_HTML            => true,
+        T_DOC_COMMENT_WHITESPACE => true,
+        T_COMMENT                => true,
+        T_END_HEREDOC            => true,
+        T_END_NOWDOC             => true,
+    ];
+
+    /**
      * The --tab-width CLI value that is being used.
      *
      * @var integer
@@ -62,20 +76,11 @@ class DisallowSpaceIndentSniff implements Sniff
             }
         }
 
-        $checkTokens = [
-            T_WHITESPACE             => true,
-            T_INLINE_HTML            => true,
-            T_DOC_COMMENT_WHITESPACE => true,
-            T_COMMENT                => true,
-            T_END_HEREDOC            => true,
-            T_END_NOWDOC             => true,
-        ];
-
         $eolLen = strlen($phpcsFile->eolChar);
 
         $tokens = $phpcsFile->getTokens();
         for ($i = 0; $i < $phpcsFile->numTokens; $i++) {
-            if ($tokens[$i]['column'] !== 1 || isset($checkTokens[$tokens[$i]['code']]) === false) {
+            if ($tokens[$i]['column'] !== 1 || isset(self::TOKENS_CONTAINING_INDENT[$tokens[$i]['code']]) === false) {
                 continue;
             }
 
