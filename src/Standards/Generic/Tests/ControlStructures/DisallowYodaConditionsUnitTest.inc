@@ -7,8 +7,8 @@ if ($value == true) {}
 if (true === $value) {}
 if (true == $value) {}
 
-if($value === true){}
-if($value == true){}
+if($value === false){}
+if($value == false){}
 if(false === $value){}
 if(!false == $value || true !== $value){}
 
@@ -139,8 +139,8 @@ if (is_array($val)
     && array('foo', 'bar') === array($foo, $bar)
     && ['foo', 'bar'] === [$foo, $bar]
     && array('foo' => true, 'bar' => false) === array(getContents())
-    && ['foo' => true, 'bar' => false] === array(getContents())
-    && array(getContents()) === ['foo' => true, 'bar' => false]
+    && ['foo' => true, 'bar' => \false, 'baz' => null] === array(getContents())
+    && array(getContents()) === ['foo' => \true, 'bar' => false, 'baz' => \null]
 ) {
 }
 
@@ -192,3 +192,14 @@ if(Partially\qualified('foo') === 10){}
 if(1.5 === Partially\qualified(true)){}
 if(namespace\relative(false) === null){}
 if('string' === namespace\relative(null)){}
+
+// Handle FQN true/false/null the same as plain true/false/null.
+if ($value === \true) {}
+if (\true === $value) {}
+
+if($value == \FALSE){}
+if(\FALSE === $value){}
+if(!\false == $value || true !== $value){}
+
+if($value === \Null){}
+if(\Null == $value){}
