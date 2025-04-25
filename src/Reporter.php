@@ -290,6 +290,10 @@ class Reporter
             $generatedReport = ob_get_contents();
             ob_end_clean();
 
+            if ($this->config->colors !== true) {
+                $generatedReport = Common::stripColors($generatedReport);
+            }
+
             if ($report['output'] === null) {
                 // Using a temp file.
                 if (isset($this->tmpFiles[$type]) === false) {
