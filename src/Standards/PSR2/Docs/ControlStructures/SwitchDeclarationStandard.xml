@@ -1,6 +1,33 @@
 <documentation title="Switch Declaration">
     <standard>
     <![CDATA[
+    Case and default keywords must be lowercase.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Keywords in lowercase.">
+        <![CDATA[
+switch ($foo) {
+    <em>case</em> 'bar':
+        break;
+    <em>default</em>:
+        break;
+}
+        ]]>
+        </code>
+        <code title="Invalid: Keywords not in lowercase.">
+        <![CDATA[
+switch ($foo) {
+    <em>CASE</em> 'bar':
+        break;
+    <em>Default</em>:
+        break;
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
     Case statements must be followed by exactly one space.
     ]]>
     </standard>
@@ -51,6 +78,52 @@ switch ($foo) {
     </code_comparison>
     <standard>
     <![CDATA[
+    The case or default body must start on the line following the statement.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Body starts on the next line.">
+        <![CDATA[
+switch ($foo) {
+    case 'bar':
+<em></em>        break;
+}
+        ]]>
+        </code>
+        <code title="Invalid: Body on the same line as the case statement.">
+        <![CDATA[
+switch ($foo) {
+    case 'bar':<em></em> break;
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    Terminating statements must be on a line by themselves.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Terminating statement on its own line.">
+        <![CDATA[
+switch ($foo) {
+    case 'bar':
+        echo $foo;
+        <em>return;</em>
+}
+        ]]>
+        </code>
+        <code title="Invalid: Terminating statement not on its own line.">
+        <![CDATA[
+switch ($foo) {
+    case 'bar':
+        <em>echo $foo; return;</em>
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
     Terminating statements must be indented four more spaces from the case statement.
     ]]>
     </standard>
@@ -68,6 +141,34 @@ switch ($foo) {
 switch ($foo) {
     case 'bar':
 <em>    </em>break;
+}
+        ]]>
+        </code>
+    </code_comparison>
+    <standard>
+    <![CDATA[
+    Case and default statements must be defined using a colon.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Using a colon for case and default statements.">
+        <![CDATA[
+switch ($foo) {
+    case 'bar'<em>:</em>
+        break;
+    default<em>:</em>
+        break;
+}
+        ]]>
+        </code>
+        <code title="Invalid: Using a semi-colon or colon followed by braces.">
+        <![CDATA[
+switch ($foo) {
+    case 'bar'<em>;</em>
+        break;
+    default: <em>{</em>
+        break;
+    <em>}</em>
 }
         ]]>
         </code>
