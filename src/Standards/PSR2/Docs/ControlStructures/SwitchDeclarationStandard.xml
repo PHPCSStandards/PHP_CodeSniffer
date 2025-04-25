@@ -67,8 +67,9 @@ switch ($foo) {
         <![CDATA[
 switch ($foo) {
     case 'bar':
-    <em>// no break</em>
-    default<em></em>:
+        echo $foo;
+        <em>// no break</em>
+    default:
         break;
 }
         ]]>
@@ -77,7 +78,8 @@ switch ($foo) {
         <![CDATA[
 switch ($foo) {
     case 'bar':
-    default<em></em>:
+        echo $foo;<em></em>
+    default:
         break;
 }
         ]]>
