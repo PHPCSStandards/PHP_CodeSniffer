@@ -104,5 +104,19 @@ $heredoc = <<<END
 $heredoc = <<< "END"
     some text
     some \$text
-    some text
+    some text \\ including a backslash
     END;
+
+$heredoc = <<<EOD
+    <?php
+    echo 'The below line contains escape characters and should be recognized as needing heredoc';
+    echo "aa\xC3\xC3	\xC3\xB8aa";
+    EOD;
+
+echo <<<EOT
+    This should print a capital 'A': \x41
+    EOT;
+
+echo <<<EOT
+    Here we should have a tab and 2 'A's: \t \101 \u{41}
+    EOT;
