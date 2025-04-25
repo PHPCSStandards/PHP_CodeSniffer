@@ -1,11 +1,11 @@
-<documentation title="Switch Declarations">
+<documentation title="Switch Declaration">
     <standard>
     <![CDATA[
-    Case statements should be followed by a space.  Colons in switch declarations should not be preceded by whitespace.  Break statements should be indented 4 more spaces from the case statement.  There must be a comment when falling through from one case into the next.
+    Case statements must be followed by exactly one space.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: Case statement followed by 1 space.">
+        <code title="Valid: Case statement followed by one space.">
         <![CDATA[
 switch ($foo) {
     case<em> </em>'bar':
@@ -13,7 +13,7 @@ switch ($foo) {
 }
         ]]>
         </code>
-        <code title="Invalid: Case statement not followed by 1 space.">
+        <code title="Invalid: Case statement not followed by one space.">
         <![CDATA[
 switch ($foo) {
     case<em></em>'bar':
@@ -22,8 +22,13 @@ switch ($foo) {
         ]]>
         </code>
     </code_comparison>
+    <standard>
+    <![CDATA[
+    There must be no whitespace between the case value or default keyword and the colon.
+    ]]>
+    </standard>
     <code_comparison>
-        <code title="Valid: Colons not prefixed by whitespace.">
+        <code title="Valid: Colons not preceded by whitespace.">
         <![CDATA[
 switch ($foo) {
     case 'bar'<em></em>:
@@ -33,7 +38,7 @@ switch ($foo) {
 }
         ]]>
         </code>
-        <code title="Invalid: Colons prefixed by whitespace.">
+        <code title="Invalid: Colons preceded by whitespace.">
         <![CDATA[
 switch ($foo) {
     case 'bar'<em> </em>:
@@ -44,6 +49,11 @@ switch ($foo) {
         ]]>
         </code>
     </code_comparison>
+    <standard>
+    <![CDATA[
+    Terminating statements must be indented four more spaces from the case statement.
+    ]]>
+    </standard>
     <code_comparison>
         <code title="Valid: Break statement indented correctly.">
         <![CDATA[
@@ -53,7 +63,7 @@ switch ($foo) {
 }
         ]]>
         </code>
-        <code title="Invalid: Break statement not indented 4 spaces.">
+        <code title="Invalid: Break statement not indented four spaces.">
         <![CDATA[
 switch ($foo) {
     case 'bar':
@@ -62,8 +72,13 @@ switch ($foo) {
         ]]>
         </code>
     </code_comparison>
+    <standard>
+    <![CDATA[
+    There must be a comment when fall-through is intentional in a non-empty case body.
+    ]]>
+    </standard>
     <code_comparison>
-        <code title="Valid: Comment marking intentional fall-through.">
+        <code title="Valid: Comment marking intentional fall-through in a non-empty case body.">
         <![CDATA[
 switch ($foo) {
     case 'bar':
@@ -74,7 +89,7 @@ switch ($foo) {
 }
         ]]>
         </code>
-        <code title="Invalid: No comment marking intentional fall-through.">
+        <code title="Invalid: No comment marking intentional fall-through in a non-empty case body.">
         <![CDATA[
 switch ($foo) {
     case 'bar':
