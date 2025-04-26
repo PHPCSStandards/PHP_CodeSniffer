@@ -208,7 +208,7 @@ class Runner
             $this->reporter->printReports();
 
             if ($this->config->quiet === false) {
-                StatusWriter::write('');
+                StatusWriter::writeNewline();
                 Timing::printRunTime();
             }
         } catch (DeepExitException $e) {
