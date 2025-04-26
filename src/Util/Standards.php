@@ -312,27 +312,44 @@ class Standards
 
 
     /**
+     * Prepares a list of installed coding standards for display.
+     *
+     * @return string
+     */
+    public static function prepareInstalledStandardsForDisplay()
+    {
+        $installedStandards = self::getInstalledStandards();
+        $numStandards       = count($installedStandards);
+
+        $output = '';
+        if ($numStandards === 0) {
+            $output .= 'No coding standards are installed.';
+        } else {
+            $lastStandard = array_pop($installedStandards);
+            if ($numStandards === 1) {
+                $output .= "The only coding standard installed is $lastStandard";
+            } else {
+                $standardList  = implode(', ', $installedStandards);
+                $standardList .= ' and '.$lastStandard;
+                $output       .= 'The installed coding standards are '.$standardList;
+            }
+        }
+
+        return $output;
+
+    }//end prepareInstalledStandardsForDisplay()
+
+
+    /**
      * Prints out a list of installed coding standards.
+     *
+     * @deprecated 4.0.0 Use `echo Standards::prepareInstalledStandardsForDisplay()` instead.
      *
      * @return void
      */
     public static function printInstalledStandards()
     {
-        $installedStandards = self::getInstalledStandards();
-        $numStandards       = count($installedStandards);
-
-        if ($numStandards === 0) {
-            echo 'No coding standards are installed.'.PHP_EOL;
-        } else {
-            $lastStandard = array_pop($installedStandards);
-            if ($numStandards === 1) {
-                echo "The only coding standard installed is $lastStandard".PHP_EOL;
-            } else {
-                $standardList  = implode(', ', $installedStandards);
-                $standardList .= ' and '.$lastStandard;
-                echo 'The installed coding standards are '.$standardList.PHP_EOL;
-            }
-        }
+        echo self::prepareInstalledStandardsForDisplay(), PHP_EOL;
 
     }//end printInstalledStandards()
 

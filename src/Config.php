@@ -685,10 +685,7 @@ class Config
             ob_end_clean();
             throw new DeepExitException($output, 0);
         case 'i' :
-            ob_start();
-            Standards::printInstalledStandards();
-            $output = ob_get_contents();
-            ob_end_clean();
+            $output = Standards::prepareInstalledStandardsForDisplay().PHP_EOL;
             throw new DeepExitException($output, 0);
         case 'v' :
             if ($this->quiet === true) {
