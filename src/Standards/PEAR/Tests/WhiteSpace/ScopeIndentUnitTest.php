@@ -30,7 +30,7 @@ final class ScopeIndentUnitTest extends AbstractSniffTestCase
      */
     public function setCliValues($testFile, $config)
     {
-        $config->setConfigData('scope_indent_debug', false, true);
+        $config->setConfigData('scope_indent_debug', '0', true);
 
     }//end setCliValues()
 
