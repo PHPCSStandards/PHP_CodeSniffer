@@ -36,7 +36,7 @@ final class FixFileReturnValueTest extends TestCase
         $testCaseFile = __DIR__.'/Fixtures/test.inc';
         $phpcsFile    = new LocalFile($testCaseFile, $ruleset, $config);
         $phpcsFile->process();
-        $fixed = $phpcsFile->fixer->fixFile($phpcsFile);
+        $fixed = $phpcsFile->fixer->fixFile();
 
         $this->assertTrue($fixed);
 
@@ -60,7 +60,7 @@ final class FixFileReturnValueTest extends TestCase
         $testCaseFile = __DIR__.'/Fixtures/test.inc';
         $phpcsFile    = new LocalFile($testCaseFile, $ruleset, $config);
         $phpcsFile->process();
-        $fixed = $phpcsFile->fixer->fixFile($phpcsFile);
+        $fixed = $phpcsFile->fixer->fixFile();
 
         $this->assertFalse($fixed);
 
