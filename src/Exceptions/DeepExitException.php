@@ -5,8 +5,13 @@
  * Allows the runner to return an exit code instead of putting exit codes elsewhere
  * in the source code.
  *
+ * Exit codes passed to this exception (as the `$code` parameter) MUST be one of the
+ * predefined exit code constants per the `PHP_CodeSniffer\Util\ExitCode` class; or a bitmask sum of those.
+ *
  * @author    Greg Sherwood <gsherwood@squiz.net>
+ * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2025 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 

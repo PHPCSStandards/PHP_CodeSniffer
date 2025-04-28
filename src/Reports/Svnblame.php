@@ -10,6 +10,7 @@
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Exceptions\DeepExitException;
+use PHP_CodeSniffer\Util\ExitCode;
 
 class Svnblame extends VersionControl
 {
@@ -57,7 +58,7 @@ class Svnblame extends VersionControl
         $handle  = popen($command, 'r');
         if ($handle === false) {
             $error = 'ERROR: Could not execute "'.$command.'"'.PHP_EOL.PHP_EOL;
-            throw new DeepExitException($error, 3);
+            throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         }
 
         $rawContent = stream_get_contents($handle);

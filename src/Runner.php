@@ -21,6 +21,7 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Files\FileList;
 use PHP_CodeSniffer\Util\Cache;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\ExitCode;
 use PHP_CodeSniffer\Util\Standards;
 use PHP_CodeSniffer\Util\Timing;
 use PHP_CodeSniffer\Util\Tokens;
@@ -278,7 +279,7 @@ class Runner
                 // out by letting them know which standards are installed.
                 $error  = 'ERROR: the "'.$standard.'" coding standard is not installed.'.PHP_EOL.PHP_EOL;
                 $error .= Standards::prepareInstalledStandardsForDisplay().PHP_EOL;
-                throw new DeepExitException($error, 3);
+                throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
             }
         }
 
@@ -309,7 +310,7 @@ class Runner
         } catch (RuntimeException $e) {
             $error  = rtrim($e->getMessage(), "\r\n").PHP_EOL.PHP_EOL;
             $error .= $this->config->printShortUsage(true);
-            throw new DeepExitException($error, 3);
+            throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         }
 
     }//end init()
@@ -348,7 +349,7 @@ class Runner
             if (empty($this->config->files) === true) {
                 $error  = 'ERROR: You must supply at least one file or directory to process.'.PHP_EOL.PHP_EOL;
                 $error .= $this->config->printShortUsage(true);
-                throw new DeepExitException($error, 3);
+                throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
             }
 
             if (PHP_CODESNIFFER_VERBOSITY > 0) {
@@ -380,7 +381,7 @@ class Runner
         if ($numFiles === 0) {
             $error  = 'ERROR: No files were checked.'.PHP_EOL;
             $error .= 'All specified files were excluded or did not match filtering rules.'.PHP_EOL.PHP_EOL;
-            throw new DeepExitException($error, 3);
+            throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         }
 
         // Turn all sniff errors into exceptions.
@@ -694,7 +695,8 @@ class Runner
                 case 's':
                     break(2);
                 case 'q':
-                    throw new DeepExitException('', 0);
+                    // User request to "quit": exit code should be 0.
+                    throw new DeepExitException('', ExitCode::OKAY);
                 default:
                     // Repopulate the sniffs because some of them save their state
                     // and only clear it when the file changes, but we are rechecking

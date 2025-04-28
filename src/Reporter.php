@@ -14,6 +14,7 @@ use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Reports\Report;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\ExitCode;
 
 class Reporter
 {
@@ -103,7 +104,7 @@ class Reporter
                 $filename = realpath($type);
                 if ($filename === false) {
                     $error = "ERROR: Custom report \"$type\" not found".PHP_EOL;
-                    throw new DeepExitException($error, 3);
+                    throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                 }
 
                 $reportClassName = Autoload::loadFile($filename);
@@ -132,7 +133,7 @@ class Reporter
 
             if ($reportClassName === '') {
                 $error = "ERROR: Class file for report \"$type\" not found".PHP_EOL;
-                throw new DeepExitException($error, 3);
+                throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
             }
 
             $reportClass = new $reportClassName();
