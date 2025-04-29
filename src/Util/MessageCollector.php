@@ -33,42 +33,42 @@ final class MessageCollector
      *
      * @var int
      */
-    const ERROR = 1;
+    public const ERROR = 1;
 
     /**
      * Indicator for a warning.
      *
      * @var int
      */
-    const WARNING = 2;
+    public const WARNING = 2;
 
     /**
      * Indicator for a notice.
      *
      * @var int
      */
-    const NOTICE = 4;
+    public const NOTICE = 4;
 
     /**
      * Indicator for a deprecation notice.
      *
      * @var int
      */
-    const DEPRECATED = 8;
+    public const DEPRECATED = 8;
 
     /**
      * Indicator for ordering the messages based on severity first, order received second.
      *
      * @var string
      */
-    const ORDERBY_SEVERITY = 'severity';
+    public const ORDERBY_SEVERITY = 'severity';
 
     /**
      * Indicator for ordering the messages based on the order in which they were received.
      *
      * @var string
      */
-    const ORDERBY_RECEIVED = 'received';
+    public const ORDERBY_RECEIVED = 'received';
 
     /**
      * Collected messages.

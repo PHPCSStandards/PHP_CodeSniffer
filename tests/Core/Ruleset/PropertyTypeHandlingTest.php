@@ -29,14 +29,14 @@ final class PropertyTypeHandlingTest extends TestCase
      *
      * @var string
      */
-    const SNIFF_CODE = 'TestStandard.SetProperty.PropertyTypeHandling';
+    private const SNIFF_CODE = 'TestStandard.SetProperty.PropertyTypeHandling';
 
     /**
      * Class name of the sniff used in these tests.
      *
      * @var string
      */
-    const SNIFF_CLASS = 'Fixtures\\TestStandard\\Sniffs\\SetProperty\\PropertyTypeHandlingSniff';
+    private const SNIFF_CLASS = 'Fixtures\\TestStandard\\Sniffs\\SetProperty\\PropertyTypeHandlingSniff';
 
 
     /**

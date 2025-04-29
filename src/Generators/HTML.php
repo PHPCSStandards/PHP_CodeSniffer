@@ -28,7 +28,7 @@ class HTML extends Generator
      *
      * @var string
      */
-    const STYLESHEET = '<style>
+    private const STYLESHEET = '<style>
         body {
             background-color: #FFFFFF;
             font-size: 14px;

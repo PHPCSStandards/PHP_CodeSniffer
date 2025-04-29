@@ -19,14 +19,14 @@ class Timing
      *
      * @var int
      */
-    const MINUTE_IN_MS = 60000;
+    private const MINUTE_IN_MS = 60000;
 
     /**
      * Number of milliseconds in a second.
      *
      * @var int
      */
-    const SECOND_IN_MS = 1000;
+    private const SECOND_IN_MS = 1000;
 
     /**
      * The start time of the run in microseconds.

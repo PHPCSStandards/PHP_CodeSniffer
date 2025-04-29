@@ -157,4 +157,7 @@
         <exclude-pattern>src/Standards/Generic/Sniffs/Commenting/TodoSniff\.php</exclude-pattern>
         <exclude-pattern>src/Standards/Generic/Tests/Commenting/TodoUnitTest\.php</exclude-pattern>
     </rule>
+
+    <!-- Require visibility for class constants. -->
+    <rule ref="PSR12.Properties.ConstantVisibility"/>
 </ruleset>
