@@ -679,11 +679,8 @@ class Config
         switch ($arg) {
         case 'h':
         case '?':
-            ob_start();
             $this->printUsage();
-            $output = ob_get_contents();
-            ob_end_clean();
-            throw new DeepExitException($output, 0);
+            throw new DeepExitException('', 0);
         case 'i' :
             $output = Standards::prepareInstalledStandardsForDisplay().PHP_EOL;
             throw new DeepExitException($output, 0);
@@ -793,11 +790,8 @@ class Config
     {
         switch ($arg) {
         case 'help':
-            ob_start();
             $this->printUsage();
-            $output = ob_get_contents();
-            ob_end_clean();
-            throw new DeepExitException($output, 0);
+            throw new DeepExitException('', 0);
         case 'version':
             $output  = 'PHP_CodeSniffer version '.self::VERSION.' ('.self::STABILITY.') ';
             $output .= 'by Squiz and PHPCSStandards'.PHP_EOL;
