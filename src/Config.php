@@ -895,12 +895,9 @@ class Config
             }
             throw new DeepExitException($output, 0);
         case 'config-show':
-            ob_start();
-            $data = self::getAllConfigData();
-            echo 'Using config file: '.self::$configDataFile.PHP_EOL.PHP_EOL;
-            $this->printConfigData($data);
-            $output = ob_get_contents();
-            ob_end_clean();
+            $data    = self::getAllConfigData();
+            $output  = 'Using config file: '.self::$configDataFile.PHP_EOL.PHP_EOL;
+            $output .= $this->prepareConfigDataForDisplay($data);
             throw new DeepExitException($output, 0);
         case 'runtime-set':
             if (isset($this->cliArgs[($pos + 1)]) === false
@@ -1758,32 +1755,52 @@ class Config
 
 
     /**
+     * Prepares the gathered config data for display.
+     *
+     * @param array<string, string> $data The config data to format for display.
+     *
+     * @return string
+     */
+    public function prepareConfigDataForDisplay($data)
+    {
+        if (empty($data) === true) {
+            return '';
+        }
+
+        $max  = 0;
+        $keys = array_keys($data);
+        foreach ($keys as $key) {
+            $len = strlen($key);
+            if ($len > $max) {
+                $max = $len;
+            }
+        }
+
+        $max += 2;
+        ksort($data);
+
+        $output = '';
+        foreach ($data as $name => $value) {
+            $output .= str_pad($name.': ', $max).$value.PHP_EOL;
+        }
+
+        return $output;
+
+    }//end prepareConfigDataForDisplay()
+
+
+    /**
      * Prints out the gathered config data.
      *
-     * @param array $data The config data to print.
+     * @param array<string, string> $data The config data to print.
+     *
+     * @deprecated 4.0.0 Use `echo Config::prepareConfigDataForDisplay()` instead.
      *
      * @return void
      */
     public function printConfigData($data)
     {
-        $max  = 0;
-        $keys = array_keys($data);
-        foreach ($keys as $key) {
-            $len = strlen($key);
-            if (strlen($key) > $max) {
-                $max = $len;
-            }
-        }
-
-        if ($max === 0) {
-            return;
-        }
-
-        $max += 2;
-        ksort($data);
-        foreach ($data as $name => $value) {
-            echo str_pad($name.': ', $max).$value.PHP_EOL;
-        }
+        echo $this->prepareConfigDataForDisplay($data);
 
     }//end printConfigData()
 
