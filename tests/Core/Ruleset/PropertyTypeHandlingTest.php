@@ -271,8 +271,8 @@ final class PropertyTypeHandlingTest extends TestCase
                 'expected'     => [
                     'predefinedA' => 'true',
                     'predefinedB' => '  null  ',
-                    'newValueA' => false,
-                    'newValueB' => null,
+                    'newValueA'   => false,
+                    'newValueB'   => null,
                     '1.5', // phpcs:ignore Squiz.Arrays.ArrayDeclaration.NoKeySpecified -- That is largely what we are testing...
                     true,
                 ],

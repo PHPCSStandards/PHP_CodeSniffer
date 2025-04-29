@@ -46,10 +46,10 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
     {
         return [
             'standard'   => [
-                'testMarker'  => '/* testStandard */',
+                'testMarker' => '/* testStandard */',
             ],
             'mixed case' => [
-                'testMarker'  => '/* testMixedCase */',
+                'testMarker' => '/* testMixedCase */',
             ],
         ];
 
@@ -456,37 +456,37 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
     {
         return [
             'self'      => [
-                'testMarker'  => '/* testSelfReturnType */',
+                'testMarker' => '/* testSelfReturnType */',
             ],
             'parent'    => [
-                'testMarker'  => '/* testParentReturnType */',
+                'testMarker' => '/* testParentReturnType */',
             ],
             'callable'  => [
-                'testMarker'  => '/* testCallableReturnType */',
+                'testMarker' => '/* testCallableReturnType */',
             ],
             'array'     => [
-                'testMarker'  => '/* testArrayReturnType */',
+                'testMarker' => '/* testArrayReturnType */',
             ],
             'static'    => [
-                'testMarker'  => '/* testStaticReturnType */',
+                'testMarker' => '/* testStaticReturnType */',
             ],
             'false'     => [
-                'testMarker'  => '/* testFalseReturnType */',
+                'testMarker' => '/* testFalseReturnType */',
             ],
             'true'      => [
-                'testMarker'  => '/* testTrueReturnType */',
+                'testMarker' => '/* testTrueReturnType */',
             ],
             'null'      => [
-                'testMarker'  => '/* testNullReturnType */',
+                'testMarker' => '/* testNullReturnType */',
             ],
             'FQN false' => [
-                'testMarker'  => '/* testFQNFalseReturnType */',
+                'testMarker' => '/* testFQNFalseReturnType */',
             ],
             'FQN true'  => [
-                'testMarker'  => '/* testFQNTrueReturnType */',
+                'testMarker' => '/* testFQNTrueReturnType */',
             ],
             'FQN null'  => [
-                'testMarker'  => '/* testFQNNullReturnType */',
+                'testMarker' => '/* testFQNNullReturnType */',
             ],
         ];
 
