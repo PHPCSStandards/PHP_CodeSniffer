@@ -10,6 +10,7 @@ namespace PHP_CodeSniffer\Tests\Core\Runner;
 
 use PHP_CodeSniffer\Runner;
 use PHP_CodeSniffer\Tests\Core\Runner\AbstractRunnerTestCase;
+use PHP_CodeSniffer\Tests\Core\StatusWriterTestHelper;
 
 /**
  * Tests for the "All files were excluded" error message.
@@ -18,6 +19,7 @@ use PHP_CodeSniffer\Tests\Core\Runner\AbstractRunnerTestCase;
  */
 final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
 {
+    use StatusWriterTestHelper;
 
 
     /**
@@ -40,6 +42,8 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
 
         $runner = new Runner();
         $runner->runPHPCS();
+
+        $this->verifyOutput();
 
     }//end testPhpcs()
 
@@ -65,6 +69,8 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
 
         $runner = new Runner();
         $runner->runPHPCBF();
+
+        $this->verifyOutput();
 
     }//end testPhpcbf()
 
@@ -111,12 +117,24 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
             $_SERVER['argv'][] = $arg;
         }
 
-        $message  = 'ERROR: No files were checked.'.PHP_EOL;
-        $message .= 'All specified files were excluded or did not match filtering rules.'.PHP_EOL.PHP_EOL;
-
-        $this->expectOutputString($message);
+        $this->expectNoStdoutOutput();
 
     }//end setupTest()
+
+
+    /**
+     * Helper method to verify the output expectation for STDERR.
+     *
+     * @return void
+     */
+    private function verifyOutput()
+    {
+        $expected  = 'ERROR: No files were checked.'.PHP_EOL;
+        $expected .= 'All specified files were excluded or did not match filtering rules.'.PHP_EOL.PHP_EOL;
+
+        $this->assertStderrOutputSameString($expected);
+
+    }//end verifyOutput()
 
 
 }//end class

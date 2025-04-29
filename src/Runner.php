@@ -126,8 +126,17 @@ class Runner
                 Timing::printRunTime();
             }
         } catch (DeepExitException $e) {
-            echo $e->getMessage();
-            return $e->getCode();
+            $exitCode = $e->getCode();
+            $message  = $e->getMessage();
+            if ($message !== '') {
+                if ($exitCode === 0) {
+                    echo $e->getMessage();
+                } else {
+                    StatusWriter::write($e->getMessage(), 0, 0);
+                }
+            }
+
+            return $exitCode;
         }//end try
 
         if ($numErrors === 0) {
@@ -212,8 +221,17 @@ class Runner
                 Timing::printRunTime();
             }
         } catch (DeepExitException $e) {
-            echo $e->getMessage();
-            return $e->getCode();
+            $exitCode = $e->getCode();
+            $message  = $e->getMessage();
+            if ($message !== '') {
+                if ($exitCode === 0) {
+                    echo $e->getMessage();
+                } else {
+                    StatusWriter::write($e->getMessage(), 0, 0);
+                }
+            }
+
+            return $exitCode;
         }//end try
 
         if ($this->reporter->totalFixed === 0) {
