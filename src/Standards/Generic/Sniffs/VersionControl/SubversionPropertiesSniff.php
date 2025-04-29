@@ -23,12 +23,21 @@ class SubversionPropertiesSniff implements Sniff
      * exact value the property should have or NULL if the
      * property should just be set but the value is not fixed.
      *
-     * @var array
+     * @var array<string, string>
      */
-    protected $properties = [
+    protected const REQUIRED_PROPERTIES = [
         'svn:keywords'  => 'Author Id Revision',
         'svn:eol-style' => 'native',
     ];
+
+    /**
+     * The Subversion properties that should be set.
+     *
+     * @var array<string, string>
+     *
+     * @deprecated 4.0.0 Use the SubversionPropertiesSniff::REQUIRED_PROPERTIES constant instead.
+     */
+    protected $properties = self::REQUIRED_PROPERTIES;
 
 
     /**
@@ -61,10 +70,10 @@ class SubversionPropertiesSniff implements Sniff
             return $phpcsFile->numTokens;
         }
 
-        $allProperties = ($properties + $this->properties);
+        $allProperties = ($properties + static::REQUIRED_PROPERTIES);
         foreach ($allProperties as $key => $value) {
             if (isset($properties[$key]) === true
-                && isset($this->properties[$key]) === false
+                && isset(static::REQUIRED_PROPERTIES[$key]) === false
             ) {
                 $error = 'Unexpected Subversion property "%s" = "%s"';
                 $data  = [
@@ -76,25 +85,25 @@ class SubversionPropertiesSniff implements Sniff
             }
 
             if (isset($properties[$key]) === false
-                && isset($this->properties[$key]) === true
+                && isset(static::REQUIRED_PROPERTIES[$key]) === true
             ) {
                 $error = 'Missing Subversion property "%s" = "%s"';
                 $data  = [
                     $key,
-                    $this->properties[$key],
+                    static::REQUIRED_PROPERTIES[$key],
                 ];
                 $phpcsFile->addError($error, $stackPtr, 'Missing', $data);
                 continue;
             }
 
             if ($properties[$key] !== null
-                && $properties[$key] !== $this->properties[$key]
+                && $properties[$key] !== static::REQUIRED_PROPERTIES[$key]
             ) {
                 $error = 'Subversion property "%s" = "%s" does not match "%s"';
                 $data  = [
                     $key,
                     $properties[$key],
-                    $this->properties[$key],
+                    static::REQUIRED_PROPERTIES[$key],
                 ];
                 $phpcsFile->addError($error, $stackPtr, 'NoMatch', $data);
             }

@@ -18,19 +18,28 @@ class Common
     /**
      * An array of variable types for param/var we will check.
      *
-     * @var string[]
+     * @var array<string, string>
      */
-    public static $allowedTypes = [
-        'array',
-        'boolean',
-        'float',
-        'integer',
-        'mixed',
-        'object',
-        'string',
-        'resource',
-        'callable',
+    public const ALLOWED_TYPES = [
+        'array'    => 'array',
+        'boolean'  => 'boolean',
+        'float'    => 'float',
+        'integer'  => 'integer',
+        'mixed'    => 'mixed',
+        'object'   => 'object',
+        'string'   => 'string',
+        'resource' => 'resource',
+        'callable' => 'callable',
     ];
+
+    /**
+     * An array of variable types for param/var we will check.
+     *
+     * @var array<string, string>
+     *
+     * @deprecated 4.0.0 Use the Common::ALLOWED_TYPES constant instead.
+     */
+    public static $allowedTypes = self::ALLOWED_TYPES;
 
 
     /**
@@ -466,7 +475,7 @@ class Common
             return '';
         }
 
-        if (in_array($varType, self::$allowedTypes, true) === true) {
+        if (isset(self::ALLOWED_TYPES[$varType]) === true) {
             return $varType;
         } else {
             $lowerVarType = strtolower($varType);
@@ -512,7 +521,7 @@ class Common
                 } else {
                     return 'array';
                 }//end if
-            } else if (in_array($lowerVarType, self::$allowedTypes, true) === true) {
+            } else if (isset(self::ALLOWED_TYPES[$lowerVarType]) === true) {
                 // A valid type, but not lower cased.
                 return $lowerVarType;
             } else {

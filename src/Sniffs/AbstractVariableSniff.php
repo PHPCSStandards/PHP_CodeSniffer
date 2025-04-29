@@ -26,9 +26,9 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
      *
      * Used by various naming convention sniffs.
      *
-     * @var array
+     * @var array<string, true>
      */
-    protected $phpReservedVars = [
+    protected const PHP_RESERVED_VARS = [
         '_SERVER'              => true,
         '_GET'                 => true,
         '_POST'                => true,
@@ -42,6 +42,15 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
         'HTTP_RAW_POST_DATA'   => true,
         'php_errormsg'         => true,
     ];
+
+    /**
+     * List of PHP Reserved variables.
+     *
+     * @var array<string, true>
+     *
+     * @deprecated 4.0.0 Use the AbstractVariableSniff::PHP_RESERVED_VARS constant instead.
+     */
+    protected $phpReservedVars = self::PHP_RESERVED_VARS;
 
 
     /**

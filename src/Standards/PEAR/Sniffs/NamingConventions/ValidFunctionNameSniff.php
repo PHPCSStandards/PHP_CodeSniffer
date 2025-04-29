@@ -20,9 +20,9 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
     /**
      * A list of all PHP magic methods.
      *
-     * @var array
+     * @var array<string, true>
      */
-    protected $magicMethods = [
+    protected const MAGIC_METHODS = [
         'construct'   => true,
         'destruct'    => true,
         'call'        => true,
@@ -45,9 +45,27 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
     /**
      * A list of all PHP magic functions.
      *
-     * @var array
+     * @var array<string, true>
      */
-    protected $magicFunctions = ['autoload' => true];
+    protected const MAGIC_FUNCTIONS = ['autoload' => true];
+
+    /**
+     * A list of all PHP magic methods.
+     *
+     * @var array<string, true>
+     *
+     * @deprecated 4.0.0 Use the ValidFunctionNameSniff::MAGIC_METHODS constant instead.
+     */
+    protected $magicMethods = self::MAGIC_METHODS;
+
+    /**
+     * A list of all PHP magic functions.
+     *
+     * @var array<string, true>
+     *
+     * @deprecated 4.0.0 Use the ValidFunctionNameSniff::MAGIC_FUNCTIONS constant instead.
+     */
+    protected $magicFunctions = self::MAGIC_FUNCTIONS;
 
 
     /**
@@ -101,7 +119,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         // Is this a magic method. i.e., is prefixed with "__" ?
         if (preg_match('|^__[^_]|', $methodName) !== 0) {
             $magicPart = substr($methodNameLc, 2);
-            if (isset($this->magicMethods[$magicPart]) === true) {
+            if (isset(static::MAGIC_METHODS[$magicPart]) === true) {
                 return;
             }
 
@@ -191,7 +209,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         // Is this a magic function. i.e., it is prefixed with "__".
         if (preg_match('|^__[^_]|', $functionName) !== 0) {
             $magicPart = strtolower(substr($functionName, 2));
-            if (isset($this->magicFunctions[$magicPart]) === true) {
+            if (isset(static::MAGIC_FUNCTIONS[$magicPart]) === true) {
                 return;
             }
 

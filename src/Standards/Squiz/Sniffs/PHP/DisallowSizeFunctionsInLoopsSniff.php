@@ -18,13 +18,22 @@ class DisallowSizeFunctionsInLoopsSniff implements Sniff
     /**
      * An array of functions we don't want in the condition of loops.
      *
-     * @var array
+     * @var array<string, true>
      */
-    protected $forbiddenFunctions = [
+    protected const FORBIDDEN_FUNCTIONS = [
         'sizeof' => true,
         'strlen' => true,
         'count'  => true,
     ];
+
+    /**
+     * An array of functions we don't want in the condition of loops.
+     *
+     * @var array<string, true>
+     *
+     * @deprecated 4.0.0 Use the DisallowSizeFunctionsInLoopsSniff::FORBIDDEN_FUNCTIONS constant instead.
+     */
+    protected $forbiddenFunctions = self::FORBIDDEN_FUNCTIONS;
 
 
     /**
@@ -68,7 +77,7 @@ class DisallowSizeFunctionsInLoopsSniff implements Sniff
 
         for ($i = ($start + 1); $i < $end; $i++) {
             if (($tokens[$i]['code'] === T_STRING || $tokens[$i]['code'] === T_NAME_FULLY_QUALIFIED)
-                && isset($this->forbiddenFunctions[ltrim($tokens[$i]['content'], '\\')]) === true
+                && isset(static::FORBIDDEN_FUNCTIONS[ltrim($tokens[$i]['content'], '\\')]) === true
             ) {
                 $functionName = $tokens[$i]['content'];
 

@@ -48,8 +48,8 @@ class CamelCapsMethodNameSniff extends GenericCamelCapsFunctionNameSniff
         // Ignore magic methods.
         if (preg_match('|^__[^_]|', $methodName) !== 0) {
             $magicPart = strtolower(substr($methodName, 2));
-            if (isset($this->magicMethods[$magicPart]) === true
-                || isset($this->methodsDoubleUnderscore[$magicPart]) === true
+            if (isset(static::MAGIC_METHODS[$magicPart]) === true
+                || isset(static::DOUBLE_UNDERSCORE_METHODS[$magicPart]) === true
             ) {
                 return;
             }

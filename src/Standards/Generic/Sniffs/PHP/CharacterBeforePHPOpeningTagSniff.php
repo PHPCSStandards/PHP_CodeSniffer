@@ -20,13 +20,22 @@ class CharacterBeforePHPOpeningTagSniff implements Sniff
      *
      * Use encoding names as keys and hex BOM representations as values.
      *
-     * @var array
+     * @var array<string, string>
      */
-    protected $bomDefinitions = [
+    protected const BOM_DEFINITIONS = [
         'UTF-8'       => 'efbbbf',
         'UTF-16 (BE)' => 'feff',
         'UTF-16 (LE)' => 'fffe',
     ];
+
+    /**
+     * List of supported BOM definitions.
+     *
+     * @var array<string, string>
+     *
+     * @deprecated 4.0.0 Use the CharacterBeforePHPOpeningTagSniff::BOM_DEFINITIONS constant instead.
+     */
+    protected $bomDefinitions = self::BOM_DEFINITIONS;
 
 
     /**
@@ -56,7 +65,7 @@ class CharacterBeforePHPOpeningTagSniff implements Sniff
         if ($stackPtr > 0) {
             // Allow a byte-order mark.
             $tokens = $phpcsFile->getTokens();
-            foreach ($this->bomDefinitions as $expectedBomHex) {
+            foreach (static::BOM_DEFINITIONS as $expectedBomHex) {
                 $bomByteLength = (strlen($expectedBomHex) / 2);
                 $htmlBomHex    = bin2hex(substr($tokens[0]['content'], 0, $bomByteLength));
                 if ($htmlBomHex === $expectedBomHex) {
