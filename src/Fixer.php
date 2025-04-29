@@ -210,7 +210,7 @@ class Fixer
 
         StatusWriter::resume();
 
-        if ($this->numFixes > 0) {
+        if ($this->numFixes > 0 || $this->inConflict === true) {
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
                 if (ob_get_level() > 0) {
                     ob_end_clean();
