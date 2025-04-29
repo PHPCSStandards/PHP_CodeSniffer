@@ -74,7 +74,7 @@ final class AttributesTest extends AbstractTokenizerTestCase
             'class attribute'                                                                   => [
                 'testMarker' => '/* testAttribute */',
                 'tokenCodes' => [
-                    T_STRING
+                    T_STRING,
                 ],
             ],
             'class attribute with param'                                                        => [
@@ -105,7 +105,7 @@ final class AttributesTest extends AbstractTokenizerTestCase
             'function attribute'                                                                => [
                 'testMarker' => '/* testAttributeOnFunction */',
                 'tokenCodes' => [
-                    T_STRING
+                    T_STRING,
                 ],
             ],
             'function attribute with params'                                                    => [
@@ -389,7 +389,7 @@ final class AttributesTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testSingleAttributeOnParameter */',
                 'position'   => 4,
                 'tokenCodes' => [
-                    T_STRING
+                    T_STRING,
                 ],
             ],
             'parameter attribute; multiple comma separated, inline' => [
