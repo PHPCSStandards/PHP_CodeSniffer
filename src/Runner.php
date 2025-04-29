@@ -258,11 +258,8 @@ class Runner
             if (Standards::isInstalledStandard($standard) === false) {
                 // They didn't select a valid coding standard, so help them
                 // out by letting them know which standards are installed.
-                $error = 'ERROR: the "'.$standard.'" coding standard is not installed. ';
-                ob_start();
-                Standards::printInstalledStandards();
-                $error .= ob_get_contents();
-                ob_end_clean();
+                $error  = 'ERROR: the "'.$standard.'" coding standard is not installed.'.PHP_EOL.PHP_EOL;
+                $error .= Standards::prepareInstalledStandardsForDisplay().PHP_EOL;
                 throw new DeepExitException($error, 3);
             }
         }
