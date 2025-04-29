@@ -49,6 +49,7 @@ final class NullableTypeDeclarationUnitTest extends AbstractSniffTestCase
             90 => 1,
             91 => 1,
             95 => 1,
+            98 => 3,
         ];
 
     }//end getErrorList()

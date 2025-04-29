@@ -496,6 +496,15 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             'OO method return type: fully qualified classes'              => [
                 'testMarker'  => '/* testDNFTypeReturnFullyQualified */',
             ],
+            'OO method param type: fully qualified true'                  => [
+                'testMarker'  => '/* testDNFTypeFQNTrue */',
+            ],
+            'OO method return type: fully qualified false'                => [
+                'testMarker'  => '/* testDNFTypeFQNFalse */',
+            ],
+            'closure return type: fully qualified null'                   => [
+                'testMarker'  => '/* testDNFTypeFQNNull */',
+            ],
             'function param type: with reference'                         => [
                 'testMarker'  => '/* testDNFTypeWithReference */',
             ],

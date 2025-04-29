@@ -187,6 +187,15 @@ function trueTypeReturn($param): array|true|null {}
 /* testTypeUnionPHP82TrueLast */
 $closure = function ($param): array|true {}
 
+/* testTypeUnionFQNTrue */
+function FQNTrueTypeParam(\True|null $param) {}
+
+/* testTypeUnionFQNFalse */
+function FQNFalseTypeReturn($param): array|\false|null {}
+
+/* testTypeUnionFQNNull */
+$closure = function ($param): array|\NULL {};
+
 /* testLiveCoding */
 // Intentional parse error. This has to be the last test in the file.
 return function( type|

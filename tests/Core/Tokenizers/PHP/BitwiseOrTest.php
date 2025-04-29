@@ -155,6 +155,9 @@ final class BitwiseOrTest extends AbstractTokenizerTestCase
             'type for function param with true type first'             => ['/* testTypeUnionPHP82TrueFirst */'],
             'return type for function with true type middle'           => ['/* testTypeUnionPHP82TrueMiddle */'],
             'return type for closure with true type last'              => ['/* testTypeUnionPHP82TrueLast */'],
+            'type for function param with FQN true'                    => ['/* testTypeUnionFQNTrue */'],
+            'return type for function with FQN false'                  => ['/* testTypeUnionFQNFalse */'],
+            'return type for closure with FQN null'                    => ['/* testTypeUnionFQNNull */'],
         ];
 
     }//end dataTypeUnion()

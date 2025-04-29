@@ -55,10 +55,22 @@ class DisallowYodaConditionsSniff implements Sniff
             T_LNUMBER,
             T_DNUMBER,
             T_CONSTANT_ENCAPSED_STRING,
+            T_NAME_FULLY_QUALIFIED,
         ];
 
         if (in_array($tokens[$previousIndex]['code'], $relevantTokens, true) === false) {
             return;
+        }
+
+        // Special case: T_NAME_FULLY_QUALIFIED is only a "relevant" token when it is for a FQN true/false/null.
+        if ($tokens[$previousIndex]['code'] === T_NAME_FULLY_QUALIFIED) {
+            $compareReadyKeyword = strtolower($tokens[$previousIndex]['content']);
+            if ($compareReadyKeyword !== '\true'
+                && $compareReadyKeyword !== '\false'
+                && $compareReadyKeyword !== '\null'
+            ) {
+                return;
+            }
         }
 
         if ($tokens[$previousIndex]['code'] === T_CLOSE_SHORT_ARRAY) {
@@ -164,6 +176,7 @@ class DisallowYodaConditionsSniff implements Sniff
             T_COMMA        => T_COMMA,
             T_TRUE         => T_TRUE,
             T_FALSE        => T_FALSE,
+            T_NULL         => T_NULL,
         ];
 
         for ($i = ($start + 1); $i < $end; $i++) {
@@ -172,10 +185,21 @@ class DisallowYodaConditionsSniff implements Sniff
                 continue;
             }
 
+            // Special case: T_NAME_FULLY_QUALIFIED is only a "static" token when it is for a FQN true/false/null.
+            if ($tokens[$i]['code'] === T_NAME_FULLY_QUALIFIED) {
+                $compareReadyKeyword = strtolower($tokens[$i]['content']);
+                if ($compareReadyKeyword === '\true'
+                    || $compareReadyKeyword === '\false'
+                    || $compareReadyKeyword === '\null'
+                ) {
+                    continue;
+                }
+            }
+
             if (isset($staticTokens[$tokens[$i]['code']]) === false) {
                 return false;
             }
-        }
+        }//end for
 
         return true;
 

@@ -133,6 +133,15 @@ class MyClass
 
         /* testInstanceOfPartiallyQualified */
         $is = $obj instanceof Partially\ClassName;
+
+        /* testFullyQualifiedNull */
+        $a = \NULL;
+
+        /* testFullyQualifiedFalse */
+        $a = \false;
+
+        /* testFullyQualifiedTrue */
+        $a = \True;
     }
 }
 

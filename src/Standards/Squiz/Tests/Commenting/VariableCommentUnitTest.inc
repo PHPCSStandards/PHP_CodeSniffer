@@ -499,3 +499,21 @@ class AllowMoreForSelectivelyIgnoringDisallowedTags {
 }
 
 // phpcs:enable Squiz.Commenting.VariableComment
+
+class StandaloneFQNNullTrueFalseTypes
+{
+    /**
+     * @var null
+     */
+    public \Null $variableName = null;
+
+    /**
+     * @var true
+     */
+    protected \true $variableName = true;
+
+    /**
+     * @var false
+     */
+    private \FALSE $variableName = false;
+}

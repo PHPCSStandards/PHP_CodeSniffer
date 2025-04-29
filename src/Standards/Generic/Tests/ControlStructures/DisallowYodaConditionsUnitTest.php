@@ -75,6 +75,10 @@ final class DisallowYodaConditionsUnitTest extends AbstractSniffTestCase
             190 => 1,
             192 => 1,
             194 => 1,
+            198 => 1,
+            201 => 1,
+            202 => 2,
+            205 => 1,
         ];
 
     }//end getErrorList()

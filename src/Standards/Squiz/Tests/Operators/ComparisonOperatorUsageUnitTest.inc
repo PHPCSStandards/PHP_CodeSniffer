@@ -146,3 +146,9 @@ if (unqualified($argTags > 0)) {}
 if (Partially\qualified($argTags > 0)) {}
 if (\Fully\qualified($argTags > 0)) {}
 if (namespace\relative($argTags > 0)) {}
+
+// Verify that FQN true/false are handled the same as unqualified.
+if (true) {}
+if (\true) {}
+for ($var1 = 10; FALSE; $var1--) {}
+for ($var1 = 10; \FALSE; $var1--) {}

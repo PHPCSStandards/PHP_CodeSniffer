@@ -160,3 +160,7 @@ class SkipOverPHP84FinalProperties {
     final MyType|FALSE $propA;
     private static final NULL|MyClass $propB;
 }
+
+$a = \NULL;
+$a = \falSe;
+$a = \True;

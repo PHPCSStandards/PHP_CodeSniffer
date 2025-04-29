@@ -162,6 +162,15 @@ function &fn(/* testTypeIntersectionNonArrowFunctionDeclaration */ Foo&Bar $some
 /* testTypeIntersectionWithInvalidTypes */
 function (int&string $var) {};
 
+/* testTypeIntersectionInvalidFQNTrue */
+function FQNTrueTypeParam(\True&MyClass $param) {}
+
+/* testTypeIntersectionInvalidFQNFalse */
+function FQNFalseTypeReturn($param): \SomeOtherClass&\false&MyClass {}
+
+/* testTypeIntersectionInvalidFQNNull */
+$closure = function ($param): MyClass&\NULL {};
+
 /* testLiveCoding */
 // Intentional parse error. This has to be the last test in the file.
 return function( Foo&

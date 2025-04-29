@@ -43,8 +43,6 @@ class LowerCaseConstantSniff implements Sniff
         T_NAME_QUALIFIED         => T_NAME_QUALIFIED,
         T_NAME_FULLY_QUALIFIED   => T_NAME_FULLY_QUALIFIED,
         T_NAME_RELATIVE          => T_NAME_RELATIVE,
-        T_NS_SEPARATOR           => T_NS_SEPARATOR,
-        T_NAMESPACE              => T_NAMESPACE,
         T_TYPE_UNION             => T_TYPE_UNION,
         T_TYPE_INTERSECTION      => T_TYPE_INTERSECTION,
         T_TYPE_OPEN_PARENTHESIS  => T_TYPE_OPEN_PARENTHESIS,
@@ -61,6 +59,9 @@ class LowerCaseConstantSniff implements Sniff
     public function register()
     {
         $targets = $this->targets;
+
+        // Allow for "fully qualified" true/false/null.
+        $targets[] = T_NAME_FULLY_QUALIFIED;
 
         // Register scope modifiers to filter out property type declarations.
         $targets  += Tokens::SCOPE_MODIFIERS;
@@ -96,6 +97,13 @@ class LowerCaseConstantSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
+
+        // If this is a fully qualified name, check if it is FQN true/false/null.
+        if ($tokens[$stackPtr]['code'] === T_NAME_FULLY_QUALIFIED
+            && $this->isFQNTrueFalseNull($phpcsFile, $stackPtr) === false
+        ) {
+            return;
+        }
 
         // Skip over potential type declarations for constants.
         if ($tokens[$stackPtr]['code'] === T_CONST) {
@@ -180,7 +188,10 @@ class LowerCaseConstantSniff implements Sniff
                 }
 
                 for ($i = $param['default_token']; $i < $paramEnd; $i++) {
-                    if (isset($this->targets[$tokens[$i]['code']]) === true) {
+                    if (isset($this->targets[$tokens[$i]['code']]) === true
+                        || ($tokens[$i]['code'] === T_NAME_FULLY_QUALIFIED
+                        && $this->isFQNTrueFalseNull($phpcsFile, $i) === true)
+                    ) {
                         $this->processConstant($phpcsFile, $i);
                     }
                 }
@@ -194,6 +205,28 @@ class LowerCaseConstantSniff implements Sniff
         $this->processConstant($phpcsFile, $stackPtr);
 
     }//end process()
+
+
+    /**
+     * Check if a fully qualified name is a fully qualified true/false/null.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param int                         $stackPtr  The position of the T_NAME_FULLY_QUALIFIED token in the
+     *                                               stack passed in $tokens.
+     *
+     * @return bool
+     */
+    protected function isFQNTrueFalseNull(File $phpcsFile, $stackPtr)
+    {
+        $tokens = $phpcsFile->getTokens();
+
+        // Check for fully qualified true/false/null only.
+        $compareReadyKeyword = strtolower($tokens[$stackPtr]['content']);
+        return ($compareReadyKeyword === '\true'
+            || $compareReadyKeyword === '\false'
+            || $compareReadyKeyword === '\null');
+
+    }//end isFQNTrueFalseNull()
 
 
     /**

@@ -93,3 +93,6 @@ function fooH(): ?
 
 // Fatal error: null cannot be marked as nullable, but that's not the concern of this sniff.
 function fooI(): ? null {}
+
+// Ensure nullable FQN true/false are handled correctly.
+function fqnTrueFalseNull(? \FALSE $paramA, ? \Null $paramB) : ?   \true {}

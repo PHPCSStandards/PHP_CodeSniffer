@@ -455,29 +455,38 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
     public static function dataKeywordReturnTypes()
     {
         return [
-            'self'     => [
+            'self'      => [
                 'testMarker'  => '/* testSelfReturnType */',
             ],
-            'parent'   => [
+            'parent'    => [
                 'testMarker'  => '/* testParentReturnType */',
             ],
-            'callable' => [
+            'callable'  => [
                 'testMarker'  => '/* testCallableReturnType */',
             ],
-            'array'    => [
+            'array'     => [
                 'testMarker'  => '/* testArrayReturnType */',
             ],
-            'static'   => [
+            'static'    => [
                 'testMarker'  => '/* testStaticReturnType */',
             ],
-            'false'    => [
+            'false'     => [
                 'testMarker'  => '/* testFalseReturnType */',
             ],
-            'true'     => [
+            'true'      => [
                 'testMarker'  => '/* testTrueReturnType */',
             ],
-            'null'     => [
+            'null'      => [
                 'testMarker'  => '/* testNullReturnType */',
+            ],
+            'FQN false' => [
+                'testMarker'  => '/* testFQNFalseReturnType */',
+            ],
+            'FQN true'  => [
+                'testMarker'  => '/* testFQNTrueReturnType */',
+            ],
+            'FQN null'  => [
+                'testMarker'  => '/* testFQNNullReturnType */',
             ],
         ];
 
