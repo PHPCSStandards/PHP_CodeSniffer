@@ -11,6 +11,7 @@ namespace PHP_CodeSniffer\Tests\Core\Standards;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHP_CodeSniffer\Tests\Core\Ruleset\AbstractRulesetTestCase;
+use PHP_CodeSniffer\Tests\Core\StatusWriterTestHelper;
 
 /**
  * Tests that pre-defined standards do not throw errors.
@@ -19,6 +20,7 @@ use PHP_CodeSniffer\Tests\Core\Ruleset\AbstractRulesetTestCase;
  */
 final class StandardRulesetsQATest extends AbstractRulesetTestCase
 {
+    use StatusWriterTestHelper;
 
 
     /**
@@ -36,15 +38,13 @@ final class StandardRulesetsQATest extends AbstractRulesetTestCase
      */
     public function testBuildInStandardsDoNotContainErrors($standard)
     {
-        ob_start();
+        $this->expectNoStdoutOutput();
+
         $config  = new ConfigDouble(["--standard=$standard"]);
         $ruleset = new Ruleset($config);
 
-        $seenOutput = ob_get_contents();
-        ob_end_clean();
-
         // Make sure no messages were thrown.
-        $this->assertSame('', $seenOutput);
+        $this->assertStderrOutputSameString('');
 
         // Make sure sniffs were registered.
         $this->assertGreaterThanOrEqual(1, count($ruleset->sniffCodes));
