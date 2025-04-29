@@ -61,13 +61,6 @@ class Reporter
     public $totalFixed = 0;
 
     /**
-     * When the PHPCS run started.
-     *
-     * @var float
-     */
-    public static $startTime = 0;
-
-    /**
      * A cache of report objects.
      *
      * @var array
