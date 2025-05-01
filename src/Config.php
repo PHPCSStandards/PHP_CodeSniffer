@@ -650,16 +650,14 @@ class Config
             $this->colors = (bool) $colors;
         }
 
-        if (defined('PHP_CODESNIFFER_IN_TESTS') === false) {
-            $cache = self::getConfigData('cache');
-            if ($cache !== null) {
-                $this->cache = (bool) $cache;
-            }
+        $cache = self::getConfigData('cache');
+        if ($cache !== null) {
+            $this->cache = (bool) $cache;
+        }
 
-            $parallel = self::getConfigData('parallel');
-            if ($parallel !== null) {
-                $this->parallel = max((int) $parallel, 1);
-            }
+        $parallel = self::getConfigData('parallel');
+        if ($parallel !== null) {
+            $this->parallel = max((int) $parallel, 1);
         }
 
     }//end restoreDefaults()
@@ -817,10 +815,8 @@ class Config
                 break;
             }
 
-            if (defined('PHP_CODESNIFFER_IN_TESTS') === false) {
-                $this->cache = true;
-                $this->overriddenDefaults['cache'] = true;
-            }
+            $this->cache = true;
+            $this->overriddenDefaults['cache'] = true;
             break;
         case 'no-cache':
             if (isset($this->overriddenDefaults['cache']) === true) {
@@ -928,9 +924,7 @@ class Config
 
                 $this->exclude = $this->parseSniffCodes(substr($arg, 8), 'exclude');
                 $this->overriddenDefaults['exclude'] = true;
-            } else if (defined('PHP_CODESNIFFER_IN_TESTS') === false
-                && substr($arg, 0, 6) === 'cache='
-            ) {
+            } else if (substr($arg, 0, 6) === 'cache=') {
                 if ((isset($this->overriddenDefaults['cache']) === true
                     && $this->cache === false)
                     || isset($this->overriddenDefaults['cacheFile']) === true
