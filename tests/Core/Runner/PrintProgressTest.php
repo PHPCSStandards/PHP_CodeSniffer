@@ -86,6 +86,9 @@ final class PrintProgressTest extends TestCase
         self::$config->showProgress = true;
         self::$fileWithoutErrorsOrWarnings->ignored = false;
 
+        // Reset all static properties on the StatusWriter class.
+        $this->resetStatusWriterProperties();
+
     }//end tearDown()
 
 
