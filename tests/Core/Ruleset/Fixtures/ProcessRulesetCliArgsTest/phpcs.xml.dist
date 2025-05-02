@@ -22,6 +22,9 @@
     <arg name="extensions" value="inc,php"/>
     <arg name="tab-width" value="4"/>
 
+    <!-- Issue squizlabs/PHP_CodeSniffer#2395: second test. -->
+    <arg name="no-cache"/>
+
     <!-- Miscellaneous other settings. -->
     <arg name="report-width" value="120"/>
 
