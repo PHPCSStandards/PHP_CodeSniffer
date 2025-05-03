@@ -175,5 +175,5 @@ if ($timeTaken < 1000) {
 }
 
 echo PHP_EOL;
-echo 'Filesize generated phpcs.phar file: '.filesize(dirname(__DIR__).'/phpcs.phar').' bytes'.PHP_EOL;
-echo 'Filesize generated phpcs.phar file: '.filesize(dirname(__DIR__).'/phpcbf.phar').' bytes'.PHP_EOL;
+echo 'Filesize generated phpcs.phar file: '.number_format(filesize(dirname(__DIR__).'/phpcs.phar'), 0, ',', '.').' bytes'.PHP_EOL;
+echo 'Filesize generated phpcs.phar file: '.number_format(filesize(dirname(__DIR__).'/phpcbf.phar'), 0, ',', '.').' bytes'.PHP_EOL;
