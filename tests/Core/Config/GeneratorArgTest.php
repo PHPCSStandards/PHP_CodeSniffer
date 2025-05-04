@@ -21,6 +21,22 @@ final class GeneratorArgTest extends TestCase
 
 
     /**
+     * Skip these tests when in CBF mode.
+     *
+     * @before
+     *
+     * @return void
+     */
+    protected function maybeSkipTests()
+    {
+        if (PHP_CODESNIFFER_CBF === true) {
+            $this->markTestSkipped('The `--generator` CLI flag is only supported for the `phpcs` command');
+        }
+
+    }//end maybeSkipTests()
+
+
+    /**
      * Ensure that the generator property is set when the parameter is passed a valid value.
      *
      * @param string $argumentValue         Generator name passed on the command line.
