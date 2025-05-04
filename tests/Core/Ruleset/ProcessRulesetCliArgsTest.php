@@ -184,26 +184,32 @@ final class ProcessRulesetCliArgsTest extends TestCase
      */
     public static function dataCliArgsWithPaths()
     {
-        return [
-            'Paths should be resolved based on the ruleset location: basepath'   => [
+        $data = [
+            'Paths should be resolved based on the ruleset location: basepath'  => [
                 'name'     => 'basepath',
                 'expected' => self::FIXTURE_DIR,
             ],
-            'Paths should be resolved based on the ruleset location: reportFile' => [
-                'name'     => 'reportFile',
-                'expected' => self::FIXTURE_DIR.'/config/phpcs/report.txt',
-            ],
-            'Paths should be resolved based on the ruleset location: bootstrap'  => [
+            'Paths should be resolved based on the ruleset location: bootstrap' => [
                 'name'     => 'bootstrap',
                 'expected' => [
                     self::FIXTURE_DIR.'/vendor/OrgName/ExtStandard/bootstrap.php',
                 ],
             ],
-            'Paths should be resolved based on the ruleset location: cacheFile'  => [
+            'Paths should be resolved based on the ruleset location: cacheFile' => [
                 'name'     => 'cacheFile',
                 'expected' => self::FIXTURE_DIR.'/config/phpcs/.cache.phpcs',
             ],
         ];
+
+        // Setting the `--report-file=` arg is only supported when running `phpcs`.
+        if (PHP_CODESNIFFER_CBF === false) {
+            $data['Paths should be resolved based on the ruleset location: reportFile'] = [
+                'name'     => 'reportFile',
+                'expected' => self::FIXTURE_DIR.'/config/phpcs/report.txt',
+            ];
+        }
+
+        return $data;
 
     }//end dataCliArgsWithPaths()
 
