@@ -34,6 +34,11 @@ final class SniffsExcludeArgsTest extends TestCase
      */
     public function testInvalid($argument, $value, $errors, $suggestion)
     {
+        $cmd = 'phpcs';
+        if (PHP_CODESNIFFER_CBF === true) {
+            $cmd = 'phpcbf';
+        }
+
         $exception = 'PHP_CodeSniffer\Exceptions\DeepExitException';
         $message   = 'ERROR: The --'.$argument.' option only supports sniff codes.'.PHP_EOL;
         $message  .= 'Sniff codes are in the form "Standard.Category.Sniff".'.PHP_EOL;
@@ -47,7 +52,7 @@ final class SniffsExcludeArgsTest extends TestCase
         }
 
         $message .= PHP_EOL;
-        $message .= 'Run "phpcs --help" for usage information'.PHP_EOL;
+        $message .= "Run \"{$cmd} --help\" for usage information".PHP_EOL;
         $message .= PHP_EOL;
 
         if (method_exists($this, 'expectException') === true) {
