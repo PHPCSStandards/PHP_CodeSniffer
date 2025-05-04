@@ -227,8 +227,6 @@ jobs:
             echo 'FILE=phpunit-lte9.xml.dist' >> "$GITHUB_OUTPUT"
           fi
 
-      # Note: The code style check is run multiple times against every PHP version
-      # as it also acts as an integration test.
       - name: 'PHPCS: set the path to PHP'
         run: php "bin/phpcs" --config-set php_path php
 
@@ -236,14 +234,23 @@ jobs:
         if: ${{ matrix.skip_tests != true }}
         run: php "vendor/bin/phpunit" -c ${{ steps.phpunit_config.outputs.FILE }} --no-coverage
 
+      # Do one test run against the complete test suite in CBF mode to ensure all tests can run in CBF mode.
+      - name: 'PHPUnit: run the full test suite without code coverage in CBF mode (PHP 8.3 only)'
+        if: ${{ matrix.php == '8.3' }}
+        run: php "vendor/bin/phpunit" -c ${{ steps.phpunit_config.outputs.FILE }} --exclude-group nothing --no-coverage
+        env:
+          PHP_CODESNIFFER_CBF: '1'
+
       - name: 'PHPUnit: run select tests in CBF mode'
-        if: ${{ matrix.skip_tests != true }}
+        if: ${{ matrix.skip_tests != true && matrix.php != '8.3' }}
         run: >
           php "vendor/bin/phpunit" -c ${{ steps.phpunit_config.outputs.FILE }} --no-coverage
           --group CBF --exclude-group nothing
         env:
           PHP_CODESNIFFER_CBF: '1'
 
+      # Note: The code style check is run multiple times against every PHP version
+      # as it also acts as an integration test.
       - name: 'PHPCS: check code style without cache, no parallel'
         if: ${{ matrix.custom_ini == false }}
         run: php "bin/phpcs" --no-cache --parallel=1

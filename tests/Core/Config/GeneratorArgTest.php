@@ -21,6 +21,20 @@ final class GeneratorArgTest extends TestCase
 
 
     /**
+     * Skip these tests when in CBF mode.
+     *
+     * @return void
+     */
+    protected function setUp(): void
+    {
+        if (PHP_CODESNIFFER_CBF === true) {
+            $this->markTestSkipped('This test needs CS mode to run');
+        }
+
+    }//end setUp()
+
+
+    /**
      * Ensure that the generator property is set when the parameter is passed a valid value.
      *
      * @param string $argumentValue         Generator name passed on the command line.
