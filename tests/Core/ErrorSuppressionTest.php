@@ -1057,6 +1057,16 @@ EOD;
                 'expectedErrors'   => 0,
                 'expectedWarnings' => 0,
             ],
+            'disable: everything; enable: sniff'                                   => [
+                'code'             => '
+                    // phpcs:disable
+                    // phpcs:enable Generic.PHP.LowerCaseConstant
+                    //TODO: write some code
+                    $var = TRUE;
+                    ',
+                'expectedErrors'   => 1,
+                'expectedWarnings' => 0,
+            ],
         ];
 
     }//end dataEnableSelected()

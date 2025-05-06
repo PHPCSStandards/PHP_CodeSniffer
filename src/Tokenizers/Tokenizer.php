@@ -176,7 +176,7 @@ abstract class Tokenizer
         $lineNumber = 1;
         $eolLen     = strlen($this->eolChar);
         $ignoring   = null;
-        $ignoreAll  = IgnoreList::ignoringAll();
+        $ignoreAll  = IgnoreList::getInstanceIgnoringAll();
         $inTests    = defined('PHP_CODESNIFFER_IN_TESTS');
 
         $checkEncoding = false;
@@ -383,11 +383,7 @@ abstract class Tokenizer
                         if (empty($additionalText) === true) {
                             $ignoring = $ignoreAll;
                         } else {
-                            if ($ignoring === null) {
-                                $ignoring = IgnoreList::ignoringNone();
-                            } else {
-                                $ignoring = clone $ignoring;
-                            }
+                            $ignoring = IgnoreList::getNewInstanceFrom($ignoring);
 
                             $parts = explode(',', $additionalText);
                             foreach ($parts as $sniffCode) {
@@ -408,7 +404,7 @@ abstract class Tokenizer
                             if (empty($additionalText) === true) {
                                 $ignoring = null;
                             } else {
-                                $ignoring = clone $ignoring;
+                                $ignoring = IgnoreList::getNewInstanceFrom($ignoring);
                                 $parts    = explode(',', $additionalText);
                                 foreach ($parts as $sniffCode) {
                                     $sniffCode = trim($sniffCode);
@@ -416,7 +412,7 @@ abstract class Tokenizer
                                     $ignoring->set($sniffCode, false);
                                 }
 
-                                if ($ignoring->isEmpty() === true) {
+                                if ($ignoring->ignoresNothing() === true) {
                                     $ignoring = null;
                                 }
                             }
@@ -443,12 +439,8 @@ abstract class Tokenizer
                             $ignoreRules  = ['.all' => true];
                             $lineIgnoring = $ignoreAll;
                         } else {
-                            $parts = explode(',', $additionalText);
-                            if ($ignoring === null) {
-                                $lineIgnoring = IgnoreList::ignoringNone();
-                            } else {
-                                $lineIgnoring = clone $ignoring;
-                            }
+                            $parts        = explode(',', $additionalText);
+                            $lineIgnoring = IgnoreList::getNewInstanceFrom($ignoring);
 
                             foreach ($parts as $sniffCode) {
                                 $ignoreRules[trim($sniffCode)] = true;
