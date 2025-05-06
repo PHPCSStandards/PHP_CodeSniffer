@@ -2,14 +2,23 @@
 /**
  * Class to manage a list of sniffs to ignore.
  *
- * @author    Brad Jorsch <brad.jorsch@automattic.com>
- * @copyright 2023 Brad Jorsch
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2025 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Util;
 
-class IgnoreList
+/**
+ * Class to manage a list of sniffs to ignore.
+ *
+ * ---------------------------------------------------------------------------------------------
+ * This class is intended for internal use only and is not part of the public API.
+ * This also means that it has no promise of backward compatibility. Use at your own risk.
+ * ---------------------------------------------------------------------------------------------
+ *
+ * @internal
+ */
+final class IgnoreList
 {
 
     /**
@@ -19,7 +28,7 @@ class IgnoreList
      * Each level may be a boolean indicating that everything underneath the branch is or is not ignored, or
      * may have a `.default' key indicating the default status for any branches not in the tree.
      *
-     * @var array|boolean
+     * @var array<string, bool|array<string, bool|array<string, bool|array<string, bool>>>>
      */
     private $data = [ '.default' => false ];
 
@@ -27,27 +36,47 @@ class IgnoreList
     /**
      * Get an instance set to ignore nothing.
      *
-     * @return static
+     * @return IgnoreList
      */
-    public static function ignoringNone()
+    public static function getInstanceIgnoringNothing()
     {
         return new self();
 
-    }//end ignoringNone()
+    }//end getInstanceIgnoringNothing()
 
 
     /**
      * Get an instance set to ignore everything.
      *
-     * @return static
+     * @return IgnoreList
      */
-    public static function ignoringAll()
+    public static function getInstanceIgnoringAll()
     {
-        $ret = new self();
-        $ret->data['.default'] = true;
-        return $ret;
+        $instance = new self();
+        $instance->data['.default'] = true;
+        return $instance;
 
-    }//end ignoringAll()
+    }//end getInstanceIgnoringAll()
+
+
+    /**
+     * Get a new instance based on an existing instance.
+     *
+     * If passed null, creates a new instance that ignores nothing.
+     *
+     * @param IgnoreList|null $ignoreList List to clone.
+     *
+     * @return IgnoreList
+     */
+    public static function getNewInstanceFrom(?IgnoreList $ignoreList)
+    {
+        if ($ignoreList === null) {
+            return self::getInstanceIgnoringNothing();
+        }
+
+        return clone $ignoreList;
+
+    }//end getNewInstanceFrom()
 
 
     /**
@@ -57,10 +86,10 @@ class IgnoreList
      *
      * @return bool
      */
-    public function check($code)
+    public function isIgnored($code)
     {
-        $data = $this->data;
-        $ret  = $data['.default'];
+        $data        = $this->data;
+        $returnValue = $data['.default'];
         foreach (explode('.', $code) as $part) {
             if (isset($data[$part]) === false) {
                 break;
@@ -68,18 +97,18 @@ class IgnoreList
 
             $data = $data[$part];
             if (is_bool($data) === true) {
-                $ret = $data;
+                $returnValue = $data;
                 break;
             }
 
             if (isset($data['.default']) === true) {
-                $ret = $data['.default'];
+                $returnValue = $data['.default'];
             }
         }
 
-        return $ret;
+        return $returnValue;
 
-    }//end check()
+    }//end isIgnored()
 
 
     /**
@@ -88,7 +117,7 @@ class IgnoreList
      * @param string $code   Partial or complete sniff code.
      * @param bool   $ignore Whether the specified sniff should be ignored.
      *
-     * @return this
+     * @return IgnoreList $this for chaining.
      */
     public function set($code, $ignore)
     {
@@ -114,29 +143,29 @@ class IgnoreList
 
 
     /**
-     * Check if the list is empty.
+     * Check if the list ignores nothing.
      *
      * @return bool
      */
-    public function isEmpty()
+    public function ignoresNothing()
     {
-        $arrs = [ $this->data ];
-        while ($arrs !== []) {
-            $arr = array_pop($arrs);
-            foreach ($arr as $v) {
-                if ($v === true) {
+        $arraysToProcess = [ $this->data ];
+        while ($arraysToProcess !== []) {
+            $arrayBeingProcessed = array_pop($arraysToProcess);
+            foreach ($arrayBeingProcessed as $valueBeingProcessed) {
+                if ($valueBeingProcessed === true) {
                     return false;
                 }
 
-                if (is_array($v) === true) {
-                    $arrs[] = $v;
+                if (is_array($valueBeingProcessed) === true) {
+                    $arraysToProcess[] = $valueBeingProcessed;
                 }
             }
         }
 
         return true;
 
-    }//end isEmpty()
+    }//end ignoresNothing()
 
 
     /**
@@ -144,25 +173,25 @@ class IgnoreList
      *
      * @return bool
      */
-    public function isAll()
+    public function ignoresEverything()
     {
-        $arrs = [ $this->data ];
-        while ($arrs !== []) {
-            $arr = array_pop($arrs);
-            foreach ($arr as $v) {
-                if ($v === false) {
+        $arraysToProcess = [ $this->data ];
+        while ($arraysToProcess !== []) {
+            $arrayBeingProcessed = array_pop($arraysToProcess);
+            foreach ($arrayBeingProcessed as $valueBeingProcessed) {
+                if ($valueBeingProcessed === false) {
                     return false;
                 }
 
-                if (is_array($v) === true) {
-                    $arrs[] = $v;
+                if (is_array($valueBeingProcessed) === true) {
+                    $arraysToProcess[] = $valueBeingProcessed;
                 }
             }
         }
 
         return true;
 
-    }//end isAll()
+    }//end ignoresEverything()
 
 
 }//end class

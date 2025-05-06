@@ -858,7 +858,7 @@ class File
     protected function addMessage($error, $message, $line, $column, $code, $data, $severity, $fixable)
     {
         // Check if this line is ignoring all message codes.
-        if (isset($this->tokenizer->ignoredLines[$line]) === true && $this->tokenizer->ignoredLines[$line]->isAll() === true) {
+        if (isset($this->tokenizer->ignoredLines[$line]) === true && $this->tokenizer->ignoredLines[$line]->ignoresEverything() === true) {
             return false;
         }
 
@@ -892,7 +892,7 @@ class File
             ];
         }//end if
 
-        if (isset($this->tokenizer->ignoredLines[$line]) === true && $this->tokenizer->ignoredLines[$line]->check($sniffCode) === true) {
+        if (isset($this->tokenizer->ignoredLines[$line]) === true && $this->tokenizer->ignoredLines[$line]->isIgnored($sniffCode) === true) {
             return false;
         }
 

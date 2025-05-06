@@ -2,152 +2,44 @@
 /**
  * Tests for the IgnoreList class.
  *
- * @author    Brad Jorsch <brad.jorsch@automattic.com>
- * @copyright 2023 Brad Jorsch
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2025 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
-namespace PHP_CodeSniffer\Tests\Core;
+namespace PHP_CodeSniffer\Tests\Core\Util\IgnoreList;
 
 use PHP_CodeSniffer\Util\IgnoreList;
 use PHPUnit\Framework\TestCase;
 
-class IgnoreListTest extends TestCase
+/**
+ * Test isIgnored() and set().
+ *
+ * @covers PHP_CodeSniffer\Util\IgnoreList::isIgnored
+ * @covers PHP_CodeSniffer\Util\IgnoreList::set
+ */
+class CheckAndSetTest extends TestCase
 {
 
 
     /**
-     * Test ignoringNone() works.
+     * Test isIgnored() and set().
      *
-     * @covers PHP_CodeSniffer\Util\IgnoreList::ignoringNone
-     * @return void
-     */
-    public function testIgnoringNoneWorks()
-    {
-        $ignoreList = IgnoreList::ignoringNone();
-        $this->assertInstanceOf(IgnoreList::class, $ignoreList);
-        $this->assertFalse($ignoreList->check('Anything'));
-
-    }//end testIgnoringNoneWorks()
-
-
-    /**
-     * Test ignoringAll() works.
-     *
-     * @covers PHP_CodeSniffer\Util\IgnoreList::ignoringAll
-     * @return void
-     */
-    public function testIgnoringAllWorks()
-    {
-        $ignoreList = IgnoreList::ignoringAll();
-        $this->assertInstanceOf(IgnoreList::class, $ignoreList);
-        $this->assertTrue($ignoreList->check('Anything'));
-
-    }//end testIgnoringAllWorks()
-
-
-    /**
-     * Test isEmpty() and isAll().
-     *
-     * @param IgnoreList $ignoreList  IgnoreList to test.
-     * @param bool       $expectEmpty Expected return value from isEmpty().
-     * @param bool       $expectAll   Expected return value from isAll().
-     *
-     * @return void
-     *
-     * @dataProvider dataIsEmptyAndAll
-     * @covers       PHP_CodeSniffer\Util\IgnoreList::isEmpty
-     * @covers       PHP_CodeSniffer\Util\IgnoreList::isAll
-     */
-    public function testIsEmptyAndAll($ignoreList, $expectEmpty, $expectAll)
-    {
-        $this->assertSame($expectEmpty, $ignoreList->isEmpty());
-        $this->assertSame($expectAll, $ignoreList->isAll());
-
-    }//end testIsEmptyAndAll()
-
-
-    /**
-     * Data provider.
-     *
-     * @see testIsEmptyAndAll()
-     *
-     * @return array
-     */
-    public static function dataIsEmptyAndAll()
-    {
-        return [
-            'fresh list'                                                    => [
-                new IgnoreList(),
-                true,
-                false,
-            ],
-            'list from ignoringNone'                                        => [
-                IgnoreList::ignoringNone(),
-                true,
-                false,
-            ],
-            'list from ignoringAll'                                         => [
-                IgnoreList::ignoringAll(),
-                false,
-                true,
-            ],
-            'list from ignoringNone, something set to false'                => [
-                IgnoreList::ignoringNone()->set('Foo.Bar', false),
-                true,
-                false,
-            ],
-            'list from ignoringNone, something set to true'                 => [
-                IgnoreList::ignoringNone()->set('Foo.Bar', true),
-                false,
-                false,
-            ],
-            'list from ignoringAll, something set to false'                 => [
-                IgnoreList::ignoringAll()->set('Foo.Bar', false),
-                false,
-                false,
-            ],
-            'list from ignoringAll, something set to true'                  => [
-                IgnoreList::ignoringAll()->set('Foo.Bar', true),
-                false,
-                true,
-            ],
-            'list from ignoringNone, something set to true then overridden' => [
-                IgnoreList::ignoringNone()->set('Foo.Bar', true)->set('Foo', false),
-                true,
-                false,
-            ],
-            'list from ignoringAll, something set to false then overridden' => [
-                IgnoreList::ignoringAll()->set('Foo.Bar', false)->set('Foo', true),
-                false,
-                true,
-            ],
-        ];
-
-    }//end dataIsEmptyAndAll()
-
-
-    /**
-     * Test check() and set().
-     *
-     * @param array $toSet   Associative array of $code => $ignore to pass to set().
-     * @param array $toCheck Associative array of $code => $expect to pass to check().
+     * @param array<string,bool> $toSet   Associative array of $code => $ignore to pass to set().
+     * @param array<string,bool> $toCheck Associative array of $code => $expect to pass to isIgnored().
      *
      * @return void
      *
      * @dataProvider dataCheckAndSet
-     * @covers       PHP_CodeSniffer\Util\IgnoreList::check
-     * @covers       PHP_CodeSniffer\Util\IgnoreList::set
      */
     public function testCheckAndSet($toSet, $toCheck)
     {
         $ignoreList = new IgnoreList();
         foreach ($toSet as $code => $ignore) {
-            $this->assertSame($ignoreList, $ignoreList->set($code, $ignore));
+            $this->assertSame($ignoreList, $ignoreList->set($code, $ignore), 'Set method returned $this');
         }
 
         foreach ($toCheck as $code => $expect) {
-            $this->assertSame($expect, $ignoreList->check($code));
+            $this->assertSame($expect, $ignoreList->isIgnored($code), "$code is ignored");
         }
 
     }//end testCheckAndSet()
@@ -158,7 +50,7 @@ class IgnoreListTest extends TestCase
      *
      * @see testCheckAndSet()
      *
-     * @return array
+     * @return array<string, array<array<string, bool>>>
      */
     public static function dataCheckAndSet()
     {
