@@ -106,9 +106,10 @@ class LocalFile extends File
                 $this->replayErrors($cache['errors'], $cache['warnings']);
                 $this->configCache['cache'] = true;
             } else {
-                $this->errorCount   = $cache['errorCount'];
-                $this->warningCount = $cache['warningCount'];
-                $this->fixableCount = $cache['fixableCount'];
+                $this->errorCount          = $cache['errorCount'];
+                $this->warningCount        = $cache['warningCount'];
+                $this->fixableErrorCount   = $cache['fixableErrorCount'];
+                $this->fixableWarningCount = $cache['fixableWarningCount'];
             }
 
             if (PHP_CODESNIFFER_VERBOSITY > 0
@@ -129,14 +130,15 @@ class LocalFile extends File
         parent::process();
 
         $cache = [
-            'hash'         => $hash,
-            'errors'       => $this->errors,
-            'warnings'     => $this->warnings,
-            'metrics'      => $this->metrics,
-            'errorCount'   => $this->errorCount,
-            'warningCount' => $this->warningCount,
-            'fixableCount' => $this->fixableCount,
-            'numTokens'    => $this->numTokens,
+            'hash'                => $hash,
+            'errors'              => $this->errors,
+            'warnings'            => $this->warnings,
+            'metrics'             => $this->metrics,
+            'errorCount'          => $this->errorCount,
+            'warningCount'        => $this->warningCount,
+            'fixableErrorCount'   => $this->fixableErrorCount,
+            'fixableWarningCount' => $this->fixableWarningCount,
+            'numTokens'           => $this->numTokens,
         ];
 
         Cache::set($this->path, $cache);
@@ -166,11 +168,12 @@ class LocalFile extends File
      */
     private function replayErrors($errors, $warnings)
     {
-        $this->errors       = [];
-        $this->warnings     = [];
-        $this->errorCount   = 0;
-        $this->warningCount = 0;
-        $this->fixableCount = 0;
+        $this->errors            = [];
+        $this->warnings          = [];
+        $this->errorCount        = 0;
+        $this->warningCount      = 0;
+        $this->fixableErrorCount = 0;
+        $this->fixableWarningCount = 0;
 
         $this->replayingErrors = true;
 
