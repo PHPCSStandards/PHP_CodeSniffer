@@ -36,7 +36,7 @@ final class IgnoreList
     /**
      * Get an instance set to ignore nothing.
      *
-     * @return IgnoreList
+     * @return \PHP_CodeSniffer\Util\IgnoreList
      */
     public static function getInstanceIgnoringNothing()
     {
@@ -48,7 +48,7 @@ final class IgnoreList
     /**
      * Get an instance set to ignore everything.
      *
-     * @return IgnoreList
+     * @return \PHP_CodeSniffer\Util\IgnoreList
      */
     public static function getInstanceIgnoringAll()
     {
@@ -64,9 +64,9 @@ final class IgnoreList
      *
      * If passed null, creates a new instance that ignores nothing.
      *
-     * @param IgnoreList|null $ignoreList List to clone.
+     * @param \PHP_CodeSniffer\Util\IgnoreList|null $ignoreList List to clone.
      *
-     * @return IgnoreList
+     * @return \PHP_CodeSniffer\Util\IgnoreList
      */
     public static function getNewInstanceFrom(?IgnoreList $ignoreList)
     {
@@ -117,7 +117,7 @@ final class IgnoreList
      * @param string $code   Partial or complete sniff code.
      * @param bool   $ignore Whether the specified sniff should be ignored.
      *
-     * @return IgnoreList $this for chaining.
+     * @return \PHP_CodeSniffer\Util\IgnoreList $this for chaining.
      */
     public function set($code, $ignore)
     {
