@@ -15,6 +15,7 @@ namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Exceptions\DeepExitException;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Timing;
 use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 class Cbf implements Report
@@ -73,14 +74,7 @@ class Cbf implements Report
                 StatusWriter::forceWrite('DONE', 0, 0);
             }
 
-            $timeTaken = ((microtime(true) - $startTime) * 1000);
-            if ($timeTaken < 1000) {
-                $timeTaken = round($timeTaken);
-                StatusWriter::forceWrite(" in {$timeTaken}ms");
-            } else {
-                $timeTaken = round(($timeTaken / 1000), 2);
-                StatusWriter::forceWrite(" in $timeTaken secs");
-            }
+            StatusWriter::forceWrite(' in '.Timing::getHumanReadableDuration(Timing::getDurationSince($startTime)));
         }
 
         if ($fixed === true) {

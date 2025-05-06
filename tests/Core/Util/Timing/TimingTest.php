@@ -61,6 +61,24 @@ final class TimingTest extends TestCase
 
 
     /**
+     * Verify that getDurationSince() returns the time in milliseconds.
+     *
+     * @return void
+     */
+    public function testGetDurationSinceReturnsMilliseconds()
+    {
+        $startTime = microtime(true);
+        usleep(1500);
+        $duration = Timing::getDurationSince($startTime);
+
+        $this->assertIsFloat($duration);
+        $this->assertGreaterThan(1, $duration);
+        $this->assertLessThan(15, $duration);
+
+    }//end testGetDurationSinceReturnsMilliseconds()
+
+
+    /**
      * Verify that printRunTime() doesn't print anything if the timer wasn't started.
      *
      * @return void

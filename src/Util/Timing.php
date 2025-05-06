@@ -2,8 +2,17 @@
 /**
  * Timing functions for the run.
  *
+ * ---------------------------------------------------------------------------------------------
+ * This class is intended for internal use only and is not part of the public API.
+ * This also means that it has no promise of backward compatibility. Use at your own risk.
+ * ---------------------------------------------------------------------------------------------
+ *
+ * @internal
+ *
  * @author    Greg Sherwood <gsherwood@squiz.net>
+ * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2025 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
@@ -11,7 +20,7 @@ namespace PHP_CodeSniffer\Util;
 
 use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
-class Timing
+final class Timing
 {
 
     /**
@@ -29,7 +38,7 @@ class Timing
     private const SECOND_IN_MS = 1000;
 
     /**
-     * The start time of the run in microseconds.
+     * The start time of the run in seconds.
      *
      * @var float
      */
@@ -71,6 +80,20 @@ class Timing
         return ((microtime(true) - self::$startTime) * 1000);
 
     }//end getDuration()
+
+
+    /**
+     * Get the duration since a given start time up to "now".
+     *
+     * @param float $startTime Start time in microseconds.
+     *
+     * @return float Duration in milliseconds.
+     */
+    public static function getDurationSince($startTime)
+    {
+        return ((microtime(true) - $startTime) * 1000);
+
+    }//end getDurationSince()
 
 
     /**

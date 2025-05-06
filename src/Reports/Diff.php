@@ -10,6 +10,7 @@
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Timing;
 use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 class Diff implements Report
@@ -51,14 +52,7 @@ class Diff implements Report
             $phpcsFile->parse();
 
             if (PHP_CODESNIFFER_VERBOSITY === 1) {
-                $timeTaken = ((microtime(true) - $startTime) * 1000);
-                if ($timeTaken < 1000) {
-                    $timeTaken = round($timeTaken);
-                    StatusWriter::write("DONE in {$timeTaken}ms");
-                } else {
-                    $timeTaken = round(($timeTaken / 1000), 2);
-                    StatusWriter::write("DONE in $timeTaken secs");
-                }
+                StatusWriter::write('DONE in '.Timing::getHumanReadableDuration(Timing::getDurationSince($startTime)));
             }
 
             $phpcsFile->fixer->startFile($phpcsFile);

@@ -612,14 +612,7 @@ class Runner
             $file->process();
 
             if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                $timeTaken = ((microtime(true) - $startTime) * 1000);
-                if ($timeTaken < 1000) {
-                    $timeTaken = round($timeTaken);
-                    StatusWriter::write("DONE in {$timeTaken}ms", 0, 0);
-                } else {
-                    $timeTaken = round(($timeTaken / 1000), 2);
-                    StatusWriter::write("DONE in $timeTaken secs", 0, 0);
-                }
+                StatusWriter::write('DONE in '.Timing::getHumanReadableDuration(Timing::getDurationSince($startTime)), 0, 0);
 
                 if (PHP_CODESNIFFER_CBF === true) {
                     $errors = $file->getFixableCount();
