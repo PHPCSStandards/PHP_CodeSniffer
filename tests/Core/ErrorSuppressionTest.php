@@ -1057,7 +1057,7 @@ EOD;
                 'expectedErrors'   => 0,
                 'expectedWarnings' => 0,
             ],
-            'disable: everything; enable: sniff'                                   => [
+            'disable: everything; enable: sniff'                                                                            => [
                 'code'             => '
                     // phpcs:disable
                     // phpcs:enable Generic.PHP.LowerCaseConstant
