@@ -19,6 +19,7 @@ use DOMDocument;
 use DOMElement;
 use DOMNode;
 use PHP_CodeSniffer\Config;
+use PHP_CodeSniffer\Exceptions\GeneratorException;
 
 class HTML extends Generator
 {
@@ -126,6 +127,9 @@ class HTML extends Generator
      *
      * @return void
      * @see    processSniff()
+     *
+     * @throws \PHP_CodeSniffer\Exceptions\GeneratorException If there is no <documentation> element
+     *                                                        in the XML document.
      */
     public function generate()
     {
@@ -134,10 +138,18 @@ class HTML extends Generator
         }
 
         ob_start();
-        parent::generate();
+        try {
+            parent::generate();
+            $content = ob_get_clean();
+        } catch (GeneratorException $e) {
+            ob_end_clean();
+            $content = '';
+        }
 
-        $content = ob_get_contents();
-        ob_end_clean();
+        // If an exception was caught, rethrow it outside of the output buffer.
+        if (isset($e) === true) {
+            throw $e;
+        }
 
         // Clear anchor cache after Documentation generation.
         // The anchor generation for the TOC anchor links will use the same logic, so should end up with the same unique slugs.

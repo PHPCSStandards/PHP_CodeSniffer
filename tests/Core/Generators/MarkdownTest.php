@@ -8,6 +8,8 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Generators;
 
+use PHP_CodeSniffer\Exceptions\GeneratorException;
+use PHP_CodeSniffer\Generators\Markdown;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHP_CodeSniffer\Tests\Core\Generators\Fixtures\MarkdownDouble;
@@ -21,6 +23,27 @@ use PHPUnit\Framework\TestCase;
  */
 final class MarkdownTest extends TestCase
 {
+
+
+    /**
+     * Verify that an XML doc which isn't valid documentation yields an Exception to warn devs.
+     *
+     * @return void
+     */
+    public function testGeneratingInvalidDocsResultsInException()
+    {
+        // Set up the ruleset.
+        $standard = __DIR__.'/NoValidDocsTest.xml';
+        $config   = new ConfigDouble(["--standard=$standard"]);
+        $ruleset  = new Ruleset($config);
+
+        $this->expectException(GeneratorException::class);
+        $this->expectExceptionMessage('Missing top-level <documentation> element in XML documentation file');
+
+        $generator = new Markdown($ruleset);
+        $generator->generate();
+
+    }//end testGeneratingInvalidDocsResultsInException()
 
 
     /**
