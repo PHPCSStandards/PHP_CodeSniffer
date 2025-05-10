@@ -55,5 +55,6 @@ class NonVisibilityCases {
     ) {}
 }
 
+// Intentional parse error. This must be the last test in the file.
 class LiveCodingDemo {
     /* testLiveCoding */ private(set

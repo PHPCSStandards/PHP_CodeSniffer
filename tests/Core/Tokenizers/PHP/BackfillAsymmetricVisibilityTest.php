@@ -2,14 +2,20 @@
 /**
  * Tests the support of PHP 8.4 asymmetric visibility.
  *
- * @author  Daniel Scherzer <daniel.e.scherzer@gmail.com>
- * @license https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @author    Daniel Scherzer <daniel.e.scherzer@gmail.com>
+ * @copyright 2025 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizers\PHP;
 
 use PHP_CodeSniffer\Tests\Core\Tokenizers\AbstractTokenizerTestCase;
 
+/**
+ * Tests the support of PHP 8.4 asymmetric visibility.
+ *
+ * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
+ */
 final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
 {
 
@@ -22,7 +28,6 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
      * @param string $testContent The token content to look for
      *
      * @dataProvider dataAsymmetricVisibility
-     * @covers       PHP_CodeSniffer\Tokenizers\PHP::processAdditional
      *
      * @return void
      */
@@ -56,43 +61,6 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
         );
 
     }//end testAsymmetricVisibility()
-
-
-    /**
-     * Test that things that are not asymmetric visibility keywords are not
-     * tokenized as such.
-     *
-     * @param string $testMarker  The comment which prefaces the target token in the test file.
-     * @param string $testType    The expected token type
-     * @param string $testContent The token content to look for
-     *
-     * @dataProvider dataNotAsymmetricVisibility
-     * @covers       PHP_CodeSniffer\Tokenizers\PHP::processAdditional
-     *
-     * @return void
-     */
-    public function testNotAsymmetricVisibility($testMarker, $testType, $testContent)
-    {
-        $tokens     = $this->phpcsFile->getTokens();
-        $target     = $this->getTargetToken(
-            $testMarker,
-            [ constant($testType) ],
-            $testContent
-        );
-        $tokenArray = $tokens[$target];
-
-        $this->assertSame(
-            $testType,
-            $tokenArray['type'],
-            'Token tokenized as '.$tokenArray['type'].' (type)'
-        );
-        $this->assertSame(
-            constant($testType),
-            $tokenArray['code'],
-            'Token tokenized as '.$tokenArray['type'].' (code)'
-        );
-
-    }//end testNotAsymmetricVisibility()
 
 
     /**
@@ -231,6 +199,42 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
         ];
 
     }//end dataAsymmetricVisibility()
+
+
+    /**
+     * Test that things that are not asymmetric visibility keywords are not
+     * tokenized as such.
+     *
+     * @param string $testMarker  The comment which prefaces the target token in the test file.
+     * @param string $testType    The expected token type
+     * @param string $testContent The token content to look for
+     *
+     * @dataProvider dataNotAsymmetricVisibility
+     *
+     * @return void
+     */
+    public function testNotAsymmetricVisibility($testMarker, $testType, $testContent)
+    {
+        $tokens     = $this->phpcsFile->getTokens();
+        $target     = $this->getTargetToken(
+            $testMarker,
+            [constant($testType)],
+            $testContent
+        );
+        $tokenArray = $tokens[$target];
+
+        $this->assertSame(
+            $testType,
+            $tokenArray['type'],
+            'Token tokenized as '.$tokenArray['type'].' (type)'
+        );
+        $this->assertSame(
+            constant($testType),
+            $tokenArray['code'],
+            'Token tokenized as '.$tokenArray['type'].' (code)'
+        );
+
+    }//end testNotAsymmetricVisibility()
 
 
     /**
