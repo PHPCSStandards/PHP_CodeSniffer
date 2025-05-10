@@ -55,6 +55,11 @@ final class ConstantVisibilityUnitTest extends AbstractSniffUnitTest
                 21 => 1,
             ];
 
+        case 'ConstantVisibilityUnitTest.2.inc':
+            return [
+                6 => 1,
+            ];
+
         default:
             return [];
         }
