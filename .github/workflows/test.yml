@@ -274,13 +274,22 @@ jobs:
     strategy:
       matrix:
         os: ['ubuntu-latest', 'windows-latest']
+        # Note: we can only run code coverage builds against PHP 7.2 and PHP 8.4 or higher:
+        # - PHP 7.2 will work as it uses PHPUnit 8, which doesn't use PHP Parser yet.
+        # - As of PHPUnit 9.3 (PHP 7.3+), PHPUnit started using PHP Parser for code coverage, and PHP Parser
+        #   also polyfills tokens, but to different (integer) values.
+        # - Additionally, PHP Parser will block PHPUnit from running with a fatal error if it detects
+        #   non-integer values for polyfilled tokens.... _sigh_.
+        # - So, aside from PHP 7.2, we can only run code coverage on the last PHP version (or higher)
+        #   which added a new token, which is polyfilled by both.
+        #   At the time of writing, this means PHP 8.4 or higher.
         php: ['7.2', '8.4']
         custom_ini: [false]
 
         include:
           # Also run one coverage build with custom ini settings for testing the DisallowShortOpenTag sniff.
           # Also run with a disabled extension for testing the handling of unsettable ini settings by PHPCS.
-          - php: '8.1'
+          - php: '8.4'
             os: 'ubuntu-latest'
             custom_ini: true
             extensions: ':mysqli' # Run with mysqli disabled.
@@ -334,10 +343,16 @@ jobs:
         run: |
           if [ "${{ startsWith( steps.phpunit_version.outputs.VERSION, '11.' ) }}" == "true" ]; then
             echo 'FILE=phpunit.xml.dist' >> "$GITHUB_OUTPUT"
+            echo 'WARM_CACHE=true' >> "$GITHUB_OUTPUT"
           elif [ "${{ startsWith( steps.phpunit_version.outputs.VERSION, '10.' ) }}" == "true" ]; then
             echo 'FILE=phpunit.xml.dist' >> "$GITHUB_OUTPUT"
+            echo 'WARM_CACHE=true' >> "$GITHUB_OUTPUT"
+          elif [ "${{ steps.phpunit_version.outputs.VERSION >= '9.3' }}" == "true" ]; then
+            echo 'FILE=phpunit-lte9.xml.dist' >> "$GITHUB_OUTPUT"
+            echo 'WARM_CACHE=true' >> "$GITHUB_OUTPUT"
           else
             echo 'FILE=phpunit-lte9.xml.dist' >> "$GITHUB_OUTPUT"
+            echo 'WARM_CACHE=false' >> "$GITHUB_OUTPUT"
           fi
 
       - name: 'PHPCS: set the path to PHP'
@@ -348,10 +363,10 @@ jobs:
       # As of PHPUnit 9.3.4, a cache warming option is available.
       # Using that option prevents issues with PHP-Parser backfilling PHP tokens during our test runs.
       - name: "Warm the PHPUnit cache (PHPUnit 9.3+)"
-        if: ${{ steps.phpunit_version.outputs.VERSION >= '9.3' }}
+        if: ${{ steps.phpunit_config.outputs.WARM_CACHE == 'true' }}
         run: >
-          php "vendor/bin/phpunit" -c ${{ steps.phpunit_config.outputs.FILE }}
-          --coverage-cache ./build/phpunit-cache --warm-coverage-cache
+          php "vendor/bin/phpunit" -c ${{ steps.phpunit_config.outputs.FILE }} --warm-coverage-cache
+          ${{ steps.phpunit_version.outputs.VERSION >= '9.3' && '--coverage-cache ./build/phpunit-cache' || '' }}
 
       - name: "Run the unit tests with code coverage"
         if: ${{ matrix.os != 'windows-latest' }}
