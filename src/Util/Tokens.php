@@ -180,6 +180,19 @@ if (defined('T_ENUM') === false) {
     define('T_ENUM', 'PHPCS_T_ENUM');
 }
 
+// Some PHP 8.4 tokens, replicated for lower versions.
+if (defined('T_PUBLIC_SET') === false) {
+    define('T_PUBLIC_SET', 'PHPCS_T_PUBLIC_SET');
+}
+
+if (defined('T_PROTECTED_SET') === false) {
+    define('T_PROTECTED_SET', 'PHPCS_T_PROTECTED_SET');
+}
+
+if (defined('T_PRIVATE_SET') === false) {
+    define('T_PRIVATE_SET', 'PHPCS_T_PRIVATE_SET');
+}
+
 // Tokens used for parsing doc blocks.
 define('T_DOC_COMMENT_STAR', 'PHPCS_T_DOC_COMMENT_STAR');
 define('T_DOC_COMMENT_WHITESPACE', 'PHPCS_T_DOC_COMMENT_WHITESPACE');
@@ -463,9 +476,12 @@ final class Tokens
      * @var array<int|string, int|string>
      */
     public static $scopeModifiers = [
-        T_PRIVATE   => T_PRIVATE,
-        T_PUBLIC    => T_PUBLIC,
-        T_PROTECTED => T_PROTECTED,
+        T_PRIVATE       => T_PRIVATE,
+        T_PUBLIC        => T_PUBLIC,
+        T_PROTECTED     => T_PROTECTED,
+        T_PUBLIC_SET    => T_PUBLIC_SET,
+        T_PROTECTED_SET => T_PROTECTED_SET,
+        T_PRIVATE_SET   => T_PRIVATE_SET,
     ];
 
     /**

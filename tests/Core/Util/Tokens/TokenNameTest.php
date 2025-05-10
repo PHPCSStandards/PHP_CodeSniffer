@@ -176,6 +176,19 @@ final class TokenNameTest extends TestCase
                 'tokenCode' => T_ENUM,
                 'expected'  => 'T_ENUM',
             ],
+
+            'PHP 8.4 native token, polyfilled: T_PUBLIC_SET'                              => [
+                'tokenCode' => T_PUBLIC_SET,
+                'expected'  => 'T_PUBLIC_SET',
+            ],
+            'PHP 8.4 native token, polyfilled: T_PROTECTED_SET'                           => [
+                'tokenCode' => T_PROTECTED_SET,
+                'expected'  => 'T_PROTECTED_SET',
+            ],
+            'PHP 8.4 native token, polyfilled: T_PRIVATE_SET'                             => [
+                'tokenCode' => T_PRIVATE_SET,
+                'expected'  => 'T_PRIVATE_SET',
+            ],
         ];
 
     }//end dataPolyfilledPHPNativeTokens()
