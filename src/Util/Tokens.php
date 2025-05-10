@@ -346,11 +346,14 @@ final class Tokens
      *
      * @var array<int|string, int|string>
      */
-    public const METHOD_MODIFIERS = (self::SCOPE_MODIFIERS + [
-        T_ABSTRACT => T_ABSTRACT,
-        T_STATIC   => T_STATIC,
-        T_FINAL    => T_FINAL,
-    ]);
+    public const METHOD_MODIFIERS = [
+        T_PRIVATE   => T_PRIVATE,
+        T_PUBLIC    => T_PUBLIC,
+        T_PROTECTED => T_PROTECTED,
+        T_ABSTRACT  => T_ABSTRACT,
+        T_STATIC    => T_STATIC,
+        T_FINAL     => T_FINAL,
+    ];
 
     /**
      * Tokens that open code blocks.
