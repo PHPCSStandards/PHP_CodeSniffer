@@ -5,11 +5,11 @@ class Nullable
     /* testNullableReadonlyOnly */
     readonly ?int $prop;
 
-    /* testNullablePrivateSetOnly */
+    /* testNullablePrivateSet */
     private(set) ?int $prop2;
 
-    /* testNullablePublicPrivateSetOnly */
-    public private(set) ?int $prop3;
+    /* testNullablePublicProtectedSet */
+    public protected(set) ?int $prop3;
 }
 
 class InlineThen
