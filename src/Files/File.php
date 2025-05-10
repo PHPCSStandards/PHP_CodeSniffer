@@ -1827,6 +1827,9 @@ class File
      *   array(
      *    'scope'           => string,        // Public, private, or protected.
      *    'scope_specified' => boolean,       // TRUE if the scope was explicitly specified.
+     *    'set_scope'       => string|false,  // Scope for asymmetric visibility.
+     *                                        // Either public, private, or protected or
+     *                                        // FALSE if no set scope is specified.
      *    'is_static'       => boolean,       // TRUE if the static keyword was found.
      *    'is_readonly'     => boolean,       // TRUE if the readonly keyword was found.
      *    'is_final'        => boolean,       // TRUE if the final keyword was found.
@@ -1896,19 +1899,18 @@ class File
         }
 
         $valid = [
-            T_PUBLIC    => T_PUBLIC,
-            T_PRIVATE   => T_PRIVATE,
-            T_PROTECTED => T_PROTECTED,
-            T_STATIC    => T_STATIC,
-            T_VAR       => T_VAR,
-            T_READONLY  => T_READONLY,
-            T_FINAL     => T_FINAL,
+            T_STATIC   => T_STATIC,
+            T_VAR      => T_VAR,
+            T_READONLY => T_READONLY,
+            T_FINAL    => T_FINAL,
         ];
 
+        $valid += Tokens::$scopeModifiers;
         $valid += Tokens::$emptyTokens;
 
         $scope          = 'public';
         $scopeSpecified = false;
+        $setScope       = false;
         $isStatic       = false;
         $isReadonly     = false;
         $isFinal        = false;
@@ -1940,6 +1942,15 @@ class File
             case T_PROTECTED:
                 $scope          = 'protected';
                 $scopeSpecified = true;
+                break;
+            case T_PUBLIC_SET:
+                $setScope = 'public';
+                break;
+            case T_PROTECTED_SET:
+                $setScope = 'protected';
+                break;
+            case T_PRIVATE_SET:
+                $setScope = 'private';
                 break;
             case T_STATIC:
                 $isStatic = true;
@@ -2004,6 +2015,7 @@ class File
         return [
             'scope'           => $scope,
             'scope_specified' => $scopeSpecified,
+            'set_scope'       => $setScope,
             'is_static'       => $isStatic,
             'is_readonly'     => $isReadonly,
             'is_final'        => $isFinal,
