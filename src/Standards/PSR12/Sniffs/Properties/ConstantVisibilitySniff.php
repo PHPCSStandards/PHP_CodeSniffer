@@ -16,6 +16,17 @@ use PHP_CodeSniffer\Util\Tokens;
 class ConstantVisibilitySniff implements Sniff
 {
 
+    /**
+     * Visibility tokens which are valid for class constants.
+     *
+     * @var array<int, int>
+     */
+    private const VALID_VISIBILITY = [
+        T_PRIVATE   => T_PRIVATE,
+        T_PUBLIC    => T_PUBLIC,
+        T_PROTECTED => T_PROTECTED,
+    ];
+
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -50,14 +61,8 @@ class ConstantVisibilitySniff implements Sniff
         $ignore   = Tokens::EMPTY_TOKENS;
         $ignore[] = T_FINAL;
 
-        $validVisibility = [
-            T_PRIVATE   => T_PRIVATE,
-            T_PUBLIC    => T_PUBLIC,
-            T_PROTECTED => T_PROTECTED,
-        ];
-
         $prev = $phpcsFile->findPrevious($ignore, ($stackPtr - 1), null, true);
-        if (isset($validVisibility[$tokens[$prev]['code']]) === true) {
+        if (isset(self::VALID_VISIBILITY[$tokens[$prev]['code']]) === true) {
             return;
         }
 
