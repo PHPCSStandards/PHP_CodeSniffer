@@ -450,7 +450,18 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             'OO property type: with final and static keyword'             => [
                 'testMarker' => '/* testDNFTypeWithPHP84FinalKeywordAndStatic */',
             ],
-
+            'OO property type: asymmetric visibility, private(set)'       => [
+                'testMarker' => '/* testDNFTypePropertyWithPrivateSet */',
+            ],
+            'OO property type: asymmetric vis, public private(set)'       => [
+                'testMarker' => '/* testDNFTypePropertyWithPublicPrivateSet */',
+            ],
+            'OO property type: asymmetric visibility, protected(set)'     => [
+                'testMarker' => '/* testDNFTypePropertyWithProtectedSet */',
+            ],
+            'OO property type: asymmetric vis, public protected(set)'     => [
+                'testMarker' => '/* testDNFTypePropertyWithPublicProtectedSet */',
+            ],
             'OO method param type: first param'                           => [
                 'testMarker' => '/* testDNFTypeParam1WithAttribute */',
             ],

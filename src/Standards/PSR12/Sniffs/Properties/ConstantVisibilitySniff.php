@@ -50,8 +50,14 @@ class ConstantVisibilitySniff implements Sniff
         $ignore   = Tokens::EMPTY_TOKENS;
         $ignore[] = T_FINAL;
 
+        $validVisibility = [
+            T_PRIVATE   => T_PRIVATE,
+            T_PUBLIC    => T_PUBLIC,
+            T_PROTECTED => T_PROTECTED,
+        ];
+
         $prev = $phpcsFile->findPrevious($ignore, ($stackPtr - 1), null, true);
-        if (isset(Tokens::SCOPE_MODIFIERS[$tokens[$prev]['code']]) === true) {
+        if (isset($validVisibility[$tokens[$prev]['code']]) === true) {
             return;
         }
 

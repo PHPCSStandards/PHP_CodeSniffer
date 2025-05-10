@@ -69,6 +69,10 @@ final class LowerCaseConstantUnitTest extends AbstractSniffTestCase
                 164 => 1,
                 165 => 1,
                 166 => 1,
+                171 => 1,
+                173 => 1,
+                175 => 1,
+                177 => 1,
             ];
 
         default:

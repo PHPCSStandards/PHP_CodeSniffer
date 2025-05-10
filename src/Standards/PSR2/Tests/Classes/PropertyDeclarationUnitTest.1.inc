@@ -101,3 +101,17 @@ interface PHP84HookedProperty {
     public $thisisfine { get; }
     public $_underscore { get; }
 }
+
+class AsymmetricVisibility {
+    private(set) int $foo,
+        $bar,
+        $var = 5;
+
+    public private(set) readonly ?string    $spaces;
+
+    protected(set) array $unfixed;
+
+    protected(set) public int $wrongOrder1;
+
+    private(set) protected ?string $wrongOrder2;
+}
