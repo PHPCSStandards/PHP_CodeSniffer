@@ -153,18 +153,66 @@ class File
     protected $warningCount = 0;
 
     /**
-     * The total number of errors and warnings that can be fixed.
+     * The original total number of errors that can be fixed (first run on a file).
+     *
+     * {@internal This should be regarded as an immutable property.}
      *
      * @var integer
      */
-    protected $fixableCount = 0;
+    private $fixableErrorCountFirstRun;
 
     /**
-     * The total number of errors and warnings that were fixed.
+     * The original total number of warnings that can be fixed (first run on a file).
+     *
+     * {@internal This should be regarded as an immutable property.}
+     *
+     * @var integer
+     */
+    private $fixableWarningCountFirstRun;
+
+    /**
+     * The current total number of errors that can be fixed.
+     *
+     * @var integer
+     */
+    protected $fixableErrorCount = 0;
+
+    /**
+     * The current total number of warnings that can be fixed.
+     *
+     * @var integer
+     */
+    protected $fixableWarningCount = 0;
+
+    /**
+     * The actual number of errors and warnings that were fixed.
+     *
+     * I.e. how many fixes were applied. This may be higher than the originally found
+     * issues if the fixer from one sniff causes other sniffs to come into play in follow-up loops.
+     * Example: if a brace is moved to a new line, the `ScopeIndent` sniff may need to ensure
+     * the brace is indented correctly in the next loop.
      *
      * @var integer
      */
     protected $fixedCount = 0;
+
+    /**
+     * The effective number of errors that were fixed.
+     *
+     * I.e. how many of the originally found errors were fixed.
+     *
+     * @var integer
+     */
+    protected $fixedErrorCount = 0;
+
+    /**
+     * The effective number of warnings that were fixed.
+     *
+     * I.e. how many of the originally found warnings were fixed.
+     *
+     * @var integer
+     */
+    protected $fixedWarningCount = 0;
 
     /**
      * TRUE if errors are being replayed from the cache.
@@ -309,11 +357,12 @@ class File
             return;
         }
 
-        $this->errors       = [];
-        $this->warnings     = [];
-        $this->errorCount   = 0;
-        $this->warningCount = 0;
-        $this->fixableCount = 0;
+        $this->errors            = [];
+        $this->warnings          = [];
+        $this->errorCount        = 0;
+        $this->warningCount      = 0;
+        $this->fixableErrorCount = 0;
+        $this->fixableWarningCount = 0;
 
         $this->parse();
 
@@ -351,11 +400,12 @@ class File
                     || substr($commentTextLower, 0, 17) === '@phpcs:ignorefile'
                 ) {
                     // Ignoring the whole file, just a little late.
-                    $this->errors       = [];
-                    $this->warnings     = [];
-                    $this->errorCount   = 0;
-                    $this->warningCount = 0;
-                    $this->fixableCount = 0;
+                    $this->errors            = [];
+                    $this->warnings          = [];
+                    $this->errorCount        = 0;
+                    $this->warningCount      = 0;
+                    $this->fixableErrorCount = 0;
+                    $this->fixableWarningCount = 0;
                     return;
                 } else if (substr($commentTextLower, 0, 9) === 'phpcs:set'
                     || substr($commentTextLower, 0, 10) === '@phpcs:set'
@@ -505,7 +555,14 @@ class File
             StatusWriter::write('*** END SNIFF PROCESSING REPORT ***', 1);
         }
 
-        $this->fixedCount += $this->fixer->getFixCount();
+        if (isset($this->fixableErrorCountFirstRun, $this->fixableWarningCountFirstRun) === false) {
+            $this->fixableErrorCountFirstRun   = $this->fixableErrorCount;
+            $this->fixableWarningCountFirstRun = $this->fixableWarningCount;
+        }
+
+        $this->fixedCount       += $this->fixer->getFixCount();
+        $this->fixedErrorCount   = ($this->fixableErrorCountFirstRun - $this->fixableErrorCount);
+        $this->fixedWarningCount = ($this->fixableWarningCountFirstRun - $this->fixableWarningCount);
 
     }//end process()
 
@@ -1004,7 +1061,11 @@ class File
 
         $messageCount++;
         if ($fixable === true) {
-            $this->fixableCount++;
+            if ($error === true) {
+                $this->fixableErrorCount++;
+            } else {
+                $this->fixableWarningCount++;
+            }
         }
 
         if ($this->configCache['recordErrors'] === false
@@ -1114,13 +1175,37 @@ class File
      */
     public function getFixableCount()
     {
-        return $this->fixableCount;
+        return ($this->fixableErrorCount + $this->fixableWarningCount);
 
     }//end getFixableCount()
 
 
     /**
-     * Returns the number of fixed errors/warnings.
+     * Returns the number of fixable errors raised.
+     *
+     * @return int
+     */
+    public function getFixableErrorCount()
+    {
+        return $this->fixableErrorCount;
+
+    }//end getFixableErrorCount()
+
+
+    /**
+     * Returns the number of fixable warnings raised.
+     *
+     * @return int
+     */
+    public function getFixableWarningCount()
+    {
+        return $this->fixableWarningCount;
+
+    }//end getFixableWarningCount()
+
+
+    /**
+     * Returns the actual number of fixed errors/warnings.
      *
      * @return int
      */
@@ -1129,6 +1214,30 @@ class File
         return $this->fixedCount;
 
     }//end getFixedCount()
+
+
+    /**
+     * Returns the effective number of fixed errors.
+     *
+     * @return int
+     */
+    public function getFixedErrorCount()
+    {
+        return $this->fixedErrorCount;
+
+    }//end getFixedErrorCount()
+
+
+    /**
+     * Returns the effective number of fixed warnings.
+     *
+     * @return int
+     */
+    public function getFixedWarningCount()
+    {
+        return $this->fixedWarningCount;
+
+    }//end getFixedWarningCount()
 
 
     /**

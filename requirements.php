@@ -29,7 +29,8 @@ namespace PHP_CodeSniffer;
  */
 function checkRequirements()
 {
-    $exitCode = 3;
+    // IMPORTANT: Must stay in sync with the value of the `PHP_CodeSniffer\Util\ExitCode::REQUIREMENTS_NOT_MET` constant!
+    $exitCode = 64;
 
     // Check the PHP version.
     if (PHP_VERSION_ID < 70200) {

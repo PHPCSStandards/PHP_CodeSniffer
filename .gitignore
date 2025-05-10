@@ -11,3 +11,5 @@ composer.lock
 phpstan.neon
 /node_modules/
 /tests/Standards/sniffStnd.xml
+/tests/Core/Util/ExitCode/Fixtures/ExitCodeTest/*.fixed
+/tests/Core/Util/ExitCode/Fixtures/ExitCodeTest/phpcs.cache

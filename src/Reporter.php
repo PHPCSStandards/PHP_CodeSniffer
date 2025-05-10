@@ -14,7 +14,14 @@ use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Reports\Report;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\ExitCode;
 
+/**
+ * Manages reporting of errors and warnings.
+ *
+ * @property-read int $totalFixable Total number of errors/warnings that can be fixed.
+ * @property-read int $totalFixed   Total number of errors/warnings that were fixed.
+ */
 class Reporter
 {
 
@@ -47,18 +54,32 @@ class Reporter
     public $totalWarnings = 0;
 
     /**
-     * Total number of errors/warnings that can be fixed.
+     * Total number of errors that can be fixed.
      *
      * @var integer
      */
-    public $totalFixable = 0;
+    public $totalFixableErrors = 0;
 
     /**
-     * Total number of errors/warnings that were fixed.
+     * Total number of warnings that can be fixed.
      *
      * @var integer
      */
-    public $totalFixed = 0;
+    public $totalFixableWarnings = 0;
+
+    /**
+     * Total number of errors that were fixed.
+     *
+     * @var integer
+     */
+    public $totalFixedErrors = 0;
+
+    /**
+     * Total number of warnings that were fixed.
+     *
+     * @var integer
+     */
+    public $totalFixedWarnings = 0;
 
     /**
      * A cache of report objects.
@@ -103,7 +124,7 @@ class Reporter
                 $filename = realpath($type);
                 if ($filename === false) {
                     $error = "ERROR: Custom report \"$type\" not found".PHP_EOL;
-                    throw new DeepExitException($error, 3);
+                    throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                 }
 
                 $reportClassName = Autoload::loadFile($filename);
@@ -132,7 +153,7 @@ class Reporter
 
             if ($reportClassName === '') {
                 $error = "ERROR: Class file for report \"$type\" not found".PHP_EOL;
-                throw new DeepExitException($error, 3);
+                throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
             }
 
             $reportClass = new $reportClassName();
@@ -157,6 +178,81 @@ class Reporter
         }//end foreach
 
     }//end __construct()
+
+
+    /**
+     * Check whether a (virtual) property is set.
+     *
+     * @param string $name Property name.
+     *
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        return ($name === 'totalFixable' || $name === 'totalFixed');
+
+    }//end __isset()
+
+
+    /**
+     * Get the value of an inaccessible property.
+     *
+     * The properties supported via this method are both deprecated since PHP_CodeSniffer 4.0.
+     * - For $totalFixable, use `($reporter->totalFixableErrors + $reporter->totalFixableWarnings)` instead.
+     * - For $totalFixed, use `($reporter->totalFixedErrors + $reporter->totalFixedWarnings)` instead.
+     *
+     * @param string $name The name of the property.
+     *
+     * @return int
+     *
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If the setting name is invalid.
+     */
+    public function __get($name)
+    {
+        if ($name === 'totalFixable') {
+            return ($this->totalFixableErrors + $this->totalFixableWarnings);
+        }
+
+        if ($name === 'totalFixed') {
+            return ($this->totalFixedErrors + $this->totalFixedWarnings);
+        }
+
+        throw new RuntimeException("ERROR: access requested to unknown property \"Reporter::\${$name}\"");
+
+    }//end __get()
+
+
+    /**
+     * Setting a dynamic/virtual property on this class is not allowed.
+     *
+     * @param string $name  Property name.
+     * @param mixed  $value Property value.
+     *
+     * @return bool
+     *
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException
+     */
+    public function __set($name, $value)
+    {
+        throw new RuntimeException("ERROR: setting property \"Reporter::\${$name}\" is not allowed");
+
+    }//end __set()
+
+
+    /**
+     * Unsetting a dynamic/virtual property on this class is not allowed.
+     *
+     * @param string $name Property name.
+     *
+     * @return bool
+     *
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException
+     */
+    public function __unset($name)
+    {
+        throw new RuntimeException("ERROR: unsetting property \"Reporter::\${$name}\" is not allowed");
+
+    }//end __unset()
 
 
     /**
@@ -219,7 +315,7 @@ class Reporter
             $this->totalFiles,
             $this->totalErrors,
             $this->totalWarnings,
-            $this->totalFixable,
+            ($this->totalFixableErrors + $this->totalFixableWarnings),
             $this->config->showSources,
             $this->config->reportWidth,
             $this->config->interactive,
@@ -306,12 +402,10 @@ class Reporter
 
             // When PHPCBF is running, we need to use the fixable error values
             // after the report has run and fixed what it can.
-            if (PHP_CODESNIFFER_CBF === true) {
-                $this->totalFixable += $phpcsFile->getFixableCount();
-                $this->totalFixed   += $phpcsFile->getFixedCount();
-            } else {
-                $this->totalFixable += $reportData['fixable'];
-            }
+            $this->totalFixableErrors   += $phpcsFile->getFixableErrorCount();
+            $this->totalFixableWarnings += $phpcsFile->getFixableWarningCount();
+            $this->totalFixedErrors     += $phpcsFile->getFixedErrorCount();
+            $this->totalFixedWarnings   += $phpcsFile->getFixedWarningCount();
         }
 
     }//end cacheFileReport()

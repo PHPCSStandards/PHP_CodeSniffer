@@ -19,6 +19,7 @@ use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Exceptions\DeepExitException;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\ExitCode;
 use RecursiveArrayIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -157,7 +158,7 @@ class FileList implements Iterator, Countable
                 $filename = realpath($filterType);
                 if ($filename === false) {
                     $error = "ERROR: Custom filter \"$filterType\" not found".PHP_EOL;
-                    throw new DeepExitException($error, 3);
+                    throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                 }
 
                 $filterClass = Autoload::loadFile($filename);

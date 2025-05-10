@@ -102,7 +102,12 @@ class Fixer
     private $inConflict = false;
 
     /**
-     * The number of fixes that have been performed.
+     * The actual number of fixes that have been performed.
+     *
+     * I.e. how many fixes were applied. This may be higher than the originally found
+     * issues if the fixer from one sniff causes other sniffs to come into play in follow-up loops.
+     * Example: if a brace is moved to a new line, the `ScopeIndent` sniff may need to ensure
+     * the brace is indented correctly in the next loop.
      *
      * @var integer
      */
@@ -336,7 +341,7 @@ class Fixer
 
 
     /**
-     * Get a count of fixes that have been performed on the file.
+     * Get a count of the actual number of fixes that have been performed on the file.
      *
      * This value is reset every time a new file is started, or an existing
      * file is restarted.

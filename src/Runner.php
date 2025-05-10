@@ -21,6 +21,7 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Files\FileList;
 use PHP_CodeSniffer\Util\Cache;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\ExitCode;
 use PHP_CodeSniffer\Util\Standards;
 use PHP_CodeSniffer\Util\Timing;
 use PHP_CodeSniffer\Util\Tokens;
@@ -117,7 +118,7 @@ class Runner
                 $this->config->cache = false;
             }
 
-            $numErrors = $this->run();
+            $this->run();
 
             // Print all the reports for this run.
             $this->reporter->printReports();
@@ -139,16 +140,7 @@ class Runner
             return $exitCode;
         }//end try
 
-        if ($numErrors === 0) {
-            // No errors found.
-            return 0;
-        } else if ($this->reporter->totalFixable === 0) {
-            // Errors found, but none of them can be fixed by PHPCBF.
-            return 1;
-        } else {
-            // Errors found, and some can be fixed by PHPCBF.
-            return 2;
-        }
+        return ExitCode::calculate($this->reporter);
 
     }//end runPHPCS()
 
@@ -234,24 +226,7 @@ class Runner
             return $exitCode;
         }//end try
 
-        if ($this->reporter->totalFixed === 0) {
-            // Nothing was fixed by PHPCBF.
-            if ($this->reporter->totalFixable === 0) {
-                // Nothing found that could be fixed.
-                return 0;
-            } else {
-                // Something failed to fix.
-                return 2;
-            }
-        }
-
-        if ($this->reporter->totalFixable === 0) {
-            // PHPCBF fixed all fixable errors.
-            return 1;
-        }
-
-        // PHPCBF fixed some fixable errors, but others failed to fix.
-        return 2;
+        return ExitCode::calculate($this->reporter);
 
     }//end runPHPCBF()
 
@@ -278,7 +253,7 @@ class Runner
                 // out by letting them know which standards are installed.
                 $error  = 'ERROR: the "'.$standard.'" coding standard is not installed.'.PHP_EOL.PHP_EOL;
                 $error .= Standards::prepareInstalledStandardsForDisplay().PHP_EOL;
-                throw new DeepExitException($error, 3);
+                throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
             }
         }
 
@@ -309,7 +284,7 @@ class Runner
         } catch (RuntimeException $e) {
             $error  = rtrim($e->getMessage(), "\r\n").PHP_EOL.PHP_EOL;
             $error .= $this->config->printShortUsage(true);
-            throw new DeepExitException($error, 3);
+            throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         }
 
     }//end init()
@@ -318,7 +293,8 @@ class Runner
     /**
      * Performs the run.
      *
-     * @return int The number of errors and warnings found.
+     * @return void
+     *
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException
      */
@@ -348,7 +324,7 @@ class Runner
             if (empty($this->config->files) === true) {
                 $error  = 'ERROR: You must supply at least one file or directory to process.'.PHP_EOL.PHP_EOL;
                 $error .= $this->config->printShortUsage(true);
-                throw new DeepExitException($error, 3);
+                throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
             }
 
             if (PHP_CODESNIFFER_VERBOSITY > 0) {
@@ -380,7 +356,7 @@ class Runner
         if ($numFiles === 0) {
             $error  = 'ERROR: No files were checked.'.PHP_EOL;
             $error .= 'All specified files were excluded or did not match filtering rules.'.PHP_EOL.PHP_EOL;
-            throw new DeepExitException($error, 3);
+            throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         }
 
         // Turn all sniff errors into exceptions.
@@ -452,11 +428,13 @@ class Runner
 
                     // Reset the reporter to make sure only figures from this
                     // file batch are recorded.
-                    $this->reporter->totalFiles    = 0;
-                    $this->reporter->totalErrors   = 0;
-                    $this->reporter->totalWarnings = 0;
-                    $this->reporter->totalFixable  = 0;
-                    $this->reporter->totalFixed    = 0;
+                    $this->reporter->totalFiles           = 0;
+                    $this->reporter->totalErrors          = 0;
+                    $this->reporter->totalWarnings        = 0;
+                    $this->reporter->totalFixableErrors   = 0;
+                    $this->reporter->totalFixableWarnings = 0;
+                    $this->reporter->totalFixedErrors     = 0;
+                    $this->reporter->totalFixedWarnings   = 0;
 
                     // Process the files.
                     $pathsProcessed = [];
@@ -491,11 +469,13 @@ class Runner
                     // Write information about the run to the filesystem
                     // so it can be picked up by the main process.
                     $childOutput = [
-                        'totalFiles'    => $this->reporter->totalFiles,
-                        'totalErrors'   => $this->reporter->totalErrors,
-                        'totalWarnings' => $this->reporter->totalWarnings,
-                        'totalFixable'  => $this->reporter->totalFixable,
-                        'totalFixed'    => $this->reporter->totalFixed,
+                        'totalFiles'           => $this->reporter->totalFiles,
+                        'totalErrors'          => $this->reporter->totalErrors,
+                        'totalWarnings'        => $this->reporter->totalWarnings,
+                        'totalFixableErrors'   => $this->reporter->totalFixableErrors,
+                        'totalFixableWarnings' => $this->reporter->totalFixableWarnings,
+                        'totalFixedErrors'     => $this->reporter->totalFixedErrors,
+                        'totalFixedWarnings'   => $this->reporter->totalFixedWarnings,
                     ];
 
                     $output  = '<'.'?php'."\n".' $childOutput = ';
@@ -537,26 +517,6 @@ class Runner
         if ($this->config->cache === true) {
             Cache::save();
         }
-
-        $ignoreWarnings = Config::getConfigData('ignore_warnings_on_exit');
-        $ignoreErrors   = Config::getConfigData('ignore_errors_on_exit');
-
-        $return = ($this->reporter->totalErrors + $this->reporter->totalWarnings);
-        if ($ignoreErrors !== null) {
-            $ignoreErrors = (bool) $ignoreErrors;
-            if ($ignoreErrors === true) {
-                $return -= $this->reporter->totalErrors;
-            }
-        }
-
-        if ($ignoreWarnings !== null) {
-            $ignoreWarnings = (bool) $ignoreWarnings;
-            if ($ignoreWarnings === true) {
-                $return -= $this->reporter->totalWarnings;
-            }
-        }
-
-        return $return;
 
     }//end run()
 
@@ -615,8 +575,9 @@ class Runner
                 StatusWriter::write('DONE in '.Timing::getHumanReadableDuration(Timing::getDurationSince($startTime)), 0, 0);
 
                 if (PHP_CODESNIFFER_CBF === true) {
-                    $errors = $file->getFixableCount();
-                    StatusWriter::write(" ($errors fixable violations)");
+                    $errors   = $file->getFixableErrorCount();
+                    $warnings = $file->getFixableWarningCount();
+                    StatusWriter::write(" ($errors fixable errors, $warnings fixable warnings)");
                 } else {
                     $errors   = $file->getErrorCount();
                     $warnings = $file->getWarningCount();
@@ -694,7 +655,8 @@ class Runner
                 case 's':
                     break(2);
                 case 'q':
-                    throw new DeepExitException('', 0);
+                    // User request to "quit": exit code should be 0.
+                    throw new DeepExitException('', ExitCode::OKAY);
                 default:
                     // Repopulate the sniffs because some of them save their state
                     // and only clear it when the file changes, but we are rechecking
@@ -756,17 +718,19 @@ class Runner
             if (isset($childOutput) === false) {
                 // The child process died, so the run has failed.
                 $file = new DummyFile('', $this->ruleset, $this->config);
-                $file->setErrorCounts(1, 0, 0, 0);
+                $file->setErrorCounts(1, 0, 0, 0, 0, 0);
                 $this->printProgress($file, $totalBatches, $numProcessed);
                 $success = false;
                 continue;
             }
 
-            $this->reporter->totalFiles    += $childOutput['totalFiles'];
-            $this->reporter->totalErrors   += $childOutput['totalErrors'];
-            $this->reporter->totalWarnings += $childOutput['totalWarnings'];
-            $this->reporter->totalFixable  += $childOutput['totalFixable'];
-            $this->reporter->totalFixed    += $childOutput['totalFixed'];
+            $this->reporter->totalFiles           += $childOutput['totalFiles'];
+            $this->reporter->totalErrors          += $childOutput['totalErrors'];
+            $this->reporter->totalWarnings        += $childOutput['totalWarnings'];
+            $this->reporter->totalFixableErrors   += $childOutput['totalFixableErrors'];
+            $this->reporter->totalFixableWarnings += $childOutput['totalFixableWarnings'];
+            $this->reporter->totalFixedErrors     += $childOutput['totalFixedErrors'];
+            $this->reporter->totalFixedWarnings   += $childOutput['totalFixedWarnings'];
 
             if (isset($debugOutput) === true) {
                 echo $debugOutput;
@@ -783,8 +747,10 @@ class Runner
             $file->setErrorCounts(
                 $childOutput['totalErrors'],
                 $childOutput['totalWarnings'],
-                $childOutput['totalFixable'],
-                $childOutput['totalFixed']
+                $childOutput['totalFixableErrors'],
+                $childOutput['totalFixableWarnings'],
+                $childOutput['totalFixedErrors'],
+                $childOutput['totalFixedWarnings']
             );
             $this->printProgress($file, $totalBatches, $numProcessed);
         }//end while

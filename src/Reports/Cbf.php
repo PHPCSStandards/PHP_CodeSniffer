@@ -15,6 +15,7 @@ namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Exceptions\DeepExitException;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\ExitCode;
 use PHP_CodeSniffer\Util\Timing;
 use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
@@ -60,7 +61,7 @@ class Cbf implements Report
             // even if nothing was fixed. Exit here because we
             // can't process any more than 1 file in this setup.
             $fixedContent = $phpcsFile->fixer->getContents();
-            throw new DeepExitException($fixedContent, 1);
+            throw new DeepExitException($fixedContent, ExitCode::OKAY);
         }
 
         if ($errors === 0) {
