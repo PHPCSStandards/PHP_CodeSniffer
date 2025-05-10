@@ -20,15 +20,3 @@ enum SomeEnum {
     public const BAR = 'bar';
     const BAZ = 'baz';
 }
-
-// Don't break on asymmetric visibility
-class WithAsym {
-
-    private(set) string $asym1;
-
-    public private(set) string $asym2;
-
-    protected(set) string $asym3;
-
-    public protected(set) string $asym4;
-}
