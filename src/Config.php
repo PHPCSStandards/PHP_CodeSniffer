@@ -96,7 +96,7 @@ class Config
      *
      * @var string
      */
-    public const STABILITY = 'alpha';
+    public const STABILITY = 'beta';
 
     /**
      * Default report width when no report width is provided and 'auto' does not yield a valid width.
