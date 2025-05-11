@@ -109,9 +109,11 @@ jobs:
           ini-values: error_reporting=-1, display_errors=On
           coverage: none
 
-      # Note: the `.` is in the command to make it work for both PHPCS as well PHPCBF.
+      - name: Create a PHP file
+        run: echo '<?php echo "Hello, World!";' > hello.php
+
       - name: Verify the PHAR is nominally functional
-        run: php ${{ steps.source.outputs.FILE }} . -e --standard=PSR12
+        run: php ${{ steps.source.outputs.FILE }} -- -ps hello.php --standard=PSR2
 
       - name: Grab the version
         id: asset_version
@@ -186,9 +188,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_FORCE_TTY: true
 
-      # Note: the `.` is in the command to make it work for both PHPCS as well PHPCBF.
+      - name: Create a PHP file
+        run: echo '<?php echo "Hello, World!";' > hello.php
+
       - name: Verify the PHAR is nominally functional
-        run: php ./tools/${{ matrix.pharfile }} . -e --standard=PSR12
+        run: php ./tools/${{ matrix.pharfile }} -- -ps hello.php --standard=PSR2
 
       - name: Grab the version
         id: asset_version
