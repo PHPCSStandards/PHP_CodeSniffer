@@ -56,6 +56,11 @@ class UnusedFunctionParameterSniff implements Sniff
         '__debuginfo'   => true,
     ];
 
+    /**
+     * A list of prefixes for parameter names that indicate, they should be ignored.
+     */
+    private $ignorePrefixes = ['$_'];
+
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -127,7 +132,22 @@ class UnusedFunctionParameterSniff implements Sniff
             return;
         }
 
-        foreach ($methodParams as $param) {
+        $filteredMethodParams = array_filter(
+            $methodParams,
+            function ($parameter) {
+                $ignoreVariable = array_reduce(
+                    $this->ignorePrefixes,
+                    function ($previous, $ignorePrefix) use ($parameter) {
+                        return $previous || strpos($parameter['name'], $ignorePrefix) === 0;
+                    },
+                    false
+                );
+
+                return $ignoreVariable === false;
+            }
+        );
+
+        foreach ($filteredMethodParams as $param) {
             if (isset($param['property_visibility']) === true) {
                 // Ignore constructor property promotion.
                 continue;
