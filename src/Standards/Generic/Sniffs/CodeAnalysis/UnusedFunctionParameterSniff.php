@@ -58,6 +58,8 @@ class UnusedFunctionParameterSniff implements Sniff
 
     /**
      * A list of prefixes for parameter names that indicate, they should be ignored.
+     *
+     * @var string[]
      */
     private $ignorePrefixes = ['$_'];
 
