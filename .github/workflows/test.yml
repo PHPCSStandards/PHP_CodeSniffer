@@ -61,6 +61,11 @@ jobs:
           # Installing on Windows with PHP 5.4 runs into all sorts of problems (which are not ours).
           - php: '5.4'
             os: 'windows-latest'
+          # By default, the memory limit should be disabled with setup_php, but we're still running
+          # into memory limit issues when the full test suite is run on PHP 5.6 in Windows.
+          # As support for PHP < 7.2 will be dropped in PHPCS 4.0 anyhow, let's just skip the build.
+          - php: '5.6'
+            os: 'windows-latest'
 
         include:
           # Skip test runs on builds which are also run in the coverage job.
