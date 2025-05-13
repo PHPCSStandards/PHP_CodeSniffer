@@ -45,7 +45,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.job }}-${{ strategy.job-index }}-${{ github.ref }}
       cancel-in-progress: true
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     needs: build
 
     strategy:
