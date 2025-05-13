@@ -45,7 +45,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.job }}-${{ strategy.job-index }}-${{ github.ref }}
       cancel-in-progress: true
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     needs: build
 
     strategy:
@@ -59,7 +59,6 @@ jobs:
 
         include:
           # Skip test runs on builds which are also run in the coverage job.
-          # Note: the tests on PHP 8.1 will still be run as the coverage build uses custom_ini settings for that version.
           - php: '7.2'
             skip_tests: true
           - php: '8.4'
