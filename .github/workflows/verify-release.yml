@@ -21,6 +21,25 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  ###############################################################
+  # Trigger an update of the schema.phpcodesniffer.com website. #
+  ###############################################################
+  trigger-schema-site-update:
+    runs-on: ubuntu-latest
+
+    # Only run this workflow in the context of this repo.
+    if: github.repository_owner == 'PHPCSStandards'
+
+    name: "Trigger update of schema website"
+
+    steps:
+      - name: Trigger schema website update
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.WORKFLOW_DISPATCH_PAT }}
+          repository: PHPCSStandards/schema.phpcodesniffer.com
+          event-type: phpcs-release
+
   ##################################################################################
   # Verify the release is available in all the right places and works as expected. #
   ##################################################################################
@@ -129,9 +148,9 @@ jobs:
         if: ${{ steps.asset_version.outputs.VERSION != steps.version.outputs.TAG }}
         run: exit 1
 
-  # #########################################
-  # Verify install via PHIVE.
-  # #########################################
+  #############################
+  # Verify install via PHIVE. #
+  #############################
   verify-phive:
     runs-on: ubuntu-latest
 
