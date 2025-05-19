@@ -1073,6 +1073,13 @@ abstract class Tokenizer
                         continue;
                     }
 
+                    if ($tokenType === T_START_HEREDOC) {
+                        // Heredocs are special because they can be used as a value, including
+                        // inside a function call or as a default value for a parameter.
+                        // So if we find them nested inside another opener, just skip them.
+                        continue;
+                    }
+
                     if ($tokenType === T_FUNCTION
                         && $this->tokens[$stackPtr]['code'] !== T_FUNCTION
                     ) {
