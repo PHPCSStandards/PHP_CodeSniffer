@@ -243,6 +243,32 @@ final class HTMLTest extends TestCase
 
 
     /**
+     * Test anchor links in the generated docs are slugified and unique.
+     *
+     * @return void
+     */
+    public function testAnchorLinks()
+    {
+        // Set up the ruleset.
+        $standard = __DIR__.'/AnchorLinksTest.xml';
+        $config   = new ConfigDouble(["--standard=$standard"]);
+        $ruleset  = new Ruleset($config);
+
+        $pathToExpected = __DIR__.'/Expectations/ExpectedOutputDocumentationTitleToAnchorSlug.html';
+        $expected       = file_get_contents($pathToExpected);
+        $this->assertNotFalse($expected, 'Output expectation file could not be found');
+
+        // Make the test OS independent.
+        $expected = str_replace("\n", PHP_EOL, $expected);
+        $this->expectOutputString($expected);
+
+        $generator = new HTMLDouble($ruleset);
+        $generator->generate();
+
+    }//end testAnchorLinks()
+
+
+    /**
      * Test the generated footer.
      *
      * @return void
@@ -335,6 +361,66 @@ final class HTMLTest extends TestCase
         ini_set('date.timezone', $originalIni);
 
     }//end testFooterDoesntThrowWarningOnMissingTimezone()
+
+
+    /**
+     * Perfunctory test to verify that extenders which call deprecated methods will see a deprecation notice.
+     *
+     * Note: not all deprecated methods are tested as some need arguments.
+     *
+     * @param string $methodName Name of the deprecated method to test.
+     *
+     * @dataProvider dataCallingDeprecatedMethodThrowsDeprecationNotice
+     *
+     * @return void
+     */
+    public function testCallingDeprecatedMethodThrowsDeprecationNotice($methodName)
+    {
+        $exceptionClass = 'PHPUnit\Framework\Error\Deprecated';
+        if (class_exists($exceptionClass) === false) {
+            $exceptionClass = 'PHPUnit_Framework_Error_Deprecated';
+        }
+
+        $regex = '`^The PHP_CodeSniffer\\\\Generators\\\\HTML::%s\(\) method is deprecated\. Use "echo [^\s]+::%s\(\)" instead\.$`';
+        $regex = sprintf($regex, preg_quote($methodName, '`'), str_replace('print', 'getFormatted', $methodName));
+
+        if (method_exists($this, 'expectExceptionMessageMatches') === true) {
+            $this->expectException($exceptionClass);
+            $this->expectExceptionMessageMatches($regex);
+        } else if (method_exists($this, 'expectExceptionMessageRegExp') === true) {
+            // PHPUnit < 8.4.0.
+            $this->expectException($exceptionClass);
+            $this->expectExceptionMessageRegExp($regex);
+        } else {
+            // PHPUnit < 5.2.0.
+            $this->setExpectedExceptionRegExp($exceptionClass, $regex);
+        }
+
+        // Set up the ruleset.
+        $standard = __DIR__.'/OneDocTest.xml';
+        $config   = new ConfigDouble(["--standard=$standard"]);
+        $ruleset  = new Ruleset($config);
+
+        $generator = new HTMLDouble($ruleset);
+        $generator->$methodName();
+
+    }//end testCallingDeprecatedMethodThrowsDeprecationNotice()
+
+
+    /**
+     * Data provider.
+     *
+     * @return array<string, array<string, string>>
+     */
+    public static function dataCallingDeprecatedMethodThrowsDeprecationNotice()
+    {
+        return [
+            'printHeader()' => ['printHeader'],
+            'printToc()'    => ['printToc'],
+            'printFooter()' => ['printFooter'],
+        ];
+
+    }//end dataCallingDeprecatedMethodThrowsDeprecationNotice()
 
 
 }//end class

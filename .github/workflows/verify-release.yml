@@ -21,6 +21,25 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  ###############################################################
+  # Trigger an update of the schema.phpcodesniffer.com website. #
+  ###############################################################
+  trigger-schema-site-update:
+    runs-on: ubuntu-latest
+
+    # Only run this workflow in the context of this repo.
+    if: github.repository_owner == 'PHPCSStandards'
+
+    name: "Trigger update of schema website"
+
+    steps:
+      - name: Trigger schema website update
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.WORKFLOW_DISPATCH_PAT }}
+          repository: PHPCSStandards/schema.phpcodesniffer.com
+          event-type: phpcs-release
+
   ##################################################################################
   # Verify the release is available in all the right places and works as expected. #
   ##################################################################################
@@ -109,9 +128,11 @@ jobs:
           ini-values: error_reporting=-1, display_errors=On
           coverage: none
 
-      # Note: the `.` is in the command to make it work for both PHPCS as well PHPCBF.
+      - name: Create a PHP file
+        run: echo '<?php echo "Hello, World!";' > hello.php
+
       - name: Verify the PHAR is nominally functional
-        run: php ${{ steps.source.outputs.FILE }} . -e --standard=PSR12
+        run: php ${{ steps.source.outputs.FILE }} -- -ps hello.php --standard=PSR2
 
       - name: Grab the version
         id: asset_version
@@ -127,9 +148,9 @@ jobs:
         if: ${{ steps.asset_version.outputs.VERSION != steps.version.outputs.TAG }}
         run: exit 1
 
-  # #########################################
-  # Verify install via PHIVE.
-  # #########################################
+  #############################
+  # Verify install via PHIVE. #
+  #############################
   verify-phive:
     runs-on: ubuntu-latest
 
@@ -146,24 +167,28 @@ jobs:
     name: "PHIVE: ${{ matrix.pharfile }}"
 
     steps:
-      - name: Retrieve latest release info
-        uses: octokit/request-action@v2.x
-        id: get_latest_release
-        with:
-          route: GET /repos/PHPCSStandards/PHP_CodeSniffer/releases/latest
+      # Phive does not support a stability flag yet, so it will always download the
+      # very latest release, even when this is a pre-release.
+      # I.e. to verify the downloaded version, we need to select the version number including pre-releases.
+      # Ref: https://github.com/phar-io/phive/issues/154
+      - name: Retrieve latest release info (including prereleases)
+        id: latest_release
+        run: |
+          latestRelease="$(gh release list --repo PHPCSStandards/PHP_CodeSniffer --limit 1 --json tagName --jq '.[0].tagName')"
+          echo "TAG=$latestRelease" >> "$GITHUB_OUTPUT"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: "DEBUG: Show API request failure status"
-        if: ${{ failure() }}
-        run: "echo No release found. Request failed with status ${{ steps.get_latest_release.outputs.status }}"
-
-      - name: Grab latest tag name from API response
-        id: version
-        run: |
-          echo "TAG=${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}" >> "$GITHUB_OUTPUT"
-
       - name: "DEBUG: Show tag name found in API response"
+        run: "echo ${{ steps.latest_release.outputs.TAG }}"
+
+      # Just get the version number, without alpha/beta/RC.
+      - name: Clean up the version number
+        id: version
+        # yamllint disable-line rule:line-length
+        run: echo "TAG=$(echo '${{ steps.latest_release.outputs.TAG }}' | grep --only-matching --max-count=1 --extended-regexp '\b[0-9]+(\.[0-9]+)+')" >> "$GITHUB_OUTPUT"
+
+      - name: "DEBUG: Show cleaned up tag name"
         run: "echo ${{ steps.version.outputs.TAG }}"
 
       - name: Setup PHP
@@ -186,9 +211,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_FORCE_TTY: true
 
-      # Note: the `.` is in the command to make it work for both PHPCS as well PHPCBF.
+      - name: Create a PHP file
+        run: echo '<?php echo "Hello, World!";' > hello.php
+
       - name: Verify the PHAR is nominally functional
-        run: php ./tools/${{ matrix.pharfile }} . -e --standard=PSR12
+        run: php ./tools/${{ matrix.pharfile }} -- -ps hello.php --standard=PSR2
 
       - name: Grab the version
         id: asset_version

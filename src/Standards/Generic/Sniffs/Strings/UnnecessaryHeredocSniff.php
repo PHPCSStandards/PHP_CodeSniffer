@@ -15,6 +15,35 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class UnnecessaryHeredocSniff implements Sniff
 {
 
+    /**
+     * Escape chars which are supported in heredocs, but not in nowdocs.
+     *
+     * @var array<string>
+     */
+    private $escapeChars = [
+        // Octal sequences.
+        '\0',
+        '\1',
+        '\2',
+        '\3',
+        '\4',
+        '\5',
+        '\6',
+        '\7',
+
+        // Various whitespace and the escape char.
+        '\n',
+        '\r',
+        '\t',
+        '\v',
+        '\e',
+        '\f',
+
+        // Hex and unicode sequences.
+        '\x',
+        '\u',
+    ];
+
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -81,14 +110,33 @@ class UnnecessaryHeredocSniff implements Sniff
 
         $phpcsFile->recordMetric($stackPtr, 'Heredoc contains interpolation or expression', 'no');
 
+        // Check for escape sequences which aren't supported in nowdocs.
+        foreach ($this->escapeChars as $testChar) {
+            if (strpos($body, $testChar) !== false) {
+                return;
+            }
+        }
+
         $warning = 'Detected heredoc without interpolation or expressions. Use nowdoc syntax instead';
 
         $fix = $phpcsFile->addFixableWarning($warning, $stackPtr, 'Found');
         if ($fix === true) {
+            $phpcsFile->fixer->beginChangeset();
+
             $identifier  = trim(ltrim($tokens[$stackPtr]['content'], '<'));
             $replaceWith = "'".trim($identifier, '"')."'";
             $replacement = str_replace($identifier, $replaceWith, $tokens[$stackPtr]['content']);
             $phpcsFile->fixer->replaceToken($stackPtr, $replacement);
+
+            for ($i = ($stackPtr + 1); $i < $closer; $i++) {
+                $content = $tokens[$i]['content'];
+                $content = str_replace(['\\$', '\\\\'], ['$', '\\'], $content);
+                if ($tokens[$i]['content'] !== $content) {
+                    $phpcsFile->fixer->replaceToken($i, $content);
+                }
+            }
+
+            $phpcsFile->fixer->endChangeset();
         }
 
     }//end process()

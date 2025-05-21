@@ -61,7 +61,8 @@ final class ExpandRulesetReferenceTest extends AbstractRulesetTestCase
         $standard = __DIR__.'/'.$standard;
         $config   = new ConfigDouble(["--standard=$standard"]);
 
-        $exceptionMessage = 'Referenced sniff "%s" does not exist';
+        $exceptionMessage  = 'ERROR: Referenced sniff "%s" does not exist.'.PHP_EOL;
+        $exceptionMessage .= 'ERROR: No sniffs were registered.'.PHP_EOL.PHP_EOL;
         $this->expectRuntimeExceptionMessage(sprintf($exceptionMessage, $replacement));
 
         new Ruleset($config);

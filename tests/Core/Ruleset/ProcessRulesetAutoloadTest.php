@@ -150,7 +150,7 @@ final class ProcessRulesetAutoloadTest extends AbstractRulesetTestCase
      */
     public function testFileNotFoundException()
     {
-        $exceptionMsg = 'The specified autoload file "./tests/Core/Ruleset/Fixtures/ThisFileDoesNotExist.php" does not exist';
+        $exceptionMsg = 'ERROR: The specified autoload file "./tests/Core/Ruleset/Fixtures/ThisFileDoesNotExist.php" does not exist';
         $this->expectRuntimeExceptionMessage($exceptionMsg);
 
         // Set up the ruleset.

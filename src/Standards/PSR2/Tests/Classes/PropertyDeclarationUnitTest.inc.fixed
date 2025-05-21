@@ -82,3 +82,28 @@ class ReadOnlyProp {
 
     protected readonly ?string $wrongOrder2;
 }
+
+class FinalProperties {
+    final public int $foo,
+        $bar,
+        $var = null;
+
+    final protected (D|N)|false $foo;
+    final array $foo;
+    FINAL public ?int $wrongOrder1;
+    final protected static ?string $wrongOrder2;
+}
+
+class AsymmetricVisibility {
+    private(set) int $foo,
+        $bar,
+        $var = 5;
+
+    public private(set) readonly ?string $spaces;
+
+    protected(set) array $unfixed;
+
+    protected(set) public int $wrongOrder1;
+
+    private(set) protected ?string $wrongOrder2;
+}

@@ -35,4 +35,34 @@ class MarkdownDouble extends Markdown
     {
         return parent::getFormattedFooter();
     }
+
+    /**
+     * [VISIBILITY WIDENING ONLY] Print the header of the HTML page.
+     *
+     * @return void
+     */
+    public function printHeader()
+    {
+        parent::printHeader();
+    }
+
+    /**
+     * [VISIBILITY WIDENING ONLY] Print the table of contents for the standard.
+     *
+     * @return void
+     */
+    public function printToc()
+    {
+        parent::printToc();
+    }
+
+    /**
+     * [VISIBILITY WIDENING ONLY] Print the footer of the HTML page.
+     *
+     * @return void
+     */
+    public function printFooter()
+    {
+        parent::printFooter();
+    }
 }

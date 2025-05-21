@@ -14,6 +14,7 @@ namespace PHP_CodeSniffer;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Sniffs\DeprecatedSniff;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\MessageCollector;
 use PHP_CodeSniffer\Util\Standards;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -131,6 +132,20 @@ class Ruleset
      */
     private $deprecatedSniffs = [];
 
+    /**
+     * Message collector object.
+     *
+     * User-facing messages should be collected via this object for display once the ruleset processing has finished.
+     *
+     * The following type of errors should *NOT* be collected, but should still throw their own `RuntimeException`:
+     * - Errors which could cause other (uncollectable) errors further into the ruleset processing, like a missing autoload file.
+     * - Errors which are directly aimed at and only intended for sniff developers or integrators
+     *   (in contrast to ruleset maintainers or end-users).
+     *
+     * @var \PHP_CodeSniffer\Util\MessageCollector
+     */
+    private $msgCache;
+
 
     /**
      * Initialise the ruleset that the run will use.
@@ -138,14 +153,15 @@ class Ruleset
      * @param \PHP_CodeSniffer\Config $config The config data for the run.
      *
      * @return void
-     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If no sniffs were registered.
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If blocking errors were encountered when processing the ruleset.
      */
     public function __construct(Config $config)
     {
-        $this->config = $config;
-        $restrictions = $config->sniffs;
-        $exclusions   = $config->exclude;
-        $sniffs       = [];
+        $this->config   = $config;
+        $restrictions   = $config->sniffs;
+        $exclusions     = $config->exclude;
+        $sniffs         = [];
+        $this->msgCache = new MessageCollector();
 
         $standardPaths = [];
         foreach ($config->standards as $standard) {
@@ -186,11 +202,11 @@ class Ruleset
 
             if (defined('PHP_CODESNIFFER_IN_TESTS') === true && empty($restrictions) === false) {
                 // In unit tests, only register the sniffs that the test wants and not the entire standard.
-                try {
-                    foreach ($restrictions as $restriction) {
-                        $sniffs = array_merge($sniffs, $this->expandRulesetReference($restriction, dirname($standard)));
-                    }
-                } catch (RuntimeException $e) {
+                foreach ($restrictions as $restriction) {
+                    $sniffs = array_merge($sniffs, $this->expandRulesetReference($restriction, dirname($standard)));
+                }
+
+                if (empty($sniffs) === true) {
                     // Sniff reference could not be expanded, which probably means this
                     // is an installed standard. Let the unit test system take care of
                     // setting the correct sniff for testing.
@@ -239,8 +255,10 @@ class Ruleset
         }
 
         if ($numSniffs === 0) {
-            throw new RuntimeException('No sniffs were registered');
+            $this->msgCache->add('No sniffs were registered.', MessageCollector::ERROR);
         }
+
+        $this->displayCachedMessages();
 
     }//end __construct()
 
@@ -366,7 +384,7 @@ class Ruleset
 
         $messages        = [];
         $messageTemplate = 'This sniff has been deprecated since %s and will be removed in %s. %s';
-        $errorTemplate   = 'The %s::%s() method must return a %sstring, received %s';
+        $errorTemplate   = 'ERROR: The %s::%s() method must return a %sstring, received %s';
 
         foreach ($this->deprecatedSniffs as $sniffCode => $className) {
             if (isset($this->sniffs[$className]) === false) {
@@ -462,6 +480,35 @@ class Ruleset
 
 
     /**
+     * Print any notices encountered while processing the ruleset(s).
+     *
+     * Note: these messages aren't shown at the time they are encountered to avoid "one error hiding behind another".
+     * This way the (end-)user gets to see all of them in one go.
+     *
+     * @return void
+     *
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If blocking errors were encountered.
+     */
+    private function displayCachedMessages()
+    {
+        // Don't show deprecations/notices/warnings in quiet mode, in explain mode
+        // or when the documentation is being shown.
+        // Documentation and explain will call the Ruleset multiple times which
+        // would lead to duplicate display of the messages.
+        if ($this->msgCache->containsBlockingErrors() === false
+            && ($this->config->quiet === true
+            || $this->config->explain === true
+            || $this->config->generator !== null)
+        ) {
+            return;
+        }
+
+        $this->msgCache->display();
+
+    }//end displayCachedMessages()
+
+
+    /**
      * Processes a single ruleset and returns a list of the sniffs it represents.
      *
      * Rules founds within the ruleset are processed immediately, but sniff classes
@@ -486,7 +533,7 @@ class Ruleset
         libxml_use_internal_errors(true);
         $ruleset = simplexml_load_string(file_get_contents($rulesetPath));
         if ($ruleset === false) {
-            $errorMsg = "Ruleset $rulesetPath is not valid".PHP_EOL;
+            $errorMsg = "ERROR: Ruleset $rulesetPath is not valid".PHP_EOL;
             $errors   = libxml_get_errors();
             foreach ($errors as $error) {
                 $errorMsg .= '- On line '.$error->line.', column '.$error->column.': '.$error->message;
@@ -525,12 +572,12 @@ class Ruleset
             $autoloadPath = (string) $autoload;
 
             // Try relative autoload paths first.
-            $relativePath = Common::realPath(dirname($rulesetPath).DIRECTORY_SEPARATOR.$autoloadPath);
+            $relativePath = Common::realpath(dirname($rulesetPath).DIRECTORY_SEPARATOR.$autoloadPath);
 
             if ($relativePath !== false && is_file($relativePath) === true) {
                 $autoloadPath = $relativePath;
             } else if (is_file($autoloadPath) === false) {
-                throw new RuntimeException('The specified autoload file "'.$autoload.'" does not exist');
+                throw new RuntimeException('ERROR: The specified autoload file "'.$autoload.'" does not exist');
             }
 
             include_once $autoloadPath;
@@ -845,6 +892,13 @@ class Ruleset
      */
     private function expandRulesetReference($ref, $rulesetDir, $depth=0)
     {
+        // Naming an (external) standard "Internal" is deprecated.
+        if (strtolower($ref) === 'internal') {
+            $message  = 'The name "Internal" is reserved for internal use. A PHP_CodeSniffer standard should not be called "Internal".'.PHP_EOL;
+            $message .= 'Contact the maintainer of the standard to fix this.';
+            $this->msgCache->add($message, MessageCollector::DEPRECATED);
+        }
+
         // Ignore internal sniffs codes as they are used to only
         // hide and change internal messages.
         if (substr($ref, 0, 9) === 'Internal.') {
@@ -993,8 +1047,8 @@ class Ruleset
             }
         } else {
             if (is_file($ref) === false) {
-                $error = "Referenced sniff \"$ref\" does not exist";
-                throw new RuntimeException($error);
+                $this->msgCache->add("Referenced sniff \"$ref\" does not exist.", MessageCollector::ERROR);
+                return [];
             }
 
             if (substr($ref, -9) === 'Sniff.php') {
@@ -1083,18 +1137,19 @@ class Ruleset
 
                 $type = strtolower((string) $rule->type);
                 if ($type !== 'error' && $type !== 'warning') {
-                    throw new RuntimeException("Message type \"$type\" is invalid; must be \"error\" or \"warning\"");
-                }
+                    $message = "Message type \"$type\" for \"$code\" is invalid; must be \"error\" or \"warning\".";
+                    $this->msgCache->add($message, MessageCollector::ERROR);
+                } else {
+                    $this->ruleset[$code]['type'] = $type;
+                    if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                        echo str_repeat("\t", $depth);
+                        echo "\t\t=> message type set to ".(string) $rule->type;
+                        if ($code !== $ref) {
+                            echo " for $code";
+                        }
 
-                $this->ruleset[$code]['type'] = $type;
-                if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    echo str_repeat("\t", $depth);
-                    echo "\t\t=> message type set to ".(string) $rule->type;
-                    if ($code !== $ref) {
-                        echo " for $code";
+                        echo PHP_EOL;
                     }
-
-                    echo PHP_EOL;
                 }
             }//end if
 
@@ -1171,15 +1226,24 @@ class Ruleset
                             }
 
                             $printValue = rtrim($printValue, ',');
-                        } else {
+                        } else if (isset($prop['value']) === true) {
+                            $message  = 'Passing an array of values to a property using a comma-separated string'.PHP_EOL;
+                            $message .= 'was deprecated in PHP_CodeSniffer 3.3.0. Support will be removed in PHPCS 4.0.0.'.PHP_EOL;
+                            $message .= "The deprecated syntax was used for property \"$name\"".PHP_EOL;
+                            $message .= "for sniff \"$code\".".PHP_EOL;
+                            $message .= 'Pass array values via <element [key="..." ]value="..."> nodes instead.';
+                            $this->msgCache->add($message, MessageCollector::DEPRECATED);
+
                             $value      = (string) $prop['value'];
                             $printValue = $value;
-                            foreach (explode(',', $value) as $val) {
-                                list($k, $v) = explode('=>', $val.'=>');
-                                if ($v !== '') {
-                                    $values[trim($k)] = trim($v);
-                                } else {
-                                    $values[] = trim($k);
+                            if ($value !== '') {
+                                foreach (explode(',', $value) as $val) {
+                                    list($k, $v) = explode('=>', $val.'=>');
+                                    if ($v !== '') {
+                                        $values[trim($k)] = trim($v);
+                                    } else {
+                                        $values[] = trim($k);
+                                    }
                                 }
                             }
                         }//end if
@@ -1359,6 +1423,29 @@ class Ruleset
                 continue;
             }
 
+            if ($reflection->implementsInterface('PHP_CodeSniffer\\Sniffs\\Sniff') === false) {
+                $message  = 'All sniffs must implement the PHP_CodeSniffer\\Sniffs\\Sniff interface.'.PHP_EOL;
+                $message .= "Interface not implemented for sniff $className.".PHP_EOL;
+                $message .= 'Contact the sniff author to fix the sniff.';
+                $this->msgCache->add($message, MessageCollector::DEPRECATED);
+
+                // Skip classes which don't implement the register() or process() methods.
+                if (method_exists($className, 'register') === false
+                    || method_exists($className, 'process') === false
+                ) {
+                    $errorMsg = 'Sniff class %s is missing required method %s().';
+                    if (method_exists($className, 'register') === false) {
+                        $this->msgCache->add(sprintf($errorMsg, $className, 'register'), MessageCollector::ERROR);
+                    }
+
+                    if (method_exists($className, 'process') === false) {
+                        $this->msgCache->add(sprintf($errorMsg, $className, 'process'), MessageCollector::ERROR);
+                    }
+
+                    continue;
+                }
+            }//end if
+
             $listeners[$className] = $className;
 
             if (PHP_CODESNIFFER_VERBOSITY > 2) {
@@ -1387,9 +1474,24 @@ class Ruleset
             $this->sniffs[$sniffClass] = new $sniffClass();
 
             $sniffCode = Common::getSniffCode($sniffClass);
+
+            if (substr($sniffCode, 0, 1) === '.'
+                || substr($sniffCode, -1) === '.'
+                || strpos($sniffCode, '..') !== false
+                || preg_match('`(^|\.)Sniffs\.`', $sniffCode) === 1
+                || preg_match('`[^\s\.-]+\\\\Sniffs\\\\[^\s\.-]+\\\\[^\s\.-]+Sniff`', $sniffClass) !== 1
+            ) {
+                $message  = "The sniff $sniffClass does not comply with the PHP_CodeSniffer naming conventions.";
+                $message .= ' This will no longer be supported in PHPCS 4.0.'.PHP_EOL;
+                $message .= 'Contact the sniff author to fix the sniff.';
+                $this->msgCache->add($message, MessageCollector::DEPRECATED);
+            }
+
             $this->sniffCodes[$sniffCode] = $sniffClass;
 
+            $isDeprecated = false;
             if ($this->sniffs[$sniffClass] instanceof DeprecatedSniff) {
+                $isDeprecated = true;
                 $this->deprecatedSniffs[$sniffCode] = $sniffClass;
             }
 
@@ -1402,6 +1504,24 @@ class Ruleset
 
             $tokenizers = [];
             $vars       = get_class_vars($sniffClass);
+            if (empty($vars['supportedTokenizers']) === false
+                && $isDeprecated === false
+                && in_array('PHP', $vars['supportedTokenizers'], true) === false
+            ) {
+                if (in_array('CSS', $vars['supportedTokenizers'], true) === true
+                    || in_array('JS', $vars['supportedTokenizers'], true) === true
+                ) {
+                    $message = 'Scanning CSS/JS files is deprecated and support will be removed in PHP_CodeSniffer 4.0.'.PHP_EOL;
+                } else {
+                    // Just in case someone has an integration with a custom tokenizer.
+                    $message = 'Support for custom tokenizers will be removed in PHP_CodeSniffer 4.0.'.PHP_EOL;
+                }
+
+                $message .= 'The %s sniff is listening for %s.';
+                $message  = sprintf($message, $sniffCode, implode(', ', $vars['supportedTokenizers']));
+                $this->msgCache->add($message, MessageCollector::DEPRECATED);
+            }
+
             if (isset($vars['supportedTokenizers']) === true) {
                 foreach ($vars['supportedTokenizers'] as $tokenizer) {
                     $tokenizers[$tokenizer] = $tokenizer;
@@ -1412,8 +1532,12 @@ class Ruleset
 
             $tokens = $this->sniffs[$sniffClass]->register();
             if (is_array($tokens) === false) {
-                $msg = "Sniff $sniffClass register() method must return an array";
-                throw new RuntimeException($msg);
+                $msg = "The sniff {$sniffClass}::register() method must return an array.";
+                $this->msgCache->add($msg, MessageCollector::ERROR);
+
+                // Unregister the sniff.
+                unset($this->sniffs[$sniffClass], $this->sniffCodes[$sniffCode], $this->deprecatedSniffs[$sniffCode]);
+                continue;
             }
 
             $ignorePatterns = [];
@@ -1523,9 +1647,9 @@ class Ruleset
 
         if ($isSettable === false) {
             if ($settings['scope'] === 'sniff') {
-                $notice  = "Ruleset invalid. Property \"$propertyName\" does not exist on sniff ";
-                $notice .= array_search($sniffClass, $this->sniffCodes, true);
-                throw new RuntimeException($notice);
+                $notice  = "Property \"$propertyName\" does not exist on sniff ";
+                $notice .= array_search($sniffClass, $this->sniffCodes, true).'.';
+                $this->msgCache->add($notice, MessageCollector::ERROR);
             }
 
             return;

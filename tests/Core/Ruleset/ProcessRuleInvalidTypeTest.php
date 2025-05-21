@@ -23,7 +23,7 @@ final class ProcessRuleInvalidTypeTest extends AbstractRulesetTestCase
 
 
     /**
-     * Test displaying an informative error message when an invalid type is given.
+     * Test displaying an error when an invalid type is given.
      *
      * @return void
      */
@@ -32,7 +32,7 @@ final class ProcessRuleInvalidTypeTest extends AbstractRulesetTestCase
         $standard = __DIR__.'/ProcessRuleInvalidTypeTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
-        $message = 'Message type "notice" is invalid; must be "error" or "warning"';
+        $message = 'ERROR: Message type "notice" for "Generic.Files.ByteOrderMark" is invalid; must be "error" or "warning".'.PHP_EOL.PHP_EOL;
         $this->expectRuntimeExceptionMessage($message);
 
         new Ruleset($config);

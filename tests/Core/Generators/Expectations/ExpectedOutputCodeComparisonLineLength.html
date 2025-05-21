@@ -26,6 +26,19 @@
             margin-top: 50px;
         }
 
+        h2 a.sniffanchor,
+        h2 a.sniffanchor {
+            color: #006C95;
+            opacity: 0;
+            padding: 0 3px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        h2:hover a.sniffanchor,
+        h2:focus a.sniffanchor {
+            opacity: 1;
+        }
+
         .code-comparison {
             width: 100%;
         }
@@ -43,6 +56,11 @@
             width: 50%;
             background-color: #F1F1F1;
             line-height: 15px;
+        }
+
+        .code-comparison-title {
+            text-align: left;
+            font-weight: 600;
         }
 
         .code-comparison-code {
@@ -70,14 +88,13 @@
  </head>
  <body>
   <h1>GeneratorTest Coding Standards</h1>
-  <a name="Code-Comparison,-line-length" />
-  <h2>Code Comparison, line length</h2>
+  <h2 id="code-comparison--line-length">Code Comparison, line length<a class="sniffanchor" href="#code-comparison--line-length"> &sect; </a></h2>
   <p class="text">Ensure there is no PHP &quot;Warning: str_repeat(): Second argument has to be greater than or equal to 0&quot;.<br/>
 Ref: squizlabs/PHP_CodeSniffer#2522</p>
   <table class="code-comparison">
    <tr>
-    <td class="code-comparison-title">Valid: contains line which is too long.</td>
-    <td class="code-comparison-title">Invalid: contains line which is too long.</td>
+    <th class="code-comparison-title">Valid: contains line which is too long.</th>
+    <th class="code-comparison-title">Invalid: contains line which is too long.</th>
    </tr>
    <tr>
     <td class="code-comparison-code">class&nbsp;Foo&nbsp;extends&nbsp;Bar&nbsp;implements&nbsp;<span class="code-comparison-highlight">Countable</span>,&nbsp;Serializable</br>{</br>}</td>

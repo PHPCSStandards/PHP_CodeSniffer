@@ -23,6 +23,8 @@ use PHP_CodeSniffer\Tests\Core\Ruleset\AbstractRulesetTestCase;
  * @runTestsInSeparateProcesses
  * @preserveGlobalState         disabled
  *
+ * @group Windows
+ *
  * @covers \PHP_CodeSniffer\Ruleset::processRuleset
  */
 final class ProcessRulesetBrokenRulesetTest extends AbstractRulesetTestCase
@@ -39,7 +41,7 @@ final class ProcessRulesetBrokenRulesetTest extends AbstractRulesetTestCase
         $standard = __DIR__.'/ProcessRulesetBrokenRulesetEmptyFileTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
-        $regex  = '`^Ruleset \S+ProcessRulesetBrokenRulesetEmptyFileTest\.xml is not valid\R';
+        $regex  = '`^ERROR: Ruleset \S+ProcessRulesetBrokenRulesetEmptyFileTest\.xml is not valid\R';
         $regex .= '(- On line 1, column 1: Document is empty\R)?$`';
 
         $this->expectRuntimeExceptionRegex($regex);
@@ -59,8 +61,8 @@ final class ProcessRulesetBrokenRulesetTest extends AbstractRulesetTestCase
         $standard = __DIR__.'/ProcessRulesetBrokenRulesetSingleErrorTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
-        $regex  = '`^Ruleset \S+ProcessRulesetBrokenRulesetSingleErrorTest\.xml is not valid\R';
-        $regex .= '- On line 3, column 1: Premature end of data in tag ruleset line 2\R$`';
+        $regex  = '`^ERROR: Ruleset \S+ProcessRulesetBrokenRulesetSingleErrorTest\.xml is not valid\R';
+        $regex .= '- On line 3, column 1: (Premature end of data in tag ruleset line 2|EndTag: \'</\' not found)\R$`';
 
         $this->expectRuntimeExceptionRegex($regex);
 
@@ -79,10 +81,10 @@ final class ProcessRulesetBrokenRulesetTest extends AbstractRulesetTestCase
         $standard = __DIR__.'/ProcessRulesetBrokenRulesetMultiErrorTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
-        $regex  = '`^Ruleset \S+ProcessRulesetBrokenRulesetMultiErrorTest\.xml is not valid\R';
+        $regex  = '`^ERROR: Ruleset \S+ProcessRulesetBrokenRulesetMultiErrorTest\.xml is not valid\R';
         $regex .= '- On line 8, column 12: Opening and ending tag mismatch: property line 7 and rule\R';
-        $regex .= '- On line 10, column 11: Opening and ending tag mismatch: properties line 5 and ruleset\R';
-        $regex .= '(- On line 11, column 1: Premature end of data in tag rule line 4\R)?$`';
+        $regex .= '- On line 10, column 11: Opening and ending tag mismatch: properties line [57] and ruleset\R';
+        $regex .= '(- On line 11, column 1: (Premature end of data in tag rule(set)? line [24]|EndTag: \'</\' not found)\R)*$`';
 
         $this->expectRuntimeExceptionRegex($regex);
 

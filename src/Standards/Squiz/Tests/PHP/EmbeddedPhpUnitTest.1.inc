@@ -269,6 +269,27 @@ echo 'the PHP tag is correctly indented as an indent less than the previous code
 
 <?PHP  echo 'Extra space after uppercase long open tag '; ?>
 
+<?php echo 'Open tag after code'; ?>            <?php
+echo $j;
+?>
+
+    <?php echo 'Open tag after code - indented'; ?>            <?php
+    echo $j;
+    /* comment
+    */ /*comment*/ ?>            <?php
+    /**
+     * Docblock.
+     */   ?>            <?php
+    echo $j;
+    ?>
+
+<?php
+enum BlankLineBeforeCloseShouldBeIgnoredWhenLastBeforeIsCloseCurlyForScope
+{
+}//trailing comment
+
+?>
+
 <?php
 // This test case file MUST always end with an unclosed long open PHP tag (with this comment) to prevent
 // the tests running into the "last PHP closing tag excepted" condition breaking tests.

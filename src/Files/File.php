@@ -346,7 +346,6 @@ class File
         $listenerIgnoreTo = [];
         $inTests          = defined('PHP_CODESNIFFER_IN_TESTS');
         $checkAnnotations = $this->config->annotations;
-        $annotationErrors = [];
 
         // Foreach of the listeners that have registered to listen for this
         // token, get them to process it.
@@ -415,15 +414,7 @@ class File
                                 'scope' => 'sniff',
                             ];
                             $listenerClass = $this->ruleset->sniffCodes[$listenerCode];
-                            try {
-                                $this->ruleset->setSniffProperty($listenerClass, $propertyCode, $settings);
-                            } catch (RuntimeException $e) {
-                                // Non-existant property being set via an inline annotation.
-                                // This is typically a PHPCS test case file, but we can't throw an error on the annotation
-                                // line as it would get ignored. We also don't want this error to block
-                                // the scan of the current file, so collect these and throw later.
-                                $annotationErrors[] = 'Line '.$token['line'].': '.str_replace('Ruleset invalid. ', '', $e->getMessage());
-                            }
+                            $this->ruleset->setSniffProperty($listenerClass, $propertyCode, $settings);
                         }
                     }
                 }//end if
@@ -553,13 +544,6 @@ class File
             }
         }
 
-        if ($annotationErrors !== []) {
-            $error  = 'Encountered invalid inline phpcs:set annotations. Found:'.PHP_EOL;
-            $error .= implode(PHP_EOL, $annotationErrors);
-
-            $this->addWarning($error, null, 'Internal.PropertyDoesNotExist');
-        }
-
         if (PHP_CODESNIFFER_VERBOSITY > 2) {
             echo "\t*** END TOKEN PROCESSING ***".PHP_EOL;
             echo "\t*** START SNIFF PROCESSING REPORT ***".PHP_EOL;
@@ -672,13 +656,13 @@ class File
     /**
      * Records an error against a specific token in the file.
      *
-     * @param string  $error    The error message.
-     * @param int     $stackPtr The stack position where the error occurred.
-     * @param string  $code     A violation code unique to the sniff message.
-     * @param array   $data     Replacements for the error message.
-     * @param int     $severity The severity level for this error. A value of 0
-     *                          will be converted into the default severity level.
-     * @param boolean $fixable  Can the error be fixed by the sniff?
+     * @param string   $error    The error message.
+     * @param int|null $stackPtr The stack position where the error occurred.
+     * @param string   $code     A violation code unique to the sniff message.
+     * @param array    $data     Replacements for the error message.
+     * @param int      $severity The severity level for this error. A value of 0
+     *                           will be converted into the default severity level.
+     * @param boolean  $fixable  Can the error be fixed by the sniff?
      *
      * @return boolean
      */
@@ -706,13 +690,13 @@ class File
     /**
      * Records a warning against a specific token in the file.
      *
-     * @param string  $warning  The error message.
-     * @param int     $stackPtr The stack position where the error occurred.
-     * @param string  $code     A violation code unique to the sniff message.
-     * @param array   $data     Replacements for the warning message.
-     * @param int     $severity The severity level for this warning. A value of 0
-     *                          will be converted into the default severity level.
-     * @param boolean $fixable  Can the warning be fixed by the sniff?
+     * @param string   $warning  The error message.
+     * @param int|null $stackPtr The stack position where the error occurred.
+     * @param string   $code     A violation code unique to the sniff message.
+     * @param array    $data     Replacements for the warning message.
+     * @param int      $severity The severity level for this warning. A value of 0
+     *                           will be converted into the default severity level.
+     * @param boolean  $fixable  Can the warning be fixed by the sniff?
      *
      * @return boolean
      */
@@ -1845,6 +1829,7 @@ class File
      *    'scope_specified' => boolean,       // TRUE if the scope was explicitly specified.
      *    'is_static'       => boolean,       // TRUE if the static keyword was found.
      *    'is_readonly'     => boolean,       // TRUE if the readonly keyword was found.
+     *    'is_final'        => boolean,       // TRUE if the final keyword was found.
      *    'type'            => string,        // The type of the var (empty if no type specified).
      *    'type_token'      => integer|false, // The stack pointer to the start of the type
      *                                        // or FALSE if there is no type.
@@ -1917,6 +1902,7 @@ class File
             T_STATIC    => T_STATIC,
             T_VAR       => T_VAR,
             T_READONLY  => T_READONLY,
+            T_FINAL     => T_FINAL,
         ];
 
         $valid += Tokens::$emptyTokens;
@@ -1925,6 +1911,7 @@ class File
         $scopeSpecified = false;
         $isStatic       = false;
         $isReadonly     = false;
+        $isFinal        = false;
 
         $startOfStatement = $this->findPrevious(
             [
@@ -1960,7 +1947,10 @@ class File
             case T_READONLY:
                 $isReadonly = true;
                 break;
-            }
+            case T_FINAL:
+                $isFinal = true;
+                break;
+            }//end switch
         }//end for
 
         $type         = '';
@@ -2016,6 +2006,7 @@ class File
             'scope_specified' => $scopeSpecified,
             'is_static'       => $isStatic,
             'is_readonly'     => $isReadonly,
+            'is_final'        => $isFinal,
             'type'            => $type,
             'type_token'      => $typeToken,
             'type_end_token'  => $typeEndToken,
@@ -2567,6 +2558,7 @@ class File
                 && $this->tokens[$i]['code'] !== T_CONTINUE
                 && $this->tokens[$i]['code'] !== T_THROW
                 && $this->tokens[$i]['code'] !== T_EXIT
+                && $this->tokens[$i]['code'] !== T_GOTO
             ) {
                 // Found the end of the previous scope block.
                 return $lastNotEmpty;

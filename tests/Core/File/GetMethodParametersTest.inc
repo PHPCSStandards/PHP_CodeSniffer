@@ -312,6 +312,9 @@ function() use() {};
 /* testClosureUse */
 function() use( $foo, $bar ) {};
 
+/* testClosureUseWithReference */
+$cl = function() use (&$foo, &$bar) {};
+
 /* testFunctionParamListWithTrailingComma */
 function trailingComma(
     ?string $foo  /*comment*/ ,

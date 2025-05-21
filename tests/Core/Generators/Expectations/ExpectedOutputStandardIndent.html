@@ -26,6 +26,19 @@
             margin-top: 50px;
         }
 
+        h2 a.sniffanchor,
+        h2 a.sniffanchor {
+            color: #006C95;
+            opacity: 0;
+            padding: 0 3px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        h2:hover a.sniffanchor,
+        h2:focus a.sniffanchor {
+            opacity: 1;
+        }
+
         .code-comparison {
             width: 100%;
         }
@@ -43,6 +56,11 @@
             width: 50%;
             background-color: #F1F1F1;
             line-height: 15px;
+        }
+
+        .code-comparison-title {
+            text-align: left;
+            font-weight: 600;
         }
 
         .code-comparison-code {
@@ -70,8 +88,7 @@
  </head>
  <body>
   <h1>GeneratorTest Coding Standards</h1>
-  <a name="Standard-Element,-indentation-should-be-ignored" />
-  <h2>Standard Element, indentation should be ignored</h2>
+  <h2 id="standard-element--indentation-should-be-ignored">Standard Element, indentation should be ignored<a class="sniffanchor" href="#standard-element--indentation-should-be-ignored"> &sect; </a></h2>
   <p class="text">This line has no indentation.<br/>
 This line has 4 spaces indentation.<br/>
 This line has 8 spaces indentation.<br/>

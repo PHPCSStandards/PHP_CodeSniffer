@@ -376,6 +376,14 @@ To run the tests specific to the use of `PHP_CODESNIFFER_CBF === true`:
     vendor/bin/phpunit --group CBF --exclude-group nothing
     ```
 
+#### Other notes about writing tests
+
+* The `Config` class uses a number of static properties and can have a performance impact on the tests too.
+    To get round both these issues, use the `ConfigDouble` class instead.
+    Generally speaking, only tests which test the behaviour of the `Config` class itself where it relates to the static properties, should use the real `Config` class for testing.
+    In such cases, the `PHP_CodeSniffer\Tests\Core\Config\AbstractRealConfigTestCase` should be used as the base test class.
+* Tests for the `Runner` class often can't create their own `Config` object in the tests, so run into the same issue.
+    Those tests should use the `PHP_CodeSniffer\Tests\Core\Runner\AbstractRunnerTestCase` base class, which will ensure the Config is clean.
 
 ### Submitting Your Pull Request
 

@@ -26,6 +26,19 @@
             margin-top: 50px;
         }
 
+        h2 a.sniffanchor,
+        h2 a.sniffanchor {
+            color: #006C95;
+            opacity: 0;
+            padding: 0 3px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        h2:hover a.sniffanchor,
+        h2:focus a.sniffanchor {
+            opacity: 1;
+        }
+
         .code-comparison {
             width: 100%;
         }
@@ -43,6 +56,11 @@
             width: 50%;
             background-color: #F1F1F1;
             line-height: 15px;
+        }
+
+        .code-comparison-title {
+            text-align: left;
+            font-weight: 600;
         }
 
         .code-comparison-code {
@@ -70,13 +88,12 @@
  </head>
  <body>
   <h1>GeneratorTest Coding Standards</h1>
-  <a name="Code-Title,-line-wrapping" />
-  <h2>Code Title, line wrapping</h2>
+  <h2 id="code-title--line-wrapping">Code Title, line wrapping<a class="sniffanchor" href="#code-title--line-wrapping"> &sect; </a></h2>
   <p class="text">This is a standard block.</p>
   <table class="code-comparison">
    <tr>
-    <td class="code-comparison-title">Valid: exactly 45 character long description.</td>
-    <td class="code-comparison-title">Invalid: exactly 45 char long description---.</td>
+    <th class="code-comparison-title">Valid: exactly 45 character long description.</th>
+    <th class="code-comparison-title">Invalid: exactly 45 char long description---.</th>
    </tr>
    <tr>
     <td class="code-comparison-code">//&nbsp;Dummy.</td>
@@ -85,8 +102,8 @@
   </table>
   <table class="code-comparison">
    <tr>
-    <td class="code-comparison-title">Valid: exactly 46 character long description-.</td>
-    <td class="code-comparison-title">Invalid: exactly 46 character long description</td>
+    <th class="code-comparison-title">Valid: exactly 46 character long description-.</th>
+    <th class="code-comparison-title">Invalid: exactly 46 character long description</th>
    </tr>
    <tr>
     <td class="code-comparison-code">//&nbsp;Dummy.</td>
@@ -95,8 +112,8 @@
   </table>
   <table class="code-comparison">
    <tr>
-    <td class="code-comparison-title">Valid: exactly 47 character long description--.</td>
-    <td class="code-comparison-title">Invalid: exactly 47 character long description.</td>
+    <th class="code-comparison-title">Valid: exactly 47 character long description--.</th>
+    <th class="code-comparison-title">Invalid: exactly 47 character long description.</th>
    </tr>
    <tr>
     <td class="code-comparison-code">//&nbsp;Dummy.</td>
@@ -105,8 +122,8 @@
   </table>
   <table class="code-comparison">
    <tr>
-    <td class="code-comparison-title">Valid: this description is longer than 46 characters and will wrap.</td>
-    <td class="code-comparison-title">Invalid: this description is longer than 46 characters and will wrap.</td>
+    <th class="code-comparison-title">Valid: this description is longer than 46 characters and will wrap.</th>
+    <th class="code-comparison-title">Invalid: this description is longer than 46 characters and will wrap.</th>
    </tr>
    <tr>
     <td class="code-comparison-code">//&nbsp;Dummy.</td>

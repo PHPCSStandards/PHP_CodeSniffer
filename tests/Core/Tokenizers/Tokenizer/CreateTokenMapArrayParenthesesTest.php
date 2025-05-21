@@ -143,7 +143,7 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testFunctionDeclarationParamDNFType */',
             ],
             'closure param DNF type'     => [
-                'testMarker'  => '/* testClosureDeclarationParamDNFType */',
+                'testMarker' => '/* testClosureDeclarationParamDNFType */',
             ],
             'arrow return DNF type'      => [
                 'testMarker'  => '/* testArrowDeclarationReturnDNFType */',

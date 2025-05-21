@@ -84,15 +84,15 @@ $input->getFilterChain()->attachByName('Null', ['type' => Null::TYPE_STRING]);
 
 // Issue #3332 - ignore type declarations, but not default values.
 class TypedThings {
-	const MYCONST = FALSE;
+    const MYCONST = FALSE;
 
-	public int|FALSE $int = FALSE;
-	public Type|NULL $int = new MyObj(NULL);
+    public int|FALSE $int = FALSE;
+    public Type|NULL $int = new MyObj(NULL);
 
-	private function typed(int|FALSE $param = NULL, Type|NULL $obj = new MyObj(FALSE)) : string|FALSE|NULL
-	{
-		if (TRUE === FALSE) {
-			return NULL;
+    private function typed(int|FALSE $param = NULL, Type|NULL $obj = new MyObj(FALSE)) : string|FALSE|NULL
+    {
+        if (TRUE === FALSE) {
+            return NULL;
         }
     }
 }
@@ -151,3 +151,24 @@ class TypedConstants {
 
 // Global constants can not be typed.
 const MYCONST = TRUE;
+
+class SkipOverPHP82DNFTypes {
+    protected (\FullyQualified&Partially\Qualified)|TRUE $propertyC;
+}
+
+class SkipOverPHP84FinalProperties {
+    final MyType|FALSE $propA;
+    private static final NULL|MyClass $propB;
+}
+
+// PHP 8.4 asymmetric visibility
+class WithAsym {
+
+    private(set) NULL|TRUE $asym1 = TRUE;
+
+    public private(set) ?bool $asym2 = FALSE;
+
+    protected(set) FALSE|string|null $asym3 = NULL;
+
+    public protected(set) Type|NULL|bool $asym4 = TRUE;
+}

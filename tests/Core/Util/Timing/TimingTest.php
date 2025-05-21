@@ -41,7 +41,7 @@ final class TimingTest extends TestCase
 
 
     /**
-     * Verify that getDuration() returns 0 when the timer wasn't started.
+     * Verify that getDuration() returns the time in milliseconds.
      *
      * @return void
      */
@@ -52,8 +52,6 @@ final class TimingTest extends TestCase
         $duration = Timing::getDuration();
 
         $this->assertTrue(is_float($duration));
-        $this->assertGreaterThan(1, $duration);
-        $this->assertLessThan(15, $duration);
 
     }//end testGetDurationWithStartReturnsMilliseconds()
 

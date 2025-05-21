@@ -85,7 +85,7 @@ class Config
      *
      * @var string
      */
-    const VERSION = '3.12.0';
+    const VERSION = '3.13.1';
 
     /**
      * Package stability; either stable, beta or alpha.
@@ -1010,8 +1010,8 @@ class Config
                 }
 
                 self::$overriddenDefaults['stdinPath'] = true;
-            } else if (PHP_CODESNIFFER_CBF === false && substr($arg, 0, 12) === 'report-file=') {
-                if (isset(self::$overriddenDefaults['reportFile']) === true) {
+            } else if (substr($arg, 0, 12) === 'report-file=') {
+                if (PHP_CODESNIFFER_CBF === true || isset(self::$overriddenDefaults['reportFile']) === true) {
                     break;
                 }
 
@@ -1141,21 +1141,24 @@ class Config
                     break;
                 }
 
-                $extensions    = explode(',', substr($arg, 11));
-                $newExtensions = [];
-                foreach ($extensions as $ext) {
-                    $slash = strpos($ext, '/');
-                    if ($slash !== false) {
-                        // They specified the tokenizer too.
-                        list($ext, $tokenizer) = explode('/', $ext);
-                        $newExtensions[$ext]   = strtoupper($tokenizer);
-                        continue;
-                    }
+                $extensionsString = substr($arg, 11);
+                $newExtensions    = [];
+                if (empty($extensionsString) === false) {
+                    $extensions = explode(',', $extensionsString);
+                    foreach ($extensions as $ext) {
+                        $slash = strpos($ext, '/');
+                        if ($slash !== false) {
+                            // They specified the tokenizer too.
+                            list($ext, $tokenizer) = explode('/', $ext);
+                            $newExtensions[$ext]   = strtoupper($tokenizer);
+                            continue;
+                        }
 
-                    if (isset($this->extensions[$ext]) === true) {
-                        $newExtensions[$ext] = $this->extensions[$ext];
-                    } else {
-                        $newExtensions[$ext] = 'PHP';
+                        if (isset($this->extensions[$ext]) === true) {
+                            $newExtensions[$ext] = $this->extensions[$ext];
+                        } else {
+                            $newExtensions[$ext] = 'PHP';
+                        }
                     }
                 }
 
@@ -1296,7 +1299,7 @@ class Config
      * @param string $argument The name of the argument which is being processed.
      *
      * @return array<string>
-     * @throws DeepExitException When any of the provided codes are not valid as sniff codes.
+     * @throws \PHP_CodeSniffer\Exceptions\DeepExitException When any of the provided codes are not valid as sniff codes.
      */
     private function parseSniffCodes($input, $argument)
     {

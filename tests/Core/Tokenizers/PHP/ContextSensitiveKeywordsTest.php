@@ -155,8 +155,16 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
      */
     public function testKeywords($testMarker, $expectedTokenType)
     {
+        $tokenTargets   = Tokens::$contextSensitiveKeywords;
+        $tokenTargets[] = T_STRING;
+        $tokenTargets[] = T_ANON_CLASS;
+        $tokenTargets[] = T_MATCH_DEFAULT;
+        $tokenTargets[] = T_PRIVATE_SET;
+        $tokenTargets[] = T_PROTECTED_SET;
+        $tokenTargets[] = T_PUBLIC_SET;
+
         $tokens     = $this->phpcsFile->getTokens();
-        $target     = $this->getTargetToken($testMarker, (Tokens::$contextSensitiveKeywords + [T_ANON_CLASS, T_MATCH_DEFAULT, T_STRING]));
+        $target     = $this->getTargetToken($testMarker, $tokenTargets);
         $tokenArray = $tokens[$target];
 
         $this->assertSame(
@@ -178,7 +186,7 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
      *
      * @see testKeywords()
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public static function dataKeywords()
     {
@@ -243,6 +251,18 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
             'public: property declaration'           => [
                 'testMarker'        => '/* testPublicIsKeyword */',
                 'expectedTokenType' => 'T_PUBLIC',
+            ],
+            'private(set): property declaration'     => [
+                'testMarker'        => '/* testPrivateSetIsKeyword */',
+                'expectedTokenType' => 'T_PRIVATE_SET',
+            ],
+            'protected(set): property declaration'   => [
+                'testMarker'        => '/* testProtectedSetIsKeyword */',
+                'expectedTokenType' => 'T_PROTECTED_SET',
+            ],
+            'public(set): property declaration'      => [
+                'testMarker'        => '/* testPublicSetIsKeyword */',
+                'expectedTokenType' => 'T_PUBLIC_SET',
             ],
             'var: property declaration'              => [
                 'testMarker'        => '/* testVarIsKeyword */',

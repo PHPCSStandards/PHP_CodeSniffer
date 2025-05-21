@@ -231,6 +231,7 @@ class PHP extends Tokenizer
                 T_CONTINUE => T_CONTINUE,
                 T_THROW    => T_THROW,
                 T_EXIT     => T_EXIT,
+                T_GOTO     => T_GOTO,
             ],
             'strict' => true,
             'shared' => true,
@@ -251,6 +252,7 @@ class PHP extends Tokenizer
                 T_CONTINUE => T_CONTINUE,
                 T_THROW    => T_THROW,
                 T_EXIT     => T_EXIT,
+                T_GOTO     => T_GOTO,
             ],
             'strict' => true,
             'shared' => true,
@@ -289,7 +291,7 @@ class PHP extends Tokenizer
      * from the scopeOpeners array. The data is duplicated here to
      * save time during parsing of the file.
      *
-     * @var array
+     * @var array<int|string, int|string>
      */
     public $endScopeTokens = [
         T_CLOSE_CURLY_BRACKET => T_CLOSE_CURLY_BRACKET,
@@ -401,8 +403,11 @@ class PHP extends Tokenizer
         T_PLUS_EQUAL               => 2,
         T_PRINT                    => 5,
         T_PRIVATE                  => 7,
+        T_PRIVATE_SET              => 12,
         T_PUBLIC                   => 6,
+        T_PUBLIC_SET               => 11,
         T_PROTECTED                => 9,
+        T_PROTECTED_SET            => 14,
         T_READONLY                 => 8,
         T_REQUIRE                  => 7,
         T_REQUIRE_ONCE             => 12,
@@ -799,6 +804,46 @@ class PHP extends Tokenizer
 
                     break;
                 }
+            }//end if
+
+            /*
+                Prior to PHP 7.4, PHP didn't support stand-alone PHP open tags at the end of a file
+                (without a new line), so we need to make sure that the tokenization in PHPCS is consistent
+                cross-version PHP by retokenizing to T_OPEN_TAG.
+            */
+
+            if (PHP_VERSION_ID < 70400
+                && $tokenIsArray === true
+                // PHP < 7.4 with short open tags off.
+                && (($stackPtr === ($numTokens - 1)
+                && $token[0] === T_INLINE_HTML
+                && stripos($token[1], '<?php') === 0)
+                // PHP < 7.4 with short open tags on.
+                || ($stackPtr === ($numTokens - 2)
+                && $token[0] === T_OPEN_TAG
+                && $token[1] === '<?'
+                && is_array($tokens[($stackPtr + 1)]) === true
+                && $tokens[($stackPtr + 1)][0] === T_STRING
+                && strtolower($tokens[($stackPtr + 1)][1]) === 'php'))
+            ) {
+                if ($token[0] === T_INLINE_HTML) {
+                    $finalTokens[$newStackPtr] = [
+                        'code'    => T_OPEN_TAG,
+                        'type'    => 'T_OPEN_TAG',
+                        'content' => $token[1],
+                    ];
+                } else {
+                    $finalTokens[$newStackPtr] = [
+                        'code'    => T_OPEN_TAG,
+                        'type'    => 'T_OPEN_TAG',
+                        'content' => $token[1].$tokens[($stackPtr + 1)][1],
+                    ];
+
+                    $stackPtr++;
+                }
+
+                $newStackPtr++;
+                continue;
             }//end if
 
             /*
@@ -1224,6 +1269,49 @@ class PHP extends Tokenizer
             }//end if
 
             /*
+                Asymmetric visibility for PHP < 8.4
+            */
+
+            if ($tokenIsArray === true
+                && in_array($token[0], [T_PUBLIC, T_PROTECTED, T_PRIVATE], true) === true
+                && ($stackPtr + 3) < $numTokens
+                && $tokens[($stackPtr + 1)] === '('
+                && is_array($tokens[($stackPtr + 2)]) === true
+                && $tokens[($stackPtr + 2)][0] === T_STRING
+                && strtolower($tokens[($stackPtr + 2)][1]) === 'set'
+                && $tokens[($stackPtr + 3)] === ')'
+            ) {
+                $newToken = [];
+                if ($token[0] === T_PUBLIC) {
+                    $oldCode          = 'T_PUBLIC';
+                    $newToken['code'] = T_PUBLIC_SET;
+                    $newToken['type'] = 'T_PUBLIC_SET';
+                } else if ($token[0] === T_PROTECTED) {
+                    $oldCode          = 'T_PROTECTED';
+                    $newToken['code'] = T_PROTECTED_SET;
+                    $newToken['type'] = 'T_PROTECTED_SET';
+                } else {
+                    $oldCode          = 'T_PRIVATE';
+                    $newToken['code'] = T_PRIVATE_SET;
+                    $newToken['type'] = 'T_PRIVATE_SET';
+                }
+
+                $newToken['content']       = $token[1].'('.$tokens[($stackPtr + 2)][1].')';
+                $finalTokens[$newStackPtr] = $newToken;
+                $newStackPtr++;
+
+                if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                    $newCode = $newToken['type'];
+                    echo "\t\t* tokens from $stackPtr changed from $oldCode to $newCode".PHP_EOL;
+                }
+
+                // We processed an extra 3 tokens, for `(`, `set`, and `)`.
+                $stackPtr += 3;
+
+                continue;
+            }//end if
+
+            /*
                 As of PHP 8.0 fully qualified, partially qualified and namespace relative
                 identifier names are tokenized differently.
                 This "undoes" the new tokenization so the tokenization will be the same in
@@ -1493,6 +1581,12 @@ class PHP extends Tokenizer
                         'content' => $token[1],
                     ];
                     $newStackPtr++;
+
+                    // Also modify the original token stack so that
+                    // future checks (like looking for T_NULLABLE) can
+                    // detect the T_READONLY token more easily.
+                    $tokens[$stackPtr][0] = T_READONLY;
+                    $token[0] = T_READONLY;
 
                     if (PHP_CODESNIFFER_VERBOSITY > 1 && $type !== T_READONLY) {
                         echo "\t\t* token $stackPtr changed from $type to T_READONLY".PHP_EOL;
@@ -2141,7 +2235,9 @@ class PHP extends Tokenizer
                     if ($tokenType === T_FUNCTION
                         || $tokenType === T_FN
                         || isset(Tokens::$methodPrefixes[$tokenType]) === true
+                        || isset(Tokens::$scopeModifiers[$tokenType]) === true
                         || $tokenType === T_VAR
+                        || $tokenType === T_READONLY
                     ) {
                         if (PHP_CODESNIFFER_VERBOSITY > 1) {
                             echo "\t\t* token $stackPtr changed from ? to T_NULLABLE".PHP_EOL;
@@ -2249,7 +2345,7 @@ class PHP extends Tokenizer
                         ) {
                             // Non-empty content.
                             if (is_array($tokens[$x]) === true && $tokens[$x][0] === T_USE) {
-                                // Found a use statements, so search ahead for the closing parenthesis.
+                                // Found a use statement, so search ahead for the closing parenthesis.
                                 for ($x += 1; $x < $numTokens; $x++) {
                                     if (is_array($tokens[$x]) === false && $tokens[$x] === ')') {
                                         continue(2);
@@ -3379,7 +3475,8 @@ class PHP extends Tokenizer
                         && (isset(Tokens::$scopeModifiers[$this->tokens[$x]['code']]) === true
                         || $this->tokens[$x]['code'] === T_VAR
                         || $this->tokens[$x]['code'] === T_STATIC
-                        || $this->tokens[$x]['code'] === T_READONLY)
+                        || $this->tokens[$x]['code'] === T_READONLY
+                        || $this->tokens[$x]['code'] === T_FINAL)
                     ) {
                         // This will also confirm constructor property promotion parameters, but that's fine.
                         $confirmed = true;

@@ -26,6 +26,19 @@
             margin-top: 50px;
         }
 
+        h2 a.sniffanchor,
+        h2 a.sniffanchor {
+            color: #006C95;
+            opacity: 0;
+            padding: 0 3px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        h2:hover a.sniffanchor,
+        h2:focus a.sniffanchor {
+            opacity: 1;
+        }
+
         .code-comparison {
             width: 100%;
         }
@@ -43,6 +56,11 @@
             width: 50%;
             background-color: #F1F1F1;
             line-height: 15px;
+        }
+
+        .code-comparison-title {
+            text-align: left;
+            font-weight: 600;
         }
 
         .code-comparison-code {
@@ -70,13 +88,12 @@
  </head>
  <body>
   <h1>GeneratorTest Coding Standards</h1>
-  <a name="Superfluous-code-element" />
-  <h2>Superfluous code element</h2>
+  <h2 id="superfluous-code-element">Superfluous code element<a class="sniffanchor" href="#superfluous-code-element"> &sect; </a></h2>
   <p class="text">This is a standard block.</p>
   <table class="code-comparison">
    <tr>
-    <td class="code-comparison-title">Valid: Checking handling of blank lines.</td>
-    <td class="code-comparison-title">Invalid: Checking handling of blank lines.</td>
+    <th class="code-comparison-title">Valid: Checking handling of blank lines.</th>
+    <th class="code-comparison-title">Invalid: Checking handling of blank lines.</th>
    </tr>
    <tr>
     <td class="code-comparison-code">$valid&nbsp;=&nbsp;true;</td>

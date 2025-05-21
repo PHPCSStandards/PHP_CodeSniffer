@@ -45,7 +45,7 @@ final class GitStagedTest extends AbstractFilterTestCase
             ->method('exec')
             ->willReturn(['autoload.php']);
 
-        $this->assertEquals([$rootFile], $this->getFilteredResultsAsArray($mockObj));
+        $this->assertSame([$rootFile], $this->getFilteredResultsAsArray($mockObj));
 
     }//end testFileNamePassesAsBasePathWillTranslateToDirname()
 
@@ -76,7 +76,7 @@ final class GitStagedTest extends AbstractFilterTestCase
             ->method('exec')
             ->willReturn($outputGitStaged);
 
-        $this->assertEquals($expectedOutput, $this->getFilteredResultsAsArray($mockObj));
+        $this->assertSame($expectedOutput, $this->getFilteredResultsAsArray($mockObj));
 
     }//end testAcceptOnlyGitStaged()
 
@@ -240,7 +240,7 @@ final class GitStagedTest extends AbstractFilterTestCase
      *            JRF: I've not managed to find a command which does so, let alone one, which then
      *            doesn't have side-effects of uncatchable output while running the tests.}
      *
-     * @return array<string, array<string, array<string>>>
+     * @return array<string, array<string, string|array<string>>>
      */
     public static function dataExecAlwaysReturnsArray()
     {

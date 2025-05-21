@@ -26,6 +26,19 @@
             margin-top: 50px;
         }
 
+        h2 a.sniffanchor,
+        h2 a.sniffanchor {
+            color: #006C95;
+            opacity: 0;
+            padding: 0 3px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        h2:hover a.sniffanchor,
+        h2:focus a.sniffanchor {
+            opacity: 1;
+        }
+
         .code-comparison {
             width: 100%;
         }
@@ -43,6 +56,11 @@
             width: 50%;
             background-color: #F1F1F1;
             line-height: 15px;
+        }
+
+        .code-comparison-title {
+            text-align: left;
+            font-weight: 600;
         }
 
         .code-comparison-code {
@@ -70,8 +88,7 @@
  </head>
  <body>
   <h1>GeneratorTest Coding Standards</h1>
-  <a name="Standard-Element,-blank-line-handling" />
-  <h2>Standard Element, blank line handling</h2>
+  <h2 id="standard-element--blank-line-handling">Standard Element, blank line handling<a class="sniffanchor" href="#standard-element--blank-line-handling"> &sect; </a></h2>
   <p class="text">There is a blank line at the start of this standard.</p>
   <p class="text">And the above blank line is also deliberate to test part of the logic.</p>
   <p class="text">Let&#039;s also end on a blank line to test that too.</p>

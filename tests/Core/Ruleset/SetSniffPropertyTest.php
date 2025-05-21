@@ -135,7 +135,7 @@ final class SetSniffPropertyTest extends AbstractRulesetTestCase
      */
     public function testSetPropertyThrowsErrorOnInvalidProperty()
     {
-        $exceptionMsg = 'Ruleset invalid. Property "indentation" does not exist on sniff Generic.Arrays.ArrayIndent';
+        $exceptionMsg = 'ERROR: Property "indentation" does not exist on sniff Generic.Arrays.ArrayIndent.'.PHP_EOL.PHP_EOL;
         $this->expectRuntimeExceptionMessage($exceptionMsg);
 
         // Set up the ruleset.
@@ -155,7 +155,7 @@ final class SetSniffPropertyTest extends AbstractRulesetTestCase
      */
     public function testSetPropertyThrowsErrorWhenPropertyOnlyAllowedViaAttribute()
     {
-        $exceptionMsg = 'Ruleset invalid. Property "arbitrarystring" does not exist on sniff TestStandard.SetProperty.NotAllowedViaAttribute';
+        $exceptionMsg = 'ERROR: Property "arbitrarystring" does not exist on sniff TestStandard.SetProperty.NotAllowedViaAttribute.'.PHP_EOL.PHP_EOL;
         $this->expectRuntimeExceptionMessage($exceptionMsg);
 
         // Set up the ruleset.

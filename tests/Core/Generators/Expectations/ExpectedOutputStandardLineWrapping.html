@@ -26,6 +26,19 @@
             margin-top: 50px;
         }
 
+        h2 a.sniffanchor,
+        h2 a.sniffanchor {
+            color: #006C95;
+            opacity: 0;
+            padding: 0 3px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        h2:hover a.sniffanchor,
+        h2:focus a.sniffanchor {
+            opacity: 1;
+        }
+
         .code-comparison {
             width: 100%;
         }
@@ -43,6 +56,11 @@
             width: 50%;
             background-color: #F1F1F1;
             line-height: 15px;
+        }
+
+        .code-comparison-title {
+            text-align: left;
+            font-weight: 600;
         }
 
         .code-comparison-code {
@@ -70,8 +88,7 @@
  </head>
  <body>
   <h1>GeneratorTest Coding Standards</h1>
-  <a name="Standard-Element,-line-wrapping-handling" />
-  <h2>Standard Element, line wrapping handling</h2>
+  <h2 id="standard-element--line-wrapping-handling">Standard Element, line wrapping handling<a class="sniffanchor" href="#standard-element--line-wrapping-handling"> &sect; </a></h2>
   <p class="text">This line has to be exactly 99 chars to test part of the logic.------------------------------------<br/>
 And this line has to be exactly 100 chars.----------------------------------------------------------<br/>
 And here we have a line which should start wrapping as it is longer than 100 chars. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque iaculis enim quis hendrerit. Morbi ultrices in odio pharetra commodo.</p>

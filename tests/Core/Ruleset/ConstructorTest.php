@@ -282,7 +282,7 @@ final class ConstructorTest extends AbstractRulesetTestCase
         $standard = __DIR__.'/ConstructorNoSniffsTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
-        $message = 'No sniffs were registered';
+        $message = 'ERROR: No sniffs were registered.'.PHP_EOL.PHP_EOL;
         $this->expectRuntimeExceptionMessage($message);
 
         new Ruleset($config);

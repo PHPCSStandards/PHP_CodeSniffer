@@ -125,6 +125,13 @@ final class BitwiseOrTest extends AbstractTokenizerTestCase
             'type for readonly property, reversed modifier order'      => ['/* testTypeUnionPropertyWithReadOnlyKeywordFirst */'],
             'type for readonly property, no visibility'                => ['/* testTypeUnionPropertyWithOnlyReadOnlyKeyword */'],
             'type for static property, no visibility'                  => ['/* testTypeUnionPropertyWithOnlyStaticKeyword */'],
+            'type for final property, no visibility'                   => ['/* testTypeUnionWithPHP84FinalKeyword */'],
+            'type for final property, reversed modifier order'         => ['/* testTypeUnionWithPHP84FinalKeywordFirst */'],
+            'type for final property, no visibility, FQN type'         => ['/* testTypeUnionWithPHP84FinalKeywordAndFQN */'],
+            'type for private(set) property'                           => ['/* testTypeUnionPropertyPrivateSet */'],
+            'type for public private(set) property'                    => ['/* testTypeUnionPropertyPublicPrivateSet */'],
+            'type for protected(set) property'                         => ['/* testTypeUnionPropertyProtected */'],
+            'type for public protected(set) property'                  => ['/* testTypeUnionPropertyPublicProtected */'],
             'type for method parameter'                                => ['/* testTypeUnionParam1 */'],
             'type for method parameter, first in multi-union'          => ['/* testTypeUnionParam2 */'],
             'type for method parameter, last in multi-union'           => ['/* testTypeUnionParam3 */'],
@@ -150,8 +157,8 @@ final class BitwiseOrTest extends AbstractTokenizerTestCase
             'return type for arrow function'                           => ['/* testTypeUnionArrowReturnType */'],
             'type for function parameter, return by ref'               => ['/* testTypeUnionNonArrowFunctionDeclaration */'],
             'type for function param with true type first'             => ['/* testTypeUnionPHP82TrueFirst */'],
-            'type for function param with true type middle'            => ['/* testTypeUnionPHP82TrueMiddle */'],
-            'type for function param with true type last'              => ['/* testTypeUnionPHP82TrueLast */'],
+            'return type for function with true type middle'           => ['/* testTypeUnionPHP82TrueMiddle */'],
+            'return type for closure with true type last'              => ['/* testTypeUnionPHP82TrueLast */'],
         ];
 
     }//end dataTypeUnion()

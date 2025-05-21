@@ -36,9 +36,9 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
      *
      * @return void
      */
-    protected function storeHomePath()
+    public static function storeHomePath()
     {
-        $this->homepath = getenv('HOME');
+        self::$homepath = getenv('HOME');
 
     }//end storeHomePath()
 
@@ -50,10 +50,10 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
      *
      * @return void
      */
-    protected function restoreHomePath()
+    public static function restoreHomePath()
     {
-        if (is_string($this->homepath) === true) {
-            putenv('HOME='.$this->homepath);
+        if (is_string(self::$homepath) === true) {
+            putenv('HOME='.self::$homepath);
         } else {
             // Remove the environment variable as it didn't exist before.
             putenv('HOME');
@@ -109,7 +109,8 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
         $standard = __DIR__.'/ExpandRulesetReferenceHomePathFailTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
-        $exceptionMessage = 'Referenced sniff "~/src/MyStandard/Sniffs/DoesntExist/" does not exist';
+        $exceptionMessage  = 'ERROR: Referenced sniff "~/src/MyStandard/Sniffs/DoesntExist/" does not exist.'.PHP_EOL;
+        $exceptionMessage .= 'ERROR: No sniffs were registered.'.PHP_EOL.PHP_EOL;
         $this->expectRuntimeExceptionMessage($exceptionMessage);
 
         new Ruleset($config);

@@ -45,10 +45,10 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
     {
         return [
             'standard'   => [
-                'testMarker'  => '/* testStandard */',
+                'testMarker' => '/* testStandard */',
             ],
             'mixed case' => [
-                'testMarker'  => '/* testMixedCase */',
+                'testMarker' => '/* testMixedCase */',
             ],
         ];
 
@@ -362,35 +362,35 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
 
 
     /**
-     * Test arrow functions that use nullable namespace types.
+     * Test arrow functions that use nullable type with unqualified class name.
      *
      * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
      *
      * @return void
      */
-    public function testNullableNamespace()
+    public function testNullableUnqualifiedClassName()
     {
-        $token = $this->getTargetToken('/* testNullableNamespace */', T_FN);
+        $token = $this->getTargetToken('/* testNullableUnqualifiedClassName */', T_FN);
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 15, 18);
 
-    }//end testNullableNamespace()
+    }//end testNullableUnqualifiedClassName()
 
 
     /**
-     * Test arrow functions that use the namespace operator in the return type.
+     * Test arrow functions that use namespace relative class name in the return type.
      *
      * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
      *
      * @return void
      */
-    public function testNamespaceOperatorInTypes()
+    public function testNamespaceRelativeClassNameInTypes()
     {
-        $token = $this->getTargetToken('/* testNamespaceOperatorInTypes */', T_FN);
+        $token = $this->getTargetToken('/* testNamespaceRelativeClassNameInTypes */', T_FN);
         $this->backfillHelper($token);
         $this->scopePositionTestHelper($token, 16, 19);
 
-    }//end testNamespaceOperatorInTypes()
+    }//end testNamespaceRelativeClassNameInTypes()
 
 
     /**
@@ -423,28 +423,28 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
     {
         return [
             'self'     => [
-                'testMarker'  => '/* testSelfReturnType */',
+                'testMarker' => '/* testSelfReturnType */',
             ],
             'parent'   => [
-                'testMarker'  => '/* testParentReturnType */',
+                'testMarker' => '/* testParentReturnType */',
             ],
             'callable' => [
-                'testMarker'  => '/* testCallableReturnType */',
+                'testMarker' => '/* testCallableReturnType */',
             ],
             'array'    => [
-                'testMarker'  => '/* testArrayReturnType */',
+                'testMarker' => '/* testArrayReturnType */',
             ],
             'static'   => [
-                'testMarker'  => '/* testStaticReturnType */',
+                'testMarker' => '/* testStaticReturnType */',
             ],
             'false'    => [
-                'testMarker'  => '/* testFalseReturnType */',
+                'testMarker' => '/* testFalseReturnType */',
             ],
             'true'     => [
-                'testMarker'  => '/* testTrueReturnType */',
+                'testMarker' => '/* testTrueReturnType */',
             ],
             'null'     => [
-                'testMarker'  => '/* testNullReturnType */',
+                'testMarker' => '/* testNullReturnType */',
             ],
         ];
 
@@ -896,37 +896,37 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
     {
         $tokens = $this->phpcsFile->getTokens();
 
-        $this->assertTrue(array_key_exists('scope_condition', $tokens[$token]), 'Scope condition is not set');
-        $this->assertTrue(array_key_exists('scope_opener', $tokens[$token]), 'Scope opener is not set');
-        $this->assertTrue(array_key_exists('scope_closer', $tokens[$token]), 'Scope closer is not set');
+        $this->assertArrayHasKey('scope_condition', $tokens[$token], 'Scope condition is not set');
+        $this->assertArrayHasKey('scope_opener', $tokens[$token], 'Scope opener is not set');
+        $this->assertArrayHasKey('scope_closer', $tokens[$token], 'Scope closer is not set');
         $this->assertSame($tokens[$token]['scope_condition'], $token, 'Scope condition is not the T_FN token');
-        $this->assertTrue(array_key_exists('parenthesis_owner', $tokens[$token]), 'Parenthesis owner is not set');
-        $this->assertTrue(array_key_exists('parenthesis_opener', $tokens[$token]), 'Parenthesis opener is not set');
-        $this->assertTrue(array_key_exists('parenthesis_closer', $tokens[$token]), 'Parenthesis closer is not set');
+        $this->assertArrayHasKey('parenthesis_owner', $tokens[$token], 'Parenthesis owner is not set');
+        $this->assertArrayHasKey('parenthesis_opener', $tokens[$token], 'Parenthesis opener is not set');
+        $this->assertArrayHasKey('parenthesis_closer', $tokens[$token], 'Parenthesis closer is not set');
         $this->assertSame($tokens[$token]['parenthesis_owner'], $token, 'Parenthesis owner is not the T_FN token');
 
         $opener = $tokens[$token]['scope_opener'];
-        $this->assertTrue(array_key_exists('scope_condition', $tokens[$opener]), 'Opener scope condition is not set');
-        $this->assertTrue(array_key_exists('scope_opener', $tokens[$opener]), 'Opener scope opener is not set');
-        $this->assertTrue(array_key_exists('scope_closer', $tokens[$opener]), 'Opener scope closer is not set');
+        $this->assertArrayHasKey('scope_condition', $tokens[$opener], 'Opener scope condition is not set');
+        $this->assertArrayHasKey('scope_opener', $tokens[$opener], 'Opener scope opener is not set');
+        $this->assertArrayHasKey('scope_closer', $tokens[$opener], 'Opener scope closer is not set');
         $this->assertSame($tokens[$opener]['scope_condition'], $token, 'Opener scope condition is not the T_FN token');
         $this->assertSame(T_FN_ARROW, $tokens[$opener]['code'], 'Arrow scope opener not tokenized as T_FN_ARROW (code)');
         $this->assertSame('T_FN_ARROW', $tokens[$opener]['type'], 'Arrow scope opener not tokenized as T_FN_ARROW (type)');
 
         $closer = $tokens[$token]['scope_closer'];
-        $this->assertTrue(array_key_exists('scope_condition', $tokens[$closer]), 'Closer scope condition is not set');
-        $this->assertTrue(array_key_exists('scope_opener', $tokens[$closer]), 'Closer scope opener is not set');
-        $this->assertTrue(array_key_exists('scope_closer', $tokens[$closer]), 'Closer scope closer is not set');
+        $this->assertArrayHasKey('scope_condition', $tokens[$closer], 'Closer scope condition is not set');
+        $this->assertArrayHasKey('scope_opener', $tokens[$closer], 'Closer scope opener is not set');
+        $this->assertArrayHasKey('scope_closer', $tokens[$closer], 'Closer scope closer is not set');
         if ($skipScopeCloserCheck === false) {
             $this->assertSame($tokens[$closer]['scope_condition'], $token, 'Closer scope condition is not the T_FN token');
         }
 
         $opener = $tokens[$token]['parenthesis_opener'];
-        $this->assertTrue(array_key_exists('parenthesis_owner', $tokens[$opener]), 'Opening parenthesis owner is not set');
+        $this->assertArrayHasKey('parenthesis_owner', $tokens[$opener], 'Opening parenthesis owner is not set');
         $this->assertSame($tokens[$opener]['parenthesis_owner'], $token, 'Opening parenthesis owner is not the T_FN token');
 
         $closer = $tokens[$token]['parenthesis_closer'];
-        $this->assertTrue(array_key_exists('parenthesis_owner', $tokens[$closer]), 'Closing parenthesis owner is not set');
+        $this->assertArrayHasKey('parenthesis_owner', $tokens[$closer], 'Closing parenthesis owner is not set');
         $this->assertSame($tokens[$closer]['parenthesis_owner'], $token, 'Closing parenthesis owner is not the T_FN token');
 
     }//end backfillHelper()
