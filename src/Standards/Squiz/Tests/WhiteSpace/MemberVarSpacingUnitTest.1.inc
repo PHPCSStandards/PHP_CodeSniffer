@@ -444,3 +444,18 @@ class MultilineCommentShouldNotBeSplitUp {
      */
     public $prop;
 }
+
+class AsymVisibility {
+    protected private(set) int $asymProtectedPrivate;
+
+    /**
+     * Docblock
+     */
+    protected(set) final string $asymProtected;
+    #[AnAttribute]
+
+    public(set) string|bool $asymPublic;
+
+
+    private(set) private bool $asymPrivate;
+}
