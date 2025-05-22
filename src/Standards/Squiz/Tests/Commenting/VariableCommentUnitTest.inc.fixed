@@ -469,3 +469,20 @@ class PHP84FinalProperties {
      */
     final int $hasDocblock;
 }
+
+class AsymVisibility {
+    /**
+     * @var integer
+     */
+    public(set) int $hasDocblockA;
+
+    /**
+     * @var integer
+     */
+    public protected(set) int $hasDocblockB;
+
+    /**
+     * @var integer
+     */
+    private(set) protected int $hasDocblockC;
+}
