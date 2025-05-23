@@ -114,7 +114,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
             }//end if
         }//end if
 
-        if ($propertyInfo['scope_specified'] === false) {
+        if ($propertyInfo['scope_specified'] === false && $propertyInfo['set_scope'] === false) {
             $error = 'Visibility must be declared on property "%s"';
             $data  = [$tokens[$stackPtr]['content']];
             $phpcsFile->addError($error, $stackPtr, 'ScopeMissing', $data);
