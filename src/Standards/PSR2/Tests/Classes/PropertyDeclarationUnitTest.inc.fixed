@@ -37,8 +37,8 @@ class ABC {
     private static $propC;
     public static $propD;
     protected static
-        $propE;
-    private static /*comment*/   $propF;
+            $propE;
+    private static    /*comment*/   $propF;
 }
 
 class MyClass
@@ -103,7 +103,23 @@ class AsymmetricVisibility {
 
     protected(set) array $unfixed;
 
-    protected(set) public int $wrongOrder1;
+    public protected(set) int $wrongOrder1;
 
-    private(set) protected ?string $wrongOrder2;
+    protected private(set) ?string $wrongOrder2;
+
+    final protected private(set) static bool $correctOrder;
+
+    final protected private(set) static bool $wrongOrder3;
+    final protected private(set) static bool $wrongOrder4;
+    final public protected(set) static bool $wrongOrder5;
+    final public public(set) static bool $wrongOrder6;
+
+    final protected private(set) static bool $wrongOrder7;
+    final protected private(set) static bool $wrongOrder8;
+    final public protected(set) static bool $wrongOrder9;
+    final public public(set) static bool $wrongOrder10;
+
+    final private(set) static bool $wrongOrder11;
+    final protected(set) static bool $wrongOrder12;
+    final public(set) static bool $wrongOrder13;
 }
