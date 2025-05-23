@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the \PHP_CodeSniffer\Files\File:findStartOfStatement method.
+ * Tests for the \PHP_CodeSniffer\Files\File::findStartOfStatement method.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
@@ -15,7 +15,7 @@ use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 use PHP_CodeSniffer\Util\Tokens;
 
 /**
- * Tests for the \PHP_CodeSniffer\Files\File:findStartOfStatement method.
+ * Tests for the \PHP_CodeSniffer\Files\File::findStartOfStatement method.
  *
  * @covers \PHP_CodeSniffer\Files\File::findStartOfStatement
  */

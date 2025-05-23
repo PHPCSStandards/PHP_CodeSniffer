@@ -163,7 +163,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
                 'testCloserMarker' => '/* testCaseConstantCloserMarker */',
             ],
             'switch case with constant, assignment'                             => [
-                'testMarker'       => '/* testCaseWithAssigmentToConstantIsNotEnumCase */',
+                'testMarker'       => '/* testCaseWithAssignmentToConstantIsNotEnumCase */',
                 'expectedTokens'   => [
                     'scope_opener' => T_COLON,
                     'scope_closer' => T_CLOSE_CURLY_BRACKET,

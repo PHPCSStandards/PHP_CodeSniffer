@@ -200,7 +200,7 @@ final class ExplainTest extends TestCase
         $expected .= '  TestStandard.SetProperty.PropertyTypeHandling'.PHP_EOL;
         $expected .= '  TestStandard.ValidSniffs.RegisterEmptyArray'.PHP_EOL.PHP_EOL;
 
-        $expected .= '* Sniffs marked with an asterix are deprecated.'.PHP_EOL;
+        $expected .= '* Sniffs marked with an asterisk are deprecated.'.PHP_EOL;
 
         $this->expectOutputString($expected);
 

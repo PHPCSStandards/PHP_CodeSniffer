@@ -332,7 +332,7 @@ class Ruleset
         }//end foreach
 
         if (count($this->deprecatedSniffs) > 0) {
-            echo PHP_EOL.'* Sniffs marked with an asterix are deprecated.'.PHP_EOL;
+            echo PHP_EOL.'* Sniffs marked with an asterisk are deprecated.'.PHP_EOL;
         }
 
     }//end explain()
