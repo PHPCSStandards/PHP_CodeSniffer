@@ -15,7 +15,7 @@ use PHP_CodeSniffer\Util\Tokens;
 
 class ArrayDeclarationSniff implements Sniff
 {
-
+    public bool $alignDoubleArrowToLongestElement = true;
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -823,7 +823,12 @@ class ArrayDeclarationSniff implements Sniff
                 }
             }//end if
 
-            $arrowStart = ($tokens[$indexPointer]['column'] + $maxLength + 1);
+            $arrowStart = ($tokens[$indexPointer]['column'] + $index['index_length'] + 1);
+
+            if ($this->alignDoubleArrowToLongestElement) {
+                $arrowStart = ($tokens[$indexPointer]['column'] + $maxLength + 1);
+            }
+
             if ($tokens[$index['arrow']]['column'] !== $arrowStart) {
                 $expected       = ($arrowStart - ($index['index_length'] + $tokens[$indexPointer]['column']));
                 $found          = ($tokens[$index['arrow']]['column'] - ($index['index_length'] + $tokens[$indexPointer]['column']));
@@ -847,11 +852,9 @@ class ArrayDeclarationSniff implements Sniff
                         $phpcsFile->fixer->replaceToken(($index['arrow'] - 1), str_repeat(' ', $expected));
                     }
                 }
-
-                continue;
             }//end if
 
-            $valueStart = ($arrowStart + 3);
+            $valueStart = ($tokens[$index['arrow']]['column'] + 3);
             if ($tokens[$valuePointer]['column'] !== $valueStart) {
                 $expected = ($valueStart - ($tokens[$index['arrow']]['length'] + $tokens[$index['arrow']]['column']));
                 $found    = ($tokens[$valuePointer]['column'] - ($tokens[$index['arrow']]['length'] + $tokens[$index['arrow']]['column']));
