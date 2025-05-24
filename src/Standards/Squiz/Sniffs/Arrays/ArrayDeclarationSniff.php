@@ -15,12 +15,13 @@ use PHP_CodeSniffer\Util\Tokens;
 
 class ArrayDeclarationSniff implements Sniff
 {
+
     /**
      * Controls how to align the double arrow in multi-line arrays:
      * - true: align the double arrow to the longest index
      * - false: align the double arrow to length of the index
      *
-     * @var bool
+     * @var boolean
      */
     public bool $alignDoubleArrowToLongestIndex = true;
 
