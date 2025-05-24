@@ -15,7 +15,7 @@ use PHP_CodeSniffer\Util\Tokens;
 
 class ArrayDeclarationSniff implements Sniff
 {
-    public bool $alignDoubleArrowToLongestElement = true;
+    public bool $alignDoubleArrowToLongestIndex = true;
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -825,7 +825,7 @@ class ArrayDeclarationSniff implements Sniff
 
             $arrowStart = ($tokens[$indexPointer]['column'] + $index['index_length'] + 1);
 
-            if ($this->alignDoubleArrowToLongestElement) {
+            if ($this->alignDoubleArrowToLongestIndex) {
                 $arrowStart = ($tokens[$indexPointer]['column'] + $maxLength + 1);
             }
 
