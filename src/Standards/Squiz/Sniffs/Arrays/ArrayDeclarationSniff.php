@@ -15,7 +15,15 @@ use PHP_CodeSniffer\Util\Tokens;
 
 class ArrayDeclarationSniff implements Sniff
 {
+    /**
+     * Controls how to align the double arrow in multi-line arrays:
+     * - true: align the double arrow to the longest index
+     * - false: align the double arrow to length of the index
+     *
+     * @var bool
+     */
     public bool $alignDoubleArrowToLongestIndex = true;
+
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -825,7 +833,7 @@ class ArrayDeclarationSniff implements Sniff
 
             $arrowStart = ($tokens[$indexPointer]['column'] + $index['index_length'] + 1);
 
-            if ($this->alignDoubleArrowToLongestIndex) {
+            if ($this->alignDoubleArrowToLongestIndex === true) {
                 $arrowStart = ($tokens[$indexPointer]['column'] + $maxLength + 1);
             }
 
