@@ -185,3 +185,13 @@ class FinalProperties {
     final readonly public ?MyType $spacing_correct;
     protected final $spacing_incorrect = 'foo';
 }
+
+class AsymVisibility {
+    public(set) string $asymPublic  = 'hello';
+    public protected(set) final $asymProtected  = 'hello';
+    private(set) public string|false $asymPrivate  = 'hello';
+
+    public public(set) $asymPublicPublic  = 'hello';
+    protected(set) public $asymPublicProtected  = 'hello';
+    protected private(set) $asymProtectedPrivate  = 'hello';
+}
