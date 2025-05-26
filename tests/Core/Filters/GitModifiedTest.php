@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Filters;
 
+use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Filters\GitModified;
 use PHP_CodeSniffer\Tests\Core\Filters\AbstractFilterTestCase;
 use RecursiveArrayIterator;
@@ -217,6 +218,10 @@ final class GitModifiedTest extends AbstractFilterTestCase
     {
         if (is_dir(__DIR__.'/../../../.git') === false) {
             $this->markTestSkipped('Not a git repository');
+        }
+
+        if (Config::getExecutablePath('git') === null) {
+            $this->markTestSkipped('git command not available');
         }
 
         $fakeDI = new RecursiveArrayIterator(self::getFakeFileList());
