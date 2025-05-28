@@ -209,6 +209,8 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
      * Verify that in CS mode, phpcs-only <ini> directives are respected and phpcbf-only <ini>
      * directives are ignored.
      *
+     * @requires extension bcmath
+     *
      * @return void
      */
     public function testShouldProcessIniCsonly()
@@ -228,7 +230,8 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
      * Verify that in CBF mode, phpcbf-only <ini> directives are respected and phpcs-only <ini>
      * directives are ignored.
      *
-     * @group CBF
+     * @group    CBF
+     * @requires extension bcmath
      *
      * @return void
      */
