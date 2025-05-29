@@ -218,7 +218,7 @@ class Common
         }
 
         // Next try is detecting whether we have `tty` installed and use that.
-        if (defined('PHP_WINDOWS_VERSION_PLATFORM') === true) {
+        if (PHP_OS_FAMILY === 'Windows') {
             $devnull = 'NUL';
             $which   = 'where';
         } else {
