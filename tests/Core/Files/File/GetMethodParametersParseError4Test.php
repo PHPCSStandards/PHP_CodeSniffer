@@ -6,7 +6,7 @@
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
-namespace PHP_CodeSniffer\Tests\Core\File;
+namespace PHP_CodeSniffer\Tests\Core\Files\File;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
 
@@ -15,7 +15,7 @@ use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
  *
  * @covers \PHP_CodeSniffer\Files\File::getMethodParameters
  */
-final class GetMethodParametersParseError3Test extends AbstractMethodTestCase
+final class GetMethodParametersParseError4Test extends AbstractMethodTestCase
 {
 
 
@@ -26,10 +26,10 @@ final class GetMethodParametersParseError3Test extends AbstractMethodTestCase
      */
     public function testParseError()
     {
-        $this->expectRunTimeException('$stackPtr was not a valid T_USE');
-
         $target = $this->getTargetToken('/* testParseError */', [T_USE]);
-        self::$phpcsFile->getMethodParameters($target);
+        $result = self::$phpcsFile->getMethodParameters($target);
+
+        $this->assertSame([], $result);
 
     }//end testParseError()
 

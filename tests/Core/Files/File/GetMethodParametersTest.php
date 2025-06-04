@@ -9,7 +9,7 @@
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
-namespace PHP_CodeSniffer\Tests\Core\File;
+namespace PHP_CodeSniffer\Tests\Core\Files\File;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
 

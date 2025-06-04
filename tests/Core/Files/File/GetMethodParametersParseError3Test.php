@@ -2,12 +2,11 @@
 /**
  * Tests for the \PHP_CodeSniffer\Files\File::getMethodParameters method.
  *
- * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
- * @copyright 2019-2024 PHPCSStandards Contributors
+ * @copyright 2025 PHPCSStandards Contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
-namespace PHP_CodeSniffer\Tests\Core\File;
+namespace PHP_CodeSniffer\Tests\Core\Files\File;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
 
@@ -16,7 +15,7 @@ use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
  *
  * @covers \PHP_CodeSniffer\Files\File::getMethodParameters
  */
-final class GetMethodParametersParseError2Test extends AbstractMethodTestCase
+final class GetMethodParametersParseError3Test extends AbstractMethodTestCase
 {
 
 
@@ -27,10 +26,10 @@ final class GetMethodParametersParseError2Test extends AbstractMethodTestCase
      */
     public function testParseError()
     {
-        $target = $this->getTargetToken('/* testParseError */', [T_FUNCTION, T_CLOSURE, T_FN]);
-        $result = self::$phpcsFile->getMethodParameters($target);
+        $this->expectRunTimeException('$stackPtr was not a valid T_USE');
 
-        $this->assertSame([], $result);
+        $target = $this->getTargetToken('/* testParseError */', [T_USE]);
+        self::$phpcsFile->getMethodParameters($target);
 
     }//end testParseError()
 
