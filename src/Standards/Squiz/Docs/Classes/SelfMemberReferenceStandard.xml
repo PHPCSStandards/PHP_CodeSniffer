@@ -1,30 +1,56 @@
 <documentation title="Self Member Reference">
     <standard>
     <![CDATA[
-    The self keyword should be used instead of the current class name, should be lowercase, and should not have spaces before or after it.
+    When referencing static members within a class, the self keyword must be used instead of the
+    current class name, it must be lowercase, and there must be no spaces before or after the double
+    colon.
     ]]>
     </standard>
     <code_comparison>
         <code title="Valid: Lowercase self used.">
         <![CDATA[
-<em>self</em>::foo();
+class Bar
+{
+    public function baz()
+    {
+        <em>self</em>::foo();
+    }
+}
         ]]>
         </code>
         <code title="Invalid: Uppercase self used.">
         <![CDATA[
-<em>SELF</em>::foo();
+class Bar
+{
+    public function baz()
+    {
+        <em>SELF</em>::foo();
+    }
+}
         ]]>
         </code>
     </code_comparison>
     <code_comparison>
-        <code title="Valid: Correct spacing used.">
+        <code title="Valid: No spaces around the double colon.">
         <![CDATA[
-self<em></em>::<em></em>foo();
+class Bar
+{
+    public function baz()
+    {
+        self<em></em>::<em></em>foo();
+    }
+}
         ]]>
         </code>
-        <code title="Invalid: Incorrect spacing used.">
+        <code title="Invalid: Spaces around double colon operator.">
         <![CDATA[
-self<em> </em>::<em> </em>foo();
+class Bar
+{
+    public function baz()
+    {
+        self<em> </em>::<em> </em>foo();
+    }
+}
         ]]>
         </code>
     </code_comparison>
@@ -33,10 +59,6 @@ self<em> </em>::<em> </em>foo();
         <![CDATA[
 class Foo
 {
-    public static function bar()
-    {
-    }
-
     public static function baz()
     {
         <em>self</em>::bar();
@@ -48,10 +70,6 @@ class Foo
         <![CDATA[
 class <em>Foo</em>
 {
-    public static function bar()
-    {
-    }
-
     public static function baz()
     {
         <em>Foo</em>::bar();
