@@ -217,6 +217,17 @@ class ConstructorPropertyPromotionWithOnlyReadOnly {
     public function __construct(readonly Foo&Bar $promotedProp, readonly ?bool $promotedToo,) {}
 }
 
+class ConstructorPropertyPromotionWithAsymVisibility {
+    /* testPHP84ConstructorPropertyPromotionWithAsymVisibility */
+    public function __construct(
+        protected(set) string|Book $book,
+        public private(set) ?Publisher $publisher,
+        Private(set) PROTECTED Author $author,
+        readonly public(set) int $pubYear,
+        protected(set) $illegalMissingType,
+    ) {}
+}
+
 /* testPHP8ConstructorPropertyPromotionGlobalFunction */
 // Intentional fatal error. Property promotion not allowed in non-constructor, but that's not the concern of this method.
 function globalFunction(private $x) {}
