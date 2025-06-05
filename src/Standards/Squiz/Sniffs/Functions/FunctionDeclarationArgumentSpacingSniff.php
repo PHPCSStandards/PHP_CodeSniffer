@@ -340,6 +340,40 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                 }//end if
             }//end if
 
+            if (isset($param['set_visibility_token']) === true && $param['set_visibility_token'] !== false) {
+                $visibilityToken      = $param['set_visibility_token'];
+                $afterVisibilityToken = $phpcsFile->findNext(T_WHITESPACE, ($visibilityToken + 1), $param['token'], true);
+
+                $spacesAfter = 0;
+                if ($afterVisibilityToken !== false
+                    && $tokens[$visibilityToken]['line'] !== $tokens[$afterVisibilityToken]['line']
+                ) {
+                    $spacesAfter = 'newline';
+                } else if ($tokens[($visibilityToken + 1)]['code'] === T_WHITESPACE) {
+                    $spacesAfter = $tokens[($visibilityToken + 1)]['length'];
+                }
+
+                if ($spacesAfter !== 1) {
+                    $error = 'Expected 1 space after set-visibility modifier "%s"; %s found';
+                    $data  = [
+                        $tokens[$visibilityToken]['content'],
+                        $spacesAfter,
+                    ];
+
+                    $fix = $phpcsFile->addFixableError($error, $visibilityToken, 'SpacingAfterSetVisbility', $data);
+                    if ($fix === true) {
+                        $phpcsFile->fixer->beginChangeset();
+                        $phpcsFile->fixer->addContent($visibilityToken, ' ');
+
+                        for ($i = ($visibilityToken + 1); $tokens[$i]['code'] === T_WHITESPACE; $i++) {
+                            $phpcsFile->fixer->replaceToken($i, '');
+                        }
+
+                        $phpcsFile->fixer->endChangeset();
+                    }
+                }//end if
+            }//end if
+
             if (isset($param['readonly_token']) === true) {
                 $readonlyToken      = $param['readonly_token'];
                 $afterReadonlyToken = $phpcsFile->findNext(T_WHITESPACE, ($readonlyToken + 1), $param['token'], true);
