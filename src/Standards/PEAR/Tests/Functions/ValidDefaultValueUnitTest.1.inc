@@ -109,7 +109,7 @@ class OnlyConstructorPropertyPromotion {
 
 class ConstructorPropertyPromotionMixedWithNormalParams {
     public function __construct(
-        public string $name = '',
+        public(set) string $name = '',
         ?int $optionalParam = 0,
         mixed $requiredParam,
     ) {}
