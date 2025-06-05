@@ -375,3 +375,29 @@ class WithFinalProperties {
     /* testPHP84FinalComplexTypedProp */
     final public (Foo&\Bar)|bool $val9;
 }
+
+class AsymVisibility {
+    /* testPHP84AsymPublicSetProperty */
+    public(set) mixed $prop1;
+    /* testPHP84AsymPublicPublicSetProperty */
+    public public(set) (A&B)|null $prop2;
+    /* testPHP84AsymPublicSetPublicProperty */
+    public(set) public bool $prop3;
+
+    /* testPHP84AsymProtectedSetProperty */
+    protected(set) readonly mixed $prop4;
+    /* testPHP84AsymPublicProtectedSetProperty */
+    public protected(set) string $prop5;
+    /* testPHP84AsymProtectedSetPublicProperty */
+    protected(set) public ?float $prop6;
+
+    /* testPHP84AsymPrivateSetProperty */
+    private(set) string|int $prop7;
+    /* testPHP84AsymProtectedPrivateSetProperty */
+    final protected private(set) $prop8;
+    /* testPHP84AsymPrivateSetPublicProperty */
+    private(set) public mixed $prop9;
+
+    /* testPHP84IllegalAsymPublicProtectedSetStaticProperty */
+    public protected(set) static mixed $prop10;
+}
