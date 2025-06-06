@@ -109,4 +109,20 @@ class AsymmetricVisibility {
     protected(set) public int $wrongOrder1;
 
     private(set) protected ?string $wrongOrder2;
+
+    final protected private(set) static bool $correctOrder;
+
+    private(set) static final protected bool $wrongOrder3;
+    private(set) static protected final bool $wrongOrder4;
+    final protected(set) static public bool $wrongOrder5;
+    static public(set) final public bool $wrongOrder6;
+
+    protected private(set) static final bool $wrongOrder7;
+    protected final private(set) static bool $wrongOrder8;
+    static public final protected(set) bool $wrongOrder9;
+    public static public(set) final bool $wrongOrder10;
+
+    private(set) static final bool $wrongOrder11;
+    final static protected(set) bool $wrongOrder12;
+    static public(set) final bool $wrongOrder13;
 }
