@@ -20,6 +20,7 @@ use RecursiveArrayIterator;
  * Tests for the \PHP_CodeSniffer\Filters\Filter::accept method.
  *
  * @covers \PHP_CodeSniffer\Filters\Filter
+ * @group  Windows
  */
 final class AcceptTest extends AbstractFilterTestCase
 {
@@ -46,15 +47,22 @@ final class AcceptTest extends AbstractFilterTestCase
      *
      * @param array<string> $inputPaths     List of file paths to be filtered.
      * @param array<string> $expectedOutput Expected filtering result.
+     * @param bool          $localFiles     Value of the Config class "local" setting (default: false).
      *
      * @dataProvider dataExcludePatterns
      *
      * @return void
      */
-    public function testExcludePatterns($inputPaths, $expectedOutput)
+    public function testExcludePatterns($inputPaths, $expectedOutput, $localFiles=false)
     {
         $fakeDI = new RecursiveArrayIterator($inputPaths);
         $filter = new Filter($fakeDI, '/', self::$config, self::$ruleset);
+
+        self::$config->local = false;
+
+        if ($localFiles === true) {
+            self::$config->local = true;
+        }
 
         $this->assertSame($expectedOutput, $this->getFilteredResultsAsArray($filter));
 
@@ -98,6 +106,60 @@ final class AcceptTest extends AbstractFilterTestCase
                     '/path/to/src/generic/Main.php',
                     '/path/to/src/anything-generic/Main.php',
                 ],
+            ],
+            'Filter should exclude files without an extension, using unsupported extension and starting with a dot'             => [
+                'inputPaths'     => [
+                    '/path/to/src/Main.php',
+                    '/path/to/src/.hiddenfile',
+                    '/path/to/src/NoExtension',
+                    '/path/to/src/UnsupportedExtension.txt',
+                    '/path/to/src/UnsupportedExtension.php.bak',
+                ],
+                'expectedOutput' => [
+                    '/path/to/src/Main.php',
+                ],
+            ],
+            'Filter should ignore duplicate files'                                                                              => [
+                'inputPaths'     => [
+                    __FILE__,
+                    __FILE__,
+                    '/path/to/src/Main.php',
+                ],
+                'expectedOutput' => [
+                    __FILE__,
+                    '/path/to/src/Main.php',
+                ],
+            ],
+            'Filter should work for relative exclude patterns'                                                                  => [
+                'inputPaths'     => [
+                    'src/Main.php',
+                    'src/AnotherDir/File.php',
+                ],
+                'expectedOutput' => [
+                    'src/Main.php',
+                ],
+            ],
+
+            // Uses real directories to test code that calls is_dir().
+            'Filter should handle directories'                                                                                  => [
+                'inputPaths'     => [
+                    self::getBaseDir().'/src/Generators',
+                    self::getBaseDir().'/src/Standards',
+                ],
+                'expectedOutput' => [
+                    self::getBaseDir().'/src/Standards',
+                ],
+            ],
+            'Filter should ignore directories when --local is used'                                                             => [
+                'inputPaths'     => [
+                    'src/Main.php',
+                    self::getBaseDir().'/src/Generators',
+                    self::getBaseDir().'/src/Standards',
+                ],
+                'expectedOutput' => [
+                    'src/Main.php',
+                ],
+                'localFiles'     => true,
             ],
         ];
 

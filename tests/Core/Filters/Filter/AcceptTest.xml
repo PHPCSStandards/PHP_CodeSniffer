@@ -2,10 +2,14 @@
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="AcceptTest" xsi:noNamespaceSchemaLocation="phpcs.xsd">
     <description>Ruleset to test the filtering based on exclude patterns.</description>
 
-    <!-- Directory pattern. -->
+    <!-- Directory patterns. -->
     <exclude-pattern>*/something/*</exclude-pattern>
+    <exclude-pattern>*/src/Generators/*</exclude-pattern>
     <!-- File pattern. -->
     <exclude-pattern>*/Other/Main\.php$</exclude-pattern>
+
+    <!-- Relative directory pattern. -->
+    <exclude-pattern type="relative">/AnotherDir/*</exclude-pattern>
 
     <rule ref="Generic">
         <exclude name="Generic.Debug"/>
