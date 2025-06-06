@@ -75,7 +75,7 @@ class TypedProperties
 }
 
 class ConstructorPropertyPromotionWithTypes {
-    public function __construct(protected Float|Int $x, public ?STRING &$y = 'test', private mixed $z) {}
+    public function __construct(protected Float|Int $x, public(set) ?STRING &$y = 'test', private mixed $z) {}
 }
 
 class ConstructorPropertyPromotionAndNormalParams {
