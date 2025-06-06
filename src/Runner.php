@@ -777,7 +777,8 @@ class Runner
 
         while (count($childProcs) > 0) {
             $pid = pcntl_waitpid(0, $status);
-            if ($pid <= 0) {
+            if ($pid <= 0 || array_key_exists($pid, $childProcs) === false) {
+                // No child or a child with an unmanaged PID was returned.
                 continue;
             }
 
