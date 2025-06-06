@@ -24,8 +24,9 @@ class ScopeKeywordSpacingSniff implements Sniff
      */
     public function register()
     {
-        $register   = Tokens::$methodPrefixes;
-        $register[] = T_READONLY;
+        $register  = Tokens::$methodPrefixes;
+        $register += Tokens::$scopeModifiers;
+        $register[T_READONLY] = T_READONLY;
         return $register;
 
     }//end register()

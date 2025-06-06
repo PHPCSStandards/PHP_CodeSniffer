@@ -70,6 +70,9 @@ final class ScopeKeywordSpacingUnitTest extends AbstractSniffUnitTest
                 187 => 1,
                 188 => 1,
                 193 => 2,
+                197 => 1,
+                198 => 3,
+                199 => 2,
             ];
 
         case 'ScopeKeywordSpacingUnitTest.3.inc':
