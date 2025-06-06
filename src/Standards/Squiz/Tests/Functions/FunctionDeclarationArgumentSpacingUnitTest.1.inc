@@ -210,3 +210,18 @@ class PropertyPromotionSpacingAfterModifier {
         string $tooMuchSpaceNewLines,
     ) {}
 }
+
+class AsymVisibilityPropertyPromotionSpacingAfterComma {
+    public function __construct(private(set) string|int $propA, protected(set) bool $correctSpace,  public(set) MyClass $tooMuchSpace,public(set) string $noSpace) {}
+}
+
+class AsymVisibilityPropertyPromotionSpacingAfterModifier {
+    public function __construct(
+        private(set)$noSpace,
+        public(set)    MyClass $tooMuchSpace,
+        protected(set)   public   string $tooMuchSpaceX2,
+        private
+        public(set)
+        string $tooMuchSpaceNewLines,
+    ) {}
+}
