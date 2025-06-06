@@ -114,3 +114,20 @@ final class FinalClassWithFinalProp
       */
     final $property = 10;
 }
+
+class AsymVisibility {
+    /**
+    * Stars should be aligned.
+   */
+    public(set) int $prop = 1;
+
+    /**
+      * Stars should be aligned.
+       */
+    protected(set) int $prop = 1;
+
+    /**
+     * Stars should be aligned.
+     */
+    private(set) int $prop = 1;
+}
