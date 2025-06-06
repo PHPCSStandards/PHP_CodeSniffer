@@ -60,5 +60,17 @@ $c = function() {
     from fun();
 }
 
+class AsymmetricVisibility {
+    public(set) int $correctPublicSet;
+    protected(set) int $correctProtectedSet;
+    private(set) int $correctPrivateSet;
+
+    public(set) int $wrongCasePublic;
+    protected(set) array $wrongCaseProtected;
+    protected(set) int $wrongCaseProtectedSet;
+    private(set) int $wrongCasePrivate;
+    private(set) readonly ?string $wrongCasePrivateSet;
+}
+
 __HALT_COMPILER(); // An exception due to phar support.
 function
