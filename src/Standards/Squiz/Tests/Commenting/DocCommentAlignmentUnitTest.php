@@ -57,6 +57,10 @@ final class DocCommentAlignmentUnitTest extends AbstractSniffTestCase
             112 => 1,
             113 => 1,
             114 => 1,
+            120 => 1,
+            121 => 1,
+            125 => 1,
+            126 => 1,
         ];
 
     }//end getErrorList()

@@ -45,6 +45,9 @@ final class MemberVarScopeUnitTest extends AbstractSniffTestCase
                 67 => 1,
                 71 => 1,
                 75 => 1,
+                80 => 1,
+                81 => 1,
+                82 => 1,
             ];
 
         default:
