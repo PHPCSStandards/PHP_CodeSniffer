@@ -33,6 +33,9 @@ class LowerCaseKeywordSniff implements Sniff
             T_MATCH_DEFAULT => T_MATCH_DEFAULT,
             T_PARENT        => T_PARENT,
             T_SELF          => T_SELF,
+            T_PUBLIC_SET    => T_PUBLIC_SET,
+            T_PROTECTED_SET => T_PROTECTED_SET,
+            T_PRIVATE_SET   => T_PRIVATE_SET,
         ];
 
         return $targets;
