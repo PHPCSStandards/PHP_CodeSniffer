@@ -2191,6 +2191,122 @@ final class GetMethodParametersTest extends AbstractMethodUnitTest
 
 
     /**
+     * Verify recognition of PHP8 constructor with property promotion using PHP 8.4 asymmetric visibility.
+     *
+     * @return void
+     */
+    public function testPHP84ConstructorPropertyPromotionWithAsymVisibility()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected    = [];
+        $expected[0] = [
+            'token'                => 12,
+            'name'                 => '$book',
+            'content'              => 'protected(set) string|Book $book',
+            'has_attributes'       => false,
+            'pass_by_reference'    => false,
+            'reference_token'      => false,
+            'variable_length'      => false,
+            'variadic_token'       => false,
+            'type_hint'            => 'string|Book',
+            'type_hint_token'      => 8,
+            'type_hint_end_token'  => 10,
+            'nullable_type'        => false,
+            'property_visibility'  => 'public',
+            'visibility_token'     => false,
+            'set_visibility'       => 'protected(set)',
+            'set_visibility_token' => 6,
+            'property_readonly'    => false,
+            'comma_token'          => 13,
+        ];
+        $expected[1] = [
+            'token'                => 23,
+            'name'                 => '$publisher',
+            'content'              => 'public private(set) ?Publisher $publisher',
+            'has_attributes'       => false,
+            'pass_by_reference'    => false,
+            'reference_token'      => false,
+            'variable_length'      => false,
+            'variadic_token'       => false,
+            'type_hint'            => '?Publisher',
+            'type_hint_token'      => 21,
+            'type_hint_end_token'  => 21,
+            'nullable_type'        => true,
+            'property_visibility'  => 'public',
+            'visibility_token'     => 16,
+            'set_visibility'       => 'private(set)',
+            'set_visibility_token' => 18,
+            'property_readonly'    => false,
+            'comma_token'          => 24,
+        ];
+        $expected[2] = [
+            'token'                => 33,
+            'name'                 => '$author',
+            'content'              => 'Private(set) PROTECTED Author $author',
+            'has_attributes'       => false,
+            'pass_by_reference'    => false,
+            'reference_token'      => false,
+            'variable_length'      => false,
+            'variadic_token'       => false,
+            'type_hint'            => 'Author',
+            'type_hint_token'      => 31,
+            'type_hint_end_token'  => 31,
+            'nullable_type'        => false,
+            'property_visibility'  => 'PROTECTED',
+            'visibility_token'     => 29,
+            'set_visibility'       => 'Private(set)',
+            'set_visibility_token' => 27,
+            'property_readonly'    => false,
+            'comma_token'          => 34,
+        ];
+        $expected[3] = [
+            'token'                => 43,
+            'name'                 => '$pubYear',
+            'content'              => 'readonly public(set) int $pubYear',
+            'has_attributes'       => false,
+            'pass_by_reference'    => false,
+            'reference_token'      => false,
+            'variable_length'      => false,
+            'variadic_token'       => false,
+            'type_hint'            => 'int',
+            'type_hint_token'      => 41,
+            'type_hint_end_token'  => 41,
+            'nullable_type'        => false,
+            'property_visibility'  => 'public',
+            'visibility_token'     => false,
+            'set_visibility'       => 'public(set)',
+            'set_visibility_token' => 39,
+            'property_readonly'    => true,
+            'readonly_token'       => 37,
+            'comma_token'          => 44,
+        ];
+        $expected[4] = [
+            'token'                => 49,
+            'name'                 => '$illegalMissingType',
+            'content'              => 'protected(set) $illegalMissingType',
+            'has_attributes'       => false,
+            'pass_by_reference'    => false,
+            'reference_token'      => false,
+            'variable_length'      => false,
+            'variadic_token'       => false,
+            'type_hint'            => '',
+            'type_hint_token'      => false,
+            'type_hint_end_token'  => false,
+            'nullable_type'        => false,
+            'property_visibility'  => 'public',
+            'visibility_token'     => false,
+            'set_visibility'       => 'protected(set)',
+            'set_visibility_token' => 47,
+            'property_readonly'    => false,
+            'comma_token'          => 50,
+        ];
+
+        $this->getMethodParametersTestHelper('/* '.__FUNCTION__.' */', $expected);
+
+    }//end testPHP84ConstructorPropertyPromotionWithAsymVisibility()
+
+
+    /**
      * Verify behaviour when a non-constructor function uses PHP 8 property promotion syntax.
      *
      * @return void
@@ -3212,6 +3328,10 @@ final class GetMethodParametersTest extends AbstractMethodUnitTest
 
             if (isset($param['visibility_token']) === true && is_int($param['visibility_token']) === true) {
                 $expected[$key]['visibility_token'] += $target;
+            }
+
+            if (isset($param['set_visibility_token']) === true && is_int($param['set_visibility_token']) === true) {
+                $expected[$key]['set_visibility_token'] += $target;
             }
 
             if (isset($param['readonly_token']) === true) {
