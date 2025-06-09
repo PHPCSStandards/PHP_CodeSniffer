@@ -1,0 +1,60 @@
+name: E2E Tests
+
+on:
+  # Run on pushes to `master`/`4.0` and on all pull requests.
+  # Prevent the build from running when there are only irrelevant changes.
+  push:
+    branches:
+      - master
+      - 4.0
+    tags:
+      - '**'
+    paths-ignore:
+      - '**.md'
+  pull_request:
+  # Allow manually triggering the workflow.
+  workflow_dispatch:
+
+jobs:
+  bash-tests:
+    # Cancels all previous runs of this particular job for the same branch that have not yet completed.
+    concurrency:
+      # The concurrency group contains the workflow name, job name, job index and the branch name.
+      group: ${{ github.workflow }}-${{ github.job }}-${{ strategy.job-index }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    runs-on: 'ubuntu-latest'
+
+    strategy:
+      matrix:
+        php: ['5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
+
+    # yamllint disable-line rule:line-length
+    name: "E2E PHP: ${{ matrix.php }}"
+
+    continue-on-error: ${{ matrix.php == '8.5' }}
+
+    steps:
+      - name: Prepare git to leave line endings alone
+        run: git config --global core.autocrlf input
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          ini-values: "error_reporting=-1, display_errors=On"
+          coverage: none
+
+      - name: "Install bashunit"
+        shell: bash
+        run: |
+          curl -s https://bashunit.typeddevs.com/install.sh > install.sh
+          chmod +x install.sh
+          ./install.sh
+
+      - name: "Run bashunit tests"
+        shell: bash
+        run: "./lib/bashunit -p tests/EndToEnd"
