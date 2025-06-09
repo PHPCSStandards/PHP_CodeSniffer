@@ -53,7 +53,9 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
 
         $endOfPreviousStatement = $phpcsFile->findPrevious($stopPoints, ($stackPtr - 1), null, false, null, true);
 
-        $validPrefixes   = Tokens::$methodPrefixes;
+        $validPrefixes   = Tokens::$scopeModifiers;
+        $validPrefixes[] = T_STATIC;
+        $validPrefixes[] = T_FINAL;
         $validPrefixes[] = T_VAR;
         $validPrefixes[] = T_READONLY;
 
