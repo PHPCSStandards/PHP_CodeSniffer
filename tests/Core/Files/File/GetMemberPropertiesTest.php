@@ -68,6 +68,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -82,6 +83,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -96,6 +98,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -110,6 +113,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -124,6 +128,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -138,6 +143,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -152,6 +158,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -166,6 +173,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -180,6 +188,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -194,6 +203,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -208,6 +218,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -222,6 +233,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -236,6 +248,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -250,6 +263,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -264,6 +278,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -278,6 +293,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -292,6 +308,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -306,6 +323,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -320,6 +338,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -334,6 +353,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -348,6 +368,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -362,6 +383,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -376,6 +398,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -390,6 +413,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -404,6 +428,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -418,6 +443,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -432,6 +458,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -446,6 +473,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -460,6 +488,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -474,6 +503,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -488,6 +518,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -502,6 +533,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -516,6 +548,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -530,6 +563,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -544,6 +578,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -558,6 +593,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -572,6 +608,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -586,6 +623,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -600,6 +638,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -614,6 +653,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -628,6 +668,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -642,6 +683,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -656,6 +698,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -670,6 +713,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -684,6 +728,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -698,6 +743,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -712,6 +758,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -726,6 +773,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -740,6 +788,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -754,6 +803,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -769,6 +819,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -783,6 +834,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -797,6 +849,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -811,6 +864,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -825,6 +879,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -839,6 +894,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -853,6 +909,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -867,6 +924,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => true,
                     'is_final'        => false,
@@ -881,6 +939,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => true,
                     'is_final'        => false,
@@ -895,6 +954,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => true,
                     'is_final'        => false,
@@ -909,6 +969,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => true,
                     'is_final'        => false,
@@ -923,6 +984,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => true,
                     'is_final'        => false,
@@ -937,6 +999,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => true,
                     'is_final'        => false,
@@ -951,6 +1014,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => true,
                     'is_final'        => false,
@@ -965,6 +1029,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => true,
                     'is_final'        => false,
@@ -979,6 +1044,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -993,6 +1059,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -1007,6 +1074,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -1021,6 +1089,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -1035,6 +1104,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -1049,6 +1119,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -1063,6 +1134,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -1078,6 +1150,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -1092,6 +1165,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -1106,6 +1180,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -1120,6 +1195,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -1134,6 +1210,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -1148,6 +1225,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => true,
                     'is_final'        => false,
@@ -1163,6 +1241,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -1177,6 +1256,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => true,
                     'is_final'        => false,
@@ -1191,6 +1271,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'private',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => true,
                     'is_final'        => false,
@@ -1205,6 +1286,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => false,
@@ -1219,6 +1301,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => true,
@@ -1233,6 +1316,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'protected',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => true,
@@ -1247,6 +1331,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => true,
@@ -1261,6 +1346,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => true,
                     'is_readonly'     => false,
                     'is_final'        => true,
@@ -1275,6 +1361,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => true,
                     'is_final'        => true,
@@ -1289,6 +1376,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => true,
@@ -1303,6 +1391,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => false,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => true,
@@ -1317,6 +1406,7 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => true,
@@ -1331,11 +1421,163 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 'expected'   => [
                     'scope'           => 'public',
                     'scope_specified' => true,
+                    'set_scope'       => false,
                     'is_static'       => false,
                     'is_readonly'     => false,
                     'is_final'        => true,
                     'type'            => '(Foo&\Bar)|bool',
                     'type_token'      => -8,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => false,
+                ],
+            ],
+
+            'php8.4-asym-public-set'                                       => [
+                'identifier' => '/* testPHP84AsymPublicSetProperty */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => false,
+                    'set_scope'       => 'public',
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'is_final'        => false,
+                    'type'            => 'mixed',
+                    'type_token'      => -2,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => false,
+                ],
+            ],
+            'php8.4-asym-public-public-set-dnf-type'                       => [
+                'identifier' => '/* testPHP84AsymPublicPublicSetProperty */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => true,
+                    'set_scope'       => 'public',
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'is_final'        => false,
+                    'type'            => '(A&B)|null',
+                    'type_token'      => -8,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => false,
+                ],
+            ],
+            'php8.4-asym-public-set-public'                                => [
+                'identifier' => '/* testPHP84AsymPublicSetPublicProperty */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => true,
+                    'set_scope'       => 'public',
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'is_final'        => false,
+                    'type'            => 'bool',
+                    'type_token'      => -2,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => false,
+                ],
+            ],
+            'php8.4-asym-protected-set-readonly'                           => [
+                'identifier' => '/* testPHP84AsymProtectedSetProperty */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => false,
+                    'set_scope'       => 'protected',
+                    'is_static'       => false,
+                    'is_readonly'     => true,
+                    'is_final'        => false,
+                    'type'            => 'mixed',
+                    'type_token'      => -2,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => false,
+                ],
+            ],
+            'php8.4-asym-public-protected-set'                             => [
+                'identifier' => '/* testPHP84AsymPublicProtectedSetProperty */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => true,
+                    'set_scope'       => 'protected',
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'is_final'        => false,
+                    'type'            => 'string',
+                    'type_token'      => -2,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => false,
+                ],
+            ],
+            'php8.4-asym-protected-set-public-nullable-type'               => [
+                'identifier' => '/* testPHP84AsymProtectedSetPublicProperty */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => true,
+                    'set_scope'       => 'protected',
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'is_final'        => false,
+                    'type'            => '?float',
+                    'type_token'      => -2,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => true,
+                ],
+            ],
+            'php8.4-asym-private-set-union-type'                           => [
+                'identifier' => '/* testPHP84AsymPrivateSetProperty */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => false,
+                    'set_scope'       => 'private',
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'is_final'        => false,
+                    'type'            => 'string|int',
+                    'type_token'      => -4,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => false,
+                ],
+            ],
+            'php8.4-asym-final-protected-private-set'                      => [
+                'identifier' => '/* testPHP84AsymProtectedPrivateSetProperty */',
+                'expected'   => [
+                    'scope'           => 'protected',
+                    'scope_specified' => true,
+                    'set_scope'       => 'private',
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'is_final'        => true,
+                    'type'            => '',
+                    'type_token'      => false,
+                    'type_end_token'  => false,
+                    'nullable_type'   => false,
+                ],
+            ],
+            'php8.4-asym-private-set-public'                               => [
+                'identifier' => '/* testPHP84AsymPrivateSetPublicProperty */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => true,
+                    'set_scope'       => 'private',
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'is_final'        => false,
+                    'type'            => 'mixed',
+                    'type_token'      => -2,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => false,
+                ],
+            ],
+            'php8.4-illegal-asym-public-protected-set-static'              => [
+                'identifier' => '/* testPHP84IllegalAsymPublicProtectedSetStaticProperty */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => true,
+                    'set_scope'       => 'protected',
+                    'is_static'       => true,
+                    'is_readonly'     => false,
+                    'is_final'        => false,
+                    'type'            => 'mixed',
+                    'type_token'      => -2,
                     'type_end_token'  => -2,
                     'nullable_type'   => false,
                 ],
