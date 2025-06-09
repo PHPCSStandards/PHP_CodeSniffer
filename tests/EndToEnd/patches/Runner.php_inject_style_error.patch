@@ -1,0 +1,11 @@
+--- a/src/Runner.php
++++ b/src/Runner.php
+@@ -73,7 +73,7 @@ class Runner
+             $this->config = new Config();
+ 
+             // Init the run and load the rulesets to set additional config vars.
+-            $this->init();
++            $this->init(); // This comment is not allowed here
+ 
+             // Print a list of sniffs in each of the supplied standards.
+             // We fudge the config here so that each standard is explained in isolation.
