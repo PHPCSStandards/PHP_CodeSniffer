@@ -139,8 +139,16 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testFunctionParenthesesOwnerReturnByRef */',
                 'tokenCode'  => T_FUNCTION,
             ],
-            'function declaration, keyword as function name' => [
-                'testMarker' => '/* testFunctionParenthesesOwnerKeywordName */',
+            'function declaration, "match" as function name' => [
+                'testMarker' => '/* testFunctionParenthesesOwnerKeywordNameMatch */',
+                'tokenCode'  => T_FUNCTION,
+            ],
+            'function declaration, "fn" as function name'    => [
+                'testMarker' => '/* testFunctionParenthesesOwnerKeywordNameFn */',
+                'tokenCode'  => T_FUNCTION,
+            ],
+            'function declaration, "&fn" as function name'   => [
+                'testMarker' => '/* testFunctionParenthesesOwnerKeywordNameFnReturnByRef */',
                 'tokenCode'  => T_FUNCTION,
             ],
             'closure declaration'                            => [
@@ -276,7 +284,7 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
 
 
     /**
-     * Test parentheses owner tokens when used without parentheses (where possible) do *not* the "parenthesis_*" token indexes set.
+     * Test parentheses owner tokens when used without parentheses (where possible) do *not* have the "parenthesis_*" token indexes set.
      *
      * @param string     $testMarker The comment prefacing the target token.
      * @param int|string $tokenCode  The token code to look for.
