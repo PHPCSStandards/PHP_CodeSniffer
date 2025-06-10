@@ -60,8 +60,14 @@ function name($a, $b/* testFunctionParenthesesCloser */) {}
 function &returnByRef ($a, $b/* testFunctionParenthesesCloserReturnByRef */) {}
 
 class ReservedKeyword {
-    /* testFunctionParenthesesOwnerKeywordName */
-    public function match($a, $b/* testFunctionParenthesesCloserKeywordName */) {}
+    /* testFunctionParenthesesOwnerKeywordNameMatch */
+    public function match($a, $b/* testFunctionParenthesesCloserKeywordNameMatch */) {}
+
+    /* testFunctionParenthesesOwnerKeywordNameFn */
+    public function fn($a, $b/* testFunctionParenthesesCloserKeywordNameFn */) {}
+
+    /* testFunctionParenthesesOwnerKeywordNameFnReturnByRef */
+    public function &fn($a, $b/* testFunctionParenthesesCloserKeywordNameFnReturnByRef */) {}
 }
 
 /* testClosureParenthesesOwner */

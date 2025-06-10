@@ -2217,6 +2217,8 @@ class PHP extends Tokenizer
             if ($tokenIsArray === true
                 && $token[0] === T_STRING
                 && strtolower($token[1]) === 'fn'
+                && isset(static::T_STRING_CONTEXTS[$finalTokens[$lastNotEmptyToken]['code']]) === false
+                && $finalTokens[$lastNotEmptyToken]['content'] !== '&'
             ) {
                 // Modify the original token stack so that
                 // future checks (like looking for T_NULLABLE) can
