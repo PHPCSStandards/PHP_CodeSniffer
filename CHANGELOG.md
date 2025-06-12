@@ -6,6 +6,58 @@ The file documents changes to the PHP_CodeSniffer project.
 
 _Nothing yet._
 
+## [3.13.1] - 2025-06-12
+
+### Added
+- Added support for PHP 8.4 properties with asymmetric visibility to File::getMemberProperties() through a new `set_scope` array index in the return value. [#1116]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patches.
+- Added support for PHP 8.4 (constructor promoted) properties with asymmetric visibility to File::getMethodParameters() through new `set_visibility` and `set_visibility_token` array indexes in the return value. [#1116]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patches.
+- Added support for PHP 8.4 asymmetric visibility modifiers to the following sniffs:
+    - Generic.PHP.LowerCaseKeyword [#1117]
+    - PEAR.NamingConventions.ValidVariableName [#1118]
+    - PSR2.Classes.PropertyDeclaration [#1119]
+    - Squiz.Commenting.BlockComment [#1120]
+    - Squiz.Commenting.DocCommentAlignment [#1120]
+    - Squiz.Commenting.VariableComment [#1120]
+    - Squiz.Functions.FunctionDeclarationArgumentSpacing [#1121]
+    - Squiz.Scope.MemberVarScope [#1122]
+    - Squiz.WhiteSpace.MemberVarSpacing [#1123]
+    - Squiz.WhiteSpace.ScopeKeywordSpacing [#1124]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patches.
+
+### Changed
+- The PSR2.Classes.PropertyDeclaration will now check that a set-visibility modifier keyword is placed after a potential general visibility keyword. [#1119]
+    - Errors will be reported via a new `AvizKeywordOrder` error code.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- The Squiz.Functions.FunctionDeclarationArgumentSpacing will now check spacing after a set-visibility modifier keyword. [#1121]
+    - Errors will be reported via a new `SpacingAfterSetVisbility` error code.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- The Squiz.Scope.MemberVarScope will now flag missing "read" visibility, when "write" visibility is set, under a separate error code `AsymReadMissing`. [#1122]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- The documentation for the following sniffs has been improved:
+    - PEAR.Classes.ClassDeclaration
+    - Squiz.WhiteSpace.FunctionOpeningBraceSpace
+    - Thanks to [Brian Dunne][@braindawg] and [Rodrigo Primo][@rodrigoprimo] for the patches.
+- Various housekeeping, including improvements to the tests and documentation.
+    - Thanks to [Dan Wallis][@fredden], [Rodrigo Primo][@rodrigoprimo] and [Juliette Reinders Folmer][@jrfnl] for their contributions.
+
+### Other
+- The latest PHP_CodeSniffer XSD file is now available via the following permalink: <https://schema.phpcodesniffer.com/phpcs.xsd>. [#1094]
+    Older XSD files can be referenced via permalinks based on their minor: `https://schema.phpcodesniffer.com/#.#/phpcs.xsd`.
+
+[#1094]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/1094
+[#1116]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1116
+[#1117]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1117
+[#1118]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1118
+[#1119]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1119
+[#1120]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1120
+[#1121]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1121
+[#1122]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1122
+[#1123]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1123
+[#1124]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1124
+
+
 ## [3.13.0] - 2025-05-11
 
 ### Added
@@ -7582,6 +7634,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 -->
 
 [Unreleased]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/master...HEAD
+[3.13.1]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.13.0...3.13.1
 [3.13.0]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.12.2...3.13.0
 [3.12.2]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.12.1...3.12.2
 [3.12.1]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.12.0...3.12.1
