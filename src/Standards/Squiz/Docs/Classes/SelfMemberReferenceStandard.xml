@@ -7,10 +7,8 @@
     <code_comparison>
         <code title="Valid: Lowercase self used.">
         <![CDATA[
-class Bar
-{
-    public function baz()
-    {
+class Bar {
+    public function baz() {
         <em>self</em>::foo();
     }
 }
@@ -18,10 +16,8 @@ class Bar
         </code>
         <code title="Invalid: Uppercase self used.">
         <![CDATA[
-class Bar
-{
-    public function baz()
-    {
+class Bar {
+    public function baz() {
         <em>SELF</em>::foo();
     }
 }
@@ -36,10 +32,8 @@ class Bar
     <code_comparison>
         <code title="Valid: No spaces around the double colon operator.">
         <![CDATA[
-class Bar
-{
-    public function baz()
-    {
+class Bar {
+    public function baz() {
         self<em></em>::<em></em>foo();
     }
 }
@@ -47,10 +41,8 @@ class Bar
         </code>
         <code title="Invalid: Spaces around double colon operator.">
         <![CDATA[
-class Bar
-{
-    public function baz()
-    {
+class Bar {
+    public function baz() {
         self<em> </em>::<em> </em>foo();
     }
 }
@@ -65,12 +57,10 @@ class Bar
     <code_comparison>
         <code title="Valid: Self used as reference.">
         <![CDATA[
-class Foo
-{
+class Foo {
     public function bar() {}
 
-    public function baz()
-    {
+    public function baz() {
         <em>self</em>::bar();
     }
 }
@@ -78,12 +68,10 @@ class Foo
         </code>
         <code title="Invalid: Local class name used as reference.">
         <![CDATA[
-class <em>Foo</em>
-{
+class <em>Foo</em> {
     public function bar() {}
 
-    public function baz()
-    {
+    public function baz() {
         <em>Foo</em>::bar();
     }
 }
