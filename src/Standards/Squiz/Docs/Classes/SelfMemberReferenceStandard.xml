@@ -67,6 +67,8 @@ class Bar
         <![CDATA[
 class Foo
 {
+    public static function bar() {}
+
     public static function baz()
     {
         <em>self</em>::bar();
@@ -78,6 +80,8 @@ class Foo
         <![CDATA[
 class <em>Foo</em>
 {
+    public static function bar() {}
+
     public static function baz()
     {
         <em>Foo</em>::bar();
