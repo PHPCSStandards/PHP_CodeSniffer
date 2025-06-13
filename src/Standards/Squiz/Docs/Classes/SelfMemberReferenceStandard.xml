@@ -1,9 +1,7 @@
 <documentation title="Self Member Reference">
     <standard>
     <![CDATA[
-    When referencing static members within a class, the self keyword must be used instead of the
-    current class name, it must be lowercase, and there must be no spaces before or after the double
-    colon.
+    The self keyword must be lowercase.
     ]]>
     </standard>
     <code_comparison>
@@ -30,8 +28,13 @@ class Bar
         ]]>
         </code>
     </code_comparison>
+    <standard>
+    <![CDATA[
+    There must be no spaces before or after the double colon operator.
+    ]]>
+    </standard>
     <code_comparison>
-        <code title="Valid: No spaces around the double colon.">
+        <code title="Valid: No spaces around the double colon operator.">
         <![CDATA[
 class Bar
 {
@@ -54,6 +57,11 @@ class Bar
         ]]>
         </code>
     </code_comparison>
+    <standard>
+    <![CDATA[
+    The self keyword must be used instead of the current class name.
+    ]]>
+    </standard>
     <code_comparison>
         <code title="Valid: Self used as reference.">
         <![CDATA[
