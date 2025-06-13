@@ -113,9 +113,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_FORCE_TTY: true
 
-      - name: Download public key
+      - name: Download public key (May 2024)
         env:
           FINGERPRINT: "0x689DAD778FF08760E046228BA978220305CD5C32"
+        run: gpg --keyserver "hkps://keys.openpgp.org" --recv-keys "$FINGERPRINT"
+
+      - name: Download public key (June 2025)
+        env:
+          FINGERPRINT: "0xD91D86963AF3A29B6520462297B02DD8E5071466"
         run: gpg --keyserver "hkps://keys.openpgp.org" --recv-keys "$FINGERPRINT"
 
       - name: Verify signature of the PHAR file
@@ -200,7 +205,9 @@ jobs:
           tools: phive
 
       - name: Install
-        run: phive install ${{ matrix.pharfile }} --copy --trust-gpg-keys 689DAD778FF08760E046228BA978220305CD5C32
+        run: >
+          phive install ${{ matrix.pharfile }} --copy
+          --trust-gpg-keys 689DAD778FF08760E046228BA978220305CD5C32,D91D86963AF3A29B6520462297B02DD8E5071466
 
       - name: "DEBUG: List files"
         run: ls -R

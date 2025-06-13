@@ -8,6 +8,17 @@
 - [ ] Verify that any new functions have type declarations (ClassName/array/callable) whenever possible.
 - [ ] Verify that the license tags all refer to the _new_ organisation and no longer to Squizlabs. (easily overlooked in new files)
 - [ ] Verify that `@copyright` tags in new files use `@copyright 20xx PHPCSStandards and contributors`.
+- [ ] Check if the GPG key is still valid (not expired).
+    If it has expired, create a new key before starting the release process.
+    - Generate a new key following the steps here: <https://phar.io/howto/generate-gpg-key.html>.
+    - Upload the new key following the steps here: <https://phar.io/howto/uploading-public-keys.html>.
+        :warning: the command for exporting the key will export _all_ keys for the email address. This will not work as OpenPGP does not send an email to verify the key if the upload contained multiple keys.
+        So, first run `gpg --keyid-format LONG --list-keys my@email.com`.
+        Then run `gpg --export --armor KEY_ID > phpcs.pub` specifically for the new key.
+        And then upload the file.
+    - Verify the key via the link received via email.
+    - Update the key information in the README x 3.
+    - Update the key info in the verify-release GHA workflow x 2.
 
 ### Wiki
 
@@ -77,11 +88,6 @@ Please consider [funding the PHP_CodeSniffer project](https://opencollective.com
     gpg -u my@email.com --detach-sign --output phpcs-x.x.x.phar.asc phpcs-x.x.x.phar
     gpg -u my@email.com --detach-sign --output phpcbf-x.x.x.phar.asc phpcbf-x.x.x.phar
     ```
-    - If, for whatever reason, the key is no longer available or has expired:
-      -> generate a new key following the steps here: <https://phar.io/howto/generate-gpg-key.html>.
-      -> upload the new key following the steps here: <https://phar.io/howto/uploading-public-keys.html>.
-      -> update the key information in the README x 3.
-      -> update the key info in the verify-release GHA workflow.
 - [ ] Get the SHA of the files for the phive.xml file
     ```bash
     # Linux
