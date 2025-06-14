@@ -247,13 +247,6 @@ class Filter extends RecursiveFilterIterator
         }
 
         foreach ($ignorePatterns as $pattern => $type) {
-            // Maintains backwards compatibility in case the ignore pattern does
-            // not have a relative/absolute value.
-            if (is_int($pattern) === true) {
-                $pattern = $type;
-                $type    = 'absolute';
-            }
-
             $replacements = [
                 '\\,' => ',',
                 '*'   => '.*',
