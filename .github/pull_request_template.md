@@ -40,6 +40,7 @@ Fixes #
 - [ ] I have added tests to cover my changes.
 - [ ] I have verified that the code complies with the projects coding standards.
 - [ ] \[Required for new sniffs\] I have added XML documentation for the sniff.
+- [ ] I have opened a sister-PR in the [documentation repository](https://github.com/PHPCSStandards/PHP_CodeSniffer-documentation) to update the Wiki.
 
 <!--
 ============================================================================================
