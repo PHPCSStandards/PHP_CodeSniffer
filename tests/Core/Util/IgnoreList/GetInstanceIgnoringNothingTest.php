@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers PHP_CodeSniffer\Util\IgnoreList::getInstanceIgnoringNothing
  */
-class GetInstanceIgnoringNothingTest extends TestCase
+final class GetInstanceIgnoringNothingTest extends TestCase
 {
 
 

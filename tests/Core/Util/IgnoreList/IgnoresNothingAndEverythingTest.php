@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
  * @covers PHP_CodeSniffer\Util\IgnoreList::ignoresNothing
  * @covers PHP_CodeSniffer\Util\IgnoreList::ignoresEverything
  */
-class IgnoresNothingAndEverythingTest extends TestCase
+final class IgnoresNothingAndEverythingTest extends TestCase
 {
 
 

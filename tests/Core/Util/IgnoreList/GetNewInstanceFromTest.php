@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers PHP_CodeSniffer\Util\IgnoreList::getNewInstanceFrom
  */
-class GetNewInstanceFromTest extends TestCase
+final class GetNewInstanceFromTest extends TestCase
 {
 
 

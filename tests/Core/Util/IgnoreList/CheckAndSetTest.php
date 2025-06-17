@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
  * @covers PHP_CodeSniffer\Util\IgnoreList::isIgnored
  * @covers PHP_CodeSniffer\Util\IgnoreList::set
  */
-class CheckAndSetTest extends TestCase
+final class CheckAndSetTest extends TestCase
 {
 
 
