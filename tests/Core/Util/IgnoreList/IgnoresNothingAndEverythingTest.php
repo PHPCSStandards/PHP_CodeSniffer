@@ -24,9 +24,9 @@ class IgnoresNothingAndEverythingTest extends TestCase
     /**
      * Test ignoresNothing() and ignoresEverything().
      *
-     * @param IgnoreList $ignoreList              IgnoreList to test.
-     * @param bool       $expectIgnoresNothing    Expected return value from ignoresNothing().
-     * @param bool       $expectIgnoresEverything Expected return value from ignoresEverything().
+     * @param \PHP_CodeSniffer\Util\IgnoreList $ignoreList              IgnoreList to test.
+     * @param bool                             $expectIgnoresNothing    Expected return value from ignoresNothing().
+     * @param bool                             $expectIgnoresEverything Expected return value from ignoresEverything().
      *
      * @return void
      *
@@ -45,7 +45,7 @@ class IgnoresNothingAndEverythingTest extends TestCase
      *
      * @see testIgnoresNothingAndEverything()
      *
-     * @return array<string, array<IgnoreList|bool>>
+     * @return array<string, array<\PHP_CodeSniffer\Util\IgnoreList|bool>>
      */
     public static function dataIgnoresNothingAndEverything()
     {
