@@ -56,8 +56,8 @@ final class CheckAndSetTest extends TestCase
     {
         return [
             'set a code'                                                                       => [
-                ['Standard.Category.Sniff.Code' => true],
-                [
+                'toSet'   => ['Standard.Category.Sniff.Code' => true],
+                'toCheck' => [
                     'Standard.Category.Sniff.Code'      => true,
                     'Standard.Category.Sniff.OtherCode' => false,
                     'Standard.Category.OtherSniff.Code' => false,
@@ -66,8 +66,8 @@ final class CheckAndSetTest extends TestCase
                 ],
             ],
             'set a sniff'                                                                      => [
-                ['Standard.Category.Sniff' => true],
-                [
+                'toSet'   => ['Standard.Category.Sniff' => true],
+                'toCheck' => [
                     'Standard.Category.Sniff.Code'      => true,
                     'Standard.Category.Sniff.OtherCode' => true,
                     'Standard.Category.OtherSniff.Code' => false,
@@ -76,8 +76,8 @@ final class CheckAndSetTest extends TestCase
                 ],
             ],
             'set a category'                                                                   => [
-                ['Standard.Category' => true],
-                [
+                'toSet'   => ['Standard.Category' => true],
+                'toCheck' => [
                     'Standard.Category.Sniff.Code'      => true,
                     'Standard.Category.Sniff.OtherCode' => true,
                     'Standard.Category.OtherSniff.Code' => true,
@@ -86,8 +86,8 @@ final class CheckAndSetTest extends TestCase
                 ],
             ],
             'set a standard'                                                                   => [
-                ['Standard' => true],
-                [
+                'toSet'   => ['Standard' => true],
+                'toCheck' => [
                     'Standard.Category.Sniff.Code'      => true,
                     'Standard.Category.Sniff.OtherCode' => true,
                     'Standard.Category.OtherSniff.Code' => true,
@@ -96,11 +96,11 @@ final class CheckAndSetTest extends TestCase
                 ],
             ],
             'set a standard, unignore a sniff in it'                                           => [
-                [
+                'toSet'   => [
                     'Standard'                => true,
                     'Standard.Category.Sniff' => false,
                 ],
-                [
+                'toCheck' => [
                     'Standard.Category.Sniff.Code'      => false,
                     'Standard.Category.Sniff.OtherCode' => false,
                     'Standard.Category.OtherSniff.Code' => true,
@@ -109,12 +109,12 @@ final class CheckAndSetTest extends TestCase
                 ],
             ],
             'set a standard, unignore a category in it, ignore a sniff in that'                => [
-                [
+                'toSet'   => [
                     'Standard'                => true,
                     'Standard.Category'       => false,
                     'Standard.Category.Sniff' => true,
                 ],
-                [
+                'toCheck' => [
                     'Standard.Category.Sniff.Code'      => true,
                     'Standard.Category.Sniff.OtherCode' => true,
                     'Standard.Category.OtherSniff.Code' => false,
@@ -123,14 +123,14 @@ final class CheckAndSetTest extends TestCase
                 ],
             ],
             'ignore some sniffs, then override some of those by unignoring the whole category' => [
-                [
+                'toSet'   => [
                     'Standard.Category1.Sniff1' => true,
                     'Standard.Category1.Sniff2' => true,
                     'Standard.Category2.Sniff1' => true,
                     'Standard.Category2.Sniff2' => true,
                     'Standard.Category1'        => false,
                 ],
-                [
+                'toCheck' => [
                     'Standard.Category1.Sniff1' => false,
                     'Standard.Category1.Sniff2' => false,
                     'Standard.Category2.Sniff1' => true,
