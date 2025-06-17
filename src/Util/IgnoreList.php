@@ -30,7 +30,7 @@ final class IgnoreList
      *
      * @var array<string, bool|array<string, bool|array<string, bool|array<string, bool>>>>
      */
-    private $data = [ '.default' => false ];
+    private $data = ['.default' => false];
 
 
     /**
@@ -105,7 +105,7 @@ final class IgnoreList
             if (isset($data[$part]) === false) {
                 $data[$part] = [];
             } else if (is_bool($data[$part]) === true) {
-                $data[$part] = [ '.default' => $data[$part] ];
+                $data[$part] = ['.default' => $data[$part]];
             }
 
             $data = &$data[$part];
@@ -158,7 +158,7 @@ final class IgnoreList
      */
     public function ignoresNothing()
     {
-        $arraysToProcess = [ $this->data ];
+        $arraysToProcess = [$this->data];
         while ($arraysToProcess !== []) {
             $arrayBeingProcessed = array_pop($arraysToProcess);
             foreach ($arrayBeingProcessed as $valueBeingProcessed) {
@@ -184,7 +184,7 @@ final class IgnoreList
      */
     public function ignoresEverything()
     {
-        $arraysToProcess = [ $this->data ];
+        $arraysToProcess = [$this->data];
         while ($arraysToProcess !== []) {
             $arrayBeingProcessed = array_pop($arraysToProcess);
             foreach ($arrayBeingProcessed as $valueBeingProcessed) {

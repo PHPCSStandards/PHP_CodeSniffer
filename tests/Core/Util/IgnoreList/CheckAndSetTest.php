@@ -24,8 +24,8 @@ final class CheckAndSetTest extends TestCase
     /**
      * Test isIgnored() and set().
      *
-     * @param array<string,bool> $toSet   Associative array of $code => $ignore to pass to set().
-     * @param array<string,bool> $toCheck Associative array of $code => $expect to pass to isIgnored().
+     * @param array<string, bool> $toSet   Associative array of $code => $ignore to pass to set().
+     * @param array<string, bool> $toCheck Associative array of $code => $expect to pass to isIgnored().
      *
      * @return void
      *
