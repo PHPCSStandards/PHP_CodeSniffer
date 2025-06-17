@@ -20,7 +20,7 @@ final class GetMethodParametersParseError3Test extends AbstractMethodTestCase
 
 
     /**
-     * Test receiving an empty array when encountering a specific parse error.
+     * Test receiving an exception when encountering a specific parse error.
      *
      * @return void
      */

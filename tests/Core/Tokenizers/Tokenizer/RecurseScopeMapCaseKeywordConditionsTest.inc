@@ -58,7 +58,7 @@ switch (true) {
     case CONSTANT:
     /* testCaseWithConstantAndIdenticalIsNotEnumCase */
     case CONSTANT === 1:
-    /* testCaseWithAssigmentToConstantIsNotEnumCase */
+    /* testCaseWithAssignmentToConstantIsNotEnumCase */
     case CONSTANT = 1:
     /* testIsNotEnumCaseIsCaseInsensitive */
     cAsE CONSTANT:
