@@ -92,11 +92,11 @@ class Config
     public const VERSION = '4.0.0';
 
     /**
-     * Package stability; either stable, beta or alpha.
+     * Package stability; either stable, RC, beta or alpha.
      *
      * @var string
      */
-    public const STABILITY = 'beta';
+    public const STABILITY = 'RC';
 
     /**
      * Default report width when no report width is provided and 'auto' does not yield a valid width.

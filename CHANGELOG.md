@@ -6,6 +6,31 @@ The file documents changes to the PHP_CodeSniffer project.
 
 _Nothing yet._
 
+## [4.0.0RC1] - 2025-06-18
+
+This release includes all improvements and bugfixes from PHP_CodeSniffer [3.13.1] and [3.13.2].
+
+### Changed
+- The error code `Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterVisbility` has been changed to `Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterVisibility`. [#1136]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- The following sniff(s) have received efficiency improvements:
+    - Generic.ControlStructures.InlineControlStructure
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+
+### Fixed
+- Fixed bug [#3889][sq-3889] : A selective `phpcs:enable` could sometimes override a later selective `phpcs:ignore`.
+    - Thanks to [Brad Jorsch][@anomiex] for the patch
+- Fixed bug [#1128] : missing 'parenthesis_owner' index for T_FUNCTION token on PHP < 7.4 when function is named "fn".
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+
+### Other
+- The GPG signature for the PHAR files has been rotated. The new fingerprint is: D91D86963AF3A29B6520462297B02DD8E5071466.
+
+[sq-3889]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3889
+[#1128]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1128
+[#1136]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1136
+
+
 ## [3.13.2] - 2025-06-18
 
 ### Changed
@@ -7956,6 +7981,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 -->
 
 [Unreleased]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/master...HEAD
+[4.0.0RC1]:   https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/4.0.0beta1...4.0.0RC1
 [4.0.0beta1]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.13.0...4.0.0beta1
 [3.13.2]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.13.1...3.13.2
 [3.13.1]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.13.0...3.13.1
