@@ -33,7 +33,7 @@ class CheckAndSetTest extends TestCase
      */
     public function testCheckAndSet($toSet, $toCheck)
     {
-        $ignoreList = new IgnoreList();
+        $ignoreList = IgnoreList::getNewInstanceFrom(null);
         foreach ($toSet as $code => $ignore) {
             $this->assertSame($ignoreList, $ignoreList->set($code, $ignore), 'Set method returned $this');
         }

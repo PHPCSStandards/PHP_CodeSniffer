@@ -34,6 +34,15 @@ final class IgnoreList
 
 
     /**
+     * Prohibit direct instantiation of this class. Use the static `get[New]Instance*()` entry point methods instead.
+     */
+    private function __construct()
+    {
+
+    }//end __construct()
+
+
+    /**
      * Get an instance set to ignore nothing.
      *
      * @return \PHP_CodeSniffer\Util\IgnoreList

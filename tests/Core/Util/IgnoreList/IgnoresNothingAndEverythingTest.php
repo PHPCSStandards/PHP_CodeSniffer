@@ -51,7 +51,7 @@ class IgnoresNothingAndEverythingTest extends TestCase
     {
         return [
             'fresh list'                                                                  => [
-                new IgnoreList(),
+                IgnoreList::getNewInstanceFrom(null),
                 true,
                 false,
             ],
