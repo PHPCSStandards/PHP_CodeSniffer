@@ -320,7 +320,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                         $spacesAfter,
                     ];
 
-                    $fix = $phpcsFile->addFixableError($error, $visibilityToken, 'SpacingAfterVisbility', $data);
+                    $fix = $phpcsFile->addFixableError($error, $visibilityToken, 'SpacingAfterVisibility', $data);
                     if ($fix === true) {
                         $phpcsFile->fixer->beginChangeset();
                         $phpcsFile->fixer->addContent($visibilityToken, ' ');
