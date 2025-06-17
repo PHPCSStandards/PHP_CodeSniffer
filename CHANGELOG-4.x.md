@@ -2,6 +2,47 @@
 
 The file documents changes to the PHP_CodeSniffer project for the 4.x series of releases.
 
+## [4.0.0] - 2025-09-16
+
+This release contains breaking changes.
+
+Upgrade guides for both [ruleset maintainers/end-users][wiki-upgrade-4.0-end-users], as well as for [sniff developers and integrators][wiki-upgrade-4.0-extenders], have been published to the Wiki.
+
+You are strongly encouraged to read the upgrade guide applicable to your situation before upgrading.
+
+This release includes all improvements and bugfixes from PHP_CodeSniffer [3.13.3] and  [3.13.4].
+
+### Changed
+- Tokenizer/PHP: fully qualified `exit`/`die`/`true`/`false`/`null` will be tokenized as the keyword token and the token `'content'` will include the leading backslash. [#1201]
+- Wherever possible based on the PHP 7.2 minimum version, parameter types have been added to all methods. [#1237]
+- The supported PHPUnit version constraints have been updated to `^8.4.0 || ^9.3.4 || ^10.5.32 || 11.3.3 - 11.5.28 || ^11.5.31`. [#1247]
+    - External standards using the PHP_CodeSniffer native framework may need to update their own PHPUnit version constraints.
+- Various housekeeping, including improvements to the tests and documentation.
+
+### Fixed
+- Fixed bug [#1082]: new exit codes weren't applied when running `phpcbf` on code provided via STDIN.
+    - Thanks to [Dan Wallis][@fredden] for the patch.
+- Fixed bug [#1172]: `// phpcs:set` for inline array properties did not handle a single item array with the value `true`, `false` or `null` correctly.
+- Fixed bug [#1174]: progress bar wasn't showing files as fixed when running `phpcbf` in parallel mode.
+- Fixed bug [#1226]: PHP 8.5 "Using null as an array offset" deprecation notice.
+
+### Other
+- Please be aware that the `master` branch has been renamed to `3.x` and the default branch has changed to the `4.x` branch.
+    - If you contribute to PHP_CodeSniffer, you will need to update your local git clone.
+    - If you develop against PHP_CodeSniffer and run your tests against dev branches of PHPCS, you will need to update your workflows.
+
+[3.13.3]: https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/4.x/CHANGELOG-3.x.md#3133---2025-09-04
+[3.13.4]: https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/4.x/CHANGELOG-3.x.md#3134---2025-09-05
+
+[#1082]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/1082
+[#1172]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1172
+[#1174]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1174
+[#1201]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/1201
+[#1226]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1226
+[#1237]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1237
+[#1247]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1247
+
+
 ## [4.0.0RC1] - 2025-06-18
 
 This release includes all improvements and bugfixes from PHP_CodeSniffer [3.13.1] and [3.13.2].
@@ -268,11 +309,14 @@ This release includes all improvements and bugfixes from PHP_CodeSniffer [3.13.1
 **Calling all testers!**
 
 Please help by testing the beta release and reporting any issues you run into.
-Upgrade guides for both [ruleset maintainers/end-users](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Version-4.0-User-Upgrade-Guide), as well as for [sniff developers and integrators](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Version-4.0-Developer-Upgrade-Guide), have been published to the Wiki to help smooth the transition.
+Upgrade guides for both [ruleset maintainers/end-users][wiki-upgrade-4.0-end-users], as well as for [sniff developers and integrators][wiki-upgrade-4.0-extenders], have been published to the Wiki to help smooth the transition.
 
 All patches courtesy of [Greg Sherwood][@gsherwood] and [Juliette Reinders Folmer][@jrfnl].
 
 Special thanks go out to [Dan Wallis][@fredden] and [Rodrigo Primo][@rodrigoprimo] for their reviews and feedback.
+
+[wiki-upgrade-4.0-end-users]: https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Version-4.0-User-Upgrade-Guide
+[wiki-upgrade-4.0-extenders]: https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Version-4.0-Developer-Upgrade-Guide
 
 [sq-1595]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1595
 [sq-1612]: https://github.com/squizlabs/PHP_CodeSniffer/issues/1612
@@ -348,6 +392,7 @@ Special thanks go out to [Dan Wallis][@fredden] and [Rodrigo Primo][@rodrigoprim
 === Link list for release links ====
 -->
 
+[4.0.0]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/4.0.0RC1...4.0.0
 [4.0.0RC1]:   https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/4.0.0beta1...4.0.0RC1
 [4.0.0beta1]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.13.0...4.0.0beta1
 
