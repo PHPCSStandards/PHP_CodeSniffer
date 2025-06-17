@@ -247,11 +247,9 @@ jobs:
         env:
           PHP_CODESNIFFER_CBF: '1'
 
-      # Note: The code style check is run multiple times against every PHP version
-      # as it also acts as an integration test.
-      - name: 'PHPCS: check code style without cache, no parallel'
+      - name: "Run bashunit tests"
         if: ${{ matrix.custom_ini == false }}
-        run: php "bin/phpcs" --no-cache --parallel=1
+        run: "./scripts/bashunit -p tests/EndToEnd"
 
       - name: Download the PHPCS phar
         if: ${{ matrix.custom_ini == false }}
