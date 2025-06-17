@@ -31,7 +31,7 @@ _Nothing yet._
     - Errors will be reported via a new `AvizKeywordOrder` error code.
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
 - The Squiz.Functions.FunctionDeclarationArgumentSpacing will now check spacing after a set-visibility modifier keyword. [#1121]
-    - Errors will be reported via a new `SpacingAfterSetVisbility` error code.
+    - Errors will be reported via a new `SpacingAfterSetVisibility` error code.
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
 - The Squiz.Scope.MemberVarScope will now flag missing "read" visibility, when "write" visibility is set, under a separate error code `AsymReadMissing`. [#1122]
     - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
