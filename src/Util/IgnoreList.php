@@ -89,6 +89,37 @@ final class IgnoreList
 
 
     /**
+     * Set the ignore status for a sniff.
+     *
+     * @param string $code   Partial or complete sniff code.
+     * @param bool   $ignore Whether the specified sniff should be ignored.
+     *
+     * @return \PHP_CodeSniffer\Util\IgnoreList $this for chaining.
+     */
+    public function set($code, $ignore)
+    {
+        $data  = &$this->data;
+        $parts = explode('.', $code);
+        while (count($parts) > 1) {
+            $part = array_shift($parts);
+            if (isset($data[$part]) === false) {
+                $data[$part] = [];
+            } else if (is_bool($data[$part]) === true) {
+                $data[$part] = [ '.default' => $data[$part] ];
+            }
+
+            $data = &$data[$part];
+        }
+
+        $part        = array_shift($parts);
+        $data[$part] = (bool) $ignore;
+
+        return $this;
+
+    }//end set()
+
+
+    /**
      * Check whether a sniff code is ignored.
      *
      * @param string $code Partial or complete sniff code.
@@ -118,37 +149,6 @@ final class IgnoreList
         return $returnValue;
 
     }//end isIgnored()
-
-
-    /**
-     * Set the ignore status for a sniff.
-     *
-     * @param string $code   Partial or complete sniff code.
-     * @param bool   $ignore Whether the specified sniff should be ignored.
-     *
-     * @return \PHP_CodeSniffer\Util\IgnoreList $this for chaining.
-     */
-    public function set($code, $ignore)
-    {
-        $data  = &$this->data;
-        $parts = explode('.', $code);
-        while (count($parts) > 1) {
-            $part = array_shift($parts);
-            if (isset($data[$part]) === false) {
-                $data[$part] = [];
-            } else if (is_bool($data[$part]) === true) {
-                $data[$part] = [ '.default' => $data[$part] ];
-            }
-
-            $data = &$data[$part];
-        }
-
-        $part        = array_shift($parts);
-        $data[$part] = (bool) $ignore;
-
-        return $this;
-
-    }//end set()
 
 
     /**
