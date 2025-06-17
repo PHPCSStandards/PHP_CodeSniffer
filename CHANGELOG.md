@@ -6,7 +6,23 @@ The file documents changes to the PHP_CodeSniffer project.
 
 _Nothing yet._
 
-## [3.13.1] - 2025-06-12
+## [3.13.2] - 2025-06-18
+
+### Changed
+- The documentation for the following sniffs has been improved:
+    - Squiz.Classes.SelfMemberReference
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Various housekeeping, including improvements to the tests and documentation.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] and [Juliette Reinders Folmer][@jrfnl] for their contributions.
+
+### Fixed
+- Fixed bug [#1135] : Squiz.Functions.FunctionDeclarationArgumentSpacing: typo in new error code `SpacingAfterSetVis\[i\]bility`.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+
+[#1135]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1135
+
+
+## [3.13.1] - 2025-06-13
 
 ### Added
 - Added support for PHP 8.4 properties with asymmetric visibility to File::getMemberProperties() through a new `set_scope` array index in the return value. [#1116]
@@ -45,6 +61,7 @@ _Nothing yet._
 ### Other
 - The latest PHP_CodeSniffer XSD file is now available via the following permalink: <https://schema.phpcodesniffer.com/phpcs.xsd>. [#1094]
     Older XSD files can be referenced via permalinks based on their minor: `https://schema.phpcodesniffer.com/#.#/phpcs.xsd`.
+- The GPG signature for the PHAR files has been rotated. The new fingerprint is: D91D86963AF3A29B6520462297B02DD8E5071466.
 
 [#1094]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/1094
 [#1116]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1116
@@ -7940,6 +7957,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 
 [Unreleased]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/master...HEAD
 [4.0.0beta1]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.13.0...4.0.0beta1
+[3.13.2]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.13.1...3.13.2
 [3.13.1]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.13.0...3.13.1
 [3.13.0]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.12.2...3.13.0
 [3.12.2]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.12.1...3.12.2
