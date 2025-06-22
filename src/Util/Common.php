@@ -330,7 +330,7 @@ class Common
     /**
      * Returns true if the specified string is in the camel caps format.
      *
-     * @param string  $string      The string the verify.
+     * @param string  $string      The string to verify.
      * @param boolean $classFormat If true, check to see if the string is in the
      *                             class format. Class format strings must start
      *                             with a capital letter and contain no
