@@ -56,6 +56,10 @@ final class IsCamelCapsTest extends TestCase
                 'name'   => 'thisISCamelCaps',
                 'strict' => false,
             ],
+            'lower camelCase string with initial acronym'         => [
+                'name'   => 'ISThisCamelCaps',
+                'strict' => false,
+            ],
         ];
 
     }//end dataValidNotClassFormatPublic()
@@ -87,35 +91,48 @@ final class IsCamelCapsTest extends TestCase
     public static function dataInvalidNotClassFormatPublic()
     {
         return [
-            'string with initial underscore (invalid when $public is true)'      => [
+            'string with initial underscore (invalid when $public is true)'              => [
                 'name' => '_thisIsCamelCaps',
             ],
-            'lower camelCase string with acronym (invalid when $strict is true)' => [
+            'lower camelCase string with acronym (invalid when $strict is true)'         => [
                 'name' => 'thisISCamelCaps',
             ],
-            'PascalCase string'                                                  => [
+            'lower camelCase string with initial acronym (invalid when $strict is true)' => [
+                'name' => 'ISThisCamelCaps',
+            ],
+            'PascalCase string'                                                          => [
                 'name' => 'ThisIsCamelCaps',
             ],
-            'lower camelCase string with initial digit'                          => [
+            'lower camelCase string with initial digit'                                  => [
                 'name' => '3thisIsCamelCaps',
             ],
-            'lower camelCase string with initial [^a-zA-z_] character: *'        => [
+            'lower camelCase string with initial illegal character: *'                   => [
                 'name' => '*thisIsCamelCaps',
             ],
-            'lower camelCase string with initial [^a-zA-z_] character: -'        => [
+            'lower camelCase string with initial illegal character: -'                   => [
                 'name' => '-thisIsCamelCaps',
             ],
-            'lower camelCase string with medial [^a-zA-z_] character: *'         => [
+            'lower camelCase string with initial illegal character: é'                   => [
+                'name' => 'éCamelCaps',
+            ],
+            'lower camelCase string with medial illegal character: *'                    => [
                 'name' => 'this*IsCamelCaps',
             ],
-            'lower camelCase string with medial [^a-zA-z_] character: -'         => [
+            'lower camelCase string with medial illegal character: -'                    => [
                 'name' => 'this-IsCamelCaps',
             ],
-            'lower camelCase string with single medial underscore'               => [
+            'lower camelCase string with medial illegal character: é'                    => [
+                // No camels were harmed in the cspell:disable-next-line.
+                'name' => 'thisIsCamélCaps',
+            ],
+            'lower camelCase string with single medial underscore'                       => [
                 'name' => 'this_IsCamelCaps',
             ],
-            'snake_case string'                                                  => [
+            'snake_case string'                                                          => [
                 'name' => 'this_is_camel_caps',
+            ],
+            'empty string'                                                               => [
+                'name' => '',
             ],
         ];
 
@@ -149,19 +166,23 @@ final class IsCamelCapsTest extends TestCase
     public static function dataValidNotClassFormatPrivate()
     {
         return [
-            'lower camelCase string with initial underscore'             => [
+            'lower camelCase string with initial underscore'                        => [
                 'name'   => '_thisIsCamelCaps',
                 'strict' => true,
             ],
-            'lower camelCase string with acronym and initial underscore' => [
+            'lower camelCase string with acronym and initial underscore'            => [
                 'name'   => '_thisISCamelCaps',
                 'strict' => false,
             ],
-            '_i18N'                                                      => [
+            'lower camelCase string with acronym after initial underscore'          => [
+                'name'   => '_ISThisCamelCaps',
+                'strict' => false,
+            ],
+            'numeronym with initial underscore and capital after digit'             => [
                 'name'   => '_i18N',
                 'strict' => true,
             ],
-            '_i18n'                                                      => [
+            'numeronym with initial underscore and lowercase character after digit' => [
                 'name'   => '_i18n',
                 'strict' => true,
             ],
@@ -221,16 +242,28 @@ final class IsCamelCapsTest extends TestCase
                 'name'   => '3thisIsCamelCaps',
                 'strict' => true,
             ],
-            'lower camelCase string with initial [^a-zA-Z_] character: *'                         => [
+            'lower camelCase string with initial illegal character: *'                            => [
                 'name'   => '*thisIsCamelCaps',
                 'strict' => true,
             ],
-            'lower camelCase string with initial [^a-zA-Z_] character: -'                         => [
+            'lower camelCase string with initial illegal character: -'                            => [
                 'name'   => '-thisIsCamelCaps',
+                'strict' => true,
+            ],
+            'lower camelCase string with initial illegal character: é'                            => [
+                'name'   => 'éCamelCaps',
                 'strict' => true,
             ],
             'snake_case string with initial underscore'                                           => [
                 'name'   => '_this_is_camel_caps',
+                'strict' => true,
+            ],
+            'single underscore'                                                                   => [
+                'name'   => '_',
+                'strict' => true,
+            ],
+            'empty string'                                                                        => [
+                'name'   => '',
                 'strict' => true,
             ],
         ];
@@ -277,6 +310,26 @@ final class IsCamelCapsTest extends TestCase
                 'name'   => 'This3IsCamelCaps',
                 'strict' => false,
             ],
+            'PascalCase string with digit inside word'   => [
+                'name'   => 'Th1sIsCamelCaps',
+                'strict' => false,
+            ],
+            'Single capital (strict)'                    => [
+                'name'   => 'A',
+                'strict' => true,
+            ],
+            'Single capital with digit (strict)'         => [
+                'name'   => 'A1',
+                'strict' => true,
+            ],
+            'Single capital (relaxed)'                   => [
+                'name'   => 'A',
+                'strict' => false,
+            ],
+            'Single capital with digit (relaxed)'        => [
+                'name'   => 'A1',
+                'strict' => false,
+            ],
         ];
 
     }//end dataValidClassFormatPublic()
@@ -316,6 +369,9 @@ final class IsCamelCapsTest extends TestCase
             ],
             'capitalised snake case'                             => [
                 'name' => 'This_Is_Camel_Caps',
+            ],
+            'empty string'                                       => [
+                'name' => '',
             ],
         ];
 
@@ -360,9 +416,97 @@ final class IsCamelCapsTest extends TestCase
                 'name'   => '_ThisIsCamelCaps',
                 'public' => false,
             ],
+            'empty string (public)'                               => [
+                'name'   => '',
+                'public' => true,
+            ],
+            'empty string (private)'                              => [
+                'name'   => '',
+                'public' => false,
+            ],
         ];
 
     }//end dataInvalidClassFormatPrivate()
+
+
+    /**
+     * Test valid strings with default arguments.
+     *
+     * @param string $name The tested name.
+     *
+     * @dataProvider dataValidDefaultArguments
+     *
+     * @return void
+     */
+    public function testValidDefaultArguments($name)
+    {
+        $this->assertTrue(Common::isCamelCaps($name));
+
+    }//end testValidDefaultArguments()
+
+
+    /**
+     * Data provider.
+     *
+     * @see testValidDefaultArguments()
+     *
+     * @return array<string, array<string, string>>
+     */
+    public static function dataValidDefaultArguments()
+    {
+        return [
+            'lower camelCase string'                   => [
+                'name' => 'thisIsCamelCaps',
+            ],
+            'lower camelCase string with medial digit' => [
+                'name' => 'this3IsCamelCaps',
+            ],
+        ];
+
+    }//end dataValidDefaultArguments()
+
+
+    /**
+     * Test invalid strings with default arguments.
+     *
+     * @param string $name The tested name.
+     *
+     * @dataProvider dataInvalidDefaultArguments
+     *
+     * @return void
+     */
+    public function testInvalidDefaultArguments($name)
+    {
+        $this->assertFalse(Common::isCamelCaps($name));
+
+    }//end testInvalidDefaultArguments()
+
+
+    /**
+     * Data provider.
+     *
+     * @see testInvalidDefaultArguments()
+     *
+     * @return array<string, array<string, string>>
+     */
+    public static function dataInvalidDefaultArguments()
+    {
+        return [
+            'PascalCase string'                              => [
+                'name' => 'ThisIsCamelCaps',
+            ],
+            'PascalCase string with acronym'                 => [
+                'name' => 'ThisISCamelCaps',
+            ],
+            'lower camelCase string with initial underscore' => [
+                'name' => '_thisIsCamelCaps',
+            ],
+            'lower camelCase string with acronym'            => [
+                'name' => 'thisISCamelCaps',
+            ],
+        ];
+
+    }//end dataInvalidDefaultArguments()
 
 
 }//end class
