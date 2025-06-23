@@ -384,6 +384,7 @@ To run the tests specific to the use of `PHP_CODESNIFFER_CBF === true`:
     In such cases, the `PHP_CodeSniffer\Tests\Core\Config\AbstractRealConfigTestCase` should be used as the base test class.
 * Tests for the `Runner` class often can't create their own `Config` object in the tests, so run into the same issue.
     Those tests should use the `PHP_CodeSniffer\Tests\Core\Runner\AbstractRunnerTestCase` base class, which will ensure the Config is clean.
+* When using data providers, define them immediately below the corresponding test method. The data provider's name should match the test method name, replacing the "test" prefix with "data". For example, the data provider for a method named `testSomething()` should be `dataSomething()`.
 
 ### Submitting Your Pull Request
 
