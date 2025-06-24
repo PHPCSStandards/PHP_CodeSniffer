@@ -380,6 +380,8 @@ To run the tests specific to the use of `PHP_CODESNIFFER_CBF === true`:
 
 #### Other notes about writing tests
 
+* When using data providers, define them immediately below the corresponding test method.
+* When a test method has only one data provider, it is considered best practice to closely couple the test and data provider methods via their names. I.e. the data provider's name should match the test method name, replacing the "test" prefix with "data". For example, the data provider for a method named `testSomething()` should be `dataSomething()`.
 * The `Config` class uses a number of static properties and can have a performance impact on the tests too.
     To get round both these issues, use the `ConfigDouble` class instead.
     Generally speaking, only tests which test the behaviour of the `Config` class itself where it relates to the static properties, should use the real `Config` class for testing.
