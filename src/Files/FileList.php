@@ -92,7 +92,6 @@ class FileList implements Iterator, Countable
 
                 foreach ($iterator as $file) {
                     $this->files[$file->getPathname()] = null;
-                    $this->numFiles++;
                 }
             } else {
                 $this->addFile($path);
@@ -100,6 +99,7 @@ class FileList implements Iterator, Countable
         }//end foreach
 
         reset($this->files);
+        $this->numFiles = count($this->files);
 
     }//end __construct()
 
@@ -132,6 +132,11 @@ class FileList implements Iterator, Countable
         $iterator = new RecursiveIteratorIterator($filter);
 
         foreach ($iterator as $path) {
+            if (array_key_exists($path, $this->files) === true) {
+                // The path has already been added.
+                continue;
+            }
+
             $this->files[$path] = $file;
             $this->numFiles++;
         }
