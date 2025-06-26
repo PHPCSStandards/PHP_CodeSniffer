@@ -379,33 +379,33 @@ final class IsCamelCapsTest extends TestCase
 
 
     /**
-     * Test invalid class names with the private flag set.
+     * Test invalid class names with the public flag set.
      *
-     * Note that the private flag is ignored if the class format
+     * Note that the public flag is ignored if the class format
      * flag is set, so these names are all invalid.
      *
      * @param string $name   The tested name.
      * @param bool   $public Value of the $public flag.
      *
-     * @dataProvider dataInvalidClassFormatPrivate
+     * @dataProvider dataInvalidClassFormatWithPublicFlag
      *
      * @return void
      */
-    public function testInvalidClassFormatPrivate($name, $public)
+    public function testInvalidClassFormatWithPublicFlag($name, $public)
     {
         $this->assertFalse(Common::isCamelCaps($name, true, $public));
 
-    }//end testInvalidClassFormatPrivate()
+    }//end testInvalidClassFormatWithPublicFlag()
 
 
     /**
      * Data provider.
      *
-     * @see testInvalidClassFormatPrivate()
+     * @see testInvalidClassFormatWithPublicFlag()
      *
      * @return array<string, array<string, string|bool>>
      */
-    public static function dataInvalidClassFormatPrivate()
+    public static function dataInvalidClassFormatWithPublicFlag()
     {
         return [
             'PascalCase string with initial underscore (public)'  => [
@@ -426,7 +426,7 @@ final class IsCamelCapsTest extends TestCase
             ],
         ];
 
-    }//end dataInvalidClassFormatPrivate()
+    }//end dataInvalidClassFormatWithPublicFlag()
 
 
     /**
