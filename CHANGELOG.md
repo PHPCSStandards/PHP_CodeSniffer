@@ -983,7 +983,7 @@ All deprecation are slated for removal in PHP_CodeSniffer 4.0.
 [#608]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/608
 
 [ghcli]:    https://cli.github.com/
-[ghattest]: https://docs.github.com/en/actions/security-for-github-actions/using-artifact-attestations/using-artifact-attestations-to-establish-provenance-for-builds
+[ghattest]: https://docs.github.com/en/actions/how-tos/security-for-github-actions/using-artifact-attestations/using-artifact-attestations-to-establish-provenance-for-builds
 
 ## [3.10.2] - 2024-07-22
 
