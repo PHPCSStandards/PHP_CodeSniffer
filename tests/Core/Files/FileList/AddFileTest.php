@@ -8,10 +8,11 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Files\FileList;
 
+use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Files\FileList;
+use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHPUnit\Framework\TestCase;
-use stdClass;
 
 /**
  * Tests for the \PHP_CodeSniffer\Files\FileList::addFile method.
@@ -90,12 +91,19 @@ final class AddFileTest extends TestCase
      */
     public static function dataAddFile()
     {
+        $config  = new ConfigDouble();
+        $ruleset = new Ruleset($config);
+
         return [
-            'Regular file'                  => ['fileName' => 'test1.php'],
-            'STDIN'                         => ['fileName' => 'STDIN'],
+            'Regular file'                  => [
+                'fileName' => 'test1.php',
+            ],
+            'STDIN'                         => [
+                'fileName' => 'STDIN',
+            ],
             'Regular file with file object' => [
                 'fileName'   => 'test1.php',
-                'fileObject' => new stdClass(),
+                'fileObject' => new File('test1.php', $ruleset, $config),
             ],
         ];
 
