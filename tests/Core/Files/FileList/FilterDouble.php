@@ -8,25 +8,11 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Files\FileList;
 
-use RecursiveFilterIterator;
+use PHP_CodeSniffer\Filters\Filter;
 use ReturnTypeWillChange;
 
-class FilterDouble extends RecursiveFilterIterator
+final class FilterDouble extends Filter
 {
-
-
-    /**
-     * Constructs a filter.
-     *
-     * @param \RecursiveIterator $iterator The iterator we are using to get file paths.
-     *
-     * @return void
-     */
-    public function __construct($iterator)
-    {
-        parent::__construct($iterator);
-
-    }//end __construct()
 
 
     /**
