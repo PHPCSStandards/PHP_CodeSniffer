@@ -76,7 +76,7 @@ final class ConstructTest extends TestCase
 
         $i = 0;
 
-        // Sort the value to make the tests stable as different OSes will read directories
+        // Sort the values to make the tests stable as different OSes will read directories
         // in a different order and the order is not relevant for these tests. Just the values.
         $fileListArray = iterator_to_array($fileList);
         ksort($fileListArray);
@@ -93,7 +93,7 @@ final class ConstructTest extends TestCase
     /**
      * Data provider for testConstruct.
      *
-     * @return array<string, array<string>>
+     * @return array<string, array<string, array<string>>>
      */
     public static function dataConstruct()
     {

@@ -86,7 +86,7 @@ final class AddFileTest extends TestCase
     /**
      * Data provider for testAddFile.
      *
-     * @return array<string, array<string>>
+     * @return array<string, array<string, string|object>>
      */
     public static function dataAddFile()
     {
