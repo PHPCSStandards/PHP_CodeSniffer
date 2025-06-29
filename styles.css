@@ -1,0 +1,194 @@
+@import url(https://fonts.bunny.net/css?family=open-sans:400,800);
+
+:root {
+
+    --background-color: #f3f4f6;
+    --foreground-color: #111827;
+    --primary-color: #10b981;
+    
+    @media (prefers-color-scheme: dark) {
+        --background-color: #111827;
+        --foreground-color: #f3f4f6;
+    }    
+}
+
+a {
+    color: var(--foreground-color);
+}
+
+a:hover, a:focus-visible {
+    color: color-mix(in srgb, var(--foreground-color), var(--primary-color));
+    text-decoration: underline;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    
+    background: var(--background-color);
+    background: radial-gradient(circle, rgba(243, 244, 246, 1) 0%, rgba(209, 213, 219, 1) 100%);
+    
+    @media (prefers-color-scheme: dark) {
+        background: radial-gradient(circle, rgba(22, 34, 54, 1) 0%, rgba(17, 24, 39, 1) 100%);
+    }
+
+    background-attachment: fixed;
+
+    color: var(--foreground-color);
+    margin: 0;
+
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.heading {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.download-section {
+    display: flex;
+    gap: 2rem;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.download-box {
+    background-color: var(--background-color);
+    border: 1px solid var(--foreground-color);
+    border-radius: .75rem;
+    padding: 1.5rem;
+    width: 300px;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.download-box__title {
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: 800;
+}
+
+.download-box__description {
+    color: color-mix(in srgb, var(--foreground-color), #6b7280);
+    flex: 1;
+}
+
+.download-box__secondary-link {
+    color: color-mix(in srgb, var(--foreground-color), #6b7280);
+    font-size: 0.9em;
+}
+
+.icon {
+    width: 1rem;
+    height: 1rem;
+}
+
+.icon--foreground {
+    fill: var(--foreground-color);
+}
+
+.icon--github {
+    fill: #24292f; // see https://github.com/logos
+}
+
+@media (prefers-color-scheme: dark) {
+    .icon--github {
+            fill: #fff;
+        }
+}
+
+.button {
+    background-color: var(--foreground-color);
+    color: var(--background-color);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    display: flex;
+    align-items: center;
+}
+
+.button:hover, .button:focus-visible {
+    color: var(--background-color);
+    background-color: color-mix(in srgb, var(--foreground-color), var(--primary-color));
+}
+
+.button--download {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.additional-info {
+    padding-top: 3rem;
+    display: flex;
+}
+
+.external-links {
+    padding-top: 2rem;
+}
+
+/* phars.html */
+
+.link {
+    color: var(--foreground-color);
+    text-decoration: underline;
+}
+
+.phar-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding-top: 1.5rem;
+
+    font-size: .8rem;
+    min-width: 300px;    
+}
+
+/* a faint separator between the list items */
+.phar-list__version::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background-color: var(--foreground-color);
+    opacity: 0.1;
+    margin: 1rem 0;
+}
+
+.phar-list__version-label {
+    border-left: 4px solid var(--primary-color);
+    padding-left: 0.5rem;
+}
+
+ .phar-list__files {
+    list-style: none;
+    padding: 0;
+
+    * + * {
+        margin-top: 0.25rem;
+    }
+ }
