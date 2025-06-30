@@ -41,6 +41,14 @@ function indent (int $level): string
     return $output;
 }
 
+function humanReadableFilesize($file) {
+    $bytes = filesize($file);
+
+    $units = ['B', 'K', 'M', 'G'];
+    $factor = floor((strlen($bytes) - 1) / 3);
+    return sprintf("%.1f", $bytes / pow(1024, $factor)) . $units[(int) $factor];
+}
+
 $html = "<ul class=\"phar-list\">\n";
 
 foreach ($filesGroupedByVersion as $version => $files) {
@@ -51,7 +59,10 @@ foreach ($filesGroupedByVersion as $version => $files) {
     indent(4) . "<ul class=\"phar-list__files\">\n";
 
     foreach ($files as $file) {
-        $html .= indent(5) . "<li><a download href=\"phars/" . htmlspecialchars($file) . '">' . htmlspecialchars($file) . "</a></li>\n";
+        $fileSize = humanReadableFilesize($pharDir . '/' . $file);
+        $lastModifiedDate = shell_exec(escapeshellcmd("git log -1 --pretty=\"format:%cs\" -- " . $pharDir . '/' . $file));
+
+        $html .= indent(5) . "<li><a download href=\"/phars/" . htmlspecialchars($file) . '">' . htmlspecialchars($file) . "</a> <span class=\"phar-list__filesize\">" . htmlspecialchars($fileSize) . " | " . htmlspecialchars($lastModifiedDate) . "</span></li>\n";
     }
 
     $html .= indent(4) . "</ul>\n" .

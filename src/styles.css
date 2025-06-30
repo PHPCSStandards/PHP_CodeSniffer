@@ -192,3 +192,9 @@ body {
         margin-top: 0.25rem;
     }
  }
+
+ .phar-list__filesize {
+    color: color-mix(in srgb, var(--foreground-color), #6b7280);
+    font-size: 0.8em;
+    margin-left: 0.25rem;
+ }
