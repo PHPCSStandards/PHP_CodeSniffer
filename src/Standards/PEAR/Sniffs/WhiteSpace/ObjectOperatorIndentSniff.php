@@ -191,10 +191,7 @@ class ObjectOperatorIndentSniff implements Sniff
             $next = $phpcsFile->findNext(
                 $this->targets,
                 ($next + 1),
-                null,
-                false,
-                null,
-                true
+                $end
             );
         }//end while
 
