@@ -64,13 +64,15 @@ final class SyntaxUnitTest extends AbstractSniffUnitTest
 
 
     /**
-     * Test the sniff checks syntax when file contents are passed via STDIN.
+     * Test the sniff checks syntax when file contents are passed via STDIN. Doesn't run on Windows
+     * as PHPCS currently doesn't support STDIN on this OS.
      *
      * @param string $content        The content to test.
      * @param int    $errorCount     The expected number of errors.
      * @param array  $expectedErrors The expected errors.
      *
      * @dataProvider dataStdIn
+     * @requires     OS ^(?!WIN).*
      *
      * @return void
      */
