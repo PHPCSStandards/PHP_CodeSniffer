@@ -84,11 +84,19 @@ class SyntaxSniff implements Sniff
     {
         if ($phpcsFile->getFilename() === 'STDIN') {
             $content = $phpcsFile->getTokensAsString(0, $phpcsFile->numTokens);
-            return "echo ".escapeshellarg($content)." | ".Common::escapeshellcmd($this->phpPath)." -l -d display_errors=1 -d error_prepend_string='' 2>&1";
+            return sprintf(
+                "echo %s | %s -l -d display_errors=1 -d error_prepend_string='' 2>&1",
+                escapeshellarg($content),
+                Common::escapeshellcmd($this->phpPath)
+            );
         }
 
         $fileName = escapeshellarg($phpcsFile->getFilename());
-        return Common::escapeshellcmd($this->phpPath)." -l -d display_errors=1 -d error_prepend_string='' $fileName 2>&1";
+        return sprintf(
+            "%s -l -d display_errors=1 -d error_prepend_string='' %s 2>&1",
+            Common::escapeshellcmd($this->phpPath),
+            $fileName
+        );
 
     }//end getPhpLintCommand()
 
