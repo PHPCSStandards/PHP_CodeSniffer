@@ -72,8 +72,9 @@ class SyntaxSniff implements Sniff
 
 
     /**
-     * Returns the command used to lint PHP code. Uses a different command when the content is
-     * provided via STDIN.
+     * Returns the command used to lint PHP code.
+     *
+     * Uses a different command when the content is provided via STDIN.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The File object.
      *

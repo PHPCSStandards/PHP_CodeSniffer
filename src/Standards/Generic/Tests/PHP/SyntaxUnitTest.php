@@ -64,8 +64,9 @@ final class SyntaxUnitTest extends AbstractSniffUnitTest
 
 
     /**
-     * Test the sniff checks syntax when file contents are passed via STDIN. Doesn't run on Windows
-     * as PHPCS currently doesn't support STDIN on this OS.
+     * Test the sniff checks syntax when file contents are passed via STDIN.
+     *
+     * Note: this test doesn't run on Windows as PHPCS currently doesn't support STDIN on this OS.
      *
      * @param string $content        The content to test.
      * @param int    $errorCount     The expected number of errors.
@@ -121,12 +122,12 @@ final class SyntaxUnitTest extends AbstractSniffUnitTest
         }
 
         return [
-            'No syntax errors'                                                            => [
+            'No syntax errors'                                                                => [
                 '<?php $array = [1, 2, 3];',
                 0,
                 [],
             ],
-            'One syntax error'                                                            => [
+            'One syntax error'                                                                => [
                 '<?php $array = [1, 2, 3; // Missing closing bracket.',
                 1,
                 [
@@ -143,7 +144,7 @@ final class SyntaxUnitTest extends AbstractSniffUnitTest
                     ],
                 ],
             ],
-            'Single error reported even when there is more than syntax error in the file' => [
+            'Single error reported even when there is more than one syntax error in the file' => [
                 '<?php $array = [1, 2, 3; // Missing closing bracket.
                 $anotherArray = [4, 5, 6; // Another missing closing bracket.',
                 1,
