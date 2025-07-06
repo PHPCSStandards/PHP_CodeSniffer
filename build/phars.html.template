@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="../styles.css" />
     <title>PHP_CodeSniffer PHAR - All PHAR files</title>
 </head>
 
 <body>
     <main class="container">
         <h1 class="heading">All PHAR files</h1>
-        <a href="/index.html" class="link">See latest PHAR files</a>
+        <a href="../index.html" class="link">See latest PHAR files</a>
         <!-- {{ PHARS }} -->
     </main>
 </body>
