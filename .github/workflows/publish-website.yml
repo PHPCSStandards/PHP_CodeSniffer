@@ -2,9 +2,11 @@ name: Deploy gh-pages branch to GitHub Pages
 
 on:
   push:
-    branches: ["gh-pages"]
-
-  # Allows us to run this workflow manually from the Actions tab
+    branches:
+      - "gh-pages"
+  # Do a dry-run (update, no deploy) for PRs.
+  pull_request:
+  # Allow running this workflow manually from the Actions tab.
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
@@ -20,23 +22,44 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
+    # Don't run on forks.
+    if: github.repository == 'PHPCSStandards/PHP_CodeSniffer'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      # By default use the `gh-pages` branch.
+      # For testing changes to the workflow or the scripts, use the PR branch
+      # to have access to the latest version of the workflow/scripts.
+      - name: Determine branch to use
+        id: base_branch
+        env:
+          REF: ${{ github.ref }}
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "BRANCH=$REF" >> "$GITHUB_OUTPUT"
+          else
+            echo 'BRANCH=gh-pages' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.base_branch.outputs.BRANCH }}
       
       - name: Install PHP
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          ini-values: error_reporting=-1, display_errors=On, log_errors_max_len=0
+          coverage: none
 
       - name: Generate /phars/index.html
-        run: |
-          php build/generate_phars_list.php
+        run: php build/generate_phars_list.php
+
+      - name: Check GitHub Pages status
+        uses: crazy-max/ghaction-github-status@v4
+        with:
+          pages_threshold: major_outage
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -45,7 +68,21 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: './src'
+          
+  deploy:
+    needs: build
+    # Don't run on forks.
+    if: github.repository == 'PHPCSStandards/PHP_CodeSniffer' && github.event_name != 'pull_request' && needs.build.result == 'success'
 
+    name: "Deploy the website"
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
