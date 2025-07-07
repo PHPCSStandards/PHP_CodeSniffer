@@ -152,7 +152,7 @@ body {
     padding-top: 2rem;
 }
 
-/* phars.html */
+/* phars/index.html */
 
 .link {
     color: var(--foreground-color);
@@ -197,4 +197,12 @@ body {
     color: color-mix(in srgb, var(--foreground-color), #6b7280);
     font-size: 0.8em;
     margin-left: 0.25rem;
+ }
+
+ .footnote {
+    max-width: 80ch;
+    font-size: .8rem;
+    text-align: center;
+    padding: 1rem;
+    text-wrap: balance;
  }

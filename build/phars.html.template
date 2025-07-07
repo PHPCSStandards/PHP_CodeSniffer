@@ -5,15 +5,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles.css" />
-    <title>PHP_CodeSniffer PHAR - All PHAR files</title>
+    <title>PHP_CodeSniffer - PHAR Archive</title>
     <link rel="canonical" href="https://phars.phpcodesniffer.com/phars/" />
 </head>
 
 <body>
     <main class="container">
-        <h1 class="heading">All PHAR files</h1>
+        <h1 class="heading">PHAR Archive</h1>
         <a href=".." class="link">See latest PHAR files</a>
         <!-- {{ PHARS }} -->
+        <div class="footnote">Note: The PHAR archive does not contain all previously released PHAR files. Only the ones released since PHIVE support was added (and the PHAR files started to be signed).</div>
     </main>
 </body>
 
