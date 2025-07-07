@@ -1,5 +1,11 @@
-
+#!/usr/bin/env php
 <?php
+/**
+ * Script to auto-generate the `phars/index.html` page for the GH Pages website.
+ *
+ * @copyright 2025 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ */
 
 // A directory containing files that are named {phpcs,phpcbf}-*.{phar,phar.asc}.
 $pharDir = __DIR__ . '/../src/phars';
