@@ -40,6 +40,25 @@ jobs:
           repository: PHPCSStandards/schema.phpcodesniffer.com
           event-type: phpcs-release
 
+  #######################################################
+  # Trigger an update of the documentation in the Wiki. #
+  #######################################################
+  trigger-wiki-update:
+    runs-on: ubuntu-latest
+
+    # Only run this workflow in the context of this repo.
+    if: github.repository_owner == 'PHPCSStandards'
+
+    name: "Trigger update of wiki"
+
+    steps:
+      - name: Trigger wiki update
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.WORKFLOW_DISPATCH_DOCS_PAT }}
+          repository: PHPCSStandards/PHP_CodeSniffer-documentation
+          event-type: phpcs-release
+
   ##################################################################################
   # Verify the release is available in all the right places and works as expected. #
   ##################################################################################
