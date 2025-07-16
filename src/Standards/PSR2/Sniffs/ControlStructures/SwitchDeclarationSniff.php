@@ -172,7 +172,15 @@ class SwitchDeclarationSniff implements Sniff
                 }//end if
             } else {
                 $error = strtoupper($type).' statements must be defined using a colon';
-                $phpcsFile->addError($error, $nextCase, 'WrongOpener'.$type);
+                if ($tokens[$opener]['code'] === T_SEMICOLON) {
+                    $fix = $phpcsFile->addFixableError($error, $nextCase, 'WrongOpener'.$type);
+                    if ($fix === true) {
+                        $phpcsFile->fixer->replaceToken($opener, ':');
+                    }
+                } else {
+                    // Probably a case/default statement with colon + curly braces.
+                    $phpcsFile->addError($error, $nextCase, 'WrongOpener'.$type);
+                }
             }//end if
 
             // We only want cases from here on in.
