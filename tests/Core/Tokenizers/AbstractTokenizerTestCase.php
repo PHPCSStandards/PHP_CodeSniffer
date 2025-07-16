@@ -12,7 +12,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizers;
 
-use PHP_CodeSniffer\Files\DummyFile;
+use PHP_CodeSniffer\Files\LocalFile;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
@@ -63,11 +63,7 @@ abstract class AbstractTokenizerTestCase extends TestCase
             $relativePath   = str_replace('\\', DIRECTORY_SEPARATOR, $relativeCN);
             $pathToTestFile = realpath(__DIR__).$relativePath.'.inc';
 
-            // Make sure the file gets parsed correctly based on the file type.
-            $contents  = 'phpcs_input_file: '.$pathToTestFile.PHP_EOL;
-            $contents .= file_get_contents($pathToTestFile);
-
-            $this->phpcsFile = new DummyFile($contents, $ruleset, $config);
+            $this->phpcsFile = new LocalFile($pathToTestFile, $ruleset, $config);
             $this->phpcsFile->parse();
         }//end if
 
