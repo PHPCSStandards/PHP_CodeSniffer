@@ -3127,6 +3127,29 @@ class PHP extends Tokenizer
                 $allowed     += Tokens::$magicConstants;
 
                 for ($x = ($i - 1); $x >= 0; $x--) {
+                    // Allow for PHP 8.4 anon class dereferencing without wrapping parentheses.
+                    // Note: the T_CLASS token has not yet been retokenized to T_ANON_CLASS!
+                    if ($this->tokens[$x]['code'] === T_CLOSE_CURLY_BRACKET
+                        && isset($this->tokens[$x]['scope_condition']) === true
+                        && $this->tokens[$this->tokens[$x]['scope_condition']]['code'] === T_CLASS
+                    ) {
+                        // Now, make sure it is an anonymous class and not a normal class.
+                        for ($y = ($this->tokens[$x]['scope_condition'] + 1); $y < $numTokens; $y++) {
+                            if (isset(Tokens::$emptyTokens[$this->tokens[$y]['code']]) === false) {
+                                break;
+                            }
+                        }
+
+                        // Use the same check as used for the anon class retokenization.
+                        if ($this->tokens[$y]['code'] === T_OPEN_PARENTHESIS
+                            || $this->tokens[$y]['code'] === T_OPEN_CURLY_BRACKET
+                            || $this->tokens[$y]['code'] === T_EXTENDS
+                            || $this->tokens[$y]['code'] === T_IMPLEMENTS
+                        ) {
+                            break;
+                        }
+                    }
+
                     // If we hit a scope opener, the statement has ended
                     // without finding anything, so it's probably an array
                     // using PHP 7.1 short list syntax.
