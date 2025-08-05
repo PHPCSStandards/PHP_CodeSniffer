@@ -24,7 +24,7 @@ concurrency:
 jobs:
   build:
     # Don't run on forks.
-    if: github.repository == 'PHPCSStandards/PHP_CodeSniffer'
+    if: github.event.repository.fork == false
     runs-on: ubuntu-latest
     steps:
       # By default use the `gh-pages` branch.
@@ -85,4 +85,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-

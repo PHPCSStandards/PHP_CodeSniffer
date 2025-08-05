@@ -3,6 +3,8 @@
 /**
  * Script to auto-generate the `phars/index.html` page for the GH Pages website.
  *
+ * {@internal This script has a minimum PHP requirement of PHP 7.0.}
+ *
  * @copyright 2025 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
@@ -10,7 +12,7 @@
 // A directory containing files that are named {phpcs,phpcbf}-*.{phar,phar.asc}.
 $pharDir = __DIR__ . '/../src/phars';
 
-$allFiles = array_filter(scandir($pharDir), function ($file) {
+$allFiles = array_filter(scandir($pharDir), function (string $file) {
     return preg_match('/\.phar(\.asc)?$/', $file);
 });
 
@@ -34,11 +36,11 @@ uksort($filesGroupedByVersion, function ($a, $b) {
     return version_compare($b, $a);
 });
 
-function indent (int $level): string
+function indent(int $level): string
 {
     $indentSpaces = '    ';
 
-    $output = "";
+    $output = '';
 
     for ($i = 0; $i < $level; $i++) {
         $output .= $indentSpaces;
@@ -47,12 +49,13 @@ function indent (int $level): string
     return $output;
 }
 
-function humanReadableFilesize($file) {
+function humanReadableFilesize(string $file): string
+{
     $bytes = filesize($file);
 
-    $units = ['B', 'K', 'M', 'G'];
+    $units  = ['B', 'K', 'M', 'G'];
     $factor = floor((strlen($bytes) - 1) / 3);
-    return sprintf("%.1f", $bytes / pow(1024, $factor)) . $units[(int) $factor];
+    return sprintf('%.1f', $bytes / pow(1024, $factor)) . $units[(int) $factor];
 }
 
 $html = "<ul class=\"phar-list\">\n";
@@ -60,23 +63,23 @@ $html = "<ul class=\"phar-list\">\n";
 foreach ($filesGroupedByVersion as $version => $files) {
     sort($files);
 
-    $html .= indent(3) . "<li class=\"phar-list__version\">\n" .
-    indent(4) . "<h2 class=\"phar-list__version-label\">" . $version . "</h2>\n" .
-    indent(4) . "<ul class=\"phar-list__files\">\n";
+    $html .= indent(3) . "<li class=\"phar-list__version\">\n"
+        . indent(4) . '<h2 class="phar-list__version-label">' . $version . "</h2>\n"
+        . indent(4) . "<ul class=\"phar-list__files\">\n";
 
     foreach ($files as $file) {
         $fileSize = humanReadableFilesize($pharDir . '/' . $file);
-        $lastModifiedDate = shell_exec(escapeshellcmd("git log -1 --pretty=\"format:%cs\" -- " . $pharDir . '/' . $file));
 
-        $html .= indent(5) . "<li><a download href=\"/phars/" . htmlspecialchars($file) . '">' . htmlspecialchars($file) . "</a> <span class=\"phar-list__filesize\">" . htmlspecialchars($fileSize) . " | " . htmlspecialchars($lastModifiedDate) . "</span></li>\n";
+        $html .= indent(5) . '<li><a download href="/phars/' . htmlspecialchars($file) . '">' . htmlspecialchars($file)
+            . '</a> <span class="phar-list__filesize">' . htmlspecialchars($fileSize) . "</span></li>\n";
     }
 
-    $html .= indent(4) . "</ul>\n" .
-    indent(3) . "</li>\n";
+    $html .= indent(4) . "</ul>\n"
+        . indent(3) . "</li>\n";
 }
 
-$html .= indent(2) . "</li>\n" .
-         "</ul>\n";
+$html .= indent(2) . "</li>\n"
+    . "</ul>\n";
 
 $template = file_get_contents(__DIR__ . '/phars.html.template');
 

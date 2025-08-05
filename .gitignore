@@ -1,3 +1,3 @@
-vendor
+/vendor/
 .phpunit.result.cache
 src/phars/index.html
