@@ -764,7 +764,7 @@ class Runner
      * The reporting information returned by each child process is merged
      * into the main reporter class.
      *
-     * @param array<non-negative-int, non-empty-string> $childProcs An array of child processes to wait for.
+     * @param array<int, string> $childProcs An array of child processes to wait for.
      *
      * @return bool
      */
