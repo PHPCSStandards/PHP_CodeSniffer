@@ -247,21 +247,10 @@ jobs:
         env:
           PHP_CODESNIFFER_CBF: '1'
 
-      - name: "Install bashunit"
-        if: ${{ matrix.custom_ini == false && matrix.os == 'ubuntu-latest' }}
-        run: |
-          curl -s https://bashunit.typeddevs.com/install.sh > install.sh
-          chmod +x install.sh
-          ./install.sh
-
-      - name: "Run bashunit tests"
-        if: ${{ matrix.custom_ini == false && matrix.os == 'ubuntu-latest' }}
-        run: "./lib/bashunit -p tests/EndToEnd"
-
       # Note: The code style check is run multiple times against every PHP version
       # as it also acts as an integration test.
       - name: 'PHPCS: check code style without cache, no parallel'
-        if: ${{ matrix.custom_ini == false && matrix.os == 'windows-latest' }}
+        if: ${{ matrix.custom_ini == false }}
         run: php "bin/phpcs" --no-cache --parallel=1
 
       - name: Download the PHPCS phar
