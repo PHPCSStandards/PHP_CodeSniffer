@@ -28,7 +28,7 @@ jobs:
   update-year-in-test:
     runs-on: ubuntu-latest
     # Don't run the cron job on forks.
-    if: ${{ github.event_name != 'schedule' || github.repository == 'PHPCSStandards/PHP_CodeSniffer' }}
+    if: ${{ github.event_name != 'schedule' || github.event.repository.fork == false }}
 
     name: "Happy New Year"
     steps:
