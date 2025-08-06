@@ -8,3 +8,4 @@
 composer.lock
 phpstan.neon
 /node_modules/
+/tests/EndToEnd/Fixtures/*.fixed
