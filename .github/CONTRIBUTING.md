@@ -397,7 +397,6 @@ To run the tests specific to the use of `PHP_CODESNIFFER_CBF === true`:
     Generally speaking, it is a good idea to always add a call to `expectNoStdoutOutput()` in any test using the `assertStderrOutput*()` assertions to make sure there is no output leaking to `stdOut`.
 
 
-
 ### Writing End-to-End Tests
 
 Bash-based end-to-end tests can be written using the [Bashunit](https://bashunit.typeddevs.com/) test tooling.
