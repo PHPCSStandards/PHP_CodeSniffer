@@ -18,7 +18,8 @@ Thank you for your interest in contributing to PHP_CodeSniffer!
     * [Finding Something to Work on](#finding-something-to-work-on)
     * [Getting Started](#getting-started)
     * [While Working on a Patch](#while-working-on-a-patch)
-    * [Writing Tests](#writing-tests)
+    * [Writing Unit/Integration Tests](#writing-unitintegration-tests)
+    * [Writing End-to-End Tests](#writing-end-to-end-tests)
     * [Submitting Your Pull Request](#submitting-your-pull-request)
 * [Licensing](#licensing)
 
@@ -270,7 +271,7 @@ To help you with this, a number of convenience scripts are available:
 * `composer build` will build the phpcs.phar and phpcbf.phar files.
 
 
-### Writing Tests
+### Writing Unit/Integration Tests
 
 Tests for the PHP_CodeSniffer engine can be found in the `tests/Core` directory.
 Tests for individual sniffs can be found in the `src/Standards/[StandardName]/Tests/[Category]/` directory.
@@ -378,7 +379,7 @@ To run the tests specific to the use of `PHP_CODESNIFFER_CBF === true`:
     vendor/bin/phpunit --group CBF --exclude-group nothing
     ```
 
-#### Other notes about writing tests
+#### Other notes about writing unit/integration tests
 
 * When using data providers, define them immediately below the corresponding test method.
 * When a test method has only one data provider, it is considered best practice to closely couple the test and data provider methods via their names. I.e. the data provider's name should match the test method name, replacing the "test" prefix with "data". For example, the data provider for a method named `testSomething()` should be `dataSomething()`.
@@ -394,6 +395,24 @@ To run the tests specific to the use of `PHP_CODESNIFFER_CBF === true`:
     If your tests **_do_** need their own `setUp()` and `tearDown()` methods, or would benefit more from using one of the other base TestCase classes, use the `PHP_CodeSniffer\Tests\Core\StatusWriterTestHelper` trait and call the appropriate setup/teardown helper methods from within your own `setUp()` and `tearDown()` methods.
     Tests using the `AbstractWriterTestCase` class or the trait, also get access to the following test helpers for use when testing output sent to `stdErr`: `expectNoStdoutOutput()`, `assertStderrOutputSameString($expected)` and `assertStderrOutputMatchesRegex($regex)`.
     Generally speaking, it is a good idea to always add a call to `expectNoStdoutOutput()` in any test using the `assertStderrOutput*()` assertions to make sure there is no output leaking to `stdOut`.
+
+
+
+### Writing End-to-End Tests
+
+Bash-based end-to-end tests can be written using the [Bashunit](https://bashunit.typeddevs.com/) test tooling.
+
+To install bashunit, follow the [installation guide](https://bashunit.typeddevs.com/installation).
+
+You can then run the bashunit tests on Linux/Mac/WSL, like so:
+```bash
+./lib/bashunit -p tests/EndToEnd
+```
+
+> Note: these tests will not run in the Windows native CMD shell. When on Windows, either use WSL or use the "git bash" shell.
+
+When writing end-to-end tests, please use fixtures for the "files under scan" to make the tests stable.
+These fixtures can be placed in the `tests/EndToEnd/Fixtures` subdirectory.
 
 
 ### Submitting Your Pull Request

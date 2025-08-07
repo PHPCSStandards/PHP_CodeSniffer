@@ -13,3 +13,5 @@ phpstan.neon
 /tests/Standards/sniffStnd.xml
 /tests/Core/Util/ExitCode/Fixtures/ExitCodeTest/*.fixed
 /tests/Core/Util/ExitCode/Fixtures/ExitCodeTest/phpcs.cache
+/tests/EndToEnd/Fixtures/*.fixed
+/lib/
