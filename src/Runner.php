@@ -764,7 +764,7 @@ class Runner
      * The reporting information returned by each child process is merged
      * into the main reporter class.
      *
-     * @param array $childProcs An array of child processes to wait for.
+     * @param array<int, string> $childProcs An array of child processes to wait for.
      *
      * @return bool
      */
@@ -777,7 +777,8 @@ class Runner
 
         while (count($childProcs) > 0) {
             $pid = pcntl_waitpid(0, $status);
-            if ($pid <= 0) {
+            if ($pid <= 0 || isset($childProcs[$pid]) === false) {
+                // No child or a child with an unmanaged PID was returned.
                 continue;
             }
 
