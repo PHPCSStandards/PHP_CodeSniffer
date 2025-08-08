@@ -1646,23 +1646,27 @@ class Ruleset
             return;
         }
 
-        $value = $this->getRealPropertyValue($settings['value']);
+        $value = $settings['value'];
 
         // Handle properties set inline via phpcs:set.
         if (substr($name, -2) === '[]') {
             $values = [];
             if (is_string($value) === true) {
-                foreach (explode(',', $value) as $val) {
-                    list($k, $v) = explode('=>', $val.'=>');
-                    if ($v !== '') {
-                        $values[trim($k)] = $v;
-                    } else {
-                        $values[] = $k;
+                if (trim($value) !== '') {
+                    foreach (explode(',', $value) as $val) {
+                        list($k, $v) = explode('=>', $val.'=>');
+                        if ($v !== '') {
+                            $values[trim($k)] = $v;
+                        } else {
+                            $values[] = $k;
+                        }
                     }
                 }
             }
 
             $value = $this->getRealPropertyValue($values);
+        } else {
+            $value = $this->getRealPropertyValue($value);
         }
 
         if (isset($settings['extend']) === true
