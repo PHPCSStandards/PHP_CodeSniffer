@@ -791,7 +791,7 @@ class Runner
             $errors   = $file->getErrorCount();
             $warnings = $file->getWarningCount();
             $fixable  = $file->getFixableCount();
-            $fixed    = $file->getFixedCount();
+            $fixed    = ($file->getFixedErrorCount() + $file->getFixedWarningCount());
 
             if (PHP_CODESNIFFER_CBF === true) {
                 // Files with fixed errors or warnings are F (green).

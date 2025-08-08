@@ -26,6 +26,13 @@ function test_phpcbf_returns_error_on_issues() {
   assert_contains "A TOTAL OF 1 ERROR WERE FIXED IN 1 FILE" "$OUTPUT"
 }
 
+function test_phpcbf_progressbar_shows_fixes_with_parallel_on() {
+  OUTPUT="$( { bin/phpcbf --no-colors --parallel=10 --no-cache --suffix=.fixed --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassWithStyleError.inc; } 2>&1 )"
+  assert_successful_code
+
+  assert_contains "F 1 / 1 (100%)" "$OUTPUT"
+}
+
 function test_phpcbf_bug_1112() {
   # See https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/1112
   if [[ "$(uname)" == "Darwin" ]]; then
