@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - master
-      - 4.0
+      - 4.x
     tags:
       - '**'
     paths-ignore:
