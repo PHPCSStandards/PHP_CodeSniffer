@@ -20,7 +20,7 @@ function test_phpcbf_is_working_in_parallel() {
 
 function test_phpcbf_returns_error_on_issues() {
   OUTPUT="$( { bin/phpcbf --no-colors --no-cache --suffix=.fixed --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassWithStyleError.inc; } 2>&1 )"
-  assert_exit_code 1
+  assert_successful_code
 
   assert_contains "F 1 / 1 (100%)" "$OUTPUT"
   assert_contains "A TOTAL OF 1 ERROR WERE FIXED IN 1 FILE" "$OUTPUT"
