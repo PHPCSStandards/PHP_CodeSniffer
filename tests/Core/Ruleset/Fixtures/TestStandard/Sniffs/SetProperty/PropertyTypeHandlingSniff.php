@@ -240,6 +240,27 @@ final class PropertyTypeHandlingSniff implements Sniff
     ];
 
     /**
+     * Used to verify that - in particular inline - array properties with only a "special" value get handled correctly.
+     *
+     * @var array<mixed>
+     */
+    public $expectsArrayWithJustValueTrue = [];
+
+    /**
+     * Used to verify that - in particular inline - array properties with only a "special" value get handled correctly.
+     *
+     * @var array<mixed>
+     */
+    public $expectsArrayWithJustValueFalse = [];
+
+    /**
+     * Used to verify that - in particular inline - array properties with only a "special" value get handled correctly.
+     *
+     * @var array<mixed>
+     */
+    public $expectsArrayWithJustValueNull = [];
+
+    /**
      * Used to verify that if `extend` is used on a non-array property, the value still gets set, but not as an array.
      *
      * @var array<mixed>

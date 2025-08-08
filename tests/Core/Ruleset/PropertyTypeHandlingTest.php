@@ -174,6 +174,18 @@ final class PropertyTypeHandlingTest extends TestCase
                 'propertyName' => 'expectsEmptyArray',
                 'expected'     => [],
             ],
+            'Array with just the value "true"'               => [
+                'propertyName' => 'expectsArrayWithJustValueTrue',
+                'expected'     => [true],
+            ],
+            'Array with just the value "false"'              => [
+                'propertyName' => 'expectsArrayWithJustValueFalse',
+                'expected'     => [false],
+            ],
+            'Array with just the value "null"'               => [
+                'propertyName' => 'expectsArrayWithJustValueNull',
+                'expected'     => [null],
+            ],
         ];
 
     }//end dataTypeHandling()

@@ -25,4 +25,8 @@
 // phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsArrayWithKeysAndValues[] string=>string,10=>10,float=>1.5,null=>null,true=>true,false=>false
 // phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsEmptyArray[]
 
+// phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsArrayWithJustValueTrue[] true
+// phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsArrayWithJustValueFalse[] false
+// phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsArrayWithJustValueNull[] null
+
 echo 'hello!';

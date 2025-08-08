@@ -108,6 +108,18 @@
                 <element value="true"/>
             </property>
 
+            <property name="expectsArrayWithJustValueTrue" type="array">
+                <element value="true"/>
+            </property>
+
+            <property name="expectsArrayWithJustValueFalse" type="array">
+                <element value="false"/>
+            </property>
+
+            <property name="expectsArrayWithJustValueNull" type="array">
+                <element value="null"/>
+            </property>
+
             <property name="expectsStringNotArray" extend="true" value="some value"/>
 
         </properties>
