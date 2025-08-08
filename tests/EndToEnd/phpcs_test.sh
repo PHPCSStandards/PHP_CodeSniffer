@@ -9,7 +9,7 @@ function test_phpcs_is_working_in_parallel() {
 }
 
 function test_phpcs_returns_error_on_issues() {
-  OUTPUT="$(bin/phpcs --no-colors --no-cache --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassWithStyleError.inc)"
+  OUTPUT="$( { bin/phpcs --no-colors --no-cache --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassWithStyleError.inc; } 2>&1 )"
   assert_exit_code 2
 
   assert_contains "E 1 / 1 (100%)" "$OUTPUT"

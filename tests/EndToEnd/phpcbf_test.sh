@@ -5,21 +5,21 @@ function tear_down() {
 }
 
 function test_phpcbf_is_working() {
-  OUTPUT="$(bin/phpcbf --no-cache --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassOneWithoutStyleError.inc tests/EndToEnd/Fixtures/ClassTwoWithoutStyleError.inc)"
+  OUTPUT="$( { bin/phpcbf --no-cache --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassOneWithoutStyleError.inc tests/EndToEnd/Fixtures/ClassTwoWithoutStyleError.inc; } 2>&1 )"
 
   assert_successful_code
   assert_contains "No violations were found" "$OUTPUT"
 }
 
 function test_phpcbf_is_working_in_parallel() {
-  OUTPUT="$(bin/phpcbf --no-cache --parallel=2 --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassOneWithoutStyleError.inc tests/EndToEnd/Fixtures/ClassTwoWithoutStyleError.inc)"
+  OUTPUT="$( { bin/phpcbf --no-cache --parallel=2 --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassOneWithoutStyleError.inc tests/EndToEnd/Fixtures/ClassTwoWithoutStyleError.inc; } 2>&1 )"
 
   assert_successful_code
   assert_contains "No violations were found" "$OUTPUT"
 }
 
 function test_phpcbf_returns_error_on_issues() {
-  OUTPUT="$(bin/phpcbf --no-colors --no-cache --suffix=.fixed --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassWithStyleError.inc)"
+  OUTPUT="$( { bin/phpcbf --no-colors --no-cache --suffix=.fixed --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassWithStyleError.inc; } 2>&1 )"
   assert_exit_code 1
 
   assert_contains "F 1 / 1 (100%)" "$OUTPUT"
