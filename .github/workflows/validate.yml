@@ -154,3 +154,21 @@ jobs:
     if: ${{ github.event_name != 'schedule' || github.event.repository.fork == false }}
 
     uses: PHPCSStandards/.github/.github/workflows/reusable-remark.yml@main
+
+  shellcheck:
+    name: 'ShellCheck'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up problem matcher
+        uses: lumaxis/shellcheck-problem-matchers@v2
+        with:
+          format: gcc
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@2.0.0
+        with:
+          format: gcc
