@@ -7,7 +7,9 @@
  * report from the command line.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
+ * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2025 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
@@ -15,6 +17,7 @@ namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Exceptions\DeepExitException;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Reporter;
 use PHP_CodeSniffer\Util\ExitCode;
 use PHP_CodeSniffer\Util\Timing;
 use PHP_CodeSniffer\Util\Writers\StatusWriter;
@@ -60,8 +63,12 @@ class Cbf implements Report
             // Replacing STDIN, so output current file to STDOUT
             // even if nothing was fixed. Exit here because we
             // can't process any more than 1 file in this setup.
-            $fixedContent = $phpcsFile->fixer->getContents();
-            throw new DeepExitException($fixedContent, ExitCode::OKAY);
+            echo $phpcsFile->fixer->getContents();
+
+            // Fake a Reporter instance to allow for getting a proper exit code.
+            $reporter = $this->createReporterInstance($phpcsFile);
+
+            throw new DeepExitException('', ExitCode::calculate($reporter));
         }
 
         if ($errors === 0) {
@@ -244,6 +251,41 @@ class Cbf implements Report
         echo PHP_EOL.str_repeat('-', $width).PHP_EOL.PHP_EOL;
 
     }//end generate()
+
+
+    /**
+     * Create a "fake" Reporter instance to allow for getting a proper exit code when scanning code provided via STDIN.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being reported on.
+     *
+     * @return \PHP_CodeSniffer\Reporter
+     */
+    private function createReporterInstance(File $phpcsFile)
+    {
+        $reporter = new class extends Reporter {
+
+
+            /**
+             * Overload the constructor as we don't need it.
+             */
+            public function __construct()
+            {
+            }//end __construct()
+
+
+        };
+
+        $reporter->totalFiles           = 1;
+        $reporter->totalErrors          = $phpcsFile->getErrorCount();
+        $reporter->totalWarnings        = $phpcsFile->getWarningCount();
+        $reporter->totalFixableErrors   = $phpcsFile->getFixableErrorCount();
+        $reporter->totalFixableWarnings = $phpcsFile->getFixableWarningCount();
+        $reporter->totalFixedErrors     = $phpcsFile->getFixedErrorCount();
+        $reporter->totalFixedWarnings   = $phpcsFile->getFixedWarningCount();
+
+        return $reporter;
+
+    }//end createReporterInstance()
 
 
 }//end class
