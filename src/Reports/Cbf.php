@@ -276,8 +276,8 @@ class Cbf implements Report
         };
 
         $reporter->totalFiles           = 1;
-        $reporter->totalErrors          = $phpcsFile->getErrorCount();
-        $reporter->totalWarnings        = $phpcsFile->getWarningCount();
+        $reporter->totalErrors          = $phpcsFile->getFirstRunCount('error');
+        $reporter->totalWarnings        = $phpcsFile->getFirstRunCount('warning');
         $reporter->totalFixableErrors   = $phpcsFile->getFixableErrorCount();
         $reporter->totalFixableWarnings = $phpcsFile->getFixableWarningCount();
         $reporter->totalFixedErrors     = $phpcsFile->getFixedErrorCount();
