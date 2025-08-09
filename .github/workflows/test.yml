@@ -183,16 +183,18 @@ jobs:
       - name: Setup ini config
         id: set_ini
         shell: bash
+        # yamllint disable rule:line-length
         run: |
           # Set the "short_open_tag" ini to make sure specific conditions are tested.
           # Also turn on error_reporting to ensure all notices are shown.
           if [[ ${{ matrix.custom_ini }} == true && "${{ matrix.php }}" == '5.5' ]]; then
-            echo 'PHP_INI=error_reporting=-1, display_errors=On, date.timezone=Australia/Sydney, short_open_tag=On, asp_tags=On' >> "$GITHUB_OUTPUT"
+            echo 'PHP_INI=error_reporting=-1, display_errors=On, display_startup_errors=On, date.timezone=Australia/Sydney, short_open_tag=On, asp_tags=On' >> "$GITHUB_OUTPUT"
           elif [[ ${{ matrix.custom_ini }} == true && "${{ matrix.php }}" != '5.5' ]]; then
-            echo 'PHP_INI=error_reporting=-1, display_errors=On, date.timezone=Australia/Sydney, short_open_tag=On' >> "$GITHUB_OUTPUT"
+            echo 'PHP_INI=error_reporting=-1, display_errors=On, display_startup_errors=On, date.timezone=Australia/Sydney, short_open_tag=On' >> "$GITHUB_OUTPUT"
           else
-            echo 'PHP_INI=error_reporting=-1, display_errors=On' >> "$GITHUB_OUTPUT"
+            echo 'PHP_INI=error_reporting=-1, display_errors=On, display_startup_errors=On' >> "$GITHUB_OUTPUT"
           fi
+          # yamllint enable rule:line-length
 
       - name: Install PHP
         uses: shivammathur/setup-php@v2
@@ -314,7 +316,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          ini-values: error_reporting=-1, display_errors=On${{ steps.set_ini.outputs.PHP_INI }}
+          ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On${{ steps.set_ini.outputs.PHP_INI }}
           coverage: xdebug
 
       # This action also handles the caching of the dependencies.

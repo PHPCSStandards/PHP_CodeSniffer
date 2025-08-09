@@ -149,7 +149,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 'latest'
-          ini-values: error_reporting=-1, display_errors=On
+          ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On
           coverage: none
 
       - name: Create a PHP file
@@ -219,7 +219,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 'latest'
-          ini-values: error_reporting=-1, display_errors=On
+          ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On
           coverage: none
           tools: phive
 

@@ -40,7 +40,7 @@ jobs:
         with:
           php-version: ${{ inputs.phpVersion }}
           coverage: none
-          ini-values: phar.readonly=Off, error_reporting=-1, display_errors=On
+          ini-values: phar.readonly=Off, error_reporting=-1, display_errors=On, display_startup_errors=On
 
       - name: Build the phar files
         run: php scripts/build-phar.php
