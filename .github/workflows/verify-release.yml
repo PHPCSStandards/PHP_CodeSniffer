@@ -27,8 +27,8 @@ jobs:
   trigger-schema-site-update:
     runs-on: ubuntu-latest
 
-    # Only run this workflow in the context of this repo.
-    if: github.repository_owner == 'PHPCSStandards'
+    # Only run this workflow in the context of this repo, don't run for changed workflow PR dry-runs.
+    if: github.repository_owner == 'PHPCSStandards' && github.event_name != 'pull_request'
 
     name: "Trigger update of schema website"
 
@@ -46,8 +46,8 @@ jobs:
   trigger-wiki-update:
     runs-on: ubuntu-latest
 
-    # Only run this workflow in the context of this repo.
-    if: github.repository_owner == 'PHPCSStandards'
+    # Only run this workflow in the context of this repo, don't run for changed workflow PR dry-runs.
+    if: github.repository_owner == 'PHPCSStandards' && github.event_name != 'pull_request'
 
     name: "Trigger update of wiki"
 
@@ -149,7 +149,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 'latest'
-          ini-values: error_reporting=-1, display_errors=On
+          ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On
           coverage: none
 
       - name: Create a PHP file
@@ -219,7 +219,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 'latest'
-          ini-values: error_reporting=-1, display_errors=On
+          ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On
           coverage: none
           tools: phive
 
