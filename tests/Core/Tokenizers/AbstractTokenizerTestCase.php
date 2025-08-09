@@ -137,9 +137,9 @@ abstract class AbstractTokenizerTestCase extends TestCase
     public static function clearResolvedTokensCache()
     {
         $property = new ReflectionProperty('PHP_CodeSniffer\Tokenizers\PHP', 'resolveTokenCache');
-        $property->setAccessible(true);
+        (PHP_VERSION_ID < 80100) && $property->setAccessible(true);
         $property->setValue(null, []);
-        $property->setAccessible(false);
+        (PHP_VERSION_ID < 80100) && $property->setAccessible(false);
 
     }//end clearResolvedTokensCache()
 
