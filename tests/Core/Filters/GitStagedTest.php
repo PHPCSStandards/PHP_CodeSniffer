@@ -228,7 +228,7 @@ final class GitStagedTest extends AbstractFilterTestCase
         $filter = new GitStaged($fakeDI, '/', self::$config, self::$ruleset);
 
         $reflMethod = new ReflectionMethod($filter, 'exec');
-        $reflMethod->setAccessible(true);
+        (PHP_VERSION_ID < 80100) && $reflMethod->setAccessible(true);
         $result = $reflMethod->invoke($filter, $cmd);
 
         $this->assertSame($expected, $result);

@@ -172,9 +172,9 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
     public function testRegistersWhenADeprecatedSniffIsLoaded()
     {
         $property = new ReflectionProperty(self::$ruleset, 'deprecatedSniffs');
-        $property->setAccessible(true);
+        (PHP_VERSION_ID < 80100) && $property->setAccessible(true);
         $actualValue = $property->getValue(self::$ruleset);
-        $property->setAccessible(false);
+        (PHP_VERSION_ID < 80100) && $property->setAccessible(false);
 
         // Only verify there is one deprecated sniff registered.
         // There are other tests which test the deprecated sniff handling in more detail.

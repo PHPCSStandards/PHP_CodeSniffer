@@ -280,14 +280,14 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
     private function mockCachedMessages(Ruleset $ruleset, $messages)
     {
         $reflProperty = new ReflectionProperty($ruleset, 'msgCache');
-        $reflProperty->setAccessible(true);
+        (PHP_VERSION_ID < 80100) && $reflProperty->setAccessible(true);
 
         $msgCache = $reflProperty->getValue($ruleset);
         foreach ($messages as $msg => $type) {
             $msgCache->add($msg, $type);
         }
 
-        $reflProperty->setAccessible(false);
+        (PHP_VERSION_ID < 80100) && $reflProperty->setAccessible(false);
 
     }//end mockCachedMessages()
 
@@ -302,9 +302,9 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
     private function invokeDisplayCachedMessages(Ruleset $ruleset)
     {
         $reflMethod = new ReflectionMethod($ruleset, 'displayCachedMessages');
-        $reflMethod->setAccessible(true);
+        (PHP_VERSION_ID < 80100) && $reflMethod->setAccessible(true);
         $reflMethod->invoke($ruleset);
-        $reflMethod->setAccessible(false);
+        (PHP_VERSION_ID < 80100) && $reflMethod->setAccessible(false);
 
     }//end invokeDisplayCachedMessages()
 

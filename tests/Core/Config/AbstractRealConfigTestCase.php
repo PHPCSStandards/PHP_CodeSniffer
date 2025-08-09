@@ -82,9 +82,9 @@ abstract class AbstractRealConfigTestCase extends TestCase
     protected static function setStaticConfigProperty($name, $value)
     {
         $property = new ReflectionProperty('PHP_CodeSniffer\Config', $name);
-        $property->setAccessible(true);
+        (PHP_VERSION_ID < 80100) && $property->setAccessible(true);
         $property->setValue(null, $value);
-        $property->setAccessible(false);
+        (PHP_VERSION_ID < 80100) && $property->setAccessible(false);
 
     }//end setStaticConfigProperty()
 
