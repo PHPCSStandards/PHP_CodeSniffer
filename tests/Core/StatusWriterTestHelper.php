@@ -68,9 +68,9 @@ trait StatusWriterTestHelper
         $this->stream = $stream;
 
         $streamProperty = new ReflectionProperty(StatusWriter::class, 'stream');
-        $streamProperty->setAccessible(true);
+        (PHP_VERSION_ID < 80100) && $streamProperty->setAccessible(true);
         $streamProperty->setValue(null, $this->stream);
-        $streamProperty->setAccessible(false);
+        (PHP_VERSION_ID < 80100) && $streamProperty->setAccessible(false);
 
     }//end redirectStatusWriterOutputToStream()
 
@@ -86,9 +86,9 @@ trait StatusWriterTestHelper
     {
         // Reset the static property to its default.
         $streamProperty = new ReflectionProperty(StatusWriter::class, 'stream');
-        $streamProperty->setAccessible(true);
+        (PHP_VERSION_ID < 80100) && $streamProperty->setAccessible(true);
         $streamProperty->setValue(null, STDERR);
-        $streamProperty->setAccessible(false);
+        (PHP_VERSION_ID < 80100) && $streamProperty->setAccessible(false);
 
     }//end resetStatusWriterStream()
 
