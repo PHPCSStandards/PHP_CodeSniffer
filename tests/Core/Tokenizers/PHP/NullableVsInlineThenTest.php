@@ -53,13 +53,15 @@ final class NullableVsInlineThenTest extends AbstractTokenizerTestCase
             'property declaration, readonly, no visibility'  => ['/* testNullableReadonlyOnly */'],
             'property declaration, private set'              => ['/* testNullablePrivateSet */'],
             'property declaration, public and protected set' => ['/* testNullablePublicProtectedSet */'],
+            'property declaration, final, no visibility'     => ['/* testNullableFinalOnly */'],
+            'property declaration, abstract, no visibility'  => ['/* testNullableAbstractOnly */'],
         ];
 
     }//end dataNullable()
 
 
     /**
-     * Test that "readonly" when not used as the keyword is still tokenized as `T_STRING`.
+     * Test that a "?" when used as part of a ternary expression is tokenized as `T_INLINE_THEN`.
      *
      * @param string $testMarker The comment which prefaces the target token in the test file.
      *
