@@ -36,6 +36,7 @@ class VariableCommentSniff extends AbstractVariableSniff
             T_STATIC                 => T_STATIC,
             T_READONLY               => T_READONLY,
             T_FINAL                  => T_FINAL,
+            T_ABSTRACT               => T_ABSTRACT,
             T_WHITESPACE             => T_WHITESPACE,
             T_STRING                 => T_STRING,
             T_NS_SEPARATOR           => T_NS_SEPARATOR,
