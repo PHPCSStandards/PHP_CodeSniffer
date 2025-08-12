@@ -3499,7 +3499,8 @@ class PHP extends Tokenizer
                         || $this->tokens[$x]['code'] === T_VAR
                         || $this->tokens[$x]['code'] === T_STATIC
                         || $this->tokens[$x]['code'] === T_READONLY
-                        || $this->tokens[$x]['code'] === T_FINAL)
+                        || $this->tokens[$x]['code'] === T_FINAL
+                        || $this->tokens[$x]['code'] === T_ABSTRACT)
                     ) {
                         // This will also confirm constructor property promotion parameters, but that's fine.
                         $confirmed = true;
