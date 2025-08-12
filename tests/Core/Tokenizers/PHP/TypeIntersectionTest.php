@@ -130,6 +130,8 @@ final class TypeIntersectionTest extends AbstractTokenizerTestCase
             'type for asymmetric visibility (public private(set)) prop'   => ['/* testTypeIntersectionPropertyWithPublicPrivateSet */'],
             'type for asymmetric visibility (protected(set)) property'    => ['/* testTypeIntersectionPropertyWithProtectedSet */'],
             'type for asymmetric visibility (public protected(set)) prop' => ['/* testTypeIntersectionPropertyWithPublicProtectedSet */'],
+            'type for abstract property'                                  => ['/* testTypeIntersectionWithPHP84AbstractKeyword */'],
+            'type for abstract property reversed modifier order'          => ['/* testTypeIntersectionWithPHP84AbstractKeywordFirst */'],
             'type for method parameter'                                   => ['/* testTypeIntersectionParam1 */'],
             'type for method parameter, first in multi-intersect'         => ['/* testTypeIntersectionParam2 */'],
             'type for method parameter, last in multi-intersect'          => ['/* testTypeIntersectionParam3 */'],

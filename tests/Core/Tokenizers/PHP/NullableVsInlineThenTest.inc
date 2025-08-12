@@ -1,6 +1,6 @@
 <?php
 
-class Nullable
+abstract class Nullable
 {
     /* testNullableReadonlyOnly */
     readonly ?int $prop;
@@ -10,6 +10,12 @@ class Nullable
 
     /* testNullablePublicProtectedSet */
     public protected(set) ?int $prop3;
+
+    /* testNullableFinalOnly */
+    final ?bool $prop4;
+
+    /* testNullableAbstractOnly */
+    abstract ?string $prop5 { get; }
 }
 
 class InlineThen
