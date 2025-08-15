@@ -172,3 +172,21 @@ jobs:
         uses: ludeeus/action-shellcheck@2.0.0
         with:
           format: gcc
+
+  find-token-properties:
+    # The properties in the Tokens class have been deprecated.
+    # The code in this repository should always use the constants instead.
+    name: 'Find use of Tokens properties'
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Find uses
+        id: findprops
+        shell: cmd
+        run: |
+          findstr /S /N /C:"Tokens::$" *.php
+          IF %ERRORLEVEL% NEQ 1 (Echo Please use the Tokens constants instead of the properties &Exit /b 1)
+          IF %ERRORLEVEL% EQU 1 (Echo All good &Exit /b 0)
