@@ -80,6 +80,10 @@ final class PropertyDeclarationUnitTest extends AbstractSniffTestCase
                 130 => 1,
                 131 => 1,
                 132 => 2,
+                137 => 1,
+                138 => 1,
+                139 => 1,
+                140 => 1,
             ];
 
         default:
