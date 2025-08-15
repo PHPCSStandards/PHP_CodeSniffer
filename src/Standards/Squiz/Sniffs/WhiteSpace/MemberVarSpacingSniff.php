@@ -58,6 +58,7 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
         $validPrefixes[] = T_FINAL;
         $validPrefixes[] = T_VAR;
         $validPrefixes[] = T_READONLY;
+        $validPrefixes[] = T_ABSTRACT;
 
         $startOfStatement = $phpcsFile->findNext($validPrefixes, ($endOfPreviousStatement + 1), $stackPtr, false, null, true);
         if ($startOfStatement === false) {
