@@ -76,6 +76,10 @@ final class PropertyDeclarationUnitTest extends AbstractSniffUnitTest
             125 => 1,
             126 => 1,
             127 => 2,
+            132 => 1,
+            133 => 1,
+            134 => 1,
+            135 => 1,
         ];
 
     }//end getErrorList()
