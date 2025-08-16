@@ -1215,7 +1215,7 @@ class Ruleset
                                 }
 
                                 $value = (string) $element['value'];
-                                if (isset($element['key']) === true) {
+                                if (isset($element['key']) === true && trim($element['key']) !== '') {
                                     $key          = (string) $element['key'];
                                     $values[$key] = $value;
                                     $printValue  .= $key.'=>'.$value.',';
