@@ -47,6 +47,12 @@ class testFECNClassThatImplementsAndExtends implements InterfaceA, InterfaceB ex
 /* testInterfaceMultiExtends */
 interface Multi extends \Package\FooInterface, \BarInterface {};
 
+/* testExtendedReadonlyAnonClass */
+$anon = new readonly class() extends \Fully\Qualified\MyClass {};
+
+/* testExtendedAnonClassWithAttributes */
+$anon = new #[SomeAttribute] class( $p ) extends Partially\Qualified\MyClass {};
+
 /* testMissingExtendsName */
 class testMissingExtendsName extends { /* missing classname */ } // Intentional parse error.
 
