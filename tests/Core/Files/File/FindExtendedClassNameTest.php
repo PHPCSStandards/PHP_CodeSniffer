@@ -129,6 +129,14 @@ final class FindExtendedClassNameTest extends AbstractMethodUnitTest
                 'identifier' => '/* testInterfaceMultiExtends */',
                 'expected'   => '\Package\FooInterface',
             ],
+            'readonly anon class extends fully qualified class'           => [
+                'identifier' => '/* testExtendedReadonlyAnonClass */',
+                'expected'   => '\Fully\Qualified\MyClass',
+            ],
+            'anon class with attribute extends partially qualified class' => [
+                'identifier' => '/* testExtendedAnonClassWithAttributes */',
+                'expected'   => 'Partially\Qualified\MyClass',
+            ],
             'parse error - extends keyword, but no class name'            => [
                 'identifier' => '/* testMissingExtendsName */',
                 'expected'   => false,
