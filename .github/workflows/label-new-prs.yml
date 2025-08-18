@@ -38,7 +38,7 @@ jobs:
     steps:
       # Checkout is needed to use the `use_local_config` option.
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Verify changes to the labeling logic
         uses: srvaroa/labeler@v1
