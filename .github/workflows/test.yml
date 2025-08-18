@@ -114,7 +114,7 @@ jobs:
         run: git config --global core.autocrlf input
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: "libxml2: find the latest relevant tag"
         if: ${{ matrix.libxml_minor }}
@@ -310,7 +310,7 @@ jobs:
         run: git config --global core.autocrlf input
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup ini config
         if: ${{ matrix.custom_ini == true && matrix.os != 'windows-latest' }}

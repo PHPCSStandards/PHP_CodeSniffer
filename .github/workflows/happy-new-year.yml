@@ -49,7 +49,7 @@ jobs:
         run: "echo current year: ${{ steps.year.outputs.NEW_YEAR }} - previous year: ${{ steps.year.outputs.PREVIOUS_YEAR }}"
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ steps.branches.outputs.BASE }}
 
