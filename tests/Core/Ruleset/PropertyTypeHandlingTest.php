@@ -93,6 +93,7 @@ final class PropertyTypeHandlingTest extends TestCase
             '10',
             '1.5',
             null,
+            null,
             true,
             false,
         ];
@@ -100,6 +101,7 @@ final class PropertyTypeHandlingTest extends TestCase
             'string' => 'string',
             10       => '10',
             'float'  => '1.5',
+            ''       => null,
             'null'   => null,
             'true'   => true,
             'false'  => false,

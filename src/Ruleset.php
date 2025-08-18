@@ -1651,15 +1651,13 @@ class Ruleset
         // Handle properties set inline via phpcs:set.
         if (substr($name, -2) === '[]') {
             $values = [];
-            if (is_string($value) === true) {
-                if (trim($value) !== '') {
-                    foreach (explode(',', $value) as $val) {
-                        list($k, $v) = explode('=>', $val.'=>');
-                        if ($v !== '') {
-                            $values[trim($k)] = $v;
-                        } else {
-                            $values[] = $k;
-                        }
+            if (is_string($value) === true && trim($value) !== '') {
+                foreach (explode(',', $value) as $val) {
+                    if (strpos($val, '=>') === false) {
+                        $values[] = $val;
+                    } else {
+                        list($k, $v)      = explode('=>', $val);
+                        $values[trim($k)] = $v;
                     }
                 }
             }

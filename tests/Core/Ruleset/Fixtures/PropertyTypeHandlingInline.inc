@@ -21,8 +21,8 @@
 // phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsBooleanFalseCase fALSe
 // phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsBooleanFalseTrimmed      false
 
-// phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsArrayWithOnlyValues[] string, 10, 1.5, null, true, false
-// phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsArrayWithKeysAndValues[] string=>string,10=>10,float=>1.5,null=>null,true=>true,false=>false
+// phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsArrayWithOnlyValues[] string, 10, 1.5, , null, true, false
+// phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsArrayWithKeysAndValues[] string=>string,10=>10,float=>1.5,=>,null=>null,true=>true,false=>false
 // phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsEmptyArray[]
 
 // phpcs:set TestStandard.SetProperty.PropertyTypeHandling expectsArrayWithJustValueTrue[] true
