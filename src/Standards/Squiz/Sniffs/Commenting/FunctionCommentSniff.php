@@ -76,7 +76,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                 $phpcsFile->addError($error, $return, 'MissingReturnType');
             } else {
                 // Support both a return type and a description.
-                preg_match('`^((?:\|?(?:array\([^\)]*\)|[\\\\a-z0-9\[\]]+))*)( .*)?`i', $content, $returnParts);
+                preg_match('`^((?:\|?(?:array\([^\)]*\)|[\\\\a-z0-9_\[\]]+))*)( .*)?`i', $content, $returnParts);
                 if (isset($returnParts[1]) === false) {
                     return;
                 }
