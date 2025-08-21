@@ -153,22 +153,13 @@ class File
     protected $warningCount = 0;
 
     /**
-     * The original total number of errors that can be fixed (first run on a file).
+     * The original total number of errors and warnings (first run on a file).
      *
      * {@internal This should be regarded as an immutable property.}
      *
-     * @var integer
+     * @var array<string, int>
      */
-    private $fixableErrorCountFirstRun;
-
-    /**
-     * The original total number of warnings that can be fixed (first run on a file).
-     *
-     * {@internal This should be regarded as an immutable property.}
-     *
-     * @var integer
-     */
-    private $fixableWarningCountFirstRun;
+    private $firstRunCounts;
 
     /**
      * The current total number of errors that can be fixed.
@@ -555,14 +546,18 @@ class File
             StatusWriter::write('*** END SNIFF PROCESSING REPORT ***', 1);
         }
 
-        if (isset($this->fixableErrorCountFirstRun, $this->fixableWarningCountFirstRun) === false) {
-            $this->fixableErrorCountFirstRun   = $this->fixableErrorCount;
-            $this->fixableWarningCountFirstRun = $this->fixableWarningCount;
+        if (isset($this->firstRunCounts) === false) {
+            $this->firstRunCounts = [
+                'error'          => $this->errorCount,
+                'warning'        => $this->warningCount,
+                'fixableError'   => $this->fixableErrorCount,
+                'fixableWarning' => $this->fixableWarningCount,
+            ];
         }
 
         $this->fixedCount       += $this->fixer->getFixCount();
-        $this->fixedErrorCount   = ($this->fixableErrorCountFirstRun - $this->fixableErrorCount);
-        $this->fixedWarningCount = ($this->fixableWarningCountFirstRun - $this->fixableWarningCount);
+        $this->fixedErrorCount   = ($this->firstRunCounts['fixableError'] - $this->fixableErrorCount);
+        $this->fixedWarningCount = ($this->firstRunCounts['fixableWarning'] - $this->fixableWarningCount);
 
     }//end process()
 
@@ -1215,6 +1210,22 @@ class File
         return $this->fixedWarningCount;
 
     }//end getFixedWarningCount()
+
+
+    /**
+     * Retrieve information about the first run.
+     *
+     * @param $type string
+     *
+     * @internal This method does not form part of any public API nor backwards compatibility guarantee.
+     *
+     * @return int
+     */
+    public function getFirstRunCount(string $type):int
+    {
+        return $this->firstRunCounts[$type];
+
+    }//end getFirstRunCount()
 
 
     /**
