@@ -43,3 +43,39 @@ function test_phpcbf_bug_1112() {
     assert_successful_code "$(bash -ic 'bash --init-file <(echo "echo \"Subprocess\"") -c "bin/phpcbf --no-cache --parallel=2 --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassOneWithoutStyleError.inc tests/EndToEnd/Fixtures/ClassTwoWithoutStyleError.inc"')"
   fi
 }
+
+function test_phpcbf_exit_code_clean() {
+  bin/phpcbf --suffix=.fixed --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassOneWithoutStyleError.inc
+  assert_exit_code 0
+
+  # Same result via STDIN
+  bin/phpcbf --suffix=.fixed --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist < tests/EndToEnd/Fixtures/ClassOneWithoutStyleError.inc
+  assert_exit_code 0
+}
+
+function test_phpcbf_exit_code_fixable() {
+  bin/phpcbf --suffix=.fixed --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassWithStyleError.inc
+  assert_exit_code 0
+
+  # Same result via STDIN
+  bin/phpcbf --suffix=.fixed --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist < tests/EndToEnd/Fixtures/ClassWithStyleError.inc
+  assert_exit_code 0
+}
+
+function test_phpcbf_exit_code_non_fixable() {
+  bin/phpcbf --suffix=.fixed --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassWithUnfixableStyleError.inc
+  assert_exit_code 2
+
+  # Same result via STDIN
+  bin/phpcbf --suffix=.fixed --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist < tests/EndToEnd/Fixtures/ClassWithUnfixableStyleError.inc
+  assert_exit_code 2
+}
+
+function test_phpcbf_exit_code_fixable_and_non_fixable() {
+  bin/phpcbf --suffix=.fixed --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassWithTwoStyleErrors.inc
+  assert_exit_code 2
+
+  # Same result via STDIN
+  bin/phpcbf --suffix=.fixed --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist < tests/EndToEnd/Fixtures/ClassWithTwoStyleErrors.inc
+  assert_exit_code 2
+}
