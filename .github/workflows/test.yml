@@ -92,6 +92,7 @@ jobs:
           releases-only: false  # The libxml2 repository doesn't use GitHub's "release" feature.
           prefix: 'v${{ matrix.libxml_minor }}.' # Limit the result to the minor we're interested in.
           sort-tags: true # Find the "greatest" version for that minor based on semver.
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       # To put it simply: we need to remove the 'v' prefix from the version number.
       - name: "libxml2: parse the version to a patch version"
