@@ -4,13 +4,6 @@ on:
   # Run on pushes to `master`/`4.x` and on all pull requests.
   # Prevent the build from running when there are only irrelevant changes.
   push:
-    branches:
-      - master
-      - 4.x
-    tags:
-      - '**'
-    paths-ignore:
-      - '**.md'
   pull_request:
   # Allow manually triggering the workflow.
   workflow_dispatch:
@@ -54,21 +47,10 @@ jobs:
       #   code conditions.
       matrix:
         os: ['ubuntu-latest', 'windows-latest']
-        php: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
+        php: ['8.2', '8.3', '8.4', '8.5']
         custom_ini: [false]
 
         include:
-          # Skip test runs on builds which are also run in the coverage job.
-          - php: '7.2'
-            skip_tests: true
-          - php: '8.4'
-            skip_tests: true
-
-          # Run a couple of builds with custom extensions to allow for testing ini handling within PHPCS.
-          # Ref: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/416
-          - php: '7.3'
-            os: 'ubuntu-latest'
-            extensions: ':mysqli' # Run with mysqli disabled.
           - php: '8.2'
             os: 'ubuntu-latest'
             extensions: ':mysqli' # Run with mysqli disabled.
@@ -77,21 +59,12 @@ jobs:
           # To safeguard support for the latest libxml we need to update the library on the fly.
           # This only needs to be tested with one PHP version for each libxml minor to verify support.
           # Testing against multiple PHP versions would not yield a difference in results.
-          - php: '8.0'
-            os: 'ubuntu-latest'
-            libxml_minor: '2.11'
           - php: '8.3'
             os: 'ubuntu-latest'
             libxml_minor: '2.13'
 
           # Extra builds running only the unit tests with different PHP ini settings.
-          - php: '7.4'
-            os: 'ubuntu-latest'
-            custom_ini: true
           - php: '8.3'
-            os: 'ubuntu-latest'
-            custom_ini: true
-          - php: '8.0'
             os: 'ubuntu-latest'
             custom_ini: true
           - php: '8.2'
@@ -284,7 +257,7 @@ jobs:
         # - So, aside from PHP 7.2, we can only run code coverage on the last PHP version (or higher)
         #   which added a new token, which is polyfilled by both.
         #   At the time of writing, this means PHP 8.4 or higher.
-        php: ['7.2', '8.4']
+        php: ['8.4']
         custom_ini: [false]
 
         include:

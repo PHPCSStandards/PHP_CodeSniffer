@@ -36,8 +36,14 @@
         "ext-xmlwriter": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.0 || ^9.3.4 || ^10.5.32 || 11.3.3 - 11.5.28 || ^11.5.31"
+        "phpunit/phpunit": "dev-attr"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/staabm/phpunit"
+        }
+    ],
     "bin": [
         "bin/phpcbf",
         "bin/phpcs"
