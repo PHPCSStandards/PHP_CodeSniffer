@@ -116,10 +116,10 @@ final class ProcessRulesetIniSetTest extends TestCase
         return [
             // Using Core directives available PHP cross-version to prevent the tests failing
             // on an unavailable directive or due to an extension not being available.
-            'php.ini only option: disable_classes'  => [
+            'php.ini only option: expose_php'       => [
                 'standard' => __DIR__.'/IniSetFailIniOnlyTest.xml',
-                'option'   => 'disable_classes',
-                'expected' => 'DateTime,DOMComment',
+                'option'   => 'expose_php',
+                'expected' => '0',
             ],
             'INI_PERDIR option: short_open_tag'     => [
                 'standard' => __DIR__.'/IniSetFailIniPerDirTest.xml',
