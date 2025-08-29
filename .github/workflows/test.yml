@@ -191,7 +191,7 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php == '8.5' && '8.4' || matrix.php }}
+          php-version: ${{ matrix.php }}
           ini-values: ${{ steps.set_ini.outputs.PHP_INI }}
           extensions: ${{ matrix.extensions }}
           coverage: none
@@ -206,14 +206,6 @@ jobs:
         with:
           composer-options: ${{ matrix.php == '8.5' && '--ignore-platform-req=php+' || '' }}
           custom-cache-suffix: $(date -u "+%Y-%m")
-
-      - name: "Install PHP again (PHP 8.5)"
-        if: ${{ matrix.php == '8.5' }}
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          ini-values: ${{ steps.set_ini.outputs.PHP_INI }}
-          coverage: none
 
       - name: Grab PHPUnit version
         id: phpunit_version

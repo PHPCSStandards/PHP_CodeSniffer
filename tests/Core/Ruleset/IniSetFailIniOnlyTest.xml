@@ -2,7 +2,7 @@
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="IniSetTest" xsi:noNamespaceSchemaLocation="phpcs.xsd">
     <description>Ruleset to test ini values which can not be changed at runtime will be reported as such when set from the ruleset.</description>
 
-    <ini name="disable_classes" value="DateTime,DOMComment"/>
+    <ini name="expose_php" value="0"/>
 
     <!-- Prevent a "no sniff were registered" error. -->
     <rule ref="Generic.PHP.BacktickOperator"/>

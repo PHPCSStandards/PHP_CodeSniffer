@@ -300,10 +300,10 @@ final class IniSetTest extends TestCase
         return [
             // Using Core directives available PHP cross-version to prevent the tests failing
             // on an unavailable directive or due to an extension not being available.
-            'php.ini only option: disable_classes'     => [
-                'option'           => 'disable_classes',
-                'newValue'         => 'DateTime,DOMComment',
-                'alternativeValue' => 'DOMComment,DateTime',
+            'php.ini only option: expose_php'          => [
+                'option'           => 'expose_php',
+                'newValue'         => '0',
+                'alternativeValue' => '1',
             ],
             'INI_PERDIR option: short_open_tag (bool)' => [
                 'option'           => 'short_open_tag',
