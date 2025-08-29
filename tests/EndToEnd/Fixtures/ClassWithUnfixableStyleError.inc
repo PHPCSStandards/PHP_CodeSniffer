@@ -11,4 +11,4 @@ namespace PHP_CodeSniffer\Tests\EndToEnd\Fixtures;
 
 class ClassWithUnfixableStyleError
 {
-} # This comment does not belong here, according to PSR12.
+} // This comment does not belong here, according to PSR12.

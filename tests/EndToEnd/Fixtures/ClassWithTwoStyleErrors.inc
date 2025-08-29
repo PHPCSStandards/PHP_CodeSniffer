@@ -9,6 +9,6 @@
 
 namespace PHP_CodeSniffer\Tests\EndToEnd\Fixtures;
 
-# The brace on the following line should be on a line by itself. This can be fixed with phpcbf.
+// The brace on the following line should be on a line by itself. This can be fixed with phpcbf.
 class ClassWithTwoStyleErrors {
-} # This comment does not belong here, according to PSR12. This cannot be fixed with phpcbf.
+} // This comment does not belong here, according to PSR12. This cannot be fixed with phpcbf.
