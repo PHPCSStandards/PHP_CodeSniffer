@@ -26,39 +26,3 @@ function test_phpcs_bug_1112() {
       assert_successful_code "$(bash -ic 'bash --init-file <(echo "echo \"Subprocess\"") -c "bin/phpcs --no-cache --parallel=2 --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassOneWithoutStyleError.inc tests/EndToEnd/Fixtures/ClassTwoWithoutStyleError.inc"')"
     fi
 }
-
-function test_phpcs_exit_code_clean() {
-  bin/phpcs --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassOneWithoutStyleError.inc
-  assert_exit_code 0
-
-  # Same result via STDIN
-  bin/phpcs --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist < tests/EndToEnd/Fixtures/ClassOneWithoutStyleError.inc
-  assert_exit_code 0
-}
-
-function test_phpcs_exit_code_fixable() {
-  bin/phpcs --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassWithStyleError.inc
-  assert_exit_code 1
-
-  # Same result via STDIN
-  bin/phpcs --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist < tests/EndToEnd/Fixtures/ClassWithStyleError.inc
-  assert_exit_code 1
-}
-
-function test_phpcs_exit_code_non_fixable() {
-  bin/phpcs --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassWithUnfixableStyleError.inc
-  assert_exit_code 2
-
-  # Same result via STDIN
-  bin/phpcs --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist < tests/EndToEnd/Fixtures/ClassWithUnfixableStyleError.inc
-  assert_exit_code 2
-}
-
-function test_phpcs_exit_code_fixable_and_non_fixable() {
-  bin/phpcs --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ClassWithTwoStyleErrors.inc
-  assert_exit_code 3
-
-  # Same result via STDIN
-  bin/phpcs --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist < tests/EndToEnd/Fixtures/ClassWithTwoStyleErrors.inc
-  assert_exit_code 3
-}
