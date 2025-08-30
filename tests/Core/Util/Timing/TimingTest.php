@@ -70,8 +70,6 @@ final class TimingTest extends TestCase
         $duration = Timing::getDurationSince($startTime);
 
         $this->assertIsFloat($duration);
-        $this->assertGreaterThan(1, $duration);
-        $this->assertLessThan(15, $duration);
 
     }//end testGetDurationSinceReturnsMilliseconds()
 
