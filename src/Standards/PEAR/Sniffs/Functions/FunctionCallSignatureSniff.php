@@ -54,6 +54,13 @@ class FunctionCallSignatureSniff implements Sniff
      */
     public $requiredSpacesBeforeClose = 0;
 
+    /**
+     * Allows Heredoc and Nowdoc to start after the opening bracket.
+     *
+     * @var boolean
+     */
+    public $allowHereDocAfterOpenBracket = false;
+
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -402,7 +409,15 @@ class FunctionCallSignatureSniff implements Sniff
             }
         }//end if
 
-        $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($openBracket + 1), null, true);
+        $nextTokens = Tokens::$emptyTokens;
+        if ($this->allowHereDocAfterOpenBracket === true) {
+            $nextTokens += [
+                T_START_HEREDOC,
+                T_START_NOWDOC,
+            ];
+        }
+
+        $next = $phpcsFile->findNext($nextTokens, ($openBracket + 1), null, true);
         if ($tokens[$next]['line'] === $tokens[$openBracket]['line']) {
             $error = 'Opening parenthesis of a multi-line function call must be the last content on the line';
             $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'ContentAfterOpenBracket');
