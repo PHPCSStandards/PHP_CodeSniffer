@@ -209,7 +209,7 @@ jobs:
       # This action also handles the caching of the dependencies.
       - name: Set up node
         if: ${{ matrix.custom_ini == false }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '20'
 
@@ -322,7 +322,7 @@ jobs:
       # This action also handles the caching of the dependencies.
       - name: Set up node
         if: ${{ matrix.custom_ini == false }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '20'
 
