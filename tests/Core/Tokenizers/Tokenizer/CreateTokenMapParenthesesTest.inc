@@ -108,6 +108,12 @@ exit ( 101 /* testExitParenthesesCloser */);
 /* testDieParenthesesOwner */
 die ('oopsie' /* testDieParenthesesCloser */);
 
+/* testFullyQualifiedExitParenthesesOwner */
+\exit ( 101 /* testFullyQualifiedExitParenthesesCloser */);
+
+/* testFullyQualifiedDieParenthesesOwner */
+\die ('oopsie' /* testFullyQualifiedDieParenthesesCloser */);
+
 /* testExitNoParentheses */
 exit;
 

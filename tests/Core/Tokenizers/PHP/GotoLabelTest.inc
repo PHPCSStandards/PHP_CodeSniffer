@@ -122,7 +122,7 @@ switch ($x) {
         break;
 
     /* testNotGotoDeclarationFalseInCase */
-    case false:
+    case \false:
         // Do something.
         break;
 

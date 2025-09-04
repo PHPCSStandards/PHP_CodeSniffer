@@ -252,7 +252,7 @@ switch ($sContext)
     case 'SOMETHING':
     case 'CONSTANT':
         do_something();
-        break;
+        \exit();
     case 'GLOBAL':
     case 'GLOBAL1':
         do_something();

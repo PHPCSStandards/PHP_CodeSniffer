@@ -17,6 +17,7 @@ function gotoLabels() {
     goto /* testContinue */ continue;
     goto /* testDeclare */ declare;
     goto /* testDefault */ default;
+    goto /* testDie */ die;
     goto /* testDo */ do;
     goto /* testEcho */ echo;
     goto /* testElse */ else;

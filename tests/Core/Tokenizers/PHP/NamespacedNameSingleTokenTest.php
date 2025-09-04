@@ -868,12 +868,12 @@ final class NamespacedNameSingleTokenTest extends AbstractTokenizerTestCase
                     ],
                 ],
             ],
-            'fully qualified "null"'                                                                      => [
-                'testMarker'     => '/* testFullyQualifiedNull */',
+            'exit in partially qualified name (start)'                                                    => [
+                'testMarker'     => '/* testExitInNamespacedNameStart */',
                 'expectedTokens' => [
                     [
-                        'type'    => 'T_NAME_FULLY_QUALIFIED',
-                        'content' => '\NULL',
+                        'type'    => 'T_NAME_QUALIFIED',
+                        'content' => 'Exit\Name',
                     ],
                     [
                         'type'    => 'T_SEMICOLON',
@@ -881,12 +881,168 @@ final class NamespacedNameSingleTokenTest extends AbstractTokenizerTestCase
                     ],
                 ],
             ],
-            'fully qualified "false"'                                                                     => [
+            'exit in fully qualified name (middle)'                                                       => [
+                'testMarker'     => '/* testExitInNamespacedNameMiddle */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_NAME_FULLY_QUALIFIED',
+                        'content' => '\Not\exit\Name',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'exit in fully qualified name (end)'                                                          => [
+                'testMarker'     => '/* testExitInNamespacedNameEnd */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_NAME_FULLY_QUALIFIED',
+                        'content' => '\Not\Exit',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'PHP 8.4 exit as function call, fully qualified'                                              => [
+                'testMarker'     => '/* testFullyQualifiedExitFunctionCall */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_EXIT',
+                        'content' => '\\Exit',
+                    ],
+                    [
+                        'type'    => 'T_OPEN_PARENTHESIS',
+                        'content' => '(',
+                    ],
+                ],
+            ],
+            'exit as constant, fully qualified (illegal)'                                                 => [
+                'testMarker'     => '/* testFullyQualifiedExitConstant */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_EXIT',
+                        'content' => '\\exit',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'die in partially qualified name (start)'                                                     => [
+                'testMarker'     => '/* testDieInNamespacedNameStart */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_NAME_FULLY_QUALIFIED',
+                        'content' => '\Die\Name',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'die in fully qualified name (middle)'                                                        => [
+                'testMarker'     => '/* testDieInNamespacedNameMiddle */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_NAME_FULLY_QUALIFIED',
+                        'content' => '\Not\die\Name',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'die in fully qualified name (end)'                                                           => [
+                'testMarker'     => '/* testDieInNamespacedNameEnd */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_NAME_FULLY_QUALIFIED',
+                        'content' => '\Not\DIE',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'PHP 8.4 die as function call, fully qualified'                                               => [
+                'testMarker'     => '/* testFullyQualifiedDieFunctionCall */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_EXIT',
+                        'content' => '\\die',
+                    ],
+                    [
+                        'type'    => 'T_OPEN_PARENTHESIS',
+                        'content' => '(',
+                    ],
+                ],
+            ],
+            'die as constant, fully qualified (illegal)'                                                  => [
+                'testMarker'     => '/* testFullyQualifiedDieConstant */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_EXIT',
+                        'content' => '\\DIE',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'false in partially qualified name (start)'                                                   => [
+                'testMarker'     => '/* testFalseInNamespacedNameStart */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_NAME_QUALIFIED',
+                        'content' => 'False\Name',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'false in fully qualified name (middle)'                                                      => [
+                'testMarker'     => '/* testFalseInNamespacedNameMiddle */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_NAME_FULLY_QUALIFIED',
+                        'content' => '\Not\false\Name',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'false in fully qualified name (end)'                                                         => [
+                'testMarker'     => '/* testFalseInNamespacedNameEnd */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_NAME_FULLY_QUALIFIED',
+                        'content' => '\Not\FALSE',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'false, fully qualified'                                                                      => [
                 'testMarker'     => '/* testFullyQualifiedFalse */',
                 'expectedTokens' => [
                     [
-                        'type'    => 'T_NAME_FULLY_QUALIFIED',
-                        'content' => '\false',
+                        'type'    => 'T_FALSE',
+                        'content' => '\\false',
                     ],
                     [
                         'type'    => 'T_SEMICOLON',
@@ -894,12 +1050,12 @@ final class NamespacedNameSingleTokenTest extends AbstractTokenizerTestCase
                     ],
                 ],
             ],
-            'fully qualified "true"'                                                                      => [
-                'testMarker'     => '/* testFullyQualifiedTrue */',
+            'true in partially qualified name (start)'                                                    => [
+                'testMarker'     => '/* testTrueInNamespacedNameStart */',
                 'expectedTokens' => [
                     [
                         'type'    => 'T_NAME_FULLY_QUALIFIED',
-                        'content' => '\True',
+                        'content' => '\True\Name',
                     ],
                     [
                         'type'    => 'T_SEMICOLON',
@@ -907,6 +1063,98 @@ final class NamespacedNameSingleTokenTest extends AbstractTokenizerTestCase
                     ],
                 ],
             ],
+            'true in fully qualified name (middle)'                                                       => [
+                'testMarker'     => '/* testTrueInNamespacedNameMiddle */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_NAME_FULLY_QUALIFIED',
+                        'content' => '\Not\true\Name',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'true in fully qualified name (end)'                                                          => [
+                'testMarker'     => '/* testTrueInNamespacedNameEnd */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_NAME_FULLY_QUALIFIED',
+                        'content' => '\Not\True',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'true, fully qualified'                                                                       => [
+                'testMarker'     => '/* testFullyQualifiedTrue */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_TRUE',
+                        'content' => '\\TRUE',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'null in partially qualified name (start)'                                                    => [
+                'testMarker'     => '/* testNullInNamespacedNameStart */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_NAME_QUALIFIED',
+                        'content' => 'Null\Name',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'null in fully qualified name (middle)'                                                       => [
+                'testMarker'     => '/* testNullInNamespacedNameMiddle */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_NAME_FULLY_QUALIFIED',
+                        'content' => '\Not\Null\Name',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'null in fully qualified name (end)'                                                          => [
+                'testMarker'     => '/* testNullInNamespacedNameEnd */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_NAME_FULLY_QUALIFIED',
+                        'content' => '\Not\null',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+            'null, fully qualified'                                                                       => [
+                'testMarker'     => '/* testFullyQualifiedNull */',
+                'expectedTokens' => [
+                    [
+                        'type'    => 'T_NULL',
+                        'content' => '\\Null',
+                    ],
+                    [
+                        'type'    => 'T_SEMICOLON',
+                        'content' => ';',
+                    ],
+                ],
+            ],
+
             'function call, namespace relative, with whitespace (invalid in PHP 8)'                       => [
                 'testMarker'     => '/* testInvalidInPHP8Whitespace */',
                 'expectedTokens' => [

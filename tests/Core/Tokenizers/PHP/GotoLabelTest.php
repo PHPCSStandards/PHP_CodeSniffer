@@ -253,7 +253,7 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
             ],
             'not goto label - false followed by switch-case colon'               => [
                 'testMarker'   => '/* testNotGotoDeclarationFalseInCase */',
-                'testContent'  => 'false',
+                'testContent'  => '\false',
                 'expectedType' => 'T_FALSE',
             ],
             'not goto label - null followed by switch-case colon'                => [

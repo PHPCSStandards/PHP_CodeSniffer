@@ -183,6 +183,14 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testDieParenthesesOwner */',
                 'tokenCode'  => T_EXIT,
             ],
+            'exit (fully qualified)'                         => [
+                'testMarker' => '/* testFullyQualifiedExitParenthesesOwner */',
+                'tokenCode'  => T_EXIT,
+            ],
+            'die (fully qualified)'                          => [
+                'testMarker' => '/* testFullyQualifiedDieParenthesesOwner */',
+                'tokenCode'  => T_EXIT,
+            ],
 
             'if - nested outer'                              => [
                 'testMarker' => '/* testNestedOuterIfParenthesesOwner */',

@@ -1360,6 +1360,43 @@ class PHP extends Tokenizer
             }//end if
 
             /*
+             * There is a select group of keywords - true, false, null, exit and die -,
+             * which can be used in fully qualified form, but should still be tokenized as the keyword.
+             */
+
+            if (PHP_VERSION_ID >= 80000
+                && $tokenIsArray === true
+                && $token[0] === T_NAME_FULLY_QUALIFIED
+            ) {
+                $specialCasedType = null;
+                $contentLc        = strtolower($token[1]);
+                if ($contentLc === '\exit' || $contentLc === '\die') {
+                    $specialCasedType = 'T_EXIT';
+                } else if ($contentLc === '\true') {
+                    $specialCasedType = 'T_TRUE';
+                } else if ($contentLc === '\false') {
+                    $specialCasedType = 'T_FALSE';
+                } else if ($contentLc === '\null') {
+                    $specialCasedType = 'T_NULL';
+                }
+
+                if ($specialCasedType !== null) {
+                    $newToken            = [];
+                    $newToken['code']    = constant($specialCasedType);
+                    $newToken['type']    = $specialCasedType;
+                    $newToken['content'] = $token[1];
+                    $finalTokens[$newStackPtr] = $newToken;
+                    ++$newStackPtr;
+
+                    if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                        StatusWriter::write("* token $stackPtr retokenized to $specialCasedType ({$token[1]})", 2);
+                    }
+
+                    continue;
+                }
+            }//end if
+
+            /*
                 Before PHP 8.0, namespaced names were not tokenized as a single token.
 
                 Note: reserved keywords are allowed within the "single token" names, so
@@ -1429,6 +1466,24 @@ class PHP extends Tokenizer
                         // This must be a qualified name starting with a reserved keyword.
                         // We need to overwrite the previously set final token.
                         --$newStackPtr;
+                    }
+
+                    // Special case fully qualified true/false/null/exit/die.
+                    if ($newToken['code'] === T_NAME_FULLY_QUALIFIED) {
+                        $newContentLc = strtolower($newToken['content']);
+                        if ($newContentLc === '\exit' || $newContentLc === '\die') {
+                            $newToken['code'] = T_EXIT;
+                            $newToken['type'] = 'T_EXIT';
+                        } else if ($newContentLc === '\true') {
+                            $newToken['code'] = T_TRUE;
+                            $newToken['type'] = 'T_TRUE';
+                        } else if ($newContentLc === '\false') {
+                            $newToken['code'] = T_FALSE;
+                            $newToken['type'] = 'T_FALSE';
+                        } else if ($newContentLc === '\null') {
+                            $newToken['code'] = T_NULL;
+                            $newToken['type'] = 'T_NULL';
+                        }
                     }
 
                     $finalTokens[$newStackPtr] = $newToken;
@@ -2320,7 +2375,9 @@ class PHP extends Tokenizer
             */
 
             if ($tokenIsArray === true
-                && $token[0] === T_STRING
+                && ($token[0] === T_STRING
+                || ($token[0] === T_EXIT
+                && (strtolower($token[1]) === 'exit' || strtolower($token[1]) === 'die')))
                 && (is_array($tokens[($stackPtr - 1)]) === false
                 || $tokens[($stackPtr - 1)][0] !== T_PAAMAYIM_NEKUDOTAYIM)
             ) {

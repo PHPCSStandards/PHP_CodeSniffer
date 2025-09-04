@@ -174,13 +174,6 @@ class ComparisonOperatorUsageSniff implements Sniff
                 $foundBooleans++;
             }
 
-            if ($tokens[$i]['code'] === T_NAME_FULLY_QUALIFIED) {
-                $compareReadyKeyword = strtolower($tokens[$i]['content']);
-                if ($compareReadyKeyword === '\true' || $compareReadyKeyword === '\false') {
-                    $foundBooleans++;
-                }
-            }
-
             if ($tokens[$i]['code'] === T_BOOLEAN_AND
                 || $tokens[$i]['code'] === T_BOOLEAN_OR
             ) {

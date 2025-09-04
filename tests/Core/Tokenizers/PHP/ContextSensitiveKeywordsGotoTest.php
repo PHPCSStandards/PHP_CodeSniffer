@@ -64,6 +64,7 @@ final class ContextSensitiveKeywordsGotoTest extends AbstractTokenizerTestCase
             'continue'     => ['/* testContinue */'],
             'declare'      => ['/* testDeclare */'],
             'default'      => ['/* testDefault */'],
+            'die'          => ['/* testDie */'],
             'do'           => ['/* testDo */'],
             'echo'         => ['/* testEcho */'],
             'else'         => ['/* testElse */'],

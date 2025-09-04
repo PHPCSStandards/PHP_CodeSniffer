@@ -449,6 +449,14 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
                 'testMarker'        => '/* testUnsetIsKeyword */',
                 'expectedTokenType' => 'T_UNSET',
             ],
+            '\\die: statement (fully qualified)'     => [
+                'testMarker'        => '/* testFullyQualifiedDieIsKeyword */',
+                'expectedTokenType' => 'T_EXIT',
+            ],
+            '\\exit: statement (fully qualified)'    => [
+                'testMarker'        => '/* testFullyQualifiedExitIsKeyword */',
+                'expectedTokenType' => 'T_EXIT',
+            ],
 
             'include'                                => [
                 'testMarker'        => '/* testIncludeIsKeyword */',
