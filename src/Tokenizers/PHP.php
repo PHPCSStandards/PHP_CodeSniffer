@@ -694,6 +694,25 @@ class PHP extends Tokenizer
                             break;
                         }
                     }
+
+                    // Fully Qualified `\exit`/`\die` should be preserved.
+                    if ($token[0] === T_EXIT
+                        && $finalTokens[$lastNotEmptyToken]['code'] === T_NS_SEPARATOR
+                    ) {
+                        for ($i = ($lastNotEmptyToken - 1); $i >= 0; $i--) {
+                            if (isset(Tokens::$emptyTokens[$finalTokens[$i]['code']]) === true) {
+                                continue;
+                            }
+
+                            if ($finalTokens[$i]['code'] !== T_STRING
+                                && $finalTokens[$i]['code'] !== T_NAMESPACE
+                            ) {
+                                $preserveKeyword = true;
+                            }
+
+                            break;
+                        }
+                    }
                 }//end if
 
                 // Types in typed constants should not be touched, but the constant name should be.
@@ -1354,6 +1373,38 @@ class PHP extends Tokenizer
 
                     $name = substr($name, 10);
                 }
+
+                // Special case keywords which can be used in fully qualified form.
+                if ($token[0] === T_NAME_FULLY_QUALIFIED) {
+                    $specialCasedType = null;
+                    $nameLc           = strtolower($name);
+                    if ($nameLc === 'exit' || $nameLc === 'die') {
+                        $specialCasedType = 'T_EXIT';
+                    } else if ($nameLc === 'true') {
+                        $specialCasedType = 'T_TRUE';
+                    } else if ($nameLc === 'false') {
+                        $specialCasedType = 'T_FALSE';
+                    } else if ($nameLc === 'null') {
+                        $specialCasedType = 'T_NULL';
+                    }
+
+                    if ($specialCasedType !== null) {
+                        $newToken            = [];
+                        $newToken['code']    = constant($specialCasedType);
+                        $newToken['type']    = $specialCasedType;
+                        $newToken['content'] = $name;
+                        $finalTokens[$newStackPtr] = $newToken;
+                        ++$newStackPtr;
+
+                        if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                            $type    = Tokens::tokenName($token[0]);
+                            $content = Common::prepareForOutput($token[1]);
+                            echo "\t\t* token $stackPtr split into individual tokens T_NS_SEPARATOR + $specialCasedType".PHP_EOL;
+                        }
+
+                        continue;
+                    }
+                }//end if
 
                 $parts     = explode('\\', $name);
                 $partCount = count($parts);
@@ -2523,15 +2574,36 @@ class PHP extends Tokenizer
                     } else if (isset($this->tstringContexts[$finalTokens[$lastNotEmptyToken]['code']]) === true
                         && $finalTokens[$lastNotEmptyToken]['code'] !== T_CONST
                     ) {
-                        $preserveTstring = true;
+                        $preserveTstring   = true;
+                        $tokenContentLower = strtolower($token[1]);
 
                         // Special case for syntax like: return new self/new parent
                         // where self/parent should not be a string.
-                        $tokenContentLower = strtolower($token[1]);
                         if ($finalTokens[$lastNotEmptyToken]['code'] === T_NEW
                             && ($tokenContentLower === 'self' || $tokenContentLower === 'parent')
                         ) {
                             $preserveTstring = false;
+                        }
+
+                        // Special case for fully qualified \true, \false and \null
+                        // where true/false/null should not be a string.
+                        // Note: if this is the _start_ of a longer namespaced name, this will undone again later.
+                        if ($finalTokens[$lastNotEmptyToken]['code'] === T_NS_SEPARATOR
+                            && ($tokenContentLower === 'true' || $tokenContentLower === 'false' || $tokenContentLower === 'null')
+                        ) {
+                            for ($i = ($lastNotEmptyToken - 1); $i >= 0; $i--) {
+                                if (isset(Tokens::$emptyTokens[$finalTokens[$i]['code']]) === true) {
+                                    continue;
+                                }
+
+                                if ($finalTokens[$i]['code'] !== T_STRING
+                                    && $finalTokens[$i]['code'] !== T_NAMESPACE
+                                ) {
+                                    $preserveTstring = false;
+                                }
+
+                                break;
+                            }
                         }
                     } else if ($finalTokens[$lastNotEmptyToken]['content'] === '&') {
                         // Function names for functions declared to return by reference.
@@ -3629,6 +3701,7 @@ class PHP extends Tokenizer
             } else if ($this->tokens[$i]['code'] === T_TRUE
                 || $this->tokens[$i]['code'] === T_FALSE
                 || $this->tokens[$i]['code'] === T_NULL
+                || $this->tokens[$i]['code'] === T_EXIT
             ) {
                 for ($x = ($i + 1); $x < $numTokens; $x++) {
                     if (isset(Tokens::$emptyTokens[$this->tokens[$x]['code']]) === false) {

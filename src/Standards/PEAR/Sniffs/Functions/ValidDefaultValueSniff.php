@@ -54,11 +54,14 @@ class ValidDefaultValueSniff implements Sniff
             }
 
             if (array_key_exists('default', $param) === true) {
-                $defaultFound = true;
+                $defaultFound   = true;
+                $defaultValueLc = strtolower($param['default']);
                 // Check if the arg is type hinted and using NULL for the default.
                 // This does not make the argument optional - it just allows NULL
                 // to be passed in.
-                if ($param['type_hint'] !== '' && strtolower($param['default']) === 'null') {
+                if ($param['type_hint'] !== ''
+                    && ($defaultValueLc === 'null' || $defaultValueLc === '\null')
+                ) {
                     $defaultFound = false;
                 }
 

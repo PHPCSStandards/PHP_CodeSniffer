@@ -142,6 +142,7 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
             '"false" as case name'     => ['/* testKeywordAsEnumCaseNameShouldBeString5 */'],
             '"default" as case name'   => ['/* testKeywordAsEnumCaseNameShouldBeString6 */'],
             '"array" as case name'     => ['/* testKeywordAsEnumCaseNameShouldBeString7 */'],
+            '"exit" as case name'      => ['/* testKeywordAsEnumCaseNameShouldBeString8 */'],
         ];
 
     }//end dataKeywordAsEnumCaseNameShouldBeString()

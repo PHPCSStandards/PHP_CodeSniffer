@@ -669,6 +669,12 @@ final class FindStartOfStatementTest extends AbstractMethodUnitTest
                 'targets'        => T_SEMICOLON,
                 'expectedTarget' => T_GOTO,
             ],
+            'Namespace separator for "die" should be start for contents - close parenthesis'          => [
+                // Note: not sure if this is actually correct - should this be the open parenthesis ?
+                'testMarker'     => '/* testInsideCaseFullyQualifiedDieStatement */',
+                'targets'        => T_CLOSE_PARENTHESIS,
+                'expectedTarget' => T_NS_SEPARATOR,
+            ],
             'Default keyword should be start of default statement - default itself'                   => [
                 'testMarker'     => '/* testDefaultStatement */',
                 'targets'        => T_DEFAULT,
