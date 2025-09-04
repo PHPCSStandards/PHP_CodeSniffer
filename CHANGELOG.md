@@ -6,6 +6,87 @@ The file documents changes to the PHP_CodeSniffer project.
 
 _Nothing yet._
 
+## [3.13.3] - 2025-09-04
+
+### Added
+- Tokenizer support for PHP 8.4 dereferencing of new expressions without wrapping parentheses. [#1160]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Tokenizer support for PHP 8.4 `abstract` properties. [#1183]
+    - The `File::getMemberProperties()` method now also supports `abstract` properties through a new `is_abstract` array index in the return value. [#1184]
+    - Additionally, the following sniffs have been updated to support `abstract` properties:
+        - Generic.PHP.LowerCaseConstant [#1185]
+        - Generic.PHP.UpperCaseConstant [#1185]
+        - PSR2.Classes.PropertyDeclaration [#1188]
+        - Squiz.Commenting.VariableComment [#1186]
+        - Squiz.WhiteSpace.MemberVarSpacing [#1187]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patches
+- Tokenizer support for the PHP 8.4 "exit as a function call" change. [#1201]
+    - When `exit`/`die` is used as a fully qualified "function call", it will now be tokenized as `T_NS_SEPARATOR` + `T_EXIT`.
+    - Additionally, the following sniff has been updated to handle fully qualified exit/die correctly:
+        - Squiz.PHP.NonExecutableCode
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patches
+
+### Changed
+- Tokenizer/PHP: fully qualified `true`/`false`/`null` will now be tokenized as `T_NS_SEPARATOR` + `T_TRUE`/`T_FALSE`/`T_NULL`. [#1201]
+    - Previously, these were tokenized as `T_NS_SEPARATOR` + `T_STRING`.
+    - Additionally, the following sniffs have been updated to handle fully qualified true/false/null correctly:
+        - Generic.CodeAnalysis.UnconditionalIfStatement
+        - Generic.ControlStructures.DisallowYodaConditions
+        - PEAR.Functions.ValidDefaultValue
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patches.
+- Generic.PHP.Syntax: the sniff is now able to scan input provided via STDIN on non-Windows OSes. [#915]
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- PSR2.ControlStructures.SwitchDeclaration: the `WrongOpener*` error code is now auto-fixable if the identified "wrong opener" is a semi-colon. [#1161]
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- The PSR2.Classes.PropertyDeclaration will now check that the abstract modifier keyword is placed before a visibility keyword. [#1188]
+    - Errors will be reported via a new `AbstractAfterVisibility` error code.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Various housekeeping, including improvements to the tests and documentation.
+    - Thanks to [Bernhard Zwein][@benno5020], [Rick Kerkhof][@NanoSector], [Rodrigo Primo][@rodrigoprimo] and [Juliette Reinders Folmer][@jrfnl] for their contributions.
+
+### Fixed
+- Fixed bug [#1112] : `--parallel` option fails if PHP_CodeSniffer is invoked via bash and the invokation creates a non-PHPCS-managed process.
+    - Thanks to [Rick Kerkhof][@NanoSector] for the patch.
+- Fixed bug [#1113] : fatal error when the specified "files to scan" would result in the same file being added multiple times to the queue.
+    - This error only occured when `--parallel` scanning was enabled.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Fixed bug [#1154] : PEAR.WhiteSpace.ObjectOperatorIndent: false positive when checking multiple chained method calls in a multidimensional array.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
+- Fixed bug [#1193] : edge case inconsistency in how empty string array keys for sniff properties are handled.
+    - Thanks to [Rodrigo Primo][@rodrigoprimo] and [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Fixed bug [#1197] : Squiz.Commenting.FunctionComment: return types containing a class name with underscores would be truncated leading to incorrect results.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+
+### Other
+- The [Wiki documentation] is now publicly editable. :tada:
+    - Update proposals can be submittted by opening a pull request in the [PHPCSStandards/PHP_CodeSniffer-documentation][docs-repo] repository.
+        Contributions welcome !
+    - Thanks to [Anna Filina][@afilina], [Dan Wallis][@fredden] and [Juliette Reinders Folmer][@jrfnl] for their work on getting this set up.
+- The [Phar website] has had a facelift. [#107]
+    - Thanks to [Bernhard Zwein][@benno5020] for making this happen!
+
+[Wiki documentation]: https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki
+[docs-repo]:          https://github.com/PHPCSStandards/PHP_CodeSniffer-documentation
+[Phar website]:       https://phars.phpcodesniffer.com/
+
+[#107]:  https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/107
+[#915]:  https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/915
+[#1112]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/1112
+[#1113]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/1113
+[#1154]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/1154
+[#1160]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1160
+[#1161]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1161
+[#1183]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1183
+[#1184]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1184
+[#1185]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1185
+[#1186]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1186
+[#1187]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1187
+[#1188]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1188
+[#1193]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1193
+[#1197]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/1197
+[#1201]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/1201
+
+
 ## [4.0.0RC1] - 2025-06-18
 
 This release includes all improvements and bugfixes from PHP_CodeSniffer [3.13.1] and [3.13.2].
@@ -7983,6 +8064,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [Unreleased]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/master...HEAD
 [4.0.0RC1]:   https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/4.0.0beta1...4.0.0RC1
 [4.0.0beta1]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.13.0...4.0.0beta1
+[3.13.3]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.13.2...3.13.3
 [3.13.2]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.13.1...3.13.2
 [3.13.1]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.13.0...3.13.1
 [3.13.0]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.12.2...3.13.0
@@ -8121,6 +8203,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@becoded]:             https://github.com/becoded
 [@Benjamin-Loison]:     https://github.com/Benjamin-Loison
 [@benmatselby]:         https://github.com/benmatselby
+[@benno5020]:           https://github.com/benno5020
 [@biinari]:             https://github.com/biinari
 [@Billz95]:             https://github.com/Billz95
 [@biozshock]:           https://github.com/biozshock
@@ -8246,6 +8329,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [@mrkrstphr]:           https://github.com/mrkrstphr
 [@mythril]:             https://github.com/mythril
 [@Naelyth]:             https://github.com/Naelyth
+[@NanoSector]:          https://github.com/NanoSector
 [@ndm2]:                https://github.com/ndm2
 [@nicholascus]:         https://github.com/nicholascus
 [@NickDickinsonWilde]:  https://github.com/NickDickinsonWilde
