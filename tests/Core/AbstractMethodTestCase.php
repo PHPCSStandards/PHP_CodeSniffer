@@ -10,8 +10,8 @@
 namespace PHP_CodeSniffer\Tests\Core;
 
 use Exception;
-use PHP_CodeSniffer\Files\DummyFile;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Files\LocalFile;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHPUnit\Framework\TestCase;
@@ -58,11 +58,7 @@ abstract class AbstractMethodTestCase extends TestCase
         $relativePath   = str_replace('\\', DIRECTORY_SEPARATOR, $relativeCN);
         $pathToTestFile = realpath(__DIR__).$relativePath.'.inc';
 
-        // Make sure the file gets parsed correctly based on the file type.
-        $contents  = 'phpcs_input_file: '.$pathToTestFile.PHP_EOL;
-        $contents .= file_get_contents($pathToTestFile);
-
-        self::$phpcsFile = new DummyFile($contents, $ruleset, $config);
+        self::$phpcsFile = new LocalFile($pathToTestFile, $ruleset, $config);
         self::$phpcsFile->parse();
 
     }//end setUpBeforeClass()
