@@ -1531,16 +1531,18 @@ class PHP extends Tokenizer
                 $newToken['type']    = 'T_ATTRIBUTE';
                 $newToken['content'] = '#[';
                 $finalTokens[$newStackPtr] = $newToken;
+                $newStackPtr++;
 
-                $tokens[$bracketCloser]    = [];
-                $tokens[$bracketCloser][0] = T_ATTRIBUTE_END;
-                $tokens[$bracketCloser][1] = ']';
+                if ($bracketCloser !== null) {
+                    $tokens[$bracketCloser]    = [];
+                    $tokens[$bracketCloser][0] = T_ATTRIBUTE_END;
+                    $tokens[$bracketCloser][1] = ']';
 
-                if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    StatusWriter::write("* token $bracketCloser changed from T_CLOSE_SQUARE_BRACKET to T_ATTRIBUTE_END", 2);
+                    if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                        StatusWriter::write("* token $bracketCloser changed from T_CLOSE_SQUARE_BRACKET to T_ATTRIBUTE_END", 2);
+                    }
                 }
 
-                $newStackPtr++;
                 continue;
             }//end if
 
@@ -2187,7 +2189,7 @@ class PHP extends Tokenizer
                     }
 
                     if ($prevNonEmpty === null
-                        && isset(Tokens::EMPTY_TOKENS[$tokenType]) === false
+                        && @isset(Tokens::EMPTY_TOKENS[$tokenType]) === false
                     ) {
                         // Found the previous non-empty token.
                         if ($tokenType === ':' || $tokenType === ',' || $tokenType === T_ATTRIBUTE_END) {
@@ -2206,8 +2208,8 @@ class PHP extends Tokenizer
 
                     if ($tokenType === T_FUNCTION
                         || $tokenType === T_FN
-                        || isset(Tokens::METHOD_MODIFIERS[$tokenType]) === true
-                        || isset(Tokens::SCOPE_MODIFIERS[$tokenType]) === true
+                        || @isset(Tokens::METHOD_MODIFIERS[$tokenType]) === true
+                        || @isset(Tokens::SCOPE_MODIFIERS[$tokenType]) === true
                         || $tokenType === T_VAR
                         || $tokenType === T_READONLY
                     ) {
@@ -2230,7 +2232,7 @@ class PHP extends Tokenizer
                         break;
                     }
 
-                    if (isset(Tokens::EMPTY_TOKENS[$tokenType]) === false) {
+                    if (@isset(Tokens::EMPTY_TOKENS[$tokenType]) === false) {
                         $lastSeenNonEmpty = $tokenType;
                     }
                 }//end for

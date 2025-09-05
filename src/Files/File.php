@@ -1907,6 +1907,10 @@ class File
             throw new RuntimeException('$stackPtr must be of type T_VARIABLE');
         }
 
+        if (empty($this->tokens[$stackPtr]['conditions']) === true) {
+            throw new RuntimeException('$stackPtr is not a class member var');
+        }
+
         $conditions = $this->tokens[$stackPtr]['conditions'];
         $conditions = array_keys($conditions);
         $ptr        = array_pop($conditions);
