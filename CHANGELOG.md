@@ -6,6 +6,18 @@ The file documents changes to the PHP_CodeSniffer project.
 
 _Nothing yet._
 
+## [3.13.4] - 2025-09-05
+
+### Fixed
+- Fixed bug [#1213]: ability to run tests for external standards using the PHPCS native test framework was broken.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+- Fixed bug [#1214]: PHP 8.5 "Using null as an array offset" deprecation notices.
+    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
+
+[#1213]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1213
+[#1214]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1214
+
+
 ## [3.13.3] - 2025-09-04
 
 ### Added
@@ -8064,6 +8076,7 @@ Additionally, thanks to [Alexander Turek][@derrabus] for consulting on the repo 
 [Unreleased]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/master...HEAD
 [4.0.0RC1]:   https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/4.0.0beta1...4.0.0RC1
 [4.0.0beta1]: https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.13.0...4.0.0beta1
+[3.13.4]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.13.3...3.13.4
 [3.13.3]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.13.2...3.13.3
 [3.13.2]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.13.1...3.13.2
 [3.13.1]:     https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/3.13.0...3.13.1
