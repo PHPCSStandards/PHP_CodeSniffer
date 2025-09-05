@@ -9,6 +9,10 @@
             <signature type="gpg"/>
             <hash type="sha-256" value="628088f3ecdce0b11948c203ca02afc5fb96b13b1a2c8b042020920f6e2344e6"/>
         </release>
+        <release version="3.13.4" url="https://phars.phpcodesniffer.com/phars/phpcs-3.13.4.phar">
+            <signature type="gpg"/>
+            <hash type="sha-256" value="ec78c8804e4a872979880331bcac8f81a7d485cb08531468af76ae67508b5cd1"/>
+        </release>
         <release version="3.13.3" url="https://phars.phpcodesniffer.com/phars/phpcs-3.13.3.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="4f60d903d78151829ae04e9971db771e67e5d2007578dc9f30781080105e1a5b"/>
@@ -198,6 +202,10 @@
         <release version="4.0.0-beta1" url="https://phars.phpcodesniffer.com/phars/phpcbf-4.0.0beta1.phar">
             <signature type="gpg"/>
             <hash type="sha-256" value="857976079133df55462066656c83e0927cd3f94f6d493c0f1aaa25257f42b072"/>
+        </release>
+        <release version="3.13.4" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.13.4.phar">
+            <signature type="gpg"/>
+            <hash type="sha-256" value="24b02f927d2319c7eeebc79741a1fe0b54993c0a0833223064c5b87b79299b42"/>
         </release>
         <release version="3.13.3" url="https://phars.phpcodesniffer.com/phars/phpcbf-3.13.3.phar">
             <signature type="gpg"/>
