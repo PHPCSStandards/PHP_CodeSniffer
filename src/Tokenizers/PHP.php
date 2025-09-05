@@ -1468,16 +1468,18 @@ class PHP extends Tokenizer
                 $newToken['type']    = 'T_ATTRIBUTE';
                 $newToken['content'] = '#[';
                 $finalTokens[$newStackPtr] = $newToken;
+                $newStackPtr++;
 
-                $tokens[$bracketCloser]    = [];
-                $tokens[$bracketCloser][0] = T_ATTRIBUTE_END;
-                $tokens[$bracketCloser][1] = ']';
+                if ($bracketCloser !== null) {
+                    $tokens[$bracketCloser]    = [];
+                    $tokens[$bracketCloser][0] = T_ATTRIBUTE_END;
+                    $tokens[$bracketCloser][1] = ']';
 
-                if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    echo "\t\t* token $bracketCloser changed from T_CLOSE_SQUARE_BRACKET to T_ATTRIBUTE_END".PHP_EOL;
+                    if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                        echo "\t\t* token $bracketCloser changed from T_CLOSE_SQUARE_BRACKET to T_ATTRIBUTE_END".PHP_EOL;
+                    }
                 }
 
-                $newStackPtr++;
                 continue;
             }//end if
 
