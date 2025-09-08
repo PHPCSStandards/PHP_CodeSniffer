@@ -2139,15 +2139,25 @@ class PHP extends Tokenizer
                         continue;
                     }
 
-                    if (($tokenType !== T_CALLABLE
-                        && isset($lastRelevantNonEmpty) === false)
-                        || ($lastRelevantNonEmpty === T_ARRAY
-                        && $tokenType === '(')
-                        || (isset(Tokens::NAME_TOKENS[$lastRelevantNonEmpty]) === true
-                        && ($tokenType === T_DOUBLE_COLON
-                        || $tokenType === '('
-                        || $tokenType === ':'))
-                    ) {
+                    $isInlineThen = false;
+                    if (isset($lastRelevantNonEmpty) === false && $tokenType !== T_CALLABLE) {
+                        // Can be anything, but is definitely not a type declaration.
+                        $isInlineThen = true;
+                    } else if (isset($lastRelevantNonEmpty) === true) {
+                        if ($lastRelevantNonEmpty === T_ARRAY && $tokenType === '(') {
+                            // Array declaration in ternary then.
+                            $isInlineThen = true;
+                        } else if (isset(Tokens::NAME_TOKENS[$lastRelevantNonEmpty]) === true
+                            && ($tokenType === T_DOUBLE_COLON
+                            || $tokenType === '('
+                            || $tokenType === ':')
+                        ) {
+                            // Constant access, function call, static class member access in ternary then.
+                            $isInlineThen = true;
+                        }
+                    }
+
+                    if ($isInlineThen === true) {
                         if (PHP_CODESNIFFER_VERBOSITY > 1) {
                             StatusWriter::write("* token $stackPtr changed from ? to T_INLINE_THEN", 2);
                         }
