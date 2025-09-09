@@ -55,6 +55,11 @@ final class NullableVsInlineThenTest extends AbstractTokenizerTestCase
             'property declaration, public and protected set' => ['/* testNullablePublicProtectedSet */'],
             'property declaration, final, no visibility'     => ['/* testNullableFinalOnly */'],
             'property declaration, abstract, no visibility'  => ['/* testNullableAbstractOnly */'],
+
+            'closure param type, nullable int'               => ['/* testClosureParamTypeNullableInt */'],
+            'closure param type, nullable callable'          => ['/* testClosureParamTypeNullableCallable */'],
+            'closure return type, nullable int'              => ['/* testClosureReturnTypeNullableInt */'],
+            'function return type, nullable callable'        => ['/* testFunctionReturnTypeNullableCallable */'],
         ];
 
     }//end dataNullable()
@@ -91,7 +96,25 @@ final class NullableVsInlineThenTest extends AbstractTokenizerTestCase
     public static function dataInlineThen()
     {
         return [
-            'ternary in property default value' => ['/* testInlineThenInPropertyDefaultValue */'],
+            'ternary in property default value'                            => ['/* testInlineThenInPropertyDefaultValue */'],
+
+            'ternary ? followed by array declaration'                      => ['/* testInlineThenWithArrayDeclaration */'],
+
+            'ternary ? followed by unqualified constant'                   => ['/* testInlineThenWithUnqualifiedNameAndNothingElse */'],
+            'ternary ? followed by unqualified function call'              => ['/* testInlineThenWithUnqualifiedNameAndParens */'],
+            'ternary ? followed by unqualified static method call'         => ['/* testInlineThenWithUnqualifiedNameAndDoubleColon */'],
+
+            'ternary ? followed by fully qualified constant'               => ['/* testInlineThenWithFullyQualifiedNameAndNothingElse */'],
+            'ternary ? followed by fully qualified function call'          => ['/* testInlineThenWithFullyQualifiedNameAndParens */'],
+            'ternary ? followed by fully qualified static method call'     => ['/* testInlineThenWithFullyQualifiedNameAndDoubleColon */'],
+
+            'ternary ? followed by partially qualified constant'           => ['/* testInlineThenWithPartiallyQualifiedNameAndNothingElse */'],
+            'ternary ? followed by partially qualified function call'      => ['/* testInlineThenWithPartiallyQualifiedNameAndParens */'],
+            'ternary ? followed by partially qualified static method call' => ['/* testInlineThenWithPartiallyQualifiedNameAndDoubleColon */'],
+
+            'ternary ? followed by namespace relative constant'            => ['/* testInlineThenWithNamespaceRelativeNameAndNothingElse */'],
+            'ternary ? followed by namespace relative function call'       => ['/* testInlineThenWithNamespaceRelativeNameAndParens */'],
+            'ternary ? followed by namespace relative static method call'  => ['/* testInlineThenWithNamespaceRelativeNameAndDoubleColon */'],
         ];
 
     }//end dataInlineThen()
