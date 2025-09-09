@@ -40,7 +40,7 @@ final class GitStagedTest extends AbstractFilterTestCase
             self::$config,
             self::$ruleset,
         ];
-        $mockObj         = $this->getMockedClass('PHP_CodeSniffer\Filters\GitStaged', $constructorArgs, ['exec']);
+        $mockObj         = $this->getMockedClass(GitStaged::class, $constructorArgs, ['exec']);
 
         $mockObj->expects($this->once())
             ->method('exec')
@@ -71,7 +71,7 @@ final class GitStagedTest extends AbstractFilterTestCase
             self::$config,
             self::$ruleset,
         ];
-        $mockObj         = $this->getMockedClass('PHP_CodeSniffer\Filters\GitStaged', $constructorArgs, ['exec']);
+        $mockObj         = $this->getMockedClass(GitStaged::class, $constructorArgs, ['exec']);
 
         $mockObj->expects($this->once())
             ->method('exec')

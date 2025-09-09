@@ -10,6 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core;
 
 use Exception;
+use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Files\LocalFile;
 use PHP_CodeSniffer\Ruleset;
@@ -54,7 +55,7 @@ abstract class AbstractMethodTestCase extends TestCase
         $ruleset = new Ruleset($config);
 
         // Default to a file with the same name as the test class. Extension is property based.
-        $relativeCN     = str_replace(__NAMESPACE__, '', get_called_class());
+        $relativeCN     = str_replace(__NAMESPACE__, '', static::class);
         $relativePath   = str_replace('\\', DIRECTORY_SEPARATOR, $relativeCN);
         $pathToTestFile = realpath(__DIR__).$relativePath.'.inc';
 
@@ -235,7 +236,7 @@ abstract class AbstractMethodTestCase extends TestCase
      */
     public function expectRunTimeException($message)
     {
-        $this->expectException('PHP_CodeSniffer\Exceptions\RuntimeException');
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage($message);
 
     }//end expectRunTimeException()

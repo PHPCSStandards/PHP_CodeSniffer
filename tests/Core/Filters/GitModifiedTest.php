@@ -40,7 +40,7 @@ final class GitModifiedTest extends AbstractFilterTestCase
             self::$config,
             self::$ruleset,
         ];
-        $mockObj         = $this->getMockedClass('PHP_CodeSniffer\Filters\GitModified', $constructorArgs, ['exec']);
+        $mockObj         = $this->getMockedClass(GitModified::class, $constructorArgs, ['exec']);
 
         $mockObj->expects($this->once())
             ->method('exec')
@@ -71,7 +71,7 @@ final class GitModifiedTest extends AbstractFilterTestCase
             self::$config,
             self::$ruleset,
         ];
-        $mockObj         = $this->getMockedClass('PHP_CodeSniffer\Filters\GitModified', $constructorArgs, ['exec']);
+        $mockObj         = $this->getMockedClass(GitModified::class, $constructorArgs, ['exec']);
 
         $mockObj->expects($this->once())
             ->method('exec')

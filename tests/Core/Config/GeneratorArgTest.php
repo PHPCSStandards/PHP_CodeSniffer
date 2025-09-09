@@ -8,6 +8,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Config;
 
+use PHP_CodeSniffer\Exceptions\DeepExitException;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHPUnit\Framework\TestCase;
 
@@ -123,10 +124,9 @@ final class GeneratorArgTest extends TestCase
      */
     public function testInvalidGenerator($generatorName)
     {
-        $exception = 'PHP_CodeSniffer\Exceptions\DeepExitException';
-        $message   = 'ERROR: "'.$generatorName.'" is not a valid generator. The following generators are supported: Text, HTML and Markdown.';
+        $message = 'ERROR: "'.$generatorName.'" is not a valid generator. The following generators are supported: Text, HTML and Markdown.';
 
-        $this->expectException($exception);
+        $this->expectException(DeepExitException::class);
         $this->expectExceptionMessage($message);
 
         new ConfigDouble(["--generator={$generatorName}"]);

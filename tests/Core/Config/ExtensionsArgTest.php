@@ -8,6 +8,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Config;
 
+use PHP_CodeSniffer\Exceptions\DeepExitException;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHPUnit\Framework\TestCase;
 
@@ -134,7 +135,7 @@ final class ExtensionsArgTest extends TestCase
         $message .= 'PHP_CodeSniffer >= 4.0 only supports scanning PHP files.'.PHP_EOL;
         $message .= 'Received: '.$passedValue.PHP_EOL.PHP_EOL;
 
-        $this->expectException('PHP_CodeSniffer\Exceptions\DeepExitException');
+        $this->expectException(DeepExitException::class);
         $this->expectExceptionMessage($message);
 
         new ConfigDouble(["--extensions={$passedValue}"]);

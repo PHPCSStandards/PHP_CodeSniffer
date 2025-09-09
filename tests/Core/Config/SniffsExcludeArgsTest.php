@@ -8,6 +8,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Config;
 
+use PHP_CodeSniffer\Exceptions\DeepExitException;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHPUnit\Framework\TestCase;
 
@@ -39,12 +40,11 @@ final class SniffsExcludeArgsTest extends TestCase
             $cmd = 'phpcbf';
         }
 
-        $exception = 'PHP_CodeSniffer\Exceptions\DeepExitException';
-        $message   = 'ERROR: The --'.$argument.' option only supports sniff codes.'.PHP_EOL;
-        $message  .= 'Sniff codes are in the form "Standard.Category.Sniff".'.PHP_EOL;
-        $message  .= PHP_EOL;
-        $message  .= 'The following problems were detected:'.PHP_EOL;
-        $message  .= '* '.implode(PHP_EOL.'* ', $errors).PHP_EOL;
+        $message  = 'ERROR: The --'.$argument.' option only supports sniff codes.'.PHP_EOL;
+        $message .= 'Sniff codes are in the form "Standard.Category.Sniff".'.PHP_EOL;
+        $message .= PHP_EOL;
+        $message .= 'The following problems were detected:'.PHP_EOL;
+        $message .= '* '.implode(PHP_EOL.'* ', $errors).PHP_EOL;
 
         if ($suggestion !== null) {
             $message .= PHP_EOL;
@@ -55,7 +55,7 @@ final class SniffsExcludeArgsTest extends TestCase
         $message .= "Run \"{$cmd} --help\" for usage information".PHP_EOL;
         $message .= PHP_EOL;
 
-        $this->expectException($exception);
+        $this->expectException(DeepExitException::class);
         $this->expectExceptionMessage($message);
 
         new ConfigDouble(["--$argument=$value"]);

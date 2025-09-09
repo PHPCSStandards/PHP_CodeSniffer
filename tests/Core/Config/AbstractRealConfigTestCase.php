@@ -10,6 +10,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Config;
 
+use PHP_CodeSniffer\Config;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
@@ -73,7 +74,7 @@ abstract class AbstractRealConfigTestCase extends TestCase
      */
     protected static function setStaticConfigProperty($name, $value)
     {
-        $property = new ReflectionProperty('PHP_CodeSniffer\Config', $name);
+        $property = new ReflectionProperty(Config::class, $name);
         (PHP_VERSION_ID < 80100) && $property->setAccessible(true);
         $property->setValue(null, $value);
         (PHP_VERSION_ID < 80100) && $property->setAccessible(false);

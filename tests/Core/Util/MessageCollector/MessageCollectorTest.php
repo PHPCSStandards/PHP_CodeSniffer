@@ -8,6 +8,8 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Util\MessageCollector;
 
+use InvalidArgumentException;
+use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Tests\Core\AbstractWriterTestCase;
 use PHP_CodeSniffer\Util\MessageCollector;
 
@@ -31,10 +33,9 @@ final class MessageCollectorTest extends AbstractWriterTestCase
      */
     public function testAddingNonStringMessageResultsInException($message)
     {
-        $exception    = 'InvalidArgumentException';
         $exceptionMsg = 'The $message should be of type string. Received: ';
 
-        $this->expectException($exception);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage($exceptionMsg);
 
         $msgCollector = new MessageCollector();
@@ -73,10 +74,9 @@ final class MessageCollectorTest extends AbstractWriterTestCase
      */
     public function testAddingMessageWithUnsupportedMessageTypeResultsInException($type)
     {
-        $exception    = 'InvalidArgumentException';
         $exceptionMsg = 'The message $type should be one of the predefined MessageCollector constants. Received: ';
 
-        $this->expectException($exception);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage($exceptionMsg);
 
         $msgCollector = new MessageCollector();
@@ -300,9 +300,7 @@ final class MessageCollectorTest extends AbstractWriterTestCase
      */
     public function testDisplayingBlockingErrors($messages, $expected)
     {
-        $exception = 'PHP_CodeSniffer\Exceptions\RuntimeException';
-
-        $this->expectException($exception);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage($expected);
 
         $msgCollector = new MessageCollector();

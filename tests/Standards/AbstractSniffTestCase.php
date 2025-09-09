@@ -150,7 +150,7 @@ TEMPLATE;
             $this->markTestSkipped();
         }
 
-        $sniffCode      = Common::getSniffCode(get_class($this));
+        $sniffCode      = Common::getSniffCode(static::class);
         $sniffCodeParts = explode('.', $sniffCode);
         $standardName   = $sniffCodeParts[0];
 
