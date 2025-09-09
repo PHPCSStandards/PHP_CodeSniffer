@@ -34,11 +34,36 @@ final class Help
     /**
      * Long options which are available for both the `phpcs` as well as the `phpcbf` command.
      *
-     * {@internal This should be a constant array, but those aren't supported until PHP 5.6.}
-     *
-     * @var string Comma-separated list of the option names.
+     * @var array<string> List of the option names.
      */
-    public const DEFAULT_LONG_OPTIONS = 'basepath,bootstrap,colors,encoding,error-severity,exclude,extensions,file,file-list,filter,ignore,ignore-annotations,no-colors,parallel,php-ini,report-width,runtime-set,severity,sniffs,standard,stdin-path,tab-width,version,vv,vvv,warning-severity';
+    public const DEFAULT_LONG_OPTIONS = [
+        'basepath',
+        'bootstrap',
+        'colors',
+        'encoding',
+        'error-severity',
+        'exclude',
+        'extensions',
+        'file',
+        'file-list',
+        'filter',
+        'ignore',
+        'ignore-annotations',
+        'no-colors',
+        'parallel',
+        'php-ini',
+        'report-width',
+        'runtime-set',
+        'severity',
+        'sniffs',
+        'standard',
+        'stdin-path',
+        'tab-width',
+        'version',
+        'vv',
+        'vvv',
+        'warning-severity',
+    ];
 
     /**
      * Minimum screen width.

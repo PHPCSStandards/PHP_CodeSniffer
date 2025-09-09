@@ -190,7 +190,7 @@ final class HelpTest extends TestCase
      */
     public static function dataOptionFiltering()
     {
-        $allLongOptions   = explode(',', Help::DEFAULT_LONG_OPTIONS);
+        $allLongOptions   = Help::DEFAULT_LONG_OPTIONS;
         $allLongOptions[] = 'cache';
         $allLongOptions[] = 'no-cache';
         $allLongOptions[] = 'report';
@@ -248,7 +248,7 @@ final class HelpTest extends TestCase
                 ],
             ],
             'Default options only'                            => [
-                'longOptions'  => explode(',', Help::DEFAULT_LONG_OPTIONS),
+                'longOptions'  => Help::DEFAULT_LONG_OPTIONS,
                 'shortOptions' => Help::DEFAULT_SHORT_OPTIONS,
                 'expected'     => [
                     'Scan targets'           => 8,
