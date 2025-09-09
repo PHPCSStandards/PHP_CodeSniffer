@@ -47,20 +47,20 @@ final class ConstantVisibilityUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'ConstantVisibilityUnitTest.1.inc':
-            return [
-                4  => 1,
-                12 => 1,
-                21 => 1,
-            ];
+            case 'ConstantVisibilityUnitTest.1.inc':
+                return [
+                    4  => 1,
+                    12 => 1,
+                    21 => 1,
+                ];
 
-        case 'ConstantVisibilityUnitTest.2.inc':
-            return [
-                6 => 1,
-            ];
+            case 'ConstantVisibilityUnitTest.2.inc':
+                return [
+                    6 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 }

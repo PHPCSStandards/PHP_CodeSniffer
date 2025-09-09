@@ -157,114 +157,114 @@ class FileHeaderSniff implements Sniff
 
         do {
             switch ($tokens[$next]['code']) {
-            case T_DOC_COMMENT_OPEN_TAG:
-                if ($foundDocblock === true) {
-                    // Found a second docblock, so start of code.
-                    break(2);
-                }
-
-                // Make sure this is not a code-level docblock.
-                $end = $tokens[$next]['comment_closer'];
-                for ($docToken = ($end + 1); $docToken < $phpcsFile->numTokens; $docToken++) {
-                    if (isset(Tokens::EMPTY_TOKENS[$tokens[$docToken]['code']]) === true) {
-                        continue;
-                    }
-
-                    if ($tokens[$docToken]['code'] === T_ATTRIBUTE
-                        && isset($tokens[$docToken]['attribute_closer']) === true
-                    ) {
-                        $docToken = $tokens[$docToken]['attribute_closer'];
-                        continue;
-                    }
-
-                    break;
-                }
-
-                if ($docToken === $phpcsFile->numTokens) {
-                    $docToken--;
-                }
-
-                if (isset($commentOpeners[$tokens[$docToken]['code']]) === false
-                    && isset(Tokens::METHOD_MODIFIERS[$tokens[$docToken]['code']]) === false
-                    && $tokens[$docToken]['code'] !== T_READONLY
-                ) {
-                    // Check for an @var annotation.
-                    $annotation = false;
-                    for ($i = $next; $i < $end; $i++) {
-                        if ($tokens[$i]['code'] === T_DOC_COMMENT_TAG
-                            && strtolower($tokens[$i]['content']) === '@var'
-                        ) {
-                            $annotation = true;
-                            break;
-                        }
-                    }
-
-                    if ($annotation === false) {
-                        $foundDocblock = true;
-                        $headerLines[] = [
-                            'type'  => 'docblock',
-                            'start' => $next,
-                            'end'   => $end,
-                        ];
-                    }
-                }
-
-                $next = $end;
-                break;
-            case T_DECLARE:
-            case T_NAMESPACE:
-                if (isset($tokens[$next]['scope_opener']) === true) {
-                    // If this statement is using bracketed syntax, it doesn't
-                    // apply to the entire files and so is not part of header.
-                    // The header has now ended and the main code block begins.
-                    break(2);
-                }
-
-                $end = $phpcsFile->findEndOfStatement($next);
-
-                $headerLines[] = [
-                    'type'  => substr(strtolower($tokens[$next]['type']), 2),
-                    'start' => $next,
-                    'end'   => $end,
-                ];
-
-                $next = $end;
-                break;
-            case T_USE:
-                $type    = 'use';
-                $useType = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($next + 1), null, true);
-                if ($useType !== false && $tokens[$useType]['code'] === T_STRING) {
-                    $content = strtolower($tokens[$useType]['content']);
-                    if ($content === 'function' || $content === 'const') {
-                        $type .= ' ' . $content;
-                    }
-                }
-
-                $end = $phpcsFile->findEndOfStatement($next);
-
-                $headerLines[] = [
-                    'type'  => $type,
-                    'start' => $next,
-                    'end'   => $end,
-                ];
-
-                $next = $end;
-                break;
-            default:
-                // Skip comments as PSR-12 doesn't say if these are allowed or not.
-                if (isset(Tokens::COMMENT_TOKENS[$tokens[$next]['code']]) === true) {
-                    $next = $phpcsFile->findNext(Tokens::COMMENT_TOKENS, ($next + 1), null, true);
-                    if ($next === false) {
-                        // We reached the end of the file.
+                case T_DOC_COMMENT_OPEN_TAG:
+                    if ($foundDocblock === true) {
+                        // Found a second docblock, so start of code.
                         break(2);
                     }
 
-                    $next--;
-                    break;
-                }
+                    // Make sure this is not a code-level docblock.
+                    $end = $tokens[$next]['comment_closer'];
+                    for ($docToken = ($end + 1); $docToken < $phpcsFile->numTokens; $docToken++) {
+                        if (isset(Tokens::EMPTY_TOKENS[$tokens[$docToken]['code']]) === true) {
+                            continue;
+                        }
 
-                // We found the start of the main code block.
-                break(2);
+                        if ($tokens[$docToken]['code'] === T_ATTRIBUTE
+                            && isset($tokens[$docToken]['attribute_closer']) === true
+                        ) {
+                            $docToken = $tokens[$docToken]['attribute_closer'];
+                            continue;
+                        }
+
+                        break;
+                    }
+
+                    if ($docToken === $phpcsFile->numTokens) {
+                        $docToken--;
+                    }
+
+                    if (isset($commentOpeners[$tokens[$docToken]['code']]) === false
+                        && isset(Tokens::METHOD_MODIFIERS[$tokens[$docToken]['code']]) === false
+                        && $tokens[$docToken]['code'] !== T_READONLY
+                    ) {
+                        // Check for an @var annotation.
+                        $annotation = false;
+                        for ($i = $next; $i < $end; $i++) {
+                            if ($tokens[$i]['code'] === T_DOC_COMMENT_TAG
+                                && strtolower($tokens[$i]['content']) === '@var'
+                            ) {
+                                $annotation = true;
+                                break;
+                            }
+                        }
+
+                        if ($annotation === false) {
+                            $foundDocblock = true;
+                            $headerLines[] = [
+                                'type'  => 'docblock',
+                                'start' => $next,
+                                'end'   => $end,
+                            ];
+                        }
+                    }
+
+                    $next = $end;
+                    break;
+                case T_DECLARE:
+                case T_NAMESPACE:
+                    if (isset($tokens[$next]['scope_opener']) === true) {
+                        // If this statement is using bracketed syntax, it doesn't
+                        // apply to the entire files and so is not part of header.
+                        // The header has now ended and the main code block begins.
+                        break(2);
+                    }
+
+                    $end = $phpcsFile->findEndOfStatement($next);
+
+                    $headerLines[] = [
+                        'type'  => substr(strtolower($tokens[$next]['type']), 2),
+                        'start' => $next,
+                        'end'   => $end,
+                    ];
+
+                    $next = $end;
+                    break;
+                case T_USE:
+                    $type    = 'use';
+                    $useType = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($next + 1), null, true);
+                    if ($useType !== false && $tokens[$useType]['code'] === T_STRING) {
+                        $content = strtolower($tokens[$useType]['content']);
+                        if ($content === 'function' || $content === 'const') {
+                            $type .= ' ' . $content;
+                        }
+                    }
+
+                    $end = $phpcsFile->findEndOfStatement($next);
+
+                    $headerLines[] = [
+                        'type'  => $type,
+                        'start' => $next,
+                        'end'   => $end,
+                    ];
+
+                    $next = $end;
+                    break;
+                default:
+                    // Skip comments as PSR-12 doesn't say if these are allowed or not.
+                    if (isset(Tokens::COMMENT_TOKENS[$tokens[$next]['code']]) === true) {
+                        $next = $phpcsFile->findNext(Tokens::COMMENT_TOKENS, ($next + 1), null, true);
+                        if ($next === false) {
+                            // We reached the end of the file.
+                            break(2);
+                        }
+
+                        $next--;
+                        break;
+                    }
+
+                    // We found the start of the main code block.
+                    break(2);
             }
 
             $next = $phpcsFile->findNext(T_WHITESPACE, ($next + 1), null, true);

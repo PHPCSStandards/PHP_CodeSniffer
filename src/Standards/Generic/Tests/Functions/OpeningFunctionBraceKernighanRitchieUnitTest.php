@@ -50,49 +50,49 @@ final class OpeningFunctionBraceKernighanRitchieUnitTest extends AbstractSniffTe
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'OpeningFunctionBraceKernighanRitchieUnitTest.1.inc':
-            return [
-                9   => 1,
-                13  => 1,
-                17  => 1,
-                29  => 1,
-                33  => 1,
-                37  => 1,
-                53  => 1,
-                58  => 1,
-                63  => 1,
-                77  => 1,
-                82  => 1,
-                87  => 1,
-                104 => 1,
-                119 => 1,
-                123 => 1,
-                127 => 1,
-                132 => 1,
-                137 => 1,
-                142 => 1,
-                157 => 1,
-                162 => 1,
-                171 => 1,
-                181 => 1,
-                191 => 1,
-                197 => 1,
-                203 => 1,
-                213 => 1,
-                214 => 1,
-                222 => 1,
-                224 => 1,
-                227 => 1,
-            ];
-        case 'OpeningFunctionBraceKernighanRitchieUnitTest.2.inc':
-            return [
-                6  => 1,
-                10 => 1,
-                14 => 1,
-                18 => 1,
-            ];
-        default:
-            return [];
+            case 'OpeningFunctionBraceKernighanRitchieUnitTest.1.inc':
+                return [
+                    9   => 1,
+                    13  => 1,
+                    17  => 1,
+                    29  => 1,
+                    33  => 1,
+                    37  => 1,
+                    53  => 1,
+                    58  => 1,
+                    63  => 1,
+                    77  => 1,
+                    82  => 1,
+                    87  => 1,
+                    104 => 1,
+                    119 => 1,
+                    123 => 1,
+                    127 => 1,
+                    132 => 1,
+                    137 => 1,
+                    142 => 1,
+                    157 => 1,
+                    162 => 1,
+                    171 => 1,
+                    181 => 1,
+                    191 => 1,
+                    197 => 1,
+                    203 => 1,
+                    213 => 1,
+                    214 => 1,
+                    222 => 1,
+                    224 => 1,
+                    227 => 1,
+                ];
+            case 'OpeningFunctionBraceKernighanRitchieUnitTest.2.inc':
+                return [
+                    6  => 1,
+                    10 => 1,
+                    14 => 1,
+                    18 => 1,
+                ];
+            default:
+                return [];
         }
     }
 

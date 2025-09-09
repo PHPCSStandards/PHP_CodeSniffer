@@ -47,11 +47,11 @@ final class GlobalFunctionUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'GlobalFunctionUnitTest.1.inc':
-            return [2 => 1];
+            case 'GlobalFunctionUnitTest.1.inc':
+                return [2 => 1];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 }

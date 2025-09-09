@@ -33,11 +33,11 @@ final class CharacterBeforePHPOpeningTagUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'CharacterBeforePHPOpeningTagUnitTest.1.inc':
-            return [2 => 1];
+            case 'CharacterBeforePHPOpeningTagUnitTest.1.inc':
+                return [2 => 1];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

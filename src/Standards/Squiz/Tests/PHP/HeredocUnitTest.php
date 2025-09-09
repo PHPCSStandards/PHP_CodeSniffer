@@ -33,14 +33,14 @@ final class HeredocUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'HeredocUnitTest.1.inc':
-            return [
-                2 => 1,
-                8 => 1,
-            ];
+            case 'HeredocUnitTest.1.inc':
+                return [
+                    2 => 1,
+                    8 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

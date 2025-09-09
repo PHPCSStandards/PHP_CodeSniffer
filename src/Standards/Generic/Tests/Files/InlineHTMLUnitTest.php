@@ -33,17 +33,17 @@ final class InlineHTMLUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'InlineHTMLUnitTest.3.inc':
-            return [4 => 1];
+            case 'InlineHTMLUnitTest.3.inc':
+                return [4 => 1];
 
-        case 'InlineHTMLUnitTest.4.inc':
-            return [1 => 1];
+            case 'InlineHTMLUnitTest.4.inc':
+                return [1 => 1];
 
-        case 'InlineHTMLUnitTest.7.inc':
-            return [1 => 1];
+            case 'InlineHTMLUnitTest.7.inc':
+                return [1 => 1];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

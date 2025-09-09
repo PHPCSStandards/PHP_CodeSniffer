@@ -32,13 +32,13 @@ final class InterfaceNameSuffixUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'InterfaceNameSuffixUnitTest.1.inc':
-            return [
-                5 => 1,
-                9 => 1,
-            ];
-        default:
-            return [];
+            case 'InterfaceNameSuffixUnitTest.1.inc':
+                return [
+                    5 => 1,
+                    9 => 1,
+                ];
+            default:
+                return [];
         }
     }
 

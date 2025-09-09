@@ -33,22 +33,22 @@ final class SpreadOperatorSpacingAfterUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'SpreadOperatorSpacingAfterUnitTest.1.inc':
-            return [
-                12 => 1,
-                13 => 1,
-                20 => 2,
-                40 => 1,
-                41 => 1,
-                46 => 2,
-                60 => 1,
-                61 => 1,
-                66 => 2,
-                78 => 1,
-            ];
+            case 'SpreadOperatorSpacingAfterUnitTest.1.inc':
+                return [
+                    12 => 1,
+                    13 => 1,
+                    20 => 2,
+                    40 => 1,
+                    41 => 1,
+                    46 => 2,
+                    60 => 1,
+                    61 => 1,
+                    66 => 2,
+                    78 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

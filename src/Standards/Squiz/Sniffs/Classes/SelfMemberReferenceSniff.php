@@ -86,18 +86,18 @@ class SelfMemberReferenceSniff extends AbstractScopeSniff
             $inlineName      = '';
 
             switch ($tokens[$calledClassName]['code']) {
-            case T_NAME_FULLY_QUALIFIED:
-                $inlineName = $tokens[$calledClassName]['content'];
-                break;
+                case T_NAME_FULLY_QUALIFIED:
+                    $inlineName = $tokens[$calledClassName]['content'];
+                    break;
 
-            case T_NAME_QUALIFIED:
-            case T_STRING:
-                $inlineName = $namespaceName . '\\' . $tokens[$calledClassName]['content'];
-                break;
+                case T_NAME_QUALIFIED:
+                case T_STRING:
+                    $inlineName = $namespaceName . '\\' . $tokens[$calledClassName]['content'];
+                    break;
 
-            case T_NAME_RELATIVE:
-                $inlineName = $namespaceName . substr($tokens[$calledClassName]['content'], 9);
-                break;
+                case T_NAME_RELATIVE:
+                    $inlineName = $namespaceName . substr($tokens[$calledClassName]['content'], 9);
+                    break;
             }
 
             if ($declarationName === $inlineName) {

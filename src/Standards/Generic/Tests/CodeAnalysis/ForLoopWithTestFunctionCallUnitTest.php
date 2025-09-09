@@ -47,28 +47,28 @@ final class ForLoopWithTestFunctionCallUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'ForLoopWithTestFunctionCallUnitTest.1.inc':
-            return [
-                4  => 1,
-                13 => 1,
-                17 => 1,
-                21 => 1,
-                26 => 1,
-                35 => 1,
-                39 => 1,
-                43 => 1,
-                47 => 1,
-                52 => 1,
-                58 => 1,
-                66 => 1,
-                72 => 1,
-                81 => 1,
-                97 => 1,
-                98 => 1,
-                99 => 1,
-            ];
-        default:
-            return [];
+            case 'ForLoopWithTestFunctionCallUnitTest.1.inc':
+                return [
+                    4  => 1,
+                    13 => 1,
+                    17 => 1,
+                    21 => 1,
+                    26 => 1,
+                    35 => 1,
+                    39 => 1,
+                    43 => 1,
+                    47 => 1,
+                    52 => 1,
+                    58 => 1,
+                    66 => 1,
+                    72 => 1,
+                    81 => 1,
+                    97 => 1,
+                    98 => 1,
+                    99 => 1,
+                ];
+            default:
+                return [];
         }
     }
 }

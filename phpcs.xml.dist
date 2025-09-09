@@ -32,9 +32,11 @@
         <exclude name="PEAR.Commenting.FileComment.MissingVersion"/>
         <exclude name="PEAR.Commenting.InlineComment"/>
         <exclude name="Generic.Files.LineLength"/>
+        <exclude name="PEAR.WhiteSpace.ScopeIndent"/>
     </rule>
 
     <!-- Include some sniffs from other standards that don't conflict with PEAR -->
+    <rule ref="Generic.WhiteSpace.ScopeIndent"/>
     <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
     <rule ref="Squiz.Arrays.ArrayDeclaration"/>
     <rule ref="PSR12.Classes.ClosingBrace"/>

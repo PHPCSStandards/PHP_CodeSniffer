@@ -33,44 +33,44 @@ final class SuperfluousWhitespaceUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'SuperfluousWhitespaceUnitTest.1.inc':
-            return [
-                2  => 1,
-                4  => 1,
-                5  => 1,
-                6  => 1,
-                7  => 1,
-                16 => 1,
-                23 => 1,
-                28 => 1,
-                33 => 1,
-                49 => 1,
-                62 => 1,
-                65 => 1,
-                73 => 1,
-            ];
+            case 'SuperfluousWhitespaceUnitTest.1.inc':
+                return [
+                    2  => 1,
+                    4  => 1,
+                    5  => 1,
+                    6  => 1,
+                    7  => 1,
+                    16 => 1,
+                    23 => 1,
+                    28 => 1,
+                    33 => 1,
+                    49 => 1,
+                    62 => 1,
+                    65 => 1,
+                    73 => 1,
+                ];
 
-        case 'SuperfluousWhitespaceUnitTest.2.inc':
-            return [
-                2 => 1,
-                8 => 1,
-            ];
+            case 'SuperfluousWhitespaceUnitTest.2.inc':
+                return [
+                    2 => 1,
+                    8 => 1,
+                ];
 
-        case 'SuperfluousWhitespaceUnitTest.3.inc':
-            return [
-                6  => 1,
-                10 => 1,
-            ];
+            case 'SuperfluousWhitespaceUnitTest.3.inc':
+                return [
+                    6  => 1,
+                    10 => 1,
+                ];
 
-        case 'SuperfluousWhitespaceUnitTest.4.inc':
-        case 'SuperfluousWhitespaceUnitTest.5.inc':
-            return [
-                1 => 1,
-                4 => 1,
-            ];
+            case 'SuperfluousWhitespaceUnitTest.4.inc':
+            case 'SuperfluousWhitespaceUnitTest.5.inc':
+                return [
+                    1 => 1,
+                    4 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

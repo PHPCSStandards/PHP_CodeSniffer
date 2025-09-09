@@ -33,16 +33,16 @@ final class MethodScopeUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'MethodScopeUnitTest.1.inc':
-            return [
-                6  => 1,
-                30 => 1,
-                39 => 1,
-                46 => 1,
-            ];
+            case 'MethodScopeUnitTest.1.inc':
+                return [
+                    6  => 1,
+                    30 => 1,
+                    39 => 1,
+                    46 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

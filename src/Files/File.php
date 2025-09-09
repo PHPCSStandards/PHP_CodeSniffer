@@ -1450,208 +1450,208 @@ class File
             }
 
             switch ($this->tokens[$i]['code']) {
-            case T_ATTRIBUTE:
-                $hasAttributes = true;
+                case T_ATTRIBUTE:
+                    $hasAttributes = true;
 
-                // Skip to the end of the attribute.
-                $i = $this->tokens[$i]['attribute_closer'];
-                break;
-            case T_BITWISE_AND:
-                if ($defaultStart === null) {
-                    $passByReference = true;
-                    $referenceToken  = $i;
-                }
-                break;
-            case T_VARIABLE:
-                $currVar = $i;
-                break;
-            case T_ELLIPSIS:
-                $variableLength = true;
-                $variadicToken  = $i;
-                break;
-            case T_CALLABLE:
-                if ($typeHintToken === false) {
-                    $typeHintToken = $i;
-                }
-
-                $typeHint        .= $this->tokens[$i]['content'];
-                $typeHintEndToken = $i;
-                break;
-            case T_SELF:
-            case T_PARENT:
-            case T_STATIC:
-                // Self and parent are valid, static invalid, but was probably intended as type hint.
-                if (isset($defaultStart) === false) {
+                    // Skip to the end of the attribute.
+                    $i = $this->tokens[$i]['attribute_closer'];
+                    break;
+                case T_BITWISE_AND:
+                    if ($defaultStart === null) {
+                        $passByReference = true;
+                        $referenceToken  = $i;
+                    }
+                    break;
+                case T_VARIABLE:
+                    $currVar = $i;
+                    break;
+                case T_ELLIPSIS:
+                    $variableLength = true;
+                    $variadicToken  = $i;
+                    break;
+                case T_CALLABLE:
                     if ($typeHintToken === false) {
                         $typeHintToken = $i;
                     }
 
                     $typeHint        .= $this->tokens[$i]['content'];
                     $typeHintEndToken = $i;
-                }
-                break;
-            case T_STRING:
-            case T_NAME_QUALIFIED:
-            case T_NAME_FULLY_QUALIFIED:
-            case T_NAME_RELATIVE:
-                // This is an identifier name, so it may be a type declaration, but it could
-                // also be a constant used as a default value.
-                $prevComma = false;
-                for ($t = $i; $t >= $opener; $t--) {
-                    if ($this->tokens[$t]['code'] === T_COMMA) {
-                        $prevComma = $t;
-                        break;
-                    }
-                }
+                    break;
+                case T_SELF:
+                case T_PARENT:
+                case T_STATIC:
+                    // Self and parent are valid, static invalid, but was probably intended as type hint.
+                    if (isset($defaultStart) === false) {
+                        if ($typeHintToken === false) {
+                            $typeHintToken = $i;
+                        }
 
-                if ($prevComma !== false) {
-                    $nextEquals = false;
-                    for ($t = $prevComma; $t < $i; $t++) {
-                        if ($this->tokens[$t]['code'] === T_EQUAL) {
-                            $nextEquals = $t;
+                        $typeHint        .= $this->tokens[$i]['content'];
+                        $typeHintEndToken = $i;
+                    }
+                    break;
+                case T_STRING:
+                case T_NAME_QUALIFIED:
+                case T_NAME_FULLY_QUALIFIED:
+                case T_NAME_RELATIVE:
+                    // This is an identifier name, so it may be a type declaration, but it could
+                    // also be a constant used as a default value.
+                    $prevComma = false;
+                    for ($t = $i; $t >= $opener; $t--) {
+                        if ($this->tokens[$t]['code'] === T_COMMA) {
+                            $prevComma = $t;
                             break;
                         }
                     }
 
-                    if ($nextEquals !== false) {
-                        break;
-                    }
-                }
+                    if ($prevComma !== false) {
+                        $nextEquals = false;
+                        for ($t = $prevComma; $t < $i; $t++) {
+                            if ($this->tokens[$t]['code'] === T_EQUAL) {
+                                $nextEquals = $t;
+                                break;
+                            }
+                        }
 
-                if ($defaultStart === null) {
-                    if ($typeHintToken === false) {
-                        $typeHintToken = $i;
-                    }
-
-                    $typeHint        .= $this->tokens[$i]['content'];
-                    $typeHintEndToken = $i;
-                }
-                break;
-            case T_NAMESPACE:
-            case T_NS_SEPARATOR:
-            case T_TYPE_UNION:
-            case T_TYPE_INTERSECTION:
-            case T_TYPE_OPEN_PARENTHESIS:
-            case T_TYPE_CLOSE_PARENTHESIS:
-            case T_FALSE:
-            case T_TRUE:
-            case T_NULL:
-                // Part of a type hint or default value.
-                if ($defaultStart === null) {
-                    if ($typeHintToken === false) {
-                        $typeHintToken = $i;
+                        if ($nextEquals !== false) {
+                            break;
+                        }
                     }
 
-                    $typeHint        .= $this->tokens[$i]['content'];
-                    $typeHintEndToken = $i;
-                }
-                break;
-            case T_NULLABLE:
-                if ($defaultStart === null) {
-                    $nullableType     = true;
-                    $typeHint        .= $this->tokens[$i]['content'];
-                    $typeHintEndToken = $i;
-                }
-                break;
-            case T_PUBLIC:
-            case T_PROTECTED:
-            case T_PRIVATE:
-                if ($defaultStart === null) {
-                    $visibilityToken = $i;
-                }
-                break;
-            case T_PUBLIC_SET:
-            case T_PROTECTED_SET:
-            case T_PRIVATE_SET:
-                if ($defaultStart === null) {
-                    $setVisibilityToken = $i;
-                }
-                break;
-            case T_READONLY:
-                if ($defaultStart === null) {
-                    $readonlyToken = $i;
-                }
-                break;
-            case T_CLOSE_PARENTHESIS:
-            case T_COMMA:
-                // If it's null, then there must be no parameters for this
-                // method.
-                if ($currVar === null) {
-                    continue 2;
-                }
+                    if ($defaultStart === null) {
+                        if ($typeHintToken === false) {
+                            $typeHintToken = $i;
+                        }
 
-                $vars[$paramCount]            = [];
-                $vars[$paramCount]['token']   = $currVar;
-                $vars[$paramCount]['name']    = $this->tokens[$currVar]['content'];
-                $vars[$paramCount]['content'] = trim($this->getTokensAsString($paramStart, ($i - $paramStart)));
+                        $typeHint        .= $this->tokens[$i]['content'];
+                        $typeHintEndToken = $i;
+                    }
+                    break;
+                case T_NAMESPACE:
+                case T_NS_SEPARATOR:
+                case T_TYPE_UNION:
+                case T_TYPE_INTERSECTION:
+                case T_TYPE_OPEN_PARENTHESIS:
+                case T_TYPE_CLOSE_PARENTHESIS:
+                case T_FALSE:
+                case T_TRUE:
+                case T_NULL:
+                    // Part of a type hint or default value.
+                    if ($defaultStart === null) {
+                        if ($typeHintToken === false) {
+                            $typeHintToken = $i;
+                        }
 
-                if ($defaultStart !== null) {
-                    $vars[$paramCount]['default']       = trim($this->getTokensAsString($defaultStart, ($i - $defaultStart)));
-                    $vars[$paramCount]['default_token'] = $defaultStart;
-                    $vars[$paramCount]['default_equal_token'] = $equalToken;
-                }
-
-                $vars[$paramCount]['has_attributes']      = $hasAttributes;
-                $vars[$paramCount]['pass_by_reference']   = $passByReference;
-                $vars[$paramCount]['reference_token']     = $referenceToken;
-                $vars[$paramCount]['variable_length']     = $variableLength;
-                $vars[$paramCount]['variadic_token']      = $variadicToken;
-                $vars[$paramCount]['type_hint']           = $typeHint;
-                $vars[$paramCount]['type_hint_token']     = $typeHintToken;
-                $vars[$paramCount]['type_hint_end_token'] = $typeHintEndToken;
-                $vars[$paramCount]['nullable_type']       = $nullableType;
-
-                if ($visibilityToken !== null || $setVisibilityToken !== null || $readonlyToken !== null) {
-                    $vars[$paramCount]['property_visibility'] = 'public';
-                    $vars[$paramCount]['visibility_token']    = false;
-
-                    if ($visibilityToken !== null) {
-                        $vars[$paramCount]['property_visibility'] = $this->tokens[$visibilityToken]['content'];
-                        $vars[$paramCount]['visibility_token']    = $visibilityToken;
+                        $typeHint        .= $this->tokens[$i]['content'];
+                        $typeHintEndToken = $i;
+                    }
+                    break;
+                case T_NULLABLE:
+                    if ($defaultStart === null) {
+                        $nullableType     = true;
+                        $typeHint        .= $this->tokens[$i]['content'];
+                        $typeHintEndToken = $i;
+                    }
+                    break;
+                case T_PUBLIC:
+                case T_PROTECTED:
+                case T_PRIVATE:
+                    if ($defaultStart === null) {
+                        $visibilityToken = $i;
+                    }
+                    break;
+                case T_PUBLIC_SET:
+                case T_PROTECTED_SET:
+                case T_PRIVATE_SET:
+                    if ($defaultStart === null) {
+                        $setVisibilityToken = $i;
+                    }
+                    break;
+                case T_READONLY:
+                    if ($defaultStart === null) {
+                        $readonlyToken = $i;
+                    }
+                    break;
+                case T_CLOSE_PARENTHESIS:
+                case T_COMMA:
+                    // If it's null, then there must be no parameters for this
+                    // method.
+                    if ($currVar === null) {
+                        continue 2;
                     }
 
-                    if ($setVisibilityToken !== null) {
-                        $vars[$paramCount]['set_visibility']       = $this->tokens[$setVisibilityToken]['content'];
-                        $vars[$paramCount]['set_visibility_token'] = $setVisibilityToken;
+                    $vars[$paramCount]            = [];
+                    $vars[$paramCount]['token']   = $currVar;
+                    $vars[$paramCount]['name']    = $this->tokens[$currVar]['content'];
+                    $vars[$paramCount]['content'] = trim($this->getTokensAsString($paramStart, ($i - $paramStart)));
+
+                    if ($defaultStart !== null) {
+                        $vars[$paramCount]['default']       = trim($this->getTokensAsString($defaultStart, ($i - $defaultStart)));
+                        $vars[$paramCount]['default_token'] = $defaultStart;
+                        $vars[$paramCount]['default_equal_token'] = $equalToken;
                     }
 
-                    $vars[$paramCount]['property_readonly'] = false;
-                    if ($readonlyToken !== null) {
-                        $vars[$paramCount]['property_readonly'] = true;
-                        $vars[$paramCount]['readonly_token']    = $readonlyToken;
+                    $vars[$paramCount]['has_attributes']      = $hasAttributes;
+                    $vars[$paramCount]['pass_by_reference']   = $passByReference;
+                    $vars[$paramCount]['reference_token']     = $referenceToken;
+                    $vars[$paramCount]['variable_length']     = $variableLength;
+                    $vars[$paramCount]['variadic_token']      = $variadicToken;
+                    $vars[$paramCount]['type_hint']           = $typeHint;
+                    $vars[$paramCount]['type_hint_token']     = $typeHintToken;
+                    $vars[$paramCount]['type_hint_end_token'] = $typeHintEndToken;
+                    $vars[$paramCount]['nullable_type']       = $nullableType;
+
+                    if ($visibilityToken !== null || $setVisibilityToken !== null || $readonlyToken !== null) {
+                        $vars[$paramCount]['property_visibility'] = 'public';
+                        $vars[$paramCount]['visibility_token']    = false;
+
+                        if ($visibilityToken !== null) {
+                            $vars[$paramCount]['property_visibility'] = $this->tokens[$visibilityToken]['content'];
+                            $vars[$paramCount]['visibility_token']    = $visibilityToken;
+                        }
+
+                        if ($setVisibilityToken !== null) {
+                            $vars[$paramCount]['set_visibility']       = $this->tokens[$setVisibilityToken]['content'];
+                            $vars[$paramCount]['set_visibility_token'] = $setVisibilityToken;
+                        }
+
+                        $vars[$paramCount]['property_readonly'] = false;
+                        if ($readonlyToken !== null) {
+                            $vars[$paramCount]['property_readonly'] = true;
+                            $vars[$paramCount]['readonly_token']    = $readonlyToken;
+                        }
                     }
-                }
 
-                if ($this->tokens[$i]['code'] === T_COMMA) {
-                    $vars[$paramCount]['comma_token'] = $i;
-                } else {
-                    $vars[$paramCount]['comma_token'] = false;
-                }
+                    if ($this->tokens[$i]['code'] === T_COMMA) {
+                        $vars[$paramCount]['comma_token'] = $i;
+                    } else {
+                        $vars[$paramCount]['comma_token'] = false;
+                    }
 
-                // Reset the vars, as we are about to process the next parameter.
-                $currVar            = null;
-                $paramStart         = ($i + 1);
-                $defaultStart       = null;
-                $equalToken         = null;
-                $hasAttributes      = false;
-                $passByReference    = false;
-                $referenceToken     = false;
-                $variableLength     = false;
-                $variadicToken      = false;
-                $typeHint           = '';
-                $typeHintToken      = false;
-                $typeHintEndToken   = false;
-                $nullableType       = false;
-                $visibilityToken    = null;
-                $setVisibilityToken = null;
-                $readonlyToken      = null;
+                    // Reset the vars, as we are about to process the next parameter.
+                    $currVar            = null;
+                    $paramStart         = ($i + 1);
+                    $defaultStart       = null;
+                    $equalToken         = null;
+                    $hasAttributes      = false;
+                    $passByReference    = false;
+                    $referenceToken     = false;
+                    $variableLength     = false;
+                    $variadicToken      = false;
+                    $typeHint           = '';
+                    $typeHintToken      = false;
+                    $typeHintEndToken   = false;
+                    $nullableType       = false;
+                    $visibilityToken    = null;
+                    $setVisibilityToken = null;
+                    $readonlyToken      = null;
 
-                $paramCount++;
-                break;
-            case T_EQUAL:
-                $defaultStart = $this->findNext(Tokens::EMPTY_TOKENS, ($i + 1), null, true);
-                $equalToken   = $i;
-                break;
+                    $paramCount++;
+                    break;
+                case T_EQUAL:
+                    $defaultStart = $this->findNext(Tokens::EMPTY_TOKENS, ($i + 1), null, true);
+                    $equalToken   = $i;
+                    break;
             }
         }
 
@@ -1728,27 +1728,27 @@ class File
             }
 
             switch ($this->tokens[$i]['code']) {
-            case T_PUBLIC:
-                $scope          = 'public';
-                $scopeSpecified = true;
-                break;
-            case T_PRIVATE:
-                $scope          = 'private';
-                $scopeSpecified = true;
-                break;
-            case T_PROTECTED:
-                $scope          = 'protected';
-                $scopeSpecified = true;
-                break;
-            case T_ABSTRACT:
-                $isAbstract = true;
-                break;
-            case T_FINAL:
-                $isFinal = true;
-                break;
-            case T_STATIC:
-                $isStatic = true;
-                break;
+                case T_PUBLIC:
+                    $scope          = 'public';
+                    $scopeSpecified = true;
+                    break;
+                case T_PRIVATE:
+                    $scope          = 'private';
+                    $scopeSpecified = true;
+                    break;
+                case T_PROTECTED:
+                    $scope          = 'protected';
+                    $scopeSpecified = true;
+                    break;
+                case T_ABSTRACT:
+                    $isAbstract = true;
+                    break;
+                case T_FINAL:
+                    $isFinal = true;
+                    break;
+                case T_STATIC:
+                    $isStatic = true;
+                    break;
             }
         }
 
@@ -1942,39 +1942,39 @@ class File
             }
 
             switch ($this->tokens[$i]['code']) {
-            case T_PUBLIC:
-                $scope          = 'public';
-                $scopeSpecified = true;
-                break;
-            case T_PRIVATE:
-                $scope          = 'private';
-                $scopeSpecified = true;
-                break;
-            case T_PROTECTED:
-                $scope          = 'protected';
-                $scopeSpecified = true;
-                break;
-            case T_PUBLIC_SET:
-                $setScope = 'public';
-                break;
-            case T_PROTECTED_SET:
-                $setScope = 'protected';
-                break;
-            case T_PRIVATE_SET:
-                $setScope = 'private';
-                break;
-            case T_STATIC:
-                $isStatic = true;
-                break;
-            case T_READONLY:
-                $isReadonly = true;
-                break;
-            case T_FINAL:
-                $isFinal = true;
-                break;
-            case T_ABSTRACT:
-                $isAbstract = true;
-                break;
+                case T_PUBLIC:
+                    $scope          = 'public';
+                    $scopeSpecified = true;
+                    break;
+                case T_PRIVATE:
+                    $scope          = 'private';
+                    $scopeSpecified = true;
+                    break;
+                case T_PROTECTED:
+                    $scope          = 'protected';
+                    $scopeSpecified = true;
+                    break;
+                case T_PUBLIC_SET:
+                    $setScope = 'public';
+                    break;
+                case T_PROTECTED_SET:
+                    $setScope = 'protected';
+                    break;
+                case T_PRIVATE_SET:
+                    $setScope = 'private';
+                    break;
+                case T_STATIC:
+                    $isStatic = true;
+                    break;
+                case T_READONLY:
+                    $isReadonly = true;
+                    break;
+                case T_FINAL:
+                    $isFinal = true;
+                    break;
+                case T_ABSTRACT:
+                    $isAbstract = true;
+                    break;
             }
         }
 
@@ -2083,17 +2083,17 @@ class File
             }
 
             switch ($this->tokens[$i]['code']) {
-            case T_ABSTRACT:
-                $isAbstract = true;
-                break;
+                case T_ABSTRACT:
+                    $isAbstract = true;
+                    break;
 
-            case T_FINAL:
-                $isFinal = true;
-                break;
+                case T_FINAL:
+                    $isFinal = true;
+                    break;
 
-            case T_READONLY:
-                $isReadonly = true;
-                break;
+                case T_READONLY:
+                    $isReadonly = true;
+                    break;
             }
         }
 

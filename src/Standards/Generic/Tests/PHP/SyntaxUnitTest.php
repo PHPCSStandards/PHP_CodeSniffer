@@ -37,12 +37,12 @@ final class SyntaxUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'SyntaxUnitTest.1.inc':
-        case 'SyntaxUnitTest.2.inc':
-            return [3 => 1];
+            case 'SyntaxUnitTest.1.inc':
+            case 'SyntaxUnitTest.2.inc':
+                return [3 => 1];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

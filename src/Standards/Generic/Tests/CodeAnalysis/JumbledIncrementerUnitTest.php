@@ -47,22 +47,22 @@ final class JumbledIncrementerUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'JumbledIncrementerUnitTest.1.inc':
-            return [
-                3  => 2,
-                4  => 1,
-                20 => 1,
-                40 => 2,
-                41 => 1,
-                58 => 1,
-                69 => 1,
-                79 => 2,
-                80 => 1,
-                87 => 1,
-            ];
+            case 'JumbledIncrementerUnitTest.1.inc':
+                return [
+                    3  => 2,
+                    4  => 1,
+                    20 => 1,
+                    40 => 2,
+                    41 => 1,
+                    58 => 1,
+                    69 => 1,
+                    79 => 2,
+                    80 => 1,
+                    87 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 }

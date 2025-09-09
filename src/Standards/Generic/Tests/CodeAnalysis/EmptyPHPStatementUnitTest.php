@@ -67,40 +67,40 @@ final class EmptyPHPStatementUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'EmptyPHPStatementUnitTest.1.inc':
-            return [
-                9  => 1,
-                12 => 1,
-                15 => 1,
-                18 => 1,
-                21 => 1,
-                22 => 2,
-                31 => 1,
-                33 => 1,
-                43 => 1,
-                45 => 2,
-                49 => 1,
-                50 => 1,
-                57 => 1,
-                59 => 1,
-                61 => 1,
-                63 => 2,
-                71 => 1,
-                72 => 1,
-                80 => 1,
-            ];
-        case 'EmptyPHPStatementUnitTest.2.inc':
-            return [
-                2  => 1,
-                3  => 1,
-                4  => 1,
-                13 => 1,
-                15 => 1,
-                25 => 1,
-                27 => 1,
-            ];
-        default:
-            return [];
+            case 'EmptyPHPStatementUnitTest.1.inc':
+                return [
+                    9  => 1,
+                    12 => 1,
+                    15 => 1,
+                    18 => 1,
+                    21 => 1,
+                    22 => 2,
+                    31 => 1,
+                    33 => 1,
+                    43 => 1,
+                    45 => 2,
+                    49 => 1,
+                    50 => 1,
+                    57 => 1,
+                    59 => 1,
+                    61 => 1,
+                    63 => 2,
+                    71 => 1,
+                    72 => 1,
+                    80 => 1,
+                ];
+            case 'EmptyPHPStatementUnitTest.2.inc':
+                return [
+                    2  => 1,
+                    3  => 1,
+                    4  => 1,
+                    13 => 1,
+                    15 => 1,
+                    25 => 1,
+                    27 => 1,
+                ];
+            default:
+                return [];
         }
     }
 }

@@ -70,18 +70,18 @@ class MethodDeclarationSniff extends AbstractScopeSniff
         $prefix = $stackPtr;
         while (($prefix = $phpcsFile->findPrevious(Tokens::METHOD_MODIFIERS, ($prefix - 1), $prev)) !== false) {
             switch ($tokens[$prefix]['code']) {
-            case T_STATIC:
-                $static = $prefix;
-                break;
-            case T_ABSTRACT:
-                $abstract = $prefix;
-                break;
-            case T_FINAL:
-                $final = $prefix;
-                break;
-            default:
-                $visibility = $prefix;
-                break;
+                case T_STATIC:
+                    $static = $prefix;
+                    break;
+                case T_ABSTRACT:
+                    $abstract = $prefix;
+                    break;
+                case T_FINAL:
+                    $final = $prefix;
+                    break;
+                default:
+                    $visibility = $prefix;
+                    break;
             }
         }
 

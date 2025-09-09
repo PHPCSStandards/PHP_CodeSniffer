@@ -33,45 +33,45 @@ final class ArbitraryParenthesesSpacingUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'ArbitraryParenthesesSpacingUnitTest.1.inc':
-            return [
-                64  => 4,
-                66  => 1,
-                68  => 1,
-                69  => 1,
-                72  => 2,
-                73  => 2,
-                77  => 2,
-                81  => 4,
-                90  => 4,
-                94  => 1,
-                95  => 1,
-                97  => 1,
-                100 => 2,
-                101 => 2,
-                104 => 2,
-                107 => 2,
-                109 => 4,
-                111 => 4,
-                113 => 2,
-                115 => 2,
-                123 => 1,
-                125 => 2,
-                127 => 1,
-                131 => 1,
-                133 => 1,
-                137 => 1,
-                139 => 2,
-                141 => 1,
-                144 => 1,
-                146 => 1,
-                163 => 1,
-                164 => 1,
-                165 => 1,
-            ];
+            case 'ArbitraryParenthesesSpacingUnitTest.1.inc':
+                return [
+                    64  => 4,
+                    66  => 1,
+                    68  => 1,
+                    69  => 1,
+                    72  => 2,
+                    73  => 2,
+                    77  => 2,
+                    81  => 4,
+                    90  => 4,
+                    94  => 1,
+                    95  => 1,
+                    97  => 1,
+                    100 => 2,
+                    101 => 2,
+                    104 => 2,
+                    107 => 2,
+                    109 => 4,
+                    111 => 4,
+                    113 => 2,
+                    115 => 2,
+                    123 => 1,
+                    125 => 2,
+                    127 => 1,
+                    131 => 1,
+                    133 => 1,
+                    137 => 1,
+                    139 => 2,
+                    141 => 1,
+                    144 => 1,
+                    146 => 1,
+                    163 => 1,
+                    164 => 1,
+                    165 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 
@@ -89,14 +89,14 @@ final class ArbitraryParenthesesSpacingUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'ArbitraryParenthesesSpacingUnitTest.1.inc':
-            return [
-                55 => 1,
-                56 => 1,
-            ];
+            case 'ArbitraryParenthesesSpacingUnitTest.1.inc':
+                return [
+                    55 => 1,
+                    56 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 }

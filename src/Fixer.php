@@ -319,14 +319,14 @@ class Fixer
         foreach ($diffLines as $line) {
             if (isset($line[0]) === true) {
                 switch ($line[0]) {
-                case '-':
-                    $diff[] = "\033[31m$line\033[0m";
-                    break;
-                case '+':
-                    $diff[] = "\033[32m$line\033[0m";
-                    break;
-                default:
-                    $diff[] = $line;
+                    case '-':
+                        $diff[] = "\033[31m$line\033[0m";
+                        break;
+                    case '+':
+                        $diff[] = "\033[32m$line\033[0m";
+                        break;
+                    default:
+                        $diff[] = $line;
                 }
             }
         }

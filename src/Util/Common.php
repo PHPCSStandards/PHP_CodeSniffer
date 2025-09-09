@@ -469,19 +469,19 @@ class Common
         } else {
             $lowerVarType = strtolower($varType);
             switch ($lowerVarType) {
-            case 'bool':
-            case 'boolean':
-                return 'boolean';
-            case 'double':
-            case 'real':
-            case 'float':
-                return 'float';
-            case 'int':
-            case 'integer':
-                return 'integer';
-            case 'array()':
-            case 'array':
-                return 'array';
+                case 'bool':
+                case 'boolean':
+                    return 'boolean';
+                case 'double':
+                case 'real':
+                case 'float':
+                    return 'float';
+                case 'int':
+                case 'integer':
+                    return 'integer';
+                case 'array()':
+                case 'array':
+                    return 'array';
             }
 
             if (strpos($lowerVarType, 'array(') !== false) {

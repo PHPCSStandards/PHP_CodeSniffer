@@ -47,17 +47,17 @@ final class UnconditionalIfStatementUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'UnconditionalIfStatementUnitTest.1.inc':
-            return [
-                3  => 1,
-                5  => 1,
-                7  => 1,
-                16 => 1,
-                17 => 1,
-            ];
+            case 'UnconditionalIfStatementUnitTest.1.inc':
+                return [
+                    3  => 1,
+                    5  => 1,
+                    7  => 1,
+                    16 => 1,
+                    17 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 }

@@ -853,26 +853,26 @@ abstract class AbstractPatternSniff implements Sniff
         $nestedBraces      = 0;
         for ($start = $from; $start >= 0; $start--) {
             switch ($pattern[$start]) {
-            case '(':
-                if ($nestedParenthesis === 0) {
-                    $skip['to'] = 'parenthesis_closer';
-                }
+                case '(':
+                    if ($nestedParenthesis === 0) {
+                        $skip['to'] = 'parenthesis_closer';
+                    }
 
-                $nestedParenthesis--;
-                break;
-            case '{':
-                if ($nestedBraces === 0) {
-                    $skip['to'] = 'scope_closer';
-                }
+                    $nestedParenthesis--;
+                    break;
+                case '{':
+                    if ($nestedBraces === 0) {
+                        $skip['to'] = 'scope_closer';
+                    }
 
-                $nestedBraces--;
-                break;
-            case '}':
-                $nestedBraces++;
-                break;
-            case ')':
-                $nestedParenthesis++;
-                break;
+                    $nestedBraces--;
+                    break;
+                case '}':
+                    $nestedBraces++;
+                    break;
+                case ')':
+                    $nestedParenthesis++;
+                    break;
             }
 
             if (isset($skip['to']) === true) {

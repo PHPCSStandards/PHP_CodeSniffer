@@ -685,52 +685,52 @@ abstract class Tokenizer
             */
 
             switch ($this->tokens[$i]['code']) {
-            case T_OPEN_SQUARE_BRACKET:
-                $squareOpeners[] = $i;
-
-                if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    StatusWriter::write("=> Found square bracket opener at $i", (count($squareOpeners) + count($curlyOpeners)));
-                }
-                break;
-            case T_OPEN_CURLY_BRACKET:
-                if (isset($this->tokens[$i]['scope_closer']) === false) {
-                    $curlyOpeners[] = $i;
+                case T_OPEN_SQUARE_BRACKET:
+                    $squareOpeners[] = $i;
 
                     if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                        StatusWriter::write("=> Found curly bracket opener at $i", (count($squareOpeners) + count($curlyOpeners)));
+                        StatusWriter::write("=> Found square bracket opener at $i", (count($squareOpeners) + count($curlyOpeners)));
                     }
-                }
-                break;
-            case T_CLOSE_SQUARE_BRACKET:
-                if (empty($squareOpeners) === false) {
-                    $opener = array_pop($squareOpeners);
-                    $this->tokens[$i]['bracket_opener']      = $opener;
-                    $this->tokens[$i]['bracket_closer']      = $i;
-                    $this->tokens[$opener]['bracket_opener'] = $opener;
-                    $this->tokens[$opener]['bracket_closer'] = $i;
+                    break;
+                case T_OPEN_CURLY_BRACKET:
+                    if (isset($this->tokens[$i]['scope_closer']) === false) {
+                        $curlyOpeners[] = $i;
 
-                    if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                        StatusWriter::write("=> Found square bracket closer at $i for $opener", (count($squareOpeners) + count($curlyOpeners) + 1));
+                        if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                            StatusWriter::write("=> Found curly bracket opener at $i", (count($squareOpeners) + count($curlyOpeners)));
+                        }
                     }
-                }
-                break;
-            case T_CLOSE_CURLY_BRACKET:
-                if (empty($curlyOpeners) === false
-                    && isset($this->tokens[$i]['scope_opener']) === false
-                ) {
-                    $opener = array_pop($curlyOpeners);
-                    $this->tokens[$i]['bracket_opener']      = $opener;
-                    $this->tokens[$i]['bracket_closer']      = $i;
-                    $this->tokens[$opener]['bracket_opener'] = $opener;
-                    $this->tokens[$opener]['bracket_closer'] = $i;
+                    break;
+                case T_CLOSE_SQUARE_BRACKET:
+                    if (empty($squareOpeners) === false) {
+                        $opener = array_pop($squareOpeners);
+                        $this->tokens[$i]['bracket_opener']      = $opener;
+                        $this->tokens[$i]['bracket_closer']      = $i;
+                        $this->tokens[$opener]['bracket_opener'] = $opener;
+                        $this->tokens[$opener]['bracket_closer'] = $i;
 
-                    if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                        StatusWriter::write("=> Found curly bracket closer at $i for $opener", (count($squareOpeners) + count($curlyOpeners) + 1));
+                        if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                            StatusWriter::write("=> Found square bracket closer at $i for $opener", (count($squareOpeners) + count($curlyOpeners) + 1));
+                        }
                     }
-                }
-                break;
-            default:
-                continue 2;
+                    break;
+                case T_CLOSE_CURLY_BRACKET:
+                    if (empty($curlyOpeners) === false
+                        && isset($this->tokens[$i]['scope_opener']) === false
+                    ) {
+                        $opener = array_pop($curlyOpeners);
+                        $this->tokens[$i]['bracket_opener']      = $opener;
+                        $this->tokens[$i]['bracket_closer']      = $i;
+                        $this->tokens[$opener]['bracket_opener'] = $opener;
+                        $this->tokens[$opener]['bracket_closer'] = $i;
+
+                        if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                            StatusWriter::write("=> Found curly bracket closer at $i for $opener", (count($squareOpeners) + count($curlyOpeners) + 1));
+                        }
+                    }
+                    break;
+                default:
+                    continue 2;
             }
         }
 

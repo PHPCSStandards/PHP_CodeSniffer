@@ -33,21 +33,21 @@ final class DisallowMultipleAssignmentsUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'DisallowMultipleAssignmentsUnitTest.1.inc':
-            return [
-                4  => 1,
-                5  => 2,
-                7  => 1,
-                9  => 1,
-                12 => 1,
-                14 => 1,
-                15 => 1,
-                79 => 1,
-                85 => 1,
-            ];
+            case 'DisallowMultipleAssignmentsUnitTest.1.inc':
+                return [
+                    4  => 1,
+                    5  => 2,
+                    7  => 1,
+                    9  => 1,
+                    12 => 1,
+                    14 => 1,
+                    15 => 1,
+                    79 => 1,
+                    85 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

@@ -33,31 +33,31 @@ final class FileCommentUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'FileCommentUnitTest.1.inc':
-            return [
-                1  => 1,
-                22 => 2,
-                23 => 1,
-                24 => 2,
-                25 => 2,
-                26 => 1,
-                27 => 2,
-                28 => 2,
-                32 => 2,
-            ];
+            case 'FileCommentUnitTest.1.inc':
+                return [
+                    1  => 1,
+                    22 => 2,
+                    23 => 1,
+                    24 => 2,
+                    25 => 2,
+                    26 => 1,
+                    27 => 2,
+                    28 => 2,
+                    32 => 2,
+                ];
 
-        case 'FileCommentUnitTest.4.inc':
-        case 'FileCommentUnitTest.6.inc':
-        case 'FileCommentUnitTest.7.inc':
-        case 'FileCommentUnitTest.9.inc':
-        case 'FileCommentUnitTest.10.inc':
-            return [1 => 1];
+            case 'FileCommentUnitTest.4.inc':
+            case 'FileCommentUnitTest.6.inc':
+            case 'FileCommentUnitTest.7.inc':
+            case 'FileCommentUnitTest.9.inc':
+            case 'FileCommentUnitTest.10.inc':
+                return [1 => 1];
 
-        case 'FileCommentUnitTest.5.inc':
-            return [2 => 1];
+            case 'FileCommentUnitTest.5.inc':
+                return [2 => 1];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

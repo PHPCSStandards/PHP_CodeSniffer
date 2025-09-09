@@ -47,48 +47,48 @@ final class DuplicateClassNameUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'DuplicateClassNameUnitTest.1.inc':
-            return [
-                10 => 1,
-                11 => 1,
-                12 => 1,
-                13 => 1,
-            ];
+            case 'DuplicateClassNameUnitTest.1.inc':
+                return [
+                    10 => 1,
+                    11 => 1,
+                    12 => 1,
+                    13 => 1,
+                ];
 
-        case 'DuplicateClassNameUnitTest.2.inc':
-            return [
-                2 => 1,
-                3 => 1,
-                4 => 1,
-                5 => 1,
-            ];
+            case 'DuplicateClassNameUnitTest.2.inc':
+                return [
+                    2 => 1,
+                    3 => 1,
+                    4 => 1,
+                    5 => 1,
+                ];
 
-        case 'DuplicateClassNameUnitTest.5.inc':
-            return [
-                3 => 1,
-                7 => 1,
-            ];
+            case 'DuplicateClassNameUnitTest.5.inc':
+                return [
+                    3 => 1,
+                    7 => 1,
+                ];
 
-        case 'DuplicateClassNameUnitTest.6.inc':
-            return [10 => 1];
+            case 'DuplicateClassNameUnitTest.6.inc':
+                return [10 => 1];
 
-        case 'DuplicateClassNameUnitTest.8.inc':
-            return [
-                7 => 1,
-                8 => 1,
-            ];
+            case 'DuplicateClassNameUnitTest.8.inc':
+                return [
+                    7 => 1,
+                    8 => 1,
+                ];
 
-        case 'DuplicateClassNameUnitTest.9.inc':
-            return [
-                3 => 1,
-                4 => 1,
-            ];
+            case 'DuplicateClassNameUnitTest.9.inc':
+                return [
+                    3 => 1,
+                    4 => 1,
+                ];
 
-        case 'DuplicateClassNameUnitTest.11.inc':
-            return [13 => 1];
+            case 'DuplicateClassNameUnitTest.11.inc':
+                return [13 => 1];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 }

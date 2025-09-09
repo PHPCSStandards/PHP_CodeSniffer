@@ -33,10 +33,10 @@ final class OpenTagUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'OpenTagUnitTest.2.inc':
-            return [1 => 1];
-        default:
-            return [];
+            case 'OpenTagUnitTest.2.inc':
+                return [1 => 1];
+            default:
+                return [];
         }
     }
 

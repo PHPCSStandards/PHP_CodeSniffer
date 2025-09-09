@@ -33,19 +33,19 @@ final class EndFileNewlineUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'EndFileNewlineUnitTest.1.inc':
-        case 'EndFileNewlineUnitTest.3.inc':
-        case 'EndFileNewlineUnitTest.6.inc':
-        case 'EndFileNewlineUnitTest.7.inc':
-        case 'EndFileNewlineUnitTest.9.inc':
-        case 'EndFileNewlineUnitTest.10.inc':
-            return [2 => 1];
-        case 'EndFileNewlineUnitTest.11.inc':
-        case 'EndFileNewlineUnitTest.12.inc':
-        case 'EndFileNewlineUnitTest.13.inc':
-            return [1 => 1];
-        default:
-            return [];
+            case 'EndFileNewlineUnitTest.1.inc':
+            case 'EndFileNewlineUnitTest.3.inc':
+            case 'EndFileNewlineUnitTest.6.inc':
+            case 'EndFileNewlineUnitTest.7.inc':
+            case 'EndFileNewlineUnitTest.9.inc':
+            case 'EndFileNewlineUnitTest.10.inc':
+                return [2 => 1];
+            case 'EndFileNewlineUnitTest.11.inc':
+            case 'EndFileNewlineUnitTest.12.inc':
+            case 'EndFileNewlineUnitTest.13.inc':
+                return [1 => 1];
+            default:
+                return [];
         }
     }
 

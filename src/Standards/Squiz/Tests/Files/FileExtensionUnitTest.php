@@ -33,10 +33,10 @@ final class FileExtensionUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'FileExtensionUnitTest.1.inc':
-            return [1 => 1];
-        default:
-            return [];
+            case 'FileExtensionUnitTest.1.inc':
+                return [1 => 1];
+            default:
+                return [];
         }
     }
 

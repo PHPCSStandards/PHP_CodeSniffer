@@ -32,14 +32,14 @@ final class TraitNameSuffixUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'TraitNameSuffixUnitTest.1.inc':
-            return [
-                3 => 1,
-                9 => 1,
-            ];
+            case 'TraitNameSuffixUnitTest.1.inc':
+                return [
+                    3 => 1,
+                    9 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

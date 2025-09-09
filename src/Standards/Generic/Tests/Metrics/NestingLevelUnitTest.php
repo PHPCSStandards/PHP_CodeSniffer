@@ -33,10 +33,10 @@ final class NestingLevelUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'NestingLevelUnitTest.1.inc':
-            return [73 => 1];
-        default:
-            return [];
+            case 'NestingLevelUnitTest.1.inc':
+                return [73 => 1];
+            default:
+                return [];
         }
     }
 
@@ -54,13 +54,13 @@ final class NestingLevelUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'NestingLevelUnitTest.1.inc':
-            return [
-                27 => 1,
-                46 => 1,
-            ];
-        default:
-            return [];
+            case 'NestingLevelUnitTest.1.inc':
+                return [
+                    27 => 1,
+                    46 => 1,
+                ];
+            default:
+                return [];
         }
     }
 }
