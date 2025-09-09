@@ -16,6 +16,16 @@ class BooleanOperatorPlacementSniff implements Sniff
 {
 
     /**
+     * Boolean operator tokens.
+     *
+     * @var array<int|string>
+     */
+    private const BOOLEAN_OPERATORS = [
+        T_BOOLEAN_AND,
+        T_BOOLEAN_OR,
+    ];
+
+    /**
      * Used to restrict the placement of the boolean operator.
      *
      * Allowed value are "first" or "last".
@@ -70,11 +80,6 @@ class BooleanOperatorPlacementSniff implements Sniff
             return;
         }
 
-        $find = [
-            T_BOOLEAN_AND,
-            T_BOOLEAN_OR,
-        ];
-
         if ($this->allowOnly === 'first' || $this->allowOnly === 'last') {
             $position = $this->allowOnly;
         } else {
@@ -86,7 +91,7 @@ class BooleanOperatorPlacementSniff implements Sniff
         $operators = [];
 
         do {
-            $operator = $phpcsFile->findNext($find, ($operator + 1), $parenCloser);
+            $operator = $phpcsFile->findNext(self::BOOLEAN_OPERATORS, ($operator + 1), $parenCloser);
             if ($operator === false) {
                 break;
             }

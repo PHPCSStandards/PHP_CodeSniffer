@@ -17,6 +17,20 @@ class SwitchDeclarationSniff implements Sniff
 {
 
     /**
+     * Tokens which can terminate a "case".
+     *
+     * @var array<int|string, int|string>
+     */
+    private const CASE_TERMINATING_TOKENS = [
+        T_RETURN   => T_RETURN,
+        T_BREAK    => T_BREAK,
+        T_CONTINUE => T_CONTINUE,
+        T_THROW    => T_THROW,
+        T_EXIT     => T_EXIT,
+        T_GOTO     => T_GOTO,
+    ];
+
+    /**
      * The number of spaces code should be indented.
      *
      * @var integer
@@ -382,17 +396,8 @@ class SwitchDeclarationSniff implements Sniff
         } else if ($tokens[$lastToken]['code'] === T_SEMICOLON) {
             // We found the last statement of the CASE. Now we want to
             // check whether it is a terminating one.
-            $terminators = [
-                T_RETURN   => T_RETURN,
-                T_BREAK    => T_BREAK,
-                T_CONTINUE => T_CONTINUE,
-                T_THROW    => T_THROW,
-                T_EXIT     => T_EXIT,
-                T_GOTO     => T_GOTO,
-            ];
-
             $terminator = $phpcsFile->findStartOfStatement(($lastToken - 1));
-            if (isset($terminators[$tokens[$terminator]['code']]) === true) {
+            if (isset(self::CASE_TERMINATING_TOKENS[$tokens[$terminator]['code']]) === true) {
                 return $terminator;
             }
         }//end if
