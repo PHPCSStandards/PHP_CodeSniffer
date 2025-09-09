@@ -9,17 +9,11 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Ruleset;
 
+use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHPUnit\Framework\TestCase;
 
 abstract class AbstractRulesetTestCase extends TestCase
 {
-
-    /**
-     * The fully qualified name of the PHPCS runtime exception class.
-     *
-     * @var string
-     */
-    private const RUNTIME_EXCEPTION = 'PHP_CodeSniffer\Exceptions\RuntimeException';
 
 
     /**
@@ -75,7 +69,7 @@ abstract class AbstractRulesetTestCase extends TestCase
      */
     protected function expectRuntimeExceptionMessage($message)
     {
-        $this->expectException(self::RUNTIME_EXCEPTION);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage($message);
 
     }//end expectRuntimeExceptionMessage()
@@ -92,11 +86,11 @@ abstract class AbstractRulesetTestCase extends TestCase
     protected function expectRuntimeExceptionRegex($regex)
     {
         if (method_exists($this, 'expectExceptionMessageMatches') === true) {
-            $this->expectException(self::RUNTIME_EXCEPTION);
+            $this->expectException(RuntimeException::class);
             $this->expectExceptionMessageMatches($regex);
         } else {
             // PHPUnit < 8.4.0.
-            $this->expectException(self::RUNTIME_EXCEPTION);
+            $this->expectException(RuntimeException::class);
             $this->expectExceptionMessageRegExp($regex);
         }
 

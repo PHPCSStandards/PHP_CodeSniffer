@@ -232,7 +232,7 @@ class FileCommentSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        if (get_class($this) === 'PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\FileCommentSniff') {
+        if (static::class === 'PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\FileCommentSniff') {
             $docBlock = 'file';
         } else {
             $docBlock = 'class';

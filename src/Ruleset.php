@@ -14,6 +14,7 @@ namespace PHP_CodeSniffer;
 use InvalidArgumentException;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Sniffs\DeprecatedSniff;
+use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Util\Common;
 use PHP_CodeSniffer\Util\MessageCollector;
 use PHP_CodeSniffer\Util\Standards;
@@ -1470,7 +1471,7 @@ class Ruleset
                 continue;
             }
 
-            if ($reflection->implementsInterface('PHP_CodeSniffer\\Sniffs\\Sniff') === false) {
+            if ($reflection->implementsInterface(Sniff::class) === false) {
                 $message  = 'All sniffs must implement the PHP_CodeSniffer\\Sniffs\\Sniff interface.'.PHP_EOL;
                 $message .= "Interface not implemented for sniff $className.".PHP_EOL;
                 $message .= 'Contact the sniff author to fix the sniff.';
@@ -1486,7 +1487,7 @@ class Ruleset
                     && empty($value) === false
                     && in_array('PHP', $value, true) === false
                 ) {
-                    if ($reflection->implementsInterface('PHP_CodeSniffer\\Sniffs\\DeprecatedSniff') === true) {
+                    if ($reflection->implementsInterface(DeprecatedSniff::class) === true) {
                         // Silently ignore the sniff if the sniff is marked as deprecated.
                         continue;
                     }

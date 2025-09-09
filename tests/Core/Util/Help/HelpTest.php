@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Util\Help;
 
+use InvalidArgumentException;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHP_CodeSniffer\Util\Help;
 use PHPUnit\Framework\TestCase;
@@ -139,10 +140,9 @@ final class HelpTest extends TestCase
      */
     public function testConstructorInvalidArgumentException()
     {
-        $exception = 'InvalidArgumentException';
-        $message   = 'The $shortOptions parameter must be a string';
+        $message = 'The $shortOptions parameter must be a string';
 
-        $this->expectException($exception);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage($message);
 
         new Help(new ConfigDouble(), [], []);

@@ -16,6 +16,7 @@ use PHP_CodeSniffer\Files\LocalFile;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
+use PHP_CodeSniffer\Tokenizers\PHP;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
@@ -59,7 +60,7 @@ abstract class AbstractTokenizerTestCase extends TestCase
             $ruleset = new Ruleset($config);
 
             // Default to a file with the same name as the test class. Extension is property based.
-            $relativeCN     = str_replace(__NAMESPACE__, '', get_called_class());
+            $relativeCN     = str_replace(__NAMESPACE__, '', static::class);
             $relativePath   = str_replace('\\', DIRECTORY_SEPARATOR, $relativeCN);
             $pathToTestFile = realpath(__DIR__).$relativePath.'.inc';
 
@@ -120,7 +121,7 @@ abstract class AbstractTokenizerTestCase extends TestCase
      */
     public static function clearResolvedTokensCache()
     {
-        $property = new ReflectionProperty('PHP_CodeSniffer\Tokenizers\PHP', 'resolveTokenCache');
+        $property = new ReflectionProperty(PHP::class, 'resolveTokenCache');
         (PHP_VERSION_ID < 80100) && $property->setAccessible(true);
         $property->setValue(null, []);
         (PHP_VERSION_ID < 80100) && $property->setAccessible(false);

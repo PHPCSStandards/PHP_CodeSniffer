@@ -17,6 +17,7 @@ use Iterator;
 use PHP_CodeSniffer\Autoload;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Exceptions\DeepExitException;
+use PHP_CodeSniffer\Filters\Filter;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Util\Common;
 use PHP_CodeSniffer\Util\ExitCode;
@@ -156,7 +157,7 @@ class FileList implements Iterator, Countable
         $filterType = $this->config->filter;
 
         if ($filterType === null) {
-            $filterClass = '\PHP_CodeSniffer\Filters\Filter';
+            $filterClass = Filter::class;
         } else {
             if (strpos($filterType, '.') !== false) {
                 // This is a path to a custom filter class.

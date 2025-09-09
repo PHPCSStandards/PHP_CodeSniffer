@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Util\Common;
 
+use InvalidArgumentException;
 use PHP_CodeSniffer\Util\Common;
 use PHPUnit\Framework\TestCase;
 
@@ -32,10 +33,9 @@ final class GetSniffCodeTest extends TestCase
      */
     public function testGetSniffCodeThrowsExceptionOnInvalidInput($input)
     {
-        $exception = 'InvalidArgumentException';
-        $message   = 'The $sniffClass parameter must be a non-empty string';
+        $message = 'The $sniffClass parameter must be a non-empty string';
 
-        $this->expectException($exception);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage($message);
 
         Common::getSniffCode($input);
@@ -72,10 +72,9 @@ final class GetSniffCodeTest extends TestCase
      */
     public function testGetSniffCodeThrowsExceptionOnInputWhichIsNotASniffTestClass($input)
     {
-        $exception = 'InvalidArgumentException';
-        $message   = 'The $sniffClass parameter was not passed a fully qualified sniff(test) class name. Received:';
+        $message = 'The $sniffClass parameter was not passed a fully qualified sniff(test) class name. Received:';
 
-        $this->expectException($exception);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage($message);
 
         Common::getSniffCode($input);
