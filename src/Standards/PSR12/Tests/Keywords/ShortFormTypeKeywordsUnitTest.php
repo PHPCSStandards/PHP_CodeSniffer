@@ -52,6 +52,4 @@ final class ShortFormTypeKeywordsUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

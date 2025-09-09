@@ -350,6 +350,4 @@ class Code implements Report
 
         echo $cachedData;
     }
-
-
 }

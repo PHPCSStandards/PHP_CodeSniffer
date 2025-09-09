@@ -52,6 +52,4 @@ final class DisallowMultipleStatementsUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

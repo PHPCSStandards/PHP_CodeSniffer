@@ -114,6 +114,4 @@ final class NullableVsInlineThenTest extends AbstractTokenizerTestCase
             'ternary ? followed by namespace relative static method call'  => ['/* testInlineThenWithNamespaceRelativeNameAndDoubleColon */'],
         ];
     }
-
-
 }

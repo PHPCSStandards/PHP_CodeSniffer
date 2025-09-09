@@ -61,6 +61,4 @@ class FixmeSniff implements Sniff
             $phpcsFile->addError($error, $stackPtr, $type, $data);
         }
     }
-
-
 }

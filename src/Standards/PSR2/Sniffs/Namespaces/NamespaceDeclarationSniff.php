@@ -86,6 +86,4 @@ class NamespaceDeclarationSniff implements Sniff
             }
         }
     }
-
-
 }

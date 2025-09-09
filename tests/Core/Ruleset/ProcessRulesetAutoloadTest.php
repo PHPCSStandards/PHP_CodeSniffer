@@ -156,6 +156,4 @@ final class ProcessRulesetAutoloadTest extends AbstractRulesetTestCase
         $config   = new ConfigDouble(["--standard=$standard"]);
         new Ruleset($config);
     }
-
-
 }

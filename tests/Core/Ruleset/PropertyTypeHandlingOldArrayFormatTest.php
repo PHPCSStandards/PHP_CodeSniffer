@@ -48,6 +48,4 @@ final class PropertyTypeHandlingOldArrayFormatTest extends AbstractRulesetTestCa
         $config   = new ConfigDouble(["--standard=$standard"]);
         new Ruleset($config);
     }
-
-
 }

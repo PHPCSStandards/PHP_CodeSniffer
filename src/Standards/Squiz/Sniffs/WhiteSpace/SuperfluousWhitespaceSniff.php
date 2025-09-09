@@ -207,6 +207,4 @@ class SuperfluousWhitespaceSniff implements Sniff
             }//end if
         }//end if
     }
-
-
 }

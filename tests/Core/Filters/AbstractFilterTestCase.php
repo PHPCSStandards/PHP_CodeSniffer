@@ -222,6 +222,4 @@ abstract class AbstractFilterTestCase extends TestCase
 
         return $paths;
     }
-
-
 }

@@ -49,6 +49,4 @@ final class ElseIfDeclarationUnitTest extends AbstractSniffTestCase
             12 => 1,
         ];
     }
-
-
 }

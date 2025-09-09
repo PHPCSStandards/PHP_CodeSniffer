@@ -41,6 +41,4 @@ class EvalSniff implements Sniff
         $error = 'Use of eval() is discouraged';
         $phpcsFile->addWarning($error, $stackPtr, 'Discouraged');
     }
-
-
 }

@@ -87,6 +87,4 @@ final class ForLoopDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

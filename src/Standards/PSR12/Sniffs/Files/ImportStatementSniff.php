@@ -70,6 +70,4 @@ class ImportStatementSniff implements Sniff
             $phpcsFile->fixer->replaceToken($next, ltrim($tokens[$next]['content'], '\\'));
         }
     }
-
-
 }

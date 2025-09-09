@@ -50,6 +50,4 @@ class OneInterfacePerFileSniff implements Sniff
             $phpcsFile->addError($error, $nextInterface, 'MultipleFound');
         }
     }
-
-
 }

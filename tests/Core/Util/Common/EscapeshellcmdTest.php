@@ -84,6 +84,4 @@ final class EscapeshellcmdTest extends TestCase
             ],
         ];
     }
-
-
 }

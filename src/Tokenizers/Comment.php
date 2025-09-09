@@ -282,6 +282,4 @@ class Comment
             'type'    => 'T_DOC_COMMENT_WHITESPACE',
         ];
     }
-
-
 }

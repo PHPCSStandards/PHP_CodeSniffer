@@ -140,6 +140,4 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
             '"exit" as case name'      => ['/* testKeywordAsEnumCaseNameShouldBeString8 */'],
         ];
     }
-
-
 }

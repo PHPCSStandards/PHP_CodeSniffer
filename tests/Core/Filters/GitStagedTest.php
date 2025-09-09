@@ -260,6 +260,4 @@ final class GitStagedTest extends AbstractFilterTestCase
             ],
         ];
     }
-
-
 }

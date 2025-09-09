@@ -154,6 +154,4 @@ class SpaceAfterCastSniff implements Sniff
             }
         }
     }
-
-
 }

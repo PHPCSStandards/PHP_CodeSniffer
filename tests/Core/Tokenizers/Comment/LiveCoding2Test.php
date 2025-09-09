@@ -61,6 +61,4 @@ final class LiveCoding2Test extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
     }
-
-
 }

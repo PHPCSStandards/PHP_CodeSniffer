@@ -391,6 +391,4 @@ class OperatorSpacingSniff implements Sniff
 
         return true;
     }
-
-
 }

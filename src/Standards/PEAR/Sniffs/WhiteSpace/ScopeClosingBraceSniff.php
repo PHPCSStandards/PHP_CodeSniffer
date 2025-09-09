@@ -175,6 +175,4 @@ class ScopeClosingBraceSniff implements Sniff
             }
         }
     }
-
-
 }

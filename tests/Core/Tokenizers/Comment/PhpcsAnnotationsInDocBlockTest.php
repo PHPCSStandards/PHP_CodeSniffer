@@ -615,6 +615,4 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
     }
-
-
 }

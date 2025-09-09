@@ -225,6 +225,4 @@ final class BackfillEnumTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

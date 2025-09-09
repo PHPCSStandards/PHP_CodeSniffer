@@ -93,6 +93,4 @@ class NestingLevelSniff implements Sniff
             $phpcsFile->addWarning($warning, $stackPtr, 'TooHigh', $data);
         }
     }
-
-
 }

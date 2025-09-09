@@ -281,6 +281,4 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
 
         $this->assertSame($expected, self::$sniff->indicies);
     }
-
-
 }

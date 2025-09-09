@@ -236,6 +236,4 @@ class ForbiddenFunctionsSniff implements Sniff
             $phpcsFile->addWarning($error, $stackPtr, $type, $data);
         }
     }
-
-
 }

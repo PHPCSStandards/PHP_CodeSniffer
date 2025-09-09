@@ -101,6 +101,4 @@ class RequireStrictTypesSniff implements Sniff
         // open tags, typically embedded in HTML.
         return $phpcsFile->numTokens;
     }
-
-
 }

@@ -53,6 +53,4 @@ final class ForbiddenFunctionsUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

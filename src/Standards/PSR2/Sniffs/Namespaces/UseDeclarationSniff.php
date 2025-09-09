@@ -294,6 +294,4 @@ class UseDeclarationSniff implements Sniff
 
         return false;
     }
-
-
 }

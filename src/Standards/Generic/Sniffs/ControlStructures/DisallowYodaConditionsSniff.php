@@ -178,6 +178,4 @@ class DisallowYodaConditionsSniff implements Sniff
 
         return true;
     }
-
-
 }

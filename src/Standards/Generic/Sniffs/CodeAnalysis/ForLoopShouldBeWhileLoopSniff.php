@@ -84,6 +84,4 @@ class ForLoopShouldBeWhileLoopSniff implements Sniff
             $phpcsFile->addWarning($error, $stackPtr, 'CanSimplify');
         }
     }
-
-
 }

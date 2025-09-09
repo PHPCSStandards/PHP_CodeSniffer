@@ -93,6 +93,4 @@ final class CreatePositionMapYieldFromTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

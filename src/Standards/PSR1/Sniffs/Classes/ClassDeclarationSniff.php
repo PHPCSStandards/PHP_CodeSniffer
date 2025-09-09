@@ -68,6 +68,4 @@ class ClassDeclarationSniff implements Sniff
             $phpcsFile->recordMetric($stackPtr, 'Class defined in namespace', 'yes');
         }
     }
-
-
 }

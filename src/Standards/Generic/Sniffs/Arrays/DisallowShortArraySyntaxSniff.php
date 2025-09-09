@@ -54,6 +54,4 @@ class DisallowShortArraySyntaxSniff implements Sniff
             $phpcsFile->fixer->endChangeset();
         }
     }
-
-
 }

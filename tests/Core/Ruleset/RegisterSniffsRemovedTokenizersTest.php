@@ -98,6 +98,4 @@ final class RegisterSniffsRemovedTokenizersTest extends AbstractRulesetTestCase
             ],
         ];
     }
-
-
 }

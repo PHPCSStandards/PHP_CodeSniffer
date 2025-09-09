@@ -130,6 +130,4 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
 
         $this->assertStderrOutputSameString($expected);
     }
-
-
 }

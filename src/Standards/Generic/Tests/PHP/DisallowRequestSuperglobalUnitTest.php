@@ -49,6 +49,4 @@ final class DisallowRequestSuperglobalUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

@@ -76,6 +76,4 @@ abstract class AbstractRealConfigTestCase extends TestCase
         $property->setValue(null, $value);
         (PHP_VERSION_ID < 80100) && $property->setAccessible(false);
     }
-
-
 }

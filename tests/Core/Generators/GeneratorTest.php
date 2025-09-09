@@ -188,6 +188,4 @@ final class GeneratorTest extends TestCase
         $generator = new MockGenerator($ruleset);
         $generator->generate();
     }
-
-
 }

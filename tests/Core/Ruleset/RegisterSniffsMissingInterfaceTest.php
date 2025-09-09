@@ -58,6 +58,4 @@ final class RegisterSniffsMissingInterfaceTest extends AbstractRulesetTestCase
 
         new Ruleset($config);
     }
-
-
 }

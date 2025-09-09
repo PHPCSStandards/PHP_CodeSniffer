@@ -153,6 +153,4 @@ final class HeredocStringTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

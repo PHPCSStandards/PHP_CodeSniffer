@@ -227,6 +227,4 @@ class BooleanOperatorPlacementSniff implements Sniff
 
         $phpcsFile->fixer->endChangeset();
     }
-
-
 }

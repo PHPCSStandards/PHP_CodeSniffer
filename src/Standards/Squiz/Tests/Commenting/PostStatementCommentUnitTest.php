@@ -58,6 +58,4 @@ final class PostStatementCommentUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

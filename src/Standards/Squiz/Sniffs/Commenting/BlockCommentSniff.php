@@ -392,6 +392,4 @@ class BlockCommentSniff implements Sniff
             $phpcsFile->addError($error, $commentCloser, 'NoEmptyLineAfter');
         }
     }
-
-
 }

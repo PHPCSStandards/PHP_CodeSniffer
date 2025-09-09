@@ -66,6 +66,4 @@ final class ObjectOperatorSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

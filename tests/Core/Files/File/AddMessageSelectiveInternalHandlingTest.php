@@ -117,6 +117,4 @@ final class AddMessageSelectiveInternalHandlingTest extends TestCase
 
         return $phpcsFile;
     }
-
-
 }

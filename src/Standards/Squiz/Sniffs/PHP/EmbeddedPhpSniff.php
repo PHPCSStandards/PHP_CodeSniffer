@@ -502,6 +502,4 @@ class EmbeddedPhpSniff implements Sniff
 
         return $indent;
     }
-
-
 }

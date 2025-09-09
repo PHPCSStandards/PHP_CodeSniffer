@@ -49,6 +49,4 @@ final class SAPIUsageUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

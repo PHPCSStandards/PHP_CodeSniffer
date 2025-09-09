@@ -73,6 +73,4 @@ class FunctionCallSignatureSniff extends PEARFunctionCallSignatureSniff
 
         return false;
     }
-
-
 }

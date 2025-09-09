@@ -66,6 +66,4 @@ final class NullableTypeDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

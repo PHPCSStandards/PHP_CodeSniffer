@@ -226,6 +226,4 @@ final class DoubleArrowTest extends AbstractTokenizerTestCase
             'in_complex_match_value_in_short_array' => ['/* testFnArrowInComplexMatchValueInShortArrayValue */'],
         ];
     }
-
-
 }

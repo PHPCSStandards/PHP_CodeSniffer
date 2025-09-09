@@ -396,6 +396,4 @@ class MultipleStatementAlignmentSniff implements Sniff
             return $assign;
         }
     }
-
-
 }

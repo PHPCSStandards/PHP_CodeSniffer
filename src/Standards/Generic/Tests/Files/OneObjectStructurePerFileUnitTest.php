@@ -52,6 +52,4 @@ final class OneObjectStructurePerFileUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

@@ -307,6 +307,4 @@ class SideEffectsSniff implements Sniff
             'effect' => $firstEffect,
         ];
     }
-
-
 }

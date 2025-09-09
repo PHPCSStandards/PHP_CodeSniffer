@@ -165,6 +165,4 @@ final class ProcessRulesetIniDirectivesTest extends TestCase
             ],
         ];
     }
-
-
 }

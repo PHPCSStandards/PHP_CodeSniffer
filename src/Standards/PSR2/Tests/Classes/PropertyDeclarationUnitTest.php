@@ -118,6 +118,4 @@ final class PropertyDeclarationUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
     }
-
-
 }

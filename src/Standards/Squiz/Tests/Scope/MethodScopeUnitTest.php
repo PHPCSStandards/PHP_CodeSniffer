@@ -59,6 +59,4 @@ final class MethodScopeUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

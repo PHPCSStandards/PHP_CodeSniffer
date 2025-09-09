@@ -70,6 +70,4 @@ final class ControlSignatureUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

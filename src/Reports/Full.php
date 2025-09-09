@@ -248,6 +248,4 @@ class Full implements Report
 
         echo $cachedData;
     }
-
-
 }

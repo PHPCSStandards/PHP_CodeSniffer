@@ -306,6 +306,4 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
     {
         // We don't care about normal variables.
     }
-
-
 }

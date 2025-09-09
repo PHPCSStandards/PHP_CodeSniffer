@@ -217,6 +217,4 @@ class OpeningFunctionBraceBsdAllmanSniff implements Sniff
 
         $phpcsFile->recordMetric($stackPtr, "$metricType opening brace placement", 'new line');
     }
-
-
 }

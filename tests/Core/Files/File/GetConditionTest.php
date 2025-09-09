@@ -475,6 +475,4 @@ final class GetConditionTest extends AbstractMethodTestCase
             'Failed asserting that "testSeriouslyNestedMethod" has an OO Scope token condition'
         );
     }
-
-
 }

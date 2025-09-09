@@ -65,6 +65,4 @@ final class IncludingFileUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

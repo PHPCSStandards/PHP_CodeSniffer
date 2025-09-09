@@ -162,6 +162,4 @@ class DisallowShortOpenTagSniff implements Sniff
 
         return $snippet;
     }
-
-
 }

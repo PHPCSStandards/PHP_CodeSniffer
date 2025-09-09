@@ -212,6 +212,4 @@ class ControlStructureSpacingSniff implements Sniff
             }
         }
     }
-
-
 }

@@ -64,6 +64,4 @@ final class ShouldProcessFileWithoutExtensionTest extends AbstractFilterTestCase
 
         $this->assertSame($expectedOutput, $this->getFilteredResultsAsArray($filter));
     }
-
-
 }

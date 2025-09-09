@@ -1898,6 +1898,4 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
         $next = $this->getTargetToken('/* testNotAVariable */', T_RETURN);
         self::$phpcsFile->getMemberProperties($next);
     }
-
-
 }

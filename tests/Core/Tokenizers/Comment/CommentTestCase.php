@@ -121,6 +121,4 @@ abstract class CommentTestCase extends AbstractTokenizerTestCase
             );
         }//end for
     }
-
-
 }

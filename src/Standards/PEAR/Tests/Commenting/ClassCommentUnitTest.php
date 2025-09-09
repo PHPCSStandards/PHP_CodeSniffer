@@ -92,6 +92,4 @@ final class ClassCommentUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
     }
-
-
 }

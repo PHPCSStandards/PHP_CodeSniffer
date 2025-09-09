@@ -146,6 +146,4 @@ abstract class Generator
      * @see    generate()
      */
     abstract protected function processSniff(DOMElement $doc);
-
-
 }

@@ -47,6 +47,4 @@ abstract class AbstractFileListTestCase extends TestCase
             self::$ruleset        = new Ruleset(self::$config);
         }
     }
-
-
 }

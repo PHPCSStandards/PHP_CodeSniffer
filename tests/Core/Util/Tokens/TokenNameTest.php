@@ -154,6 +154,4 @@ final class TokenNameTest extends TestCase
             ],
         ];
     }
-
-
 }

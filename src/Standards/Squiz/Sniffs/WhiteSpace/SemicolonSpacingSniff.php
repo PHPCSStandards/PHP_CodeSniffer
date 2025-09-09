@@ -99,6 +99,4 @@ class SemicolonSpacingSniff implements Sniff
             $phpcsFile->fixer->endChangeset();
         }
     }
-
-
 }

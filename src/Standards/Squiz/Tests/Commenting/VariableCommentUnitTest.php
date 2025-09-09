@@ -87,6 +87,4 @@ final class VariableCommentUnitTest extends AbstractSniffTestCase
             496 => 1,
         ];
     }
-
-
 }

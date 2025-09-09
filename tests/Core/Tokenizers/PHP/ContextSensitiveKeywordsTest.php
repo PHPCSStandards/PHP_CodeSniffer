@@ -563,6 +563,4 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

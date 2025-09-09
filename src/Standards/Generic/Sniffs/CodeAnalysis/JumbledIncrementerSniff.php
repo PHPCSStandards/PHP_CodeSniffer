@@ -126,6 +126,4 @@ class JumbledIncrementerSniff implements Sniff
 
         return $incrementers;
     }
-
-
 }

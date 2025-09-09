@@ -365,6 +365,4 @@ abstract class VersionControl implements Report
      * @return array
      */
     abstract protected function getBlameContent(string $filename);
-
-
 }

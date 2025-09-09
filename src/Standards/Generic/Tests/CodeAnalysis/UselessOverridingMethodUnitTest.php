@@ -65,6 +65,4 @@ final class UselessOverridingMethodUnitTest extends AbstractSniffTestCase
             return [];
         }
     }
-
-
 }

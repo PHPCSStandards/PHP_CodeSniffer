@@ -57,6 +57,4 @@ final class BooleanOperatorPlacementUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

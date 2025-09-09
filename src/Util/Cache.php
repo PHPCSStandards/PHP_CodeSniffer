@@ -347,6 +347,4 @@ class Cache
     {
         return (count(self::$cache) - 1);
     }
-
-
 }

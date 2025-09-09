@@ -90,6 +90,4 @@ class EmptyStatementSniff implements Sniff
         $error = 'Empty %s statement detected';
         $phpcsFile->addError($error, $stackPtr, 'Detected' . ucfirst(strtolower($name)), [$name]);
     }
-
-
 }

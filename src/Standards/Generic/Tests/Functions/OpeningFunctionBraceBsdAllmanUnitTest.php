@@ -84,6 +84,4 @@ final class OpeningFunctionBraceBsdAllmanUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

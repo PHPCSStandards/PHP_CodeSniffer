@@ -56,6 +56,4 @@ final class TraitNameSuffixUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

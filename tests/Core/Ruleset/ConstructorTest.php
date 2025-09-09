@@ -280,6 +280,4 @@ final class ConstructorTest extends AbstractRulesetTestCase
 
         new Ruleset($config);
     }
-
-
 }

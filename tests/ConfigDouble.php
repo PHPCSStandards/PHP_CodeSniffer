@@ -207,6 +207,4 @@ final class ConfigDouble extends Config
 
         (PHP_VERSION_ID < 80100) && $property->setAccessible(false);
     }
-
-
 }

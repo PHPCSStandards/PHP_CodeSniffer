@@ -226,6 +226,4 @@ class Text extends Generator
 
         return $rows;
     }
-
-
 }

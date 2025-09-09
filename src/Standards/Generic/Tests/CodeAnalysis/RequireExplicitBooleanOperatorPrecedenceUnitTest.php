@@ -84,6 +84,4 @@ final class RequireExplicitBooleanOperatorPrecedenceUnitTest extends AbstractSni
     {
         return [];
     }
-
-
 }

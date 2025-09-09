@@ -50,6 +50,4 @@ final class GotoTargetSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

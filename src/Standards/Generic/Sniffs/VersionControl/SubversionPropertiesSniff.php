@@ -187,6 +187,4 @@ class SubversionPropertiesSniff implements Sniff
 
         return $properties;
     }
-
-
 }

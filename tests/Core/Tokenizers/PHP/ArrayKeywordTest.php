@@ -189,6 +189,4 @@ final class ArrayKeywordTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

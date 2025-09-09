@@ -96,6 +96,4 @@ final class SpaceAfterCastUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

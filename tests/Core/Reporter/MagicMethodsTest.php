@@ -139,6 +139,4 @@ final class MagicMethodsTest extends TestCase
         $reporter = new Reporter(new ConfigDouble());
         unset($reporter->totalFixed);
     }
-
-
 }

@@ -133,6 +133,4 @@ final class FunctionDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

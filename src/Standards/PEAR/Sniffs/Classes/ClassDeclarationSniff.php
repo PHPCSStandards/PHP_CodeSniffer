@@ -142,6 +142,4 @@ class ClassDeclarationSniff implements Sniff
             }
         }//end if
     }
-
-
 }

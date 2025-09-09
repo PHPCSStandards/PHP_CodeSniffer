@@ -422,6 +422,4 @@ class FileHeaderSniff implements Sniff
             }//end if
         }//end foreach
     }
-
-
 }

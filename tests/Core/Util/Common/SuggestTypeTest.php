@@ -212,6 +212,4 @@ final class SuggestTypeTest extends TestCase
             ],
         ];
     }
-
-
 }

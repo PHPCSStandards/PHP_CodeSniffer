@@ -48,6 +48,4 @@ class EmptyCatchCommentSniff implements Sniff
             $phpcsFile->addError($error, $scopeStart, 'Missing');
         }
     }
-
-
 }

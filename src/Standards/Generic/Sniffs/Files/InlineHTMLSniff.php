@@ -81,6 +81,4 @@ class InlineHTMLSniff implements Sniff
 
         return $phpcsFile->numTokens;
     }
-
-
 }

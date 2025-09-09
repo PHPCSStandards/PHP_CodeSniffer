@@ -132,6 +132,4 @@ final class GitMergeConflictUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

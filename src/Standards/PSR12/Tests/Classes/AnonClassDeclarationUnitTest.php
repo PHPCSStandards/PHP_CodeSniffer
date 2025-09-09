@@ -73,6 +73,4 @@ final class AnonClassDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

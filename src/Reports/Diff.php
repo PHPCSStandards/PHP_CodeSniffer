@@ -115,6 +115,4 @@ class Diff implements Report
             echo PHP_EOL;
         }
     }
-
-
 }

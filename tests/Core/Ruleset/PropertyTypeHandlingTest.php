@@ -359,6 +359,4 @@ final class PropertyTypeHandlingTest extends TestCase
 
         return $sniffObject;
     }
-
-
 }

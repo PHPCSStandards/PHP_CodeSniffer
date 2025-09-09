@@ -44,6 +44,4 @@ class ElseIfDeclarationSniff implements Sniff
             $phpcsFile->fixer->replaceToken($stackPtr, 'else if');
         }
     }
-
-
 }

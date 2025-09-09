@@ -100,6 +100,4 @@ final class AcceptTest extends AbstractFilterTestCase
         // Allow these tests to work on Windows as well.
         return self::mapPathsToRuntimeOs($testCases);
     }
-
-
 }

@@ -1498,6 +1498,4 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
 
         $this->assertSame($expected, $found);
     }
-
-
 }

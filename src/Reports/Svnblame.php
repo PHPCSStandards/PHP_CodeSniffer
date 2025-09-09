@@ -67,6 +67,4 @@ class Svnblame extends VersionControl
 
         return $blames;
     }
-
-
 }

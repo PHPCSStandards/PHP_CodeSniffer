@@ -3268,6 +3268,4 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
 
         $this->assertSame($expected, $found);
     }
-
-
 }

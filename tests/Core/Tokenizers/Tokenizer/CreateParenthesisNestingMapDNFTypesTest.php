@@ -365,6 +365,4 @@ final class CreateParenthesisNestingMapDNFTypesTest extends AbstractTokenizerTes
             ],
         ];
     }
-
-
 }

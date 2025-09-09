@@ -144,6 +144,4 @@ final class ProcessRulesetConfigDirectivesTest extends TestCase
             ],
         ];
     }
-
-
 }

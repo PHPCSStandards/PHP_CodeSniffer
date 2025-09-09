@@ -155,6 +155,4 @@ final class GetHighestWeightedTokenTest extends TestCase
 
         return $data;
     }
-
-
 }

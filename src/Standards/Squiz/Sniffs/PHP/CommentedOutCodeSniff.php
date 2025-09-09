@@ -272,6 +272,4 @@ class CommentedOutCodeSniff implements Sniff
 
         return ($lastCommentBlockToken + 1);
     }
-
-
 }

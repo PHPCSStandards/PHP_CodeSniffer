@@ -350,6 +350,4 @@ class LowerCaseTypeSniff implements Sniff
             $phpcsFile->fixer->replaceToken($stackPtr, $typeLower);
         }
     }
-
-
 }

@@ -60,6 +60,4 @@ final class StaticThisUsageUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

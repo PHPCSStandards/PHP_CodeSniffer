@@ -84,6 +84,4 @@ class GitModified extends ExactMatch
 
         return $output;
     }
-
-
 }

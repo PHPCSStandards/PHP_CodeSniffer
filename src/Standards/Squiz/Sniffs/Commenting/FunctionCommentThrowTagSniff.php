@@ -226,6 +226,4 @@ class FunctionCommentThrowTagSniff implements Sniff
             $phpcsFile->addError($error, $commentEnd, 'Missing', $data);
         }
     }
-
-
 }

@@ -625,6 +625,4 @@ final class Help
 
         return $options;
     }
-
-
 }

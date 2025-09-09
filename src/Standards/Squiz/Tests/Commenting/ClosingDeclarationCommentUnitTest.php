@@ -79,6 +79,4 @@ final class ClosingDeclarationCommentUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

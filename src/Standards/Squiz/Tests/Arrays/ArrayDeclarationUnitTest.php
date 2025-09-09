@@ -255,6 +255,4 @@ final class ArrayDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

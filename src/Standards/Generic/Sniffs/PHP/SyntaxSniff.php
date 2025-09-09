@@ -96,6 +96,4 @@ class SyntaxSniff implements Sniff
             $fileName
         );
     }
-
-
 }

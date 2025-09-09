@@ -123,6 +123,4 @@ abstract class AbstractTokenizerTestCase extends TestCase
         $property->setValue(null, []);
         (PHP_VERSION_ID < 80100) && $property->setAccessible(false);
     }
-
-
 }

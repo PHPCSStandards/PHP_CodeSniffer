@@ -104,6 +104,4 @@ class ClassInstantiationSniff implements Sniff
             $phpcsFile->fixer->addContent($prev, '()');
         }
     }
-
-
 }

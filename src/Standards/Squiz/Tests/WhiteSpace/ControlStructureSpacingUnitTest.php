@@ -77,6 +77,4 @@ final class ControlStructureSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

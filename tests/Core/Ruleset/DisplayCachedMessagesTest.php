@@ -304,6 +304,4 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         $reflMethod->invoke($ruleset);
         (PHP_VERSION_ID < 80100) && $reflMethod->setAccessible(false);
     }
-
-
 }

@@ -96,6 +96,4 @@ final class IgnoresNothingAndEverythingTest extends TestCase
             ],
         ];
     }
-
-
 }

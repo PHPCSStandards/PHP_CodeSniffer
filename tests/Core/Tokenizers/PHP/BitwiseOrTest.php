@@ -164,6 +164,4 @@ final class BitwiseOrTest extends AbstractTokenizerTestCase
             'return type for closure with FQN null'                    => ['/* testTypeUnionFQNNull */'],
         ];
     }
-
-
 }

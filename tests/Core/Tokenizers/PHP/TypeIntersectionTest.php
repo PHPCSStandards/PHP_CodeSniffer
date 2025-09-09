@@ -159,6 +159,4 @@ final class TypeIntersectionTest extends AbstractTokenizerTestCase
             'return type for closure, includes (invalid) FQN null'        => ['/* testTypeIntersectionInvalidFQNNull */'],
         ];
     }
-
-
 }

@@ -365,6 +365,4 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
 
         $this->assertSame($expected, self::$ruleset->ruleset);
     }
-
-
 }

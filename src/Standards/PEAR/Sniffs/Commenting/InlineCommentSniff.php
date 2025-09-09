@@ -61,6 +61,4 @@ class InlineCommentSniff implements Sniff
             $phpcsFile->recordMetric($stackPtr, 'Inline comment style', '/* ... */');
         }
     }
-
-
 }

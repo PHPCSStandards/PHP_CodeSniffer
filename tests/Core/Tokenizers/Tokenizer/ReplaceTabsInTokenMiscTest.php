@@ -115,6 +115,4 @@ EOD;
         $this->assertSame(11, $tokens[$target]['length'], 'Length is not as expected');
         $this->assertArrayHasKey('orig_content', $tokens[$target], "Key 'orig_content' not found in the token array.");
     }
-
-
 }

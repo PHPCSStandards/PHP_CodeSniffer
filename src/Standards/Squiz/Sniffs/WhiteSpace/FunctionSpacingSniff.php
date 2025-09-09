@@ -369,6 +369,4 @@ class FunctionSpacingSniff implements Sniff
             }//end if
         }//end if
     }
-
-
 }

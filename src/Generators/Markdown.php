@@ -265,6 +265,4 @@ class Markdown extends Generator
 
         return $code;
     }
-
-
 }

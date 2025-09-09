@@ -55,6 +55,4 @@ final class InterfaceNameSuffixUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

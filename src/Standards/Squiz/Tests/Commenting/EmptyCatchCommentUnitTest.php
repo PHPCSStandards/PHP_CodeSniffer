@@ -53,6 +53,4 @@ final class EmptyCatchCommentUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

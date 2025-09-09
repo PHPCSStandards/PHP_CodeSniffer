@@ -387,6 +387,4 @@ final class IsReferenceTest extends AbstractMethodTestCase
             ],
         ];
     }
-
-
 }

@@ -84,6 +84,4 @@ final class SwitchDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

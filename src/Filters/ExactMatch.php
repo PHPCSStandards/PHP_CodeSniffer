@@ -105,6 +105,4 @@ abstract class ExactMatch extends Filter
      * @return array
      */
     abstract protected function getAllowedFiles();
-
-
 }

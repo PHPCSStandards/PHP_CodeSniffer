@@ -431,6 +431,4 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
             ],
         ];
     }
-
-
 }

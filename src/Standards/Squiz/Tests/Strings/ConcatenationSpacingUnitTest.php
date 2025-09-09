@@ -64,6 +64,4 @@ final class ConcatenationSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

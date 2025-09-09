@@ -38,6 +38,4 @@ final class BackfillFnTokenParseErrorTest extends AbstractTokenizerTestCase
         $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is set');
         $this->assertArrayNotHasKey('parenthesis_closer', $tokenArray, 'Parenthesis closer is set');
     }
-
-
 }

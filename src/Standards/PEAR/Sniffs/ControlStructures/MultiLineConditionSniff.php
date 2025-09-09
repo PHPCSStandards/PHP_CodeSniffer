@@ -266,6 +266,4 @@ class MultiLineConditionSniff implements Sniff
             }
         }
     }
-
-
 }

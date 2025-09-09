@@ -62,6 +62,4 @@ final class DNFTypesParseError1Test extends AbstractTokenizerTestCase
             'Return type'      => ['/* testBrokenReturnDNFTypeEndOnOpenParenthesis */'],
         ];
     }
-
-
 }

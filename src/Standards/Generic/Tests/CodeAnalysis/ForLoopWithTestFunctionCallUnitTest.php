@@ -71,6 +71,4 @@ final class ForLoopWithTestFunctionCallUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
     }
-
-
 }

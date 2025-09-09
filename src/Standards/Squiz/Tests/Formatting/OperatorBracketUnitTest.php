@@ -97,6 +97,4 @@ final class OperatorBracketUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

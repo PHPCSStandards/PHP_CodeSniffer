@@ -195,6 +195,4 @@ class SelfMemberReferenceSniff extends AbstractScopeSniff
 
         return $namespace;
     }
-
-
 }

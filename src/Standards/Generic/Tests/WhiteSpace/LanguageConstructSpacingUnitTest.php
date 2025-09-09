@@ -95,6 +95,4 @@ final class LanguageConstructSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

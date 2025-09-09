@@ -298,6 +298,4 @@ class ForLoopDeclarationSniff implements Sniff
             }//end if
         } while ($semicolonCount < 2);
     }
-
-
 }

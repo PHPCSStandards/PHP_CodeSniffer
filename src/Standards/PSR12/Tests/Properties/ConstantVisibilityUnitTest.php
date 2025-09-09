@@ -63,6 +63,4 @@ final class ConstantVisibilityUnitTest extends AbstractSniffTestCase
             return [];
         }
     }
-
-
 }

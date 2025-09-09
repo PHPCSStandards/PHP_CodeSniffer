@@ -50,6 +50,4 @@ final class FunctionDuplicateArgumentUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

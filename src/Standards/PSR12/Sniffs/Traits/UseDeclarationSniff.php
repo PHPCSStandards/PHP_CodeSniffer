@@ -691,6 +691,4 @@ class UseDeclarationSniff implements Sniff
             }
         }
     }
-
-
 }

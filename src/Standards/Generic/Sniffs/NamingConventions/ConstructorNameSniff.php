@@ -179,6 +179,4 @@ class ConstructorNameSniff extends AbstractScopeSniff
             }
         }
     }
-
-
 }

@@ -114,6 +114,4 @@ class CyclomaticComplexitySniff implements Sniff
             $phpcsFile->addWarning($warning, $stackPtr, 'TooHigh', $data);
         }
     }
-
-
 }

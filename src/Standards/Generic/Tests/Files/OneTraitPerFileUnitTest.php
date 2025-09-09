@@ -49,6 +49,4 @@ final class OneTraitPerFileUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

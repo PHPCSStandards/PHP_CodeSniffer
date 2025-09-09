@@ -1576,6 +1576,4 @@ abstract class Tokenizer
             StatusWriter::write('*** END LEVEL MAP ***', 1);
         }
     }
-
-
 }

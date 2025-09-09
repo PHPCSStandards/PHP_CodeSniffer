@@ -153,6 +153,4 @@ class LowercasePHPFunctionsSniff implements Sniff
             $phpcsFile->fixer->replaceToken($stackPtr, strtolower($tokens[$stackPtr]['content']));
         }
     }
-
-
 }

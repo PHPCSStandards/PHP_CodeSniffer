@@ -144,6 +144,4 @@ final class GeneratorArgTest extends TestCase
             [''],
         ];
     }
-
-
 }

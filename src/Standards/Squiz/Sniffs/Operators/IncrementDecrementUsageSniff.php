@@ -222,6 +222,4 @@ class IncrementDecrementUsageSniff implements Sniff
             $phpcsFile->addError($error, $stackPtr, 'Found');
         }//end if
     }
-
-
 }

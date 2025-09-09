@@ -66,6 +66,4 @@ final class IncrementDecrementUsageUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

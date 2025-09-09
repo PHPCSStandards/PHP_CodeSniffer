@@ -51,6 +51,4 @@ final class DiscourageGotoUnitTest extends AbstractSniffTestCase
             16 => 1,
         ];
     }
-
-
 }

@@ -48,6 +48,4 @@ final class BacktickOperatorUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

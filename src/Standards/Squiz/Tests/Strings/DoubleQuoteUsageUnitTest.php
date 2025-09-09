@@ -60,6 +60,4 @@ final class DoubleQuoteUsageUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

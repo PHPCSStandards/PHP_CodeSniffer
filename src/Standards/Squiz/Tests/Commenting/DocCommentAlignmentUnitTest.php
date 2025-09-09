@@ -83,6 +83,4 @@ final class DocCommentAlignmentUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

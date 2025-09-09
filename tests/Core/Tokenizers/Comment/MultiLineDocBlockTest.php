@@ -426,6 +426,4 @@ final class MultiLineDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
     }
-
-
 }

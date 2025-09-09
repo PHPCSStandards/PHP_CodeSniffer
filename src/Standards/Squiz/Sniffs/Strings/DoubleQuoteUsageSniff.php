@@ -142,6 +142,4 @@ class DoubleQuoteUsageSniff implements Sniff
 
         return $skipTo;
     }
-
-
 }

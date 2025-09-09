@@ -42,6 +42,4 @@ class ControlSignatureSniff extends AbstractPatternSniff
             'match (...) {EOL',
         ];
     }
-
-
 }

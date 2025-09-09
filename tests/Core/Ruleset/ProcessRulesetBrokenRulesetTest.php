@@ -88,6 +88,4 @@ final class ProcessRulesetBrokenRulesetTest extends AbstractRulesetTestCase
 
         new Ruleset($config);
     }
-
-
 }

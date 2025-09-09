@@ -98,6 +98,4 @@ final class CamelCapsFunctionNameUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

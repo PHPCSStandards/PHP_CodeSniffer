@@ -103,6 +103,4 @@ class ReturnTypeDeclarationSniff implements Sniff
             }
         }
     }
-
-
 }

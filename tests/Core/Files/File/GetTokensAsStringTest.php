@@ -320,6 +320,4 @@ final class GetTokensAsStringTest extends AbstractMethodTestCase
             ],
         ];
     }
-
-
 }

@@ -275,6 +275,4 @@ final class RegisterSniffsTest extends TestCase
         $this->assertSame(array_keys(self::$originalSniffs), array_keys(self::$ruleset->sniffs));
         $this->assertSame(array_keys(self::$originalSniffs), array_values(self::$ruleset->sniffs));
     }
-
-
 }

@@ -121,6 +121,4 @@ class Xml implements Report
         echo $cachedData;
         echo '</phpcs>' . PHP_EOL;
     }
-
-
 }

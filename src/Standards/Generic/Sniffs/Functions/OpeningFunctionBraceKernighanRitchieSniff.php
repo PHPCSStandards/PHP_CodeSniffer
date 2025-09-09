@@ -170,6 +170,4 @@ class OpeningFunctionBraceKernighanRitchieSniff implements Sniff
             }
         }
     }
-
-
 }

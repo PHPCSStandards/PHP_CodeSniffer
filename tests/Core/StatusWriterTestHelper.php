@@ -153,6 +153,4 @@ trait StatusWriterTestHelper
             $this->assertRegExp($regex, $output);
         }
     }
-
-
 }

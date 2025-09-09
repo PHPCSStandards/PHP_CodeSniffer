@@ -104,6 +104,4 @@ final class RuleInclusionAbsoluteWindowsTest extends TestCase
             $this->ruleset->sniffs['PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterCastSniff']->spacing
         );
     }
-
-
 }

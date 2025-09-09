@@ -67,6 +67,4 @@ final class UnnecessaryHeredocUnitTest extends AbstractSniffTestCase
             return [];
         }
     }
-
-
 }

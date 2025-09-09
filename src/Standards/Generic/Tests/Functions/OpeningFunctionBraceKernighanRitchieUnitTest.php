@@ -109,6 +109,4 @@ final class OpeningFunctionBraceKernighanRitchieUnitTest extends AbstractSniffTe
     {
         return [];
     }
-
-
 }

@@ -50,6 +50,4 @@ final class CompoundNamespaceDepthUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

@@ -231,6 +231,4 @@ class Notifysend implements Report
 
         return $cmd;
     }
-
-
 }

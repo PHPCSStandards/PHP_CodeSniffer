@@ -114,6 +114,4 @@ class ClassCommentSniff extends FileCommentSniff
             }
         }
     }
-
-
 }

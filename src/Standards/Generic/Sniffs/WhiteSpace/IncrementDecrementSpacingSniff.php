@@ -154,6 +154,4 @@ class IncrementDecrementSpacingSniff implements Sniff
             }
         }//end if
     }
-
-
 }

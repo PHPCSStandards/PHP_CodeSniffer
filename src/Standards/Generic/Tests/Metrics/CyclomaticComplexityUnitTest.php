@@ -70,6 +70,4 @@ final class CyclomaticComplexityUnitTest extends AbstractSniffTestCase
             return [];
         }
     }
-
-
 }

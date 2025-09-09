@@ -61,6 +61,4 @@ final class EmptyStatementUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

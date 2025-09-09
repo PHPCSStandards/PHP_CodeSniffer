@@ -102,6 +102,4 @@ class ClassCommentSniff implements Sniff
             $phpcsFile->addWarning($error, $tag, 'TagNotAllowed', $data);
         }
     }
-
-
 }

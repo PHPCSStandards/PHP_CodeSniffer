@@ -485,6 +485,4 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
         $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');
         $this->assertArrayNotHasKey('scope_closer', $tokenArray, 'Scope closer is set');
     }
-
-
 }

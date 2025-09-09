@@ -309,6 +309,4 @@ class InlineCommentSniff implements Sniff
 
         return ($lastCommentToken + 1);
     }
-
-
 }

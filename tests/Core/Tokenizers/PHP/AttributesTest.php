@@ -679,6 +679,4 @@ final class AttributesTest extends AbstractTokenizerTestCase
 
         $this->assertSame($tokenCodes, $map);
     }
-
-
 }

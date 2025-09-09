@@ -404,6 +404,4 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

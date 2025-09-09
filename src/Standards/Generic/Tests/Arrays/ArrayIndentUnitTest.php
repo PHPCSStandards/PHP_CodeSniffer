@@ -74,6 +74,4 @@ final class ArrayIndentUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

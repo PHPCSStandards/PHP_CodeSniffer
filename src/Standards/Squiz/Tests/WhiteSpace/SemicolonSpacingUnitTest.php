@@ -59,6 +59,4 @@ final class SemicolonSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

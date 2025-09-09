@@ -66,6 +66,4 @@ final class ConstructorNameUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

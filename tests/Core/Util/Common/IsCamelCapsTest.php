@@ -489,6 +489,4 @@ final class IsCamelCapsTest extends TestCase
             ],
         ];
     }
-
-
 }

@@ -214,6 +214,4 @@ final class GenerateDiffTest extends TestCase
 
         $this->assertSame($expected, $diff);
     }
-
-
 }

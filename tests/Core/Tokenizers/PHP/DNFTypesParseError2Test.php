@@ -207,6 +207,4 @@ final class DNFTypesParseError2Test extends AbstractTokenizerTestCase
             'Return type - missing one open parenthesis'      => ['/* testBrokenReturnDNFTypeParensMissingOneOpen */'],
         ];
     }
-
-
 }

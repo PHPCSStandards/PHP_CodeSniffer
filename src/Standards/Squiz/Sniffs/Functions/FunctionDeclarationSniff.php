@@ -28,6 +28,4 @@ class FunctionDeclarationSniff extends AbstractPatternSniff
             'abstract function abc(...);',
         ];
     }
-
-
 }

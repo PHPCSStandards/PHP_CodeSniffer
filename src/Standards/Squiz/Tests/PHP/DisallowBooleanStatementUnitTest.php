@@ -51,6 +51,4 @@ final class DisallowBooleanStatementUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

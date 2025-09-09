@@ -126,6 +126,4 @@ class SpaceAfterNotSniff implements Sniff
             }
         }
     }
-
-
 }

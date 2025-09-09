@@ -59,6 +59,4 @@ final class CommentedOutCodeUnitTest extends AbstractSniffTestCase
             158 => 1,
         ];
     }
-
-
 }

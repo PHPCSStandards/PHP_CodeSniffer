@@ -757,6 +757,4 @@ final class HelpTest extends TestCase
         $reflProperty->setValue($help, $value);
         (PHP_VERSION_ID < 80100) && $reflProperty->setAccessible(false);
     }
-
-
 }

@@ -158,6 +158,4 @@ class ObjectOperatorSpacingSniff implements Sniff
 
         return true;
     }
-
-
 }

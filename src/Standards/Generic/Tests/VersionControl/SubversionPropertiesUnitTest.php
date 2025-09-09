@@ -58,6 +58,4 @@ final class SubversionPropertiesUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

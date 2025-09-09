@@ -134,6 +134,4 @@ final class NullsafeObjectOperatorTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

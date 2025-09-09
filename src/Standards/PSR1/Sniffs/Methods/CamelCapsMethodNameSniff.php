@@ -84,6 +84,4 @@ class CamelCapsMethodNameSniff extends GenericCamelCapsFunctionNameSniff
     protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr)
     {
     }
-
-
 }

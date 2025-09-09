@@ -616,6 +616,4 @@ class FunctionCallSignatureSniff implements Sniff
             }//end if
         }//end for
     }
-
-
 }

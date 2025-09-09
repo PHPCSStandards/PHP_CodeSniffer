@@ -111,6 +111,4 @@ class DuplicateClassNameSniff implements Sniff
 
         return $phpcsFile->numTokens;
     }
-
-
 }

@@ -177,6 +177,4 @@ class UselessOverridingMethodSniff implements Sniff
             $phpcsFile->addWarning('Possible useless method overriding detected', $stackPtr, 'Found');
         }
     }
-
-
 }

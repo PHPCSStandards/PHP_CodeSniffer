@@ -525,6 +525,4 @@ class FunctionDeclarationSniff implements Sniff
             }
         }//end for
     }
-
-
 }

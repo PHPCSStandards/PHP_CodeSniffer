@@ -49,6 +49,4 @@ final class EvalUnitTest extends AbstractSniffTestCase
             4 => 1,
         ];
     }
-
-
 }

@@ -75,6 +75,4 @@ class MethodScopeSniff extends AbstractScopeSniff
     protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr)
     {
     }
-
-
 }

@@ -71,6 +71,4 @@ final class IncrementDecrementSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

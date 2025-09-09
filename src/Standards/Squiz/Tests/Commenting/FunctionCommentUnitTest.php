@@ -198,6 +198,4 @@ final class FunctionCommentUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

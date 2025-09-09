@@ -54,6 +54,4 @@ class GlobalFunctionSniff implements Sniff
             }
         }
     }
-
-
 }

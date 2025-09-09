@@ -110,6 +110,4 @@ class PostStatementCommentSniff implements Sniff
             $phpcsFile->fixer->addNewlineBefore($stackPtr);
         }
     }
-
-
 }

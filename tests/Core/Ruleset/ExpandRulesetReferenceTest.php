@@ -126,6 +126,4 @@ final class ExpandRulesetReferenceTest extends AbstractRulesetTestCase
 
         return $data;
     }
-
-
 }

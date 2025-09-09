@@ -51,6 +51,4 @@ final class NamespaceDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

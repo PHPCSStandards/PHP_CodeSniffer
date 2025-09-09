@@ -1767,6 +1767,4 @@ class Config
     {
         echo $this->prepareConfigDataForDisplay($data);
     }
-
-
 }

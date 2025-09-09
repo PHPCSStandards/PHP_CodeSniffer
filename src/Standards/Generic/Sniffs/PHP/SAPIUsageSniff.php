@@ -65,6 +65,4 @@ class SAPIUsageSniff implements Sniff
         $error = 'Use the PHP_SAPI constant instead of calling php_sapi_name()';
         $phpcsFile->addError($error, $stackPtr, 'FunctionFound');
     }
-
-
 }

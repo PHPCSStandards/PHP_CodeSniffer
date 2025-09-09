@@ -155,6 +155,4 @@ final class GetSniffCodeTest extends TestCase
             ],
         ];
     }
-
-
 }

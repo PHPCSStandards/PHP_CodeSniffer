@@ -85,6 +85,4 @@ class LogicalOperatorSpacingSniff implements Sniff
             }
         }
     }
-
-
 }

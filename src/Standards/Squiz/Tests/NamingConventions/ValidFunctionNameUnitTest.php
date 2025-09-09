@@ -65,6 +65,4 @@ final class ValidFunctionNameUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

@@ -270,6 +270,4 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

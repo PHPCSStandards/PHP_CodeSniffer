@@ -638,6 +638,4 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         $actual = self::$ruleset->ruleset[$sniffCode][$key];
         $this->assertSame($expected, $actual, "Value for $key on sniff $sniffCode does not meet expectations");
     }
-
-
 }

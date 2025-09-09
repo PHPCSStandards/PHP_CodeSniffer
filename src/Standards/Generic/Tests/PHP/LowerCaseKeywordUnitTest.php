@@ -76,6 +76,4 @@ final class LowerCaseKeywordUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

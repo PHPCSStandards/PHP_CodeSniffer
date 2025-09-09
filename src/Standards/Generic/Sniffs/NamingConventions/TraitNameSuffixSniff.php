@@ -48,6 +48,4 @@ class TraitNameSuffixSniff implements Sniff
             $phpcsFile->addError('Trait names must be suffixed with "Trait"; found "%s"', $stackPtr, 'Missing', [$traitName]);
         }
     }
-
-
 }

@@ -62,6 +62,4 @@ class LowercaseFunctionKeywordsSniff implements Sniff
             }
         }
     }
-
-
 }

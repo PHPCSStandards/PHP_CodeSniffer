@@ -317,6 +317,4 @@ class InlineControlStructureSniff implements Sniff
 
         $phpcsFile->fixer->endChangeset();
     }
-
-
 }

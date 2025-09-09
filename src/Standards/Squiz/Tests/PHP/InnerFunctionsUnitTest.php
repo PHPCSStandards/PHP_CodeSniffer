@@ -51,6 +51,4 @@ final class InnerFunctionsUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

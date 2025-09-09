@@ -115,6 +115,4 @@ final class ValidVariableNameUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
     }
-
-
 }

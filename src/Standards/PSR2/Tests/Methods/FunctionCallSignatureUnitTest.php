@@ -97,6 +97,4 @@ final class FunctionCallSignatureUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

@@ -179,6 +179,4 @@ class BuildRequirementsCheckMatrix
 
         return $builds;
     }
-
-
 }

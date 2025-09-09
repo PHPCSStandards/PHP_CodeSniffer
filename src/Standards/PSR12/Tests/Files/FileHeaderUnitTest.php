@@ -80,6 +80,4 @@ final class FileHeaderUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

@@ -212,6 +212,4 @@ class LocalFile extends File
 
         $this->replayingErrors = false;
     }
-
-
 }

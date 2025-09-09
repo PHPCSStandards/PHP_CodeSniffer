@@ -393,6 +393,4 @@ final class BackfillNumericSeparatorTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

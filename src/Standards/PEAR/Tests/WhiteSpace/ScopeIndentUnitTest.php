@@ -79,6 +79,4 @@ final class ScopeIndentUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

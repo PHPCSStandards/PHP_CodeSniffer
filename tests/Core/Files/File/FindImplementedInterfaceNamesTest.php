@@ -160,6 +160,4 @@ final class FindImplementedInterfaceNamesTest extends AbstractMethodTestCase
             ],
         ];
     }
-
-
 }

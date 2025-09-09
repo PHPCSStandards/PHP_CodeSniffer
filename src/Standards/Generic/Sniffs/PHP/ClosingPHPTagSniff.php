@@ -47,6 +47,4 @@ class ClosingPHPTagSniff implements Sniff
             $phpcsFile->addError($error, $stackPtr, 'NotFound');
         }
     }
-
-
 }

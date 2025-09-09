@@ -139,6 +139,4 @@ final class TimingTest extends TestCase
         $regex = '`^(Time: [0-9]+ms; Memory: [0-9\.]+MB' . PHP_EOL . '){3}$`';
         $this->assertStderrOutputMatchesRegex($regex);
     }
-
-
 }

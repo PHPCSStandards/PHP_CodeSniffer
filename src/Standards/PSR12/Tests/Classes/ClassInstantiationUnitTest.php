@@ -67,6 +67,4 @@ final class ClassInstantiationUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

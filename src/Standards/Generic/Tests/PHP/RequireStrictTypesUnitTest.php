@@ -65,6 +65,4 @@ final class RequireStrictTypesUnitTest extends AbstractSniffTestCase
             return [];
         }
     }
-
-
 }

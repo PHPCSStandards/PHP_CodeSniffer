@@ -50,6 +50,4 @@ final class NoSilencedErrorsUnitTest extends AbstractSniffTestCase
             16 => 1,
         ];
     }
-
-
 }

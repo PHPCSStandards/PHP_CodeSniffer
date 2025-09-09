@@ -373,6 +373,4 @@ final class StatusWriterTest extends AbstractWriterTestCase
 
         $this->assertStderrOutputSameString($expected);
     }
-
-
 }

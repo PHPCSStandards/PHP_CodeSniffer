@@ -74,6 +74,4 @@ final class FileCommentUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

@@ -77,6 +77,4 @@ class OpenTagSniff implements Sniff
 
         return $phpcsFile->numTokens;
     }
-
-
 }

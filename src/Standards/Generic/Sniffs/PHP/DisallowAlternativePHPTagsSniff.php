@@ -102,6 +102,4 @@ class DisallowAlternativePHPTagsSniff implements Sniff
 
         return $snippet;
     }
-
-
 }

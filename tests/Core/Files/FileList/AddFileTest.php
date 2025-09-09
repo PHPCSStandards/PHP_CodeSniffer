@@ -125,6 +125,4 @@ final class AddFileTest extends AbstractFileListTestCase
         $this->assertCount(2, $this->fileList);
         $this->assertSame($expectedFiles, array_keys(iterator_to_array($this->fileList)));
     }
-
-
 }

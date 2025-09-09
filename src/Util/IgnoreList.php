@@ -193,6 +193,4 @@ final class IgnoreList
 
         return true;
     }
-
-
 }

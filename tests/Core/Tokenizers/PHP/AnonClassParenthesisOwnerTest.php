@@ -148,6 +148,4 @@ final class AnonClassParenthesisOwnerTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

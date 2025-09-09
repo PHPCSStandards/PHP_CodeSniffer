@@ -102,6 +102,4 @@ final class BlockCommentUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

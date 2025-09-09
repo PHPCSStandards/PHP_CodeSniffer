@@ -52,6 +52,4 @@ final class CastSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

@@ -49,6 +49,4 @@ final class OneInterfacePerFileUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

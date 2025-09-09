@@ -138,6 +138,4 @@ final class CheckAndSetTest extends TestCase
             ],
         ];
     }
-
-
 }

@@ -164,6 +164,4 @@ abstract class AbstractArraySniff implements Sniff
      * @return void
      */
     abstract protected function processMultiLineArray(File $phpcsFile, int $stackPtr, int $arrayStart, int $arrayEnd, array $indices);
-
-
 }

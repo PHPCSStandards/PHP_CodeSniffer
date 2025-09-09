@@ -272,6 +272,4 @@ final class BackfillReadonlyTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

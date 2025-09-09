@@ -160,6 +160,4 @@ final class ExtensionsArgTest extends TestCase
             ],
         ];
     }
-
-
 }

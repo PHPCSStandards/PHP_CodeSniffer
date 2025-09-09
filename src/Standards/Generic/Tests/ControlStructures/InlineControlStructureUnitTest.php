@@ -102,6 +102,4 @@ final class InlineControlStructureUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

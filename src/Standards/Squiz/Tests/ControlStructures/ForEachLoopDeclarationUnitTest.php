@@ -54,6 +54,4 @@ final class ForEachLoopDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

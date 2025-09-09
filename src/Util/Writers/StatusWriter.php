@@ -162,6 +162,4 @@ final class StatusWriter
     {
         return self::$paused;
     }
-
-
 }

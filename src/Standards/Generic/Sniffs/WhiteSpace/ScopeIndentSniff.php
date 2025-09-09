@@ -1393,6 +1393,4 @@ class ScopeIndentSniff implements Sniff
 
         return true;
     }
-
-
 }

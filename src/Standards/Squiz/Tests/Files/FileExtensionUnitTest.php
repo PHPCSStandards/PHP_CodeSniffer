@@ -53,6 +53,4 @@ final class FileExtensionUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

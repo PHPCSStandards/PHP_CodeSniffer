@@ -68,6 +68,4 @@ class ShortFormTypeKeywordsSniff implements Sniff
             $phpcsFile->fixer->replaceToken($stackPtr, $replacement);
         }
     }
-
-
 }

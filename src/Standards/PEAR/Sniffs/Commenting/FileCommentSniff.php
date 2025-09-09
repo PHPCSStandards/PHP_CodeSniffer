@@ -576,6 +576,4 @@ class FileCommentSniff implements Sniff
             }
         }
     }
-
-
 }

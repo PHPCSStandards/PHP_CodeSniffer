@@ -134,6 +134,4 @@ class ControlStructureSpacingSniff implements Sniff
             }
         }//end if
     }
-
-
 }

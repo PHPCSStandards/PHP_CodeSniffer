@@ -94,6 +94,4 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
             }
         }//end for
     }
-
-
 }

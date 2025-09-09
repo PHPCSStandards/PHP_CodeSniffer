@@ -518,6 +518,4 @@ class Reporter
         $report['messages'] = $errors;
         return $report;
     }
-
-
 }

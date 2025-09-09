@@ -362,6 +362,4 @@ class OperatorBracketSniff implements Sniff
             $phpcsFile->fixer->endChangeset();
         }
     }
-
-
 }

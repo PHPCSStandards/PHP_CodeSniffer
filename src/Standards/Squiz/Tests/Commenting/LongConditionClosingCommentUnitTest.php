@@ -76,6 +76,4 @@ final class LongConditionClosingCommentUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

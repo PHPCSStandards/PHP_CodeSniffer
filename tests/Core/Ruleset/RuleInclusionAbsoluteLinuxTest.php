@@ -107,6 +107,4 @@ final class RuleInclusionAbsoluteLinuxTest extends TestCase
             $this->ruleset->sniffs['PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff']->spacing
         );
     }
-
-
 }

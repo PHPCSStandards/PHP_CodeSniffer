@@ -80,6 +80,4 @@ final class ComparisonOperatorUsageUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

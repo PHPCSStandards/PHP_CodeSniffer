@@ -62,6 +62,4 @@ final class InlineHTMLUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

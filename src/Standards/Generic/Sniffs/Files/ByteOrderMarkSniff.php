@@ -84,6 +84,4 @@ class ByteOrderMarkSniff implements Sniff
 
         return $phpcsFile->numTokens;
     }
-
-
 }

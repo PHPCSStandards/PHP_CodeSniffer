@@ -121,6 +121,4 @@ final class FunctionDeclarationArgumentSpacingUnitTest extends AbstractSniffTest
     {
         return [];
     }
-
-
 }

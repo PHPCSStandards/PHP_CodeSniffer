@@ -967,6 +967,4 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $this->assertSame($expectedScopeOpener, $tokens[$closer]['scope_opener'], 'Closer scope opener is not the arrow token');
         $this->assertSame($expectedScopeCloser, $tokens[$closer]['scope_closer'], 'Closer scope closer is not the ' . $expectedCloserType . ' token');
     }
-
-
 }

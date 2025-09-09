@@ -597,6 +597,4 @@ class Common
         $newName = substr($newName, ($start + 1));
         return $newName;
     }
-
-
 }

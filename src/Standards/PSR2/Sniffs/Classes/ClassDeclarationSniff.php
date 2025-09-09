@@ -515,6 +515,4 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
             }
         }
     }
-
-
 }

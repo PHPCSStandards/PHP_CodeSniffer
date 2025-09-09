@@ -84,6 +84,4 @@ class Emacs implements Report
     ) {
         echo $cachedData;
     }
-
-
 }

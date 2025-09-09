@@ -206,6 +206,4 @@ class VariableCommentSniff extends AbstractVariableSniff
     protected function processVariableInString(File $phpcsFile, int $stackPtr)
     {
     }
-
-
 }

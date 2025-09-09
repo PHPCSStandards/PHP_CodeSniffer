@@ -947,6 +947,4 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
             ],
         ];
     }
-
-
 }

@@ -68,6 +68,4 @@ class ClassFileNameSniff implements Sniff
             $phpcsFile->addError($error, $stackPtr, 'NoMatch', $data);
         }
     }
-
-
 }

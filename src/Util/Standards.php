@@ -345,6 +345,4 @@ class Standards
     {
         echo self::prepareInstalledStandardsForDisplay(), PHP_EOL;
     }
-
-
 }

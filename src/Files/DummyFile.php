@@ -85,6 +85,4 @@ class DummyFile extends File
         $this->fixedErrorCount     = $fixedErrorCount;
         $this->fixedWarningCount   = $fixedWarningCount;
     }
-
-
 }

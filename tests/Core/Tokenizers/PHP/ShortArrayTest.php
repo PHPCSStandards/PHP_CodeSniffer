@@ -140,6 +140,4 @@ final class ShortArrayTest extends AbstractTokenizerTestCase
             'short list after class declaration'             => ['/* testShortListDeclarationAfterClassDeclaration */'],
         ];
     }
-
-
 }

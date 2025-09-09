@@ -53,6 +53,4 @@ final class EchoedStringsUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

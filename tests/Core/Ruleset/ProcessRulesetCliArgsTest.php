@@ -227,6 +227,4 @@ final class ProcessRulesetCliArgsTest extends TestCase
 
         return str_replace(DIRECTORY_SEPARATOR, '/', $path);
     }
-
-
 }

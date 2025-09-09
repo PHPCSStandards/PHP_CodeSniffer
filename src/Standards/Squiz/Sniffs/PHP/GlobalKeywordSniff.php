@@ -46,6 +46,4 @@ class GlobalKeywordSniff implements Sniff
         $data    = [$varName];
         $phpcsFile->addError($error, $stackPtr, 'NotAllowed', $data);
     }
-
-
 }

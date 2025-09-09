@@ -73,6 +73,4 @@ class EndFileNoNewlineSniff implements Sniff
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
     }
-
-
 }

@@ -52,6 +52,4 @@ final class LogicalOperatorSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

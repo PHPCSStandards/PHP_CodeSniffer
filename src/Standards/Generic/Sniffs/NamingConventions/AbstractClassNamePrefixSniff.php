@@ -53,6 +53,4 @@ class AbstractClassNamePrefixSniff implements Sniff
             $phpcsFile->addError('Abstract class names must be prefixed with "Abstract"; found "%s"', $stackPtr, 'Missing', [$className]);
         }
     }
-
-
 }

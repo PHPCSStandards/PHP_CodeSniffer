@@ -59,6 +59,4 @@ class AbstractArraySniffTestable extends AbstractArraySniff
     {
         $this->indicies = $indices;
     }
-
-
 }

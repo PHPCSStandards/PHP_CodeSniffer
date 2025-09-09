@@ -137,6 +137,4 @@ final class DoubleQuotedStringTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

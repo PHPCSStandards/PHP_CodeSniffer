@@ -59,6 +59,4 @@ final class LowercaseDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

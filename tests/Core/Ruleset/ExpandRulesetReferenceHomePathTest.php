@@ -105,6 +105,4 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
 
         new Ruleset($config);
     }
-
-
 }

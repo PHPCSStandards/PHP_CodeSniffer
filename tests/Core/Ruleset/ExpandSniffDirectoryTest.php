@@ -61,6 +61,4 @@ final class ExpandSniffDirectoryTest extends TestCase
 
         $this->assertSame($expectedSniffCodes, $actual, 'Registered sniffs do not match expectation');
     }
-
-
 }

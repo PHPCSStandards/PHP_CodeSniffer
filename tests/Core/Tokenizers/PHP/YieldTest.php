@@ -419,6 +419,4 @@ final class YieldTest extends AbstractTokenizerTestCase
             'yield used as method name with ref'  => ['/* testYieldUsedAsMethodNameReturnByRef */'],
         ];
     }
-
-
 }

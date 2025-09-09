@@ -60,6 +60,4 @@ class TodoSniff implements Sniff
             $phpcsFile->addWarning($error, $stackPtr, $type, $data);
         }
     }
-
-
 }

@@ -259,6 +259,4 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
      * @return array<string, array<string, int|string|null>>
      */
     abstract public static function getTabReplacementExpected();
-
-
 }

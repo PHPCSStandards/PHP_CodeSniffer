@@ -56,6 +56,4 @@ final class FixmeUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

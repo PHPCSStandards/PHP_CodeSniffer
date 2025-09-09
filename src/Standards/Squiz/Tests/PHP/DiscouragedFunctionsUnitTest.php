@@ -50,6 +50,4 @@ final class DiscouragedFunctionsUnitTest extends AbstractSniffTestCase
             4 => 1,
         ];
     }
-
-
 }

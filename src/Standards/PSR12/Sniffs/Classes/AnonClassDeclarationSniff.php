@@ -237,6 +237,4 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
         $this->multiLineSniff->processBracket($phpcsFile, $openBracket, $tokens, 'argument');
         $this->multiLineSniff->processArgumentList($phpcsFile, $stackPtr, $this->indent, 'argument');
     }
-
-
 }

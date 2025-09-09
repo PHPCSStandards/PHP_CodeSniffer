@@ -189,6 +189,4 @@ class FunctionCallArgumentSpacingSniff implements Sniff
             }//end if
         }//end while
     }
-
-
 }

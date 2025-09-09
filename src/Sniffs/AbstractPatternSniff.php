@@ -922,6 +922,4 @@ abstract class AbstractPatternSniff implements Sniff
 
         return $patterns;
     }
-
-
 }

@@ -60,6 +60,4 @@ final class AbstractClassNamePrefixUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

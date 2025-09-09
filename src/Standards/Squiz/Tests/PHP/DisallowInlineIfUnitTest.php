@@ -49,6 +49,4 @@ final class DisallowInlineIfUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

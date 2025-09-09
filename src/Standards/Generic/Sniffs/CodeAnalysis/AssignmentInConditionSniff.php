@@ -164,6 +164,4 @@ class AssignmentInConditionSniff implements Sniff
             $startPos = $hasAssignment;
         } while ($startPos < $closer);
     }
-
-
 }

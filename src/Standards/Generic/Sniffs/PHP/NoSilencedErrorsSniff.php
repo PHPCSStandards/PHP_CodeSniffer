@@ -70,6 +70,4 @@ class NoSilencedErrorsSniff implements Sniff
             $phpcsFile->addWarning($error, $stackPtr, 'Discouraged', [$found]);
         }
     }
-
-
 }

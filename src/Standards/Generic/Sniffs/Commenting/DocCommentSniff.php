@@ -340,6 +340,4 @@ class DocCommentSniff implements Sniff
             $foundTags[$tagName] = true;
         }
     }
-
-
 }

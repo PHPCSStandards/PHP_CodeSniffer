@@ -324,6 +324,4 @@ class Source implements Report
 
         return $friendlyName;
     }
-
-
 }

@@ -85,6 +85,4 @@ final class MethodDeclarationUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
     }
-
-
 }

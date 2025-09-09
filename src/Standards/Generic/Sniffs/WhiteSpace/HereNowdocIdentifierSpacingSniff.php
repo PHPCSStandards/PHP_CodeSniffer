@@ -62,6 +62,4 @@ class HereNowdocIdentifierSpacingSniff implements Sniff
             $phpcsFile->fixer->replaceToken($stackPtr, $replacement);
         }
     }
-
-
 }

@@ -187,6 +187,4 @@ class ArrayIndentSniff extends AbstractArraySniff
             $phpcsFile->fixer->replaceToken(($arrayEnd - 1), $padding);
         }
     }
-
-
 }

@@ -51,6 +51,4 @@ final class FinallyTest extends AbstractTokenizerTestCase
             'finally used as property name'       => ['/* testFinallyUsedAsPropertyName */'],
         ];
     }
-
-
 }

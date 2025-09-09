@@ -104,6 +104,4 @@ class Hgblame extends VersionControl
 
         return $blames;
     }
-
-
 }

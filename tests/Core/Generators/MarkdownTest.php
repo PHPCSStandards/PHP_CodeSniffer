@@ -338,6 +338,4 @@ final class MarkdownTest extends TestCase
         // Reset the timezone to its original state.
         ini_set('date.timezone', $originalIni);
     }
-
-
 }

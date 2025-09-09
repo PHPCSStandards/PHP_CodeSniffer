@@ -320,6 +320,4 @@ class ControlSignatureSniff implements Sniff
             }
         }
     }
-
-
 }

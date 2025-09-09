@@ -68,6 +68,4 @@ final class ExecutableFileUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

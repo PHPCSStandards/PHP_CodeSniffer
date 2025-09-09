@@ -157,6 +157,4 @@ class LanguageConstructSpacingSniff implements Sniff
             }
         }//end if
     }
-
-
 }

@@ -188,6 +188,4 @@ class DisallowMultipleAssignmentsSniff implements Sniff
 
         $phpcsFile->addError($error, $stackPtr, $errorCode);
     }
-
-
 }

@@ -79,6 +79,4 @@ class ValidClassNameSniff implements Sniff
             $phpcsFile->recordMetric($stackPtr, 'PascalCase class name', 'yes');
         }
     }
-
-
 }

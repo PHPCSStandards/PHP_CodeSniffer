@@ -52,6 +52,4 @@ class DisallowBooleanStatementSniff implements Sniff
         $error = 'Boolean operators are not allowed outside of control structure conditions';
         $phpcsFile->addError($error, $stackPtr, 'Found');
     }
-
-
 }

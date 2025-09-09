@@ -90,6 +90,4 @@ final class MultiLineFunctionDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

@@ -261,6 +261,4 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
             '"exit" as case name'      => ['/* testKeywordAsEnumCaseNameShouldBeString8 */'],
         ];
     }
-
-
 }

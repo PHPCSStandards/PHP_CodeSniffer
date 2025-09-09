@@ -91,6 +91,4 @@ class ValidClassNameSniff implements Sniff
             }
         }//end if
     }
-
-
 }

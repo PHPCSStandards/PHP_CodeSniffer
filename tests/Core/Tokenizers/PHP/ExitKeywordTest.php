@@ -240,6 +240,4 @@ final class ExitKeywordTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

@@ -58,6 +58,4 @@ class CastSpacingSniff implements Sniff
             }
         }
     }
-
-
 }

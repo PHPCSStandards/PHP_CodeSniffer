@@ -105,6 +105,4 @@ final class PrepareForOutputTest extends TestCase
             ],
         ];
     }
-
-
 }

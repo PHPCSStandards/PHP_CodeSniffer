@@ -132,6 +132,4 @@ final class DisallowSpaceIndentUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

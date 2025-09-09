@@ -61,6 +61,4 @@ final class UnnecessaryStringConcatUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

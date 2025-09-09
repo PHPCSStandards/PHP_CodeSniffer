@@ -57,6 +57,4 @@ final class DisallowComparisonAssignmentUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

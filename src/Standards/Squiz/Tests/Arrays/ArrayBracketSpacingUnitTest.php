@@ -55,6 +55,4 @@ final class ArrayBracketSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

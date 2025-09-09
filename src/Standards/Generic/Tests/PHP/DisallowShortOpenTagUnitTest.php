@@ -107,6 +107,4 @@ final class DisallowShortOpenTagUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
     }
-
-
 }

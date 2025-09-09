@@ -119,6 +119,4 @@ final class DocCommentUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

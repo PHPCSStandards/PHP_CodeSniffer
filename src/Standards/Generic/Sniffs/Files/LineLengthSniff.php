@@ -193,6 +193,4 @@ class LineLengthSniff implements Sniff
             $phpcsFile->addWarning($warning, $stackPtr, 'TooLong', $data);
         }
     }
-
-
 }

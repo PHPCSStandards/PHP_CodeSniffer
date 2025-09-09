@@ -625,6 +625,4 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
 
         return $data;
     }
-
-
 }

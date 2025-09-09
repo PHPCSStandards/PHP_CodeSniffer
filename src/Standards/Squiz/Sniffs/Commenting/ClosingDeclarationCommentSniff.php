@@ -125,6 +125,4 @@ class ClosingDeclarationCommentSniff implements Sniff
             return;
         }
     }
-
-
 }

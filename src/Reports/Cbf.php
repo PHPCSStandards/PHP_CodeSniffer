@@ -269,8 +269,6 @@ class Cbf implements Report
             public function __construct()
             {
             }
-
-
         };
 
         $reporter->totalFiles           = 1;
@@ -283,6 +281,4 @@ class Cbf implements Report
 
         return $reporter;
     }
-
-
 }

@@ -216,6 +216,4 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
             }
         }//end if
     }
-
-
 }

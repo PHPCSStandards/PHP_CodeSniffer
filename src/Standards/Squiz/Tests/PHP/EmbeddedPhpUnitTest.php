@@ -243,6 +243,4 @@ final class EmbeddedPhpUnitTest extends AbstractSniffTestCase
 
         return [];
     }
-
-
 }

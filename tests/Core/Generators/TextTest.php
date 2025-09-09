@@ -226,6 +226,4 @@ final class TextTest extends TestCase
             ],
         ];
     }
-
-
 }

@@ -126,6 +126,4 @@ class Junit implements Report
         echo $cachedData;
         echo '</testsuites>' . PHP_EOL;
     }
-
-
 }

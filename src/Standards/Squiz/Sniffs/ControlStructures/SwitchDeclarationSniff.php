@@ -287,6 +287,4 @@ class SwitchDeclarationSniff implements Sniff
             $phpcsFile->addError($error, $stackPtr, 'MissingCase');
         }
     }
-
-
 }

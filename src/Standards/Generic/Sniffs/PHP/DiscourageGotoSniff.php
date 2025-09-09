@@ -43,6 +43,4 @@ class DiscourageGotoSniff implements Sniff
     {
         $phpcsFile->addWarning('Use of the GOTO language construct is discouraged', $stackPtr, 'Found');
     }
-
-
 }

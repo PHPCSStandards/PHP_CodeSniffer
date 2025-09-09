@@ -1057,6 +1057,4 @@ final class StableCommentWhitespaceTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

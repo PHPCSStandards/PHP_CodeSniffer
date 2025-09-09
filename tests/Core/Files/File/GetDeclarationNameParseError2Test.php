@@ -31,6 +31,4 @@ final class GetDeclarationNameParseError2Test extends AbstractMethodTestCase
         $result = self::$phpcsFile->getDeclarationName($target);
         $this->assertSame('', $result);
     }
-
-
 }

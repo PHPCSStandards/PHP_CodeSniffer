@@ -60,6 +60,4 @@ final class DeprecatedFunctionsUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

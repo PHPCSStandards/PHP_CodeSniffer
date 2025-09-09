@@ -204,6 +204,4 @@ final class SingleLineDocBlockTest extends CommentTestCase
 
         $this->checkTokenSequence($target, $expectedSequence);
     }
-
-
 }

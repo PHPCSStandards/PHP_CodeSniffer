@@ -78,6 +78,4 @@ class LowerCaseKeywordSniff implements Sniff
             $phpcsFile->recordMetric($stackPtr, 'PHP keyword case', 'lower');
         }//end if
     }
-
-
 }

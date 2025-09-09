@@ -984,6 +984,4 @@ final class Tokens
 
         return $highestType;
     }
-
-
 }

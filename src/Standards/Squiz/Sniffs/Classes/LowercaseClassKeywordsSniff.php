@@ -66,6 +66,4 @@ class LowercaseClassKeywordsSniff implements Sniff
             }
         }
     }
-
-
 }

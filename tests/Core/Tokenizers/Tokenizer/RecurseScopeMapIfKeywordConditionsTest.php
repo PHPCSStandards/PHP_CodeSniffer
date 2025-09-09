@@ -70,6 +70,4 @@ final class RecurseScopeMapIfKeywordConditionsTest extends AbstractTokenizerTest
             )
         );
     }
-
-
 }

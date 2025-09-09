@@ -289,6 +289,4 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
             $phpcsFile->addError($error, $stackPtr, 'FunctionNameInvalid', $data);
         }
     }
-
-
 }

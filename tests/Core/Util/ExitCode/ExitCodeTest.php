@@ -655,6 +655,4 @@ final class ExitCodeTest extends AbstractRunnerTestCase
             $_SERVER['argv'][] = $arg;
         }
     }
-
-
 }

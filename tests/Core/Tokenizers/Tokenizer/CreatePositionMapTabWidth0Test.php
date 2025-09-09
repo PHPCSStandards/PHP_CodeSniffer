@@ -101,6 +101,4 @@ final class CreatePositionMapTabWidth0Test extends ReplaceTabsInTokenTestCase
             ],
         ];
     }
-
-
 }

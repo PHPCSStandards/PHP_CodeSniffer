@@ -113,6 +113,4 @@ final class BackfillExplicitOctalNotationTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

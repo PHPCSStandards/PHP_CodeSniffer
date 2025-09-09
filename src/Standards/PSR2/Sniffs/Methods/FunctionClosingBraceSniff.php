@@ -84,6 +84,4 @@ class FunctionClosingBraceSniff implements Sniff
             $phpcsFile->fixer->endChangeset();
         }
     }
-
-
 }

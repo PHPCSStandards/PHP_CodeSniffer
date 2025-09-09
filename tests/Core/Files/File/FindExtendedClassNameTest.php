@@ -148,6 +148,4 @@ final class FindExtendedClassNameTest extends AbstractMethodTestCase
             ],
         ];
     }
-
-
 }

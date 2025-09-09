@@ -466,6 +466,4 @@ TEMPLATE;
      * @return array<int, int>
      */
     abstract protected function getWarningList();
-
-
 }

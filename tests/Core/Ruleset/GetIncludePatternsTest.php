@@ -98,6 +98,4 @@ final class GetIncludePatternsTest extends TestCase
             ],
         ];
     }
-
-
 }

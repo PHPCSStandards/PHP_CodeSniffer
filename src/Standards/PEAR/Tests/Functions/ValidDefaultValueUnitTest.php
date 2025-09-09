@@ -67,6 +67,4 @@ final class ValidDefaultValueUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

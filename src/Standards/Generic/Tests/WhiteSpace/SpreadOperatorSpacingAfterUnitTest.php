@@ -65,6 +65,4 @@ final class SpreadOperatorSpacingAfterUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

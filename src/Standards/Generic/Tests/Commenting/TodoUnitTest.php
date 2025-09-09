@@ -55,6 +55,4 @@ final class TodoUnitTest extends AbstractSniffTestCase
             21 => 1,
         ];
     }
-
-
 }

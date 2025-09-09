@@ -953,6 +953,4 @@ class ArrayDeclarationSniff implements Sniff
             }
         }//end foreach
     }
-
-
 }

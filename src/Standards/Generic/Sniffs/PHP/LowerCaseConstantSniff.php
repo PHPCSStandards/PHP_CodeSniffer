@@ -226,6 +226,4 @@ class LowerCaseConstantSniff implements Sniff
             $phpcsFile->recordMetric($stackPtr, 'PHP constant case', 'lower');
         }
     }
-
-
 }

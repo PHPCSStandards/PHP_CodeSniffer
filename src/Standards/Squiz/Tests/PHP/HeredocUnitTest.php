@@ -57,6 +57,4 @@ final class HeredocUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

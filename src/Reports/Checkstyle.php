@@ -104,6 +104,4 @@ class Checkstyle implements Report
         echo $cachedData;
         echo '</checkstyle>' . PHP_EOL;
     }
-
-
 }

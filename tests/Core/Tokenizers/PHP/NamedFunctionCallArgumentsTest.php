@@ -973,6 +973,4 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
 
         return $data;
     }
-
-
 }

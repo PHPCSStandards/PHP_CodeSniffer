@@ -99,6 +99,4 @@ final class ArbitraryParenthesesSpacingUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
     }
-
-
 }

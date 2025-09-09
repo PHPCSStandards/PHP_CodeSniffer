@@ -203,6 +203,4 @@ final class ExplainTest extends TestCase
 
         $ruleset->explain();
     }
-
-
 }

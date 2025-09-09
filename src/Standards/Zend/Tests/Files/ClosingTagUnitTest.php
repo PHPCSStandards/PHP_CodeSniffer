@@ -63,6 +63,4 @@ final class ClosingTagUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

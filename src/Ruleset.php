@@ -1761,6 +1761,4 @@ class Ruleset
 
         return [];
     }
-
-
 }

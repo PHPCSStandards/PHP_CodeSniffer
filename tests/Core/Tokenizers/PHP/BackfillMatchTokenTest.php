@@ -549,6 +549,4 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
         $this->assertArrayHasKey('parenthesis_owner', $tokens[$closer], 'Closing parenthesis owner is not set');
         $this->assertSame($token, $tokens[$closer]['parenthesis_owner'], 'Closing parenthesis owner is not the ' . $tokenType . ' token');
     }
-
-
 }

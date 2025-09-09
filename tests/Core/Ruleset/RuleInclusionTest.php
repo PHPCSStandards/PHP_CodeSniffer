@@ -461,6 +461,4 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
             ],
         ];
     }
-
-
 }

@@ -322,6 +322,4 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

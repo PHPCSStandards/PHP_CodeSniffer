@@ -401,6 +401,4 @@ class SwitchDeclarationSniff implements Sniff
 
         return false;
     }
-
-
 }

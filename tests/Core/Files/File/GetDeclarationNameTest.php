@@ -204,6 +204,4 @@ final class GetDeclarationNameTest extends AbstractMethodTestCase
             ],
         ];
     }
-
-
 }

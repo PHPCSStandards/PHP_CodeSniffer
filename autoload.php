@@ -326,8 +326,6 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
         {
             return self::$loadedFiles;
         }
-
-
     }
 
     // Register the autoloader before any existing autoloaders to ensure

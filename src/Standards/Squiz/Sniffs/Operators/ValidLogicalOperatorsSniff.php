@@ -60,6 +60,4 @@ class ValidLogicalOperatorsSniff implements Sniff
         ];
         $phpcsFile->addError($error, $stackPtr, 'NotAllowed', $data);
     }
-
-
 }

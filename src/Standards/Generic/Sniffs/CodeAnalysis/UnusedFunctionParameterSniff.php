@@ -298,6 +298,4 @@ class UnusedFunctionParameterSniff implements Sniff
             }
         }//end if
     }
-
-
 }

@@ -495,6 +495,4 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
             ],
         ];
     }
-
-
 }

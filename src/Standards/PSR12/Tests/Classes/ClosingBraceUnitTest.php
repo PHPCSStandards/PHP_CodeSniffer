@@ -53,6 +53,4 @@ final class ClosingBraceUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

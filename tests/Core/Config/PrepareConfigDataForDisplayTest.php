@@ -109,6 +109,4 @@ final class PrepareConfigDataForDisplayTest extends TestCase
         $config = new ConfigDouble();
         $config->printConfigData([]);
     }
-
-
 }

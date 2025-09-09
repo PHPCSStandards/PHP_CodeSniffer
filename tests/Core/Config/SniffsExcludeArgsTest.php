@@ -310,6 +310,4 @@ final class SniffsExcludeArgsTest extends TestCase
             'exclude' => ['exclude'],
         ];
     }
-
-
 }

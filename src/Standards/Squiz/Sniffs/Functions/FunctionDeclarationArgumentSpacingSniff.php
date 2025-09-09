@@ -560,6 +560,4 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
             }
         }
     }
-
-
 }

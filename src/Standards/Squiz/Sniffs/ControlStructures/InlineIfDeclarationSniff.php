@@ -148,6 +148,4 @@ class InlineIfDeclarationSniff implements Sniff
             }
         }
     }
-
-
 }

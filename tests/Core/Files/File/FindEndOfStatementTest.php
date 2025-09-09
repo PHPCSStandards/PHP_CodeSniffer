@@ -430,6 +430,4 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
 
         $this->assertSame(($start + 5), $found);
     }
-
-
 }

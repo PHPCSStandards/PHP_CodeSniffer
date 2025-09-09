@@ -97,6 +97,4 @@ final class LowercasedFilenameUnitTest extends AbstractSniffTestCase
         $this->assertSame(0, $file->getWarningCount());
         $this->assertCount(0, $file->getErrors());
     }
-
-
 }

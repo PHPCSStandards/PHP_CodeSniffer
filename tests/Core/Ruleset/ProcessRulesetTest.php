@@ -253,6 +253,4 @@ final class ProcessRulesetTest extends TestCase
 
         return $ruleset;
     }
-
-
 }

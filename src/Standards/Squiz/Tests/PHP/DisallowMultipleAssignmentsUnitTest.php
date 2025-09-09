@@ -64,6 +64,4 @@ final class DisallowMultipleAssignmentsUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

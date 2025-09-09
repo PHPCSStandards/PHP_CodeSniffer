@@ -64,6 +64,4 @@ final class UnnecessaryFinalModifierUnitTest extends AbstractSniffTestCase
             return [];
         }
     }
-
-
 }

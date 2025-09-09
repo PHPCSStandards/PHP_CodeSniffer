@@ -61,6 +61,4 @@ final class LineEndingsUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

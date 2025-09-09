@@ -100,6 +100,4 @@ class Json implements Report
         echo rtrim($cachedData, ',');
         echo '}}' . PHP_EOL;
     }
-
-
 }

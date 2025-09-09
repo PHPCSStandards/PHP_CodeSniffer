@@ -733,6 +733,4 @@ final class OtherContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

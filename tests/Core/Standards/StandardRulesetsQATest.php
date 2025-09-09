@@ -75,6 +75,4 @@ final class StandardRulesetsQATest extends AbstractRulesetTestCase
 
         return $data;
     }
-
-
 }

@@ -789,6 +789,4 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
 
         return false;
     }
-
-
 }

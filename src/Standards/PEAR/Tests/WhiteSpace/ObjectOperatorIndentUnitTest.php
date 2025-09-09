@@ -73,6 +73,4 @@ final class ObjectOperatorIndentUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

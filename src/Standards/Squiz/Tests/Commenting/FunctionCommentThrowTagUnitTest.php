@@ -60,6 +60,4 @@ final class FunctionCommentThrowTagUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

@@ -116,6 +116,4 @@ final class ConstructTest extends AbstractFileListTestCase
             ],
         ];
     }
-
-
 }

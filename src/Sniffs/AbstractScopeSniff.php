@@ -181,6 +181,4 @@ abstract class AbstractScopeSniff implements Sniff
      *                  the rest of the file.
      */
     abstract protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr);
-
-
 }

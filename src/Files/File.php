@@ -2941,6 +2941,4 @@ class File
             return $names;
         }
     }
-
-
 }

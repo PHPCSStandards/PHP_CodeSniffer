@@ -62,6 +62,4 @@ final class DisallowSizeFunctionsInLoopsUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

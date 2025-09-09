@@ -170,6 +170,4 @@ class EmptyPHPStatementSniff implements Sniff
             $phpcsFile->fixer->endChangeset();
         }
     }
-
-
 }

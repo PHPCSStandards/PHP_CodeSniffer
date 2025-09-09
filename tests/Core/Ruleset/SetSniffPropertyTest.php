@@ -269,6 +269,4 @@ final class SetSniffPropertyTest extends AbstractRulesetTestCase
         $sniffObject = $ruleset->sniffs[$sniffClass];
         $this->assertSame($propertyValue, $sniffObject->$propertyName, 'Property value not set to expected value');
     }
-
-
 }

@@ -86,6 +86,4 @@ class NullableTypeDeclarationSniff implements Sniff
         // Non-whitespace tokens found; trigger error but don't fix.
         $phpcsFile->addError($error, $stackPtr, 'UnexpectedCharactersFound');
     }
-
-
 }

@@ -61,6 +61,4 @@ final class EndFileNoNewlineUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

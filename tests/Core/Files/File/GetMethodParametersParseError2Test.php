@@ -32,6 +32,4 @@ final class GetMethodParametersParseError2Test extends AbstractMethodTestCase
 
         $this->assertSame([], $result);
     }
-
-
 }

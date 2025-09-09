@@ -513,6 +513,4 @@ final class MessageCollectorTest extends AbstractWriterTestCase
             $collector->add($msg, $type);
         }
     }
-
-
 }

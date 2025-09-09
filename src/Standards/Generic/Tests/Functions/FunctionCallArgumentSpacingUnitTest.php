@@ -92,6 +92,4 @@ final class FunctionCallArgumentSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

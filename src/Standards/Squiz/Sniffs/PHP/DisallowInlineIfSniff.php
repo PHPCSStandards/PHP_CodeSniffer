@@ -40,6 +40,4 @@ class DisallowInlineIfSniff implements Sniff
     {
         $phpcsFile->addError('Inline IF statements are not allowed', $stackPtr, 'Found');
     }
-
-
 }

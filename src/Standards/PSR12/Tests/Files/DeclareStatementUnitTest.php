@@ -77,6 +77,4 @@ final class DeclareStatementUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

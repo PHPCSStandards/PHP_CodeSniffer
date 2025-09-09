@@ -116,6 +116,4 @@ final class DetermineLoadedClassTest extends TestCase
         $className = Autoload::determineLoadedClass($classesBeforeLoad, $classesAfterLoad);
         $this->assertSame('PHP_CodeSniffer\Tests\Core\Autoloader\Sub\C', $className);
     }
-
-
 }

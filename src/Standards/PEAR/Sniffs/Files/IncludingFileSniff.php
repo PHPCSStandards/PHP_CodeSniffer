@@ -129,6 +129,4 @@ class IncludingFileSniff implements Sniff
             }
         }//end if
     }
-
-
 }

@@ -165,6 +165,4 @@ class ScopeKeywordSpacingSniff implements Sniff
             }//end if
         }//end if
     }
-
-
 }

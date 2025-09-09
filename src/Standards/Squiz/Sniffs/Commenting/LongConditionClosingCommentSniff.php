@@ -201,6 +201,4 @@ class LongConditionClosingCommentSniff implements Sniff
             return;
         }
     }
-
-
 }

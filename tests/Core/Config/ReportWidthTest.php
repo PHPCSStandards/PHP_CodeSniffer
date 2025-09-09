@@ -246,6 +246,4 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
             ],
         ];
     }
-
-
 }

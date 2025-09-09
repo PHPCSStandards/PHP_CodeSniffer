@@ -254,6 +254,4 @@ class FileList implements Iterator, Countable
     {
         return $this->numFiles;
     }
-
-
 }

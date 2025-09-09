@@ -161,6 +161,4 @@ final class SyntaxUnitTest extends AbstractSniffTestCase
             ],
         ];
     }
-
-
 }

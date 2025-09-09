@@ -216,6 +216,4 @@ final class PrintProgressDotsTest extends TestCase
 
         $this->assertStderrOutputSameString($expected);
     }
-
-
 }

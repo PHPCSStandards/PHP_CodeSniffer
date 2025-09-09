@@ -65,6 +65,4 @@ class DisallowLongArraySyntaxSniff implements Sniff
             $phpcsFile->fixer->endChangeset();
         }
     }
-
-
 }

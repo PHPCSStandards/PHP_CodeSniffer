@@ -78,6 +78,4 @@ final class SideEffectsUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
     }
-
-
 }

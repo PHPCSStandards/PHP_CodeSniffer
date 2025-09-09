@@ -54,6 +54,4 @@ final class InlineCommentUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

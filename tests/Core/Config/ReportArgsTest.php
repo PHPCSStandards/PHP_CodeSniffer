@@ -57,6 +57,4 @@ final class ReportArgsTest extends TestCase
         $this->assertNull($config->reportFile);
         $this->assertSame(['full' => null], $config->reports);
     }
-
-
 }

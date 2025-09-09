@@ -118,6 +118,4 @@ final class LowerCaseTypeUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

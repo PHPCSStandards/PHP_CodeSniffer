@@ -152,6 +152,4 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
             }
         }
     }
-
-
 }

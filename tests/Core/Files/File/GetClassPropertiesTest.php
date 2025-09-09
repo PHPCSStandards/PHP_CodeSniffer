@@ -183,6 +183,4 @@ final class GetClassPropertiesTest extends AbstractMethodTestCase
             ],
         ];
     }
-
-
 }

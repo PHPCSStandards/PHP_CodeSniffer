@@ -97,6 +97,4 @@ final class ScopeKeywordSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

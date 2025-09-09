@@ -138,6 +138,4 @@ class UnnecessaryHeredocSniff implements Sniff
             $phpcsFile->fixer->endChangeset();
         }
     }
-
-
 }

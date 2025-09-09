@@ -99,6 +99,4 @@ class MultiLineAssignmentSniff implements Sniff
             $phpcsFile->addError($error, $stackPtr, 'Indent', $data);
         }
     }
-
-
 }

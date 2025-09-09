@@ -270,6 +270,4 @@ final class MessageCollector
     {
         $this->cache = [];
     }
-
-
 }

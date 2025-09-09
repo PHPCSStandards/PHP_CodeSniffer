@@ -107,6 +107,4 @@ final class LineLengthUnitTest extends AbstractSniffTestCase
             return [];
         }//end switch
     }
-
-
 }

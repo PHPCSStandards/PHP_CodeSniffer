@@ -95,6 +95,4 @@ final class UseDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

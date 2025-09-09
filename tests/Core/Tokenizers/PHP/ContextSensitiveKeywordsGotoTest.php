@@ -123,6 +123,4 @@ final class ContextSensitiveKeywordsGotoTest extends AbstractTokenizerTestCase
             'xor'          => ['/* testXor */'],
         ];
     }
-
-
 }

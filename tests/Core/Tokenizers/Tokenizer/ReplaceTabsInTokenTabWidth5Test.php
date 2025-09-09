@@ -105,6 +105,4 @@ final class ReplaceTabsInTokenTabWidth5Test extends ReplaceTabsInTokenTestCase
             ],
         ];
     }
-
-
 }

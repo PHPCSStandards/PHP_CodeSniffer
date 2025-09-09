@@ -86,6 +86,4 @@ class GitStaged extends ExactMatch
 
         return $output;
     }
-
-
 }

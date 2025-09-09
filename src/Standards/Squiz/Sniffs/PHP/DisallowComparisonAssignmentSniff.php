@@ -103,6 +103,4 @@ class DisallowComparisonAssignmentSniff implements Sniff
             }
         }
     }
-
-
 }

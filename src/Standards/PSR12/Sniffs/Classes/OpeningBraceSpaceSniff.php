@@ -73,6 +73,4 @@ class OpeningBraceSpaceSniff implements Sniff
 
         $phpcsFile->fixer->endChangeset();
     }
-
-
 }

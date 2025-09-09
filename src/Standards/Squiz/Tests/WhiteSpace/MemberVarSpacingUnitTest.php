@@ -113,6 +113,4 @@ final class MemberVarSpacingUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

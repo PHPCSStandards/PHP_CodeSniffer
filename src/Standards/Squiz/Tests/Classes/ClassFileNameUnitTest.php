@@ -138,6 +138,4 @@ final class ClassFileNameUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

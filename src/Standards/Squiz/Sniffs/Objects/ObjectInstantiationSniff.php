@@ -78,6 +78,4 @@ class ObjectInstantiationSniff implements Sniff
         $error = 'New objects must be assigned to a variable';
         $phpcsFile->addError($error, $stackPtr, 'NotAssigned');
     }
-
-
 }

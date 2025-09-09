@@ -88,6 +88,4 @@ class ArrayBracketSpacingSniff implements Sniff
             }
         }
     }
-
-
 }

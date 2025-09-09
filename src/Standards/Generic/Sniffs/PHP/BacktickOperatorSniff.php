@@ -41,6 +41,4 @@ class BacktickOperatorSniff implements Sniff
         $error = 'Use of the backtick operator is forbidden';
         $phpcsFile->addError($error, $stackPtr, 'Found');
     }
-
-
 }

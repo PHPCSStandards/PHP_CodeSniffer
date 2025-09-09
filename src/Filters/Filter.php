@@ -295,6 +295,4 @@ class Filter extends RecursiveFilterIterator
 
         return false;
     }
-
-
 }

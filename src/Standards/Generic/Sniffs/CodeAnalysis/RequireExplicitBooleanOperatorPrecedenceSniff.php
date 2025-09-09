@@ -105,6 +105,4 @@ class RequireExplicitBooleanOperatorPrecedenceSniff implements Sniff
         $error .= ' without using parentheses to clarify precedence is not allowed.';
         $phpcsFile->addError($error, $stackPtr, 'MissingParentheses');
     }
-
-
 }

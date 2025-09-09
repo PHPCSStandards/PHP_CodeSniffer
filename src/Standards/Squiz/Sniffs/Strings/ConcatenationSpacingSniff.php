@@ -157,6 +157,4 @@ class ConcatenationSpacingSniff implements Sniff
             }
         }//end if
     }
-
-
 }

@@ -148,6 +148,4 @@ final class Timing
 
         self::$printed = true;
     }
-
-
 }

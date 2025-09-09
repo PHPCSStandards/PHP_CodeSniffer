@@ -79,6 +79,4 @@ class GotoTargetSpacingSniff implements Sniff
             $phpcsFile->fixer->endChangeset();
         }
     }
-
-
 }

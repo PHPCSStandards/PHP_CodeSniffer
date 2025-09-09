@@ -233,6 +233,4 @@ abstract class AbstractMethodTestCase extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage($message);
     }
-
-
 }

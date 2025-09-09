@@ -72,6 +72,4 @@ final class InlineIfDeclarationUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

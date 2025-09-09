@@ -296,6 +296,4 @@ class NonExecutableCodeSniff implements Sniff
             }
         }//end for
     }
-
-
 }

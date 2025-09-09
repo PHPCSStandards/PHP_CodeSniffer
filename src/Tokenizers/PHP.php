@@ -4072,6 +4072,4 @@ class PHP extends Tokenizer
             }//end if
         }//end for
     }
-
-
 }

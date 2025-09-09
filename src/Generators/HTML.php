@@ -457,6 +457,4 @@ class HTML extends Generator
 
         return $code;
     }
-
-
 }

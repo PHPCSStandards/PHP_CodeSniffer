@@ -91,6 +91,4 @@ abstract class AbstractRulesetTestCase extends TestCase
             $this->expectExceptionMessageRegExp($regex);
         }
     }
-
-
 }

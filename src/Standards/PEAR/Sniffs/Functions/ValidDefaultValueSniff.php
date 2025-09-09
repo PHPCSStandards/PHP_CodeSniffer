@@ -74,6 +74,4 @@ class ValidDefaultValueSniff implements Sniff
             }
         }//end foreach
     }
-
-
 }

@@ -110,6 +110,4 @@ final class CreatePositionMapHeredocNowdocCloserTest extends AbstractTokenizerTe
             ],
         ];
     }
-
-
 }

@@ -65,6 +65,4 @@ class ElseIfDeclarationSniff implements Sniff
             }
         }
     }
-
-
 }

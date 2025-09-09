@@ -57,6 +57,4 @@ class FunctionDuplicateArgumentSniff implements Sniff
             }
         }
     }
-
-
 }

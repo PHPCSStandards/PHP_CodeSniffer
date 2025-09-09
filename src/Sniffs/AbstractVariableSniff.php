@@ -225,6 +225,4 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
      *                  the rest of the file.
      */
     abstract protected function processVariableInString(File $phpcsFile, int $stackPtr);
-
-
 }

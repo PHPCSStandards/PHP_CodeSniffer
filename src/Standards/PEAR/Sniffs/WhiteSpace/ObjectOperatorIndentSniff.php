@@ -194,6 +194,4 @@ class ObjectOperatorIndentSniff implements Sniff
             );
         }//end while
     }
-
-
 }

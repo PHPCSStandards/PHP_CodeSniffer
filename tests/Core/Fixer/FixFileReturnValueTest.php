@@ -81,6 +81,4 @@ final class FixFileReturnValueTest extends TestCase
             ],
         ];
     }
-
-
 }

@@ -228,6 +228,4 @@ class ArbitraryParenthesesSpacingSniff implements Sniff
             }//end if
         }//end if
     }
-
-
 }

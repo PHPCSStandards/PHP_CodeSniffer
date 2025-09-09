@@ -207,6 +207,4 @@ class ComparisonOperatorUsageSniff implements Sniff
             $phpcsFile->addError($error, $stackPtr, 'ImplicitTrue');
         }
     }
-
-
 }

@@ -63,6 +63,4 @@ final class SelfMemberReferenceUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

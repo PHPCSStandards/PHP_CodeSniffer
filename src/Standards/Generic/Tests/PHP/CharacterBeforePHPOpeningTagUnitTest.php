@@ -54,6 +54,4 @@ final class CharacterBeforePHPOpeningTagUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

@@ -1285,6 +1285,4 @@ final class NamespacedNameSingleTokenTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

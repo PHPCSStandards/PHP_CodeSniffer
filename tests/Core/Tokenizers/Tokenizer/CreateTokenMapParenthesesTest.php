@@ -333,6 +333,4 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
             ],
         ];
     }
-
-
 }

@@ -50,6 +50,4 @@ final class ValidLogicalOperatorsUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

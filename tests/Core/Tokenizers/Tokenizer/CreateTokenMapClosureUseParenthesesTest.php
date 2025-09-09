@@ -184,6 +184,4 @@ final class CreateTokenMapClosureUseParenthesesTest extends AbstractTokenizerTes
             'Closure use nested in class' => ['/* testClosureUseNestedInClass */'],
         ];
     }
-
-
 }

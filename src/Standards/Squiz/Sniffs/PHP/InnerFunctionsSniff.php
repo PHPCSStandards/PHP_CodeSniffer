@@ -69,6 +69,4 @@ class InnerFunctionsSniff implements Sniff
         $error = 'The use of inner functions is forbidden';
         $phpcsFile->addError($error, $stackPtr, 'NotAllowed');
     }
-
-
 }

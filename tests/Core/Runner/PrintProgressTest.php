@@ -228,6 +228,4 @@ final class PrintProgressTest extends TestCase
         ];
         // phpcs:enable
     }
-
-
 }

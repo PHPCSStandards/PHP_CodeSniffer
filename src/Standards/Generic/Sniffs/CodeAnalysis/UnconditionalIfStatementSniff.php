@@ -86,6 +86,4 @@ class UnconditionalIfStatementSniff implements Sniff
             $phpcsFile->addWarning($error, $stackPtr, 'Found');
         }
     }
-
-
 }

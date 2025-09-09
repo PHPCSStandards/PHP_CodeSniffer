@@ -540,6 +540,4 @@ class FunctionCommentSniff implements Sniff
             $phpcsFile->addError($error, $commentStart, 'MissingParamTag', $data);
         }
     }
-
-
 }

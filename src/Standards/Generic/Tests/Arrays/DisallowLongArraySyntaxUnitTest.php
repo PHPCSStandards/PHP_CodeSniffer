@@ -68,6 +68,4 @@ final class DisallowLongArraySyntaxUnitTest extends AbstractSniffTestCase
     {
         return [];
     }
-
-
 }

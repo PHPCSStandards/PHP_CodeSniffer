@@ -50,6 +50,4 @@ class OneTraitPerFileSniff implements Sniff
             $phpcsFile->addError($error, $nextClass, 'MultipleFound');
         }
     }
-
-
 }

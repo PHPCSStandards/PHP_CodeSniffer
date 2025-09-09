@@ -65,6 +65,4 @@ final class JumbledIncrementerUnitTest extends AbstractSniffTestCase
             return [];
         }
     }
-
-
 }

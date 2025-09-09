@@ -241,6 +241,4 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
             $phpcsFile->recordMetric($stackPtr, 'CamelCase method name', 'yes');
         }
     }
-
-
 }
