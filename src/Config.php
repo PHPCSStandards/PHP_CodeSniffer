@@ -123,6 +123,30 @@ class Config
     ];
 
     /**
+     * A list of valid generators.
+     *
+     * @var array<string, string> Keys are the lowercase version of the generator name, while values
+     *                            are the name of the associated PHP generator class.
+     */
+    private const VALID_GENERATORS = [
+        'text'     => 'Text',
+        'html'     => 'HTML',
+        'markdown' => 'Markdown',
+    ];
+
+    /**
+     * The default configuration file names supported by PHPCS.
+     *
+     * @var array<string> The supported file names in order of precedence (highest first).
+     */
+    private const CONFIG_FILENAMES = [
+        '.phpcs.xml',
+        'phpcs.xml',
+        '.phpcs.xml.dist',
+        'phpcs.xml.dist',
+    ];
+
+    /**
      * An array of settings that PHPCS and PHPCBF accept.
      *
      * This array is not meant to be accessed directly. Instead, use the settings
@@ -190,21 +214,6 @@ class Config
      * @var string[]
      */
     private $cliArgs = [];
-
-    /**
-     * A list of valid generators.
-     *
-     * {@internal Once support for PHP < 5.6 is dropped, this property should be refactored into a
-     * class constant.}
-     *
-     * @var array<string, string> Keys are the lowercase version of the generator name, while values
-     *                            are the associated PHP generator class.
-     */
-    private $validGenerators = [
-        'text'     => 'Text',
-        'html'     => 'HTML',
-        'markdown' => 'Markdown',
-    ];
 
     /**
      * Command line values that the user has supplied directly.
@@ -429,15 +438,8 @@ class Config
             // Look for a default ruleset in the current directory or higher.
             $currentDir = getcwd();
 
-            $defaultFiles = [
-                '.phpcs.xml',
-                'phpcs.xml',
-                '.phpcs.xml.dist',
-                'phpcs.xml.dist',
-            ];
-
             do {
-                foreach ($defaultFiles as $defaultFilename) {
+                foreach (self::CONFIG_FILENAMES as $defaultFilename) {
                     $default = $currentDir.DIRECTORY_SEPARATOR.$defaultFilename;
                     if (is_file($default) === true) {
                         $this->standards = [$default];
@@ -1250,8 +1252,8 @@ class Config
                 $generatorName          = substr($arg, 10);
                 $lowerCaseGeneratorName = strtolower($generatorName);
 
-                if (isset($this->validGenerators[$lowerCaseGeneratorName]) === false) {
-                    $validOptions = implode(', ', $this->validGenerators);
+                if (isset(self::VALID_GENERATORS[$lowerCaseGeneratorName]) === false) {
+                    $validOptions = implode(', ', self::VALID_GENERATORS);
                     $validOptions = substr_replace($validOptions, ' and', strrpos($validOptions, ','), 1);
                     $error        = sprintf(
                         'ERROR: "%s" is not a valid generator. The following generators are supported: %s.'.PHP_EOL.PHP_EOL,
@@ -1262,7 +1264,7 @@ class Config
                     throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                 }
 
-                $this->generator = $this->validGenerators[$lowerCaseGeneratorName];
+                $this->generator = self::VALID_GENERATORS[$lowerCaseGeneratorName];
                 $this->overriddenDefaults['generator'] = true;
             } else if (substr($arg, 0, 9) === 'encoding=') {
                 if (isset($this->overriddenDefaults['encoding']) === true) {

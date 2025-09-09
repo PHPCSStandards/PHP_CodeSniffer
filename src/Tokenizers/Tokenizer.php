@@ -19,6 +19,29 @@ abstract class Tokenizer
 {
 
     /**
+     * List of tokens which may contain tab characters.
+     *
+     * @var array<int|string, true>
+     */
+    private const TOKENS_WITH_TABS = [
+        T_WHITESPACE               => true,
+        T_COMMENT                  => true,
+        T_DOC_COMMENT              => true,
+        T_DOC_COMMENT_WHITESPACE   => true,
+        T_DOC_COMMENT_STRING       => true,
+        T_CONSTANT_ENCAPSED_STRING => true,
+        T_DOUBLE_QUOTED_STRING     => true,
+        T_START_HEREDOC            => true,
+        T_START_NOWDOC             => true,
+        T_HEREDOC                  => true,
+        T_NOWDOC                   => true,
+        T_END_HEREDOC              => true,
+        T_END_NOWDOC               => true,
+        T_INLINE_HTML              => true,
+        T_YIELD_FROM               => true,
+    ];
+
+    /**
      * The config data for the run.
      *
      * @var \PHP_CodeSniffer\Config
@@ -188,24 +211,6 @@ abstract class Tokenizer
         $encoding         = $this->config->encoding;
         $tabWidth         = $this->config->tabWidth;
 
-        $tokensWithTabs = [
-            T_WHITESPACE               => true,
-            T_COMMENT                  => true,
-            T_DOC_COMMENT              => true,
-            T_DOC_COMMENT_WHITESPACE   => true,
-            T_DOC_COMMENT_STRING       => true,
-            T_CONSTANT_ENCAPSED_STRING => true,
-            T_DOUBLE_QUOTED_STRING     => true,
-            T_START_HEREDOC            => true,
-            T_START_NOWDOC             => true,
-            T_HEREDOC                  => true,
-            T_NOWDOC                   => true,
-            T_END_HEREDOC              => true,
-            T_END_NOWDOC               => true,
-            T_INLINE_HTML              => true,
-            T_YIELD_FROM               => true,
-        ];
-
         $this->numTokens = count($this->tokens);
         for ($i = 0; $i < $this->numTokens; $i++) {
             $this->tokens[$i]['line']   = $lineNumber;
@@ -216,7 +221,7 @@ abstract class Tokenizer
                 $length      = $this->knownLengths[$this->tokens[$i]['code']];
                 $currColumn += $length;
             } else if ($tabWidth === 0
-                || isset($tokensWithTabs[$this->tokens[$i]['code']]) === false
+                || isset(self::TOKENS_WITH_TABS[$this->tokens[$i]['code']]) === false
                 || strpos($this->tokens[$i]['content'], "\t") === false
             ) {
                 // There are no tabs in this content, or we aren't replacing them.
