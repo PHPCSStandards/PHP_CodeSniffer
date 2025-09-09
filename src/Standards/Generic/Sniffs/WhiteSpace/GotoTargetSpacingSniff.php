@@ -51,9 +51,9 @@ class GotoTargetSpacingSniff implements Sniff
 
         if ($nextNonWhiteSpace !== $nextNonEmpty) {
             $found = 'comment';
-        } else if ($tokens[$stackPtr]['line'] !== $tokens[$nextNonWhiteSpace]['line']) {
+        } elseif ($tokens[$stackPtr]['line'] !== $tokens[$nextNonWhiteSpace]['line']) {
             $found = 'newline';
-        } else if ($tokens[($stackPtr + 1)]['length'] === 1) {
+        } elseif ($tokens[($stackPtr + 1)]['length'] === 1) {
             $found = '1 space';
         } else {
             $found = $tokens[($stackPtr + 1)]['length'] . ' spaces';

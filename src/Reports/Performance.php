@@ -134,7 +134,7 @@ class Performance implements Report
 
             if ($time > $tripleAvgSniffTime) {
                 printf($formatError, $sniff, $time, $percent);
-            } else if ($time > $doubleAvgSniffTime) {
+            } elseif ($time > $doubleAvgSniffTime) {
                 printf($formatWarning, $sniff, $time, $percent);
             } else {
                 printf($format, $sniff, $time, $percent);

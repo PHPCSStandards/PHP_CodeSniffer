@@ -221,7 +221,7 @@ abstract class AbstractFilterTestCase extends TestCase
         foreach ($paths as $key => $value) {
             if (is_string($value) === true) {
                 $paths[$key] = strtr($value, '/', '\\\\');
-            } else if (is_array($value) === true) {
+            } elseif (is_array($value) === true) {
                 $paths[$key] = self::mapPathsToRuntimeOs($value);
             }
         }

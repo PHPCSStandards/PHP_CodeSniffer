@@ -58,7 +58,7 @@ class FileCommentSniff implements Sniff
             $phpcsFile->addError('You must use "/**" style comments for a file comment', $commentStart, 'WrongStyle');
             $phpcsFile->recordMetric($stackPtr, 'File has doc comment', 'yes');
             return $phpcsFile->numTokens;
-        } else if ($commentStart === false || $tokens[$commentStart]['code'] !== T_DOC_COMMENT_OPEN_TAG) {
+        } elseif ($commentStart === false || $tokens[$commentStart]['code'] !== T_DOC_COMMENT_OPEN_TAG) {
             $phpcsFile->addError('Missing file doc comment', $stackPtr, 'Missing');
             $phpcsFile->recordMetric($stackPtr, 'File has doc comment', 'no');
             return $phpcsFile->numTokens;
@@ -169,7 +169,7 @@ class FileCommentSniff implements Sniff
                         $phpcsFile->fixer->replaceToken($string, $expected);
                     }
                 }
-            } else if ($name === '@copyright') {
+            } elseif ($name === '@copyright') {
                 if (preg_match('/^([0-9]{4})(-[0-9]{4})? (Squiz Pty Ltd \(ABN 77 084 670 600\))$/', $tokens[$string]['content']) === 0) {
                     $error = 'Expected "xxxx-xxxx Squiz Pty Ltd (ABN 77 084 670 600)" for copyright declaration';
                     $fix   = $phpcsFile->addFixableError($error, $tag, 'IncorrectCopyright');

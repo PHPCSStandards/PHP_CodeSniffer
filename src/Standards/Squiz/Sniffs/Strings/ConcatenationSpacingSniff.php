@@ -135,7 +135,7 @@ class ConcatenationSpacingSniff implements Sniff
                     }
 
                     $phpcsFile->fixer->endChangeset();
-                } else if ($this->spacing > 0) {
+                } elseif ($this->spacing > 0) {
                     $phpcsFile->fixer->addContent(($stackPtr - 1), $padding);
                 }
             }
@@ -152,7 +152,7 @@ class ConcatenationSpacingSniff implements Sniff
                     }
 
                     $phpcsFile->fixer->endChangeset();
-                } else if ($this->spacing > 0) {
+                } elseif ($this->spacing > 0) {
                     $phpcsFile->fixer->addContent($stackPtr, $padding);
                 }
             }

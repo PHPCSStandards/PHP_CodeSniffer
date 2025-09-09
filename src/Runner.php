@@ -390,7 +390,7 @@ class Runner
                     }
 
                     $this->processFile($file);
-                } else if (PHP_CODESNIFFER_VERBOSITY > 0) {
+                } elseif (PHP_CODESNIFFER_VERBOSITY > 0) {
                     StatusWriter::write('Skipping ' . basename($file->path));
                 }
 
@@ -417,7 +417,7 @@ class Runner
                 $pid = pcntl_fork();
                 if ($pid === -1) {
                     throw new RuntimeException('Failed to create child process');
-                } else if ($pid !== 0) {
+                } elseif ($pid !== 0) {
                     $childProcs[$pid] = $childOutFilename;
                 } else {
                     // Move forward to the start of the batch.
@@ -804,7 +804,7 @@ class Runner
                         $colorOpen  = "\033[31m";
                         $colorClose = "\033[0m";
                     }
-                } else if ($fixed > 0) {
+                } elseif ($fixed > 0) {
                     $progressDot = 'F';
 
                     if ($showColors === true) {
@@ -830,7 +830,7 @@ class Runner
 
                         $colorClose = "\033[0m";
                     }
-                } else if ($warnings > 0) {
+                } elseif ($warnings > 0) {
                     $progressDot = 'W';
 
                     if ($showColors === true) {

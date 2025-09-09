@@ -113,7 +113,7 @@ final class Timing
             if ($secs >= 0.01) {
                 $timeString .= ", $secs secs";
             }
-        } else if ($duration >= self::SECOND_IN_MS) {
+        } elseif ($duration >= self::SECOND_IN_MS) {
             $timeString = round(($duration / self::SECOND_IN_MS), 2) . ' secs';
         } else {
             $timeString = round($duration) . 'ms';

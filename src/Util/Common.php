@@ -521,7 +521,7 @@ class Common
                 } else {
                     return 'array';
                 }//end if
-            } else if (isset(self::ALLOWED_TYPES[$lowerVarType]) === true) {
+            } elseif (isset(self::ALLOWED_TYPES[$lowerVarType]) === true) {
                 // A valid type, but not lower cased.
                 return $lowerVarType;
             } else {
@@ -566,7 +566,7 @@ class Common
         if ($sniff !== 'Sniff' && substr($sniff, -5) === 'Sniff') {
             // Sniff class name.
             $sniff = substr($sniff, 0, -5);
-        } else if ($sniff !== 'UnitTest' && substr($sniff, -8) === 'UnitTest') {
+        } elseif ($sniff !== 'UnitTest' && substr($sniff, -8) === 'UnitTest') {
             // Unit test class name.
             $sniff = substr($sniff, 0, -8);
         } else {

@@ -75,7 +75,7 @@ class SelfMemberReferenceSniff extends AbstractScopeSniff
 
                 return;
             }
-        } else if (isset(Tokens::NAME_TOKENS[$tokens[$calledClassName]['code']]) === true) {
+        } elseif (isset(Tokens::NAME_TOKENS[$tokens[$calledClassName]['code']]) === true) {
             // Work out the fully qualified name for both the class declaration
             // as well as the class usage to see if they match.
             $namespaceName = $this->getNamespaceName($phpcsFile, $currScope);

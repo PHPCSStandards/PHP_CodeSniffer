@@ -104,7 +104,7 @@ final class IgnoreList
             $part = array_shift($parts);
             if (isset($data[$part]) === false) {
                 $data[$part] = [];
-            } else if (is_bool($data[$part]) === true) {
+            } elseif (is_bool($data[$part]) === true) {
                 $data[$part] = ['.default' => $data[$part]];
             }
 

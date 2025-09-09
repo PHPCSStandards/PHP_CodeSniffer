@@ -78,9 +78,9 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
 
             if ($position < 1) {
                 continue;
-            } else if ($position > 1) {
+            } elseif ($position > 1) {
                 break;
-            } else if ($code !== T_VARIABLE && isset(Tokens::NAME_TOKENS[$code]) === false) {
+            } elseif ($code !== T_VARIABLE && isset(Tokens::NAME_TOKENS[$code]) === false) {
                 continue;
             }
 

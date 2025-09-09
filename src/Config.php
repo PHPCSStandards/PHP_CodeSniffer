@@ -303,7 +303,7 @@ class Config
 
             if (is_int($value) === true) {
                 $value = abs($value);
-            } else if (is_string($value) === true && preg_match('`^\d+$`', $value) === 1) {
+            } elseif (is_string($value) === true && preg_match('`^\d+$`', $value) === 1) {
                 $value = (int) $value;
             } else {
                 $value = self::DEFAULT_REPORT_WIDTH;
@@ -920,14 +920,14 @@ class Config
 
                 $this->sniffs = $this->parseSniffCodes(substr($arg, 7), 'sniffs');
                 $this->overriddenDefaults['sniffs'] = true;
-            } else if (substr($arg, 0, 8) === 'exclude=') {
+            } elseif (substr($arg, 0, 8) === 'exclude=') {
                 if (isset($this->overriddenDefaults['exclude']) === true) {
                     break;
                 }
 
                 $this->exclude = $this->parseSniffCodes(substr($arg, 8), 'exclude');
                 $this->overriddenDefaults['exclude'] = true;
-            } else if (substr($arg, 0, 6) === 'cache=') {
+            } elseif (substr($arg, 0, 6) === 'cache=') {
                 if ((isset($this->overriddenDefaults['cache']) === true
                     && $this->cache === false)
                     || isset($this->overriddenDefaults['cacheFile']) === true
@@ -977,7 +977,7 @@ class Config
                     $error .= $this->printShortUsage(true);
                     throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                 }
-            } else if (substr($arg, 0, 10) === 'bootstrap=') {
+            } elseif (substr($arg, 0, 10) === 'bootstrap=') {
                 $files     = explode(',', substr($arg, 10));
                 $bootstrap = [];
                 foreach ($files as $file) {
@@ -993,7 +993,7 @@ class Config
 
                 $this->bootstrap = array_merge($this->bootstrap, $bootstrap);
                 $this->overriddenDefaults['bootstrap'] = true;
-            } else if (substr($arg, 0, 10) === 'file-list=') {
+            } elseif (substr($arg, 0, 10) === 'file-list=') {
                 $fileList = substr($arg, 10);
                 $path     = Common::realpath($fileList);
                 if ($path === false) {
@@ -1013,7 +1013,7 @@ class Config
 
                     $this->processFilePath($inputFile);
                 }
-            } else if (substr($arg, 0, 11) === 'stdin-path=') {
+            } elseif (substr($arg, 0, 11) === 'stdin-path=') {
                 if (isset($this->overriddenDefaults['stdinPath']) === true) {
                     break;
                 }
@@ -1026,7 +1026,7 @@ class Config
                 }
 
                 $this->overriddenDefaults['stdinPath'] = true;
-            } else if (substr($arg, 0, 12) === 'report-file=') {
+            } elseif (substr($arg, 0, 12) === 'report-file=') {
                 if (PHP_CODESNIFFER_CBF === true || isset($this->overriddenDefaults['reportFile']) === true) {
                     break;
                 }
@@ -1054,14 +1054,14 @@ class Config
                     $error .= $this->printShortUsage(true);
                     throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                 }
-            } else if (substr($arg, 0, 13) === 'report-width=') {
+            } elseif (substr($arg, 0, 13) === 'report-width=') {
                 if (isset($this->overriddenDefaults['reportWidth']) === true) {
                     break;
                 }
 
                 $this->reportWidth = substr($arg, 13);
                 $this->overriddenDefaults['reportWidth'] = true;
-            } else if (substr($arg, 0, 9) === 'basepath=') {
+            } elseif (substr($arg, 0, 9) === 'basepath=') {
                 if (isset($this->overriddenDefaults['basepath']) === true) {
                     break;
                 }
@@ -1087,7 +1087,7 @@ class Config
                     $error .= $this->printShortUsage(true);
                     throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                 }
-            } else if ((substr($arg, 0, 7) === 'report=' || substr($arg, 0, 7) === 'report-')) {
+            } elseif ((substr($arg, 0, 7) === 'report=' || substr($arg, 0, 7) === 'report-')) {
                 $reports = [];
 
                 if ($arg[6] === '-') {
@@ -1140,21 +1140,21 @@ class Config
                 }
 
                 $this->overriddenDefaults['reports'] = true;
-            } else if (substr($arg, 0, 7) === 'filter=') {
+            } elseif (substr($arg, 0, 7) === 'filter=') {
                 if (isset($this->overriddenDefaults['filter']) === true) {
                     break;
                 }
 
                 $this->filter = substr($arg, 7);
                 $this->overriddenDefaults['filter'] = true;
-            } else if (substr($arg, 0, 9) === 'standard=') {
+            } elseif (substr($arg, 0, 9) === 'standard=') {
                 $standards = trim(substr($arg, 9));
                 if ($standards !== '') {
                     $this->standards = explode(',', $standards);
                 }
 
                 $this->overriddenDefaults['standards'] = true;
-            } else if (substr($arg, 0, 11) === 'extensions=') {
+            } elseif (substr($arg, 0, 11) === 'extensions=') {
                 if (isset($this->overriddenDefaults['extensions']) === true) {
                     break;
                 }
@@ -1182,21 +1182,21 @@ class Config
 
                 $this->extensions = $newExtensions;
                 $this->overriddenDefaults['extensions'] = true;
-            } else if (substr($arg, 0, 7) === 'suffix=') {
+            } elseif (substr($arg, 0, 7) === 'suffix=') {
                 if (isset($this->overriddenDefaults['suffix']) === true) {
                     break;
                 }
 
                 $this->suffix = substr($arg, 7);
                 $this->overriddenDefaults['suffix'] = true;
-            } else if (substr($arg, 0, 9) === 'parallel=') {
+            } elseif (substr($arg, 0, 9) === 'parallel=') {
                 if (isset($this->overriddenDefaults['parallel']) === true) {
                     break;
                 }
 
                 $this->parallel = max((int) substr($arg, 9), 1);
                 $this->overriddenDefaults['parallel'] = true;
-            } else if (substr($arg, 0, 9) === 'severity=') {
+            } elseif (substr($arg, 0, 9) === 'severity=') {
                 $this->errorSeverity   = (int) substr($arg, 9);
                 $this->warningSeverity = $this->errorSeverity;
                 if (isset($this->overriddenDefaults['errorSeverity']) === false) {
@@ -1206,21 +1206,21 @@ class Config
                 if (isset($this->overriddenDefaults['warningSeverity']) === false) {
                     $this->overriddenDefaults['warningSeverity'] = true;
                 }
-            } else if (substr($arg, 0, 15) === 'error-severity=') {
+            } elseif (substr($arg, 0, 15) === 'error-severity=') {
                 if (isset($this->overriddenDefaults['errorSeverity']) === true) {
                     break;
                 }
 
                 $this->errorSeverity = (int) substr($arg, 15);
                 $this->overriddenDefaults['errorSeverity'] = true;
-            } else if (substr($arg, 0, 17) === 'warning-severity=') {
+            } elseif (substr($arg, 0, 17) === 'warning-severity=') {
                 if (isset($this->overriddenDefaults['warningSeverity']) === true) {
                     break;
                 }
 
                 $this->warningSeverity = (int) substr($arg, 17);
                 $this->overriddenDefaults['warningSeverity'] = true;
-            } else if (substr($arg, 0, 7) === 'ignore=') {
+            } elseif (substr($arg, 0, 7) === 'ignore=') {
                 if (isset($this->overriddenDefaults['ignored']) === true) {
                     break;
                 }
@@ -1244,7 +1244,7 @@ class Config
 
                 $this->ignored = $ignored;
                 $this->overriddenDefaults['ignored'] = true;
-            } else if (substr($arg, 0, 10) === 'generator='
+            } elseif (substr($arg, 0, 10) === 'generator='
                 && PHP_CODESNIFFER_CBF === false
             ) {
                 if (isset($this->overriddenDefaults['generator']) === true) {
@@ -1268,14 +1268,14 @@ class Config
 
                 $this->generator = self::VALID_GENERATORS[$lowerCaseGeneratorName];
                 $this->overriddenDefaults['generator'] = true;
-            } else if (substr($arg, 0, 9) === 'encoding=') {
+            } elseif (substr($arg, 0, 9) === 'encoding=') {
                 if (isset($this->overriddenDefaults['encoding']) === true) {
                     break;
                 }
 
                 $this->encoding = strtolower(substr($arg, 9));
                 $this->overriddenDefaults['encoding'] = true;
-            } else if (substr($arg, 0, 10) === 'tab-width=') {
+            } elseif (substr($arg, 0, 10) === 'tab-width=') {
                 if (isset($this->overriddenDefaults['tabWidth']) === true) {
                     break;
                 }
@@ -1342,9 +1342,9 @@ class Config
 
             if ($partCount === 0) {
                 $errors[] = 'Standard codes are not supported: ' . $sniff;
-            } else if ($partCount === 1) {
+            } elseif ($partCount === 1) {
                 $errors[] = 'Category codes are not supported: ' . $sniff;
-            } else if ($partCount === 3) {
+            } elseif ($partCount === 3) {
                 $errors[] = 'Message codes are not supported: ' . $sniff;
             } else {
                 $errors[] = 'Too many parts: ' . $sniff;

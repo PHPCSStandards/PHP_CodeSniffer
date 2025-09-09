@@ -102,7 +102,7 @@ class VariableCommentSniff extends AbstractVariableSniff
                 } else {
                     $foundVar = $tag;
                 }
-            } else if ($tokens[$tag]['content'] === '@see') {
+            } elseif ($tokens[$tag]['content'] === '@see') {
                 // Make sure the tag isn't empty.
                 $string = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $tag, $commentEnd);
                 if ($string === false || $tokens[$string]['line'] !== $tokens[$tag]['line']) {

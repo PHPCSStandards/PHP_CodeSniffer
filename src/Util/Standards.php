@@ -298,7 +298,7 @@ class Standards
 
             if ($path !== false && is_file($path) === true) {
                 return $path;
-            } else if (Common::isPharFile($standardPath) === true) {
+            } elseif (Common::isPharFile($standardPath) === true) {
                 $path = Common::realpath($standardPath);
                 if ($path !== false) {
                     return $path;

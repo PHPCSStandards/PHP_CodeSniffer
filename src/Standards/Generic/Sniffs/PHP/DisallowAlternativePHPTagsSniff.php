@@ -66,7 +66,7 @@ class DisallowAlternativePHPTagsSniff implements Sniff
             $data    = ['<%=' . $snippet];
 
             $phpcsFile->addWarning($error, $stackPtr, 'MaybeASPShortOpenTagFound', $data);
-        } else if (strpos($content, '<%') !== false) {
+        } elseif (strpos($content, '<%') !== false) {
             $error   = 'Possible use of ASP style opening tags detected; found: %s';
             $snippet = $this->getSnippet($content, '<%');
             $data    = ['<%' . $snippet];

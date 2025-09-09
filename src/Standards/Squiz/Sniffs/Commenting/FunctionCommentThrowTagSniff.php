@@ -130,7 +130,7 @@ class FunctionCommentThrowTagSniff implements Sniff
                         $thrownExceptions[] = $tokens[$currException]['content'];
                     }
                 }
-            } else if ($tokens[$nextToken]['code'] === T_VARIABLE) {
+            } elseif ($tokens[$nextToken]['code'] === T_VARIABLE) {
                 // Find the nearest catch block in this scope and, if the caught var
                 // matches our re-thrown var, use the exception types being caught as
                 // exception types that are being thrown as well.
@@ -191,7 +191,7 @@ class FunctionCommentThrowTagSniff implements Sniff
             $error = 'Missing @throws tag in function comment';
             $phpcsFile->addError($error, $commentEnd, 'Missing');
             return;
-        } else if (empty($thrownExceptions) === true) {
+        } elseif (empty($thrownExceptions) === true) {
             // If token count is zero, it means that only variables are being
             // thrown, so we need at least one @throws tag (checked above).
             // Nothing more to do.

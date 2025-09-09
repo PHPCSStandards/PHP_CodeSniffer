@@ -182,7 +182,7 @@ class LowerCaseTypeSniff implements Sniff
                             $error,
                             $errorCode
                         );
-                    } else if (isset(self::PHP_TYPES[strtolower($type)]) === true) {
+                    } elseif (isset(self::PHP_TYPES[strtolower($type)]) === true) {
                         $this->processType($phpcsFile, $props['type_token'], $type, $error, $errorCode);
                     }
                 }
@@ -213,7 +213,7 @@ class LowerCaseTypeSniff implements Sniff
                     $error,
                     $errorCode
                 );
-            } else if (isset(self::PHP_TYPES[strtolower($returnType)]) === true) {
+            } elseif (isset(self::PHP_TYPES[strtolower($returnType)]) === true) {
                 $this->processType($phpcsFile, $props['return_type_token'], $returnType, $error, $errorCode);
             }
         }
@@ -244,7 +244,7 @@ class LowerCaseTypeSniff implements Sniff
                         $error,
                         $errorCode
                     );
-                } else if (isset(self::PHP_TYPES[strtolower($typeHint)]) === true) {
+                } elseif (isset(self::PHP_TYPES[strtolower($typeHint)]) === true) {
                     $this->processType($phpcsFile, $param['type_hint_token'], $typeHint, $error, $errorCode);
                 }
             }

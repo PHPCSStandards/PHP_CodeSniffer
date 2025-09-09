@@ -133,9 +133,9 @@ class DisallowTabIndentSniff implements Sniff
 
                     if ($foundIndentTabs > 0 && $foundIndentSpaces === 0) {
                         $phpcsFile->recordMetric($i, 'Line indent', 'tabs');
-                    } else if ($foundIndentTabs === 0 && $foundIndentSpaces > 0) {
+                    } elseif ($foundIndentTabs === 0 && $foundIndentSpaces > 0) {
                         $phpcsFile->recordMetric($i, 'Line indent', 'spaces');
-                    } else if ($foundIndentTabs > 0 && $foundIndentSpaces > 0) {
+                    } elseif ($foundIndentTabs > 0 && $foundIndentSpaces > 0) {
                         $spacePosition  = strpos($indentation, ' ');
                         $tabAfterSpaces = strpos($indentation, "\t", $spacePosition);
                         if ($tabAfterSpaces !== false) {

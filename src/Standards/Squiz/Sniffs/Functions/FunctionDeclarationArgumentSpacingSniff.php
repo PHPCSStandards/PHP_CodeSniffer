@@ -198,7 +198,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                 $spacesBefore = 0;
                 if ($tokens[$param['token']]['line'] !== $tokens[$equalToken]['line']) {
                     $spacesBefore = 'newline';
-                } else if ($tokens[($param['token'] + 1)]['code'] === T_WHITESPACE) {
+                } elseif ($tokens[($param['token'] + 1)]['code'] === T_WHITESPACE) {
                     $spacesBefore = $tokens[($param['token'] + 1)]['length'];
                 }
 
@@ -232,7 +232,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                 $spacesAfter = 0;
                 if ($tokens[$equalToken]['line'] !== $tokens[$param['default_token']]['line']) {
                     $spacesAfter = 'newline';
-                } else if ($tokens[($equalToken + 1)]['code'] === T_WHITESPACE) {
+                } elseif ($tokens[($equalToken + 1)]['code'] === T_WHITESPACE) {
                     $spacesAfter = $tokens[($equalToken + 1)]['length'];
                 }
 
@@ -309,7 +309,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                     && $tokens[$visibilityToken]['line'] !== $tokens[$afterVisibilityToken]['line']
                 ) {
                     $spacesAfter = 'newline';
-                } else if ($tokens[($visibilityToken + 1)]['code'] === T_WHITESPACE) {
+                } elseif ($tokens[($visibilityToken + 1)]['code'] === T_WHITESPACE) {
                     $spacesAfter = $tokens[($visibilityToken + 1)]['length'];
                 }
 
@@ -343,7 +343,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                     && $tokens[$visibilityToken]['line'] !== $tokens[$afterVisibilityToken]['line']
                 ) {
                     $spacesAfter = 'newline';
-                } else if ($tokens[($visibilityToken + 1)]['code'] === T_WHITESPACE) {
+                } elseif ($tokens[($visibilityToken + 1)]['code'] === T_WHITESPACE) {
                     $spacesAfter = $tokens[($visibilityToken + 1)]['length'];
                 }
 
@@ -377,7 +377,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                     && $tokens[$readonlyToken]['line'] !== $tokens[$afterReadonlyToken]['line']
                 ) {
                     $spacesAfter = 'newline';
-                } else if ($tokens[($readonlyToken + 1)]['code'] === T_WHITESPACE) {
+                } elseif ($tokens[($readonlyToken + 1)]['code'] === T_WHITESPACE) {
                     $spacesAfter = $tokens[($readonlyToken + 1)]['length'];
                 }
 
@@ -410,7 +410,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                 $spaceBeforeComma = 0;
                 if ($tokens[$endOfPreviousParam]['line'] !== $tokens[$commaToken]['line']) {
                     $spaceBeforeComma = 'newline';
-                } else if ($tokens[($commaToken - 1)]['code'] === T_WHITESPACE) {
+                } elseif ($tokens[($commaToken - 1)]['code'] === T_WHITESPACE) {
                     $spaceBeforeComma = $tokens[($commaToken - 1)]['length'];
                 }
 
@@ -472,7 +472,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                         $typeOfNextShort = 'PropertyModifier';
                         $modifier        = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($commaToken + 1), $param['token'], true);
                         $contentOfNext   = $tokens[$modifier]['content'];
-                    } else if ($param['type_hint_token'] !== false) {
+                    } elseif ($param['type_hint_token'] !== false) {
                         $typeOfNext      = 'type hint';
                         $typeOfNextShort = 'Hint';
                         $contentOfNext   = $param['type_hint'];
@@ -495,7 +495,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                         if ($fix === true) {
                             $phpcsFile->fixer->addContent($commaToken, ' ');
                         }
-                    } else if ($spacesAfter !== 1) {
+                    } elseif ($spacesAfter !== 1) {
                         $error     = 'Expected 1 space between comma and %s "%s"; %s found';
                         $errorCode = 'SpacingBefore' . $typeOfNextShort;
                         $data      = [

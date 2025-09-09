@@ -110,7 +110,7 @@ class UnusedFunctionParameterSniff implements Sniff
                 $extends    = $phpcsFile->findExtendedClassName($classPtr);
                 if ($extends !== false) {
                     $errorCode .= 'InExtendedClass';
-                } else if ($implements !== false) {
+                } elseif ($implements !== false) {
                     $errorCode .= 'InImplementedInterface';
                 }
             }
@@ -197,7 +197,7 @@ class UnusedFunctionParameterSniff implements Sniff
 
             if ($code === T_VARIABLE && isset($params[$token['content']]) === true) {
                 unset($params[$token['content']]);
-            } else if ($code === T_DOLLAR) {
+            } elseif ($code === T_DOLLAR) {
                 $nextToken = $phpcsFile->findNext(T_WHITESPACE, ($next + 1), null, true);
                 if ($tokens[$nextToken]['code'] === T_OPEN_CURLY_BRACKET) {
                     $nextToken = $phpcsFile->findNext(T_WHITESPACE, ($nextToken + 1), null, true);
@@ -208,7 +208,7 @@ class UnusedFunctionParameterSniff implements Sniff
                         }
                     }
                 }
-            } else if ($code === T_DOUBLE_QUOTED_STRING
+            } elseif ($code === T_DOUBLE_QUOTED_STRING
                 || $code === T_START_HEREDOC
                 || $code === T_START_NOWDOC
             ) {
@@ -233,7 +233,7 @@ class UnusedFunctionParameterSniff implements Sniff
                     $varContent = '';
                     if ($stringToken[0] === T_DOLLAR_OPEN_CURLY_BRACES) {
                         $varContent = '$' . $stringTokens[($stringPtr + 1)][1];
-                    } else if ($stringToken[0] === T_VARIABLE) {
+                    } elseif ($stringToken[0] === T_VARIABLE) {
                         $varContent = $stringToken[1];
                     }
 

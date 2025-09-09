@@ -112,7 +112,7 @@ class Markdown extends Generator
         foreach ($doc->childNodes as $node) {
             if ($node->nodeName === 'standard') {
                 $content .= $this->getFormattedTextBlock($node);
-            } else if ($node->nodeName === 'code_comparison') {
+            } elseif ($node->nodeName === 'code_comparison') {
                 $content .= $this->getFormattedCodeComparisonBlock($node);
             }
         }

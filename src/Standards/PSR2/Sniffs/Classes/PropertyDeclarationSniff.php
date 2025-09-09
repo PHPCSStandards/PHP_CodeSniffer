@@ -91,7 +91,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
                 if ($fix === true) {
                     $phpcsFile->fixer->addContent($typeToken, ' ');
                 }
-            } else if ($tokens[($typeToken + 1)]['content'] !== ' ') {
+            } elseif ($tokens[($typeToken + 1)]['content'] !== ' ') {
                 $next = $phpcsFile->findNext(T_WHITESPACE, ($typeToken + 1), null, true);
                 if ($tokens[$next]['line'] !== $tokens[$typeToken]['line']) {
                     $found = 'newline';

@@ -761,9 +761,9 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
 
                 if ($colonCount === 1) {
                     $this->assertSame(T_COLON, $tokens[$i]['code'], 'First colon is not tokenized as T_COLON');
-                } else if ($colonCount === 2) {
+                } elseif ($colonCount === 2) {
                     $this->assertSame(T_INLINE_ELSE, $tokens[$i]['code'], 'Second colon is not tokenized as T_INLINE_ELSE');
-                } else if ($colonCount === 3) {
+                } elseif ($colonCount === 3) {
                     $this->assertSame(T_COLON, $tokens[$i]['code'], 'Third colon is not tokenized as T_COLON');
                 } else {
                     $this->fail('Unexpected colon encountered in statement');
@@ -959,15 +959,15 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
 
             if ($keyword === 'and') {
                 $tokensTypes[] = T_LOGICAL_AND;
-            } else if ($keyword === 'die') {
+            } elseif ($keyword === 'die') {
                 $tokensTypes[] = T_EXIT;
-            } else if ($keyword === 'or') {
+            } elseif ($keyword === 'or') {
                 $tokensTypes[] = T_LOGICAL_OR;
-            } else if ($keyword === 'xor') {
+            } elseif ($keyword === 'xor') {
                 $tokensTypes[] = T_LOGICAL_XOR;
-            } else if ($keyword === '__halt_compiler') {
+            } elseif ($keyword === '__halt_compiler') {
                 $tokensTypes[] = T_HALT_COMPILER;
-            } else if (defined($tokenName) === true) {
+            } elseif (defined($tokenName) === true) {
                 $tokensTypes[] = constant($tokenName);
             }
 

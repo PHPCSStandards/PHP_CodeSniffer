@@ -145,7 +145,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
                     $phpcsFile->fixer->addNewlineBefore($closeBrace);
                 }
             }
-        } else if ($tokens[($closeBrace - 1)]['code'] === T_WHITESPACE) {
+        } elseif ($tokens[($closeBrace - 1)]['code'] === T_WHITESPACE) {
             $prevContent = $tokens[($closeBrace - 1)]['content'];
             if ($prevContent !== $phpcsFile->eolChar) {
                 $blankSpace = substr($prevContent, strpos($prevContent, $phpcsFile->eolChar));
@@ -206,7 +206,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
                     for ($i = ($closeBrace + 1); $i < $nextContent; $i++) {
                         if ($tokens[$i]['line'] <= ($tokens[$closeBrace]['line'] + 1)) {
                             continue;
-                        } else if ($tokens[$i]['line'] === $tokens[$nextContent]['line']) {
+                        } elseif ($tokens[$i]['line'] === $tokens[$nextContent]['line']) {
                             break;
                         }
 

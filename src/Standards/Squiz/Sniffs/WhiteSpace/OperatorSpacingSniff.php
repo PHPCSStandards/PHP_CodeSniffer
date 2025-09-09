@@ -223,7 +223,7 @@ class OperatorSpacingSniff implements Sniff
             }
 
             $phpcsFile->recordMetric($stackPtr, 'Space before operator', 0);
-        } else if (isset(Tokens::ASSIGNMENT_TOKENS[$tokens[$stackPtr]['code']]) === false
+        } elseif (isset(Tokens::ASSIGNMENT_TOKENS[$tokens[$stackPtr]['code']]) === false
             || $this->ignoreSpacingBeforeAssignments === false
         ) {
             // Throw an error for assignments only if enabled using the sniff property

@@ -68,7 +68,7 @@ class DuplicateClassNameSniff implements Sniff
                         || $tokens[$nextNonEmpty]['code'] === T_NAME_QUALIFIED
                     ) {
                         $namespace = $tokens[$nextNonEmpty]['content'];
-                    } else if ($tokens[$nextNonEmpty]['code'] === T_OPEN_CURLY_BRACKET) {
+                    } elseif ($tokens[$nextNonEmpty]['code'] === T_OPEN_CURLY_BRACKET) {
                         $namespace = '';
                     }
 

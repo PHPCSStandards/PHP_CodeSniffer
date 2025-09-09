@@ -79,7 +79,7 @@ class Xml implements Report
         $content = $out->flush();
         if (strpos($content, PHP_EOL) !== false) {
             $content = substr($content, (strpos($content, PHP_EOL) + strlen(PHP_EOL)));
-        } else if (strpos($content, "\n") !== false) {
+        } elseif (strpos($content, "\n") !== false) {
             $content = substr($content, (strpos($content, "\n") + 1));
         }
 

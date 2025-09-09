@@ -232,9 +232,9 @@ class MultiLineConditionSniff implements Sniff
 
         if ($tokens[$openBrace]['line'] > $tokens[$closeBracket]['line']) {
             $length = -1;
-        } else if ($openBrace === ($closeBracket + 1)) {
+        } elseif ($openBrace === ($closeBracket + 1)) {
             $length = 0;
-        } else if ($openBrace === ($closeBracket + 2)
+        } elseif ($openBrace === ($closeBracket + 2)
             && $tokens[($closeBracket + 1)]['code'] === T_WHITESPACE
         ) {
             $length = $tokens[($closeBracket + 1)]['length'];

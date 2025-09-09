@@ -307,7 +307,7 @@ class SwitchDeclarationSniff implements Sniff
                     }
 
                     return $this->findNestedTerminator($phpcsFile, ($scopeOpener + 1), $scopeCloser);
-                } else if ($tokens[$prevToken]['code'] === T_ELSEIF
+                } elseif ($tokens[$prevToken]['code'] === T_ELSEIF
                     || $tokens[$prevToken]['code'] === T_ELSE
                 ) {
                     // If we find a terminating statement within this block,
@@ -321,7 +321,7 @@ class SwitchDeclarationSniff implements Sniff
                     if ($tokens[$prevToken]['code'] === T_ELSE) {
                         $hasElseBlock = true;
                     }
-                } else if ($tokens[$prevToken]['code'] === T_FINALLY) {
+                } elseif ($tokens[$prevToken]['code'] === T_FINALLY) {
                     // If we find a terminating statement within this block,
                     // the whole try/catch/finally statement is covered.
                     $hasTerminator = $this->findNestedTerminator($phpcsFile, ($scopeOpener + 1), $scopeCloser);
@@ -331,7 +331,7 @@ class SwitchDeclarationSniff implements Sniff
 
                     // Otherwise, we continue with the previous TRY or CATCH clause.
                     $currentCloser = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($prevToken - 1), $stackPtr, true);
-                } else if ($tokens[$prevToken]['code'] === T_TRY) {
+                } elseif ($tokens[$prevToken]['code'] === T_TRY) {
                     // If we've seen CATCH blocks without terminator statement and
                     // have not seen a FINALLY *with* a terminator statement, we
                     // don't even need to bother checking the TRY.
@@ -340,7 +340,7 @@ class SwitchDeclarationSniff implements Sniff
                     }
 
                     return $this->findNestedTerminator($phpcsFile, ($scopeOpener + 1), $scopeCloser);
-                } else if ($tokens[$prevToken]['code'] === T_CATCH) {
+                } elseif ($tokens[$prevToken]['code'] === T_CATCH) {
                     // Keep track of seen catch statements without terminating statement,
                     // but don't bow out yet as there may still be a FINALLY clause
                     // with a terminating statement before the CATCH.
@@ -350,7 +350,7 @@ class SwitchDeclarationSniff implements Sniff
                     }
 
                     $currentCloser = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($prevToken - 1), $stackPtr, true);
-                } else if ($tokens[$prevToken]['code'] === T_SWITCH) {
+                } elseif ($tokens[$prevToken]['code'] === T_SWITCH) {
                     $hasDefaultBlock = false;
                     $endOfSwitch     = $tokens[$prevToken]['scope_closer'];
                     $nextCase        = $prevToken;
@@ -393,7 +393,7 @@ class SwitchDeclarationSniff implements Sniff
             } while ($currentCloser !== false && $tokens[$currentCloser]['code'] === T_CLOSE_CURLY_BRACKET);
 
             return true;
-        } else if ($tokens[$lastToken]['code'] === T_SEMICOLON) {
+        } elseif ($tokens[$lastToken]['code'] === T_SEMICOLON) {
             // We found the last statement of the CASE. Now we want to
             // check whether it is a terminating one.
             $terminator = $phpcsFile->findStartOfStatement(($lastToken - 1));

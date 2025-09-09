@@ -100,7 +100,7 @@ class AssignmentInConditionSniff implements Sniff
 
             $closer = $semicolon;
             unset($semicolon);
-        } else if ($token['code'] === T_CASE) {
+        } elseif ($token['code'] === T_CASE) {
             if (isset($token['scope_opener']) === false) {
                 return;
             }

@@ -74,7 +74,7 @@ class Cache
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
                     StatusWriter::write("=> external file: $file", 2);
                 }
-            } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
+            } elseif (PHP_CODESNIFFER_VERBOSITY > 1) {
                 StatusWriter::write("=> internal sniff: $file", 2);
             }
 
@@ -90,7 +90,7 @@ class Cache
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
                     StatusWriter::write("=> external ruleset: $file", 2);
                 }
-            } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
+            } elseif (PHP_CODESNIFFER_VERBOSITY > 1) {
                 StatusWriter::write("=> internal ruleset: $file", 2);
             }
 
@@ -278,7 +278,7 @@ class Cache
                     StatusWriter::write('* cache was invalid and has been cleared *', 1);
                 }
             }
-        } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
+        } elseif (PHP_CODESNIFFER_VERBOSITY > 1) {
             StatusWriter::write('* cache file does not exist *', 1);
         }
 
