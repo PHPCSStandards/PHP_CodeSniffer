@@ -2271,7 +2271,7 @@ class PHP extends Tokenizer
                     }
 
                     if ($prevNonEmpty === null
-                        && @isset(Tokens::$emptyTokens[$tokenType]) === false
+                        && isset(Tokens::$emptyTokens[$tokenType]) === false
                     ) {
                         // Found the previous non-empty token.
                         if ($tokenType === ':' || $tokenType === ',' || $tokenType === T_ATTRIBUTE_END) {
@@ -2290,8 +2290,8 @@ class PHP extends Tokenizer
 
                     if ($tokenType === T_FUNCTION
                         || $tokenType === T_FN
-                        || @isset(Tokens::$methodPrefixes[$tokenType]) === true
-                        || @isset(Tokens::$scopeModifiers[$tokenType]) === true
+                        || isset(Tokens::$methodPrefixes[$tokenType]) === true
+                        || isset(Tokens::$scopeModifiers[$tokenType]) === true
                         || $tokenType === T_VAR
                         || $tokenType === T_READONLY
                     ) {
@@ -2314,7 +2314,7 @@ class PHP extends Tokenizer
                         break;
                     }
 
-                    if (@isset(Tokens::$emptyTokens[$tokenType]) === false) {
+                    if (isset(Tokens::$emptyTokens[$tokenType]) === false) {
                         $lastSeenNonEmpty = $tokenType;
                     }
                 }//end for
