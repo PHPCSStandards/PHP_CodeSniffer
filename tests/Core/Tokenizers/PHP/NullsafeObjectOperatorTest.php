@@ -20,7 +20,7 @@ final class NullsafeObjectOperatorTest extends AbstractTokenizerTestCase
      *
      * @var array<int|string>
      */
-    protected $find = [
+    private const TARGET_TOKENS = [
         T_NULLSAFE_OBJECT_OPERATOR,
         T_OBJECT_OPERATOR,
         T_INLINE_THEN,
@@ -38,7 +38,7 @@ final class NullsafeObjectOperatorTest extends AbstractTokenizerTestCase
     {
         $tokens = $this->phpcsFile->getTokens();
 
-        $operator = $this->getTargetToken('/* testObjectOperator */', $this->find);
+        $operator = $this->getTargetToken('/* testObjectOperator */', self::TARGET_TOKENS);
         $this->assertSame(T_OBJECT_OPERATOR, $tokens[$operator]['code'], 'Failed asserting code is object operator');
         $this->assertSame('T_OBJECT_OPERATOR', $tokens[$operator]['type'], 'Failed asserting type is object operator');
 
@@ -59,7 +59,7 @@ final class NullsafeObjectOperatorTest extends AbstractTokenizerTestCase
     {
         $tokens = $this->phpcsFile->getTokens();
 
-        $operator = $this->getTargetToken($testMarker, $this->find);
+        $operator = $this->getTargetToken($testMarker, self::TARGET_TOKENS);
         $this->assertSame(T_NULLSAFE_OBJECT_OPERATOR, $tokens[$operator]['code'], 'Failed asserting code is nullsafe object operator');
         $this->assertSame('T_NULLSAFE_OBJECT_OPERATOR', $tokens[$operator]['type'], 'Failed asserting type is nullsafe object operator');
 
@@ -99,7 +99,7 @@ final class NullsafeObjectOperatorTest extends AbstractTokenizerTestCase
     {
         $tokens = $this->phpcsFile->getTokens();
 
-        $operator = $this->getTargetToken($testMarker, $this->find);
+        $operator = $this->getTargetToken($testMarker, self::TARGET_TOKENS);
         $this->assertSame(T_INLINE_THEN, $tokens[$operator]['code'], 'Failed asserting code is inline then');
         $this->assertSame('T_INLINE_THEN', $tokens[$operator]['type'], 'Failed asserting type is inline then');
 
