@@ -20,9 +20,9 @@ class LowerCaseTypeSniff implements Sniff
     /**
      * Native types supported by PHP.
      *
-     * @var array
+     * @var array<string, true>
      */
-    private $phpTypes = [
+    private const PHP_TYPES = [
         'self'     => true,
         'parent'   => true,
         'array'    => true,
@@ -146,7 +146,7 @@ class LowerCaseTypeSniff implements Sniff
                             );
                         } else {
                             $type = $tokens[$startOfType]['content'];
-                            if (isset($this->phpTypes[strtolower($type)]) === true) {
+                            if (isset(self::PHP_TYPES[strtolower($type)]) === true) {
                                 $this->processType($phpcsFile, $startOfType, $type, $error, $errorCode);
                             }
                         }
@@ -182,7 +182,7 @@ class LowerCaseTypeSniff implements Sniff
                             $error,
                             $errorCode
                         );
-                    } else if (isset($this->phpTypes[strtolower($type)]) === true) {
+                    } else if (isset(self::PHP_TYPES[strtolower($type)]) === true) {
                         $this->processType($phpcsFile, $props['type_token'], $type, $error, $errorCode);
                     }
                 }
@@ -213,7 +213,7 @@ class LowerCaseTypeSniff implements Sniff
                     $error,
                     $errorCode
                 );
-            } else if (isset($this->phpTypes[strtolower($returnType)]) === true) {
+            } else if (isset(self::PHP_TYPES[strtolower($returnType)]) === true) {
                 $this->processType($phpcsFile, $props['return_type_token'], $returnType, $error, $errorCode);
             }
         }
@@ -244,7 +244,7 @@ class LowerCaseTypeSniff implements Sniff
                         $error,
                         $errorCode
                     );
-                } else if (isset($this->phpTypes[strtolower($typeHint)]) === true) {
+                } else if (isset(self::PHP_TYPES[strtolower($typeHint)]) === true) {
                     $this->processType($phpcsFile, $param['type_hint_token'], $typeHint, $error, $errorCode);
                 }
             }
@@ -285,7 +285,7 @@ class LowerCaseTypeSniff implements Sniff
             ) {
                 if ($typeTokenCount === 1
                     && $type !== ''
-                    && isset($this->phpTypes[strtolower($type)]) === true
+                    && isset(self::PHP_TYPES[strtolower($type)]) === true
                 ) {
                     $this->processType($phpcsFile, $typeStart, $type, $error, $errorCode);
                 }
@@ -309,7 +309,7 @@ class LowerCaseTypeSniff implements Sniff
         // Handle type at end of type string.
         if ($typeTokenCount === 1
             && $type !== ''
-            && isset($this->phpTypes[strtolower($type)]) === true
+            && isset(self::PHP_TYPES[strtolower($type)]) === true
         ) {
             $this->processType($phpcsFile, $typeStart, $type, $error, $errorCode);
         }

@@ -21,6 +21,27 @@ class CyclomaticComplexitySniff implements Sniff
 {
 
     /**
+     * Predicate nodes for PHP.
+     *
+     * @var array<int|string, true>
+     */
+    private const PREDICATE_NODES = [
+        T_CASE                     => true,
+        T_DEFAULT                  => true,
+        T_CATCH                    => true,
+        T_IF                       => true,
+        T_FOR                      => true,
+        T_FOREACH                  => true,
+        T_WHILE                    => true,
+        T_ELSEIF                   => true,
+        T_INLINE_THEN              => true,
+        T_COALESCE                 => true,
+        T_COALESCE_EQUAL           => true,
+        T_MATCH_ARROW              => true,
+        T_NULLSAFE_OBJECT_OPERATOR => true,
+    ];
+
+    /**
      * A complexity higher than this value will throw a warning.
      *
      * @var integer
@@ -69,28 +90,11 @@ class CyclomaticComplexitySniff implements Sniff
         $start = $tokens[$stackPtr]['scope_opener'];
         $end   = $tokens[$stackPtr]['scope_closer'];
 
-        // Predicate nodes for PHP.
-        $find = [
-            T_CASE                     => true,
-            T_DEFAULT                  => true,
-            T_CATCH                    => true,
-            T_IF                       => true,
-            T_FOR                      => true,
-            T_FOREACH                  => true,
-            T_WHILE                    => true,
-            T_ELSEIF                   => true,
-            T_INLINE_THEN              => true,
-            T_COALESCE                 => true,
-            T_COALESCE_EQUAL           => true,
-            T_MATCH_ARROW              => true,
-            T_NULLSAFE_OBJECT_OPERATOR => true,
-        ];
-
         $complexity = 1;
 
         // Iterate from start to end and count predicate nodes.
         for ($i = ($start + 1); $i < $end; $i++) {
-            if (isset($find[$tokens[$i]['code']]) === true) {
+            if (isset(self::PREDICATE_NODES[$tokens[$i]['code']]) === true) {
                 $complexity++;
             }
         }
