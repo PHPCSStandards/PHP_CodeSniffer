@@ -39,7 +39,6 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
         $this->assertArrayHasKey('parenthesis_owner', $tokenArray, 'Parenthesis owner is not set');
         $this->assertArrayHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is not set');
         $this->assertArrayHasKey('parenthesis_closer', $tokenArray, 'Parenthesis closer is not set');
-
     }
 
 
@@ -73,7 +72,6 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testOOConstDefault */',
             ],
         ];
-
     }
 
 
@@ -101,7 +99,6 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
         $this->assertArrayNotHasKey('parenthesis_owner', $tokenArray, 'Parenthesis owner is set');
         $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is set');
         $this->assertArrayNotHasKey('parenthesis_closer', $tokenArray, 'Parenthesis closer is set');
-
     }
 
 
@@ -150,7 +147,6 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
                 'testContent' => 'Array',
             ],
         ];
-
     }
 
 
@@ -179,7 +175,6 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
         $this->assertArrayNotHasKey('parenthesis_owner', $tokenArray, 'Parenthesis owner is set');
         $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is set');
         $this->assertArrayNotHasKey('parenthesis_closer', $tokenArray, 'Parenthesis closer is set');
-
     }
 
 
@@ -205,7 +200,6 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
                 'testContent' => 'ARRAY',
             ],
         ];
-
     }
 
 

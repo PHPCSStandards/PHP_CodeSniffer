@@ -37,7 +37,6 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::write($message);
 
         $this->assertStderrOutputSameString($expected);
-
     }
 
 
@@ -58,7 +57,6 @@ final class StatusWriterTest extends AbstractWriterTestCase
                 'expected' => PHP_EOL,
             ],
         ];
-
     }
 
 
@@ -81,7 +79,6 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::write($message, $indent, $newlines);
 
         $this->assertStderrOutputSameString($expected);
-
     }
 
 
@@ -130,7 +127,6 @@ final class StatusWriterTest extends AbstractWriterTestCase
                 'expected' => 'This message should end up in stdErr with no tab indent and no new line',
             ],
         ];
-
     }
 
 
@@ -153,7 +149,6 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::write($message);
 
         $this->assertStderrOutputSameString('');
-
     }
 
 
@@ -184,7 +179,6 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::write($message);
 
         $this->assertStderrOutputSameString($expected);
-
     }
 
 
@@ -208,7 +202,6 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::forceWrite($message);
 
         $this->assertStderrOutputSameString($expected);
-
     }
 
 
@@ -244,7 +237,6 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::forceWrite($messageC);
 
         $this->assertStderrOutputSameString($expected);
-
     }
 
 
@@ -270,7 +262,6 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::forceWriteNewline();
 
         $this->assertStderrOutputSameString(PHP_EOL . PHP_EOL);
-
     }
 
 
@@ -326,7 +317,6 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::write($message);
 
         $this->assertStderrOutputSameString($expected);
-
     }
 
 
@@ -382,7 +372,6 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::write($messageA);
 
         $this->assertStderrOutputSameString($expected);
-
     }
 
 

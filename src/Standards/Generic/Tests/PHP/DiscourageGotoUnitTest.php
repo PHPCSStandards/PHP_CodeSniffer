@@ -31,7 +31,6 @@ final class DiscourageGotoUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [];
-
     }
 
 
@@ -51,7 +50,6 @@ final class DiscourageGotoUnitTest extends AbstractSniffTestCase
             11 => 1,
             16 => 1,
         ];
-
     }
 
 

@@ -29,7 +29,6 @@ final class FindExtendedClassNameTest extends AbstractMethodTestCase
     {
         $result = self::$phpcsFile->findExtendedClassName(100000);
         $this->assertFalse($result);
-
     }
 
 
@@ -43,7 +42,6 @@ final class FindExtendedClassNameTest extends AbstractMethodTestCase
         $token  = $this->getTargetToken('/* testNotAClass */', [T_FUNCTION]);
         $result = self::$phpcsFile->findExtendedClassName($token);
         $this->assertFalse($result);
-
     }
 
 
@@ -63,7 +61,6 @@ final class FindExtendedClassNameTest extends AbstractMethodTestCase
         $OOToken = $this->getTargetToken($identifier, [T_CLASS, T_ANON_CLASS, T_INTERFACE]);
         $result  = self::$phpcsFile->findExtendedClassName($OOToken);
         $this->assertSame($expected, $result);
-
     }
 
 
@@ -150,7 +147,6 @@ final class FindExtendedClassNameTest extends AbstractMethodTestCase
                 'expected'   => false,
             ],
         ];
-
     }
 
 

@@ -63,7 +63,6 @@ final class SetSniffPropertyTest extends AbstractRulesetTestCase
         foreach ($properties as $name => $expectedValue) {
             $this->assertSame($expectedValue, $sniffObject->$name, 'Property value not set to expected value');
         }
-
     }
 
 
@@ -81,7 +80,6 @@ final class SetSniffPropertyTest extends AbstractRulesetTestCase
             'Property allowed as sniff extends stdClass'         => ['AllowedViaStdClass'],
             'Property allowed as sniff has magic __set() method' => ['AllowedViaMagicMethod'],
         ];
-
     }
 
 
@@ -123,7 +121,6 @@ final class SetSniffPropertyTest extends AbstractRulesetTestCase
         $hasProperty = (new ReflectionObject($ruleset->sniffs[$sniffClass]))->hasProperty($propertyName);
         $errorMsg    = sprintf('Property %s registered for sniff %s which does not support it', $propertyName, $sniffClass);
         $this->assertFalse($hasProperty, $errorMsg);
-
     }
 
 
@@ -142,7 +139,6 @@ final class SetSniffPropertyTest extends AbstractRulesetTestCase
         $standard = __DIR__ . '/SetPropertyThrowsErrorOnInvalidPropertyTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         new Ruleset($config);
-
     }
 
 
@@ -162,7 +158,6 @@ final class SetSniffPropertyTest extends AbstractRulesetTestCase
         $standard = __DIR__ . '/SetPropertyNotAllowedViaAttributeTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         new Ruleset($config);
-
     }
 
 
@@ -180,7 +175,6 @@ final class SetSniffPropertyTest extends AbstractRulesetTestCase
         $standard = __DIR__ . '/SetPropertyDoesNotThrowErrorOnInvalidPropertyWhenSetForStandardTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         new Ruleset($config);
-
     }
 
 
@@ -198,7 +192,6 @@ final class SetSniffPropertyTest extends AbstractRulesetTestCase
         $standard = __DIR__ . '/SetPropertyDoesNotThrowErrorOnInvalidPropertyWhenSetForCategoryTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         new Ruleset($config);
-
     }
 
 
@@ -231,7 +224,6 @@ final class SetSniffPropertyTest extends AbstractRulesetTestCase
         // Verify that our target sniff has NOT been registered after attempting to set the property.
         $this->assertArrayNotHasKey($sniffCode, $ruleset->sniffCodes, 'Unused sniff was registered in sniffCodes, but shouldn\'t have been');
         $this->assertArrayNotHasKey($sniffClass, $ruleset->sniffs, 'Unused sniff was registered in sniffs, but shouldn\'t have been');
-
     }
 
 
@@ -276,7 +268,6 @@ final class SetSniffPropertyTest extends AbstractRulesetTestCase
 
         $sniffObject = $ruleset->sniffs[$sniffClass];
         $this->assertSame($propertyValue, $sniffObject->$propertyName, 'Property value not set to expected value');
-
     }
 
 

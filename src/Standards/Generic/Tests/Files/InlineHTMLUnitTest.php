@@ -45,7 +45,6 @@ final class InlineHTMLUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -62,7 +61,6 @@ final class InlineHTMLUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         return [];
-
     }
 
 

@@ -40,7 +40,6 @@ final class GetIgnorePatternsTest extends TestCase
         $standard      = __DIR__ . '/GetIgnorePatternsTest.xml';
         $config        = new ConfigDouble(["--standard=$standard"]);
         self::$ruleset = new Ruleset($config);
-
     }
 
 
@@ -57,7 +56,6 @@ final class GetIgnorePatternsTest extends TestCase
     public function testGetIgnorePatterns($listener, $expected)
     {
         $this->assertSame($expected, self::$ruleset->getIgnorePatterns($listener));
-
     }
 
 
@@ -102,7 +100,6 @@ final class GetIgnorePatternsTest extends TestCase
                 'expected' => [],
             ],
         ];
-
     }
 
 

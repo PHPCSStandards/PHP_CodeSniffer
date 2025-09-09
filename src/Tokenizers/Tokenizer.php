@@ -128,7 +128,6 @@ abstract class Tokenizer
 
         // Allow the tokenizer to do additional processing if required.
         $this->processAdditional();
-
     }
 
 
@@ -152,7 +151,6 @@ abstract class Tokenizer
         }
 
         return false;
-
     }
 
 
@@ -164,7 +162,6 @@ abstract class Tokenizer
     public function getTokens()
     {
         return $this->tokens;
-
     }
 
 
@@ -482,7 +479,6 @@ abstract class Tokenizer
         if ($checkAnnotations === false) {
             $this->ignoredLines = [];
         }
-
     }
 
 
@@ -572,7 +568,6 @@ abstract class Tokenizer
         $token['orig_content'] = $token['content'];
         $token['content']      = $newContent;
         $token['length']       = $length;
-
     }
 
 
@@ -749,7 +744,6 @@ abstract class Tokenizer
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             StatusWriter::write('*** END TOKEN MAP ***', 1);
         }
-
     }
 
 
@@ -786,7 +780,6 @@ abstract class Tokenizer
                 }
             }//end if
         }//end for
-
     }
 
 
@@ -826,7 +819,6 @@ abstract class Tokenizer
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             StatusWriter::write('*** END SCOPE MAP ***', 1);
         }
-
     }
 
 
@@ -1356,7 +1348,6 @@ abstract class Tokenizer
         }//end for
 
         return $stackPtr;
-
     }
 
 
@@ -1584,7 +1575,6 @@ abstract class Tokenizer
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             StatusWriter::write('*** END LEVEL MAP ***', 1);
         }
-
     }
 
 

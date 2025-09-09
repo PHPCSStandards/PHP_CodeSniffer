@@ -2755,7 +2755,6 @@ class PHP extends Tokenizer
         }
 
         return $finalTokens;
-
     }
 
 
@@ -3754,7 +3753,6 @@ class PHP extends Tokenizer
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             StatusWriter::write('*** END ADDITIONAL PHP PROCESSING ***', 1);
         }
-
     }
 
 
@@ -3832,7 +3830,6 @@ class PHP extends Tokenizer
 
         $newToken['content'] = $token[1];
         return $newToken;
-
     }
 
 
@@ -3940,7 +3937,6 @@ class PHP extends Tokenizer
 
         self::$resolveTokenCache[$token] = $newToken;
         return $newToken;
-
     }
 
 
@@ -3977,7 +3973,6 @@ class PHP extends Tokenizer
         }
 
         return $closer;
-
     }
 
 
@@ -4040,7 +4035,6 @@ class PHP extends Tokenizer
         }
 
         return $subTokens;
-
     }
 
 
@@ -4077,7 +4071,6 @@ class PHP extends Tokenizer
                 }
             }//end if
         }//end for
-
     }
 
 

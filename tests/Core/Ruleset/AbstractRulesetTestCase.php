@@ -33,7 +33,6 @@ abstract class AbstractRulesetTestCase extends TestCase
             // PHPUnit < 9.6.11.
             $this->assertObjectHasAttribute($propertyName, $object, $message);
         }
-
     }
 
 
@@ -55,7 +54,6 @@ abstract class AbstractRulesetTestCase extends TestCase
             // PHPUnit < 9.6.11.
             $this->assertObjectNotHasAttribute($propertyName, $object, $message);
         }
-
     }
 
 
@@ -71,7 +69,6 @@ abstract class AbstractRulesetTestCase extends TestCase
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage($message);
-
     }
 
 
@@ -93,7 +90,6 @@ abstract class AbstractRulesetTestCase extends TestCase
             $this->expectException(RuntimeException::class);
             $this->expectExceptionMessageRegExp($regex);
         }
-
     }
 
 

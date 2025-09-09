@@ -32,7 +32,6 @@ final class DisallowTabIndentUnitTest extends AbstractSniffTestCase
     public function setCliValues(string $testFile, Config $config)
     {
         $config->tabWidth = 4;
-
     }
 
 
@@ -119,7 +118,6 @@ final class DisallowTabIndentUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -134,7 +132,6 @@ final class DisallowTabIndentUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

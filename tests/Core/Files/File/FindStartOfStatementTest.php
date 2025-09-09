@@ -55,7 +55,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         }
 
         $this->assertSame([], $errors);
-
     }
 
 
@@ -70,7 +69,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 5), $found);
-
     }
 
 
@@ -85,7 +83,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 6), $found);
-
     }
 
 
@@ -100,7 +97,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame($start, $found);
-
     }
 
 
@@ -115,7 +111,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 6), $found);
-
     }
 
 
@@ -130,7 +125,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 11), $found);
-
     }
 
 
@@ -158,7 +152,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame($start, $found);
-
     }
 
 
@@ -198,7 +191,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 1), $found);
-
     }
 
 
@@ -232,7 +224,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 5), $found);
-
     }
 
 
@@ -247,7 +238,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 21), $found);
-
     }
 
 
@@ -262,7 +252,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 7), $found);
-
     }
 
 
@@ -277,7 +266,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 11), $found);
-
     }
 
 
@@ -292,7 +280,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 18), $found);
-
     }
 
 
@@ -308,7 +295,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 8), $found);
-
     }
 
 
@@ -324,7 +310,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 17), $found);
-
     }
 
 
@@ -339,7 +324,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 1), $found);
-
     }
 
 
@@ -354,7 +338,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame($start, $found);
-
     }
 
 
@@ -374,7 +357,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 4), $found);
-
     }
 
 
@@ -394,7 +376,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame($start, $found);
-
     }
 
 
@@ -409,7 +390,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 6), $found);
-
     }
 
 
@@ -431,7 +411,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 18), $found);
-
     }
 
 
@@ -452,7 +431,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 10), $found);
-
     }
 
 
@@ -482,7 +460,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $start += 30;
         $found  = self::$phpcsFile->findStartOfStatement($start);
         $this->assertSame(($start - 26), $found);
-
     }
 
 
@@ -508,7 +485,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 2), $found);
-
     }
 
 
@@ -524,7 +500,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 1), $found);
-
     }
 
 
@@ -540,7 +515,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame(($start - 1), $found);
-
     }
 
 
@@ -560,7 +534,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($start);
 
         $this->assertSame($expected, $found);
-
     }
 
 
@@ -586,7 +559,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($testToken);
 
         $this->assertSame($expected, $found);
-
     }
 
 
@@ -686,7 +658,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
                 'expectedTarget' => T_CONTINUE,
             ],
         ];
-
     }
 
 
@@ -711,7 +682,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($testToken);
 
         $this->assertSame($expected, $found);
-
     }
 
 
@@ -768,7 +738,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
                 'expectedTarget' => T_STRING,
             ],
         ];
-
     }
 
 
@@ -793,7 +762,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($testToken);
 
         $this->assertSame($expected, $found);
-
     }
 
 
@@ -848,7 +816,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
                 'expectedTarget' => T_VARIABLE,
             ],
         ];
-
     }
 
 
@@ -874,7 +841,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($testToken);
 
         $this->assertSame($expected, $found);
-
     }
 
 
@@ -929,7 +895,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
                 'expectedTarget' => T_VARIABLE,
             ],
         ];
-
     }
 
 
@@ -954,7 +919,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findStartOfStatement($testToken);
 
         $this->assertSame($expected, $found);
-
     }
 
 
@@ -982,7 +946,6 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
                 'expectedTarget' => T_VARIABLE,
             ],
         ];
-
     }
 
 

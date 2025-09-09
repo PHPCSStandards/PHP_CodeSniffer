@@ -44,7 +44,6 @@ final class SyntaxUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
     }
 
 
@@ -59,7 +58,6 @@ final class SyntaxUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 
@@ -103,7 +101,6 @@ final class SyntaxUnitTest extends AbstractSniffTestCase
             $file->getErrors(),
             'Error list does not match expected errors'
         );
-
     }
 
 
@@ -163,7 +160,6 @@ final class SyntaxUnitTest extends AbstractSniffTestCase
                 ],
             ],
         ];
-
     }
 
 

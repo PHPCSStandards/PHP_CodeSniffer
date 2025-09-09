@@ -53,7 +53,6 @@ class UnnecessaryHeredocSniff implements Sniff
     public function register()
     {
         return [T_START_HEREDOC];
-
     }
 
 
@@ -138,7 +137,6 @@ class UnnecessaryHeredocSniff implements Sniff
 
             $phpcsFile->fixer->endChangeset();
         }
-
     }
 
 

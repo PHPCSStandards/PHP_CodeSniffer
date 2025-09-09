@@ -80,7 +80,6 @@ final class LanguageConstructSpacingUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -95,7 +94,6 @@ final class LanguageConstructSpacingUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

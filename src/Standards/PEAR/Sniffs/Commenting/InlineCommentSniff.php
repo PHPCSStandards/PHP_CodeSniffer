@@ -24,7 +24,6 @@ class InlineCommentSniff implements Sniff
     public function register()
     {
         return [T_COMMENT];
-
     }
 
 
@@ -61,7 +60,6 @@ class InlineCommentSniff implements Sniff
         ) {
             $phpcsFile->recordMetric($stackPtr, 'Inline comment style', '/* ... */');
         }
-
     }
 
 

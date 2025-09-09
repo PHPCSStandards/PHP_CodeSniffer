@@ -31,7 +31,6 @@ final class ForLoopWithTestFunctionCallUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [];
-
     }
 
 
@@ -71,7 +70,6 @@ final class ForLoopWithTestFunctionCallUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 

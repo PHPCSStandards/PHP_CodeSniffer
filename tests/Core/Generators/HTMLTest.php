@@ -42,7 +42,6 @@ final class HTMLTest extends TestCase
 
         $generator = new HTML($ruleset);
         $generator->generate();
-
     }
 
 
@@ -71,7 +70,6 @@ final class HTMLTest extends TestCase
 
         $generator = new HTMLDouble($ruleset);
         $generator->generate();
-
     }
 
 
@@ -96,7 +94,6 @@ final class HTMLTest extends TestCase
                 'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputStructureDocs.html',
             ],
         ];
-
     }
 
 
@@ -126,7 +123,6 @@ final class HTMLTest extends TestCase
 
         $generator = new HTMLDouble($ruleset);
         $generator->generate();
-
     }
 
 
@@ -251,7 +247,6 @@ final class HTMLTest extends TestCase
                 'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputInvalidStandardNoContent.html',
             ],
         ];
-
     }
 
 
@@ -277,7 +272,6 @@ final class HTMLTest extends TestCase
 
         $generator = new HTMLDouble($ruleset);
         $generator->generate();
-
     }
 
 
@@ -307,7 +301,6 @@ final class HTMLTest extends TestCase
             // PHPUnit < 9.1.0.
             $this->assertRegExp($regex, $footer);
         }
-
     }
 
 
@@ -332,7 +325,6 @@ final class HTMLTest extends TestCase
         $generator->getRealFooter();
 
         $this->assertSame($expected, error_reporting());
-
     }
 
 
@@ -372,7 +364,6 @@ final class HTMLTest extends TestCase
 
         // Reset the timezone to its original state.
         ini_set('date.timezone', $originalIni);
-
     }
 
 

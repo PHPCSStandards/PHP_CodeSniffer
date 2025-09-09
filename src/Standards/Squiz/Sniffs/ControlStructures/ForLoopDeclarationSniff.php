@@ -46,7 +46,6 @@ class ForLoopDeclarationSniff implements Sniff
     public function register()
     {
         return [T_FOR];
-
     }
 
 
@@ -298,7 +297,6 @@ class ForLoopDeclarationSniff implements Sniff
                 }//end if
             }//end if
         } while ($semicolonCount < 2);
-
     }
 
 

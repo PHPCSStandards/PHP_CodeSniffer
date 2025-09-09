@@ -40,7 +40,6 @@ final class ArrayBracketSpacingUnitTest extends AbstractSniffTestCase
             30 => 1,
             31 => 2,
         ];
-
     }
 
 
@@ -55,7 +54,6 @@ final class ArrayBracketSpacingUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

@@ -41,7 +41,6 @@ class ConstructorNameSniff extends AbstractScopeSniff
     public function __construct()
     {
         parent::__construct([T_CLASS, T_ANON_CLASS], [T_FUNCTION], true);
-
     }
 
 
@@ -130,7 +129,6 @@ class ConstructorNameSniff extends AbstractScopeSniff
 
             $startIndex = $nextNonEmpty;
         }//end while
-
     }
 
 
@@ -146,7 +144,6 @@ class ConstructorNameSniff extends AbstractScopeSniff
      */
     protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr)
     {
-
     }
 
 
@@ -181,7 +178,6 @@ class ConstructorNameSniff extends AbstractScopeSniff
                 $i = $tokens[$i]['scope_closer'];
             }
         }
-
     }
 
 

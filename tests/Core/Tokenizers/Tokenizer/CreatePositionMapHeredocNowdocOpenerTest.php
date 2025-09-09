@@ -44,7 +44,6 @@ final class CreatePositionMapHeredocNowdocOpenerTest extends AbstractTokenizerTe
             $this->assertArrayHasKey($key, $tokens[$opener], "Key $key not found in the token array.");
             $this->assertSame($value, $tokens[$opener][$key], "Value for key $key does not match expectation.");
         }
-
     }
 
 
@@ -115,7 +114,6 @@ final class CreatePositionMapHeredocNowdocOpenerTest extends AbstractTokenizerTe
                 ],
             ],
         ];
-
     }
 
 

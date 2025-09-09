@@ -71,7 +71,6 @@ final class ClassDeclarationUnitTest extends AbstractSniffTestCase
             132 => 1,
             141 => 1,
         ];
-
     }
 
 
@@ -86,7 +85,6 @@ final class ClassDeclarationUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

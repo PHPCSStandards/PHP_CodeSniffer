@@ -32,7 +32,6 @@ final class LineEndingsUnitTest extends AbstractSniffTestCase
     public function setCliValues(string $testFile, Config $config)
     {
         $config->tabWidth = 4;
-
     }
 
 
@@ -47,7 +46,6 @@ final class LineEndingsUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [1 => 1];
-
     }
 
 
@@ -62,7 +60,6 @@ final class LineEndingsUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

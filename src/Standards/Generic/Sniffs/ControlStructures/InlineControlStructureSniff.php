@@ -40,7 +40,6 @@ class InlineControlStructureSniff implements Sniff
             T_DO,
             T_FOR,
         ];
-
     }
 
 
@@ -317,7 +316,6 @@ class InlineControlStructureSniff implements Sniff
         }//end if
 
         $phpcsFile->fixer->endChangeset();
-
     }
 
 

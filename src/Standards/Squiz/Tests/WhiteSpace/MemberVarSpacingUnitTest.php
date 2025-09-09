@@ -98,7 +98,6 @@ final class MemberVarSpacingUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -113,7 +112,6 @@ final class MemberVarSpacingUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

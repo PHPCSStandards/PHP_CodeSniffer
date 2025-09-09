@@ -86,7 +86,6 @@ class FileCommentSniff implements Sniff
     public function register()
     {
         return [T_OPEN_TAG];
-
     }
 
 
@@ -214,7 +213,6 @@ class FileCommentSniff implements Sniff
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
-
     }
 
 
@@ -313,7 +311,6 @@ class FileCommentSniff implements Sniff
                 $pos++;
             }
         }//end foreach
-
     }
 
 
@@ -355,7 +352,6 @@ class FileCommentSniff implements Sniff
                 $phpcsFile->addError($error, $tag, 'InvalidCategory', $data);
             }
         }//end foreach
-
     }
 
 
@@ -408,7 +404,6 @@ class FileCommentSniff implements Sniff
                 $phpcsFile->addError($error, $tag, 'InvalidPackage', $data);
             }//end if
         }//end foreach
-
     }
 
 
@@ -452,7 +447,6 @@ class FileCommentSniff implements Sniff
             ];
             $phpcsFile->addError($error, $tag, 'InvalidSubpackage', $data);
         }//end foreach
-
     }
 
 
@@ -482,7 +476,6 @@ class FileCommentSniff implements Sniff
                 $phpcsFile->addError($error, $tag, 'InvalidAuthors');
             }
         }
-
     }
 
 
@@ -523,7 +516,6 @@ class FileCommentSniff implements Sniff
                 $phpcsFile->addError($error, $tag, 'IncompleteCopyright');
             }
         }//end foreach
-
     }
 
 
@@ -552,7 +544,6 @@ class FileCommentSniff implements Sniff
                 $phpcsFile->addError($error, $tag, 'IncompleteLicense');
             }
         }
-
     }
 
 
@@ -584,7 +575,6 @@ class FileCommentSniff implements Sniff
                 $phpcsFile->addWarning($error, $tag, 'InvalidVersion', $data);
             }
         }
-
     }
 
 

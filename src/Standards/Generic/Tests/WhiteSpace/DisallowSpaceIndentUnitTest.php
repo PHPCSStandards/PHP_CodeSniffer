@@ -36,7 +36,6 @@ final class DisallowSpaceIndentUnitTest extends AbstractSniffTestCase
         }
 
         $config->tabWidth = 4;
-
     }
 
 
@@ -118,7 +117,6 @@ final class DisallowSpaceIndentUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -133,7 +131,6 @@ final class DisallowSpaceIndentUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

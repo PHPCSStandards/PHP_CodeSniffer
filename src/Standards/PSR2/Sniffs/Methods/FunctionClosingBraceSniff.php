@@ -27,7 +27,6 @@ class FunctionClosingBraceSniff implements Sniff
             T_FUNCTION,
             T_CLOSURE,
         ];
-
     }
 
 
@@ -84,7 +83,6 @@ class FunctionClosingBraceSniff implements Sniff
 
             $phpcsFile->fixer->endChangeset();
         }
-
     }
 
 

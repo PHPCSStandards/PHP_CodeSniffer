@@ -112,7 +112,6 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
                 'expectedTags' => [],
             ],
         ];
-
     }
 
 
@@ -135,7 +134,6 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -156,7 +154,6 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -177,7 +174,6 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -197,7 +193,6 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -228,7 +223,6 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -259,7 +253,6 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -290,7 +283,6 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -326,7 +318,6 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -365,7 +356,6 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -406,7 +396,6 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -450,7 +439,6 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -492,7 +480,6 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -526,7 +513,6 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -560,7 +546,6 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -596,7 +581,6 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -630,7 +614,6 @@ final class PhpcsAnnotationsInDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 

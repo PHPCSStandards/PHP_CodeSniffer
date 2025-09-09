@@ -38,7 +38,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
 
         $target = $this->getTargetToken($commentString, $targetTokenType);
         self::$phpcsFile->getMethodParameters($target);
-
     }
 
 
@@ -71,7 +70,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
                 ],
             ],
         ];
-
     }
 
 
@@ -90,7 +88,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
 
         $use = $this->getTargetToken($identifier, [T_USE]);
         self::$phpcsFile->getMethodParameters($use);
-
     }
 
 
@@ -108,7 +105,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
             'ImportGroupUse' => ['/* testImportGroupUse */'],
             'TraitUse'       => ['/* testTraitUse */'],
         ];
-
     }
 
 
@@ -129,7 +125,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         $result = self::$phpcsFile->getMethodParameters($target);
 
         $this->assertSame([], $result);
-
     }
 
 
@@ -154,7 +149,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
                 'targetTokenType' => T_USE,
             ],
         ];
-
     }
 
 
@@ -184,7 +178,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -214,7 +207,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -244,7 +236,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -277,7 +268,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -328,7 +318,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -374,7 +363,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -404,7 +392,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -450,7 +437,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -483,7 +469,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -529,7 +514,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -559,7 +543,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -610,7 +593,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -658,7 +640,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -706,7 +687,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -736,7 +716,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -766,7 +745,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -811,7 +789,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -856,7 +833,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1045,7 +1021,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1234,7 +1209,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1303,7 +1277,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1333,7 +1306,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1363,7 +1335,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1393,7 +1364,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1438,7 +1408,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1483,7 +1452,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1516,7 +1484,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1546,7 +1513,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1576,7 +1542,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1608,7 +1573,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1638,7 +1602,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1671,7 +1634,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1704,7 +1666,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1737,7 +1698,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1767,7 +1727,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1797,7 +1756,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1827,7 +1785,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1905,7 +1862,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1977,7 +1933,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2025,7 +1980,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2078,7 +2032,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2132,7 +2085,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2186,7 +2138,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2302,7 +2253,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2335,7 +2285,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2386,7 +2335,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2420,7 +2368,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2516,7 +2463,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2561,7 +2507,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2607,7 +2552,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2637,7 +2581,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2667,7 +2610,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2697,7 +2639,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2730,7 +2671,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2763,7 +2703,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2814,7 +2753,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2863,7 +2801,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2909,7 +2846,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2939,7 +2875,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -2969,7 +2904,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -3002,7 +2936,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -3047,7 +2980,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected, [T_USE]);
-
     }
 
 
@@ -3092,7 +3024,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected, [T_USE]);
-
     }
 
 
@@ -3140,7 +3071,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -3185,7 +3115,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -3230,7 +3159,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -3275,7 +3203,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected, [T_USE]);
-
     }
 
 
@@ -3340,7 +3267,6 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
         }//end foreach
 
         $this->assertSame($expected, $found);
-
     }
 
 

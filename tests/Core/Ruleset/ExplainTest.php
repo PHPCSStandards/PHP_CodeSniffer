@@ -53,7 +53,6 @@ final class ExplainTest extends TestCase
         $this->expectOutputString($expected);
 
         $ruleset->explain();
-
     }
 
 
@@ -88,7 +87,6 @@ final class ExplainTest extends TestCase
         $this->expectOutputString($expected);
 
         $ruleset->explain();
-
     }
 
 
@@ -115,7 +113,6 @@ final class ExplainTest extends TestCase
         $this->expectOutputString($expected);
 
         $ruleset->explain();
-
     }
 
 
@@ -161,7 +158,6 @@ final class ExplainTest extends TestCase
         $this->expectOutputString($expected);
 
         $ruleset->explain();
-
     }
 
 
@@ -206,7 +202,6 @@ final class ExplainTest extends TestCase
         $this->expectOutputString($expected);
 
         $ruleset->explain();
-
     }
 
 

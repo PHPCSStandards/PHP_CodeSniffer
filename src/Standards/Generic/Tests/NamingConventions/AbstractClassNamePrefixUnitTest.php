@@ -45,7 +45,6 @@ final class AbstractClassNamePrefixUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
     }
 
 
@@ -60,7 +59,6 @@ final class AbstractClassNamePrefixUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

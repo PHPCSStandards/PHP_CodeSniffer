@@ -47,7 +47,6 @@ final class ProcessRulesetBrokenRulesetTest extends AbstractRulesetTestCase
         $this->expectRuntimeExceptionRegex($regex);
 
         new Ruleset($config);
-
     }
 
 
@@ -67,7 +66,6 @@ final class ProcessRulesetBrokenRulesetTest extends AbstractRulesetTestCase
         $this->expectRuntimeExceptionRegex($regex);
 
         new Ruleset($config);
-
     }
 
 
@@ -89,7 +87,6 @@ final class ProcessRulesetBrokenRulesetTest extends AbstractRulesetTestCase
         $this->expectRuntimeExceptionRegex($regex);
 
         new Ruleset($config);
-
     }
 
 

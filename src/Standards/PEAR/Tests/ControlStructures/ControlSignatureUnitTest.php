@@ -55,7 +55,6 @@ final class ControlSignatureUnitTest extends AbstractSniffTestCase
             157 => 1,
             165 => 1,
         ];
-
     }
 
 
@@ -70,7 +69,6 @@ final class ControlSignatureUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

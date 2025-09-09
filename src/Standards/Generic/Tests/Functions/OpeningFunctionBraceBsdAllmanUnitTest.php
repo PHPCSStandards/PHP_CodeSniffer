@@ -69,7 +69,6 @@ final class OpeningFunctionBraceBsdAllmanUnitTest extends AbstractSniffTestCase
             268 => 1,
             270 => 1,
         ];
-
     }
 
 
@@ -84,7 +83,6 @@ final class OpeningFunctionBraceBsdAllmanUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

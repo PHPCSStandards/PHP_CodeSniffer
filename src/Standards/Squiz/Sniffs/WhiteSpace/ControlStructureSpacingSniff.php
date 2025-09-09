@@ -38,7 +38,6 @@ class ControlStructureSpacingSniff implements Sniff
             T_FINALLY,
             T_MATCH,
         ];
-
     }
 
 
@@ -342,7 +341,6 @@ class ControlStructureSpacingSniff implements Sniff
                 }
             }
         }//end if
-
     }
 
 

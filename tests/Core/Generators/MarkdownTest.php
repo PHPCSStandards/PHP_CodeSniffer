@@ -42,7 +42,6 @@ final class MarkdownTest extends TestCase
 
         $generator = new Markdown($ruleset);
         $generator->generate();
-
     }
 
 
@@ -71,7 +70,6 @@ final class MarkdownTest extends TestCase
 
         $generator = new MarkdownDouble($ruleset);
         $generator->generate();
-
     }
 
 
@@ -96,7 +94,6 @@ final class MarkdownTest extends TestCase
                 'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputStructureDocs.md',
             ],
         ];
-
     }
 
 
@@ -126,7 +123,6 @@ final class MarkdownTest extends TestCase
 
         $generator = new MarkdownDouble($ruleset);
         $generator->generate();
-
     }
 
 
@@ -251,7 +247,6 @@ final class MarkdownTest extends TestCase
                 'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputInvalidStandardNoContent.md',
             ],
         ];
-
     }
 
 
@@ -279,7 +274,6 @@ final class MarkdownTest extends TestCase
             // PHPUnit < 9.1.0.
             $this->assertRegExp($regex, $footer);
         }
-
     }
 
 
@@ -304,7 +298,6 @@ final class MarkdownTest extends TestCase
         $generator->getRealFooter();
 
         $this->assertSame($expected, error_reporting());
-
     }
 
 
@@ -344,7 +337,6 @@ final class MarkdownTest extends TestCase
 
         // Reset the timezone to its original state.
         ini_set('date.timezone', $originalIni);
-
     }
 
 

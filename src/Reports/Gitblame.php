@@ -54,7 +54,6 @@ class Gitblame extends VersionControl
         $parts  = array_slice($parts, 0, (count($parts) - 2));
         $author = preg_replace('|\(|', '', implode(' ', $parts));
         return $author;
-
     }
 
 
@@ -85,7 +84,6 @@ class Gitblame extends VersionControl
         chdir($cwd);
 
         return $blames;
-
     }
 
 

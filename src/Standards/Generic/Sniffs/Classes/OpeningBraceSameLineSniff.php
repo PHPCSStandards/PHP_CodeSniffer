@@ -29,7 +29,6 @@ class OpeningBraceSameLineSniff implements Sniff
             T_TRAIT,
             T_ENUM,
         ];
-
     }
 
 
@@ -116,7 +115,6 @@ class OpeningBraceSameLineSniff implements Sniff
                 }
             }
         }
-
     }
 
 

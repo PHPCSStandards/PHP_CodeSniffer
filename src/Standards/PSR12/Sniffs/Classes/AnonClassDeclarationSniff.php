@@ -41,7 +41,6 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
     public function register()
     {
         return [T_ANON_CLASS];
-
     }
 
 
@@ -131,7 +130,6 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
                 $phpcsFile->fixer->endChangeset();
             }
         }//end if
-
     }
 
 
@@ -218,7 +216,6 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
                 }//end if
             }//end if
         }//end if
-
     }
 
 
@@ -239,7 +236,6 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
 
         $this->multiLineSniff->processBracket($phpcsFile, $openBracket, $tokens, 'argument');
         $this->multiLineSniff->processArgumentList($phpcsFile, $stackPtr, $this->indent, 'argument');
-
     }
 
 

@@ -35,7 +35,6 @@ final class ExitKeywordTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_EXIT, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_EXIT (code)');
         $this->assertSame('T_EXIT', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_EXIT (type)');
-
     }
 
 
@@ -106,7 +105,6 @@ final class ExitKeywordTest extends AbstractTokenizerTestCase
                 'testContent' => '\die',
             ],
         ];
-
     }
 
 
@@ -133,7 +131,6 @@ final class ExitKeywordTest extends AbstractTokenizerTestCase
 
         $this->assertSame($tokenCode, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expected . ' (code)');
         $this->assertSame($expected, $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expected . ' (type)');
-
     }
 
 
@@ -242,7 +239,6 @@ final class ExitKeywordTest extends AbstractTokenizerTestCase
                 'expected'    => 'T_GOTO_LABEL',
             ],
         ];
-
     }
 
 

@@ -39,7 +39,6 @@ class NestingLevelSniff implements Sniff
     public function register()
     {
         return [T_FUNCTION];
-
     }
 
 
@@ -93,7 +92,6 @@ class NestingLevelSniff implements Sniff
             ];
             $phpcsFile->addWarning($warning, $stackPtr, 'TooHigh', $data);
         }
-
     }
 
 

@@ -38,7 +38,6 @@ final class GetDeclarationNameTest extends AbstractMethodTestCase
 
         $target = $this->getTargetToken($testMarker, $targetType);
         self::$phpcsFile->getDeclarationName($target);
-
     }
 
 
@@ -77,7 +76,6 @@ final class GetDeclarationNameTest extends AbstractMethodTestCase
                 'targetType' => T_ANON_CLASS,
             ],
         ];
-
     }
 
 
@@ -107,7 +105,6 @@ final class GetDeclarationNameTest extends AbstractMethodTestCase
         $target = $this->getTargetToken($testMarker, $targetType);
         $result = self::$phpcsFile->getDeclarationName($target);
         $this->assertSame($expected, $result);
-
     }
 
 
@@ -206,7 +203,6 @@ final class GetDeclarationNameTest extends AbstractMethodTestCase
                 'expected'   => 'static',
             ],
         ];
-
     }
 
 

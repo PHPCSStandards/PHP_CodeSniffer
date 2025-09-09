@@ -37,7 +37,6 @@ final class DisallowMultipleStatementsUnitTest extends AbstractSniffTestCase
             8  => 2,
             16 => 2,
         ];
-
     }
 
 
@@ -52,7 +51,6 @@ final class DisallowMultipleStatementsUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

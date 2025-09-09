@@ -75,7 +75,6 @@ final class MultiLineFunctionDeclarationUnitTest extends AbstractSniffTestCase
             318 => 1,
             323 => 1,
         ];
-
     }
 
 
@@ -90,7 +89,6 @@ final class MultiLineFunctionDeclarationUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

@@ -44,7 +44,6 @@ final class SemicolonSpacingUnitTest extends AbstractSniffTestCase
             30 => 2,
             36 => 1,
         ];
-
     }
 
 
@@ -59,7 +58,6 @@ final class SemicolonSpacingUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

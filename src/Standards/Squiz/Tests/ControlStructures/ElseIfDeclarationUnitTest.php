@@ -34,7 +34,6 @@ final class ElseIfDeclarationUnitTest extends AbstractSniffTestCase
             8  => 1,
             13 => 1,
         ];
-
     }
 
 
@@ -49,7 +48,6 @@ final class ElseIfDeclarationUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

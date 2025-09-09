@@ -29,7 +29,6 @@ final class DetermineLoadedClassTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         include __DIR__ . '/TestFiles/Sub/C.inc';
-
     }
 
 
@@ -59,7 +58,6 @@ final class DetermineLoadedClassTest extends TestCase
 
         $className = Autoload::determineLoadedClass($classesBeforeLoad, $classesAfterLoad);
         $this->assertSame('PHP_CodeSniffer\Tests\Core\Autoloader\Sub\C', $className);
-
     }
 
 
@@ -117,7 +115,6 @@ final class DetermineLoadedClassTest extends TestCase
 
         $className = Autoload::determineLoadedClass($classesBeforeLoad, $classesAfterLoad);
         $this->assertSame('PHP_CodeSniffer\Tests\Core\Autoloader\Sub\C', $className);
-
     }
 
 

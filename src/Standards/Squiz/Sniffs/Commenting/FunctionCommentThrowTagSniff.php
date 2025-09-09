@@ -25,7 +25,6 @@ class FunctionCommentThrowTagSniff implements Sniff
     public function register()
     {
         return [T_FUNCTION];
-
     }
 
 
@@ -226,7 +225,6 @@ class FunctionCommentThrowTagSniff implements Sniff
             $data  = [$throw];
             $phpcsFile->addError($error, $commentEnd, 'Missing', $data);
         }
-
     }
 
 

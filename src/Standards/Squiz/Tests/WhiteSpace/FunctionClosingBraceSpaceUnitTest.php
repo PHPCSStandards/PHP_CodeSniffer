@@ -42,7 +42,6 @@ final class FunctionClosingBraceSpaceUnitTest extends AbstractSniffTestCase
             81 => 1,
             88 => 1,
         ];
-
     }
 
 
@@ -57,7 +56,6 @@ final class FunctionClosingBraceSpaceUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

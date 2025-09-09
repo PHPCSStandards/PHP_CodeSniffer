@@ -40,7 +40,6 @@ final class MessageCollectorTest extends AbstractWriterTestCase
 
         $msgCollector = new MessageCollector();
         $msgCollector->add($message);
-
     }
 
 
@@ -59,7 +58,6 @@ final class MessageCollectorTest extends AbstractWriterTestCase
             'integer' => [10],
             'array'   => [['something' => 'incorrect']],
         ];
-
     }
 
 
@@ -81,7 +79,6 @@ final class MessageCollectorTest extends AbstractWriterTestCase
 
         $msgCollector = new MessageCollector();
         $msgCollector->add('Message', $type);
-
     }
 
 
@@ -105,7 +102,6 @@ final class MessageCollectorTest extends AbstractWriterTestCase
             'integer which doesn\'t match any of the message type constants: 123'         => [123],
             'integer which doesn\'t match any of the message type constants: PHP_INT_MAX' => [PHP_INT_MAX],
         ];
-
     }
 
 
@@ -128,7 +124,6 @@ final class MessageCollectorTest extends AbstractWriterTestCase
         $this->createErrorCache($msgCollector, $messages);
 
         $this->assertSame($expected, $msgCollector->containsBlockingErrors());
-
     }
 
 
@@ -171,7 +166,6 @@ final class MessageCollectorTest extends AbstractWriterTestCase
                 'expected' => true,
             ],
         ];
-
     }
 
 
@@ -201,7 +195,6 @@ final class MessageCollectorTest extends AbstractWriterTestCase
         $msgCollector->display();
 
         $this->assertStderrOutputSameString($expected);
-
     }
 
 
@@ -278,7 +271,6 @@ final class MessageCollectorTest extends AbstractWriterTestCase
             ],
         ];
         // phpcs:enable
-
     }
 
 
@@ -306,7 +298,6 @@ final class MessageCollectorTest extends AbstractWriterTestCase
         $msgCollector = new MessageCollector();
         $this->createErrorCache($msgCollector, $messages);
         $msgCollector->display();
-
     }
 
 
@@ -355,7 +346,6 @@ final class MessageCollectorTest extends AbstractWriterTestCase
             ],
         ];
         // phpcs:enable
-
     }
 
 
@@ -382,7 +372,6 @@ final class MessageCollectorTest extends AbstractWriterTestCase
         $msgCollector->display();
 
         $this->assertStderrOutputSameString($expected);
-
     }
 
 
@@ -409,7 +398,6 @@ final class MessageCollectorTest extends AbstractWriterTestCase
         $msgCollector->display();
 
         $this->assertStderrOutputSameString($expected);
-
     }
 
 
@@ -441,7 +429,6 @@ final class MessageCollectorTest extends AbstractWriterTestCase
         $msgCollector->display();
 
         $this->assertStderrOutputSameString($expected);
-
     }
 
 
@@ -472,7 +459,6 @@ final class MessageCollectorTest extends AbstractWriterTestCase
         $msgCollector->display($order);
 
         $this->assertStderrOutputSameString($expected);
-
     }
 
 
@@ -509,7 +495,6 @@ final class MessageCollectorTest extends AbstractWriterTestCase
                 'expected' => $expectedForSeverity,
             ],
         ];
-
     }
 
 
@@ -527,7 +512,6 @@ final class MessageCollectorTest extends AbstractWriterTestCase
         foreach ($messages as $msg => $type) {
             $collector->add($msg, $type);
         }
-
     }
 
 

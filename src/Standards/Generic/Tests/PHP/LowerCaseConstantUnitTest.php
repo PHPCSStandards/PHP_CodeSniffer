@@ -78,7 +78,6 @@ final class LowerCaseConstantUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -93,7 +92,6 @@ final class LowerCaseConstantUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

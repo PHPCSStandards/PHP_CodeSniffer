@@ -65,7 +65,6 @@ final class BackfillEnumTest extends AbstractTokenizerTestCase
         $this->assertSame($enum, $tokens[$scopeCloser]['scope_condition']);
         $this->assertSame($scopeOpener, $tokens[$scopeCloser]['scope_opener']);
         $this->assertSame($scopeCloser, $tokens[$scopeCloser]['scope_closer']);
-
     }
 
 
@@ -122,7 +121,6 @@ final class BackfillEnumTest extends AbstractTokenizerTestCase
                 'closerOffset' => 14,
             ],
         ];
-
     }
 
 
@@ -150,7 +148,6 @@ final class BackfillEnumTest extends AbstractTokenizerTestCase
 
         $this->assertSame(constant($expectedType), $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (code)');
         $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (type)');
-
     }
 
 
@@ -227,7 +224,6 @@ final class BackfillEnumTest extends AbstractTokenizerTestCase
                 'testContent' => 'enum',
             ],
         ];
-
     }
 
 

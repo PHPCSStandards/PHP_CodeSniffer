@@ -29,7 +29,6 @@ class ClassDeclarationSniff implements Sniff
             T_TRAIT,
             T_ENUM,
         ];
-
     }
 
 
@@ -142,7 +141,6 @@ class ClassDeclarationSniff implements Sniff
                 }
             }
         }//end if
-
     }
 
 

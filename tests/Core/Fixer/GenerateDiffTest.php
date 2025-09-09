@@ -56,7 +56,6 @@ final class GenerateDiffTest extends TestCase
         self::$phpcsFile = new LocalFile(__DIR__ . '/Fixtures/GenerateDiffTest.inc', $ruleset, $config);
         self::$phpcsFile->parse();
         self::$phpcsFile->fixer->startFile(self::$phpcsFile);
-
     }
 
 
@@ -70,7 +69,6 @@ final class GenerateDiffTest extends TestCase
         $diff = self::$phpcsFile->fixer->generateDiff(null, false);
 
         $this->assertSame('', $diff);
-
     }
 
 
@@ -93,7 +91,6 @@ final class GenerateDiffTest extends TestCase
         $expectedDiffFile = str_replace('.inc', '.diff', $filePath);
 
         $this->assertStringEqualsFile($expectedDiffFile, $diff);
-
     }
 
 
@@ -138,7 +135,6 @@ final class GenerateDiffTest extends TestCase
                 'filePath' => __DIR__ . '/Fixtures/GenerateDiffTest-WhiteSpaceAtEnd.inc',
             ],
         ];
-
     }
 
 
@@ -169,7 +165,6 @@ final class GenerateDiffTest extends TestCase
         $diff = str_replace('--- tests\Core\Fixer/', '--- tests/Core/Fixer/', $diff);
 
         $this->assertSame($expected, $diff);
-
     }
 
 
@@ -218,7 +213,6 @@ final class GenerateDiffTest extends TestCase
         $diff = preg_replace('`\R`', "\n", $diff);
 
         $this->assertSame($expected, $diff);
-
     }
 
 

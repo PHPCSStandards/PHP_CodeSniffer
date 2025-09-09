@@ -44,7 +44,6 @@ final class PrintProgressDotsTest extends TestCase
         }
 
         $this->checkProgressDot($colors, $code, $sniffs, $expected);
-
     }
 
 
@@ -106,7 +105,6 @@ final class PrintProgressDotsTest extends TestCase
                 'expected' => "\033[32m" . 'W' . "\033[0m",
             ],
         ];
-
     }
 
 
@@ -131,7 +129,6 @@ final class PrintProgressDotsTest extends TestCase
         }
 
         $this->checkProgressDot($colors, $code, $sniffs, $expected, true);
-
     }
 
 
@@ -181,7 +178,6 @@ final class PrintProgressDotsTest extends TestCase
                 'expected' => "\033[31m" . 'E' . "\033[0m",
             ],
         ];
-
     }
 
 
@@ -219,7 +215,6 @@ final class PrintProgressDotsTest extends TestCase
         $runner->printProgress($file, 2, 1);
 
         $this->assertStderrOutputSameString($expected);
-
     }
 
 

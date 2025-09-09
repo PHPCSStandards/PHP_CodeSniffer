@@ -28,7 +28,6 @@ class SelfMemberReferenceSniff extends AbstractScopeSniff
     public function __construct()
     {
         parent::__construct([T_CLASS], [T_DOUBLE_COLON]);
-
     }
 
 
@@ -151,7 +150,6 @@ class SelfMemberReferenceSniff extends AbstractScopeSniff
                 $phpcsFile->fixer->endChangeset();
             }
         }
-
     }
 
 
@@ -167,7 +165,6 @@ class SelfMemberReferenceSniff extends AbstractScopeSniff
      */
     protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr)
     {
-
     }
 
 
@@ -197,7 +194,6 @@ class SelfMemberReferenceSniff extends AbstractScopeSniff
         }
 
         return $namespace;
-
     }
 
 

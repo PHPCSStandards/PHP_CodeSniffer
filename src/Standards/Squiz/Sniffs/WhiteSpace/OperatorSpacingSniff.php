@@ -108,7 +108,6 @@ class OperatorSpacingSniff implements Sniff
         $targets[] = T_DECLARE;
 
         return $targets;
-
     }
 
 
@@ -326,7 +325,6 @@ class OperatorSpacingSniff implements Sniff
                 }
             }//end if
         }//end if
-
     }
 
 
@@ -392,7 +390,6 @@ class OperatorSpacingSniff implements Sniff
         }//end if
 
         return true;
-
     }
 
 

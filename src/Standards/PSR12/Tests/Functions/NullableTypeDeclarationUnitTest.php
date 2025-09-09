@@ -51,7 +51,6 @@ final class NullableTypeDeclarationUnitTest extends AbstractSniffTestCase
             95 => 1,
             98 => 3,
         ];
-
     }
 
 
@@ -66,7 +65,6 @@ final class NullableTypeDeclarationUnitTest extends AbstractSniffTestCase
     protected function getWarningList()
     {
         return [];
-
     }
 
 

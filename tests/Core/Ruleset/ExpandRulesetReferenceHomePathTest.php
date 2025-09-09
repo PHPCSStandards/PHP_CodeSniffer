@@ -37,7 +37,6 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
     public static function setUpBeforeClass(): void
     {
         self::$homepath = getenv('HOME');
-
     }
 
 
@@ -54,7 +53,6 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
             // Remove the environment variable as it didn't exist before.
             putenv('HOME');
         }
-
     }
 
 
@@ -67,7 +65,6 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
     {
         $fakeHomePath = __DIR__ . DIRECTORY_SEPARATOR . 'Fixtures' . DIRECTORY_SEPARATOR . 'FakeHomePath';
         putenv("HOME=$fakeHomePath");
-
     }
 
 
@@ -87,7 +84,6 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
         $expected = ['MyStandard.Category.Valid' => 'FakeHomePath\\MyStandard\\Sniffs\\Category\\ValidSniff'];
 
         $this->assertSame($expected, $ruleset->sniffCodes);
-
     }
 
 
@@ -108,7 +104,6 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
         $this->expectRuntimeExceptionMessage($exceptionMessage);
 
         new Ruleset($config);
-
     }
 
 

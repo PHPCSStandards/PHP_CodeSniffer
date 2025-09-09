@@ -47,7 +47,6 @@ final class ProcessRulesetIniSetTest extends TestCase
         if (is_string($this->originalValue) === true) {
             @ini_set($this->currentOption, $this->originalValue);
         }
-
     }
 
 
@@ -67,7 +66,6 @@ final class ProcessRulesetIniSetTest extends TestCase
         new Ruleset(new ConfigDouble(['.', '--standard=' . __DIR__ . '/IniSetSuccessTest.xml']));
 
         $this->assertSame($expected, ini_get($this->currentOption));
-
     }
 
 
@@ -102,7 +100,6 @@ final class ProcessRulesetIniSetTest extends TestCase
 
         // Make sure the value didn't get set.
         $this->assertNotSame($expected, ini_get($option), 'Setting the ini value should not have worked, the test is broken');
-
     }
 
 
@@ -132,7 +129,6 @@ final class ProcessRulesetIniSetTest extends TestCase
                 'expected' => '200',
             ],
         ];
-
     }
 
 

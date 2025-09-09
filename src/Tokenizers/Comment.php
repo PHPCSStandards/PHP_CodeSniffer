@@ -174,7 +174,6 @@ class Comment
         }
 
         return $tokens;
-
     }
 
 
@@ -250,7 +249,6 @@ class Comment
         }
 
         return $tokens;
-
     }
 
 
@@ -283,7 +281,6 @@ class Comment
             'code'    => T_DOC_COMMENT_WHITESPACE,
             'type'    => 'T_DOC_COMMENT_WHITESPACE',
         ];
-
     }
 
 

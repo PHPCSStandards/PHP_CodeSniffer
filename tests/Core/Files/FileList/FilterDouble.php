@@ -24,7 +24,6 @@ final class FilterDouble extends Filter
     public function accept()
     {
         return true;
-
     }
 
 

@@ -48,7 +48,6 @@ final class StandardRulesetsQATest extends AbstractRulesetTestCase
 
         // Make sure sniffs were registered.
         $this->assertGreaterThanOrEqual(1, count($ruleset->sniffCodes));
-
     }
 
 
@@ -75,7 +74,6 @@ final class StandardRulesetsQATest extends AbstractRulesetTestCase
         }
 
         return $data;
-
     }
 
 

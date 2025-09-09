@@ -25,7 +25,6 @@ class SpaceBeforeCastSniff implements Sniff
     public function register()
     {
         return Tokens::CAST_TOKENS;
-
     }
 
 
@@ -66,7 +65,6 @@ class SpaceBeforeCastSniff implements Sniff
                 $phpcsFile->fixer->replaceToken(($stackPtr - 1), ' ');
             }
         }
-
     }
 
 

@@ -37,7 +37,6 @@ final class BackfillNumericSeparatorTest extends AbstractTokenizerTestCase
         $this->assertSame(constant($type), $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $type . ' (code)');
         $this->assertSame($type, $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $type . ' (type)');
         $this->assertSame($value, $tokenArray['content']);
-
     }
 
 
@@ -132,7 +131,6 @@ final class BackfillNumericSeparatorTest extends AbstractTokenizerTestCase
                 'value'  => '10_223_372_036_854_775_807',
             ],
         ];
-
     }
 
 
@@ -162,7 +160,6 @@ final class BackfillNumericSeparatorTest extends AbstractTokenizerTestCase
             );
             $this->assertSame($expectedToken['content'], $tokens[$i]['content']);
         }
-
     }
 
 
@@ -395,7 +392,6 @@ final class BackfillNumericSeparatorTest extends AbstractTokenizerTestCase
                 ],
             ],
         ];
-
     }
 
 

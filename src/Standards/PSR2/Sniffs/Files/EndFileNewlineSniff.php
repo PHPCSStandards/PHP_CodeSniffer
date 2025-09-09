@@ -27,7 +27,6 @@ class EndFileNewlineSniff implements Sniff
             T_OPEN_TAG,
             T_OPEN_TAG_WITH_ECHO,
         ];
-
     }
 
 
@@ -100,7 +99,6 @@ class EndFileNewlineSniff implements Sniff
 
         // Skip the rest of the file.
         return $phpcsFile->numTokens;
-
     }
 
 

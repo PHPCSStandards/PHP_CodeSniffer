@@ -51,7 +51,6 @@ final class ConstructorNameUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -66,7 +65,6 @@ final class ConstructorNameUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

@@ -50,7 +50,6 @@ final class StableCommentWhitespaceWinTest extends AbstractTokenizerTestCase
 
             ++$comment;
         }
-
     }
 
 
@@ -368,7 +367,6 @@ final class StableCommentWhitespaceWinTest extends AbstractTokenizerTestCase
                 ],
             ],
         ];
-
     }
 
 

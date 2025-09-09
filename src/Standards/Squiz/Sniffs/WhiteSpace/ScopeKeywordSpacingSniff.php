@@ -28,7 +28,6 @@ class ScopeKeywordSpacingSniff implements Sniff
         $register += Tokens::SCOPE_MODIFIERS;
         $register[T_READONLY] = T_READONLY;
         return $register;
-
     }
 
 
@@ -165,7 +164,6 @@ class ScopeKeywordSpacingSniff implements Sniff
                 }
             }//end if
         }//end if
-
     }
 
 

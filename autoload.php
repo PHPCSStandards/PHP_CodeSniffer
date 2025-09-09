@@ -140,7 +140,6 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
             }
 
             return false;
-
         }
 
 
@@ -183,7 +182,6 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
             self::$loadedClasses[$path]    = $className;
             self::$loadedFiles[$className] = $path;
             return self::$loadedClasses[$path];
-
         }
 
 
@@ -244,7 +242,6 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
             }
 
             return $className;
-
         }
 
 
@@ -259,7 +256,6 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
         public static function addSearchPath(string $path, string $nsPrefix = '')
         {
             self::$searchPaths[$path] = rtrim(trim((string) $nsPrefix), '\\');
-
         }
 
 
@@ -271,7 +267,6 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
         public static function getSearchPaths()
         {
             return self::$searchPaths;
-
         }
 
 
@@ -290,7 +285,6 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
             }
 
             return self::$loadedClasses[$path];
-
         }
 
 
@@ -309,7 +303,6 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
             }
 
             return self::$loadedFiles[$className];
-
         }
 
 
@@ -321,7 +314,6 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
         public static function getLoadedClasses()
         {
             return self::$loadedClasses;
-
         }
 
 
@@ -333,7 +325,6 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
         public static function getLoadedFiles()
         {
             return self::$loadedFiles;
-
         }
 
 

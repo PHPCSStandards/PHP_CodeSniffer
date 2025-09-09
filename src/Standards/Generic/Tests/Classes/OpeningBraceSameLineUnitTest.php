@@ -46,7 +46,6 @@ final class OpeningBraceSameLineUnitTest extends AbstractSniffTestCase
             94  => 1,
             100 => 1,
         ];
-
     }
 
 
@@ -61,7 +60,6 @@ final class OpeningBraceSameLineUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

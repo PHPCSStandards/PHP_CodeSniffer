@@ -24,7 +24,6 @@ class GlobalKeywordSniff implements Sniff
     public function register()
     {
         return [T_GLOBAL];
-
     }
 
 
@@ -46,7 +45,6 @@ class GlobalKeywordSniff implements Sniff
         $error   = 'Use of the "global" keyword is forbidden; use "$GLOBALS[\'%s\']" instead';
         $data    = [$varName];
         $phpcsFile->addError($error, $stackPtr, 'NotAllowed', $data);
-
     }
 
 

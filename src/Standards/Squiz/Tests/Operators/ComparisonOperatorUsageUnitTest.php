@@ -65,7 +65,6 @@ final class ComparisonOperatorUsageUnitTest extends AbstractSniffTestCase
             148 => 1,
             156 => 2,
         ];
-
     }
 
 
@@ -80,7 +79,6 @@ final class ComparisonOperatorUsageUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

@@ -35,7 +35,6 @@ final class AcceptTest extends AbstractFilterTestCase
         $standard      = __DIR__ . '/' . basename(__FILE__, '.php') . '.xml';
         self::$config  = new ConfigDouble(["--standard=$standard", '--ignore=*/somethingelse/*']);
         self::$ruleset = new Ruleset(self::$config);
-
     }
 
 
@@ -55,7 +54,6 @@ final class AcceptTest extends AbstractFilterTestCase
         $filter = new Filter($fakeDI, '/', self::$config, self::$ruleset);
 
         $this->assertSame($expectedOutput, $this->getFilteredResultsAsArray($filter));
-
     }
 
 
@@ -101,7 +99,6 @@ final class AcceptTest extends AbstractFilterTestCase
 
         // Allow these tests to work on Windows as well.
         return self::mapPathsToRuntimeOs($testCases);
-
     }
 
 

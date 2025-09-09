@@ -39,7 +39,6 @@ class SpaceAfterCastSniff implements Sniff
     public function register()
     {
         return Tokens::CAST_TOKENS;
-
     }
 
 
@@ -154,7 +153,6 @@ class SpaceAfterCastSniff implements Sniff
                 $phpcsFile->fixer->endChangeset();
             }
         }
-
     }
 
 

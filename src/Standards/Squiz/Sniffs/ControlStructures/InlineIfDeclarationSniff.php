@@ -24,7 +24,6 @@ class InlineIfDeclarationSniff implements Sniff
     public function register()
     {
         return [T_INLINE_THEN];
-
     }
 
 
@@ -148,7 +147,6 @@ class InlineIfDeclarationSniff implements Sniff
                 }
             }
         }
-
     }
 
 

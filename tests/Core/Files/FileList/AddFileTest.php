@@ -36,7 +36,6 @@ final class AddFileTest extends AbstractFileListTestCase
     {
         self::$config->files = [];
         $this->fileList      = new FileList(self::$config, self::$ruleset);
-
     }
 
 
@@ -70,7 +69,6 @@ final class AddFileTest extends AbstractFileListTestCase
                 'File object not found in list'
             );
         }
-
     }
 
 
@@ -95,7 +93,6 @@ final class AddFileTest extends AbstractFileListTestCase
                 'fileObject' => new File('test1.php', self::$ruleset, self::$config),
             ],
         ];
-
     }
 
 
@@ -127,7 +124,6 @@ final class AddFileTest extends AbstractFileListTestCase
         $this->fileList->addFile($file2);
         $this->assertCount(2, $this->fileList);
         $this->assertSame($expectedFiles, array_keys(iterator_to_array($this->fileList)));
-
     }
 
 

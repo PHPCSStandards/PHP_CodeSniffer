@@ -35,7 +35,6 @@ class DisallowShortOpenTagSniff implements Sniff
         }
 
         return $targets;
-
     }
 
 
@@ -133,7 +132,6 @@ class DisallowShortOpenTagSniff implements Sniff
                 }
             }
         }//end if
-
     }
 
 
@@ -163,7 +161,6 @@ class DisallowShortOpenTagSniff implements Sniff
         }
 
         return $snippet;
-
     }
 
 

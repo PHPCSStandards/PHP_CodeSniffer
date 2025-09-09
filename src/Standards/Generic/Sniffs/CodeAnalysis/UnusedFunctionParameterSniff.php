@@ -69,7 +69,6 @@ class UnusedFunctionParameterSniff implements Sniff
             T_CLOSURE,
             T_FN,
         ];
-
     }
 
 
@@ -298,7 +297,6 @@ class UnusedFunctionParameterSniff implements Sniff
                 }
             }
         }//end if
-
     }
 
 

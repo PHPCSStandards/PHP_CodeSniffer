@@ -89,7 +89,6 @@ final class ControlSignatureUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -104,7 +103,6 @@ final class ControlSignatureUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

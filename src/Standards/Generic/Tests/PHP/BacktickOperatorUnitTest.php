@@ -33,7 +33,6 @@ final class BacktickOperatorUnitTest extends AbstractSniffTestCase
         return [
             2 => 2,
         ];
-
     }
 
 
@@ -48,7 +47,6 @@ final class BacktickOperatorUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

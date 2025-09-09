@@ -75,7 +75,6 @@ function stripWhitespaceAndComments(string $fullpath, Config $config)
     }
 
     return $stripped;
-
 }
 
 

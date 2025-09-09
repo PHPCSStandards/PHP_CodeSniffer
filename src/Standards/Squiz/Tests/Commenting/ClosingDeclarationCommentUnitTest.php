@@ -62,7 +62,6 @@ final class ClosingDeclarationCommentUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -79,7 +78,6 @@ final class ClosingDeclarationCommentUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         return [];
-
     }
 
 

@@ -52,7 +52,6 @@ final class DNFTypesParseError2Test extends AbstractTokenizerTestCase
 
         $this->assertSame(T_BITWISE_AND, $token['code'], 'Token tokenized as ' . $token['type'] . ', not T_BITWISE_AND (code)');
         $this->assertSame('T_BITWISE_AND', $token['type'], 'Token tokenized as ' . $token['type'] . ', not T_BITWISE_AND (type)');
-
     }
 
 
@@ -71,7 +70,6 @@ final class DNFTypesParseError2Test extends AbstractTokenizerTestCase
             'Parameter type'   => ['/* testBrokenParamDNFTypeParensMissingClose */'],
             'Return type'      => ['/* testBrokenReturnDNFTypeParensMissingClose */'],
         ];
-
     }
 
 
@@ -111,7 +109,6 @@ final class DNFTypesParseError2Test extends AbstractTokenizerTestCase
 
         $this->assertSame(T_BITWISE_AND, $token['code'], 'Token tokenized as ' . $token['type'] . ', not T_BITWISE_AND (code)');
         $this->assertSame('T_BITWISE_AND', $token['type'], 'Token tokenized as ' . $token['type'] . ', not T_BITWISE_AND (type)');
-
     }
 
 
@@ -130,7 +127,6 @@ final class DNFTypesParseError2Test extends AbstractTokenizerTestCase
             'Parameter type'   => ['/* testBrokenParamDNFTypeParensMissingOpen */'],
             'Return type'      => ['/* testBrokenReturnDNFTypeParensMissingOpen */'],
         ];
-
     }
 
 
@@ -192,7 +188,6 @@ final class DNFTypesParseError2Test extends AbstractTokenizerTestCase
                 break;
             }//end switch
         }//end for
-
     }
 
 
@@ -211,7 +206,6 @@ final class DNFTypesParseError2Test extends AbstractTokenizerTestCase
             'Parameter type - missing one close parenthesis'  => ['/* testBrokenParamDNFTypeParensMissingOneClose */'],
             'Return type - missing one open parenthesis'      => ['/* testBrokenReturnDNFTypeParensMissingOneOpen */'],
         ];
-
     }
 
 

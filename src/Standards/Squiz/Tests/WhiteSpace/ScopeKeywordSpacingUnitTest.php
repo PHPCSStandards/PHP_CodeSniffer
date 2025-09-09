@@ -82,7 +82,6 @@ final class ScopeKeywordSpacingUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -97,7 +96,6 @@ final class ScopeKeywordSpacingUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

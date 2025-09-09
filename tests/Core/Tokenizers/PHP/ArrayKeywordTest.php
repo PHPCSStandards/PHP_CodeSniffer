@@ -35,7 +35,6 @@ final class ArrayKeywordTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_ARRAY, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_ARRAY (code)');
         $this->assertSame('T_ARRAY', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_ARRAY (type)');
-
     }
 
 
@@ -69,7 +68,6 @@ final class ArrayKeywordTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testOOConstDefault */',
             ],
         ];
-
     }
 
 
@@ -93,7 +91,6 @@ final class ArrayKeywordTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
         $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (type)');
-
     }
 
 
@@ -142,7 +139,6 @@ final class ArrayKeywordTest extends AbstractTokenizerTestCase
                 'testContent' => 'Array',
             ],
         ];
-
     }
 
 
@@ -167,7 +163,6 @@ final class ArrayKeywordTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
         $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (type)');
-
     }
 
 
@@ -193,7 +188,6 @@ final class ArrayKeywordTest extends AbstractTokenizerTestCase
                 'testContent' => 'ARRAY',
             ],
         ];
-
     }
 
 

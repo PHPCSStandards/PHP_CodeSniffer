@@ -35,7 +35,6 @@ final class TokenNameTest extends TestCase
     public function testTokenName($tokenCode, $expected)
     {
         $this->assertSame($expected, Tokens::tokenName($tokenCode));
-
     }
 
 
@@ -75,7 +74,6 @@ final class TokenNameTest extends TestCase
                 'expected'  => 'ing',
             ],
         ];
-
     }
 
 
@@ -155,7 +153,6 @@ final class TokenNameTest extends TestCase
                 'expected'  => 'T_PRIVATE_SET',
             ],
         ];
-
     }
 
 

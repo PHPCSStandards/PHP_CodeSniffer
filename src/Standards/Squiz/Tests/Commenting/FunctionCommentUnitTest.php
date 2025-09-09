@@ -183,7 +183,6 @@ final class FunctionCommentUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -198,7 +197,6 @@ final class FunctionCommentUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

@@ -67,7 +67,6 @@ final class MultiLineDocBlockTest extends CommentTestCase
                 'expectedTags' => [],
             ],
         ];
-
     }
 
 
@@ -90,7 +89,6 @@ final class MultiLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -203,7 +201,6 @@ final class MultiLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -253,7 +250,6 @@ final class MultiLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -331,7 +327,6 @@ final class MultiLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -359,7 +354,6 @@ final class MultiLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -388,7 +382,6 @@ final class MultiLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -432,7 +425,6 @@ final class MultiLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 

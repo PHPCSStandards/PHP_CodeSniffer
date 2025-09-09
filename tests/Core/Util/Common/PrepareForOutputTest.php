@@ -37,7 +37,6 @@ final class PrepareForOutputTest extends TestCase
     public function testPrepareForOutput($content, $exclude, $expected, $expectedWin)
     {
         $this->assertSame($expected, Common::prepareForOutput($content, $exclude));
-
     }
 
 
@@ -57,7 +56,6 @@ final class PrepareForOutputTest extends TestCase
     public function testPrepareForOutputWindows($content, $exclude, $expected, $expectedWin)
     {
         $this->assertSame($expectedWin, Common::prepareForOutput($content, $exclude));
-
     }
 
 
@@ -106,7 +104,6 @@ final class PrepareForOutputTest extends TestCase
                 'expectedWin' => "\r\n\\t ",
             ],
         ];
-
     }
 
 

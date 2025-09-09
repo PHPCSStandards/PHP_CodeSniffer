@@ -49,7 +49,6 @@ final class ProcessRulesetConfigDirectivesTest extends TestCase
             self::$config = new ConfigDouble(["--standard=$standardA,$standardB"]);
             new Ruleset(self::$config);
         }
-
     }
 
 
@@ -67,7 +66,6 @@ final class ProcessRulesetConfigDirectivesTest extends TestCase
         if (isset(self::$config) === true) {
             self::$config->__destruct();
         }
-
     }
 
 
@@ -89,7 +87,6 @@ final class ProcessRulesetConfigDirectivesTest extends TestCase
     public function testConfigDirectives($name, $expected)
     {
         $this->assertSame($expected, self::$config->getConfigData($name));
-
     }
 
 
@@ -146,7 +143,6 @@ final class ProcessRulesetConfigDirectivesTest extends TestCase
                 'expected' => 'grandchild B',
             ],
         ];
-
     }
 
 

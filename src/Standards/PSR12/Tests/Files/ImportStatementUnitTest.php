@@ -36,7 +36,6 @@ final class ImportStatementUnitTest extends AbstractSniffTestCase
             7  => 1,
             10 => 1,
         ];
-
     }
 
 
@@ -51,7 +50,6 @@ final class ImportStatementUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

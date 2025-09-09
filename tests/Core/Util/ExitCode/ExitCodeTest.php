@@ -49,7 +49,6 @@ final class ExitCodeTest extends AbstractRunnerTestCase
 
         // Reset static properties on the Config class.
         AbstractRunnerTestCase::setUp();
-
     }
 
 
@@ -68,7 +67,6 @@ final class ExitCodeTest extends AbstractRunnerTestCase
 
         // Delete the cache file between tests to prevent a cache from an earlier test run influencing the results of the tests.
         @unlink(self::CACHE_FILE);
-
     }
 
 
@@ -91,7 +89,6 @@ final class ExitCodeTest extends AbstractRunnerTestCase
         }
 
         AbstractRunnerTestCase::tearDownAfterClass();
-
     }
 
 
@@ -110,7 +107,6 @@ final class ExitCodeTest extends AbstractRunnerTestCase
         $extraArgs[] = self::SOURCE_DIR . 'mix-errors-warnings.inc';
 
         $this->runPhpcsAndCheckExitCode($extraArgs, $expected);
-
     }
 
 
@@ -136,7 +132,6 @@ final class ExitCodeTest extends AbstractRunnerTestCase
         $extraArgs[] = '--parallel=3';
 
         $this->runPhpcsAndCheckExitCode($extraArgs, $expected);
-
     }
 
 
@@ -171,7 +166,6 @@ final class ExitCodeTest extends AbstractRunnerTestCase
 
         // Second run to verify the exit code is the same when the results are taking from the cache.
         $this->runPhpcsAndCheckExitCode($extraArgs, $expected);
-
     }
 
 
@@ -198,7 +192,6 @@ final class ExitCodeTest extends AbstractRunnerTestCase
         ob_end_clean();
 
         $this->assertSame($expected, $actual);
-
     }
 
 
@@ -368,7 +361,6 @@ final class ExitCodeTest extends AbstractRunnerTestCase
                 'expected'  => 1,
             ],
         ];
-
     }
 
 
@@ -388,7 +380,6 @@ final class ExitCodeTest extends AbstractRunnerTestCase
         $extraArgs[] = self::SOURCE_DIR . 'mix-errors-warnings.inc';
 
         $this->runPhpcbfAndCheckExitCode($extraArgs, $expected);
-
     }
 
 
@@ -415,7 +406,6 @@ final class ExitCodeTest extends AbstractRunnerTestCase
         $extraArgs[] = '--parallel=3';
 
         $this->runPhpcbfAndCheckExitCode($extraArgs, $expected);
-
     }
 
 
@@ -442,7 +432,6 @@ final class ExitCodeTest extends AbstractRunnerTestCase
         ob_end_clean();
 
         $this->assertSame($expected, $actual);
-
     }
 
 
@@ -640,7 +629,6 @@ final class ExitCodeTest extends AbstractRunnerTestCase
                 'expected'  => 0,
             ],
         ];
-
     }
 
 
@@ -666,7 +654,6 @@ final class ExitCodeTest extends AbstractRunnerTestCase
         foreach ($extraArgs as $arg) {
             $_SERVER['argv'][] = $arg;
         }
-
     }
 
 

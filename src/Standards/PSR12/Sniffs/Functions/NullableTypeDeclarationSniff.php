@@ -40,7 +40,6 @@ class NullableTypeDeclarationSniff implements Sniff
     public function register()
     {
         return [T_NULLABLE];
-
     }
 
 
@@ -86,7 +85,6 @@ class NullableTypeDeclarationSniff implements Sniff
 
         // Non-whitespace tokens found; trigger error but don't fix.
         $phpcsFile->addError($error, $stackPtr, 'UnexpectedCharactersFound');
-
     }
 
 

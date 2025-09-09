@@ -36,7 +36,6 @@ final class InnerFunctionsUnitTest extends AbstractSniffTestCase
             55 => 1,
             83 => 1,
         ];
-
     }
 
 
@@ -51,7 +50,6 @@ final class InnerFunctionsUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

@@ -34,7 +34,6 @@ final class LiveCoding1Test extends CommentTestCase
                 'expectedTags' => [],
             ],
         ];
-
     }
 
 
@@ -62,7 +61,6 @@ final class LiveCoding1Test extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 

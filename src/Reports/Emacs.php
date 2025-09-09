@@ -52,7 +52,6 @@ class Emacs implements Report
         }
 
         return true;
-
     }
 
 
@@ -84,7 +83,6 @@ class Emacs implements Report
         bool $toScreen = true
     ) {
         echo $cachedData;
-
     }
 
 

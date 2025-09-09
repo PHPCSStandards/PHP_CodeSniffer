@@ -36,7 +36,6 @@ final class CreateTokenMapClosureUseParenthesesTest extends AbstractTokenizerTes
         $this->assertArrayNotHasKey('parenthesis_owner', $tokens[$use], 'parenthesis_owner key is set');
         $this->assertArrayNotHasKey('parenthesis_opener', $tokens[$use], 'parenthesis_opener key is set');
         $this->assertArrayNotHasKey('parenthesis_closer', $tokens[$use], 'parenthesis_closer key is set');
-
     }
 
 
@@ -61,7 +60,6 @@ final class CreateTokenMapClosureUseParenthesesTest extends AbstractTokenizerTes
                 'testMarker' => '/* testUseTraitInNestedAnonClass */',
             ],
         ];
-
     }
 
 
@@ -115,7 +113,6 @@ final class CreateTokenMapClosureUseParenthesesTest extends AbstractTokenizerTes
                 'Closer "parenthesis_owner" key set to unexpected owner'
             );
         }
-
     }
 
 
@@ -132,7 +129,6 @@ final class CreateTokenMapClosureUseParenthesesTest extends AbstractTokenizerTes
         $data['Trait use statement']['expectedOwnerCode'] = T_FUNCTION;
 
         return $data;
-
     }
 
 
@@ -173,7 +169,6 @@ final class CreateTokenMapClosureUseParenthesesTest extends AbstractTokenizerTes
         $this->assertSame($use, $tokens[$closer]['parenthesis_owner'], 'Closer "parenthesis_owner" key set incorrectly');
         $this->assertSame($opener, $tokens[$closer]['parenthesis_opener'], 'Closer "parenthesis_opener" key set incorrectly');
         $this->assertSame($closer, $tokens[$closer]['parenthesis_closer'], 'Closer "parenthesis_closer" key set incorrectly');
-
     }
 
 
@@ -188,7 +183,6 @@ final class CreateTokenMapClosureUseParenthesesTest extends AbstractTokenizerTes
             'Plain closure use'           => ['/* testClosureUse */'],
             'Closure use nested in class' => ['/* testClosureUseNestedInClass */'],
         ];
-
     }
 
 

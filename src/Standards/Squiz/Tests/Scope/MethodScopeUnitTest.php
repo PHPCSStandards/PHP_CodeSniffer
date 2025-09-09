@@ -44,7 +44,6 @@ final class MethodScopeUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -59,7 +58,6 @@ final class MethodScopeUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

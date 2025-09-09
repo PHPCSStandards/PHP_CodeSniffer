@@ -38,7 +38,6 @@ final class NestingLevelUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
     }
 
 
@@ -63,7 +62,6 @@ final class NestingLevelUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
     }
 
 

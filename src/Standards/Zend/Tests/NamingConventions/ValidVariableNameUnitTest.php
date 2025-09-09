@@ -76,7 +76,6 @@ final class ValidVariableNameUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -115,7 +114,6 @@ final class ValidVariableNameUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 

@@ -28,7 +28,6 @@ class ValidDefaultValueSniff implements Sniff
             T_CLOSURE,
             T_FN,
         ];
-
     }
 
 
@@ -74,7 +73,6 @@ class ValidDefaultValueSniff implements Sniff
                 return;
             }
         }//end foreach
-
     }
 
 

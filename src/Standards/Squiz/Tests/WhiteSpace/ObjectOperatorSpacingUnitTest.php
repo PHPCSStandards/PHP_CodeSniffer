@@ -51,7 +51,6 @@ final class ObjectOperatorSpacingUnitTest extends AbstractSniffTestCase
             51 => 1,
             52 => 2,
         ];
-
     }
 
 
@@ -66,7 +65,6 @@ final class ObjectOperatorSpacingUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

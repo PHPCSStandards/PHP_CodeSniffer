@@ -265,7 +265,6 @@ class Ruleset
         }
 
         $this->displayCachedMessages();
-
     }
 
 
@@ -340,7 +339,6 @@ class Ruleset
         if (count($this->deprecatedSniffs) > 0) {
             echo PHP_EOL . '* Sniffs marked with an asterisk are deprecated.' . PHP_EOL;
         }
-
     }
 
 
@@ -352,7 +350,6 @@ class Ruleset
     public function hasSniffDeprecations()
     {
         return (count($this->deprecatedSniffs) > 0);
-
     }
 
 
@@ -482,7 +479,6 @@ class Ruleset
         $closer = wordwrap('Deprecated sniffs are still run, but will stop working at some point in the future.', $reportWidth, PHP_EOL);
         StatusWriter::writeNewline(2);
         StatusWriter::write($closer, 0, 2);
-
     }
 
 
@@ -511,7 +507,6 @@ class Ruleset
         }
 
         $this->msgCache->display();
-
     }
 
 
@@ -883,7 +878,6 @@ class Ruleset
         }
 
         return $files;
-
     }
 
 
@@ -942,7 +936,6 @@ class Ruleset
         }//end foreach
 
         return $sniffs;
-
     }
 
 
@@ -1125,7 +1118,6 @@ class Ruleset
                 return $this->processRuleset($ref, ($depth + 2));
             }
         }//end if
-
     }
 
 
@@ -1380,7 +1372,6 @@ class Ruleset
                 }
             }//end foreach
         }//end foreach
-
     }
 
 
@@ -1415,7 +1406,6 @@ class Ruleset
         }
 
         return false;
-
     }
 
 
@@ -1509,7 +1499,6 @@ class Ruleset
         }//end foreach
 
         $this->sniffs = $listeners;
-
     }
 
 
@@ -1598,7 +1587,6 @@ class Ruleset
                 }
             }
         }//end foreach
-
     }
 
 
@@ -1679,7 +1667,6 @@ class Ruleset
         } else {
             $sniffObject->$propertyName = $value;
         }
-
     }
 
 
@@ -1723,7 +1710,6 @@ class Ruleset
         }//end if
 
         return $value;
-
     }
 
 
@@ -1749,7 +1735,6 @@ class Ruleset
         }
 
         return [];
-
     }
 
 
@@ -1775,7 +1760,6 @@ class Ruleset
         }
 
         return [];
-
     }
 
 

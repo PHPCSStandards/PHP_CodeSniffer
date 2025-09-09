@@ -80,7 +80,6 @@ class Diff implements Report
 
         echo $diff . PHP_EOL;
         return true;
-
     }
 
 
@@ -115,7 +114,6 @@ class Diff implements Report
         if ($toScreen === true && $cachedData !== '') {
             echo PHP_EOL;
         }
-
     }
 
 

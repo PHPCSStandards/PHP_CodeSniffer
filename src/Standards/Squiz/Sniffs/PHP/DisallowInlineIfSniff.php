@@ -24,7 +24,6 @@ class DisallowInlineIfSniff implements Sniff
     public function register()
     {
         return [T_INLINE_THEN];
-
     }
 
 
@@ -40,7 +39,6 @@ class DisallowInlineIfSniff implements Sniff
     public function process(File $phpcsFile, int $stackPtr)
     {
         $phpcsFile->addError('Inline IF statements are not allowed', $stackPtr, 'Found');
-
     }
 
 

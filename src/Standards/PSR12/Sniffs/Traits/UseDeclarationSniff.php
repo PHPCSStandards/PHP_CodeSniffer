@@ -25,7 +25,6 @@ class UseDeclarationSniff implements Sniff
     public function register()
     {
         return [T_USE];
-
     }
 
 
@@ -299,7 +298,6 @@ class UseDeclarationSniff implements Sniff
         }//end foreach
 
         return $tokens[$ooToken]['scope_closer'];
-
     }
 
 
@@ -667,7 +665,6 @@ class UseDeclarationSniff implements Sniff
                 }
             }
         }//end if
-
     }
 
 
@@ -693,7 +690,6 @@ class UseDeclarationSniff implements Sniff
                 $phpcsFile->fixer->replaceToken($next, ';' . $phpcsFile->eolChar . $padding . 'use ');
             }
         }
-
     }
 
 

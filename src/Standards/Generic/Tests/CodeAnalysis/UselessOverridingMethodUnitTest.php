@@ -31,7 +31,6 @@ final class UselessOverridingMethodUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [];
-
     }
 
 
@@ -65,7 +64,6 @@ final class UselessOverridingMethodUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
     }
 
 

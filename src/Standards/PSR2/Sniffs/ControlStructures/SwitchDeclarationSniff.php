@@ -46,7 +46,6 @@ class SwitchDeclarationSniff implements Sniff
     public function register()
     {
         return [T_SWITCH];
-
     }
 
 
@@ -221,7 +220,6 @@ class SwitchDeclarationSniff implements Sniff
                 }
             }
         }//end while
-
     }
 
 
@@ -250,7 +248,6 @@ class SwitchDeclarationSniff implements Sniff
         }
 
         return $stackPtr;
-
     }
 
 
@@ -403,7 +400,6 @@ class SwitchDeclarationSniff implements Sniff
         }//end if
 
         return false;
-
     }
 
 

@@ -61,7 +61,6 @@ final class SpaceBeforeCastUnitTest extends AbstractSniffTestCase
             55 => 1,
             56 => 1,
         ];
-
     }
 
 
@@ -76,7 +75,6 @@ final class SpaceBeforeCastUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

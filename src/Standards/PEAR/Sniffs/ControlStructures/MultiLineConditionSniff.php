@@ -35,7 +35,6 @@ class MultiLineConditionSniff implements Sniff
             T_IF,
             T_ELSEIF,
         ];
-
     }
 
 
@@ -266,7 +265,6 @@ class MultiLineConditionSniff implements Sniff
                 $phpcsFile->fixer->replaceToken(($closeBracket + 1), ' ');
             }
         }
-
     }
 
 

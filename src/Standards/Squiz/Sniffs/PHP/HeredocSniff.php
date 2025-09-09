@@ -27,7 +27,6 @@ class HeredocSniff implements Sniff
             T_START_HEREDOC,
             T_START_NOWDOC,
         ];
-
     }
 
 
@@ -55,7 +54,6 @@ class HeredocSniff implements Sniff
 
         $error = 'Use of %s syntax (%s) is not allowed; use standard strings or inline HTML instead';
         $phpcsFile->addError($error, $stackPtr, $codePrefix . 'NotAllowed', $data);
-
     }
 
 

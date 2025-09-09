@@ -69,7 +69,6 @@ class CamelCapsMethodNameSniff extends GenericCamelCapsFunctionNameSniff
         } else {
             $phpcsFile->recordMetric($stackPtr, 'CamelCase method name', 'yes');
         }
-
     }
 
 
@@ -84,7 +83,6 @@ class CamelCapsMethodNameSniff extends GenericCamelCapsFunctionNameSniff
      */
     protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr)
     {
-
     }
 
 

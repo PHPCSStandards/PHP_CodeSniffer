@@ -42,7 +42,6 @@ final class HeredocUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -57,7 +56,6 @@ final class HeredocUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

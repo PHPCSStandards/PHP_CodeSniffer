@@ -39,7 +39,6 @@ final class CharacterBeforePHPOpeningTagUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -54,7 +53,6 @@ final class CharacterBeforePHPOpeningTagUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

@@ -33,7 +33,6 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
     public function testLongOpenTag($testMarker, array $expectedTokens)
     {
         $this->checkTokenSequence($testMarker, $expectedTokens);
-
     }
 
 
@@ -131,7 +130,6 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
         ];
 
         return $data;
-
     }
 
 
@@ -149,7 +147,6 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
     public function testCaseLongOpenTag($testMarker, array $expectedTokens)
     {
         $this->checkTokenSequence($testMarker, $expectedTokens);
-
     }
 
 
@@ -173,7 +170,6 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
         $data['open tag, multi space']['expectedTokens'][0]['content'] = '<?phP';
 
         return $data;
-
     }
 
 
@@ -190,7 +186,6 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
     public function testShortOpenEchoTag($testMarker, array $expectedTokens)
     {
         $this->checkTokenSequence($testMarker, $expectedTokens);
-
     }
 
 
@@ -202,7 +197,6 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
     public static function dataShortOpenEchoTag()
     {
         return self::getOpenTagTokenizationProvider('ShortOpenEcho', 'T_OPEN_TAG_WITH_ECHO', '<?=');
-
     }
 
 
@@ -223,7 +217,6 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
         }
 
         $this->checkTokenSequence($testMarker, $expectedTokens);
-
     }
 
 
@@ -235,7 +228,6 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
     public static function dataShortOpenTag()
     {
         return self::getOpenTagTokenizationProvider('ShortOpen', 'T_OPEN_TAG', '<?');
-
     }
 
 
@@ -281,7 +273,6 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
 
             ++$stackPtr;
         }//end foreach
-
     }
 
 
@@ -412,7 +403,6 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
                 ],
             ],
         ];
-
     }
 
 

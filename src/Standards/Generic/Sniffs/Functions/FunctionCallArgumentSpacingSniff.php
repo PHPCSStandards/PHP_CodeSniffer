@@ -35,7 +35,6 @@ class FunctionCallArgumentSpacingSniff implements Sniff
         $targets[] = T_CLOSE_PARENTHESIS;
 
         return $targets;
-
     }
 
 
@@ -84,7 +83,6 @@ class FunctionCallArgumentSpacingSniff implements Sniff
         }
 
         $this->checkSpacing($phpcsFile, $stackPtr, $openBracket);
-
     }
 
 
@@ -190,7 +188,6 @@ class FunctionCallArgumentSpacingSniff implements Sniff
                 }//end if
             }//end if
         }//end while
-
     }
 
 

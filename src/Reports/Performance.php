@@ -40,7 +40,6 @@ class Performance implements Report
         }
 
         return true;
-
     }
 
 
@@ -154,7 +153,6 @@ class Performance implements Report
         echo str_repeat('-', $width) . PHP_EOL;
         printf($formatBold, 'TOTAL RUN TIME', $runTime, 100);
         echo str_repeat('-', $width) . PHP_EOL;
-
     }
 
 

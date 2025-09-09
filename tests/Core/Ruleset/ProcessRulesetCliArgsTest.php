@@ -48,7 +48,6 @@ final class ProcessRulesetCliArgsTest extends TestCase
             self::$config = new ConfigDouble(["--standard=$standard"]);
             new Ruleset(self::$config);
         }
-
     }
 
 
@@ -66,7 +65,6 @@ final class ProcessRulesetCliArgsTest extends TestCase
         if (isset(self::$config) === true) {
             self::$config->__destruct();
         }
-
     }
 
 
@@ -88,7 +86,6 @@ final class ProcessRulesetCliArgsTest extends TestCase
     public function testCliArgs($name, $expected)
     {
         $this->assertSame($expected, self::$config->{$name});
-
     }
 
 
@@ -152,7 +149,6 @@ final class ProcessRulesetCliArgsTest extends TestCase
                 'expected' => 120,
             ],
         ];
-
     }
 
 
@@ -173,7 +169,6 @@ final class ProcessRulesetCliArgsTest extends TestCase
         $actual   = $this->normalizeSlashes(self::$config->{$name});
 
         $this->assertSame($expected, $actual);
-
     }
 
 
@@ -210,7 +205,6 @@ final class ProcessRulesetCliArgsTest extends TestCase
         }
 
         return $data;
-
     }
 
 
@@ -232,7 +226,6 @@ final class ProcessRulesetCliArgsTest extends TestCase
         }
 
         return str_replace(DIRECTORY_SEPARATOR, '/', $path);
-
     }
 
 

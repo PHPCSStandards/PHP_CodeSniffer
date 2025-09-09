@@ -136,7 +136,6 @@ class Fixer
                 $this->tokens[$index] = $token['content'];
             }
         }
-
     }
 
 
@@ -219,7 +218,6 @@ class Fixer
         }
 
         return true;
-
     }
 
 
@@ -336,7 +334,6 @@ class Fixer
         $diff = implode(PHP_EOL, $diff);
 
         return $diff;
-
     }
 
 
@@ -351,7 +348,6 @@ class Fixer
     public function getFixCount()
     {
         return $this->numFixes;
-
     }
 
 
@@ -364,7 +360,6 @@ class Fixer
     {
         $contents = implode($this->tokens);
         return $contents;
-
     }
 
 
@@ -387,7 +382,6 @@ class Fixer
         } else {
             return $this->tokens[$stackPtr];
         }
-
     }
 
 
@@ -417,7 +411,6 @@ class Fixer
 
         $this->changeset   = [];
         $this->inChangeset = true;
-
     }
 
 
@@ -461,7 +454,6 @@ class Fixer
 
         $this->changeset = [];
         return true;
-
     }
 
 
@@ -496,7 +488,6 @@ class Fixer
 
             $this->changeset = [];
         }//end if
-
     }
 
 
@@ -617,7 +608,6 @@ class Fixer
         }
 
         return true;
-
     }
 
 
@@ -675,7 +665,6 @@ class Fixer
         }
 
         return true;
-
     }
 
 
@@ -700,7 +689,6 @@ class Fixer
         }
 
         return $this->replaceToken($stackPtr, $newContent);
-
     }
 
 
@@ -715,7 +703,6 @@ class Fixer
     {
         $current = $this->getTokenContent($stackPtr);
         return $this->replaceToken($stackPtr, $current . $this->currentFile->eolChar);
-
     }
 
 
@@ -730,7 +717,6 @@ class Fixer
     {
         $current = $this->getTokenContent($stackPtr);
         return $this->replaceToken($stackPtr, $this->currentFile->eolChar . $current);
-
     }
 
 
@@ -746,7 +732,6 @@ class Fixer
     {
         $current = $this->getTokenContent($stackPtr);
         return $this->replaceToken($stackPtr, $current . $content);
-
     }
 
 
@@ -762,7 +747,6 @@ class Fixer
     {
         $current = $this->getTokenContent($stackPtr);
         return $this->replaceToken($stackPtr, $content . $current);
-
     }
 
 
@@ -824,7 +808,6 @@ class Fixer
         if ($useChangeset === true) {
             $this->endChangeset();
         }
-
     }
 
 
@@ -844,7 +827,6 @@ class Fixer
             // Sniff code could not be determined. This may be an abstract sniff class or a helper class.
             return $className;
         }
-
     }
 
 

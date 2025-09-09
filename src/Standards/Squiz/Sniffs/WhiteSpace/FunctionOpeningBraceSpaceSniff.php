@@ -27,7 +27,6 @@ class FunctionOpeningBraceSpaceSniff implements Sniff
             T_FUNCTION,
             T_CLOSURE,
         ];
-
     }
 
 
@@ -81,7 +80,6 @@ class FunctionOpeningBraceSpaceSniff implements Sniff
                 $phpcsFile->fixer->endChangeset();
             }
         }
-
     }
 
 

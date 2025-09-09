@@ -33,7 +33,6 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_ENUM_CASE, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_ENUM_CASE (code)');
         $this->assertSame('T_ENUM_CASE', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_ENUM_CASE (type)');
-
     }
 
 
@@ -55,7 +54,6 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
             'enum case, after switch statement'                          => ['/* testEnumCaseAfterSwitch */'],
             'enum case, after switch statement using alternative syntax' => ['/* testEnumCaseAfterSwitchWithEndSwitch */'],
         ];
-
     }
 
 
@@ -77,7 +75,6 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_CASE, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_CASE (code)');
         $this->assertSame('T_CASE', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_CASE (type)');
-
     }
 
 
@@ -99,7 +96,6 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
             'switch case, body in curlies declares enum'         => ['/* testCaseInSwitchWhenCreatingEnumInSwitch1 */'],
             'switch case, body after semicolon declares enum'    => ['/* testCaseInSwitchWhenCreatingEnumInSwitch2 */'],
         ];
-
     }
 
 
@@ -121,7 +117,6 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
         $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (type)');
-
     }
 
 
@@ -144,7 +139,6 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
             '"array" as case name'     => ['/* testKeywordAsEnumCaseNameShouldBeString7 */'],
             '"exit" as case name'      => ['/* testKeywordAsEnumCaseNameShouldBeString8 */'],
         ];
-
     }
 
 

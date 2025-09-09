@@ -45,7 +45,6 @@ class ControlSignatureSniff implements Sniff
             T_SWITCH,
             T_MATCH,
         ];
-
     }
 
 
@@ -320,7 +319,6 @@ class ControlSignatureSniff implements Sniff
                 }
             }
         }
-
     }
 
 

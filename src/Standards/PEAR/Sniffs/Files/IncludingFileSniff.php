@@ -32,7 +32,6 @@ class IncludingFileSniff implements Sniff
             T_REQUIRE,
             T_INCLUDE,
         ];
-
     }
 
 
@@ -129,7 +128,6 @@ class IncludingFileSniff implements Sniff
                 }
             }
         }//end if
-
     }
 
 

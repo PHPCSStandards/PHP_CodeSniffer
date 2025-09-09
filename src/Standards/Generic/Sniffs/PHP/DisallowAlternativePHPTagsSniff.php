@@ -26,7 +26,6 @@ class DisallowAlternativePHPTagsSniff implements Sniff
     public function register()
     {
         return [T_INLINE_HTML];
-
     }
 
 
@@ -73,7 +72,6 @@ class DisallowAlternativePHPTagsSniff implements Sniff
 
             $phpcsFile->addWarning($error, $stackPtr, 'MaybeASPOpenTagFound', $data);
         }
-
     }
 
 
@@ -103,7 +101,6 @@ class DisallowAlternativePHPTagsSniff implements Sniff
         }
 
         return $snippet;
-
     }
 
 

@@ -36,7 +36,6 @@ final class RegisterSniffsMissingInterfaceTest extends AbstractRulesetTestCase
         $this->expectOutputString('');
 
         new Ruleset($config);
-
     }
 
 
@@ -58,7 +57,6 @@ final class RegisterSniffsMissingInterfaceTest extends AbstractRulesetTestCase
         $this->expectRuntimeExceptionMessage($expected);
 
         new Ruleset($config);
-
     }
 
 

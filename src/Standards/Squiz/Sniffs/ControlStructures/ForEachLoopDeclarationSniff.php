@@ -38,7 +38,6 @@ class ForEachLoopDeclarationSniff implements Sniff
     public function register()
     {
         return [T_FOREACH];
-
     }
 
 
@@ -226,7 +225,6 @@ class ForEachLoopDeclarationSniff implements Sniff
                 }
             }
         }
-
     }
 
 

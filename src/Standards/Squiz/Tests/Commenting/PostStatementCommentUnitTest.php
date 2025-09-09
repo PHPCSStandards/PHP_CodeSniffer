@@ -43,7 +43,6 @@ final class PostStatementCommentUnitTest extends AbstractSniffTestCase
             63 => 1,
             64 => 1,
         ];
-
     }
 
 
@@ -58,7 +57,6 @@ final class PostStatementCommentUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

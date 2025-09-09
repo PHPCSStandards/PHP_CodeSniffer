@@ -49,7 +49,6 @@ final class DisallowMultipleAssignmentsUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
     }
 
 
@@ -64,7 +63,6 @@ final class DisallowMultipleAssignmentsUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

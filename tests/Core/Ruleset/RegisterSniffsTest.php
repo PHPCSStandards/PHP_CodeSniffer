@@ -82,7 +82,6 @@ final class RegisterSniffsTest extends TestCase
         $standardsDir .= 'src' . DIRECTORY_SEPARATOR . 'Standards' . DIRECTORY_SEPARATOR;
 
         self::$psr1SniffAbsolutePaths = self::relativeToAbsoluteSniffFiles($standardsDir, self::$psr1SniffFiles);
-
     }
 
 
@@ -104,7 +103,6 @@ final class RegisterSniffsTest extends TestCase
         }
 
         return $fileList;
-
     }
 
 
@@ -117,7 +115,6 @@ final class RegisterSniffsTest extends TestCase
     {
         // Clear out the Ruleset::$sniffs property.
         self::$ruleset->sniffs = [];
-
     }
 
 
@@ -133,7 +130,6 @@ final class RegisterSniffsTest extends TestCase
         // Make sure the same sniff list was recreated (but without the objects having been created yet).
         $this->assertSame(array_keys(self::$originalSniffs), array_keys(self::$ruleset->sniffs));
         $this->assertSame(array_keys(self::$originalSniffs), array_values(self::$ruleset->sniffs));
-
     }
 
 
@@ -162,7 +158,6 @@ final class RegisterSniffsTest extends TestCase
         sort($actual);
 
         $this->assertSame($expected, $actual);
-
     }
 
 
@@ -193,7 +188,6 @@ final class RegisterSniffsTest extends TestCase
         sort($actual);
 
         $this->assertSame($expected, $actual);
-
     }
 
 
@@ -226,7 +220,6 @@ final class RegisterSniffsTest extends TestCase
         self::$ruleset->registerSniffs(self::$psr1SniffAbsolutePaths, $restrictions, $exclusions);
 
         $this->assertSame($expected, array_keys(self::$ruleset->sniffs));
-
     }
 
 
@@ -254,7 +247,6 @@ final class RegisterSniffsTest extends TestCase
         // Make sure the same sniff list was recreated (but without the objects having been created yet).
         $this->assertSame(array_keys(self::$originalSniffs), array_keys(self::$ruleset->sniffs));
         $this->assertSame(array_keys(self::$originalSniffs), array_values(self::$ruleset->sniffs));
-
     }
 
 
@@ -282,7 +274,6 @@ final class RegisterSniffsTest extends TestCase
         // Make sure the same sniff list was recreated (but without the objects having been created yet).
         $this->assertSame(array_keys(self::$originalSniffs), array_keys(self::$ruleset->sniffs));
         $this->assertSame(array_keys(self::$originalSniffs), array_values(self::$ruleset->sniffs));
-
     }
 
 

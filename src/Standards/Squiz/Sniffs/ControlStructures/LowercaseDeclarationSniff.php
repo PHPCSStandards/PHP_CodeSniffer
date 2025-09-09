@@ -36,7 +36,6 @@ class LowercaseDeclarationSniff implements Sniff
             T_CATCH,
             T_MATCH,
         ];
-
     }
 
 
@@ -68,7 +67,6 @@ class LowercaseDeclarationSniff implements Sniff
                 $phpcsFile->fixer->replaceToken($stackPtr, $contentLc);
             }
         }
-
     }
 
 

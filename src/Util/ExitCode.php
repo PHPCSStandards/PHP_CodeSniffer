@@ -138,7 +138,6 @@ final class ExitCode
         }
 
         return $exitCode;
-
     }
 
 

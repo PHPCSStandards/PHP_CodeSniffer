@@ -29,7 +29,6 @@ class OneObjectStructurePerFileSniff implements Sniff
             T_TRAIT,
             T_ENUM,
         ];
-
     }
 
 
@@ -55,7 +54,6 @@ class OneObjectStructurePerFileSniff implements Sniff
             $error = 'Only one object structure is allowed in a file';
             $phpcsFile->addError($error, $nextClass, 'MultipleFound');
         }
-
     }
 
 

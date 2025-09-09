@@ -98,7 +98,6 @@ class ScopeIndentSniff implements Sniff
     public function register()
     {
         return [T_OPEN_TAG];
-
     }
 
 
@@ -1307,7 +1306,6 @@ class ScopeIndentSniff implements Sniff
 
         // Don't process the rest of the file.
         return $phpcsFile->numTokens;
-
     }
 
 
@@ -1394,7 +1392,6 @@ class ScopeIndentSniff implements Sniff
         }//end if
 
         return true;
-
     }
 
 

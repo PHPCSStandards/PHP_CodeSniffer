@@ -37,7 +37,6 @@ class UnnecessaryFinalModifierSniff implements Sniff
     public function register()
     {
         return [T_CLASS];
-
     }
 
 
@@ -81,7 +80,6 @@ class UnnecessaryFinalModifierSniff implements Sniff
                 $next = $tokens[$next]['scope_closer'];
             }
         }
-
     }
 
 

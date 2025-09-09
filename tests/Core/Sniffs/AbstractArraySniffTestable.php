@@ -39,7 +39,6 @@ class AbstractArraySniffTestable extends AbstractArraySniff
     public function processSingleLineArray(File $phpcsFile, int $stackPtr, int $arrayStart, int $arrayEnd, array $indices)
     {
         $this->indicies = $indices;
-
     }
 
 
@@ -59,7 +58,6 @@ class AbstractArraySniffTestable extends AbstractArraySniff
     public function processMultiLineArray(File $phpcsFile, int $stackPtr, int $arrayStart, int $arrayEnd, array $indices)
     {
         $this->indicies = $indices;
-
     }
 
 

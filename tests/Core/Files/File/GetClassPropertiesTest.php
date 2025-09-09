@@ -36,7 +36,6 @@ final class GetClassPropertiesTest extends AbstractMethodTestCase
 
         $target = $this->getTargetToken($testMarker, $tokenType);
         self::$phpcsFile->getClassProperties($target);
-
     }
 
 
@@ -63,7 +62,6 @@ final class GetClassPropertiesTest extends AbstractMethodTestCase
                 'tokenType'  => T_ENUM,
             ],
         ];
-
     }
 
 
@@ -82,7 +80,6 @@ final class GetClassPropertiesTest extends AbstractMethodTestCase
         $class  = $this->getTargetToken($testMarker, T_CLASS);
         $result = self::$phpcsFile->getClassProperties($class);
         $this->assertSame($expected, $result);
-
     }
 
 
@@ -185,7 +182,6 @@ final class GetClassPropertiesTest extends AbstractMethodTestCase
                 ],
             ],
         ];
-
     }
 
 

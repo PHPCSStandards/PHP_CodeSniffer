@@ -48,7 +48,6 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
         if (copy($baseFileName, self::$caseFileName) === false) {
             throw new Exception(sprintf('Failed to copy test case file "ReplaceTabsInTokenTest.inc" to %s', self::$caseFileName));
         }
-
     }
 
 
@@ -60,7 +59,6 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
     public static function tearDownAfterClass(): void
     {
         @unlink(self::$caseFileName);
-
     }
 
 
@@ -93,7 +91,6 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
             $this->assertArrayHasKey($key, $tokens[$target], "Key $key not found in the token array.");
             $this->assertSame($value, $tokens[$target][$key], "Value for key $key does not match expectation.");
         }
-
     }
 
 
@@ -128,7 +125,6 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
                 ],
             ],
         ];
-
     }
 
 
@@ -160,7 +156,6 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
             $this->assertArrayHasKey($key, $tokens[$target], "Key $key not found in the token array.");
             $this->assertSame($value, $tokens[$target][$key], "Value for key $key does not match expectation.");
         }
-
     }
 
 
@@ -251,7 +246,6 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
         $data['Mixed tab/space indentation']['offset'] = 1;
 
         return $data;
-
     }
 
 

@@ -69,7 +69,6 @@ final class CreateParenthesisNestingMapDNFTypesTest extends AbstractTokenizerTes
             $this->assertArrayHasKey($openPtr, $tokens[$i]['nested_parenthesis'], 'Nested parenthesis is missing target parentheses set');
             $this->assertSame($closePtr, $tokens[$i]['nested_parenthesis'][$openPtr], 'Nested parenthesis closer not set correctly');
         }
-
     }
 
 
@@ -174,7 +173,6 @@ final class CreateParenthesisNestingMapDNFTypesTest extends AbstractTokenizerTes
                 'testMarker' => '/* testParensNoOwnerInArrowReturnExpression */',
             ],
         ];
-
     }
 
 
@@ -223,7 +221,6 @@ final class CreateParenthesisNestingMapDNFTypesTest extends AbstractTokenizerTes
             $this->assertArrayHasKey($openPtr, $tokens[$i]['nested_parenthesis'], 'Nested parenthesis is missing target parentheses set');
             $this->assertSame($closePtr, $tokens[$i]['nested_parenthesis'][$openPtr], 'Nested parenthesis closer not set correctly');
         }//end for
-
     }
 
 
@@ -367,7 +364,6 @@ final class CreateParenthesisNestingMapDNFTypesTest extends AbstractTokenizerTes
                 'testMarker' => '/* testDNFTypeParamIllegalNestedParens */',
             ],
         ];
-
     }
 
 

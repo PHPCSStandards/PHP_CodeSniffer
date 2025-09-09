@@ -47,7 +47,6 @@ final class ClosingTagUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
     }
 
 
@@ -62,7 +61,6 @@ final class ClosingTagUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

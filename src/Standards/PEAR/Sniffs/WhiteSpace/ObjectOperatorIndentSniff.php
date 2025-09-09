@@ -48,7 +48,6 @@ class ObjectOperatorIndentSniff implements Sniff
     public function register()
     {
         return self::TARGET_TOKENS;
-
     }
 
 
@@ -194,7 +193,6 @@ class ObjectOperatorIndentSniff implements Sniff
                 $end
             );
         }//end while
-
     }
 
 

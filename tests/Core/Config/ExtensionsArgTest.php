@@ -36,7 +36,6 @@ final class ExtensionsArgTest extends TestCase
         $config = new ConfigDouble(["--extensions=$passedValue"]);
 
         $this->assertSame($expected, $config->extensions);
-
     }
 
 
@@ -97,7 +96,6 @@ final class ExtensionsArgTest extends TestCase
                 ],
             ],
         ];
-
     }
 
 
@@ -116,7 +114,6 @@ final class ExtensionsArgTest extends TestCase
         );
 
         $this->assertSame(['php' => 'PHP'], $config->extensions);
-
     }
 
 
@@ -139,7 +136,6 @@ final class ExtensionsArgTest extends TestCase
         $this->expectExceptionMessage($message);
 
         new ConfigDouble(["--extensions={$passedValue}"]);
-
     }
 
 
@@ -163,7 +159,6 @@ final class ExtensionsArgTest extends TestCase
                 'passedValue' => 'php,js/js,phpt/php',
             ],
         ];
-
     }
 
 

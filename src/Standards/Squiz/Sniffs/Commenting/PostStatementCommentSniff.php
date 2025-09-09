@@ -42,7 +42,6 @@ class PostStatementCommentSniff implements Sniff
     public function register()
     {
         return [T_COMMENT];
-
     }
 
 
@@ -110,7 +109,6 @@ class PostStatementCommentSniff implements Sniff
         if ($fix === true) {
             $phpcsFile->fixer->addNewlineBefore($stackPtr);
         }
-
     }
 
 

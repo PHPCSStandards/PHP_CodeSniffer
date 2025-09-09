@@ -27,7 +27,6 @@ class ElseIfDeclarationSniff implements Sniff
             T_ELSE,
             T_ELSEIF,
         ];
-
     }
 
 
@@ -65,7 +64,6 @@ class ElseIfDeclarationSniff implements Sniff
                 $phpcsFile->fixer->endChangeset();
             }
         }
-
     }
 
 

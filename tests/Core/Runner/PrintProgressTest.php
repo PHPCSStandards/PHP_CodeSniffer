@@ -72,7 +72,6 @@ final class PrintProgressTest extends TestCase
         $content = '<?php' . "\n" . '$var = false;' . "\n";
         self::$fileWithoutErrorsOrWarnings = new DummyFile($content, self::$ruleset, self::$config);
         self::$fileWithoutErrorsOrWarnings->process();
-
     }
 
 
@@ -88,7 +87,6 @@ final class PrintProgressTest extends TestCase
 
         // Reset all static properties on the StatusWriter class.
         $this->resetStatusWriterProperties();
-
     }
 
 
@@ -104,7 +102,6 @@ final class PrintProgressTest extends TestCase
         // preventing the destructor from running the clean up (which without stray references would be
         // automagically triggered when this object is destroyed, but we can't definitively rely on that).
         self::$config->__destruct();
-
     }
 
 
@@ -124,7 +121,6 @@ final class PrintProgressTest extends TestCase
         }
 
         $this->assertStderrOutputSameString('');
-
     }
 
 
@@ -149,7 +145,6 @@ final class PrintProgressTest extends TestCase
         }
 
         $this->assertStderrOutputSameString('.S.S.S.S.S 10 / 10 (100%)' . PHP_EOL);
-
     }
 
 
@@ -172,7 +167,6 @@ final class PrintProgressTest extends TestCase
         }
 
         $this->assertStderrOutputSameString($expected);
-
     }
 
 
@@ -233,7 +227,6 @@ final class PrintProgressTest extends TestCase
             ],
         ];
         // phpcs:enable
-
     }
 
 

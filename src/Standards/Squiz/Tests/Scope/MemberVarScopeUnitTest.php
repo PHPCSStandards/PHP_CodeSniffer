@@ -54,7 +54,6 @@ final class MemberVarScopeUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -69,7 +68,6 @@ final class MemberVarScopeUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

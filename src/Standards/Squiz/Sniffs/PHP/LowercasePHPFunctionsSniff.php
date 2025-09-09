@@ -32,7 +32,6 @@ class LowercasePHPFunctionsSniff implements Sniff
 
         $allFunctions           = get_defined_functions();
         $this->builtInFunctions = array_flip($allFunctions['internal']);
-
     }
 
 
@@ -47,7 +46,6 @@ class LowercasePHPFunctionsSniff implements Sniff
             T_STRING,
             T_NAME_FULLY_QUALIFIED,
         ];
-
     }
 
 
@@ -154,7 +152,6 @@ class LowercasePHPFunctionsSniff implements Sniff
         if ($fix === true) {
             $phpcsFile->fixer->replaceToken($stackPtr, strtolower($tokens[$stackPtr]['content']));
         }
-
     }
 
 

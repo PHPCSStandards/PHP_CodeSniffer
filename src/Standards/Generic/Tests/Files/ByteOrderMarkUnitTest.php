@@ -41,7 +41,6 @@ final class ByteOrderMarkUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
     }
 
 
@@ -70,7 +69,6 @@ final class ByteOrderMarkUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
     }
 
 

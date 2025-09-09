@@ -25,7 +25,6 @@ class ObjectInstantiationSniff implements Sniff
     public function register()
     {
         return [T_NEW];
-
     }
 
 
@@ -78,7 +77,6 @@ class ObjectInstantiationSniff implements Sniff
 
         $error = 'New objects must be assigned to a variable';
         $phpcsFile->addError($error, $stackPtr, 'NotAssigned');
-
     }
 
 

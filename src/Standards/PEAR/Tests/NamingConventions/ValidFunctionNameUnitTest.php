@@ -140,7 +140,6 @@ final class ValidFunctionNameUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -155,7 +154,6 @@ final class ValidFunctionNameUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

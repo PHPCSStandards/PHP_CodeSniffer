@@ -25,7 +25,6 @@ class TodoSniff implements Sniff
     public function register()
     {
         return array_diff(Tokens::COMMENT_TOKENS, Tokens::PHPCS_ANNOTATION_TOKENS);
-
     }
 
 
@@ -60,7 +59,6 @@ class TodoSniff implements Sniff
 
             $phpcsFile->addWarning($error, $stackPtr, $type, $data);
         }
-
     }
 
 

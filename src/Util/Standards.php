@@ -46,7 +46,6 @@ class Standards
         }
 
         return $resolvedInstalledPaths;
-
     }
 
 
@@ -144,7 +143,6 @@ class Standards
         }//end foreach
 
         return $installedStandards;
-
     }
 
 
@@ -215,7 +213,6 @@ class Standards
         }//end foreach
 
         return $installedStandards;
-
     }
 
 
@@ -262,7 +259,6 @@ class Standards
         }//end if
 
         return false;
-
     }
 
 
@@ -307,7 +303,6 @@ class Standards
         }//end foreach
 
         return null;
-
     }
 
 
@@ -336,7 +331,6 @@ class Standards
         }
 
         return $output;
-
     }
 
 
@@ -350,7 +344,6 @@ class Standards
     public static function printInstalledStandards()
     {
         echo self::prepareInstalledStandardsForDisplay(), PHP_EOL;
-
     }
 
 

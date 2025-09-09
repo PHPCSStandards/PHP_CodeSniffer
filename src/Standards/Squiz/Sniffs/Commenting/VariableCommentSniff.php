@@ -25,7 +25,6 @@ class VariableCommentSniff extends AbstractVariableSniff
     public function __construct()
     {
         AbstractScopeSniff::__construct(Tokens::OO_SCOPE_TOKENS, [T_VARIABLE], false);
-
     }
 
 
@@ -174,7 +173,6 @@ class VariableCommentSniff extends AbstractVariableSniff
                 unset($replacement);
             }
         }
-
     }
 
 
@@ -191,7 +189,6 @@ class VariableCommentSniff extends AbstractVariableSniff
      */
     protected function processVariable(File $phpcsFile, int $stackPtr)
     {
-
     }
 
 
@@ -208,7 +205,6 @@ class VariableCommentSniff extends AbstractVariableSniff
      */
     protected function processVariableInString(File $phpcsFile, int $stackPtr)
     {
-
     }
 
 

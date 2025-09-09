@@ -69,7 +69,6 @@ class Checkstyle implements Report
         echo $out->flush();
 
         return true;
-
     }
 
 
@@ -104,7 +103,6 @@ class Checkstyle implements Report
         echo '<checkstyle version="' . Config::VERSION . '">' . PHP_EOL;
         echo $cachedData;
         echo '</checkstyle>' . PHP_EOL;
-
     }
 
 

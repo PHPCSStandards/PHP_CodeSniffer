@@ -29,7 +29,6 @@ final class ExecutableFileUnitTest extends AbstractSniffTestCase
     {
         // Skip on Windows which doesn't have the concept of executable files.
         return PHP_OS_FAMILY === 'Windows';
-
     }
 
 
@@ -52,7 +51,6 @@ final class ExecutableFileUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -69,7 +67,6 @@ final class ExecutableFileUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         return [];
-
     }
 
 

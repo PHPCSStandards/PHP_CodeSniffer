@@ -34,7 +34,6 @@ final class IsCamelCapsTest extends TestCase
     public function testValidNotClassFormatPublic($name, $strict)
     {
         $this->assertTrue(Common::isCamelCaps($name, false, true, $strict));
-
     }
 
 
@@ -61,7 +60,6 @@ final class IsCamelCapsTest extends TestCase
                 'strict' => false,
             ],
         ];
-
     }
 
 
@@ -77,7 +75,6 @@ final class IsCamelCapsTest extends TestCase
     public function testInvalidNotClassFormatPublic($name)
     {
         $this->assertFalse(Common::isCamelCaps($name, false, true, true));
-
     }
 
 
@@ -135,7 +132,6 @@ final class IsCamelCapsTest extends TestCase
                 'name' => '',
             ],
         ];
-
     }
 
 
@@ -152,7 +148,6 @@ final class IsCamelCapsTest extends TestCase
     public function testValidNotClassFormatPrivate($name, $strict)
     {
         $this->assertTrue(Common::isCamelCaps($name, false, false, $strict));
-
     }
 
 
@@ -187,7 +182,6 @@ final class IsCamelCapsTest extends TestCase
                 'strict' => true,
             ],
         ];
-
     }
 
 
@@ -204,7 +198,6 @@ final class IsCamelCapsTest extends TestCase
     public function testInvalidNotClassFormatPrivate($name, $strict)
     {
         $this->assertFalse(Common::isCamelCaps($name, false, false, $strict));
-
     }
 
 
@@ -267,7 +260,6 @@ final class IsCamelCapsTest extends TestCase
                 'strict' => true,
             ],
         ];
-
     }
 
 
@@ -284,7 +276,6 @@ final class IsCamelCapsTest extends TestCase
     public function testValidClassFormatPublic($name, $strict)
     {
         $this->assertTrue(Common::isCamelCaps($name, true, true, $strict));
-
     }
 
 
@@ -331,7 +322,6 @@ final class IsCamelCapsTest extends TestCase
                 'strict' => false,
             ],
         ];
-
     }
 
 
@@ -347,7 +337,6 @@ final class IsCamelCapsTest extends TestCase
     public function testInvalidClassFormat($name)
     {
         $this->assertFalse(Common::isCamelCaps($name, true));
-
     }
 
 
@@ -374,7 +363,6 @@ final class IsCamelCapsTest extends TestCase
                 'name' => '',
             ],
         ];
-
     }
 
 
@@ -394,7 +382,6 @@ final class IsCamelCapsTest extends TestCase
     public function testInvalidClassFormatWithVisibilityPublicFlag($name, $visibilityPublic)
     {
         $this->assertFalse(Common::isCamelCaps($name, true, $visibilityPublic));
-
     }
 
 
@@ -425,7 +412,6 @@ final class IsCamelCapsTest extends TestCase
                 'visibilityPublic' => false,
             ],
         ];
-
     }
 
 
@@ -441,7 +427,6 @@ final class IsCamelCapsTest extends TestCase
     public function testValidDefaultArguments($name)
     {
         $this->assertTrue(Common::isCamelCaps($name));
-
     }
 
 
@@ -462,7 +447,6 @@ final class IsCamelCapsTest extends TestCase
                 'name' => 'this3IsCamelCaps',
             ],
         ];
-
     }
 
 
@@ -478,7 +462,6 @@ final class IsCamelCapsTest extends TestCase
     public function testInvalidDefaultArguments($name)
     {
         $this->assertFalse(Common::isCamelCaps($name));
-
     }
 
 
@@ -505,7 +488,6 @@ final class IsCamelCapsTest extends TestCase
                 'name' => 'thisISCamelCaps',
             ],
         ];
-
     }
 
 

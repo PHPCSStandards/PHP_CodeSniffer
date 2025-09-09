@@ -50,7 +50,6 @@ class UpperCaseConstantSniff extends LowerCaseConstantSniff
         } else {
             $phpcsFile->recordMetric($stackPtr, 'PHP constant case', 'upper');
         }
-
     }
 
 

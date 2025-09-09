@@ -39,7 +39,6 @@ final class RegisterSniffsRemovedTokenizersTest extends AbstractRulesetTestCase
         // Set up the ruleset.
         $standard     = __DIR__ . '/RegisterSniffsRemovedTokenizersTest.xml';
         self::$config = new ConfigDouble(["--standard=$standard"]);
-
     }
 
 
@@ -66,7 +65,6 @@ final class RegisterSniffsRemovedTokenizersTest extends AbstractRulesetTestCase
         $this->expectRuntimeExceptionRegex($expected);
 
         new Ruleset(self::$config);
-
     }
 
 
@@ -99,7 +97,6 @@ final class RegisterSniffsRemovedTokenizersTest extends AbstractRulesetTestCase
                 'expected' => sprintf($message, 'TestStandard.SupportedTokenizers.ListensForUnrecognizedTokenizers', 'SCSS, TypeScript'),
             ],
         ];
-
     }
 
 

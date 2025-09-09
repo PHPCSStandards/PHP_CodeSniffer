@@ -45,7 +45,6 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
         }
 
         $this->assertSame($expected, $result);
-
     }
 
 
@@ -1844,7 +1843,6 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                 ],
             ],
         ];
-
     }
 
 
@@ -1863,7 +1861,6 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
 
         $variable = $this->getTargetToken($identifier, T_VARIABLE);
         self::$phpcsFile->getMemberProperties($variable);
-
     }
 
 
@@ -1886,7 +1883,6 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
             'method parameter in enum'                               => ['/* testEnumMethodParamNotProperty */'],
             'property in enum (parse error)'                         => ['/* testEnumProperty */'],
         ];
-
     }
 
 
@@ -1901,7 +1897,6 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
 
         $next = $this->getTargetToken('/* testNotAVariable */', T_RETURN);
         self::$phpcsFile->getMemberProperties($next);
-
     }
 
 

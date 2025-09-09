@@ -141,7 +141,6 @@ class Runner
         }//end try
 
         return ExitCode::calculate($this->reporter);
-
     }
 
 
@@ -227,7 +226,6 @@ class Runner
         }//end try
 
         return ExitCode::calculate($this->reporter);
-
     }
 
 
@@ -286,7 +284,6 @@ class Runner
             $error .= $this->config->printShortUsage(true);
             throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         }
-
     }
 
 
@@ -517,7 +514,6 @@ class Runner
         if ($this->config->cache === true) {
             Cache::save();
         }
-
     }
 
 
@@ -544,7 +540,6 @@ class Runner
         }
 
         throw new RuntimeException("$message in $file on line $line");
-
     }
 
 
@@ -672,7 +667,6 @@ class Runner
 
         // Clean up the file to save (a lot of) memory.
         $file->cleanUp();
-
     }
 
 
@@ -757,7 +751,6 @@ class Runner
         }//end while
 
         return $success;
-
     }
 
 
@@ -863,7 +856,6 @@ class Runner
         }
 
         StatusWriter::write(str_repeat(' ', $padding) . " $numProcessed / $numFiles ($percent%)");
-
     }
 
 
@@ -901,7 +893,6 @@ class Runner
                 }
             }
         );
-
     }
 
 

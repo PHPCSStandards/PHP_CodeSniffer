@@ -43,7 +43,6 @@ class Text extends Generator
         if (trim($content) !== '') {
             echo $this->getFormattedTitle($doc), $content;
         }
-
     }
 
 
@@ -73,7 +72,6 @@ class Text extends Generator
         $output .= PHP_EOL . PHP_EOL;
 
         return $output;
-
     }
 
 
@@ -102,7 +100,6 @@ class Text extends Generator
         $text      = implode(PHP_EOL, $nodeLines);
 
         return wordwrap($text, 100, PHP_EOL) . PHP_EOL . PHP_EOL;
-
     }
 
 
@@ -155,7 +152,6 @@ class Text extends Generator
         }
 
         return $output;
-
     }
 
 
@@ -178,7 +174,6 @@ class Text extends Generator
         $title = wordwrap($title, 46, "\n");
 
         return explode("\n", $title);
-
     }
 
 
@@ -200,7 +195,6 @@ class Text extends Generator
 
         $code = str_replace(['<em>', '</em>'], '', $code);
         return explode("\n", $code);
-
     }
 
 
@@ -231,7 +225,6 @@ class Text extends Generator
         }//end for
 
         return $rows;
-
     }
 
 

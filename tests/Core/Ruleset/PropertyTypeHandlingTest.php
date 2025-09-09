@@ -55,7 +55,6 @@ final class PropertyTypeHandlingTest extends TestCase
         $sniffObject = $this->getSniffObjectForRuleset();
 
         $this->assertSame($expected, $sniffObject->$propertyName);
-
     }
 
 
@@ -74,7 +73,6 @@ final class PropertyTypeHandlingTest extends TestCase
         $sniffObject = $this->getSniffObjectAfterProcessingFile();
 
         $this->assertSame($expected, $sniffObject->$propertyName);
-
     }
 
 
@@ -189,7 +187,6 @@ final class PropertyTypeHandlingTest extends TestCase
                 'expected'     => [null],
             ],
         ];
-
     }
 
 
@@ -296,7 +293,6 @@ final class PropertyTypeHandlingTest extends TestCase
                 'expected'     => 'some value',
             ],
         ];
-
     }
 
 
@@ -326,7 +322,6 @@ final class PropertyTypeHandlingTest extends TestCase
         }
 
         return $sniffObject;
-
     }
 
 
@@ -363,7 +358,6 @@ final class PropertyTypeHandlingTest extends TestCase
         }
 
         return $sniffObject;
-
     }
 
 

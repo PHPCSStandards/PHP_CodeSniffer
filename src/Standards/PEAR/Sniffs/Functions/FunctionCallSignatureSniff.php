@@ -60,7 +60,6 @@ class FunctionCallSignatureSniff implements Sniff
         $tokens[] = T_CLOSE_PARENTHESIS;
 
         return $tokens;
-
     }
 
 
@@ -154,7 +153,6 @@ class FunctionCallSignatureSniff implements Sniff
         } else {
             $this->processSingleLineCall($phpcsFile, $stackPtr, $openBracket, $tokens);
         }
-
     }
 
 
@@ -179,7 +177,6 @@ class FunctionCallSignatureSniff implements Sniff
         }
 
         return false;
-
     }
 
 
@@ -309,7 +306,6 @@ class FunctionCallSignatureSniff implements Sniff
                 }//end if
             }//end if
         }//end if
-
     }
 
 
@@ -619,7 +615,6 @@ class FunctionCallSignatureSniff implements Sniff
                 $argEnd   = $phpcsFile->findEndOfStatement($next, [T_COLON]);
             }//end if
         }//end for
-
     }
 
 

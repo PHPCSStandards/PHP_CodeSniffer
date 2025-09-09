@@ -48,7 +48,6 @@ class SubversionPropertiesSniff implements Sniff
     public function register()
     {
         return [T_OPEN_TAG];
-
     }
 
 
@@ -111,7 +110,6 @@ class SubversionPropertiesSniff implements Sniff
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
-
     }
 
 
@@ -188,7 +186,6 @@ class SubversionPropertiesSniff implements Sniff
         }
 
         return $properties;
-
     }
 
 

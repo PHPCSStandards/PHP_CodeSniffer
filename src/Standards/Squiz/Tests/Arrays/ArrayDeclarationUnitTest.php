@@ -240,7 +240,6 @@ final class ArrayDeclarationUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -255,7 +254,6 @@ final class ArrayDeclarationUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

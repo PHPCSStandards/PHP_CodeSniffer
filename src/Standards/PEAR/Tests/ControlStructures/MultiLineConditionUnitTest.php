@@ -67,7 +67,6 @@ final class MultiLineConditionUnitTest extends AbstractSniffTestCase
             240 => 2,
             248 => 2,
         ];
-
     }
 
 
@@ -82,7 +81,6 @@ final class MultiLineConditionUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

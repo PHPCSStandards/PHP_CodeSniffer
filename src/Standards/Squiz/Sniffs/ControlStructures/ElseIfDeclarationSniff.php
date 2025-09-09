@@ -24,7 +24,6 @@ class ElseIfDeclarationSniff implements Sniff
     public function register()
     {
         return [T_ELSEIF];
-
     }
 
 
@@ -44,7 +43,6 @@ class ElseIfDeclarationSniff implements Sniff
         if ($fix === true) {
             $phpcsFile->fixer->replaceToken($stackPtr, 'else if');
         }
-
     }
 
 

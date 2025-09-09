@@ -31,7 +31,6 @@ final class ForLoopShouldBeWhileLoopUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [];
-
     }
 
 
@@ -57,7 +56,6 @@ final class ForLoopShouldBeWhileLoopUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
     }
 
 

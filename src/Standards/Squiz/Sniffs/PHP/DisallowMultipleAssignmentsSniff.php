@@ -25,7 +25,6 @@ class DisallowMultipleAssignmentsSniff implements Sniff
     public function register()
     {
         return [T_EQUAL];
-
     }
 
 
@@ -188,7 +187,6 @@ class DisallowMultipleAssignmentsSniff implements Sniff
         }
 
         $phpcsFile->addError($error, $stackPtr, $errorCode);
-
     }
 
 

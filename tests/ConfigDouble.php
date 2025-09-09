@@ -68,7 +68,6 @@ final class ConfigDouble extends Config
         if ($skipSettingReportWidth !== true) {
             $this->preventAutoDiscoveryScreenWidth();
         }
-
     }
 
 
@@ -83,7 +82,6 @@ final class ConfigDouble extends Config
         $this->setStaticConfigProperty('executablePaths', []);
         $this->setStaticConfigProperty('configData', null);
         $this->setStaticConfigProperty('configDataFile', null);
-
     }
 
 
@@ -101,7 +99,6 @@ final class ConfigDouble extends Config
         if ($this->skipSettingStandard !== true) {
             $this->preventSearchingForRuleset();
         }
-
     }
 
 
@@ -113,7 +110,6 @@ final class ConfigDouble extends Config
     private function resetSelectProperties()
     {
         $this->setStaticConfigProperty('executablePaths', []);
-
     }
 
 
@@ -129,7 +125,6 @@ final class ConfigDouble extends Config
     {
         $this->setStaticConfigProperty('configData', []);
         $this->setStaticConfigProperty('configDataFile', '');
-
     }
 
 
@@ -153,7 +148,6 @@ final class ConfigDouble extends Config
         }
 
         self::setStaticConfigProperty('overriddenDefaults', $overriddenDefaults);
-
     }
 
 
@@ -169,7 +163,6 @@ final class ConfigDouble extends Config
         if ($settings['reportWidth'] === 'auto') {
             $this->reportWidth = self::DEFAULT_REPORT_WIDTH;
         }
-
     }
 
 
@@ -190,7 +183,6 @@ final class ConfigDouble extends Config
         }
 
         return $property->getValue();
-
     }
 
 
@@ -214,7 +206,6 @@ final class ConfigDouble extends Config
         }
 
         (PHP_VERSION_ID < 80100) && $property->setAccessible(false);
-
     }
 
 

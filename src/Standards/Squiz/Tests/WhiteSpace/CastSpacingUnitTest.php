@@ -37,7 +37,6 @@ final class CastSpacingUnitTest extends AbstractSniffTestCase
             6 => 1,
             9 => 1,
         ];
-
     }
 
 
@@ -52,7 +51,6 @@ final class CastSpacingUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

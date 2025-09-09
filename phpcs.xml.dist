@@ -64,7 +64,10 @@
     <rule ref="Squiz.Strings.DoubleQuoteUsage.NotRequired"/>
     <rule ref="Generic.Strings.UnnecessaryHeredoc"/>
     <rule ref="Squiz.WhiteSpace.ControlStructureSpacing"/>
-    <rule ref="Squiz.WhiteSpace.FunctionClosingBraceSpace"/>
+    <rule ref="Squiz.WhiteSpace.FunctionClosingBraceSpace">
+        <exclude name="Squiz.WhiteSpace.FunctionClosingBraceSpace.SpacingBeforeClose"/>
+    </rule>
+    <rule ref="PSR2.Methods.FunctionClosingBrace"/>
     <rule ref="Squiz.WhiteSpace.FunctionSpacing"/>
     <rule ref="Squiz.WhiteSpace.MemberVarSpacing"/>
     <rule ref="PSR12.Operators.OperatorSpacing"/>

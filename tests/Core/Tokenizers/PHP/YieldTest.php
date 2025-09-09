@@ -41,7 +41,6 @@ final class YieldTest extends AbstractTokenizerTestCase
         $this->assertSame('T_YIELD', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_YIELD (type)');
 
         $this->assertSame($expectedContent, $tokenArray['content'], 'Token content does not match expectation');
-
     }
 
 
@@ -60,7 +59,6 @@ final class YieldTest extends AbstractTokenizerTestCase
                 'expectedContent' => 'yield',
             ],
         ];
-
     }
 
 
@@ -89,7 +87,6 @@ final class YieldTest extends AbstractTokenizerTestCase
         } else {
             $this->assertSame($expectedContent, $tokenArray['content'], 'Token content does not match expectation');
         }
-
     }
 
 
@@ -116,7 +113,6 @@ final class YieldTest extends AbstractTokenizerTestCase
                 'expectedContent' => 'yield	from',
             ],
         ];
-
     }
 
 
@@ -155,7 +151,6 @@ final class YieldTest extends AbstractTokenizerTestCase
 
             ++$target;
         }
-
     }
 
 
@@ -381,7 +376,6 @@ final class YieldTest extends AbstractTokenizerTestCase
                 ],
             ],
         ];
-
     }
 
 
@@ -402,7 +396,6 @@ final class YieldTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
         $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (type)');
-
     }
 
 
@@ -425,7 +418,6 @@ final class YieldTest extends AbstractTokenizerTestCase
             'from used as class constant access'  => ['/* testFromUsedForClassConstantAccess1 */'],
             'yield used as method name with ref'  => ['/* testYieldUsedAsMethodNameReturnByRef */'],
         ];
-
     }
 
 

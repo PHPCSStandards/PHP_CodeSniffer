@@ -38,7 +38,6 @@ final class ProcessRulesetTest extends TestCase
         $expected = ['Generic.PHP.BacktickOperator' => 'PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\BacktickOperatorSniff'];
 
         $this->assertSame($expected, $ruleset->sniffCodes);
-
     }
 
 
@@ -84,7 +83,6 @@ final class ProcessRulesetTest extends TestCase
         ksort($actual);
 
         $this->assertSame($expected, $actual);
-
     }
 
 
@@ -111,7 +109,6 @@ final class ProcessRulesetTest extends TestCase
         ksort($actual);
 
         $this->assertSame($expected, $actual);
-
     }
 
 
@@ -139,7 +136,6 @@ final class ProcessRulesetTest extends TestCase
         }
 
         $this->assertSame('1', $actualValue);
-
     }
 
 
@@ -168,7 +164,6 @@ final class ProcessRulesetTest extends TestCase
         $this->assertIsArray($ruleset->ruleset[$sniffCode], "Sniff $sniffCode is not an array");
         $this->assertArrayHasKey($key, $ruleset->ruleset[$sniffCode], "Directive $key not registered for sniff $sniffCode");
         $this->assertSame(5, $ruleset->ruleset[$sniffCode][$key], "$key has unexpected value for sniff $sniffCode");
-
     }
 
 
@@ -202,7 +197,6 @@ final class ProcessRulesetTest extends TestCase
         $this->assertIsArray($ruleset->ruleset[$sniffCode], "Sniff $sniffCode is not an array");
         $this->assertArrayHasKey($key, $ruleset->ruleset[$sniffCode], "Directive $key not registered for sniff $sniffCode");
         $this->assertSame(5, $ruleset->ruleset[$sniffCode][$key], "$key has unexpected value for sniff $sniffCode");
-
     }
 
 
@@ -219,7 +213,6 @@ final class ProcessRulesetTest extends TestCase
         $sniffCode = 'Generic.Metrics.CyclomaticComplexity';
         $this->assertArrayNotHasKey($sniffCode, $ruleset->sniffCodes, "Sniff $sniffCode registered");
         $this->assertArrayNotHasKey($sniffCode, $ruleset->ruleset, "Sniff $sniffCode adjusted");
-
     }
 
 
@@ -239,7 +232,6 @@ final class ProcessRulesetTest extends TestCase
 
         $sniffCode = 'Generic.PHP.BacktickOperator.Found';
         $this->assertArrayNotHasKey($sniffCode, $ruleset->ruleset, "Sniff $sniffCode adjusted");
-
     }
 
 
@@ -260,7 +252,6 @@ final class ProcessRulesetTest extends TestCase
         }
 
         return $ruleset;
-
     }
 
 

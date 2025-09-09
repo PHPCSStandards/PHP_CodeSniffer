@@ -39,7 +39,6 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
         $targets[] = T_DECLARE;
 
         return $targets;
-
     }
 
 
@@ -121,7 +120,6 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
                 $phpcsFile->fixer->addContent($stackPtr, ' ');
             }
         }
-
     }
 
 

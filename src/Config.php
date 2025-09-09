@@ -275,7 +275,6 @@ class Config
         }
 
         return $this->settings[$name];
-
     }
 
 
@@ -348,7 +347,6 @@ class Config
         }//end switch
 
         $this->settings[$name] = $value;
-
     }
 
 
@@ -362,7 +360,6 @@ class Config
     public function __isset(string $name)
     {
         return isset($this->settings[$name]);
-
     }
 
 
@@ -376,7 +373,6 @@ class Config
     public function __unset(string $name)
     {
         $this->settings[$name] = null;
-
     }
 
 
@@ -388,7 +384,6 @@ class Config
     public function getSettings()
     {
         return $this->settings;
-
     }
 
 
@@ -402,7 +397,6 @@ class Config
     public function setSettings(array $settings)
     {
         $this->settings = $settings;
-
     }
 
 
@@ -487,7 +481,6 @@ class Config
         }//end if
 
         fclose($handle);
-
     }
 
 
@@ -538,7 +531,6 @@ class Config
                 $this->processUnknownArgument($arg, $i);
             }//end if
         }//end for
-
     }
 
 
@@ -662,7 +654,6 @@ class Config
         if ($parallel !== null) {
             $this->parallel = max((int) $parallel, 1);
         }
-
     }
 
 
@@ -774,7 +765,6 @@ class Config
                 $this->processUnknownArgument('-' . $arg, $pos);
             }
         }//end switch
-
     }
 
 
@@ -1306,7 +1296,6 @@ class Config
             }//end if
             break;
         }//end switch
-
     }
 
 
@@ -1393,7 +1382,6 @@ class Config
         }
 
         return $sniffs;
-
     }
 
 
@@ -1422,7 +1410,6 @@ class Config
         }
 
         $this->processFilePath($arg);
-
     }
 
 
@@ -1458,7 +1445,6 @@ class Config
             $this->files = $files;
             $this->overriddenDefaults['files'] = true;
         }
-
     }
 
 
@@ -1478,7 +1464,6 @@ class Config
         }
 
         echo PHP_EOL;
-
     }
 
 
@@ -1505,7 +1490,6 @@ class Config
         }
 
         echo $usage;
-
     }
 
 
@@ -1531,7 +1515,6 @@ class Config
         $shortOptions = Help::DEFAULT_SHORT_OPTIONS . 'aems';
 
         (new Help($this, $longOptions, $shortOptions))->display();
-
     }
 
 
@@ -1547,7 +1530,6 @@ class Config
         $shortOptions  = Help::DEFAULT_SHORT_OPTIONS;
 
         (new Help($this, $longOptions, $shortOptions))->display();
-
     }
 
 
@@ -1573,7 +1555,6 @@ class Config
         }
 
         return $phpCodeSnifferConfig[$key];
-
     }
 
 
@@ -1614,7 +1595,6 @@ class Config
 
         self::$executablePaths[$name] = $result;
         return $result;
-
     }
 
 
@@ -1696,7 +1676,6 @@ class Config
         }
 
         return true;
-
     }
 
 
@@ -1738,7 +1717,6 @@ class Config
         self::$configDataFile = $configFile;
         self::$configData     = $phpCodeSnifferConfig;
         return self::$configData;
-
     }
 
 
@@ -1773,7 +1751,6 @@ class Config
         }
 
         return $output;
-
     }
 
 
@@ -1789,7 +1766,6 @@ class Config
     public function printConfigData(array $data)
     {
         echo $this->prepareConfigDataForDisplay($data);
-
     }
 
 

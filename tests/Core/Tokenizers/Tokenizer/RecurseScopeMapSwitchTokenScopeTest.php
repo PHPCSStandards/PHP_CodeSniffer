@@ -83,7 +83,6 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
                 $tokens[$tokenArray['scope_closer']]['type']
             )
         );
-
     }
 
 
@@ -153,7 +152,6 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
             ],
 
         ];
-
     }
 
 

@@ -38,7 +38,6 @@ final class TimingTest extends TestCase
     public function testGetDurationWithoutStartReturnsZero()
     {
         $this->assertSame(0, Timing::getDuration());
-
     }
 
 
@@ -54,7 +53,6 @@ final class TimingTest extends TestCase
         $duration = Timing::getDuration();
 
         $this->assertIsFloat($duration);
-
     }
 
 
@@ -70,7 +68,6 @@ final class TimingTest extends TestCase
         $duration = Timing::getDurationSince($startTime);
 
         $this->assertIsFloat($duration);
-
     }
 
 
@@ -86,7 +83,6 @@ final class TimingTest extends TestCase
         Timing::printRunTime();
 
         $this->assertStderrOutputSameString('');
-
     }
 
 
@@ -102,7 +98,6 @@ final class TimingTest extends TestCase
         Timing::printRunTime(true);
 
         $this->assertStderrOutputSameString('');
-
     }
 
 
@@ -123,7 +118,6 @@ final class TimingTest extends TestCase
 
         $regex = '`^Time: [0-9]+ms; Memory: [0-9\.]+MB' . PHP_EOL . '$`';
         $this->assertStderrOutputMatchesRegex($regex);
-
     }
 
 
@@ -144,7 +138,6 @@ final class TimingTest extends TestCase
 
         $regex = '`^(Time: [0-9]+ms; Memory: [0-9\.]+MB' . PHP_EOL . '){3}$`';
         $this->assertStderrOutputMatchesRegex($regex);
-
     }
 
 

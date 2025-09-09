@@ -57,7 +57,6 @@ final class ClassFileNameUnitTest extends AbstractSniffTestCase
         sort($testFiles, SORT_NATURAL);
 
         return $testFiles;
-
     }
 
 
@@ -124,7 +123,6 @@ final class ClassFileNameUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -139,7 +137,6 @@ final class ClassFileNameUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

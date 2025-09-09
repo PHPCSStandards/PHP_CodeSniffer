@@ -34,7 +34,6 @@ final class GlobalKeywordUnitTest extends AbstractSniffTestCase
             8 => 1,
             9 => 1,
         ];
-
     }
 
 
@@ -49,7 +48,6 @@ final class GlobalKeywordUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

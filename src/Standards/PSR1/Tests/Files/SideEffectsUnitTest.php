@@ -34,7 +34,6 @@ final class SideEffectsUnitTest extends AbstractSniffTestCase
         if ($testFile === 'SideEffectsUnitTest.12.inc') {
             $config->annotations = false;
         }
-
     }
 
 
@@ -51,7 +50,6 @@ final class SideEffectsUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         return [];
-
     }
 
 
@@ -79,7 +77,6 @@ final class SideEffectsUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 

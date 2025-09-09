@@ -42,7 +42,6 @@ final class FunctionDeclarationUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -57,7 +56,6 @@ final class FunctionDeclarationUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

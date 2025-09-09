@@ -25,7 +25,6 @@ class EchoedStringsSniff implements Sniff
     public function register()
     {
         return [T_ECHO];
-
     }
 
 
@@ -81,7 +80,6 @@ class EchoedStringsSniff implements Sniff
                 $phpcsFile->fixer->endChangeset();
             }
         }
-
     }
 
 

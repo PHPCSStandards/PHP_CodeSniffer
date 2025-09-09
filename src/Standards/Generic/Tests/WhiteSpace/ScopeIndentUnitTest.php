@@ -39,7 +39,6 @@ final class ScopeIndentUnitTest extends AbstractSniffTestCase
         } else {
             $config->tabWidth = 0;
         }
-
     }
 
 
@@ -174,7 +173,6 @@ final class ScopeIndentUnitTest extends AbstractSniffTestCase
             1633 => 1,
             1634 => 1,
         ];
-
     }
 
 
@@ -189,7 +187,6 @@ final class ScopeIndentUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

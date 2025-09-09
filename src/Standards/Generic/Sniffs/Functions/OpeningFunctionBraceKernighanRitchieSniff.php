@@ -42,7 +42,6 @@ class OpeningFunctionBraceKernighanRitchieSniff implements Sniff
             T_FUNCTION,
             T_CLOSURE,
         ];
-
     }
 
 
@@ -170,7 +169,6 @@ class OpeningFunctionBraceKernighanRitchieSniff implements Sniff
                 }
             }
         }
-
     }
 
 

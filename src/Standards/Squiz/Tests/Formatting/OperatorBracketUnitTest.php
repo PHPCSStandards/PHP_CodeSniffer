@@ -82,7 +82,6 @@ final class OperatorBracketUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -97,7 +96,6 @@ final class OperatorBracketUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

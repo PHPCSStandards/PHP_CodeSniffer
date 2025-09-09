@@ -34,7 +34,6 @@ final class StripColorsTest extends TestCase
     public function testStripColors($text, $expected)
     {
         $this->assertSame($expected, Common::stripColors($text));
-
     }
 
 
@@ -89,7 +88,6 @@ Third Fourth
 Next line Last',
             ],
         ];
-
     }
 
 

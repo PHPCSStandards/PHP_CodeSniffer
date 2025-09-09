@@ -23,7 +23,6 @@ class MethodDeclarationSniff extends AbstractScopeSniff
     public function __construct()
     {
         parent::__construct(Tokens::OO_SCOPE_TOKENS, [T_FUNCTION]);
-
     }
 
 
@@ -139,7 +138,6 @@ class MethodDeclarationSniff extends AbstractScopeSniff
 
             $phpcsFile->fixer->endChangeset();
         }
-
     }
 
 
@@ -155,7 +153,6 @@ class MethodDeclarationSniff extends AbstractScopeSniff
      */
     protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr)
     {
-
     }
 
 

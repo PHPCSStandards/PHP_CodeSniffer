@@ -28,7 +28,6 @@ class ReturnTypeDeclarationSniff implements Sniff
             T_CLOSURE,
             T_FN,
         ];
-
     }
 
 
@@ -103,7 +102,6 @@ class ReturnTypeDeclarationSniff implements Sniff
                 $phpcsFile->addError($error, $colon, 'SpaceBeforeColon');
             }
         }
-
     }
 
 

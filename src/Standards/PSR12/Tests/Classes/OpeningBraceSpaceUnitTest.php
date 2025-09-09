@@ -38,7 +38,6 @@ final class OpeningBraceSpaceUnitTest extends AbstractSniffTestCase
             41 => 1,
             55 => 1,
         ];
-
     }
 
 
@@ -53,7 +52,6 @@ final class OpeningBraceSpaceUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

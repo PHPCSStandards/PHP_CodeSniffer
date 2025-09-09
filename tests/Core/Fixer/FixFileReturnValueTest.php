@@ -39,7 +39,6 @@ final class FixFileReturnValueTest extends TestCase
         $fixed = $phpcsFile->fixer->fixFile();
 
         $this->assertTrue($fixed);
-
     }
 
 
@@ -63,7 +62,6 @@ final class FixFileReturnValueTest extends TestCase
         $fixed = $phpcsFile->fixer->fixFile();
 
         $this->assertFalse($fixed);
-
     }
 
 
@@ -82,7 +80,6 @@ final class FixFileReturnValueTest extends TestCase
                 'standard' => __DIR__ . '/FixFileReturnValueNotEnoughLoopsTest.xml',
             ],
         ];
-
     }
 
 

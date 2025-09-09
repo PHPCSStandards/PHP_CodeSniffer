@@ -31,7 +31,6 @@ final class GlobalFunctionUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [];
-
     }
 
 
@@ -54,7 +53,6 @@ final class GlobalFunctionUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 

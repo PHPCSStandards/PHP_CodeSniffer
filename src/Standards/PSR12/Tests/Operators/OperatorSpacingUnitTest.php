@@ -59,7 +59,6 @@ final class OperatorSpacingUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -74,7 +73,6 @@ final class OperatorSpacingUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

@@ -59,7 +59,6 @@ final class SingleLineDocBlockTest extends CommentTestCase
                 'expectedTags' => [2],
             ],
         ];
-
     }
 
 
@@ -79,7 +78,6 @@ final class SingleLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', [T_COMMENT, T_DOC_COMMENT_OPEN_TAG]);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -100,7 +98,6 @@ final class SingleLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -120,7 +117,6 @@ final class SingleLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -141,7 +137,6 @@ final class SingleLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -164,7 +159,6 @@ final class SingleLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -187,7 +181,6 @@ final class SingleLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 
@@ -210,7 +203,6 @@ final class SingleLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
     }
 
 

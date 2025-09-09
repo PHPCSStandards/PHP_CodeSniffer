@@ -24,7 +24,6 @@ class OpenTagSniff implements Sniff
     public function register()
     {
         return [T_OPEN_TAG];
-
     }
 
 
@@ -77,7 +76,6 @@ class OpenTagSniff implements Sniff
         }
 
         return $phpcsFile->numTokens;
-
     }
 
 

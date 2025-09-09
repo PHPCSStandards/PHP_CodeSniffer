@@ -31,7 +31,6 @@ final class UnconditionalIfStatementUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [];
-
     }
 
 
@@ -60,7 +59,6 @@ final class UnconditionalIfStatementUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 

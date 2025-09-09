@@ -42,7 +42,6 @@ final class DisallowComparisonAssignmentUnitTest extends AbstractSniffTestCase
             58 => 1,
             62 => 1,
         ];
-
     }
 
 
@@ -57,7 +56,6 @@ final class DisallowComparisonAssignmentUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

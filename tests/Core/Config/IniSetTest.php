@@ -46,7 +46,6 @@ final class IniSetTest extends TestCase
         if (is_string($this->originalValue) === true) {
             @ini_set($this->currentOption, $this->originalValue);
         }
-
     }
 
 
@@ -66,7 +65,6 @@ final class IniSetTest extends TestCase
         new ConfigDouble(['-d', "{$this->currentOption}={$this->originalValue}"]);
 
         $this->assertSame($this->originalValue, ini_get($this->currentOption));
-
     }
 
 
@@ -96,7 +94,6 @@ final class IniSetTest extends TestCase
         new ConfigDouble(['-d', $this->currentOption]);
 
         $this->assertSame($expected, ini_get($this->currentOption));
-
     }
 
 
@@ -126,7 +123,6 @@ final class IniSetTest extends TestCase
         new ConfigDouble(['-d', "$option=$newValue"]);
 
         $this->assertSame($newValue, ini_get($option));
-
     }
 
 
@@ -145,7 +141,6 @@ final class IniSetTest extends TestCase
                 'alternativeValue' => '20',
             ],
         ];
-
     }
 
 
@@ -175,7 +170,6 @@ final class IniSetTest extends TestCase
         new ConfigDouble(['-d', "{$this->currentOption}=$newValue"]);
 
         $this->assertSame($newValue, ini_get($this->currentOption));
-
     }
 
 
@@ -211,7 +205,6 @@ final class IniSetTest extends TestCase
         new ConfigDouble(['-d', "{$this->currentOption}=$newValue"]);
 
         $this->assertSame($newValue, ini_get($this->currentOption));
-
     }
 
 
@@ -237,7 +230,6 @@ final class IniSetTest extends TestCase
         new ConfigDouble(['-d', "{$this->currentOption}=$newValue"]);
 
         $this->assertFalse(ini_get($this->currentOption), 'This should be impossible: an option for a disabled extension cannot be set');
-
     }
 
 
@@ -257,7 +249,6 @@ final class IniSetTest extends TestCase
         new ConfigDouble(['-d', "{$this->currentOption}=$newValue"]);
 
         $this->assertFalse(ini_get($this->currentOption), 'This should be impossible: an option which isn\'t known to PHP cannot be set');
-
     }
 
 
@@ -286,7 +277,6 @@ final class IniSetTest extends TestCase
         }
 
         new ConfigDouble(['-d', "$option=$newValue"]);
-
     }
 
 
@@ -321,7 +311,6 @@ final class IniSetTest extends TestCase
                 'alternativeValue' => '300',
             ],
         ];
-
     }
 
 

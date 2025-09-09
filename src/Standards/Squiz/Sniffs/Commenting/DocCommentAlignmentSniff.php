@@ -25,7 +25,6 @@ class DocCommentAlignmentSniff implements Sniff
     public function register()
     {
         return [T_DOC_COMMENT_OPEN_TAG];
-
     }
 
 
@@ -140,7 +139,6 @@ class DocCommentAlignmentSniff implements Sniff
                 }
             }
         }//end for
-
     }
 
 

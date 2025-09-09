@@ -74,7 +74,6 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
     public function __construct()
     {
         parent::__construct(Tokens::OO_SCOPE_TOKENS, [T_FUNCTION], true);
-
     }
 
 
@@ -183,7 +182,6 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
                 $phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $errorData);
             }
         }
-
     }
 
 
@@ -290,7 +288,6 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
             $data[] = $newName;
             $phpcsFile->addError($error, $stackPtr, 'FunctionNameInvalid', $data);
         }
-
     }
 
 

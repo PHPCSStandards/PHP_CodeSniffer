@@ -36,7 +36,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
 
         $next = $this->getTargetToken($commentString, $targetTokenType);
         self::$phpcsFile->getMethodProperties($next);
-
     }
 
 
@@ -69,7 +68,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
                 ],
             ],
         ];
-
     }
 
 
@@ -94,7 +92,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -120,7 +117,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -146,7 +142,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -171,7 +166,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -196,7 +190,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -221,7 +214,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -247,7 +239,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -273,7 +264,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -299,7 +289,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -325,7 +314,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -351,7 +339,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -377,7 +364,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -403,7 +389,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -429,7 +414,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -454,7 +438,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -480,7 +463,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -505,7 +487,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -531,7 +512,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -557,7 +537,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -583,7 +562,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -609,7 +587,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -635,7 +612,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -661,7 +637,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -687,7 +662,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -713,7 +687,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -739,7 +712,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -767,7 +739,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -793,7 +764,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -819,7 +789,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -845,7 +814,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -871,7 +839,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -897,7 +864,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -923,7 +889,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -949,7 +914,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -975,7 +939,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1001,7 +964,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1027,7 +989,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1053,7 +1014,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1079,7 +1039,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1105,7 +1064,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1131,7 +1089,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1157,7 +1114,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1183,7 +1139,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1209,7 +1164,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1235,7 +1189,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1261,7 +1214,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1287,7 +1239,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1313,7 +1264,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1341,7 +1291,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1370,7 +1319,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1396,7 +1344,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1423,7 +1370,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1449,7 +1395,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1476,7 +1421,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1502,7 +1446,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1528,7 +1471,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         ];
 
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
-
     }
 
 
@@ -1555,7 +1497,6 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
         }
 
         $this->assertSame($expected, $found);
-
     }
 
 

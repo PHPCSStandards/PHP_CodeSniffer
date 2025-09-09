@@ -37,7 +37,6 @@ class SyntaxSniff implements Sniff
             T_OPEN_TAG,
             T_OPEN_TAG_WITH_ECHO,
         ];
-
     }
 
 
@@ -67,7 +66,6 @@ class SyntaxSniff implements Sniff
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
-
     }
 
 
@@ -97,7 +95,6 @@ class SyntaxSniff implements Sniff
             Common::escapeshellcmd($this->phpPath),
             $fileName
         );
-
     }
 
 

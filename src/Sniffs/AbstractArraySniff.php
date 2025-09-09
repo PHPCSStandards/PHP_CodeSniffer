@@ -27,7 +27,6 @@ abstract class AbstractArraySniff implements Sniff
             T_ARRAY,
             T_OPEN_SHORT_ARRAY,
         ];
-
     }
 
 
@@ -97,7 +96,6 @@ abstract class AbstractArraySniff implements Sniff
         } else {
             $this->processMultiLineArray($phpcsFile, $stackPtr, $arrayStart, $arrayEnd, $indices);
         }
-
     }
 
 
@@ -133,7 +131,6 @@ abstract class AbstractArraySniff implements Sniff
         }
 
         return $ptr;
-
     }
 
 

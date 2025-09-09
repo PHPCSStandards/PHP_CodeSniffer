@@ -36,7 +36,6 @@ final class NamespaceDeclarationUnitTest extends AbstractSniffTestCase
             17 => 1,
             19 => 1,
         ];
-
     }
 
 
@@ -51,7 +50,6 @@ final class NamespaceDeclarationUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

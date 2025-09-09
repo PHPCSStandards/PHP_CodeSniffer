@@ -30,7 +30,6 @@ class ClosingDeclarationCommentSniff implements Sniff
             T_INTERFACE,
             T_TRAIT,
         ];
-
     }
 
 
@@ -125,7 +124,6 @@ class ClosingDeclarationCommentSniff implements Sniff
 
             return;
         }
-
     }
 
 

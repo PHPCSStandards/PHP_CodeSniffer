@@ -87,7 +87,6 @@ final class InlineControlStructureUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -102,7 +101,6 @@ final class InlineControlStructureUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

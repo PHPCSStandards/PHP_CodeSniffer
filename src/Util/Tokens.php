@@ -942,7 +942,6 @@ final class Tokens
         }
 
         return substr($token, 6);
-
     }
 
 
@@ -984,7 +983,6 @@ final class Tokens
         }
 
         return $highestType;
-
     }
 
 

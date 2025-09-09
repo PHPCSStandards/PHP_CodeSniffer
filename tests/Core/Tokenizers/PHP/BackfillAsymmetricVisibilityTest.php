@@ -59,7 +59,6 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
             $tokenArray['content'],
             'Token tokenized as ' . $tokenArray['type'] . ' (content)'
         );
-
     }
 
 
@@ -197,7 +196,6 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
                 'testContent' => 'PRIVATE(SET)',
             ],
         ];
-
     }
 
 
@@ -233,7 +231,6 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
             $tokenArray['code'],
             'Token tokenized as ' . $tokenArray['type'] . ' (code)'
         );
-
     }
 
 
@@ -324,7 +321,6 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
                 'testContent' => 'private',
             ],
         ];
-
     }
 
 

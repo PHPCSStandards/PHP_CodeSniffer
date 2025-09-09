@@ -114,7 +114,6 @@ final class MessageCollector
             'message' => $message,
             'type'    => $type,
         ];
-
     }
 
 
@@ -128,7 +127,6 @@ final class MessageCollector
         $seenTypes     = array_column($this->cache, 'type');
         $typeFrequency = array_count_values($seenTypes);
         return isset($typeFrequency[self::ERROR]);
-
     }
 
 
@@ -169,7 +167,6 @@ final class MessageCollector
         } else {
             StatusWriter::write($allMessages, 0, 2);
         }
-
     }
 
 
@@ -187,7 +184,6 @@ final class MessageCollector
         }
 
         return $messages;
-
     }
 
 
@@ -220,7 +216,6 @@ final class MessageCollector
         }
 
         return $message;
-
     }
 
 
@@ -263,7 +258,6 @@ final class MessageCollector
         }
 
         return array_merge($errors, $warnings, $notices, $deprecations);
-
     }
 
 
@@ -275,7 +269,6 @@ final class MessageCollector
     private function clearCache()
     {
         $this->cache = [];
-
     }
 
 

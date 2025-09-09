@@ -86,7 +86,6 @@ TEMPLATE;
     public static function tearDownAfterClass(): void
     {
         @unlink(self::RULESET_FILENAME);
-
     }
 
 
@@ -121,7 +120,6 @@ TEMPLATE;
         sort($testFiles, SORT_NATURAL);
 
         return $testFiles;
-
     }
 
 
@@ -133,7 +131,6 @@ TEMPLATE;
     protected function shouldSkipTest()
     {
         return false;
-
     }
 
 
@@ -244,7 +241,6 @@ TEMPLATE;
         if (empty($failureMessages) === false) {
             $this->fail(implode(PHP_EOL, $failureMessages));
         }
-
     }
 
 
@@ -434,7 +430,6 @@ TEMPLATE;
         }//end foreach
 
         return $failureMessages;
-
     }
 
 
@@ -448,7 +443,6 @@ TEMPLATE;
      */
     public function setCliValues(string $testFile, Config $config)
     {
-
     }
 
 

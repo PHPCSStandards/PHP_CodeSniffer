@@ -51,7 +51,6 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
             T_CLOSURE,
             T_FN,
         ];
-
     }
 
 
@@ -88,7 +87,6 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                 $this->processBracket($phpcsFile, $tokens[$use]['parenthesis_opener']);
             }
         }
-
     }
 
 
@@ -561,7 +559,6 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                 }
             }
         }
-
     }
 
 

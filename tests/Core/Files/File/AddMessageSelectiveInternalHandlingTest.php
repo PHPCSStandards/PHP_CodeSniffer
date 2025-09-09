@@ -38,7 +38,6 @@ final class AddMessageSelectiveInternalHandlingTest extends TestCase
 
         $added = $phpcsFile->addError('No code found', 0, 'Internal.NoCodeFound');
         $this->assertFalse($added);
-
     }
 
 
@@ -58,7 +57,6 @@ final class AddMessageSelectiveInternalHandlingTest extends TestCase
 
         $added = $phpcsFile->addError('Some other error', 0, 'Internal.SomeError');
         $this->assertTrue($added);
-
     }
 
 
@@ -85,7 +83,6 @@ final class AddMessageSelectiveInternalHandlingTest extends TestCase
                 'exclude' => 'Generic.Files.ByteOrderMark,Generic.PHP.DisallowShortOpenTag',
             ],
         ];
-
     }
 
 
@@ -119,7 +116,6 @@ final class AddMessageSelectiveInternalHandlingTest extends TestCase
         $phpcsFile->parse();
 
         return $phpcsFile;
-
     }
 
 

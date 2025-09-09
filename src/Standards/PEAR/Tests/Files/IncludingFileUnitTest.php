@@ -50,7 +50,6 @@ final class IncludingFileUnitTest extends AbstractSniffTestCase
             98 => 1,
             99 => 2,
         ];
-
     }
 
 
@@ -65,7 +64,6 @@ final class IncludingFileUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

@@ -39,7 +39,6 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
 
         $this->assertIsInt($label);
         $this->assertSame($testContent, $tokens[$label]['content']);
-
     }
 
 
@@ -91,7 +90,6 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
                 'testContent' => 'null',
             ],
         ];
-
     }
 
 
@@ -121,7 +119,6 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
         $this->assertSame(T_GOTO_COLON, $tokens[$next]['code']);
         $this->assertSame('T_GOTO_COLON', $tokens[$next]['type']);
         $this->assertSame(':', $tokens[$next]['content']);
-
     }
 
 
@@ -173,7 +170,6 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
                 'testContent' => 'null',
             ],
         ];
-
     }
 
 
@@ -207,7 +203,6 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
 
         $this->assertSame($expectedCode, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (code)');
         $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (type)');
-
     }
 
 
@@ -274,7 +269,6 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
                 'testContent' => 'Suit',
             ],
         ];
-
     }
 
 

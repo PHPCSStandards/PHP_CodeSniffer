@@ -24,7 +24,6 @@ class GlobalFunctionSniff implements Sniff
     public function register()
     {
         return [T_FUNCTION];
-
     }
 
 
@@ -54,7 +53,6 @@ class GlobalFunctionSniff implements Sniff
                 $phpcsFile->addWarning($error, $stackPtr, 'Found', $data);
             }
         }
-
     }
 
 

@@ -41,7 +41,6 @@ final class TraitNameSuffixUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
     }
 
 
@@ -56,7 +55,6 @@ final class TraitNameSuffixUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

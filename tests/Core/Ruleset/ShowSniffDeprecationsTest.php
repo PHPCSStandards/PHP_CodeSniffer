@@ -41,7 +41,6 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
         $ruleset = new Ruleset($config);
 
         $this->assertSame($expected, $ruleset->hasSniffDeprecations());
-
     }
 
 
@@ -64,7 +63,6 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
                 'expected' => true,
             ],
         ];
-
     }
 
 
@@ -92,7 +90,6 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
         $ruleset->showSniffDeprecations();
 
         $this->assertStderrOutputSameString('');
-
     }
 
 
@@ -118,7 +115,6 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
                 'additionalArgs' => ['-q'],
             ],
         ];
-
     }
 
 
@@ -141,7 +137,6 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
         }
 
         $this->testDeprecatedSniffsListDoesNotShow($standard, $additionalArgs);
-
     }
 
 
@@ -160,7 +155,6 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
                 'additionalArgs' => ['--generator=text'],
             ],
         ];
-
     }
 
 
@@ -186,7 +180,6 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
         $ruleset->showSniffDeprecations();
 
         $this->assertStderrOutputSameString('');
-
     }
 
 
@@ -219,7 +212,6 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
         $ruleset->showSniffDeprecations();
 
         $this->assertStderrOutputSameString('');
-
     }
 
 
@@ -286,7 +278,6 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
         $ruleset->showSniffDeprecations();
 
         $this->assertStderrOutputSameString($expected);
-
     }
 
 
@@ -318,7 +309,6 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
         $ruleset->showSniffDeprecations();
 
         $this->assertStderrOutputSameString($expectedOutput);
-
     }
 
 
@@ -401,7 +391,6 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
             ],
         ];
         // phpcs:enable
-
     }
 
 
@@ -447,7 +436,6 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
             $ruleset->sniffCodes,
             'WithReplacement sniff not registered'
         );
-
     }
 
 
@@ -472,7 +460,6 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
         $ruleset  = new Ruleset($config);
 
         $ruleset->showSniffDeprecations();
-
     }
 
 
@@ -507,7 +494,6 @@ final class ShowSniffDeprecationsTest extends AbstractRulesetTestCase
                 'exceptionMessage' => 'ERROR: The Fixtures\TestStandard\Sniffs\DeprecatedInvalid\EmptyRemovalVersionSniff::getRemovalVersion() method must return a non-empty string, received ""',
             ],
         ];
-
     }
 
 

@@ -34,7 +34,6 @@ final class ShouldProcessFileWithoutExtensionTest extends AbstractFilterTestCase
         $filter = new Filter($fakeDI, $fileWithoutExt, self::$config, self::$ruleset);
 
         $this->assertSame([$fileWithoutExt], $this->getFilteredResultsAsArray($filter));
-
     }
 
 
@@ -64,7 +63,6 @@ final class ShouldProcessFileWithoutExtensionTest extends AbstractFilterTestCase
         ];
 
         $this->assertSame($expectedOutput, $this->getFilteredResultsAsArray($filter));
-
     }
 
 

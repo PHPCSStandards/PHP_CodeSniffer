@@ -38,7 +38,6 @@ final class FileExtensionUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
     }
 
 
@@ -53,7 +52,6 @@ final class FileExtensionUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

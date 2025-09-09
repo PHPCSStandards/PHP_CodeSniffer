@@ -32,7 +32,6 @@ abstract class AbstractRealConfigTestCase extends TestCase
         // from being read and influencing the tests.
         self::setStaticConfigProperty('configData', []);
         self::setStaticConfigProperty('configDataFile', '');
-
     }
 
 
@@ -44,7 +43,6 @@ abstract class AbstractRealConfigTestCase extends TestCase
     protected function tearDown(): void
     {
         $_SERVER['argv'] = [];
-
     }
 
 
@@ -60,7 +58,6 @@ abstract class AbstractRealConfigTestCase extends TestCase
         self::setStaticConfigProperty('configData', null);
         self::setStaticConfigProperty('configDataFile', null);
         $_SERVER['argv'] = [];
-
     }
 
 
@@ -78,7 +75,6 @@ abstract class AbstractRealConfigTestCase extends TestCase
         (PHP_VERSION_ID < 80100) && $property->setAccessible(true);
         $property->setValue(null, $value);
         (PHP_VERSION_ID < 80100) && $property->setAccessible(false);
-
     }
 
 

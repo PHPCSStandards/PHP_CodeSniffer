@@ -30,7 +30,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
     public static function setUpBeforeClass(): void
     {
         parent::clearResolvedTokensCache();
-
     }
 
 
@@ -60,7 +59,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_SWITCH);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
-
     }
 
 
@@ -83,7 +81,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_STRING);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
-
     }
 
 
@@ -109,7 +106,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_VARIABLE);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
-
     }
 
 
@@ -129,7 +125,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_CONSTANT_ENCAPSED_STRING);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
-
     }
 
 
@@ -159,7 +154,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_VARIABLE);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
-
     }
 
 
@@ -183,7 +177,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_VARIABLE);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
-
     }
 
 
@@ -211,7 +204,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_VARIABLE);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
-
     }
 
 
@@ -236,7 +228,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_CATCH);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
-
     }
 
 
@@ -256,7 +247,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_LNUMBER);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
-
     }
 
 
@@ -276,7 +266,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_LNUMBER);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
-
     }
 
 
@@ -296,7 +285,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_EQUAL);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
-
     }
 
 
@@ -318,7 +306,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_VARIABLE);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
-
     }
 
 
@@ -340,7 +327,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_EQUAL);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
-
     }
 
 
@@ -362,7 +348,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_ECHO);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
-
     }
 
 
@@ -383,7 +368,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_EQUAL);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
-
     }
 
 
@@ -424,7 +408,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
 
             ++$sequenceKey;
         }//end for
-
     }
 
 

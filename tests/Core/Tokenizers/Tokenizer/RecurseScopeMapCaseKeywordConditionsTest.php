@@ -37,7 +37,6 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
         $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
         $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');
         $this->assertArrayNotHasKey('scope_closer', $tokenArray, 'Scope closer is set');
-
     }
 
 
@@ -59,7 +58,6 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
             'enum case, after switch statement'                          => ['/* testEnumCaseAfterSwitch */'],
             'enum case, after switch statement using alternative syntax' => ['/* testEnumCaseAfterSwitchWithEndSwitch */'],
         ];
-
     }
 
 
@@ -125,7 +123,6 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
                 $tokens[$tokenArray['scope_closer']]['type']
             )
         );
-
     }
 
 
@@ -216,7 +213,6 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
                 ],
             ],
         ];
-
     }
 
 
@@ -242,7 +238,6 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
         $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
         $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');
         $this->assertArrayNotHasKey('scope_closer', $tokenArray, 'Scope closer is set');
-
     }
 
 
@@ -265,7 +260,6 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
             '"array" as case name'     => ['/* testKeywordAsEnumCaseNameShouldBeString7 */'],
             '"exit" as case name'      => ['/* testKeywordAsEnumCaseNameShouldBeString8 */'],
         ];
-
     }
 
 

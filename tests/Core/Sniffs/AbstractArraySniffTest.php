@@ -42,7 +42,6 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
     {
         self::$sniff = new AbstractArraySniffTestable();
         parent::setUpBeforeClass();
-
     }
 
 
@@ -63,7 +62,6 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
     }
 
 
@@ -99,7 +97,6 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
     }
 
 
@@ -132,7 +129,6 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
     }
 
 
@@ -162,7 +158,6 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
     }
 
 
@@ -192,7 +187,6 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
     }
 
 
@@ -228,7 +222,6 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
     }
 
 
@@ -252,7 +245,6 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
     }
 
 
@@ -288,7 +280,6 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
     }
 
 

@@ -41,7 +41,6 @@ final class FixmeUnitTest extends AbstractSniffTestCase
             18 => 1,
             21 => 1,
         ];
-
     }
 
 
@@ -56,7 +55,6 @@ final class FixmeUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

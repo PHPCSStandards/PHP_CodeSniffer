@@ -27,7 +27,6 @@ class FunctionClosingBraceSpaceSniff implements Sniff
             T_FUNCTION,
             T_CLOSURE,
         ];
-
     }
 
 
@@ -127,7 +126,6 @@ class FunctionClosingBraceSpaceSniff implements Sniff
                 }
             }//end if
         }//end if
-
     }
 
 

@@ -63,7 +63,6 @@ class ArbitraryParenthesesSpacingSniff implements Sniff
             T_OPEN_PARENTHESIS,
             T_CLOSE_PARENTHESIS,
         ];
-
     }
 
 
@@ -228,7 +227,6 @@ class ArbitraryParenthesesSpacingSniff implements Sniff
                 }//end if
             }//end if
         }//end if
-
     }
 
 

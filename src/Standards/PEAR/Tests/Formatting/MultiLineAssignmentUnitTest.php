@@ -35,7 +35,6 @@ final class MultiLineAssignmentUnitTest extends AbstractSniffTestCase
             6 => 1,
             8 => 1,
         ];
-
     }
 
 
@@ -50,7 +49,6 @@ final class MultiLineAssignmentUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

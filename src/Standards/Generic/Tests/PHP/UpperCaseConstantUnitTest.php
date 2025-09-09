@@ -59,7 +59,6 @@ final class UpperCaseConstantUnitTest extends AbstractSniffTestCase
             117 => 1,
             118 => 1,
         ];
-
     }
 
 
@@ -74,7 +73,6 @@ final class UpperCaseConstantUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

@@ -81,7 +81,6 @@ final class SpaceAfterCastUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -96,7 +95,6 @@ final class SpaceAfterCastUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

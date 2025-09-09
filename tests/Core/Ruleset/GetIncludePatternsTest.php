@@ -40,7 +40,6 @@ final class GetIncludePatternsTest extends TestCase
         $standard      = __DIR__ . '/GetIncludePatternsTest.xml';
         $config        = new ConfigDouble(["--standard=$standard"]);
         self::$ruleset = new Ruleset($config);
-
     }
 
 
@@ -57,7 +56,6 @@ final class GetIncludePatternsTest extends TestCase
     public function testGetIncludePatterns($listener, $expected)
     {
         $this->assertSame($expected, self::$ruleset->getIncludePatterns($listener));
-
     }
 
 
@@ -99,7 +97,6 @@ final class GetIncludePatternsTest extends TestCase
                 'expected' => [],
             ],
         ];
-
     }
 
 

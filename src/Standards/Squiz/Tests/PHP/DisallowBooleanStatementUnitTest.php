@@ -36,7 +36,6 @@ final class DisallowBooleanStatementUnitTest extends AbstractSniffTestCase
             13 => 1,
             15 => 1,
         ];
-
     }
 
 
@@ -51,7 +50,6 @@ final class DisallowBooleanStatementUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

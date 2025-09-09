@@ -50,7 +50,6 @@ final class SpreadOperatorSpacingAfterUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -65,7 +64,6 @@ final class SpreadOperatorSpacingAfterUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

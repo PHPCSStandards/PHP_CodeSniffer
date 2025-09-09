@@ -37,7 +37,6 @@ final class EmptyPHPStatementUnitTest extends AbstractSniffTestCase
         }
 
         return $testFiles;
-
     }
 
 
@@ -52,7 +51,6 @@ final class EmptyPHPStatementUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [];
-
     }
 
 
@@ -104,7 +102,6 @@ final class EmptyPHPStatementUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 

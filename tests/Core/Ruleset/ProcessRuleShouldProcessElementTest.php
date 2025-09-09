@@ -43,7 +43,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
             $config        = new ConfigDouble(["--standard=$standard"]);
             self::$ruleset = new Ruleset($config);
         }
-
     }
 
 
@@ -75,7 +74,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         // Verify that the CBF-only severity directive is NOT applied.
         $sniffCode = 'PSR2.Namespaces.NamespaceDeclaration';
         $this->assertNotHasRulesetDirective($sniffCode, $key);
-
     }
 
 
@@ -106,7 +104,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         // Verify that the CBF-only severity directive IS applied.
         $sniffCode = 'PSR2.Namespaces.NamespaceDeclaration';
         $this->assertRulesetPropertySame(4, $sniffCode, $key);
-
     }
 
 
@@ -135,7 +132,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         // Verify that the CBF-only type directive is NOT applied.
         $sniffCode = 'PSR2.Namespaces.NamespaceDeclaration';
         $this->assertNotHasRulesetDirective($sniffCode, $key);
-
     }
 
 
@@ -166,7 +162,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         // Verify that the CBF-only type directive IS applied.
         $sniffCode = 'PSR2.Namespaces.NamespaceDeclaration';
         $this->assertRulesetPropertySame('error', $sniffCode, $key);
-
     }
 
 
@@ -195,7 +190,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         // Verify that the CBF-only message directive is NOT applied.
         $sniffCode = 'PSR2.Namespaces.NamespaceDeclaration';
         $this->assertNotHasRulesetDirective($sniffCode, $key);
-
     }
 
 
@@ -229,7 +223,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         // Verify that the CBF-only message directive IS applied.
         $sniffCode = 'PSR2.Namespaces.NamespaceDeclaration';
         $this->assertRulesetPropertySame('A different warning but only for phpcbf', $sniffCode, $key);
-
     }
 
 
@@ -260,7 +253,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         // Verify that the CBF-only include-pattern directive is NOT applied.
         $sniffCode = 'PSR2.Files.ClosingTag';
         $this->assertArrayNotHasKey($sniffCode, self::$ruleset->includePatterns, "Sniff $sniffCode was registered");
-
     }
 
 
@@ -293,7 +285,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         $sniffCode = 'PSR2.Files.ClosingTag';
         $this->assertArrayHasKey($sniffCode, self::$ruleset->includePatterns, "Sniff $sniffCode not registered");
         $this->assertArrayHasKey($includedKey, self::$ruleset->includePatterns[$sniffCode], "Include pattern for sniff $sniffCode not registered");
-
     }
 
 
@@ -324,7 +315,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         // Verify that the CBF-only exclude-pattern directive is NOT applied.
         $sniffCode = 'PSR2.Methods.FunctionClosingBrace';
         $this->assertArrayNotHasKey($sniffCode, self::$ruleset->ignorePatterns, "Sniff $sniffCode was registered");
-
     }
 
 
@@ -357,7 +347,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         $sniffCode = 'PSR2.Methods.FunctionClosingBrace';
         $this->assertArrayHasKey($sniffCode, self::$ruleset->ignorePatterns, "Sniff $sniffCode not registered");
         $this->assertArrayHasKey($excludedKey, self::$ruleset->ignorePatterns[$sniffCode], "Ignore pattern for sniff $sniffCode not registered");
-
     }
 
 
@@ -393,7 +382,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
 
         $actualValue = self::$ruleset->sniffs[$cbfSniffClass]->$propertyName;
         $this->assertSame($propertyDefault, $actualValue, 'cbf-only property change directive was applied');
-
     }
 
 
@@ -431,7 +419,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
 
         $actualValue = self::$ruleset->sniffs[$cbfSniffClass]->$propertyName;
         $this->assertSame($propertyChanged, $actualValue, 'cbf-only property change directive not applied');
-
     }
 
 
@@ -473,7 +460,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
 
         $this->assertXObjectHasProperty($propertyName, $sniffObject);
         $this->assertSame($expectedDefault, $sniffObject->$propertyName, 'cbf-only property change directive was applied');
-
     }
 
 
@@ -517,7 +503,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
 
         $this->assertXObjectHasProperty($propertyName, $sniffObject);
         $this->assertSame($expected, $sniffObject->$propertyName, 'cbf-only property change directive not applied');
-
     }
 
 
@@ -545,7 +530,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         ];
 
         $this->verifyShouldProcessElement($expected);
-
     }
 
 
@@ -575,7 +559,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         ];
 
         $this->verifyShouldProcessElement($expected);
-
     }
 
 
@@ -601,7 +584,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         // Verify the value.
         $actualValue = $sniffObject->$propertyName;
         $this->assertSame($expected, $actualValue, 'Selective element directives not applied correctly');
-
     }
 
 
@@ -618,7 +600,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         $this->assertArrayHasKey($sniffCode, self::$ruleset->ruleset, "Sniff $sniffCode not registered");
         $this->assertIsArray(self::$ruleset->ruleset[$sniffCode], "Sniff $sniffCode is not an array");
         $this->assertArrayHasKey($key, self::$ruleset->ruleset[$sniffCode], "Directive $key not registered for sniff $sniffCode");
-
     }
 
 
@@ -638,7 +619,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
         ) {
             $this->fail("Directive $key is registered for sniff $sniffCode");
         }
-
     }
 
 
@@ -657,7 +637,6 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
 
         $actual = self::$ruleset->ruleset[$sniffCode][$key];
         $this->assertSame($expected, $actual, "Value for $key on sniff $sniffCode does not meet expectations");
-
     }
 
 

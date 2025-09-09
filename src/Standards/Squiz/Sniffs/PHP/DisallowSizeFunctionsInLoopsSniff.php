@@ -47,7 +47,6 @@ class DisallowSizeFunctionsInLoopsSniff implements Sniff
             T_WHILE,
             T_FOR,
         ];
-
     }
 
 
@@ -95,7 +94,6 @@ class DisallowSizeFunctionsInLoopsSniff implements Sniff
                 $phpcsFile->addError($error, $i, 'Found', $data);
             }//end if
         }//end for
-
     }
 
 

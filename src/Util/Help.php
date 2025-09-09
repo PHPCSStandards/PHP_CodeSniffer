@@ -148,7 +148,6 @@ final class Help
         $this->gutterWidth = strlen(self::GUTTER);
 
         $this->setMaxOptionNameLength();
-
     }
 
 
@@ -161,7 +160,6 @@ final class Help
     {
         $this->printUsage();
         $this->printCategories();
-
     }
 
 
@@ -211,7 +209,6 @@ final class Help
         }//end foreach
 
         $this->activeOptions = $filteredOptions;
-
     }
 
 
@@ -236,7 +233,6 @@ final class Help
         if (empty($lengths) === false) {
             $this->maxOptionNameLength = max($lengths);
         }
-
     }
 
 
@@ -251,7 +247,6 @@ final class Help
     private function getMaxWidth()
     {
         return max(self::MIN_WIDTH, $this->config->reportWidth);
-
     }
 
 
@@ -263,7 +258,6 @@ final class Help
     private function getDescriptionColumnWidth()
     {
         return ($this->getMaxWidth() - $this->maxOptionNameLength - $this->indentWidth - $this->gutterWidth);
-
     }
 
 
@@ -275,7 +269,6 @@ final class Help
     private function getDescriptionFollowupLineIndentLength()
     {
         return ($this->maxOptionNameLength + $this->indentWidth + $this->gutterWidth);
-
     }
 
 
@@ -294,7 +287,6 @@ final class Help
         $this->printCategoryHeader('Usage');
 
         echo self::INDENT . $command . ' [options] <file|directory>' . PHP_EOL;
-
     }
 
 
@@ -309,7 +301,6 @@ final class Help
             $this->printCategoryHeader($category);
             $this->printCategoryOptions($options);
         }
-
     }
 
 
@@ -328,7 +319,6 @@ final class Help
         }
 
         echo PHP_EOL . $header . PHP_EOL;
-
     }
 
 
@@ -372,7 +362,6 @@ final class Help
         }
 
         echo $output;
-
     }
 
 
@@ -389,7 +378,6 @@ final class Help
     private function colorizeVariableInput(string $text)
     {
         return preg_replace('`(<(?:(?>[^<>]+)|(?R))*>)`', "\033[36m" . '$1' . "\033[32m", $text);
-
     }
 
 
@@ -636,7 +624,6 @@ final class Help
         // phpcs:enable
 
         return $options;
-
     }
 
 

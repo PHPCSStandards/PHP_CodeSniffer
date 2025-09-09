@@ -25,7 +25,6 @@ class FileHeaderSniff implements Sniff
     public function register()
     {
         return [T_OPEN_TAG];
-
     }
 
 
@@ -115,7 +114,6 @@ class FileHeaderSniff implements Sniff
         $this->processHeaderLines($phpcsFile, $possibleHeaders[$openTag]);
 
         return $phpcsFile->numTokens;
-
     }
 
 
@@ -273,7 +271,6 @@ class FileHeaderSniff implements Sniff
         } while ($next !== false);
 
         return $headerLines;
-
     }
 
 
@@ -424,7 +421,6 @@ class FileHeaderSniff implements Sniff
                 $phpcsFile->addError($error, $found[$type]['start'], 'IncorrectOrder', $data);
             }//end if
         }//end foreach
-
     }
 
 

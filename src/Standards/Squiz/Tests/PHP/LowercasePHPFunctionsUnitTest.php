@@ -38,7 +38,6 @@ final class LowercasePHPFunctionsUnitTest extends AbstractSniffTestCase
             35 => 1,
             36 => 1,
         ];
-
     }
 
 
@@ -53,7 +52,6 @@ final class LowercasePHPFunctionsUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

@@ -27,7 +27,6 @@ class HereNowdocIdentifierSpacingSniff implements Sniff
             T_START_HEREDOC,
             T_START_NOWDOC,
         ];
-
     }
 
 
@@ -62,7 +61,6 @@ class HereNowdocIdentifierSpacingSniff implements Sniff
             $replacement = str_replace([' ', "\t"], '', $tokens[$stackPtr]['content']);
             $phpcsFile->fixer->replaceToken($stackPtr, $replacement);
         }
-
     }
 
 

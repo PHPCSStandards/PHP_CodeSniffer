@@ -53,7 +53,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         }
 
         $this->assertSame([], $errors);
-
     }
 
 
@@ -68,7 +67,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame(($start + 5), $found);
-
     }
 
 
@@ -83,7 +81,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame(($start + 6), $found);
-
     }
 
 
@@ -98,7 +95,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame(($start + 13), $found);
-
     }
 
 
@@ -126,7 +122,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame($start, $found);
-
     }
 
 
@@ -154,7 +149,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame(($start + 6), $found);
-
     }
 
 
@@ -182,7 +176,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame(($start + 3), $found);
-
     }
 
 
@@ -197,7 +190,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame(($start + 21), $found);
-
     }
 
 
@@ -212,7 +204,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame(($start + 9), $found);
-
     }
 
 
@@ -230,7 +221,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $endOfStatementFn     = self::$phpcsFile->findEndOfStatement($fn);
 
         $this->assertSame($endOfStatementFn, $endOfStatementStatic);
-
     }
 
 
@@ -245,7 +235,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame(($start + 18), $found);
-
     }
 
 
@@ -260,7 +249,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame(($start + 8), $found);
-
     }
 
 
@@ -275,7 +263,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame(($start + 17), $found);
-
     }
 
 
@@ -295,7 +282,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame(($start + 1), $found);
-
     }
 
 
@@ -315,7 +301,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame($start, $found);
-
     }
 
 
@@ -333,7 +318,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $start += 6;
         $found  = self::$phpcsFile->findEndOfStatement($start);
         $this->assertSame(($start + 7), $found);
-
     }
 
 
@@ -348,7 +332,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame(($start + 5), $found);
-
     }
 
 
@@ -368,7 +351,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame(($start + 1), $found);
-
     }
 
 
@@ -390,7 +372,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame(($start + 21), $found);
-
     }
 
 
@@ -410,7 +391,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame(($start + 14), $found);
-
     }
 
 
@@ -430,7 +410,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame(($start + 22), $found);
-
     }
 
 
@@ -450,7 +429,6 @@ final class FindEndOfStatementTest extends AbstractMethodTestCase
         $found  = self::$phpcsFile->findEndOfStatement($start);
 
         $this->assertSame(($start + 5), $found);
-
     }
 
 

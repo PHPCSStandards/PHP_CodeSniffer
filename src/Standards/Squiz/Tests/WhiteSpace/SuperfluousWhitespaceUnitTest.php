@@ -72,7 +72,6 @@ final class SuperfluousWhitespaceUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -87,7 +86,6 @@ final class SuperfluousWhitespaceUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

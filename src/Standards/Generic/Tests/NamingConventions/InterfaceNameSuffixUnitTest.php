@@ -40,7 +40,6 @@ final class InterfaceNameSuffixUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
     }
 
 
@@ -55,7 +54,6 @@ final class InterfaceNameSuffixUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

@@ -57,7 +57,6 @@ final class AttributesTest extends AbstractTokenizerTestCase
         );
 
         $this->assertSame($tokenCodes, $map);
-
     }
 
 
@@ -266,7 +265,6 @@ final class AttributesTest extends AbstractTokenizerTestCase
                 ],
             ],
         ];
-
     }
 
 
@@ -290,7 +288,6 @@ final class AttributesTest extends AbstractTokenizerTestCase
         $this->assertSame(T_WHITESPACE, $tokens[($closer + 1)]['code']);
         $this->assertSame(T_ATTRIBUTE, $tokens[($closer + 2)]['code']);
         $this->assertArrayHasKey('attribute_closer', $tokens[($closer + 2)]);
-
     }
 
 
@@ -313,7 +310,6 @@ final class AttributesTest extends AbstractTokenizerTestCase
         $closer = $tokens[$attribute]['attribute_closer'];
         $this->assertSame(T_WHITESPACE, $tokens[($closer + 1)]['code']);
         $this->assertSame(T_COMMENT, $tokens[($closer + 2)]['code']);
-
     }
 
 
@@ -366,7 +362,6 @@ final class AttributesTest extends AbstractTokenizerTestCase
         );
 
         $this->assertSame($tokenCodes, $map);
-
     }
 
 
@@ -421,7 +416,6 @@ final class AttributesTest extends AbstractTokenizerTestCase
                 ],
             ],
         ];
-
     }
 
 
@@ -473,7 +467,6 @@ final class AttributesTest extends AbstractTokenizerTestCase
             $this->assertSame($expectedCode, $tokens[$i]['code']);
             ++$i;
         }
-
     }
 
 
@@ -572,7 +565,6 @@ final class AttributesTest extends AbstractTokenizerTestCase
                 ],
             ],
         ];
-
     }
 
 
@@ -593,7 +585,6 @@ final class AttributesTest extends AbstractTokenizerTestCase
 
         $this->assertArrayHasKey('attribute_closer', $tokens[$attribute]);
         $this->assertNull($tokens[$attribute]['attribute_closer']);
-
     }
 
 
@@ -687,7 +678,6 @@ final class AttributesTest extends AbstractTokenizerTestCase
         );
 
         $this->assertSame($tokenCodes, $map);
-
     }
 
 

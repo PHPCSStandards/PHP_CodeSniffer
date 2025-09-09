@@ -69,5 +69,4 @@ function checkRequirements()
         fwrite(STDERR, sprintf($error, $required, $missing));
         exit($exitCode);
     }
-
 }

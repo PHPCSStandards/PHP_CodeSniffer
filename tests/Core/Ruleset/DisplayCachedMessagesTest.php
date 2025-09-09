@@ -44,7 +44,6 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         $this->invokeDisplayCachedMessages($ruleset);
 
         $this->assertStderrOutputSameString('');
-
     }
 
 
@@ -66,7 +65,6 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         $this->expectRuntimeExceptionMessage($expected);
 
         $this->invokeDisplayCachedMessages($ruleset);
-
     }
 
 
@@ -109,7 +107,6 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
                 // phpcs:enable
             ],
         ];
-
     }
 
 
@@ -133,7 +130,6 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         $this->invokeDisplayCachedMessages($ruleset);
 
         $this->assertStderrOutputSameString($expected);
-
     }
 
 
@@ -174,7 +170,6 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
                 // phpcs:enable
             ],
         ];
-
     }
 
 
@@ -199,7 +194,6 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         $this->expectRuntimeExceptionMessage('ERROR: ' . $message . PHP_EOL);
 
         $this->invokeDisplayCachedMessages($ruleset);
-
     }
 
 
@@ -223,7 +217,6 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         $this->invokeDisplayCachedMessages($ruleset);
 
         $this->assertStderrOutputSameString('');
-
     }
 
 
@@ -254,7 +247,6 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         }
 
         return $data;
-
     }
 
 
@@ -273,7 +265,6 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         }
 
         return $ruleset;
-
     }
 
 
@@ -296,7 +287,6 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         }
 
         (PHP_VERSION_ID < 80100) && $reflProperty->setAccessible(false);
-
     }
 
 
@@ -313,7 +303,6 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         (PHP_VERSION_ID < 80100) && $reflMethod->setAccessible(true);
         $reflMethod->invoke($ruleset);
         (PHP_VERSION_ID < 80100) && $reflMethod->setAccessible(false);
-
     }
 
 

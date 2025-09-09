@@ -54,7 +54,6 @@ class Markdown extends Generator
             echo $content;
             echo $this->getFormattedFooter();
         }
-
     }
 
 
@@ -71,7 +70,6 @@ class Markdown extends Generator
         $standard = $this->ruleset->name;
 
         return "# $standard Coding Standard" . PHP_EOL;
-
     }
 
 
@@ -93,7 +91,6 @@ class Markdown extends Generator
         error_reporting($errorLevel);
 
         return $output;
-
     }
 
 
@@ -122,7 +119,6 @@ class Markdown extends Generator
             echo PHP_EOL . "## $title" . PHP_EOL . PHP_EOL;
             echo $content;
         }
-
     }
 
 
@@ -173,7 +169,6 @@ class Markdown extends Generator
         }
 
         return implode(PHP_EOL, $lines) . PHP_EOL;
-
     }
 
 
@@ -233,7 +228,6 @@ class Markdown extends Generator
         }
 
         return $output;
-
     }
 
 
@@ -250,7 +244,6 @@ class Markdown extends Generator
     {
         $title = trim($codeElm->getAttribute('title'));
         return str_replace('  ', '&nbsp;&nbsp;', $title);
-
     }
 
 
@@ -271,7 +264,6 @@ class Markdown extends Generator
         $code = str_replace(['<em>', '</em>'], '', $code);
 
         return $code;
-
     }
 
 

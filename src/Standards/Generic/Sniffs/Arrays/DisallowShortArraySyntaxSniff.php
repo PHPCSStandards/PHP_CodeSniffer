@@ -24,7 +24,6 @@ class DisallowShortArraySyntaxSniff implements Sniff
     public function register()
     {
         return [T_OPEN_SHORT_ARRAY];
-
     }
 
 
@@ -54,7 +53,6 @@ class DisallowShortArraySyntaxSniff implements Sniff
             $phpcsFile->fixer->replaceToken($closer, ')');
             $phpcsFile->fixer->endChangeset();
         }
-
     }
 
 

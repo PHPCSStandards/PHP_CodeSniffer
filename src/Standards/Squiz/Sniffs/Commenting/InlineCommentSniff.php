@@ -39,7 +39,6 @@ class InlineCommentSniff implements Sniff
             T_COMMENT,
             T_DOC_COMMENT_OPEN_TAG,
         ];
-
     }
 
 
@@ -309,7 +308,6 @@ class InlineCommentSniff implements Sniff
         }//end if
 
         return ($lastCommentToken + 1);
-
     }
 
 

@@ -65,7 +65,6 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
                 'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
             );
         }//end foreach
-
     }
 
 
@@ -296,7 +295,6 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
                 ],
             ],
         ];
-
     }
 
 
@@ -327,7 +325,6 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             $tokens[$label]['type'],
             'Token tokenized as ' . $tokens[$label]['type'] . ', not T_STRING (type)'
         );
-
     }
 
 
@@ -358,7 +355,6 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
                 'content'    => 'count',
             ],
         ];
-
     }
 
 
@@ -410,7 +406,6 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             $tokens[$colon]['type'],
             'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
-
     }
 
 
@@ -507,7 +502,6 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             $tokens[$colon]['type'],
             'Second arg ternary: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (type)'
         );
-
     }
 
 
@@ -588,7 +582,6 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             $tokens[$colon]['type'],
             'Function in else: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
-
     }
 
 
@@ -618,7 +611,6 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             $tokens[$colon]['type'],
             'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (type)'
         );
-
     }
 
 
@@ -680,7 +672,6 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             $tokens[$colon]['type'],
             'Default case: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
-
     }
 
 
@@ -726,7 +717,6 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             $tokens[$colon]['type'],
             'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
-
     }
 
 
@@ -770,7 +760,6 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
                 }
             }
         }
-
     }
 
 
@@ -791,7 +780,6 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testTernaryWithArrowFunctionsAndReturnTypes */',
             ],
         ];
-
     }
 
 
@@ -842,7 +830,6 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             $tokens[$colon]['type'],
             'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
-
     }
 
 
@@ -985,7 +972,6 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         }//end foreach
 
         return $data;
-
     }
 
 

@@ -36,7 +36,6 @@ final class ObjectInstantiationUnitTest extends AbstractSniffTestCase
             31 => 1,
             39 => 2,
         ];
-
     }
 
 
@@ -51,7 +50,6 @@ final class ObjectInstantiationUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

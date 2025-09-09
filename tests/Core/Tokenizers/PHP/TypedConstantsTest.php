@@ -43,7 +43,6 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
             $tokens[$target]['type'],
             'Token tokenized as ' . $tokens[$target]['type'] . ', not T_INLINE_THEN (type)'
         );
-
     }
 
 
@@ -79,7 +78,6 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
                 'Token tokenized as ' . $tokens[$i]['type'] . ', not T_STRING (type)'
             );
         }
-
     }
 
 
@@ -103,7 +101,6 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testClassConstVisibilityUntyped */',
             ],
         ];
-
     }
 
 
@@ -143,7 +140,6 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
 
             ++$current;
         }
-
     }
 
 
@@ -257,7 +253,6 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
         }
 
         return $data;
-
     }
 
 
@@ -367,7 +362,6 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
         }
 
         return $data;
-
     }
 
 
@@ -449,7 +443,6 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
         }
 
         return $data;
-
     }
 
 
@@ -487,7 +480,6 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
         }
 
         return $data;
-
     }
 
 
@@ -632,7 +624,6 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
         }
 
         return $data;
-
     }
 
 

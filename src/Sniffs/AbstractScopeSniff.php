@@ -93,7 +93,6 @@ abstract class AbstractScopeSniff implements Sniff
         $this->listenOutside = $listenOutside;
         $this->scopeTokens   = array_flip($scopeTokens);
         $this->tokens        = $tokens;
-
     }
 
 
@@ -110,7 +109,6 @@ abstract class AbstractScopeSniff implements Sniff
     final public function register()
     {
         return $this->tokens;
-
     }
 
 
@@ -147,7 +145,6 @@ abstract class AbstractScopeSniff implements Sniff
         if (empty($skipTokens) === false) {
             return min($skipTokens);
         }
-
     }
 
 

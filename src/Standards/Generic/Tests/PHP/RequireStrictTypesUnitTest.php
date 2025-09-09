@@ -42,7 +42,6 @@ final class RequireStrictTypesUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
     }
 
 
@@ -65,7 +64,6 @@ final class RequireStrictTypesUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
     }
 
 

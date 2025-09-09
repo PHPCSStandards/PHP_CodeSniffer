@@ -71,7 +71,6 @@ class BuildRequirementsCheckMatrix
         );
 
         return $builds;
-
     }
 
 
@@ -105,7 +104,6 @@ class BuildRequirementsCheckMatrix
         }
 
         return $builds;
-
     }
 
 
@@ -137,7 +135,6 @@ class BuildRequirementsCheckMatrix
         }
 
         return $builds;
-
     }
 
 
@@ -181,7 +178,6 @@ class BuildRequirementsCheckMatrix
         }//end foreach
 
         return $builds;
-
     }
 
 

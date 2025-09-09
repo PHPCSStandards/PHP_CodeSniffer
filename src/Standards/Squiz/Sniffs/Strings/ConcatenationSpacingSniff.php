@@ -39,7 +39,6 @@ class ConcatenationSpacingSniff implements Sniff
     public function register()
     {
         return [T_STRING_CONCAT];
-
     }
 
 
@@ -157,7 +156,6 @@ class ConcatenationSpacingSniff implements Sniff
                 }
             }
         }//end if
-
     }
 
 

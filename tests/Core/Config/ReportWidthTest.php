@@ -36,7 +36,6 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
         // Can't test the exact value as "auto" will resolve differently depending on the machine running the tests.
         $this->assertIsInt($config->reportWidth, 'Report width is not an integer');
         $this->assertGreaterThan(0, $config->reportWidth, 'Report width is not greater than 0');
-
     }
 
 
@@ -62,7 +61,6 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
         // Can't test the exact value as "auto" will resolve differently depending on the machine running the tests.
         $this->assertIsInt($config->reportWidth, 'Report width is not an integer');
         $this->assertGreaterThan(0, $config->reportWidth, 'Report width is not greater than 0');
-
     }
 
 
@@ -86,7 +84,6 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
 
         $config = new Config(['--standard=PSR1']);
         $this->assertSame(120, $config->reportWidth);
-
     }
 
 
@@ -108,7 +105,6 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
 
         $config = new Config();
         $this->assertSame(100, $config->reportWidth);
-
     }
 
 
@@ -131,7 +127,6 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
 
         $config = new Config();
         $this->assertSame(100, $config->reportWidth);
-
     }
 
 
@@ -164,7 +159,6 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
 
         $config = new Config($cliArgs);
         $this->assertSame(180, $config->reportWidth);
-
     }
 
 
@@ -183,7 +177,6 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
         // Can't test the exact value as "auto" will resolve differently depending on the machine running the tests.
         $this->assertIsInt($config->reportWidth, 'Report width is not an integer');
         $this->assertGreaterThan(0, $config->reportWidth, 'Report width is not greater than 0');
-
     }
 
 
@@ -204,7 +197,6 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
         $config->reportWidth = $value;
 
         $this->assertSame($expected, $config->reportWidth);
-
     }
 
 
@@ -253,7 +245,6 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
                 'expected' => 180,
             ],
         ];
-
     }
 
 

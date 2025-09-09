@@ -45,7 +45,6 @@ class UnconditionalIfStatementSniff implements Sniff
             T_IF,
             T_ELSEIF,
         ];
-
     }
 
 
@@ -86,7 +85,6 @@ class UnconditionalIfStatementSniff implements Sniff
             $error = 'Avoid IF statements that are always true or false';
             $phpcsFile->addWarning($error, $stackPtr, 'Found');
         }
-
     }
 
 

@@ -212,7 +212,6 @@ class Full implements Report
 
         echo PHP_EOL;
         return true;
-
     }
 
 
@@ -248,7 +247,6 @@ class Full implements Report
         }
 
         echo $cachedData;
-
     }
 
 

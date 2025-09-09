@@ -35,7 +35,6 @@ class UnnecessaryStringConcatSniff implements Sniff
     public function register()
     {
         return [T_STRING_CONCAT];
-
     }
 
 
@@ -88,7 +87,6 @@ class UnnecessaryStringConcatSniff implements Sniff
 
         $error = 'String concat is not required here; use a single string instead';
         $phpcsFile->addError($error, $stackPtr, 'Found');
-
     }
 
 

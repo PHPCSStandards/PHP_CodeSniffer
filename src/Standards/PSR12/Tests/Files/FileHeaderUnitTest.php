@@ -65,7 +65,6 @@ final class FileHeaderUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 
@@ -80,7 +79,6 @@ final class FileHeaderUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
     }
 
 

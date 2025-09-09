@@ -31,7 +31,6 @@ final class ConstantVisibilityUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [];
-
     }
 
 
@@ -63,7 +62,6 @@ final class ConstantVisibilityUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
     }
 
 

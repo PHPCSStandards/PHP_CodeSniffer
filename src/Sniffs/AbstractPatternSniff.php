@@ -62,7 +62,6 @@ abstract class AbstractPatternSniff implements Sniff
     public function __construct()
     {
         $this->supplementaryTokens = $this->registerSupplementary();
-
     }
 
 
@@ -103,7 +102,6 @@ abstract class AbstractPatternSniff implements Sniff
         }//end foreach
 
         return array_unique(array_merge($listenTypes, $this->supplementaryTokens));
-
     }
 
 
@@ -135,7 +133,6 @@ abstract class AbstractPatternSniff implements Sniff
         }
 
         return $tokenTypes;
-
     }
 
 
@@ -162,7 +159,6 @@ abstract class AbstractPatternSniff implements Sniff
         }
 
         return $tokenTypes[$token];
-
     }
 
 
@@ -228,7 +224,6 @@ abstract class AbstractPatternSniff implements Sniff
         foreach ($allErrors as $stackPtr => $error) {
             $phpcsFile->addError($error, $stackPtr, 'Found');
         }
-
     }
 
 
@@ -685,7 +680,6 @@ abstract class AbstractPatternSniff implements Sniff
         }
 
         return $errors;
-
     }
 
 
@@ -709,7 +703,6 @@ abstract class AbstractPatternSniff implements Sniff
         $error = "Expected \"$expected\"; found \"$found\"";
 
         return $error;
-
     }
 
 
@@ -734,7 +727,6 @@ abstract class AbstractPatternSniff implements Sniff
     protected function registerSupplementary()
     {
         return [];
-
     }
 
 
@@ -751,7 +743,6 @@ abstract class AbstractPatternSniff implements Sniff
      */
     protected function processSupplementary(File $phpcsFile, int $stackPtr)
     {
-
     }
 
 
@@ -841,7 +832,6 @@ abstract class AbstractPatternSniff implements Sniff
         }//end for
 
         return $patterns;
-
     }
 
 
@@ -895,7 +885,6 @@ abstract class AbstractPatternSniff implements Sniff
         }
 
         return $skip;
-
     }
 
 
@@ -932,7 +921,6 @@ abstract class AbstractPatternSniff implements Sniff
         }
 
         return $patterns;
-
     }
 
 

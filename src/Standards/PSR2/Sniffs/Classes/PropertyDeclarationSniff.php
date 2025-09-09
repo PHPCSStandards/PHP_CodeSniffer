@@ -25,7 +25,6 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
     public function __construct()
     {
         AbstractScopeSniff::__construct(Tokens::OO_SCOPE_TOKENS, [T_VARIABLE], false);
-
     }
 
 
@@ -278,7 +277,6 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
                 }
             }
         }//end if
-
     }
 
 
@@ -292,10 +290,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
      */
     protected function processVariable(File $phpcsFile, int $stackPtr)
     {
-        /*
-            We don't care about normal variables.
-        */
-
+        // We don't care about normal variables.
     }
 
 
@@ -309,10 +304,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
      */
     protected function processVariableInString(File $phpcsFile, int $stackPtr)
     {
-        /*
-            We don't care about normal variables.
-        */
-
+        // We don't care about normal variables.
     }
 
 

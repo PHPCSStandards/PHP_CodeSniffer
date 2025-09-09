@@ -59,7 +59,6 @@ final class SniffsExcludeArgsTest extends TestCase
         $this->expectExceptionMessage($message);
 
         new ConfigDouble(["--$argument=$value"]);
-
     }
 
 
@@ -195,7 +194,6 @@ final class SniffsExcludeArgsTest extends TestCase
         }//end foreach
 
         return $data;
-
     }
 
 
@@ -214,7 +212,6 @@ final class SniffsExcludeArgsTest extends TestCase
         $config = new ConfigDouble(["--$argument=$value"]);
 
         $this->assertSame($result, $config->$argument);
-
     }
 
 
@@ -276,7 +273,6 @@ final class SniffsExcludeArgsTest extends TestCase
         }//end foreach
 
         return $data;
-
     }
 
 
@@ -299,7 +295,6 @@ final class SniffsExcludeArgsTest extends TestCase
         );
 
         $this->assertSame(['StandardOne.Category.Sniff'], $config->$argument);
-
     }
 
 
@@ -314,7 +309,6 @@ final class SniffsExcludeArgsTest extends TestCase
             'sniffs'  => ['sniffs'],
             'exclude' => ['exclude'],
         ];
-
     }
 
 

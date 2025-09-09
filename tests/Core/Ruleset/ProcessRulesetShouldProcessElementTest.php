@@ -62,7 +62,6 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
                 self::$originalIniValues[$name] = $value;
             }
         }
-
     }
 
 
@@ -79,7 +78,6 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
             self::$config  = new ConfigDouble(["--standard=$standard"]);
             self::$ruleset = new Ruleset(self::$config);
         }
-
     }
 
 
@@ -105,7 +103,6 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
 
             ini_set($name, $value);
         }
-
     }
 
 
@@ -124,7 +121,6 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
         $this->assertSame('true', Config::getConfigData('neither'), 'Non-selective config directive was not applied.');
         $this->assertSame('true', Config::getConfigData('csOnly'), 'CS-only config directive was not applied.');
         $this->assertSame(null, Config::getConfigData('cbfOnly'), 'CBF-only config directive was applied, while it shouldn\'t have been.');
-
     }
 
 
@@ -145,7 +141,6 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
         $this->assertSame('true', Config::getConfigData('neither'), 'Non-selective config directive was not applied.');
         $this->assertSame(null, Config::getConfigData('csOnly'), 'CS-only config directive was applied, while it shouldn\'t have been.');
         $this->assertSame('true', Config::getConfigData('cbfOnly'), 'CBF-only config directive was not applied.');
-
     }
 
 
@@ -172,7 +167,6 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
         $this->assertTrue(self::$config->showSources, 'Non-selective short arg directive was not applied [2].');
         $this->assertTrue(self::$config->colors, 'CS-only arg directive was not applied.');
         $this->assertSame($expectedReports, self::$config->reports, 'CBF-only arg directive was applied, while it shouldn\'t have been.');
-
     }
 
 
@@ -201,7 +195,6 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
         $this->assertTrue(self::$config->showSources, 'Non-selective short arg directive was not applied [2].');
         $this->assertFalse(self::$config->colors, 'CS-only arg directive was applied, while it shouldn\'t have been.');
         $this->assertSame($expectedReports, self::$config->reports, 'CBF-only arg directive was not applied.');
-
     }
 
 
@@ -222,7 +215,6 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
         $this->assertSame('2', ini_get('bcmath.scale'), 'Non-selective ini directive was not applied.');
         $this->assertSame('path/to/docs/', ini_get('docref_root'), 'CS-only ini directive was not applied.');
         $this->assertSame('', ini_get('user_agent'), 'CBF-only ini directive was applied, while it shouldn\'t have been.');
-
     }
 
 
@@ -244,7 +236,6 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
         $this->assertSame('2', ini_get('bcmath.scale'), 'Non-selective ini directive was not applied.');
         $this->assertSame('', ini_get('docref_root'), 'CS-only ini directive was applied, while it shouldn\'t have been..');
         $this->assertSame('Never mind', ini_get('user_agent'), 'CBF-only ini directive was not applied.');
-
     }
 
 
@@ -266,7 +257,6 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
         ];
 
         $this->assertSame($expected, self::$ruleset->ignorePatterns);
-
     }
 
 
@@ -290,7 +280,6 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
         ];
 
         $this->assertSame($expected, self::$ruleset->ignorePatterns);
-
     }
 
 
@@ -309,7 +298,6 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
         $this->assertArrayHasKey('PEAR.Formatting.MultiLineAssignment', self::$ruleset->sniffCodes);
         $this->assertArrayHasKey('Generic.Arrays.ArrayIndent', self::$ruleset->sniffCodes);
         $this->assertArrayNotHasKey('PSR2.Classes.ClassDeclaration', self::$ruleset->sniffCodes);
-
     }
 
 
@@ -330,7 +318,6 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
         $this->assertArrayHasKey('PEAR.Formatting.MultiLineAssignment', self::$ruleset->sniffCodes);
         $this->assertArrayNotHasKey('Generic.Arrays.ArrayIndent', self::$ruleset->sniffCodes);
         $this->assertArrayHasKey('PSR2.Classes.ClassDeclaration', self::$ruleset->sniffCodes);
-
     }
 
 
@@ -353,7 +340,6 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
         ];
 
         $this->assertSame($expected, self::$ruleset->ruleset);
-
     }
 
 
@@ -378,7 +364,6 @@ final class ProcessRulesetShouldProcessElementTest extends TestCase
         ];
 
         $this->assertSame($expected, self::$ruleset->ruleset);
-
     }
 
 

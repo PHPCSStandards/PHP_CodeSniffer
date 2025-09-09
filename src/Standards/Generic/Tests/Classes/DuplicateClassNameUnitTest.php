@@ -31,7 +31,6 @@ final class DuplicateClassNameUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [];
-
     }
 
 
@@ -91,7 +90,6 @@ final class DuplicateClassNameUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
     }
 
 

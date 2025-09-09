@@ -67,7 +67,6 @@ abstract class CommentTestCase extends AbstractTokenizerTestCase
                 'Comment_closer not set to the expected stack pointer (for stackPtr ' . $i . ')'
             );
         }
-
     }
 
 
@@ -121,7 +120,6 @@ abstract class CommentTestCase extends AbstractTokenizerTestCase
                 'Token content did not match expectations' . $errorMsgSuffix
             );
         }//end for
-
     }
 
 

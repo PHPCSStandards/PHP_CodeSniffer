@@ -56,7 +56,6 @@ class Common
         }
 
         return false;
-
     }
 
 
@@ -84,7 +83,6 @@ class Common
         }
 
         return false;
-
     }
 
 
@@ -137,7 +135,6 @@ class Common
         }
 
         return false;
-
     }
 
 
@@ -167,7 +164,6 @@ class Common
         }
 
         return $path;
-
     }
 
 
@@ -188,7 +184,6 @@ class Common
         }
 
         return $eolChar;
-
     }
 
 
@@ -247,7 +242,6 @@ class Common
         $isTTY = ($mode !== $type['S_IFIFO']);
 
         return $isTTY;
-
     }
 
 
@@ -269,7 +263,6 @@ class Common
         }
 
         return $cmd;
-
     }
 
 
@@ -318,7 +311,6 @@ class Common
         }//end if
 
         return $content;
-
     }
 
 
@@ -332,7 +324,6 @@ class Common
     public static function stripColors(string $text)
     {
         return preg_replace('`\033\[[0-9;]+m`', '', $text);
-
     }
 
 
@@ -417,7 +408,6 @@ class Common
         }//end if
 
         return true;
-
     }
 
 
@@ -455,7 +445,6 @@ class Common
         }
 
         return $validName;
-
     }
 
 
@@ -529,7 +518,6 @@ class Common
                 return $varType;
             }//end if
         }//end if
-
     }
 
 
@@ -578,7 +566,6 @@ class Common
         $standard = $parts[($partsCount - 4)];
         $category = $parts[($partsCount - 2)];
         return $standard . '.' . $category . '.' . $sniff;
-
     }
 
 
@@ -609,7 +596,6 @@ class Common
 
         $newName = substr($newName, ($start + 1));
         return $newName;
-
     }
 
 

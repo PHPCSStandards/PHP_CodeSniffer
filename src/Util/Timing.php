@@ -61,7 +61,6 @@ final class Timing
     {
 
         self::$startTime = microtime(true);
-
     }
 
 
@@ -78,7 +77,6 @@ final class Timing
         }
 
         return ((microtime(true) - self::$startTime) * 1000);
-
     }
 
 
@@ -92,7 +90,6 @@ final class Timing
     public static function getDurationSince(float $startTime)
     {
         return ((microtime(true) - $startTime) * 1000);
-
     }
 
 
@@ -120,7 +117,6 @@ final class Timing
         }
 
         return $timeString;
-
     }
 
 
@@ -151,7 +147,6 @@ final class Timing
         StatusWriter::write("Time: $duration; Memory: $mem");
 
         self::$printed = true;
-
     }
 
 

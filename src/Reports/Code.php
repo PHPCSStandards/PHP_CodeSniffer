@@ -314,7 +314,6 @@ class Code implements Report
         }
 
         return true;
-
     }
 
 
@@ -350,7 +349,6 @@ class Code implements Report
         }
 
         echo $cachedData;
-
     }
 
 

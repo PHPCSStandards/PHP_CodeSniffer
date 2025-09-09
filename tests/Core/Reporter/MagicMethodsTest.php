@@ -35,7 +35,6 @@ final class MagicMethodsTest extends TestCase
         $reporter = new Reporter(new ConfigDouble());
 
         $this->assertFalse(isset($reporter->unknown));
-
     }
 
 
@@ -50,7 +49,6 @@ final class MagicMethodsTest extends TestCase
         $this->expectExceptionMessage('ERROR: access requested to unknown property "Reporter::$invalid"');
 
         (new Reporter(new ConfigDouble()))->invalid;
-
     }
 
 
@@ -78,7 +76,6 @@ final class MagicMethodsTest extends TestCase
 
         $this->assertTrue(isset($reporter->$propertyName));
         $this->assertSame($expectedValue, $reporter->$propertyName);
-
     }
 
 
@@ -111,7 +108,6 @@ final class MagicMethodsTest extends TestCase
                 'expectedValue' => 4,
             ],
         ];
-
     }
 
 
@@ -127,7 +123,6 @@ final class MagicMethodsTest extends TestCase
 
         $reporter = new Reporter(new ConfigDouble());
         $reporter->totalFixable = 10;
-
     }
 
 
@@ -143,7 +138,6 @@ final class MagicMethodsTest extends TestCase
 
         $reporter = new Reporter(new ConfigDouble());
         unset($reporter->totalFixed);
-
     }
 
 

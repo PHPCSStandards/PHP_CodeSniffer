@@ -176,7 +176,6 @@ class Reporter
                 file_put_contents($output, '');
             }
         }//end foreach
-
     }
 
 
@@ -190,7 +189,6 @@ class Reporter
     public function __isset(string $name)
     {
         return ($name === 'totalFixable' || $name === 'totalFixed');
-
     }
 
 
@@ -218,7 +216,6 @@ class Reporter
         }
 
         throw new RuntimeException("ERROR: access requested to unknown property \"Reporter::\${$name}\"");
-
     }
 
 
@@ -235,7 +232,6 @@ class Reporter
     public function __set(string $name, $value)
     {
         throw new RuntimeException("ERROR: setting property \"Reporter::\${$name}\" is not allowed");
-
     }
 
 
@@ -251,7 +247,6 @@ class Reporter
     public function __unset(string $name)
     {
         throw new RuntimeException("ERROR: unsetting property \"Reporter::\${$name}\" is not allowed");
-
     }
 
 
@@ -275,7 +270,6 @@ class Reporter
         }
 
         return $toScreen;
-
     }
 
 
@@ -341,7 +335,6 @@ class Reporter
                 unset($this->tmpFiles[$report]);
             }
         }
-
     }
 
 
@@ -407,7 +400,6 @@ class Reporter
             $this->totalFixedErrors     += $phpcsFile->getFixedErrorCount();
             $this->totalFixedWarnings   += $phpcsFile->getFixedWarningCount();
         }
-
     }
 
 
@@ -525,7 +517,6 @@ class Reporter
         ksort($errors);
         $report['messages'] = $errors;
         return $report;
-
     }
 
 

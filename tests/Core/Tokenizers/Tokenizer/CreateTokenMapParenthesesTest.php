@@ -63,7 +63,6 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
         $this->assertSame($owner, $closerArray['parenthesis_owner'], $tokenType . ' closer "parenthesis_owner" key set incorrectly');
         $this->assertSame($opener, $closerArray['parenthesis_opener'], $tokenType . ' closer "parenthesis_opener" key set incorrectly');
         $this->assertSame($closer, $closerArray['parenthesis_closer'], $tokenType . ' closer "parenthesis_closer" key set incorrectly');
-
     }
 
 
@@ -225,7 +224,6 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
                 'tokenCode'  => T_ANON_CLASS,
             ],
         ];
-
     }
 
 
@@ -259,7 +257,6 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
         $this->assertArrayHasKey('parenthesis_closer', $closerArray, 'Closer does not have "parenthesis_closer" key');
         $this->assertSame($opener, $closerArray['parenthesis_opener'], 'Closer "parenthesis_opener" key set incorrectly');
         $this->assertSame($closer, $closerArray['parenthesis_closer'], 'Closer "parenthesis_closer" key set incorrectly');
-
     }
 
 
@@ -287,7 +284,6 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testNestedFunctionCallCParenthesesOpener */',
             ],
         ];
-
     }
 
 
@@ -312,7 +308,6 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
         $this->assertArrayNotHasKey('parenthesis_owner', $tokenArray, $tokenType . ' token has "parenthesis_owner" key');
         $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, $tokenType . ' token has "parenthesis_opener" key');
         $this->assertArrayNotHasKey('parenthesis_closer', $tokenArray, $tokenType . ' token has "parenthesis_closer" key');
-
     }
 
 
@@ -337,7 +332,6 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
                 'tokenCode'  => T_EXIT,
             ],
         ];
-
     }
 
 

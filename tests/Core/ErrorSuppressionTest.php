@@ -54,7 +54,6 @@ final class ErrorSuppressionTest extends TestCase
 
         $this->assertSame($expectedErrors, $file->getErrorCount());
         $this->assertCount($expectedErrors, $file->getErrors());
-
     }
 
 
@@ -134,7 +133,6 @@ final class ErrorSuppressionTest extends TestCase
                 'after'  => '/** phpcs:enable */',
             ],
         ];
-
     }
 
 
@@ -174,7 +172,6 @@ EOD;
 
         $this->assertSame($expectedErrors, $file->getErrorCount());
         $this->assertCount($expectedErrors, $file->getErrors());
-
     }
 
 
@@ -216,7 +213,6 @@ EOD;
                 'between' => '/** phpcs:enable */',
             ],
         ];
-
     }
 
 
@@ -255,7 +251,6 @@ EOD;
 
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
-
     }
 
 
@@ -289,7 +284,6 @@ EOD;
                 'after'  => '/** phpcs:enable */',
             ],
         ];
-
     }
 
 
@@ -329,7 +323,6 @@ EOD;
 
         $this->assertSame($expectedErrors, $file->getErrorCount());
         $this->assertCount($expectedErrors, $file->getErrors());
-
     }
 
 
@@ -387,7 +380,6 @@ EOD;
                 'after'  => ' # @phpcs:ignore',
             ],
         ];
-
     }
 
 
@@ -410,7 +402,6 @@ EOD;
 
         $this->assertSame(0, $file->getErrorCount());
         $this->assertCount(0, $file->getErrors());
-
     }
 
 
@@ -442,7 +433,6 @@ EOD;
 
         $this->assertSame(0, $file->getErrorCount());
         $this->assertCount(0, $file->getErrors());
-
     }
 
 
@@ -480,7 +470,6 @@ EOD;
 
         $this->assertSame(0, $file->getErrorCount());
         $this->assertCount(0, $file->getErrors());
-
     }
 
 
@@ -522,7 +511,6 @@ EOD;
                 'after'  => '# @phpcs:enable',
             ],
         ];
-
     }
 
 
@@ -565,7 +553,6 @@ EOD;
 
         $this->assertSame($expectedErrors, $file->getErrorCount());
         $this->assertCount($expectedErrors, $file->getErrors());
-
     }
 
 
@@ -607,7 +594,6 @@ EOD;
                 'after'  => '/** @phpcs:enable */',
             ],
         ];
-
     }
 
 
@@ -649,7 +635,6 @@ EOD;
 
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
-
     }
 
 
@@ -701,7 +686,6 @@ EOD;
                 'after'  => '// phpcs:ignoreFile',
             ],
         ];
-
     }
 
 
@@ -747,7 +731,6 @@ EOD;
 
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
-
     }
 
 
@@ -820,7 +803,6 @@ EOD;
                 'expectedWarnings' => 1,
             ],
         ];
-
     }
 
 
@@ -859,7 +841,6 @@ EOD;
 
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
-
     }
 
 
@@ -1068,7 +1049,6 @@ EOD;
                 'expectedWarnings' => 0,
             ],
         ];
-
     }
 
 
@@ -1112,7 +1092,6 @@ EOD;
 
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
-
     }
 
 
@@ -1159,7 +1138,6 @@ EOD;
                 'expectedWarnings' => 1,
             ],
         ];
-
     }
 
 
@@ -1198,7 +1176,6 @@ EOD;
 
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
-
     }
 
 
@@ -1259,7 +1236,6 @@ EOD;
                 'expectedWarnings' => 0,
             ],
         ];
-
     }
 
 

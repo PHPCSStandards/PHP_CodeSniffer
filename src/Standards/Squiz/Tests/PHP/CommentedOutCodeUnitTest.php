@@ -31,7 +31,6 @@ final class CommentedOutCodeUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [];
-
     }
 
 
@@ -59,7 +58,6 @@ final class CommentedOutCodeUnitTest extends AbstractSniffTestCase
             147 => 1,
             158 => 1,
         ];
-
     }
 
 

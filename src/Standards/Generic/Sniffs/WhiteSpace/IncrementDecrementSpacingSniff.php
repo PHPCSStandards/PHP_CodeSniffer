@@ -28,7 +28,6 @@ class IncrementDecrementSpacingSniff implements Sniff
             T_DEC,
             T_INC,
         ];
-
     }
 
 
@@ -154,7 +153,6 @@ class IncrementDecrementSpacingSniff implements Sniff
                 $phpcsFile->fixer->endChangeset();
             }
         }//end if
-
     }
 
 
