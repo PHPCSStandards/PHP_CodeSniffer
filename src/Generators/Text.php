@@ -220,15 +220,8 @@ class Text extends Generator
 
         $rows = '';
         for ($i = 0; $i < $maxLines; $i++) {
-            $column1Text = '';
-            if (isset($column1Lines[$i]) === true) {
-                $column1Text = $column1Lines[$i];
-            }
-
-            $column2Text = '';
-            if (isset($column2Lines[$i]) === true) {
-                $column2Text = $column2Lines[$i];
-            }
+            $column1Text = ($column1Lines[$i] ?? '');
+            $column2Text = ($column2Lines[$i] ?? '');
 
             $rows .= '| ';
             $rows .= $column1Text.str_repeat(' ', max(0, (47 - strlen($column1Text))));
