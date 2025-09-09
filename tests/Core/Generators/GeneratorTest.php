@@ -53,38 +53,38 @@ final class GeneratorTest extends TestCase
      */
     public static function dataConstructor()
     {
-        $pathToDocsInFixture  = __DIR__.DIRECTORY_SEPARATOR.'Fixtures';
-        $pathToDocsInFixture .= DIRECTORY_SEPARATOR.'StandardWithDocs';
-        $pathToDocsInFixture .= DIRECTORY_SEPARATOR.'Docs'.DIRECTORY_SEPARATOR;
+        $pathToDocsInFixture  = __DIR__ . DIRECTORY_SEPARATOR . 'Fixtures';
+        $pathToDocsInFixture .= DIRECTORY_SEPARATOR . 'StandardWithDocs';
+        $pathToDocsInFixture .= DIRECTORY_SEPARATOR . 'Docs' . DIRECTORY_SEPARATOR;
 
         return [
             'Standard without docs'             => [
-                'standard' => __DIR__.'/NoDocsTest.xml',
+                'standard' => __DIR__ . '/NoDocsTest.xml',
                 'expected' => [],
             ],
             'Standard with an invalid doc file' => [
-                'standard' => __DIR__.'/NoValidDocsTest.xml',
+                'standard' => __DIR__ . '/NoValidDocsTest.xml',
                 'expected' => [
-                    $pathToDocsInFixture.'Structure'.DIRECTORY_SEPARATOR.'NoDocumentationElementStandard.xml',
+                    $pathToDocsInFixture . 'Structure' . DIRECTORY_SEPARATOR . 'NoDocumentationElementStandard.xml',
                 ],
             ],
             'Standard with one doc file'        => [
-                'standard' => __DIR__.'/OneDocTest.xml',
+                'standard' => __DIR__ . '/OneDocTest.xml',
                 'expected' => [
-                    $pathToDocsInFixture.'Structure'.DIRECTORY_SEPARATOR.'OneStandardBlockNoCodeStandard.xml',
+                    $pathToDocsInFixture . 'Structure' . DIRECTORY_SEPARATOR . 'OneStandardBlockNoCodeStandard.xml',
                 ],
             ],
             'Standard with multiple doc files'  => [
-                'standard' => __DIR__.'/StructureDocsTest.xml',
+                'standard' => __DIR__ . '/StructureDocsTest.xml',
                 'expected' => [
-                    $pathToDocsInFixture.'Structure'.DIRECTORY_SEPARATOR.'NoContentStandard.xml',
-                    $pathToDocsInFixture.'Structure'.DIRECTORY_SEPARATOR.'OneCodeComparisonNoStandardStandard.xml',
-                    $pathToDocsInFixture.'Structure'.DIRECTORY_SEPARATOR.'OneStandardBlockCodeComparisonStandard.xml',
-                    $pathToDocsInFixture.'Structure'.DIRECTORY_SEPARATOR.'OneStandardBlockNoCodeStandard.xml',
-                    $pathToDocsInFixture.'Structure'.DIRECTORY_SEPARATOR.'OneStandardBlockTwoCodeComparisonsStandard.xml',
-                    $pathToDocsInFixture.'Structure'.DIRECTORY_SEPARATOR.'TwoStandardBlocksNoCodeStandard.xml',
-                    $pathToDocsInFixture.'Structure'.DIRECTORY_SEPARATOR.'TwoStandardBlocksOneCodeComparisonStandard.xml',
-                    $pathToDocsInFixture.'Structure'.DIRECTORY_SEPARATOR.'TwoStandardBlocksThreeCodeComparisonsStandard.xml',
+                    $pathToDocsInFixture . 'Structure' . DIRECTORY_SEPARATOR . 'NoContentStandard.xml',
+                    $pathToDocsInFixture . 'Structure' . DIRECTORY_SEPARATOR . 'OneCodeComparisonNoStandardStandard.xml',
+                    $pathToDocsInFixture . 'Structure' . DIRECTORY_SEPARATOR . 'OneStandardBlockCodeComparisonStandard.xml',
+                    $pathToDocsInFixture . 'Structure' . DIRECTORY_SEPARATOR . 'OneStandardBlockNoCodeStandard.xml',
+                    $pathToDocsInFixture . 'Structure' . DIRECTORY_SEPARATOR . 'OneStandardBlockTwoCodeComparisonsStandard.xml',
+                    $pathToDocsInFixture . 'Structure' . DIRECTORY_SEPARATOR . 'TwoStandardBlocksNoCodeStandard.xml',
+                    $pathToDocsInFixture . 'Structure' . DIRECTORY_SEPARATOR . 'TwoStandardBlocksOneCodeComparisonStandard.xml',
+                    $pathToDocsInFixture . 'Structure' . DIRECTORY_SEPARATOR . 'TwoStandardBlocksThreeCodeComparisonsStandard.xml',
                 ],
             ],
         ];
@@ -100,7 +100,7 @@ final class GeneratorTest extends TestCase
     public function testGeneratingInvalidDocsResultsInException()
     {
         // Set up the ruleset.
-        $standard = __DIR__.'/NoValidDocsTest.xml';
+        $standard = __DIR__ . '/NoValidDocsTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
@@ -153,19 +153,19 @@ final class GeneratorTest extends TestCase
         $multidocExpected[] = 'Two Standard Blocks, No Code';
         $multidocExpected[] = 'Two Standard Blocks, One Code Comparison';
         $multidocExpected[] = 'Two Standard Blocks, Three Code Comparisons';
-        $multidocExpected   = implode(PHP_EOL, $multidocExpected).PHP_EOL;
+        $multidocExpected   = implode(PHP_EOL, $multidocExpected) . PHP_EOL;
 
         return [
             'Standard without docs'            => [
-                'standard' => __DIR__.'/NoDocsTest.xml',
+                'standard' => __DIR__ . '/NoDocsTest.xml',
                 'expected' => '',
             ],
             'Standard with one doc file'       => [
-                'standard' => __DIR__.'/OneDocTest.xml',
-                'expected' => 'One Standard Block, No Code'.PHP_EOL,
+                'standard' => __DIR__ . '/OneDocTest.xml',
+                'expected' => 'One Standard Block, No Code' . PHP_EOL,
             ],
             'Standard with multiple doc files' => [
-                'standard' => __DIR__.'/StructureDocsTest.xml',
+                'standard' => __DIR__ . '/StructureDocsTest.xml',
                 'expected' => $multidocExpected,
             ],
         ];
@@ -182,13 +182,13 @@ final class GeneratorTest extends TestCase
     public function testGetTitleFallbackToFilename()
     {
         // Set up the ruleset.
-        $standard = __DIR__.'/AllValidDocsTest.xml';
+        $standard = __DIR__ . '/AllValidDocsTest.xml';
         $sniffs   = 'StandardWithDocs.Content.DocumentationTitlePCREFallback';
         $config   = new ConfigDouble(["--standard=$standard", "--sniffs=$sniffs"]);
         $ruleset  = new Ruleset($config);
 
         // Make the test OS independent.
-        $this->expectOutputString('Documentation Title PCRE Fallback'.PHP_EOL);
+        $this->expectOutputString('Documentation Title PCRE Fallback' . PHP_EOL);
 
         $generator = new MockGenerator($ruleset);
         $generator->generate();

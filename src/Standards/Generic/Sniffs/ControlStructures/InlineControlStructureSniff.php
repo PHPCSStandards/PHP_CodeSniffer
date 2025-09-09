@@ -308,7 +308,7 @@ class InlineControlStructureSniff implements Sniff
                 $addedContent = '';
             }
 
-            $addedContent .= $indent.'}';
+            $addedContent .= $indent . '}';
             if ($next !== false && $tokens[$endToken]['code'] === T_COMMENT) {
                 $addedContent .= $phpcsFile->eolChar;
             }

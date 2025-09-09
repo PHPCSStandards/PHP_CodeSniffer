@@ -56,7 +56,7 @@ class GotoTargetSpacingSniff implements Sniff
         } else if ($tokens[($stackPtr + 1)]['length'] === 1) {
             $found = '1 space';
         } else {
-            $found = $tokens[($stackPtr + 1)]['length'].' spaces';
+            $found = $tokens[($stackPtr + 1)]['length'] . ' spaces';
         }
 
         $error = 'There should be no space between goto label "%s" and the colon following it. Found: %s';

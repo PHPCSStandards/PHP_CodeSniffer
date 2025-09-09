@@ -32,7 +32,7 @@ final class HeredocStringTest extends AbstractTokenizerTestCase
         $tokens = $this->phpcsFile->getTokens();
 
         $target = $this->getTargetToken($testMarker, T_HEREDOC);
-        $this->assertSame($expectedContent."\n", $tokens[$target]['content']);
+        $this->assertSame($expectedContent . "\n", $tokens[$target]['content']);
 
     }//end testHeredocString()
 
@@ -52,9 +52,9 @@ final class HeredocStringTest extends AbstractTokenizerTestCase
     {
         $tokens = $this->phpcsFile->getTokens();
 
-        $testMarker = substr($testMarker, 0, -3).'Wrapped */';
+        $testMarker = substr($testMarker, 0, -3) . 'Wrapped */';
         $target     = $this->getTargetToken($testMarker, T_HEREDOC);
-        $this->assertSame('Do '.$expectedContent." Something\n", $tokens[$target]['content']);
+        $this->assertSame('Do ' . $expectedContent . " Something\n", $tokens[$target]['content']);
 
     }//end testHeredocStringWrapped()
 

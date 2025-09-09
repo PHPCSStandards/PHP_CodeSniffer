@@ -75,8 +75,8 @@ class UnnecessaryStringConcatSniff implements Sniff
         // this trick is sometimes required in PHP strings.
         $prevChar = substr($tokens[$prev]['content'], -2, 1);
         $nextChar = $tokens[$next]['content'][1];
-        $combined = $prevChar.$nextChar;
-        if ($combined === '?'.'>' || $combined === '<'.'?') {
+        $combined = $prevChar . $nextChar;
+        if ($combined === '?' . '>' || $combined === '<' . '?') {
             return;
         }
 

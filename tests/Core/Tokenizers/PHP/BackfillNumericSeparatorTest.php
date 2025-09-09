@@ -34,8 +34,8 @@ final class BackfillNumericSeparatorTest extends AbstractTokenizerTestCase
         $number     = $this->getTargetToken($marker, [T_LNUMBER, T_DNUMBER]);
         $tokenArray = $tokens[$number];
 
-        $this->assertSame(constant($type), $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not '.$type.' (code)');
-        $this->assertSame($type, $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not '.$type.' (type)');
+        $this->assertSame(constant($type), $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $type . ' (code)');
+        $this->assertSame($type, $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $type . ' (type)');
         $this->assertSame($value, $tokenArray['content']);
 
     }//end testBackfill()
@@ -158,7 +158,7 @@ final class BackfillNumericSeparatorTest extends AbstractTokenizerTestCase
             $this->assertSame(
                 $expectedToken['code'],
                 $tokens[$i]['code'],
-                'Token tokenized as '.Tokens::tokenName($tokens[$i]['code']).', not '.Tokens::tokenName($expectedToken['code'])
+                'Token tokenized as ' . Tokens::tokenName($tokens[$i]['code']) . ', not ' . Tokens::tokenName($expectedToken['code'])
             );
             $this->assertSame($expectedToken['content'], $tokens[$i]['content']);
         }

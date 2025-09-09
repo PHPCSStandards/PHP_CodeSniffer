@@ -327,7 +327,7 @@ class FunctionCommentSniff implements Sniff
 
                         for ($i = ($tag + 3); $i < $end; $i++) {
                             if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING) {
-                                $comment        .= ' '.$tokens[$i]['content'];
+                                $comment        .= ' ' . $tokens[$i]['content'];
                                 $commentEnd      = $i;
                                 $commentTokens[] = $i;
                             }
@@ -364,7 +364,7 @@ class FunctionCommentSniff implements Sniff
         // this prefix to the variable name so comparisons are easier.
         foreach ($realParams as $pos => $param) {
             if ($param['variable_length'] === true) {
-                $realParams[$pos]['name'] = '...'.$realParams[$pos]['name'];
+                $realParams[$pos]['name'] = '...' . $realParams[$pos]['name'];
             }
         }
 
@@ -406,7 +406,7 @@ class FunctionCommentSniff implements Sniff
                         $content .= wordwrap(
                             $param['comment'],
                             $wrapLength,
-                            $phpcsFile->eolChar.$padding
+                            $phpcsFile->eolChar . $padding
                         );
 
                         $phpcsFile->fixer->replaceToken($commentToken, $content);
@@ -477,7 +477,7 @@ class FunctionCommentSniff implements Sniff
                     $content .= wordwrap(
                         $param['comment'],
                         $wrapLength,
-                        $phpcsFile->eolChar.$padding
+                        $phpcsFile->eolChar . $padding
                     );
 
                     $phpcsFile->fixer->replaceToken($commentToken, $content);

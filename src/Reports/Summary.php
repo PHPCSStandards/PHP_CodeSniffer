@@ -40,7 +40,7 @@ class Summary implements Report
             return false;
         }
 
-        echo $report['filename'].'>>'.$report['errors'].'>>'.$report['warnings'].PHP_EOL;
+        echo $report['filename'] . '>>' . $report['errors'] . '>>' . $report['warnings'] . PHP_EOL;
         return true;
 
     }//end generateFileReport()
@@ -119,28 +119,28 @@ class Summary implements Report
         $width = min($width, ($maxLength + 21));
         $width = max($width, 70);
 
-        echo PHP_EOL."\033[1m".'PHP CODE SNIFFER REPORT SUMMARY'."\033[0m".PHP_EOL;
-        echo str_repeat('-', $width).PHP_EOL;
-        echo "\033[1m".'FILE'.str_repeat(' ', ($width - 20)).'ERRORS  WARNINGS'."\033[0m".PHP_EOL;
-        echo str_repeat('-', $width).PHP_EOL;
+        echo PHP_EOL . "\033[1m" . 'PHP CODE SNIFFER REPORT SUMMARY' . "\033[0m" . PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
+        echo "\033[1m" . 'FILE' . str_repeat(' ', ($width - 20)) . 'ERRORS  WARNINGS' . "\033[0m" . PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
 
         foreach ($reportFiles as $file => $data) {
             $padding = ($width - 18 - $data['strlen']);
             if ($padding < 0) {
-                $file    = '...'.substr($file, (($padding * -1) + 3));
+                $file    = '...' . substr($file, (($padding * -1) + 3));
                 $padding = 0;
             }
 
-            echo $file.str_repeat(' ', $padding).'  ';
+            echo $file . str_repeat(' ', $padding) . '  ';
             if ($data['errors'] !== 0) {
-                echo "\033[31m".$data['errors']."\033[0m";
+                echo "\033[31m" . $data['errors'] . "\033[0m";
                 echo str_repeat(' ', (8 - strlen((string) $data['errors'])));
             } else {
                 echo '0       ';
             }
 
             if ($data['warnings'] !== 0) {
-                echo "\033[33m".$data['warnings']."\033[0m";
+                echo "\033[33m" . $data['warnings'] . "\033[0m";
             } else {
                 echo '0';
             }
@@ -148,18 +148,18 @@ class Summary implements Report
             echo PHP_EOL;
         }//end foreach
 
-        echo str_repeat('-', $width).PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
         echo "\033[1mA TOTAL OF $totalErrors ERROR";
         if ($totalErrors !== 1) {
             echo 'S';
         }
 
-        echo ' AND '.$totalWarnings.' WARNING';
+        echo ' AND ' . $totalWarnings . ' WARNING';
         if ($totalWarnings !== 1) {
             echo 'S';
         }
 
-        echo ' WERE FOUND IN '.$totalFiles.' FILE';
+        echo ' WERE FOUND IN ' . $totalFiles . ' FILE';
         if ($totalFiles !== 1) {
             echo 'S';
         }
@@ -167,11 +167,11 @@ class Summary implements Report
         echo "\033[0m";
 
         if ($totalFixable > 0) {
-            echo PHP_EOL.str_repeat('-', $width).PHP_EOL;
+            echo PHP_EOL . str_repeat('-', $width) . PHP_EOL;
             echo "\033[1mPHPCBF CAN FIX $totalFixable OF THESE SNIFF VIOLATIONS AUTOMATICALLY\033[0m";
         }
 
-        echo PHP_EOL.str_repeat('-', $width).PHP_EOL.PHP_EOL;
+        echo PHP_EOL . str_repeat('-', $width) . PHP_EOL . PHP_EOL;
 
     }//end generate()
 

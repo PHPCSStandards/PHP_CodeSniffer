@@ -440,7 +440,7 @@ class Config
 
             do {
                 foreach (self::CONFIG_FILENAMES as $defaultFilename) {
-                    $default = $currentDir.DIRECTORY_SEPARATOR.$defaultFilename;
+                    $default = $currentDir . DIRECTORY_SEPARATOR . $defaultFilename;
                     if (is_file($default) === true) {
                         $this->standards = [$default];
                         break(2);
@@ -683,7 +683,7 @@ class Config
             $this->printUsage();
             throw new DeepExitException('', ExitCode::OKAY);
         case 'i' :
-            $output = Standards::prepareInstalledStandardsForDisplay().PHP_EOL;
+            $output = Standards::prepareInstalledStandardsForDisplay() . PHP_EOL;
             throw new DeepExitException($output, ExitCode::OKAY);
         case 'v' :
             if ($this->quiet === true) {
@@ -748,7 +748,7 @@ class Config
 
             $changed = ini_set($ini[0], $ini[1]);
             if ($changed === false && ini_get($ini[0]) !== $ini[1]) {
-                $error  = sprintf('ERROR: Ini option "%s" cannot be changed at runtime.', $ini[0]).PHP_EOL;
+                $error  = sprintf('ERROR: Ini option "%s" cannot be changed at runtime.', $ini[0]) . PHP_EOL;
                 $error .= $this->printShortUsage(true);
                 throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
             }
@@ -771,7 +771,7 @@ class Config
                 $unknown[]     = $arg;
                 $this->unknown = $unknown;
             } else {
-                $this->processUnknownArgument('-'.$arg, $pos);
+                $this->processUnknownArgument('-' . $arg, $pos);
             }
         }//end switch
 
@@ -794,8 +794,8 @@ class Config
             $this->printUsage();
             throw new DeepExitException('', ExitCode::OKAY);
         case 'version':
-            $output  = 'PHP_CodeSniffer version '.self::VERSION.' ('.self::STABILITY.') ';
-            $output .= 'by Squiz and PHPCSStandards'.PHP_EOL;
+            $output  = 'PHP_CodeSniffer version ' . self::VERSION . ' (' . self::STABILITY . ') ';
+            $output .= 'by Squiz and PHPCSStandards' . PHP_EOL;
             throw new DeepExitException($output, ExitCode::OKAY);
         case 'colors':
             if (isset($this->overriddenDefaults['colors']) === true) {
@@ -841,7 +841,7 @@ class Config
             if (isset($this->cliArgs[($pos + 1)]) === false
                 || isset($this->cliArgs[($pos + 2)]) === false
             ) {
-                $error  = 'ERROR: Setting a config option requires a name and value'.PHP_EOL.PHP_EOL;
+                $error  = 'ERROR: Setting a config option requires a name and value' . PHP_EOL . PHP_EOL;
                 $error .= $this->printShortUsage(true);
                 throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
             }
@@ -853,50 +853,50 @@ class Config
             try {
                 $this->setConfigData($key, $value);
             } catch (Exception $e) {
-                throw new DeepExitException($e->getMessage().PHP_EOL, ExitCode::PROCESS_ERROR);
+                throw new DeepExitException($e->getMessage() . PHP_EOL, ExitCode::PROCESS_ERROR);
             }
 
-            $output = 'Using config file: '.self::$configDataFile.PHP_EOL.PHP_EOL;
+            $output = 'Using config file: ' . self::$configDataFile . PHP_EOL . PHP_EOL;
 
             if ($current === null) {
-                $output .= "Config value \"$key\" added successfully".PHP_EOL;
+                $output .= "Config value \"$key\" added successfully" . PHP_EOL;
             } else {
-                $output .= "Config value \"$key\" updated successfully; old value was \"$current\"".PHP_EOL;
+                $output .= "Config value \"$key\" updated successfully; old value was \"$current\"" . PHP_EOL;
             }
             throw new DeepExitException($output, ExitCode::OKAY);
         case 'config-delete':
             if (isset($this->cliArgs[($pos + 1)]) === false) {
-                $error  = 'ERROR: Deleting a config option requires the name of the option'.PHP_EOL.PHP_EOL;
+                $error  = 'ERROR: Deleting a config option requires the name of the option' . PHP_EOL . PHP_EOL;
                 $error .= $this->printShortUsage(true);
                 throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
             }
 
-            $output = 'Using config file: '.self::$configDataFile.PHP_EOL.PHP_EOL;
+            $output = 'Using config file: ' . self::$configDataFile . PHP_EOL . PHP_EOL;
 
             $key     = $this->cliArgs[($pos + 1)];
             $current = self::getConfigData($key);
             if ($current === null) {
-                $output .= "Config value \"$key\" has not been set".PHP_EOL;
+                $output .= "Config value \"$key\" has not been set" . PHP_EOL;
             } else {
                 try {
                     $this->setConfigData($key, null);
                 } catch (Exception $e) {
-                    throw new DeepExitException($e->getMessage().PHP_EOL, ExitCode::PROCESS_ERROR);
+                    throw new DeepExitException($e->getMessage() . PHP_EOL, ExitCode::PROCESS_ERROR);
                 }
 
-                $output .= "Config value \"$key\" removed successfully; old value was \"$current\"".PHP_EOL;
+                $output .= "Config value \"$key\" removed successfully; old value was \"$current\"" . PHP_EOL;
             }
             throw new DeepExitException($output, ExitCode::OKAY);
         case 'config-show':
             $data    = self::getAllConfigData();
-            $output  = 'Using config file: '.self::$configDataFile.PHP_EOL.PHP_EOL;
+            $output  = 'Using config file: ' . self::$configDataFile . PHP_EOL . PHP_EOL;
             $output .= $this->prepareConfigDataForDisplay($data);
             throw new DeepExitException($output, ExitCode::OKAY);
         case 'runtime-set':
             if (isset($this->cliArgs[($pos + 1)]) === false
                 || isset($this->cliArgs[($pos + 2)]) === false
             ) {
-                $error  = 'ERROR: Setting a runtime config option requires a name and value'.PHP_EOL.PHP_EOL;
+                $error  = 'ERROR: Setting a runtime config option requires a name and value' . PHP_EOL . PHP_EOL;
                 $error .= $this->printShortUsage(true);
                 throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
             }
@@ -947,25 +947,25 @@ class Config
 
                     $dir = dirname($this->cacheFile);
                     if (is_dir($dir) === false) {
-                        $error  = 'ERROR: The specified cache file path "'.$this->cacheFile.'" points to a non-existent directory'.PHP_EOL.PHP_EOL;
+                        $error  = 'ERROR: The specified cache file path "' . $this->cacheFile . '" points to a non-existent directory' . PHP_EOL . PHP_EOL;
                         $error .= $this->printShortUsage(true);
                         throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                     }
 
                     if ($dir === '.') {
                         // Passed cache file is a file in the current directory.
-                        $this->cacheFile = getcwd().'/'.basename($this->cacheFile);
+                        $this->cacheFile = getcwd() . '/' . basename($this->cacheFile);
                     } else {
                         if ($dir[0] === '/') {
                             // An absolute path.
                             $dir = Common::realpath($dir);
                         } else {
-                            $dir = Common::realpath(getcwd().'/'.$dir);
+                            $dir = Common::realpath(getcwd() . '/' . $dir);
                         }
 
                         if ($dir !== false) {
                             // Cache file path is relative.
-                            $this->cacheFile = $dir.'/'.basename($this->cacheFile);
+                            $this->cacheFile = $dir . '/' . basename($this->cacheFile);
                         }
                     }
                 }//end if
@@ -973,7 +973,7 @@ class Config
                 $this->overriddenDefaults['cacheFile'] = true;
 
                 if (is_dir($this->cacheFile) === true) {
-                    $error  = 'ERROR: The specified cache file path "'.$this->cacheFile.'" is a directory'.PHP_EOL.PHP_EOL;
+                    $error  = 'ERROR: The specified cache file path "' . $this->cacheFile . '" is a directory' . PHP_EOL . PHP_EOL;
                     $error .= $this->printShortUsage(true);
                     throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                 }
@@ -983,7 +983,7 @@ class Config
                 foreach ($files as $file) {
                     $path = Common::realpath($file);
                     if ($path === false) {
-                        $error  = 'ERROR: The specified bootstrap file "'.$file.'" does not exist'.PHP_EOL.PHP_EOL;
+                        $error  = 'ERROR: The specified bootstrap file "' . $file . '" does not exist' . PHP_EOL . PHP_EOL;
                         $error .= $this->printShortUsage(true);
                         throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                     }
@@ -997,7 +997,7 @@ class Config
                 $fileList = substr($arg, 10);
                 $path     = Common::realpath($fileList);
                 if ($path === false) {
-                    $error  = 'ERROR: The specified file list "'.$fileList.'" does not exist'.PHP_EOL.PHP_EOL;
+                    $error  = 'ERROR: The specified file list "' . $fileList . '" does not exist' . PHP_EOL . PHP_EOL;
                     $error .= $this->printShortUsage(true);
                     throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                 }
@@ -1039,18 +1039,18 @@ class Config
 
                     $dir = Common::realpath(dirname($this->reportFile));
                     if (is_dir($dir) === false) {
-                        $error  = 'ERROR: The specified report file path "'.$this->reportFile.'" points to a non-existent directory'.PHP_EOL.PHP_EOL;
+                        $error  = 'ERROR: The specified report file path "' . $this->reportFile . '" points to a non-existent directory' . PHP_EOL . PHP_EOL;
                         $error .= $this->printShortUsage(true);
                         throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                     }
 
-                    $this->reportFile = $dir.'/'.basename($this->reportFile);
+                    $this->reportFile = $dir . '/' . basename($this->reportFile);
                 }//end if
 
                 $this->overriddenDefaults['reportFile'] = true;
 
                 if (is_dir($this->reportFile) === true) {
-                    $error  = 'ERROR: The specified report file path "'.$this->reportFile.'" is a directory'.PHP_EOL.PHP_EOL;
+                    $error  = 'ERROR: The specified report file path "' . $this->reportFile . '" is a directory' . PHP_EOL . PHP_EOL;
                     $error .= $this->printShortUsage(true);
                     throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                 }
@@ -1083,7 +1083,7 @@ class Config
                 }
 
                 if (is_dir($this->basepath) === false) {
-                    $error  = 'ERROR: The specified basepath "'.$this->basepath.'" points to a non-existent directory'.PHP_EOL.PHP_EOL;
+                    $error  = 'ERROR: The specified basepath "' . $this->basepath . '" points to a non-existent directory' . PHP_EOL . PHP_EOL;
                     $error .= $this->printShortUsage(true);
                     throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                 }
@@ -1104,15 +1104,15 @@ class Config
                         } else {
                             $dir = Common::realpath(dirname($output));
                             if (is_dir($dir) === false) {
-                                $error  = 'ERROR: The specified '.$report.' report file path "'.$output.'" points to a non-existent directory'.PHP_EOL.PHP_EOL;
+                                $error  = 'ERROR: The specified ' . $report . ' report file path "' . $output . '" points to a non-existent directory' . PHP_EOL . PHP_EOL;
                                 $error .= $this->printShortUsage(true);
                                 throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                             }
 
-                            $output = $dir.'/'.basename($output);
+                            $output = $dir . '/' . basename($output);
 
                             if (is_dir($output) === true) {
-                                $error  = 'ERROR: The specified '.$report.' report file path "'.$output.'" is a directory'.PHP_EOL.PHP_EOL;
+                                $error  = 'ERROR: The specified ' . $report . ' report file path "' . $output . '" is a directory' . PHP_EOL . PHP_EOL;
                                 $error .= $this->printShortUsage(true);
                                 throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                             }
@@ -1168,9 +1168,9 @@ class Config
                             // They specified the tokenizer too.
                             list($ext, $tokenizer) = explode('/', $ext);
                             if (strtoupper($tokenizer) !== 'PHP') {
-                                $error  = 'ERROR: Specifying the tokenizer to use for an extension is no longer supported.'.PHP_EOL;
-                                $error .= 'PHP_CodeSniffer >= 4.0 only supports scanning PHP files.'.PHP_EOL;
-                                $error .= 'Received: '.substr($arg, 11).PHP_EOL.PHP_EOL;
+                                $error  = 'ERROR: Specifying the tokenizer to use for an extension is no longer supported.' . PHP_EOL;
+                                $error .= 'PHP_CodeSniffer >= 4.0 only supports scanning PHP files.' . PHP_EOL;
+                                $error .= 'Received: ' . substr($arg, 11) . PHP_EOL . PHP_EOL;
                                 $error .= $this->printShortUsage(true);
                                 throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                             }
@@ -1258,7 +1258,7 @@ class Config
                     $validOptions = implode(', ', self::VALID_GENERATORS);
                     $validOptions = substr_replace($validOptions, ' and', strrpos($validOptions, ','), 1);
                     $error        = sprintf(
-                        'ERROR: "%s" is not a valid generator. The following generators are supported: %s.'.PHP_EOL.PHP_EOL,
+                        'ERROR: "%s" is not a valid generator. The following generators are supported: %s.' . PHP_EOL . PHP_EOL,
                         $generatorName,
                         $validOptions
                     );
@@ -1301,7 +1301,7 @@ class Config
                         // Value is not valid, so just ignore it.
                     }
                 } else {
-                    $this->processUnknownArgument('--'.$arg, $pos);
+                    $this->processUnknownArgument('--' . $arg, $pos);
                 }
             }//end if
             break;
@@ -1341,18 +1341,18 @@ class Config
             }
 
             if ($partCount === 0) {
-                $errors[] = 'Standard codes are not supported: '.$sniff;
+                $errors[] = 'Standard codes are not supported: ' . $sniff;
             } else if ($partCount === 1) {
-                $errors[] = 'Category codes are not supported: '.$sniff;
+                $errors[] = 'Category codes are not supported: ' . $sniff;
             } else if ($partCount === 3) {
-                $errors[] = 'Message codes are not supported: '.$sniff;
+                $errors[] = 'Message codes are not supported: ' . $sniff;
             } else {
-                $errors[] = 'Too many parts: '.$sniff;
+                $errors[] = 'Too many parts: ' . $sniff;
             }
 
             if ($partCount > 2) {
                 $parts    = explode('.', $sniff, 4);
-                $sniffs[] = $parts[0].'.'.$parts[1].'.'.$parts[2];
+                $sniffs[] = $parts[0] . '.' . $parts[1] . '.' . $parts[2];
             }
         }//end foreach
 
@@ -1376,15 +1376,15 @@ class Config
         );
 
         if ($errors !== []) {
-            $error  = 'ERROR: The --'.$argument.' option only supports sniff codes.'.PHP_EOL;
-            $error .= 'Sniff codes are in the form "Standard.Category.Sniff".'.PHP_EOL;
+            $error  = 'ERROR: The --' . $argument . ' option only supports sniff codes.' . PHP_EOL;
+            $error .= 'Sniff codes are in the form "Standard.Category.Sniff".' . PHP_EOL;
             $error .= PHP_EOL;
-            $error .= 'The following problems were detected:'.PHP_EOL;
-            $error .= '* '.implode(PHP_EOL.'* ', $errors).PHP_EOL;
+            $error .= 'The following problems were detected:' . PHP_EOL;
+            $error .= '* ' . implode(PHP_EOL . '* ', $errors) . PHP_EOL;
 
             if ($sniffs !== []) {
                 $error .= PHP_EOL;
-                $error .= 'Perhaps try --'.$argument.'="'.implode(',', $sniffs).'" instead.'.PHP_EOL;
+                $error .= 'Perhaps try --' . $argument . '="' . implode(',', $sniffs) . '" instead.' . PHP_EOL;
             }
 
             $error .= PHP_EOL;
@@ -1416,7 +1416,7 @@ class Config
                 return;
             }
 
-            $error  = "ERROR: option \"$arg\" not known".PHP_EOL.PHP_EOL;
+            $error  = "ERROR: option \"$arg\" not known" . PHP_EOL . PHP_EOL;
             $error .= $this->printShortUsage(true);
             throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         }
@@ -1447,7 +1447,7 @@ class Config
                 return;
             }
 
-            $error  = 'ERROR: The file "'.$path.'" does not exist.'.PHP_EOL.PHP_EOL;
+            $error  = 'ERROR: The file "' . $path . '" does not exist.' . PHP_EOL . PHP_EOL;
             $error .= $this->printShortUsage(true);
             throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         } else {
@@ -1498,7 +1498,7 @@ class Config
             $usage = 'Run "phpcs --help" for usage information';
         }
 
-        $usage .= PHP_EOL.PHP_EOL;
+        $usage .= PHP_EOL . PHP_EOL;
 
         if ($returnOutput === true) {
             return $usage;
@@ -1528,7 +1528,7 @@ class Config
         $longOptions[] = 'config-show';
         $longOptions[] = 'generator';
 
-        $shortOptions = Help::DEFAULT_SHORT_OPTIONS.'aems';
+        $shortOptions = Help::DEFAULT_SHORT_OPTIONS . 'aems';
 
         (new Help($this, $longOptions, $shortOptions))->display();
 
@@ -1587,7 +1587,7 @@ class Config
      */
     public static function getExecutablePath(string $name)
     {
-        $data = self::getConfigData($name.'_path');
+        $data = self::getConfigData($name . '_path');
         if ($data !== null) {
             return $data;
         }
@@ -1602,9 +1602,9 @@ class Config
         }
 
         if (PHP_OS_FAMILY === 'Windows') {
-            $cmd = 'where '.escapeshellarg($name).' 2> nul';
+            $cmd = 'where ' . escapeshellarg($name) . ' 2> nul';
         } else {
-            $cmd = 'which '.escapeshellarg($name).' 2> /dev/null';
+            $cmd = 'which ' . escapeshellarg($name) . ' 2> /dev/null';
         }
 
         $result = exec($cmd, $output, $retVal);
@@ -1648,15 +1648,15 @@ class Config
             }
 
             if ($path !== '') {
-                $configFile = dirname($path).DIRECTORY_SEPARATOR.'CodeSniffer.conf';
+                $configFile = dirname($path) . DIRECTORY_SEPARATOR . 'CodeSniffer.conf';
             } else {
-                $configFile = dirname(__DIR__).DIRECTORY_SEPARATOR.'CodeSniffer.conf';
+                $configFile = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'CodeSniffer.conf';
             }
 
             if (is_file($configFile) === true
                 && is_writable($configFile) === false
             ) {
-                $error = 'ERROR: Config file '.$configFile.' is not writable'.PHP_EOL.PHP_EOL;
+                $error = 'ERROR: Config file ' . $configFile . ' is not writable' . PHP_EOL . PHP_EOL;
                 throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
             }
         }//end if
@@ -1672,12 +1672,12 @@ class Config
         }
 
         if ($temp === false) {
-            $output  = '<'.'?php'."\n".' $phpCodeSnifferConfig = ';
+            $output  = '<' . '?php' . "\n" . ' $phpCodeSnifferConfig = ';
             $output .= var_export($phpCodeSnifferConfig, true);
-            $output .= ";\n?".'>';
+            $output .= ";\n?" . '>';
 
             if (file_put_contents($configFile, $output) === false) {
-                $error = 'ERROR: Config file '.$configFile.' could not be written'.PHP_EOL.PHP_EOL;
+                $error = 'ERROR: Config file ' . $configFile . ' could not be written' . PHP_EOL . PHP_EOL;
                 throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
             }
 
@@ -1719,9 +1719,9 @@ class Config
         }
 
         if ($path !== '') {
-            $configFile = dirname($path).DIRECTORY_SEPARATOR.'CodeSniffer.conf';
+            $configFile = dirname($path) . DIRECTORY_SEPARATOR . 'CodeSniffer.conf';
         } else {
-            $configFile = dirname(__DIR__).DIRECTORY_SEPARATOR.'CodeSniffer.conf';
+            $configFile = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'CodeSniffer.conf';
         }
 
         if (is_file($configFile) === false) {
@@ -1730,7 +1730,7 @@ class Config
         }
 
         if (Common::isReadable($configFile) === false) {
-            $error = 'ERROR: Config file '.$configFile.' is not readable'.PHP_EOL.PHP_EOL;
+            $error = 'ERROR: Config file ' . $configFile . ' is not readable' . PHP_EOL . PHP_EOL;
             throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         }
 
@@ -1769,7 +1769,7 @@ class Config
 
         $output = '';
         foreach ($data as $name => $value) {
-            $output .= str_pad($name.': ', $max).$value.PHP_EOL;
+            $output .= str_pad($name . ': ', $max) . $value . PHP_EOL;
         }
 
         return $output;

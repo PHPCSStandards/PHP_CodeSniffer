@@ -36,12 +36,12 @@ final class PHPOpenTagEOF3Test extends AbstractTokenizerTestCase
         $this->assertSame(
             T_OPEN_TAG,
             $tokens[$stackPtr]['code'],
-            'Token tokenized as '.Tokens::tokenName($tokens[$stackPtr]['code']).', not T_OPEN_TAG (code)'
+            'Token tokenized as ' . Tokens::tokenName($tokens[$stackPtr]['code']) . ', not T_OPEN_TAG (code)'
         );
         $this->assertSame(
             'T_OPEN_TAG',
             $tokens[$stackPtr]['type'],
-            'Token tokenized as '.$tokens[$stackPtr]['type'].', not T_OPEN_TAG (type)'
+            'Token tokenized as ' . $tokens[$stackPtr]['type'] . ', not T_OPEN_TAG (type)'
         );
         $this->assertSame('<?PHP', $tokens[$stackPtr]['content']);
 

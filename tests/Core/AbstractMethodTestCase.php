@@ -57,7 +57,7 @@ abstract class AbstractMethodTestCase extends TestCase
         // Default to a file with the same name as the test class. Extension is property based.
         $relativeCN     = str_replace(__NAMESPACE__, '', static::class);
         $relativePath   = str_replace('\\', DIRECTORY_SEPARATOR, $relativeCN);
-        $pathToTestFile = realpath(__DIR__).$relativePath.'.inc';
+        $pathToTestFile = realpath(__DIR__) . $relativePath . '.inc';
 
         self::$phpcsFile = new LocalFile($pathToTestFile, $ruleset, $config);
         self::$phpcsFile->parse();
@@ -213,9 +213,9 @@ abstract class AbstractMethodTestCase extends TestCase
         );
 
         if ($target === false) {
-            $msg = 'Failed to find test target token for comment string: '.$commentString;
+            $msg = 'Failed to find test target token for comment string: ' . $commentString;
             if ($tokenContent !== null) {
-                $msg .= ' with token content: '.$tokenContent;
+                $msg .= ' with token content: ' . $tokenContent;
             }
 
             throw new Exception($msg);

@@ -62,7 +62,7 @@ abstract class AbstractTokenizerTestCase extends TestCase
             // Default to a file with the same name as the test class. Extension is property based.
             $relativeCN     = str_replace(__NAMESPACE__, '', static::class);
             $relativePath   = str_replace('\\', DIRECTORY_SEPARATOR, $relativeCN);
-            $pathToTestFile = realpath(__DIR__).$relativePath.'.inc';
+            $pathToTestFile = realpath(__DIR__) . $relativePath . '.inc';
 
             $this->phpcsFile = new LocalFile($pathToTestFile, $ruleset, $config);
             $this->phpcsFile->parse();

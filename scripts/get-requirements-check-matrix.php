@@ -13,6 +13,6 @@
 
 error_reporting(E_ALL);
 
-require_once __DIR__.'/BuildRequirementsCheckMatrix.php';
+require_once __DIR__ . '/BuildRequirementsCheckMatrix.php';
 
 echo json_encode(['include' => (new PHP_CodeSniffer\BuildRequirementsCheckMatrix())->getBuilds()]);

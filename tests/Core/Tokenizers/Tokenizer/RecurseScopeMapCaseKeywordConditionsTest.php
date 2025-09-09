@@ -32,7 +32,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
         $tokenArray = $tokens[$enumCase];
 
         // Make sure we're looking at the right token.
-        $this->assertSame(T_ENUM_CASE, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_ENUM_CASE (code)');
+        $this->assertSame(T_ENUM_CASE, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_ENUM_CASE (code)');
 
         $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
         $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');
@@ -92,7 +92,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
         $expectedScopeCloser    = $this->getTargetToken($scopeCloserMarker, $expectedTokens['scope_closer']);
 
         // Make sure we're looking at the right token.
-        $this->assertSame(T_CASE, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_CASE (code)');
+        $this->assertSame(T_CASE, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_CASE (code)');
 
         $this->assertArrayHasKey('scope_condition', $tokenArray, 'Scope condition is not set');
         $this->assertSame(
@@ -237,7 +237,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
         $tokenArray   = $tokens[$enumCaseName];
 
         // Make sure we're looking at the right token.
-        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
+        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
 
         $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
         $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');

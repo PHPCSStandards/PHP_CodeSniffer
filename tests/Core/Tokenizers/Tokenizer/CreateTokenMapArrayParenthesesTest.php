@@ -34,7 +34,7 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
         $tokenArray = $tokens[$token];
 
         // Make sure we're looking at the right token.
-        $this->assertSame(T_ARRAY, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_ARRAY (code)');
+        $this->assertSame(T_ARRAY, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_ARRAY (code)');
 
         $this->assertArrayHasKey('parenthesis_owner', $tokenArray, 'Parenthesis owner is not set');
         $this->assertArrayHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is not set');
@@ -96,7 +96,7 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
         $tokenArray = $tokens[$token];
 
         // Make sure we're looking at the right token.
-        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
+        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
 
         $this->assertArrayNotHasKey('parenthesis_owner', $tokenArray, 'Parenthesis owner is set');
         $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is set');
@@ -174,7 +174,7 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
         $tokenArray = $tokens[$token];
 
         // Make sure we're looking at the right token.
-        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
+        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
 
         $this->assertArrayNotHasKey('parenthesis_owner', $tokenArray, 'Parenthesis owner is set');
         $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is set');

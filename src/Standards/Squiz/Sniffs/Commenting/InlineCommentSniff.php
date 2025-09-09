@@ -213,7 +213,7 @@ class InlineCommentSniff implements Sniff
             }//end if
 
             if ($fix === true) {
-                $newComment = '// '.ltrim($tokens[$lastCommentToken]['content'], "/\t ");
+                $newComment = '// ' . ltrim($tokens[$lastCommentToken]['content'], "/\t ");
                 $phpcsFile->fixer->replaceToken($lastCommentToken, $newComment);
             }
 
@@ -243,7 +243,7 @@ class InlineCommentSniff implements Sniff
                 $error = 'Inline comments must end in %s';
                 $ender = '';
                 foreach (self::VALID_SENTENCE_END_CHARS as $closerName => $symbol) {
-                    $ender .= ' '.$closerName.',';
+                    $ender .= ' ' . $closerName . ',';
                 }
 
                 $ender = trim($ender, ' ,');

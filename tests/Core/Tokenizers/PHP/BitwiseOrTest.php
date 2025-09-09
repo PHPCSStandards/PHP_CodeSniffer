@@ -31,8 +31,8 @@ final class BitwiseOrTest extends AbstractTokenizerTestCase
         $target     = $this->getTargetToken($testMarker, [T_BITWISE_OR, T_TYPE_UNION]);
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_BITWISE_OR, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_BITWISE_OR (code)');
-        $this->assertSame('T_BITWISE_OR', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_BITWISE_OR (type)');
+        $this->assertSame(T_BITWISE_OR, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_BITWISE_OR (code)');
+        $this->assertSame('T_BITWISE_OR', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_BITWISE_OR (type)');
 
     }//end testBitwiseOr()
 
@@ -87,8 +87,8 @@ final class BitwiseOrTest extends AbstractTokenizerTestCase
         $target     = $this->getTargetToken($testMarker, [T_BITWISE_OR, T_TYPE_UNION]);
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_TYPE_UNION, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_TYPE_UNION (code)');
-        $this->assertSame('T_TYPE_UNION', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_TYPE_UNION (type)');
+        $this->assertSame(T_TYPE_UNION, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_TYPE_UNION (code)');
+        $this->assertSame('T_TYPE_UNION', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_TYPE_UNION (type)');
 
     }//end testTypeUnion()
 

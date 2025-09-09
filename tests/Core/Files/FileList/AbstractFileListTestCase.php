@@ -43,7 +43,7 @@ abstract class AbstractFileListTestCase extends TestCase
         // Wrapped in an `isset()` as the properties may have been set already (via a call to this method from a dataprovider).
         if (isset(self::$ruleset) === false) {
             self::$config         = new ConfigDouble();
-            self::$config->filter = __DIR__.'/FilterDouble.php';
+            self::$config->filter = __DIR__ . '/FilterDouble.php';
             self::$ruleset        = new Ruleset(self::$config);
         }
 

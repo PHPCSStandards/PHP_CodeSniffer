@@ -38,12 +38,12 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             $this->assertSame(
                 T_PARAM_NAME,
                 $tokens[$label]['code'],
-                'Token tokenized as '.$tokens[$label]['type'].', not T_PARAM_NAME (code)'
+                'Token tokenized as ' . $tokens[$label]['type'] . ', not T_PARAM_NAME (code)'
             );
             $this->assertSame(
                 'T_PARAM_NAME',
                 $tokens[$label]['type'],
-                'Token tokenized as '.$tokens[$label]['type'].', not T_PARAM_NAME (type)'
+                'Token tokenized as ' . $tokens[$label]['type'] . ', not T_PARAM_NAME (type)'
             );
 
             // Get the next non-empty token.
@@ -52,17 +52,17 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
             $this->assertSame(
                 ':',
                 $tokens[$colon]['content'],
-                'Next token after parameter name is not a colon. Found: '.$tokens[$colon]['content']
+                'Next token after parameter name is not a colon. Found: ' . $tokens[$colon]['content']
             );
             $this->assertSame(
                 T_COLON,
                 $tokens[$colon]['code'],
-                'Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (code)'
+                'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)'
             );
             $this->assertSame(
                 'T_COLON',
                 $tokens[$colon]['type'],
-                'Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (type)'
+                'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
             );
         }//end foreach
 
@@ -320,12 +320,12 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             T_STRING,
             $tokens[$label]['code'],
-            'Token tokenized as '.$tokens[$label]['type'].', not T_STRING (code)'
+            'Token tokenized as ' . $tokens[$label]['type'] . ', not T_STRING (code)'
         );
         $this->assertSame(
             'T_STRING',
             $tokens[$label]['type'],
-            'Token tokenized as '.$tokens[$label]['type'].', not T_STRING (type)'
+            'Token tokenized as ' . $tokens[$label]['type'] . ', not T_STRING (type)'
         );
 
     }//end testOtherTstringInFunctionCall()
@@ -382,12 +382,12 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             T_INLINE_ELSE,
             $tokens[$colon]['code'],
-            'Token tokenized as '.$tokens[$colon]['type'].', not T_INLINE_ELSE (code)'
+            'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (code)'
         );
         $this->assertSame(
             'T_INLINE_ELSE',
             $tokens[$colon]['type'],
-            'Token tokenized as '.$tokens[$colon]['type'].', not T_INLINE_ELSE (type)'
+            'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (type)'
         );
 
         $label = $this->getTargetToken('/* testMixedPositionalAndNamedArgsWithTernary */', T_PARAM_NAME, 'name');
@@ -398,17 +398,17 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             ':',
             $tokens[$colon]['content'],
-            'Next token after parameter name is not a colon. Found: '.$tokens[$colon]['content']
+            'Next token after parameter name is not a colon. Found: ' . $tokens[$colon]['content']
         );
         $this->assertSame(
             T_COLON,
             $tokens[$colon]['code'],
-            'Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (code)'
+            'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)'
         );
         $this->assertSame(
             'T_COLON',
             $tokens[$colon]['type'],
-            'Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (type)'
+            'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
 
     }//end testMixedPositionalAndNamedArgsWithTernary()
@@ -438,17 +438,17 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             ':',
             $tokens[$colon]['content'],
-            'First arg: Next token after parameter name is not a colon. Found: '.$tokens[$colon]['content']
+            'First arg: Next token after parameter name is not a colon. Found: ' . $tokens[$colon]['content']
         );
         $this->assertSame(
             T_COLON,
             $tokens[$colon]['code'],
-            'First arg: Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (code)'
+            'First arg: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)'
         );
         $this->assertSame(
             'T_COLON',
             $tokens[$colon]['type'],
-            'First arg: Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (type)'
+            'First arg: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
 
         $true = $this->getTargetToken('/* testNamedArgWithTernary */', T_TRUE);
@@ -459,12 +459,12 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             T_INLINE_ELSE,
             $tokens[$colon]['code'],
-            'First arg ternary: Token tokenized as '.$tokens[$colon]['type'].', not T_INLINE_ELSE (code)'
+            'First arg ternary: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (code)'
         );
         $this->assertSame(
             'T_INLINE_ELSE',
             $tokens[$colon]['type'],
-            'First arg ternary: Token tokenized as '.$tokens[$colon]['type'].', not T_INLINE_ELSE (type)'
+            'First arg ternary: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (type)'
         );
 
         /*
@@ -479,17 +479,17 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             ':',
             $tokens[$colon]['content'],
-            'Second arg: Next token after parameter name is not a colon. Found: '.$tokens[$colon]['content']
+            'Second arg: Next token after parameter name is not a colon. Found: ' . $tokens[$colon]['content']
         );
         $this->assertSame(
             T_COLON,
             $tokens[$colon]['code'],
-            'Second arg: Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (code)'
+            'Second arg: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)'
         );
         $this->assertSame(
             'T_COLON',
             $tokens[$colon]['type'],
-            'Second arg: Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (type)'
+            'Second arg: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
 
         $true = $this->getTargetToken('/* testNamedArgWithTernary */', T_STRING, 'CONSTANT_A');
@@ -500,12 +500,12 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             T_INLINE_ELSE,
             $tokens[$colon]['code'],
-            'Second arg ternary: Token tokenized as '.$tokens[$colon]['type'].', not T_INLINE_ELSE (code)'
+            'Second arg ternary: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (code)'
         );
         $this->assertSame(
             'T_INLINE_ELSE',
             $tokens[$colon]['type'],
-            'Second arg ternary: Token tokenized as '.$tokens[$colon]['type'].', not T_INLINE_ELSE (type)'
+            'Second arg ternary: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (type)'
         );
 
     }//end testNamedArgWithTernary()
@@ -535,17 +535,17 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             ':',
             $tokens[$colon]['content'],
-            'Function in then: Next token after parameter name is not a colon. Found: '.$tokens[$colon]['content']
+            'Function in then: Next token after parameter name is not a colon. Found: ' . $tokens[$colon]['content']
         );
         $this->assertSame(
             T_COLON,
             $tokens[$colon]['code'],
-            'Function in then: Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (code)'
+            'Function in then: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)'
         );
         $this->assertSame(
             'T_COLON',
             $tokens[$colon]['type'],
-            'Function in then: Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (type)'
+            'Function in then: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
 
         $closeParens = $this->getTargetToken('/* testTernaryWithFunctionCallsInThenElse */', T_CLOSE_PARENTHESIS);
@@ -556,12 +556,12 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             T_INLINE_ELSE,
             $tokens[$colon]['code'],
-            'Token tokenized as '.$tokens[$colon]['type'].', not T_INLINE_ELSE (code)'
+            'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (code)'
         );
         $this->assertSame(
             'T_INLINE_ELSE',
             $tokens[$colon]['type'],
-            'Token tokenized as '.$tokens[$colon]['type'].', not T_INLINE_ELSE (type)'
+            'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (type)'
         );
 
         /*
@@ -576,17 +576,17 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             ':',
             $tokens[$colon]['content'],
-            'Function in else: Next token after parameter name is not a colon. Found: '.$tokens[$colon]['content']
+            'Function in else: Next token after parameter name is not a colon. Found: ' . $tokens[$colon]['content']
         );
         $this->assertSame(
             T_COLON,
             $tokens[$colon]['code'],
-            'Function in else: Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (code)'
+            'Function in else: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)'
         );
         $this->assertSame(
             'T_COLON',
             $tokens[$colon]['type'],
-            'Function in else: Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (type)'
+            'Function in else: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
 
     }//end testTernaryWithFunctionCallsInThenElse()
@@ -611,12 +611,12 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             T_INLINE_ELSE,
             $tokens[$colon]['code'],
-            'Token tokenized as '.$tokens[$colon]['type'].', not T_INLINE_ELSE (code)'
+            'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (code)'
         );
         $this->assertSame(
             'T_INLINE_ELSE',
             $tokens[$colon]['type'],
-            'Token tokenized as '.$tokens[$colon]['type'].', not T_INLINE_ELSE (type)'
+            'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (type)'
         );
 
     }//end testTernaryWithConstantsInThenElse()
@@ -641,12 +641,12 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             T_COLON,
             $tokens[$colon]['code'],
-            'First case: Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (code)'
+            'First case: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)'
         );
         $this->assertSame(
             'T_COLON',
             $tokens[$colon]['type'],
-            'First case: Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (type)'
+            'First case: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
 
         $label = $this->getTargetToken('/* testSwitchCaseWithClassProperty */', T_STRING, 'property');
@@ -657,12 +657,12 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             T_COLON,
             $tokens[$colon]['code'],
-            'Second case: Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (code)'
+            'Second case: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)'
         );
         $this->assertSame(
             'T_COLON',
             $tokens[$colon]['type'],
-            'Second case: Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (type)'
+            'Second case: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
 
         $default = $this->getTargetToken('/* testSwitchDefault */', T_DEFAULT);
@@ -673,12 +673,12 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             T_COLON,
             $tokens[$colon]['code'],
-            'Default case: Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (code)'
+            'Default case: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)'
         );
         $this->assertSame(
             'T_COLON',
             $tokens[$colon]['type'],
-            'Default case: Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (type)'
+            'Default case: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
 
     }//end testSwitchStatement()
@@ -700,12 +700,12 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             T_VARIABLE,
             $tokens[$label]['code'],
-            'Token tokenized as '.$tokens[$label]['type'].', not T_VARIABLE (code)'
+            'Token tokenized as ' . $tokens[$label]['type'] . ', not T_VARIABLE (code)'
         );
         $this->assertSame(
             'T_VARIABLE',
             $tokens[$label]['type'],
-            'Token tokenized as '.$tokens[$label]['type'].', not T_VARIABLE (type)'
+            'Token tokenized as ' . $tokens[$label]['type'] . ', not T_VARIABLE (type)'
         );
 
         // Get the next non-empty token.
@@ -714,17 +714,17 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             ':',
             $tokens[$colon]['content'],
-            'Next token after parameter name is not a colon. Found: '.$tokens[$colon]['content']
+            'Next token after parameter name is not a colon. Found: ' . $tokens[$colon]['content']
         );
         $this->assertSame(
             T_COLON,
             $tokens[$colon]['code'],
-            'Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (code)'
+            'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)'
         );
         $this->assertSame(
             'T_COLON',
             $tokens[$colon]['type'],
-            'Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (type)'
+            'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
 
     }//end testParseErrorVariableLabel()
@@ -816,12 +816,12 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             T_PARAM_NAME,
             $tokens[$label]['code'],
-            'Token tokenized as '.$tokens[$label]['type'].', not T_PARAM_NAME (code)'
+            'Token tokenized as ' . $tokens[$label]['type'] . ', not T_PARAM_NAME (code)'
         );
         $this->assertSame(
             'T_PARAM_NAME',
             $tokens[$label]['type'],
-            'Token tokenized as '.$tokens[$label]['type'].', not T_PARAM_NAME (type)'
+            'Token tokenized as ' . $tokens[$label]['type'] . ', not T_PARAM_NAME (type)'
         );
 
         // Get the next non-empty token.
@@ -830,17 +830,17 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             ':',
             $tokens[$colon]['content'],
-            'Next token after parameter name is not a colon. Found: '.$tokens[$colon]['content']
+            'Next token after parameter name is not a colon. Found: ' . $tokens[$colon]['content']
         );
         $this->assertSame(
             T_COLON,
             $tokens[$colon]['code'],
-            'Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (code)'
+            'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)'
         );
         $this->assertSame(
             'T_COLON',
             $tokens[$colon]['type'],
-            'Token tokenized as '.$tokens[$colon]['type'].', not T_COLON (type)'
+            'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
         );
 
     }//end testReservedKeywordsAsName()
@@ -955,7 +955,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
                 T_STRING,
                 T_GOTO_LABEL,
             ];
-            $tokenName   = 'T_'.strtoupper($keyword);
+            $tokenName   = 'T_' . strtoupper($keyword);
 
             if ($keyword === 'and') {
                 $tokensTypes[] = T_LOGICAL_AND;
@@ -971,14 +971,14 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
                 $tokensTypes[] = constant($tokenName);
             }
 
-            $data[$keyword.'FirstParam'] = [
-                '/* testReservedKeyword'.ucfirst($keyword).'1 */',
+            $data[$keyword . 'FirstParam'] = [
+                '/* testReservedKeyword' . ucfirst($keyword) . '1 */',
                 $tokensTypes,
                 $keyword,
             ];
 
-            $data[$keyword.'SecondParam'] = [
-                '/* testReservedKeyword'.ucfirst($keyword).'2 */',
+            $data[$keyword . 'SecondParam'] = [
+                '/* testReservedKeyword' . ucfirst($keyword) . '2 */',
                 $tokensTypes,
                 $keyword,
             ];

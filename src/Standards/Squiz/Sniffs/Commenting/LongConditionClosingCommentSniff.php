@@ -196,7 +196,7 @@ class LongConditionClosingCommentSniff implements Sniff
 
             $fix = $phpcsFile->addFixableError($error, $stackPtr, 'Invalid', $data);
             if ($fix === true) {
-                $phpcsFile->fixer->replaceToken($comment, $expected.$phpcsFile->eolChar);
+                $phpcsFile->fixer->replaceToken($comment, $expected . $phpcsFile->eolChar);
             }
 
             return;

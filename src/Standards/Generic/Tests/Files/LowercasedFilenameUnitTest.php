@@ -34,7 +34,7 @@ final class LowercasedFilenameUnitTest extends AbstractSniffTestCase
     {
         $testFileDir = dirname($testFileBase);
         $testFiles   = parent::getTestFiles($testFileBase);
-        $testFiles[] = $testFileDir.DIRECTORY_SEPARATOR.'lowercased_filename_unit_test.inc';
+        $testFiles[] = $testFileDir . DIRECTORY_SEPARATOR . 'lowercased_filename_unit_test.inc';
 
         return $testFiles;
 

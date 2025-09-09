@@ -38,7 +38,7 @@ final class ProcessRulesetBrokenRulesetTest extends AbstractRulesetTestCase
      */
     public function testBrokenRulesetEmptyFile()
     {
-        $standard = __DIR__.'/ProcessRulesetBrokenRulesetEmptyFileTest.xml';
+        $standard = __DIR__ . '/ProcessRulesetBrokenRulesetEmptyFileTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
         $regex  = '`^ERROR: Ruleset \S+ProcessRulesetBrokenRulesetEmptyFileTest\.xml is not valid\R';
@@ -58,7 +58,7 @@ final class ProcessRulesetBrokenRulesetTest extends AbstractRulesetTestCase
      */
     public function testBrokenRulesetSingleError()
     {
-        $standard = __DIR__.'/ProcessRulesetBrokenRulesetSingleErrorTest.xml';
+        $standard = __DIR__ . '/ProcessRulesetBrokenRulesetSingleErrorTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
         $regex  = '`^ERROR: Ruleset \S+ProcessRulesetBrokenRulesetSingleErrorTest\.xml is not valid\R';
@@ -78,7 +78,7 @@ final class ProcessRulesetBrokenRulesetTest extends AbstractRulesetTestCase
      */
     public function testBrokenRulesetMultiError()
     {
-        $standard = __DIR__.'/ProcessRulesetBrokenRulesetMultiErrorTest.xml';
+        $standard = __DIR__ . '/ProcessRulesetBrokenRulesetMultiErrorTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
         $regex  = '`^ERROR: Ruleset \S+ProcessRulesetBrokenRulesetMultiErrorTest\.xml is not valid\R';

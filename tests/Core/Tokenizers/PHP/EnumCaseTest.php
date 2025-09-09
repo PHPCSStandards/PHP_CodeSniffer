@@ -31,8 +31,8 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
         $enumCase   = $this->getTargetToken($testMarker, [T_ENUM_CASE, T_CASE]);
         $tokenArray = $tokens[$enumCase];
 
-        $this->assertSame(T_ENUM_CASE, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_ENUM_CASE (code)');
-        $this->assertSame('T_ENUM_CASE', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_ENUM_CASE (type)');
+        $this->assertSame(T_ENUM_CASE, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_ENUM_CASE (code)');
+        $this->assertSame('T_ENUM_CASE', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_ENUM_CASE (type)');
 
     }//end testEnumCases()
 
@@ -75,8 +75,8 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
         $case       = $this->getTargetToken($testMarker, [T_ENUM_CASE, T_CASE]);
         $tokenArray = $tokens[$case];
 
-        $this->assertSame(T_CASE, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_CASE (code)');
-        $this->assertSame('T_CASE', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_CASE (type)');
+        $this->assertSame(T_CASE, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_CASE (code)');
+        $this->assertSame('T_CASE', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_CASE (type)');
 
     }//end testNotEnumCases()
 
@@ -119,8 +119,8 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
         $enumCaseName = $this->getTargetToken($testMarker, [T_STRING, T_INTERFACE, T_TRAIT, T_ENUM, T_FUNCTION, T_FALSE, T_DEFAULT, T_ARRAY]);
         $tokenArray   = $tokens[$enumCaseName];
 
-        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
-        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
+        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
+        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (type)');
 
     }//end testKeywordAsEnumCaseNameShouldBeString()
 

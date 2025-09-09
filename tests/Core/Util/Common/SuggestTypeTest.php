@@ -61,7 +61,7 @@ final class SuggestTypeTest extends TestCase
     {
         $data = [];
         foreach (Common::ALLOWED_TYPES as $type) {
-            $data['Type: '.$type] = [$type];
+            $data['Type: ' . $type] = [$type];
         }
 
         return $data;
@@ -98,11 +98,11 @@ final class SuggestTypeTest extends TestCase
     {
         $data = [];
         foreach (Common::ALLOWED_TYPES as $type) {
-            $data['Mixed case: '.$type] = [
+            $data['Mixed case: ' . $type] = [
                 'varType'  => ucfirst($type),
                 'expected' => $type,
             ];
-            $data['Uppercase: '.$type]  = [
+            $data['Uppercase: ' . $type]  = [
                 'varType'  => strtoupper($type),
                 'expected' => $type,
             ];

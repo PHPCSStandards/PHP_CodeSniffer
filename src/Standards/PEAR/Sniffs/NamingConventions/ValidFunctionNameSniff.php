@@ -111,7 +111,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
             $className = $phpcsFile->getDeclarationName($currScope);
         }
 
-        $errorData = [$className.'::'.$methodName];
+        $errorData = [$className . '::' . $methodName];
 
         $methodNameLc = strtolower($methodName);
         $classNameLc  = strtolower($className);
@@ -133,7 +133,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         }
 
         // PHP4 destructors are allowed to break our rules.
-        if ($methodNameLc === '_'.$classNameLc) {
+        if ($methodNameLc === '_' . $classNameLc) {
             return;
         }
 
@@ -258,7 +258,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         // Every function must have a camel caps part, so check that first.
         if (Common::isCamelCaps($camelCapsPart, false, true, false) === false) {
             $validName        = false;
-            $newCamelCapsPart = strtolower($camelCapsPart[0]).substr($camelCapsPart, 1);
+            $newCamelCapsPart = strtolower($camelCapsPart[0]) . substr($camelCapsPart, 1);
         }
 
         if ($packagePart !== '') {
@@ -269,7 +269,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
                 if ($bit[0] !== strtoupper($bit[0])) {
                     $newPackagePart = '';
                     foreach ($nameBits as $bit) {
-                        $newPackagePart .= strtoupper($bit[0]).substr($bit, 1).'_';
+                        $newPackagePart .= strtoupper($bit[0]) . substr($bit, 1) . '_';
                     }
 
                     $validName = false;
@@ -282,7 +282,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
             if ($newPackagePart === '') {
                 $newName = $newCamelCapsPart;
             } else {
-                $newName = rtrim($newPackagePart, '_').'_'.$newCamelCapsPart;
+                $newName = rtrim($newPackagePart, '_') . '_' . $newCamelCapsPart;
             }
 
             $error  = 'Function name "%s" is invalid; consider "%s" instead';

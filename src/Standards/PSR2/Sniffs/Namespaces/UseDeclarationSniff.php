@@ -81,7 +81,7 @@ class UseDeclarationSniff implements Sniff
                         $baseUse .= ' ';
                     }
 
-                    $phpcsFile->fixer->replaceToken($next, ';'.$phpcsFile->eolChar.$baseUse);
+                    $phpcsFile->fixer->replaceToken($next, ';' . $phpcsFile->eolChar . $baseUse);
                 }
             } else {
                 $closingCurly = $phpcsFile->findNext(T_CLOSE_USE_GROUP, ($next + 1));
@@ -137,7 +137,7 @@ class UseDeclarationSniff implements Sniff
                                 if ($nextNonEmpty !== false && $tokens[$nextNonEmpty]['line'] === $tokens[$next]['line']) {
                                     $prevNonWhitespace = $phpcsFile->findPrevious(T_WHITESPACE, ($nextNonEmpty - 1), $next, true);
                                     if ($prevNonWhitespace === $next) {
-                                        $phpcsFile->fixer->replaceToken($next, ';'.$phpcsFile->eolChar);
+                                        $phpcsFile->fixer->replaceToken($next, ';' . $phpcsFile->eolChar);
                                     } else {
                                         $phpcsFile->fixer->replaceToken($next, ';');
                                         $phpcsFile->fixer->addNewline($prevNonWhitespace);

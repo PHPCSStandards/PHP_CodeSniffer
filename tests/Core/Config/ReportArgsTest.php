@@ -31,7 +31,7 @@ final class ReportArgsTest extends TestCase
             $this->markTestSkipped('This test needs CS mode to run');
         }
 
-        $config = new ConfigDouble(['--report-file='.__DIR__.'/report.txt']);
+        $config = new ConfigDouble(['--report-file=' . __DIR__ . '/report.txt']);
 
         $this->assertTrue(is_string($config->reportFile));
         $this->assertStringEndsWith('/report.txt', $config->reportFile);
@@ -53,7 +53,7 @@ final class ReportArgsTest extends TestCase
             $this->markTestSkipped('This test needs CBF mode to run');
         }
 
-        $config = new ConfigDouble(['--report-file='.__DIR__.'/report.txt']);
+        $config = new ConfigDouble(['--report-file=' . __DIR__ . '/report.txt']);
 
         $this->assertNull($config->reportFile);
         $this->assertSame(['full' => null], $config->reports);

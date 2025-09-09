@@ -34,7 +34,7 @@ function checkRequirements()
 
     // Check the PHP version.
     if (PHP_VERSION_ID < 70200) {
-        $error = 'ERROR: PHP_CodeSniffer requires PHP version 7.2.0 or greater.'.PHP_EOL;
+        $error = 'ERROR: PHP_CodeSniffer requires PHP version 7.2.0 or greater.' . PHP_EOL;
         fwrite(STDERR, $error);
         exit($exitCode);
     }
@@ -55,17 +55,17 @@ function checkRequirements()
     if (empty($missingExtensions) === false) {
         $last      = array_pop($requiredExtensions);
         $required  = implode(', ', $requiredExtensions);
-        $required .= ' and '.$last;
+        $required .= ' and ' . $last;
 
         if (count($missingExtensions) === 1) {
             $missing = $missingExtensions[0];
         } else {
             $last     = array_pop($missingExtensions);
             $missing  = implode(', ', $missingExtensions);
-            $missing .= ' and '.$last;
+            $missing .= ' and ' . $last;
         }
 
-        $error = 'ERROR: PHP_CodeSniffer requires the %s extensions to be enabled. Please enable %s.'.PHP_EOL;
+        $error = 'ERROR: PHP_CodeSniffer requires the %s extensions to be enabled. Please enable %s.' . PHP_EOL;
         fwrite(STDERR, sprintf($error, $required, $missing));
         exit($exitCode);
     }

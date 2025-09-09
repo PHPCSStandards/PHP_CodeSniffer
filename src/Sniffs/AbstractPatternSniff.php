@@ -269,7 +269,7 @@ abstract class AbstractPatternSniff implements Sniff
                 if ($pattern[$i]['type'] === 'token') {
                     if ($pattern[$i]['token'] === T_WHITESPACE) {
                         if ($tokens[$stackPtr]['code'] === T_WHITESPACE) {
-                            $found = $tokens[$stackPtr]['content'].$found;
+                            $found = $tokens[$stackPtr]['content'] . $found;
                         }
 
                         // Only check the size of the whitespace if this is not
@@ -304,7 +304,7 @@ abstract class AbstractPatternSniff implements Sniff
                             ($stackPtr - $prev - 1)
                         );
 
-                        $found = $tokens[$prev]['content'].$tokenContent.$found;
+                        $found = $tokens[$prev]['content'] . $tokenContent . $found;
 
                         if (isset($pattern[($i - 1)]) === true
                             && $pattern[($i - 1)]['type'] === 'skip'
@@ -337,12 +337,12 @@ abstract class AbstractPatternSniff implements Sniff
                     }
 
                     if ($to === 'parenthesis_opener') {
-                        $found = '{'.$found;
+                        $found = '{' . $found;
                     } else {
-                        $found = '('.$found;
+                        $found = '(' . $found;
                     }
 
-                    $found = '...'.$found;
+                    $found = '...' . $found;
 
                     // Skip to the opening token.
                     $stackPtr = ($tokens[$next][$to] - 1);
@@ -368,13 +368,13 @@ abstract class AbstractPatternSniff implements Sniff
                             ($stackPtr - $startComment + 1)
                         );
 
-                        $found    = $tokenContent.$found;
+                        $found    = $tokenContent . $found;
                         $stackPtr = ($startComment - 1);
                     }
 
                     if ($tokens[$stackPtr]['code'] === T_WHITESPACE) {
                         if ($tokens[$stackPtr]['content'] !== $phpcsFile->eolChar) {
-                            $found = $tokens[$stackPtr]['content'].$found;
+                            $found = $tokens[$stackPtr]['content'] . $found;
 
                             // This may just be an indent that comes after a newline
                             // so check the token before to make sure. If it is a newline, we
@@ -388,10 +388,10 @@ abstract class AbstractPatternSniff implements Sniff
                                 $stackPtr--;
                             }
                         } else {
-                            $found = 'EOL'.$found;
+                            $found = 'EOL' . $found;
                         }
                     } else {
-                        $found    = $tokens[$stackPtr]['content'].$found;
+                        $found    = $tokens[$stackPtr]['content'] . $found;
                         $hasError = true;
                     }//end if
 
@@ -915,7 +915,7 @@ abstract class AbstractPatternSniff implements Sniff
 
         // Don't add a space after the closing php tag as it will add a new
         // whitespace token.
-        $tokenizer = new PHP('<?php'."\n".$str.'?>', null);
+        $tokenizer = new PHP('<?php' . "\n" . $str . '?>', null);
         StatusWriter::resume();
 
         // Remove the <?php tag from the front and the end php tag from the back.

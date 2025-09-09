@@ -59,7 +59,7 @@ class Junit implements Report
                 foreach ($lineErrors as $column => $colErrors) {
                     foreach ($colErrors as $error) {
                         $out->startElement('testcase');
-                        $out->writeAttribute('name', $error['source'].' at '.$report['filename']." ($line:$column)");
+                        $out->writeAttribute('name', $error['source'] . ' at ' . $report['filename'] . " ($line:$column)");
 
                         $error['type'] = strtolower($error['type']);
                         if ($phpcsFile->config->encoding !== 'utf-8') {
@@ -122,10 +122,10 @@ class Junit implements Report
         }
 
         $failures = ($totalErrors + $totalWarnings);
-        echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
-        echo '<testsuites name="PHP_CodeSniffer '.Config::VERSION.'" errors="0" tests="'.$tests.'" failures="'.$failures.'">'.PHP_EOL;
+        echo '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
+        echo '<testsuites name="PHP_CodeSniffer ' . Config::VERSION . '" errors="0" tests="' . $tests . '" failures="' . $failures . '">' . PHP_EOL;
         echo $cachedData;
-        echo '</testsuites>'.PHP_EOL;
+        echo '</testsuites>' . PHP_EOL;
 
     }//end generate()
 

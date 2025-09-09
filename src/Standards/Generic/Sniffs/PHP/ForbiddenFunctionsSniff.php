@@ -67,7 +67,7 @@ class ForbiddenFunctionsSniff implements Sniff
 
         if ($this->patternMatch === true) {
             foreach ($this->forbiddenFunctionNames as $i => $name) {
-                $this->forbiddenFunctionNames[$i] = '/'.$name.'/i';
+                $this->forbiddenFunctionNames[$i] = '/' . $name . '/i';
             }
 
             return [
@@ -84,7 +84,7 @@ class ForbiddenFunctionsSniff implements Sniff
             if ($name === '__halt_compiler') {
                 $hasHaltCompiler = true;
             } else {
-                $string .= $name.'();';
+                $string .= $name . '();';
             }
         }
 

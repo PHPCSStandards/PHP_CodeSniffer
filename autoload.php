@@ -78,9 +78,9 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
                 }
 
                 if (strpos(__DIR__, 'phar://') !== 0
-                    && @file_exists(__DIR__.'/../../autoload.php') === true
+                    && @file_exists(__DIR__ . '/../../autoload.php') === true
                 ) {
-                    self::$composerAutoloader = include __DIR__.'/../../autoload.php';
+                    self::$composerAutoloader = include __DIR__ . '/../../autoload.php';
                     if (self::$composerAutoloader instanceof ClassLoader) {
                         self::$composerAutoloader->unregister();
                         self::$composerAutoloader->register();
@@ -99,16 +99,16 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
 
             if (substr($className, 0, 16) === 'PHP_CodeSniffer\\') {
                 if (substr($className, 0, 22) === 'PHP_CodeSniffer\Tests\\') {
-                    $isInstalled = !is_dir(__DIR__.$ds.'tests');
+                    $isInstalled = !is_dir(__DIR__ . $ds . 'tests');
                     if ($isInstalled === false) {
-                        $path = __DIR__.$ds.'tests';
+                        $path = __DIR__ . $ds . 'tests';
                     } else {
-                        $path = '@test_dir@'.$ds.'PHP_CodeSniffer'.$ds.'CodeSniffer';
+                        $path = '@test_dir@' . $ds . 'PHP_CodeSniffer' . $ds . 'CodeSniffer';
                     }
 
-                    $path .= $ds.substr(str_replace('\\', $ds, $className), 22).'.php';
+                    $path .= $ds . substr(str_replace('\\', $ds, $className), 22) . '.php';
                 } else {
-                    $path = __DIR__.$ds.'src'.$ds.substr(str_replace('\\', $ds, $className), 16).'.php';
+                    $path = __DIR__ . $ds . 'src' . $ds . substr(str_replace('\\', $ds, $className), 16) . '.php';
                 }
             }
 
@@ -125,7 +125,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
                         $className = substr($className, (strlen($nsPrefix) + 1));
                     }
 
-                    $path = $searchPath.$ds.str_replace('\\', $ds, $className).'.php';
+                    $path = $searchPath . $ds . str_replace('\\', $ds, $className) . '.php';
                     if (is_file($path) === true) {
                         break;
                     }
@@ -342,5 +342,5 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
     // Register the autoloader before any existing autoloaders to ensure
     // it gets a chance to hear about every autoload request, and record
     // the file and class name for it.
-    spl_autoload_register(__NAMESPACE__.'\Autoload::load', true, true);
+    spl_autoload_register(__NAMESPACE__ . '\Autoload::load', true, true);
 }//end if

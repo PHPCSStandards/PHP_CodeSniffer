@@ -42,11 +42,11 @@ class Emacs implements Report
                 foreach ($colErrors as $error) {
                     $message = $error['message'];
                     if ($showSources === true) {
-                        $message .= ' ('.$error['source'].')';
+                        $message .= ' (' . $error['source'] . ')';
                     }
 
                     $type = strtolower($error['type']);
-                    echo $report['filename'].':'.$line.':'.$column.': '.$type.' - '.$message.PHP_EOL;
+                    echo $report['filename'] . ':' . $line . ':' . $column . ': ' . $type . ' - ' . $message . PHP_EOL;
                 }
             }
         }

@@ -205,8 +205,8 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
         $tokens     = $this->phpcsFile->getTokens();
         $tokenArray = $tokens[$target];
 
-        $this->assertSame($expectedCode, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (code)');
-        $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (type)');
+        $this->assertSame($expectedCode, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (code)');
+        $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (type)');
 
     }//end testNotAGotoDeclaration()
 

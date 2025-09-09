@@ -257,12 +257,12 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
             $this->assertSame(
                 constant($tokenInfo['type']),
                 $tokens[$stackPtr]['code'],
-                'Token tokenized as '.Tokens::tokenName($tokens[$stackPtr]['code']).', not '.$tokenInfo['type'].' (code)'
+                'Token tokenized as ' . Tokens::tokenName($tokens[$stackPtr]['code']) . ', not ' . $tokenInfo['type'] . ' (code)'
             );
             $this->assertSame(
                 $tokenInfo['type'],
                 $tokens[$stackPtr]['type'],
-                'Token tokenized as '.$tokens[$stackPtr]['type'].', not '.$tokenInfo['type'].' (type)'
+                'Token tokenized as ' . $tokens[$stackPtr]['type'] . ', not ' . $tokenInfo['type'] . ' (type)'
             );
 
             if (isset($tokenInfo['content']) === true) {
@@ -303,7 +303,7 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
 
         return [
             'open tag + new line'                       => [
-                'testMarker'     => '/* test'.$tagtype.'TagWithNewLine */',
+                'testMarker'     => '/* test' . $tagtype . 'TagWithNewLine */',
                 'expectedTokens' => [
                     [
                         'type'       => $tokenType,
@@ -322,7 +322,7 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
                 ],
             ],
             'open tag + one space + new line'           => [
-                'testMarker'     => '/* test'.$tagtype.'TagWithOneSpaceAndNewLine */',
+                'testMarker'     => '/* test' . $tagtype . 'TagWithOneSpaceAndNewLine */',
                 'expectedTokens' => [
                     [
                         'type'       => $tokenType,
@@ -331,7 +331,7 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
                     ],
                     [
                         'type'       => 'T_WHITESPACE',
-                        'content'    => ' '."\n",
+                        'content'    => ' ' . "\n",
                         'lineOffset' => 0,
                     ],
                     [
@@ -341,7 +341,7 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
                 ],
             ],
             'open tag + trailing whitespace + new line' => [
-                'testMarker'     => '/* test'.$tagtype.'TagWithTrailingWhiteSpaceAndNewLine */',
+                'testMarker'     => '/* test' . $tagtype . 'TagWithTrailingWhiteSpaceAndNewLine */',
                 'expectedTokens' => [
                     [
                         'type'       => $tokenType,
@@ -350,7 +350,7 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
                     ],
                     [
                         'type'       => 'T_WHITESPACE',
-                        'content'    => '    '."\n",
+                        'content'    => '    ' . "\n",
                         'lineOffset' => 0,
                     ],
                     [
@@ -360,7 +360,7 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
                 ],
             ],
             'open tag, no space'                        => [
-                'testMarker'     => '/* test'.$tagtype.'TagNoSpace */',
+                'testMarker'     => '/* test' . $tagtype . 'TagNoSpace */',
                 'expectedTokens' => [
                     [
                         'type'       => $tokenType,
@@ -374,7 +374,7 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
                 ],
             ],
             'open tag, one space'                       => [
-                'testMarker'     => '/* test'.$tagtype.'TagOneSpace */',
+                'testMarker'     => '/* test' . $tagtype . 'TagOneSpace */',
                 'expectedTokens' => [
                     [
                         'type'       => $tokenType,
@@ -393,7 +393,7 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
                 ],
             ],
             'open tag, multi space'                     => [
-                'testMarker'     => '/* test'.$tagtype.'TagMultiSpace */',
+                'testMarker'     => '/* test' . $tagtype . 'TagMultiSpace */',
                 'expectedTokens' => [
                     [
                         'type'       => $tokenType,

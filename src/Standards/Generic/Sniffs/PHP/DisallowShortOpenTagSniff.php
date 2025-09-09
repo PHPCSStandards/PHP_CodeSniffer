@@ -123,7 +123,7 @@ class DisallowShortOpenTagSniff implements Sniff
             if ($closerFound !== false) {
                 $error   = 'Possible use of short open tags detected; found: %s';
                 $snippet = $this->getSnippet($content, '<?');
-                $data    = ['<?'.$snippet];
+                $data    = ['<?' . $snippet];
 
                 $phpcsFile->addWarning($error, $stackPtr, 'PossibleFound', $data);
 

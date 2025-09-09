@@ -100,7 +100,7 @@ final class AddMessageSelectiveInternalHandlingTest extends TestCase
     private function getPhpcsFile($sniffs, $exclude)
     {
         // Set up the ruleset.
-        $standard = __DIR__.'/AddMessageSelectiveInternalHandlingTest.xml';
+        $standard = __DIR__ . '/AddMessageSelectiveInternalHandlingTest.xml';
         $args     = ["--standard=$standard"];
 
         if (empty($sniffs) === false) {
@@ -114,7 +114,7 @@ final class AddMessageSelectiveInternalHandlingTest extends TestCase
         $config  = new ConfigDouble($args);
         $ruleset = new Ruleset($config);
 
-        $content   = '<?php '."\necho 'hello!';\n";
+        $content   = '<?php ' . "\necho 'hello!';\n";
         $phpcsFile = new DummyFile($content, $ruleset, $config);
         $phpcsFile->parse();
 

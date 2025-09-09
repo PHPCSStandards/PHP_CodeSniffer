@@ -62,7 +62,7 @@ class Cache
 
         $installDir     = dirname(__DIR__);
         $installDirLen  = strlen($installDir);
-        $standardDir    = $installDir.DIRECTORY_SEPARATOR.'Standards';
+        $standardDir    = $installDir . DIRECTORY_SEPARATOR . 'Standards';
         $standardDirLen = strlen($standardDir);
         foreach ($classes as $file) {
             if (substr($file, 0, $standardDirLen) !== $standardDir) {
@@ -152,7 +152,7 @@ class Cache
         // Along with the code hash, use various settings that can affect
         // the results of a run to create a new hash. This hash will be used
         // in the cache file name.
-        $rulesetHash       = md5(var_export($ruleset->ignorePatterns, true).var_export($ruleset->includePatterns, true));
+        $rulesetHash       = md5(var_export($ruleset->ignorePatterns, true) . var_export($ruleset->includePatterns, true));
         $phpExtensionsHash = md5(var_export(get_loaded_extensions(), true));
         $configData        = [
             'phpVersion'    => PHP_VERSION_ID,
@@ -239,7 +239,7 @@ class Cache
                 }
 
                 $fileHash = substr(sha1($file), 0, 12);
-                $testFile = $cacheDir.DIRECTORY_SEPARATOR."phpcs.$fileHash.$cacheHash.cache";
+                $testFile = $cacheDir . DIRECTORY_SEPARATOR . "phpcs.$fileHash.$cacheHash.cache";
                 if ($cacheFile === null) {
                     // This will be our default location if we can't find
                     // an existing file.
@@ -259,13 +259,13 @@ class Cache
 
             if ($cacheFile === null) {
                 // Unlikely, but just in case $paths is empty for some reason.
-                $cacheFile = $cacheDir.DIRECTORY_SEPARATOR."phpcs.$cacheHash.cache";
+                $cacheFile = $cacheDir . DIRECTORY_SEPARATOR . "phpcs.$cacheHash.cache";
             }
         }//end if
 
         self::$path = $cacheFile;
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
-            StatusWriter::write('=> Using cache file: '.self::$path, 1);
+            StatusWriter::write('=> Using cache file: ' . self::$path, 1);
         }
 
         if (file_exists(self::$path) === true) {

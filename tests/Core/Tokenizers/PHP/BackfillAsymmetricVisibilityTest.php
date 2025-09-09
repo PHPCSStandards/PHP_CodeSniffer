@@ -47,17 +47,17 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
         $this->assertSame(
             $testType,
             $tokenArray['type'],
-            'Token tokenized as '.$tokenArray['type'].' (type)'
+            'Token tokenized as ' . $tokenArray['type'] . ' (type)'
         );
         $this->assertSame(
             constant($testType),
             $tokenArray['code'],
-            'Token tokenized as '.$tokenArray['type'].' (code)'
+            'Token tokenized as ' . $tokenArray['type'] . ' (code)'
         );
         $this->assertSame(
             $testContent,
             $tokenArray['content'],
-            'Token tokenized as '.$tokenArray['type'].' (content)'
+            'Token tokenized as ' . $tokenArray['type'] . ' (content)'
         );
 
     }//end testAsymmetricVisibility()
@@ -226,12 +226,12 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
         $this->assertSame(
             $testType,
             $tokenArray['type'],
-            'Token tokenized as '.$tokenArray['type'].' (type)'
+            'Token tokenized as ' . $tokenArray['type'] . ' (type)'
         );
         $this->assertSame(
             constant($testType),
             $tokenArray['code'],
-            'Token tokenized as '.$tokenArray['type'].' (code)'
+            'Token tokenized as ' . $tokenArray['type'] . ' (code)'
         );
 
     }//end testNotAsymmetricVisibility()

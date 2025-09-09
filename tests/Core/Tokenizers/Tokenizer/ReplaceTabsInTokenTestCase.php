@@ -37,10 +37,10 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
      */
     public static function setUpBeforeClass(): void
     {
-        $relativeCN         = str_replace(__NAMESPACE__.'\\', '', static::class);
-        self::$caseFileName = __DIR__.DIRECTORY_SEPARATOR.$relativeCN.'.inc';
+        $relativeCN         = str_replace(__NAMESPACE__ . '\\', '', static::class);
+        self::$caseFileName = __DIR__ . DIRECTORY_SEPARATOR . $relativeCN . '.inc';
 
-        $baseFileName = realpath(__DIR__.'/ReplaceTabsInTokenTest.inc');
+        $baseFileName = realpath(__DIR__ . '/ReplaceTabsInTokenTest.inc');
         if (is_string($baseFileName) === false) {
             throw new Exception('Base test case file "ReplaceTabsInTokenTest.inc" not found');
         }

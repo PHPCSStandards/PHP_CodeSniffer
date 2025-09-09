@@ -36,7 +36,7 @@ class Performance implements Report
     {
         $times = $phpcsFile->getListenerTimes();
         foreach ($times as $sniff => $time) {
-            echo "$sniff>>$time".PHP_EOL;
+            echo "$sniff>>$time" . PHP_EOL;
         }
 
         return true;
@@ -112,10 +112,10 @@ class Performance implements Report
 
         arsort($totalTimes);
 
-        echo PHP_EOL."\033[1m".'PHP CODE SNIFFER SNIFF PERFORMANCE REPORT'."\033[0m".PHP_EOL;
-        echo str_repeat('-', $width).PHP_EOL;
-        echo "\033[1m".'SNIFF'.str_repeat(' ', ($width - 31)).'TIME TAKEN (SECS)     (%)'."\033[0m".PHP_EOL;
-        echo str_repeat('-', $width).PHP_EOL;
+        echo PHP_EOL . "\033[1m" . 'PHP CODE SNIFFER SNIFF PERFORMANCE REPORT' . "\033[0m" . PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
+        echo "\033[1m" . 'SNIFF' . str_repeat(' ', ($width - 31)) . 'TIME TAKEN (SECS)     (%)' . "\033[0m" . PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
 
         // Mark sniffs which take more than twice as long as the average processing time per sniff
         // in orange and when they take more than three times as long as the average,
@@ -124,10 +124,10 @@ class Performance implements Report
         $doubleAvgSniffTime = (2 * $avgSniffTime);
         $tripleAvgSniffTime = (3 * $avgSniffTime);
 
-        $format        = "%- {$maxNameWidth}.{$maxNameWidth}s % 12.6f (% 5.1f %%)".PHP_EOL;
-        $formatBold    = "\033[1m%- {$maxNameWidth}.{$maxNameWidth}s % 12.6f (% 5.1f %%)\033[0m".PHP_EOL;
-        $formatWarning = "%- {$maxNameWidth}.{$maxNameWidth}s \033[33m% 12.6f (% 5.1f %%)\033[0m".PHP_EOL;
-        $formatError   = "%- {$maxNameWidth}.{$maxNameWidth}s \033[31m% 12.6f (% 5.1f %%)\033[0m".PHP_EOL;
+        $format        = "%- {$maxNameWidth}.{$maxNameWidth}s % 12.6f (% 5.1f %%)" . PHP_EOL;
+        $formatBold    = "\033[1m%- {$maxNameWidth}.{$maxNameWidth}s % 12.6f (% 5.1f %%)\033[0m" . PHP_EOL;
+        $formatWarning = "%- {$maxNameWidth}.{$maxNameWidth}s \033[33m% 12.6f (% 5.1f %%)\033[0m" . PHP_EOL;
+        $formatError   = "%- {$maxNameWidth}.{$maxNameWidth}s \033[31m% 12.6f (% 5.1f %%)\033[0m" . PHP_EOL;
 
         foreach ($totalTimes as $sniff => $time) {
             $percent = round((($time / $totalSniffTime) * 100), 1);
@@ -141,19 +141,19 @@ class Performance implements Report
             }
         }
 
-        echo str_repeat('-', $width).PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
         printf($formatBold, 'TOTAL SNIFF PROCESSING TIME', $totalSniffTime, 100);
 
         $runTime   = (Timing::getDuration() / 1000);
         $phpcsTime = ($runTime - $totalSniffTime);
 
-        echo PHP_EOL.str_repeat('-', $width).PHP_EOL;
+        echo PHP_EOL . str_repeat('-', $width) . PHP_EOL;
         printf($format, 'Time taken by sniffs', $totalSniffTime, round((($totalSniffTime / $runTime) * 100), 1));
         printf($format, 'Time taken by PHPCS runner', $phpcsTime, round((($phpcsTime / $runTime) * 100), 1));
 
-        echo str_repeat('-', $width).PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
         printf($formatBold, 'TOTAL RUN TIME', $runTime, 100);
-        echo str_repeat('-', $width).PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
 
     }//end generate()
 

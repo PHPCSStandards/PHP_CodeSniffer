@@ -33,16 +33,16 @@ final class DNFTypesParseError1Test extends AbstractTokenizerTestCase
         $token   = $tokens[$openPtr];
 
         // Verify that the open parenthesis is tokenized as a normal parenthesis.
-        $this->assertSame(T_OPEN_PARENTHESIS, $token['code'], 'Token tokenized as '.$token['type'].', not T_OPEN_PARENTHESIS (code)');
-        $this->assertSame('T_OPEN_PARENTHESIS', $token['type'], 'Token tokenized as '.$token['type'].', not T_OPEN_PARENTHESIS (type)');
+        $this->assertSame(T_OPEN_PARENTHESIS, $token['code'], 'Token tokenized as ' . $token['type'] . ', not T_OPEN_PARENTHESIS (code)');
+        $this->assertSame('T_OPEN_PARENTHESIS', $token['type'], 'Token tokenized as ' . $token['type'] . ', not T_OPEN_PARENTHESIS (type)');
 
         // Verify that the type union is still tokenized as T_BITWISE_OR as the type declaration
         // is not recognized as a valid type declaration.
         $unionPtr = $this->getTargetToken($testMarker, [T_BITWISE_OR, T_TYPE_UNION], '|');
         $token    = $tokens[$unionPtr];
 
-        $this->assertSame(T_BITWISE_OR, $token['code'], 'Token tokenized as '.$token['type'].', not T_BITWISE_OR (code)');
-        $this->assertSame('T_BITWISE_OR', $token['type'], 'Token tokenized as '.$token['type'].', not T_BITWISE_OR (type)');
+        $this->assertSame(T_BITWISE_OR, $token['code'], 'Token tokenized as ' . $token['type'] . ', not T_BITWISE_OR (code)');
+        $this->assertSame('T_BITWISE_OR', $token['type'], 'Token tokenized as ' . $token['type'] . ', not T_BITWISE_OR (type)');
 
     }//end testBrokenDNFTypeCantEndOnOpenParenthesis()
 

@@ -40,19 +40,19 @@ final class SniffsExcludeArgsTest extends TestCase
             $cmd = 'phpcbf';
         }
 
-        $message  = 'ERROR: The --'.$argument.' option only supports sniff codes.'.PHP_EOL;
-        $message .= 'Sniff codes are in the form "Standard.Category.Sniff".'.PHP_EOL;
+        $message  = 'ERROR: The --' . $argument . ' option only supports sniff codes.' . PHP_EOL;
+        $message .= 'Sniff codes are in the form "Standard.Category.Sniff".' . PHP_EOL;
         $message .= PHP_EOL;
-        $message .= 'The following problems were detected:'.PHP_EOL;
-        $message .= '* '.implode(PHP_EOL.'* ', $errors).PHP_EOL;
+        $message .= 'The following problems were detected:' . PHP_EOL;
+        $message .= '* ' . implode(PHP_EOL . '* ', $errors) . PHP_EOL;
 
         if ($suggestion !== null) {
             $message .= PHP_EOL;
-            $message .= "Perhaps try --$argument=\"$suggestion\" instead.".PHP_EOL;
+            $message .= "Perhaps try --$argument=\"$suggestion\" instead." . PHP_EOL;
         }
 
         $message .= PHP_EOL;
-        $message .= "Run \"{$cmd} --help\" for usage information".PHP_EOL;
+        $message .= "Run \"{$cmd} --help\" for usage information" . PHP_EOL;
         $message .= PHP_EOL;
 
         $this->expectException(DeepExitException::class);
@@ -79,7 +79,7 @@ final class SniffsExcludeArgsTest extends TestCase
 
         foreach ($arguments as $argument) {
             // Empty values are errors.
-            $data[$argument.'; empty string']     = [
+            $data[$argument . '; empty string']     = [
                 'argument'   => $argument,
                 'value'      => '',
                 'errors'     => [
@@ -87,7 +87,7 @@ final class SniffsExcludeArgsTest extends TestCase
                 ],
                 'suggestion' => null,
             ];
-            $data[$argument.'; one comma alone']  = [
+            $data[$argument . '; one comma alone']  = [
                 'argument'   => $argument,
                 'value'      => ',',
                 'errors'     => [
@@ -95,7 +95,7 @@ final class SniffsExcludeArgsTest extends TestCase
                 ],
                 'suggestion' => null,
             ];
-            $data[$argument.'; two commas alone'] = [
+            $data[$argument . '; two commas alone'] = [
                 'argument'   => $argument,
                 'value'      => ',,',
                 'errors'     => [
@@ -105,7 +105,7 @@ final class SniffsExcludeArgsTest extends TestCase
             ];
 
             // A standard is not a valid sniff.
-            $data[$argument.'; standard'] = [
+            $data[$argument . '; standard'] = [
                 'argument'   => $argument,
                 'value'      => 'Standard',
                 'errors'     => [
@@ -115,7 +115,7 @@ final class SniffsExcludeArgsTest extends TestCase
             ];
 
             // A category is not a valid sniff.
-            $data[$argument.'; category'] = [
+            $data[$argument . '; category'] = [
                 'argument'   => $argument,
                 'value'      => 'Standard.Category',
                 'errors'     => [
@@ -125,7 +125,7 @@ final class SniffsExcludeArgsTest extends TestCase
             ];
 
             // An error-code is not a valid sniff.
-            $data[$argument.'; error-code'] = [
+            $data[$argument . '; error-code'] = [
                 'argument'   => $argument,
                 'value'      => 'Standard.Category.Sniff.Code',
                 'errors'     => [
@@ -135,7 +135,7 @@ final class SniffsExcludeArgsTest extends TestCase
             ];
 
             // Too many dots.
-            $data[$argument.'; too many dots'] = [
+            $data[$argument . '; too many dots'] = [
                 'argument'   => $argument,
                 'value'      => 'Standard.Category.Sniff.Code.Extra',
                 'errors'     => [
@@ -145,7 +145,7 @@ final class SniffsExcludeArgsTest extends TestCase
             ];
 
             // All errors are reported in one go.
-            $data[$argument.'; two errors'] = [
+            $data[$argument . '; two errors'] = [
                 'argument'   => $argument,
                 'value'      => 'StandardOne,StandardTwo',
                 'errors'     => [
@@ -156,7 +156,7 @@ final class SniffsExcludeArgsTest extends TestCase
             ];
 
             // Order of valid/invalid does not impact error reporting.
-            $data[$argument.'; valid followed by invalid'] = [
+            $data[$argument . '; valid followed by invalid'] = [
                 'argument'   => $argument,
                 'value'      => 'StandardOne.Category.Sniff,StandardTwo.Category',
                 'errors'     => [
@@ -164,7 +164,7 @@ final class SniffsExcludeArgsTest extends TestCase
                 ],
                 'suggestion' => 'StandardOne.Category.Sniff',
             ];
-            $data[$argument.'; invalid followed by valid'] = [
+            $data[$argument . '; invalid followed by valid'] = [
                 'argument'   => $argument,
                 'value'      => 'StandardOne.Category,StandardTwo.Category.Sniff',
                 'errors'     => [
@@ -174,7 +174,7 @@ final class SniffsExcludeArgsTest extends TestCase
             ];
 
             // Different cases are reported individually (in duplicate), but suggestions are reduced.
-            $data[$argument.'; case mismatch - different errors'] = [
+            $data[$argument . '; case mismatch - different errors'] = [
                 'argument'   => $argument,
                 'value'      => 'Standard.Category.Sniff.Code,sTANDARD.cATEGORY.sNIFF.cODE.eXTRA',
                 'errors'     => [
@@ -183,7 +183,7 @@ final class SniffsExcludeArgsTest extends TestCase
                 ],
                 'suggestion' => 'Standard.Category.Sniff',
             ];
-            $data[$argument.'; case mismatch - same error']       = [
+            $data[$argument . '; case mismatch - same error']       = [
                 'argument'   => $argument,
                 'value'      => 'sTANDARD.cATEGORY.sNIFF.cODE,Standard.Category.Sniff.Code',
                 'errors'     => [
@@ -233,12 +233,12 @@ final class SniffsExcludeArgsTest extends TestCase
         $data      = [];
 
         foreach ($arguments as $argument) {
-            $data[$argument.'; one valid sniff']  = [
+            $data[$argument . '; one valid sniff']  = [
                 'argument' => $argument,
                 'value'    => 'Standard.Category.Sniff',
                 'result'   => ['Standard.Category.Sniff'],
             ];
-            $data[$argument.'; two valid sniffs'] = [
+            $data[$argument . '; two valid sniffs'] = [
                 'argument' => $argument,
                 'value'    => 'StandardOne.Category.Sniff,StandardTwo.Category.Sniff',
                 'result'   => [
@@ -248,12 +248,12 @@ final class SniffsExcludeArgsTest extends TestCase
             ];
 
             // Rogue commas are quietly ignored.
-            $data[$argument.'; trailing comma'] = [
+            $data[$argument . '; trailing comma'] = [
                 'argument' => $argument,
                 'value'    => 'Standard.Category.Sniff,',
                 'result'   => ['Standard.Category.Sniff'],
             ];
-            $data[$argument.'; double comma between sniffs'] = [
+            $data[$argument . '; double comma between sniffs'] = [
                 'argument' => $argument,
                 'value'    => 'StandardOne.Category.Sniff,,StandardTwo.Category.Sniff',
                 'result'   => [
@@ -263,12 +263,12 @@ final class SniffsExcludeArgsTest extends TestCase
             ];
 
             // Duplicates are reduced silently.
-            $data[$argument.'; one valid sniff twice'] = [
+            $data[$argument . '; one valid sniff twice'] = [
                 'argument' => $argument,
                 'value'    => 'Standard.Category.Sniff,Standard.Category.Sniff',
                 'result'   => ['Standard.Category.Sniff'],
             ];
-            $data[$argument.'; one valid sniff in different cases'] = [
+            $data[$argument . '; one valid sniff in different cases'] = [
                 'argument' => $argument,
                 'value'    => 'Standard.Category.Sniff, standard.category.sniff, STANDARD.CATEGORY.SNIFF',
                 'result'   => ['Standard.Category.Sniff'],

@@ -121,7 +121,7 @@ final class TimingTest extends TestCase
         Timing::printRunTime();
         Timing::printRunTime();
 
-        $regex = '`^Time: [0-9]+ms; Memory: [0-9\.]+MB'.PHP_EOL.'$`';
+        $regex = '`^Time: [0-9]+ms; Memory: [0-9\.]+MB' . PHP_EOL . '$`';
         $this->assertStderrOutputMatchesRegex($regex);
 
     }//end testTimeIsPrintedOnlyOnce()
@@ -142,7 +142,7 @@ final class TimingTest extends TestCase
         Timing::printRunTime(true);
         Timing::printRunTime(true);
 
-        $regex = '`^(Time: [0-9]+ms; Memory: [0-9\.]+MB'.PHP_EOL.'){3}$`';
+        $regex = '`^(Time: [0-9]+ms; Memory: [0-9\.]+MB' . PHP_EOL . '){3}$`';
         $this->assertStderrOutputMatchesRegex($regex);
 
     }//end testTimeIsPrintedMultipleTimesOnlyIfForced()

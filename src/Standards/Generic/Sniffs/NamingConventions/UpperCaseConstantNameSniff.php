@@ -138,8 +138,8 @@ class UpperCaseConstantNameSniff implements Sniff
 
             $error = 'Constants must be uppercase; expected %s but found %s';
             $data  = [
-                $prefix.strtoupper($constName),
-                $prefix.$constName,
+                $prefix . strtoupper($constName),
+                $prefix . $constName,
             ];
             $phpcsFile->addError($error, $constPtr, 'ConstantNotUpperCase', $data);
         } else {

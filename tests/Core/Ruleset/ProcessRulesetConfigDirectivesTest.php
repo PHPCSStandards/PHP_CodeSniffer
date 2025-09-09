@@ -25,7 +25,7 @@ final class ProcessRulesetConfigDirectivesTest extends TestCase
      *
      * @var string
      */
-    private const FIXTURE_DIR = __DIR__.'/Fixtures/ProcessRulesetConfigDirectivesTest';
+    private const FIXTURE_DIR = __DIR__ . '/Fixtures/ProcessRulesetConfigDirectivesTest';
 
     /**
      * The Config object.
@@ -44,8 +44,8 @@ final class ProcessRulesetConfigDirectivesTest extends TestCase
     {
         if (isset(self::$config) === false) {
             // Set up the ruleset.
-            $standardA    = self::FIXTURE_DIR.'/ProcessRulesetConfigDirectivesATest.xml';
-            $standardB    = self::FIXTURE_DIR.'/ProcessRulesetConfigDirectivesBTest.xml';
+            $standardA    = self::FIXTURE_DIR . '/ProcessRulesetConfigDirectivesATest.xml';
+            $standardB    = self::FIXTURE_DIR . '/ProcessRulesetConfigDirectivesBTest.xml';
             self::$config = new ConfigDouble(["--standard=$standardA,$standardB"]);
             new Ruleset(self::$config);
         }

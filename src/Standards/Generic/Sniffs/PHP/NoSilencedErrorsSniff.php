@@ -61,7 +61,7 @@ class NoSilencedErrorsSniff implements Sniff
         }
 
         $found = $phpcsFile->getTokensAsString($stackPtr, $contextLength);
-        $found = str_replace(["\t", "\n", "\r"], ' ', $found).'...';
+        $found = str_replace(["\t", "\n", "\r"], ' ', $found) . '...';
 
         if ($this->error === true) {
             $error = 'Silencing errors is forbidden; found: %s';

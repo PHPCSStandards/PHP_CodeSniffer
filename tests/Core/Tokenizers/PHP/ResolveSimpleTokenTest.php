@@ -57,7 +57,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             T_CLOSE_CURLY_BRACKET,
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_SWITCH);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_SWITCH);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
@@ -80,7 +80,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             T_SEMICOLON,
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_STRING);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_STRING);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
@@ -106,7 +106,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             T_SEMICOLON,
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_VARIABLE);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_VARIABLE);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
@@ -126,7 +126,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             T_SEMICOLON,
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_CONSTANT_ENCAPSED_STRING);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_CONSTANT_ENCAPSED_STRING);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
@@ -156,7 +156,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             T_SEMICOLON,
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_VARIABLE);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_VARIABLE);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
@@ -180,7 +180,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             T_SEMICOLON,
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_VARIABLE);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_VARIABLE);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
@@ -208,7 +208,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             T_SEMICOLON,
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_VARIABLE);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_VARIABLE);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
@@ -233,7 +233,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             T_CLOSE_CURLY_BRACKET,
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_CATCH);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_CATCH);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
@@ -253,7 +253,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             T_SEMICOLON,
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_LNUMBER);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_LNUMBER);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
@@ -273,7 +273,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             T_SEMICOLON,
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_LNUMBER);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_LNUMBER);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
@@ -293,7 +293,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             T_SEMICOLON,
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_EQUAL);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_EQUAL);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
@@ -315,7 +315,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             T_SEMICOLON,
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_VARIABLE);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_VARIABLE);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
@@ -337,7 +337,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             T_SEMICOLON,
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_EQUAL);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_EQUAL);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
@@ -359,7 +359,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             T_SEMICOLON,
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_ECHO);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_ECHO);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
@@ -380,7 +380,7 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             T_SEMICOLON,
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_EQUAL);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_EQUAL);
 
         $this->checkTokenSequence(($target + 1), $expectedSequence);
 
@@ -413,13 +413,13 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             $this->assertSame(
                 $expectedSequence[$sequenceKey],
                 $tokens[$i]['code'],
-                'Token tokenized as '.Tokens::tokenName($tokens[$i]['code']).', not '.$expectedTokenName.' (code)'
+                'Token tokenized as ' . Tokens::tokenName($tokens[$i]['code']) . ', not ' . $expectedTokenName . ' (code)'
             );
 
             $this->assertSame(
                 $expectedTokenName,
                 $tokens[$i]['type'],
-                'Token tokenized as '.$tokens[$i]['type'].', not '.$expectedTokenName.' (type)'
+                'Token tokenized as ' . $tokens[$i]['type'] . ', not ' . $expectedTokenName . ' (type)'
             );
 
             ++$sequenceKey;

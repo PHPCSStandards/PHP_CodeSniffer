@@ -53,7 +53,7 @@ class DisallowAlternativePHPTagsSniff implements Sniff
         if (preg_match('`(<script (?:[^>]+)?language=[\'"]?php[\'"]?(?:[^>]+)?>)`i', $content, $match) === 1) {
             $error   = 'Script style opening tag used; expected "<?php" but found "%s"';
             $snippet = $this->getSnippet($content, $match[1]);
-            $data    = [$match[1].$snippet];
+            $data    = [$match[1] . $snippet];
 
             $phpcsFile->addError($error, $stackPtr, 'ScriptOpenTagFound', $data);
             return;
@@ -63,13 +63,13 @@ class DisallowAlternativePHPTagsSniff implements Sniff
         if (strpos($content, '<%=') !== false) {
             $error   = 'Possible use of ASP style short opening tags detected; found: %s';
             $snippet = $this->getSnippet($content, '<%=');
-            $data    = ['<%='.$snippet];
+            $data    = ['<%=' . $snippet];
 
             $phpcsFile->addWarning($error, $stackPtr, 'MaybeASPShortOpenTagFound', $data);
         } else if (strpos($content, '<%') !== false) {
             $error   = 'Possible use of ASP style opening tags detected; found: %s';
             $snippet = $this->getSnippet($content, '<%');
-            $data    = ['<%'.$snippet];
+            $data    = ['<%' . $snippet];
 
             $phpcsFile->addWarning($error, $stackPtr, 'MaybeASPOpenTagFound', $data);
         }

@@ -70,7 +70,7 @@ class Markdown extends Generator
     {
         $standard = $this->ruleset->name;
 
-        return "# $standard Coding Standard".PHP_EOL;
+        return "# $standard Coding Standard" . PHP_EOL;
 
     }//end getFormattedHeader()
 
@@ -88,8 +88,8 @@ class Markdown extends Generator
         // Turn off errors so we don't get timezone warnings if people
         // don't have their timezone set.
         $errorLevel = error_reporting(0);
-        $output     = PHP_EOL.'Documentation generated on '.date('r');
-        $output    .= ' by [PHP_CodeSniffer '.Config::VERSION.'](https://github.com/PHPCSStandards/PHP_CodeSniffer)'.PHP_EOL;
+        $output     = PHP_EOL . 'Documentation generated on ' . date('r');
+        $output    .= ' by [PHP_CodeSniffer ' . Config::VERSION . '](https://github.com/PHPCSStandards/PHP_CodeSniffer)' . PHP_EOL;
         error_reporting($errorLevel);
 
         return $output;
@@ -119,7 +119,7 @@ class Markdown extends Generator
 
         if (trim($content) !== '') {
             $title = $this->getTitle($doc);
-            echo PHP_EOL."## $title".PHP_EOL.PHP_EOL;
+            echo PHP_EOL . "## $title" . PHP_EOL . PHP_EOL;
             echo $content;
         }
 
@@ -168,11 +168,11 @@ class Markdown extends Generator
                 $lines[] = $currentLine;
             } else {
                 // Ensure that line breaks are respected in markdown.
-                $lines[] = $currentLine.'  ';
+                $lines[] = $currentLine . '  ';
             }
         }
 
-        return implode(PHP_EOL, $lines).PHP_EOL;
+        return implode(PHP_EOL, $lines) . PHP_EOL;
 
     }//end getFormattedTextBlock()
 
@@ -206,30 +206,30 @@ class Markdown extends Generator
 
         $titleRow = '';
         if ($firstTitle !== '' || $secondTitle !== '') {
-            $titleRow .= '   <tr>'.PHP_EOL;
-            $titleRow .= "    <th>$firstTitle</th>".PHP_EOL;
-            $titleRow .= "    <th>$secondTitle</th>".PHP_EOL;
-            $titleRow .= '   </tr>'.PHP_EOL;
+            $titleRow .= '   <tr>' . PHP_EOL;
+            $titleRow .= "    <th>$firstTitle</th>" . PHP_EOL;
+            $titleRow .= "    <th>$secondTitle</th>" . PHP_EOL;
+            $titleRow .= '   </tr>' . PHP_EOL;
         }
 
         $codeRow = '';
         if ($first !== '' || $second !== '') {
-            $codeRow .= '   <tr>'.PHP_EOL;
-            $codeRow .= '<td>'.PHP_EOL.PHP_EOL;
-            $codeRow .= "    $first".PHP_EOL.PHP_EOL;
-            $codeRow .= '</td>'.PHP_EOL;
-            $codeRow .= '<td>'.PHP_EOL.PHP_EOL;
-            $codeRow .= "    $second".PHP_EOL.PHP_EOL;
-            $codeRow .= '</td>'.PHP_EOL;
-            $codeRow .= '   </tr>'.PHP_EOL;
+            $codeRow .= '   <tr>' . PHP_EOL;
+            $codeRow .= '<td>' . PHP_EOL . PHP_EOL;
+            $codeRow .= "    $first" . PHP_EOL . PHP_EOL;
+            $codeRow .= '</td>' . PHP_EOL;
+            $codeRow .= '<td>' . PHP_EOL . PHP_EOL;
+            $codeRow .= "    $second" . PHP_EOL . PHP_EOL;
+            $codeRow .= '</td>' . PHP_EOL;
+            $codeRow .= '   </tr>' . PHP_EOL;
         }
 
         $output = '';
         if ($titleRow !== '' || $codeRow !== '') {
-            $output .= '  <table>'.PHP_EOL;
+            $output .= '  <table>' . PHP_EOL;
             $output .= $titleRow;
             $output .= $codeRow;
-            $output .= '  </table>'.PHP_EOL;
+            $output .= '  </table>' . PHP_EOL;
         }
 
         return $output;
@@ -267,7 +267,7 @@ class Markdown extends Generator
     {
         $code = (string) $codeElm->nodeValue;
         $code = trim($code);
-        $code = str_replace("\n", PHP_EOL.'    ', $code);
+        $code = str_replace("\n", PHP_EOL . '    ', $code);
         $code = str_replace(['<em>', '</em>'], '', $code);
 
         return $code;

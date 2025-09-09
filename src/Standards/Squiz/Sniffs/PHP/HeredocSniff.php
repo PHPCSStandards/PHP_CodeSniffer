@@ -54,7 +54,7 @@ class HeredocSniff implements Sniff
         $data[] = trim($tokens[$stackPtr]['content']);
 
         $error = 'Use of %s syntax (%s) is not allowed; use standard strings or inline HTML instead';
-        $phpcsFile->addError($error, $stackPtr, $codePrefix.'NotAllowed', $data);
+        $phpcsFile->addError($error, $stackPtr, $codePrefix . 'NotAllowed', $data);
 
     }//end process()
 

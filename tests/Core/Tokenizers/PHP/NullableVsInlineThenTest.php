@@ -34,8 +34,8 @@ final class NullableVsInlineThenTest extends AbstractTokenizerTestCase
         $target     = $this->getTargetToken($testMarker, [T_NULLABLE, T_INLINE_THEN]);
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_NULLABLE, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_NULLABLE (code)');
-        $this->assertSame('T_NULLABLE', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_NULLABLE (type)');
+        $this->assertSame(T_NULLABLE, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_NULLABLE (code)');
+        $this->assertSame('T_NULLABLE', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_NULLABLE (type)');
 
     }//end testNullable()
 
@@ -80,8 +80,8 @@ final class NullableVsInlineThenTest extends AbstractTokenizerTestCase
         $target     = $this->getTargetToken($testMarker, [T_NULLABLE, T_INLINE_THEN]);
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_INLINE_THEN, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_INLINE_THEN (code)');
-        $this->assertSame('T_INLINE_THEN', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_INLINE_THEN (type)');
+        $this->assertSame(T_INLINE_THEN, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_INLINE_THEN (code)');
+        $this->assertSame('T_INLINE_THEN', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_INLINE_THEN (type)');
 
     }//end testInlineThen()
 

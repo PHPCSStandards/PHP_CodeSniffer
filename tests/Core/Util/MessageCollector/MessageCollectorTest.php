@@ -224,27 +224,27 @@ final class MessageCollectorTest extends AbstractWriterTestCase
                 'messages' => [
                     'This is a warning' => MessageCollector::WARNING,
                 ],
-                'expected' => 'WARNING: This is a warning'.PHP_EOL.PHP_EOL,
+                'expected' => 'WARNING: This is a warning' . PHP_EOL . PHP_EOL,
             ],
             'One notice'            => [
                 'messages' => [
                     'This is a notice' => MessageCollector::NOTICE,
                 ],
-                'expected' => 'NOTICE: This is a notice'.PHP_EOL.PHP_EOL,
+                'expected' => 'NOTICE: This is a notice' . PHP_EOL . PHP_EOL,
             ],
             'One deprecation'       => [
                 'messages' => [
                     'This is a deprecation' => MessageCollector::DEPRECATED,
                 ],
-                'expected' => 'DEPRECATED: This is a deprecation'.PHP_EOL.PHP_EOL,
+                'expected' => 'DEPRECATED: This is a deprecation' . PHP_EOL . PHP_EOL,
             ],
             'Multiple warnings'     => [
                 'messages' => [
                     'First warning'  => MessageCollector::WARNING,
                     'Second warning' => MessageCollector::WARNING,
                 ],
-                'expected' => 'WARNING: First warning'.PHP_EOL
-                    .'WARNING: Second warning'.PHP_EOL.PHP_EOL,
+                'expected' => 'WARNING: First warning' . PHP_EOL
+                    . 'WARNING: Second warning' . PHP_EOL . PHP_EOL,
             ],
             'Multiple notices'      => [
                 'messages' => [
@@ -252,17 +252,17 @@ final class MessageCollectorTest extends AbstractWriterTestCase
                     'Second notice' => MessageCollector::NOTICE,
                     'Third notice'  => MessageCollector::NOTICE,
                 ],
-                'expected' => 'NOTICE: First notice'.PHP_EOL
-                    .'NOTICE: Second notice'.PHP_EOL
-                    .'NOTICE: Third notice'.PHP_EOL.PHP_EOL,
+                'expected' => 'NOTICE: First notice' . PHP_EOL
+                    . 'NOTICE: Second notice' . PHP_EOL
+                    . 'NOTICE: Third notice' . PHP_EOL . PHP_EOL,
             ],
             'Multiple deprecations' => [
                 'messages' => [
                     'First deprecation'  => MessageCollector::DEPRECATED,
                     'Second deprecation' => MessageCollector::DEPRECATED,
                 ],
-                'expected' => 'DEPRECATED: First deprecation'.PHP_EOL
-                    .'DEPRECATED: Second deprecation'.PHP_EOL.PHP_EOL,
+                'expected' => 'DEPRECATED: First deprecation' . PHP_EOL
+                    . 'DEPRECATED: Second deprecation' . PHP_EOL . PHP_EOL,
             ],
             'All together now'      => [
                 'messages' => [
@@ -271,10 +271,10 @@ final class MessageCollectorTest extends AbstractWriterTestCase
                     'Third notice'      => MessageCollector::NOTICE,
                     'Fourth warning'    => MessageCollector::WARNING,
                 ],
-                'expected' => 'WARNING: Second warning'.PHP_EOL
-                    .'WARNING: Fourth warning'.PHP_EOL
-                    .'NOTICE: Third notice'.PHP_EOL
-                    .'DEPRECATED: First deprecation'.PHP_EOL.PHP_EOL,
+                'expected' => 'WARNING: Second warning' . PHP_EOL
+                    . 'WARNING: Fourth warning' . PHP_EOL
+                    . 'NOTICE: Third notice' . PHP_EOL
+                    . 'DEPRECATED: First deprecation' . PHP_EOL . PHP_EOL,
             ],
         ];
         // phpcs:enable
@@ -325,15 +325,15 @@ final class MessageCollectorTest extends AbstractWriterTestCase
                 'messages' => [
                     'This is an error' => MessageCollector::ERROR,
                 ],
-                'expected' => 'ERROR: This is an error'.PHP_EOL.PHP_EOL,
+                'expected' => 'ERROR: This is an error' . PHP_EOL . PHP_EOL,
             ],
             'Multiple errors'                         => [
                 'messages' => [
                     'First error'  => MessageCollector::ERROR,
                     'Second error' => MessageCollector::ERROR,
                 ],
-                'expected' => 'ERROR: First error'.PHP_EOL
-                    .'ERROR: Second error'.PHP_EOL.PHP_EOL,
+                'expected' => 'ERROR: First error' . PHP_EOL
+                    . 'ERROR: Second error' . PHP_EOL . PHP_EOL,
             ],
             'Errors mixed with non-blocking messages' => [
                 'messages' => [
@@ -345,13 +345,13 @@ final class MessageCollectorTest extends AbstractWriterTestCase
                     'Sixth error'         => MessageCollector::ERROR,
                     'Seventh deprecation' => MessageCollector::DEPRECATED,
                 ],
-                'expected' => 'ERROR: Fourth error'.PHP_EOL
-                    .'ERROR: Sixth error'.PHP_EOL
-                    .'WARNING: Second warning'.PHP_EOL
-                    .'WARNING: Fifth warning'.PHP_EOL
-                    .'NOTICE: Third notice'.PHP_EOL
-                    .'DEPRECATED: First deprecation'.PHP_EOL
-                    .'DEPRECATED: Seventh deprecation'.PHP_EOL.PHP_EOL,
+                'expected' => 'ERROR: Fourth error' . PHP_EOL
+                    . 'ERROR: Sixth error' . PHP_EOL
+                    . 'WARNING: Second warning' . PHP_EOL
+                    . 'WARNING: Fifth warning' . PHP_EOL
+                    . 'NOTICE: Third notice' . PHP_EOL
+                    . 'DEPRECATED: First deprecation' . PHP_EOL
+                    . 'DEPRECATED: Seventh deprecation' . PHP_EOL . PHP_EOL,
             ],
         ];
         // phpcs:enable
@@ -374,8 +374,8 @@ final class MessageCollectorTest extends AbstractWriterTestCase
         $msgCollector->add($message, MessageCollector::NOTICE);
         $msgCollector->add($message, MessageCollector::WARNING);
 
-        $expected  = 'WARNING: Trying to add the same message twice'.PHP_EOL;
-        $expected .= 'NOTICE: Trying to add the same message twice'.PHP_EOL.PHP_EOL;
+        $expected  = 'WARNING: Trying to add the same message twice' . PHP_EOL;
+        $expected .= 'NOTICE: Trying to add the same message twice' . PHP_EOL . PHP_EOL;
 
         $this->expectNoStdoutOutput();
 
@@ -401,8 +401,8 @@ final class MessageCollectorTest extends AbstractWriterTestCase
         $msgCollector->add($message, MessageCollector::NOTICE);
         $msgCollector->add($message, MessageCollector::NOTICE);
 
-        $expected  = 'NOTICE: Trying to add the same message twice'.PHP_EOL;
-        $expected .= 'NOTICE: Trying to add the same message twice'.PHP_EOL.PHP_EOL;
+        $expected  = 'NOTICE: Trying to add the same message twice' . PHP_EOL;
+        $expected .= 'NOTICE: Trying to add the same message twice' . PHP_EOL . PHP_EOL;
 
         $this->expectNoStdoutOutput();
 
@@ -430,10 +430,10 @@ final class MessageCollectorTest extends AbstractWriterTestCase
         $msgCollector = new MessageCollector();
         $this->createErrorCache($msgCollector, $messages);
 
-        $expected  = 'WARNING: Fourth warning'.PHP_EOL;
-        $expected .= 'NOTICE: First notice'.PHP_EOL;
-        $expected .= 'NOTICE: Third notice'.PHP_EOL;
-        $expected .= 'DEPRECATED: Second deprecation'.PHP_EOL.PHP_EOL;
+        $expected  = 'WARNING: Fourth warning' . PHP_EOL;
+        $expected .= 'NOTICE: First notice' . PHP_EOL;
+        $expected .= 'NOTICE: Third notice' . PHP_EOL;
+        $expected .= 'DEPRECATED: Second deprecation' . PHP_EOL . PHP_EOL;
 
         $this->expectNoStdoutOutput();
 
@@ -485,15 +485,15 @@ final class MessageCollectorTest extends AbstractWriterTestCase
      */
     public static function dataDisplayOrderHandling()
     {
-        $expectedForSeverity  = 'WARNING: Fourth warning'.PHP_EOL;
-        $expectedForSeverity .= 'NOTICE: First notice'.PHP_EOL;
-        $expectedForSeverity .= 'NOTICE: Third notice'.PHP_EOL;
-        $expectedForSeverity .= 'DEPRECATED: Second deprecation'.PHP_EOL.PHP_EOL;
+        $expectedForSeverity  = 'WARNING: Fourth warning' . PHP_EOL;
+        $expectedForSeverity .= 'NOTICE: First notice' . PHP_EOL;
+        $expectedForSeverity .= 'NOTICE: Third notice' . PHP_EOL;
+        $expectedForSeverity .= 'DEPRECATED: Second deprecation' . PHP_EOL . PHP_EOL;
 
-        $expectedForReceived  = 'NOTICE: First notice'.PHP_EOL;
-        $expectedForReceived .= 'DEPRECATED: Second deprecation'.PHP_EOL;
-        $expectedForReceived .= 'NOTICE: Third notice'.PHP_EOL;
-        $expectedForReceived .= 'WARNING: Fourth warning'.PHP_EOL.PHP_EOL;
+        $expectedForReceived  = 'NOTICE: First notice' . PHP_EOL;
+        $expectedForReceived .= 'DEPRECATED: Second deprecation' . PHP_EOL;
+        $expectedForReceived .= 'NOTICE: Third notice' . PHP_EOL;
+        $expectedForReceived .= 'WARNING: Fourth warning' . PHP_EOL . PHP_EOL;
 
         return [
             'Order by severity'                  => [

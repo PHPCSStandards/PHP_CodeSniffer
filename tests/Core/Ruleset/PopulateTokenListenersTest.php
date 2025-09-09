@@ -41,7 +41,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
     {
         if (isset(self::$ruleset) === false) {
             // Set up the ruleset.
-            $standard      = __DIR__.'/PopulateTokenListenersTest.xml';
+            $standard      = __DIR__ . '/PopulateTokenListenersTest.xml';
             $config        = new ConfigDouble(["--standard=$standard"]);
             self::$ruleset = new Ruleset($config);
         }
@@ -56,11 +56,11 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
      */
     public function testSniffWhereRegisterDoesNotReturnAnArrayThrowsException()
     {
-        $standard = __DIR__.'/PopulateTokenListenersRegisterNoArrayTest.xml';
+        $standard = __DIR__ . '/PopulateTokenListenersRegisterNoArrayTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
         $sniffClass = 'Fixtures\\TestStandard\\Sniffs\\InvalidSniffs\\RegisterNoArraySniff';
-        $message    = "ERROR: The sniff {$sniffClass}::register() method must return an array.".PHP_EOL.PHP_EOL;
+        $message    = "ERROR: The sniff {$sniffClass}::register() method must return an array." . PHP_EOL . PHP_EOL;
         $this->expectRuntimeExceptionMessage($message);
 
         new Ruleset($config);
@@ -83,7 +83,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
         $target = 'Fixtures\\TestStandard\\Sniffs\\ValidSniffs\\RegisterEmptyArraySniff';
 
         foreach (self::$ruleset->tokenListeners as $token => $listeners) {
-            $this->assertIsArray($listeners, 'No listeners registered for token'.Tokens::tokenName($token));
+            $this->assertIsArray($listeners, 'No listeners registered for token' . Tokens::tokenName($token));
             $this->assertArrayNotHasKey(
                 $target,
                 $listeners,
@@ -261,7 +261,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
     public function testSetsClassAndSourceIndexes()
     {
         foreach (self::$ruleset->tokenListeners as $token => $listeners) {
-            $this->assertIsArray($listeners, 'No listeners registered for token'.Tokens::tokenName($token));
+            $this->assertIsArray($listeners, 'No listeners registered for token' . Tokens::tokenName($token));
 
             foreach ($listeners as $className => $details) {
                 $this->assertArrayHasKey(
@@ -287,7 +287,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
                     sprintf('Value for "source" key is not a string for token %s', Tokens::tokenName($token))
                 );
 
-                $expected = '.'.substr($className, (strrpos($className, '\\') + 1), -5);
+                $expected = '.' . substr($className, (strrpos($className, '\\') + 1), -5);
 
                 $this->assertStringEndsWith(
                     $expected,
@@ -310,7 +310,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
         $exclude = 'PHP_CodeSniffer\\Standards\\Generic\\Sniffs\\NamingConventions\\UpperCaseConstantNameSniff';
 
         foreach (self::$ruleset->tokenListeners as $token => $listeners) {
-            $this->assertIsArray($listeners, 'No listeners registered for token'.Tokens::tokenName($token));
+            $this->assertIsArray($listeners, 'No listeners registered for token' . Tokens::tokenName($token));
 
             foreach ($listeners as $className => $details) {
                 if ($className === $exclude) {
@@ -345,7 +345,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
         $exclude = 'PHP_CodeSniffer\\Standards\\PSR1\\Sniffs\\Files\\SideEffectsSniff';
 
         foreach (self::$ruleset->tokenListeners as $token => $listeners) {
-            $this->assertIsArray($listeners, 'No listeners registered for token'.Tokens::tokenName($token));
+            $this->assertIsArray($listeners, 'No listeners registered for token' . Tokens::tokenName($token));
 
             foreach ($listeners as $className => $details) {
                 if ($className === $exclude) {

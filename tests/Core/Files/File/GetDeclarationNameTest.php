@@ -34,7 +34,7 @@ final class GetDeclarationNameTest extends AbstractMethodTestCase
     public function testInvalidTokenPassed($testMarker, $targetType)
     {
         $tokenName = Tokens::tokenName($targetType);
-        $this->expectRunTimeException('Token type "'.$tokenName.'" is not T_FUNCTION, T_CLASS, T_INTERFACE, T_TRAIT or T_ENUM');
+        $this->expectRunTimeException('Token type "' . $tokenName . '" is not T_FUNCTION, T_CLASS, T_INTERFACE, T_TRAIT or T_ENUM');
 
         $target = $this->getTargetToken($testMarker, $targetType);
         self::$phpcsFile->getDeclarationName($target);

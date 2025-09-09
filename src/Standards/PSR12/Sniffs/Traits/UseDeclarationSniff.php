@@ -275,7 +275,7 @@ class UseDeclarationSniff implements Sniff
                         $fix   = $phpcsFile->addFixableError($error, $end, 'NoBlankLineAfterUse');
                         if ($fix === true) {
                             if ($tokens[$next]['line'] === $tokens[$useToken]['line']) {
-                                $phpcsFile->fixer->addContentBefore($next, $phpcsFile->eolChar.$phpcsFile->eolChar);
+                                $phpcsFile->fixer->addContentBefore($next, $phpcsFile->eolChar . $phpcsFile->eolChar);
                             } else {
                                 for ($i = ($next - 1); $i > $end; $i--) {
                                     if ($tokens[$i]['line'] !== $tokens[$next]['line']) {
@@ -690,7 +690,7 @@ class UseDeclarationSniff implements Sniff
             $fix   = $phpcsFile->addFixableError($error, $next, 'MultipleImport');
             if ($fix === true) {
                 $padding = str_repeat(' ', ($tokens[$stackPtr]['column'] - 1));
-                $phpcsFile->fixer->replaceToken($next, ';'.$phpcsFile->eolChar.$padding.'use ');
+                $phpcsFile->fixer->replaceToken($next, ';' . $phpcsFile->eolChar . $padding . 'use ');
             }
         }
 

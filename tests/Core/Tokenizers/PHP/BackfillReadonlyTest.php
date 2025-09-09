@@ -34,8 +34,8 @@ final class BackfillReadonlyTest extends AbstractTokenizerTestCase
         $target     = $this->getTargetToken($testMarker, [T_READONLY, T_STRING], $testContent);
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_READONLY, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_READONLY (code)');
-        $this->assertSame('T_READONLY', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_READONLY (type)');
+        $this->assertSame(T_READONLY, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_READONLY (code)');
+        $this->assertSame('T_READONLY', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_READONLY (type)');
 
     }//end testReadonly()
 
@@ -196,8 +196,8 @@ final class BackfillReadonlyTest extends AbstractTokenizerTestCase
         $tokens     = $this->phpcsFile->getTokens();
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(constant($expectedType), $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (code)');
-        $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (type)');
+        $this->assertSame(constant($expectedType), $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (code)');
+        $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (type)');
 
     }//end testNotReadonly()
 

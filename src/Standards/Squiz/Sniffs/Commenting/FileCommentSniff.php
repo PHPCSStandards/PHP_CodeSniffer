@@ -143,7 +143,7 @@ class FileCommentSniff implements Sniff
             if ($isRequired === true && in_array($name, $foundTags, true) === true) {
                 $error = 'Only one %s tag is allowed in a file comment';
                 $data  = [$name];
-                $phpcsFile->addError($error, $tag, 'Duplicate'.ucfirst(substr($name, 1)).'Tag', $data);
+                $phpcsFile->addError($error, $tag, 'Duplicate' . ucfirst(substr($name, 1)) . 'Tag', $data);
             }
 
             $foundTags[] = $name;
@@ -156,7 +156,7 @@ class FileCommentSniff implements Sniff
             if ($string === false || $tokens[$string]['line'] !== $tokens[$tag]['line']) {
                 $error = 'Content missing for %s tag in file comment';
                 $data  = [$name];
-                $phpcsFile->addError($error, $tag, 'Empty'.ucfirst(substr($name, 1)).'Tag', $data);
+                $phpcsFile->addError($error, $tag, 'Empty' . ucfirst(substr($name, 1)) . 'Tag', $data);
                 continue;
             }
 
@@ -180,7 +180,7 @@ class FileCommentSniff implements Sniff
                             $matches[1] = date('Y');
                         }
 
-                        $expected = $matches[1].' Squiz Pty Ltd (ABN 77 084 670 600)';
+                        $expected = $matches[1] . ' Squiz Pty Ltd (ABN 77 084 670 600)';
                         $phpcsFile->fixer->replaceToken($string, $expected);
                     }
                 }
@@ -193,7 +193,7 @@ class FileCommentSniff implements Sniff
             if (in_array($tag, $foundTags, true) === false) {
                 $error = 'Missing %s tag in file comment';
                 $data  = [$tag];
-                $phpcsFile->addError($error, $commentEnd, 'Missing'.ucfirst(substr($tag, 1)).'Tag', $data);
+                $phpcsFile->addError($error, $commentEnd, 'Missing' . ucfirst(substr($tag, 1)) . 'Tag', $data);
             }
 
             if (isset($foundTags[$pos]) === false) {
@@ -206,7 +206,7 @@ class FileCommentSniff implements Sniff
                     ($pos + 1),
                     $tag,
                 ];
-                $phpcsFile->addError($error, $tokens[$commentStart]['comment_tags'][$pos], ucfirst(substr($tag, 1)).'TagOrder', $data);
+                $phpcsFile->addError($error, $tokens[$commentStart]['comment_tags'][$pos], ucfirst(substr($tag, 1)) . 'TagOrder', $data);
             }
 
             $pos++;

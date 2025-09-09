@@ -51,7 +51,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
     protected function setUp(): void
     {
         if (self::$standard === '') {
-            $standard       = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
+            $standard       = __DIR__ . '/' . basename(__FILE__, '.php') . '.xml';
             self::$standard = $standard;
 
             // On-the-fly adjust the ruleset test file to be able to test
@@ -435,7 +435,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
      */
     public function testSettingInvalidPropertiesOnStandardsAndCategoriesSilentlyFails($sniffClass, $propertyName)
     {
-        $this->assertArrayHasKey($sniffClass, self::$ruleset->sniffs, 'Sniff class '.$sniffClass.' not listed in registered sniffs');
+        $this->assertArrayHasKey($sniffClass, self::$ruleset->sniffs, 'Sniff class ' . $sniffClass . ' not listed in registered sniffs');
         $this->assertXObjectNotHasProperty($propertyName, self::$ruleset->sniffs[$sniffClass]);
 
     }//end testSettingInvalidPropertiesOnStandardsAndCategoriesSilentlyFails()

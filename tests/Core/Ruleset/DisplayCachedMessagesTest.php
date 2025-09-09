@@ -82,7 +82,7 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         return [
             'One error'                               => [
                 'messages' => ['This is a serious blocking issue' => MessageCollector::ERROR],
-                'expected' => 'ERROR: This is a serious blocking issue'.PHP_EOL.PHP_EOL,
+                'expected' => 'ERROR: This is a serious blocking issue' . PHP_EOL . PHP_EOL,
             ],
             'Multiple blocking errors'                => [
                 'messages' => [
@@ -91,9 +91,9 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
                     'OMG, why do you think that would work ?' => MessageCollector::ERROR,
                 ],
                 // phpcs:disable Squiz.Strings.ConcatenationSpacing.PaddingFound -- Test readability is more important.
-                'expected' => 'ERROR: This is a serious blocking issue'.PHP_EOL
-                    . 'ERROR: And here is another one'.PHP_EOL
-                    . 'ERROR: OMG, why do you think that would work ?'.PHP_EOL.PHP_EOL,
+                'expected' => 'ERROR: This is a serious blocking issue' . PHP_EOL
+                    . 'ERROR: And here is another one' . PHP_EOL
+                    . 'ERROR: OMG, why do you think that would work ?' . PHP_EOL . PHP_EOL,
                 // phpcs:enable
             ],
             'Mix of blocking and non-blocking errors' => [
@@ -103,9 +103,9 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
                     'Careful, this may not be correct'                              => MessageCollector::NOTICE,
                 ],
                 // phpcs:disable Squiz.Strings.ConcatenationSpacing.PaddingFound -- Test readability is more important.
-                'expected' => 'ERROR: This is a serious blocking issue'.PHP_EOL
-                    . 'NOTICE: Careful, this may not be correct'.PHP_EOL
-                    . 'DEPRECATED: Something something deprecated and will be removed in v x.x.x'.PHP_EOL.PHP_EOL,
+                'expected' => 'ERROR: This is a serious blocking issue' . PHP_EOL
+                    . 'NOTICE: Careful, this may not be correct' . PHP_EOL
+                    . 'DEPRECATED: Something something deprecated and will be removed in v x.x.x' . PHP_EOL . PHP_EOL,
                 // phpcs:enable
             ],
         ];
@@ -149,15 +149,15 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         return [
             'One deprecation'              => [
                 'messages' => ['My deprecation message' => MessageCollector::DEPRECATED],
-                'expected' => 'DEPRECATED: My deprecation message'.PHP_EOL.PHP_EOL,
+                'expected' => 'DEPRECATED: My deprecation message' . PHP_EOL . PHP_EOL,
             ],
             'One notice'                   => [
                 'messages' => ['My notice message' => MessageCollector::NOTICE],
-                'expected' => 'NOTICE: My notice message'.PHP_EOL.PHP_EOL,
+                'expected' => 'NOTICE: My notice message' . PHP_EOL . PHP_EOL,
             ],
             'One warning'                  => [
                 'messages' => ['My warning message' => MessageCollector::WARNING],
-                'expected' => 'WARNING: My warning message'.PHP_EOL.PHP_EOL,
+                'expected' => 'WARNING: My warning message' . PHP_EOL . PHP_EOL,
             ],
             'Multiple non-blocking errors' => [
                 'messages' => [
@@ -167,10 +167,10 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
                     'Careful, this may not be correct'                              => MessageCollector::NOTICE,
                 ],
                 // phpcs:disable Squiz.Strings.ConcatenationSpacing.PaddingFound -- Test readability is more important.
-                'expected' => 'WARNING: Something is not supported and support may be removed'.PHP_EOL
-                    .'NOTICE: Careful, this may not be correct'.PHP_EOL
-                    .'DEPRECATED: Something something deprecated and will be removed in v x.x.x'.PHP_EOL
-                    .'DEPRECATED: Some other deprecation notice'.PHP_EOL.PHP_EOL,
+                'expected' => 'WARNING: Something is not supported and support may be removed' . PHP_EOL
+                    . 'NOTICE: Careful, this may not be correct' . PHP_EOL
+                    . 'DEPRECATED: Something something deprecated and will be removed in v x.x.x' . PHP_EOL
+                    . 'DEPRECATED: Some other deprecation notice' . PHP_EOL . PHP_EOL,
                 // phpcs:enable
             ],
         ];
@@ -196,7 +196,7 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         $errors  = [$message => MessageCollector::ERROR];
         $this->mockCachedMessages($ruleset, $errors);
 
-        $this->expectRuntimeExceptionMessage('ERROR: '.$message.PHP_EOL);
+        $this->expectRuntimeExceptionMessage('ERROR: ' . $message . PHP_EOL);
 
         $this->invokeDisplayCachedMessages($ruleset);
 

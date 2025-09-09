@@ -31,15 +31,15 @@ final class ShortArrayTest extends AbstractTokenizerTestCase
         $opener     = $this->getTargetToken($testMarker, [T_OPEN_SQUARE_BRACKET, T_OPEN_SHORT_ARRAY]);
         $tokenArray = $tokens[$opener];
 
-        $this->assertSame(T_OPEN_SQUARE_BRACKET, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_OPEN_SQUARE_BRACKET (code)');
-        $this->assertSame('T_OPEN_SQUARE_BRACKET', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_OPEN_SQUARE_BRACKET (type)');
+        $this->assertSame(T_OPEN_SQUARE_BRACKET, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_OPEN_SQUARE_BRACKET (code)');
+        $this->assertSame('T_OPEN_SQUARE_BRACKET', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_OPEN_SQUARE_BRACKET (type)');
 
         if (isset($tokens[$opener]['bracket_closer']) === true) {
             $closer     = $tokens[$opener]['bracket_closer'];
             $tokenArray = $tokens[$closer];
 
-            $this->assertSame(T_CLOSE_SQUARE_BRACKET, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_CLOSE_SQUARE_BRACKET (code)');
-            $this->assertSame('T_CLOSE_SQUARE_BRACKET', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_CLOSE_SQUARE_BRACKET (type)');
+            $this->assertSame(T_CLOSE_SQUARE_BRACKET, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_CLOSE_SQUARE_BRACKET (code)');
+            $this->assertSame('T_CLOSE_SQUARE_BRACKET', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_CLOSE_SQUARE_BRACKET (type)');
         }
 
     }//end testSquareBrackets()
@@ -106,15 +106,15 @@ final class ShortArrayTest extends AbstractTokenizerTestCase
         $opener     = $this->getTargetToken($testMarker, [T_OPEN_SQUARE_BRACKET, T_OPEN_SHORT_ARRAY]);
         $tokenArray = $tokens[$opener];
 
-        $this->assertSame(T_OPEN_SHORT_ARRAY, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_OPEN_SHORT_ARRAY (code)');
-        $this->assertSame('T_OPEN_SHORT_ARRAY', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_OPEN_SHORT_ARRAY (type)');
+        $this->assertSame(T_OPEN_SHORT_ARRAY, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_OPEN_SHORT_ARRAY (code)');
+        $this->assertSame('T_OPEN_SHORT_ARRAY', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_OPEN_SHORT_ARRAY (type)');
 
         if (isset($tokens[$opener]['bracket_closer']) === true) {
             $closer     = $tokens[$opener]['bracket_closer'];
             $tokenArray = $tokens[$closer];
 
-            $this->assertSame(T_CLOSE_SHORT_ARRAY, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_CLOSE_SHORT_ARRAY (code)');
-            $this->assertSame('T_CLOSE_SHORT_ARRAY', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_CLOSE_SHORT_ARRAY (type)');
+            $this->assertSame(T_CLOSE_SHORT_ARRAY, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_CLOSE_SHORT_ARRAY (code)');
+            $this->assertSame('T_CLOSE_SHORT_ARRAY', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_CLOSE_SHORT_ARRAY (type)');
         }
 
     }//end testShortArrays()

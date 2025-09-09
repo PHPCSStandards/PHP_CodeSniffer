@@ -64,7 +64,7 @@ class ClassFileNameSniff implements Sniff
             $error = 'Filename doesn\'t match %s name; expected file name "%s"';
             $data  = [
                 $tokens[$stackPtr]['content'],
-                $ooName.'.'.$extension,
+                $ooName . '.' . $extension,
             ];
             $phpcsFile->addError($error, $stackPtr, 'NoMatch', $data);
         }

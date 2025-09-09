@@ -72,7 +72,7 @@ final class ConstructTest extends AbstractFileListTestCase
      */
     public static function dataConstruct()
     {
-        $fixturesDir = __DIR__.DIRECTORY_SEPARATOR.'Fixtures'.DIRECTORY_SEPARATOR;
+        $fixturesDir = __DIR__ . DIRECTORY_SEPARATOR . 'Fixtures' . DIRECTORY_SEPARATOR;
 
         return [
             'No files'                                     => [
@@ -92,8 +92,8 @@ final class ConstructTest extends AbstractFileListTestCase
             'A directory'                                  => [
                 'files'         => [$fixturesDir],
                 'expectedFiles' => [
-                    $fixturesDir.'file1.php',
-                    $fixturesDir.'file2.php',
+                    $fixturesDir . 'file1.php',
+                    $fixturesDir . 'file2.php',
                 ],
             ],
             'Same file twice'                              => [
@@ -107,12 +107,12 @@ final class ConstructTest extends AbstractFileListTestCase
             ],
             'File and then directory containing that file' => [
                 'files'         => [
-                    $fixturesDir.'file1.php',
+                    $fixturesDir . 'file1.php',
                     $fixturesDir,
                 ],
                 'expectedFiles' => [
-                    $fixturesDir.'file1.php',
-                    $fixturesDir.'file2.php',
+                    $fixturesDir . 'file1.php',
+                    $fixturesDir . 'file2.php',
                 ],
             ],
         ];

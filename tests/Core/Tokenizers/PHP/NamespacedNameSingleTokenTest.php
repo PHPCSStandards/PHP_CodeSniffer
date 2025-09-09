@@ -45,12 +45,12 @@ final class NamespacedNameSingleTokenTest extends AbstractTokenizerTestCase
             $this->assertSame(
                 constant($tokenInfo['type']),
                 $tokens[$identifier]['code'],
-                'Token tokenized as '.$tokens[$identifier]['type'].', not '.$tokenInfo['type'].' (code)'
+                'Token tokenized as ' . $tokens[$identifier]['type'] . ', not ' . $tokenInfo['type'] . ' (code)'
             );
             $this->assertSame(
                 $tokenInfo['type'],
                 $tokens[$identifier]['type'],
-                'Token tokenized as '.$tokens[$identifier]['type'].', not '.$tokenInfo['type'].' (type)'
+                'Token tokenized as ' . $tokens[$identifier]['type'] . ', not ' . $tokenInfo['type'] . ' (type)'
             );
             $this->assertSame($tokenInfo['content'], $tokens[$identifier]['content']);
 

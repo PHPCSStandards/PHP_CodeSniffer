@@ -31,7 +31,7 @@ final class ProcessRulesetTest extends TestCase
     public function testSniffsFileNotDirectory()
     {
         // Set up the ruleset.
-        $standard = __DIR__.'/ProcessRulesetInvalidNoSniffsDirTest.xml';
+        $standard = __DIR__ . '/ProcessRulesetInvalidNoSniffsDirTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
@@ -50,7 +50,7 @@ final class ProcessRulesetTest extends TestCase
     public function testAutoExpandSniffsDirectory()
     {
         // Set up the ruleset.
-        $standard = __DIR__.'/ProcessRulesetAutoExpandSniffsDirectoryTest.xml';
+        $standard = __DIR__ . '/ProcessRulesetAutoExpandSniffsDirectoryTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
@@ -96,7 +96,7 @@ final class ProcessRulesetTest extends TestCase
     public function testExcludeSniffGroup()
     {
         // Set up the ruleset.
-        $standard = __DIR__.'/ProcessRulesetExcludeSniffGroupTest.xml';
+        $standard = __DIR__ . '/ProcessRulesetExcludeSniffGroupTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
@@ -254,7 +254,7 @@ final class ProcessRulesetTest extends TestCase
 
         if (isset($ruleset) === false) {
             // Set up the ruleset.
-            $standard = __DIR__.'/ProcessRulesetMiscTest.xml';
+            $standard = __DIR__ . '/ProcessRulesetMiscTest.xml';
             $config   = new ConfigDouble(["--standard=$standard"]);
             $ruleset  = new Ruleset($config);
         }

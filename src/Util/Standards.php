@@ -27,7 +27,7 @@ class Standards
     {
         $ds = DIRECTORY_SEPARATOR;
 
-        $installedPaths = [dirname(__DIR__, 2).$ds.'src'.$ds.'Standards'];
+        $installedPaths = [dirname(__DIR__, 2) . $ds . 'src' . $ds . 'Standards'];
         $configPaths    = Config::getConfigData('installed_paths');
         if ($configPaths !== null) {
             $installedPaths = array_merge($installedPaths, explode(',', $configPaths));
@@ -36,7 +36,7 @@ class Standards
         $resolvedInstalledPaths = [];
         foreach ($installedPaths as $installedPath) {
             if (substr($installedPath, 0, 1) === '.') {
-                $installedPath = Common::realpath(__DIR__.$ds.'..'.$ds.'..'.$ds.$installedPath);
+                $installedPath = Common::realpath(__DIR__ . $ds . '..' . $ds . '..' . $ds . $installedPath);
                 if ($installedPath === false) {
                     continue;
                 }
@@ -90,7 +90,7 @@ class Standards
 
         foreach ($installedPaths as $standardsDir) {
             // Check if the installed dir is actually a standard itself.
-            $csFile = $standardsDir.'/ruleset.xml';
+            $csFile = $standardsDir . '/ruleset.xml';
             if (is_file($csFile) === true) {
                 $rulesets[] = $csFile;
                 continue;
@@ -111,7 +111,7 @@ class Standards
                     }
 
                     // Valid coding standard dirs include a ruleset.
-                    $csFile = $file->getPathname().'/ruleset.xml';
+                    $csFile = $file->getPathname() . '/ruleset.xml';
                     if (is_file($csFile) === true) {
                         $rulesets[] = $csFile;
                     }
@@ -179,7 +179,7 @@ class Standards
 
         foreach ($installedPaths as $standardsDir) {
             // Check if the installed dir is actually a standard itself.
-            $csFile = $standardsDir.'/ruleset.xml';
+            $csFile = $standardsDir . '/ruleset.xml';
             if (is_file($csFile) === true) {
                 $basename = basename($standardsDir);
                 $installedStandards[$basename] = $basename;
@@ -203,7 +203,7 @@ class Standards
                     }
 
                     // Valid coding standard dirs include a ruleset.
-                    $csFile = $file->getPathname().'/ruleset.xml';
+                    $csFile = $file->getPathname() . '/ruleset.xml';
                     if (is_file($csFile) === true) {
                         $standardsInDir[$filename] = $filename;
                     }
@@ -255,7 +255,7 @@ class Standards
 
             // If it is a directory with a ruleset.xml file in it,
             // it is a standard.
-            $ruleset = rtrim($standard, ' /\\').DIRECTORY_SEPARATOR.'ruleset.xml';
+            $ruleset = rtrim($standard, ' /\\') . DIRECTORY_SEPARATOR . 'ruleset.xml';
             if (is_file($ruleset) === true) {
                 return true;
             }
@@ -285,7 +285,7 @@ class Standards
 
         $installedPaths = self::getInstalledStandardPaths();
         foreach ($installedPaths as $installedPath) {
-            $standardPath = $installedPath.DIRECTORY_SEPARATOR.$standard;
+            $standardPath = $installedPath . DIRECTORY_SEPARATOR . $standard;
             if (file_exists($standardPath) === false) {
                 if (basename($installedPath) !== $standard) {
                     continue;
@@ -294,7 +294,7 @@ class Standards
                 $standardPath = $installedPath;
             }
 
-            $path = Common::realpath($standardPath.DIRECTORY_SEPARATOR.'ruleset.xml');
+            $path = Common::realpath($standardPath . DIRECTORY_SEPARATOR . 'ruleset.xml');
 
             if ($path !== false && is_file($path) === true) {
                 return $path;
@@ -330,8 +330,8 @@ class Standards
                 $output .= "The only coding standard installed is $lastStandard";
             } else {
                 $standardList  = implode(', ', $installedStandards);
-                $standardList .= ' and '.$lastStandard;
-                $output       .= 'The installed coding standards are '.$standardList;
+                $standardList .= ' and ' . $lastStandard;
+                $output       .= 'The installed coding standards are ' . $standardList;
             }
         }
 

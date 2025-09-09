@@ -63,7 +63,7 @@ class CamelCapsMethodNameSniff extends GenericCamelCapsFunctionNameSniff
                 $className = $phpcsFile->getDeclarationName($currScope);
             }
 
-            $errorData = [$className.'::'.$methodName];
+            $errorData = [$className . '::' . $methodName];
             $phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $errorData);
             $phpcsFile->recordMetric($stackPtr, 'CamelCase method name', 'no');
         } else {

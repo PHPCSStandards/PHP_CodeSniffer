@@ -117,10 +117,10 @@ class Xml implements Report
         bool $interactive = false,
         bool $toScreen = true
     ) {
-        echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
-        echo '<phpcs version="'.Config::VERSION.'">'.PHP_EOL;
+        echo '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
+        echo '<phpcs version="' . Config::VERSION . '">' . PHP_EOL;
         echo $cachedData;
-        echo '</phpcs>'.PHP_EOL;
+        echo '</phpcs>' . PHP_EOL;
 
     }//end generate()
 

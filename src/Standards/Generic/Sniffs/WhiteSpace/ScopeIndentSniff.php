@@ -599,7 +599,7 @@ class ScopeIndentSniff implements Sniff
                     if ($this->debug === true) {
                         $line = $tokens[$checkToken]['line'];
                         $type = $tokens[$checkToken]['type'];
-                        StatusWriter::write('=> add adjustment of '.$adjustments[$checkToken]." for token $checkToken ($type) on line $line", 1);
+                        StatusWriter::write('=> add adjustment of ' . $adjustments[$checkToken] . " for token $checkToken ($type) on line $line", 1);
                     }
                 }//end if
             }//end if
@@ -909,7 +909,7 @@ class ScopeIndentSniff implements Sniff
                     if ($accepted === true && $this->debug === true) {
                         $line = $tokens[$checkToken]['line'];
                         $type = $tokens[$checkToken]['type'];
-                        StatusWriter::write('=> add adjustment of '.$adjustments[$checkToken]." for token $checkToken ($type) on line $line", 1);
+                        StatusWriter::write('=> add adjustment of ' . $adjustments[$checkToken] . " for token $checkToken ($type) on line $line", 1);
                     }
                 }
             }//end if
@@ -1338,7 +1338,7 @@ class ScopeIndentSniff implements Sniff
                 $numTabs = floor($length / $this->tabWidth);
                 if ($numTabs > 0) {
                     $numSpaces = ($length - ($numTabs * $this->tabWidth));
-                    $padding   = str_repeat("\t", $numTabs).str_repeat(' ', $numSpaces);
+                    $padding   = str_repeat("\t", $numTabs) . str_repeat(' ', $numSpaces);
                 }
             } else {
                 $padding = str_repeat(' ', $length);
@@ -1347,7 +1347,7 @@ class ScopeIndentSniff implements Sniff
 
         if ($tokens[$stackPtr]['column'] === 1) {
             $trimmed  = ltrim($tokens[$stackPtr]['content']);
-            $accepted = $phpcsFile->fixer->replaceToken($stackPtr, $padding.$trimmed);
+            $accepted = $phpcsFile->fixer->replaceToken($stackPtr, $padding . $trimmed);
         } else {
             // Easier to just replace the entire indent.
             $accepted = $phpcsFile->fixer->replaceToken(($stackPtr - 1), $padding);
@@ -1375,7 +1375,7 @@ class ScopeIndentSniff implements Sniff
                     if ($this->tabIndent === true) {
                         $numTabs   = floor($padding / $this->tabWidth);
                         $numSpaces = ($padding - ($numTabs * $this->tabWidth));
-                        $padding   = str_repeat("\t", $numTabs).str_repeat(' ', $numSpaces);
+                        $padding   = str_repeat("\t", $numTabs) . str_repeat(' ', $numSpaces);
                     } else {
                         $padding = str_repeat(' ', $padding);
                     }

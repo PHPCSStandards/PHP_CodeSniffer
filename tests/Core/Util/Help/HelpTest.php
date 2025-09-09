@@ -201,7 +201,7 @@ final class HelpTest extends TestCase
         $allLongOptions[] = 'generator';
         $allLongOptions[] = 'suffix';
 
-        $allShortOptions = Help::DEFAULT_SHORT_OPTIONS.'saem';
+        $allShortOptions = Help::DEFAULT_SHORT_OPTIONS . 'saem';
 
         return [
             'No options'                                      => [
@@ -494,39 +494,39 @@ final class HelpTest extends TestCase
             'Report width small: 40; forces report width to minimum width of 60'                                                    => [
                 'reportWidth'    => 40,
                 'longOptions'    => $longOptions,
-                'expectedOutput' => PHP_EOL.'Rule Selection Options:'.PHP_EOL
-                    .'  -e                      Explain a standard by showing the'.PHP_EOL
-                    .'                          names of all the sniffs it'.PHP_EOL
-                    .'                          includes.'.PHP_EOL
-                    .'  --generator=<generator> Show documentation for a standard.'.PHP_EOL
-                    .'                          Use either the "HTML", "Markdown"'.PHP_EOL
-                    .'                          or "Text" generator.'.PHP_EOL,
+                'expectedOutput' => PHP_EOL . 'Rule Selection Options:' . PHP_EOL
+                    . '  -e                      Explain a standard by showing the' . PHP_EOL
+                    . '                          names of all the sniffs it' . PHP_EOL
+                    . '                          includes.' . PHP_EOL
+                    . '  --generator=<generator> Show documentation for a standard.' . PHP_EOL
+                    . '                          Use either the "HTML", "Markdown"' . PHP_EOL
+                    . '                          or "Text" generator.' . PHP_EOL,
             ],
             'Report width is minimum: 60 (= self::MIN_WIDTH)'                                                                       => [
                 'reportWidth'    => Help::MIN_WIDTH,
                 'longOptions'    => $longOptions,
-                'expectedOutput' => PHP_EOL.'Rule Selection Options:'.PHP_EOL
-                    .'  -e                      Explain a standard by showing the'.PHP_EOL
-                    .'                          names of all the sniffs it'.PHP_EOL
-                    .'                          includes.'.PHP_EOL
-                    .'  --generator=<generator> Show documentation for a standard.'.PHP_EOL
-                    .'                          Use either the "HTML", "Markdown"'.PHP_EOL
-                    .'                          or "Text" generator.'.PHP_EOL,
+                'expectedOutput' => PHP_EOL . 'Rule Selection Options:' . PHP_EOL
+                    . '  -e                      Explain a standard by showing the' . PHP_EOL
+                    . '                          names of all the sniffs it' . PHP_EOL
+                    . '                          includes.' . PHP_EOL
+                    . '  --generator=<generator> Show documentation for a standard.' . PHP_EOL
+                    . '                          Use either the "HTML", "Markdown"' . PHP_EOL
+                    . '                          or "Text" generator.' . PHP_EOL,
             ],
             'Report width matches length for one line, not the other: 96; only one should wrap'                                     => [
                 'reportWidth'    => 96,
                 'longOptions'    => $longOptions,
-                'expectedOutput' => PHP_EOL.'Rule Selection Options:'.PHP_EOL
-                    .'  -e                      Explain a standard by showing the names of all the sniffs it includes.'.PHP_EOL
-                    .'  --generator=<generator> Show documentation for a standard. Use either the "HTML", "Markdown"'.PHP_EOL
-                    .'                          or "Text" generator.'.PHP_EOL,
+                'expectedOutput' => PHP_EOL . 'Rule Selection Options:' . PHP_EOL
+                    . '  -e                      Explain a standard by showing the names of all the sniffs it includes.' . PHP_EOL
+                    . '  --generator=<generator> Show documentation for a standard. Use either the "HTML", "Markdown"' . PHP_EOL
+                    . '                          or "Text" generator.' . PHP_EOL,
             ],
             'Report width matches longest line: 119; the messages should not wrap and there should be no stray new line at the end' => [
                 'reportWidth'    => 119,
                 'longOptions'    => $longOptions,
-                'expectedOutput' => PHP_EOL.'Rule Selection Options:'.PHP_EOL
-                    .'  -e                      Explain a standard by showing the names of all the sniffs it includes.'.PHP_EOL
-                    .'  --generator=<generator> Show documentation for a standard. Use either the "HTML", "Markdown" or "Text" generator.'.PHP_EOL,
+                'expectedOutput' => PHP_EOL . 'Rule Selection Options:' . PHP_EOL
+                    . '  -e                      Explain a standard by showing the names of all the sniffs it includes.' . PHP_EOL
+                    . '  --generator=<generator> Show documentation for a standard. Use either the "HTML", "Markdown" or "Text" generator.' . PHP_EOL,
             ],
         ];
         // phpcs:enable
@@ -668,20 +668,20 @@ final class HelpTest extends TestCase
                     'long-option-multi-line-description' => [
                         'argument'    => '--something=<var>',
                         'description' => 'Proin sit amet malesuada libero, finibus bibendum tortor. Nulla vitae quam nec orci finibus pharetra.'
-                            ."\n".'Nam eget blandit dui.',
+                            . "\n" . 'Nam eget blandit dui.',
                     ],
                 ],
                 'expectedRegex' => [
-                    'no-color' => '`^ {'.$indentLength.'}-a {15} {'.$gutterLength.'}Lorem ipsum dolor sit amet, consectetur adipiscing elit\.\R'
-                        .'\R'
-                        .' {'.$indentLength.'}--something=<var> {'.$gutterLength.'}Proin sit amet malesuada libero, finibus bibendum tortor\.\R'
-                        .' {'.($indentLength + 17).'} {'.$gutterLength.'}Nulla vitae quam nec orci finibus pharetra\.\R'
-                        .' {'.($indentLength + 17).'} {'.$gutterLength.'}Nam eget blandit dui\.\R$`',
-                    'color'    => '`^ {'.$indentLength.'}\\033\[32m-a {15}\\033\[0m {'.$gutterLength.'}Lorem ipsum dolor sit amet, consectetur adipiscing elit\.\R'
-                        .'\R'
-                        .' {'.$indentLength.'}\\033\[32m--something=\\033\[36m<var>\\033\[32m\\033\[0m {'.$gutterLength.'}Proin sit amet malesuada libero, finibus bibendum tortor\.\R'
-                        .' {'.($indentLength + 17).'} {'.$gutterLength.'}Nulla vitae quam nec orci finibus pharetra\.\R'
-                        .' {'.($indentLength + 17).'} {'.$gutterLength.'}Nam eget blandit dui\.\R$`',
+                    'no-color' => '`^ {' . $indentLength . '}-a {15} {' . $gutterLength . '}Lorem ipsum dolor sit amet, consectetur adipiscing elit\.\R'
+                        . '\R'
+                        . ' {' . $indentLength . '}--something=<var> {' . $gutterLength . '}Proin sit amet malesuada libero, finibus bibendum tortor\.\R'
+                        . ' {' . ($indentLength + 17) . '} {' . $gutterLength . '}Nulla vitae quam nec orci finibus pharetra\.\R'
+                        . ' {' . ($indentLength + 17) . '} {' . $gutterLength . '}Nam eget blandit dui\.\R$`',
+                    'color'    => '`^ {' . $indentLength . '}\\033\[32m-a {15}\\033\[0m {' . $gutterLength . '}Lorem ipsum dolor sit amet, consectetur adipiscing elit\.\R'
+                        . '\R'
+                        . ' {' . $indentLength . '}\\033\[32m--something=\\033\[36m<var>\\033\[32m\\033\[0m {' . $gutterLength . '}Proin sit amet malesuada libero, finibus bibendum tortor\.\R'
+                        . ' {' . ($indentLength + 17) . '} {' . $gutterLength . '}Nulla vitae quam nec orci finibus pharetra\.\R'
+                        . ' {' . ($indentLength + 17) . '} {' . $gutterLength . '}Nam eget blandit dui\.\R$`',
                 ],
             ],
             'Input: text, arg, text; multi-line text gets wrapped'            => [
@@ -698,14 +698,14 @@ final class HelpTest extends TestCase
                     ],
                 ],
                 'expectedRegex' => [
-                    'no-color' => '`^ {'.$indentLength.'}Lorem ipsum dolor sit amet, consectetur adipiscing elit\.\R'
-                        .' {'.$indentLength.'}--something {'.$gutterLength.'}Fusce dapibus sodales est eu sodales\.\R'
-                        .' {'.$indentLength.'}Maecenas vulputate ligula vel feugiat finibus. Mauris sem dui, pretium in\R'
-                        .' {'.$indentLength.'}turpis auctor, consectetur ultrices lorem\.\R$`',
-                    'color'    => '`^ {'.$indentLength.'}Lorem ipsum dolor sit amet, consectetur adipiscing elit\.\R'
-                        .' {'.$indentLength.'}\\033\[32m--something\\033\[0m {'.$gutterLength.'}Fusce dapibus sodales est eu sodales\.\R'
-                        .' {'.$indentLength.'}Maecenas vulputate ligula vel feugiat finibus. Mauris sem dui, pretium in\R'
-                        .' {'.$indentLength.'}turpis auctor, consectetur ultrices lorem\.\R$`',
+                    'no-color' => '`^ {' . $indentLength . '}Lorem ipsum dolor sit amet, consectetur adipiscing elit\.\R'
+                        . ' {' . $indentLength . '}--something {' . $gutterLength . '}Fusce dapibus sodales est eu sodales\.\R'
+                        . ' {' . $indentLength . '}Maecenas vulputate ligula vel feugiat finibus. Mauris sem dui, pretium in\R'
+                        . ' {' . $indentLength . '}turpis auctor, consectetur ultrices lorem\.\R$`',
+                    'color'    => '`^ {' . $indentLength . '}Lorem ipsum dolor sit amet, consectetur adipiscing elit\.\R'
+                        . ' {' . $indentLength . '}\\033\[32m--something\\033\[0m {' . $gutterLength . '}Fusce dapibus sodales est eu sodales\.\R'
+                        . ' {' . $indentLength . '}Maecenas vulputate ligula vel feugiat finibus. Mauris sem dui, pretium in\R'
+                        . ' {' . $indentLength . '}turpis auctor, consectetur ultrices lorem\.\R$`',
                 ],
             ],
         ];

@@ -53,18 +53,18 @@ abstract class CommentTestCase extends AbstractTokenizerTestCase
         // Check that the comment_opener and comment_closer keys have been added to all docblock tokens.
         for ($i = $expectedOpener; $i <= $expectedCloser; $i++) {
             $token = $tokens[$i];
-            $this->assertArrayHasKey('comment_opener', $token, 'Comment_opener index is not set (for stackPtr '.$i.')');
-            $this->assertArrayHasKey('comment_closer', $token, 'Comment_closer index is not set (for stackPtr '.$i.')');
+            $this->assertArrayHasKey('comment_opener', $token, 'Comment_opener index is not set (for stackPtr ' . $i . ')');
+            $this->assertArrayHasKey('comment_closer', $token, 'Comment_closer index is not set (for stackPtr ' . $i . ')');
 
             $this->assertSame(
                 $expectedOpener,
                 $token['comment_opener'],
-                'Comment_opener not set to the expected stack pointer (for stackPtr '.$i.')'
+                'Comment_opener not set to the expected stack pointer (for stackPtr ' . $i . ')'
             );
             $this->assertSame(
                 $expectedCloser,
                 $token['comment_closer'],
-                'Comment_closer not set to the expected stack pointer (for stackPtr '.$i.')'
+                'Comment_closer not set to the expected stack pointer (for stackPtr ' . $i . ')'
             );
         }
 
@@ -101,24 +101,24 @@ abstract class CommentTestCase extends AbstractTokenizerTestCase
             $expectedCode    = key($currentItem);
             $expectedType    = Tokens::tokenName($expectedCode);
             $expectedContent = current($currentItem);
-            $errorMsgSuffix  = PHP_EOL.'(StackPtr: '.$i.' | Position in sequence: '.$sequenceKey.' | Expected: '.$expectedType.')';
+            $errorMsgSuffix  = PHP_EOL . '(StackPtr: ' . $i . ' | Position in sequence: ' . $sequenceKey . ' | Expected: ' . $expectedType . ')';
 
             $this->assertSame(
                 $expectedCode,
                 $tokens[$i]['code'],
-                'Token tokenized as '.Tokens::tokenName($tokens[$i]['code']).', not '.$expectedType.' (code)'.$errorMsgSuffix
+                'Token tokenized as ' . Tokens::tokenName($tokens[$i]['code']) . ', not ' . $expectedType . ' (code)' . $errorMsgSuffix
             );
 
             $this->assertSame(
                 $expectedType,
                 $tokens[$i]['type'],
-                'Token tokenized as '.$tokens[$i]['type'].', not '.$expectedType.' (type)'.$errorMsgSuffix
+                'Token tokenized as ' . $tokens[$i]['type'] . ', not ' . $expectedType . ' (type)' . $errorMsgSuffix
             );
 
             $this->assertSame(
                 $expectedContent,
                 $tokens[$i]['content'],
-                'Token content did not match expectations'.$errorMsgSuffix
+                'Token content did not match expectations' . $errorMsgSuffix
             );
         }//end for
 

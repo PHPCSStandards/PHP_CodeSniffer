@@ -123,7 +123,7 @@ class LanguageConstructSpacingSniff implements Sniff
                     preg_match('/yield/i', $found, $yield);
                     preg_match('/from/i', $found, $from);
                     $phpcsFile->fixer->beginChangeset();
-                    $phpcsFile->fixer->replaceToken($stackPtr, $yield[0].' '.$from[0]);
+                    $phpcsFile->fixer->replaceToken($stackPtr, $yield[0] . ' ' . $from[0]);
 
                     for ($i = ($stackPtr + 1); $i <= $yieldFromEnd; $i++) {
                         $phpcsFile->fixer->replaceToken($i, '');
@@ -149,8 +149,8 @@ class LanguageConstructSpacingSniff implements Sniff
         } else if ($tokens[($stackPtr + 1)]['code'] !== T_OPEN_PARENTHESIS) {
             $error = 'Language constructs must be followed by a single space; expected "%s" but found "%s"';
             $data  = [
-                $tokens[$stackPtr]['content'].' '.$tokens[($stackPtr + 1)]['content'],
-                $tokens[$stackPtr]['content'].$tokens[($stackPtr + 1)]['content'],
+                $tokens[$stackPtr]['content'] . ' ' . $tokens[($stackPtr + 1)]['content'],
+                $tokens[$stackPtr]['content'] . $tokens[($stackPtr + 1)]['content'],
             ];
             $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'Incorrect', $data);
             if ($fix === true) {

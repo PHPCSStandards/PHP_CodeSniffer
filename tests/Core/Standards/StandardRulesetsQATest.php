@@ -63,8 +63,8 @@ final class StandardRulesetsQATest extends AbstractRulesetTestCase
     {
         // Get a list of all build-in, PHPCS native standards.
         $sep          = DIRECTORY_SEPARATOR;
-        $targetDir    = dirname(__DIR__, 3).$sep.'src'.$sep.'Standards'.$sep;
-        $rulesetFiles = glob($targetDir.'*'.$sep.'ruleset.xml');
+        $targetDir    = dirname(__DIR__, 3) . $sep . 'src' . $sep . 'Standards' . $sep;
+        $rulesetFiles = glob($targetDir . '*' . $sep . 'ruleset.xml');
 
         $data = [];
         foreach ($rulesetFiles as $file) {

@@ -149,7 +149,7 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
             $className = $phpcsFile->getDeclarationName($currScope);
         }
 
-        $errorData = [$className.'::'.$methodName];
+        $errorData = [$className . '::' . $methodName];
 
         $methodNameLc = strtolower($methodName);
         $classNameLc  = strtolower($className);
@@ -173,7 +173,7 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
         }
 
         // PHP4 destructors are allowed to break our rules.
-        if ($methodNameLc === '_'.$classNameLc) {
+        if ($methodNameLc === '_' . $classNameLc) {
             return;
         }
 

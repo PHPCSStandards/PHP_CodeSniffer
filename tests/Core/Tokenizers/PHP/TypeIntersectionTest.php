@@ -32,8 +32,8 @@ final class TypeIntersectionTest extends AbstractTokenizerTestCase
         $target     = $this->getTargetToken($testMarker, [T_BITWISE_AND, T_TYPE_INTERSECTION]);
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_BITWISE_AND, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_BITWISE_AND (code)');
-        $this->assertSame('T_BITWISE_AND', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_BITWISE_AND (type)');
+        $this->assertSame(T_BITWISE_AND, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_BITWISE_AND (code)');
+        $this->assertSame('T_BITWISE_AND', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_BITWISE_AND (type)');
 
     }//end testBitwiseAnd()
 
@@ -90,8 +90,8 @@ final class TypeIntersectionTest extends AbstractTokenizerTestCase
         $target     = $this->getTargetToken($testMarker, [T_BITWISE_AND, T_TYPE_INTERSECTION]);
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_TYPE_INTERSECTION, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_TYPE_INTERSECTION (code)');
-        $this->assertSame('T_TYPE_INTERSECTION', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_TYPE_INTERSECTION (type)');
+        $this->assertSame(T_TYPE_INTERSECTION, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_TYPE_INTERSECTION (code)');
+        $this->assertSame('T_TYPE_INTERSECTION', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_TYPE_INTERSECTION (type)');
 
     }//end testTypeIntersection()
 

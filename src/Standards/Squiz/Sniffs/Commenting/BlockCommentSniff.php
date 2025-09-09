@@ -177,7 +177,7 @@ class BlockCommentSniff implements Sniff
             if ($tokens[$stackPtr]['line'] !== $tokens[$nextNonEmpty]['line']) {
                 $fix = $phpcsFile->addFixableError($error, $stackPtr, 'SingleLine');
                 if ($fix === true) {
-                    $comment = '// '.$commentText.$phpcsFile->eolChar;
+                    $comment = '// ' . $commentText . $phpcsFile->eolChar;
                     $phpcsFile->fixer->replaceToken($stackPtr, $comment);
                 }
             } else {
@@ -203,7 +203,7 @@ class BlockCommentSniff implements Sniff
 
                 $comment = preg_replace(
                     '/^(\s*\/\*\*?)/',
-                    '$1'.$phpcsFile->eolChar.$indent,
+                    '$1' . $phpcsFile->eolChar . $indent,
                     $tokens[$stackPtr]['content'],
                     1
                 );
@@ -236,7 +236,7 @@ class BlockCommentSniff implements Sniff
             }
 
             if ($leadingSpace !== $expected) {
-                $expectedTxt = $expected.' space';
+                $expectedTxt = $expected . ' space';
                 if ($expected !== 1) {
                     $expectedTxt .= 's';
                 }
@@ -259,7 +259,7 @@ class BlockCommentSniff implements Sniff
                         $padding = str_repeat(' ', $expected);
                     }
 
-                    $phpcsFile->fixer->replaceToken($commentLines[1], $padding.$commentText);
+                    $phpcsFile->fixer->replaceToken($commentLines[1], $padding . $commentText);
                 }
             }//end if
 
@@ -296,7 +296,7 @@ class BlockCommentSniff implements Sniff
             }
 
             if ($leadingSpace < $expected) {
-                $expectedTxt = $expected.' space';
+                $expectedTxt = $expected . ' space';
                 if ($expected !== 1) {
                     $expectedTxt .= 's';
                 }
@@ -319,7 +319,7 @@ class BlockCommentSniff implements Sniff
                         $padding = str_repeat(' ', $expected);
                     }
 
-                    $phpcsFile->fixer->replaceToken($line, $padding.$commentText);
+                    $phpcsFile->fixer->replaceToken($line, $padding . $commentText);
                 }
             }//end if
         }//end foreach
@@ -340,7 +340,7 @@ class BlockCommentSniff implements Sniff
             }
 
             if ($leadingSpace !== $expected) {
-                $expectedTxt = $expected.' space';
+                $expectedTxt = $expected . ' space';
                 if ($expected !== 1) {
                     $expectedTxt .= 's';
                 }
@@ -363,7 +363,7 @@ class BlockCommentSniff implements Sniff
                         $padding = str_repeat(' ', $expected);
                     }
 
-                    $phpcsFile->fixer->replaceToken($commentLines[$lastIndex], $padding.$commentText);
+                    $phpcsFile->fixer->replaceToken($commentLines[$lastIndex], $padding . $commentText);
                 }
             }//end if
         }//end if

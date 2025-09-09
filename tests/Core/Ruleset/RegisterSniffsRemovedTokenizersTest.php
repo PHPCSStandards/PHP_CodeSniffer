@@ -37,7 +37,7 @@ final class RegisterSniffsRemovedTokenizersTest extends AbstractRulesetTestCase
     public static function setUpBeforeClass(): void
     {
         // Set up the ruleset.
-        $standard     = __DIR__.'/RegisterSniffsRemovedTokenizersTest.xml';
+        $standard     = __DIR__ . '/RegisterSniffsRemovedTokenizersTest.xml';
         self::$config = new ConfigDouble(["--standard=$standard"]);
 
     }//end setUpBeforeClass()

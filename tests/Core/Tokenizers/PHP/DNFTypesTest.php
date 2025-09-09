@@ -36,28 +36,28 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
         $opener  = $tokens[$openPtr];
 
         $this->assertSame('(', $opener['content'], 'Content of type open parenthesis is not "("');
-        $this->assertSame(T_OPEN_PARENTHESIS, $opener['code'], 'Token tokenized as '.$opener['type'].', not T_OPEN_PARENTHESIS (code)');
-        $this->assertSame('T_OPEN_PARENTHESIS', $opener['type'], 'Token tokenized as '.$opener['type'].', not T_OPEN_PARENTHESIS (type)');
+        $this->assertSame(T_OPEN_PARENTHESIS, $opener['code'], 'Token tokenized as ' . $opener['type'] . ', not T_OPEN_PARENTHESIS (code)');
+        $this->assertSame('T_OPEN_PARENTHESIS', $opener['type'], 'Token tokenized as ' . $opener['type'] . ', not T_OPEN_PARENTHESIS (type)');
 
         $closePtr = $opener['parenthesis_closer'];
         $closer   = $tokens[$closePtr];
 
         $this->assertSame(')', $closer['content'], 'Content of type close parenthesis is not ")"');
-        $this->assertSame(T_CLOSE_PARENTHESIS, $closer['code'], 'Token tokenized as '.$closer['type'].', not T_CLOSE_PARENTHESIS (code)');
-        $this->assertSame('T_CLOSE_PARENTHESIS', $closer['type'], 'Token tokenized as '.$closer['type'].', not T_CLOSE_PARENTHESIS (type)');
+        $this->assertSame(T_CLOSE_PARENTHESIS, $closer['code'], 'Token tokenized as ' . $closer['type'] . ', not T_CLOSE_PARENTHESIS (code)');
+        $this->assertSame('T_CLOSE_PARENTHESIS', $closer['type'], 'Token tokenized as ' . $closer['type'] . ', not T_CLOSE_PARENTHESIS (type)');
 
         if ($skipCheckInside === false) {
             for ($i = ($openPtr + 1); $i < $closePtr; $i++) {
                 // If there are ampersands, make sure these are tokenized as bitwise and.
                 if ($tokens[$i]['content'] === '&') {
-                    $this->assertSame(T_BITWISE_AND, $tokens[$i]['code'], 'Token tokenized as '.$tokens[$i]['type'].', not T_BITWISE_AND (code)');
-                    $this->assertSame('T_BITWISE_AND', $tokens[$i]['type'], 'Token tokenized as '.$tokens[$i]['type'].', not T_BITWISE_AND (type)');
+                    $this->assertSame(T_BITWISE_AND, $tokens[$i]['code'], 'Token tokenized as ' . $tokens[$i]['type'] . ', not T_BITWISE_AND (code)');
+                    $this->assertSame('T_BITWISE_AND', $tokens[$i]['type'], 'Token tokenized as ' . $tokens[$i]['type'] . ', not T_BITWISE_AND (type)');
                 }
 
                 // If there are pipes, make sure these are tokenized as bitwise or.
                 if ($tokens[$i]['content'] === '|') {
-                    $this->assertSame(T_BITWISE_OR, $tokens[$i]['code'], 'Token tokenized as '.$tokens[$i]['type'].', not T_BITWISE_OR (code)');
-                    $this->assertSame('T_BITWISE_OR', $tokens[$i]['type'], 'Token tokenized as '.$tokens[$i]['type'].', not T_BITWISE_OR (type)');
+                    $this->assertSame(T_BITWISE_OR, $tokens[$i]['code'], 'Token tokenized as ' . $tokens[$i]['type'] . ', not T_BITWISE_OR (code)');
+                    $this->assertSame('T_BITWISE_OR', $tokens[$i]['type'], 'Token tokenized as ' . $tokens[$i]['type'] . ', not T_BITWISE_OR (type)');
                 }
             }
         }
@@ -67,12 +67,12 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             $this->assertSame(
                 T_BITWISE_OR,
                 $tokens[$before]['code'],
-                'Token before tokenized as '.$tokens[$before]['type'].', not T_BITWISE_OR (code)'
+                'Token before tokenized as ' . $tokens[$before]['type'] . ', not T_BITWISE_OR (code)'
             );
             $this->assertSame(
                 'T_BITWISE_OR',
                 $tokens[$before]['type'],
-                'Token before tokenized as '.$tokens[$before]['type'].', not T_BITWISE_OR (type)'
+                'Token before tokenized as ' . $tokens[$before]['type'] . ', not T_BITWISE_OR (type)'
             );
         }
 
@@ -81,12 +81,12 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             $this->assertSame(
                 T_BITWISE_OR,
                 $tokens[$after]['code'],
-                'Token after tokenized as '.$tokens[$after]['type'].', not T_BITWISE_OR (code)'
+                'Token after tokenized as ' . $tokens[$after]['type'] . ', not T_BITWISE_OR (code)'
             );
             $this->assertSame(
                 'T_BITWISE_OR',
                 $tokens[$after]['type'],
-                'Token after tokenized as '.$tokens[$after]['type'].', not T_BITWISE_OR (type)'
+                'Token after tokenized as ' . $tokens[$after]['type'] . ', not T_BITWISE_OR (type)'
             );
         }
 
@@ -292,15 +292,15 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
         $opener  = $tokens[$openPtr];
 
         $this->assertSame('(', $opener['content'], 'Content of type open parenthesis is not "("');
-        $this->assertSame(T_TYPE_OPEN_PARENTHESIS, $opener['code'], 'Token tokenized as '.$opener['type'].', not T_TYPE_OPEN_PARENTHESIS (code)');
-        $this->assertSame('T_TYPE_OPEN_PARENTHESIS', $opener['type'], 'Token tokenized as '.$opener['type'].', not T_TYPE_OPEN_PARENTHESIS (type)');
+        $this->assertSame(T_TYPE_OPEN_PARENTHESIS, $opener['code'], 'Token tokenized as ' . $opener['type'] . ', not T_TYPE_OPEN_PARENTHESIS (code)');
+        $this->assertSame('T_TYPE_OPEN_PARENTHESIS', $opener['type'], 'Token tokenized as ' . $opener['type'] . ', not T_TYPE_OPEN_PARENTHESIS (type)');
 
         $closePtr = $opener['parenthesis_closer'];
         $closer   = $tokens[$closePtr];
 
         $this->assertSame(')', $closer['content'], 'Content of type close parenthesis is not ")"');
-        $this->assertSame(T_TYPE_CLOSE_PARENTHESIS, $closer['code'], 'Token tokenized as '.$closer['type'].', not T_TYPE_CLOSE_PARENTHESIS (code)');
-        $this->assertSame('T_TYPE_CLOSE_PARENTHESIS', $closer['type'], 'Token tokenized as '.$closer['type'].', not T_TYPE_CLOSE_PARENTHESIS (type)');
+        $this->assertSame(T_TYPE_CLOSE_PARENTHESIS, $closer['code'], 'Token tokenized as ' . $closer['type'] . ', not T_TYPE_CLOSE_PARENTHESIS (code)');
+        $this->assertSame('T_TYPE_CLOSE_PARENTHESIS', $closer['type'], 'Token tokenized as ' . $closer['type'] . ', not T_TYPE_CLOSE_PARENTHESIS (type)');
 
         $intersectionCount = 0;
         for ($i = ($openPtr + 1); $i < $closePtr; $i++) {
@@ -308,20 +308,20 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
                 $this->assertSame(
                     T_TYPE_INTERSECTION,
                     $tokens[$i]['code'],
-                    'Token tokenized as '.$tokens[$i]['type'].', not T_TYPE_INTERSECTION (code)'
+                    'Token tokenized as ' . $tokens[$i]['type'] . ', not T_TYPE_INTERSECTION (code)'
                 );
                 $this->assertSame(
                     'T_TYPE_INTERSECTION',
                     $tokens[$i]['type'],
-                    'Token tokenized as '.$tokens[$i]['type'].', not T_TYPE_INTERSECTION (type)'
+                    'Token tokenized as ' . $tokens[$i]['type'] . ', not T_TYPE_INTERSECTION (type)'
                 );
                 ++$intersectionCount;
             }
 
             // Not valid, but that's irrelevant for the tokenization.
             if ($tokens[$i]['content'] === '|') {
-                $this->assertSame(T_TYPE_UNION, $tokens[$i]['code'], 'Token tokenized as '.$tokens[$i]['type'].', not T_TYPE_UNION (code)');
-                $this->assertSame('T_TYPE_UNION', $tokens[$i]['type'], 'Token tokenized as '.$tokens[$i]['type'].', not T_TYPE_UNION (type)');
+                $this->assertSame(T_TYPE_UNION, $tokens[$i]['code'], 'Token tokenized as ' . $tokens[$i]['type'] . ', not T_TYPE_UNION (code)');
+                $this->assertSame('T_TYPE_UNION', $tokens[$i]['type'], 'Token tokenized as ' . $tokens[$i]['type'] . ', not T_TYPE_UNION (type)');
 
                 // For the purposes of this test, presume it was intended as an intersection.
                 ++$intersectionCount;
@@ -335,12 +335,12 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             $this->assertSame(
                 T_TYPE_UNION,
                 $tokens[$before]['code'],
-                'Token before tokenized as '.$tokens[$before]['type'].', not T_TYPE_UNION (code)'
+                'Token before tokenized as ' . $tokens[$before]['type'] . ', not T_TYPE_UNION (code)'
             );
             $this->assertSame(
                 'T_TYPE_UNION',
                 $tokens[$before]['type'],
-                'Token before tokenized as '.$tokens[$before]['type'].', not T_TYPE_UNION (type)'
+                'Token before tokenized as ' . $tokens[$before]['type'] . ', not T_TYPE_UNION (type)'
             );
         }
 
@@ -349,12 +349,12 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             $this->assertSame(
                 T_NULLABLE,
                 $tokens[$before]['code'],
-                'Token before tokenized as '.$tokens[$before]['type'].', not T_NULLABLE (code)'
+                'Token before tokenized as ' . $tokens[$before]['type'] . ', not T_NULLABLE (code)'
             );
             $this->assertSame(
                 'T_NULLABLE',
                 $tokens[$before]['type'],
-                'Token before tokenized as '.$tokens[$before]['type'].', not T_NULLABLE (type)'
+                'Token before tokenized as ' . $tokens[$before]['type'] . ', not T_NULLABLE (type)'
             );
         }
 
@@ -363,12 +363,12 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
             $this->assertSame(
                 T_TYPE_UNION,
                 $tokens[$after]['code'],
-                'Token after tokenized as '.$tokens[$after]['type'].', not T_TYPE_UNION (code)'
+                'Token after tokenized as ' . $tokens[$after]['type'] . ', not T_TYPE_UNION (code)'
             );
             $this->assertSame(
                 'T_TYPE_UNION',
                 $tokens[$after]['type'],
-                'Token after tokenized as '.$tokens[$after]['type'].', not T_TYPE_UNION (type)'
+                'Token after tokenized as ' . $tokens[$after]['type'] . ', not T_TYPE_UNION (type)'
             );
         }
 

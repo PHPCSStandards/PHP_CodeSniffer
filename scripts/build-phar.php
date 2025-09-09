@@ -23,12 +23,12 @@ use PHP_CodeSniffer\Util\Tokens;
 error_reporting(E_ALL);
 
 if (ini_get('phar.readonly') === '1') {
-    echo 'Unable to build, phar.readonly in php.ini is set to read only.'.PHP_EOL;
+    echo 'Unable to build, phar.readonly in php.ini is set to read only.' . PHP_EOL;
     exit(1);
 }
 
-require_once dirname(__DIR__).'/autoload.php';
-require_once dirname(__DIR__).'/src/Util/Tokens.php';
+require_once dirname(__DIR__) . '/autoload.php';
+require_once dirname(__DIR__) . '/src/Util/Tokens.php';
 
 if (defined('PHP_CODESNIFFER_VERBOSITY') === false) {
     define('PHP_CODESNIFFER_VERBOSITY', 0);
@@ -54,13 +54,13 @@ function stripWhitespaceAndComments(string $fullpath, Config $config)
         $tokenizer = new PHP($contents, $config, "\n");
         $tokens    = $tokenizer->getTokens();
     } catch (TokenizerException $e) {
-        throw new RuntimeException('Failed to tokenize file '.$fullpath);
+        throw new RuntimeException('Failed to tokenize file ' . $fullpath);
     }
 
     $stripped = '';
     foreach ($tokens as $token) {
         if ($token['code'] === T_ATTRIBUTE_END || $token['code'] === T_OPEN_TAG) {
-            $stripped .= $token['content']."\n";
+            $stripped .= $token['content'] . "\n";
             continue;
         }
 
@@ -87,13 +87,13 @@ $scripts = [
 ];
 
 foreach ($scripts as $script) {
-    echo "Building $script phar".PHP_EOL;
+    echo "Building $script phar" . PHP_EOL;
 
-    $pharName = $script.'.phar';
-    $pharFile = getcwd().'/'.$pharName;
-    echo "\t=> $pharFile".PHP_EOL;
+    $pharName = $script . '.phar';
+    $pharFile = getcwd() . '/' . $pharName;
+    echo "\t=> $pharFile" . PHP_EOL;
     if (file_exists($pharFile) === true) {
-        echo "\t** file exists, removing **".PHP_EOL;
+        echo "\t** file exists, removing **" . PHP_EOL;
         unlink($pharFile);
     }
 
@@ -105,7 +105,7 @@ foreach ($scripts as $script) {
 
     echo "\t=> adding files... ";
 
-    $srcDir    = realpath(__DIR__.'/../src');
+    $srcDir    = realpath(__DIR__ . '/../src');
     $srcDirLen = strlen($srcDir);
 
     $rdi = new RecursiveDirectoryIterator($srcDir, RecursiveDirectoryIterator::FOLLOW_SYMLINKS);
@@ -123,11 +123,11 @@ foreach ($scripts as $script) {
         }
 
         $fullpath = $file->getPathname();
-        if (strpos($fullpath, DIRECTORY_SEPARATOR.'Tests'.DIRECTORY_SEPARATOR) !== false) {
+        if (strpos($fullpath, DIRECTORY_SEPARATOR . 'Tests' . DIRECTORY_SEPARATOR) !== false) {
             continue;
         }
 
-        $path = 'src'.substr($fullpath, $srcDirLen);
+        $path = 'src' . substr($fullpath, $srcDirLen);
 
         if (substr($filename, -4) === '.xml') {
             $phar->addFile($fullpath, $path);
@@ -140,39 +140,39 @@ foreach ($scripts as $script) {
     }//end foreach
 
     // Add requirements check.
-    $phar->addFromString('requirements.php', stripWhitespaceAndComments(realpath(__DIR__.'/../requirements.php'), $config));
+    $phar->addFromString('requirements.php', stripWhitespaceAndComments(realpath(__DIR__ . '/../requirements.php'), $config));
 
     // Add autoloader.
-    $phar->addFromString('autoload.php', stripWhitespaceAndComments(realpath(__DIR__.'/../autoload.php'), $config));
+    $phar->addFromString('autoload.php', stripWhitespaceAndComments(realpath(__DIR__ . '/../autoload.php'), $config));
 
     // Add licence file.
-    $phar->addFile(realpath(__DIR__.'/../licence.txt'), 'licence.txt');
+    $phar->addFile(realpath(__DIR__ . '/../licence.txt'), 'licence.txt');
 
-    echo 'done'.PHP_EOL;
-    echo "\t   Added ".$fileCount.' files'.PHP_EOL;
+    echo 'done' . PHP_EOL;
+    echo "\t   Added " . $fileCount . ' files' . PHP_EOL;
 
     /*
         Add the stub.
     */
 
     echo "\t=> adding stub... ";
-    $stub  = '#!/usr/bin/env php'."\n";
-    $stub .= '<?php'."\n";
-    $stub .= 'Phar::mapPhar(\''.$pharName.'\');'."\n";
-    $stub .= 'require_once "phar://'.$pharName.'/requirements.php";'."\n";
-    $stub .= 'PHP_CodeSniffer\checkRequirements();'."\n";
-    $stub .= 'require_once "phar://'.$pharName.'/autoload.php";'."\n";
-    $stub .= '$runner = new PHP_CodeSniffer\Runner();'."\n";
-    $stub .= '$exitCode = $runner->run'.$script.'();'."\n";
-    $stub .= 'exit($exitCode);'."\n";
+    $stub  = '#!/usr/bin/env php' . "\n";
+    $stub .= '<?php' . "\n";
+    $stub .= 'Phar::mapPhar(\'' . $pharName . '\');' . "\n";
+    $stub .= 'require_once "phar://' . $pharName . '/requirements.php";' . "\n";
+    $stub .= 'PHP_CodeSniffer\checkRequirements();' . "\n";
+    $stub .= 'require_once "phar://' . $pharName . '/autoload.php";' . "\n";
+    $stub .= '$runner = new PHP_CodeSniffer\Runner();' . "\n";
+    $stub .= '$exitCode = $runner->run' . $script . '();' . "\n";
+    $stub .= 'exit($exitCode);' . "\n";
     $stub .= '__HALT_COMPILER();';
     $phar->setStub($stub);
 
-    echo 'done'.PHP_EOL;
+    echo 'done' . PHP_EOL;
 }//end foreach
 
 Timing::printRunTime();
 
 echo PHP_EOL;
-echo 'Filesize generated phpcs.phar file: '.number_format(filesize(dirname(__DIR__).'/phpcs.phar'), 0, ',', '.').' bytes'.PHP_EOL;
-echo 'Filesize generated phpcs.phar file: '.number_format(filesize(dirname(__DIR__).'/phpcbf.phar'), 0, ',', '.').' bytes'.PHP_EOL;
+echo 'Filesize generated phpcs.phar file: ' . number_format(filesize(dirname(__DIR__) . '/phpcs.phar'), 0, ',', '.') . ' bytes' . PHP_EOL;
+echo 'Filesize generated phpcs.phar file: ' . number_format(filesize(dirname(__DIR__) . '/phpcbf.phar'), 0, ',', '.') . ' bytes' . PHP_EOL;

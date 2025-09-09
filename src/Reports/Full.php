@@ -95,35 +95,35 @@ class Full implements Report
             $width = 70;
         }
 
-        echo PHP_EOL."\033[1mFILE: ";
+        echo PHP_EOL . "\033[1mFILE: ";
         if ($fileLength <= ($width - 6)) {
             echo $file;
         } else {
-            echo '...'.substr($file, ($fileLength - ($width - 6)));
+            echo '...' . substr($file, ($fileLength - ($width - 6)));
         }
 
-        echo "\033[0m".PHP_EOL;
-        echo str_repeat('-', $width).PHP_EOL;
+        echo "\033[0m" . PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
 
-        echo "\033[1m".'FOUND '.$report['errors'].' ERROR';
+        echo "\033[1m" . 'FOUND ' . $report['errors'] . ' ERROR';
         if ($report['errors'] !== 1) {
             echo 'S';
         }
 
         if ($report['warnings'] > 0) {
-            echo ' AND '.$report['warnings'].' WARNING';
+            echo ' AND ' . $report['warnings'] . ' WARNING';
             if ($report['warnings'] !== 1) {
                 echo 'S';
             }
         }
 
-        echo ' AFFECTING '.count($report['messages']).' LINE';
+        echo ' AFFECTING ' . count($report['messages']) . ' LINE';
         if (count($report['messages']) !== 1) {
             echo 'S';
         }
 
-        echo "\033[0m".PHP_EOL;
-        echo str_repeat('-', $width).PHP_EOL;
+        echo "\033[0m" . PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
 
         // The maximum amount of space an error message can use.
         $maxErrorSpace = ($width - $paddingLength - 1);
@@ -135,7 +135,7 @@ class Full implements Report
             $afterMsg  = "\033[0m";
         }
 
-        $beforeAfterLength = strlen($beforeMsg.$afterMsg);
+        $beforeAfterLength = strlen($beforeMsg . $afterMsg);
 
         foreach ($report['messages'] as $line => $lineErrors) {
             foreach ($lineErrors as $colErrors) {
@@ -147,19 +147,19 @@ class Full implements Report
 
                     // Add the padding _after_ the wordwrap as the message itself may contain line breaks
                     // and those lines will also need to receive padding.
-                    $errorMsg = str_replace("\n", $afterMsg.PHP_EOL.$paddingLine2.$beforeMsg, $errorMsg);
-                    $errorMsg = $beforeMsg.$errorMsg.$afterMsg;
+                    $errorMsg = str_replace("\n", $afterMsg . PHP_EOL . $paddingLine2 . $beforeMsg, $errorMsg);
+                    $errorMsg = $beforeMsg . $errorMsg . $afterMsg;
 
                     if ($showSources === true) {
                         $lastMsg          = $errorMsg;
-                        $startPosLastLine = strrpos($errorMsg, PHP_EOL.$paddingLine2.$beforeMsg);
+                        $startPosLastLine = strrpos($errorMsg, PHP_EOL . $paddingLine2 . $beforeMsg);
                         if ($startPosLastLine !== false) {
                             // Message is multiline. Grab the text of last line of the message, including the color codes.
-                            $lastMsg = substr($errorMsg, ($startPosLastLine + strlen(PHP_EOL.$paddingLine2)));
+                            $lastMsg = substr($errorMsg, ($startPosLastLine + strlen(PHP_EOL . $paddingLine2)));
                         }
 
                         // When show sources is used, the message itself will be bolded, so we need to correct the length.
-                        $sourceSuffix = '('.$error['source'].')';
+                        $sourceSuffix = '(' . $error['source'] . ')';
 
                         $lastMsgPlusSourceLength = strlen($lastMsg);
                         // Add space + source suffix length.
@@ -168,16 +168,16 @@ class Full implements Report
                         $lastMsgPlusSourceLength -= $beforeAfterLength;
 
                         if ($lastMsgPlusSourceLength > $maxErrorSpace) {
-                            $errorMsg .= PHP_EOL.$paddingLine2.$sourceSuffix;
+                            $errorMsg .= PHP_EOL . $paddingLine2 . $sourceSuffix;
                         } else {
-                            $errorMsg .= ' '.$sourceSuffix;
+                            $errorMsg .= ' ' . $sourceSuffix;
                         }
                     }//end if
 
                     // The padding that goes on the front of the line.
                     $padding = ($maxLineNumLength - strlen($line));
 
-                    echo ' '.str_repeat(' ', $padding).$line.' | ';
+                    echo ' ' . str_repeat(' ', $padding) . $line . ' | ';
                     if ($error['type'] === 'ERROR') {
                         echo "\033[31mERROR\033[0m";
                         if ($report['warnings'] > 0) {
@@ -199,15 +199,15 @@ class Full implements Report
                         echo '] ';
                     }
 
-                    echo $errorMsg.PHP_EOL;
+                    echo $errorMsg . PHP_EOL;
                 }//end foreach
             }//end foreach
         }//end foreach
 
-        echo str_repeat('-', $width).PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
         if ($report['fixable'] > 0) {
-            echo "\033[1m".'PHPCBF CAN FIX THE '.$report['fixable'].' MARKED SNIFF VIOLATIONS AUTOMATICALLY'."\033[0m".PHP_EOL;
-            echo str_repeat('-', $width).PHP_EOL;
+            echo "\033[1m" . 'PHPCBF CAN FIX THE ' . $report['fixable'] . ' MARKED SNIFF VIOLATIONS AUTOMATICALLY' . "\033[0m" . PHP_EOL;
+            echo str_repeat('-', $width) . PHP_EOL;
         }
 
         echo PHP_EOL;

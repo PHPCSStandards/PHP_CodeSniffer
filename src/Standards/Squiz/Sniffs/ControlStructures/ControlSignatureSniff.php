@@ -138,7 +138,7 @@ class ControlSignatureSniff implements Sniff
                     $found = strlen($content);
                 }
             } else {
-                $found = '"'.str_replace($phpcsFile->eolChar, '\n', $content).'"';
+                $found = '"' . str_replace($phpcsFile->eolChar, '\n', $content) . '"';
             }
 
             if ($found !== $expected) {
@@ -169,7 +169,7 @@ class ControlSignatureSniff implements Sniff
                                 }
                             }
                         } else {
-                            $phpcsFile->fixer->addContent($closer, $padding.$tokens[$opener]['content']);
+                            $phpcsFile->fixer->addContent($closer, $padding . $tokens[$opener]['content']);
                             $phpcsFile->fixer->replaceToken($opener, '');
 
                             if ($tokens[$opener]['line'] !== $tokens[$closer]['line']) {

@@ -103,7 +103,7 @@ class Common
         if (substr($path, 0, 2) === '~/') {
             $homeDir = getenv('HOME');
             if ($homeDir !== false) {
-                $path = $homeDir.substr($path, 1);
+                $path = $homeDir . substr($path, 1);
             }
         }
 
@@ -125,13 +125,13 @@ class Common
         }
 
         $phar  = Phar::running(false);
-        $extra = str_replace('phar://'.$phar, '', $path);
+        $extra = str_replace('phar://' . $phar, '', $path);
         $path  = realpath($phar);
         if ($path === false) {
             return false;
         }
 
-        $path = 'phar://'.$path.$extra;
+        $path = 'phar://' . $path . $extra;
         if (file_exists($path) === true) {
             return $path;
         }
@@ -514,7 +514,7 @@ class Common
                     $type1 = self::suggestType($type1);
                     $type2 = self::suggestType($type2);
                     if ($type2 !== '') {
-                        $type2 = ' => '.$type2;
+                        $type2 = ' => ' . $type2;
                     }
 
                     return "array($type1$type2)";
@@ -557,7 +557,7 @@ class Common
             || $parts[($partsCount - 2)] === 'Sniffs'
         ) {
             throw new InvalidArgumentException(
-                'The $sniffClass parameter was not passed a fully qualified sniff(test) class name. Received: '.$sniffClass
+                'The $sniffClass parameter was not passed a fully qualified sniff(test) class name. Received: ' . $sniffClass
             );
         }
 
@@ -571,13 +571,13 @@ class Common
             $sniff = substr($sniff, 0, -8);
         } else {
             throw new InvalidArgumentException(
-                'The $sniffClass parameter was not passed a fully qualified sniff(test) class name. Received: '.$sniffClass
+                'The $sniffClass parameter was not passed a fully qualified sniff(test) class name. Received: ' . $sniffClass
             );
         }
 
         $standard = $parts[($partsCount - 4)];
         $category = $parts[($partsCount - 2)];
-        return $standard.'.'.$category.'.'.$sniff;
+        return $standard . '.' . $category . '.' . $sniff;
 
     }//end getSniffCode()
 

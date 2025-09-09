@@ -36,12 +36,12 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             T_INLINE_THEN,
             $tokens[$target]['code'],
-            'Token tokenized as '.Tokens::tokenName($tokens[$target]['code']).', not T_INLINE_THEN (code)'
+            'Token tokenized as ' . Tokens::tokenName($tokens[$target]['code']) . ', not T_INLINE_THEN (code)'
         );
         $this->assertSame(
             'T_INLINE_THEN',
             $tokens[$target]['type'],
-            'Token tokenized as '.$tokens[$target]['type'].', not T_INLINE_THEN (type)'
+            'Token tokenized as ' . $tokens[$target]['type'] . ', not T_INLINE_THEN (type)'
         );
 
     }//end testTernaryIsInlineThen()
@@ -71,12 +71,12 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
             $this->assertSame(
                 T_STRING,
                 $tokens[$i]['code'],
-                'Token tokenized as '.Tokens::tokenName($tokens[$i]['code']).', not T_STRING (code)'
+                'Token tokenized as ' . Tokens::tokenName($tokens[$i]['code']) . ', not T_STRING (code)'
             );
             $this->assertSame(
                 'T_STRING',
                 $tokens[$i]['type'],
-                'Token tokenized as '.$tokens[$i]['type'].', not T_STRING (type)'
+                'Token tokenized as ' . $tokens[$i]['type'] . ', not T_STRING (type)'
             );
         }
 
@@ -138,7 +138,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
             $this->assertSame(
                 $sequence[$current],
                 $tokens[$i]['code'],
-                'Token tokenized as '.Tokens::tokenName($tokens[$i]['code']).', not '.Tokens::tokenName($sequence[$current]).' (code)'
+                'Token tokenized as ' . Tokens::tokenName($tokens[$i]['code']) . ', not ' . Tokens::tokenName($sequence[$current]) . ' (code)'
             );
 
             ++$current;

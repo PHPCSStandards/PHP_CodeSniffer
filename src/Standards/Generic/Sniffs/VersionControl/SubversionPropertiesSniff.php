@@ -131,8 +131,8 @@ class SubversionPropertiesSniff implements Sniff
         $properties = [];
 
         $paths   = [];
-        $paths[] = dirname($path).'/.svn/props/'.basename($path).'.svn-work';
-        $paths[] = dirname($path).'/.svn/prop-base/'.basename($path).'.svn-base';
+        $paths[] = dirname($path) . '/.svn/props/' . basename($path) . '.svn-work';
+        $paths[] = dirname($path) . '/.svn/prop-base/' . basename($path) . '.svn-base';
 
         $foundPath = false;
         foreach ($paths as $path) {

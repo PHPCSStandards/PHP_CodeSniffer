@@ -99,7 +99,7 @@ final class MessageCollector
     public function add($message, $type = self::NOTICE)
     {
         if (is_string($message) === false) {
-            throw new InvalidArgumentException('The $message should be of type string. Received: '.gettype($message).'.');
+            throw new InvalidArgumentException('The $message should be of type string. Received: ' . gettype($message) . '.');
         }
 
         if ($type !== self::ERROR
@@ -107,7 +107,7 @@ final class MessageCollector
             && $type !== self::NOTICE
             && $type !== self::DEPRECATED
         ) {
-            throw new InvalidArgumentException('The message $type should be one of the predefined MessageCollector constants. Received: '.$type.'.');
+            throw new InvalidArgumentException('The message $type should be one of the predefined MessageCollector constants. Received: ' . $type . '.');
         }
 
         $this->cache[] = [
@@ -165,7 +165,7 @@ final class MessageCollector
         $allMessages = implode(PHP_EOL, $messages);
 
         if ($blocking === true) {
-            throw new RuntimeException($allMessages.PHP_EOL.PHP_EOL);
+            throw new RuntimeException($allMessages . PHP_EOL . PHP_EOL);
         } else {
             StatusWriter::write($allMessages, 0, 2);
         }
@@ -203,19 +203,19 @@ final class MessageCollector
     {
         switch ($type) {
         case self::ERROR:
-            $message = 'ERROR: '.$message;
+            $message = 'ERROR: ' . $message;
             break;
 
         case self::WARNING:
-            $message = 'WARNING: '.$message;
+            $message = 'WARNING: ' . $message;
             break;
 
         case self::DEPRECATED:
-            $message = 'DEPRECATED: '.$message;
+            $message = 'DEPRECATED: ' . $message;
             break;
 
         default:
-            $message = 'NOTICE: '.$message;
+            $message = 'NOTICE: ' . $message;
             break;
         }
 

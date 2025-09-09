@@ -109,14 +109,14 @@ final class Timing
         if ($duration >= self::MINUTE_IN_MS) {
             $mins       = floor($duration / self::MINUTE_IN_MS);
             $secs       = round((fmod($duration, self::MINUTE_IN_MS) / self::SECOND_IN_MS), 2);
-            $timeString = $mins.' mins';
+            $timeString = $mins . ' mins';
             if ($secs >= 0.01) {
                 $timeString .= ", $secs secs";
             }
         } else if ($duration >= self::SECOND_IN_MS) {
-            $timeString = round(($duration / self::SECOND_IN_MS), 2).' secs';
+            $timeString = round(($duration / self::SECOND_IN_MS), 2) . ' secs';
         } else {
-            $timeString = round($duration).'ms';
+            $timeString = round($duration) . 'ms';
         }
 
         return $timeString;
@@ -147,7 +147,7 @@ final class Timing
         $duration = self::getDuration();
         $duration = self::getHumanReadableDuration($duration);
 
-        $mem = round((memory_get_peak_usage(true) / (1024 * 1024)), 2).'MB';
+        $mem = round((memory_get_peak_usage(true) / (1024 * 1024)), 2) . 'MB';
         StatusWriter::write("Time: $duration; Memory: $mem");
 
         self::$printed = true;

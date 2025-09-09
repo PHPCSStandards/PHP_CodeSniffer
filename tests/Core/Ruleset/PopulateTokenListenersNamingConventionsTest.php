@@ -33,26 +33,26 @@ final class PopulateTokenListenersNamingConventionsTest extends AbstractRulesetT
     public function testBrokenNamingConventions()
     {
         $expectedMessage  = 'ERROR: The sniff BrokenNamingConventions\\Sniffs\\MissingCategoryDirSniff does not comply';
-        $expectedMessage .= ' with the PHP_CodeSniffer naming conventions.'.PHP_EOL;
-        $expectedMessage .= 'Contact the sniff author to fix the sniff.'.PHP_EOL;
-        $expectedMessage .= 'ERROR: The sniff NoNamespaceSniff does not comply with the PHP_CodeSniffer naming conventions.'.PHP_EOL;
-        $expectedMessage .= 'Contact the sniff author to fix the sniff.'.PHP_EOL;
-        $expectedMessage .= 'ERROR: The sniff Sniffs\PartialNamespaceSniff does not comply with the PHP_CodeSniffer naming conventions.'.PHP_EOL;
-        $expectedMessage .= 'Contact the sniff author to fix the sniff.'.PHP_EOL;
+        $expectedMessage .= ' with the PHP_CodeSniffer naming conventions.' . PHP_EOL;
+        $expectedMessage .= 'Contact the sniff author to fix the sniff.' . PHP_EOL;
+        $expectedMessage .= 'ERROR: The sniff NoNamespaceSniff does not comply with the PHP_CodeSniffer naming conventions.' . PHP_EOL;
+        $expectedMessage .= 'Contact the sniff author to fix the sniff.' . PHP_EOL;
+        $expectedMessage .= 'ERROR: The sniff Sniffs\PartialNamespaceSniff does not comply with the PHP_CodeSniffer naming conventions.' . PHP_EOL;
+        $expectedMessage .= 'Contact the sniff author to fix the sniff.' . PHP_EOL;
         $expectedMessage .= 'ERROR: The sniff BrokenNamingConventions\Sniffs\Category\Sniff does not comply';
-        $expectedMessage .= ' with the PHP_CodeSniffer naming conventions.'.PHP_EOL;
-        $expectedMessage .= 'Contact the sniff author to fix the sniff.'.PHP_EOL;
+        $expectedMessage .= ' with the PHP_CodeSniffer naming conventions.' . PHP_EOL;
+        $expectedMessage .= 'Contact the sniff author to fix the sniff.' . PHP_EOL;
         $expectedMessage .= 'ERROR: The sniff BrokenNamingConventions\Sniffs\Sniffs\CategoryCalledSniffsSniff does not';
-        $expectedMessage .= ' comply with the PHP_CodeSniffer naming conventions.'.PHP_EOL;
-        $expectedMessage .= 'Contact the sniff author to fix the sniff.'.PHP_EOL;
+        $expectedMessage .= ' comply with the PHP_CodeSniffer naming conventions.' . PHP_EOL;
+        $expectedMessage .= 'Contact the sniff author to fix the sniff.' . PHP_EOL;
         $expectedMessage .= 'ERROR: The sniff BrokenNamingConventions\Sniffs\Category\SubDir\TooDeeplyNestedSniff';
-        $expectedMessage .= ' does not comply with the PHP_CodeSniffer naming conventions.'.PHP_EOL;
-        $expectedMessage .= 'Contact the sniff author to fix the sniff.'.PHP_EOL.PHP_EOL;
+        $expectedMessage .= ' does not comply with the PHP_CodeSniffer naming conventions.' . PHP_EOL;
+        $expectedMessage .= 'Contact the sniff author to fix the sniff.' . PHP_EOL . PHP_EOL;
 
         $this->expectRuntimeExceptionMessage($expectedMessage);
 
         // Set up the ruleset.
-        $standard = __DIR__.'/PopulateTokenListenersNamingConventionsTest.xml';
+        $standard = __DIR__ . '/PopulateTokenListenersNamingConventionsTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 

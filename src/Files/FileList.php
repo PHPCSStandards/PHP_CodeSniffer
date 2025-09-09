@@ -83,7 +83,7 @@ class FileList implements Iterator, Countable
             $isPharFile = Common::isPharFile($path);
             if (is_dir($path) === true || $isPharFile === true) {
                 if ($isPharFile === true) {
-                    $path = 'phar://'.$path;
+                    $path = 'phar://' . $path;
                 }
 
                 $filterClass = $this->getFilterClass();
@@ -163,13 +163,13 @@ class FileList implements Iterator, Countable
                 // This is a path to a custom filter class.
                 $filename = realpath($filterType);
                 if ($filename === false) {
-                    $error = "ERROR: Custom filter \"$filterType\" not found".PHP_EOL;
+                    $error = "ERROR: Custom filter \"$filterType\" not found" . PHP_EOL;
                     throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                 }
 
                 $filterClass = Autoload::loadFile($filename);
             } else {
-                $filterClass = '\PHP_CodeSniffer\Filters\\'.$filterType;
+                $filterClass = '\PHP_CodeSniffer\Filters\\' . $filterType;
             }
         }
 

@@ -212,12 +212,12 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
         }
 
         foreach (['extends', 'implements'] as $keywordType) {
-            $keyword = $phpcsFile->findNext(constant('T_'.strtoupper($keywordType)), ($compareToken + 1), $openingBrace);
+            $keyword = $phpcsFile->findNext(constant('T_' . strtoupper($keywordType)), ($compareToken + 1), $openingBrace);
             if ($keyword !== false) {
                 if ($tokens[$keyword]['line'] !== $tokens[$compareToken]['line']) {
-                    $error = 'The '.$keywordType.' keyword must be on the same line as the %s '.$compareType;
+                    $error = 'The ' . $keywordType . ' keyword must be on the same line as the %s ' . $compareType;
                     $data  = [$stackPtrType];
-                    $fix   = $phpcsFile->addFixableError($error, $keyword, ucfirst($keywordType).'Line', $data);
+                    $fix   = $phpcsFile->addFixableError($error, $keyword, ucfirst($keywordType) . 'Line', $data);
                     if ($fix === true) {
                         $phpcsFile->fixer->beginChangeset();
                         $comments = [];
@@ -241,7 +241,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                                 ++$i;
                             }
 
-                            $phpcsFile->fixer->addContentBefore($i, ' '.implode(' ', $comments));
+                            $phpcsFile->fixer->addContentBefore($i, ' ' . implode(' ', $comments));
                         }
 
                         $phpcsFile->fixer->endChangeset();
@@ -252,9 +252,9 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                     // in the list.
                     $gap = $tokens[($keyword - 1)]['length'];
                     if ($gap !== 1) {
-                        $error = 'Expected 1 space before '.$keywordType.' keyword; %s found';
+                        $error = 'Expected 1 space before ' . $keywordType . ' keyword; %s found';
                         $data  = [$gap];
-                        $fix   = $phpcsFile->addFixableError($error, $keyword, 'SpaceBefore'.ucfirst($keywordType), $data);
+                        $fix   = $phpcsFile->addFixableError($error, $keyword, 'SpaceBefore' . ucfirst($keywordType), $data);
                         if ($fix === true) {
                             $phpcsFile->fixer->replaceToken(($keyword - 1), ' ');
                         }

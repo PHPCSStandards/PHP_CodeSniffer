@@ -78,7 +78,7 @@ class DuplicateClassNameSniff implements Sniff
                 $name = $phpcsFile->getDeclarationName($stackPtr);
                 if (empty($name) === false) {
                     if ($namespace !== '') {
-                        $name = $namespace.'\\'.$name;
+                        $name = $namespace . '\\' . $name;
                     }
 
                     $compareName = strtolower($name);

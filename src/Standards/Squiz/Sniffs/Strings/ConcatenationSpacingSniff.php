@@ -131,7 +131,7 @@ class ConcatenationSpacingSniff implements Sniff
                         && ($tokens[($stackPtr - 2)]['code'] === T_LNUMBER
                         || $tokens[($stackPtr - 2)]['code'] === T_DNUMBER)
                     ) {
-                        $phpcsFile->fixer->replaceToken(($stackPtr - 2), '('.$tokens[($stackPtr - 2)]['content'].')');
+                        $phpcsFile->fixer->replaceToken(($stackPtr - 2), '(' . $tokens[($stackPtr - 2)]['content'] . ')');
                     }
 
                     $phpcsFile->fixer->endChangeset();
@@ -148,7 +148,7 @@ class ConcatenationSpacingSniff implements Sniff
                         && ($tokens[($stackPtr + 2)]['code'] === T_LNUMBER
                         || $tokens[($stackPtr + 2)]['code'] === T_DNUMBER)
                     ) {
-                        $phpcsFile->fixer->replaceToken(($stackPtr + 2), '('.$tokens[($stackPtr + 2)]['content'].')');
+                        $phpcsFile->fixer->replaceToken(($stackPtr + 2), '(' . $tokens[($stackPtr + 2)]['content'] . ')');
                     }
 
                     $phpcsFile->fixer->endChangeset();

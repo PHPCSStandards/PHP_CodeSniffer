@@ -74,8 +74,8 @@ class SemicolonSpacingSniff implements Sniff
             return;
         }
 
-        $expected = $tokens[$nonSpace]['content'].';';
-        $found    = $phpcsFile->getTokensAsString($nonSpace, ($stackPtr - $nonSpace)).';';
+        $expected = $tokens[$nonSpace]['content'] . ';';
+        $found    = $phpcsFile->getTokensAsString($nonSpace, ($stackPtr - $nonSpace)) . ';';
         $found    = str_replace("\n", '\n', $found);
         $found    = str_replace("\r", '\r', $found);
         $found    = str_replace("\t", '\t', $found);

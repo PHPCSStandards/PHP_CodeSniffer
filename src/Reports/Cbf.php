@@ -82,16 +82,16 @@ class Cbf implements Report
                 StatusWriter::forceWrite('DONE', 0, 0);
             }
 
-            StatusWriter::forceWrite(' in '.Timing::getHumanReadableDuration(Timing::getDurationSince($startTime)));
+            StatusWriter::forceWrite(' in ' . Timing::getHumanReadableDuration(Timing::getDurationSince($startTime)));
         }
 
         if ($fixed === true) {
             // The filename in the report may be truncated due to a basepath setting
             // but we are using it for writing here and not display,
             // so find the correct path if basepath is in use.
-            $newFilename = $report['filename'].$phpcsFile->config->suffix;
+            $newFilename = $report['filename'] . $phpcsFile->config->suffix;
             if ($phpcsFile->config->basepath !== null) {
-                $newFilename = $phpcsFile->config->basepath.DIRECTORY_SEPARATOR.$newFilename;
+                $newFilename = $phpcsFile->config->basepath . DIRECTORY_SEPARATOR . $newFilename;
             }
 
             $newContent = $phpcsFile->fixer->getContents();
@@ -101,7 +101,7 @@ class Cbf implements Report
                 if ($newFilename === $report['filename']) {
                     StatusWriter::forceWrite('=> File was overwritten', 1);
                 } else {
-                    StatusWriter::forceWrite('=> Fixed file written to '.basename($newFilename), 1);
+                    StatusWriter::forceWrite('=> Fixed file written to ' . basename($newFilename), 1);
                 }
             }
         }
@@ -110,7 +110,7 @@ class Cbf implements Report
         $warningCount = $phpcsFile->getWarningCount();
         $fixableCount = $phpcsFile->getFixableCount();
         $fixedCount   = ($errors - $fixableCount);
-        echo $report['filename'].">>$errorCount>>$warningCount>>$fixableCount>>$fixedCount".PHP_EOL;
+        echo $report['filename'] . ">>$errorCount>>$warningCount>>$fixableCount>>$fixedCount" . PHP_EOL;
 
         return $fixed;
 
@@ -187,22 +187,22 @@ class Cbf implements Report
         $width = min($width, ($maxLength + 21));
         $width = max($width, 70);
 
-        echo PHP_EOL."\033[1m".'PHPCBF RESULT SUMMARY'."\033[0m".PHP_EOL;
-        echo str_repeat('-', $width).PHP_EOL;
-        echo "\033[1m".'FILE'.str_repeat(' ', ($width - 20)).'FIXED  REMAINING'."\033[0m".PHP_EOL;
-        echo str_repeat('-', $width).PHP_EOL;
+        echo PHP_EOL . "\033[1m" . 'PHPCBF RESULT SUMMARY' . "\033[0m" . PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
+        echo "\033[1m" . 'FILE' . str_repeat(' ', ($width - 20)) . 'FIXED  REMAINING' . "\033[0m" . PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
 
         foreach ($reportFiles as $file => $data) {
             $padding = ($width - 18 - $data['strlen']);
             if ($padding < 0) {
-                $file    = '...'.substr($file, (($padding * -1) + 3));
+                $file    = '...' . substr($file, (($padding * -1) + 3));
                 $padding = 0;
             }
 
-            echo $file.str_repeat(' ', $padding).'  ';
+            echo $file . str_repeat(' ', $padding) . '  ';
 
             if ($data['fixable'] > 0) {
-                echo "\033[31mFAILED TO FIX\033[0m".PHP_EOL;
+                echo "\033[31mFAILED TO FIX\033[0m" . PHP_EOL;
                 continue;
             }
 
@@ -224,14 +224,14 @@ class Cbf implements Report
             echo PHP_EOL;
         }//end foreach
 
-        echo str_repeat('-', $width).PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
         echo "\033[1mA TOTAL OF $totalFixed ERROR";
         if ($totalFixed !== 1) {
             echo 'S';
         }
 
         $numFiles = count($reportFiles);
-        echo ' WERE FIXED IN '.$numFiles.' FILE';
+        echo ' WERE FIXED IN ' . $numFiles . ' FILE';
         if ($numFiles !== 1) {
             echo 'S';
         }
@@ -239,7 +239,7 @@ class Cbf implements Report
         echo "\033[0m";
 
         if ($failures > 0) {
-            echo PHP_EOL.str_repeat('-', $width).PHP_EOL;
+            echo PHP_EOL . str_repeat('-', $width) . PHP_EOL;
             echo "\033[1mPHPCBF FAILED TO FIX $failures FILE";
             if ($failures !== 1) {
                 echo 'S';
@@ -248,7 +248,7 @@ class Cbf implements Report
             echo "\033[0m";
         }
 
-        echo PHP_EOL.str_repeat('-', $width).PHP_EOL.PHP_EOL;
+        echo PHP_EOL . str_repeat('-', $width) . PHP_EOL . PHP_EOL;
 
     }//end generate()
 

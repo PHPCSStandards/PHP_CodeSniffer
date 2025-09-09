@@ -27,14 +27,14 @@ final class ExitCodeTest extends AbstractRunnerTestCase
      *
      * @var string
      */
-    private const SOURCE_DIR = __DIR__.'/Fixtures/ExitCodeTest/';
+    private const SOURCE_DIR = __DIR__ . '/Fixtures/ExitCodeTest/';
 
     /**
      * Path to a file to use for the caching tests.
      *
      * @var string
      */
-    private const CACHE_FILE = __DIR__.'/Fixtures/ExitCodeTest/phpcs.cache';
+    private const CACHE_FILE = __DIR__ . '/Fixtures/ExitCodeTest/phpcs.cache';
 
 
     /**
@@ -79,7 +79,7 @@ final class ExitCodeTest extends AbstractRunnerTestCase
      */
     public static function tearDownAfterClass(): void
     {
-        $globPattern = self::SOURCE_DIR.'/*.inc.fixed';
+        $globPattern = self::SOURCE_DIR . '/*.inc.fixed';
         $globPattern = str_replace('/', DIRECTORY_SEPARATOR, $globPattern);
 
         $fixedFiles = glob($globPattern, GLOB_NOESCAPE);
@@ -107,7 +107,7 @@ final class ExitCodeTest extends AbstractRunnerTestCase
      */
     public function testPhpcsNoParallel($extraArgs, $expected)
     {
-        $extraArgs[] = self::SOURCE_DIR.'mix-errors-warnings.inc';
+        $extraArgs[] = self::SOURCE_DIR . 'mix-errors-warnings.inc';
 
         $this->runPhpcsAndCheckExitCode($extraArgs, $expected);
 
@@ -152,8 +152,8 @@ final class ExitCodeTest extends AbstractRunnerTestCase
      */
     public function testPhpcsWithCache($extraArgs, $expected)
     {
-        $extraArgs[] = self::SOURCE_DIR.'mix-errors-warnings.inc';
-        $extraArgs[] = '--cache='.self::CACHE_FILE;
+        $extraArgs[] = self::SOURCE_DIR . 'mix-errors-warnings.inc';
+        $extraArgs[] = '--cache=' . self::CACHE_FILE;
 
         // Make sure we start without a cache.
         if (method_exists($this, 'assertFileDoesNotExist') === true) {
@@ -385,7 +385,7 @@ final class ExitCodeTest extends AbstractRunnerTestCase
      */
     public function testPhpcbfNoParallel($extraArgs, $expected)
     {
-        $extraArgs[] = self::SOURCE_DIR.'mix-errors-warnings.inc';
+        $extraArgs[] = self::SOURCE_DIR . 'mix-errors-warnings.inc';
 
         $this->runPhpcbfAndCheckExitCode($extraArgs, $expected);
 
@@ -654,7 +654,7 @@ final class ExitCodeTest extends AbstractRunnerTestCase
      */
     private function setServerArgs($cmd, $extraArgs)
     {
-        $standard = __DIR__.'/ExitCodeTest.xml';
+        $standard = __DIR__ . '/ExitCodeTest.xml';
 
         $_SERVER['argv'] = [
             $cmd,

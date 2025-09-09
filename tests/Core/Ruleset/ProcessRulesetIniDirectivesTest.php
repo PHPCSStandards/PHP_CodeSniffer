@@ -25,7 +25,7 @@ final class ProcessRulesetIniDirectivesTest extends TestCase
      *
      * @var string
      */
-    private const FIXTURE_DIR = __DIR__.'/Fixtures/ProcessRulesetIniDirectivesTest';
+    private const FIXTURE_DIR = __DIR__ . '/Fixtures/ProcessRulesetIniDirectivesTest';
 
     /**
      * Cache to store the original ini values for ini settings being changed in these tests.
@@ -77,7 +77,7 @@ final class ProcessRulesetIniDirectivesTest extends TestCase
     {
         if (self::$initialized === false) {
             // Set up the ruleset.
-            $standard = self::FIXTURE_DIR.'/ProcessRulesetIniDirectivesTest.xml';
+            $standard = self::FIXTURE_DIR . '/ProcessRulesetIniDirectivesTest.xml';
             $config   = new ConfigDouble(["--standard=$standard"]);
             new Ruleset($config);
 

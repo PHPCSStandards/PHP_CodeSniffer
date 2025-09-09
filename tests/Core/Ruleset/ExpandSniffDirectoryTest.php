@@ -40,11 +40,11 @@ final class ExpandSniffDirectoryTest extends TestCase
     public function testExpandSniffDirectory()
     {
         // Set up the ruleset.
-        $standard = __DIR__.'/ExpandSniffDirectoryTest.xml';
+        $standard = __DIR__ . '/ExpandSniffDirectoryTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
-        $expectedPathToRuleset = __DIR__.'/Fixtures/DirectoryExpansion/.hiddenAbove/src/MyStandard/ruleset.xml';
+        $expectedPathToRuleset = __DIR__ . '/Fixtures/DirectoryExpansion/.hiddenAbove/src/MyStandard/ruleset.xml';
         $expectedPathToRuleset = realpath($expectedPathToRuleset);
         $this->assertNotFalse($expectedPathToRuleset, 'Ruleset file could not be found');
         $this->assertContains($expectedPathToRuleset, $ruleset->paths, 'Ruleset file not included in the "seen ruleset paths"');

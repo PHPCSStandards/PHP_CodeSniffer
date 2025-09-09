@@ -89,7 +89,7 @@ class EmptyStatementSniff implements Sniff
         // Get token identifier.
         $name  = strtoupper($token['content']);
         $error = 'Empty %s statement detected';
-        $phpcsFile->addError($error, $stackPtr, 'Detected'.ucfirst(strtolower($name)), [$name]);
+        $phpcsFile->addError($error, $stackPtr, 'Detected' . ucfirst(strtolower($name)), [$name]);
 
     }//end process()
 
