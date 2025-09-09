@@ -5,9 +5,9 @@ class OtherContextSensitiveKeywords
     const /* testKeywordParentAsConstantNameShouldBeString */ PARENT = 'PARENT';
     const /* testKeywordSelfAsConstantNameShouldBeString */ SELF = 'SELF';
 
-    const /* testKeywordFalseAsConstantNameShouldBeString */ FALSE = 'FALSE',
-    const /* testKeywordTrueAsConstantNameShouldBeString */ TRUE = 'TRUE',
-    const /* testKeywordNullAsConstantNameShouldBeString */ NULL = 'NULL',
+    const /* testKeywordFalseAsConstantNameShouldBeString */ FALSE = 'FALSE';
+    const /* testKeywordTrueAsConstantNameShouldBeString */ TRUE = 'TRUE';
+    const /* testKeywordNullAsConstantNameShouldBeString */ NULL = 'NULL';
 }
 
 abstract class SomeClass
