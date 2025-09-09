@@ -16,19 +16,19 @@ class LongConditionClosingCommentSniff implements Sniff
 {
 
     /**
-     * The openers that we are interested in.
+     * The condition openers that we are interested in.
      *
-     * @var array<int|string>
+     * @var array<int|string, int|string>
      */
-    private static $openers = [
-        T_SWITCH,
-        T_IF,
-        T_FOR,
-        T_FOREACH,
-        T_WHILE,
-        T_TRY,
-        T_CASE,
-        T_MATCH,
+    private const CONDITION_OPENERS = [
+        T_SWITCH  => T_SWITCH,
+        T_IF      => T_IF,
+        T_FOR     => T_FOR,
+        T_FOREACH => T_FOREACH,
+        T_WHILE   => T_WHILE,
+        T_TRY     => T_TRY,
+        T_CASE    => T_CASE,
+        T_MATCH   => T_MATCH,
     ];
 
     /**
@@ -84,7 +84,7 @@ class LongConditionClosingCommentSniff implements Sniff
         $endBrace       = $tokens[$stackPtr];
 
         // We are only interested in some code blocks.
-        if (in_array($startCondition['code'], self::$openers, true) === false) {
+        if (isset(self::CONDITION_OPENERS[$startCondition['code']]) === false) {
             return;
         }
 

@@ -21,9 +21,9 @@ class PostStatementCommentSniff implements Sniff
      * If post statement comments are found within the condition
      * parenthesis of these structures, leave them alone.
      *
-     * @var array
+     * @var array<int|string, true>
      */
-    private $controlStructureExceptions = [
+    private const CONTROL_STRUCTURE_EXCEPTIONS = [
         T_IF      => true,
         T_ELSEIF  => true,
         T_SWITCH  => true,
@@ -92,7 +92,7 @@ class PostStatementCommentSniff implements Sniff
             $nestedParens = $tokens[$stackPtr]['nested_parenthesis'];
             foreach ($nestedParens as $open => $close) {
                 if (isset($tokens[$open]['parenthesis_owner']) === true
-                    && isset($this->controlStructureExceptions[$tokens[$tokens[$open]['parenthesis_owner']]['code']]) === true
+                    && isset(self::CONTROL_STRUCTURE_EXCEPTIONS[$tokens[$tokens[$open]['parenthesis_owner']]['code']]) === true
                 ) {
                     return;
                 }

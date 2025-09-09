@@ -15,6 +15,18 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class FileCommentSniff implements Sniff
 {
 
+    /**
+     * Required tags in correct order.
+     *
+     * @var array<string, true>
+     */
+    private const REQUIRED_TAGS = [
+        '@package'    => true,
+        '@subpackage' => true,
+        '@author'     => true,
+        '@copyright'  => true,
+    ];
+
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -123,18 +135,10 @@ class FileCommentSniff implements Sniff
             $phpcsFile->addError($error, $commentEnd, 'SpacingAfterComment');
         }
 
-        // Required tags in correct order.
-        $required = [
-            '@package'    => true,
-            '@subpackage' => true,
-            '@author'     => true,
-            '@copyright'  => true,
-        ];
-
         $foundTags = [];
         foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
             $name       = $tokens[$tag]['content'];
-            $isRequired = isset($required[$name]);
+            $isRequired = isset(self::REQUIRED_TAGS[$name]);
 
             if ($isRequired === true && in_array($name, $foundTags, true) === true) {
                 $error = 'Only one %s tag is allowed in a file comment';
@@ -185,7 +189,7 @@ class FileCommentSniff implements Sniff
 
         // Check if the tags are in the correct position.
         $pos = 0;
-        foreach ($required as $tag => $true) {
+        foreach (self::REQUIRED_TAGS as $tag => $true) {
             if (in_array($tag, $foundTags, true) === false) {
                 $error = 'Missing %s tag in file comment';
                 $data  = [$tag];
