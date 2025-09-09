@@ -66,10 +66,10 @@ $ternary = true ? Partially\callMe() : null;
 $ternary = true ? Partially\ClassName::callMe() : null;
 
 /* testInlineThenWithNamespaceRelativeNameAndNothingElse */
-$ternary = true ? Partially\CONSTANT_NAME : null;
+$ternary = true ? namespace\CONSTANT_NAME : null;
 
 /* testInlineThenWithNamespaceRelativeNameAndParens */
-$ternary = true ? Partially\callMe() : null;
+$ternary = true ? namespace\callMe() : null;
 
 /* testInlineThenWithNamespaceRelativeNameAndDoubleColon */
-$ternary = true ? Partially\ClassName::callMe() : null;
+$ternary = true ? namespace\ClassName::callMe() : null;
