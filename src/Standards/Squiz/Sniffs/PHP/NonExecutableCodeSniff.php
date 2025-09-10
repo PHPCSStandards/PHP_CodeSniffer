@@ -68,7 +68,7 @@ class NonExecutableCodeSniff implements Sniff
         $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
 
         // Allow for PHP 8.4+ fully qualified use of exit/die.
-        if ($tokens[$stackPtr]['code'] === \T_EXIT && $tokens[$prev]['code'] === \T_NS_SEPARATOR) {
+        if ($tokens[$stackPtr]['code'] === T_EXIT && $tokens[$prev]['code'] === T_NS_SEPARATOR) {
             $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($prev - 1), null, true);
         }
 
