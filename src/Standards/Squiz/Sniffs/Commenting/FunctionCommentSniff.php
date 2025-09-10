@@ -67,7 +67,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
 
         // Skip constructor and destructor.
         $methodName      = $phpcsFile->getDeclarationName($stackPtr);
-        $isSpecialMethod = in_array($methodName,  $this->specialMethods, true);
+        $isSpecialMethod = in_array($methodName, $this->specialMethods, true);
 
         if ($return !== null) {
             $content = $tokens[($return + 2)]['content'];
@@ -781,7 +781,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
             T_DOC_COMMENT_STAR,
         ];
         for ($i = $commentStart; $i <= $tokens[$commentStart]['comment_closer']; $i++) {
-            if (in_array($tokens[$i]['code'], $allowedTokens) === false) {
+            if (in_array($tokens[$i]['code'], $allowedTokens, true) === false) {
                 $trimmedContent = strtolower(trim($tokens[$i]['content']));
 
                 if ($trimmedContent === '{@inheritdoc}') {

@@ -298,7 +298,7 @@ final class MessageCollector
         }
 
         // PHP 5.4.
-        $callback = function ($row) use ($columnKey) {
+        $callback = static function ($row) use ($columnKey) {
             return $row[$columnKey];
         };
 

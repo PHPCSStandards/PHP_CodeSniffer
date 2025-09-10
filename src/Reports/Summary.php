@@ -98,7 +98,7 @@ class Summary implements Report
 
         uksort(
             $reportFiles,
-            function ($keyA, $keyB) {
+            static function ($keyA, $keyB) {
                 $pathPartsA = explode(DIRECTORY_SEPARATOR, $keyA);
                 $pathPartsB = explode(DIRECTORY_SEPARATOR, $keyB);
 
