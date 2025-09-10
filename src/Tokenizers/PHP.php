@@ -2255,6 +2255,9 @@ class PHP extends Tokenizer
                 for ($i = ($stackPtr - 1); $i >= 0; $i--) {
                     if (is_array($tokens[$i]) === true) {
                         $tokenType = $tokens[$i][0];
+                    } else if ($tokens[$i] === null) {
+                        // Ignore skipped tokens.
+                        continue;
                     } else {
                         $tokenType = $tokens[$i];
                     }
