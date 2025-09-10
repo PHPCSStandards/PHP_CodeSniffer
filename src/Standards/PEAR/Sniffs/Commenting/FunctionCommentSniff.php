@@ -195,7 +195,7 @@ class FunctionCommentSniff implements Sniff
 
         // Skip constructor and destructor.
         $methodName      = $phpcsFile->getDeclarationName($stackPtr);
-        $isSpecialMethod = in_array($methodName,  $this->specialMethods, true);
+        $isSpecialMethod = in_array($methodName, $this->specialMethods, true);
 
         $return = null;
         foreach ($tokens[$commentStart]['comment_tags'] as $tag) {

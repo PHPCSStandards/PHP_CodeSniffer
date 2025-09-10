@@ -138,7 +138,7 @@ class VariableCommentSniff extends AbstractVariableSniff
             return;
         }
 
-         // Support both a var type and a description.
+        // Support both a var type and a description.
         preg_match('`^((?:\|?(?:array\([^\)]*\)|[\\\\a-z0-9\[\]]+))*)( .*)?`i', $tokens[($foundVar + 2)]['content'], $varParts);
         if (isset($varParts[1]) === false) {
             return;
