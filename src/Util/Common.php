@@ -337,35 +337,35 @@ class Common
 
 
     /**
-     * Returns true if the specified string is in the camel caps format.
+     * Returns true if the specified text string is in the camel caps format.
      *
-     * @param string  $string      The string to verify.
-     * @param boolean $classFormat If true, check to see if the string is in the
-     *                             class format. Class format strings must start
-     *                             with a capital letter and contain no
-     *                             underscores.
-     * @param boolean $public      If true, the first character in the string
-     *                             must be an a-z character. If false, the
-     *                             character must be an underscore. This
-     *                             argument is only applicable if $classFormat
-     *                             is false.
-     * @param boolean $strict      If true, the string must not have two capital
-     *                             letters next to each other. If false, a
-     *                             relaxed camel caps policy is used to allow
-     *                             for acronyms.
+     * @param string  $name             The string to verify.
+     * @param boolean $classFormat      If true, check to see if the string is in the
+     *                                  class format. Class format strings must start
+     *                                  with a capital letter and contain no
+     *                                  underscores.
+     * @param boolean $visibilityPublic If true, the first character in the string
+     *                                  must be an a-z character. If false, the
+     *                                  character must be an underscore. This
+     *                                  argument is only applicable if $classFormat
+     *                                  is false.
+     * @param boolean $strict           If true, the string must not have two capital
+     *                                  letters next to each other. If false, a
+     *                                  relaxed camel caps policy is used to allow
+     *                                  for acronyms.
      *
      * @return boolean
      */
     public static function isCamelCaps(
-        $string,
+        $name,
         $classFormat=false,
-        $public=true,
+        $visibilityPublic=true,
         $strict=true
     ) {
         // Check the first character first.
         if ($classFormat === false) {
             $legalFirstChar = '';
-            if ($public === false) {
+            if ($visibilityPublic === false) {
                 $legalFirstChar = '[_]';
             }
 
@@ -380,28 +380,28 @@ class Common
             $legalFirstChar = '[A-Z]';
         }
 
-        if (preg_match("/^$legalFirstChar/", $string) === 0) {
+        if (preg_match("/^$legalFirstChar/", $name) === 0) {
             return false;
         }
 
         // Check that the name only contains legal characters.
         $legalChars = 'a-zA-Z0-9';
-        if (preg_match("|[^$legalChars]|", substr($string, 1)) > 0) {
+        if (preg_match("|[^$legalChars]|", substr($name, 1)) > 0) {
             return false;
         }
 
         if ($strict === true) {
             // Check that there are not two capital letters next to each other.
-            $length          = strlen($string);
+            $length          = strlen($name);
             $lastCharWasCaps = $classFormat;
 
             for ($i = 1; $i < $length; $i++) {
-                $ascii = ord($string[$i]);
+                $ascii = ord($name[$i]);
                 if ($ascii >= 48 && $ascii <= 57) {
                     // The character is a number, so it can't be a capital.
                     $isCaps = false;
                 } else {
-                    if (strtoupper($string[$i]) === $string[$i]) {
+                    if (strtoupper($name[$i]) === $name[$i]) {
                         $isCaps = true;
                     } else {
                         $isCaps = false;
@@ -422,23 +422,23 @@ class Common
 
 
     /**
-     * Returns true if the specified string is in the underscore caps format.
+     * Returns true if the specified text string is in the underscore caps format.
      *
-     * @param string $string The string to verify.
+     * @param string $name The text string to verify.
      *
      * @return boolean
      */
-    public static function isUnderscoreName($string)
+    public static function isUnderscoreName($name)
     {
         // If there is whitespace in the name, it can't be valid.
-        if (strpos($string, ' ') !== false) {
+        if (strpos($name, ' ') !== false) {
             return false;
         }
 
         $validName = true;
-        $nameBits  = explode('_', $string);
+        $nameBits  = explode('_', $name);
 
-        if (preg_match('|^[A-Z]|', $string) === 0) {
+        if (preg_match('|^[A-Z]|', $name) === 0) {
             // Name does not begin with a capital letter.
             $validName = false;
         } else {

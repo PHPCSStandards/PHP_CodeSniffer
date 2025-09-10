@@ -49,17 +49,17 @@ class DeprecatedFunctionsSniff extends ForbiddenFunctionsSniff
     /**
      * Generates the error or warning for this sniff.
      *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param int                         $stackPtr  The position of the forbidden function
-     *                                               in the token array.
-     * @param string                      $function  The name of the forbidden function.
-     * @param string                      $pattern   The pattern used for the match.
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile    The file being scanned.
+     * @param int                         $stackPtr     The position of the forbidden function
+     *                                                  in the token array.
+     * @param string                      $functionName The name of the forbidden function.
+     * @param string                      $pattern      The pattern used for the match.
      *
      * @return void
      */
-    protected function addError($phpcsFile, $stackPtr, $function, $pattern=null)
+    protected function addError($phpcsFile, $stackPtr, $functionName, $pattern=null)
     {
-        $data  = [$function];
+        $data  = [$functionName];
         $error = 'Function %s() has been deprecated';
         $type  = 'Deprecated';
 

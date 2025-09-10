@@ -61,11 +61,11 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
          * This method only loads classes that exist in the PHP_CodeSniffer namespace.
          * All other classes are ignored and loaded by subsequent autoloaders.
          *
-         * @param string $class The name of the class to load.
+         * @param string $className The name of the class to load.
          *
          * @return bool
          */
-        public static function load($class)
+        public static function load($className)
         {
             // Include the composer autoloader if there is one, but re-register it
             // so this autoloader runs before the composer one as we need to include
@@ -73,7 +73,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
             if (self::$composerAutoloader === null) {
                 // Make sure we don't try to load any of Composer's classes
                 // while the autoloader is being setup.
-                if (strpos($class, 'Composer\\') === 0) {
+                if (strpos($className, 'Composer\\') === 0) {
                     return false;
                 }
 
@@ -97,8 +97,8 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
             $ds   = DIRECTORY_SEPARATOR;
             $path = false;
 
-            if (substr($class, 0, 16) === 'PHP_CodeSniffer\\') {
-                if (substr($class, 0, 22) === 'PHP_CodeSniffer\Tests\\') {
+            if (substr($className, 0, 16) === 'PHP_CodeSniffer\\') {
+                if (substr($className, 0, 22) === 'PHP_CodeSniffer\Tests\\') {
                     $isInstalled = !is_dir(__DIR__.$ds.'tests');
                     if ($isInstalled === false) {
                         $path = __DIR__.$ds.'tests';
@@ -106,23 +106,23 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
                         $path = '@test_dir@'.$ds.'PHP_CodeSniffer'.$ds.'CodeSniffer';
                     }
 
-                    $path .= $ds.substr(str_replace('\\', $ds, $class), 22).'.php';
+                    $path .= $ds.substr(str_replace('\\', $ds, $className), 22).'.php';
                 } else {
-                    $path = __DIR__.$ds.'src'.$ds.substr(str_replace('\\', $ds, $class), 16).'.php';
+                    $path = __DIR__.$ds.'src'.$ds.substr(str_replace('\\', $ds, $className), 16).'.php';
                 }
             }
 
             // See if the composer autoloader knows where the class is.
             if ($path === false && self::$composerAutoloader !== false) {
-                $path = self::$composerAutoloader->findFile($class);
+                $path = self::$composerAutoloader->findFile($className);
             }
 
             // See if the class is inside one of our alternate search paths.
             if ($path === false) {
                 foreach (self::$searchPaths as $searchPath => $nsPrefix) {
-                    $className = $class;
-                    if ($nsPrefix !== '' && substr($class, 0, strlen($nsPrefix)) === $nsPrefix) {
-                        $className = substr($class, (strlen($nsPrefix) + 1));
+                    $className = $className;
+                    if ($nsPrefix !== '' && substr($className, 0, strlen($nsPrefix)) === $nsPrefix) {
+                        $className = substr($className, (strlen($nsPrefix) + 1));
                     }
 
                     $path = $searchPath.$ds.str_replace('\\', $ds, $className).'.php';
@@ -297,18 +297,18 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
         /**
          * Gets the file path for the given class name.
          *
-         * @param string $class The name of the class.
+         * @param string $className The name of the class.
          *
          * @throws \Exception If the class name has not been loaded.
          * @return string
          */
-        public static function getLoadedFileName($class)
+        public static function getLoadedFileName($className)
         {
-            if (isset(self::$loadedFiles[$class]) === false) {
-                throw new Exception("Cannot get file name for $class; class has not been included");
+            if (isset(self::$loadedFiles[$className]) === false) {
+                throw new Exception("Cannot get file name for $className; class has not been included");
             }
 
-            return self::$loadedFiles[$class];
+            return self::$loadedFiles[$className];
 
         }//end getLoadedFileName()
 

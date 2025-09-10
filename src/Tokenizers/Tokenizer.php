@@ -170,11 +170,11 @@ abstract class Tokenizer
     /**
      * Creates an array of tokens when given some content.
      *
-     * @param string $string The string to tokenize.
+     * @param string $code The code to tokenize.
      *
      * @return array
      */
-    abstract protected function tokenize($string);
+    abstract protected function tokenize($code);
 
 
     /**

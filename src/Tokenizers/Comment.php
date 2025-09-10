@@ -19,35 +19,35 @@ class Comment
     /**
      * Splits a single doc block comment token up into something that can be easily iterated over.
      *
-     * @param string $string   The doc block comment string to parse.
+     * @param string $comment  The doc block comment string to parse.
      * @param string $eolChar  The EOL character to use for splitting strings.
      * @param int    $stackPtr The position of the token in the "new"/final token stream.
      *
      * @return array<int, array<string, string|int|array<int>>>
      */
-    public function tokenizeString($string, $eolChar, $stackPtr)
+    public function tokenizeString($comment, $eolChar, $stackPtr)
     {
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             StatusWriter::write('*** START COMMENT TOKENIZING ***', 2);
         }
 
         $tokens   = [];
-        $numChars = strlen($string);
+        $numChars = strlen($comment);
 
         /*
             Doc block comments start with /*, but typically contain an
             extra star when they are used for function and class comments.
         */
 
-        $char      = ($numChars - strlen(ltrim($string, '/*')));
-        $lastChars = substr($string, -2);
+        $char      = ($numChars - strlen(ltrim($comment, '/*')));
+        $lastChars = substr($comment, -2);
         if ($char === $numChars && $lastChars === '*/') {
             // Edge case: docblock without whitespace or contents.
-            $openTag = substr($string, 0, -2);
-            $string  = $lastChars;
+            $openTag = substr($comment, 0, -2);
+            $comment = $lastChars;
         } else {
-            $openTag = substr($string, 0, $char);
-            $string  = ltrim($string, '/*');
+            $openTag = substr($comment, 0, $char);
+            $comment = ltrim($comment, '/*');
         }
 
         $tokens[$stackPtr] = [
@@ -73,7 +73,7 @@ class Comment
         */
 
         $closeTag = [
-            'content'        => substr($string, strlen(rtrim($string, '/*'))),
+            'content'        => substr($comment, strlen(rtrim($comment, '/*'))),
             'code'           => T_DOC_COMMENT_CLOSE_TAG,
             'type'           => 'T_DOC_COMMENT_CLOSE_TAG',
             'comment_opener' => $openPtr,
@@ -84,7 +84,7 @@ class Comment
             $closeTag['content'] = '';
         }
 
-        $string = rtrim($string, '/*');
+        $string = rtrim($comment, '/*');
 
         /*
             Process each line of the comment.
@@ -181,32 +181,32 @@ class Comment
     /**
      * Process a single line of a comment.
      *
-     * @param string $string  The comment string being tokenized.
+     * @param string $comment The comment string being tokenized.
      * @param string $eolChar The EOL character to use for splitting strings.
      * @param int    $start   The position in the string to start processing.
      * @param int    $end     The position in the string to end processing.
      *
      * @return array<int, array<string, string|int>>
      */
-    private function processLine($string, $eolChar, $start, $end)
+    private function processLine($comment, $eolChar, $start, $end)
     {
         $tokens = [];
 
         // Collect content padding.
-        $space = $this->collectWhitespace($string, $start, $end);
+        $space = $this->collectWhitespace($comment, $start, $end);
         if ($space !== null) {
             $tokens[] = $space;
             $start   += strlen($space['content']);
         }
 
-        if (isset($string[$start]) === false) {
+        if (isset($comment[$start]) === false) {
             return $tokens;
         }
 
-        if ($string[$start] === '@') {
+        if ($comment[$start] === '@') {
             // The content up until the first whitespace is the tag name.
             $matches = [];
-            preg_match('/@[^\s]+/', $string, $matches, 0, $start);
+            preg_match('/@[^\s]+/', $comment, $matches, 0, $start);
             if (isset($matches[0]) === true
                 && substr(strtolower($matches[0]), 0, 7) !== '@phpcs:'
             ) {
@@ -219,7 +219,7 @@ class Comment
                 ];
 
                 // Then there will be some whitespace.
-                $space = $this->collectWhitespace($string, $start, $end);
+                $space = $this->collectWhitespace($comment, $start, $end);
                 if ($space !== null) {
                     $tokens[] = $space;
                     $start   += strlen($space['content']);
@@ -228,14 +228,14 @@ class Comment
         }//end if
 
         // Process the rest of the line.
-        $eol = strpos($string, $eolChar, $start);
+        $eol = strpos($comment, $eolChar, $start);
         if ($eol === false) {
             $eol = $end;
         }
 
         if ($eol > $start) {
             $tokens[] = [
-                'content' => substr($string, $start, ($eol - $start)),
+                'content' => substr($comment, $start, ($eol - $start)),
                 'code'    => T_DOC_COMMENT_STRING,
                 'type'    => 'T_DOC_COMMENT_STRING',
             ];
@@ -243,7 +243,7 @@ class Comment
 
         if ($eol !== $end) {
             $tokens[] = [
-                'content' => substr($string, $eol, strlen($eolChar)),
+                'content' => substr($comment, $eol, strlen($eolChar)),
                 'code'    => T_DOC_COMMENT_WHITESPACE,
                 'type'    => 'T_DOC_COMMENT_WHITESPACE',
             ];
@@ -257,21 +257,21 @@ class Comment
     /**
      * Collect consecutive whitespace into a single token.
      *
-     * @param string $string The comment string being tokenized.
-     * @param int    $start  The position in the string to start processing.
-     * @param int    $end    The position in the string to end processing.
+     * @param string $comment The comment string being tokenized.
+     * @param int    $start   The position in the string to start processing.
+     * @param int    $end     The position in the string to end processing.
      *
      * @return array<string, string|int>|null
      */
-    private function collectWhitespace($string, $start, $end)
+    private function collectWhitespace($comment, $start, $end)
     {
         $space = '';
         for ($start; $start < $end; $start++) {
-            if ($string[$start] !== ' ' && $string[$start] !== "\t") {
+            if ($comment[$start] !== ' ' && $comment[$start] !== "\t") {
                 break;
             }
 
-            $space .= $string[$start];
+            $space .= $comment[$start];
         }
 
         if ($space === '') {

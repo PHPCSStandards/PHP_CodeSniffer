@@ -531,11 +531,11 @@ class PHP extends Tokenizer
      * Starts by using token_get_all() but does a lot of extra processing
      * to insert information about the context of the token.
      *
-     * @param string $string The string to tokenize.
+     * @param string $code The code to tokenize.
      *
      * @return array
      */
-    protected function tokenize($string)
+    protected function tokenize($code)
     {
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             StatusWriter::write('*** START PHP TOKENIZING ***', 1);
@@ -545,7 +545,7 @@ class PHP extends Tokenizer
             }
         }
 
-        $tokens      = @token_get_all($string);
+        $tokens      = @token_get_all($code);
         $finalTokens = [];
 
         $newStackPtr       = 0;
