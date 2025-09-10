@@ -744,17 +744,17 @@ abstract class AbstractPatternSniff implements Sniff
     }//end registerSupplementary()
 
 
-     /**
-      * Processes any tokens registered with registerSupplementary().
-      *
-      * @param \PHP_CodeSniffer\Files\File $phpcsFile The PHP_CodeSniffer file where to
-      *                                               process the skip.
-      * @param int                         $stackPtr  The position in the tokens stack to
-      *                                               process.
-      *
-      * @return void
-      * @see    registerSupplementary()
-      */
+    /**
+     * Processes any tokens registered with registerSupplementary().
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The PHP_CodeSniffer file where to
+     *                                               process the skip.
+     * @param int                         $stackPtr  The position in the tokens stack to
+     *                                               process.
+     *
+     * @return void
+     * @see    registerSupplementary()
+     */
     protected function processSupplementary(File $phpcsFile, $stackPtr)
     {
 

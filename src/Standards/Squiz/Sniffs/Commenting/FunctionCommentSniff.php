@@ -67,7 +67,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
 
         // Skip constructor and destructor.
         $methodName      = $phpcsFile->getDeclarationName($stackPtr);
-        $isSpecialMethod = in_array($methodName,  $this->specialMethods, true);
+        $isSpecialMethod = in_array($methodName, $this->specialMethods, true);
 
         if ($return !== null) {
             $content = $tokens[($return + 2)]['content'];
