@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Tokenizers;
 
+use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Exceptions\TokenizerException;
 use PHP_CodeSniffer\Util\Common;
 use PHP_CodeSniffer\Util\IgnoreList;
@@ -108,7 +109,7 @@ abstract class Tokenizer
      * @return void
      * @throws \PHP_CodeSniffer\Exceptions\TokenizerException If the file appears to be minified.
      */
-    public function __construct($content, $config, $eolChar='\n')
+    public function __construct(string $content, ?Config $config, string $eolChar='\n')
     {
         $this->eolChar = $eolChar;
 
@@ -139,7 +140,7 @@ abstract class Tokenizer
      *
      * @return boolean
      */
-    protected function isMinifiedContent($content, $eolChar='\n')
+    protected function isMinifiedContent(string $content, string $eolChar='\n')
     {
         // Minified files often have a very large number of characters per line
         // and cause issues when tokenizing.
@@ -174,7 +175,7 @@ abstract class Tokenizer
      *
      * @return array
      */
-    abstract protected function tokenize($code);
+    abstract protected function tokenize(string $code);
 
 
     /**
@@ -500,7 +501,7 @@ abstract class Tokenizer
      *
      * @return void
      */
-    public function replaceTabsInToken(&$token, $prefix=' ', $padding=' ', $tabWidth=null)
+    public function replaceTabsInToken(array &$token, string $prefix=' ', string $padding=' ', ?int $tabWidth=null)
     {
         $checkEncoding = false;
         if (function_exists('iconv_strlen') === true) {
@@ -840,7 +841,7 @@ abstract class Tokenizer
      * @return int The position in the stack that closed the scope.
      * @throws \PHP_CodeSniffer\Exceptions\TokenizerException If the nesting level gets too deep.
      */
-    private function recurseScopeMap($stackPtr, $depth=1, &$ignore=0)
+    private function recurseScopeMap(int $stackPtr, int $depth=1, int &$ignore=0)
     {
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             StatusWriter::write("=> Begin scope map recursion at token $stackPtr with depth $depth", $depth);

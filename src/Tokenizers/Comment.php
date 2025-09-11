@@ -25,7 +25,7 @@ class Comment
      *
      * @return array<int, array<string, string|int|array<int>>>
      */
-    public function tokenizeString($comment, $eolChar, $stackPtr)
+    public function tokenizeString(string $comment, string $eolChar, int $stackPtr)
     {
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             StatusWriter::write('*** START COMMENT TOKENIZING ***', 2);
@@ -188,7 +188,7 @@ class Comment
      *
      * @return array<int, array<string, string|int>>
      */
-    private function processLine($comment, $eolChar, $start, $end)
+    private function processLine(string $comment, string $eolChar, int $start, int $end)
     {
         $tokens = [];
 
@@ -263,7 +263,7 @@ class Comment
      *
      * @return array<string, string|int>|null
      */
-    private function collectWhitespace($comment, $start, $end)
+    private function collectWhitespace(string $comment, int $start, int $end)
     {
         $space = '';
         for ($start; $start < $end; $start++) {
