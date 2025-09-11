@@ -9,12 +9,12 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Util\Help;
 
-use InvalidArgumentException;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHP_CodeSniffer\Util\Help;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
 use ReflectionProperty;
+use TypeError;
 
 /**
  * Test the Help class.
@@ -134,20 +134,17 @@ final class HelpTest extends TestCase
 
 
     /**
-     * Test receiving an expected exception when the shortOptions parameter is not passed a string value.
+     * Test receiving an expected exception when the shortOptions parameter is not passed a scalar value.
      *
      * @return void
      */
-    public function testConstructorInvalidArgumentException()
+    public function testConstructorTypeError()
     {
-        $message = 'The $shortOptions parameter must be a string';
-
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage($message);
+        $this->expectException(TypeError::class);
 
         new Help(new ConfigDouble(), [], []);
 
-    }//end testConstructorInvalidArgumentException()
+    }//end testConstructorTypeError()
 
 
     /**

@@ -89,7 +89,7 @@ final class Timing
      *
      * @return float Duration in milliseconds.
      */
-    public static function getDurationSince($startTime)
+    public static function getDurationSince(float $startTime)
     {
         return ((microtime(true) - $startTime) * 1000);
 
@@ -103,7 +103,7 @@ final class Timing
      *
      * @return string
      */
-    public static function getHumanReadableDuration($duration)
+    public static function getHumanReadableDuration(float $duration)
     {
         $timeString = '';
         if ($duration >= self::MINUTE_IN_MS) {
@@ -132,7 +132,7 @@ final class Timing
      *
      * @return void
      */
-    public static function printRunTime($force=false)
+    public static function printRunTime(bool $force=false)
     {
         if ($force === false && self::$printed === true) {
             // A double call.

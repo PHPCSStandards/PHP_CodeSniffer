@@ -307,7 +307,7 @@ class Cache
      *
      * @return mixed
      */
-    public static function get($key=null)
+    public static function get(?string $key=null)
     {
         if ($key === null) {
             return self::$cache;
@@ -331,7 +331,7 @@ class Cache
      *
      * @return void
      */
-    public static function set($key, $value)
+    public static function set(?string $key, $value)
     {
         if ($key === null) {
             self::$cache = $value;

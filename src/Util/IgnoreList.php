@@ -96,7 +96,7 @@ final class IgnoreList
      *
      * @return \PHP_CodeSniffer\Util\IgnoreList $this for chaining.
      */
-    public function set($code, $ignore)
+    public function set(string $code, bool $ignore)
     {
         $data  = &$this->data;
         $parts = explode('.', $code);
@@ -126,7 +126,7 @@ final class IgnoreList
      *
      * @return bool
      */
-    public function isIgnored($code)
+    public function isIgnored(string $code)
     {
         $data        = $this->data;
         $returnValue = $data['.default'];
