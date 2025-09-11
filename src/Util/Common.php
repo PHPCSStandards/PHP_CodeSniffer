@@ -144,9 +144,9 @@ class Common
     /**
      * Removes a base path from the front of a file path.
      *
-     * @param string $path     The path of the file.
-     * @param string $basepath The base path to remove. This should not end
-     *                         with a directory separator.
+     * @param string      $path     The path of the file.
+     * @param string|null $basepath The base path to remove. This should not end
+     *                              with a directory separator.
      *
      * @return string
      */
