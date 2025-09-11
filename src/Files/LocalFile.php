@@ -28,7 +28,7 @@ class LocalFile extends File
      *
      * @return void
      */
-    public function __construct($path, Ruleset $ruleset, Config $config)
+    public function __construct(string $path, Ruleset $ruleset, Config $config)
     {
         $this->path = trim($path);
         if (Common::isReadable($this->path) === false) {
@@ -166,7 +166,7 @@ class LocalFile extends File
      *
      * @return void
      */
-    private function replayErrors($errors, $warnings)
+    private function replayErrors(array $errors, array $warnings)
     {
         $this->errors            = [];
         $this->warnings          = [];
