@@ -75,7 +75,7 @@ class MultipleStatementAlignmentSniff implements Sniff
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int                         $stackPtr  The position of the current token
      *                                               in the stack passed in $tokens.
-     * @param int                         $end       The token where checking should end.
+     * @param int|null                    $end       The token where checking should end.
      *                                               If NULL, the entire file will be checked.
      *
      * @return int

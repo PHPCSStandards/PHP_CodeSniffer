@@ -112,8 +112,8 @@ class FileList implements Iterator, Countable
      * If a file object has already been created, it can be passed here.
      * If it is left NULL, it will be created when accessed.
      *
-     * @param string                      $path The path to the file being added.
-     * @param \PHP_CodeSniffer\Files\File $file The file being added.
+     * @param string                           $path The path to the file being added.
+     * @param \PHP_CodeSniffer\Files\File|null $file The file being added.
      *
      * @return void
      */

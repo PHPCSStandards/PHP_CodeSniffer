@@ -960,8 +960,8 @@ final class Tokens
      * @param array<int|string> $tokens The token types to get the highest weighted
      *                                  type for.
      *
-     * @return int The highest weighted token.
-     *             On equal "weight", returns the first token of that particular weight.
+     * @return int|string The highest weighted token.
+     *                    On equal "weight", returns the first token of that particular weight.
      */
     public static function getHighestWeightedToken(array $tokens)
     {
