@@ -18,7 +18,7 @@ class ValidSniff implements Sniff
         return [T_CLASS];
     }
 
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         // Do something.
     }

@@ -7,17 +7,18 @@
 
 namespace Fixtures\TestStandard\Sniffs\MissingInterface;
 
+use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractArraySniff;
 
 final class ValidImplementsViaAbstractSniff extends AbstractArraySniff
 {
 
-    protected function processSingleLineArray($phpcsFile, $stackPtr, $arrayStart, $arrayEnd, $indices)
+    protected function processSingleLineArray(File $phpcsFile, int $stackPtr, int $arrayStart, int $arrayEnd, array $indices)
 	{
 		// Do something.
     }
 
-    protected function processMultiLineArray($phpcsFile, $stackPtr, $arrayStart, $arrayEnd, $indices)
+    protected function processMultiLineArray(File $phpcsFile, int $stackPtr, int $arrayStart, int $arrayEnd, array $indices)
 	{
 		// Do something.
     }

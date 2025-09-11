@@ -272,7 +272,7 @@ final class PropertyTypeHandlingSniff implements Sniff
         return [T_ECHO];
     }
 
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         // Do something.
     }

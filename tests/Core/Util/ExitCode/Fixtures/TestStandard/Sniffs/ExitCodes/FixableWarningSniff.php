@@ -18,7 +18,7 @@ class FixableWarningSniff implements Sniff
         return [T_SEMICOLON];
     }
 
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if ($tokens[($stackPtr - 1)]['code'] === T_WHITESPACE) {

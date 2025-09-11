@@ -18,7 +18,7 @@ class RegisterEmptyArraySniff implements Sniff
         return [];
     }
 
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         // Do something.
     }
