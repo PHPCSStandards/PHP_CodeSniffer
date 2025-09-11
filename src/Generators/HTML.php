@@ -262,13 +262,13 @@ class HTML extends Generator
     /**
      * Process the documentation for a single sniff.
      *
-     * @param \DOMNode $doc The DOMNode object for the sniff.
-     *                      It represents the "documentation" tag in the XML
-     *                      standard file.
+     * @param \DOMElement $doc The DOMElement object for the sniff.
+     *                         It represents the "documentation" tag in the XML
+     *                         standard file.
      *
      * @return void
      */
-    public function processSniff(DOMNode $doc)
+    public function processSniff(DOMElement $doc)
     {
         $content = '';
         foreach ($doc->childNodes as $node) {
@@ -301,7 +301,7 @@ class HTML extends Generator
      *
      * @return string
      */
-    private function titleToAnchor($title)
+    private function titleToAnchor(string $title)
     {
         // Slugify the text.
         $title = strtolower($title);
