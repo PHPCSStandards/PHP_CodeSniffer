@@ -37,7 +37,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processMemberVar(File $phpcsFile, $stackPtr)
+    protected function processMemberVar(File $phpcsFile, int $stackPtr)
     {
         try {
             $propertyInfo = $phpcsFile->getMemberProperties($stackPtr);
@@ -290,7 +290,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariable(File $phpcsFile, $stackPtr)
+    protected function processVariable(File $phpcsFile, int $stackPtr)
     {
         /*
             We don't care about normal variables.
@@ -307,7 +307,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariableInString(File $phpcsFile, $stackPtr)
+    protected function processVariableInString(File $phpcsFile, int $stackPtr)
     {
         /*
             We don't care about normal variables.

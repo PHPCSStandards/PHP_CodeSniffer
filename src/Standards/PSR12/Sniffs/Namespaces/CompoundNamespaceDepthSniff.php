@@ -44,7 +44,7 @@ class CompoundNamespaceDepthSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $this->maxDepth = (int) $this->maxDepth;
 

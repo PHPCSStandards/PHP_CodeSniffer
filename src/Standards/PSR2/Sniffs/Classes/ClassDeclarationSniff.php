@@ -44,7 +44,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         // We want all the errors from the PEAR standard, plus some of our own.
         parent::process($phpcsFile, $stackPtr);
@@ -70,7 +70,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
      *
      * @return void
      */
-    public function processOpen(File $phpcsFile, $stackPtr)
+    public function processOpen(File $phpcsFile, int $stackPtr)
     {
         $tokens       = $phpcsFile->getTokens();
         $stackPtrType = strtolower($tokens[$stackPtr]['content']);
@@ -473,7 +473,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
      *
      * @return void
      */
-    public function processClose(File $phpcsFile, $stackPtr)
+    public function processClose(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 

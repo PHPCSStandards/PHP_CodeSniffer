@@ -62,7 +62,7 @@ class SideEffectsSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $result = $this->searchForConflict($phpcsFile, 0, ($phpcsFile->numTokens - 1), $tokens);
@@ -100,7 +100,7 @@ class SideEffectsSniff implements Sniff
      *
      * @return array
      */
-    private function searchForConflict($phpcsFile, $start, $end, $tokens)
+    private function searchForConflict(File $phpcsFile, int $start, int $end, array $tokens)
     {
         $checkAnnotations = $phpcsFile->config->annotations;
 

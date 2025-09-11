@@ -37,7 +37,7 @@ class FunctionCallSignatureSniff extends PEARFunctionCallSignatureSniff
      *
      * @return bool
      */
-    public function isMultiLineCall(File $phpcsFile, $stackPtr, $openBracket, $tokens)
+    public function isMultiLineCall(File $phpcsFile, int $stackPtr, int $openBracket, array $tokens)
     {
         // If the first argument is on a new line, this is a multi-line
         // function call, even if there is only one argument.

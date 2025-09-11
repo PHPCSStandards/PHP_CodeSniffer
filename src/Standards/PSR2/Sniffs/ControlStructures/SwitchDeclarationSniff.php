@@ -59,7 +59,7 @@ class SwitchDeclarationSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -236,7 +236,7 @@ class SwitchDeclarationSniff implements Sniff
      *
      * @return int|false
      */
-    private function findNextCase($phpcsFile, $stackPtr, $end)
+    private function findNextCase(File $phpcsFile, int $stackPtr, int $end)
     {
         $tokens = $phpcsFile->getTokens();
         while (($stackPtr = $phpcsFile->findNext([T_CASE, T_DEFAULT, T_SWITCH], $stackPtr, $end)) !== false) {
@@ -265,7 +265,7 @@ class SwitchDeclarationSniff implements Sniff
      *
      * @return int|bool
      */
-    private function findNestedTerminator($phpcsFile, $stackPtr, $end)
+    private function findNestedTerminator(File $phpcsFile, int $stackPtr, int $end)
     {
         $tokens = $phpcsFile->getTokens();
 

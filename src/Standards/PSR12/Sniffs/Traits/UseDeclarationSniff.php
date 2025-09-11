@@ -38,7 +38,7 @@ class UseDeclarationSniff implements Sniff
      *
      * @return void|int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -312,7 +312,7 @@ class UseDeclarationSniff implements Sniff
      *
      * @return void
      */
-    protected function processUseGroup(File $phpcsFile, $stackPtr)
+    protected function processUseGroup(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -680,7 +680,7 @@ class UseDeclarationSniff implements Sniff
      *
      * @return void
      */
-    protected function processUseStatement(File $phpcsFile, $stackPtr)
+    protected function processUseStatement(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
