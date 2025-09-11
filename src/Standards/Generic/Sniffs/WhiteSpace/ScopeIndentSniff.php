@@ -111,7 +111,7 @@ class ScopeIndentSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $debug = Config::getConfigData('scope_indent_debug');
         if ($debug !== null) {
@@ -1323,7 +1323,7 @@ class ScopeIndentSniff implements Sniff
      *
      * @return bool
      */
-    protected function adjustIndent(File $phpcsFile, $stackPtr, $length, $change)
+    protected function adjustIndent(File $phpcsFile, int $stackPtr, int $length, int $change)
     {
         $tokens = $phpcsFile->getTokens();
 

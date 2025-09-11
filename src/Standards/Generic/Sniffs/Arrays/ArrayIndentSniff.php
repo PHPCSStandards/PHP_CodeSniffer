@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Arrays;
 
+use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractArraySniff;
 use PHP_CodeSniffer\Util\Tokens;
 
@@ -36,7 +37,7 @@ class ArrayIndentSniff extends AbstractArraySniff
      *
      * @return void
      */
-    public function processSingleLineArray($phpcsFile, $stackPtr, $arrayStart, $arrayEnd, $indices)
+    public function processSingleLineArray(File $phpcsFile, int $stackPtr, int $arrayStart, int $arrayEnd, array $indices)
     {
 
     }//end processSingleLineArray()
@@ -55,7 +56,7 @@ class ArrayIndentSniff extends AbstractArraySniff
      *
      * @return void
      */
-    public function processMultiLineArray($phpcsFile, $stackPtr, $arrayStart, $arrayEnd, $indices)
+    public function processMultiLineArray(File $phpcsFile, int $stackPtr, int $arrayStart, int $arrayEnd, array $indices)
     {
         $tokens = $phpcsFile->getTokens();
 

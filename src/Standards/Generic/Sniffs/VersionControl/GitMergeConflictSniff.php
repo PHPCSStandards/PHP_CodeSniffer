@@ -40,7 +40,7 @@ class GitMergeConflictSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $error  = 'Merge conflict boundary found; type: %s';

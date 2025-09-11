@@ -42,7 +42,7 @@ class OpeningBraceSameLineSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens          = $phpcsFile->getTokens();
         $scopeIdentifier = $phpcsFile->findNext(T_STRING, ($stackPtr + 1));

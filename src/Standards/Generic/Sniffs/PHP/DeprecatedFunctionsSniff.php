@@ -10,6 +10,7 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\PHP;
 
+use PHP_CodeSniffer\Files\File;
 use ReflectionFunction;
 
 class DeprecatedFunctionsSniff extends ForbiddenFunctionsSniff
@@ -57,7 +58,7 @@ class DeprecatedFunctionsSniff extends ForbiddenFunctionsSniff
      *
      * @return void
      */
-    protected function addError($phpcsFile, $stackPtr, $functionName, $pattern=null)
+    protected function addError(File $phpcsFile, int $stackPtr, string $functionName, ?string $pattern=null)
     {
         $data  = [$functionName];
         $error = 'Function %s() has been deprecated';

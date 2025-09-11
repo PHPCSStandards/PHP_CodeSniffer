@@ -44,7 +44,7 @@ class EmptyPHPStatementSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -66,7 +66,7 @@ class EmptyPHPStatementSniff implements Sniff
      *
      * @return void
      */
-    private function processSemicolon(File $phpcsFile, $stackPtr)
+    private function processSemicolon(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -146,7 +146,7 @@ class EmptyPHPStatementSniff implements Sniff
      *
      * @return void
      */
-    private function processCloseTag(File $phpcsFile, $stackPtr)
+    private function processCloseTag(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 

@@ -52,7 +52,7 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens         = $phpcsFile->getTokens();
         $this->spacing  = (int) $this->spacing;
