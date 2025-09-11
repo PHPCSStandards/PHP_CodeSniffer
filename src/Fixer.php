@@ -235,7 +235,7 @@ class Fixer
      *
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException When the diff command fails.
      */
-    public function generateDiff($filePath=null, $colors=true)
+    public function generateDiff(?string $filePath=null, bool $colors=true)
     {
         if ($filePath === null) {
             $filePath = $this->currentFile->getFilename();
@@ -378,7 +378,7 @@ class Fixer
      *
      * @return string
      */
-    public function getTokenContent($stackPtr)
+    public function getTokenContent(int $stackPtr)
     {
         if ($this->inChangeset === true
             && isset($this->changeset[$stackPtr]) === true
@@ -508,7 +508,7 @@ class Fixer
      *
      * @return bool If the change was accepted.
      */
-    public function replaceToken($stackPtr, $content)
+    public function replaceToken(int $stackPtr, string $content)
     {
         if ($this->inConflict === true) {
             return false;
@@ -628,7 +628,7 @@ class Fixer
      *
      * @return bool If a change was reverted.
      */
-    public function revertToken($stackPtr)
+    public function revertToken(int $stackPtr)
     {
         if (isset($this->fixedTokens[$stackPtr]) === false) {
             return false;
@@ -689,7 +689,7 @@ class Fixer
      *
      * @return bool If the change was accepted.
      */
-    public function substrToken($stackPtr, $start, $length=null)
+    public function substrToken(int $stackPtr, int $start, ?int $length=null)
     {
         $current = $this->getTokenContent($stackPtr);
 
@@ -711,7 +711,7 @@ class Fixer
      *
      * @return bool If the change was accepted.
      */
-    public function addNewline($stackPtr)
+    public function addNewline(int $stackPtr)
     {
         $current = $this->getTokenContent($stackPtr);
         return $this->replaceToken($stackPtr, $current.$this->currentFile->eolChar);
@@ -726,7 +726,7 @@ class Fixer
      *
      * @return bool If the change was accepted.
      */
-    public function addNewlineBefore($stackPtr)
+    public function addNewlineBefore(int $stackPtr)
     {
         $current = $this->getTokenContent($stackPtr);
         return $this->replaceToken($stackPtr, $this->currentFile->eolChar.$current);
@@ -742,7 +742,7 @@ class Fixer
      *
      * @return bool If the change was accepted.
      */
-    public function addContent($stackPtr, $content)
+    public function addContent(int $stackPtr, string $content)
     {
         $current = $this->getTokenContent($stackPtr);
         return $this->replaceToken($stackPtr, $current.$content);
@@ -758,7 +758,7 @@ class Fixer
      *
      * @return bool If the change was accepted.
      */
-    public function addContentBefore($stackPtr, $content)
+    public function addContentBefore(int $stackPtr, string $content)
     {
         $current = $this->getTokenContent($stackPtr);
         return $this->replaceToken($stackPtr, $content.$current);
@@ -778,7 +778,7 @@ class Fixer
      *
      * @return void
      */
-    public function changeCodeBlockIndent($start, $end, $change)
+    public function changeCodeBlockIndent(int $start, int $end, int $change)
     {
         $tokens = $this->currentFile->getTokens();
 
@@ -835,7 +835,7 @@ class Fixer
      *
      * @return string
      */
-    private function getSniffCodeForDebug($className)
+    private function getSniffCodeForDebug(string $className)
     {
         try {
             $sniffCode = Common::getSniffCode($className);

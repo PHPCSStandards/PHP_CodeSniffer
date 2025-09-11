@@ -46,7 +46,7 @@ if (defined('PHP_CODESNIFFER_VERBOSITY') === false) {
  *
  * @throws \PHP_CodeSniffer\Exceptions\RuntimeException When tokenizer errors are encountered.
  */
-function stripWhitespaceAndComments($fullpath, $config)
+function stripWhitespaceAndComments(string $fullpath, Config $config)
 {
     $contents = file_get_contents($fullpath);
 

@@ -187,7 +187,7 @@ class Reporter
      *
      * @return bool
      */
-    public function __isset($name)
+    public function __isset(string $name)
     {
         return ($name === 'totalFixable' || $name === 'totalFixed');
 
@@ -207,7 +207,7 @@ class Reporter
      *
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If the setting name is invalid.
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         if ($name === 'totalFixable') {
             return ($this->totalFixableErrors + $this->totalFixableWarnings);
@@ -232,7 +232,7 @@ class Reporter
      *
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value)
     {
         throw new RuntimeException("ERROR: setting property \"Reporter::\${$name}\" is not allowed");
 
@@ -248,7 +248,7 @@ class Reporter
      *
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException
      */
-    public function __unset($name)
+    public function __unset(string $name)
     {
         throw new RuntimeException("ERROR: unsetting property \"Reporter::\${$name}\" is not allowed");
 
@@ -286,7 +286,7 @@ class Reporter
      *
      * @return void
      */
-    public function printReport($report)
+    public function printReport(string $report)
     {
         $reportClass = $this->reports[$report]['class'];
         $reportFile  = $this->reports[$report]['output'];

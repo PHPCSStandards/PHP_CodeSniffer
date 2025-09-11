@@ -252,7 +252,7 @@ class Config
      * @return mixed
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If the setting name is invalid.
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         if (array_key_exists($name, $this->settings) === false) {
             throw new RuntimeException("ERROR: unable to get value of property \"$name\"");
@@ -288,7 +288,7 @@ class Config
      * @return void
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If the setting name is invalid.
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value)
     {
         if (array_key_exists($name, $this->settings) === false) {
             throw new RuntimeException("Can't __set() $name; setting doesn't exist");
@@ -359,7 +359,7 @@ class Config
      *
      * @return bool
      */
-    public function __isset($name)
+    public function __isset(string $name)
     {
         return isset($this->settings[$name]);
 
@@ -373,7 +373,7 @@ class Config
      *
      * @return void
      */
-    public function __unset($name)
+    public function __unset(string $name)
     {
         $this->settings[$name] = null;
 
@@ -399,7 +399,7 @@ class Config
      *
      * @return void
      */
-    public function setSettings($settings)
+    public function setSettings(array $settings)
     {
         $this->settings = $settings;
 
@@ -415,7 +415,7 @@ class Config
      *
      * @return void
      */
-    public function __construct(array $cliArgs=[], $dieOnUnknownArg=true)
+    public function __construct(array $cliArgs=[], bool $dieOnUnknownArg=true)
     {
         if (defined('PHP_CODESNIFFER_IN_TESTS') === true) {
             // Let everything through during testing so that we can
@@ -498,7 +498,7 @@ class Config
      *
      * @return void
      */
-    public function setCommandLineValues($args)
+    public function setCommandLineValues(array $args)
     {
         $this->cliArgs = $args;
         $numArgs       = count($args);
@@ -675,7 +675,7 @@ class Config
      * @return void
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException
      */
-    public function processShortArgument($arg, $pos)
+    public function processShortArgument(string $arg, int $pos)
     {
         switch ($arg) {
         case 'h':
@@ -787,7 +787,7 @@ class Config
      * @return void
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException
      */
-    public function processLongArgument($arg, $pos)
+    public function processLongArgument(string $arg, int $pos)
     {
         switch ($arg) {
         case 'help':
@@ -1319,7 +1319,7 @@ class Config
      * @return array<string>
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException When any of the provided codes are not valid as sniff codes.
      */
-    private function parseSniffCodes($input, $argument)
+    private function parseSniffCodes(string $input, string $argument)
     {
         $errors = [];
         $sniffs = [];
@@ -1408,7 +1408,7 @@ class Config
      * @return void
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException
      */
-    public function processUnknownArgument($arg, $pos)
+    public function processUnknownArgument(string $arg, int $pos)
     {
         // We don't know about any additional switches; just files.
         if ($arg[0] === '-') {
@@ -1434,7 +1434,7 @@ class Config
      * @return void
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException
      */
-    public function processFilePath($path)
+    public function processFilePath(string $path)
     {
         // If we are processing STDIN, don't record any files to check.
         if ($this->stdin === true) {
@@ -1490,7 +1490,7 @@ class Config
      *
      * @return string|void
      */
-    public function printShortUsage($returnOutput=false)
+    public function printShortUsage(bool $returnOutput=false)
     {
         if (PHP_CODESNIFFER_CBF === true) {
             $usage = 'Run "phpcbf --help" for usage information';
@@ -1560,7 +1560,7 @@ class Config
      * @see    setConfigData()
      * @see    getAllConfigData()
      */
-    public static function getConfigData($key)
+    public static function getConfigData(string $key)
     {
         $phpCodeSnifferConfig = self::getAllConfigData();
 
@@ -1585,7 +1585,7 @@ class Config
      * @return string|null
      * @see    getConfigData()
      */
-    public static function getExecutablePath($name)
+    public static function getExecutablePath(string $name)
     {
         $data = self::getConfigData($name.'_path');
         if ($data !== null) {
@@ -1633,7 +1633,7 @@ class Config
      * @see    getConfigData()
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException If the config file can not be written.
      */
-    public function setConfigData($key, $value, $temp=false)
+    public function setConfigData(string $key, ?string $value, bool $temp=false)
     {
         if (isset($this->overriddenDefaults['runtime-set']) === true
             && isset($this->overriddenDefaults['runtime-set'][$key]) === true
@@ -1749,7 +1749,7 @@ class Config
      *
      * @return string
      */
-    public function prepareConfigDataForDisplay($data)
+    public function prepareConfigDataForDisplay(array $data)
     {
         if (empty($data) === true) {
             return '';
@@ -1786,7 +1786,7 @@ class Config
      *
      * @return void
      */
-    public function printConfigData($data)
+    public function printConfigData(array $data)
     {
         echo $this->prepareConfigDataForDisplay($data);
 
