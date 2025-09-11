@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\Commenting;
 
+use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
@@ -28,7 +29,7 @@ final class BlockCommentUnitTest extends AbstractSniffTestCase
      *
      * @return void
      */
-    public function setCliValues($testFile, $config)
+    public function setCliValues(string $testFile, Config $config)
     {
         $config->tabWidth = 4;
 

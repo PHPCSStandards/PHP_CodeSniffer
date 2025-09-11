@@ -14,6 +14,7 @@
 namespace PHP_CodeSniffer\Tests\Standards;
 
 use DirectoryIterator;
+use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\LocalFile;
 use PHP_CodeSniffer\Ruleset;
@@ -99,7 +100,7 @@ TEMPLATE;
      *
      * @return string[]
      */
-    protected function getTestFiles($testFileBase)
+    protected function getTestFiles(string $testFileBase)
     {
         $testFiles = [];
 
@@ -440,12 +441,12 @@ TEMPLATE;
     /**
      * Get a list of CLI values to set before the file is tested.
      *
-     * @param string                  $filename The name of the file being tested.
+     * @param string                  $testFile The name of the file being tested.
      * @param \PHP_CodeSniffer\Config $config   The config data for the run.
      *
      * @return void
      */
-    public function setCliValues($filename, $config)
+    public function setCliValues(string $testFile, Config $config)
     {
 
     }//end setCliValues()

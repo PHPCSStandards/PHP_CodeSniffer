@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Standards\PSR1\Tests\Files;
 
+use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
@@ -28,7 +29,7 @@ final class SideEffectsUnitTest extends AbstractSniffTestCase
      *
      * @return void
      */
-    public function setCliValues($testFile, $config)
+    public function setCliValues(string $testFile, Config $config)
     {
         if ($testFile === 'SideEffectsUnitTest.12.inc') {
             $config->annotations = false;
