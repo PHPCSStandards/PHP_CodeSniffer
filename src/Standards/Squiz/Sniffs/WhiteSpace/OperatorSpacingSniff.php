@@ -45,7 +45,7 @@ class OperatorSpacingSniff implements Sniff
     /**
      * A list of tokens that aren't considered as operands.
      *
-     * @var string[]
+     * @var array<int|string, int|string>
      */
     private $nonOperandTokens = [];
 
