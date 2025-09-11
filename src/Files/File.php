@@ -1229,7 +1229,7 @@ class File
      *
      * @return int
      */
-    public function getFirstRunCount(string $type):int
+    public function getFirstRunCount(string $type): int
     {
         return $this->firstRunCounts[$type];
 

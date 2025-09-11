@@ -164,4 +164,7 @@
 
     <!-- Require visibility for class constants. -->
     <rule ref="PSR12.Properties.ConstantVisibility"/>
+
+    <!-- Handle consistent formatting of return types. -->
+    <rule ref="PSR12.Functions.ReturnTypeDeclaration"/>
 </ruleset>
