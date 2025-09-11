@@ -1698,8 +1698,8 @@ class Ruleset
      * Optionally takes a listener to get ignore patterns specified
      * for that sniff only.
      *
-     * @param string $listener The listener to get patterns for. If NULL, all
-     *                         patterns are returned.
+     * @param string|null $listener The listener to get patterns for. If NULL, all
+     *                              patterns are returned.
      *
      * @return array
      */
@@ -1724,8 +1724,8 @@ class Ruleset
      * Optionally takes a listener to get include patterns specified
      * for that sniff only.
      *
-     * @param string $listener The listener to get patterns for. If NULL, all
-     *                         patterns are returned.
+     * @param string|null $listener The listener to get patterns for. If NULL, all
+     *                              patterns are returned.
      *
      * @return array
      */

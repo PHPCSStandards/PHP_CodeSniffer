@@ -2443,8 +2443,8 @@ class File
     /**
      * Returns the position of the first non-whitespace token in a statement.
      *
-     * @param int              $start  The position to start searching from in the token stack.
-     * @param int|string|array $ignore Token types that should not be considered stop points.
+     * @param int                   $start  The position to start searching from in the token stack.
+     * @param int|string|array|null $ignore Token types that should not be considered stop points.
      *
      * @return int
      */
@@ -2634,8 +2634,8 @@ class File
     /**
      * Returns the position of the last non-whitespace token in a statement.
      *
-     * @param int              $start  The position to start searching from in the token stack.
-     * @param int|string|array $ignore Token types that should not be considered stop points.
+     * @param int                   $start  The position to start searching from in the token stack.
+     * @param int|string|array|null $ignore Token types that should not be considered stop points.
      *
      * @return int
      */
@@ -2756,7 +2756,7 @@ class File
      *                                  token stack.
      * @param bool             $exclude If true, find the token that is NOT of
      *                                  the types specified in $types.
-     * @param string           $value   The value that the token must be equal to.
+     * @param string|null      $value   The value that the token must be equal to.
      *                                  If value is omitted, tokens with any value will
      *                                  be returned.
      *
