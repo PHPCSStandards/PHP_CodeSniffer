@@ -123,7 +123,7 @@ abstract class AbstractPatternSniff implements Sniff
      *
      * @return array<int, int>
      */
-    private function getPatternTokenTypes($pattern)
+    private function getPatternTokenTypes(array $pattern)
     {
         $tokenTypes = [];
         foreach ($pattern as $pos => $patternInfo) {
@@ -149,7 +149,7 @@ abstract class AbstractPatternSniff implements Sniff
      *             as the listener.
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If we could not determine a token to listen for.
      */
-    private function getListenerTokenPos($pattern)
+    private function getListenerTokenPos(array $pattern)
     {
         $tokenTypes = $this->getPatternTokenTypes($pattern);
         $tokenCodes = array_keys($tokenTypes);
@@ -178,7 +178,7 @@ abstract class AbstractPatternSniff implements Sniff
      * @return void
      * @see    register()
      */
-    final public function process(File $phpcsFile, $stackPtr)
+    final public function process(File $phpcsFile, int $stackPtr)
     {
         $file = $phpcsFile->getFilename();
         if ($this->currFile !== $file) {
@@ -246,7 +246,7 @@ abstract class AbstractPatternSniff implements Sniff
      *
      * @return array|false
      */
-    protected function processPattern($patternInfo, File $phpcsFile, $stackPtr)
+    protected function processPattern(array $patternInfo, File $phpcsFile, int $stackPtr)
     {
         $tokens      = $phpcsFile->getTokens();
         $pattern     = $patternInfo['pattern'];
@@ -697,7 +697,7 @@ abstract class AbstractPatternSniff implements Sniff
      *
      * @return string The error message.
      */
-    protected function prepareError($found, $patternCode)
+    protected function prepareError(string $found, string $patternCode)
     {
         $found    = str_replace("\r\n", '\n', $found);
         $found    = str_replace("\n", '\n', $found);
@@ -749,7 +749,7 @@ abstract class AbstractPatternSniff implements Sniff
      * @return void
      * @see    registerSupplementary()
      */
-    protected function processSupplementary(File $phpcsFile, $stackPtr)
+    protected function processSupplementary(File $phpcsFile, int $stackPtr)
     {
 
     }//end processSupplementary()
@@ -764,7 +764,7 @@ abstract class AbstractPatternSniff implements Sniff
      * @see    createSkipPattern()
      * @see    createTokenPattern()
      */
-    private function parse($pattern)
+    private function parse(string $pattern)
     {
         $patterns   = [];
         $length     = strlen($pattern);
@@ -855,7 +855,7 @@ abstract class AbstractPatternSniff implements Sniff
      * @see    createTokenPattern()
      * @see    parse()
      */
-    private function createSkipPattern($pattern, $from)
+    private function createSkipPattern(string $pattern, int $from)
     {
         $skip = ['type' => 'skip'];
 
@@ -908,7 +908,7 @@ abstract class AbstractPatternSniff implements Sniff
      * @see    createSkipPattern()
      * @see    parse()
      */
-    private function createTokenPattern($str)
+    private function createTokenPattern(string $str)
     {
         // Pause the StatusWriter to silence Tokenizer debug info about the patterns being parsed (which only confuses things).
         StatusWriter::pause();

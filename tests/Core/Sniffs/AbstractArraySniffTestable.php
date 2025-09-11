@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Sniffs;
 
+use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractArraySniff;
 
 class AbstractArraySniffTestable extends AbstractArraySniff
@@ -35,7 +36,7 @@ class AbstractArraySniffTestable extends AbstractArraySniff
      *
      * @return void
      */
-    public function processSingleLineArray($phpcsFile, $stackPtr, $arrayStart, $arrayEnd, $indices)
+    public function processSingleLineArray(File $phpcsFile, int $stackPtr, int $arrayStart, int $arrayEnd, array $indices)
     {
         $this->indicies = $indices;
 
@@ -55,7 +56,7 @@ class AbstractArraySniffTestable extends AbstractArraySniff
      *
      * @return void
      */
-    public function processMultiLineArray($phpcsFile, $stackPtr, $arrayStart, $arrayEnd, $indices)
+    public function processMultiLineArray(File $phpcsFile, int $stackPtr, int $arrayStart, int $arrayEnd, array $indices)
     {
         $this->indicies = $indices;
 
