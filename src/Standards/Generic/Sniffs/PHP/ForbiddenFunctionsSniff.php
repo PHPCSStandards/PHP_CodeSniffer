@@ -206,7 +206,7 @@ class ForbiddenFunctionsSniff implements Sniff
      * @param int                         $stackPtr  The position of the forbidden function
      *                                               in the token array.
      * @param string                      $function  The name of the forbidden function.
-     * @param string                      $pattern   The pattern used for the match.
+     * @param string|null                 $pattern   The pattern used for the match.
      *
      * @return void
      */

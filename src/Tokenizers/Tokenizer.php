@@ -579,10 +579,10 @@ abstract class Tokenizer
      * is placed into an orig_content index and the new token length is also
      * set in the length index.
      *
-     * @param array  $token    The token to replace tabs inside.
-     * @param string $prefix   The character to use to represent the start of a tab.
-     * @param string $padding  The character to use to represent the end of a tab.
-     * @param int    $tabWidth The number of spaces each tab represents.
+     * @param array    $token    The token to replace tabs inside.
+     * @param string   $prefix   The character to use to represent the start of a tab.
+     * @param string   $padding  The character to use to represent the end of a tab.
+     * @param int|null $tabWidth The number of spaces each tab represents.
      *
      * @return void
      */

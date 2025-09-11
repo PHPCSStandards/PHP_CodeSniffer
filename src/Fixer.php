@@ -222,10 +222,10 @@ class Fixer
     /**
      * Generates a text diff of the original file and the new content.
      *
-     * @param string  $filePath Optional file path to diff the file against.
-     *                          If not specified, the original version of the
-     *                          file will be used.
-     * @param boolean $colors   Print coloured output or not.
+     * @param string|null $filePath Optional file path to diff the file against.
+     *                              If not specified, the original version of the
+     *                              file will be used.
+     * @param boolean     $colors   Print coloured output or not.
      *
      * @return string
      *
@@ -698,10 +698,10 @@ class Fixer
     /**
      * Replace the content of a token with a part of its current content.
      *
-     * @param int $stackPtr The position of the token in the token stack.
-     * @param int $start    The first character to keep.
-     * @param int $length   The number of characters to keep. If NULL, the content of
-     *                      the token from $start to the end of the content is kept.
+     * @param int      $stackPtr The position of the token in the token stack.
+     * @param int      $start    The first character to keep.
+     * @param int|null $length   The number of characters to keep. If NULL, the content of
+     *                           the token from $start to the end of the content is kept.
      *
      * @return bool If the change was accepted.
      */
