@@ -52,7 +52,7 @@ class FileHeaderSniff implements Sniff
             $headerLines = $this->getHeaderLines($phpcsFile, $openTag);
             if (empty($headerLines) === true && $openTag === $stackPtr) {
                 // No content in the file.
-                return;
+                return $phpcsFile->numTokens;
             }
 
             $possibleHeaders[$openTag] = $headerLines;
