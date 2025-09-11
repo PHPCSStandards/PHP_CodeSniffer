@@ -38,7 +38,7 @@ class VariableCommentSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    public function processMemberVar(File $phpcsFile, $stackPtr)
+    public function processMemberVar(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -189,7 +189,7 @@ class VariableCommentSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariable(File $phpcsFile, $stackPtr)
+    protected function processVariable(File $phpcsFile, int $stackPtr)
     {
 
     }//end processVariable()
@@ -206,7 +206,7 @@ class VariableCommentSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariableInString(File $phpcsFile, $stackPtr)
+    protected function processVariableInString(File $phpcsFile, int $stackPtr)
     {
 
     }//end processVariableInString()

@@ -37,7 +37,7 @@ class StaticThisUsageSniff extends AbstractScopeSniff
      *
      * @return void
      */
-    public function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
+    public function processTokenWithinScope(File $phpcsFile, int $stackPtr, int $currScope)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -82,7 +82,7 @@ class StaticThisUsageSniff extends AbstractScopeSniff
      *
      * @return void
      */
-    private function checkThisUsage(File $phpcsFile, $next, $end)
+    private function checkThisUsage(File $phpcsFile, int $next, int $end)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -119,7 +119,7 @@ class StaticThisUsageSniff extends AbstractScopeSniff
      *
      * @return void
      */
-    protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
+    protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr)
     {
 
     }//end processTokenOutsideScope()

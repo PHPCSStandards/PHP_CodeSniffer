@@ -42,7 +42,7 @@ class ClassFileNameSniff implements Sniff
      * @return int|void Integer stack pointer to skip forward or void to continue
      *                  normal file processing.
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $fullPath = $phpcsFile->getFilename();
         if ($fullPath === 'STDIN') {

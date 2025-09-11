@@ -42,7 +42,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
      *
      * @return void
      */
-    protected function processReturn(File $phpcsFile, $stackPtr, $commentStart)
+    protected function processReturn(File $phpcsFile, int $stackPtr, int $commentStart)
     {
         $tokens = $phpcsFile->getTokens();
         $return = null;
@@ -202,7 +202,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
      *
      * @return void
      */
-    protected function processThrows(File $phpcsFile, $stackPtr, $commentStart)
+    protected function processThrows(File $phpcsFile, int $stackPtr, int $commentStart)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -278,7 +278,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
      *
      * @return void
      */
-    protected function processParams(File $phpcsFile, $stackPtr, $commentStart)
+    protected function processParams(File $phpcsFile, int $stackPtr, int $commentStart)
     {
         if ($this->phpVersion === null) {
             $this->phpVersion = Config::getConfigData('php_version');
@@ -653,7 +653,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
      *
      * @return void
      */
-    protected function checkSpacingAfterParamType(File $phpcsFile, $param, $maxType, $spacing=1)
+    protected function checkSpacingAfterParamType(File $phpcsFile, array $param, int $maxType, int $spacing=1)
     {
         // Check number of spaces after the type.
         $spaces = ($maxType - strlen($param['type']) + $spacing);
@@ -712,7 +712,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
      *
      * @return void
      */
-    protected function checkSpacingAfterParamName(File $phpcsFile, $param, $maxVar, $spacing=1)
+    protected function checkSpacingAfterParamName(File $phpcsFile, array $param, int $maxVar, int $spacing=1)
     {
         // Check number of spaces after the var name.
         $spaces = ($maxVar - strlen($param['var']) + $spacing);
@@ -771,7 +771,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
      *
      * @return boolean TRUE if the docblock contains only {@inheritdoc} (case-insensitive).
      */
-    protected function checkInheritdoc(File $phpcsFile, $stackPtr, $commentStart)
+    protected function checkInheritdoc(File $phpcsFile, int $stackPtr, int $commentStart)
     {
         $tokens = $phpcsFile->getTokens();
 

@@ -64,7 +64,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -101,7 +101,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
      *
      * @return void
      */
-    public function processBracket($phpcsFile, $openBracket)
+    public function processBracket(File $phpcsFile, int $openBracket)
     {
         $tokens       = $phpcsFile->getTokens();
         $closeBracket = $tokens[$openBracket]['parenthesis_closer'];

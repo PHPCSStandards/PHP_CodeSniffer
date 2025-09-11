@@ -38,7 +38,7 @@ class OperatorBracketSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -253,7 +253,7 @@ class OperatorBracketSniff implements Sniff
      *
      * @return void
      */
-    public function addMissingBracketsError($phpcsFile, $stackPtr)
+    public function addMissingBracketsError(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 

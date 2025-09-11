@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions;
 
+use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Standards\PEAR\Sniffs\Functions\FunctionDeclarationSniff as PEARFunctionDeclarationSniff;
 use PHP_CodeSniffer\Util\Tokens;
 
@@ -29,7 +30,7 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
      *
      * @return bool
      */
-    public function isMultiLineDeclaration($phpcsFile, $stackPtr, $openBracket, $tokens)
+    public function isMultiLineDeclaration(File $phpcsFile, int $stackPtr, int $openBracket, array $tokens)
     {
         $bracketsToCheck = [$stackPtr => $openBracket];
 
@@ -93,7 +94,7 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
      *
      * @return void
      */
-    public function processSingleLineDeclaration($phpcsFile, $stackPtr, $tokens)
+    public function processSingleLineDeclaration(File $phpcsFile, int $stackPtr, array $tokens)
     {
         // We do everything the parent sniff does, and a bit more because we
         // define multi-line declarations a bit differently.
@@ -139,7 +140,7 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
      *
      * @return void
      */
-    public function processMultiLineDeclaration($phpcsFile, $stackPtr, $tokens)
+    public function processMultiLineDeclaration(File $phpcsFile, int $stackPtr, array $tokens)
     {
         // We do everything the parent sniff does, and a bit more.
         parent::processMultiLineDeclaration($phpcsFile, $stackPtr, $tokens);
@@ -174,7 +175,7 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
      *
      * @return void
      */
-    public function processBracket($phpcsFile, $openBracket, $tokens, $type='function')
+    public function processBracket(File $phpcsFile, int $openBracket, array $tokens, string $type='function')
     {
         $errorPrefix = '';
         if ($type === 'use') {
