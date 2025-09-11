@@ -96,7 +96,7 @@ class Notifysend implements Report
      *
      * @return bool
      */
-    public function generateFileReport($report, File $phpcsFile, $showSources=false, $width=80)
+    public function generateFileReport(array $report, File $phpcsFile, bool $showSources=false, int $width=80)
     {
         echo $report['filename'].PHP_EOL;
 
@@ -124,15 +124,15 @@ class Notifysend implements Report
      * @return void
      */
     public function generate(
-        $cachedData,
-        $totalFiles,
-        $totalErrors,
-        $totalWarnings,
-        $totalFixable,
-        $showSources=false,
-        $width=80,
-        $interactive=false,
-        $toScreen=true
+        string $cachedData,
+        int $totalFiles,
+        int $totalErrors,
+        int $totalWarnings,
+        int $totalFixable,
+        bool $showSources=false,
+        int $width=80,
+        bool $interactive=false,
+        bool $toScreen=true
     ) {
         $checkedFiles = explode(PHP_EOL, trim($cachedData));
 
@@ -157,7 +157,7 @@ class Notifysend implements Report
      *
      * @return string|null Error message or NULL if no error/warning found.
      */
-    protected function generateMessage($checkedFiles, $totalErrors, $totalWarnings)
+    protected function generateMessage(array $checkedFiles, int $totalErrors, int $totalWarnings)
     {
         if ($totalErrors === 0 && $totalWarnings === 0) {
             // Nothing to print.
@@ -209,7 +209,7 @@ class Notifysend implements Report
      *
      * @return void
      */
-    protected function notifyErrors($msg)
+    protected function notifyErrors(string $msg)
     {
         $cmd  = $this->getBasicCommand();
         $cmd .= ' -i error';

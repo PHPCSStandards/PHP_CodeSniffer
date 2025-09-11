@@ -31,7 +31,7 @@ class Hgblame extends VersionControl
      *
      * @return string|false String or FALSE if impossible to recover.
      */
-    protected function getAuthor($line)
+    protected function getAuthor(string $line)
     {
         $blameParts = [];
         $line       = preg_replace('|\s+|', ' ', $line);
@@ -67,7 +67,7 @@ class Hgblame extends VersionControl
      * @return array
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException
      */
-    protected function getBlameContent($filename)
+    protected function getBlameContent(string $filename)
     {
         $cwd = getcwd();
 

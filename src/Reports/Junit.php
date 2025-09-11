@@ -33,7 +33,7 @@ class Junit implements Report
      *
      * @return bool
      */
-    public function generateFileReport($report, File $phpcsFile, $showSources=false, $width=80)
+    public function generateFileReport(array $report, File $phpcsFile, bool $showSources=false, int $width=80)
     {
         $out = new XMLWriter;
         $out->openMemory();
@@ -101,15 +101,15 @@ class Junit implements Report
      * @return void
      */
     public function generate(
-        $cachedData,
-        $totalFiles,
-        $totalErrors,
-        $totalWarnings,
-        $totalFixable,
-        $showSources=false,
-        $width=80,
-        $interactive=false,
-        $toScreen=true
+        string $cachedData,
+        int $totalFiles,
+        int $totalErrors,
+        int $totalWarnings,
+        int $totalFixable,
+        bool $showSources=false,
+        int $width=80,
+        bool $interactive=false,
+        bool $toScreen=true
     ) {
         // Figure out the total number of tests.
         $tests   = 0;

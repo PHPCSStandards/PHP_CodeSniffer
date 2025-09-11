@@ -38,7 +38,7 @@ abstract class VersionControl implements Report
      *
      * @return bool
      */
-    public function generateFileReport($report, File $phpcsFile, $showSources=false, $width=80)
+    public function generateFileReport(array $report, File $phpcsFile, bool $showSources=false, int $width=80)
     {
         $blames = $this->getBlameContent($phpcsFile->getFilename());
 
@@ -148,15 +148,15 @@ abstract class VersionControl implements Report
      * @return void
      */
     public function generate(
-        $cachedData,
-        $totalFiles,
-        $totalErrors,
-        $totalWarnings,
-        $totalFixable,
-        $showSources=false,
-        $width=80,
-        $interactive=false,
-        $toScreen=true
+        string $cachedData,
+        int $totalFiles,
+        int $totalErrors,
+        int $totalWarnings,
+        int $totalFixable,
+        bool $showSources=false,
+        int $width=80,
+        bool $interactive=false,
+        bool $toScreen=true
     ) {
         $errorsShown = ($totalErrors + $totalWarnings);
         if ($errorsShown === 0) {
@@ -356,7 +356,7 @@ abstract class VersionControl implements Report
      *
      * @return mixed string or false if impossible to recover.
      */
-    abstract protected function getAuthor($line);
+    abstract protected function getAuthor(string $line);
 
 
     /**
@@ -366,7 +366,7 @@ abstract class VersionControl implements Report
      *
      * @return array
      */
-    abstract protected function getBlameContent($filename);
+    abstract protected function getBlameContent(string $filename);
 
 
 }//end class
