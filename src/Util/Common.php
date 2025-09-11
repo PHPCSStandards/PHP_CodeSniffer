@@ -49,7 +49,7 @@ class Common
      *
      * @return bool
      */
-    public static function isPharFile($path)
+    public static function isPharFile(string $path)
     {
         if (strpos($path, 'phar://') === 0) {
             return true;
@@ -70,7 +70,7 @@ class Common
      *
      * @return boolean
      */
-    public static function isReadable($path)
+    public static function isReadable(string $path)
     {
         if (@is_readable($path) === true) {
             return true;
@@ -97,7 +97,7 @@ class Common
      *
      * @return string|false
      */
-    public static function realpath($path)
+    public static function realpath(string $path)
     {
         // Support the path replacement of ~ with the user's home directory.
         if (substr($path, 0, 2) === '~/') {
@@ -150,7 +150,7 @@ class Common
      *
      * @return string
      */
-    public static function stripBasepath($path, $basepath)
+    public static function stripBasepath(string $path, ?string $basepath)
     {
         if (empty($basepath) === true) {
             return $path;
@@ -178,7 +178,7 @@ class Common
      *
      * @return string
      */
-    public static function detectLineEndings($contents)
+    public static function detectLineEndings(string $contents)
     {
         if (preg_match("/\r\n?|\n/", $contents, $matches) !== 1) {
             // Assume there are no newlines.
@@ -258,7 +258,7 @@ class Common
      *
      * @return string
      */
-    public static function escapeshellcmd($cmd)
+    public static function escapeshellcmd(string $cmd)
     {
         $cmd = escapeshellcmd($cmd);
 
@@ -285,7 +285,7 @@ class Common
      *
      * @return string
      */
-    public static function prepareForOutput($content, $exclude=[])
+    public static function prepareForOutput(string $content, array $exclude=[])
     {
         if (PHP_OS_FAMILY === 'Windows') {
             if (in_array("\r", $exclude, true) === false) {
@@ -329,7 +329,7 @@ class Common
      *
      * @return string
      */
-    public static function stripColors($text)
+    public static function stripColors(string $text)
     {
         return preg_replace('`\033\[[0-9;]+m`', '', $text);
 
@@ -357,10 +357,10 @@ class Common
      * @return boolean
      */
     public static function isCamelCaps(
-        $name,
-        $classFormat=false,
-        $visibilityPublic=true,
-        $strict=true
+        string $name,
+        bool $classFormat=false,
+        bool $visibilityPublic=true,
+        bool $strict=true
     ) {
         // Check the first character first.
         if ($classFormat === false) {
@@ -428,7 +428,7 @@ class Common
      *
      * @return boolean
      */
-    public static function isUnderscoreName($name)
+    public static function isUnderscoreName(string $name)
     {
         // If there is whitespace in the name, it can't be valid.
         if (strpos($name, ' ') !== false) {
@@ -469,7 +469,7 @@ class Common
      *
      * @return string
      */
-    public static function suggestType($varType)
+    public static function suggestType(string $varType)
     {
         if ($varType === '') {
             return '';
@@ -589,7 +589,7 @@ class Common
      *
      * @return string
      */
-    public static function cleanSniffClass($sniffClass)
+    public static function cleanSniffClass(string $sniffClass)
     {
         $newName = strtolower($sniffClass);
 

@@ -40,7 +40,7 @@ abstract class AbstractArraySniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -110,7 +110,7 @@ abstract class AbstractArraySniff implements Sniff
      *
      * @return int
      */
-    private function getNext(File $phpcsFile, $ptr, $arrayEnd)
+    private function getNext(File $phpcsFile, int $ptr, int $arrayEnd)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -150,7 +150,7 @@ abstract class AbstractArraySniff implements Sniff
      *
      * @return void
      */
-    abstract protected function processSingleLineArray($phpcsFile, $stackPtr, $arrayStart, $arrayEnd, $indices);
+    abstract protected function processSingleLineArray(File $phpcsFile, int $stackPtr, int $arrayStart, int $arrayEnd, array $indices);
 
 
     /**
@@ -166,7 +166,7 @@ abstract class AbstractArraySniff implements Sniff
      *
      * @return void
      */
-    abstract protected function processMultiLineArray($phpcsFile, $stackPtr, $arrayStart, $arrayEnd, $indices);
+    abstract protected function processMultiLineArray(File $phpcsFile, int $stackPtr, int $arrayStart, int $arrayEnd, array $indices);
 
 
 }//end class

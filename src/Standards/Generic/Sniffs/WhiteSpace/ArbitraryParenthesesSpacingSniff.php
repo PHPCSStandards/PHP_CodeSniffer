@@ -76,7 +76,7 @@ class ArbitraryParenthesesSpacingSniff implements Sniff
      *
      * @return void|int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 

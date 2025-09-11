@@ -30,7 +30,7 @@ class DummyFile extends File
      *
      * @return void
      */
-    public function __construct($content, Ruleset $ruleset, Config $config)
+    public function __construct(string $content, Ruleset $ruleset, Config $config)
     {
         $this->setContent($content);
 
@@ -71,8 +71,14 @@ class DummyFile extends File
      *
      * @return void
      */
-    public function setErrorCounts($errorCount, $warningCount, $fixableErrorCount, $fixableWarningCount, $fixedErrorCount, $fixedWarningCount)
-    {
+    public function setErrorCounts(
+        int $errorCount,
+        int $warningCount,
+        int $fixableErrorCount,
+        int $fixableWarningCount,
+        int $fixedErrorCount,
+        int $fixedWarningCount
+    ) {
         $this->errorCount          = $errorCount;
         $this->warningCount        = $warningCount;
         $this->fixableErrorCount   = $fixableErrorCount;

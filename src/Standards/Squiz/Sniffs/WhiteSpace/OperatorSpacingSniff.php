@@ -124,7 +124,7 @@ class OperatorSpacingSniff implements Sniff
      *                  pointer is reached. Return `$phpcsFile->numTokens` to skip
      *                  the rest of the file.
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -339,7 +339,7 @@ class OperatorSpacingSniff implements Sniff
      *
      * @return boolean
      */
-    protected function isOperator(File $phpcsFile, $stackPtr)
+    protected function isOperator(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 

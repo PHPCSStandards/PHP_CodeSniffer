@@ -535,7 +535,7 @@ class PHP extends Tokenizer
      *
      * @return array
      */
-    protected function tokenize($code)
+    protected function tokenize(string $code)
     {
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             StatusWriter::write('*** START PHP TOKENIZING ***', 1);
@@ -3847,7 +3847,7 @@ class PHP extends Tokenizer
      *
      * @return array The new token in array format.
      */
-    public static function resolveSimpleToken($token)
+    public static function resolveSimpleToken(string $token)
     {
         $newToken = [];
 
@@ -3955,7 +3955,7 @@ class PHP extends Tokenizer
      *
      * @return int|null The position of the closing token, if found. NULL otherwise.
      */
-    private function findCloser(array &$tokens, $start, $openerTokens, $closerChar)
+    private function findCloser(array &$tokens, int $start, $openerTokens, string $closerChar)
     {
         $numTokens    = count($tokens);
         $stack        = [0];
@@ -3990,7 +3990,7 @@ class PHP extends Tokenizer
      *
      * @return array|null The array of parsed attribute tokens
      */
-    private function parsePhpAttribute(array &$tokens, $stackPtr)
+    private function parsePhpAttribute(array &$tokens, int $stackPtr)
     {
 
         $token = $tokens[$stackPtr];

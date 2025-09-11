@@ -37,7 +37,7 @@ class ElseIfDeclarationSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $error = 'Usage of ELSEIF not allowed; use ELSE IF instead';
         $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'NotAllowed');

@@ -30,7 +30,7 @@ class Svnblame extends VersionControl
      *
      * @return mixed string or false if impossible to recover.
      */
-    protected function getAuthor($line)
+    protected function getAuthor(string $line)
     {
         $blameParts = [];
         preg_match('|\s*([^\s]+)\s+([^\s]+)|', $line, $blameParts);
@@ -52,7 +52,7 @@ class Svnblame extends VersionControl
      * @return array
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException
      */
-    protected function getBlameContent($filename)
+    protected function getBlameContent(string $filename)
     {
         $command = 'svn blame "'.$filename.'" 2>&1';
         $handle  = popen($command, 'r');

@@ -84,7 +84,7 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
      *                  pointer is reached. Return `$phpcsFile->numTokens` to skip
      *                  the rest of the file.
      */
-    final protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
+    final protected function processTokenWithinScope(File $phpcsFile, int $stackPtr, int $currScope)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -162,7 +162,7 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
      *                  pointer is reached. Return `$phpcsFile->numTokens` to skip
      *                  the rest of the file.
      */
-    final protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
+    final protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         // These variables are not member vars.
@@ -193,7 +193,7 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
      *                  pointer is reached. Return `$phpcsFile->numTokens` to skip
      *                  the rest of the file.
      */
-    abstract protected function processMemberVar(File $phpcsFile, $stackPtr);
+    abstract protected function processMemberVar(File $phpcsFile, int $stackPtr);
 
 
     /**
@@ -208,7 +208,7 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
      *                  pointer is reached. Return `$phpcsFile->numTokens` to skip
      *                  the rest of the file.
      */
-    abstract protected function processVariable(File $phpcsFile, $stackPtr);
+    abstract protected function processVariable(File $phpcsFile, int $stackPtr);
 
 
     /**
@@ -227,7 +227,7 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
      *                  pointer is reached. Return `$phpcsFile->numTokens` to skip
      *                  the rest of the file.
      */
-    abstract protected function processVariableInString(File $phpcsFile, $stackPtr);
+    abstract protected function processVariableInString(File $phpcsFile, int $stackPtr);
 
 
 }//end class

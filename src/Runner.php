@@ -536,7 +536,7 @@ class Runner
      * @return bool
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException
      */
-    public function handleErrors($code, $message, $file, $line)
+    public function handleErrors(int $code, string $message, string $file, int $line)
     {
         if ((error_reporting() & $code) === 0) {
             // This type of error is being muted.
@@ -556,7 +556,7 @@ class Runner
      * @return void
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException
      */
-    public function processFile($file)
+    public function processFile(File $file)
     {
         if (PHP_CODESNIFFER_VERBOSITY > 0) {
             $startTime = microtime(true);
@@ -686,7 +686,7 @@ class Runner
      *
      * @return bool
      */
-    private function processChildProcs($childProcs)
+    private function processChildProcs(array $childProcs)
     {
         $numProcessed = 0;
         $totalBatches = count($childProcs);
@@ -771,7 +771,7 @@ class Runner
      *
      * @return void
      */
-    public function printProgress(File $file, $numFiles, $numProcessed)
+    public function printProgress(File $file, int $numFiles, int $numProcessed)
     {
         if (PHP_CODESNIFFER_VERBOSITY > 0
             || $this->config->showProgress === false
@@ -874,7 +874,7 @@ class Runner
      *
      * @return void
      */
-    private function registerOutOfMemoryShutdownMessage($command)
+    private function registerOutOfMemoryShutdownMessage(string $command)
     {
         // Allocate all needed memory beforehand as much as possible.
         $errorMsg    = PHP_EOL.'The PHP_CodeSniffer "%1$s" command ran out of memory.'.PHP_EOL;

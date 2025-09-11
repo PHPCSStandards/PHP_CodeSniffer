@@ -31,7 +31,7 @@ final class ClassFileNameUnitTest extends AbstractSniffTestCase
      *
      * @return string[]
      */
-    protected function getTestFiles($testFileBase)
+    protected function getTestFiles(string $testFileBase)
     {
         $testFiles = [];
 

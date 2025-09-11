@@ -65,7 +65,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
          *
          * @return bool
          */
-        public static function load($className)
+        public static function load(string $className)
         {
             // Include the composer autoloader if there is one, but re-register it
             // so this autoloader runs before the composer one as we need to include
@@ -151,7 +151,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
          *
          * @return string The fully qualified name of the class in the loaded file.
          */
-        public static function loadFile($path)
+        public static function loadFile(string $path)
         {
             if (strpos(__DIR__, 'phar://') !== 0) {
                 $path = realpath($path);
@@ -195,7 +195,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
          *
          * @return string The fully qualified name of the class in the loaded file.
          */
-        public static function determineLoadedClass($classesBeforeLoad, $classesAfterLoad)
+        public static function determineLoadedClass(array $classesBeforeLoad, array $classesAfterLoad)
         {
             $className = null;
 
@@ -256,7 +256,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
          *
          * @return void
          */
-        public static function addSearchPath($path, $nsPrefix='')
+        public static function addSearchPath(string $path, string $nsPrefix='')
         {
             self::$searchPaths[$path] = rtrim(trim((string) $nsPrefix), '\\');
 
@@ -283,7 +283,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
          * @throws \Exception If the file path has not been loaded.
          * @return string
          */
-        public static function getLoadedClassName($path)
+        public static function getLoadedClassName(string $path)
         {
             if (isset(self::$loadedClasses[$path]) === false) {
                 throw new Exception("Cannot get class name for $path; file has not been included");
@@ -302,7 +302,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
          * @throws \Exception If the class name has not been loaded.
          * @return string
          */
-        public static function getLoadedFileName($className)
+        public static function getLoadedFileName(string $className)
         {
             if (isset(self::$loadedFiles[$className]) === false) {
                 throw new Exception("Cannot get file name for $className; class has not been included");

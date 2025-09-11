@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\WhiteSpace;
 
+use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
@@ -28,7 +29,7 @@ final class DisallowSpaceIndentUnitTest extends AbstractSniffTestCase
      *
      * @return void
      */
-    public function setCliValues($testFile, $config)
+    public function setCliValues(string $testFile, Config $config)
     {
         if ($testFile === 'DisallowSpaceIndentUnitTest.2.inc') {
             return;

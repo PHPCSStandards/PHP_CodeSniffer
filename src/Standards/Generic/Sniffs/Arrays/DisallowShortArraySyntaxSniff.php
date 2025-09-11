@@ -37,7 +37,7 @@ class DisallowShortArraySyntaxSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $phpcsFile->recordMetric($stackPtr, 'Short array syntax used', 'yes');
 

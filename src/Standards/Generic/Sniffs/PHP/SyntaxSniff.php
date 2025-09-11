@@ -50,7 +50,7 @@ class SyntaxSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         if ($this->phpPath === null) {
             $this->phpPath = Config::getExecutablePath('php');

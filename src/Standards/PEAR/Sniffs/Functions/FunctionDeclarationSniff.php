@@ -50,7 +50,7 @@ class FunctionDeclarationSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -210,7 +210,7 @@ class FunctionDeclarationSniff implements Sniff
      *
      * @return bool
      */
-    public function isMultiLineDeclaration($phpcsFile, $stackPtr, $openBracket, $tokens)
+    public function isMultiLineDeclaration(File $phpcsFile, int $stackPtr, int $openBracket, array $tokens)
     {
         $closeBracket = $tokens[$openBracket]['parenthesis_closer'];
         if ($tokens[$openBracket]['line'] !== $tokens[$closeBracket]['line']) {
@@ -247,7 +247,7 @@ class FunctionDeclarationSniff implements Sniff
      *
      * @return void
      */
-    public function processSingleLineDeclaration($phpcsFile, $stackPtr, $tokens)
+    public function processSingleLineDeclaration(File $phpcsFile, int $stackPtr, array $tokens)
     {
         if ($tokens[$stackPtr]['code'] === T_CLOSURE) {
             $sniff = new OpeningFunctionBraceKernighanRitchieSniff();
@@ -272,7 +272,7 @@ class FunctionDeclarationSniff implements Sniff
      *
      * @return void
      */
-    public function processMultiLineDeclaration($phpcsFile, $stackPtr, $tokens)
+    public function processMultiLineDeclaration(File $phpcsFile, int $stackPtr, array $tokens)
     {
         $this->processArgumentList($phpcsFile, $stackPtr, $this->indent);
 
@@ -371,7 +371,7 @@ class FunctionDeclarationSniff implements Sniff
      *
      * @return void
      */
-    public function processArgumentList($phpcsFile, $stackPtr, $indent, $type='function')
+    public function processArgumentList(File $phpcsFile, int $stackPtr, int $indent, string $type='function')
     {
         $tokens = $phpcsFile->getTokens();
 

@@ -60,7 +60,7 @@ class ByteOrderMarkSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         // The BOM will be the very first token in the file.
         if ($stackPtr !== 0) {

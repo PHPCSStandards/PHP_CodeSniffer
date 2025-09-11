@@ -78,7 +78,7 @@ class GitStaged extends ExactMatch
      *
      * @return array
      */
-    protected function exec($cmd)
+    protected function exec(string $cmd)
     {
         $output   = [];
         $lastLine = exec($cmd, $output);

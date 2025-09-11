@@ -18,7 +18,7 @@ final class ValidImplementsSniff implements Sniff
         return [T_OPEN_TAG];
     }
 
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         // Do something.
     }

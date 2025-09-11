@@ -18,7 +18,7 @@ class WarningSniff implements Sniff
         return [T_COMMENT];
     }
 
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $phpcsFile->addWarning('Commments are not allowed', $stackPtr, 'Found');
     }

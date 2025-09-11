@@ -30,7 +30,7 @@ final class LowercasedFilenameUnitTest extends AbstractSniffTestCase
      *
      * @return string[]
      */
-    protected function getTestFiles($testFileBase)
+    protected function getTestFiles(string $testFileBase)
     {
         $testFileDir = dirname($testFileBase);
         $testFiles   = parent::getTestFiles($testFileBase);

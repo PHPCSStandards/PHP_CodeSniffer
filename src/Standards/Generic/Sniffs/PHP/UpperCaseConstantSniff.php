@@ -24,7 +24,7 @@ class UpperCaseConstantSniff extends LowerCaseConstantSniff
      *
      * @return void
      */
-    protected function processConstant(File $phpcsFile, $stackPtr)
+    protected function processConstant(File $phpcsFile, int $stackPtr)
     {
         $tokens   = $phpcsFile->getTokens();
         $keyword  = $tokens[$stackPtr]['content'];

@@ -38,7 +38,7 @@ class FileHeaderSniff implements Sniff
      *
      * @return int|void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -128,7 +128,7 @@ class FileHeaderSniff implements Sniff
      *
      * @return array
      */
-    public function getHeaderLines(File $phpcsFile, $stackPtr)
+    public function getHeaderLines(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -286,7 +286,7 @@ class FileHeaderSniff implements Sniff
      *
      * @return void
      */
-    public function processHeaderLines(File $phpcsFile, $headerLines)
+    public function processHeaderLines(File $phpcsFile, array $headerLines)
     {
         $tokens = $phpcsFile->getTokens();
 

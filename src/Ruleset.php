@@ -22,6 +22,7 @@ use PHP_CodeSniffer\Util\Writers\StatusWriter;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use ReflectionClass;
+use SimpleXMLElement;
 use stdClass;
 
 class Ruleset
@@ -528,7 +529,7 @@ class Ruleset
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException - If the ruleset path is invalid.
      *                                                      - If a specified autoload file could not be found.
      */
-    public function processRuleset($rulesetPath, $depth=0)
+    public function processRuleset(string $rulesetPath, int $depth=0)
     {
         $rulesetPath = Common::realpath($rulesetPath);
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
@@ -895,7 +896,7 @@ class Ruleset
      *
      * @return array
      */
-    private function expandSniffDirectory($directory, $depth=0)
+    private function expandSniffDirectory(string $directory, int $depth=0)
     {
         $sniffs = [];
 
@@ -957,7 +958,7 @@ class Ruleset
      * @return array
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If the reference is invalid.
      */
-    private function expandRulesetReference($ref, $rulesetDir, $depth=0)
+    private function expandRulesetReference(string $ref, string $rulesetDir, int $depth=0)
     {
         // Naming an (external) standard "Internal" is not supported.
         if (strtolower($ref) === 'internal') {
@@ -1139,7 +1140,7 @@ class Ruleset
      * @return void
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If rule settings are invalid.
      */
-    private function processRule($rule, $newSniffs, $depth=0)
+    private function processRule(SimpleXMLElement $rule, array $newSniffs, int $depth=0)
     {
         $ref  = (string) $rule['ref'];
         $todo = [$ref];
@@ -1390,7 +1391,7 @@ class Ruleset
      *
      * @return bool
      */
-    private function shouldProcessElement($element)
+    private function shouldProcessElement(SimpleXMLElement $element)
     {
         if (isset($element['phpcbf-only']) === false
             && isset($element['phpcs-only']) === false
@@ -1429,7 +1430,7 @@ class Ruleset
      *
      * @return void
      */
-    public function registerSniffs($files, $restrictions, $exclusions)
+    public function registerSniffs(array $files, array $restrictions, array $exclusions)
     {
         $listeners = [];
 
@@ -1615,7 +1616,7 @@ class Ruleset
      *                                                      which doesn't declare the property or explicitly supports
      *                                                      dynamic properties.
      */
-    public function setSniffProperty($sniffClass, $name, $settings)
+    public function setSniffProperty(string $sniffClass, string $name, array $settings)
     {
         // Setting a property for a sniff we are not using.
         if (isset($this->sniffs[$sniffClass]) === false) {
@@ -1737,7 +1738,7 @@ class Ruleset
      *
      * @return array
      */
-    public function getIgnorePatterns($listener=null)
+    public function getIgnorePatterns(?string $listener=null)
     {
         if ($listener === null) {
             return $this->ignorePatterns;
@@ -1763,7 +1764,7 @@ class Ruleset
      *
      * @return array
      */
-    public function getIncludePatterns($listener=null)
+    public function getIncludePatterns(?string $listener=null)
     {
         if ($listener === null) {
             return $this->includePatterns;

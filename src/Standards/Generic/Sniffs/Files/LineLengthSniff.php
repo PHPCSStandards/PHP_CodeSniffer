@@ -68,7 +68,7 @@ class LineLengthSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         for ($i = 1; $i < $phpcsFile->numTokens; $i++) {
@@ -94,7 +94,7 @@ class LineLengthSniff implements Sniff
      *
      * @return void
      */
-    protected function checkLineLength($phpcsFile, $tokens, $stackPtr)
+    protected function checkLineLength(File $phpcsFile, array $tokens, int $stackPtr)
     {
         // The passed token is the first on the line.
         $stackPtr--;

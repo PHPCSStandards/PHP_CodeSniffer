@@ -23,13 +23,13 @@ class Text extends Generator
     /**
      * Process the documentation for a single sniff.
      *
-     * @param \DOMNode $doc The DOMNode object for the sniff.
-     *                      It represents the "documentation" tag in the XML
-     *                      standard file.
+     * @param \DOMElement $doc The DOMElement object for the sniff.
+     *                         It represents the "documentation" tag in the XML
+     *                         standard file.
      *
      * @return void
      */
-    public function processSniff(DOMNode $doc)
+    public function processSniff(DOMElement $doc)
     {
         $content = '';
         foreach ($doc->childNodes as $node) {
@@ -50,16 +50,16 @@ class Text extends Generator
     /**
      * Format the title area for a single sniff.
      *
-     * @param \DOMNode $doc The DOMNode object for the sniff.
-     *                      It represents the "documentation" tag in the XML
-     *                      standard file.
+     * @param \DOMElement $doc The DOMElement object for the sniff.
+     *                         It represents the "documentation" tag in the XML
+     *                         standard file.
      *
      * @since 3.12.0 Replaces the Text::printTitle() method,
      *               which was deprecated in 3.12.0 and removed in 4.0.0.
      *
      * @return string
      */
-    protected function getFormattedTitle(DOMNode $doc)
+    protected function getFormattedTitle(DOMElement $doc)
     {
         $title        = $this->getTitle($doc);
         $standard     = $this->ruleset->name;

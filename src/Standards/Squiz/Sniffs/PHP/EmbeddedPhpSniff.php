@@ -41,7 +41,7 @@ class EmbeddedPhpSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -68,7 +68,7 @@ class EmbeddedPhpSniff implements Sniff
      *
      * @return void
      */
-    private function validateMultilineEmbeddedPhp($phpcsFile, $stackPtr, $closingTag)
+    private function validateMultilineEmbeddedPhp(File $phpcsFile, int $stackPtr, $closingTag)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -335,7 +335,7 @@ class EmbeddedPhpSniff implements Sniff
      *
      * @return void
      */
-    private function validateInlineEmbeddedPhp($phpcsFile, $stackPtr, $closeTag)
+    private function validateInlineEmbeddedPhp(File $phpcsFile, int $stackPtr, int $closeTag)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -442,7 +442,7 @@ class EmbeddedPhpSniff implements Sniff
      *
      * @return void
      */
-    private function reportEmptyTagSet(File $phpcsFile, $stackPtr, $closeTag)
+    private function reportEmptyTagSet(File $phpcsFile, int $stackPtr, int $closeTag)
     {
         $tokens = $phpcsFile->getTokens();
         $error  = 'Empty embedded PHP tag found';
@@ -479,7 +479,7 @@ class EmbeddedPhpSniff implements Sniff
      *
      * @return int
      */
-    private function calculateLineIndent(File $phpcsFile, $stackPtr)
+    private function calculateLineIndent(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 

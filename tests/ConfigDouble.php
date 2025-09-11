@@ -56,7 +56,7 @@ final class ConfigDouble extends Config
      *
      * @return void
      */
-    public function __construct(array $cliArgs=[], $skipSettingStandard=false, $skipSettingReportWidth=false)
+    public function __construct(array $cliArgs=[], bool $skipSettingStandard=false, bool $skipSettingReportWidth=false)
     {
         $this->skipSettingStandard = $skipSettingStandard;
 
@@ -180,7 +180,7 @@ final class ConfigDouble extends Config
      *
      * @return mixed
      */
-    private function getStaticConfigProperty($name)
+    private function getStaticConfigProperty(string $name)
     {
         $property = new ReflectionProperty(Config::class, $name);
         (PHP_VERSION_ID < 80100) && $property->setAccessible(true);
@@ -202,7 +202,7 @@ final class ConfigDouble extends Config
      *
      * @return void
      */
-    private function setStaticConfigProperty($name, $value)
+    private function setStaticConfigProperty(string $name, $value)
     {
         $property = new ReflectionProperty(Config::class, $name);
         (PHP_VERSION_ID < 80100) && $property->setAccessible(true);

@@ -122,7 +122,7 @@ class ForbiddenFunctionsSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -210,7 +210,7 @@ class ForbiddenFunctionsSniff implements Sniff
      *
      * @return void
      */
-    protected function addError($phpcsFile, $stackPtr, $functionName, $pattern=null)
+    protected function addError(File $phpcsFile, int $stackPtr, string $functionName, ?string $pattern=null)
     {
         $data  = [$functionName];
         $error = 'The use of function %s() is ';

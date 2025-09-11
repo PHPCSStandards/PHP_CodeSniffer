@@ -44,7 +44,7 @@ class IncrementDecrementUsageSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -66,7 +66,7 @@ class IncrementDecrementUsageSniff implements Sniff
      *
      * @return void
      */
-    protected function processIncDec($phpcsFile, $stackPtr)
+    protected function processIncDec(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -116,7 +116,7 @@ class IncrementDecrementUsageSniff implements Sniff
      *
      * @return void
      */
-    protected function processAssignment($phpcsFile, $stackPtr)
+    protected function processAssignment(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 

@@ -39,7 +39,7 @@ class DisallowAlternativePHPTagsSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens  = $phpcsFile->getTokens();
         $openTag = $tokens[$stackPtr];
@@ -86,7 +86,7 @@ class DisallowAlternativePHPTagsSniff implements Sniff
      *
      * @return string
      */
-    protected function getSnippet($content, $start='', $length=40)
+    protected function getSnippet(string $content, string $start='', int $length=40)
     {
         $startPos = 0;
 

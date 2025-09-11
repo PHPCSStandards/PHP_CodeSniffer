@@ -48,7 +48,7 @@ class FunctionCallArgumentSpacingSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -99,7 +99,7 @@ class FunctionCallArgumentSpacingSniff implements Sniff
      *
      * @return void
      */
-    public function checkSpacing(File $phpcsFile, $stackPtr, $openBracket)
+    public function checkSpacing(File $phpcsFile, int $stackPtr, int $openBracket)
     {
         $tokens = $phpcsFile->getTokens();
 

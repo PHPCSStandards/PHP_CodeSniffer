@@ -61,7 +61,7 @@ class SubversionPropertiesSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $path       = $phpcsFile->getFilename();
         $properties = $this->getProperties($path);
@@ -126,7 +126,7 @@ class SubversionPropertiesSniff implements Sniff
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If Subversion properties file could
      *                                                      not be opened.
      */
-    protected function getProperties($path)
+    protected function getProperties(string $path)
     {
         $properties = [];
 

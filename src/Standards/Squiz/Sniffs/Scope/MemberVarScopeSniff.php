@@ -37,7 +37,7 @@ class MemberVarScopeSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processMemberVar(File $phpcsFile, $stackPtr)
+    protected function processMemberVar(File $phpcsFile, int $stackPtr)
     {
         try {
             $properties = $phpcsFile->getMemberProperties($stackPtr);
@@ -72,7 +72,7 @@ class MemberVarScopeSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariable(File $phpcsFile, $stackPtr)
+    protected function processVariable(File $phpcsFile, int $stackPtr)
     {
         /*
             We don't care about normal variables.
@@ -89,7 +89,7 @@ class MemberVarScopeSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariableInString(File $phpcsFile, $stackPtr)
+    protected function processVariableInString(File $phpcsFile, int $stackPtr)
     {
         /*
             We don't care about normal variables.

@@ -146,7 +146,7 @@ final class MessageCollector
      *
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException When there are blocking errors.
      */
-    public function display($order=self::ORDERBY_SEVERITY)
+    public function display(string $order=self::ORDERBY_SEVERITY)
     {
         if ($this->cache === []) {
             return;
@@ -199,7 +199,7 @@ final class MessageCollector
      *
      * @return string
      */
-    private function prefix($message, $type)
+    private function prefix(string $message, int $type)
     {
         switch ($type) {
         case self::ERROR:

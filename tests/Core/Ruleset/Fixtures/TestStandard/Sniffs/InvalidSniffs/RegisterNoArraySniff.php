@@ -18,7 +18,7 @@ class RegisterNoArraySniff implements Sniff
         return false;
     }
 
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         // Do something.
     }

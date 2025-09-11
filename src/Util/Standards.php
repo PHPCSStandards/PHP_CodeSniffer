@@ -77,8 +77,8 @@ class Standards
      * @see    getInstalledStandardPaths()
      */
     public static function getInstalledStandardDetails(
-        $includeGeneric=false,
-        $standardsDir=''
+        bool $includeGeneric=false,
+        string $standardsDir=''
     ) {
         $rulesets = [];
 
@@ -166,8 +166,8 @@ class Standards
      * @see    isInstalledStandard()
      */
     public static function getInstalledStandards(
-        $includeGeneric=false,
-        $standardsDir=''
+        bool $includeGeneric=false,
+        string $standardsDir=''
     ) {
         $installedStandards = [];
 
@@ -231,7 +231,7 @@ class Standards
      * @return boolean
      * @see    getInstalledStandards()
      */
-    public static function isInstalledStandard($standard)
+    public static function isInstalledStandard(string $standard)
     {
         $path = self::getInstalledStandardPath($standard);
         if ($path !== null && strpos($path, 'ruleset.xml') !== false) {
@@ -277,7 +277,7 @@ class Standards
      *
      * @return string|null
      */
-    public static function getInstalledStandardPath($standard)
+    public static function getInstalledStandardPath(string $standard)
     {
         if (strpos($standard, '.') !== false) {
             return null;

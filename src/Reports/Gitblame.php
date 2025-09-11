@@ -31,7 +31,7 @@ class Gitblame extends VersionControl
      *
      * @return mixed string or false if impossible to recover.
      */
-    protected function getAuthor($line)
+    protected function getAuthor(string $line)
     {
         $blameParts = [];
         $line       = preg_replace('|\s+|', ' ', $line);
@@ -66,7 +66,7 @@ class Gitblame extends VersionControl
      * @return array
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException
      */
-    protected function getBlameContent($filename)
+    protected function getBlameContent(string $filename)
     {
         $cwd = getcwd();
 

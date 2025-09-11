@@ -88,7 +88,7 @@ class LowerCaseConstantSniff implements Sniff
      *                  called again on the current file until the returned stack
      *                  pointer is reached.
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -201,7 +201,7 @@ class LowerCaseConstantSniff implements Sniff
      *
      * @return void
      */
-    protected function processConstant(File $phpcsFile, $stackPtr)
+    protected function processConstant(File $phpcsFile, int $stackPtr)
     {
         $tokens   = $phpcsFile->getTokens();
         $keyword  = $tokens[$stackPtr]['content'];

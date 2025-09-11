@@ -16,7 +16,6 @@
 
 namespace PHP_CodeSniffer\Util;
 
-use InvalidArgumentException;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Util\Common;
 
@@ -137,15 +136,9 @@ final class Help
      * @param \PHP_CodeSniffer\Config $config       Configuration object.
      * @param array<string>           $longOptions  The long options which should be shown.
      * @param string                  $shortOptions The short options which should be shown.
-     *
-     * @throws \InvalidArgumentException When $shortOptions is not a string.
      */
-    public function __construct(Config $config, array $longOptions, $shortOptions='')
+    public function __construct(Config $config, array $longOptions, string $shortOptions='')
     {
-        if (is_string($shortOptions) === false) {
-            throw new InvalidArgumentException('The $shortOptions parameter must be a string');
-        }
-
         $this->config           = $config;
         $this->requestedOptions = array_merge($longOptions, str_split($shortOptions));
 
@@ -327,7 +320,7 @@ final class Help
      *
      * @return void
      */
-    private function printCategoryHeader($header)
+    private function printCategoryHeader(string $header)
     {
         $header .= ':';
         if ($this->config->colors === true) {
@@ -393,7 +386,7 @@ final class Help
      *
      * @return string
      */
-    private function colorizeVariableInput($text)
+    private function colorizeVariableInput(string $text)
     {
         return preg_replace('`(<(?:(?>[^<>]+)|(?R))*>)`', "\033[36m".'$1'."\033[32m", $text);
 

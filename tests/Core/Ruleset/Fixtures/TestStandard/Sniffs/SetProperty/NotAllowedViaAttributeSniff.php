@@ -20,7 +20,7 @@ class NotAllowedViaAttributeSniff implements Sniff
         return [T_WHITESPACE];
     }
 
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         // Do something.
     }

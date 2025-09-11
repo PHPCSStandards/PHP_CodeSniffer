@@ -28,7 +28,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariable(File $phpcsFile, $stackPtr)
+    protected function processVariable(File $phpcsFile, int $stackPtr)
     {
         $tokens  = $phpcsFile->getTokens();
         $varName = ltrim($tokens[$stackPtr]['content'], '$');
@@ -113,7 +113,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processMemberVar(File $phpcsFile, $stackPtr)
+    protected function processMemberVar(File $phpcsFile, int $stackPtr)
     {
         try {
             $memberProps = $phpcsFile->getMemberProperties($stackPtr);
@@ -169,7 +169,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariableInString(File $phpcsFile, $stackPtr)
+    protected function processVariableInString(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 

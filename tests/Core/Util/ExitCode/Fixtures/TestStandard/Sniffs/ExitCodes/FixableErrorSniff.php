@@ -18,7 +18,7 @@ class FixableErrorSniff implements Sniff
         return [T_OPEN_TAG];
     }
 
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens     = $phpcsFile->getTokens();
         $contents   = $tokens[$stackPtr]['content'];

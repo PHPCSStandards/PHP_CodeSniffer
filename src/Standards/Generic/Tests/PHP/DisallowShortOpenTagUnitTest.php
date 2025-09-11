@@ -27,7 +27,7 @@ final class DisallowShortOpenTagUnitTest extends AbstractSniffTestCase
      *
      * @return string[]
      */
-    protected function getTestFiles($testFileBase)
+    protected function getTestFiles(string $testFileBase)
     {
         $testFiles = [$testFileBase.'1.inc'];
 

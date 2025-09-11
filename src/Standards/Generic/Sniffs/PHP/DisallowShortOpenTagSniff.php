@@ -48,7 +48,7 @@ class DisallowShortOpenTagSniff implements Sniff
      *
      * @return void|int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $token  = $tokens[$stackPtr];
@@ -146,7 +146,7 @@ class DisallowShortOpenTagSniff implements Sniff
      *
      * @return string
      */
-    protected function getSnippet($content, $start='', $length=40)
+    protected function getSnippet(string $content, string $start='', int $length=40)
     {
         $startPos = 0;
 

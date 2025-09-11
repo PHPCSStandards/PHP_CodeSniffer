@@ -61,7 +61,7 @@ class MultipleStatementAlignmentSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $lastAssign = $this->checkAlignment($phpcsFile, $stackPtr);
         return ($lastAssign + 1);
@@ -80,7 +80,7 @@ class MultipleStatementAlignmentSniff implements Sniff
      *
      * @return int
      */
-    public function checkAlignment($phpcsFile, $stackPtr, $end=null)
+    public function checkAlignment(File $phpcsFile, int $stackPtr, ?int $end=null)
     {
         $tokens = $phpcsFile->getTokens();
 

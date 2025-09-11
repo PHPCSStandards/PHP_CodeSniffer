@@ -18,7 +18,7 @@ class ErrorSniff implements Sniff
         return [T_VARIABLE];
     }
 
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if ($tokens[$stackPtr]['content'] === '$var') {

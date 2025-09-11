@@ -9,6 +9,7 @@
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Functions;
 
+use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
@@ -28,7 +29,7 @@ final class OpeningFunctionBraceKernighanRitchieUnitTest extends AbstractSniffTe
      *
      * @return void
      */
-    public function setCliValues($testFile, $config)
+    public function setCliValues(string $testFile, Config $config)
     {
         if ($testFile === 'OpeningFunctionBraceKernighanRitchieUnitTest.2.inc') {
             $config->tabWidth = 4;
