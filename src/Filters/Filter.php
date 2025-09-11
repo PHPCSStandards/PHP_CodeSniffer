@@ -15,6 +15,7 @@ use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Util\Common;
 use RecursiveDirectoryIterator;
 use RecursiveFilterIterator;
+use RecursiveIterator;
 use ReturnTypeWillChange;
 
 class Filter extends RecursiveFilterIterator
@@ -84,7 +85,7 @@ class Filter extends RecursiveFilterIterator
      *
      * @return void
      */
-    public function __construct($iterator, $basedir, Config $config, Ruleset $ruleset)
+    public function __construct(RecursiveIterator $iterator, string $basedir, Config $config, Ruleset $ruleset)
     {
         parent::__construct($iterator);
         $this->basedir = $basedir;
@@ -177,7 +178,7 @@ class Filter extends RecursiveFilterIterator
      *
      * @return bool
      */
-    protected function shouldProcessFile($path)
+    protected function shouldProcessFile(string $path)
     {
         // Check that the file's extension is one we are checking.
         // We are strict about checking the extension and we don't
@@ -224,7 +225,7 @@ class Filter extends RecursiveFilterIterator
      *
      * @return bool
      */
-    protected function shouldIgnorePath($path)
+    protected function shouldIgnorePath(string $path)
     {
         if ($this->ignoreFilePatterns === null) {
             $this->ignoreDirPatterns  = [];
