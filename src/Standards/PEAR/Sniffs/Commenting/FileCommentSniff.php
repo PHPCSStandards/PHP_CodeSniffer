@@ -99,7 +99,7 @@ class FileCommentSniff implements Sniff
      *
      * @return int|void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -228,7 +228,7 @@ class FileCommentSniff implements Sniff
      *
      * @return void
      */
-    protected function processTags($phpcsFile, $stackPtr, $commentStart)
+    protected function processTags(File $phpcsFile, int $stackPtr, int $commentStart)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -325,7 +325,7 @@ class FileCommentSniff implements Sniff
      *
      * @return void
      */
-    protected function processCategory($phpcsFile, array $tags)
+    protected function processCategory(File $phpcsFile, array $tags)
     {
         $tokens = $phpcsFile->getTokens();
         foreach ($tags as $tag) {
@@ -367,7 +367,7 @@ class FileCommentSniff implements Sniff
      *
      * @return void
      */
-    protected function processPackage($phpcsFile, array $tags)
+    protected function processPackage(File $phpcsFile, array $tags)
     {
         $tokens = $phpcsFile->getTokens();
         foreach ($tags as $tag) {
@@ -420,7 +420,7 @@ class FileCommentSniff implements Sniff
      *
      * @return void
      */
-    protected function processSubpackage($phpcsFile, array $tags)
+    protected function processSubpackage(File $phpcsFile, array $tags)
     {
         $tokens = $phpcsFile->getTokens();
         foreach ($tags as $tag) {
@@ -464,7 +464,7 @@ class FileCommentSniff implements Sniff
      *
      * @return void
      */
-    protected function processAuthor($phpcsFile, array $tags)
+    protected function processAuthor(File $phpcsFile, array $tags)
     {
         $tokens = $phpcsFile->getTokens();
         foreach ($tags as $tag) {
@@ -494,7 +494,7 @@ class FileCommentSniff implements Sniff
      *
      * @return void
      */
-    protected function processCopyright($phpcsFile, array $tags)
+    protected function processCopyright(File $phpcsFile, array $tags)
     {
         $tokens = $phpcsFile->getTokens();
         foreach ($tags as $tag) {
@@ -535,7 +535,7 @@ class FileCommentSniff implements Sniff
      *
      * @return void
      */
-    protected function processLicense($phpcsFile, array $tags)
+    protected function processLicense(File $phpcsFile, array $tags)
     {
         $tokens = $phpcsFile->getTokens();
         foreach ($tags as $tag) {
@@ -564,7 +564,7 @@ class FileCommentSniff implements Sniff
      *
      * @return void
      */
-    protected function processVersion($phpcsFile, array $tags)
+    protected function processVersion(File $phpcsFile, array $tags)
     {
         $tokens = $phpcsFile->getTokens();
         foreach ($tags as $tag) {

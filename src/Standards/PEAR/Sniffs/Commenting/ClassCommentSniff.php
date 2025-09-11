@@ -41,7 +41,7 @@ class ClassCommentSniff extends FileCommentSniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens    = $phpcsFile->getTokens();
         $type      = strtolower($tokens[$stackPtr]['content']);
@@ -99,7 +99,7 @@ class ClassCommentSniff extends FileCommentSniff
      *
      * @return void
      */
-    protected function processVersion($phpcsFile, array $tags)
+    protected function processVersion(File $phpcsFile, array $tags)
     {
         $tokens = $phpcsFile->getTokens();
         foreach ($tags as $tag) {

@@ -57,7 +57,7 @@ class FunctionCommentSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $scopeModifier = $phpcsFile->getMethodProperties($stackPtr)['scope'];
         if (($scopeModifier === 'protected'
@@ -189,7 +189,7 @@ class FunctionCommentSniff implements Sniff
      *
      * @return void
      */
-    protected function processReturn(File $phpcsFile, $stackPtr, $commentStart)
+    protected function processReturn(File $phpcsFile, int $stackPtr, int $commentStart)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -238,7 +238,7 @@ class FunctionCommentSniff implements Sniff
      *
      * @return void
      */
-    protected function processThrows(File $phpcsFile, $stackPtr, $commentStart)
+    protected function processThrows(File $phpcsFile, int $stackPtr, int $commentStart)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -273,7 +273,7 @@ class FunctionCommentSniff implements Sniff
      *
      * @return void
      */
-    protected function processParams(File $phpcsFile, $stackPtr, $commentStart)
+    protected function processParams(File $phpcsFile, int $stackPtr, int $commentStart)
     {
         $tokens = $phpcsFile->getTokens();
 
