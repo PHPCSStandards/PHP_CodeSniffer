@@ -52,19 +52,19 @@ final class UnnecessaryHeredocUnitTest extends AbstractSniffTestCase
         ];
 
         switch ($testFile) {
-        case 'UnnecessaryHeredocUnitTest.1.inc':
-            return $warnings;
-
-        case 'UnnecessaryHeredocUnitTest.2.inc':
-            if (PHP_VERSION_ID >= 70300) {
+            case 'UnnecessaryHeredocUnitTest.1.inc':
                 return $warnings;
-            }
 
-            // PHP 7.2 or lower: PHP version which doesn't support flexible heredocs/nowdocs yet.
-            return [];
+            case 'UnnecessaryHeredocUnitTest.2.inc':
+                if (PHP_VERSION_ID >= 70300) {
+                    return $warnings;
+                }
 
-        default:
-            return [];
+                // PHP 7.2 or lower: PHP version which doesn't support flexible heredocs/nowdocs yet.
+                return [];
+
+            default:
+                return [];
         }
     }
 }

@@ -33,14 +33,14 @@ final class FunctionDeclarationUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'FunctionDeclarationUnitTest.1.inc':
-            return [
-                55 => 1,
-                68 => 1,
-            ];
+            case 'FunctionDeclarationUnitTest.1.inc':
+                return [
+                    55 => 1,
+                    68 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

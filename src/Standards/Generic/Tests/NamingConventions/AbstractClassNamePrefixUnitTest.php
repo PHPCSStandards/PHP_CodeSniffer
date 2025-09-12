@@ -32,18 +32,18 @@ final class AbstractClassNamePrefixUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'AbstractClassNamePrefixUnitTest.1.inc':
-            return [
-                3  => 1,
-                7  => 1,
-                11 => 1,
-                16 => 1,
-                29 => 1,
-                44 => 1,
-                45 => 1,
-            ];
-        default:
-            return [];
+            case 'AbstractClassNamePrefixUnitTest.1.inc':
+                return [
+                    3  => 1,
+                    7  => 1,
+                    11 => 1,
+                    16 => 1,
+                    29 => 1,
+                    44 => 1,
+                    45 => 1,
+                ];
+            default:
+                return [];
         }
     }
 

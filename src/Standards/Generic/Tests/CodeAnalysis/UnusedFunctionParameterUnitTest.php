@@ -47,28 +47,28 @@ final class UnusedFunctionParameterUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'UnusedFunctionParameterUnitTest.1.inc':
-            return [
-                3   => 1,
-                7   => 1,
-                78  => 1,
-                94  => 1,
-                100 => 1,
-                106 => 1,
-                117 => 1,
-                121 => 2,
-                125 => 2,
-                163 => 1,
-                172 => 1,
-                228 => 2,
-                232 => 2,
-                244 => 2,
-                248 => 2,
-                271 => 1,
-            ];
+            case 'UnusedFunctionParameterUnitTest.1.inc':
+                return [
+                    3   => 1,
+                    7   => 1,
+                    78  => 1,
+                    94  => 1,
+                    100 => 1,
+                    106 => 1,
+                    117 => 1,
+                    121 => 2,
+                    125 => 2,
+                    163 => 1,
+                    172 => 1,
+                    228 => 2,
+                    232 => 2,
+                    244 => 2,
+                    248 => 2,
+                    271 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 }

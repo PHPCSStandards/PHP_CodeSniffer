@@ -33,89 +33,89 @@ final class GitMergeConflictUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'GitMergeConflictUnitTest.1.inc':
-            return [
-                26 => 1,
-                28 => 1,
-                30 => 1,
-                45 => 1,
-                53 => 1,
-                55 => 1,
-                59 => 1,
-                61 => 1,
-            ];
+            case 'GitMergeConflictUnitTest.1.inc':
+                return [
+                    26 => 1,
+                    28 => 1,
+                    30 => 1,
+                    45 => 1,
+                    53 => 1,
+                    55 => 1,
+                    59 => 1,
+                    61 => 1,
+                ];
 
-        case 'GitMergeConflictUnitTest.2.inc':
-            return [
-                4  => 1,
-                6  => 1,
-                8  => 1,
-                14 => 1,
-                20 => 1,
-                22 => 1,
-                26 => 1,
-                28 => 1,
-                30 => 1,
-            ];
+            case 'GitMergeConflictUnitTest.2.inc':
+                return [
+                    4  => 1,
+                    6  => 1,
+                    8  => 1,
+                    14 => 1,
+                    20 => 1,
+                    22 => 1,
+                    26 => 1,
+                    28 => 1,
+                    30 => 1,
+                ];
 
-        case 'GitMergeConflictUnitTest.3.inc':
-            return [
-                3  => 1,
-                5  => 1,
-                7  => 1,
-                12 => 1,
-                14 => 1,
-                16 => 1,
-                22 => 1,
-                24 => 1,
-                26 => 1,
-                38 => 1,
-                40 => 1,
-                42 => 1,
-            ];
+            case 'GitMergeConflictUnitTest.3.inc':
+                return [
+                    3  => 1,
+                    5  => 1,
+                    7  => 1,
+                    12 => 1,
+                    14 => 1,
+                    16 => 1,
+                    22 => 1,
+                    24 => 1,
+                    26 => 1,
+                    38 => 1,
+                    40 => 1,
+                    42 => 1,
+                ];
 
-        case 'GitMergeConflictUnitTest.4.inc':
-            return [
-                6  => 1,
-                8  => 1,
-                10 => 1,
-                18 => 1,
-                22 => 1,
-                25 => 1,
-                29 => 1,
-                34 => 1,
-                39 => 1,
-                53 => 1,
-                55 => 1,
-                57 => 1,
-                64 => 1,
-                68 => 1,
-                71 => 1,
-            ];
-        case 'GitMergeConflictUnitTest.5.inc':
-        case 'GitMergeConflictUnitTest.6.inc':
-            return [
-                6  => 1,
-                8  => 1,
-                10 => 1,
-                15 => 1,
-                28 => 1,
-                30 => 1,
-                32 => 1,
-            ];
+            case 'GitMergeConflictUnitTest.4.inc':
+                return [
+                    6  => 1,
+                    8  => 1,
+                    10 => 1,
+                    18 => 1,
+                    22 => 1,
+                    25 => 1,
+                    29 => 1,
+                    34 => 1,
+                    39 => 1,
+                    53 => 1,
+                    55 => 1,
+                    57 => 1,
+                    64 => 1,
+                    68 => 1,
+                    71 => 1,
+                ];
+            case 'GitMergeConflictUnitTest.5.inc':
+            case 'GitMergeConflictUnitTest.6.inc':
+                return [
+                    6  => 1,
+                    8  => 1,
+                    10 => 1,
+                    15 => 1,
+                    28 => 1,
+                    30 => 1,
+                    32 => 1,
+                ];
 
-        case 'GitMergeConflictUnitTest.7.inc':
-            return [
-                3  => 1,
-                5  => 1,
-                7  => 1,
-                12 => 1,
-                14 => 1,
-                16 => 1,
-            ];
+            case 'GitMergeConflictUnitTest.7.inc':
+                return [
+                    3  => 1,
+                    5  => 1,
+                    7  => 1,
+                    12 => 1,
+                    14 => 1,
+                    16 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

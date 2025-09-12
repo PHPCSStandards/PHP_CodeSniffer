@@ -33,22 +33,22 @@ final class ValidFunctionNameUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'ValidFunctionNameUnitTest.1.inc':
-            return [
-                4  => 1,
-                5  => 1,
-                6  => 1,
-                7  => 1,
-                8  => 1,
-                9  => 1,
-                11 => 1,
-                12 => 1,
-                13 => 1,
-                14 => 2,
-            ];
+            case 'ValidFunctionNameUnitTest.1.inc':
+                return [
+                    4  => 1,
+                    5  => 1,
+                    6  => 1,
+                    7  => 1,
+                    8  => 1,
+                    9  => 1,
+                    11 => 1,
+                    12 => 1,
+                    13 => 1,
+                    14 => 2,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

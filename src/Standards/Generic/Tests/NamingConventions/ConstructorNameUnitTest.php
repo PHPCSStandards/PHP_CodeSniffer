@@ -33,23 +33,23 @@ final class ConstructorNameUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'ConstructorNameUnitTest.1.inc':
-            return [
-                6   => 1,
-                11  => 1,
-                47  => 1,
-                62  => 1,
-                91  => 1,
-                103 => 1,
-                104 => 1,
-                112 => 1,
-                120 => 1,
-                121 => 1,
-                126 => 1,
-                127 => 1,
-            ];
-        default:
-            return [];
+            case 'ConstructorNameUnitTest.1.inc':
+                return [
+                    6   => 1,
+                    11  => 1,
+                    47  => 1,
+                    62  => 1,
+                    91  => 1,
+                    103 => 1,
+                    104 => 1,
+                    112 => 1,
+                    120 => 1,
+                    121 => 1,
+                    126 => 1,
+                    127 => 1,
+                ];
+            default:
+                return [];
         }
     }
 

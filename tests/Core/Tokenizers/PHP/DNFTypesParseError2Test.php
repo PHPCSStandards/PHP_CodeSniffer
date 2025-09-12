@@ -163,29 +163,29 @@ final class DNFTypesParseError2Test extends AbstractTokenizerTestCase
 
             // Verify that type tokens have not been retokenized to `T_TYPE_*` tokens for broken type declarations.
             switch ($tokens[$i]['content']) {
-            case '|':
-                $this->assertSame(T_BITWISE_OR, $tokens[$i]['code'], $errorPrefix . ', not T_BITWISE_OR (code)');
-                $this->assertSame('T_BITWISE_OR', $tokens[$i]['type'], $errorPrefix . ', not T_BITWISE_OR (type)');
-                break;
+                case '|':
+                    $this->assertSame(T_BITWISE_OR, $tokens[$i]['code'], $errorPrefix . ', not T_BITWISE_OR (code)');
+                    $this->assertSame('T_BITWISE_OR', $tokens[$i]['type'], $errorPrefix . ', not T_BITWISE_OR (type)');
+                    break;
 
-            case '&':
-                $this->assertSame(T_BITWISE_AND, $tokens[$i]['code'], $errorPrefix . ', not T_BITWISE_AND (code)');
-                $this->assertSame('T_BITWISE_AND', $tokens[$i]['type'], $errorPrefix . ', not T_BITWISE_AND (type)');
-                break;
+                case '&':
+                    $this->assertSame(T_BITWISE_AND, $tokens[$i]['code'], $errorPrefix . ', not T_BITWISE_AND (code)');
+                    $this->assertSame('T_BITWISE_AND', $tokens[$i]['type'], $errorPrefix . ', not T_BITWISE_AND (type)');
+                    break;
 
-            case '(':
-                // Verify that the open parenthesis is tokenized as a normal parenthesis.
-                $this->assertSame(T_OPEN_PARENTHESIS, $tokens[$i]['code'], $errorPrefix . ', not T_OPEN_PARENTHESIS (code)');
-                $this->assertSame('T_OPEN_PARENTHESIS', $tokens[$i]['type'], $errorPrefix . ', not T_OPEN_PARENTHESIS (type)');
-                break;
+                case '(':
+                    // Verify that the open parenthesis is tokenized as a normal parenthesis.
+                    $this->assertSame(T_OPEN_PARENTHESIS, $tokens[$i]['code'], $errorPrefix . ', not T_OPEN_PARENTHESIS (code)');
+                    $this->assertSame('T_OPEN_PARENTHESIS', $tokens[$i]['type'], $errorPrefix . ', not T_OPEN_PARENTHESIS (type)');
+                    break;
 
-            case ')':
-                $this->assertSame(T_CLOSE_PARENTHESIS, $tokens[$i]['code'], $errorPrefix . ', not T_CLOSE_PARENTHESIS (code)');
-                $this->assertSame('T_CLOSE_PARENTHESIS', $tokens[$i]['type'], $errorPrefix . ', not T_CLOSE_PARENTHESIS (type)');
-                break;
+                case ')':
+                    $this->assertSame(T_CLOSE_PARENTHESIS, $tokens[$i]['code'], $errorPrefix . ', not T_CLOSE_PARENTHESIS (code)');
+                    $this->assertSame('T_CLOSE_PARENTHESIS', $tokens[$i]['type'], $errorPrefix . ', not T_CLOSE_PARENTHESIS (type)');
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
         }
     }

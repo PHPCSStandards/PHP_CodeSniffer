@@ -66,14 +66,14 @@ class UseDeclarationSniff implements Sniff
                 $fix = $phpcsFile->addFixableError($error, $stackPtr, 'MultipleDeclarations');
                 if ($fix === true) {
                     switch ($tokens[($stackPtr + 2)]['content']) {
-                    case 'const':
-                        $baseUse = 'use const';
-                        break;
-                    case 'function':
-                        $baseUse = 'use function';
-                        break;
-                    default:
-                        $baseUse = 'use';
+                        case 'const':
+                            $baseUse = 'use const';
+                            break;
+                        case 'function':
+                            $baseUse = 'use function';
+                            break;
+                        default:
+                            $baseUse = 'use';
                     }
 
                     if ($tokens[($next + 1)]['code'] !== T_WHITESPACE) {

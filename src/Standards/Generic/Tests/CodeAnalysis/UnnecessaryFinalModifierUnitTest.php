@@ -47,21 +47,21 @@ final class UnnecessaryFinalModifierUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'UnnecessaryFinalModifierUnitTest.1.inc':
-            return [
-                11 => 1,
-                12 => 1,
-                15 => 1,
-                18 => 1,
-                32 => 1,
-                33 => 1,
-                37 => 1,
-                38 => 1,
-                59 => 1,
-                60 => 1,
-            ];
-        default:
-            return [];
+            case 'UnnecessaryFinalModifierUnitTest.1.inc':
+                return [
+                    11 => 1,
+                    12 => 1,
+                    15 => 1,
+                    18 => 1,
+                    32 => 1,
+                    33 => 1,
+                    37 => 1,
+                    38 => 1,
+                    59 => 1,
+                    60 => 1,
+                ];
+            default:
+                return [];
         }
     }
 }

@@ -647,20 +647,20 @@ class Runner
                 $input = trim($input);
 
                 switch ($input) {
-                case 's':
-                    break(2);
-                case 'q':
-                    // User request to "quit": exit code should be 0.
-                    throw new DeepExitException('', ExitCode::OKAY);
-                default:
-                    // Repopulate the sniffs because some of them save their state
-                    // and only clear it when the file changes, but we are rechecking
-                    // the same file.
-                    $file->ruleset->populateTokenListeners();
-                    $file->reloadContent();
-                    $file->process();
-                    $this->reporter->cacheFileReport($file);
-                    break;
+                    case 's':
+                        break(2);
+                    case 'q':
+                        // User request to "quit": exit code should be 0.
+                        throw new DeepExitException('', ExitCode::OKAY);
+                    default:
+                        // Repopulate the sniffs because some of them save their state
+                        // and only clear it when the file changes, but we are rechecking
+                        // the same file.
+                        $file->ruleset->populateTokenListeners();
+                        $file->reloadContent();
+                        $file->process();
+                        $this->reporter->cacheFileReport($file);
+                        break;
                 }
             }
         }

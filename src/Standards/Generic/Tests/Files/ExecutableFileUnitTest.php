@@ -45,11 +45,11 @@ final class ExecutableFileUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'ExecutableFileUnitTest.2.inc':
-        case 'ExecutableFileUnitTest.4.inc':
-            return [1 => 1];
-        default:
-            return [];
+            case 'ExecutableFileUnitTest.2.inc':
+            case 'ExecutableFileUnitTest.4.inc':
+                return [1 => 1];
+            default:
+                return [];
         }
     }
 

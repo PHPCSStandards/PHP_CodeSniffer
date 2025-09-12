@@ -33,19 +33,19 @@ final class ClosingTagUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'ClosingTagUnitTest.1.inc':
-            return [11 => 1];
+            case 'ClosingTagUnitTest.1.inc':
+                return [11 => 1];
 
-        case 'ClosingTagUnitTest.4.inc':
-        case 'ClosingTagUnitTest.5.inc':
-            return [1 => 1];
+            case 'ClosingTagUnitTest.4.inc':
+            case 'ClosingTagUnitTest.5.inc':
+                return [1 => 1];
 
-        case 'ClosingTagUnitTest.6.inc':
-        case 'ClosingTagUnitTest.7.inc':
-            return [5 => 1];
+            case 'ClosingTagUnitTest.6.inc':
+            case 'ClosingTagUnitTest.7.inc':
+                return [5 => 1];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

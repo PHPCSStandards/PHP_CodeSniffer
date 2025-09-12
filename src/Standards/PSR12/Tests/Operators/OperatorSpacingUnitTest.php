@@ -33,31 +33,31 @@ final class OperatorSpacingUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'OperatorSpacingUnitTest.1.inc':
-            return [
-                2  => 1,
-                3  => 2,
-                4  => 1,
-                5  => 2,
-                6  => 4,
-                9  => 3,
-                10 => 2,
-                11 => 3,
-                13 => 3,
-                14 => 2,
-                18 => 1,
-                20 => 1,
-                22 => 2,
-                23 => 2,
-                26 => 1,
-                37 => 4,
-                39 => 1,
-                40 => 1,
-                44 => 2,
-                47 => 2,
-            ];
-        default:
-            return [];
+            case 'OperatorSpacingUnitTest.1.inc':
+                return [
+                    2  => 1,
+                    3  => 2,
+                    4  => 1,
+                    5  => 2,
+                    6  => 4,
+                    9  => 3,
+                    10 => 2,
+                    11 => 3,
+                    13 => 3,
+                    14 => 2,
+                    18 => 1,
+                    20 => 1,
+                    22 => 2,
+                    23 => 2,
+                    26 => 1,
+                    37 => 4,
+                    39 => 1,
+                    40 => 1,
+                    44 => 2,
+                    47 => 2,
+                ];
+            default:
+                return [];
         }
     }
 

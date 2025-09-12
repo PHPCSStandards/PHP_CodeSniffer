@@ -47,14 +47,14 @@ final class ForLoopShouldBeWhileLoopUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'ForLoopShouldBeWhileLoopUnitTest.1.inc':
-            return [
-                6  => 1,
-                10 => 1,
-                34 => 1,
-            ];
-        default:
-            return [];
+            case 'ForLoopShouldBeWhileLoopUnitTest.1.inc':
+                return [
+                    6  => 1,
+                    10 => 1,
+                    34 => 1,
+                ];
+            default:
+                return [];
         }
     }
 }

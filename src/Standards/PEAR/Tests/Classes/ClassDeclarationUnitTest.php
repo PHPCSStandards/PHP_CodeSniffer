@@ -52,25 +52,25 @@ final class ClassDeclarationUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'ClassDeclarationUnitTest.1.inc':
-            return [
-                21  => 1,
-                22  => 1,
-                23  => 1,
-                27  => 1,
-                33  => 1,
-                38  => 1,
-                49  => 1,
-                84  => 1,
-                94  => 1,
-                99  => 1,
-                104 => 1,
-                110 => 1,
-                114 => 1,
-            ];
+            case 'ClassDeclarationUnitTest.1.inc':
+                return [
+                    21  => 1,
+                    22  => 1,
+                    23  => 1,
+                    27  => 1,
+                    33  => 1,
+                    38  => 1,
+                    49  => 1,
+                    84  => 1,
+                    94  => 1,
+                    99  => 1,
+                    104 => 1,
+                    110 => 1,
+                    114 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

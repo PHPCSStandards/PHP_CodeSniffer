@@ -33,23 +33,23 @@ final class ClassCommentUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'ClassCommentUnitTest.1.inc':
-            return [
-                2   => 1,
-                15  => 1,
-                31  => 1,
-                54  => 1,
-                143 => 1,
-                145 => 1,
-            ];
+            case 'ClassCommentUnitTest.1.inc':
+                return [
+                    2   => 1,
+                    15  => 1,
+                    31  => 1,
+                    54  => 1,
+                    143 => 1,
+                    145 => 1,
+                ];
 
-        case 'ClassCommentUnitTest.2.inc':
-            return [
-                7 => 1,
-            ];
+            case 'ClassCommentUnitTest.2.inc':
+                return [
+                    7 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 
@@ -67,17 +67,17 @@ final class ClassCommentUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'ClassCommentUnitTest.1.inc':
-            return [
-                29 => 1,
-                30 => 1,
-                50 => 1,
-                66 => 1,
-                67 => 1,
-            ];
+            case 'ClassCommentUnitTest.1.inc':
+                return [
+                    29 => 1,
+                    30 => 1,
+                    50 => 1,
+                    66 => 1,
+                    67 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 }

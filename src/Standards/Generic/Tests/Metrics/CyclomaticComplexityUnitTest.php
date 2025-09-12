@@ -33,10 +33,10 @@ final class CyclomaticComplexityUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'CyclomaticComplexityUnitTest.1.inc':
-            return [118 => 1];
-        default:
-            return [];
+            case 'CyclomaticComplexityUnitTest.1.inc':
+                return [118 => 1];
+            default:
+                return [];
         }
     }
 
@@ -54,20 +54,20 @@ final class CyclomaticComplexityUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'CyclomaticComplexityUnitTest.1.inc':
-            return [
-                45  => 1,
-                72  => 1,
-                189 => 1,
-                237 => 1,
-                285 => 1,
-                333 => 1,
-                381 => 1,
-                417 => 1,
-                445 => 1,
-            ];
-        default:
-            return [];
+            case 'CyclomaticComplexityUnitTest.1.inc':
+                return [
+                    45  => 1,
+                    72  => 1,
+                    189 => 1,
+                    237 => 1,
+                    285 => 1,
+                    333 => 1,
+                    381 => 1,
+                    417 => 1,
+                    445 => 1,
+                ];
+            default:
+                return [];
         }
     }
 }

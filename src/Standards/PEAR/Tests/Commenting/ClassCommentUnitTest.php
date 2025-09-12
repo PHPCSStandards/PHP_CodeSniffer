@@ -33,38 +33,38 @@ final class ClassCommentUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'ClassCommentUnitTest.1.inc':
-            return [
-                4   => 1,
-                15  => 1,
-                51  => 1,
-                63  => 1,
-                65  => 2,
-                66  => 1,
-                68  => 1,
-                70  => 1,
-                71  => 1,
-                72  => 1,
-                74  => 2,
-                75  => 1,
-                76  => 1,
-                77  => 1,
-                85  => 1,
-                96  => 5,
-                106 => 5,
-                116 => 5,
-                126 => 5,
-                161 => 1,
-                163 => 1,
-            ];
+            case 'ClassCommentUnitTest.1.inc':
+                return [
+                    4   => 1,
+                    15  => 1,
+                    51  => 1,
+                    63  => 1,
+                    65  => 2,
+                    66  => 1,
+                    68  => 1,
+                    70  => 1,
+                    71  => 1,
+                    72  => 1,
+                    74  => 2,
+                    75  => 1,
+                    76  => 1,
+                    77  => 1,
+                    85  => 1,
+                    96  => 5,
+                    106 => 5,
+                    116 => 5,
+                    126 => 5,
+                    161 => 1,
+                    163 => 1,
+                ];
 
-        case 'ClassCommentUnitTest.2.inc':
-            return [
-                7 => 1,
-            ];
+            case 'ClassCommentUnitTest.2.inc':
+                return [
+                    7 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 
@@ -82,14 +82,14 @@ final class ClassCommentUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'ClassCommentUnitTest.1.inc':
-            return [
-                71 => 1,
-                73 => 1,
-            ];
+            case 'ClassCommentUnitTest.1.inc':
+                return [
+                    71 => 1,
+                    73 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 }

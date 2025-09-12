@@ -33,13 +33,13 @@ final class ByteOrderMarkUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'ByteOrderMarkUnitTest.1.inc':
-        case 'ByteOrderMarkUnitTest.4.inc':
-        case 'ByteOrderMarkUnitTest.5.inc':
-            return [1 => 1];
+            case 'ByteOrderMarkUnitTest.1.inc':
+            case 'ByteOrderMarkUnitTest.4.inc':
+            case 'ByteOrderMarkUnitTest.5.inc':
+                return [1 => 1];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 
@@ -57,17 +57,17 @@ final class ByteOrderMarkUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'ByteOrderMarkUnitTest.3.inc':
-        case 'ByteOrderMarkUnitTest.4.inc':
-        case 'ByteOrderMarkUnitTest.5.inc':
-            if ((bool) ini_get('short_open_tag') === false) {
-                // Warning about "no code found in file".
-                return [1 => 1];
-            }
-            return [];
+            case 'ByteOrderMarkUnitTest.3.inc':
+            case 'ByteOrderMarkUnitTest.4.inc':
+            case 'ByteOrderMarkUnitTest.5.inc':
+                if ((bool) ini_get('short_open_tag') === false) {
+                    // Warning about "no code found in file".
+                    return [1 => 1];
+                }
+                return [];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 }

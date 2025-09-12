@@ -1421,34 +1421,34 @@ class PHP extends Tokenizer
                 $newToken['content'] = $token[1];
 
                 switch ($token[0]) {
-                case T_STRING:
-                    $newToken['code'] = T_NAME_QUALIFIED;
-                    $newToken['type'] = 'T_NAME_QUALIFIED';
-                    break;
-                case T_NAMESPACE:
-                    $newToken['code'] = T_NAME_RELATIVE;
-                    $newToken['type'] = 'T_NAME_RELATIVE';
-                    break;
-                case T_NS_SEPARATOR:
-                    $newToken['code'] = T_NAME_FULLY_QUALIFIED;
-                    $newToken['type'] = 'T_NAME_FULLY_QUALIFIED';
-
-                    if (is_array($tokens[($i - 1)]) === true
-                        && isset(Tokens::EMPTY_TOKENS[$tokens[($i - 1)][0]]) === false
-                        && preg_match(self::PHP_LABEL_REGEX, $tokens[($i - 1)][1]) === 1
-                    ) {
-                        // The namespaced name starts with a reserved keyword. Move one token back.
-                        $newToken['code']    = T_NAME_QUALIFIED;
-                        $newToken['type']    = 'T_NAME_QUALIFIED';
-                        $newToken['content'] = $tokens[($i - 1)][1];
-                        --$nameStart;
-                        --$i;
+                    case T_STRING:
+                        $newToken['code'] = T_NAME_QUALIFIED;
+                        $newToken['type'] = 'T_NAME_QUALIFIED';
                         break;
-                    }
+                    case T_NAMESPACE:
+                        $newToken['code'] = T_NAME_RELATIVE;
+                        $newToken['type'] = 'T_NAME_RELATIVE';
+                        break;
+                    case T_NS_SEPARATOR:
+                        $newToken['code'] = T_NAME_FULLY_QUALIFIED;
+                        $newToken['type'] = 'T_NAME_FULLY_QUALIFIED';
 
-                    ++$i;
-                    $newToken['content'] .= $tokens[$i][1];
-                    break;
+                        if (is_array($tokens[($i - 1)]) === true
+                            && isset(Tokens::EMPTY_TOKENS[$tokens[($i - 1)][0]]) === false
+                            && preg_match(self::PHP_LABEL_REGEX, $tokens[($i - 1)][1]) === 1
+                        ) {
+                            // The namespaced name starts with a reserved keyword. Move one token back.
+                            $newToken['code']    = T_NAME_QUALIFIED;
+                            $newToken['type']    = 'T_NAME_QUALIFIED';
+                            $newToken['content'] = $tokens[($i - 1)][1];
+                            --$nameStart;
+                            --$i;
+                            break;
+                        }
+
+                        ++$i;
+                        $newToken['content'] .= $tokens[$i][1];
+                        break;
                 }
 
                 while (isset($tokens[($i + 1)], $tokens[($i + 2)]) === true
@@ -3791,24 +3791,24 @@ class PHP extends Tokenizer
 
         if ($token[0] === T_STRING) {
             switch ($cacheKey) {
-            case 'false':
-                $newToken['type'] = 'T_FALSE';
-                break;
-            case 'true':
-                $newToken['type'] = 'T_TRUE';
-                break;
-            case 'null':
-                $newToken['type'] = 'T_NULL';
-                break;
-            case 'self':
-                $newToken['type'] = 'T_SELF';
-                break;
-            case 'parent':
-                $newToken['type'] = 'T_PARENT';
-                break;
-            default:
-                $newToken['type'] = 'T_STRING';
-                break;
+                case 'false':
+                    $newToken['type'] = 'T_FALSE';
+                    break;
+                case 'true':
+                    $newToken['type'] = 'T_TRUE';
+                    break;
+                case 'null':
+                    $newToken['type'] = 'T_NULL';
+                    break;
+                case 'self':
+                    $newToken['type'] = 'T_SELF';
+                    break;
+                case 'parent':
+                    $newToken['type'] = 'T_PARENT';
+                    break;
+                default:
+                    $newToken['type'] = 'T_STRING';
+                    break;
             }
 
             $newToken['code'] = constant($newToken['type']);
@@ -3849,87 +3849,87 @@ class PHP extends Tokenizer
         $newToken = [];
 
         switch ($token) {
-        case '{':
-            $newToken['type'] = 'T_OPEN_CURLY_BRACKET';
-            break;
-        case '}':
-            $newToken['type'] = 'T_CLOSE_CURLY_BRACKET';
-            break;
-        case '[':
-            $newToken['type'] = 'T_OPEN_SQUARE_BRACKET';
-            break;
-        case ']':
-            $newToken['type'] = 'T_CLOSE_SQUARE_BRACKET';
-            break;
-        case '(':
-            $newToken['type'] = 'T_OPEN_PARENTHESIS';
-            break;
-        case ')':
-            $newToken['type'] = 'T_CLOSE_PARENTHESIS';
-            break;
-        case ':':
-            $newToken['type'] = 'T_COLON';
-            break;
-        case '.':
-            $newToken['type'] = 'T_STRING_CONCAT';
-            break;
-        case ';':
-            $newToken['type'] = 'T_SEMICOLON';
-            break;
-        case '=':
-            $newToken['type'] = 'T_EQUAL';
-            break;
-        case '*':
-            $newToken['type'] = 'T_MULTIPLY';
-            break;
-        case '/':
-            $newToken['type'] = 'T_DIVIDE';
-            break;
-        case '+':
-            $newToken['type'] = 'T_PLUS';
-            break;
-        case '-':
-            $newToken['type'] = 'T_MINUS';
-            break;
-        case '%':
-            $newToken['type'] = 'T_MODULUS';
-            break;
-        case '^':
-            $newToken['type'] = 'T_BITWISE_XOR';
-            break;
-        case '&':
-            $newToken['type'] = 'T_BITWISE_AND';
-            break;
-        case '|':
-            $newToken['type'] = 'T_BITWISE_OR';
-            break;
-        case '~':
-            $newToken['type'] = 'T_BITWISE_NOT';
-            break;
-        case '<':
-            $newToken['type'] = 'T_LESS_THAN';
-            break;
-        case '>':
-            $newToken['type'] = 'T_GREATER_THAN';
-            break;
-        case '!':
-            $newToken['type'] = 'T_BOOLEAN_NOT';
-            break;
-        case ',':
-            $newToken['type'] = 'T_COMMA';
-            break;
-        case '@':
-            $newToken['type'] = 'T_ASPERAND';
-            break;
-        case '$':
-            $newToken['type'] = 'T_DOLLAR';
-            break;
-        case '`':
-            $newToken['type'] = 'T_BACKTICK';
-            break;
-        default:
-            $newToken['type'] = 'T_NONE';
-            break;
+            case '{':
+                $newToken['type'] = 'T_OPEN_CURLY_BRACKET';
+                break;
+            case '}':
+                $newToken['type'] = 'T_CLOSE_CURLY_BRACKET';
+                break;
+            case '[':
+                $newToken['type'] = 'T_OPEN_SQUARE_BRACKET';
+                break;
+            case ']':
+                $newToken['type'] = 'T_CLOSE_SQUARE_BRACKET';
+                break;
+            case '(':
+                $newToken['type'] = 'T_OPEN_PARENTHESIS';
+                break;
+            case ')':
+                $newToken['type'] = 'T_CLOSE_PARENTHESIS';
+                break;
+            case ':':
+                $newToken['type'] = 'T_COLON';
+                break;
+            case '.':
+                $newToken['type'] = 'T_STRING_CONCAT';
+                break;
+            case ';':
+                $newToken['type'] = 'T_SEMICOLON';
+                break;
+            case '=':
+                $newToken['type'] = 'T_EQUAL';
+                break;
+            case '*':
+                $newToken['type'] = 'T_MULTIPLY';
+                break;
+            case '/':
+                $newToken['type'] = 'T_DIVIDE';
+                break;
+            case '+':
+                $newToken['type'] = 'T_PLUS';
+                break;
+            case '-':
+                $newToken['type'] = 'T_MINUS';
+                break;
+            case '%':
+                $newToken['type'] = 'T_MODULUS';
+                break;
+            case '^':
+                $newToken['type'] = 'T_BITWISE_XOR';
+                break;
+            case '&':
+                $newToken['type'] = 'T_BITWISE_AND';
+                break;
+            case '|':
+                $newToken['type'] = 'T_BITWISE_OR';
+                break;
+            case '~':
+                $newToken['type'] = 'T_BITWISE_NOT';
+                break;
+            case '<':
+                $newToken['type'] = 'T_LESS_THAN';
+                break;
+            case '>':
+                $newToken['type'] = 'T_GREATER_THAN';
+                break;
+            case '!':
+                $newToken['type'] = 'T_BOOLEAN_NOT';
+                break;
+            case ',':
+                $newToken['type'] = 'T_COMMA';
+                break;
+            case '@':
+                $newToken['type'] = 'T_ASPERAND';
+                break;
+            case '$':
+                $newToken['type'] = 'T_DOLLAR';
+                break;
+            case '`':
+                $newToken['type'] = 'T_BACKTICK';
+                break;
+            default:
+                $newToken['type'] = 'T_NONE';
+                break;
         }
 
         $newToken['code']    = constant($newToken['type']);

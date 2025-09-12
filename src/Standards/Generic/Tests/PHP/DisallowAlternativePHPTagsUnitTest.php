@@ -33,16 +33,16 @@ final class DisallowAlternativePHPTagsUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'DisallowAlternativePHPTagsUnitTest.1.inc':
-            return [
-                4  => 1,
-                7  => 1,
-                8  => 1,
-                11 => 1,
-            ];
+            case 'DisallowAlternativePHPTagsUnitTest.1.inc':
+                return [
+                    4  => 1,
+                    7  => 1,
+                    8  => 1,
+                    11 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

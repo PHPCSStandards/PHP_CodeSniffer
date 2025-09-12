@@ -33,14 +33,14 @@ final class RequireStrictTypesUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'RequireStrictTypesUnitTest.2.inc':
-        case 'RequireStrictTypesUnitTest.5.inc':
-        case 'RequireStrictTypesUnitTest.6.inc':
-        case 'RequireStrictTypesUnitTest.10.inc':
-            return [1 => 1];
+            case 'RequireStrictTypesUnitTest.2.inc':
+            case 'RequireStrictTypesUnitTest.5.inc':
+            case 'RequireStrictTypesUnitTest.6.inc':
+            case 'RequireStrictTypesUnitTest.10.inc':
+                return [1 => 1];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 
@@ -55,14 +55,14 @@ final class RequireStrictTypesUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'RequireStrictTypesUnitTest.11.inc':
-        case 'RequireStrictTypesUnitTest.12.inc':
-        case 'RequireStrictTypesUnitTest.14.inc':
-        case 'RequireStrictTypesUnitTest.15.inc':
-            return [3 => 1];
+            case 'RequireStrictTypesUnitTest.11.inc':
+            case 'RequireStrictTypesUnitTest.12.inc':
+            case 'RequireStrictTypesUnitTest.14.inc':
+            case 'RequireStrictTypesUnitTest.15.inc':
+                return [3 => 1];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 }

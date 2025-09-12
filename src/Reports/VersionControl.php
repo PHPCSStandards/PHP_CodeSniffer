@@ -177,40 +177,40 @@ abstract class VersionControl implements Report
         foreach ($lines as $line) {
             $parts = explode('>>', $line);
             switch ($parts[0]) {
-            case 'AUTHOR':
-                if (isset($authorCache[$parts[1]]) === false) {
-                    $authorCache[$parts[1]] = $parts[2];
-                } else {
-                    $authorCache[$parts[1]] += $parts[2];
-                }
-                break;
-            case 'PRAISE':
-                if (isset($praiseCache[$parts[1]]) === false) {
-                    $praiseCache[$parts[1]] = [
-                        'good' => $parts[2],
-                        'bad'  => $parts[3],
-                    ];
-                } else {
-                    $praiseCache[$parts[1]]['good'] += $parts[2];
-                    $praiseCache[$parts[1]]['bad']  += $parts[3];
-                }
-                break;
-            case 'SOURCE':
-                if (isset($praiseCache[$parts[1]]) === false) {
-                    $praiseCache[$parts[1]] = [];
-                }
+                case 'AUTHOR':
+                    if (isset($authorCache[$parts[1]]) === false) {
+                        $authorCache[$parts[1]] = $parts[2];
+                    } else {
+                        $authorCache[$parts[1]] += $parts[2];
+                    }
+                    break;
+                case 'PRAISE':
+                    if (isset($praiseCache[$parts[1]]) === false) {
+                        $praiseCache[$parts[1]] = [
+                            'good' => $parts[2],
+                            'bad'  => $parts[3],
+                        ];
+                    } else {
+                        $praiseCache[$parts[1]]['good'] += $parts[2];
+                        $praiseCache[$parts[1]]['bad']  += $parts[3];
+                    }
+                    break;
+                case 'SOURCE':
+                    if (isset($praiseCache[$parts[1]]) === false) {
+                        $praiseCache[$parts[1]] = [];
+                    }
 
-                if (isset($sourceCache[$parts[1]][$parts[2]]) === false) {
-                    $sourceCache[$parts[1]][$parts[2]] = [
-                        'count'   => $parts[3],
-                        'fixable' => (bool) $parts[4],
-                    ];
-                } else {
-                    $sourceCache[$parts[1]][$parts[2]]['count'] += $parts[3];
-                }
-                break;
-            default:
-                break;
+                    if (isset($sourceCache[$parts[1]][$parts[2]]) === false) {
+                        $sourceCache[$parts[1]][$parts[2]] = [
+                            'count'   => $parts[3],
+                            'fixable' => (bool) $parts[4],
+                        ];
+                    } else {
+                        $sourceCache[$parts[1]][$parts[2]]['count'] += $parts[3];
+                    }
+                    break;
+                default:
+                    break;
             }
         }
 

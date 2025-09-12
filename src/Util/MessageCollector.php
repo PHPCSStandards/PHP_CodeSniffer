@@ -198,21 +198,21 @@ final class MessageCollector
     private function prefix(string $message, int $type)
     {
         switch ($type) {
-        case self::ERROR:
-            $message = 'ERROR: ' . $message;
-            break;
+            case self::ERROR:
+                $message = 'ERROR: ' . $message;
+                break;
 
-        case self::WARNING:
-            $message = 'WARNING: ' . $message;
-            break;
+            case self::WARNING:
+                $message = 'WARNING: ' . $message;
+                break;
 
-        case self::DEPRECATED:
-            $message = 'DEPRECATED: ' . $message;
-            break;
+            case self::DEPRECATED:
+                $message = 'DEPRECATED: ' . $message;
+                break;
 
-        default:
-            $message = 'NOTICE: ' . $message;
-            break;
+            default:
+                $message = 'NOTICE: ' . $message;
+                break;
         }
 
         return $message;
@@ -239,21 +239,21 @@ final class MessageCollector
 
         foreach ($messages as list('message' => $message, 'type' => $type)) {
             switch ($type) {
-            case self::ERROR:
-                $errors[] = $message;
-                break;
+                case self::ERROR:
+                    $errors[] = $message;
+                    break;
 
-            case self::WARNING:
-                $warnings[] = $message;
-                break;
+                case self::WARNING:
+                    $warnings[] = $message;
+                    break;
 
-            case self::DEPRECATED:
-                $deprecations[] = $message;
-                break;
+                case self::DEPRECATED:
+                    $deprecations[] = $message;
+                    break;
 
-            default:
-                $notices[] = $message;
-                break;
+                default:
+                    $notices[] = $message;
+                    break;
             }
         }
 

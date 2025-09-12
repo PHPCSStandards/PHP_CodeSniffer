@@ -48,20 +48,20 @@ final class LineLengthUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'LineLengthUnitTest.1.inc':
-            return [
-                31 => 1,
-                34 => 1,
-                45 => 1,
-                82 => 1,
-            ];
+            case 'LineLengthUnitTest.1.inc':
+                return [
+                    31 => 1,
+                    34 => 1,
+                    45 => 1,
+                    82 => 1,
+                ];
 
-        case 'LineLengthUnitTest.2.inc':
-        case 'LineLengthUnitTest.3.inc':
-            return [7 => 1];
+            case 'LineLengthUnitTest.2.inc':
+            case 'LineLengthUnitTest.3.inc':
+                return [7 => 1];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 
@@ -79,32 +79,32 @@ final class LineLengthUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'LineLengthUnitTest.1.inc':
-            return [
-                9  => 1,
-                15 => 1,
-                21 => 1,
-                24 => 1,
-                29 => 1,
-                37 => 1,
-                63 => 1,
-                73 => 1,
-                75 => 1,
-                84 => 1,
-            ];
+            case 'LineLengthUnitTest.1.inc':
+                return [
+                    9  => 1,
+                    15 => 1,
+                    21 => 1,
+                    24 => 1,
+                    29 => 1,
+                    37 => 1,
+                    63 => 1,
+                    73 => 1,
+                    75 => 1,
+                    84 => 1,
+                ];
 
-        case 'LineLengthUnitTest.2.inc':
-        case 'LineLengthUnitTest.3.inc':
-            return [6 => 1];
+            case 'LineLengthUnitTest.2.inc':
+            case 'LineLengthUnitTest.3.inc':
+                return [6 => 1];
 
-        case 'LineLengthUnitTest.4.inc':
-            return [
-                10 => 1,
-                14 => 1,
-            ];
+            case 'LineLengthUnitTest.4.inc':
+                return [
+                    10 => 1,
+                    14 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 }

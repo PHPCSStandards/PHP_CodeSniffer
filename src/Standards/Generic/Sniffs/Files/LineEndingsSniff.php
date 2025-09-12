@@ -86,18 +86,18 @@ class LineEndingsSniff implements Sniff
         if ($fix === true) {
             $tokens = $phpcsFile->getTokens();
             switch ($this->eolChar) {
-            case '\n':
-                $eolChar = "\n";
-                break;
-            case '\r':
-                $eolChar = "\r";
-                break;
-            case '\r\n':
-                $eolChar = "\r\n";
-                break;
-            default:
-                $eolChar = $this->eolChar;
-                break;
+                case '\n':
+                    $eolChar = "\n";
+                    break;
+                case '\r':
+                    $eolChar = "\r";
+                    break;
+                case '\r\n':
+                    $eolChar = "\r\n";
+                    break;
+                default:
+                    $eolChar = $this->eolChar;
+                    break;
             }
 
             for ($i = 0; $i < $phpcsFile->numTokens; $i++) {

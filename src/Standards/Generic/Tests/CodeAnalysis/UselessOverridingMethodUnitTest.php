@@ -47,22 +47,22 @@ final class UselessOverridingMethodUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'UselessOverridingMethodUnitTest.1.inc':
-            return [
-                4   => 1,
-                16  => 1,
-                38  => 1,
-                56  => 1,
-                68  => 1,
-                72  => 1,
-                93  => 1,
-                116 => 1,
-                134 => 1,
-                146 => 1,
-                153 => 1,
-            ];
-        default:
-            return [];
+            case 'UselessOverridingMethodUnitTest.1.inc':
+                return [
+                    4   => 1,
+                    16  => 1,
+                    38  => 1,
+                    56  => 1,
+                    68  => 1,
+                    72  => 1,
+                    93  => 1,
+                    116 => 1,
+                    134 => 1,
+                    146 => 1,
+                    153 => 1,
+                ];
+            default:
+                return [];
         }
     }
 }

@@ -33,27 +33,27 @@ final class MethodDeclarationUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'MethodDeclarationUnitTest.1.inc':
-            return [
-                9  => 1,
-                11 => 1,
-                13 => 1,
-                15 => 3,
-                24 => 1,
-                34 => 1,
-                36 => 1,
-                38 => 1,
-                40 => 3,
-                50 => 1,
-                52 => 1,
-                54 => 1,
-                56 => 3,
-                63 => 2,
-                73 => 1,
-            ];
+            case 'MethodDeclarationUnitTest.1.inc':
+                return [
+                    9  => 1,
+                    11 => 1,
+                    13 => 1,
+                    15 => 3,
+                    24 => 1,
+                    34 => 1,
+                    36 => 1,
+                    38 => 1,
+                    40 => 3,
+                    50 => 1,
+                    52 => 1,
+                    54 => 1,
+                    56 => 3,
+                    63 => 2,
+                    73 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 
@@ -71,18 +71,18 @@ final class MethodDeclarationUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'MethodDeclarationUnitTest.1.inc':
-            return [
-                5  => 1,
-                21 => 1,
-                30 => 1,
-                46 => 1,
-                63 => 1,
-                70 => 1,
-            ];
+            case 'MethodDeclarationUnitTest.1.inc':
+                return [
+                    5  => 1,
+                    21 => 1,
+                    30 => 1,
+                    46 => 1,
+                    63 => 1,
+                    70 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 }

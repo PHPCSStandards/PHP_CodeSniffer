@@ -33,34 +33,34 @@ final class ClosingDeclarationCommentUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'ClosingDeclarationCommentUnitTest.1.inc':
-            return [
-                13  => 1,
-                17  => 1,
-                31  => 1,
-                41  => 1,
-                59  => 1,
-                63  => 1,
-                67  => 1,
-                79  => 1,
-                83  => 1,
-                89  => 1,
-                92  => 1,
-                98  => 1,
-                101 => 1,
-                106 => 1,
-                110 => 1,
-                124 => 1,
-            ];
+            case 'ClosingDeclarationCommentUnitTest.1.inc':
+                return [
+                    13  => 1,
+                    17  => 1,
+                    31  => 1,
+                    41  => 1,
+                    59  => 1,
+                    63  => 1,
+                    67  => 1,
+                    79  => 1,
+                    83  => 1,
+                    89  => 1,
+                    92  => 1,
+                    98  => 1,
+                    101 => 1,
+                    106 => 1,
+                    110 => 1,
+                    124 => 1,
+                ];
 
-        case 'ClosingDeclarationCommentUnitTest.4.inc':
-            return [8 => 1];
+            case 'ClosingDeclarationCommentUnitTest.4.inc':
+                return [8 => 1];
 
-        case 'ClosingDeclarationCommentUnitTest.5.inc':
-            return [11 => 1];
+            case 'ClosingDeclarationCommentUnitTest.5.inc':
+                return [11 => 1];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

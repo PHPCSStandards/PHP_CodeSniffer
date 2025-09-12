@@ -33,26 +33,26 @@ final class MemberVarScopeUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'MemberVarScopeUnitTest.1.inc':
-            return [
-                7  => 1,
-                25 => 1,
-                29 => 1,
-                33 => 1,
-                39 => 1,
-                41 => 1,
-                66 => 2,
-                67 => 1,
-                71 => 1,
-                75 => 1,
-                80 => 1,
-                81 => 1,
-                82 => 1,
-                90 => 1,
-            ];
+            case 'MemberVarScopeUnitTest.1.inc':
+                return [
+                    7  => 1,
+                    25 => 1,
+                    29 => 1,
+                    33 => 1,
+                    39 => 1,
+                    41 => 1,
+                    66 => 2,
+                    67 => 1,
+                    71 => 1,
+                    75 => 1,
+                    80 => 1,
+                    81 => 1,
+                    82 => 1,
+                    90 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

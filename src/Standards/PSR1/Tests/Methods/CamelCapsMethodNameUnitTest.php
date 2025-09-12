@@ -33,22 +33,22 @@ final class CamelCapsMethodNameUnitTest extends AbstractSniffTestCase
     public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'CamelCapsMethodNameUnitTest.1.inc':
-            return [
-                6  => 1,
-                7  => 1,
-                11 => 1,
-                12 => 1,
-                13 => 1,
-                17 => 1,
-                21 => 1,
-                25 => 1,
-                26 => 1,
-                77 => 1,
-            ];
+            case 'CamelCapsMethodNameUnitTest.1.inc':
+                return [
+                    6  => 1,
+                    7  => 1,
+                    11 => 1,
+                    12 => 1,
+                    13 => 1,
+                    17 => 1,
+                    21 => 1,
+                    25 => 1,
+                    26 => 1,
+                    77 => 1,
+                ];
 
-        default:
-            return [];
+            default:
+                return [];
         }
     }
 

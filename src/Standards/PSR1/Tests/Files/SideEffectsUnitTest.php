@@ -66,16 +66,16 @@ final class SideEffectsUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'SideEffectsUnitTest.3.inc':
-        case 'SideEffectsUnitTest.4.inc':
-        case 'SideEffectsUnitTest.5.inc':
-        case 'SideEffectsUnitTest.10.inc':
-        case 'SideEffectsUnitTest.12.inc':
-        case 'SideEffectsUnitTest.15.inc':
-        case 'SideEffectsUnitTest.16.inc':
-            return [1 => 1];
-        default:
-            return [];
+            case 'SideEffectsUnitTest.3.inc':
+            case 'SideEffectsUnitTest.4.inc':
+            case 'SideEffectsUnitTest.5.inc':
+            case 'SideEffectsUnitTest.10.inc':
+            case 'SideEffectsUnitTest.12.inc':
+            case 'SideEffectsUnitTest.15.inc':
+            case 'SideEffectsUnitTest.16.inc':
+                return [1 => 1];
+            default:
+                return [];
         }
     }
 }
