@@ -158,7 +158,7 @@ class FunctionCommentThrowTagSniff implements Sniff
                 }
             } else {
                 ++$unknownCount;
-            }//end if
+            }
         } while ($currPos < $stackPtrEnd && $currPos !== false);
 
         if ($foundThrows === false) {

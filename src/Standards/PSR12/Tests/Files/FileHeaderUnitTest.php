@@ -64,7 +64,7 @@ final class FileHeaderUnitTest extends AbstractSniffTestCase
             return [4 => 2];
         default:
             return [];
-        }//end switch
+        }
     }
 
 

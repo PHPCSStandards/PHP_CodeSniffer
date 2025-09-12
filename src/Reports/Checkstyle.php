@@ -63,7 +63,7 @@ class Checkstyle implements Report
                     $out->endElement();
                 }
             }
-        }//end foreach
+        }
 
         $out->endElement();
         echo $out->flush();

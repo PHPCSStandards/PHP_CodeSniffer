@@ -52,7 +52,7 @@ final class DisallowLongArraySyntaxUnitTest extends AbstractSniffTestCase
             ];
         default:
             return [];
-        }//end switch
+        }
     }
 
 

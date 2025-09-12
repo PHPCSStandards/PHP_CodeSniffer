@@ -154,10 +154,10 @@ class Info implements Report
                     'total',
                     number_format($totalCount)
                 );
-            }//end if
+            }
 
             echo PHP_EOL;
-        }//end foreach
+        }
 
         echo str_repeat('-', 70) . PHP_EOL;
     }

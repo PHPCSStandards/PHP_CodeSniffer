@@ -53,7 +53,7 @@ final class UpperCaseConstantNameUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

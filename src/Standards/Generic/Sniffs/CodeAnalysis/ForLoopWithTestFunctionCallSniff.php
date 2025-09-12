@@ -92,6 +92,6 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
                 $phpcsFile->addWarning($error, $stackPtr, 'NotAllowed');
                 break;
             }
-        }//end for
+        }
     }
 }

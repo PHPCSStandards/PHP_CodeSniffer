@@ -107,8 +107,8 @@ class ComparisonOperatorUsageSniff implements Sniff
                         ) {
                             break;
                         }
-                    }//end if
-                }//end for
+                    }
+                }
 
                 $start = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($i + 1), null, true);
             } else {
@@ -117,7 +117,7 @@ class ComparisonOperatorUsageSniff implements Sniff
                 }
 
                 $start = $tokens[$end]['parenthesis_opener'];
-            }//end if
+            }
         } elseif ($tokens[$stackPtr]['code'] === T_FOR) {
             if (isset($tokens[$stackPtr]['parenthesis_opener']) === false) {
                 return;
@@ -138,7 +138,7 @@ class ComparisonOperatorUsageSniff implements Sniff
 
             $start = $tokens[$stackPtr]['parenthesis_opener'];
             $end   = $tokens[$stackPtr]['parenthesis_closer'];
-        }//end if
+        }
 
         $requiredOps   = 0;
         $foundOps      = 0;
@@ -198,7 +198,7 @@ class ComparisonOperatorUsageSniff implements Sniff
             if (isset(Tokens::EMPTY_TOKENS[$type]) === false) {
                 $lastNonEmpty = $i;
             }
-        }//end for
+        }
 
         $requiredOps++;
 

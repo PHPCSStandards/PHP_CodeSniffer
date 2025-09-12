@@ -115,7 +115,7 @@ class ControlSignatureSniff implements Sniff
                     $phpcsFile->fixer->replaceToken(($stackPtr + 1), str_repeat(' ', $expected));
                 }
             }
-        }//end if
+        }
 
         // Single space after closing parenthesis.
         if (isset($tokens[$stackPtr]['parenthesis_closer']) === true
@@ -182,10 +182,10 @@ class ControlSignatureSniff implements Sniff
                         }
 
                         $phpcsFile->fixer->endChangeset();
-                    }//end if
-                }//end if
-            }//end if
-        }//end if
+                    }
+                }
+            }
+        }
 
         // Single newline after opening brace.
         if (isset($tokens[$stackPtr]['scope_opener']) === true) {
@@ -211,7 +211,7 @@ class ControlSignatureSniff implements Sniff
                 // We found the first bit of a code, or a comment on the
                 // following line.
                 break;
-            }//end for
+            }
 
             if ($tokens[$next]['line'] === $tokens[$opener]['line']) {
                 $error = 'Newline required after opening brace';
@@ -230,7 +230,7 @@ class ControlSignatureSniff implements Sniff
                     $phpcsFile->fixer->addContent($opener, $phpcsFile->eolChar);
                     $phpcsFile->fixer->endChangeset();
                 }
-            }//end if
+            }
         } elseif ($tokens[$stackPtr]['code'] === T_WHILE) {
             // Zero spaces after parenthesis closer, but only if followed by a semicolon.
             $closer       = $tokens[$stackPtr]['parenthesis_closer'];
@@ -254,7 +254,7 @@ class ControlSignatureSniff implements Sniff
                     }
                 }
             }
-        }//end if
+        }
 
         // Only want to check multi-keyword structures from here on.
         if ($tokens[$stackPtr]['code'] === T_WHILE) {
@@ -288,7 +288,7 @@ class ControlSignatureSniff implements Sniff
             }
         } else {
             return;
-        }//end if
+        }
 
         // Single space after closing brace.
         $found = 1;

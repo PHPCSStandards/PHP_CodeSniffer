@@ -142,7 +142,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                                 $phpcsFile->addError($error, $return, 'InvalidReturnVoid');
                             }
                         }
-                    }//end if
+                    }
                 } elseif ($returnType !== 'mixed'
                     && $returnType !== 'never'
                     && in_array('void', $typeNames, true) === false
@@ -177,9 +177,9 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                                 $phpcsFile->addError($error, $returnToken, 'InvalidReturnNotVoid');
                             }
                         }
-                    }//end if
-                }//end if
-            }//end if
+                    }
+                }
+            }
         } else {
             if ($isSpecialMethod === true) {
                 return;
@@ -187,7 +187,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
 
             $error = 'Missing @return tag in function comment';
             $phpcsFile->addError($error, $tokens[$commentStart]['comment_closer'], 'MissingReturn');
-        }//end if
+        }
     }
 
 
@@ -261,8 +261,8 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                     $error = '@throws tag comment must end with a full stop';
                     $phpcsFile->addError($error, ($tag + 2), 'ThrowsNoFullStop');
                 }
-            }//end if
-        }//end foreach
+            }
+        }
     }
 
 
@@ -366,15 +366,15 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                         $error = 'Missing parameter comment';
                         $phpcsFile->addError($error, $tag, 'MissingParamComment');
                         $commentLines[] = ['comment' => ''];
-                    }//end if
+                    }
                 } else {
                     $error = 'Missing parameter name';
                     $phpcsFile->addError($error, $tag, 'MissingParamName');
-                }//end if
+                }
             } else {
                 $error = 'Missing parameter type';
                 $phpcsFile->addError($error, $tag, 'MissingParamType');
-            }//end if
+            }
 
             $params[] = [
                 'tag'          => $tag,
@@ -385,7 +385,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                 'type_space'   => $typeSpace,
                 'var_space'    => $varSpace,
             ];
-        }//end foreach
+        }
 
         $realParams  = $phpcsFile->getMethodParameters($stackPtr);
         $foundParams = [];
@@ -492,7 +492,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                             $param['var'],
                         ];
                         $phpcsFile->addError($error, $stackPtr, 'IncorrectTypeHint', $data);
-                    }//end if
+                    }
                 } elseif ($suggestedTypeHint === '' && isset($realParams[$pos]) === true) {
                     $typeHint = $realParams[$pos]['type_hint'];
                     if ($typeHint !== '') {
@@ -503,8 +503,8 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                         ];
                         $phpcsFile->addError($error, $stackPtr, 'InvalidTypeHint', $data);
                     }
-                }//end if
-            }//end foreach
+                }
+            }
 
             $suggestedType = implode('|', $suggestedTypeNames);
             if ($param['type'] !== $suggestedType) {
@@ -545,8 +545,8 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                     }
 
                     $phpcsFile->fixer->endChangeset();
-                }//end if
-            }//end if
+                }
+            }
 
             if ($param['var'] === '') {
                 continue;
@@ -598,12 +598,12 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                     $error .= 'actual variable name %s';
 
                     $phpcsFile->addError($error, $param['tag'], $code, $data);
-                }//end if
+                }
             } elseif (substr($param['var'], -4) !== ',...') {
                 // We must have an extra parameter comment.
                 $error = 'Superfluous parameter comment';
                 $phpcsFile->addError($error, $param['tag'], 'ExtraParamComment');
-            }//end if
+            }
 
             if ($param['comment'] === '') {
                 continue;
@@ -623,7 +623,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                 $error = 'Parameter comment must end with a full stop';
                 $phpcsFile->addError($error, $param['tag'], 'ParamCommentFullStop');
             }
-        }//end foreach
+        }
 
         $realNames = [];
         foreach ($realParams as $realParam) {
@@ -693,8 +693,8 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                 }
 
                 $phpcsFile->fixer->endChangeset();
-            }//end if
-        }//end if
+            }
+        }
     }
 
 
@@ -751,8 +751,8 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                 }
 
                 $phpcsFile->fixer->endChangeset();
-            }//end if
-        }//end if
+            }
+        }
     }
 
 

@@ -114,7 +114,7 @@ class DisallowMultipleAssignmentsSniff implements Sniff
                 // We found our variable.
                 break;
             }
-        }//end for
+        }
 
         if ($varToken <= 0) {
             // Didn't find a variable.

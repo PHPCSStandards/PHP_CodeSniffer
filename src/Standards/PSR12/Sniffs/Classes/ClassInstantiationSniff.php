@@ -81,7 +81,7 @@ class ClassInstantiationSniff implements Sniff
 
             $classNameEnd = $i;
             break;
-        }//end for
+        }
 
         if ($classNameEnd === null) {
             return;

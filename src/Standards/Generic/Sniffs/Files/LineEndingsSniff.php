@@ -119,8 +119,8 @@ class LineEndingsSniff implements Sniff
                 if ($tokenContent !== $newContent) {
                     $phpcsFile->fixer->replaceToken($i, $newContent);
                 }
-            }//end for
-        }//end if
+            }
+        }
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;

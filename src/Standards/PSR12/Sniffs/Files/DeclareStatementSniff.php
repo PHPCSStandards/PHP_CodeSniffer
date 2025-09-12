@@ -105,7 +105,7 @@ class DeclareStatementSniff implements Sniff
                     $equals = $phpcsFile->findNext(T_EQUAL, ($equals + 1));
                 }
             }
-        }//end if
+        }
 
         // There should be no space between equal sign and directive value.
         $value = $phpcsFile->findNext(T_WHITESPACE, ($equals + 1), null, true);
@@ -182,8 +182,8 @@ class DeclareStatementSniff implements Sniff
                 if ($tokens[$token]['type'] === 'T_OPEN_CURLY_BRACKET') {
                     $curlyBracket = $token;
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         if ($curlyBracket !== false) {
             $prevToken = $phpcsFile->findPrevious(T_WHITESPACE, ($curlyBracket - 1), null, true);
@@ -205,7 +205,7 @@ class DeclareStatementSniff implements Sniff
 
                     $phpcsFile->fixer->endChangeset();
                 }
-            }//end if
+            }
 
             $closeCurlyBracket = $tokens[$curlyBracket]['bracket_closer'];
 
@@ -222,7 +222,7 @@ class DeclareStatementSniff implements Sniff
                         $phpcsFile->fixer->addNewline($prevToken);
                     }
                 }
-            }//end if
+            }
 
             // Closing curly bracket must align with the declare keyword.
             if ($tokens[$stackPtr]['column'] !== $tokens[$closeCurlyBracket]['column']) {
@@ -253,6 +253,6 @@ class DeclareStatementSniff implements Sniff
                     $phpcsFile->fixer->endChangeset();
                 }
             }
-        }//end if
+        }
     }
 }

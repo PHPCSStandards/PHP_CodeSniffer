@@ -130,7 +130,7 @@ class DisallowSpaceIndentSniff implements Sniff
 
                 // Don't record metrics for empty lines.
                 $recordMetrics = false;
-            }//end if
+            }
 
             $foundSpaces = substr_count($content, ' ');
             $foundTabs   = substr_count($content, "\t");
@@ -195,7 +195,7 @@ class DisallowSpaceIndentSniff implements Sniff
                 } elseif ($recordMetrics === true) {
                     $phpcsFile->recordMetric($i, 'Line indent', 'mixed');
                 }
-            }//end if
+            }
 
             $error     = 'Tabs must be used to indent lines; spaces are not allowed';
             $errorCode = 'SpacesUsed';
@@ -214,7 +214,7 @@ class DisallowSpaceIndentSniff implements Sniff
                 $padding .= str_repeat(' ', $expectedSpaces);
                 $phpcsFile->fixer->replaceToken($i, $padding . $nonWhitespace);
             }
-        }//end for
+        }
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;

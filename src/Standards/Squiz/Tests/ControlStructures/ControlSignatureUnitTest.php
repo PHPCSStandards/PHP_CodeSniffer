@@ -88,7 +88,7 @@ final class ControlSignatureUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

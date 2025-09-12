@@ -128,7 +128,7 @@ class Source implements Report
                     }
 
                     $parts[2] = $sniff;
-                }//end if
+                }
 
                 $maxLength = max($maxLength, strlen($sniff));
 
@@ -139,8 +139,8 @@ class Source implements Report
                 ];
             } else {
                 $sources[$source]['count'] += $count;
-            }//end if
-        }//end foreach
+            }
+        }
 
         if ($showSources === true) {
             $width = min($width, ($maxLength + 11));
@@ -239,10 +239,10 @@ class Source implements Report
                 } else {
                     echo $sniff . str_repeat(' ', ($width - 35 - strlen($sniff)));
                 }
-            }//end if
+            }
 
             echo $sourceData['count'] . PHP_EOL;
-        }//end foreach
+        }
 
         echo str_repeat('-', $width) . PHP_EOL;
         echo "\033[1m" . 'A TOTAL OF ' . ($totalErrors + $totalWarnings) . ' SNIFF VIOLATION';
@@ -314,10 +314,10 @@ class Source implements Report
 
                     $lastWasUpper = true;
                 }
-            }//end if
+            }
 
             $friendlyName .= $name[$i];
-        }//end for
+        }
 
         $friendlyName    = trim($friendlyName);
         $friendlyName[0] = strtoupper($friendlyName[0]);

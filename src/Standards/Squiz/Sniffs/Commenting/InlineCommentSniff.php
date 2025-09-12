@@ -110,7 +110,7 @@ class InlineCommentSniff implements Sniff
                 $error = 'Inline doc block comments are not allowed; use "/* Comment */" or "// Comment" instead';
                 $phpcsFile->addError($error, $stackPtr, 'DocBlock');
             }
-        }//end if
+        }
 
         if ($tokens[$stackPtr]['content'][0] === '#') {
             $error = 'Perl-style comments are not allowed; use "// Comment" instead';
@@ -159,7 +159,7 @@ class InlineCommentSniff implements Sniff
 
             $commentTokens[] = $nextComment;
             $lastComment     = $nextComment;
-        }//end while
+        }
 
         $commentText = '';
         foreach ($commentTokens as $lastCommentToken) {
@@ -209,7 +209,7 @@ class InlineCommentSniff implements Sniff
                     $comment,
                 ];
                 $fix   = $phpcsFile->addFixableError($error, $lastCommentToken, 'SpacingBefore', $data);
-            }//end if
+            }
 
             if ($fix === true) {
                 $newComment = '// ' . ltrim($tokens[$lastCommentToken]['content'], "/\t ");
@@ -217,7 +217,7 @@ class InlineCommentSniff implements Sniff
             }
 
             $commentText .= trim(substr($tokens[$lastCommentToken]['content'], 2));
-        }//end foreach
+        }
 
         if ($commentText === '') {
             $error = 'Blank comments are not allowed';
@@ -305,7 +305,7 @@ class InlineCommentSniff implements Sniff
 
                 $phpcsFile->fixer->endChangeset();
             }
-        }//end if
+        }
 
         return ($lastCommentToken + 1);
     }

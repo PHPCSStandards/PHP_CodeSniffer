@@ -43,7 +43,7 @@ final class EndFileNoNewlineUnitTest extends AbstractSniffTestCase
             return [1 => 1];
         default:
             return [];
-        }//end switch
+        }
     }
 
 

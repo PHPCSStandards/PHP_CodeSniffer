@@ -136,7 +136,7 @@ foreach ($scripts as $script) {
         }
 
         ++$fileCount;
-    }//end foreach
+    }
 
     // Add requirements check.
     $phar->addFromString('requirements.php', stripWhitespaceAndComments(realpath(__DIR__ . '/../requirements.php'), $config));
@@ -168,7 +168,7 @@ foreach ($scripts as $script) {
     $phar->setStub($stub);
 
     echo 'done' . PHP_EOL;
-}//end foreach
+}
 
 Timing::printRunTime();
 

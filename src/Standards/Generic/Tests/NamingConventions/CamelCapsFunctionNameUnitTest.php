@@ -82,7 +82,7 @@ final class CamelCapsFunctionNameUnitTest extends AbstractSniffTestCase
             ];
         default:
             return [];
-        }//end switch
+        }
     }
 
 

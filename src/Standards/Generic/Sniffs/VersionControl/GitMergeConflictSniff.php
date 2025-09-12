@@ -118,8 +118,8 @@ class GitMergeConflictSniff implements Sniff
                     }
                 }
                 break;
-            }//end switch
-        }//end for
+            }
+        }
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;

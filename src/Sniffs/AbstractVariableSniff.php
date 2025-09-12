@@ -138,7 +138,7 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
                     break;
                 }
             }
-        }//end if
+        }
 
         if ($inFunction === true) {
             return $this->processVariable($phpcsFile, $stackPtr);

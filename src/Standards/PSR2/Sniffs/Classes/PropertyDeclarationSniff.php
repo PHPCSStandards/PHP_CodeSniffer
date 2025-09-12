@@ -119,8 +119,8 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
                         }
                     }
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         if ($propertyInfo['scope_specified'] === false && $propertyInfo['set_scope'] === false) {
             $error = 'Visibility must be declared on property "%s"';
@@ -176,7 +176,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
             }
 
             $firstVisibilityModifier = min($scopePtr, $setScopePtr);
-        }//end if
+        }
 
         if ($hasVisibilityModifier === true && $propertyInfo['is_final'] === true) {
             $scopePtr = $firstVisibilityModifier;
@@ -201,7 +201,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
                     $phpcsFile->fixer->endChangeset();
                 }
             }
-        }//end if
+        }
 
         if ($hasVisibilityModifier === true && $propertyInfo['is_abstract'] === true) {
             $scopePtr    = $firstVisibilityModifier;
@@ -226,7 +226,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
                     $phpcsFile->fixer->endChangeset();
                 }
             }
-        }//end if
+        }
 
         if ($hasVisibilityModifier === true && $propertyInfo['is_static'] === true) {
             $scopePtr  = $lastVisibilityModifier;
@@ -251,7 +251,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
                     $phpcsFile->fixer->endChangeset();
                 }
             }
-        }//end if
+        }
 
         if ($hasVisibilityModifier === true && $propertyInfo['is_readonly'] === true) {
             $scopePtr    = $lastVisibilityModifier;
@@ -276,7 +276,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
                     $phpcsFile->fixer->endChangeset();
                 }
             }
-        }//end if
+        }
     }
 
 

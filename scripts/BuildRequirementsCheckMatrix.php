@@ -174,8 +174,8 @@ class BuildRequirementsCheckMatrix
                         ];
                     }
                 }
-            }//end foreach
-        }//end foreach
+            }
+        }
 
         return $builds;
     }

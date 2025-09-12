@@ -206,7 +206,7 @@ final class Help
             if (empty($filteredOptions[$category]) === true || count($filteredOptions[$category]) === $spacerCount) {
                 unset($filteredOptions[$category]);
             }
-        }//end foreach
+        }
 
         $this->activeOptions = $filteredOptions;
     }

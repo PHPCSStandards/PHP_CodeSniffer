@@ -144,7 +144,7 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
             }
 
             $i = $nextNonWhitespace;
-        }//end for
+        }
 
         // There needs to be n blank lines before the var, not counting comments.
         if ($start === $startOfStatement) {
@@ -222,7 +222,7 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
             }
 
             $phpcsFile->fixer->endChangeset();
-        }//end if
+        }
 
         if ($endOfStatement !== false) {
             return $endOfStatement;

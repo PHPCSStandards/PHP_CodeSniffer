@@ -191,7 +191,7 @@ final class SniffsExcludeArgsTest extends TestCase
                 ],
                 'suggestion' => 'sTANDARD.cATEGORY.sNIFF',
             ];
-        }//end foreach
+        }
 
         return $data;
     }
@@ -270,7 +270,7 @@ final class SniffsExcludeArgsTest extends TestCase
                 'value'    => 'Standard.Category.Sniff, standard.category.sniff, STANDARD.CATEGORY.SNIFF',
                 'result'   => ['Standard.Category.Sniff'],
             ];
-        }//end foreach
+        }
 
         return $data;
     }

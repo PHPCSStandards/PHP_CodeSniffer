@@ -44,7 +44,6 @@
     <rule ref="Squiz.Commenting.DocCommentAlignment"/>
     <rule ref="Squiz.Commenting.EmptyCatchComment"/>
     <rule ref="Squiz.Commenting.InlineComment"/>
-    <rule ref="Squiz.Commenting.LongConditionClosingComment"/>
     <rule ref="Squiz.Commenting.PostStatementComment">
         <exclude name="Squiz.Commenting.PostStatementComment.AnnotationFound"/>
     </rule>

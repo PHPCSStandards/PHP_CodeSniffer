@@ -127,7 +127,7 @@ final class FunctionSpacingUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

@@ -160,7 +160,7 @@ class ControlStructureSpacingSniff implements Sniff
                     }
                 }
             }
-        }//end for
+        }
 
         // Check the closing parenthesis.
         $prev = $phpcsFile->findPrevious(T_WHITESPACE, ($parenCloser - 1), $parenOpener, true);
@@ -188,8 +188,8 @@ class ControlStructureSpacingSniff implements Sniff
 
                     $phpcsFile->fixer->endChangeset();
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         if ($tokens[$parenCloser]['line'] !== $tokens[$prev]['line']) {
             $requiredIndent = ($tokens[$first]['column'] - 1);

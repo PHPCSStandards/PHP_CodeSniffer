@@ -200,7 +200,7 @@ class BooleanOperatorPlacementSniff implements Sniff
                         $phpcsFile->fixer->addContent($prev, ' ' . $tokens[$operator]['content']);
                         $phpcsFile->fixer->replaceToken($operator, '');
                     }
-                }//end if
+                }
             } else {
                 if ($tokens[$prev]['line'] === $tokens[$operator]['line']) {
                     if ($tokens[$next]['line'] === $tokens[$operator]['line']) {
@@ -221,9 +221,9 @@ class BooleanOperatorPlacementSniff implements Sniff
                         $phpcsFile->fixer->addContentBefore($next, $tokens[$operator]['content'] . ' ');
                         $phpcsFile->fixer->replaceToken($operator, '');
                     }
-                }//end if
-            }//end if
-        }//end foreach
+                }
+            }
+        }
 
         $phpcsFile->fixer->endChangeset();
     }

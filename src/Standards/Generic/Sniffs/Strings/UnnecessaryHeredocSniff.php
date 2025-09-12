@@ -105,7 +105,7 @@ class UnnecessaryHeredocSniff implements Sniff
                 $phpcsFile->recordMetric($stackPtr, 'Heredoc contains interpolation or expression', 'yes');
                 return;
             }
-        }//end foreach
+        }
 
         $phpcsFile->recordMetric($stackPtr, 'Heredoc contains interpolation or expression', 'no');
 

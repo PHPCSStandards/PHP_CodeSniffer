@@ -101,6 +101,6 @@ final class EmptyPHPStatementUnitTest extends AbstractSniffTestCase
             ];
         default:
             return [];
-        }//end switch
+        }
     }
 }

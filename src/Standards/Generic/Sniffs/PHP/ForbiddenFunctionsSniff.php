@@ -191,7 +191,7 @@ class ForbiddenFunctionsSniff implements Sniff
             if (in_array($function, $this->forbiddenFunctionNames, true) === false) {
                 return;
             }
-        }//end if
+        }
 
         $this->addError($phpcsFile, $stackPtr, $function, $pattern);
     }

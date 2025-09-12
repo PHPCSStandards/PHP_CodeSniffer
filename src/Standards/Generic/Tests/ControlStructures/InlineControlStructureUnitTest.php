@@ -86,7 +86,7 @@ final class InlineControlStructureUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

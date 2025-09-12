@@ -83,9 +83,9 @@ class Full implements Report
                     }
 
                     $maxErrorLength = max($maxErrorLength, ($length + 1));
-                }//end foreach
-            }//end foreach
-        }//end foreach
+                }
+            }
+        }
 
         $file       = $report['filename'];
         $fileLength = strlen($file);
@@ -172,7 +172,7 @@ class Full implements Report
                         } else {
                             $errorMsg .= ' ' . $sourceSuffix;
                         }
-                    }//end if
+                    }
 
                     // The padding that goes on the front of the line.
                     $padding = ($maxLineNumLength - strlen($line));
@@ -200,9 +200,9 @@ class Full implements Report
                     }
 
                     echo $errorMsg . PHP_EOL;
-                }//end foreach
-            }//end foreach
-        }//end foreach
+                }
+            }
+        }
 
         echo str_repeat('-', $width) . PHP_EOL;
         if ($report['fixable'] > 0) {

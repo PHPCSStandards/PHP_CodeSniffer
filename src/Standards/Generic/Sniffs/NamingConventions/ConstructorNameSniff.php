@@ -128,7 +128,7 @@ class ConstructorNameSniff extends AbstractScopeSniff
             }
 
             $startIndex = $nextNonEmpty;
-        }//end while
+        }
     }
 
 

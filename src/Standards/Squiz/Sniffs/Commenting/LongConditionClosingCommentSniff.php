@@ -124,9 +124,9 @@ class LongConditionClosingCommentSniff implements Sniff
                     $endBrace = $tokens[$stackPtr];
                 } else {
                     break;
-                }//end if
+                }
             } while (isset($tokens[$nextToken]['scope_closer']) === true);
-        }//end if
+        }
 
         if ($startCondition['code'] === T_TRY) {
             // TRY statements need to check until the end of all CATCH statements.

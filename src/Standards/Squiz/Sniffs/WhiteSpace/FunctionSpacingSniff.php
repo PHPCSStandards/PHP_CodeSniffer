@@ -240,8 +240,8 @@ class FunctionSpacingSniff implements Sniff
                 }
 
                 $phpcsFile->fixer->endChangeset();
-            }//end if
-        }//end if
+            }
+        }
 
         /*
             Check the number of blank lines
@@ -312,8 +312,8 @@ class FunctionSpacingSniff implements Sniff
                 if ($currentLine === $prevLine) {
                     break;
                 }
-            }//end for
-        }//end if
+            }
+        }
 
         $requiredSpacing = $this->spacing;
         $errorCode       = 'Before';
@@ -365,8 +365,8 @@ class FunctionSpacingSniff implements Sniff
                     }
 
                     $phpcsFile->fixer->endChangeset();
-                }//end if
-            }//end if
-        }//end if
+                }
+            }
+        }
     }
 }

@@ -171,7 +171,7 @@ class LineLengthSniff implements Sniff
                     return;
                 }
             }
-        }//end if
+        }
 
         if ($this->absoluteLineLimit > 0
             && $lineLength > $this->absoluteLineLimit

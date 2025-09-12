@@ -61,7 +61,7 @@ final class ClosingDeclarationCommentUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

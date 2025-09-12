@@ -183,7 +183,7 @@ class LowerCaseConstantSniff implements Sniff
 
             // Skip over return type declarations.
             return $end;
-        }//end if
+        }
 
         // Handle everything else.
         $this->processConstant($phpcsFile, $stackPtr);

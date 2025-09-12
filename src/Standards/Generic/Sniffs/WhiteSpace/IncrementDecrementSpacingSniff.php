@@ -100,7 +100,7 @@ class IncrementDecrementSpacingSniff implements Sniff
             }
 
             return;
-        }//end if
+        }
 
         // Is this a post-increment/decrement ?
         $prevNonEmpty = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
@@ -152,6 +152,6 @@ class IncrementDecrementSpacingSniff implements Sniff
 
                 $phpcsFile->fixer->endChangeset();
             }
-        }//end if
+        }
     }
 }

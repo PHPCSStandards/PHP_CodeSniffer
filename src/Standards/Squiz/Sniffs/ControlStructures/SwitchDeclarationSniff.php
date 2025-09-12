@@ -201,14 +201,14 @@ class SwitchDeclarationSniff implements Sniff
 
                                 $phpcsFile->fixer->endChangeset();
                             }
-                        }//end if
+                        }
                     } else {
                         // Ensure the BREAK statement is not followed by a blank line.
                         if ($nextLine !== ($tokens[$semicolon]['line'] + 1)) {
                             $error = 'Blank lines are not allowed after the DEFAULT case\'s breaking statement';
                             $phpcsFile->addError($error, $nextBreak, 'SpacingAfterDefaultBreak');
                         }
-                    }//end if
+                    }
 
                     $caseLine = $tokens[$nextCase]['line'];
                     $nextLine = $tokens[$nextBreak]['line'];
@@ -223,7 +223,7 @@ class SwitchDeclarationSniff implements Sniff
                         $error = 'Blank lines are not allowed after ' . strtoupper($type) . ' statements';
                         $phpcsFile->addError($error, $nextCase, 'SpacingAfter' . $type);
                     }
-                }//end if
+                }
 
                 if ($tokens[$nextBreak]['code'] === T_BREAK) {
                     if ($type === 'Case') {
@@ -264,13 +264,13 @@ class SwitchDeclarationSniff implements Sniff
                             $error = 'Comment required for empty DEFAULT case';
                             $phpcsFile->addError($error, $nextCase, 'EmptyDefault');
                         }
-                    }//end if
-                }//end if
+                    }
+                }
             } elseif ($type === 'Default') {
                 $error = 'DEFAULT case must have a breaking statement';
                 $phpcsFile->addError($error, $nextCase, 'DefaultNoBreak');
-            }//end if
-        }//end while
+            }
+        }
 
         if ($foundDefault === false) {
             $error = 'All SWITCH statements must contain a DEFAULT case';

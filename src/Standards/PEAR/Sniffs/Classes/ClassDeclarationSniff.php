@@ -95,8 +95,8 @@ class ClassDeclarationSniff implements Sniff
                 }
 
                 return;
-            }//end if
-        }//end if
+            }
+        }
 
         if ($tokens[($curlyBrace + 1)]['content'] !== $phpcsFile->eolChar) {
             $error = 'Opening %s brace must be on a line by itself';
@@ -140,6 +140,6 @@ class ClassDeclarationSniff implements Sniff
                     }
                 }
             }
-        }//end if
+        }
     }
 }

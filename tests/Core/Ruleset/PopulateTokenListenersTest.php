@@ -285,8 +285,8 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
                     $details['source'],
                     sprintf('Unexpected value for "source" key for sniff class %s for token %s', $className, Tokens::tokenName($token))
                 );
-            }//end foreach
-        }//end foreach
+            }
+        }
     }
 
 
@@ -320,7 +320,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
                     sprintf('Unexpected value for "include" key for sniff class %s for token %s', $className, Tokens::tokenName($token))
                 );
             }
-        }//end foreach
+        }
     }
 
 
@@ -354,7 +354,7 @@ final class PopulateTokenListenersTest extends AbstractRulesetTestCase
                     sprintf('Unexpected value for "ignore" key for sniff class %s for token %s', $className, Tokens::tokenName($token))
                 );
             }
-        }//end foreach
+        }
     }
 
 

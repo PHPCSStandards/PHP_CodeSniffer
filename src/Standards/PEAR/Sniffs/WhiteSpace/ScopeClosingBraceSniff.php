@@ -163,7 +163,7 @@ class ScopeClosingBraceSniff implements Sniff
                 ];
                 $fix   = $phpcsFile->addFixableError($error, $scopeEnd, 'Indent', $data);
             }
-        }//end if
+        }
 
         if ($fix === true) {
             $spaces = str_repeat(' ', $expectedIndent);

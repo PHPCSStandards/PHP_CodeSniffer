@@ -65,7 +65,7 @@ final class ClassCommentUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 
@@ -90,6 +90,6 @@ final class ClassCommentUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 }

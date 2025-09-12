@@ -230,7 +230,7 @@ class SideEffectsSniff implements Sniff
 
                     continue;
                 }
-            }//end if
+            }
 
             // Special case for defined() as it can be used to see
             // if a constant (a symbol) should be defined or not and
@@ -254,7 +254,7 @@ class SideEffectsSniff implements Sniff
                         continue;
                     }
                 }
-            }//end if
+            }
 
             // Conditional statements are allowed in symbol files as long as the
             // contents is only a symbol definition. So don't count these as effects
@@ -290,7 +290,7 @@ class SideEffectsSniff implements Sniff
 
                 $i = $tokens[$i]['scope_closer'];
                 continue;
-            }//end if
+            }
 
             if ($firstEffect === null) {
                 $firstEffect = $i;
@@ -300,7 +300,7 @@ class SideEffectsSniff implements Sniff
                 // We have a conflict we have to report, so no point continuing.
                 break;
             }
-        }//end for
+        }
 
         return [
             'symbol' => $firstSymbol,

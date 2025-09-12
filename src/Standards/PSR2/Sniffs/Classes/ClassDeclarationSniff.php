@@ -115,8 +115,8 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                         }
                     }
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         // We'll need the indent of the class/interface declaration for later.
         $classIndent = 0;
@@ -174,7 +174,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                     }
                 }
             }
-        }//end if
+        }
 
         // Check after the class/interface name.
         if ($className !== null
@@ -244,7 +244,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                         }
 
                         $phpcsFile->fixer->endChangeset();
-                    }//end if
+                    }
                 } else {
                     // Check the whitespace before. Whitespace after is checked
                     // later by looking at the whitespace before the first class name
@@ -258,9 +258,9 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                             $phpcsFile->fixer->replaceToken(($keyword - 1), ' ');
                         }
                     }
-                }//end if
-            }//end if
-        }//end foreach
+                }
+            }
+        }
 
         // Check each of the extends/implements class names. If the extends/implements
         // keyword is the last content on the line, it means we need to check for
@@ -393,7 +393,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                             }
                         }
                     }
-                }//end if
+                }
             } else {
                 if ($tokens[($className - 1)]['code'] === T_COMMA) {
                     $error = 'Expected 1 space before "%s"; 0 found';
@@ -430,9 +430,9 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                                 $phpcsFile->fixer->addContent($prev, ' ');
                             }
                         }
-                    }//end if
-                }//end if
-            }//end if
+                    }
+                }
+            }
 
             if ($checkingImplements === true
                 && $tokens[($className + 1)]['code'] !== T_COMMA
@@ -457,8 +457,8 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                 $nextComma = $phpcsFile->findNext(T_COMMA, $className);
             } else {
                 $nextComma = ($className + 1);
-            }//end if
-        }//end foreach
+            }
+        }
     }
 
 
@@ -497,7 +497,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
 
                 $phpcsFile->fixer->endChangeset();
             }
-        }//end if
+        }
 
         if ($tokens[$stackPtr]['code'] !== T_ANON_CLASS) {
             // Check the closing brace is on it's own line, but allow

@@ -194,14 +194,14 @@ class MultipleStatementAlignmentSniff implements Sniff
                             break;
                         }
                     }
-                }//end if
+                }
 
                 continue;
             } elseif ($assign !== $stackPtr && $tokens[$assign]['line'] === $lastLine) {
                 // Skip multiple assignments on the same line. We only need to
                 // try and align the first assignment.
                 continue;
-            }//end if
+            }
 
             if ($assign !== $stackPtr) {
                 if ($tokens[$assign]['level'] > $tokens[$stackPtr]['level']) {
@@ -238,7 +238,7 @@ class MultipleStatementAlignmentSniff implements Sniff
                         }
                     }
                 }
-            }//end if
+            }
 
             $var = $phpcsFile->findPrevious(
                 Tokens::EMPTY_TOKENS,
@@ -277,7 +277,7 @@ class MultipleStatementAlignmentSniff implements Sniff
                     }
 
                     $assignColumn = ($varEnd + $padding);
-                }//end if
+                }
 
                 if (($assignColumn + $assignLen) > ($assignments[$maxPadding]['assign_col'] + $assignments[$maxPadding]['assign_len'])) {
                     $newPadding = ($varEnd - $assignments[$maxPadding]['var_end'] + $assignLen - $assignments[$maxPadding]['assign_len'] + 1);
@@ -301,12 +301,12 @@ class MultipleStatementAlignmentSniff implements Sniff
                     }
                 } elseif ($padding > $assignments[$maxPadding]['expected']) {
                     $maxPadding = $assign;
-                }//end if
+                }
             } else {
                 $padding      = 1;
                 $assignColumn = ($varEnd + 1);
                 $maxPadding   = $assign;
-            }//end if
+            }
 
             $found = 0;
             if ($tokens[($var + 1)]['code'] === T_WHITESPACE) {
@@ -327,7 +327,7 @@ class MultipleStatementAlignmentSniff implements Sniff
 
             $lastLine   = $tokens[$assign]['line'];
             $prevAssign = $assign;
-        }//end for
+        }
 
         if (empty($assignments) === true) {
             return $stackPtr;
@@ -380,7 +380,7 @@ class MultipleStatementAlignmentSniff implements Sniff
                     $phpcsFile->fixer->replaceToken(($assignment - 1), $newContent);
                 }
             }
-        }//end foreach
+        }
 
         if ($numAssignments > 1) {
             if ($errorGenerated === true) {

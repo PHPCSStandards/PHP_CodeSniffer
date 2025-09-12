@@ -86,7 +86,7 @@ class FunctionDeclarationSniff implements Sniff
                     }
                 }
             }
-        }//end if
+        }
 
         // Must be no space before the opening parenthesis. For closures, this is
         // enforced by the previous check because there is no content between the keywords
@@ -135,9 +135,9 @@ class FunctionDeclarationSniff implements Sniff
                             }
                         }
                     }
-                }//end if
-            }//end if
-        }//end if
+                }
+            }
+        }
 
         // Must be one space before and after USE keyword for closures.
         if ($tokens[$stackPtr]['code'] === T_CLOSURE) {
@@ -184,8 +184,8 @@ class FunctionDeclarationSniff implements Sniff
                         }
                     }
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         if ($this->isMultiLineDeclaration($phpcsFile, $stackPtr, $openBracket, $tokens) === true) {
             $this->processMultiLineDeclaration($phpcsFile, $stackPtr, $tokens);
@@ -327,11 +327,11 @@ class FunctionDeclarationSniff implements Sniff
                     }
 
                     $phpcsFile->fixer->endChangeset();
-                }//end if
+                }
 
                 return;
-            }//end if
-        }//end if
+            }
+        }
 
         $prev = $tokens[($opener - 1)];
         if ($prev['code'] !== T_WHITESPACE) {
@@ -431,8 +431,8 @@ class FunctionDeclarationSniff implements Sniff
                         $phpcsFile->fixer->addNewlineBefore($closeBracket);
                     }
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         // Each line between the parenthesis should be indented 4 spaces.
         $openBracket = $tokens[$stackPtr]['parenthesis_opener'];
@@ -490,7 +490,7 @@ class FunctionDeclarationSniff implements Sniff
                 }
 
                 $lastLine = $tokens[$i]['line'];
-            }//end if
+            }
 
             if ($tokens[$i]['code'] === T_OPEN_PARENTHESIS
                 && isset($tokens[$i]['parenthesis_closer']) === true
@@ -523,6 +523,6 @@ class FunctionDeclarationSniff implements Sniff
                 $lastLine = $tokens[$i]['line'];
                 continue;
             }
-        }//end for
+        }
     }
 }

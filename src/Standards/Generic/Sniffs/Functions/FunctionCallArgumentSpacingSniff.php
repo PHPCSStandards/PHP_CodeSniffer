@@ -158,8 +158,8 @@ class FunctionCallArgumentSpacingSniff implements Sniff
 
                             $phpcsFile->fixer->endChangeset();
                         }
-                    }//end if
-                }//end if
+                    }
+                }
 
                 if ($tokens[($nextSeparator + 1)]['code'] !== T_WHITESPACE) {
                     // Ignore trailing comma's after last argument as that's outside the scope of this sniff.
@@ -185,8 +185,8 @@ class FunctionCallArgumentSpacingSniff implements Sniff
                             }
                         }
                     }
-                }//end if
-            }//end if
-        }//end while
+                }
+            }
+        }
     }
 }

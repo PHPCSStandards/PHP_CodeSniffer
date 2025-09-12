@@ -243,7 +243,7 @@ abstract class Tokenizer
                 $this->replaceTabsInToken($this->tokens[$i]);
                 $length      = $this->tokens[$i]['length'];
                 $currColumn += $length;
-            }//end if
+            }
 
             $this->tokens[$i]['length'] = $length;
 
@@ -312,7 +312,7 @@ abstract class Tokenizer
 
                             $lineHasOtherContent = true;
                             break;
-                        }//end for
+                        }
 
                         $changedLines = false;
                         for ($next = $i; $next < $this->numTokens; $next++) {
@@ -348,8 +348,8 @@ abstract class Tokenizer
 
                             $lineHasOtherContent = true;
                             break;
-                        }//end for
-                    }//end if
+                        }
+                    }
 
                     if (substr($commentTextLower, 0, 9) === 'phpcs:set') {
                         // Ignore standards for complete lines that change sniff settings.
@@ -430,7 +430,7 @@ abstract class Tokenizer
                             }
 
                             $this->tokens[$i]['sniffCodes'] = $enabledSniffs;
-                        }//end if
+                        }
 
                         $this->tokens[$i]['code'] = T_PHPCS_ENABLE;
                         $this->tokens[$i]['type'] = 'T_PHPCS_ENABLE';
@@ -465,14 +465,14 @@ abstract class Tokenizer
                             // so respect the ignore rules it set.
                             $this->ignoredLines[$this->tokens[$i]['line']] = $lineIgnoring;
                         }
-                    }//end if
-                }//end if
-            }//end if
+                    }
+                }
+            }
 
             if ($ignoring !== null && isset($this->ignoredLines[$this->tokens[$i]['line']]) === false) {
                 $this->ignoredLines[$this->tokens[$i]['line']] = $ignoring;
             }
-        }//end for
+        }
 
         // If annotations are being ignored, we clear out all the ignore rules
         // but leave the annotations tokenized as normal.
@@ -562,8 +562,8 @@ abstract class Tokenizer
                 $currColumn += $pad;
                 $length     += $pad;
                 $newContent .= $prefix . str_repeat($padding, ($pad - 1));
-            }//end foreach
-        }//end if
+            }
+        }
 
         $token['orig_content'] = $token['content'];
         $token['content']      = $newContent;
@@ -646,7 +646,7 @@ abstract class Tokenizer
                     $this->tokens[$i]['parenthesis_opener']      = $opener;
                     $this->tokens[$i]['parenthesis_closer']      = $i;
                     $this->tokens[$opener]['parenthesis_closer'] = $i;
-                }//end if
+                }
             } elseif ($this->tokens[$i]['code'] === T_ATTRIBUTE) {
                 $openers[] = $i;
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
@@ -677,8 +677,8 @@ abstract class Tokenizer
                     } elseif (PHP_CODESNIFFER_VERBOSITY > 1) {
                         StatusWriter::write("=> Found unowned attribute closer at $i for $opener", (count($openers) + 1));
                     }
-                }//end if
-            }//end if
+                }
+            }
 
             /*
                 Bracket mapping.
@@ -731,8 +731,8 @@ abstract class Tokenizer
                 break;
             default:
                 continue 2;
-            }//end switch
-        }//end for
+            }
+        }
 
         // Cleanup for any openers that we didn't find closers for.
         // This typically means there was a syntax error breaking things.
@@ -778,8 +778,8 @@ abstract class Tokenizer
                 if (empty($map) === false) {
                     $this->tokens[$i]['nested_parenthesis'] = $map;
                 }
-            }//end if
-        }//end for
+            }
+        }
     }
 
 
@@ -813,8 +813,8 @@ abstract class Tokenizer
                 }
 
                 $i = $this->recurseScopeMap($i);
-            }//end if
-        }//end for
+            }
+        }
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             StatusWriter::write('*** END SCOPE MAP ***', 1);
@@ -873,7 +873,7 @@ abstract class Tokenizer
 
                 $statusMessage .= "]: $type => $content";
                 StatusWriter::write($statusMessage, $depth);
-            }//end if
+            }
 
             // Very special case for IF statements in PHP that can be defined without
             // scope tokens. E.g., if (1) 1; 1 ? (1 ? 1 : 1) : 1;
@@ -984,7 +984,7 @@ abstract class Tokenizer
                         // The closer was not processed, so we need to
                         // complete that token as well.
                         $todo[] = $scopeCloser;
-                    }//end if
+                    }
 
                     if ($validCloser === true) {
                         foreach ($todo as $token) {
@@ -1014,9 +1014,9 @@ abstract class Tokenizer
                         }
                     } else {
                         continue;
-                    }//end if
-                }//end if
-            }//end if
+                    }
+                }
+            }
 
             // Is this an opening condition ?
             if (isset($this->scopeOpeners[$tokenType]) === true) {
@@ -1049,7 +1049,7 @@ abstract class Tokenizer
 
                         $i = self::recurseScopeMap($i, ($depth + 1), $ignore);
                         continue;
-                    }//end if
+                    }
 
                     if ($tokenType === T_CLASS) {
                         // Probably an anonymous class inside another anonymous class,
@@ -1071,7 +1071,7 @@ abstract class Tokenizer
 
                         $i = self::recurseScopeMap($i, ($depth + 1), $ignore);
                         continue;
-                    }//end if
+                    }
 
                     // Found another opening condition but still haven't
                     // found our opener, so we are never going to find one.
@@ -1098,7 +1098,7 @@ abstract class Tokenizer
 
                         return $stackPtr;
                     }
-                }//end if
+                }
 
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
                     StatusWriter::write('* token is an opening condition *', $depth);
@@ -1168,8 +1168,8 @@ abstract class Tokenizer
                     if (isset($this->scopeOpeners[$tokenType]['end'][T_CLOSE_CURLY_BRACKET]) === true) {
                         $ignore = $oldIgnore;
                     }
-                }//end if
-            }//end if
+                }
+            }
 
             if (isset($this->scopeOpeners[$currType]['start'][$tokenType]) === true
                 && $opener === null
@@ -1214,10 +1214,10 @@ abstract class Tokenizer
                                 }
 
                                 break;
-                            }//end if
-                        }//end for
-                    }//end if
-                }//end if
+                            }
+                        }
+                    }
+                }
 
                 if ($ignore === 0 || $tokenType !== T_OPEN_CURLY_BRACKET) {
                     $openerNested = isset($this->tokens[$i]['nested_parenthesis']);
@@ -1242,7 +1242,7 @@ abstract class Tokenizer
 
                         $opener = $i;
                     }
-                }//end if
+                }
             } elseif ($tokenType === T_SEMICOLON
                 && $opener === null
                 && (isset($this->tokens[$stackPtr]['parenthesis_closer']) === false
@@ -1342,10 +1342,10 @@ abstract class Tokenizer
                         }
 
                         return ($i - 1);
-                    }//end if
-                }//end if
-            }//end if
-        }//end for
+                    }
+                }
+            }
+        }
 
         return $stackPtr;
     }
@@ -1394,7 +1394,7 @@ abstract class Tokenizer
 
                 $statusMessage .= "]: $type => $content";
                 StatusWriter::write($statusMessage, ($level + 1));
-            }//end if
+            }
 
             $this->tokens[$i]['level']      = $level;
             $this->tokens[$i]['conditions'] = $conditions;
@@ -1462,8 +1462,8 @@ abstract class Tokenizer
                                     StatusWriter::write("* cleaned $x:$type *", ($level + 1));
                                     StatusWriter::write("=> level changed from $oldLevel to $newLevel", ($level + 2));
                                     StatusWriter::write("=> conditions changed from $oldConds to $newConds", ($level + 2));
-                                }//end if
-                            }//end for
+                                }
+                            }
 
                             unset($conditions[$badToken]);
                             if (PHP_CODESNIFFER_VERBOSITY > 1) {
@@ -1477,8 +1477,8 @@ abstract class Tokenizer
                             if (PHP_CODESNIFFER_VERBOSITY > 1) {
                                 StatusWriter::write('* level decreased *', ($level + 2));
                             }
-                        }//end if
-                    }//end if
+                        }
+                    }
 
                     $level++;
                     if (PHP_CODESNIFFER_VERBOSITY > 1) {
@@ -1554,10 +1554,10 @@ abstract class Tokenizer
                                             StatusWriter::write("* cleaned $x:$type *", ($level + 1));
                                             StatusWriter::write("=> level changed from $oldLevel to $newLevel", ($level + 2));
                                             StatusWriter::write("=> conditions changed from $oldConds to $newConds", ($level + 2));
-                                        }//end if
-                                    }//end for
-                                }//end if
-                            }//end if
+                                        }
+                                    }
+                                }
+                            }
 
                             $level--;
                             if (PHP_CODESNIFFER_VERBOSITY > 1) {
@@ -1566,11 +1566,11 @@ abstract class Tokenizer
 
                             $this->tokens[$i]['level']      = $level;
                             $this->tokens[$i]['conditions'] = $conditions;
-                        }//end if
-                    }//end foreach
-                }//end if
-            }//end if
-        }//end for
+                        }
+                    }
+                }
+            }
+        }
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             StatusWriter::write('*** END LEVEL MAP ***', 1);

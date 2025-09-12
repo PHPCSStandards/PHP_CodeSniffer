@@ -139,7 +139,7 @@ final class ValidFunctionNameUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

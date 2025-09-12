@@ -272,7 +272,7 @@ final class PHPOpenTagTest extends AbstractTokenizerTestCase
             );
 
             ++$stackPtr;
-        }//end foreach
+        }
     }
 
 

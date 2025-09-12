@@ -189,7 +189,7 @@ class Cache
             }
 
             StatusWriter::write("=> cacheHash: $cacheHash", 2);
-        }//end if
+        }
 
         if ($config->cacheFile !== null) {
             $cacheFile = $config->cacheFile;
@@ -255,13 +255,13 @@ class Cache
                     $cacheFile = $testFile;
                     break;
                 }
-            }//end foreach
+            }
 
             if ($cacheFile === null) {
                 // Unlikely, but just in case $paths is empty for some reason.
                 $cacheFile = $cacheDir . DIRECTORY_SEPARATOR . "phpcs.$cacheHash.cache";
             }
-        }//end if
+        }
 
         self::$path = $cacheFile;
         if (PHP_CODESNIFFER_VERBOSITY > 1) {

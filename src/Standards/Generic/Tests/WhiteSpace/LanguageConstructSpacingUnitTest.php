@@ -79,7 +79,7 @@ final class LanguageConstructSpacingUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

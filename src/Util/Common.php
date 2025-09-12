@@ -308,7 +308,7 @@ class Common
             if (in_array(' ', $exclude, true) === false) {
                 $content = str_replace(' ', "\033[30;1m·\033[0m", $content);
             }
-        }//end if
+        }
 
         return $content;
     }
@@ -405,7 +405,7 @@ class Common
 
                 $lastCharWasCaps = $isCaps;
             }
-        }//end if
+        }
 
         return true;
     }
@@ -482,7 +482,7 @@ class Common
             case 'array()':
             case 'array':
                 return 'array';
-            }//end switch
+            }
 
             if (strpos($lowerVarType, 'array(') !== false) {
                 // Valid array declaration:
@@ -509,15 +509,15 @@ class Common
                     return "array($type1$type2)";
                 } else {
                     return 'array';
-                }//end if
+                }
             } elseif (isset(self::ALLOWED_TYPES[$lowerVarType]) === true) {
                 // A valid type, but not lower cased.
                 return $lowerVarType;
             } else {
                 // Must be a custom type name.
                 return $varType;
-            }//end if
-        }//end if
+            }
+        }
     }
 
 

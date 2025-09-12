@@ -409,8 +409,8 @@ class File
                             $this->ruleset->setSniffProperty($listenerClass, $propertyCode, $settings);
                         }
                     }
-                }//end if
-            }//end if
+                }
+            }
 
             if (PHP_CODESNIFFER_VERBOSITY > 2) {
                 $type    = $token['type'];
@@ -480,8 +480,8 @@ class File
                             $this->ignoredListeners[$class] = true;
                             continue;
                         }
-                    }//end if
-                }//end if
+                    }
+                }
 
                 $this->activeListener = $class;
 
@@ -513,8 +513,8 @@ class File
                 }
 
                 $this->activeListener = '';
-            }//end foreach
-        }//end foreach
+            }
+        }
 
         // If short open tags are off but the file being checked uses
         // short open tags, the whole content will be inline HTML
@@ -879,7 +879,7 @@ class File
                 $parts[0] . '.' . $parts[1],
                 $parts[0],
             ];
-        }//end if
+        }
 
         if (isset($this->tokenizer->ignoredLines[$line]) === true && $this->tokenizer->ignoredLines[$line]->isIgnored($sniffCode) === true) {
             return false;
@@ -1015,9 +1015,9 @@ class File
                     // This file path is being included.
                     $included = true;
                     break;
-                }//end foreach
-            }//end foreach
-        }//end if
+                }
+            }
+        }
 
         if ($included === false) {
             // There were include rules set, but this file
@@ -1652,8 +1652,8 @@ class File
                 $defaultStart = $this->findNext(Tokens::EMPTY_TOKENS, ($i + 1), null, true);
                 $equalToken   = $i;
                 break;
-            }//end switch
-        }//end for
+            }
+        }
 
         return $vars;
     }
@@ -1749,8 +1749,8 @@ class File
             case T_STATIC:
                 $isStatic = true;
                 break;
-            }//end switch
-        }//end for
+            }
+        }
 
         $returnType         = '';
         $returnTypeToken    = false;
@@ -1810,7 +1810,7 @@ class File
                     $returnType        .= $this->tokens[$i]['content'];
                     $returnTypeEndToken = $i;
                 }
-            }//end for
+            }
 
             if ($this->tokens[$stackPtr]['code'] === T_FN) {
                 $bodyToken = T_FN_ARROW;
@@ -1820,7 +1820,7 @@ class File
 
             $end     = $this->findNext([$bodyToken, T_SEMICOLON], $this->tokens[$stackPtr]['parenthesis_closer']);
             $hasBody = $this->tokens[$end]['code'] === $bodyToken;
-        }//end if
+        }
 
         if ($returnType !== '' && $nullableReturnType === true) {
             $returnType = '?' . $returnType;
@@ -1975,8 +1975,8 @@ class File
             case T_ABSTRACT:
                 $isAbstract = true;
                 break;
-            }//end switch
-        }//end for
+            }
+        }
 
         $type         = '';
         $typeToken    = false;
@@ -2022,7 +2022,7 @@ class File
             if ($type !== '' && $nullableType === true) {
                 $type = '?' . $type;
             }
-        }//end if
+        }
 
         return [
             'scope'           => $scope,
@@ -2095,7 +2095,7 @@ class File
                 $isReadonly = true;
                 break;
             }
-        }//end for
+        }
 
         return [
             'is_abstract' => $isAbstract,
@@ -2180,9 +2180,9 @@ class File
                             return true;
                         }
                     }
-                }//end if
-            }//end if
-        }//end if
+                }
+            }
+        }
 
         // Pass by reference in function calls and assign by reference in arrays.
         if ($this->tokens[$tokenBefore]['code'] === T_OPEN_PARENTHESIS
@@ -2208,8 +2208,8 @@ class File
                 if ($this->tokens[$nextSignificantAfter]['code'] === T_VARIABLE) {
                     return true;
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         return false;
     }
@@ -2331,7 +2331,7 @@ class File
                     break;
                 }
             }
-        }//end for
+        }
 
         return false;
     }
@@ -2397,7 +2397,7 @@ class File
             if ($local === true && $this->tokens[$i]['code'] === T_SEMICOLON) {
                 break;
             }
-        }//end for
+        }
 
         return false;
     }
@@ -2492,7 +2492,7 @@ class File
                         $inNestedExpression = true;
                         break;
                     }
-                }//end for
+                }
 
                 if ($inNestedExpression === false) {
                     // $prevMatch will now either be the scope opener or a match arrow.
@@ -2523,9 +2523,9 @@ class File
                     }
 
                     return $next;
-                }//end if
-            }//end if
-        }//end if
+                }
+            }
+        }
 
         $lastNotEmpty = $start;
 
@@ -2582,12 +2582,12 @@ class File
                 if ($start !== false) {
                     $i = $start;
                 }
-            }//end if
+            }
 
             if (isset(Tokens::EMPTY_TOKENS[$this->tokens[$i]['code']]) === false) {
                 $lastNotEmpty = $i;
             }
-        }//end for
+        }
 
         return 0;
     }
@@ -2647,8 +2647,8 @@ class File
                         $start = $nextMatchArrow;
                     }
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         $lastNotEmpty = $start;
         for ($i = $start; $i < $this->numTokens; $i++) {
@@ -2696,12 +2696,12 @@ class File
                 if ($end !== false) {
                     $i = $end;
                 }
-            }//end if
+            }
 
             if (isset(Tokens::EMPTY_TOKENS[$this->tokens[$i]['code']]) === false) {
                 $lastNotEmpty = $i;
             }
-        }//end for
+        }
 
         return ($this->numTokens - 1);
     }
@@ -2762,7 +2762,7 @@ class File
                     $foundToken = $i;
                 }
             }
-        }//end for
+        }
 
         return $foundToken;
     }

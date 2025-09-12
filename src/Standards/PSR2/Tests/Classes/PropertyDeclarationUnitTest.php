@@ -88,7 +88,7 @@ final class PropertyDeclarationUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 
@@ -116,6 +116,6 @@ final class PropertyDeclarationUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 }

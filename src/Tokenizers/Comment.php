@@ -155,7 +155,7 @@ class Comment
 
                 $stackPtr++;
             }
-        }//end foreach
+        }
 
         $tokens[$stackPtr] = $closeTag;
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
@@ -224,7 +224,7 @@ class Comment
                     $start   += strlen($space['content']);
                 }
             }
-        }//end if
+        }
 
         // Process the rest of the line.
         $eol = strpos($comment, $eolChar, $start);

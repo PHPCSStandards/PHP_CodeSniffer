@@ -119,7 +119,7 @@ class MultiLineConditionSniff implements Sniff
                         }
                     }
                 }
-            }//end if
+            }
 
             if ($tokens[$i]['line'] !== $prevLine) {
                 if ($tokens[$i]['line'] === $tokens[$closeBracket]['line']) {
@@ -130,10 +130,10 @@ class MultiLineConditionSniff implements Sniff
                         // Closing brace needs to be indented to the same level
                         // as the statement.
                         $expectedIndent = $statementIndent;
-                    }//end if
+                    }
                 } else {
                     $expectedIndent = ($statementIndent + $this->indent);
-                }//end if
+                }
 
                 if ($tokens[$i]['code'] === T_COMMENT
                     || isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[$i]['code']]) === true
@@ -197,11 +197,11 @@ class MultiLineConditionSniff implements Sniff
                                 }
                             }
                         }
-                    }//end if
-                }//end if
+                    }
+                }
 
                 $prevLine = $tokens[$i]['line'];
-            }//end if
+            }
 
             if (isset(Tokens::NAME_TOKENS[$tokens[$i]['code']]) === true) {
                 $next = $phpcsFile->findNext(T_WHITESPACE, ($i + 1), null, true);
@@ -213,7 +213,7 @@ class MultiLineConditionSniff implements Sniff
                     continue;
                 }
             }
-        }//end for
+        }
 
         // From here on, we are checking the spacing of the opening and closing
         // braces. If this IF statement does not use braces, we end here.

@@ -163,10 +163,10 @@ class UseDeclarationSniff implements Sniff
                         }
 
                         $phpcsFile->fixer->endChangeset();
-                    }//end if
-                }//end if
-            }//end if
-        }//end if
+                    }
+                }
+            }
+        }
 
         // Make sure this USE comes after the first namespace declaration.
         $prev = $phpcsFile->findPrevious(T_NAMESPACE, ($stackPtr - 1));
@@ -259,7 +259,7 @@ class UseDeclarationSniff implements Sniff
                     $phpcsFile->fixer->endChangeset();
                 }
             }
-        }//end if
+        }
     }
 
 

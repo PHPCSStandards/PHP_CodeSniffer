@@ -76,6 +76,6 @@ class CompoundNamespaceDepthSniff implements Sniff
 
                 $depth = 1;
             }
-        }//end for
+        }
     }
 }

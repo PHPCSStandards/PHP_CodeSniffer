@@ -75,7 +75,7 @@ class Junit implements Report
                     }
                 }
             }
-        }//end if
+        }
 
         $out->endElement();
         echo $out->flush();

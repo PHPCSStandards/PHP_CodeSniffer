@@ -230,7 +230,7 @@ class Ruleset
             }
 
             $sniffs = array_merge($sniffs, $this->processRuleset($standard));
-        }//end foreach
+        }
 
         // Ignore sniff restrictions if caching is on.
         if ($config->cache === true) {
@@ -326,7 +326,7 @@ class Ruleset
                 if ($currentStandard === null) {
                     break;
                 }
-            }//end if
+            }
 
             if (isset($this->deprecatedSniffs[$sniff]) === true) {
                 $sniff .= ' *';
@@ -334,7 +334,7 @@ class Ruleset
 
             $sniffsInStandard[] = $sniff;
             ++$lastCount;
-        }//end foreach
+        }
 
         if (count($this->deprecatedSniffs) > 0) {
             echo PHP_EOL . '* Sniffs marked with an asterisk are deprecated.' . PHP_EOL;
@@ -447,7 +447,7 @@ class Ruleset
             $message       .= '   ' . implode(PHP_EOL . '   ', explode(PHP_EOL, $wrapped));
 
             $messages[] = $message;
-        }//end foreach
+        }
 
         if (count($messages) === 0) {
             return;
@@ -585,7 +585,7 @@ class Ruleset
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
                 StatusWriter::write("=> included autoloader $autoloadPath", ($depth + 1));
             }
-        }//end foreach
+        }
 
         // Process custom sniff config settings.
         // Processing rules:
@@ -615,7 +615,7 @@ class Ruleset
             if ($applied === true && PHP_CODESNIFFER_VERBOSITY > 1) {
                 StatusWriter::write('=> set config value ' . $name . ': ' . (string) $config['value'], ($depth + 1));
             }
-        }//end foreach
+        }
 
         // Process custom command line arguments.
         // Processing rules:
@@ -683,7 +683,7 @@ class Ruleset
                     // Remember which settings we've seen.
                     $cleanedValue .= $flag;
                     $this->cliSettingsApplied[$cliSettingName] = $depth;
-                }//end foreach
+                }
 
                 if ($cleanedValue === '') {
                     // No flags found which should be applied.
@@ -691,14 +691,14 @@ class Ruleset
                 }
 
                 $argString = '-' . $cleanedValue;
-            }//end if
+            }
 
             $cliArgs[] = $argString;
 
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
                 StatusWriter::write("=> set command line value $argString", ($depth + 1));
             }
-        }//end foreach
+        }
 
         foreach ($ruleset->rule as $rule) {
             if (isset($rule['ref']) === false
@@ -744,8 +744,8 @@ class Ruleset
                             StatusWriter::write('Excluding sniff "' . $sniffCode . '" except for "' . $parts[3] . '"', ($depth + 2));
                         }
                     }
-                }//end if
-            }//end if
+                }
+            }
 
             if (isset($rule->exclude) === true) {
                 foreach ($rule->exclude as $exclude) {
@@ -780,11 +780,11 @@ class Ruleset
                             $this->expandRulesetReference((string) $exclude['name'], $rulesetDir, ($depth + 1))
                         );
                     }
-                }//end foreach
-            }//end if
+                }
+            }
 
             $this->processRule($rule, $newSniffs, $depth);
-        }//end foreach
+        }
 
         // Set custom php ini values as CLI args.
         foreach ($ruleset->{'ini'} as $arg) {
@@ -811,7 +811,7 @@ class Ruleset
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
                 StatusWriter::write("=> set PHP ini value $name to $value", ($depth + 1));
             }
-        }//end foreach
+        }
 
         if (empty($this->config->files) === true) {
             // Process hard-coded file paths.
@@ -933,7 +933,7 @@ class Ruleset
             }
 
             $sniffs[] = $path;
-        }//end foreach
+        }
 
         return $sniffs;
     }
@@ -1080,8 +1080,8 @@ class Ruleset
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
                     StatusWriter::write('=> ' . Common::stripBasepath($ref, $this->config->basepath), ($depth + 2));
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         if (is_dir($ref) === true) {
             if (is_file($ref . DIRECTORY_SEPARATOR . 'ruleset.xml') === true) {
@@ -1117,7 +1117,7 @@ class Ruleset
 
                 return $this->processRuleset($ref, ($depth + 2));
             }
-        }//end if
+        }
     }
 
 
@@ -1202,7 +1202,7 @@ class Ruleset
                         StatusWriter::write($statusMessage, ($depth + 2));
                     }
                 }
-            }//end if
+            }
 
             // Custom message.
             if (isset($rule->message) === true
@@ -1318,9 +1318,9 @@ class Ruleset
 
                             StatusWriter::write($statusMessage, ($depth + 2));
                         }
-                    }//end if
-                }//end foreach
-            }//end if
+                    }
+                }
+            }
 
             // Ignore patterns.
             foreach ($rule->{'exclude-pattern'} as $pattern) {
@@ -1345,7 +1345,7 @@ class Ruleset
 
                     StatusWriter::write($statusMessage . ': ' . (string) $pattern, ($depth + 2));
                 }
-            }//end foreach
+            }
 
             // Include patterns.
             foreach ($rule->{'include-pattern'} as $pattern) {
@@ -1370,8 +1370,8 @@ class Ruleset
 
                     StatusWriter::write($statusMessage . ': ' . (string) $pattern, ($depth + 2));
                 }
-            }//end foreach
-        }//end foreach
+            }
+        }
     }
 
 
@@ -1489,14 +1489,14 @@ class Ruleset
                     $this->msgCache->add($message, MessageCollector::ERROR);
                     continue;
                 }
-            }//end if
+            }
 
             $listeners[$className] = $className;
 
             if (PHP_CODESNIFFER_VERBOSITY > 2) {
                 StatusWriter::write("Registered $className");
             }
-        }//end foreach
+        }
 
         $this->sniffs = $listeners;
     }
@@ -1586,7 +1586,7 @@ class Ruleset
                     ];
                 }
             }
-        }//end foreach
+        }
     }
 
 
@@ -1707,7 +1707,7 @@ class Ruleset
             if ($valueLc === 'null') {
                 return null;
             }
-        }//end if
+        }
 
         return $value;
     }

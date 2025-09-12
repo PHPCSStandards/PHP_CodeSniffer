@@ -113,7 +113,7 @@ class UnusedFunctionParameterSniff implements Sniff
                     $errorCode .= 'InImplementedInterface';
                 }
             }
-        }//end if
+        }
 
         $params       = [];
         $methodParams = $phpcsFile->getMethodParameters($stackPtr);
@@ -189,8 +189,8 @@ class UnusedFunctionParameterSniff implements Sniff
                         // There is a return <token>.
                         return;
                     }
-                }//end if
-            }//end if
+                }
+            }
 
             $foundContent = true;
 
@@ -240,8 +240,8 @@ class UnusedFunctionParameterSniff implements Sniff
                         unset($params[$varContent]);
                     }
                 }
-            }//end if
-        }//end for
+            }
+        }
 
         if ($foundContent === true && count($params) > 0) {
             $error = 'The method parameter %s is never used';
@@ -283,7 +283,7 @@ class UnusedFunctionParameterSniff implements Sniff
                         ];
                     }
                 }
-            }//end for
+            }
 
             if (count($errorInfo) > 0) {
                 $errorInfo = array_reverse($errorInfo);
@@ -296,6 +296,6 @@ class UnusedFunctionParameterSniff implements Sniff
                     $phpcsFile->addWarning($error, $info['position'], $info['errorcode'], $data);
                 }
             }
-        }//end if
+        }
     }
 }

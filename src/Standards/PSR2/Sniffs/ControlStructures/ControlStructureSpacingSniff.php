@@ -105,7 +105,7 @@ class ControlStructureSpacingSniff implements Sniff
                     }
                 }
             }
-        }//end if
+        }
 
         $prev = $phpcsFile->findPrevious(T_WHITESPACE, ($parenCloser - 1), $parenOpener, true);
         if ($tokens[$prev]['line'] === $tokens[$parenCloser]['line']) {
@@ -132,6 +132,6 @@ class ControlStructureSpacingSniff implements Sniff
                     }
                 }
             }
-        }//end if
+        }
     }
 }

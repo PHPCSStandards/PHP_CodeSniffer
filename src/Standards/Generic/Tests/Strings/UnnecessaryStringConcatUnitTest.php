@@ -45,7 +45,7 @@ final class UnnecessaryStringConcatUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

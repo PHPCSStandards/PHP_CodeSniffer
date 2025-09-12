@@ -324,7 +324,7 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
                 // For the purposes of this test, presume it was intended as an intersection.
                 ++$intersectionCount;
             }
-        }//end for
+        }
 
         $this->assertGreaterThanOrEqual(1, $intersectionCount, 'Did not find an intersection "&" between the DNF type parentheses');
 

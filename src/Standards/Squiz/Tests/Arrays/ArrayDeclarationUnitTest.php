@@ -239,7 +239,7 @@ final class ArrayDeclarationUnitTest extends AbstractSniffTestCase
             return [8 => 1];
         default:
             return [];
-        }//end switch
+        }
     }
 
 

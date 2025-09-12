@@ -153,8 +153,8 @@ class SwitchDeclarationSniff implements Sniff
 
                             $phpcsFile->fixer->endChangeset();
                         }
-                    }//end if
-                }//end if
+                    }
+                }
 
                 if ($tokens[$nextCloser]['scope_condition'] === $nextCase) {
                     // Only need to check some things once, even if the
@@ -181,8 +181,8 @@ class SwitchDeclarationSniff implements Sniff
                                 }
                             }
                         }
-                    }//end if
-                }//end if
+                    }
+                }
             } else {
                 $error = strtoupper($type) . ' statements must be defined using a colon';
                 if ($tokens[$opener]['code'] === T_SEMICOLON) {
@@ -194,7 +194,7 @@ class SwitchDeclarationSniff implements Sniff
                     // Probably a case/default statement with colon + curly braces.
                     $phpcsFile->addError($error, $nextCase, 'WrongOpener' . $type);
                 }
-            }//end if
+            }
 
             // We only want cases from here on in.
             if ($type !== 'case') {
@@ -219,7 +219,7 @@ class SwitchDeclarationSniff implements Sniff
                     }
                 }
             }
-        }//end while
+        }
     }
 
 
@@ -375,7 +375,7 @@ class SwitchDeclarationSniff implements Sniff
                         if ($hasTerminator === false) {
                             return false;
                         }
-                    }//end while
+                    }
 
                     // If we have not encountered a DEFAULT block by now, we cannot
                     // be sure that the whole statement terminates in every case.
@@ -386,7 +386,7 @@ class SwitchDeclarationSniff implements Sniff
                     return $hasTerminator;
                 } else {
                     return false;
-                }//end if
+                }
             } while ($currentCloser !== false && $tokens[$currentCloser]['code'] === T_CLOSE_CURLY_BRACKET);
 
             return true;
@@ -397,7 +397,7 @@ class SwitchDeclarationSniff implements Sniff
             if (isset(self::CASE_TERMINATING_TOKENS[$tokens[$terminator]['code']]) === true) {
                 return $terminator;
             }
-        }//end if
+        }
 
         return false;
     }

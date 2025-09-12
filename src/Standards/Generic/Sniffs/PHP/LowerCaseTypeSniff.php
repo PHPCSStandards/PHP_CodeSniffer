@@ -149,10 +149,10 @@ class LowerCaseTypeSniff implements Sniff
                                 $this->processType($phpcsFile, $startOfType, $type, $error, $errorCode);
                             }
                         }
-                    }//end if
+                    }
 
                     continue;
-                }//end if
+                }
 
                 if ($tokens[$i]['code'] !== T_VARIABLE) {
                     continue;
@@ -185,10 +185,10 @@ class LowerCaseTypeSniff implements Sniff
                         $this->processType($phpcsFile, $props['type_token'], $type, $error, $errorCode);
                     }
                 }
-            }//end for
+            }
 
             return;
-        }//end if
+        }
 
         /*
          * Check function return type.
@@ -247,7 +247,7 @@ class LowerCaseTypeSniff implements Sniff
                     $this->processType($phpcsFile, $param['type_hint_token'], $typeHint, $error, $errorCode);
                 }
             }
-        }//end foreach
+        }
     }
 
 
@@ -302,7 +302,7 @@ class LowerCaseTypeSniff implements Sniff
 
             ++$typeTokenCount;
             $type .= $tokens[$i]['content'];
-        }//end for
+        }
 
         // Handle type at end of type string.
         if ($typeTokenCount === 1

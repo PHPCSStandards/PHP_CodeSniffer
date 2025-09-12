@@ -113,7 +113,7 @@ class AssignmentInConditionSniff implements Sniff
 
             $opener = $token['parenthesis_opener'];
             $closer = $token['parenthesis_closer'];
-        }//end if
+        }
 
         $startPos = $opener;
 

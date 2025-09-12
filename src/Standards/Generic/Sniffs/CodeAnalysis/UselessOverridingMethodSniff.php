@@ -149,7 +149,7 @@ class UselessOverridingMethodSniff implements Sniff
             if ($parenthesisCount === 0) {
                 break;
             }
-        }//end for
+        }
 
         $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($next + 1), null, true);
         if ($tokens[$next]['code'] !== T_SEMICOLON && $tokens[$next]['code'] !== T_CLOSE_TAG) {

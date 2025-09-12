@@ -117,7 +117,7 @@ final class DisallowTabIndentUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

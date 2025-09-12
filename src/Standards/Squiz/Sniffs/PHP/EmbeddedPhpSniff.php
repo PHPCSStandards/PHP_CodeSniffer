@@ -94,7 +94,7 @@ class EmbeddedPhpSniff implements Sniff
                 $this->reportEmptyTagSet($phpcsFile, $stackPtr, $closingTag);
                 return;
             }
-        }//end if
+        }
 
         if ($tokens[$firstContent]['line'] === $tokens[$stackPtr]['line']) {
             $error = 'Opening PHP tag must be on a line by itself';
@@ -142,7 +142,7 @@ class EmbeddedPhpSniff implements Sniff
 
                         $phpcsFile->fixer->endChangeset();
                     }
-                }//end if
+                }
 
                 $indent        = $this->calculateLineIndent($phpcsFile, $stackPtr);
                 $contentColumn = ($tokens[$firstContent]['column'] - 1);
@@ -162,8 +162,8 @@ class EmbeddedPhpSniff implements Sniff
                         }
                     }
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         $lastContentBeforeBlock = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
         if ($tokens[$lastContentBeforeBlock]['line'] === $tokens[$stackPtr]['line']
@@ -188,7 +188,7 @@ class EmbeddedPhpSniff implements Sniff
                 }
 
                 $phpcsFile->fixer->endChangeset();
-            }//end if
+            }
         } else {
             // Find the first token on the first non-empty line we find.
             for ($first = ($lastContentBeforeBlock - 1); $first > 0; $first--) {
@@ -214,7 +214,7 @@ class EmbeddedPhpSniff implements Sniff
                     $phpcsFile->fixer->replaceToken(($stackPtr - 1), str_repeat(' ', $expected));
                 }
             }
-        }//end if
+        }
 
         if ($closingTag === false) {
             return;
@@ -248,7 +248,7 @@ class EmbeddedPhpSniff implements Sniff
                 $phpcsFile->fixer->addContentBefore($closingTag, str_repeat(' ', $closerIndent));
                 $phpcsFile->fixer->addNewlineBefore($closingTag);
                 $phpcsFile->fixer->endChangeset();
-            }//end if
+            }
         } elseif ($firstContentAfterBlock !== false
             && $tokens[$firstContentAfterBlock]['line'] === $tokens[$closingTag]['line']
         ) {
@@ -281,8 +281,8 @@ class EmbeddedPhpSniff implements Sniff
                 }
 
                 $phpcsFile->fixer->endChangeset();
-            }//end if
-        }//end if
+            }
+        }
 
         $next = $phpcsFile->findNext($this->register(), ($closingTag + 1));
         if ($next === false) {
@@ -317,7 +317,7 @@ class EmbeddedPhpSniff implements Sniff
 
                 $phpcsFile->fixer->endChangeset();
             }
-        }//end if
+        }
     }
 
 
@@ -395,8 +395,8 @@ class EmbeddedPhpSniff implements Sniff
                     $data  = [$statementCount];
                     $phpcsFile->addError($error, $stackPtr, 'MultipleStatements', $data);
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         $trailingSpace = 0;
         if ($tokens[($closeTag - 1)]['code'] === T_WHITESPACE) {

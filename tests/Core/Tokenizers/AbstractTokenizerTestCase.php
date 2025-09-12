@@ -66,7 +66,7 @@ abstract class AbstractTokenizerTestCase extends TestCase
 
             $this->phpcsFile = new LocalFile($pathToTestFile, $ruleset, $config);
             $this->phpcsFile->parse();
-        }//end if
+        }
     }
 
 

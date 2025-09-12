@@ -106,7 +106,7 @@ class SubversionPropertiesSniff implements Sniff
                 ];
                 $phpcsFile->addError($error, $stackPtr, 'NoMatch', $data);
             }
-        }//end foreach
+        }
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
@@ -175,11 +175,11 @@ class SubversionPropertiesSniff implements Sniff
                     fgetc($handle);
 
                     $properties[$key] = $value;
-                }//end while
+                }
 
                 fclose($handle);
-            }//end if
-        }//end foreach
+            }
+        }
 
         if ($foundPath === false) {
             return null;

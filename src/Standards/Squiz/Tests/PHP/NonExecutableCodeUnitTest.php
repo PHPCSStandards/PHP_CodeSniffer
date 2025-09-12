@@ -117,6 +117,6 @@ final class NonExecutableCodeUnitTest extends AbstractSniffTestCase
             ];
         default:
             return [];
-        }//end switch
+        }
     }
 }

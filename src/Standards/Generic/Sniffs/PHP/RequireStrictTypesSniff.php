@@ -71,7 +71,7 @@ class RequireStrictTypesSniff implements Sniff
 
                 $next = $phpcsFile->findNext(T_COMMA, ($next + 1), $tokens[$declare]['parenthesis_closer']);
             } while ($next !== false && $next < $tokens[$declare]['parenthesis_closer']);
-        }//end if
+        }
 
         if ($found === false) {
             $error = 'Missing required strict_types declaration';

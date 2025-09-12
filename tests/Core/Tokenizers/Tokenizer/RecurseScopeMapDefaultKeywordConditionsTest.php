@@ -265,7 +265,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
                 $tokens[$closer]['scope_closer'],
                 sprintf('T_DEFAULT closer scope closer token incorrect. Marker: %s.', $closerMarker)
             );
-        }//end if
+        }
 
         if (($opener + 1) !== $closer) {
             $end = $closer;
@@ -280,7 +280,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
                     sprintf('T_DEFAULT condition not added for token belonging to the T_DEFAULT structure. Marker: %s.', $testMarker)
                 );
             }
-        }//end if
+        }
     }
 
 

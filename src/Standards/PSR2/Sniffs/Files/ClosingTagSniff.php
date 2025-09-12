@@ -77,7 +77,7 @@ class ClosingTagSniff implements Sniff
             $phpcsFile->recordMetric($stackPtr, 'PHP closing tag at end of PHP-only file', 'yes');
         } else {
             $phpcsFile->recordMetric($stackPtr, 'PHP closing tag at end of PHP-only file', 'no');
-        }//end if
+        }
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;

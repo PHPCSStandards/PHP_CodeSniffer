@@ -225,14 +225,14 @@ class InlineControlStructureSniff implements Sniff
                     if ($next !== false && $tokens[$next]['code'] === T_SEMICOLON) {
                         $end = $next;
                     }
-                }//end if
+                }
 
                 if ($tokens[$end]['code'] !== T_END_HEREDOC
                     && $tokens[$end]['code'] !== T_END_NOWDOC
                 ) {
                     break;
                 }
-            }//end if
+            }
 
             if (isset($tokens[$end]['parenthesis_closer']) === true) {
                 $end          = $tokens[$end]['parenthesis_closer'];
@@ -243,7 +243,7 @@ class InlineControlStructureSniff implements Sniff
             if ($tokens[$end]['code'] !== T_WHITESPACE) {
                 $lastNonEmpty = $end;
             }
-        }//end for
+        }
 
         if ($end === $phpcsFile->numTokens) {
             $end = $lastNonEmpty;
@@ -313,7 +313,7 @@ class InlineControlStructureSniff implements Sniff
             }
 
             $phpcsFile->fixer->addContent($endToken, $addedContent);
-        }//end if
+        }
 
         $phpcsFile->fixer->endChangeset();
     }

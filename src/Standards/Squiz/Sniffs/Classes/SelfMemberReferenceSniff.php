@@ -113,9 +113,9 @@ class SelfMemberReferenceSniff extends AbstractScopeSniff
 
                     // Fix potential whitespace issues in the next loop.
                     return;
-                }//end if
-            }//end if
-        }//end if
+                }
+            }
+        }
 
         if ($tokens[($stackPtr - 1)]['code'] === T_WHITESPACE) {
             $found = $tokens[($stackPtr - 1)]['length'];
