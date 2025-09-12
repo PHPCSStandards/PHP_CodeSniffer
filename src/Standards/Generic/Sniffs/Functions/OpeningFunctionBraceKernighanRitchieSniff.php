@@ -142,7 +142,7 @@ class OpeningFunctionBraceKernighanRitchieSniff implements Sniff
         $spacing = $tokens[($openingBrace - 1)]['content'];
         if ($tokens[($openingBrace - 1)]['code'] !== T_WHITESPACE) {
             $length = 0;
-        } else if ($spacing === "\t") {
+        } elseif ($spacing === "\t") {
             // Tab without tab-width set, so no tab replacement has taken place.
             $length = '\t';
         } else {

@@ -581,7 +581,7 @@ class Ruleset
 
             if ($relativePath !== false && is_file($relativePath) === true) {
                 $autoloadPath = $relativePath;
-            } else if (is_file($autoloadPath) === false) {
+            } elseif (is_file($autoloadPath) === false) {
                 throw new RuntimeException('ERROR: The specified autoload file "' . $autoload . '" does not exist');
             }
 
@@ -737,7 +737,7 @@ class Ruleset
                         StatusWriter::write('* disabling sniff exclusion for specific message code *', ($depth + 2));
                         StatusWriter::write('=> severity set to 5', ($depth + 2));
                     }
-                } else if (empty($newSniffs) === false) {
+                } elseif (empty($newSniffs) === false) {
                     $newSniff = $newSniffs[0];
                     if (in_array($newSniff, $ownSniffs, true) === false) {
                         // Including a sniff that hasn't been included higher up, but
@@ -1028,7 +1028,7 @@ class Ruleset
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
                     StatusWriter::write('=> ' . Common::stripBasepath($ref, $this->config->basepath), ($depth + 2));
                 }
-            } else if (is_dir($ref) === false) {
+            } elseif (is_dir($ref) === false) {
                 // Work out the sniff path.
                 $sepPos = strpos($ref, DIRECTORY_SEPARATOR);
                 if ($sepPos !== false) {
@@ -1040,7 +1040,7 @@ class Ruleset
                     if (count($parts) === 1) {
                         // A whole standard?
                         $path = '';
-                    } else if (count($parts) === 2) {
+                    } elseif (count($parts) === 2) {
                         // A directory of sniffs?
                         $path = DIRECTORY_SEPARATOR . 'Sniffs' . DIRECTORY_SEPARATOR . $parts[1];
                     } else {
@@ -1249,7 +1249,7 @@ class Ruleset
                         $this->ruleset[$code] = [
                             'properties' => [],
                         ];
-                    } else if (isset($this->ruleset[$code]['properties']) === false) {
+                    } elseif (isset($this->ruleset[$code]['properties']) === false) {
                         $this->ruleset[$code]['properties'] = [];
                     }
 

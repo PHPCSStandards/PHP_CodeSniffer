@@ -106,7 +106,7 @@ class SpaceAfterCastSniff implements Sniff
         $found = 0;
         if ($tokens[$stackPtr]['line'] !== $tokens[$nextNonEmpty]['line']) {
             $found = 'newline';
-        } else if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
+        } elseif ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
             $found = $tokens[($stackPtr + 1)]['length'];
         }
 
@@ -127,7 +127,7 @@ class SpaceAfterCastSniff implements Sniff
         if ($this->spacing !== 0) {
             if ($found === 0) {
                 $errorCode = 'NoSpace';
-            } else if ($found !== 'newline' && $found < $this->spacing) {
+            } elseif ($found !== 'newline' && $found < $this->spacing) {
                 $errorCode = 'TooLittleSpace';
             }
         }

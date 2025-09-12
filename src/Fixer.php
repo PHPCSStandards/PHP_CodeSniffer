@@ -201,7 +201,7 @@ class Fixer
             if ($this->numFixes === 0 && $this->inConflict === false) {
                 // Nothing left to do.
                 break;
-            } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
+            } elseif (PHP_CODESNIFFER_VERBOSITY > 1) {
                 StatusWriter::forceWrite("* fixed $this->numFixes violations, starting loop " . ($this->loops + 1) . ' *', 1);
             }
         }//end while
@@ -454,7 +454,7 @@ class Fixer
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
                 StatusWriter::forceWrite('=> Changeset failed to apply', 1);
             }
-        } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
+        } elseif (PHP_CODESNIFFER_VERBOSITY > 1) {
             $fixes = count($this->changeset);
             StatusWriter::forceWrite("=> Changeset ended: $fixes changes applied", 1);
         }

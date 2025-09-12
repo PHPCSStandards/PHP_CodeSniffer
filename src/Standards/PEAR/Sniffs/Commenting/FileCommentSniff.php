@@ -132,12 +132,12 @@ class FileCommentSniff implements Sniff
         if ($tokens[$commentStart]['code'] === T_CLOSE_TAG) {
             // We are only interested if this is the first open tag.
             return $phpcsFile->numTokens;
-        } else if ($tokens[$commentStart]['code'] === T_COMMENT) {
+        } elseif ($tokens[$commentStart]['code'] === T_COMMENT) {
             $error = 'You must use "/**" style comments for a file comment';
             $phpcsFile->addError($error, $errorToken, 'WrongStyle');
             $phpcsFile->recordMetric($stackPtr, 'File has doc comment', 'yes');
             return $phpcsFile->numTokens;
-        } else if ($commentStart === false
+        } elseif ($commentStart === false
             || $tokens[$commentStart]['code'] !== T_DOC_COMMENT_OPEN_TAG
         ) {
             $phpcsFile->addError('Missing file doc comment', $errorToken, 'Missing');
@@ -196,7 +196,7 @@ class FileCommentSniff implements Sniff
         for ($i = ($commentStart + 1); $i < $commentEnd; $i++) {
             if ($tokens[$i]['code'] === T_DOC_COMMENT_TAG) {
                 break;
-            } else if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING
+            } elseif ($tokens[$i]['code'] === T_DOC_COMMENT_STRING
                 && strstr(strtolower($tokens[$i]['content']), 'php version') !== false
             ) {
                 $found = true;

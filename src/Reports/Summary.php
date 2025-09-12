@@ -108,7 +108,7 @@ class Summary implements Report
 
                 if (empty($pathPartsA) === false && empty($pathPartsB) === true) {
                     return 1;
-                } else if (empty($pathPartsA) === true && empty($pathPartsB) === false) {
+                } elseif (empty($pathPartsA) === true && empty($pathPartsB) === false) {
                     return -1;
                 } else {
                     return strcasecmp($partA, $partB);

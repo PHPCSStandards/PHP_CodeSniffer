@@ -144,9 +144,9 @@ class LineLengthSniff implements Sniff
         // Record metrics for common line length groupings.
         if ($lineLength <= 80) {
             $phpcsFile->recordMetric($stackPtr, 'Line length', '80 or less');
-        } else if ($lineLength <= 120) {
+        } elseif ($lineLength <= 120) {
             $phpcsFile->recordMetric($stackPtr, 'Line length', '81-120');
-        } else if ($lineLength <= 150) {
+        } elseif ($lineLength <= 150) {
             $phpcsFile->recordMetric($stackPtr, 'Line length', '121-150');
         } else {
             $phpcsFile->recordMetric($stackPtr, 'Line length', '151 or more');
@@ -185,7 +185,7 @@ class LineLengthSniff implements Sniff
 
             $error = 'Line exceeds maximum limit of %s characters; contains %s characters';
             $phpcsFile->addError($error, $stackPtr, 'MaxExceeded', $data);
-        } else if ($lineLength > $this->lineLimit) {
+        } elseif ($lineLength > $this->lineLimit) {
             $data = [
                 $this->lineLimit,
                 $lineLength,

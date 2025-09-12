@@ -85,7 +85,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
             if ($tokens[$prevNonEmpty]['line'] !== $tokens[$stackPtr]['line']) {
                 $spaces    = 'newline';
                 $errorCode = 'NewlineBeforeKeyword';
-            } else if ($tokens[($stackPtr - 1)]['code'] === T_WHITESPACE) {
+            } elseif ($tokens[($stackPtr - 1)]['code'] === T_WHITESPACE) {
                 $spaces = $tokens[($stackPtr - 1)]['length'];
             }
 
@@ -153,7 +153,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
             // Spacing of the keyword.
             if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
                 $gap = 0;
-            } else if ($tokens[($stackPtr + 2)]['line'] !== $tokens[$stackPtr]['line']) {
+            } elseif ($tokens[($stackPtr + 2)]['line'] !== $tokens[$stackPtr]['line']) {
                 $gap = 'newline';
             } else {
                 $gap = $tokens[($stackPtr + 1)]['length'];
@@ -290,7 +290,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
 
         if ($className !== null) {
             $start = $className;
-        } else if (isset($tokens[$stackPtr]['parenthesis_closer']) === true) {
+        } elseif (isset($tokens[$stackPtr]['parenthesis_closer']) === true) {
             $start = $tokens[$stackPtr]['parenthesis_closer'];
         } else {
             $start = $stackPtr;
@@ -344,7 +344,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                         $phpcsFile->fixer->addNewline($prev);
                         $phpcsFile->fixer->endChangeset();
                     }
-                } else if ((isset(Tokens::COMMENT_TOKENS[$tokens[$prev]['code']]) === false
+                } elseif ((isset(Tokens::COMMENT_TOKENS[$tokens[$prev]['code']]) === false
                     && $tokens[$prev]['line'] !== ($tokens[$className]['line'] - 1))
                     || $tokens[$prev]['line'] === $tokens[$className]['line']
                 ) {

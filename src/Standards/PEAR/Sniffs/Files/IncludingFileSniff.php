@@ -103,7 +103,7 @@ class IncludingFileSniff implements Sniff
                 if ($fix === true) {
                     $phpcsFile->fixer->replaceToken($stackPtr, 'include_once');
                 }
-            } else if ($tokenCode === T_REQUIRE) {
+            } elseif ($tokenCode === T_REQUIRE) {
                 $error  = 'File is being conditionally included; ';
                 $error .= 'use "include" instead';
                 $fix    = $phpcsFile->addFixableError($error, $stackPtr, 'UseInclude');
@@ -120,7 +120,7 @@ class IncludingFileSniff implements Sniff
                 if ($fix === true) {
                     $phpcsFile->fixer->replaceToken($stackPtr, 'require_once');
                 }
-            } else if ($tokenCode === T_INCLUDE) {
+            } elseif ($tokenCode === T_INCLUDE) {
                 $error  = 'File is being unconditionally included; ';
                 $error .= 'use "require" instead';
                 $fix    = $phpcsFile->addFixableError($error, $stackPtr, 'UseRequire');

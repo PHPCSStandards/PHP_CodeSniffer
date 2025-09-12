@@ -398,7 +398,7 @@ class File
                     $this->fixableErrorCount = 0;
                     $this->fixableWarningCount = 0;
                     return;
-                } else if (substr($commentTextLower, 0, 9) === 'phpcs:set'
+                } elseif (substr($commentTextLower, 0, 9) === 'phpcs:set'
                     || substr($commentTextLower, 0, 10) === '@phpcs:set'
                 ) {
                     if (isset($token['sniffCode']) === true) {
@@ -984,7 +984,7 @@ class File
                 if (isset($this->configCache['includePatterns'][$checkCode]) === true) {
                     $patterns  = $this->configCache['includePatterns'][$checkCode];
                     $excluding = false;
-                } else if (isset($this->configCache['ignorePatterns'][$checkCode]) === true) {
+                } elseif (isset($this->configCache['ignorePatterns'][$checkCode]) === true) {
                     $patterns  = $this->configCache['ignorePatterns'][$checkCode];
                     $excluding = true;
                 }
@@ -1110,7 +1110,7 @@ class File
         if (isset($this->metrics[$metric]) === false) {
             $this->metrics[$metric] = ['values' => [$value => 1]];
             $this->metricTokens[$metric][$stackPtr] = true;
-        } else if (isset($this->metricTokens[$metric][$stackPtr]) === false) {
+        } elseif (isset($this->metricTokens[$metric][$stackPtr]) === false) {
             $this->metricTokens[$metric][$stackPtr] = true;
             if (isset($this->metrics[$metric]['values'][$value]) === false) {
                 $this->metrics[$metric]['values'][$value] = 1;
@@ -1336,7 +1336,7 @@ class File
         if (isset($this->tokens[$stackPtr]['parenthesis_opener']) === true) {
             // For functions, stop searching at the parenthesis opener.
             $stopPoint = $this->tokens[$stackPtr]['parenthesis_opener'];
-        } else if (isset($this->tokens[$stackPtr]['scope_opener']) === true) {
+        } elseif (isset($this->tokens[$stackPtr]['scope_opener']) === true) {
             // For OO tokens, stop searching at the open curly.
             $stopPoint = $this->tokens[$stackPtr]['scope_opener'];
         }
@@ -2347,7 +2347,7 @@ class File
             if ($found === true) {
                 if ($value === null) {
                     return $i;
-                } else if ($this->tokens[$i]['content'] === $value) {
+                } elseif ($this->tokens[$i]['content'] === $value) {
                     return $i;
                 }
             }
@@ -2357,15 +2357,15 @@ class File
                     && $i === $this->tokens[$i]['scope_closer']
                 ) {
                     $i = $this->tokens[$i]['scope_opener'];
-                } else if (isset($this->tokens[$i]['bracket_opener']) === true
+                } elseif (isset($this->tokens[$i]['bracket_opener']) === true
                     && $i === $this->tokens[$i]['bracket_closer']
                 ) {
                     $i = $this->tokens[$i]['bracket_opener'];
-                } else if (isset($this->tokens[$i]['parenthesis_opener']) === true
+                } elseif (isset($this->tokens[$i]['parenthesis_opener']) === true
                     && $i === $this->tokens[$i]['parenthesis_closer']
                 ) {
                     $i = $this->tokens[$i]['parenthesis_opener'];
-                } else if ($this->tokens[$i]['code'] === T_SEMICOLON) {
+                } elseif ($this->tokens[$i]['code'] === T_SEMICOLON) {
                     break;
                 }
             }
@@ -2428,7 +2428,7 @@ class File
             if ($found === true) {
                 if ($value === null) {
                     return $i;
-                } else if ($this->tokens[$i]['content'] === $value) {
+                } elseif ($this->tokens[$i]['content'] === $value) {
                     return $i;
                 }
             }
@@ -2613,11 +2613,11 @@ class File
                 && $i === $this->tokens[$i]['bracket_closer']
             ) {
                 $i = $this->tokens[$i]['bracket_opener'];
-            } else if (isset($this->tokens[$i]['parenthesis_opener']) === true
+            } elseif (isset($this->tokens[$i]['parenthesis_opener']) === true
                 && $i === $this->tokens[$i]['parenthesis_closer']
             ) {
                 $i = $this->tokens[$i]['parenthesis_opener'];
-            } else if ($this->tokens[$i]['code'] === T_CLOSE_USE_GROUP) {
+            } elseif ($this->tokens[$i]['code'] === T_CLOSE_USE_GROUP) {
                 $start = $this->findPrevious(T_OPEN_USE_GROUP, ($i - 1));
                 if ($start !== false) {
                     $i = $start;
@@ -2724,15 +2724,15 @@ class File
                 }
 
                 $i = $this->tokens[$i]['scope_closer'];
-            } else if (isset($this->tokens[$i]['bracket_closer']) === true
+            } elseif (isset($this->tokens[$i]['bracket_closer']) === true
                 && $i === $this->tokens[$i]['bracket_opener']
             ) {
                 $i = $this->tokens[$i]['bracket_closer'];
-            } else if (isset($this->tokens[$i]['parenthesis_closer']) === true
+            } elseif (isset($this->tokens[$i]['parenthesis_closer']) === true
                 && $i === $this->tokens[$i]['parenthesis_opener']
             ) {
                 $i = $this->tokens[$i]['parenthesis_closer'];
-            } else if ($this->tokens[$i]['code'] === T_OPEN_USE_GROUP) {
+            } elseif ($this->tokens[$i]['code'] === T_OPEN_USE_GROUP) {
                 $end = $this->findNext(T_CLOSE_USE_GROUP, ($i + 1));
                 if ($end !== false) {
                     $i = $end;
@@ -2800,7 +2800,7 @@ class File
             if ($found === true) {
                 if ($value === null) {
                     $foundToken = $i;
-                } else if ($this->tokens[$i]['content'] === $value) {
+                } elseif ($this->tokens[$i]['content'] === $value) {
                     $foundToken = $i;
                 }
             }

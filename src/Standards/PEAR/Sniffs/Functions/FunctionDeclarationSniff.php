@@ -69,7 +69,7 @@ class FunctionDeclarationSniff implements Sniff
             // Must be one space after the FUNCTION keyword.
             if ($tokens[($stackPtr + 1)]['content'] === $phpcsFile->eolChar) {
                 $spaces = 'newline';
-            } else if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
+            } elseif ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
                 $spaces = $tokens[($stackPtr + 1)]['length'];
             } else {
                 $spaces = 0;
@@ -100,7 +100,7 @@ class FunctionDeclarationSniff implements Sniff
             if ($methodName !== '') {
                 if ($tokens[($openBracket - 1)]['content'] === $phpcsFile->eolChar) {
                     $spaces = 'newline';
-                } else if ($tokens[($openBracket - 1)]['code'] === T_WHITESPACE) {
+                } elseif ($tokens[($openBracket - 1)]['code'] === T_WHITESPACE) {
                     $spaces = $tokens[($openBracket - 1)]['length'];
                 } else {
                     $spaces = 0;
@@ -121,7 +121,7 @@ class FunctionDeclarationSniff implements Sniff
                     if ($end !== false) {
                         if ($tokens[($end - 1)]['content'] === $phpcsFile->eolChar) {
                             $spaces = 'newline';
-                        } else if ($tokens[($end - 1)]['code'] === T_WHITESPACE) {
+                        } elseif ($tokens[($end - 1)]['code'] === T_WHITESPACE) {
                             $spaces = $tokens[($end - 1)]['length'];
                         } else {
                             $spaces = 0;
@@ -146,7 +146,7 @@ class FunctionDeclarationSniff implements Sniff
             if ($use !== false) {
                 if ($tokens[($use + 1)]['code'] !== T_WHITESPACE) {
                     $length = 0;
-                } else if ($tokens[($use + 1)]['content'] === "\t") {
+                } elseif ($tokens[($use + 1)]['content'] === "\t") {
                     $length = '\t';
                 } else {
                     $length = $tokens[($use + 1)]['length'];
@@ -167,7 +167,7 @@ class FunctionDeclarationSniff implements Sniff
 
                 if ($tokens[($use - 1)]['code'] !== T_WHITESPACE) {
                     $length = 0;
-                } else if ($tokens[($use - 1)]['content'] === "\t") {
+                } elseif ($tokens[($use - 1)]['content'] === "\t") {
                     $length = '\t';
                 } else {
                     $length = $tokens[($use - 1)]['length'];
@@ -469,9 +469,9 @@ class FunctionDeclarationSniff implements Sniff
 
                     // This is an empty line, so don't check the indent.
                     continue;
-                } else if ($tokens[$i]['code'] === T_WHITESPACE) {
+                } elseif ($tokens[$i]['code'] === T_WHITESPACE) {
                     $foundIndent = $tokens[$i]['length'];
-                } else if ($tokens[$i]['code'] === T_DOC_COMMENT_WHITESPACE) {
+                } elseif ($tokens[$i]['code'] === T_DOC_COMMENT_WHITESPACE) {
                     $foundIndent = $tokens[$i]['length'];
                     ++$expectedIndent;
                 }

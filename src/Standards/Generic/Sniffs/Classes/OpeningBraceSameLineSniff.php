@@ -98,7 +98,7 @@ class OpeningBraceSameLineSniff implements Sniff
         // Is there precisely one space before the opening brace ?
         if ($tokens[($openingBrace - 1)]['code'] !== T_WHITESPACE) {
             $length = 0;
-        } else if ($tokens[($openingBrace - 1)]['content'] === "\t") {
+        } elseif ($tokens[($openingBrace - 1)]['content'] === "\t") {
             $length = '\t';
         } else {
             $length = $tokens[($openingBrace - 1)]['length'];

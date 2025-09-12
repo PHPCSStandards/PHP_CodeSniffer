@@ -212,7 +212,7 @@ class OperatorBracketSniff implements Sniff
             // It is not in a bracketed statement at all.
             $this->addMissingBracketsError($phpcsFile, $stackPtr);
             return;
-        } else if ($tokens[$lastBracket]['parenthesis_closer'] < $stackPtr) {
+        } elseif ($tokens[$lastBracket]['parenthesis_closer'] < $stackPtr) {
             // There are a set of brackets in front of it that don't include it.
             $this->addMissingBracketsError($phpcsFile, $stackPtr);
             return;

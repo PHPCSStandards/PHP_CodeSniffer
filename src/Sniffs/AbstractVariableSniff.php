@@ -168,7 +168,7 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
         // These variables are not member vars.
         if ($tokens[$stackPtr]['code'] === T_VARIABLE) {
             return $this->processVariable($phpcsFile, $stackPtr);
-        } else if ($tokens[$stackPtr]['code'] === T_DOUBLE_QUOTED_STRING
+        } elseif ($tokens[$stackPtr]['code'] === T_DOUBLE_QUOTED_STRING
             || $tokens[$stackPtr]['code'] === T_HEREDOC
         ) {
             // Check to see if this string has a variable in it.

@@ -45,7 +45,7 @@ class Diff implements Report
             if (PHP_CODESNIFFER_VERBOSITY === 1) {
                 $startTime = microtime(true);
                 StatusWriter::write('DIFF report is parsing ' . basename($report['filename']) . ' ', 0, 0);
-            } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
+            } elseif (PHP_CODESNIFFER_VERBOSITY > 1) {
                 StatusWriter::write('DIFF report is forcing parse of ' . $report['filename']);
             }
 

@@ -72,7 +72,7 @@ class InlineControlStructureSniff implements Sniff
 
         if (isset($tokens[$stackPtr]['parenthesis_closer']) === true) {
             $nextTokenIndex = ($tokens[$stackPtr]['parenthesis_closer'] + 1);
-        } else if (in_array($tokens[$stackPtr]['code'], [T_ELSE, T_DO], true) === true) {
+        } elseif (in_array($tokens[$stackPtr]['code'], [T_ELSE, T_DO], true) === true) {
             $nextTokenIndex = ($stackPtr + 1);
         }
 
@@ -220,7 +220,7 @@ class InlineControlStructureSniff implements Sniff
                     if ($type === T_DO && $nextType === T_WHILE) {
                         $end = $phpcsFile->findNext(T_SEMICOLON, ($next + 1));
                     }
-                } else if ($type === T_CLOSURE) {
+                } elseif ($type === T_CLOSURE) {
                     // There should be a semicolon after the closing brace.
                     $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($end + 1), null, true);
                     if ($next !== false && $tokens[$next]['code'] === T_SEMICOLON) {
@@ -302,7 +302,7 @@ class InlineControlStructureSniff implements Sniff
 
             if ($tokens[$first]['code'] === T_WHITESPACE) {
                 $indent = $tokens[$first]['content'];
-            } else if ($tokens[$first]['code'] === T_INLINE_HTML
+            } elseif ($tokens[$first]['code'] === T_INLINE_HTML
                 || $tokens[$first]['code'] === T_OPEN_TAG
             ) {
                 $addedContent = '';

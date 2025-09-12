@@ -159,13 +159,13 @@ class DeclareStatementSniff implements Sniff
             if ($tokens[$token]['type'] === 'T_OPEN_CURLY_BRACKET') {
                 // Block declaration.
                 $curlyBracket = $token;
-            } else if ($tokens[$token]['type'] === 'T_SEMICOLON') {
+            } elseif ($tokens[$token]['type'] === 'T_SEMICOLON') {
                 $error = 'Expected no space between the closing parenthesis and the semicolon in a declare statement';
                 $fix   = $phpcsFile->addFixableError($error, $parenthesis, 'SpaceFoundBeforeSemicolon');
                 if ($fix === true) {
                     $phpcsFile->fixer->replaceToken(($parenthesis + 1), '');
                 }
-            } else if ($tokens[$token]['type'] === 'T_CLOSE_TAG') {
+            } elseif ($tokens[$token]['type'] === 'T_CLOSE_TAG') {
                 if ($tokens[($parenthesis)]['line'] !== $tokens[$token]['line']) {
                     // Close tag must be on the same line..
                     $error = 'The close tag must be on the same line as the declare statement';
@@ -193,7 +193,7 @@ class DeclareStatementSniff implements Sniff
             // The opening curly bracket must on the same line with a single space between closing bracket.
             if ($tokens[$prevToken]['type'] !== 'T_CLOSE_PARENTHESIS') {
                 $phpcsFile->addError($error, $curlyBracket, 'ExtraSpaceFoundAfterBracket');
-            } else if ($phpcsFile->getTokensAsString(($prevToken + 1), ($curlyBracket - $prevToken - 1)) !== ' ') {
+            } elseif ($phpcsFile->getTokensAsString(($prevToken + 1), ($curlyBracket - $prevToken - 1)) !== ' ') {
                 $fix = $phpcsFile->addFixableError($error, $curlyBracket, 'ExtraSpaceFoundAfterBracket');
                 if ($fix === true) {
                     $phpcsFile->fixer->beginChangeset();

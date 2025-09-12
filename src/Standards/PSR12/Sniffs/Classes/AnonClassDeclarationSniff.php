@@ -171,7 +171,7 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
 
         if ($tokens[$prev]['line'] !== $tokens[$closeBracket]['line']) {
             $spaceBeforeClose = 'newline';
-        } else if ($tokens[($closeBracket - 1)]['code'] === T_WHITESPACE) {
+        } elseif ($tokens[($closeBracket - 1)]['code'] === T_WHITESPACE) {
             $spaceBeforeClose = $tokens[($closeBracket - 1)]['length'];
         }
 

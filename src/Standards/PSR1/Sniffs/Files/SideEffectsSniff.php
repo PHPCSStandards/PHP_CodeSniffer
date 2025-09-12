@@ -211,7 +211,7 @@ class SideEffectsSniff implements Sniff
 
                 $i = $tokens[$i]['scope_closer'];
                 continue;
-            } else if (($tokens[$i]['code'] === T_STRING
+            } elseif (($tokens[$i]['code'] === T_STRING
                 || $tokens[$i]['code'] === T_NAME_FULLY_QUALIFIED)
                 && strtolower(ltrim($tokens[$i]['content'], '\\')) === 'define'
             ) {

@@ -267,7 +267,7 @@ class SwitchDeclarationSniff implements Sniff
                         }
                     }//end if
                 }//end if
-            } else if ($type === 'Default') {
+            } elseif ($type === 'Default') {
                 $error = 'DEFAULT case must have a breaking statement';
                 $phpcsFile->addError($error, $nextCase, 'DefaultNoBreak');
             }//end if

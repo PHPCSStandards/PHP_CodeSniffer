@@ -348,7 +348,7 @@ class ArrayDeclarationSniff implements Sniff
             if ($fix === true) {
                 $phpcsFile->fixer->addNewlineBefore($arrayEnd);
             }
-        } else if ($tokens[$arrayEnd]['column'] !== $keywordStart) {
+        } elseif ($tokens[$arrayEnd]['column'] !== $keywordStart) {
             // Check the closing bracket is lined up under the "a" in array.
             $expected       = ($keywordStart - 1);
             $found          = ($tokens[$arrayEnd]['column'] - 1);
@@ -410,7 +410,7 @@ class ArrayDeclarationSniff implements Sniff
 
                 if ($tokens[$nextToken]['code'] === T_ARRAY) {
                     $nextToken = $tokens[$tokens[$nextToken]['parenthesis_opener']]['parenthesis_closer'];
-                } else if ($tokens[$nextToken]['code'] === T_OPEN_SHORT_ARRAY) {
+                } elseif ($tokens[$nextToken]['code'] === T_OPEN_SHORT_ARRAY) {
                     $nextToken = $tokens[$nextToken]['bracket_closer'];
                 } else {
                     // T_CLOSURE.
@@ -568,7 +568,7 @@ class ArrayDeclarationSniff implements Sniff
 
         if (empty($indices) === true) {
             $singleValue = true;
-        } else if (count($indices) === 1 && $tokens[$lastToken]['code'] === T_COMMA) {
+        } elseif (count($indices) === 1 && $tokens[$lastToken]['code'] === T_COMMA) {
             // There may be another array value without a comma.
             $exclude     = Tokens::EMPTY_TOKENS;
             $exclude[]   = T_COMMA;
@@ -701,7 +701,7 @@ class ArrayDeclarationSniff implements Sniff
                             $phpcsFile->fixer->addNewlineBefore($valuePointer);
                         }
                     }
-                } else if ($previousIsWhitespace === true) {
+                } elseif ($previousIsWhitespace === true) {
                     $expected = $keywordStart;
 
                     $first          = $phpcsFile->findFirstOnLine(T_WHITESPACE, $valuePointer, true);
@@ -882,7 +882,7 @@ class ArrayDeclarationSniff implements Sniff
 
                         $phpcsFile->fixer->replaceToken(($valuePointer - 1), str_repeat(' ', $expected));
                         $phpcsFile->fixer->endChangeset();
-                    } else if ($found === 0) {
+                    } elseif ($found === 0) {
                         $phpcsFile->fixer->addContent(($valuePointer - 1), str_repeat(' ', $expected));
                     } else {
                         $phpcsFile->fixer->replaceToken(($valuePointer - 1), str_repeat(' ', $expected));
@@ -897,7 +897,7 @@ class ArrayDeclarationSniff implements Sniff
             $end = $phpcsFile->findEndOfStatement($valueStart);
             if ($end === false) {
                 $valueEnd = $valueStart;
-            } else if ($tokens[$end]['code'] === T_COMMA) {
+            } elseif ($tokens[$end]['code'] === T_COMMA) {
                 $valueEnd  = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($end - 1), $valueStart, true);
                 $nextComma = $end;
             } else {

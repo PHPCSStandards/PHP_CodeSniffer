@@ -437,7 +437,7 @@ class FunctionCommentSniff implements Sniff
 
                     $phpcsFile->addError($error, $param['tag'], $code, $data);
                 }
-            } else if (substr($param['var'], -4) !== ',...') {
+            } elseif (substr($param['var'], -4) !== ',...') {
                 // We must have an extra parameter comment.
                 $error = 'Superfluous parameter comment';
                 $phpcsFile->addError($error, $param['tag'], 'ExtraParamComment');

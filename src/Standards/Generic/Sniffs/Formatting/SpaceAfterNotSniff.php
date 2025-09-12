@@ -90,7 +90,7 @@ class SpaceAfterNotSniff implements Sniff
         $found = 0;
         if ($tokens[$stackPtr]['line'] !== $tokens[$nextNonEmpty]['line']) {
             $found = 'newline';
-        } else if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
+        } elseif ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
             $found = $tokens[($stackPtr + 1)]['length'];
         }
 

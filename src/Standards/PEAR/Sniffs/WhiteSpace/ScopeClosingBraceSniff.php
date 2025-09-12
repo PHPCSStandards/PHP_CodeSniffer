@@ -83,7 +83,7 @@ class ScopeClosingBraceSniff implements Sniff
         $startColumn = 1;
         if ($tokens[$lineStart]['code'] === T_WHITESPACE) {
             $startColumn = $tokens[($lineStart + 1)]['column'];
-        } else if ($tokens[$lineStart]['code'] === T_INLINE_HTML) {
+        } elseif ($tokens[$lineStart]['code'] === T_INLINE_HTML) {
             $trimmed = ltrim($tokens[$lineStart]['content']);
             if ($trimmed === '') {
                 $startColumn = $tokens[($lineStart + 1)]['column'];
@@ -130,7 +130,7 @@ class ScopeClosingBraceSniff implements Sniff
         $braceIndent = 0;
         if ($tokens[$lineStart]['code'] === T_WHITESPACE) {
             $braceIndent = ($tokens[($lineStart + 1)]['column'] - 1);
-        } else if ($tokens[$lineStart]['code'] === T_INLINE_HTML) {
+        } elseif ($tokens[$lineStart]['code'] === T_INLINE_HTML) {
             $trimmed = ltrim($tokens[$lineStart]['content']);
             if ($trimmed === '') {
                 $braceIndent = ($tokens[($lineStart + 1)]['column'] - 1);

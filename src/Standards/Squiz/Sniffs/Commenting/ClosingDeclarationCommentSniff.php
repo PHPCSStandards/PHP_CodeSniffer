@@ -73,11 +73,11 @@ class ClosingDeclarationCommentSniff implements Sniff
             }
 
             $comment = '//end ' . $decName . '()';
-        } else if ($tokens[$stackPtr]['code'] === T_CLASS) {
+        } elseif ($tokens[$stackPtr]['code'] === T_CLASS) {
             $comment = '//end class';
-        } else if ($tokens[$stackPtr]['code'] === T_INTERFACE) {
+        } elseif ($tokens[$stackPtr]['code'] === T_INTERFACE) {
             $comment = '//end interface';
-        } else if ($tokens[$stackPtr]['code'] === T_TRAIT) {
+        } elseif ($tokens[$stackPtr]['code'] === T_TRAIT) {
             $comment = '//end trait';
         } else {
             $comment = '//end enum';

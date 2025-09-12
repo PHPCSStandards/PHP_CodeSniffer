@@ -89,7 +89,7 @@ class ConstructorNameSniff extends AbstractScopeSniff
                 $error = 'PHP4 style constructors are not allowed; use "__construct()" instead';
                 $phpcsFile->addError($error, $stackPtr, 'OldStyle');
             }
-        } else if ($methodName !== '__construct') {
+        } elseif ($methodName !== '__construct') {
             // Not a constructor.
             return;
         }

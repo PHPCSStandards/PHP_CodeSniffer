@@ -127,7 +127,7 @@ class Filter extends RecursiveFilterIterator
             if ($this->config->local === true) {
                 return false;
             }
-        } else if ($this->shouldProcessFile($filePath) === false) {
+        } elseif ($this->shouldProcessFile($filePath) === false) {
             return false;
         }
 

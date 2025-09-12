@@ -106,7 +106,7 @@ class CyclomaticComplexitySniff implements Sniff
                 $this->absoluteComplexity,
             ];
             $phpcsFile->addError($error, $stackPtr, 'MaxExceeded', $data);
-        } else if ($complexity > $this->complexity) {
+        } elseif ($complexity > $this->complexity) {
             $warning = 'Function\'s cyclomatic complexity (%s) exceeds %s; consider refactoring the function';
             $data    = [
                 $complexity,

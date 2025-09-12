@@ -129,7 +129,7 @@ class DocCommentAlignmentSniff implements Sniff
                 if ($fix === true) {
                     $phpcsFile->fixer->addContent($i, ' ');
                 }
-            } else if ($tokens[($i + 2)]['code'] === T_DOC_COMMENT_TAG
+            } elseif ($tokens[($i + 2)]['code'] === T_DOC_COMMENT_TAG
                 && $tokens[($i + 1)]['content'] !== ' '
             ) {
                 $error = 'Expected 1 space after asterisk; %s found';
