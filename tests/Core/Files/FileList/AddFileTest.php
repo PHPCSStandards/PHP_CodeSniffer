@@ -47,15 +47,21 @@ final class AddFileTest extends AbstractFileListTestCase
     /**
      * Test adding a file to the list.
      *
-     * @param string      $fileName   The name of the file to add.
-     * @param object|null $fileObject An optional file object to add instead of creating a new one.
+     * @param string $fileName       The name of the file to add.
+     * @param bool   $passFileObject Whether to pass a File object to addFile() or not.
      *
      * @dataProvider dataAddFile
      *
      * @return void
      */
-    public function testAddFile($fileName, $fileObject=null)
+    public function testAddFile($fileName, $passFileObject=false)
     {
+        $fileObject = null;
+
+        if ($passFileObject === true) {
+            $fileObject = new File($fileName, self::$ruleset, self::$config);
+        }
+
         $this->assertCount(0, $this->fileList);
 
         $this->fileList->addFile($fileName, $fileObject);
@@ -65,7 +71,7 @@ final class AddFileTest extends AbstractFileListTestCase
         $this->assertCount(1, $this->fileList, 'File count mismatch');
         $this->assertArrayHasKey($fileName, $fileListArray, 'File not found in list');
 
-        if (isset($fileObject) === true) {
+        if ($fileObject instanceof File) {
             $this->assertSame($fileObject, $fileListArray[$fileName], 'File object mismatch');
         } else {
             $this->assertInstanceOf(
@@ -81,12 +87,10 @@ final class AddFileTest extends AbstractFileListTestCase
     /**
      * Data provider for testAddFile.
      *
-     * @return array<string, array<string, string|object>>
+     * @return array<string, array<string, string|bool>>
      */
     public static function dataAddFile()
     {
-        self::initializeConfigAndRuleset();
-
         return [
             'Regular file'                  => [
                 'fileName' => 'test1.php',
@@ -95,8 +99,8 @@ final class AddFileTest extends AbstractFileListTestCase
                 'fileName' => 'STDIN',
             ],
             'Regular file with file object' => [
-                'fileName'   => 'test1.php',
-                'fileObject' => new File('test1.php', self::$ruleset, self::$config),
+                'fileName'       => 'test1.php',
+                'passFileObject' => true,
             ],
         ];
 
