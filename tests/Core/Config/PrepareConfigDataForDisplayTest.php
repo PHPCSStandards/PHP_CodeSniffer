@@ -62,7 +62,7 @@ final class PrepareConfigDataForDisplayTest extends TestCase
                 'data'     => [
                     'colors' => '1',
                 ],
-                'expected' => 'colors: 1'.PHP_EOL,
+                'expected' => 'colors: 1' . PHP_EOL,
             ],
             'Data with keys of varying length in non-alphabetically order' => [
                 'data'     => [
@@ -71,17 +71,17 @@ final class PrepareConfigDataForDisplayTest extends TestCase
                     'ignore_errors_on_exit' => '1',
                     'default_standard'      => 'PSR12',
                 ],
-                'expected' => 'default_standard:      PSR12'.PHP_EOL
-                    .'encoding:              utf-8'.PHP_EOL
-                    .'ignore_errors_on_exit: 1'.PHP_EOL
-                    .'tab_width:             2'.PHP_EOL,
+                'expected' => 'default_standard:      PSR12' . PHP_EOL
+                    . 'encoding:              utf-8' . PHP_EOL
+                    . 'ignore_errors_on_exit: 1' . PHP_EOL
+                    . 'tab_width:             2' . PHP_EOL,
             ],
             'Invalid config data: no keys'                                 => [
                 'data'     => [
                     '1',
                     '2',
                 ],
-                'expected' => '0: 1'.PHP_EOL.'1: 2'.PHP_EOL,
+                'expected' => '0: 1' . PHP_EOL . '1: 2' . PHP_EOL,
             ],
             'Unexpected, but handled, data with non-string scalar values'  => [
                 'data'     => [
@@ -89,9 +89,9 @@ final class PrepareConfigDataForDisplayTest extends TestCase
                     'ignore_errors_on_exit' => true,
                     'tab_width'             => 2,
                 ],
-                'expected' => 'encoding:              utf-8'.PHP_EOL
-                    .'ignore_errors_on_exit: 1'.PHP_EOL
-                    .'tab_width:             2'.PHP_EOL,
+                'expected' => 'encoding:              utf-8' . PHP_EOL
+                    . 'ignore_errors_on_exit: 1' . PHP_EOL
+                    . 'tab_width:             2' . PHP_EOL,
             ],
         ];
         // phpcs:enable

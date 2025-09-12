@@ -834,7 +834,7 @@ class PHP extends Tokenizer
                     $finalTokens[$newStackPtr] = [
                         'code'    => T_OPEN_TAG,
                         'type'    => 'T_OPEN_TAG',
-                        'content' => $token[1].$tokens[($stackPtr + 1)][1],
+                        'content' => $token[1] . $tokens[($stackPtr + 1)][1],
                     ];
 
                     $stackPtr++;
@@ -874,7 +874,7 @@ class PHP extends Tokenizer
                     ) {
                         // Adjusting the original token stack as the "new line may be split over two tokens"
                         // check should still be run on this token.
-                        $tokens[($stackPtr + 1)][1] = $openTagAndWhiteSpace[1].$tokens[($stackPtr + 1)][1];
+                        $tokens[($stackPtr + 1)][1] = $openTagAndWhiteSpace[1] . $tokens[($stackPtr + 1)][1];
 
                         if (PHP_CODESNIFFER_VERBOSITY > 1) {
                             StatusWriter::write("* removed whitespace from T_OPEN_TAG token $stackPtr and merged it with the next token T_WHITESPACE", 2);
@@ -1344,7 +1344,7 @@ class PHP extends Tokenizer
                     $newToken['type'] = 'T_PRIVATE_SET';
                 }
 
-                $newToken['content']       = $token[1].'('.$tokens[($stackPtr + 2)][1].')';
+                $newToken['content']       = $token[1] . '(' . $tokens[($stackPtr + 2)][1] . ')';
                 $finalTokens[$newStackPtr] = $newToken;
                 $newStackPtr++;
 
@@ -1457,7 +1457,7 @@ class PHP extends Tokenizer
                     && isset(Tokens::EMPTY_TOKENS[$tokens[($i + 2)][0]]) === false
                     && preg_match(self::PHP_LABEL_REGEX, $tokens[($i + 2)][1]) === 1
                 ) {
-                    $newToken['content'] .= $tokens[($i + 1)][1].$tokens[($i + 2)][1];
+                    $newToken['content'] .= $tokens[($i + 1)][1] . $tokens[($i + 2)][1];
                     $i = ($i + 2);
                 }
 
@@ -1827,7 +1827,7 @@ class PHP extends Tokenizer
                 ];
                 $newStackPtr++;
 
-                $yieldFromSubtokens = @token_get_all("<?php\n".substr($token[1], 5, -4));
+                $yieldFromSubtokens = @token_get_all("<?php\n" . substr($token[1], 5, -4));
                 // Remove the PHP open tag token.
                 array_shift($yieldFromSubtokens);
                 // Add the "from" keyword.
@@ -3729,14 +3729,14 @@ class PHP extends Tokenizer
                             $type     = $this->tokens[$x]['type'];
                             $oldConds = '';
                             foreach ($oldConditions as $condition) {
-                                $oldConds .= Tokens::tokenName($condition).',';
+                                $oldConds .= Tokens::tokenName($condition) . ',';
                             }
 
                             $oldConds = rtrim($oldConds, ',');
 
                             $newConds = '';
                             foreach ($this->tokens[$x]['conditions'] as $condition) {
-                                $newConds .= Tokens::tokenName($condition).',';
+                                $newConds .= Tokens::tokenName($condition) . ',';
                             }
 
                             $newConds = rtrim($newConds, ',');
@@ -3996,7 +3996,7 @@ class PHP extends Tokenizer
         $token = $tokens[$stackPtr];
 
         $commentBody = substr($token[1], 2);
-        $subTokens   = @token_get_all('<?php '.$commentBody);
+        $subTokens   = @token_get_all('<?php ' . $commentBody);
 
         foreach ($subTokens as $i => $subToken) {
             if (is_array($subToken) === true
@@ -4025,7 +4025,7 @@ class PHP extends Tokenizer
                 }
             }
 
-            $subTokens = @token_get_all('<?php '.$commentBody);
+            $subTokens = @token_get_all('<?php ' . $commentBody);
             array_splice($subTokens, 0, 1, [[T_ATTRIBUTE, '#[']]);
 
             $bracketCloser = $this->findCloser($subTokens, 1, '[', ']');

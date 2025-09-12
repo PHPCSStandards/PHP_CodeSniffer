@@ -69,7 +69,7 @@ final class PrintProgressTest extends TestCase
         self::$runner->config = self::$config;
 
         // Simple file which won't have any errors against the above sniff.
-        $content = '<?php'."\n".'$var = false;'."\n";
+        $content = '<?php' . "\n" . '$var = false;' . "\n";
         self::$fileWithoutErrorsOrWarnings = new DummyFile($content, self::$ruleset, self::$config);
         self::$fileWithoutErrorsOrWarnings->process();
 
@@ -148,7 +148,7 @@ final class PrintProgressTest extends TestCase
             self::$runner->printProgress(self::$fileWithoutErrorsOrWarnings, $nrOfFiles, $i);
         }
 
-        $this->assertStderrOutputSameString('.S.S.S.S.S 10 / 10 (100%)'.PHP_EOL);
+        $this->assertStderrOutputSameString('.S.S.S.S.S 10 / 10 (100%)' . PHP_EOL);
 
     }//end testProgressDotSkippedFiles()
 
@@ -189,47 +189,47 @@ final class PrintProgressTest extends TestCase
         return [
             'Less than 60 files (23)'       => [
                 'nrOfFiles' => 23,
-                'expected'  => str_repeat('.', 23).' 23 / 23 (100%)'.PHP_EOL,
+                'expected'  => str_repeat('.', 23) . ' 23 / 23 (100%)' . PHP_EOL,
             ],
             'Exactly 60 files'              => [
                 'nrOfFiles' => 60,
-                'expected'  => $fullLineOfDots.' 60 / 60 (100%)'.PHP_EOL,
+                'expected'  => $fullLineOfDots . ' 60 / 60 (100%)' . PHP_EOL,
             ],
             'Between 60 and 120 files (71)' => [
                 'nrOfFiles' => 71,
-                'expected'  => $fullLineOfDots.' 60 / 71 (85%)'.PHP_EOL
-                    .str_repeat('.', 11).str_repeat(' ', 49).' 71 / 71 (100%)'.PHP_EOL,
+                'expected'  => $fullLineOfDots . ' 60 / 71 (85%)' . PHP_EOL
+                    . str_repeat('.', 11) . str_repeat(' ', 49) . ' 71 / 71 (100%)' . PHP_EOL,
             ],
             'More than 120 files (162)'     => [
                 'nrOfFiles' => 162,
-                'expected'  => $fullLineOfDots.'  60 / 162 (37%)'.PHP_EOL
-                    .$fullLineOfDots.' 120 / 162 (74%)'.PHP_EOL
-                    .str_repeat('.', 42).str_repeat(' ', 18).' 162 / 162 (100%)'.PHP_EOL,
+                'expected'  => $fullLineOfDots . '  60 / 162 (37%)' . PHP_EOL
+                    . $fullLineOfDots . ' 120 / 162 (74%)' . PHP_EOL
+                    . str_repeat('.', 42) . str_repeat(' ', 18) . ' 162 / 162 (100%)' . PHP_EOL,
             ],
             // More than anything, this tests that the padding of the numbers is handled correctly.
             'More than 1000 files (1234)'   => [
                 'nrOfFiles' => 1234,
-                'expected'  => $fullLineOfDots.'   60 / 1234 (5%)'.PHP_EOL
-                    .$fullLineOfDots.'  120 / 1234 (10%)'.PHP_EOL
-                    .$fullLineOfDots.'  180 / 1234 (15%)'.PHP_EOL
-                    .$fullLineOfDots.'  240 / 1234 (19%)'.PHP_EOL
-                    .$fullLineOfDots.'  300 / 1234 (24%)'.PHP_EOL
-                    .$fullLineOfDots.'  360 / 1234 (29%)'.PHP_EOL
-                    .$fullLineOfDots.'  420 / 1234 (34%)'.PHP_EOL
-                    .$fullLineOfDots.'  480 / 1234 (39%)'.PHP_EOL
-                    .$fullLineOfDots.'  540 / 1234 (44%)'.PHP_EOL
-                    .$fullLineOfDots.'  600 / 1234 (49%)'.PHP_EOL
-                    .$fullLineOfDots.'  660 / 1234 (53%)'.PHP_EOL
-                    .$fullLineOfDots.'  720 / 1234 (58%)'.PHP_EOL
-                    .$fullLineOfDots.'  780 / 1234 (63%)'.PHP_EOL
-                    .$fullLineOfDots.'  840 / 1234 (68%)'.PHP_EOL
-                    .$fullLineOfDots.'  900 / 1234 (73%)'.PHP_EOL
-                    .$fullLineOfDots.'  960 / 1234 (78%)'.PHP_EOL
-                    .$fullLineOfDots.' 1020 / 1234 (83%)'.PHP_EOL
-                    .$fullLineOfDots.' 1080 / 1234 (88%)'.PHP_EOL
-                    .$fullLineOfDots.' 1140 / 1234 (92%)'.PHP_EOL
-                    .$fullLineOfDots.' 1200 / 1234 (97%)'.PHP_EOL
-                    .str_repeat('.', 34).str_repeat(' ', 26).' 1234 / 1234 (100%)'.PHP_EOL,
+                'expected'  => $fullLineOfDots . '   60 / 1234 (5%)' . PHP_EOL
+                    . $fullLineOfDots . '  120 / 1234 (10%)' . PHP_EOL
+                    . $fullLineOfDots . '  180 / 1234 (15%)' . PHP_EOL
+                    . $fullLineOfDots . '  240 / 1234 (19%)' . PHP_EOL
+                    . $fullLineOfDots . '  300 / 1234 (24%)' . PHP_EOL
+                    . $fullLineOfDots . '  360 / 1234 (29%)' . PHP_EOL
+                    . $fullLineOfDots . '  420 / 1234 (34%)' . PHP_EOL
+                    . $fullLineOfDots . '  480 / 1234 (39%)' . PHP_EOL
+                    . $fullLineOfDots . '  540 / 1234 (44%)' . PHP_EOL
+                    . $fullLineOfDots . '  600 / 1234 (49%)' . PHP_EOL
+                    . $fullLineOfDots . '  660 / 1234 (53%)' . PHP_EOL
+                    . $fullLineOfDots . '  720 / 1234 (58%)' . PHP_EOL
+                    . $fullLineOfDots . '  780 / 1234 (63%)' . PHP_EOL
+                    . $fullLineOfDots . '  840 / 1234 (68%)' . PHP_EOL
+                    . $fullLineOfDots . '  900 / 1234 (73%)' . PHP_EOL
+                    . $fullLineOfDots . '  960 / 1234 (78%)' . PHP_EOL
+                    . $fullLineOfDots . ' 1020 / 1234 (83%)' . PHP_EOL
+                    . $fullLineOfDots . ' 1080 / 1234 (88%)' . PHP_EOL
+                    . $fullLineOfDots . ' 1140 / 1234 (92%)' . PHP_EOL
+                    . $fullLineOfDots . ' 1200 / 1234 (97%)' . PHP_EOL
+                    . str_repeat('.', 34) . str_repeat(' ', 26) . ' 1234 / 1234 (100%)' . PHP_EOL,
             ],
         ];
         // phpcs:enable

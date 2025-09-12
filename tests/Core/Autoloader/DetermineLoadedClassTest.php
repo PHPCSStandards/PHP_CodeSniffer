@@ -28,7 +28,7 @@ final class DetermineLoadedClassTest extends TestCase
      */
     public static function setUpBeforeClass(): void
     {
-        include __DIR__.'/TestFiles/Sub/C.inc';
+        include __DIR__ . '/TestFiles/Sub/C.inc';
 
     }//end setUpBeforeClass()
 

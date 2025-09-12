@@ -49,7 +49,7 @@ class InlineCommentSniff implements Sniff
             $fix    = $phpcsFile->addFixableError($error, $stackPtr, 'WrongStyle');
             if ($fix === true) {
                 $newComment = ltrim($tokens[$stackPtr]['content'], '# ');
-                $newComment = '// '.$newComment;
+                $newComment = '// ' . $newComment;
                 $phpcsFile->fixer->replaceToken($stackPtr, $newComment);
             }
         } else if ($tokens[$stackPtr]['content'][0] === '/'

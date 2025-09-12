@@ -293,7 +293,7 @@ final class Help
 
         $this->printCategoryHeader('Usage');
 
-        echo self::INDENT.$command.' [options] <file|directory>'.PHP_EOL;
+        echo self::INDENT . $command . ' [options] <file|directory>' . PHP_EOL;
 
     }//end printUsage()
 
@@ -327,7 +327,7 @@ final class Help
             $header = "\033[33m{$header}\033[0m";
         }
 
-        echo PHP_EOL.$header.PHP_EOL;
+        echo PHP_EOL . $header . PHP_EOL;
 
     }//end printCategoryHeader()
 
@@ -353,17 +353,17 @@ final class Help
 
             if (isset($option['text']) === true) {
                 $text    = wordwrap($option['text'], $maxTextWidth, "\n");
-                $output .= self::INDENT.implode(PHP_EOL.self::INDENT, explode("\n", $text)).PHP_EOL;
+                $output .= self::INDENT . implode(PHP_EOL . self::INDENT, explode("\n", $text)) . PHP_EOL;
             }
 
             if (isset($option['argument'], $option['description']) === true) {
                 $argument = str_pad($option['argument'], $this->maxOptionNameLength);
                 $argument = $this->colorizeVariableInput($argument);
-                $output  .= self::INDENT."\033[32m{$argument}\033[0m";
+                $output  .= self::INDENT . "\033[32m{$argument}\033[0m";
                 $output  .= self::GUTTER;
 
                 $description = wordwrap($option['description'], $maxDescriptionWidth, "\n");
-                $output     .= implode(PHP_EOL.$secondLineIndent, explode("\n", $description)).PHP_EOL;
+                $output     .= implode(PHP_EOL . $secondLineIndent, explode("\n", $description)) . PHP_EOL;
             }
         }
 
@@ -388,7 +388,7 @@ final class Help
      */
     private function colorizeVariableInput(string $text)
     {
-        return preg_replace('`(<(?:(?>[^<>]+)|(?R))*>)`', "\033[36m".'$1'."\033[32m", $text);
+        return preg_replace('`(<(?:(?>[^<>]+)|(?R))*>)`', "\033[36m" . '$1' . "\033[32m", $text);
 
     }//end colorizeVariableInput()
 
@@ -486,8 +486,8 @@ final class Help
             ],
             'parallel'   => [
                 'argument'    => '--parallel=<processes>',
-                'description' => 'The number of files to be checked simultaneously. Defaults to 1 (no parallel processing).'."\n"
-                    .'If enabled, this option only takes effect if the PHP PCNTL (Process Control) extension is available.',
+                'description' => 'The number of files to be checked simultaneously. Defaults to 1 (no parallel processing).' . "\n"
+                    . 'If enabled, this option only takes effect if the PHP PCNTL (Process Control) extension is available.',
             ],
             'suffix'     => [
                 'argument'    => '--suffix=<suffix>',
@@ -497,16 +497,16 @@ final class Help
 
             'php-ini'    => [
                 'argument'    => '-d <key[=value]>',
-                'description' => 'Set the [key] php.ini value to [value] or set to [true] if value is omitted.'."\n"
-                    .'Note: only php.ini settings which can be changed at runtime are supported.',
+                'description' => 'Set the [key] php.ini value to [value] or set to [true] if value is omitted.' . "\n"
+                    . 'Note: only php.ini settings which can be changed at runtime are supported.',
             ],
         ];
 
         $options['Reporting Options'] = [
             'report'             => [
                 'argument'    => '--report=<report(s)>',
-                'description' => 'A comma-separated list of reports to print. Available reports: "full", "xml", "checkstyle", "csv", "json", "junit", "emacs", "source", "summary", "diff", "svnblame", "gitblame", "hgblame", "notifysend" or "performance".'."\n"
-                    .'Or specify the path to a custom report class. By default, the "full" report is displayed.',
+                'description' => 'A comma-separated list of reports to print. Available reports: "full", "xml", "checkstyle", "csv", "json", "junit", "emacs", "source", "summary", "diff", "svnblame", "gitblame", "hgblame", "notifysend" or "performance".' . "\n"
+                    . 'Or specify the path to a custom report class. By default, the "full" report is displayed.',
             ],
             'report-file'        => [
                 'argument'    => '--report-file=<reportFile>',
@@ -590,8 +590,8 @@ final class Help
             'blank-line'     => ['spacer' => ''],
 
             'config-explain' => [
-                'text' => 'Default values for a selection of options can be stored in a user-specific CodeSniffer.conf configuration file.'."\n"
-                    .'This applies to the following options: "default_standard", "report_format", "tab_width", "encoding", "severity", "error_severity", "warning_severity", "show_warnings", "report_width", "show_progress", "quiet", "colors", "cache", "parallel", "installed_paths", "php_version", "ignore_errors_on_exit", "ignore_warnings_on_exit", "ignore_non_auto_fixable_on_exit".',
+                'text' => 'Default values for a selection of options can be stored in a user-specific CodeSniffer.conf configuration file.' . "\n"
+                    . 'This applies to the following options: "default_standard", "report_format", "tab_width", "encoding", "severity", "error_severity", "warning_severity", "show_warnings", "report_width", "show_progress", "quiet", "colors", "cache", "parallel", "installed_paths", "php_version", "ignore_errors_on_exit", "ignore_warnings_on_exit", "ignore_non_auto_fixable_on_exit".',
             ],
             'config-show'    => [
                 'argument'    => '--config-show',

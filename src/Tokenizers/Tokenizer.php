@@ -522,7 +522,7 @@ abstract class Tokenizer
 
             $firstTabSize = ($tabWidth - (($currColumn - 1) % $tabWidth));
             $length       = ($firstTabSize + ($tabWidth * ($numTabs - 1)));
-            $newContent   = $prefix.str_repeat($padding, ($length - 1));
+            $newContent   = $prefix . str_repeat($padding, ($length - 1));
         } else {
             // We need to determine the length of each tab.
             $tabs = explode("\t", $token['content']);
@@ -565,7 +565,7 @@ abstract class Tokenizer
                 $pad         = ($tabWidth - ($currColumn + $tabWidth - 1) % $tabWidth);
                 $currColumn += $pad;
                 $length     += $pad;
-                $newContent .= $prefix.str_repeat($padding, ($pad - 1));
+                $newContent .= $prefix . str_repeat($padding, ($pad - 1));
             }//end foreach
         }//end if
 
@@ -1395,10 +1395,10 @@ abstract class Tokenizer
                 if (empty($conditions) !== true) {
                     $conditionString = 'conds;';
                     foreach ($conditions as $condition) {
-                        $conditionString .= Tokens::tokenName($condition).',';
+                        $conditionString .= Tokens::tokenName($condition) . ',';
                     }
 
-                    $statusMessage .= rtrim($conditionString, ',').';';
+                    $statusMessage .= rtrim($conditionString, ',') . ';';
                 }
 
                 $statusMessage .= "]: $type => $content";
@@ -1455,14 +1455,14 @@ abstract class Tokenizer
                                     $type     = $this->tokens[$x]['type'];
                                     $oldConds = '';
                                     foreach ($oldConditions as $condition) {
-                                        $oldConds .= Tokens::tokenName($condition).',';
+                                        $oldConds .= Tokens::tokenName($condition) . ',';
                                     }
 
                                     $oldConds = rtrim($oldConds, ',');
 
                                     $newConds = '';
                                     foreach ($this->tokens[$x]['conditions'] as $condition) {
-                                        $newConds .= Tokens::tokenName($condition).',';
+                                        $newConds .= Tokens::tokenName($condition) . ',';
                                     }
 
                                     $newConds = rtrim($newConds, ',');
@@ -1522,7 +1522,7 @@ abstract class Tokenizer
 
                             $oldCondition = array_pop($conditions);
                             if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                                StatusWriter::write('* token '.Tokens::tokenName($oldCondition).' removed from conditions array *', ($level + 1));
+                                StatusWriter::write('* token ' . Tokens::tokenName($oldCondition) . ' removed from conditions array *', ($level + 1));
                             }
 
                             // Make sure this closer actually belongs to us.
@@ -1547,14 +1547,14 @@ abstract class Tokenizer
                                             $type     = $this->tokens[$x]['type'];
                                             $oldConds = '';
                                             foreach ($oldConditions as $condition) {
-                                                $oldConds .= Tokens::tokenName($condition).',';
+                                                $oldConds .= Tokens::tokenName($condition) . ',';
                                             }
 
                                             $oldConds = rtrim($oldConds, ',');
 
                                             $newConds = '';
                                             foreach ($this->tokens[$x]['conditions'] as $condition) {
-                                                $newConds .= Tokens::tokenName($condition).',';
+                                                $newConds .= Tokens::tokenName($condition) . ',';
                                             }
 
                                             $newConds = rtrim($newConds, ',');

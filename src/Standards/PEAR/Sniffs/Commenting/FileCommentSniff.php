@@ -254,7 +254,7 @@ class FileCommentSniff implements Sniff
                     $name,
                     $docBlock,
                 ];
-                $phpcsFile->addError($error, $tag, 'Duplicate'.ucfirst(substr($name, 1)).'Tag', $data);
+                $phpcsFile->addError($error, $tag, 'Duplicate' . ucfirst(substr($name, 1)) . 'Tag', $data);
             }
 
             $foundTags[]        = $name;
@@ -267,7 +267,7 @@ class FileCommentSniff implements Sniff
                     $name,
                     $docBlock,
                 ];
-                $phpcsFile->addError($error, $tag, 'Empty'.ucfirst(substr($name, 1)).'Tag', $data);
+                $phpcsFile->addError($error, $tag, 'Empty' . ucfirst(substr($name, 1)) . 'Tag', $data);
                 continue;
             }
         }//end foreach
@@ -282,12 +282,12 @@ class FileCommentSniff implements Sniff
                         $tag,
                         $docBlock,
                     ];
-                    $phpcsFile->addError($error, $commentEnd, 'Missing'.ucfirst(substr($tag, 1)).'Tag', $data);
+                    $phpcsFile->addError($error, $commentEnd, 'Missing' . ucfirst(substr($tag, 1)) . 'Tag', $data);
                 }
 
                 continue;
             } else {
-                $method = 'process'.substr($tag, 1);
+                $method = 'process' . substr($tag, 1);
                 if (method_exists($this, $method) === true) {
                     // Process each tag if a method is defined.
                     call_user_func([$this, $method], $phpcsFile, $tagTokens[$tag]);
@@ -304,7 +304,7 @@ class FileCommentSniff implements Sniff
                     ($pos + 1),
                     $tag,
                 ];
-                $phpcsFile->addError($error, $tokens[$commentStart]['comment_tags'][$pos], ucfirst(substr($tag, 1)).'TagOrder', $data);
+                $phpcsFile->addError($error, $tokens[$commentStart]['comment_tags'][$pos], ucfirst(substr($tag, 1)) . 'TagOrder', $data);
             }
 
             // Account for multiple tags.
@@ -339,10 +339,10 @@ class FileCommentSniff implements Sniff
                 $newContent = str_replace(' ', '_', $content);
                 $nameBits   = explode('_', $newContent);
                 $firstBit   = array_shift($nameBits);
-                $newName    = ucfirst($firstBit).'_';
+                $newName    = ucfirst($firstBit) . '_';
                 foreach ($nameBits as $bit) {
                     if ($bit !== '') {
-                        $newName .= ucfirst($bit).'_';
+                        $newName .= ucfirst($bit) . '_';
                     }
                 }
 
@@ -392,10 +392,10 @@ class FileCommentSniff implements Sniff
             } else {
                 $nameBits = explode('_', $newContent);
                 $firstBit = array_shift($nameBits);
-                $newName  = strtoupper($firstBit[0]).substr($firstBit, 1).'_';
+                $newName  = strtoupper($firstBit[0]) . substr($firstBit, 1) . '_';
                 foreach ($nameBits as $bit) {
                     if ($bit !== '') {
-                        $newName .= strtoupper($bit[0]).substr($bit, 1).'_';
+                        $newName .= strtoupper($bit[0]) . substr($bit, 1) . '_';
                     }
                 }
 
@@ -437,10 +437,10 @@ class FileCommentSniff implements Sniff
             $newContent = str_replace(' ', '_', $content);
             $nameBits   = explode('_', $newContent);
             $firstBit   = array_shift($nameBits);
-            $newName    = strtoupper($firstBit[0]).substr($firstBit, 1).'_';
+            $newName    = strtoupper($firstBit[0]) . substr($firstBit, 1) . '_';
             foreach ($nameBits as $bit) {
                 if ($bit !== '') {
-                    $newName .= strtoupper($bit[0]).substr($bit, 1).'_';
+                    $newName .= strtoupper($bit[0]) . substr($bit, 1) . '_';
                 }
             }
 
@@ -476,8 +476,8 @@ class FileCommentSniff implements Sniff
             $content = $tokens[($tag + 2)]['content'];
             $local   = '\da-zA-Z-_+';
             // Dot character cannot be the first or last character in the local-part.
-            $localMiddle = $local.'.\w';
-            if (preg_match('/^([^<]*)\s+<(['.$local.'](['.$localMiddle.']*['.$local.'])*@[\da-zA-Z][-.\w]*[\da-zA-Z]\.[a-zA-Z]{2,})>$/', $content) === 0) {
+            $localMiddle = $local . '.\w';
+            if (preg_match('/^([^<]*)\s+<([' . $local . ']([' . $localMiddle . ']*[' . $local . '])*@[\da-zA-Z][-.\w]*[\da-zA-Z]\.[a-zA-Z]{2,})>$/', $content) === 0) {
                 $error = 'Content of the @author tag must be in the form "Display Name <username@example.com>"';
                 $phpcsFile->addError($error, $tag, 'InvalidAuthors');
             }

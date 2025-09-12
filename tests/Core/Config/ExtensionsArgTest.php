@@ -131,9 +131,9 @@ final class ExtensionsArgTest extends TestCase
      */
     public function testInvalidExtensions($passedValue)
     {
-        $message  = 'ERROR: Specifying the tokenizer to use for an extension is no longer supported.'.PHP_EOL;
-        $message .= 'PHP_CodeSniffer >= 4.0 only supports scanning PHP files.'.PHP_EOL;
-        $message .= 'Received: '.$passedValue.PHP_EOL.PHP_EOL;
+        $message  = 'ERROR: Specifying the tokenizer to use for an extension is no longer supported.' . PHP_EOL;
+        $message .= 'PHP_CodeSniffer >= 4.0 only supports scanning PHP files.' . PHP_EOL;
+        $message .= 'Received: ' . $passedValue . PHP_EOL . PHP_EOL;
 
         $this->expectException(DeepExitException::class);
         $this->expectExceptionMessage($message);

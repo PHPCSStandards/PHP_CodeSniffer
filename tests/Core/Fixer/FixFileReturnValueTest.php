@@ -29,11 +29,11 @@ final class FixFileReturnValueTest extends TestCase
      */
     public function testReturnValueIsTrueWhenFileWasFixed()
     {
-        $standard = __DIR__.'/FixFileReturnValueAllGoodTest.xml';
+        $standard = __DIR__ . '/FixFileReturnValueAllGoodTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
-        $testCaseFile = __DIR__.'/Fixtures/test.inc';
+        $testCaseFile = __DIR__ . '/Fixtures/test.inc';
         $phpcsFile    = new LocalFile($testCaseFile, $ruleset, $config);
         $phpcsFile->process();
         $fixed = $phpcsFile->fixer->fixFile();
@@ -57,7 +57,7 @@ final class FixFileReturnValueTest extends TestCase
         $config  = new ConfigDouble(["--standard=$standard"]);
         $ruleset = new Ruleset($config);
 
-        $testCaseFile = __DIR__.'/Fixtures/test.inc';
+        $testCaseFile = __DIR__ . '/Fixtures/test.inc';
         $phpcsFile    = new LocalFile($testCaseFile, $ruleset, $config);
         $phpcsFile->process();
         $fixed = $phpcsFile->fixer->fixFile();
@@ -76,10 +76,10 @@ final class FixFileReturnValueTest extends TestCase
     {
         return [
             'when there is a fixer conflict'                                    => [
-                'standard' => __DIR__.'/FixFileReturnValueConflictTest.xml',
+                'standard' => __DIR__ . '/FixFileReturnValueConflictTest.xml',
             ],
             'when the fixer ran out of loops before all fixes could be applied' => [
-                'standard' => __DIR__.'/FixFileReturnValueNotEnoughLoopsTest.xml',
+                'standard' => __DIR__ . '/FixFileReturnValueNotEnoughLoopsTest.xml',
             ],
         ];
 

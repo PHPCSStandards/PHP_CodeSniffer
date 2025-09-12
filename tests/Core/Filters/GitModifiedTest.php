@@ -31,7 +31,7 @@ final class GitModifiedTest extends AbstractFilterTestCase
      */
     public function testFileNamePassesAsBasePathWillTranslateToDirname()
     {
-        $rootFile = self::getBaseDir().'/autoload.php';
+        $rootFile = self::getBaseDir() . '/autoload.php';
 
         $fakeDI          = new RecursiveArrayIterator(self::getFakeFileList());
         $constructorArgs = [
@@ -117,7 +117,7 @@ final class GitModifiedTest extends AbstractFilterTestCase
                     'autoload.php',
                 ],
                 'expectedOutput'    => [
-                    $basedir.'/autoload.php',
+                    $basedir . '/autoload.php',
                 ],
             ],
             'single file marked as git modified - file in sub dir'                 => [
@@ -126,12 +126,12 @@ final class GitModifiedTest extends AbstractFilterTestCase
                     'src/Standards/Generic/Sniffs/Classes/DuplicateClassNameSniff.php',
                 ],
                 'expectedOutput'    => [
-                    $basedir.'/src',
-                    $basedir.'/src/Standards',
-                    $basedir.'/src/Standards/Generic',
-                    $basedir.'/src/Standards/Generic/Sniffs',
-                    $basedir.'/src/Standards/Generic/Sniffs/Classes',
-                    $basedir.'/src/Standards/Generic/Sniffs/Classes/DuplicateClassNameSniff.php',
+                    $basedir . '/src',
+                    $basedir . '/src/Standards',
+                    $basedir . '/src/Standards/Generic',
+                    $basedir . '/src/Standards/Generic/Sniffs',
+                    $basedir . '/src/Standards/Generic/Sniffs/Classes',
+                    $basedir . '/src/Standards/Generic/Sniffs/Classes/DuplicateClassNameSniff.php',
                 ],
             ],
 
@@ -143,11 +143,11 @@ final class GitModifiedTest extends AbstractFilterTestCase
                     'src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.1.inc.fixed',
                 ],
                 'expectedOutput'    => [
-                    $basedir.'/src',
-                    $basedir.'/src/Standards',
-                    $basedir.'/src/Standards/Squiz',
-                    $basedir.'/src/Standards/Squiz/Tests',
-                    $basedir.'/src/Standards/Squiz/Tests/WhiteSpace',
+                    $basedir . '/src',
+                    $basedir . '/src/Standards',
+                    $basedir . '/src/Standards/Squiz',
+                    $basedir . '/src/Standards/Squiz/Tests',
+                    $basedir . '/src/Standards/Squiz/Tests/WhiteSpace',
                 ],
             ],
 
@@ -159,14 +159,14 @@ final class GitModifiedTest extends AbstractFilterTestCase
                     'src/Standards/Generic/Sniffs/Classes/DuplicateClassNameSniff.php',
                 ],
                 'expectedOutput'    => [
-                    $basedir.'/src',
-                    $basedir.'/src/Standards',
-                    $basedir.'/src/Standards/Generic',
-                    $basedir.'/src/Standards/Generic/Docs',
-                    $basedir.'/src/Standards/Generic/Docs/Classes',
-                    $basedir.'/src/Standards/Generic/Sniffs',
-                    $basedir.'/src/Standards/Generic/Sniffs/Classes',
-                    $basedir.'/src/Standards/Generic/Sniffs/Classes/DuplicateClassNameSniff.php',
+                    $basedir . '/src',
+                    $basedir . '/src/Standards',
+                    $basedir . '/src/Standards/Generic',
+                    $basedir . '/src/Standards/Generic/Docs',
+                    $basedir . '/src/Standards/Generic/Docs/Classes',
+                    $basedir . '/src/Standards/Generic/Sniffs',
+                    $basedir . '/src/Standards/Generic/Sniffs/Classes',
+                    $basedir . '/src/Standards/Generic/Sniffs/Classes/DuplicateClassNameSniff.php',
                 ],
             ],
 
@@ -181,17 +181,17 @@ final class GitModifiedTest extends AbstractFilterTestCase
                     'src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.php',
                 ],
                 'expectedOutput'    => [
-                    $basedir.'/autoload.php',
-                    $basedir.'/src',
-                    $basedir.'/src/Standards',
-                    $basedir.'/src/Standards/Squiz',
-                    $basedir.'/src/Standards/Squiz/Sniffs',
-                    $basedir.'/src/Standards/Squiz/Sniffs/WhiteSpace',
-                    $basedir.'/src/Standards/Squiz/Sniffs/WhiteSpace/OperatorSpacingSniff.php',
-                    $basedir.'/src/Standards/Squiz/Tests',
-                    $basedir.'/src/Standards/Squiz/Tests/WhiteSpace',
-                    $basedir.'/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.1.inc',
-                    $basedir.'/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.php',
+                    $basedir . '/autoload.php',
+                    $basedir . '/src',
+                    $basedir . '/src/Standards',
+                    $basedir . '/src/Standards/Squiz',
+                    $basedir . '/src/Standards/Squiz/Sniffs',
+                    $basedir . '/src/Standards/Squiz/Sniffs/WhiteSpace',
+                    $basedir . '/src/Standards/Squiz/Sniffs/WhiteSpace/OperatorSpacingSniff.php',
+                    $basedir . '/src/Standards/Squiz/Tests',
+                    $basedir . '/src/Standards/Squiz/Tests/WhiteSpace',
+                    $basedir . '/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.1.inc',
+                    $basedir . '/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.php',
                 ],
             ],
         ];
@@ -213,7 +213,7 @@ final class GitModifiedTest extends AbstractFilterTestCase
      */
     public function testExecAlwaysReturnsArray($cmd, $expected)
     {
-        if (is_dir(__DIR__.'/../../../.git') === false) {
+        if (is_dir(__DIR__ . '/../../../.git') === false) {
             $this->markTestSkipped('Not a git repository');
         }
 
@@ -250,11 +250,11 @@ final class GitModifiedTest extends AbstractFilterTestCase
             'valid command which won\'t have any output unless files in the bin dir have been modified' => [
                 // Largely using the command used in the filter, but only checking the bin dir.
                 // This should prevent the test unexpectedly failing during local development (in most cases).
-                'cmd'      => 'git ls-files -o -m --exclude-standard -- '.escapeshellarg(self::getBaseDir().'/bin'),
+                'cmd'      => 'git ls-files -o -m --exclude-standard -- ' . escapeshellarg(self::getBaseDir() . '/bin'),
                 'expected' => [],
             ],
             'valid command which will have output'                                                      => [
-                'cmd'      => 'git ls-files --exclude-standard -- '.escapeshellarg(self::getBaseDir().'/bin'),
+                'cmd'      => 'git ls-files --exclude-standard -- ' . escapeshellarg(self::getBaseDir() . '/bin'),
                 'expected' => [
                     'bin/phpcbf',
                     'bin/phpcbf.bat',

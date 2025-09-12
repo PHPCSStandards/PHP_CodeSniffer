@@ -847,8 +847,8 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $tokens     = $this->phpcsFile->getTokens();
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(constant($expectedType), $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (code)');
-        $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (type)');
+        $this->assertSame(constant($expectedType), $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (code)');
+        $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (type)');
 
         $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
         $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');
@@ -1001,15 +1001,15 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
         $expectedScopeCloser = ($token + $closerOffset);
 
         $this->assertSame($expectedScopeOpener, $tokens[$token]['scope_opener'], 'Scope opener is not the arrow token');
-        $this->assertSame($expectedScopeCloser, $tokens[$token]['scope_closer'], 'Scope closer is not the '.$expectedCloserType.' token');
+        $this->assertSame($expectedScopeCloser, $tokens[$token]['scope_closer'], 'Scope closer is not the ' . $expectedCloserType . ' token');
 
         $opener = $tokens[$token]['scope_opener'];
         $this->assertSame($expectedScopeOpener, $tokens[$opener]['scope_opener'], 'Opener scope opener is not the arrow token');
-        $this->assertSame($expectedScopeCloser, $tokens[$opener]['scope_closer'], 'Opener scope closer is not the '.$expectedCloserType.' token');
+        $this->assertSame($expectedScopeCloser, $tokens[$opener]['scope_closer'], 'Opener scope closer is not the ' . $expectedCloserType . ' token');
 
         $closer = $tokens[$token]['scope_closer'];
         $this->assertSame($expectedScopeOpener, $tokens[$closer]['scope_opener'], 'Closer scope opener is not the arrow token');
-        $this->assertSame($expectedScopeCloser, $tokens[$closer]['scope_closer'], 'Closer scope closer is not the '.$expectedCloserType.' token');
+        $this->assertSame($expectedScopeCloser, $tokens[$closer]['scope_closer'], 'Closer scope closer is not the ' . $expectedCloserType . ' token');
 
     }//end scopePositionTestHelper()
 

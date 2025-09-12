@@ -35,8 +35,8 @@ final class ContextSensitiveKeywordsGotoTest extends AbstractTokenizerTestCase
         $target     = $this->getTargetToken($testMarker, (Tokens::CONTEXT_SENSITIVE_KEYWORDS + [T_STRING]));
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
-        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
+        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
+        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (type)');
 
     }//end testStrings()
 

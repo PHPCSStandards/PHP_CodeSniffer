@@ -84,11 +84,11 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
     {
         return [
             'All files filtered out via extension'      => [
-                'sourceDir' => __DIR__.'/Fixtures/AllFilesExcludedSetA/',
+                'sourceDir' => __DIR__ . '/Fixtures/AllFilesExcludedSetA/',
                 'extraArgs' => ['--extensions=php'],
             ],
             'All files filtered out via ignore pattern' => [
-                'sourceDir' => __DIR__.'/Fixtures/AllFilesExcludedSetB/',
+                'sourceDir' => __DIR__ . '/Fixtures/AllFilesExcludedSetB/',
                 'extraArgs' => ['--ignore=/place*\.php'],
             ],
         ];
@@ -129,8 +129,8 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
      */
     private function verifyOutput()
     {
-        $expected  = 'ERROR: No files were checked.'.PHP_EOL;
-        $expected .= 'All specified files were excluded or did not match filtering rules.'.PHP_EOL.PHP_EOL;
+        $expected  = 'ERROR: No files were checked.' . PHP_EOL;
+        $expected .= 'All specified files were excluded or did not match filtering rules.' . PHP_EOL . PHP_EOL;
 
         $this->assertStderrOutputSameString($expected);
 

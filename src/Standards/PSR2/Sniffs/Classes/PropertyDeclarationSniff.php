@@ -170,7 +170,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
                     }
 
                     $phpcsFile->fixer->replaceToken($scopePtr, '');
-                    $phpcsFile->fixer->addContentBefore($setScopePtr, $tokens[$scopePtr]['content'].' ');
+                    $phpcsFile->fixer->addContentBefore($setScopePtr, $tokens[$scopePtr]['content'] . ' ');
 
                     $phpcsFile->fixer->endChangeset();
                 }
@@ -197,7 +197,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
                     }
 
                     $phpcsFile->fixer->replaceToken($finalPtr, '');
-                    $phpcsFile->fixer->addContentBefore($scopePtr, $tokens[$finalPtr]['content'].' ');
+                    $phpcsFile->fixer->addContentBefore($scopePtr, $tokens[$finalPtr]['content'] . ' ');
 
                     $phpcsFile->fixer->endChangeset();
                 }
@@ -222,7 +222,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
                     }
 
                     $phpcsFile->fixer->replaceToken($abstractPtr, '');
-                    $phpcsFile->fixer->addContentBefore($scopePtr, $tokens[$abstractPtr]['content'].' ');
+                    $phpcsFile->fixer->addContentBefore($scopePtr, $tokens[$abstractPtr]['content'] . ' ');
 
                     $phpcsFile->fixer->endChangeset();
                 }
@@ -247,7 +247,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
                     }
 
                     $phpcsFile->fixer->replaceToken($staticPtr, '');
-                    $phpcsFile->fixer->addContent($scopePtr, ' '.$tokens[$staticPtr]['content']);
+                    $phpcsFile->fixer->addContent($scopePtr, ' ' . $tokens[$staticPtr]['content']);
 
                     $phpcsFile->fixer->endChangeset();
                 }
@@ -272,7 +272,7 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
                     }
 
                     $phpcsFile->fixer->replaceToken($readonlyPtr, '');
-                    $phpcsFile->fixer->addContent($scopePtr, ' '.$tokens[$readonlyPtr]['content']);
+                    $phpcsFile->fixer->addContent($scopePtr, ' ' . $tokens[$readonlyPtr]['content']);
 
                     $phpcsFile->fixer->endChangeset();
                 }

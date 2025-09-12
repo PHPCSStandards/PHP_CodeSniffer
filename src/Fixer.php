@@ -169,7 +169,7 @@ class Fixer
                 $max   = strlen(count($lines));
                 foreach ($lines as $lineNum => $line) {
                     $lineNum++;
-                    StatusWriter::forceWrite(str_pad($lineNum, $max, ' ', STR_PAD_LEFT).'|'.$line);
+                    StatusWriter::forceWrite(str_pad($lineNum, $max, ' ', STR_PAD_LEFT) . '|' . $line);
                 }
 
                 StatusWriter::forceWrite('--- END FILE CONTENT ---');
@@ -183,7 +183,7 @@ class Fixer
             $this->loops++;
 
             if (PHP_CODESNIFFER_CBF === true && PHP_CODESNIFFER_VERBOSITY > 0) {
-                StatusWriter::forceWrite("\r".str_repeat(' ', 80)."\r", 0, 0);
+                StatusWriter::forceWrite("\r" . str_repeat(' ', 80) . "\r", 0, 0);
                 $statusMessage = "=> Fixing file: $this->numFixes/$fixable violations remaining [made $this->loops pass";
                 if ($this->loops > 1) {
                     $statusMessage .= 'es';
@@ -202,7 +202,7 @@ class Fixer
                 // Nothing left to do.
                 break;
             } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                StatusWriter::forceWrite("* fixed $this->numFixes violations, starting loop ".($this->loops + 1).' *', 1);
+                StatusWriter::forceWrite("* fixed $this->numFixes violations, starting loop " . ($this->loops + 1) . ' *', 1);
             }
         }//end while
 
@@ -241,7 +241,7 @@ class Fixer
             $filePath = $this->currentFile->getFilename();
         }
 
-        $cwd = getcwd().DIRECTORY_SEPARATOR;
+        $cwd = getcwd() . DIRECTORY_SEPARATOR;
         if (strpos($filePath, $cwd) === 0) {
             $filename = substr($filePath, strlen($cwd));
         } else {
@@ -609,7 +609,7 @@ class Fixer
             $statusMessage = "$sniff:$line replaced token $stackPtr ($type on line $tokenLine) \"$oldContent\" => \"$newContent\"";
             $depth         = 1;
             if (empty($this->changeset) === false) {
-                $statusMessage = 'A: '.$statusMessage;
+                $statusMessage = 'A: ' . $statusMessage;
                 $depth         = 2;
             }
 
@@ -667,7 +667,7 @@ class Fixer
             $statusMessage = "$sniff:$line reverted token $stackPtr ($type on line $tokenLine) \"$oldContent\" => \"$newContent\"";
             $depth         = 1;
             if (empty($this->changeset) === false) {
-                $statusMessage = 'R: '.$statusMessage;
+                $statusMessage = 'R: ' . $statusMessage;
                 $depth         = 2;
             }
 
@@ -714,7 +714,7 @@ class Fixer
     public function addNewline(int $stackPtr)
     {
         $current = $this->getTokenContent($stackPtr);
-        return $this->replaceToken($stackPtr, $current.$this->currentFile->eolChar);
+        return $this->replaceToken($stackPtr, $current . $this->currentFile->eolChar);
 
     }//end addNewline()
 
@@ -729,7 +729,7 @@ class Fixer
     public function addNewlineBefore(int $stackPtr)
     {
         $current = $this->getTokenContent($stackPtr);
-        return $this->replaceToken($stackPtr, $this->currentFile->eolChar.$current);
+        return $this->replaceToken($stackPtr, $this->currentFile->eolChar . $current);
 
     }//end addNewlineBefore()
 
@@ -745,7 +745,7 @@ class Fixer
     public function addContent(int $stackPtr, string $content)
     {
         $current = $this->getTokenContent($stackPtr);
-        return $this->replaceToken($stackPtr, $current.$content);
+        return $this->replaceToken($stackPtr, $current . $content);
 
     }//end addContent()
 
@@ -761,7 +761,7 @@ class Fixer
     public function addContentBefore(int $stackPtr, string $content)
     {
         $current = $this->getTokenContent($stackPtr);
-        return $this->replaceToken($stackPtr, $content.$current);
+        return $this->replaceToken($stackPtr, $content . $current);
 
     }//end addContentBefore()
 
@@ -813,9 +813,9 @@ class Fixer
                     $padding = '';
                 }
 
-                $newContent = $padding.ltrim($tokens[$i]['content']);
+                $newContent = $padding . ltrim($tokens[$i]['content']);
             } else {
-                $newContent = $baseIndent.$tokens[$i]['content'];
+                $newContent = $baseIndent . $tokens[$i]['content'];
             }
 
             $this->replaceToken($i, $newContent);

@@ -64,7 +64,7 @@ final class ProcessRulesetIniSetTest extends TestCase
         $this->originalValue = ini_get($this->currentOption);
         $this->assertNotFalse($this->originalValue, "Test is broken: the {$this->currentOption} ini directive does not exist");
 
-        new Ruleset(new ConfigDouble(['.', '--standard='.__DIR__.'/IniSetSuccessTest.xml']));
+        new Ruleset(new ConfigDouble(['.', '--standard=' . __DIR__ . '/IniSetSuccessTest.xml']));
 
         $this->assertSame($expected, ini_get($this->currentOption));
 
@@ -117,17 +117,17 @@ final class ProcessRulesetIniSetTest extends TestCase
             // Using Core directives available PHP cross-version to prevent the tests failing
             // on an unavailable directive or due to an extension not being available.
             'php.ini only option: expose_php'       => [
-                'standard' => __DIR__.'/IniSetFailIniOnlyTest.xml',
+                'standard' => __DIR__ . '/IniSetFailIniOnlyTest.xml',
                 'option'   => 'expose_php',
                 'expected' => '0',
             ],
             'INI_PERDIR option: short_open_tag'     => [
-                'standard' => __DIR__.'/IniSetFailIniPerDirTest.xml',
+                'standard' => __DIR__ . '/IniSetFailIniPerDirTest.xml',
                 'option'   => 'short_open_tag',
                 'expected' => '1',
             ],
             'INI_SYSTEM option: realpath_cache_ttl' => [
-                'standard' => __DIR__.'/IniSetFailIniSystemTest.xml',
+                'standard' => __DIR__ . '/IniSetFailIniSystemTest.xml',
                 'option'   => 'realpath_cache_ttl',
                 'expected' => '200',
             ],

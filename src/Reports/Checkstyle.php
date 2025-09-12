@@ -100,10 +100,10 @@ class Checkstyle implements Report
         bool $interactive = false,
         bool $toScreen = true
     ) {
-        echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
-        echo '<checkstyle version="'.Config::VERSION.'">'.PHP_EOL;
+        echo '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
+        echo '<checkstyle version="' . Config::VERSION . '">' . PHP_EOL;
         echo $cachedData;
-        echo '</checkstyle>'.PHP_EOL;
+        echo '</checkstyle>' . PHP_EOL;
 
     }//end generate()
 

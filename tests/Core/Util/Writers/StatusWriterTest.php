@@ -51,7 +51,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
         return [
             'Default settings'              => [
                 'message'  => 'This message should end up in stdErr with no tab indent and 1 new line',
-                'expected' => 'This message should end up in stdErr with no tab indent and 1 new line'.PHP_EOL,
+                'expected' => 'This message should end up in stdErr with no tab indent and 1 new line' . PHP_EOL,
             ],
             'empty message prints new line' => [
                 'message'  => '',
@@ -97,7 +97,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
                 'message'  => 'This message should end up in stdErr with no tab indent and 1 new line',
                 'indent'   => 0,
                 'newlines' => 1,
-                'expected' => 'This message should end up in stdErr with no tab indent and 1 new line'.PHP_EOL,
+                'expected' => 'This message should end up in stdErr with no tab indent and 1 new line' . PHP_EOL,
             ],
             'no indent, suppress new line'                             => [
                 'message'  => 'This message should end up in stdErr with no tab indent and no new line',
@@ -109,7 +109,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
                 'message'  => 'This message should end up in stdErr with one tab indent and 1 new line',
                 'indent'   => 1,
                 'newlines' => 1,
-                'expected' => "\tThis message should end up in stdErr with one tab indent and 1 new line".PHP_EOL,
+                'expected' => "\tThis message should end up in stdErr with one tab indent and 1 new line" . PHP_EOL,
             ],
             '2 indents, suppress new line'                             => [
                 'message'  => 'This message should end up in stdErr with two tab indent and no new line',
@@ -121,7 +121,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
                 'message'  => 'This message should end up in stdErr with one tab indent and 2 new lines',
                 'indent'   => 1,
                 'newlines' => 2,
-                'expected' => "\tThis message should end up in stdErr with one tab indent and 2 new lines".PHP_EOL.PHP_EOL,
+                'expected' => "\tThis message should end up in stdErr with one tab indent and 2 new lines" . PHP_EOL . PHP_EOL,
             ],
             'negative number of indents, negative number of new lines' => [
                 'message'  => 'This message should end up in stdErr with no tab indent and no new line',
@@ -180,7 +180,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
         $this->assertFalse(StatusWriter::isPaused());
 
         $message  = 'Once the StatusWriter is resumed, messages should be printed again';
-        $expected = $message.PHP_EOL;
+        $expected = $message . PHP_EOL;
         StatusWriter::write($message);
 
         $this->assertStderrOutputSameString($expected);
@@ -198,7 +198,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
         $this->expectNoStdoutOutput();
 
         $message  = 'This message should still be force printed when the StatusWriter is paused';
-        $expected = $message.PHP_EOL;
+        $expected = $message . PHP_EOL;
 
         $this->assertFalse(StatusWriter::isPaused());
 
@@ -222,7 +222,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
         $this->expectNoStdoutOutput();
 
         $messageA = 'This message should still be force printed when the StatusWriter is paused';
-        $expected = $messageA.PHP_EOL;
+        $expected = $messageA . PHP_EOL;
 
         $messageB = 'This message should NOT be printed when the StatusWriter is paused';
 
@@ -238,7 +238,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
         $this->assertFalse(StatusWriter::isPaused());
 
         $messageC  = 'Once the StatusWriter is resumed, messages should be printed again';
-        $expected .= $messageC.PHP_EOL.$messageC.PHP_EOL;
+        $expected .= $messageC . PHP_EOL . $messageC . PHP_EOL;
 
         StatusWriter::write($messageC);
         StatusWriter::forceWrite($messageC);
@@ -269,7 +269,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::writeNewline();
         StatusWriter::forceWriteNewline();
 
-        $this->assertStderrOutputSameString(PHP_EOL.PHP_EOL);
+        $this->assertStderrOutputSameString(PHP_EOL . PHP_EOL);
 
     }//end testWriteNewline()
 
@@ -322,7 +322,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
         $this->assertFalse(StatusWriter::isPaused());
 
         $message  = 'Once the StatusWriter is resumed, messages should be printed again';
-        $expected = $message.PHP_EOL;
+        $expected = $message . PHP_EOL;
         StatusWriter::write($message);
 
         $this->assertStderrOutputSameString($expected);
@@ -341,7 +341,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
 
         $messageA = 'This message should not be printed when the StatusWriter is paused';
         $messageB = 'Once the StatusWriter is resumed, messages should be printed again';
-        $expected = $messageB.PHP_EOL.$messageB.PHP_EOL;
+        $expected = $messageB . PHP_EOL . $messageB . PHP_EOL;
 
         $this->assertFalse(StatusWriter::isPaused());
 

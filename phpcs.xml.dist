@@ -61,14 +61,13 @@
     <rule ref="Squiz.Operators.ComparisonOperatorUsage"/>
     <rule ref="Squiz.PHP.DisallowInlineIf"/>
     <rule ref="Squiz.Scope.MethodScope"/>
-    <rule ref="Squiz.Strings.ConcatenationSpacing"/>
     <rule ref="Squiz.Strings.DoubleQuoteUsage.NotRequired"/>
     <rule ref="Generic.Strings.UnnecessaryHeredoc"/>
     <rule ref="Squiz.WhiteSpace.ControlStructureSpacing"/>
     <rule ref="Squiz.WhiteSpace.FunctionClosingBraceSpace"/>
     <rule ref="Squiz.WhiteSpace.FunctionSpacing"/>
     <rule ref="Squiz.WhiteSpace.MemberVarSpacing"/>
-    <rule ref="Squiz.WhiteSpace.OperatorSpacing"/>
+    <rule ref="PSR12.Operators.OperatorSpacing"/>
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
     <rule ref="Generic.Arrays.DisallowLongArraySyntax">
         <!-- Files involved in the requirements check should stay compatible with PHP 5.3. -->

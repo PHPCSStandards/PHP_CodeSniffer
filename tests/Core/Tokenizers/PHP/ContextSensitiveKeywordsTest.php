@@ -32,8 +32,8 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
         $target     = $this->getTargetToken($testMarker, (Tokens::CONTEXT_SENSITIVE_KEYWORDS + [T_STRING]));
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
-        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
+        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
+        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (type)');
 
     }//end testStrings()
 
@@ -170,12 +170,12 @@ final class ContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
         $this->assertSame(
             constant($expectedTokenType),
             $tokenArray['code'],
-            'Token tokenized as '.$tokenArray['type'].', not '.$expectedTokenType.' (code)'
+            'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedTokenType . ' (code)'
         );
         $this->assertSame(
             $expectedTokenType,
             $tokenArray['type'],
-            'Token tokenized as '.$tokenArray['type'].', not '.$expectedTokenType.' (type)'
+            'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedTokenType . ' (type)'
         );
 
     }//end testKeywords()

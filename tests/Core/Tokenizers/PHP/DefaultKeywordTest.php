@@ -38,8 +38,8 @@ final class DefaultKeywordTest extends AbstractTokenizerTestCase
         $token      = $this->getTargetToken($testMarker, [T_MATCH_DEFAULT, T_DEFAULT, T_STRING], $testContent);
         $tokenArray = $tokens[$token];
 
-        $this->assertSame(T_MATCH_DEFAULT, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_MATCH_DEFAULT (code)');
-        $this->assertSame('T_MATCH_DEFAULT', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_MATCH_DEFAULT (type)');
+        $this->assertSame(T_MATCH_DEFAULT, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_MATCH_DEFAULT (code)');
+        $this->assertSame('T_MATCH_DEFAULT', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_MATCH_DEFAULT (type)');
 
     }//end testMatchDefault()
 
@@ -118,8 +118,8 @@ final class DefaultKeywordTest extends AbstractTokenizerTestCase
         $token      = $this->getTargetToken($testMarker, [T_MATCH_DEFAULT, T_DEFAULT, T_STRING], $testContent);
         $tokenArray = $tokens[$token];
 
-        $this->assertSame(T_DEFAULT, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_DEFAULT (code)');
-        $this->assertSame('T_DEFAULT', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_DEFAULT (type)');
+        $this->assertSame(T_DEFAULT, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_DEFAULT (code)');
+        $this->assertSame('T_DEFAULT', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_DEFAULT (type)');
 
     }//end testSwitchDefault()
 
@@ -181,8 +181,8 @@ final class DefaultKeywordTest extends AbstractTokenizerTestCase
         $tokens     = $this->phpcsFile->getTokens();
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(constant($expectedType), $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (code)');
-        $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (type)');
+        $this->assertSame(constant($expectedType), $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (code)');
+        $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (type)');
 
     }//end testNotDefaultKeyword()
 

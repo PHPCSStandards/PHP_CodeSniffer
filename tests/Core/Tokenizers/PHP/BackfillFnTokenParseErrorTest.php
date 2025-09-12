@@ -29,7 +29,7 @@ final class BackfillFnTokenParseErrorTest extends AbstractTokenizerTestCase
         $token      = $this->getTargetToken('/* testLiveCoding */', [T_STRING, T_FN], 'fn');
         $tokenArray = $tokens[$token];
 
-        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING');
+        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING');
 
         $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
         $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');

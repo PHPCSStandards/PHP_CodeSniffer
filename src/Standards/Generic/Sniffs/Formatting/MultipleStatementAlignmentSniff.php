@@ -343,7 +343,7 @@ class MultipleStatementAlignmentSniff implements Sniff
                 continue;
             }
 
-            $expectedText = $data['expected'].' space';
+            $expectedText = $data['expected'] . ' space';
             if ($data['expected'] !== 1) {
                 $expectedText .= 's';
             }
@@ -351,7 +351,7 @@ class MultipleStatementAlignmentSniff implements Sniff
             if ($data['found'] === null) {
                 $foundText = 'a new line';
             } else {
-                $foundText = $data['found'].' space';
+                $foundText = $data['found'] . ' space';
                 if ($data['found'] !== 1) {
                     $foundText .= 's';
                 }

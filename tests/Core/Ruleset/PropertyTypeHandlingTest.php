@@ -313,7 +313,7 @@ final class PropertyTypeHandlingTest extends TestCase
 
         if (isset($sniffObject) === false) {
             // Set up the ruleset.
-            $standard = __DIR__.'/PropertyTypeHandlingTest.xml';
+            $standard = __DIR__ . '/PropertyTypeHandlingTest.xml';
             $config   = new ConfigDouble(["--standard=$standard"]);
             $ruleset  = new Ruleset($config);
 
@@ -343,7 +343,7 @@ final class PropertyTypeHandlingTest extends TestCase
 
         if (isset($sniffObject) === false) {
             // Set up the ruleset.
-            $standard = __DIR__.'/PropertyTypeHandlingInlineTest.xml';
+            $standard = __DIR__ . '/PropertyTypeHandlingInlineTest.xml';
             $config   = new ConfigDouble(["--standard=$standard"]);
             $ruleset  = new Ruleset($config);
 
@@ -355,7 +355,7 @@ final class PropertyTypeHandlingTest extends TestCase
             $sniffObject = $ruleset->sniffs[self::SNIFF_CLASS];
 
             // Process the file with inline phpcs:set annotations.
-            $testFile = realpath(__DIR__.'/Fixtures/PropertyTypeHandlingInline.inc');
+            $testFile = realpath(__DIR__ . '/Fixtures/PropertyTypeHandlingInline.inc');
             $this->assertNotFalse($testFile);
 
             $phpcsFile = new LocalFile($testFile, $ruleset, $config);

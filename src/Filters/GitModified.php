@@ -40,7 +40,7 @@ class GitModified extends ExactMatch
     {
         $modified = [];
 
-        $cmd    = 'git ls-files -o -m --exclude-standard -- '.escapeshellarg($this->basedir);
+        $cmd    = 'git ls-files -o -m --exclude-standard -- ' . escapeshellarg($this->basedir);
         $output = $this->exec($cmd);
 
         $basedir = $this->basedir;

@@ -78,7 +78,7 @@ class IncrementDecrementSpacingSniff implements Sniff
             $phpcsFile->recordMetric($stackPtr, 'Spacing between in/decrementor and variable', $spaces);
 
             $error     = 'Expected no spaces between the %s operator and %s; %s found';
-            $errorCode = 'SpaceAfter'.ucfirst($tokenName);
+            $errorCode = 'SpaceAfter' . ucfirst($tokenName);
             $data      = [
                 $tokenName,
                 $tokens[$nextNonEmpty]['content'],
@@ -132,7 +132,7 @@ class IncrementDecrementSpacingSniff implements Sniff
             $phpcsFile->recordMetric($stackPtr, 'Spacing between in/decrementor and variable', $spaces);
 
             $error     = 'Expected no spaces between %s and the %s operator; %s found';
-            $errorCode = 'SpaceAfter'.ucfirst($tokenName);
+            $errorCode = 'SpaceAfter' . ucfirst($tokenName);
             $data      = [
                 $tokens[$prevNonEmpty]['content'],
                 $tokenName,

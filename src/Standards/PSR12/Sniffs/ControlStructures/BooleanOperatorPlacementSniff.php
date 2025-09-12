@@ -191,14 +191,14 @@ class BooleanOperatorPlacementSniff implements Sniff
 
                         $first   = $phpcsFile->findFirstOnLine(T_WHITESPACE, $operator, true);
                         $padding = str_repeat(' ', ($tokens[$first]['column'] - 1));
-                        $phpcsFile->fixer->addContent($operator, $phpcsFile->eolChar.$padding);
+                        $phpcsFile->fixer->addContent($operator, $phpcsFile->eolChar . $padding);
                     } else {
                         // Move the operator to the end of the previous line.
                         if ($tokens[($operator + 1)]['code'] === T_WHITESPACE) {
                             $phpcsFile->fixer->replaceToken(($operator + 1), '');
                         }
 
-                        $phpcsFile->fixer->addContent($prev, ' '.$tokens[$operator]['content']);
+                        $phpcsFile->fixer->addContent($prev, ' ' . $tokens[$operator]['content']);
                         $phpcsFile->fixer->replaceToken($operator, '');
                     }
                 }//end if
@@ -212,14 +212,14 @@ class BooleanOperatorPlacementSniff implements Sniff
 
                         $first   = $phpcsFile->findFirstOnLine(T_WHITESPACE, $operator, true);
                         $padding = str_repeat(' ', ($tokens[$first]['column'] - 1));
-                        $phpcsFile->fixer->addContentBefore($operator, $phpcsFile->eolChar.$padding);
+                        $phpcsFile->fixer->addContentBefore($operator, $phpcsFile->eolChar . $padding);
                     } else {
                         // Move the operator to the start of the next line.
                         if ($tokens[($operator - 1)]['code'] === T_WHITESPACE) {
                             $phpcsFile->fixer->replaceToken(($operator - 1), '');
                         }
 
-                        $phpcsFile->fixer->addContentBefore($next, $tokens[$operator]['content'].' ');
+                        $phpcsFile->fixer->addContentBefore($next, $tokens[$operator]['content'] . ' ');
                         $phpcsFile->fixer->replaceToken($operator, '');
                     }
                 }//end if

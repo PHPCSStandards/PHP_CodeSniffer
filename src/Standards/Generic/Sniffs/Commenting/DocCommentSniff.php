@@ -202,7 +202,7 @@ class DocCommentSniff implements Sniff
                 }
 
                 $indent = str_repeat(' ', $tokens[$stackPtr]['column']);
-                $phpcsFile->fixer->addContent($prev, $phpcsFile->eolChar.$indent.'*'.$phpcsFile->eolChar);
+                $phpcsFile->fixer->addContent($prev, $phpcsFile->eolChar . $indent . '*' . $phpcsFile->eolChar);
                 $phpcsFile->fixer->endChangeset();
             }
         }
@@ -293,7 +293,7 @@ class DocCommentSniff implements Sniff
                         }
 
                         $indent = str_repeat(' ', $tokens[$stackPtr]['column']);
-                        $phpcsFile->fixer->addContent($prev, $phpcsFile->eolChar.$indent.'*'.$phpcsFile->eolChar);
+                        $phpcsFile->fixer->addContent($prev, $phpcsFile->eolChar . $indent . '*' . $phpcsFile->eolChar);
                         $phpcsFile->fixer->endChangeset();
                     }
                 }

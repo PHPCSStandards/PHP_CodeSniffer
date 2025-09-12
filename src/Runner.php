@@ -95,7 +95,7 @@ class Runner
                 foreach ($standards as $standard) {
                     $this->config->standards = [$standard];
                     $ruleset   = new Ruleset($this->config);
-                    $class     = 'PHP_CodeSniffer\Generators\\'.$this->config->generator;
+                    $class     = 'PHP_CodeSniffer\Generators\\' . $this->config->generator;
                     $generator = new $class($ruleset);
                     $generator->generate();
                 }
@@ -251,8 +251,8 @@ class Runner
             if (Standards::isInstalledStandard($standard) === false) {
                 // They didn't select a valid coding standard, so help them
                 // out by letting them know which standards are installed.
-                $error  = 'ERROR: the "'.$standard.'" coding standard is not installed.'.PHP_EOL.PHP_EOL;
-                $error .= Standards::prepareInstalledStandardsForDisplay().PHP_EOL;
+                $error  = 'ERROR: the "' . $standard . '" coding standard is not installed.' . PHP_EOL . PHP_EOL;
+                $error .= Standards::prepareInstalledStandardsForDisplay() . PHP_EOL;
                 throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
             }
         }
@@ -282,7 +282,7 @@ class Runner
                 $this->ruleset->showSniffDeprecations();
             }
         } catch (RuntimeException $e) {
-            $error  = rtrim($e->getMessage(), "\r\n").PHP_EOL.PHP_EOL;
+            $error  = rtrim($e->getMessage(), "\r\n") . PHP_EOL . PHP_EOL;
             $error .= $this->config->printShortUsage(true);
             throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         }
@@ -322,7 +322,7 @@ class Runner
             $todo->addFile($dummy->path, $dummy);
         } else {
             if (empty($this->config->files) === true) {
-                $error  = 'ERROR: You must supply at least one file or directory to process.'.PHP_EOL.PHP_EOL;
+                $error  = 'ERROR: You must supply at least one file or directory to process.' . PHP_EOL . PHP_EOL;
                 $error .= $this->config->printShortUsage(true);
                 throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
             }
@@ -354,8 +354,8 @@ class Runner
 
         $numFiles = count($todo);
         if ($numFiles === 0) {
-            $error  = 'ERROR: No files were checked.'.PHP_EOL;
-            $error .= 'All specified files were excluded or did not match filtering rules.'.PHP_EOL.PHP_EOL;
+            $error  = 'ERROR: No files were checked.' . PHP_EOL;
+            $error .= 'All specified files were excluded or did not match filtering rules.' . PHP_EOL . PHP_EOL;
             throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         }
 
@@ -383,7 +383,7 @@ class Runner
                     $currDir = dirname($path);
                     if ($lastDir !== $currDir) {
                         if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                            StatusWriter::write('Changing into directory '.Common::stripBasepath($currDir, $this->config->basepath));
+                            StatusWriter::write('Changing into directory ' . Common::stripBasepath($currDir, $this->config->basepath));
                         }
 
                         $lastDir = $currDir;
@@ -391,7 +391,7 @@ class Runner
 
                     $this->processFile($file);
                 } else if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                    StatusWriter::write('Skipping '.basename($file->path));
+                    StatusWriter::write('Skipping ' . basename($file->path));
                 }
 
                 $numProcessed++;
@@ -451,7 +451,7 @@ class Runner
                         $currDir = dirname($path);
                         if ($lastDir !== $currDir) {
                             if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                                StatusWriter::write('Changing into directory '.Common::stripBasepath($currDir, $this->config->basepath));
+                                StatusWriter::write('Changing into directory ' . Common::stripBasepath($currDir, $this->config->basepath));
                             }
 
                             $lastDir = $currDir;
@@ -478,7 +478,7 @@ class Runner
                         'totalFixedWarnings'   => $this->reporter->totalFixedWarnings,
                     ];
 
-                    $output  = '<'.'?php'."\n".' $childOutput = ';
+                    $output  = '<' . '?php' . "\n" . ' $childOutput = ';
                     $output .= var_export($childOutput, true);
                     $output .= ";\n\$debugOutput = ";
                     $output .= var_export($debugOutput, true);
@@ -493,7 +493,7 @@ class Runner
                         $output .= var_export($childCache, true);
                     }
 
-                    $output .= ";\n?".'>';
+                    $output .= ";\n?" . '>';
                     file_put_contents($childOutFilename, $output);
                     exit();
                 }//end if
@@ -565,14 +565,14 @@ class Runner
                 $newlines = 1;
             }
 
-            StatusWriter::write('Processing '.basename($file->path).' ', 0, $newlines);
+            StatusWriter::write('Processing ' . basename($file->path) . ' ', 0, $newlines);
         }
 
         try {
             $file->process();
 
             if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                StatusWriter::write('DONE in '.Timing::getHumanReadableDuration(Timing::getDurationSince($startTime)), 0, 0);
+                StatusWriter::write('DONE in ' . Timing::getHumanReadableDuration(Timing::getDurationSince($startTime)), 0, 0);
 
                 if (PHP_CODESNIFFER_CBF === true) {
                     $errors   = $file->getFixableErrorCount();
@@ -585,7 +585,7 @@ class Runner
                 }
             }
         } catch (Exception $e) {
-            $error = 'An error occurred during processing; checking has been aborted. The error message was: '.$e->getMessage();
+            $error = 'An error occurred during processing; checking has been aborted. The error message was: ' . $e->getMessage();
 
             // Determine which sniff caused the error.
             $sniffStack = null;
@@ -612,7 +612,7 @@ class Runner
                     if (empty($nextStack) === false
                         && isset($nextStack['class']) === true
                     ) {
-                        $sniffCode = 'the '.Common::getSniffCode($nextStack['class']).' sniff';
+                        $sniffCode = 'the ' . Common::getSniffCode($nextStack['class']) . ' sniff';
                     }
                 } catch (InvalidArgumentException $e) {
                     // Sniff code could not be determined. This may be an abstract sniff class.
@@ -622,7 +622,7 @@ class Runner
                     $sniffCode = substr(strrchr(str_replace('\\', '/', $sniffStack['file']), '/'), 1);
                 }
 
-                $error .= sprintf(PHP_EOL.'The error originated in %s on line %s.', $sniffCode, $sniffStack['line']);
+                $error .= sprintf(PHP_EOL . 'The error originated in %s on line %s.', $sniffCode, $sniffStack['line']);
             }
 
             $file->addErrorOnLine($error, 1, 'Internal.Exception');
@@ -846,7 +846,7 @@ class Runner
             }//end if
         }//end if
 
-        StatusWriter::write($colorOpen.$progressDot.$colorClose, 0, 0);
+        StatusWriter::write($colorOpen . $progressDot . $colorClose, 0, 0);
 
         $numPerLine = 60;
         if ($numProcessed !== $numFiles && ($numProcessed % $numPerLine) !== 0) {
@@ -862,7 +862,7 @@ class Runner
             $padding += ($numPerLine - ($numFiles - (floor($numFiles / $numPerLine) * $numPerLine)));
         }
 
-        StatusWriter::write(str_repeat(' ', $padding)." $numProcessed / $numFiles ($percent%)");
+        StatusWriter::write(str_repeat(' ', $padding) . " $numProcessed / $numFiles ($percent%)");
 
     }//end printProgress()
 
@@ -877,9 +877,9 @@ class Runner
     private function registerOutOfMemoryShutdownMessage(string $command)
     {
         // Allocate all needed memory beforehand as much as possible.
-        $errorMsg    = PHP_EOL.'The PHP_CodeSniffer "%1$s" command ran out of memory.'.PHP_EOL;
-        $errorMsg   .= 'Either raise the "memory_limit" of PHP in the php.ini file or raise the memory limit at runtime'.PHP_EOL;
-        $errorMsg   .= 'using `%1$s -d memory_limit=512M` (replace 512M with the desired memory limit).'.PHP_EOL;
+        $errorMsg    = PHP_EOL . 'The PHP_CodeSniffer "%1$s" command ran out of memory.' . PHP_EOL;
+        $errorMsg   .= 'Either raise the "memory_limit" of PHP in the php.ini file or raise the memory limit at runtime' . PHP_EOL;
+        $errorMsg   .= 'using `%1$s -d memory_limit=512M` (replace 512M with the desired memory limit).' . PHP_EOL;
         $errorMsg    = sprintf($errorMsg, $command);
         $memoryError = 'Allowed memory size of';
         $errorArray  = [

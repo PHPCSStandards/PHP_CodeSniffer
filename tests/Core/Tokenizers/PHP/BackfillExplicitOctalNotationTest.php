@@ -36,7 +36,7 @@ final class BackfillExplicitOctalNotationTest extends AbstractTokenizerTestCase
 
         $this->assertSame($value, $tokens[$number]['content'], 'Content of integer token does not match expectation');
 
-        $this->assertSame($nextToken, $tokens[($number + 1)]['code'], 'Next token is not the expected type, but '.$tokens[($number + 1)]['type']);
+        $this->assertSame($nextToken, $tokens[($number + 1)]['code'], 'Next token is not the expected type, but ' . $tokens[($number + 1)]['type']);
         $this->assertSame($nextContent, $tokens[($number + 1)]['content'], 'Next token did not have the expected contents');
 
     }//end testExplicitOctalNotation()

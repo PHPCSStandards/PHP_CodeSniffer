@@ -34,8 +34,8 @@ final class DoubleArrowTest extends AbstractTokenizerTestCase
         $token      = $this->getTargetToken($testMarker, [T_DOUBLE_ARROW, T_MATCH_ARROW, T_FN_ARROW]);
         $tokenArray = $tokens[$token];
 
-        $this->assertSame(T_DOUBLE_ARROW, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_DOUBLE_ARROW (code)');
-        $this->assertSame('T_DOUBLE_ARROW', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_DOUBLE_ARROW (type)');
+        $this->assertSame(T_DOUBLE_ARROW, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_DOUBLE_ARROW (code)');
+        $this->assertSame('T_DOUBLE_ARROW', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_DOUBLE_ARROW (type)');
 
     }//end testDoubleArrow()
 
@@ -119,8 +119,8 @@ final class DoubleArrowTest extends AbstractTokenizerTestCase
         $token      = $this->getTargetToken($testMarker, [T_DOUBLE_ARROW, T_MATCH_ARROW, T_FN_ARROW]);
         $tokenArray = $tokens[$token];
 
-        $this->assertSame(T_MATCH_ARROW, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_MATCH_ARROW (code)');
-        $this->assertSame('T_MATCH_ARROW', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_MATCH_ARROW (type)');
+        $this->assertSame(T_MATCH_ARROW, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_MATCH_ARROW (code)');
+        $this->assertSame('T_MATCH_ARROW', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_MATCH_ARROW (type)');
 
     }//end testMatchArrow()
 
@@ -206,8 +206,8 @@ final class DoubleArrowTest extends AbstractTokenizerTestCase
         $token      = $this->getTargetToken($testMarker, [T_DOUBLE_ARROW, T_MATCH_ARROW, T_FN_ARROW]);
         $tokenArray = $tokens[$token];
 
-        $this->assertSame(T_FN_ARROW, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_FN_ARROW (code)');
-        $this->assertSame('T_FN_ARROW', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_FN_ARROW (type)');
+        $this->assertSame(T_FN_ARROW, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_FN_ARROW (code)');
+        $this->assertSame('T_FN_ARROW', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_FN_ARROW (type)');
 
     }//end testFnArrow()
 

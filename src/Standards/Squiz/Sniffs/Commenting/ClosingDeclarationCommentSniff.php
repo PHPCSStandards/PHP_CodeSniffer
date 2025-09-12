@@ -72,7 +72,7 @@ class ClosingDeclarationCommentSniff implements Sniff
                 return;
             }
 
-            $comment = '//end '.$decName.'()';
+            $comment = '//end ' . $decName . '()';
         } else if ($tokens[$stackPtr]['code'] === T_CLASS) {
             $comment = '//end class';
         } else if ($tokens[$stackPtr]['code'] === T_INTERFACE) {
@@ -104,13 +104,13 @@ class ClosingDeclarationCommentSniff implements Sniff
 
                     // Just in case, because indentation fixes can add indents onto
                     // these comments and cause us to be unable to fix them.
-                    $phpcsFile->fixer->replaceToken($next, $comment.$phpcsFile->eolChar);
+                    $phpcsFile->fixer->replaceToken($next, $comment . $phpcsFile->eolChar);
                     $phpcsFile->fixer->endChangeset();
                 }
             } else {
                 $fix = $phpcsFile->addFixableError('Expected %s', $closingBracket, 'Missing', $data);
                 if ($fix === true) {
-                    $phpcsFile->fixer->replaceToken($closingBracket, '}'.$comment);
+                    $phpcsFile->fixer->replaceToken($closingBracket, '}' . $comment);
                 }
             }
 
@@ -120,7 +120,7 @@ class ClosingDeclarationCommentSniff implements Sniff
         if (rtrim($tokens[($closingBracket + 1)]['content']) !== $comment) {
             $fix = $phpcsFile->addFixableError('Expected %s', $closingBracket, 'Incorrect', $data);
             if ($fix === true) {
-                $phpcsFile->fixer->replaceToken(($closingBracket + 1), $comment.$phpcsFile->eolChar);
+                $phpcsFile->fixer->replaceToken(($closingBracket + 1), $comment . $phpcsFile->eolChar);
             }
 
             return;

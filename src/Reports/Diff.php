@@ -44,15 +44,15 @@ class Diff implements Report
         if (empty($tokens) === true) {
             if (PHP_CODESNIFFER_VERBOSITY === 1) {
                 $startTime = microtime(true);
-                StatusWriter::write('DIFF report is parsing '.basename($report['filename']).' ', 0, 0);
+                StatusWriter::write('DIFF report is parsing ' . basename($report['filename']) . ' ', 0, 0);
             } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                StatusWriter::write('DIFF report is forcing parse of '.$report['filename']);
+                StatusWriter::write('DIFF report is forcing parse of ' . $report['filename']);
             }
 
             $phpcsFile->parse();
 
             if (PHP_CODESNIFFER_VERBOSITY === 1) {
-                StatusWriter::write('DONE in '.Timing::getHumanReadableDuration(Timing::getDurationSince($startTime)));
+                StatusWriter::write('DONE in ' . Timing::getHumanReadableDuration(Timing::getDurationSince($startTime)));
             }
 
             $phpcsFile->fixer->startFile($phpcsFile);
@@ -78,7 +78,7 @@ class Diff implements Report
             return false;
         }
 
-        echo $diff.PHP_EOL;
+        echo $diff . PHP_EOL;
         return true;
 
     }//end generateFileReport()

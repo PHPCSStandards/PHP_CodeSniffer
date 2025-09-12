@@ -130,7 +130,7 @@ class CommentedOutCodeSniff implements Sniff
                 }
             }//end if
 
-            $content     .= $tokenContent.$phpcsFile->eolChar;
+            $content     .= $tokenContent . $phpcsFile->eolChar;
             $lastLineSeen = $tokens[$i]['line'];
 
             $lastCommentBlockToken = $i;
@@ -160,7 +160,7 @@ class CommentedOutCodeSniff implements Sniff
             return ($lastCommentBlockToken + 1);
         }
 
-        $content = '<?php '.$content.' ?>';
+        $content = '<?php ' . $content . ' ?>';
 
         // Because we are not really parsing code, the tokenizer can throw all sorts
         // of errors that don't mean anything, so ignore them.

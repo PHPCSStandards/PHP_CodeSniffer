@@ -25,7 +25,7 @@ final class ProcessRulesetCliArgsTest extends TestCase
      *
      * @var string
      */
-    private const FIXTURE_DIR = __DIR__.'/Fixtures/ProcessRulesetCliArgsTest';
+    private const FIXTURE_DIR = __DIR__ . '/Fixtures/ProcessRulesetCliArgsTest';
 
     /**
      * The Config object.
@@ -44,7 +44,7 @@ final class ProcessRulesetCliArgsTest extends TestCase
     {
         if (isset(self::$config) === false) {
             // Set up the ruleset.
-            $standard     = self::FIXTURE_DIR.'/.phpcs.xml';
+            $standard     = self::FIXTURE_DIR . '/.phpcs.xml';
             self::$config = new ConfigDouble(["--standard=$standard"]);
             new Ruleset(self::$config);
         }
@@ -192,12 +192,12 @@ final class ProcessRulesetCliArgsTest extends TestCase
             'Paths should be resolved based on the ruleset location: bootstrap' => [
                 'name'     => 'bootstrap',
                 'expected' => [
-                    self::FIXTURE_DIR.'/vendor/OrgName/ExtStandard/bootstrap.php',
+                    self::FIXTURE_DIR . '/vendor/OrgName/ExtStandard/bootstrap.php',
                 ],
             ],
             'Paths should be resolved based on the ruleset location: cacheFile' => [
                 'name'     => 'cacheFile',
-                'expected' => self::FIXTURE_DIR.'/config/phpcs/.cache.phpcs',
+                'expected' => self::FIXTURE_DIR . '/config/phpcs/.cache.phpcs',
             ],
         ];
 
@@ -205,7 +205,7 @@ final class ProcessRulesetCliArgsTest extends TestCase
         if (PHP_CODESNIFFER_CBF === false) {
             $data['Paths should be resolved based on the ruleset location: reportFile'] = [
                 'name'     => 'reportFile',
-                'expected' => self::FIXTURE_DIR.'/config/phpcs/report.txt',
+                'expected' => self::FIXTURE_DIR . '/config/phpcs/report.txt',
             ];
         }
 

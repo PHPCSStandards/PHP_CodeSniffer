@@ -63,7 +63,7 @@ final class ConstructorTest extends AbstractRulesetTestCase
             ],
             'Absolute path to standard directory passed' => [
                 'cliArgs'  => [
-                    '--standard='.__DIR__.DIRECTORY_SEPARATOR.'Fixtures'.DIRECTORY_SEPARATOR.'TestStandard',
+                    '--standard=' . __DIR__ . DIRECTORY_SEPARATOR . 'Fixtures' . DIRECTORY_SEPARATOR . 'TestStandard',
                     // Limit this to a valid sniff to prevent running into error messages unrelated to what
                     // is being tested here.
                     '--sniffs=TestStandard.ValidSniffs.RegisterEmptyArray',
@@ -114,14 +114,14 @@ final class ConstructorTest extends AbstractRulesetTestCase
      */
     public static function dataStandardsAreRegisteredWithAutoloader()
     {
-        $basePath     = dirname(__DIR__, 3).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'Standards'.DIRECTORY_SEPARATOR;
+        $basePath     = dirname(__DIR__, 3) . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Standards' . DIRECTORY_SEPARATOR;
         $defaultPaths = [
-            $basePath.'PEAR'  => 'PEAR',
-            $basePath.'PSR1'  => 'PSR1',
-            $basePath.'PSR12' => 'PSR12',
-            $basePath.'PSR2'  => 'PSR2',
-            $basePath.'Squiz' => 'Squiz',
-            $basePath.'Zend'  => 'Zend',
+            $basePath . 'PEAR'  => 'PEAR',
+            $basePath . 'PSR1'  => 'PSR1',
+            $basePath . 'PSR12' => 'PSR12',
+            $basePath . 'PSR2'  => 'PSR2',
+            $basePath . 'Squiz' => 'Squiz',
+            $basePath . 'Zend'  => 'Zend',
         ];
 
         $data = [
@@ -134,8 +134,8 @@ final class ConstructorTest extends AbstractRulesetTestCase
             ],
         ];
 
-        $extraInstalledPath  = __DIR__.DIRECTORY_SEPARATOR.'Fixtures'.DIRECTORY_SEPARATOR.'DirectoryExpansion';
-        $extraInstalledPath .= DIRECTORY_SEPARATOR.'.hiddenAbove'.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'MyStandard';
+        $extraInstalledPath  = __DIR__ . DIRECTORY_SEPARATOR . 'Fixtures' . DIRECTORY_SEPARATOR . 'DirectoryExpansion';
+        $extraInstalledPath .= DIRECTORY_SEPARATOR . '.hiddenAbove' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'MyStandard';
         $data['Additional non-namespaced standard'] = [
             'cliArgs'  => [
                 '--standard=MyStandard',
@@ -146,7 +146,7 @@ final class ConstructorTest extends AbstractRulesetTestCase
             'expected' => ($defaultPaths + [$extraInstalledPath => 'MyStandard']),
         ];
 
-        $extraInstalledPath = __DIR__.DIRECTORY_SEPARATOR.'Fixtures'.DIRECTORY_SEPARATOR.'TestStandard';
+        $extraInstalledPath = __DIR__ . DIRECTORY_SEPARATOR . 'Fixtures' . DIRECTORY_SEPARATOR . 'TestStandard';
         $data['Additional namespaced standard'] = [
             'cliArgs'  => [
                 '--standard=TestStandard',
@@ -278,10 +278,10 @@ final class ConstructorTest extends AbstractRulesetTestCase
      */
     public function testNoSniffsRegisteredException()
     {
-        $standard = __DIR__.'/ConstructorNoSniffsTest.xml';
+        $standard = __DIR__ . '/ConstructorNoSniffsTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
-        $message = 'ERROR: No sniffs were registered.'.PHP_EOL.PHP_EOL;
+        $message = 'ERROR: No sniffs were registered.' . PHP_EOL . PHP_EOL;
         $this->expectRuntimeExceptionMessage($message);
 
         new Ruleset($config);

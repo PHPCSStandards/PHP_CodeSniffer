@@ -28,7 +28,7 @@ final class ShouldProcessFileWithoutExtensionTest extends AbstractFilterTestCase
      */
     public function testFileWithoutExtensionIsAcceptedWhenExplicitlyRequested()
     {
-        $fileWithoutExt = self::getBaseDir().'/bin/phpcs';
+        $fileWithoutExt = self::getBaseDir() . '/bin/phpcs';
 
         $fakeDI = new RecursiveArrayIterator([$fileWithoutExt]);
         $filter = new Filter($fakeDI, $fileWithoutExt, self::$config, self::$ruleset);
@@ -47,20 +47,20 @@ final class ShouldProcessFileWithoutExtensionTest extends AbstractFilterTestCase
     {
         $baseDir      = self::getBaseDir();
         $fakeFileList = [
-            $baseDir.'/autoload.php',
-            $baseDir.'/bin',
-            $baseDir.'/bin/phpcs',
-            $baseDir.'/scripts',
-            $baseDir.'/scripts/build-phar.php',
+            $baseDir . '/autoload.php',
+            $baseDir . '/bin',
+            $baseDir . '/bin/phpcs',
+            $baseDir . '/scripts',
+            $baseDir . '/scripts/build-phar.php',
         ];
         $fakeDI       = new RecursiveArrayIterator($fakeFileList);
         $filter       = new Filter($fakeDI, self::getBaseDir(), self::$config, self::$ruleset);
 
         $expectedOutput = [
-            $baseDir.'/autoload.php',
-            $baseDir.'/bin',
-            $baseDir.'/scripts',
-            $baseDir.'/scripts/build-phar.php',
+            $baseDir . '/autoload.php',
+            $baseDir . '/bin',
+            $baseDir . '/scripts',
+            $baseDir . '/scripts/build-phar.php',
         ];
 
         $this->assertSame($expectedOutput, $this->getFilteredResultsAsArray($filter));

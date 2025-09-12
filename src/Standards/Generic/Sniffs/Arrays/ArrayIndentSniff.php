@@ -152,7 +152,7 @@ class ArrayIndentSniff extends AbstractArraySniff
             $error = 'Closing brace of array declaration must be on a new line';
             $fix   = $phpcsFile->addFixableError($error, $arrayEnd, 'CloseBraceNotNewLine');
             if ($fix === true) {
-                $padding = $phpcsFile->eolChar.str_repeat(' ', $startIndent);
+                $padding = $phpcsFile->eolChar . str_repeat(' ', $startIndent);
                 $phpcsFile->fixer->addContentBefore($arrayEnd, $padding);
             }
 

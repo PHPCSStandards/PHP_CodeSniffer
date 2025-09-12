@@ -35,8 +35,8 @@ final class BackfillEnumTest extends AbstractTokenizerTestCase
         $enum       = $this->getTargetToken($testMarker, [T_ENUM, T_STRING], $testContent);
         $tokenArray = $tokens[$enum];
 
-        $this->assertSame(T_ENUM, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_ENUM (code)');
-        $this->assertSame('T_ENUM', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_ENUM (type)');
+        $this->assertSame(T_ENUM, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_ENUM (code)');
+        $this->assertSame('T_ENUM', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_ENUM (type)');
 
         $this->assertArrayHasKey('scope_condition', $tokenArray);
         $this->assertArrayHasKey('scope_opener', $tokenArray);
@@ -148,8 +148,8 @@ final class BackfillEnumTest extends AbstractTokenizerTestCase
         $tokens     = $this->phpcsFile->getTokens();
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(constant($expectedType), $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (code)');
-        $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not '.$expectedType.' (type)');
+        $this->assertSame(constant($expectedType), $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (code)');
+        $this->assertSame($expectedType, $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedType . ' (type)');
 
     }//end testNotEnums()
 

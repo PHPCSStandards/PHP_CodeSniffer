@@ -78,8 +78,8 @@ final class RegisterSniffsTest extends TestCase
         ksort(self::$originalSniffs);
 
         // Update the sniff file list.
-        $standardsDir  = dirname(__DIR__, 3).DIRECTORY_SEPARATOR;
-        $standardsDir .= 'src'.DIRECTORY_SEPARATOR.'Standards'.DIRECTORY_SEPARATOR;
+        $standardsDir  = dirname(__DIR__, 3) . DIRECTORY_SEPARATOR;
+        $standardsDir .= 'src' . DIRECTORY_SEPARATOR . 'Standards' . DIRECTORY_SEPARATOR;
 
         self::$psr1SniffAbsolutePaths = self::relativeToAbsoluteSniffFiles($standardsDir, self::$psr1SniffFiles);
 
@@ -99,7 +99,7 @@ final class RegisterSniffsTest extends TestCase
         $fileList = [];
         foreach ($relativePaths as $sniffName) {
             $sniffFile  = str_replace('/', DIRECTORY_SEPARATOR, $sniffName);
-            $sniffFile  = $baseDir.$sniffFile;
+            $sniffFile  = $baseDir . $sniffFile;
             $fileList[] = $sniffFile;
         }
 
@@ -237,7 +237,7 @@ final class RegisterSniffsTest extends TestCase
      */
     public function testRegisterSniffsFiltersOutAbstractClasses()
     {
-        $extraPathsBaseDir = __DIR__.DIRECTORY_SEPARATOR.'Fixtures'.DIRECTORY_SEPARATOR;
+        $extraPathsBaseDir = __DIR__ . DIRECTORY_SEPARATOR . 'Fixtures' . DIRECTORY_SEPARATOR;
         $extraPaths        = [
             'DirectoryExpansion/.hiddenAbove/src/MyStandard/Sniffs/AbstractSniff.php',
             'DirectoryExpansion/.hiddenAbove/src/MyStandard/Sniffs/CategoryB/AnotherAbstractSniff.php',
@@ -265,7 +265,7 @@ final class RegisterSniffsTest extends TestCase
      */
     public function testRegisteredSniffsFiltersOutFilePathsWithoutSniffsDir()
     {
-        $extraPathsBaseDir = __DIR__.DIRECTORY_SEPARATOR.'Fixtures'.DIRECTORY_SEPARATOR;
+        $extraPathsBaseDir = __DIR__ . DIRECTORY_SEPARATOR . 'Fixtures' . DIRECTORY_SEPARATOR;
         $extraPaths        = [
             'DirectoryExpansion/.hiddenAbove/src/MyStandard/Utils/NotInSniffsDirSniff.php',
             'DirectoryExpansion/.hiddenAbove/src/MyStandard/Utils/SubDir/NotInSniffsDirSniff.php',

@@ -29,10 +29,10 @@ final class ProcessRuleInvalidTypeTest extends AbstractRulesetTestCase
      */
     public function testInvalidTypeHandling()
     {
-        $standard = __DIR__.'/ProcessRuleInvalidTypeTest.xml';
+        $standard = __DIR__ . '/ProcessRuleInvalidTypeTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
-        $message = 'ERROR: Message type "notice" for "Generic.Files.ByteOrderMark" is invalid; must be "error" or "warning".'.PHP_EOL.PHP_EOL;
+        $message = 'ERROR: Message type "notice" for "Generic.Files.ByteOrderMark" is invalid; must be "error" or "warning".' . PHP_EOL . PHP_EOL;
         $this->expectRuntimeExceptionMessage($message);
 
         new Ruleset($config);

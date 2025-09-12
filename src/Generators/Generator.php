@@ -51,11 +51,11 @@ abstract class Generator
         $this->ruleset = $ruleset;
 
         $find    = [
-            DIRECTORY_SEPARATOR.'Sniffs'.DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR . 'Sniffs' . DIRECTORY_SEPARATOR,
             'Sniff.php',
         ];
         $replace = [
-            DIRECTORY_SEPARATOR.'Docs'.DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR . 'Docs' . DIRECTORY_SEPARATOR,
             'Standard.xml',
         ];
 
@@ -126,7 +126,7 @@ abstract class Generator
             $documentation = $doc->getElementsByTagName('documentation')->item(0);
             if (($documentation instanceof DOMNode) === false) {
                 throw new GeneratorException(
-                    'Missing top-level <documentation> element in XML documentation file '.$file
+                    'Missing top-level <documentation> element in XML documentation file ' . $file
                 );
             }
 

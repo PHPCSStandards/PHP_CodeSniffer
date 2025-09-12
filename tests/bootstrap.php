@@ -31,10 +31,10 @@ if (defined('PHP_CODESNIFFER_CBF') === false) {
     $cbfMode = getenv('PHP_CODESNIFFER_CBF');
     if ($cbfMode === '1') {
         define('PHP_CODESNIFFER_CBF', true);
-        echo 'Note: Tests are running in "CBF" mode'.PHP_EOL.PHP_EOL;
+        echo 'Note: Tests are running in "CBF" mode' . PHP_EOL . PHP_EOL;
     } else {
         define('PHP_CODESNIFFER_CBF', false);
-        echo 'Note: Tests are running in "CS" mode'.PHP_EOL.PHP_EOL;
+        echo 'Note: Tests are running in "CS" mode' . PHP_EOL . PHP_EOL;
     }
 }
 
@@ -42,7 +42,7 @@ if (defined('PHP_CODESNIFFER_VERBOSITY') === false) {
     define('PHP_CODESNIFFER_VERBOSITY', 0);
 }
 
-require_once __DIR__.'/../autoload.php';
+require_once __DIR__ . '/../autoload.php';
 
 // Make sure all installed standards are autoloadable.
 $installedStandards = Standards::getInstalledStandardDetails();

@@ -37,8 +37,8 @@ final class YieldTest extends AbstractTokenizerTestCase
         $target     = $this->getTargetToken($testMarker, [T_YIELD, T_YIELD_FROM, T_STRING]);
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_YIELD, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_YIELD (code)');
-        $this->assertSame('T_YIELD', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_YIELD (type)');
+        $this->assertSame(T_YIELD, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_YIELD (code)');
+        $this->assertSame('T_YIELD', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_YIELD (type)');
 
         $this->assertSame($expectedContent, $tokenArray['content'], 'Token content does not match expectation');
 
@@ -81,8 +81,8 @@ final class YieldTest extends AbstractTokenizerTestCase
         $target     = $this->getTargetToken($testMarker, [T_YIELD, T_YIELD_FROM, T_STRING]);
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_YIELD_FROM, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_YIELD_FROM (code)');
-        $this->assertSame('T_YIELD_FROM', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_YIELD_FROM (type)');
+        $this->assertSame(T_YIELD_FROM, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_YIELD_FROM (code)');
+        $this->assertSame('T_YIELD_FROM', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_YIELD_FROM (type)');
 
         if (isset($tokenArray['orig_content']) === true) {
             $this->assertSame($expectedContent, $tokenArray['orig_content'], 'Token (orig) content does not match expectation');
@@ -140,17 +140,17 @@ final class YieldTest extends AbstractTokenizerTestCase
             $this->assertSame(
                 constant($tokenInfo['type']),
                 $tokens[$target]['code'],
-                'Token tokenized as '.Tokens::tokenName($tokens[$target]['code']).', not '.$tokenInfo['type'].' (code)'
+                'Token tokenized as ' . Tokens::tokenName($tokens[$target]['code']) . ', not ' . $tokenInfo['type'] . ' (code)'
             );
             $this->assertSame(
                 $tokenInfo['type'],
                 $tokens[$target]['type'],
-                'Token tokenized as '.$tokens[$target]['type'].', not '.$tokenInfo['type'].' (type)'
+                'Token tokenized as ' . $tokens[$target]['type'] . ', not ' . $tokenInfo['type'] . ' (type)'
             );
             $this->assertSame(
                 $tokenInfo['content'],
                 $tokens[$target]['content'],
-                'Content of token '.($nr + 1).' ('.$tokens[$target]['type'].') does not match expectations'
+                'Content of token ' . ($nr + 1) . ' (' . $tokens[$target]['type'] . ') does not match expectations'
             );
 
             ++$target;
@@ -400,8 +400,8 @@ final class YieldTest extends AbstractTokenizerTestCase
         $target     = $this->getTargetToken($testMarker, [T_YIELD, T_YIELD_FROM, T_STRING]);
         $tokenArray = $tokens[$target];
 
-        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (code)');
-        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_STRING (type)');
+        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
+        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (type)');
 
     }//end testYieldNonKeyword()
 

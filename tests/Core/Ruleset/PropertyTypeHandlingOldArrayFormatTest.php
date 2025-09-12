@@ -44,7 +44,7 @@ final class PropertyTypeHandlingOldArrayFormatTest extends AbstractRulesetTestCa
         $this->expectRuntimeExceptionRegex($regex);
 
         // Set up the ruleset.
-        $standard = __DIR__.'/PropertyTypeHandlingOldArrayFormatTest.xml';
+        $standard = __DIR__ . '/PropertyTypeHandlingOldArrayFormatTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         new Ruleset($config);
 

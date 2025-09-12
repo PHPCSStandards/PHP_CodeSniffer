@@ -42,12 +42,12 @@ final class StableCommentWhitespaceTest extends AbstractTokenizerTestCase
             $this->assertSame(
                 constant($tokenInfo['type']),
                 $tokens[$comment]['code'],
-                'Token tokenized as '.Tokens::tokenName($tokens[$comment]['code']).', not '.$tokenInfo['type'].' (code)'
+                'Token tokenized as ' . Tokens::tokenName($tokens[$comment]['code']) . ', not ' . $tokenInfo['type'] . ' (code)'
             );
             $this->assertSame(
                 $tokenInfo['type'],
                 $tokens[$comment]['type'],
-                'Token tokenized as '.$tokens[$comment]['type'].', not '.$tokenInfo['type'].' (type)'
+                'Token tokenized as ' . $tokens[$comment]['type'] . ', not ' . $tokenInfo['type'] . ' (type)'
             );
             $this->assertSame($tokenInfo['content'], $tokens[$comment]['content']);
 

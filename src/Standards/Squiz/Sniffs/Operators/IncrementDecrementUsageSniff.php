@@ -212,7 +212,7 @@ class IncrementDecrementUsageSniff implements Sniff
                 }
             }
 
-            $expected = $operator.$operator.$tokens[$assignedVar]['content'];
+            $expected = $operator . $operator . $tokens[$assignedVar]['content'];
             $found    = $phpcsFile->getTokensAsString($assignedVar, ($statementEnd - $assignedVar + 1));
 
             if ($operator === '+') {

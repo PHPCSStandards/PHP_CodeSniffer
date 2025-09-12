@@ -77,7 +77,7 @@ class Hgblame extends VersionControl
         while (empty($fileParts) === false) {
             array_pop($fileParts);
             $location = implode(DIRECTORY_SEPARATOR, $fileParts);
-            if (is_dir($location.DIRECTORY_SEPARATOR.'.hg') === true) {
+            if (is_dir($location . DIRECTORY_SEPARATOR . '.hg') === true) {
                 $found = true;
                 break;
             }
@@ -86,14 +86,14 @@ class Hgblame extends VersionControl
         if ($found === true) {
             chdir($location);
         } else {
-            $error = 'ERROR: Could not locate .hg directory '.PHP_EOL.PHP_EOL;
+            $error = 'ERROR: Could not locate .hg directory ' . PHP_EOL . PHP_EOL;
             throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         }
 
-        $command = 'hg blame -u -d -v "'.$filename.'" 2>&1';
+        $command = 'hg blame -u -d -v "' . $filename . '" 2>&1';
         $handle  = popen($command, 'r');
         if ($handle === false) {
-            $error = 'ERROR: Could not execute "'.$command.'"'.PHP_EOL.PHP_EOL;
+            $error = 'ERROR: Could not execute "' . $command . '"' . PHP_EOL . PHP_EOL;
             throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         }
 

@@ -43,26 +43,26 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
         $openerArray = $tokens[$opener];
         $closerArray = $tokens[$closer];
 
-        $this->assertArrayHasKey('parenthesis_owner', $ownerArray, $tokenType.' token does not have "parenthesis_owner" key');
-        $this->assertArrayHasKey('parenthesis_opener', $ownerArray, $tokenType.' token does not have "parenthesis_opener" key');
-        $this->assertArrayHasKey('parenthesis_closer', $ownerArray, $tokenType.' token does not have "parenthesis_closer" key');
-        $this->assertSame($owner, $ownerArray['parenthesis_owner'], $tokenType.' token "parenthesis_owner" key set incorrectly');
-        $this->assertSame($opener, $ownerArray['parenthesis_opener'], $tokenType.' token "parenthesis_opener" key set incorrectly');
-        $this->assertSame($closer, $ownerArray['parenthesis_closer'], $tokenType.' token "parenthesis_closer" key set incorrectly');
+        $this->assertArrayHasKey('parenthesis_owner', $ownerArray, $tokenType . ' token does not have "parenthesis_owner" key');
+        $this->assertArrayHasKey('parenthesis_opener', $ownerArray, $tokenType . ' token does not have "parenthesis_opener" key');
+        $this->assertArrayHasKey('parenthesis_closer', $ownerArray, $tokenType . ' token does not have "parenthesis_closer" key');
+        $this->assertSame($owner, $ownerArray['parenthesis_owner'], $tokenType . ' token "parenthesis_owner" key set incorrectly');
+        $this->assertSame($opener, $ownerArray['parenthesis_opener'], $tokenType . ' token "parenthesis_opener" key set incorrectly');
+        $this->assertSame($closer, $ownerArray['parenthesis_closer'], $tokenType . ' token "parenthesis_closer" key set incorrectly');
 
-        $this->assertArrayHasKey('parenthesis_owner', $openerArray, $tokenType.' opener does not have "parenthesis_owner" key');
-        $this->assertArrayHasKey('parenthesis_opener', $openerArray, $tokenType.' opener does not have "parenthesis_opener" key');
-        $this->assertArrayHasKey('parenthesis_closer', $openerArray, $tokenType.' opener does not have "parenthesis_closer" key');
-        $this->assertSame($owner, $openerArray['parenthesis_owner'], $tokenType.' opener "parenthesis_owner" key set incorrectly');
-        $this->assertSame($opener, $openerArray['parenthesis_opener'], $tokenType.' opener "parenthesis_opener" key set incorrectly');
-        $this->assertSame($closer, $openerArray['parenthesis_closer'], $tokenType.' opener "parenthesis_closer" key set incorrectly');
+        $this->assertArrayHasKey('parenthesis_owner', $openerArray, $tokenType . ' opener does not have "parenthesis_owner" key');
+        $this->assertArrayHasKey('parenthesis_opener', $openerArray, $tokenType . ' opener does not have "parenthesis_opener" key');
+        $this->assertArrayHasKey('parenthesis_closer', $openerArray, $tokenType . ' opener does not have "parenthesis_closer" key');
+        $this->assertSame($owner, $openerArray['parenthesis_owner'], $tokenType . ' opener "parenthesis_owner" key set incorrectly');
+        $this->assertSame($opener, $openerArray['parenthesis_opener'], $tokenType . ' opener "parenthesis_opener" key set incorrectly');
+        $this->assertSame($closer, $openerArray['parenthesis_closer'], $tokenType . ' opener "parenthesis_closer" key set incorrectly');
 
-        $this->assertArrayHasKey('parenthesis_owner', $closerArray, $tokenType.' closer does not have "parenthesis_owner" key');
-        $this->assertArrayHasKey('parenthesis_opener', $closerArray, $tokenType.' closer does not have "parenthesis_opener" key');
-        $this->assertArrayHasKey('parenthesis_closer', $closerArray, $tokenType.' closer does not have "parenthesis_closer" key');
-        $this->assertSame($owner, $closerArray['parenthesis_owner'], $tokenType.' closer "parenthesis_owner" key set incorrectly');
-        $this->assertSame($opener, $closerArray['parenthesis_opener'], $tokenType.' closer "parenthesis_opener" key set incorrectly');
-        $this->assertSame($closer, $closerArray['parenthesis_closer'], $tokenType.' closer "parenthesis_closer" key set incorrectly');
+        $this->assertArrayHasKey('parenthesis_owner', $closerArray, $tokenType . ' closer does not have "parenthesis_owner" key');
+        $this->assertArrayHasKey('parenthesis_opener', $closerArray, $tokenType . ' closer does not have "parenthesis_opener" key');
+        $this->assertArrayHasKey('parenthesis_closer', $closerArray, $tokenType . ' closer does not have "parenthesis_closer" key');
+        $this->assertSame($owner, $closerArray['parenthesis_owner'], $tokenType . ' closer "parenthesis_owner" key set incorrectly');
+        $this->assertSame($opener, $closerArray['parenthesis_opener'], $tokenType . ' closer "parenthesis_opener" key set incorrectly');
+        $this->assertSame($closer, $closerArray['parenthesis_closer'], $tokenType . ' closer "parenthesis_closer" key set incorrectly');
 
     }//end testParenthesesWithOwner()
 
@@ -309,9 +309,9 @@ final class CreateTokenMapParenthesesTest extends AbstractTokenizerTestCase
 
         $tokenType = Tokens::tokenName($tokenCode);
 
-        $this->assertArrayNotHasKey('parenthesis_owner', $tokenArray, $tokenType.' token has "parenthesis_owner" key');
-        $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, $tokenType.' token has "parenthesis_opener" key');
-        $this->assertArrayNotHasKey('parenthesis_closer', $tokenArray, $tokenType.' token has "parenthesis_closer" key');
+        $this->assertArrayNotHasKey('parenthesis_owner', $tokenArray, $tokenType . ' token has "parenthesis_owner" key');
+        $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, $tokenType . ' token has "parenthesis_opener" key');
+        $this->assertArrayNotHasKey('parenthesis_closer', $tokenArray, $tokenType . ' token has "parenthesis_closer" key');
 
     }//end testParenthesesOwnerWithoutParentheses()
 

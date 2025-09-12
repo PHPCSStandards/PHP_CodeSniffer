@@ -189,7 +189,7 @@ class HTML extends Generator
         );
 
         // Use the correct line endings based on the OS.
-        return str_replace("\n", PHP_EOL, $output).PHP_EOL;
+        return str_replace("\n", PHP_EOL, $output) . PHP_EOL;
 
     }//end getFormattedHeader()
 
@@ -211,10 +211,10 @@ class HTML extends Generator
             return '';
         }
 
-        $output  = '  <h2>Table of Contents</h2>'.PHP_EOL;
-        $output .= '  <ul class="toc">'.PHP_EOL;
+        $output  = '  <h2>Table of Contents</h2>' . PHP_EOL;
+        $output .= '  <ul class="toc">' . PHP_EOL;
 
-        $listItemTemplate = '   <li><a href="#%s">%s</a></li>'.PHP_EOL;
+        $listItemTemplate = '   <li><a href="#%s">%s</a></li>' . PHP_EOL;
 
         foreach ($this->docFiles as $file) {
             $doc = new DOMDocument();
@@ -224,7 +224,7 @@ class HTML extends Generator
             $output       .= sprintf($listItemTemplate, $this->titleToAnchor($title), $title);
         }
 
-        $output .= '  </ul>'.PHP_EOL;
+        $output .= '  </ul>' . PHP_EOL;
 
         return $output;
 
@@ -254,7 +254,7 @@ class HTML extends Generator
         error_reporting($errorLevel);
 
         // Use the correct line endings based on the OS.
-        return str_replace("\n", PHP_EOL, $output).PHP_EOL;
+        return str_replace("\n", PHP_EOL, $output) . PHP_EOL;
 
     }//end getFormattedFooter()
 
@@ -282,7 +282,7 @@ class HTML extends Generator
         if (trim($content) !== '') {
             $title = $this->getTitle($doc);
             printf(
-                '  <h2 id="%1$s">%2$s<a class="sniffanchor" href="#%1$s"> &sect; </a></h2>'.PHP_EOL,
+                '  <h2 id="%1$s">%2$s<a class="sniffanchor" href="#%1$s"> &sect; </a></h2>' . PHP_EOL,
                 $this->titleToAnchor($title),
                 $title
             );
@@ -309,8 +309,8 @@ class HTML extends Generator
 
         if (isset($this->seenAnchors[$title]) === true) {
             // Try to find a unique anchor for this title.
-            for ($i = 2; (isset($this->seenAnchors[$title.'-'.$i]) === true); $i++);
-            $title .= '-'.$i;
+            for ($i = 2; (isset($this->seenAnchors[$title . '-' . $i]) === true); $i++);
+            $title .= '-' . $i;
         }
 
         // Add to "seen" list.
@@ -360,16 +360,16 @@ class HTML extends Generator
                 if ($nextLine === '') {
                     // Next line is a blank line, end the paragraph and start a new one.
                     // Also skip over the blank line.
-                    $lines[] = $currentLine.'</p>'.PHP_EOL.'  <p class="text">';
+                    $lines[] = $currentLine . '</p>' . PHP_EOL . '  <p class="text">';
                     ++$i;
                 } else {
                     // Next line is not blank, so just add a line break.
-                    $lines[] = $currentLine.'<br/>'.PHP_EOL;
+                    $lines[] = $currentLine . '<br/>' . PHP_EOL;
                 }
             }
         }
 
-        return '  <p class="text">'.implode('', $lines).'</p>'.PHP_EOL;
+        return '  <p class="text">' . implode('', $lines) . '</p>' . PHP_EOL;
 
     }//end getFormattedTextBlock()
 
@@ -403,26 +403,26 @@ class HTML extends Generator
 
         $titleRow = '';
         if ($firstTitle !== '' || $secondTitle !== '') {
-            $titleRow .= '   <tr>'.PHP_EOL;
-            $titleRow .= "    <th class=\"code-comparison-title\">$firstTitle</th>".PHP_EOL;
-            $titleRow .= "    <th class=\"code-comparison-title\">$secondTitle</th>".PHP_EOL;
-            $titleRow .= '   </tr>'.PHP_EOL;
+            $titleRow .= '   <tr>' . PHP_EOL;
+            $titleRow .= "    <th class=\"code-comparison-title\">$firstTitle</th>" . PHP_EOL;
+            $titleRow .= "    <th class=\"code-comparison-title\">$secondTitle</th>" . PHP_EOL;
+            $titleRow .= '   </tr>' . PHP_EOL;
         }
 
         $codeRow = '';
         if ($first !== '' || $second !== '') {
-            $codeRow .= '   <tr>'.PHP_EOL;
-            $codeRow .= "    <td class=\"code-comparison-code\">$first</td>".PHP_EOL;
-            $codeRow .= "    <td class=\"code-comparison-code\">$second</td>".PHP_EOL;
-            $codeRow .= '   </tr>'.PHP_EOL;
+            $codeRow .= '   <tr>' . PHP_EOL;
+            $codeRow .= "    <td class=\"code-comparison-code\">$first</td>" . PHP_EOL;
+            $codeRow .= "    <td class=\"code-comparison-code\">$second</td>" . PHP_EOL;
+            $codeRow .= '   </tr>' . PHP_EOL;
         }
 
         $output = '';
         if ($titleRow !== '' || $codeRow !== '') {
-            $output  = '  <table class="code-comparison">'.PHP_EOL;
+            $output  = '  <table class="code-comparison">' . PHP_EOL;
             $output .= $titleRow;
             $output .= $codeRow;
-            $output .= '  </table>'.PHP_EOL;
+            $output .= '  </table>' . PHP_EOL;
         }
 
         return $output;

@@ -46,7 +46,7 @@ class Csv implements Report
                     $source   = $error['source'];
                     $severity = $error['severity'];
                     $fixable  = (int) $error['fixable'];
-                    echo "\"$filename\",$line,$column,$type,\"$message\",$source,$severity,$fixable".PHP_EOL;
+                    echo "\"$filename\",$line,$column,$type,\"$message\",$source,$severity,$fixable" . PHP_EOL;
                 }
             }
         }
@@ -83,7 +83,7 @@ class Csv implements Report
         bool $interactive = false,
         bool $toScreen = true
     ) {
-        echo 'File,Line,Column,Type,Message,Source,Severity,Fixable'.PHP_EOL;
+        echo 'File,Line,Column,Type,Message,Source,Severity,Fixable' . PHP_EOL;
         echo $cachedData;
 
     }//end generate()

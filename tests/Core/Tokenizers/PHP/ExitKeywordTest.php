@@ -33,8 +33,8 @@ final class ExitKeywordTest extends AbstractTokenizerTestCase
         $token      = $this->getTargetToken($testMarker, [T_EXIT, T_STRING], $testContent);
         $tokenArray = $tokens[$token];
 
-        $this->assertSame(T_EXIT, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_EXIT (code)');
-        $this->assertSame('T_EXIT', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_EXIT (type)');
+        $this->assertSame(T_EXIT, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_EXIT (code)');
+        $this->assertSame('T_EXIT', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_EXIT (type)');
 
     }//end testExitIsKeyword()
 
@@ -131,8 +131,8 @@ final class ExitKeywordTest extends AbstractTokenizerTestCase
         $token      = $this->getTargetToken($testMarker, [T_EXIT, $tokenCode], $testContent);
         $tokenArray = $tokens[$token];
 
-        $this->assertSame($tokenCode, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not '.$expected.' (code)');
-        $this->assertSame($expected, $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not '.$expected.' (type)');
+        $this->assertSame($tokenCode, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expected . ' (code)');
+        $this->assertSame($expected, $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expected . ' (type)');
 
     }//end testNotExitKeyword()
 

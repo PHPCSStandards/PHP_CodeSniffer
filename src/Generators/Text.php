@@ -68,9 +68,9 @@ class Text extends Generator
 
         $output  = PHP_EOL;
         $output .= str_repeat('-', ($titleLength + 4));
-        $output .= strtoupper(PHP_EOL."| $displayTitle |".PHP_EOL);
+        $output .= strtoupper(PHP_EOL . "| $displayTitle |" . PHP_EOL);
         $output .= str_repeat('-', ($titleLength + 4));
-        $output .= PHP_EOL.PHP_EOL;
+        $output .= PHP_EOL . PHP_EOL;
 
         return $output;
 
@@ -101,7 +101,7 @@ class Text extends Generator
         $nodeLines = array_map('trim', $nodeLines);
         $text      = implode(PHP_EOL, $nodeLines);
 
-        return wordwrap($text, 100, PHP_EOL).PHP_EOL.PHP_EOL;
+        return wordwrap($text, 100, PHP_EOL) . PHP_EOL . PHP_EOL;
 
     }//end getFormattedTextBlock()
 
@@ -136,20 +136,20 @@ class Text extends Generator
         $titleRow = '';
         if ($firstTitleLines !== [] || $secondTitleLines !== []) {
             $titleRow  = $this->linesToTableRows($firstTitleLines, $secondTitleLines);
-            $titleRow .= str_repeat('-', 100).PHP_EOL;
+            $titleRow .= str_repeat('-', 100) . PHP_EOL;
         }//end if
 
         $codeRow = '';
         if ($firstLines !== [] || $secondLines !== []) {
             $codeRow  = $this->linesToTableRows($firstLines, $secondLines);
-            $codeRow .= str_repeat('-', 100).PHP_EOL.PHP_EOL;
+            $codeRow .= str_repeat('-', 100) . PHP_EOL . PHP_EOL;
         }//end if
 
         $output = '';
         if ($titleRow !== '' || $codeRow !== '') {
             $output  = str_repeat('-', 41);
             $output .= ' CODE COMPARISON ';
-            $output .= str_repeat('-', 42).PHP_EOL;
+            $output .= str_repeat('-', 42) . PHP_EOL;
             $output .= $titleRow;
             $output .= $codeRow;
         }
@@ -224,10 +224,10 @@ class Text extends Generator
             $column2Text = ($column2Lines[$i] ?? '');
 
             $rows .= '| ';
-            $rows .= $column1Text.str_repeat(' ', max(0, (47 - strlen($column1Text))));
+            $rows .= $column1Text . str_repeat(' ', max(0, (47 - strlen($column1Text))));
             $rows .= '| ';
-            $rows .= $column2Text.str_repeat(' ', max(0, (48 - strlen($column2Text))));
-            $rows .= '|'.PHP_EOL;
+            $rows .= $column2Text . str_repeat(' ', max(0, (48 - strlen($column2Text))));
+            $rows .= '|' . PHP_EOL;
         }//end for
 
         return $rows;

@@ -30,7 +30,7 @@ final class ExpandRulesetReferenceInternalTest extends AbstractRulesetTestCase
     public function testInternalRefDoesNotGetExpanded()
     {
         // Set up the ruleset.
-        $standard = __DIR__.'/ExpandRulesetReferenceInternalIgnoreTest.xml';
+        $standard = __DIR__ . '/ExpandRulesetReferenceInternalIgnoreTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
@@ -50,13 +50,13 @@ final class ExpandRulesetReferenceInternalTest extends AbstractRulesetTestCase
      */
     public function testInternalStandardIsNotSupported()
     {
-        $message  = 'ERROR: The name "Internal" is reserved for internal use. A PHP_CodeSniffer standard should not be called "Internal".'.PHP_EOL;
-        $message .= 'Contact the maintainer of the standard to fix this.'.PHP_EOL.PHP_EOL;
+        $message  = 'ERROR: The name "Internal" is reserved for internal use. A PHP_CodeSniffer standard should not be called "Internal".' . PHP_EOL;
+        $message .= 'Contact the maintainer of the standard to fix this.' . PHP_EOL . PHP_EOL;
 
         $this->expectRuntimeExceptionMessage($message);
 
         // Set up the ruleset.
-        $standard = __DIR__.'/ExpandRulesetReferenceInternalStandardTest.xml';
+        $standard = __DIR__ . '/ExpandRulesetReferenceInternalStandardTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 

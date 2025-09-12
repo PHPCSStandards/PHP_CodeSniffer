@@ -46,7 +46,7 @@ class OpeningBraceSameLineSniff implements Sniff
     {
         $tokens          = $phpcsFile->getTokens();
         $scopeIdentifier = $phpcsFile->findNext(T_STRING, ($stackPtr + 1));
-        $errorData       = [strtolower($tokens[$stackPtr]['content']).' '.$tokens[$scopeIdentifier]['content']];
+        $errorData       = [strtolower($tokens[$stackPtr]['content']) . ' ' . $tokens[$scopeIdentifier]['content']];
 
         if (isset($tokens[$stackPtr]['scope_opener']) === false) {
             // Parse error or live coding.

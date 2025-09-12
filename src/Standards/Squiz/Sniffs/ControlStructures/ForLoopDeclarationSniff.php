@@ -243,7 +243,7 @@ class ForLoopDeclarationSniff implements Sniff
             if ($semicolonCount !== 1 || $prevNonWhiteSpace !== $openingBracket) {
                 if ($tokens[($semicolon - 1)]['code'] === T_WHITESPACE) {
                     $error     = 'Whitespace found before %s semicolon of FOR loop';
-                    $errorCode = 'SpacingBefore'.$humanReadableCode;
+                    $errorCode = 'SpacingBefore' . $humanReadableCode;
                     $fix       = $phpcsFile->addFixableError($error, $semicolon, $errorCode, $data);
                     if ($fix === true) {
                         $phpcsFile->fixer->beginChangeset();
@@ -264,7 +264,7 @@ class ForLoopDeclarationSniff implements Sniff
                     && $tokens[($semicolon + 1)]['code'] !== T_SEMICOLON
                 ) {
                     $error     = 'Expected 1 space after %s semicolon of FOR loop; 0 found';
-                    $errorCode = 'NoSpaceAfter'.$humanReadableCode;
+                    $errorCode = 'NoSpaceAfter' . $humanReadableCode;
                     $fix       = $phpcsFile->addFixableError($error, $semicolon, $errorCode, $data);
                     if ($fix === true) {
                         $phpcsFile->fixer->addContent($semicolon, ' ');
@@ -282,7 +282,7 @@ class ForLoopDeclarationSniff implements Sniff
                         || $spaces !== 'newline')
                     ) {
                         $error     = 'Expected 1 space after %s semicolon of FOR loop; %s found';
-                        $errorCode = 'SpacingAfter'.$humanReadableCode;
+                        $errorCode = 'SpacingAfter' . $humanReadableCode;
                         $data[]    = $spaces;
                         $fix       = $phpcsFile->addFixableError($error, $semicolon, $errorCode, $data);
                         if ($fix === true) {

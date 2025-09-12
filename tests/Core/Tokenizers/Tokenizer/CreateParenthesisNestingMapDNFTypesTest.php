@@ -34,7 +34,7 @@ final class CreateParenthesisNestingMapDNFTypesTest extends AbstractTokenizerTes
         $opener  = $tokens[$openPtr];
 
         // Make sure we're looking at the right token.
-        $this->assertSame(T_OPEN_PARENTHESIS, $opener['code'], 'Token tokenized as '.$opener['type'].', not T_OPEN_PARENTHESIS (code)');
+        $this->assertSame(T_OPEN_PARENTHESIS, $opener['code'], 'Token tokenized as ' . $opener['type'] . ', not T_OPEN_PARENTHESIS (code)');
 
         if ($owner !== false) {
             $this->assertArrayHasKey('parenthesis_owner', $opener, 'Parenthesis owner is not set');
@@ -51,7 +51,7 @@ final class CreateParenthesisNestingMapDNFTypesTest extends AbstractTokenizerTes
         $closer   = $tokens[$closePtr];
 
         // Make sure we're looking at the right token.
-        $this->assertSame(T_CLOSE_PARENTHESIS, $closer['code'], 'Token tokenized as '.$closer['type'].', not T_CLOSE_PARENTHESIS (code)');
+        $this->assertSame(T_CLOSE_PARENTHESIS, $closer['code'], 'Token tokenized as ' . $closer['type'] . ', not T_CLOSE_PARENTHESIS (code)');
 
         if ($owner !== false) {
             $this->assertArrayHasKey('parenthesis_owner', $closer, 'Parenthesis owner is not set');
@@ -200,7 +200,7 @@ final class CreateParenthesisNestingMapDNFTypesTest extends AbstractTokenizerTes
         $opener  = $tokens[$openPtr];
 
         // Make sure we're looking at the right token.
-        $this->assertSame(T_TYPE_OPEN_PARENTHESIS, $opener['code'], 'Token tokenized as '.$opener['type'].', not T_TYPE_OPEN_PARENTHESIS (code)');
+        $this->assertSame(T_TYPE_OPEN_PARENTHESIS, $opener['code'], 'Token tokenized as ' . $opener['type'] . ', not T_TYPE_OPEN_PARENTHESIS (code)');
 
         $this->assertArrayNotHasKey('parenthesis_owner', $opener, 'Parenthesis owner is set');
         $this->assertArrayHasKey('parenthesis_opener', $opener, 'Parenthesis opener is not set');
@@ -211,7 +211,7 @@ final class CreateParenthesisNestingMapDNFTypesTest extends AbstractTokenizerTes
         $closer   = $tokens[$closePtr];
 
         // Make sure we're looking at the right token.
-        $this->assertSame(T_TYPE_CLOSE_PARENTHESIS, $closer['code'], 'Token tokenized as '.$closer['type'].', not T_TYPE_CLOSE_PARENTHESIS (code)');
+        $this->assertSame(T_TYPE_CLOSE_PARENTHESIS, $closer['code'], 'Token tokenized as ' . $closer['type'] . ', not T_TYPE_CLOSE_PARENTHESIS (code)');
 
         $this->assertArrayNotHasKey('parenthesis_owner', $closer, 'Parenthesis owner is set');
         $this->assertArrayHasKey('parenthesis_opener', $closer, 'Parenthesis opener is not set');

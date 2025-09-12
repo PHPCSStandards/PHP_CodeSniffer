@@ -189,7 +189,7 @@ class MultiLineConditionSniff implements Sniff
                                 if (isset(Tokens::BOOLEAN_OPERATORS[$tokens[$prev]['code']]) === true) {
                                     $phpcsFile->fixer->beginChangeset();
                                     $phpcsFile->fixer->replaceToken($prev, '');
-                                    $phpcsFile->fixer->addContentBefore($next, $tokens[$prev]['content'].' ');
+                                    $phpcsFile->fixer->addContentBefore($next, $tokens[$prev]['content'] . ' ');
                                     $phpcsFile->fixer->endChangeset();
                                 } else {
                                     for ($x = ($prev + 1); $x < $next; $x++) {

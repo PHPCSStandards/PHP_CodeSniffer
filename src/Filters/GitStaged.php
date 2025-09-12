@@ -42,7 +42,7 @@ class GitStaged extends ExactMatch
     {
         $modified = [];
 
-        $cmd    = 'git diff --cached --name-only -- '.escapeshellarg($this->basedir);
+        $cmd    = 'git diff --cached --name-only -- ' . escapeshellarg($this->basedir);
         $output = $this->exec($cmd);
 
         $basedir = $this->basedir;

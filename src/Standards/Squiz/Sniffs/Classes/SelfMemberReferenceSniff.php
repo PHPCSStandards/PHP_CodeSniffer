@@ -83,7 +83,7 @@ class SelfMemberReferenceSniff extends AbstractScopeSniff
                 $namespaceName = '';
             }
 
-            $declarationName = $namespaceName.'\\'.$phpcsFile->getDeclarationName($currScope);
+            $declarationName = $namespaceName . '\\' . $phpcsFile->getDeclarationName($currScope);
             $inlineName      = '';
 
             switch ($tokens[$calledClassName]['code']) {
@@ -93,11 +93,11 @@ class SelfMemberReferenceSniff extends AbstractScopeSniff
 
             case T_NAME_QUALIFIED:
             case T_STRING:
-                $inlineName = $namespaceName.'\\'.$tokens[$calledClassName]['content'];
+                $inlineName = $namespaceName . '\\' . $tokens[$calledClassName]['content'];
                 break;
 
             case T_NAME_RELATIVE:
-                $inlineName = $namespaceName.substr($tokens[$calledClassName]['content'], 9);
+                $inlineName = $namespaceName . substr($tokens[$calledClassName]['content'], 9);
                 break;
             }
 

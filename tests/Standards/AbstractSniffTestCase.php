@@ -56,7 +56,7 @@ TEMPLATE;
      *
      * @var string
      */
-    private const RULESET_FILENAME = __DIR__.'/sniffStnd.xml';
+    private const RULESET_FILENAME = __DIR__ . '/sniffStnd.xml';
 
     /**
      * Cache for the Config object.
@@ -161,10 +161,10 @@ TEMPLATE;
         // Get a list of all test files to check.
         $testFiles = $this->getTestFiles($testFileBase);
         if (empty($testFiles) === true) {
-            $this->markTestIncomplete('No test case files found for '.static::class);
+            $this->markTestIncomplete('No test case files found for ' . static::class);
         }
 
-        $sniffFile = preg_replace('`[/\\\\]Tests[/\\\\]`', DIRECTORY_SEPARATOR.'Sniffs'.DIRECTORY_SEPARATOR, $testFileBase);
+        $sniffFile = preg_replace('`[/\\\\]Tests[/\\\\]`', DIRECTORY_SEPARATOR . 'Sniffs' . DIRECTORY_SEPARATOR, $testFileBase);
         $sniffFile = str_replace('UnitTest.', 'Sniff.php', $sniffFile);
 
         if (file_exists($sniffFile) === false) {
@@ -205,7 +205,7 @@ TEMPLATE;
                 $phpcsFile = new LocalFile($testFile, $ruleset, $config);
                 $phpcsFile->process();
             } catch (RuntimeException $e) {
-                $this->fail('An unexpected exception has been caught: '.$e->getMessage());
+                $this->fail('An unexpected exception has been caught: ' . $e->getMessage());
             }
 
             $failures        = $this->generateFailureMessages($phpcsFile);
@@ -220,7 +220,7 @@ TEMPLATE;
                 }
 
                 // Check for a .fixed file to check for accuracy of fixes.
-                $fixedFile = $testFile.'.fixed';
+                $fixedFile = $testFile . '.fixed';
                 $filename  = basename($testFile);
                 if (file_exists($fixedFile) === true) {
                     if ($phpcsFile->fixer->getContents() !== file_get_contents($fixedFile)) {
@@ -301,7 +301,7 @@ TEMPLATE;
 
                 $errorsTemp = [];
                 foreach ($errors as $foundError) {
-                    $errorsTemp[] = $foundError['message'].' ('.$foundError['source'].')';
+                    $errorsTemp[] = $foundError['message'] . ' (' . $foundError['source'] . ')';
                 }
 
                 $allProblems[$line]['found_errors'] = array_merge($foundErrorsTemp, $errorsTemp);
@@ -347,7 +347,7 @@ TEMPLATE;
 
                 $warningsTemp = [];
                 foreach ($warnings as $warning) {
-                    $warningsTemp[] = $warning['message'].' ('.$warning['source'].')';
+                    $warningsTemp[] = $warning['message'] . ' (' . $warning['source'] . ')';
                 }
 
                 $allProblems[$line]['found_warnings'] = array_merge($foundWarningsTemp, $warningsTemp);
@@ -390,14 +390,14 @@ TEMPLATE;
             if ($expectedErrors !== $numErrors || $expectedWarnings !== $numWarnings) {
                 $lineMessage     = "[LINE $line]";
                 $expectedMessage = 'Expected ';
-                $foundMessage    = 'in '.basename($testFile).' but found ';
+                $foundMessage    = 'in ' . basename($testFile) . ' but found ';
 
                 if ($expectedErrors !== $numErrors) {
                     $expectedMessage .= "$expectedErrors error(s)";
                     $foundMessage    .= "$numErrors error(s)";
                     if ($numErrors !== 0) {
                         $foundString .= 'error(s)';
-                        $errors      .= implode(PHP_EOL.' -> ', $problems['found_errors']);
+                        $errors      .= implode(PHP_EOL . ' -> ', $problems['found_errors']);
                     }
 
                     if ($expectedWarnings !== $numWarnings) {
@@ -417,16 +417,16 @@ TEMPLATE;
                     if ($numWarnings !== 0) {
                         $foundString .= 'warning(s)';
                         if (empty($errors) === false) {
-                            $errors .= PHP_EOL.' -> ';
+                            $errors .= PHP_EOL . ' -> ';
                         }
 
-                        $errors .= implode(PHP_EOL.' -> ', $problems['found_warnings']);
+                        $errors .= implode(PHP_EOL . ' -> ', $problems['found_warnings']);
                     }
                 }
 
                 $fullMessage = "$lineMessage $expectedMessage $foundMessage.";
                 if ($errors !== '') {
-                    $fullMessage .= " The $foundString found were:".PHP_EOL." -> $errors";
+                    $fullMessage .= " The $foundString found were:" . PHP_EOL . " -> $errors";
                 }
 
                 $failureMessages[] = $fullMessage;

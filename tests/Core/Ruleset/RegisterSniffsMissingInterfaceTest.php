@@ -30,7 +30,7 @@ final class RegisterSniffsMissingInterfaceTest extends AbstractRulesetTestCase
     public function testNoNoticesForSniffsImplementingInterface()
     {
         // Set up the ruleset.
-        $standard = __DIR__.'/RegisterSniffsMissingInterfaceValidTest.xml';
+        $standard = __DIR__ . '/RegisterSniffsMissingInterfaceValidTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
         $this->expectOutputString('');
@@ -48,12 +48,12 @@ final class RegisterSniffsMissingInterfaceTest extends AbstractRulesetTestCase
     public function testErrorWhenSniffDoesntImplementInterface()
     {
         // Set up the ruleset.
-        $standard = __DIR__.'/RegisterSniffsMissingInterfaceInvalidTest.xml';
+        $standard = __DIR__ . '/RegisterSniffsMissingInterfaceInvalidTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
-        $expected  = 'ERROR: All sniffs must implement the PHP_CodeSniffer\\Sniffs\\Sniff interface.'.PHP_EOL;
-        $expected .= 'Interface not implemented for sniff Fixtures\\TestStandard\\Sniffs\\MissingInterface\\InvalidImplementsWithoutImplementSniff.'.PHP_EOL;
-        $expected .= 'Contact the sniff author to fix the sniff.'.PHP_EOL.PHP_EOL;
+        $expected  = 'ERROR: All sniffs must implement the PHP_CodeSniffer\\Sniffs\\Sniff interface.' . PHP_EOL;
+        $expected .= 'Interface not implemented for sniff Fixtures\\TestStandard\\Sniffs\\MissingInterface\\InvalidImplementsWithoutImplementSniff.' . PHP_EOL;
+        $expected .= 'Contact the sniff author to fix the sniff.' . PHP_EOL . PHP_EOL;
 
         $this->expectRuntimeExceptionMessage($expected);
 

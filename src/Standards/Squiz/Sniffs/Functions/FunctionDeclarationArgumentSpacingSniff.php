@@ -203,7 +203,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                 }
 
                 if ($spacesBefore !== $this->equalsSpacing) {
-                    $error = 'Incorrect spacing between argument "%s" and equals sign; expected '.$this->equalsSpacing.' but found %s';
+                    $error = 'Incorrect spacing between argument "%s" and equals sign; expected ' . $this->equalsSpacing . ' but found %s';
                     $data  = [
                         $param['name'],
                         $spacesBefore,
@@ -237,7 +237,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                 }
 
                 if ($spacesAfter !== $this->equalsSpacing) {
-                    $error = 'Incorrect spacing between default value and equals sign for argument "%s"; expected '.$this->equalsSpacing.' but found %s';
+                    $error = 'Incorrect spacing between default value and equals sign for argument "%s"; expected ' . $this->equalsSpacing . ' but found %s';
                     $data  = [
                         $param['name'],
                         $spacesAfter,
@@ -283,7 +283,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                         $data[] = strlen($gap);
                     } else {
                         // Gap contains more than just spaces: render these for better clarity.
-                        $data[] = '"'.Common::prepareForOutput($gap).'"';
+                        $data[] = '"' . Common::prepareForOutput($gap) . '"';
                     }
 
                     $fix = $phpcsFile->addFixableError($error, $typeHintToken, 'SpacingAfterHint', $data);
@@ -485,7 +485,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
 
                     if ($spacesAfter === 0) {
                         $error     = 'Expected 1 space between comma and %s "%s"; 0 found';
-                        $errorCode = 'NoSpaceBefore'.$typeOfNextShort;
+                        $errorCode = 'NoSpaceBefore' . $typeOfNextShort;
                         $data      = [
                             $typeOfNext,
                             $contentOfNext,
@@ -497,7 +497,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                         }
                     } else if ($spacesAfter !== 1) {
                         $error     = 'Expected 1 space between comma and %s "%s"; %s found';
-                        $errorCode = 'SpacingBefore'.$typeOfNextShort;
+                        $errorCode = 'SpacingBefore' . $typeOfNextShort;
                         $data      = [
                             $typeOfNext,
                             $contentOfNext,

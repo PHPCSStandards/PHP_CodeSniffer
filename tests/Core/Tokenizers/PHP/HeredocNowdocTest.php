@@ -36,12 +36,12 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
     public function testHeredocSingleLine()
     {
         $expectedSequence = [
-            [T_START_HEREDOC => '<<<EOD'."\n"],
-            [T_HEREDOC       => 'Some $var text'."\n"],
+            [T_START_HEREDOC => '<<<EOD' . "\n"],
+            [T_HEREDOC       => 'Some $var text' . "\n"],
             [T_END_HEREDOC   => 'EOD'],
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_START_HEREDOC);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_START_HEREDOC);
 
         $this->checkTokenSequence($target, $expectedSequence);
 
@@ -59,11 +59,11 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
     {
         $expectedSequence = [
             [T_START_NOWDOC => "<<<'MARKER'\n"],
-            [T_NOWDOC       => 'Some text'."\n"],
+            [T_NOWDOC       => 'Some text' . "\n"],
             [T_END_NOWDOC   => 'MARKER'],
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_START_NOWDOC);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_START_NOWDOC);
 
         $this->checkTokenSequence($target, $expectedSequence);
 
@@ -80,14 +80,14 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
     public function testHeredocMultiLine()
     {
         $expectedSequence = [
-            [T_START_HEREDOC => '<<<"😬"'."\n"],
-            [T_HEREDOC       => 'Lorum ipsum'."\n"],
-            [T_HEREDOC       => 'Some $var text'."\n"],
-            [T_HEREDOC       => 'dolor sit amet'."\n"],
+            [T_START_HEREDOC => '<<<"😬"' . "\n"],
+            [T_HEREDOC       => 'Lorum ipsum' . "\n"],
+            [T_HEREDOC       => 'Some $var text' . "\n"],
+            [T_HEREDOC       => 'dolor sit amet' . "\n"],
             [T_END_HEREDOC   => '😬'],
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_START_HEREDOC);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_START_HEREDOC);
 
         $this->checkTokenSequence($target, $expectedSequence);
 
@@ -105,13 +105,13 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
     {
         $expectedSequence = [
             [T_START_NOWDOC => "<<<'multi_line'\n"],
-            [T_NOWDOC       => 'Lorum ipsum'."\n"],
-            [T_NOWDOC       => 'Some text'."\n"],
-            [T_NOWDOC       => 'dolor sit amet'."\n"],
+            [T_NOWDOC       => 'Lorum ipsum' . "\n"],
+            [T_NOWDOC       => 'Some text' . "\n"],
+            [T_NOWDOC       => 'dolor sit amet' . "\n"],
             [T_END_NOWDOC   => 'multi_line'],
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_START_NOWDOC);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_START_NOWDOC);
 
         $this->checkTokenSequence($target, $expectedSequence);
 
@@ -128,14 +128,14 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
     public function testHeredocEndsOnBlankLine()
     {
         $expectedSequence = [
-            [T_START_HEREDOC => '<<<EOD'."\n"],
-            [T_HEREDOC       => 'Lorum ipsum'."\n"],
-            [T_HEREDOC       => 'dolor sit amet'."\n"],
+            [T_START_HEREDOC => '<<<EOD' . "\n"],
+            [T_HEREDOC       => 'Lorum ipsum' . "\n"],
+            [T_HEREDOC       => 'dolor sit amet' . "\n"],
             [T_HEREDOC       => "\n"],
             [T_END_HEREDOC   => 'EOD'],
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_START_HEREDOC);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_START_HEREDOC);
 
         $this->checkTokenSequence($target, $expectedSequence);
 
@@ -153,13 +153,13 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
     {
         $expectedSequence = [
             [T_START_NOWDOC => "<<<'EOD'\n"],
-            [T_NOWDOC       => 'Lorum ipsum'."\n"],
-            [T_NOWDOC       => 'dolor sit amet'."\n"],
+            [T_NOWDOC       => 'Lorum ipsum' . "\n"],
+            [T_NOWDOC       => 'dolor sit amet' . "\n"],
             [T_NOWDOC       => "\n"],
             [T_END_NOWDOC   => 'EOD'],
         ];
 
-        $target = $this->getTargetToken('/* '.__FUNCTION__.' */', T_START_NOWDOC);
+        $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_START_NOWDOC);
 
         $this->checkTokenSequence($target, $expectedSequence);
 
@@ -186,24 +186,24 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
             $expectedCode    = key($currentItem);
             $expectedType    = Tokens::tokenName($expectedCode);
             $expectedContent = current($currentItem);
-            $errorMsgSuffix  = PHP_EOL.'(StackPtr: '.$i.' | Position in sequence: '.$sequenceKey.' | Expected: '.$expectedType.')';
+            $errorMsgSuffix  = PHP_EOL . '(StackPtr: ' . $i . ' | Position in sequence: ' . $sequenceKey . ' | Expected: ' . $expectedType . ')';
 
             $this->assertSame(
                 $expectedCode,
                 $tokens[$i]['code'],
-                'Token tokenized as '.Tokens::tokenName($tokens[$i]['code']).', not '.$expectedType.' (code)'.$errorMsgSuffix
+                'Token tokenized as ' . Tokens::tokenName($tokens[$i]['code']) . ', not ' . $expectedType . ' (code)' . $errorMsgSuffix
             );
 
             $this->assertSame(
                 $expectedType,
                 $tokens[$i]['type'],
-                'Token tokenized as '.$tokens[$i]['type'].', not '.$expectedType.' (type)'.$errorMsgSuffix
+                'Token tokenized as ' . $tokens[$i]['type'] . ', not ' . $expectedType . ' (type)' . $errorMsgSuffix
             );
 
             $this->assertSame(
                 $expectedContent,
                 $tokens[$i]['content'],
-                'Token content did not match expectations'.$errorMsgSuffix
+                'Token content did not match expectations' . $errorMsgSuffix
             );
         }//end for
 

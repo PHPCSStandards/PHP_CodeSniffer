@@ -180,7 +180,7 @@ class EmbeddedPhpSniff implements Sniff
                 $padding = $this->calculateLineIndent($phpcsFile, $lastContentBeforeBlock);
 
                 $phpcsFile->fixer->beginChangeset();
-                $phpcsFile->fixer->addContentBefore($stackPtr, $phpcsFile->eolChar.str_repeat(' ', $padding));
+                $phpcsFile->fixer->addContentBefore($stackPtr, $phpcsFile->eolChar . str_repeat(' ', $padding));
 
                 // Make sure we don't leave trailing whitespace behind.
                 if ($tokens[($stackPtr - 1)]['code'] === T_INLINE_HTML
@@ -421,7 +421,7 @@ class EmbeddedPhpSniff implements Sniff
                 } else if ($tokens[($closeTag - 1)]['code'] === T_COMMENT
                     || isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[($closeTag - 1)]['code']]) === true
                 ) {
-                    $phpcsFile->fixer->replaceToken(($closeTag - 1), rtrim($tokens[($closeTag - 1)]['content']).' ');
+                    $phpcsFile->fixer->replaceToken(($closeTag - 1), rtrim($tokens[($closeTag - 1)]['content']) . ' ');
                 } else {
                     $phpcsFile->fixer->replaceToken(($closeTag - 1), ' ');
                 }

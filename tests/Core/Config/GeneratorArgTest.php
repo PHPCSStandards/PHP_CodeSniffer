@@ -124,7 +124,7 @@ final class GeneratorArgTest extends TestCase
      */
     public function testInvalidGenerator($generatorName)
     {
-        $message = 'ERROR: "'.$generatorName.'" is not a valid generator. The following generators are supported: Text, HTML and Markdown.';
+        $message = 'ERROR: "' . $generatorName . '" is not a valid generator. The following generators are supported: Text, HTML and Markdown.';
 
         $this->expectException(DeepExitException::class);
         $this->expectExceptionMessage($message);

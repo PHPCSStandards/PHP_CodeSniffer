@@ -32,7 +32,7 @@ final class RunPHPCSGeneratorTest extends AbstractRunnerTestCase
             $this->markTestSkipped('This test needs CS mode to run');
         }
 
-        $standard        = dirname(__DIR__).'/Generators/OneDocTest.xml';
+        $standard        = dirname(__DIR__) . '/Generators/OneDocTest.xml';
         $_SERVER['argv'] = [
             'phpcs',
             '--generator=Text',

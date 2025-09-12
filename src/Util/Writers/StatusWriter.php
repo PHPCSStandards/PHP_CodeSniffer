@@ -86,7 +86,7 @@ final class StatusWriter
     public static function forceWrite(string $message, int $indent = 0, int $newlines = 1)
     {
         if ($indent > 0) {
-            $message = str_repeat("\t", $indent).$message;
+            $message = str_repeat("\t", $indent) . $message;
         }
 
         if ($newlines > 0) {

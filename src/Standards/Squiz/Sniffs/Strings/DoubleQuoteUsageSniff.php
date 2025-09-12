@@ -105,7 +105,7 @@ class DoubleQuoteUsageSniff implements Sniff
 
         // The use of variables in double quoted strings is not allowed.
         if ($tokens[$stackPtr]['code'] === T_DOUBLE_QUOTED_STRING) {
-            $stringTokens = token_get_all('<?php '.$workingString);
+            $stringTokens = token_get_all('<?php ' . $workingString);
             foreach ($stringTokens as $token) {
                 if (is_array($token) === true && $token[0] === T_VARIABLE) {
                     $error = 'Variable "%s" not allowed in double quoted string; use concatenation instead';

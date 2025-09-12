@@ -29,11 +29,11 @@ final class HeredocParseErrorTest extends AbstractTokenizerTestCase
     {
         $tokens = $this->phpcsFile->getTokens();
 
-        $token      = $this->getTargetToken('/* testUnclosedHeredoc */', [T_START_HEREDOC, T_STRING], '<<< HEAD'."\n");
+        $token      = $this->getTargetToken('/* testUnclosedHeredoc */', [T_START_HEREDOC, T_STRING], '<<< HEAD' . "\n");
         $tokenArray = $tokens[$token];
 
-        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as '.$tokenArray['type'].', not T_START_HEREDOC (code)');
-        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as '.$tokenArray['type'].', not T_START_HEREDOC (type)');
+        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_START_HEREDOC (code)');
+        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_START_HEREDOC (type)');
 
     }//end testMergeConflict()
 

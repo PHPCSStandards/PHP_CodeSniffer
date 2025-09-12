@@ -49,7 +49,7 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
     public static function tearDownAfterClass(): void
     {
         if (is_string(self::$homepath) === true) {
-            putenv('HOME='.self::$homepath);
+            putenv('HOME=' . self::$homepath);
         } else {
             // Remove the environment variable as it didn't exist before.
             putenv('HOME');
@@ -65,7 +65,7 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
      */
     protected function setUp(): void
     {
-        $fakeHomePath = __DIR__.DIRECTORY_SEPARATOR.'Fixtures'.DIRECTORY_SEPARATOR.'FakeHomePath';
+        $fakeHomePath = __DIR__ . DIRECTORY_SEPARATOR . 'Fixtures' . DIRECTORY_SEPARATOR . 'FakeHomePath';
         putenv("HOME=$fakeHomePath");
 
     }//end setUp()
@@ -80,7 +80,7 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
     public function testHomePathRefGetsExpandedAndFindsSniff()
     {
         // Set up the ruleset.
-        $standard = __DIR__.'/ExpandRulesetReferenceHomePathTest.xml';
+        $standard = __DIR__ . '/ExpandRulesetReferenceHomePathTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
@@ -100,11 +100,11 @@ final class ExpandRulesetReferenceHomePathTest extends AbstractRulesetTestCase
     public function testHomePathRefGetsExpandedAndThrowsExceptionWhenPathIsInvalid()
     {
         // Set up the ruleset.
-        $standard = __DIR__.'/ExpandRulesetReferenceHomePathFailTest.xml';
+        $standard = __DIR__ . '/ExpandRulesetReferenceHomePathFailTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
 
-        $exceptionMessage  = 'ERROR: Referenced sniff "~/src/MyStandard/Sniffs/DoesntExist/" does not exist.'.PHP_EOL;
-        $exceptionMessage .= 'ERROR: No sniffs were registered.'.PHP_EOL.PHP_EOL;
+        $exceptionMessage  = 'ERROR: Referenced sniff "~/src/MyStandard/Sniffs/DoesntExist/" does not exist.' . PHP_EOL;
+        $exceptionMessage .= 'ERROR: No sniffs were registered.' . PHP_EOL . PHP_EOL;
         $this->expectRuntimeExceptionMessage($exceptionMessage);
 
         new Ruleset($config);

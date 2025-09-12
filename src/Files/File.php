@@ -453,7 +453,7 @@ class File
                             $pattern = str_replace('/', '\\\\', $pattern);
                         }
 
-                        $pattern = '`'.$pattern.'`i';
+                        $pattern = '`' . $pattern . '`i';
                         if (preg_match($pattern, $this->path) === 1) {
                             $this->ignoredListeners[$class] = true;
                             continue(2);
@@ -473,7 +473,7 @@ class File
                                 $pattern = str_replace('/', '\\\\', $pattern);
                             }
 
-                            $pattern = '`'.$pattern.'`i';
+                            $pattern = '`' . $pattern . '`i';
                             if (preg_match($pattern, $this->path) === 1) {
                                 $included = true;
                                 break;
@@ -494,7 +494,7 @@ class File
                 }
 
                 if (PHP_CODESNIFFER_VERBOSITY > 2) {
-                    StatusWriter::write('Processing '.$this->activeListener.'... ', 3, 0);
+                    StatusWriter::write('Processing ' . $this->activeListener . '... ', 3, 0);
                 }
 
                 $ignoreTo = $this->ruleset->sniffs[$class]->process($this, $stackPtr);
@@ -540,7 +540,7 @@ class File
 
             arsort($this->listenerTimes, SORT_NUMERIC);
             foreach ($this->listenerTimes as $listener => $timeTaken) {
-                StatusWriter::write("$listener: ".round(($timeTaken), 4).' secs', 1);
+                StatusWriter::write("$listener: " . round(($timeTaken), 4) . ' secs', 1);
             }
 
             StatusWriter::write('*** END SNIFF PROCESSING REPORT ***', 1);
@@ -883,14 +883,14 @@ class File
                 $listenerCode = substr($sniffCode, 0, strrpos($sniffCode, '.'));
             } else {
                 $listenerCode = Common::getSniffCode($this->activeListener);
-                $sniffCode    = $listenerCode.'.'.$code;
+                $sniffCode    = $listenerCode . '.' . $code;
                 $parts        = explode('.', $sniffCode);
             }
 
             $checkCodes = [
                 $sniffCode,
-                $parts[0].'.'.$parts[1].'.'.$parts[2],
-                $parts[0].'.'.$parts[1],
+                $parts[0] . '.' . $parts[1] . '.' . $parts[2],
+                $parts[0] . '.' . $parts[1],
                 $parts[0],
             ];
         }//end if
@@ -1008,7 +1008,7 @@ class File
                         $replacements['/'] = '\\\\';
                     }
 
-                    $pattern = '`'.strtr($pattern, $replacements).'`i';
+                    $pattern = '`' . strtr($pattern, $replacements) . '`i';
                     $matched = preg_match($pattern, $this->path);
 
                     if ($matched === 0) {
@@ -1329,7 +1329,7 @@ class File
             && $tokenCode !== T_TRAIT
             && $tokenCode !== T_ENUM
         ) {
-            throw new RuntimeException('Token type "'.$this->tokens[$stackPtr]['type'].'" is not T_FUNCTION, T_CLASS, T_INTERFACE, T_TRAIT or T_ENUM');
+            throw new RuntimeException('Token type "' . $this->tokens[$stackPtr]['type'] . '" is not T_FUNCTION, T_CLASS, T_INTERFACE, T_TRAIT or T_ENUM');
         }
 
         $stopPoint = $this->numTokens;
@@ -1856,7 +1856,7 @@ class File
         }//end if
 
         if ($returnType !== '' && $nullableReturnType === true) {
-            $returnType = '?'.$returnType;
+            $returnType = '?' . $returnType;
         }
 
         return [
@@ -2054,7 +2054,7 @@ class File
             }
 
             if ($type !== '' && $nullableType === true) {
-                $type = '?'.$type;
+                $type = '?' . $type;
             }
         }//end if
 

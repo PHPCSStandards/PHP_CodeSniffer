@@ -36,8 +36,8 @@ class Json implements Report
         $filename = str_replace('\\', '\\\\', $report['filename']);
         $filename = str_replace('"', '\"', $filename);
         $filename = str_replace('/', '\/', $filename);
-        echo '"'.$filename.'":{';
-        echo '"errors":'.$report['errors'].',"warnings":'.$report['warnings'].',"messages":[';
+        echo '"' . $filename . '":{';
+        echo '"errors":' . $report['errors'] . ',"warnings":' . $report['warnings'] . ',"messages":[';
 
         $messages = '';
         foreach ($report['messages'] as $line => $lineErrors) {
@@ -57,7 +57,7 @@ class Json implements Report
                     $messagesObject->column  = $column;
                     $messagesObject->fixable = $fixable;
 
-                    $messages .= json_encode($messagesObject).',';
+                    $messages .= json_encode($messagesObject) . ',';
                 }
             }
         }//end foreach
@@ -97,9 +97,9 @@ class Json implements Report
         bool $interactive = false,
         bool $toScreen = true
     ) {
-        echo '{"totals":{"errors":'.$totalErrors.',"warnings":'.$totalWarnings.',"fixable":'.$totalFixable.'},"files":{';
+        echo '{"totals":{"errors":' . $totalErrors . ',"warnings":' . $totalWarnings . ',"fixable":' . $totalFixable . '},"files":{';
         echo rtrim($cachedData, ',');
-        echo '}}'.PHP_EOL;
+        echo '}}' . PHP_EOL;
 
     }//end generate()
 

@@ -39,7 +39,7 @@ final class ProcessRuleShouldProcessElementTest extends AbstractRulesetTestCase
     {
         if (isset(self::$ruleset) === false) {
             // Set up the ruleset.
-            $standard      = __DIR__.'/ProcessRuleShouldProcessElementTest.xml';
+            $standard      = __DIR__ . '/ProcessRuleShouldProcessElementTest.xml';
             $config        = new ConfigDouble(["--standard=$standard"]);
             self::$ruleset = new Ruleset($config);
         }

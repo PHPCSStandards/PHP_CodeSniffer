@@ -296,7 +296,7 @@ class FunctionCallSignatureSniff implements Sniff
                         $prev--;
                     }
 
-                    $phpcsFile->fixer->addContent($prev, $padding.$closingContent);
+                    $phpcsFile->fixer->addContent($prev, $padding . $closingContent);
 
                     $prevNonWhitespace = $phpcsFile->findPrevious(T_WHITESPACE, ($closer - 1), null, true);
                     for ($i = ($prevNonWhitespace + 1); $i <= $closer; $i++) {
@@ -386,7 +386,7 @@ class FunctionCallSignatureSniff implements Sniff
                 if ($foundFunctionIndent === 0) {
                     $phpcsFile->fixer->addContentBefore($first, $padding);
                 } else if ($tokens[$first]['code'] === T_INLINE_HTML) {
-                    $newContent = $padding.ltrim($tokens[$first]['content']);
+                    $newContent = $padding . ltrim($tokens[$first]['content']);
                     $phpcsFile->fixer->replaceToken($first, $newContent);
                 } else {
                     $phpcsFile->fixer->replaceToken(($first - 1), $padding);
@@ -401,7 +401,7 @@ class FunctionCallSignatureSniff implements Sniff
             if ($fix === true) {
                 $phpcsFile->fixer->addContent(
                     $openBracket,
-                    $phpcsFile->eolChar.str_repeat(' ', ($foundFunctionIndent + $this->indent))
+                    $phpcsFile->eolChar . str_repeat(' ', ($foundFunctionIndent + $this->indent))
                 );
             }
         }
@@ -414,7 +414,7 @@ class FunctionCallSignatureSniff implements Sniff
             if ($fix === true) {
                 $phpcsFile->fixer->addContentBefore(
                     $closeBracket,
-                    $phpcsFile->eolChar.str_repeat(' ', ($foundFunctionIndent + $this->indent))
+                    $phpcsFile->eolChar . str_repeat(' ', ($foundFunctionIndent + $this->indent))
                 );
             }
         }
@@ -559,7 +559,7 @@ class FunctionCallSignatureSniff implements Sniff
                                 }
                             } else {
                                 if ($tokens[$i]['code'] === T_COMMENT) {
-                                    $comment = $padding.ltrim($tokens[$i]['content']);
+                                    $comment = $padding . ltrim($tokens[$i]['content']);
                                     $phpcsFile->fixer->replaceToken($i, $comment);
                                 } else {
                                     $phpcsFile->fixer->replaceToken($i, $padding);
@@ -608,7 +608,7 @@ class FunctionCallSignatureSniff implements Sniff
 
                             $phpcsFile->fixer->addContentBefore(
                                 $next,
-                                $phpcsFile->eolChar.str_repeat(' ', ($foundFunctionIndent + $this->indent))
+                                $phpcsFile->eolChar . str_repeat(' ', ($foundFunctionIndent + $this->indent))
                             );
                             $phpcsFile->fixer->endChangeset();
                         }

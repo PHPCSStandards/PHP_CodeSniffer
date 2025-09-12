@@ -244,7 +244,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
 
                 for ($i = ($tag + 3); $i < $end; $i++) {
                     if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING) {
-                        $comment .= ' '.$tokens[$i]['content'];
+                        $comment .= ' ' . $tokens[$i]['content'];
                     }
                 }
 
@@ -356,7 +356,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                                     $indent = $tokens[($i - 1)]['length'];
                                 }
 
-                                $comment       .= ' '.$tokens[$i]['content'];
+                                $comment       .= ' ' . $tokens[$i]['content'];
                                 $commentLines[] = [
                                     'comment' => $tokens[$i]['content'],
                                     'token'   => $i,
@@ -396,7 +396,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
         // this prefix to the variable name so comparisons are easier.
         foreach ($realParams as $pos => $param) {
             if ($param['variable_length'] === true) {
-                $realParams[$pos]['name'] = '...'.$realParams[$pos]['name'];
+                $realParams[$pos]['name'] = '...' . $realParams[$pos]['name'];
             }
         }
 
@@ -482,11 +482,11 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                             || $suggestedTypeHint === 'float'
                             || $suggestedTypeHint === 'bool'
                         ) {
-                            $errorCode = 'Scalar'.$errorCode;
+                            $errorCode = 'Scalar' . $errorCode;
                         }
 
                         $phpcsFile->addError($error, $stackPtr, $errorCode, $data);
-                    } else if ($typeHint !== $compareTypeHint && $typeHint !== '?'.$compareTypeHint) {
+                    } else if ($typeHint !== $compareTypeHint && $typeHint !== '?' . $compareTypeHint) {
                         $error = 'Expected type hint "%s"; found "%s" for %s';
                         $data  = [
                             $suggestedTypeHint,

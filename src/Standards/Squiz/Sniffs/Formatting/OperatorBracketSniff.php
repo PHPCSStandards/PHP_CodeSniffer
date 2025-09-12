@@ -359,8 +359,8 @@ class OperatorBracketSniff implements Sniff
             // Can only fix this error if both tokens are available for fixing.
             // Adding one bracket without the other will create parse errors.
             $phpcsFile->fixer->beginChangeset();
-            $phpcsFile->fixer->replaceToken($before, '('.$tokens[$before]['content']);
-            $phpcsFile->fixer->replaceToken($after, $tokens[$after]['content'].')');
+            $phpcsFile->fixer->replaceToken($before, '(' . $tokens[$before]['content']);
+            $phpcsFile->fixer->replaceToken($after, $tokens[$after]['content'] . ')');
             $phpcsFile->fixer->endChangeset();
         }
 

@@ -33,7 +33,7 @@ final class MarkdownTest extends TestCase
     public function testGeneratingInvalidDocsResultsInException()
     {
         // Set up the ruleset.
-        $standard = __DIR__.'/NoValidDocsTest.xml';
+        $standard = __DIR__ . '/NoValidDocsTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
@@ -84,16 +84,16 @@ final class MarkdownTest extends TestCase
     {
         return [
             'Standard without docs'            => [
-                'standard'       => __DIR__.'/NoDocsTest.xml',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputEmpty.txt',
+                'standard'       => __DIR__ . '/NoDocsTest.xml',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputEmpty.txt',
             ],
             'Standard with one doc file'       => [
-                'standard'       => __DIR__.'/OneDocTest.xml',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputOneDoc.md',
+                'standard'       => __DIR__ . '/OneDocTest.xml',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputOneDoc.md',
             ],
             'Standard with multiple doc files' => [
-                'standard'       => __DIR__.'/StructureDocsTest.xml',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputStructureDocs.md',
+                'standard'       => __DIR__ . '/StructureDocsTest.xml',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputStructureDocs.md',
             ],
         ];
 
@@ -113,7 +113,7 @@ final class MarkdownTest extends TestCase
     public function testDocSpecifics($sniffs, $pathToExpected)
     {
         // Set up the ruleset.
-        $standard = __DIR__.'/AllValidDocsTest.xml';
+        $standard = __DIR__ . '/AllValidDocsTest.xml';
         $config   = new ConfigDouble(["--standard=$standard", "--sniffs=$sniffs"]);
         $ruleset  = new Ruleset($config);
 
@@ -140,115 +140,115 @@ final class MarkdownTest extends TestCase
         return [
             'Documentation title: case'                         => [
                 'sniffs'         => 'StandardWithDocs.Content.DocumentationTitleCase',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputDocumentationTitleCase.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputDocumentationTitleCase.md',
             ],
             'Documentation title: length'                       => [
                 'sniffs'         => 'StandardWithDocs.Content.DocumentationTitleLength',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputDocumentationTitleLength.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputDocumentationTitleLength.md',
             ],
             'Documentation title: fallback to file name'        => [
                 'sniffs'         => 'StandardWithDocs.Content.DocumentationTitlePCREFallback',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputDocumentationTitlePCREFallback.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputDocumentationTitlePCREFallback.md',
             ],
             'Standard Element: blank line handling'             => [
                 'sniffs'         => 'StandardWithDocs.Content.StandardBlankLines',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputStandardBlankLines.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputStandardBlankLines.md',
             ],
             'Standard Element: encoding of special characters'  => [
                 'sniffs'         => 'StandardWithDocs.Content.StandardEncoding',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputStandardEncoding.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputStandardEncoding.md',
             ],
             'Standard Element: indent handling'                 => [
                 'sniffs'         => 'StandardWithDocs.Content.StandardIndent',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputStandardIndent.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputStandardIndent.md',
             ],
             'Standard Element: line wrapping'                   => [
                 'sniffs'         => 'StandardWithDocs.Content.StandardLineWrapping',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputStandardLineWrapping.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputStandardLineWrapping.md',
             ],
             'Code Title: line wrapping'                         => [
                 'sniffs'         => 'StandardWithDocs.Content.CodeTitleLineWrapping',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeTitleLineWrapping.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputCodeTitleLineWrapping.md',
             ],
             'Code Title: whitespace handling'                   => [
                 'sniffs'         => 'StandardWithDocs.Content.CodeTitleWhitespace',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeTitleWhitespace.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputCodeTitleWhitespace.md',
             ],
             'Code Comparison: blank line handling'              => [
                 'sniffs'         => 'StandardWithDocs.Content.CodeComparisonBlankLines',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonBlankLines.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputCodeComparisonBlankLines.md',
             ],
             'Code Comparison: different block lengths'          => [
                 'sniffs'         => 'StandardWithDocs.Content.CodeComparisonBlockLength',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonBlockLength.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputCodeComparisonBlockLength.md',
             ],
             'Code Comparison: encoding of special characters'   => [
                 'sniffs'         => 'StandardWithDocs.Content.CodeComparisonEncoding',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonEncoding.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputCodeComparisonEncoding.md',
             ],
             'Code Comparison: line length handling'             => [
                 'sniffs'         => 'StandardWithDocs.Content.CodeComparisonLineLength',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputCodeComparisonLineLength.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputCodeComparisonLineLength.md',
             ],
             'Unsupported: <code> element at the wrong level'    => [
                 'sniffs'         => 'StandardWithDocs.Unsupported.ElementAtWrongLevel',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputEmpty.txt',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputEmpty.txt',
             ],
             'Unsupported: one correct elm, one at wrong level'  => [
                 'sniffs'         => 'StandardWithDocs.Unsupported.OneElmAtWrongLevel',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputUnsupportedOneElmAtWrongLevel.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputUnsupportedOneElmAtWrongLevel.md',
             ],
             'Unsupported: superfluous code element'             => [
                 'sniffs'         => 'StandardWithDocs.Unsupported.SuperfluousCodeElement',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputUnsupportedSuperfluousCodeElement.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputUnsupportedSuperfluousCodeElement.md',
             ],
             'Unsupported: unknown element'                      => [
                 'sniffs'         => 'StandardWithDocs.Unsupported.UnknownElement',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputEmpty.txt',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputEmpty.txt',
             ],
             'Invalid: code comparison mismatched code elms'     => [
                 'sniffs'         => 'StandardWithDocs.Invalid.CodeComparisonMismatchedCodeElms',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputInvalidCodeComparisonMismatchedCodeElms.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputInvalidCodeComparisonMismatchedCodeElms.md',
             ],
             'Invalid: code comparison only has one code elm'    => [
                 'sniffs'         => 'StandardWithDocs.Invalid.CodeComparisonMissingCodeElm',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputInvalidCodeComparisonMissingCodeElm.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputInvalidCodeComparisonMissingCodeElm.md',
             ],
             'Invalid: code elements have no content'            => [
                 'sniffs'         => 'StandardWithDocs.Invalid.CodeComparisonNoCode',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputInvalidCodeComparisonNoCode.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputInvalidCodeComparisonNoCode.md',
             ],
             'Invalid: code comparison element has no content'   => [
                 'sniffs'         => 'StandardWithDocs.Invalid.CodeComparisonNoContent',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputInvalidCodeComparisonNoContent.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputInvalidCodeComparisonNoContent.md',
             ],
             'Invalid: code comparison two code elms, one empty' => [
                 'sniffs'         => 'StandardWithDocs.Invalid.CodeComparisonOneEmptyCodeElm',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputInvalidCodeComparisonOneEmptyCodeElm.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputInvalidCodeComparisonOneEmptyCodeElm.md',
             ],
             'Invalid: code comparison two empty code elms'      => [
                 'sniffs'         => 'StandardWithDocs.Invalid.CodeComparisonTwoEmptyCodeElms',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputInvalidCodeComparisonTwoEmptyCodeElms.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputInvalidCodeComparisonTwoEmptyCodeElms.md',
             ],
             'Invalid: code title attributes are empty'          => [
                 'sniffs'         => 'StandardWithDocs.Invalid.CodeTitleEmpty',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputInvalidCodeTitleEmpty.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputInvalidCodeTitleEmpty.md',
             ],
             'Invalid: code title attributes missing'            => [
                 'sniffs'         => 'StandardWithDocs.Invalid.CodeTitleMissing',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputInvalidCodeTitleMissing.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputInvalidCodeTitleMissing.md',
             ],
             'Invalid: documentation title attribute is empty'   => [
                 'sniffs'         => 'StandardWithDocs.Invalid.DocumentationTitleEmpty',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputInvalidDocumentationTitleEmpty.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputInvalidDocumentationTitleEmpty.md',
             ],
             'Invalid: documentation title attribute missing'    => [
                 'sniffs'         => 'StandardWithDocs.Invalid.DocumentationTitleMissing',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputInvalidDocumentationTitleMissing.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputInvalidDocumentationTitleMissing.md',
             ],
             'Invalid: standard element has no content'          => [
                 'sniffs'         => 'StandardWithDocs.Invalid.StandardNoContent',
-                'pathToExpected' => __DIR__.'/Expectations/ExpectedOutputInvalidStandardNoContent.md',
+                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputInvalidStandardNoContent.md',
             ],
         ];
 
@@ -263,7 +263,7 @@ final class MarkdownTest extends TestCase
     public function testFooter()
     {
         // Set up the ruleset.
-        $standard = __DIR__.'/OneDocTest.xml';
+        $standard = __DIR__ . '/OneDocTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
@@ -296,7 +296,7 @@ final class MarkdownTest extends TestCase
         $expected = error_reporting();
 
         // Set up the ruleset.
-        $standard = __DIR__.'/OneDocTest.xml';
+        $standard = __DIR__ . '/OneDocTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
@@ -335,7 +335,7 @@ final class MarkdownTest extends TestCase
         $originalIni = @ini_set('date.timezone', '');
 
         // Set up the ruleset.
-        $standard = __DIR__.'/OneDocTest.xml';
+        $standard = __DIR__ . '/OneDocTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 

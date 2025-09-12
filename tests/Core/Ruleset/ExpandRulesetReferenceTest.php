@@ -30,7 +30,7 @@ final class ExpandRulesetReferenceTest extends AbstractRulesetTestCase
     public function testRulesetRelativePathReferences()
     {
         // Set up the ruleset.
-        $standard = __DIR__.'/ExpandRulesetReferenceTest.xml';
+        $standard = __DIR__ . '/ExpandRulesetReferenceTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         $ruleset  = new Ruleset($config);
 
@@ -58,11 +58,11 @@ final class ExpandRulesetReferenceTest extends AbstractRulesetTestCase
     public function testUnresolvableReferenceThrowsException($standard, $replacement)
     {
         // Set up the ruleset.
-        $standard = __DIR__.'/'.$standard;
+        $standard = __DIR__ . '/' . $standard;
         $config   = new ConfigDouble(["--standard=$standard"]);
 
-        $exceptionMessage  = 'ERROR: Referenced sniff "%s" does not exist.'.PHP_EOL;
-        $exceptionMessage .= 'ERROR: No sniffs were registered.'.PHP_EOL.PHP_EOL;
+        $exceptionMessage  = 'ERROR: Referenced sniff "%s" does not exist.' . PHP_EOL;
+        $exceptionMessage .= 'ERROR: No sniffs were registered.' . PHP_EOL . PHP_EOL;
         $this->expectRuntimeExceptionMessage(sprintf($exceptionMessage, $replacement));
 
         new Ruleset($config);

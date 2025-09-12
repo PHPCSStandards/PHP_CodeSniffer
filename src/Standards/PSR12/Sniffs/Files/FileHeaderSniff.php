@@ -238,7 +238,7 @@ class FileHeaderSniff implements Sniff
                 if ($useType !== false && $tokens[$useType]['code'] === T_STRING) {
                     $content = strtolower($tokens[$useType]['content']);
                     if ($content === 'function' || $content === 'const') {
-                        $type .= ' '.$content;
+                        $type .= ' ' . $content;
                     }
                 }
 
@@ -302,11 +302,11 @@ class FileHeaderSniff implements Sniff
                 $next = $phpcsFile->findNext(T_WHITESPACE, ($line['end'] + 1), null, true);
                 if ($next !== false && $tokens[$next]['line'] !== ($tokens[$line['end']]['line'] + 2)) {
                     $error     = 'Header blocks must be separated by a single blank line';
-                    $errorCode = 'SpacingAfter'.str_replace(' ', '', ucwords($line['type'])).'Block';
+                    $errorCode = 'SpacingAfter' . str_replace(' ', '', ucwords($line['type'])) . 'Block';
                     $fix       = $phpcsFile->addFixableError($error, $line['end'], $errorCode);
                     if ($fix === true) {
                         if ($tokens[$next]['line'] === $tokens[$line['end']]['line']) {
-                            $phpcsFile->fixer->addContentBefore($next, $phpcsFile->eolChar.$phpcsFile->eolChar);
+                            $phpcsFile->fixer->addContentBefore($next, $phpcsFile->eolChar . $phpcsFile->eolChar);
                         } else if ($tokens[$next]['line'] === ($tokens[$line['end']]['line'] + 1)) {
                             $phpcsFile->fixer->addNewline($line['end']);
                         } else {
@@ -342,7 +342,7 @@ class FileHeaderSniff implements Sniff
                 $next = $phpcsFile->findNext(T_WHITESPACE, ($line['end'] + 1), null, true);
                 if ($tokens[$next]['line'] > ($tokens[$line['end']]['line'] + 1)) {
                     $error     = 'Header blocks must not contain blank lines';
-                    $errorCode = 'SpacingInside'.str_replace(' ', '', ucwords($line['type'])).'Block';
+                    $errorCode = 'SpacingInside' . str_replace(' ', '', ucwords($line['type'])) . 'Block';
                     $fix       = $phpcsFile->addFixableError($error, $line['end'], $errorCode);
                     if ($fix === true) {
                         $phpcsFile->fixer->beginChangeset();
