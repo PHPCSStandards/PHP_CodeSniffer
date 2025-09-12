@@ -20,12 +20,12 @@ class HTMLDouble extends HTML
      */
     protected function getFormattedFooter()
     {
-        $output ='  <div class="tag-line">Documentation generated on #REDACTED# by <a href="https://github.com/PHPCSStandards/PHP_CodeSniffer">PHP_CodeSniffer #VERSION#</a></div>
+        $output = '  <div class="tag-line">Documentation generated on #REDACTED# by <a href="https://github.com/PHPCSStandards/PHP_CodeSniffer">PHP_CodeSniffer #VERSION#</a></div>
  </body>
 </html>';
 
         // Use the correct line endings based on the OS.
-        return str_replace("\n", PHP_EOL, $output).PHP_EOL;
+        return str_replace("\n", PHP_EOL, $output) . PHP_EOL;
     }
 
     /**

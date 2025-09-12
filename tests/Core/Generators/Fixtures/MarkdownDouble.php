@@ -20,8 +20,8 @@ class MarkdownDouble extends Markdown
      */
     protected function getFormattedFooter()
     {
-        $output     = PHP_EOL.'Documentation generated on *REDACTED*';
-        $output    .= ' by [PHP_CodeSniffer *VERSION*](https://github.com/PHPCSStandards/PHP_CodeSniffer)'.PHP_EOL;
+        $output  = PHP_EOL . 'Documentation generated on *REDACTED*';
+        $output .= ' by [PHP_CodeSniffer *VERSION*](https://github.com/PHPCSStandards/PHP_CodeSniffer)' . PHP_EOL;
 
         return $output;
     }

@@ -11,7 +11,7 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\DeprecatedSniff;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
-class WithReplacementContainingLinuxNewlinesSniff implements Sniff,DeprecatedSniff
+class WithReplacementContainingLinuxNewlinesSniff implements Sniff, DeprecatedSniff
 {
 
     public function getDeprecationVersion()
@@ -27,10 +27,10 @@ class WithReplacementContainingLinuxNewlinesSniff implements Sniff,DeprecatedSni
     public function getDeprecationMessage()
     {
         return "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n"
-            ."Fusce vel vestibulum nunc. Sed luctus dolor tortor, eu euismod purus pretium sed.\n"
-            ."Fusce egestas congue massa semper cursus. Donec quis pretium tellus.\n"
-            ."In lacinia, augue ut ornare porttitor, diam nunc faucibus purus, et accumsan eros sapien at sem.\n"
-            .'Sed pulvinar aliquam malesuada. Aliquam erat volutpat. Mauris gravida rutrum lectus at egestas.';
+            . "Fusce vel vestibulum nunc. Sed luctus dolor tortor, eu euismod purus pretium sed.\n"
+            . "Fusce egestas congue massa semper cursus. Donec quis pretium tellus.\n"
+            . "In lacinia, augue ut ornare porttitor, diam nunc faucibus purus, et accumsan eros sapien at sem.\n"
+            . 'Sed pulvinar aliquam malesuada. Aliquam erat volutpat. Mauris gravida rutrum lectus at egestas.';
     }
 
     public function register()
