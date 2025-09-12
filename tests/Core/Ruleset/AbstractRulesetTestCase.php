@@ -73,8 +73,7 @@ abstract class AbstractRulesetTestCase extends TestCase
 
 
     /**
-     * Helper method to tell PHPUnit to expect a PHPCS RuntimeException which matches a regex patten
-     * in a PHPUnit cross-version compatible manner.
+     * Helper method to tell PHPUnit to expect a PHPCS RuntimeException which matches a regex pattern.
      *
      * @param string $regex The regex which should match.
      *
@@ -82,13 +81,7 @@ abstract class AbstractRulesetTestCase extends TestCase
      */
     protected function expectRuntimeExceptionRegex($regex)
     {
-        if (method_exists($this, 'expectExceptionMessageMatches') === true) {
-            $this->expectException(RuntimeException::class);
-            $this->expectExceptionMessageMatches($regex);
-        } else {
-            // PHPUnit < 8.4.0.
-            $this->expectException(RuntimeException::class);
-            $this->expectExceptionMessageRegExp($regex);
-        }
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessageMatches($regex);
     }
 }
