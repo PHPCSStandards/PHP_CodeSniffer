@@ -66,7 +66,7 @@ final class EmptyPHPStatementUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         switch ($testFile) {
         case 'EmptyPHPStatementUnitTest.1.inc':

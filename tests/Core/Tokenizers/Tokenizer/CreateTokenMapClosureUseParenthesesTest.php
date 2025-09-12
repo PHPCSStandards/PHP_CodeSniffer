@@ -79,7 +79,7 @@ final class CreateTokenMapClosureUseParenthesesTest extends AbstractTokenizerTes
      *
      * @return void
      */
-    public function testUseNotClosureNextOpenClose($testMarker, $expectedOwnerCode=null)
+    public function testUseNotClosureNextOpenClose($testMarker, $expectedOwnerCode = null)
     {
         $tokens = $this->phpcsFile->getTokens();
         $opener = $this->getTargetToken($testMarker, T_OPEN_PARENTHESIS);

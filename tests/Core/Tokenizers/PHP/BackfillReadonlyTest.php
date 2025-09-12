@@ -28,7 +28,7 @@ final class BackfillReadonlyTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testReadonly($testMarker, $testContent='readonly')
+    public function testReadonly($testMarker, $testContent = 'readonly')
     {
         $tokens     = $this->phpcsFile->getTokens();
         $target     = $this->getTargetToken($testMarker, [T_READONLY, T_STRING], $testContent);
@@ -187,7 +187,7 @@ final class BackfillReadonlyTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testNotReadonly($testMarker, $testContent='readonly', $expectedType='T_STRING')
+    public function testNotReadonly($testMarker, $testContent = 'readonly', $expectedType = 'T_STRING')
     {
         $targetTypes  = Tokens::NAME_TOKENS;
         $targetTypes += [T_READONLY => T_READONLY];

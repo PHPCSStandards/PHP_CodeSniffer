@@ -43,7 +43,7 @@ final class ExecutableFileUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
         case 'ExecutableFileUnitTest.2.inc':
@@ -66,7 +66,7 @@ final class ExecutableFileUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         return [];
 

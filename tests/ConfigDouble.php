@@ -56,7 +56,7 @@ final class ConfigDouble extends Config
      *
      * @return void
      */
-    public function __construct(array $cliArgs=[], bool $skipSettingStandard=false, bool $skipSettingReportWidth=false)
+    public function __construct(array $cliArgs = [], bool $skipSettingStandard = false, bool $skipSettingReportWidth = false)
     {
         $this->skipSettingStandard = $skipSettingStandard;
 

@@ -674,9 +674,9 @@ class File
         string $error,
         ?int $stackPtr,
         string $code,
-        array $data=[],
-        int $severity=0,
-        bool $fixable=false
+        array $data = [],
+        int $severity = 0,
+        bool $fixable = false
     ) {
         if ($stackPtr === null) {
             $line   = 1;
@@ -708,9 +708,9 @@ class File
         string $warning,
         ?int $stackPtr,
         string $code,
-        array $data=[],
-        int $severity=0,
-        bool $fixable=false
+        array $data = [],
+        int $severity = 0,
+        bool $fixable = false
     ) {
         if ($stackPtr === null) {
             $line   = 1;
@@ -741,8 +741,8 @@ class File
         string $error,
         int $line,
         string $code,
-        array $data=[],
-        int $severity=0
+        array $data = [],
+        int $severity = 0
     ) {
         return $this->addMessage(true, $error, $line, 1, $code, $data, $severity, false);
 
@@ -765,8 +765,8 @@ class File
         string $warning,
         int $line,
         string $code,
-        array $data=[],
-        int $severity=0
+        array $data = [],
+        int $severity = 0
     ) {
         return $this->addMessage(false, $warning, $line, 1, $code, $data, $severity, false);
 
@@ -791,8 +791,8 @@ class File
         string $error,
         int $stackPtr,
         string $code,
-        array $data=[],
-        int $severity=0
+        array $data = [],
+        int $severity = 0
     ) {
         $recorded = $this->addError($error, $stackPtr, $code, $data, $severity, true);
         if ($recorded === true && $this->fixer->enabled === true) {
@@ -822,8 +822,8 @@ class File
         string $warning,
         int $stackPtr,
         string $code,
-        array $data=[],
-        int $severity=0
+        array $data = [],
+        int $severity = 0
     ) {
         $recorded = $this->addWarning($warning, $stackPtr, $code, $data, $severity, true);
         if ($recorded === true && $this->fixer->enabled === true) {
@@ -2264,7 +2264,7 @@ class File
      * @return string The token contents.
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If the specified position does not exist.
      */
-    public function getTokensAsString($start, $length, bool $origContent=false)
+    public function getTokensAsString($start, $length, bool $origContent = false)
     {
         if (is_int($start) === false || isset($this->tokens[$start]) === false) {
             throw new RuntimeException('The $start position for getTokensAsString() must exist in the token stack');
@@ -2324,10 +2324,10 @@ class File
     public function findPrevious(
         $types,
         int $start,
-        ?int $end=null,
-        bool $exclude=false,
-        ?string $value=null,
-        bool $local=false
+        ?int $end = null,
+        bool $exclude = false,
+        ?string $value = null,
+        bool $local = false
     ) {
         $types = (array) $types;
 
@@ -2405,10 +2405,10 @@ class File
     public function findNext(
         $types,
         int $start,
-        ?int $end=null,
-        bool $exclude=false,
-        ?string $value=null,
-        bool $local=false
+        ?int $end = null,
+        bool $exclude = false,
+        ?string $value = null,
+        bool $local = false
     ) {
         $types = (array) $types;
 
@@ -2451,7 +2451,7 @@ class File
      *
      * @return int
      */
-    public function findStartOfStatement(int $start, $ignore=null)
+    public function findStartOfStatement(int $start, $ignore = null)
     {
         $startTokens = Tokens::BLOCK_OPENERS;
         $startTokens[T_OPEN_SHORT_ARRAY]   = true;
@@ -2642,7 +2642,7 @@ class File
      *
      * @return int
      */
-    public function findEndOfStatement(int $start, $ignore=null)
+    public function findEndOfStatement(int $start, $ignore = null)
     {
         $endTokens = [
             T_COLON                => true,
@@ -2769,7 +2769,7 @@ class File
      *                   FALSE when no matching token could be found between the start of
      *                   the line and the start token.
      */
-    public function findFirstOnLine($types, int $start, bool $exclude=false, ?string $value=null)
+    public function findFirstOnLine($types, int $start, bool $exclude = false, ?string $value = null)
     {
         if (is_array($types) === false) {
             $types = [$types];
@@ -2860,7 +2860,7 @@ class File
      *
      * @return int|false
      */
-    public function getCondition(int $stackPtr, $type, bool $first=true)
+    public function getCondition(int $stackPtr, $type, bool $first = true)
     {
         // Check for the existence of the token.
         if (isset($this->tokens[$stackPtr]) === false) {

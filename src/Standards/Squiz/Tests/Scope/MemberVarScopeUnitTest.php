@@ -30,7 +30,7 @@ final class MemberVarScopeUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
         case 'MemberVarScopeUnitTest.1.inc':

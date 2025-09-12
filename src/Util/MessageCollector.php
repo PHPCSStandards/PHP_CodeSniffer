@@ -96,7 +96,7 @@ final class MessageCollector
      * @throws \InvalidArgumentException If the message text is not a string.
      * @throws \InvalidArgumentException If the message type is not one of the accepted types.
      */
-    public function add($message, $type=self::NOTICE)
+    public function add($message, $type = self::NOTICE)
     {
         if (is_string($message) === false) {
             throw new InvalidArgumentException('The $message should be of type string. Received: '.gettype($message).'.');
@@ -146,7 +146,7 @@ final class MessageCollector
      *
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException When there are blocking errors.
      */
-    public function display(string $order=self::ORDERBY_SEVERITY)
+    public function display(string $order = self::ORDERBY_SEVERITY)
     {
         if ($this->cache === []) {
             return;

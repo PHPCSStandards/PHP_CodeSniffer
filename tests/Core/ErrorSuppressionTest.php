@@ -36,7 +36,7 @@ final class ErrorSuppressionTest extends TestCase
      *
      * @return void
      */
-    public function testSuppressError($before, $after, $expectedErrors=0)
+    public function testSuppressError($before, $after, $expectedErrors = 0)
     {
         static $config, $ruleset;
 
@@ -150,7 +150,7 @@ final class ErrorSuppressionTest extends TestCase
      *
      * @return void
      */
-    public function testSuppressSomeErrors($before, $between, $expectedErrors=1)
+    public function testSuppressSomeErrors($before, $between, $expectedErrors = 1)
     {
         static $config, $ruleset;
 
@@ -232,7 +232,7 @@ EOD;
      *
      * @return void
      */
-    public function testSuppressWarning($before, $after, $expectedWarnings=0)
+    public function testSuppressWarning($before, $after, $expectedWarnings = 0)
     {
         static $config, $ruleset;
 
@@ -306,7 +306,7 @@ EOD;
      *
      * @return void
      */
-    public function testSuppressLine($before, $after='', $expectedErrors=1)
+    public function testSuppressLine($before, $after = '', $expectedErrors = 1)
     {
         static $config, $ruleset;
 
@@ -538,7 +538,7 @@ EOD;
      *
      * @return void
      */
-    public function testSuppressScope($before, $after, $expectedErrors=0)
+    public function testSuppressScope($before, $after, $expectedErrors = 0)
     {
         static $config, $ruleset;
 
@@ -624,7 +624,7 @@ EOD;
      *
      * @return void
      */
-    public function testSuppressFile($before, $after='', $expectedWarnings=0)
+    public function testSuppressFile($before, $after = '', $expectedWarnings = 0)
     {
         static $config, $ruleset;
 
@@ -718,7 +718,7 @@ EOD;
      *
      * @return void
      */
-    public function testDisableSelected($before, $expectedErrors=0, $expectedWarnings=0)
+    public function testDisableSelected($before, $expectedErrors = 0, $expectedWarnings = 0)
     {
         static $config, $ruleset;
 

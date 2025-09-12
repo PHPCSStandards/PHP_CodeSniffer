@@ -838,7 +838,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testNotAnArrowFunction($testMarker, $testContent='fn', $expectedType='T_STRING')
+    public function testNotAnArrowFunction($testMarker, $testContent = 'fn', $expectedType = 'T_STRING')
     {
         $targetTypes  = Tokens::NAME_TOKENS;
         $targetTypes += [T_FN => T_FN];
@@ -942,7 +942,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    private function backfillHelper($token, $skipScopeCloserCheck=false)
+    private function backfillHelper($token, $skipScopeCloserCheck = false)
     {
         $tokens = $this->phpcsFile->getTokens();
 
@@ -994,7 +994,7 @@ final class BackfillFnTokenTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    private function scopePositionTestHelper($token, $openerOffset, $closerOffset, $expectedCloserType='semicolon')
+    private function scopePositionTestHelper($token, $openerOffset, $closerOffset, $expectedCloserType = 'semicolon')
     {
         $tokens = $this->phpcsFile->getTokens();
         $expectedScopeOpener = ($token + $openerOffset);

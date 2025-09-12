@@ -30,7 +30,7 @@ final class ClosingTagUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
         case 'ClosingTagUnitTest.1.inc':

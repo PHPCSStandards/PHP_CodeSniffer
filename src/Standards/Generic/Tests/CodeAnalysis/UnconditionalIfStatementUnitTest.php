@@ -45,7 +45,7 @@ final class UnconditionalIfStatementUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         switch ($testFile) {
         case 'UnconditionalIfStatementUnitTest.1.inc':

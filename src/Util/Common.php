@@ -285,7 +285,7 @@ class Common
      *
      * @return string
      */
-    public static function prepareForOutput(string $content, array $exclude=[])
+    public static function prepareForOutput(string $content, array $exclude = [])
     {
         if (PHP_OS_FAMILY === 'Windows') {
             if (in_array("\r", $exclude, true) === false) {
@@ -358,9 +358,9 @@ class Common
      */
     public static function isCamelCaps(
         string $name,
-        bool $classFormat=false,
-        bool $visibilityPublic=true,
-        bool $strict=true
+        bool $classFormat = false,
+        bool $visibilityPublic = true,
+        bool $strict = true
     ) {
         // Check the first character first.
         if ($classFormat === false) {

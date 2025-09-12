@@ -32,7 +32,7 @@ class Checkstyle implements Report
      *
      * @return bool
      */
-    public function generateFileReport(array $report, File $phpcsFile, bool $showSources=false, int $width=80)
+    public function generateFileReport(array $report, File $phpcsFile, bool $showSources = false, int $width = 80)
     {
         $out = new XMLWriter;
         $out->openMemory();
@@ -95,10 +95,10 @@ class Checkstyle implements Report
         int $totalErrors,
         int $totalWarnings,
         int $totalFixable,
-        bool $showSources=false,
-        int $width=80,
-        bool $interactive=false,
-        bool $toScreen=true
+        bool $showSources = false,
+        int $width = 80,
+        bool $interactive = false,
+        bool $toScreen = true
     ) {
         echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
         echo '<checkstyle version="'.Config::VERSION.'">'.PHP_EOL;

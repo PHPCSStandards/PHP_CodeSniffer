@@ -30,7 +30,7 @@ final class LowerCaseTypeUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
         case 'LowerCaseTypeUnitTest.1.inc':

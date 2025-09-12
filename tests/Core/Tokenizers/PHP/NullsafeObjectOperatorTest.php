@@ -95,7 +95,7 @@ final class NullsafeObjectOperatorTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testTernaryThen($testMarker, $testObjectOperator=false)
+    public function testTernaryThen($testMarker, $testObjectOperator = false)
     {
         $tokens = $this->phpcsFile->getTokens();
 

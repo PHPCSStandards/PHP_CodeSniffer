@@ -58,7 +58,7 @@ class DeprecatedFunctionsSniff extends ForbiddenFunctionsSniff
      *
      * @return void
      */
-    protected function addError(File $phpcsFile, int $stackPtr, string $functionName, ?string $pattern=null)
+    protected function addError(File $phpcsFile, int $stackPtr, string $functionName, ?string $pattern = null)
     {
         $data  = [$functionName];
         $error = 'Function %s() has been deprecated';

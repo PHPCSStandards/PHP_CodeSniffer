@@ -30,7 +30,7 @@ final class EndFileNoNewlineUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
         case 'EndFileNoNewlineUnitTest.1.inc':
@@ -58,7 +58,7 @@ final class EndFileNoNewlineUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         return [];
 

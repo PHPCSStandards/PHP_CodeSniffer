@@ -44,7 +44,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
      *
      * @return void
      */
-    public function testMatchDefault($testMarker, $testContent='default')
+    public function testMatchDefault($testMarker, $testContent = 'default')
     {
         $tokens = $this->phpcsFile->getTokens();
 
@@ -154,7 +154,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
      *
      * @return void
      */
-    public function testSwitchDefault($testMarker, $openerMarker, $closerMarker, $conditionStopMarker=null, $testContent='default', $sharedScopeCloser=false)
+    public function testSwitchDefault($testMarker, $openerMarker, $closerMarker, $conditionStopMarker = null, $testContent = 'default', $sharedScopeCloser = false)
     {
         $tokens = $this->phpcsFile->getTokens();
 
@@ -356,7 +356,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
      *
      * @return void
      */
-    public function testNotDefaultKeyword($testMarker, $testContent='DEFAULT')
+    public function testNotDefaultKeyword($testMarker, $testContent = 'DEFAULT')
     {
         $targetTypes  = Tokens::NAME_TOKENS;
         $targetTypes += [

@@ -50,7 +50,7 @@ final class AddFileTest extends AbstractFileListTestCase
      *
      * @return void
      */
-    public function testAddFile($fileName, $fileObject=null)
+    public function testAddFile($fileName, $fileObject = null)
     {
         $this->assertCount(0, $this->fileList);
 

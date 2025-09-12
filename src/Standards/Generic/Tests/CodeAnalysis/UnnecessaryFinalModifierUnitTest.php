@@ -45,7 +45,7 @@ final class UnnecessaryFinalModifierUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         switch ($testFile) {
         case 'UnnecessaryFinalModifierUnitTest.1.inc':

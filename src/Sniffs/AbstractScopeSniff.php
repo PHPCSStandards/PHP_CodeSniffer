@@ -71,7 +71,7 @@ abstract class AbstractScopeSniff implements Sniff
     public function __construct(
         array $scopeTokens,
         array $tokens,
-        bool $listenOutside=false
+        bool $listenOutside = false
     ) {
         if (empty($scopeTokens) === true) {
             $error = 'The scope tokens list cannot be empty';

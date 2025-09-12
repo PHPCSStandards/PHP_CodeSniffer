@@ -31,7 +31,7 @@ class Json implements Report
      *
      * @return bool
      */
-    public function generateFileReport(array $report, File $phpcsFile, bool $showSources=false, int $width=80)
+    public function generateFileReport(array $report, File $phpcsFile, bool $showSources = false, int $width = 80)
     {
         $filename = str_replace('\\', '\\\\', $report['filename']);
         $filename = str_replace('"', '\"', $filename);
@@ -92,10 +92,10 @@ class Json implements Report
         int $totalErrors,
         int $totalWarnings,
         int $totalFixable,
-        bool $showSources=false,
-        int $width=80,
-        bool $interactive=false,
-        bool $toScreen=true
+        bool $showSources = false,
+        int $width = 80,
+        bool $interactive = false,
+        bool $toScreen = true
     ) {
         echo '{"totals":{"errors":'.$totalErrors.',"warnings":'.$totalWarnings.',"fixable":'.$totalFixable.'},"files":{';
         echo rtrim($cachedData, ',');

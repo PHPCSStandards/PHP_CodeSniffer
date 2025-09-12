@@ -30,7 +30,7 @@ final class DeclareStatementUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
         case 'DeclareStatementUnitTest.1.inc':

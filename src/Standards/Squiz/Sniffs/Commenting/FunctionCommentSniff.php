@@ -653,7 +653,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
      *
      * @return void
      */
-    protected function checkSpacingAfterParamType(File $phpcsFile, array $param, int $maxType, int $spacing=1)
+    protected function checkSpacingAfterParamType(File $phpcsFile, array $param, int $maxType, int $spacing = 1)
     {
         // Check number of spaces after the type.
         $spaces = ($maxType - strlen($param['type']) + $spacing);
@@ -712,7 +712,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
      *
      * @return void
      */
-    protected function checkSpacingAfterParamName(File $phpcsFile, array $param, int $maxVar, int $spacing=1)
+    protected function checkSpacingAfterParamName(File $phpcsFile, array $param, int $maxVar, int $spacing = 1)
     {
         // Check number of spaces after the var name.
         $spaces = ($maxVar - strlen($param['var']) + $spacing);

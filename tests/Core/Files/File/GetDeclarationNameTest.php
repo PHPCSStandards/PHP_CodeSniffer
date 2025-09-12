@@ -92,7 +92,7 @@ final class GetDeclarationNameTest extends AbstractMethodTestCase
      *
      * @return void
      */
-    public function testGetDeclarationName($testMarker, $expected, $targetType=null)
+    public function testGetDeclarationName($testMarker, $expected, $targetType = null)
     {
         if (isset($targetType) === false) {
             $targetType = [

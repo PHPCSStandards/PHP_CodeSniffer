@@ -117,7 +117,7 @@ class FileList implements Iterator, Countable
      *
      * @return void
      */
-    public function addFile(string $path, ?File $file=null)
+    public function addFile(string $path, ?File $file = null)
     {
         // No filtering is done for STDIN when the filename
         // has not been specified.

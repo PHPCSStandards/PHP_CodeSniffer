@@ -137,7 +137,7 @@ final class Help
      * @param array<string>           $longOptions  The long options which should be shown.
      * @param string                  $shortOptions The short options which should be shown.
      */
-    public function __construct(Config $config, array $longOptions, string $shortOptions='')
+    public function __construct(Config $config, array $longOptions, string $shortOptions = '')
     {
         $this->config           = $config;
         $this->requestedOptions = array_merge($longOptions, str_split($shortOptions));

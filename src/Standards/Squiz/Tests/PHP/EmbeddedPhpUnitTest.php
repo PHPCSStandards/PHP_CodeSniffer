@@ -30,7 +30,7 @@ final class EmbeddedPhpUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
         case 'EmbeddedPhpUnitTest.1.inc':
@@ -233,7 +233,7 @@ final class EmbeddedPhpUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         if ($testFile === 'EmbeddedPhpUnitTest.24.inc'
             && (bool) ini_get('short_open_tag') === false

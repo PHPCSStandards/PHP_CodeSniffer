@@ -196,7 +196,7 @@ final class PrintProgressDotsTest extends TestCase
      *
      * @return void
      */
-    private function checkProgressDot($colors, $code, $sniffs, $expected, $enableFixer=false)
+    private function checkProgressDot($colors, $code, $sniffs, $expected, $enableFixer = false)
     {
         $this->expectNoStdoutOutput();
 

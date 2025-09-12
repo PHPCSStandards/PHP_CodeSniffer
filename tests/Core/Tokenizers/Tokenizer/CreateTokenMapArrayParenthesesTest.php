@@ -26,7 +26,7 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testArrayKeyword($testMarker, $testContent='array')
+    public function testArrayKeyword($testMarker, $testContent = 'array')
     {
         $tokens = $this->phpcsFile->getTokens();
 
@@ -88,7 +88,7 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testArrayType($testMarker, $testContent='array')
+    public function testArrayType($testMarker, $testContent = 'array')
     {
         $tokens = $this->phpcsFile->getTokens();
 
@@ -166,7 +166,7 @@ final class CreateTokenMapArrayParenthesesTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testNotArrayKeyword($testMarker, $testContent='array')
+    public function testNotArrayKeyword($testMarker, $testContent = 'array')
     {
         $tokens = $this->phpcsFile->getTokens();
 

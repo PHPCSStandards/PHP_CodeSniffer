@@ -132,7 +132,7 @@ final class Timing
      *
      * @return void
      */
-    public static function printRunTime(bool $force=false)
+    public static function printRunTime(bool $force = false)
     {
         if ($force === false && self::$printed === true) {
             // A double call.

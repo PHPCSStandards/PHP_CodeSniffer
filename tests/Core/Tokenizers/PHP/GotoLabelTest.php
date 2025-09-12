@@ -189,7 +189,7 @@ final class GotoLabelTest extends AbstractTokenizerTestCase
      *
      * @return void
      */
-    public function testNotAGotoDeclaration($testMarker, $testContent, $expectedType='T_STRING')
+    public function testNotAGotoDeclaration($testMarker, $testContent, $expectedType = 'T_STRING')
     {
         $targetTypes  = Tokens::NAME_TOKENS;
         $targetTypes += [T_GOTO_LABEL => T_GOTO_LABEL];

@@ -146,7 +146,7 @@ class DisallowShortOpenTagSniff implements Sniff
      *
      * @return string
      */
-    protected function getSnippet(string $content, string $start='', int $length=40)
+    protected function getSnippet(string $content, string $start = '', int $length = 40)
     {
         $startPos = 0;
 

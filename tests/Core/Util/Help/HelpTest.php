@@ -723,7 +723,7 @@ final class HelpTest extends TestCase
      *
      * @return mixed
      */
-    private function invokeReflectionMethod(Help $help, $methodName, $params=null)
+    private function invokeReflectionMethod(Help $help, $methodName, $params = null)
     {
         $reflMethod = new ReflectionMethod($help, $methodName);
         (PHP_VERSION_ID < 80100) && $reflMethod->setAccessible(true);

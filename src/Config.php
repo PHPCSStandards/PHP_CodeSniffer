@@ -415,7 +415,7 @@ class Config
      *
      * @return void
      */
-    public function __construct(array $cliArgs=[], bool $dieOnUnknownArg=true)
+    public function __construct(array $cliArgs = [], bool $dieOnUnknownArg = true)
     {
         if (defined('PHP_CODESNIFFER_IN_TESTS') === true) {
             // Let everything through during testing so that we can
@@ -1490,7 +1490,7 @@ class Config
      *
      * @return string|void
      */
-    public function printShortUsage(bool $returnOutput=false)
+    public function printShortUsage(bool $returnOutput = false)
     {
         if (PHP_CODESNIFFER_CBF === true) {
             $usage = 'Run "phpcbf --help" for usage information';
@@ -1633,7 +1633,7 @@ class Config
      * @see    getConfigData()
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException If the config file can not be written.
      */
-    public function setConfigData(string $key, ?string $value, bool $temp=false)
+    public function setConfigData(string $key, ?string $value, bool $temp = false)
     {
         if (isset($this->overriddenDefaults['runtime-set']) === true
             && isset($this->overriddenDefaults['runtime-set'][$key]) === true

@@ -53,7 +53,7 @@ final class ScopeIndentUnitTest extends AbstractSniffTestCase
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         if ($testFile === 'ScopeIndentUnitTest.3.inc') {
             return [
