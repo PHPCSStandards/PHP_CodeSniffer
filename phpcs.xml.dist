@@ -58,6 +58,8 @@
     <rule ref="Squiz.PHP.DisallowInlineIf"/>
     <rule ref="Squiz.Scope.MethodScope"/>
     <rule ref="Squiz.Strings.ConcatenationSpacing"/>
+    <rule ref="Squiz.Strings.DoubleQuoteUsage.NotRequired"/>
+    <rule ref="Generic.Strings.UnnecessaryHeredoc"/>
     <rule ref="Squiz.WhiteSpace.ControlStructureSpacing"/>
     <rule ref="Squiz.WhiteSpace.FunctionClosingBraceSpace"/>
     <rule ref="Squiz.WhiteSpace.FunctionSpacing"/>
@@ -133,6 +135,7 @@
                 <element key="print" value="echo"/>
                 <element key="is_null" value="null"/>
                 <element key="create_function" value="null"/>
+                <element key="join" value="implode"/>
             </property>
         </properties>
     </rule>
@@ -150,7 +153,7 @@
 
     <!-- This test file specifically *needs* Windows line endings for testing purposes. -->
     <rule ref="Generic.Files.LineEndings.InvalidEOLChar">
-        <exclude-pattern>tests/Core/Tokenizers/PHP/StableCommentWhitespaceWinTest\.php</exclude-pattern>
+        <exclude-pattern>tests/Core/Tokenizers/PHP/*WinTest\.php</exclude-pattern>
     </rule>
 
     <!-- Avoid false positive with this sniff detecting itself -->
@@ -161,4 +164,7 @@
 
     <!-- Require visibility for class constants. -->
     <rule ref="PSR12.Properties.ConstantVisibility"/>
+
+    <!-- Handle consistent formatting of return types. -->
+    <rule ref="PSR12.Functions.ReturnTypeDeclaration"/>
 </ruleset>
