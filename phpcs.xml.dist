@@ -178,4 +178,13 @@
 
     <!-- Handle consistent formatting of return types. -->
     <rule ref="PSR12.Functions.ReturnTypeDeclaration"/>
+
+    <!-- Separate header blocks with a single blank line. -->
+    <rule ref="PSR12.Files.FileHeader">
+        <exclude name="PSR12.Files.FileHeader.SpacingAfterTagBlock"/>
+    </rule>
+    <rule ref="PSR12.Files.FileHeader.SpacingAfterNamespaceBlock">
+        <!-- Prevent conflict with function spacing sniff. -->
+        <exclude-pattern>/requirements\.php</exclude-pattern>
+    </rule>
 </ruleset>
