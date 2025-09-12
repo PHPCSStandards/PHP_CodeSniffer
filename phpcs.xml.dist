@@ -150,7 +150,7 @@
 
     <!-- This test file specifically *needs* Windows line endings for testing purposes. -->
     <rule ref="Generic.Files.LineEndings.InvalidEOLChar">
-        <exclude-pattern>tests/Core/Tokenizers/PHP/StableCommentWhitespaceWinTest\.php</exclude-pattern>
+        <exclude-pattern>tests/Core/Tokenizers/PHP/*WinTest\.php</exclude-pattern>
     </rule>
 
     <!-- Avoid false positive with this sniff detecting itself -->
