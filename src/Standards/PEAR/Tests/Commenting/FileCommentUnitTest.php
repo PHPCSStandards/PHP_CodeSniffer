@@ -59,7 +59,7 @@ final class FileCommentUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 
@@ -86,6 +86,6 @@ final class FileCommentUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 }

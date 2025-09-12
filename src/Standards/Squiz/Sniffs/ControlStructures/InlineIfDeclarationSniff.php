@@ -131,7 +131,7 @@ class InlineIfDeclarationSniff implements Sniff
                     }
                 }
             }
-        }//end if
+        }
 
         $contentAfter = $phpcsFile->findNext(T_WHITESPACE, ($inlineElse + 1), null, true);
         $spaceAfter   = (($tokens[$contentAfter]['column']) - ($tokens[$inlineElse]['column'] + 1));

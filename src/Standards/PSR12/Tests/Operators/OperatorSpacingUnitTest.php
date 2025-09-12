@@ -58,7 +58,7 @@ final class OperatorSpacingUnitTest extends AbstractSniffTestCase
             ];
         default:
             return [];
-        }//end switch
+        }
     }
 
 

@@ -407,6 +407,6 @@ final class ResolveSimpleTokenTest extends AbstractTokenizerTestCase
             );
 
             ++$sequenceKey;
-        }//end for
+        }
     }
 }

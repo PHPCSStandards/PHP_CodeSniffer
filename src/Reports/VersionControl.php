@@ -84,7 +84,7 @@ abstract class VersionControl implements Report
             }
 
             unset($blames[($line - 1)]);
-        }//end foreach
+        }
 
         // Now go through and give the authors some credit for
         // all the lines that do not have errors.
@@ -108,7 +108,7 @@ abstract class VersionControl implements Report
             }
 
             $praiseCache[$author]['good']++;
-        }//end foreach
+        }
 
         foreach ($authorCache as $author => $errors) {
             echo "AUTHOR>>$author>>$errors" . PHP_EOL;
@@ -211,8 +211,8 @@ abstract class VersionControl implements Report
                 break;
             default:
                 break;
-            }//end switch
-        }//end foreach
+            }
+        }
 
         // Make sure the report width isn't too big.
         $maxLength = 0;
@@ -316,9 +316,9 @@ abstract class VersionControl implements Report
                     }
 
                     echo $line . PHP_EOL;
-                }//end foreach
-            }//end if
-        }//end foreach
+                }
+            }
+        }
 
         echo str_repeat('-', $width) . PHP_EOL;
         echo "\033[1m" . 'A TOTAL OF ' . $errorsShown . ' SNIFF VIOLATION';

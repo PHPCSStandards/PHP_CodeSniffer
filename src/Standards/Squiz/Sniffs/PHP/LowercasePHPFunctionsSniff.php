@@ -118,7 +118,7 @@ class LowercasePHPFunctionsSniff implements Sniff
 
             // No open parenthesis; not a "use function" statement nor a function call.
             return;
-        }//end if
+        }
 
         if ($tokens[$prev]['code'] === T_FUNCTION) {
             // Function declaration, not a function call.

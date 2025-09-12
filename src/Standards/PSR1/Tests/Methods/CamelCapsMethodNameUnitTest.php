@@ -49,7 +49,7 @@ final class CamelCapsMethodNameUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

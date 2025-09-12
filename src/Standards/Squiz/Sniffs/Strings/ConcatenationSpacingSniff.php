@@ -155,6 +155,6 @@ class ConcatenationSpacingSniff implements Sniff
                     $phpcsFile->fixer->addContent($stackPtr, $padding);
                 }
             }
-        }//end if
+        }
     }
 }

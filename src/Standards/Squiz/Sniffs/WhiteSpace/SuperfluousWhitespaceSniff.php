@@ -204,7 +204,7 @@ class SuperfluousWhitespaceSniff implements Sniff
                         $phpcsFile->fixer->endChangeset();
                     }
                 }
-            }//end if
-        }//end if
+            }
+        }
     }
 }

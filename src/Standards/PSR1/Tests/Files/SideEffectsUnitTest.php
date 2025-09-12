@@ -76,6 +76,6 @@ final class SideEffectsUnitTest extends AbstractSniffTestCase
             return [1 => 1];
         default:
             return [];
-        }//end switch
+        }
     }
 }

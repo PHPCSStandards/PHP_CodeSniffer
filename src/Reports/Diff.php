@@ -56,7 +56,7 @@ class Diff implements Report
             }
 
             $phpcsFile->fixer->startFile($phpcsFile);
-        }//end if
+        }
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             StatusWriter::write('*** START FILE FIXING ***', 1);

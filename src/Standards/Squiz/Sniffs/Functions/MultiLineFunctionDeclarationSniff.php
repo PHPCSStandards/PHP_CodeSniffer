@@ -74,7 +74,7 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
             if ($next !== false && $tokens[$next]['line'] !== $tokens[$end]['line']) {
                 return true;
             }
-        }//end foreach
+        }
 
         return false;
     }
@@ -123,7 +123,7 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
                     $phpcsFile->fixer->endChangeset();
                 }
             }
-        }//end if
+        }
     }
 
 
@@ -205,8 +205,8 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
                         $phpcsFile->fixer->endChangeset();
                     }
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         // Each line between the brackets should contain a single parameter.
         for ($i = ($openBracket + 1); $i < $closeBracket; $i++) {
@@ -238,6 +238,6 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
                     $phpcsFile->fixer->addNewline($i);
                 }
             }
-        }//end for
+        }
     }
 }

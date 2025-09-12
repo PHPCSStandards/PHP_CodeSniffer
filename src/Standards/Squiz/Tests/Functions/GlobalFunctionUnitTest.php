@@ -52,6 +52,6 @@ final class GlobalFunctionUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 }

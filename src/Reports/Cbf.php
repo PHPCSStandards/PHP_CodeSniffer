@@ -221,7 +221,7 @@ class Cbf implements Report
             }
 
             echo PHP_EOL;
-        }//end foreach
+        }
 
         echo str_repeat('-', $width) . PHP_EOL;
         echo "\033[1mA TOTAL OF $totalFixed ERROR";

@@ -122,7 +122,7 @@ final class ClassFileNameUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

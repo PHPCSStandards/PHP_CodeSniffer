@@ -89,6 +89,6 @@ class ValidClassNameSniff implements Sniff
                 $data[]  = $newName;
                 $phpcsFile->addError($error, $stackPtr, 'Invalid', $data);
             }
-        }//end if
+        }
     }
 }

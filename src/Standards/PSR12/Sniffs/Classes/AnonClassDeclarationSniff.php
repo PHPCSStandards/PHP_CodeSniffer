@@ -129,7 +129,7 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
 
                 $phpcsFile->fixer->endChangeset();
             }
-        }//end if
+        }
     }
 
 
@@ -213,9 +213,9 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
                     $phpcsFile->fixer->endChangeset();
                 } else {
                     $phpcsFile->fixer->replaceToken(($closeBracket - 1), '');
-                }//end if
-            }//end if
-        }//end if
+                }
+            }
+        }
     }
 
 

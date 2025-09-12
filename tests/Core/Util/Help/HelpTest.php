@@ -126,8 +126,8 @@ final class HelpTest extends TestCase
                         "Option $name: a description should always be accompanied by an argument"
                     );
                 }
-            }//end foreach
-        }//end foreach
+            }
+        }
     }
 
 

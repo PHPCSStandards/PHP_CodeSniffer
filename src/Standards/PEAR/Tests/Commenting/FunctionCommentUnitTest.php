@@ -103,7 +103,7 @@ final class FunctionCommentUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

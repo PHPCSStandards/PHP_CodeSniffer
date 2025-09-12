@@ -37,7 +37,7 @@ final class OpenTagUnitTest extends AbstractSniffTestCase
             return [1 => 1];
         default:
             return [];
-        }//end switch
+        }
     }
 
 

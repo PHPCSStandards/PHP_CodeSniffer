@@ -344,7 +344,7 @@ class Config
         default :
             // No validation required.
             break;
-        }//end switch
+        }
 
         $this->settings[$name] = $value;
     }
@@ -444,7 +444,7 @@ class Config
                 $lastDir    = $currentDir;
                 $currentDir = dirname($currentDir);
             } while ($currentDir !== '.' && $currentDir !== $lastDir && Common::isReadable($currentDir) === true);
-        }//end if
+        }
 
         if (defined('STDIN') === false
             || PHP_OS_FAMILY === 'Windows'
@@ -478,7 +478,7 @@ class Config
                 $this->overriddenDefaults['stdin']        = true;
                 $this->overriddenDefaults['stdinContent'] = true;
             }
-        }//end if
+        }
 
         fclose($handle);
     }
@@ -529,8 +529,8 @@ class Config
                 }
             } else {
                 $this->processUnknownArgument($arg, $i);
-            }//end if
-        }//end for
+            }
+        }
     }
 
 
@@ -764,7 +764,7 @@ class Config
             } else {
                 $this->processUnknownArgument('-' . $arg, $pos);
             }
-        }//end switch
+        }
     }
 
 
@@ -958,7 +958,7 @@ class Config
                             $this->cacheFile = $dir . '/' . basename($this->cacheFile);
                         }
                     }
-                }//end if
+                }
 
                 $this->overriddenDefaults['cacheFile'] = true;
 
@@ -1035,7 +1035,7 @@ class Config
                     }
 
                     $this->reportFile = $dir . '/' . basename($this->reportFile);
-                }//end if
+                }
 
                 $this->overriddenDefaults['reportFile'] = true;
 
@@ -1106,8 +1106,8 @@ class Config
                                 $error .= $this->printShortUsage(true);
                                 throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                             }
-                        }//end if
-                    }//end if
+                        }
+                    }
 
                     $reports[$report] = $output;
                 } else {
@@ -1120,7 +1120,7 @@ class Config
                     foreach ($reportNames as $report) {
                         $reports[$report] = null;
                     }
-                }//end if
+                }
 
                 // Remove the default value so the CLI value overrides it.
                 if (isset($this->overriddenDefaults['reports']) === false) {
@@ -1293,9 +1293,9 @@ class Config
                 } else {
                     $this->processUnknownArgument('--' . $arg, $pos);
                 }
-            }//end if
+            }
             break;
-        }//end switch
+        }
     }
 
 
@@ -1343,7 +1343,7 @@ class Config
                 $parts    = explode('.', $sniff, 4);
                 $sniffs[] = $parts[0] . '.' . $parts[1] . '.' . $parts[2];
             }
-        }//end foreach
+        }
 
         $sniffs = array_reduce(
             $sniffs,
@@ -1639,7 +1639,7 @@ class Config
                 $error = 'ERROR: Config file ' . $configFile . ' is not writable' . PHP_EOL . PHP_EOL;
                 throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
             }
-        }//end if
+        }
 
         $phpCodeSnifferConfig = self::getAllConfigData();
 

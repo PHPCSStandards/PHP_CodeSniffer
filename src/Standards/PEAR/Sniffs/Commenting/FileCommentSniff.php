@@ -268,7 +268,7 @@ class FileCommentSniff implements Sniff
                 $phpcsFile->addError($error, $tag, 'Empty' . ucfirst(substr($name, 1)) . 'Tag', $data);
                 continue;
             }
-        }//end foreach
+        }
 
         // Check if the tags are in the correct position.
         $pos = 0;
@@ -310,7 +310,7 @@ class FileCommentSniff implements Sniff
             while (isset($foundTags[$pos]) === true && $foundTags[$pos] === $tag) {
                 $pos++;
             }
-        }//end foreach
+        }
     }
 
 
@@ -351,7 +351,7 @@ class FileCommentSniff implements Sniff
                 ];
                 $phpcsFile->addError($error, $tag, 'InvalidCategory', $data);
             }
-        }//end foreach
+        }
     }
 
 
@@ -402,8 +402,8 @@ class FileCommentSniff implements Sniff
                     $validName,
                 ];
                 $phpcsFile->addError($error, $tag, 'InvalidPackage', $data);
-            }//end if
-        }//end foreach
+            }
+        }
     }
 
 
@@ -446,7 +446,7 @@ class FileCommentSniff implements Sniff
                 $validName,
             ];
             $phpcsFile->addError($error, $tag, 'InvalidSubpackage', $data);
-        }//end foreach
+        }
     }
 
 
@@ -515,7 +515,7 @@ class FileCommentSniff implements Sniff
                 $error = '@copyright tag must contain a year and the name of the copyright holder';
                 $phpcsFile->addError($error, $tag, 'IncompleteCopyright');
             }
-        }//end foreach
+        }
     }
 
 

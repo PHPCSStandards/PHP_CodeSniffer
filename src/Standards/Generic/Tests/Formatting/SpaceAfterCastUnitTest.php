@@ -80,7 +80,7 @@ final class SpaceAfterCastUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

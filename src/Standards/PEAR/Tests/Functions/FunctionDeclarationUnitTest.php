@@ -117,7 +117,7 @@ final class FunctionDeclarationUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

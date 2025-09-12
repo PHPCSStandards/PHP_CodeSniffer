@@ -119,7 +119,7 @@ class LocalFile extends File
             $this->numTokens = $cache['numTokens'];
             $this->fromCache = true;
             return;
-        }//end if
+        }
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             StatusWriter::writeNewline();

@@ -134,8 +134,8 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
 
                 // No params, so we don't check normal spacing rules.
                 return;
-            }//end if
-        }//end if
+            }
+        }
 
         foreach ($params as $paramNumber => $param) {
             if ($param['pass_by_reference'] === true) {
@@ -161,8 +161,8 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
 
                         $phpcsFile->fixer->endChangeset();
                     }
-                }//end if
-            }//end if
+                }
+            }
 
             if ($param['variable_length'] === true) {
                 $variadicToken = $param['variadic_token'];
@@ -187,8 +187,8 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
 
                         $phpcsFile->fixer->endChangeset();
                     }
-                }//end if
-            }//end if
+                }
+            }
 
             if (isset($param['default_equal_token']) === true) {
                 $equalToken = $param['default_equal_token'];
@@ -225,7 +225,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                             $phpcsFile->fixer->endChangeset();
                         }
                     }
-                }//end if
+                }
 
                 $spacesAfter = 0;
                 if ($tokens[$equalToken]['line'] !== $tokens[$param['default_token']]['line']) {
@@ -259,8 +259,8 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                             $phpcsFile->fixer->endChangeset();
                         }
                     }
-                }//end if
-            }//end if
+                }
+            }
 
             if ($param['type_hint_token'] !== false) {
                 $typeHintToken = $param['type_hint_end_token'];
@@ -295,8 +295,8 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
 
                         $phpcsFile->fixer->endChangeset();
                     }
-                }//end if
-            }//end if
+                }
+            }
 
             if (isset($param['visibility_token']) === true && $param['visibility_token'] !== false) {
                 $visibilityToken      = $param['visibility_token'];
@@ -329,8 +329,8 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
 
                         $phpcsFile->fixer->endChangeset();
                     }
-                }//end if
-            }//end if
+                }
+            }
 
             if (isset($param['set_visibility_token']) === true && $param['set_visibility_token'] !== false) {
                 $visibilityToken      = $param['set_visibility_token'];
@@ -363,8 +363,8 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
 
                         $phpcsFile->fixer->endChangeset();
                     }
-                }//end if
-            }//end if
+                }
+            }
 
             if (isset($param['readonly_token']) === true) {
                 $readonlyToken      = $param['readonly_token'];
@@ -394,8 +394,8 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
 
                         $phpcsFile->fixer->endChangeset();
                     }
-                }//end if
-            }//end if
+                }
+            }
 
             $commaToken = false;
             if ($paramNumber > 0 && $params[($paramNumber - 1)]['comma_token'] !== false) {
@@ -448,8 +448,8 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                         }
 
                         $phpcsFile->fixer->endChangeset();
-                    }//end if
-                }//end if
+                    }
+                }
 
                 // Don't check spacing after the comma if it is the last content on the line.
                 $checkComma = true;
@@ -506,10 +506,10 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                         if ($fix === true) {
                             $phpcsFile->fixer->replaceToken(($commaToken + 1), ' ');
                         }
-                    }//end if
-                }//end if
-            }//end if
-        }//end foreach
+                    }
+                }
+            }
+        }
 
         // Only check spacing around parenthesis for single line definitions.
         if ($multiLine === true) {

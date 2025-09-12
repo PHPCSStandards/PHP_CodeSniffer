@@ -58,6 +58,6 @@ final class UnconditionalIfStatementUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 }

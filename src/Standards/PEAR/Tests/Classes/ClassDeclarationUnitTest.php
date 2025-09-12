@@ -71,7 +71,7 @@ final class ClassDeclarationUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

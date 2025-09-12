@@ -74,7 +74,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
 
             $config        = new ConfigDouble(["--standard=$standard"]);
             self::$ruleset = new Ruleset($config);
-        }//end if
+        }
     }
 
 

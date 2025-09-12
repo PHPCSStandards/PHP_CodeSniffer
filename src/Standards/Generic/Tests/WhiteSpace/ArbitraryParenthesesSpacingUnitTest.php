@@ -72,7 +72,7 @@ final class ArbitraryParenthesesSpacingUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 
@@ -97,6 +97,6 @@ final class ArbitraryParenthesesSpacingUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 }

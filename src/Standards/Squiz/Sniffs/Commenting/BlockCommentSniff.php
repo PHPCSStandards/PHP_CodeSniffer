@@ -118,7 +118,7 @@ class BlockCommentSniff implements Sniff
             }
 
             return;
-        }//end if
+        }
 
         $commentLines  = [$stackPtr];
         $nextComment   = $stackPtr;
@@ -147,7 +147,7 @@ class BlockCommentSniff implements Sniff
             ) {
                 break;
             }
-        }//end while
+        }
 
         $commentText = str_replace($phpcsFile->eolChar, '', $commentString);
         $commentText = trim($commentText, "/* \t");
@@ -210,7 +210,7 @@ class BlockCommentSniff implements Sniff
             }
 
             return;
-        }//end if
+        }
 
         $starColumn = $tokens[$stackPtr]['column'];
         $hasStars   = false;
@@ -260,13 +260,13 @@ class BlockCommentSniff implements Sniff
 
                     $phpcsFile->fixer->replaceToken($commentLines[1], $padding . $commentText);
                 }
-            }//end if
+            }
 
             if (preg_match('/^\p{Ll}/u', $commentText) === 1) {
                 $error = 'Block comments must start with a capital letter';
                 $phpcsFile->addError($error, $commentLines[1], 'NoCapital');
             }
-        }//end if
+        }
 
         // Check that each line of the comment is indented past the star.
         foreach ($commentLines as $line) {
@@ -320,8 +320,8 @@ class BlockCommentSniff implements Sniff
 
                     $phpcsFile->fixer->replaceToken($line, $padding . $commentText);
                 }
-            }//end if
-        }//end foreach
+            }
+        }
 
         // Finally, test the last line is correct.
         $lastIndex   = (count($commentLines) - 1);
@@ -364,8 +364,8 @@ class BlockCommentSniff implements Sniff
 
                     $phpcsFile->fixer->replaceToken($commentLines[$lastIndex], $padding . $commentText);
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         // Check that the lines before and after this comment are blank.
         $contentBefore = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);

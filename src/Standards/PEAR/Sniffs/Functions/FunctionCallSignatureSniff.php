@@ -239,7 +239,7 @@ class FunctionCallSignatureSniff implements Sniff
                     }
                 }
             }
-        }//end if
+        }
 
         // Checking this: $value = my_function(...[*]).
         $spaceBeforeClose = 0;
@@ -303,9 +303,9 @@ class FunctionCallSignatureSniff implements Sniff
                     $phpcsFile->fixer->endChangeset();
                 } else {
                     $phpcsFile->fixer->replaceToken(($closer - 1), $padding);
-                }//end if
-            }//end if
-        }//end if
+                }
+            }
+        }
     }
 
 
@@ -388,7 +388,7 @@ class FunctionCallSignatureSniff implements Sniff
                     $phpcsFile->fixer->replaceToken(($first - 1), $padding);
                 }
             }
-        }//end if
+        }
 
         $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($openBracket + 1), null, true);
         if ($tokens[$next]['line'] === $tokens[$openBracket]['line']) {
@@ -442,7 +442,7 @@ class FunctionCallSignatureSniff implements Sniff
 
                 $phpcsFile->fixer->endChangeset();
             }
-        }//end if
+        }
 
         $i = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($openBracket + 1), null, true);
 
@@ -567,17 +567,17 @@ class FunctionCallSignatureSniff implements Sniff
                             }
 
                             $phpcsFile->fixer->endChangeset();
-                        }//end if
-                    }//end if
+                        }
+                    }
                 } else {
                     $nextCode = $i;
-                }//end if
+                }
 
                 if ($inArg === false) {
                     $argStart = $nextCode;
                     $argEnd   = $phpcsFile->findEndOfStatement($nextCode, [T_COLON]);
                 }
-            }//end if
+            }
 
             // If we are within an argument we should be ignoring commas
             // as these are not signalling the end of an argument.
@@ -609,11 +609,11 @@ class FunctionCallSignatureSniff implements Sniff
                             $phpcsFile->fixer->endChangeset();
                         }
                     }
-                }//end if
+                }
 
                 $argStart = $next;
                 $argEnd   = $phpcsFile->findEndOfStatement($next, [T_COLON]);
-            }//end if
-        }//end for
+            }
+        }
     }
 }

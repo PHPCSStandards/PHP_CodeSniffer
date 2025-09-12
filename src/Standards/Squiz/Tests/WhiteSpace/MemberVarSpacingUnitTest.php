@@ -97,7 +97,7 @@ final class MemberVarSpacingUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

@@ -149,7 +149,7 @@ class DisallowTabIndentSniff implements Sniff
                             }
                         }
                     }
-                }//end if
+                }
             } else {
                 // Look for tabs so we can report and replace, but don't
                 // record any metrics about them because they aren't
@@ -158,7 +158,7 @@ class DisallowTabIndentSniff implements Sniff
                     $error     = 'Spaces must be used for alignment; tabs are not allowed';
                     $errorCode = 'NonIndentTabsUsed';
                 }
-            }//end if
+            }
 
             if ($foundTabs === 0) {
                 continue;
@@ -184,7 +184,7 @@ class DisallowTabIndentSniff implements Sniff
                     $phpcsFile->fixer->replaceToken($i, $newContent);
                 }
             }
-        }//end for
+        }
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;

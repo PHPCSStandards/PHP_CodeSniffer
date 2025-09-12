@@ -80,7 +80,7 @@ class UpperCaseConstantNameSniff implements Sniff
             }
 
             return;
-        }//end if
+        }
 
         // Only interested in define statements now.
         if (strtolower(ltrim($tokens[$stackPtr]['content'], '\\')) !== 'define') {

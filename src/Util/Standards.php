@@ -116,7 +116,7 @@ class Standards
                     }
                 }
             }
-        }//end foreach
+        }
 
         $installedStandards = [];
 
@@ -140,7 +140,7 @@ class Standards
                 'name'      => $standardName,
                 'namespace' => $namespace,
             ];
-        }//end foreach
+        }
 
         return $installedStandards;
     }
@@ -210,7 +210,7 @@ class Standards
 
             natsort($standardsInDir);
             $installedStandards += $standardsInDir;
-        }//end foreach
+        }
 
         return $installedStandards;
     }
@@ -256,7 +256,7 @@ class Standards
             if (is_file($ruleset) === true) {
                 return true;
             }
-        }//end if
+        }
 
         return false;
     }
@@ -300,7 +300,7 @@ class Standards
                     return $path;
                 }
             }
-        }//end foreach
+        }
 
         return null;
     }

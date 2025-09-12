@@ -44,7 +44,7 @@ final class InlineHTMLUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

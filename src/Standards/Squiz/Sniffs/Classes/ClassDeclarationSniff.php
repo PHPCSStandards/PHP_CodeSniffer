@@ -80,8 +80,8 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
                         }
                     }
                 }
-            }//end if
-        }//end if
+            }
+        }
     }
 
 
@@ -162,7 +162,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
                     }
                 }
             }
-        }//end if
+        }
 
         if ($difference !== -1 && $difference !== 1) {
             for ($nextSignificant = $nextContent; $nextSignificant < $phpcsFile->numTokens; $nextSignificant++) {
@@ -214,6 +214,6 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
                     $phpcsFile->fixer->endChangeset();
                 }
             }
-        }//end if
+        }
     }
 }

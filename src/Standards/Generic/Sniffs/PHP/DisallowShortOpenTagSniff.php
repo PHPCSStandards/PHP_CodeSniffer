@@ -131,7 +131,7 @@ class DisallowShortOpenTagSniff implements Sniff
                     return $i;
                 }
             }
-        }//end if
+        }
     }
 
 

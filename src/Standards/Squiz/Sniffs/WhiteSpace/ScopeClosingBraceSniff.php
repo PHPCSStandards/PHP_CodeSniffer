@@ -105,6 +105,6 @@ class ScopeClosingBraceSniff implements Sniff
                     $phpcsFile->fixer->substrToken(($lineStart - 1), 0, $diff);
                 }
             }
-        }//end if
+        }
     }
 }

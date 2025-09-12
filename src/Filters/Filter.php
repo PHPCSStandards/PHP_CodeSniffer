@@ -252,7 +252,7 @@ class Filter extends RecursiveFilterIterator
                     $this->ignoreFilePatterns[$pattern] = $type;
                 }
             }
-        }//end if
+        }
 
         $relativePath = $path;
         if (strpos($path, $this->basedir) === 0) {
@@ -291,7 +291,7 @@ class Filter extends RecursiveFilterIterator
             if (preg_match($pattern, $testPath) === 1) {
                 return true;
             }
-        }//end foreach
+        }
 
         return false;
     }

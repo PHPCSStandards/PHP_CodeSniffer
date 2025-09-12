@@ -183,8 +183,8 @@ class FileCommentSniff implements Sniff
                         $phpcsFile->fixer->replaceToken($string, $expected);
                     }
                 }
-            }//end if
-        }//end foreach
+            }
+        }
 
         // Check if the tags are in the correct position.
         $pos = 0;
@@ -209,7 +209,7 @@ class FileCommentSniff implements Sniff
             }
 
             $pos++;
-        }//end foreach
+        }
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;

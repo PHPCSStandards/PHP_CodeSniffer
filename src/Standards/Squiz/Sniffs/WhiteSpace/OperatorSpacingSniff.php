@@ -169,7 +169,7 @@ class OperatorSpacingSniff implements Sniff
                         $phpcsFile->fixer->replaceToken(($stackPtr - 1), ' ');
                     }
                 }
-            }//end if
+            }
 
             $hasNext = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
             if ($hasNext === false) {
@@ -204,10 +204,10 @@ class OperatorSpacingSniff implements Sniff
                         $phpcsFile->fixer->replaceToken(($stackPtr + 1), ' ');
                     }
                 }
-            }//end if
+            }
 
             return;
-        }//end if
+        }
 
         $operator = $tokens[$stackPtr]['content'];
 
@@ -265,9 +265,9 @@ class OperatorSpacingSniff implements Sniff
                         $phpcsFile->fixer->replaceToken(($stackPtr - 1), ' ');
                         $phpcsFile->fixer->endChangeset();
                     }
-                }//end if
-            }//end if
-        }//end if
+                }
+            }
+        }
 
         $hasNext = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
         if ($hasNext === false) {
@@ -323,8 +323,8 @@ class OperatorSpacingSniff implements Sniff
                         $phpcsFile->fixer->replaceToken(($stackPtr + 1), ' ');
                     }
                 }
-            }//end if
-        }//end if
+            }
+        }
     }
 
 
@@ -387,7 +387,7 @@ class OperatorSpacingSniff implements Sniff
             if (isset($this->nonOperandTokens[$tokens[$prev]['code']]) === true) {
                 return false;
             }
-        }//end if
+        }
 
         return true;
     }

@@ -203,7 +203,7 @@ class Fixer
             } elseif (PHP_CODESNIFFER_VERBOSITY > 1) {
                 StatusWriter::forceWrite("* fixed $this->numFixes violations, starting loop " . ($this->loops + 1) . ' *', 1);
             }
-        }//end while
+        }
 
         $this->enabled = false;
 
@@ -487,7 +487,7 @@ class Fixer
             }
 
             $this->changeset = [];
-        }//end if
+        }
     }
 
 
@@ -543,7 +543,7 @@ class Fixer
                 $oldContent .= $append;
                 $newContent .= $append;
             }
-        }//end if
+        }
 
         if ($this->inChangeset === true) {
             $this->changeset[$stackPtr] = $content;
@@ -585,12 +585,12 @@ class Fixer
                 }
 
                 return false;
-            }//end if
+            }
 
             $this->oldTokenValues[$stackPtr]['prev'] = $this->oldTokenValues[$stackPtr]['curr'];
             $this->oldTokenValues[$stackPtr]['curr'] = $content;
             $this->oldTokenValues[$stackPtr]['loop'] = $this->loops;
-        }//end if
+        }
 
         $this->fixedTokens[$stackPtr] = $this->tokens[$stackPtr];
         $this->tokens[$stackPtr]      = $content;
@@ -647,7 +647,7 @@ class Fixer
                 $oldContent .= $append;
                 $newContent .= $append;
             }
-        }//end if
+        }
 
         $this->tokens[$stackPtr] = $this->fixedTokens[$stackPtr];
         unset($this->fixedTokens[$stackPtr]);
@@ -803,7 +803,7 @@ class Fixer
             }
 
             $this->replaceToken($i, $newContent);
-        }//end for
+        }
 
         if ($useChangeset === true) {
             $this->endChangeset();

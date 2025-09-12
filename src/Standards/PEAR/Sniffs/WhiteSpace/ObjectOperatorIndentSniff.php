@@ -168,7 +168,7 @@ class ObjectOperatorIndentSniff implements Sniff
                     }
 
                     $previousIndent = $expectedIndent;
-                }//end if
+                }
 
                 // It cant be the last thing on the line either.
                 $content = $phpcsFile->findNext(T_WHITESPACE, ($next + 1), null, true);
@@ -185,13 +185,13 @@ class ObjectOperatorIndentSniff implements Sniff
                         $phpcsFile->fixer->endChangeset();
                     }
                 }
-            }//end if
+            }
 
             $next = $phpcsFile->findNext(
                 self::TARGET_TOKENS,
                 ($next + 1),
                 $end
             );
-        }//end while
+        }
     }
 }

@@ -149,7 +149,7 @@ class Reporter
                         break;
                     }
                 }
-            }//end if
+            }
 
             if ($reportClassName === '') {
                 $error = "ERROR: Class file for report \"$type\" not found" . PHP_EOL;
@@ -175,7 +175,7 @@ class Reporter
             } else {
                 file_put_contents($output, '');
             }
-        }//end foreach
+        }
     }
 
 
@@ -385,8 +385,8 @@ class Reporter
                 file_put_contents($this->tmpFiles[$type], $generatedReport, (FILE_APPEND | LOCK_EX));
             } else {
                 file_put_contents($report['output'], $generatedReport, (FILE_APPEND | LOCK_EX));
-            }//end if
-        }//end foreach
+            }
+        }
 
         if ($errorsShown === true || PHP_CODESNIFFER_CBF === true) {
             $this->totalFiles++;
@@ -482,7 +482,7 @@ class Reporter
             }
 
             ksort($errors[$line]);
-        }//end foreach
+        }
 
         foreach ($phpcsFile->getWarnings() as $line => $lineWarnings) {
             foreach ($lineWarnings as $column => $colWarnings) {
@@ -509,10 +509,10 @@ class Reporter
                 } else {
                     $errors[$line][$column] = $newWarnings;
                 }
-            }//end foreach
+            }
 
             ksort($errors[$line]);
-        }//end foreach
+        }
 
         ksort($errors);
         $report['messages'] = $errors;

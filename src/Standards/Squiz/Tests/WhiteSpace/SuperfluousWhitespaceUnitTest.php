@@ -71,7 +71,7 @@ final class SuperfluousWhitespaceUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

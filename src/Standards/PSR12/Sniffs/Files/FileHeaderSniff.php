@@ -109,7 +109,7 @@ class FileHeaderSniff implements Sniff
                     $phpcsFile->addError($error, $openTag, 'HeaderPosition');
                 }
             }
-        }//end if
+        }
 
         $this->processHeaderLines($phpcsFile, $possibleHeaders[$openTag]);
 
@@ -207,7 +207,7 @@ class FileHeaderSniff implements Sniff
                             'end'   => $end,
                         ];
                     }
-                }//end if
+                }
 
                 $next = $end;
                 break;
@@ -265,7 +265,7 @@ class FileHeaderSniff implements Sniff
 
                 // We found the start of the main code block.
                 break(2);
-            }//end switch
+            }
 
             $next = $phpcsFile->findNext(T_WHITESPACE, ($next + 1), null, true);
         } while ($next !== false);
@@ -318,8 +318,8 @@ class FileHeaderSniff implements Sniff
 
                             $phpcsFile->fixer->endChangeset();
                         }
-                    }//end if
-                }//end if
+                    }
+                }
 
                 // Make sure we haven't seen this next block before.
                 if (isset($headerLines[($i + 1)]) === true
@@ -357,13 +357,13 @@ class FileHeaderSniff implements Sniff
 
                         $phpcsFile->fixer->endChangeset();
                     }
-                }//end if
-            }//end if
+                }
+            }
 
             if (isset($found[$line['type']]) === false) {
                 $found[$line['type']] = $line;
             }
-        }//end foreach
+        }
 
         /*
             Next, check that the order of the header blocks
@@ -419,7 +419,7 @@ class FileHeaderSniff implements Sniff
                     $blockOrder[$prevValidType],
                 ];
                 $phpcsFile->addError($error, $found[$type]['start'], 'IncorrectOrder', $data);
-            }//end if
-        }//end foreach
+            }
+        }
     }
 }

@@ -156,8 +156,8 @@ class FunctionCommentSniff implements Sniff
                 }
 
                 $i = $nextNonWhitespace;
-            }//end for
-        }//end if
+            }
+        }
 
         $commentStart = $tokens[$commentEnd]['comment_opener'];
         foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
@@ -221,7 +221,7 @@ class FunctionCommentSniff implements Sniff
 
             $error = 'Missing @return tag in function comment';
             $phpcsFile->addError($error, $tokens[$commentStart]['comment_closer'], 'MissingReturn');
-        }//end if
+        }
     }
 
 
@@ -255,7 +255,7 @@ class FunctionCommentSniff implements Sniff
                 $error = 'Exception type missing for @throws tag in function comment';
                 $phpcsFile->addError($error, $tag, 'InvalidThrows');
             }
-        }//end foreach
+        }
     }
 
 
@@ -331,15 +331,15 @@ class FunctionCommentSniff implements Sniff
                     } else {
                         $error = 'Missing parameter comment';
                         $phpcsFile->addError($error, $tag, 'MissingParamComment');
-                    }//end if
+                    }
                 } else {
                     $error = 'Missing parameter name';
                     $phpcsFile->addError($error, $tag, 'MissingParamName');
-                }//end if
+                }
             } else {
                 $error = 'Missing parameter type';
                 $phpcsFile->addError($error, $tag, 'MissingParamType');
-            }//end if
+            }
 
             $params[] = [
                 'tag'            => $tag,
@@ -351,7 +351,7 @@ class FunctionCommentSniff implements Sniff
                 'type_space'     => $typeSpace,
                 'var_space'      => $varSpace,
             ];
-        }//end foreach
+        }
 
         $realParams  = $phpcsFile->getMethodParameters($stackPtr);
         $foundParams = [];
@@ -409,9 +409,9 @@ class FunctionCommentSniff implements Sniff
                         for ($i = ($commentToken + 1); $i <= $param['comment_end']; $i++) {
                             $phpcsFile->fixer->replaceToken($i, '');
                         }
-                    }//end if
-                }//end if
-            }//end if
+                    }
+                }
+            }
 
             // Make sure the param name is correct.
             if (isset($realParams[$pos]) === true) {
@@ -437,7 +437,7 @@ class FunctionCommentSniff implements Sniff
                 // We must have an extra parameter comment.
                 $error = 'Superfluous parameter comment';
                 $phpcsFile->addError($error, $param['tag'], 'ExtraParamComment');
-            }//end if
+            }
 
             if ($param['comment'] === '') {
                 continue;
@@ -480,8 +480,8 @@ class FunctionCommentSniff implements Sniff
                     for ($i = ($commentToken + 1); $i <= $param['comment_end']; $i++) {
                         $phpcsFile->fixer->replaceToken($i, '');
                     }
-                }//end if
-            }//end if
+                }
+            }
 
             // Check the alignment of multi-line param comments.
             if ($param['tag'] !== $param['comment_end']) {
@@ -523,9 +523,9 @@ class FunctionCommentSniff implements Sniff
                             $phpcsFile->fixer->addContentBefore($commentToken, $padding);
                         }
                     }
-                }//end foreach
-            }//end if
-        }//end foreach
+                }
+            }
+        }
 
         $realNames = [];
         foreach ($realParams as $realParam) {

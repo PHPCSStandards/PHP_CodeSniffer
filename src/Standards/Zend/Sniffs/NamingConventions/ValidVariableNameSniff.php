@@ -68,9 +68,9 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                         $data    = [$originalVarName];
                         $phpcsFile->addWarning($warning, $stackPtr, 'ContainsNumbers', $data);
                     }
-                }//end if
-            }//end if
-        }//end if
+                }
+            }
+        }
 
         // There is no way for us to know if the var is public or private,
         // so we have to ignore a leading underscore if there is one and just
@@ -187,7 +187,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                     $data    = [$varName];
                     $phpcsFile->addWarning($warning, $stackPtr, 'StringVarContainsNumbers', $data);
                 }
-            }//end foreach
-        }//end if
+            }
+        }
     }
 }

@@ -87,6 +87,6 @@ final class AssignmentInConditionUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 }

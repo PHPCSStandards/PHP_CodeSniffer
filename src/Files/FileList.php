@@ -97,8 +97,8 @@ class FileList implements Iterator, Countable
                 }
             } else {
                 $this->addFile($path);
-            }//end if
-        }//end foreach
+            }
+        }
 
         reset($this->files);
         $this->numFiles = count($this->files);

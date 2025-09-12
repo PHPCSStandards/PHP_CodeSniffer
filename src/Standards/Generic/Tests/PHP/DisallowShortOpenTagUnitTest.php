@@ -72,7 +72,7 @@ final class DisallowShortOpenTagUnitTest extends AbstractSniffTestCase
             ];
         default:
             return [];
-        }//end switch
+        }
     }
 
 
@@ -105,6 +105,6 @@ final class DisallowShortOpenTagUnitTest extends AbstractSniffTestCase
             ];
         default:
             return [];
-        }//end switch
+        }
     }
 }

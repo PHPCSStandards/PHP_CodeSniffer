@@ -50,7 +50,7 @@ final class ValidVariableNameUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

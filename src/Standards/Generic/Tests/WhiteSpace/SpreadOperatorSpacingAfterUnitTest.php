@@ -49,7 +49,7 @@ final class SpreadOperatorSpacingAfterUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

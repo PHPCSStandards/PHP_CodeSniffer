@@ -94,8 +94,8 @@ class FunctionClosingBraceSpaceSniff implements Sniff
                     }
 
                     $phpcsFile->fixer->endChangeset();
-                }//end if
-            }//end if
+                }
+            }
         } else {
             if ($found !== 1) {
                 if ($found < 0) {
@@ -124,7 +124,7 @@ class FunctionClosingBraceSpaceSniff implements Sniff
                         }
                     }
                 }
-            }//end if
-        }//end if
+            }
+        }
     }
 }

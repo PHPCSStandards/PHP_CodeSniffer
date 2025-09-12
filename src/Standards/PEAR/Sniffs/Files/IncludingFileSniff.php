@@ -127,6 +127,6 @@ class IncludingFileSniff implements Sniff
                     $phpcsFile->fixer->replaceToken($stackPtr, 'require');
                 }
             }
-        }//end if
+        }
     }
 }

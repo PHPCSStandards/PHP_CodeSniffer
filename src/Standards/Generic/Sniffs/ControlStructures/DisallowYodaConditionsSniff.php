@@ -113,8 +113,8 @@ class DisallowYodaConditionsSniff implements Sniff
                 && $this->isArrayStatic($phpcsFile, $beforeOpeningParenthesisIndex) === false
             ) {
                 return;
-            }//end if
-        }//end if
+            }
+        }
 
         $phpcsFile->addError(
             'Usage of Yoda conditions is not allowed; switch the expression order',

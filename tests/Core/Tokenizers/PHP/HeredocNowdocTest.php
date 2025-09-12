@@ -199,6 +199,6 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
                 $tokens[$i]['content'],
                 'Token content did not match expectations' . $errorMsgSuffix
             );
-        }//end for
+        }
     }
 }

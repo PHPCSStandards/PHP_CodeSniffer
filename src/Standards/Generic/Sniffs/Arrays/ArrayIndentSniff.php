@@ -97,7 +97,7 @@ class ArrayIndentSniff extends AbstractArraySniff
             }
 
             return;
-        }//end if
+        }
 
         $expectedIndent = ($startIndent + $this->indent);
 
@@ -144,7 +144,7 @@ class ArrayIndentSniff extends AbstractArraySniff
             } else {
                 $phpcsFile->fixer->replaceToken(($first - 1), $padding);
             }
-        }//end foreach
+        }
 
         $prev = $phpcsFile->findPrevious(T_WHITESPACE, ($arrayEnd - 1), null, true);
         if ($tokens[$prev]['line'] === $tokens[$arrayEnd]['line']) {

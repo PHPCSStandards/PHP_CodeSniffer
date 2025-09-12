@@ -97,7 +97,7 @@ class ForEachLoopDeclarationSniff implements Sniff
                     }
                 }
             }
-        }//end if
+        }
 
         if ($this->requiredSpacesBeforeClose === 0 && $tokens[($closingBracket - 1)]['code'] === T_WHITESPACE) {
             $error = 'Space found before closing bracket of FOREACH loop';
@@ -127,7 +127,7 @@ class ForEachLoopDeclarationSniff implements Sniff
                     }
                 }
             }
-        }//end if
+        }
 
         $asToken = $phpcsFile->findNext(T_AS, $openingBracket);
         if ($asToken === false) {
@@ -188,7 +188,7 @@ class ForEachLoopDeclarationSniff implements Sniff
                     }
                 }
             }
-        }//end if
+        }
 
         if ($tokens[($asToken - 1)]['code'] !== T_WHITESPACE) {
             $error = 'Expected 1 space before "as"; 0 found';

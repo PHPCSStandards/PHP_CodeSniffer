@@ -113,8 +113,8 @@ class VariableCommentSniff extends AbstractVariableSniff
                 $data  = [$tokens[$tag]['content']];
                 $code  = ucwords(ltrim($tokens[$tag]['content'], '@')) . 'TagNotAllowed';
                 $phpcsFile->addWarning($error, $tag, $code, $data);
-            }//end if
-        }//end foreach
+            }
+        }
 
         // The @var tag is the only one we require.
         if ($foundVar === null) {

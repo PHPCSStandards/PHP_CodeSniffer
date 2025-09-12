@@ -96,6 +96,6 @@ class DisallowMultipleStatementsSniff implements Sniff
             }
         } else {
             $phpcsFile->recordMetric($stackPtr, 'Multiple statements on same line', 'no');
-        }//end if
+        }
     }
 }

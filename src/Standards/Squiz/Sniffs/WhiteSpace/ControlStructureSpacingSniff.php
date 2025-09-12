@@ -98,7 +98,7 @@ class ControlStructureSpacingSniff implements Sniff
             } else {
                 $phpcsFile->recordMetric($stackPtr, 'Spaces before control structure close parenthesis', 0);
             }
-        }//end if
+        }
 
         if (isset($tokens[$stackPtr]['scope_closer']) === false) {
             return;
@@ -163,7 +163,7 @@ class ControlStructureSpacingSniff implements Sniff
             }
         } else {
             $phpcsFile->recordMetric($stackPtr, 'Blank lines at start of control structure', 0);
-        }//end if
+        }
 
         if ($firstContent !== $scopeCloser) {
             $lastContent = $phpcsFile->findPrevious(
@@ -220,8 +220,8 @@ class ControlStructureSpacingSniff implements Sniff
                 }
             } else {
                 $phpcsFile->recordMetric($stackPtr, 'Blank lines at end of control structure', 0);
-            }//end if
-        }//end if
+            }
+        }
 
         if ($tokens[$stackPtr]['code'] === T_MATCH) {
             // Move the scope closer to the semicolon/comma.
@@ -258,7 +258,7 @@ class ControlStructureSpacingSniff implements Sniff
             ) {
                 $trailingContent = $nextCode;
             }
-        }//end if
+        }
 
         if ($tokens[$trailingContent]['code'] === T_ELSE) {
             if ($tokens[$stackPtr]['code'] === T_IF) {
@@ -340,6 +340,6 @@ class ControlStructureSpacingSniff implements Sniff
                     $phpcsFile->fixer->addNewline($scopeCloser);
                 }
             }
-        }//end if
+        }
     }
 }

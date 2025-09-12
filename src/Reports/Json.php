@@ -60,7 +60,7 @@ class Json implements Report
                     $messages .= json_encode($messagesObject) . ',';
                 }
             }
-        }//end foreach
+        }
 
         echo rtrim($messages, ',');
         echo ']},';

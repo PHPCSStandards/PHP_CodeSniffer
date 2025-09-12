@@ -81,7 +81,7 @@ final class OperatorBracketUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

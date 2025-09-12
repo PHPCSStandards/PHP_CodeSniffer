@@ -103,7 +103,7 @@ final class DocCommentUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

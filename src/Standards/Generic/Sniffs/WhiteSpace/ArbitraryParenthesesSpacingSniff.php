@@ -170,9 +170,9 @@ class ArbitraryParenthesesSpacingSniff implements Sniff
                     } else {
                         $phpcsFile->fixer->replaceToken(($stackPtr + 1), $expected);
                     }
-                }//end if
-            }//end if
-        }//end if
+                }
+            }
+        }
 
         if ($tokens[$stackPtr]['code'] === T_CLOSE_PARENTHESIS
             && isset($tokens[($stackPtr - 1)], $tokens[($stackPtr - 2)]) === true
@@ -224,8 +224,8 @@ class ArbitraryParenthesesSpacingSniff implements Sniff
                     } else {
                         $phpcsFile->fixer->replaceToken(($stackPtr - 1), $expected);
                     }
-                }//end if
-            }//end if
-        }//end if
+                }
+            }
+        }
     }
 }

@@ -114,7 +114,7 @@ class DoubleQuoteUsageSniff implements Sniff
             }
 
             return $skipTo;
-        }//end if
+        }
 
         foreach (self::ESCAPE_CHARS as $testChar) {
             if (strpos($workingString, $testChar) !== false) {

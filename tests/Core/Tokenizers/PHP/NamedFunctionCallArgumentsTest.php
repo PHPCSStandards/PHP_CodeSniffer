@@ -64,7 +64,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
                 $tokens[$colon]['type'],
                 'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)'
             );
-        }//end foreach
+        }
     }
 
 
@@ -969,7 +969,7 @@ final class NamedFunctionCallArgumentsTest extends AbstractTokenizerTestCase
                 $tokensTypes,
                 $keyword,
             ];
-        }//end foreach
+        }
 
         return $data;
     }

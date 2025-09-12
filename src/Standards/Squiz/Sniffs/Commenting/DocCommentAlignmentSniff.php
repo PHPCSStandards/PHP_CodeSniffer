@@ -111,7 +111,7 @@ class DocCommentAlignmentSniff implements Sniff
                         $phpcsFile->fixer->replaceToken(($i - 1), $padding);
                     }
                 }
-            }//end if
+            }
 
             if ($tokens[$i]['code'] !== T_DOC_COMMENT_STAR) {
                 continue;
@@ -138,6 +138,6 @@ class DocCommentAlignmentSniff implements Sniff
                     $phpcsFile->fixer->replaceToken(($i + 1), ' ');
                 }
             }
-        }//end for
+        }
     }
 }

@@ -50,7 +50,7 @@ final class ExecutableFileUnitTest extends AbstractSniffTestCase
             return [1 => 1];
         default:
             return [];
-        }//end switch
+        }
     }
 
 

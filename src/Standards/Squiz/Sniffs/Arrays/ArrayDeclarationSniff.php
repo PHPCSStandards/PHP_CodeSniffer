@@ -115,7 +115,7 @@ class ArrayDeclarationSniff implements Sniff
             $phpcsFile->recordMetric($stackPtr, 'Short array syntax used', 'yes');
             $arrayStart = $stackPtr;
             $arrayEnd   = $tokens[$stackPtr]['bracket_closer'];
-        }//end if
+        }
 
         // Check for empty arrays.
         $content = $phpcsFile->findNext(T_WHITESPACE, ($arrayStart + 1), ($arrayEnd + 1), true);
@@ -190,7 +190,7 @@ class ArrayDeclarationSniff implements Sniff
                     }
                 }
             }
-        }//end for
+        }
 
         // Now check each of the double arrows (if any).
         $nextArrow = $arrayStart;
@@ -218,7 +218,7 @@ class ArrayDeclarationSniff implements Sniff
                         $phpcsFile->fixer->replaceToken(($nextArrow - 1), ' ');
                     }
                 }
-            }//end if
+            }
 
             if ($tokens[($nextArrow + 1)]['code'] !== T_WHITESPACE) {
                 $content = $tokens[($nextArrow + 1)]['content'];
@@ -243,8 +243,8 @@ class ArrayDeclarationSniff implements Sniff
                         $phpcsFile->fixer->replaceToken(($nextArrow + 1), ' ');
                     }
                 }
-            }//end if
-        }//end while
+            }
+        }
 
         if ($valueCount > 0) {
             $nestedParenthesis = false;
@@ -300,7 +300,7 @@ class ArrayDeclarationSniff implements Sniff
                             $phpcsFile->fixer->replaceToken(($comma + 1), ' ');
                         }
                     }
-                }//end if
+                }
 
                 if ($tokens[($comma - 1)]['code'] === T_WHITESPACE) {
                     $content     = $tokens[($comma - 2)]['content'];
@@ -316,8 +316,8 @@ class ArrayDeclarationSniff implements Sniff
                         $phpcsFile->fixer->replaceToken(($comma - 1), '');
                     }
                 }
-            }//end foreach
-        }//end if
+            }
+        }
     }
 
 
@@ -369,7 +369,7 @@ class ArrayDeclarationSniff implements Sniff
                     $phpcsFile->fixer->replaceToken(($arrayEnd - 1), str_repeat(' ', $expected));
                 }
             }
-        }//end if
+        }
 
         $keyUsed    = false;
         $singleUsed = false;
@@ -422,7 +422,7 @@ class ArrayDeclarationSniff implements Sniff
                 }
 
                 continue;
-            }//end if
+            }
 
             if ($tokens[$nextToken]['code'] !== T_DOUBLE_ARROW && $tokens[$nextToken]['code'] !== T_COMMA) {
                 continue;
@@ -488,7 +488,7 @@ class ArrayDeclarationSniff implements Sniff
                                 $phpcsFile->addError($error, $nextToken, 'SpaceBeforeComma', $data);
                             }
                         }
-                    }//end if
+                    }
 
                     $valueContent = $phpcsFile->findNext(
                         Tokens::EMPTY_TOKENS,
@@ -508,11 +508,11 @@ class ArrayDeclarationSniff implements Sniff
                         // Don't decide if an array is key => value indexed or not when PHP 7.4+ array unpacking is used.
                         $singleUsed = true;
                     }
-                }//end if
+                }
 
                 $lastToken = $nextToken;
                 continue;
-            }//end if
+            }
 
             if ($tokens[$nextToken]['code'] === T_DOUBLE_ARROW) {
                 if ($singleUsed === true) {
@@ -557,8 +557,8 @@ class ArrayDeclarationSniff implements Sniff
                 $currentEntry['value'] = $nextContent;
                 $indices[] = $currentEntry;
                 $lastToken = $nextToken;
-            }//end if
-        }//end for
+            }
+        }
 
         // Check for multi-line arrays that should be single-line.
         $singleValue = false;
@@ -616,8 +616,8 @@ class ArrayDeclarationSniff implements Sniff
                 }
 
                 return;
-            }//end if
-        }//end if
+            }
+        }
 
         /*
             This section checks for arrays that don't specify keys.
@@ -725,9 +725,9 @@ class ArrayDeclarationSniff implements Sniff
                             }
                         }
                     }
-                }//end if
-            }//end foreach
-        }//end if
+                }
+            }
+        }
 
         /*
             Below the actual indentation of the array is checked.
@@ -818,7 +818,7 @@ class ArrayDeclarationSniff implements Sniff
                         $phpcsFile->fixer->replaceToken(($indexPointer - 1), str_repeat(' ', $expected));
                     }
                 }
-            }//end if
+            }
 
             $arrowStart = ($tokens[$indexPointer]['column'] + $maxLength + 1);
             if ($tokens[$index['arrow']]['column'] !== $arrowStart) {
@@ -846,7 +846,7 @@ class ArrayDeclarationSniff implements Sniff
                 }
 
                 continue;
-            }//end if
+            }
 
             $valueStart = ($arrowStart + 3);
             if ($tokens[$valuePointer]['column'] !== $valueStart) {
@@ -885,7 +885,7 @@ class ArrayDeclarationSniff implements Sniff
                         $phpcsFile->fixer->replaceToken(($valuePointer - 1), str_repeat(' ', $expected));
                     }
                 }
-            }//end if
+            }
 
             // Check each line ends in a comma.
             $valueStart = $valuePointer;
@@ -930,7 +930,7 @@ class ArrayDeclarationSniff implements Sniff
 
                     $phpcsFile->fixer->endChangeset();
                 }
-            }//end if
+            }
 
             // Check that there is no space before the comma.
             if ($nextComma !== false && $tokens[($nextComma - 1)]['code'] === T_WHITESPACE) {
@@ -951,6 +951,6 @@ class ArrayDeclarationSniff implements Sniff
                     }
                 }
             }
-        }//end foreach
+        }
     }
 }

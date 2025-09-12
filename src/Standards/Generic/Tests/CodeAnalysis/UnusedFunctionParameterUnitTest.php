@@ -69,6 +69,6 @@ final class UnusedFunctionParameterUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 }

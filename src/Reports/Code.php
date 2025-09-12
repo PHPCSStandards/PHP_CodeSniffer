@@ -70,7 +70,7 @@ class Code implements Report
             }
 
             $tokens = $phpcsFile->getTokens();
-        }//end if
+        }
 
         // Create an array that maps lines to the first token on the line.
         $lineTokens = [];
@@ -256,8 +256,8 @@ class Code implements Report
                             $snippet .= "\033[0m";
                         }
                     }
-                }//end for
-            }//end if
+                }
+            }
 
             echo str_repeat('-', $width) . PHP_EOL;
 
@@ -300,12 +300,12 @@ class Code implements Report
                     );
 
                     echo $errorMsg . PHP_EOL;
-                }//end foreach
-            }//end foreach
+                }
+            }
 
             echo str_repeat('-', $width) . PHP_EOL;
             echo rtrim($snippet) . PHP_EOL;
-        }//end foreach
+        }
 
         echo str_repeat('-', $width) . PHP_EOL;
         if ($report['fixable'] > 0) {

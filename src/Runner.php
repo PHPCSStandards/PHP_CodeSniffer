@@ -138,7 +138,7 @@ class Runner
             }
 
             return $exitCode;
-        }//end try
+        }
 
         return ExitCode::calculate($this->reporter);
     }
@@ -223,7 +223,7 @@ class Runner
             }
 
             return $exitCode;
-        }//end try
+        }
 
         return ExitCode::calculate($this->reporter);
     }
@@ -347,7 +347,7 @@ class Runner
                     StatusWriter::write("DONE ($size files in cache)");
                 }
             }
-        }//end if
+        }
 
         $numFiles = count($todo);
         if ($numFiles === 0) {
@@ -458,7 +458,7 @@ class Runner
 
                         $pathsProcessed[] = $path;
                         $todo->next();
-                    }//end for
+                    }
 
                     $debugOutput = ob_get_contents();
                     ob_end_clean();
@@ -493,14 +493,14 @@ class Runner
                     $output .= ";\n?" . '>';
                     file_put_contents($childOutFilename, $output);
                     exit();
-                }//end if
-            }//end for
+                }
+            }
 
             $success = $this->processChildProcs($childProcs);
             if ($success === false) {
                 throw new RuntimeException('One or more child processes failed to run');
             }
-        }//end if
+        }
 
         restore_error_handler();
 
@@ -621,7 +621,7 @@ class Runner
             }
 
             $file->addErrorOnLine($error, 1, 'Internal.Exception');
-        }//end try
+        }
 
         $this->reporter->cacheFileReport($file);
 
@@ -662,8 +662,8 @@ class Runner
                     $this->reporter->cacheFileReport($file);
                     break;
                 }
-            }//end while
-        }//end if
+            }
+        }
 
         // Clean up the file to save (a lot of) memory.
         $file->cleanUp();
@@ -748,7 +748,7 @@ class Runner
                 $childOutput['totalFixedWarnings']
             );
             $this->printProgress($file, $totalBatches, $numProcessed);
-        }//end while
+        }
 
         return $success;
     }
@@ -804,7 +804,7 @@ class Runner
                         $colorOpen  = "\033[32m";
                         $colorClose = "\033[0m";
                     }
-                }//end if
+                }
             } else {
                 // Files with errors are E (red).
                 // Files with fixable errors are E (green).
@@ -835,9 +835,9 @@ class Runner
 
                         $colorClose = "\033[0m";
                     }
-                }//end if
-            }//end if
-        }//end if
+                }
+            }
+        }
 
         StatusWriter::write($colorOpen . $progressDot . $colorClose, 0, 0);
 

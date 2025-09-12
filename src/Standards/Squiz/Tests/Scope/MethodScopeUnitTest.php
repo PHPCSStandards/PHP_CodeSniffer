@@ -43,7 +43,7 @@ final class MethodScopeUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

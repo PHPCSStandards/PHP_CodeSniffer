@@ -3264,7 +3264,7 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
             if (isset($param['readonly_token']) === true) {
                 $expected[$key]['readonly_token'] += $target;
             }
-        }//end foreach
+        }
 
         $this->assertSame($expected, $found);
     }

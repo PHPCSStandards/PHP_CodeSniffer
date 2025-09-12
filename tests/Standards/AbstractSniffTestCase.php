@@ -232,11 +232,11 @@ TEMPLATE;
                     $diff = trim($phpcsFile->fixer->generateDiff($testFile));
                     $failureMessages[] = "Missing fixed version of $filename to verify the accuracy of fixes, while the sniff is making fixes against the test case file; the diff is\n$diff";
                 }
-            }//end if
+            }
 
             // Restore the config.
             $config->setSettings($oldConfig);
-        }//end foreach
+        }
 
         if (empty($failureMessages) === false) {
             $this->fail(implode(PHP_EOL, $failureMessages));
@@ -301,7 +301,7 @@ TEMPLATE;
                 }
 
                 $allProblems[$line]['found_errors'] = array_merge($foundErrorsTemp, $errorsTemp);
-            }//end foreach
+            }
 
             if (isset($expectedErrors[$line]) === true) {
                 $allProblems[$line]['expected_errors'] = $expectedErrors[$line];
@@ -310,7 +310,7 @@ TEMPLATE;
             }
 
             unset($expectedErrors[$line]);
-        }//end foreach
+        }
 
         foreach ($expectedErrors as $line => $numErrors) {
             if (isset($allProblems[$line]) === false) {
@@ -347,7 +347,7 @@ TEMPLATE;
                 }
 
                 $allProblems[$line]['found_warnings'] = array_merge($foundWarningsTemp, $warningsTemp);
-            }//end foreach
+            }
 
             if (isset($expectedWarnings[$line]) === true) {
                 $allProblems[$line]['expected_warnings'] = $expectedWarnings[$line];
@@ -356,7 +356,7 @@ TEMPLATE;
             }
 
             unset($expectedWarnings[$line]);
-        }//end foreach
+        }
 
         foreach ($expectedWarnings as $line => $numWarnings) {
             if (isset($allProblems[$line]) === false) {
@@ -426,8 +426,8 @@ TEMPLATE;
                 }
 
                 $failureMessages[] = $fullMessage;
-            }//end if
-        }//end foreach
+            }
+        }
 
         return $failureMessages;
     }

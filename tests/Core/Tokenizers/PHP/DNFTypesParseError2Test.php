@@ -186,8 +186,8 @@ final class DNFTypesParseError2Test extends AbstractTokenizerTestCase
 
             default:
                 break;
-            }//end switch
-        }//end for
+            }
+        }
     }
 
 

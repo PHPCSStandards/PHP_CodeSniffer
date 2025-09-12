@@ -99,7 +99,7 @@ abstract class AbstractPatternSniff implements Sniff
             }
 
             $this->parsedPatterns[$tokenType][] = $patternArray;
-        }//end foreach
+        }
 
         return array_unique(array_merge($listenTypes, $this->supplementaryTokens));
     }
@@ -308,7 +308,7 @@ abstract class AbstractPatternSniff implements Sniff
                         } else {
                             $stackPtr = ($prev - 1);
                         }
-                    }//end if
+                    }
                 } elseif ($pattern[$i]['type'] === 'skip') {
                     // Skip to next piece of relevant code.
                     if ($pattern[$i]['to'] === 'parenthesis_closer') {
@@ -388,7 +388,7 @@ abstract class AbstractPatternSniff implements Sniff
                     } else {
                         $found    = $tokens[$stackPtr]['content'] . $found;
                         $hasError = true;
-                    }//end if
+                    }
 
                     if ($hasError === false && $pattern[($i - 1)]['type'] !== 'newline') {
                         // Make sure they only have 1 newline.
@@ -397,9 +397,9 @@ abstract class AbstractPatternSniff implements Sniff
                             $hasError = true;
                         }
                     }
-                }//end if
-            }//end for
-        }//end if
+                }
+            }
+        }
 
         $stackPtr          = $origStackPtr;
         $lastAddedStackPtr = null;
@@ -456,7 +456,7 @@ abstract class AbstractPatternSniff implements Sniff
 
                             $lastAddedStackPtr = $stackPtr;
                             $stackPtr          = $next;
-                        }//end if
+                        }
 
                         if ($stackPtr !== $lastAddedStackPtr) {
                             $found .= $tokenContent;
@@ -466,7 +466,7 @@ abstract class AbstractPatternSniff implements Sniff
                             $found            .= $tokens[$stackPtr]['content'];
                             $lastAddedStackPtr = $stackPtr;
                         }
-                    }//end if
+                    }
 
                     if (isset($pattern[($i + 1)]) === true
                         && $pattern[($i + 1)]['type'] === 'skip'
@@ -522,7 +522,7 @@ abstract class AbstractPatternSniff implements Sniff
                             // our pattern. This means the pattern is not for us.
                             return false;
                         }
-                    }//end if
+                    }
 
                     // If we skipped past some whitespace tokens, then add them
                     // to the found string.
@@ -552,7 +552,7 @@ abstract class AbstractPatternSniff implements Sniff
                         if ($tokens[$next]['line'] !== $tokens[$stackPtr]['line']) {
                             $hasError = true;
                         }
-                    }//end if
+                    }
 
                     if ($next !== $lastAddedStackPtr) {
                         $found            .= $tokens[$next]['content'];
@@ -566,7 +566,7 @@ abstract class AbstractPatternSniff implements Sniff
                     } else {
                         $stackPtr = ($next + 1);
                     }
-                }//end if
+                }
             } elseif ($pattern[$i]['type'] === 'skip') {
                 if ($pattern[$i]['to'] === 'unknown') {
                     $next = $phpcsFile->findNext(
@@ -606,7 +606,7 @@ abstract class AbstractPatternSniff implements Sniff
 
                     // Skip to the closing token.
                     $stackPtr = ($tokens[$next][$pattern[$i]['to']] + 1);
-                }//end if
+                }
             } elseif ($pattern[$i]['type'] === 'string') {
                 if ($tokens[$stackPtr]['code'] !== T_STRING) {
                     $hasError = true;
@@ -659,7 +659,7 @@ abstract class AbstractPatternSniff implements Sniff
                             $next = ($newline + 1);
                         }
                     }
-                }//end if
+                }
 
                 if ($stackPtr !== $lastAddedStackPtr) {
                     $found .= $phpcsFile->getTokensAsString(
@@ -671,8 +671,8 @@ abstract class AbstractPatternSniff implements Sniff
                 }
 
                 $stackPtr = $next;
-            }//end if
-        }//end for
+            }
+        }
 
         if ($hasError === true) {
             $error = $this->prepareError($found, $patternCode);
@@ -789,7 +789,7 @@ abstract class AbstractPatternSniff implements Sniff
                 $lastToken      = ($i - $firstToken);
                 $firstToken     = ($i + 3);
                 $i += 2;
-            }//end if
+            }
 
             if ($specialPattern !== false || $isLastChar === true) {
                 // If we are at the end of the string, don't worry about a limit.
@@ -821,7 +821,7 @@ abstract class AbstractPatternSniff implements Sniff
                 if ($isLastChar === false && $i === ($length - 1)) {
                     $i--;
                 }
-            }//end if
+            }
 
             // Add the skip pattern *after* we have processed
             // all the tokens from the end of the last skip pattern
@@ -829,7 +829,7 @@ abstract class AbstractPatternSniff implements Sniff
             if ($specialPattern !== false) {
                 $patterns[] = $specialPattern;
             }
-        }//end for
+        }
 
         return $patterns;
     }
@@ -873,12 +873,12 @@ abstract class AbstractPatternSniff implements Sniff
             case ')':
                 $nestedParenthesis++;
                 break;
-            }//end switch
+            }
 
             if (isset($skip['to']) === true) {
                 break;
             }
-        }//end for
+        }
 
         if (isset($skip['to']) === false) {
             $skip['to'] = 'unknown';

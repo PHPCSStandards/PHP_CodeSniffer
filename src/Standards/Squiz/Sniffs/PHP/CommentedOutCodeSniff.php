@@ -127,7 +127,7 @@ class CommentedOutCodeSniff implements Sniff
                 if (substr($tokenContent, 0, 1) === '*') {
                     $tokenContent = substr($tokenContent, 1);
                 }
-            }//end if
+            }
 
             $content     .= $tokenContent . $phpcsFile->eolChar;
             $lastLineSeen = $tokens[$i]['line'];
@@ -138,7 +138,7 @@ class CommentedOutCodeSniff implements Sniff
                 // Closer of a block comment found.
                 break;
             }
-        }//end for
+        }
 
         // Ignore typical warning suppression annotations from other tools.
         if (preg_match('`^\s*@[A-Za-z()\._-]+\s*$`', $content) === 1) {

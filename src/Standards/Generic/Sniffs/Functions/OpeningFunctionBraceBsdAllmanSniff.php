@@ -131,7 +131,7 @@ class OpeningFunctionBraceBsdAllmanSniff implements Sniff
                 }
 
                 $phpcsFile->fixer->endChangeset();
-            }//end if
+            }
 
             $phpcsFile->recordMetric($stackPtr, "$metricType opening brace placement", 'same line');
         } elseif ($lineDifference > 1) {
@@ -161,8 +161,8 @@ class OpeningFunctionBraceBsdAllmanSniff implements Sniff
 
                     $phpcsFile->fixer->endChangeset();
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         $ignore   = Tokens::PHPCS_ANNOTATION_TOKENS;
         $ignore[] = T_WHITESPACE;
@@ -213,7 +213,7 @@ class OpeningFunctionBraceBsdAllmanSniff implements Sniff
                     $phpcsFile->fixer->replaceToken(($openingBrace - 1), $indent);
                 }
             }
-        }//end if
+        }
 
         $phpcsFile->recordMetric($stackPtr, "$metricType opening brace placement", 'new line');
     }

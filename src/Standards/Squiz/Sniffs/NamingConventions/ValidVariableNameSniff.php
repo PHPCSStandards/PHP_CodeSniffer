@@ -62,9 +62,9 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                         $data  = [$originalVarName];
                         $phpcsFile->addError($error, $var, 'MemberNotCamelCaps', $data);
                     }
-                }//end if
-            }//end if
-        }//end if
+                }
+            }
+        }
 
         $objOperator = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
         if ($tokens[$objOperator]['code'] === T_DOUBLE_COLON) {

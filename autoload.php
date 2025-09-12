@@ -92,7 +92,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
                 } else {
                     self::$composerAutoloader = false;
                 }
-            }//end if
+            }
 
             $ds   = DIRECTORY_SEPARATOR;
             $path = false;
@@ -332,4 +332,4 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
     // it gets a chance to hear about every autoload request, and record
     // the file and class name for it.
     spl_autoload_register(__NAMESPACE__ . '\Autoload::load', true, true);
-}//end if
+}

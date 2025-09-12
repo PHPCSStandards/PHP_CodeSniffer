@@ -43,7 +43,7 @@ final class DisallowAlternativePHPTagsUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 
 

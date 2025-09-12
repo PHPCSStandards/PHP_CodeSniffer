@@ -87,7 +87,7 @@ class ScopeKeywordSpacingSniff implements Sniff
                     return;
                 }
             }
-        }//end if
+        }
 
         if ($tokens[$prevToken]['code'] === T_AS) {
             // Trait visibility change, e.g., "use HelloWorld { sayHello as private; }".
@@ -162,7 +162,7 @@ class ScopeKeywordSpacingSniff implements Sniff
                     $phpcsFile->fixer->replaceToken(($stackPtr + 1), ' ');
                     $phpcsFile->fixer->endChangeset();
                 }
-            }//end if
-        }//end if
+            }
+        }
     }
 }

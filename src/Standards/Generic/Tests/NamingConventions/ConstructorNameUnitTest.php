@@ -50,7 +50,7 @@ final class ConstructorNameUnitTest extends AbstractSniffTestCase
             ];
         default:
             return [];
-        }//end switch
+        }
     }
 
 

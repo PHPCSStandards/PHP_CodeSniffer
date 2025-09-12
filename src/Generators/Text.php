@@ -134,13 +134,13 @@ class Text extends Generator
         if ($firstTitleLines !== [] || $secondTitleLines !== []) {
             $titleRow  = $this->linesToTableRows($firstTitleLines, $secondTitleLines);
             $titleRow .= str_repeat('-', 100) . PHP_EOL;
-        }//end if
+        }
 
         $codeRow = '';
         if ($firstLines !== [] || $secondLines !== []) {
             $codeRow  = $this->linesToTableRows($firstLines, $secondLines);
             $codeRow .= str_repeat('-', 100) . PHP_EOL . PHP_EOL;
-        }//end if
+        }
 
         $output = '';
         if ($titleRow !== '' || $codeRow !== '') {
@@ -222,7 +222,7 @@ class Text extends Generator
             $rows .= '| ';
             $rows .= $column2Text . str_repeat(' ', max(0, (48 - strlen($column2Text))));
             $rows .= '|' . PHP_EOL;
-        }//end for
+        }
 
         return $rows;
     }

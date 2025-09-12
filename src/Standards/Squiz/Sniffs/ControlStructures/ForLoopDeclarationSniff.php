@@ -127,8 +127,8 @@ class ForLoopDeclarationSniff implements Sniff
                         $phpcsFile->fixer->endChangeset();
                     }
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         $prevNonWhiteSpace  = $phpcsFile->findPrevious(T_WHITESPACE, ($closingBracket - 1), $openingBracket, true);
         $beforeClosefixable = true;
@@ -199,8 +199,8 @@ class ForLoopDeclarationSniff implements Sniff
                         }
                     }
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         /*
          * Check whitespace around each of the semicolon tokens.
@@ -294,8 +294,8 @@ class ForLoopDeclarationSniff implements Sniff
                             $phpcsFile->fixer->endChangeset();
                         }
                     }
-                }//end if
-            }//end if
+                }
+            }
         } while ($semicolonCount < 2);
     }
 }

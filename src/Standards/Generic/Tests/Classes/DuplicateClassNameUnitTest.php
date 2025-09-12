@@ -89,6 +89,6 @@ final class DuplicateClassNameUnitTest extends AbstractSniffTestCase
 
         default:
             return [];
-        }//end switch
+        }
     }
 }

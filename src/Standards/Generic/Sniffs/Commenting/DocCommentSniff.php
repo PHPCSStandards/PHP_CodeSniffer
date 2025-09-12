@@ -175,8 +175,8 @@ class DocCommentSniff implements Sniff
                     $error = 'Doc comment long description must start with a capital letter';
                     $phpcsFile->addError($error, $long, 'LongNotCapital');
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         if (empty($tokens[$commentStart]['comment_tags']) === true) {
             // No tags in the comment.
@@ -240,10 +240,10 @@ class DocCommentSniff implements Sniff
                 if ($paramGroupid === null) {
                     $paramGroupid = $groupid;
                 }
-            }//end if
+            }
 
             $tagGroups[$groupid][] = $tag;
-        }//end foreach
+        }
 
         foreach ($tagGroups as $groupid => $group) {
             $maxLength = 0;
@@ -296,7 +296,7 @@ class DocCommentSniff implements Sniff
                         $phpcsFile->fixer->endChangeset();
                     }
                 }
-            }//end if
+            }
 
             // Now check paddings.
             foreach ($paddings as $tag => $padding) {
@@ -316,7 +316,7 @@ class DocCommentSniff implements Sniff
                     }
                 }
             }
-        }//end foreach
+        }
 
         // If there is a param group, it needs to be first.
         if ($paramGroupid !== null && $paramGroupid !== 0) {

@@ -69,7 +69,7 @@ class Xml implements Report
                     $out->endElement();
                 }
             }
-        }//end foreach
+        }
 
         $out->endElement();
 

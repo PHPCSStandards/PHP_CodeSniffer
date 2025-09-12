@@ -76,7 +76,7 @@ class OperatorBracketSniff implements Sniff
                     }
                 }
             }
-        }//end if
+        }
 
         $previousToken = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true, null, true);
         if ($previousToken !== false) {
@@ -183,7 +183,7 @@ class OperatorBracketSniff implements Sniff
                     if ($next !== $endBracket) {
                         break;
                     }
-                }//end if
+                }
 
                 if (in_array($prevCode, Tokens::SCOPE_OPENERS, true) === true) {
                     // This operation is inside a control structure like FOREACH
@@ -204,8 +204,8 @@ class OperatorBracketSniff implements Sniff
 
                 $lastBracket = $bracket;
                 break;
-            }//end foreach
-        }//end if
+            }
+        }
 
         if ($lastBracket === false) {
             // It is not in a bracketed statement at all.
@@ -233,7 +233,7 @@ class OperatorBracketSniff implements Sniff
             }
 
             return;
-        }//end if
+        }
 
         $lastAssignment = $phpcsFile->findPrevious(Tokens::ASSIGNMENT_TOKENS, $stackPtr, null, false, null, true);
         if ($lastAssignment !== false && $lastAssignment > $lastBracket) {
@@ -300,7 +300,7 @@ class OperatorBracketSniff implements Sniff
             }
 
             break;
-        }//end for
+        }
 
         $before = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($before + 1), null, true);
 
@@ -342,7 +342,7 @@ class OperatorBracketSniff implements Sniff
             }
 
             break;
-        }//end for
+        }
 
         $after = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($after - 1), null, true);
 

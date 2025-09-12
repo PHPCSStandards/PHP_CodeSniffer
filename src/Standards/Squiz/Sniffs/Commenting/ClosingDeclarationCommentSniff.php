@@ -80,7 +80,7 @@ class ClosingDeclarationCommentSniff implements Sniff
             $comment = '//end trait';
         } else {
             $comment = '//end enum';
-        }//end if
+        }
 
         if (isset($tokens[$stackPtr]['scope_closer']) === false) {
             // Parse error or live coding.
@@ -114,7 +114,7 @@ class ClosingDeclarationCommentSniff implements Sniff
             }
 
             return;
-        }//end if
+        }
 
         if (rtrim($tokens[($closingBracket + 1)]['content']) !== $comment) {
             $fix = $phpcsFile->addFixableError('Expected %s', $closingBracket, 'Incorrect', $data);
