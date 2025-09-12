@@ -33,8 +33,7 @@ final class DoubleQuotedStringTest extends AbstractTokenizerTestCase
 
         $target = $this->getTargetToken($testMarker, T_DOUBLE_QUOTED_STRING);
         $this->assertSame($expectedContent, $tokens[$target]['content']);
-
-    }//end testDoubleQuotedString()
+    }
 
 
     /**
@@ -137,8 +136,5 @@ final class DoubleQuotedStringTest extends AbstractTokenizerTestCase
 ',
             ],
         ];
-
-    }//end dataDoubleQuotedString()
-
-
-}//end class
+    }
+}

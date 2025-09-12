@@ -43,8 +43,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
             $tokens[$target]['type'],
             'Token tokenized as ' . $tokens[$target]['type'] . ', not T_INLINE_THEN (type)'
         );
-
-    }//end testTernaryIsInlineThen()
+    }
 
 
     /**
@@ -79,8 +78,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
                 'Token tokenized as ' . $tokens[$i]['type'] . ', not T_STRING (type)'
             );
         }
-
-    }//end testUntypedConstant()
+    }
 
 
     /**
@@ -103,8 +101,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testClassConstVisibilityUntyped */',
             ],
         ];
-
-    }//end dataUntypedConstant()
+    }
 
 
     /**
@@ -143,8 +140,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
 
             ++$current;
         }
-
-    }//end testTypedConstant()
+    }
 
 
     /**
@@ -257,8 +253,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
         }
 
         return $data;
-
-    }//end dataTypedConstant()
+    }
 
 
     /**
@@ -367,8 +362,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
         }
 
         return $data;
-
-    }//end dataNullableTypedConstant()
+    }
 
 
     /**
@@ -449,8 +443,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
         }
 
         return $data;
-
-    }//end dataUnionTypedConstant()
+    }
 
 
     /**
@@ -487,8 +480,7 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
         }
 
         return $data;
-
-    }//end dataIntersectionTypedConstant()
+    }
 
 
     /**
@@ -632,8 +624,5 @@ final class TypedConstantsTest extends AbstractTokenizerTestCase
         }
 
         return $data;
-
-    }//end dataDNFTypedConstant()
-
-
-}//end class
+    }
+}

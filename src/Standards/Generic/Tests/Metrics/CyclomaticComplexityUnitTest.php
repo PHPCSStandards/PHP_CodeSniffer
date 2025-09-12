@@ -38,8 +38,7 @@ final class CyclomaticComplexityUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -70,8 +69,5 @@ final class CyclomaticComplexityUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

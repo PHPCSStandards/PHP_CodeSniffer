@@ -37,8 +37,7 @@ final class LowercasedFilenameUnitTest extends AbstractSniffTestCase
         $testFiles[] = $testFileDir . DIRECTORY_SEPARATOR . 'lowercased_filename_unit_test.inc';
 
         return $testFiles;
-
-    }//end getTestFiles()
+    }
 
 
     /**
@@ -60,8 +59,7 @@ final class LowercasedFilenameUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -75,8 +73,7 @@ final class LowercasedFilenameUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
+    }
 
 
     /**
@@ -99,8 +96,5 @@ final class LowercasedFilenameUnitTest extends AbstractSniffTestCase
         $this->assertSame(0, $file->getErrorCount());
         $this->assertSame(0, $file->getWarningCount());
         $this->assertCount(0, $file->getErrors());
-
-    }//end testStdIn()
-
-
-}//end class
+    }
+}

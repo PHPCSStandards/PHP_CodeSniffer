@@ -55,8 +55,7 @@ final class MethodDeclarationUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -85,8 +84,5 @@ final class MethodDeclarationUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

@@ -52,8 +52,7 @@ final class ValidDefaultValueUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -67,8 +66,5 @@ final class ValidDefaultValueUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

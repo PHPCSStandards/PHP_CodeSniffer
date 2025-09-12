@@ -36,8 +36,5 @@ final class ProcessRuleInvalidTypeTest extends AbstractRulesetTestCase
         $this->expectRuntimeExceptionMessage($message);
 
         new Ruleset($config);
-
-    }//end testInvalidTypeHandling()
-
-
-}//end class
+    }
+}

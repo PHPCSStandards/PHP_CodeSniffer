@@ -35,8 +35,7 @@ final class MultiLineAssignmentUnitTest extends AbstractSniffTestCase
             6 => 1,
             8 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -50,8 +49,5 @@ final class MultiLineAssignmentUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

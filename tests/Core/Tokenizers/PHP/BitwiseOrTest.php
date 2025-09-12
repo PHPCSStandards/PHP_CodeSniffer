@@ -33,8 +33,7 @@ final class BitwiseOrTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_BITWISE_OR, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_BITWISE_OR (code)');
         $this->assertSame('T_BITWISE_OR', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_BITWISE_OR (type)');
-
-    }//end testBitwiseOr()
+    }
 
 
     /**
@@ -67,8 +66,7 @@ final class BitwiseOrTest extends AbstractTokenizerTestCase
             'in parameter in function call'              => ['/* testBitwiseOrNonArrowFnFunctionCall */'],
             'live coding / undetermined'                 => ['/* testLiveCoding */'],
         ];
-
-    }//end dataBitwiseOr()
+    }
 
 
     /**
@@ -89,8 +87,7 @@ final class BitwiseOrTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_TYPE_UNION, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_TYPE_UNION (code)');
         $this->assertSame('T_TYPE_UNION', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_TYPE_UNION (type)');
-
-    }//end testTypeUnion()
+    }
 
 
     /**
@@ -166,8 +163,5 @@ final class BitwiseOrTest extends AbstractTokenizerTestCase
             'return type for function with FQN false'                  => ['/* testTypeUnionFQNFalse */'],
             'return type for closure with FQN null'                    => ['/* testTypeUnionFQNNull */'],
         ];
-
-    }//end dataTypeUnion()
-
-
-}//end class
+    }
+}

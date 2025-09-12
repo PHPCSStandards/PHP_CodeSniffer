@@ -41,8 +41,7 @@ final class ExpandRulesetReferenceTest extends AbstractRulesetTestCase
         ];
 
         $this->assertSame($expected, $ruleset->sniffCodes);
-
-    }//end testRulesetRelativePathReferences()
+    }
 
 
     /**
@@ -66,8 +65,7 @@ final class ExpandRulesetReferenceTest extends AbstractRulesetTestCase
         $this->expectRuntimeExceptionMessage(sprintf($exceptionMessage, $replacement));
 
         new Ruleset($config);
-
-    }//end testUnresolvableReferenceThrowsException()
+    }
 
 
     /**
@@ -127,8 +125,5 @@ final class ExpandRulesetReferenceTest extends AbstractRulesetTestCase
         }
 
         return $data;
-
-    }//end dataUnresolvableReferenceThrowsException()
-
-
-}//end class
+    }
+}

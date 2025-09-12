@@ -34,8 +34,7 @@ final class DisallowRequestSuperglobalUnitTest extends AbstractSniffTestCase
             12 => 1,
             13 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -49,8 +48,5 @@ final class DisallowRequestSuperglobalUnitTest extends AbstractSniffTestCase
     protected function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

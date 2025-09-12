@@ -188,8 +188,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
             $error = 'Missing @return tag in function comment';
             $phpcsFile->addError($error, $tokens[$commentStart]['comment_closer'], 'MissingReturn');
         }//end if
-
-    }//end processReturn()
+    }
 
 
     /**
@@ -264,8 +263,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                 }
             }//end if
         }//end foreach
-
-    }//end processThrows()
+    }
 
 
     /**
@@ -639,8 +637,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
             $data  = [$neededParam];
             $phpcsFile->addError($error, $commentStart, 'MissingParamTag', $data);
         }
-
-    }//end processParams()
+    }
 
 
     /**
@@ -698,8 +695,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                 $phpcsFile->fixer->endChangeset();
             }//end if
         }//end if
-
-    }//end checkSpacingAfterParamType()
+    }
 
 
     /**
@@ -757,8 +753,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                 $phpcsFile->fixer->endChangeset();
             }//end if
         }//end if
-
-    }//end checkSpacingAfterParamName()
+    }
 
 
     /**
@@ -793,8 +788,5 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
         }
 
         return false;
-
-    }//end checkInheritdoc()
-
-
-}//end class
+    }
+}

@@ -43,8 +43,7 @@ class DeprecatedFunctionsSniff extends ForbiddenFunctionsSniff
                 $this->forbiddenFunctions[$functionName] = null;
             }
         }
-
-    }//end __construct()
+    }
 
 
     /**
@@ -69,8 +68,5 @@ class DeprecatedFunctionsSniff extends ForbiddenFunctionsSniff
         } else {
             $phpcsFile->addWarning($error, $stackPtr, $type, $data);
         }
-
-    }//end addError()
-
-
-}//end class
+    }
+}

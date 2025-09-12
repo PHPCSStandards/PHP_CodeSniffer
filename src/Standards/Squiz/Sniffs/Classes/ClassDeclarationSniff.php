@@ -38,8 +38,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
             $error = 'Only one interface or class is allowed in a file';
             $phpcsFile->addError($error, $nextClass, 'MultipleClasses');
         }
-
-    }//end process()
+    }
 
 
     /**
@@ -83,8 +82,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
                 }
             }//end if
         }//end if
-
-    }//end processOpen()
+    }
 
 
     /**
@@ -217,8 +215,5 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
                 }
             }
         }//end if
-
-    }//end processClose()
-
-
-}//end class
+    }
+}

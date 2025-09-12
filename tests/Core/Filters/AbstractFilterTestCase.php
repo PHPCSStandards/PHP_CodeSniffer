@@ -45,8 +45,7 @@ abstract class AbstractFilterTestCase extends TestCase
     {
         self::$config  = new ConfigDouble();
         self::$ruleset = new Ruleset(self::$config);
-
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -63,8 +62,7 @@ abstract class AbstractFilterTestCase extends TestCase
         if (isset(self::$config) === true) {
             self::$config->__destruct();
         }
-
-    }//end tearDownAfterClass()
+    }
 
 
     /**
@@ -98,8 +96,7 @@ abstract class AbstractFilterTestCase extends TestCase
 
         return $mockedObj->getMock()
             ->setConstructorArgs($constructorArgs);
-
-    }//end getMockedClass()
+    }
 
 
     /**
@@ -118,8 +115,7 @@ abstract class AbstractFilterTestCase extends TestCase
         }
 
         return $files;
-
-    }//end getFilteredResultsAsArray()
+    }
 
 
     /**
@@ -130,8 +126,7 @@ abstract class AbstractFilterTestCase extends TestCase
     protected static function getBaseDir()
     {
         return dirname(__DIR__, 3);
-
-    }//end getBaseDir()
+    }
 
 
     /**
@@ -197,8 +192,7 @@ abstract class AbstractFilterTestCase extends TestCase
             $basedir . '/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.js.fixed',
             $basedir . '/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.php',
         ];
-
-    }//end getFakeFileList()
+    }
 
 
     /**
@@ -227,8 +221,5 @@ abstract class AbstractFilterTestCase extends TestCase
         }
 
         return $paths;
-
-    }//end mapPathsToRuntimeOs()
-
-
-}//end class
+    }
+}

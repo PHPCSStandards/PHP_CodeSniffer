@@ -32,8 +32,7 @@ final class DocCommentUnitTest extends AbstractSniffTestCase
     public function setCliValues(string $testFile, Config $config)
     {
         $config->tabWidth = 4;
-
-    }//end setCliValues()
+    }
 
 
     /**
@@ -105,8 +104,7 @@ final class DocCommentUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -120,8 +118,5 @@ final class DocCommentUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

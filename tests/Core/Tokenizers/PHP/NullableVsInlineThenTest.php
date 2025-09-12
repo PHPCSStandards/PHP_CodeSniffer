@@ -36,8 +36,7 @@ final class NullableVsInlineThenTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_NULLABLE, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_NULLABLE (code)');
         $this->assertSame('T_NULLABLE', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_NULLABLE (type)');
-
-    }//end testNullable()
+    }
 
 
     /**
@@ -61,8 +60,7 @@ final class NullableVsInlineThenTest extends AbstractTokenizerTestCase
             'closure return type, nullable int'              => ['/* testClosureReturnTypeNullableInt */'],
             'function return type, nullable callable'        => ['/* testFunctionReturnTypeNullableCallable */'],
         ];
-
-    }//end dataNullable()
+    }
 
 
     /**
@@ -82,8 +80,7 @@ final class NullableVsInlineThenTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_INLINE_THEN, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_INLINE_THEN (code)');
         $this->assertSame('T_INLINE_THEN', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_INLINE_THEN (type)');
-
-    }//end testInlineThen()
+    }
 
 
     /**
@@ -116,8 +113,5 @@ final class NullableVsInlineThenTest extends AbstractTokenizerTestCase
             'ternary ? followed by namespace relative function call'       => ['/* testInlineThenWithNamespaceRelativeNameAndParens */'],
             'ternary ? followed by namespace relative static method call'  => ['/* testInlineThenWithNamespaceRelativeNameAndDoubleColon */'],
         ];
-
-    }//end dataInlineThen()
-
-
-}//end class
+    }
+}

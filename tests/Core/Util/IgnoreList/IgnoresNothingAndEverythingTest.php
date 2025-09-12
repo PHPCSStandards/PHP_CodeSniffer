@@ -36,8 +36,7 @@ final class IgnoresNothingAndEverythingTest extends TestCase
     {
         $this->assertSame($expectIgnoresNothing, $ignoreList->ignoresNothing(), 'Ignores nothing');
         $this->assertSame($expectIgnoresEverything, $ignoreList->ignoresEverything(), 'Ignores everything');
-
-    }//end testIgnoresNothingAndEverything()
+    }
 
 
     /**
@@ -96,8 +95,5 @@ final class IgnoresNothingAndEverythingTest extends TestCase
                 'expectIgnoresEverything' => true,
             ],
         ];
-
-    }//end dataIgnoresNothingAndEverything()
-
-
-}//end class
+    }
+}

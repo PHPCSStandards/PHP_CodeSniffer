@@ -57,8 +57,7 @@ class ComparisonOperatorUsageSniff implements Sniff
             T_WHILE,
             T_FOR,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -207,8 +206,5 @@ class ComparisonOperatorUsageSniff implements Sniff
             $error = 'Implicit true comparisons prohibited; use === TRUE instead';
             $phpcsFile->addError($error, $stackPtr, 'ImplicitTrue');
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

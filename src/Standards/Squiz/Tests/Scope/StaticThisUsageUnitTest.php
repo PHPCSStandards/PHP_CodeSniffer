@@ -45,8 +45,7 @@ final class StaticThisUsageUnitTest extends AbstractSniffTestCase
             99  => 1,
             125 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -60,8 +59,5 @@ final class StaticThisUsageUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

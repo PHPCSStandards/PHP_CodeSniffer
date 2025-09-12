@@ -39,8 +39,7 @@ final class GetSniffCodeTest extends TestCase
         $this->expectExceptionMessage($message);
 
         Common::getSniffCode($input);
-
-    }//end testGetSniffCodeThrowsExceptionOnInvalidInput()
+    }
 
 
     /**
@@ -56,8 +55,7 @@ final class GetSniffCodeTest extends TestCase
             'Class name is not a string' => [true],
             'Class name is empty'        => [''],
         ];
-
-    }//end dataGetSniffCodeThrowsExceptionOnInvalidInput()
+    }
 
 
     /**
@@ -78,8 +76,7 @@ final class GetSniffCodeTest extends TestCase
         $this->expectExceptionMessage($message);
 
         Common::getSniffCode($input);
-
-    }//end testGetSniffCodeThrowsExceptionOnInputWhichIsNotASniffTestClass()
+    }
 
 
     /**
@@ -103,8 +100,7 @@ final class GetSniffCodeTest extends TestCase
             'Fully qualified class name, no Sniffs or Tests leaf'           => ['CompanyName\\CustomSniffs\\Whatever\\CheckMeSniff'],
             'Fully qualified class name, category called Sniffs'            => ['CompanyName\\Sniffs\\Sniffs\\InvalidCategorySniff'],
         ];
-
-    }//end dataGetSniffCodeThrowsExceptionOnInputWhichIsNotASniffTestClass()
+    }
 
 
     /**
@@ -120,8 +116,7 @@ final class GetSniffCodeTest extends TestCase
     public function testGetSniffCode($fqnClass, $expected)
     {
         $this->assertSame($expected, Common::getSniffCode($fqnClass));
-
-    }//end testGetSniffCode()
+    }
 
 
     /**
@@ -159,8 +154,5 @@ final class GetSniffCodeTest extends TestCase
                 'expected' => 'MyStandard.Category.AnalyzeMe',
             ],
         ];
-
-    }//end dataGetSniffCode()
-
-
-}//end class
+    }
+}

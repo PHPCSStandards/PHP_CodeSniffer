@@ -80,8 +80,7 @@ final class DisallowYodaConditionsUnitTest extends AbstractSniffTestCase
             202 => 2,
             205 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -95,8 +94,5 @@ final class DisallowYodaConditionsUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

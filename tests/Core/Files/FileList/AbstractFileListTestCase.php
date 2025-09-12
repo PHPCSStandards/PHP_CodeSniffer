@@ -46,8 +46,5 @@ abstract class AbstractFileListTestCase extends TestCase
             self::$config->filter = __DIR__ . '/FilterDouble.php';
             self::$ruleset        = new Ruleset(self::$config);
         }
-
-    }//end setUpBeforeClass()
-
-
-}//end class
+    }
+}

@@ -35,8 +35,5 @@ final class GetNewInstanceFromTest extends TestCase
         $this->assertNotSame($ignoreList, $ignoreList2, 'Passing an instance returns a different instance');
 
         $this->assertTrue($ignoreList2->isIgnored('Foo.Bar'), 'New instance ignores the same as the old one');
-
-    }//end testGetNewInstanceFrom()
-
-
-}//end class
+    }
+}

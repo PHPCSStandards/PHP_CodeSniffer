@@ -283,8 +283,7 @@ class File
         $this->configCache['trackTime']       = $this->config->trackTime;
         $this->configCache['ignorePatterns']  = $this->ruleset->ignorePatterns;
         $this->configCache['includePatterns'] = $this->ruleset->includePatterns;
-
-    }//end __construct()
+    }
 
 
     /**
@@ -307,8 +306,7 @@ class File
             $this->addWarningOnLine($e->getMessage(), 1, 'Internal.DetectLineEndings');
             return;
         }
-
-    }//end setContent()
+    }
 
 
     /**
@@ -321,8 +319,7 @@ class File
      */
     public function reloadContent()
     {
-
-    }//end reloadContent()
+    }
 
 
     /**
@@ -333,8 +330,7 @@ class File
     public function disableCaching()
     {
         $this->configCache['cache'] = false;
-
-    }//end disableCaching()
+    }
 
 
     /**
@@ -558,8 +554,7 @@ class File
         $this->fixedCount       += $this->fixer->getFixCount();
         $this->fixedErrorCount   = ($this->firstRunCounts['fixableError'] - $this->fixableErrorCount);
         $this->fixedWarningCount = ($this->firstRunCounts['fixableWarning'] - $this->fixableWarningCount);
-
-    }//end process()
+    }
 
 
     /**
@@ -622,8 +617,7 @@ class File
 
             StatusWriter::write("[$this->numTokens tokens in $numLines lines]... ", 0, $newlines);
         }
-
-    }//end parse()
+    }
 
 
     /**
@@ -634,8 +628,7 @@ class File
     public function getTokens()
     {
         return $this->tokens;
-
-    }//end getTokens()
+    }
 
 
     /**
@@ -653,8 +646,7 @@ class File
         $this->fixer         = null;
         $this->config        = null;
         $this->ruleset       = null;
-
-    }//end cleanUp()
+    }
 
 
     /**
@@ -687,8 +679,7 @@ class File
         }
 
         return $this->addMessage(true, $error, $line, $column, $code, $data, $severity, $fixable);
-
-    }//end addError()
+    }
 
 
     /**
@@ -721,8 +712,7 @@ class File
         }
 
         return $this->addMessage(false, $warning, $line, $column, $code, $data, $severity, $fixable);
-
-    }//end addWarning()
+    }
 
 
     /**
@@ -745,8 +735,7 @@ class File
         int $severity = 0
     ) {
         return $this->addMessage(true, $error, $line, 1, $code, $data, $severity, false);
-
-    }//end addErrorOnLine()
+    }
 
 
     /**
@@ -769,8 +758,7 @@ class File
         int $severity = 0
     ) {
         return $this->addMessage(false, $warning, $line, 1, $code, $data, $severity, false);
-
-    }//end addWarningOnLine()
+    }
 
 
     /**
@@ -800,8 +788,7 @@ class File
         }
 
         return false;
-
-    }//end addFixableError()
+    }
 
 
     /**
@@ -831,8 +818,7 @@ class File
         }
 
         return false;
-
-    }//end addFixableWarning()
+    }
 
 
     /**
@@ -1092,8 +1078,7 @@ class File
         }
 
         return true;
-
-    }//end addMessage()
+    }
 
 
     /**
@@ -1120,8 +1105,7 @@ class File
         }
 
         return true;
-
-    }//end recordMetric()
+    }
 
 
     /**
@@ -1132,8 +1116,7 @@ class File
     public function getErrorCount()
     {
         return $this->errorCount;
-
-    }//end getErrorCount()
+    }
 
 
     /**
@@ -1144,8 +1127,7 @@ class File
     public function getWarningCount()
     {
         return $this->warningCount;
-
-    }//end getWarningCount()
+    }
 
 
     /**
@@ -1156,8 +1138,7 @@ class File
     public function getFixableCount()
     {
         return ($this->fixableErrorCount + $this->fixableWarningCount);
-
-    }//end getFixableCount()
+    }
 
 
     /**
@@ -1168,8 +1149,7 @@ class File
     public function getFixableErrorCount()
     {
         return $this->fixableErrorCount;
-
-    }//end getFixableErrorCount()
+    }
 
 
     /**
@@ -1180,8 +1160,7 @@ class File
     public function getFixableWarningCount()
     {
         return $this->fixableWarningCount;
-
-    }//end getFixableWarningCount()
+    }
 
 
     /**
@@ -1192,8 +1171,7 @@ class File
     public function getFixedCount()
     {
         return $this->fixedCount;
-
-    }//end getFixedCount()
+    }
 
 
     /**
@@ -1204,8 +1182,7 @@ class File
     public function getFixedErrorCount()
     {
         return $this->fixedErrorCount;
-
-    }//end getFixedErrorCount()
+    }
 
 
     /**
@@ -1216,8 +1193,7 @@ class File
     public function getFixedWarningCount()
     {
         return $this->fixedWarningCount;
-
-    }//end getFixedWarningCount()
+    }
 
 
     /**
@@ -1232,8 +1208,7 @@ class File
     public function getFirstRunCount(string $type): int
     {
         return $this->firstRunCounts[$type];
-
-    }//end getFirstRunCount()
+    }
 
 
     /**
@@ -1244,8 +1219,7 @@ class File
     public function getIgnoredLines()
     {
         return $this->tokenizer->ignoredLines;
-
-    }//end getIgnoredLines()
+    }
 
 
     /**
@@ -1256,8 +1230,7 @@ class File
     public function getErrors()
     {
         return $this->errors;
-
-    }//end getErrors()
+    }
 
 
     /**
@@ -1268,8 +1241,7 @@ class File
     public function getWarnings()
     {
         return $this->warnings;
-
-    }//end getWarnings()
+    }
 
 
     /**
@@ -1280,8 +1252,7 @@ class File
     public function getMetrics()
     {
         return $this->metrics;
-
-    }//end getMetrics()
+    }
 
 
     /**
@@ -1292,8 +1263,7 @@ class File
     public function getListenerTimes()
     {
         return $this->listenerTimes;
-
-    }//end getListenerTimes()
+    }
 
 
     /**
@@ -1304,8 +1274,7 @@ class File
     public function getFilename()
     {
         return $this->path;
-
-    }//end getFilename()
+    }
 
 
     /**
@@ -1350,8 +1319,7 @@ class File
         }
 
         return $content;
-
-    }//end getDeclarationName()
+    }
 
 
     /**
@@ -1688,8 +1656,7 @@ class File
         }//end for
 
         return $vars;
-
-    }//end getMethodParameters()
+    }
 
 
     /**
@@ -1871,8 +1838,7 @@ class File
             'is_static'             => $isStatic,
             'has_body'              => $hasBody,
         ];
-
-    }//end getMethodProperties()
+    }
 
 
     /**
@@ -2071,8 +2037,7 @@ class File
             'type_end_token'  => $typeEndToken,
             'nullable_type'   => $nullableType,
         ];
-
-    }//end getMemberProperties()
+    }
 
 
     /**
@@ -2137,8 +2102,7 @@ class File
             'is_final'    => $isFinal,
             'is_readonly' => $isReadonly,
         ];
-
-    }//end getClassProperties()
+    }
 
 
     /**
@@ -2248,8 +2212,7 @@ class File
         }//end if
 
         return false;
-
-    }//end isReference()
+    }
 
 
     /**
@@ -2291,8 +2254,7 @@ class File
         }
 
         return $str;
-
-    }//end getTokensAsString()
+    }
 
 
     /**
@@ -2372,8 +2334,7 @@ class File
         }//end for
 
         return false;
-
-    }//end findPrevious()
+    }
 
 
     /**
@@ -2439,8 +2400,7 @@ class File
         }//end for
 
         return false;
-
-    }//end findNext()
+    }
 
 
     /**
@@ -2630,8 +2590,7 @@ class File
         }//end for
 
         return 0;
-
-    }//end findStartOfStatement()
+    }
 
 
     /**
@@ -2745,8 +2704,7 @@ class File
         }//end for
 
         return ($this->numTokens - 1);
-
-    }//end findEndOfStatement()
+    }
 
 
     /**
@@ -2807,8 +2765,7 @@ class File
         }//end for
 
         return $foundToken;
-
-    }//end findFirstOnLine()
+    }
 
 
     /**
@@ -2842,8 +2799,7 @@ class File
         }
 
         return false;
-
-    }//end hasCondition()
+    }
 
 
     /**
@@ -2884,8 +2840,7 @@ class File
         }
 
         return false;
-
-    }//end getCondition()
+    }
 
 
     /**
@@ -2934,8 +2889,7 @@ class File
         }
 
         return $name;
-
-    }//end findExtendedClassName()
+    }
 
 
     /**
@@ -2986,8 +2940,5 @@ class File
             $names = array_map('trim', $names);
             return $names;
         }
-
-    }//end findImplementedInterfaceNames()
-
-
-}//end class
+    }
+}

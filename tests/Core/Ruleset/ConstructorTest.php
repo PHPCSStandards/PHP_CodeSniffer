@@ -39,8 +39,7 @@ final class ConstructorTest extends AbstractRulesetTestCase
         $ruleset = new Ruleset($config);
 
         $this->assertSame($expected, $ruleset->name);
-
-    }//end testHandlingStandardsPassedViaCLI()
+    }
 
 
     /**
@@ -71,8 +70,7 @@ final class ConstructorTest extends AbstractRulesetTestCase
                 'expected' => 'TestStandard',
             ],
         ];
-
-    }//end dataHandlingStandardsPassedViaCLI()
+    }
 
 
     /**
@@ -101,8 +99,7 @@ final class ConstructorTest extends AbstractRulesetTestCase
             $this->assertArrayHasKey($path, $autoloadPaths, "Path $path has not been registered with the autoloader");
             $this->assertSame($namespacedStandardName, $autoloadPaths[$path], 'Expected (namespaced) standard name does not match');
         }
-
-    }//end testStandardsAreRegisteredWithAutoloader()
+    }
 
 
     /**
@@ -161,8 +158,7 @@ final class ConstructorTest extends AbstractRulesetTestCase
         ];
 
         return $data;
-
-    }//end dataStandardsAreRegisteredWithAutoloader()
+    }
 
 
     /**
@@ -189,8 +185,7 @@ final class ConstructorTest extends AbstractRulesetTestCase
         sort($actual);
 
         $this->assertSame($expected, $actual);
-
-    }//end testCachingVersusRestrictions()
+    }
 
 
     /**
@@ -267,8 +262,7 @@ final class ConstructorTest extends AbstractRulesetTestCase
              */
 
         ];
-
-    }//end dataCachingVersusRestrictions()
+    }
 
 
     /**
@@ -285,8 +279,5 @@ final class ConstructorTest extends AbstractRulesetTestCase
         $this->expectRuntimeExceptionMessage($message);
 
         new Ruleset($config);
-
-    }//end testNoSniffsRegisteredException()
-
-
-}//end class
+    }
+}

@@ -25,8 +25,7 @@ class ScopeClosingBraceSniff implements Sniff
     public function register()
     {
         return Tokens::SCOPE_OPENERS;
-
-    }//end register()
+    }
 
 
     /**
@@ -107,8 +106,5 @@ class ScopeClosingBraceSniff implements Sniff
                 }
             }
         }//end if
-
-    }//end process()
-
-
-}//end class
+    }
+}

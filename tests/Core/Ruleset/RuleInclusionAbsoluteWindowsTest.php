@@ -68,8 +68,7 @@ final class RuleInclusionAbsoluteWindowsTest extends TestCase
         // Initialize the config and ruleset objects for the test.
         $config        = new ConfigDouble(["--standard={$this->standard}"]);
         $this->ruleset = new Ruleset($config);
-
-    }//end setUp()
+    }
 
 
     /**
@@ -80,8 +79,7 @@ final class RuleInclusionAbsoluteWindowsTest extends TestCase
     protected function tearDown(): void
     {
         file_put_contents($this->standard, $this->contents);
-
-    }//end tearDown()
+    }
 
 
     /**
@@ -105,8 +103,5 @@ final class RuleInclusionAbsoluteWindowsTest extends TestCase
             '10',
             $this->ruleset->sniffs['PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterCastSniff']->spacing
         );
-
-    }//end testWindowsStylePathRuleInclusion()
-
-
-}//end class
+    }
+}

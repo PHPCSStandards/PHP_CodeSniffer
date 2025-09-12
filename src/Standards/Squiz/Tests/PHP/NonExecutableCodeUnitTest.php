@@ -31,8 +31,7 @@ final class NonExecutableCodeUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -119,8 +118,5 @@ final class NonExecutableCodeUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

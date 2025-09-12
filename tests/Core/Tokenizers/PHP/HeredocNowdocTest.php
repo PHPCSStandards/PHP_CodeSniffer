@@ -44,8 +44,7 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_START_HEREDOC);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
-    }//end testHeredocSingleLine()
+    }
 
 
     /**
@@ -66,8 +65,7 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_START_NOWDOC);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
-    }//end testNowdocSingleLine()
+    }
 
 
     /**
@@ -90,8 +88,7 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_START_HEREDOC);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
-    }//end testHeredocMultiLine()
+    }
 
 
     /**
@@ -114,8 +111,7 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_START_NOWDOC);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
-    }//end testNowdocMultiLine()
+    }
 
 
     /**
@@ -138,8 +134,7 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_START_HEREDOC);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
-    }//end testHeredocEndsOnBlankLine()
+    }
 
 
     /**
@@ -162,8 +157,7 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_START_NOWDOC);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
-    }//end testNowdocEndsOnBlankLine()
+    }
 
 
     /**
@@ -206,8 +200,5 @@ final class HeredocNowdocTest extends AbstractTokenizerTestCase
                 'Token content did not match expectations' . $errorMsgSuffix
             );
         }//end for
-
-    }//end checkTokenSequence()
-
-
-}//end class
+    }
+}

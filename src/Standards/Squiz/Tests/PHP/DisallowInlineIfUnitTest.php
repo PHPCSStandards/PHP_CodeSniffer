@@ -34,8 +34,7 @@ final class DisallowInlineIfUnitTest extends AbstractSniffTestCase
             8  => 1,
             18 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -49,8 +48,5 @@ final class DisallowInlineIfUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

@@ -54,8 +54,7 @@ final class ErrorSuppressionTest extends TestCase
 
         $this->assertSame($expectedErrors, $file->getErrorCount());
         $this->assertCount($expectedErrors, $file->getErrors());
-
-    }//end testSuppressError()
+    }
 
 
     /**
@@ -134,8 +133,7 @@ final class ErrorSuppressionTest extends TestCase
                 'after'  => '/** phpcs:enable */',
             ],
         ];
-
-    }//end dataSuppressError()
+    }
 
 
     /**
@@ -174,8 +172,7 @@ EOD;
 
         $this->assertSame($expectedErrors, $file->getErrorCount());
         $this->assertCount($expectedErrors, $file->getErrors());
-
-    }//end testSuppressSomeErrors()
+    }
 
 
     /**
@@ -216,8 +213,7 @@ EOD;
                 'between' => '/** phpcs:enable */',
             ],
         ];
-
-    }//end dataSuppressSomeErrors()
+    }
 
 
     /**
@@ -255,8 +251,7 @@ EOD;
 
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
-
-    }//end testSuppressWarning()
+    }
 
 
     /**
@@ -289,8 +284,7 @@ EOD;
                 'after'  => '/** phpcs:enable */',
             ],
         ];
-
-    }//end dataSuppressWarning()
+    }
 
 
     /**
@@ -329,8 +323,7 @@ EOD;
 
         $this->assertSame($expectedErrors, $file->getErrorCount());
         $this->assertCount($expectedErrors, $file->getErrors());
-
-    }//end testSuppressLine()
+    }
 
 
     /**
@@ -387,8 +380,7 @@ EOD;
                 'after'  => ' # @phpcs:ignore',
             ],
         ];
-
-    }//end dataSuppressLine()
+    }
 
 
     /**
@@ -410,8 +402,7 @@ EOD;
 
         $this->assertSame(0, $file->getErrorCount());
         $this->assertCount(0, $file->getErrors());
-
-    }//end testSuppressLineMidLine()
+    }
 
 
     /**
@@ -442,8 +433,7 @@ EOD;
 
         $this->assertSame(0, $file->getErrorCount());
         $this->assertCount(0, $file->getErrors());
-
-    }//end testSuppressLineWithinDocblock()
+    }
 
 
     /**
@@ -480,8 +470,7 @@ EOD;
 
         $this->assertSame(0, $file->getErrorCount());
         $this->assertCount(0, $file->getErrors());
-
-    }//end testNestedSuppressLine()
+    }
 
 
     /**
@@ -522,8 +511,7 @@ EOD;
                 'after'  => '# @phpcs:enable',
             ],
         ];
-
-    }//end dataNestedSuppressLine()
+    }
 
 
     /**
@@ -565,8 +553,7 @@ EOD;
 
         $this->assertSame($expectedErrors, $file->getErrorCount());
         $this->assertCount($expectedErrors, $file->getErrors());
-
-    }//end testSuppressScope()
+    }
 
 
     /**
@@ -607,8 +594,7 @@ EOD;
                 'after'  => '/** @phpcs:enable */',
             ],
         ];
-
-    }//end dataSuppressScope()
+    }
 
 
     /**
@@ -649,8 +635,7 @@ EOD;
 
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
-
-    }//end testSuppressFile()
+    }
 
 
     /**
@@ -701,8 +686,7 @@ EOD;
                 'after'  => '// phpcs:ignoreFile',
             ],
         ];
-
-    }//end dataSuppressFile()
+    }
 
 
     /**
@@ -747,8 +731,7 @@ EOD;
 
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
-
-    }//end testDisableSelected()
+    }
 
 
     /**
@@ -820,8 +803,7 @@ EOD;
                 'expectedWarnings' => 1,
             ],
         ];
-
-    }//end dataDisableSelected()
+    }
 
 
     /**
@@ -859,8 +841,7 @@ EOD;
 
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
-
-    }//end testEnableSelected()
+    }
 
 
     /**
@@ -1068,8 +1049,7 @@ EOD;
                 'expectedWarnings' => 0,
             ],
         ];
-
-    }//end dataEnableSelected()
+    }
 
 
     /**
@@ -1112,8 +1092,7 @@ EOD;
 
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
-
-    }//end testIgnoreSelected()
+    }
 
 
     /**
@@ -1159,8 +1138,7 @@ EOD;
                 'expectedWarnings' => 1,
             ],
         ];
-
-    }//end dataIgnoreSelected()
+    }
 
 
     /**
@@ -1198,8 +1176,7 @@ EOD;
 
         $this->assertSame($expectedWarnings, $file->getWarningCount());
         $this->assertCount($expectedWarnings, $file->getWarnings());
-
-    }//end testCommenting()
+    }
 
 
     /**
@@ -1259,8 +1236,5 @@ EOD;
                 'expectedWarnings' => 0,
             ],
         ];
-
-    }//end dataCommenting()
-
-
-}//end class
+    }
+}

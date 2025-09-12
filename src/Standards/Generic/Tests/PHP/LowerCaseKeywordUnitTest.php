@@ -61,8 +61,7 @@ final class LowerCaseKeywordUnitTest extends AbstractSniffTestCase
             71 => 1,
             72 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -76,8 +75,5 @@ final class LowerCaseKeywordUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

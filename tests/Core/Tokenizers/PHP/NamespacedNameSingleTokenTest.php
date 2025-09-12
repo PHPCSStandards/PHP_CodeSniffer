@@ -56,8 +56,7 @@ final class NamespacedNameSingleTokenTest extends AbstractTokenizerTestCase
 
             ++$identifier;
         }
-
-    }//end testIdentifierTokenization()
+    }
 
 
     /**
@@ -1285,8 +1284,5 @@ final class NamespacedNameSingleTokenTest extends AbstractTokenizerTestCase
                 ],
             ],
         ];
-
-    }//end dataIdentifierTokenization()
-
-
-}//end class
+    }
+}

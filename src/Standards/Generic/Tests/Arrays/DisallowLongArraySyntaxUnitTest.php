@@ -53,8 +53,7 @@ final class DisallowLongArraySyntaxUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -68,8 +67,5 @@ final class DisallowLongArraySyntaxUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

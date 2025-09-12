@@ -31,8 +31,7 @@ final class UnnecessaryFinalModifierUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -64,8 +63,5 @@ final class UnnecessaryFinalModifierUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

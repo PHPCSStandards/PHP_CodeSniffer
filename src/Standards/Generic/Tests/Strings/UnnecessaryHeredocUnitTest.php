@@ -31,8 +31,7 @@ final class UnnecessaryHeredocUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -67,8 +66,5 @@ final class UnnecessaryHeredocUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

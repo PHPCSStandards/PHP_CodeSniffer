@@ -58,8 +58,7 @@ final class ObjectOperatorIndentUnitTest extends AbstractSniffTestCase
             142 => 1,
             152 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -73,8 +72,5 @@ final class ObjectOperatorIndentUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

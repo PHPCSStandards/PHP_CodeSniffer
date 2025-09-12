@@ -68,8 +68,7 @@ final class ConfigDouble extends Config
         if ($skipSettingReportWidth !== true) {
             $this->preventAutoDiscoveryScreenWidth();
         }
-
-    }//end __construct()
+    }
 
 
     /**
@@ -83,8 +82,7 @@ final class ConfigDouble extends Config
         $this->setStaticConfigProperty('executablePaths', []);
         $this->setStaticConfigProperty('configData', null);
         $this->setStaticConfigProperty('configDataFile', null);
-
-    }//end __destruct()
+    }
 
 
     /**
@@ -101,8 +99,7 @@ final class ConfigDouble extends Config
         if ($this->skipSettingStandard !== true) {
             $this->preventSearchingForRuleset();
         }
-
-    }//end setCommandLineValues()
+    }
 
 
     /**
@@ -113,8 +110,7 @@ final class ConfigDouble extends Config
     private function resetSelectProperties()
     {
         $this->setStaticConfigProperty('executablePaths', []);
-
-    }//end resetSelectProperties()
+    }
 
 
     /**
@@ -129,8 +125,7 @@ final class ConfigDouble extends Config
     {
         $this->setStaticConfigProperty('configData', []);
         $this->setStaticConfigProperty('configDataFile', '');
-
-    }//end preventReadingCodeSnifferConfFile()
+    }
 
 
     /**
@@ -153,8 +148,7 @@ final class ConfigDouble extends Config
         }
 
         self::setStaticConfigProperty('overriddenDefaults', $overriddenDefaults);
-
-    }//end preventSearchingForRuleset()
+    }
 
 
     /**
@@ -169,8 +163,7 @@ final class ConfigDouble extends Config
         if ($settings['reportWidth'] === 'auto') {
             $this->reportWidth = self::DEFAULT_REPORT_WIDTH;
         }
-
-    }//end preventAutoDiscoveryScreenWidth()
+    }
 
 
     /**
@@ -190,8 +183,7 @@ final class ConfigDouble extends Config
         }
 
         return $property->getValue();
-
-    }//end getStaticConfigProperty()
+    }
 
 
     /**
@@ -214,8 +206,5 @@ final class ConfigDouble extends Config
         }
 
         (PHP_VERSION_ID < 80100) && $property->setAccessible(false);
-
-    }//end setStaticConfigProperty()
-
-
-}//end class
+    }
+}

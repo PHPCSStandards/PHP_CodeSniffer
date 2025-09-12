@@ -32,8 +32,7 @@ final class LineLengthUnitTest extends AbstractSniffTestCase
     public function setCliValues(string $testFile, Config $config)
     {
         $config->tabWidth = 4;
-
-    }//end setCliValues()
+    }
 
 
     /**
@@ -64,8 +63,7 @@ final class LineLengthUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -108,8 +106,5 @@ final class LineLengthUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

@@ -41,8 +41,7 @@ class LanguageConstructSpacingSniff implements Sniff
             T_USE,
             T_GOTO,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -157,8 +156,5 @@ class LanguageConstructSpacingSniff implements Sniff
                 $phpcsFile->fixer->addContent($stackPtr, ' ');
             }
         }//end if
-
-    }//end process()
-
-
-}//end class
+    }
+}

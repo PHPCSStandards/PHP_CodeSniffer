@@ -31,8 +31,7 @@ final class JumbledIncrementerUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -65,8 +64,5 @@ final class JumbledIncrementerUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

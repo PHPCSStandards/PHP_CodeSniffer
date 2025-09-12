@@ -65,8 +65,7 @@ final class HelpTest extends TestCase
                 );
             }
         }
-
-    }//end testQaArgumentNamesAreWithinAcceptableBounds()
+    }
 
 
     /**
@@ -129,8 +128,7 @@ final class HelpTest extends TestCase
                 }
             }//end foreach
         }//end foreach
-
-    }//end testQaValidCategoryOptionDefinitions()
+    }
 
 
     /**
@@ -143,8 +141,7 @@ final class HelpTest extends TestCase
         $this->expectException(TypeError::class);
 
         new Help(new ConfigDouble(), [], []);
-
-    }//end testConstructorTypeError()
+    }
 
 
     /**
@@ -176,8 +173,7 @@ final class HelpTest extends TestCase
         }
 
         $this->assertSame($expected, $activeOptions, 'Option count per category does not match');
-
-    }//end testOptionFiltering()
+    }
 
 
     /**
@@ -282,8 +278,7 @@ final class HelpTest extends TestCase
                 ],
             ],
         ];
-
-    }//end dataOptionFiltering()
+    }
 
 
     /**
@@ -321,8 +316,7 @@ final class HelpTest extends TestCase
                 $previousWasSpacer = isset($option['spacer']);
             }
         }
-
-    }//end testOptionFilteringSpacerHandling()
+    }
 
 
     /**
@@ -358,8 +352,7 @@ final class HelpTest extends TestCase
                 'shortOptions' => 'spqm',
             ],
         ];
-
-    }//end dataOptionFilteringSpacerHandling()
+    }
 
 
     /**
@@ -380,8 +373,7 @@ final class HelpTest extends TestCase
 
         $expectedRegex = str_replace('phpc(bf|s)', 'phpcs', $expectedRegex);
         $this->verifyDisplayUsage($cliArgs, $expectedRegex);
-
-    }//end testDisplayUsageCS()
+    }
 
 
     /**
@@ -403,8 +395,7 @@ final class HelpTest extends TestCase
 
         $expectedRegex = str_replace('phpc(bf|s)', 'phpcbf', $expectedRegex);
         $this->verifyDisplayUsage($cliArgs, $expectedRegex);
-
-    }//end testDisplayUsageCBF()
+    }
 
 
     /**
@@ -423,8 +414,7 @@ final class HelpTest extends TestCase
         $this->expectOutputRegex($expectedRegex);
 
         $help->display();
-
-    }//end verifyDisplayUsage()
+    }
 
 
     /**
@@ -444,8 +434,7 @@ final class HelpTest extends TestCase
                 'expectedRegex' => '`^\s*\\033\[33mUsage:\\033\[0m\s+phpc(bf|s) \[options\] \<file\|directory\>\s+$`',
             ],
         ];
-
-    }//end dataDisplayUsage()
+    }
 
 
     /**
@@ -473,8 +462,7 @@ final class HelpTest extends TestCase
         $this->invokeReflectionMethod($help, 'printCategories');
 
         $this->expectOutputString($expectedOutput);
-
-    }//end testReportWidthCalculations()
+    }
 
 
     /**
@@ -530,8 +518,7 @@ final class HelpTest extends TestCase
             ],
         ];
         // phpcs:enable
-
-    }//end dataReportWidthCalculations()
+    }
 
 
     /**
@@ -550,8 +537,7 @@ final class HelpTest extends TestCase
         $result = $this->invokeReflectionMethod($help, 'colorizeVariableInput', $input);
 
         $this->assertSame($expected, $result);
-
-    }//end testColorizeVariableInput()
+    }
 
 
     /**
@@ -591,8 +577,7 @@ final class HelpTest extends TestCase
                 'expected' => "Start \033[36m<This <is> text>\033[32m end",
             ],
         ];
-
-    }//end dataColorizeVariableInput()
+    }
 
 
     /**
@@ -615,8 +600,7 @@ final class HelpTest extends TestCase
         $this->invokeReflectionMethod($help, 'printCategoryOptions', $input);
 
         $this->expectOutputRegex($expectedRegex['no-color']);
-
-    }//end testPrintCategoryOptionsNoColor()
+    }
 
 
     /**
@@ -639,8 +623,7 @@ final class HelpTest extends TestCase
         $this->invokeReflectionMethod($help, 'printCategoryOptions', $input);
 
         $this->expectOutputRegex($expectedRegex['color']);
-
-    }//end testPrintCategoryOptionsColor()
+    }
 
 
     /**
@@ -710,8 +693,7 @@ final class HelpTest extends TestCase
             ],
         ];
         // phpcs:enable
-
-    }//end dataPrintCategoryOptions()
+    }
 
 
     /**
@@ -737,8 +719,7 @@ final class HelpTest extends TestCase
         (PHP_VERSION_ID < 80100) && $reflMethod->setAccessible(false);
 
         return $returnValue;
-
-    }//end invokeReflectionMethod()
+    }
 
 
     /**
@@ -757,8 +738,7 @@ final class HelpTest extends TestCase
         (PHP_VERSION_ID < 80100) && $reflProperty->setAccessible(false);
 
         return $returnValue;
-
-    }//end getReflectionProperty()
+    }
 
 
     /**
@@ -776,8 +756,5 @@ final class HelpTest extends TestCase
         (PHP_VERSION_ID < 80100) && $reflProperty->setAccessible(true);
         $reflProperty->setValue($help, $value);
         (PHP_VERSION_ID < 80100) && $reflProperty->setAccessible(false);
-
-    }//end setReflectionProperty()
-
-
-}//end class
+    }
+}

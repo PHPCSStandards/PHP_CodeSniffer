@@ -275,8 +275,7 @@ class Config
         }
 
         return $this->settings[$name];
-
-    }//end __get()
+    }
 
 
     /**
@@ -348,8 +347,7 @@ class Config
         }//end switch
 
         $this->settings[$name] = $value;
-
-    }//end __set()
+    }
 
 
     /**
@@ -362,8 +360,7 @@ class Config
     public function __isset(string $name)
     {
         return isset($this->settings[$name]);
-
-    }//end __isset()
+    }
 
 
     /**
@@ -376,8 +373,7 @@ class Config
     public function __unset(string $name)
     {
         $this->settings[$name] = null;
-
-    }//end __unset()
+    }
 
 
     /**
@@ -388,8 +384,7 @@ class Config
     public function getSettings()
     {
         return $this->settings;
-
-    }//end getSettings()
+    }
 
 
     /**
@@ -402,8 +397,7 @@ class Config
     public function setSettings(array $settings)
     {
         $this->settings = $settings;
-
-    }//end setSettings()
+    }
 
 
     /**
@@ -487,8 +481,7 @@ class Config
         }//end if
 
         fclose($handle);
-
-    }//end __construct()
+    }
 
 
     /**
@@ -538,8 +531,7 @@ class Config
                 $this->processUnknownArgument($arg, $i);
             }//end if
         }//end for
-
-    }//end setCommandLineValues()
+    }
 
 
     /**
@@ -662,8 +654,7 @@ class Config
         if ($parallel !== null) {
             $this->parallel = max((int) $parallel, 1);
         }
-
-    }//end restoreDefaults()
+    }
 
 
     /**
@@ -774,8 +765,7 @@ class Config
                 $this->processUnknownArgument('-' . $arg, $pos);
             }
         }//end switch
-
-    }//end processShortArgument()
+    }
 
 
     /**
@@ -1306,8 +1296,7 @@ class Config
             }//end if
             break;
         }//end switch
-
-    }//end processLongArgument()
+    }
 
 
     /**
@@ -1393,8 +1382,7 @@ class Config
         }
 
         return $sniffs;
-
-    }//end parseSniffCodes()
+    }
 
 
     /**
@@ -1422,8 +1410,7 @@ class Config
         }
 
         $this->processFilePath($arg);
-
-    }//end processUnknownArgument()
+    }
 
 
     /**
@@ -1458,8 +1445,7 @@ class Config
             $this->files = $files;
             $this->overriddenDefaults['files'] = true;
         }
-
-    }//end processFilePath()
+    }
 
 
     /**
@@ -1478,8 +1464,7 @@ class Config
         }
 
         echo PHP_EOL;
-
-    }//end printUsage()
+    }
 
 
     /**
@@ -1505,8 +1490,7 @@ class Config
         }
 
         echo $usage;
-
-    }//end printShortUsage()
+    }
 
 
     /**
@@ -1531,8 +1515,7 @@ class Config
         $shortOptions = Help::DEFAULT_SHORT_OPTIONS . 'aems';
 
         (new Help($this, $longOptions, $shortOptions))->display();
-
-    }//end printPHPCSUsage()
+    }
 
 
     /**
@@ -1547,8 +1530,7 @@ class Config
         $shortOptions  = Help::DEFAULT_SHORT_OPTIONS;
 
         (new Help($this, $longOptions, $shortOptions))->display();
-
-    }//end printPHPCBFUsage()
+    }
 
 
     /**
@@ -1573,8 +1555,7 @@ class Config
         }
 
         return $phpCodeSnifferConfig[$key];
-
-    }//end getConfigData()
+    }
 
 
     /**
@@ -1614,8 +1595,7 @@ class Config
 
         self::$executablePaths[$name] = $result;
         return $result;
-
-    }//end getExecutablePath()
+    }
 
 
     /**
@@ -1696,8 +1676,7 @@ class Config
         }
 
         return true;
-
-    }//end setConfigData()
+    }
 
 
     /**
@@ -1738,8 +1717,7 @@ class Config
         self::$configDataFile = $configFile;
         self::$configData     = $phpCodeSnifferConfig;
         return self::$configData;
-
-    }//end getAllConfigData()
+    }
 
 
     /**
@@ -1773,8 +1751,7 @@ class Config
         }
 
         return $output;
-
-    }//end prepareConfigDataForDisplay()
+    }
 
 
     /**
@@ -1789,8 +1766,5 @@ class Config
     public function printConfigData(array $data)
     {
         echo $this->prepareConfigDataForDisplay($data);
-
-    }//end printConfigData()
-
-
-}//end class
+    }
+}

@@ -29,8 +29,7 @@ final class FindImplementedInterfaceNamesTest extends AbstractMethodTestCase
     {
         $result = self::$phpcsFile->findImplementedInterfaceNames(100000);
         $this->assertFalse($result);
-
-    }//end testNonExistentToken()
+    }
 
 
     /**
@@ -43,8 +42,7 @@ final class FindImplementedInterfaceNamesTest extends AbstractMethodTestCase
         $token  = $this->getTargetToken('/* testNotAClass */', [T_FUNCTION]);
         $result = self::$phpcsFile->findImplementedInterfaceNames($token);
         $this->assertFalse($result);
-
-    }//end testNotAClass()
+    }
 
 
     /**
@@ -62,8 +60,7 @@ final class FindImplementedInterfaceNamesTest extends AbstractMethodTestCase
         $OOToken = $this->getTargetToken($identifier, [T_CLASS, T_ANON_CLASS, T_INTERFACE, T_ENUM]);
         $result  = self::$phpcsFile->findImplementedInterfaceNames($OOToken);
         $this->assertSame($expected, $result);
-
-    }//end testFindImplementedInterfaceNames()
+    }
 
 
     /**
@@ -162,8 +159,5 @@ final class FindImplementedInterfaceNamesTest extends AbstractMethodTestCase
                 'expected'   => false,
             ],
         ];
-
-    }//end dataImplementedInterface()
-
-
-}//end class
+    }
+}

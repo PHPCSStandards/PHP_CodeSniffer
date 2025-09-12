@@ -83,8 +83,7 @@ final class CamelCapsFunctionNameUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -98,8 +97,5 @@ final class CamelCapsFunctionNameUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

@@ -942,8 +942,7 @@ final class Tokens
         }
 
         return substr($token, 6);
-
-    }//end tokenName()
+    }
 
 
     /**
@@ -984,8 +983,5 @@ final class Tokens
         }
 
         return $highestType;
-
-    }//end getHighestWeightedToken()
-
-
-}//end class
+    }
+}

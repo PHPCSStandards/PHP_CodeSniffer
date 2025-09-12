@@ -28,8 +28,7 @@ class ClassFileNameSniff implements Sniff
         unset($targets[T_ANON_CLASS]);
 
         return $targets;
-
-    }//end register()
+    }
 
 
     /**
@@ -68,8 +67,5 @@ class ClassFileNameSniff implements Sniff
             ];
             $phpcsFile->addError($error, $stackPtr, 'NoMatch', $data);
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

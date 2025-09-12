@@ -61,8 +61,7 @@ abstract class AbstractMethodTestCase extends TestCase
 
         self::$phpcsFile = new LocalFile($pathToTestFile, $ruleset, $config);
         self::$phpcsFile->parse();
-
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -82,8 +81,7 @@ abstract class AbstractMethodTestCase extends TestCase
 
         self::$tabWidth  = 4;
         self::$phpcsFile = null;
-
-    }//end tearDownAfterClass()
+    }
 
 
     /**
@@ -103,8 +101,7 @@ abstract class AbstractMethodTestCase extends TestCase
     public function testTestMarkersAreUnique()
     {
         $this->assertTestMarkersAreUnique(self::$phpcsFile);
-
-    }//end testTestMarkersAreUnique()
+    }
 
 
     /**
@@ -133,8 +130,7 @@ abstract class AbstractMethodTestCase extends TestCase
         }
 
         self::assertSame(array_unique($seenComments), $seenComments, 'Duplicate test markers found.');
-
-    }//end assertTestMarkersAreUnique()
+    }
 
 
     /**
@@ -152,8 +148,7 @@ abstract class AbstractMethodTestCase extends TestCase
     public function getTargetToken($commentString, $tokenType, $tokenContent = null)
     {
         return self::getTargetTokenFromFile(self::$phpcsFile, $commentString, $tokenType, $tokenContent);
-
-    }//end getTargetToken()
+    }
 
 
     /**
@@ -222,8 +217,7 @@ abstract class AbstractMethodTestCase extends TestCase
         }
 
         return $target;
-
-    }//end getTargetTokenFromFile()
+    }
 
 
     /**
@@ -238,8 +232,5 @@ abstract class AbstractMethodTestCase extends TestCase
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage($message);
-
-    }//end expectRunTimeException()
-
-
-}//end class
+    }
+}

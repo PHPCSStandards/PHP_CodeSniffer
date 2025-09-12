@@ -31,8 +31,7 @@ final class NoSilencedErrorsUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [13 => 1];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -50,8 +49,5 @@ final class NoSilencedErrorsUnitTest extends AbstractSniffTestCase
             10 => 1,
             16 => 1,
         ];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

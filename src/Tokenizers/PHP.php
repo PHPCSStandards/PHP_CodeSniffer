@@ -2755,8 +2755,7 @@ class PHP extends Tokenizer
         }
 
         return $finalTokens;
-
-    }//end tokenize()
+    }
 
 
     /**
@@ -3754,8 +3753,7 @@ class PHP extends Tokenizer
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             StatusWriter::write('*** END ADDITIONAL PHP PROCESSING ***', 1);
         }
-
-    }//end processAdditional()
+    }
 
 
     /**
@@ -3832,8 +3830,7 @@ class PHP extends Tokenizer
 
         $newToken['content'] = $token[1];
         return $newToken;
-
-    }//end standardiseToken()
+    }
 
 
     /**
@@ -3940,8 +3937,7 @@ class PHP extends Tokenizer
 
         self::$resolveTokenCache[$token] = $newToken;
         return $newToken;
-
-    }//end resolveSimpleToken()
+    }
 
 
     /**
@@ -3977,8 +3973,7 @@ class PHP extends Tokenizer
         }
 
         return $closer;
-
-    }//end findCloser()
+    }
 
 
     /**
@@ -4040,8 +4035,7 @@ class PHP extends Tokenizer
         }
 
         return $subTokens;
-
-    }//end parsePhpAttribute()
+    }
 
 
     /**
@@ -4077,8 +4071,5 @@ class PHP extends Tokenizer
                 }
             }//end if
         }//end for
-
-    }//end createAttributesNestingMap()
-
-
-}//end class
+    }
+}

@@ -46,8 +46,7 @@ final class CreatePositionMapYieldFromTest extends AbstractTokenizerTestCase
             $this->assertArrayHasKey($key, $tokens[$target], "Key $key not found in the token array.");
             $this->assertSame($value, $tokens[$target][$key], "Value for key $key does not match expectation.");
         }
-
-    }//end testYieldFromTabReplacement()
+    }
 
 
     /**
@@ -93,8 +92,5 @@ final class CreatePositionMapYieldFromTest extends AbstractTokenizerTestCase
                 ],
             ],
         ];
-
-    }//end dataYieldFromTabReplacement()
-
-
-}//end class
+    }
+}

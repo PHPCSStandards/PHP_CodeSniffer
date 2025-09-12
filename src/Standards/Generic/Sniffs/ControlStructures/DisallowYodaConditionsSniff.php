@@ -29,8 +29,7 @@ class DisallowYodaConditionsSniff implements Sniff
         unset($tokens[T_COALESCE]);
 
         return $tokens;
-
-    }//end register()
+    }
 
 
     /**
@@ -122,8 +121,7 @@ class DisallowYodaConditionsSniff implements Sniff
             $stackPtr,
             'Found'
         );
-
-    }//end process()
+    }
 
 
     /**
@@ -179,8 +177,5 @@ class DisallowYodaConditionsSniff implements Sniff
         }
 
         return true;
-
-    }//end isArrayStatic()
-
-
-}//end class
+    }
+}

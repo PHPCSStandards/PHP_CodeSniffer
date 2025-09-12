@@ -43,8 +43,7 @@ final class PostStatementCommentUnitTest extends AbstractSniffTestCase
             63 => 1,
             64 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -58,8 +57,5 @@ final class PostStatementCommentUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

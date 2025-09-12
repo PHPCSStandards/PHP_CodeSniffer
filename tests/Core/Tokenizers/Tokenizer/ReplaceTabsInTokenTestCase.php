@@ -48,8 +48,7 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
         if (copy($baseFileName, self::$caseFileName) === false) {
             throw new Exception(sprintf('Failed to copy test case file "ReplaceTabsInTokenTest.inc" to %s', self::$caseFileName));
         }
-
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -60,8 +59,7 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
     public static function tearDownAfterClass(): void
     {
         @unlink(self::$caseFileName);
-
-    }//end tearDownAfterClass()
+    }
 
 
     /**
@@ -93,8 +91,7 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
             $this->assertArrayHasKey($key, $tokens[$target], "Key $key not found in the token array.");
             $this->assertSame($value, $tokens[$target][$key], "Value for key $key does not match expectation.");
         }
-
-    }//end testNoReplacementsAreMadeWhenNoTabsAreFound()
+    }
 
 
     /**
@@ -128,8 +125,7 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
                 ],
             ],
         ];
-
-    }//end dataNoReplacementsAreMadeWhenNoTabsAreFound()
+    }
 
 
     /**
@@ -160,8 +156,7 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
             $this->assertArrayHasKey($key, $tokens[$target], "Key $key not found in the token array.");
             $this->assertSame($value, $tokens[$target][$key], "Value for key $key does not match expectation.");
         }
-
-    }//end testTabReplacement()
+    }
 
 
     /**
@@ -251,8 +246,7 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
         $data['Mixed tab/space indentation']['offset'] = 1;
 
         return $data;
-
-    }//end dataTabReplacement()
+    }
 
 
     /**
@@ -265,6 +259,4 @@ abstract class ReplaceTabsInTokenTestCase extends AbstractTokenizerTestCase
      * @return array<string, array<string, int|string|null>>
      */
     abstract public static function getTabReplacementExpected();
-
-
-}//end class
+}

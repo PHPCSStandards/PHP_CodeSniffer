@@ -37,8 +37,7 @@ final class OneObjectStructurePerFileUnitTest extends AbstractSniffTestCase
             18 => 1,
             22 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -52,8 +51,5 @@ final class OneObjectStructurePerFileUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

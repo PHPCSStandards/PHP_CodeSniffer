@@ -77,8 +77,7 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
         }//end foreach
 
         return false;
-
-    }//end isMultiLineDeclaration()
+    }
 
 
     /**
@@ -125,8 +124,7 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
                 }
             }
         }//end if
-
-    }//end processSingleLineDeclaration()
+    }
 
 
     /**
@@ -158,8 +156,7 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
         }
 
         $this->processBracket($phpcsFile, $tokens[$use]['parenthesis_opener'], $tokens, 'use');
-
-    }//end processMultiLineDeclaration()
+    }
 
 
     /**
@@ -242,8 +239,5 @@ class MultiLineFunctionDeclarationSniff extends PEARFunctionDeclarationSniff
                 }
             }
         }//end for
-
-    }//end processBracket()
-
-
-}//end class
+    }
+}

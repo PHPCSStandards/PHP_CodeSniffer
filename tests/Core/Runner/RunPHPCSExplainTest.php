@@ -66,8 +66,5 @@ final class RunPHPCSExplainTest extends AbstractRunnerTestCase
 
         $runner = new Runner();
         $runner->runPHPCS();
-
-    }//end testExplainWillExplainEachStandardSeparately()
-
-
-}//end class
+    }
+}

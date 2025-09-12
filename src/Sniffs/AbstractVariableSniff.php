@@ -67,8 +67,7 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
         ];
 
         parent::__construct($scopes, $listen, true);
-
-    }//end __construct()
+    }
 
 
     /**
@@ -146,8 +145,7 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
         } else {
             return $this->processMemberVar($phpcsFile, $stackPtr);
         }
-
-    }//end processTokenWithinScope()
+    }
 
 
     /**
@@ -177,8 +175,7 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
                 return $this->processVariableInString($phpcsFile, $stackPtr);
             }
         }
-
-    }//end processTokenOutsideScope()
+    }
 
 
     /**
@@ -228,6 +225,4 @@ abstract class AbstractVariableSniff extends AbstractScopeSniff
      *                  the rest of the file.
      */
     abstract protected function processVariableInString(File $phpcsFile, int $stackPtr);
-
-
-}//end class
+}

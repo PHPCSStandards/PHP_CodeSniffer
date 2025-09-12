@@ -44,8 +44,7 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         $this->invokeDisplayCachedMessages($ruleset);
 
         $this->assertStderrOutputSameString('');
-
-    }//end testDisplayCachedMessagesStaysSilentWithoutErrors()
+    }
 
 
     /**
@@ -66,8 +65,7 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         $this->expectRuntimeExceptionMessage($expected);
 
         $this->invokeDisplayCachedMessages($ruleset);
-
-    }//end testBlockingErrorsAreDisplayedViaAnException()
+    }
 
 
     /**
@@ -109,8 +107,7 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
                 // phpcs:enable
             ],
         ];
-
-    }//end dataBlockingErrorsAreDisplayedViaAnException()
+    }
 
 
     /**
@@ -133,8 +130,7 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         $this->invokeDisplayCachedMessages($ruleset);
 
         $this->assertStderrOutputSameString($expected);
-
-    }//end testNonBlockingErrorsGenerateOutput()
+    }
 
 
     /**
@@ -174,8 +170,7 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
                 // phpcs:enable
             ],
         ];
-
-    }//end dataNonBlockingErrorsGenerateOutput()
+    }
 
 
     /**
@@ -199,8 +194,7 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         $this->expectRuntimeExceptionMessage('ERROR: ' . $message . PHP_EOL);
 
         $this->invokeDisplayCachedMessages($ruleset);
-
-    }//end testBlockingErrorsAlwaysShow()
+    }
 
 
     /**
@@ -223,8 +217,7 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         $this->invokeDisplayCachedMessages($ruleset);
 
         $this->assertStderrOutputSameString('');
-
-    }//end testNonBlockingErrorsDoNotShowUnderSpecificCircumstances()
+    }
 
 
     /**
@@ -254,8 +247,7 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         }
 
         return $data;
-
-    }//end dataSelectiveDisplayOfMessages()
+    }
 
 
     /**
@@ -273,8 +265,7 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         }
 
         return $ruleset;
-
-    }//end getPlainRuleset()
+    }
 
 
     /**
@@ -296,8 +287,7 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         }
 
         (PHP_VERSION_ID < 80100) && $reflProperty->setAccessible(false);
-
-    }//end mockCachedMessages()
+    }
 
 
     /**
@@ -313,8 +303,5 @@ final class DisplayCachedMessagesTest extends AbstractRulesetTestCase
         (PHP_VERSION_ID < 80100) && $reflMethod->setAccessible(true);
         $reflMethod->invoke($ruleset);
         (PHP_VERSION_ID < 80100) && $reflMethod->setAccessible(false);
-
-    }//end invokeDisplayCachedMessages()
-
-
-}//end class
+    }
+}

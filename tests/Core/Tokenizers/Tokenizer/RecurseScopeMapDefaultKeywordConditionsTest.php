@@ -73,8 +73,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
             $tokenArray,
             sprintf('Scope closer is set. Marker: %s.', $testMarker)
         );
-
-    }//end testMatchDefault()
+    }
 
 
     /**
@@ -128,8 +127,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
                 'testContent' => 'DEFAULT',
             ],
         ];
-
-    }//end dataMatchDefault()
+    }
 
 
     /**
@@ -283,8 +281,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
                 );
             }
         }//end if
-
-    }//end testSwitchDefault()
+    }
 
 
     /**
@@ -341,8 +338,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
                 'closerMarker' => '/* testSwitchDefaultNestedIfWithAndWithoutBracesScopeCloser */',
             ],
         ];
-
-    }//end dataSwitchDefault()
+    }
 
 
     /**
@@ -390,8 +386,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
             $tokenArray,
             sprintf('Scope closer is set. Marker: %s.', $testMarker)
         );
-
-    }//end testNotDefaultKeyword()
+    }
 
 
     /**
@@ -467,8 +462,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
                 'testContent' => 'default',
             ],
         ];
-
-    }//end dataNotDefaultKeyword()
+    }
 
 
     /**
@@ -490,8 +484,5 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
         $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
         $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');
         $this->assertArrayNotHasKey('scope_closer', $tokenArray, 'Scope closer is set');
-
-    }//end testIssue3326()
-
-
-}//end class
+    }
+}

@@ -37,8 +37,7 @@ final class ShortFormTypeKeywordsUnitTest extends AbstractSniffTestCase
             13 => 1,
             14 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -52,8 +51,5 @@ final class ShortFormTypeKeywordsUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

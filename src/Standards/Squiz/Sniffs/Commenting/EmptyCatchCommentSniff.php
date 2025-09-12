@@ -24,8 +24,7 @@ class EmptyCatchCommentSniff implements Sniff
     public function register()
     {
         return [T_CATCH];
-
-    }//end register()
+    }
 
 
     /**
@@ -48,8 +47,5 @@ class EmptyCatchCommentSniff implements Sniff
             $error = 'Empty CATCH statement must have a comment to explain why the exception is not handled';
             $phpcsFile->addError($error, $scopeStart, 'Missing');
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

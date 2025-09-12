@@ -24,8 +24,7 @@ class OneClassPerFileSniff implements Sniff
     public function register()
     {
         return [T_CLASS];
-
-    }//end register()
+    }
 
 
     /**
@@ -50,8 +49,5 @@ class OneClassPerFileSniff implements Sniff
             $error = 'Only one class is allowed in a file';
             $phpcsFile->addError($error, $nextClass, 'MultipleFound');
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

@@ -34,8 +34,7 @@ final class SAPIUsageUnitTest extends AbstractSniffTestCase
             2 => 1,
             6 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -49,8 +48,5 @@ final class SAPIUsageUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

@@ -37,7 +37,7 @@
     <!-- Include some sniffs from other standards that don't conflict with PEAR -->
     <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
     <rule ref="Squiz.Arrays.ArrayDeclaration"/>
-    <rule ref="Squiz.Commenting.ClosingDeclarationComment"/>
+    <rule ref="PSR12.Classes.ClosingBrace"/>
     <rule ref="Squiz.ControlStructures.ControlSignature"/>
     <rule ref="PSR2.ControlStructures.ElseIfDeclaration"/>
     <rule ref="Squiz.Commenting.BlockComment"/>
@@ -64,8 +64,15 @@
     <rule ref="Squiz.Strings.DoubleQuoteUsage.NotRequired"/>
     <rule ref="Generic.Strings.UnnecessaryHeredoc"/>
     <rule ref="Squiz.WhiteSpace.ControlStructureSpacing"/>
-    <rule ref="Squiz.WhiteSpace.FunctionClosingBraceSpace"/>
-    <rule ref="Squiz.WhiteSpace.FunctionSpacing"/>
+    <rule ref="Squiz.WhiteSpace.FunctionClosingBraceSpace">
+        <exclude name="Squiz.WhiteSpace.FunctionClosingBraceSpace.SpacingBeforeClose"/>
+    </rule>
+    <rule ref="PSR2.Methods.FunctionClosingBrace"/>
+    <rule ref="Squiz.WhiteSpace.FunctionSpacing">
+        <properties>
+            <property name="spacingAfterLast" value="0"/>
+        </properties>
+    </rule>
     <rule ref="Squiz.WhiteSpace.MemberVarSpacing"/>
     <rule ref="PSR12.Operators.OperatorSpacing"/>
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>

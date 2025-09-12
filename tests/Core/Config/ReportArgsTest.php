@@ -36,8 +36,7 @@ final class ReportArgsTest extends TestCase
         $this->assertTrue(is_string($config->reportFile));
         $this->assertStringEndsWith('/report.txt', $config->reportFile);
         $this->assertSame(['full' => null], $config->reports);
-
-    }//end testReportFileDoesNotSetReportsCs()
+    }
 
 
     /**
@@ -57,8 +56,5 @@ final class ReportArgsTest extends TestCase
 
         $this->assertNull($config->reportFile);
         $this->assertSame(['full' => null], $config->reports);
-
-    }//end testReportFileDoesNotSetReportsCbf()
-
-
-}//end class
+    }
+}

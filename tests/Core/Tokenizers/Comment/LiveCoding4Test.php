@@ -34,8 +34,7 @@ final class LiveCoding4Test extends CommentTestCase
                 'expectedTags' => [],
             ],
         ];
-
-    }//end dataDocblockOpenerCloser()
+    }
 
 
     /**
@@ -69,8 +68,5 @@ final class LiveCoding4Test extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
-    }//end testLiveCoding()
-
-
-}//end class
+    }
+}

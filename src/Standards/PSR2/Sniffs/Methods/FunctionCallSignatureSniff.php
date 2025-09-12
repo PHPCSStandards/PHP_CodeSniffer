@@ -72,8 +72,5 @@ class FunctionCallSignatureSniff extends PEARFunctionCallSignatureSniff
         }
 
         return false;
-
-    }//end isMultiLineCall()
-
-
-}//end class
+    }
+}

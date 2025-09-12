@@ -58,8 +58,7 @@ class RequireExplicitBooleanOperatorPrecedenceSniff implements Sniff
         $this->searchTargets[T_INLINE_ELSE] = T_INLINE_ELSE;
 
         return Tokens::BOOLEAN_OPERATORS;
-
-    }//end register()
+    }
 
 
     /**
@@ -105,8 +104,5 @@ class RequireExplicitBooleanOperatorPrecedenceSniff implements Sniff
         $error  = 'Mixing different binary boolean operators within an expression';
         $error .= ' without using parentheses to clarify precedence is not allowed.';
         $phpcsFile->addError($error, $stackPtr, 'MissingParentheses');
-
-    }//end process()
-
-
-}//end class
+    }
+}

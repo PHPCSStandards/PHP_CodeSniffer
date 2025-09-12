@@ -37,8 +37,7 @@ final class ExpandRulesetReferenceInternalTest extends AbstractRulesetTestCase
         $expected = ['Generic.PHP.BacktickOperator' => 'PHP_CodeSniffer\\Standards\\Generic\\Sniffs\\PHP\\BacktickOperatorSniff'];
 
         $this->assertSame($expected, $ruleset->sniffCodes);
-
-    }//end testInternalRefDoesNotGetExpanded()
+    }
 
 
     /**
@@ -64,8 +63,5 @@ final class ExpandRulesetReferenceInternalTest extends AbstractRulesetTestCase
 
         // This assertion will only take effect for PHPUnit 10+.
         $this->assertSame($expected, $ruleset->sniffCodes);
-
-    }//end testInternalStandardIsNotSupported()
-
-
-}//end class
+    }
+}

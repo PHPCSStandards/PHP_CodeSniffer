@@ -61,8 +61,7 @@ final class Timing
     {
 
         self::$startTime = microtime(true);
-
-    }//end startTiming()
+    }
 
 
     /**
@@ -78,8 +77,7 @@ final class Timing
         }
 
         return ((microtime(true) - self::$startTime) * 1000);
-
-    }//end getDuration()
+    }
 
 
     /**
@@ -92,8 +90,7 @@ final class Timing
     public static function getDurationSince(float $startTime)
     {
         return ((microtime(true) - $startTime) * 1000);
-
-    }//end getDurationSince()
+    }
 
 
     /**
@@ -120,8 +117,7 @@ final class Timing
         }
 
         return $timeString;
-
-    }//end getHumanReadableDuration()
+    }
 
 
     /**
@@ -151,8 +147,5 @@ final class Timing
         StatusWriter::write("Time: $duration; Memory: $mem");
 
         self::$printed = true;
-
-    }//end printRunTime()
-
-
-}//end class
+    }
+}

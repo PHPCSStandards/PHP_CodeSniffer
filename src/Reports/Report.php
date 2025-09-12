@@ -82,6 +82,4 @@ interface Report
         bool $interactive = false,
         bool $toScreen = true
     );
-
-
-}//end interface
+}

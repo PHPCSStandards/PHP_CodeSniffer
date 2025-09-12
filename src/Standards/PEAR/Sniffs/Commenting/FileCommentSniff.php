@@ -86,8 +86,7 @@ class FileCommentSniff implements Sniff
     public function register()
     {
         return [T_OPEN_TAG];
-
-    }//end register()
+    }
 
 
     /**
@@ -214,8 +213,7 @@ class FileCommentSniff implements Sniff
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
-
-    }//end process()
+    }
 
 
     /**
@@ -313,8 +311,7 @@ class FileCommentSniff implements Sniff
                 $pos++;
             }
         }//end foreach
-
-    }//end processTags()
+    }
 
 
     /**
@@ -355,8 +352,7 @@ class FileCommentSniff implements Sniff
                 $phpcsFile->addError($error, $tag, 'InvalidCategory', $data);
             }
         }//end foreach
-
-    }//end processCategory()
+    }
 
 
     /**
@@ -408,8 +404,7 @@ class FileCommentSniff implements Sniff
                 $phpcsFile->addError($error, $tag, 'InvalidPackage', $data);
             }//end if
         }//end foreach
-
-    }//end processPackage()
+    }
 
 
     /**
@@ -452,8 +447,7 @@ class FileCommentSniff implements Sniff
             ];
             $phpcsFile->addError($error, $tag, 'InvalidSubpackage', $data);
         }//end foreach
-
-    }//end processSubpackage()
+    }
 
 
     /**
@@ -482,8 +476,7 @@ class FileCommentSniff implements Sniff
                 $phpcsFile->addError($error, $tag, 'InvalidAuthors');
             }
         }
-
-    }//end processAuthor()
+    }
 
 
     /**
@@ -523,8 +516,7 @@ class FileCommentSniff implements Sniff
                 $phpcsFile->addError($error, $tag, 'IncompleteCopyright');
             }
         }//end foreach
-
-    }//end processCopyright()
+    }
 
 
     /**
@@ -552,8 +544,7 @@ class FileCommentSniff implements Sniff
                 $phpcsFile->addError($error, $tag, 'IncompleteLicense');
             }
         }
-
-    }//end processLicense()
+    }
 
 
     /**
@@ -584,8 +575,5 @@ class FileCommentSniff implements Sniff
                 $phpcsFile->addWarning($error, $tag, 'InvalidVersion', $data);
             }
         }
-
-    }//end processVersion()
-
-
-}//end class
+    }
+}

@@ -31,8 +31,7 @@ class EmptyPHPStatementSniff implements Sniff
             T_SEMICOLON,
             T_CLOSE_TAG,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -53,8 +52,7 @@ class EmptyPHPStatementSniff implements Sniff
         } else {
             $this->processCloseTag($phpcsFile, $stackPtr);
         }
-
-    }//end process()
+    }
 
 
     /**
@@ -133,8 +131,7 @@ class EmptyPHPStatementSniff implements Sniff
 
             $phpcsFile->fixer->endChangeset();
         }//end if
-
-    }//end processSemicolon()
+    }
 
 
     /**
@@ -172,8 +169,5 @@ class EmptyPHPStatementSniff implements Sniff
 
             $phpcsFile->fixer->endChangeset();
         }
-
-    }//end processCloseTag()
-
-
-}//end class
+    }
+}

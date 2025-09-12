@@ -25,8 +25,7 @@ class DeclareStatementSniff implements Sniff
     public function register()
     {
         return [T_DECLARE];
-
-    }//end register()
+    }
 
 
     /**
@@ -255,8 +254,5 @@ class DeclareStatementSniff implements Sniff
                 }
             }
         }//end if
-
-    }//end process()
-
-
-}//end class
+    }
+}

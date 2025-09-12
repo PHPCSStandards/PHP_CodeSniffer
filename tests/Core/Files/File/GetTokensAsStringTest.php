@@ -30,8 +30,7 @@ final class GetTokensAsStringTest extends AbstractMethodTestCase
         $this->expectRunTimeException('The $start position for getTokensAsString() must exist in the token stack');
 
         self::$phpcsFile->getTokensAsString(100000, 10);
-
-    }//end testNonExistentToken()
+    }
 
 
     /**
@@ -44,8 +43,7 @@ final class GetTokensAsStringTest extends AbstractMethodTestCase
         $this->expectRunTimeException('The $start position for getTokensAsString() must exist in the token stack');
 
         self::$phpcsFile->getTokensAsString(false, 10);
-
-    }//end testNonIntegerStart()
+    }
 
 
     /**
@@ -60,8 +58,7 @@ final class GetTokensAsStringTest extends AbstractMethodTestCase
 
         $result = self::$phpcsFile->getTokensAsString(10, 1.5);
         $this->assertSame('', $result);
-
-    }//end testNonIntegerLength()
+    }
 
 
     /**
@@ -76,8 +73,7 @@ final class GetTokensAsStringTest extends AbstractMethodTestCase
 
         $result = self::$phpcsFile->getTokensAsString(10, 0);
         $this->assertSame('', $result);
-
-    }//end testLengthEqualToOrLessThanZero()
+    }
 
 
     /**
@@ -94,8 +90,7 @@ final class GetTokensAsStringTest extends AbstractMethodTestCase
 ',
             $result
         );
-
-    }//end testLengthBeyondEndOfFile()
+    }
 
 
     /**
@@ -115,8 +110,7 @@ final class GetTokensAsStringTest extends AbstractMethodTestCase
         $start  = $this->getTargetToken($testMarker, $startTokenType);
         $result = self::$phpcsFile->getTokensAsString($start, $length);
         $this->assertSame($expected, $result);
-
-    }//end testGetTokensAsString()
+    }
 
 
     /**
@@ -269,8 +263,7 @@ final class GetTokensAsStringTest extends AbstractMethodTestCase
                 'expected'       => 'echo   $foo;',
             ],
         ];
-
-    }//end dataGetTokensAsString()
+    }
 
 
     /**
@@ -290,8 +283,7 @@ final class GetTokensAsStringTest extends AbstractMethodTestCase
         $start  = $this->getTargetToken($testMarker, $startTokenType);
         $result = self::$phpcsFile->getTokensAsString($start, $length, true);
         $this->assertSame($expected, $result);
-
-    }//end testGetOrigContent()
+    }
 
 
     /**
@@ -327,8 +319,5 @@ final class GetTokensAsStringTest extends AbstractMethodTestCase
                 'expected'       => 'echo   $foo;',
             ],
         ];
-
-    }//end dataGetOrigContent()
-
-
-}//end class
+    }
+}

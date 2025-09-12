@@ -89,8 +89,7 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
                 'Token after tokenized as ' . $tokens[$after]['type'] . ', not T_BITWISE_OR (type)'
             );
         }
-
-    }//end testNormalParentheses()
+    }
 
 
     /**
@@ -266,8 +265,7 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testParensNoOwnerInArrowReturnExpression */',
             ],
         ];
-
-    }//end dataNormalParentheses()
+    }
 
 
     /**
@@ -371,8 +369,7 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
                 'Token after tokenized as ' . $tokens[$after]['type'] . ', not T_TYPE_UNION (type)'
             );
         }
-
-    }//end testDNFTypeParentheses()
+    }
 
 
     /**
@@ -559,8 +556,5 @@ final class DNFTypesTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testDNFTypeParamIllegalNestedParens */',
             ],
         ];
-
-    }//end dataDNFTypeParentheses()
-
-
-}//end class
+    }
+}

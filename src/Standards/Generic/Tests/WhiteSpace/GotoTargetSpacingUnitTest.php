@@ -35,8 +35,7 @@ final class GotoTargetSpacingUnitTest extends AbstractSniffTestCase
             24 => 1,
             34 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -50,8 +49,5 @@ final class GotoTargetSpacingUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

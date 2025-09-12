@@ -44,8 +44,7 @@ class JumbledIncrementerSniff implements Sniff
     public function register()
     {
         return [T_FOR];
-
-    }//end register()
+    }
 
 
     /**
@@ -93,8 +92,7 @@ class JumbledIncrementerSniff implements Sniff
                 $phpcsFile->addWarning($error, $stackPtr, 'Found', $data);
             }
         }
-
-    }//end process()
+    }
 
 
     /**
@@ -127,8 +125,5 @@ class JumbledIncrementerSniff implements Sniff
         }
 
         return $incrementers;
-
-    }//end findIncrementers()
-
-
-}//end class
+    }
+}

@@ -29,8 +29,7 @@ class ValidClassNameSniff implements Sniff
             T_TRAIT,
             T_ENUM,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -91,8 +90,5 @@ class ValidClassNameSniff implements Sniff
                 $phpcsFile->addError($error, $stackPtr, 'Invalid', $data);
             }
         }//end if
-
-    }//end process()
-
-
-}//end class
+    }
+}

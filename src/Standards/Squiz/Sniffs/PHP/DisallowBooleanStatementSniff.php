@@ -25,8 +25,7 @@ class DisallowBooleanStatementSniff implements Sniff
     public function register()
     {
         return Tokens::BOOLEAN_OPERATORS;
-
-    }//end register()
+    }
 
 
     /**
@@ -52,8 +51,5 @@ class DisallowBooleanStatementSniff implements Sniff
 
         $error = 'Boolean operators are not allowed outside of control structure conditions';
         $phpcsFile->addError($error, $stackPtr, 'Found');
-
-    }//end process()
-
-
-}//end class
+    }
+}

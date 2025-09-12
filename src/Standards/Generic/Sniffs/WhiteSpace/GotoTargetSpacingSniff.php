@@ -25,8 +25,7 @@ class GotoTargetSpacingSniff implements Sniff
     public function register()
     {
         return [T_GOTO_LABEL];
-
-    }//end register()
+    }
 
 
     /**
@@ -79,8 +78,5 @@ class GotoTargetSpacingSniff implements Sniff
 
             $phpcsFile->fixer->endChangeset();
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

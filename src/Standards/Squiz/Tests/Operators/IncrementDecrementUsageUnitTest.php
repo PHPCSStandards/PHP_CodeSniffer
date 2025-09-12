@@ -51,8 +51,7 @@ final class IncrementDecrementUsageUnitTest extends AbstractSniffTestCase
             55 => 1,
             56 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -66,8 +65,5 @@ final class IncrementDecrementUsageUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

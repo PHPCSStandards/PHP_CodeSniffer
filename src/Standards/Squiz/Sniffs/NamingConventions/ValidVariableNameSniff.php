@@ -100,8 +100,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             $data  = [$originalVarName];
             $phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $data);
         }
-
-    }//end processVariable()
+    }
 
 
     /**
@@ -150,8 +149,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             $error = 'Member variable "%s" is not in valid camel caps format';
             $phpcsFile->addError($error, $stackPtr, 'MemberNotCamelCaps', $errorData);
         }
-
-    }//end processMemberVar()
+    }
 
 
     /**
@@ -181,8 +179,5 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                 }
             }
         }
-
-    }//end processVariableInString()
-
-
-}//end class
+    }
+}

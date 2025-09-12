@@ -25,8 +25,7 @@ class LogicalOperatorSpacingSniff implements Sniff
     public function register()
     {
         return Tokens::BOOLEAN_OPERATORS;
-
-    }//end register()
+    }
 
 
     /**
@@ -85,8 +84,5 @@ class LogicalOperatorSpacingSniff implements Sniff
                 }
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

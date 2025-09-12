@@ -67,8 +67,7 @@ abstract class CommentTestCase extends AbstractTokenizerTestCase
                 'Comment_closer not set to the expected stack pointer (for stackPtr ' . $i . ')'
             );
         }
-
-    }//end testDocblockOpenerCloser()
+    }
 
 
     /**
@@ -121,8 +120,5 @@ abstract class CommentTestCase extends AbstractTokenizerTestCase
                 'Token content did not match expectations' . $errorMsgSuffix
             );
         }//end for
-
-    }//end checkTokenSequence()
-
-
-}//end class
+    }
+}

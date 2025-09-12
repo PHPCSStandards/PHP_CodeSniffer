@@ -31,8 +31,7 @@ final class TodoUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -55,8 +54,5 @@ final class TodoUnitTest extends AbstractSniffTestCase
             18 => 1,
             21 => 1,
         ];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

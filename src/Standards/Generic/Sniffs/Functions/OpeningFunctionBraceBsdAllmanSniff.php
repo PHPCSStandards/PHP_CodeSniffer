@@ -42,8 +42,7 @@ class OpeningFunctionBraceBsdAllmanSniff implements Sniff
             T_FUNCTION,
             T_CLOSURE,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -217,8 +216,5 @@ class OpeningFunctionBraceBsdAllmanSniff implements Sniff
         }//end if
 
         $phpcsFile->recordMetric($stackPtr, "$metricType opening brace placement", 'new line');
-
-    }//end process()
-
-
-}//end class
+    }
+}

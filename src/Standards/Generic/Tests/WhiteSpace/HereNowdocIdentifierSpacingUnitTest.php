@@ -36,8 +36,7 @@ final class HereNowdocIdentifierSpacingUnitTest extends AbstractSniffTestCase
             19 => 1,
             23 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -51,8 +50,5 @@ final class HereNowdocIdentifierSpacingUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

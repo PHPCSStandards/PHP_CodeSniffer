@@ -36,8 +36,7 @@ class ConstantVisibilitySniff implements Sniff
     public function register()
     {
         return [T_CONST];
-
-    }//end register()
+    }
 
 
     /**
@@ -68,8 +67,5 @@ class ConstantVisibilitySniff implements Sniff
 
         $error = 'Visibility must be declared on all constants if your project supports PHP 7.1 or later';
         $phpcsFile->addWarning($error, $stackPtr, 'NotFound');
-
-    }//end process()
-
-
-}//end class
+    }
+}

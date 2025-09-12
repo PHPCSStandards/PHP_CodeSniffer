@@ -41,8 +41,7 @@ final class ShortArrayTest extends AbstractTokenizerTestCase
             $this->assertSame(T_CLOSE_SQUARE_BRACKET, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_CLOSE_SQUARE_BRACKET (code)');
             $this->assertSame('T_CLOSE_SQUARE_BRACKET', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_CLOSE_SQUARE_BRACKET (type)');
         }
-
-    }//end testSquareBrackets()
+    }
 
 
     /**
@@ -86,8 +85,7 @@ final class ShortArrayTest extends AbstractTokenizerTestCase
             'new anonymous class expression dereferencing 4' => ['/* testNewAnonClassImplementsExpressionDereferencing */'],
             'live coding'                                    => ['/* testLiveCoding */'],
         ];
-
-    }//end dataSquareBrackets()
+    }
 
 
     /**
@@ -116,8 +114,7 @@ final class ShortArrayTest extends AbstractTokenizerTestCase
             $this->assertSame(T_CLOSE_SHORT_ARRAY, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_CLOSE_SHORT_ARRAY (code)');
             $this->assertSame('T_CLOSE_SHORT_ARRAY', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_CLOSE_SHORT_ARRAY (type)');
         }
-
-    }//end testShortArrays()
+    }
 
 
     /**
@@ -142,8 +139,5 @@ final class ShortArrayTest extends AbstractTokenizerTestCase
             'short list after alternative control structure' => ['/* testShortListDeclarationAfterAlternativeControlStructure */'],
             'short list after class declaration'             => ['/* testShortListDeclarationAfterClassDeclaration */'],
         ];
-
-    }//end dataShortArrays()
-
-
-}//end class
+    }
+}

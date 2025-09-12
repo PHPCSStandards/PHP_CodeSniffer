@@ -24,8 +24,7 @@ class OneInterfacePerFileSniff implements Sniff
     public function register()
     {
         return [T_INTERFACE];
-
-    }//end register()
+    }
 
 
     /**
@@ -50,8 +49,5 @@ class OneInterfacePerFileSniff implements Sniff
             $error = 'Only one interface is allowed in a file';
             $phpcsFile->addError($error, $nextInterface, 'MultipleFound');
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

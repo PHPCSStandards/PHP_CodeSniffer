@@ -47,8 +47,7 @@ final class DisallowSizeFunctionsInLoopsUnitTest extends AbstractSniffTestCase
             61 => 1,
             63 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -62,8 +61,5 @@ final class DisallowSizeFunctionsInLoopsUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

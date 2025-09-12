@@ -29,8 +29,7 @@ final class SuggestTypeTest extends TestCase
     public function testSuggestTypeEmpty()
     {
         $this->assertSame('', Common::suggestType(''));
-
-    }//end testSuggestTypeEmpty()
+    }
 
 
     /**
@@ -46,8 +45,7 @@ final class SuggestTypeTest extends TestCase
     {
         $result = Common::suggestType($varType);
         $this->assertSame($varType, $result);
-
-    }//end testSuggestTypeAllowedType()
+    }
 
 
     /**
@@ -65,8 +63,7 @@ final class SuggestTypeTest extends TestCase
         }
 
         return $data;
-
-    }//end dataSuggestTypeAllowedType()
+    }
 
 
     /**
@@ -83,8 +80,7 @@ final class SuggestTypeTest extends TestCase
     {
         $result = Common::suggestType($varType);
         $this->assertSame($expected, $result);
-
-    }//end testSuggestTypeAllowedTypeWrongCase()
+    }
 
 
     /**
@@ -109,8 +105,7 @@ final class SuggestTypeTest extends TestCase
         }
 
         return $data;
-
-    }//end dataSuggestTypeAllowedTypeWrongCase()
+    }
 
 
     /**
@@ -127,8 +122,7 @@ final class SuggestTypeTest extends TestCase
     {
         $result = Common::suggestType($varType);
         $this->assertSame($expected, $result);
-
-    }//end testSuggestTypeOther()
+    }
 
 
     /**
@@ -217,8 +211,5 @@ final class SuggestTypeTest extends TestCase
                 'expected' => '\DateTime',
             ],
         ];
-
-    }//end dataSuggestTypeOther()
-
-
-}//end class
+    }
+}

@@ -314,8 +314,7 @@ class Code implements Report
         }
 
         return true;
-
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -350,8 +349,5 @@ class Code implements Report
         }
 
         echo $cachedData;
-
-    }//end generate()
-
-
-}//end class
+    }
+}

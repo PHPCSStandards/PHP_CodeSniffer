@@ -34,8 +34,7 @@ final class GetHumanReadableDurationTest extends TestCase
     public function testGetHumanReadableDuration($duration, $expected)
     {
         $this->assertSame($expected, Timing::getHumanReadableDuration($duration));
-
-    }//end testGetHumanReadableDuration()
+    }
 
 
     /**
@@ -107,8 +106,5 @@ final class GetHumanReadableDurationTest extends TestCase
                 'expected' => '89 mins, 24 secs',
             ],
         ];
-
-    }//end dataGetHumanReadableDuration()
-
-
-}//end class
+    }
+}

@@ -45,8 +45,7 @@ final class DeprecatedFunctionsUnitTest extends AbstractSniffTestCase
         }
 
         return $errors;
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -60,8 +59,5 @@ final class DeprecatedFunctionsUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

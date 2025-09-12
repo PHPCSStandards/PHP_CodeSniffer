@@ -34,8 +34,7 @@ final class GetHighestWeightedTokenTest extends TestCase
     public function testGetHighestWeightedToken($tokens, $expected)
     {
         $this->assertSame($expected, Tokens::getHighestWeightedToken($tokens));
-
-    }//end testGetHighestWeightedToken()
+    }
 
 
     /**
@@ -155,8 +154,5 @@ final class GetHighestWeightedTokenTest extends TestCase
         ];
 
         return $data;
-
-    }//end dataGetHighestWeightedToken()
-
-
-}//end class
+    }
+}

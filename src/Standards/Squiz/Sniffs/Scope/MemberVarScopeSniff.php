@@ -25,8 +25,7 @@ class MemberVarScopeSniff extends AbstractVariableSniff
     public function __construct()
     {
         AbstractScopeSniff::__construct(Tokens::OO_SCOPE_TOKENS, [T_VARIABLE], false);
-
-    }//end __construct()
+    }
 
 
     /**
@@ -60,8 +59,7 @@ class MemberVarScopeSniff extends AbstractVariableSniff
             $data  = [$tokens[$stackPtr]['content']];
             $phpcsFile->addError($error, $stackPtr, 'AsymReadMissing', $data);
         }
-
-    }//end processMemberVar()
+    }
 
 
     /**
@@ -74,11 +72,8 @@ class MemberVarScopeSniff extends AbstractVariableSniff
      */
     protected function processVariable(File $phpcsFile, int $stackPtr)
     {
-        /*
-            We don't care about normal variables.
-        */
-
-    }//end processVariable()
+        // We don't care about normal variables.
+    }
 
 
     /**
@@ -91,11 +86,6 @@ class MemberVarScopeSniff extends AbstractVariableSniff
      */
     protected function processVariableInString(File $phpcsFile, int $stackPtr)
     {
-        /*
-            We don't care about normal variables.
-        */
-
-    }//end processVariableInString()
-
-
-}//end class
+        // We don't care about normal variables.
+    }
+}

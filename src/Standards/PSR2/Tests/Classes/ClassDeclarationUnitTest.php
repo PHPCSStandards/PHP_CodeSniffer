@@ -81,8 +81,7 @@ final class ClassDeclarationUnitTest extends AbstractSniffTestCase
             324 => 1,
             344 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -96,8 +95,5 @@ final class ClassDeclarationUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

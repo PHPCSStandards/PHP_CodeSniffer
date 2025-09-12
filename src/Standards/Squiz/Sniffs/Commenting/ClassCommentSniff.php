@@ -32,8 +32,7 @@ class ClassCommentSniff implements Sniff
     public function register()
     {
         return [T_CLASS];
-
-    }//end register()
+    }
 
 
     /**
@@ -102,8 +101,5 @@ class ClassCommentSniff implements Sniff
             $data  = [$tokens[$tag]['content']];
             $phpcsFile->addWarning($error, $tag, 'TagNotAllowed', $data);
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

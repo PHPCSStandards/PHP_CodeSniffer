@@ -37,8 +37,7 @@ final class LogicalOperatorSpacingUnitTest extends AbstractSniffTestCase
             15 => 1,
             17 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -52,8 +51,5 @@ final class LogicalOperatorSpacingUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

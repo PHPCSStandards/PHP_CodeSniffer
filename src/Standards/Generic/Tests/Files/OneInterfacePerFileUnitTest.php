@@ -34,8 +34,7 @@ final class OneInterfacePerFileUnitTest extends AbstractSniffTestCase
             6  => 1,
             10 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -49,8 +48,5 @@ final class OneInterfacePerFileUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

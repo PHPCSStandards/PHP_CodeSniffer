@@ -56,8 +56,7 @@ final class IncrementDecrementSpacingUnitTest extends AbstractSniffTestCase
             56 => 1,
             58 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -71,8 +70,5 @@ final class IncrementDecrementSpacingUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

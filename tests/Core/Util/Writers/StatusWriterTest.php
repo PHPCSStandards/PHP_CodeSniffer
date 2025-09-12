@@ -37,8 +37,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::write($message);
 
         $this->assertStderrOutputSameString($expected);
-
-    }//end testStatusSentToStdErr()
+    }
 
 
     /**
@@ -58,8 +57,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
                 'expected' => PHP_EOL,
             ],
         ];
-
-    }//end dataStatusSentToStdErr()
+    }
 
 
     /**
@@ -81,8 +79,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::write($message, $indent, $newlines);
 
         $this->assertStderrOutputSameString($expected);
-
-    }//end testStatusSentToStdErrIndentNewlines()
+    }
 
 
     /**
@@ -130,8 +127,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
                 'expected' => 'This message should end up in stdErr with no tab indent and no new line',
             ],
         ];
-
-    }//end dataStatusSentToStdErrIndentNewlines()
+    }
 
 
     /**
@@ -153,8 +149,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::write($message);
 
         $this->assertStderrOutputSameString('');
-
-    }//end testStatusDoesNotGetPrintedWhenPaused()
+    }
 
 
     /**
@@ -184,8 +179,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::write($message);
 
         $this->assertStderrOutputSameString($expected);
-
-    }//end testStatusDoesGetPrintedWhenPausedAndResumed()
+    }
 
 
     /**
@@ -208,8 +202,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::forceWrite($message);
 
         $this->assertStderrOutputSameString($expected);
-
-    }//end testStatusDoesGetForcePrintedWhenPaused()
+    }
 
 
     /**
@@ -244,8 +237,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::forceWrite($messageC);
 
         $this->assertStderrOutputSameString($expected);
-
-    }//end testStatusDoesGetForcePrintedWhenPausedAndResumed()
+    }
 
 
     /**
@@ -270,8 +262,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::forceWriteNewline();
 
         $this->assertStderrOutputSameString(PHP_EOL . PHP_EOL);
-
-    }//end testWriteNewline()
+    }
 
 
     /**
@@ -326,8 +317,7 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::write($message);
 
         $this->assertStderrOutputSameString($expected);
-
-    }//end testNestedPausing()
+    }
 
 
     /**
@@ -382,8 +372,5 @@ final class StatusWriterTest extends AbstractWriterTestCase
         StatusWriter::write($messageA);
 
         $this->assertStderrOutputSameString($expected);
-
-    }//end testResumingMoreOftenThanPaused()
-
-
-}//end class
+    }
+}

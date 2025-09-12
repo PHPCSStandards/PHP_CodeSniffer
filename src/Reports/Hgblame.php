@@ -55,8 +55,7 @@ class Hgblame extends VersionControl
         $parts = array_slice($parts, 0, (count($parts) - 6));
 
         return trim(preg_replace('|<.+>|', '', implode(' ', $parts)));
-
-    }//end getAuthor()
+    }
 
 
     /**
@@ -104,8 +103,5 @@ class Hgblame extends VersionControl
         chdir($cwd);
 
         return $blames;
-
-    }//end getBlameContent()
-
-
-}//end class
+    }
+}

@@ -45,8 +45,7 @@ class SuperfluousWhitespaceSniff implements Sniff
             T_DOC_COMMENT_WHITESPACE,
             T_CLOSURE,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -207,8 +206,5 @@ class SuperfluousWhitespaceSniff implements Sniff
                 }
             }//end if
         }//end if
-
-    }//end process()
-
-
-}//end class
+    }
+}

@@ -283,8 +283,7 @@ class Cache
         }
 
         self::$cache['config'] = $configData;
-
-    }//end load()
+    }
 
 
     /**
@@ -295,8 +294,7 @@ class Cache
     public static function save()
     {
         file_put_contents(self::$path, json_encode(self::$cache));
-
-    }//end save()
+    }
 
 
     /**
@@ -318,8 +316,7 @@ class Cache
         }
 
         return false;
-
-    }//end get()
+    }
 
 
     /**
@@ -338,8 +335,7 @@ class Cache
         } else {
             self::$cache[$key] = $value;
         }
-
-    }//end set()
+    }
 
 
     /**
@@ -350,8 +346,5 @@ class Cache
     public static function getSize()
     {
         return (count(self::$cache) - 1);
-
-    }//end getSize()
-
-
-}//end class
+    }
+}

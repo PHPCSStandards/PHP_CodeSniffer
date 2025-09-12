@@ -30,8 +30,7 @@ final class InlineIfDeclarationUnitTest extends AbstractSniffTestCase
     public function getCliValues($testFile)
     {
         return ['--encoding=utf-8'];
-
-    }//end getCliValues()
+    }
 
 
     /**
@@ -58,8 +57,7 @@ final class InlineIfDeclarationUnitTest extends AbstractSniffTestCase
             44 => 1,
             47 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -73,8 +71,5 @@ final class InlineIfDeclarationUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

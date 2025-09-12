@@ -38,8 +38,7 @@ final class EchoedStringsUnitTest extends AbstractSniffTestCase
             9  => 1,
             13 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -53,8 +52,5 @@ final class EchoedStringsUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

@@ -109,8 +109,7 @@ class ForbiddenFunctionsSniff implements Sniff
         $targets[] = T_NAME_FULLY_QUALIFIED;
 
         return $targets;
-
-    }//end register()
+    }
 
 
     /**
@@ -195,8 +194,7 @@ class ForbiddenFunctionsSniff implements Sniff
         }//end if
 
         $this->addError($phpcsFile, $stackPtr, $function, $pattern);
-
-    }//end process()
+    }
 
 
     /**
@@ -237,8 +235,5 @@ class ForbiddenFunctionsSniff implements Sniff
         } else {
             $phpcsFile->addWarning($error, $stackPtr, $type, $data);
         }
-
-    }//end addError()
-
-
-}//end class
+    }
+}

@@ -54,8 +54,7 @@ EOD;
         $this->assertSame('  ', $tokens[$target]['content'], 'Content after tab replacement is not as expected');
         $this->assertSame(2, $tokens[$target]['length'], 'Length after tab replacement is not as expected');
         $this->assertArrayHasKey('orig_content', $tokens[$target], "Key 'orig_content' not found in the token array.");
-
-    }//end testTabWidthNotSet()
+    }
 
 
     /**
@@ -86,8 +85,7 @@ EOD;
         $this->assertSame(17, $tokens[$target]['length'], 'Length is not as expected');
         $this->assertArrayHasKey('orig_content', $tokens[$target], "Key 'orig_content' not found in the token array.");
         $this->assertSame("'пасха		пасха'", $tokens[$target]['orig_content'], 'Orig_content is not as expected');
-
-    }//end testLengthSettingRespectsEncoding()
+    }
 
 
     /**
@@ -116,8 +114,5 @@ EOD;
         $this->assertIsInt($target, 'Target token was not found');
         $this->assertSame(11, $tokens[$target]['length'], 'Length is not as expected');
         $this->assertArrayHasKey('orig_content', $tokens[$target], "Key 'orig_content' not found in the token array.");
-
-    }//end testLengthSettingFallsBackToBytesWhenTextContainsIllegalChars()
-
-
-}//end class
+    }
+}

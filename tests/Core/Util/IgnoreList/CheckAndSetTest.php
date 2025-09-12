@@ -41,8 +41,7 @@ final class CheckAndSetTest extends TestCase
         foreach ($toCheck as $code => $expect) {
             $this->assertSame($expect, $ignoreList->isIgnored($code), "$code is ignored");
         }
-
-    }//end testCheckAndSet()
+    }
 
 
     /**
@@ -138,8 +137,5 @@ final class CheckAndSetTest extends TestCase
                 ],
             ],
         ];
-
-    }//end dataCheckAndSet()
-
-
-}//end class
+    }
+}

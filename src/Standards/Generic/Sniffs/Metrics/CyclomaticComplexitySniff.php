@@ -64,8 +64,7 @@ class CyclomaticComplexitySniff implements Sniff
     public function register()
     {
         return [T_FUNCTION];
-
-    }//end register()
+    }
 
 
     /**
@@ -114,8 +113,5 @@ class CyclomaticComplexitySniff implements Sniff
             ];
             $phpcsFile->addWarning($warning, $stackPtr, 'TooHigh', $data);
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

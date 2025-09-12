@@ -33,8 +33,5 @@ final class CreateTokenMapClosureUseParenthesesParseErrorTest extends AbstractTo
         $this->assertArrayNotHasKey('parenthesis_owner', $tokens[$use], 'parenthesis_owner key is set');
         $this->assertArrayNotHasKey('parenthesis_opener', $tokens[$use], 'parenthesis_opener key is set');
         $this->assertArrayNotHasKey('parenthesis_closer', $tokens[$use], 'parenthesis_closer key is set');
-
-    }//end testLiveCoding()
-
-
-}//end class
+    }
+}

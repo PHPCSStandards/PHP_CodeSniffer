@@ -49,8 +49,7 @@ class SideEffectsSniff implements Sniff
     public function register()
     {
         return [T_OPEN_TAG];
-
-    }//end register()
+    }
 
 
     /**
@@ -81,8 +80,7 @@ class SideEffectsSniff implements Sniff
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
-
-    }//end process()
+    }
 
 
     /**
@@ -308,8 +306,5 @@ class SideEffectsSniff implements Sniff
             'symbol' => $firstSymbol,
             'effect' => $firstEffect,
         ];
-
-    }//end searchForConflict()
-
-
-}//end class
+    }
+}

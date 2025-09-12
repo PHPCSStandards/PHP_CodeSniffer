@@ -49,8 +49,7 @@ class BooleanOperatorPlacementSniff implements Sniff
             T_ELSEIF,
             T_MATCH,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -227,8 +226,5 @@ class BooleanOperatorPlacementSniff implements Sniff
         }//end foreach
 
         $phpcsFile->fixer->endChangeset();
-
-    }//end process()
-
-
-}//end class
+    }
+}

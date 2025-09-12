@@ -100,8 +100,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             $data    = [$originalVarName];
             $phpcsFile->addWarning($warning, $stackPtr, 'ContainsNumbers', $data);
         }
-
-    }//end processVariable()
+    }
 
 
     /**
@@ -156,8 +155,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             $data    = [$varName];
             $phpcsFile->addWarning($warning, $stackPtr, 'MemberVarContainsNumbers', $data);
         }
-
-    }//end processMemberVar()
+    }
 
 
     /**
@@ -191,8 +189,5 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                 }
             }//end foreach
         }//end if
-
-    }//end processVariableInString()
-
-
-}//end class
+    }
+}

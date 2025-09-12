@@ -38,8 +38,7 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
     public function __construct()
     {
         AbstractScopeSniff::__construct(Tokens::OO_SCOPE_TOKENS, [T_VARIABLE], false);
-
-    }//end __construct()
+    }
 
 
     /**
@@ -228,8 +227,7 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
         if ($endOfStatement !== false) {
             return $endOfStatement;
         }
-
-    }//end processMemberVar()
+    }
 
 
     /**
@@ -242,11 +240,8 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
      */
     protected function processVariable(File $phpcsFile, int $stackPtr)
     {
-        /*
-            We don't care about normal variables.
-        */
-
-    }//end processVariable()
+        // We don't care about normal variables.
+    }
 
 
     /**
@@ -259,11 +254,6 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
      */
     protected function processVariableInString(File $phpcsFile, int $stackPtr)
     {
-        /*
-            We don't care about normal variables.
-        */
-
-    }//end processVariableInString()
-
-
-}//end class
+        // We don't care about normal variables.
+    }
+}

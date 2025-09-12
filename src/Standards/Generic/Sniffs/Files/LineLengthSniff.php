@@ -55,8 +55,7 @@ class LineLengthSniff implements Sniff
     public function register()
     {
         return [T_OPEN_TAG];
-
-    }//end register()
+    }
 
 
     /**
@@ -81,8 +80,7 @@ class LineLengthSniff implements Sniff
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
-
-    }//end process()
+    }
 
 
     /**
@@ -194,8 +192,5 @@ class LineLengthSniff implements Sniff
             $warning = 'Line exceeds %s characters; contains %s characters';
             $phpcsFile->addWarning($warning, $stackPtr, 'TooLong', $data);
         }
-
-    }//end checkLineLength()
-
-
-}//end class
+    }
+}

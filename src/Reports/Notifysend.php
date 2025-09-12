@@ -77,8 +77,7 @@ class Notifysend implements Report
             '',
             exec($this->path . ' --version')
         );
-
-    }//end __construct()
+    }
 
 
     /**
@@ -103,8 +102,7 @@ class Notifysend implements Report
         // We want this file counted in the total number
         // of checked files even if it has no errors.
         return true;
-
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -144,8 +142,7 @@ class Notifysend implements Report
         } else {
             $this->notifyErrors($msg);
         }
-
-    }//end generate()
+    }
 
 
     /**
@@ -182,8 +179,7 @@ class Notifysend implements Report
         }
 
         return $msg;
-
-    }//end generateMessage()
+    }
 
 
     /**
@@ -198,8 +194,7 @@ class Notifysend implements Report
         $cmd .= ' "PHP CodeSniffer: Ok"';
         $cmd .= ' "All fine"';
         exec($cmd);
-
-    }//end notifyAllFine()
+    }
 
 
     /**
@@ -216,8 +211,7 @@ class Notifysend implements Report
         $cmd .= ' "PHP CodeSniffer: Error"';
         $cmd .= ' ' . escapeshellarg(trim($msg));
         exec($cmd);
-
-    }//end notifyErrors()
+    }
 
 
     /**
@@ -236,8 +230,5 @@ class Notifysend implements Report
         }
 
         return $cmd;
-
-    }//end getBasicCommand()
-
-
-}//end class
+    }
+}

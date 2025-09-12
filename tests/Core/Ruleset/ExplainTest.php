@@ -53,8 +53,7 @@ final class ExplainTest extends TestCase
         $this->expectOutputString($expected);
 
         $ruleset->explain();
-
-    }//end testExplain()
+    }
 
 
     /**
@@ -88,8 +87,7 @@ final class ExplainTest extends TestCase
         $this->expectOutputString($expected);
 
         $ruleset->explain();
-
-    }//end testExplainAlwaysDisplaysCompleteSniffName()
+    }
 
 
     /**
@@ -115,8 +113,7 @@ final class ExplainTest extends TestCase
         $this->expectOutputString($expected);
 
         $ruleset->explain();
-
-    }//end testExplainSingleSniff()
+    }
 
 
     /**
@@ -161,8 +158,7 @@ final class ExplainTest extends TestCase
         $this->expectOutputString($expected);
 
         $ruleset->explain();
-
-    }//end testExplainCustomRuleset()
+    }
 
 
     /**
@@ -206,8 +202,5 @@ final class ExplainTest extends TestCase
         $this->expectOutputString($expected);
 
         $ruleset->explain();
-
-    }//end testExplainWithDeprecatedSniffs()
-
-
-}//end class
+    }
+}

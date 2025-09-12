@@ -82,8 +82,7 @@ final class RegisterSniffsTest extends TestCase
         $standardsDir .= 'src' . DIRECTORY_SEPARATOR . 'Standards' . DIRECTORY_SEPARATOR;
 
         self::$psr1SniffAbsolutePaths = self::relativeToAbsoluteSniffFiles($standardsDir, self::$psr1SniffFiles);
-
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -104,8 +103,7 @@ final class RegisterSniffsTest extends TestCase
         }
 
         return $fileList;
-
-    }//end relativeToAbsoluteSniffFiles()
+    }
 
 
     /**
@@ -117,8 +115,7 @@ final class RegisterSniffsTest extends TestCase
     {
         // Clear out the Ruleset::$sniffs property.
         self::$ruleset->sniffs = [];
-
-    }//end setUp()
+    }
 
 
     /**
@@ -133,8 +130,7 @@ final class RegisterSniffsTest extends TestCase
         // Make sure the same sniff list was recreated (but without the objects having been created yet).
         $this->assertSame(array_keys(self::$originalSniffs), array_keys(self::$ruleset->sniffs));
         $this->assertSame(array_keys(self::$originalSniffs), array_values(self::$ruleset->sniffs));
-
-    }//end testRegisteredSniffsShouldBeTheSame()
+    }
 
 
     /**
@@ -162,8 +158,7 @@ final class RegisterSniffsTest extends TestCase
         sort($actual);
 
         $this->assertSame($expected, $actual);
-
-    }//end testRegisteredSniffsWithRestrictions()
+    }
 
 
     /**
@@ -193,8 +188,7 @@ final class RegisterSniffsTest extends TestCase
         sort($actual);
 
         $this->assertSame($expected, $actual);
-
-    }//end testRegisteredSniffsWithExclusions()
+    }
 
 
     /**
@@ -226,8 +220,7 @@ final class RegisterSniffsTest extends TestCase
         self::$ruleset->registerSniffs(self::$psr1SniffAbsolutePaths, $restrictions, $exclusions);
 
         $this->assertSame($expected, array_keys(self::$ruleset->sniffs));
-
-    }//end testRegisteredSniffsBothRestrictionsAndExclusions()
+    }
 
 
     /**
@@ -254,8 +247,7 @@ final class RegisterSniffsTest extends TestCase
         // Make sure the same sniff list was recreated (but without the objects having been created yet).
         $this->assertSame(array_keys(self::$originalSniffs), array_keys(self::$ruleset->sniffs));
         $this->assertSame(array_keys(self::$originalSniffs), array_values(self::$ruleset->sniffs));
-
-    }//end testRegisterSniffsFiltersOutAbstractClasses()
+    }
 
 
     /**
@@ -282,8 +274,5 @@ final class RegisterSniffsTest extends TestCase
         // Make sure the same sniff list was recreated (but without the objects having been created yet).
         $this->assertSame(array_keys(self::$originalSniffs), array_keys(self::$ruleset->sniffs));
         $this->assertSame(array_keys(self::$originalSniffs), array_values(self::$ruleset->sniffs));
-
-    }//end testRegisteredSniffsFiltersOutFilePathsWithoutSniffsDir()
-
-
-}//end class
+    }
+}

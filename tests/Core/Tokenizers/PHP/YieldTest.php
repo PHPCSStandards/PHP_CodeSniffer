@@ -41,8 +41,7 @@ final class YieldTest extends AbstractTokenizerTestCase
         $this->assertSame('T_YIELD', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_YIELD (type)');
 
         $this->assertSame($expectedContent, $tokenArray['content'], 'Token content does not match expectation');
-
-    }//end testYieldKeyword()
+    }
 
 
     /**
@@ -60,8 +59,7 @@ final class YieldTest extends AbstractTokenizerTestCase
                 'expectedContent' => 'yield',
             ],
         ];
-
-    }//end dataYieldKeyword()
+    }
 
 
     /**
@@ -89,8 +87,7 @@ final class YieldTest extends AbstractTokenizerTestCase
         } else {
             $this->assertSame($expectedContent, $tokenArray['content'], 'Token content does not match expectation');
         }
-
-    }//end testYieldFromKeywordSingleToken()
+    }
 
 
     /**
@@ -116,8 +113,7 @@ final class YieldTest extends AbstractTokenizerTestCase
                 'expectedContent' => 'yield	from',
             ],
         ];
-
-    }//end dataYieldFromKeywordSingleToken()
+    }
 
 
     /**
@@ -155,8 +151,7 @@ final class YieldTest extends AbstractTokenizerTestCase
 
             ++$target;
         }
-
-    }//end testYieldFromKeywordMultiToken()
+    }
 
 
     /**
@@ -381,8 +376,7 @@ final class YieldTest extends AbstractTokenizerTestCase
                 ],
             ],
         ];
-
-    }//end dataYieldFromKeywordMultiToken()
+    }
 
 
     /**
@@ -402,8 +396,7 @@ final class YieldTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
         $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (type)');
-
-    }//end testYieldNonKeyword()
+    }
 
 
     /**
@@ -425,8 +418,5 @@ final class YieldTest extends AbstractTokenizerTestCase
             'from used as class constant access'  => ['/* testFromUsedForClassConstantAccess1 */'],
             'yield used as method name with ref'  => ['/* testYieldUsedAsMethodNameReturnByRef */'],
         ];
-
-    }//end dataYieldNonKeyword()
-
-
-}//end class
+    }
+}

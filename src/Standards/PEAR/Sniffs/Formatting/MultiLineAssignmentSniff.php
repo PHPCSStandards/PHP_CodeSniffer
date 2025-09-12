@@ -31,8 +31,7 @@ class MultiLineAssignmentSniff implements Sniff
     public function register()
     {
         return [T_EQUAL];
-
-    }//end register()
+    }
 
 
     /**
@@ -99,8 +98,5 @@ class MultiLineAssignmentSniff implements Sniff
             ];
             $phpcsFile->addError($error, $stackPtr, 'Indent', $data);
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

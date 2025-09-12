@@ -29,8 +29,7 @@ class ClassDeclarationSniff implements Sniff
             T_TRAIT,
             T_ENUM,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -68,8 +67,5 @@ class ClassDeclarationSniff implements Sniff
         } else {
             $phpcsFile->recordMetric($stackPtr, 'Class defined in namespace', 'yes');
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

@@ -41,8 +41,7 @@ final class EscapeshellcmdTest extends TestCase
         }
 
         $this->assertSame($expected, Common::escapeshellcmd($command));
-
-    }//end testEscapeshellcmd()
+    }
 
 
     /**
@@ -84,8 +83,5 @@ final class EscapeshellcmdTest extends TestCase
                 'expectedWin' => 'php^ -f^ ./^~home/path^ to/file.php',
             ],
         ];
-
-    }//end dataEscapeshellcmd()
-
-
-}//end class
+    }
+}

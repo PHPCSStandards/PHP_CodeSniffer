@@ -62,8 +62,7 @@ abstract class AbstractPatternSniff implements Sniff
     public function __construct()
     {
         $this->supplementaryTokens = $this->registerSupplementary();
-
-    }//end __construct()
+    }
 
 
     /**
@@ -103,8 +102,7 @@ abstract class AbstractPatternSniff implements Sniff
         }//end foreach
 
         return array_unique(array_merge($listenTypes, $this->supplementaryTokens));
-
-    }//end register()
+    }
 
 
     /**
@@ -135,8 +133,7 @@ abstract class AbstractPatternSniff implements Sniff
         }
 
         return $tokenTypes;
-
-    }//end getPatternTokenTypes()
+    }
 
 
     /**
@@ -162,8 +159,7 @@ abstract class AbstractPatternSniff implements Sniff
         }
 
         return $tokenTypes[$token];
-
-    }//end getListenerTokenPos()
+    }
 
 
     /**
@@ -228,8 +224,7 @@ abstract class AbstractPatternSniff implements Sniff
         foreach ($allErrors as $stackPtr => $error) {
             $phpcsFile->addError($error, $stackPtr, 'Found');
         }
-
-    }//end process()
+    }
 
 
     /**
@@ -685,8 +680,7 @@ abstract class AbstractPatternSniff implements Sniff
         }
 
         return $errors;
-
-    }//end processPattern()
+    }
 
 
     /**
@@ -709,8 +703,7 @@ abstract class AbstractPatternSniff implements Sniff
         $error = "Expected \"$expected\"; found \"$found\"";
 
         return $error;
-
-    }//end prepareError()
+    }
 
 
     /**
@@ -734,8 +727,7 @@ abstract class AbstractPatternSniff implements Sniff
     protected function registerSupplementary()
     {
         return [];
-
-    }//end registerSupplementary()
+    }
 
 
     /**
@@ -751,8 +743,7 @@ abstract class AbstractPatternSniff implements Sniff
      */
     protected function processSupplementary(File $phpcsFile, int $stackPtr)
     {
-
-    }//end processSupplementary()
+    }
 
 
     /**
@@ -841,8 +832,7 @@ abstract class AbstractPatternSniff implements Sniff
         }//end for
 
         return $patterns;
-
-    }//end parse()
+    }
 
 
     /**
@@ -895,8 +885,7 @@ abstract class AbstractPatternSniff implements Sniff
         }
 
         return $skip;
-
-    }//end createSkipPattern()
+    }
 
 
     /**
@@ -932,8 +921,5 @@ abstract class AbstractPatternSniff implements Sniff
         }
 
         return $patterns;
-
-    }//end createTokenPattern()
-
-
-}//end class
+    }
+}

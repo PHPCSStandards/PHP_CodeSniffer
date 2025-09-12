@@ -30,8 +30,5 @@ final class GetDeclarationNameParseError1Test extends AbstractMethodTestCase
         $target = $this->getTargetToken('/* testLiveCoding */', T_FUNCTION);
         $result = self::$phpcsFile->getDeclarationName($target);
         $this->assertSame('', $result);
-
-    }//end testGetDeclarationName()
-
-
-}//end class
+    }
+}

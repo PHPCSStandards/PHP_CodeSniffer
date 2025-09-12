@@ -75,8 +75,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
             $config        = new ConfigDouble(["--standard=$standard"]);
             self::$ruleset = new Ruleset($config);
         }//end if
-
-    }//end setUp()
+    }
 
 
     /**
@@ -87,8 +86,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
     public function tearDown(): void
     {
         file_put_contents(self::$standard, self::$contents);
-
-    }//end tearDown()
+    }
 
 
     /**
@@ -99,8 +97,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
     public function testHasSniffCodes()
     {
         $this->assertCount(49, self::$ruleset->sniffCodes);
-
-    }//end testHasSniffCodes()
+    }
 
 
     /**
@@ -117,8 +114,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
     {
         $this->assertArrayHasKey($key, self::$ruleset->sniffCodes);
         $this->assertSame($value, self::$ruleset->sniffCodes[$key]);
-
-    }//end testRegisteredSniffCodes()
+    }
 
 
     /**
@@ -328,8 +324,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
                 'PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\NestingLevelSniff',
             ],
         ];
-
-    }//end dataRegisteredSniffCodes()
+    }
 
 
     /**
@@ -351,8 +346,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
 
         $actualValue = self::$ruleset->sniffs[$sniffClass]->$propertyName;
         $this->assertSame($expectedValue, $actualValue);
-
-    }//end testSettingProperties()
+    }
 
 
     /**
@@ -418,8 +412,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
                 'expectedValue' => 10,
             ],
         ];
-
-    }//end dataSettingProperties()
+    }
 
 
     /**
@@ -437,8 +430,7 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
     {
         $this->assertArrayHasKey($sniffClass, self::$ruleset->sniffs, 'Sniff class ' . $sniffClass . ' not listed in registered sniffs');
         $this->assertXObjectNotHasProperty($propertyName, self::$ruleset->sniffs[$sniffClass]);
-
-    }//end testSettingInvalidPropertiesOnStandardsAndCategoriesSilentlyFails()
+    }
 
 
     /**
@@ -468,8 +460,5 @@ final class RuleInclusionTest extends AbstractRulesetTestCase
                 'propertyName' => 'setforsquizfilessniffs',
             ],
         ];
-
-    }//end dataSettingInvalidPropertiesOnStandardsAndCategoriesSilentlyFails()
-
-
-}//end class
+    }
+}

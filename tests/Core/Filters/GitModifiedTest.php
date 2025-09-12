@@ -47,8 +47,7 @@ final class GitModifiedTest extends AbstractFilterTestCase
             ->willReturn(['autoload.php']);
 
         $this->assertSame([$rootFile], $this->getFilteredResultsAsArray($mockObj));
-
-    }//end testFileNamePassesAsBasePathWillTranslateToDirname()
+    }
 
 
     /**
@@ -78,8 +77,7 @@ final class GitModifiedTest extends AbstractFilterTestCase
             ->willReturn($outputGitModified);
 
         $this->assertSame($expectedOutput, $this->getFilteredResultsAsArray($mockObj));
-
-    }//end testAcceptOnlyGitModified()
+    }
 
 
     /**
@@ -197,8 +195,7 @@ final class GitModifiedTest extends AbstractFilterTestCase
         ];
 
         return $testCases;
-
-    }//end dataAcceptOnlyGitModified()
+    }
 
 
     /**
@@ -229,8 +226,7 @@ final class GitModifiedTest extends AbstractFilterTestCase
         $result = $reflMethod->invoke($filter, $cmd);
 
         $this->assertSame($expected, $result);
-
-    }//end testExecAlwaysReturnsArray()
+    }
 
 
     /**
@@ -263,8 +259,5 @@ final class GitModifiedTest extends AbstractFilterTestCase
                 ],
             ],
         ];
-
-    }//end dataExecAlwaysReturnsArray()
-
-
-}//end class
+    }
+}

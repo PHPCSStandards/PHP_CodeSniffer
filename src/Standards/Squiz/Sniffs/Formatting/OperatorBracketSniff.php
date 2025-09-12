@@ -25,8 +25,7 @@ class OperatorBracketSniff implements Sniff
     public function register()
     {
         return Tokens::OPERATORS;
-
-    }//end register()
+    }
 
 
     /**
@@ -240,8 +239,7 @@ class OperatorBracketSniff implements Sniff
         if ($lastAssignment !== false && $lastAssignment > $lastBracket) {
             $this->addMissingBracketsError($phpcsFile, $stackPtr);
         }
-
-    }//end process()
+    }
 
 
     /**
@@ -363,8 +361,5 @@ class OperatorBracketSniff implements Sniff
             $phpcsFile->fixer->replaceToken($after, $tokens[$after]['content'] . ')');
             $phpcsFile->fixer->endChangeset();
         }
-
-    }//end addMissingBracketsError()
-
-
-}//end class
+    }
+}

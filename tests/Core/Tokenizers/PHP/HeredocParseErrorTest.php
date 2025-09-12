@@ -34,8 +34,5 @@ final class HeredocParseErrorTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_START_HEREDOC (code)');
         $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_START_HEREDOC (type)');
-
-    }//end testMergeConflict()
-
-
-}//end class
+    }
+}

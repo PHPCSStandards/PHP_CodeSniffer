@@ -36,8 +36,7 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
         // Can't test the exact value as "auto" will resolve differently depending on the machine running the tests.
         $this->assertIsInt($config->reportWidth, 'Report width is not an integer');
         $this->assertGreaterThan(0, $config->reportWidth, 'Report width is not greater than 0');
-
-    }//end testReportWidthDefault()
+    }
 
 
     /**
@@ -62,8 +61,7 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
         // Can't test the exact value as "auto" will resolve differently depending on the machine running the tests.
         $this->assertIsInt($config->reportWidth, 'Report width is not an integer');
         $this->assertGreaterThan(0, $config->reportWidth, 'Report width is not greater than 0');
-
-    }//end testReportWidthWillBeSetFromAutoWhenNotFoundInConfFile()
+    }
 
 
     /**
@@ -86,8 +84,7 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
 
         $config = new Config(['--standard=PSR1']);
         $this->assertSame(120, $config->reportWidth);
-
-    }//end testReportWidthCanBeSetFromConfFile()
+    }
 
 
     /**
@@ -108,8 +105,7 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
 
         $config = new Config();
         $this->assertSame(100, $config->reportWidth);
-
-    }//end testReportWidthCanBeSetFromCLI()
+    }
 
 
     /**
@@ -131,8 +127,7 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
 
         $config = new Config();
         $this->assertSame(100, $config->reportWidth);
-
-    }//end testReportWidthWhenSetFromCLIFirstValuePrevails()
+    }
 
 
     /**
@@ -164,8 +159,7 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
 
         $config = new Config($cliArgs);
         $this->assertSame(180, $config->reportWidth);
-
-    }//end testReportWidthSetFromCLIOverrulesConfFile()
+    }
 
 
     /**
@@ -183,8 +177,7 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
         // Can't test the exact value as "auto" will resolve differently depending on the machine running the tests.
         $this->assertIsInt($config->reportWidth, 'Report width is not an integer');
         $this->assertGreaterThan(0, $config->reportWidth, 'Report width is not greater than 0');
-
-    }//end testReportWidthInputHandlingForAuto()
+    }
 
 
     /**
@@ -204,8 +197,7 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
         $config->reportWidth = $value;
 
         $this->assertSame($expected, $config->reportWidth);
-
-    }//end testReportWidthInputHandling()
+    }
 
 
     /**
@@ -253,8 +245,5 @@ final class ReportWidthTest extends AbstractRealConfigTestCase
                 'expected' => 180,
             ],
         ];
-
-    }//end dataReportWidthInputHandling()
-
-
-}//end class
+    }
+}

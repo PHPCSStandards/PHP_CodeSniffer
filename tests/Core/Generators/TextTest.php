@@ -48,8 +48,7 @@ final class TextTest extends TestCase
 
         $generator = new Text($ruleset);
         $generator->generate();
-
-    }//end testDocs()
+    }
 
 
     /**
@@ -73,8 +72,7 @@ final class TextTest extends TestCase
                 'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputStructureDocs.txt',
             ],
         ];
-
-    }//end dataDocs()
+    }
 
 
     /**
@@ -103,8 +101,7 @@ final class TextTest extends TestCase
 
         $generator = new Text($ruleset);
         $generator->generate();
-
-    }//end testDocSpecifics()
+    }
 
 
     /**
@@ -228,8 +225,5 @@ final class TextTest extends TestCase
                 'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputInvalidStandardNoContent.txt',
             ],
         ];
-
-    }//end dataDocSpecifics()
-
-
-}//end class
+    }
+}

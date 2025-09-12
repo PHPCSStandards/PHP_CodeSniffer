@@ -39,8 +39,7 @@ final class ScopeIndentUnitTest extends AbstractSniffTestCase
         } else {
             $config->tabWidth = 0;
         }
-
-    }//end setCliValues()
+    }
 
 
     /**
@@ -174,8 +173,7 @@ final class ScopeIndentUnitTest extends AbstractSniffTestCase
             1633 => 1,
             1634 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -189,8 +187,5 @@ final class ScopeIndentUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

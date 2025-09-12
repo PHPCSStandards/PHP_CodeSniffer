@@ -36,8 +36,7 @@ final class DoubleArrowTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_DOUBLE_ARROW, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_DOUBLE_ARROW (code)');
         $this->assertSame('T_DOUBLE_ARROW', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_DOUBLE_ARROW (type)');
-
-    }//end testDoubleArrow()
+    }
 
 
     /**
@@ -97,8 +96,7 @@ final class DoubleArrowTest extends AbstractTokenizerTestCase
             'long_array_with_default_in_key_with_match'  => ['/* testLongArrayArrowWithClassConstantKeyWithNestedMatch */'],
             'short_array_with_default_in_key_with_match' => ['/* testShortArrayArrowWithClassConstantKeyWithNestedMatch */'],
         ];
-
-    }//end dataDoubleArrow()
+    }
 
 
     /**
@@ -121,8 +119,7 @@ final class DoubleArrowTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_MATCH_ARROW, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_MATCH_ARROW (code)');
         $this->assertSame('T_MATCH_ARROW', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_MATCH_ARROW (type)');
-
-    }//end testMatchArrow()
+    }
 
 
     /**
@@ -184,8 +181,7 @@ final class DoubleArrowTest extends AbstractTokenizerTestCase
             'in_long_array_value_with_default_key'    => ['/* testMatchArrowNestedInLongArrayWithClassConstantKey */'],
             'in_short_array_value_with_default_key'   => ['/* testMatchArrowNestedInShortArrayWithClassConstantKey */'],
         ];
-
-    }//end dataMatchArrow()
+    }
 
 
     /**
@@ -208,8 +204,7 @@ final class DoubleArrowTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_FN_ARROW, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_FN_ARROW (code)');
         $this->assertSame('T_FN_ARROW', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_FN_ARROW (type)');
-
-    }//end testFnArrow()
+    }
 
 
     /**
@@ -230,8 +225,5 @@ final class DoubleArrowTest extends AbstractTokenizerTestCase
 
             'in_complex_match_value_in_short_array' => ['/* testFnArrowInComplexMatchValueInShortArrayValue */'],
         ];
-
-    }//end dataFnArrow()
-
-
-}//end class
+    }
+}

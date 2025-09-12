@@ -31,8 +31,7 @@ final class EvalUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -49,8 +48,5 @@ final class EvalUnitTest extends AbstractSniffTestCase
             2 => 1,
             4 => 1,
         ];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

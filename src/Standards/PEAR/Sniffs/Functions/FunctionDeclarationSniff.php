@@ -37,8 +37,7 @@ class FunctionDeclarationSniff implements Sniff
             T_FUNCTION,
             T_CLOSURE,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -193,8 +192,7 @@ class FunctionDeclarationSniff implements Sniff
         } else {
             $this->processSingleLineDeclaration($phpcsFile, $stackPtr, $tokens);
         }
-
-    }//end process()
+    }
 
 
     /**
@@ -230,8 +228,7 @@ class FunctionDeclarationSniff implements Sniff
         }
 
         return false;
-
-    }//end isMultiLineDeclaration()
+    }
 
 
     /**
@@ -257,8 +254,7 @@ class FunctionDeclarationSniff implements Sniff
 
         $sniff->checkClosures = true;
         $sniff->process($phpcsFile, $stackPtr);
-
-    }//end processSingleLineDeclaration()
+    }
 
 
     /**
@@ -355,8 +351,7 @@ class FunctionDeclarationSniff implements Sniff
                 }
             }
         }
-
-    }//end processMultiLineDeclaration()
+    }
 
 
     /**
@@ -529,8 +524,5 @@ class FunctionDeclarationSniff implements Sniff
                 continue;
             }
         }//end for
-
-    }//end processArgumentList()
-
-
-}//end class
+    }
+}

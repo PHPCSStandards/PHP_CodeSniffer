@@ -42,8 +42,7 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
     {
         self::$sniff = new AbstractArraySniffTestable();
         parent::setUpBeforeClass();
-
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -63,8 +62,7 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
-    }//end testSimpleValues()
+    }
 
 
     /**
@@ -99,8 +97,7 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
-    }//end testSimpleKeyValues()
+    }
 
 
     /**
@@ -132,8 +129,7 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
-    }//end testMissingKeys()
+    }
 
 
     /**
@@ -162,8 +158,7 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
-    }//end testMultiTokenKeys()
+    }
 
 
     /**
@@ -192,8 +187,7 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
-    }//end testMissingKeysCoalesceTernary()
+    }
 
 
     /**
@@ -228,8 +222,7 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
-    }//end testTernaryValues()
+    }
 
 
     /**
@@ -252,8 +245,7 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
-    }//end testHeredocValues()
+    }
 
 
     /**
@@ -288,8 +280,5 @@ final class AbstractArraySniffTest extends AbstractMethodTestCase
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
-    }//end testArrowFunctionValue()
-
-
-}//end class
+    }
+}

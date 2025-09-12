@@ -38,8 +38,7 @@ class ForLoopShouldBeWhileLoopSniff implements Sniff
     public function register()
     {
         return [T_FOR];
-
-    }//end register()
+    }
 
 
     /**
@@ -84,8 +83,5 @@ class ForLoopShouldBeWhileLoopSniff implements Sniff
             $error = 'This FOR loop can be simplified to a WHILE loop';
             $phpcsFile->addWarning($error, $stackPtr, 'CanSimplify');
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

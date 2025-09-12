@@ -113,8 +113,7 @@ class Cbf implements Report
         echo $report['filename'] . ">>$errorCount>>$warningCount>>$fixableCount>>$fixedCount" . PHP_EOL;
 
         return $fixed;
-
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -249,8 +248,7 @@ class Cbf implements Report
         }
 
         echo PHP_EOL . str_repeat('-', $width) . PHP_EOL . PHP_EOL;
-
-    }//end generate()
+    }
 
 
     /**
@@ -270,9 +268,7 @@ class Cbf implements Report
              */
             public function __construct()
             {
-            }//end __construct()
-
-
+            }
         };
 
         $reporter->totalFiles           = 1;
@@ -284,8 +280,5 @@ class Cbf implements Report
         $reporter->totalFixedWarnings   = $phpcsFile->getFixedWarningCount();
 
         return $reporter;
-
-    }//end createReporterInstance()
-
-
-}//end class
+    }
+}

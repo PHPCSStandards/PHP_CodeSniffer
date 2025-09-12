@@ -25,8 +25,7 @@ class DisallowComparisonAssignmentSniff implements Sniff
     public function register()
     {
         return [T_EQUAL];
-
-    }//end register()
+    }
 
 
     /**
@@ -103,8 +102,5 @@ class DisallowComparisonAssignmentSniff implements Sniff
                 break;
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

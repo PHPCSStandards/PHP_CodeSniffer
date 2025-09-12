@@ -59,8 +59,7 @@ final class SingleLineDocBlockTest extends CommentTestCase
                 'expectedTags' => [2],
             ],
         ];
-
-    }//end dataDocblockOpenerCloser()
+    }
 
 
     /**
@@ -79,8 +78,7 @@ final class SingleLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', [T_COMMENT, T_DOC_COMMENT_OPEN_TAG]);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
-    }//end testEmptyBlockCommentNoWhiteSpace()
+    }
 
 
     /**
@@ -100,8 +98,7 @@ final class SingleLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
-    }//end testEmptyDocblockNoWhiteSpace()
+    }
 
 
     /**
@@ -120,8 +117,7 @@ final class SingleLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
-    }//end testEmptyDocblockWithWhiteSpace()
+    }
 
 
     /**
@@ -141,8 +137,7 @@ final class SingleLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
-    }//end testSingleLineDocblockNoTag()
+    }
 
 
     /**
@@ -164,8 +159,7 @@ final class SingleLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
-    }//end testSingleLineDocblockWithTag1()
+    }
 
 
     /**
@@ -187,8 +181,7 @@ final class SingleLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
-    }//end testSingleLineDocblockWithTag2()
+    }
 
 
     /**
@@ -210,8 +203,5 @@ final class SingleLineDocBlockTest extends CommentTestCase
         $target = $this->getTargetToken('/* ' . __FUNCTION__ . ' */', T_DOC_COMMENT_OPEN_TAG);
 
         $this->checkTokenSequence($target, $expectedSequence);
-
-    }//end testSingleLineDocblockWithTag3()
-
-
-}//end class
+    }
+}

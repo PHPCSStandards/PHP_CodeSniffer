@@ -44,8 +44,7 @@ final class LowercaseDeclarationUnitTest extends AbstractSniffTestCase
             21 => 1,
             24 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -59,8 +58,5 @@ final class LowercaseDeclarationUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

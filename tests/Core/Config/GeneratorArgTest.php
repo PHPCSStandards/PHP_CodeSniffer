@@ -31,8 +31,7 @@ final class GeneratorArgTest extends TestCase
         if (PHP_CODESNIFFER_CBF === true) {
             $this->markTestSkipped('This test needs CS mode to run');
         }
-
-    }//end setUp()
+    }
 
 
     /**
@@ -50,8 +49,7 @@ final class GeneratorArgTest extends TestCase
         $config = new ConfigDouble(["--generator=$argumentValue"]);
 
         $this->assertSame($expectedPropertyValue, $config->generator);
-
-    }//end testValidGenerators()
+    }
 
 
     /**
@@ -89,8 +87,7 @@ final class GeneratorArgTest extends TestCase
                 'expectedPropertyValue' => 'HTML',
             ],
         ];
-
-    }//end dataValidGeneratorNames()
+    }
 
 
     /**
@@ -109,8 +106,7 @@ final class GeneratorArgTest extends TestCase
         );
 
         $this->assertSame('Text', $config->generator);
-
-    }//end testOnlySetOnce()
+    }
 
 
     /**
@@ -130,8 +126,7 @@ final class GeneratorArgTest extends TestCase
         $this->expectExceptionMessage($message);
 
         new ConfigDouble(["--generator={$generatorName}"]);
-
-    }//end testInvalidGenerator()
+    }
 
 
     /**
@@ -148,8 +143,5 @@ final class GeneratorArgTest extends TestCase
             ['Text,HTML'],
             [''],
         ];
-
-    }//end dataInvalidGeneratorNames()
-
-
-}//end class
+    }
+}

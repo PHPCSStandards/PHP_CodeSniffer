@@ -95,8 +95,7 @@ class Filter extends RecursiveFilterIterator
         if (is_dir($basedir) === true || Common::isPharFile($basedir) === true) {
             $this->isBasedirDir = true;
         }
-
-    }//end __construct()
+    }
 
 
     /**
@@ -137,8 +136,7 @@ class Filter extends RecursiveFilterIterator
 
         $this->acceptedPaths[$realPath] = true;
         return true;
-
-    }//end accept()
+    }
 
 
     /**
@@ -165,8 +163,7 @@ class Filter extends RecursiveFilterIterator
         $children->ignoreFilePatterns = $this->ignoreFilePatterns;
         $children->acceptedPaths      = $this->acceptedPaths;
         return $children;
-
-    }//end getChildren()
+    }
 
 
     /**
@@ -214,8 +211,7 @@ class Filter extends RecursiveFilterIterator
         }
 
         return true;
-
-    }//end shouldProcessFile()
+    }
 
 
     /**
@@ -298,8 +294,5 @@ class Filter extends RecursiveFilterIterator
         }//end foreach
 
         return false;
-
-    }//end shouldIgnorePath()
-
-
-}//end class
+    }
+}

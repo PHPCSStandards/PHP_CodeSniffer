@@ -69,8 +69,7 @@ final class RequireExplicitBooleanOperatorPrecedenceUnitTest extends AbstractSni
             103 => 1,
             116 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -84,8 +83,5 @@ final class RequireExplicitBooleanOperatorPrecedenceUnitTest extends AbstractSni
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

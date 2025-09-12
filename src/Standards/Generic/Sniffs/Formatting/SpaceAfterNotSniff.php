@@ -39,8 +39,7 @@ class SpaceAfterNotSniff implements Sniff
     public function register()
     {
         return [T_BOOLEAN_NOT];
-
-    }//end register()
+    }
 
 
     /**
@@ -126,8 +125,5 @@ class SpaceAfterNotSniff implements Sniff
                 $phpcsFile->fixer->endChangeset();
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

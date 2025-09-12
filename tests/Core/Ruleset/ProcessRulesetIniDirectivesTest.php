@@ -64,8 +64,7 @@ final class ProcessRulesetIniDirectivesTest extends TestCase
                 self::$originalIniValues[$name] = $value;
             }
         }
-
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -83,8 +82,7 @@ final class ProcessRulesetIniDirectivesTest extends TestCase
 
             self::$initialized = true;
         }
-
-    }//end setUp()
+    }
 
 
     /**
@@ -101,8 +99,7 @@ final class ProcessRulesetIniDirectivesTest extends TestCase
 
             ini_set($name, $value);
         }
-
-    }//end tearDownAfterClass()
+    }
 
 
     /**
@@ -123,8 +120,7 @@ final class ProcessRulesetIniDirectivesTest extends TestCase
     public function testIniDirectives($name, $expected)
     {
         $this->assertSame($expected, ini_get($name));
-
-    }//end testIniDirectives()
+    }
 
 
     /**
@@ -168,8 +164,5 @@ final class ProcessRulesetIniDirectivesTest extends TestCase
                 'expected' => 'grandchild A',
             ],
         ];
-
-    }//end dataIniDirectives()
-
-
-}//end class
+    }
+}

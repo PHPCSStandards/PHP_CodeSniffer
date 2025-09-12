@@ -49,8 +49,7 @@ final class ConcatenationSpacingUnitTest extends AbstractSniffTestCase
             47 => 2,
             49 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -64,8 +63,5 @@ final class ConcatenationSpacingUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

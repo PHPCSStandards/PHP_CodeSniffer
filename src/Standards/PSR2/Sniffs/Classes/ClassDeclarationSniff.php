@@ -57,8 +57,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
 
         $this->processOpen($phpcsFile, $stackPtr);
         $this->processClose($phpcsFile, $stackPtr);
-
-    }//end process()
+    }
 
 
     /**
@@ -460,8 +459,7 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                 $nextComma = ($className + 1);
             }//end if
         }//end foreach
-
-    }//end processOpen()
+    }
 
 
     /**
@@ -516,8 +514,5 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
                 $phpcsFile->addError($error, $closeBrace, 'CloseBraceSameLine', $data);
             }
         }
-
-    }//end processClose()
-
-
-}//end class
+    }
+}

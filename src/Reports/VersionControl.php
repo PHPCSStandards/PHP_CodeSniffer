@@ -127,8 +127,7 @@ abstract class VersionControl implements Report
         }
 
         return true;
-
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -345,8 +344,7 @@ abstract class VersionControl implements Report
         }
 
         echo PHP_EOL . str_repeat('-', $width) . PHP_EOL . PHP_EOL;
-
-    }//end generate()
+    }
 
 
     /**
@@ -367,6 +365,4 @@ abstract class VersionControl implements Report
      * @return array
      */
     abstract protected function getBlameContent(string $filename);
-
-
-}//end class
+}

@@ -47,8 +47,5 @@ final class PropertyTypeHandlingOldArrayFormatTest extends AbstractRulesetTestCa
         $standard = __DIR__ . '/PropertyTypeHandlingOldArrayFormatTest.xml';
         $config   = new ConfigDouble(["--standard=$standard"]);
         new Ruleset($config);
-
-    }//end testUsingOldSchoolArrayFormatThrowsError()
-
-
-}//end class
+    }
+}

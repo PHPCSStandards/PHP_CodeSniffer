@@ -46,8 +46,7 @@ final class EmptyStatementUnitTest extends AbstractSniffTestCase
             72 => 2,
             74 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -61,8 +60,5 @@ final class EmptyStatementUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

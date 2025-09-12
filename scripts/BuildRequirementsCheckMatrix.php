@@ -71,8 +71,7 @@ class BuildRequirementsCheckMatrix
         );
 
         return $builds;
-
-    }//end getBuilds()
+    }
 
 
     /**
@@ -105,8 +104,7 @@ class BuildRequirementsCheckMatrix
         }
 
         return $builds;
-
-    }//end getValidBuilds()
+    }
 
 
     /**
@@ -137,8 +135,7 @@ class BuildRequirementsCheckMatrix
         }
 
         return $builds;
-
-    }//end getInvalidPHPBuilds()
+    }
 
 
     /**
@@ -181,8 +178,5 @@ class BuildRequirementsCheckMatrix
         }//end foreach
 
         return $builds;
-
-    }//end getMissingExtensionsBuilds()
-
-
-}//end class
+    }
+}

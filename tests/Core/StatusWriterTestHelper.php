@@ -32,8 +32,7 @@ trait StatusWriterTestHelper
     protected function setUp(): void
     {
         $this->redirectStatusWriterOutputToStream();
-
-    }//end setUp()
+    }
 
 
     /**
@@ -46,8 +45,7 @@ trait StatusWriterTestHelper
     protected function tearDown(): void
     {
         $this->resetStatusWriterProperties();
-
-    }//end tearDown()
+    }
 
 
     /**
@@ -71,8 +69,7 @@ trait StatusWriterTestHelper
         (PHP_VERSION_ID < 80100) && $streamProperty->setAccessible(true);
         $streamProperty->setValue(null, $this->stream);
         (PHP_VERSION_ID < 80100) && $streamProperty->setAccessible(false);
-
-    }//end redirectStatusWriterOutputToStream()
+    }
 
 
     /**
@@ -89,8 +86,7 @@ trait StatusWriterTestHelper
         (PHP_VERSION_ID < 80100) && $streamProperty->setAccessible(true);
         $streamProperty->setValue(null, STDERR);
         (PHP_VERSION_ID < 80100) && $streamProperty->setAccessible(false);
-
-    }//end resetStatusWriterStream()
+    }
 
 
     /**
@@ -105,8 +101,7 @@ trait StatusWriterTestHelper
         }
 
         $this->resetStatusWriterStream();
-
-    }//end resetStatusWriterProperties()
+    }
 
 
     /**
@@ -117,8 +112,7 @@ trait StatusWriterTestHelper
     public function expectNoStdoutOutput()
     {
         $this->expectOutputString('');
-
-    }//end expectNoStdoutOutput()
+    }
 
 
     /**
@@ -135,8 +129,7 @@ trait StatusWriterTestHelper
 
         $this->assertIsString($output);
         $this->assertSame($expected, $output);
-
-    }//end assertStderrOutputSameString()
+    }
 
 
     /**
@@ -159,8 +152,5 @@ trait StatusWriterTestHelper
             // PHPUnit < 9.1.0.
             $this->assertRegExp($regex, $output);
         }
-
-    }//end assertStderrOutputMatchesRegex()
-
-
-}//end trait
+    }
+}

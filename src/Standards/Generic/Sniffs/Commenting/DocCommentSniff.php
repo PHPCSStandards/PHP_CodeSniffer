@@ -25,8 +25,7 @@ class DocCommentSniff implements Sniff
     public function register()
     {
         return [T_DOC_COMMENT_OPEN_TAG];
-
-    }//end register()
+    }
 
 
     /**
@@ -340,8 +339,5 @@ class DocCommentSniff implements Sniff
 
             $foundTags[$tagName] = true;
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

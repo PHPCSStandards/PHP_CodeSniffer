@@ -38,8 +38,7 @@ final class LowercasePHPFunctionsUnitTest extends AbstractSniffTestCase
             35 => 1,
             36 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -53,8 +52,5 @@ final class LowercasePHPFunctionsUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

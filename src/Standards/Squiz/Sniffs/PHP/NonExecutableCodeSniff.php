@@ -48,8 +48,7 @@ class NonExecutableCodeSniff implements Sniff
             T_EXIT,
             T_GOTO,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -296,8 +295,5 @@ class NonExecutableCodeSniff implements Sniff
                 $lastLine = $line;
             }
         }//end for
-
-    }//end process()
-
-
-}//end class
+    }
+}

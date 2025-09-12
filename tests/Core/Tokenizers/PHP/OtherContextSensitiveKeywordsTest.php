@@ -30,8 +30,7 @@ final class OtherContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
     public static function setUpBeforeClass(): void
     {
         parent::clearResolvedTokensCache();
-
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -51,8 +50,7 @@ final class OtherContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
         $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (type)');
-
-    }//end testStrings()
+    }
 
 
     /**
@@ -93,8 +91,7 @@ final class OtherContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
             'constant declaration: self as name after type'                     => ['/* testSelfIsNameForTypedConstant */'],
             'constant declaration: parent as name after type'                   => ['/* testParentIsNameForTypedConstant */'],
         ];
-
-    }//end dataStrings()
+    }
 
 
     /**
@@ -123,8 +120,7 @@ final class OtherContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
             $tokenArray['type'],
             'Token tokenized as ' . $tokenArray['type'] . ', not ' . $expectedTokenType . ' (type)'
         );
-
-    }//end testKeywords()
+    }
 
 
     /**
@@ -736,8 +732,5 @@ final class OtherContextSensitiveKeywordsTest extends AbstractTokenizerTestCase
                 'expectedTokenType' => 'T_NULL',
             ],
         ];
-
-    }//end dataKeywords()
-
-
-}//end class
+    }
+}

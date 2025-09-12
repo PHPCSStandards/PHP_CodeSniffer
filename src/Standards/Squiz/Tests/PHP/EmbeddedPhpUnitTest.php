@@ -219,8 +219,7 @@ final class EmbeddedPhpUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -243,8 +242,5 @@ final class EmbeddedPhpUnitTest extends AbstractSniffTestCase
         }
 
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

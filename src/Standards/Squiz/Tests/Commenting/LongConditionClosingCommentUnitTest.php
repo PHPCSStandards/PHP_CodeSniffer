@@ -61,8 +61,7 @@ final class LongConditionClosingCommentUnitTest extends AbstractSniffTestCase
             1008 => 1,
             1032 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -76,8 +75,5 @@ final class LongConditionClosingCommentUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

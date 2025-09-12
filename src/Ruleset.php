@@ -265,8 +265,7 @@ class Ruleset
         }
 
         $this->displayCachedMessages();
-
-    }//end __construct()
+    }
 
 
     /**
@@ -340,8 +339,7 @@ class Ruleset
         if (count($this->deprecatedSniffs) > 0) {
             echo PHP_EOL . '* Sniffs marked with an asterisk are deprecated.' . PHP_EOL;
         }
-
-    }//end explain()
+    }
 
 
     /**
@@ -352,8 +350,7 @@ class Ruleset
     public function hasSniffDeprecations()
     {
         return (count($this->deprecatedSniffs) > 0);
-
-    }//end hasSniffDeprecations()
+    }
 
 
     /**
@@ -482,8 +479,7 @@ class Ruleset
         $closer = wordwrap('Deprecated sniffs are still run, but will stop working at some point in the future.', $reportWidth, PHP_EOL);
         StatusWriter::writeNewline(2);
         StatusWriter::write($closer, 0, 2);
-
-    }//end showSniffDeprecations()
+    }
 
 
     /**
@@ -511,8 +507,7 @@ class Ruleset
         }
 
         $this->msgCache->display();
-
-    }//end displayCachedMessages()
+    }
 
 
     /**
@@ -883,8 +878,7 @@ class Ruleset
         }
 
         return $files;
-
-    }//end processRuleset()
+    }
 
 
     /**
@@ -942,8 +936,7 @@ class Ruleset
         }//end foreach
 
         return $sniffs;
-
-    }//end expandSniffDirectory()
+    }
 
 
     /**
@@ -1125,8 +1118,7 @@ class Ruleset
                 return $this->processRuleset($ref, ($depth + 2));
             }
         }//end if
-
-    }//end expandRulesetReference()
+    }
 
 
     /**
@@ -1380,8 +1372,7 @@ class Ruleset
                 }
             }//end foreach
         }//end foreach
-
-    }//end processRule()
+    }
 
 
     /**
@@ -1415,8 +1406,7 @@ class Ruleset
         }
 
         return false;
-
-    }//end shouldProcessElement()
+    }
 
 
     /**
@@ -1509,8 +1499,7 @@ class Ruleset
         }//end foreach
 
         $this->sniffs = $listeners;
-
-    }//end registerSniffs()
+    }
 
 
     /**
@@ -1598,8 +1587,7 @@ class Ruleset
                 }
             }
         }//end foreach
-
-    }//end populateTokenListeners()
+    }
 
 
     /**
@@ -1679,8 +1667,7 @@ class Ruleset
         } else {
             $sniffObject->$propertyName = $value;
         }
-
-    }//end setSniffProperty()
+    }
 
 
     /**
@@ -1723,8 +1710,7 @@ class Ruleset
         }//end if
 
         return $value;
-
-    }//end getRealPropertyValue()
+    }
 
 
     /**
@@ -1749,8 +1735,7 @@ class Ruleset
         }
 
         return [];
-
-    }//end getIgnorePatterns()
+    }
 
 
     /**
@@ -1775,8 +1760,5 @@ class Ruleset
         }
 
         return [];
-
-    }//end getIncludePatterns()
-
-
-}//end class
+    }
+}

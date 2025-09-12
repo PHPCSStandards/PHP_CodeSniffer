@@ -31,8 +31,7 @@ class ValidClassNameSniff implements Sniff
             T_TRAIT,
             T_ENUM,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -79,8 +78,5 @@ class ValidClassNameSniff implements Sniff
         } else {
             $phpcsFile->recordMetric($stackPtr, 'PascalCase class name', 'yes');
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

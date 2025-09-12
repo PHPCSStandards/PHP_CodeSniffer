@@ -45,8 +45,7 @@ final class FunctionCommentThrowTagUnitTest extends AbstractSniffTestCase
             519 => 1,
             530 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -60,8 +59,5 @@ final class FunctionCommentThrowTagUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

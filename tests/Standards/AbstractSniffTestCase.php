@@ -86,8 +86,7 @@ TEMPLATE;
     public static function tearDownAfterClass(): void
     {
         @unlink(self::RULESET_FILENAME);
-
-    }//end tearDownAfterClass()
+    }
 
 
     /**
@@ -121,8 +120,7 @@ TEMPLATE;
         sort($testFiles, SORT_NATURAL);
 
         return $testFiles;
-
-    }//end getTestFiles()
+    }
 
 
     /**
@@ -133,8 +131,7 @@ TEMPLATE;
     protected function shouldSkipTest()
     {
         return false;
-
-    }//end shouldSkipTest()
+    }
 
 
     /**
@@ -244,8 +241,7 @@ TEMPLATE;
         if (empty($failureMessages) === false) {
             $this->fail(implode(PHP_EOL, $failureMessages));
         }
-
-    }//end testSniff()
+    }
 
 
     /**
@@ -434,8 +430,7 @@ TEMPLATE;
         }//end foreach
 
         return $failureMessages;
-
-    }//end generateFailureMessages()
+    }
 
 
     /**
@@ -448,8 +443,7 @@ TEMPLATE;
      */
     public function setCliValues(string $testFile, Config $config)
     {
-
-    }//end setCliValues()
+    }
 
 
     /**
@@ -472,6 +466,4 @@ TEMPLATE;
      * @return array<int, int>
      */
     abstract protected function getWarningList();
-
-
-}//end class
+}

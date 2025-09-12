@@ -42,8 +42,7 @@ final class GeneratorTest extends TestCase
 
         $generator = new MockGenerator($ruleset);
         $this->assertSame($expected, $generator->docFiles);
-
-    }//end testConstructor()
+    }
 
 
     /**
@@ -88,8 +87,7 @@ final class GeneratorTest extends TestCase
                 ],
             ],
         ];
-
-    }//end dataConstructor()
+    }
 
 
     /**
@@ -109,8 +107,7 @@ final class GeneratorTest extends TestCase
 
         $generator = new MockGenerator($ruleset);
         $generator->generate();
-
-    }//end testGeneratingInvalidDocsResultsInException()
+    }
 
 
     /**
@@ -133,8 +130,7 @@ final class GeneratorTest extends TestCase
 
         $generator = new MockGenerator($ruleset);
         $generator->generate();
-
-    }//end testGeneratingDocs()
+    }
 
 
     /**
@@ -169,8 +165,7 @@ final class GeneratorTest extends TestCase
                 'expected' => $multidocExpected,
             ],
         ];
-
-    }//end dataGeneratingDocs()
+    }
 
 
     /**
@@ -192,8 +187,5 @@ final class GeneratorTest extends TestCase
 
         $generator = new MockGenerator($ruleset);
         $generator->generate();
-
-    }//end testGetTitleFallbackToFilename()
-
-
-}//end class
+    }
+}

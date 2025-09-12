@@ -44,8 +44,7 @@ final class DisallowAlternativePHPTagsUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -78,8 +77,5 @@ final class DisallowAlternativePHPTagsUnitTest extends AbstractSniffTestCase
         }
 
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

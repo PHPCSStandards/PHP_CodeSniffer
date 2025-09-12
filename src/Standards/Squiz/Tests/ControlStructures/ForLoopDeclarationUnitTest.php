@@ -70,8 +70,7 @@ final class ForLoopDeclarationUnitTest extends AbstractSniffTestCase
         default:
             return [];
         }//end switch
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -87,8 +86,5 @@ final class ForLoopDeclarationUnitTest extends AbstractSniffTestCase
     public function getWarningList($testFile = '')
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

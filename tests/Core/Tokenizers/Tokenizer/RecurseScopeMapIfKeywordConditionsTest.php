@@ -69,8 +69,5 @@ final class RecurseScopeMapIfKeywordConditionsTest extends AbstractTokenizerTest
                 $tokens[$tokenArray['scope_closer']]['type']
             )
         );
-
-    }//end testIfElseWithNestedCaseMissingBreakSharedClosers()
-
-
-}//end class
+    }
+}

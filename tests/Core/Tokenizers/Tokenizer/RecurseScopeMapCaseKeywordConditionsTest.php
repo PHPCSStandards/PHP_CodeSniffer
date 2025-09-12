@@ -37,8 +37,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
         $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
         $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');
         $this->assertArrayNotHasKey('scope_closer', $tokenArray, 'Scope closer is set');
-
-    }//end testEnumCases()
+    }
 
 
     /**
@@ -59,8 +58,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
             'enum case, after switch statement'                          => ['/* testEnumCaseAfterSwitch */'],
             'enum case, after switch statement using alternative syntax' => ['/* testEnumCaseAfterSwitchWithEndSwitch */'],
         ];
-
-    }//end dataEnumCases()
+    }
 
 
     /**
@@ -125,8 +123,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
                 $tokens[$tokenArray['scope_closer']]['type']
             )
         );
-
-    }//end testNotEnumCases()
+    }
 
 
     /**
@@ -216,8 +213,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
                 ],
             ],
         ];
-
-    }//end dataNotEnumCases()
+    }
 
 
     /**
@@ -242,8 +238,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
         $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
         $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');
         $this->assertArrayNotHasKey('scope_closer', $tokenArray, 'Scope closer is set');
-
-    }//end testKeywordAsEnumCaseNameShouldBeString()
+    }
 
 
     /**
@@ -265,8 +260,5 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
             '"array" as case name'     => ['/* testKeywordAsEnumCaseNameShouldBeString7 */'],
             '"exit" as case name'      => ['/* testKeywordAsEnumCaseNameShouldBeString8 */'],
         ];
-
-    }//end dataKeywordAsEnumCaseNameShouldBeString()
-
-
-}//end class
+    }
+}

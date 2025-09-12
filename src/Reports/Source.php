@@ -60,8 +60,7 @@ class Source implements Report
         }
 
         return true;
-
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -264,8 +263,7 @@ class Source implements Report
         }
 
         echo PHP_EOL . str_repeat('-', $width) . PHP_EOL . PHP_EOL;
-
-    }//end generate()
+    }
 
 
     /**
@@ -325,8 +323,5 @@ class Source implements Report
         $friendlyName[0] = strtoupper($friendlyName[0]);
 
         return $friendlyName;
-
-    }//end makeFriendlyName()
-
-
-}//end class
+    }
+}

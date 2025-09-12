@@ -57,8 +57,7 @@ final class AttributesTest extends AbstractTokenizerTestCase
         );
 
         $this->assertSame($tokenCodes, $map);
-
-    }//end testAttribute()
+    }
 
 
     /**
@@ -266,8 +265,7 @@ final class AttributesTest extends AbstractTokenizerTestCase
                 ],
             ],
         ];
-
-    }//end dataAttribute()
+    }
 
 
     /**
@@ -290,8 +288,7 @@ final class AttributesTest extends AbstractTokenizerTestCase
         $this->assertSame(T_WHITESPACE, $tokens[($closer + 1)]['code']);
         $this->assertSame(T_ATTRIBUTE, $tokens[($closer + 2)]['code']);
         $this->assertArrayHasKey('attribute_closer', $tokens[($closer + 2)]);
-
-    }//end testTwoAttributesOnTheSameLine()
+    }
 
 
     /**
@@ -313,8 +310,7 @@ final class AttributesTest extends AbstractTokenizerTestCase
         $closer = $tokens[$attribute]['attribute_closer'];
         $this->assertSame(T_WHITESPACE, $tokens[($closer + 1)]['code']);
         $this->assertSame(T_COMMENT, $tokens[($closer + 2)]['code']);
-
-    }//end testAttributeAndLineComment()
+    }
 
 
     /**
@@ -366,8 +362,7 @@ final class AttributesTest extends AbstractTokenizerTestCase
         );
 
         $this->assertSame($tokenCodes, $map);
-
-    }//end testAttributeOnParameters()
+    }
 
 
     /**
@@ -421,8 +416,7 @@ final class AttributesTest extends AbstractTokenizerTestCase
                 ],
             ],
         ];
-
-    }//end dataAttributeOnParameters()
+    }
 
 
     /**
@@ -473,8 +467,7 @@ final class AttributesTest extends AbstractTokenizerTestCase
             $this->assertSame($expectedCode, $tokens[$i]['code']);
             ++$i;
         }
-
-    }//end testAttributeContainingTextLookingLikeCloseTag()
+    }
 
 
     /**
@@ -572,8 +565,7 @@ final class AttributesTest extends AbstractTokenizerTestCase
                 ],
             ],
         ];
-
-    }//end dataAttributeOnTextLookingLikeCloseTag()
+    }
 
 
     /**
@@ -593,8 +585,7 @@ final class AttributesTest extends AbstractTokenizerTestCase
 
         $this->assertArrayHasKey('attribute_closer', $tokens[$attribute]);
         $this->assertNull($tokens[$attribute]['attribute_closer']);
-
-    }//end testInvalidAttribute()
+    }
 
 
     /**
@@ -687,8 +678,5 @@ final class AttributesTest extends AbstractTokenizerTestCase
         );
 
         $this->assertSame($tokenCodes, $map);
-
-    }//end testNestedAttributes()
-
-
-}//end class
+    }
+}

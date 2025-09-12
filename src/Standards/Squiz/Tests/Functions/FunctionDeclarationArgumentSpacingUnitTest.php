@@ -106,8 +106,7 @@ final class FunctionDeclarationArgumentSpacingUnitTest extends AbstractSniffTest
         default:
             return [];
         }//end switch
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -121,8 +120,5 @@ final class FunctionDeclarationArgumentSpacingUnitTest extends AbstractSniffTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

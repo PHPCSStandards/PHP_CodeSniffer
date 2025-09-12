@@ -44,8 +44,7 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
         $runner->runPHPCS();
 
         $this->verifyOutput();
-
-    }//end testPhpcs()
+    }
 
 
     /**
@@ -71,8 +70,7 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
         $runner->runPHPCBF();
 
         $this->verifyOutput();
-
-    }//end testPhpcbf()
+    }
 
 
     /**
@@ -92,8 +90,7 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
                 'extraArgs' => ['--ignore=/place*\.php'],
             ],
         ];
-
-    }//end data()
+    }
 
 
     /**
@@ -118,8 +115,7 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
         }
 
         $this->expectNoStdoutOutput();
-
-    }//end setupTest()
+    }
 
 
     /**
@@ -133,8 +129,5 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
         $expected .= 'All specified files were excluded or did not match filtering rules.' . PHP_EOL . PHP_EOL;
 
         $this->assertStderrOutputSameString($expected);
-
-    }//end verifyOutput()
-
-
-}//end class
+    }
+}

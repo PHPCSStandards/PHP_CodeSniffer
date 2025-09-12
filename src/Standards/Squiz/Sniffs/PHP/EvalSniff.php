@@ -24,8 +24,7 @@ class EvalSniff implements Sniff
     public function register()
     {
         return [T_EVAL];
-
-    }//end register()
+    }
 
 
     /**
@@ -41,8 +40,5 @@ class EvalSniff implements Sniff
     {
         $error = 'Use of eval() is discouraged';
         $phpcsFile->addWarning($error, $stackPtr, 'Discouraged');
-
-    }//end process()
-
-
-}//end class
+    }
+}

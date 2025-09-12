@@ -86,8 +86,7 @@ class Xml implements Report
         echo $content;
 
         return true;
-
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -121,8 +120,5 @@ class Xml implements Report
         echo '<phpcs version="' . Config::VERSION . '">' . PHP_EOL;
         echo $cachedData;
         echo '</phpcs>' . PHP_EOL;
-
-    }//end generate()
-
-
-}//end class
+    }
+}

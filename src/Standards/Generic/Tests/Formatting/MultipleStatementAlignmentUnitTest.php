@@ -31,8 +31,7 @@ final class MultipleStatementAlignmentUnitTest extends AbstractSniffTestCase
     public function getErrorList()
     {
         return [];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -123,8 +122,5 @@ final class MultipleStatementAlignmentUnitTest extends AbstractSniffTestCase
             499 => 1,
             500 => 1,
         ];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

@@ -56,8 +56,7 @@ class Common
         }
 
         return false;
-
-    }//end isPharFile()
+    }
 
 
     /**
@@ -84,8 +83,7 @@ class Common
         }
 
         return false;
-
-    }//end isReadable()
+    }
 
 
     /**
@@ -137,8 +135,7 @@ class Common
         }
 
         return false;
-
-    }//end realpath()
+    }
 
 
     /**
@@ -167,8 +164,7 @@ class Common
         }
 
         return $path;
-
-    }//end stripBasepath()
+    }
 
 
     /**
@@ -188,8 +184,7 @@ class Common
         }
 
         return $eolChar;
-
-    }//end detectLineEndings()
+    }
 
 
     /**
@@ -247,8 +242,7 @@ class Common
         $isTTY = ($mode !== $type['S_IFIFO']);
 
         return $isTTY;
-
-    }//end isStdinATTY()
+    }
 
 
     /**
@@ -269,8 +263,7 @@ class Common
         }
 
         return $cmd;
-
-    }//end escapeshellcmd()
+    }
 
 
     /**
@@ -318,8 +311,7 @@ class Common
         }//end if
 
         return $content;
-
-    }//end prepareForOutput()
+    }
 
 
     /**
@@ -332,8 +324,7 @@ class Common
     public static function stripColors(string $text)
     {
         return preg_replace('`\033\[[0-9;]+m`', '', $text);
-
-    }//end stripColors()
+    }
 
 
     /**
@@ -417,8 +408,7 @@ class Common
         }//end if
 
         return true;
-
-    }//end isCamelCaps()
+    }
 
 
     /**
@@ -455,8 +445,7 @@ class Common
         }
 
         return $validName;
-
-    }//end isUnderscoreName()
+    }
 
 
     /**
@@ -529,8 +518,7 @@ class Common
                 return $varType;
             }//end if
         }//end if
-
-    }//end suggestType()
+    }
 
 
     /**
@@ -578,8 +566,7 @@ class Common
         $standard = $parts[($partsCount - 4)];
         $category = $parts[($partsCount - 2)];
         return $standard . '.' . $category . '.' . $sniff;
-
-    }//end getSniffCode()
+    }
 
 
     /**
@@ -609,8 +596,5 @@ class Common
 
         $newName = substr($newName, ($start + 1));
         return $newName;
-
-    }//end cleanSniffClass()
-
-
-}//end class
+    }
+}

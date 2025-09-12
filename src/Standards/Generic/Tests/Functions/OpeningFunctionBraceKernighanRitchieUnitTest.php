@@ -34,8 +34,7 @@ final class OpeningFunctionBraceKernighanRitchieUnitTest extends AbstractSniffTe
         if ($testFile === 'OpeningFunctionBraceKernighanRitchieUnitTest.2.inc') {
             $config->tabWidth = 4;
         }
-
-    }//end setCliValues()
+    }
 
 
     /**
@@ -95,8 +94,7 @@ final class OpeningFunctionBraceKernighanRitchieUnitTest extends AbstractSniffTe
         default:
             return [];
         }//end switch
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -110,8 +108,5 @@ final class OpeningFunctionBraceKernighanRitchieUnitTest extends AbstractSniffTe
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

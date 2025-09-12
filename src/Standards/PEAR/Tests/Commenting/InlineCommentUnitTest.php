@@ -39,8 +39,7 @@ final class InlineCommentUnitTest extends AbstractSniffTestCase
             29 => 1,
             31 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -54,8 +53,5 @@ final class InlineCommentUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

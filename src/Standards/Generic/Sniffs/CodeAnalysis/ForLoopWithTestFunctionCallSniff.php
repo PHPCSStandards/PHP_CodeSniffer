@@ -42,8 +42,7 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
     public function register()
     {
         return [T_FOR];
-
-    }//end register()
+    }
 
 
     /**
@@ -94,8 +93,5 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
                 break;
             }
         }//end for
-
-    }//end process()
-
-
-}//end class
+    }
+}

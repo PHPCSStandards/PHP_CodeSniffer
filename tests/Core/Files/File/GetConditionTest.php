@@ -138,8 +138,7 @@ final class GetConditionTest extends AbstractMethodTestCase
                 self::$markerTokens[$marker] = $this->getTargetToken($marker, Tokens::SCOPE_OPENERS);
             }
         }
-
-    }//end setUp()
+    }
 
 
     /**
@@ -154,8 +153,7 @@ final class GetConditionTest extends AbstractMethodTestCase
 
         $result = self::$phpcsFile->hasCondition(100000, T_IF);
         $this->assertFalse($result);
-
-    }//end testNonExistentToken()
+    }
 
 
     /**
@@ -173,8 +171,7 @@ final class GetConditionTest extends AbstractMethodTestCase
 
         $result = self::$phpcsFile->hasCondition($stackPtr, Tokens::OO_SCOPE_TOKENS);
         $this->assertFalse($result);
-
-    }//end testNonConditionalToken()
+    }
 
 
     /**
@@ -207,8 +204,7 @@ final class GetConditionTest extends AbstractMethodTestCase
                 "Assertion failed for test marker '{$testMarker}' with condition {$conditionType}"
             );
         }
-
-    }//end testGetCondition()
+    }
 
 
     /**
@@ -278,8 +274,7 @@ final class GetConditionTest extends AbstractMethodTestCase
                 ],
             ],
         ];
-
-    }//end dataGetCondition()
+    }
 
 
     /**
@@ -312,8 +307,7 @@ final class GetConditionTest extends AbstractMethodTestCase
                 "Assertion failed for test marker '{$testMarker}' with condition {$conditionType} (reversed)"
             );
         }
-
-    }//end testGetConditionReversed()
+    }
 
 
     /**
@@ -344,8 +338,7 @@ final class GetConditionTest extends AbstractMethodTestCase
         $data['testInDefault']['expectedResults']['T_IF']       = '/* condition 4: if */';
 
         return $data;
-
-    }//end dataGetConditionReversed()
+    }
 
 
     /**
@@ -374,8 +367,7 @@ final class GetConditionTest extends AbstractMethodTestCase
                 "Assertion failed for test marker '{$testMarker}' with condition {$conditionType}"
             );
         }
-
-    }//end testHasCondition()
+    }
 
 
     /**
@@ -445,8 +437,7 @@ final class GetConditionTest extends AbstractMethodTestCase
                 ],
             ],
         ];
-
-    }//end dataHasCondition()
+    }
 
 
     /**
@@ -483,8 +474,5 @@ final class GetConditionTest extends AbstractMethodTestCase
             $result,
             'Failed asserting that "testSeriouslyNestedMethod" has an OO Scope token condition'
         );
-
-    }//end testHasConditionMultipleTypes()
-
-
-}//end class
+    }
+}

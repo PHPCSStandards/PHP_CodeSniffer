@@ -39,8 +39,7 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
     public function register()
     {
         return [T_ELLIPSIS];
-
-    }//end register()
+    }
 
 
     /**
@@ -152,8 +151,5 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
                 $phpcsFile->fixer->endChangeset();
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

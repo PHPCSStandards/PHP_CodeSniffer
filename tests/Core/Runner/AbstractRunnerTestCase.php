@@ -16,4 +16,4 @@ use PHP_CodeSniffer\Tests\Core\Config\AbstractRealConfigTestCase;
 abstract class AbstractRunnerTestCase extends AbstractRealConfigTestCase
 {
 
-}//end class
+}

@@ -33,8 +33,7 @@ final class FinallyTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
         $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (type)');
-
-    }//end testFinallyNonKeyword()
+    }
 
 
     /**
@@ -51,8 +50,5 @@ final class FinallyTest extends AbstractTokenizerTestCase
             'finally used as method name'         => ['/* testFinallyUsedAsMethodName */'],
             'finally used as property name'       => ['/* testFinallyUsedAsPropertyName */'],
         ];
-
-    }//end dataFinallyNonKeyword()
-
-
-}//end class
+    }
+}

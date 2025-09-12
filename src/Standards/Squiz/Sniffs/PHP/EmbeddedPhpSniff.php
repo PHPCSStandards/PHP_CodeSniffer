@@ -28,8 +28,7 @@ class EmbeddedPhpSniff implements Sniff
             T_OPEN_TAG,
             T_OPEN_TAG_WITH_ECHO,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -53,8 +52,7 @@ class EmbeddedPhpSniff implements Sniff
         } else {
             $this->validateInlineEmbeddedPhp($phpcsFile, $stackPtr, $closeTag);
         }
-
-    }//end process()
+    }
 
 
     /**
@@ -320,8 +318,7 @@ class EmbeddedPhpSniff implements Sniff
                 $phpcsFile->fixer->endChangeset();
             }
         }//end if
-
-    }//end validateMultilineEmbeddedPhp()
+    }
 
 
     /**
@@ -427,8 +424,7 @@ class EmbeddedPhpSniff implements Sniff
                 }
             }
         }
-
-    }//end validateInlineEmbeddedPhp()
+    }
 
 
     /**
@@ -466,8 +462,7 @@ class EmbeddedPhpSniff implements Sniff
 
             $phpcsFile->fixer->endChangeset();
         }
-
-    }//end reportEmptyTagSet()
+    }
 
 
     /**
@@ -506,8 +501,5 @@ class EmbeddedPhpSniff implements Sniff
         }
 
         return $indent;
-
-    }//end calculateLineIndent()
-
-
-}//end class
+    }
+}

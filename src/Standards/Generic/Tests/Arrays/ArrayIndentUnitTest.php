@@ -59,8 +59,7 @@ final class ArrayIndentUnitTest extends AbstractSniffTestCase
             143 => 1,
             149 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -74,8 +73,5 @@ final class ArrayIndentUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

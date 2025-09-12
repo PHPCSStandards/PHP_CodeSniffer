@@ -36,8 +36,7 @@ final class DisallowShortArraySyntaxUnitTest extends AbstractSniffTestCase
             7 => 1,
             8 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -51,8 +50,5 @@ final class DisallowShortArraySyntaxUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

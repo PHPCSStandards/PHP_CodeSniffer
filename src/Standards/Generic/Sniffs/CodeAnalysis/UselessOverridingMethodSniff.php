@@ -48,8 +48,7 @@ class UselessOverridingMethodSniff implements Sniff
     public function register()
     {
         return [T_FUNCTION];
-
-    }//end register()
+    }
 
 
     /**
@@ -177,8 +176,5 @@ class UselessOverridingMethodSniff implements Sniff
         if (count($parameters) === count($signature) && $parameters === $signature) {
             $phpcsFile->addWarning('Possible useless method overriding detected', $stackPtr, 'Found');
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

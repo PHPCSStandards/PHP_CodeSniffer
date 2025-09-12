@@ -40,8 +40,7 @@ class Info implements Report
         }
 
         return true;
-
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -161,8 +160,5 @@ class Info implements Report
         }//end foreach
 
         echo str_repeat('-', 70) . PHP_EOL;
-
-    }//end generate()
-
-
-}//end class
+    }
+}

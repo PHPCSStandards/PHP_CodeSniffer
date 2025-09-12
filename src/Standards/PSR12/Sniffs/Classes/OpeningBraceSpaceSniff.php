@@ -25,8 +25,7 @@ class OpeningBraceSpaceSniff implements Sniff
     public function register()
     {
         return Tokens::OO_SCOPE_TOKENS;
-
-    }//end register()
+    }
 
 
     /**
@@ -73,8 +72,5 @@ class OpeningBraceSpaceSniff implements Sniff
         }
 
         $phpcsFile->fixer->endChangeset();
-
-    }//end process()
-
-
-}//end class
+    }
+}

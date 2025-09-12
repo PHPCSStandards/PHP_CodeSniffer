@@ -63,8 +63,5 @@ final class PopulateTokenListenersNamingConventionsTest extends AbstractRulesetT
 
         // This assertion will only take effect for PHPUnit 10+.
         $this->assertSame($expectedSniffCodes, $ruleset->sniffCodes, 'Registered sniffs do not match expectation');
-
-    }//end testBrokenNamingConventions()
-
-
-}//end class
+    }
+}

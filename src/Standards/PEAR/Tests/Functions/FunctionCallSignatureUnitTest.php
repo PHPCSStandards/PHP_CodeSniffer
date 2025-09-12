@@ -129,8 +129,7 @@ final class FunctionCallSignatureUnitTest extends AbstractSniffTestCase
             604 => 1,
             605 => 2,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -144,8 +143,5 @@ final class FunctionCallSignatureUnitTest extends AbstractSniffTestCase
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

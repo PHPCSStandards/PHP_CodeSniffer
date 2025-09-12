@@ -141,8 +141,7 @@ class Runner
         }//end try
 
         return ExitCode::calculate($this->reporter);
-
-    }//end runPHPCS()
+    }
 
 
     /**
@@ -227,8 +226,7 @@ class Runner
         }//end try
 
         return ExitCode::calculate($this->reporter);
-
-    }//end runPHPCBF()
+    }
 
 
     /**
@@ -286,8 +284,7 @@ class Runner
             $error .= $this->config->printShortUsage(true);
             throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         }
-
-    }//end init()
+    }
 
 
     /**
@@ -517,8 +514,7 @@ class Runner
         if ($this->config->cache === true) {
             Cache::save();
         }
-
-    }//end run()
+    }
 
 
     /**
@@ -544,8 +540,7 @@ class Runner
         }
 
         throw new RuntimeException("$message in $file on line $line");
-
-    }//end handleErrors()
+    }
 
 
     /**
@@ -672,8 +667,7 @@ class Runner
 
         // Clean up the file to save (a lot of) memory.
         $file->cleanUp();
-
-    }//end processFile()
+    }
 
 
     /**
@@ -757,8 +751,7 @@ class Runner
         }//end while
 
         return $success;
-
-    }//end processChildProcs()
+    }
 
 
     /**
@@ -863,8 +856,7 @@ class Runner
         }
 
         StatusWriter::write(str_repeat(' ', $padding) . " $numProcessed / $numFiles ($percent%)");
-
-    }//end printProgress()
+    }
 
 
     /**
@@ -901,8 +893,5 @@ class Runner
                 }
             }
         );
-
-    }//end registerOutOfMemoryShutdownMessage()
-
-
-}//end class
+    }
+}

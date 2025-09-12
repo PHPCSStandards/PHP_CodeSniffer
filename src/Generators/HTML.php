@@ -161,8 +161,7 @@ class HTML extends Generator
             echo $content;
             echo $this->getFormattedFooter();
         }
-
-    }//end generate()
+    }
 
 
     /**
@@ -190,8 +189,7 @@ class HTML extends Generator
 
         // Use the correct line endings based on the OS.
         return str_replace("\n", PHP_EOL, $output) . PHP_EOL;
-
-    }//end getFormattedHeader()
+    }
 
 
     /**
@@ -227,8 +225,7 @@ class HTML extends Generator
         $output .= '  </ul>' . PHP_EOL;
 
         return $output;
-
-    }//end getFormattedToc()
+    }
 
 
     /**
@@ -255,8 +252,7 @@ class HTML extends Generator
 
         // Use the correct line endings based on the OS.
         return str_replace("\n", PHP_EOL, $output) . PHP_EOL;
-
-    }//end getFormattedFooter()
+    }
 
 
     /**
@@ -288,8 +284,7 @@ class HTML extends Generator
             );
             echo $content;
         }
-
-    }//end processSniff()
+    }
 
 
     /**
@@ -317,8 +312,7 @@ class HTML extends Generator
         $this->seenAnchors[$title] = true;
 
         return $title;
-
-    }//end titleToAnchor()
+    }
 
 
     /**
@@ -370,8 +364,7 @@ class HTML extends Generator
         }
 
         return '  <p class="text">' . implode('', $lines) . '</p>' . PHP_EOL;
-
-    }//end getFormattedTextBlock()
+    }
 
 
     /**
@@ -426,8 +419,7 @@ class HTML extends Generator
         }
 
         return $output;
-
-    }//end getFormattedCodeComparisonBlock()
+    }
 
 
     /**
@@ -443,8 +435,7 @@ class HTML extends Generator
     {
         $title = trim($codeElm->getAttribute('title'));
         return str_replace('  ', '&nbsp;&nbsp;', $title);
-
-    }//end formatCodeTitle()
+    }
 
 
     /**
@@ -465,8 +456,5 @@ class HTML extends Generator
         $code = str_replace(['<em>', '</em>'], ['<span class="code-comparison-highlight">', '</span>'], $code);
 
         return $code;
-
-    }//end formatCodeSample()
-
-
-}//end class
+    }
+}

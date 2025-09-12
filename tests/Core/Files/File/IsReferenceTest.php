@@ -36,8 +36,7 @@ final class IsReferenceTest extends AbstractMethodTestCase
 
         $target = $this->getTargetToken($testMarker, $targetTokens);
         $this->assertFalse(self::$phpcsFile->isReference($target));
-
-    }//end testNotBitwiseAndToken()
+    }
 
 
     /**
@@ -63,8 +62,7 @@ final class IsReferenceTest extends AbstractMethodTestCase
                 'targetTokens' => [T_TYPE_INTERSECTION],
             ],
         ];
-
-    }//end dataNotBitwiseAndToken()
+    }
 
 
     /**
@@ -82,8 +80,7 @@ final class IsReferenceTest extends AbstractMethodTestCase
         $bitwiseAnd = $this->getTargetToken($testMarker, T_BITWISE_AND);
         $result     = self::$phpcsFile->isReference($bitwiseAnd);
         $this->assertSame($expected, $result);
-
-    }//end testIsReference()
+    }
 
 
     /**
@@ -389,8 +386,5 @@ final class IsReferenceTest extends AbstractMethodTestCase
                 'expected'   => true,
             ],
         ];
-
-    }//end dataIsReference()
-
-
-}//end class
+    }
+}
