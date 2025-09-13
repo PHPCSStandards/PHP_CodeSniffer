@@ -114,7 +114,7 @@ class Junit implements Report
         $tests   = 0;
         $matches = [];
         preg_match_all('/tests="([0-9]+)"/', $cachedData, $matches);
-        if (isset($matches[1]) === true) {
+        if (empty($matches[1]) === false) {
             foreach ($matches[1] as $match) {
                 $tests += $match;
             }

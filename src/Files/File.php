@@ -159,7 +159,7 @@ class File
      *
      * @var array<string, int>
      */
-    private $firstRunCounts;
+    private $firstRunCounts = [];
 
     /**
      * The current total number of errors that can be fixed.
@@ -542,7 +542,7 @@ class File
             StatusWriter::write('*** END SNIFF PROCESSING REPORT ***', 1);
         }
 
-        if (isset($this->firstRunCounts) === false) {
+        if (empty($this->firstRunCounts) === true) {
             $this->firstRunCounts = [
                 'error'          => $this->errorCount,
                 'warning'        => $this->warningCount,
