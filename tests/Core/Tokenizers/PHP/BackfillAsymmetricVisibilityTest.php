@@ -24,8 +24,8 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
      * Test that the asymmetric visibility keywords are tokenized as such.
      *
      * @param string $testMarker  The comment which prefaces the target token in the test file.
-     * @param string $testType    The expected token type
-     * @param string $testContent The token content to look for
+     * @param string $testType    The expected token type.
+     * @param string $testContent The token content to look for.
      *
      * @dataProvider dataAsymmetricVisibility
      *
@@ -206,8 +206,8 @@ final class BackfillAsymmetricVisibilityTest extends AbstractTokenizerTestCase
      * tokenized as such.
      *
      * @param string $testMarker  The comment which prefaces the target token in the test file.
-     * @param string $testType    The expected token type
-     * @param string $testContent The token content to look for
+     * @param string $testType    The expected token type.
+     * @param string $testContent The token content to look for.
      *
      * @dataProvider dataNotAsymmetricVisibility
      *

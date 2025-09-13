@@ -28,7 +28,7 @@ class FunctionCommentSniff implements Sniff
     /**
      * Array of methods which do not require a return type.
      *
-     * @var array
+     * @var array<string>
      */
     public $specialMethods = [
         '__construct',

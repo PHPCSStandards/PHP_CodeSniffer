@@ -291,7 +291,7 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
      *
      * @see testSwitchDefault()
      *
-     * @return array<string, array<string, string|int>>
+     * @return array<string, array<string, string|true|null>>
      */
     public static function dataSwitchDefault()
     {

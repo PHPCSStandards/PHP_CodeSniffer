@@ -77,7 +77,7 @@ class Reporter
     /**
      * A cache of opened temporary files.
      *
-     * @var array
+     * @var array<string, string>
      */
     private $tmpFiles = [];
 
