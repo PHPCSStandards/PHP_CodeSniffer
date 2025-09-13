@@ -107,7 +107,7 @@ final class SyntaxUnitTest extends AbstractSniffTestCase
     /**
      * Data provider for testStdIn().
      *
-     * @return array[]
+     * @return array<string, array<string|int|array>>
      */
     public static function dataStdIn()
     {

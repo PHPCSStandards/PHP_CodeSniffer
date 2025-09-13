@@ -91,7 +91,7 @@ class Reporter
     /**
      * A cache of opened temporary files.
      *
-     * @var array
+     * @var array<string, string>
      */
     private $tmpFiles = [];
 
@@ -225,7 +225,7 @@ class Reporter
      * @param string $name  Property name.
      * @param mixed  $value Property value.
      *
-     * @return bool
+     * @return void
      *
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException
      */
@@ -240,7 +240,7 @@ class Reporter
      *
      * @param string $name Property name.
      *
-     * @return bool
+     * @return void
      *
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException
      */

@@ -25,7 +25,7 @@ final class InlineIfDeclarationUnitTest extends AbstractSniffTestCase
      *
      * @param string $testFile The name of the file being tested.
      *
-     * @return array
+     * @return array<string>
      */
     public function getCliValues($testFile)
     {

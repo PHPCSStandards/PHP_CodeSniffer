@@ -188,8 +188,8 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
         /**
          * Determine which class was loaded based on the before and after lists of loaded classes.
          *
-         * @param array $classesBeforeLoad The classes/interfaces/traits before the file was included.
-         * @param array $classesAfterLoad  The classes/interfaces/traits after the file was included.
+         * @param array<string, array<string>> $classesBeforeLoad The classes/interfaces/traits before the file was included.
+         * @param array<string, array<string>> $classesAfterLoad  The classes/interfaces/traits after the file was included.
          *
          * @return string The fully qualified name of the class in the loaded file.
          */
@@ -262,7 +262,7 @@ if (class_exists('PHP_CodeSniffer\Autoload', false) === false) {
         /**
          * Retrieve the namespaces and paths registered by external standards.
          *
-         * @return array
+         * @return array<string>
          */
         public static function getSearchPaths()
         {

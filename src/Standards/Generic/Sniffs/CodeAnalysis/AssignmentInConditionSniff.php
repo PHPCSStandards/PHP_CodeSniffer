@@ -25,14 +25,14 @@ class AssignmentInConditionSniff implements Sniff
      *
      * Set in the register() method.
      *
-     * @var array
+     * @var array<int|string, int|string>
      */
     protected $assignmentTokens = [];
 
     /**
      * The tokens that indicate the start of a condition.
      *
-     * @var array
+     * @var array<int|string, int|string>
      */
     protected $conditionStartTokens = [];
 

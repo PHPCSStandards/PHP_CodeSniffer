@@ -19,7 +19,7 @@ class DuplicateClassNameSniff implements Sniff
     /**
      * List of classes that have been found during checking.
      *
-     * @var array
+     * @var array<string, array<string, string|int>>
      */
     protected $foundClasses = [];
 

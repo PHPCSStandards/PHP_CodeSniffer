@@ -1199,7 +1199,8 @@ class File
     /**
      * Retrieve information about the first run.
      *
-     * @param $type string
+     * @param string $type The type for which to get the "first run" count.
+     *                     Valid values are: 'error', 'warning', 'fixableError' and 'fixableWarning'.
      *
      * @internal This method does not form part of any public API nor backwards compatibility guarantee.
      *

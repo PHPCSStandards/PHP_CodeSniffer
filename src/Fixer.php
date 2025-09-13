@@ -83,7 +83,7 @@ class Fixer
      * All changes in changeset must be able to be applied, or else
      * the entire changeset is rejected.
      *
-     * @var array
+     * @var array<int, string>
      */
     private $changeset = [];
 

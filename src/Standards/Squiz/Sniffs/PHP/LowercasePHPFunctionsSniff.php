@@ -17,9 +17,9 @@ class LowercasePHPFunctionsSniff implements Sniff
 {
 
     /**
-     * String -> int hash map of all php built in function names
+     * Hash map of all php built in function names
      *
-     * @var array
+     * @var array<string, int>
      */
     private $builtInFunctions;
 
