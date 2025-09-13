@@ -66,8 +66,6 @@ class FunctionDeclarationSniff implements Sniff
 
         if (isset($tokens[$stackPtr]['parenthesis_opener']) === false
             || isset($tokens[$stackPtr]['parenthesis_closer']) === false
-            || $tokens[$stackPtr]['parenthesis_opener'] === null
-            || $tokens[$stackPtr]['parenthesis_closer'] === null
         ) {
             return;
         }
