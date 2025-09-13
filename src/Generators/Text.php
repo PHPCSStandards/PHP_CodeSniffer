@@ -14,7 +14,6 @@
 namespace PHP_CodeSniffer\Generators;
 
 use DOMElement;
-use DOMNode;
 
 class Text extends Generator
 {
@@ -78,14 +77,14 @@ class Text extends Generator
     /**
      * Format a text block found in a standard.
      *
-     * @param \DOMNode $node The DOMNode object for the text block.
+     * @param \DOMElement $node The DOMElement object for the text block.
      *
      * @since 3.12.0 Replaces the Text::printTextBlock() method,
      *               which was deprecated in 3.12.0 and removed in 4.0.0.
      *
      * @return string
      */
-    protected function getFormattedTextBlock(DOMNode $node)
+    protected function getFormattedTextBlock(DOMElement $node)
     {
         $text = $node->nodeValue;
         if (empty($text) === true) {
@@ -106,14 +105,14 @@ class Text extends Generator
     /**
      * Format a code comparison block found in a standard.
      *
-     * @param \DOMNode $node The DOMNode object for the code comparison block.
+     * @param \DOMElement $node The DOMElement object for the code comparison block.
      *
      * @since 3.12.0 Replaces the Text::printCodeComparisonBlock() method,
      *               which was deprecated in 3.12.0 and removed in 4.0.0.
      *
      * @return string
      */
-    protected function getFormattedCodeComparisonBlock(DOMNode $node)
+    protected function getFormattedCodeComparisonBlock(DOMElement $node)
     {
         $codeBlocks    = $node->getElementsByTagName('code');
         $firstCodeElm  = $codeBlocks->item(0);
