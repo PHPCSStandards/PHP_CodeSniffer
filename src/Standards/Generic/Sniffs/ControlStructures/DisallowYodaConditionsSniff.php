@@ -110,9 +110,7 @@ class DisallowYodaConditionsSniff implements Sniff
                 if ($prev === false) {
                     return;
                 }
-            } else if ($tokens[$beforeOpeningParenthesisIndex]['code'] === T_ARRAY
-                && $this->isArrayStatic($phpcsFile, $beforeOpeningParenthesisIndex) === false
-            ) {
+            } else if ($this->isArrayStatic($phpcsFile, $beforeOpeningParenthesisIndex) === false) {
                 return;
             }//end if
         }//end if
