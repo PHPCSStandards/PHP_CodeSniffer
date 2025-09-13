@@ -157,11 +157,6 @@
     <!-- Do not allow ambiguous conditions. -->
     <rule ref="Generic.CodeAnalysis.RequireExplicitBooleanOperatorPrecedence"/>
 
-    <!-- The testing bootstrap file uses string concats to stop IDEs seeing the class aliases -->
-    <rule ref="Generic.Strings.UnnecessaryStringConcat">
-        <exclude-pattern>tests/bootstrap\.php</exclude-pattern>
-    </rule>
-
     <!-- This test file specifically *needs* Windows line endings for testing purposes. -->
     <rule ref="Generic.Files.LineEndings.InvalidEOLChar">
         <exclude-pattern>tests/Core/Tokenizers/PHP/*WinTest\.php</exclude-pattern>
@@ -187,4 +182,17 @@
         <!-- Prevent conflict with function spacing sniff. -->
         <exclude-pattern>/requirements\.php</exclude-pattern>
     </rule>
+
+    <!-- Use select error codes from the Squiz FunctionComment sniff, which shouldn't conflict with the PEAR sniff. -->
+    <rule ref="Squiz.Commenting.FunctionComment.InvalidReturnVoid"/>
+    <rule ref="Squiz.Commenting.FunctionComment.InvalidNoReturn"/>
+    <rule ref="Squiz.Commenting.FunctionComment.InvalidReturnNotVoid"/>
+    <rule ref="Squiz.Commenting.FunctionComment.ThrowsNotCapital"/>
+    <rule ref="Squiz.Commenting.FunctionComment.ThrowsNoFullStop"/>
+    <rule ref="Squiz.Commenting.FunctionComment.InvalidReturnVoid"/>
+    <rule ref="Squiz.Commenting.FunctionComment.IncorrectTypeHint"/>
+    <rule ref="Squiz.Commenting.FunctionComment.InvalidTypeHint"/>
+    <rule ref="Squiz.Commenting.FunctionComment.ParamNameUnexpectedAmpersandPrefix"/>
+    <rule ref="Squiz.Commenting.FunctionComment.ParamCommentNotCapital"/>
+
 </ruleset>
