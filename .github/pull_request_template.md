@@ -1,7 +1,11 @@
 <!-- Provide a general summary of your changes in the title above. -->
 
 <!--
-Please target the `master` branch when submitting your pull request, unless your change **only** applies to PHPCS 4.x.
+Please target the branch for the current major when submitting your pull request.
+
+For older majors, only CI, security and PHP runtime compatibility patches will be accepted for up to a year
+after the new major was released.
+If your patch falls into this category, target the oldest major still accepting patches.
 -->
 
 # Description

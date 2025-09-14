@@ -3,7 +3,7 @@ name: Label new PRs
 on:
   # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request_target
   # The `pull_request_target` event is used for "normal" PRs to label them when they are opened.
-  # This will use the `labeler.yml` file in the default (master) branch of the repo.
+  # This will use the `labeler.yml` file in the default branch of the repo.
   pull_request_target:
     types:
       - opened

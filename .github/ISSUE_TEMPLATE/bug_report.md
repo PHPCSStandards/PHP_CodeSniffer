@@ -55,7 +55,7 @@ A clear and concise description of what you expected to happen.
 |-----------------------------|---------------------------------------------------------------------------- |
 | Operating System            | (e.g., Windows 10, MacOS 10.15)                                                           |
 | PHP version                      | (e.g., 7.2, 8.1)                                                                                          |
-| PHP_CodeSniffer version | (e.g., 3.7.2, master)                                                                                  |
+| PHP_CodeSniffer version | (e.g., 3.13.4, 4.x)                                                                                  |
 | Standard                          | (e.g., PSR2, PSR12, Squiz, custom)                                                          |
 | Install type                       | (e.g. Composer (global/local), PHAR, git clone, other (please expand)) |
 
@@ -68,4 +68,4 @@ Add any other context about the problem here.
 - [ ] I have searched the issue list and am not opening a duplicate issue.
 - [ ] I have read the [Contribution Guidelines](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/.github/CONTRIBUTING.md) and this is not a [support question](https://github.com/PHPCSStandards/PHP_CodeSniffer/discussions).
 - [ ] I confirm that this bug is a bug in PHP_CodeSniffer and not in one of the external standards.
-- [ ] I have verified the issue still exists in the `master` branch of PHP_CodeSniffer.
+- [ ] I have verified the issue still exists in the `4.x` branch of PHP_CodeSniffer.
