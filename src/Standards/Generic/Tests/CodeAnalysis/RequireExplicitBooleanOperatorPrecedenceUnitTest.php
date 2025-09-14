@@ -4,7 +4,7 @@
  *
  * @author    Tim Duesterhus <duesterhus@woltlab.com>
  * @copyright 2021-2023 WoltLab GmbH.
- * @copyright 2024 PHPCSStandards and contributors
+ * @copyright 2023 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 

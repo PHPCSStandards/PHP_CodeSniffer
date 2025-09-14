@@ -3,7 +3,8 @@
  * Tests the backfilling of numeric separators to PHP < 7.4.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2019 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2019-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 

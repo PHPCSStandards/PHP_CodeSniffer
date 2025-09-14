@@ -4,7 +4,8 @@
  * and makes sure that the tokenization of switch `T_DEFAULT` structures is not aversely affected.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
- * @copyright 2020-2021 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2020-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 

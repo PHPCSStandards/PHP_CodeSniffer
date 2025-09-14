@@ -2,7 +2,7 @@
 /**
  * Tests for the \PHP_CodeSniffer\Files\FileList::addFile method.
  *
- * @copyright 2025 PHPCSStandards Contributors
+ * @copyright 2025 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
