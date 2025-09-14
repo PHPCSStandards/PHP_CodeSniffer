@@ -174,7 +174,7 @@ will be pinged (cc-ed) to gather their thoughts on the topic.
 
 > [!TIP]
 > This cc-list list is public and
-> [maintained in a markdown file](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/.github/community-cc-list.md).
+> [maintained in a markdown file](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/.github/community-cc-list.md).
 >
 > To add or remove yourself to/from this list, submit a PR to the repo updating the `community-cc-list.md` file.
 > PRs adding/removing _other people_ to/from the list will only be merged if the people being added/removed leave a comment
@@ -471,6 +471,6 @@ Submitting a (largely) AI-generated PR will lead to you being banned from the re
 ## Licensing
 
 By contributing code to this repository, you agree to license your code for use under the
-[BSD-3-Clause license](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt).
+[BSD-3-Clause license](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt).
 
 [issuelist]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues
