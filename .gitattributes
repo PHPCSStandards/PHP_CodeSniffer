@@ -18,6 +18,9 @@ tests/EndToEnd/**/                    export-ignore
 .remarkrc                             export-ignore
 .shellcheckrc                         export-ignore
 .yamllint.yml                         export-ignore
+CHANGELOG-0.x.md                      export-ignore
+CHANGELOG-1.x.md                      export-ignore
+CHANGELOG-2.x.md                      export-ignore
 phpcs.xml.dist                        export-ignore
 phpstan.neon.dist                     export-ignore
 phpunit.xml.dist                      export-ignore
