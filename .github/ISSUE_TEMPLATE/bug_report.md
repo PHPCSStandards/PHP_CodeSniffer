@@ -66,6 +66,6 @@ Add any other context about the problem here.
 ## Please confirm
 
 - [ ] I have searched the issue list and am not opening a duplicate issue.
-- [ ] I have read the [Contribution Guidelines](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/.github/CONTRIBUTING.md) and this is not a [support question](https://github.com/PHPCSStandards/PHP_CodeSniffer/discussions).
+- [ ] I have read the [Contribution Guidelines](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/.github/CONTRIBUTING.md) and this is not a [support question](https://github.com/PHPCSStandards/PHP_CodeSniffer/discussions).
 - [ ] I confirm that this bug is a bug in PHP_CodeSniffer and not in one of the external standards.
 - [ ] I have verified the issue still exists in the `master` branch of PHP_CodeSniffer.
