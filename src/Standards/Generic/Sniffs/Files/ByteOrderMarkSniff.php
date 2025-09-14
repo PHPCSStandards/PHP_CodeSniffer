@@ -5,6 +5,7 @@
  * @author    Piotr Karas <office@mediaself.pl>
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2010-2014 mediaSELF Sp. z o.o.
+ * @copyright 2023 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 

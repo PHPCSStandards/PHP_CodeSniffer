@@ -4,6 +4,7 @@
  *
  * @author    Stefano Kowalke <blueduck@gmx.net>
  * @copyright 2010-2014 Stefano Kowalke
+ * @copyright 2023 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 

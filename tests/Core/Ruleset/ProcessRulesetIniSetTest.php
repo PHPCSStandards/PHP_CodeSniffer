@@ -2,7 +2,7 @@
 /**
  * Tests for overriding the value of a PHP ini setting by passing a new value via a ruleset.
  *
- * @copyright 2025 PHPCSStandards Contributors
+ * @copyright 2025 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 

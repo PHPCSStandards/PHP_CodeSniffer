@@ -3,7 +3,7 @@
  * Tests for the \PHP_CodeSniffer\Util\Common::stripColors() method.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
- * @copyright 2024 Juliette Reinders Folmer. All rights reserved.
+ * @copyright 2023 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 

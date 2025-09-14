@@ -2,7 +2,6 @@
 /**
  * Test the Ruleset::registerSniffs() method.
  *
- * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2025 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */

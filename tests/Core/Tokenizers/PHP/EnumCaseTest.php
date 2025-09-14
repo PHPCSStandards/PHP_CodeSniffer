@@ -3,7 +3,8 @@
  * Tests converting enum "case" to T_ENUM_CASE.
  *
  * @author    Jaroslav Hanslík <kukulich@kukulich.cz>
- * @copyright 2021 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2021-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 

@@ -3,7 +3,8 @@
  * Checks that only one object structure is declared per file.
  *
  * @author    Mponos George <gmponos@gmail.com>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
