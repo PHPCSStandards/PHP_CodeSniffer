@@ -21,5 +21,5 @@ code samples of what should *not* be flagged.
 ## Additional context (optional)
 <!-- Add any other context or screenshots about the feature request here. -->
 
-- [ ] I have read the [Contribution Guidelines](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/.github/CONTRIBUTING.md) and this is not a [support question](https://github.com/PHPCSStandards/PHP_CodeSniffer/discussions).
+- [ ] I have read the [Contribution Guidelines](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/.github/CONTRIBUTING.md) and this is not a [support question](https://github.com/PHPCSStandards/PHP_CodeSniffer/discussions).
 - [ ] I intend to create a pull request to implement this feature.
