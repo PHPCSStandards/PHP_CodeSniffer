@@ -84,7 +84,6 @@ Please consider [funding the PHP_CodeSniffer project](https://opencollective.com
 - [ ] Merge the changelog PR.
 - [ ] Make sure all CI builds for the release branch are green.
 - [ ] Create a tag for the release & push it.
-- [ ] Merge any open PRs in the documentation repository which relate to the current release.
 - [ ] Make sure all CI builds are green.
 - [ ] Download the PHAR files from the GH Actions test build page.
 - [ ] Sign the PHAR files using:
@@ -121,7 +120,8 @@ Please consider [funding the PHP_CodeSniffer project](https://opencollective.com
     - [ ] Upload the unversioned PHAR files + asc files to the release.
     - [ ] Announce the release in the discussions forum by checking the checkbox at the bottom of the release page.
 - [ ] Make sure all CI builds are green, including the verify-release workflow.
-
+- [ ] Merge any open PRs in the documentation repository which relate to the current release.
+    Important: this MUST be done **after** the release is published as otherwise the auto-generated output samples will not be updated correctly!
 
 ## After Release
 
