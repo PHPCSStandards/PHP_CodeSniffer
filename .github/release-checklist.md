@@ -1,12 +1,14 @@
 # Release checklist
 
+**Important**: If releases for multiple branches are to be tagged, always tag the 3.x release first, 4.x second etc!
+
 ## Before Release
 
 ### General
 
-- [ ] Verify, and if necessary, update the version constraints for dependencies in the `composer.json` - PR #xxx
-- [ ] Verify that any new functions have type declarations (ClassName/array/callable) whenever possible.
-- [ ] Verify that the license tags all refer to the _new_ organisation and no longer to Squizlabs. (easily overlooked in new files)
+- [ ] Verify, and if necessary, update the version constraints for dependencies in the `composer.json`.
+- [ ] Verify that any new functions have type declarations whenever possible.
+- [ ] Verify that the license tags all refer to the _new_ organisation and no longer to Squizlabs.
 - [ ] Verify that `@copyright` tags in new files use `@copyright 20xx PHPCSStandards and contributors`.
 - [ ] Check if the GPG key is still valid (not expired).
     If it has expired, create a new key before starting the release process.
@@ -27,13 +29,17 @@
 - [ ] Verify that any new sniffs which have `public` properties are listed on the Customizable Properties page in the Wiki.
 - [ ] Verify that any new CLI options are listed in the Wiki.
 - [ ] Verify that any new Reports have a section in the Reports page in the Wiki.
+- [ ] Whenever relevant, but definitely for a new major, update the output examples which cannot currently be automatically updated.
+    Search for "Regenerate the below output snippet by running the following command" comments to find the relevant sections in the wiki.
 
 ### Majors only
 
-- [ ] Move old changelog entries to `CHANGELOG_OLD.md` file.
 - [ ] Verify that everything deprecated during the previous major was removed.
-- [ ] Update the wiki for any references to anything deprecated/removed.
-- [ ] Change `Config::STABILITY` from "dev" to "stable" for the branch for the new major. - PR #xxx
+- Submit PRs to the documentation repository to update the wiki/website:
+    - [ ] Remove notes from the wiki which refer to features removed in the _previous_ major.
+        I.e. When releasing 4.0, notes about features removed/changed in or before 3.0 can be removed.
+    - [ ] Update sections related to anything deprecated/removed features to mention the deprecation/removal.
+- [ ] Change `Config::STABILITY` from "dev" to "stable" for the branch for the new major.
 
 ### Prepare changelog
 
@@ -76,9 +82,9 @@ Please consider [funding the PHP_CodeSniffer project](https://opencollective.com
 ## Release
 
 - [ ] Merge the changelog PR.
-    For now, cherrypick the changelog to the 4.0 branch.
 - [ ] Make sure all CI builds for the release branch are green.
 - [ ] Create a tag for the release & push it.
+- [ ] Merge any open PRs in the documentation repository which relate to the current release.
 - [ ] Make sure all CI builds are green.
 - [ ] Download the PHAR files from the GH Actions test build page.
 - [ ] Sign the PHAR files using:
@@ -110,7 +116,7 @@ Please consider [funding the PHP_CodeSniffer project](https://opencollective.com
     gh attestation verify phars/phpcbf-x.x.x.phar -o PHPCSStandards
     ```
     - [ ] Commit & push the changes.
-    - [ ] Verify that the website regenerated correctly and that the phars can be downloaded.
+    - [ ] Verify that the [website](https://phars.phpcodesniffer.com/) regenerated correctly.
 - [ ] Create a release & copy & paste the changelog to it.
     - [ ] Upload the unversioned PHAR files + asc files to the release.
     - [ ] Announce the release in the discussions forum by checking the checkbox at the bottom of the release page.
