@@ -35,7 +35,7 @@ jobs:
       - name: Set branches to use
         id: branches
         run: |
-          echo "BASE=master" >> "$GITHUB_OUTPUT"
+          echo "BASE=3.x" >> "$GITHUB_OUTPUT"
           echo "PR_BRANCH=feature/squiz-filecomment-update-copyright-year" >> "$GITHUB_OUTPUT"
 
       # Using "Tomorrow" to prevent accidentally getting last year if the server is not using UTC.
