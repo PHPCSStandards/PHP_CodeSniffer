@@ -79,7 +79,7 @@ To find bugs which need triage, look for issues and PRs with the
     and suggest closing the issue.
 
 Additionally, for older issues:
-* Check whether an issue still exists or has been fixed in `master` since the issue was initially reported.
+* Check whether an issue still exists or has been fixed since the issue was initially reported.
 * If it has been fixed, document (in a comment) which commit/PR was responsible for fixing the issue
     and suggest closing the ticket.
 
@@ -245,7 +245,7 @@ When in doubt how to proceed with a ticket, feel free to leave a comment with sp
 
 1. Fork/clone the repository.
 2. Run `composer install`.
-3. Create a new branch off the `master` branch to hold your patch.
+3. Create a new branch off the `4.x` branch to hold your patch.
     If there is an open issue associated with your patch, including the issue number in the branch name is good practice.
 
 

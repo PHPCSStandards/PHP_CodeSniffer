@@ -1,10 +1,10 @@
 name: Quicktest
 
 on:
-  # Run on pushes to all branches except for `master`/`4.x`.
+  # Run on pushes to all branches except the main branches.
   push:
     branches-ignore:
-      - master
+      - 3.x
       - 4.x
     paths-ignore:
       - '**.md'

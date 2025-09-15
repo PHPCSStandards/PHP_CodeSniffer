@@ -77,7 +77,7 @@ Please consider [funding the PHP_CodeSniffer project](https://opencollective.com
 
 - [ ] Merge the changelog PR.
     For now, cherrypick the changelog to the 4.0 branch.
-- [ ] Make sure all CI builds for `master` are green.
+- [ ] Make sure all CI builds for the release branch are green.
 - [ ] Create a tag for the release & push it.
 - [ ] Make sure all CI builds are green.
 - [ ] Download the PHAR files from the GH Actions test build page.

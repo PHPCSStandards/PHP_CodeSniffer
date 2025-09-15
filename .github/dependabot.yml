@@ -10,7 +10,7 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    target-branch: "master"
+    target-branch: "3.x"
     open-pull-requests-limit: 5
     commit-message:
       prefix: "GH Actions:"

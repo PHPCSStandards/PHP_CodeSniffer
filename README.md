@@ -3,9 +3,9 @@
 <div aria-hidden="true">
 
 [![Latest Stable Version](https://img.shields.io/github/v/release/PHPCSStandards/PHP_CodeSniffer?label=Stable)](https://github.com/PHPCSStandards/PHP_CodeSniffer/releases)
-[![Validate](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/validate.yml/badge.svg?branch=master)](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/validate.yml)
-[![Test](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/test.yml/badge.svg?branch=master)][GHA-test]
-[![Coverage Status](https://coveralls.io/repos/github/PHPCSStandards/PHP_CodeSniffer/badge.svg?branch=master)](https://coveralls.io/github/PHPCSStandards/PHP_CodeSniffer?branch=master)
+[![Validate](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/validate.yml/badge.svg?branch=4.x)](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/validate.yml)
+[![Test](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/test.yml/badge.svg?branch=4.x)][GHA-test]
+[![Coverage Status](https://coveralls.io/repos/github/PHPCSStandards/PHP_CodeSniffer/badge.svg?branch=4.x)](https://coveralls.io/github/PHPCSStandards/PHP_CodeSniffer?branch=4.x)
 [![License](https://img.shields.io/github/license/PHPCSStandards/PHP_CodeSniffer)](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt)
 
 ![Minimum PHP Version](https://img.shields.io/packagist/dependency-v/squizlabs/php_codesniffer/php.svg)

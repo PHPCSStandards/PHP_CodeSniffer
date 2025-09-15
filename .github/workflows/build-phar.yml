@@ -1,11 +1,11 @@
 name: Build PHARs
 
 on:
-  # Run on pushes to master and on pull requests which touch files used when building the PHARs.
+  # Run on pushes to the main branches and on pull requests which touch files used when building the PHARs.
   # Prevent the build from running when there are only irrelevant changes.
   push:
     branches:
-      - master
+      - 3.x
       - 4.x
     paths:
       - '.github/workflows/build-phar.yml'
