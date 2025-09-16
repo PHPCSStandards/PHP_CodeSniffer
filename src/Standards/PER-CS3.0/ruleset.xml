@@ -144,36 +144,41 @@
     <!-- When instantiating a new class, parentheses MUST always be present even when there are no arguments passed to the constructor. -->
     <!-- checked by PSR12.Classes.ClassInstantiation -->
 
+    <!-- If class contains no additional declarations (such as an exception that exists only to extend another exception with a new type), then the body of the class SHOULD be abbreviated as {} and placed on the same line as the previous symbol, separated by a space. -->
+    <!-- When accessing a class member immediately after instantiating a new class, the instantiation SHOULD NOT be wrapped in parentheses. -->
+    <!--todo-->
+
     <!-- 4.1 Extends and Implements -->
 
     <!-- The extends and implements keywords MUST be declared on the same line as the class name. -->
-    <!-- The opening brace for the class MUST go on its own line; the closing brace for the class MUST go on the next line after the body. -->
-    <!-- Opening braces MUST be on their own line and MUST NOT be preceded or followed by a blank line. -->
-    <!-- Closing braces MUST be on their own line and MUST NOT be preceded by a blank line. -->
+    <!-- The opening brace for the class MUST go on its own line, and MUST NOT be preceded or followed by a blank line. -->
+    <!-- The closing brace for the class MUST go on its own line, immediately following the last line of the class body, and MUST NOT be preceded by a blank line. -->
     <!-- Lists of implements and, in the case of interfaces, extends MAY be split across multiple lines, where each subsequent line is indented once. When doing so, the first item in the list MUST be on the next line, and there MUST be only one interface per line. -->
     <!-- checked by PSR12.Classes.OpeningBraceSpace -->
     <rule ref="PSR2.Classes.ClassDeclaration"/>
+    <!--todo-->
 
     <!-- 4.2 Using traits -->
 
     <!-- The use keyword used inside the classes to implement traits MUST be declared on the next line after the opening brace. -->
     <!-- Each individual trait that is imported into a class MUST be included one-per-line and each inclusion MUST have its own use import statement. -->
     <!-- When the class has nothing after the use import statement, the class closing brace MUST be on the next line after the use import statement. Otherwise, it MUST have a blank line after the use import statement. -->
-    <!-- When using the insteadof and as operators they must be used as follows taking note of indentation, spacing, and new lines. -->
+    <!-- When using the insteadof and as operators they MUST be used as follows taking note of indentation, spacing, and new lines. -->
     <!-- checked by PSR12.Traits.UseDeclaration -->
 
     <!-- 4.3 Properties and Constants -->
 
-    <!-- Visibility MUST be declared on all properties. -->
+    <!-- Visibility MUST be declared on all properties. If set-visibility is specified, then the general visibility MAY be omitted. -->
+    <!--todo-->
+    <!-- Visibility MUST be declared on all constants. -->
+    <!-- checked by PSR12.Properties.ConstantVisibility -->
+
     <!-- The var keyword MUST NOT be used to declare a property. -->
-    <!-- There MUST NOT be more than one property declared per statement. -->
-    <!-- Property names MUST NOT be prefixed with a single underscore to indicate protected or private visibility.
-    That is, an underscore prefix explicitly has no meaning. -->
+    <!-- There MUST NOT be more than one property or constant declared per statement. -->
+    <!--todo-->
+    <!-- Property or constant names MUST NOT be prefixed with a single underscore to indicate protected or private visibility. That is, an underscore prefix explicitly has no meaning. -->
     <!-- There MUST be a space between type declaration and property name. -->
     <rule ref="PSR2.Classes.PropertyDeclaration"/>
-
-    <!-- Visibility MUST be declared on all constants if your project PHP minimum version supports constant visibilities (PHP 7.1 or later). -->
-    <!-- checked by PSR12.Properties.ConstantVisibility -->
 
     <!-- 4.4 Methods and Functions -->
 
@@ -193,19 +198,13 @@
     <rule ref="Squiz.Functions.FunctionDeclaration"/>
     <rule ref="Squiz.Functions.LowercaseFunctionKeywords"/>
 
-    <!-- 4.5 Method and Function Arguments -->
+    <!-- If a function or method contains no statements or comments (such as an empty no-op implementation or when using constructor property promotion), then the body SHOULD be abbreviated as {} and placed on the same line as the previous symbol, separated by a space. -->
+    <!--todo-->
+
+    <!-- 4.5 Method and Function Parameters -->
 
     <!-- In the argument list, there MUST NOT be a space before each comma, and there MUST be one space after each comma. -->
-    <!-- When using the reference operator & before an argument, there MUST NOT be a space after it. -->
-    <!-- There MUST NOT be a space between the variadic three dot operator and the argument name. -->
-    <!-- When combining both the reference operator and the variadic three dot operator, there MUST NOT be any space between the two of them. -->
-    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
-        <properties>
-            <property name="equalsSpacing" value="1"/>
-        </properties>
-    </rule>
-
-    <!-- Method and function arguments with default values MUST go at the end of the argument list. -->
+    <!-- Method and function parameters with default values MUST go at the end of the argument list. -->
     <rule ref="PEAR.Functions.ValidDefaultValue"/>
 
     <!-- Argument lists MAY be split across multiple lines, where each subsequent line is indented once. When doing so, the first item in the list MUST be on the next line, and there MUST be only one argument per line.
@@ -218,16 +217,33 @@
     <!-- In nullable type declarations, there MUST NOT be a space between the question mark and the type. -->
     <!-- checked by PSR12.Functions.NullableTypeDeclaration -->
 
-    <!-- 4.6 abstract, final, and static -->
+    <!-- When using the reference operator & before an argument, there MUST NOT be a space after it. -->
+    <!-- There MUST NOT be a space between the variadic three dot operator and the argument name. -->
+    <!-- When combining both the reference operator and the variadic three dot operator, there MUST NOT be any space between the two of them. -->
+    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
+        <properties>
+            <property name="equalsSpacing" value="1"/>
+        </properties>
+    </rule>
 
-    <!-- When present, the abstract and final declarations MUST precede the visibility declaration. -->
-    <!-- When present, the static declaration MUST come after the visibility declaration. -->
+    <!-- 4.6 Modifier Keywords -->
+
+    <!-- Classes, properties, and methods have numerous keyword modifiers that alter how the engine and language handles them. When present, they MUST be in the following order:
+    Inheritance modifier: abstract or final
+    Visibility modifier: public, protected, or private
+    Set-visibility modifier: public(set), protected(set), or private(set)
+    Scope modifier: static
+    Mutation modifier: readonly
+    Type declaration
+    Name
+    All keywords MUST be on a single line, and MUST be separated by a single space. All keywords MUST be all lower-case. The public keyword MAY be omitted when using a set-visibility on a public-read property. -->
     <!-- checked by PSR2.Methods.MethodDeclaration included above -->
+    <!--todo-->
 
     <!-- 4.7 Method and Function Calls -->
 
     <!-- When making a method or function call, there MUST NOT be a space between the method or function name and the opening parenthesis, there MUST NOT be a space after the opening parenthesis, and there MUST NOT be a space before the closing parenthesis. In the argument list, there MUST NOT be a space before each comma, and there MUST be one space after each comma. -->
-    <!-- Argument lists MAY be split across multiple lines, where each subsequent line is indented once. When doing so, the first item in the list MUST be on the next line, and there MUST be only one argument per line. A single argument being split across multiple lines (as might be the case with an anonymous function or array) does not constitute splitting the argument list itself. -->
+    <!-- Argument lists MAY be split across multiple lines, where each subsequent line is indented once. When doing so, the first item in the list MUST be on the next line, and there MUST be only one argument per line. A single argument being split across multiple lines (as might be the case with a closure or array) does not constitute splitting the argument list itself. -->
     <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
     <rule ref="PSR2.Methods.FunctionCallSignature"/>
     <rule ref="PSR2.Methods.FunctionCallSignature.SpaceAfterCloseBracket">
@@ -236,6 +252,57 @@
     <rule ref="PSR2.Methods.FunctionCallSignature.OpeningIndent">
         <severity>0</severity>
     </rule>
+
+    <!-- If using named arguments, there MUST NOT be a space between the argument name and colon, and there MUST be a single space between the colon and the argument value. -->
+    <!-- Method chaining MAY be put on separate lines, where each subsequent line is indented once. When doing so, the first method MUST be on the next line. -->
+    <!-- The exit() and die() functions SHOULD always be called with parentheses even if no argument is given to clearly distinguish them from an access to a constant named exit or die. -->
+    <!--todo-->
+
+    <!-- 4.8 Function Callable References -->
+
+    <!-- A function or method may be referenced in a way that creates a closure out of it, by providing ... in place of arguments. -->
+    <!-- If so, the ... MUST NOT include any whitespace before or after. That is, the correct format is foo(...). -->
+    <!--todo-->
+
+    <!-- 4.9 Property Hooks -->
+
+    <!-- Object properties may also include hooks, which have a number of syntactic options. -->
+    <!-- When using the long form of hooks:
+    The opening brace MUST be on the same line as the property.
+    The opening brace MUST be separated from the property name or its default value by a single space.
+    The closing brace MUST be on its own line, and have no comment following it.
+    The entire body of the hook definition MUST be indented one level.
+    The body of each hook MUST be indented one level.
+    If multiple hooks are declared, they MUST be separated by at least a single line break. They MAY be separated by an additional blank line to aid readability. -->
+    <!-- Property hooks also support multiple short-hook variations. -->
+    <!-- For a set hook, if the argument name and type do not need to be redefined, then they MAY be omitted. -->
+    <!-- If a hook consists of a single expression, then PHP allows it to be shortened using =>. In that case:
+    There MUST be a single space on either side of the => symbol.
+    The body MUST begin on the same line as the hook name and =>.
+    Wrapping is allowed if the expression used allows for wrapping, using the rules defined elsewhere in this document. -->
+    <!-- Additionally, if the following criteria are met:
+    There is only one hook implementation.
+    That hook uses the short-hook syntax.
+    That hook expression does not contain any wrapping.
+    Then the hook MAY be listed entirely inline. In that case,
+    The hook name MUST be separated from the opening brace and the arrow operator by a single space
+    The semicolon ending of the hook MUST be separated from the closing brace by a single space. -->
+    <!-- Property hooks MAY also be defined in constructor-promoted properties. However, they MUST be only a single hook, with a short-syntax body, defined on a single line as above. If those criteria are not met, then the promoted property MUST NOT have any hooks defined inline. -->
+    <!--todo-->
+
+    <!-- 4.10 Interface and abstract properties -->
+
+    <!-- Abstract properties may be defined in interfaces or abstract classes, but are required to specify if they must support get operations, set operations, or both. In the case of abstract classes, they MAY include a body for one or another hook. -->
+    <!-- If there is a body for any hook, then the entire hook block MUST follow the same rules as for defined hooks above. The only difference is that a hook that has no body specified have a single semicolon after the hook keyword, with no space before it. -->
+    <!-- If there is no body for either hook, then the following rules apply:
+    The operation block MUST be on the same line as the property.
+    There MUST be a single space between the property name and the operation block {}.
+    There MUST be a single space after the opening {.
+    There MUST be a single space before the closing };
+    There MUST NOT be a space between the operation and its required semicolon.
+    If multiple operations are specified, they MUST be separated by a single space.
+    The get operation MUST be listed before the set operation. -->
+    <!--todo-->
 
     <!-- 5. Control Structures -->
 
