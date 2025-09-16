@@ -10,7 +10,7 @@
     <!-- Code MUST follow all rules outlined in PSR-1. -->
     <rule ref="PSR1"/>
 
-    <!-- The term 'StudlyCaps' in PSR-1 MUST be interpreted as PascalCase where the first letter of each word is capitalized including the very first letter. -->
+    <!-- The term "StudlyCaps" in PSR-1 MUST be interpreted as PascalCase where the first letter of each word is capitalized including the very first letter. -->
 
     <!-- 2.2 Files -->
 
@@ -78,6 +78,31 @@
 
     <!-- Short form of type keywords MUST be used i.e. bool instead of boolean, int instead of integer etc. -->
     <!-- checked by PSR12.Keywords.ShortFormTypeKeywords -->
+
+    <!-- Compound types includes intersection, union, and mixed intersection and union type declarations. PHP requires that all compound types be structured as an ORed (unioned) series of ANDs (intersections), and that each set of intersections be encased with parentheses. -->
+    <!-- The union symbol | and intersection symbol & MUST NOT have a leading or trailing space. The parentheses MUST NOT have a leading or trailing space. -->
+    <!-- If it is necessary to split a compound type into multiple lines:
+    If the type contains only intersections or only unions, then each line MUST have a single type.
+    If the type contains both intersections and unions, then each line MUST have a single union segment. All intersections in a segment MUST be on the same line.
+    The symbol on which the compound type is split MUST be at the start of each line. -->
+    <!-- If one of the ORed conditions is null, it MUST be the last item in the list.  -->
+    <!-- An intersection of a single simple type with null SHOULD be abbreviated using the ? alternate syntax: ?T. -->
+    <!--todo-->
+
+    <!-- 2.6 Trailing commas -->
+
+    <!-- Numerous PHP constructs allow a sequence of values to be separated by a comma, and the final item may have an optional comma. Examples include array key/value pairs, function arguments, closure use statements, match() statement branches, etc. -->
+    <!-- If that list is contained on a single line, then the last item MUST NOT have a trailing comma. -->
+    <!-- If the list is split across multiple lines, then the last item MUST have a trailing comma. -->
+    <!--todo-->
+
+    <!-- 2.7 Naming -->
+
+    <!-- This PSR RECOMMENDS following the php-src coding standards with regard to abbreviations and acronyms. -->
+    <!-- Specifically: -->
+    <!-- Abbreviations and acronyms as well as initialisms SHOULD be avoided wherever possible, unless they are much more widely used than the long form (e.g. HTTP or URL). Abbreviations, acronyms, and initialisms SHOULD be treated like regular words, thus they SHOULD be written with an uppercase first character, followed by lowercase characters. -->
+    <!--todo-->
+    <!--  -->
 
     <!-- 3. Declare Statements, Namespace, and Import Statements -->
 
