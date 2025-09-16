@@ -10,7 +10,7 @@ Upgrade guides for both [ruleset maintainers/end-users][wiki-upgrade-4.0-end-use
 
 You are strongly encouraged to read the upgrade guide applicable to your situation before upgrading.
 
-This release includes all improvements and bugfixes from PHP_CodeSniffer [3.13.3] and  [3.13.4].
+This release includes all improvements and bugfixes from PHP_CodeSniffer [4.0.0-beta1], [4.0.0-RC1], [3.13.3] and [3.13.4].
 
 ### Changed
 - Tokenizer/PHP: fully qualified `exit`/`die`/`true`/`false`/`null` will be tokenized as the keyword token and the token `'content'` will include the leading backslash. [#1201]
@@ -31,8 +31,9 @@ This release includes all improvements and bugfixes from PHP_CodeSniffer [3.13.3
     - If you contribute to PHP_CodeSniffer, you will need to update your local git clone.
     - If you develop against PHP_CodeSniffer and run your tests against dev branches of PHPCS, you will need to update your workflows.
 
-[3.13.3]: https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/4.x/CHANGELOG-3.x.md#3133---2025-09-04
-[3.13.4]: https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/4.x/CHANGELOG-3.x.md#3134---2025-09-05
+[3.13.3]:    https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/CHANGELOG-3.x.md#3133---2025-09-04
+[3.13.4]:    https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/CHANGELOG-3.x.md#3134---2025-09-05
+[4.0.0-RC1]: https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/CHANGELOG-4.x.md#400rc1---2025-06-18
 
 [#1082]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/1082
 [#1172]: https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1172
@@ -45,11 +46,10 @@ This release includes all improvements and bugfixes from PHP_CodeSniffer [3.13.3
 
 ## [4.0.0RC1] - 2025-06-18
 
-This release includes all improvements and bugfixes from PHP_CodeSniffer [3.13.1] and [3.13.2].
+This release includes all improvements and bugfixes from PHP_CodeSniffer [4.0.0-beta1], [3.13.1] and [3.13.2].
 
 ### Changed
 - The error code `Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterVisbility` has been changed to `Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterVisibility`. [#1136]
-    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
 - The following sniff(s) have received efficiency improvements:
     - Generic.ControlStructures.InlineControlStructure
     - Thanks to [Rodrigo Primo][@rodrigoprimo] for the patch.
@@ -58,13 +58,13 @@ This release includes all improvements and bugfixes from PHP_CodeSniffer [3.13.1
 - Fixed bug [#3889][sq-3889] : A selective `phpcs:enable` could sometimes override a later selective `phpcs:ignore`.
     - Thanks to [Brad Jorsch][@anomiex] for the patch
 - Fixed bug [#1128] : missing 'parenthesis_owner' index for T_FUNCTION token on PHP < 7.4 when function is named "fn".
-    - Thanks to [Juliette Reinders Folmer][@jrfnl] for the patch.
 
 ### Other
 - The GPG signature for the PHAR files has been rotated. The new fingerprint is: D91D86963AF3A29B6520462297B02DD8E5071466.
 
-[3.13.1]: https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/CHANGELOG-3.x.md#3131---2025-06-13
-[3.13.2]: https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/CHANGELOG-3.x.md#3132---2025-06-18
+[3.13.1]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/CHANGELOG-3.x.md#3131---2025-06-13
+[3.13.2]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/CHANGELOG-3.x.md#3132---2025-06-18
+[4.0.0-beta1]: https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/CHANGELOG-4.x.md#400beta1---2025-05-11
 
 [sq-3889]: https://github.com/squizlabs/PHP_CodeSniffer/issues/3889
 [#1128]:   https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1128
