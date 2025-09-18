@@ -42,12 +42,12 @@ jobs:
           fi
 
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           ref: ${{ steps.base_branch.outputs.BRANCH }}
       
       - name: Install PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@ec406be512d7077f68eed36e63f4d91bc006edc4 # 2.35.4
         with:
           php-version: '8.4'
           ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On, log_errors_max_len=0
@@ -57,15 +57,15 @@ jobs:
         run: php build/generate_phars_list.php
 
       - name: Check GitHub Pages status
-        uses: crazy-max/ghaction-github-status@v4
+        uses: crazy-max/ghaction-github-status@fa6ac37620bc5d44b93e15caed498629665e9ff5 # v4.2.0
         with:
           pages_threshold: major_outage
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
         with:
           path: './src'
           
@@ -84,4 +84,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
