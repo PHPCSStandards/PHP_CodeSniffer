@@ -25,6 +25,8 @@ jobs:
   build:
     # Don't run on forks.
     if: github.event.repository.fork == false
+
+    name: "Build the website"
     runs-on: ubuntu-latest
     steps:
       # By default use the `gh-pages` branch.
