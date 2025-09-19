@@ -16,8 +16,6 @@ updates:
       prefix: "GH Actions:"
     labels:
       - "Type: chores/QA"
-    cooldown:
-      semver-major-days: 10
     groups:
       action-runners:
         applies-to: version-updates
@@ -36,8 +34,6 @@ updates:
       prefix: "GH Pages/Actions:"
     labels:
       - "Type: chores/QA"
-    cooldown:
-      semver-major-days: 10
     groups:
       action-runners:
         applies-to: version-updates
