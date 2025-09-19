@@ -232,7 +232,8 @@ class Code implements Report
                     if (strpos($tokenContent, "\t") !== false) {
                         $token            = $tokens[$i];
                         $token['content'] = $tokenContent;
-                        if (stripos(PHP_OS, 'WIN') === 0) {
+                        if (stripos(PHP_OS, 'WIN') === 0 && PHP_VERSION_ID < 70100) {
+                            // Printing Unicode characters like '»' to Windows console only works since PHP 7.1.
                             $tab = "\000";
                         } else {
                             $tab = "\033[30;1m»\033[0m";
