@@ -406,6 +406,7 @@ jobs:
     if: always() && needs.coverage.result == 'success'
 
     runs-on: ubuntu-latest
+    name: Coveralls Finish
 
     steps:
       - name: Coveralls Finished
