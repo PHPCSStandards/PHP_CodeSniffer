@@ -154,6 +154,13 @@ jobs:
       - name: Check XML code style
         run: diff -B ${{ matrix.file }} <(xmllint --format "${{ matrix.file }}")
 
+  pinact:
+    permissions:
+      contents: read # To clone the repo.
+
+    name: 'Run Pinact'
+    uses: PHPCSStandards/.github/.github/workflows/reusable-pinact.yml@5a8a6fcf1ac33b3ec6d7b826c0f319eaa83581ff # v1.3.1
+
   yamllint:
     permissions:
       contents: read # To clone the repo.
