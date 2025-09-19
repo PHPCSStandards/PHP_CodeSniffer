@@ -114,12 +114,12 @@ jobs:
         run: git config --global core.autocrlf input
 
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: "libxml2: find the latest relevant tag"
         if: ${{ matrix.libxml_minor }}
         id: libxml_version
-        uses: oprypin/find-latest-tag@v1
+        uses: oprypin/find-latest-tag@dd2729fe78b0bb55523ae2b2a310c6773a652bd1 # v1.1.2
         with:
           repository: GNOME/libxml2
           releases-only: false  # The libxml2 repository doesn't use GitHub's "release" feature.
@@ -138,7 +138,7 @@ jobs:
       - name: "libxml2: restore cache"
         if: ${{ matrix.libxml_minor }}
         id: libxml_cache_restore
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
         with:
           path: "libxml2-${{ steps.libxml_patch_version.outputs.PATCH }}"
           key: "${{ matrix.os }}-libxml-${{ matrix.libxml_minor }}-${{ steps.libxml_patch_version.outputs.PATCH }}"
@@ -166,7 +166,7 @@ jobs:
       - name: "libxml2: save cache"
         if: ${{ matrix.libxml_minor && steps.libxml_cache_restore.outputs.cache-hit != 'true' }}
         id: libxml_cache_save
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
         with:
           path: "libxml2-${{ steps.libxml_patch_version.outputs.PATCH }}"
           key: ${{ steps.libxml_cache_restore.outputs.cache-primary-key }}
@@ -197,7 +197,7 @@ jobs:
           # yamllint enable rule:line-length
 
       - name: Install PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f # 2.35.5
         with:
           php-version: ${{ matrix.php }}
           ini-values: ${{ steps.set_ini.outputs.PHP_INI }}
@@ -209,7 +209,7 @@ jobs:
       # This action also handles the caching of the dependencies.
       - name: Set up node
         if: ${{ matrix.custom_ini == false }}
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: '20'
 
@@ -224,7 +224,7 @@ jobs:
       # Install dependencies and handle caching in one go.
       # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
       - name: Install Composer dependencies
-        uses: "ramsey/composer-install@v3"
+        uses: "ramsey/composer-install@3cf229dc2919194e9e36783941438d17239e8520" # 3.1.1
         with:
           composer-options: ${{ matrix.php == '8.5' && '--ignore-platform-req=php+' || '' }}
           custom-cache-suffix: $(date -u "+%Y-%m")
@@ -257,7 +257,7 @@ jobs:
 
       - name: Download the PHPCS phar
         if: ${{ matrix.custom_ini == false }}
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
         with:
           name: phpcs-phar
 
@@ -302,7 +302,7 @@ jobs:
         run: git config --global core.autocrlf input
 
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Setup ini config
         if: ${{ matrix.custom_ini == true && matrix.os != 'windows-latest' }}
@@ -313,7 +313,7 @@ jobs:
           echo 'PHP_INI=, date.timezone=Australia/Sydney, short_open_tag=On' >> "$GITHUB_OUTPUT"
 
       - name: Install PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f # 2.35.5
         with:
           php-version: ${{ matrix.php }}
           ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On${{ steps.set_ini.outputs.PHP_INI }}
@@ -322,7 +322,7 @@ jobs:
       # This action also handles the caching of the dependencies.
       - name: Set up node
         if: ${{ matrix.custom_ini == false }}
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: '20'
 
@@ -337,7 +337,7 @@ jobs:
       # Install dependencies and handle caching in one go.
       # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
       - name: Install Composer dependencies
-        uses: "ramsey/composer-install@v3"
+        uses: "ramsey/composer-install@3cf229dc2919194e9e36783941438d17239e8520" # 3.1.1
         with:
           # Bust the cache at least once a month - output format: YYYY-MM.
           custom-cache-suffix: $(date -u "+%Y-%m")
@@ -385,7 +385,7 @@ jobs:
 
       - name: "Upload coverage results to Coveralls (normal run)"
         if: ${{ success() }}
-        uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b # v2.3.6
         with:
           format: clover
           file: build/logs/clover.xml
@@ -394,7 +394,7 @@ jobs:
 
       - name: "Upload coverage results to Coveralls (CBF run)"
         if: ${{ matrix.os != 'windows-latest' && success() }}
-        uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b # v2.3.6
         with:
           format: clover
           file: build/logs/clover-cbf.xml
@@ -409,6 +409,6 @@ jobs:
 
     steps:
       - name: Coveralls Finished
-        uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b # v2.3.6
         with:
           parallel-finished: true
