@@ -11,7 +11,6 @@ namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use PHP_CodeSniffer\Util\Tokens;
 
 class TodoSniff implements Sniff
 {
@@ -34,7 +33,12 @@ class TodoSniff implements Sniff
      */
     public function register()
     {
-        return array_diff(Tokens::$commentTokens, Tokens::$phpcsCommentTokens);
+        return [
+            T_COMMENT,
+            T_DOC_COMMENT,
+            T_DOC_COMMENT_TAG,
+            T_DOC_COMMENT_STRING,
+        ];
 
     }//end register()
 
@@ -50,26 +54,43 @@ class TodoSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $tokens = $phpcsFile->getTokens();
-
+        $tokens  = $phpcsFile->getTokens();
         $content = $tokens[$stackPtr]['content'];
         $matches = [];
-        preg_match('/(?:\A|[^\p{L}]+)todo([^\p{L}]+(.*)|\Z)/ui', $content, $matches);
-        if (empty($matches) === false) {
-            // Clear whitespace and some common characters not required at
-            // the end of a to-do message to make the warning more informative.
-            $type        = 'CommentFound';
-            $todoMessage = trim($matches[1]);
-            $todoMessage = trim($todoMessage, '-:[](). ');
-            $error       = 'Comment refers to a TODO task';
-            $data        = [$todoMessage];
-            if ($todoMessage !== '') {
-                $type   = 'TaskFound';
-                $error .= ' "%s"';
-            }
 
-            $phpcsFile->addWarning($error, $stackPtr, $type, $data);
+        if (preg_match('/(?:\A|[^\p{L}]+)todo([^\p{L}]+(.*)|\Z)/ui', $content, $matches) !== 1) {
+            return;
         }
+
+        // Clear whitespace and some common characters not required at
+        // the end of a to-do message to make the warning more informative.
+        $todoMessage = trim($matches[1]);
+        $todoMessage = trim($todoMessage, '-:[](). ');
+
+        if ($tokens[$stackPtr]['code'] === T_DOC_COMMENT_TAG
+            && $todoMessage === ''
+        ) {
+            $nextNonEmpty = $phpcsFile->findNext(T_DOC_COMMENT_WHITESPACE, ($stackPtr + 1), null, true);
+            if ($nextNonEmpty !== false
+                && $tokens[$nextNonEmpty]['code'] === T_DOC_COMMENT_STRING
+            ) {
+                $todoMessage = trim($tokens[$nextNonEmpty]['content'], '-:[](). ');
+            }
+        }
+
+        $error = 'Comment refers to a TODO task';
+        $type  = 'CommentFound';
+        $data  = [$todoMessage];
+        if ($todoMessage !== '') {
+            $error .= ' "%s"';
+            $type   = 'TaskFound';
+        }
+
+        if ($tokens[$stackPtr]['code'] === T_DOC_COMMENT_TAG) {
+            $type .= 'InDocblock';
+        }
+
+        $phpcsFile->addWarning($error, $stackPtr, $type, $data);
 
     }//end process()
 
