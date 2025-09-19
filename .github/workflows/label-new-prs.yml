@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - name: Label new PRs
-        uses: srvaroa/labeler@v1
+        uses: srvaroa/labeler@0a20eccb8c94a1ee0bed5f16859aece1c45c3e55 # v1.13.0
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
@@ -38,10 +38,10 @@ jobs:
     steps:
       # Checkout is needed to use the `use_local_config` option.
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Verify changes to the labeling logic
-        uses: srvaroa/labeler@v1
+        uses: srvaroa/labeler@0a20eccb8c94a1ee0bed5f16859aece1c45c3e55 # v1.13.0
         with:
           use_local_config: true
           fail_on_error: true

@@ -26,10 +26,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Install PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f # 2.35.5
         with:
           php-version: 'latest'
           coverage: none
@@ -52,43 +52,43 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       # Validate the XSD file.
       - name: Validate XSD against schema
-        uses: phpcsstandards/xmllint-validate@v1
+        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
         with:
           pattern: "phpcs.xsd"
           xsd-url: "https://www.w3.org/2012/04/XMLSchema.xsd"
 
       # Validate the XML ruleset files.
       - name: Validate rulesets against schema
-        uses: phpcsstandards/xmllint-validate@v1
+        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
         with:
           pattern: "./src/Standards/*/ruleset.xml"
           xsd-file: "phpcs.xsd"
 
       # Validate the Documentation XML files.
       - name: Validate documentation XML
-        uses: phpcsstandards/xmllint-validate@v1
+        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
         with:
           pattern: "./src/Standards/*/Docs/*/*Standard.xml"
           xsd-url: "https://phpcsstandards.github.io/PHPCSDevTools/phpcsdocs.xsd"
 
       # Validate dev tool related XML files.
       - name: Validate Project PHPCS ruleset against schema
-        uses: phpcsstandards/xmllint-validate@v1
+        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
         with:
           pattern: "phpcs.xml.dist"
           xsd-file: "phpcs.xsd"
 
       - name: "Validate PHPUnit <= 9 config for well-formedness"
-        uses: phpcsstandards/xmllint-validate@v1
+        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
         with:
           pattern: "phpunit-lte9.xml.dist"
 
       - name: "Validate PHPUnit 10+ config for well-formedness"
-        uses: phpcsstandards/xmllint-validate@v1
+        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
         with:
           pattern: "phpunit.xml.dist"
 
@@ -104,7 +104,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       # Updating the lists can fail intermittently, typically after Microsoft has released a new package.
       # This should not be blocking for this job, so ignore any errors from this step.
@@ -118,7 +118,7 @@ jobs:
 
       # Show XML violations inline in the file diff.
       - name: Enable showing XML issues inline
-        uses: korelstar/xmllint-problem-matcher@v1
+        uses: korelstar/xmllint-problem-matcher@1bd292d642ddf3d369d02aaa8b262834d61198c0 # v1.2.0
 
       # Check the code-style consistency of the XML files.
       - name: Check XML code style
@@ -161,15 +161,15 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Set up problem matcher
-        uses: lumaxis/shellcheck-problem-matchers@v2
+        uses: lumaxis/shellcheck-problem-matchers@b02a1715a00c729b20eed3ebb7edf56fa9a433ba # v2.1.0
         with:
           format: gcc
 
       - name: Run ShellCheck
-        uses: ludeeus/action-shellcheck@2.0.0
+        uses: ludeeus/action-shellcheck@00cae500b08a931fb5698e11e79bfbd38e612a38 # 2.0.0
         with:
           format: gcc
 
@@ -181,7 +181,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Find uses
         id: findprops
