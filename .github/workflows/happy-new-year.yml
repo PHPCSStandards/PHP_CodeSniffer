@@ -49,13 +49,13 @@ jobs:
         run: "echo current year: ${{ steps.year.outputs.NEW_YEAR }} - previous year: ${{ steps.year.outputs.PREVIOUS_YEAR }}"
 
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           ref: ${{ steps.branches.outputs.BASE }}
 
       - name: Update the year in the copyright tag in the fixed file
         id: findreplace
-        uses: jacobtomlinson/gha-find-replace@v3
+        uses: jacobtomlinson/gha-find-replace@f1069b438f125e5395d84d1c6fd3b559a7880cb5 # 3.0.5
         with:
           find: "* @copyright  ${{ steps.year.outputs.PREVIOUS_YEAR }} Squiz Pty Ltd (ABN 77 084 670 600)"
           replace: "* @copyright  ${{ steps.year.outputs.NEW_YEAR }} Squiz Pty Ltd (ABN 77 084 670 600)"
@@ -73,7 +73,7 @@ jobs:
         run: exit 1
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7.0.8
         with:
           base: ${{ steps.branches.outputs.BASE }}
           branch: ${{ steps.branches.outputs.PR_BRANCH }}

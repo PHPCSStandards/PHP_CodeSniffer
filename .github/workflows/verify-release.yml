@@ -34,7 +34,7 @@ jobs:
 
     steps:
       - name: Trigger schema website update
-        uses: peter-evans/repository-dispatch@v3
+        uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3.0.0
         with:
           token: ${{ secrets.WORKFLOW_DISPATCH_PAT }}
           repository: PHPCSStandards/schema.phpcodesniffer.com
@@ -53,7 +53,7 @@ jobs:
 
     steps:
       - name: Trigger wiki update
-        uses: peter-evans/repository-dispatch@v3
+        uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3.0.0
         with:
           token: ${{ secrets.WORKFLOW_DISPATCH_DOCS_PAT }}
           repository: PHPCSStandards/PHP_CodeSniffer-documentation
@@ -83,7 +83,7 @@ jobs:
 
     steps:
       - name: Retrieve latest release info
-        uses: octokit/request-action@v2.x
+        uses: octokit/request-action@dad4362715b7fb2ddedf9772c8670824af564f0d # v2.4.0
         id: get_latest_release
         with:
           route: GET /repos/PHPCSStandards/PHP_CodeSniffer/releases/latest
@@ -146,7 +146,7 @@ jobs:
         run: gpg --verify ${{ steps.source.outputs.FILE }}.asc ${{ steps.source.outputs.FILE }}
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f # 2.35.5
         with:
           php-version: 'latest'
           ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On
@@ -216,7 +216,7 @@ jobs:
         run: "echo ${{ steps.version.outputs.TAG }}"
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f # 2.35.5
         with:
           php-version: 'latest'
           ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On
