@@ -1,0 +1,107 @@
+<documentation title="Class Declaration">
+    <standard>
+    <![CDATA[
+    Only one interface or class is allowed in a file.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: One class declaration per file.">
+        <![CDATA[
+class Foo implements Bar
+{
+}
+        ]]>
+        </code>
+        <code title="Invalid: More than one class or interface per file.">
+        <![CDATA[
+<em>class Foo implements Bar</em>
+{
+}
+
+<em>interface Bar</em>
+{
+}
+        ]]>
+        </code>
+        </code_comparison>
+        <standard>
+        <![CDATA[
+        No whitespace allowed before the class declaration keywords.
+        ]]>
+        </standard>
+        <code_comparison>
+            <code title="Valid: No whitespace before class declaration keywords.">
+            <![CDATA[
+<em></em>abstract class Foo
+{
+}
+            ]]>
+            </code>
+            <code title="Invalid: Whitespace before class declaration
+keywords.">
+            <![CDATA[
+<em> </em>abstract class Foo
+{
+}
+            ]]>
+            </code>
+        </code_comparison>
+        <standard>
+        <![CDATA[
+        Closing brace of a class or interface must be followed by a single blank line.
+        ]]>
+        </standard>
+        <code_comparison>
+            <code title="Valid: Single blank line after closing brace.">
+            <![CDATA[
+class Foo
+{
+}
+<em></em>
+            ]]>
+            </code>
+            <code title="Invalid: No blank line after closing brace.">
+            <![CDATA[
+class Foo
+{
+}<em></em>
+            ]]>
+            </code>
+        </code_comparison>
+        <standard>
+        <![CDATA[
+        Closing brace of a class or interface must be on a line by itself.
+        ]]>
+        </standard>
+        <code_comparison>
+            <code title="Valid: Closing brace is on a line by itself.">
+            <![CDATA[
+class Foo
+{
+<em>}</em>
+            ]]>
+            </code>
+            <code title="Invalid: Closing brace is not on a line by itself.">
+            <![CDATA[
+class Foo
+{<em>}</em>
+            ]]>
+            </code>
+        </code_comparison>
+        <code_comparison>
+            <code title="Valid: No whitespace before closing brace.">
+            <![CDATA[
+class Foo
+{
+<em>}</em>
+            ]]>
+            </code>
+            <code title="Invalid: Whitespace before closing brace.">
+            <![CDATA[
+class Foo
+{
+<em> </em>}
+            ]]>
+            </code>
+        </code_comparison>
+</documentation>
