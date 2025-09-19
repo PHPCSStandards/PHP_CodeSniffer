@@ -16,6 +16,14 @@ updates:
       prefix: "GH Actions:"
     labels:
       - "Type: chores/QA"
+    cooldown:
+      semver-major-days: 10
+    groups:
+      action-runners:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
 
   # Handle updates for the orphan gh-pages branch.
   - package-ecosystem: "github-actions"
@@ -28,3 +36,11 @@ updates:
       prefix: "GH Pages/Actions:"
     labels:
       - "Type: chores/QA"
+    cooldown:
+      semver-major-days: 10
+    groups:
+      action-runners:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
