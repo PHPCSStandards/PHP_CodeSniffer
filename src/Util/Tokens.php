@@ -90,107 +90,111 @@ define('T_TYPE_CLOSE_PARENTHESIS', 'PHPCS_T_TYPE_CLOSE_PARENTHESIS');
  * `PHP_CodeSniffer\Tests\Core\Util\Tokens\TokenNameTest::dataPolyfilledPHPNativeTokens()` test method!}
  */
 
-// Some PHP 5.5 tokens, replicated for lower versions.
+// PHP 5.5.
 if (defined('T_FINALLY') === false) {
-    define('T_FINALLY', 'PHPCS_T_FINALLY');
+    define('T_FINALLY', -1000);
 }
 
 if (defined('T_YIELD') === false) {
-    define('T_YIELD', 'PHPCS_T_YIELD');
+    define('T_YIELD', -1001);
 }
 
-// Some PHP 5.6 tokens, replicated for lower versions.
+// PHP 5.6.
 if (defined('T_ELLIPSIS') === false) {
-    define('T_ELLIPSIS', 'PHPCS_T_ELLIPSIS');
+    define('T_ELLIPSIS', -1002);
 }
 
 if (defined('T_POW') === false) {
-    define('T_POW', 'PHPCS_T_POW');
+    define('T_POW', -1003);
 }
 
 if (defined('T_POW_EQUAL') === false) {
-    define('T_POW_EQUAL', 'PHPCS_T_POW_EQUAL');
+    define('T_POW_EQUAL', -1004);
 }
 
-// Some PHP 7 tokens, replicated for lower versions.
+// PHP 7.
 if (defined('T_SPACESHIP') === false) {
-    define('T_SPACESHIP', 'PHPCS_T_SPACESHIP');
+    define('T_SPACESHIP', -1005);
 }
 
 if (defined('T_COALESCE') === false) {
-    define('T_COALESCE', 'PHPCS_T_COALESCE');
+    define('T_COALESCE', -1006);
 }
 
 if (defined('T_COALESCE_EQUAL') === false) {
-    define('T_COALESCE_EQUAL', 'PHPCS_T_COALESCE_EQUAL');
+    define('T_COALESCE_EQUAL', -1007);
 }
 
 if (defined('T_YIELD_FROM') === false) {
-    define('T_YIELD_FROM', 'PHPCS_T_YIELD_FROM');
+    define('T_YIELD_FROM', -1008);
 }
 
-// Some PHP 7.4 tokens, replicated for lower versions.
+// PHP 7.4.
 if (defined('T_BAD_CHARACTER') === false) {
-    define('T_BAD_CHARACTER', 'PHPCS_T_BAD_CHARACTER');
+    define('T_BAD_CHARACTER', -1009);
 }
 
 if (defined('T_FN') === false) {
-    define('T_FN', 'PHPCS_T_FN');
+    define('T_FN', -1010);
 }
 
-// Some PHP 8.0 tokens, replicated for lower versions.
+// PHP 8.0.
 if (defined('T_NULLSAFE_OBJECT_OPERATOR') === false) {
-    define('T_NULLSAFE_OBJECT_OPERATOR', 'PHPCS_T_NULLSAFE_OBJECT_OPERATOR');
+    define('T_NULLSAFE_OBJECT_OPERATOR', -1011);
 }
 
 if (defined('T_NAME_QUALIFIED') === false) {
-    define('T_NAME_QUALIFIED', 'PHPCS_T_NAME_QUALIFIED');
+    define('T_NAME_QUALIFIED', -1012);
 }
 
 if (defined('T_NAME_FULLY_QUALIFIED') === false) {
-    define('T_NAME_FULLY_QUALIFIED', 'PHPCS_T_NAME_FULLY_QUALIFIED');
+    define('T_NAME_FULLY_QUALIFIED', -1013);
 }
 
 if (defined('T_NAME_RELATIVE') === false) {
-    define('T_NAME_RELATIVE', 'PHPCS_T_NAME_RELATIVE');
+    define('T_NAME_RELATIVE', -1014);
 }
 
 if (defined('T_MATCH') === false) {
-    define('T_MATCH', 'PHPCS_T_MATCH');
+    define('T_MATCH', -1015);
 }
 
 if (defined('T_ATTRIBUTE') === false) {
-    define('T_ATTRIBUTE', 'PHPCS_T_ATTRIBUTE');
+    define('T_ATTRIBUTE', -1016);
 }
 
-// Some PHP 8.1 tokens, replicated for lower versions.
+// PHP 8.1.
 if (defined('T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG') === false) {
-    define('T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG', 'PHPCS_T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG');
+    define('T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG', -1017);
 }
 
 if (defined('T_AMPERSAND_NOT_FOLLOWED_BY_VAR_OR_VARARG') === false) {
-    define('T_AMPERSAND_NOT_FOLLOWED_BY_VAR_OR_VARARG', 'PHPCS_T_AMPERSAND_NOT_FOLLOWED_BY_VAR_OR_VARARG');
+    define('T_AMPERSAND_NOT_FOLLOWED_BY_VAR_OR_VARARG', -1018);
 }
 
 if (defined('T_READONLY') === false) {
-    define('T_READONLY', 'PHPCS_T_READONLY');
+    define('T_READONLY', -1019);
 }
 
 if (defined('T_ENUM') === false) {
-    define('T_ENUM', 'PHPCS_T_ENUM');
+    define('T_ENUM', -1020);
 }
 
-// Some PHP 8.4 tokens, replicated for lower versions.
+// PHP 8.4.
+if (defined('T_PROPERTY_C') === false) {
+    define('T_PROPERTY_C', -1021);
+}
+
 if (defined('T_PUBLIC_SET') === false) {
-    define('T_PUBLIC_SET', 'PHPCS_T_PUBLIC_SET');
+    define('T_PUBLIC_SET', -1022);
 }
 
 if (defined('T_PROTECTED_SET') === false) {
-    define('T_PROTECTED_SET', 'PHPCS_T_PROTECTED_SET');
+    define('T_PROTECTED_SET', -1023);
 }
 
 if (defined('T_PRIVATE_SET') === false) {
-    define('T_PRIVATE_SET', 'PHPCS_T_PRIVATE_SET');
+    define('T_PRIVATE_SET', -1024);
 }
 
 // Tokens used for parsing doc blocks.
