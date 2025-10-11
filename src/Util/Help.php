@@ -36,7 +36,6 @@ final class Help
      * @var array<string> List of the option names.
      */
     public const DEFAULT_LONG_OPTIONS = [
-        'allow-empty-file-list',
         'basepath',
         'bootstrap',
         'colors',
@@ -492,82 +491,78 @@ final class Help
         ];
 
         $options['Reporting Options'] = [
-            'report'                => [
+            'report'             => [
                 'argument'    => '--report=<report(s)>',
                 'description' => 'A comma-separated list of reports to print. Available reports: "full", "xml", "checkstyle", "csv", "json", "junit", "emacs", "source", "summary", "diff", "svnblame", "gitblame", "hgblame", "notifysend" or "performance".' . "\n"
                     . 'Or specify the path to a custom report class. By default, the "full" report is displayed.',
             ],
-            'report-file'           => [
+            'report-file'        => [
                 'argument'    => '--report-file=<reportFile>',
                 'description' => 'Write the report to the specified file path.',
             ],
-            'report-report'         => [
+            'report-report'      => [
                 'argument'    => '--report-<report>=<reportFile>',
                 'description' => 'Write the report specified in <report> to the specified file path.',
             ],
-            'report-width'          => [
+            'report-width'       => [
                 'argument'    => '--report-width=<reportWidth>',
                 'description' => 'How many columns wide screen reports should be. Set to "auto" to use current screen width, where supported.',
             ],
-            'basepath'              => [
+            'basepath'           => [
                 'argument'    => '--basepath=<basepath>',
                 'description' => 'Strip a path from the front of file paths inside reports.',
             ],
-            'blank-line-1'          => ['spacer' => ''],
+            'blank-line-1'       => ['spacer' => ''],
 
-            'w'                     => [
+            'w'                  => [
                 'argument'    => '-w',
                 'description' => 'Include both warnings and errors (default).',
             ],
-            'n'                     => [
+            'n'                  => [
                 'argument'    => '-n',
                 'description' => 'Do not include warnings. Shortcut for "--warning-severity=0".',
             ],
-            'severity'              => [
+            'severity'           => [
                 'argument'    => '--severity=<severity>',
                 'description' => 'The minimum severity required to display an error or warning. Defaults to 5.',
             ],
-            'error-severity'        => [
+            'error-severity'     => [
                 'argument'    => '--error-severity=<severity>',
                 'description' => 'The minimum severity required to display an error. Defaults to 5.',
             ],
-            'warning-severity'      => [
+            'warning-severity'   => [
                 'argument'    => '--warning-severity=<severity>',
                 'description' => 'The minimum severity required to display a warning. Defaults to 5.',
             ],
-            'blank-line-2'          => ['spacer' => ''],
+            'blank-line-2'       => ['spacer' => ''],
 
-            's'                     => [
+            's'                  => [
                 'argument'    => '-s',
                 'description' => 'Show sniff error codes in all reports.',
             ],
-            'ignore-annotations'    => [
+            'ignore-annotations' => [
                 'argument'    => '--ignore-annotations',
                 'description' => 'Ignore all "phpcs:..." annotations in code comments.',
             ],
-            'colors'                => [
+            'colors'             => [
                 'argument'    => '--colors',
                 'description' => 'Use colors in screen output.',
             ],
-            'no-colors'             => [
+            'no-colors'          => [
                 'argument'    => '--no-colors',
                 'description' => 'Do not use colors in screen output (default).',
             ],
-            'p'                     => [
+            'p'                  => [
                 'argument'    => '-p',
                 'description' => 'Show progress of the run.',
             ],
-            'q'                     => [
+            'q'                  => [
                 'argument'    => '-q',
                 'description' => 'Quiet mode; disables progress and verbose output.',
             ],
-            'm'                     => [
+            'm'                  => [
                 'argument'    => '-m',
                 'description' => 'Stop error messages from being recorded. This saves a lot of memory but stops many reports from being used.',
-            ],
-            'allow-empty-file-list' => [
-                'argument'    => '--allow-empty-file-list',
-                'description' => 'Suppress "No files were checked" error.',
             ],
         ];
 
