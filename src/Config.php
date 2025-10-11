@@ -65,7 +65,6 @@ use PHP_CodeSniffer\Util\Standards;
  * @property string      $stdinContent    Content passed directly to PHPCS on STDIN.
  * @property string      $stdinPath       The path to use for content passed on STDIN.
  * @property bool        $trackTime       Whether or not to track sniff run time.
- * @property bool        $allowEmptyFileList Suppresses "No files were checked" error.
  *
  * @property array<string, string>      $extensions File extensions that should be checked, and what tokenizer is used.
  *                                                  E.g., array('inc' => 'PHP');
@@ -161,43 +160,42 @@ class Config
      * @var array<string, mixed>
      */
     private $settings = [
-        'files'              => null,
-        'standards'          => null,
-        'verbosity'          => null,
-        'interactive'        => null,
-        'parallel'           => null,
-        'cache'              => null,
-        'cacheFile'          => null,
-        'colors'             => null,
-        'explain'            => null,
-        'local'              => null,
-        'showSources'        => null,
-        'showProgress'       => null,
-        'quiet'              => null,
-        'annotations'        => null,
-        'tabWidth'           => null,
-        'encoding'           => null,
-        'extensions'         => null,
-        'sniffs'             => null,
-        'exclude'            => null,
-        'ignored'            => null,
-        'reportFile'         => null,
-        'generator'          => null,
-        'filter'             => null,
-        'bootstrap'          => null,
-        'reports'            => null,
-        'basepath'           => null,
-        'reportWidth'        => null,
-        'errorSeverity'      => null,
-        'warningSeverity'    => null,
-        'recordErrors'       => null,
-        'suffix'             => null,
-        'stdin'              => null,
-        'stdinContent'       => null,
-        'stdinPath'          => null,
-        'trackTime'          => null,
-        'unknown'            => null,
-        'allowEmptyFileList' => null,
+        'files'           => null,
+        'standards'       => null,
+        'verbosity'       => null,
+        'interactive'     => null,
+        'parallel'        => null,
+        'cache'           => null,
+        'cacheFile'       => null,
+        'colors'          => null,
+        'explain'         => null,
+        'local'           => null,
+        'showSources'     => null,
+        'showProgress'    => null,
+        'quiet'           => null,
+        'annotations'     => null,
+        'tabWidth'        => null,
+        'encoding'        => null,
+        'extensions'      => null,
+        'sniffs'          => null,
+        'exclude'         => null,
+        'ignored'         => null,
+        'reportFile'      => null,
+        'generator'       => null,
+        'filter'          => null,
+        'bootstrap'       => null,
+        'reports'         => null,
+        'basepath'        => null,
+        'reportWidth'     => null,
+        'errorSeverity'   => null,
+        'warningSeverity' => null,
+        'recordErrors'    => null,
+        'suffix'          => null,
+        'stdin'           => null,
+        'stdinContent'    => null,
+        'stdinPath'       => null,
+        'trackTime'       => null,
+        'unknown'         => null,
     ];
 
     /**
@@ -583,7 +581,6 @@ class Config
         $this->stdinPath       = null;
         $this->trackTime       = false;
         $this->unknown         = [];
-        $this->allowEmptyFileList = false;
 
         $standard = self::getConfigData('default_standard');
         if ($standard !== null) {
@@ -830,14 +827,6 @@ class Config
 
                 $this->annotations = false;
                 $this->overriddenDefaults['annotations'] = true;
-                break;
-            case 'allow-empty-file-list':
-                if (isset($this->overriddenDefaults['allowEmptyFileList']) === true) {
-                    break;
-                }
-
-                $this->allowEmptyFileList = true;
-                $this->overriddenDefaults['allowEmptyFileList'] = true;
                 break;
             case 'config-set':
                 if (isset($this->cliArgs[($pos + 1)]) === false

@@ -351,7 +351,7 @@ class Runner
         }
 
         $numFiles = count($todo);
-        if ($numFiles === 0 && $this->config->allowEmptyFileList === false) {
+        if ($numFiles === 0 && Config::getConfigData('allow_empty_file_list') !== '1') {
             $error  = 'ERROR: No files were checked.' . PHP_EOL;
             $error .= 'All specified files were excluded or did not match filtering rules.' . PHP_EOL . PHP_EOL;
             throw new DeepExitException($error, ExitCode::PROCESS_ERROR);

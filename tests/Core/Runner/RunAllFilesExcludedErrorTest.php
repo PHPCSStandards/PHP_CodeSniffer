@@ -90,7 +90,9 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
             $this->markTestSkipped('This test needs CS mode to run');
         }
 
-        $extraArgs[] = '--allow-empty-file-list';
+        $extraArgs[] = '--runtime-set';
+        $extraArgs[] = 'allow_empty_file_list';
+        $extraArgs[] = '1';
         $this->setupTest($sourceDir, $extraArgs);
 
         $runner = new Runner();
@@ -119,7 +121,9 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
             $this->markTestSkipped('This test needs CBF mode to run');
         }
 
-        $extraArgs[] = '--allow-empty-file-list';
+        $extraArgs[] = '--runtime-set';
+        $extraArgs[] = 'allow_empty_file_list';
+        $extraArgs[] = '1';
         $this->setupTest($sourceDir, $extraArgs);
 
         $runner = new Runner();
