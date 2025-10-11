@@ -10,6 +10,7 @@
 
 namespace PHP_CodeSniffer\Util;
 
+// PHPCS native tokens.
 define('T_NONE', 'PHPCS_T_NONE');
 define('T_OPEN_CURLY_BRACKET', 'PHPCS_T_OPEN_CURLY_BRACKET');
 define('T_CLOSE_CURLY_BRACKET', 'PHPCS_T_CLOSE_CURLY_BRACKET');
@@ -70,84 +71,6 @@ define('T_TYPE_INTERSECTION', 'PHPCS_T_TYPE_INTERSECTION');
 define('T_TYPE_OPEN_PARENTHESIS', 'PHPCS_T_TYPE_OPEN_PARENTHESIS');
 define('T_TYPE_CLOSE_PARENTHESIS', 'PHPCS_T_TYPE_CLOSE_PARENTHESIS');
 
-/*
- * {@internal IMPORTANT: all PHP native polyfilled tokens MUST be added to the
- * `PHP_CodeSniffer\Tests\Core\Util\Tokens\TokenNameTest::dataPolyfilledPHPNativeTokens()` test method!}
- */
-
-// Some PHP 7.4 tokens, replicated for lower versions.
-if (defined('T_COALESCE_EQUAL') === false) {
-    define('T_COALESCE_EQUAL', 'PHPCS_T_COALESCE_EQUAL');
-}
-
-if (defined('T_BAD_CHARACTER') === false) {
-    define('T_BAD_CHARACTER', 'PHPCS_T_BAD_CHARACTER');
-}
-
-if (defined('T_FN') === false) {
-    define('T_FN', 'PHPCS_T_FN');
-}
-
-// Some PHP 8.0 tokens, replicated for lower versions.
-if (defined('T_NULLSAFE_OBJECT_OPERATOR') === false) {
-    define('T_NULLSAFE_OBJECT_OPERATOR', 'PHPCS_T_NULLSAFE_OBJECT_OPERATOR');
-}
-
-if (defined('T_NAME_QUALIFIED') === false) {
-    define('T_NAME_QUALIFIED', 'PHPCS_T_NAME_QUALIFIED');
-}
-
-if (defined('T_NAME_FULLY_QUALIFIED') === false) {
-    define('T_NAME_FULLY_QUALIFIED', 'PHPCS_T_NAME_FULLY_QUALIFIED');
-}
-
-if (defined('T_NAME_RELATIVE') === false) {
-    define('T_NAME_RELATIVE', 'PHPCS_T_NAME_RELATIVE');
-}
-
-if (defined('T_MATCH') === false) {
-    define('T_MATCH', 'PHPCS_T_MATCH');
-}
-
-if (defined('T_ATTRIBUTE') === false) {
-    define('T_ATTRIBUTE', 'PHPCS_T_ATTRIBUTE');
-}
-
-// Some PHP 8.1 tokens, replicated for lower versions.
-if (defined('T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG') === false) {
-    define('T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG', 'PHPCS_T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG');
-}
-
-if (defined('T_AMPERSAND_NOT_FOLLOWED_BY_VAR_OR_VARARG') === false) {
-    define('T_AMPERSAND_NOT_FOLLOWED_BY_VAR_OR_VARARG', 'PHPCS_T_AMPERSAND_NOT_FOLLOWED_BY_VAR_OR_VARARG');
-}
-
-if (defined('T_READONLY') === false) {
-    define('T_READONLY', 'PHPCS_T_READONLY');
-}
-
-if (defined('T_ENUM') === false) {
-    define('T_ENUM', 'PHPCS_T_ENUM');
-}
-
-// Some PHP 8.4 tokens, replicated for lower versions.
-if (defined('T_PUBLIC_SET') === false) {
-    define('T_PUBLIC_SET', 'PHPCS_T_PUBLIC_SET');
-}
-
-if (defined('T_PROTECTED_SET') === false) {
-    define('T_PROTECTED_SET', 'PHPCS_T_PROTECTED_SET');
-}
-
-if (defined('T_PRIVATE_SET') === false) {
-    define('T_PRIVATE_SET', 'PHPCS_T_PRIVATE_SET');
-}
-
-// Some PHP 8.5 tokens, replicated for lower versions.
-if (defined('T_VOID_CAST') === false) {
-    define('T_VOID_CAST', 'PHPCS_T_VOID_CAST');
-}
-
 // Tokens used for parsing doc blocks.
 define('T_DOC_COMMENT_STAR', 'PHPCS_T_DOC_COMMENT_STAR');
 define('T_DOC_COMMENT_WHITESPACE', 'PHPCS_T_DOC_COMMENT_WHITESPACE');
@@ -162,6 +85,8 @@ define('T_PHPCS_DISABLE', 'PHPCS_T_PHPCS_DISABLE');
 define('T_PHPCS_SET', 'PHPCS_T_PHPCS_SET');
 define('T_PHPCS_IGNORE', 'PHPCS_T_PHPCS_IGNORE');
 define('T_PHPCS_IGNORE_FILE', 'PHPCS_T_PHPCS_IGNORE_FILE');
+
+Tokens::polyfillTokenizerConstants();
 
 final class Tokens
 {
@@ -613,6 +538,13 @@ final class Tokens
     ];
 
     /**
+     * Mapping table for polyfilled constants
+     *
+     * @var array<int, string>
+     */
+    private static $polyfillMappingTable = [];
+
+    /**
      * The token weightings.
      *
      * @var array<int|string, int>
@@ -943,12 +875,12 @@ final class Tokens
      */
     public static function tokenName($token)
     {
-        if (is_string($token) === false) {
-            // PHP-supplied token name.
-            return token_name($token);
+        if (is_string($token) === true) {
+            // PHPCS native token.
+            return substr($token, 6);
         }
 
-        return substr($token, 6);
+        return (self::$polyfillMappingTable[$token] ?? token_name($token));
     }
 
 
@@ -990,5 +922,67 @@ final class Tokens
         }
 
         return $highestType;
+    }
+
+
+    /**
+     * Polyfill tokenizer (T_*) constants.
+     *
+     * {@internal IMPORTANT: all PHP native polyfilled tokens MUST be added to the
+     * `PHP_CodeSniffer\Tests\Core\Util\Tokens\TokenNameTest::dataPolyfilledPHPNativeTokens()` test method!}
+     *
+     * @return void
+     */
+    public static function polyfillTokenizerConstants(): void
+    {
+        // Ideally this would be a private class constant. We cannot do that
+        // here as the constants that we are polyfilling in this method are
+        // used in some of the class constants for this class. If we reference
+        // any class constants or properties before this method has fully run,
+        // PHP will intitialise the class, leading to warnings about undefined
+        // T_* constants.
+        $tokensToPolyfill = [
+            'T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG',
+            'T_AMPERSAND_NOT_FOLLOWED_BY_VAR_OR_VARARG',
+            'T_ATTRIBUTE',
+            'T_BAD_CHARACTER',
+            'T_COALESCE_EQUAL',
+            'T_ENUM',
+            'T_FN',
+            'T_MATCH',
+            'T_NAME_FULLY_QUALIFIED',
+            'T_NAME_QUALIFIED',
+            'T_NAME_RELATIVE',
+            'T_NULLSAFE_OBJECT_OPERATOR',
+            'T_PRIVATE_SET',
+            'T_PROTECTED_SET',
+            'T_PUBLIC_SET',
+            'T_READONLY',
+            'T_VOID_CAST',
+        ];
+
+        // <https://www.php.net/manual/en/tokens.php>
+        // The PHP manual suggests "using big numbers like 10000" for
+        // polyfilled T_* constants. We have arbitrarily chosen to start our
+        // numbering scheme from 135_000.
+        $nextTokenNumber = 135000;
+
+        $polyfillMappingTable = [];
+
+        foreach ($tokensToPolyfill as $tokenName) {
+            if (defined($tokenName) === false) {
+                while (isset($polyfillMappingTable[$nextTokenNumber]) === true) {
+                    $nextTokenNumber++;
+                }
+
+                define($tokenName, $nextTokenNumber);
+            }
+
+            $polyfillMappingTable[constant($tokenName)] = $tokenName;
+        }
+
+        // Be careful to not reference this class anywhere in this method until
+        // *after* all constants have been polyfilled.
+        self::$polyfillMappingTable = $polyfillMappingTable;
     }
 }
