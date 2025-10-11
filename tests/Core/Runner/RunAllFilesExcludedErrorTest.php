@@ -74,6 +74,63 @@ final class RunAllFilesExcludedErrorTest extends AbstractRunnerTestCase
 
 
     /**
+     * Verify that the "All files were excluded" error message is not shown when all files are excluded and it is
+     * allowed via --allow-empty-file-list (PHPCS).
+     *
+     * @param string        $sourceDir The (fixture) directory to scan for files.
+     * @param array<string> $extraArgs Any extra arguments to pass on the command line.
+     *
+     * @dataProvider data
+     *
+     * @return void
+     */
+    public function testPhpcsAllowEmpty($sourceDir, $extraArgs)
+    {
+        if (PHP_CODESNIFFER_CBF === true) {
+            $this->markTestSkipped('This test needs CS mode to run');
+        }
+
+        $extraArgs[] = '--allow-empty-file-list';
+        $this->setupTest($sourceDir, $extraArgs);
+
+        $runner = new Runner();
+        $runner->runPHPCS();
+
+        $regex = '`^(Time: [0-9]+ms; Memory: [0-9\.]+MB' . PHP_EOL . ')?$`';
+        $this->assertStderrOutputMatchesRegex($regex);
+    }
+
+
+    /**
+     * Verify that the "All files were excluded" error message is not shown when all files are excluded and it is
+     * * allowed via --allow-empty-file-list (PHPCBF).
+     *
+     * @param string        $sourceDir The (fixture) directory to scan for files.
+     * @param array<string> $extraArgs Any extra arguments to pass on the command line.
+     *
+     * @dataProvider data
+     * @group        CBF
+     *
+     * @return void
+     */
+    public function testPhpcbfAllowEmpty($sourceDir, $extraArgs)
+    {
+        if (PHP_CODESNIFFER_CBF === false) {
+            $this->markTestSkipped('This test needs CBF mode to run');
+        }
+
+        $extraArgs[] = '--allow-empty-file-list';
+        $this->setupTest($sourceDir, $extraArgs);
+
+        $runner = new Runner();
+        $runner->runPHPCBF();
+
+        $regex = '`^.*No violations were found.*(Time: [0-9]+ms; Memory: [0-9\.]+MB' . PHP_EOL . ')?$`m';
+        $this->assertStderrOutputMatchesRegex($regex);
+    }
+
+
+    /**
      * Data provider.
      *
      * @return array<string, array<string, string|array<string>>>
