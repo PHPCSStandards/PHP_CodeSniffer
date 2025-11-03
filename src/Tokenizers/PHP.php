@@ -2244,6 +2244,24 @@ class PHP extends Tokenizer
                     break;
                 }//end for
 
+                // Handle live coding/parse errors elegantly.
+                // If the "?" is the last non-empty token in the file, we cannot draw a definitive conclusion,
+                // so tokenize as T_INLINE_THEN.
+                if ($i === $numTokens) {
+                    if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                        echo "\t\t* token $stackPtr at end of file changed from ? to T_INLINE_THEN".PHP_EOL;
+                    }
+
+                    $newToken['code'] = T_INLINE_THEN;
+                    $newToken['type'] = 'T_INLINE_THEN';
+
+                    $insideInlineIf[] = $stackPtr;
+
+                    $finalTokens[$newStackPtr] = $newToken;
+                    $newStackPtr++;
+                    continue;
+                }
+
                 /*
                  * This can still be a nullable type or a ternary.
                  * Do additional checking.
@@ -2253,11 +2271,13 @@ class PHP extends Tokenizer
                 $lastSeenNonEmpty = null;
 
                 for ($i = ($stackPtr - 1); $i >= 0; $i--) {
+                    if (isset($tokens[$i]) === false) {
+                        // Ignore skipped tokens (related to PHP 8+ slash/hash comment vs new line retokenization).
+                        continue;
+                    }
+
                     if (is_array($tokens[$i]) === true) {
                         $tokenType = $tokens[$i][0];
-                    } else if ($tokens[$i] === null) {
-                        // Ignore skipped tokens.
-                        continue;
                     } else {
                         $tokenType = $tokens[$i];
                     }

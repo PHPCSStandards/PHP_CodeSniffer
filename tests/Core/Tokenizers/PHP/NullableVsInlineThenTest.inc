@@ -22,7 +22,11 @@ $closure = function (
     /* testClosureParamTypeNullableInt */
     ?Int $a,
     /* testClosureParamTypeNullableCallable */
-    ?    Callable $b
+    ?    Callable $b,
+    /* testClosureParamTypeNullableStringWithAttributeAndSlashComment */
+    #[AttributeForParam]
+    // This must be a slash or hash comment and the next line must **NOT** have any indentation for the PHP 8.5 deprecation notice (issue PHPCSStandards/PHP_CodeSniffer#1216) to occur.
+?string $c
 /* testClosureReturnTypeNullableInt */
 ) :?INT{};
 

@@ -50,16 +50,17 @@ final class NullableVsInlineThenTest extends AbstractTokenizerTestCase
     public static function dataNullable()
     {
         return [
-            'property declaration, readonly, no visibility'  => ['/* testNullableReadonlyOnly */'],
-            'property declaration, private set'              => ['/* testNullablePrivateSet */'],
-            'property declaration, public and protected set' => ['/* testNullablePublicProtectedSet */'],
-            'property declaration, final, no visibility'     => ['/* testNullableFinalOnly */'],
-            'property declaration, abstract, no visibility'  => ['/* testNullableAbstractOnly */'],
+            'property declaration, readonly, no visibility'                 => ['/* testNullableReadonlyOnly */'],
+            'property declaration, private set'                             => ['/* testNullablePrivateSet */'],
+            'property declaration, public and protected set'                => ['/* testNullablePublicProtectedSet */'],
+            'property declaration, final, no visibility'                    => ['/* testNullableFinalOnly */'],
+            'property declaration, abstract, no visibility'                 => ['/* testNullableAbstractOnly */'],
 
-            'closure param type, nullable int'               => ['/* testClosureParamTypeNullableInt */'],
-            'closure param type, nullable callable'          => ['/* testClosureParamTypeNullableCallable */'],
-            'closure return type, nullable int'              => ['/* testClosureReturnTypeNullableInt */'],
-            'function return type, nullable callable'        => ['/* testFunctionReturnTypeNullableCallable */'],
+            'closure param type, nullable int'                              => ['/* testClosureParamTypeNullableInt */'],
+            'closure param type, nullable callable'                         => ['/* testClosureParamTypeNullableCallable */'],
+            'closure param type, nullable string with comment, issue #1216' => ['/* testClosureParamTypeNullableStringWithAttributeAndSlashComment */'],
+            'closure return type, nullable int'                             => ['/* testClosureReturnTypeNullableInt */'],
+            'function return type, nullable callable'                       => ['/* testFunctionReturnTypeNullableCallable */'],
         ];
 
     }//end dataNullable()
