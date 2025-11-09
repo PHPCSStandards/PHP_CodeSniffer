@@ -79,6 +79,15 @@ final class SwitchDeclarationUnitTest extends AbstractSniffTestCase
             330 => 1,
             339 => 2,
             342 => 1,
+            350 => 12,
+            353 => 4,
+            354 => 3,
+            358 => 1,
+            364 => 2,
+            369 => 1,
+            375 => 2,
+            377 => 1,
+            380 => 1,
         ];
     }
 

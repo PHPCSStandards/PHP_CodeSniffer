@@ -288,9 +288,8 @@ switch ($something) {
 
 switch ($foo) {
     case '1':
-    return;
+    return; // comment
 
- // comment
     break;
 
 }
@@ -354,3 +353,54 @@ switch ( $a ) {
 
 jumpOut:
 doSomething();
+
+// Bug: the below should not throw "Blank lines are not allowed before/after..." errors (as there are no blank lines).
+// Instead the sniff should flag case/default/break statements not being on their own line.
+switch ($condition) {
+    case 'string':
+        $varStr = 'one line';
+    break;
+
+    case 'bool':
+        $varStr = 'one line';
+    return $foo;
+
+    default:
+        $varStr = 'test';
+    break;}
+
+switch ($condition) {
+    case 'string': /*test comment handling when adding new lines*/
+        $varStr = 'one line';/*test comment handling when adding new lines*/
+    break;
+
+    default:/*test comment handling when adding new lines*/
+        $varStr = 'test'; /*test comment handling when adding new lines*/
+    break;
+}
+
+switch ($condition) {
+    case 'too many blank lines':
+
+
+        // This comment should be used for the "blank line after case" determination.
+        $varStr = 'test';
+
+    break;
+
+    // Comment to use for measuring blank lines between the above break and here.
+    case 'this is fine': // This comment should be ignored and $varStr should be used instead.
+
+
+        $varStr = 'test';
+
+
+    break; // Trailing comment to ignore.
+
+    // This comment should be used for the "blank line after break" determination.
+    default: // This comment should be ignored and $varStr should be used instead.
+
+        $varStr = 'test';
+    break;
+
+}
