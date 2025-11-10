@@ -347,11 +347,11 @@ doSomething();
 
 // Bug: the below should not throw "Blank lines are not allowed before/after..." errors (as there are no blank lines).
 // Instead the sniff should flag case/default/break statements not being on their own line.
-switch ($condition) {case 'string': $varStr = 'one line'; break;case 'bool':$varStr = 'one line';return $foo;default: $varStr = 'test'; break;}
+switch ($condition) {case 'string': $varStr = 'one line'; break; case 'bool':$varStr = 'one line';return $foo;default: $varStr = 'test'; break;}
 
 switch ($condition) {
-case 'string': /*test comment handling when adding new lines*/$varStr = 'one line';/*test comment handling when adding new lines*/ break;
-default:/*test comment handling when adding new lines*/ $varStr = 'test'; /*test comment handling when adding new lines*/break;
+  case 'string': /*test comment handling when adding new lines*/$varStr = 'one line';/*test comment handling when adding new lines*/ break;
+  default:/*test comment handling when adding new lines*/ $varStr = 'test'; /*test comment handling when adding new lines*/break;
 }
 
 switch ($condition) {
