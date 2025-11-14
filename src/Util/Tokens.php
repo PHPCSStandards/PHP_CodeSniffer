@@ -942,22 +942,31 @@ final class Tokens
         // PHP will intitialise the class, leading to warnings about undefined
         // T_* constants.
         $tokensToPolyfill = [
-            'T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG',
-            'T_AMPERSAND_NOT_FOLLOWED_BY_VAR_OR_VARARG',
-            'T_ATTRIBUTE',
+            // PHP 7.4 native tokens.
             'T_BAD_CHARACTER',
             'T_COALESCE_EQUAL',
-            'T_ENUM',
             'T_FN',
+
+            // PHP 8.0 native tokens.
+            'T_ATTRIBUTE',
             'T_MATCH',
             'T_NAME_FULLY_QUALIFIED',
             'T_NAME_QUALIFIED',
             'T_NAME_RELATIVE',
             'T_NULLSAFE_OBJECT_OPERATOR',
+
+            // PHP 8.1 native tokens.
+            'T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG',
+            'T_AMPERSAND_NOT_FOLLOWED_BY_VAR_OR_VARARG',
+            'T_ENUM',
+            'T_READONLY',
+
+            // PHP 8.4 native tokens.
             'T_PRIVATE_SET',
             'T_PROTECTED_SET',
             'T_PUBLIC_SET',
-            'T_READONLY',
+
+            // PHP 8.5 native tokens.
             'T_VOID_CAST',
         ];
 
