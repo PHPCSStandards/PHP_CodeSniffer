@@ -976,15 +976,38 @@ final class Tokens
         // numbering scheme from 135_000.
         $nextTokenNumber = 135000;
 
+        // This variable is necessary to avoid collisions with any other
+        // libraries which also polyfill T_* constants.
+        // array_flip()/isset() because in_array() is slow.
+        $existingConstants = array_flip(get_defined_constants(true)['tokenizer']);
+        foreach ((get_defined_constants(true)['user'] ?? []) as $k => $v) {
+            if (isset($k[2]) === false || $k[0] !== 'T' || $k[1] !== '_') {
+                // We only care about T_* constants.
+                continue;
+            }
+
+            if (isset($existingConstants[$v]) === true) {
+                throw new \Exception("Externally polyfilled tokenizer constant value collision detected! $k has the same value as {$existingConstants[$v]}");
+            }
+
+            $existingConstants[$v] = $k;
+        }
+
         $polyfillMappingTable = [];
 
         foreach ($tokensToPolyfill as $tokenName) {
+            if (isset(get_defined_constants(true)['tokenizer'][$tokenName]) === true) {
+                // This is a PHP native token, which is already defined by PHP.
+                continue;
+            }
+
             if (defined($tokenName) === false) {
-                while (isset($polyfillMappingTable[$nextTokenNumber]) === true) {
+                while (isset($existingConstants[$nextTokenNumber]) === true) {
                     $nextTokenNumber++;
                 }
 
                 define($tokenName, $nextTokenNumber);
+                $existingConstants[$nextTokenNumber] = $tokenName;
             }
 
             $polyfillMappingTable[constant($tokenName)] = $tokenName;
