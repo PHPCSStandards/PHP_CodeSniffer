@@ -61,6 +61,12 @@ class ReturnTypeDeclarationSniff implements Sniff
             $returnType = $phpcsFile->findPrevious(T_NULLABLE, ($returnType - 1));
         }
 
+        $colon = $phpcsFile->findPrevious(T_COLON, ($returnType - 1), $tokens[$stackPtr]['parenthesis_closer']);
+        if ($colon === false) {
+            // Parse error / live coding.
+            return;
+        }
+
         if ($tokens[($returnType - 1)]['code'] !== T_WHITESPACE
             || $tokens[($returnType - 1)]['content'] !== ' '
             || $tokens[($returnType - 2)]['code'] !== T_COLON
@@ -83,7 +89,6 @@ class ReturnTypeDeclarationSniff implements Sniff
             }
         }
 
-        $colon = $phpcsFile->findPrevious(T_COLON, $returnType);
         if ($tokens[($colon - 1)]['code'] !== T_CLOSE_PARENTHESIS) {
             $error = 'There must not be a space before the colon in a return type declaration';
             $prev  = $phpcsFile->findPrevious(T_WHITESPACE, ($colon - 1), null, true);
