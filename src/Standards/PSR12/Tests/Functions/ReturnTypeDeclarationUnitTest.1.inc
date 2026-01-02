@@ -64,3 +64,11 @@ function functionName(?string $arg1, ?int &$arg2):
 fn (?\DateTime $arg) : ?\DateTime => $arg;
 
 return (!$a ? [ new class { public function b(): c {} } ] : []);
+
+// This should be fixed in one fixer loop iteration.
+function multipleWhitespaceTokens():
+
+
+
+
+    ?int {}

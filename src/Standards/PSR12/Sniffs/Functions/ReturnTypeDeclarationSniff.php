@@ -69,23 +69,24 @@ class ReturnTypeDeclarationSniff implements Sniff
 
         if ($tokens[($returnType - 1)]['code'] !== T_WHITESPACE
             || $tokens[($returnType - 1)]['content'] !== ' '
-            || $tokens[($returnType - 2)]['code'] !== T_COLON
+            || ($returnType - 2) !== $colon
         ) {
             $error = 'There must be a single space between the colon and type in a return type declaration';
-            if ($tokens[($returnType - 1)]['code'] === T_WHITESPACE
-                && $tokens[($returnType - 2)]['code'] === T_COLON
-            ) {
-                $fix = $phpcsFile->addFixableError($error, $returnType, 'SpaceBeforeReturnType');
-                if ($fix === true) {
-                    $phpcsFile->fixer->replaceToken(($returnType - 1), ' ');
-                }
-            } elseif ($tokens[($returnType - 1)]['code'] === T_COLON) {
-                $fix = $phpcsFile->addFixableError($error, $returnType, 'SpaceBeforeReturnType');
-                if ($fix === true) {
-                    $phpcsFile->fixer->addContentBefore($returnType, ' ');
-                }
-            } else {
+
+            $nonWhitespaceToken = $phpcsFile->findNext(T_WHITESPACE, ($colon + 1), $returnType, true);
+            if ($nonWhitespaceToken !== false) {
                 $phpcsFile->addError($error, $returnType, 'SpaceBeforeReturnType');
+            } else {
+                $fix = $phpcsFile->addFixableError($error, $returnType, 'SpaceBeforeReturnType');
+                if ($fix === true) {
+                    $phpcsFile->fixer->beginChangeset();
+                    for ($i = ($returnType - 1); $i > $colon; $i--) {
+                        $phpcsFile->fixer->replaceToken($i, '');
+                    }
+
+                    $phpcsFile->fixer->addContentBefore($returnType, ' ');
+                    $phpcsFile->fixer->endChangeset();
+                }
             }
         }
 

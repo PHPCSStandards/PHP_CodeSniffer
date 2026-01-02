@@ -48,6 +48,7 @@ final class ReturnTypeDeclarationUnitTest extends AbstractSniffTestCase
                     60 => 1,
                     62 => 1,
                     64 => 1,
+                    74 => 1,
                 ];
             default:
                 return [];
