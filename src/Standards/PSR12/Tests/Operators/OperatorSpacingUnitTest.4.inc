@@ -1,10 +1,18 @@
 <?php
 
-// phpcs:set PSR12.Operators.OperatorSpacing perCompatible 2.0
+// phpcs:set PSR12.Operators.OperatorSpacing perCompatible 3.0
 
 try {
     // nothing
-} catch (Exception|RuntimeException $e) {
+} catch (Exception | RuntimeException $e) {
+}
+
+// Testing that it works with future versions as well.
+// phpcs:set PSR12.Operators.OperatorSpacing perCompatible 4.0
+
+try {
+    // nothing
+} catch (Exception | RuntimeException $e) {
 }
 
 // phpcs:set PSR12.Operators.OperatorSpacing perCompatible 1.0

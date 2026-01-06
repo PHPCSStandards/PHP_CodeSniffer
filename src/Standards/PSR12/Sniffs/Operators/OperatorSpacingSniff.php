@@ -18,7 +18,7 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
 {
 
     /**
-     * The PER version to be compatible with.
+     * The PER version to be compatible with. For backwards compatibility this is set to 1.0 by default.
      *
      * @var string
      */
@@ -82,25 +82,52 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
 
         $operator = $tokens[$stackPtr]['content'];
 
-        $checkBefore = true;
-        $checkAfter  = true;
-
-        // PER-CS 2.0: Exception to the rule for catch blocks (union types) where no space is required.
+        // PER-CS 3.0: Exception to the rule for catch blocks (union types) where no space is required.
         // As union types didn't exist when PSR-12 was created, the pipe in catch statements
-        // was originally treated as a bitwise operator. This check disables the spacing requirement
-        // for that specific case when opting in to PER-CS 2.0 or higher.
-        if ($operator === '|' && version_compare($this->perCompatible, '2.0', '>=') === true) {
+        // was originally treated as a bitwise operator. This check changes the spacing requirement
+        // for that specific case when opting in to PER-CS 3.0 or higher.
+        if ($operator === '|' && version_compare($this->perCompatible, '3.0', '>=') === true) {
             if (isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
                 $parenthesis = array_keys($tokens[$stackPtr]['nested_parenthesis']);
                 $bracket     = array_pop($parenthesis);
                 if (isset($tokens[$bracket]['parenthesis_owner']) === true
                     && $tokens[$tokens[$bracket]['parenthesis_owner']]['code'] === T_CATCH
                 ) {
-                    $checkBefore = false;
-                    $checkAfter  = false;
+                    if ($tokens[($stackPtr - 1)]['code'] === T_WHITESPACE) {
+                        $error = 'Expected 0 spaces before "%s"; %s found';
+                        $data  = [
+                            $operator,
+                            $tokens[($stackPtr - 1)]['length'],
+                        ];
+
+                        $fix = $phpcsFile->addFixableError($error, $stackPtr, 'SpaceBefore', $data);
+                        if ($fix === true) {
+                            $phpcsFile->fixer->replaceToken(($stackPtr - 1), '');
+                        }
+                    }
+
+                    if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
+                        $error = 'Expected 0 spaces after "%s"; %s found';
+                        $data  = [
+                            $operator,
+                            $tokens[($stackPtr + 1)]['length'],
+                        ];
+
+                        $fix = $phpcsFile->addFixableError($error, $stackPtr, 'SpaceAfter', $data);
+                        if ($fix === true) {
+                            $phpcsFile->fixer->replaceToken(($stackPtr + 1), '');
+                        }
+                    }
+
+                    // Now that this special case is handled, we can return early as we don't need to do
+                    // further checks.
+                    return;
                 }
             }
         }
+
+        $checkBefore = true;
+        $checkAfter  = true;
 
         // Skip short ternary.
         if ($tokens[($stackPtr)]['code'] === T_INLINE_ELSE

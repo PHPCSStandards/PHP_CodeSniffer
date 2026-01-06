@@ -26,21 +26,21 @@ if ($a===$b) {
     </code_comparison>
     <standard>
     <![CDATA[
-    When the "perCompatible" property is set to "2.0" or higher, the requirement for spaces around the pipe operator in a catch block (union types) is removed.
+    When the "perCompatible" property is set to "3.0" or higher, the requirement for spaces around the pipe operator in a catch block (union types) is removed.
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: perCompatible set to 2.0.">
+        <code title="Valid: perCompatible set to 3.0 or higher.">
         <![CDATA[
 try {
 } catch (Exception|RuntimeException $e) {
 }
         ]]>
         </code>
-        <code title="Invalid: perCompatible set to 1.0 (default).">
+        <code title="Valid: perCompatible set to a version lower than 3.0 (default 1.0).">
         <![CDATA[
 try {
-} catch (Exception|RuntimeException $e) {
+} catch (Exception | RuntimeException $e) {
 }
         ]]>
         </code>
