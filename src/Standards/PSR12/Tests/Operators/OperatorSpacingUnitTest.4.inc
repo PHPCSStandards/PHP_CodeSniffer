@@ -1,0 +1,15 @@
+<?php
+
+// phpcs:set PSR12.Operators.OperatorSpacing perCompatible 2.0
+
+try {
+    // nothing
+} catch (Exception|RuntimeException $e) {
+}
+
+// phpcs:set PSR12.Operators.OperatorSpacing perCompatible 1.0
+
+try {
+    // nothing
+} catch (Exception|RuntimeException $e) {
+}

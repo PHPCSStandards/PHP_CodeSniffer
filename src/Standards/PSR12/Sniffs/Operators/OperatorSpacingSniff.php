@@ -17,6 +17,13 @@ use PHP_CodeSniffer\Util\Tokens;
 class OperatorSpacingSniff extends SquizOperatorSpacingSniff
 {
 
+    /**
+     * The PER version to be compatible with.
+     *
+     * @var string
+     */
+    public $perCompatible = '1.0';
+
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -77,6 +84,23 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
 
         $checkBefore = true;
         $checkAfter  = true;
+
+        // PER-CS 2.0: Exception to the rule for catch blocks (union types) where no space is required.
+        // As union types didn't exist when PSR-12 was created, the pipe in catch statements
+        // was originally treated as a bitwise operator. This check disables the spacing requirement
+        // for that specific case when opting in to PER-CS 2.0 or higher.
+        if ($operator === '|' && version_compare($this->perCompatible, '2.0', '>=') === true) {
+            if (isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
+                $parenthesis = array_keys($tokens[$stackPtr]['nested_parenthesis']);
+                $bracket     = array_pop($parenthesis);
+                if (isset($tokens[$bracket]['parenthesis_owner']) === true
+                    && $tokens[$tokens[$bracket]['parenthesis_owner']]['code'] === T_CATCH
+                ) {
+                    $checkBefore = false;
+                    $checkAfter  = false;
+                }
+            }
+        }
 
         // Skip short ternary.
         if ($tokens[($stackPtr)]['code'] === T_INLINE_ELSE
