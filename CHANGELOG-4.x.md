@@ -2,11 +2,6 @@
 
 The file documents changes to the PHP_CodeSniffer project for the 4.x series of releases.
 
-## [Unreleased]
-
-### Added
-- PSR12.Operators.OperatorSpacing: new `perCompatible` property to support PER-CS 2.0. Issue #660.
-
 ## [4.0.1] - 2025-11-10
 
 This release includes all improvements and bugfixes from PHP_CodeSniffer [3.13.5].
