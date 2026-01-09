@@ -30,7 +30,7 @@ if ($a===$b) {
     ]]>
     </standard>
     <code_comparison>
-        <code title="Valid: perCompatible set to 3.0 or higher.">
+        <code title="Valid: no spaces around the '|' operator in a multi-catch with 'perCompatible=3.0' (or higher).">
         <![CDATA[
 try {
 } catch (Exception|RuntimeException $e) {
