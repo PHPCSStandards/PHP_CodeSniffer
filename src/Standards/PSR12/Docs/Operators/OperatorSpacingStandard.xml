@@ -37,7 +37,7 @@ try {
 }
         ]]>
         </code>
-        <code title="Valid: perCompatible set to a version lower than 3.0 (default 1.0).">
+        <code title="Invalid: spaces around the '|' operator in a multi-catch with 'perCompatible=3.0' (or higher).">
         <![CDATA[
 try {
 } catch (Exception | RuntimeException $e) {
