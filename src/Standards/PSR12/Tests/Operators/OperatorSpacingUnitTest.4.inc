@@ -84,14 +84,14 @@ try {
 ) {
 }
 
-// Invalid becasue of no space.
-try {
-    // nothing
-} catch (Exception|RuntimeException $e) {
-}
-
-// Invalid because of multiple spaces.
+// Valid because PSR 12 allows more than one space around operators.
 try {
     // nothing
 } catch (Exception  |   RuntimeException $e) {
+}
+
+// Invalid because of no space.
+try {
+    // nothing
+} catch (Exception|RuntimeException $e) {
 }

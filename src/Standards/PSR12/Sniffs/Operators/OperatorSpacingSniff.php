@@ -86,43 +86,48 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
         // As union types didn't exist when PSR-12 was created, the pipe in catch statements
         // was originally treated as a bitwise operator. This check changes the spacing requirement
         // for that specific case when opting in to PER-CS 3.0 or higher.
-        if ($operator === '|' && version_compare($this->perCompatible, '3.0', '>=') === true) {
-            if (isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
-                $parenthesis = array_keys($tokens[$stackPtr]['nested_parenthesis']);
-                $bracket     = array_pop($parenthesis);
-                if (isset($tokens[$bracket]['parenthesis_owner']) === true
-                    && $tokens[$tokens[$bracket]['parenthesis_owner']]['code'] === T_CATCH
+        if ($operator === '|' && version_compare($this->perCompatible, '3.0', '>=') === true
+            && isset($tokens[$stackPtr]['nested_parenthesis']) === true
+        ) {
+            $parenthesis = array_keys($tokens[$stackPtr]['nested_parenthesis']);
+            $bracket     = array_pop($parenthesis);
+            if (isset($tokens[$bracket]['parenthesis_owner']) === true
+                && $tokens[$tokens[$bracket]['parenthesis_owner']]['code'] === T_CATCH
+            ) {
+                if ($tokens[($stackPtr - 1)]['code'] === T_WHITESPACE
+                    && strpos($tokens[($stackPtr - 1)]['content'], $phpcsFile->eolChar) === false
+                    && $tokens[($stackPtr - 1)]['column'] !== 1
                 ) {
-                    if ($tokens[($stackPtr - 1)]['code'] === T_WHITESPACE) {
-                        $error = 'Expected 0 spaces before "%s"; %s found';
-                        $data  = [
-                            $operator,
-                            $tokens[($stackPtr - 1)]['length'],
-                        ];
+                    $error = 'Expected 0 spaces before "%s"; %s found';
+                    $data  = [
+                        $operator,
+                        $tokens[($stackPtr - 1)]['length'],
+                    ];
 
-                        $fix = $phpcsFile->addFixableError($error, $stackPtr, 'SpaceBefore', $data);
-                        if ($fix === true) {
-                            $phpcsFile->fixer->replaceToken(($stackPtr - 1), '');
-                        }
+                    $fix = $phpcsFile->addFixableError($error, $stackPtr, 'SpaceBefore', $data);
+                    if ($fix === true) {
+                        $phpcsFile->fixer->replaceToken(($stackPtr - 1), '');
                     }
-
-                    if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
-                        $error = 'Expected 0 spaces after "%s"; %s found';
-                        $data  = [
-                            $operator,
-                            $tokens[($stackPtr + 1)]['length'],
-                        ];
-
-                        $fix = $phpcsFile->addFixableError($error, $stackPtr, 'SpaceAfter', $data);
-                        if ($fix === true) {
-                            $phpcsFile->fixer->replaceToken(($stackPtr + 1), '');
-                        }
-                    }
-
-                    // Now that this special case is handled, we can return early as we don't need to do
-                    // further checks.
-                    return;
                 }
+
+                if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE
+                    && strpos($tokens[($stackPtr + 1)]['content'], $phpcsFile->eolChar) === false
+                ) {
+                    $error = 'Expected 0 spaces after "%s"; %s found';
+                    $data  = [
+                        $operator,
+                        $tokens[($stackPtr + 1)]['length'],
+                    ];
+
+                    $fix = $phpcsFile->addFixableError($error, $stackPtr, 'SpaceAfter', $data);
+                    if ($fix === true) {
+                        $phpcsFile->fixer->replaceToken(($stackPtr + 1), '');
+                    }
+                }
+
+                // Now that this special case is handled, we can return early as we don't need to do
+                // further checks.
+                return;
             }
         }
 
