@@ -102,13 +102,13 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
                     && strpos($tokens[($stackPtr - 1)]['content'], $phpcsFile->eolChar) === false
                     && $tokens[($stackPtr - 1)]['column'] !== 1
                 ) {
-                    $error = 'Expected 0 spaces before "%s"; %s found';
+                    $error = 'Expected 0 spaces before "%s" in multi-catch statement; %s found';
                     $data  = [
                         $operator,
                         $tokens[($stackPtr - 1)]['length'],
                     ];
 
-                    $fix = $phpcsFile->addFixableError($error, $stackPtr, 'SpaceBefore', $data);
+                    $fix = $phpcsFile->addFixableError($error, $stackPtr, 'MultiCatchSpaceBefore', $data);
                     if ($fix === true) {
                         $phpcsFile->fixer->replaceToken(($stackPtr - 1), '');
                     }
@@ -117,13 +117,13 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
                 if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE
                     && strpos($tokens[($stackPtr + 1)]['content'], $phpcsFile->eolChar) === false
                 ) {
-                    $error = 'Expected 0 spaces after "%s"; %s found';
+                    $error = 'Expected 0 spaces after "%s" in multi-catch statement; %s found';
                     $data  = [
                         $operator,
                         $tokens[($stackPtr + 1)]['length'],
                     ];
 
-                    $fix = $phpcsFile->addFixableError($error, $stackPtr, 'SpaceAfter', $data);
+                    $fix = $phpcsFile->addFixableError($error, $stackPtr, 'MultiCatchSpaceAfter', $data);
                     if ($fix === true) {
                         $phpcsFile->fixer->replaceToken(($stackPtr + 1), '');
                     }
