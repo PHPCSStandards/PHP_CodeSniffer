@@ -56,14 +56,10 @@ final class OperatorSpacingUnitTest extends AbstractSniffTestCase
                     40 => 1,
                     44 => 2,
                     47 => 2,
-                ];
-            case 'OperatorSpacingUnitTest.4.inc':
-                return [
-                    38 => 2,
-                    44 => 2,
-                    52 => 2,
-                    90 => 2,
-                    96 => 2,
+                    120 => 2,
+                    158 => 2,
+                    164 => 2,
+                    172 => 2,
                 ];
             default:
                 return [];

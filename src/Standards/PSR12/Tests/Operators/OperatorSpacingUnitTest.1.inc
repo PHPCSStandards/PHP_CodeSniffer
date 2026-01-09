@@ -77,3 +77,97 @@ function setDefault(#[ImportValue(
     }
 
 declare(strict_types=1);
+
+// Valid.
+try {
+    // nothing
+} catch (Exception | RuntimeException $e) {
+}
+
+// Valid because multiline formatting is undefined.
+try {
+    // nothing
+} catch (
+    Exception
+    | RuntimeException
+    | KlausiException
+    | AnotherException
+    | ItNeverEndsException $e
+) {
+}
+
+// Valid because multiline formatting is undefined.
+try {
+    // nothing
+} catch (
+    Exception |
+    RuntimeException |
+    KlausiException |
+    AnotherException |
+    ItNeverEndsException $e
+) {
+}
+
+// Valid because PSR 12 allows more than one space around operators.
+try {
+    // nothing
+} catch (Exception  |   RuntimeException $e) {
+}
+
+// Invalid because of no space.
+try {
+    // nothing
+} catch (Exception|RuntimeException $e) {
+}
+
+// phpcs:set PSR12.Operators.OperatorSpacing perCompatible 3.0
+
+// Valid.
+try {
+    // nothing
+} catch (Exception|RuntimeException $e) {
+}
+
+// Valid because multiline formatting is undefined.
+try {
+    // nothing
+} catch (
+    Exception
+    |RuntimeException
+    |KlausiException
+    |AnotherException
+    |ItNeverEndsException $e
+) {
+}
+
+// Valid because multiline formatting is undefined.
+try {
+    // nothing
+} catch (
+    Exception|
+    RuntimeException|
+    KlausiException|
+    AnotherException|
+    ItNeverEndsException $e
+) {
+}
+
+// Invalid becasue of one space.
+try {
+    // nothing
+} catch (Exception | RuntimeException $e) {
+}
+
+// Invalid because of multiple spaces.
+try {
+    // nothing
+} catch (Exception  |   RuntimeException $e) {
+}
+
+// Testing that it works with future versions as well.
+// phpcs:set PSR12.Operators.OperatorSpacing perCompatible 4.0
+
+try {
+    // nothing
+} catch (Exception | RuntimeException $e) {
+}
