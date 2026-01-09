@@ -36,7 +36,7 @@ final class OperatorSpacingUnitTest extends AbstractSniffTestCase
         switch ($testFile) {
             case 'OperatorSpacingUnitTest.1.inc':
                 return [
-                    2  => 1,
+                    2  => 2,
                     3  => 2,
                     4  => 1,
                     5  => 2,
@@ -46,7 +46,8 @@ final class OperatorSpacingUnitTest extends AbstractSniffTestCase
                     11 => 3,
                     13 => 3,
                     14 => 2,
-                    18 => 1,
+                    18 => 2,
+                    19 => 1,
                     20 => 1,
                     22 => 2,
                     23 => 2,
@@ -59,9 +60,11 @@ final class OperatorSpacingUnitTest extends AbstractSniffTestCase
                 ];
             case 'OperatorSpacingUnitTest.4.inc':
                 return [
-                    7  => 2,
-                    15 => 2,
-                    22 => 2,
+                    38  => 2,
+                    44 => 2,
+                    52 => 2,
+                    90 => 2,
+                    96 => 2,
                 ];
             default:
                 return [];

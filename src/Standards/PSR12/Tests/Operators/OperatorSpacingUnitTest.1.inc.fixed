@@ -1,5 +1,5 @@
 <?php
-if ($a    === $b) {
+if ($a === $b) {
     $foo = $bar ?? $a ?? $b;
 } elseif ($a > $b) {
     $variable = $foo ? 'foo' : 'bar';
@@ -15,8 +15,8 @@ $foo = $a >> $b;
 
 function foo(&$a,& $b) {}
 
-$foo = $a   and $b;
-$foo = $a or   $b;
+$foo = $a and $b;
+$foo = $a or $b;
 $foo = $a xor $b;
 $foo = !$a;
 $foo = $a && $b;
