@@ -90,8 +90,11 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
             && isset($tokens[$stackPtr]['nested_parenthesis']) === true
             && version_compare($this->perCompatible, '3.0', '>=') === true
         ) {
-            $parenthesis = array_keys($tokens[$stackPtr]['nested_parenthesis']);
-            $bracket     = array_pop($parenthesis);
+            // Calling array_keys() on a nested sub-array can have memory leaks, assign to a variable first.
+            // See https://github.com/squizlabs/PHP_CodeSniffer/pull/2273 .
+            $parenthesis     = $tokens[$stackPtr]['nested_parenthesis'];
+            $parenthesisKeys = array_keys($parenthesis);
+            $bracket         = array_pop($parenthesisKeys);
             if (isset($tokens[$bracket]['parenthesis_owner']) === true
                 && $tokens[$tokens[$bracket]['parenthesis_owner']]['code'] === T_CATCH
             ) {
