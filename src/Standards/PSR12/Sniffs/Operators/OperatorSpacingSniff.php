@@ -82,7 +82,7 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
 
         $operator = $tokens[$stackPtr]['content'];
 
-        // PER-CS 3.0: Exception to the rule for catch blocks (union types) where no space is required.
+        // PER-CS 3.0: Exception to the rule for pipe operators in multi-catch blocks where no space is required.
         // As union types didn't exist when PSR-12 was created, the pipe in catch statements
         // was originally treated as a bitwise operator. This check changes the spacing requirement
         // for that specific case when opting in to PER-CS 3.0 or higher.
