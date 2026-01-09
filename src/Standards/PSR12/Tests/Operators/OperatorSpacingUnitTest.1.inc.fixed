@@ -114,12 +114,6 @@ try {
 } catch (Exception  |   RuntimeException $e) {
 }
 
-// Invalid because of no space.
-try {
-    // nothing
-} catch (Exception | RuntimeException $e) {
-}
-
 // phpcs:set PSR12.Operators.OperatorSpacing perCompatible 3.0
 
 // Valid.
@@ -152,7 +146,7 @@ try {
 ) {
 }
 
-// Invalid becasue of one space.
+// Invalid because of one space.
 try {
     // nothing
 } catch (Exception|RuntimeException $e) {
