@@ -26,7 +26,7 @@ if ($a===$b) {
     </code_comparison>
     <standard>
     <![CDATA[
-    When the "perCompatible" property is set to "3.0" or higher, the requirement for spaces around the pipe operator in a catch block (union types) is removed.
+    When the "perCompatible" property is set to "3.0" or higher, the requirement for spaces around the single pipe operator in a multi-catch block is changed to a requirement of "no spaces".
     ]]>
     </standard>
     <code_comparison>
