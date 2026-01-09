@@ -86,8 +86,9 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
         // As union types didn't exist when PSR-12 was created, the pipe in catch statements
         // was originally treated as a bitwise operator. This check changes the spacing requirement
         // for that specific case when opting in to PER-CS 3.0 or higher.
-        if ($operator === '|' && version_compare($this->perCompatible, '3.0', '>=') === true
+        if ($tokens[$stackPtr]['code'] === T_BITWISE_OR
             && isset($tokens[$stackPtr]['nested_parenthesis']) === true
+            && version_compare($this->perCompatible, '3.0', '>=') === true
         ) {
             $parenthesis = array_keys($tokens[$stackPtr]['nested_parenthesis']);
             $bracket     = array_pop($parenthesis);
