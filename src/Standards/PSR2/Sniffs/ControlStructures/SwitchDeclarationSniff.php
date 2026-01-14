@@ -197,8 +197,12 @@ class SwitchDeclarationSniff implements Sniff
                         }
                     }
                 } else {
-                    // Probably a case/default statement with colon + curly braces.
-                    $phpcsFile->addError($error, $nextCase, 'WrongOpener' . $type);
+                    if ($tokens[$opener]['code'] === T_OPEN_CURLY_BRACKET) {
+                        $error = '%s statements must not use a braced block after the colon';
+                        $phpcsFile->addError($error, $nextCase, 'WrongOpener', [strtoupper($type)]);
+                    } else {
+                        $phpcsFile->addError($error, $nextCase, 'WrongOpener' . $type);
+                    }
                 }
             }
 

@@ -638,3 +638,12 @@ switch ($foo):
         <div>Some html</div>
         <?php break;
 endswitch;
+
+// Verify that the sniff gracefully handles braced block with trailing comment.
+switch ($foo) {
+    case 'Foo': // Trailing comment.
+    {
+        echo 'foo';
+        break;
+    }
+}
