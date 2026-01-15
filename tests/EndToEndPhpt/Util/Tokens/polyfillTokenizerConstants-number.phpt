@@ -9,6 +9,11 @@ if (version_compare(PHP_VERSION, '8.4', '>=') === true) {
 <?php
 define('T_PUBLIC_SET', 135000);
 require 'src/Util/Tokens.php';
-echo T_PRIVATE_SET, PHP_EOL; // ..0 is used, so this becomes ..1
+// ..00 is used, so this becomes ..01 (PHP 8.x) or ..14 (PHP 7.x)
+if (T_PRIVATE_SET > 135000) {
+    echo 'Success.', PHP_EOL;
+} else {
+    echo 'Failure - ', T_PRIVATE_SET, PHP_EOL;
+}
 --EXPECT--
-135001
+Success.
