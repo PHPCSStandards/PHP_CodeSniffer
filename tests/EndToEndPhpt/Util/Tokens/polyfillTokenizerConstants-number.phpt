@@ -8,7 +8,7 @@ if (version_compare(PHP_VERSION, '8.4', '>=') === true) {
 --FILE--
 <?php
 define('T_PUBLIC_SET', 135000);
-require('src/Util/Tokens.php');
+require 'src/Util/Tokens.php';
 echo T_PRIVATE_SET, PHP_EOL; // ..0 is used, so this becomes ..1
 --EXPECT--
 135001
