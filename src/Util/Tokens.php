@@ -979,8 +979,9 @@ final class Tokens
         // This variable is necessary to avoid collisions with any other
         // libraries which also polyfill T_* constants.
         // array_flip()/isset() because in_array() is slow.
-        $existingConstants = array_flip(get_defined_constants(true)['tokenizer']);
-        foreach ((get_defined_constants(true)['user'] ?? []) as $k => $v) {
+        $allDefinedConstants = get_defined_constants(true);
+        $existingConstants   = array_flip($allDefinedConstants['tokenizer']);
+        foreach (($allDefinedConstants['user'] ?? []) as $k => $v) {
             if (isset($k[2]) === false || $k[0] !== 'T' || $k[1] !== '_') {
                 // We only care about T_* constants.
                 continue;
@@ -996,7 +997,7 @@ final class Tokens
         $polyfillMappingTable = [];
 
         foreach ($tokensToPolyfill as $tokenName) {
-            if (isset(get_defined_constants(true)['tokenizer'][$tokenName]) === true) {
+            if (isset($allDefinedConstants['tokenizer'][$tokenName]) === true) {
                 // This is a PHP native token, which is already defined by PHP.
                 continue;
             }
