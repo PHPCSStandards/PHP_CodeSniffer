@@ -13,6 +13,6 @@ require 'src/Util/Tokens.php';
 Fatal error: Uncaught Exception: Externally polyfilled tokenizer constant value collision detected! T_PUBLIC_SET has the same value as T_STRING in %s:%d
 Stack trace:
 #0 %s(%d): PHP_CodeSniffer\Util\Tokens::polyfillTokenizerConstants()
-#1 Standard input code(%d): require('...')
+#1 Standard input code(%d): require('%s')
 #2 {main}
   thrown in %s on line %d
