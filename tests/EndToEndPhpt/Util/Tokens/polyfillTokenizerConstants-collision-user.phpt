@@ -15,6 +15,6 @@ require 'src/Util/Tokens.php';
 Fatal error: Uncaught Exception: Externally polyfilled tokenizer constant value collision detected! T_PROTECTED_SET has the same value as T_PRIVATE_SET in %s:%d
 Stack trace:
 #0 %s(%d): PHP_CodeSniffer\Util\Tokens::polyfillTokenizerConstants()
-#1 Standard input code(%d): require('%s')
+#1 %s(%d): require('%s')
 #2 {main}
   thrown in %s on line %d
