@@ -11,7 +11,7 @@ if (version_compare(PHP_VERSION, "8.4", ">=")) {
 define('T_', T_STRING); // Too short.
 define('ONE', T_STRING); // First character is not 'T'.
 define('TWO', T_STRING); // Second character is not '_'.
-require('src/Util/Tokens.php');
+require 'src/Util/Tokens.php';
 echo 'No conflicts', PHP_EOL;
 --EXPECT--
 No conflicts
