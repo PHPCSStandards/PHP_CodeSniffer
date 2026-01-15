@@ -2,8 +2,8 @@
 Detect when the value of a polyfilled PHP token collides with a value already used by an existing internal PHP token.
 --SKIPIF--
 <?php
-if (version_compare(PHP_VERSION, "8.4", ">=")) {
-    echo "skip because tokens used in this test already exist in PHP 8.4 so we cannot test polyfilling them", PHP_EOL;
+if (version_compare(PHP_VERSION, '8.4', '>=') === true) {
+    echo 'skip because tokens used in this test already exist in PHP 8.4 so we cannot test polyfilling them', PHP_EOL;
 }
 --FILE--
 <?php
