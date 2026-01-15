@@ -538,7 +538,7 @@ final class Tokens
     ];
 
     /**
-     * Mapping table for polyfilled constants
+     * Mapping table for polyfilled constants.
      *
      * @var array<int, string>
      */
