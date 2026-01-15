@@ -10,7 +10,7 @@ if (version_compare(PHP_VERSION, '8.4', '>=') === true) {
 define('T_PRIVATE_SET', 10000);
 define('T_PROTECTED_SET', 10000);
 define('T_PUBLIC_SET', 10000);
-require('src/Util/Tokens.php');
+require 'src/Util/Tokens.php';
 --EXPECTF--
 Fatal error: Uncaught Exception: Externally polyfilled tokenizer constant value collision detected! T_PROTECTED_SET has the same value as T_PRIVATE_SET in %s:%d
 Stack trace:
