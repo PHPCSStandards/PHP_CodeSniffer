@@ -8,7 +8,7 @@ if (version_compare(PHP_VERSION, '8.4', '>=') === true) {
 --FILE--
 <?php
 define('T_PUBLIC_SET', T_STRING);
-require('src/Util/Tokens.php');
+require 'src/Util/Tokens.php';
 --EXPECTF--
 Fatal error: Uncaught Exception: Externally polyfilled tokenizer constant value collision detected! T_PUBLIC_SET has the same value as T_STRING in %s:%d
 Stack trace:
