@@ -2294,8 +2294,8 @@ class PHP extends Tokenizer
                         || $tokenType === T_FN
                         || isset(Tokens::METHOD_MODIFIERS[$tokenType]) === true
                         || isset(Tokens::SCOPE_MODIFIERS[$tokenType]) === true
-                        || $tokenType === T_VAR
-                        || $tokenType === T_READONLY
+                        || isset(Tokens::PROPERTY_MODIFIERS[$tokenType]) === true
+                        || isset(Tokens::CLASS_MODIFIERS[$tokenType]) === true
                     ) {
                         if (PHP_CODESNIFFER_VERBOSITY > 1) {
                             StatusWriter::write("* token $stackPtr changed from ? to T_NULLABLE", 2);
@@ -3544,12 +3544,7 @@ class PHP extends Tokenizer
                     }
 
                     if ($suspectedType === 'property or parameter'
-                        && (isset(Tokens::SCOPE_MODIFIERS[$this->tokens[$x]['code']]) === true
-                        || $this->tokens[$x]['code'] === T_VAR
-                        || $this->tokens[$x]['code'] === T_STATIC
-                        || $this->tokens[$x]['code'] === T_READONLY
-                        || $this->tokens[$x]['code'] === T_FINAL
-                        || $this->tokens[$x]['code'] === T_ABSTRACT)
+                        && isset(Tokens::PROPERTY_MODIFIERS[$this->tokens[$x]['code']]) === true
                     ) {
                         // This will also confirm constructor property promotion parameters, but that's fine.
                         $confirmed = true;

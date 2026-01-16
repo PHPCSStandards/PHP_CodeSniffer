@@ -63,10 +63,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
                 $blankSpace = substr($prevContent, strpos($prevContent, $phpcsFile->eolChar));
                 $spaces     = strlen($blankSpace);
 
-                if ($tokens[($stackPtr - 2)]['code'] !== T_ABSTRACT
-                    && $tokens[($stackPtr - 2)]['code'] !== T_FINAL
-                    && $tokens[($stackPtr - 2)]['code'] !== T_READONLY
-                ) {
+                if (isset(Tokens::CLASS_MODIFIERS[$tokens[($stackPtr - 2)]['code']]) === false) {
                     if ($spaces !== 0) {
                         $type  = strtolower($tokens[$stackPtr]['content']);
                         $error = 'Expected 0 spaces before %s keyword; %s found';

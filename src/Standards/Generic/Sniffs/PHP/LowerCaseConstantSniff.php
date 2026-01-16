@@ -57,13 +57,8 @@ class LowerCaseConstantSniff implements Sniff
     {
         $targets = self::TARGET_TOKENS;
 
-        // Register scope modifiers to filter out property type declarations.
-        $targets  += Tokens::SCOPE_MODIFIERS;
-        $targets[] = T_VAR;
-        $targets[] = T_STATIC;
-        $targets[] = T_READONLY;
-        $targets[] = T_FINAL;
-        $targets[] = T_ABSTRACT;
+        // Register property modifiers to filter out property type declarations.
+        $targets += Tokens::PROPERTY_MODIFIERS;
 
         // Register function keywords to filter out param/return type declarations.
         $targets[] = T_FUNCTION;
@@ -119,13 +114,7 @@ class LowerCaseConstantSniff implements Sniff
          * declarations, in which case, it is correct to skip over them.
          */
 
-        if (isset(Tokens::SCOPE_MODIFIERS[$tokens[$stackPtr]['code']]) === true
-            || $tokens[$stackPtr]['code'] === T_VAR
-            || $tokens[$stackPtr]['code'] === T_STATIC
-            || $tokens[$stackPtr]['code'] === T_READONLY
-            || $tokens[$stackPtr]['code'] === T_FINAL
-            || $tokens[$stackPtr]['code'] === T_ABSTRACT
-        ) {
+        if (isset(Tokens::PROPERTY_MODIFIERS[$tokens[$stackPtr]['code']]) === true) {
             $skipOver = (Tokens::EMPTY_TOKENS + self::PROPERTY_TYPE_TOKENS);
             $skipTo   = $phpcsFile->findNext($skipOver, ($stackPtr + 1), null, true);
             if ($skipTo !== false) {

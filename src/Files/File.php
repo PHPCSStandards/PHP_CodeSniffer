@@ -1909,15 +1909,7 @@ class File
             }
         }
 
-        $valid = [
-            T_STATIC   => T_STATIC,
-            T_VAR      => T_VAR,
-            T_READONLY => T_READONLY,
-            T_FINAL    => T_FINAL,
-            T_ABSTRACT => T_ABSTRACT,
-        ];
-
-        $valid += Tokens::SCOPE_MODIFIERS;
+        $valid  = Tokens::PROPERTY_MODIFIERS;
         $valid += Tokens::EMPTY_TOKENS;
 
         $scope          = 'public';
@@ -2068,12 +2060,11 @@ class File
         }
 
         $valid = [
-            T_FINAL      => T_FINAL,
-            T_ABSTRACT   => T_ABSTRACT,
-            T_READONLY   => T_READONLY,
             T_WHITESPACE => T_WHITESPACE,
             T_COMMENT    => T_COMMENT,
         ];
+
+        $valid += Tokens::CLASS_MODIFIERS;
 
         $isAbstract = false;
         $isFinal    = false;

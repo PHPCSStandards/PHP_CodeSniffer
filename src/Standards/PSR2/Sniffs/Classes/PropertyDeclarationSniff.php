@@ -57,12 +57,8 @@ class PropertyDeclarationSniff extends AbstractVariableSniff
         // Detect multiple properties defined at the same time. Throw an error
         // for this, but also only process the first property in the list so we don't
         // repeat errors.
-        $find   = Tokens::SCOPE_MODIFIERS;
+        $find   = Tokens::PROPERTY_MODIFIERS;
         $find[] = T_VARIABLE;
-        $find[] = T_VAR;
-        $find[] = T_READONLY;
-        $find[] = T_FINAL;
-        $find[] = T_ABSTRACT;
         $find[] = T_SEMICOLON;
         $find[] = T_OPEN_CURLY_BRACKET;
 

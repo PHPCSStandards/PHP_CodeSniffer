@@ -26,11 +26,9 @@ class LowercaseClassKeywordsSniff implements Sniff
     public function register()
     {
         $targets   = Tokens::OO_SCOPE_TOKENS;
+        $targets  += Tokens::CLASS_MODIFIERS;
         $targets[] = T_EXTENDS;
         $targets[] = T_IMPLEMENTS;
-        $targets[] = T_ABSTRACT;
-        $targets[] = T_FINAL;
-        $targets[] = T_READONLY;
         $targets[] = T_VAR;
         $targets[] = T_CONST;
 

@@ -363,6 +363,30 @@ final class Tokens
     ];
 
     /**
+     * Tokens that can prefix a class name.
+     *
+     * @var array<int|string, int|string>
+     */
+    public const CLASS_MODIFIERS = [
+        T_ABSTRACT => T_ABSTRACT,
+        T_FINAL    => T_FINAL,
+        T_READONLY => T_READONLY,
+    ];
+
+    /**
+     * Tokens that can prefix a property name.
+     *
+     * @var array<int|string, int|string>
+     */
+    public const PROPERTY_MODIFIERS = (self::SCOPE_MODIFIERS + [
+        T_ABSTRACT => T_ABSTRACT,
+        T_FINAL    => T_FINAL,
+        T_READONLY => T_READONLY,
+        T_STATIC   => T_STATIC,
+        T_VAR      => T_VAR,
+    ]);
+
+    /**
      * Tokens that open code blocks.
      *
      * @var array<int|string, int|string>

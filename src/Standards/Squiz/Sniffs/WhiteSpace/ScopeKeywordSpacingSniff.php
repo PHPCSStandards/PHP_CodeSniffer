@@ -1,6 +1,6 @@
 <?php
 /**
- * Ensure there is a single space after scope keywords.
+ * Ensure there is a single space after all modifier keywords (not just scope modifiers).
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
@@ -27,7 +27,8 @@ class ScopeKeywordSpacingSniff implements Sniff
     {
         $register  = Tokens::METHOD_MODIFIERS;
         $register += Tokens::SCOPE_MODIFIERS;
-        $register[T_READONLY] = T_READONLY;
+        $register += Tokens::PROPERTY_MODIFIERS;
+        $register += Tokens::CLASS_MODIFIERS;
         return $register;
     }
 
