@@ -129,7 +129,7 @@ jobs:
       - name: "libxml2: restore cache"
         if: ${{ matrix.libxml_minor }}
         id: libxml_cache_restore
-        uses: actions/cache/restore@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
+        uses: actions/cache/restore@8b402f58fbc84540c8b491a91e594a4576fec3d7 # v5.0.2
         with:
           path: "libxml2-${{ steps.libxml_patch_version.outputs.PATCH }}"
           key: "${{ matrix.os }}-libxml-${{ matrix.libxml_minor }}-${{ steps.libxml_patch_version.outputs.PATCH }}"
@@ -157,7 +157,7 @@ jobs:
       - name: "libxml2: save cache"
         if: ${{ matrix.libxml_minor && steps.libxml_cache_restore.outputs.cache-hit != 'true' }}
         id: libxml_cache_save
-        uses: actions/cache/save@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
+        uses: actions/cache/save@8b402f58fbc84540c8b491a91e594a4576fec3d7 # v5.0.2
         with:
           path: "libxml2-${{ steps.libxml_patch_version.outputs.PATCH }}"
           key: ${{ steps.libxml_cache_restore.outputs.cache-primary-key }}
