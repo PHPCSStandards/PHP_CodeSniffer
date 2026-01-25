@@ -350,8 +350,9 @@ class OperatorSpacingSniff implements Sniff
         // Skip declare statements.
         if ($tokens[$stackPtr]['code'] === T_EQUAL) {
             if (isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
-                $parenthesis = array_keys($tokens[$stackPtr]['nested_parenthesis']);
-                $bracket     = array_pop($parenthesis);
+                $parentheses = $tokens[$stackPtr]['nested_parenthesis'];
+                $parentheses = array_keys($parentheses);
+                $bracket     = array_pop($parentheses);
                 if (isset($tokens[$bracket]['parenthesis_owner']) === true) {
                     $function = $tokens[$bracket]['parenthesis_owner'];
                     if ($tokens[$function]['code'] === T_FUNCTION
