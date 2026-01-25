@@ -114,6 +114,26 @@ try {
 } catch (Exception  |   RuntimeException $e) {
 }
 
+// Valid usage of bitwise OR operator between if parentheses.
+if ($error === E_ERROR | E_DEPRECATED) {
+    // do something
+}
+
+// Valid usage of bitwise OR operator between function definition parentheses.
+function testFunction($flags = E_ERROR | E_DEPRECATED) {
+    // do something
+}
+
+// Invalid usage of bitwise OR operator between if parentheses.
+if ($error === E_ERROR|E_DEPRECATED) {
+    // do something
+}
+
+// Invalid usage of bitwise OR operator between function definition parentheses.
+function testFunction2($flags = E_ERROR|E_DEPRECATED) {
+    // do something
+}
+
 // phpcs:set PSR12.Operators.OperatorSpacing perCompatible 3.0
 
 // Valid.
@@ -158,6 +178,26 @@ try {
 } catch (Exception  |   RuntimeException $e) {
 }
 
+// Valid usage of bitwise OR operator between if parentheses.
+if ($error === E_ERROR | E_DEPRECATED) {
+    // do something
+}
+
+// Valid usage of bitwise OR operator between function definition parentheses.
+function testFunction3($flags = E_ERROR | E_DEPRECATED) {
+    // do something
+}
+
+// Invalid usage of bitwise OR operator between if parentheses.
+if ($error === E_ERROR|E_DEPRECATED) {
+    // do something
+}
+
+// Invalid usage of bitwise OR operator between function definition parentheses.
+function testFunction4($flags = E_ERROR|E_DEPRECATED) {
+    // do something
+}
+
 // Testing that it works with future versions as well.
 // phpcs:set PSR12.Operators.OperatorSpacing perCompatible 4.0
 
@@ -165,3 +205,6 @@ try {
     // nothing
 } catch (Exception | RuntimeException $e) {
 }
+
+// Reset property back to its default value.
+// phpcs:set PSR12.Operators.OperatorSpacing perCompatible 1.0
