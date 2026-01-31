@@ -831,6 +831,31 @@ class ScopeIndentSniff implements Sniff
                 $exact = false;
             }
 
+            // Special handling for multi-line extends and implements lists.
+            // Only apply to interface/class names that are directly part of extends/implements statements.
+            if ($checkToken !== null
+                && (isset(Tokens::NAME_TOKENS[$tokens[$checkToken]['code']]) === true
+                || $tokens[$checkToken]['code'] === T_EXTENDS
+                || $tokens[$checkToken]['code'] === T_IMPLEMENTS)
+            ) {
+                $scopeToken = $phpcsFile->findPrevious(Tokens::OO_SCOPE_TOKENS, ($checkToken - 1));
+
+                // Verify that the token is part of declaration by checking that the token is before the scope opener.
+                if ($scopeToken !== false
+                    && $tokens[$scopeToken]['line'] !== $tokens[$checkToken]['line']
+                    && isset($tokens[$scopeToken]['scope_opener']) === true
+                    && $tokens[$scopeToken]['scope_opener'] > $checkToken
+                ) {
+                    $checkIndent = (($tokens[$scopeToken]['column'] - 1) + $this->indent);
+
+                    if (isset($adjustments[$scopeToken]) === true) {
+                        $checkIndent += $adjustments[$scopeToken];
+                    }
+
+                    $checkIndent = (int) (ceil($checkIndent / $this->indent) * $this->indent);
+                }
+            }
+
             if ($checkIndent === null) {
                 $checkIndent = $currentIndent;
             }

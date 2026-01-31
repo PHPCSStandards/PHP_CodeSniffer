@@ -1,0 +1,70 @@
+<?php
+// phpcs:set Generic.WhiteSpace.ScopeIndent exact true
+
+// Correct multi-line extends/implements.
+class CorrectClass extends BaseClass implements
+    InterfaceOne,
+    Some\Namespace\InterfaceTwo
+{
+    public function test()
+    {
+        return true;
+    }
+}
+
+// Incorrect multi-line extends/implements (should trigger errors).
+class IncorrectClass extends
+    BaseClass implements
+        \Some\Namespace\InterfaceOne,
+        InterfaceTwo
+{
+    public function test()
+    {
+        return true;
+    }
+}
+
+// Interface with multi-line extends.
+interface TestInterface extends
+    BaseInterface,
+    AnotherInterface
+{
+    public function testMethod();
+}
+
+// Edge case: constant/property names should NOT trigger multi-line logic.
+class EdgeCase
+    extends BaseClass
+        implements InterfaceOne
+{
+    public const extends = 'value';
+    public const implements = 'value';
+    private $extends = null;
+    private $implements = null;
+    public function test() {
+        $this->extends = 'test';
+        $this->implements = 'test';
+        return true;
+    }
+}
+
+// Edge case: property access should NOT trigger multi-line logic.
+function test_function() {
+    $obj = new stdClass();
+    $obj->extends = 'value';
+    $obj->implements = 'value';
+    echo $obj->extends;
+    echo $obj->implements;
+}
+
+// Conditional class with inconsistent indentation.
+if (class_exists('ConditionalClass') === false) {
+class ConditionalClass implements
+            InterfaceOne,
+    InterfaceTwo,
+            InterfaceThree {
+        public function test() {
+            return true;
+        }
+    }
+}
