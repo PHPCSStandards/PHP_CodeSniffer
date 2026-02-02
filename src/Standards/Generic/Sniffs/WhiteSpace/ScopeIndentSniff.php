@@ -846,10 +846,16 @@ class ScopeIndentSniff implements Sniff
                     && isset($tokens[$scopeToken]['scope_opener']) === true
                     && $tokens[$scopeToken]['scope_opener'] > $checkToken
                 ) {
-                    $checkIndent = (($tokens[$scopeToken]['column'] - 1) + $this->indent);
+                    $start = $phpcsFile->findStartOfStatement($scopeToken);
 
-                    if (isset($adjustments[$scopeToken]) === true) {
-                        $checkIndent += $adjustments[$scopeToken];
+                    if ($start === false) {
+                        $start = $scopeToken;
+                    }
+
+                    $checkIndent = (($tokens[$start]['column'] - 1) + $this->indent);
+
+                    if (isset($adjustments[$start]) === true) {
+                        $checkIndent += $adjustments[$start];
                     }
 
                     $checkIndent = (int) (ceil($checkIndent / $this->indent) * $this->indent);
@@ -1112,7 +1118,13 @@ class ScopeIndentSniff implements Sniff
                     }
                 }
 
-                $currentIndent = (($tokens[$first]['column'] - 1) + $this->indent);
+                $currentIndent = ($tokens[$first]['column'] - 1);
+
+                if ($this->debug === true) {
+                    $type = $tokens[$i]['type'];
+                    StatusWriter::write("=> indent set to $currentIndent by token $i ($type)", 1);
+                }
+
                 $openScopes[$tokens[$i]['scope_closer']] = $tokens[$i]['scope_condition'];
                 if ($this->debug === true) {
                     $closerToken    = $tokens[$i]['scope_closer'];
@@ -1130,12 +1142,14 @@ class ScopeIndentSniff implements Sniff
 
                 // Make sure it is divisible by our expected indent.
                 $currentIndent = (int) (floor($currentIndent / $this->indent) * $this->indent);
-                $i = $tokens[$i]['scope_opener'];
-                $setIndents[$i] = $currentIndent;
+
+                $opener       = $tokens[$i]['scope_opener'];
+                $futureIndent = ($currentIndent + $this->indent);
+                $setIndents[$opener] = $futureIndent;
 
                 if ($this->debug === true) {
-                    $type = $tokens[$i]['type'];
-                    StatusWriter::write("=> indent set to $currentIndent by token $i ($type)", 1);
+                    $type = $tokens[$opener]['type'];
+                    StatusWriter::write("=> indent will be set to $futureIndent at token $opener ($type)", 1);
                 }
 
                 continue;

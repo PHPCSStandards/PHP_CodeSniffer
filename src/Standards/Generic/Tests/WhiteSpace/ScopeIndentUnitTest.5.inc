@@ -67,4 +67,15 @@ class ConditionalClass implements
             return true;
         }
     }
+
+    // Edge case: anonymous class with extends/implements.
+$anonymous = new class() extends
+BaseClass implements
+InterfaceOne,
+InterfaceTwo
+{
+public function test() {
+return true;
+}
+};
 }
