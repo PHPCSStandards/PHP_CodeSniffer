@@ -79,3 +79,15 @@ return true;
 }
 };
 }
+
+// Edge case: anonymous function.
+register_shutdown_function(
+    static function () use (
+        $errorMsg,
+        $errorArray
+    ) {
+        if (empty($errorMsg) === false) {
+            fwrite(STDERR, $errorMsg);
+        }
+    }
+);

@@ -1152,6 +1152,12 @@ class ScopeIndentSniff implements Sniff
                     StatusWriter::write("=> indent will be set to $futureIndent at token $opener ($type)", 1);
                 }
 
+                // If it is a closure, jump to the future.
+                if ($tokens[$i]['code'] === T_CLOSURE) {
+                    $i = $opener;
+                    $currentIndent = $futureIndent;
+                }
+
                 continue;
             }
 
