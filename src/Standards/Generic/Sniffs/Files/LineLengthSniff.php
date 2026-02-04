@@ -177,21 +177,53 @@ class LineLengthSniff implements Sniff
         if ($this->absoluteLineLimit > 0
             && $lineLength > $this->absoluteLineLimit
         ) {
+            $code = 'MaxExceeded';
+            if ($this->isLineNamespacedName($tokens, $tokens[$stackPtr]['line']) === true) {
+                $code = 'NamespacedNameMaxExceeded';
+            }
+
             $data = [
                 $this->absoluteLineLimit,
                 $lineLength,
             ];
 
             $error = 'Line exceeds maximum limit of %s characters; contains %s characters';
-            $phpcsFile->addError($error, $stackPtr, 'MaxExceeded', $data);
+            $phpcsFile->addError($error, $stackPtr, $code, $data);
         } elseif ($lineLength > $this->lineLimit) {
+            $code = 'TooLong';
+            if ($this->isLineNamespacedName($tokens, $tokens[$stackPtr]['line']) === true) {
+                $code = 'NamespacedNameTooLong';
+            }
+
             $data = [
                 $this->lineLimit,
                 $lineLength,
             ];
 
             $warning = 'Line exceeds %s characters; contains %s characters';
-            $phpcsFile->addWarning($warning, $stackPtr, 'TooLong', $data);
+            $phpcsFile->addWarning($warning, $stackPtr, $code, $data);
         }
+    }
+
+
+    /**
+     * Checks if a line is a namespaced name
+     *
+     * @param array $tokens The token stack.
+     * @param int   $line   The line to check validate
+     *
+     * @return bool
+     */
+    private function isLineNamespacedName(array $tokens, int $line): bool
+    {
+        $filteredTokens = array_filter(
+            $tokens,
+            function ($token) use ($line) {
+                return $token['line'] === $line
+                    && in_array($token['code'], [T_NAME_QUALIFIED, T_NAME_FULLY_QUALIFIED, T_NAME_RELATIVE], true);
+            }
+        );
+
+        return $filteredTokens !== [];
     }
 }

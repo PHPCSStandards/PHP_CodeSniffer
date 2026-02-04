@@ -60,6 +60,15 @@ final class LineLengthUnitTest extends AbstractSniffTestCase
             case 'LineLengthUnitTest.2.inc':
             case 'LineLengthUnitTest.3.inc':
                 return [7 => 1];
+            case 'LineLengthUnitTest.5.inc':
+                return [
+                    10 => 1,
+                    23 => 1,
+                    24 => 1,
+                    25 => 1,
+                    36 => 1,
+                    37 => 1,
+                ];
 
             default:
                 return [];
@@ -102,6 +111,15 @@ final class LineLengthUnitTest extends AbstractSniffTestCase
                 return [
                     10 => 1,
                     14 => 1,
+                ];
+            case 'LineLengthUnitTest.5.inc':
+                return [
+                    7  => 1,
+                    18 => 1,
+                    19 => 1,
+                    20 => 1,
+                    32 => 1,
+                    33 => 1,
                 ];
 
             default:
