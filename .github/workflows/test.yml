@@ -105,7 +105,7 @@ jobs:
         run: git config --global core.autocrlf input
 
       - name: Checkout code
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: "libxml2: find the latest relevant tag"
         if: ${{ matrix.libxml_minor }}
@@ -129,7 +129,7 @@ jobs:
       - name: "libxml2: restore cache"
         if: ${{ matrix.libxml_minor }}
         id: libxml_cache_restore
-        uses: actions/cache/restore@8b402f58fbc84540c8b491a91e594a4576fec3d7 # v5.0.2
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
           path: "libxml2-${{ steps.libxml_patch_version.outputs.PATCH }}"
           key: "${{ matrix.os }}-libxml-${{ matrix.libxml_minor }}-${{ steps.libxml_patch_version.outputs.PATCH }}"
@@ -157,7 +157,7 @@ jobs:
       - name: "libxml2: save cache"
         if: ${{ matrix.libxml_minor && steps.libxml_cache_restore.outputs.cache-hit != 'true' }}
         id: libxml_cache_save
-        uses: actions/cache/save@8b402f58fbc84540c8b491a91e594a4576fec3d7 # v5.0.2
+        uses: actions/cache/save@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
           path: "libxml2-${{ steps.libxml_patch_version.outputs.PATCH }}"
           key: ${{ steps.libxml_cache_restore.outputs.cache-primary-key }}
@@ -300,7 +300,7 @@ jobs:
         run: git config --global core.autocrlf input
 
       - name: Checkout code
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Setup ini config
         if: ${{ matrix.custom_ini == true && matrix.os != 'windows-latest' }}
