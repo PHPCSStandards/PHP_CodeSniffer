@@ -33,5 +33,13 @@ echo \ThisReallyLong\Long\Looooong\Loooooooong\UseStatement\ThatShouldThrowAWarn
 new \ThisReallyLong\Long\Looooong\Loooooooooooong\UseStatement\ThatShouldThrowAWarning\BecauseItsNotTooLong\ClassName();
 
 // These are just a bit too long and should throw a NamespacedNameMaxExceeded error
-echo \ThisReallyLong\Long\Long\Looong\UseStatement\ThatShouldNotBeAllowed\AndThrowErrorsBecauseItsTooLong\functionCall();
-new \ThisReallyLong\Long\Long\Looooooong\UseStatement\ThatShouldNotBeAllowed\AndThrowErrorsBecauseItsTooLong\ClassName();
+echo \ThisReallyLong\Long\Long\Looooong\UseStatement\ThatShouldNotBeAllowed\AndThrowErrorsBecauseItsTooLong\functionCall();
+new \ThisReallyLong\Long\Long\Looooooooong\UseStatement\ThatShouldNotBeAllowed\AndThrowErrorsBecauseItsTooLong\ClassName();
+
+// These are a bit too long but can be shortened and should throw a TooLong warning
+echo \This\Name\Space\IsGoingToBeJustWithinLimits\LongLongLooong\functionCall('foo', 'bar', 'baz');
+new \This\Name\Space\IsGoingToBeJustWithinLimits\LongLongLongLooong\ClassName('foo', 'bar', 'baz');
+
+// These are just a bit too long but can be shortened and should throw a MaxExceeded error
+echo \ThisReallyLong\Long\Long\Looong\UseStatement\ThatShouldNotBeAllowed\AndThrowErrorsBecauseItsTooLong\functionCall('foo', 'bar', 'baz');
+new \ThisReallyLong\Long\Long\Looooooong\UseStatement\ThatShouldNotBeAllowed\AndThrowErrorsBecauseItsTooLong\ClassName('foo', 'bar', 'baz');

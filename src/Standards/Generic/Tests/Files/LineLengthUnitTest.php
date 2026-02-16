@@ -68,6 +68,8 @@ final class LineLengthUnitTest extends AbstractSniffTestCase
                     25 => 1,
                     36 => 1,
                     37 => 1,
+                    44 => 1,
+                    45 => 1,
                 ];
 
             default:
@@ -120,6 +122,8 @@ final class LineLengthUnitTest extends AbstractSniffTestCase
                     20 => 1,
                     32 => 1,
                     33 => 1,
+                    40 => 1,
+                    41 => 1,
                 ];
 
             default:
