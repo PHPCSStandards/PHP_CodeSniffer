@@ -218,7 +218,7 @@ jobs:
         run: >
           npm install -g --fund false
           csslint
-          eslint
+          eslint@9.x
           jshint
 
       # Install dependencies and handle caching in one go.
@@ -331,7 +331,7 @@ jobs:
         run: >
           npm install -g --fund false
           csslint
-          eslint
+          eslint@9.x
           jshint
 
       # Install dependencies and handle caching in one go.
