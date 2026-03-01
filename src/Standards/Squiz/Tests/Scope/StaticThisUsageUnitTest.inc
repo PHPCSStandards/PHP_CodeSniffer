@@ -1,6 +1,6 @@
 <?php
-class MyClass
-{
+abstract class MyClass {
+    abstract public static function ignoreMe($a, $b);
     public static function func1()
     {
         $value = 'hello';
