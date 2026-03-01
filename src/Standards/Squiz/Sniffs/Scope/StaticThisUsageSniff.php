@@ -86,12 +86,15 @@ class StaticThisUsageSniff extends AbstractScopeSniff
         $tokens = $phpcsFile->getTokens();
 
         do {
-            $next = $phpcsFile->findNext([T_VARIABLE, T_ANON_CLASS], ($next + 1), $end);
+            $next = $phpcsFile->findNext([T_VARIABLE, T_CLOSURE, T_ANON_CLASS], ($next + 1), $end);
             if ($next === false) {
                 continue;
             }
 
-            if ($tokens[$next]['code'] === T_ANON_CLASS) {
+            if (($tokens[$next]['code'] === T_ANON_CLASS
+                || $tokens[$next]['code'] === T_CLOSURE)
+                && isset($tokens[$next]['scope_opener']) === true
+            ) {
                 $this->checkThisUsage($phpcsFile, $next, $tokens[$next]['scope_opener']);
                 $next = $tokens[$next]['scope_closer'];
                 continue;

@@ -125,3 +125,22 @@ enum MyEnum {
         $this->doSomething();
     }
 }
+
+class NestedScopesShouldBeSkipped
+{
+    public static function examineMe() {
+        $this->shouldBeFlagged();
+
+        function nestedFunction() {
+            $this->nestedFunctionsDoNotHaveAccessToThis();
+        }
+
+        \Closure::bind(
+            function ($this) { // Cannot use $this as a param, so this should still be flagged.
+                $this->x = 1; // This is fine. $this related to the Closure class, not to the NestedScopesShouldBeSkipped class.
+            },
+            new Target(),
+            Target::class,
+        )();
+    }
+}
