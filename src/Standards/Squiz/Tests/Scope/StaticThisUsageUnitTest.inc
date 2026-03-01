@@ -37,7 +37,7 @@ class MyClass
     }
 
     public static function func1() {
-        return function() {
+        return static function() {
             echo $this->name;
         };
     }
@@ -137,10 +137,42 @@ class NestedScopesShouldBeSkipped
 
         \Closure::bind(
             function ($this) { // Cannot use $this as a param, so this should still be flagged.
-                $this->x = 1; // This is fine. $this related to the Closure class, not to the NestedScopesShouldBeSkipped class.
+                $this->x = 1; // This is fine. $this related to the Target class, not to the NestedScopesShouldBeSkipped class.
             },
             new Target(),
             Target::class,
         )();
+
+        $callable = static function ($a, $b) {
+            return $a * $b * $this->multiplier; // This should be flagged. The closure is declared as static.
+        };
+    }
+
+    public function dontExamineMe() {
+        $this->shouldNotBeFlagged();
+
+        \Closure::bind(
+            function () {
+                $this->x = 1; // This is fine. $this related to the Target class, not to the NestedScopesShouldBeSkipped class.
+            },
+            new Target(),
+            Target::class,
+        )();
+
+        $callable = static function ($a, $b) {
+            return $a * $b * $this->multiplier; // This should be flagged. The closure is declared as static.
+        };
     }
 }
+
+function ignoreMe() {
+    $this->notAllowedButNotTheSameIssueAsThisSniffIsLookingFor();
+}
+
+$callable = function ($a, $b) {
+    return $a * $b * $this->multiplier; // This should NOT be flagged. The closure might be bound to an object.
+};
+
+$callable = static function ($a, $b) {
+    return $a * $b * $this->multiplier; // This should be flagged. The closure is declared as static.
+};
