@@ -12,7 +12,6 @@ namespace PHP_CodeSniffer\Standards\Generic\Sniffs\PHP;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use PHP_CodeSniffer\Util\Common;
 use PHP_CodeSniffer\Util\Tokens;
 
 class LowerCaseKeywordSniff implements Sniff
@@ -63,12 +62,10 @@ class LowerCaseKeywordSniff implements Sniff
                 $phpcsFile->recordMetric($stackPtr, 'PHP keyword case', 'mixed');
             }
 
-            $messageKeyword = Common::prepareForOutput($keyword);
-
             $error = 'PHP keywords must be lowercase; expected "%s" but found "%s"';
             $data  = [
-                strtolower($messageKeyword),
-                $messageKeyword,
+                strtolower($keyword),
+                $keyword,
             ];
 
             $fix = $phpcsFile->addFixableError($error, $stackPtr, 'Found', $data);
