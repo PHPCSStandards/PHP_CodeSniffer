@@ -488,3 +488,55 @@ function foo(
     $param2
 ) : // comment.
    \Package\Sub\SomeClass   {}
+
+class MultiLineCommentsBetweenParamsIndentOK
+{
+    public function something(
+        /*
+         * Some comment for whatever reason
+         * phpcs:disable Stnd.Cat -- for reasons
+         */
+        string $paramA,
+        // phpcs:enable Stnd.Cat
+        // Comment line 2
+        // Comment line 3
+        #[NotBlank]
+        int $paramB,
+    ) {
+    }
+}
+
+class MultiLineCommentsBetweenParamsIncorrectIndent
+{
+    public function something(
+    /*
+     * Some comment for whatever reason
+     * phpcs:disable Stnd.CatA -- this line will only be flagged & fixed when `--ignore-annotations` is used.
+     */
+    string $paramA,
+/*
+ * Some comment for whatever reason
+ * phpcs:disable Stnd.CatB -- this line will only be flagged & fixed when `--ignore-annotations` is used.
+ */
+string $paramB,
+
+  // phpcs:enable Stnd.CatA,Stnd.CatB -- this line will only be flagged & fixed when `--ignore-annotations` is used.
+    // Comment line 2
+// Comment line 3
+#[NotBlank]
+int $paramC,
+            /*
+
+                Some comment surrounded by blank lines (deliberately!)
+
+             */
+            ?string $paramD,
+    /*
+
+      Some comment surrounded by blank lines (deliberately!)
+
+     */
+    ?string $paramE,
+    ) {
+    }
+}
