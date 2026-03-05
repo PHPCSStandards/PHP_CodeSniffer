@@ -45,6 +45,12 @@ final class StaticThisUsageUnitTest extends AbstractSniffTestCase
             84  => 1,
             99  => 1,
             125 => 1,
+            132 => 1,
+            135 => 1,
+            139 => 1,
+            147 => 1,
+            163 => 1,
+            177 => 1,
         ];
     }
 
