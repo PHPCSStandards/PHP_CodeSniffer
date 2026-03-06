@@ -65,7 +65,7 @@ class InlineControlStructureSniff implements Sniff
         // Ignore the ELSE in ELSE IF. We'll process the IF part later.
         if ($tokens[$stackPtr]['code'] === T_ELSE) {
             $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
-            if ($tokens[$next]['code'] === T_IF) {
+            if ($next === false || $tokens[$next]['code'] === T_IF) {
                 return;
             }
         }
