@@ -115,10 +115,6 @@ class InlineControlStructureSniff implements Sniff
         }
 
         $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($start + 1), null, true);
-        if ($nextNonEmpty === false) {
-            // Live coding or parse error.
-            return;
-        }
 
         if ($tokens[$nextNonEmpty]['code'] === T_OPEN_CURLY_BRACKET
             || $tokens[$nextNonEmpty]['code'] === T_COLON
