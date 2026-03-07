@@ -106,6 +106,8 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
       - name: "libxml2: find the latest relevant tag"
         if: ${{ matrix.libxml_minor }}
@@ -301,6 +303,8 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
       - name: Setup ini config
         if: ${{ matrix.custom_ini == true && matrix.os != 'windows-latest' }}
