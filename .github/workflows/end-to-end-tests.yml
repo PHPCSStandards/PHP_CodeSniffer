@@ -29,7 +29,6 @@ jobs:
       matrix:
         php: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5', 'nightly']
 
-    # yamllint disable-line rule:line-length
     name: "E2E PHP: ${{ matrix.php }}"
 
     continue-on-error: ${{ matrix.php == 'nightly' }}
@@ -53,7 +52,7 @@ jobs:
       - name: Install Composer dependencies
         uses: "ramsey/composer-install@3cf229dc2919194e9e36783941438d17239e8520" # 3.1.1
         with:
-          composer-options: ${{ matrix.php == '8.6' && '--ignore-platform-req=php+' || '' }}
+          composer-options: ${{ matrix.php == 'nightly' && '--ignore-platform-req=php+' || '' }}
           custom-cache-suffix: $(date -u "+%Y-%m")
 
       - name: 'PHPUnit: run end-to-end tests (phpt)'
