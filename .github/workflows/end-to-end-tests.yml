@@ -56,6 +56,11 @@ jobs:
           custom-cache-suffix: $(date -u "+%Y-%m")
 
       - name: 'PHPUnit: run end-to-end tests (phpt)'
+        # We have included '--no-coverage' here to make sure that we do not run with coverage enabled
+        # by mistake, if the Xdebug extension gets loaded in future. These tests are not compatible
+        # with how PHPUnit runs when coverage is enabled. This is because PHPUnit pre-loads all PHP
+        # files as part of its coverage initialisation process, and these tests specifically test the
+        # code which is used during the PHP_CodeSniffer bootstrap step.
         run: php "vendor/bin/phpunit" -c phpunit-e2e.xml.dist --no-coverage
 
       - name: "Install bashunit"
