@@ -7,7 +7,7 @@
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
-namespace PHP_CodeSniffer\Tests\EndToEnd\Fixtures;
+namespace PHP_CodeSniffer\Tests\EndToEndBash\Fixtures;
 
 class ClassOneWithoutStyleError
 {

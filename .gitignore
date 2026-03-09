@@ -14,4 +14,4 @@ vendor/
 /tests/Standards/sniffStnd.xml
 /tests/Core/Util/ExitCode/Fixtures/ExitCodeTest/*.fixed
 /tests/Core/Util/ExitCode/Fixtures/ExitCodeTest/phpcs.cache
-/tests/EndToEnd/Fixtures/*.fixed
+/tests/EndToEndBash/Fixtures/*.fixed

@@ -9,7 +9,7 @@
 scripts/                              export-ignore
 src/Standards/**/Tests/               export-ignore
 tests/Core/**/                        export-ignore
-tests/EndToEnd/**/                    export-ignore
+tests/EndToEndBash/**/                export-ignore
 .cspell.json                          export-ignore
 .gitattributes                        export-ignore
 .gitignore                            export-ignore

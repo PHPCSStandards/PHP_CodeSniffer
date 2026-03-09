@@ -136,8 +136,9 @@ class OperatorBracketSniff implements Sniff
 
         $lastBracket = false;
         if (isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
-            $parenthesis = array_reverse($tokens[$stackPtr]['nested_parenthesis'], true);
-            foreach ($parenthesis as $bracket => $endBracket) {
+            $parentheses = $tokens[$stackPtr]['nested_parenthesis'];
+            $parentheses = array_reverse($parentheses, true);
+            foreach ($parentheses as $bracket => $endBracket) {
                 $prevToken = $phpcsFile->findPrevious(T_WHITESPACE, ($bracket - 1), null, true);
                 $prevCode  = $tokens[$prevToken]['code'];
 

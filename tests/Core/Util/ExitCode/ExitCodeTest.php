@@ -230,6 +230,29 @@ final class ExitCodeTest extends AbstractRunnerTestCase
                 'expected'  => 3,
             ],
 
+            // Verify that when warnings or errors are suppressed, they don't affect the exit code.
+            'Only warnings, while ignoring warnings'                                         => [
+                'extraArgs' => [
+                    '-n',
+                    '--sniffs=TestStandard.ExitCodes.Warning,TestStandard.ExitCodes.FixableWarning',
+                ],
+                'expected'  => 0,
+            ],
+            'Only warnings, while warnings have severity 0'                                  => [
+                'extraArgs' => [
+                    '--warning-severity=0',
+                    '--sniffs=TestStandard.ExitCodes.Warning,TestStandard.ExitCodes.FixableWarning',
+                ],
+                'expected'  => 0,
+            ],
+            'Only errors, while errors have severity 0'                                      => [
+                'extraArgs' => [
+                    '--error-severity=0',
+                    '--sniffs=TestStandard.ExitCodes.Error,TestStandard.ExitCodes.FixableError',
+                ],
+                'expected'  => 0,
+            ],
+
             // In both the below cases, we still have 1 fixable and 1 non-fixable issue which we need to take into account, so exit code = 3.
             'Mix of errors and warnings, ignoring warnings for exit code'                    => [
                 'extraArgs' => [
@@ -489,6 +512,50 @@ final class ExitCodeTest extends AbstractRunnerTestCase
             'Only warnings'                                                                                  => [
                 'extraArgs' => ['--exclude=TestStandard.ExitCodes.FailToFix,TestStandard.ExitCodes.FixableError,TestStandard.ExitCodes.Error'],
                 'expected'  => 2,
+            ],
+
+            // Verify that when warnings or errors are suppressed, they don't affect the exit code.
+            'Only warnings, while ignoring warnings'                                                         => [
+                'extraArgs' => [
+                    '-n',
+                    '--sniffs=TestStandard.ExitCodes.Warning,TestStandard.ExitCodes.FixableWarning',
+                ],
+                'expected'  => 0,
+            ],
+            'Only warnings, while warnings have severity 0'                                                  => [
+                'extraArgs' => [
+                    '--warning-severity=0',
+                    '--sniffs=TestStandard.ExitCodes.Warning,TestStandard.ExitCodes.FixableWarning',
+                ],
+                'expected'  => 0,
+            ],
+            'Only errors, while errors have severity 0'                                                      => [
+                'extraArgs' => [
+                    '--error-severity=0',
+                    '--sniffs=TestStandard.ExitCodes.Error,TestStandard.ExitCodes.FixableError',
+                ],
+                'expected'  => 0,
+            ],
+            'Fixed all auto-fixable errors, non-auto-fixable warnings remain, but are ignored'               => [
+                'extraArgs' => [
+                    '-n',
+                    '--sniffs=TestStandard.ExitCodes.FixableError,TestStandard.ExitCodes.Warning',
+                ],
+                'expected'  => 0,
+            ],
+            'Fixed all auto-fixable errors, non-auto-fixable warnings remain, but warnings have severity 0'  => [
+                'extraArgs' => [
+                    '--warning-severity=0',
+                    '--sniffs=TestStandard.ExitCodes.FixableError,TestStandard.ExitCodes.Warning',
+                ],
+                'expected'  => 0,
+            ],
+            'Fixed all auto-fixable warnings, non-auto-fixable errors remain, but errors have severity 0'    => [
+                'extraArgs' => [
+                    '--error-severity=0',
+                    '--sniffs=TestStandard.ExitCodes.FixableWarning,TestStandard.ExitCodes.Error',
+                ],
+                'expected'  => 0,
             ],
 
             // In both the below cases, we still have 1 non-fixable issue which we need to take into account, so exit code = 2.

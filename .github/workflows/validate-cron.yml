@@ -17,11 +17,11 @@ jobs:
     # Don't run the cronjob in this workflow on forks.
     if: ${{ github.event.repository.fork == false }}
 
-    uses: PHPCSStandards/.github/.github/workflows/reusable-markdownlint.yml@main
+    uses: PHPCSStandards/.github/.github/workflows/reusable-markdownlint.yml@0d44fe2771ae7bc1254a0a4ec596d8110d16d3dc # v1.1.1
 
   remark:
     name: 'QA Markdown'
     # Don't run the cronjob in this workflow on forks.
     if: ${{ github.event.repository.fork == false }}
 
-    uses: PHPCSStandards/.github/.github/workflows/reusable-remark.yml@main
+    uses: PHPCSStandards/.github/.github/workflows/reusable-remark.yml@0d44fe2771ae7bc1254a0a4ec596d8110d16d3dc # v1.1.1

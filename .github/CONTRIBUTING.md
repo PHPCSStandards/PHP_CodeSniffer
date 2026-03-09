@@ -407,13 +407,13 @@ To install bashunit, follow the [installation guide](https://bashunit.typeddevs.
 
 You can then run the bashunit tests on Linux/Mac/WSL, like so:
 ```bash
-./lib/bashunit -p tests/EndToEnd
+./lib/bashunit -p tests/EndToEndBash
 ```
 
 > Note: these tests will not run in the Windows native CMD shell. When on Windows, either use WSL or use the "git bash" shell.
 
 When writing end-to-end tests, please use fixtures for the "files under scan" to make the tests stable.
-These fixtures can be placed in the `tests/EndToEnd/Fixtures` subdirectory.
+These fixtures can be placed in the `tests/EndToEndBash/Fixtures` subdirectory.
 
 #### phpt
 
