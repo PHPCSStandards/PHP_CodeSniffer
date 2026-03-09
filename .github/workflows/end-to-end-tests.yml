@@ -15,21 +15,50 @@ on:
   # Allow manually triggering the workflow.
   workflow_dispatch:
 
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   bash-tests:
-    # Cancels all previous runs of this particular job for the same branch that have not yet completed.
-    concurrency:
-      # The concurrency group contains the workflow name, job name, job index and the branch name.
-      group: ${{ github.workflow }}-${{ github.job }}-${{ strategy.job-index }}-${{ github.ref }}
-      cancel-in-progress: true
-
     runs-on: 'ubuntu-latest'
 
     strategy:
       matrix:
         php: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5', 'nightly']
 
-    name: "E2E PHP: ${{ matrix.php }}"
+    name: "E2E PHP(bash): ${{ matrix.php }}"
+
+    continue-on-error: ${{ matrix.php == 'nightly' }}
+
+    steps:
+      - name: Prepare git to leave line endings alone
+        run: git config --global core.autocrlf input
+
+      - name: Checkout code
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: "Install bashunit"
+        shell: bash
+        run: |
+          curl -s https://bashunit.typeddevs.com/install.sh > install.sh
+          chmod +x install.sh
+          ./install.sh
+
+      - name: "Run bashunit tests"
+        shell: bash
+        run: "./lib/bashunit -p tests/EndToEnd"
+
+  phpt-tests:
+    runs-on: 'ubuntu-latest'
+
+    strategy:
+      matrix:
+        php: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5', 'nightly']
+
+    name: "E2E PHP(phpt): ${{ matrix.php }}"
 
     continue-on-error: ${{ matrix.php == 'nightly' }}
 
@@ -62,14 +91,3 @@ jobs:
         # files as part of its coverage initialisation process, and these tests specifically test the
         # code which is used during the PHP_CodeSniffer bootstrap step.
         run: php "vendor/bin/phpunit" -c phpunit-e2e.xml.dist --no-coverage
-
-      - name: "Install bashunit"
-        shell: bash
-        run: |
-          curl -s https://bashunit.typeddevs.com/install.sh > install.sh
-          chmod +x install.sh
-          ./install.sh
-
-      - name: "Run bashunit tests"
-        shell: bash
-        run: "./lib/bashunit -p tests/EndToEnd"
