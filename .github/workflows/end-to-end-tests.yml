@@ -29,7 +29,7 @@ jobs:
       matrix:
         php: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5', 'nightly']
 
-    name: "E2E PHP(bash): ${{ matrix.php }}"
+    name: "E2E Bash PHP: ${{ matrix.php }}"
 
     continue-on-error: ${{ matrix.php == 'nightly' }}
 
@@ -60,7 +60,7 @@ jobs:
       matrix:
         php: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5', 'nightly']
 
-    name: "E2E PHP(phpt): ${{ matrix.php }}"
+    name: "E2E phpt PHP: ${{ matrix.php }}"
 
     continue-on-error: ${{ matrix.php == 'nightly' }}
 
