@@ -25,7 +25,9 @@ PHP_CodeSniffer is a set of two PHP scripts; the main `phpcs` script that tokeni
 
 ## Requirements
 
-PHP_CodeSniffer requires PHP version 7.2.0 or greater, although individual sniffs may have additional requirements such as external applications and scripts. See the [Configuration Options manual page](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Configuration-Options) for a list of these requirements.
+PHP_CodeSniffer requires PHP version 7.2.0 or greater. For more information about required and recommended PHP extensions, see the [Requirements wiki page](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Requirements).
+
+Individual sniffs may have additional requirements such as external applications and scripts. See the [Configuration Options manual page](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Configuration-Options) for a list of these requirements.
 
 If you're using PHP_CodeSniffer as part of a team, or you're running it on a [CI](https://en.wikipedia.org/wiki/Continuous_integration) server, you may want to configure your project's settings [using a configuration file](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Advanced-Usage#using-a-default-configuration-file).
 
