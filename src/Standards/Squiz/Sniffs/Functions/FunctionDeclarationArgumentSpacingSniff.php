@@ -280,7 +280,7 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                         $data[] = strlen($gap);
                     } else {
                         // Gap contains more than just spaces: render these for better clarity.
-                        $data[] = '"' . Common::prepareForOutput($gap) . '"';
+                        $data[] = '"' . Common::prepareForOutput($gap, [' ']) . '"';
                     }
 
                     $fix = $phpcsFile->addFixableError($error, $typeHintToken, 'SpacingAfterHint', $data);
