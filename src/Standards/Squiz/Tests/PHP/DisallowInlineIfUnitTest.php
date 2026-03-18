@@ -3,15 +3,21 @@
  * Unit test class for the DisallowObEndFlush sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\PHP;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class DisallowInlineIfUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the DisallowObEndFlush sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DisallowInlineIfSniff
+ */
+final class DisallowInlineIfUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -21,28 +27,15 @@ class DisallowInlineIfUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
-     * @param string $testFile The name of the file being tested.
-     *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='DisallowInlineIfUnitTest.inc')
+    public function getErrorList()
     {
-        switch ($testFile) {
-        case 'DisallowInlineIfUnitTest.inc':
-            return [
-                8  => 1,
-                18 => 1,
-            ];
-            break;
-        case 'DisallowInlineIfUnitTest.js':
-            return [1 => 1];
-            break;
-        default:
-            return [];
-            break;
-        }//end switch
-
-    }//end getErrorList()
+        return [
+            8  => 1,
+            18 => 1,
+        ];
+    }
 
 
     /**
@@ -56,8 +49,5 @@ class DisallowInlineIfUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

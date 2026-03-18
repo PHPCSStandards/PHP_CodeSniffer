@@ -149,6 +149,46 @@ if ($foo) {
 // another comment here.
 $foo++;
 
+/**
+ * Comment should be ignored, even though there is an attribute between the docblock and the class declaration.
+ */
+
+#[AttributeA]
+
+final class MyClass
+{
+    /**
+     * Comment should be ignored, even though there is an attribute between the docblock and the function declaration
+     */
+    #[AttributeA]
+    #[AttributeB]
+    final public function test() {}
+}
+
+/**
+ * Comment should be ignored.
+ *
+ */
+enum MyEnum {
+
+}
+
+/**
+ * Comment should be ignored.
+ *
+ */
+readonly class MyClass
+{
+    /**
+     * Comment should be ignored.
+     *
+     */
+    readonly $property = 10;
+}
+
+#️⃣ Apparently the emoji keycap number sign (hash) also works and turns this into a comment.
+echo 'hello!';
+
 /*
  * N.B.: The below test line must be the last test in the file.
  * Testing that a new line after an inline comment when it's the last non-whitespace

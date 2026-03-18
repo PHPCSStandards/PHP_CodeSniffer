@@ -3,15 +3,21 @@
  * Unit test class for the FunctionDeclaration sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\Functions;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class FunctionDeclarationUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the FunctionDeclaration sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions\FunctionDeclarationSniff
+ */
+final class FunctionDeclarationUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -21,16 +27,23 @@ class FunctionDeclarationUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile = '')
     {
-        return [
-            55 => 1,
-            68 => 1,
-        ];
+        switch ($testFile) {
+            case 'FunctionDeclarationUnitTest.1.inc':
+                return [
+                    55 => 1,
+                    68 => 1,
+                ];
 
-    }//end getErrorList()
+            default:
+                return [];
+        }
+    }
 
 
     /**
@@ -44,8 +57,5 @@ class FunctionDeclarationUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

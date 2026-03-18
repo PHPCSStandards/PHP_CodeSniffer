@@ -3,13 +3,16 @@
  * Diff report for PHP_CodeSniffer.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Timing;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 class Diff implements Report
 {
@@ -22,14 +25,15 @@ class Diff implements Report
      * and FALSE if it ignored the file. Returning TRUE indicates that the file and
      * its data should be counted in the grand totals.
      *
-     * @param array                 $report      Prepared report data.
-     * @param \PHP_CodeSniffer\File $phpcsFile   The file being reported on.
-     * @param bool                  $showSources Show sources?
-     * @param int                   $width       Maximum allowed line width.
+     * @param array<string, string|int|array> $report      Prepared report data.
+     *                                                     See the {@see Report} interface for a detailed specification.
+     * @param \PHP_CodeSniffer\Files\File     $phpcsFile   The file being reported on.
+     * @param bool                            $showSources Show sources?
+     * @param int                             $width       Maximum allowed line width.
      *
      * @return bool
      */
-    public function generateFileReport($report, File $phpcsFile, $showSources=false, $width=80)
+    public function generateFileReport(array $report, File $phpcsFile, bool $showSources = false, int $width = 80)
     {
         $errors = $phpcsFile->getFixableCount();
         if ($errors === 0) {
@@ -41,39 +45,28 @@ class Diff implements Report
         if (empty($tokens) === true) {
             if (PHP_CODESNIFFER_VERBOSITY === 1) {
                 $startTime = microtime(true);
-                echo 'DIFF report is parsing '.basename($report['filename']).' ';
-            } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                echo 'DIFF report is forcing parse of '.$report['filename'].PHP_EOL;
+                StatusWriter::write('DIFF report is parsing ' . basename($report['filename']) . ' ', 0, 0);
+            } elseif (PHP_CODESNIFFER_VERBOSITY > 1) {
+                StatusWriter::write('DIFF report is forcing parse of ' . $report['filename']);
             }
 
             $phpcsFile->parse();
 
             if (PHP_CODESNIFFER_VERBOSITY === 1) {
-                $timeTaken = ((microtime(true) - $startTime) * 1000);
-                if ($timeTaken < 1000) {
-                    $timeTaken = round($timeTaken);
-                    echo "DONE in {$timeTaken}ms";
-                } else {
-                    $timeTaken = round(($timeTaken / 1000), 2);
-                    echo "DONE in $timeTaken secs";
-                }
-
-                echo PHP_EOL;
+                StatusWriter::write('DONE in ' . Timing::getHumanReadableDuration(Timing::getDurationSince($startTime)));
             }
 
             $phpcsFile->fixer->startFile($phpcsFile);
-        }//end if
+        }
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
-            ob_end_clean();
-            echo "\t*** START FILE FIXING ***".PHP_EOL;
+            StatusWriter::write('*** START FILE FIXING ***', 1);
         }
 
         $fixed = $phpcsFile->fixer->fixFile();
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
-            echo "\t*** END FILE FIXING ***".PHP_EOL;
-            ob_start();
+            StatusWriter::write('*** END FILE FIXING ***', 1);
         }
 
         if ($fixed === false) {
@@ -86,10 +79,9 @@ class Diff implements Report
             return false;
         }
 
-        echo $diff.PHP_EOL;
+        echo $diff . PHP_EOL;
         return true;
-
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -109,22 +101,19 @@ class Diff implements Report
      * @return void
      */
     public function generate(
-        $cachedData,
-        $totalFiles,
-        $totalErrors,
-        $totalWarnings,
-        $totalFixable,
-        $showSources=false,
-        $width=80,
-        $interactive=false,
-        $toScreen=true
+        string $cachedData,
+        int $totalFiles,
+        int $totalErrors,
+        int $totalWarnings,
+        int $totalFixable,
+        bool $showSources = false,
+        int $width = 80,
+        bool $interactive = false,
+        bool $toScreen = true
     ) {
         echo $cachedData;
         if ($toScreen === true && $cachedData !== '') {
             echo PHP_EOL;
         }
-
-    }//end generate()
-
-
-}//end class
+    }
+}

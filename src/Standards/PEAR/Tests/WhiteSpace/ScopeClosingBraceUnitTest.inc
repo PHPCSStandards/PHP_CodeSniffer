@@ -144,3 +144,57 @@ switch ( $a ) {
 ?>
 <?php $_cartQty = $this->getSummaryCount(); ?>
 <div id="minicart" <?php if ($_cartQty == 0): ?>class="empty"<?php endif; ?>>
+
+<?php
+$match = match ($test) { 1 => 'a', 2 => 'b' };
+
+$match = match ($test) {
+    1 => 'a',
+    2 => 'b'
+    };
+
+enum Enum
+{
+}
+
+enum Suits {}
+
+enum Cards
+{
+    }
+
+?>
+<!-- Prevent fixer conflict with itself when the scope closer is preceded by non-empty/non-indentation inline HTML. -->
+<?php if ($someConditional) : ?>
+<div class="container">
+</div> <?php endif;
+
+function switchCaseCreativeScopeOpeners()
+{
+    switch ($correct) {
+        case 'colon':
+            break;
+        case 'semicolon';
+            return;
+        case 'PHP close tag' ?>
+            <?php return ?>
+        <?php case 'PHP close tag with semicolon'; ?>
+            <?php exit ?>
+        <?php case 'PHP close tag 3' ?>
+            <?php return ?>
+        <?php default ?>
+            <?php break ?>
+        <?php
+    }
+
+    switch ($incorrect) {
+        case 'semicolon'; return;
+        case 'PHP close tag' ?>
+    <?php return ?>
+        <?php case 'PHP close tag with semicolon'; ?>
+              <?php exit ?>
+        <?php default ?>
+        <?php break ?>
+        <?php
+      }
+}

@@ -3,8 +3,9 @@
  * Checks that control structures have the correct spacing around brackets.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace;
@@ -16,21 +17,11 @@ use PHP_CodeSniffer\Util\Tokens;
 class ControlStructureSpacingSniff implements Sniff
 {
 
-    /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
-
 
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
@@ -46,9 +37,9 @@ class ControlStructureSpacingSniff implements Sniff
             T_TRY,
             T_CATCH,
             T_FINALLY,
+            T_MATCH,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -60,7 +51,7 @@ class ControlStructureSpacingSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -108,7 +99,7 @@ class ControlStructureSpacingSniff implements Sniff
             } else {
                 $phpcsFile->recordMetric($stackPtr, 'Spaces before control structure close parenthesis', 0);
             }
-        }//end if
+        }
 
         if (isset($tokens[$stackPtr]['scope_closer']) === false) {
             return;
@@ -129,7 +120,7 @@ class ControlStructureSpacingSniff implements Sniff
 
             // Skip all empty tokens on the same line as the opener.
             if ($tokens[$firstContent]['line'] === $tokens[$scopeOpener]['line']
-                && (isset(Tokens::$emptyTokens[$code]) === true
+                && (isset(Tokens::EMPTY_TOKENS[$code]) === true
                 || $code === T_CLOSE_TAG)
             ) {
                 continue;
@@ -144,6 +135,7 @@ class ControlStructureSpacingSniff implements Sniff
             T_CLASS                => true,
             T_INTERFACE            => true,
             T_TRAIT                => true,
+            T_ENUM                 => true,
             T_DOC_COMMENT_OPEN_TAG => true,
         ];
 
@@ -172,7 +164,7 @@ class ControlStructureSpacingSniff implements Sniff
             }
         } else {
             $phpcsFile->recordMetric($stackPtr, 'Blank lines at start of control structure', 0);
-        }//end if
+        }
 
         if ($firstContent !== $scopeCloser) {
             $lastContent = $phpcsFile->findPrevious(
@@ -183,7 +175,7 @@ class ControlStructureSpacingSniff implements Sniff
             );
 
             $lastNonEmptyContent = $phpcsFile->findPrevious(
-                Tokens::$emptyTokens,
+                Tokens::EMPTY_TOKENS,
                 ($scopeCloser - 1),
                 null,
                 true
@@ -229,8 +221,18 @@ class ControlStructureSpacingSniff implements Sniff
                 }
             } else {
                 $phpcsFile->recordMetric($stackPtr, 'Blank lines at end of control structure', 0);
-            }//end if
-        }//end if
+            }
+        }
+
+        if ($tokens[$stackPtr]['code'] === T_MATCH) {
+            // Move the scope closer to the semicolon/comma.
+            $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($scopeCloser + 1), null, true);
+            if ($next !== false
+                && ($tokens[$next]['code'] === T_SEMICOLON || $tokens[$next]['code'] === T_COMMA)
+            ) {
+                $scopeCloser = $next;
+            }
+        }
 
         $trailingContent = $phpcsFile->findNext(
             T_WHITESPACE,
@@ -240,12 +242,12 @@ class ControlStructureSpacingSniff implements Sniff
         );
 
         if ($tokens[$trailingContent]['code'] === T_COMMENT
-            || isset(Tokens::$phpcsCommentTokens[$tokens[$trailingContent]['code']]) === true
+            || isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[$trailingContent]['code']]) === true
         ) {
             // Special exception for code where the comment about
             // an ELSE or ELSEIF is written between the control structures.
             $nextCode = $phpcsFile->findNext(
-                Tokens::$emptyTokens,
+                Tokens::EMPTY_TOKENS,
                 ($scopeCloser + 1),
                 null,
                 true
@@ -257,7 +259,7 @@ class ControlStructureSpacingSniff implements Sniff
             ) {
                 $trailingContent = $nextCode;
             }
-        }//end if
+        }
 
         if ($tokens[$trailingContent]['code'] === T_ELSE) {
             if ($tokens[$stackPtr]['code'] === T_IF) {
@@ -314,7 +316,7 @@ class ControlStructureSpacingSniff implements Sniff
                     $phpcsFile->fixer->endChangeset();
                 }
             }
-        } else if ($tokens[$trailingContent]['code'] !== T_ELSE
+        } elseif ($tokens[$trailingContent]['code'] !== T_ELSE
             && $tokens[$trailingContent]['code'] !== T_ELSEIF
             && $tokens[$trailingContent]['code'] !== T_CATCH
             && $tokens[$trailingContent]['code'] !== T_FINALLY
@@ -331,7 +333,7 @@ class ControlStructureSpacingSniff implements Sniff
                 );
 
                 if (($tokens[$trailingContent]['code'] === T_COMMENT
-                    || isset(Tokens::$phpcsCommentTokens[$tokens[$trailingContent]['code']]) === true)
+                    || isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[$trailingContent]['code']]) === true)
                     && $tokens[$trailingContent]['line'] === $tokens[$scopeCloser]['line']
                 ) {
                     $phpcsFile->fixer->addNewline($trailingContent);
@@ -339,9 +341,6 @@ class ControlStructureSpacingSniff implements Sniff
                     $phpcsFile->fixer->addNewline($scopeCloser);
                 }
             }
-        }//end if
-
-    }//end process()
-
-
-}//end class
+        }
+    }
+}

@@ -3,8 +3,9 @@
  * Ensures method and function names are correct.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PEAR\Sniffs\NamingConventions;
@@ -20,9 +21,9 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
     /**
      * A list of all PHP magic methods.
      *
-     * @var array
+     * @var array<string, true>
      */
-    protected $magicMethods = [
+    protected const MAGIC_METHODS = [
         'construct'   => true,
         'destruct'    => true,
         'call'        => true,
@@ -45,9 +46,27 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
     /**
      * A list of all PHP magic functions.
      *
-     * @var array
+     * @var array<string, true>
      */
-    protected $magicFunctions = ['autoload' => true];
+    protected const MAGIC_FUNCTIONS = ['autoload' => true];
+
+    /**
+     * A list of all PHP magic methods.
+     *
+     * @var array<string, true>
+     *
+     * @deprecated 4.0.0 Use the ValidFunctionNameSniff::MAGIC_METHODS constant instead.
+     */
+    protected $magicMethods = self::MAGIC_METHODS;
+
+    /**
+     * A list of all PHP magic functions.
+     *
+     * @var array<string, true>
+     *
+     * @deprecated 4.0.0 Use the ValidFunctionNameSniff::MAGIC_FUNCTIONS constant instead.
+     */
+    protected $magicFunctions = self::MAGIC_FUNCTIONS;
 
 
     /**
@@ -55,9 +74,8 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
      */
     public function __construct()
     {
-        parent::__construct(Tokens::$ooScopeTokens, [T_FUNCTION], true);
-
-    }//end __construct()
+        parent::__construct(Tokens::OO_SCOPE_TOKENS, [T_FUNCTION], true);
+    }
 
 
     /**
@@ -70,7 +88,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
      *
      * @return void
      */
-    protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
+    protected function processTokenWithinScope(File $phpcsFile, int $stackPtr, int $currScope)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -83,17 +101,17 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         }
 
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($methodName === null) {
-            // Ignore closures.
+        if ($methodName === '') {
+            // Ignore live coding.
             return;
         }
 
-        $className = $phpcsFile->getDeclarationName($currScope);
-        if (isset($className) === false) {
-            $className = '[Anonymous Class]';
+        $className = '[Anonymous Class]';
+        if ($tokens[$currScope]['code'] !== T_ANON_CLASS) {
+            $className = $phpcsFile->getDeclarationName($currScope);
         }
 
-        $errorData = [$className.'::'.$methodName];
+        $errorData = [$className . '::' . $methodName];
 
         $methodNameLc = strtolower($methodName);
         $classNameLc  = strtolower($className);
@@ -101,7 +119,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         // Is this a magic method. i.e., is prefixed with "__" ?
         if (preg_match('|^__[^_]|', $methodName) !== 0) {
             $magicPart = substr($methodNameLc, 2);
-            if (isset($this->magicMethods[$magicPart]) === true) {
+            if (isset(static::MAGIC_METHODS[$magicPart]) === true) {
                 return;
             }
 
@@ -115,7 +133,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         }
 
         // PHP4 destructors are allowed to break our rules.
-        if ($methodNameLc === '_'.$classNameLc) {
+        if ($methodNameLc === '_' . $classNameLc) {
             return;
         }
 
@@ -165,8 +183,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
                 $phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $errorData);
             }
         }
-
-    }//end processTokenWithinScope()
+    }
 
 
     /**
@@ -178,14 +195,9 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
      *
      * @return void
      */
-    protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
+    protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr)
     {
         $functionName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($functionName === null) {
-            // Ignore closures.
-            return;
-        }
-
         if (ltrim($functionName, '_') === '') {
             // Ignore special functions.
             return;
@@ -196,7 +208,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         // Is this a magic function. i.e., it is prefixed with "__".
         if (preg_match('|^__[^_]|', $functionName) !== 0) {
             $magicPart = strtolower(substr($functionName, 2));
-            if (isset($this->magicFunctions[$magicPart]) === true) {
+            if (isset(static::MAGIC_FUNCTIONS[$magicPart]) === true) {
                 return;
             }
 
@@ -245,7 +257,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         // Every function must have a camel caps part, so check that first.
         if (Common::isCamelCaps($camelCapsPart, false, true, false) === false) {
             $validName        = false;
-            $newCamelCapsPart = strtolower($camelCapsPart[0]).substr($camelCapsPart, 1);
+            $newCamelCapsPart = strtolower($camelCapsPart[0]) . substr($camelCapsPart, 1);
         }
 
         if ($packagePart !== '') {
@@ -256,7 +268,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
                 if ($bit[0] !== strtoupper($bit[0])) {
                     $newPackagePart = '';
                     foreach ($nameBits as $bit) {
-                        $newPackagePart .= strtoupper($bit[0]).substr($bit, 1).'_';
+                        $newPackagePart .= strtoupper($bit[0]) . substr($bit, 1) . '_';
                     }
 
                     $validName = false;
@@ -269,7 +281,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
             if ($newPackagePart === '') {
                 $newName = $newCamelCapsPart;
             } else {
-                $newName = rtrim($newPackagePart, '_').'_'.$newCamelCapsPart;
+                $newName = rtrim($newPackagePart, '_') . '_' . $newCamelCapsPart;
             }
 
             $error  = 'Function name "%s" is invalid; consider "%s" instead';
@@ -277,8 +289,5 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
             $data[] = $newName;
             $phpcsFile->addError($error, $stackPtr, 'FunctionNameInvalid', $data);
         }
-
-    }//end processTokenOutsideScope()
-
-
-}//end class
+    }
+}

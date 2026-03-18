@@ -3,8 +3,9 @@
  * Checks that the method declaration is correct.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods;
@@ -22,9 +23,8 @@ class MethodDeclarationSniff extends AbstractScopeSniff
      */
     public function __construct()
     {
-        parent::__construct(Tokens::$ooScopeTokens, [T_FUNCTION]);
-
-    }//end __construct()
+        parent::__construct(Tokens::OO_SCOPE_TOKENS, [T_FUNCTION]);
+    }
 
 
     /**
@@ -36,7 +36,7 @@ class MethodDeclarationSniff extends AbstractScopeSniff
      *
      * @return void
      */
-    protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
+    protected function processTokenWithinScope(File $phpcsFile, int $stackPtr, int $currScope)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -49,8 +49,8 @@ class MethodDeclarationSniff extends AbstractScopeSniff
         }
 
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($methodName === null) {
-            // Ignore closures.
+        if ($methodName === '') {
+            // Ignore live coding.
             return;
         }
 
@@ -65,24 +65,24 @@ class MethodDeclarationSniff extends AbstractScopeSniff
         $abstract   = 0;
         $final      = 0;
 
-        $find = (Tokens::$methodPrefixes + Tokens::$emptyTokens);
+        $find = (Tokens::METHOD_MODIFIERS + Tokens::EMPTY_TOKENS);
         $prev = $phpcsFile->findPrevious($find, ($stackPtr - 1), null, true);
 
         $prefix = $stackPtr;
-        while (($prefix = $phpcsFile->findPrevious(Tokens::$methodPrefixes, ($prefix - 1), $prev)) !== false) {
+        while (($prefix = $phpcsFile->findPrevious(Tokens::METHOD_MODIFIERS, ($prefix - 1), $prev)) !== false) {
             switch ($tokens[$prefix]['code']) {
-            case T_STATIC:
-                $static = $prefix;
-                break;
-            case T_ABSTRACT:
-                $abstract = $prefix;
-                break;
-            case T_FINAL:
-                $final = $prefix;
-                break;
-            default:
-                $visibility = $prefix;
-                break;
+                case T_STATIC:
+                    $static = $prefix;
+                    break;
+                case T_ABSTRACT:
+                    $abstract = $prefix;
+                    break;
+                case T_FINAL:
+                    $final = $prefix;
+                    break;
+                default:
+                    $visibility = $prefix;
+                    break;
             }
         }
 
@@ -95,9 +95,9 @@ class MethodDeclarationSniff extends AbstractScopeSniff
                 $fixes[$final]       = '';
                 $fixes[($final + 1)] = '';
                 if (isset($fixes[$visibility]) === true) {
-                    $fixes[$visibility] = 'final '.$fixes[$visibility];
+                    $fixes[$visibility] = 'final ' . $fixes[$visibility];
                 } else {
-                    $fixes[$visibility] = 'final '.$tokens[$visibility]['content'];
+                    $fixes[$visibility] = 'final ' . $tokens[$visibility]['content'];
                 }
             }
         }
@@ -109,9 +109,9 @@ class MethodDeclarationSniff extends AbstractScopeSniff
                 $fixes[$abstract]       = '';
                 $fixes[($abstract + 1)] = '';
                 if (isset($fixes[$visibility]) === true) {
-                    $fixes[$visibility] = 'abstract '.$fixes[$visibility];
+                    $fixes[$visibility] = 'abstract ' . $fixes[$visibility];
                 } else {
-                    $fixes[$visibility] = 'abstract '.$tokens[$visibility]['content'];
+                    $fixes[$visibility] = 'abstract ' . $tokens[$visibility]['content'];
                 }
             }
         }
@@ -125,7 +125,7 @@ class MethodDeclarationSniff extends AbstractScopeSniff
                 if (isset($fixes[$visibility]) === true) {
                     $fixes[$visibility] .= ' static';
                 } else {
-                    $fixes[$visibility] = $tokens[$visibility]['content'].' static';
+                    $fixes[$visibility] = $tokens[$visibility]['content'] . ' static';
                 }
             }
         }
@@ -139,8 +139,7 @@ class MethodDeclarationSniff extends AbstractScopeSniff
 
             $phpcsFile->fixer->endChangeset();
         }
-
-    }//end processTokenWithinScope()
+    }
 
 
     /**
@@ -153,10 +152,7 @@ class MethodDeclarationSniff extends AbstractScopeSniff
      *
      * @return void
      */
-    protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
+    protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr)
     {
-
-    }//end processTokenOutsideScope()
-
-
-}//end class
+    }
+}

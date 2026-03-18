@@ -4,7 +4,8 @@
  *
  * @author    Andy Grunwald <andygrunwald@gmail.com>
  * @copyright 2010-2014 Andy Grunwald
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Files;
@@ -19,13 +20,15 @@ class LowercasedFilenameSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
-        return [T_OPEN_TAG];
-
-    }//end register()
+        return [
+            T_OPEN_TAG,
+            T_OPEN_TAG_WITH_ECHO,
+        ];
+    }
 
 
     /**
@@ -37,11 +40,11 @@ class LowercasedFilenameSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $filename = $phpcsFile->getFilename();
         if ($filename === 'STDIN') {
-            return;
+            return $phpcsFile->numTokens;
         }
 
         $filename          = basename($filename);
@@ -59,9 +62,6 @@ class LowercasedFilenameSniff implements Sniff
         }
 
         // Ignore the rest of the file.
-        return ($phpcsFile->numTokens + 1);
-
-    }//end process()
-
-
-}//end class
+        return $phpcsFile->numTokens;
+    }
+}

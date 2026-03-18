@@ -159,16 +159,41 @@ class Nested_Anon_Class {
 namespace Foo\Baz {
     class BarFoo {
         public function foo() {
-            echo Foo\Baz\BarFoo::$prop;
+            echo \Foo\Baz\BarFoo::$prop;
         }
     }
 }
 
-// Prevent false negative when namespace has whitespace/comments.
+// Prevent false negative when namespace has whitespace/comments - no longer supported as of PHPCS 4.x.
 namespace Foo /*comment*/ \ Bah {
     class BarFoo {
         public function foo() {
-            echo Foo \ /*comment*/ Bah\BarFoo::$prop;
+            echo \Foo \ /*comment*/ Bah\BarFoo::$prop;
         }
+    }
+}
+
+namespace EndsIn\CloseTag ?>
+<?php
+
+class Baz {
+    function myFunction()
+    {
+        \EndsIn\CloseTag\Whatever::something();
+        \EndsIn\CloseTag\Baz::something();
+    }
+}
+
+// Issue PHPCSStandards/PHP_CodeSniffer#553.
+namespace TestMe;
+
+namespace\functionCall();
+namespace\anotherFunctionCall();
+
+class SelfMemberReference
+{
+    public function falseNegative()
+    {
+        $testResults[] = \TestMe\SelfMemberReference::test();
     }
 }

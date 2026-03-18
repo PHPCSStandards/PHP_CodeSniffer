@@ -3,15 +3,21 @@
  * Tests for the \PHP_CodeSniffer\Sniffs\AbstractArraySniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2020 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Tests\Core\Sniffs;
 
-use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
+use PHP_CodeSniffer\Tests\Core\AbstractMethodTestCase;
 
-class AbstractArraySniffTest extends AbstractMethodUnitTest
+/**
+ * Tests for the \PHP_CodeSniffer\Sniffs\AbstractArraySniff.
+ *
+ * @covers \PHP_CodeSniffer\Sniffs\AbstractArraySniff
+ */
+final class AbstractArraySniffTest extends AbstractMethodTestCase
 {
 
     /**
@@ -20,7 +26,7 @@ class AbstractArraySniffTest extends AbstractMethodUnitTest
      * This extends the \PHP_CodeSniffer\Sniffs\AbstractArraySniff class to make the
      * internal workings of the sniff observable.
      *
-     * @var \PHP_CodeSniffer\Sniffs\AbstractArraySniffTestable
+     * @var \PHP_CodeSniffer\Tests\Core\Sniffs\AbstractArraySniffTestable
      */
     protected static $sniff;
 
@@ -33,12 +39,11 @@ class AbstractArraySniffTest extends AbstractMethodUnitTest
      *
      * @return void
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::$sniff = new AbstractArraySniffTestable();
         parent::setUpBeforeClass();
-
-    }//end setUpBeforeClass()
+    }
 
 
     /**
@@ -58,8 +63,7 @@ class AbstractArraySniffTest extends AbstractMethodUnitTest
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
-    }//end testSimpleValues()
+    }
 
 
     /**
@@ -94,8 +98,7 @@ class AbstractArraySniffTest extends AbstractMethodUnitTest
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
-    }//end testSimpleKeyValues()
+    }
 
 
     /**
@@ -127,8 +130,7 @@ class AbstractArraySniffTest extends AbstractMethodUnitTest
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
-    }//end testMissingKeys()
+    }
 
 
     /**
@@ -157,8 +159,7 @@ class AbstractArraySniffTest extends AbstractMethodUnitTest
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
-    }//end testMultiTokenKeys()
+    }
 
 
     /**
@@ -187,8 +188,7 @@ class AbstractArraySniffTest extends AbstractMethodUnitTest
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
-    }//end testMissingKeysCoalesceTernary()
+    }
 
 
     /**
@@ -223,8 +223,7 @@ class AbstractArraySniffTest extends AbstractMethodUnitTest
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
-    }//end testTernaryValues()
+    }
 
 
     /**
@@ -247,8 +246,7 @@ class AbstractArraySniffTest extends AbstractMethodUnitTest
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
-    }//end testHeredocValues()
+    }
 
 
     /**
@@ -283,8 +281,5 @@ class AbstractArraySniffTest extends AbstractMethodUnitTest
         ];
 
         $this->assertSame($expected, self::$sniff->indicies);
-
-    }//end testArrowFunctionValue()
-
-
-}//end class
+    }
+}

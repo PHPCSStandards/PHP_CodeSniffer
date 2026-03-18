@@ -3,8 +3,9 @@
  * Checks that there is one empty line before the closing brace of a function.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace;
@@ -15,21 +16,11 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class FunctionClosingBraceSpaceSniff implements Sniff
 {
 
-    /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
-
 
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
@@ -37,8 +28,7 @@ class FunctionClosingBraceSpaceSniff implements Sniff
             T_FUNCTION,
             T_CLOSURE,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -50,7 +40,7 @@ class FunctionClosingBraceSpaceSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -61,26 +51,6 @@ class FunctionClosingBraceSpaceSniff implements Sniff
 
         $closeBrace  = $tokens[$stackPtr]['scope_closer'];
         $prevContent = $phpcsFile->findPrevious(T_WHITESPACE, ($closeBrace - 1), null, true);
-
-        // Special case for empty JS functions.
-        if ($phpcsFile->tokenizerType === 'JS' && $prevContent === $tokens[$stackPtr]['scope_opener']) {
-            // In this case, the opening and closing brace must be
-            // right next to each other.
-            if ($tokens[$stackPtr]['scope_closer'] !== ($tokens[$stackPtr]['scope_opener'] + 1)) {
-                $error = 'The opening and closing braces of empty functions must be directly next to each other; e.g., function () {}';
-                $fix   = $phpcsFile->addFixableError($error, $closeBrace, 'SpacingBetween');
-                if ($fix === true) {
-                    $phpcsFile->fixer->beginChangeset();
-                    for ($i = ($tokens[$stackPtr]['scope_opener'] + 1); $i < $closeBrace; $i++) {
-                        $phpcsFile->fixer->replaceToken($i, '');
-                    }
-
-                    $phpcsFile->fixer->endChangeset();
-                }
-            }
-
-            return;
-        }
 
         $nestedFunction = false;
         if ($phpcsFile->hasCondition($stackPtr, [T_FUNCTION, T_CLOSURE]) === true
@@ -100,7 +70,7 @@ class FunctionClosingBraceSpaceSniff implements Sniff
                 if ($fix === true) {
                     $phpcsFile->fixer->addNewlineBefore($closeBrace);
                 }
-            } else if ($found > 0) {
+            } elseif ($found > 0) {
                 $error = 'Expected 0 blank lines before closing brace of nested function; %s found';
                 $data  = [$found];
                 $fix   = $phpcsFile->addFixableError($error, $closeBrace, 'SpacingBeforeNestedClose', $data);
@@ -125,8 +95,8 @@ class FunctionClosingBraceSpaceSniff implements Sniff
                     }
 
                     $phpcsFile->fixer->endChangeset();
-                }//end if
-            }//end if
+                }
+            }
         } else {
             if ($found !== 1) {
                 if ($found < 0) {
@@ -155,10 +125,7 @@ class FunctionClosingBraceSpaceSniff implements Sniff
                         }
                     }
                 }
-            }//end if
-        }//end if
-
-    }//end process()
-
-
-}//end class
+            }
+        }
+    }
+}

@@ -3,8 +3,9 @@
  * Makes sure that any strings that are "echoed" are not enclosed in brackets.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Strings;
@@ -20,13 +21,12 @@ class EchoedStringsSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
         return [T_ECHO];
-
-    }//end register()
+    }
 
 
     /**
@@ -38,7 +38,7 @@ class EchoedStringsSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -51,7 +51,7 @@ class EchoedStringsSniff implements Sniff
 
         $end = $phpcsFile->findNext([T_SEMICOLON, T_CLOSE_TAG], $stackPtr, null, false);
 
-        // If the token before the semi-colon is not a closing parenthesis, then we are not concerned.
+        // If the token before the semicolon is not a closing parenthesis, then we are not concerned.
         $prev = $phpcsFile->findPrevious(T_WHITESPACE, ($end - 1), null, true);
         if ($tokens[$prev]['code'] !== T_CLOSE_PARENTHESIS) {
             $phpcsFile->recordMetric($stackPtr, 'Brackets around echoed strings', 'no');
@@ -66,7 +66,7 @@ class EchoedStringsSniff implements Sniff
 
         $phpcsFile->recordMetric($stackPtr, 'Brackets around echoed strings', 'yes');
 
-        if (($phpcsFile->findNext(Tokens::$operators, $stackPtr, $end, false)) === false) {
+        if (($phpcsFile->findNext(Tokens::OPERATORS, $stackPtr, $end, false)) === false) {
             // There are no arithmetic operators in this.
             $error = 'Echoed strings should not be bracketed';
             $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'HasBracket');
@@ -81,8 +81,5 @@ class EchoedStringsSniff implements Sniff
                 $phpcsFile->fixer->endChangeset();
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

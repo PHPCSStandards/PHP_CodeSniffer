@@ -65,3 +65,23 @@ $a = [
 
 $var = $foo->something(!$var);
 $var = $foo?->something(!$var);
+
+$callback = function ($value) {
+    if ($value > 10) {
+        return false;
+    }
+};
+
+function issue3616() {
+    $food = 'cake';
+
+    $returnValue = match (true) {
+        $food === 'apple' => 'This food is an apple',
+        $food === 'bar' => 'This food is a bar',
+        $food === 'cake' => 'This food is a cake',
+    };
+}
+
+$var = \Fully\qualified(!$var);
+$var = Partially\qualified(!$var);
+$var = namespace\relative(!$var);

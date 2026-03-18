@@ -3,15 +3,21 @@
  * Unit test class for the ConstantVisibility sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2019 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR12\Tests\Properties;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class ConstantVisibilityUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ConstantVisibility sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Properties\ConstantVisibilitySniff
+ */
+final class ConstantVisibilityUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -26,8 +32,7 @@ class ConstantVisibilityUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -36,13 +41,27 @@ class ConstantVisibilityUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    public function getWarningList()
+    public function getWarningList($testFile = '')
     {
-        return [4 => 1];
+        switch ($testFile) {
+            case 'ConstantVisibilityUnitTest.1.inc':
+                return [
+                    4  => 1,
+                    12 => 1,
+                    21 => 1,
+                ];
 
-    }//end getWarningList()
+            case 'ConstantVisibilityUnitTest.2.inc':
+                return [
+                    6 => 1,
+                ];
 
-
-}//end class
+            default:
+                return [];
+        }
+    }
+}

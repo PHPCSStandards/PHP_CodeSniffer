@@ -3,8 +3,9 @@
  * Checks that the closing braces of scopes are aligned correctly.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PEAR\Sniffs\WhiteSpace;
@@ -24,16 +25,15 @@ class ScopeClosingBraceSniff implements Sniff
     public $indent = 4;
 
 
-     /**
-      * Returns an array of tokens this test wants to listen for.
-      *
-      * @return int[]
-      */
+    /**
+     * Returns an array of tokens this test wants to listen for.
+     *
+     * @return array<int|string>
+     */
     public function register()
     {
-        return Tokens::$scopeOpeners;
-
-    }//end register()
+        return Tokens::SCOPE_OPENERS;
+    }
 
 
     /**
@@ -45,7 +45,7 @@ class ScopeClosingBraceSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -83,7 +83,7 @@ class ScopeClosingBraceSniff implements Sniff
         $startColumn = 1;
         if ($tokens[$lineStart]['code'] === T_WHITESPACE) {
             $startColumn = $tokens[($lineStart + 1)]['column'];
-        } else if ($tokens[$lineStart]['code'] === T_INLINE_HTML) {
+        } elseif ($tokens[$lineStart]['code'] === T_INLINE_HTML) {
             $trimmed = ltrim($tokens[$lineStart]['content']);
             if ($trimmed === '') {
                 $startColumn = $tokens[($lineStart + 1)]['column'];
@@ -93,16 +93,19 @@ class ScopeClosingBraceSniff implements Sniff
         }
 
         // Check that the closing brace is on it's own line.
-        $lastContent = $phpcsFile->findPrevious(
-            [
-                T_WHITESPACE,
-                T_INLINE_HTML,
-                T_OPEN_TAG,
-            ],
-            ($scopeEnd - 1),
-            $scopeStart,
-            true
-        );
+        for ($lastContent = ($scopeEnd - 1); $lastContent > $scopeStart; $lastContent--) {
+            if ($tokens[$lastContent]['code'] === T_WHITESPACE || $tokens[$lastContent]['code'] === T_OPEN_TAG) {
+                continue;
+            }
+
+            if ($tokens[$lastContent]['code'] === T_INLINE_HTML
+                && ltrim($tokens[$lastContent]['content']) === ''
+            ) {
+                continue;
+            }
+
+            break;
+        }
 
         if ($tokens[$lastContent]['line'] === $tokens[$scopeEnd]['line']) {
             $error = 'Closing brace must be on a line by itself';
@@ -127,7 +130,7 @@ class ScopeClosingBraceSniff implements Sniff
         $braceIndent = 0;
         if ($tokens[$lineStart]['code'] === T_WHITESPACE) {
             $braceIndent = ($tokens[($lineStart + 1)]['column'] - 1);
-        } else if ($tokens[$lineStart]['code'] === T_INLINE_HTML) {
+        } elseif ($tokens[$lineStart]['code'] === T_INLINE_HTML) {
             $trimmed = ltrim($tokens[$lineStart]['content']);
             if ($trimmed === '') {
                 $braceIndent = ($tokens[($lineStart + 1)]['column'] - 1);
@@ -161,7 +164,7 @@ class ScopeClosingBraceSniff implements Sniff
                 ];
                 $fix   = $phpcsFile->addFixableError($error, $scopeEnd, 'Indent', $data);
             }
-        }//end if
+        }
 
         if ($fix === true) {
             $spaces = str_repeat(' ', $expectedIndent);
@@ -172,8 +175,5 @@ class ScopeClosingBraceSniff implements Sniff
                 $phpcsFile->fixer->addContentBefore($lineStart, $spaces);
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

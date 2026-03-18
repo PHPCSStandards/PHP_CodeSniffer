@@ -28,7 +28,6 @@
     <rule ref="PEAR.Functions.ValidDefaultValue"/>
     <rule ref="PSR2.Files.EndFileNewline"/>
     <rule ref="Zend.Files.ClosingTag"/>
-    <rule ref="Zend.Debug.CodeAnalyzer"/>
 
     <!-- Lines can be 120 chars long, but never show errors -->
     <rule ref="Generic.Files.LineLength">
@@ -47,18 +46,16 @@
 
     <!-- Have 20 chars padding maximum and always show as errors -->
     <rule ref="Generic.Formatting.MultipleStatementAlignment">
+        <type>error</type>
         <properties>
             <property name="maxPadding" value="20"/>
-            <property name="error" value="true"/>
         </properties>
     </rule>
 
     <!-- Ban some functions -->
     <rule ref="Generic.PHP.ForbiddenFunctions">
         <properties>
-            <property name="forbiddenFunctions" type="array">
-                <element key="sizeof" value="count"/>
-                <element key="delete" value="unset"/>
+            <property name="forbiddenFunctions" type="array" extend="true">
                 <element key="print" value="echo"/>
                 <element key="is_null" value="null"/>
                 <element key="create_function" value="null"/>
@@ -69,17 +66,6 @@
     <!-- We allow empty catch statements -->
     <rule ref="Generic.CodeAnalysis.EmptyStatement.DetectedCATCH">
         <severity>0</severity>
-    </rule>
-
-    <!-- We don't want gsjlint throwing errors for things we already check -->
-    <rule ref="Generic.Debug.ClosureLinter">
-        <properties>
-            <property name="errorCodes" type="array" value="0210"/>
-            <property name="ignoreCodes" type="array" value="0001,0110,0240"/>
-        </properties>
-    </rule>
-    <rule ref="Generic.Debug.ClosureLinter.ExternalToolError">
-        <message>%2$s</message>
     </rule>
 
     <!-- Only one argument per line in multi-line function calls -->
@@ -101,11 +87,6 @@
         <severity>0</severity>
     </rule>
     <rule ref="Squiz.Arrays.ArrayDeclaration.CloseBraceNewLine">
-        <severity>0</severity>
-    </rule>
-
-    <!-- Squiz.WhiteSpace.LanguageConstructSpacing is deprecated -->
-    <rule ref="Squiz.WhiteSpace.LanguageConstructSpacing">
         <severity>0</severity>
     </rule>
 

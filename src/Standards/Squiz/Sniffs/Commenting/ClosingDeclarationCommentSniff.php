@@ -1,10 +1,11 @@
 <?php
 /**
- * Checks the //end ... comments on classes, interfaces and functions.
+ * Checks the //end ... comments on classes, enums, functions, interfaces and traits.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting;
@@ -19,17 +20,18 @@ class ClosingDeclarationCommentSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
         return [
-            T_FUNCTION,
             T_CLASS,
+            T_ENUM,
+            T_FUNCTION,
             T_INTERFACE,
+            T_TRAIT,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -41,7 +43,7 @@ class ClosingDeclarationCommentSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -60,37 +62,38 @@ class ClosingDeclarationCommentSniff implements Sniff
             }
 
             if (isset($tokens[$stackPtr]['scope_closer']) === false) {
-                $error = 'Possible parse error: non-abstract method defined as abstract';
-                $phpcsFile->addWarning($error, $stackPtr, 'Abstract');
+                // Parse error or live coding.
                 return;
             }
 
             $decName = $phpcsFile->getDeclarationName($stackPtr);
-            $comment = '//end '.$decName.'()';
-        } else if ($tokens[$stackPtr]['code'] === T_CLASS) {
+            if ($decName === '') {
+                // Parse error or live coding.
+                return;
+            }
+
+            $comment = '//end ' . $decName . '()';
+        } elseif ($tokens[$stackPtr]['code'] === T_CLASS) {
             $comment = '//end class';
-        } else {
+        } elseif ($tokens[$stackPtr]['code'] === T_INTERFACE) {
             $comment = '//end interface';
-        }//end if
+        } elseif ($tokens[$stackPtr]['code'] === T_TRAIT) {
+            $comment = '//end trait';
+        } else {
+            $comment = '//end enum';
+        }
 
         if (isset($tokens[$stackPtr]['scope_closer']) === false) {
-            $error = 'Possible parse error: %s missing opening or closing brace';
-            $data  = [$tokens[$stackPtr]['content']];
-            $phpcsFile->addWarning($error, $stackPtr, 'MissingBrace', $data);
+            // Parse error or live coding.
             return;
         }
 
         $closingBracket = $tokens[$stackPtr]['scope_closer'];
 
-        if ($closingBracket === null) {
-            // Possible inline structure. Other tests will handle it.
-            return;
-        }
-
         $data = [$comment];
         if (isset($tokens[($closingBracket + 1)]) === false || $tokens[($closingBracket + 1)]['code'] !== T_COMMENT) {
             $next = $phpcsFile->findNext(T_WHITESPACE, ($closingBracket + 1), null, true);
-            if (rtrim($tokens[$next]['content']) === $comment) {
+            if ($next !== false && rtrim($tokens[$next]['content']) === $comment) {
                 // The comment isn't really missing; it is just in the wrong place.
                 $fix = $phpcsFile->addFixableError('Expected %s directly after closing brace', $closingBracket, 'Misplaced', $data);
                 if ($fix === true) {
@@ -101,29 +104,26 @@ class ClosingDeclarationCommentSniff implements Sniff
 
                     // Just in case, because indentation fixes can add indents onto
                     // these comments and cause us to be unable to fix them.
-                    $phpcsFile->fixer->replaceToken($next, $comment.$phpcsFile->eolChar);
+                    $phpcsFile->fixer->replaceToken($next, $comment . $phpcsFile->eolChar);
                     $phpcsFile->fixer->endChangeset();
                 }
             } else {
                 $fix = $phpcsFile->addFixableError('Expected %s', $closingBracket, 'Missing', $data);
                 if ($fix === true) {
-                    $phpcsFile->fixer->replaceToken($closingBracket, '}'.$comment.$phpcsFile->eolChar);
+                    $phpcsFile->fixer->replaceToken($closingBracket, '}' . $comment);
                 }
-            }
-
-            return;
-        }//end if
-
-        if (rtrim($tokens[($closingBracket + 1)]['content']) !== $comment) {
-            $fix = $phpcsFile->addFixableError('Expected %s', $closingBracket, 'Incorrect', $data);
-            if ($fix === true) {
-                $phpcsFile->fixer->replaceToken(($closingBracket + 1), $comment.$phpcsFile->eolChar);
             }
 
             return;
         }
 
-    }//end process()
+        if (rtrim($tokens[($closingBracket + 1)]['content']) !== $comment) {
+            $fix = $phpcsFile->addFixableError('Expected %s', $closingBracket, 'Incorrect', $data);
+            if ($fix === true) {
+                $phpcsFile->fixer->replaceToken(($closingBracket + 1), $comment . $phpcsFile->eolChar);
+            }
 
-
-}//end class
+            return;
+        }
+    }
+}

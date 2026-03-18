@@ -48,10 +48,15 @@ class RightSideVisTest {
 }
 
 namespace Something\sizeof;
-$var = new Sizeof();
+$var = new   /*comment*/   Sizeof();
 class SizeOf implements Something {}
 
 function mymodule_form_callback(SizeOf $sizeof) {
 }
 
 $size = $class?->sizeof($array);
+
+#[SizeOf(10)]
+function doSomething() {}
+
+$size = sizeof /*comment*/ ($array);

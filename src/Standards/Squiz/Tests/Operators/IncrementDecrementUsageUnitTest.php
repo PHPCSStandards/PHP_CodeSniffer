@@ -3,15 +3,21 @@
  * Unit test class for the IncrementDecrementUsage sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\Operators;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class IncrementDecrementUsageUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the IncrementDecrementUsage sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Operators\IncrementDecrementUsageSniff
+ */
+final class IncrementDecrementUsageUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -37,9 +43,16 @@ class IncrementDecrementUsageUnitTest extends AbstractSniffUnitTest
             31 => 1,
             41 => 1,
             42 => 1,
+            44 => 1,
+            45 => 1,
+            47 => 1,
+            48 => 1,
+            50 => 1,
+            53 => 1,
+            55 => 1,
+            56 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -53,8 +66,5 @@ class IncrementDecrementUsageUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

@@ -3,16 +3,18 @@
  * Processes pattern strings and checks that the code conforms to the pattern.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Sniffs;
 
-use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Util\Tokens;
-use PHP_CodeSniffer\Tokenizers\PHP;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Tokenizers\PHP;
+use PHP_CodeSniffer\Util\Tokens;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 abstract class AbstractPatternSniff implements Sniff
 {
@@ -57,19 +59,11 @@ abstract class AbstractPatternSniff implements Sniff
 
     /**
      * Constructs a AbstractPatternSniff.
-     *
-     * @param boolean $ignoreComments If true, comments will be ignored.
      */
-    public function __construct($ignoreComments=null)
+    public function __construct()
     {
-        // This is here for backwards compatibility.
-        if ($ignoreComments !== null) {
-            $this->ignoreComments = $ignoreComments;
-        }
-
         $this->supplementaryTokens = $this->registerSupplementary();
-
-    }//end __construct()
+    }
 
 
     /**
@@ -78,7 +72,7 @@ abstract class AbstractPatternSniff implements Sniff
      * Classes extending <i>AbstractPatternTest</i> should implement the
      * <i>getPatterns()</i> method to register the patterns they wish to test.
      *
-     * @return int[]
+     * @return array<int|string>
      * @see    process()
      */
     final public function register()
@@ -106,11 +100,10 @@ abstract class AbstractPatternSniff implements Sniff
             }
 
             $this->parsedPatterns[$tokenType][] = $patternArray;
-        }//end foreach
+        }
 
         return array_unique(array_merge($listenTypes, $this->supplementaryTokens));
-
-    }//end register()
+    }
 
 
     /**
@@ -129,7 +122,7 @@ abstract class AbstractPatternSniff implements Sniff
      *
      * @return array<int, int>
      */
-    private function getPatternTokenTypes($pattern)
+    private function getPatternTokenTypes(array $pattern)
     {
         $tokenTypes = [];
         foreach ($pattern as $pos => $patternInfo) {
@@ -141,8 +134,7 @@ abstract class AbstractPatternSniff implements Sniff
         }
 
         return $tokenTypes;
-
-    }//end getPatternTokenTypes()
+    }
 
 
     /**
@@ -155,7 +147,7 @@ abstract class AbstractPatternSniff implements Sniff
      *             as the listener.
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If we could not determine a token to listen for.
      */
-    private function getListenerTokenPos($pattern)
+    private function getListenerTokenPos(array $pattern)
     {
         $tokenTypes = $this->getPatternTokenTypes($pattern);
         $tokenCodes = array_keys($tokenTypes);
@@ -168,8 +160,7 @@ abstract class AbstractPatternSniff implements Sniff
         }
 
         return $tokenTypes[$token];
-
-    }//end getListenerTokenPos()
+    }
 
 
     /**
@@ -184,7 +175,7 @@ abstract class AbstractPatternSniff implements Sniff
      * @return void
      * @see    register()
      */
-    final public function process(File $phpcsFile, $stackPtr)
+    final public function process(File $phpcsFile, int $stackPtr)
     {
         $file = $phpcsFile->getFilename();
         if ($this->currFile !== $file) {
@@ -218,7 +209,7 @@ abstract class AbstractPatternSniff implements Sniff
             if ($errors === false) {
                 // The pattern didn't match.
                 continue;
-            } else if (empty($errors) === true) {
+            } elseif (empty($errors) === true) {
                 // The pattern matched, but there were no errors.
                 break;
             }
@@ -234,8 +225,7 @@ abstract class AbstractPatternSniff implements Sniff
         foreach ($allErrors as $stackPtr => $error) {
             $phpcsFile->addError($error, $stackPtr, 'Found');
         }
-
-    }//end process()
+    }
 
 
     /**
@@ -250,9 +240,9 @@ abstract class AbstractPatternSniff implements Sniff
      * @param int                         $stackPtr    The position in the tokens stack where
      *                                                 the listening token type was found.
      *
-     * @return array
+     * @return array|false
      */
-    protected function processPattern($patternInfo, File $phpcsFile, $stackPtr)
+    protected function processPattern(array $patternInfo, File $phpcsFile, int $stackPtr)
     {
         $tokens      = $phpcsFile->getTokens();
         $pattern     = $patternInfo['pattern'];
@@ -262,7 +252,7 @@ abstract class AbstractPatternSniff implements Sniff
 
         $ignoreTokens = [T_WHITESPACE => T_WHITESPACE];
         if ($this->ignoreComments === true) {
-            $ignoreTokens += Tokens::$commentTokens;
+            $ignoreTokens += Tokens::COMMENT_TOKENS;
         }
 
         $origStackPtr = $stackPtr;
@@ -275,7 +265,7 @@ abstract class AbstractPatternSniff implements Sniff
                 if ($pattern[$i]['type'] === 'token') {
                     if ($pattern[$i]['token'] === T_WHITESPACE) {
                         if ($tokens[$stackPtr]['code'] === T_WHITESPACE) {
-                            $found = $tokens[$stackPtr]['content'].$found;
+                            $found = $tokens[$stackPtr]['content'] . $found;
                         }
 
                         // Only check the size of the whitespace if this is not
@@ -310,7 +300,7 @@ abstract class AbstractPatternSniff implements Sniff
                             ($stackPtr - $prev - 1)
                         );
 
-                        $found = $tokens[$prev]['content'].$tokenContent.$found;
+                        $found = $tokens[$prev]['content'] . $tokenContent . $found;
 
                         if (isset($pattern[($i - 1)]) === true
                             && $pattern[($i - 1)]['type'] === 'skip'
@@ -319,8 +309,8 @@ abstract class AbstractPatternSniff implements Sniff
                         } else {
                             $stackPtr = ($prev - 1);
                         }
-                    }//end if
-                } else if ($pattern[$i]['type'] === 'skip') {
+                    }
+                } elseif ($pattern[$i]['type'] === 'skip') {
                     // Skip to next piece of relevant code.
                     if ($pattern[$i]['to'] === 'parenthesis_closer') {
                         $to = 'parenthesis_opener';
@@ -343,23 +333,23 @@ abstract class AbstractPatternSniff implements Sniff
                     }
 
                     if ($to === 'parenthesis_opener') {
-                        $found = '{'.$found;
+                        $found = '{' . $found;
                     } else {
-                        $found = '('.$found;
+                        $found = '(' . $found;
                     }
 
-                    $found = '...'.$found;
+                    $found = '...' . $found;
 
                     // Skip to the opening token.
                     $stackPtr = ($tokens[$next][$to] - 1);
-                } else if ($pattern[$i]['type'] === 'string') {
+                } elseif ($pattern[$i]['type'] === 'string') {
                     $found = 'abc';
-                } else if ($pattern[$i]['type'] === 'newline') {
+                } elseif ($pattern[$i]['type'] === 'newline') {
                     if ($this->ignoreComments === true
-                        && isset(Tokens::$commentTokens[$tokens[$stackPtr]['code']]) === true
+                        && isset(Tokens::COMMENT_TOKENS[$tokens[$stackPtr]['code']]) === true
                     ) {
                         $startComment = $phpcsFile->findPrevious(
-                            Tokens::$commentTokens,
+                            Tokens::COMMENT_TOKENS,
                             ($stackPtr - 1),
                             null,
                             true
@@ -374,32 +364,32 @@ abstract class AbstractPatternSniff implements Sniff
                             ($stackPtr - $startComment + 1)
                         );
 
-                        $found    = $tokenContent.$found;
+                        $found    = $tokenContent . $found;
                         $stackPtr = ($startComment - 1);
                     }
 
                     if ($tokens[$stackPtr]['code'] === T_WHITESPACE) {
                         if ($tokens[$stackPtr]['content'] !== $phpcsFile->eolChar) {
-                            $found = $tokens[$stackPtr]['content'].$found;
+                            $found = $tokens[$stackPtr]['content'] . $found;
 
                             // This may just be an indent that comes after a newline
                             // so check the token before to make sure. If it is a newline, we
                             // can ignore the error here.
                             if (($tokens[($stackPtr - 1)]['content'] !== $phpcsFile->eolChar)
                                 && ($this->ignoreComments === true
-                                && isset(Tokens::$commentTokens[$tokens[($stackPtr - 1)]['code']]) === false)
+                                && isset(Tokens::COMMENT_TOKENS[$tokens[($stackPtr - 1)]['code']]) === false)
                             ) {
                                 $hasError = true;
                             } else {
                                 $stackPtr--;
                             }
                         } else {
-                            $found = 'EOL'.$found;
+                            $found = 'EOL' . $found;
                         }
                     } else {
-                        $found    = $tokens[$stackPtr]['content'].$found;
+                        $found    = $tokens[$stackPtr]['content'] . $found;
                         $hasError = true;
-                    }//end if
+                    }
 
                     if ($hasError === false && $pattern[($i - 1)]['type'] !== 'newline') {
                         // Make sure they only have 1 newline.
@@ -408,13 +398,18 @@ abstract class AbstractPatternSniff implements Sniff
                             $hasError = true;
                         }
                     }
-                }//end if
-            }//end for
-        }//end if
+                }
+            }
+        }
 
         $stackPtr          = $origStackPtr;
         $lastAddedStackPtr = null;
         $patternLen        = count($pattern);
+
+        if (($stackPtr + $patternLen - $patternInfo['listen_pos']) > $phpcsFile->numTokens) {
+            // Pattern can never match as there are not enough tokens left in the file.
+            return false;
+        }
 
         for ($i = $patternInfo['listen_pos']; $i < $patternLen; $i++) {
             if (isset($tokens[$stackPtr]) === false) {
@@ -426,7 +421,7 @@ abstract class AbstractPatternSniff implements Sniff
                     if ($this->ignoreComments === true) {
                         // If we are ignoring comments, check to see if this current
                         // token is a comment. If so skip it.
-                        if (isset(Tokens::$commentTokens[$tokens[$stackPtr]['code']]) === true) {
+                        if (isset(Tokens::COMMENT_TOKENS[$tokens[$stackPtr]['code']]) === true) {
                             continue;
                         }
 
@@ -434,7 +429,7 @@ abstract class AbstractPatternSniff implements Sniff
                         // current token as we should allow a space before a
                         // comment for readability.
                         if (isset($tokens[($stackPtr + 1)]) === true
-                            && isset(Tokens::$commentTokens[$tokens[($stackPtr + 1)]['code']]) === true
+                            && isset(Tokens::COMMENT_TOKENS[$tokens[($stackPtr + 1)]['code']]) === true
                         ) {
                             continue;
                         }
@@ -449,7 +444,7 @@ abstract class AbstractPatternSniff implements Sniff
                         } else {
                             // Get all the whitespace to the next token.
                             $next = $phpcsFile->findNext(
-                                Tokens::$emptyTokens,
+                                Tokens::EMPTY_TOKENS,
                                 $stackPtr,
                                 null,
                                 true
@@ -462,7 +457,7 @@ abstract class AbstractPatternSniff implements Sniff
 
                             $lastAddedStackPtr = $stackPtr;
                             $stackPtr          = $next;
-                        }//end if
+                        }
 
                         if ($stackPtr !== $lastAddedStackPtr) {
                             $found .= $tokenContent;
@@ -472,7 +467,7 @@ abstract class AbstractPatternSniff implements Sniff
                             $found            .= $tokens[$stackPtr]['content'];
                             $lastAddedStackPtr = $stackPtr;
                         }
-                    }//end if
+                    }
 
                     if (isset($pattern[($i + 1)]) === true
                         && $pattern[($i + 1)]['type'] === 'skip'
@@ -528,7 +523,7 @@ abstract class AbstractPatternSniff implements Sniff
                             // our pattern. This means the pattern is not for us.
                             return false;
                         }
-                    }//end if
+                    }
 
                     // If we skipped past some whitespace tokens, then add them
                     // to the found string.
@@ -536,7 +531,7 @@ abstract class AbstractPatternSniff implements Sniff
                         $hasComment = false;
                         for ($j = $stackPtr; $j < $next; $j++) {
                             $found .= $tokens[$j]['content'];
-                            if (isset(Tokens::$commentTokens[$tokens[$j]['code']]) === true) {
+                            if (isset(Tokens::COMMENT_TOKENS[$tokens[$j]['code']]) === true) {
                                 $hasComment = true;
                             }
                         }
@@ -558,7 +553,7 @@ abstract class AbstractPatternSniff implements Sniff
                         if ($tokens[$next]['line'] !== $tokens[$stackPtr]['line']) {
                             $hasError = true;
                         }
-                    }//end if
+                    }
 
                     if ($next !== $lastAddedStackPtr) {
                         $found            .= $tokens[$next]['content'];
@@ -572,8 +567,8 @@ abstract class AbstractPatternSniff implements Sniff
                     } else {
                         $stackPtr = ($next + 1);
                     }
-                }//end if
-            } else if ($pattern[$i]['type'] === 'skip') {
+                }
+            } elseif ($pattern[$i]['type'] === 'skip') {
                 if ($pattern[$i]['to'] === 'unknown') {
                     $next = $phpcsFile->findNext(
                         $pattern[($i + 1)]['token'],
@@ -591,7 +586,7 @@ abstract class AbstractPatternSniff implements Sniff
                 } else {
                     // Find the previous opener.
                     $next = $phpcsFile->findPrevious(
-                        Tokens::$blockOpeners,
+                        Tokens::BLOCK_OPENERS,
                         $stackPtr
                     );
 
@@ -612,8 +607,8 @@ abstract class AbstractPatternSniff implements Sniff
 
                     // Skip to the closing token.
                     $stackPtr = ($tokens[$next][$pattern[$i]['to']] + 1);
-                }//end if
-            } else if ($pattern[$i]['type'] === 'string') {
+                }
+            } elseif ($pattern[$i]['type'] === 'string') {
                 if ($tokens[$stackPtr]['code'] !== T_STRING) {
                     $hasError = true;
                 }
@@ -624,7 +619,7 @@ abstract class AbstractPatternSniff implements Sniff
                 }
 
                 $stackPtr++;
-            } else if ($pattern[$i]['type'] === 'newline') {
+            } elseif ($pattern[$i]['type'] === 'newline') {
                 // Find the next token that contains a newline character.
                 $newline = 0;
                 for ($j = $stackPtr; $j < $phpcsFile->numTokens; $j++) {
@@ -641,7 +636,7 @@ abstract class AbstractPatternSniff implements Sniff
                 } else {
                     if ($this->ignoreComments === false) {
                         // The newline character cannot be part of a comment.
-                        if (isset(Tokens::$commentTokens[$tokens[$newline]['code']]) === true) {
+                        if (isset(Tokens::COMMENT_TOKENS[$tokens[$newline]['code']]) === true) {
                             $hasError = true;
                         }
                     }
@@ -665,7 +660,7 @@ abstract class AbstractPatternSniff implements Sniff
                             $next = ($newline + 1);
                         }
                     }
-                }//end if
+                }
 
                 if ($stackPtr !== $lastAddedStackPtr) {
                     $found .= $phpcsFile->getTokensAsString(
@@ -677,8 +672,8 @@ abstract class AbstractPatternSniff implements Sniff
                 }
 
                 $stackPtr = $next;
-            }//end if
-        }//end for
+            }
+        }
 
         if ($hasError === true) {
             $error = $this->prepareError($found, $patternCode);
@@ -686,8 +681,7 @@ abstract class AbstractPatternSniff implements Sniff
         }
 
         return $errors;
-
-    }//end processPattern()
+    }
 
 
     /**
@@ -698,7 +692,7 @@ abstract class AbstractPatternSniff implements Sniff
      *
      * @return string The error message.
      */
-    protected function prepareError($found, $patternCode)
+    protected function prepareError(string $found, string $patternCode)
     {
         $found    = str_replace("\r\n", '\n', $found);
         $found    = str_replace("\n", '\n', $found);
@@ -710,8 +704,7 @@ abstract class AbstractPatternSniff implements Sniff
         $error = "Expected \"$expected\"; found \"$found\"";
 
         return $error;
-
-    }//end prepareError()
+    }
 
 
     /**
@@ -735,25 +728,23 @@ abstract class AbstractPatternSniff implements Sniff
     protected function registerSupplementary()
     {
         return [];
+    }
 
-    }//end registerSupplementary()
 
-
-     /**
-      * Processes any tokens registered with registerSupplementary().
-      *
-      * @param \PHP_CodeSniffer\Files\File $phpcsFile The PHP_CodeSniffer file where to
-      *                                               process the skip.
-      * @param int                         $stackPtr  The position in the tokens stack to
-      *                                               process.
-      *
-      * @return void
-      * @see    registerSupplementary()
-      */
-    protected function processSupplementary(File $phpcsFile, $stackPtr)
+    /**
+     * Processes any tokens registered with registerSupplementary().
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The PHP_CodeSniffer file where to
+     *                                               process the skip.
+     * @param int                         $stackPtr  The position in the tokens stack to
+     *                                               process.
+     *
+     * @return void
+     * @see    registerSupplementary()
+     */
+    protected function processSupplementary(File $phpcsFile, int $stackPtr)
     {
-
-    }//end processSupplementary()
+    }
 
 
     /**
@@ -765,7 +756,7 @@ abstract class AbstractPatternSniff implements Sniff
      * @see    createSkipPattern()
      * @see    createTokenPattern()
      */
-    private function parse($pattern)
+    private function parse(string $pattern)
     {
         $patterns   = [];
         $length     = strlen($pattern);
@@ -789,17 +780,17 @@ abstract class AbstractPatternSniff implements Sniff
                 if ($specialPattern['to'] !== 'unknown') {
                     $firstToken++;
                 }
-            } else if (substr($pattern, $i, 3) === 'abc') {
+            } elseif (substr($pattern, $i, 3) === 'abc') {
                 $specialPattern = ['type' => 'string'];
                 $lastToken      = ($i - $firstToken);
                 $firstToken     = ($i + 3);
                 $i += 2;
-            } else if (substr($pattern, $i, 3) === 'EOL') {
+            } elseif (substr($pattern, $i, 3) === 'EOL') {
                 $specialPattern = ['type' => 'newline'];
                 $lastToken      = ($i - $firstToken);
                 $firstToken     = ($i + 3);
                 $i += 2;
-            }//end if
+            }
 
             if ($specialPattern !== false || $isLastChar === true) {
                 // If we are at the end of the string, don't worry about a limit.
@@ -831,7 +822,7 @@ abstract class AbstractPatternSniff implements Sniff
                 if ($isLastChar === false && $i === ($length - 1)) {
                     $i--;
                 }
-            }//end if
+            }
 
             // Add the skip pattern *after* we have processed
             // all the tokens from the end of the last skip pattern
@@ -839,24 +830,23 @@ abstract class AbstractPatternSniff implements Sniff
             if ($specialPattern !== false) {
                 $patterns[] = $specialPattern;
             }
-        }//end for
+        }
 
         return $patterns;
-
-    }//end parse()
+    }
 
 
     /**
      * Creates a skip pattern.
      *
      * @param string $pattern The pattern being parsed.
-     * @param string $from    The token content that the skip pattern starts from.
+     * @param int    $from    The token position that the skip pattern starts from.
      *
      * @return array The pattern step.
      * @see    createTokenPattern()
      * @see    parse()
      */
-    private function createSkipPattern($pattern, $from)
+    private function createSkipPattern(string $pattern, int $from)
     {
         $skip = ['type' => 'skip'];
 
@@ -864,40 +854,39 @@ abstract class AbstractPatternSniff implements Sniff
         $nestedBraces      = 0;
         for ($start = $from; $start >= 0; $start--) {
             switch ($pattern[$start]) {
-            case '(':
-                if ($nestedParenthesis === 0) {
-                    $skip['to'] = 'parenthesis_closer';
-                }
+                case '(':
+                    if ($nestedParenthesis === 0) {
+                        $skip['to'] = 'parenthesis_closer';
+                    }
 
-                $nestedParenthesis--;
-                break;
-            case '{':
-                if ($nestedBraces === 0) {
-                    $skip['to'] = 'scope_closer';
-                }
+                    $nestedParenthesis--;
+                    break;
+                case '{':
+                    if ($nestedBraces === 0) {
+                        $skip['to'] = 'scope_closer';
+                    }
 
-                $nestedBraces--;
-                break;
-            case '}':
-                $nestedBraces++;
-                break;
-            case ')':
-                $nestedParenthesis++;
-                break;
-            }//end switch
+                    $nestedBraces--;
+                    break;
+                case '}':
+                    $nestedBraces++;
+                    break;
+                case ')':
+                    $nestedParenthesis++;
+                    break;
+            }
 
             if (isset($skip['to']) === true) {
                 break;
             }
-        }//end for
+        }
 
         if (isset($skip['to']) === false) {
             $skip['to'] = 'unknown';
         }
 
         return $skip;
-
-    }//end createSkipPattern()
+    }
 
 
     /**
@@ -909,15 +898,19 @@ abstract class AbstractPatternSniff implements Sniff
      * @see    createSkipPattern()
      * @see    parse()
      */
-    private function createTokenPattern($str)
+    private function createTokenPattern(string $str)
     {
+        // Pause the StatusWriter to silence Tokenizer debug info about the patterns being parsed (which only confuses things).
+        StatusWriter::pause();
+
         // Don't add a space after the closing php tag as it will add a new
         // whitespace token.
-        $tokenizer = new PHP('<?php '.$str.'?>', null);
+        $tokenizer = new PHP('<?php' . "\n" . $str . '?>', null);
+        StatusWriter::resume();
 
         // Remove the <?php tag from the front and the end php tag from the back.
         $tokens = $tokenizer->getTokens();
-        $tokens = array_slice($tokens, 1, (count($tokens) - 2));
+        $tokens = array_slice($tokens, 2, (count($tokens) - 3));
 
         $patterns = [];
         foreach ($tokens as $patternInfo) {
@@ -929,8 +922,5 @@ abstract class AbstractPatternSniff implements Sniff
         }
 
         return $patterns;
-
-    }//end createTokenPattern()
-
-
-}//end class
+    }
+}

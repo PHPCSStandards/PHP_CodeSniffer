@@ -3,8 +3,9 @@
  * Ensure there is no whitespace before a semicolon.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace;
@@ -16,27 +17,16 @@ use PHP_CodeSniffer\Util\Tokens;
 class SemicolonSpacingSniff implements Sniff
 {
 
-    /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
-
 
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
         return [T_SEMICOLON];
-
-    }//end register()
+    }
 
 
     /**
@@ -48,18 +38,18 @@ class SemicolonSpacingSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
         $prevType = $tokens[($stackPtr - 1)]['code'];
-        if (isset(Tokens::$emptyTokens[$prevType]) === false) {
+        if (isset(Tokens::EMPTY_TOKENS[$prevType]) === false) {
             return;
         }
 
-        $nonSpace = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 2), null, true);
+        $nonSpace = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 2), null, true);
 
-        // Detect whether this is a semi-colon for a condition in a `for()` control structure.
+        // Detect whether this is a semicolon for a condition in a `for()` control structure.
         $forCondition = false;
         if (isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
             $nestedParens     = $tokens[$stackPtr]['nested_parenthesis'];
@@ -84,8 +74,8 @@ class SemicolonSpacingSniff implements Sniff
             return;
         }
 
-        $expected = $tokens[$nonSpace]['content'].';';
-        $found    = $phpcsFile->getTokensAsString($nonSpace, ($stackPtr - $nonSpace)).';';
+        $expected = $tokens[$nonSpace]['content'] . ';';
+        $found    = $phpcsFile->getTokensAsString($nonSpace, ($stackPtr - $nonSpace)) . ';';
         $found    = str_replace("\n", '\n', $found);
         $found    = str_replace("\r", '\r', $found);
         $found    = str_replace("\t", '\t', $found);
@@ -109,8 +99,5 @@ class SemicolonSpacingSniff implements Sniff
 
             $phpcsFile->fixer->endChangeset();
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

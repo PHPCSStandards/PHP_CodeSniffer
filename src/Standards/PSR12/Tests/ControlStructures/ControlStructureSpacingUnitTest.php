@@ -3,15 +3,21 @@
  * Unit test class for the ControlStructureSpacing sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2019 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR12\Tests\ControlStructures;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class ControlStructureSpacingUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ControlStructureSpacing sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\ControlStructures\ControlStructureSpacingSniff
+ */
+final class ControlStructureSpacingUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -26,24 +32,31 @@ class ControlStructureSpacingUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [
-            2  => 2,
-            16 => 1,
-            17 => 1,
-            18 => 1,
-            22 => 1,
-            23 => 1,
-            32 => 1,
-            33 => 1,
-            34 => 1,
-            37 => 1,
-            38 => 1,
-            39 => 1,
-            48 => 2,
-            58 => 1,
-            59 => 1,
+            2   => 2,
+            16  => 1,
+            17  => 1,
+            18  => 1,
+            22  => 1,
+            23  => 1,
+            32  => 1,
+            33  => 1,
+            34  => 1,
+            37  => 1,
+            38  => 1,
+            39  => 1,
+            48  => 2,
+            58  => 1,
+            59  => 1,
+            92  => 1,
+            96  => 1,
+            97  => 1,
+            98  => 2,
+            106 => 1,
+            111 => 1,
+            117 => 1,
+            127 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -57,8 +70,5 @@ class ControlStructureSpacingUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

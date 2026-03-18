@@ -3,15 +3,21 @@
  * Unit test class for the DuplicateClassName sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Classes;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class DuplicateClassNameUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the DuplicateClassName sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Classes\DuplicateClassNameSniff
+ */
+final class DuplicateClassNameUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -26,8 +32,7 @@ class DuplicateClassNameUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -40,38 +45,51 @@ class DuplicateClassNameUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'DuplicateClassNameUnitTest.1.inc':
-            return [
-                8  => 1,
-                9  => 1,
-                10 => 1,
-            ];
-            break;
-        case 'DuplicateClassNameUnitTest.2.inc':
-            return [
-                2 => 1,
-                3 => 1,
-                4 => 1,
-            ];
-            break;
-        case 'DuplicateClassNameUnitTest.5.inc':
-            return [
-                3 => 1,
-                7 => 1,
-            ];
-            break;
-        case 'DuplicateClassNameUnitTest.6.inc':
-            return [10 => 1];
-            break;
-        default:
-            return [];
-            break;
-        }//end switch
+            case 'DuplicateClassNameUnitTest.1.inc':
+                return [
+                    10 => 1,
+                    11 => 1,
+                    12 => 1,
+                    13 => 1,
+                ];
 
-    }//end getWarningList()
+            case 'DuplicateClassNameUnitTest.2.inc':
+                return [
+                    2 => 1,
+                    3 => 1,
+                    4 => 1,
+                    5 => 1,
+                ];
 
+            case 'DuplicateClassNameUnitTest.5.inc':
+                return [
+                    3 => 1,
+                    7 => 1,
+                ];
 
-}//end class
+            case 'DuplicateClassNameUnitTest.6.inc':
+                return [10 => 1];
+
+            case 'DuplicateClassNameUnitTest.8.inc':
+                return [
+                    7 => 1,
+                    8 => 1,
+                ];
+
+            case 'DuplicateClassNameUnitTest.9.inc':
+                return [
+                    3 => 1,
+                    4 => 1,
+                ];
+
+            case 'DuplicateClassNameUnitTest.11.inc':
+                return [13 => 1];
+
+            default:
+                return [];
+        }
+    }
+}

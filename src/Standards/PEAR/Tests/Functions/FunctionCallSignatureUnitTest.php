@@ -3,15 +3,21 @@
  * Unit test class for the FunctionCallSignature sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PEAR\Tests\Functions;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class FunctionCallSignatureUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the FunctionCallSignature sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PEAR\Sniffs\Functions\FunctionCallSignatureSniff
+ */
+final class FunctionCallSignatureUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -21,35 +27,10 @@ class FunctionCallSignatureUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
-     * @param string $testFile The name of the file being tested.
-     *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='FunctionCallSignatureUnitTest.inc')
+    public function getErrorList()
     {
-        if ($testFile === 'FunctionCallSignatureUnitTest.js') {
-            return [
-                5  => 1,
-                6  => 2,
-                7  => 1,
-                8  => 1,
-                9  => 2,
-                10 => 3,
-                17 => 1,
-                18 => 1,
-                21 => 1,
-                24 => 1,
-                28 => 2,
-                30 => 2,
-                35 => 1,
-                49 => 1,
-                51 => 1,
-                54 => 1,
-                70 => 1,
-                71 => 1,
-            ];
-        }//end if
-
         return [
             5   => 1,
             6   => 2,
@@ -126,9 +107,30 @@ class FunctionCallSignatureUnitTest extends AbstractSniffUnitTest
             523 => 1,
             524 => 3,
             527 => 2,
-        ];
+            539 => 1,
+            540 => 1,
+            546 => 1,
+            547 => 1,
+            548 => 1,
+            559 => 1,
+            567 => 1,
+            568 => 1,
+            573 => 1,
+            574 => 1,
+            579 => 3,
+            580 => 2,
+            581 => 1,
+            583 => 2,
+            584 => 1,
+            586 => 2,
 
-    }//end getErrorList()
+            601 => 2,
+            602 => 2,
+            603 => 1,
+            604 => 1,
+            605 => 2,
+        ];
+    }
 
 
     /**
@@ -142,8 +144,5 @@ class FunctionCallSignatureUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

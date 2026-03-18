@@ -3,12 +3,14 @@
  * A testable implementation of \PHP_CodeSniffer\Sniffs\AbstractArraySniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2020 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Tests\Core\Sniffs;
 
+use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractArraySniff;
 
 class AbstractArraySniffTestable extends AbstractArraySniff
@@ -35,11 +37,10 @@ class AbstractArraySniffTestable extends AbstractArraySniff
      *
      * @return void
      */
-    public function processSingleLineArray($phpcsFile, $stackPtr, $arrayStart, $arrayEnd, $indices)
+    public function processSingleLineArray(File $phpcsFile, int $stackPtr, int $arrayStart, int $arrayEnd, array $indices)
     {
         $this->indicies = $indices;
-
-    }//end processSingleLineArray()
+    }
 
 
     /**
@@ -55,11 +56,8 @@ class AbstractArraySniffTestable extends AbstractArraySniff
      *
      * @return void
      */
-    public function processMultiLineArray($phpcsFile, $stackPtr, $arrayStart, $arrayEnd, $indices)
+    public function processMultiLineArray(File $phpcsFile, int $stackPtr, int $arrayStart, int $arrayEnd, array $indices)
     {
         $this->indicies = $indices;
-
-    }//end processMultiLineArray()
-
-
-}//end class
+    }
+}

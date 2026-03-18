@@ -3,8 +3,9 @@
  * Makes sure there are no spaces around the concatenation operator.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Strings;
@@ -34,13 +35,12 @@ class ConcatenationSpacingSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
         return [T_STRING_CONCAT];
-
-    }//end register()
+    }
 
 
     /**
@@ -52,7 +52,7 @@ class ConcatenationSpacingSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if (isset($tokens[($stackPtr + 2)]) === false) {
@@ -61,7 +61,7 @@ class ConcatenationSpacingSniff implements Sniff
         }
 
         $ignoreBefore = false;
-        $prev         = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+        $prev         = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
         if ($tokens[$prev]['code'] === T_END_HEREDOC || $tokens[$prev]['code'] === T_END_NOWDOC) {
             // Spacing before must be preserved due to the here/nowdoc closing tag.
             $ignoreBefore = true;
@@ -131,11 +131,11 @@ class ConcatenationSpacingSniff implements Sniff
                         && ($tokens[($stackPtr - 2)]['code'] === T_LNUMBER
                         || $tokens[($stackPtr - 2)]['code'] === T_DNUMBER)
                     ) {
-                        $phpcsFile->fixer->replaceToken(($stackPtr - 2), '('.$tokens[($stackPtr - 2)]['content'].')');
+                        $phpcsFile->fixer->replaceToken(($stackPtr - 2), '(' . $tokens[($stackPtr - 2)]['content'] . ')');
                     }
 
                     $phpcsFile->fixer->endChangeset();
-                } else if ($this->spacing > 0) {
+                } elseif ($this->spacing > 0) {
                     $phpcsFile->fixer->addContent(($stackPtr - 1), $padding);
                 }
             }
@@ -148,17 +148,14 @@ class ConcatenationSpacingSniff implements Sniff
                         && ($tokens[($stackPtr + 2)]['code'] === T_LNUMBER
                         || $tokens[($stackPtr + 2)]['code'] === T_DNUMBER)
                     ) {
-                        $phpcsFile->fixer->replaceToken(($stackPtr + 2), '('.$tokens[($stackPtr + 2)]['content'].')');
+                        $phpcsFile->fixer->replaceToken(($stackPtr + 2), '(' . $tokens[($stackPtr + 2)]['content'] . ')');
                     }
 
                     $phpcsFile->fixer->endChangeset();
-                } else if ($this->spacing > 0) {
+                } elseif ($this->spacing > 0) {
                     $phpcsFile->fixer->addContent($stackPtr, $padding);
                 }
             }
-        }//end if
-
-    }//end process()
-
-
-}//end class
+        }
+    }
+}

@@ -5,7 +5,8 @@
 class ClassFileNameUnitTest {}
 interface ClassFileNameUnitTest {}
 trait ClassFileNameUnitTest {}
-
+enum ClassFileNameUnitTest {}
+enum ClassFileNameUnitTest: int {}
 
 // Invalid filename matching class name (case sensitive).
 class classFileNameUnitTest {}
@@ -14,9 +15,12 @@ class CLASSFILENAMEUNITTEST {}
 interface classFileNameUnitTest {}
 interface classfilenameunittest {}
 interface CLASSFILENAMEUNITTEST {}
-trait classFileNameUnitTest {}
+trait /*comment*/ classFileNameUnitTest {}
 trait classfilenameunittest {}
 trait CLASSFILENAMEUNITTEST {}
+enum classFileNameUnitTest {}
+enum classfilenameunittest {}
+enum CLASSFILENAMEUNITTEST {}
 
 
 // Invalid non-filename matching class names.
@@ -32,6 +36,9 @@ trait CompletelyWrongClassName {}
 trait ClassFileNameUnitTestExtra {}
 trait ClassFileNameUnitTestInc {}
 trait ExtraClassFileNameUnitTest {}
-
-
-?>
+enum CompletelyWrongClassName {}
+enum ClassFileNameUnitTestExtra {}
+enum ClassFileNameUnitTestInc {}
+enum
+    // Comment
+    ExtraClassFileNameUnitTest {}

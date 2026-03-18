@@ -3,8 +3,9 @@
  * Ensures there is only one assignment on a line, and that it is the first thing on the line.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP;
@@ -20,13 +21,12 @@ class DisallowMultipleAssignmentsSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
         return [T_EQUAL];
-
-    }//end register()
+    }
 
 
     /**
@@ -38,13 +38,18 @@ class DisallowMultipleAssignmentsSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
         // Ignore default value assignments in function definitions.
-        $function = $phpcsFile->findPrevious([T_FUNCTION, T_CLOSURE], ($stackPtr - 1), null, false, null, true);
+        $function = $phpcsFile->findPrevious([T_FUNCTION, T_CLOSURE, T_FN], ($stackPtr - 1), null, false, null, true);
         if ($function !== false) {
+            if (isset($tokens[$function]['parenthesis_closer']) === false) {
+                // Live coding/parse error. Bow out.
+                return;
+            }
+
             $opener = $tokens[$function]['parenthesis_opener'];
             $closer = $tokens[$function]['parenthesis_closer'];
             if ($opener < $stackPtr && $closer > $stackPtr) {
@@ -69,7 +74,7 @@ class DisallowMultipleAssignmentsSniff implements Sniff
             $conditions = $tokens[$stackPtr]['conditions'];
             end($conditions);
             $deepestScope = key($conditions);
-            if (isset(Tokens::$ooScopeTokens[$tokens[$deepestScope]['code']]) === true) {
+            if (isset(Tokens::OO_SCOPE_TOKENS[$tokens[$deepestScope]['code']]) === true) {
                 return;
             }
         }
@@ -83,6 +88,11 @@ class DisallowMultipleAssignmentsSniff implements Sniff
         */
 
         for ($varToken = ($stackPtr - 1); $varToken >= 0; $varToken--) {
+            if (in_array($tokens[$varToken]['code'], [T_SEMICOLON, T_OPEN_CURLY_BRACKET, T_CLOSE_TAG], true) === true) {
+                // We've reached the previous statement, so we didn't find a variable.
+                return;
+            }
+
             // Skip brackets.
             if (isset($tokens[$varToken]['parenthesis_opener']) === true && $tokens[$varToken]['parenthesis_opener'] < $varToken) {
                 $varToken = $tokens[$varToken]['parenthesis_opener'];
@@ -94,17 +104,18 @@ class DisallowMultipleAssignmentsSniff implements Sniff
                 continue;
             }
 
-            if ($tokens[$varToken]['code'] === T_SEMICOLON) {
-                // We've reached the next statement, so we
-                // didn't find a variable.
-                return;
-            }
-
             if ($tokens[$varToken]['code'] === T_VARIABLE) {
+                $prevNonEmpty = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($varToken - 1), null, true);
+                if ($tokens[$prevNonEmpty]['code'] === T_OBJECT_OPERATOR) {
+                    // Dynamic property access, the real "start" variable still needs to be found.
+                    $varToken = $prevNonEmpty;
+                    continue;
+                }
+
                 // We found our variable.
                 break;
             }
-        }//end for
+        }
 
         if ($varToken <= 0) {
             // Didn't find a variable.
@@ -113,17 +124,15 @@ class DisallowMultipleAssignmentsSniff implements Sniff
 
         $start = $phpcsFile->findStartOfStatement($varToken);
 
-        $allowed = Tokens::$emptyTokens;
+        $allowed  = Tokens::EMPTY_TOKENS;
+        $allowed += Tokens::NAME_TOKENS;
 
-        $allowed[T_STRING]          = T_STRING;
-        $allowed[T_NS_SEPARATOR]    = T_NS_SEPARATOR;
-        $allowed[T_DOUBLE_COLON]    = T_DOUBLE_COLON;
-        $allowed[T_OBJECT_OPERATOR] = T_OBJECT_OPERATOR;
-        $allowed[T_ASPERAND]        = T_ASPERAND;
-        $allowed[T_DOLLAR]          = T_DOLLAR;
-        $allowed[T_SELF]            = T_SELF;
-        $allowed[T_PARENT]          = T_PARENT;
-        $allowed[T_STATIC]          = T_STATIC;
+        $allowed[T_DOUBLE_COLON] = T_DOUBLE_COLON;
+        $allowed[T_ASPERAND]     = T_ASPERAND;
+        $allowed[T_DOLLAR]       = T_DOLLAR;
+        $allowed[T_SELF]         = T_SELF;
+        $allowed[T_PARENT]       = T_PARENT;
+        $allowed[T_STATIC]       = T_STATIC;
 
         $varToken = $phpcsFile->findPrevious($allowed, ($varToken - 1), null, true);
 
@@ -146,6 +155,7 @@ class DisallowMultipleAssignmentsSniff implements Sniff
 
         if ($tokens[$varToken]['code'] === T_VARIABLE
             || $tokens[$varToken]['code'] === T_OPEN_TAG
+            || $tokens[$varToken]['code'] === T_GOTO_COLON
             || $tokens[$varToken]['code'] === T_INLINE_THEN
             || $tokens[$varToken]['code'] === T_INLINE_ELSE
             || $tokens[$varToken]['code'] === T_SEMICOLON
@@ -163,8 +173,8 @@ class DisallowMultipleAssignmentsSniff implements Sniff
                 T_IF     => T_IF,
                 T_ELSEIF => T_ELSEIF,
                 T_SWITCH => T_SWITCH,
-                T_CASE   => T_CASE,
                 T_FOR    => T_FOR,
+                T_MATCH  => T_MATCH,
             ];
             foreach ($nested as $opener => $closer) {
                 if (isset($tokens[$opener]['parenthesis_owner']) === true
@@ -177,8 +187,5 @@ class DisallowMultipleAssignmentsSniff implements Sniff
         }
 
         $phpcsFile->addError($error, $stackPtr, $errorCode);
-
-    }//end process()
-
-
-}//end class
+    }
+}

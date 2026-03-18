@@ -11,23 +11,24 @@
  *         parent::__construct(array(T_CLASS), array(T_FUNCTION));
  *     }
  *
- *     protected function processTokenWithinScope(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr, $currScope)
+ *     protected function processTokenWithinScope(\PHP_CodeSniffer\Files\File $phpcsFile, int $stackPtr, int $currScope)
  *     {
  *         $className = $phpcsFile->getDeclarationName($currScope);
- *         echo 'encountered a method within class '.$className;
+ *         $phpcsFile->addWarning('encountered a method within class '.$className, $stackPtr, 'MethodFound');
  *     }
  * }
  * </code>
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Sniffs;
 
-use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
+use PHP_CodeSniffer\Files\File;
 
 abstract class AbstractScopeSniff implements Sniff
 {
@@ -42,7 +43,7 @@ abstract class AbstractScopeSniff implements Sniff
     /**
      * The type of scope opener tokens that this test wishes to listen to.
      *
-     * @var string
+     * @var array<int|string>
      */
     private $scopeTokens = [];
 
@@ -71,7 +72,7 @@ abstract class AbstractScopeSniff implements Sniff
     public function __construct(
         array $scopeTokens,
         array $tokens,
-        $listenOutside=false
+        bool $listenOutside = false
     ) {
         if (empty($scopeTokens) === true) {
             $error = 'The scope tokens list cannot be empty';
@@ -93,8 +94,7 @@ abstract class AbstractScopeSniff implements Sniff
         $this->listenOutside = $listenOutside;
         $this->scopeTokens   = array_flip($scopeTokens);
         $this->tokens        = $tokens;
-
-    }//end __construct()
+    }
 
 
     /**
@@ -104,14 +104,13 @@ abstract class AbstractScopeSniff implements Sniff
      * DO NOT OVERRIDE THIS METHOD. Use the constructor of this class to register
      * for the desired tokens and scope.
      *
-     * @return int[]
+     * @return array<int|string>
      * @see    __constructor()
      */
     final public function register()
     {
         return $this->tokens;
-
-    }//end register()
+    }
 
 
     /**
@@ -123,11 +122,11 @@ abstract class AbstractScopeSniff implements Sniff
      *
      * @return void|int Optionally returns a stack pointer. The sniff will not be
      *                  called again on the current file until the returned stack
-     *                  pointer is reached. Return ($phpcsFile->numTokens + 1) to skip
+     *                  pointer is reached. Return `$phpcsFile->numTokens` to skip
      *                  the rest of the file.
      * @see    processTokenWithinScope()
      */
-    final public function process(File $phpcsFile, $stackPtr)
+    final public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -147,10 +146,7 @@ abstract class AbstractScopeSniff implements Sniff
         if (empty($skipTokens) === false) {
             return min($skipTokens);
         }
-
-        return;
-
-    }//end process()
+    }
 
 
     /**
@@ -166,10 +162,10 @@ abstract class AbstractScopeSniff implements Sniff
      *
      * @return void|int Optionally returns a stack pointer. The sniff will not be
      *                  called again on the current file until the returned stack
-     *                  pointer is reached. Return ($phpcsFile->numTokens + 1) to skip
+     *                  pointer is reached. Return `$phpcsFile->numTokens` to skip
      *                  the rest of the file.
      */
-    abstract protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope);
+    abstract protected function processTokenWithinScope(File $phpcsFile, int $stackPtr, int $currScope);
 
 
     /**
@@ -182,10 +178,8 @@ abstract class AbstractScopeSniff implements Sniff
      *
      * @return void|int Optionally returns a stack pointer. The sniff will not be
      *                  called again on the current file until the returned stack
-     *                  pointer is reached. Return (count($tokens) + 1) to skip
+     *                  pointer is reached. Return `$phpcsFile->numTokens` to skip
      *                  the rest of the file.
      */
-    abstract protected function processTokenOutsideScope(File $phpcsFile, $stackPtr);
-
-
-}//end class
+    abstract protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr);
+}

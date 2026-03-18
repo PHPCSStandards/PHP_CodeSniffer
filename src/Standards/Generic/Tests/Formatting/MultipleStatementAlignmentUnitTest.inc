@@ -406,3 +406,99 @@ $foofoo   = new Foo([
 
 $i = 0;
 echo "TEST: ".($i += 1)."\n";
+
+// Valid
+$foo      = 'Hello';
+$variable = 12;
+$foo     .= ' World';
+$test     = 1;
+$test   <<= 6;
+
+// Invalid
+$foo      = 'Hello';
+$variable = 12;
+$foo      .= ' World';
+$test     = 1;
+$test     <<= 6;
+
+// phpcs:set Generic.Formatting.MultipleStatementAlignment alignAtEnd false
+
+// Valid
+$foo      = 'Hello';
+$variable = 12;
+$foo      .= ' World';
+$test     = 1;
+$test     <<= 6;
+
+// Invalid
+$foo      = 'Hello';
+$variable = 12;
+$foo     .= ' World';
+$test     = 1;
+$test   <<= 6;
+
+// phpcs:set Generic.Formatting.MultipleStatementAlignment maxPadding 8
+
+$one                = 'one';
+$varonetwo          = 'two';
+$varonetwothree     = 'three';
+$varonetwothreefour = 'four';
+
+$one       = 'one';
+$varonetwo .= 'two';
+$varonetwo = 'two';
+$varonetwo .= 'two';
+$varonetwothree     = 'three';
+$varonetwothreefour = 'four';
+
+$one         <<= 8;
+$onetwothree = 3;
+
+// phpcs:set Generic.Formatting.MultipleStatementAlignment maxPadding 1000
+
+$a        = 123;
+$model    = new class() {
+    // empty
+};
+$resource = new class() {
+    // empty
+};
+
+// phpcs:set Generic.Formatting.MultipleStatementAlignment alignAtEnd true
+
+$one       <<= 8;
+$onetwothree = 3;
+
+// Issue 3326.
+class Test
+{
+    public const DEFAULT = 'default';
+    public const SOS     = 'sos';
+    public const HELP    = 'help';
+
+    protected static $thisIsAReallyLongVariableName = [];
+}
+
+// Issue #3460.
+function issue3460_invalid() {
+    $a = static function ($variables = false) use ($foo) {
+        return $variables;
+    };
+    $b   = $a;
+}
+
+function issue3460_valid() {
+    $a = static function ($variables = false) use ($foo) {
+        return $variables;
+    };
+    $b = $a;
+}
+
+function makeSureThatAssignmentWithinClosureAreStillHandled() {
+    $a = static function ($variables = []) use ($temp) {
+        $a = 'foo';
+        $bar = 'bar';
+        $longer = 'longer';
+        return $variables;
+    };
+}

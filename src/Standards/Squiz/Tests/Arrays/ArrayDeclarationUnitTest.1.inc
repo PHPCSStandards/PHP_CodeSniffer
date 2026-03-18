@@ -19,7 +19,7 @@ class TestClass
                     'height' => '',
                    );
 
-    private $_bad = Array(
+    private $_bad = ARRAY(
                     'width' => '',
                     'height' => ''
                      );
@@ -475,7 +475,86 @@ yield array(
        static fn () : string => '',
       );
 
+$foo = array(
+        'foo' => match ($anything) {
+            'foo' => 'bar',
+            default => null,
+        },
+       );
+
 // Intentional syntax error.
 $a = array(
       'a' =>
      );
+
+// Safeguard correct errors for key/no key when PHP 7.4+ array unpacking is encountered.
+$x = array(
+    ...$a,
+      'foo' => 'bar',
+     );
+
+$x = array(
+      'foo' => 'bar',
+    ...$a,
+     );
+
+$x = array(
+      'foo' => 'bar',
+    ...$a,
+      'baz' => 'bar',
+     );
+
+$x = array(
+    ...$a,
+    'foo' => 'bar', // OK.
+    'bar', // NoKeySpecified Error (based on second entry).
+     );
+
+$x = array(
+    ...$a,
+    'bar', // OK.
+    'foo' => 'bar', // KeySpecified Error (based on second entry).
+     );
+
+$x = array(
+    'foo' => 'bar',
+    ...$a,
+    'baz' => 'bar',
+    'bar', // NoKeySpecified Error (based on first entry).
+     );
+
+$x = array(
+    'bar',
+    ...$a,
+    'bar',
+    'baz' => 'bar', // KeySpecified (based on first entry).
+     );
+
+ $x =
+ array(
+  'a',
+  'b',
+   );
+
+$x = array(
+      1, static fn (float $item): float => match ($item) {
+        2.0 => 3.0,
+        default => $item
+    },
+     );
+
+$x = array(
+      1, static::helloWorld(), $class instanceof static,
+      2,
+     );
+
+$noSpaceBeforeDoubleArrow = array(
+                             'width'=> '',
+                             'height' => '',
+                            );
+
+$newlineAfterDoubleArrow = array(
+                            'width'  =>
+                            '',
+                            'height' => '',
+                           );

@@ -3,15 +3,21 @@
  * Unit test class for the ElseIfDeclaration sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR2\Tests\ControlStructures;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class ElseIfDeclarationUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ElseIfDeclaration sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR2\Sniffs\ControlStructures\ElseIfDeclarationSniff
+ */
+final class ElseIfDeclarationUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -26,8 +32,7 @@ class ElseIfDeclarationUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -44,8 +49,5 @@ class ElseIfDeclarationUnitTest extends AbstractSniffUnitTest
             4  => 1,
             12 => 1,
         ];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

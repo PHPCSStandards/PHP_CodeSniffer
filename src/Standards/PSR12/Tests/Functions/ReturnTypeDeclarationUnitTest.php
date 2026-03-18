@@ -3,15 +3,21 @@
  * Unit test class for the ReturnTypeDeclaration sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2018 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR12\Tests\Functions;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class ReturnTypeDeclarationUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ReturnTypeDeclaration sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Functions\ReturnTypeDeclarationSniff
+ */
+final class ReturnTypeDeclarationUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -21,26 +27,33 @@ class ReturnTypeDeclarationUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    protected function getErrorList()
+    protected function getErrorList($testFile = '')
     {
-        return [
-            27 => 1,
-            28 => 1,
-            35 => 2,
-            41 => 2,
-            48 => 2,
-            52 => 1,
-            55 => 1,
-            56 => 1,
-            59 => 1,
-            60 => 1,
-            62 => 1,
-            64 => 1,
-        ];
-
-    }//end getErrorList()
+        switch ($testFile) {
+            case 'ReturnTypeDeclarationUnitTest.1.inc':
+                return [
+                    27 => 1,
+                    28 => 1,
+                    35 => 2,
+                    41 => 2,
+                    48 => 2,
+                    52 => 1,
+                    55 => 1,
+                    56 => 1,
+                    59 => 1,
+                    60 => 1,
+                    62 => 1,
+                    64 => 1,
+                    74 => 1,
+                ];
+            default:
+                return [];
+        }
+    }
 
 
     /**
@@ -49,13 +62,12 @@ class ReturnTypeDeclarationUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    protected function getWarningList()
+    protected function getWarningList($testFile = '')
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

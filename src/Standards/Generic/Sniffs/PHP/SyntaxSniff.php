@@ -4,8 +4,9 @@
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @author    Blaine Schmeisser <blainesch@gmail.com>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\PHP;
@@ -13,6 +14,7 @@ namespace PHP_CodeSniffer\Standards\Generic\Sniffs\PHP;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Common;
 
 class SyntaxSniff implements Sniff
 {
@@ -28,13 +30,15 @@ class SyntaxSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
-        return [T_OPEN_TAG];
-
-    }//end register()
+        return [
+            T_OPEN_TAG,
+            T_OPEN_TAG_WITH_ECHO,
+        ];
+    }
 
 
     /**
@@ -44,18 +48,17 @@ class SyntaxSniff implements Sniff
      * @param int                         $stackPtr  The position of the current token in
      *                                               the stack passed in $tokens.
      *
-     * @return void
+     * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         if ($this->phpPath === null) {
             $this->phpPath = Config::getExecutablePath('php');
         }
 
-        $fileName = escapeshellarg($phpcsFile->getFilename());
-        $cmd      = escapeshellcmd($this->phpPath)." -l -d display_errors=1 -d error_prepend_string='' $fileName 2>&1";
-        $output   = shell_exec($cmd);
-        $matches  = [];
+        $cmd     = $this->getPhpLintCommand($phpcsFile);
+        $output  = shell_exec($cmd);
+        $matches = [];
         if (preg_match('/^.*error:(.*) in .* on line ([0-9]+)/m', trim($output), $matches) === 1) {
             $error = trim($matches[1]);
             $line  = (int) $matches[2];
@@ -63,9 +66,35 @@ class SyntaxSniff implements Sniff
         }
 
         // Ignore the rest of the file.
-        return ($phpcsFile->numTokens + 1);
+        return $phpcsFile->numTokens;
+    }
 
-    }//end process()
 
+    /**
+     * Returns the command used to lint PHP code.
+     *
+     * Uses a different command when the content is provided via STDIN.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The File object.
+     *
+     * @return string The command used to lint PHP code.
+     */
+    private function getPhpLintCommand(File $phpcsFile)
+    {
+        if ($phpcsFile->getFilename() === 'STDIN') {
+            $content = $phpcsFile->getTokensAsString(0, $phpcsFile->numTokens);
+            return sprintf(
+                "echo %s | %s -l -d display_errors=1 -d error_prepend_string='' 2>&1",
+                escapeshellarg($content),
+                Common::escapeshellcmd($this->phpPath)
+            );
+        }
 
-}//end class
+        $fileName = escapeshellarg($phpcsFile->getFilename());
+        return sprintf(
+            "%s -l -d display_errors=1 -d error_prepend_string='' %s 2>&1",
+            Common::escapeshellcmd($this->phpPath),
+            $fileName
+        );
+    }
+}

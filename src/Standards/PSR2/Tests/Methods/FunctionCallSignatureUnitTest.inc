@@ -242,3 +242,47 @@ function (array $term) use ($mode): string {
 },
 $search
 ));
+
+// PHP 8.0 named parameters.
+array_fill_keys(
+    keys: range(
+        1,
+        12,
+    ),
+    value: true,
+);
+
+array_fill_keys(
+    keys: range( 1,
+            12,
+    ), value: true,
+);
+
+// phpcs:set PSR2.Methods.FunctionCallSignature allowMultipleArguments true
+array_fill_keys(
+    keys: range( 1,
+            12,
+    ), value: true,
+);
+// phpcs:set PSR2.Methods.FunctionCallSignature allowMultipleArguments false
+
+// Anonymous object instantiations are treated the same as a normal call.
+$anon = new class() {};
+$anon = new class($foo, true) {};
+$anon = new class(
+    $foo,
+    true,
+    10
+) {};
+
+$anon = new class( ) {};
+$anon = new class( $foo, true    ) {};
+$anon = new class($foo,
+
+  true, 10) {};
+
+// ... though do not enforce no space between the class keyword and the open parenthesis.
+$anon = new class () {};
+
+// And anonymous object instantiations without parentheses are ignored.
+$anon = new class {};

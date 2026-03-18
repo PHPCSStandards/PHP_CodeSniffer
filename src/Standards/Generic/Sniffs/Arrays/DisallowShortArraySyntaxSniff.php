@@ -3,8 +3,9 @@
  * Bans the use of the PHP short array syntax.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Arrays;
@@ -19,13 +20,12 @@ class DisallowShortArraySyntaxSniff implements Sniff
     /**
      * Registers the tokens that this sniff wants to listen for.
      *
-     * @return int[]
+     * @return array<int|string>
      */
     public function register()
     {
         return [T_OPEN_SHORT_ARRAY];
-
-    }//end register()
+    }
 
 
     /**
@@ -37,7 +37,7 @@ class DisallowShortArraySyntaxSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $phpcsFile->recordMetric($stackPtr, 'Short array syntax used', 'yes');
 
@@ -54,8 +54,5 @@ class DisallowShortArraySyntaxSniff implements Sniff
             $phpcsFile->fixer->replaceToken($closer, ')');
             $phpcsFile->fixer->endChangeset();
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

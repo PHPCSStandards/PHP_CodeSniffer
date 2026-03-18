@@ -3,8 +3,9 @@
  * Ensures all calls to inbuilt PHP functions are lowercase.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP;
@@ -17,9 +18,9 @@ class LowercasePHPFunctionsSniff implements Sniff
 {
 
     /**
-     * String -> int hash map of all php built in function names
+     * Hash map of all php built in function names
      *
-     * @var array
+     * @var array<string, int>
      */
     private $builtInFunctions;
 
@@ -32,20 +33,21 @@ class LowercasePHPFunctionsSniff implements Sniff
 
         $allFunctions           = get_defined_functions();
         $this->builtInFunctions = array_flip($allFunctions['internal']);
-
-    }//end __construct()
+    }
 
 
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
-        return [T_STRING];
-
-    }//end register()
+        return [
+            T_STRING,
+            T_NAME_FULLY_QUALIFIED,
+        ];
+    }
 
 
     /**
@@ -57,11 +59,15 @@ class LowercasePHPFunctionsSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
-        $content   = $tokens[$stackPtr]['content'];
+        $content = $tokens[$stackPtr]['content'];
+        if ($tokens[$stackPtr]['code'] === T_NAME_FULLY_QUALIFIED) {
+            $content = ltrim($content, '\\');
+        }
+
         $contentLc = strtolower($content);
         if ($content === $contentLc) {
             return;
@@ -75,20 +81,25 @@ class LowercasePHPFunctionsSniff implements Sniff
         }
 
         // Make sure this is a function call or a use statement.
-        $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        if (empty($tokens[$stackPtr]['nested_attributes']) === false) {
+            // Class instantiation in attribute, not function call.
+            return;
+        }
+
+        $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
         if ($next === false) {
             // Not a function call.
             return;
         }
 
-        $ignore   = Tokens::$emptyTokens;
+        $ignore   = Tokens::EMPTY_TOKENS;
         $ignore[] = T_BITWISE_AND;
         $prev     = $phpcsFile->findPrevious($ignore, ($stackPtr - 1), null, true);
-        $prevPrev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($prev - 1), null, true);
+        $prevPrev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($prev - 1), null, true);
 
         if ($tokens[$next]['code'] !== T_OPEN_PARENTHESIS) {
             // Is this a use statement importing a PHP native function ?
-            if ($tokens[$next]['code'] !== T_NS_SEPARATOR
+            if ($tokens[$stackPtr]['code'] === T_STRING
                 && $tokens[$prev]['code'] === T_STRING
                 && $tokens[$prev]['content'] === 'function'
                 && $prevPrev !== false
@@ -108,24 +119,11 @@ class LowercasePHPFunctionsSniff implements Sniff
 
             // No open parenthesis; not a "use function" statement nor a function call.
             return;
-        }//end if
+        }
 
         if ($tokens[$prev]['code'] === T_FUNCTION) {
             // Function declaration, not a function call.
             return;
-        }
-
-        if ($tokens[$prev]['code'] === T_NS_SEPARATOR) {
-            if ($prevPrev !== false
-                && ($tokens[$prevPrev]['code'] === T_STRING
-                || $tokens[$prevPrev]['code'] === T_NAMESPACE
-                || $tokens[$prevPrev]['code'] === T_NEW)
-            ) {
-                // Namespaced class/function, not an inbuilt function.
-                // Could potentially give false negatives for non-namespaced files
-                // when namespace\functionName() is encountered.
-                return;
-            }
         }
 
         if ($tokens[$prev]['code'] === T_NEW) {
@@ -153,10 +151,7 @@ class LowercasePHPFunctionsSniff implements Sniff
 
         $fix = $phpcsFile->addFixableError($error, $stackPtr, 'CallUppercase', $data);
         if ($fix === true) {
-            $phpcsFile->fixer->replaceToken($stackPtr, $contentLc);
+            $phpcsFile->fixer->replaceToken($stackPtr, strtolower($tokens[$stackPtr]['content']));
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

@@ -3,17 +3,30 @@
  * Checks the naming of member variables.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PEAR\Sniffs\NamingConventions;
 
+use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\AbstractScopeSniff;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
+use PHP_CodeSniffer\Util\Tokens;
 
 class ValidVariableNameSniff extends AbstractVariableSniff
 {
+
+
+    /**
+     * Only listen to variables within OO scopes.
+     */
+    public function __construct()
+    {
+        AbstractScopeSniff::__construct(Tokens::OO_SCOPE_TOKENS, [T_VARIABLE], false);
+    }
 
 
     /**
@@ -25,18 +38,23 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processMemberVar(File $phpcsFile, $stackPtr)
+    protected function processMemberVar(File $phpcsFile, int $stackPtr)
     {
-        $tokens = $phpcsFile->getTokens();
-
-        $memberProps = $phpcsFile->getMemberProperties($stackPtr);
-        if (empty($memberProps) === true) {
+        try {
+            $memberProps = $phpcsFile->getMemberProperties($stackPtr);
+        } catch (RuntimeException $e) {
+            // Parse error: property in enum. Ignore.
             return;
         }
 
+        $tokens         = $phpcsFile->getTokens();
         $memberName     = ltrim($tokens[$stackPtr]['content'], '$');
         $scope          = $memberProps['scope'];
         $scopeSpecified = $memberProps['scope_specified'];
+        if ($scopeSpecified === false && $memberProps['set_scope'] !== false) {
+            // Implicit `public` visibility for property with asymmetric visibility.
+            $scopeSpecified = true;
+        }
 
         if ($memberProps['scope'] === 'private') {
             $isPublic = false;
@@ -62,8 +80,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             $phpcsFile->addError($error, $stackPtr, 'PublicUnderscore', $data);
             return;
         }
-
-    }//end processMemberVar()
+    }
 
 
     /**
@@ -74,13 +91,10 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariable(File $phpcsFile, $stackPtr)
+    protected function processVariable(File $phpcsFile, int $stackPtr)
     {
-        /*
-            We don't care about normal variables.
-        */
-
-    }//end processVariable()
+        // We don't care about normal variables.
+    }
 
 
     /**
@@ -91,13 +105,8 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariableInString(File $phpcsFile, $stackPtr)
+    protected function processVariableInString(File $phpcsFile, int $stackPtr)
     {
-        /*
-            We don't care about normal variables.
-        */
-
-    }//end processVariableInString()
-
-
-}//end class
+        // We don't care about normal variables.
+    }
+}

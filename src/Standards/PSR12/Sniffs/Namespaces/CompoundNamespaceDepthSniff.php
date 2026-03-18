@@ -3,8 +3,9 @@
  * Verifies that compound namespaces are not defined too deep.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR12\Sniffs\Namespaces;
@@ -26,13 +27,12 @@ class CompoundNamespaceDepthSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
         return [T_OPEN_USE_GROUP];
-
-    }//end register()
+    }
 
 
     /**
@@ -44,7 +44,7 @@ class CompoundNamespaceDepthSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $this->maxDepth = (int) $this->maxDepth;
 
@@ -62,6 +62,11 @@ class CompoundNamespaceDepthSniff implements Sniff
                 continue;
             }
 
+            if ($tokens[$i]['code'] === T_NAME_FULLY_QUALIFIED || $tokens[$i]['code'] === T_NAME_QUALIFIED) {
+                $depth += substr_count($tokens[$i]['content'], '\\');
+                continue;
+            }
+
             if ($i === $end || $tokens[$i]['code'] === T_COMMA) {
                 // End of a namespace.
                 if ($depth > $this->maxDepth) {
@@ -73,8 +78,5 @@ class CompoundNamespaceDepthSniff implements Sniff
                 $depth = 1;
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

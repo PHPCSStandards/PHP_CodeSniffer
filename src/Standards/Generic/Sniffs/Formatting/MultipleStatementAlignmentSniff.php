@@ -6,8 +6,9 @@
  * each assignment are aligned. It will display a warning to advise that the signs should be aligned.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting;
@@ -20,23 +21,6 @@ class MultipleStatementAlignmentSniff implements Sniff
 {
 
     /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
-
-    /**
-     * If true, an error will be thrown; otherwise a warning.
-     *
-     * @var boolean
-     */
-    public $error = false;
-
-    /**
      * The maximum amount of padding before the alignment is ignored.
      *
      * If the amount of padding required to align this assignment with the
@@ -47,19 +31,25 @@ class MultipleStatementAlignmentSniff implements Sniff
      */
     public $maxPadding = 1000;
 
+    /**
+     * Controls which side of the assignment token is used for alignment.
+     *
+     * @var boolean
+     */
+    public $alignAtEnd = true;
+
 
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
-        $tokens = Tokens::$assignmentTokens;
+        $tokens = Tokens::ASSIGNMENT_TOKENS;
         unset($tokens[T_DOUBLE_ARROW]);
         return $tokens;
-
-    }//end register()
+    }
 
 
     /**
@@ -71,47 +61,44 @@ class MultipleStatementAlignmentSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
+    {
+        $lastAssign = $this->checkAlignment($phpcsFile, $stackPtr);
+        return ($lastAssign + 1);
+    }
+
+
+    /**
+     * Processes this test, when one of its tokens is encountered.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param int                         $stackPtr  The position of the current token
+     *                                               in the stack passed in $tokens.
+     * @param int|null                    $end       The token where checking should end.
+     *                                               If NULL, the entire file will be checked.
+     *
+     * @return int
+     */
+    public function checkAlignment(File $phpcsFile, int $stackPtr, ?int $end = null)
     {
         $tokens = $phpcsFile->getTokens();
 
-        // Ignore assignments used in a condition, like an IF or FOR.
+        // Ignore assignments used in a condition, like an IF or FOR or closure param defaults.
         if (isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
             // If the parenthesis is on the same line as the assignment,
             // then it should be ignored as it is specifically being grouped.
             $parens    = $tokens[$stackPtr]['nested_parenthesis'];
             $lastParen = array_pop($parens);
             if ($tokens[$lastParen]['line'] === $tokens[$stackPtr]['line']) {
-                return;
+                return $stackPtr;
             }
 
             foreach ($tokens[$stackPtr]['nested_parenthesis'] as $start => $end) {
                 if (isset($tokens[$start]['parenthesis_owner']) === true) {
-                    return;
+                    return $stackPtr;
                 }
             }
         }
-
-        $lastAssign = $this->checkAlignment($phpcsFile, $stackPtr);
-        return ($lastAssign + 1);
-
-    }//end process()
-
-
-    /**
-     * Processes this test, when one of its tokens is encountered.
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param int                         $stackPtr  The position of the current token
-     *                                               in the stack passed in $tokens.
-     * @param int                         $end       The token where checking should end.
-     *                                               If NULL, the entire file will be checked.
-     *
-     * @return int
-     */
-    public function checkAlignment($phpcsFile, $stackPtr, $end=null)
-    {
-        $tokens = $phpcsFile->getTokens();
 
         $assignments = [];
         $prevAssign  = null;
@@ -126,13 +113,12 @@ class MultipleStatementAlignmentSniff implements Sniff
             $end = $phpcsFile->numTokens;
         }
 
-        $find = Tokens::$assignmentTokens;
+        $find = Tokens::ASSIGNMENT_TOKENS;
         unset($find[T_DOUBLE_ARROW]);
 
-        $scopes = Tokens::$scopeOpeners;
+        $scopes = Tokens::SCOPE_OPENERS;
         unset($scopes[T_CLOSURE]);
         unset($scopes[T_ANON_CLASS]);
-        unset($scopes[T_OBJECT]);
 
         for ($assign = $stackPtr; $assign < $end; $assign++) {
             if ($tokens[$assign]['level'] < $tokens[$stackPtr]['level']) {
@@ -140,11 +126,25 @@ class MultipleStatementAlignmentSniff implements Sniff
                 break;
             }
 
-            if (isset($scopes[$tokens[$assign]['code']]) === true
-                && isset($tokens[$assign]['scope_opener']) === true
+            if (isset($tokens[$assign]['scope_opener']) === true
                 && $tokens[$assign]['level'] === $tokens[$stackPtr]['level']
             ) {
-                break;
+                if (isset($scopes[$tokens[$assign]['code']]) === true) {
+                    // This type of scope indicates that the assignment block is over.
+                    break;
+                }
+
+                // Skip over the scope block because it is seen as part of the assignment block,
+                // but also process any assignment blocks that are inside as well.
+                $nextAssign = $phpcsFile->findNext($find, ($assign + 1), ($tokens[$assign]['scope_closer'] - 1));
+                if ($nextAssign !== false) {
+                    $assign = $this->checkAlignment($phpcsFile, $nextAssign);
+                } else {
+                    $assign = $tokens[$assign]['scope_closer'];
+                }
+
+                $lastCode = $assign;
+                continue;
             }
 
             if ($assign === $arrayEnd) {
@@ -153,7 +153,7 @@ class MultipleStatementAlignmentSniff implements Sniff
 
             if (isset($find[$tokens[$assign]['code']]) === false) {
                 // A blank line indicates that the assignment block has ended.
-                if (isset(Tokens::$emptyTokens[$tokens[$assign]['code']]) === false
+                if (isset(Tokens::EMPTY_TOKENS[$tokens[$assign]['code']]) === false
                     && ($tokens[$assign]['line'] - $tokens[$lastCode]['line']) > 1
                     && $tokens[$assign]['level'] === $tokens[$stackPtr]['level']
                     && $arrayEnd === null
@@ -179,7 +179,7 @@ class MultipleStatementAlignmentSniff implements Sniff
                     $arrayEnd = $tokens[$tokens[$assign]['parenthesis_opener']]['parenthesis_closer'];
                 }
 
-                if (isset(Tokens::$emptyTokens[$tokens[$assign]['code']]) === false) {
+                if (isset(Tokens::EMPTY_TOKENS[$tokens[$assign]['code']]) === false) {
                     $lastCode = $assign;
 
                     if ($tokens[$assign]['code'] === T_SEMICOLON) {
@@ -190,19 +190,19 @@ class MultipleStatementAlignmentSniff implements Sniff
                             } else {
                                 $lastSemi = $assign;
                             }
-                        } else if ($tokens[$assign]['level'] < $tokens[$stackPtr]['level']) {
+                        } elseif ($tokens[$assign]['level'] < $tokens[$stackPtr]['level']) {
                             // Statement is in a different context, so the block is over.
                             break;
                         }
                     }
-                }//end if
+                }
 
                 continue;
-            } else if ($assign !== $stackPtr && $tokens[$assign]['line'] === $lastLine) {
+            } elseif ($assign !== $stackPtr && $tokens[$assign]['line'] === $lastLine) {
                 // Skip multiple assignments on the same line. We only need to
                 // try and align the first assignment.
                 continue;
-            }//end if
+            }
 
             if ($assign !== $stackPtr) {
                 if ($tokens[$assign]['level'] > $tokens[$stackPtr]['level']) {
@@ -211,10 +211,10 @@ class MultipleStatementAlignmentSniff implements Sniff
                     $assign   = $this->checkAlignment($phpcsFile, $assign);
                     $lastCode = $assign;
                     continue;
-                } else if ($tokens[$assign]['level'] < $tokens[$stackPtr]['level']) {
+                } elseif ($tokens[$assign]['level'] < $tokens[$stackPtr]['level']) {
                     // We've gone one level up, so the block we are processing is done.
                     break;
-                } else if ($arrayEnd !== null) {
+                } elseif ($arrayEnd !== null) {
                     // Assignments inside arrays are not part of
                     // the original block, so process this new block.
                     $assign   = ($this->checkAlignment($phpcsFile, $assign, $arrayEnd) - 1);
@@ -239,10 +239,10 @@ class MultipleStatementAlignmentSniff implements Sniff
                         }
                     }
                 }
-            }//end if
+            }
 
             $var = $phpcsFile->findPrevious(
-                Tokens::$emptyTokens,
+                Tokens::EMPTY_TOKENS,
                 ($assign - 1),
                 null,
                 true
@@ -253,6 +253,10 @@ class MultipleStatementAlignmentSniff implements Sniff
             // padding length if they aligned with us.
             $varEnd    = $tokens[($var + 1)]['column'];
             $assignLen = $tokens[$assign]['length'];
+            if ($this->alignAtEnd !== true) {
+                $assignLen = 1;
+            }
+
             if ($assign !== $stackPtr) {
                 if ($prevAssign === null) {
                     // Processing an inner block but no assignments found.
@@ -274,7 +278,7 @@ class MultipleStatementAlignmentSniff implements Sniff
                     }
 
                     $assignColumn = ($varEnd + $padding);
-                }//end if
+                }
 
                 if (($assignColumn + $assignLen) > ($assignments[$maxPadding]['assign_col'] + $assignments[$maxPadding]['assign_len'])) {
                     $newPadding = ($varEnd - $assignments[$maxPadding]['var_end'] + $assignLen - $assignments[$maxPadding]['assign_len'] + 1);
@@ -296,14 +300,14 @@ class MultipleStatementAlignmentSniff implements Sniff
                         $padding      = 1;
                         $assignColumn = ($varEnd + 1);
                     }
-                } else if ($padding > $assignments[$maxPadding]['expected']) {
+                } elseif ($padding > $assignments[$maxPadding]['expected']) {
                     $maxPadding = $assign;
-                }//end if
+                }
             } else {
                 $padding      = 1;
                 $assignColumn = ($varEnd + 1);
                 $maxPadding   = $assign;
-            }//end if
+            }
 
             $found = 0;
             if ($tokens[($var + 1)]['code'] === T_WHITESPACE) {
@@ -324,7 +328,7 @@ class MultipleStatementAlignmentSniff implements Sniff
 
             $lastLine   = $tokens[$assign]['line'];
             $prevAssign = $assign;
-        }//end for
+        }
 
         if (empty($assignments) === true) {
             return $stackPtr;
@@ -338,7 +342,7 @@ class MultipleStatementAlignmentSniff implements Sniff
                 continue;
             }
 
-            $expectedText = $data['expected'].' space';
+            $expectedText = $data['expected'] . ' space';
             if ($data['expected'] !== 1) {
                 $expectedText .= 's';
             }
@@ -346,7 +350,7 @@ class MultipleStatementAlignmentSniff implements Sniff
             if ($data['found'] === null) {
                 $foundText = 'a new line';
             } else {
-                $foundText = $data['found'].' space';
+                $foundText = $data['found'] . ' space';
                 if ($data['found'] !== 1) {
                     $foundText .= 's';
                 }
@@ -365,11 +369,7 @@ class MultipleStatementAlignmentSniff implements Sniff
                 $foundText,
             ];
 
-            if ($this->error === true) {
-                $fix = $phpcsFile->addFixableError($error, $assignment, $type, $errorData);
-            } else {
-                $fix = $phpcsFile->addFixableWarning($error, $assignment, $type.'Warning', $errorData);
-            }
+            $fix = $phpcsFile->addFixableWarning($error, $assignment, $type, $errorData);
 
             $errorGenerated = true;
 
@@ -381,7 +381,7 @@ class MultipleStatementAlignmentSniff implements Sniff
                     $phpcsFile->fixer->replaceToken(($assignment - 1), $newContent);
                 }
             }
-        }//end foreach
+        }
 
         if ($numAssignments > 1) {
             if ($errorGenerated === true) {
@@ -396,8 +396,5 @@ class MultipleStatementAlignmentSniff implements Sniff
         } else {
             return $assign;
         }
-
-    }//end checkAlignment()
-
-
-}//end class
+    }
+}

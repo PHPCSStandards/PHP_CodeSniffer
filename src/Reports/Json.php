@@ -4,8 +4,9 @@
  *
  * @author    Jeffrey Fisher <jeffslofish@gmail.com>
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Reports;
@@ -23,20 +24,21 @@ class Json implements Report
      * and FALSE if it ignored the file. Returning TRUE indicates that the file and
      * its data should be counted in the grand totals.
      *
-     * @param array                 $report      Prepared report data.
-     * @param \PHP_CodeSniffer\File $phpcsFile   The file being reported on.
-     * @param bool                  $showSources Show sources?
-     * @param int                   $width       Maximum allowed line width.
+     * @param array<string, string|int|array> $report      Prepared report data.
+     *                                                     See the {@see Report} interface for a detailed specification.
+     * @param \PHP_CodeSniffer\Files\File     $phpcsFile   The file being reported on.
+     * @param bool                            $showSources Show sources?
+     * @param int                             $width       Maximum allowed line width.
      *
      * @return bool
      */
-    public function generateFileReport($report, File $phpcsFile, $showSources=false, $width=80)
+    public function generateFileReport(array $report, File $phpcsFile, bool $showSources = false, int $width = 80)
     {
         $filename = str_replace('\\', '\\\\', $report['filename']);
         $filename = str_replace('"', '\"', $filename);
         $filename = str_replace('/', '\/', $filename);
-        echo '"'.$filename.'":{';
-        echo '"errors":'.$report['errors'].',"warnings":'.$report['warnings'].',"messages":[';
+        echo '"' . $filename . '":{';
+        echo '"errors":' . $report['errors'] . ',"warnings":' . $report['warnings'] . ',"messages":[';
 
         $messages = '';
         foreach ($report['messages'] as $line => $lineErrors) {
@@ -56,17 +58,16 @@ class Json implements Report
                     $messagesObject->column  = $column;
                     $messagesObject->fixable = $fixable;
 
-                    $messages .= json_encode($messagesObject).",";
+                    $messages .= json_encode($messagesObject) . ',';
                 }
             }
-        }//end foreach
+        }
 
         echo rtrim($messages, ',');
         echo ']},';
 
         return true;
-
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -86,21 +87,18 @@ class Json implements Report
      * @return void
      */
     public function generate(
-        $cachedData,
-        $totalFiles,
-        $totalErrors,
-        $totalWarnings,
-        $totalFixable,
-        $showSources=false,
-        $width=80,
-        $interactive=false,
-        $toScreen=true
+        string $cachedData,
+        int $totalFiles,
+        int $totalErrors,
+        int $totalWarnings,
+        int $totalFixable,
+        bool $showSources = false,
+        int $width = 80,
+        bool $interactive = false,
+        bool $toScreen = true
     ) {
-        echo '{"totals":{"errors":'.$totalErrors.',"warnings":'.$totalWarnings.',"fixable":'.$totalFixable.'},"files":{';
+        echo '{"totals":{"errors":' . $totalErrors . ',"warnings":' . $totalWarnings . ',"fixable":' . $totalFixable . '},"files":{';
         echo rtrim($cachedData, ',');
-        echo "}}".PHP_EOL;
-
-    }//end generate()
-
-
-}//end class
+        echo '}}' . PHP_EOL;
+    }
+}

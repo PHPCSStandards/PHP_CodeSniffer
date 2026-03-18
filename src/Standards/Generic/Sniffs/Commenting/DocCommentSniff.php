@@ -3,39 +3,30 @@
  * Ensures doc blocks follow basic formatting.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
 
 class DocCommentSniff implements Sniff
 {
-
-    /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
 
 
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
         return [T_DOC_COMMENT_OPEN_TAG];
-
-    }//end register()
+    }
 
 
     /**
@@ -47,7 +38,7 @@ class DocCommentSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -129,7 +120,7 @@ class DocCommentSniff implements Sniff
                     for ($i = $stackPtr; $i < $short; $i++) {
                         if ($tokens[$i]['line'] === $tokens[$stackPtr]['line']) {
                             continue;
-                        } else if ($tokens[$i]['line'] === $tokens[$short]['line']) {
+                        } elseif ($tokens[$i]['line'] === $tokens[$short]['line']) {
                             break;
                         }
 
@@ -170,7 +161,7 @@ class DocCommentSniff implements Sniff
                         for ($i = ($shortEnd + 1); $i < $long; $i++) {
                             if ($tokens[$i]['line'] === $tokens[$shortEnd]['line']) {
                                 continue;
-                            } else if ($tokens[$i]['line'] === ($tokens[$long]['line'] - 1)) {
+                            } elseif ($tokens[$i]['line'] === ($tokens[$long]['line'] - 1)) {
                                 break;
                             }
 
@@ -185,8 +176,8 @@ class DocCommentSniff implements Sniff
                     $error = 'Doc comment long description must start with a capital letter';
                     $phpcsFile->addError($error, $long, 'LongNotCapital');
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         if (empty($tokens[$commentStart]['comment_tags']) === true) {
             // No tags in the comment.
@@ -211,7 +202,7 @@ class DocCommentSniff implements Sniff
                 }
 
                 $indent = str_repeat(' ', $tokens[$stackPtr]['column']);
-                $phpcsFile->fixer->addContent($prev, $phpcsFile->eolChar.$indent.'*'.$phpcsFile->eolChar);
+                $phpcsFile->fixer->addContent($prev, $phpcsFile->eolChar . $indent . '*' . $phpcsFile->eolChar);
                 $phpcsFile->fixer->endChangeset();
             }
         }
@@ -250,10 +241,10 @@ class DocCommentSniff implements Sniff
                 if ($paramGroupid === null) {
                     $paramGroupid = $groupid;
                 }
-            }//end if
+            }
 
             $tagGroups[$groupid][] = $tag;
-        }//end foreach
+        }
 
         foreach ($tagGroups as $groupid => $group) {
             $maxLength = 0;
@@ -280,9 +271,12 @@ class DocCommentSniff implements Sniff
             }
 
             // Check that there was single blank line after the tag block
-            // but account for a multi-line tag comments.
+            // but account for multi-line tag comments.
+            $find = Tokens::PHPCS_ANNOTATION_TOKENS;
+            $find[T_DOC_COMMENT_TAG] = T_DOC_COMMENT_TAG;
+
             $lastTag = $group[$pos];
-            $next    = $phpcsFile->findNext(T_DOC_COMMENT_TAG, ($lastTag + 3), $commentEnd);
+            $next    = $phpcsFile->findNext($find, ($lastTag + 3), $commentEnd);
             if ($next !== false) {
                 $prev = $phpcsFile->findPrevious([T_DOC_COMMENT_TAG, T_DOC_COMMENT_STRING], ($next - 1), $commentStart);
                 if ($tokens[$next]['line'] !== ($tokens[$prev]['line'] + 2)) {
@@ -299,11 +293,11 @@ class DocCommentSniff implements Sniff
                         }
 
                         $indent = str_repeat(' ', $tokens[$stackPtr]['column']);
-                        $phpcsFile->fixer->addContent($prev, $phpcsFile->eolChar.$indent.'*'.$phpcsFile->eolChar);
+                        $phpcsFile->fixer->addContent($prev, $phpcsFile->eolChar . $indent . '*' . $phpcsFile->eolChar);
                         $phpcsFile->fixer->endChangeset();
                     }
                 }
-            }//end if
+            }
 
             // Now check paddings.
             foreach ($paddings as $tag => $padding) {
@@ -323,7 +317,7 @@ class DocCommentSniff implements Sniff
                     }
                 }
             }
-        }//end foreach
+        }
 
         // If there is a param group, it needs to be first.
         if ($paramGroupid !== null && $paramGroupid !== 0) {
@@ -346,8 +340,5 @@ class DocCommentSniff implements Sniff
 
             $foundTags[$tagName] = true;
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

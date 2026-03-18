@@ -3,8 +3,9 @@
  * Verifies that trait import statements are defined correctly.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR12\Sniffs\Traits;
@@ -20,13 +21,12 @@ class UseDeclarationSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
         return [T_USE];
-
-    }//end register()
+    }
 
 
     /**
@@ -36,16 +36,16 @@ class UseDeclarationSniff implements Sniff
      * @param int                         $stackPtr  The position of the current token in the
      *                                               stack passed in $tokens.
      *
-     * @return void
+     * @return void|int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
         // Needs to be a use statement directly inside a class.
         $conditions = $tokens[$stackPtr]['conditions'];
         end($conditions);
-        if (isset(Tokens::$ooScopeTokens[current($conditions)]) === false) {
+        if (isset(Tokens::OO_SCOPE_TOKENS[current($conditions)]) === false) {
             return;
         }
 
@@ -81,7 +81,7 @@ class UseDeclarationSniff implements Sniff
                         continue;
                     }
 
-                    if (isset(Tokens::$commentTokens[$tokens[$i]['code']]) === true) {
+                    if (isset(Tokens::COMMENT_TOKENS[$tokens[$i]['code']]) === true) {
                         if ($tokens[$i]['code'] === T_DOC_COMMENT_CLOSE_TAG) {
                             // Skip past the comment.
                             $i = $tokens[$i]['comment_opener'];
@@ -93,14 +93,14 @@ class UseDeclarationSniff implements Sniff
                     }
 
                     break;
-                }//end for
+                }
 
                 if ($tokens[$lastValidContent]['line'] !== ($tokens[$opener]['line'] + 1)) {
                     $error = 'The first trait import statement must be declared on the first non-comment line after the %s opening brace';
                     $data  = [strtolower($tokens[$ooToken]['content'])];
 
                     // Figure out if we can fix this error.
-                    $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($useToken - 1), ($opener - 1), true);
+                    $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($useToken - 1), ($opener - 1), true);
                     if ($tokens[$prev]['line'] === $tokens[$opener]['line']) {
                         $fix = $phpcsFile->addFixableError($error, $useToken, 'UseAfterBrace', $data);
                         if ($fix === true) {
@@ -123,7 +123,7 @@ class UseDeclarationSniff implements Sniff
                                     $phpcsFile->fixer->replaceToken($i, '');
                                 }
 
-                                if (isset(Tokens::$commentTokens[$tokens[$i]['code']]) === true) {
+                                if (isset(Tokens::COMMENT_TOKENS[$tokens[$i]['code']]) === true) {
                                     if ($tokens[$i]['code'] === T_DOC_COMMENT_CLOSE_TAG) {
                                         // Skip past the comment.
                                         $i = $tokens[$i]['comment_opener'];
@@ -131,17 +131,17 @@ class UseDeclarationSniff implements Sniff
 
                                     $lastValidContent = $i;
                                 }
-                            }//end for
+                            }
 
                             $phpcsFile->fixer->endChangeset();
-                        }//end if
+                        }
                     } else {
                         $phpcsFile->addError($error, $useToken, 'UseAfterBrace', $data);
-                    }//end if
-                }//end if
+                    }
+                }
             } else {
                 // Make sure this use statement is not on the same line as the previous one.
-                $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($useToken - 1), null, true);
+                $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($useToken - 1), null, true);
                 if ($prev !== false && $tokens[$prev]['line'] === $tokens[$useToken]['line']) {
                     $error     = 'Each imported trait must be on its own line';
                     $prevNonWs = $phpcsFile->findPrevious(T_WHITESPACE, ($useToken - 1), null, true);
@@ -172,10 +172,42 @@ class UseDeclarationSniff implements Sniff
                             }
 
                             $phpcsFile->fixer->endChangeset();
-                        }//end if
-                    }//end if
-                }//end if
-            }//end if
+                        }
+                    }
+                }
+            }
+
+            $error = 'Expected 1 space after USE in trait import statement; %s found';
+            if ($tokens[($useToken + 1)]['code'] !== T_WHITESPACE) {
+                $data = ['0'];
+                $fix  = $phpcsFile->addFixableError($error, $useToken, 'SpaceAfterUse', $data);
+                if ($fix === true) {
+                    $phpcsFile->fixer->addContent($useToken, ' ');
+                }
+            } elseif ($tokens[($useToken + 1)]['content'] !== ' ') {
+                $next = $phpcsFile->findNext(T_WHITESPACE, ($useToken + 1), null, true);
+                if ($tokens[$next]['line'] !== $tokens[$useToken]['line']) {
+                    $found = 'newline';
+                } else {
+                    $found = $tokens[($useToken + 1)]['length'];
+                }
+
+                $data = [$found];
+                $fix  = $phpcsFile->addFixableError($error, $useToken, 'SpaceAfterUse', $data);
+                if ($fix === true) {
+                    if ($found === 'newline') {
+                        $phpcsFile->fixer->beginChangeset();
+                        for ($x = ($useToken + 1); $x < $next; $x++) {
+                            $phpcsFile->fixer->replaceToken($x, '');
+                        }
+
+                        $phpcsFile->fixer->addContent($useToken, ' ');
+                        $phpcsFile->fixer->endChangeset();
+                    } else {
+                        $phpcsFile->fixer->replaceToken(($useToken + 1), ' ');
+                    }
+                }
+            }
 
             // Check the formatting of the statement.
             if (isset($tokens[$useToken]['scope_opener']) === true) {
@@ -220,8 +252,8 @@ class UseDeclarationSniff implements Sniff
 
                             $phpcsFile->fixer->endChangeset();
                         }
-                    }//end if
-                } else if ($tokens[$next]['code'] !== T_USE) {
+                    }
+                } elseif ($tokens[$next]['code'] !== T_USE) {
                     // Comments are allowed on the same line as the use statement, so make sure
                     // we don't error for those.
                     for ($next = ($end + 1); $next < $tokens[$ooToken]['scope_closer']; $next++) {
@@ -229,7 +261,7 @@ class UseDeclarationSniff implements Sniff
                             continue;
                         }
 
-                        if (isset(Tokens::$commentTokens[$tokens[$next]['code']]) === true
+                        if (isset(Tokens::COMMENT_TOKENS[$tokens[$next]['code']]) === true
                             && $tokens[$next]['line'] === $tokens[$end]['line']
                         ) {
                             continue;
@@ -243,7 +275,7 @@ class UseDeclarationSniff implements Sniff
                         $fix   = $phpcsFile->addFixableError($error, $end, 'NoBlankLineAfterUse');
                         if ($fix === true) {
                             if ($tokens[$next]['line'] === $tokens[$useToken]['line']) {
-                                $phpcsFile->fixer->addContentBefore($next, $phpcsFile->eolChar.$phpcsFile->eolChar);
+                                $phpcsFile->fixer->addContentBefore($next, $phpcsFile->eolChar . $phpcsFile->eolChar);
                             } else {
                                 for ($i = ($next - 1); $i > $end; $i--) {
                                     if ($tokens[$i]['line'] !== $tokens[$next]['line']) {
@@ -255,20 +287,19 @@ class UseDeclarationSniff implements Sniff
                             }
                         }
                     }
-                }//end if
+                }
             } else {
                 // Ensure use statements are grouped.
-                $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($end + 1), null, true);
+                $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($end + 1), null, true);
                 if ($next !== $useTokens[($usePos + 1)]) {
                     $error = 'Imported traits must be grouped together';
                     $phpcsFile->addError($error, $useTokens[($usePos + 1)], 'NotGrouped');
                 }
-            }//end if
-        }//end foreach
+            }
+        }
 
         return $tokens[$ooToken]['scope_closer'];
-
-    }//end process()
+    }
 
 
     /**
@@ -280,7 +311,7 @@ class UseDeclarationSniff implements Sniff
      *
      * @return void
      */
-    protected function processUseGroup(File $phpcsFile, $stackPtr)
+    protected function processUseGroup(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -316,7 +347,7 @@ class UseDeclarationSniff implements Sniff
             } else {
                 $phpcsFile->addError($error, $opener, 'OpenBraceNewLine');
             }
-        }//end if
+        }
 
         $error = 'Expected 1 space before opening brace in trait import statement; %s found';
         if ($tokens[($opener - 1)]['code'] !== T_WHITESPACE) {
@@ -325,7 +356,7 @@ class UseDeclarationSniff implements Sniff
             if ($fix === true) {
                 $phpcsFile->fixer->addContentBefore($opener, ' ');
             }
-        } else if ($tokens[($opener - 1)]['content'] !== ' ') {
+        } elseif ($tokens[($opener - 1)]['content'] !== ' ') {
             $prev = $phpcsFile->findPrevious(T_WHITESPACE, ($opener - 1), null, true);
             if ($tokens[$prev]['line'] !== $tokens[$opener]['line']) {
                 $found = 'newline';
@@ -348,9 +379,9 @@ class UseDeclarationSniff implements Sniff
                     $phpcsFile->fixer->replaceToken(($opener - 1), ' ');
                 }
             }
-        }//end if
+        }
 
-        $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($opener + 1), ($closer - 1), true);
+        $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($opener + 1), ($closer - 1), true);
         if ($next !== false && $tokens[$next]['line'] !== ($tokens[$opener]['line'] + 1)) {
             $error     = 'First trait conflict resolution statement must be on the line after the opening brace';
             $nextNonWs = $phpcsFile->findNext(T_WHITESPACE, ($opener + 1), ($closer - 1), true);
@@ -373,7 +404,7 @@ class UseDeclarationSniff implements Sniff
                     $phpcsFile->fixer->endChangeset();
                 }
             }
-        }//end if
+        }
 
         for ($i = ($stackPtr + 1); $i < $opener; $i++) {
             if ($tokens[$i]['code'] !== T_COMMA) {
@@ -396,7 +427,7 @@ class UseDeclarationSniff implements Sniff
                 if ($fix === true) {
                     $phpcsFile->fixer->addContent($i, ' ');
                 }
-            } else if ($tokens[($i + 1)]['content'] !== ' ') {
+            } elseif ($tokens[($i + 1)]['content'] !== ' ') {
                 $next = $phpcsFile->findNext(T_WHITESPACE, ($i + 1), $opener, true);
                 if ($tokens[$next]['line'] !== $tokens[$i]['line']) {
                     $found = 'newline';
@@ -419,8 +450,8 @@ class UseDeclarationSniff implements Sniff
                         $phpcsFile->fixer->replaceToken(($i + 1), ' ');
                     }
                 }
-            }//end if
-        }//end for
+            }
+        }
 
         for ($i = ($opener + 1); $i < $closer; $i++) {
             if ($tokens[$i]['code'] === T_INSTEADOF) {
@@ -431,7 +462,7 @@ class UseDeclarationSniff implements Sniff
                     if ($fix === true) {
                         $phpcsFile->fixer->addContentBefore($i, ' ');
                     }
-                } else if ($tokens[($i - 1)]['content'] !== ' ') {
+                } elseif ($tokens[($i - 1)]['content'] !== ' ') {
                     $prev = $phpcsFile->findPrevious(T_WHITESPACE, ($i - 1), $opener, true);
                     if ($tokens[$prev]['line'] !== $tokens[$i]['line']) {
                         $found = 'newline';
@@ -441,7 +472,7 @@ class UseDeclarationSniff implements Sniff
 
                     $data = [$found];
 
-                    $prevNonWs = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($i - 1), $opener, true);
+                    $prevNonWs = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($i - 1), $opener, true);
                     if ($prevNonWs !== $prev) {
                         $phpcsFile->addError($error, $i, 'SpaceBeforeInsteadof', $data);
                     } else {
@@ -460,7 +491,7 @@ class UseDeclarationSniff implements Sniff
                             }
                         }
                     }
-                }//end if
+                }
 
                 $error = 'Expected 1 space after INSTEADOF in trait import statement; %s found';
                 if ($tokens[($i + 1)]['code'] !== T_WHITESPACE) {
@@ -469,7 +500,7 @@ class UseDeclarationSniff implements Sniff
                     if ($fix === true) {
                         $phpcsFile->fixer->addContent($i, ' ');
                     }
-                } else if ($tokens[($i + 1)]['content'] !== ' ') {
+                } elseif ($tokens[($i + 1)]['content'] !== ' ') {
                     $next = $phpcsFile->findNext(T_WHITESPACE, ($i + 1), $closer, true);
                     if ($tokens[$next]['line'] !== $tokens[$i]['line']) {
                         $found = 'newline';
@@ -479,7 +510,7 @@ class UseDeclarationSniff implements Sniff
 
                     $data = [$found];
 
-                    $nextNonWs = $phpcsFile->findNext(Tokens::$emptyTokens, ($i + 1), $closer, true);
+                    $nextNonWs = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($i + 1), $closer, true);
                     if ($nextNonWs !== $next) {
                         $phpcsFile->addError($error, $i, 'SpaceAfterInsteadof', $data);
                     } else {
@@ -498,8 +529,8 @@ class UseDeclarationSniff implements Sniff
                             }
                         }
                     }
-                }//end if
-            }//end if
+                }
+            }
 
             if ($tokens[$i]['code'] === T_AS) {
                 $error = 'Expected 1 space before AS in trait import statement; %s found';
@@ -509,7 +540,7 @@ class UseDeclarationSniff implements Sniff
                     if ($fix === true) {
                         $phpcsFile->fixer->addContentBefore($i, ' ');
                     }
-                } else if ($tokens[($i - 1)]['content'] !== ' ') {
+                } elseif ($tokens[($i - 1)]['content'] !== ' ') {
                     $prev = $phpcsFile->findPrevious(T_WHITESPACE, ($i - 1), $opener, true);
                     if ($tokens[$prev]['line'] !== $tokens[$i]['line']) {
                         $found = 'newline';
@@ -519,7 +550,7 @@ class UseDeclarationSniff implements Sniff
 
                     $data = [$found];
 
-                    $prevNonWs = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($i - 1), $opener, true);
+                    $prevNonWs = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($i - 1), $opener, true);
                     if ($prevNonWs !== $prev) {
                         $phpcsFile->addError($error, $i, 'SpaceBeforeAs', $data);
                     } else {
@@ -538,7 +569,7 @@ class UseDeclarationSniff implements Sniff
                             }
                         }
                     }
-                }//end if
+                }
 
                 $error = 'Expected 1 space after AS in trait import statement; %s found';
                 if ($tokens[($i + 1)]['code'] !== T_WHITESPACE) {
@@ -547,7 +578,7 @@ class UseDeclarationSniff implements Sniff
                     if ($fix === true) {
                         $phpcsFile->fixer->addContent($i, ' ');
                     }
-                } else if ($tokens[($i + 1)]['content'] !== ' ') {
+                } elseif ($tokens[($i + 1)]['content'] !== ' ') {
                     $next = $phpcsFile->findNext(T_WHITESPACE, ($i + 1), $closer, true);
                     if ($tokens[$next]['line'] !== $tokens[$i]['line']) {
                         $found = 'newline';
@@ -557,7 +588,7 @@ class UseDeclarationSniff implements Sniff
 
                     $data = [$found];
 
-                    $nextNonWs = $phpcsFile->findNext(Tokens::$emptyTokens, ($i + 1), $closer, true);
+                    $nextNonWs = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($i + 1), $closer, true);
                     if ($nextNonWs !== $next) {
                         $phpcsFile->addError($error, $i, 'SpaceAfterAs', $data);
                     } else {
@@ -576,8 +607,8 @@ class UseDeclarationSniff implements Sniff
                             }
                         }
                     }
-                }//end if
-            }//end if
+                }
+            }
 
             if ($tokens[$i]['code'] === T_SEMICOLON) {
                 if ($tokens[($i - 1)]['code'] === T_WHITESPACE) {
@@ -589,7 +620,7 @@ class UseDeclarationSniff implements Sniff
                     }
                 }
 
-                $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($i + 1), ($closer - 1), true);
+                $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($i + 1), ($closer - 1), true);
                 if ($next !== false && $tokens[$next]['line'] === $tokens[$i]['line']) {
                     $error     = 'Each trait conflict resolution statement must be on a line by itself';
                     $nextNonWs = $phpcsFile->findNext(T_WHITESPACE, ($i + 1), ($closer - 1), true);
@@ -608,10 +639,10 @@ class UseDeclarationSniff implements Sniff
                         }
                     }
                 }
-            }//end if
-        }//end for
+            }
+        }
 
-        $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($closer - 1), ($opener + 1), true);
+        $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($closer - 1), ($opener + 1), true);
         if ($prev !== false && $tokens[$prev]['line'] !== ($tokens[$closer]['line'] - 1)) {
             $error     = 'Closing brace must be on the line after the last trait conflict resolution statement';
             $prevNonWs = $phpcsFile->findPrevious(T_WHITESPACE, ($closer - 1), ($opener + 1), true);
@@ -634,9 +665,8 @@ class UseDeclarationSniff implements Sniff
                     $phpcsFile->fixer->endChangeset();
                 }
             }
-        }//end if
-
-    }//end processUseGroup()
+        }
+    }
 
 
     /**
@@ -648,41 +678,9 @@ class UseDeclarationSniff implements Sniff
      *
      * @return void
      */
-    protected function processUseStatement(File $phpcsFile, $stackPtr)
+    protected function processUseStatement(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-
-        $error = 'Expected 1 space after USE in trait import statement; %s found';
-        if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
-            $data = ['0'];
-            $fix  = $phpcsFile->addFixableError($error, $stackPtr, 'SpaceAfterAs', $data);
-            if ($fix === true) {
-                $phpcsFile->fixer->addContent($stackPtr, ' ');
-            }
-        } else if ($tokens[($stackPtr + 1)]['content'] !== ' ') {
-            $next = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
-            if ($tokens[$next]['line'] !== $tokens[$stackPtr]['line']) {
-                $found = 'newline';
-            } else {
-                $found = $tokens[($stackPtr + 1)]['length'];
-            }
-
-            $data = [$found];
-            $fix  = $phpcsFile->addFixableError($error, $stackPtr, 'SpaceAfterAs', $data);
-            if ($fix === true) {
-                if ($found === 'newline') {
-                    $phpcsFile->fixer->beginChangeset();
-                    for ($x = ($stackPtr + 1); $x < $next; $x++) {
-                        $phpcsFile->fixer->replaceToken($x, '');
-                    }
-
-                    $phpcsFile->fixer->addContent($stackPtr, ' ');
-                    $phpcsFile->fixer->endChangeset();
-                } else {
-                    $phpcsFile->fixer->replaceToken(($stackPtr + 1), ' ');
-                }
-            }
-        }//end if
 
         $next = $phpcsFile->findNext([T_COMMA, T_SEMICOLON], ($stackPtr + 1));
         if ($next !== false && $tokens[$next]['code'] === T_COMMA) {
@@ -690,11 +688,8 @@ class UseDeclarationSniff implements Sniff
             $fix   = $phpcsFile->addFixableError($error, $next, 'MultipleImport');
             if ($fix === true) {
                 $padding = str_repeat(' ', ($tokens[$stackPtr]['column'] - 1));
-                $phpcsFile->fixer->replaceToken($next, ';'.$phpcsFile->eolChar.$padding.'use ');
+                $phpcsFile->fixer->replaceToken($next, ';' . $phpcsFile->eolChar . $padding . 'use ');
             }
         }
-
-    }//end processUseStatement()
-
-
-}//end class
+    }
+}

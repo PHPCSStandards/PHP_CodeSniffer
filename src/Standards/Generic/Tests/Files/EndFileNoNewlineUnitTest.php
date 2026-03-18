@@ -3,15 +3,21 @@
  * Unit test class for the EndFileNoNewline sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Files;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class EndFileNoNewlineUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the EndFileNoNewline sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\EndFileNoNewlineSniff
+ */
+final class EndFileNoNewlineUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -25,23 +31,21 @@ class EndFileNoNewlineUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'EndFileNoNewlineUnitTest.1.inc':
-        case 'EndFileNoNewlineUnitTest.1.css':
-        case 'EndFileNoNewlineUnitTest.1.js':
-        case 'EndFileNoNewlineUnitTest.2.inc':
-            return [3 => 1];
-        case 'EndFileNoNewlineUnitTest.2.css':
-        case 'EndFileNoNewlineUnitTest.2.js':
-        case 'EndFileNoNewlineUnitTest.6.inc':
-            return [2 => 1];
-        default:
-            return [];
-        }//end switch
-
-    }//end getErrorList()
+            case 'EndFileNoNewlineUnitTest.1.inc':
+            case 'EndFileNoNewlineUnitTest.2.inc':
+                return [3 => 1];
+            case 'EndFileNoNewlineUnitTest.6.inc':
+                return [2 => 1];
+            case 'EndFileNoNewlineUnitTest.8.inc':
+            case 'EndFileNoNewlineUnitTest.9.inc':
+                return [1 => 1];
+            default:
+                return [];
+        }
+    }
 
 
     /**
@@ -54,11 +58,8 @@ class EndFileNoNewlineUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

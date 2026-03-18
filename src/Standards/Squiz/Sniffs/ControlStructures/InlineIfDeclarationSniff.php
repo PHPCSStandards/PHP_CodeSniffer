@@ -3,8 +3,9 @@
  * Tests the spacing of shorthand IF statements.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures;
@@ -19,13 +20,12 @@ class InlineIfDeclarationSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
         return [T_INLINE_THEN];
-
-    }//end register()
+    }
 
 
     /**
@@ -37,7 +37,7 @@ class InlineIfDeclarationSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -132,7 +132,7 @@ class InlineIfDeclarationSniff implements Sniff
                     }
                 }
             }
-        }//end if
+        }
 
         $contentAfter = $phpcsFile->findNext(T_WHITESPACE, ($inlineElse + 1), null, true);
         $spaceAfter   = (($tokens[$contentAfter]['column']) - ($tokens[$inlineElse]['column'] + 1));
@@ -148,8 +148,5 @@ class InlineIfDeclarationSniff implements Sniff
                 }
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

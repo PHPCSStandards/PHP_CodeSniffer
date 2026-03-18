@@ -281,7 +281,7 @@ class NamespacedException {
     public function fooBar2() {
         throw new \Foo\Bar\FooBarException();
     }
-    
+
     /**
      * @throws FooBarException
      */
@@ -506,6 +506,46 @@ namespace {
          */
         public function ThrowGlobalExceptionToo() {
             throw new SomeGlobalException();
+        }
+    }
+}
+
+$anon = new class {
+    /**
+     * Tag and token number mismatch.
+     *
+     * @throws PHP_Exception1
+     * @throws PHP_Exception2
+     */
+    #[AnAttribute]
+    #[AnotherAttribute]
+    public function JumpOverAttributesToFindDocblock() {
+        throw new PHP_Exception1('Error');
+    }
+};
+
+
+/**
+ * @throws Wrong_Exception
+ */
+public function ImproveCommentTolerance() {
+    throw /*comment*/ new /*comment*/ Right_Exception('Error');
+}
+
+namespace Namespaced\Names {
+    class NamespacedNames {
+        /**
+         * @throws Namespaced\Names\Exception
+         */
+        public function foo() {
+            throw new namespace\Exception();
+        }
+
+        /**
+         * @throws Namespaced\Names\Bar\FooBarException
+         */
+        public function fooBar2() {
+            throw new Bar\FooBarException();
         }
     }
 }

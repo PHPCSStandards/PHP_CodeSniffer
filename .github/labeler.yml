@@ -1,0 +1,97 @@
+version: 1
+appendOnly: true
+labels:
+  - label: "Status: triage"
+    draft: false
+    author-can-merge: false
+
+  - label: "Core Component: Config & CLI options"
+    draft: false
+    files:
+      - "src/Config.php$"
+  - label: "Core Component: Ruleset"
+    draft: false
+    files:
+      - "src/Ruleset.php$"
+  - label: "Core Component: File"
+    draft: false
+    files:
+      - "src/Files/.*"
+  - label: "Core Component: Fixer"
+    draft: false
+    files:
+      - "src/Fixer.php$"
+  - label: "Core Component: Generators"
+    draft: false
+    files:
+      - "src/Generators/.*"
+  - label: "Core Component: Reports"
+    draft: false
+    files:
+      - "src/Reports/.*"
+  - label: "Core Component: Tokenizer"
+    draft: false
+    files:
+      - "src/Tokenizers/.*"
+  - label: "Core Component: Utils"
+    draft: false
+    files:
+      - "src/Util/.*"
+
+  - label: "Focus: Comments/Docblocks"
+    draft: false
+    files:
+      - "src/Standards/.*/Sniffs/Commenting/"
+  - label: "Focus: Fixer Conflicts"
+    draft: false
+    body: ".* fixer conflict.*"
+
+  - label: "Standard: Generic"
+    draft: false
+    files:
+      - "src/Standards/Generic/(Docs|Sniffs)/.*"
+  - label: "Standard: PEAR"
+    draft: false
+    files:
+      - "src/Standards/PEAR/(Docs|Sniffs)/.*"
+  - label: "Standard: PSR1"
+    draft: false
+    files:
+      - "src/Standards/PSR1/(Docs|Sniffs)/.*"
+  - label: "Standard: PSR2"
+    draft: false
+    files:
+      - "src/Standards/PSR2/(Docs|Sniffs)/.*"
+  - label: "Standard: PSR12"
+    draft: false
+    files:
+      - "src/Standards/PSR12/(Docs|Sniffs)/.*"
+  - label: "Standard: Squiz"
+    draft: false
+    files:
+      - "src/Standards/Squiz/(Docs|Sniffs)/.*"
+  - label: "Standard: Zend"
+    draft: false
+    files:
+      - "src/Standards/Zend/(Docs|Sniffs)/.*"
+
+  - label: "Type: breaking change"
+    draft: false
+    body: '[Xx]\] Breaking change'
+  - label: "Type: bug"
+    draft: false
+    body: '[Xx]\] Bug fix'
+  - label: "Type: enhancement"
+    draft: false
+    body: '[Xx]\] New feature'
+  - label: "Type: documentation"
+    draft: false
+    body: '[Xx]\] Documentation improvement'
+  - label: "Type: documentation"
+    draft: false
+    files:
+      - 'src/Standards/.*/Docs/[A-Za-z0-9-]*/.*Standard.xml$'
+  - label: "Type: documentation"
+    draft: false
+    files:
+      - "*.md$"

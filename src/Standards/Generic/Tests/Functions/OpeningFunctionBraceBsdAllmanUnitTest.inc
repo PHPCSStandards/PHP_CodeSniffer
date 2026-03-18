@@ -236,3 +236,35 @@ function myFunction($a, $lot, $of, $params)
     : array /* comment */ {
     return null;
 }
+
+class Issue3357
+{
+    public function extraLine(string: $a): void
+
+    {
+        // code here.
+    }
+}
+
+function issue3357WithoutIndent(string: $a): void
+
+
+{
+    // code here.
+}
+
+class Issue3357WithComment
+{
+    public function extraLine(string: $a): void
+    // Comment.
+    {
+        // code here.
+    }
+}
+
+    function myFunction()
+    {}
+    function myFunction()
+          {} // Too many spaces indent with an empty function.
+    function myFunction()
+{} // Too little spaces indent with an empty function.

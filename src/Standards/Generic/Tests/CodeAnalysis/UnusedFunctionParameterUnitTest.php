@@ -4,14 +4,20 @@
  *
  * @author    Manuel Pichler <mapi@manuel-pichler.de>
  * @copyright 2007-2014 Manuel Pichler. All rights reserved.
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\CodeAnalysis;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class UnusedFunctionParameterUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the UnusedFunctionParameter sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UnusedFunctionParameterSniff
+ */
+final class UnusedFunctionParameterUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -26,8 +32,7 @@ class UnusedFunctionParameterUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -36,23 +41,35 @@ class UnusedFunctionParameterUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    public function getWarningList()
+    public function getWarningList($testFile = '')
     {
-        return [
-            3   => 1,
-            7   => 1,
-            78  => 1,
-            94  => 1,
-            100 => 1,
-            106 => 1,
-            117 => 1,
-            121 => 2,
-            125 => 2,
-        ];
+        switch ($testFile) {
+            case 'UnusedFunctionParameterUnitTest.1.inc':
+                return [
+                    3   => 1,
+                    7   => 1,
+                    78  => 1,
+                    94  => 1,
+                    100 => 1,
+                    106 => 1,
+                    117 => 1,
+                    121 => 2,
+                    125 => 2,
+                    163 => 1,
+                    172 => 1,
+                    228 => 2,
+                    232 => 2,
+                    244 => 2,
+                    248 => 2,
+                    271 => 1,
+                ];
 
-    }//end getWarningList()
-
-
-}//end class
+            default:
+                return [];
+        }
+    }
+}

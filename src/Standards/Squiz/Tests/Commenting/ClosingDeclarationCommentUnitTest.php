@@ -3,15 +3,21 @@
  * Unit test class for the ClosingDeclarationComment sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\Commenting;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class ClosingDeclarationCommentUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ClosingDeclarationComment sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting\ClosingDeclarationCommentSniff
+ */
+final class ClosingDeclarationCommentUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -21,22 +27,43 @@ class ClosingDeclarationCommentUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the test file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile = '')
     {
-        return [
-            13 => 1,
-            17 => 1,
-            31 => 1,
-            41 => 1,
-            59 => 1,
-            63 => 1,
-            67 => 1,
-            79 => 1,
-        ];
+        switch ($testFile) {
+            case 'ClosingDeclarationCommentUnitTest.1.inc':
+                return [
+                    13  => 1,
+                    17  => 1,
+                    31  => 1,
+                    41  => 1,
+                    59  => 1,
+                    63  => 1,
+                    67  => 1,
+                    79  => 1,
+                    83  => 1,
+                    89  => 1,
+                    92  => 1,
+                    98  => 1,
+                    101 => 1,
+                    106 => 1,
+                    110 => 1,
+                    124 => 1,
+                ];
 
-    }//end getErrorList()
+            case 'ClosingDeclarationCommentUnitTest.4.inc':
+                return [8 => 1];
+
+            case 'ClosingDeclarationCommentUnitTest.5.inc':
+                return [11 => 1];
+
+            default:
+                return [];
+        }
+    }
 
 
     /**
@@ -45,13 +72,12 @@ class ClosingDeclarationCommentUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
+     * @param string $testFile The name of the test file being tested.
+     *
      * @return array<int, int>
      */
-    public function getWarningList()
+    public function getWarningList($testFile = '')
     {
-        return [71 => 1];
-
-    }//end getWarningList()
-
-
-}//end class
+        return [];
+    }
+}

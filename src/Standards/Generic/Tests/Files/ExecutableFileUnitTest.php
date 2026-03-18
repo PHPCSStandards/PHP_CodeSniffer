@@ -4,30 +4,33 @@
  *
  * @author    Matthew Peveler <matt.peveler@gmail.com>
  * @copyright 2019 Matthew Peveler
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Files;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class ExecutableFileUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ExecutableFile sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\ExecutableFileSniff
+ */
+final class ExecutableFileUnitTest extends AbstractSniffTestCase
 {
 
 
     /**
      * Should this test be skipped for some reason.
      *
-     * @return void
+     * @return bool
      */
     protected function shouldSkipTest()
     {
-        // PEAR doesn't preserve the executable flag, so skip
-        // tests when running in a PEAR install.
-        // Also skip on Windows which doesn't have the concept of executable files.
-        return ($GLOBALS['PHP_CODESNIFFER_PEAR'] || (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN'));
-
-    }//end shouldSkipTest()
+        // Skip on Windows which doesn't have the concept of executable files.
+        return PHP_OS_FAMILY === 'Windows';
+    }
 
 
     /**
@@ -40,16 +43,16 @@ class ExecutableFileUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'ExecutableFileUnitTest.2.inc':
-            return [1 => 1];
-        default:
-            return [];
-        }//end switch
-
-    }//end getErrorList()
+            case 'ExecutableFileUnitTest.2.inc':
+            case 'ExecutableFileUnitTest.4.inc':
+                return [1 => 1];
+            default:
+                return [];
+        }
+    }
 
 
     /**
@@ -62,11 +65,8 @@ class ExecutableFileUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

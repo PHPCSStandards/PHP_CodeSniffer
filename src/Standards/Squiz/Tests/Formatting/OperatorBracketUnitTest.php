@@ -3,15 +3,21 @@
  * Unit test class for the OperatorBracket sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\Formatting;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class OperatorBracketUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the OperatorBracket sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Formatting\OperatorBracketSniff
+ */
+final class OperatorBracketUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -25,73 +31,59 @@ class OperatorBracketUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='OperatorBracketUnitTest.inc')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'OperatorBracketUnitTest.inc':
-            return [
-                3   => 1,
-                6   => 1,
-                9   => 1,
-                12  => 1,
-                15  => 1,
-                18  => 2,
-                20  => 1,
-                25  => 1,
-                28  => 1,
-                31  => 1,
-                34  => 1,
-                37  => 1,
-                40  => 1,
-                43  => 2,
-                45  => 1,
-                47  => 5,
-                48  => 1,
-                50  => 2,
-                55  => 2,
-                56  => 1,
-                63  => 2,
-                64  => 1,
-                67  => 1,
-                86  => 1,
-                90  => 1,
-                109 => 1,
-                130 => 1,
-                134 => 1,
-                135 => 2,
-                137 => 1,
-                139 => 1,
-                150 => 1,
-                161 => 1,
-                163 => 2,
-                165 => 2,
-                169 => 1,
-                174 => 1,
-            ];
-            break;
-        case 'OperatorBracketUnitTest.js':
-            return [
-                5   => 1,
-                8   => 1,
-                11  => 1,
-                14  => 1,
-                24  => 1,
-                30  => 1,
-                33  => 1,
-                36  => 1,
-                39  => 1,
-                46  => 1,
-                47  => 1,
-                63  => 1,
-                108 => 1,
-            ];
-             break;
-        default:
-            return [];
-            break;
-        }//end switch
+            case 'OperatorBracketUnitTest.1.inc':
+                return [
+                    3   => 1,
+                    6   => 1,
+                    9   => 1,
+                    12  => 1,
+                    15  => 1,
+                    18  => 2,
+                    20  => 1,
+                    25  => 1,
+                    28  => 1,
+                    31  => 1,
+                    34  => 1,
+                    37  => 1,
+                    40  => 1,
+                    43  => 2,
+                    45  => 1,
+                    47  => 5,
+                    48  => 1,
+                    50  => 2,
+                    55  => 2,
+                    56  => 1,
+                    63  => 2,
+                    64  => 1,
+                    67  => 1,
+                    86  => 1,
+                    90  => 1,
+                    109 => 1,
+                    130 => 1,
+                    134 => 1,
+                    135 => 2,
+                    137 => 1,
+                    139 => 1,
+                    150 => 1,
+                    161 => 1,
+                    163 => 2,
+                    165 => 2,
+                    169 => 1,
+                    174 => 1,
+                    176 => 1,
+                    185 => 1,
+                    189 => 1,
+                    193 => 1,
+                    194 => 2,
+                ];
 
-    }//end getErrorList()
+            default:
+                return [];
+        }
+    }
 
 
     /**
@@ -105,8 +97,5 @@ class OperatorBracketUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

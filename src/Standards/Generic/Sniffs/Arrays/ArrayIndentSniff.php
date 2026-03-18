@@ -3,12 +3,14 @@
  * Ensures that array are indented one tab stop.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Arrays;
 
+use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractArraySniff;
 use PHP_CodeSniffer\Util\Tokens;
 
@@ -36,10 +38,9 @@ class ArrayIndentSniff extends AbstractArraySniff
      *
      * @return void
      */
-    public function processSingleLineArray($phpcsFile, $stackPtr, $arrayStart, $arrayEnd, $indices)
+    public function processSingleLineArray(File $phpcsFile, int $stackPtr, int $arrayStart, int $arrayEnd, array $indices)
     {
-
-    }//end processSingleLineArray()
+    }
 
 
     /**
@@ -55,14 +56,13 @@ class ArrayIndentSniff extends AbstractArraySniff
      *
      * @return void
      */
-    public function processMultiLineArray($phpcsFile, $stackPtr, $arrayStart, $arrayEnd, $indices)
+    public function processMultiLineArray(File $phpcsFile, int $stackPtr, int $arrayStart, int $arrayEnd, array $indices)
     {
         $tokens = $phpcsFile->getTokens();
 
         // Determine how far indented the entire array declaration should be.
-        $ignore     = Tokens::$emptyTokens;
+        $ignore     = Tokens::EMPTY_TOKENS;
         $ignore[]   = T_DOUBLE_ARROW;
-        $ignore[]   = T_COMMA;
         $prev       = $phpcsFile->findPrevious($ignore, ($stackPtr - 1), null, true);
         $start      = $phpcsFile->findStartOfStatement($prev);
         $first      = $phpcsFile->findFirstOnLine(T_WHITESPACE, $start, true);
@@ -76,9 +76,15 @@ class ArrayIndentSniff extends AbstractArraySniff
         // check indent levels because it's not valid. But we don't enforce exactly
         // how far indented it should be.
         if ($startIndent < $baseIndent) {
-            $error = 'Array open brace not indented correctly; expected at least %s spaces but found %s';
+            $pluralizeSpace = 's';
+            if ($baseIndent === 1) {
+                $pluralizeSpace = '';
+            }
+
+            $error = 'Array open brace not indented correctly; expected at least %s space%s but found %s';
             $data  = [
                 $baseIndent,
+                $pluralizeSpace,
                 $startIndent,
             ];
             $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'OpenBraceIncorrect', $data);
@@ -92,7 +98,7 @@ class ArrayIndentSniff extends AbstractArraySniff
             }
 
             return;
-        }//end if
+        }
 
         $expectedIndent = ($startIndent + $this->indent);
 
@@ -103,7 +109,7 @@ class ArrayIndentSniff extends AbstractArraySniff
                 $start = $index['value_start'];
             }
 
-            $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($start - 1), null, true);
+            $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($start - 1), null, true);
             if ($tokens[$prev]['line'] === $tokens[$start]['line']) {
                 // This index isn't the only content on the line
                 // so we can't check indent rules.
@@ -117,9 +123,15 @@ class ArrayIndentSniff extends AbstractArraySniff
                 continue;
             }
 
-            $error = 'Array key not indented correctly; expected %s spaces but found %s';
+            $pluralizeSpace = 's';
+            if ($expectedIndent === 1) {
+                $pluralizeSpace = '';
+            }
+
+            $error = 'Array key not indented correctly; expected %s space%s but found %s';
             $data  = [
                 $expectedIndent,
+                $pluralizeSpace,
                 $foundIndent,
             ];
             $fix   = $phpcsFile->addFixableError($error, $first, 'KeyIncorrect', $data);
@@ -133,14 +145,14 @@ class ArrayIndentSniff extends AbstractArraySniff
             } else {
                 $phpcsFile->fixer->replaceToken(($first - 1), $padding);
             }
-        }//end foreach
+        }
 
         $prev = $phpcsFile->findPrevious(T_WHITESPACE, ($arrayEnd - 1), null, true);
         if ($tokens[$prev]['line'] === $tokens[$arrayEnd]['line']) {
             $error = 'Closing brace of array declaration must be on a new line';
             $fix   = $phpcsFile->addFixableError($error, $arrayEnd, 'CloseBraceNotNewLine');
             if ($fix === true) {
-                $padding = $phpcsFile->eolChar.str_repeat(' ', $expectedIndent);
+                $padding = $phpcsFile->eolChar . str_repeat(' ', $startIndent);
                 $phpcsFile->fixer->addContentBefore($arrayEnd, $padding);
             }
 
@@ -148,15 +160,20 @@ class ArrayIndentSniff extends AbstractArraySniff
         }
 
         // The close brace must be indented one stop less.
-        $expectedIndent -= $this->indent;
-        $foundIndent     = ($tokens[$arrayEnd]['column'] - 1);
-        if ($foundIndent === $expectedIndent) {
+        $foundIndent = ($tokens[$arrayEnd]['column'] - 1);
+        if ($foundIndent === $startIndent) {
             return;
         }
 
-        $error = 'Array close brace not indented correctly; expected %s spaces but found %s';
+        $pluralizeSpace = 's';
+        if ($startIndent === 1) {
+            $pluralizeSpace = '';
+        }
+
+        $error = 'Array close brace not indented correctly; expected %s space%s but found %s';
         $data  = [
-            $expectedIndent,
+            $startIndent,
+            $pluralizeSpace,
             $foundIndent,
         ];
         $fix   = $phpcsFile->addFixableError($error, $arrayEnd, 'CloseBraceIncorrect', $data);
@@ -164,14 +181,11 @@ class ArrayIndentSniff extends AbstractArraySniff
             return;
         }
 
-        $padding = str_repeat(' ', $expectedIndent);
+        $padding = str_repeat(' ', $startIndent);
         if ($foundIndent === 0) {
             $phpcsFile->fixer->addContentBefore($arrayEnd, $padding);
         } else {
             $phpcsFile->fixer->replaceToken(($arrayEnd - 1), $padding);
         }
-
-    }//end processMultiLineArray()
-
-
-}//end class
+    }
+}

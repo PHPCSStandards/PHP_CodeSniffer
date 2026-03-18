@@ -252,7 +252,7 @@ switch ($sContext)
     case 'SOMETHING':
     case 'CONSTANT':
         do_something();
-        break;
+        \exit();
     case 'GLOBAL':
     case 'GLOBAL1':
         do_something();
@@ -271,3 +271,379 @@ $foo = $foo ?
         }
     } :
     null;
+
+switch ($foo) {
+case Foo::INTERFACE:
+    echo '1';
+    return self::INTERFACE;
+case Foo::TRAIT:
+case Foo::ARRAY:
+    echo '1';
+    return self::VALUE;
+}
+
+// OK: Every clause terminates
+switch ($foo) {
+    case 1:
+        switch ($bar) {
+            case 1:
+                return 1;
+            default:
+                return 3;
+        }
+    case 2:
+        return 2;
+}
+
+// KO: Not every clause terminates
+switch ($foo) {
+    case 1:
+        switch ($bar) {
+            case 1:
+                return;
+        }
+    case 2:
+        return 2;
+}
+
+// KO: Not every clause terminates
+switch ($foo) {
+    case 1:
+        switch ($bar) {
+            case 1:
+                return;
+            default:
+                $a = 1;
+        }
+    case 2:
+        return 2;
+}
+
+// OK: Every clause terminates
+switch ($foo) {
+    case 1:
+        switch ($bar) {
+            case 1:
+                return 1;
+            default:
+                throw new \Exception();
+        }
+    case 2:
+        return 2;
+}
+
+switch ($foo) {
+    case 1:
+        // phpcs:ignore
+    case 2:
+        return 1;
+    case 3:
+        return 2;
+}
+
+// Issue 3352.
+switch ( $test ) {
+    case 2: // comment followed by empty line
+
+        break;
+
+    case 3: /* phpcs:ignore Stnd.Cat.SniffName -- Verify correct handling of ignore comments. */
+
+
+
+        break;
+
+    case 4: /** inline docblock */
+
+
+
+        break;
+
+    case 5: /* checking how it handles */ /* two trailing comments */
+
+        break;
+
+    case 6:
+       // Comment as first content of the body.
+
+        break;
+
+    case 7:
+        /* phpcs:ignore Stnd.Cat.SniffName -- Verify correct handling of ignore comments at start of body. */
+
+        break;
+
+    case 8:
+        /** inline docblock */
+
+        break;
+}
+
+// Handle comments correctly.
+switch ($foo) {
+    case 1:
+        if ($bar > 0) {
+            doSomething();
+        }
+        // Comment
+        else {
+            return 1;
+        }
+    case 2:
+        return 2;
+}
+
+switch ($foo) {
+    case 1:
+        if ($bar > 0) /*comment*/ {
+            return doSomething();
+        }
+        else {
+            return 1;
+        }
+    case 2:
+        return 2;
+}
+
+// Issue #3297.
+// Okay - finally will always be executed, so all branches are covered by the `return` in finally.
+switch ( $a ) {
+    case 1:
+        try {
+            doSomething();
+        } catch (Exception $e) {
+            doSomething();
+        } catch (AnotherException $e) {
+            doSomething();
+        } finally {
+            return true;
+        }
+    default:
+        $other = $code;
+        break;
+}
+
+// Okay - all - non-finally - branches have a terminating statement.
+switch ( $a ) {
+    case 1:
+        try {
+            return false;
+        } catch (Exception $e) /*comment*/ {
+            return true;
+        }
+        // Comment
+        catch (AnotherException $e) {
+            return true;
+        } finally {
+            doSomething();
+        }
+    default:
+        $other = $code;
+        break;
+}
+
+// Okay - finally will always be executed, so all branches are covered by the `return` in finally.
+// Non-standard structure order.
+switch ( $a ) {
+    case 1:
+        try {
+            doSomething();
+        } catch (Exception $e) {
+            doSomething();
+        } finally {
+            return true;
+        } catch (AnotherException $e) {
+            doSomething();
+        }
+    default:
+        $other = $code;
+        break;
+}
+
+// Okay - all - non-finally - branches have a terminating statement.
+// Non-standard structure order.
+switch ( $a ) {
+    case 1:
+        try {
+            return false;
+        } finally {
+            doSomething();
+        } catch (MyException $e) {
+            return true;
+        } catch (AnotherException $e) {
+            return true;
+        }
+    default:
+        $other = $code;
+        break;
+}
+
+// All okay, no finally. Any exception still uncaught will terminate the case anyhow, so we're good.
+switch ( $a ) {
+    case 1:
+        try {
+            return false;
+        } catch (MyException $e) {
+            return true;
+        } catch (AnotherException $e) {
+            return true;
+        }
+    default:
+        $other = $code;
+        break;
+}
+
+// All okay, no catch
+switch ( $a ) {
+    case 1:
+        try {
+            return true;
+        } finally {
+            doSomething();
+        }
+    case 2:
+        $other = $code;
+        break;
+}
+
+// All okay, try-catch nested in if.
+switch ( $a ) {
+    case 1:
+        if ($a) {
+            try {
+                return true; // Comment.
+            } catch (MyException $e) {
+                throw new Exception($e->getMessage());
+            }
+        } else {
+            return true;
+        }
+    case 2:
+        $other = $code;
+        break;
+}
+
+// Missing fall-through comment.
+switch ( $a ) {
+    case 1:
+        try {
+            doSomething();
+        } finally {
+            doSomething();
+        }
+    case 2:
+        $other = $code;
+        break;
+}
+
+// Missing fall-through comment. One of the catches does not have a terminating statement.
+switch ( $a ) {
+    case 1:
+        try {
+            return false;
+        } catch (Exception $e) {
+            doSomething();
+        } catch (AnotherException $e) {
+            return true;
+        } finally {
+            doSomething();
+        }
+    default:
+        $other = $code;
+        break;
+}
+
+// Missing fall-through comment. Try does not have a terminating statement.
+switch ( $a ) {
+    case 1:
+        try {
+            doSomething();
+        } finally {
+            doSomething();
+        } catch (Exception $e) {
+            return true;
+        } catch (AnotherException $e) {
+            return true;
+        }
+    default:
+        $other = $code;
+        break;
+}
+
+// Missing fall-through comment. One of the catches does not have a terminating statement.
+switch ( $a ) {
+    case 1:
+        try {
+            return false;
+        } catch (Exception $e) {
+            doSomething();
+        } catch (AnotherException $e) {
+            return true;
+        }
+    default:
+        $other = $code;
+        break;
+}
+
+// Issue 3550 - comment after terminating statement.
+switch (rand()) {
+    case 1:
+        if (rand() === 1) {
+            break;
+        } else {
+            break; // comment
+        }
+    default:
+        break;
+}
+
+// Fix: goto should be recognized as terminating statement.
+switch ( $a ) {
+    case 1:
+        doSomething();
+        goto jumpOut;
+    default:
+        $other = $code;
+        break;
+}
+
+jumpOut:
+doSomething();
+
+// Fixable semicolon as case/default scope opener.
+switch ($value) {
+    case 'foo';
+    case 'bar' /*comment*/ ;
+    case 'baz'  ;
+        echo 'foo, bar, or baz';
+        break;
+    default;
+        echo 'Other';
+    default ;
+        echo 'Other';
+}
+
+// Verify that case/default statements with a PHP close tag as scope opener are handled correctly by the sniff.
+switch ($foo):
+    case "foo"?>
+        <div>Some html</div>
+        <?php break;
+    case "bar" ; ?>
+        <div>Some html</div>
+        <?php break;
+    default ?>
+        <div>Some html</div>
+        <?php break;
+    default ; ?>
+        <div>Some html</div>
+        <?php break;
+endswitch;
+
+// Verify that the sniff gracefully handles braced block with trailing comment.
+switch ($foo) {
+    case 'Foo': // Trailing comment.
+    {
+        echo 'foo';
+        break;
+    }
+}

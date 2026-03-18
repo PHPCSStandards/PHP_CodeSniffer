@@ -3,14 +3,14 @@
  * Summary report for PHP_CodeSniffer.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Util;
 
 class Summary implements Report
 {
@@ -23,14 +23,15 @@ class Summary implements Report
      * and FALSE if it ignored the file. Returning TRUE indicates that the file and
      * its data should be counted in the grand totals.
      *
-     * @param array                 $report      Prepared report data.
-     * @param \PHP_CodeSniffer\File $phpcsFile   The file being reported on.
-     * @param bool                  $showSources Show sources?
-     * @param int                   $width       Maximum allowed line width.
+     * @param array<string, string|int|array> $report      Prepared report data.
+     *                                                     See the {@see Report} interface for a detailed specification.
+     * @param \PHP_CodeSniffer\Files\File     $phpcsFile   The file being reported on.
+     * @param bool                            $showSources Show sources?
+     * @param int                             $width       Maximum allowed line width.
      *
      * @return bool
      */
-    public function generateFileReport($report, File $phpcsFile, $showSources=false, $width=80)
+    public function generateFileReport(array $report, File $phpcsFile, bool $showSources = false, int $width = 80)
     {
         if (PHP_CODESNIFFER_VERBOSITY === 0
             && $report['errors'] === 0
@@ -40,10 +41,9 @@ class Summary implements Report
             return false;
         }
 
-        echo $report['filename'].'>>'.$report['errors'].'>>'.$report['warnings'].PHP_EOL;
+        echo $report['filename'] . '>>' . $report['errors'] . '>>' . $report['warnings'] . PHP_EOL;
         return true;
-
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -63,15 +63,15 @@ class Summary implements Report
      * @return void
      */
     public function generate(
-        $cachedData,
-        $totalFiles,
-        $totalErrors,
-        $totalWarnings,
-        $totalFixable,
-        $showSources=false,
-        $width=80,
-        $interactive=false,
-        $toScreen=true
+        string $cachedData,
+        int $totalFiles,
+        int $totalErrors,
+        int $totalWarnings,
+        int $totalFixable,
+        bool $showSources = false,
+        int $width = 80,
+        bool $interactive = false,
+        bool $toScreen = true
     ) {
         $lines = explode(PHP_EOL, $cachedData);
         array_pop($lines);
@@ -97,7 +97,7 @@ class Summary implements Report
 
         uksort(
             $reportFiles,
-            function ($keyA, $keyB) {
+            static function ($keyA, $keyB) {
                 $pathPartsA = explode(DIRECTORY_SEPARATOR, $keyA);
                 $pathPartsB = explode(DIRECTORY_SEPARATOR, $keyB);
 
@@ -108,7 +108,7 @@ class Summary implements Report
 
                 if (empty($pathPartsA) === false && empty($pathPartsB) === true) {
                     return 1;
-                } else if (empty($pathPartsA) === true && empty($pathPartsB) === false) {
+                } elseif (empty($pathPartsA) === true && empty($pathPartsB) === false) {
                     return -1;
                 } else {
                     return strcasecmp($partA, $partB);
@@ -119,47 +119,47 @@ class Summary implements Report
         $width = min($width, ($maxLength + 21));
         $width = max($width, 70);
 
-        echo PHP_EOL."\033[1m".'PHP CODE SNIFFER REPORT SUMMARY'."\033[0m".PHP_EOL;
-        echo str_repeat('-', $width).PHP_EOL;
-        echo "\033[1m".'FILE'.str_repeat(' ', ($width - 20)).'ERRORS  WARNINGS'."\033[0m".PHP_EOL;
-        echo str_repeat('-', $width).PHP_EOL;
+        echo PHP_EOL . "\033[1m" . 'PHP CODE SNIFFER REPORT SUMMARY' . "\033[0m" . PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
+        echo "\033[1m" . 'FILE' . str_repeat(' ', ($width - 20)) . 'ERRORS  WARNINGS' . "\033[0m" . PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
 
         foreach ($reportFiles as $file => $data) {
             $padding = ($width - 18 - $data['strlen']);
             if ($padding < 0) {
-                $file    = '...'.substr($file, (($padding * -1) + 3));
+                $file    = '...' . substr($file, (($padding * -1) + 3));
                 $padding = 0;
             }
 
-            echo $file.str_repeat(' ', $padding).'  ';
+            echo $file . str_repeat(' ', $padding) . '  ';
             if ($data['errors'] !== 0) {
-                echo "\033[31m".$data['errors']."\033[0m";
+                echo "\033[31m" . $data['errors'] . "\033[0m";
                 echo str_repeat(' ', (8 - strlen((string) $data['errors'])));
             } else {
                 echo '0       ';
             }
 
             if ($data['warnings'] !== 0) {
-                echo "\033[33m".$data['warnings']."\033[0m";
+                echo "\033[33m" . $data['warnings'] . "\033[0m";
             } else {
                 echo '0';
             }
 
             echo PHP_EOL;
-        }//end foreach
+        }
 
-        echo str_repeat('-', $width).PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
         echo "\033[1mA TOTAL OF $totalErrors ERROR";
         if ($totalErrors !== 1) {
             echo 'S';
         }
 
-        echo ' AND '.$totalWarnings.' WARNING';
+        echo ' AND ' . $totalWarnings . ' WARNING';
         if ($totalWarnings !== 1) {
             echo 'S';
         }
 
-        echo ' WERE FOUND IN '.$totalFiles.' FILE';
+        echo ' WERE FOUND IN ' . $totalFiles . ' FILE';
         if ($totalFiles !== 1) {
             echo 'S';
         }
@@ -167,17 +167,10 @@ class Summary implements Report
         echo "\033[0m";
 
         if ($totalFixable > 0) {
-            echo PHP_EOL.str_repeat('-', $width).PHP_EOL;
+            echo PHP_EOL . str_repeat('-', $width) . PHP_EOL;
             echo "\033[1mPHPCBF CAN FIX $totalFixable OF THESE SNIFF VIOLATIONS AUTOMATICALLY\033[0m";
         }
 
-        echo PHP_EOL.str_repeat('-', $width).PHP_EOL.PHP_EOL;
-
-        if ($toScreen === true && $interactive === false) {
-            Util\Timing::printRunTime();
-        }
-
-    }//end generate()
-
-
-}//end class
+        echo PHP_EOL . str_repeat('-', $width) . PHP_EOL . PHP_EOL;
+    }
+}

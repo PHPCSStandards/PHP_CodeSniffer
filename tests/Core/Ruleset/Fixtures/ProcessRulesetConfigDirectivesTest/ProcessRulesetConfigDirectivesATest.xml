@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="ProcessRulesetConfigDirectivesTest" xsi:noNamespaceSchemaLocation="https://schema.phpcodesniffer.com/phpcs.xsd">
+
+    <!-- This ruleset sets two config directives.
+         All included rulesets will try to override these and should fail.
+         Whether the config is set before, or after, the sub-rulesets are included, should be irrelevant.
+    -->
+    <config name="expectValueFromParentATestSetBeforeIncludes" value="parent A"/>
+
+    <!-- Include the overrides. -->
+    <rule ref="./ProcessRulesetConfigDirectivesIncludeATest.xml"/>
+    <rule ref="./ProcessRulesetConfigDirectivesIncludeBTest.xml"/>
+
+    <config name="expectValueFromParentATestSetAfterIncludes" value="parent A"/>
+
+    <!-- This directive should not be applied. Last included ruleset (parent B) should win. -->
+    <config name="expectValueFromParentBTest" value="parent A"/>
+
+    <!-- Prevent a "no sniffs were registered" error. -->
+    <rule ref="Generic.PHP.BacktickOperator"/>
+</ruleset>

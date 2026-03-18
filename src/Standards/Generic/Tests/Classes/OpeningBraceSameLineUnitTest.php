@@ -3,15 +3,21 @@
  * Unit test class for the OpeningBraceSameLine sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Classes;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class OpeningBraceSameLineUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the OpeningBraceSameLine sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Classes\OpeningBraceSameLineSniff
+ */
+final class OpeningBraceSameLineUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -27,20 +33,21 @@ class OpeningBraceSameLineUnitTest extends AbstractSniffUnitTest
     {
 
         return [
-            19 => 2,
-            23 => 1,
-            28 => 2,
-            34 => 1,
-            38 => 1,
-            41 => 1,
-            44 => 1,
-            47 => 1,
-            70 => 1,
-            79 => 1,
-            90 => 1,
+            19  => 2,
+            23  => 1,
+            28  => 2,
+            34  => 1,
+            38  => 1,
+            41  => 1,
+            44  => 1,
+            47  => 1,
+            70  => 1,
+            79  => 1,
+            90  => 1,
+            94  => 1,
+            100 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -53,9 +60,6 @@ class OpeningBraceSameLineUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList()
     {
-        return [51 => 1];
-
-    }//end getWarningList()
-
-
-}//end class
+        return [];
+    }
+}

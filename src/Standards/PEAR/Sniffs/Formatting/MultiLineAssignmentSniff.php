@@ -3,8 +3,9 @@
  * If an assignment goes over two lines, ensure the equal sign is indented.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PEAR\Sniffs\Formatting;
@@ -26,13 +27,12 @@ class MultiLineAssignmentSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
         return [T_EQUAL];
-
-    }//end register()
+    }
 
 
     /**
@@ -44,7 +44,7 @@ class MultiLineAssignmentSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -62,7 +62,7 @@ class MultiLineAssignmentSniff implements Sniff
         }
 
         // Make sure it is the first thing on the line, otherwise we ignore it.
-        $prev = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), false, true);
+        $prev = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
         if ($prev === false) {
             // Bad assignment.
             return;
@@ -99,8 +99,5 @@ class MultiLineAssignmentSniff implements Sniff
             ];
             $phpcsFile->addError($error, $stackPtr, 'Indent', $data);
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

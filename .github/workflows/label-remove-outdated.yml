@@ -1,0 +1,79 @@
+name: Remove outdated labels
+
+on:
+  # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request_target
+  issues:
+    types:
+      - closed
+  pull_request_target:
+    types:
+      - closed
+      - review_requested
+
+jobs:
+  on-issue-close:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'PHPCSStandards' && github.event.issue.state == 'closed'
+
+    name: Clean up labels on issue close
+
+    steps:
+      - uses: mondeja/remove-labels-gh-action@b7118e4ba5dca74acf1059b3cb7660378ff9ab1a # v2.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            Status: awaiting feedback
+            Status: close candidate
+            Status: help wanted
+            Status: needs investigation
+            Status: triage
+
+  on-pr-review-request:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'PHPCSStandards' && github.event.action == 'review_requested'
+
+    name: "Clean up labels on PR (re-)review request"
+
+    steps:
+      - uses: mondeja/remove-labels-gh-action@b7118e4ba5dca74acf1059b3cb7660378ff9ab1a # v2.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            Status: awaiting feedback
+
+  on-pr-merge:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'PHPCSStandards' && github.event.pull_request.merged == true
+
+    name: Clean up labels on PR merge
+
+    steps:
+      - uses: mondeja/remove-labels-gh-action@b7118e4ba5dca74acf1059b3cb7660378ff9ab1a # v2.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            Status: awaiting feedback
+            Status: close candidate
+            Status: has merge conflict
+            Status: help wanted
+            Status: needs investigation
+            Status: triage
+            Status: waiting for opinions
+
+  on-pr-close:
+    runs-on: ubuntu-latest
+    # yamllint disable-line rule:line-length
+    if: github.repository_owner == 'PHPCSStandards' && github.event_name == 'pull_request_target' && github.event.action == 'closed' && github.event.pull_request.merged == false
+
+    name: Clean up labels on PR close
+
+    steps:
+      - uses: mondeja/remove-labels-gh-action@b7118e4ba5dca74acf1059b3cb7660378ff9ab1a # v2.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            Status: awaiting feedback
+            Status: close candidate
+            Status: help wanted
+            Status: needs investigation
+            Status: triage

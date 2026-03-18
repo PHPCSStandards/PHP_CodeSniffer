@@ -7,7 +7,7 @@ use function Vendor\Package\{functionA, functionB, functionC};
 use FUNCTION \Another\Vendor\functionD;
 
 use CONST Vendor\Package\{CONSTANT_A, CONSTANT_B, CONSTANT_C};
-use const Another\Vendor\CONSTANT_D;
+use const \Another\Vendor\CONSTANT_D;
 
 class ClassName3
 {
@@ -17,3 +17,10 @@ class ClassName3
 }
 
 $foo = function() use($bar) {};
+
+enum SomeEnum
+{
+    use \FirstTrait;
+    use SecondTrait;
+    use ThirdTrait;
+}

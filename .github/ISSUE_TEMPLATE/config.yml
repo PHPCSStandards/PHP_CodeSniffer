@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Community Support
+    url: https://github.com/PHPCSStandards/PHP_CodeSniffer/discussions?discussions_q=-category%3AAnnouncements
+    about: Support questions belong in Discussions, not in the issue tracker.

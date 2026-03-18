@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="ProcessRulesetIniDirectivesTest" xsi:noNamespaceSchemaLocation="https://schema.phpcodesniffer.com/phpcs.xsd">
+
+    <!-- These ini directives should not be applied. Root should win. -->
+    <ini name="highlight.comment" value="grandchild A"/>
+    <ini name="highlight.default" value="grandchild A"/>
+    <ini name="url_rewriter.hosts" value="grandchild A"/>
+
+    <!-- For this ini directive, this is the "highest" (and only) level, so this one should be applied. -->
+    <ini name="user_agent" value="grandchild A"/>
+
+    <!-- This directive should not be applied. Higher level ruleset (child A) should win. -->
+    <ini name="highlight.html" value="grandchild A"/>
+
+    <!-- This directive should not be applied. Last included, higher level, ruleset (child B) should win. -->
+    <ini name="highlight.string" value="grandchild A"/>
+
+</ruleset>

@@ -3,14 +3,14 @@
  * Full report for PHP_CodeSniffer.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Util;
 
 class Full implements Report
 {
@@ -23,14 +23,15 @@ class Full implements Report
      * and FALSE if it ignored the file. Returning TRUE indicates that the file and
      * its data should be counted in the grand totals.
      *
-     * @param array                 $report      Prepared report data.
-     * @param \PHP_CodeSniffer\File $phpcsFile   The file being reported on.
-     * @param bool                  $showSources Show sources?
-     * @param int                   $width       Maximum allowed line width.
+     * @param array<string, string|int|array> $report      Prepared report data.
+     *                                                     See the {@see Report} interface for a detailed specification.
+     * @param \PHP_CodeSniffer\Files\File     $phpcsFile   The file being reported on.
+     * @param bool                            $showSources Show sources?
+     * @param int                             $width       Maximum allowed line width.
      *
      * @return bool
      */
-    public function generateFileReport($report, File $phpcsFile, $showSources=false, $width=80)
+    public function generateFileReport(array $report, File $phpcsFile, bool $showSources = false, int $width = 80)
     {
         if ($report['errors'] === 0 && $report['warnings'] === 0) {
             // Nothing to print.
@@ -61,12 +62,25 @@ class Full implements Report
 
         // Make sure the report width isn't too big.
         $maxErrorLength = 0;
-        foreach ($report['messages'] as $line => $lineErrors) {
-            foreach ($lineErrors as $column => $colErrors) {
+        foreach ($report['messages'] as $lineErrors) {
+            foreach ($lineErrors as $colErrors) {
                 foreach ($colErrors as $error) {
-                    $length = strlen($error['message']);
+                    // Start with the presumption of a single line error message.
+                    $length    = strlen($error['message']);
+                    $srcLength = (strlen($error['source']) + 3);
                     if ($showSources === true) {
-                        $length += (strlen($error['source']) + 3);
+                        $length += $srcLength;
+                    }
+
+                    // ... but also handle multi-line messages correctly.
+                    if (strpos($error['message'], "\n") !== false) {
+                        $errorLines = explode("\n", $error['message']);
+                        $length     = max(array_map('strlen', $errorLines));
+
+                        if ($showSources === true) {
+                            $lastLine = array_pop($errorLines);
+                            $length   = max($length, (strlen($lastLine) + $srcLength));
+                        }
                     }
 
                     $maxErrorLength = max($maxErrorLength, ($length + 1));
@@ -82,74 +96,89 @@ class Full implements Report
             $width = 70;
         }
 
-        echo PHP_EOL."\033[1mFILE: ";
+        echo PHP_EOL . "\033[1mFILE: ";
         if ($fileLength <= ($width - 6)) {
             echo $file;
         } else {
-            echo '...'.substr($file, ($fileLength - ($width - 6)));
+            echo '...' . substr($file, ($fileLength - ($width - 6)));
         }
 
-        echo "\033[0m".PHP_EOL;
-        echo str_repeat('-', $width).PHP_EOL;
+        echo "\033[0m" . PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
 
-        echo "\033[1m".'FOUND '.$report['errors'].' ERROR';
+        echo "\033[1m" . 'FOUND ' . $report['errors'] . ' ERROR';
         if ($report['errors'] !== 1) {
             echo 'S';
         }
 
         if ($report['warnings'] > 0) {
-            echo ' AND '.$report['warnings'].' WARNING';
+            echo ' AND ' . $report['warnings'] . ' WARNING';
             if ($report['warnings'] !== 1) {
                 echo 'S';
             }
         }
 
-        echo ' AFFECTING '.count($report['messages']).' LINE';
+        echo ' AFFECTING ' . count($report['messages']) . ' LINE';
         if (count($report['messages']) !== 1) {
             echo 'S';
         }
 
-        echo "\033[0m".PHP_EOL;
-        echo str_repeat('-', $width).PHP_EOL;
+        echo "\033[0m" . PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
 
         // The maximum amount of space an error message can use.
         $maxErrorSpace = ($width - $paddingLength - 1);
 
+        $beforeMsg = '';
+        $afterMsg  = '';
+        if ($showSources === true) {
+            $beforeMsg = "\033[1m";
+            $afterMsg  = "\033[0m";
+        }
+
+        $beforeAfterLength = strlen($beforeMsg . $afterMsg);
+
         foreach ($report['messages'] as $line => $lineErrors) {
-            foreach ($lineErrors as $column => $colErrors) {
+            foreach ($lineErrors as $colErrors) {
                 foreach ($colErrors as $error) {
-                    $message  = $error['message'];
-                    $msgLines = [$message];
-                    if (strpos($message, "\n") !== false) {
-                        $msgLines = explode("\n", $message);
-                    }
+                    $errorMsg = wordwrap(
+                        $error['message'],
+                        $maxErrorSpace
+                    );
 
-                    $errorMsg = '';
-                    $lastLine = (count($msgLines) - 1);
-                    foreach ($msgLines as $k => $msgLine) {
-                        if ($k === 0) {
-                            if ($showSources === true) {
-                                $errorMsg .= "\033[1m";
-                            }
+                    // Add the padding _after_ the wordwrap as the message itself may contain line breaks
+                    // and those lines will also need to receive padding.
+                    $errorMsg = str_replace("\n", $afterMsg . PHP_EOL . $paddingLine2 . $beforeMsg, $errorMsg);
+                    $errorMsg = $beforeMsg . $errorMsg . $afterMsg;
+
+                    if ($showSources === true) {
+                        $lastMsg          = $errorMsg;
+                        $startPosLastLine = strrpos($errorMsg, PHP_EOL . $paddingLine2 . $beforeMsg);
+                        if ($startPosLastLine !== false) {
+                            // Message is multiline. Grab the text of last line of the message, including the color codes.
+                            $lastMsg = substr($errorMsg, ($startPosLastLine + strlen(PHP_EOL . $paddingLine2)));
+                        }
+
+                        // When show sources is used, the message itself will be bolded, so we need to correct the length.
+                        $sourceSuffix = '(' . $error['source'] . ')';
+
+                        $lastMsgPlusSourceLength = strlen($lastMsg);
+                        // Add space + source suffix length.
+                        $lastMsgPlusSourceLength += (1 + strlen($sourceSuffix));
+                        // Correct for the color codes.
+                        $lastMsgPlusSourceLength -= $beforeAfterLength;
+
+                        if ($lastMsgPlusSourceLength > $maxErrorSpace) {
+                            $errorMsg .= PHP_EOL . $paddingLine2 . $sourceSuffix;
                         } else {
-                            $errorMsg .= PHP_EOL.$paddingLine2;
+                            $errorMsg .= ' ' . $sourceSuffix;
                         }
-
-                        if ($k === $lastLine && $showSources === true) {
-                            $msgLine .= "\033[0m".' ('.$error['source'].')';
-                        }
-
-                        $errorMsg .= wordwrap(
-                            $msgLine,
-                            $maxErrorSpace,
-                            PHP_EOL.$paddingLine2
-                        );
                     }
 
                     // The padding that goes on the front of the line.
                     $padding = ($maxLineNumLength - strlen($line));
 
-                    echo ' '.str_repeat(' ', $padding).$line.' | ';
+                    echo ' ' . str_repeat(' ', $padding) . $line . ' | ';
                     if ($error['type'] === 'ERROR') {
                         echo "\033[31mERROR\033[0m";
                         if ($report['warnings'] > 0) {
@@ -171,21 +200,20 @@ class Full implements Report
                         echo '] ';
                     }
 
-                    echo $errorMsg.PHP_EOL;
-                }//end foreach
-            }//end foreach
-        }//end foreach
+                    echo $errorMsg . PHP_EOL;
+                }
+            }
+        }
 
-        echo str_repeat('-', $width).PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
         if ($report['fixable'] > 0) {
-            echo "\033[1m".'PHPCBF CAN FIX THE '.$report['fixable'].' MARKED SNIFF VIOLATIONS AUTOMATICALLY'."\033[0m".PHP_EOL;
-            echo str_repeat('-', $width).PHP_EOL;
+            echo "\033[1m" . 'PHPCBF CAN FIX THE ' . $report['fixable'] . ' MARKED SNIFF VIOLATIONS AUTOMATICALLY' . "\033[0m" . PHP_EOL;
+            echo str_repeat('-', $width) . PHP_EOL;
         }
 
         echo PHP_EOL;
         return true;
-
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -205,27 +233,20 @@ class Full implements Report
      * @return void
      */
     public function generate(
-        $cachedData,
-        $totalFiles,
-        $totalErrors,
-        $totalWarnings,
-        $totalFixable,
-        $showSources=false,
-        $width=80,
-        $interactive=false,
-        $toScreen=true
+        string $cachedData,
+        int $totalFiles,
+        int $totalErrors,
+        int $totalWarnings,
+        int $totalFixable,
+        bool $showSources = false,
+        int $width = 80,
+        bool $interactive = false,
+        bool $toScreen = true
     ) {
         if ($cachedData === '') {
             return;
         }
 
         echo $cachedData;
-
-        if ($toScreen === true && $interactive === false) {
-            Util\Timing::printRunTime();
-        }
-
-    }//end generate()
-
-
-}//end class
+    }
+}

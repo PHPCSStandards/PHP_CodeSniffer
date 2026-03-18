@@ -54,7 +54,7 @@ class ClassName7
 
 class ClassName8
 {
-    use A ,  B,
+    use   A ,  B,
     C
     {
 
@@ -206,4 +206,16 @@ class Foo implements Bar
      * Comment here;
      */
     use Baz;
+}
+
+enum SomeEnum1
+{
+    use FirstTrait;
+}
+
+enum SomeEnum2
+{
+
+    use   FirstTrait;
+
 }

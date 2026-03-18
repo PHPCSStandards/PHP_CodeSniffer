@@ -3,15 +3,21 @@
  * Unit test class for the ClosingBrace sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR12\Tests\Classes;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class ClosingBraceUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ClosingBrace sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Classes\ClosingBraceSniff
+ */
+final class ClosingBraceUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -31,9 +37,9 @@ class ClosingBraceUnitTest extends AbstractSniffUnitTest
             19 => 1,
             24 => 1,
             31 => 1,
+            52 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -47,8 +53,5 @@ class ClosingBraceUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

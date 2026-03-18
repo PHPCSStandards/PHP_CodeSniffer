@@ -4,14 +4,14 @@
  *
  * @author    Ben Selby <benmatselby@gmail.com>
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Util\Timing;
 
 abstract class VersionControl implements Report
 {
@@ -31,16 +31,17 @@ abstract class VersionControl implements Report
      * and FALSE if it ignored the file. Returning TRUE indicates that the file and
      * its data should be counted in the grand totals.
      *
-     * @param array                 $report      Prepared report data.
-     * @param \PHP_CodeSniffer\File $phpcsFile   The file being reported on.
-     * @param bool                  $showSources Show sources?
-     * @param int                   $width       Maximum allowed line width.
+     * @param array<string, string|int|array> $report      Prepared report data.
+     *                                                     See the {@see Report} interface for a detailed specification.
+     * @param \PHP_CodeSniffer\Files\File     $phpcsFile   The file being reported on.
+     * @param bool                            $showSources Show sources?
+     * @param int                             $width       Maximum allowed line width.
      *
      * @return bool
      */
-    public function generateFileReport($report, File $phpcsFile, $showSources=false, $width=80)
+    public function generateFileReport(array $report, File $phpcsFile, bool $showSources = false, int $width = 80)
     {
-        $blames = $this->getBlameContent($report['filename']);
+        $blames = $this->getBlameContent($phpcsFile->getFilename());
 
         $authorCache = [];
         $praiseCache = [];
@@ -65,7 +66,7 @@ abstract class VersionControl implements Report
 
             $praiseCache[$author]['bad']++;
 
-            foreach ($lineErrors as $column => $colErrors) {
+            foreach ($lineErrors as $colErrors) {
                 foreach ($colErrors as $error) {
                     $authorCache[$author]++;
 
@@ -84,7 +85,7 @@ abstract class VersionControl implements Report
             }
 
             unset($blames[($line - 1)]);
-        }//end foreach
+        }
 
         // Now go through and give the authors some credit for
         // all the lines that do not have errors.
@@ -108,27 +109,26 @@ abstract class VersionControl implements Report
             }
 
             $praiseCache[$author]['good']++;
-        }//end foreach
+        }
 
         foreach ($authorCache as $author => $errors) {
-            echo "AUTHOR>>$author>>$errors".PHP_EOL;
+            echo "AUTHOR>>$author>>$errors" . PHP_EOL;
         }
 
         foreach ($praiseCache as $author => $praise) {
-            echo "PRAISE>>$author>>".$praise['good'].'>>'.$praise['bad'].PHP_EOL;
+            echo "PRAISE>>$author>>" . $praise['good'] . '>>' . $praise['bad'] . PHP_EOL;
         }
 
         foreach ($sourceCache as $author => $sources) {
             foreach ($sources as $source => $sourceData) {
                 $count   = $sourceData['count'];
                 $fixable = (int) $sourceData['fixable'];
-                echo "SOURCE>>$author>>$source>>$count>>$fixable".PHP_EOL;
+                echo "SOURCE>>$author>>$source>>$count>>$fixable" . PHP_EOL;
             }
         }
 
         return true;
-
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -148,15 +148,15 @@ abstract class VersionControl implements Report
      * @return void
      */
     public function generate(
-        $cachedData,
-        $totalFiles,
-        $totalErrors,
-        $totalWarnings,
-        $totalFixable,
-        $showSources=false,
-        $width=80,
-        $interactive=false,
-        $toScreen=true
+        string $cachedData,
+        int $totalFiles,
+        int $totalErrors,
+        int $totalWarnings,
+        int $totalFixable,
+        bool $showSources = false,
+        int $width = 80,
+        bool $interactive = false,
+        bool $toScreen = true
     ) {
         $errorsShown = ($totalErrors + $totalWarnings);
         if ($errorsShown === 0) {
@@ -178,42 +178,42 @@ abstract class VersionControl implements Report
         foreach ($lines as $line) {
             $parts = explode('>>', $line);
             switch ($parts[0]) {
-            case 'AUTHOR':
-                if (isset($authorCache[$parts[1]]) === false) {
-                    $authorCache[$parts[1]] = $parts[2];
-                } else {
-                    $authorCache[$parts[1]] += $parts[2];
-                }
-                break;
-            case 'PRAISE':
-                if (isset($praiseCache[$parts[1]]) === false) {
-                    $praiseCache[$parts[1]] = [
-                        'good' => $parts[2],
-                        'bad'  => $parts[3],
-                    ];
-                } else {
-                    $praiseCache[$parts[1]]['good'] += $parts[2];
-                    $praiseCache[$parts[1]]['bad']  += $parts[3];
-                }
-                break;
-            case 'SOURCE':
-                if (isset($praiseCache[$parts[1]]) === false) {
-                    $praiseCache[$parts[1]] = [];
-                }
+                case 'AUTHOR':
+                    if (isset($authorCache[$parts[1]]) === false) {
+                        $authorCache[$parts[1]] = $parts[2];
+                    } else {
+                        $authorCache[$parts[1]] += $parts[2];
+                    }
+                    break;
+                case 'PRAISE':
+                    if (isset($praiseCache[$parts[1]]) === false) {
+                        $praiseCache[$parts[1]] = [
+                            'good' => $parts[2],
+                            'bad'  => $parts[3],
+                        ];
+                    } else {
+                        $praiseCache[$parts[1]]['good'] += $parts[2];
+                        $praiseCache[$parts[1]]['bad']  += $parts[3];
+                    }
+                    break;
+                case 'SOURCE':
+                    if (isset($praiseCache[$parts[1]]) === false) {
+                        $praiseCache[$parts[1]] = [];
+                    }
 
-                if (isset($sourceCache[$parts[1]][$parts[2]]) === false) {
-                    $sourceCache[$parts[1]][$parts[2]] = [
-                        'count'   => $parts[3],
-                        'fixable' => (bool) $parts[4],
-                    ];
-                } else {
-                    $sourceCache[$parts[1]][$parts[2]]['count'] += $parts[3];
-                }
-                break;
-            default:
-                break;
-            }//end switch
-        }//end foreach
+                    if (isset($sourceCache[$parts[1]][$parts[2]]) === false) {
+                        $sourceCache[$parts[1]][$parts[2]] = [
+                            'count'   => $parts[3],
+                            'fixable' => (bool) $parts[4],
+                        ];
+                    } else {
+                        $sourceCache[$parts[1]][$parts[2]]['count'] += $parts[3];
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
 
         // Make sure the report width isn't too big.
         $maxLength = 0;
@@ -234,14 +234,14 @@ abstract class VersionControl implements Report
         $width = max($width, 70);
         arsort($authorCache);
 
-        echo PHP_EOL."\033[1m".'PHP CODE SNIFFER '.$this->reportName.' BLAME SUMMARY'."\033[0m".PHP_EOL;
-        echo str_repeat('-', $width).PHP_EOL."\033[1m";
+        echo PHP_EOL . "\033[1m" . 'PHP CODE SNIFFER ' . $this->reportName . ' BLAME SUMMARY' . "\033[0m" . PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL . "\033[1m";
         if ($showSources === true) {
-            echo 'AUTHOR   SOURCE'.str_repeat(' ', ($width - 43)).'(Author %) (Overall %) COUNT'.PHP_EOL;
-            echo str_repeat('-', $width).PHP_EOL;
+            echo 'AUTHOR   SOURCE' . str_repeat(' ', ($width - 43)) . '(Author %) (Overall %) COUNT' . PHP_EOL;
+            echo str_repeat('-', $width) . PHP_EOL;
         } else {
-            echo 'AUTHOR'.str_repeat(' ', ($width - 34)).'(Author %) (Overall %) COUNT'.PHP_EOL;
-            echo str_repeat('-', $width).PHP_EOL;
+            echo 'AUTHOR' . str_repeat(' ', ($width - 34)) . '(Author %) (Overall %) COUNT' . PHP_EOL;
+            echo str_repeat('-', $width) . PHP_EOL;
         }
 
         echo "\033[0m";
@@ -264,18 +264,18 @@ abstract class VersionControl implements Report
                 $percent = round(($praiseCache[$author]['bad'] / $total * 100), 2);
             }
 
-            $overallPercent = '('.round((($count / $errorsShown) * 100), 2).')';
-            $authorPercent  = '('.$percent.')';
-            $line           = str_repeat(' ', (6 - strlen($count))).$count;
-            $line           = str_repeat(' ', (12 - strlen($overallPercent))).$overallPercent.$line;
-            $line           = str_repeat(' ', (11 - strlen($authorPercent))).$authorPercent.$line;
-            $line           = $author.str_repeat(' ', ($width - strlen($author) - strlen($line))).$line;
+            $overallPercent = '(' . round((($count / $errorsShown) * 100), 2) . ')';
+            $authorPercent  = '(' . $percent . ')';
+            $line           = str_repeat(' ', (6 - strlen($count))) . $count;
+            $line           = str_repeat(' ', (12 - strlen($overallPercent))) . $overallPercent . $line;
+            $line           = str_repeat(' ', (11 - strlen($authorPercent))) . $authorPercent . $line;
+            $line           = $author . str_repeat(' ', ($width - strlen($author) - strlen($line))) . $line;
 
             if ($showSources === true) {
                 $line = "\033[1m$line\033[0m";
             }
 
-            echo $line.PHP_EOL;
+            echo $line . PHP_EOL;
 
             if ($showSources === true && isset($sourceCache[$author]) === true) {
                 $errors = $sourceCache[$author];
@@ -294,7 +294,7 @@ abstract class VersionControl implements Report
                         $source = substr($source, 0, $maxSniffWidth);
                     }
 
-                    $line = str_repeat(' ', (5 - strlen($count))).$count;
+                    $line = str_repeat(' ', (5 - strlen($count))) . $count;
 
                     echo '         ';
                     if ($totalFixable > 0) {
@@ -316,18 +316,18 @@ abstract class VersionControl implements Report
                         echo str_repeat(' ', ($width - 14 - strlen($source)));
                     }
 
-                    echo $line.PHP_EOL;
-                }//end foreach
-            }//end if
-        }//end foreach
+                    echo $line . PHP_EOL;
+                }
+            }
+        }
 
-        echo str_repeat('-', $width).PHP_EOL;
-        echo "\033[1m".'A TOTAL OF '.$errorsShown.' SNIFF VIOLATION';
+        echo str_repeat('-', $width) . PHP_EOL;
+        echo "\033[1m" . 'A TOTAL OF ' . $errorsShown . ' SNIFF VIOLATION';
         if ($errorsShown !== 1) {
             echo 'S';
         }
 
-        echo ' WERE COMMITTED BY '.count($authorCache).' AUTHOR';
+        echo ' WERE COMMITTED BY ' . count($authorCache) . ' AUTHOR';
         if (count($authorCache) !== 1) {
             echo 'S';
         }
@@ -336,21 +336,16 @@ abstract class VersionControl implements Report
 
         if ($totalFixable > 0) {
             if ($showSources === true) {
-                echo PHP_EOL.str_repeat('-', $width).PHP_EOL;
+                echo PHP_EOL . str_repeat('-', $width) . PHP_EOL;
                 echo "\033[1mPHPCBF CAN FIX THE $fixableSources MARKED SOURCES AUTOMATICALLY ($totalFixable VIOLATIONS IN TOTAL)\033[0m";
             } else {
-                echo PHP_EOL.str_repeat('-', $width).PHP_EOL;
+                echo PHP_EOL . str_repeat('-', $width) . PHP_EOL;
                 echo "\033[1mPHPCBF CAN FIX $totalFixable OF THESE SNIFF VIOLATIONS AUTOMATICALLY\033[0m";
             }
         }
 
-        echo PHP_EOL.str_repeat('-', $width).PHP_EOL.PHP_EOL;
-
-        if ($toScreen === true && $interactive === false) {
-            Timing::printRunTime();
-        }
-
-    }//end generate()
+        echo PHP_EOL . str_repeat('-', $width) . PHP_EOL . PHP_EOL;
+    }
 
 
     /**
@@ -360,7 +355,7 @@ abstract class VersionControl implements Report
      *
      * @return mixed string or false if impossible to recover.
      */
-    abstract protected function getAuthor($line);
+    abstract protected function getAuthor(string $line);
 
 
     /**
@@ -370,7 +365,5 @@ abstract class VersionControl implements Report
      *
      * @return array
      */
-    abstract protected function getBlameContent($filename);
-
-
-}//end class
+    abstract protected function getBlameContent(string $filename);
+}

@@ -4,7 +4,8 @@
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2019 Juliette Reinders Folmer. All rights reserved.
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace;
@@ -34,13 +35,12 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
         return [T_ELLIPSIS];
-
-    }//end register()
+    }
 
 
     /**
@@ -52,13 +52,22 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
-        $tokens        = $phpcsFile->getTokens();
-        $this->spacing = (int) $this->spacing;
+        $tokens         = $phpcsFile->getTokens();
+        $this->spacing  = (int) $this->spacing;
+        $pluralizeSpace = 's';
+        if ($this->spacing === 1) {
+            $pluralizeSpace = '';
+        }
 
-        $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
         if ($nextNonEmpty === false) {
+            return;
+        }
+
+        if ($tokens[$nextNonEmpty]['code'] === T_CLOSE_PARENTHESIS) {
+            // Ignore PHP 8.1 first class callable syntax.
             return;
         }
 
@@ -76,8 +85,11 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
 
         $nextNonWhitespace = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
         if ($nextNonEmpty !== $nextNonWhitespace) {
-            $error = 'Expected %s space(s) after the spread operator; comment found';
-            $data  = [$this->spacing];
+            $error = 'Expected %s space%s after the spread operator; comment found';
+            $data  = [
+                $this->spacing,
+                $pluralizeSpace,
+            ];
             $phpcsFile->addError($error, $stackPtr, 'CommentFound', $data);
 
             if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
@@ -92,7 +104,7 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
         $found = 0;
         if ($tokens[$stackPtr]['line'] !== $tokens[$nextNonEmpty]['line']) {
             $found = 'newline';
-        } else if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
+        } elseif ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
             $found = $tokens[($stackPtr + 1)]['length'];
         }
 
@@ -102,9 +114,10 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
             return;
         }
 
-        $error = 'Expected %s space(s) after the spread operator; %s found';
+        $error = 'Expected %s space%s after the spread operator; %s found';
         $data  = [
             $this->spacing,
+            $pluralizeSpace,
             $found,
         ];
 
@@ -112,7 +125,7 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
         if ($this->spacing !== 0) {
             if ($found === 0) {
                 $errorCode = 'NoSpace';
-            } else if ($found !== 'newline' && $found < $this->spacing) {
+            } elseif ($found !== 'newline' && $found < $this->spacing) {
                 $errorCode = 'TooLittleSpace';
             }
         }
@@ -139,8 +152,5 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
                 $phpcsFile->fixer->endChangeset();
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

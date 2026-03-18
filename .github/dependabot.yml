@@ -1,0 +1,44 @@
+# Dependabot configuration.
+#
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  # Handle updates for the default branch.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "cron"
+      cronjob: "10 22 5,20 * *" # At 22:10, every 5th and 20th day of the month.
+    target-branch: "3.x"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "GH Actions:"
+    labels:
+      - "Type: chores/QA"
+    groups:
+      action-runners:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Handle updates for the orphan gh-pages branch.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "cron"
+      cronjob: "10 22 5,20 * *" # At 22:10, every 5th and 20th day of the month.
+    target-branch: "gh-pages"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "GH Pages/Actions:"
+    labels:
+      - "Type: chores/QA"
+    groups:
+      action-runners:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"

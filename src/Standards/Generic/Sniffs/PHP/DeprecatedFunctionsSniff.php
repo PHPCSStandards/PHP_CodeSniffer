@@ -4,11 +4,15 @@
  *
  * @author    Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\PHP;
+
+use PHP_CodeSniffer\Files\File;
+use ReflectionFunction;
 
 class DeprecatedFunctionsSniff extends ForbiddenFunctionsSniff
 {
@@ -34,30 +38,29 @@ class DeprecatedFunctionsSniff extends ForbiddenFunctionsSniff
         $functions = get_defined_functions();
 
         foreach ($functions['internal'] as $functionName) {
-            $function = new \ReflectionFunction($functionName);
+            $function = new ReflectionFunction($functionName);
 
             if ($function->isDeprecated() === true) {
                 $this->forbiddenFunctions[$functionName] = null;
             }
         }
-
-    }//end __construct()
+    }
 
 
     /**
      * Generates the error or warning for this sniff.
      *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param int                         $stackPtr  The position of the forbidden function
-     *                                               in the token array.
-     * @param string                      $function  The name of the forbidden function.
-     * @param string                      $pattern   The pattern used for the match.
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile    The file being scanned.
+     * @param int                         $stackPtr     The position of the forbidden function
+     *                                                  in the token array.
+     * @param string                      $functionName The name of the forbidden function.
+     * @param string|null                 $pattern      The pattern used for the match.
      *
      * @return void
      */
-    protected function addError($phpcsFile, $stackPtr, $function, $pattern=null)
+    protected function addError(File $phpcsFile, int $stackPtr, string $functionName, ?string $pattern = null)
     {
-        $data  = [$function];
+        $data  = [$functionName];
         $error = 'Function %s() has been deprecated';
         $type  = 'Deprecated';
 
@@ -66,8 +69,5 @@ class DeprecatedFunctionsSniff extends ForbiddenFunctionsSniff
         } else {
             $phpcsFile->addWarning($error, $stackPtr, $type, $data);
         }
-
-    }//end addError()
-
-
-}//end class
+    }
+}

@@ -11,15 +11,15 @@
  * </ul>
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use PHP_CodeSniffer\Util\Tokens;
 
 class ClassCommentSniff implements Sniff
 {
@@ -28,13 +28,12 @@ class ClassCommentSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
         return [T_CLASS];
-
-    }//end register()
+    }
 
 
     /**
@@ -46,13 +45,36 @@ class ClassCommentSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-        $find   = Tokens::$methodPrefixes;
-        $find[] = T_WHITESPACE;
+        $find   = [
+            T_ABSTRACT   => T_ABSTRACT,
+            T_FINAL      => T_FINAL,
+            T_READONLY   => T_READONLY,
+            T_WHITESPACE => T_WHITESPACE,
+        ];
 
-        $commentEnd = $phpcsFile->findPrevious($find, ($stackPtr - 1), null, true);
+        $previousContent = null;
+        for ($commentEnd = ($stackPtr - 1); $commentEnd >= 0; $commentEnd--) {
+            if (isset($find[$tokens[$commentEnd]['code']]) === true) {
+                continue;
+            }
+
+            if ($previousContent === null) {
+                $previousContent = $commentEnd;
+            }
+
+            if ($tokens[$commentEnd]['code'] === T_ATTRIBUTE_END
+                && isset($tokens[$commentEnd]['attribute_opener']) === true
+            ) {
+                $commentEnd = $tokens[$commentEnd]['attribute_opener'];
+                continue;
+            }
+
+            break;
+        }
+
         if ($tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG
             && $tokens[$commentEnd]['code'] !== T_COMMENT
         ) {
@@ -69,7 +91,7 @@ class ClassCommentSniff implements Sniff
             return;
         }
 
-        if ($tokens[$commentEnd]['line'] !== ($tokens[$stackPtr]['line'] - 1)) {
+        if ($tokens[$previousContent]['line'] !== ($tokens[$stackPtr]['line'] - 1)) {
             $error = 'There must be no blank lines after the class comment';
             $phpcsFile->addError($error, $commentEnd, 'SpacingAfter');
         }
@@ -80,8 +102,5 @@ class ClassCommentSniff implements Sniff
             $data  = [$tokens[$tag]['content']];
             $phpcsFile->addWarning($error, $tag, 'TagNotAllowed', $data);
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

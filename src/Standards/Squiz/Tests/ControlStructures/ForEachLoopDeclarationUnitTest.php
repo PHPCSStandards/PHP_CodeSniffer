@@ -3,15 +3,21 @@
  * Unit test class for the ForEachLoopDeclaration sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\ControlStructures;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class ForEachLoopDeclarationUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ForEachLoopDeclaration sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\ForEachLoopDeclarationSniff
+ */
+final class ForEachLoopDeclarationUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -34,8 +40,7 @@ class ForEachLoopDeclarationUnitTest extends AbstractSniffUnitTest
             26 => 2,
             28 => 2,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -49,8 +54,5 @@ class ForEachLoopDeclarationUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

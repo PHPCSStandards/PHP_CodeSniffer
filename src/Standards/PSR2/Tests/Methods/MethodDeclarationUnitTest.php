@@ -3,15 +3,21 @@
  * Unit test class for the MethodDeclaration sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR2\Tests\Methods;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class MethodDeclarationUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the MethodDeclaration sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\MethodDeclarationSniff
+ */
+final class MethodDeclarationUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -21,28 +27,36 @@ class MethodDeclarationUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the test file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile = '')
     {
-        return [
-            9  => 1,
-            11 => 1,
-            13 => 1,
-            15 => 3,
-            24 => 1,
-            34 => 1,
-            36 => 1,
-            38 => 1,
-            40 => 3,
-            50 => 1,
-            52 => 1,
-            54 => 1,
-            56 => 3,
-            63 => 2,
-        ];
+        switch ($testFile) {
+            case 'MethodDeclarationUnitTest.1.inc':
+                return [
+                    9  => 1,
+                    11 => 1,
+                    13 => 1,
+                    15 => 3,
+                    24 => 1,
+                    34 => 1,
+                    36 => 1,
+                    38 => 1,
+                    40 => 3,
+                    50 => 1,
+                    52 => 1,
+                    54 => 1,
+                    56 => 3,
+                    63 => 2,
+                    73 => 1,
+                ];
 
-    }//end getErrorList()
+            default:
+                return [];
+        }
+    }
 
 
     /**
@@ -51,19 +65,25 @@ class MethodDeclarationUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
+     * @param string $testFile The name of the test file being tested.
+     *
      * @return array<int, int>
      */
-    public function getWarningList()
+    public function getWarningList($testFile = '')
     {
-        return [
-            5  => 1,
-            21 => 1,
-            30 => 1,
-            46 => 1,
-            63 => 1,
-        ];
+        switch ($testFile) {
+            case 'MethodDeclarationUnitTest.1.inc':
+                return [
+                    5  => 1,
+                    21 => 1,
+                    30 => 1,
+                    46 => 1,
+                    63 => 1,
+                    70 => 1,
+                ];
 
-    }//end getWarningList()
-
-
-}//end class
+            default:
+                return [];
+        }
+    }
+}

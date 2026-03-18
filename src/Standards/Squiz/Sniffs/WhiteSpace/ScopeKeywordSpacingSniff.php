@@ -3,8 +3,9 @@
  * Ensure there is a single space after scope keywords.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace;
@@ -20,15 +21,15 @@ class ScopeKeywordSpacingSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
-        $register   = Tokens::$scopeModifiers;
-        $register[] = T_STATIC;
+        $register  = Tokens::METHOD_MODIFIERS;
+        $register += Tokens::SCOPE_MODIFIERS;
+        $register[T_READONLY] = T_READONLY;
         return $register;
-
-    }//end register()
+    }
 
 
     /**
@@ -40,23 +41,53 @@ class ScopeKeywordSpacingSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
-        if (isset($tokens[($stackPtr + 1)]) === false) {
+        $nextNonWhitespace = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
+        if ($nextNonWhitespace === false) {
+            // Parse error/live coding. Bow out.
             return;
         }
 
-        $prevToken = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
-        $nextToken = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $prevToken = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
+        $nextToken = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
 
-        if ($tokens[$stackPtr]['code'] === T_STATIC
-            && (($nextToken === false || $tokens[$nextToken]['code'] === T_DOUBLE_COLON)
-            || $tokens[$prevToken]['code'] === T_NEW)
-        ) {
-            // Late static binding, e.g., static:: OR new static() usage or live coding.
-            return;
+        if ($tokens[$stackPtr]['code'] === T_STATIC) {
+            if (($nextToken === false || $tokens[$nextToken]['code'] === T_DOUBLE_COLON)
+                || $tokens[$prevToken]['code'] === T_NEW
+                || $tokens[$prevToken]['code'] === T_INSTANCEOF
+            ) {
+                // Late static binding, e.g., static:: OR new static() usage or live coding.
+                return;
+            }
+
+            if ($prevToken !== false
+                && $tokens[$prevToken]['code'] === T_TYPE_UNION
+            ) {
+                // Not a scope keyword, but a union return type.
+                return;
+            }
+
+            if ($prevToken !== false
+                && $tokens[$prevToken]['code'] === T_NULLABLE
+            ) {
+                // Not a scope keyword, but a return type.
+                return;
+            }
+
+            if ($prevToken !== false
+                && $tokens[$prevToken]['code'] === T_COLON
+            ) {
+                $prevPrevToken = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($prevToken - 1), null, true);
+                if ($prevPrevToken !== false
+                    && $tokens[$prevPrevToken]['code'] === T_CLOSE_PARENTHESIS
+                ) {
+                    // Not a scope keyword, but a return type.
+                    return;
+                }
+            }
         }
 
         if ($tokens[$prevToken]['code'] === T_AS) {
@@ -64,7 +95,23 @@ class ScopeKeywordSpacingSniff implements Sniff
             return;
         }
 
-        if ($nextToken !== false && $tokens[$nextToken]['code'] === T_VARIABLE) {
+        $isInFunctionDeclaration = false;
+        if (empty($tokens[$stackPtr]['nested_parenthesis']) === false) {
+            // Check if this is PHP 8.0 constructor property promotion.
+            // In that case, we can't have multi-property definitions.
+            $nestedParens    = $tokens[$stackPtr]['nested_parenthesis'];
+            $lastCloseParens = end($nestedParens);
+            if (isset($tokens[$lastCloseParens]['parenthesis_owner']) === true
+                && $tokens[$tokens[$lastCloseParens]['parenthesis_owner']]['code'] === T_FUNCTION
+            ) {
+                $isInFunctionDeclaration = true;
+            }
+        }
+
+        if ($nextToken !== false
+            && $tokens[$nextToken]['code'] === T_VARIABLE
+            && $isInFunctionDeclaration === false
+        ) {
             $endOfStatement = $phpcsFile->findNext(T_SEMICOLON, ($nextToken + 1));
             if ($endOfStatement === false) {
                 // Live coding.
@@ -116,10 +163,7 @@ class ScopeKeywordSpacingSniff implements Sniff
                     $phpcsFile->fixer->replaceToken(($stackPtr + 1), ' ');
                     $phpcsFile->fixer->endChangeset();
                 }
-            }//end if
-        }//end if
-
-    }//end process()
-
-
-}//end class
+            }
+        }
+    }
+}

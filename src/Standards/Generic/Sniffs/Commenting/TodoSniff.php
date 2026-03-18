@@ -3,8 +3,9 @@
  * Warns about TODO comments.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Commenting;
@@ -16,27 +17,16 @@ use PHP_CodeSniffer\Util\Tokens;
 class TodoSniff implements Sniff
 {
 
-    /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
-
 
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
-        return array_diff(Tokens::$commentTokens, Tokens::$phpcsCommentTokens);
-
-    }//end register()
+        return array_diff(Tokens::COMMENT_TOKENS, Tokens::PHPCS_ANNOTATION_TOKENS);
+    }
 
 
     /**
@@ -48,7 +38,7 @@ class TodoSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -70,8 +60,5 @@ class TodoSniff implements Sniff
 
             $phpcsFile->addWarning($error, $stackPtr, $type, $data);
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

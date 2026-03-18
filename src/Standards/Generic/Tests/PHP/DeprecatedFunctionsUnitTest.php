@@ -4,14 +4,20 @@
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2019 Juliette Reinders Folmer. All rights reserved.
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class DeprecatedFunctionsUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the DeprecatedFunctions sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DeprecatedFunctionsSniff
+ */
+final class DeprecatedFunctionsUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -27,7 +33,7 @@ class DeprecatedFunctionsUnitTest extends AbstractSniffUnitTest
     {
         $errors = [];
 
-        if (PHP_VERSION_ID >= 70200 && PHP_VERSION_ID < 80000) {
+        if (PHP_VERSION_ID < 80000) {
             $errors[3] = 1;
         }
 
@@ -35,9 +41,12 @@ class DeprecatedFunctionsUnitTest extends AbstractSniffUnitTest
             $errors[4] = 1;
         }
 
-        return $errors;
+        if (PHP_VERSION_ID >= 80000) {
+            $errors[5] = 1;
+        }
 
-    }//end getErrorList()
+        return $errors;
+    }
 
 
     /**
@@ -51,8 +60,5 @@ class DeprecatedFunctionsUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

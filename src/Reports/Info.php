@@ -3,14 +3,14 @@
  * Info report for PHP_CodeSniffer.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Util\Timing;
 
 class Info implements Report
 {
@@ -23,29 +23,29 @@ class Info implements Report
      * and FALSE if it ignored the file. Returning TRUE indicates that the file and
      * its data should be counted in the grand totals.
      *
-     * @param array                 $report      Prepared report data.
-     * @param \PHP_CodeSniffer\File $phpcsFile   The file being reported on.
-     * @param bool                  $showSources Show sources?
-     * @param int                   $width       Maximum allowed line width.
+     * @param array<string, string|int|array> $report      Prepared report data.
+     *                                                     See the {@see Report} interface for a detailed specification.
+     * @param \PHP_CodeSniffer\Files\File     $phpcsFile   The file being reported on.
+     * @param bool                            $showSources Show sources?
+     * @param int                             $width       Maximum allowed line width.
      *
      * @return bool
      */
-    public function generateFileReport($report, File $phpcsFile, $showSources=false, $width=80)
+    public function generateFileReport(array $report, File $phpcsFile, bool $showSources = false, int $width = 80)
     {
         $metrics = $phpcsFile->getMetrics();
         foreach ($metrics as $metric => $data) {
             foreach ($data['values'] as $value => $count) {
-                echo "$metric>>$value>>$count".PHP_EOL;
+                echo "$metric>>$value>>$count" . PHP_EOL;
             }
         }
 
         return true;
-
-    }//end generateFileReport()
+    }
 
 
     /**
-     * Prints the source of all errors and warnings.
+     * Prints the recorded metrics.
      *
      * @param string $cachedData    Any partial report data that was returned from
      *                              generateFileReport during the run.
@@ -61,15 +61,15 @@ class Info implements Report
      * @return void
      */
     public function generate(
-        $cachedData,
-        $totalFiles,
-        $totalErrors,
-        $totalWarnings,
-        $totalFixable,
-        $showSources=false,
-        $width=80,
-        $interactive=false,
-        $toScreen=true
+        string $cachedData,
+        int $totalFiles,
+        int $totalErrors,
+        int $totalWarnings,
+        int $totalFixable,
+        bool $showSources = false,
+        int $width = 80,
+        bool $interactive = false,
+        bool $toScreen = true
     ) {
         $lines = explode(PHP_EOL, $cachedData);
         array_pop($lines);
@@ -97,15 +97,15 @@ class Info implements Report
 
         ksort($metrics);
 
-        echo PHP_EOL."\033[1m".'PHP CODE SNIFFER INFORMATION REPORT'."\033[0m".PHP_EOL;
-        echo str_repeat('-', 70).PHP_EOL;
+        echo PHP_EOL . "\033[1m" . 'PHP CODE SNIFFER INFORMATION REPORT' . "\033[0m" . PHP_EOL;
+        echo str_repeat('-', 70) . PHP_EOL;
 
         foreach ($metrics as $metric => $values) {
             if (count($values) === 1) {
                 $count = reset($values);
                 $value = key($values);
 
-                echo "$metric: \033[4m$value\033[0m [$count/$count, 100%]".PHP_EOL;
+                echo "$metric: \033[4m$value\033[0m [$count/$count, 100%]" . PHP_EOL;
             } else {
                 $totalCount = 0;
                 $valueWidth = 0;
@@ -123,7 +123,7 @@ class Info implements Report
                 // Account for 'total' line.
                 $valueWidth = max(5, $valueWidth);
 
-                echo "$metric:".PHP_EOL;
+                echo "$metric:" . PHP_EOL;
 
                 ksort($values, SORT_NATURAL);
                 arsort($values);
@@ -141,7 +141,7 @@ class Info implements Report
                     }
 
                     printf(
-                        "\t%-{$valueWidth}s => %{$countWidth}s (%{$percentPrefixWidth}s%{$percentWidth}.2f%%)".PHP_EOL,
+                        "\t%-{$valueWidth}s => %{$countWidth}s (%{$percentPrefixWidth}s%{$percentWidth}.2f%%)" . PHP_EOL,
                         $value,
                         number_format($count),
                         $percentPrefix,
@@ -149,24 +149,17 @@ class Info implements Report
                     );
                 }
 
-                echo "\t".str_repeat('-', ($valueWidth + $countWidth + 15)).PHP_EOL;
+                echo "\t" . str_repeat('-', ($valueWidth + $countWidth + 15)) . PHP_EOL;
                 printf(
-                    "\t%-{$valueWidth}s => %{$countWidth}s (100.00%%)".PHP_EOL,
+                    "\t%-{$valueWidth}s => %{$countWidth}s (100.00%%)" . PHP_EOL,
                     'total',
                     number_format($totalCount)
                 );
-            }//end if
+            }
 
             echo PHP_EOL;
-        }//end foreach
-
-        echo str_repeat('-', 70).PHP_EOL;
-
-        if ($toScreen === true && $interactive === false) {
-            Timing::printRunTime();
         }
 
-    }//end generate()
-
-
-}//end class
+        echo str_repeat('-', 70) . PHP_EOL;
+    }
+}

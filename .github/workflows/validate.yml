@@ -1,0 +1,167 @@
+name: Validate
+
+on:
+  # Run on all pushes and on all pull requests.
+  push:
+  pull_request:
+  # Allow manually triggering the workflow.
+  workflow_dispatch:
+
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  phpcs:
+    name: Check PHP code style
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@44454db4f0199b8b9685a5d763dc37cbf79108e1 # 2.36.0
+        with:
+          php-version: 'latest'
+          coverage: none
+          tools: cs2pr
+
+      - name: Check PHP code style
+        id: phpcs
+        run: php "bin/phpcs" --report-full --report-checkstyle=./phpcs-report.xml
+
+      - name: Show PHPCS results in PR
+        if: ${{ always() && steps.phpcs.outcome == 'failure' }}
+        run: cs2pr ./phpcs-report.xml
+
+  checkxml:
+    name: Check XML files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      # Validate the XSD file.
+      - name: Validate XSD against schema
+        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
+        with:
+          pattern: "phpcs.xsd"
+          xsd-url: "https://www.w3.org/2012/04/XMLSchema.xsd"
+
+      # Validate the XML ruleset files.
+      - name: Validate rulesets against schema
+        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
+        with:
+          pattern: "./src/Standards/*/ruleset.xml"
+          xsd-file: "phpcs.xsd"
+
+      # Validate the Documentation XML files.
+      - name: Validate documentation XML
+        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
+        with:
+          pattern: "./src/Standards/*/Docs/*/*Standard.xml"
+          xsd-url: "https://phpcsstandards.github.io/PHPCSDevTools/phpcsdocs.xsd"
+
+      # Validate dev tool related XML files.
+      - name: Validate Project PHPCS ruleset against schema
+        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
+        with:
+          pattern: "phpcs.xml.dist"
+          xsd-file: "phpcs.xsd"
+
+      - name: "Validate PHPUnit <= 9 config for well-formedness"
+        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
+        with:
+          pattern: "phpunit-lte9.xml.dist"
+
+      - name: "Validate PHPUnit 10+ config for well-formedness"
+        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
+        with:
+          pattern: "phpunit.xml.dist"
+
+  xml-cs:
+    name: 'XML Code style'
+    runs-on: ubuntu-latest
+
+    env:
+      XMLLINT_INDENT: '    '
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      # Updating the lists can fail intermittently, typically after Microsoft has released a new package.
+      # This should not be blocking for this job, so ignore any errors from this step.
+      # Ref: https://github.com/dotnet/core/issues/4167
+      - name: Update the available packages list
+        continue-on-error: true
+        run: sudo apt-get update
+
+      - name: Install xmllint
+        run: sudo apt-get install --no-install-recommends -y libxml2-utils
+
+      # Show XML violations inline in the file diff.
+      - name: Enable showing XML issues inline
+        uses: korelstar/xmllint-problem-matcher@1bd292d642ddf3d369d02aaa8b262834d61198c0 # v1.2.0
+
+      # Check the code-style consistency of the XML files.
+      - name: Check XML code style
+        run: |
+          diff -B ./phpcs.xml.dist <(xmllint --format "./phpcs.xml.dist")
+          diff -B ./src/Standards/Generic/ruleset.xml <(xmllint --format "./src/Standards/Generic/ruleset.xml")
+          diff -B ./src/Standards/PEAR/ruleset.xml <(xmllint --format "./src/Standards/PEAR/ruleset.xml")
+          diff -B ./src/Standards/PSR1/ruleset.xml <(xmllint --format "./src/Standards/PSR1/ruleset.xml")
+          diff -B ./src/Standards/PSR2/ruleset.xml <(xmllint --format "./src/Standards/PSR2/ruleset.xml")
+          diff -B ./src/Standards/PSR12/ruleset.xml <(xmllint --format "./src/Standards/PSR12/ruleset.xml")
+          diff -B ./src/Standards/Squiz/ruleset.xml <(xmllint --format "./src/Standards/Squiz/ruleset.xml")
+          diff -B ./src/Standards/Zend/ruleset.xml <(xmllint --format "./src/Standards/Zend/ruleset.xml")
+
+  yamllint:
+    name: 'Lint Yaml'
+    uses: PHPCSStandards/.github/.github/workflows/reusable-yamllint.yml@0d44fe2771ae7bc1254a0a4ec596d8110d16d3dc # v1.1.1
+    with:
+      strict: true
+
+  markdownlint:
+    name: 'Lint Markdown'
+    uses: PHPCSStandards/.github/.github/workflows/reusable-markdownlint.yml@0d44fe2771ae7bc1254a0a4ec596d8110d16d3dc # v1.1.1
+
+  remark:
+    name: 'QA Markdown'
+    uses: PHPCSStandards/.github/.github/workflows/reusable-remark.yml@0d44fe2771ae7bc1254a0a4ec596d8110d16d3dc # v1.1.1
+
+  shellcheck:
+    name: 'ShellCheck'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Set up problem matcher
+        uses: lumaxis/shellcheck-problem-matchers@b02a1715a00c729b20eed3ebb7edf56fa9a433ba # v2.1.0
+        with:
+          format: gcc
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@00cae500b08a931fb5698e11e79bfbd38e612a38 # 2.0.0
+        with:
+          format: gcc
+
+  find-token-properties:
+    # The properties in the Tokens class have been deprecated.
+    # The code in this repository should always use the constants instead.
+    name: 'Find use of Tokens properties'
+    uses: PHPCSStandards/.github/.github/workflows/reusable-findtokenprops.yml@a06ac9fa50dcd1d98cc581e9a4e331363a69ea09 # v1.1.0

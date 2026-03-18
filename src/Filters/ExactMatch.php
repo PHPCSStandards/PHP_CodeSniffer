@@ -2,16 +2,17 @@
 /**
  * An abstract filter class for checking files and folders against exact matches.
  *
- * Supports both whitelists and blacklists.
+ * Supports both allowed files and disallowed files.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Filters;
 
-use PHP_CodeSniffer\Util;
+use PHP_CodeSniffer\Util\Common;
 
 abstract class ExactMatch extends Filter
 {
@@ -21,22 +22,22 @@ abstract class ExactMatch extends Filter
      *
      * @var array
      */
-    private $blacklist = null;
+    private $disallowedFiles = null;
 
     /**
      * A list of files to include.
      *
-     * If the whitelist is empty, only files in the blacklist will be excluded.
+     * If the allowed files list is empty, only files in the disallowed files list will be excluded.
      *
      * @var array
      */
-    private $whitelist = null;
+    private $allowedFiles = null;
 
 
     /**
      * Check whether the current element of the iterator is acceptable.
      *
-     * If a file is both blacklisted and whitelisted, it will be deemed unacceptable.
+     * If a file is both disallowed and allowed, it will be deemed unacceptable.
      *
      * @return bool
      */
@@ -46,63 +47,63 @@ abstract class ExactMatch extends Filter
             return false;
         }
 
-        if ($this->blacklist === null) {
-            $this->blacklist = $this->getblacklist();
+        if ($this->disallowedFiles === null) {
+            $this->disallowedFiles = $this->getDisallowedFiles();
         }
 
-        if ($this->whitelist === null) {
-            $this->whitelist = $this->getwhitelist();
+        if ($this->allowedFiles === null) {
+            $this->allowedFiles = $this->getAllowedFiles();
         }
 
-        $filePath = Util\Common::realpath($this->current());
+        $filePath = Common::realpath($this->current());
 
-        // If file is both blacklisted and whitelisted, the blacklist takes precedence.
-        if (isset($this->blacklist[$filePath]) === true) {
+        // If a file is both disallowed and allowed, the disallowed files list takes precedence.
+        if (isset($this->disallowedFiles[$filePath]) === true) {
             return false;
         }
 
-        if (empty($this->whitelist) === true && empty($this->blacklist) === false) {
-            // We are only checking a blacklist, so everything else should be whitelisted.
+        if (empty($this->allowedFiles) === true && empty($this->disallowedFiles) === false) {
+            // We are only checking the disallowed files list, so everything else should be allowed.
             return true;
         }
 
-        return isset($this->whitelist[$filePath]);
-
-    }//end accept()
+        return isset($this->allowedFiles[$filePath]);
+    }
 
 
     /**
      * Returns an iterator for the current entry.
      *
-     * Ensures that the blacklist and whitelist are preserved so they don't have
+     * Ensures that the disallowed files list and the allowed files list are preserved so they don't have
      * to be generated each time.
      *
      * @return \RecursiveIterator
      */
     public function getChildren()
     {
-        $children            = parent::getChildren();
-        $children->blacklist = $this->blacklist;
-        $children->whitelist = $this->whitelist;
+        $children = parent::getChildren();
+        $children->disallowedFiles = $this->disallowedFiles;
+        $children->allowedFiles    = $this->allowedFiles;
         return $children;
-
-    }//end getChildren()
-
-
-    /**
-     * Get a list of blacklisted file paths.
-     *
-     * @return array
-     */
-    abstract protected function getBlacklist();
+    }
 
 
     /**
-     * Get a list of whitelisted file paths.
+     * Get a list of file paths to exclude.
+     *
+     * @since 3.9.0 Replaces the `getBlacklist()` method, which was removed in PHPCS 4.0.0.
      *
      * @return array
      */
-    abstract protected function getWhitelist();
+    abstract protected function getDisallowedFiles();
 
 
-}//end class
+    /**
+     * Get a list of file paths to include.
+     *
+     * @since 3.9.0 Replaces the `getWhitelist()` method, which was removed in PHPCS 4.0.0.
+     *
+     * @return array
+     */
+    abstract protected function getAllowedFiles();
+}

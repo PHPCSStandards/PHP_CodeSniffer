@@ -3,15 +3,22 @@
  * Unit test class for the ScopeIndent sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\WhiteSpace;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Config;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class ScopeIndentUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the ScopeIndent sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\ScopeIndentSniff
+ */
+final class ScopeIndentUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -23,16 +30,17 @@ class ScopeIndentUnitTest extends AbstractSniffUnitTest
      *
      * @return void
      */
-    public function setCliValues($testFile, $config)
+    public function setCliValues(string $testFile, Config $config)
     {
+        $config->setConfigData('scope_indent_debug', '0', true);
+
         // Tab width setting is only needed for the tabbed file.
         if ($testFile === 'ScopeIndentUnitTest.2.inc') {
             $config->tabWidth = 4;
         } else {
             $config->tabWidth = 0;
         }
-
-    }//end setCliValues()
+    }
 
 
     /**
@@ -45,40 +53,14 @@ class ScopeIndentUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='ScopeIndentUnitTest.inc')
+    public function getErrorList($testFile = '')
     {
-        if ($testFile === 'ScopeIndentUnitTest.1.js') {
-            return [
-                6   => 1,
-                14  => 1,
-                21  => 1,
-                30  => 1,
-                32  => 1,
-                33  => 1,
-                34  => 1,
-                39  => 1,
-                42  => 1,
-                59  => 1,
-                60  => 1,
-                75  => 1,
-                120 => 1,
-                121 => 1,
-                122 => 1,
-                123 => 1,
-                141 => 1,
-                142 => 1,
-                155 => 1,
-                156 => 1,
-                168 => 1,
-                184 => 1,
-            ];
-        }//end if
-
         if ($testFile === 'ScopeIndentUnitTest.3.inc') {
             return [
                 6  => 1,
                 7  => 1,
                 10 => 1,
+                33 => 1,
             ];
         }
 
@@ -178,13 +160,21 @@ class ScopeIndentUnitTest extends AbstractSniffUnitTest
             1340 => 1,
             1342 => 1,
             1345 => 1,
-            1473 => 1,
-            1474 => 1,
-            1475 => 1,
-            1476 => 1,
+            1488 => 1,
+            1489 => 1,
+            1500 => 1,
+            1503 => 1,
+            1518 => 1,
+            1520 => 1,
+            1527 => 1,
+            1529 => 1,
+            1530 => 1,
+            1659 => 1,
+            1660 => 1,
+            1661 => 1,
+            1662 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -198,8 +188,5 @@ class ScopeIndentUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

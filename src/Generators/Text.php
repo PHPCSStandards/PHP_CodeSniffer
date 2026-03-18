@@ -5,11 +5,15 @@
  * Output is designed to be displayed in a terminal and is wrapped to 100 characters.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Generators;
+
+use DOMElement;
 
 class Text extends Generator
 {
@@ -18,236 +22,207 @@ class Text extends Generator
     /**
      * Process the documentation for a single sniff.
      *
-     * @param \DOMNode $doc The DOMNode object for the sniff.
-     *                      It represents the "documentation" tag in the XML
-     *                      standard file.
+     * @param \DOMElement $doc The DOMElement object for the sniff.
+     *                         It represents the "documentation" tag in the XML
+     *                         standard file.
      *
      * @return void
      */
-    public function processSniff(\DOMNode $doc)
+    public function processSniff(DOMElement $doc)
     {
-        $this->printTitle($doc);
-
+        $content = '';
         foreach ($doc->childNodes as $node) {
             if ($node->nodeName === 'standard') {
-                $this->printTextBlock($node);
-            } else if ($node->nodeName === 'code_comparison') {
-                $this->printCodeComparisonBlock($node);
+                $content .= $this->getFormattedTextBlock($node);
+            } elseif ($node->nodeName === 'code_comparison') {
+                $content .= $this->getFormattedCodeComparisonBlock($node);
             }
         }
 
-    }//end processSniff()
+        if (trim($content) !== '') {
+            echo $this->getFormattedTitle($doc), $content;
+        }
+    }
 
 
     /**
-     * Prints the title area for a single sniff.
+     * Format the title area for a single sniff.
      *
-     * @param \DOMNode $doc The DOMNode object for the sniff.
-     *                      It represents the "documentation" tag in the XML
-     *                      standard file.
+     * @param \DOMElement $doc The DOMElement object for the sniff.
+     *                         It represents the "documentation" tag in the XML
+     *                         standard file.
      *
-     * @return void
+     * @since 3.12.0 Replaces the Text::printTitle() method,
+     *               which was deprecated in 3.12.0 and removed in 4.0.0.
+     *
+     * @return string
      */
-    protected function printTitle(\DOMNode $doc)
+    protected function getFormattedTitle(DOMElement $doc)
     {
-        $title    = $this->getTitle($doc);
-        $standard = $this->ruleset->name;
+        $title        = $this->getTitle($doc);
+        $standard     = $this->ruleset->name;
+        $displayTitle = "$standard CODING STANDARD: $title";
+        $titleLength  = strlen($displayTitle);
 
-        echo PHP_EOL;
-        echo str_repeat('-', (strlen("$standard CODING STANDARD: $title") + 4));
-        echo strtoupper(PHP_EOL."| $standard CODING STANDARD: $title |".PHP_EOL);
-        echo str_repeat('-', (strlen("$standard CODING STANDARD: $title") + 4));
-        echo PHP_EOL.PHP_EOL;
+        $output  = PHP_EOL;
+        $output .= str_repeat('-', ($titleLength + 4));
+        $output .= strtoupper(PHP_EOL . "| $displayTitle |" . PHP_EOL);
+        $output .= str_repeat('-', ($titleLength + 4));
+        $output .= PHP_EOL . PHP_EOL;
 
-    }//end printTitle()
+        return $output;
+    }
 
 
     /**
-     * Print a text block found in a standard.
+     * Format a text block found in a standard.
      *
-     * @param \DOMNode $node The DOMNode object for the text block.
+     * @param \DOMElement $node The DOMElement object for the text block.
      *
-     * @return void
+     * @since 3.12.0 Replaces the Text::printTextBlock() method,
+     *               which was deprecated in 3.12.0 and removed in 4.0.0.
+     *
+     * @return string
      */
-    protected function printTextBlock(\DOMNode $node)
+    protected function getFormattedTextBlock(DOMElement $node)
     {
-        $text = trim($node->nodeValue);
-        $text = str_replace('<em>', '*', $text);
-        $text = str_replace('</em>', '*', $text);
+        $text = $node->nodeValue;
+        if (empty($text) === true) {
+            return '';
+        }
+
+        $text = trim($text);
+        $text = str_replace(['<em>', '</em>'], '*', $text);
 
         $nodeLines = explode("\n", $text);
-        $lines     = [];
+        $nodeLines = array_map('trim', $nodeLines);
+        $text      = implode(PHP_EOL, $nodeLines);
 
-        foreach ($nodeLines as $currentLine) {
-            $currentLine = trim($currentLine);
-            if ($currentLine === '') {
-                // The text contained a blank line. Respect this.
-                $lines[] = '';
-                continue;
-            }
-
-            $tempLine = '';
-            $words    = explode(' ', $currentLine);
-
-            foreach ($words as $word) {
-                $currentLength = strlen($tempLine.$word);
-                if ($currentLength < 99) {
-                    $tempLine .= $word.' ';
-                    continue;
-                }
-
-                if ($currentLength === 99 || $currentLength === 100) {
-                    // We are already at the edge, so we are done.
-                    $lines[]  = $tempLine.$word;
-                    $tempLine = '';
-                } else {
-                    $lines[]  = rtrim($tempLine);
-                    $tempLine = $word.' ';
-                }
-            }//end foreach
-
-            if ($tempLine !== '') {
-                $lines[] = rtrim($tempLine);
-            }
-        }//end foreach
-
-        echo implode(PHP_EOL, $lines).PHP_EOL.PHP_EOL;
-
-    }//end printTextBlock()
+        return wordwrap($text, 100, PHP_EOL) . PHP_EOL . PHP_EOL;
+    }
 
 
     /**
-     * Print a code comparison block found in a standard.
+     * Format a code comparison block found in a standard.
      *
-     * @param \DOMNode $node The DOMNode object for the code comparison block.
+     * @param \DOMElement $node The DOMElement object for the code comparison block.
      *
-     * @return void
+     * @since 3.12.0 Replaces the Text::printCodeComparisonBlock() method,
+     *               which was deprecated in 3.12.0 and removed in 4.0.0.
+     *
+     * @return string
      */
-    protected function printCodeComparisonBlock(\DOMNode $node)
+    protected function getFormattedCodeComparisonBlock(DOMElement $node)
     {
-        $codeBlocks = $node->getElementsByTagName('code');
-        $first      = trim($codeBlocks->item(0)->nodeValue);
-        $firstTitle = $codeBlocks->item(0)->getAttribute('title');
+        $codeBlocks    = $node->getElementsByTagName('code');
+        $firstCodeElm  = $codeBlocks->item(0);
+        $secondCodeElm = $codeBlocks->item(1);
 
-        $firstTitleLines = [];
-        $tempTitle       = '';
-        $words           = explode(' ', $firstTitle);
-
-        foreach ($words as $word) {
-            if (strlen($tempTitle.$word) >= 45) {
-                if (strlen($tempTitle.$word) === 45) {
-                    // Adding the extra space will push us to the edge
-                    // so we are done.
-                    $firstTitleLines[] = $tempTitle.$word;
-                    $tempTitle         = '';
-                } else if (strlen($tempTitle.$word) === 46) {
-                    // We are already at the edge, so we are done.
-                    $firstTitleLines[] = $tempTitle.$word;
-                    $tempTitle         = '';
-                } else {
-                    $firstTitleLines[] = $tempTitle;
-                    $tempTitle         = $word.' ';
-                }
-            } else {
-                $tempTitle .= $word.' ';
-            }
-        }//end foreach
-
-        if ($tempTitle !== '') {
-            $firstTitleLines[] = $tempTitle;
+        if (isset($firstCodeElm, $secondCodeElm) === false) {
+            // Missing at least one code block.
+            return '';
         }
 
-        $first      = str_replace('<em>', '', $first);
-        $first      = str_replace('</em>', '', $first);
-        $firstLines = explode("\n", $first);
+        $firstTitleLines = $this->codeTitleToLines($firstCodeElm);
+        $firstLines      = $this->codeToLines($firstCodeElm);
 
-        $second      = trim($codeBlocks->item(1)->nodeValue);
-        $secondTitle = $codeBlocks->item(1)->getAttribute('title');
+        $secondTitleLines = $this->codeTitleToLines($secondCodeElm);
+        $secondLines      = $this->codeToLines($secondCodeElm);
 
-        $secondTitleLines = [];
-        $tempTitle        = '';
-        $words            = explode(' ', $secondTitle);
-
-        foreach ($words as $word) {
-            if (strlen($tempTitle.$word) >= 45) {
-                if (strlen($tempTitle.$word) === 45) {
-                    // Adding the extra space will push us to the edge
-                    // so we are done.
-                    $secondTitleLines[] = $tempTitle.$word;
-                    $tempTitle          = '';
-                } else if (strlen($tempTitle.$word) === 46) {
-                    // We are already at the edge, so we are done.
-                    $secondTitleLines[] = $tempTitle.$word;
-                    $tempTitle          = '';
-                } else {
-                    $secondTitleLines[] = $tempTitle;
-                    $tempTitle          = $word.' ';
-                }
-            } else {
-                $tempTitle .= $word.' ';
-            }
-        }//end foreach
-
-        if ($tempTitle !== '') {
-            $secondTitleLines[] = $tempTitle;
+        $titleRow = '';
+        if ($firstTitleLines !== [] || $secondTitleLines !== []) {
+            $titleRow  = $this->linesToTableRows($firstTitleLines, $secondTitleLines);
+            $titleRow .= str_repeat('-', 100) . PHP_EOL;
         }
 
-        $second      = str_replace('<em>', '', $second);
-        $second      = str_replace('</em>', '', $second);
-        $secondLines = explode("\n", $second);
+        $codeRow = '';
+        if ($firstLines !== [] || $secondLines !== []) {
+            $codeRow  = $this->linesToTableRows($firstLines, $secondLines);
+            $codeRow .= str_repeat('-', 100) . PHP_EOL . PHP_EOL;
+        }
 
-        $maxCodeLines  = max(count($firstLines), count($secondLines));
-        $maxTitleLines = max(count($firstTitleLines), count($secondTitleLines));
+        $output = '';
+        if ($titleRow !== '' || $codeRow !== '') {
+            $output  = str_repeat('-', 41);
+            $output .= ' CODE COMPARISON ';
+            $output .= str_repeat('-', 42) . PHP_EOL;
+            $output .= $titleRow;
+            $output .= $codeRow;
+        }
 
-        echo str_repeat('-', 41);
-        echo ' CODE COMPARISON ';
-        echo str_repeat('-', 42).PHP_EOL;
-
-        for ($i = 0; $i < $maxTitleLines; $i++) {
-            if (isset($firstTitleLines[$i]) === true) {
-                $firstLineText = $firstTitleLines[$i];
-            } else {
-                $firstLineText = '';
-            }
-
-            if (isset($secondTitleLines[$i]) === true) {
-                $secondLineText = $secondTitleLines[$i];
-            } else {
-                $secondLineText = '';
-            }
-
-            echo '| ';
-            echo $firstLineText.str_repeat(' ', (46 - strlen($firstLineText)));
-            echo ' | ';
-            echo $secondLineText.str_repeat(' ', (47 - strlen($secondLineText)));
-            echo ' |'.PHP_EOL;
-        }//end for
-
-        echo str_repeat('-', 100).PHP_EOL;
-
-        for ($i = 0; $i < $maxCodeLines; $i++) {
-            if (isset($firstLines[$i]) === true) {
-                $firstLineText = $firstLines[$i];
-            } else {
-                $firstLineText = '';
-            }
-
-            if (isset($secondLines[$i]) === true) {
-                $secondLineText = $secondLines[$i];
-            } else {
-                $secondLineText = '';
-            }
-
-            echo '| ';
-            echo $firstLineText.str_repeat(' ', max(0, (47 - strlen($firstLineText))));
-            echo '| ';
-            echo $secondLineText.str_repeat(' ', max(0, (48 - strlen($secondLineText))));
-            echo '|'.PHP_EOL;
-        }//end for
-
-        echo str_repeat('-', 100).PHP_EOL.PHP_EOL;
-
-    }//end printCodeComparisonBlock()
+        return $output;
+    }
 
 
-}//end class
+    /**
+     * Retrieve a code block title and split it into lines for use in an ASCII table.
+     *
+     * @param \DOMElement $codeElm The DOMElement object for a code block.
+     *
+     * @since 3.12.0
+     *
+     * @return array<string>
+     */
+    private function codeTitleToLines(DOMElement $codeElm)
+    {
+        $title = trim($codeElm->getAttribute('title'));
+        if ($title === '') {
+            return [];
+        }
+
+        $title = wordwrap($title, 46, "\n");
+
+        return explode("\n", $title);
+    }
+
+
+    /**
+     * Retrieve a code block contents and split it into lines for use in an ASCII table.
+     *
+     * @param \DOMElement $codeElm The DOMElement object for a code block.
+     *
+     * @since 3.12.0
+     *
+     * @return array<string>
+     */
+    private function codeToLines(DOMElement $codeElm)
+    {
+        $code = trim($codeElm->nodeValue);
+        if ($code === '') {
+            return [];
+        }
+
+        $code = str_replace(['<em>', '</em>'], '', $code);
+        return explode("\n", $code);
+    }
+
+
+    /**
+     * Transform two sets of text lines into rows for use in an ASCII table.
+     *
+     * The sets may not contains an equal amount of lines, while the resulting rows should.
+     *
+     * @param array<string> $column1Lines Lines of text to place in column 1.
+     * @param array<string> $column2Lines Lines of text to place in column 2.
+     *
+     * @return string
+     */
+    private function linesToTableRows(array $column1Lines, array $column2Lines)
+    {
+        $maxLines = max(count($column1Lines), count($column2Lines));
+
+        $rows = '';
+        for ($i = 0; $i < $maxLines; $i++) {
+            $column1Text = ($column1Lines[$i] ?? '');
+            $column2Text = ($column2Lines[$i] ?? '');
+
+            $rows .= '| ';
+            $rows .= $column1Text . str_repeat(' ', max(0, (47 - strlen($column1Text))));
+            $rows .= '| ';
+            $rows .= $column2Text . str_repeat(' ', max(0, (48 - strlen($column2Text))));
+            $rows .= '|' . PHP_EOL;
+        }
+
+        return $rows;
+    }
+}

@@ -3,15 +3,21 @@
  * Unit test class for the FunctionCallSignature sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR2\Tests\Methods;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class FunctionCallSignatureUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the FunctionCallSignature sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\FunctionCallSignatureSniff
+ */
+final class FunctionCallSignatureUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -35,20 +41,19 @@ class FunctionCallSignatureUnitTest extends AbstractSniffUnitTest
             103 => 1,
             111 => 1,
             117 => 4,
-            121 => 1,
-            125 => 1,
-            129 => 1,
-            133 => 1,
-            138 => 1,
-            146 => 1,
-            150 => 1,
-            154 => 1,
-            158 => 1,
-            162 => 1,
-            167 => 1,
-            172 => 1,
+            123 => 1,
+            127 => 1,
+            131 => 1,
+            136 => 1,
+            143 => 1,
+            148 => 1,
+            152 => 1,
+            156 => 1,
+            160 => 1,
+            165 => 1,
+            170 => 1,
             175 => 1,
-            178 => 1,
+            178 => 2,
             186 => 1,
             187 => 1,
             194 => 3,
@@ -67,9 +72,18 @@ class FunctionCallSignatureUnitTest extends AbstractSniffUnitTest
             234 => 1,
             242 => 1,
             243 => 1,
+            256 => 1,
+            257 => 1,
+            258 => 1,
+            263 => 1,
+            264 => 1,
+            278 => 2,
+            279 => 2,
+            280 => 1,
+            281 => 1,
+            282 => 3,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -83,8 +97,5 @@ class FunctionCallSignatureUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

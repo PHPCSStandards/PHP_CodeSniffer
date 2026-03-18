@@ -63,3 +63,7 @@ $var = array(
 );
 
 (bool) $a ? echo $b : echo $c;
+
+(void) callMe();
+(void)(bool) callMe();
+   (void) callMe(); // Indentation whitespace before should be and will be ignored.

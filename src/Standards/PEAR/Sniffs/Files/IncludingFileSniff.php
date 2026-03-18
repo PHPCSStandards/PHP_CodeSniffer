@@ -5,8 +5,9 @@
  * Also checks that brackets do not surround the file being included.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PEAR\Sniffs\Files;
@@ -22,7 +23,7 @@ class IncludingFileSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
@@ -32,8 +33,7 @@ class IncludingFileSniff implements Sniff
             T_REQUIRE,
             T_INCLUDE,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -45,11 +45,11 @@ class IncludingFileSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
-        $nextToken = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $nextToken = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
         if ($tokens[$nextToken]['code'] === T_OPEN_PARENTHESIS) {
             $error = '"%s" is a statement not a function; no parentheses are required';
             $data  = [$tokens[$stackPtr]['content']];
@@ -87,8 +87,8 @@ class IncludingFileSniff implements Sniff
         // Check to see if they are assigning the return value of this
         // including call. If they are then they are probably checking it, so
         // it's conditional.
-        $previous = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
-        if (isset(Tokens::$assignmentTokens[$tokens[$previous]['code']]) === true) {
+        $previous = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
+        if (isset(Tokens::ASSIGNMENT_TOKENS[$tokens[$previous]['code']]) === true) {
             // The have assigned the return value to it, so its conditional.
             $inCondition = true;
         }
@@ -103,7 +103,7 @@ class IncludingFileSniff implements Sniff
                 if ($fix === true) {
                     $phpcsFile->fixer->replaceToken($stackPtr, 'include_once');
                 }
-            } else if ($tokenCode === T_REQUIRE) {
+            } elseif ($tokenCode === T_REQUIRE) {
                 $error  = 'File is being conditionally included; ';
                 $error .= 'use "include" instead';
                 $fix    = $phpcsFile->addFixableError($error, $stackPtr, 'UseInclude');
@@ -120,7 +120,7 @@ class IncludingFileSniff implements Sniff
                 if ($fix === true) {
                     $phpcsFile->fixer->replaceToken($stackPtr, 'require_once');
                 }
-            } else if ($tokenCode === T_INCLUDE) {
+            } elseif ($tokenCode === T_INCLUDE) {
                 $error  = 'File is being unconditionally included; ';
                 $error .= 'use "require" instead';
                 $fix    = $phpcsFile->addFixableError($error, $stackPtr, 'UseRequire');
@@ -128,9 +128,6 @@ class IncludingFileSniff implements Sniff
                     $phpcsFile->fixer->replaceToken($stackPtr, 'require');
                 }
             }
-        }//end if
-
-    }//end process()
-
-
-}//end class
+        }
+    }
+}

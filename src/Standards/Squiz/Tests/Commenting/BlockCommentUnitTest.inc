@@ -256,3 +256,85 @@ $y = 10 + /* test */ -2;
 /*
  * No blank line allowed above the comment if it's the first non-empty token after a PHP open tag.
  */
+
+?>
+<?=
+/*
+ * No blank line required above the comment if it's the first non-empty token after a PHP open tag.
+ */
+
+$contentToEcho
+?>
+<?=
+
+
+/*
+ * No blank line allowed above the comment if it's the first non-empty token after a PHP open tag.
+ */
+$contentToEcho
+
+/**
+ * Comment should be ignored, even though there is an attribute between the docblock and the class declaration.
+ */
+
+#[AttributeA]
+
+final class MyClass
+{
+    /**
+     * Comment should be ignored, even though there is an attribute between the docblock and the function declaration
+     */
+    #[AttributeA]
+    #[AttributeB]
+    final public function test() {}
+}
+
+/**
+ * Comment should be ignored.
+ */
+abstract class MyClass
+{
+    /**
+     * Comment should be ignored.
+     */
+    readonly public string $prop;
+}
+
+/**
+ * Comment should be ignored
+ *
+ */
+enum MyEnum {
+
+}
+
+class FinalProperties {
+    /**
+     * Comment should be ignored.
+     */
+    final int $prop = 1;
+}
+
+class AsymVisibility {
+    /**
+     * Comment should be ignored.
+     */
+    public(set) int $prop = 1;
+
+    /**
+     * Comment should be ignored.
+     */
+    protected(set) int $prop = 1;
+
+    /**
+     * Comment should be ignored.
+     */
+    private(set) int $prop = 1;
+}
+
+abstract class AbstractProperties {
+    /**
+     * Comment should be ignored.
+     */
+    abstract int $prop {get;}
+}

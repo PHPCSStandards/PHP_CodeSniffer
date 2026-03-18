@@ -4,8 +4,9 @@
  *
  * @author    Mponos George <gmponos@gmail.com>
  * @author    Mark Scherer <username@example.com>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\ControlStructures;
@@ -21,13 +22,15 @@ class DisallowYodaConditionsSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
-        return Tokens::$comparisonTokens;
+        $tokens = Tokens::COMPARISON_TOKENS;
+        unset($tokens[T_COALESCE]);
 
-    }//end register()
+        return $tokens;
+    }
 
 
     /**
@@ -39,10 +42,10 @@ class DisallowYodaConditionsSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens         = $phpcsFile->getTokens();
-        $previousIndex  = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+        $previousIndex  = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
         $relevantTokens = [
             T_CLOSE_SHORT_ARRAY,
             T_CLOSE_PARENTHESIS,
@@ -54,9 +57,7 @@ class DisallowYodaConditionsSniff implements Sniff
             T_CONSTANT_ENCAPSED_STRING,
         ];
 
-        if ($previousIndex === false
-            || in_array($tokens[$previousIndex]['code'], $relevantTokens, true) === false
-        ) {
+        if (in_array($tokens[$previousIndex]['code'], $relevantTokens, true) === false) {
             return;
         }
 
@@ -67,12 +68,9 @@ class DisallowYodaConditionsSniff implements Sniff
             }
         }
 
-        $prevIndex = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($previousIndex - 1), null, true);
-        if ($prevIndex === false) {
-            return;
-        }
+        $prevIndex = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($previousIndex - 1), null, true);
 
-        if (in_array($tokens[$prevIndex]['code'], Tokens::$arithmeticTokens, true) === true) {
+        if (in_array($tokens[$prevIndex]['code'], Tokens::ARITHMETIC_TOKENS, true) === true) {
             return;
         }
 
@@ -82,20 +80,19 @@ class DisallowYodaConditionsSniff implements Sniff
 
         // Is it a parenthesis.
         if ($tokens[$previousIndex]['code'] === T_CLOSE_PARENTHESIS) {
-            // Check what exists inside the parenthesis.
-            $closeParenthesisIndex = $phpcsFile->findPrevious(
-                Tokens::$emptyTokens,
+            $beforeOpeningParenthesisIndex = $phpcsFile->findPrevious(
+                Tokens::EMPTY_TOKENS,
                 ($tokens[$previousIndex]['parenthesis_opener'] - 1),
                 null,
                 true
             );
 
-            if ($closeParenthesisIndex === false || $tokens[$closeParenthesisIndex]['code'] !== T_ARRAY) {
-                if ($tokens[$closeParenthesisIndex]['code'] === T_STRING) {
+            if ($beforeOpeningParenthesisIndex === false || $tokens[$beforeOpeningParenthesisIndex]['code'] !== T_ARRAY) {
+                if (isset(Tokens::NAME_TOKENS[$tokens[$beforeOpeningParenthesisIndex]['code']]) === true) {
                     return;
                 }
 
-                // If it is not an array check what is inside.
+                // If it is not an array, check what is inside.
                 $found = $phpcsFile->findPrevious(
                     T_VARIABLE,
                     ($previousIndex - 1),
@@ -107,26 +104,23 @@ class DisallowYodaConditionsSniff implements Sniff
                     return;
                 }
 
-                // If there is nothing inside the parenthesis, it it not a Yoda.
+                // If there is nothing inside the parenthesis, it is not a Yoda condition.
                 $opener = $tokens[$previousIndex]['parenthesis_opener'];
-                $prev   = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($previousIndex - 1), ($opener + 1), true);
+                $prev   = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($previousIndex - 1), ($opener + 1), true);
                 if ($prev === false) {
                     return;
                 }
-            } else if ($tokens[$closeParenthesisIndex]['code'] === T_ARRAY
-                && $this->isArrayStatic($phpcsFile, $closeParenthesisIndex) === false
-            ) {
+            } elseif ($this->isArrayStatic($phpcsFile, $beforeOpeningParenthesisIndex) === false) {
                 return;
-            }//end if
-        }//end if
+            }
+        }
 
         $phpcsFile->addError(
             'Usage of Yoda conditions is not allowed; switch the expression order',
             $stackPtr,
             'Found'
         );
-
-    }//end process()
+    }
 
 
     /**
@@ -137,36 +131,37 @@ class DisallowYodaConditionsSniff implements Sniff
      *
      * @return bool
      */
-    public function isArrayStatic(File $phpcsFile, $arrayToken)
+    public function isArrayStatic(File $phpcsFile, int $arrayToken)
     {
         $tokens = $phpcsFile->getTokens();
 
-        $arrayEnd = null;
         if ($tokens[$arrayToken]['code'] === T_OPEN_SHORT_ARRAY) {
             $start = $arrayToken;
             $end   = $tokens[$arrayToken]['bracket_closer'];
-        } else if ($tokens[$arrayToken]['code'] === T_ARRAY) {
+        } elseif ($tokens[$arrayToken]['code'] === T_ARRAY) {
             $start = $tokens[$arrayToken]['parenthesis_opener'];
             $end   = $tokens[$arrayToken]['parenthesis_closer'];
         } else {
-            return true;
+            // Shouldn't be possible but may happen if external sniffs are using this method.
+            return true; // @codeCoverageIgnore
         }
 
-        $staticTokens  = Tokens::$emptyTokens;
-        $staticTokens += Tokens::$textStringTokens;
-        $staticTokens += Tokens::$assignmentTokens;
-        $staticTokens += Tokens::$equalityTokens;
-        $staticTokens += Tokens::$comparisonTokens;
-        $staticTokens += Tokens::$arithmeticTokens;
-        $staticTokens += Tokens::$operators;
-        $staticTokens += Tokens::$booleanOperators;
-        $staticTokens += Tokens::$castTokens;
-        $staticTokens += Tokens::$bracketTokens;
+        $staticTokens  = Tokens::EMPTY_TOKENS;
+        $staticTokens += Tokens::TEXT_STRING_TOKENS;
+        $staticTokens += Tokens::ASSIGNMENT_TOKENS;
+        $staticTokens += Tokens::EQUALITY_TOKENS;
+        $staticTokens += Tokens::COMPARISON_TOKENS;
+        $staticTokens += Tokens::ARITHMETIC_TOKENS;
+        $staticTokens += Tokens::OPERATORS;
+        $staticTokens += Tokens::BOOLEAN_OPERATORS;
+        $staticTokens += Tokens::CAST_TOKENS;
+        $staticTokens += Tokens::BRACKET_TOKENS;
         $staticTokens += [
             T_DOUBLE_ARROW => T_DOUBLE_ARROW,
             T_COMMA        => T_COMMA,
             T_TRUE         => T_TRUE,
             T_FALSE        => T_FALSE,
+            T_NULL         => T_NULL,
         ];
 
         for ($i = ($start + 1); $i < $end; $i++) {
@@ -181,8 +176,5 @@ class DisallowYodaConditionsSniff implements Sniff
         }
 
         return true;
-
-    }//end isArrayStatic()
-
-
-}//end class
+    }
+}

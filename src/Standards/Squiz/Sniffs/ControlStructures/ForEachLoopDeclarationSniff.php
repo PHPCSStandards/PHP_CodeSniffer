@@ -3,8 +3,9 @@
  * Verifies that there is a space between each condition of foreach loops.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures;
@@ -33,13 +34,12 @@ class ForEachLoopDeclarationSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
         return [T_FOREACH];
-
-    }//end register()
+    }
 
 
     /**
@@ -51,7 +51,7 @@ class ForEachLoopDeclarationSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $this->requiredSpacesAfterOpen   = (int) $this->requiredSpacesAfterOpen;
         $this->requiredSpacesBeforeClose = (int) $this->requiredSpacesBeforeClose;
@@ -59,14 +59,12 @@ class ForEachLoopDeclarationSniff implements Sniff
 
         $openingBracket = $phpcsFile->findNext(T_OPEN_PARENTHESIS, $stackPtr);
         if ($openingBracket === false) {
-            $error = 'Possible parse error: FOREACH has no opening parenthesis';
-            $phpcsFile->addWarning($error, $stackPtr, 'MissingOpenParenthesis');
+            // Parse error or live coding.
             return;
         }
 
         if (isset($tokens[$openingBracket]['parenthesis_closer']) === false) {
-            $error = 'Possible parse error: FOREACH has no closing parenthesis';
-            $phpcsFile->addWarning($error, $stackPtr, 'MissingCloseParenthesis');
+            // Parse error or live coding.
             return;
         }
 
@@ -78,7 +76,7 @@ class ForEachLoopDeclarationSniff implements Sniff
             if ($fix === true) {
                 $phpcsFile->fixer->replaceToken(($openingBracket + 1), '');
             }
-        } else if ($this->requiredSpacesAfterOpen > 0) {
+        } elseif ($this->requiredSpacesAfterOpen > 0) {
             $spaceAfterOpen = 0;
             if ($tokens[($openingBracket + 1)]['code'] === T_WHITESPACE) {
                 $spaceAfterOpen = $tokens[($openingBracket + 1)]['length'];
@@ -90,7 +88,7 @@ class ForEachLoopDeclarationSniff implements Sniff
                     $this->requiredSpacesAfterOpen,
                     $spaceAfterOpen,
                 ];
-                $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'SpacingAfterOpen', $data);
+                $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'SpaceAfterOpen', $data);
                 if ($fix === true) {
                     $padding = str_repeat(' ', $this->requiredSpacesAfterOpen);
                     if ($spaceAfterOpen === 0) {
@@ -100,7 +98,7 @@ class ForEachLoopDeclarationSniff implements Sniff
                     }
                 }
             }
-        }//end if
+        }
 
         if ($this->requiredSpacesBeforeClose === 0 && $tokens[($closingBracket - 1)]['code'] === T_WHITESPACE) {
             $error = 'Space found before closing bracket of FOREACH loop';
@@ -108,7 +106,7 @@ class ForEachLoopDeclarationSniff implements Sniff
             if ($fix === true) {
                 $phpcsFile->fixer->replaceToken(($closingBracket - 1), '');
             }
-        } else if ($this->requiredSpacesBeforeClose > 0) {
+        } elseif ($this->requiredSpacesBeforeClose > 0) {
             $spaceBeforeClose = 0;
             if ($tokens[($closingBracket - 1)]['code'] === T_WHITESPACE) {
                 $spaceBeforeClose = $tokens[($closingBracket - 1)]['length'];
@@ -130,12 +128,11 @@ class ForEachLoopDeclarationSniff implements Sniff
                     }
                 }
             }
-        }//end if
+        }
 
         $asToken = $phpcsFile->findNext(T_AS, $openingBracket);
         if ($asToken === false) {
-            $error = 'Possible parse error: FOREACH has no AS statement';
-            $phpcsFile->addWarning($error, $stackPtr, 'MissingAs');
+            // Parse error or live coding.
             return;
         }
 
@@ -192,7 +189,7 @@ class ForEachLoopDeclarationSniff implements Sniff
                     }
                 }
             }
-        }//end if
+        }
 
         if ($tokens[($asToken - 1)]['code'] !== T_WHITESPACE) {
             $error = 'Expected 1 space before "as"; 0 found';
@@ -229,8 +226,5 @@ class ForEachLoopDeclarationSniff implements Sniff
                 }
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

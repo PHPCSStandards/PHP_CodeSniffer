@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="IniSetTest" xsi:noNamespaceSchemaLocation="phpcs.xsd">
+    <description>Ruleset to test ini values can be changed from the ruleset.</description>
+
+    <ini name="precision" value="10"/>
+
+    <!-- Prevent a "no sniff were registered" error. -->
+    <rule ref="Generic.PHP.BacktickOperator"/>
+</ruleset>

@@ -3,15 +3,21 @@
  * Unit test class for the InlineIfDeclaration sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\ControlStructures;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class InlineIfDeclarationUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the InlineIfDeclaration sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\InlineIfDeclarationSniff
+ */
+final class InlineIfDeclarationUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -20,13 +26,12 @@ class InlineIfDeclarationUnitTest extends AbstractSniffUnitTest
      *
      * @param string $testFile The name of the file being tested.
      *
-     * @return array
+     * @return array<string>
      */
     public function getCliValues($testFile)
     {
         return ['--encoding=utf-8'];
-
-    }//end getCliValues()
+    }
 
 
     /**
@@ -53,8 +58,7 @@ class InlineIfDeclarationUnitTest extends AbstractSniffUnitTest
             44 => 1,
             47 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -68,8 +72,5 @@ class InlineIfDeclarationUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

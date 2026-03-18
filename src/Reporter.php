@@ -3,8 +3,9 @@
  * Manages reporting of errors and warnings.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer;
@@ -14,7 +15,14 @@ use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Reports\Report;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\ExitCode;
 
+/**
+ * Manages reporting of errors and warnings.
+ *
+ * @property-read int $totalFixable Total number of errors/warnings that can be fixed.
+ * @property-read int $totalFixed   Total number of errors/warnings that were fixed.
+ */
 class Reporter
 {
 
@@ -47,25 +55,32 @@ class Reporter
     public $totalWarnings = 0;
 
     /**
-     * Total number of errors/warnings that can be fixed.
+     * Total number of errors that can be fixed.
      *
      * @var integer
      */
-    public $totalFixable = 0;
+    public $totalFixableErrors = 0;
 
     /**
-     * Total number of errors/warnings that were fixed.
+     * Total number of warnings that can be fixed.
      *
      * @var integer
      */
-    public $totalFixed = 0;
+    public $totalFixableWarnings = 0;
 
     /**
-     * When the PHPCS run started.
+     * Total number of errors that were fixed.
      *
-     * @var float
+     * @var integer
      */
-    public static $startTime = 0;
+    public $totalFixedErrors = 0;
+
+    /**
+     * Total number of warnings that were fixed.
+     *
+     * @var integer
+     */
+    public $totalFixedWarnings = 0;
 
     /**
      * A cache of report objects.
@@ -77,7 +92,7 @@ class Reporter
     /**
      * A cache of opened temporary files.
      *
-     * @var array
+     * @var array<string, string>
      */
     private $tmpFiles = [];
 
@@ -109,15 +124,15 @@ class Reporter
                 // This is a path to a custom report class.
                 $filename = realpath($type);
                 if ($filename === false) {
-                    $error = "ERROR: Custom report \"$type\" not found".PHP_EOL;
-                    throw new DeepExitException($error, 3);
+                    $error = "ERROR: Custom report \"$type\" not found" . PHP_EOL;
+                    throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
                 }
 
                 $reportClassName = Autoload::loadFile($filename);
-            } else if (class_exists('PHP_CodeSniffer\Reports\\'.ucfirst($type)) === true) {
+            } elseif (class_exists('PHP_CodeSniffer\Reports\\' . ucfirst($type)) === true) {
                 // PHPCS native report.
-                $reportClassName = 'PHP_CodeSniffer\Reports\\'.ucfirst($type);
-            } else if (class_exists($type) === true) {
+                $reportClassName = 'PHP_CodeSniffer\Reports\\' . ucfirst($type);
+            } elseif (class_exists($type) === true) {
                 // FQN of a custom report.
                 $reportClassName = $type;
             } else {
@@ -130,21 +145,21 @@ class Reporter
                         continue;
                     }
 
-                    if (class_exists($nsPrefix.'\\'.$trimmedType) === true) {
-                        $reportClassName = $nsPrefix.'\\'.$trimmedType;
+                    if (class_exists($nsPrefix . '\\' . $trimmedType) === true) {
+                        $reportClassName = $nsPrefix . '\\' . $trimmedType;
                         break;
                     }
                 }
-            }//end if
+            }
 
             if ($reportClassName === '') {
-                $error = "ERROR: Class file for report \"$type\" not found".PHP_EOL;
-                throw new DeepExitException($error, 3);
+                $error = "ERROR: Class file for report \"$type\" not found" . PHP_EOL;
+                throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
             }
 
             $reportClass = new $reportClassName();
             if (($reportClass instanceof Report) === false) {
-                throw new RuntimeException('Class "'.$reportClassName.'" must implement the "PHP_CodeSniffer\Report" interface.');
+                throw new RuntimeException('Class "' . $reportClassName . '" must implement the "PHP_CodeSniffer\Report" interface.');
             }
 
             $this->reports[$type] = [
@@ -161,9 +176,79 @@ class Reporter
             } else {
                 file_put_contents($output, '');
             }
-        }//end foreach
+        }
+    }
 
-    }//end __construct()
+
+    /**
+     * Check whether a (virtual) property is set.
+     *
+     * @param string $name Property name.
+     *
+     * @return bool
+     */
+    public function __isset(string $name)
+    {
+        return ($name === 'totalFixable' || $name === 'totalFixed');
+    }
+
+
+    /**
+     * Get the value of an inaccessible property.
+     *
+     * The properties supported via this method are both deprecated since PHP_CodeSniffer 4.0.
+     * - For $totalFixable, use `($reporter->totalFixableErrors + $reporter->totalFixableWarnings)` instead.
+     * - For $totalFixed, use `($reporter->totalFixedErrors + $reporter->totalFixedWarnings)` instead.
+     *
+     * @param string $name The name of the property.
+     *
+     * @return int
+     *
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If the setting name is invalid.
+     */
+    public function __get(string $name)
+    {
+        if ($name === 'totalFixable') {
+            return ($this->totalFixableErrors + $this->totalFixableWarnings);
+        }
+
+        if ($name === 'totalFixed') {
+            return ($this->totalFixedErrors + $this->totalFixedWarnings);
+        }
+
+        throw new RuntimeException("ERROR: access requested to unknown property \"Reporter::\${$name}\"");
+    }
+
+
+    /**
+     * Setting a dynamic/virtual property on this class is not allowed.
+     *
+     * @param string $name  Property name.
+     * @param mixed  $value Property value.
+     *
+     * @return void
+     *
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException
+     */
+    public function __set(string $name, $value)
+    {
+        throw new RuntimeException("ERROR: setting property \"Reporter::\${$name}\" is not allowed");
+    }
+
+
+    /**
+     * Unsetting a dynamic/virtual property on this class is not allowed.
+     *
+     * @param string $name Property name.
+     *
+     * @return void
+     *
+     * @throws \PHP_CodeSniffer\Exceptions\RuntimeException
+     */
+    public function __unset(string $name)
+    {
+        throw new RuntimeException("ERROR: unsetting property \"Reporter::\${$name}\" is not allowed");
+    }
 
 
     /**
@@ -186,8 +271,7 @@ class Reporter
         }
 
         return $toScreen;
-
-    }//end printReports()
+    }
 
 
     /**
@@ -197,7 +281,7 @@ class Reporter
      *
      * @return void
      */
-    public function printReport($report)
+    public function printReport(string $report)
     {
         $reportClass = $this->reports[$report]['class'];
         $reportFile  = $this->reports[$report]['output'];
@@ -226,7 +310,7 @@ class Reporter
             $this->totalFiles,
             $this->totalErrors,
             $this->totalWarnings,
-            $this->totalFixable,
+            ($this->totalFixableErrors + $this->totalFixableWarnings),
             $this->config->showSources,
             $this->config->reportWidth,
             $this->config->interactive,
@@ -236,7 +320,7 @@ class Reporter
         ob_end_clean();
 
         if ($this->config->colors !== true || $reportFile !== null) {
-            $generatedReport = preg_replace('`\033\[[0-9;]+m`', '', $generatedReport);
+            $generatedReport = Common::stripColors($generatedReport);
         }
 
         if ($reportFile !== null) {
@@ -244,7 +328,7 @@ class Reporter
                 echo $generatedReport;
             }
 
-            file_put_contents($reportFile, $generatedReport.PHP_EOL);
+            file_put_contents($reportFile, $generatedReport . PHP_EOL);
         } else {
             echo $generatedReport;
             if ($filename !== null && file_exists($filename) === true) {
@@ -252,8 +336,7 @@ class Reporter
                 unset($this->tmpFiles[$report]);
             }
         }
-
-    }//end printReport()
+    }
 
 
     /**
@@ -303,8 +386,8 @@ class Reporter
                 file_put_contents($this->tmpFiles[$type], $generatedReport, (FILE_APPEND | LOCK_EX));
             } else {
                 file_put_contents($report['output'], $generatedReport, (FILE_APPEND | LOCK_EX));
-            }//end if
-        }//end foreach
+            }
+        }
 
         if ($errorsShown === true || PHP_CODESNIFFER_CBF === true) {
             $this->totalFiles++;
@@ -313,15 +396,12 @@ class Reporter
 
             // When PHPCBF is running, we need to use the fixable error values
             // after the report has run and fixed what it can.
-            if (PHP_CODESNIFFER_CBF === true) {
-                $this->totalFixable += $phpcsFile->getFixableCount();
-                $this->totalFixed   += $phpcsFile->getFixedCount();
-            } else {
-                $this->totalFixable += $reportData['fixable'];
-            }
+            $this->totalFixableErrors   += $phpcsFile->getFixableErrorCount();
+            $this->totalFixableWarnings += $phpcsFile->getFixableWarningCount();
+            $this->totalFixedErrors     += $phpcsFile->getFixedErrorCount();
+            $this->totalFixedWarnings   += $phpcsFile->getFixedWarningCount();
         }
-
-    }//end cacheFileReport()
+    }
 
 
     /**
@@ -329,7 +409,29 @@ class Reporter
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file that has been processed.
      *
-     * @return array
+     * @return array<string, string|int|array> Prepared report data.
+     *                                         The format of prepared data is as follows:
+     *                                         ```
+     *                                         array(
+     *                                           'filename' => string The name of the current file.
+     *                                           'errors'   => int    The number of errors seen in the current file.
+     *                                           'warnings' => int    The number of warnings seen in the current file.
+     *                                           'fixable'  => int    The number of fixable issues seen in the current file.
+     *                                           'messages' => array(
+     *                                             int <Line number> => array(
+     *                                               int <Column number> => array(
+     *                                                 int <Message index> => array(
+     *                                                   'message'  => string The error/warning message.
+     *                                                   'source'   => string The full error code for the message.
+     *                                                   'severity' => int    The severity of the message.
+     *                                                   'fixable'  => bool   Whether this error/warning is auto-fixable.
+     *                                                   'type'     => string The type of message. Either 'ERROR' or 'WARNING'.
+     *                                                 )
+     *                                               )
+     *                                             )
+     *                                           )
+     *                                         )
+     *                                         ```
      */
     public function prepareFileReport(File $phpcsFile)
     {
@@ -342,7 +444,7 @@ class Reporter
         ];
 
         if ($report['errors'] === 0 && $report['warnings'] === 0) {
-            // Prefect score!
+            // Perfect score!
             return $report;
         }
 
@@ -381,7 +483,7 @@ class Reporter
             }
 
             ksort($errors[$line]);
-        }//end foreach
+        }
 
         foreach ($phpcsFile->getWarnings() as $line => $lineWarnings) {
             foreach ($lineWarnings as $column => $colWarnings) {
@@ -408,16 +510,13 @@ class Reporter
                 } else {
                     $errors[$line][$column] = $newWarnings;
                 }
-            }//end foreach
+            }
 
             ksort($errors[$line]);
-        }//end foreach
+        }
 
         ksort($errors);
         $report['messages'] = $errors;
         return $report;
-
-    }//end prepareFileReport()
-
-
-}//end class
+    }
+}

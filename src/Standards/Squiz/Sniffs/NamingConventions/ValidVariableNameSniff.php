@@ -3,12 +3,14 @@
  * Checks the naming of variables and member variables.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions;
 
+use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
 use PHP_CodeSniffer\Util\Common;
@@ -27,13 +29,13 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariable(File $phpcsFile, $stackPtr)
+    protected function processVariable(File $phpcsFile, int $stackPtr)
     {
         $tokens  = $phpcsFile->getTokens();
         $varName = ltrim($tokens[$stackPtr]['content'], '$');
 
         // If it's a php reserved var, then its ok.
-        if (isset($this->phpReservedVars[$varName]) === true) {
+        if (isset(static::PHP_RESERVED_VARS[$varName]) === true) {
             return;
         }
 
@@ -57,28 +59,38 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                     }
 
                     if (Common::isCamelCaps($objVarName, false, true, false) === false) {
-                        $error = 'Variable "%s" is not in valid camel caps format';
+                        $error = 'Member variable "%s" is not in valid camel caps format';
                         $data  = [$originalVarName];
-                        $phpcsFile->addError($error, $var, 'NotCamelCaps', $data);
+                        $phpcsFile->addError($error, $var, 'MemberNotCamelCaps', $data);
                     }
-                }//end if
-            }//end if
-        }//end if
+                }
+            }
+        }
+
+        $objOperator = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
+        if ($tokens[$objOperator]['code'] === T_DOUBLE_COLON) {
+            // The variable lives within a class, and is referenced like
+            // this: MyClass::$_variable, so we don't know its scope.
+            $objVarName = $varName;
+            if (substr($objVarName, 0, 1) === '_') {
+                $objVarName = substr($objVarName, 1);
+            }
+
+            if (Common::isCamelCaps($objVarName, false, true, false) === false) {
+                $error = 'Member variable "%s" is not in valid camel caps format';
+                $data  = [$tokens[$stackPtr]['content']];
+                $phpcsFile->addError($error, $stackPtr, 'MemberNotCamelCaps', $data);
+            }
+
+            return;
+        }
 
         // There is no way for us to know if the var is public or private,
         // so we have to ignore a leading underscore if there is one and just
         // check the main part of the variable name.
         $originalVarName = $varName;
         if (substr($varName, 0, 1) === '_') {
-            $objOperator = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
-            if ($tokens[$objOperator]['code'] === T_DOUBLE_COLON) {
-                // The variable lives within a class, and is referenced like
-                // this: MyClass::$_variable, so we don't know its scope.
-                $inClass = true;
-            } else {
-                $inClass = $phpcsFile->hasCondition($stackPtr, Tokens::$ooScopeTokens);
-            }
-
+            $inClass = $phpcsFile->hasCondition($stackPtr, Tokens::OO_SCOPE_TOKENS);
             if ($inClass === true) {
                 $varName = substr($varName, 1);
             }
@@ -89,8 +101,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             $data  = [$originalVarName];
             $phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $data);
         }
-
-    }//end processVariable()
+    }
 
 
     /**
@@ -102,20 +113,17 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processMemberVar(File $phpcsFile, $stackPtr)
+    protected function processMemberVar(File $phpcsFile, int $stackPtr)
     {
-        $tokens = $phpcsFile->getTokens();
-
-        $varName     = ltrim($tokens[$stackPtr]['content'], '$');
-        $memberProps = $phpcsFile->getMemberProperties($stackPtr);
-        if (empty($memberProps) === true) {
-            // Couldn't get any info about this variable, which
-            // generally means it is invalid or possibly has a parse
-            // error. Any errors will be reported by the core, so
-            // we can ignore it.
+        try {
+            $memberProps = $phpcsFile->getMemberProperties($stackPtr);
+        } catch (RuntimeException $e) {
+            // Parse error: property in enum. Ignore.
             return;
         }
 
+        $tokens    = $phpcsFile->getTokens();
+        $varName   = ltrim($tokens[$stackPtr]['content'], '$');
         $public    = ($memberProps['scope'] !== 'private');
         $errorData = [$varName];
 
@@ -142,8 +150,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             $error = 'Member variable "%s" is not in valid camel caps format';
             $phpcsFile->addError($error, $stackPtr, 'MemberNotCamelCaps', $errorData);
         }
-
-    }//end processMemberVar()
+    }
 
 
     /**
@@ -155,14 +162,14 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariableInString(File $phpcsFile, $stackPtr)
+    protected function processVariableInString(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
         if (preg_match_all('|[^\\\]\${?([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)|', $tokens[$stackPtr]['content'], $matches) !== 0) {
             foreach ($matches[1] as $varName) {
                 // If it's a php reserved var, then its ok.
-                if (isset($this->phpReservedVars[$varName]) === true) {
+                if (isset(static::PHP_RESERVED_VARS[$varName]) === true) {
                     continue;
                 }
 
@@ -173,8 +180,5 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                 }
             }
         }
-
-    }//end processVariableInString()
-
-
-}//end class
+    }
+}

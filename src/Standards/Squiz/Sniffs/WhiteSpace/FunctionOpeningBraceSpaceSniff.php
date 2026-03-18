@@ -3,8 +3,9 @@
  * Checks that there is no empty line after the opening brace of a function.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace;
@@ -15,21 +16,11 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class FunctionOpeningBraceSpaceSniff implements Sniff
 {
 
-    /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
-
 
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
@@ -37,8 +28,7 @@ class FunctionOpeningBraceSpaceSniff implements Sniff
             T_FUNCTION,
             T_CLOSURE,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -50,7 +40,7 @@ class FunctionOpeningBraceSpaceSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -63,9 +53,9 @@ class FunctionOpeningBraceSpaceSniff implements Sniff
         $nextContent = $phpcsFile->findNext(T_WHITESPACE, ($openBrace + 1), null, true);
 
         if ($nextContent === $tokens[$stackPtr]['scope_closer']) {
-             // The next bit of content is the closing brace, so this
-             // is an empty function and should have a blank line
-             // between the opening and closing braces.
+            // The next bit of content is the closing brace, so this
+            // is an empty function and should have a blank line
+            // between the opening and closing braces.
             return;
         }
 
@@ -91,8 +81,5 @@ class FunctionOpeningBraceSpaceSniff implements Sniff
                 $phpcsFile->fixer->endChangeset();
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

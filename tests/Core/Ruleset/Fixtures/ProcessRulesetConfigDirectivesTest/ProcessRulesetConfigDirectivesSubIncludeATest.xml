@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="ProcessRulesetConfigDirectivesTest" xsi:noNamespaceSchemaLocation="https://schema.phpcodesniffer.com/phpcs.xsd">
+
+    <!-- These config directives should not be applied. Root should win. -->
+    <config name="expectValueFromParentATestSetBeforeIncludes" value="grandchild A"/>
+    <config name="expectValueFromParentATestSetAfterIncludes" value="grandchild A"/>
+
+    <!-- This directive should not be applied. Child A should win. -->
+    <config name="expectValueFromChildATestSetBeforeIncludes" value="grandchild A"/>
+
+    <!-- This directive should not be applied. Child B should win. -->
+    <config name="expectValueFromChildBTestAlsoInGrandChildA" value="grandchild A"/>
+
+    <!-- This directive is only set in this ruleset, so should be applied. -->
+    <config name="expectValueFromGrandChildATest" value="grandchild A"/>
+
+</ruleset>

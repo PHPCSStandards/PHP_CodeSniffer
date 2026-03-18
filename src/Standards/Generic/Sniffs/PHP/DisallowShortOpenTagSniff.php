@@ -3,8 +3,9 @@
  * Makes sure that shorthand PHP open tags are not used.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\PHP;
@@ -20,7 +21,7 @@ class DisallowShortOpenTagSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
@@ -35,8 +36,7 @@ class DisallowShortOpenTagSniff implements Sniff
         }
 
         return $targets;
-
-    }//end register()
+    }
 
 
     /**
@@ -46,9 +46,9 @@ class DisallowShortOpenTagSniff implements Sniff
      * @param int                         $stackPtr  The position of the current token
      *                                               in the stack passed in $tokens.
      *
-     * @return void
+     * @return void|int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $token  = $tokens[$stackPtr];
@@ -73,19 +73,21 @@ class DisallowShortOpenTagSniff implements Sniff
         }
 
         if ($token['code'] === T_OPEN_TAG_WITH_ECHO) {
-            $nextVar = $tokens[$phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true)];
-            $error   = 'Short PHP opening tag used with echo; expected "<?php echo %s ..." but found "%s %s ..."';
-            $data    = [
-                $nextVar['content'],
-                $token['content'],
-                $nextVar['content'],
-            ];
-            $fix     = $phpcsFile->addFixableError($error, $stackPtr, 'EchoFound', $data);
-            if ($fix === true) {
-                if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
-                    $phpcsFile->fixer->replaceToken($stackPtr, '<?php echo ');
-                } else {
-                    $phpcsFile->fixer->replaceToken($stackPtr, '<?php echo');
+            $nextVar = $tokens[$phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true)];
+            if ($nextVar['code'] !== T_CLOSE_TAG) {
+                $error = 'Short PHP opening tag used with echo; expected "<?php echo %s ..." but found "%s %s ..."';
+                $data  = [
+                    $nextVar['content'],
+                    $token['content'],
+                    $nextVar['content'],
+                ];
+                $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'EchoFound', $data);
+                if ($fix === true) {
+                    if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
+                        $phpcsFile->fixer->replaceToken($stackPtr, '<?php echo ');
+                    } else {
+                        $phpcsFile->fixer->replaceToken($stackPtr, '<?php echo');
+                    }
                 }
             }
         }
@@ -110,7 +112,7 @@ class DisallowShortOpenTagSniff implements Sniff
                 if ($closerFound !== false) {
                     if ($i !== $stackPtr) {
                         break;
-                    } else if ($closerFound > $openerFound) {
+                    } elseif ($closerFound > $openerFound) {
                         break;
                     } else {
                         $closerFound = false;
@@ -121,7 +123,7 @@ class DisallowShortOpenTagSniff implements Sniff
             if ($closerFound !== false) {
                 $error   = 'Possible use of short open tags detected; found: %s';
                 $snippet = $this->getSnippet($content, '<?');
-                $data    = ['<?'.$snippet];
+                $data    = ['<?' . $snippet];
 
                 $phpcsFile->addWarning($error, $stackPtr, 'PossibleFound', $data);
 
@@ -130,9 +132,8 @@ class DisallowShortOpenTagSniff implements Sniff
                     return $i;
                 }
             }
-        }//end if
-
-    }//end process()
+        }
+    }
 
 
     /**
@@ -144,7 +145,7 @@ class DisallowShortOpenTagSniff implements Sniff
      *
      * @return string
      */
-    protected function getSnippet($content, $start='', $length=40)
+    protected function getSnippet(string $content, string $start = '', int $length = 40)
     {
         $startPos = 0;
 
@@ -161,8 +162,5 @@ class DisallowShortOpenTagSniff implements Sniff
         }
 
         return $snippet;
-
-    }//end getSnippet()
-
-
-}//end class
+    }
+}

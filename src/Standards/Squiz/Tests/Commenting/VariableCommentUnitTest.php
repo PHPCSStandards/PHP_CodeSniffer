@@ -3,15 +3,21 @@
  * Unit test class for the VariableComment sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\Commenting;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
-class VariableCommentUnitTest extends AbstractSniffUnitTest
+/**
+ * Unit test class for the VariableComment sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting\VariableCommentSniff
+ */
+final class VariableCommentUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -58,9 +64,11 @@ class VariableCommentUnitTest extends AbstractSniffUnitTest
             336 => 1,
             361 => 1,
             364 => 1,
+            399 => 1,
+            403 => 1,
+            457 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -73,9 +81,11 @@ class VariableCommentUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList()
     {
-        return [93 => 1];
-
-    }//end getWarningList()
-
-
-}//end class
+        return [
+            93  => 1,
+            494 => 1,
+            495 => 1,
+            496 => 1,
+        ];
+    }
+}

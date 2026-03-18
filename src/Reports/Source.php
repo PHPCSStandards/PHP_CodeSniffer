@@ -3,14 +3,14 @@
  * Source report for PHP_CodeSniffer.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Util\Timing;
 
 class Source implements Report
 {
@@ -23,14 +23,15 @@ class Source implements Report
      * and FALSE if it ignored the file. Returning TRUE indicates that the file and
      * its data should be counted in the grand totals.
      *
-     * @param array                 $report      Prepared report data.
-     * @param \PHP_CodeSniffer\File $phpcsFile   The file being reported on.
-     * @param bool                  $showSources Show sources?
-     * @param int                   $width       Maximum allowed line width.
+     * @param array<string, string|int|array> $report      Prepared report data.
+     *                                                     See the {@see Report} interface for a detailed specification.
+     * @param \PHP_CodeSniffer\Files\File     $phpcsFile   The file being reported on.
+     * @param bool                            $showSources Show sources?
+     * @param int                             $width       Maximum allowed line width.
      *
      * @return bool
      */
-    public function generateFileReport($report, File $phpcsFile, $showSources=false, $width=80)
+    public function generateFileReport(array $report, File $phpcsFile, bool $showSources = false, int $width = 80)
     {
         if ($report['errors'] === 0 && $report['warnings'] === 0) {
             // Nothing to print.
@@ -39,8 +40,8 @@ class Source implements Report
 
         $sources = [];
 
-        foreach ($report['messages'] as $line => $lineErrors) {
-            foreach ($lineErrors as $column => $colErrors) {
+        foreach ($report['messages'] as $lineErrors) {
+            foreach ($lineErrors as $colErrors) {
                 foreach ($colErrors as $error) {
                     $src = $error['source'];
                     if (isset($sources[$src]) === false) {
@@ -56,12 +57,11 @@ class Source implements Report
         }
 
         foreach ($sources as $source => $data) {
-            echo $source.'>>'.$data['fixable'].'>>'.$data['count'].PHP_EOL;
+            echo $source . '>>' . $data['fixable'] . '>>' . $data['count'] . PHP_EOL;
         }
 
         return true;
-
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -81,15 +81,15 @@ class Source implements Report
      * @return void
      */
     public function generate(
-        $cachedData,
-        $totalFiles,
-        $totalErrors,
-        $totalWarnings,
-        $totalFixable,
-        $showSources=false,
-        $width=80,
-        $interactive=false,
-        $toScreen=true
+        string $cachedData,
+        int $totalFiles,
+        int $totalErrors,
+        int $totalWarnings,
+        int $totalFixable,
+        bool $showSources = false,
+        int $width = 80,
+        bool $interactive = false,
+        bool $toScreen = true
     ) {
         $lines = explode(PHP_EOL, $cachedData);
         array_pop($lines);
@@ -124,12 +124,12 @@ class Source implements Report
                     if (isset($parts[3]) === true) {
                         $name    = $this->makeFriendlyName($parts[3]);
                         $name[0] = strtolower($name[0]);
-                        $sniff  .= ' '.$name;
+                        $sniff  .= ' ' . $name;
                         unset($parts[3]);
                     }
 
                     $parts[2] = $sniff;
-                }//end if
+                }
 
                 $maxLength = max($maxLength, strlen($sniff));
 
@@ -140,8 +140,8 @@ class Source implements Report
                 ];
             } else {
                 $sources[$source]['count'] += $count;
-            }//end if
-        }//end foreach
+            }
+        }
 
         if ($showSources === true) {
             $width = min($width, ($maxLength + 11));
@@ -160,23 +160,23 @@ class Source implements Report
 
         array_multisort($counts, SORT_DESC, $sourceCodes, SORT_ASC, SORT_NATURAL, $sources);
 
-        echo PHP_EOL."\033[1mPHP CODE SNIFFER VIOLATION SOURCE SUMMARY\033[0m".PHP_EOL;
-        echo str_repeat('-', $width).PHP_EOL."\033[1m";
+        echo PHP_EOL . "\033[1mPHP CODE SNIFFER VIOLATION SOURCE SUMMARY\033[0m" . PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL . "\033[1m";
         if ($showSources === true) {
             if ($totalFixable > 0) {
-                echo '    SOURCE'.str_repeat(' ', ($width - 15)).'COUNT'.PHP_EOL;
+                echo '    SOURCE' . str_repeat(' ', ($width - 15)) . 'COUNT' . PHP_EOL;
             } else {
-                echo 'SOURCE'.str_repeat(' ', ($width - 11)).'COUNT'.PHP_EOL;
+                echo 'SOURCE' . str_repeat(' ', ($width - 11)) . 'COUNT' . PHP_EOL;
             }
         } else {
             if ($totalFixable > 0) {
-                echo '    STANDARD  CATEGORY            SNIFF'.str_repeat(' ', ($width - 44)).'COUNT'.PHP_EOL;
+                echo '    STANDARD  CATEGORY            SNIFF' . str_repeat(' ', ($width - 44)) . 'COUNT' . PHP_EOL;
             } else {
-                echo 'STANDARD  CATEGORY            SNIFF'.str_repeat(' ', ($width - 40)).'COUNT'.PHP_EOL;
+                echo 'STANDARD  CATEGORY            SNIFF' . str_repeat(' ', ($width - 40)) . 'COUNT' . PHP_EOL;
             }
         }
 
-        echo "\033[0m".str_repeat('-', $width).PHP_EOL;
+        echo "\033[0m" . str_repeat('-', $width) . PHP_EOL;
 
         $fixableSources = 0;
 
@@ -221,14 +221,14 @@ class Source implements Report
                     $parts[0] = substr($parts[0], 0, ((strlen($parts[0]) - 8) * -1));
                 }
 
-                echo $parts[0].str_repeat(' ', (10 - strlen($parts[0])));
+                echo $parts[0] . str_repeat(' ', (10 - strlen($parts[0])));
 
                 $category = $parts[1];
                 if (strlen($category) > 18) {
                     $category = substr($category, 0, ((strlen($category) - 18) * -1));
                 }
 
-                echo $category.str_repeat(' ', (20 - strlen($category)));
+                echo $category . str_repeat(' ', (20 - strlen($category)));
 
                 $sniff = $parts[2];
                 if (strlen($sniff) > $maxSniffWidth) {
@@ -236,22 +236,22 @@ class Source implements Report
                 }
 
                 if ($totalFixable > 0) {
-                    echo $sniff.str_repeat(' ', ($width - 39 - strlen($sniff)));
+                    echo $sniff . str_repeat(' ', ($width - 39 - strlen($sniff)));
                 } else {
-                    echo $sniff.str_repeat(' ', ($width - 35 - strlen($sniff)));
+                    echo $sniff . str_repeat(' ', ($width - 35 - strlen($sniff)));
                 }
-            }//end if
+            }
 
-            echo $sourceData['count'].PHP_EOL;
-        }//end foreach
+            echo $sourceData['count'] . PHP_EOL;
+        }
 
-        echo str_repeat('-', $width).PHP_EOL;
-        echo "\033[1m".'A TOTAL OF '.($totalErrors + $totalWarnings).' SNIFF VIOLATION';
+        echo str_repeat('-', $width) . PHP_EOL;
+        echo "\033[1m" . 'A TOTAL OF ' . ($totalErrors + $totalWarnings) . ' SNIFF VIOLATION';
         if (($totalErrors + $totalWarnings) > 1) {
             echo 'S';
         }
 
-        echo ' WERE FOUND IN '.count($sources).' SOURCE';
+        echo ' WERE FOUND IN ' . count($sources) . ' SOURCE';
         if (count($sources) !== 1) {
             echo 'S';
         }
@@ -259,17 +259,12 @@ class Source implements Report
         echo "\033[0m";
 
         if ($totalFixable > 0) {
-            echo PHP_EOL.str_repeat('-', $width).PHP_EOL;
+            echo PHP_EOL . str_repeat('-', $width) . PHP_EOL;
             echo "\033[1mPHPCBF CAN FIX THE $fixableSources MARKED SOURCES AUTOMATICALLY ($totalFixable VIOLATIONS IN TOTAL)\033[0m";
         }
 
-        echo PHP_EOL.str_repeat('-', $width).PHP_EOL.PHP_EOL;
-
-        if ($toScreen === true && $interactive === false) {
-            Timing::printRunTime();
-        }
-
-    }//end generate()
+        echo PHP_EOL . str_repeat('-', $width) . PHP_EOL . PHP_EOL;
+    }
 
 
     /**
@@ -279,7 +274,7 @@ class Source implements Report
      *
      * @return string
      */
-    public function makeFriendlyName($name)
+    public function makeFriendlyName(string $name)
     {
         if (trim($name) === '') {
             return '';
@@ -320,17 +315,14 @@ class Source implements Report
 
                     $lastWasUpper = true;
                 }
-            }//end if
+            }
 
             $friendlyName .= $name[$i];
-        }//end for
+        }
 
         $friendlyName    = trim($friendlyName);
         $friendlyName[0] = strtoupper($friendlyName[0]);
 
         return $friendlyName;
-
-    }//end makeFriendlyName()
-
-
-}//end class
+    }
+}

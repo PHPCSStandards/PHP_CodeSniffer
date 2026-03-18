@@ -3,8 +3,9 @@
  * Checks the format of the declare statements.
  *
  * @author    Sertan Danis <sdanis@squiz.net>
- * @copyright 2006-2019 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR12\Sniffs\Files;
@@ -20,13 +21,12 @@ class DeclareStatementSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
         return [T_DECLARE];
-
-    }//end register()
+    }
 
 
     /**
@@ -38,7 +38,7 @@ class DeclareStatementSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         // Allow a byte-order mark.
         $tokens = $phpcsFile->getTokens();
@@ -106,10 +106,16 @@ class DeclareStatementSniff implements Sniff
                     $equals = $phpcsFile->findNext(T_EQUAL, ($equals + 1));
                 }
             }
-        }//end if
+        }
 
         // There should be no space between equal sign and directive value.
         $value = $phpcsFile->findNext(T_WHITESPACE, ($equals + 1), null, true);
+
+        if ($value === false) {
+            // Live coding / parse error.
+            return;
+        }
+
         if ($equals !== false) {
             if ($tokens[($equals + 1)]['type'] !== 'T_LNUMBER') {
                 $error = 'Expected no space between equal sign and the directive value in a declare statement';
@@ -153,13 +159,13 @@ class DeclareStatementSniff implements Sniff
             if ($tokens[$token]['type'] === 'T_OPEN_CURLY_BRACKET') {
                 // Block declaration.
                 $curlyBracket = $token;
-            } else if ($tokens[$token]['type'] === 'T_SEMICOLON') {
+            } elseif ($tokens[$token]['type'] === 'T_SEMICOLON') {
                 $error = 'Expected no space between the closing parenthesis and the semicolon in a declare statement';
                 $fix   = $phpcsFile->addFixableError($error, $parenthesis, 'SpaceFoundBeforeSemicolon');
                 if ($fix === true) {
                     $phpcsFile->fixer->replaceToken(($parenthesis + 1), '');
                 }
-            } else if ($tokens[$token]['type'] === 'T_CLOSE_TAG') {
+            } elseif ($tokens[$token]['type'] === 'T_CLOSE_TAG') {
                 if ($tokens[($parenthesis)]['line'] !== $tokens[$token]['line']) {
                     // Close tag must be on the same line..
                     $error = 'The close tag must be on the same line as the declare statement';
@@ -177,8 +183,8 @@ class DeclareStatementSniff implements Sniff
                 if ($tokens[$token]['type'] === 'T_OPEN_CURLY_BRACKET') {
                     $curlyBracket = $token;
                 }
-            }//end if
-        }//end if
+            }
+        }
 
         if ($curlyBracket !== false) {
             $prevToken = $phpcsFile->findPrevious(T_WHITESPACE, ($curlyBracket - 1), null, true);
@@ -187,7 +193,7 @@ class DeclareStatementSniff implements Sniff
             // The opening curly bracket must on the same line with a single space between closing bracket.
             if ($tokens[$prevToken]['type'] !== 'T_CLOSE_PARENTHESIS') {
                 $phpcsFile->addError($error, $curlyBracket, 'ExtraSpaceFoundAfterBracket');
-            } else if ($phpcsFile->getTokensAsString(($prevToken + 1), ($curlyBracket - $prevToken - 1)) !== ' ') {
+            } elseif ($phpcsFile->getTokensAsString(($prevToken + 1), ($curlyBracket - $prevToken - 1)) !== ' ') {
                 $fix = $phpcsFile->addFixableError($error, $curlyBracket, 'ExtraSpaceFoundAfterBracket');
                 if ($fix === true) {
                     $phpcsFile->fixer->beginChangeset();
@@ -200,7 +206,7 @@ class DeclareStatementSniff implements Sniff
 
                     $phpcsFile->fixer->endChangeset();
                 }
-            }//end if
+            }
 
             $closeCurlyBracket = $tokens[$curlyBracket]['bracket_closer'];
 
@@ -217,7 +223,7 @@ class DeclareStatementSniff implements Sniff
                         $phpcsFile->fixer->addNewline($prevToken);
                     }
                 }
-            }//end if
+            }
 
             // Closing curly bracket must align with the declare keyword.
             if ($tokens[$stackPtr]['column'] !== $tokens[$closeCurlyBracket]['column']) {
@@ -230,7 +236,7 @@ class DeclareStatementSniff implements Sniff
             }
 
             // The open curly bracket must be the last code on the line.
-            $token = $phpcsFile->findNext(Tokens::$emptyTokens, ($curlyBracket + 1), null, true);
+            $token = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($curlyBracket + 1), null, true);
             if ($tokens[$curlyBracket]['line'] === $tokens[$token]['line']) {
                 $error = 'The open curly bracket of a declare statement must be the last code on the line';
                 $fix   = $phpcsFile->addFixableError($error, $token, 'CodeFoundAfterCurlyBracket');
@@ -243,14 +249,11 @@ class DeclareStatementSniff implements Sniff
                         $phpcsFile->fixer->replaceToken($i, '');
                     }
 
-                    $phpcsFile->fixer->addNewLineBefore($token);
+                    $phpcsFile->fixer->addNewlineBefore($token);
 
                     $phpcsFile->fixer->endChangeset();
                 }
             }
-        }//end if
-
-    }//end process()
-
-
-}//end class
+        }
+    }
+}

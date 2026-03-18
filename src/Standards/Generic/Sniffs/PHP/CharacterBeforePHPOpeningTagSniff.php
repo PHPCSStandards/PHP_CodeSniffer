@@ -4,7 +4,8 @@
  *
  * @author    Andy Grunwald <andygrunwald@gmail.com>
  * @copyright 2010-2014 Andy Grunwald
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\PHP;
@@ -20,25 +21,33 @@ class CharacterBeforePHPOpeningTagSniff implements Sniff
      *
      * Use encoding names as keys and hex BOM representations as values.
      *
-     * @var array
+     * @var array<string, string>
      */
-    protected $bomDefinitions = [
+    protected const BOM_DEFINITIONS = [
         'UTF-8'       => 'efbbbf',
         'UTF-16 (BE)' => 'feff',
         'UTF-16 (LE)' => 'fffe',
     ];
 
+    /**
+     * List of supported BOM definitions.
+     *
+     * @var array<string, string>
+     *
+     * @deprecated 4.0.0 Use the CharacterBeforePHPOpeningTagSniff::BOM_DEFINITIONS constant instead.
+     */
+    protected $bomDefinitions = self::BOM_DEFINITIONS;
+
 
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
         return [T_OPEN_TAG];
-
-    }//end register()
+    }
 
 
     /**
@@ -50,13 +59,13 @@ class CharacterBeforePHPOpeningTagSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $expected = 0;
         if ($stackPtr > 0) {
             // Allow a byte-order mark.
             $tokens = $phpcsFile->getTokens();
-            foreach ($this->bomDefinitions as $bomName => $expectedBomHex) {
+            foreach (static::BOM_DEFINITIONS as $expectedBomHex) {
                 $bomByteLength = (strlen($expectedBomHex) / 2);
                 $htmlBomHex    = bin2hex(substr($tokens[0]['content'], 0, $bomByteLength));
                 if ($htmlBomHex === $expectedBomHex) {
@@ -79,8 +88,5 @@ class CharacterBeforePHPOpeningTagSniff implements Sniff
         // Skip the rest of the file so we don't pick up additional
         // open tags, typically embedded in HTML.
         return $phpcsFile->numTokens;
-
-    }//end process()
-
-
-}//end class
+    }
+}

@@ -3,8 +3,9 @@
  * Bans the use of heredocs and nowdocs.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP;
@@ -19,7 +20,7 @@ class HeredocSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
@@ -27,8 +28,7 @@ class HeredocSniff implements Sniff
             T_START_HEREDOC,
             T_START_NOWDOC,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -40,12 +40,20 @@ class HeredocSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
-        $error = 'Use of heredoc and nowdoc syntax ("<<<") is not allowed; use standard strings or inline HTML instead';
-        $phpcsFile->addError($error, $stackPtr, 'NotAllowed');
+        $tokens = $phpcsFile->getTokens();
 
-    }//end process()
+        $codePrefix = 'Heredoc';
+        $data       = ['heredoc'];
+        if ($tokens[$stackPtr]['code'] === T_START_NOWDOC) {
+            $codePrefix = 'Nowdoc';
+            $data       = ['nowdoc'];
+        }
 
+        $data[] = trim($tokens[$stackPtr]['content']);
 
-}//end class
+        $error = 'Use of %s syntax (%s) is not allowed; use standard strings or inline HTML instead';
+        $phpcsFile->addError($error, $stackPtr, $codePrefix . 'NotAllowed', $data);
+    }
+}

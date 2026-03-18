@@ -3,8 +3,9 @@
  * Verifies that the short form of type keywords is used (e.g., int, bool).
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR12\Sniffs\Keywords;
@@ -19,7 +20,7 @@ class ShortFormTypeKeywordsSniff implements Sniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
-     * @return array
+     * @return array<int|string>
      */
     public function register()
     {
@@ -27,8 +28,7 @@ class ShortFormTypeKeywordsSniff implements Sniff
             T_BOOL_CAST,
             T_INT_CAST,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -40,7 +40,7 @@ class ShortFormTypeKeywordsSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens     = $phpcsFile->getTokens();
         $typecast   = str_replace(' ', '', $tokens[$stackPtr]['content']);
@@ -68,8 +68,5 @@ class ShortFormTypeKeywordsSniff implements Sniff
 
             $phpcsFile->fixer->replaceToken($stackPtr, $replacement);
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

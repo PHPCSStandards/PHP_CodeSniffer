@@ -3,8 +3,9 @@
  * Checks the declaration of the class and its inheritance is correct.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Classes;
@@ -26,7 +27,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         // We want all the errors from the PSR2 standard, plus some of our own.
         parent::process($phpcsFile, $stackPtr);
@@ -38,8 +39,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
             $error = 'Only one interface or class is allowed in a file';
             $phpcsFile->addError($error, $nextClass, 'MultipleClasses');
         }
-
-    }//end process()
+    }
 
 
     /**
@@ -51,7 +51,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
      *
      * @return void
      */
-    public function processOpen(File $phpcsFile, $stackPtr)
+    public function processOpen(File $phpcsFile, int $stackPtr)
     {
         parent::processOpen($phpcsFile, $stackPtr);
 
@@ -65,6 +65,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
 
                 if ($tokens[($stackPtr - 2)]['code'] !== T_ABSTRACT
                     && $tokens[($stackPtr - 2)]['code'] !== T_FINAL
+                    && $tokens[($stackPtr - 2)]['code'] !== T_READONLY
                 ) {
                     if ($spaces !== 0) {
                         $type  = strtolower($tokens[$stackPtr]['content']);
@@ -80,10 +81,9 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
                         }
                     }
                 }
-            }//end if
-        }//end if
-
-    }//end processOpen()
+            }
+        }
+    }
 
 
     /**
@@ -95,7 +95,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
      *
      * @return void
      */
-    public function processClose(File $phpcsFile, $stackPtr)
+    public function processClose(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if (isset($tokens[$stackPtr]['scope_closer']) === false) {
@@ -110,7 +110,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
             if ($tokens[$nextContent]['line'] === $tokens[$closeBrace]['line']
                 && ($tokens[$nextContent]['code'] === T_WHITESPACE
                 || $tokens[$nextContent]['code'] === T_COMMENT
-                || isset(Tokens::$phpcsCommentTokens[$tokens[$nextContent]['code']]) === true)
+                || isset(Tokens::PHPCS_ANNOTATION_TOKENS[$tokens[$nextContent]['code']]) === true)
             ) {
                 continue;
             }
@@ -144,7 +144,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
                     $phpcsFile->fixer->addNewlineBefore($closeBrace);
                 }
             }
-        } else if ($tokens[($closeBrace - 1)]['code'] === T_WHITESPACE) {
+        } elseif ($tokens[($closeBrace - 1)]['code'] === T_WHITESPACE) {
             $prevContent = $tokens[($closeBrace - 1)]['content'];
             if ($prevContent !== $phpcsFile->eolChar) {
                 $blankSpace = substr($prevContent, strpos($prevContent, $phpcsFile->eolChar));
@@ -163,14 +163,31 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
                     }
                 }
             }
-        }//end if
+        }
 
         if ($difference !== -1 && $difference !== 1) {
-            if ($tokens[$nextContent]['code'] === T_DOC_COMMENT_OPEN_TAG) {
-                $next = $phpcsFile->findNext(T_WHITESPACE, ($tokens[$nextContent]['comment_closer'] + 1), null, true);
-                if ($next !== false && $tokens[$next]['code'] === T_FUNCTION) {
-                    return;
+            for ($nextSignificant = $nextContent; $nextSignificant < $phpcsFile->numTokens; $nextSignificant++) {
+                if ($tokens[$nextSignificant]['code'] === T_WHITESPACE) {
+                    continue;
                 }
+
+                if ($tokens[$nextSignificant]['code'] === T_DOC_COMMENT_OPEN_TAG) {
+                    $nextSignificant = $tokens[$nextSignificant]['comment_closer'];
+                    continue;
+                }
+
+                if ($tokens[$nextSignificant]['code'] === T_ATTRIBUTE
+                    && isset($tokens[$nextSignificant]['attribute_closer']) === true
+                ) {
+                    $nextSignificant = $tokens[$nextSignificant]['attribute_closer'];
+                    continue;
+                }
+
+                break;
+            }
+
+            if ($tokens[$nextSignificant]['code'] === T_FUNCTION) {
+                return;
             }
 
             $error = 'Closing brace of a %s must be followed by a single blank line; found %s';
@@ -188,7 +205,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
                     for ($i = ($closeBrace + 1); $i < $nextContent; $i++) {
                         if ($tokens[$i]['line'] <= ($tokens[$closeBrace]['line'] + 1)) {
                             continue;
-                        } else if ($tokens[$i]['line'] === $tokens[$nextContent]['line']) {
+                        } elseif ($tokens[$i]['line'] === $tokens[$nextContent]['line']) {
                             break;
                         }
 
@@ -198,9 +215,6 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
                     $phpcsFile->fixer->endChangeset();
                 }
             }
-        }//end if
-
-    }//end processClose()
-
-
-}//end class
+        }
+    }
+}
