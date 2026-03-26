@@ -3,8 +3,9 @@
  * A filter to only include files that have been modified or added in a Git repository.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Filters;
@@ -18,37 +19,20 @@ class GitModified extends ExactMatch
     /**
      * Get a list of file paths to exclude.
      *
-     * @since 3.9.0
+     * @since 3.9.0 Replaces the `getBlacklist()` method, which was removed in PHPCS 4.0.0.
      *
      * @return array
      */
     protected function getDisallowedFiles()
     {
         return [];
-
-    }//end getDisallowedFiles()
-
-
-    /**
-     * Get a list of file paths to exclude.
-     *
-     * @deprecated 3.9.0 Overload the `getDisallowedFiles()` method instead.
-     *
-     * @codeCoverageIgnore
-     *
-     * @return array
-     */
-    protected function getBlacklist()
-    {
-        return $this->getDisallowedFiles();
-
-    }//end getBlacklist()
+    }
 
 
     /**
      * Get a list of file paths to include.
      *
-     * @since 3.9.0
+     * @since 3.9.0 Replaces the `getWhitelist()` method, which was removed in PHPCS 4.0.0.
      *
      * @return array
      */
@@ -56,7 +40,7 @@ class GitModified extends ExactMatch
     {
         $modified = [];
 
-        $cmd    = 'git ls-files -o -m --exclude-standard -- '.escapeshellarg($this->basedir);
+        $cmd    = 'git ls-files -o -m --exclude-standard -- ' . escapeshellarg($this->basedir);
         $output = $this->exec($cmd);
 
         $basedir = $this->basedir;
@@ -78,24 +62,7 @@ class GitModified extends ExactMatch
         }
 
         return $modified;
-
-    }//end getAllowedFiles()
-
-
-    /**
-     * Get a list of file paths to include.
-     *
-     * @deprecated 3.9.0 Overload the `getAllowedFiles()` method instead.
-     *
-     * @codeCoverageIgnore
-     *
-     * @return array
-     */
-    protected function getWhitelist()
-    {
-        return $this->getAllowedFiles();
-
-    }//end getWhitelist()
+    }
 
 
     /**
@@ -108,7 +75,7 @@ class GitModified extends ExactMatch
      *
      * @return array
      */
-    protected function exec($cmd)
+    protected function exec(string $cmd)
     {
         $output   = [];
         $lastLine = exec($cmd, $output);
@@ -117,8 +84,5 @@ class GitModified extends ExactMatch
         }
 
         return $output;
-
-    }//end exec()
-
-
-}//end class
+    }
+}

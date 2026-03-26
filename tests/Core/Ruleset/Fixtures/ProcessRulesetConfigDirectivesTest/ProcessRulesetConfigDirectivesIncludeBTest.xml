@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="ProcessRulesetConfigDirectivesTest" xsi:noNamespaceSchemaLocation="https://schema.phpcodesniffer.com/phpcs.xsd">
+
+    <!-- These config directives should not be applied. Root should win. -->
+    <config name="expectValueFromParentATestSetBeforeIncludes" value="child B"/>
+    <config name="expectValueFromParentATestSetAfterIncludes" value="child B"/>
+
+    <!-- For this config directive, this is the "highest" level, but the directive is also set in the "child A"
+         ruleset, which is at the same "level".
+         In that case, the value which "wins" is determined by the order in which the rulesets are included.
+         In this case, that means that "child B" should win as "child A" is included _before_ child B (from the root ruleset),
+         so the value from "child B" overwrites the value from the earlier read "child A".
+    -->
+    <config name="expectValueFromChildBTestInChildAAndChildB" value="child B"/>
+
+    <!-- For this config directive, this is the "highest" level, but the directive is also set in the "grandchild A" ruleset.
+         Highest level should win, independently of whether the grandchild is a child of this ruleset, or of another ruleset.
+    -->
+    <config name="expectValueFromChildBTestAlsoInGrandChildA" value="child B"/>
+
+    <!-- This directive is only set in this ruleset, so should be applied. -->
+    <config name="expectValueFromChildBTest" value="child B"/>
+
+</ruleset>

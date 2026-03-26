@@ -3,8 +3,9 @@
  * Ensures the file does not end with a newline character.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Files;
@@ -14,17 +15,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class EndFileNoNewlineSniff implements Sniff
 {
-
-    /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-        'CSS',
-    ];
 
 
     /**
@@ -38,8 +28,7 @@ class EndFileNoNewlineSniff implements Sniff
             T_OPEN_TAG,
             T_OPEN_TAG_WITH_ECHO,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -51,7 +40,7 @@ class EndFileNoNewlineSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         // Skip to the end of the file.
         $tokens   = $phpcsFile->getTokens();
@@ -84,8 +73,5 @@ class EndFileNoNewlineSniff implements Sniff
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
-
-    }//end process()
-
-
-}//end class
+    }
+}

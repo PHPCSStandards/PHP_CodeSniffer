@@ -4,7 +4,8 @@
  *
  * @author    Matthew Peveler <matt.peveler@gmail.com>
  * @copyright 2019 Matthew Peveler
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Files;
@@ -27,8 +28,7 @@ class ExecutableFileSniff implements Sniff
             T_OPEN_TAG,
             T_OPEN_TAG_WITH_ECHO,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -40,7 +40,7 @@ class ExecutableFileSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $filename = $phpcsFile->getFilename();
 
@@ -55,8 +55,5 @@ class ExecutableFileSniff implements Sniff
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
-
-    }//end process()
-
-
-}//end class
+    }
+}

@@ -3,20 +3,21 @@
  * Unit test class for the StaticThisUsage sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\Scope;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the StaticThisUsage sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\Scope\StaticThisUsageSniff
  */
-final class StaticThisUsageUnitTest extends AbstractSniffUnitTest
+final class StaticThisUsageUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -45,8 +46,7 @@ final class StaticThisUsageUnitTest extends AbstractSniffUnitTest
             99  => 1,
             125 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -60,8 +60,5 @@ final class StaticThisUsageUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

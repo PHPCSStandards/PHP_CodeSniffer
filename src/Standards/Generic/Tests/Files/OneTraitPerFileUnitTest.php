@@ -4,19 +4,20 @@
  *
  * @author    Alexander Obuhovich <aik.bold@gmail.com>
  * @copyright 2010-2014 Alexander Obuhovich
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Files;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the OneTraitPerFile sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\OneTraitPerFileSniff
  */
-final class OneTraitPerFileUnitTest extends AbstractSniffUnitTest
+final class OneTraitPerFileUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -26,7 +27,7 @@ final class OneTraitPerFileUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
-     * @return array(int => int)
+     * @return array<int, int>
      */
     public function getErrorList()
     {
@@ -34,8 +35,7 @@ final class OneTraitPerFileUnitTest extends AbstractSniffUnitTest
             6  => 1,
             10 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -44,13 +44,10 @@ final class OneTraitPerFileUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
-     * @return array(int => int)
+     * @return array<int, int>
      */
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

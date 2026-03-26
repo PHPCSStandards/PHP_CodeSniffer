@@ -3,20 +3,21 @@
  * Unit test class for the DisallowBooleanStatement sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\PHP;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the DisallowBooleanStatement sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DisallowBooleanStatementSniff
  */
-final class DisallowBooleanStatementUnitTest extends AbstractSniffUnitTest
+final class DisallowBooleanStatementUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -36,8 +37,7 @@ final class DisallowBooleanStatementUnitTest extends AbstractSniffUnitTest
             13 => 1,
             15 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -51,8 +51,5 @@ final class DisallowBooleanStatementUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

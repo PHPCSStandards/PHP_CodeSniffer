@@ -21,7 +21,8 @@
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @author    Manuel Pichler <mapi@manuel-pichler.de>
  * @copyright 2007-2014 Manuel Pichler. All rights reserved.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis;
@@ -42,8 +43,7 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
     public function register()
     {
         return [T_FOR];
-
-    }//end register()
+    }
 
 
     /**
@@ -55,7 +55,7 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $token  = $tokens[$stackPtr];
@@ -78,24 +78,21 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
 
             if ($position < 1) {
                 continue;
-            } else if ($position > 1) {
+            } elseif ($position > 1) {
                 break;
-            } else if ($code !== T_VARIABLE && $code !== T_STRING) {
+            } elseif ($code !== T_VARIABLE && isset(Tokens::NAME_TOKENS[$code]) === false) {
                 continue;
             }
 
             // Find next non empty token, if it is a open parenthesis we have a
             // function call.
-            $index = $phpcsFile->findNext(Tokens::$emptyTokens, ($next + 1), null, true);
+            $index = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($next + 1), null, true);
 
             if ($tokens[$index]['code'] === T_OPEN_PARENTHESIS) {
                 $error = 'Avoid function calls in a FOR loop test part';
                 $phpcsFile->addWarning($error, $stackPtr, 'NotAllowed');
                 break;
             }
-        }//end for
-
-    }//end process()
-
-
-}//end class
+        }
+    }
+}

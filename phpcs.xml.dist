@@ -3,14 +3,17 @@
     <description>The coding standard for PHP_CodeSniffer itself.</description>
 
     <file>autoload.php</file>
-    <file>bin</file>
+    <file>requirements.php</file>
+    <file>bin/phpcs</file>
+    <file>bin/phpcbf</file>
     <file>scripts</file>
     <file>src</file>
     <file>tests</file>
 
-    <exclude-pattern>*/src/Standards/*/Tests/*\.(inc|css|js)$</exclude-pattern>
-    <exclude-pattern>*/tests/Core/*/*\.(inc|css|js)$</exclude-pattern>
+    <exclude-pattern>*/src/Standards/*/Tests/*\.inc$</exclude-pattern>
+    <exclude-pattern>*/tests/Core/*/*\.inc$</exclude-pattern>
     <exclude-pattern>*/tests/Core/*/Fixtures/*\.php$</exclude-pattern>
+    <exclude-pattern>*/tests/EndToEnd/Fixtures/*\.inc$</exclude-pattern>
 
     <arg name="basepath" value="."/>
     <arg name="colors"/>
@@ -22,40 +25,63 @@
         <exclude name="PEAR.NamingConventions.ValidFunctionName"/>
         <exclude name="PEAR.NamingConventions.ValidVariableName"/>
         <exclude name="PEAR.Commenting.ClassComment"/>
+        <exclude name="PEAR.Commenting.FileComment.MissingAuthorTag"/>
         <exclude name="PEAR.Commenting.FileComment.MissingCategoryTag"/>
         <exclude name="PEAR.Commenting.FileComment.MissingPackageTag"/>
         <exclude name="PEAR.Commenting.FileComment.MissingLinkTag"/>
         <exclude name="PEAR.Commenting.FileComment.MissingVersion"/>
         <exclude name="PEAR.Commenting.InlineComment"/>
         <exclude name="Generic.Files.LineLength"/>
+        <exclude name="PEAR.WhiteSpace.ScopeIndent"/>
     </rule>
 
     <!-- Include some sniffs from other standards that don't conflict with PEAR -->
+    <rule ref="Generic.WhiteSpace.ScopeIndent"/>
     <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
     <rule ref="Squiz.Arrays.ArrayDeclaration"/>
-    <rule ref="Squiz.Commenting.ClosingDeclarationComment"/>
+    <rule ref="PSR12.Classes.ClosingBrace"/>
     <rule ref="Squiz.ControlStructures.ControlSignature"/>
-    <rule ref="Squiz.ControlStructures.ElseIfDeclaration"/>
+    <rule ref="PSR2.ControlStructures.ElseIfDeclaration"/>
     <rule ref="Squiz.Commenting.BlockComment"/>
     <rule ref="Squiz.Commenting.DocCommentAlignment"/>
     <rule ref="Squiz.Commenting.EmptyCatchComment"/>
     <rule ref="Squiz.Commenting.InlineComment"/>
-    <rule ref="Squiz.Commenting.LongConditionClosingComment"/>
-    <rule ref="Squiz.Commenting.PostStatementComment"/>
-    <rule ref="Squiz.Commenting.VariableComment"/>
+    <rule ref="Squiz.Commenting.PostStatementComment">
+        <exclude name="Squiz.Commenting.PostStatementComment.AnnotationFound"/>
+    </rule>
+    <rule ref="Squiz.Commenting.VariableComment">
+        <exclude name="Squiz.Commenting.VariableComment.DeprecatedTagNotAllowed"/>
+        <exclude name="Squiz.Commenting.VariableComment.LinkTagNotAllowed"/>
+    </rule>
     <rule ref="Squiz.Formatting.OperatorBracket"/>
-    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing"/>
+    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
+        <properties>
+            <property name="equalsSpacing" value="1"/>
+        </properties>
+    </rule>
     <rule ref="Squiz.Operators.ComparisonOperatorUsage"/>
     <rule ref="Squiz.PHP.DisallowInlineIf"/>
     <rule ref="Squiz.Scope.MethodScope"/>
-    <rule ref="Squiz.Strings.ConcatenationSpacing"/>
+    <rule ref="Squiz.Strings.DoubleQuoteUsage.NotRequired"/>
+    <rule ref="Generic.Strings.UnnecessaryHeredoc"/>
     <rule ref="Squiz.WhiteSpace.ControlStructureSpacing"/>
-    <rule ref="Squiz.WhiteSpace.FunctionClosingBraceSpace"/>
-    <rule ref="Squiz.WhiteSpace.FunctionSpacing"/>
+    <rule ref="Squiz.WhiteSpace.FunctionClosingBraceSpace">
+        <exclude name="Squiz.WhiteSpace.FunctionClosingBraceSpace.SpacingBeforeClose"/>
+    </rule>
+    <rule ref="PSR2.Methods.FunctionClosingBrace"/>
+    <rule ref="Squiz.WhiteSpace.FunctionSpacing">
+        <properties>
+            <property name="spacingAfterLast" value="0"/>
+        </properties>
+    </rule>
     <rule ref="Squiz.WhiteSpace.MemberVarSpacing"/>
-    <rule ref="Squiz.WhiteSpace.OperatorSpacing"/>
+    <rule ref="PSR12.Operators.OperatorSpacing"/>
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
-    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax">
+        <!-- Files involved in the requirements check should stay compatible with PHP 5.3. -->
+        <exclude-pattern>bin/phpc(s|bf)$</exclude-pattern>
+        <exclude-pattern>requirements\.php$</exclude-pattern>
+    </rule>
     <rule ref="Generic.Commenting.Todo"/>
     <rule ref="Generic.ControlStructures.DisallowYodaConditions"/>
     <rule ref="Generic.ControlStructures.InlineControlStructure"/>
@@ -116,12 +142,11 @@
     <!-- Ban some functions -->
     <rule ref="Generic.PHP.ForbiddenFunctions">
         <properties>
-            <property name="forbiddenFunctions" type="array">
-                <element key="sizeof" value="count"/>
-                <element key="delete" value="unset"/>
+            <property name="forbiddenFunctions" type="array" extend="true">
                 <element key="print" value="echo"/>
                 <element key="is_null" value="null"/>
                 <element key="create_function" value="null"/>
+                <element key="join" value="implode"/>
             </property>
         </properties>
     </rule>
@@ -132,14 +157,9 @@
     <!-- Do not allow ambiguous conditions. -->
     <rule ref="Generic.CodeAnalysis.RequireExplicitBooleanOperatorPrecedence"/>
 
-    <!-- The testing bootstrap file uses string concats to stop IDEs seeing the class aliases -->
-    <rule ref="Generic.Strings.UnnecessaryStringConcat">
-        <exclude-pattern>tests/bootstrap\.php</exclude-pattern>
-    </rule>
-
     <!-- This test file specifically *needs* Windows line endings for testing purposes. -->
     <rule ref="Generic.Files.LineEndings.InvalidEOLChar">
-        <exclude-pattern>tests/Core/Tokenizer/PHP/StableCommentWhitespaceWinTest\.php</exclude-pattern>
+        <exclude-pattern>tests/Core/Tokenizers/PHP/*WinTest\.php</exclude-pattern>
     </rule>
 
     <!-- Avoid false positive with this sniff detecting itself -->
@@ -148,8 +168,31 @@
         <exclude-pattern>src/Standards/Generic/Tests/Commenting/TodoUnitTest\.php</exclude-pattern>
     </rule>
 
-    <!-- @see https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/122#discussion_r1414167897 -->
-    <rule ref="Squiz.Commenting.VariableComment">
-        <exclude-pattern>src/Util/Tokens\.php</exclude-pattern>
+    <!-- Require visibility for class constants. -->
+    <rule ref="PSR12.Properties.ConstantVisibility"/>
+
+    <!-- Handle consistent formatting of return types. -->
+    <rule ref="PSR12.Functions.ReturnTypeDeclaration"/>
+
+    <!-- Separate header blocks with a single blank line. -->
+    <rule ref="PSR12.Files.FileHeader">
+        <exclude name="PSR12.Files.FileHeader.SpacingAfterTagBlock"/>
     </rule>
+    <rule ref="PSR12.Files.FileHeader.SpacingAfterNamespaceBlock">
+        <!-- Prevent conflict with function spacing sniff. -->
+        <exclude-pattern>/requirements\.php</exclude-pattern>
+    </rule>
+
+    <!-- Use select error codes from the Squiz FunctionComment sniff, which shouldn't conflict with the PEAR sniff. -->
+    <rule ref="Squiz.Commenting.FunctionComment.InvalidReturnVoid"/>
+    <rule ref="Squiz.Commenting.FunctionComment.InvalidNoReturn"/>
+    <rule ref="Squiz.Commenting.FunctionComment.InvalidReturnNotVoid"/>
+    <rule ref="Squiz.Commenting.FunctionComment.ThrowsNotCapital"/>
+    <rule ref="Squiz.Commenting.FunctionComment.ThrowsNoFullStop"/>
+    <rule ref="Squiz.Commenting.FunctionComment.InvalidReturnVoid"/>
+    <rule ref="Squiz.Commenting.FunctionComment.IncorrectTypeHint"/>
+    <rule ref="Squiz.Commenting.FunctionComment.InvalidTypeHint"/>
+    <rule ref="Squiz.Commenting.FunctionComment.ParamNameUnexpectedAmpersandPrefix"/>
+    <rule ref="Squiz.Commenting.FunctionComment.ParamCommentNotCapital"/>
+
 </ruleset>

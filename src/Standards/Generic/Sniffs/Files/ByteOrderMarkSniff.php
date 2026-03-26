@@ -5,7 +5,8 @@
  * @author    Piotr Karas <office@mediaself.pl>
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2010-2014 mediaSELF Sp. z o.o.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Files;
@@ -21,13 +22,22 @@ class ByteOrderMarkSniff implements Sniff
      *
      * Use encoding names as keys and hex BOM representations as values.
      *
-     * @var array
+     * @var array<string, string>
      */
-    protected $bomDefinitions = [
+    protected const BOM_DEFINITIONS = [
         'UTF-8'       => 'efbbbf',
         'UTF-16 (BE)' => 'feff',
         'UTF-16 (LE)' => 'fffe',
     ];
+
+    /**
+     * List of supported BOM definitions.
+     *
+     * @var array<string, string>
+     *
+     * @deprecated 4.0.0 Use the ByteOrderMarkSniff::BOM_DEFINITIONS constant instead.
+     */
+    protected $bomDefinitions = self::BOM_DEFINITIONS;
 
 
     /**
@@ -38,8 +48,7 @@ class ByteOrderMarkSniff implements Sniff
     public function register()
     {
         return [T_INLINE_HTML];
-
-    }//end register()
+    }
 
 
     /**
@@ -51,7 +60,7 @@ class ByteOrderMarkSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         // The BOM will be the very first token in the file.
         if ($stackPtr !== 0) {
@@ -60,7 +69,7 @@ class ByteOrderMarkSniff implements Sniff
 
         $tokens = $phpcsFile->getTokens();
 
-        foreach ($this->bomDefinitions as $bomName => $expectedBomHex) {
+        foreach (static::BOM_DEFINITIONS as $bomName => $expectedBomHex) {
             $bomByteLength = (strlen($expectedBomHex) / 2);
             $htmlBomHex    = bin2hex(substr($tokens[$stackPtr]['content'], 0, $bomByteLength));
             if ($htmlBomHex === $expectedBomHex) {
@@ -75,8 +84,5 @@ class ByteOrderMarkSniff implements Sniff
         $phpcsFile->recordMetric($stackPtr, 'Using byte order mark', 'no');
 
         return $phpcsFile->numTokens;
-
-    }//end process()
-
-
-}//end class
+    }
+}

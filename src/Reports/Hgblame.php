@@ -4,13 +4,15 @@
  *
  * @author    Ben Selby <benmatselby@gmail.com>
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Exceptions\DeepExitException;
+use PHP_CodeSniffer\Util\ExitCode;
 
 class Hgblame extends VersionControl
 {
@@ -30,7 +32,7 @@ class Hgblame extends VersionControl
      *
      * @return string|false String or FALSE if impossible to recover.
      */
-    protected function getAuthor($line)
+    protected function getAuthor(string $line)
     {
         $blameParts = [];
         $line       = preg_replace('|\s+|', ' ', $line);
@@ -54,8 +56,7 @@ class Hgblame extends VersionControl
         $parts = array_slice($parts, 0, (count($parts) - 6));
 
         return trim(preg_replace('|<.+>|', '', implode(' ', $parts)));
-
-    }//end getAuthor()
+    }
 
 
     /**
@@ -66,7 +67,7 @@ class Hgblame extends VersionControl
      * @return array
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException
      */
-    protected function getBlameContent($filename)
+    protected function getBlameContent(string $filename)
     {
         $cwd = getcwd();
 
@@ -76,7 +77,7 @@ class Hgblame extends VersionControl
         while (empty($fileParts) === false) {
             array_pop($fileParts);
             $location = implode(DIRECTORY_SEPARATOR, $fileParts);
-            if (is_dir($location.DIRECTORY_SEPARATOR.'.hg') === true) {
+            if (is_dir($location . DIRECTORY_SEPARATOR . '.hg') === true) {
                 $found = true;
                 break;
             }
@@ -85,15 +86,15 @@ class Hgblame extends VersionControl
         if ($found === true) {
             chdir($location);
         } else {
-            $error = 'ERROR: Could not locate .hg directory '.PHP_EOL.PHP_EOL;
-            throw new DeepExitException($error, 3);
+            $error = 'ERROR: Could not locate .hg directory ' . PHP_EOL . PHP_EOL;
+            throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         }
 
-        $command = 'hg blame -u -d -v "'.$filename.'" 2>&1';
+        $command = 'hg blame -u -d -v "' . $filename . '" 2>&1';
         $handle  = popen($command, 'r');
         if ($handle === false) {
-            $error = 'ERROR: Could not execute "'.$command.'"'.PHP_EOL.PHP_EOL;
-            throw new DeepExitException($error, 3);
+            $error = 'ERROR: Could not execute "' . $command . '"' . PHP_EOL . PHP_EOL;
+            throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         }
 
         $rawContent = stream_get_contents($handle);
@@ -103,8 +104,5 @@ class Hgblame extends VersionControl
         chdir($cwd);
 
         return $blames;
-
-    }//end getBlameContent()
-
-
-}//end class
+    }
+}

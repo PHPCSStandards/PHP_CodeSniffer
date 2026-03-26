@@ -1,7 +1,11 @@
 <!-- Provide a general summary of your changes in the title above. -->
 
 <!--
-Please target the `master` branch when submitting your pull request, unless your change **only** applies to PHPCS 4.x.
+Please target the branch for the current major when submitting your pull request.
+
+For older majors, only CI, security and PHP runtime compatibility patches will be accepted for up to a year
+after the new major was released.
+If your patch falls into this category, target the oldest major still accepting patches.
 -->
 
 # Description
@@ -35,11 +39,12 @@ Fixes #
 ## PR checklist
 <!-- Go over all the following points, and put an `x` in all the boxes that apply. -->
 - [ ] I have checked there is no other PR open for the same change.
-- [ ] I have read the [Contribution Guidelines](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/.github/CONTRIBUTING.md).
+- [ ] I have read the [Contribution Guidelines](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/.github/CONTRIBUTING.md).
 - [ ] I grant the project the right to include and distribute the code under the BSD-3-Clause license (and I have the right to grant these rights).
 - [ ] I have added tests to cover my changes.
 - [ ] I have verified that the code complies with the projects coding standards.
 - [ ] \[Required for new sniffs\] I have added XML documentation for the sniff.
+- [ ] I have opened a sister-PR in the [documentation repository](https://github.com/PHPCSStandards/PHP_CodeSniffer-documentation) to update the Wiki.
 
 <!--
 ============================================================================================

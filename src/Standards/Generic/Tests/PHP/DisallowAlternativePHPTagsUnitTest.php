@@ -3,48 +3,22 @@
  * Unit test class for the DisallowAlternativePHPTags sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the DisallowAlternativePHPTags sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DisallowAlternativePHPTagsSniff
  */
-final class DisallowAlternativePHPTagsUnitTest extends AbstractSniffUnitTest
+final class DisallowAlternativePHPTagsUnitTest extends AbstractSniffTestCase
 {
-
-
-    /**
-     * Get a list of all test files to check.
-     *
-     * @param string $testFileBase The base path that the unit tests files will have.
-     *
-     * @return string[]
-     */
-    protected function getTestFiles($testFileBase)
-    {
-        $testFiles = [$testFileBase.'1.inc'];
-
-        $aspTags = false;
-        if (PHP_VERSION_ID < 70000) {
-            $aspTags = (bool) ini_get('asp_tags');
-        }
-
-        if ($aspTags === true) {
-            $testFiles[] = $testFileBase.'2.inc';
-        } else {
-            $testFiles[] = $testFileBase.'3.inc';
-        }
-
-        return $testFiles;
-
-    }//end getTestFiles()
 
 
     /**
@@ -57,28 +31,21 @@ final class DisallowAlternativePHPTagsUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'DisallowAlternativePHPTagsUnitTest.1.inc':
-            return [
-                4  => 1,
-                7  => 1,
-                8  => 1,
-                11 => 1,
-            ];
-        case 'DisallowAlternativePHPTagsUnitTest.2.inc':
-            return [
-                2 => 1,
-                3 => 1,
-                4 => 1,
-                5 => 1,
-            ];
-        default:
-            return [];
-        }//end switch
+            case 'DisallowAlternativePHPTagsUnitTest.1.inc':
+                return [
+                    4  => 1,
+                    7  => 1,
+                    8  => 1,
+                    11 => 1,
+                ];
 
-    }//end getErrorList()
+            default:
+                return [];
+        }
+    }
 
 
     /**
@@ -91,20 +58,25 @@ final class DisallowAlternativePHPTagsUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
-        if ($testFile === 'DisallowAlternativePHPTagsUnitTest.3.inc') {
+        if ($testFile === 'DisallowAlternativePHPTagsUnitTest.2.inc') {
+            // Check if the Internal.NoCodeFound error can be expected on line 1.
+            $option = (bool) ini_get('short_open_tag');
+            $line1  = 1;
+            if ($option === true) {
+                $line1 = 0;
+            }
+
             return [
+                1 => $line1,
+                2 => 1,
                 3 => 1,
                 4 => 1,
                 5 => 1,
-                6 => 1,
             ];
         }
 
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

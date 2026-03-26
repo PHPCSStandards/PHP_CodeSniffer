@@ -317,7 +317,7 @@ foo(
     $e
 );
 
-test(
+Partially\Qualified\test(
         1,2,3,4
     );
 
@@ -374,7 +374,7 @@ return (function ($a, $b) {
 
 function foo()
 {
-     Bar(
+     \Bar(
         function () {
         }
     );
@@ -390,7 +390,7 @@ $deprecated_functions = [
 
 $deprecated_functions = [
     'the_category_ID'
-         => function_call( // 9 spaces, not 8. This is the problem line.
+         => namespace\function_call( // 9 spaces, not 8. This is the problem line.
         $a,
         $b
     ),
@@ -574,3 +574,38 @@ content
     'my_file.php'
   ); ?>
 <?php endif; ?>
+
+<?php
+$val = \functionCall ( $arg );
+$val = Package\functionCall( $arg );
+$val = namespace\functionCall ($arg);
+
+$val = \functionCall ( $arg
+, $arg2 );
+$val = Package\functionCall(
+                            $arg, $arg2);
+$val = namespace\functionCall(
+    $arg,
+    $arg2
+);
+
+// Anonymous object instantiations are treated the same as a normal call.
+$anon = new class() {};
+$anon = new class($foo, true) {};
+$anon = new class(
+    $foo,
+    true,
+    10
+) {};
+
+$anon = new class( ) {};
+$anon = new class( $foo, true    ) {};
+$anon = new class($foo,
+
+  true, 10) {};
+
+// ... though do not enforce no space between the class keyword and the open parenthesis.
+$anon = new class () {};
+
+// And anonymous object instantiations without parentheses are ignored.
+$anon = new class {};

@@ -586,3 +586,13 @@ $x = array(
       $class instanceof static,
       2,
      );
+
+$noSpaceBeforeDoubleArrow = array(
+                             'width'  => '',
+                             'height' => '',
+                            );
+
+$newlineAfterDoubleArrow = array(
+                            'width'  => '',
+                            'height' => '',
+                           );

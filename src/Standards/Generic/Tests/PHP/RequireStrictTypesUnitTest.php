@@ -3,20 +3,21 @@
  * Unit test class for the RequireStrictType sniff.
  *
  * @author    Sertan Danis <sdanis@squiz.net>
- * @copyright 2006-2019 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the RequireStrictType sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\RequireStrictTypesSniff
  */
-final class RequireStrictTypesUnitTest extends AbstractSniffUnitTest
+final class RequireStrictTypesUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -30,20 +31,19 @@ final class RequireStrictTypesUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'RequireStrictTypesUnitTest.2.inc':
-        case 'RequireStrictTypesUnitTest.5.inc':
-        case 'RequireStrictTypesUnitTest.6.inc':
-        case 'RequireStrictTypesUnitTest.10.inc':
-            return [1 => 1];
+            case 'RequireStrictTypesUnitTest.2.inc':
+            case 'RequireStrictTypesUnitTest.5.inc':
+            case 'RequireStrictTypesUnitTest.6.inc':
+            case 'RequireStrictTypesUnitTest.10.inc':
+                return [1 => 1];
 
-        default:
-            return [];
+            default:
+                return [];
         }
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -53,20 +53,17 @@ final class RequireStrictTypesUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'RequireStrictTypesUnitTest.11.inc':
-        case 'RequireStrictTypesUnitTest.12.inc':
-        case 'RequireStrictTypesUnitTest.14.inc':
-        case 'RequireStrictTypesUnitTest.15.inc':
-            return [3 => 1];
+            case 'RequireStrictTypesUnitTest.11.inc':
+            case 'RequireStrictTypesUnitTest.12.inc':
+            case 'RequireStrictTypesUnitTest.14.inc':
+            case 'RequireStrictTypesUnitTest.15.inc':
+                return [3 => 1];
 
-        default:
-            return [];
+            default:
+                return [];
         }
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

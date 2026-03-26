@@ -4,19 +4,20 @@
  *
  * @author    Manuel Pichler <mapi@manuel-pichler.de>
  * @copyright 2007-2014 Manuel Pichler. All rights reserved.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\CodeAnalysis;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the UnconditionalIfStatement sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UnconditionalIfStatementSniff
  */
-final class UnconditionalIfStatementUnitTest extends AbstractSniffUnitTest
+final class UnconditionalIfStatementUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -31,8 +32,7 @@ final class UnconditionalIfStatementUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -45,21 +45,20 @@ final class UnconditionalIfStatementUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'UnconditionalIfStatementUnitTest.1.inc':
-            return [
-                3 => 1,
-                5 => 1,
-                7 => 1,
-            ];
+            case 'UnconditionalIfStatementUnitTest.1.inc':
+                return [
+                    3  => 1,
+                    5  => 1,
+                    7  => 1,
+                    16 => 1,
+                    17 => 1,
+                ];
 
-        default:
-            return [];
-        }//end switch
-
-    }//end getWarningList()
-
-
-}//end class
+            default:
+                return [];
+        }
+    }
+}

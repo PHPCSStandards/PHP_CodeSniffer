@@ -3,7 +3,7 @@
  * Checks that abstract classes are prefixed by Abstract.
  *
  * @author  Anna Borzenko <annnechko@gmail.com>
- * @license https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions;
@@ -23,8 +23,7 @@ class AbstractClassNamePrefixSniff implements Sniff
     public function register()
     {
         return [T_CLASS];
-
-    }//end register()
+    }
 
 
     /**
@@ -36,7 +35,7 @@ class AbstractClassNamePrefixSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         if ($phpcsFile->getClassProperties($stackPtr)['is_abstract'] === false) {
             // This class is not abstract so we don't need to check it.
@@ -44,8 +43,8 @@ class AbstractClassNamePrefixSniff implements Sniff
         }
 
         $className = $phpcsFile->getDeclarationName($stackPtr);
-        if ($className === null) {
-            // We are not interested in anonymous classes.
+        if ($className === '') {
+            // Live coding or parse error.
             return;
         }
 
@@ -53,8 +52,5 @@ class AbstractClassNamePrefixSniff implements Sniff
         if (strtolower($prefix) !== 'abstract') {
             $phpcsFile->addError('Abstract class names must be prefixed with "Abstract"; found "%s"', $stackPtr, 'Missing', [$className]);
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

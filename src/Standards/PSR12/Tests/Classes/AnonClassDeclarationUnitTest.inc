@@ -50,15 +50,15 @@ $instance6 = new class extends \Foo
 };
 
 $instance7 = new  class  extends  \Foo implements
-    \One, \Two,
-        \Three,
+    \One, Two,
+        Partially\Three,
 \Four,
-  \Five {
+  namespace\Five {
     // Class content
 };
 
 if ($foo) {
-    $instance8 = new class extends \Foo implements
+    $instance8 = new class extends namespace\Foo implements
         \One,
         \Five {
         // Class content
@@ -68,7 +68,7 @@ if ($foo) {
 $instance9 = new class (
     $one,
     $two
-) extends \Foo implements \One {
+) extends Partially\Foo implements \One {
     // Class content
 };
 

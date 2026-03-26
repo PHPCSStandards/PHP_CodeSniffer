@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="ProcessRulesetCliArgsTest" xsi:noNamespaceSchemaLocation="https://schema.phpcodesniffer.com/phpcs.xsd">
+
+    <!-- Issue squizlabs/PHP_CodeSniffer#2395: allow overruling CLI args when they have different CLI flag names.
+         The values from the parent ruleset should be applied, not those from the child.
+    -->
+    <arg name="colors"/>
+    <arg value="qn"/>
+
+    <!-- Paths must be resolved based on the ruleset location which included the directive. -->
+    <arg name="basepath" value="./"/>
+
+    <!-- Miscellaneous other settings. -->
+    <arg name="parallel" value="10"/>
+
+    <!-- Include the overrides. -->
+    <rule ref="./vendor/OrgName/ExtStandard/ruleset.xml"/>
+
+    <!-- Issues squizlabs/PHP_CodeSniffer#2597 + squizlabs/PHP_CodeSniffer#2602: allow overruling CLI args when they have the CLI flag names.
+         The values from the parent ruleset should be applied, not those from the child.
+    -->
+    <arg name="extensions" value="inc,php"/>
+    <arg name="tab-width" value="4"/>
+
+    <!-- Issue squizlabs/PHP_CodeSniffer#2395: second test. -->
+    <arg name="no-cache"/>
+
+    <!-- Miscellaneous other settings. -->
+    <arg name="report-width" value="120"/>
+
+</ruleset>

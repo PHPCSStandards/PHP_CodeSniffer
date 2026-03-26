@@ -20,7 +20,7 @@ class Foo
 {
 }
 
-<em>echo "Class Foo loaded."</em>
+<em>echo "Class Foo loaded.";</em>
         ]]>
         </code>
     </code_comparison>

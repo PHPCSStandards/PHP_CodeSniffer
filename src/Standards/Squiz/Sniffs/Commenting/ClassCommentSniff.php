@@ -11,8 +11,9 @@
  * </ul>
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting;
@@ -32,8 +33,7 @@ class ClassCommentSniff implements Sniff
     public function register()
     {
         return [T_CLASS];
-
-    }//end register()
+    }
 
 
     /**
@@ -45,7 +45,7 @@ class ClassCommentSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $find   = [
@@ -102,8 +102,5 @@ class ClassCommentSniff implements Sniff
             $data  = [$tokens[$tag]['content']];
             $phpcsFile->addWarning($error, $tag, 'TagNotAllowed', $data);
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

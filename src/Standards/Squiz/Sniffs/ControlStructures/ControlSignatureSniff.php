@@ -3,8 +3,9 @@
  * Verifies that control statements conform to their coding standards.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures;
@@ -22,16 +23,6 @@ class ControlSignatureSniff implements Sniff
      * @var integer
      */
     public $requiredSpacesBeforeColon = 1;
-
-    /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
 
 
     /**
@@ -55,8 +46,7 @@ class ControlSignatureSniff implements Sniff
             T_SWITCH,
             T_MATCH,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -68,11 +58,11 @@ class ControlSignatureSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
-        $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
         if ($nextNonEmpty === false) {
             return;
         }
@@ -96,7 +86,7 @@ class ControlSignatureSniff implements Sniff
         $found = 1;
         if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
             $found = 0;
-        } else if ($tokens[($stackPtr + 1)]['content'] !== ' ') {
+        } elseif ($tokens[($stackPtr + 1)]['content'] !== ' ') {
             if (strpos($tokens[($stackPtr + 1)]['content'], $phpcsFile->eolChar) !== false) {
                 $found = 'newline';
             } else {
@@ -126,7 +116,7 @@ class ControlSignatureSniff implements Sniff
                     $phpcsFile->fixer->replaceToken(($stackPtr + 1), str_repeat(' ', $expected));
                 }
             }
-        }//end if
+        }
 
         // Single space after closing parenthesis.
         if (isset($tokens[$stackPtr]['parenthesis_closer']) === true
@@ -148,7 +138,7 @@ class ControlSignatureSniff implements Sniff
                     $found = strlen($content);
                 }
             } else {
-                $found = '"'.str_replace($phpcsFile->eolChar, '\n', $content).'"';
+                $found = '"' . str_replace($phpcsFile->eolChar, '\n', $content) . '"';
             }
 
             if ($found !== $expected) {
@@ -179,7 +169,7 @@ class ControlSignatureSniff implements Sniff
                                 }
                             }
                         } else {
-                            $phpcsFile->fixer->addContent($closer, $padding.$tokens[$opener]['content']);
+                            $phpcsFile->fixer->addContent($closer, $padding . $tokens[$opener]['content']);
                             $phpcsFile->fixer->replaceToken($opener, '');
 
                             if ($tokens[$opener]['line'] !== $tokens[$closer]['line']) {
@@ -193,10 +183,10 @@ class ControlSignatureSniff implements Sniff
                         }
 
                         $phpcsFile->fixer->endChangeset();
-                    }//end if
-                }//end if
-            }//end if
-        }//end if
+                    }
+                }
+            }
+        }
 
         // Single newline after opening brace.
         if (isset($tokens[$stackPtr]['scope_opener']) === true) {
@@ -213,7 +203,7 @@ class ControlSignatureSniff implements Sniff
 
                 // Skip all empty tokens on the same line as the opener.
                 if ($tokens[$next]['line'] === $tokens[$opener]['line']
-                    && (isset(Tokens::$emptyTokens[$code]) === true
+                    && (isset(Tokens::EMPTY_TOKENS[$code]) === true
                     || $code === T_CLOSE_TAG)
                 ) {
                     continue;
@@ -222,7 +212,7 @@ class ControlSignatureSniff implements Sniff
                 // We found the first bit of a code, or a comment on the
                 // following line.
                 break;
-            }//end for
+            }
 
             if ($tokens[$next]['line'] === $tokens[$opener]['line']) {
                 $error = 'Newline required after opening brace';
@@ -241,11 +231,11 @@ class ControlSignatureSniff implements Sniff
                     $phpcsFile->fixer->addContent($opener, $phpcsFile->eolChar);
                     $phpcsFile->fixer->endChangeset();
                 }
-            }//end if
-        } else if ($tokens[$stackPtr]['code'] === T_WHILE) {
+            }
+        } elseif ($tokens[$stackPtr]['code'] === T_WHILE) {
             // Zero spaces after parenthesis closer, but only if followed by a semicolon.
             $closer       = $tokens[$stackPtr]['parenthesis_closer'];
-            $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($closer + 1), null, true);
+            $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($closer + 1), null, true);
             if ($nextNonEmpty !== false && $tokens[$nextNonEmpty]['code'] === T_SEMICOLON) {
                 $found = 0;
                 if ($tokens[($closer + 1)]['code'] === T_WHITESPACE) {
@@ -265,7 +255,7 @@ class ControlSignatureSniff implements Sniff
                     }
                 }
             }
-        }//end if
+        }
 
         // Only want to check multi-keyword structures from here on.
         if ($tokens[$stackPtr]['code'] === T_WHILE) {
@@ -273,14 +263,14 @@ class ControlSignatureSniff implements Sniff
                 return;
             }
 
-            $closer = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+            $closer = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
             if ($closer === false
                 || $tokens[$closer]['code'] !== T_CLOSE_CURLY_BRACKET
                 || $tokens[$tokens[$closer]['scope_condition']]['code'] !== T_DO
             ) {
                 return;
             }
-        } else if ($tokens[$stackPtr]['code'] === T_ELSE
+        } elseif ($tokens[$stackPtr]['code'] === T_ELSE
             || $tokens[$stackPtr]['code'] === T_ELSEIF
             || $tokens[$stackPtr]['code'] === T_CATCH
             || $tokens[$stackPtr]['code'] === T_FINALLY
@@ -293,21 +283,21 @@ class ControlSignatureSniff implements Sniff
                 return;
             }
 
-            $closer = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+            $closer = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
             if ($closer === false || $tokens[$closer]['code'] !== T_CLOSE_CURLY_BRACKET) {
                 return;
             }
         } else {
             return;
-        }//end if
+        }
 
         // Single space after closing brace.
         $found = 1;
         if ($tokens[($closer + 1)]['code'] !== T_WHITESPACE) {
             $found = 0;
-        } else if ($tokens[$closer]['line'] !== $tokens[$stackPtr]['line']) {
+        } elseif ($tokens[$closer]['line'] !== $tokens[$stackPtr]['line']) {
             $found = 'newline';
-        } else if ($tokens[($closer + 1)]['content'] !== ' ') {
+        } elseif ($tokens[($closer + 1)]['content'] !== ' ') {
             $found = $tokens[($closer + 1)]['length'];
         }
 
@@ -315,7 +305,7 @@ class ControlSignatureSniff implements Sniff
             $error = 'Expected 1 space after closing brace; %s found';
             $data  = [$found];
 
-            if ($phpcsFile->findNext(Tokens::$commentTokens, ($closer + 1), $stackPtr) !== false) {
+            if ($phpcsFile->findNext(Tokens::COMMENT_TOKENS, ($closer + 1), $stackPtr) !== false) {
                 // Comment found between closing brace and keyword, don't auto-fix.
                 $phpcsFile->addError($error, $closer, 'SpaceAfterCloseBrace', $data);
                 return;
@@ -330,8 +320,5 @@ class ControlSignatureSniff implements Sniff
                 }
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

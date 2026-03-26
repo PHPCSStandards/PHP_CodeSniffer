@@ -3,7 +3,7 @@
  * Checks that traits are suffixed by Trait.
  *
  * @author  Anna Borzenko <annnechko@gmail.com>
- * @license https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions;
@@ -23,8 +23,7 @@ class TraitNameSuffixSniff implements Sniff
     public function register()
     {
         return [T_TRAIT];
-
-    }//end register()
+    }
 
 
     /**
@@ -36,10 +35,11 @@ class TraitNameSuffixSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $traitName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($traitName === null) {
+        if ($traitName === '') {
+            // Live coding or parse error. Bow out.
             return;
         }
 
@@ -47,8 +47,5 @@ class TraitNameSuffixSniff implements Sniff
         if (strtolower($suffix) !== 'trait') {
             $phpcsFile->addError('Trait names must be suffixed with "Trait"; found "%s"', $stackPtr, 'Missing', [$traitName]);
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

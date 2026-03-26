@@ -5,11 +5,11 @@ labels:
     draft: false
     author-can-merge: false
 
-  - label: "Core Component: Config & Ruleset & CLI options"
+  - label: "Core Component: Config & CLI options"
     draft: false
     files:
       - "src/Config.php$"
-  - label: "Core Component: Config & Ruleset & CLI options"
+  - label: "Core Component: Ruleset"
     draft: false
     files:
       - "src/Ruleset.php$"
@@ -21,6 +21,10 @@ labels:
     draft: false
     files:
       - "src/Fixer.php$"
+  - label: "Core Component: Generators"
+    draft: false
+    files:
+      - "src/Generators/.*"
   - label: "Core Component: Reports"
     draft: false
     files:
@@ -46,10 +50,6 @@ labels:
     draft: false
     files:
       - "src/Standards/Generic/(Docs|Sniffs)/.*"
-  - label: "Standard: MySource"
-    draft: false
-    files:
-      - "src/Standards/MySource/(Docs|Sniffs)/.*"
   - label: "Standard: PEAR"
     draft: false
     files:
@@ -90,7 +90,7 @@ labels:
   - label: "Type: documentation"
     draft: false
     files:
-      - '/Docs/[A-Za-z0-9-]*/.*Standard.xml$'
+      - 'src/Standards/.*/Docs/[A-Za-z0-9-]*/.*Standard.xml$'
   - label: "Type: documentation"
     draft: false
     files:

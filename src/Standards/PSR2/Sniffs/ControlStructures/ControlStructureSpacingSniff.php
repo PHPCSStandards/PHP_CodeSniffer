@@ -3,8 +3,9 @@
  * Checks that control structures have the correct spacing around brackets.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR2\Sniffs\ControlStructures;
@@ -48,8 +49,7 @@ class ControlStructureSpacingSniff implements Sniff
             T_CATCH,
             T_MATCH,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -61,7 +61,7 @@ class ControlStructureSpacingSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $this->requiredSpacesAfterOpen   = (int) $this->requiredSpacesAfterOpen;
         $this->requiredSpacesBeforeClose = (int) $this->requiredSpacesBeforeClose;
@@ -76,7 +76,7 @@ class ControlStructureSpacingSniff implements Sniff
         $parenOpener = $tokens[$stackPtr]['parenthesis_opener'];
         $parenCloser = $tokens[$stackPtr]['parenthesis_closer'];
         $nextContent = $phpcsFile->findNext(T_WHITESPACE, ($parenOpener + 1), null, true);
-        if (in_array($tokens[$nextContent]['code'], Tokens::$commentTokens, true) === false) {
+        if (in_array($tokens[$nextContent]['code'], Tokens::COMMENT_TOKENS, true) === false) {
             $spaceAfterOpen = 0;
             if ($tokens[($parenOpener + 1)]['code'] === T_WHITESPACE) {
                 if (strpos($tokens[($parenOpener + 1)]['content'], $phpcsFile->eolChar) !== false) {
@@ -99,14 +99,14 @@ class ControlStructureSpacingSniff implements Sniff
                     $padding = str_repeat(' ', $this->requiredSpacesAfterOpen);
                     if ($spaceAfterOpen === 0) {
                         $phpcsFile->fixer->addContent($parenOpener, $padding);
-                    } else if ($spaceAfterOpen === 'newline') {
+                    } elseif ($spaceAfterOpen === 'newline') {
                         $phpcsFile->fixer->replaceToken(($parenOpener + 1), '');
                     } else {
                         $phpcsFile->fixer->replaceToken(($parenOpener + 1), $padding);
                     }
                 }
             }
-        }//end if
+        }
 
         $prev = $phpcsFile->findPrevious(T_WHITESPACE, ($parenCloser - 1), $parenOpener, true);
         if ($tokens[$prev]['line'] === $tokens[$parenCloser]['line']) {
@@ -133,9 +133,6 @@ class ControlStructureSpacingSniff implements Sniff
                     }
                 }
             }
-        }//end if
-
-    }//end process()
-
-
-}//end class
+        }
+    }
+}

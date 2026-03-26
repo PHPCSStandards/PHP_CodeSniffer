@@ -11,17 +11,18 @@
  *         parent::__construct(array(T_CLASS), array(T_FUNCTION));
  *     }
  *
- *     protected function processTokenWithinScope(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr, $currScope)
+ *     protected function processTokenWithinScope(\PHP_CodeSniffer\Files\File $phpcsFile, int $stackPtr, int $currScope)
  *     {
  *         $className = $phpcsFile->getDeclarationName($currScope);
- *         echo 'encountered a method within class '.$className;
+ *         $phpcsFile->addWarning('encountered a method within class '.$className, $stackPtr, 'MethodFound');
  *     }
  * }
  * </code>
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Sniffs;
@@ -71,7 +72,7 @@ abstract class AbstractScopeSniff implements Sniff
     public function __construct(
         array $scopeTokens,
         array $tokens,
-        $listenOutside=false
+        bool $listenOutside = false
     ) {
         if (empty($scopeTokens) === true) {
             $error = 'The scope tokens list cannot be empty';
@@ -93,8 +94,7 @@ abstract class AbstractScopeSniff implements Sniff
         $this->listenOutside = $listenOutside;
         $this->scopeTokens   = array_flip($scopeTokens);
         $this->tokens        = $tokens;
-
-    }//end __construct()
+    }
 
 
     /**
@@ -110,8 +110,7 @@ abstract class AbstractScopeSniff implements Sniff
     final public function register()
     {
         return $this->tokens;
-
-    }//end register()
+    }
 
 
     /**
@@ -127,7 +126,7 @@ abstract class AbstractScopeSniff implements Sniff
      *                  the rest of the file.
      * @see    processTokenWithinScope()
      */
-    final public function process(File $phpcsFile, $stackPtr)
+    final public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -147,8 +146,7 @@ abstract class AbstractScopeSniff implements Sniff
         if (empty($skipTokens) === false) {
             return min($skipTokens);
         }
-
-    }//end process()
+    }
 
 
     /**
@@ -167,7 +165,7 @@ abstract class AbstractScopeSniff implements Sniff
      *                  pointer is reached. Return `$phpcsFile->numTokens` to skip
      *                  the rest of the file.
      */
-    abstract protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope);
+    abstract protected function processTokenWithinScope(File $phpcsFile, int $stackPtr, int $currScope);
 
 
     /**
@@ -183,7 +181,5 @@ abstract class AbstractScopeSniff implements Sniff
      *                  pointer is reached. Return `$phpcsFile->numTokens` to skip
      *                  the rest of the file.
      */
-    abstract protected function processTokenOutsideScope(File $phpcsFile, $stackPtr);
-
-
-}//end class
+    abstract protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr);
+}

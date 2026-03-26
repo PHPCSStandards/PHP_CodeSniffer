@@ -197,3 +197,7 @@ $foobar = functionCallMatchParam(
     }  , // But check the spacing again once the match expression has finished.
     $args
 );
+
+$result = \Fully\qualified($arg1,$arg2);
+$result = Partially\qualified($arg1 , $arg2);
+$result = namespace\relative($arg1 ,  $arg2);

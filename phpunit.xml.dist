@@ -1,35 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.2/phpunit.xsd"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
     backupGlobals="true"
     beStrictAboutOutputDuringTests="true"
     beStrictAboutTestsThatDoNotTestAnything="false"
     bootstrap="tests/bootstrap.php"
-    convertErrorsToExceptions="true"
-    convertWarningsToExceptions="true"
-    convertNoticesToExceptions="true"
-    convertDeprecationsToExceptions="true"
-    forceCoversAnnotation="true"
+    cacheDirectory="build/phpunit-cache"
+    displayDetailsOnTestsThatTriggerErrors="true"
+    displayDetailsOnTestsThatTriggerWarnings="true"
+    displayDetailsOnTestsThatTriggerNotices="true"
+    displayDetailsOnTestsThatTriggerDeprecations="true"
+    displayDetailsOnPhpunitDeprecations="false"
+    failOnWarning="true"
+    failOnNotice="true"
+    failOnDeprecation="true"
+    failOnPhpunitDeprecation="false"
+    requireCoverageMetadata="true"
     >
     <testsuites>
-        <testsuite name="PHP_CodeSniffer Test Suite">
-            <file>tests/AllTests.php</file>
+        <testsuite name="PHPCS_Core">
+            <directory>./tests/Core/</directory>
+        </testsuite>
+        <testsuite name="PHPCS_Sniffs">
+            <directory>./src/Standards/Generic/Tests/</directory>
+            <directory>./src/Standards/PEAR/Tests/</directory>
+            <directory>./src/Standards/PSR1/Tests/</directory>
+            <directory>./src/Standards/PSR2/Tests/</directory>
+            <directory>./src/Standards/PSR12/Tests/</directory>
+            <directory>./src/Standards/Squiz/Tests/</directory>
+            <directory>./src/Standards/Zend/Tests/</directory>
         </testsuite>
     </testsuites>
 
-    <filter>
-        <whitelist addUncoveredFilesFromWhitelist="true" processUncoveredFilesFromWhitelist="false">
+    <groups>
+        <exclude>
+            <group>CBF</group>
+        </exclude>
+    </groups>
+
+    <source>
+        <include>
             <directory suffix=".php">./src</directory>
             <file>./autoload.php</file>
-            <exclude>
-                <directory suffix="UnitTest.php">./src/Standards</directory>
-            </exclude>
-        </whitelist>
-    </filter>
+        </include>
+        <exclude>
+            <directory suffix="UnitTest.php">./src/Standards</directory>
+        </exclude>
+    </source>
 
-    <logging>
-        <log type="coverage-text" target="php://stdout" showOnlySummary="true"/>
-        <log type="coverage-clover" target="build/logs/clover.xml"/>
-    </logging>
+    <coverage includeUncoveredFiles="true">
+        <report>
+            <clover outputFile="build/logs/clover.xml"/>
+            <text outputFile="php://stdout" showOnlySummary="true"/>
+        </report>
+    </coverage>
+
+    <php>
+        <env name="PHP_CODESNIFFER_CBF" value="0"/>
+    </php>
 </phpunit>

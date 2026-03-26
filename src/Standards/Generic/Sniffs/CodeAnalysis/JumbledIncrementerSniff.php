@@ -24,7 +24,8 @@
  *
  * @author    Manuel Pichler <mapi@manuel-pichler.de>
  * @copyright 2007-2014 Manuel Pichler. All rights reserved.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis;
@@ -44,8 +45,7 @@ class JumbledIncrementerSniff implements Sniff
     public function register()
     {
         return [T_FOR];
-
-    }//end register()
+    }
 
 
     /**
@@ -57,7 +57,7 @@ class JumbledIncrementerSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $token  = $tokens[$stackPtr];
@@ -93,8 +93,7 @@ class JumbledIncrementerSniff implements Sniff
                 $phpcsFile->addWarning($error, $stackPtr, 'Found', $data);
             }
         }
-
-    }//end process()
+    }
 
 
     /**
@@ -121,14 +120,11 @@ class JumbledIncrementerSniff implements Sniff
             $code = $tokens[$next]['code'];
             if ($code === T_SEMICOLON) {
                 ++$semicolons;
-            } else if ($semicolons === 2 && $code === T_VARIABLE) {
+            } elseif ($semicolons === 2 && $code === T_VARIABLE) {
                 $incrementers[] = $tokens[$next]['content'];
             }
         }
 
         return $incrementers;
-
-    }//end findIncrementers()
-
-
-}//end class
+    }
+}

@@ -3,8 +3,9 @@
  * Function for caching between runs.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Util;
@@ -13,6 +14,7 @@ use FilesystemIterator;
 use PHP_CodeSniffer\Autoload;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 use RecursiveCallbackFilterIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -50,7 +52,8 @@ class Cache
         // At this point, the loaded class list contains the core PHPCS code
         // and all sniffs that have been loaded as part of the run.
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
-            echo PHP_EOL."\tGenerating loaded file list for code hash".PHP_EOL;
+            StatusWriter::writeNewline();
+            StatusWriter::write('Generating loaded file list for code hash', 1);
         }
 
         $codeHashFiles = [];
@@ -60,7 +63,7 @@ class Cache
 
         $installDir     = dirname(__DIR__);
         $installDirLen  = strlen($installDir);
-        $standardDir    = $installDir.DIRECTORY_SEPARATOR.'Standards';
+        $standardDir    = $installDir . DIRECTORY_SEPARATOR . 'Standards';
         $standardDirLen = strlen($standardDir);
         foreach ($classes as $file) {
             if (substr($file, 0, $standardDirLen) !== $standardDir) {
@@ -70,10 +73,10 @@ class Cache
                 }
 
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    echo "\t\t=> external file: $file".PHP_EOL;
+                    StatusWriter::write("=> external file: $file", 2);
                 }
-            } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                echo "\t\t=> internal sniff: $file".PHP_EOL;
+            } elseif (PHP_CODESNIFFER_VERBOSITY > 1) {
+                StatusWriter::write("=> internal sniff: $file", 2);
             }
 
             $codeHashFiles[] = $file;
@@ -86,10 +89,10 @@ class Cache
         foreach ($rulesets as $file) {
             if (substr($file, 0, $standardDirLen) !== $standardDir) {
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    echo "\t\t=> external ruleset: $file".PHP_EOL;
+                    StatusWriter::write("=> external ruleset: $file", 2);
                 }
-            } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                echo "\t\t=> internal ruleset: $file".PHP_EOL;
+            } elseif (PHP_CODESNIFFER_VERBOSITY > 1) {
+                StatusWriter::write("=> internal ruleset: $file", 2);
             }
 
             $codeHashFiles[] = $file;
@@ -105,7 +108,7 @@ class Cache
         );
         $filter = new RecursiveCallbackFilterIterator(
             $di,
-            function ($file, $key, $iterator) {
+            static function ($file, $key, $iterator) {
                 // Skip non-php files.
                 $filename = $file->getFilename();
                 if ($file->isFile() === true && substr($filename, -4) !== '.php') {
@@ -133,7 +136,7 @@ class Cache
         $iterator = new RecursiveIteratorIterator($filter);
         foreach ($iterator as $file) {
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                echo "\t\t=> core file: $file".PHP_EOL;
+                StatusWriter::write("=> core file: $file", 2);
             }
 
             $codeHashFiles[] = $file->getPathname();
@@ -150,7 +153,7 @@ class Cache
         // Along with the code hash, use various settings that can affect
         // the results of a run to create a new hash. This hash will be used
         // in the cache file name.
-        $rulesetHash       = md5(var_export($ruleset->ignorePatterns, true).var_export($ruleset->includePatterns, true));
+        $rulesetHash       = md5(var_export($ruleset->ignorePatterns, true) . var_export($ruleset->includePatterns, true));
         $phpExtensionsHash = md5(var_export(get_loaded_extensions(), true));
         $configData        = [
             'phpVersion'    => PHP_VERSION_ID,
@@ -168,12 +171,12 @@ class Cache
         $cacheHash    = substr(sha1($configString), 0, 12);
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
-            echo "\tGenerating cache key data".PHP_EOL;
+            StatusWriter::write('Generating cache key data', 1);
             foreach ($configData as $key => $value) {
                 if (is_array($value) === true) {
-                    echo "\t\t=> $key:".PHP_EOL;
+                    StatusWriter::write("=> $key:", 2);
                     foreach ($value as $subKey => $subValue) {
-                        echo "\t\t\t=> $subKey: $subValue".PHP_EOL;
+                        StatusWriter::write("=> $subKey: $subValue", 3);
                     }
 
                     continue;
@@ -183,11 +186,11 @@ class Cache
                     $value = (int) $value;
                 }
 
-                echo "\t\t=> $key: $value".PHP_EOL;
+                StatusWriter::write("=> $key: $value", 2);
             }
 
-            echo "\t\t=> cacheHash: $cacheHash".PHP_EOL;
-        }//end if
+            StatusWriter::write("=> cacheHash: $cacheHash", 2);
+        }
 
         if ($config->cacheFile !== null) {
             $cacheFile = $config->cacheFile;
@@ -196,7 +199,7 @@ class Cache
             // We can use this to locate an existing cache file, or to
             // determine where to create a new one.
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                echo "\tChecking possible cache file paths".PHP_EOL;
+                StatusWriter::write('Checking possible cache file paths', 1);
             }
 
             $paths = [];
@@ -237,7 +240,7 @@ class Cache
                 }
 
                 $fileHash = substr(sha1($file), 0, 12);
-                $testFile = $cacheDir.DIRECTORY_SEPARATOR."phpcs.$fileHash.$cacheHash.cache";
+                $testFile = $cacheDir . DIRECTORY_SEPARATOR . "phpcs.$fileHash.$cacheHash.cache";
                 if ($cacheFile === null) {
                     // This will be our default location if we can't find
                     // an existing file.
@@ -245,25 +248,25 @@ class Cache
                 }
 
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    echo "\t\t=> $testFile".PHP_EOL;
-                    echo "\t\t\t * based on shared location: $file *".PHP_EOL;
+                    StatusWriter::write("=> $testFile", 2);
+                    StatusWriter::write(" * based on shared location: $file *", 3);
                 }
 
                 if (file_exists($testFile) === true) {
                     $cacheFile = $testFile;
                     break;
                 }
-            }//end foreach
+            }
 
             if ($cacheFile === null) {
                 // Unlikely, but just in case $paths is empty for some reason.
-                $cacheFile = $cacheDir.DIRECTORY_SEPARATOR."phpcs.$cacheHash.cache";
+                $cacheFile = $cacheDir . DIRECTORY_SEPARATOR . "phpcs.$cacheHash.cache";
             }
-        }//end if
+        }
 
         self::$path = $cacheFile;
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
-            echo "\t=> Using cache file: ".self::$path.PHP_EOL;
+            StatusWriter::write('=> Using cache file: ' . self::$path, 1);
         }
 
         if (file_exists(self::$path) === true) {
@@ -273,16 +276,15 @@ class Cache
             if (self::$cache['config'] !== $configData) {
                 self::$cache = [];
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    echo "\t* cache was invalid and has been cleared *".PHP_EOL;
+                    StatusWriter::write('* cache was invalid and has been cleared *', 1);
                 }
             }
-        } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
-            echo "\t* cache file does not exist *".PHP_EOL;
+        } elseif (PHP_CODESNIFFER_VERBOSITY > 1) {
+            StatusWriter::write('* cache file does not exist *', 1);
         }
 
         self::$cache['config'] = $configData;
-
-    }//end load()
+    }
 
 
     /**
@@ -293,19 +295,18 @@ class Cache
     public static function save()
     {
         file_put_contents(self::$path, json_encode(self::$cache));
-
-    }//end save()
+    }
 
 
     /**
      * Retrieves a single entry from the cache.
      *
-     * @param string $key The key of the data to get. If NULL,
-     *                    everything in the cache is returned.
+     * @param string|null $key The key of the data to get. If NULL,
+     *                         everything in the cache is returned.
      *
      * @return mixed
      */
-    public static function get($key=null)
+    public static function get(?string $key = null)
     {
         if ($key === null) {
             return self::$cache;
@@ -316,28 +317,26 @@ class Cache
         }
 
         return false;
-
-    }//end get()
+    }
 
 
     /**
      * Retrieves a single entry from the cache.
      *
-     * @param string $key   The key of the data to set. If NULL,
-     *                      sets the entire cache.
-     * @param mixed  $value The value to set.
+     * @param string|null $key   The key of the data to set. If NULL,
+     *                           sets the entire cache.
+     * @param mixed       $value The value to set.
      *
      * @return void
      */
-    public static function set($key, $value)
+    public static function set(?string $key, $value)
     {
         if ($key === null) {
             self::$cache = $value;
         } else {
             self::$cache[$key] = $value;
         }
-
-    }//end set()
+    }
 
 
     /**
@@ -348,8 +347,5 @@ class Cache
     public static function getSize()
     {
         return (count(self::$cache) - 1);
-
-    }//end getSize()
-
-
-}//end class
+    }
+}

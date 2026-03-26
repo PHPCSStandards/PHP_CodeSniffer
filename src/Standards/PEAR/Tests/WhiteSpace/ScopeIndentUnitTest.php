@@ -3,21 +3,37 @@
  * Unit test class for the ScopeIndent sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PEAR\Tests\WhiteSpace;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Config;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the ScopeIndent sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\PEAR\Sniffs\WhiteSpace\ScopeIndentSniff
  */
-final class ScopeIndentUnitTest extends AbstractSniffUnitTest
+final class ScopeIndentUnitTest extends AbstractSniffTestCase
 {
+
+
+    /**
+     * Get a list of CLI values to set before the file is tested.
+     *
+     * @param string                  $testFile The name of the file being tested.
+     * @param \PHP_CodeSniffer\Config $config   The config data for the test run.
+     *
+     * @return void
+     */
+    public function setCliValues(string $testFile, Config $config)
+    {
+        $config->setConfigData('scope_indent_debug', '0', true);
+    }
 
 
     /**
@@ -49,8 +65,7 @@ final class ScopeIndentUnitTest extends AbstractSniffUnitTest
             284 => 1,
             311 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -64,8 +79,5 @@ final class ScopeIndentUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

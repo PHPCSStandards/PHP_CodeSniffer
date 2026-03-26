@@ -1,0 +1,27 @@
+name: Validate Cronjob
+
+on:
+  # Run this workflow every Monday at 6:00 (to make sure the broken link check runs regularly).
+  schedule:
+    - cron: '0 6 * * 1'
+
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  markdownlint:
+    name: 'Lint Markdown'
+    # Don't run the cronjob in this workflow on forks.
+    if: ${{ github.event.repository.fork == false }}
+
+    uses: PHPCSStandards/.github/.github/workflows/reusable-markdownlint.yml@main
+
+  remark:
+    name: 'QA Markdown'
+    # Don't run the cronjob in this workflow on forks.
+    if: ${{ github.event.repository.fork == false }}
+
+    uses: PHPCSStandards/.github/.github/workflows/reusable-remark.yml@main

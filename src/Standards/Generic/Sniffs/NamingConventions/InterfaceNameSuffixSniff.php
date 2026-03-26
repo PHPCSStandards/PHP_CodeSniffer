@@ -3,7 +3,7 @@
  * Checks that interfaces are suffixed by Interface.
  *
  * @author  Anna Borzenko <annnechko@gmail.com>
- * @license https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions;
@@ -23,8 +23,7 @@ class InterfaceNameSuffixSniff implements Sniff
     public function register()
     {
         return [T_INTERFACE];
-
-    }//end register()
+    }
 
 
     /**
@@ -36,10 +35,11 @@ class InterfaceNameSuffixSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $interfaceName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($interfaceName === null) {
+        if ($interfaceName === '') {
+            // Live coding or parse error. Bow out.
             return;
         }
 
@@ -47,8 +47,5 @@ class InterfaceNameSuffixSniff implements Sniff
         if (strtolower($suffix) !== 'interface') {
             $phpcsFile->addError('Interface names must be suffixed with "Interface"; found "%s"', $stackPtr, 'Missing', [$interfaceName]);
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

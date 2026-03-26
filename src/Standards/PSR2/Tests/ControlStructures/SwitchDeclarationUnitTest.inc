@@ -252,7 +252,7 @@ switch ($sContext)
     case 'SOMETHING':
     case 'CONSTANT':
         do_something();
-        break;
+        \exit();
     case 'GLOBAL':
     case 'GLOBAL1':
         do_something();
@@ -596,3 +596,45 @@ switch (rand()) {
     default:
         break;
 }
+
+// Fix: goto should be recognized as terminating statement.
+switch ( $a ) {
+    case 1:
+        doSomething();
+        goto jumpOut;
+    default:
+        $other = $code;
+        break;
+}
+
+jumpOut:
+doSomething();
+
+// Fixable semicolon as case/default scope opener.
+switch ($value) {
+    case 'foo';
+    case 'bar' /*comment*/ ;
+    case 'baz'  ;
+        echo 'foo, bar, or baz';
+        break;
+    default;
+        echo 'Other';
+    default ;
+        echo 'Other';
+}
+
+// Verify that case/default statements with a PHP close tag as scope opener are handled correctly by the sniff.
+switch ($foo):
+    case "foo"?>
+        <div>Some html</div>
+        <?php break;
+    case "bar" ; ?>
+        <div>Some html</div>
+        <?php break;
+    default ?>
+        <div>Some html</div>
+        <?php break;
+    default ; ?>
+        <div>Some html</div>
+        <?php break;
+endswitch;

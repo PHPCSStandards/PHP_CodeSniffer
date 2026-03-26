@@ -4,19 +4,20 @@
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2019 Juliette Reinders Folmer. All rights reserved.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\VersionControl;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the SubversionProperties sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\VersionControl\SubversionPropertiesSniff
  */
-final class SubversionPropertiesUnitTest extends AbstractSniffUnitTest
+final class SubversionPropertiesUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -29,8 +30,7 @@ final class SubversionPropertiesUnitTest extends AbstractSniffUnitTest
     {
         // This sniff cannot be tested as no SVN version control directory is available.
         return true;
-
-    }//end shouldSkipTest()
+    }
 
 
     /**
@@ -44,8 +44,7 @@ final class SubversionPropertiesUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -59,8 +58,5 @@ final class SubversionPropertiesUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

@@ -19,7 +19,7 @@ class TestClass
                     'height' => '',
                    );
 
-    private $_bad = Array(
+    private $_bad = ARRAY(
                     'width' => '',
                     'height' => ''
                      );
@@ -547,3 +547,14 @@ $x = array(
       1, static::helloWorld(), $class instanceof static,
       2,
      );
+
+$noSpaceBeforeDoubleArrow = array(
+                             'width'=> '',
+                             'height' => '',
+                            );
+
+$newlineAfterDoubleArrow = array(
+                            'width'  =>
+                            '',
+                            'height' => '',
+                           );

@@ -3,20 +3,22 @@
  * Unit test class for the SideEffects sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR1\Tests\Files;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Config;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the SideEffects sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\PSR1\Sniffs\Files\SideEffectsSniff
  */
-final class SideEffectsUnitTest extends AbstractSniffUnitTest
+final class SideEffectsUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -28,13 +30,12 @@ final class SideEffectsUnitTest extends AbstractSniffUnitTest
      *
      * @return void
      */
-    public function setCliValues($testFile, $config)
+    public function setCliValues(string $testFile, Config $config)
     {
         if ($testFile === 'SideEffectsUnitTest.12.inc') {
             $config->annotations = false;
         }
-
-    }//end setCliValues()
+    }
 
 
     /**
@@ -47,11 +48,10 @@ final class SideEffectsUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         return [];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -64,22 +64,19 @@ final class SideEffectsUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'SideEffectsUnitTest.3.inc':
-        case 'SideEffectsUnitTest.4.inc':
-        case 'SideEffectsUnitTest.5.inc':
-        case 'SideEffectsUnitTest.10.inc':
-        case 'SideEffectsUnitTest.12.inc':
-        case 'SideEffectsUnitTest.15.inc':
-        case 'SideEffectsUnitTest.16.inc':
-            return [1 => 1];
-        default:
-            return [];
-        }//end switch
-
-    }//end getWarningList()
-
-
-}//end class
+            case 'SideEffectsUnitTest.3.inc':
+            case 'SideEffectsUnitTest.4.inc':
+            case 'SideEffectsUnitTest.5.inc':
+            case 'SideEffectsUnitTest.10.inc':
+            case 'SideEffectsUnitTest.12.inc':
+            case 'SideEffectsUnitTest.15.inc':
+            case 'SideEffectsUnitTest.16.inc':
+                return [1 => 1];
+            default:
+                return [];
+        }
+    }
+}

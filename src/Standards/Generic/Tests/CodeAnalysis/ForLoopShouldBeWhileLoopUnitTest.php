@@ -4,19 +4,20 @@
  *
  * @author    Manuel Pichler <mapi@manuel-pichler.de>
  * @copyright 2007-2014 Manuel Pichler. All rights reserved.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\CodeAnalysis;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the ForLoopShouldBeWhileLoop sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\ForLoopShouldBeWhileLoopSniff
  */
-final class ForLoopShouldBeWhileLoopUnitTest extends AbstractSniffUnitTest
+final class ForLoopShouldBeWhileLoopUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -31,8 +32,7 @@ final class ForLoopShouldBeWhileLoopUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -45,20 +45,17 @@ final class ForLoopShouldBeWhileLoopUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'ForLoopShouldBeWhileLoopUnitTest.1.inc':
-            return [
-                6  => 1,
-                10 => 1,
-                34 => 1,
-            ];
-        default:
-            return [];
+            case 'ForLoopShouldBeWhileLoopUnitTest.1.inc':
+                return [
+                    6  => 1,
+                    10 => 1,
+                    34 => 1,
+                ];
+            default:
+                return [];
         }
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

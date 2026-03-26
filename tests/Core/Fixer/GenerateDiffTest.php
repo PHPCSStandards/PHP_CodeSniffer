@@ -3,8 +3,8 @@
  * Tests for diff generation.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
- * @copyright 2024 Juliette Reinders Folmer. All rights reserved.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Tests\Core\Fixer;
@@ -21,6 +21,7 @@ use PHPUnit\Framework\TestCase;
  * test running the fixer itself, nor generating a diff based on a fixer run.
  *
  * @covers PHP_CodeSniffer\Fixer::generateDiff
+ * @group  Windows
  */
 final class GenerateDiffTest extends TestCase
 {
@@ -45,20 +46,17 @@ final class GenerateDiffTest extends TestCase
      * prevent doing tab replacement when parsing the file. This is to allow for testing a
      * diff with tabs vs spaces (which wouldn't yield a diff if tabs had already been replaced).
      *
-     * @beforeClass
-     *
      * @return void
      */
-    public static function initializeFile()
+    public static function setUpBeforeClass(): void
     {
         $config  = new ConfigDouble();
         $ruleset = new Ruleset($config);
 
-        self::$phpcsFile = new LocalFile(__DIR__.'/Fixtures/GenerateDiffTest.inc', $ruleset, $config);
+        self::$phpcsFile = new LocalFile(__DIR__ . '/Fixtures/GenerateDiffTest.inc', $ruleset, $config);
         self::$phpcsFile->parse();
         self::$phpcsFile->fixer->startFile(self::$phpcsFile);
-
-    }//end initializeFile()
+    }
 
 
     /**
@@ -71,8 +69,7 @@ final class GenerateDiffTest extends TestCase
         $diff = self::$phpcsFile->fixer->generateDiff(null, false);
 
         $this->assertSame('', $diff);
-
-    }//end testGenerateDiffNoFile()
+    }
 
 
     /**
@@ -94,8 +91,7 @@ final class GenerateDiffTest extends TestCase
         $expectedDiffFile = str_replace('.inc', '.diff', $filePath);
 
         $this->assertStringEqualsFile($expectedDiffFile, $diff);
-
-    }//end testGenerateDiff()
+    }
 
 
     /**
@@ -109,38 +105,37 @@ final class GenerateDiffTest extends TestCase
     {
         return [
             'no difference'                    => [
-                'filePath' => __DIR__.'/Fixtures/GenerateDiffTest-NoDiff.inc',
+                'filePath' => __DIR__ . '/Fixtures/GenerateDiffTest-NoDiff.inc',
             ],
             'line removed'                     => [
-                'filePath' => __DIR__.'/Fixtures/GenerateDiffTest-LineRemoved.inc',
+                'filePath' => __DIR__ . '/Fixtures/GenerateDiffTest-LineRemoved.inc',
             ],
             'line added'                       => [
-                'filePath' => __DIR__.'/Fixtures/GenerateDiffTest-LineAdded.inc',
+                'filePath' => __DIR__ . '/Fixtures/GenerateDiffTest-LineAdded.inc',
             ],
             'var name changed'                 => [
-                'filePath' => __DIR__.'/Fixtures/GenerateDiffTest-VarNameChanged.inc',
+                'filePath' => __DIR__ . '/Fixtures/GenerateDiffTest-VarNameChanged.inc',
             ],
             'trailing whitespace removed'      => [
-                'filePath' => __DIR__.'/Fixtures/GenerateDiffTest-NoTrailingWhitespace.inc',
+                'filePath' => __DIR__ . '/Fixtures/GenerateDiffTest-NoTrailingWhitespace.inc',
             ],
             'tab replaced with spaces'         => [
-                'filePath' => __DIR__.'/Fixtures/GenerateDiffTest-TabsToSpaces.inc',
+                'filePath' => __DIR__ . '/Fixtures/GenerateDiffTest-TabsToSpaces.inc',
             ],
             'blank lines at start of file'     => [
-                'filePath' => __DIR__.'/Fixtures/GenerateDiffTest-BlankLinesAtStart.inc',
+                'filePath' => __DIR__ . '/Fixtures/GenerateDiffTest-BlankLinesAtStart.inc',
             ],
             'whitespace diff at start of file' => [
-                'filePath' => __DIR__.'/Fixtures/GenerateDiffTest-WhiteSpaceAtStart.inc',
+                'filePath' => __DIR__ . '/Fixtures/GenerateDiffTest-WhiteSpaceAtStart.inc',
             ],
             'blank lines at end of file'       => [
-                'filePath' => __DIR__.'/Fixtures/GenerateDiffTest-BlankLinesAtEnd.inc',
+                'filePath' => __DIR__ . '/Fixtures/GenerateDiffTest-BlankLinesAtEnd.inc',
             ],
             'whitespace diff at end of file'   => [
-                'filePath' => __DIR__.'/Fixtures/GenerateDiffTest-WhiteSpaceAtEnd.inc',
+                'filePath' => __DIR__ . '/Fixtures/GenerateDiffTest-WhiteSpaceAtEnd.inc',
             ],
         ];
-
-    }//end dataGenerateDiff()
+    }
 
 
     /**
@@ -150,28 +145,27 @@ final class GenerateDiffTest extends TestCase
      */
     public function testGenerateDiffColoured()
     {
-        $expected  = "\033[31m--- tests/Core/Fixer/Fixtures/GenerateDiffTest-VarNameChanged.inc\033[0m".PHP_EOL;
-        $expected .= "\033[32m+++ PHP_CodeSniffer\033[0m".PHP_EOL;
-        $expected .= '@@ -1,7 +1,7 @@'.PHP_EOL;
-        $expected .= ' <?php'.PHP_EOL;
-        $expected .= ' // Comment with 2 spaces trailing whitespace.  '.PHP_EOL;
-        $expected .= "\033[31m".'-$rav = FALSE;'."\033[0m".PHP_EOL;
-        $expected .= "\033[32m".'+$var = FALSE;'."\033[0m".PHP_EOL;
-        $expected .= ' '.PHP_EOL;
-        $expected .= "\033[31m".'-if ($rav) {'."\033[0m".PHP_EOL;
-        $expected .= "\033[32m".'+if ($var) {'."\033[0m".PHP_EOL;
-        $expected .= ' 	echo \'This line is tab indented\';'.PHP_EOL;
+        $expected  = "\033[31m--- tests/Core/Fixer/Fixtures/GenerateDiffTest-VarNameChanged.inc\033[0m" . PHP_EOL;
+        $expected .= "\033[32m+++ PHP_CodeSniffer\033[0m" . PHP_EOL;
+        $expected .= '@@ -1,7 +1,7 @@' . PHP_EOL;
+        $expected .= ' <?php' . PHP_EOL;
+        $expected .= ' // Comment with 2 spaces trailing whitespace.  ' . PHP_EOL;
+        $expected .= "\033[31m" . '-$rav = FALSE;' . "\033[0m" . PHP_EOL;
+        $expected .= "\033[32m" . '+$var = FALSE;' . "\033[0m" . PHP_EOL;
+        $expected .= ' ' . PHP_EOL;
+        $expected .= "\033[31m" . '-if ($rav) {' . "\033[0m" . PHP_EOL;
+        $expected .= "\033[32m" . '+if ($var) {' . "\033[0m" . PHP_EOL;
+        $expected .= ' 	echo \'This line is tab indented\';' . PHP_EOL;
         $expected .= ' }';
 
-        $filePath = __DIR__.'/Fixtures/GenerateDiffTest-VarNameChanged.inc';
+        $filePath = __DIR__ . '/Fixtures/GenerateDiffTest-VarNameChanged.inc';
         $diff     = self::$phpcsFile->fixer->generateDiff($filePath);
 
         // Allow for the tests to pass on Windows too.
         $diff = str_replace('--- tests\Core\Fixer/', '--- tests/Core/Fixer/', $diff);
 
         $this->assertSame($expected, $diff);
-
-    }//end testGenerateDiffColoured()
+    }
 
 
     /**
@@ -191,25 +185,25 @@ final class GenerateDiffTest extends TestCase
     {
         // By the looks of it, if the only diff between two files is line endings, the
         // diff generated by the *nix "diff" command will always contain *nix line endings.
-        $expected  = '--- tests/Core/Fixer/Fixtures/GenerateDiffTest-WindowsLineEndings.inc'."\n";
-        $expected .= '+++ PHP_CodeSniffer'."\n";
-        $expected .= '@@ -1,7 +1,7 @@'."\n";
-        $expected .= '-<?php'."\n";
-        $expected .= '-// Comment with 2 spaces trailing whitespace.  '."\n";
-        $expected .= '-$var = FALSE;'."\n";
-        $expected .= '-'."\n";
-        $expected .= '-if ($var) {'."\n";
-        $expected .= '-	echo \'This line is tab indented\';'."\n";
-        $expected .= '-}'."\n";
-        $expected .= '+<?php'."\n";
-        $expected .= '+// Comment with 2 spaces trailing whitespace.  '."\n";
-        $expected .= '+$var = FALSE;'."\n";
-        $expected .= '+'."\n";
-        $expected .= '+if ($var) {'."\n";
-        $expected .= '+	echo \'This line is tab indented\';'."\n";
-        $expected .= '+}'."\n";
+        $expected  = '--- tests/Core/Fixer/Fixtures/GenerateDiffTest-WindowsLineEndings.inc' . "\n";
+        $expected .= '+++ PHP_CodeSniffer' . "\n";
+        $expected .= '@@ -1,7 +1,7 @@' . "\n";
+        $expected .= '-<?php' . "\n";
+        $expected .= '-// Comment with 2 spaces trailing whitespace.  ' . "\n";
+        $expected .= '-$var = FALSE;' . "\n";
+        $expected .= '-' . "\n";
+        $expected .= '-if ($var) {' . "\n";
+        $expected .= '-	echo \'This line is tab indented\';' . "\n";
+        $expected .= '-}' . "\n";
+        $expected .= '+<?php' . "\n";
+        $expected .= '+// Comment with 2 spaces trailing whitespace.  ' . "\n";
+        $expected .= '+$var = FALSE;' . "\n";
+        $expected .= '+' . "\n";
+        $expected .= '+if ($var) {' . "\n";
+        $expected .= '+	echo \'This line is tab indented\';' . "\n";
+        $expected .= '+}' . "\n";
 
-        $filePath = __DIR__.'/Fixtures/GenerateDiffTest-WindowsLineEndings.inc';
+        $filePath = __DIR__ . '/Fixtures/GenerateDiffTest-WindowsLineEndings.inc';
         $diff     = self::$phpcsFile->fixer->generateDiff($filePath, false);
 
         // Allow for the tests to pass on Windows too.
@@ -219,8 +213,5 @@ final class GenerateDiffTest extends TestCase
         $diff = preg_replace('`\R`', "\n", $diff);
 
         $this->assertSame($expected, $diff);
-
-    }//end testGenerateDiffDifferentLineEndings()
-
-
-}//end class
+    }
+}

@@ -3,8 +3,9 @@
  * Ensures that the value of a comparison is not assigned to a variable.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP;
@@ -25,8 +26,7 @@ class DisallowComparisonAssignmentSniff implements Sniff
     public function register()
     {
         return [T_EQUAL];
-
-    }//end register()
+    }
 
 
     /**
@@ -38,7 +38,7 @@ class DisallowComparisonAssignmentSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -54,7 +54,7 @@ class DisallowComparisonAssignmentSniff implements Sniff
 
         // Ignore values in array definitions or match structures.
         $nextNonEmpty = $phpcsFile->findNext(
-            Tokens::$emptyTokens,
+            Tokens::EMPTY_TOKENS,
             ($stackPtr + 1),
             null,
             true
@@ -68,18 +68,16 @@ class DisallowComparisonAssignmentSniff implements Sniff
         }
 
         // Ignore function calls.
-        $ignore = [
-            T_NULLSAFE_OBJECT_OPERATOR,
-            T_OBJECT_OPERATOR,
-            T_STRING,
-            T_VARIABLE,
-            T_WHITESPACE,
-        ];
+        $ignore   = Tokens::NAME_TOKENS;
+        $ignore[] = T_NULLSAFE_OBJECT_OPERATOR;
+        $ignore[] = T_OBJECT_OPERATOR;
+        $ignore[] = T_VARIABLE;
+        $ignore[] = T_WHITESPACE;
 
         $next = $phpcsFile->findNext($ignore, ($stackPtr + 1), null, true);
         if ($tokens[$next]['code'] === T_CLOSURE
             || ($tokens[$next]['code'] === T_OPEN_PARENTHESIS
-            && $tokens[($next - 1)]['code'] === T_STRING)
+            && isset(Tokens::NAME_TOKENS[$tokens[($next - 1)]['code']]) === true)
         ) {
             // Code will look like: $var = myFunction(
             // and will be ignored.
@@ -88,7 +86,7 @@ class DisallowComparisonAssignmentSniff implements Sniff
 
         $endStatement = $phpcsFile->findEndOfStatement($stackPtr);
         for ($i = ($stackPtr + 1); $i < $endStatement; $i++) {
-            if ((isset(Tokens::$comparisonTokens[$tokens[$i]['code']]) === true
+            if ((isset(Tokens::COMPARISON_TOKENS[$tokens[$i]['code']]) === true
                 && $tokens[$i]['code'] !== T_COALESCE)
                 || $tokens[$i]['code'] === T_INLINE_THEN
             ) {
@@ -97,7 +95,7 @@ class DisallowComparisonAssignmentSniff implements Sniff
                 break;
             }
 
-            if (isset(Tokens::$booleanOperators[$tokens[$i]['code']]) === true
+            if (isset(Tokens::BOOLEAN_OPERATORS[$tokens[$i]['code']]) === true
                 || $tokens[$i]['code'] === T_BOOLEAN_NOT
             ) {
                 $error = 'The value of a boolean operation must not be assigned to a variable';
@@ -105,8 +103,5 @@ class DisallowComparisonAssignmentSniff implements Sniff
                 break;
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

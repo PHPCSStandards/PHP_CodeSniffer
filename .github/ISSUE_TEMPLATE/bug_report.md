@@ -10,9 +10,9 @@ assignees: ''
 <!--
 Before reporting a sniff related bug, please check the error code using `phpcs -s`.
 
-If the error code starts with anything other than `Generic`, `MySource`, `PEAR`,
-`PSR1`, `PSR2`, `PSR12`, `Squiz` or `Zend`, the error is likely coming from an
-external PHP_CodeSniffer standard.
+If the error code starts with anything other than `Generic`, `PEAR`, `PSR1`,
+`PSR2`, `PSR12`, `Squiz` or `Zend`, the error is likely coming from an
+PHP_CodeSniffer standard.
 
 Please report bugs for externally maintained sniffs to the appropriate external
 standard repository (not here).
@@ -51,13 +51,13 @@ A clear and concise description of what you expected to happen.
 
 ## Versions (please complete the following information)
 
-|                                       |                                                                                                           |
-|--------------------------|----------------------------------------------------------------------  |
-| Operating System           | [e.g., Windows 10, MacOS 10.15]                                                       |
-| PHP version                    | [e.g., 7.2, 8.1]                                                                                     |
-| PHP_CodeSniffer version | [e.g., 3.7.2, master]                                                                            |
-| Standard                         | [e.g., PSR2, PSR12, Squiz, custom]                                                      |
-| Install type                      | [e.g. Composer (global/local), PHAR, git clone, other (please expand)] |
+|                                          |                                                                                                                |
+|-----------------------------|---------------------------------------------------------------------------- |
+| Operating System            | (e.g., Windows 10, MacOS 10.15)                                                           |
+| PHP version                      | (e.g., 7.2, 8.1)                                                                                          |
+| PHP_CodeSniffer version | (e.g., 3.13.4, 4.x)                                                                                  |
+| Standard                          | (e.g., PSR2, PSR12, Squiz, custom)                                                          |
+| Install type                       | (e.g. Composer (global/local), PHAR, git clone, other (please expand)) |
 
 ## Additional context
 
@@ -66,6 +66,6 @@ Add any other context about the problem here.
 ## Please confirm
 
 - [ ] I have searched the issue list and am not opening a duplicate issue.
-- [ ] I have read the [Contribution Guidelines](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/.github/CONTRIBUTING.md) and this is not a [support question](https://github.com/PHPCSStandards/PHP_CodeSniffer/discussions).
+- [ ] I have read the [Contribution Guidelines](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/.github/CONTRIBUTING.md) and this is not a [support question](https://github.com/PHPCSStandards/PHP_CodeSniffer/discussions).
 - [ ] I confirm that this bug is a bug in PHP_CodeSniffer and not in one of the external standards.
-- [ ] I have verified the issue still exists in the `master` branch of PHP_CodeSniffer.
+- [ ] I have verified the issue still exists in the `4.x` branch of PHP_CodeSniffer.

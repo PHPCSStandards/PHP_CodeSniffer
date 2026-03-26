@@ -453,4 +453,91 @@ class MoreMissingButSupportedTypes
      * @var SomeClass
      */
     private namespace\SomeClass $variableName;
+
+    public static ?\Folder\ClassName $FQNTypeDecl_noComment = null;
+
+    /**
+     * @var \Folder\ClassName|null
+     */
+    public ?\Folder\ClassName $FQNTypeDecl_withComment = null;
+}
+
+class DNFTypes
+{
+    /**
+     * @var mixed
+     */
+    private (\Iterator&namespace\Countable)|false|null $variableName;
+}
+
+class PHP84FinalProperties {
+    /**
+     * @var integer
+     */
+    final int $hasDocblock;
+}
+
+// phpcs:disable Squiz.Commenting.VariableComment.SinceTagNotAllowed
+// phpcs:disable Squiz.Commenting.VariableComment.DeprecatedTagNotAllowed
+class AllowMoreForSelectivelyIgnoringDisallowedTags {
+    /**
+     * @var string
+     *
+     * @since      3.1
+     * @deprecated 10.5
+     */
+    public string $propertyWithExtraTags;
+
+    /**
+     * @var string
+     *
+     * @link       https://example.org/some-link
+     * @api
+     * @param string This tag is not allowed.
+     */
+    public $theAboveExtraTagsAreStillNotAllowed;
+}
+
+// phpcs:enable Squiz.Commenting.VariableComment
+
+class StandaloneFQNNullTrueFalseTypes
+{
+    /**
+     * @var null
+     */
+    public \Null $variableName = null;
+
+    /**
+     * @var true
+     */
+    protected \true $variableName = true;
+
+    /**
+     * @var false
+     */
+    private \FALSE $variableName = false;
+}
+
+class AsymVisibility {
+    /**
+     * @var integer
+     */
+    public(set) int $hasDocblockA;
+
+    /**
+     * @var integer
+     */
+    public protected(set) int $hasDocblockB;
+
+    /**
+     * @var integer
+     */
+    private(set) protected int $hasDocblockC;
+}
+
+abstract class PHP84AbstractProperties {
+    /**
+     * @var Type
+     */
+    abstract Type $hasDocblock {get;}
 }

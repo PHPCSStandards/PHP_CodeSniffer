@@ -168,3 +168,33 @@ enum Cards
 <?php if ($someConditional) : ?>
 <div class="container">
 </div> <?php endif;
+
+function switchCaseCreativeScopeOpeners()
+{
+    switch ($correct) {
+        case 'colon':
+            break;
+        case 'semicolon';
+            return;
+        case 'PHP close tag' ?>
+            <?php return ?>
+        <?php case 'PHP close tag with semicolon'; ?>
+            <?php exit ?>
+        <?php case 'PHP close tag 3' ?>
+            <?php return ?>
+        <?php default ?>
+            <?php break ?>
+        <?php
+    }
+
+    switch ($incorrect) {
+        case 'semicolon'; return;
+        case 'PHP close tag' ?>
+    <?php return ?>
+        <?php case 'PHP close tag with semicolon'; ?>
+              <?php exit ?>
+        <?php default ?>
+        <?php break ?>
+        <?php
+      }
+}

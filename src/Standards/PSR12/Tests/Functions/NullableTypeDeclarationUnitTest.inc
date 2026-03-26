@@ -8,10 +8,10 @@ class MyClass {
     {
     }
 
-    public function validWithFQN(
+    public function validWithQualifiedNames(
         ?\MyNameSpace\MyArray $array = null,
-        ?\MyNameSpace\MyObject $object
-    ): ?\MyNameSpace\MyObject
+        ?MyNameSpace\MyObject $object
+    ): ?namespace\MyObject
     {
     }
 
@@ -26,10 +26,10 @@ class MyClass {
     {
     }
 
-    public function invalidWithFQNTooMuchWhitespace(
+    public function invalidWithQualifiedNamesTooMuchWhitespace(
         ? \MyNameSpace\MyArray $array = null,
-        ? \MyNameSpace\MyObject
-    ):? \MyNameSpace\MyObject
+        ? MyNameSpace\MyObject
+    ):? namespace\MyObject
     {
     }
 }
@@ -93,3 +93,6 @@ function fooH(): ?
 
 // Fatal error: null cannot be marked as nullable, but that's not the concern of this sniff.
 function fooI(): ? null {}
+
+// Ensure nullable FQN true/false are handled correctly.
+function fqnTrueFalseNull(? \FALSE $paramA, ? \Null $paramB) : ?   \true {}

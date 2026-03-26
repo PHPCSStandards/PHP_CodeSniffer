@@ -62,3 +62,29 @@
         <?= 'unreachable - with semicolon'; ?>
     <?php endforeach; ?>
 <?php endif; ?>
+
+<!-- No problem here. -->
+<!-- Mind: the case/default statements all miss an explicit semicolon. This is perfectly valid PHP though. -->
+<?php switch(true): ?>
+    <?php case 'foo' ?>
+        <div>executable</div>
+        <?php break; ?>
+    <?php case 'bar' ?>
+        <?php return ?>
+    <?php default ?>
+        <div>executable</div>
+        <?php goto LABEL; ?>
+<?php endswitch ?>
+
+<!-- Should detect errors here. -->
+<?php switch(true): ?>
+    <?php case 'foo' ?>
+        <?php break; ?>
+        <div>non-executable</div>
+    <?php case 'bar' ?>
+        <?php return; ?>
+        <div>non-executable</div>
+    <?php default ?>
+        <?php goto LABEL ?>
+        <div>non-executable</div>
+<?php endswitch ?>

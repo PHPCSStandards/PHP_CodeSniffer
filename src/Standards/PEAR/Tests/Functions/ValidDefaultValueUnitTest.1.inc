@@ -109,8 +109,12 @@ class OnlyConstructorPropertyPromotion {
 
 class ConstructorPropertyPromotionMixedWithNormalParams {
     public function __construct(
-        public string $name = '',
+        public(set) string $name = '',
         ?int $optionalParam = 0,
         mixed $requiredParam,
     ) {}
 }
+
+// Safeguard correct handling of FQN null as default value.
+function foo(Foo $foo = \null, $bar) {}
+function foo(Foo $foo = \null, Foz $foz = \NULL, $bar = true, $baz) {}

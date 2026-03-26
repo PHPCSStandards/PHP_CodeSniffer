@@ -3,8 +3,9 @@
  * Ensures there is a single space after cast tokens.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting;
@@ -38,9 +39,8 @@ class SpaceAfterCastSniff implements Sniff
      */
     public function register()
     {
-        return Tokens::$castTokens;
-
-    }//end register()
+        return Tokens::CAST_TOKENS;
+    }
 
 
     /**
@@ -52,7 +52,7 @@ class SpaceAfterCastSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens         = $phpcsFile->getTokens();
         $this->spacing  = (int) $this->spacing;
@@ -68,7 +68,7 @@ class SpaceAfterCastSniff implements Sniff
             return;
         }
 
-        $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
         if ($nextNonEmpty === false) {
             return;
         }
@@ -106,7 +106,7 @@ class SpaceAfterCastSniff implements Sniff
         $found = 0;
         if ($tokens[$stackPtr]['line'] !== $tokens[$nextNonEmpty]['line']) {
             $found = 'newline';
-        } else if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
+        } elseif ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
             $found = $tokens[($stackPtr + 1)]['length'];
         }
 
@@ -127,7 +127,7 @@ class SpaceAfterCastSniff implements Sniff
         if ($this->spacing !== 0) {
             if ($found === 0) {
                 $errorCode = 'NoSpace';
-            } else if ($found !== 'newline' && $found < $this->spacing) {
+            } elseif ($found !== 'newline' && $found < $this->spacing) {
                 $errorCode = 'TooLittleSpace';
             }
         }
@@ -154,8 +154,5 @@ class SpaceAfterCastSniff implements Sniff
                 $phpcsFile->fixer->endChangeset();
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

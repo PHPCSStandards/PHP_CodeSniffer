@@ -3,8 +3,9 @@
  * Checks that the file does not end with a closing tag.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Zend\Sniffs\Files;
@@ -25,8 +26,7 @@ class ClosingTagSniff implements Sniff
     public function register()
     {
         return [T_OPEN_TAG];
-
-    }//end register()
+    }
 
 
     /**
@@ -38,7 +38,7 @@ class ClosingTagSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         // Find the last non-empty token.
         $tokens = $phpcsFile->getTokens();
@@ -54,7 +54,7 @@ class ClosingTagSniff implements Sniff
             if ($fix === true) {
                 $phpcsFile->fixer->beginChangeset();
                 $phpcsFile->fixer->replaceToken($last, $phpcsFile->eolChar);
-                $prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($last - 1), null, true);
+                $prev = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($last - 1), null, true);
                 if ($tokens[$prev]['code'] !== T_SEMICOLON
                     && $tokens[$prev]['code'] !== T_CLOSE_CURLY_BRACKET
                     && $tokens[$prev]['code'] !== T_OPEN_TAG
@@ -68,12 +68,9 @@ class ClosingTagSniff implements Sniff
             $phpcsFile->recordMetric($stackPtr, 'PHP closing tag at EOF', 'yes');
         } else {
             $phpcsFile->recordMetric($stackPtr, 'PHP closing tag at EOF', 'no');
-        }//end if
+        }
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
-
-    }//end process()
-
-
-}//end class
+    }
+}

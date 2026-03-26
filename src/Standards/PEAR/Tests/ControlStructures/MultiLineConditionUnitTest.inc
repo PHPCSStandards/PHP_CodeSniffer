@@ -249,3 +249,26 @@ if ($IPP->errorCode() == 401
 ) {
     return false;
 }
+
+// Should be no errors even though lines are not exactly aligned together.
+// Multi-line function call takes precedence.
+if ($a === true
+    && \Fully\Qualified(
+        $key, $value2
+    )
+) {
+}
+
+if ($a === true
+    && Partially\qualified(
+        $key, $value2
+    )
+) {
+}
+
+if ($a === true
+    && namespace\relative(
+        $key, $value2
+    )
+) {
+}

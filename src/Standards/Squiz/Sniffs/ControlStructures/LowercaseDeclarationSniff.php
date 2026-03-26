@@ -3,8 +3,9 @@
  * Ensures all control structure keywords are lowercase.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures;
@@ -36,8 +37,7 @@ class LowercaseDeclarationSniff implements Sniff
             T_CATCH,
             T_MATCH,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -49,7 +49,7 @@ class LowercaseDeclarationSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -68,8 +68,5 @@ class LowercaseDeclarationSniff implements Sniff
                 $phpcsFile->fixer->replaceToken($stackPtr, $contentLc);
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

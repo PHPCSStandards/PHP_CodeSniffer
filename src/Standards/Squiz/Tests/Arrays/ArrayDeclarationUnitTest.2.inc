@@ -536,3 +536,20 @@ $x = [
       1, static::helloWorld(), $class instanceof static,
       2,
      ];
+
+$noSpaceBeforeDoubleArrow = [
+                             'width'=> '',
+                             'height' => '',
+                            ];
+
+$newlineAfterDoubleArrow = [
+                            'width'  =>
+                            '',
+                            'height' => '',
+                           ];
+
+// Sniff should ignore short lists when inside a foreach.
+// https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/527
+foreach ($data as [, , $value]) {}
+foreach ($array as $k => [$v1, , $v3]) {}
+foreach ([$a ,$b] as $c) {} // Not a short list. Sniff should handle it.

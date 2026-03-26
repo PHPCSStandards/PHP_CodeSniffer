@@ -3,8 +3,9 @@
  * Checks that the strict_types has been declared.
  *
  * @author    Sertan Danis <sdanis@squiz.net>
- * @copyright 2006-2019 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\PHP;
@@ -25,8 +26,7 @@ class RequireStrictTypesSniff implements Sniff
     public function register()
     {
         return [T_OPEN_TAG];
-
-    }//end register()
+    }
 
 
     /**
@@ -38,7 +38,7 @@ class RequireStrictTypesSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens  = $phpcsFile->getTokens();
         $declare = $phpcsFile->findNext(T_DECLARE, ($stackPtr + 1));
@@ -55,7 +55,7 @@ class RequireStrictTypesSniff implements Sniff
 
             do {
                 $next = $phpcsFile->findNext(
-                    Tokens::$emptyTokens,
+                    Tokens::EMPTY_TOKENS,
                     ($next + 1),
                     $tokens[$declare]['parenthesis_closer'],
                     true
@@ -72,7 +72,7 @@ class RequireStrictTypesSniff implements Sniff
 
                 $next = $phpcsFile->findNext(T_COMMA, ($next + 1), $tokens[$declare]['parenthesis_closer']);
             } while ($next !== false && $next < $tokens[$declare]['parenthesis_closer']);
-        }//end if
+        }
 
         if ($found === false) {
             $error = 'Missing required strict_types declaration';
@@ -82,7 +82,7 @@ class RequireStrictTypesSniff implements Sniff
         }
 
         // Strict types declaration found, make sure strict types is enabled.
-        $skip     = Tokens::$emptyTokens;
+        $skip     = Tokens::EMPTY_TOKENS;
         $skip[]   = T_EQUAL;
         $valuePtr = $phpcsFile->findNext($skip, ($next + 1), null, true);
 
@@ -101,8 +101,5 @@ class RequireStrictTypesSniff implements Sniff
         // Skip the rest of the file so we don't pick up additional
         // open tags, typically embedded in HTML.
         return $phpcsFile->numTokens;
-
-    }//end process()
-
-
-}//end class
+    }
+}

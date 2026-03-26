@@ -1,0 +1,4 @@
+<?php
+
+// Comment.
+print 'hello'  ;

@@ -7,15 +7,20 @@
  * report from the command line.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Exceptions\DeepExitException;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Reporter;
+use PHP_CodeSniffer\Util\ExitCode;
 use PHP_CodeSniffer\Util\Timing;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 class Cbf implements Report
 {
@@ -37,17 +42,18 @@ class Cbf implements Report
      * @return bool
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException
      */
-    public function generateFileReport($report, File $phpcsFile, $showSources=false, $width=80)
+    public function generateFileReport(array $report, File $phpcsFile, bool $showSources = false, int $width = 80)
     {
         $errors = $phpcsFile->getFixableCount();
         if ($errors !== 0) {
             if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                ob_end_clean();
                 $startTime = microtime(true);
-                echo "\t=> Fixing file: $errors/$errors violations remaining";
+                $newlines  = 0;
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    echo PHP_EOL;
+                    $newlines = 1;
                 }
+
+                StatusWriter::forceWrite("=> Fixing file: $errors/$errors violations remaining", 1, $newlines);
             }
 
             $fixed = $phpcsFile->fixer->fixFile();
@@ -57,8 +63,12 @@ class Cbf implements Report
             // Replacing STDIN, so output current file to STDOUT
             // even if nothing was fixed. Exit here because we
             // can't process any more than 1 file in this setup.
-            $fixedContent = $phpcsFile->fixer->getContents();
-            throw new DeepExitException($fixedContent, 1);
+            echo $phpcsFile->fixer->getContents();
+
+            // Fake a Reporter instance to allow for getting a proper exit code.
+            $reporter = $this->createReporterInstance($phpcsFile);
+
+            throw new DeepExitException('', ExitCode::calculate($reporter));
         }
 
         if ($errors === 0) {
@@ -67,28 +77,21 @@ class Cbf implements Report
 
         if (PHP_CODESNIFFER_VERBOSITY > 0) {
             if ($fixed === false) {
-                echo 'ERROR';
+                StatusWriter::forceWrite('ERROR', 0, 0);
             } else {
-                echo 'DONE';
+                StatusWriter::forceWrite('DONE', 0, 0);
             }
 
-            $timeTaken = ((microtime(true) - $startTime) * 1000);
-            if ($timeTaken < 1000) {
-                $timeTaken = round($timeTaken);
-                echo " in {$timeTaken}ms".PHP_EOL;
-            } else {
-                $timeTaken = round(($timeTaken / 1000), 2);
-                echo " in $timeTaken secs".PHP_EOL;
-            }
+            StatusWriter::forceWrite(' in ' . Timing::getHumanReadableDuration(Timing::getDurationSince($startTime)));
         }
 
         if ($fixed === true) {
             // The filename in the report may be truncated due to a basepath setting
             // but we are using it for writing here and not display,
             // so find the correct path if basepath is in use.
-            $newFilename = $report['filename'].$phpcsFile->config->suffix;
+            $newFilename = $report['filename'] . $phpcsFile->config->suffix;
             if ($phpcsFile->config->basepath !== null) {
-                $newFilename = $phpcsFile->config->basepath.DIRECTORY_SEPARATOR.$newFilename;
+                $newFilename = $phpcsFile->config->basepath . DIRECTORY_SEPARATOR . $newFilename;
             }
 
             $newContent = $phpcsFile->fixer->getContents();
@@ -96,26 +99,21 @@ class Cbf implements Report
 
             if (PHP_CODESNIFFER_VERBOSITY > 0) {
                 if ($newFilename === $report['filename']) {
-                    echo "\t=> File was overwritten".PHP_EOL;
+                    StatusWriter::forceWrite('=> File was overwritten', 1);
                 } else {
-                    echo "\t=> Fixed file written to ".basename($newFilename).PHP_EOL;
+                    StatusWriter::forceWrite('=> Fixed file written to ' . basename($newFilename), 1);
                 }
             }
-        }
-
-        if (PHP_CODESNIFFER_VERBOSITY > 0) {
-            ob_start();
         }
 
         $errorCount   = $phpcsFile->getErrorCount();
         $warningCount = $phpcsFile->getWarningCount();
         $fixableCount = $phpcsFile->getFixableCount();
         $fixedCount   = ($errors - $fixableCount);
-        echo $report['filename'].">>$errorCount>>$warningCount>>$fixableCount>>$fixedCount".PHP_EOL;
+        echo $report['filename'] . ">>$errorCount>>$warningCount>>$fixableCount>>$fixedCount" . PHP_EOL;
 
         return $fixed;
-
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -135,21 +133,28 @@ class Cbf implements Report
      * @return void
      */
     public function generate(
-        $cachedData,
-        $totalFiles,
-        $totalErrors,
-        $totalWarnings,
-        $totalFixable,
-        $showSources=false,
-        $width=80,
-        $interactive=false,
-        $toScreen=true
+        string $cachedData,
+        int $totalFiles,
+        int $totalErrors,
+        int $totalWarnings,
+        int $totalFixable,
+        bool $showSources = false,
+        int $width = 80,
+        bool $interactive = false,
+        bool $toScreen = true
     ) {
         $lines = explode(PHP_EOL, $cachedData);
         array_pop($lines);
 
         if (empty($lines) === true) {
-            echo PHP_EOL.'No fixable errors were found'.PHP_EOL;
+            if (($totalErrors + $totalWarnings) === 0) {
+                StatusWriter::writeNewline();
+                StatusWriter::write('No violations were found');
+            } else {
+                StatusWriter::writeNewline();
+                StatusWriter::write('No fixable errors were found');
+            }
+
             return;
         }
 
@@ -181,22 +186,22 @@ class Cbf implements Report
         $width = min($width, ($maxLength + 21));
         $width = max($width, 70);
 
-        echo PHP_EOL."\033[1m".'PHPCBF RESULT SUMMARY'."\033[0m".PHP_EOL;
-        echo str_repeat('-', $width).PHP_EOL;
-        echo "\033[1m".'FILE'.str_repeat(' ', ($width - 20)).'FIXED  REMAINING'."\033[0m".PHP_EOL;
-        echo str_repeat('-', $width).PHP_EOL;
+        echo PHP_EOL . "\033[1m" . 'PHPCBF RESULT SUMMARY' . "\033[0m" . PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
+        echo "\033[1m" . 'FILE' . str_repeat(' ', ($width - 20)) . 'FIXED  REMAINING' . "\033[0m" . PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
 
         foreach ($reportFiles as $file => $data) {
             $padding = ($width - 18 - $data['strlen']);
             if ($padding < 0) {
-                $file    = '...'.substr($file, (($padding * -1) + 3));
+                $file    = '...' . substr($file, (($padding * -1) + 3));
                 $padding = 0;
             }
 
-            echo $file.str_repeat(' ', $padding).'  ';
+            echo $file . str_repeat(' ', $padding) . '  ';
 
             if ($data['fixable'] > 0) {
-                echo "\033[31mFAILED TO FIX\033[0m".PHP_EOL;
+                echo "\033[31mFAILED TO FIX\033[0m" . PHP_EOL;
                 continue;
             }
 
@@ -216,16 +221,16 @@ class Cbf implements Report
             }
 
             echo PHP_EOL;
-        }//end foreach
+        }
 
-        echo str_repeat('-', $width).PHP_EOL;
+        echo str_repeat('-', $width) . PHP_EOL;
         echo "\033[1mA TOTAL OF $totalFixed ERROR";
         if ($totalFixed !== 1) {
             echo 'S';
         }
 
         $numFiles = count($reportFiles);
-        echo ' WERE FIXED IN '.$numFiles.' FILE';
+        echo ' WERE FIXED IN ' . $numFiles . ' FILE';
         if ($numFiles !== 1) {
             echo 'S';
         }
@@ -233,7 +238,7 @@ class Cbf implements Report
         echo "\033[0m";
 
         if ($failures > 0) {
-            echo PHP_EOL.str_repeat('-', $width).PHP_EOL;
+            echo PHP_EOL . str_repeat('-', $width) . PHP_EOL;
             echo "\033[1mPHPCBF FAILED TO FIX $failures FILE";
             if ($failures !== 1) {
                 echo 'S';
@@ -242,13 +247,38 @@ class Cbf implements Report
             echo "\033[0m";
         }
 
-        echo PHP_EOL.str_repeat('-', $width).PHP_EOL.PHP_EOL;
-
-        if ($toScreen === true && $interactive === false) {
-            Timing::printRunTime();
-        }
-
-    }//end generate()
+        echo PHP_EOL . str_repeat('-', $width) . PHP_EOL . PHP_EOL;
+    }
 
 
-}//end class
+    /**
+     * Create a "fake" Reporter instance to allow for getting a proper exit code when scanning code provided via STDIN.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being reported on.
+     *
+     * @return \PHP_CodeSniffer\Reporter
+     */
+    private function createReporterInstance(File $phpcsFile)
+    {
+        $reporter = new class extends Reporter {
+
+
+            /**
+             * Overload the constructor as we don't need it.
+             */
+            public function __construct()
+            {
+            }
+        };
+
+        $reporter->totalFiles           = 1;
+        $reporter->totalErrors          = $phpcsFile->getFirstRunCount('error');
+        $reporter->totalWarnings        = $phpcsFile->getFirstRunCount('warning');
+        $reporter->totalFixableErrors   = $phpcsFile->getFixableErrorCount();
+        $reporter->totalFixableWarnings = $phpcsFile->getFixableWarningCount();
+        $reporter->totalFixedErrors     = $phpcsFile->getFixedErrorCount();
+        $reporter->totalFixedWarnings   = $phpcsFile->getFixedWarningCount();
+
+        return $reporter;
+    }
+}

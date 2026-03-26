@@ -3,20 +3,21 @@
  * Unit test class for the FileComment sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PEAR\Tests\Commenting;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the FileComment sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\FileCommentSniff
  */
-final class FileCommentUnitTest extends AbstractSniffUnitTest
+final class FileCommentUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -30,38 +31,37 @@ final class FileCommentUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'FileCommentUnitTest.1.inc':
-            return [
-                21 => 1,
-                23 => 2,
-                24 => 1,
-                26 => 1,
-                28 => 1,
-                29 => 1,
-                30 => 1,
-                31 => 1,
-                32 => 2,
-                33 => 1,
-                34 => 1,
-                35 => 1,
-                40 => 2,
-                41 => 2,
-                43 => 1,
-            ];
+            case 'FileCommentUnitTest.1.inc':
+                return [
+                    21 => 1,
+                    23 => 2,
+                    24 => 1,
+                    26 => 1,
+                    28 => 1,
+                    29 => 1,
+                    30 => 1,
+                    31 => 1,
+                    32 => 2,
+                    33 => 1,
+                    34 => 1,
+                    35 => 1,
+                    40 => 2,
+                    41 => 2,
+                    43 => 1,
+                ];
 
-        case 'FileCommentUnitTest.2.inc':
-        case 'FileCommentUnitTest.3.inc':
-        case 'FileCommentUnitTest.4.inc':
-            return [1 => 1];
+            case 'FileCommentUnitTest.2.inc':
+            case 'FileCommentUnitTest.3.inc':
+            case 'FileCommentUnitTest.4.inc':
+                return [1 => 1];
 
-        default:
-            return [];
-        }//end switch
-
-    }//end getErrorList()
+            default:
+                return [];
+        }
+    }
 
 
     /**
@@ -74,22 +74,19 @@ final class FileCommentUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'FileCommentUnitTest.1.inc':
-            return [
-                29 => 1,
-                30 => 1,
-                34 => 1,
-                43 => 1,
-            ];
+            case 'FileCommentUnitTest.1.inc':
+                return [
+                    29 => 1,
+                    30 => 1,
+                    34 => 1,
+                    43 => 1,
+                ];
 
-        default:
-            return [];
-        }//end switch
-
-    }//end getWarningList()
-
-
-}//end class
+            default:
+                return [];
+        }
+    }
+}

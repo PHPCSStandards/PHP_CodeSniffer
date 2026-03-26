@@ -33,9 +33,9 @@ class ArrayUnique {}
 $sillyComments = strToLower /*comment*/ ($string);
 
 $callToGlobalFunction = \STR_REPEAT($a, 2);
-$callToGlobalFunction = \ /*comment*/ str_Repeat($a, 2);
+$callToGlobalFunction = \str_Repeat($a, 2);
 
-$callToNamespacedFunction = MyNamespace /* phpcs:ignore Standard */ \STR_REPEAT($a, 2);
+$callToNamespacedFunction = MyNamespace\STR_REPEAT($a, 2);
 $callToNamespacedFunction = namespace\STR_REPEAT($a, 2); // Could potentially be false negative.
 
 $filePath = new \File($path);

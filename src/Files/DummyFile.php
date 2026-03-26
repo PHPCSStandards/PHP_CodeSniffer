@@ -8,8 +8,9 @@
  * as the first line of the file contents.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Files;
@@ -30,7 +31,7 @@ class DummyFile extends File
      *
      * @return void
      */
-    public function __construct($content, Ruleset $ruleset, Config $config)
+    public function __construct(string $content, Ruleset $ruleset, Config $config)
     {
         $this->setContent($content);
 
@@ -55,28 +56,34 @@ class DummyFile extends File
         }
 
         parent::__construct($path, $ruleset, $config);
-
-    }//end __construct()
+    }
 
 
     /**
      * Set the error, warning, and fixable counts for the file.
      *
-     * @param int $errorCount   The number of errors found.
-     * @param int $warningCount The number of warnings found.
-     * @param int $fixableCount The number of fixable errors found.
-     * @param int $fixedCount   The number of errors that were fixed.
+     * @param int $errorCount          The number of errors found.
+     * @param int $warningCount        The number of warnings found.
+     * @param int $fixableErrorCount   The number of fixable errors found.
+     * @param int $fixableWarningCount The number of fixable warning found.
+     * @param int $fixedErrorCount     The number of errors that were fixed.
+     * @param int $fixedWarningCount   The number of warning that were fixed.
      *
      * @return void
      */
-    public function setErrorCounts($errorCount, $warningCount, $fixableCount, $fixedCount)
-    {
-        $this->errorCount   = $errorCount;
-        $this->warningCount = $warningCount;
-        $this->fixableCount = $fixableCount;
-        $this->fixedCount   = $fixedCount;
-
-    }//end setErrorCounts()
-
-
-}//end class
+    public function setErrorCounts(
+        int $errorCount,
+        int $warningCount,
+        int $fixableErrorCount,
+        int $fixableWarningCount,
+        int $fixedErrorCount,
+        int $fixedWarningCount
+    ) {
+        $this->errorCount          = $errorCount;
+        $this->warningCount        = $warningCount;
+        $this->fixableErrorCount   = $fixableErrorCount;
+        $this->fixableWarningCount = $fixableWarningCount;
+        $this->fixedErrorCount     = $fixedErrorCount;
+        $this->fixedWarningCount   = $fixedWarningCount;
+    }
+}

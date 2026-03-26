@@ -4,7 +4,8 @@
  *
  * @author    Alexander Obuhovich <aik.bold@gmail.com>
  * @copyright 2010-2014 Alexander Obuhovich
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Files;
@@ -24,8 +25,7 @@ class OneTraitPerFileSniff implements Sniff
     public function register()
     {
         return [T_TRAIT];
-
-    }//end register()
+    }
 
 
     /**
@@ -37,7 +37,7 @@ class OneTraitPerFileSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $start  = ($stackPtr + 1);
@@ -50,8 +50,5 @@ class OneTraitPerFileSniff implements Sniff
             $error = 'Only one trait is allowed in a file';
             $phpcsFile->addError($error, $nextClass, 'MultipleFound');
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

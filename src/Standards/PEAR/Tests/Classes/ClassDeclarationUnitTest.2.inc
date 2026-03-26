@@ -7,5 +7,5 @@ if (!class_exists('ClassOpeningBraceTabIndented')) {
 }
 
 
-// Needs to be last test in the file. Intentional parse error.
+// Needs to be last test in the file. Intentional parse error. Should be ignored.
 class MyParseError extends Exception

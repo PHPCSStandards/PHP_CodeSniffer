@@ -4,19 +4,20 @@
  *
  * @author    Manuel Pichler <mapi@manuel-pichler.de>
  * @copyright 2007-2014 Manuel Pichler. All rights reserved.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\CodeAnalysis;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the UnnecessaryFinalModifier sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UnnecessaryFinalModifierSniff
  */
-final class UnnecessaryFinalModifierUnitTest extends AbstractSniffUnitTest
+final class UnnecessaryFinalModifierUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -31,8 +32,7 @@ final class UnnecessaryFinalModifierUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -45,25 +45,24 @@ final class UnnecessaryFinalModifierUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         switch ($testFile) {
-        case 'UnnecessaryFinalModifierUnitTest.1.inc':
-            return [
-                11 => 1,
-                12 => 1,
-                15 => 1,
-                18 => 1,
-                32 => 1,
-                33 => 1,
-                37 => 1,
-                38 => 1,
-            ];
-        default:
-            return [];
+            case 'UnnecessaryFinalModifierUnitTest.1.inc':
+                return [
+                    11 => 1,
+                    12 => 1,
+                    15 => 1,
+                    18 => 1,
+                    32 => 1,
+                    33 => 1,
+                    37 => 1,
+                    38 => 1,
+                    59 => 1,
+                    60 => 1,
+                ];
+            default:
+                return [];
         }
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

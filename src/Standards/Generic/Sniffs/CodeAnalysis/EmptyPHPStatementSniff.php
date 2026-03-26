@@ -7,7 +7,8 @@
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2017 Juliette Reinders Folmer. All rights reserved.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis;
@@ -31,8 +32,7 @@ class EmptyPHPStatementSniff implements Sniff
             T_SEMICOLON,
             T_CLOSE_TAG,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -44,119 +44,131 @@ class EmptyPHPStatementSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
-        switch ($tokens[$stackPtr]['type']) {
-        // Detect `something();;`.
-        case 'T_SEMICOLON':
-            $prevNonEmpty = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+        if ($tokens[$stackPtr]['code'] === T_SEMICOLON) {
+            $this->processSemicolon($phpcsFile, $stackPtr);
+        } else {
+            $this->processCloseTag($phpcsFile, $stackPtr);
+        }
+    }
 
-            if ($prevNonEmpty === false) {
+
+    /**
+     * Detect `something();;`.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param int                         $stackPtr  The position of the current token
+     *                                               in the stack passed in $tokens.
+     *
+     * @return void
+     */
+    private function processSemicolon(File $phpcsFile, int $stackPtr)
+    {
+        $tokens = $phpcsFile->getTokens();
+
+        $prevNonEmpty = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
+        if ($tokens[$prevNonEmpty]['code'] !== T_SEMICOLON
+            && $tokens[$prevNonEmpty]['code'] !== T_OPEN_TAG
+            && $tokens[$prevNonEmpty]['code'] !== T_OPEN_TAG_WITH_ECHO
+        ) {
+            if (isset($tokens[$prevNonEmpty]['scope_condition']) === false) {
                 return;
             }
 
-            if ($tokens[$prevNonEmpty]['code'] !== T_SEMICOLON
-                && $tokens[$prevNonEmpty]['code'] !== T_OPEN_TAG
-                && $tokens[$prevNonEmpty]['code'] !== T_OPEN_TAG_WITH_ECHO
-            ) {
-                if (isset($tokens[$prevNonEmpty]['scope_condition']) === false) {
-                    return;
-                }
-
-                if ($tokens[$prevNonEmpty]['scope_opener'] !== $prevNonEmpty
-                    && $tokens[$prevNonEmpty]['code'] !== T_CLOSE_CURLY_BRACKET
-                ) {
-                    return;
-                }
-
-                $scopeOwner = $tokens[$tokens[$prevNonEmpty]['scope_condition']]['code'];
-                if ($scopeOwner === T_CLOSURE || $scopeOwner === T_ANON_CLASS || $scopeOwner === T_MATCH) {
-                    return;
-                }
-
-                // Else, it's something like `if (foo) {};` and the semicolon is not needed.
-            }
-
-            if (isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
-                $nested     = $tokens[$stackPtr]['nested_parenthesis'];
-                $lastCloser = array_pop($nested);
-                if (isset($tokens[$lastCloser]['parenthesis_owner']) === true
-                    && $tokens[$tokens[$lastCloser]['parenthesis_owner']]['code'] === T_FOR
-                ) {
-                    // Empty for() condition.
-                    return;
-                }
-            }
-
-            $fix = $phpcsFile->addFixableWarning(
-                'Empty PHP statement detected: superfluous semicolon.',
-                $stackPtr,
-                'SemicolonWithoutCodeDetected'
-            );
-            if ($fix === true) {
-                $phpcsFile->fixer->beginChangeset();
-
-                if ($tokens[$prevNonEmpty]['code'] === T_OPEN_TAG
-                    || $tokens[$prevNonEmpty]['code'] === T_OPEN_TAG_WITH_ECHO
-                ) {
-                    // Check for superfluous whitespace after the semicolon which will be
-                    // removed as the `<?php ` open tag token already contains whitespace,
-                    // either a space or a new line.
-                    if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
-                        $replacement = str_replace(' ', '', $tokens[($stackPtr + 1)]['content']);
-                        $phpcsFile->fixer->replaceToken(($stackPtr + 1), $replacement);
-                    }
-                }
-
-                for ($i = $stackPtr; $i > $prevNonEmpty; $i--) {
-                    if ($tokens[$i]['code'] !== T_SEMICOLON
-                        && $tokens[$i]['code'] !== T_WHITESPACE
-                    ) {
-                        break;
-                    }
-
-                    $phpcsFile->fixer->replaceToken($i, '');
-                }
-
-                $phpcsFile->fixer->endChangeset();
-            }//end if
-            break;
-
-        // Detect `<?php ? >`.
-        case 'T_CLOSE_TAG':
-            $prevNonEmpty = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
-
-            if ($prevNonEmpty === false
-                || ($tokens[$prevNonEmpty]['code'] !== T_OPEN_TAG
-                && $tokens[$prevNonEmpty]['code'] !== T_OPEN_TAG_WITH_ECHO)
+            if ($tokens[$prevNonEmpty]['scope_opener'] !== $prevNonEmpty
+                && $tokens[$prevNonEmpty]['code'] !== T_CLOSE_CURLY_BRACKET
             ) {
                 return;
             }
 
-            $fix = $phpcsFile->addFixableWarning(
-                'Empty PHP open/close tag combination detected.',
-                $prevNonEmpty,
-                'EmptyPHPOpenCloseTagsDetected'
-            );
-            if ($fix === true) {
-                $phpcsFile->fixer->beginChangeset();
+            $scopeOwner = $tokens[$tokens[$prevNonEmpty]['scope_condition']]['code'];
+            if ($scopeOwner === T_CLOSURE || $scopeOwner === T_ANON_CLASS || $scopeOwner === T_MATCH) {
+                return;
+            }
 
-                for ($i = $prevNonEmpty; $i <= $stackPtr; $i++) {
-                    $phpcsFile->fixer->replaceToken($i, '');
+            // Else, it's something like `if (foo) {};` and the semicolon is not needed.
+        }
+
+        if (isset($tokens[$stackPtr]['nested_parenthesis']) === true) {
+            $nested     = $tokens[$stackPtr]['nested_parenthesis'];
+            $lastCloser = array_pop($nested);
+            if (isset($tokens[$lastCloser]['parenthesis_owner']) === true
+                && $tokens[$tokens[$lastCloser]['parenthesis_owner']]['code'] === T_FOR
+            ) {
+                // Empty for() condition.
+                return;
+            }
+        }
+
+        $fix = $phpcsFile->addFixableWarning(
+            'Empty PHP statement detected: superfluous semicolon.',
+            $stackPtr,
+            'SemicolonWithoutCodeDetected'
+        );
+
+        if ($fix === true) {
+            $phpcsFile->fixer->beginChangeset();
+
+            // Make sure there always remains one space between the open tag and the next content.
+            $replacement = ' ';
+            if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
+                $replacement = '';
+            }
+
+            $phpcsFile->fixer->replaceToken($stackPtr, $replacement);
+
+            for ($i = ($stackPtr - 1); $i > $prevNonEmpty; $i--) {
+                if ($tokens[$i]['code'] !== T_SEMICOLON
+                    && $tokens[$i]['code'] !== T_WHITESPACE
+                ) {
+                    break;
                 }
 
-                $phpcsFile->fixer->endChangeset();
+                $phpcsFile->fixer->replaceToken($i, '');
             }
-            break;
 
-        default:
-            // Deliberately left empty.
-            break;
-        }//end switch
-
-    }//end process()
+            $phpcsFile->fixer->endChangeset();
+        }
+    }
 
 
-}//end class
+    /**
+     * Detect `<?php ? >`.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param int                         $stackPtr  The position of the current token
+     *                                               in the stack passed in $tokens.
+     *
+     * @return void
+     */
+    private function processCloseTag(File $phpcsFile, int $stackPtr)
+    {
+        $tokens = $phpcsFile->getTokens();
+
+        $prevNonEmpty = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
+        if ($tokens[$prevNonEmpty]['code'] !== T_OPEN_TAG
+            && $tokens[$prevNonEmpty]['code'] !== T_OPEN_TAG_WITH_ECHO
+        ) {
+            return;
+        }
+
+        $fix = $phpcsFile->addFixableWarning(
+            'Empty PHP open/close tag combination detected.',
+            $prevNonEmpty,
+            'EmptyPHPOpenCloseTagsDetected'
+        );
+
+        if ($fix === true) {
+            $phpcsFile->fixer->beginChangeset();
+
+            for ($i = $prevNonEmpty; $i <= $stackPtr; $i++) {
+                $phpcsFile->fixer->replaceToken($i, '');
+            }
+
+            $phpcsFile->fixer->endChangeset();
+        }
+    }
+}

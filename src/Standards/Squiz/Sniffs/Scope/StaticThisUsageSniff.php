@@ -3,8 +3,9 @@
  * Checks for usage of $this in static methods, which will cause runtime errors.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Scope;
@@ -23,8 +24,7 @@ class StaticThisUsageSniff extends AbstractScopeSniff
     public function __construct()
     {
         parent::__construct([T_CLASS, T_TRAIT, T_ENUM, T_ANON_CLASS], [T_FUNCTION]);
-
-    }//end __construct()
+    }
 
 
     /**
@@ -37,7 +37,7 @@ class StaticThisUsageSniff extends AbstractScopeSniff
      *
      * @return void
      */
-    public function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
+    public function processTokenWithinScope(File $phpcsFile, int $stackPtr, int $currScope)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -54,7 +54,7 @@ class StaticThisUsageSniff extends AbstractScopeSniff
             return;
         }
 
-        $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
         if ($next === false || $tokens[$next]['code'] !== T_STRING) {
             // Not a function declaration, or incomplete.
             return;
@@ -69,8 +69,7 @@ class StaticThisUsageSniff extends AbstractScopeSniff
         $end  = $tokens[$stackPtr]['scope_closer'];
 
         $this->checkThisUsage($phpcsFile, $next, $end);
-
-    }//end processTokenWithinScope()
+    }
 
 
     /**
@@ -82,7 +81,7 @@ class StaticThisUsageSniff extends AbstractScopeSniff
      *
      * @return void
      */
-    private function checkThisUsage(File $phpcsFile, $next, $end)
+    private function checkThisUsage(File $phpcsFile, int $next, int $end)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -105,8 +104,7 @@ class StaticThisUsageSniff extends AbstractScopeSniff
             $error = 'Usage of "$this" in static methods will cause runtime errors';
             $phpcsFile->addError($error, $next, 'Found');
         } while ($next !== false);
-
-    }//end checkThisUsage()
+    }
 
 
     /**
@@ -119,10 +117,7 @@ class StaticThisUsageSniff extends AbstractScopeSniff
      *
      * @return void
      */
-    protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
+    protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr)
     {
-
-    }//end processTokenOutsideScope()
-
-
-}//end class
+    }
+}

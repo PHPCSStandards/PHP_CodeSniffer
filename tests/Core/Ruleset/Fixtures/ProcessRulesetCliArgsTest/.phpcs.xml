@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="ProcessRulesetCliArgsTest" xsi:noNamespaceSchemaLocation="https://schema.phpcodesniffer.com/phpcs.xsd">
+
+    <!-- Issues squizlabs/PHP_CodeSniffer#2597 + squizlabs/PHP_CodeSniffer#2602: allow overruling CLI args when they have a single CLI flag names.
+         One value is set before the includes, one after to safeguard that the order in the file does not influence the results.
+    -->
+    <arg name="extensions" value="inc,install,module,php,profile,test,theme"/>
+
+    <!-- Issue squizlabs/PHP_CodeSniffer#2395: allow overruling CLI args when they have different CLI flag names. -->
+    <arg name="no-colors"/>
+    <arg name="cache" value="./config/phpcs/.cache.phpcs"/>
+
+    <!-- Miscellaneous other settings. -->
+    <arg name="report" value="full,summary,source"/>
+
+    <!-- Include the overrides. -->
+    <rule ref="./phpcs.xml.dist"/>
+    <rule ref="./config/phpcs/include-overrules.xml"/>
+
+    <!-- Issues squizlabs/PHP_CodeSniffer#2597 + squizlabs/PHP_CodeSniffer#2602: second test. -->
+    <arg name="tab-width" value="3"/>
+
+    <!-- Issue squizlabs/PHP_CodeSniffer#2395: second test. -->
+    <arg value="w"/>
+
+    <!-- Prevent a "no sniffs were registered" error. -->
+    <rule ref="Generic.PHP.BacktickOperator"/>
+</ruleset>

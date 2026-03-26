@@ -4,19 +4,20 @@
  *
  * @author    Matthew Peveler <matt.peveler@gmail.com>
  * @copyright 2019 Matthew Peveler
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Files;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the ExecutableFile sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\ExecutableFileSniff
  */
-final class ExecutableFileUnitTest extends AbstractSniffUnitTest
+final class ExecutableFileUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -28,9 +29,8 @@ final class ExecutableFileUnitTest extends AbstractSniffUnitTest
     protected function shouldSkipTest()
     {
         // Skip on Windows which doesn't have the concept of executable files.
-        return (stripos(PHP_OS, 'WIN') === 0);
-
-    }//end shouldSkipTest()
+        return PHP_OS_FAMILY === 'Windows';
+    }
 
 
     /**
@@ -43,17 +43,16 @@ final class ExecutableFileUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'ExecutableFileUnitTest.2.inc':
-        case 'ExecutableFileUnitTest.4.inc':
-            return [1 => 1];
-        default:
-            return [];
-        }//end switch
-
-    }//end getErrorList()
+            case 'ExecutableFileUnitTest.2.inc':
+            case 'ExecutableFileUnitTest.4.inc':
+                return [1 => 1];
+            default:
+                return [];
+        }
+    }
 
 
     /**
@@ -66,11 +65,8 @@ final class ExecutableFileUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getWarningList($testFile='')
+    public function getWarningList($testFile = '')
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

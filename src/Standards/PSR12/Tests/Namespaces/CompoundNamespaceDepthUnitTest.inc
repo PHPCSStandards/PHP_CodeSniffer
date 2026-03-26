@@ -12,6 +12,7 @@ use Vendor\Package\SomeNamespace\{
     ClassZ,
 };
 
+// Parse error in PHP 8.0+, but will be detected correctly cross-version anyway.
 use Vendor\Package\SomeNamespace\{
     SubnamespaceOne /* comment */
     \AnotherNamespace // comment
@@ -29,3 +30,6 @@ use Vendor\Package\SomeNamespace\{
     SubnamespaceOne\ClassB,
     ClassZ,
 };
+
+// Reset the property to its default value.
+// phpcs:set PSR12.Namespaces.CompoundNamespaceDepth maxDepth 2

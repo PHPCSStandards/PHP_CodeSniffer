@@ -3,8 +3,9 @@
  * Verifies that operators have valid spacing surrounding them.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR12\Sniffs\Operators;
@@ -26,10 +27,10 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
     {
         parent::register();
 
-        $targets   = Tokens::$comparisonTokens;
-        $targets  += Tokens::$operators;
-        $targets  += Tokens::$assignmentTokens;
-        $targets  += Tokens::$booleanOperators;
+        $targets   = Tokens::COMPARISON_TOKENS;
+        $targets  += Tokens::OPERATORS;
+        $targets  += Tokens::ASSIGNMENT_TOKENS;
+        $targets  += Tokens::BOOLEAN_OPERATORS;
         $targets[] = T_INLINE_THEN;
         $targets[] = T_INLINE_ELSE;
         $targets[] = T_STRING_CONCAT;
@@ -39,8 +40,7 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
         $targets[] = T_DECLARE;
 
         return $targets;
-
-    }//end register()
+    }
 
 
     /**
@@ -55,7 +55,7 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
      *                  pointer is reached. Return `$phpcsFile->numTokens` to skip
      *                  the rest of the file.
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -121,8 +121,5 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
                 $phpcsFile->fixer->addContent($stackPtr, ' ');
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

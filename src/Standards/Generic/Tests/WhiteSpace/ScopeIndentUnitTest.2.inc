@@ -1614,6 +1614,40 @@ match (true) {
 	]
 };
 
+// Issue squizlabs/PHP_CodeSniffer#3808
+function test() {
+	yield
+		from [ 3, 4 ];
+}
+
+// Issue #968: Arrow function in function call argument
+return json_encode(
+	array_filter(
+		[
+			'foo' => 42,
+			'bar' => null,
+		],
+		static fn(mixed $value) => $value !== null
+	),
+	JSON_THROW_ON_ERROR
+);
+
+// Issue #968: Arrow function with multiple arguments
+$result = array_map(
+	static fn($a, $b) => $a + $b,
+	$array1,
+	$array2
+);
+
+// Issue #968: Nested arrow function
+$result = array_map(
+	static fn($x) => array_filter(
+		$x,
+		static fn($y) => $y > 0
+	),
+	$data
+);
+
 /* ADD NEW TESTS ABOVE THIS LINE AND MAKE SURE THAT THE 1 (space-based) AND 2 (tab-based) FILES ARE IN SYNC! */
 ?>
 

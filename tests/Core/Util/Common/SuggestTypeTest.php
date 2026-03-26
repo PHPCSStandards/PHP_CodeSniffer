@@ -4,7 +4,8 @@
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2019 Juliette Reinders Folmer. All rights reserved.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Tests\Core\Util\Common;
@@ -29,8 +30,7 @@ final class SuggestTypeTest extends TestCase
     public function testSuggestTypeEmpty()
     {
         $this->assertSame('', Common::suggestType(''));
-
-    }//end testSuggestTypeEmpty()
+    }
 
 
     /**
@@ -46,8 +46,7 @@ final class SuggestTypeTest extends TestCase
     {
         $result = Common::suggestType($varType);
         $this->assertSame($varType, $result);
-
-    }//end testSuggestTypeAllowedType()
+    }
 
 
     /**
@@ -60,13 +59,12 @@ final class SuggestTypeTest extends TestCase
     public static function dataSuggestTypeAllowedType()
     {
         $data = [];
-        foreach (Common::$allowedTypes as $type) {
-            $data['Type: '.$type] = [$type];
+        foreach (Common::ALLOWED_TYPES as $type) {
+            $data['Type: ' . $type] = [$type];
         }
 
         return $data;
-
-    }//end dataSuggestTypeAllowedType()
+    }
 
 
     /**
@@ -83,8 +81,7 @@ final class SuggestTypeTest extends TestCase
     {
         $result = Common::suggestType($varType);
         $this->assertSame($expected, $result);
-
-    }//end testSuggestTypeAllowedTypeWrongCase()
+    }
 
 
     /**
@@ -97,20 +94,19 @@ final class SuggestTypeTest extends TestCase
     public static function dataSuggestTypeAllowedTypeWrongCase()
     {
         $data = [];
-        foreach (Common::$allowedTypes as $type) {
-            $data['Mixed case: '.$type] = [
+        foreach (Common::ALLOWED_TYPES as $type) {
+            $data['Mixed case: ' . $type] = [
                 'varType'  => ucfirst($type),
                 'expected' => $type,
             ];
-            $data['Uppercase: '.$type]  = [
+            $data['Uppercase: ' . $type]  = [
                 'varType'  => strtoupper($type),
                 'expected' => $type,
             ];
         }
 
         return $data;
-
-    }//end dataSuggestTypeAllowedTypeWrongCase()
+    }
 
 
     /**
@@ -127,8 +123,7 @@ final class SuggestTypeTest extends TestCase
     {
         $result = Common::suggestType($varType);
         $this->assertSame($expected, $result);
-
-    }//end testSuggestTypeOther()
+    }
 
 
     /**
@@ -217,8 +212,5 @@ final class SuggestTypeTest extends TestCase
                 'expected' => '\DateTime',
             ],
         ];
-
-    }//end dataSuggestTypeOther()
-
-
-}//end class
+    }
+}

@@ -3,8 +3,9 @@
  * Ensures that functions within functions are never used.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP;
@@ -25,8 +26,7 @@ class InnerFunctionsSniff implements Sniff
     public function register()
     {
         return [T_FUNCTION];
-
-    }//end register()
+    }
 
 
     /**
@@ -38,7 +38,7 @@ class InnerFunctionsSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -56,7 +56,7 @@ class InnerFunctionsSniff implements Sniff
                 break;
             }
 
-            if (array_key_exists($condition, Tokens::$ooScopeTokens) === true) {
+            if (array_key_exists($condition, Tokens::OO_SCOPE_TOKENS) === true) {
                 // Ignore methods in OOP structures defined within functions.
                 return;
             }
@@ -69,8 +69,5 @@ class InnerFunctionsSniff implements Sniff
 
         $error = 'The use of inner functions is forbidden';
         $phpcsFile->addError($error, $stackPtr, 'NotAllowed');
-
-    }//end process()
-
-
-}//end class
+    }
+}

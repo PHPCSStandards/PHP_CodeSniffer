@@ -3,8 +3,9 @@
  * Throws errors if tabs are used for indentation.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace;
@@ -16,14 +17,19 @@ class DisallowTabIndentSniff implements Sniff
 {
 
     /**
-     * A list of tokenizers this sniff supports.
+     * Tokens which can include indentation.
      *
-     * @var array
+     * @var array<int|string, true>
      */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-        'CSS',
+    private const TOKENS_CONTAINING_INDENT = [
+        T_WHITESPACE             => true,
+        T_INLINE_HTML            => true,
+        T_DOC_COMMENT_WHITESPACE => true,
+        T_DOC_COMMENT_STRING     => true,
+        T_COMMENT                => true,
+        T_END_HEREDOC            => true,
+        T_END_NOWDOC             => true,
+        T_YIELD_FROM             => true,
     ];
 
     /**
@@ -45,8 +51,7 @@ class DisallowTabIndentSniff implements Sniff
             T_OPEN_TAG,
             T_OPEN_TAG_WITH_ECHO,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -58,7 +63,7 @@ class DisallowTabIndentSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         if ($this->tabWidth === null) {
             if (isset($phpcsFile->config->tabWidth) === false || $phpcsFile->config->tabWidth === 0) {
@@ -69,19 +74,10 @@ class DisallowTabIndentSniff implements Sniff
             }
         }
 
-        $tokens      = $phpcsFile->getTokens();
-        $checkTokens = [
-            T_WHITESPACE             => true,
-            T_INLINE_HTML            => true,
-            T_DOC_COMMENT_WHITESPACE => true,
-            T_DOC_COMMENT_STRING     => true,
-            T_COMMENT                => true,
-            T_END_HEREDOC            => true,
-            T_END_NOWDOC             => true,
-        ];
+        $tokens = $phpcsFile->getTokens();
 
         for ($i = 0; $i < $phpcsFile->numTokens; $i++) {
-            if (isset($checkTokens[$tokens[$i]['code']]) === false) {
+            if (isset(self::TOKENS_CONTAINING_INDENT[$tokens[$i]['code']]) === false) {
                 continue;
             }
 
@@ -137,9 +133,9 @@ class DisallowTabIndentSniff implements Sniff
 
                     if ($foundIndentTabs > 0 && $foundIndentSpaces === 0) {
                         $phpcsFile->recordMetric($i, 'Line indent', 'tabs');
-                    } else if ($foundIndentTabs === 0 && $foundIndentSpaces > 0) {
+                    } elseif ($foundIndentTabs === 0 && $foundIndentSpaces > 0) {
                         $phpcsFile->recordMetric($i, 'Line indent', 'spaces');
-                    } else if ($foundIndentTabs > 0 && $foundIndentSpaces > 0) {
+                    } elseif ($foundIndentTabs > 0 && $foundIndentSpaces > 0) {
                         $spacePosition  = strpos($indentation, ' ');
                         $tabAfterSpaces = strpos($indentation, "\t", $spacePosition);
                         if ($tabAfterSpaces !== false) {
@@ -154,7 +150,7 @@ class DisallowTabIndentSniff implements Sniff
                             }
                         }
                     }
-                }//end if
+                }
             } else {
                 // Look for tabs so we can report and replace, but don't
                 // record any metrics about them because they aren't
@@ -163,7 +159,7 @@ class DisallowTabIndentSniff implements Sniff
                     $error     = 'Spaces must be used for alignment; tabs are not allowed';
                     $errorCode = 'NonIndentTabsUsed';
                 }
-            }//end if
+            }
 
             if ($foundTabs === 0) {
                 continue;
@@ -173,7 +169,7 @@ class DisallowTabIndentSniff implements Sniff
             // Auto-fixing this would cause parse errors as the indentation of the heredoc/nowdoc contents
             // needs to use the same type of indentation. Also see: https://3v4l.org/7OF3M .
             if ($tokens[$i]['code'] === T_END_HEREDOC || $tokens[$i]['code'] === T_END_NOWDOC) {
-                $phpcsFile->addError($error, $i, $errorCode.'HeredocCloser');
+                $phpcsFile->addError($error, $i, $errorCode . 'HeredocCloser');
                 continue;
             }
 
@@ -189,12 +185,9 @@ class DisallowTabIndentSniff implements Sniff
                     $phpcsFile->fixer->replaceToken($i, $newContent);
                 }
             }
-        }//end for
+        }
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
-
-    }//end process()
-
-
-}//end class
+    }
+}

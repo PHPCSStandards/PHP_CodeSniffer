@@ -4,8 +4,9 @@
  *
  * @author    Willington Vega <wvega@wvega.com>
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
- * @copyright 2019 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2019-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Tests\Core\Filters\Filter;
@@ -28,17 +29,14 @@ final class AcceptTest extends AbstractFilterTestCase
     /**
      * Initialize the config and ruleset objects based on the `AcceptTest.xml` ruleset file.
      *
-     * @beforeClass
-     *
      * @return void
      */
-    public static function initializeConfigAndRuleset()
+    public static function setUpBeforeClass(): void
     {
-        $standard      = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
+        $standard      = __DIR__ . '/' . basename(__FILE__, '.php') . '.xml';
         self::$config  = new ConfigDouble(["--standard=$standard", '--ignore=*/somethingelse/*']);
         self::$ruleset = new Ruleset(self::$config);
-
-    }//end initializeConfigAndRuleset()
+    }
 
 
     /**
@@ -56,9 +54,8 @@ final class AcceptTest extends AbstractFilterTestCase
         $fakeDI = new RecursiveArrayIterator($inputPaths);
         $filter = new Filter($fakeDI, '/', self::$config, self::$ruleset);
 
-        $this->assertEquals($expectedOutput, $this->getFilteredResultsAsArray($filter));
-
-    }//end testExcludePatterns()
+        $this->assertSame($expectedOutput, $this->getFilteredResultsAsArray($filter));
+    }
 
 
     /**
@@ -103,8 +100,5 @@ final class AcceptTest extends AbstractFilterTestCase
 
         // Allow these tests to work on Windows as well.
         return self::mapPathsToRuntimeOs($testCases);
-
-    }//end dataExcludePatterns()
-
-
-}//end class
+    }
+}

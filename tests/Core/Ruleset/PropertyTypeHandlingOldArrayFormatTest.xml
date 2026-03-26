@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="PropertyTypeHandlingOldArrayFormatTest" xsi:noNamespaceSchemaLocation="https://schema.phpcodesniffer.com/phpcs.xsd">
+
+    <rule ref="./tests/Core/Ruleset/Fixtures/TestStandard/Sniffs/SetProperty/PropertyTypeHandlingOldArrayFormatSniff.php">
+        <properties>
+            <property name="expectsOldSchoolArrayWithOnlyValues" type="array" value="string, 10, 1.5, null, true, false" />
+
+            <property name="expectsOldSchoolArrayWithKeysAndValues" type="array" value="string=>string,10=>10,float=>1.5,null=>null,true=>true,false=>false" />
+
+            <property name="expectsOldSchoolArrayWithExtendedValues" type="array" value="string" />
+            <property name="expectsOldSchoolArrayWithExtendedValues" type="array" extend="true" value="15,another string" />
+
+            <property name="expectsOldSchoolArrayWithExtendedKeysAndValues" type="array" value="10=>10,string=>string" />
+            <property name="expectsOldSchoolArrayWithExtendedKeysAndValues" type="array" extend="true" value="15=>15,another string=>another string" />
+
+            <property name="expectsOldSchoolEmptyArray" type="array" value=""/>
+        </properties>
+    </rule>
+</ruleset>

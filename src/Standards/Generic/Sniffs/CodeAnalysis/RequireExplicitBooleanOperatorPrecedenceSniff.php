@@ -23,8 +23,8 @@
  *
  * @author    Tim Duesterhus <duesterhus@woltlab.com>
  * @copyright 2021-2023 WoltLab GmbH.
- * @copyright 2024 PHPCSStandards and contributors
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis;
@@ -53,14 +53,12 @@ class RequireExplicitBooleanOperatorPrecedenceSniff implements Sniff
      */
     public function register()
     {
-        $this->searchTargets  = Tokens::$booleanOperators;
-        $this->searchTargets += Tokens::$blockOpeners;
+        $this->searchTargets = Tokens::BOOLEAN_OPERATORS;
         $this->searchTargets[T_INLINE_THEN] = T_INLINE_THEN;
         $this->searchTargets[T_INLINE_ELSE] = T_INLINE_ELSE;
 
-        return Tokens::$booleanOperators;
-
-    }//end register()
+        return Tokens::BOOLEAN_OPERATORS;
+    }
 
 
     /**
@@ -72,7 +70,7 @@ class RequireExplicitBooleanOperatorPrecedenceSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -102,18 +100,9 @@ class RequireExplicitBooleanOperatorPrecedenceSniff implements Sniff
             return;
         }
 
-        if (isset(Tokens::$blockOpeners[$tokens[$previous]['code']]) === true) {
-            // Beginning of the expression found for a block opener. Needed to
-            // correctly handle match arms.
-            return;
-        }
-
         // We found a mismatching operator, thus we must report the error.
         $error  = 'Mixing different binary boolean operators within an expression';
         $error .= ' without using parentheses to clarify precedence is not allowed.';
         $phpcsFile->addError($error, $stackPtr, 'MissingParentheses');
-
-    }//end process()
-
-
-}//end class
+    }
+}

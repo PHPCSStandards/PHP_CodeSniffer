@@ -4,19 +4,20 @@
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2018 Juliette Reinders Folmer. All rights reserved.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\WhiteSpace;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the IncrementDecrementSpacing sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\IncrementDecrementSpacingSniff
  */
-final class IncrementDecrementSpacingUnitTest extends AbstractSniffUnitTest
+final class IncrementDecrementSpacingUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -26,13 +27,11 @@ final class IncrementDecrementSpacingUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
-     * @param string $testFile The name of the file being tested.
-     *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList()
     {
-        $errors = [
+        return [
             5  => 1,
             6  => 1,
             8  => 1,
@@ -41,31 +40,24 @@ final class IncrementDecrementSpacingUnitTest extends AbstractSniffUnitTest
             14 => 1,
             16 => 1,
             17 => 1,
+            21 => 1,
+            23 => 1,
+            26 => 1,
+            27 => 1,
+            30 => 1,
+            31 => 1,
+            34 => 1,
+            37 => 1,
+            40 => 1,
+            42 => 1,
+            45 => 1,
+            48 => 1,
+            50 => 1,
+            54 => 1,
+            56 => 1,
+            58 => 1,
         ];
-
-        switch ($testFile) {
-        case 'IncrementDecrementSpacingUnitTest.inc':
-            $errors[21] = 1;
-            $errors[23] = 1;
-            $errors[26] = 1;
-            $errors[27] = 1;
-            $errors[30] = 1;
-            $errors[31] = 1;
-            $errors[34] = 1;
-            $errors[37] = 1;
-            $errors[40] = 1;
-            $errors[42] = 1;
-
-            return $errors;
-
-        case 'IncrementDecrementSpacingUnitTest.js':
-            return $errors;
-
-        default:
-            return [];
-        }//end switch
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -79,8 +71,5 @@ final class IncrementDecrementSpacingUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

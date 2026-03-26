@@ -56,7 +56,7 @@ class ClassOne implements ClassTwo, ClassThree
 {
 }//end class
 
-class ClassOne implements ClassFour   ,ClassFive,  ClassSix
+class ClassOne implements ClassFour   ,\ClassFive,  namespace\ClassSix
 {
 }//end class
 
@@ -128,3 +128,25 @@ class Test
 readonly    class Test
 {
 }
+
+class TooMuchSpacingBelowClassButShouldNotBeFlaggedWhenNextThingIsFunctionWithAttribute
+{
+    var $x;
+}
+
+
+#[AttributesShouldBeJumpedOver]
+function ThisIsFineAndHasAttribute() {}
+
+class TooMuchSpacingBelowClassButShouldNotBeFlaggedWhenNextThingIsFunctionWithDocblockAndAttribute
+{
+    var $x;
+}
+
+
+/**
+ * No error.
+ */
+#[AttributesShouldBeJumpedOver]
+#[ASecondAttributeShouldBeJumpedOverToo]#[AndAThirdAsWell]
+function ThisIsFineAndHasDocblockAndAttribute() {}

@@ -77,7 +77,7 @@ switch ( true ) {
 	case $sample = 'something':
 		break;
 
-	case $sample = 'something' && $a = $b:
+	case $sample = 'something' && $a = $b;
 		break;
 }
 
@@ -93,3 +93,14 @@ if ($a = 123) :
 endif;
 
 match ($a[0] = 123) {};
+
+switch ( true ) {
+    case $sample = 'something': {
+        break;
+    }
+    case $sample ?>
+        <?php $a = $b ?><!-- This is okay, this is in the case body, not the condition. -->
+        <?php break;
+    case $sample = 'something' && $a = $b ?>
+        <?php break;
+}

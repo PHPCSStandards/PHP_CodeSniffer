@@ -3,8 +3,9 @@
  * Checks that the open tag is defined correctly.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2019 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR12\Sniffs\Files;
@@ -24,8 +25,7 @@ class OpenTagSniff implements Sniff
     public function register()
     {
         return [T_OPEN_TAG];
-
-    }//end register()
+    }
 
 
     /**
@@ -37,7 +37,7 @@ class OpenTagSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         if ($stackPtr !== 0) {
             // This rule only applies if the open tag is on the first line of the file.
@@ -56,8 +56,8 @@ class OpenTagSniff implements Sniff
             return $phpcsFile->numTokens;
         }
 
-        $next = $phpcsFile->findNext(T_INLINE_HTML, 0);
-        if ($next !== false) {
+        $hasInlineHTML = $phpcsFile->findNext(T_INLINE_HTML, 0);
+        if ($hasInlineHTML !== false) {
             // This rule only applies to PHP-only files.
             return $phpcsFile->numTokens;
         }
@@ -65,12 +65,17 @@ class OpenTagSniff implements Sniff
         $error = 'Opening PHP tag must be on a line by itself';
         $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'NotAlone');
         if ($fix === true) {
+            $phpcsFile->fixer->beginChangeset();
+
+            // Remove whitespace between the open tag and the next non-empty token.
+            for ($i = ($stackPtr + 1); $i < $next; $i++) {
+                $phpcsFile->fixer->replaceToken($i, '');
+            }
+
             $phpcsFile->fixer->addNewline($stackPtr);
+            $phpcsFile->fixer->endChangeset();
         }
 
         return $phpcsFile->numTokens;
-
-    }//end process()
-
-
-}//end class
+    }
+}

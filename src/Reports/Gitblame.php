@@ -4,13 +4,15 @@
  *
  * @author    Ben Selby <benmatselby@gmail.com>
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Exceptions\DeepExitException;
+use PHP_CodeSniffer\Util\ExitCode;
 
 class Gitblame extends VersionControl
 {
@@ -30,7 +32,7 @@ class Gitblame extends VersionControl
      *
      * @return mixed string or false if impossible to recover.
      */
-    protected function getAuthor($line)
+    protected function getAuthor(string $line)
     {
         $blameParts = [];
         $line       = preg_replace('|\s+|', ' ', $line);
@@ -53,8 +55,7 @@ class Gitblame extends VersionControl
         $parts  = array_slice($parts, 0, (count($parts) - 2));
         $author = preg_replace('|\(|', '', implode(' ', $parts));
         return $author;
-
-    }//end getAuthor()
+    }
 
 
     /**
@@ -65,16 +66,16 @@ class Gitblame extends VersionControl
      * @return array
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException
      */
-    protected function getBlameContent($filename)
+    protected function getBlameContent(string $filename)
     {
         $cwd = getcwd();
 
         chdir(dirname($filename));
-        $command = 'git blame --date=short "'.basename($filename).'" 2>&1';
+        $command = 'git blame --date=short "' . basename($filename) . '" 2>&1';
         $handle  = popen($command, 'r');
         if ($handle === false) {
-            $error = 'ERROR: Could not execute "'.$command.'"'.PHP_EOL.PHP_EOL;
-            throw new DeepExitException($error, 3);
+            $error = 'ERROR: Could not execute "' . $command . '"' . PHP_EOL . PHP_EOL;
+            throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         }
 
         $rawContent = stream_get_contents($handle);
@@ -84,8 +85,5 @@ class Gitblame extends VersionControl
         chdir($cwd);
 
         return $blames;
-
-    }//end getBlameContent()
-
-
-}//end class
+    }
+}

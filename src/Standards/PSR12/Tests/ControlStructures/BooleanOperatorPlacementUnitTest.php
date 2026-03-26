@@ -3,20 +3,21 @@
  * Unit test class for the BooleanOperatorPlacement sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2019 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR12\Tests\ControlStructures;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the BooleanOperatorPlacement sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\ControlStructures\BooleanOperatorPlacementSniff
  */
-final class BooleanOperatorPlacementUnitTest extends AbstractSniffUnitTest
+final class BooleanOperatorPlacementUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -42,8 +43,7 @@ final class BooleanOperatorPlacementUnitTest extends AbstractSniffUnitTest
             104 => 1,
             125 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -57,8 +57,5 @@ final class BooleanOperatorPlacementUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

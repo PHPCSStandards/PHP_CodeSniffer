@@ -98,3 +98,7 @@ $var = (boolean)/* comment */ $var2;
 
 $var = (  int )$spacesInsideParenthesis;
 $var = (	int		)$tabsInsideParenthesis;
+
+(void) callMe();
+(void)callMe();
+(void)   callMe();

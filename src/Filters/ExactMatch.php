@@ -5,8 +5,9 @@
  * Supports both allowed files and disallowed files.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Filters;
@@ -48,20 +49,10 @@ abstract class ExactMatch extends Filter
 
         if ($this->disallowedFiles === null) {
             $this->disallowedFiles = $this->getDisallowedFiles();
-
-            // BC-layer.
-            if ($this->disallowedFiles === null) {
-                $this->disallowedFiles = $this->getBlacklist();
-            }
         }
 
         if ($this->allowedFiles === null) {
             $this->allowedFiles = $this->getAllowedFiles();
-
-            // BC-layer.
-            if ($this->allowedFiles === null) {
-                $this->allowedFiles = $this->getWhitelist();
-            }
         }
 
         $filePath = Common::realpath($this->current());
@@ -77,8 +68,7 @@ abstract class ExactMatch extends Filter
         }
 
         return isset($this->allowedFiles[$filePath]);
-
-    }//end accept()
+    }
 
 
     /**
@@ -95,62 +85,25 @@ abstract class ExactMatch extends Filter
         $children->disallowedFiles = $this->disallowedFiles;
         $children->allowedFiles    = $this->allowedFiles;
         return $children;
-
-    }//end getChildren()
-
-
-    /**
-     * Get a list of file paths to exclude.
-     *
-     * @deprecated 3.9.0 Implement the `getDisallowedFiles()` method instead.
-     *                   The `getDisallowedFiles()` method will be made abstract and therefore required
-     *                   in v4.0 and this method will be removed.
-     *                   If both methods are implemented, the new `getDisallowedFiles()` method will take precedence.
-     *
-     * @return array
-     */
-    abstract protected function getBlacklist();
-
-
-    /**
-     * Get a list of file paths to include.
-     *
-     * @deprecated 3.9.0 Implement the `getAllowedFiles()` method instead.
-     *                   The `getAllowedFiles()` method will be made abstract and therefore required
-     *                   in v4.0 and this method will be removed.
-     *                   If both methods are implemented, the new `getAllowedFiles()` method will take precedence.
-     *
-     * @return array
-     */
-    abstract protected function getWhitelist();
+    }
 
 
     /**
      * Get a list of file paths to exclude.
      *
-     * @since 3.9.0 Replaces the deprecated `getBlacklist()` method.
+     * @since 3.9.0 Replaces the `getBlacklist()` method, which was removed in PHPCS 4.0.0.
      *
-     * @return array|null
+     * @return array
      */
-    protected function getDisallowedFiles()
-    {
-        return null;
-
-    }//end getDisallowedFiles()
+    abstract protected function getDisallowedFiles();
 
 
     /**
      * Get a list of file paths to include.
      *
-     * @since 3.9.0 Replaces the deprecated `getWhitelist()` method.
+     * @since 3.9.0 Replaces the `getWhitelist()` method, which was removed in PHPCS 4.0.0.
      *
-     * @return array|null
+     * @return array
      */
-    protected function getAllowedFiles()
-    {
-        return null;
-
-    }//end getAllowedFiles()
-
-
-}//end class
+    abstract protected function getAllowedFiles();
+}

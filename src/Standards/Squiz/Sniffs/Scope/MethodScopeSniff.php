@@ -3,8 +3,9 @@
  * Verifies that class methods have scope modifiers.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Scope;
@@ -22,9 +23,8 @@ class MethodScopeSniff extends AbstractScopeSniff
      */
     public function __construct()
     {
-        parent::__construct(Tokens::$ooScopeTokens, [T_FUNCTION]);
-
-    }//end __construct()
+        parent::__construct(Tokens::OO_SCOPE_TOKENS, [T_FUNCTION]);
+    }
 
 
     /**
@@ -36,7 +36,7 @@ class MethodScopeSniff extends AbstractScopeSniff
      *
      * @return void
      */
-    protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
+    protected function processTokenWithinScope(File $phpcsFile, int $stackPtr, int $currScope)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -49,8 +49,8 @@ class MethodScopeSniff extends AbstractScopeSniff
         }
 
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
-        if ($methodName === null) {
-            // Ignore closures.
+        if ($methodName === '') {
+            // Ignore live coding.
             return;
         }
 
@@ -60,8 +60,7 @@ class MethodScopeSniff extends AbstractScopeSniff
             $data  = [$methodName];
             $phpcsFile->addError($error, $stackPtr, 'Missing', $data);
         }
-
-    }//end processTokenWithinScope()
+    }
 
 
     /**
@@ -74,10 +73,7 @@ class MethodScopeSniff extends AbstractScopeSniff
      *
      * @return void
      */
-    protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
+    protected function processTokenOutsideScope(File $phpcsFile, int $stackPtr)
     {
-
-    }//end processTokenOutsideScope()
-
-
-}//end class
+    }
+}

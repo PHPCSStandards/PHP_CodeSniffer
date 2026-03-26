@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="ProcessRulesetIniDirectivesTest" xsi:noNamespaceSchemaLocation="https://schema.phpcodesniffer.com/phpcs.xsd">
+
+    <!-- This ruleset sets three PHP ini directives.
+         The included rulesets will try to override these and should fail.
+         Whether the ini is set before, or after, the sub-rulesets are included, should be irrelevant.
+    -->
+    <ini name="highlight.comment" value="parent"/>
+    <ini name="url_rewriter.hosts" value="parent"/>
+
+    <!-- Include the overrides. -->
+    <rule ref="./ProcessRulesetIniDirectivesIncludeATest.xml"/>
+    <rule ref="./ProcessRulesetIniDirectivesIncludeBTest.xml"/>
+
+    <ini name="highlight.default" value="parent"/>
+
+    <!-- Prevent a "no sniffs were registered" error. -->
+    <rule ref="Generic.PHP.BacktickOperator"/>
+</ruleset>

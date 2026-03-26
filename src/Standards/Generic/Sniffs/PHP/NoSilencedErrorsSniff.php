@@ -10,8 +10,9 @@
  * </code>
  *
  * @author    Andy Brockhurst <abrock@yahoo-inc.com>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\PHP;
@@ -38,8 +39,7 @@ class NoSilencedErrorsSniff implements Sniff
     public function register()
     {
         return [T_ASPERAND];
-
-    }//end register()
+    }
 
 
     /**
@@ -51,7 +51,7 @@ class NoSilencedErrorsSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         // Prepare the "Found" string to display.
         $contextLength  = 4;
@@ -61,7 +61,7 @@ class NoSilencedErrorsSniff implements Sniff
         }
 
         $found = $phpcsFile->getTokensAsString($stackPtr, $contextLength);
-        $found = str_replace(["\t", "\n", "\r"], ' ', $found).'...';
+        $found = str_replace(["\t", "\n", "\r"], ' ', $found) . '...';
 
         if ($this->error === true) {
             $error = 'Silencing errors is forbidden; found: %s';
@@ -70,8 +70,5 @@ class NoSilencedErrorsSniff implements Sniff
             $error = 'Silencing errors is discouraged; found: %s';
             $phpcsFile->addWarning($error, $stackPtr, 'Discouraged', [$found]);
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

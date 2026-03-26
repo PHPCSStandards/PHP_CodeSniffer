@@ -3,8 +3,9 @@
  * Checks the format of the declare statements.
  *
  * @author    Sertan Danis <sdanis@squiz.net>
- * @copyright 2006-2019 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR12\Sniffs\Files;
@@ -44,8 +45,7 @@ class DeclareStatementSniff implements Sniff
     public function register()
     {
         return [T_DECLARE];
-
-    }//end register()
+    }
 
 
     /**
@@ -57,7 +57,7 @@ class DeclareStatementSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -196,7 +196,7 @@ class DeclareStatementSniff implements Sniff
             }
 
             return;
-        }//end if
+        }
 
         // There should be exactly one space between the close parenthesis and the closing PHP tag.
         if ($tokens[$nextThing]['code'] === T_CLOSE_TAG) {
@@ -248,7 +248,7 @@ class DeclareStatementSniff implements Sniff
 
                     // 4 = indent size as defined by PSR12.
                     $indent = str_repeat(' ', (4 + $tokens[$stackPtr]['column'] - 1));
-                    $phpcsFile->fixer->addContentBefore($afterOpen, PHP_EOL.$indent);
+                    $phpcsFile->fixer->addContentBefore($afterOpen, PHP_EOL . $indent);
                     $phpcsFile->fixer->endChangeset();
                 }
             }
@@ -289,7 +289,7 @@ class DeclareStatementSniff implements Sniff
                     if ($fix === true) {
                         $phpcsFile->fixer->addContentBefore($closeBracket, str_repeat(' ', ($expected - $actual)));
                     }
-                } else if ($tokens[($closeBracket - 1)]['code'] === T_WHITESPACE && strlen($indent) > $expected) {
+                } elseif ($tokens[($closeBracket - 1)]['code'] === T_WHITESPACE && strlen($indent) > $expected) {
                     $fix = $phpcsFile->addFixableError($error, $closeBracket, 'CloseBracketNotAligned');
                     if ($fix === true) {
                         $phpcsFile->fixer->replaceToken(($closeBracket - 1), str_repeat(' ', $expected));
@@ -297,10 +297,9 @@ class DeclareStatementSniff implements Sniff
                 } else {
                     $phpcsFile->addError($error, $closeBracket, 'CloseBracketNotAligned');
                 }
-            }//end if
-        }//end if
-
-    }//end process()
+            }
+        }
+    }
 
 
     /**
@@ -320,7 +319,7 @@ class DeclareStatementSniff implements Sniff
         }
 
         $tokens = $phpcsFile->getTokens();
-        $error  = 'Expected no space between the '.$this->NAMES[$tokens[$previousToken]['code']].' and the '.$this->NAMES[$tokens[$nextToken]['code']].' in a declare statement';
+        $error  = 'Expected no space between the ' . $this->NAMES[$tokens[$previousToken]['code']] . ' and the ' . $this->NAMES[$tokens[$nextToken]['code']] . ' in a declare statement';
 
         $onlyWhitespace = true;
         for ($i = ($previousToken + 1); $i < $nextToken; $i++) {
@@ -344,8 +343,7 @@ class DeclareStatementSniff implements Sniff
         } else {
             $phpcsFile->addError($error, ($previousToken + 1), $errorCode);
         }
-
-    }//end complainIfTokensNotAdjacent()
+    }
 
 
     /**
@@ -367,10 +365,10 @@ class DeclareStatementSniff implements Sniff
         }
 
         $tokens = $phpcsFile->getTokens();
-        $error  = 'Expected one space between the '.$this->NAMES[$tokens[$previousToken]['code']].' and the '.$this->NAMES[$tokens[$nextToken]['code']].' in a declare statement';
+        $error  = 'Expected one space between the ' . $this->NAMES[$tokens[$previousToken]['code']] . ' and the ' . $this->NAMES[$tokens[$nextToken]['code']] . ' in a declare statement';
 
         if ($contentBetween === '') {
-            $fix = $phpcsFile->addFixableError($error, $nextToken, 'NoSpaceFound'.$errorCode);
+            $fix = $phpcsFile->addFixableError($error, $nextToken, 'NoSpaceFound' . $errorCode);
             if ($fix === true) {
                 $phpcsFile->fixer->addContentBefore($nextToken, ' ');
             }
@@ -379,11 +377,11 @@ class DeclareStatementSniff implements Sniff
         }
 
         if (trim($contentBetween) !== '') {
-            $phpcsFile->addError($error, ($previousToken + 1), 'NonSpaceFound'.$errorCode);
+            $phpcsFile->addError($error, ($previousToken + 1), 'NonSpaceFound' . $errorCode);
             return;
         }
 
-        $fix = $phpcsFile->addFixableError($error, ($nextToken - 1), 'ExtraSpaceFound'.$errorCode);
+        $fix = $phpcsFile->addFixableError($error, ($nextToken - 1), 'ExtraSpaceFound' . $errorCode);
 
         if ($fix === true) {
             $phpcsFile->fixer->beginChangeset();
@@ -394,8 +392,5 @@ class DeclareStatementSniff implements Sniff
 
             $phpcsFile->fixer->endChangeset();
         }
-
-    }//end complainIfNotExactlyOneSpaceBetween()
-
-
-}//end class
+    }
+}

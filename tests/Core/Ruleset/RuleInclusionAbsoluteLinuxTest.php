@@ -4,7 +4,8 @@
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2019 Juliette Reinders Folmer. All rights reserved.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Tests\Core\Ruleset;
@@ -46,14 +47,12 @@ final class RuleInclusionAbsoluteLinuxTest extends TestCase
     /**
      * Initialize the config and ruleset objects.
      *
-     * @before
-     *
      * @return void
      */
-    public function initializeConfigAndRuleset()
+    protected function setUp(): void
     {
-        $this->standard = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
-        $repoRootDir    = dirname(dirname(dirname(__DIR__)));
+        $this->standard = __DIR__ . '/' . basename(__FILE__, '.php') . '.xml';
+        $repoRootDir    = dirname(__DIR__, 3);
 
         // On-the-fly adjust the ruleset test file to be able to test sniffs included with absolute paths.
         $contents       = file_get_contents($this->standard);
@@ -73,22 +72,18 @@ final class RuleInclusionAbsoluteLinuxTest extends TestCase
         // Initialize the config and ruleset objects for the test.
         $config        = new ConfigDouble(["--standard={$this->standard}"]);
         $this->ruleset = new Ruleset($config);
-
-    }//end initializeConfigAndRuleset()
+    }
 
 
     /**
      * Reset ruleset file.
      *
-     * @after
-     *
      * @return void
      */
-    public function resetRuleset()
+    protected function tearDown(): void
     {
         file_put_contents($this->standard, $this->contents);
-
-    }//end resetRuleset()
+    }
 
 
     /**
@@ -112,8 +107,5 @@ final class RuleInclusionAbsoluteLinuxTest extends TestCase
             '10',
             $this->ruleset->sniffs['PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff']->spacing
         );
-
-    }//end testLinuxStylePathRuleInclusion()
-
-
-}//end class
+    }
+}

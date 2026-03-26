@@ -3,8 +3,9 @@
  * Ensures class and interface names start with a capital letter and use _ separators.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PEAR\Sniffs\NamingConventions;
@@ -29,8 +30,7 @@ class ValidClassNameSniff implements Sniff
             T_TRAIT,
             T_ENUM,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -42,7 +42,7 @@ class ValidClassNameSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -77,10 +77,10 @@ class ValidClassNameSniff implements Sniff
                 $error = '%s name is not valid';
                 $phpcsFile->addError($error, $stackPtr, 'Invalid', $errorData);
             } else {
-                $newName = strtoupper($firstBit[0]).substr($firstBit, 1).'_';
+                $newName = strtoupper($firstBit[0]) . substr($firstBit, 1) . '_';
                 foreach ($nameBits as $bit) {
                     if ($bit !== '') {
-                        $newName .= strtoupper($bit[0]).substr($bit, 1).'_';
+                        $newName .= strtoupper($bit[0]) . substr($bit, 1) . '_';
                     }
                 }
 
@@ -90,9 +90,6 @@ class ValidClassNameSniff implements Sniff
                 $data[]  = $newName;
                 $phpcsFile->addError($error, $stackPtr, 'Invalid', $data);
             }
-        }//end if
-
-    }//end process()
-
-
-}//end class
+        }
+    }
+}

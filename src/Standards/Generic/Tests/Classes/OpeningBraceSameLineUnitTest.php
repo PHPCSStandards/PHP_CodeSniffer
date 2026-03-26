@@ -3,20 +3,21 @@
  * Unit test class for the OpeningBraceSameLine sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Classes;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the OpeningBraceSameLine sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Classes\OpeningBraceSameLineSniff
  */
-final class OpeningBraceSameLineUnitTest extends AbstractSniffUnitTest
+final class OpeningBraceSameLineUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -46,8 +47,7 @@ final class OpeningBraceSameLineUnitTest extends AbstractSniffUnitTest
             94  => 1,
             100 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -60,9 +60,6 @@ final class OpeningBraceSameLineUnitTest extends AbstractSniffUnitTest
      */
     public function getWarningList()
     {
-        return [51 => 1];
-
-    }//end getWarningList()
-
-
-}//end class
+        return [];
+    }
+}

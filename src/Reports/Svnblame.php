@@ -3,13 +3,15 @@
  * SVN blame report for PHP_CodeSniffer.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Exceptions\DeepExitException;
+use PHP_CodeSniffer\Util\ExitCode;
 
 class Svnblame extends VersionControl
 {
@@ -29,7 +31,7 @@ class Svnblame extends VersionControl
      *
      * @return mixed string or false if impossible to recover.
      */
-    protected function getAuthor($line)
+    protected function getAuthor(string $line)
     {
         $blameParts = [];
         preg_match('|\s*([^\s]+)\s+([^\s]+)|', $line, $blameParts);
@@ -39,8 +41,7 @@ class Svnblame extends VersionControl
         }
 
         return $blameParts[2];
-
-    }//end getAuthor()
+    }
 
 
     /**
@@ -51,13 +52,13 @@ class Svnblame extends VersionControl
      * @return array
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException
      */
-    protected function getBlameContent($filename)
+    protected function getBlameContent(string $filename)
     {
-        $command = 'svn blame "'.$filename.'" 2>&1';
+        $command = 'svn blame "' . $filename . '" 2>&1';
         $handle  = popen($command, 'r');
         if ($handle === false) {
-            $error = 'ERROR: Could not execute "'.$command.'"'.PHP_EOL.PHP_EOL;
-            throw new DeepExitException($error, 3);
+            $error = 'ERROR: Could not execute "' . $command . '"' . PHP_EOL . PHP_EOL;
+            throw new DeepExitException($error, ExitCode::PROCESS_ERROR);
         }
 
         $rawContent = stream_get_contents($handle);
@@ -66,8 +67,5 @@ class Svnblame extends VersionControl
         $blames = explode("\n", $rawContent);
 
         return $blames;
-
-    }//end getBlameContent()
-
-
-}//end class
+    }
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="ProcessRulesetCliArgsTest" xsi:noNamespaceSchemaLocation="https://schema.phpcodesniffer.com/phpcs.xsd">
+
+    <!-- Issues squizlabs/PHP_CodeSniffer#2597 + squizlabs/PHP_CodeSniffer#2602: allow overruling CLI args when they have the CLI flag names.
+         The value from the parent ruleset should be applied, not the one from the child.
+    -->
+    <arg name="tab-width" value="5"/>
+
+    <!-- Paths must be resolved based on the ruleset location which included the directive. -->
+    <arg name="report-file" value="./report.txt"/>
+
+    <!-- Miscellaneous other settings. -->
+    <arg name="report-width" value="60"/>
+
+</ruleset>

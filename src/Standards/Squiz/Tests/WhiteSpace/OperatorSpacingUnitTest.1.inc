@@ -262,7 +262,7 @@ if ($line{-1} === ':') {
 }
 
 $a = $a instanceof $b;
-$a = $a  instanceof  $b;
+$a = $a  instanceof  static;
 $a = ($a)instanceof$b;
 
 fn&($x) => $x;

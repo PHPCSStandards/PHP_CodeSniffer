@@ -3,20 +3,21 @@
  * Unit test class for the UpperCaseConstant sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the UpperCaseConstant sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\UpperCaseConstantSniff
  */
-final class UpperCaseConstantUnitTest extends AbstractSniffUnitTest
+final class UpperCaseConstantUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -31,30 +32,35 @@ final class UpperCaseConstantUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return [
-            7  => 1,
-            10 => 1,
-            15 => 1,
-            16 => 1,
-            23 => 1,
-            26 => 1,
-            31 => 1,
-            32 => 1,
-            39 => 1,
-            42 => 1,
-            47 => 1,
-            48 => 1,
-            70 => 1,
-            71 => 1,
-            85 => 1,
-            87 => 1,
-            88 => 1,
-            90 => 2,
-            92 => 2,
-            93 => 1,
-            98 => 2,
+            7   => 1,
+            10  => 1,
+            15  => 1,
+            16  => 1,
+            23  => 1,
+            26  => 1,
+            31  => 1,
+            32  => 1,
+            39  => 1,
+            42  => 1,
+            47  => 1,
+            48  => 1,
+            70  => 1,
+            71  => 1,
+            85  => 1,
+            87  => 1,
+            88  => 1,
+            90  => 2,
+            92  => 2,
+            93  => 1,
+            98  => 2,
+            109 => 1,
+            110 => 1,
+            111 => 1,
+            116 => 1,
+            117 => 1,
+            118 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -68,8 +74,5 @@ final class UpperCaseConstantUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

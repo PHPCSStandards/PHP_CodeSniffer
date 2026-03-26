@@ -3,8 +3,8 @@
  * Abstract Testcase class for testing Filters.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
- * @copyright 2023 PHPCSStandards Contributors
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Tests\Core\Filters;
@@ -39,29 +39,21 @@ abstract class AbstractFilterTestCase extends TestCase
     /**
      * Initialize the config and ruleset objects.
      *
-     * @beforeClass
-     *
      * @return void
      */
-    public static function initializeConfigAndRuleset()
+    public static function setUpBeforeClass(): void
     {
-        self::$config  = new ConfigDouble(['--extensions=php,inc/php,js,css']);
+        self::$config  = new ConfigDouble();
         self::$ruleset = new Ruleset(self::$config);
-
-    }//end initializeConfigAndRuleset()
+    }
 
 
     /**
      * Clean up after finished test by resetting all static properties on the Config class to their default values.
      *
-     * Note: This is a PHPUnit cross-version compatible {@see \PHPUnit\Framework\TestCase::tearDownAfterClass()}
-     * method.
-     *
-     * @afterClass
-     *
      * @return void
      */
-    public static function reset()
+    public static function tearDownAfterClass(): void
     {
         // Explicitly trigger __destruct() on the ConfigDouble to reset the Config statics.
         // The explicit method call prevents potential stray test-local references to the $config object
@@ -70,8 +62,7 @@ abstract class AbstractFilterTestCase extends TestCase
         if (isset(self::$config) === true) {
             self::$config->__destruct();
         }
-
-    }//end reset()
+    }
 
 
     /**
@@ -92,30 +83,20 @@ abstract class AbstractFilterTestCase extends TestCase
      *
      * @return \PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getMockedClass($className, array $constructorArgs=[], $methodsToMock=null)
+    protected function getMockedClass($className, array $constructorArgs = [], $methodsToMock = null)
     {
         $mockedObj = $this->getMockBuilder($className);
 
-        if (method_exists($mockedObj, 'onlyMethods') === true) {
-            // PHPUnit 8+.
-            if (is_array($methodsToMock) === true) {
-                return $mockedObj
-                    ->setConstructorArgs($constructorArgs)
-                    ->onlyMethods($methodsToMock)
-                    ->getMock();
-            }
-
-            return $mockedObj->getMock()
-                ->setConstructorArgs($constructorArgs);
+        if (is_array($methodsToMock) === true) {
+            return $mockedObj
+                ->setConstructorArgs($constructorArgs)
+                ->onlyMethods($methodsToMock)
+                ->getMock();
         }
 
-        // PHPUnit < 8.
-        return $mockedObj
-            ->setConstructorArgs($constructorArgs)
-            ->setMethods($methodsToMock)
-            ->getMock();
-
-    }//end getMockedClass()
+        return $mockedObj->getMock()
+            ->setConstructorArgs($constructorArgs);
+    }
 
 
     /**
@@ -134,8 +115,7 @@ abstract class AbstractFilterTestCase extends TestCase
         }
 
         return $files;
-
-    }//end getFilteredResultsAsArray()
+    }
 
 
     /**
@@ -145,9 +125,8 @@ abstract class AbstractFilterTestCase extends TestCase
      */
     protected static function getBaseDir()
     {
-        return dirname(dirname(dirname(__DIR__)));
-
-    }//end getBaseDir()
+        return dirname(__DIR__, 3);
+    }
 
 
     /**
@@ -166,55 +145,54 @@ abstract class AbstractFilterTestCase extends TestCase
     {
         $basedir = self::getBaseDir();
         return [
-            $basedir.'/.gitignore',
-            $basedir.'/.yamllint.yml',
-            $basedir.'/phpcs.xml',
-            $basedir.'/phpcs.xml.dist',
-            $basedir.'/autoload.php',
-            $basedir.'/bin',
-            $basedir.'/bin/phpcs',
-            $basedir.'/bin/phpcs.bat',
-            $basedir.'/scripts',
-            $basedir.'/scripts/build-phar.php',
-            $basedir.'/src',
-            $basedir.'/src/WillNotExist.php',
-            $basedir.'/src/WillNotExist.bak',
-            $basedir.'/src/WillNotExist.orig',
-            $basedir.'/src/Ruleset.php',
-            $basedir.'/src/Generators',
-            $basedir.'/src/Generators/Markdown.php',
-            $basedir.'/src/Standards',
-            $basedir.'/src/Standards/Generic',
-            $basedir.'/src/Standards/Generic/Docs',
-            $basedir.'/src/Standards/Generic/Docs/Classes',
-            $basedir.'/src/Standards/Generic/Docs/Classes/DuplicateClassNameStandard.xml',
-            $basedir.'/src/Standards/Generic/Sniffs',
-            $basedir.'/src/Standards/Generic/Sniffs/Classes',
-            $basedir.'/src/Standards/Generic/Sniffs/Classes/DuplicateClassNameSniff.php',
-            $basedir.'/src/Standards/Generic/Tests',
-            $basedir.'/src/Standards/Generic/Tests/Classes',
-            $basedir.'/src/Standards/Generic/Tests/Classes/DuplicateClassNameUnitTest.1.inc',
+            $basedir . '/.gitignore',
+            $basedir . '/.yamllint.yml',
+            $basedir . '/phpcs.xml',
+            $basedir . '/phpcs.xml.dist',
+            $basedir . '/autoload.php',
+            $basedir . '/bin',
+            $basedir . '/bin/phpcs',
+            $basedir . '/bin/phpcs.bat',
+            $basedir . '/scripts',
+            $basedir . '/scripts/build-phar.php',
+            $basedir . '/src',
+            $basedir . '/src/WillNotExist.php',
+            $basedir . '/src/WillNotExist.bak',
+            $basedir . '/src/WillNotExist.orig',
+            $basedir . '/src/Ruleset.php',
+            $basedir . '/src/Generators',
+            $basedir . '/src/Generators/Markdown.php',
+            $basedir . '/src/Standards',
+            $basedir . '/src/Standards/Generic',
+            $basedir . '/src/Standards/Generic/Docs',
+            $basedir . '/src/Standards/Generic/Docs/Classes',
+            $basedir . '/src/Standards/Generic/Docs/Classes/DuplicateClassNameStandard.xml',
+            $basedir . '/src/Standards/Generic/Sniffs',
+            $basedir . '/src/Standards/Generic/Sniffs/Classes',
+            $basedir . '/src/Standards/Generic/Sniffs/Classes/DuplicateClassNameSniff.php',
+            $basedir . '/src/Standards/Generic/Tests',
+            $basedir . '/src/Standards/Generic/Tests/Classes',
+            $basedir . '/src/Standards/Generic/Tests/Classes/DuplicateClassNameUnitTest.1.inc',
             // Will rarely exist when running the tests.
-            $basedir.'/src/Standards/Generic/Tests/Classes/DuplicateClassNameUnitTest.1.inc.bak',
-            $basedir.'/src/Standards/Generic/Tests/Classes/DuplicateClassNameUnitTest.2.inc',
-            $basedir.'/src/Standards/Generic/Tests/Classes/DuplicateClassNameUnitTest.php',
-            $basedir.'/src/Standards/Squiz',
-            $basedir.'/src/Standards/Squiz/Docs',
-            $basedir.'/src/Standards/Squiz/Docs/WhiteSpace',
-            $basedir.'/src/Standards/Squiz/Docs/WhiteSpace/SemicolonSpacingStandard.xml',
-            $basedir.'/src/Standards/Squiz/Sniffs',
-            $basedir.'/src/Standards/Squiz/Sniffs/WhiteSpace',
-            $basedir.'/src/Standards/Squiz/Sniffs/WhiteSpace/OperatorSpacingSniff.php',
-            $basedir.'/src/Standards/Squiz/Tests',
-            $basedir.'/src/Standards/Squiz/Tests/WhiteSpace',
-            $basedir.'/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.1.inc',
-            $basedir.'/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.1.inc.fixed',
-            $basedir.'/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.js',
-            $basedir.'/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.js.fixed',
-            $basedir.'/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.php',
+            $basedir . '/src/Standards/Generic/Tests/Classes/DuplicateClassNameUnitTest.1.inc.bak',
+            $basedir . '/src/Standards/Generic/Tests/Classes/DuplicateClassNameUnitTest.2.inc',
+            $basedir . '/src/Standards/Generic/Tests/Classes/DuplicateClassNameUnitTest.php',
+            $basedir . '/src/Standards/Squiz',
+            $basedir . '/src/Standards/Squiz/Docs',
+            $basedir . '/src/Standards/Squiz/Docs/WhiteSpace',
+            $basedir . '/src/Standards/Squiz/Docs/WhiteSpace/SemicolonSpacingStandard.xml',
+            $basedir . '/src/Standards/Squiz/Sniffs',
+            $basedir . '/src/Standards/Squiz/Sniffs/WhiteSpace',
+            $basedir . '/src/Standards/Squiz/Sniffs/WhiteSpace/OperatorSpacingSniff.php',
+            $basedir . '/src/Standards/Squiz/Tests',
+            $basedir . '/src/Standards/Squiz/Tests/WhiteSpace',
+            $basedir . '/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.1.inc',
+            $basedir . '/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.1.inc.fixed',
+            $basedir . '/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.js',
+            $basedir . '/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.js.fixed',
+            $basedir . '/src/Standards/Squiz/Tests/WhiteSpace/OperatorSpacingUnitTest.php',
         ];
-
-    }//end getFakeFileList()
+    }
 
 
     /**
@@ -223,10 +201,10 @@ abstract class AbstractFilterTestCase extends TestCase
      * These type of tests should be able to run and pass on both *nix as well as Windows
      * based dev systems. This method is a helper to allow for this.
      *
-     * @param array<string|array> $paths A single or multi-dimensional array containing
-     *                                   file paths.
+     * @param array<string|array<string>> $paths A single or multi-dimensional array containing
+     *                                           file paths.
      *
-     * @return array<string|array>
+     * @return array<string|array<string>>
      */
     protected static function mapPathsToRuntimeOs(array $paths)
     {
@@ -237,14 +215,11 @@ abstract class AbstractFilterTestCase extends TestCase
         foreach ($paths as $key => $value) {
             if (is_string($value) === true) {
                 $paths[$key] = strtr($value, '/', '\\\\');
-            } else if (is_array($value) === true) {
+            } elseif (is_array($value) === true) {
                 $paths[$key] = self::mapPathsToRuntimeOs($value);
             }
         }
 
         return $paths;
-
-    }//end mapPathsToRuntimeOs()
-
-
-}//end class
+    }
+}

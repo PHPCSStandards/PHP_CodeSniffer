@@ -3,8 +3,9 @@
  * Tests that the stars in a doc comment align correctly.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting;
@@ -16,16 +17,6 @@ use PHP_CodeSniffer\Util\Tokens;
 class DocCommentAlignmentSniff implements Sniff
 {
 
-    /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
-
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -35,8 +26,7 @@ class DocCommentAlignmentSniff implements Sniff
     public function register()
     {
         return [T_DOC_COMMENT_OPEN_TAG];
-
-    }//end register()
+    }
 
 
     /**
@@ -48,40 +38,30 @@ class DocCommentAlignmentSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
-        // We are only interested in function/class/interface doc block comments.
-        $ignore = Tokens::$emptyTokens;
-        if ($phpcsFile->tokenizerType === 'JS') {
-            $ignore[] = T_EQUAL;
-            $ignore[] = T_STRING;
-            $ignore[] = T_OBJECT_OPERATOR;
-        }
+        // We are only interested in function/class/interface/enum/property/const doc block comments.
+        $nextToken = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
 
-        $nextToken = $phpcsFile->findNext($ignore, ($stackPtr + 1), null, true);
-        $ignore    = [
+        $ignore  = Tokens::SCOPE_MODIFIERS;
+        $ignore += [
             T_CLASS     => true,
             T_INTERFACE => true,
             T_ENUM      => true,
             T_ENUM_CASE => true,
             T_FUNCTION  => true,
-            T_PUBLIC    => true,
-            T_PRIVATE   => true,
-            T_PROTECTED => true,
             T_STATIC    => true,
             T_ABSTRACT  => true,
-            T_PROPERTY  => true,
-            T_OBJECT    => true,
-            T_PROTOTYPE => true,
+            T_FINAL     => true,
             T_VAR       => true,
             T_READONLY  => true,
         ];
 
         if ($nextToken === false || isset($ignore[$tokens[$nextToken]['code']]) === false) {
             // Could be a file comment.
-            $prevToken = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+            $prevToken = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
             if ($tokens[$prevToken]['code'] !== T_OPEN_TAG) {
                 return;
             }
@@ -132,7 +112,7 @@ class DocCommentAlignmentSniff implements Sniff
                         $phpcsFile->fixer->replaceToken(($i - 1), $padding);
                     }
                 }
-            }//end if
+            }
 
             if ($tokens[$i]['code'] !== T_DOC_COMMENT_STAR) {
                 continue;
@@ -149,7 +129,7 @@ class DocCommentAlignmentSniff implements Sniff
                 if ($fix === true) {
                     $phpcsFile->fixer->addContent($i, ' ');
                 }
-            } else if ($tokens[($i + 2)]['code'] === T_DOC_COMMENT_TAG
+            } elseif ($tokens[($i + 2)]['code'] === T_DOC_COMMENT_TAG
                 && $tokens[($i + 1)]['content'] !== ' '
             ) {
                 $error = 'Expected 1 space after asterisk; %s found';
@@ -159,9 +139,6 @@ class DocCommentAlignmentSniff implements Sniff
                     $phpcsFile->fixer->replaceToken(($i + 1), ' ');
                 }
             }
-        }//end for
-
-    }//end process()
-
-
-}//end class
+        }
+    }
+}

@@ -5,12 +5,38 @@
 
 version: 2
 updates:
+  # Handle updates for the default branch.
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    target-branch: "3.x"
     open-pull-requests-limit: 5
     commit-message:
       prefix: "GH Actions:"
     labels:
       - "Type: chores/QA"
+    groups:
+      action-runners:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Handle updates for the orphan gh-pages branch.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "gh-pages"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "GH Pages/Actions:"
+    labels:
+      - "Type: chores/QA"
+    groups:
+      action-runners:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"

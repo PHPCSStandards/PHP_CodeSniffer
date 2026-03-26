@@ -10,8 +10,9 @@
  * @author    Christian Weiske <christian.weiske@netresearch.de>
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2012-2014 Christian Weiske
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Reports;
@@ -75,10 +76,9 @@ class Notifysend implements Report
         $this->version = str_replace(
             'notify-send ',
             '',
-            exec($this->path.' --version')
+            exec($this->path . ' --version')
         );
-
-    }//end __construct()
+    }
 
 
     /**
@@ -96,15 +96,14 @@ class Notifysend implements Report
      *
      * @return bool
      */
-    public function generateFileReport($report, File $phpcsFile, $showSources=false, $width=80)
+    public function generateFileReport(array $report, File $phpcsFile, bool $showSources = false, int $width = 80)
     {
-        echo $report['filename'].PHP_EOL;
+        echo $report['filename'] . PHP_EOL;
 
         // We want this file counted in the total number
         // of checked files even if it has no errors.
         return true;
-
-    }//end generateFileReport()
+    }
 
 
     /**
@@ -124,15 +123,15 @@ class Notifysend implements Report
      * @return void
      */
     public function generate(
-        $cachedData,
-        $totalFiles,
-        $totalErrors,
-        $totalWarnings,
-        $totalFixable,
-        $showSources=false,
-        $width=80,
-        $interactive=false,
-        $toScreen=true
+        string $cachedData,
+        int $totalFiles,
+        int $totalErrors,
+        int $totalWarnings,
+        int $totalFixable,
+        bool $showSources = false,
+        int $width = 80,
+        bool $interactive = false,
+        bool $toScreen = true
     ) {
         $checkedFiles = explode(PHP_EOL, trim($cachedData));
 
@@ -144,8 +143,7 @@ class Notifysend implements Report
         } else {
             $this->notifyErrors($msg);
         }
-
-    }//end generate()
+    }
 
 
     /**
@@ -157,7 +155,7 @@ class Notifysend implements Report
      *
      * @return string|null Error message or NULL if no error/warning found.
      */
-    protected function generateMessage($checkedFiles, $totalErrors, $totalWarnings)
+    protected function generateMessage(array $checkedFiles, int $totalErrors, int $totalWarnings)
     {
         if ($totalErrors === 0 && $totalWarnings === 0) {
             // Nothing to print.
@@ -168,22 +166,21 @@ class Notifysend implements Report
 
         $msg = '';
         if ($totalFiles > 1) {
-            $msg .= 'Checked '.$totalFiles.' files'.PHP_EOL;
+            $msg .= 'Checked ' . $totalFiles . ' files' . PHP_EOL;
         } else {
-            $msg .= $checkedFiles[0].PHP_EOL;
+            $msg .= $checkedFiles[0] . PHP_EOL;
         }
 
         if ($totalWarnings > 0) {
-            $msg .= $totalWarnings.' warnings'.PHP_EOL;
+            $msg .= $totalWarnings . ' warnings' . PHP_EOL;
         }
 
         if ($totalErrors > 0) {
-            $msg .= $totalErrors.' errors'.PHP_EOL;
+            $msg .= $totalErrors . ' errors' . PHP_EOL;
         }
 
         return $msg;
-
-    }//end generateMessage()
+    }
 
 
     /**
@@ -198,8 +195,7 @@ class Notifysend implements Report
         $cmd .= ' "PHP CodeSniffer: Ok"';
         $cmd .= ' "All fine"';
         exec($cmd);
-
-    }//end notifyAllFine()
+    }
 
 
     /**
@@ -209,15 +205,14 @@ class Notifysend implements Report
      *
      * @return void
      */
-    protected function notifyErrors($msg)
+    protected function notifyErrors(string $msg)
     {
         $cmd  = $this->getBasicCommand();
         $cmd .= ' -i error';
         $cmd .= ' "PHP CodeSniffer: Error"';
-        $cmd .= ' '.escapeshellarg(trim($msg));
+        $cmd .= ' ' . escapeshellarg(trim($msg));
         exec($cmd);
-
-    }//end notifyErrors()
+    }
 
 
     /**
@@ -230,14 +225,11 @@ class Notifysend implements Report
         $cmd  = $this->path;
         $cmd .= ' --category dev.validate';
         $cmd .= ' -h int:transient:1';
-        $cmd .= ' -t '.(int) $this->timeout;
+        $cmd .= ' -t ' . (int) $this->timeout;
         if (version_compare($this->version, '0.7.3', '>=') === true) {
             $cmd .= ' -a phpcs';
         }
 
         return $cmd;
-
-    }//end getBasicCommand()
-
-
-}//end class
+    }
+}

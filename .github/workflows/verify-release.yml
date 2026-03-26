@@ -1,0 +1,258 @@
+name: Verify release
+
+on:
+  # Run whenever a release is published.
+  release:
+    types: [published]
+  # And whenever this workflow is updated.
+  push:
+    paths:
+      - '.github/workflows/verify-release.yml'
+  pull_request:
+    paths:
+      - '.github/workflows/verify-release.yml'
+  # Allow manually triggering the workflow.
+  workflow_dispatch:
+
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ###############################################################
+  # Trigger an update of the schema.phpcodesniffer.com website. #
+  ###############################################################
+  trigger-schema-site-update:
+    runs-on: ubuntu-latest
+
+    # Only run this workflow in the context of this repo, don't run for changed workflow PR dry-runs.
+    if: github.repository_owner == 'PHPCSStandards' && github.event_name != 'pull_request'
+
+    name: "Trigger update of schema website"
+
+    steps:
+      - name: Trigger schema website update
+        uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 # v4.0.1
+        with:
+          token: ${{ secrets.WORKFLOW_DISPATCH_PAT }}
+          repository: PHPCSStandards/schema.phpcodesniffer.com
+          event-type: phpcs-release
+
+  #######################################################
+  # Trigger an update of the documentation in the Wiki. #
+  #######################################################
+  trigger-wiki-update:
+    runs-on: ubuntu-latest
+
+    # Only run this workflow in the context of this repo, don't run for changed workflow PR dry-runs.
+    if: github.repository_owner == 'PHPCSStandards' && github.event_name != 'pull_request'
+
+    name: "Trigger update of wiki"
+
+    steps:
+      - name: Trigger wiki update
+        uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 # v4.0.1
+        with:
+          token: ${{ secrets.WORKFLOW_DISPATCH_DOCS_PAT }}
+          repository: PHPCSStandards/PHP_CodeSniffer-documentation
+          event-type: phpcs-release
+
+  ##################################################################################
+  # Verify the release is available in all the right places and works as expected. #
+  ##################################################################################
+  verify-available-downloads:
+    runs-on: ubuntu-latest
+
+    # Only run this workflow in the context of this repo.
+    if: github.repository_owner == 'PHPCSStandards'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        download_flavour:
+          - "Release assets"
+          - "Unversioned web"
+          - "Versioned web"
+        pharfile:
+          - 'phpcs'
+          - 'phpcbf'
+
+    name: "${{ matrix.download_flavour }}: ${{ matrix.pharfile }}"
+
+    steps:
+      - name: Retrieve latest release info
+        uses: octokit/request-action@dad4362715b7fb2ddedf9772c8670824af564f0d # v2.4.0
+        id: get_latest_release
+        with:
+          route: GET /repos/PHPCSStandards/PHP_CodeSniffer/releases/latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "DEBUG: Show API request failure status"
+        if: ${{ failure() }}
+        run: "echo No release found. Request failed with status ${{ steps.get_latest_release.outputs.status }}"
+
+      - name: Grab latest tag name from API response
+        id: version
+        run: |
+          echo "TAG=${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}" >> "$GITHUB_OUTPUT"
+
+      - name: "DEBUG: Show tag name found in API response"
+        run: "echo ${{ steps.version.outputs.TAG }}"
+
+      - name: Set source URL and file name
+        id: source
+        shell: bash
+        run: |
+          if [[ "${{ matrix.download_flavour }}" == "Release assets" ]]; then
+            echo 'SRC=https://github.com/PHPCSStandards/PHP_CodeSniffer/releases/latest/download/' >> "$GITHUB_OUTPUT"
+            echo "FILE=${{ matrix.pharfile }}.phar" >> "$GITHUB_OUTPUT"
+          elif [[ "${{ matrix.download_flavour }}" == "Unversioned web" ]]; then
+            echo 'SRC=https://phars.phpcodesniffer.com/' >> "$GITHUB_OUTPUT"
+            echo "FILE=${{ matrix.pharfile }}.phar" >> "$GITHUB_OUTPUT"
+          else
+            echo 'SRC=https://phars.phpcodesniffer.com/phars/' >> "$GITHUB_OUTPUT"
+            echo "FILE=${{ matrix.pharfile }}-${{ steps.version.outputs.TAG }}.phar" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Verify PHAR file is available and download
+        run: "wget -O ${{ steps.source.outputs.FILE }} ${{ steps.source.outputs.SRC }}${{ steps.source.outputs.FILE }}"
+
+      - name: Verify signature file is available and download
+        run: "wget -O ${{ steps.source.outputs.FILE }}.asc ${{ steps.source.outputs.SRC }}${{ steps.source.outputs.FILE }}.asc"
+
+      - name: "DEBUG: List files"
+        run: ls -Rlh
+
+      - name: Verify attestation of the PHAR file
+        run: gh attestation verify ${{ steps.source.outputs.FILE }} -o PHPCSStandards
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_FORCE_TTY: true
+
+      - name: Download public key (May 2024)
+        env:
+          FINGERPRINT: "0x689DAD778FF08760E046228BA978220305CD5C32"
+        run: gpg --keyserver "hkps://keys.openpgp.org" --recv-keys "$FINGERPRINT"
+
+      - name: Download public key (June 2025)
+        env:
+          FINGERPRINT: "0xD91D86963AF3A29B6520462297B02DD8E5071466"
+        run: gpg --keyserver "hkps://keys.openpgp.org" --recv-keys "$FINGERPRINT"
+
+      - name: Verify signature of the PHAR file
+        run: gpg --verify ${{ steps.source.outputs.FILE }}.asc ${{ steps.source.outputs.FILE }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f # 2.35.5
+        with:
+          php-version: 'latest'
+          ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On
+          coverage: none
+
+      - name: Create a PHP file
+        run: echo '<?php echo "Hello, World!";' > hello.php
+
+      - name: Verify the PHAR is nominally functional
+        run: php ${{ steps.source.outputs.FILE }} -- -ps hello.php --standard=PSR2
+
+      - name: Grab the version
+        id: asset_version
+        env:
+          FILE_NAME: ${{ steps.source.outputs.FILE }}
+        # yamllint disable-line rule:line-length
+        run: echo "VERSION=$(php "$FILE_NAME" --version | grep --only-matching --max-count=1 --extended-regexp '\b[0-9]+(\.[0-9]+)+')" >> "$GITHUB_OUTPUT"
+
+      - name: "DEBUG: Show grabbed version"
+        run: echo ${{ steps.asset_version.outputs.VERSION }}
+
+      - name: Fail the build if the PHAR is not the correct version
+        if: ${{ steps.asset_version.outputs.VERSION != steps.version.outputs.TAG }}
+        run: exit 1
+
+  #############################
+  # Verify install via PHIVE. #
+  #############################
+  verify-phive:
+    runs-on: ubuntu-latest
+
+    # Only run this workflow in the context of this repo.
+    if: github.repository_owner == 'PHPCSStandards'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        pharfile:
+          - 'phpcs'
+          - 'phpcbf'
+
+    name: "PHIVE: ${{ matrix.pharfile }}"
+
+    steps:
+      # Phive does not support a stability flag yet, so it will always download the
+      # very latest release, even when this is a pre-release.
+      # I.e. to verify the downloaded version, we need to select the version number including pre-releases.
+      # Ref: https://github.com/phar-io/phive/issues/154
+      - name: Retrieve latest release info (including prereleases)
+        id: latest_release
+        run: |
+          latestRelease="$(gh release list --repo PHPCSStandards/PHP_CodeSniffer --limit 1 --json tagName --jq '.[0].tagName')"
+          echo "TAG=$latestRelease" >> "$GITHUB_OUTPUT"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "DEBUG: Show tag name found in API response"
+        run: "echo ${{ steps.latest_release.outputs.TAG }}"
+
+      # Just get the version number, without alpha/beta/RC.
+      - name: Clean up the version number
+        id: version
+        # yamllint disable-line rule:line-length
+        run: echo "TAG=$(echo '${{ steps.latest_release.outputs.TAG }}' | grep --only-matching --max-count=1 --extended-regexp '\b[0-9]+(\.[0-9]+)+')" >> "$GITHUB_OUTPUT"
+
+      - name: "DEBUG: Show cleaned up tag name"
+        run: "echo ${{ steps.version.outputs.TAG }}"
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f # 2.35.5
+        with:
+          php-version: 'latest'
+          ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On
+          coverage: none
+          tools: phive
+
+      - name: Install
+        run: >
+          phive install ${{ matrix.pharfile }} --copy
+          --trust-gpg-keys 689DAD778FF08760E046228BA978220305CD5C32,D91D86963AF3A29B6520462297B02DD8E5071466
+
+      - name: "DEBUG: List files"
+        run: ls -R
+
+      - name: Verify attestation of the PHAR file
+        run: gh attestation verify ./tools/${{ matrix.pharfile }} -o PHPCSStandards
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_FORCE_TTY: true
+
+      - name: Create a PHP file
+        run: echo '<?php echo "Hello, World!";' > hello.php
+
+      - name: Verify the PHAR is nominally functional
+        run: php ./tools/${{ matrix.pharfile }} -- -ps hello.php --standard=PSR2
+
+      - name: Grab the version
+        id: asset_version
+        env:
+          FILE_NAME: ./tools/${{ matrix.pharfile }}
+        # yamllint disable-line rule:line-length
+        run: echo "VERSION=$(php "$FILE_NAME" --version | grep --only-matching --max-count=1 --extended-regexp '\b[0-9]+(\.[0-9]+)+')" >> "$GITHUB_OUTPUT"
+
+      - name: "DEBUG: Show grabbed version"
+        run: echo ${{ steps.asset_version.outputs.VERSION }}
+
+      - name: Fail the build if the PHAR is not the correct version
+        if: ${{ steps.asset_version.outputs.VERSION != steps.version.outputs.TAG }}
+        run: exit 1

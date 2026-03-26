@@ -10,13 +10,12 @@
  * @internal
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
- * @copyright 2024 Juliette Reinders Folmer. All rights reserved.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Util;
 
-use InvalidArgumentException;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Util\Common;
 
@@ -29,16 +28,41 @@ final class Help
      *
      * @var string
      */
-    const DEFAULT_SHORT_OPTIONS = '-hilnpqvw';
+    public const DEFAULT_SHORT_OPTIONS = '-hilnpqvw';
 
     /**
      * Long options which are available for both the `phpcs` as well as the `phpcbf` command.
      *
-     * {@internal This should be a constant array, but those aren't supported until PHP 5.6.}
-     *
-     * @var string Comma-separated list of the option names.
+     * @var array<string> List of the option names.
      */
-    const DEFAULT_LONG_OPTIONS = 'basepath,bootstrap,colors,encoding,error-severity,exclude,extensions,file,file-list,filter,ignore,ignore-annotations,no-colors,parallel,php-ini,report-width,runtime-set,severity,sniffs,standard,stdin-path,tab-width,version,vv,vvv,warning-severity';
+    public const DEFAULT_LONG_OPTIONS = [
+        'basepath',
+        'bootstrap',
+        'colors',
+        'encoding',
+        'error-severity',
+        'exclude',
+        'extensions',
+        'file',
+        'file-list',
+        'filter',
+        'ignore',
+        'ignore-annotations',
+        'no-colors',
+        'parallel',
+        'php-ini',
+        'report-width',
+        'runtime-set',
+        'severity',
+        'sniffs',
+        'standard',
+        'stdin-path',
+        'tab-width',
+        'version',
+        'vv',
+        'vvv',
+        'warning-severity',
+    ];
 
     /**
      * Minimum screen width.
@@ -47,21 +71,21 @@ final class Help
      *
      * @var integer
      */
-    const MIN_WIDTH = 60;
+    public const MIN_WIDTH = 60;
 
     /**
      * Indent option lines.
      *
      * @var string
      */
-    const INDENT = '  ';
+    public const INDENT = '  ';
 
     /**
      * Gutter spacing for between the option argument info and the option description.
      *
      * @var string
      */
-    const GUTTER = ' ';
+    public const GUTTER = ' ';
 
     /**
      * The current PHPCS Configuration.
@@ -112,15 +136,9 @@ final class Help
      * @param \PHP_CodeSniffer\Config $config       Configuration object.
      * @param array<string>           $longOptions  The long options which should be shown.
      * @param string                  $shortOptions The short options which should be shown.
-     *
-     * @throws \InvalidArgumentException When $shortOptions is not a string.
      */
-    public function __construct(Config $config, array $longOptions, $shortOptions='')
+    public function __construct(Config $config, array $longOptions, string $shortOptions = '')
     {
-        if (is_string($shortOptions) === false) {
-            throw new InvalidArgumentException('The $shortOptions parameter must be a string');
-        }
-
         $this->config           = $config;
         $this->requestedOptions = array_merge($longOptions, str_split($shortOptions));
 
@@ -130,8 +148,7 @@ final class Help
         $this->gutterWidth = strlen(self::GUTTER);
 
         $this->setMaxOptionNameLength();
-
-    }//end __construct()
+    }
 
 
     /**
@@ -143,8 +160,7 @@ final class Help
     {
         $this->printUsage();
         $this->printCategories();
-
-    }//end display()
+    }
 
 
     /**
@@ -190,11 +206,10 @@ final class Help
             if (empty($filteredOptions[$category]) === true || count($filteredOptions[$category]) === $spacerCount) {
                 unset($filteredOptions[$category]);
             }
-        }//end foreach
+        }
 
         $this->activeOptions = $filteredOptions;
-
-    }//end filterOptions()
+    }
 
 
     /**
@@ -218,8 +233,7 @@ final class Help
         if (empty($lengths) === false) {
             $this->maxOptionNameLength = max($lengths);
         }
-
-    }//end setMaxOptionNameLength()
+    }
 
 
     /**
@@ -233,8 +247,7 @@ final class Help
     private function getMaxWidth()
     {
         return max(self::MIN_WIDTH, $this->config->reportWidth);
-
-    }//end getMaxWidth()
+    }
 
 
     /**
@@ -245,8 +258,7 @@ final class Help
     private function getDescriptionColumnWidth()
     {
         return ($this->getMaxWidth() - $this->maxOptionNameLength - $this->indentWidth - $this->gutterWidth);
-
-    }//end getDescriptionColumnWidth()
+    }
 
 
     /**
@@ -257,8 +269,7 @@ final class Help
     private function getDescriptionFollowupLineIndentLength()
     {
         return ($this->maxOptionNameLength + $this->indentWidth + $this->gutterWidth);
-
-    }//end getDescriptionFollowupLineIndentLength()
+    }
 
 
     /**
@@ -270,15 +281,13 @@ final class Help
     {
         $command = 'phpcs';
         if (defined('PHP_CODESNIFFER_CBF') === true && PHP_CODESNIFFER_CBF === true) {
-            // @codeCoverageIgnore
             $command = 'phpcbf';
         }
 
         $this->printCategoryHeader('Usage');
 
-        echo self::INDENT.$command.' [options] <file|directory>'.PHP_EOL;
-
-    }//end printUsage()
+        echo self::INDENT . $command . ' [options] <file|directory>' . PHP_EOL;
+    }
 
 
     /**
@@ -292,8 +301,7 @@ final class Help
             $this->printCategoryHeader($category);
             $this->printCategoryOptions($options);
         }
-
-    }//end printCategories()
+    }
 
 
     /**
@@ -303,16 +311,15 @@ final class Help
      *
      * @return void
      */
-    private function printCategoryHeader($header)
+    private function printCategoryHeader(string $header)
     {
         $header .= ':';
         if ($this->config->colors === true) {
             $header = "\033[33m{$header}\033[0m";
         }
 
-        echo PHP_EOL.$header.PHP_EOL;
-
-    }//end printCategoryHeader()
+        echo PHP_EOL . $header . PHP_EOL;
+    }
 
 
     /**
@@ -336,17 +343,17 @@ final class Help
 
             if (isset($option['text']) === true) {
                 $text    = wordwrap($option['text'], $maxTextWidth, "\n");
-                $output .= self::INDENT.implode(PHP_EOL.self::INDENT, explode("\n", $text)).PHP_EOL;
+                $output .= self::INDENT . implode(PHP_EOL . self::INDENT, explode("\n", $text)) . PHP_EOL;
             }
 
             if (isset($option['argument'], $option['description']) === true) {
                 $argument = str_pad($option['argument'], $this->maxOptionNameLength);
                 $argument = $this->colorizeVariableInput($argument);
-                $output  .= self::INDENT."\033[32m{$argument}\033[0m";
+                $output  .= self::INDENT . "\033[32m{$argument}\033[0m";
                 $output  .= self::GUTTER;
 
                 $description = wordwrap($option['description'], $maxDescriptionWidth, "\n");
-                $output     .= implode(PHP_EOL.$secondLineIndent, explode("\n", $description)).PHP_EOL;
+                $output     .= implode(PHP_EOL . $secondLineIndent, explode("\n", $description)) . PHP_EOL;
             }
         }
 
@@ -355,8 +362,7 @@ final class Help
         }
 
         echo $output;
-
-    }//end printCategoryOptions()
+    }
 
 
     /**
@@ -369,11 +375,10 @@ final class Help
      *
      * @return string
      */
-    private function colorizeVariableInput($text)
+    private function colorizeVariableInput(string $text)
     {
-        return preg_replace('`(<(?:(?>[^<>]+)|(?R))*>)`', "\033[36m".'$1'."\033[32m", $text);
-
-    }//end colorizeVariableInput()
+        return preg_replace('`(<(?:(?>[^<>]+)|(?R))*>)`', "\033[36m" . '$1' . "\033[32m", $text);
+    }
 
 
     /**
@@ -413,8 +418,7 @@ final class Help
             ],
             'extensions' => [
                 'argument'    => '--extensions=<extensions>',
-                'description' => 'Check files with the specified file extensions (comma-separated list). Defaults to php,inc/php,js,css.'."\n"
-                    .'The type of the file can be specified using: ext/type; e.g. module/php,es/js.',
+                'description' => 'Check files with the specified file extensions (comma-separated list). Defaults to "php,inc".',
             ],
             'l'          => [
                 'argument'    => '-l',
@@ -470,8 +474,8 @@ final class Help
             ],
             'parallel'   => [
                 'argument'    => '--parallel=<processes>',
-                'description' => 'The number of files to be checked simultaneously. Defaults to 1 (no parallel processing).'."\n"
-                    .'If enabled, this option only takes effect if the PHP PCNTL (Process Control) extension is available.',
+                'description' => 'The number of files to be checked simultaneously. Defaults to 1 (no parallel processing).' . "\n"
+                    . 'If enabled, this option only takes effect if the PHP PCNTL (Process Control) extension is available.',
             ],
             'suffix'     => [
                 'argument'    => '--suffix=<suffix>',
@@ -481,15 +485,16 @@ final class Help
 
             'php-ini'    => [
                 'argument'    => '-d <key[=value]>',
-                'description' => 'Set the [key] php.ini value to [value] or set to [true] if value is omitted.'."\n"
-                    .'Note: only php.ini settings which can be changed at runtime are supported.',
+                'description' => 'Set the [key] php.ini value to [value] or set to [true] if value is omitted.' . "\n"
+                    . 'Note: only php.ini settings which can be changed at runtime are supported.',
             ],
         ];
 
         $options['Reporting Options'] = [
             'report'             => [
-                'argument'    => '--report=<report>',
-                'description' => 'Print either the "full", "xml", "checkstyle", "csv", "json", "junit", "emacs", "source", "summary", "diff", "svnblame", "gitblame", "hgblame", "notifysend" or "performance" report or specify the path to a custom report class. By default, the "full" report is displayed.',
+                'argument'    => '--report=<report(s)>',
+                'description' => 'A comma-separated list of reports to print. Available reports: "full", "xml", "checkstyle", "csv", "json", "junit", "emacs", "source", "summary", "diff", "svnblame", "gitblame", "hgblame", "notifysend" or "performance".' . "\n"
+                    . 'Or specify the path to a custom report class. By default, the "full" report is displayed.',
             ],
             'report-file'        => [
                 'argument'    => '--report-file=<reportFile>',
@@ -573,8 +578,8 @@ final class Help
             'blank-line'     => ['spacer' => ''],
 
             'config-explain' => [
-                'text' => 'Default values for a selection of options can be stored in a user-specific CodeSniffer.conf configuration file.'."\n"
-                    .'This applies to the following options: "default_standard", "report_format", "tab_width", "encoding", "severity", "error_severity", "warning_severity", "show_warnings", "report_width", "show_progress", "quiet", "colors", "cache", "parallel".',
+                'text' => 'Default values for a selection of options can be stored in a user-specific CodeSniffer.conf configuration file.' . "\n"
+                    . 'This applies to the following options: "default_standard", "report_format", "tab_width", "encoding", "severity", "error_severity", "warning_severity", "show_warnings", "report_width", "show_progress", "quiet", "colors", "cache", "parallel", "installed_paths", "php_version", "ignore_errors_on_exit", "ignore_warnings_on_exit", "ignore_non_auto_fixable_on_exit".',
             ],
             'config-show'    => [
                 'argument'    => '--config-show',
@@ -619,8 +624,5 @@ final class Help
         // phpcs:enable
 
         return $options;
-
-    }//end getAllOptions()
-
-
-}//end class
+    }
+}

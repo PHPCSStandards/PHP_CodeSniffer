@@ -3,8 +3,9 @@
  * Checks that the declaration of an anon class is correct.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2019 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR12\Sniffs\Classes;
@@ -41,8 +42,7 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
     public function register()
     {
         return [T_ANON_CLASS];
-
-    }//end register()
+    }
 
 
     /**
@@ -54,7 +54,7 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if (isset($tokens[$stackPtr]['scope_opener']) === false) {
@@ -130,9 +130,8 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
 
                 $phpcsFile->fixer->endChangeset();
             }
-        }//end if
-
-    }//end process()
+        }
+    }
 
 
     /**
@@ -144,7 +143,7 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
      *
      * @return void
      */
-    public function processSingleLineArgumentList(File $phpcsFile, $stackPtr)
+    public function processSingleLineArgumentList(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -171,7 +170,7 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
 
         if ($tokens[$prev]['line'] !== $tokens[$closeBracket]['line']) {
             $spaceBeforeClose = 'newline';
-        } else if ($tokens[($closeBracket - 1)]['code'] === T_WHITESPACE) {
+        } elseif ($tokens[($closeBracket - 1)]['code'] === T_WHITESPACE) {
             $spaceBeforeClose = $tokens[($closeBracket - 1)]['length'];
         }
 
@@ -195,7 +194,7 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
                     // We want to jump over any whitespace or inline comment and
                     // move the closing parenthesis after any other token.
                     $prev = ($closeBracket - 1);
-                    while (isset(Tokens::$emptyTokens[$tokens[$prev]['code']]) === true) {
+                    while (isset(Tokens::EMPTY_TOKENS[$tokens[$prev]['code']]) === true) {
                         if (($tokens[$prev]['code'] === T_COMMENT)
                             && (strpos($tokens[$prev]['content'], '*/') !== false)
                         ) {
@@ -215,11 +214,10 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
                     $phpcsFile->fixer->endChangeset();
                 } else {
                     $phpcsFile->fixer->replaceToken(($closeBracket - 1), '');
-                }//end if
-            }//end if
-        }//end if
-
-    }//end processSingleLineArgumentList()
+                }
+            }
+        }
+    }
 
 
     /**
@@ -231,7 +229,7 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
      *
      * @return void
      */
-    public function processMultiLineArgumentList(File $phpcsFile, $stackPtr)
+    public function processMultiLineArgumentList(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -239,8 +237,5 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
 
         $this->multiLineSniff->processBracket($phpcsFile, $openBracket, $tokens, 'argument');
         $this->multiLineSniff->processArgumentList($phpcsFile, $stackPtr, $this->indent, 'argument');
-
-    }//end processMultiLineArgumentList()
-
-
-}//end class
+    }
+}

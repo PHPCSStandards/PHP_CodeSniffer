@@ -4,7 +4,8 @@
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2018 Juliette Reinders Folmer. All rights reserved.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace;
@@ -15,16 +16,6 @@ use PHP_CodeSniffer\Util\Tokens;
 
 class IncrementDecrementSpacingSniff implements Sniff
 {
-
-    /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
 
 
     /**
@@ -38,8 +29,7 @@ class IncrementDecrementSpacingSniff implements Sniff
             T_DEC,
             T_INC,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -51,7 +41,7 @@ class IncrementDecrementSpacingSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -61,11 +51,10 @@ class IncrementDecrementSpacingSniff implements Sniff
         }
 
         // Is this a pre-increment/decrement ?
-        $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
         if ($nextNonEmpty !== false
-            && (($phpcsFile->tokenizerType === 'PHP'
-            && ($tokens[$nextNonEmpty]['code'] === T_VARIABLE || $tokens[$nextNonEmpty]['code'] === T_STRING))
-            || ($phpcsFile->tokenizerType === 'JS' && $tokens[$nextNonEmpty]['code'] === T_STRING))
+            && ($tokens[$nextNonEmpty]['code'] === T_VARIABLE
+            || isset(Tokens::NAME_TOKENS[$tokens[$nextNonEmpty]['code']]) === true)
         ) {
             if ($nextNonEmpty === ($stackPtr + 1)) {
                 $phpcsFile->recordMetric($stackPtr, 'Spacing between in/decrementor and variable', 0);
@@ -89,7 +78,7 @@ class IncrementDecrementSpacingSniff implements Sniff
             $phpcsFile->recordMetric($stackPtr, 'Spacing between in/decrementor and variable', $spaces);
 
             $error     = 'Expected no spaces between the %s operator and %s; %s found';
-            $errorCode = 'SpaceAfter'.ucfirst($tokenName);
+            $errorCode = 'SpaceAfter' . ucfirst($tokenName);
             $data      = [
                 $tokenName,
                 $tokens[$nextNonEmpty]['content'],
@@ -112,16 +101,14 @@ class IncrementDecrementSpacingSniff implements Sniff
             }
 
             return;
-        }//end if
+        }
 
         // Is this a post-increment/decrement ?
-        $prevNonEmpty = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+        $prevNonEmpty = $phpcsFile->findPrevious(Tokens::EMPTY_TOKENS, ($stackPtr - 1), null, true);
         if ($prevNonEmpty !== false
-            && (($phpcsFile->tokenizerType === 'PHP'
             && ($tokens[$prevNonEmpty]['code'] === T_VARIABLE
-            || $tokens[$prevNonEmpty]['code'] === T_STRING
-            || $tokens[$prevNonEmpty]['code'] === T_CLOSE_SQUARE_BRACKET))
-            || ($phpcsFile->tokenizerType === 'JS' && $tokens[$prevNonEmpty]['code'] === T_STRING))
+            || isset(Tokens::NAME_TOKENS[$tokens[$prevNonEmpty]['code']]) === true
+            || $tokens[$prevNonEmpty]['code'] === T_CLOSE_SQUARE_BRACKET)
         ) {
             if ($prevNonEmpty === ($stackPtr - 1)) {
                 $phpcsFile->recordMetric($stackPtr, 'Spacing between in/decrementor and variable', 0);
@@ -145,7 +132,7 @@ class IncrementDecrementSpacingSniff implements Sniff
             $phpcsFile->recordMetric($stackPtr, 'Spacing between in/decrementor and variable', $spaces);
 
             $error     = 'Expected no spaces between %s and the %s operator; %s found';
-            $errorCode = 'SpaceAfter'.ucfirst($tokenName);
+            $errorCode = 'SpaceAfter' . ucfirst($tokenName);
             $data      = [
                 $tokens[$prevNonEmpty]['content'],
                 $tokenName,
@@ -166,9 +153,6 @@ class IncrementDecrementSpacingSniff implements Sniff
 
                 $phpcsFile->fixer->endChangeset();
             }
-        }//end if
-
-    }//end process()
-
-
-}//end class
+        }
+    }
+}

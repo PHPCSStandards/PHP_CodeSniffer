@@ -3,20 +3,21 @@
  * Unit test class for the ArrayIndent sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Arrays;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the ArrayIndent sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Arrays\ArrayIndentSniff
  */
-final class ArrayIndentUnitTest extends AbstractSniffUnitTest
+final class ArrayIndentUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -59,8 +60,7 @@ final class ArrayIndentUnitTest extends AbstractSniffUnitTest
             143 => 1,
             149 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -74,8 +74,5 @@ final class ArrayIndentUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

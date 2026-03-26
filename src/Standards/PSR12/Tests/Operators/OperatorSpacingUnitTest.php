@@ -3,20 +3,21 @@
  * Unit test class for the OperatorSpacing sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PSR12\Tests\Operators;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the OperatorSpacing sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\PSR12\Sniffs\Operators\OperatorSpacingSniff
  */
-final class OperatorSpacingUnitTest extends AbstractSniffUnitTest
+final class OperatorSpacingUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -30,37 +31,36 @@ final class OperatorSpacingUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList($testFile = '')
     {
         switch ($testFile) {
-        case 'OperatorSpacingUnitTest.1.inc':
-            return [
-                2  => 1,
-                3  => 2,
-                4  => 1,
-                5  => 2,
-                6  => 4,
-                9  => 3,
-                10 => 2,
-                11 => 3,
-                13 => 3,
-                14 => 2,
-                18 => 1,
-                20 => 1,
-                22 => 2,
-                23 => 2,
-                26 => 1,
-                37 => 4,
-                39 => 1,
-                40 => 1,
-                44 => 2,
-                47 => 2,
-            ];
-        default:
-            return [];
-        }//end switch
-
-    }//end getErrorList()
+            case 'OperatorSpacingUnitTest.1.inc':
+                return [
+                    2  => 1,
+                    3  => 2,
+                    4  => 1,
+                    5  => 2,
+                    6  => 4,
+                    9  => 3,
+                    10 => 2,
+                    11 => 3,
+                    13 => 3,
+                    14 => 2,
+                    18 => 1,
+                    20 => 1,
+                    22 => 2,
+                    23 => 2,
+                    26 => 1,
+                    37 => 4,
+                    39 => 1,
+                    40 => 1,
+                    44 => 2,
+                    47 => 2,
+                ];
+            default:
+                return [];
+        }
+    }
 
 
     /**
@@ -74,8 +74,5 @@ final class OperatorSpacingUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

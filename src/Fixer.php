@@ -6,15 +6,18 @@
  * content.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer;
 
+use InvalidArgumentException;
 use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 class Fixer
 {
@@ -81,7 +84,7 @@ class Fixer
      * All changes in changeset must be able to be applied, or else
      * the entire changeset is rejected.
      *
-     * @var array
+     * @var array<int, string>
      */
     private $changeset = [];
 
@@ -100,7 +103,12 @@ class Fixer
     private $inConflict = false;
 
     /**
-     * The number of fixes that have been performed.
+     * The actual number of fixes that have been performed.
+     *
+     * I.e. how many fixes were applied. This may be higher than the originally found
+     * issues if the fixer from one sniff causes other sniffs to come into play in follow-up loops.
+     * Example: if a brace is moved to a new line, the `ScopeIndent` sniff may need to ensure
+     * the brace is indented correctly in the next loop.
      *
      * @var integer
      */
@@ -129,8 +137,7 @@ class Fixer
                 $this->tokens[$index] = $token['content'];
             }
         }
-
-    }//end startFile()
+    }
 
 
     /**
@@ -148,95 +155,92 @@ class Fixer
 
         $this->enabled = true;
 
+        // Pause the StatusWriter to silence Tokenizer debug info about the file being retokenized for each loop.
+        StatusWriter::pause();
+
         $this->loops = 0;
         while ($this->loops < 50) {
-            ob_start();
-
             // Only needed once file content has changed.
             $contents = $this->getContents();
 
             if (PHP_CODESNIFFER_VERBOSITY > 2) {
-                @ob_end_clean();
-                echo '---START FILE CONTENT---'.PHP_EOL;
+                StatusWriter::forceWrite('---START FILE CONTENT---');
                 $lines = explode($this->currentFile->eolChar, $contents);
                 $max   = strlen(count($lines));
                 foreach ($lines as $lineNum => $line) {
                     $lineNum++;
-                    echo str_pad($lineNum, $max, ' ', STR_PAD_LEFT).'|'.$line.PHP_EOL;
+                    StatusWriter::forceWrite(str_pad($lineNum, $max, ' ', STR_PAD_LEFT) . '|' . $line);
                 }
 
-                echo '--- END FILE CONTENT ---'.PHP_EOL;
-                ob_start();
+                StatusWriter::forceWrite('--- END FILE CONTENT ---');
             }
 
             $this->inConflict = false;
             $this->currentFile->ruleset->populateTokenListeners();
             $this->currentFile->setContent($contents);
             $this->currentFile->process();
-            ob_end_clean();
 
             $this->loops++;
 
             if (PHP_CODESNIFFER_CBF === true && PHP_CODESNIFFER_VERBOSITY > 0) {
-                echo "\r".str_repeat(' ', 80)."\r";
-                echo "\t=> Fixing file: $this->numFixes/$fixable violations remaining [made $this->loops pass";
+                StatusWriter::forceWrite("\r" . str_repeat(' ', 80) . "\r", 0, 0);
+                $statusMessage = "=> Fixing file: $this->numFixes/$fixable violations remaining [made $this->loops pass";
                 if ($this->loops > 1) {
-                    echo 'es';
+                    $statusMessage .= 'es';
                 }
 
-                echo ']... ';
+                $statusMessage .= ']... ';
+                $newlines       = 0;
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    echo PHP_EOL;
+                    $newlines = 1;
                 }
+
+                StatusWriter::forceWrite($statusMessage, 1, $newlines);
             }
 
             if ($this->numFixes === 0 && $this->inConflict === false) {
                 // Nothing left to do.
                 break;
-            } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                echo "\t* fixed $this->numFixes violations, starting loop ".($this->loops + 1).' *'.PHP_EOL;
+            } elseif (PHP_CODESNIFFER_VERBOSITY > 1) {
+                StatusWriter::forceWrite("* fixed $this->numFixes violations, starting loop " . ($this->loops + 1) . ' *', 1);
             }
-        }//end while
+        }
 
         $this->enabled = false;
 
-        if ($this->numFixes > 0) {
-            if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                if (ob_get_level() > 0) {
-                    ob_end_clean();
-                }
+        StatusWriter::resume();
 
-                echo "\t*** Reached maximum number of loops with $this->numFixes violations left unfixed ***".PHP_EOL;
-                ob_start();
+        if ($this->numFixes > 0 || $this->inConflict === true) {
+            if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                StatusWriter::write("*** Reached maximum number of loops with $this->numFixes violations left unfixed ***", 1);
             }
 
             return false;
         }
 
         return true;
-
-    }//end fixFile()
+    }
 
 
     /**
      * Generates a text diff of the original file and the new content.
      *
-     * @param string  $filePath Optional file path to diff the file against.
-     *                          If not specified, the original version of the
-     *                          file will be used.
-     * @param boolean $colors   Print coloured output or not.
+     * @param string|null $filePath Optional file path to diff the file against.
+     *                              If not specified, the original version of the
+     *                              file will be used.
+     * @param boolean     $colors   Print coloured output or not.
      *
      * @return string
      *
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException When the diff command fails.
      */
-    public function generateDiff($filePath=null, $colors=true)
+    public function generateDiff(?string $filePath = null, bool $colors = true)
     {
         if ($filePath === null) {
             $filePath = $this->currentFile->getFilename();
         }
 
-        $cwd = getcwd().DIRECTORY_SEPARATOR;
+        $cwd = getcwd() . DIRECTORY_SEPARATOR;
         if (strpos($filePath, $cwd) === 0) {
             $filename = substr($filePath, strlen($cwd));
         } else {
@@ -274,7 +278,7 @@ class Fixer
         ];
 
         $options = null;
-        if (stripos(PHP_OS, 'WIN') === 0) {
+        if (PHP_OS_FAMILY === 'Windows') {
             $options = ['bypass_shell' => true];
         }
 
@@ -316,14 +320,14 @@ class Fixer
         foreach ($diffLines as $line) {
             if (isset($line[0]) === true) {
                 switch ($line[0]) {
-                case '-':
-                    $diff[] = "\033[31m$line\033[0m";
-                    break;
-                case '+':
-                    $diff[] = "\033[32m$line\033[0m";
-                    break;
-                default:
-                    $diff[] = $line;
+                    case '-':
+                        $diff[] = "\033[31m$line\033[0m";
+                        break;
+                    case '+':
+                        $diff[] = "\033[32m$line\033[0m";
+                        break;
+                    default:
+                        $diff[] = $line;
                 }
             }
         }
@@ -331,12 +335,11 @@ class Fixer
         $diff = implode(PHP_EOL, $diff);
 
         return $diff;
-
-    }//end generateDiff()
+    }
 
 
     /**
-     * Get a count of fixes that have been performed on the file.
+     * Get a count of the actual number of fixes that have been performed on the file.
      *
      * This value is reset every time a new file is started, or an existing
      * file is restarted.
@@ -346,8 +349,7 @@ class Fixer
     public function getFixCount()
     {
         return $this->numFixes;
-
-    }//end getFixCount()
+    }
 
 
     /**
@@ -359,8 +361,7 @@ class Fixer
     {
         $contents = implode($this->tokens);
         return $contents;
-
-    }//end getContents()
+    }
 
 
     /**
@@ -373,7 +374,7 @@ class Fixer
      *
      * @return string
      */
-    public function getTokenContent($stackPtr)
+    public function getTokenContent(int $stackPtr)
     {
         if ($this->inChangeset === true
             && isset($this->changeset[$stackPtr]) === true
@@ -382,8 +383,7 @@ class Fixer
         } else {
             return $this->tokens[$stackPtr];
         }
-
-    }//end getTokenContent()
+    }
 
 
     /**
@@ -399,23 +399,20 @@ class Fixer
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             $bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-            if ($bt[1]['class'] === __CLASS__) {
+            if ($bt[1]['class'] === self::class) {
                 $sniff = 'Fixer';
             } else {
-                $sniff = Common::getSniffCode($bt[1]['class']);
+                $sniff = $this->getSniffCodeForDebug($bt[1]['class']);
             }
 
             $line = $bt[0]['line'];
 
-            @ob_end_clean();
-            echo "\t=> Changeset started by $sniff:$line".PHP_EOL;
-            ob_start();
+            StatusWriter::forceWrite("=> Changeset started by $sniff:$line", 1);
         }
 
         $this->changeset   = [];
         $this->inChangeset = true;
-
-    }//end beginChangeset()
+    }
 
 
     /**
@@ -449,21 +446,16 @@ class Fixer
             }
 
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                @ob_end_clean();
-                echo "\t=> Changeset failed to apply".PHP_EOL;
-                ob_start();
+                StatusWriter::forceWrite('=> Changeset failed to apply', 1);
             }
-        } else if (PHP_CODESNIFFER_VERBOSITY > 1) {
+        } elseif (PHP_CODESNIFFER_VERBOSITY > 1) {
             $fixes = count($this->changeset);
-            @ob_end_clean();
-            echo "\t=> Changeset ended: $fixes changes applied".PHP_EOL;
-            ob_start();
+            StatusWriter::forceWrite("=> Changeset ended: $fixes changes applied", 1);
         }
 
         $this->changeset = [];
         return true;
-
-    }//end endChangeset()
+    }
 
 
     /**
@@ -479,7 +471,7 @@ class Fixer
         if (empty($this->changeset) === false) {
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
                 $bt = debug_backtrace();
-                if ($bt[1]['class'] === 'PHP_CodeSniffer\Fixer') {
+                if ($bt[1]['class'] === self::class) {
                     $sniff = $bt[2]['class'];
                     $line  = $bt[1]['line'];
                 } else {
@@ -487,20 +479,17 @@ class Fixer
                     $line  = $bt[0]['line'];
                 }
 
-                $sniff = Common::getSniffCode($sniff);
+                $sniff = $this->getSniffCodeForDebug($sniff);
 
                 $numChanges = count($this->changeset);
 
-                @ob_end_clean();
-                echo "\t\tR: $sniff:$line rolled back the changeset ($numChanges changes)".PHP_EOL;
-                echo "\t=> Changeset rolled back".PHP_EOL;
-                ob_start();
+                StatusWriter::forceWrite("R: $sniff:$line rolled back the changeset ($numChanges changes)", 2);
+                StatusWriter::forceWrite('=> Changeset rolled back', 1);
             }
 
             $this->changeset = [];
-        }//end if
-
-    }//end rollbackChangeset()
+        }
+    }
 
 
     /**
@@ -511,7 +500,7 @@ class Fixer
      *
      * @return bool If the change was accepted.
      */
-    public function replaceToken($stackPtr, $content)
+    public function replaceToken(int $stackPtr, string $content)
     {
         if ($this->inConflict === true) {
             return false;
@@ -520,15 +509,13 @@ class Fixer
         if ($this->inChangeset === false
             && isset($this->fixedTokens[$stackPtr]) === true
         ) {
-            $indent = "\t";
+            $depth = 1;
             if (empty($this->changeset) === false) {
-                $indent .= "\t";
+                $depth = 2;
             }
 
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                @ob_end_clean();
-                echo "$indent* token $stackPtr has already been modified, skipping *".PHP_EOL;
-                ob_start();
+                StatusWriter::forceWrite("* token $stackPtr has already been modified, skipping *", $depth);
             }
 
             return false;
@@ -536,7 +523,7 @@ class Fixer
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             $bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-            if ($bt[1]['class'] === 'PHP_CodeSniffer\Fixer') {
+            if ($bt[1]['class'] === self::class) {
                 $sniff = $bt[2]['class'];
                 $line  = $bt[1]['line'];
             } else {
@@ -544,7 +531,7 @@ class Fixer
                 $line  = $bt[0]['line'];
             }
 
-            $sniff = Common::getSniffCode($sniff);
+            $sniff = $this->getSniffCodeForDebug($sniff);
 
             $tokens     = $this->currentFile->getTokens();
             $type       = $tokens[$stackPtr]['type'];
@@ -557,15 +544,13 @@ class Fixer
                 $oldContent .= $append;
                 $newContent .= $append;
             }
-        }//end if
+        }
 
         if ($this->inChangeset === true) {
             $this->changeset[$stackPtr] = $content;
 
             if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                @ob_end_clean();
-                echo "\t\tQ: $sniff:$line replaced token $stackPtr ($type on line $tokenLine) \"$oldContent\" => \"$newContent\"".PHP_EOL;
-                ob_start();
+                StatusWriter::forceWrite("Q: $sniff:$line replaced token $stackPtr ($type on line $tokenLine) \"$oldContent\" => \"$newContent\"", 2);
             }
 
             return true;
@@ -582,58 +567,49 @@ class Fixer
                 && $this->oldTokenValues[$stackPtr]['loop'] === ($this->loops - 1)
             ) {
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    $indent = "\t";
+                    $depth = 1;
                     if (empty($this->changeset) === false) {
-                        $indent .= "\t";
+                        $depth = 2;
                     }
 
                     $loop = $this->oldTokenValues[$stackPtr]['loop'];
 
-                    @ob_end_clean();
-                    echo "$indent**** $sniff:$line has possible conflict with another sniff on loop $loop; caused by the following change ****".PHP_EOL;
-                    echo "$indent**** replaced token $stackPtr ($type on line $tokenLine) \"$oldContent\" => \"$newContent\" ****".PHP_EOL;
+                    StatusWriter::forceWrite("**** $sniff:$line has possible conflict with another sniff on loop $loop; caused by the following change ****", $depth);
+                    StatusWriter::forceWrite("**** replaced token $stackPtr ($type on line $tokenLine) \"$oldContent\" => \"$newContent\" ****", $depth);
                 }
 
                 if ($this->oldTokenValues[$stackPtr]['loop'] >= ($this->loops - 1)) {
                     $this->inConflict = true;
                     if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                        echo "$indent**** ignoring all changes until next loop ****".PHP_EOL;
+                        StatusWriter::forceWrite('**** ignoring all changes until next loop ****', $depth);
                     }
                 }
 
-                if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                    ob_start();
-                }
-
                 return false;
-            }//end if
+            }
 
             $this->oldTokenValues[$stackPtr]['prev'] = $this->oldTokenValues[$stackPtr]['curr'];
             $this->oldTokenValues[$stackPtr]['curr'] = $content;
             $this->oldTokenValues[$stackPtr]['loop'] = $this->loops;
-        }//end if
+        }
 
         $this->fixedTokens[$stackPtr] = $this->tokens[$stackPtr];
         $this->tokens[$stackPtr]      = $content;
         $this->numFixes++;
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
-            $indent = "\t";
+            $statusMessage = "$sniff:$line replaced token $stackPtr ($type on line $tokenLine) \"$oldContent\" => \"$newContent\"";
+            $depth         = 1;
             if (empty($this->changeset) === false) {
-                $indent .= "\tA: ";
+                $statusMessage = 'A: ' . $statusMessage;
+                $depth         = 2;
             }
 
-            if (ob_get_level() > 0) {
-                ob_end_clean();
-            }
-
-            echo "$indent$sniff:$line replaced token $stackPtr ($type on line $tokenLine) \"$oldContent\" => \"$newContent\"".PHP_EOL;
-            ob_start();
+            StatusWriter::forceWrite($statusMessage, $depth);
         }
 
         return true;
-
-    }//end replaceToken()
+    }
 
 
     /**
@@ -643,7 +619,7 @@ class Fixer
      *
      * @return bool If a change was reverted.
      */
-    public function revertToken($stackPtr)
+    public function revertToken(int $stackPtr)
     {
         if (isset($this->fixedTokens[$stackPtr]) === false) {
             return false;
@@ -651,7 +627,7 @@ class Fixer
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             $bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-            if ($bt[1]['class'] === 'PHP_CodeSniffer\Fixer') {
+            if ($bt[1]['class'] === self::class) {
                 $sniff = $bt[2]['class'];
                 $line  = $bt[1]['line'];
             } else {
@@ -659,7 +635,7 @@ class Fixer
                 $line  = $bt[0]['line'];
             }
 
-            $sniff = Common::getSniffCode($sniff);
+            $sniff = $this->getSniffCodeForDebug($sniff);
 
             $tokens     = $this->currentFile->getTokens();
             $type       = $tokens[$stackPtr]['type'];
@@ -672,39 +648,38 @@ class Fixer
                 $oldContent .= $append;
                 $newContent .= $append;
             }
-        }//end if
+        }
 
         $this->tokens[$stackPtr] = $this->fixedTokens[$stackPtr];
         unset($this->fixedTokens[$stackPtr]);
         $this->numFixes--;
 
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
-            $indent = "\t";
+            $statusMessage = "$sniff:$line reverted token $stackPtr ($type on line $tokenLine) \"$oldContent\" => \"$newContent\"";
+            $depth         = 1;
             if (empty($this->changeset) === false) {
-                $indent .= "\tR: ";
+                $statusMessage = 'R: ' . $statusMessage;
+                $depth         = 2;
             }
 
-            @ob_end_clean();
-            echo "$indent$sniff:$line reverted token $stackPtr ($type on line $tokenLine) \"$oldContent\" => \"$newContent\"".PHP_EOL;
-            ob_start();
+            StatusWriter::forceWrite($statusMessage, $depth);
         }
 
         return true;
-
-    }//end revertToken()
+    }
 
 
     /**
      * Replace the content of a token with a part of its current content.
      *
-     * @param int $stackPtr The position of the token in the token stack.
-     * @param int $start    The first character to keep.
-     * @param int $length   The number of characters to keep. If NULL, the content of
-     *                      the token from $start to the end of the content is kept.
+     * @param int      $stackPtr The position of the token in the token stack.
+     * @param int      $start    The first character to keep.
+     * @param int|null $length   The number of characters to keep. If NULL, the content of
+     *                           the token from $start to the end of the content is kept.
      *
      * @return bool If the change was accepted.
      */
-    public function substrToken($stackPtr, $start, $length=null)
+    public function substrToken(int $stackPtr, int $start, ?int $length = null)
     {
         $current = $this->getTokenContent($stackPtr);
 
@@ -715,8 +690,7 @@ class Fixer
         }
 
         return $this->replaceToken($stackPtr, $newContent);
-
-    }//end substrToken()
+    }
 
 
     /**
@@ -726,12 +700,11 @@ class Fixer
      *
      * @return bool If the change was accepted.
      */
-    public function addNewline($stackPtr)
+    public function addNewline(int $stackPtr)
     {
         $current = $this->getTokenContent($stackPtr);
-        return $this->replaceToken($stackPtr, $current.$this->currentFile->eolChar);
-
-    }//end addNewline()
+        return $this->replaceToken($stackPtr, $current . $this->currentFile->eolChar);
+    }
 
 
     /**
@@ -741,12 +714,11 @@ class Fixer
      *
      * @return bool If the change was accepted.
      */
-    public function addNewlineBefore($stackPtr)
+    public function addNewlineBefore(int $stackPtr)
     {
         $current = $this->getTokenContent($stackPtr);
-        return $this->replaceToken($stackPtr, $this->currentFile->eolChar.$current);
-
-    }//end addNewlineBefore()
+        return $this->replaceToken($stackPtr, $this->currentFile->eolChar . $current);
+    }
 
 
     /**
@@ -757,12 +729,11 @@ class Fixer
      *
      * @return bool If the change was accepted.
      */
-    public function addContent($stackPtr, $content)
+    public function addContent(int $stackPtr, string $content)
     {
         $current = $this->getTokenContent($stackPtr);
-        return $this->replaceToken($stackPtr, $current.$content);
-
-    }//end addContent()
+        return $this->replaceToken($stackPtr, $current . $content);
+    }
 
 
     /**
@@ -773,12 +744,11 @@ class Fixer
      *
      * @return bool If the change was accepted.
      */
-    public function addContentBefore($stackPtr, $content)
+    public function addContentBefore(int $stackPtr, string $content)
     {
         $current = $this->getTokenContent($stackPtr);
-        return $this->replaceToken($stackPtr, $content.$current);
-
-    }//end addContentBefore()
+        return $this->replaceToken($stackPtr, $content . $current);
+    }
 
 
     /**
@@ -793,7 +763,7 @@ class Fixer
      *
      * @return void
      */
-    public function changeCodeBlockIndent($start, $end, $change)
+    public function changeCodeBlockIndent(int $start, int $end, int $change)
     {
         $tokens = $this->currentFile->getTokens();
 
@@ -828,19 +798,35 @@ class Fixer
                     $padding = '';
                 }
 
-                $newContent = $padding.ltrim($tokens[$i]['content']);
+                $newContent = $padding . ltrim($tokens[$i]['content']);
             } else {
-                $newContent = $baseIndent.$tokens[$i]['content'];
+                $newContent = $baseIndent . $tokens[$i]['content'];
             }
 
             $this->replaceToken($i, $newContent);
-        }//end for
+        }
 
         if ($useChangeset === true) {
             $this->endChangeset();
         }
+    }
 
-    }//end changeCodeBlockIndent()
 
-
-}//end class
+    /**
+     * Get the sniff code for the current sniff or the class name if the passed class is not a sniff.
+     *
+     * @param string $className Class name.
+     *
+     * @return string
+     */
+    private function getSniffCodeForDebug(string $className)
+    {
+        try {
+            $sniffCode = Common::getSniffCode($className);
+            return $sniffCode;
+        } catch (InvalidArgumentException $e) {
+            // Sniff code could not be determined. This may be an abstract sniff class or a helper class.
+            return $className;
+        }
+    }
+}

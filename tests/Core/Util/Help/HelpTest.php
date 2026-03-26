@@ -3,8 +3,8 @@
  * Tests to verify that the "help" command functions as expected.
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
- * @copyright 2024 Juliette Reinders Folmer. All rights reserved.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2024 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Tests\Core\Util\Help;
@@ -14,6 +14,7 @@ use PHP_CodeSniffer\Util\Help;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
 use ReflectionProperty;
+use TypeError;
 
 /**
  * Test the Help class.
@@ -37,12 +38,8 @@ final class HelpTest extends TestCase
      */
     public function testQaArgumentNamesAreWithinAcceptableBounds()
     {
-        $help = new Help(new ConfigDouble(), []);
-
-        $reflMethod = new ReflectionMethod($help, 'getAllOptions');
-        $reflMethod->setAccessible(true);
-        $allOptions = $reflMethod->invoke($help);
-        $reflMethod->setAccessible(false);
+        $help       = new Help(new ConfigDouble(), []);
+        $allOptions = $this->invokeReflectionMethod($help, 'getAllOptions');
 
         $this->assertGreaterThan(0, count($allOptions), 'No categories found');
 
@@ -68,8 +65,7 @@ final class HelpTest extends TestCase
                 );
             }
         }
-
-    }//end testQaArgumentNamesAreWithinAcceptableBounds()
+    }
 
 
     /**
@@ -81,12 +77,8 @@ final class HelpTest extends TestCase
      */
     public function testQaValidCategoryOptionDefinitions()
     {
-        $help = new Help(new ConfigDouble(), []);
-
-        $reflMethod = new ReflectionMethod($help, 'getAllOptions');
-        $reflMethod->setAccessible(true);
-        $allOptions = $reflMethod->invoke($help);
-        $reflMethod->setAccessible(false);
+        $help       = new Help(new ConfigDouble(), []);
+        $allOptions = $this->invokeReflectionMethod($help, 'getAllOptions');
 
         $this->assertGreaterThan(0, count($allOptions), 'No categories found');
 
@@ -134,34 +126,22 @@ final class HelpTest extends TestCase
                         "Option $name: a description should always be accompanied by an argument"
                     );
                 }
-            }//end foreach
-        }//end foreach
-
-    }//end testQaValidCategoryOptionDefinitions()
+            }
+        }
+    }
 
 
     /**
-     * Test receiving an expected exception when the shortOptions parameter is not passed a string value.
+     * Test receiving an expected exception when the shortOptions parameter is not passed a scalar value.
      *
      * @return void
      */
-    public function testConstructorInvalidArgumentException()
+    public function testConstructorTypeError()
     {
-        $exception = 'InvalidArgumentException';
-        $message   = 'The $shortOptions parameter must be a string';
-
-        if (method_exists($this, 'expectException') === true) {
-            // PHPUnit 5+.
-            $this->expectException($exception);
-            $this->expectExceptionMessage($message);
-        } else {
-            // PHPUnit 4.
-            $this->setExpectedException($exception, $message);
-        }
+        $this->expectException(TypeError::class);
 
         new Help(new ConfigDouble(), [], []);
-
-    }//end testConstructorInvalidArgumentException()
+    }
 
 
     /**
@@ -185,10 +165,7 @@ final class HelpTest extends TestCase
     {
         $help = new Help(new ConfigDouble(), $longOptions, $shortOptions);
 
-        $reflProperty = new ReflectionProperty($help, 'activeOptions');
-        $reflProperty->setAccessible(true);
-        $activeOptions = $reflProperty->getValue($help);
-        $reflProperty->setAccessible(false);
+        $activeOptions = $this->getReflectionProperty($help, 'activeOptions');
 
         // Simplify the value to make it comparible.
         foreach ($activeOptions as $category => $options) {
@@ -196,8 +173,7 @@ final class HelpTest extends TestCase
         }
 
         $this->assertSame($expected, $activeOptions, 'Option count per category does not match');
-
-    }//end testOptionFiltering()
+    }
 
 
     /**
@@ -207,7 +183,7 @@ final class HelpTest extends TestCase
      */
     public static function dataOptionFiltering()
     {
-        $allLongOptions   = explode(',', Help::DEFAULT_LONG_OPTIONS);
+        $allLongOptions   = Help::DEFAULT_LONG_OPTIONS;
         $allLongOptions[] = 'cache';
         $allLongOptions[] = 'no-cache';
         $allLongOptions[] = 'report';
@@ -221,7 +197,7 @@ final class HelpTest extends TestCase
         $allLongOptions[] = 'generator';
         $allLongOptions[] = 'suffix';
 
-        $allShortOptions = Help::DEFAULT_SHORT_OPTIONS.'saem';
+        $allShortOptions = Help::DEFAULT_SHORT_OPTIONS . 'saem';
 
         return [
             'No options'                                      => [
@@ -265,7 +241,7 @@ final class HelpTest extends TestCase
                 ],
             ],
             'Default options only'                            => [
-                'longOptions'  => explode(',', Help::DEFAULT_LONG_OPTIONS),
+                'longOptions'  => Help::DEFAULT_LONG_OPTIONS,
                 'shortOptions' => Help::DEFAULT_SHORT_OPTIONS,
                 'expected'     => [
                     'Scan targets'           => 8,
@@ -302,8 +278,7 @@ final class HelpTest extends TestCase
                 ],
             ],
         ];
-
-    }//end dataOptionFiltering()
+    }
 
 
     /**
@@ -324,10 +299,7 @@ final class HelpTest extends TestCase
     {
         $help = new Help(new ConfigDouble(), $longOptions, $shortOptions);
 
-        $reflProperty = new ReflectionProperty($help, 'activeOptions');
-        $reflProperty->setAccessible(true);
-        $activeOptions = $reflProperty->getValue($help);
-        $reflProperty->setAccessible(false);
+        $activeOptions = $this->getReflectionProperty($help, 'activeOptions');
 
         $this->assertNotEmpty($activeOptions, 'Active options is empty, test is invalid');
 
@@ -344,8 +316,7 @@ final class HelpTest extends TestCase
                 $previousWasSpacer = isset($option['spacer']);
             }
         }
-
-    }//end testOptionFilteringSpacerHandling()
+    }
 
 
     /**
@@ -381,12 +352,11 @@ final class HelpTest extends TestCase
                 'shortOptions' => 'spqm',
             ],
         ];
-
-    }//end dataOptionFilteringSpacerHandling()
+    }
 
 
     /**
-     * Test that if no short/long options are passed, only usage information is displayed (and displayed correctly).
+     * Test that if no short/long options are passed, only usage information is displayed (CS mode).
      *
      * @param array<string> $cliArgs       Command line arguments.
      * @param string        $expectedRegex Regex to validate expected output.
@@ -395,15 +365,56 @@ final class HelpTest extends TestCase
      *
      * @return void
      */
-    public function testDisplayUsage($cliArgs, $expectedRegex)
+    public function testDisplayUsageCS($cliArgs, $expectedRegex)
+    {
+        if (PHP_CODESNIFFER_CBF === true) {
+            $this->markTestSkipped('This test needs CS mode to run');
+        }
+
+        $expectedRegex = str_replace('phpc(bf|s)', 'phpcs', $expectedRegex);
+        $this->verifyDisplayUsage($cliArgs, $expectedRegex);
+    }
+
+
+    /**
+     * Test that if no short/long options are passed, only usage information is displayed (CBF mode).
+     *
+     * @param array<string> $cliArgs       Command line arguments.
+     * @param string        $expectedRegex Regex to validate expected output.
+     *
+     * @dataProvider dataDisplayUsage
+     * @group        CBF
+     *
+     * @return void
+     */
+    public function testDisplayUsageCBF($cliArgs, $expectedRegex)
+    {
+        if (PHP_CODESNIFFER_CBF === false) {
+            $this->markTestSkipped('This test needs CBF mode to run');
+        }
+
+        $expectedRegex = str_replace('phpc(bf|s)', 'phpcbf', $expectedRegex);
+        $this->verifyDisplayUsage($cliArgs, $expectedRegex);
+    }
+
+
+    /**
+     * Helper method to test that if no short/long options are passed, only usage information is displayed
+     * (and displayed correctly).
+     *
+     * @param array<string> $cliArgs       Command line arguments.
+     * @param string        $expectedRegex Regex to validate expected output.
+     *
+     * @return void
+     */
+    private function verifyDisplayUsage($cliArgs, $expectedRegex)
     {
         $help = new Help(new ConfigDouble($cliArgs), []);
 
         $this->expectOutputRegex($expectedRegex);
 
         $help->display();
-
-    }//end testDisplayUsage()
+    }
 
 
     /**
@@ -423,8 +434,7 @@ final class HelpTest extends TestCase
                 'expectedRegex' => '`^\s*\\033\[33mUsage:\\033\[0m\s+phpc(bf|s) \[options\] \<file\|directory\>\s+$`',
             ],
         ];
-
-    }//end dataDisplayUsage()
+    }
 
 
     /**
@@ -449,14 +459,10 @@ final class HelpTest extends TestCase
         $config = new ConfigDouble(["--report-width=$reportWidth", '--no-colors']);
         $help   = new Help($config, $longOptions);
 
-        $reflMethod = new ReflectionMethod($help, 'printCategories');
-        $reflMethod->setAccessible(true);
-        $reflMethod->invoke($help);
-        $reflMethod->setAccessible(false);
+        $this->invokeReflectionMethod($help, 'printCategories');
 
         $this->expectOutputString($expectedOutput);
-
-    }//end testReportWidthCalculations()
+    }
 
 
     /**
@@ -476,44 +482,43 @@ final class HelpTest extends TestCase
             'Report width small: 40; forces report width to minimum width of 60'                                                    => [
                 'reportWidth'    => 40,
                 'longOptions'    => $longOptions,
-                'expectedOutput' => PHP_EOL.'Rule Selection Options:'.PHP_EOL
-                    .'  -e                      Explain a standard by showing the'.PHP_EOL
-                    .'                          names of all the sniffs it'.PHP_EOL
-                    .'                          includes.'.PHP_EOL
-                    .'  --generator=<generator> Show documentation for a standard.'.PHP_EOL
-                    .'                          Use either the "HTML", "Markdown"'.PHP_EOL
-                    .'                          or "Text" generator.'.PHP_EOL,
+                'expectedOutput' => PHP_EOL . 'Rule Selection Options:' . PHP_EOL
+                    . '  -e                      Explain a standard by showing the' . PHP_EOL
+                    . '                          names of all the sniffs it' . PHP_EOL
+                    . '                          includes.' . PHP_EOL
+                    . '  --generator=<generator> Show documentation for a standard.' . PHP_EOL
+                    . '                          Use either the "HTML", "Markdown"' . PHP_EOL
+                    . '                          or "Text" generator.' . PHP_EOL,
             ],
             'Report width is minimum: 60 (= self::MIN_WIDTH)'                                                                       => [
                 'reportWidth'    => Help::MIN_WIDTH,
                 'longOptions'    => $longOptions,
-                'expectedOutput' => PHP_EOL.'Rule Selection Options:'.PHP_EOL
-                    .'  -e                      Explain a standard by showing the'.PHP_EOL
-                    .'                          names of all the sniffs it'.PHP_EOL
-                    .'                          includes.'.PHP_EOL
-                    .'  --generator=<generator> Show documentation for a standard.'.PHP_EOL
-                    .'                          Use either the "HTML", "Markdown"'.PHP_EOL
-                    .'                          or "Text" generator.'.PHP_EOL,
+                'expectedOutput' => PHP_EOL . 'Rule Selection Options:' . PHP_EOL
+                    . '  -e                      Explain a standard by showing the' . PHP_EOL
+                    . '                          names of all the sniffs it' . PHP_EOL
+                    . '                          includes.' . PHP_EOL
+                    . '  --generator=<generator> Show documentation for a standard.' . PHP_EOL
+                    . '                          Use either the "HTML", "Markdown"' . PHP_EOL
+                    . '                          or "Text" generator.' . PHP_EOL,
             ],
             'Report width matches length for one line, not the other: 96; only one should wrap'                                     => [
                 'reportWidth'    => 96,
                 'longOptions'    => $longOptions,
-                'expectedOutput' => PHP_EOL.'Rule Selection Options:'.PHP_EOL
-                    .'  -e                      Explain a standard by showing the names of all the sniffs it includes.'.PHP_EOL
-                    .'  --generator=<generator> Show documentation for a standard. Use either the "HTML", "Markdown"'.PHP_EOL
-                    .'                          or "Text" generator.'.PHP_EOL,
+                'expectedOutput' => PHP_EOL . 'Rule Selection Options:' . PHP_EOL
+                    . '  -e                      Explain a standard by showing the names of all the sniffs it includes.' . PHP_EOL
+                    . '  --generator=<generator> Show documentation for a standard. Use either the "HTML", "Markdown"' . PHP_EOL
+                    . '                          or "Text" generator.' . PHP_EOL,
             ],
             'Report width matches longest line: 119; the messages should not wrap and there should be no stray new line at the end' => [
                 'reportWidth'    => 119,
                 'longOptions'    => $longOptions,
-                'expectedOutput' => PHP_EOL.'Rule Selection Options:'.PHP_EOL
-                    .'  -e                      Explain a standard by showing the names of all the sniffs it includes.'.PHP_EOL
-                    .'  --generator=<generator> Show documentation for a standard. Use either the "HTML", "Markdown" or "Text" generator.'.PHP_EOL,
+                'expectedOutput' => PHP_EOL . 'Rule Selection Options:' . PHP_EOL
+                    . '  -e                      Explain a standard by showing the names of all the sniffs it includes.' . PHP_EOL
+                    . '  --generator=<generator> Show documentation for a standard. Use either the "HTML", "Markdown" or "Text" generator.' . PHP_EOL,
             ],
         ];
         // phpcs:enable
-
-    }//end dataReportWidthCalculations()
+    }
 
 
     /**
@@ -528,16 +533,11 @@ final class HelpTest extends TestCase
      */
     public function testColorizeVariableInput($input, $expected)
     {
-        $help = new Help(new ConfigDouble(), []);
-
-        $reflMethod = new ReflectionMethod($help, 'colorizeVariableInput');
-        $reflMethod->setAccessible(true);
-        $result = $reflMethod->invoke($help, $input);
-        $reflMethod->setAccessible(false);
+        $help   = new Help(new ConfigDouble(), []);
+        $result = $this->invokeReflectionMethod($help, 'colorizeVariableInput', $input);
 
         $this->assertSame($expected, $result);
-
-    }//end testColorizeVariableInput()
+    }
 
 
     /**
@@ -577,8 +577,7 @@ final class HelpTest extends TestCase
                 'expected' => "Start \033[36m<This <is> text>\033[32m end",
             ],
         ];
-
-    }//end dataColorizeVariableInput()
+    }
 
 
     /**
@@ -596,24 +595,12 @@ final class HelpTest extends TestCase
         $config = new ConfigDouble(['--no-colors']);
         $help   = new Help($config, []);
 
-        $reflProperty = new ReflectionProperty($help, 'activeOptions');
-        $reflProperty->setAccessible(true);
-        $reflProperty->setValue($help, ['cat' => $input]);
-        $reflProperty->setAccessible(false);
-
-        $reflMethod = new ReflectionMethod($help, 'setMaxOptionNameLength');
-        $reflMethod->setAccessible(true);
-        $reflMethod->invoke($help);
-        $reflMethod->setAccessible(false);
-
-        $reflMethod = new ReflectionMethod($help, 'printCategoryOptions');
-        $reflMethod->setAccessible(true);
-        $reflMethod->invoke($help, $input);
-        $reflMethod->setAccessible(false);
+        $this->setReflectionProperty($help, 'activeOptions', ['cat' => $input]);
+        $this->invokeReflectionMethod($help, 'setMaxOptionNameLength');
+        $this->invokeReflectionMethod($help, 'printCategoryOptions', $input);
 
         $this->expectOutputRegex($expectedRegex['no-color']);
-
-    }//end testPrintCategoryOptionsNoColor()
+    }
 
 
     /**
@@ -631,24 +618,12 @@ final class HelpTest extends TestCase
         $config = new ConfigDouble(['--colors']);
         $help   = new Help($config, []);
 
-        $reflProperty = new ReflectionProperty($help, 'activeOptions');
-        $reflProperty->setAccessible(true);
-        $reflProperty->setValue($help, ['cat' => $input]);
-        $reflProperty->setAccessible(false);
-
-        $reflMethod = new ReflectionMethod($help, 'setMaxOptionNameLength');
-        $reflMethod->setAccessible(true);
-        $reflMethod->invoke($help);
-        $reflMethod->setAccessible(false);
-
-        $reflMethod = new ReflectionMethod($help, 'printCategoryOptions');
-        $reflMethod->setAccessible(true);
-        $reflMethod->invoke($help, $input);
-        $reflMethod->setAccessible(false);
+        $this->setReflectionProperty($help, 'activeOptions', ['cat' => $input]);
+        $this->invokeReflectionMethod($help, 'setMaxOptionNameLength');
+        $this->invokeReflectionMethod($help, 'printCategoryOptions', $input);
 
         $this->expectOutputRegex($expectedRegex['color']);
-
-    }//end testPrintCategoryOptionsColor()
+    }
 
 
     /**
@@ -676,20 +651,20 @@ final class HelpTest extends TestCase
                     'long-option-multi-line-description' => [
                         'argument'    => '--something=<var>',
                         'description' => 'Proin sit amet malesuada libero, finibus bibendum tortor. Nulla vitae quam nec orci finibus pharetra.'
-                            ."\n".'Nam eget blandit dui.',
+                            . "\n" . 'Nam eget blandit dui.',
                     ],
                 ],
                 'expectedRegex' => [
-                    'no-color' => '`^ {'.$indentLength.'}-a {15} {'.$gutterLength.'}Lorem ipsum dolor sit amet, consectetur adipiscing elit\.\R'
-                        .'\R'
-                        .' {'.$indentLength.'}--something=<var> {'.$gutterLength.'}Proin sit amet malesuada libero, finibus bibendum tortor\.\R'
-                        .' {'.($indentLength + 17).'} {'.$gutterLength.'}Nulla vitae quam nec orci finibus pharetra\.\R'
-                        .' {'.($indentLength + 17).'} {'.$gutterLength.'}Nam eget blandit dui\.\R$`',
-                    'color'    => '`^ {'.$indentLength.'}\\033\[32m-a {15}\\033\[0m {'.$gutterLength.'}Lorem ipsum dolor sit amet, consectetur adipiscing elit\.\R'
-                        .'\R'
-                        .' {'.$indentLength.'}\\033\[32m--something=\\033\[36m<var>\\033\[32m\\033\[0m {'.$gutterLength.'}Proin sit amet malesuada libero, finibus bibendum tortor\.\R'
-                        .' {'.($indentLength + 17).'} {'.$gutterLength.'}Nulla vitae quam nec orci finibus pharetra\.\R'
-                        .' {'.($indentLength + 17).'} {'.$gutterLength.'}Nam eget blandit dui\.\R$`',
+                    'no-color' => '`^ {' . $indentLength . '}-a {15} {' . $gutterLength . '}Lorem ipsum dolor sit amet, consectetur adipiscing elit\.\R'
+                        . '\R'
+                        . ' {' . $indentLength . '}--something=<var> {' . $gutterLength . '}Proin sit amet malesuada libero, finibus bibendum tortor\.\R'
+                        . ' {' . ($indentLength + 17) . '} {' . $gutterLength . '}Nulla vitae quam nec orci finibus pharetra\.\R'
+                        . ' {' . ($indentLength + 17) . '} {' . $gutterLength . '}Nam eget blandit dui\.\R$`',
+                    'color'    => '`^ {' . $indentLength . '}\\033\[32m-a {15}\\033\[0m {' . $gutterLength . '}Lorem ipsum dolor sit amet, consectetur adipiscing elit\.\R'
+                        . '\R'
+                        . ' {' . $indentLength . '}\\033\[32m--something=\\033\[36m<var>\\033\[32m\\033\[0m {' . $gutterLength . '}Proin sit amet malesuada libero, finibus bibendum tortor\.\R'
+                        . ' {' . ($indentLength + 17) . '} {' . $gutterLength . '}Nulla vitae quam nec orci finibus pharetra\.\R'
+                        . ' {' . ($indentLength + 17) . '} {' . $gutterLength . '}Nam eget blandit dui\.\R$`',
                 ],
             ],
             'Input: text, arg, text; multi-line text gets wrapped'            => [
@@ -706,20 +681,80 @@ final class HelpTest extends TestCase
                     ],
                 ],
                 'expectedRegex' => [
-                    'no-color' => '`^ {'.$indentLength.'}Lorem ipsum dolor sit amet, consectetur adipiscing elit\.\R'
-                        .' {'.$indentLength.'}--something {'.$gutterLength.'}Fusce dapibus sodales est eu sodales\.\R'
-                        .' {'.$indentLength.'}Maecenas vulputate ligula vel feugiat finibus. Mauris sem dui, pretium in\R'
-                        .' {'.$indentLength.'}turpis auctor, consectetur ultrices lorem\.\R$`',
-                    'color'    => '`^ {'.$indentLength.'}Lorem ipsum dolor sit amet, consectetur adipiscing elit\.\R'
-                        .' {'.$indentLength.'}\\033\[32m--something\\033\[0m {'.$gutterLength.'}Fusce dapibus sodales est eu sodales\.\R'
-                        .' {'.$indentLength.'}Maecenas vulputate ligula vel feugiat finibus. Mauris sem dui, pretium in\R'
-                        .' {'.$indentLength.'}turpis auctor, consectetur ultrices lorem\.\R$`',
+                    'no-color' => '`^ {' . $indentLength . '}Lorem ipsum dolor sit amet, consectetur adipiscing elit\.\R'
+                        . ' {' . $indentLength . '}--something {' . $gutterLength . '}Fusce dapibus sodales est eu sodales\.\R'
+                        . ' {' . $indentLength . '}Maecenas vulputate ligula vel feugiat finibus. Mauris sem dui, pretium in\R'
+                        . ' {' . $indentLength . '}turpis auctor, consectetur ultrices lorem\.\R$`',
+                    'color'    => '`^ {' . $indentLength . '}Lorem ipsum dolor sit amet, consectetur adipiscing elit\.\R'
+                        . ' {' . $indentLength . '}\\033\[32m--something\\033\[0m {' . $gutterLength . '}Fusce dapibus sodales est eu sodales\.\R'
+                        . ' {' . $indentLength . '}Maecenas vulputate ligula vel feugiat finibus. Mauris sem dui, pretium in\R'
+                        . ' {' . $indentLength . '}turpis auctor, consectetur ultrices lorem\.\R$`',
                 ],
             ],
         ];
         // phpcs:enable
+    }
 
-    }//end dataPrintCategoryOptions()
+
+    /**
+     * Test Helper: invoke a reflected method which is not publicly accessible.
+     *
+     * @param \PHP_CodeSniffer\Util\Help $help       Instance of a Help object.
+     * @param string                     $methodName The name of the method to invoke.
+     * @param mixed                      $params     Optional. Parameters to pass to the method invocation.
+     *
+     * @return mixed
+     */
+    private function invokeReflectionMethod(Help $help, $methodName, $params = null)
+    {
+        $reflMethod = new ReflectionMethod($help, $methodName);
+        (PHP_VERSION_ID < 80100) && $reflMethod->setAccessible(true);
+
+        if ($params === null) {
+            $returnValue = $reflMethod->invoke($help);
+        } else {
+            $returnValue = $reflMethod->invoke($help, $params);
+        }
+
+        (PHP_VERSION_ID < 80100) && $reflMethod->setAccessible(false);
+
+        return $returnValue;
+    }
 
 
-}//end class
+    /**
+     * Test Helper: retrieve the value of property which is not publicly accessible.
+     *
+     * @param \PHP_CodeSniffer\Util\Help $help        Instance of a Help object.
+     * @param string                     $properyName The name of the property to retrieve.
+     *
+     * @return mixed
+     */
+    private function getReflectionProperty(Help $help, $properyName)
+    {
+        $reflProperty = new ReflectionProperty($help, $properyName);
+        (PHP_VERSION_ID < 80100) && $reflProperty->setAccessible(true);
+        $returnValue = $reflProperty->getValue($help);
+        (PHP_VERSION_ID < 80100) && $reflProperty->setAccessible(false);
+
+        return $returnValue;
+    }
+
+
+    /**
+     * Test Helper: set the value of property which is not publicly accessible.
+     *
+     * @param \PHP_CodeSniffer\Util\Help $help        Instance of a Help object.
+     * @param string                     $properyName The name of the property to set.
+     * @param mixed                      $value       The value to set.
+     *
+     * @return void
+     */
+    private function setReflectionProperty(Help $help, $properyName, $value)
+    {
+        $reflProperty = new ReflectionProperty($help, $properyName);
+        (PHP_VERSION_ID < 80100) && $reflProperty->setAccessible(true);
+        $reflProperty->setValue($help, $value);
+        (PHP_VERSION_ID < 80100) && $reflProperty->setAccessible(false);
+    }
+}

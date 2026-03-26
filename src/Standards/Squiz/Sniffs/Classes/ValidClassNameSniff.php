@@ -3,8 +3,9 @@
  * Ensures classes are in camel caps, and the first letter is capitalised.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Classes;
@@ -12,6 +13,7 @@ namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Classes;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\Tokens;
 
 class ValidClassNameSniff implements Sniff
 {
@@ -30,8 +32,7 @@ class ValidClassNameSniff implements Sniff
             T_TRAIT,
             T_ENUM,
         ];
-
-    }//end register()
+    }
 
 
     /**
@@ -43,14 +44,12 @@ class ValidClassNameSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
         if (isset($tokens[$stackPtr]['scope_opener']) === false) {
-            $error = 'Possible parse error: %s missing opening or closing brace';
-            $data  = [$tokens[$stackPtr]['content']];
-            $phpcsFile->addWarning($error, $stackPtr, 'MissingBrace', $data);
+            // Parse error or live coding.
             return;
         }
 
@@ -58,8 +57,8 @@ class ValidClassNameSniff implements Sniff
         // simply look for the first T_STRING because a class name
         // starting with the number will be multiple tokens.
         $opener    = $tokens[$stackPtr]['scope_opener'];
-        $nameStart = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), $opener, true);
-        $nameEnd   = $phpcsFile->findNext([T_WHITESPACE, T_COLON], $nameStart, $opener);
+        $nameStart = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), $opener, true);
+        $nameEnd   = $phpcsFile->findNext((Tokens::EMPTY_TOKENS + [T_COLON => T_COLON]), $nameStart, $opener);
         if ($nameEnd === false) {
             $name = $tokens[$nameStart]['content'];
         } else {
@@ -75,13 +74,10 @@ class ValidClassNameSniff implements Sniff
                 $type,
                 $name,
             ];
-            $phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $data);
+            $phpcsFile->addError($error, $nameStart, 'NotPascalCase', $data);
             $phpcsFile->recordMetric($stackPtr, 'PascalCase class name', 'no');
         } else {
             $phpcsFile->recordMetric($stackPtr, 'PascalCase class name', 'yes');
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

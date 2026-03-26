@@ -2,14 +2,14 @@
 
 <div aria-hidden="true">
 
-[![Latest Stable Version](http://poser.pugx.org/phpcsstandards/php_codesniffer/v)](https://github.com/PHPCSStandards/PHP_CodeSniffer/releases)
-[![Validate](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/validate.yml/badge.svg?branch=master)](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/validate.yml)
-[![Test](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/test.yml/badge.svg?branch=master)][GHA-test]
-[![Coverage Status](https://coveralls.io/repos/github/PHPCSStandards/PHP_CodeSniffer/badge.svg?branch=master)](https://coveralls.io/github/PHPCSStandards/PHP_CodeSniffer?branch=master)
-[![License](http://poser.pugx.org/phpcsstandards/php_codesniffer/license)](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt)
+[![Latest Stable Version](https://img.shields.io/github/v/release/PHPCSStandards/PHP_CodeSniffer?label=Stable)](https://github.com/PHPCSStandards/PHP_CodeSniffer/releases)
+[![Validate](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/validate.yml/badge.svg?branch=4.x)](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/validate.yml)
+[![Test](https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/test.yml/badge.svg?branch=4.x)][GHA-test]
+[![Coverage Status](https://coveralls.io/repos/github/PHPCSStandards/PHP_CodeSniffer/badge.svg?branch=4.x)](https://coveralls.io/github/PHPCSStandards/PHP_CodeSniffer?branch=4.x)
+[![License](https://img.shields.io/github/license/PHPCSStandards/PHP_CodeSniffer)](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt)
 
-![Minimum PHP Version](https://img.shields.io/packagist/php-v/squizlabs/php_codesniffer.svg?maxAge=3600)
-[![Tested on PHP 5.4 to 8.3](https://img.shields.io/badge/tested%20on-PHP%205.4%20|%205.5%20|%205.6%20|%207.0%20|%207.1%20|%207.2%20|%207.3%20|%207.4%20|%208.0%20|%208.1%20|%208.2%20|%208.3-brightgreen.svg?maxAge=2419200)][GHA-test]
+![Minimum PHP Version](https://img.shields.io/packagist/dependency-v/squizlabs/php_codesniffer/php.svg)
+[![Tested on PHP 7.2 to 8.5](https://img.shields.io/badge/tested%20on-PHP%207.2%20|%207.3%20|%207.4%20|%208.0%20|%208.1%20|%208.2%20|%208.3%20|%208.4%20|%208.5-brightgreen.svg?maxAge=2419200)][GHA-test]
 
 [GHA-test]: https://github.com/PHPCSStandards/PHP_CodeSniffer/actions/workflows/test.yml
 
@@ -20,12 +20,12 @@
 
 ## About
 
-PHP_CodeSniffer is a set of two PHP scripts; the main `phpcs` script that tokenizes PHP, JavaScript and CSS files to detect violations of a defined coding standard, and a second `phpcbf` script to automatically correct coding standard violations. PHP_CodeSniffer is an essential development tool that ensures your code remains clean and consistent.
+PHP_CodeSniffer is a set of two PHP scripts; the main `phpcs` script that tokenizes PHP files to detect violations of a defined coding standard, and a second `phpcbf` script to automatically correct coding standard violations. PHP_CodeSniffer is an essential development tool that ensures your code remains clean and consistent.
 
 
 ## Requirements
 
-PHP_CodeSniffer requires PHP version 5.4.0 or greater, although individual sniffs may have additional requirements such as external applications and scripts. See the [Configuration Options manual page](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Configuration-Options) for a list of these requirements.
+PHP_CodeSniffer requires PHP version 7.2.0 or greater, although individual sniffs may have additional requirements such as external applications and scripts. See the [Configuration Options manual page](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Configuration-Options) for a list of these requirements.
 
 If you're using PHP_CodeSniffer as part of a team, or you're running it on a [CI](https://en.wikipedia.org/wiki/Continuous_integration) server, you may want to configure your project's settings [using a configuration file](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Advanced-Usage#using-a-default-configuration-file).
 
@@ -48,7 +48,9 @@ php phpcbf.phar -h
 ```
 
 These Phars are signed with the official Release key for PHPCS with the
-fingerprint `689D AD77 8FF0 8760 E046 228B A978 2203 05CD 5C32`.
+fingerprint `D91D 8696 3AF3 A29B 6520 4622 97B0 2DD8 E507 1466`.
+
+As of PHP_CodeSniffer 3.10.3, the provenance of PHAR files associated with a release can be verified via [GitHub Artifact Attestations](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations) using the [GitHub CLI tool](https://cli.github.com/) with the following command: `gh attestation verify [phpcs|phpcbf].phar -o PHPCSStandards`.
 
 ### Composer
 If you use Composer, you can install PHP_CodeSniffer system-wide with the following command:
@@ -62,7 +64,7 @@ Or alternatively, include a dependency for `squizlabs/php_codesniffer` in your `
 ```json
 {
     "require-dev": {
-        "squizlabs/php_codesniffer": "^3.0"
+        "squizlabs/php_codesniffer": "^4.0"
     }
 }
 ```
@@ -76,8 +78,8 @@ You will then be able to run PHP_CodeSniffer from the vendor bin directory:
 ### Phive
 If you use Phive, you can install PHP_CodeSniffer as a project tool using the following commands:
 ```bash
-phive install --trust-gpg-keys 689DAD778FF08760E046228BA978220305CD5C32 phpcs
-phive install --trust-gpg-keys 689DAD778FF08760E046228BA978220305CD5C32 phpcbf
+phive install --trust-gpg-keys D91D86963AF3A29B6520462297B02DD8E5071466 phpcs
+phive install --trust-gpg-keys D91D86963AF3A29B6520462297B02DD8E5071466 phpcbf
 ```
 You will then be able to run PHP_CodeSniffer from the `tools` directory:
 ```bash
@@ -96,7 +98,7 @@ php bin/phpcbf -h
 
 ## Getting Started
 
-The default coding standard used by PHP_CodeSniffer is the PEAR coding standard. To check a file against the PEAR coding standard, simply specify the file's location:
+The default coding standard used by PHP_CodeSniffer is the PSR12 coding standard. To check a file against the PSR12 coding standard, simply specify the file's location:
 ```bash
 phpcs /path/to/code/myfile.php
 ```
@@ -104,9 +106,9 @@ Or if you wish to check an entire directory you can specify the directory locati
 ```bash
 phpcs /path/to/code-directory
 ```
-If you wish to check your code against the PSR-12 coding standard, use the `--standard` command line argument:
+If you wish to check your code against the PEAR coding standard, use the `--standard` command line argument:
 ```bash
-phpcs --standard=PSR12 /path/to/code-directory
+phpcs --standard=PEAR /path/to/code-directory
 ```
 
 If PHP_CodeSniffer finds any coding standard errors, a report will be shown after running the command.

@@ -18,7 +18,8 @@ Thank you for your interest in contributing to PHP_CodeSniffer!
     * [Finding Something to Work on](#finding-something-to-work-on)
     * [Getting Started](#getting-started)
     * [While Working on a Patch](#while-working-on-a-patch)
-    * [Writing Tests](#writing-tests)
+    * [Writing Unit/Integration Tests](#writing-unitintegration-tests)
+    * [Writing End-to-End Tests](#writing-end-to-end-tests)
     * [Submitting Your Pull Request](#submitting-your-pull-request)
 * [Licensing](#licensing)
 
@@ -31,7 +32,7 @@ already and if so, comment in that issue if you have additional information, ins
 Before reporting a bug, you should check what sniff an error is coming from.
 Running `phpcs` with the `-s` flag will show the name of the sniff for each error.
 
-If the error code starts with anything other than `Generic`, `MySource`, `PEAR`, `PSR1`, `PSR2`, `PSR12`, `Squiz` or `Zend`,
+If the error code starts with anything other than `Generic`, `PEAR`, `PSR1`, `PSR2`, `PSR12`, `Squiz` or `Zend`,
 the error is likely coming from an external PHP_CodeSniffer standard.
 **Please report bugs for externally maintained sniffs to the appropriate repository.**
 
@@ -78,7 +79,7 @@ To find bugs which need triage, look for issues and PRs with the
     and suggest closing the issue.
 
 Additionally, for older issues:
-* Check whether an issue still exists or has been fixed in `master` since the issue was initially reported.
+* Check whether an issue still exists or has been fixed since the issue was initially reported.
 * If it has been fixed, document (in a comment) which commit/PR was responsible for fixing the issue
     and suggest closing the ticket.
 
@@ -173,7 +174,7 @@ will be pinged (cc-ed) to gather their thoughts on the topic.
 
 > [!TIP]
 > This cc-list list is public and
-> [maintained in a markdown file](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/.github/community-cc-list.md).
+> [maintained in a markdown file](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/.github/community-cc-list.md).
 >
 > To add or remove yourself to/from this list, submit a PR to the repo updating the `community-cc-list.md` file.
 > PRs adding/removing _other people_ to/from the list will only be merged if the people being added/removed leave a comment
@@ -244,7 +245,7 @@ When in doubt how to proceed with a ticket, feel free to leave a comment with sp
 
 1. Fork/clone the repository.
 2. Run `composer install`.
-3. Create a new branch off the `master` branch to hold your patch.
+3. Create a new branch off the `4.x` branch to hold your patch.
     If there is an open issue associated with your patch, including the issue number in the branch name is good practice.
 
 
@@ -253,22 +254,24 @@ When in doubt how to proceed with a ticket, feel free to leave a comment with sp
 Please make sure your code conforms to the PHPCS coding standard, is covered by tests and that all the PHP_CodeSniffer
 unit tests still pass.
 
-Also, please make sure your code is compatible with the PHP_CodeSniffer minimum supported PHP version, PHP 5.4.
+Also, please make sure your code is compatible with the PHP_CodeSniffer minimum supported PHP version, PHP 7.2.
 
 To help you with this, a number of convenience scripts are available:
 * `composer check-all` will run the `cs` + `test` checks in one go.
 * `composer cs` will check for code style violations.
 * `composer cbf` will run the autofixers for code style violations.
-* `composer test` will run the unit tests.
-* `composer coverage` will run the unit tests with code coverage and show a text summary.
+* `composer test` will run the unit tests when using PHP 8.1+/PHPUnit 10+.
+* `composer test-lte9` will run the unit tests when using PHP < 8.1/PHPUnit <= 9.
+* `composer coverage` will run the unit tests with code coverage and show a text summary (PHP 8.1+/PHPUnit 10+).
+* `composer coverage-lte9` will run the unit tests with code coverage and show a text summary (PHP < 8.1/PHPUnit <= 9).
 * `composer coverage-local` will run the unit tests with code coverage and generate an HTML coverage report,
-    which will be placed in a `build/coverage-html` subdirectory.
+    which will be placed in a `build/coverage-html` subdirectory (PHP 8.1+/PHPUnit 10+).
+* `composer coverage-lte9-local` will run the unit tests with code coverage and generate an HTML coverage report,
+    which will be placed in a `build/coverage-html` subdirectory (PHP < 8.1/PHPUnit <= 9).
 * `composer build` will build the phpcs.phar and phpcbf.phar files.
 
-N.B.: You can ignore any skipped tests as these are for external tools.
 
-
-### Writing Tests
+### Writing Unit/Integration Tests
 
 Tests for the PHP_CodeSniffer engine can be found in the `tests/Core` directory.
 Tests for individual sniffs can be found in the `src/Standards/[StandardName]/Tests/[Category]/` directory.
@@ -339,6 +342,77 @@ Example:
 for
 ```
 
+#### Tests covering code which has OS-specific behaviour
+
+Most code in PHP_CodeSniffer is operating system agnostic.
+However, there are a few places which include OS-specific conditions, most notably for Windows.
+
+Tests which cover code which have Windows specific conditions should be marked with a `@group Windows` annotation to allow for running those tests separately/selectively in CI.
+
+#### Tests covering code which has CS/CBF specific behaviour
+
+There are a few places in PHPCS where code uses a global `PHP_CODESNIFFER_CBF` constant to determine what to do.
+This makes testing this code more complicated.
+
+Tests which will only work correctly when `PHP_CODESNIFFER_CBF === false` should get the following test skip condition at the top of the test method:
+```php
+if (PHP_CODESNIFFER_CBF === true) {
+    $this->markTestSkipped('This test needs CS mode to run');
+}
+```
+
+Tests which are specifically intended to cover code run when `PHP_CODESNIFFER_CBF === true` should:
+1. Be annotated with `@group CBF`.
+2. Have a test skip condition at the top of the test method like so:
+    ```php
+    if (PHP_CODESNIFFER_CBF === false) {
+        $this->markTestSkipped('This test needs CBF mode to run');
+    }
+    ```
+
+By default, the tests are run with the `PHP_CODESNIFFER_CBF` constant set to `false` and tests in the `@group CBF` will not be run.
+
+To run the tests specific to the use of `PHP_CODESNIFFER_CBF === true`:
+1. Set `<php><env name="PHP_CODESNIFFER_CBF" value="1"/></php>` in a `phpunit.xml` file or set the ENV variable on an OS-level.
+2. Run the tests like so:
+    ```bash
+    vendor/bin/phpunit --group CBF --exclude-group nothing
+    ```
+
+#### Other notes about writing unit/integration tests
+
+* When using data providers, define them immediately below the corresponding test method.
+* When a test method has only one data provider, it is considered best practice to closely couple the test and data provider methods via their names. I.e. the data provider's name should match the test method name, replacing the "test" prefix with "data". For example, the data provider for a method named `testSomething()` should be `dataSomething()`.
+* The `Config` class uses a number of static properties and can have a performance impact on the tests too.
+    To get round both these issues, use the `ConfigDouble` class instead.
+    Generally speaking, only tests which test the behaviour of the `Config` class itself where it relates to the static properties, should use the real `Config` class for testing.
+    In such cases, the `PHP_CodeSniffer\Tests\Core\Config\AbstractRealConfigTestCase` should be used as the base test class.
+* Tests for the `Runner` class often can't create their own `Config` object in the tests, so run into the same issue.
+    Those tests should use the `PHP_CodeSniffer\Tests\Core\Runner\AbstractRunnerTestCase` base class, which will ensure the Config is clean.
+* Testing output sent to `stdErr` via the `StatusWriter` class is not possible by default using PHPUnit.
+    A work-around is available, however, as the `StatusWriter` is a "static class", that work-around involves static properties which need to be (re-)set between tests to ensure tests are pure.
+    So, to test output sent to `stdErr` via the `StatusWriter`, use the `PHP_CodeSniffer\Tests\Core\AbstractWriterTestCase` base class if your tests do not need their own `setUp()` and `tearDown()` methods.
+    If your tests **_do_** need their own `setUp()` and `tearDown()` methods, or would benefit more from using one of the other base TestCase classes, use the `PHP_CodeSniffer\Tests\Core\StatusWriterTestHelper` trait and call the appropriate setup/teardown helper methods from within your own `setUp()` and `tearDown()` methods.
+    Tests using the `AbstractWriterTestCase` class or the trait, also get access to the following test helpers for use when testing output sent to `stdErr`: `expectNoStdoutOutput()`, `assertStderrOutputSameString($expected)` and `assertStderrOutputMatchesRegex($regex)`.
+    Generally speaking, it is a good idea to always add a call to `expectNoStdoutOutput()` in any test using the `assertStderrOutput*()` assertions to make sure there is no output leaking to `stdOut`.
+
+
+### Writing End-to-End Tests
+
+Bash-based end-to-end tests can be written using the [Bashunit](https://bashunit.typeddevs.com/) test tooling using version 0.26.0 or higher.
+
+To install bashunit, follow the [installation guide](https://bashunit.typeddevs.com/installation).
+
+You can then run the bashunit tests on Linux/Mac/WSL, like so:
+```bash
+./lib/bashunit -p tests/EndToEnd
+```
+
+> Note: these tests will not run in the Windows native CMD shell. When on Windows, either use WSL or use the "git bash" shell.
+
+When writing end-to-end tests, please use fixtures for the "files under scan" to make the tests stable.
+These fixtures can be placed in the `tests/EndToEnd/Fixtures` subdirectory.
+
 
 ### Submitting Your Pull Request
 
@@ -405,6 +479,6 @@ Submitting a (largely) AI-generated PR will lead to you being banned from the re
 ## Licensing
 
 By contributing code to this repository, you agree to license your code for use under the
-[BSD-3-Clause license](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt).
+[BSD-3-Clause license](https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt).
 
 [issuelist]: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues

@@ -3,8 +3,9 @@
  * Ensures there is a single space after a NOT operator.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting;
@@ -15,16 +16,6 @@ use PHP_CodeSniffer\Util\Tokens;
 
 class SpaceAfterNotSniff implements Sniff
 {
-
-    /**
-     * A list of tokenizers this sniff supports.
-     *
-     * @var array
-     */
-    public $supportedTokenizers = [
-        'PHP',
-        'JS',
-    ];
 
     /**
      * The number of spaces desired after the NOT operator.
@@ -49,8 +40,7 @@ class SpaceAfterNotSniff implements Sniff
     public function register()
     {
         return [T_BOOLEAN_NOT];
-
-    }//end register()
+    }
 
 
     /**
@@ -62,7 +52,7 @@ class SpaceAfterNotSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens         = $phpcsFile->getTokens();
         $this->spacing  = (int) $this->spacing;
@@ -71,7 +61,7 @@ class SpaceAfterNotSniff implements Sniff
             $pluralizeSpace = '';
         }
 
-        $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
         if ($nextNonEmpty === false) {
             return;
         }
@@ -100,7 +90,7 @@ class SpaceAfterNotSniff implements Sniff
         $found = 0;
         if ($tokens[$stackPtr]['line'] !== $tokens[$nextNonEmpty]['line']) {
             $found = 'newline';
-        } else if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
+        } elseif ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
             $found = $tokens[($stackPtr + 1)]['length'];
         }
 
@@ -136,8 +126,5 @@ class SpaceAfterNotSniff implements Sniff
                 $phpcsFile->fixer->endChangeset();
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

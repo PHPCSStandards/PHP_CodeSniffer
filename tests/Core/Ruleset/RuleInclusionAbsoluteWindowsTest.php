@@ -4,7 +4,8 @@
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2019 Juliette Reinders Folmer. All rights reserved.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Tests\Core\Ruleset;
@@ -16,7 +17,9 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests for the \PHP_CodeSniffer\Ruleset class using a Windows-style absolute path to include a sniff.
  *
- * @covers \PHP_CodeSniffer\Ruleset
+ * @covers   \PHP_CodeSniffer\Ruleset
+ * @requires OSFAMILY Windows
+ * @group    Windows
  */
 final class RuleInclusionAbsoluteWindowsTest extends TestCase
 {
@@ -46,18 +49,12 @@ final class RuleInclusionAbsoluteWindowsTest extends TestCase
     /**
      * Initialize the config and ruleset objects.
      *
-     * @before
-     *
      * @return void
      */
-    public function initializeConfigAndRuleset()
+    protected function setUp(): void
     {
-        if (DIRECTORY_SEPARATOR === '/') {
-            $this->markTestSkipped('Windows specific test');
-        }
-
-        $this->standard = __DIR__.'/'.basename(__FILE__, '.php').'.xml';
-        $repoRootDir    = dirname(dirname(dirname(__DIR__)));
+        $this->standard = __DIR__ . '/' . basename(__FILE__, '.php') . '.xml';
+        $repoRootDir    = dirname(__DIR__, 3);
 
         // On-the-fly adjust the ruleset test file to be able to test sniffs included with absolute paths.
         $contents       = file_get_contents($this->standard);
@@ -72,24 +69,18 @@ final class RuleInclusionAbsoluteWindowsTest extends TestCase
         // Initialize the config and ruleset objects for the test.
         $config        = new ConfigDouble(["--standard={$this->standard}"]);
         $this->ruleset = new Ruleset($config);
-
-    }//end initializeConfigAndRuleset()
+    }
 
 
     /**
      * Reset ruleset file.
      *
-     * @after
-     *
      * @return void
      */
-    public function resetRuleset()
+    protected function tearDown(): void
     {
-        if (DIRECTORY_SEPARATOR !== '/') {
-            file_put_contents($this->standard, $this->contents);
-        }
-
-    }//end resetRuleset()
+        file_put_contents($this->standard, $this->contents);
+    }
 
 
     /**
@@ -113,8 +104,5 @@ final class RuleInclusionAbsoluteWindowsTest extends TestCase
             '10',
             $this->ruleset->sniffs['PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterCastSniff']->spacing
         );
-
-    }//end testWindowsStylePathRuleInclusion()
-
-
-}//end class
+    }
+}

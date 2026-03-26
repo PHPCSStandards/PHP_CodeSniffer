@@ -4,19 +4,20 @@
  *
  * @author    Manuel Pichler <mapi@manuel-pichler.de>
  * @copyright 2007-2014 Manuel Pichler. All rights reserved.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\CodeAnalysis;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the EmptyStatement sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff
  */
-final class EmptyStatementUnitTest extends AbstractSniffUnitTest
+final class EmptyStatementUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -46,8 +47,7 @@ final class EmptyStatementUnitTest extends AbstractSniffUnitTest
             72 => 2,
             74 => 1,
         ];
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -61,8 +61,5 @@ final class EmptyStatementUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}

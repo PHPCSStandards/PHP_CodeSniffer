@@ -4,7 +4,8 @@
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2019 Juliette Reinders Folmer. All rights reserved.
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace;
@@ -39,8 +40,7 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
     public function register()
     {
         return [T_ELLIPSIS];
-
-    }//end register()
+    }
 
 
     /**
@@ -52,7 +52,7 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, int $stackPtr)
     {
         $tokens         = $phpcsFile->getTokens();
         $this->spacing  = (int) $this->spacing;
@@ -61,7 +61,7 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
             $pluralizeSpace = '';
         }
 
-        $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+        $nextNonEmpty = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
         if ($nextNonEmpty === false) {
             return;
         }
@@ -104,7 +104,7 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
         $found = 0;
         if ($tokens[$stackPtr]['line'] !== $tokens[$nextNonEmpty]['line']) {
             $found = 'newline';
-        } else if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
+        } elseif ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
             $found = $tokens[($stackPtr + 1)]['length'];
         }
 
@@ -125,7 +125,7 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
         if ($this->spacing !== 0) {
             if ($found === 0) {
                 $errorCode = 'NoSpace';
-            } else if ($found !== 'newline' && $found < $this->spacing) {
+            } elseif ($found !== 'newline' && $found < $this->spacing) {
                 $errorCode = 'TooLittleSpace';
             }
         }
@@ -152,8 +152,5 @@ class SpreadOperatorSpacingAfterSniff implements Sniff
                 $phpcsFile->fixer->endChangeset();
             }
         }
-
-    }//end process()
-
-
-}//end class
+    }
+}

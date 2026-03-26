@@ -134,3 +134,17 @@ list ($c, $d) = explode(',', '1,2');
 <?= $a * $b ?>
 <?= [$c, $d] = explode(',', '1,2');
 ?>
+<?php
+
+// Issue #598.
+$filtered_results->field = $result;
+$filtered_results->$field = $result;
+$filtered_results->$row->field = $result;
+$filtered_results->$row->$field = $result;
+
+$filtered_results[ $i ]->field = $result;
+$filtered_results[ $i ]->$field = $result;
+$filtered_results[ $i ]->$row->field = $result;
+$filtered_results[ $i ]->$row->$field = $result;
+$filtered_results[ $i ]->$row[0]->field = $result;
+$filtered_results[ $i ]->$row[$j]->$field = $result;

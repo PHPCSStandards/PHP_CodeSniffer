@@ -3,20 +3,21 @@
  * Unit test class for the MultiLineCondition sniff.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @copyright 2006-2023 Squiz Pty Ltd (ABN 77 084 670 600)
+ * @copyright 2023 PHPCSStandards and contributors
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\PEAR\Tests\ControlStructures;
 
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHP_CodeSniffer\Tests\Standards\AbstractSniffTestCase;
 
 /**
  * Unit test class for the MultiLineCondition sniff.
  *
  * @covers \PHP_CodeSniffer\Standards\PEAR\Sniffs\ControlStructures\MultiLineConditionSniff
  */
-final class MultiLineConditionUnitTest extends AbstractSniffUnitTest
+final class MultiLineConditionUnitTest extends AbstractSniffTestCase
 {
 
 
@@ -26,13 +27,11 @@ final class MultiLineConditionUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
-     * @param string $testFile The name of the file being tested.
-     *
      * @return array<int, int>
      */
-    public function getErrorList($testFile='')
+    public function getErrorList()
     {
-        $errors = [
+        return [
             21  => 1,
             22  => 1,
             35  => 1,
@@ -59,6 +58,7 @@ final class MultiLineConditionUnitTest extends AbstractSniffUnitTest
             153 => 2,
             168 => 1,
             177 => 1,
+            183 => 1,
             194 => 2,
             202 => 2,
             215 => 1,
@@ -68,14 +68,7 @@ final class MultiLineConditionUnitTest extends AbstractSniffUnitTest
             240 => 2,
             248 => 2,
         ];
-
-        if ($testFile === 'MultiLineConditionUnitTest.inc') {
-            $errors[183] = 1;
-        }
-
-        return $errors;
-
-    }//end getErrorList()
+    }
 
 
     /**
@@ -89,8 +82,5 @@ final class MultiLineConditionUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
-    }//end getWarningList()
-
-
-}//end class
+    }
+}
