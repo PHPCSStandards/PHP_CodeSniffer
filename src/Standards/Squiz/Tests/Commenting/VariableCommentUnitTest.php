@@ -27,47 +27,63 @@ final class VariableCommentUnitTest extends AbstractSniffTestCase
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the test file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile = '')
     {
-        return [
-            21  => 1,
-            24  => 1,
-            56  => 1,
-            64  => 1,
-            73  => 1,
-            84  => 1,
-            130 => 1,
-            136 => 1,
-            144 => 1,
-            152 => 1,
-            160 => 1,
-            168 => 1,
-            176 => 1,
-            184 => 1,
-            192 => 1,
-            200 => 1,
-            208 => 1,
-            216 => 1,
-            224 => 1,
-            232 => 1,
-            240 => 1,
-            248 => 1,
-            256 => 1,
-            264 => 1,
-            272 => 1,
-            280 => 1,
-            290 => 1,
-            294 => 1,
-            311 => 1,
-            336 => 1,
-            361 => 1,
-            364 => 1,
-            399 => 1,
-            403 => 1,
-            457 => 1,
-        ];
+        switch ($testFile) {
+            case 'VariableCommentUnitTest.1.inc':
+                return [
+                    21  => 1,
+                    24  => 1,
+                    56  => 1,
+                    64  => 1,
+                    73  => 1,
+                    84  => 1,
+                    130 => 1,
+                    136 => 1,
+                    144 => 1,
+                    152 => 1,
+                    160 => 1,
+                    168 => 1,
+                    176 => 1,
+                    184 => 1,
+                    192 => 1,
+                    200 => 1,
+                    208 => 1,
+                    216 => 1,
+                    224 => 1,
+                    232 => 1,
+                    240 => 1,
+                    248 => 1,
+                    256 => 1,
+                    264 => 1,
+                    272 => 1,
+                    280 => 1,
+                    290 => 1,
+                    294 => 1,
+                    311 => 1,
+                    336 => 1,
+                    361 => 1,
+                    364 => 1,
+                    399 => 1,
+                    403 => 1,
+                    457 => 1,
+                ];
+
+            case 'VariableCommentUnitTest.2.inc':
+                return [
+                    8  => 1,
+                    18 => 1,
+                    38 => 1,
+                    48 => 1,
+                ];
+
+            default:
+                return [];
+        }
     }
 
 
@@ -77,15 +93,24 @@ final class VariableCommentUnitTest extends AbstractSniffTestCase
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
+     * @param string $testFile The name of the test file being tested.
+     *
      * @return array<int, int>
      */
-    public function getWarningList()
+    public function getWarningList($testFile = '')
     {
-        return [
-            93  => 1,
-            494 => 1,
-            495 => 1,
-            496 => 1,
-        ];
+        switch ($testFile) {
+            case 'VariableCommentUnitTest.1.inc':
+
+                return [
+                    93  => 1,
+                    494 => 1,
+                    495 => 1,
+                    496 => 1,
+                ];
+
+            default:
+                return [];
+        }
     }
 }
