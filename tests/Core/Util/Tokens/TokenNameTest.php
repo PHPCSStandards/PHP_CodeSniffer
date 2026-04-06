@@ -16,6 +16,7 @@ use PHPUnit\Framework\TestCase;
  * Tests for the \PHP_CodeSniffer\Util\Tokens::tokenName() method.
  *
  * @covers \PHP_CodeSniffer\Util\Tokens::tokenName
+ * @covers \PHP_CodeSniffer\Util\Tokens::polyfillTokenizerConstants
  */
 final class TokenNameTest extends TestCase
 {

@@ -399,6 +399,8 @@ To run the tests specific to the use of `PHP_CODESNIFFER_CBF === true`:
 
 ### Writing End-to-End Tests
 
+#### Bashunit
+
 Bash-based end-to-end tests can be written using the [Bashunit](https://bashunit.typeddevs.com/) test tooling using version 0.26.0 or higher.
 
 To install bashunit, follow the [installation guide](https://bashunit.typeddevs.com/installation).
@@ -413,6 +415,20 @@ You can then run the bashunit tests on Linux/Mac/WSL, like so:
 When writing end-to-end tests, please use fixtures for the "files under scan" to make the tests stable.
 These fixtures can be placed in the `tests/EndToEndBash/Fixtures` subdirectory.
 
+#### phpt
+
+PHP-based end-to-end tests can be written using the `phpt` format. This is the format that PHP uses for its own tests. We use PHPUnit to run these tests.
+
+```bash
+vendor/bin/phpunit -c phpunit-e2e.xml.dist
+```
+
+The following resources may be helpful when writing `phpt`-style tests:
+
+* <https://www.phpinternalsbook.com/tests/phpt_file_structure.html>
+* <https://php.github.io/php-src/miscellaneous/writing-tests.html>
+* <https://dev.to/moxio/start-testing-with-phpt-tests-in-phpunit-2jpg>
+* <https://github.com/sebastianbergmann/phpunit-documentation-english/issues/302>
 
 ### Submitting Your Pull Request
 
