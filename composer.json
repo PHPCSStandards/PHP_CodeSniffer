@@ -35,6 +35,7 @@
     },
     "require": {
         "php": ">=7.2.0",
+        "ext-libxml": "*",
         "ext-simplexml": "*",
         "ext-tokenizer": "*",
         "ext-xmlwriter": "*"

@@ -82,7 +82,7 @@ class BuildRequirementsCheckMatrix
      */
     private function getValidBuilds()
     {
-        $extensions = ['minimal' => 'none, tokenizer, xmlwriter, SimpleXML'];
+        $extensions = ['minimal' => 'none, tokenizer, libxml, xmlwriter, SimpleXML'];
 
         $builds = [];
         foreach ($this->validPhp as $php) {
@@ -145,10 +145,10 @@ class BuildRequirementsCheckMatrix
     private function getMissingExtensionsBuilds()
     {
         $extensions = [
-            'missing tokenizer'     => 'none, xmlwriter, SimpleXML',
-            'missing xmlwriter'     => ':xmlwriter',
-            'missing SimpleXML'     => ':SimpleXML',
-            'missing both XML exts' => 'none, tokenizer',
+            'missing tokenizer'    => 'none, xmlwriter, SimpleXML',
+            'missing xmlwriter'    => ':xmlwriter',
+            'missing SimpleXML'    => ':SimpleXML',
+            'missing all XML exts' => 'none, tokenizer',
         ];
 
         $builds = [];
