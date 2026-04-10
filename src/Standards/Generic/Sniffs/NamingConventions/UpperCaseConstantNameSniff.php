@@ -103,13 +103,13 @@ class UpperCaseConstantNameSniff implements Sniff
             return;
         }
 
-        // If the file declares or imports a function named "define",
-        // any unqualified `define()` call may resolve to that function
-        // instead of the global one, so the sniff should bow out.
-        // Fully qualified `\define(...)` calls are unaffected as they
-        // come in as T_NAME_FULLY_QUALIFIED tokens and are handled below.
+        // If the current namespace declares or imports a function named
+        // "define", any unqualified `define()` call may resolve to that
+        // function instead of the global one, so the sniff should bow out.
+        // Fully qualified `\define(...)` calls are unaffected as they come
+        // in as T_NAME_FULLY_QUALIFIED tokens and are handled below.
         if ($tokens[$stackPtr]['code'] === T_STRING
-            && $this->fileHasCustomDefine($phpcsFile) === true
+            && $this->namespaceHasCustomDefine($phpcsFile, $stackPtr) === true
         ) {
             return;
         }
@@ -160,47 +160,50 @@ class UpperCaseConstantNameSniff implements Sniff
 
 
     /**
-     * Determine whether a file declares or imports a function named "define".
+     * Determine whether the namespace containing a token declares or imports
+     * a function named "define".
      *
-     * Checks for top-level `function define(...)` declarations and
+     * Checks for namespace-level `function define(...)` declarations and
      * `use function ...\define;` (or aliased) imports. The result is cached
-     * per file path to avoid rescanning on every visited token.
+     * per file path and namespace scope to avoid rescanning on every token.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param int                         $stackPtr  The token being checked.
      *
      * @return bool
      */
-    private function fileHasCustomDefine(File $phpcsFile)
+    private function namespaceHasCustomDefine(File $phpcsFile, int $stackPtr)
     {
         static $cache = [];
 
         $fileKey = $phpcsFile->getFilename();
         if (isset($cache[$fileKey]) === true) {
-            return $cache[$fileKey];
+            $scopeKey = $this->getNamespaceScopeKey($phpcsFile, $stackPtr);
+            return isset($cache[$fileKey][$scopeKey]);
         }
 
-        $tokens = $phpcsFile->getTokens();
-        $result = false;
+        $tokens          = $phpcsFile->getTokens();
+        $cache[$fileKey] = [];
 
         for ($i = 0; $i < $phpcsFile->numTokens; $i++) {
-            $code = $tokens[$i]['code'];
+            $code     = $tokens[$i]['code'];
+            $scopeKey = $this->getNamespaceScopeKey($phpcsFile, $i);
 
-            // Top-level `function define(...)` declaration.
-            if ($code === T_FUNCTION && empty($tokens[$i]['conditions']) === true) {
+            // Namespace-level `function define(...)` declaration.
+            if ($code === T_FUNCTION && $this->isInGlobalOrNamespaceScope($tokens[$i]) === true) {
                 $namePtr = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($i + 1), null, true);
                 if ($namePtr !== false
                     && $tokens[$namePtr]['code'] === T_STRING
                     && strtolower($tokens[$namePtr]['content']) === 'define'
                 ) {
-                    $result = true;
-                    break;
+                    $cache[$fileKey][$scopeKey] = true;
                 }
 
                 continue;
             }
 
-            // `use function ...define;` import (only top-level use statements).
-            if ($code === T_USE && empty($tokens[$i]['conditions']) === true) {
+            // `use function ...define;` import at file or namespace scope only.
+            if ($code === T_USE && $this->isInGlobalOrNamespaceScope($tokens[$i]) === true) {
                 $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($i + 1), null, true);
                 if ($next === false || $tokens[$next]['code'] !== T_STRING
                     || strtolower($tokens[$next]['content']) !== 'function'
@@ -214,8 +217,8 @@ class UpperCaseConstantNameSniff implements Sniff
                 }
 
                 if ($this->useListImportsDefine($phpcsFile, $next, $end) === true) {
-                    $result = true;
-                    break;
+                    $cache[$fileKey][$scopeKey] = true;
+                    continue;
                 }
 
                 // Group use statement: walk the body looking for a `define` import.
@@ -224,16 +227,57 @@ class UpperCaseConstantNameSniff implements Sniff
                     if ($groupEnd !== false
                         && $this->useListImportsDefine($phpcsFile, $end, $groupEnd) === true
                     ) {
-                        $result = true;
-                        break;
+                        $cache[$fileKey][$scopeKey] = true;
                     }
                 }
             }
         }
 
-        $cache[$fileKey] = $result;
+        $scopeKey = $this->getNamespaceScopeKey($phpcsFile, $stackPtr);
+        return isset($cache[$fileKey][$scopeKey]);
+    }
 
-        return $result;
+
+    /**
+     * Get a stable cache key for the namespace containing a token.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param int                         $stackPtr  The token being checked.
+     *
+     * @return string
+     */
+    private function getNamespaceScopeKey(File $phpcsFile, int $stackPtr)
+    {
+        $namespacePtr = $phpcsFile->getCondition($stackPtr, T_NAMESPACE);
+        if ($namespacePtr === false) {
+            return 'global';
+        }
+
+        return 'namespace:' . $namespacePtr;
+    }
+
+
+    /**
+     * Determine whether a token is at file scope or directly within a namespace.
+     *
+     * @param array<string, mixed> $token Token data.
+     *
+     * @return bool
+     */
+    private function isInGlobalOrNamespaceScope(array $token)
+    {
+        if (empty($token['conditions']) === true) {
+            return true;
+        }
+
+        if (count($token['conditions']) !== 1) {
+            return false;
+        }
+
+        $conditions = $token['conditions'];
+        reset($conditions);
+
+        return current($conditions) === T_NAMESPACE;
     }
 
 

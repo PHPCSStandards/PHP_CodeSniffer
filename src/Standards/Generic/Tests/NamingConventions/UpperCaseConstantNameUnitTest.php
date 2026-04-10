@@ -76,6 +76,13 @@ final class UpperCaseConstantNameUnitTest extends AbstractSniffTestCase
                     8 => 1,
                 ];
 
+            case 'UpperCaseConstantNameUnitTest.9.inc':
+                return [
+                    // A custom define() in one namespace must not suppress
+                    // checks for bare define() calls in a different namespace.
+                    13 => 1,
+                ];
+
             default:
                 return [];
         }
