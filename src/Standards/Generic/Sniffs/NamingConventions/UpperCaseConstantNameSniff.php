@@ -103,6 +103,17 @@ class UpperCaseConstantNameSniff implements Sniff
             return;
         }
 
+        // If the file declares or imports a function named "define",
+        // any unqualified `define()` call may resolve to that function
+        // instead of the global one, so the sniff should bow out.
+        // Fully qualified `\define(...)` calls are unaffected as they
+        // come in as T_NAME_FULLY_QUALIFIED tokens and are handled below.
+        if ($tokens[$stackPtr]['code'] === T_STRING
+            && $this->fileHasCustomDefine($phpcsFile) === true
+        ) {
+            return;
+        }
+
         // If the next non-whitespace token after this token
         // is not an opening parenthesis then it is not a function call.
         $openBracket = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
@@ -145,5 +156,143 @@ class UpperCaseConstantNameSniff implements Sniff
         } else {
             $phpcsFile->recordMetric($constPtr, 'Constant name case', 'upper');
         }
+    }
+
+
+    /**
+     * Determine whether a file declares or imports a function named "define".
+     *
+     * Checks for top-level `function define(...)` declarations and
+     * `use function ...\define;` (or aliased) imports. The result is cached
+     * per file path to avoid rescanning on every visited token.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     *
+     * @return bool
+     */
+    private function fileHasCustomDefine(File $phpcsFile)
+    {
+        static $cache = [];
+
+        $fileKey = $phpcsFile->getFilename();
+        if (isset($cache[$fileKey]) === true) {
+            return $cache[$fileKey];
+        }
+
+        $tokens = $phpcsFile->getTokens();
+        $result = false;
+
+        for ($i = 0; $i < $phpcsFile->numTokens; $i++) {
+            $code = $tokens[$i]['code'];
+
+            // Top-level `function define(...)` declaration.
+            if ($code === T_FUNCTION && empty($tokens[$i]['conditions']) === true) {
+                $namePtr = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($i + 1), null, true);
+                if ($namePtr !== false
+                    && $tokens[$namePtr]['code'] === T_STRING
+                    && strtolower($tokens[$namePtr]['content']) === 'define'
+                ) {
+                    $result = true;
+                    break;
+                }
+
+                continue;
+            }
+
+            // `use function ...define;` import (only top-level use statements).
+            if ($code === T_USE && empty($tokens[$i]['conditions']) === true) {
+                $next = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($i + 1), null, true);
+                if ($next === false || $tokens[$next]['code'] !== T_STRING
+                    || strtolower($tokens[$next]['content']) !== 'function'
+                ) {
+                    continue;
+                }
+
+                $end = $phpcsFile->findNext([T_SEMICOLON, T_OPEN_USE_GROUP], ($next + 1));
+                if ($end === false) {
+                    continue;
+                }
+
+                if ($this->useListImportsDefine($phpcsFile, $next, $end) === true) {
+                    $result = true;
+                    break;
+                }
+
+                // Group use statement: walk the body looking for a `define` import.
+                if ($tokens[$end]['code'] === T_OPEN_USE_GROUP) {
+                    $groupEnd = $phpcsFile->findNext(T_CLOSE_USE_GROUP, ($end + 1));
+                    if ($groupEnd !== false
+                        && $this->useListImportsDefine($phpcsFile, $end, $groupEnd) === true
+                    ) {
+                        $result = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        $cache[$fileKey] = $result;
+
+        return $result;
+    }
+
+
+    /**
+     * Inspect a `use function` import list for a `define` import.
+     *
+     * Handles plain imports (`use function Foo\define;`), aliases away from
+     * `define` (`use function Foo\define as something;` — does NOT count) and
+     * aliases to `define` (`use function Foo\bar as define;` — counts).
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param int                         $start     Position to start scanning after.
+     * @param int                         $end       Position to stop scanning at.
+     *
+     * @return bool
+     */
+    private function useListImportsDefine(File $phpcsFile, int $start, int $end)
+    {
+        $tokens = $phpcsFile->getTokens();
+
+        for ($j = ($start + 1); $j < $end; $j++) {
+            $code = $tokens[$j]['code'];
+
+            // Explicit alias: `... as define`.
+            if ($code === T_AS) {
+                $aliasPtr = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($j + 1), $end, true);
+                if ($aliasPtr !== false
+                    && $tokens[$aliasPtr]['code'] === T_STRING
+                    && strtolower($tokens[$aliasPtr]['content']) === 'define'
+                ) {
+                    return true;
+                }
+
+                continue;
+            }
+
+            if ($code !== T_STRING
+                && $code !== T_NAME_QUALIFIED
+                && $code !== T_NAME_FULLY_QUALIFIED
+            ) {
+                continue;
+            }
+
+            $segments = explode('\\', $tokens[$j]['content']);
+            $last     = strtolower(end($segments));
+            if ($last !== 'define') {
+                continue;
+            }
+
+            // Skip if the next non-empty token is `as` — the import is renamed
+            // and is therefore not in scope as `define`.
+            $after = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($j + 1), $end, true);
+            if ($after !== false && $tokens[$after]['code'] === T_AS) {
+                continue;
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

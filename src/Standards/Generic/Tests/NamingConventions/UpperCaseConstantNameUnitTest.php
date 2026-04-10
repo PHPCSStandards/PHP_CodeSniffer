@@ -49,7 +49,31 @@ final class UpperCaseConstantNameUnitTest extends AbstractSniffTestCase
                     51 => 1,
                     71 => 1,
                     73 => 1,
-                    94 => 1,
+                    91 => 1,
+                ];
+
+            case 'UpperCaseConstantNameUnitTest.6.inc':
+                return [
+                    // Only the fully qualified `\define()` call should be flagged;
+                    // the unqualified `define()` calls may resolve to the local
+                    // `Foo\define` function declared further down in the file.
+                    18 => 1,
+                ];
+
+            case 'UpperCaseConstantNameUnitTest.7.inc':
+                return [
+                    // `use function Bar\define;` brings a `define` symbol into scope,
+                    // so unqualified `define()` calls must not be flagged. Only the
+                    // fully qualified `\define()` call is.
+                    12 => 1,
+                ];
+
+            case 'UpperCaseConstantNameUnitTest.8.inc':
+                return [
+                    // `use function Bar\define as something;` aliases AWAY from
+                    // `define`, so the local `define` symbol is unaffected and
+                    // unqualified `define()` calls should still be flagged.
+                    8 => 1,
                 ];
 
             default:

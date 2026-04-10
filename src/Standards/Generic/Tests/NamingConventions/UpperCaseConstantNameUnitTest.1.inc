@@ -79,9 +79,6 @@ define(condition() ? 'name1' : 'name2', 'sniff should bow out');
 
 $callable = define(...);
 
-// Valid if outside the global namespace. Sniff should bow out.
-function define($param) {}
-
 class MyClass {
     public function define($param) {}
 }
