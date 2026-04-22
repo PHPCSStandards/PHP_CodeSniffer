@@ -511,6 +511,12 @@ class FunctionCallSignatureSniff implements Sniff
                         $expectedIndent = ($foundFunctionIndent + $this->indent + $adjustment);
                     }
 
+                    if ($tokens[$i]['code'] === T_END_HEREDOC
+                        || $tokens[$i]['code'] === T_END_NOWDOC
+                    ) {
+                        continue;
+                    }
+
                     if ($tokens[$i]['code'] !== T_WHITESPACE
                         && $tokens[$i]['code'] !== T_DOC_COMMENT_WHITESPACE
                     ) {
@@ -551,7 +557,10 @@ class FunctionCallSignatureSniff implements Sniff
                             $padding = str_repeat(' ', $expectedIndent);
                             if ($foundIndent === 0) {
                                 $phpcsFile->fixer->addContentBefore($i, $padding);
-                                if (isset($tokens[$i]['scope_opener']) === true) {
+                                if (isset($tokens[$i]['scope_opener']) === true
+                                    && $tokens[$i]['code'] !== T_START_HEREDOC
+                                    && $tokens[$i]['code'] !== T_START_NOWDOC
+                                ) {
                                     $phpcsFile->fixer->changeCodeBlockIndent($i, $tokens[$i]['scope_closer'], $expectedIndent);
                                 }
                             } else {
@@ -562,7 +571,10 @@ class FunctionCallSignatureSniff implements Sniff
                                     $phpcsFile->fixer->replaceToken($i, $padding);
                                 }
 
-                                if (isset($tokens[($i + 1)]['scope_opener']) === true) {
+                                if (isset($tokens[($i + 1)]['scope_opener']) === true
+                                    && $tokens[($i + 1)]['code'] !== T_START_HEREDOC
+                                    && $tokens[($i + 1)]['code'] !== T_START_NOWDOC
+                                ) {
                                     $phpcsFile->fixer->changeCodeBlockIndent(($i + 1), $tokens[($i + 1)]['scope_closer'], ($expectedIndent - $foundIndent));
                                 }
                             }

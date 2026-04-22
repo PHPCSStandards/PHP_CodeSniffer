@@ -609,3 +609,10 @@ $anon = new class () {};
 
 // And anonymous object instantiations without parentheses are ignored.
 $anon = new class {};
+
+// Flexible heredoc in multiline function call.
+<?php if (1) f(
+  <<<E
+	x
+E
+);
