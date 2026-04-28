@@ -653,6 +653,10 @@ class Config
 
         $parallel = self::getConfigData('parallel');
         if ($parallel !== null) {
+            if ($parallel === 'auto') {
+                $parallel = self::detectNumberOfProcessors();
+            }
+
             $this->parallel = max((int) $parallel, 1);
         }
     }
@@ -1185,7 +1189,12 @@ class Config
                         break;
                     }
 
-                    $this->parallel = max((int) substr($arg, 9), 1);
+                    $value = substr($arg, 9);
+                    if ($value === 'auto') {
+                        $value = self::detectNumberOfProcessors();
+                    }
+
+                    $this->parallel = max((int) $value, 1);
                     $this->overriddenDefaults['parallel'] = true;
                 } elseif (substr($arg, 0, 9) === 'severity=') {
                     $this->errorSeverity   = (int) substr($arg, 9);
@@ -1718,6 +1727,40 @@ class Config
         self::$configDataFile = $configFile;
         self::$configData     = $phpCodeSnifferConfig;
         return self::$configData;
+    }
+
+
+    /**
+     * Detect the number of CPU cores available.
+     *
+     * @return int
+     */
+    private static function detectNumberOfProcessors()
+    {
+        if (PHP_OS_FAMILY === 'Windows') {
+            $count = getenv('NUMBER_OF_PROCESSORS');
+            if (is_string($count) === true && preg_match('`\d+`', $count, $matches) === 1) {
+                return max((int) $matches[0], 1);
+            }
+
+            return 1;
+        }
+
+        if (function_exists('shell_exec') === true) {
+            // Linux, macOS with coreutils, and most modern Unix-like systems.
+            $count = shell_exec('nproc 2>/dev/null');
+            if (is_string($count) === true && preg_match('`\d+`', $count, $matches) === 1) {
+                return max((int) $matches[0], 1);
+            }
+
+            // MacOS / BSD fallback.
+            $count = shell_exec('sysctl -n hw.ncpu 2>/dev/null');
+            if (is_string($count) === true && preg_match('`\d+`', $count, $matches) === 1) {
+                return max((int) $matches[0], 1);
+            }
+        }
+
+        return 1;
     }
 
 
