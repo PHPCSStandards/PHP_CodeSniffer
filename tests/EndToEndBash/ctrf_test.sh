@@ -6,6 +6,7 @@ FIX_DIR="tests/EndToEndBash/Fixtures"
 # Validate that stdin is well-formed CTRF. Asserts via exit code so callers can
 # follow up with `assert_successful_code`.
 function _validate_ctrf_from_stdin() {
+  # shellcheck disable=SC2016 # PHP code is intentionally inside single quotes.
   php -r '
     $json = stream_get_contents(STDIN);
     $d    = json_decode($json, true);
@@ -48,27 +49,34 @@ function _validate_ctrf_from_stdin() {
 
 
 function test_phpcs_ctrf_report_runs_sequentially() {
-  OUTPUT="$( { bin/phpcs --no-cache --report=ctrf --standard=$ENDTOEND_STD $FIX_DIR/ClassWithStyleError.inc $FIX_DIR/ClassOneWithoutStyleError.inc; } 2>&1 )"
+  # PHPCS prints a "Time: Xms; Memory: YMB" line to stderr after the report; suppress it
+  # so the captured stdout is pure JSON.
+  OUTPUT="$(bin/phpcs --no-colors --no-cache --report=ctrf --standard="$ENDTOEND_STD" "$FIX_DIR/ClassWithStyleError.inc" "$FIX_DIR/ClassOneWithoutStyleError.inc" 2>/dev/null)"
   echo "$OUTPUT" | _validate_ctrf_from_stdin
   assert_successful_code
 }
 
 
 function test_phpcs_ctrf_report_runs_in_parallel() {
-  OUTPUT="$( { bin/phpcs --no-cache --parallel=2 --report=ctrf --standard=$ENDTOEND_STD $FIX_DIR/ClassWithStyleError.inc $FIX_DIR/ClassOneWithoutStyleError.inc $FIX_DIR/ClassWithTwoStyleErrors.inc; } 2>&1 )"
+  OUTPUT="$(bin/phpcs --no-colors --no-cache --parallel=2 --report=ctrf --standard="$ENDTOEND_STD" "$FIX_DIR/ClassWithStyleError.inc" "$FIX_DIR/ClassOneWithoutStyleError.inc" "$FIX_DIR/ClassWithTwoStyleErrors.inc" 2>/dev/null)"
   echo "$OUTPUT" | _validate_ctrf_from_stdin
   assert_successful_code
 }
 
 
 function test_phpcs_ctrf_parallel_matches_sequential() {
-  # Same input, same set of test entries (regardless of order).
-  SEQ="$( { bin/phpcs --no-cache --report=ctrf --standard=$ENDTOEND_STD $FIX_DIR/ClassWithStyleError.inc $FIX_DIR/ClassOneWithoutStyleError.inc $FIX_DIR/ClassWithTwoStyleErrors.inc; } 2>&1 )"
-  PAR="$( { bin/phpcs --no-cache --parallel=2 --report=ctrf --standard=$ENDTOEND_STD $FIX_DIR/ClassWithStyleError.inc $FIX_DIR/ClassOneWithoutStyleError.inc $FIX_DIR/ClassWithTwoStyleErrors.inc; } 2>&1 )"
+  # Same input must produce the same set of test entries regardless of order.
+  SEQ="$(bin/phpcs --no-colors --no-cache --report=ctrf --standard="$ENDTOEND_STD" "$FIX_DIR/ClassWithStyleError.inc" "$FIX_DIR/ClassOneWithoutStyleError.inc" "$FIX_DIR/ClassWithTwoStyleErrors.inc" 2>/dev/null)"
+  PAR="$(bin/phpcs --no-colors --no-cache --parallel=2 --report=ctrf --standard="$ENDTOEND_STD" "$FIX_DIR/ClassWithStyleError.inc" "$FIX_DIR/ClassOneWithoutStyleError.inc" "$FIX_DIR/ClassWithTwoStyleErrors.inc" 2>/dev/null)"
 
+  # shellcheck disable=SC2016 # PHP code is intentionally inside single quotes.
   RESULT="$(php -r '
-    $seq = json_decode($argv[1], true)["results"]["tests"];
-    $par = json_decode($argv[2], true)["results"]["tests"];
+    $seq = json_decode($argv[1], true)["results"]["tests"] ?? null;
+    $par = json_decode($argv[2], true)["results"]["tests"] ?? null;
+    if (!is_array($seq) || !is_array($par)) {
+      echo "INVALID";
+      exit(0);
+    }
     $proj = function ($t) { return ($t["status"] ?? "") . "|" . ($t["name"] ?? ""); };
     $seqKeys = array_map($proj, $seq);
     $parKeys = array_map($proj, $par);
@@ -82,22 +90,24 @@ function test_phpcs_ctrf_parallel_matches_sequential() {
 
 function test_phpcs_ctrf_report_to_file() {
   OUT_FILE="$(mktemp /tmp/phpcs-ctrf-XXXXXX.json)"
-  bin/phpcs --no-cache --report-ctrf="$OUT_FILE" --standard=$ENDTOEND_STD $FIX_DIR/ClassWithStyleError.inc > /dev/null 2>&1
-  cat "$OUT_FILE" | _validate_ctrf_from_stdin
-  RC=$?
+  bin/phpcs --no-colors --no-cache --report-ctrf="$OUT_FILE" --standard="$ENDTOEND_STD" "$FIX_DIR/ClassWithStyleError.inc" > /dev/null 2>&1
+  CONTENTS="$(cat "$OUT_FILE")"
   rm -f "$OUT_FILE"
-  return $RC
+
+  echo "$CONTENTS" | _validate_ctrf_from_stdin
+  assert_successful_code
+  assert_contains '"reportFormat":"CTRF"' "$CONTENTS"
 }
 
 
 function test_phpcs_ctrf_clean_file_emits_passed_test() {
-  OUTPUT="$( { bin/phpcs --no-cache --report=ctrf --standard=$ENDTOEND_STD $FIX_DIR/ClassOneWithoutStyleError.inc; } 2>&1 )"
+  OUTPUT="$(bin/phpcs --no-colors --no-cache --report=ctrf --standard="$ENDTOEND_STD" "$FIX_DIR/ClassOneWithoutStyleError.inc" 2>/dev/null)"
   assert_contains '"status":"passed"' "$OUTPUT"
 }
 
 
 function test_phpcs_ctrf_error_emits_failed_test() {
-  OUTPUT="$( { bin/phpcs --no-cache --report=ctrf --standard=$ENDTOEND_STD $FIX_DIR/ClassWithStyleError.inc; } 2>&1 )"
+  OUTPUT="$(bin/phpcs --no-colors --no-cache --report=ctrf --standard="$ENDTOEND_STD" "$FIX_DIR/ClassWithStyleError.inc" 2>/dev/null)"
   assert_contains '"status":"failed"' "$OUTPUT"
   assert_contains '"rawStatus":"ERROR"' "$OUTPUT"
 }
