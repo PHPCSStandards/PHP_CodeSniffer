@@ -184,6 +184,12 @@ class Ctrf implements Report
         $stop     = $now;
         $duration = ($stop - $start);
 
+        // `failed` and `other` come from the authoritative parameters PHPCS
+        // passes us. `passed` is not provided as a parameter (PHPCS doesn't
+        // separately track clean files), so we count it from the cached
+        // partials, where each clean file emitted exactly one entry with
+        // `"status":"passed"`. The asymmetry is intentional: prefer the
+        // authoritative source where one exists.
         $passed = substr_count($cachedData, '"status":"passed"');
         $failed = $totalErrors;
         $other  = $totalWarnings;

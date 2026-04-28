@@ -78,18 +78,40 @@ final class CtrfTest extends TestCase
 
         $this->assertSame('CTRF', $report['reportFormat']);
         $this->assertSame('1.0.0', $report['specVersion']);
-        $this->assertMatchesRegularExpression(
+        $this->assertRegex(
             '/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/',
             $report['reportId'],
             'reportId should be a v4 UUID.'
         );
-        $this->assertMatchesRegularExpression(
+        $this->assertRegex(
             '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/',
             $report['timestamp']
         );
         $this->assertStringStartsWith('PHP_CodeSniffer ', $report['generatedBy']);
         $this->assertSame('PHP_CodeSniffer', $report['results']['tool']['name']);
         $this->assertSame(Config::VERSION, $report['results']['tool']['version']);
+    }
+
+
+    /**
+     * Cross-version regex assertion: assertMatchesRegularExpression() was added
+     * in PHPUnit 9.1.0 and assertRegExp() was removed in PHPUnit 10. PHPCS
+     * supports both, so dispatch by feature detection.
+     *
+     * @param string $regex   The regular expression pattern.
+     * @param string $value   The string to match against.
+     * @param string $message Optional failure message.
+     *
+     * @return void
+     */
+    private function assertRegex($regex, $value, $message = '')
+    {
+        if (method_exists($this, 'assertMatchesRegularExpression') === true) {
+            $this->assertMatchesRegularExpression($regex, $value, $message);
+        } else {
+            // PHPUnit < 9.1.0.
+            $this->assertRegExp($regex, $value, $message);
+        }
     }
 
 
@@ -289,6 +311,48 @@ final class CtrfTest extends TestCase
         $this->assertSame('WARNING', $test['rawStatus']);
         $this->assertSame(['WARNING'], $test['tags']);
         $this->assertFalse($test['extra']['fixable']);
+    }
+
+
+    /**
+     * Messages from a non-UTF-8 source file must be transcoded so the JSON output is UTF-8.
+     *
+     * @return void
+     */
+    public function testNonUtf8EncodingIsTranscoded()
+    {
+        $reporter = new Ctrf();
+        $file     = $this->fileWithEncoding('iso-8859-1');
+        // The byte 0xE9 is "é" in ISO-8859-1 but invalid as a standalone byte in UTF-8.
+        $latinMessage = "Found char \xE9 (e-acute)";
+        $report       = [
+            'filename' => '/tmp/iso.php',
+            'errors'   => 1,
+            'warnings' => 0,
+            'fixable'  => 0,
+            'messages' => [
+                1 => [
+                    1 => [
+                        [
+                            'message'  => $latinMessage,
+                            'source'   => 'X.Y.Z',
+                            'severity' => 5,
+                            'fixable'  => false,
+                            'type'     => 'ERROR',
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        ob_start();
+        $reporter->generateFileReport($report, $file);
+        $output = ob_get_clean();
+
+        $decoded = json_decode('[' . rtrim($output, ',') . ']', true);
+        $this->assertCount(1, $decoded);
+        // After transcoding, the message must contain the proper UTF-8 sequence for é.
+        $this->assertStringContainsString("\xC3\xA9", $decoded[0]['message']);
     }
 
 
