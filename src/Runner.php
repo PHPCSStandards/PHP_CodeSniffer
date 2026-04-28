@@ -20,6 +20,7 @@ use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\DummyFile;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Files\FileList;
+use PHP_CodeSniffer\Files\LocalFile;
 use PHP_CodeSniffer\Util\Cache;
 use PHP_CodeSniffer\Util\Common;
 use PHP_CodeSniffer\Util\ExitCode;
@@ -396,19 +397,30 @@ class Runner
                 $this->printProgress($file, $numFiles, $numProcessed);
             }
         } else {
-            // Batching and forking.
-            $childProcs  = [];
-            $numPerBatch = ceil($numFiles / $this->config->parallel);
+            // Work-stealing parallel processing: workers ask the master for
+            // chunks of files as they finish, so faster workers (or workers
+            // that drew an easier slice) automatically pick up more work.
+            $queue = [];
+            $todo->rewind();
+            while ($todo->valid() === true) {
+                $queue[] = $todo->key();
+                $todo->next();
+            }
 
-            for ($batch = 0; $batch < $this->config->parallel; $batch++) {
-                $startAt = ($batch * $numPerBatch);
-                if ($startAt >= $numFiles) {
-                    break;
-                }
+            $numWorkers = min($this->config->parallel, $numFiles);
 
-                $endAt = ($startAt + $numPerBatch);
-                if ($endAt > $numFiles) {
-                    $endAt = $numFiles;
+            // Same default as PHPStan's parallel scheduler — small enough that
+            // a fast worker keeps coming back for more, large enough to amortize
+            // the IPC round-trip per file.
+            $chunkSize = 20;
+
+            $childProcs = [];
+            $sockets    = [];
+
+            for ($worker = 0; $worker < $numWorkers; $worker++) {
+                $pair = stream_socket_pair(STREAM_PF_UNIX, STREAM_SOCK_STREAM, STREAM_IPPROTO_IP);
+                if ($pair === false) {
+                    throw new RuntimeException('Failed to create socket pair for worker');
                 }
 
                 $childOutFilename = tempnam(sys_get_temp_dir(), 'phpcs-child');
@@ -416,85 +428,26 @@ class Runner
                 if ($pid === -1) {
                     throw new RuntimeException('Failed to create child process');
                 } elseif ($pid !== 0) {
+                    fclose($pair[1]);
                     $childProcs[$pid] = $childOutFilename;
+                    $sockets[$pid]    = $pair[0];
                 } else {
-                    // Move forward to the start of the batch.
-                    $todo->rewind();
-                    for ($i = 0; $i < $startAt; $i++) {
-                        $todo->next();
+                    fclose($pair[0]);
+                    // Don't leak previously-created parent-side sockets into
+                    // sibling workers — only this child's socket should remain.
+                    foreach ($sockets as $inheritedSocket) {
+                        fclose($inheritedSocket);
                     }
 
-                    // Reset the reporter to make sure only figures from this
-                    // file batch are recorded.
-                    $this->reporter->totalFiles           = 0;
-                    $this->reporter->totalErrors          = 0;
-                    $this->reporter->totalWarnings        = 0;
-                    $this->reporter->totalFixableErrors   = 0;
-                    $this->reporter->totalFixableWarnings = 0;
-                    $this->reporter->totalFixedErrors     = 0;
-                    $this->reporter->totalFixedWarnings   = 0;
-
-                    // Process the files.
-                    $pathsProcessed = [];
-                    ob_start();
-                    for ($i = $startAt; $i < $endAt; $i++) {
-                        $path = $todo->key();
-                        $file = $todo->current();
-
-                        if ($file->ignored === true) {
-                            $todo->next();
-                            continue;
-                        }
-
-                        $currDir = dirname($path);
-                        if ($lastDir !== $currDir) {
-                            if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                                StatusWriter::write('Changing into directory ' . Common::stripBasepath($currDir, $this->config->basepath));
-                            }
-
-                            $lastDir = $currDir;
-                        }
-
-                        $this->processFile($file);
-
-                        $pathsProcessed[] = $path;
-                        $todo->next();
-                    }
-
-                    $debugOutput = ob_get_contents();
-                    ob_end_clean();
-
-                    // Write information about the run to the filesystem
-                    // so it can be picked up by the main process.
-                    $childOutput = [
-                        'totalFiles'           => $this->reporter->totalFiles,
-                        'totalErrors'          => $this->reporter->totalErrors,
-                        'totalWarnings'        => $this->reporter->totalWarnings,
-                        'totalFixableErrors'   => $this->reporter->totalFixableErrors,
-                        'totalFixableWarnings' => $this->reporter->totalFixableWarnings,
-                        'totalFixedErrors'     => $this->reporter->totalFixedErrors,
-                        'totalFixedWarnings'   => $this->reporter->totalFixedWarnings,
-                    ];
-
-                    $output  = '<' . '?php' . "\n" . ' $childOutput = ';
-                    $output .= var_export($childOutput, true);
-                    $output .= ";\n\$debugOutput = ";
-                    $output .= var_export($debugOutput, true);
-
-                    if ($this->config->cache === true) {
-                        $childCache = [];
-                        foreach ($pathsProcessed as $path) {
-                            $childCache[$path] = Cache::get($path);
-                        }
-
-                        $output .= ";\n\$childCache = ";
-                        $output .= var_export($childCache, true);
-                    }
-
-                    $output .= ";\n?" . '>';
-                    file_put_contents($childOutFilename, $output);
+                    $this->processWorker($pair[1], $childOutFilename);
                     exit();
                 }
+            }
+
+            $this->dispatchWork($queue, $sockets, $numFiles, $chunkSize);
+
+            foreach ($sockets as $socket) {
+                fclose($socket);
             }
 
             $success = $this->processChildProcs($childProcs);
@@ -683,9 +636,6 @@ class Runner
      */
     private function processChildProcs(array $childProcs)
     {
-        $numProcessed = 0;
-        $totalBatches = count($childProcs);
-
         $success = true;
 
         while (count($childProcs) > 0) {
@@ -709,13 +659,8 @@ class Runner
             include $out;
             unlink($out);
 
-            $numProcessed++;
-
             if (isset($childOutput) === false) {
                 // The child process died, so the run has failed.
-                $file = new DummyFile('', $this->ruleset, $this->config);
-                $file->setErrorCounts(1, 0, 0, 0, 0, 0);
-                $this->printProgress($file, $totalBatches, $numProcessed);
                 $success = false;
                 continue;
             }
@@ -737,21 +682,281 @@ class Runner
                     Cache::set($path, $cache);
                 }
             }
-
-            // Fake a processed file so we can print progress output for the batch.
-            $file = new DummyFile('', $this->ruleset, $this->config);
-            $file->setErrorCounts(
-                $childOutput['totalErrors'],
-                $childOutput['totalWarnings'],
-                $childOutput['totalFixableErrors'],
-                $childOutput['totalFixableWarnings'],
-                $childOutput['totalFixedErrors'],
-                $childOutput['totalFixedWarnings']
-            );
-            $this->printProgress($file, $totalBatches, $numProcessed);
         }
 
         return $success;
+    }
+
+
+    /**
+     * Run a worker loop that asks the master for chunks of files until told to stop.
+     *
+     * @param resource $socket           The Unix socket connecting back to the master.
+     * @param string   $childOutFilename The temp file used to return totals and cache.
+     *
+     * @return void
+     */
+    private function processWorker($socket, string $childOutFilename)
+    {
+        // Reset the reporter so this worker only accumulates its own files.
+        $this->reporter->totalFiles           = 0;
+        $this->reporter->totalErrors          = 0;
+        $this->reporter->totalWarnings        = 0;
+        $this->reporter->totalFixableErrors   = 0;
+        $this->reporter->totalFixableWarnings = 0;
+        $this->reporter->totalFixedErrors     = 0;
+        $this->reporter->totalFixedWarnings   = 0;
+
+        $pathsProcessed = [];
+        $progressBuffer = [];
+        $lastDir        = '';
+
+        ob_start();
+
+        while (true) {
+            self::sendMessage(
+                $socket,
+                [
+                    'type'     => 'ready',
+                    'progress' => $progressBuffer,
+                ]
+            );
+            $progressBuffer = [];
+
+            $message = self::readMessage($socket);
+            if ($message === null || $message['type'] === 'done') {
+                break;
+            }
+
+            foreach ($message['paths'] as $path) {
+                $file = new LocalFile($path, $this->ruleset, $this->config);
+
+                if ($file->ignored === false) {
+                    $currDir = dirname($path);
+                    if ($lastDir !== $currDir) {
+                        if (PHP_CODESNIFFER_VERBOSITY > 0) {
+                            StatusWriter::write('Changing into directory ' . Common::stripBasepath($currDir, $this->config->basepath));
+                        }
+
+                        $lastDir = $currDir;
+                    }
+
+                    $this->processFile($file);
+                }
+
+                $pathsProcessed[] = $path;
+                $progressBuffer[] = [
+                    'ignored'       => $file->ignored,
+                    'errors'        => $file->getErrorCount(),
+                    'warnings'      => $file->getWarningCount(),
+                    'fixable'       => $file->getFixableCount(),
+                    'fixedErrors'   => $file->getFixedErrorCount(),
+                    'fixedWarnings' => $file->getFixedWarningCount(),
+                ];
+            }
+        }
+
+        $debugOutput = ob_get_contents();
+        ob_end_clean();
+
+        $childOutput = [
+            'totalFiles'           => $this->reporter->totalFiles,
+            'totalErrors'          => $this->reporter->totalErrors,
+            'totalWarnings'        => $this->reporter->totalWarnings,
+            'totalFixableErrors'   => $this->reporter->totalFixableErrors,
+            'totalFixableWarnings' => $this->reporter->totalFixableWarnings,
+            'totalFixedErrors'     => $this->reporter->totalFixedErrors,
+            'totalFixedWarnings'   => $this->reporter->totalFixedWarnings,
+        ];
+
+        $output  = '<' . '?php' . "\n" . ' $childOutput = ';
+        $output .= var_export($childOutput, true);
+        $output .= ";\n\$debugOutput = ";
+        $output .= var_export($debugOutput, true);
+
+        if ($this->config->cache === true) {
+            $childCache = [];
+            foreach ($pathsProcessed as $path) {
+                $childCache[$path] = Cache::get($path);
+            }
+
+            $output .= ";\n\$childCache = ";
+            $output .= var_export($childCache, true);
+        }
+
+        $output .= ";\n?" . '>';
+        file_put_contents($childOutFilename, $output);
+    }
+
+
+    /**
+     * Hand out chunks of files to workers as they request more work.
+     *
+     * Reads "ready" messages on the worker sockets and sends back either the
+     * next slice of paths or a "done" signal once the queue is exhausted.
+     * Per-file progress reported by workers is rendered as it arrives.
+     *
+     * @param array<int, string>   $queue     Ordered list of file paths to dispatch.
+     * @param array<int, resource> $sockets   PID-keyed master-side sockets.
+     * @param int                  $numFiles  Total file count, used for progress percentage.
+     * @param int                  $chunkSize Max files per dispatch.
+     *
+     * @return void
+     */
+    private function dispatchWork(array $queue, array $sockets, int $numFiles, int $chunkSize)
+    {
+        $cursor       = 0;
+        $numProcessed = 0;
+        $active       = $sockets;
+
+        while (count($active) > 0) {
+            $read   = array_values($active);
+            $write  = null;
+            $except = null;
+
+            $ready = @stream_select($read, $write, $except, null);
+            if ($ready === false) {
+                // Interrupted (e.g. SIGCHLD) — just retry.
+                continue;
+            }
+
+            if ($ready === 0) {
+                continue;
+            }
+
+            foreach ($read as $socket) {
+                $pid = array_search($socket, $active, true);
+                if ($pid === false) {
+                    continue;
+                }
+
+                $message = self::readMessage($socket);
+                if ($message === null) {
+                    // Worker closed the socket unexpectedly — let processChildProcs report it.
+                    unset($active[$pid]);
+                    continue;
+                }
+
+                foreach ($message['progress'] as $progress) {
+                    $numProcessed++;
+                    $file          = new DummyFile('', $this->ruleset, $this->config);
+                    $file->ignored = $progress['ignored'];
+
+                    // The combined fixable count is the only fixable value
+                    // printProgress reads (via getFixableCount), so park it in
+                    // the error slot and leave the warning slot at zero.
+                    $file->setErrorCounts(
+                        $progress['errors'],
+                        $progress['warnings'],
+                        $progress['fixable'],
+                        0,
+                        $progress['fixedErrors'],
+                        $progress['fixedWarnings']
+                    );
+                    $this->printProgress($file, $numFiles, $numProcessed);
+                }
+
+                if ($cursor >= $numFiles) {
+                    self::sendMessage($socket, ['type' => 'done']);
+                    unset($active[$pid]);
+                    continue;
+                }
+
+                $chunk   = array_slice($queue, $cursor, $chunkSize);
+                $cursor += count($chunk);
+                self::sendMessage(
+                    $socket,
+                    [
+                        'type'  => 'work',
+                        'paths' => $chunk,
+                    ]
+                );
+            }
+        }
+    }
+
+
+    /**
+     * Send a length-prefixed serialized message over a worker socket.
+     *
+     * @param resource $socket  The socket to write to.
+     * @param mixed    $payload Any serializable value.
+     *
+     * @return void
+     */
+    private static function sendMessage($socket, $payload)
+    {
+        $data   = serialize($payload);
+        $header = pack('N', strlen($data));
+        $buffer = $header . $data;
+        $offset = 0;
+        $total  = strlen($buffer);
+
+        while ($offset < $total) {
+            $written = fwrite($socket, substr($buffer, $offset));
+            if ($written === false || $written === 0) {
+                return;
+            }
+
+            $offset += $written;
+        }
+    }
+
+
+    /**
+     * Read a length-prefixed serialized message from a worker socket.
+     *
+     * @param resource $socket The socket to read from.
+     *
+     * @return mixed|null The decoded payload, or null on EOF / error.
+     */
+    private static function readMessage($socket)
+    {
+        $header = self::readBytes($socket, 4);
+        if ($header === null) {
+            return null;
+        }
+
+        $length = unpack('N', $header)[1];
+        if ($length === 0) {
+            return null;
+        }
+
+        $body = self::readBytes($socket, $length);
+        if ($body === null) {
+            return null;
+        }
+
+        $value = @unserialize($body);
+        if ($value === false && $body !== serialize(false)) {
+            return null;
+        }
+
+        return $value;
+    }
+
+
+    /**
+     * Read exactly $length bytes from a stream, looping over short reads.
+     *
+     * @param resource $socket The socket to read from.
+     * @param int      $length Number of bytes required.
+     *
+     * @return string|null The bytes read, or null on EOF / error.
+     */
+    private static function readBytes($socket, int $length)
+    {
+        $buffer = '';
+        while (strlen($buffer) < $length) {
+            $chunk = fread($socket, ($length - strlen($buffer)));
+            if ($chunk === false || $chunk === '') {
+                return null;
+            }
+
+            $buffer .= $chunk;
+        }
+
+        return $buffer;
     }
 
 
