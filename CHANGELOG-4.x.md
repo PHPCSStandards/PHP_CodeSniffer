@@ -2,6 +2,16 @@
 
 The file documents changes to the PHP_CodeSniffer project for the 4.x series of releases.
 
+## [Unreleased]
+
+### Added
+- New `ctrf` report which emits results in the [Common Test Report Format](https://ctrf.io/) (CTRF), an open JSON standard for test results.
+    - Each violation becomes one CTRF test entry. ERROR violations have status `failed`; WARNING violations have status `other`.
+    - Files with no violations emit one `passed` test, so the report contains the full set of files that were processed.
+    - Native PHPCS metadata (sniff source, severity, fixability) is preserved via CTRF's `rawStatus`, `tags`, and `extra` fields.
+    - Output validates against the CTRF schema (e.g. `npx --package=ctrf-cli@0.0.5 -- ctrf-cli validate <file>`).
+    - Use `--report=ctrf` for stdout output, or `--report-ctrf=/path/to/file.json` to write to a file.
+
 ## [4.0.1] - 2025-11-10
 
 This release includes all improvements and bugfixes from PHP_CodeSniffer [3.13.5].
