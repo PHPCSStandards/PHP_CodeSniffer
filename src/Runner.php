@@ -116,8 +116,12 @@ class Runner
 
             // Disable caching if we are processing STDIN as we can't be 100%
             // sure where the file came from or if it will change in the future.
+            // Also disable parallel processing — STDIN is a single file, and
+            // the workers can't see the in-memory DummyFile that holds the
+            // piped content.
             if ($this->config->stdin === true) {
-                $this->config->cache = false;
+                $this->config->cache    = false;
+                $this->config->parallel = 1;
             }
 
             $this->run();
