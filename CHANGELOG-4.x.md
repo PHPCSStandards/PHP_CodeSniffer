@@ -2,7 +2,7 @@
 
 The file documents changes to the PHP_CodeSniffer project for the 4.x series of releases.
 
-## [Unreleased]
+## Unreleased
 
 ### Added
 - New `ctrf` report which emits results in the [Common Test Report Format](https://ctrf.io/) (CTRF), an open JSON standard for test results.
