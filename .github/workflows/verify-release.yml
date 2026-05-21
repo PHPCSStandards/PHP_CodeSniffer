@@ -146,7 +146,7 @@ jobs:
         run: gpg --verify ${{ steps.source.outputs.FILE }}.asc ${{ steps.source.outputs.FILE }}
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # 2.37.0
+        uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # 2.37.1
         with:
           php-version: 'latest'
           ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On
@@ -216,7 +216,7 @@ jobs:
         run: "echo ${{ steps.version.outputs.TAG }}"
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # 2.37.0
+        uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # 2.37.1
         with:
           php-version: 'latest'
           ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On
