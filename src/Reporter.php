@@ -383,9 +383,9 @@ class Reporter
                     file_put_contents($this->tmpFiles[$type], '');
                 }
 
-                file_put_contents($this->tmpFiles[$type], $generatedReport, (FILE_APPEND | LOCK_EX));
+                $this->writeReport($this->tmpFiles[$type], $generatedReport);
             } else {
-                file_put_contents($report['output'], $generatedReport, (FILE_APPEND | LOCK_EX));
+                $this->writeReport($report['output'], $generatedReport);
             }
         }
 
@@ -400,6 +400,36 @@ class Reporter
             $this->totalFixableWarnings += $phpcsFile->getFixableWarningCount();
             $this->totalFixedErrors     += $phpcsFile->getFixedErrorCount();
             $this->totalFixedWarnings   += $phpcsFile->getFixedWarningCount();
+        }
+    }
+
+
+    /**
+     * WordPress Studio is running PHP on node.js and the filesystem does not support LOCK_EX
+     * so we have to catch the exception and write the file in a different way.
+     * For most systems this will just roll in and roll out using the usual file_put_contents
+     *
+     * @param string $reportFile The file that has been processed.
+     * @param string $reportData The data to be written to the report file.
+     *
+     * @return void
+     */
+    private function writeReport(string $reportFile, string $reportData)
+    {
+        try {
+            file_put_contents($reportFile, $reportData, (FILE_APPEND | LOCK_EX));
+        } catch (RuntimeException $e) {
+            if (file_exists($reportFile) === true) {
+                $fp = fopen($reportFile, 'a');
+                if ($fp !== false) {
+                    fwrite($fp, $reportData);
+                    fclose($fp);
+                } else {
+                    throw new RuntimeException('ERROR: unable to write report to file "' . $reportFile . '"');
+                }
+            } else {
+                file_put_contents($reportFile, $reportData);
+            }
         }
     }
 
