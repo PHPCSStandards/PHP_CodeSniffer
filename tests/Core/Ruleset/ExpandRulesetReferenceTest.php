@@ -113,7 +113,7 @@ final class ExpandRulesetReferenceTest extends AbstractRulesetTestCase
         ];
 
         // Add tests which are only relevant for case-sensitive OSes.
-        if (PHP_OS_FAMILY !== 'Windows') {
+        if (PHP_OS_FAMILY !== 'Windows' && PHP_OS_FAMILY !== 'Darwin') {
             $data['Referencing an existing sniff, but there is a case mismatch (OS-dependent) [1]'] = [
                 'standard'    => 'ExpandRulesetReferenceCaseMismatch1Test.xml',
                 'replacement' => 'psr12.functions.nullabletypedeclaration',
