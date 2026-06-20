@@ -25,7 +25,7 @@ jobs:
           persist-credentials: false
 
       - name: Install PHP
-        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # 2.37.0
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
         with:
           php-version: 'latest'
           coverage: none
@@ -51,34 +51,34 @@ jobs:
 
       # Validate the XSD file.
       - name: Validate XSD against schema
-        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
+        uses: phpcsstandards/xmllint-validate@3cec20cf1522fd72a88837490a5d987cdeef7fac # v1.0.2
         with:
           pattern: "phpcs.xsd"
           xsd-url: "https://www.w3.org/2012/04/XMLSchema.xsd"
 
       # Validate the XML ruleset files.
       - name: Validate rulesets against schema
-        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
+        uses: phpcsstandards/xmllint-validate@3cec20cf1522fd72a88837490a5d987cdeef7fac # v1.0.2
         with:
           pattern: "./src/Standards/*/ruleset.xml"
           xsd-file: "phpcs.xsd"
 
       # Validate the Documentation XML files.
       - name: Validate documentation XML
-        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
+        uses: phpcsstandards/xmllint-validate@3cec20cf1522fd72a88837490a5d987cdeef7fac # v1.0.2
         with:
           pattern: "./src/Standards/*/Docs/*/*Standard.xml"
           xsd-url: "https://phpcsstandards.github.io/PHPCSDevTools/phpcsdocs.xsd"
 
       # Validate dev tool related XML files.
       - name: Validate Project PHPCS ruleset against schema
-        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
+        uses: phpcsstandards/xmllint-validate@3cec20cf1522fd72a88837490a5d987cdeef7fac # v1.0.2
         with:
           pattern: "phpcs.xml.dist"
           xsd-file: "phpcs.xsd"
 
       - name: "Validate PHPUnit config for well-formedness"
-        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
+        uses: phpcsstandards/xmllint-validate@3cec20cf1522fd72a88837490a5d987cdeef7fac # v1.0.2
         with:
           pattern: "phpunit.xml.dist"
 
@@ -107,7 +107,7 @@ jobs:
 
       # Show XML violations inline in the file diff.
       - name: Enable showing XML issues inline
-        uses: korelstar/xmllint-problem-matcher@1bd292d642ddf3d369d02aaa8b262834d61198c0 # v1.2.0
+        uses: korelstar/xmllint-problem-matcher@dd2ad21bd8a2de0187cb621419537f345e7e509c # v1.3.0
 
       # Check the code-style consistency of the XML files.
       - name: Check XML code style
@@ -124,17 +124,17 @@ jobs:
 
   yamllint:
     name: 'Lint Yaml'
-    uses: PHPCSStandards/.github/.github/workflows/reusable-yamllint.yml@4ed5b7db58f8a2703cb83fdd7cf8a018b3aa974b # v1.1.3
+    uses: PHPCSStandards/.github/.github/workflows/reusable-yamllint.yml@8ab4abdb86d0a69a15ea85472ab7dd5c44a37759 # v1.2.0
     with:
       strict: true
 
   markdownlint:
     name: 'Lint Markdown'
-    uses: PHPCSStandards/.github/.github/workflows/reusable-markdownlint.yml@4ed5b7db58f8a2703cb83fdd7cf8a018b3aa974b # v1.1.3
+    uses: PHPCSStandards/.github/.github/workflows/reusable-markdownlint.yml@8ab4abdb86d0a69a15ea85472ab7dd5c44a37759 # v1.2.0
 
   remark:
     name: 'QA Markdown'
-    uses: PHPCSStandards/.github/.github/workflows/reusable-remark.yml@4ed5b7db58f8a2703cb83fdd7cf8a018b3aa974b # v1.1.3
+    uses: PHPCSStandards/.github/.github/workflows/reusable-remark.yml@8ab4abdb86d0a69a15ea85472ab7dd5c44a37759 # v1.2.0
 
   shellcheck:
     name: 'ShellCheck'
