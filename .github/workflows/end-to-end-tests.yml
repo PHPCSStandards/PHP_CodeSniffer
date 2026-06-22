@@ -53,7 +53,7 @@ jobs:
       - name: "Install bashunit"
         shell: bash
         run: |
-          curl -s https://bashunit.typeddevs.com/install.sh > install.sh
+          curl -sL https://bashunit.com/install.sh > install.sh
           chmod +x install.sh
           ./install.sh
 
