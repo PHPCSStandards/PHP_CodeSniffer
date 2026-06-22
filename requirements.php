@@ -41,6 +41,7 @@ function checkRequirements()
 
     $requiredExtensions = array(
         'tokenizer',
+        'libxml',
         'xmlwriter',
         'SimpleXML',
     );
