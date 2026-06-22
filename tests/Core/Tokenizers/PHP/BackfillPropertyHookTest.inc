@@ -19,7 +19,7 @@ class PropertyHookDemo
     public string /* testPropertyWithoutHooks */ $bar = 'default';
 
     public string $baz {
-        /* testSetHookDefaultParam */ set {
+        /* testSetHookImplicitParam */ set {
             $this->baz = strtoupper($value);
         }
     }

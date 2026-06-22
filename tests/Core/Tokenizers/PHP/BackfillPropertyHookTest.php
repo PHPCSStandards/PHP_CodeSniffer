@@ -29,8 +29,7 @@ final class BackfillPropertyHookTest extends AbstractTokenizerTestCase
      * @param string $openerType The expected scope opener token type.
      * @param string $closerType The expected scope closer token type.
      *
-     * @dataProvider    dataPropertyHooks
-     * @outputBuffering disabled
+     * @dataProvider dataPropertyHooks
      *
      * @return void
      */
@@ -93,8 +92,8 @@ final class BackfillPropertyHookTest extends AbstractTokenizerTestCase
                 'openerType' => 'T_OPEN_CURLY_BRACKET',
                 'closerType' => 'T_CLOSE_CURLY_BRACKET',
             ],
-            'set hook with default parameter' => [
-                'testMarker' => '/* testSetHookDefaultParam */',
+            'set hook without parameter list' => [
+                'testMarker' => '/* testSetHookImplicitParam */',
                 'tokenType'  => 'T_PROPERTY_HOOK_SET',
                 'openerType' => 'T_OPEN_CURLY_BRACKET',
                 'closerType' => 'T_CLOSE_CURLY_BRACKET',
@@ -263,23 +262,35 @@ final class BackfillPropertyHookTest extends AbstractTokenizerTestCase
 
 
     /**
-     * Test that normal properties and function calls are not retokenized as property hooks.
+     * Test that non-hook syntax is not retokenized as property hooks.
      *
      * @return void
      */
-    public function testNonHookSyntaxIsLeftAlone()
+    public function testNonHookSyntaxIsNotRetokenized()
     {
         $tokens   = $this->phpcsFile->getTokens();
         $property = $this->getTargetToken('/* testPropertyWithoutHooks */', T_VARIABLE);
         $call     = $this->getTargetToken('/* testSetFunctionCall */', T_STRING, 'set');
         $matchArm = $this->getTargetToken('/* testMatchSetArm */', T_STRING, 'set');
-        $hookGet  = $this->getTargetToken('/* testGetFunctionCallInsideHook */', T_STRING, 'get');
-        $hookSet  = $this->getTargetToken('/* testSetFunctionCallInsideHook */', T_STRING, 'set');
-        $hookArm  = $this->getTargetToken('/* testMatchSetArmInsideHook */', T_STRING, 'set');
 
         $this->assertSame(T_VARIABLE, $tokens[$property]['code']);
         $this->assertSame(T_STRING, $tokens[$call]['code']);
         $this->assertSame(T_STRING, $tokens[$matchArm]['code']);
+    }
+
+
+    /**
+     * Test that hook-looking syntax inside hooks is not retokenized as property hooks.
+     *
+     * @return void
+     */
+    public function testNestedHookSyntaxIsNotRetokenized()
+    {
+        $tokens  = $this->phpcsFile->getTokens();
+        $hookGet = $this->getTargetToken('/* testGetFunctionCallInsideHook */', T_STRING, 'get');
+        $hookSet = $this->getTargetToken('/* testSetFunctionCallInsideHook */', T_STRING, 'set');
+        $hookArm = $this->getTargetToken('/* testMatchSetArmInsideHook */', T_STRING, 'set');
+
         $this->assertSame(T_STRING, $tokens[$hookGet]['code']);
         $this->assertSame(T_STRING, $tokens[$hookSet]['code']);
         $this->assertSame(T_STRING, $tokens[$hookArm]['code']);
