@@ -399,8 +399,8 @@ class FunctionDeclarationSniff implements Sniff
         if ($tokens[$closeBracket]['line'] !== $tokens[$tokens[$closeBracket]['parenthesis_opener']]['line']
             && $tokens[$prev]['line'] === $tokens[$closeBracket]['line']
         ) {
-            $error = 'The closing parenthesis of a multi-line ' . $type . ' declaration must be on a new line';
-            $fix   = $phpcsFile->addFixableError($error, $closeBracket, 'CloseBracketLine');
+            $error = 'The closing parenthesis of a multi-line %s declaration must be on a new line';
+            $fix   = $phpcsFile->addFixableError($error, $closeBracket, 'CloseBracketLine', [$type]);
             if ($fix === true) {
                 $phpcsFile->fixer->addNewlineBefore($closeBracket);
             }
@@ -455,8 +455,8 @@ class FunctionDeclarationSniff implements Sniff
                 if ($tokens[$i]['code'] === T_WHITESPACE
                     && $tokens[$i]['line'] !== $tokens[($i + 1)]['line']
                 ) {
-                    $error = 'Blank lines are not allowed in a multi-line ' . $type . ' declaration';
-                    $fix   = $phpcsFile->addFixableError($error, $i, 'EmptyLine');
+                    $error = 'Blank lines are not allowed in a multi-line %s declaration';
+                    $fix   = $phpcsFile->addFixableError($error, $i, 'EmptyLine', [$type]);
                     if ($fix === true) {
                         $phpcsFile->fixer->replaceToken($i, '');
                     }
@@ -495,10 +495,11 @@ class FunctionDeclarationSniff implements Sniff
                 }
 
                 if ($expectedIndent !== $foundIndent) {
-                    $error = 'Multi-line ' . $type . ' declaration not indented correctly; expected %s spaces but found %s';
+                    $error = 'Multi-line %3$s declaration not indented correctly; expected %1$s spaces but found %2$s';
                     $data  = [
                         $expectedIndent,
                         $foundIndent,
+                        $type,
                     ];
 
                     $fix = $phpcsFile->addFixableError($error, $i, 'Indent', $data);
