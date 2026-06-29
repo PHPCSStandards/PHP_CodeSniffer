@@ -83,10 +83,11 @@ class SwitchDeclarationSniff implements Sniff
 
             if ($tokens[$nextCase]['content'] !== strtolower($tokens[$nextCase]['content'])) {
                 $expected = strtolower($tokens[$nextCase]['content']);
-                $error    = strtoupper($type) . ' keyword must be lowercase; expected "%s" but found "%s"';
+                $error    = '%3$s keyword must be lowercase; expected "%1$s" but found "%2$s"';
                 $data     = [
                     $expected,
                     $tokens[$nextCase]['content'],
+                    strtoupper($type),
                 ];
 
                 $fix = $phpcsFile->addFixableError($error, $nextCase, $type . 'NotLower', $data);
@@ -114,8 +115,8 @@ class SwitchDeclarationSniff implements Sniff
             $nextCloser = $tokens[$nextCase]['scope_closer'];
             if ($tokens[$opener]['code'] === T_COLON) {
                 if ($tokens[($opener - 1)]['code'] === T_WHITESPACE) {
-                    $error = 'There must be no space before the colon in a ' . strtoupper($type) . ' statement';
-                    $fix   = $phpcsFile->addFixableError($error, $nextCase, 'SpaceBeforeColon' . strtoupper($type));
+                    $error = 'There must be no space before the colon in a %s statement';
+                    $fix   = $phpcsFile->addFixableError($error, $nextCase, 'SpaceBeforeColon' . strtoupper($type), [strtoupper($type)]);
                     if ($fix === true) {
                         $phpcsFile->fixer->replaceToken(($opener - 1), '');
                     }
@@ -131,8 +132,8 @@ class SwitchDeclarationSniff implements Sniff
                 }
 
                 if ($tokens[$next]['line'] !== ($tokens[$opener]['line'] + 1)) {
-                    $error = 'The ' . strtoupper($type) . ' body must start on the line following the statement';
-                    $fix   = $phpcsFile->addFixableError($error, $nextCase, 'BodyOnNextLine' . strtoupper($type));
+                    $error = 'The %s body must start on the line following the statement';
+                    $fix   = $phpcsFile->addFixableError($error, $nextCase, 'BodyOnNextLine' . strtoupper($type), [strtoupper($type)]);
                     if ($fix === true) {
                         if ($tokens[$next]['line'] === $tokens[$opener]['line']) {
                             $padding = str_repeat(' ', ($caseAlignment + $this->indent - 1));
@@ -185,9 +186,9 @@ class SwitchDeclarationSniff implements Sniff
                     }
                 }
             } else {
-                $error = strtoupper($type) . ' statements must be defined using a colon';
+                $error = '%s statements must be defined using a colon';
                 if ($tokens[$opener]['code'] === T_SEMICOLON || $tokens[$opener]['code'] === T_CLOSE_TAG) {
-                    $fix = $phpcsFile->addFixableError($error, $nextCase, 'WrongOpener' . $type);
+                    $fix = $phpcsFile->addFixableError($error, $nextCase, 'WrongOpener' . $type, [strtoupper($type)]);
                     if ($fix === true) {
                         if ($tokens[$opener]['code'] === T_SEMICOLON) {
                             $phpcsFile->fixer->replaceToken($opener, ':');
@@ -201,7 +202,7 @@ class SwitchDeclarationSniff implements Sniff
                         $error = '%s statements must not use a braced block after the colon';
                         $phpcsFile->addError($error, $nextCase, 'WrongOpener', [strtoupper($type)]);
                     } else {
-                        $phpcsFile->addError($error, $nextCase, 'WrongOpener' . $type);
+                        $phpcsFile->addError($error, $nextCase, 'WrongOpener' . $type, [strtoupper($type)]);
                     }
                 }
             }
