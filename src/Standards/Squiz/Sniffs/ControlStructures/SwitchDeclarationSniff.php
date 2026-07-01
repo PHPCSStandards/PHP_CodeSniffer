@@ -79,10 +79,11 @@ class SwitchDeclarationSniff implements Sniff
 
             if ($tokens[$nextCase]['content'] !== strtolower($tokens[$nextCase]['content'])) {
                 $expected = strtolower($tokens[$nextCase]['content']);
-                $error    = strtoupper($type) . ' keyword must be lowercase; expected "%s" but found "%s"';
+                $error    = '%3$s keyword must be lowercase; expected "%1$s" but found "%2$s"';
                 $data     = [
                     $expected,
                     $tokens[$nextCase]['content'],
+                    strtoupper($type),
                 ];
 
                 $fix = $phpcsFile->addFixableError($error, $nextCase, $type . 'NotLower', $data);
@@ -120,8 +121,12 @@ class SwitchDeclarationSniff implements Sniff
                     }
                 }
             } elseif ($tokens[$nextCase]['column'] !== $caseAlignment) {
-                $error = strtoupper($type) . ' keyword must be indented ' . $this->indent . ' spaces from SWITCH keyword';
-                $fix   = $phpcsFile->addFixableError($error, $nextCase, $type . 'Indent');
+                $error = '%s keyword must be indented %s spaces from SWITCH keyword';
+                $data  = [
+                    strtoupper($type),
+                    $this->indent,
+                ];
+                $fix   = $phpcsFile->addFixableError($error, $nextCase, $type . 'Indent', $data);
 
                 if ($fix === true) {
                     $padding = str_repeat(' ', ($caseAlignment - 1));
@@ -155,8 +160,8 @@ class SwitchDeclarationSniff implements Sniff
             }
 
             if ($tokens[($opener - 1)]['type'] === 'T_WHITESPACE') {
-                $error = 'There must be no space before the colon in a ' . strtoupper($type) . ' statement';
-                $fix   = $phpcsFile->addFixableError($error, $nextCase, 'SpaceBeforeColon' . $type);
+                $error = 'There must be no space before the colon in a %s statement';
+                $fix   = $phpcsFile->addFixableError($error, $nextCase, 'SpaceBeforeColon' . $type, [strtoupper($type)]);
                 if ($fix === true) {
                     $phpcsFile->fixer->replaceToken(($opener - 1), '');
                 }
@@ -188,8 +193,8 @@ class SwitchDeclarationSniff implements Sniff
                             }
                         }
                     } elseif ($tokens[$nextBreak]['column'] !== $caseAlignment) {
-                        $error = 'Case breaking statement must be indented ' . $this->indent . ' spaces from SWITCH keyword';
-                        $fix   = $phpcsFile->addFixableError($error, $nextBreak, 'BreakIndent');
+                        $error = 'Case breaking statement must be indented %s spaces from SWITCH keyword';
+                        $fix   = $phpcsFile->addFixableError($error, $nextBreak, 'BreakIndent', [$this->indent]);
 
                         if ($fix === true) {
                             $padding = str_repeat(' ', ($caseAlignment - 1));
@@ -312,8 +317,8 @@ class SwitchDeclarationSniff implements Sniff
                             }
                         }
                     } elseif (($nextLine - $caseLine) > 1) {
-                        $error = 'Blank lines are not allowed after ' . strtoupper($type) . ' statements';
-                        $phpcsFile->addError($error, $nextCase, 'SpacingAfter' . $type);
+                        $error = 'Blank lines are not allowed after %s statements';
+                        $phpcsFile->addError($error, $nextCase, 'SpacingAfter' . $type, [strtoupper($type)]);
                     }
                 }
 
