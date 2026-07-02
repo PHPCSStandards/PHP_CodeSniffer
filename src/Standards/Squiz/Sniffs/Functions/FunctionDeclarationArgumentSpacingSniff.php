@@ -200,10 +200,11 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                 }
 
                 if ($spacesBefore !== $this->equalsSpacing) {
-                    $error = 'Incorrect spacing between argument "%s" and equals sign; expected ' . $this->equalsSpacing . ' but found %s';
+                    $error = 'Incorrect spacing between argument "%1$s" and equals sign; expected %3$s but found %2$s';
                     $data  = [
                         $param['name'],
                         $spacesBefore,
+                        $this->equalsSpacing,
                     ];
 
                     $nextNonWhitespace = $phpcsFile->findNext(T_WHITESPACE, ($param['token'] + 1), $equalToken, true);
@@ -234,10 +235,11 @@ class FunctionDeclarationArgumentSpacingSniff implements Sniff
                 }
 
                 if ($spacesAfter !== $this->equalsSpacing) {
-                    $error = 'Incorrect spacing between default value and equals sign for argument "%s"; expected ' . $this->equalsSpacing . ' but found %s';
+                    $error = 'Incorrect spacing between default value and equals sign for argument "%1$s"; expected %3$s but found %2$s';
                     $data  = [
                         $param['name'],
                         $spacesAfter,
+                        $this->equalsSpacing,
                     ];
 
                     $nextNonWhitespace = $phpcsFile->findNext(T_WHITESPACE, ($equalToken + 1), $param['default_token'], true);
