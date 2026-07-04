@@ -248,6 +248,11 @@ class MultipleStatementAlignmentSniff implements Sniff
                 true
             );
 
+            if ($assign !== $stackPtr && $tokens[$var]['line'] !== $tokens[$assign]['line']) {
+                // A wrapped operator has no operand on its own line to align to.
+                continue;
+            }
+
             // Make sure we wouldn't break our max padding length if we
             // aligned with this statement, or they wouldn't break the max
             // padding length if they aligned with us.

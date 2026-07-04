@@ -502,3 +502,13 @@ function makeSureThatAssignmentWithinClosureAreStillHandled() {
         return $variables;
     };
 }
+
+$wrappedChain = $foo
+    = $bar;
+
+$shortName              = $foo
+    = $bar;
+$muchLongerVariableName = $baz;
+
+$commentBeforeOperator = $foo
+/* comment */ = $bar;

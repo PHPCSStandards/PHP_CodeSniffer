@@ -122,6 +122,7 @@ final class MultipleStatementAlignmentUnitTest extends AbstractSniffTestCase
             487 => 1,
             499 => 1,
             500 => 1,
+            509 => 1,
         ];
     }
 }
