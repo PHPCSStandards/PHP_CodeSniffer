@@ -20,4 +20,4 @@ concurrency:
 jobs:
   phpstan:
     name: "PHPStan"
-    uses: PHPCSStandards/.github/.github/workflows/reusable-phpstan.yml@8ab4abdb86d0a69a15ea85472ab7dd5c44a37759 # v1.2.0
+    uses: PHPCSStandards/.github/.github/workflows/reusable-phpstan.yml@fcbbdd9495898d68229655147333a910679c33cf # v1.2.1

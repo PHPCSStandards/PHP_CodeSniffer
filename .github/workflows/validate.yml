@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
 
@@ -45,45 +45,45 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
 
       # Validate the XSD file.
       - name: Validate XSD against schema
-        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
+        uses: phpcsstandards/xmllint-validate@5189514594c8d5f4cf21b7e5af50f54d697973d7 # v2.0.0
         with:
           pattern: "phpcs.xsd"
           xsd-url: "https://www.w3.org/2012/04/XMLSchema.xsd"
 
       # Validate the XML ruleset files.
       - name: Validate rulesets against schema
-        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
+        uses: phpcsstandards/xmllint-validate@5189514594c8d5f4cf21b7e5af50f54d697973d7 # v2.0.0
         with:
           pattern: "./src/Standards/*/ruleset.xml"
           xsd-file: "phpcs.xsd"
 
       # Validate the Documentation XML files.
       - name: Validate documentation XML
-        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
+        uses: phpcsstandards/xmllint-validate@5189514594c8d5f4cf21b7e5af50f54d697973d7 # v2.0.0
         with:
           pattern: "./src/Standards/*/Docs/*/*Standard.xml"
           xsd-url: "https://phpcsstandards.github.io/PHPCSDevTools/phpcsdocs.xsd"
 
       # Validate dev tool related XML files.
       - name: Validate Project PHPCS ruleset against schema
-        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
+        uses: phpcsstandards/xmllint-validate@5189514594c8d5f4cf21b7e5af50f54d697973d7 # v2.0.0
         with:
           pattern: "phpcs.xml.dist"
           xsd-file: "phpcs.xsd"
 
       - name: "Validate PHPUnit <= 9 config for well-formedness"
-        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
+        uses: phpcsstandards/xmllint-validate@5189514594c8d5f4cf21b7e5af50f54d697973d7 # v2.0.0
         with:
           pattern: "phpunit-lte9.xml.dist"
 
       - name: "Validate PHPUnit 10+ config for well-formedness"
-        uses: phpcsstandards/xmllint-validate@0fd9c4a9046055f621fca4bbdccb8eab1fd59fdc # v1.0.1
+        uses: phpcsstandards/xmllint-validate@5189514594c8d5f4cf21b7e5af50f54d697973d7 # v2.0.0
         with:
           pattern: "phpunit.xml.dist"
 
@@ -96,7 +96,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
 
@@ -128,17 +128,17 @@ jobs:
 
   yamllint:
     name: 'Lint Yaml'
-    uses: PHPCSStandards/.github/.github/workflows/reusable-yamllint.yml@8ab4abdb86d0a69a15ea85472ab7dd5c44a37759 # v1.2.0
+    uses: PHPCSStandards/.github/.github/workflows/reusable-yamllint.yml@fcbbdd9495898d68229655147333a910679c33cf # v1.2.1
     with:
       strict: true
 
   markdownlint:
     name: 'Lint Markdown'
-    uses: PHPCSStandards/.github/.github/workflows/reusable-markdownlint.yml@8ab4abdb86d0a69a15ea85472ab7dd5c44a37759 # v1.2.0
+    uses: PHPCSStandards/.github/.github/workflows/reusable-markdownlint.yml@fcbbdd9495898d68229655147333a910679c33cf # v1.2.1
 
   remark:
     name: 'QA Markdown'
-    uses: PHPCSStandards/.github/.github/workflows/reusable-remark.yml@8ab4abdb86d0a69a15ea85472ab7dd5c44a37759 # v1.2.0
+    uses: PHPCSStandards/.github/.github/workflows/reusable-remark.yml@fcbbdd9495898d68229655147333a910679c33cf # v1.2.1
 
   shellcheck:
     name: 'ShellCheck'
@@ -146,7 +146,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
 
@@ -164,4 +164,4 @@ jobs:
     # The properties in the Tokens class have been deprecated.
     # The code in this repository should always use the constants instead.
     name: 'Find use of Tokens properties'
-    uses: PHPCSStandards/.github/.github/workflows/reusable-findtokenprops.yml@3d96a6d85381655b6cb0bc4eac175a78f18d9d8f # v1.1.2
+    uses: PHPCSStandards/.github/.github/workflows/reusable-findtokenprops.yml@fcbbdd9495898d68229655147333a910679c33cf # v1.2.1
