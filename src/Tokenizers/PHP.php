@@ -2580,7 +2580,7 @@ class PHP extends Tokenizer
                             break;
                         }
 
-                        if ($tokens[$i] === '=') {
+                        if (isset($tokens[$i]) === true && $tokens[$i] === '=') {
                             $preserveTstring        = true;
                             $insideConstDeclaration = false;
                         }
