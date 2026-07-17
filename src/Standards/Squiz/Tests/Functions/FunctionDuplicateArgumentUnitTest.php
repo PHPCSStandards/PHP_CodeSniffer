@@ -27,15 +27,22 @@ final class FunctionDuplicateArgumentUnitTest extends AbstractSniffTestCase
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile = '')
     {
-        return [
-            2 => 1,
-            4 => 2,
-            5 => 1,
-        ];
+        switch ($testFile) {
+            case 'FunctionDuplicateArgumentUnitTest.1.inc':
+                return [
+                    2 => 1,
+                    4 => 2,
+                    5 => 1,
+                ];
+            default:
+                return [];
+        }
     }
 
 
