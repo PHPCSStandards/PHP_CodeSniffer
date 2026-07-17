@@ -40,6 +40,10 @@ final class FunctionDuplicateArgumentUnitTest extends AbstractSniffTestCase
                     4 => 2,
                     5 => 1,
                 ];
+            case 'FunctionDuplicateArgumentUnitTest.4.inc':
+                return [
+                    7 => 1,
+                ];
             default:
                 return [];
         }
