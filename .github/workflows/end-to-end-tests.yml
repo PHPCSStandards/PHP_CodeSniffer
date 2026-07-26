@@ -49,6 +49,8 @@ jobs:
           php-version: ${{ matrix.php }}
           ini-values: "error_reporting=-1, display_errors=On, display_startup_errors=On"
           coverage: none
+        env:
+          fail-fast: true
 
       - name: "Install bashunit"
         shell: bash

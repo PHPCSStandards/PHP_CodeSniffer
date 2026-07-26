@@ -194,6 +194,8 @@ jobs:
           ini-values: ${{ steps.set_ini.outputs.PHP_INI }}
           extensions: ${{ matrix.extensions }}
           coverage: none
+        env:
+          fail-fast: true
 
       - name: "DEBUG: show libxml loaded version (php)"
         run: php -r 'echo "libxml loaded version = ", LIBXML_LOADED_VERSION, PHP_EOL;'
@@ -321,6 +323,8 @@ jobs:
           ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On${{ steps.set_ini.outputs.PHP_INI }}
           extensions: ${{ matrix.extensions }}
           coverage: xdebug
+        env:
+          fail-fast: true
 
       # Install dependencies and handle caching in one go.
       # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
