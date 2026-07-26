@@ -151,6 +151,8 @@ jobs:
           php-version: 'latest'
           ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On
           coverage: none
+        env:
+          fail-fast: true
 
       - name: Create a PHP file
         run: echo '<?php echo "Hello, World!";' > hello.php
@@ -222,6 +224,8 @@ jobs:
           ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On
           coverage: none
           tools: phive
+        env:
+          fail-fast: true
 
       - name: Install
         run: >

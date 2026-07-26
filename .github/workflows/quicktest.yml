@@ -59,6 +59,8 @@ jobs:
           php-version: ${{ matrix.php }}
           ini-values: 'error_reporting=-1, display_errors=On, display_startup_errors=On'
           coverage: none
+        env:
+          fail-fast: true
 
       # Install dependencies and handle caching in one go.
       # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
