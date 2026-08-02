@@ -2,7 +2,7 @@
 /**
  * Tests that a const declaration name which is the last non-empty token in a file is tokenized without an error.
  *
- * @copyright 2025 PHPCSStandards and contributors
+ * @copyright 2026 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
@@ -20,14 +20,14 @@ final class ConstNameAsLastTokenTest extends AbstractTokenizerTestCase
 
 
     /**
-     * Test that the name of a const declaration which is the last non-empty token in a file is tokenized as T_STRING.
+     * Test that an unfinished constant declaration during live coding doesn't cause an "Undefined array key" error.
      *
      * @return void
      */
-    public function testConstNameAsLastToken()
+    public function testLiveCoding()
     {
         $tokens     = $this->phpcsFile->getTokens();
-        $target     = $this->getTargetToken('/* testConstNameAsLastToken */', [T_STRING]);
+        $target     = $this->getTargetToken('/* testLiveCoding */', [T_STRING]);
         $tokenArray = $tokens[$target];
 
         $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
