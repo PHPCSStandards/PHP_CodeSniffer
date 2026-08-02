@@ -50,8 +50,9 @@ final class CommentBeforeInlineElseTest extends AbstractTokenizerTestCase
     public static function dataInlineElseAfterComment()
     {
         return [
-            'colon after slash comment' => ['/* testInlineElseAfterSlashComment */'],
-            'colon after hash comment'  => ['/* testInlineElseAfterHashComment */'],
+            'colon after slash comment'                                => ['/* testInlineElseAfterSlashComment */'],
+            'colon after hash comment'                                 => ['/* testInlineElseAfterHashComment */'],
+            'colon after parenthesized expression with comment before' => ['/* testInlineElseAfterParenthesizedExpressionWithCommentBefore */'],
         ];
     }
 

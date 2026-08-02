@@ -41,3 +41,16 @@ $fn = $foo
 ($x): int { return $x; }
 /* testInlineElseAfterReturnTypeAfterHashComment */
 : "b";
+
+/*
+ * For the below test case, the tokenizer tries to distinguish between a colon for a return type
+ * of a function declaration versus the colon in an inline else.
+ * To do so, the tokenizer needs to look at what comes before the open parenthesis and could
+ * hit a comment again with the original new line token having been set to `null`.
+ * This test safeguards against a warning being thrown for that specific situation.
+ */
+
+/* testInlineElseAfterParenthesizedExpressionWithCommentBefore */
+echo true
+? // Comment before parenthesized expression.
+(5 >= 10) : "b";
