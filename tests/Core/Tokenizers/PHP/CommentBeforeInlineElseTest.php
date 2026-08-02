@@ -80,7 +80,7 @@ final class CommentBeforeInlineElseTest extends AbstractTokenizerTestCase
         $this->assertSame(T_COLON, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_COLON (code)');
         $this->assertSame('T_COLON', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_COLON (type)');
 
-        // Verify the ternary else colon is retokenized correctly to .
+        // Verify the ternary else colon is retokenized correctly to T_INLINE_ELSE.
         $target     = $this->getTargetToken($markerTernaryElseColon, [T_INLINE_ELSE, T_COLON]);
         $tokenArray = $tokens[$target];
 
