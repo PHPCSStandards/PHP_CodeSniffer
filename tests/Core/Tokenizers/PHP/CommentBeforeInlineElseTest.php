@@ -2,7 +2,7 @@
 /**
  * Tests the retokenization of the ternary colon to T_INLINE_ELSE when preceded by a comment.
  *
- * @copyright 2025 PHPCSStandards and contributors
+ * @copyright 2026 PHPCSStandards and contributors
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 
@@ -61,20 +61,30 @@ final class CommentBeforeInlineElseTest extends AbstractTokenizerTestCase
      * else when a slash or hash comment sits between the function keyword and the parameter
      * parenthesis and is not followed by indentation.
      *
-     * @param string $testMarker The comment which prefaces the target token in the test file.
+     * @param string $markerReturnTypeColon  The comment which prefaces the target token for the return type colon.
+     * @param string $markerTernaryElseColon The comment which prefaces the target token for the inline else colon.
      *
      * @dataProvider dataColonReturnTypeAfterComment
      *
      * @return void
      */
-    public function testColonReturnTypeAfterComment($testMarker)
+    public function testColonReturnTypeAfterComment($markerReturnTypeColon, $markerTernaryElseColon)
     {
-        $tokens     = $this->phpcsFile->getTokens();
-        $target     = $this->getTargetToken($testMarker, [T_INLINE_ELSE, T_COLON]);
+        $tokens = $this->phpcsFile->getTokens();
+
+        // Verify the return type colon is still T_COLON.
+        $target     = $this->getTargetToken($markerReturnTypeColon, [T_INLINE_ELSE, T_COLON]);
         $tokenArray = $tokens[$target];
 
         $this->assertSame(T_COLON, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_COLON (code)');
         $this->assertSame('T_COLON', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_COLON (type)');
+
+        // Verify the ternary else colon is retokenized correctly to .
+        $target     = $this->getTargetToken($markerTernaryElseColon, [T_INLINE_ELSE, T_COLON]);
+        $tokenArray = $tokens[$target];
+
+        $this->assertSame(T_INLINE_ELSE, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_INLINE_ELSE (code)');
+        $this->assertSame('T_INLINE_ELSE', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_INLINE_ELSE (type)');
     }
 
 
@@ -83,13 +93,19 @@ final class CommentBeforeInlineElseTest extends AbstractTokenizerTestCase
      *
      * @see testColonReturnTypeAfterComment()
      *
-     * @return array<string, array<string>>
+     * @return array<string, array<string, string>>
      */
     public static function dataColonReturnTypeAfterComment()
     {
         return [
-            'return type colon after slash comment' => ['/* testColonReturnTypeAfterSlashComment */'],
-            'return type colon after hash comment'  => ['/* testColonReturnTypeAfterHashComment */'],
+            'return type colon after slash comment' => [
+                'markerReturnTypeColon'  => '/* testColonReturnTypeAfterSlashComment */',
+                'markerTernaryElseColon' => '/* testInlineElseAfterReturnTypeAfterSlashComment */',
+            ],
+            'return type colon after hash comment'  => [
+                'markerReturnTypeColon'  => '/* testColonReturnTypeAfterHashComment */',
+                'markerTernaryElseColon' => '/* testInlineElseAfterReturnTypeAfterHashComment */',
+            ],
         ];
     }
 }

@@ -5,19 +5,20 @@
  * On PHP 8+, this makes the tokenizer merge the new line after the `//`/`#` comment into the
  * comment token and set the original new line token to `null`. The backward-walking loops in
  * the colon retokenization need to skip over these `null` tokens.
+ *
  * See https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/1418.
  */
 
 /* testInlineElseAfterSlashComment */
 echo (5 >= 10)
 ? "a"
-//
+// Comment.
 : "b";
 
 /* testInlineElseAfterHashComment */
 $var = true
 ? "a"
-#
+# Comment.
 : "b";
 
 /*
@@ -28,13 +29,15 @@ $var = true
  */
 
 /* testColonReturnTypeAfterSlashComment */
-$fn = (5 >= 10)
-? fn//
+$fn = $foo
+? fn // Comment.
 ($x): int => $x
+/* testInlineElseAfterReturnTypeAfterSlashComment */
 : "b";
 
 /* testColonReturnTypeAfterHashComment */
-$fn = (5 >= 10)
-? function#
+$fn = $foo
+? function # Comment.
 ($x): int { return $x; }
+/* testInlineElseAfterReturnTypeAfterHashComment */
 : "b";
