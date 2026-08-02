@@ -2670,6 +2670,11 @@ class PHP extends Tokenizer
                     // Make sure this isn't a named parameter label.
                     // Get the previous non-empty token.
                     for ($i = ($stackPtr - 1); $i > 0; $i--) {
+                        if (isset($tokens[$i]) === false) {
+                            // Ignore skipped tokens (related to PHP 8+ slash/hash comment vs new line retokenization).
+                            continue;
+                        }
+
                         if (is_array($tokens[$i]) === false
                             || isset(Tokens::EMPTY_TOKENS[$tokens[$i][0]]) === false
                         ) {
@@ -2687,6 +2692,11 @@ class PHP extends Tokenizer
                     if ($isInlineIf === true) {
                         // Make sure this isn't a return type separator.
                         for ($i = ($stackPtr - 1); $i > 0; $i--) {
+                            if (isset($tokens[$i]) === false) {
+                                // Ignore skipped tokens (related to PHP 8+ slash/hash comment vs new line retokenization).
+                                continue;
+                            }
+
                             if (is_array($tokens[$i]) === false
                                 || ($tokens[$i][0] !== T_DOC_COMMENT
                                 && $tokens[$i][0] !== T_COMMENT
@@ -2714,6 +2724,11 @@ class PHP extends Tokenizer
                             // Note that we need to skip T_STRING tokens here as these
                             // can be function names.
                             for ($i--; $i > 0; $i--) {
+                                if (isset($tokens[$i]) === false) {
+                                    // Ignore skipped tokens (related to PHP 8+ slash/hash comment vs new line retokenization).
+                                    continue;
+                                }
+
                                 if (is_array($tokens[$i]) === false
                                     || ($tokens[$i][0] !== T_DOC_COMMENT
                                     && $tokens[$i][0] !== T_COMMENT
