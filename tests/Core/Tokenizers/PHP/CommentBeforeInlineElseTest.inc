@@ -19,3 +19,22 @@ $var = true
 ? "a"
 #
 : "b";
+
+/*
+ * The colon after the closure/arrow function below is a return type separator, not an inline else.
+ * The comment between the `function`/`fn` keyword and the parameter parenthesis creates the same
+ * `null` token, which the backward-walking loop looking for the function keyword must skip over so
+ * the return type colon is not mistaken for an inline else.
+ */
+
+/* testColonReturnTypeAfterSlashComment */
+$fn = (5 >= 10)
+? fn//
+($x): int => $x
+: "b";
+
+/* testColonReturnTypeAfterHashComment */
+$fn = (5 >= 10)
+? function#
+($x): int { return $x; }
+: "b";

@@ -54,4 +54,42 @@ final class CommentBeforeInlineElseTest extends AbstractTokenizerTestCase
             'colon after hash comment'  => ['/* testInlineElseAfterHashComment */'],
         ];
     }
+
+
+    /**
+     * Test that the return type colon of a closure or arrow function is not mistaken for an inline
+     * else when a slash or hash comment sits between the function keyword and the parameter
+     * parenthesis and is not followed by indentation.
+     *
+     * @param string $testMarker The comment which prefaces the target token in the test file.
+     *
+     * @dataProvider dataColonReturnTypeAfterComment
+     *
+     * @return void
+     */
+    public function testColonReturnTypeAfterComment($testMarker)
+    {
+        $tokens     = $this->phpcsFile->getTokens();
+        $target     = $this->getTargetToken($testMarker, [T_INLINE_ELSE, T_COLON]);
+        $tokenArray = $tokens[$target];
+
+        $this->assertSame(T_COLON, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_COLON (code)');
+        $this->assertSame('T_COLON', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_COLON (type)');
+    }
+
+
+    /**
+     * Data provider.
+     *
+     * @see testColonReturnTypeAfterComment()
+     *
+     * @return array<string, array<string>>
+     */
+    public static function dataColonReturnTypeAfterComment()
+    {
+        return [
+            'return type colon after slash comment' => ['/* testColonReturnTypeAfterSlashComment */'],
+            'return type colon after hash comment'  => ['/* testColonReturnTypeAfterHashComment */'],
+        ];
+    }
 }
