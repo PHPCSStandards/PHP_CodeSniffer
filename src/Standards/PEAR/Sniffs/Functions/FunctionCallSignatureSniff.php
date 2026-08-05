@@ -511,12 +511,6 @@ class FunctionCallSignatureSniff implements Sniff
                         $expectedIndent = ($foundFunctionIndent + $this->indent + $adjustment);
                     }
 
-                    if ($tokens[$i]['code'] === T_END_HEREDOC
-                        || $tokens[$i]['code'] === T_END_NOWDOC
-                    ) {
-                        continue;
-                    }
-
                     if ($tokens[$i]['code'] !== T_WHITESPACE
                         && $tokens[$i]['code'] !== T_DOC_COMMENT_WHITESPACE
                     ) {
@@ -557,10 +551,7 @@ class FunctionCallSignatureSniff implements Sniff
                             $padding = str_repeat(' ', $expectedIndent);
                             if ($foundIndent === 0) {
                                 $phpcsFile->fixer->addContentBefore($i, $padding);
-                                if (isset($tokens[$i]['scope_opener']) === true
-                                    && $tokens[$i]['code'] !== T_START_HEREDOC
-                                    && $tokens[$i]['code'] !== T_START_NOWDOC
-                                ) {
+                                if (isset($tokens[$i]['scope_opener']) === true) {
                                     $phpcsFile->fixer->changeCodeBlockIndent($i, $tokens[$i]['scope_closer'], $expectedIndent);
                                 }
                             } else {

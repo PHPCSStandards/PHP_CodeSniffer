@@ -629,9 +629,49 @@ $anon = new class () {};
 // And anonymous object instantiations without parentheses are ignored.
 $anon = new class {};
 
-// Flexible heredoc in multiline function call.
-<?php if (1) f(
-    <<<E
-	x
-E
+/*
+ * Heredoc/nowdoc contents should not be reindented when correcting the
+ * indentation of a multi-line function call argument.
+ */
+
+// Spaces: too little indentation, unquoted heredoc.
+functionCall(
+    <<<HEREDOC
+  content
+HEREDOC
+);
+
+// Spaces: correct indentation, double quoted heredoc.
+functionCall(
+    <<<"HEREDOC"
+    content
+HEREDOC
+);
+
+// Spaces: too much indentation, nowdoc.
+functionCall(
+    <<<'NOWDOC'
+      content
+NOWDOC
+);
+
+// Tabs: too little indentation, nowdoc.
+functionCall(
+    <<<'NOWDOC'
+	content
+NOWDOC
+);
+
+// Tabs: correct indentation, unquoted heredoc.
+functionCall(
+				<<<HEREDOC
+				content
+HEREDOC
+);
+
+// Tabs: too much indentation, double quoted heredoc.
+functionCall(
+    <<<"HEREDOC"
+						content
+HEREDOC
 );
