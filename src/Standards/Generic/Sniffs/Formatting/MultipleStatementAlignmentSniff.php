@@ -223,6 +223,12 @@ class MultipleStatementAlignmentSniff implements Sniff
                     continue;
                 }
 
+                if ($tokens[$lastCode]['line'] !== $tokens[$assign]['line']) {
+                    // Skip multiple assignments within one statement, where the next assignment operator
+                    // is on the next line. We only align the first assignment.
+                    continue;
+                }
+
                 // Make sure it is not assigned inside a condition (eg. IF, FOR).
                 if (isset($tokens[$assign]['nested_parenthesis']) === true) {
                     // If the parenthesis is on the same line as the assignment,
@@ -247,11 +253,6 @@ class MultipleStatementAlignmentSniff implements Sniff
                 null,
                 true
             );
-
-            if ($assign !== $stackPtr && $tokens[$var]['line'] !== $tokens[$assign]['line']) {
-                // A wrapped operator has no operand on its own line to align to.
-                continue;
-            }
 
             // Make sure we wouldn't break our max padding length if we
             // aligned with this statement, or they wouldn't break the max

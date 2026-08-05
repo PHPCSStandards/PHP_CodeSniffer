@@ -503,6 +503,7 @@ function makeSureThatAssignmentWithinClosureAreStillHandled() {
     };
 }
 
+// Issue #1435: ignore multiple assignments in a single statement, even when multi-line.
 $wrappedChain = $foo
     = $bar;
 
