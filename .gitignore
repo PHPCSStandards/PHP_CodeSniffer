@@ -10,3 +10,6 @@ vendor/
 /phpstan.neon
 /phpunit.xml
 /tests/EndToEnd/Fixtures/*.fixed
+/tests/Core/Reports/GitBlame/newfile.txt
+/tests/Core/Reports/GitBlame/$*
+/tests/Core/Reports/GitBlame/-*
