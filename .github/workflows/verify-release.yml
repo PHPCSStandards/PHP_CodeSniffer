@@ -142,6 +142,11 @@ jobs:
           FINGERPRINT: "0xD91D86963AF3A29B6520462297B02DD8E5071466"
         run: gpg --keyserver "hkps://keys.openpgp.org" --recv-keys "$FINGERPRINT"
 
+      - name: Download public key (Aug 2026)
+        env:
+          FINGERPRINT: "0x5CB4F778BF9BC4FB67AE511D96E91A992CF22FF4"
+        run: gpg --keyserver "hkps://keys.openpgp.org" --recv-keys "$FINGERPRINT"
+
       - name: Verify signature of the PHAR file
         run: gpg --verify ${{ steps.source.outputs.FILE }}.asc ${{ steps.source.outputs.FILE }}
 
@@ -230,7 +235,7 @@ jobs:
       - name: Install
         run: >
           phive install ${{ matrix.pharfile }} --copy
-          --trust-gpg-keys 689DAD778FF08760E046228BA978220305CD5C32,D91D86963AF3A29B6520462297B02DD8E5071466
+          --trust-gpg-keys 689DAD778FF08760E046228BA978220305CD5C32,D91D86963AF3A29B6520462297B02DD8E5071466,5CB4F778BF9BC4FB67AE511D96E91A992CF22FF4
 
       - name: "DEBUG: List files"
         run: ls -R

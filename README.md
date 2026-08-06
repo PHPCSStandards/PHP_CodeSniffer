@@ -48,7 +48,7 @@ php phpcbf.phar -h
 ```
 
 These Phars are signed with the official Release key for PHPCS with the
-fingerprint `D91D 8696 3AF3 A29B 6520 4622 97B0 2DD8 E507 1466`.
+fingerprint `5CB4 F778 BF9B C4FB 67AE 511D 96E9 1A99 2CF2 2FF4`.
 
 As of PHP_CodeSniffer 3.10.3, the provenance of PHAR files associated with a release can be verified via [GitHub Artifact Attestations](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations) using the [GitHub CLI tool](https://cli.github.com/) with the following command: `gh attestation verify [phpcs|phpcbf].phar -o PHPCSStandards`.
 
@@ -78,8 +78,8 @@ You will then be able to run PHP_CodeSniffer from the vendor bin directory:
 ### Phive
 If you use Phive, you can install PHP_CodeSniffer as a project tool using the following commands:
 ```bash
-phive install --trust-gpg-keys D91D86963AF3A29B6520462297B02DD8E5071466 phpcs
-phive install --trust-gpg-keys D91D86963AF3A29B6520462297B02DD8E5071466 phpcbf
+phive install --trust-gpg-keys 5CB4F778BF9BC4FB67AE511D96E91A992CF22FF4 phpcs
+phive install --trust-gpg-keys 5CB4F778BF9BC4FB67AE511D96E91A992CF22FF4 phpcbf
 ```
 You will then be able to run PHP_CodeSniffer from the `tools` directory:
 ```bash
