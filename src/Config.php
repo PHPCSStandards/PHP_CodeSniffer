@@ -90,7 +90,7 @@ class Config
      *
      * @var string
      */
-    public const VERSION = '4.0.4';
+    public const VERSION = '4.1.0';
 
     /**
      * Package stability; either stable, RC, beta or alpha.
