@@ -2,6 +2,14 @@
 
 The file documents changes to the PHP_CodeSniffer project for the 4.x series of releases.
 
+## [4.0.4] - 2026-08-06
+
+_The 4.0.2 release, the 4.0.3 and the 4.0.4 release are 100% the same, there was just a slight snafu in the release publication on GitHub. Sorry for the confusion._
+
+## [4.0.3] - 2026-08-06
+
+~~WITHDRAWN~~
+
 ## [4.0.2] - 2026-08-06
 
 **This is a security release and all users are advised to update their install(s) as soon as possible.**
