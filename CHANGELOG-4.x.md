@@ -548,6 +548,8 @@ Special thanks go out to [Dan Wallis][@fredden] and [Rodrigo Primo][@rodrigoprim
 === Link list for release links ====
 -->
 
+[4.0.4]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/4.0.3...4.0.4
+[4.0.3]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/4.0.2...4.0.3
 [4.0.2]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/4.0.1...4.0.2
 [4.0.1]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/4.0.0...4.0.1
 [4.0.0]:      https://github.com/PHPCSStandards/PHP_CodeSniffer/compare/4.0.0RC1...4.0.0
