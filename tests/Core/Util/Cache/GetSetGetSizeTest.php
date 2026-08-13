@@ -71,17 +71,17 @@ final class GetSetGetSizeTest extends TestCase
         ];
 
         return [
-            'missing key'                         => [
+            'missing key'                          => [
                 'pairsToSet' => [],
                 'getKey'     => 'missing',
                 'expected'   => false,
             ],
-            'existing key, string value'          => [
+            'existing key, string value'           => [
                 'pairsToSet' => ['k' => 'value'],
                 'getKey'     => 'k',
                 'expected'   => 'value',
             ],
-            'existing key, integer value'         => [
+            'existing key, integer value'          => [
                 'pairsToSet' => ['k' => 42],
                 'getKey'     => 'k',
                 'expected'   => 42,
@@ -91,7 +91,7 @@ final class GetSetGetSizeTest extends TestCase
                 'getKey'     => '/tmp/file.php',
                 'expected'   => $fileEntry,
             ],
-            'null key returns the whole store'    => [
+            'null key returns the whole store'     => [
                 'pairsToSet' => ['k' => 'value'],
                 'getKey'     => null,
                 'expected'   => ['k' => 'value'],
@@ -131,33 +131,54 @@ final class GetSetGetSizeTest extends TestCase
     public static function dataSet()
     {
         return [
-            'set a key' => [
+            'set a key'                            => [
                 'sets'     => [
-                    ['path', 'payload'],
+                    [
+                        'path',
+                        'payload',
+                    ],
                 ],
                 'getKey'   => 'path',
                 'expected' => 'payload',
             ],
-            'overwrite a key' => [
+            'overwrite a key'                      => [
                 'sets'     => [
-                    ['path', 'first'],
-                    ['path', 'second'],
+                    [
+                        'path',
+                        'first',
+                    ],
+                    [
+                        'path',
+                        'second',
+                    ],
                 ],
                 'getKey'   => 'path',
                 'expected' => 'second',
             ],
             'replace entire store removes old key' => [
                 'sets'     => [
-                    ['old', 1],
-                    [null, ['new' => 2]],
+                    [
+                        'old',
+                        1,
+                    ],
+                    [
+                        null,
+                        ['new' => 2],
+                    ],
                 ],
                 'getKey'   => 'old',
                 'expected' => false,
             ],
-            'replace entire store keeps new key' => [
+            'replace entire store keeps new key'   => [
                 'sets'     => [
-                    ['old', 1],
-                    [null, ['new' => 2]],
+                    [
+                        'old',
+                        1,
+                    ],
+                    [
+                        null,
+                        ['new' => 2],
+                    ],
                 ],
                 'getKey'   => 'new',
                 'expected' => 2,
@@ -201,17 +222,17 @@ final class GetSetGetSizeTest extends TestCase
     public static function dataGetSize()
     {
         return [
-            'empty store' => [
+            'empty store'                          => [
                 'replaceWhole' => null,
                 'pairsToSet'   => [],
                 'expected'     => -1,
             ],
-            'one key, no config slot' => [
+            'one key, no config slot'              => [
                 'replaceWhole' => null,
                 'pairsToSet'   => ['a' => 1],
                 'expected'     => 0,
             ],
-            'two keys, no config slot' => [
+            'two keys, no config slot'             => [
                 'replaceWhole' => null,
                 'pairsToSet'   => [
                     'a' => 1,

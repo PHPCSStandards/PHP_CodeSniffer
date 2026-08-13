@@ -140,7 +140,7 @@ final class LoadSaveTest extends TestCase
 
 
     /**
-     * load() on a missing explicit cache file stamps config and has no file entries.
+     * Test load() on a missing explicit cache file stamps config and has no file entries.
      *
      * @return void
      */
@@ -169,7 +169,7 @@ final class LoadSaveTest extends TestCase
 
 
     /**
-     * load() + set() + save() + load() round-trips a file entry through an explicit cache file.
+     * Test load(), set(), save(), and load() round-trip a file entry through an explicit cache file.
      *
      * @return void
      */
@@ -200,7 +200,7 @@ final class LoadSaveTest extends TestCase
 
 
     /**
-     * load() drops file entries when the on-disk config block cannot match this run.
+     * Test load() drops file entries when the on-disk config block cannot match this run.
      *
      * @return void
      */
@@ -208,8 +208,8 @@ final class LoadSaveTest extends TestCase
     {
         $cacheFile = $this->explicitCacheFile();
         $planted   = [
-            'config'  => ['phpVersion' => 0],
-            'dummy'   => ['hash' => 'stale'],
+            'config' => ['phpVersion' => 0],
+            'dummy'  => ['hash' => 'stale'],
         ];
 
         $bytes = file_put_contents($cacheFile, json_encode($planted));
@@ -235,7 +235,7 @@ final class LoadSaveTest extends TestCase
 
 
     /**
-     * load() keeps file entries when the on-disk config was produced by the same inputs.
+     * Test load() keeps file entries when the on-disk config was produced by the same inputs.
      *
      * @return void
      */
@@ -288,7 +288,7 @@ final class LoadSaveTest extends TestCase
         Cache::set(self::FIXTURE_A, $this->sampleFileEntry());
         Cache::save();
 
-        $created = $this->newCacheFilesIn($xdgDir, $before);
+        $created            = $this->newCacheFilesIn($xdgDir, $before);
         $this->createdFiles = array_merge($this->createdFiles, $created);
 
         $this->assertCount(1, $created);
@@ -323,7 +323,7 @@ final class LoadSaveTest extends TestCase
         Cache::set(self::FIXTURE_A, $this->sampleFileEntry());
         Cache::save();
 
-        $created = $this->newCacheFilesIn($tempDir, $before);
+        $created            = $this->newCacheFilesIn($tempDir, $before);
         $this->createdFiles = array_merge($this->createdFiles, $created);
 
         $this->assertCount(1, $created);
@@ -357,7 +357,7 @@ final class LoadSaveTest extends TestCase
         Cache::set(self::FIXTURE_A, $this->sampleFileEntry());
         Cache::save();
 
-        $created = $this->newCacheFilesIn($tempDir, $before);
+        $created            = $this->newCacheFilesIn($tempDir, $before);
         $this->createdFiles = array_merge($this->createdFiles, $created);
 
         $this->assertCount(1, $created);
@@ -392,7 +392,7 @@ final class LoadSaveTest extends TestCase
         Cache::set(self::FIXTURE_A, $this->sampleFileEntry());
         Cache::save();
 
-        $created = $this->newCacheFilesIn($xdgDir, $before);
+        $created            = $this->newCacheFilesIn($xdgDir, $before);
         $this->createdFiles = array_merge($this->createdFiles, $created);
 
         $this->assertCount(1, $created);
@@ -470,7 +470,7 @@ final class LoadSaveTest extends TestCase
         Cache::set('marker', $this->sampleFileEntry());
         Cache::save();
 
-        $created = $this->newCacheFilesIn($xdgDir, $before);
+        $created            = $this->newCacheFilesIn($xdgDir, $before);
         $this->createdFiles = array_merge($this->createdFiles, $created);
 
         $this->assertCount(1, $created);
@@ -491,7 +491,10 @@ final class LoadSaveTest extends TestCase
         $config  = new ConfigDouble($cliArgs);
         $ruleset = new Ruleset($config);
 
-        return [$config, $ruleset];
+        return [
+            $config,
+            $ruleset,
+        ];
     }
 
 
@@ -569,7 +572,7 @@ final class LoadSaveTest extends TestCase
      */
     private function createTestCacheDir()
     {
-        $dir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'phpcs-cache-xdg-' . uniqid('', true);
+        $dir     = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'phpcs-cache-xdg-' . uniqid('', true);
         $created = mkdir($dir, 0700);
         $this->assertTrue($created, 'Failed to create test cache directory: ' . $dir);
         $this->createdDirs[] = $dir;
@@ -648,5 +651,4 @@ final class LoadSaveTest extends TestCase
             $this->assertRegExp($pattern, $string, $message);
         }
     }
-
 }
