@@ -200,6 +200,69 @@ final class LoadSaveTest extends TestCase
 
 
     /**
+     * load() drops file entries when the on-disk config block cannot match this run.
+     *
+     * @return void
+     */
+    public function testLoadClearsEntriesWhenPlantedConfigDoesNotMatch()
+    {
+        $cacheFile = $this->explicitCacheFile();
+        $planted   = [
+            'config'  => ['phpVersion' => 0],
+            'dummy'   => ['hash' => 'stale'],
+        ];
+
+        $bytes = file_put_contents($cacheFile, json_encode($planted));
+        $this->assertNotFalse($bytes, 'Failed to write planted cache file');
+
+        list($config, $ruleset) = $this->createConfigAndRuleset(
+            [
+                self::FIXTURE_A,
+                '--standard=PSR1',
+                '--cache=' . $cacheFile,
+            ]
+        );
+
+        Cache::load($ruleset, $config);
+
+        $this->assertFalse(Cache::get('dummy'));
+        $cachedConfig = Cache::get('config');
+        $this->assertIsArray($cachedConfig);
+        $this->assertNotSame(['phpVersion' => 0], $cachedConfig);
+        $this->assertArrayHasKey('phpVersion', $cachedConfig);
+        $this->assertNotSame(0, $cachedConfig['phpVersion']);
+    }
+
+
+    /**
+     * load() keeps file entries when the on-disk config was produced by the same inputs.
+     *
+     * @return void
+     */
+    public function testLoadKeepsEntriesWhenConfigMatches()
+    {
+        $cacheFile = $this->explicitCacheFile();
+        $payload   = $this->sampleFileEntry();
+
+        list($config, $ruleset) = $this->createConfigAndRuleset(
+            [
+                self::FIXTURE_A,
+                '--standard=PSR1',
+                '--cache=' . $cacheFile,
+            ]
+        );
+
+        Cache::load($ruleset, $config);
+        Cache::set(self::FIXTURE_A, $payload);
+        Cache::save();
+
+        Cache::load($ruleset, $config);
+
+        $this->assertSame($payload, Cache::get(self::FIXTURE_A));
+    }
+
+
+    /**
      * Create a ConfigDouble and Ruleset from CLI arguments.
      *
      * @param array<string> $cliArgs Arguments as they would appear after the script name.
