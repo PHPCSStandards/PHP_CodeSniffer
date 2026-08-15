@@ -9,24 +9,25 @@ on:
   # Allow running this workflow manually from the Actions tab.
   workflow_dispatch:
 
-permissions: {}
-
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
+# Permissions should be configured at the job level.
+permissions: {}
+
 jobs:
   build:
+    permissions:
+      contents: read # To clone the repo.
+
     # Don't run on forks.
     if: github.event.repository.fork == false
 
     name: "Build the website"
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read # to read the contents of the repo
 
     steps:
       # By default use the `gh-pages` branch.
@@ -73,6 +74,10 @@ jobs:
           path: './src'
           
   deploy:
+    permissions:
+      pages: write # To deploy to Pages.
+      id-token: write # To verify the deployment originates from an appropriate source.
+
     needs: build
     # Don't run on forks.
     if: github.repository == 'PHPCSStandards/PHP_CodeSniffer' && github.event_name != 'pull_request' && needs.build.result == 'success'
@@ -83,10 +88,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
-    permissions:
-      pages: write # to deploy to Pages
-      id-token: write # to verify the deployment originates from an appropriate source
 
     steps:
       - name: Deploy to GitHub Pages
