@@ -147,7 +147,7 @@ jobs:
           persist-credentials: false
 
       - name: Set up problem matcher
-        uses: lumaxis/shellcheck-problem-matchers@b02a1715a00c729b20eed3ebb7edf56fa9a433ba # v2.1.0
+        uses: lumaxis/shellcheck-problem-matchers@bf6e0860fd06e4910738c6160dcd2889146ce824 # v2.3.1
         with:
           format: gcc
 
