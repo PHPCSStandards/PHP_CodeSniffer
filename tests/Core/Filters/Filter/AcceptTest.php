@@ -79,6 +79,7 @@ final class AcceptTest extends AbstractFilterTestCase
                     '/path/to/src/Somethingelse/Main.php',
                     '/path/to/src/SomethingelseEvenLonger/Main.php',
                     '/path/to/src/Other/Main.php',
+                    '/path/to/src/Other/.Hidden.php',
                 ],
                 'expectedOutput' => [
                     '/path/to/src/Main.php',
