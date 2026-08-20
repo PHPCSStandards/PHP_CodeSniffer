@@ -54,6 +54,11 @@ final class TodoUnitTest extends AbstractSniffUnitTest
             16 => 1,
             18 => 1,
             21 => 1,
+            26 => 1,
+            27 => 1,
+            28 => 1,
+            31 => 1,
+            34 => 1,
         ];
 
     }//end getWarningList()
