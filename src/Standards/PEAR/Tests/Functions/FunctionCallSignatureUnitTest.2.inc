@@ -1,0 +1,50 @@
+<?php
+
+/*
+ * Heredoc/nowdoc contents should not be reindented when correcting the
+ * indentation of a multi-line function call argument.
+ *
+ * These tests use PHP 7.3+ flexible heredoc/nowdoc syntax.
+ */
+
+// Spaces: too little indentation, unquoted heredoc.
+functionCall(
+  <<<HEREDOC
+  content
+  HEREDOC
+);
+
+// Spaces: correct indentation, double quoted heredoc.
+functionCall(
+    <<<"HEREDOC"
+    content
+    HEREDOC
+);
+
+// Spaces: too much indentation, nowdoc.
+functionCall(
+      <<<'NOWDOC'
+      content
+      NOWDOC
+);
+
+// Tabs: too little indentation, nowdoc.
+functionCall(
+	<<<'NOWDOC'
+	content
+	NOWDOC
+);
+
+// Tabs: correct indentation, unquoted heredoc.
+functionCall(
+				<<<HEREDOC
+				content
+				HEREDOC
+);
+
+// Tabs: too much indentation, double quoted heredoc.
+functionCall(
+						<<<"HEREDOC"
+						content
+						HEREDOC
+);

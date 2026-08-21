@@ -562,7 +562,10 @@ class FunctionCallSignatureSniff implements Sniff
                                     $phpcsFile->fixer->replaceToken($i, $padding);
                                 }
 
-                                if (isset($tokens[($i + 1)]['scope_opener']) === true) {
+                                if (isset($tokens[($i + 1)]['scope_opener']) === true
+                                    && $tokens[($i + 1)]['code'] !== T_START_HEREDOC
+                                    && $tokens[($i + 1)]['code'] !== T_START_NOWDOC
+                                ) {
                                     $phpcsFile->fixer->changeCodeBlockIndent(($i + 1), $tokens[($i + 1)]['scope_closer'], ($expectedIndent - $foundIndent));
                                 }
                             }
