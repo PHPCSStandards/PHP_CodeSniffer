@@ -69,6 +69,8 @@ define('T_ENUM_CASE', 'PHPCS_T_ENUM_CASE');
 define('T_TYPE_INTERSECTION', 'PHPCS_T_TYPE_INTERSECTION');
 define('T_TYPE_OPEN_PARENTHESIS', 'PHPCS_T_TYPE_OPEN_PARENTHESIS');
 define('T_TYPE_CLOSE_PARENTHESIS', 'PHPCS_T_TYPE_CLOSE_PARENTHESIS');
+define('T_PROPERTY_HOOK_GET', 'PHPCS_T_PROPERTY_HOOK_GET');
+define('T_PROPERTY_HOOK_SET', 'PHPCS_T_PROPERTY_HOOK_SET');
 
 /*
  * {@internal IMPORTANT: all PHP native polyfilled tokens MUST be added to the
@@ -280,26 +282,27 @@ final class Tokens
      * @var array<int|string, int|string>
      */
     public const PARENTHESIS_OPENERS = [
-        T_ARRAY      => T_ARRAY,
-        T_LIST       => T_LIST,
-        T_FUNCTION   => T_FUNCTION,
-        T_CLOSURE    => T_CLOSURE,
-        T_USE        => T_USE,
-        T_ANON_CLASS => T_ANON_CLASS,
-        T_WHILE      => T_WHILE,
-        T_FOR        => T_FOR,
-        T_FOREACH    => T_FOREACH,
-        T_SWITCH     => T_SWITCH,
-        T_IF         => T_IF,
-        T_ELSEIF     => T_ELSEIF,
-        T_CATCH      => T_CATCH,
-        T_DECLARE    => T_DECLARE,
-        T_MATCH      => T_MATCH,
-        T_ISSET      => T_ISSET,
-        T_EMPTY      => T_EMPTY,
-        T_UNSET      => T_UNSET,
-        T_EVAL       => T_EVAL,
-        T_EXIT       => T_EXIT,
+        T_ARRAY             => T_ARRAY,
+        T_LIST              => T_LIST,
+        T_FUNCTION          => T_FUNCTION,
+        T_PROPERTY_HOOK_SET => T_PROPERTY_HOOK_SET,
+        T_CLOSURE           => T_CLOSURE,
+        T_USE               => T_USE,
+        T_ANON_CLASS        => T_ANON_CLASS,
+        T_WHILE             => T_WHILE,
+        T_FOR               => T_FOR,
+        T_FOREACH           => T_FOREACH,
+        T_SWITCH            => T_SWITCH,
+        T_IF                => T_IF,
+        T_ELSEIF            => T_ELSEIF,
+        T_CATCH             => T_CATCH,
+        T_DECLARE           => T_DECLARE,
+        T_MATCH             => T_MATCH,
+        T_ISSET             => T_ISSET,
+        T_EMPTY             => T_EMPTY,
+        T_UNSET             => T_UNSET,
+        T_EVAL              => T_EVAL,
+        T_EXIT              => T_EXIT,
     ];
 
     /**
@@ -308,30 +311,32 @@ final class Tokens
      * @var array<int|string, int|string>
      */
     public const SCOPE_OPENERS = [
-        T_CLASS      => T_CLASS,
-        T_ANON_CLASS => T_ANON_CLASS,
-        T_INTERFACE  => T_INTERFACE,
-        T_TRAIT      => T_TRAIT,
-        T_ENUM       => T_ENUM,
-        T_NAMESPACE  => T_NAMESPACE,
-        T_FUNCTION   => T_FUNCTION,
-        T_CLOSURE    => T_CLOSURE,
-        T_IF         => T_IF,
-        T_SWITCH     => T_SWITCH,
-        T_CASE       => T_CASE,
-        T_DECLARE    => T_DECLARE,
-        T_DEFAULT    => T_DEFAULT,
-        T_WHILE      => T_WHILE,
-        T_ELSE       => T_ELSE,
-        T_ELSEIF     => T_ELSEIF,
-        T_FOR        => T_FOR,
-        T_FOREACH    => T_FOREACH,
-        T_DO         => T_DO,
-        T_TRY        => T_TRY,
-        T_CATCH      => T_CATCH,
-        T_FINALLY    => T_FINALLY,
-        T_USE        => T_USE,
-        T_MATCH      => T_MATCH,
+        T_CLASS             => T_CLASS,
+        T_ANON_CLASS        => T_ANON_CLASS,
+        T_INTERFACE         => T_INTERFACE,
+        T_TRAIT             => T_TRAIT,
+        T_ENUM              => T_ENUM,
+        T_NAMESPACE         => T_NAMESPACE,
+        T_FUNCTION          => T_FUNCTION,
+        T_CLOSURE           => T_CLOSURE,
+        T_IF                => T_IF,
+        T_SWITCH            => T_SWITCH,
+        T_CASE              => T_CASE,
+        T_DECLARE           => T_DECLARE,
+        T_DEFAULT           => T_DEFAULT,
+        T_WHILE             => T_WHILE,
+        T_ELSE              => T_ELSE,
+        T_ELSEIF            => T_ELSEIF,
+        T_FOR               => T_FOR,
+        T_FOREACH           => T_FOREACH,
+        T_DO                => T_DO,
+        T_TRY               => T_TRY,
+        T_CATCH             => T_CATCH,
+        T_FINALLY           => T_FINALLY,
+        T_USE               => T_USE,
+        T_MATCH             => T_MATCH,
+        T_PROPERTY_HOOK_GET => T_PROPERTY_HOOK_GET,
+        T_PROPERTY_HOOK_SET => T_PROPERTY_HOOK_SET,
     ];
 
     /**

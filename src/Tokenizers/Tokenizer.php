@@ -883,7 +883,11 @@ abstract class Tokenizer
             // keyword, the opener will be incorrectly assigned to this IF statement.
             // The same case also applies to USE statements, which don't have to have
             // openers, so a following USE statement can cause an incorrect brace match.
-            if (($currType === T_IF || $currType === T_ELSE || $currType === T_USE)
+            if (($currType === T_IF
+                || $currType === T_ELSE
+                || $currType === T_USE
+                || $currType === T_PROPERTY_HOOK_GET
+                || $currType === T_PROPERTY_HOOK_SET)
                 && $opener === null
                 && ($this->tokens[$i]['code'] === T_SEMICOLON
                 || $this->tokens[$i]['code'] === T_CLOSE_TAG)

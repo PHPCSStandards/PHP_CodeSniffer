@@ -429,3 +429,21 @@ abstract class WithAbstractProperties {
     /* testPHP84IllegalAbstractStaticProp */
     public abstract static string $val10 { get; }
 }
+
+class WithPropertyHooks {
+    /* testPHP84HookedProperty */
+    public string $hooked {
+        get => trim($this->hooked, ',');
+        set(string $value) { $this->hooked = $value; }
+    }
+
+    /* testPHP84HookedPropertyWithDefault */
+    public string $withDefault = 'default' {
+        get => trim($this->withDefault, ',');
+    }
+
+    /* testPHP84ByReferenceHookedProperty */
+    protected string $byRef {
+        &get { return $this->byRef; }
+    }
+}

@@ -61,7 +61,7 @@ class PHP extends Tokenizer
      * @var array
      */
     public $scopeOpeners = [
-        T_IF            => [
+        T_IF                => [
             'start'  => [
                 T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET,
                 T_COLON              => T_COLON,
@@ -79,28 +79,28 @@ class PHP extends Tokenizer
                 T_ELSEIF => T_ELSEIF,
             ],
         ],
-        T_TRY           => [
+        T_TRY               => [
             'start'  => [T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET],
             'end'    => [T_CLOSE_CURLY_BRACKET => T_CLOSE_CURLY_BRACKET],
             'strict' => true,
             'shared' => false,
             'with'   => [],
         ],
-        T_CATCH         => [
+        T_CATCH             => [
             'start'  => [T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET],
             'end'    => [T_CLOSE_CURLY_BRACKET => T_CLOSE_CURLY_BRACKET],
             'strict' => true,
             'shared' => false,
             'with'   => [],
         ],
-        T_FINALLY       => [
+        T_FINALLY           => [
             'start'  => [T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET],
             'end'    => [T_CLOSE_CURLY_BRACKET => T_CLOSE_CURLY_BRACKET],
             'strict' => true,
             'shared' => false,
             'with'   => [],
         ],
-        T_ELSE          => [
+        T_ELSE              => [
             'start'  => [
                 T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET,
                 T_COLON              => T_COLON,
@@ -116,7 +116,7 @@ class PHP extends Tokenizer
                 T_ELSEIF => T_ELSEIF,
             ],
         ],
-        T_ELSEIF        => [
+        T_ELSEIF            => [
             'start'  => [
                 T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET,
                 T_COLON              => T_COLON,
@@ -134,7 +134,7 @@ class PHP extends Tokenizer
                 T_ELSE => T_ELSE,
             ],
         ],
-        T_FOR           => [
+        T_FOR               => [
             'start'  => [
                 T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET,
                 T_COLON              => T_COLON,
@@ -147,7 +147,7 @@ class PHP extends Tokenizer
             'shared' => false,
             'with'   => [],
         ],
-        T_FOREACH       => [
+        T_FOREACH           => [
             'start'  => [
                 T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET,
                 T_COLON              => T_COLON,
@@ -160,49 +160,49 @@ class PHP extends Tokenizer
             'shared' => false,
             'with'   => [],
         ],
-        T_INTERFACE     => [
+        T_INTERFACE         => [
             'start'  => [T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET],
             'end'    => [T_CLOSE_CURLY_BRACKET => T_CLOSE_CURLY_BRACKET],
             'strict' => true,
             'shared' => false,
             'with'   => [],
         ],
-        T_FUNCTION      => [
+        T_FUNCTION          => [
             'start'  => [T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET],
             'end'    => [T_CLOSE_CURLY_BRACKET => T_CLOSE_CURLY_BRACKET],
             'strict' => true,
             'shared' => false,
             'with'   => [],
         ],
-        T_CLASS         => [
+        T_CLASS             => [
             'start'  => [T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET],
             'end'    => [T_CLOSE_CURLY_BRACKET => T_CLOSE_CURLY_BRACKET],
             'strict' => true,
             'shared' => false,
             'with'   => [],
         ],
-        T_TRAIT         => [
+        T_TRAIT             => [
             'start'  => [T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET],
             'end'    => [T_CLOSE_CURLY_BRACKET => T_CLOSE_CURLY_BRACKET],
             'strict' => true,
             'shared' => false,
             'with'   => [],
         ],
-        T_ENUM          => [
+        T_ENUM              => [
             'start'  => [T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET],
             'end'    => [T_CLOSE_CURLY_BRACKET => T_CLOSE_CURLY_BRACKET],
             'strict' => true,
             'shared' => false,
             'with'   => [],
         ],
-        T_USE           => [
+        T_USE               => [
             'start'  => [T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET],
             'end'    => [T_CLOSE_CURLY_BRACKET => T_CLOSE_CURLY_BRACKET],
             'strict' => false,
             'shared' => false,
             'with'   => [],
         ],
-        T_DECLARE       => [
+        T_DECLARE           => [
             'start'  => [
                 T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET,
                 T_COLON              => T_COLON,
@@ -215,14 +215,14 @@ class PHP extends Tokenizer
             'shared' => false,
             'with'   => [],
         ],
-        T_NAMESPACE     => [
+        T_NAMESPACE         => [
             'start'  => [T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET],
             'end'    => [T_CLOSE_CURLY_BRACKET => T_CLOSE_CURLY_BRACKET],
             'strict' => false,
             'shared' => false,
             'with'   => [],
         ],
-        T_WHILE         => [
+        T_WHILE             => [
             'start'  => [
                 T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET,
                 T_COLON              => T_COLON,
@@ -235,14 +235,14 @@ class PHP extends Tokenizer
             'shared' => false,
             'with'   => [],
         ],
-        T_DO            => [
+        T_DO                => [
             'start'  => [T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET],
             'end'    => [T_CLOSE_CURLY_BRACKET => T_CLOSE_CURLY_BRACKET],
             'strict' => true,
             'shared' => false,
             'with'   => [],
         ],
-        T_SWITCH        => [
+        T_SWITCH            => [
             'start'  => [
                 T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET,
                 T_COLON              => T_COLON,
@@ -255,7 +255,7 @@ class PHP extends Tokenizer
             'shared' => false,
             'with'   => [],
         ],
-        T_CASE          => [
+        T_CASE              => [
             'start'  => [
                 T_COLON     => T_COLON,
                 T_SEMICOLON => T_SEMICOLON,
@@ -277,7 +277,7 @@ class PHP extends Tokenizer
                 T_SWITCH  => T_SWITCH,
             ],
         ],
-        T_DEFAULT       => [
+        T_DEFAULT           => [
             'start'  => [
                 T_COLON     => T_COLON,
                 T_SEMICOLON => T_SEMICOLON,
@@ -298,21 +298,47 @@ class PHP extends Tokenizer
                 T_SWITCH => T_SWITCH,
             ],
         ],
-        T_MATCH         => [
+        T_MATCH             => [
             'start'  => [T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET],
             'end'    => [T_CLOSE_CURLY_BRACKET => T_CLOSE_CURLY_BRACKET],
             'strict' => true,
             'shared' => false,
             'with'   => [],
         ],
-        T_START_HEREDOC => [
+        T_PROPERTY_HOOK_GET => [
+            'start'  => [
+                T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET,
+                T_DOUBLE_ARROW       => T_DOUBLE_ARROW,
+            ],
+            'end'    => [
+                T_CLOSE_CURLY_BRACKET => T_CLOSE_CURLY_BRACKET,
+                T_SEMICOLON           => T_SEMICOLON,
+            ],
+            'strict' => true,
+            'shared' => false,
+            'with'   => [],
+        ],
+        T_PROPERTY_HOOK_SET => [
+            'start'  => [
+                T_OPEN_CURLY_BRACKET => T_OPEN_CURLY_BRACKET,
+                T_DOUBLE_ARROW       => T_DOUBLE_ARROW,
+            ],
+            'end'    => [
+                T_CLOSE_CURLY_BRACKET => T_CLOSE_CURLY_BRACKET,
+                T_SEMICOLON           => T_SEMICOLON,
+            ],
+            'strict' => true,
+            'shared' => false,
+            'with'   => [],
+        ],
+        T_START_HEREDOC     => [
             'start'  => [T_START_HEREDOC => T_START_HEREDOC],
             'end'    => [T_END_HEREDOC => T_END_HEREDOC],
             'strict' => true,
             'shared' => false,
             'with'   => [],
         ],
-        T_START_NOWDOC  => [
+        T_START_NOWDOC      => [
             'start'  => [T_START_NOWDOC => T_START_NOWDOC],
             'end'    => [T_END_NOWDOC => T_END_NOWDOC],
             'strict' => true,
@@ -508,6 +534,8 @@ class PHP extends Tokenizer
         T_TYPE_INTERSECTION        => 1,
         T_TYPE_OPEN_PARENTHESIS    => 1,
         T_TYPE_CLOSE_PARENTHESIS   => 1,
+        T_PROPERTY_HOOK_GET        => 3,
+        T_PROPERTY_HOOK_SET        => 3,
     ];
 
     /**
@@ -2022,6 +2050,37 @@ class PHP extends Tokenizer
                 $newStackPtr++;
                 $stackPtr = ($i - 1);
                 continue;
+            }
+
+            /*
+                PHP 8.4 property hooks.
+
+                public string $prop = 'default' {
+                    get {}
+                    set(Type $value) {}
+                    get => expr;
+                    set => expr;
+                }
+            */
+
+            if ($tokenIsArray === true
+                && $token[0] === T_VARIABLE
+            ) {
+                $opener = null;
+                $next   = $this->findNextNonEmpty($tokens, ($stackPtr + 1), $numTokens);
+
+                if ($next !== null && $tokens[$next] === '{') {
+                    $opener = $next;
+                } elseif ($next !== null && $tokens[$next] === '=') {
+                    $opener = $this->findPropertyHookBlockOpenerAfterDefault($tokens, ($next + 1));
+                }
+
+                if ($opener !== null) {
+                    $closer = $this->findCloser($tokens, ($opener + 1), '{', '}');
+                    if ($closer !== null) {
+                        $this->parsePropertyHooks($tokens, $opener, $closer);
+                    }
+                }
             }
 
             /*
@@ -4026,6 +4085,198 @@ class PHP extends Tokenizer
 
         self::$resolveTokenCache[$token] = $newToken;
         return $newToken;
+    }
+
+
+    /**
+     * Find the next non-empty token in a token_get_all() token array.
+     *
+     * @param array $tokens    The token array to search.
+     * @param int   $start     The pointer to start searching from.
+     * @param int   $numTokens The total number of tokens.
+     *
+     * @return int|null
+     */
+    private function findNextNonEmpty(array $tokens, int $start, int $numTokens)
+    {
+        for ($i = $start; $i < $numTokens; $i++) {
+            if (is_array($tokens[$i]) === true
+                && isset(Tokens::EMPTY_TOKENS[$tokens[$i][0]]) === true
+            ) {
+                continue;
+            }
+
+            return $i;
+        }
+
+        return null;
+    }
+
+
+    /**
+     * Find the previous non-empty token in a token_get_all() token array.
+     *
+     * @param array $tokens The token array to search.
+     * @param int   $start  The pointer to start searching from.
+     * @param int   $end    The lower bound for the search.
+     *
+     * @return int|null
+     */
+    private function findPreviousNonEmpty(array $tokens, int $start, int $end)
+    {
+        for ($i = $start; $i >= $end; $i--) {
+            if (is_array($tokens[$i]) === true
+                && isset(Tokens::EMPTY_TOKENS[$tokens[$i][0]]) === true
+            ) {
+                continue;
+            }
+
+            return $i;
+        }
+
+        return null;
+    }
+
+
+    /**
+     * Find the opening brace for a property hook block after a default value.
+     *
+     * @param array $tokens   The token array to search.
+     * @param int   $stackPtr The token pointer after the equals sign.
+     *
+     * @return int|null
+     */
+    private function findPropertyHookBlockOpenerAfterDefault(array &$tokens, int $stackPtr)
+    {
+        $numTokens = count($tokens);
+
+        for ($i = $stackPtr; $i < $numTokens; $i++) {
+            if ($tokens[$i] === '(') {
+                $closer = $this->findCloser($tokens, ($i + 1), '(', ')');
+                if ($closer === null) {
+                    return null;
+                }
+
+                $i = $closer;
+                continue;
+            }
+
+            if ($tokens[$i] === '[') {
+                $closer = $this->findCloser($tokens, ($i + 1), '[', ']');
+                if ($closer === null) {
+                    return null;
+                }
+
+                $i = $closer;
+                continue;
+            }
+
+            if ($tokens[$i] === '{') {
+                return $i;
+            }
+
+            if ($tokens[$i] === ')'
+                || $tokens[$i] === ']'
+                || $tokens[$i] === '}'
+                || $tokens[$i] === ';'
+                || $tokens[$i] === ','
+            ) {
+                return null;
+            }
+        }
+
+        return null;
+    }
+
+
+    /**
+     * Parse property hook keywords inside a property hook block.
+     *
+     * @param array $tokens The token array to update.
+     * @param int   $opener The property hook block opener.
+     * @param int   $closer The property hook block closer.
+     *
+     * @return void
+     */
+    private function parsePropertyHooks(array &$tokens, int $opener, int $closer)
+    {
+        for ($i = ($opener + 1); $i < $closer; $i++) {
+            if ($tokens[$i] === '{') {
+                $blockCloser = $this->findCloser($tokens, ($i + 1), '{', '}');
+                if ($blockCloser === null) {
+                    return;
+                }
+
+                $i = $blockCloser;
+                continue;
+            }
+
+            if (is_array($tokens[$i]) === false
+                || $tokens[$i][0] !== T_STRING
+            ) {
+                continue;
+            }
+
+            $hookName = strtolower($tokens[$i][1]);
+            if ($hookName !== 'get' && $hookName !== 'set') {
+                continue;
+            }
+
+            $previous = $this->findPreviousNonEmpty($tokens, ($i - 1), $opener);
+            if ($previous !== null) {
+                if (is_array($tokens[$previous]) === true) {
+                    $previousToken = $tokens[$previous][1];
+                } else {
+                    $previousToken = $tokens[$previous];
+                }
+            } else {
+                $previousToken = null;
+            }
+
+            if ($previousToken === null || in_array($previousToken, ['{', '}', ';', '&'], true) === false) {
+                continue;
+            }
+
+            $next = $this->findNextNonEmpty($tokens, ($i + 1), $closer);
+            if ($next === null) {
+                continue;
+            }
+
+            if ($hookName === 'get'
+                && ($tokens[$next] === '{'
+                || $tokens[$next] === ';'
+                || (is_array($tokens[$next]) === true && $tokens[$next][0] === T_DOUBLE_ARROW))
+            ) {
+                $tokens[$i][0] = T_PROPERTY_HOOK_GET;
+                continue;
+            }
+
+            if ($hookName !== 'set') {
+                continue;
+            }
+
+            if ($tokens[$next] === '{'
+                || $tokens[$next] === ';'
+                || (is_array($tokens[$next]) === true && $tokens[$next][0] === T_DOUBLE_ARROW)
+            ) {
+                $tokens[$i][0] = T_PROPERTY_HOOK_SET;
+                continue;
+            }
+
+            if ($tokens[$next] !== '(') {
+                continue;
+            }
+
+            $close = $this->findCloser($tokens, ($next + 1), '(', ')');
+            if ($close === null) {
+                continue;
+            }
+
+            $after = $this->findNextNonEmpty($tokens, ($close + 1), $closer);
+            if ($after !== null && $tokens[$after] === '{') {
+                $tokens[$i][0] = T_PROPERTY_HOOK_SET;
+            }
+        }
     }
 
 
