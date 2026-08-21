@@ -24,4 +24,25 @@ if ($a===$b) {
         ]]>
         </code>
     </code_comparison>
+    <standard>
+    <![CDATA[
+    When the "perCompatible" property is set to "3.0" or higher, the requirement for spaces around the single pipe operator in a multi-catch block is changed to a requirement of "no spaces".
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: no spaces around the '|' operator in a multi-catch with 'perCompatible=3.0' (or higher).">
+        <![CDATA[
+try {
+} catch (Exception|RuntimeException $e) {
+}
+        ]]>
+        </code>
+        <code title="Invalid: spaces around the '|' operator in a multi-catch with 'perCompatible=3.0' (or higher).">
+        <![CDATA[
+try {
+} catch (Exception | RuntimeException $e) {
+}
+        ]]>
+        </code>
+    </code_comparison>
 </documentation>

@@ -77,3 +77,134 @@ function setDefault(#[ImportValue(
     }
 
 declare(strict_types=1);
+
+// Valid.
+try {
+    // nothing
+} catch (Exception | RuntimeException $e) {
+}
+
+// Valid because multiline formatting is undefined.
+try {
+    // nothing
+} catch (
+    Exception
+    | RuntimeException
+    | KlausiException
+    | AnotherException
+    | ItNeverEndsException $e
+) {
+}
+
+// Valid because multiline formatting is undefined.
+try {
+    // nothing
+} catch (
+    Exception |
+    RuntimeException |
+    KlausiException |
+    AnotherException |
+    ItNeverEndsException $e
+) {
+}
+
+// Valid because PSR 12 allows more than one space around operators.
+try {
+    // nothing
+} catch (Exception  |   RuntimeException $e) {
+}
+
+// Valid usage of bitwise OR operator between if parentheses.
+if ($error === E_ERROR | E_DEPRECATED) {
+    // do something
+}
+
+// Valid usage of bitwise OR operator between function definition parentheses.
+function testFunction($flags = E_ERROR | E_DEPRECATED) {
+    // do something
+}
+
+// Invalid usage of bitwise OR operator between if parentheses.
+if ($error === E_ERROR | E_DEPRECATED) {
+    // do something
+}
+
+// Invalid usage of bitwise OR operator between function definition parentheses.
+function testFunction2($flags = E_ERROR | E_DEPRECATED) {
+    // do something
+}
+
+// phpcs:set PSR12.Operators.OperatorSpacing perCompatible 3.0
+
+// Valid.
+try {
+    // nothing
+} catch (Exception|RuntimeException $e) {
+}
+
+// Valid because multiline formatting is undefined.
+try {
+    // nothing
+} catch (
+    Exception
+    |RuntimeException
+    |KlausiException
+    |AnotherException
+    |ItNeverEndsException $e
+) {
+}
+
+// Valid because multiline formatting is undefined.
+try {
+    // nothing
+} catch (
+    Exception|
+    RuntimeException|
+    KlausiException|
+    AnotherException|
+    ItNeverEndsException $e
+) {
+}
+
+// Invalid because of one space.
+try {
+    // nothing
+} catch (Exception|RuntimeException $e) {
+}
+
+// Invalid because of multiple spaces.
+try {
+    // nothing
+} catch (Exception|RuntimeException $e) {
+}
+
+// Valid usage of bitwise OR operator between if parentheses.
+if ($error === E_ERROR | E_DEPRECATED) {
+    // do something
+}
+
+// Valid usage of bitwise OR operator between function definition parentheses.
+function testFunction3($flags = E_ERROR | E_DEPRECATED) {
+    // do something
+}
+
+// Invalid usage of bitwise OR operator between if parentheses.
+if ($error === E_ERROR | E_DEPRECATED) {
+    // do something
+}
+
+// Invalid usage of bitwise OR operator between function definition parentheses.
+function testFunction4($flags = E_ERROR | E_DEPRECATED) {
+    // do something
+}
+
+// Testing that it works with future versions as well.
+// phpcs:set PSR12.Operators.OperatorSpacing perCompatible 4.0
+
+try {
+    // nothing
+} catch (Exception|RuntimeException $e) {
+}
+
+// Reset property back to its default value.
+// phpcs:set PSR12.Operators.OperatorSpacing perCompatible 1.0
