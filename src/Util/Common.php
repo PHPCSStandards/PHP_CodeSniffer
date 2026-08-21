@@ -34,6 +34,23 @@ class Common
     ];
 
     /**
+     * An array of short variable types for param/var we will check.
+     *
+     * @var array<string, string>
+     */
+    public const ALLOWED_SHORT_TYPES = [
+        'array'    => 'array',
+        'bool'     => 'bool',
+        'float'    => 'float',
+        'int'      => 'int',
+        'mixed'    => 'mixed',
+        'object'   => 'object',
+        'string'   => 'string',
+        'resource' => 'resource',
+        'callable' => 'callable',
+    ];
+
+    /**
      * An array of variable types for param/var we will check.
      *
      * @var array<string, string>
@@ -455,31 +472,48 @@ class Common
      * If type is not one of the standard types, it must be a custom type.
      * Returns the correct type name suggestion if type name is invalid.
      *
-     * @param string $varType The variable type to process.
+     * @param string  $varType       The variable type to process.
+     * @param boolean $useShortTypes Whether to use short forms of type keywords.
      *
      * @return string
      */
-    public static function suggestType(string $varType)
+    public static function suggestType(string $varType, bool $useShortTypes = false)
     {
         if ($varType === '') {
             return '';
         }
 
-        if (isset(self::ALLOWED_TYPES[$varType]) === true) {
+        if ($useShortTypes === true) {
+            $allowedTypes = self::ALLOWED_SHORT_TYPES;
+        } else {
+            $allowedTypes = self::ALLOWED_TYPES;
+        }
+
+        if (isset($allowedTypes[$varType]) === true) {
             return $varType;
         } else {
             $lowerVarType = strtolower($varType);
             switch ($lowerVarType) {
                 case 'bool':
                 case 'boolean':
-                    return 'boolean';
+                    if ($useShortTypes === true) {
+                        return 'bool';
+                    } else {
+                        return 'boolean';
+                    }
+
                 case 'double':
                 case 'real':
                 case 'float':
                     return 'float';
                 case 'int':
                 case 'integer':
-                    return 'integer';
+                    if ($useShortTypes === true) {
+                        return 'int';
+                    } else {
+                        return 'integer';
+                    }
+
                 case 'array()':
                 case 'array':
                     return 'array';
@@ -501,8 +535,8 @@ class Common
                         $type2 = $matches[3];
                     }
 
-                    $type1 = self::suggestType($type1);
-                    $type2 = self::suggestType($type2);
+                    $type1 = self::suggestType($type1, $useShortTypes);
+                    $type2 = self::suggestType($type2, $useShortTypes);
                     if ($type2 !== '') {
                         $type2 = ' => ' . $type2;
                     }
@@ -511,7 +545,7 @@ class Common
                 } else {
                     return 'array';
                 }
-            } elseif (isset(self::ALLOWED_TYPES[$lowerVarType]) === true) {
+            } elseif (isset($allowedTypes[$lowerVarType]) === true) {
                 // A valid type, but not lower cased.
                 return $lowerVarType;
             } else {
