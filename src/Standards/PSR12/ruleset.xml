@@ -144,6 +144,10 @@
     That is, an underscore prefix explicitly has no meaning. -->
     <!-- There MUST be a space between type declaration and property name. -->
     <rule ref="PSR2.Classes.PropertyDeclaration"/>
+    <rule ref="PSR2.Classes.PropertyDeclaration.Underscore">
+        <type>error</type>
+        <message>Property name "%s" must not be prefixed with an underscore to indicate visibility</message>
+    </rule>
 
     <!-- Visibility MUST be declared on all constants if your project PHP minimum version supports constant visibilities (PHP 7.1 or later). -->
     <!-- checked by PSR12.Properties.ConstantVisibility -->
