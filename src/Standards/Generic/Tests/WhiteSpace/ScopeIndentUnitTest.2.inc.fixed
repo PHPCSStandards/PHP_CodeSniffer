@@ -1648,6 +1648,38 @@ $result = array_map(
 	$data
 );
 
+// Issue #1434: Arrow function method call inside template echo tag
+?>
+<div>
+	<div>
+		<span><?= $title ?></span>
+	</div>
+
+	<?= render(
+		[
+			'data' => map(
+				[],
+				static fn($item) => $item->getValue()
+			),
+			'options' => [],
+		]
+	) ?>
+</div>
+<?php
+
+// Issue #1434: Meaningful inline HTML immediately before a PHP open tag
+?>
+<div><?= render(
+         [
+             'data' => map(
+                 [],
+                 static fn($item) => $item->getValue()
+             ),
+             'options' => [],
+         ]
+     ) ?></div>
+<?php
+
 /* ADD NEW TESTS ABOVE THIS LINE AND MAKE SURE THAT THE 1 (space-based) AND 2 (tab-based) FILES ARE IN SYNC! */
 ?>
 
