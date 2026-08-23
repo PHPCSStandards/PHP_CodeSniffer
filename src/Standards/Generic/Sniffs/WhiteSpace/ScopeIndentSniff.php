@@ -363,6 +363,12 @@ class ScopeIndentSniff implements Sniff
                     } else {
                         $first = $phpcsFile->findFirstOnLine(T_WHITESPACE, $parenOpener, true);
 
+                        if ($tokens[$first]['code'] === T_INLINE_HTML
+                            && ltrim($tokens[$first]['content']) === ''
+                        ) {
+                            $first = $phpcsFile->findFirstOnLine([T_WHITESPACE, T_INLINE_HTML], $parenOpener, true);
+                        }
+
                         $checkIndent = ($tokens[$first]['column'] - 1);
                         if (isset($adjustments[$first]) === true) {
                             $checkIndent += $adjustments[$first];
