@@ -77,13 +77,15 @@ class SwitchDeclarationSniff implements Sniff
                 $caseCount++;
             }
 
+            $typeUc = strtoupper($type);
+
             if ($tokens[$nextCase]['content'] !== strtolower($tokens[$nextCase]['content'])) {
                 $expected = strtolower($tokens[$nextCase]['content']);
                 $error    = '%3$s keyword must be lowercase; expected "%1$s" but found "%2$s"';
                 $data     = [
                     $expected,
                     $tokens[$nextCase]['content'],
-                    strtoupper($type),
+                    $typeUc,
                 ];
 
                 $fix = $phpcsFile->addFixableError($error, $nextCase, $type . 'NotLower', $data);
@@ -110,7 +112,7 @@ class SwitchDeclarationSniff implements Sniff
             $beforeCase = $phpcsFile->findPrevious(T_WHITESPACE, ($nextCase - 1), null, true);
             if ($tokens[$beforeCase]['line'] === $tokens[$nextCase]['line']) {
                 $error = '%s statement must be on a line by itself. Found content before';
-                $fix   = $phpcsFile->addFixableError($error, $nextCase, 'ContentBefore' . $type, [strtoupper($type)]);
+                $fix   = $phpcsFile->addFixableError($error, $nextCase, 'ContentBefore' . $type, [$typeUc]);
 
                 if ($fix === true) {
                     $padding = str_repeat(' ', ($caseAlignment - 1));
@@ -123,7 +125,7 @@ class SwitchDeclarationSniff implements Sniff
             } elseif ($tokens[$nextCase]['column'] !== $caseAlignment) {
                 $error = '%s keyword must be indented %s spaces from SWITCH keyword';
                 $data  = [
-                    strtoupper($type),
+                    $typeUc,
                     $this->indent,
                 ];
                 $fix   = $phpcsFile->addFixableError($error, $nextCase, $type . 'Indent', $data);
@@ -150,7 +152,7 @@ class SwitchDeclarationSniff implements Sniff
             if ($tokens[$opener]['code'] === T_CLOSE_TAG) {
                 $error = 'There should be a colon before the PHP close tag to end the %s statement';
                 $code  = 'WrongOpener' . $type;
-                $data  = [strtoupper($type)];
+                $data  = [$typeUc];
 
                 $fix = $phpcsFile->addFixableError($error, $nextCase, $code, $data);
                 if ($fix === true) {
@@ -161,7 +163,7 @@ class SwitchDeclarationSniff implements Sniff
 
             if ($tokens[($opener - 1)]['type'] === 'T_WHITESPACE') {
                 $error = 'There must be no space before the colon in a %s statement';
-                $fix   = $phpcsFile->addFixableError($error, $nextCase, 'SpaceBeforeColon' . $type, [strtoupper($type)]);
+                $fix   = $phpcsFile->addFixableError($error, $nextCase, 'SpaceBeforeColon' . $type, [$typeUc]);
                 if ($fix === true) {
                     $phpcsFile->fixer->replaceToken(($opener - 1), '');
                 }
@@ -307,7 +309,7 @@ class SwitchDeclarationSniff implements Sniff
 
                     if ($nextLine === $caseLine) {
                         $error = '%s statement must be on a line by itself. Found content after';
-                        $fix   = $phpcsFile->addFixableError($error, $opener, 'ContentAfter' . $type, [strtoupper($type)]);
+                        $fix   = $phpcsFile->addFixableError($error, $opener, 'ContentAfter' . $type, [$typeUc]);
                         if ($fix === true) {
                             $padding = str_repeat(' ', ($caseAlignment - 1 + $this->indent));
                             if ($tokens[($i - 1)]['code'] === T_WHITESPACE) {
@@ -318,7 +320,7 @@ class SwitchDeclarationSniff implements Sniff
                         }
                     } elseif (($nextLine - $caseLine) > 1) {
                         $error = 'Blank lines are not allowed after %s statements';
-                        $phpcsFile->addError($error, $nextCase, 'SpacingAfter' . $type, [strtoupper($type)]);
+                        $phpcsFile->addError($error, $nextCase, 'SpacingAfter' . $type, [$typeUc]);
                     }
                 }
 
