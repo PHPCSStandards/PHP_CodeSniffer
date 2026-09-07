@@ -2276,7 +2276,7 @@ class PHP extends Tokenizer
                         && isset(Tokens::EMPTY_TOKENS[$tokenType]) === false
                     ) {
                         // Found the previous non-empty token.
-                        if ($tokenType === ':' || $tokenType === ',' || $tokenType === T_ATTRIBUTE_END) {
+                        if ($tokenType === ':' || $tokenType === ',' || $tokenType === '(' || $tokenType === T_ATTRIBUTE_END) {
                             $newToken['code'] = T_NULLABLE;
                             $newToken['type'] = 'T_NULLABLE';
 
