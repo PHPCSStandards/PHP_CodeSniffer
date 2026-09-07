@@ -55,6 +55,9 @@ final class NullableVsInlineThenTest extends AbstractTokenizerTestCase
             'property declaration, final, no visibility'                    => ['/* testNullableFinalOnly */'],
             'property declaration, abstract, no visibility'                 => ['/* testNullableAbstractOnly */'],
 
+            'property hook param type, nullable int'                        => ['/* testPropertyHookParamTypeNullableInt */'],
+            'short property hook param type, nullable string'               => ['/* testShortPropertyHookParamTypeNullableString */'],
+
             'closure param type, nullable int'                              => ['/* testClosureParamTypeNullableInt */'],
             'closure param type, nullable callable'                         => ['/* testClosureParamTypeNullableCallable */'],
             'closure param type, nullable string with comment, issue #1216' => ['/* testClosureParamTypeNullableStringWithAttributeAndSlashComment */'],

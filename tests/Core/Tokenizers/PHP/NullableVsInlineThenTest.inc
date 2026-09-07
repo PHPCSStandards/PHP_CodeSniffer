@@ -16,6 +16,18 @@ abstract class Nullable
 
     /* testNullableAbstractOnly */
     abstract ?string $prop5 { get; }
+
+    public int $prop6 {
+        /* testPropertyHookParamTypeNullableInt */
+        set(?int $value) {
+            $this->prop6 = $value ?? 0;
+        }
+    }
+
+    public string $prop7 {
+        /* testShortPropertyHookParamTypeNullableString */
+        set(?string $value) => $value ?? '';
+    }
 }
 
 $closure = function (
