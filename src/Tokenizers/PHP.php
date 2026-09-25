@@ -1022,13 +1022,13 @@ class PHP extends Tokenizer
                 provide a single string.
             */
 
-            if ($tokenIsArray === false && ($token[0] === '"' || $token[0] === 'b"')) {
+            if ($tokenIsArray === false && ($token[0] === '"' || strtolower($token[0]) === 'b"')) {
                 // Binary casts need a special token.
-                if ($token[0] === 'b"') {
+                if (strtolower($token[0]) === 'b"') {
                     $finalTokens[$newStackPtr] = [
                         'code'    => T_BINARY_CAST,
                         'type'    => 'T_BINARY_CAST',
-                        'content' => 'b',
+                        'content' => $token[0][0],
                     ];
                     $newStackPtr++;
                 }
@@ -1097,13 +1097,14 @@ class PHP extends Tokenizer
 
             if ($tokenIsArray === true
                 && $token[0] === T_CONSTANT_ENCAPSED_STRING
-                && (substr($token[1], 0, 2) === 'b"'
-                || substr($token[1], 0, 2) === "b'")
+                && strtolower($token[1][0]) === 'b'
+                && ($token[1][1] === '"'
+                || $token[1][1] === "'")
             ) {
                 $finalTokens[$newStackPtr] = [
                     'code'    => T_BINARY_CAST,
                     'type'    => 'T_BINARY_CAST',
-                    'content' => 'b',
+                    'content' => $token[1][0],
                 ];
                 $newStackPtr++;
                 $token[1] = substr($token[1], 1);
