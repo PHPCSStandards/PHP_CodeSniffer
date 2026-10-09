@@ -638,7 +638,9 @@ class ScopeIndentSniff implements Sniff
                     StatusWriter::write("=> removed open scope $conditionToken ($type) on line $line", 1);
                 }
 
-                if (isset($tokens[$scopeCloser]['scope_condition']) === true) {
+                if (isset($tokens[$scopeCloser]['scope_condition']) === true
+                    && $this->isSharedArrowFunctionCloser($tokens, $scopeCloser) === false
+                ) {
                     $first = $phpcsFile->findFirstOnLine([T_WHITESPACE, T_INLINE_HTML], $tokens[$scopeCloser]['scope_condition'], true);
                     if ($this->debug === true) {
                         $line = $tokens[$first]['line'];
@@ -1176,6 +1178,7 @@ class ScopeIndentSniff implements Sniff
                 || $tokens[$tokens[$i]['scope_condition']]['code'] === T_ANON_CLASS
                 || $tokens[$tokens[$i]['scope_condition']]['code'] === T_MATCH
                 || $tokens[$tokens[$i]['scope_condition']]['code'] === T_FN)
+                && $this->isSharedArrowFunctionCloser($tokens, $i) === false
             ) {
                 if ($this->debug === true) {
                     $type = str_replace('_', ' ', strtolower(substr($tokens[$tokens[$i]['scope_condition']]['type'], 2)));
@@ -1300,6 +1303,33 @@ class ScopeIndentSniff implements Sniff
 
         // Don't process the rest of the file.
         return $phpcsFile->numTokens;
+    }
+
+
+    /**
+     * Check if a token is an arrow function closer that also closes an outer parenthesis or bracket.
+     *
+     * @param array<int, array> $tokens   The token stack.
+     * @param int               $stackPtr The position of the scope closer in the stack.
+     *
+     * @return bool
+     */
+    private function isSharedArrowFunctionCloser(array $tokens, int $stackPtr)
+    {
+        $condition = $tokens[$stackPtr]['scope_condition'];
+        if ($tokens[$condition]['code'] !== T_FN) {
+            return false;
+        }
+
+        if (isset($tokens[$stackPtr]['parenthesis_opener']) === true) {
+            return $tokens[$stackPtr]['parenthesis_opener'] < $condition;
+        }
+
+        if (isset($tokens[$stackPtr]['bracket_opener']) === true) {
+            return $tokens[$stackPtr]['bracket_opener'] < $condition;
+        }
+
+        return false;
     }
 
 
