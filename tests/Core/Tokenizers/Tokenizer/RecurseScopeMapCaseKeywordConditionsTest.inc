@@ -148,3 +148,35 @@ switch ($foo):
         <div>Some html</div>
         <?php goto FOO;
 endswitch;
+
+// A throw expression (PHP 8.0) is part of a statement and does not end the case.
+switch ($value) {
+    /* testSwitchCaseNullCoalesceThrowExpression */
+    case 1:
+        $a = $b ?? throw new Exception();
+        break;
+    /* testSwitchCaseShortTernaryThrowExpression */
+    case 2:
+        $a = $b ?: throw new Exception();
+        break;
+    /* testSwitchCaseTernaryThrowExpression */
+    case 3:
+        $a = $b ? $c : throw new Exception();
+        break;
+    /* testSwitchCaseThrowExpressionAsArgument */
+    case 4:
+        doSomething($b ?? throw new Exception());
+        break;
+    /* testSwitchCaseThrowExpressionInArrowFunction */
+    case 5:
+        $fn = fn() => throw new Exception();
+        break;
+    /* testSwitchCaseThrowStatementAfterThrowExpression */
+    case 6:
+        $a = $b ?? throw new Exception();
+        /* testSwitchCaseThrowStatementAfterThrowExpressionCloserMarker */
+        throw new Exception();
+    /* testSwitchCaseThrowStatement */
+    case 7:
+        throw new Exception();
+}

@@ -825,6 +825,44 @@ abstract class Tokenizer
 
 
     /**
+     * Whether the throw at $throwPtr is an expression (PHP 8.0) rather than a throw statement.
+     *
+     * A throw statement is the first token of its statement: what comes before it ends a statement
+     * or opens a block or a case. Anything else, like `??`, `?:`, `=`, `(`, `,` or `=>`, makes it
+     * part of an expression.
+     *
+     * @param int $throwPtr The position of the T_THROW token.
+     * @param int $opener   The position of the scope opener the throw is inside.
+     *
+     * @return bool
+     */
+    private function isThrowExpression(int $throwPtr, int $opener): bool
+    {
+        for ($prev = ($throwPtr - 1); $prev > $opener; $prev--) {
+            if (isset(Tokens::EMPTY_TOKENS[$this->tokens[$prev]['code']]) === false) {
+                break;
+            }
+        }
+
+        if ($prev === $opener) {
+            return false;
+        }
+
+        $statementStart = [
+            T_SEMICOLON           => T_SEMICOLON,
+            T_OPEN_CURLY_BRACKET  => T_OPEN_CURLY_BRACKET,
+            T_CLOSE_CURLY_BRACKET => T_CLOSE_CURLY_BRACKET,
+            T_COLON               => T_COLON,
+            T_OPEN_TAG            => T_OPEN_TAG,
+            T_CLOSE_TAG           => T_CLOSE_TAG,
+            T_ELSE                => T_ELSE,
+        ];
+
+        return isset($statementStart[$this->tokens[$prev]['code']]) === false;
+    }
+
+
+    /**
      * Recurses though the scope openers to build a scope map.
      *
      * @param int $stackPtr The position in the stack of the token that
@@ -917,6 +955,20 @@ abstract class Tokenizer
                 }
 
                 return ($i - 1);
+            }
+
+            if ($opener !== null
+                && $tokenType === T_THROW
+                && isset($this->scopeOpeners[$currType]['end'][T_THROW]) === true
+                && $this->isThrowExpression($i, $opener) === true
+            ) {
+                // A PHP 8.0 throw expression, like `$a ?? throw new X()`, is part of
+                // a statement and does not end the scope the way a throw statement does.
+                if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                    StatusWriter::write("* ignoring throw expression on line {$this->tokens[$i]['line']} as a scope closer *", $depth);
+                }
+
+                continue;
             }
 
             if ($opener !== null

@@ -234,6 +234,56 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
                     'scope_closer' => T_GOTO,
                 ],
             ],
+            'switch case, null coalesce throw expression'                       => [
+                'testMarker'     => '/* testSwitchCaseNullCoalesceThrowExpression */',
+                'expectedTokens' => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_BREAK,
+                ],
+            ],
+            'switch case, short ternary throw expression'                       => [
+                'testMarker'     => '/* testSwitchCaseShortTernaryThrowExpression */',
+                'expectedTokens' => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_BREAK,
+                ],
+            ],
+            'switch case, ternary throw expression'                             => [
+                'testMarker'     => '/* testSwitchCaseTernaryThrowExpression */',
+                'expectedTokens' => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_BREAK,
+                ],
+            ],
+            'switch case, throw expression as function argument'                => [
+                'testMarker'     => '/* testSwitchCaseThrowExpressionAsArgument */',
+                'expectedTokens' => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_BREAK,
+                ],
+            ],
+            'switch case, throw expression in arrow function'                   => [
+                'testMarker'     => '/* testSwitchCaseThrowExpressionInArrowFunction */',
+                'expectedTokens' => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_BREAK,
+                ],
+            ],
+            'switch case, throw statement after throw expression'               => [
+                'testMarker'       => '/* testSwitchCaseThrowStatementAfterThrowExpression */',
+                'expectedTokens'   => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_THROW,
+                ],
+                'testCloserMarker' => '/* testSwitchCaseThrowStatementAfterThrowExpressionCloserMarker */',
+            ],
+            'switch case, throw statement'                                      => [
+                'testMarker'     => '/* testSwitchCaseThrowStatement */',
+                'expectedTokens' => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_THROW,
+                ],
+            ],
         ];
     }
 

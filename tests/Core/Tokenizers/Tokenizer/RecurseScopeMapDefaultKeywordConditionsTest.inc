@@ -251,3 +251,12 @@ switch ($foo):
         <div>Some html</div>
         <?php goto FOO;
 endswitch;
+
+// A throw expression (PHP 8.0) is part of a statement and does not end the default.
+switch ($foo) {
+    /* testSwitchDefaultWithThrowExpression */
+    default:
+        $a = $b ?? throw new Exception();
+        /* testSwitchDefaultWithThrowExpressionCloserMarker */
+        break;
+}

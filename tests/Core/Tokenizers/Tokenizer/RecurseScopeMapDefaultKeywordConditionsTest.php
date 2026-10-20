@@ -354,6 +354,11 @@ final class RecurseScopeMapDefaultKeywordConditionsTest extends AbstractTokenize
                 'openerMarker' => '/* testSwitchDefaultStartsWithPHPCloseTag */',
                 'closerMarker' => '/* testSwitchDefaultStartsWithPHPCloseTag */',
             ],
+            'switch_default_with_throw_expression'                      => [
+                'testMarker'   => '/* testSwitchDefaultWithThrowExpression */',
+                'openerMarker' => '/* testSwitchDefaultWithThrowExpression */',
+                'closerMarker' => '/* testSwitchDefaultWithThrowExpressionCloserMarker */',
+            ],
         ];
     }
 
