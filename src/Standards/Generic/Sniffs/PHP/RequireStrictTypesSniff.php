@@ -88,7 +88,7 @@ class RequireStrictTypesSniff implements Sniff
 
         if ($valuePtr !== false
             && $tokens[$valuePtr]['code'] === T_LNUMBER
-            && preg_match('`^0[xob]?0*$`iD', str_replace('_', '', $tokens[$valuePtr]['content'])) === 1
+            && preg_match('`^0[xob]?0*$`i', str_replace('_', '', $tokens[$valuePtr]['content'])) === 1
         ) {
             $error = 'Required strict_types declaration found, but strict types is disabled. Set the value to 1 to enable';
             $fix   = $phpcsFile->addFixableWarning($error, $valuePtr, 'Disabled');
