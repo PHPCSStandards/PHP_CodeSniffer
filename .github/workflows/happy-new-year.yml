@@ -32,11 +32,19 @@ jobs:
 
     name: "Happy New Year"
     steps:
-      - name: Set branches to use
+      - name: Set branch to use
         id: branches
+        env:
+          HEAD_REF: ${{ github.head_ref }}
         run: |
-          echo "BASE=3.x" >> "$GITHUB_OUTPUT"
-          echo "PR_BRANCH=feature/squiz-filecomment-update-copyright-year" >> "$GITHUB_OUTPUT"
+          if [[ "${{ github.event_name }}" == 'schedule' ]]; then
+            echo "BASE=3.x" >> "$GITHUB_OUTPUT"
+          elif [[ "${{ github.event_name }}" == 'push' ]]; then
+            # Pull requests should always go to the base branch, even when triggered via a push to 4.x.
+            echo "BASE=3.x" >> "$GITHUB_OUTPUT"
+          else # = PR, manual run or manual (re-)run for a workflow triggered by a PR.
+            echo "BASE=$HEAD_REF" >> "$GITHUB_OUTPUT"
+          fi
 
       # Using "Tomorrow" to prevent accidentally getting last year if the server is not using UTC.
       - name: Grab the new year
@@ -77,7 +85,7 @@ jobs:
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           base: ${{ steps.branches.outputs.BASE }}
-          branch: ${{ steps.branches.outputs.PR_BRANCH }}
+          branch: "feature/squiz-filecomment-update-copyright-year"
           delete-branch: true
           sign-commits: true
           commit-message: "Squiz/FileComment: update year in test case fixed file"
