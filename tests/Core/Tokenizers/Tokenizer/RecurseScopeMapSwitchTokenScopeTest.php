@@ -150,6 +150,15 @@ final class RecurseScopeMapSwitchTokenScopeTest extends AbstractTokenizerTestCas
                 'testOpenerMarker' => '/* testSwitchArrowFunctionWithReturnTypeWithinConditionScopeOpener */',
                 'testCloserMarker' => '/* testSwitchArrowFunctionWithReturnTypeWithinConditionScopeCloser */',
             ],
+            'switch with match expression in the condition'                                         => [
+                'testMarker'       => '/* testSwitchMatchWithinCondition */',
+                'expectedTokens'   => [
+                    'scope_opener' => T_OPEN_CURLY_BRACKET,
+                    'scope_closer' => T_CLOSE_CURLY_BRACKET,
+                ],
+                'testOpenerMarker' => '/* testSwitchMatchWithinConditionScopeOpener */',
+                'testCloserMarker' => '/* testSwitchMatchWithinConditionScopeCloser */',
+            ],
 
         ];
     }
