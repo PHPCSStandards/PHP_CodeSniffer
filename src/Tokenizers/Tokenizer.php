@@ -1033,8 +1033,10 @@ abstract class Tokenizer
                     if (($tokenType === T_FUNCTION
                         && $this->tokens[$stackPtr]['code'] !== T_FUNCTION)
                         || $tokenType === T_CLASS
+                        || $tokenType === T_MATCH
                     ) {
-                        // Probably a closure or an anonymous class, so process it manually.
+                        // Probably a closure, an anonymous class or a match expression
+                        // nested before the scope opener, so process it manually.
                         if (PHP_CODESNIFFER_VERBOSITY > 1) {
                             $type      = $this->tokens[$stackPtr]['type'];
                             $foundType = strtolower(substr($this->tokens[$i]['type'], 2));

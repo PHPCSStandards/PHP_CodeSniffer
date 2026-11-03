@@ -139,6 +139,7 @@ final class DoubleArrowTest extends AbstractTokenizerTestCase
             'multi_case_with_trailing_comma'          => ['/* testMatchArrowSimpleMultiCaseWithTrailingComma */'],
             'match_nested_outer'                      => ['/* testMatchArrowNestedMatchOuter */'],
             'match_nested_inner'                      => ['/* testMatchArrowNestedMatchInner */'],
+            'match_with_match_subject'                => ['/* testMatchArrowInMatchWithMatchSubject */'],
 
             'in_long_array_value_1'                   => ['/* testMatchArrowInLongArrayValue1 */'],
             'in_long_array_value_2'                   => ['/* testMatchArrowInLongArrayValue2 */'],

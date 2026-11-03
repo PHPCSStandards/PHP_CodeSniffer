@@ -69,6 +69,14 @@ function matchNestedInMatch() {
     };
 }
 
+function matchInMatchSubject() {
+    $x = match (match ($y) { 1 => 2, default => 3 }) {
+        /* testMatchArrowInMatchWithMatchSubject */
+        2 => 'two',
+        default => 'other',
+    };
+}
+
 function matchNestedInLongArrayValue() {
     $array = array(
         /* testLongArrayArrowWithNestedMatchValue1 */
