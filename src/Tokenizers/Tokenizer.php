@@ -1075,6 +1075,28 @@ abstract class Tokenizer
                         continue;
                     }
 
+                    if ($tokenType === T_MATCH) {
+                        // A match expression in the condition of another control structure,
+                        // so process it manually.
+                        if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                            $type = $this->tokens[$stackPtr]['type'];
+                            StatusWriter::write("=> Found match before scope opener for $stackPtr:$type, processing manually", $depth);
+                        }
+
+                        if (isset($this->tokens[$i]['scope_closer']) === true) {
+                            // We've already processed this match expression.
+                            if (PHP_CODESNIFFER_VERBOSITY > 1) {
+                                StatusWriter::write('* already processed, skipping *', $depth);
+                            }
+
+                            $i = $this->tokens[$i]['scope_closer'];
+                            continue;
+                        }
+
+                        $i = self::recurseScopeMap($i, ($depth + 1), $ignore);
+                        continue;
+                    }
+
                     // Found another opening condition but still haven't
                     // found our opener, so we are never going to find one.
                     if (PHP_CODESNIFFER_VERBOSITY > 1) {
