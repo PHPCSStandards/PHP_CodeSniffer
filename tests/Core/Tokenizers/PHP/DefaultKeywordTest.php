@@ -69,6 +69,12 @@ final class DefaultKeywordTest extends AbstractTokenizerTestCase
             'match_default_containing_switch'                         => [
                 'testMarker' => '/* testMatchDefault */',
             ],
+            'match_default_in_match_subject'                          => [
+                'testMarker' => '/* testMatchDefaultInMatchSubject */',
+            ],
+            'match_default_in_match_with_match_subject'               => [
+                'testMarker' => '/* testMatchDefaultInMatchWithMatchSubject */',
+            ],
 
             'match_default_with_nested_long_array_and_default_key'    => [
                 'testMarker'  => '/* testMatchDefaultWithNestedLongArrayWithClassConstantKey */',

@@ -1030,61 +1030,21 @@ abstract class Tokenizer
                         continue;
                     }
 
-                    if ($tokenType === T_FUNCTION
-                        && $this->tokens[$stackPtr]['code'] !== T_FUNCTION
+                    if (($tokenType === T_FUNCTION
+                        && $this->tokens[$stackPtr]['code'] !== T_FUNCTION)
+                        || $tokenType === T_CLASS
+                        || $tokenType === T_MATCH
                     ) {
-                        // Probably a closure, so process it manually.
+                        // Probably a closure, an anonymous class or a match expression
+                        // nested before the scope opener, so process it manually.
                         if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                            $type = $this->tokens[$stackPtr]['type'];
-                            StatusWriter::write("=> Found function before scope opener for $stackPtr:$type, processing manually", $depth);
+                            $type      = $this->tokens[$stackPtr]['type'];
+                            $foundType = strtolower(substr($this->tokens[$i]['type'], 2));
+                            StatusWriter::write("=> Found $foundType before scope opener for $stackPtr:$type, processing manually", $depth);
                         }
 
                         if (isset($this->tokens[$i]['scope_closer']) === true) {
-                            // We've already processed this closure.
-                            if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                                StatusWriter::write('* already processed, skipping *', $depth);
-                            }
-
-                            $i = $this->tokens[$i]['scope_closer'];
-                            continue;
-                        }
-
-                        $i = self::recurseScopeMap($i, ($depth + 1), $ignore);
-                        continue;
-                    }
-
-                    if ($tokenType === T_CLASS) {
-                        // Probably an anonymous class inside another anonymous class,
-                        // so process it manually.
-                        if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                            $type = $this->tokens[$stackPtr]['type'];
-                            StatusWriter::write("=> Found class before scope opener for $stackPtr:$type, processing manually", $depth);
-                        }
-
-                        if (isset($this->tokens[$i]['scope_closer']) === true) {
-                            // We've already processed this anon class.
-                            if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                                StatusWriter::write('* already processed, skipping *', $depth);
-                            }
-
-                            $i = $this->tokens[$i]['scope_closer'];
-                            continue;
-                        }
-
-                        $i = self::recurseScopeMap($i, ($depth + 1), $ignore);
-                        continue;
-                    }
-
-                    if ($tokenType === T_MATCH) {
-                        // A match expression in the condition of another control structure,
-                        // so process it manually.
-                        if (PHP_CODESNIFFER_VERBOSITY > 1) {
-                            $type = $this->tokens[$stackPtr]['type'];
-                            StatusWriter::write("=> Found match before scope opener for $stackPtr:$type, processing manually", $depth);
-                        }
-
-                        if (isset($this->tokens[$i]['scope_closer']) === true) {
-                            // We've already processed this match expression.
+                            // We've already processed this construct.
                             if (PHP_CODESNIFFER_VERBOSITY > 1) {
                                 StatusWriter::write('* already processed, skipping *', $depth);
                             }
