@@ -1614,16 +1614,6 @@ match (true) {
     ]
 };
 
-// Issue #1313.
-if (match ($name[0]) {
-    'g' => true,
-    default => false,
-} && !do_something($name[$i])) {
-    if ($obj->doSomething($name)) {
-        return $foo;
-    }
-}
-
 // Issue squizlabs/PHP_CodeSniffer#3808
 function test() {
     yield
@@ -1657,6 +1647,16 @@ $result = array_map(
     ),
     $data
 );
+
+// Issue #1313.
+if (match ($name[0]) {
+    'g' => true,
+    default => false,
+} && !do_something($name[$i])) {
+    if ($obj->doSomething($name)) {
+        return $foo;
+    }
+}
 
 /* ADD NEW TESTS ABOVE THIS LINE AND MAKE SURE THAT THE 1 (space-based) AND 2 (tab-based) FILES ARE IN SYNC! */
 ?>
