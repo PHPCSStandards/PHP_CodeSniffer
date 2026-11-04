@@ -1614,6 +1614,16 @@ match (true) {
     ]
 };
 
+// Issue #1313.
+if (match ($name[0]) {
+    'g' => true,
+    default => false,
+} && !do_something($name[$i])) {
+    if ($obj->doSomething($name)) {
+        return $foo;
+    }
+}
+
 // Issue squizlabs/PHP_CodeSniffer#3808
 function test() {
     yield

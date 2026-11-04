@@ -70,9 +70,15 @@ function matchNestedInMatch() {
 }
 
 function matchInMatchSubject() {
-    $x = match (match ($y) { 1 => 2, default => 3 }) {
-        /* testMatchArrowInMatchWithMatchSubject */
+    $x = match (match ($y) {
+        /* testMatchArrowInMatchSubject1 */
+        1 => 2,
+        /* testMatchArrowInMatchSubject2 */
+        default => 3,
+    }) {
+        /* testMatchArrowInMatchWithMatchSubject1 */
         2 => 'two',
+        /* testMatchArrowInMatchWithMatchSubject2 */
         default => 'other',
     };
 }
