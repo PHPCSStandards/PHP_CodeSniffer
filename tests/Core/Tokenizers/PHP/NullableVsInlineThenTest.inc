@@ -93,13 +93,13 @@ class InlineThen
     public int $hookProp {
         set(?int $value) {
             /* testInlineThenInPropertyHook */
-            $this->hookProp = $value ? 1 : 0;
+            $this->hookProp = $value ? PHP_INT_MAX - $value : 0;
         }
     }
 
     public string $shortHookProp {
         /* testInlineThenInShortPropertyHook */
-        get => $this->flag ? 'yes' : 'no';
+        get => $this->flag ? PHP_EOL . 'yes' : 'no';
     }
 }
 
