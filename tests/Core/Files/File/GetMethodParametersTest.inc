@@ -228,6 +228,17 @@ class ConstructorPropertyPromotionWithAsymVisibility {
     ) {}
 }
 
+class ConstructorPropertyPromotionWithHooks {
+    /* testPHP84ConstructorPropertyPromotionWithHooks */
+    public function __construct(
+        public string $name {
+            get => trim($this->name, ',');
+            set(string $value) { $this->name = $value; }
+        },
+        int $count
+    ) {}
+}
+
 /* testPHP8ConstructorPropertyPromotionGlobalFunction */
 // Intentional fatal error. Property promotion not allowed in non-constructor, but that's not the concern of this method.
 function globalFunction(private $x) {}

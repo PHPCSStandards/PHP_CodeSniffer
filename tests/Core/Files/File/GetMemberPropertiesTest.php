@@ -24,8 +24,8 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
     /**
      * Test the getMemberProperties() method.
      *
-     * @param string                         $identifier Comment which precedes the test case.
-     * @param array<string, string|int|bool> $expected   Expected function output.
+     * @param string                               $identifier Comment which precedes the test case.
+     * @param array<string, string|int|bool|array> $expected   Expected function output.
      *
      * @dataProvider dataGetMemberProperties
      *
@@ -43,6 +43,20 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
 
         if (isset($expected['type_end_token']) === true && is_int($expected['type_end_token']) === true) {
             $expected['type_end_token'] += $variable;
+        }
+
+        if (isset($expected['property_hooks']) === true) {
+            foreach ($expected['property_hooks'] as $hookName => $hook) {
+                $expected['property_hooks'][$hookName]['token'] += $variable;
+
+                if (is_int($hook['scope_opener']) === true) {
+                    $expected['property_hooks'][$hookName]['scope_opener'] += $variable;
+                }
+
+                if (is_int($hook['scope_closer']) === true) {
+                    $expected['property_hooks'][$hookName]['scope_closer'] += $variable;
+                }
+            }
         }
 
         $this->assertSame($expected, $result);
@@ -1730,6 +1744,16 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                     'type_token'      => -2,
                     'type_end_token'  => -2,
                     'nullable_type'   => false,
+                    'property_hooks'  => [
+                        'get' => [
+                            'token'        => 4,
+                            'content'      => 'get;',
+                            'syntax'       => 'bodyless',
+                            'is_reference' => false,
+                            'scope_opener' => false,
+                            'scope_closer' => false,
+                        ],
+                    ],
                 ],
             ],
             'php8.4-abstract-protected-property'                           => [
@@ -1746,6 +1770,16 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                     'type_token'      => -4,
                     'type_end_token'  => -2,
                     'nullable_type'   => false,
+                    'property_hooks'  => [
+                        'set' => [
+                            'token'        => 4,
+                            'content'      => 'set;',
+                            'syntax'       => 'bodyless',
+                            'is_reference' => false,
+                            'scope_opener' => false,
+                            'scope_closer' => false,
+                        ],
+                    ],
                 ],
             ],
             'php8.4-abstract-middle-keyword-property'                      => [
@@ -1762,6 +1796,16 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                     'type_token'      => -4,
                     'type_end_token'  => -2,
                     'nullable_type'   => false,
+                    'property_hooks'  => [
+                        'get' => [
+                            'token'        => 4,
+                            'content'      => 'get;',
+                            'syntax'       => 'bodyless',
+                            'is_reference' => false,
+                            'scope_opener' => false,
+                            'scope_closer' => false,
+                        ],
+                    ],
                 ],
             ],
             'php8.4-abstract-implicit-public-typed-property'               => [
@@ -1778,6 +1822,16 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                     'type_token'      => -2,
                     'type_end_token'  => -2,
                     'nullable_type'   => false,
+                    'property_hooks'  => [
+                        'set' => [
+                            'token'        => 4,
+                            'content'      => 'set;',
+                            'syntax'       => 'bodyless',
+                            'is_reference' => false,
+                            'scope_opener' => false,
+                            'scope_closer' => false,
+                        ],
+                    ],
                 ],
             ],
             'php8.4-abstract-implicit-public-untyped-property'             => [
@@ -1794,6 +1848,16 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                     'type_token'      => false,
                     'type_end_token'  => false,
                     'nullable_type'   => false,
+                    'property_hooks'  => [
+                        'get' => [
+                            'token'        => 4,
+                            'content'      => 'get;',
+                            'syntax'       => 'bodyless',
+                            'is_reference' => false,
+                            'scope_opener' => false,
+                            'scope_closer' => false,
+                        ],
+                    ],
                 ],
             ],
             'php8.4-abstract-public-nullable-typed-property'               => [
@@ -1810,6 +1874,16 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                     'type_token'      => -2,
                     'type_end_token'  => -2,
                     'nullable_type'   => true,
+                    'property_hooks'  => [
+                        'set' => [
+                            'token'        => 4,
+                            'content'      => 'set;',
+                            'syntax'       => 'bodyless',
+                            'is_reference' => false,
+                            'scope_opener' => false,
+                            'scope_closer' => false,
+                        ],
+                    ],
                 ],
             ],
             'php8.4-abstract-protected-complex-type-property'              => [
@@ -1826,6 +1900,16 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                     'type_token'      => -8,
                     'type_end_token'  => -2,
                     'nullable_type'   => false,
+                    'property_hooks'  => [
+                        'get' => [
+                            'token'        => 4,
+                            'content'      => 'get;',
+                            'syntax'       => 'bodyless',
+                            'is_reference' => false,
+                            'scope_opener' => false,
+                            'scope_closer' => false,
+                        ],
+                    ],
                 ],
             ],
             'php8.4-illegal-abstract-private-property'                     => [
@@ -1842,6 +1926,16 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                     'type_token'      => -2,
                     'type_end_token'  => -2,
                     'nullable_type'   => false,
+                    'property_hooks'  => [
+                        'get' => [
+                            'token'        => 4,
+                            'content'      => 'get;',
+                            'syntax'       => 'bodyless',
+                            'is_reference' => false,
+                            'scope_opener' => false,
+                            'scope_closer' => false,
+                        ],
+                    ],
                 ],
             ],
             'php8.4-illegal-abstract-readonly-property'                    => [
@@ -1858,6 +1952,16 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                     'type_token'      => -2,
                     'type_end_token'  => -2,
                     'nullable_type'   => false,
+                    'property_hooks'  => [
+                        'get' => [
+                            'token'        => 4,
+                            'content'      => 'get;',
+                            'syntax'       => 'bodyless',
+                            'is_reference' => false,
+                            'scope_opener' => false,
+                            'scope_closer' => false,
+                        ],
+                    ],
                 ],
             ],
             'php8.4-illegal-abstract-static-property'                      => [
@@ -1874,6 +1978,102 @@ final class GetMemberPropertiesTest extends AbstractMethodTestCase
                     'type_token'      => -2,
                     'type_end_token'  => -2,
                     'nullable_type'   => false,
+                    'property_hooks'  => [
+                        'get' => [
+                            'token'        => 4,
+                            'content'      => 'get;',
+                            'syntax'       => 'bodyless',
+                            'is_reference' => false,
+                            'scope_opener' => false,
+                            'scope_closer' => false,
+                        ],
+                    ],
+                ],
+            ],
+            'php8.4-hooked-property'                                       => [
+                'identifier' => '/* testPHP84HookedProperty */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => true,
+                    'set_scope'       => false,
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'is_final'        => false,
+                    'is_abstract'     => false,
+                    'type'            => 'string',
+                    'type_token'      => -2,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => false,
+                    'property_hooks'  => [
+                        'get' => [
+                            'token'        => 5,
+                            'content'      => 'get => trim($this->hooked, \',\');',
+                            'syntax'       => 'short',
+                            'is_reference' => false,
+                            'scope_opener' => 7,
+                            'scope_closer' => 18,
+                        ],
+                        'set' => [
+                            'token'        => 21,
+                            'content'      => 'set(string $value) { $this->hooked = $value; }',
+                            'syntax'       => 'full',
+                            'is_reference' => false,
+                            'scope_opener' => 28,
+                            'scope_closer' => 39,
+                        ],
+                    ],
+                ],
+            ],
+            'php8.4-hooked-property-with-default'                          => [
+                'identifier' => '/* testPHP84HookedPropertyWithDefault */',
+                'expected'   => [
+                    'scope'           => 'public',
+                    'scope_specified' => true,
+                    'set_scope'       => false,
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'is_final'        => false,
+                    'is_abstract'     => false,
+                    'type'            => 'string',
+                    'type_token'      => -2,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => false,
+                    'property_hooks'  => [
+                        'get' => [
+                            'token'        => 9,
+                            'content'      => 'get => trim($this->withDefault, \',\');',
+                            'syntax'       => 'short',
+                            'is_reference' => false,
+                            'scope_opener' => 11,
+                            'scope_closer' => 22,
+                        ],
+                    ],
+                ],
+            ],
+            'php8.4-by-reference-hooked-property'                          => [
+                'identifier' => '/* testPHP84ByReferenceHookedProperty */',
+                'expected'   => [
+                    'scope'           => 'protected',
+                    'scope_specified' => true,
+                    'set_scope'       => false,
+                    'is_static'       => false,
+                    'is_readonly'     => false,
+                    'is_final'        => false,
+                    'is_abstract'     => false,
+                    'type'            => 'string',
+                    'type_token'      => -2,
+                    'type_end_token'  => -2,
+                    'nullable_type'   => false,
+                    'property_hooks'  => [
+                        'get' => [
+                            'token'        => 6,
+                            'content'      => '&get { return $this->byRef; }',
+                            'syntax'       => 'full',
+                            'is_reference' => true,
+                            'scope_opener' => 8,
+                            'scope_closer' => 17,
+                        ],
+                    ],
                 ],
             ],
         ];

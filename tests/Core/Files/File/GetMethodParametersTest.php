@@ -2257,6 +2257,74 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
 
 
     /**
+     * Verify recognition of PHP 8.4 constructor property promotion with property hooks.
+     *
+     * @return void
+     */
+    public function testPHP84ConstructorPropertyPromotionWithHooks()
+    {
+        // Offsets are relative to the T_FUNCTION token.
+        $expected    = [];
+        $expected[0] = [
+            'token'               => 10,
+            'name'                => '$name',
+            'content'             => 'public string $name {
+            get => trim($this->name, \',\');
+            set(string $value) { $this->name = $value; }
+        }',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'string',
+            'type_hint_token'     => 8,
+            'type_hint_end_token' => 8,
+            'nullable_type'       => false,
+            'property_visibility' => 'public',
+            'visibility_token'    => 6,
+            'property_readonly'   => false,
+            'property_hooks'      => [
+                'get' => [
+                    'token'        => 15,
+                    'content'      => 'get => trim($this->name, \',\');',
+                    'syntax'       => 'short',
+                    'is_reference' => false,
+                    'scope_opener' => 17,
+                    'scope_closer' => 28,
+                ],
+                'set' => [
+                    'token'        => 31,
+                    'content'      => 'set(string $value) { $this->name = $value; }',
+                    'syntax'       => 'full',
+                    'is_reference' => false,
+                    'scope_opener' => 38,
+                    'scope_closer' => 49,
+                ],
+            ],
+            'comma_token'         => 53,
+        ];
+        $expected[1] = [
+            'token'               => 58,
+            'name'                => '$count',
+            'content'             => 'int $count',
+            'has_attributes'      => false,
+            'pass_by_reference'   => false,
+            'reference_token'     => false,
+            'variable_length'     => false,
+            'variadic_token'      => false,
+            'type_hint'           => 'int',
+            'type_hint_token'     => 56,
+            'type_hint_end_token' => 56,
+            'nullable_type'       => false,
+            'comma_token'         => false,
+        ];
+
+        $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
+    }
+
+
+    /**
      * Verify behaviour when a non-constructor function uses PHP 8 property promotion syntax.
      *
      * @return void
@@ -3263,6 +3331,20 @@ final class GetMethodParametersTest extends AbstractMethodTestCase
 
             if (isset($param['readonly_token']) === true) {
                 $expected[$key]['readonly_token'] += $target;
+            }
+
+            if (isset($param['property_hooks']) === true) {
+                foreach ($param['property_hooks'] as $hookName => $hook) {
+                    $expected[$key]['property_hooks'][$hookName]['token'] += $target;
+
+                    if (is_int($hook['scope_opener']) === true) {
+                        $expected[$key]['property_hooks'][$hookName]['scope_opener'] += $target;
+                    }
+
+                    if (is_int($hook['scope_closer']) === true) {
+                        $expected[$key]['property_hooks'][$hookName]['scope_closer'] += $target;
+                    }
+                }
             }
         }
 

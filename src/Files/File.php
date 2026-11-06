@@ -1430,6 +1430,14 @@ class File
         $readonlyToken      = null;
 
         for ($i = $paramStart; $i <= $closer; $i++) {
+            if (($this->tokens[$i]['code'] === T_PROPERTY_HOOK_GET
+                || $this->tokens[$i]['code'] === T_PROPERTY_HOOK_SET)
+                && isset($this->tokens[$i]['scope_closer']) === true
+            ) {
+                $i = $this->tokens[$i]['scope_closer'];
+                continue;
+            }
+
             // Check to see if this token has a parenthesis or bracket opener. If it does
             // it's likely to be an array which might have arguments in it. This
             // could cause problems in our parsing below, so lets just skip to the
@@ -1621,6 +1629,11 @@ class File
                         if ($readonlyToken !== null) {
                             $vars[$paramCount]['property_readonly'] = true;
                             $vars[$paramCount]['readonly_token']    = $readonlyToken;
+                        }
+
+                        $propertyHooks = $this->getPropertyHooks($currVar);
+                        if (empty($propertyHooks) === false) {
+                            $vars[$paramCount]['property_hooks'] = $propertyHooks;
                         }
                     }
 
@@ -2027,7 +2040,7 @@ class File
             }
         }
 
-        return [
+        $properties = [
             'scope'           => $scope,
             'scope_specified' => $scopeSpecified,
             'set_scope'       => $setScope,
@@ -2040,6 +2053,130 @@ class File
             'type_end_token'  => $typeEndToken,
             'nullable_type'   => $nullableType,
         ];
+
+        $propertyHooks = $this->getPropertyHooks($stackPtr);
+        if (empty($propertyHooks) === false) {
+            $properties['property_hooks'] = $propertyHooks;
+        }
+
+        return $properties;
+    }
+
+
+    /**
+     * Returns the property hooks declared for a property.
+     *
+     * @param int $stackPtr The position in the stack of the T_VARIABLE token.
+     *
+     * @return array<string, array<string, int|string|bool>>
+     */
+    private function getPropertyHooks(int $stackPtr)
+    {
+        $blockOpener = $this->findNext(Tokens::EMPTY_TOKENS, ($stackPtr + 1), null, true);
+        if ($blockOpener === false) {
+            return [];
+        }
+
+        if ($this->tokens[$blockOpener]['code'] === T_EQUAL) {
+            for ($i = ($blockOpener + 1); $i < $this->numTokens; $i++) {
+                $token = $this->tokens[$i];
+
+                if ($token['code'] === T_OPEN_CURLY_BRACKET) {
+                    $blockOpener = $i;
+                    break;
+                }
+
+                if (isset($token['parenthesis_opener']) === true
+                    && $i === $token['parenthesis_opener']
+                    && $i !== $token['parenthesis_closer']
+                ) {
+                    $i = $token['parenthesis_closer'];
+                    continue;
+                }
+
+                if (isset($token['bracket_opener']) === true
+                    && $i === $token['bracket_opener']
+                    && $i !== $token['bracket_closer']
+                ) {
+                    $i = $token['bracket_closer'];
+                    continue;
+                }
+
+                if ($token['code'] === T_CLOSE_PARENTHESIS
+                    || $token['code'] === T_CLOSE_SQUARE_BRACKET
+                    || $token['code'] === T_CLOSE_CURLY_BRACKET
+                    || $token['code'] === T_SEMICOLON
+                    || $token['code'] === T_COMMA
+                ) {
+                    return [];
+                }
+            }
+        }
+
+        if ($this->tokens[$blockOpener]['code'] !== T_OPEN_CURLY_BRACKET
+            || isset($this->tokens[$blockOpener]['bracket_closer']) === false
+        ) {
+            return [];
+        }
+
+        $blockCloser = $this->tokens[$blockOpener]['bracket_closer'];
+        $hooks       = [];
+
+        for ($i = ($blockOpener + 1); $i < $blockCloser; $i++) {
+            if ($this->tokens[$i]['code'] !== T_PROPERTY_HOOK_GET
+                && $this->tokens[$i]['code'] !== T_PROPERTY_HOOK_SET
+            ) {
+                continue;
+            }
+
+            $hook      = $this->tokens[$i];
+            $isRef     = false;
+            $hookName  = strtolower($hook['content']);
+            $hookStart = $i;
+
+            $previous = $this->findPrevious(Tokens::EMPTY_TOKENS, ($i - 1), $blockOpener, true);
+            if ($previous !== false && $this->tokens[$previous]['code'] === T_BITWISE_AND) {
+                $isRef     = true;
+                $hookStart = $previous;
+            }
+
+            if (isset($hook['scope_closer']) === true) {
+                $hookEnd = $hook['scope_closer'];
+            } else {
+                $hookEnd = $this->findNext(T_SEMICOLON, ($i + 1), $blockCloser);
+            }
+
+            if ($hookEnd === false) {
+                continue;
+            }
+
+            $scopeOpener = false;
+            $scopeCloser = false;
+            $syntax      = 'bodyless';
+
+            if (isset($hook['scope_opener']) === true) {
+                $scopeOpener = $hook['scope_opener'];
+                $scopeCloser = $hook['scope_closer'];
+                if ($this->tokens[$scopeOpener]['code'] === T_OPEN_CURLY_BRACKET) {
+                    $syntax = 'full';
+                } elseif ($this->tokens[$scopeOpener]['code'] === T_DOUBLE_ARROW) {
+                    $syntax = 'short';
+                }
+            }
+
+            $hooks[$hookName] = [
+                'token'        => $i,
+                'content'      => trim($this->getTokensAsString($hookStart, (($hookEnd - $hookStart) + 1))),
+                'syntax'       => $syntax,
+                'is_reference' => $isRef,
+                'scope_opener' => $scopeOpener,
+                'scope_closer' => $scopeCloser,
+            ];
+
+            $i = $hookEnd;
+        }
+
+        return $hooks;
     }
 
 
