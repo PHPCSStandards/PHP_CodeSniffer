@@ -18,6 +18,7 @@ Thank you for your interest in contributing to PHP_CodeSniffer!
     * [Finding Something to Work on](#finding-something-to-work-on)
     * [Getting Started](#getting-started)
     * [While Working on a Patch](#while-working-on-a-patch)
+    * [Designing Sniffs](#designing-sniffs)
     * [Writing Unit/Integration Tests](#writing-unitintegration-tests)
     * [Writing End-to-End Tests](#writing-end-to-end-tests)
     * [Submitting Your Pull Request](#submitting-your-pull-request)
@@ -269,6 +270,25 @@ To help you with this, a number of convenience scripts are available:
 * `composer coverage-lte9-local` will run the unit tests with code coverage and generate an HTML coverage report,
     which will be placed in a `build/coverage-html` subdirectory (PHP < 8.1/PHPUnit <= 9).
 * `composer build` will build the phpcs.phar and phpcbf.phar files.
+
+
+### Designing Sniffs
+
+#### Error Codes vs Properties
+
+When a sniff needs to support variations of a rule, for example, to allow end-users to decide whether a certain
+pattern should be flagged or not, there are generally two options: report the variation using a separate error code,
+or add a public property to the sniff to toggle the behavior.
+
+Generally speaking, separate error codes are preferred over properties, as they give end-users more flexibility:
+* End-users can use inline `phpcs:ignore` or `phpcs:disable` annotations to ignore a specific error code for specific
+    lines of code. Behavior controlled via a property cannot be ignored this way.
+* End-users can ignore an error code for select files or directories by using `<exclude-pattern>` for that
+    error code in their ruleset. In contrast, a property cannot be set to different values for different files or
+    directories.
+
+Properties are still the right choice for configuration values which cannot be expressed via error codes,
+like the size of an indent, a line length limit or a list of names.
 
 
 ### Writing Unit/Integration Tests
