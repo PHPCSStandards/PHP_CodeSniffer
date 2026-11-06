@@ -14,6 +14,7 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractScopeSniff;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\DocComment;
 use PHP_CodeSniffer\Util\Tokens;
 
 class VariableCommentSniff extends AbstractVariableSniff
@@ -143,13 +144,28 @@ class VariableCommentSniff extends AbstractVariableSniff
             return;
         }
 
-        $varType = $varParts[1];
+        $varType       = $varParts[1];
+        $multilineType = DocComment::getMultilineType($phpcsFile, ($foundVar + 2));
+        if ($multilineType !== null) {
+            $varType = $multilineType;
+        }
 
         // Check var type (can be multiple, separated by '|').
-        $typeNames      = explode('|', $varType);
+        $typeNames = explode('|', $varType);
+        if ($multilineType !== null) {
+            $typeNames = [$varType];
+        }
+
         $suggestedNames = [];
         foreach ($typeNames as $typeName) {
-            $suggestedName = Common::suggestType($typeName);
+            // Type suggestions only understand the legacy array(...) syntax.
+            // Do not interpret nested types inside shapes or generics as top-level types.
+            if ($multilineType !== null && preg_match('/^array\(/i', $typeName) !== 1) {
+                $suggestedName = $typeName;
+            } else {
+                $suggestedName = Common::suggestType($typeName);
+            }
+
             if (in_array($suggestedName, $suggestedNames, true) === false) {
                 $suggestedNames[] = $suggestedName;
             }
@@ -162,7 +178,14 @@ class VariableCommentSniff extends AbstractVariableSniff
                 $suggestedType,
                 $varType,
             ];
-            $fix   = $phpcsFile->addFixableError($error, $foundVar, 'IncorrectVarType', $data);
+            if ($multilineType !== null) {
+                // Replacing the first line would corrupt the multi-line type.
+                $phpcsFile->addError($error, $foundVar, 'IncorrectVarType', $data);
+                $fix = false;
+            } else {
+                $fix = $phpcsFile->addFixableError($error, $foundVar, 'IncorrectVarType', $data);
+            }
+
             if ($fix === true) {
                 $replacement = $suggestedType;
                 if (empty($varParts[2]) === false) {

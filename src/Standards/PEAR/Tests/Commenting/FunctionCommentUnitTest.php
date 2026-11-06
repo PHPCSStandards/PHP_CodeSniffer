@@ -90,6 +90,9 @@ final class FunctionCommentUnitTest extends AbstractSniffTestCase
                     523 => 1,
                     533 => 1,
                     545 => 1,
+                    573 => 1,
+                    579 => 1,
+                    580 => 1,
                 ];
 
             case 'FunctionCommentUnitTest.2.inc':

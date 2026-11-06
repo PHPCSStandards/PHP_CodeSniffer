@@ -289,17 +289,28 @@ class FunctionCommentSniff implements Sniff
             $comment       = '';
             $commentEnd    = 0;
             $commentTokens = [];
+            $paramToken    = ($tag + 2);
+            $multiLineType = false;
 
-            if ($tokens[($tag + 2)]['code'] === T_DOC_COMMENT_STRING) {
-                $matches = [];
-                preg_match('/((?:(?![$.]|&(?=\$)).)*)(?:((?:\.\.\.)?(?:\$|&)[^\s]+)(?:(\s+)(.*))?)?/', $tokens[($tag + 2)]['content'], $matches);
+            // Any strings until the next tag belong to this parameter.
+            if (isset($tokens[$commentStart]['comment_tags'][($pos + 1)]) === true) {
+                $end = $tokens[$commentStart]['comment_tags'][($pos + 1)];
+            } else {
+                $end = $tokens[$commentStart]['comment_closer'];
+            }
+
+            if ($tokens[$paramToken]['code'] === T_DOC_COMMENT_STRING) {
+                $parsed        = $this->parseParamContent($phpcsFile, $paramToken, $end);
+                $matches       = $parsed['matches'];
+                $multiLineType = ($parsed['token'] !== $paramToken);
+                $paramToken    = $parsed['token'];
 
                 if (empty($matches) === false) {
                     $typeLen   = strlen($matches[1]);
                     $type      = trim($matches[1]);
                     $typeSpace = ($typeLen - strlen($type));
                     $typeLen   = strlen($type);
-                    if ($typeLen > $maxType) {
+                    if ($typeLen > $maxType && $multiLineType === false) {
                         $maxType = $typeLen;
                     }
                 }
@@ -307,7 +318,7 @@ class FunctionCommentSniff implements Sniff
                 if (isset($matches[2]) === true) {
                     $var    = $matches[2];
                     $varLen = strlen($var);
-                    if ($varLen > $maxVar) {
+                    if ($varLen > $maxVar && $multiLineType === false) {
                         $maxVar = $varLen;
                     }
 
@@ -315,14 +326,7 @@ class FunctionCommentSniff implements Sniff
                         $varSpace = strlen($matches[3]);
                         $comment  = $matches[4];
 
-                        // Any strings until the next tag belong to this comment.
-                        if (isset($tokens[$commentStart]['comment_tags'][($pos + 1)]) === true) {
-                            $end = $tokens[$commentStart]['comment_tags'][($pos + 1)];
-                        } else {
-                            $end = $tokens[$commentStart]['comment_closer'];
-                        }
-
-                        for ($i = ($tag + 3); $i < $end; $i++) {
+                        for ($i = ($paramToken + 1); $i < $end; $i++) {
                             if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING) {
                                 $comment        .= ' ' . $tokens[$i]['content'];
                                 $commentEnd      = $i;
@@ -351,6 +355,8 @@ class FunctionCommentSniff implements Sniff
                 'comment_tokens' => $commentTokens,
                 'type_space'     => $typeSpace,
                 'var_space'      => $varSpace,
+                'param_token'    => $paramToken,
+                'multiline_type' => $multiLineType,
             ];
         }
 
@@ -372,7 +378,8 @@ class FunctionCommentSniff implements Sniff
 
             $foundParams[] = $param['var'];
 
-            if (trim($param['type']) !== '') {
+            // The spacing of a multi-line type can't be aligned with the other parameters.
+            if (trim($param['type']) !== '' && $param['multiline_type'] === false) {
                 // Check number of spaces after the type.
                 $spaces = ($maxType - strlen($param['type']) + 1);
                 if ($param['type_space'] !== $spaces) {
@@ -446,7 +453,7 @@ class FunctionCommentSniff implements Sniff
 
             // Check number of spaces after the param name.
             $spaces = ($maxVar - strlen($param['var']) + 1);
-            if ($param['var_space'] !== $spaces) {
+            if ($param['var_space'] !== $spaces && $param['multiline_type'] === false) {
                 $error = 'Expected %s spaces after parameter name; %s found';
                 $data  = [
                     $spaces,
@@ -486,9 +493,9 @@ class FunctionCommentSniff implements Sniff
 
             // Check the alignment of multi-line param comments.
             if ($param['tag'] !== $param['comment_end']) {
-                $wrapLength = ($tokens[($param['tag'] + 2)]['length'] - $param['type_space'] - $param['var_space'] - strlen($param['type']) - strlen($param['var']));
-
-                $startColumn = ($tokens[($param['tag'] + 2)]['column'] + $tokens[($param['tag'] + 2)]['length'] - $wrapLength);
+                $paramToken  = $param['param_token'];
+                $varPosition = strpos($tokens[$paramToken]['content'], $param['var']);
+                $startColumn = ($tokens[$paramToken]['column'] + $varPosition + strlen($param['var']) + $param['var_space']);
 
                 $star     = $phpcsFile->findPrevious(T_DOC_COMMENT_STAR, $param['tag']);
                 $expected = ($startColumn - $tokens[$star]['column'] - 1);
@@ -540,5 +547,80 @@ class FunctionCommentSniff implements Sniff
             $data  = [$neededParam];
             $phpcsFile->addError($error, $commentStart, 'MissingParamTag', $data);
         }
+    }
+
+
+    /**
+     * Parse the content of a param tag into its type, name and comment.
+     *
+     * A type which spans multiple lines, like a multi-line array shape, is joined
+     * with the following lines until its brackets are balanced and the parameter name is found.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param int                         $stackPtr  The position of the first comment string of the tag.
+     * @param int                         $end       The position of the next tag or the comment closer.
+     *
+     * @return array{token: int, matches: array<int, string>} The position of the comment string holding
+     *                                                         the parameter name and the regex matches.
+     */
+    protected function parseParamContent(File $phpcsFile, int $stackPtr, int $end)
+    {
+        $tokens  = $phpcsFile->getTokens();
+        $pattern = '/((?:(?![$.]|&(?=\$)).)*)(?:((?:\.\.\.)?(?:\$|&)[^\s]+)(?:(\s+)(.*))?)?/';
+
+        $matches = [];
+        preg_match($pattern, $tokens[$stackPtr]['content'], $matches);
+
+        if (isset($matches[2]) === true || $this->hasUnclosedBrackets($matches[1]) === false) {
+            return [
+                'token'   => $stackPtr,
+                'matches' => $matches,
+            ];
+        }
+
+        $content = $tokens[$stackPtr]['content'];
+        for ($i = ($stackPtr + 1); $i < $end; $i++) {
+            if ($tokens[$i]['code'] !== T_DOC_COMMENT_STRING) {
+                continue;
+            }
+
+            $content .= ' ' . $tokens[$i]['content'];
+
+            $multiLineMatches = [];
+            preg_match($pattern, $content, $multiLineMatches);
+
+            if (isset($multiLineMatches[2]) === true) {
+                return [
+                    'token'   => $i,
+                    'matches' => $multiLineMatches,
+                ];
+            }
+
+            if ($this->hasUnclosedBrackets($multiLineMatches[1]) === false) {
+                break;
+            }
+        }
+
+        // Not a valid multi-line type, so only use the first line.
+        return [
+            'token'   => $stackPtr,
+            'matches' => $matches,
+        ];
+    }
+
+
+    /**
+     * Check whether a type contains brackets which are opened, but not closed.
+     *
+     * @param string $type The type to check.
+     *
+     * @return bool
+     */
+    private function hasUnclosedBrackets(string $type)
+    {
+        // Ignore the arrow in array(key => value) types.
+        $type = str_replace('=>', '', $type);
+
+        return (preg_match_all('/[{(\[<]/', $type) > preg_match_all('/[})\]>]/', $type));
     }
 }
