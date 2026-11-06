@@ -1,0 +1,51 @@
+<?php
+
+// phpcs:set Squiz.Commenting.VariableComment useShortTypes false
+
+class UsingLongTypes
+{
+    /**
+     * @var boolean
+     */
+    public $typeBool;
+
+    /**
+     * @var boolean
+     */
+    public $typeBoolean;
+
+     /**
+      * @var integer
+      */
+     public $typeInt;
+
+     /**
+      * @var integer
+      */
+     public $typeInteger;
+}
+
+// phpcs:set Squiz.Commenting.VariableComment useShortTypes true
+
+class UsingShortTypes
+{
+    /**
+     * @var bool
+     */
+    public $typeBool;
+
+    /**
+     * @var bool
+     */
+    public $typeBoolean;
+
+     /**
+      * @var int
+      */
+     public $typeInt;
+
+     /**
+      * @var int
+      */
+     public $typeInteger;
+}

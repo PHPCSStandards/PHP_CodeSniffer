@@ -213,4 +213,34 @@ final class SuggestTypeTest extends TestCase
             ],
         ];
     }
+
+
+    /**
+     * Test the suggestType() for suggesting long types.
+     *
+     * @return void
+     */
+    public function testSuggestLongType()
+    {
+        $this->assertSame('boolean', Common::suggestType('bool', false));
+        $this->assertSame('boolean', Common::suggestType('boolean', false));
+
+        $this->assertSame('integer', Common::suggestType('int', false));
+        $this->assertSame('integer', Common::suggestType('integer', false));
+    }
+
+
+    /**
+     * Test the suggestType() for suggesting short types.
+     *
+     * @return void
+     */
+    public function testSuggestShortType()
+    {
+        $this->assertSame('bool', Common::suggestType('bool', true));
+        $this->assertSame('bool', Common::suggestType('boolean', true));
+
+        $this->assertSame('int', Common::suggestType('int', true));
+        $this->assertSame('int', Common::suggestType('integer', true));
+    }
 }
