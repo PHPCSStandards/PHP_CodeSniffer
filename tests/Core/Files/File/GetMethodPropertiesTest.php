@@ -1451,6 +1451,31 @@ final class GetMethodPropertiesTest extends AbstractMethodTestCase
 
 
     /**
+     * Test handling of a parse error where the colon is missing from the return type declaration.
+     *
+     * @return void
+     */
+    public function testMissingColonParseError()
+    {
+        // Offsets are relative to the T_CLOSURE token.
+        $expected = [
+            'scope'                 => 'public',
+            'scope_specified'       => false,
+            'return_type'           => '',
+            'return_type_token'     => false,
+            'return_type_end_token' => false,
+            'nullable_return_type'  => false,
+            'is_abstract'           => false,
+            'is_final'              => false,
+            'is_static'             => false,
+            'has_body'              => true,
+        ];
+
+        $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
+    }
+
+
+    /**
      * Test handling of closure declarations with a use variable import with a return type declaration.
      *
      * @return void

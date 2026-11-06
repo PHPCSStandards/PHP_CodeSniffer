@@ -1781,6 +1781,8 @@ class File
                 T_TYPE_CLOSE_PARENTHESIS => T_TYPE_CLOSE_PARENTHESIS,
             ];
 
+            $hasColon = false;
+
             for ($i = $this->tokens[$stackPtr]['parenthesis_closer']; $i < $this->numTokens; $i++) {
                 if (($scopeOpener === null && $this->tokens[$i]['code'] === T_SEMICOLON)
                     || ($scopeOpener !== null && $i === $scopeOpener)
@@ -1800,11 +1802,17 @@ class File
                     continue;
                 }
 
-                if ($this->tokens[$i]['code'] === T_NULLABLE) {
-                    $nullableReturnType = true;
+                if ($this->tokens[$i]['code'] === T_COLON) {
+                    $hasColon = true;
+                    continue;
                 }
 
-                if (isset($valid[$this->tokens[$i]['code']]) === true) {
+                if ($this->tokens[$i]['code'] === T_NULLABLE) {
+                    $nullableReturnType = true;
+                    continue;
+                }
+
+                if ($hasColon === true && isset($valid[$this->tokens[$i]['code']]) === true) {
                     if ($returnTypeToken === false) {
                         $returnTypeToken = $i;
                     }
