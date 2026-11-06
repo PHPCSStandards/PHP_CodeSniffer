@@ -148,3 +148,10 @@ switch ($foo):
         <div>Some html</div>
         <?php goto FOO;
 endswitch;
+
+switch ($foo) {
+    /* testSwitchCaseWithMatchInValue */
+    case match ($bar) { 1 => 'a', default => 'b' }:
+        echo 'a';
+        break;
+}

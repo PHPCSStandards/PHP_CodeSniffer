@@ -234,6 +234,13 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
                     'scope_closer' => T_GOTO,
                 ],
             ],
+            'switch case, match expression in case value'                       => [
+                'testMarker'     => '/* testSwitchCaseWithMatchInValue */',
+                'expectedTokens' => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_BREAK,
+                ],
+            ],
         ];
     }
 

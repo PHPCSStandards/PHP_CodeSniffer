@@ -58,3 +58,10 @@ switch((fn(): string => $condition ? 'foo' : 'bar')()) /* testSwitchArrowFunctio
         return 'test';
 /* testSwitchArrowFunctionWithReturnTypeWithinConditionScopeCloser */
 endswitch;
+
+/* testSwitchMatchWithinCondition */
+switch (match ($value) { 1 => 'a', default => 'b' }) /* testSwitchMatchWithinConditionScopeOpener */ {
+    case 'a':
+        return 'test';
+/* testSwitchMatchWithinConditionScopeCloser */
+}

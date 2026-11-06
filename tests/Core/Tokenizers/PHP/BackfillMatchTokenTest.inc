@@ -115,6 +115,15 @@ $x = match ($y) {
     default => match ($z) { 1 => 1 },
 };
 
+/* testMatchInMatchSubjectOuter */
+$x = match (
+    /* testMatchInMatchSubjectInner */
+    match ($y) { 1 => 2, default => 3 }
+) {
+    2 => 'two',
+    default => 'other',
+};
+
 /* testMatchInTernaryCondition */
 $x = match ($test) { 1 => 'a', 2 => 'b' } ?
     /* testMatchInTernaryThen */ match ($test) { 1 => 'a', 2 => 'b' } :

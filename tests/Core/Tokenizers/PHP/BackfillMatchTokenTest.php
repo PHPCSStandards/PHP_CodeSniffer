@@ -133,6 +133,16 @@ final class BackfillMatchTokenTest extends AbstractTokenizerTestCase
                 'openerOffset' => 6,
                 'closerOffset' => 14,
             ],
+            'match_in_match_subject_outer'              => [
+                'testMarker'   => '/* testMatchInMatchSubjectOuter */',
+                'openerOffset' => 33,
+                'closerOffset' => 51,
+            ],
+            'match_in_match_subject_inner'              => [
+                'testMarker'   => '/* testMatchInMatchSubjectInner */',
+                'openerOffset' => 6,
+                'closerOffset' => 21,
+            ],
             'ternary_condition'                         => [
                 'testMarker'   => '/* testMatchInTernaryCondition */',
                 'openerOffset' => 6,
