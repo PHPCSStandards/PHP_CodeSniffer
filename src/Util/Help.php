@@ -475,6 +475,7 @@ final class Help
             'parallel'   => [
                 'argument'    => '--parallel=<processes>',
                 'description' => 'The number of files to be checked simultaneously. Defaults to 1 (no parallel processing).' . "\n"
+                    . 'Set to "auto" to use a number of processes equal to the number of detected CPU cores.' . "\n"
                     . 'If enabled, this option only takes effect if the PHP PCNTL (Process Control) extension is available.',
             ],
             'suffix'     => [
