@@ -14,9 +14,30 @@
 namespace PHP_CodeSniffer\Generators;
 
 use DOMElement;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 class Text extends Generator
 {
+
+
+    /**
+     * Generates the documentation for a standard.
+     *
+     * @return void
+     * @see    processSniff()
+     *
+     * @throws \PHP_CodeSniffer\Exceptions\GeneratorException If there is no <documentation> element
+     *                                                        in the XML document.
+     */
+    public function generate()
+    {
+        if (empty($this->docFiles) === true) {
+            StatusWriter::write('No documentation is available for the requested sniff(s).');
+            return;
+        }
+
+        parent::generate();
+    }
 
 
     /**

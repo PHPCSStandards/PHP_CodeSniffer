@@ -13,6 +13,7 @@ use PHP_CodeSniffer\Generators\Markdown;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Tests\ConfigDouble;
 use PHP_CodeSniffer\Tests\Core\Generators\Fixtures\MarkdownDouble;
+use PHP_CodeSniffer\Tests\Core\StatusWriterTestHelper;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,6 +24,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class MarkdownTest extends TestCase
 {
+    use StatusWriterTestHelper;
 
 
     /**
@@ -81,10 +83,6 @@ final class MarkdownTest extends TestCase
     public static function dataDocs()
     {
         return [
-            'Standard without docs'            => [
-                'standard'       => __DIR__ . '/NoDocsTest.xml',
-                'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputEmpty.txt',
-            ],
             'Standard with one doc file'       => [
                 'standard'       => __DIR__ . '/OneDocTest.xml',
                 'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputOneDoc.md',
@@ -94,6 +92,27 @@ final class MarkdownTest extends TestCase
                 'pathToExpected' => __DIR__ . '/Expectations/ExpectedOutputStructureDocs.md',
             ],
         ];
+    }
+
+
+    /**
+     * Test that a message is shown when no documentation is available for the requested sniffs.
+     *
+     * @return void
+     */
+    public function testShowsMessageWhenNoDocumentationAvailable()
+    {
+        // Set up the ruleset.
+        $standard = __DIR__ . '/NoDocsTest.xml';
+        $config   = new ConfigDouble(["--standard=$standard"]);
+        $ruleset  = new Ruleset($config);
+
+        $this->expectNoStdoutOutput();
+
+        $generator = new MarkdownDouble($ruleset);
+        $generator->generate();
+
+        $this->assertStderrOutputSameString('No documentation is available for the requested sniff(s).' . PHP_EOL);
     }
 
 

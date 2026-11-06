@@ -19,6 +19,7 @@ use DOMDocument;
 use DOMElement;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Exceptions\GeneratorException;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 class HTML extends Generator
 {
@@ -133,6 +134,7 @@ class HTML extends Generator
     public function generate()
     {
         if (empty($this->docFiles) === true) {
+            StatusWriter::write('No documentation is available for the requested sniff(s).');
             return;
         }
 

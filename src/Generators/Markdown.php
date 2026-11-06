@@ -14,6 +14,7 @@ namespace PHP_CodeSniffer\Generators;
 use DOMElement;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Exceptions\GeneratorException;
+use PHP_CodeSniffer\Util\Writers\StatusWriter;
 
 class Markdown extends Generator
 {
@@ -31,6 +32,7 @@ class Markdown extends Generator
     public function generate()
     {
         if (empty($this->docFiles) === true) {
+            StatusWriter::write('No documentation is available for the requested sniff(s).');
             return;
         }
 
