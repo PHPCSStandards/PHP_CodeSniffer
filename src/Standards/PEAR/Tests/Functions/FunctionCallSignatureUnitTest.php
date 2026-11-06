@@ -27,11 +27,13 @@ final class FunctionCallSignatureUnitTest extends AbstractSniffTestCase
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile = '')
     {
-        return [
+        $errors = [
             5   => 1,
             6   => 2,
             7   => 1,
@@ -129,7 +131,32 @@ final class FunctionCallSignatureUnitTest extends AbstractSniffTestCase
             603 => 1,
             604 => 1,
             605 => 2,
+            620 => 1,
+            634 => 1,
+            641 => 1,
+            655 => 1,
         ];
+
+        switch ($testFile) {
+            case 'FunctionCallSignatureUnitTest.1.inc':
+                return $errors;
+
+            case 'FunctionCallSignatureUnitTest.2.inc':
+                if (PHP_VERSION_ID >= 70300) {
+                    return [
+                        12 => 1,
+                        26 => 1,
+                        33 => 1,
+                        47 => 1,
+                    ];
+                }
+
+                // PHP 7.2 or lower: PHP version which doesn't support flexible heredocs/nowdocs yet.
+                return [];
+
+            default:
+                return [];
+        }
     }
 
 

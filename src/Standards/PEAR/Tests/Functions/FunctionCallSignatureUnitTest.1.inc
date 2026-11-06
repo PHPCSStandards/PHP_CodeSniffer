@@ -2,20 +2,20 @@
 );
 test();
 test($arg, $arg2);
-isset();
-test();
-test();
-test($arg);
-empty($arg);
-eval($arg);
+isset ();
+test( );
+test() ;
+test( $arg);
+empty( $arg );
+eval ( $arg );
 
 if (is_array($arg) === true) {
 
 }
 
 $something = get($arg1, $arg2);
-$something = get($arg1, $arg2);
-$something = get($arg1, $arg2);
+$something = get($arg1, $arg2) ;
+$something = get($arg1, $arg2)   ;
 
 // No errors as this test only checks for function calls.
 class TestClass extends MyClass
@@ -28,10 +28,10 @@ class TestClass extends MyClass
 }
 
 make_foo($string/*the string*/, true/*test*/);
-make_foo($string/*the string*/, true/*test*/);
+make_foo($string/*the string*/, true/*test*/ );
 make_foo($string /*the string*/, true /*test*/);
 make_foo(/*the string*/$string, /*test*/true);
-make_foo(/*the string*/$string, /*test*/true);
+make_foo( /*the string*/$string, /*test*/true);
 
 // No errors should be throw here because
 // this is multi-line.
@@ -40,7 +40,7 @@ throw new Exception(
 );
 
 // Objects are the same as a normal call.
-$obj = new TestClass();
+$obj = new TestClass( );
 
 // Heredocs dont need to be indented.
 method_call(
@@ -54,16 +54,14 @@ fputs(
     STDOUT,
     'Examples:
     $ {$app} --all
-    $ {$app} --all'
-);
+    $ {$app} --all');
 
-fputs(
-    STDOUT,
+fputs(STDOUT,
     "Examples:
     $ {$app} --all
     $ {$app} --all",
-    $something
-);
+$something
+    );
 
 // This is not a function call.
 function &testFunction($arg1,
@@ -81,10 +79,10 @@ array_map(
 );
 
 array_map(
-    function($x)
-    {
-        return trim($x);
-    },
+     function($x)
+     {
+         return trim($x);
+     },
     $array
 );
 
@@ -92,19 +90,20 @@ $bar = new stdClass(
     4,
     5,
     6
+
 );
 
 $bar = new stdClass(
     4,
     5,
     6
+
 );
 
 $foo = new stdClass(
     1,
     2,
-    3
-);
+    3);
 
 function doSomething()
 {
@@ -117,8 +116,8 @@ function doSomething()
 }
 
 $var = myFunction(
-    $foo,
-    $bar
+$foo,
+$bar
 );
 
 // phpcs:set PEAR.Functions.FunctionCallSignature allowMultipleArguments false
@@ -127,8 +126,7 @@ fputs(
     STDOUT,
     "Examples:
     $ {$app} , --all
-    $ {$app} --all",
-    $something
+    $ {$app} --all", $something
 );
 
 $array = array();
@@ -136,15 +134,12 @@ array_map(
     function($x)
     {
         return trim($x, $y);
-    },
-    $foo,
+    }, $foo,
     $array
 );
 
 $bar = new stdClass(
-    4, /* thanks */
-    5, /* PSR-2 */
-    6
+    4, /* thanks */ 5, /* PSR-2 */ 6
 );
 
 function doSomething()
@@ -173,7 +168,7 @@ foo(
         'an',
         'array'
     ],
-    [
+[
         'this',
         'is',
         'an',
@@ -182,8 +177,8 @@ foo(
     array(
         'this',
         'is',
-    'an',
-    'array'
+'an',
+'array'
     ),
     array(
         'this',
@@ -196,7 +191,7 @@ foo(
         echo 'wee';
 
         return trim($x);
-    }
+   }
 );
 
 function foo()
@@ -215,12 +210,12 @@ function foo()
 
 // phpcs:set PEAR.Functions.FunctionCallSignature requiredSpacesAfterOpen 1
 // phpcs:set PEAR.Functions.FunctionCallSignature requiredSpacesBeforeClose 1
+test($arg, $arg2);
 test( $arg, $arg2 );
-test( $arg, $arg2 );
-test( $arg, $arg2 );
+test(  $arg, $arg2  );
 test();
-test();
-test();
+test( );
+test(  );
 // phpcs:set PEAR.Functions.FunctionCallSignature requiredSpacesAfterOpen 0
 // phpcs:set PEAR.Functions.FunctionCallSignature requiredSpacesBeforeClose 0
 
@@ -279,8 +274,8 @@ if (true) {
 if (true) {
     $test = '
    ' . function_0(
-        $argument_0,
-        $argument_1
+    $argument_0,
+           $argument_1
     );
 }
 
@@ -305,14 +300,12 @@ array_filter(
     }
 );
 
-foo(
-    array(
+foo(array(
     'callback' => function () {
         $foo = 'foo';
         return;
     },
-    )
-);
+));
 
 foo(
     $a,
@@ -325,47 +318,41 @@ foo(
 );
 
 Partially\Qualified\test(
-    1,2,3,4
-);
+        1,2,3,4
+    );
 
 class Test
 {
     public function getInstance()
     {
         return new static(
-            'arg',
-            'foo'
+          'arg',
+              'foo'
         );
     }
 
     public function getSelf()
     {
         return new self(
-            'a','b', 'c'
+         'a','b', 'c'
         );
     }
 }
 
-$x = $var(
-    'y',
-    'x'
-);
+$x = $var('y',
+'x');
 
-$obj->{$x}(
-    1,
-    2
-);
+$obj->{$x}(1,
+  2);
 
 return (function ($a, $b) {
     return function ($c, $d) use ($a, $b) {
         echo $a, $b, $c, $d;
     };
 })(
-    'a','b'
-)(
-    'c',
-    'd'
-);
+  'a','b'
+)('c',
+    'd');
 
 class Foo
 {
@@ -387,7 +374,7 @@ return (function ($a, $b) {
 
 function foo()
 {
-    \Bar(
+     \Bar(
         function () {
         }
     );
@@ -395,7 +382,7 @@ function foo()
 
 $deprecated_functions = [
     'the_category_ID'
-    => function_call( // 7 spaces, not 8. This is the problem line.
+       => function_call( // 7 spaces, not 8. This is the problem line.
         $a,
         $b
     ),
@@ -403,10 +390,10 @@ $deprecated_functions = [
 
 $deprecated_functions = [
     'the_category_ID'
-        => namespace\function_call( // 9 spaces, not 8. This is the problem line.
-            $a,
-            $b
-        ),
+         => namespace\function_call( // 9 spaces, not 8. This is the problem line.
+        $a,
+        $b
+    ),
 ];
 
 // phpcs:set PEAR.Functions.FunctionCallSignature allowMultipleArguments false
@@ -421,8 +408,7 @@ printf(
 // Handling of PHP 7.3 trailing comma's.
 functionCall($args, $foo,);
 functionCall(
-    $args,
-    $foo,
+    $args, $foo,
 );
 functionCall(
     $args,
@@ -432,14 +418,18 @@ functionCall(
 // phpcs:set PEAR.Functions.FunctionCallSignature allowMultipleArguments true
 
 $this->foo(
+
     ['a','b'],
     true
+
 );
 
 $this->foo(
+
     // Comment
     ['a','b'],
     true
+
 );
 
 function m()
@@ -447,9 +437,9 @@ function m()
     $t = '
     ' . (empty(true) ? '
     ' . f(
-        '1',
-        '2',
-    ) . '
+                '1',
+                '2',
+            ) . '
     ' : '');
 }
 
@@ -471,7 +461,7 @@ WHERE f IN(" . implode(
 $notices = array(
     'index' => sprintf(
         translation_function('a text string with %s placeholder'),
-        'replacement'
+    'replacement'
     ),
 );
 
@@ -517,26 +507,24 @@ $salesOrderThresholdTransfer->fromArray($salesOrderThresholdEntity->toArray(), t
         (new StoreTransfer())->fromArray($salesOrderThresholdEntity->getStore()->toArray(), true)
     );
 
-return trim(
-    preg_replace_callback(
+return trim(preg_replace_callback(
             // sprintf replaces IGNORED_CHARS multiple times: for %s as well as %1$s (argument numbering)
             // /[%s]*([^%1$s]+)/ results in /[IGNORED_CHARS]*([^IGNORED_CHARS]+)/
-        sprintf('/[%s]*([^%1$s]+)/', self::IGNORED_CHARS),
-        function (array $term) use ($mode): string {
-            // query pieces have to bigger than one char, otherwise they are too expensive for the search
-            if (mb_strlen($term[1], 'UTF-8') > 1) {
-                // in boolean search mode '' (empty) means OR, '-' means NOT
-                return sprintf('%s%s ', $mode === 'AND' ? '+' : '', self::extractUmlauts($term[1]));
-            }
+                sprintf('/[%s]*([^%1$s]+)/', self::IGNORED_CHARS),
+                function (array $term) use ($mode): string {
+                    // query pieces have to bigger than one char, otherwise they are too expensive for the search
+                    if (mb_strlen($term[1], 'UTF-8') > 1) {
+                        // in boolean search mode '' (empty) means OR, '-' means NOT
+                        return sprintf('%s%s ', $mode === 'AND' ? '+' : '', self::extractUmlauts($term[1]));
+                    }
 
-            return '';
-        },
-        $search
-    )
-);
+                    return '';
+                },
+                $search
+            ));
 
 $a = ['a' => function ($b) { return $b; }];
-$a['a'](1);
+$a['a']( 1 );
 
 // PHP 8.0 named parameters.
 array_fill_keys(
@@ -548,19 +536,16 @@ array_fill_keys(
 );
 
 array_fill_keys(
-    keys: range(
-        1,
-        12,
+    keys: range( 1,
+            12,
     ), value: true,
 );
 
 // phpcs:set PEAR.Functions.FunctionCallSignature allowMultipleArguments false
 array_fill_keys(
-    keys: range(
-        1,
-        12,
-    ),
-    value: true,
+    keys: range( 1,
+            12,
+    ), value: true,
 );
 // phpcs:set PEAR.Functions.FunctionCallSignature allowMultipleArguments true
 
@@ -571,37 +556,34 @@ array_fill_keys(
     ); ?></p>
 </div>
 <div>
-<p/><?php require get_theme_file_path(
-    '/theme_extra/test_block.php'
-); ?></p>
+  <p/><?php require get_theme_file_path(
+      '/theme_extra/test_block.php'
+  ); ?></p>
 </div>
 <?php
 echo 'hi';
 ?>
 content
-    <p><?php require get_theme_file_path(
-        '/theme_extra/test_block.php'
+      <p><?php require get_theme_file_path(
+      '/theme_extra/test_block.php'
 ); ?></p>
 
 <!-- If the first token is inline HTML, the token itself should be adjusted, not the token before. -->
 <?php if (check_me() == 'value'): ?>
-<?php include get_file_path(
+  <?php include get_file_path(
     'my_file.php'
-); ?>
+  ); ?>
 <?php endif; ?>
 
 <?php
-$val = \functionCall($arg);
-$val = Package\functionCall($arg);
-$val = namespace\functionCall($arg);
+$val = \functionCall ( $arg );
+$val = Package\functionCall( $arg );
+$val = namespace\functionCall ($arg);
 
-$val = \functionCall(
-    $arg
-    , $arg2 
-);
+$val = \functionCall ( $arg
+, $arg2 );
 $val = Package\functionCall(
-    $arg, $arg2
-);
+                            $arg, $arg2);
 $val = namespace\functionCall(
     $arg,
     $arg2
@@ -616,15 +598,61 @@ $anon = new class(
     10
 ) {};
 
-$anon = new class() {};
-$anon = new class($foo, true) {};
-$anon = new class(
-    $foo,
-    true, 10
-) {};
+$anon = new class( ) {};
+$anon = new class( $foo, true    ) {};
+$anon = new class($foo,
+
+  true, 10) {};
 
 // ... though do not enforce no space between the class keyword and the open parenthesis.
 $anon = new class () {};
 
 // And anonymous object instantiations without parentheses are ignored.
 $anon = new class {};
+
+/*
+ * Heredoc/nowdoc contents should not be reindented when correcting the
+ * indentation of a multi-line function call argument.
+ */
+
+// Spaces: too little indentation, unquoted heredoc.
+functionCall(
+  <<<HEREDOC
+  content
+HEREDOC
+);
+
+// Spaces: correct indentation, double quoted heredoc.
+functionCall(
+    <<<"HEREDOC"
+    content
+HEREDOC
+);
+
+// Spaces: too much indentation, nowdoc.
+functionCall(
+      <<<'NOWDOC'
+      content
+NOWDOC
+);
+
+// Tabs: too little indentation, nowdoc.
+functionCall(
+	<<<'NOWDOC'
+	content
+NOWDOC
+);
+
+// Tabs: correct indentation, unquoted heredoc.
+functionCall(
+				<<<HEREDOC
+				content
+HEREDOC
+);
+
+// Tabs: too much indentation, double quoted heredoc.
+functionCall(
+						<<<"HEREDOC"
+						content
+HEREDOC
+);
