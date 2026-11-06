@@ -1648,6 +1648,22 @@ $result = array_map(
 	$data
 );
 
+// Issue #1498: Arrow function as the last array item without a trailing comma.
+[
+	'a' => fn() => ''
+];
+
+[
+	'a' => fn($row) => $row['a'],
+	'b' => fn($row) => 1
+];
+
+// Issue #1498: Arrow function as the last function call argument.
+foo(
+	'a',
+	fn() => 1
+);
+
 /* ADD NEW TESTS ABOVE THIS LINE AND MAKE SURE THAT THE 1 (space-based) AND 2 (tab-based) FILES ARE IN SYNC! */
 ?>
 
