@@ -2276,6 +2276,9 @@ class PHP extends Tokenizer
                         && isset(Tokens::EMPTY_TOKENS[$tokenType]) === false
                     ) {
                         // Found the previous non-empty token.
+                        // A ternary needs an expression before the "?", so a "?" directly after an open
+                        // parenthesis can only be the start of a nullable parameter type. This also covers
+                        // property hook parameters, where the walk would otherwise reach the "{" of the hook.
                         if ($tokenType === ':' || $tokenType === ',' || $tokenType === '(' || $tokenType === T_ATTRIBUTE_END) {
                             $newToken['code'] = T_NULLABLE;
                             $newToken['type'] = 'T_NULLABLE';

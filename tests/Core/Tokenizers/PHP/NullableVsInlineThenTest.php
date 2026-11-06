@@ -57,6 +57,15 @@ final class NullableVsInlineThenTest extends AbstractTokenizerTestCase
 
             'property hook param type, nullable int'                        => ['/* testPropertyHookParamTypeNullableInt */'],
             'short property hook param type, nullable string'               => ['/* testShortPropertyHookParamTypeNullableString */'],
+            'property hook param type, multi-line param list'               => ['/* testPropertyHookParamTypeNullableMultiLine */'],
+            'property hook param type, comment before nullable'             => ['/* testPropertyHookParamTypeNullableWithComment */'],
+            'property hook param type, whitespace after nullable'           => ['/* testPropertyHookParamTypeNullableWithWhitespace */'],
+            'final property hook param type, nullable int'                  => ['/* testFinalPropertyHookParamTypeNullable */'],
+            'property hook param type, attribute before nullable'           => ['/* testPropertyHookParamTypeNullableWithAttribute */'],
+            'promoted property hook param type, nullable int'               => ['/* testPromotedPropertyHookParamTypeNullable */'],
+
+            'function param type, nullable first param'                     => ['/* testFunctionParamTypeNullableFirstParam */'],
+            'arrow function param type, nullable first param'               => ['/* testArrowFunctionParamTypeNullableFirstParam */'],
 
             'closure param type, nullable int'                              => ['/* testClosureParamTypeNullableInt */'],
             'closure param type, nullable callable'                         => ['/* testClosureParamTypeNullableCallable */'],
@@ -98,6 +107,8 @@ final class NullableVsInlineThenTest extends AbstractTokenizerTestCase
     {
         return [
             'ternary in property default value'                            => ['/* testInlineThenInPropertyDefaultValue */'],
+            'ternary in property hook body'                                => ['/* testInlineThenInPropertyHook */'],
+            'ternary in short property hook'                               => ['/* testInlineThenInShortPropertyHook */'],
 
             'ternary ? followed by array declaration'                      => ['/* testInlineThenWithArrayDeclaration */'],
 
