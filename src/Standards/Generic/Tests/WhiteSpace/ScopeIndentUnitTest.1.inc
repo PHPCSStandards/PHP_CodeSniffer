@@ -1648,6 +1648,17 @@ $result = array_map(
     $data
 );
 
+// Issue #1460: Comments between stacked case/default statements should not be flagged.
+switch ($foo) {
+    case 1:
+    // Comment.
+    case 2:
+    // Comment.
+    default:
+        echo 'Test';
+        break;
+}
+
 /* ADD NEW TESTS ABOVE THIS LINE AND MAKE SURE THAT THE 1 (space-based) AND 2 (tab-based) FILES ARE IN SYNC! */
 ?>
 
