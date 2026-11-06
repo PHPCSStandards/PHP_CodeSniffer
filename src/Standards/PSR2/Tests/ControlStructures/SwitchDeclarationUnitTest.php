@@ -27,54 +27,61 @@ final class SwitchDeclarationUnitTest extends AbstractSniffTestCase
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
      */
-    public function getErrorList()
+    public function getErrorList($testFile = '')
     {
-        return [
-            10  => 1,
-            11  => 1,
-            14  => 1,
-            16  => 1,
-            20  => 1,
-            23  => 1,
-            29  => 1,
-            33  => 1,
-            37  => 2,
-            108 => 2,
-            109 => 1,
-            111 => 1,
-            113 => 2,
-            114 => 1,
-            128 => 1,
-            141 => 1,
-            172 => 1,
-            194 => 1,
-            224 => 1,
-            236 => 1,
-            260 => 1,
-            300 => 1,
-            311 => 1,
-            346 => 1,
-            350 => 1,
-            356 => 1,
-            362 => 1,
-            384 => 1,
-            528 => 1,
-            541 => 1,
-            558 => 1,
-            575 => 1,
-            615 => 1,
-            616 => 1,
-            617 => 1,
-            620 => 1,
-            622 => 1,
-            628 => 1,
-            631 => 1,
-            634 => 1,
-            637 => 1,
-            644 => 1,
-        ];
+        switch ($testFile) {
+            case 'SwitchDeclarationUnitTest.1.inc':
+                return [
+                    10  => 1,
+                    11  => 1,
+                    14  => 1,
+                    16  => 1,
+                    20  => 1,
+                    23  => 1,
+                    29  => 1,
+                    33  => 1,
+                    37  => 2,
+                    108 => 2,
+                    109 => 1,
+                    111 => 1,
+                    113 => 2,
+                    114 => 1,
+                    128 => 1,
+                    141 => 1,
+                    172 => 1,
+                    194 => 1,
+                    224 => 1,
+                    236 => 1,
+                    260 => 1,
+                    300 => 1,
+                    311 => 1,
+                    346 => 1,
+                    350 => 1,
+                    356 => 1,
+                    362 => 1,
+                    384 => 1,
+                    528 => 1,
+                    541 => 1,
+                    558 => 1,
+                    575 => 1,
+                    615 => 1,
+                    616 => 1,
+                    617 => 1,
+                    620 => 1,
+                    622 => 1,
+                    628 => 1,
+                    631 => 1,
+                    634 => 1,
+                    637 => 1,
+                    644 => 1,
+                ];
+            default:
+                return [];
+        }
     }
 
 
