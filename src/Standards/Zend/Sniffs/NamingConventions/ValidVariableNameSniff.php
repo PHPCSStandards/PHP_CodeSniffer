@@ -18,6 +18,7 @@ use PHP_CodeSniffer\Util\Tokens;
 
 class ValidVariableNameSniff extends AbstractVariableSniff
 {
+    private const NUMERIC_CHARACTERS = '0123456789';
 
 
     /**
@@ -64,7 +65,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                         $error = 'Variable "%s" is not in valid camel caps format';
                         $data  = [$originalVarName];
                         $phpcsFile->addError($error, $var, 'NotCamelCaps', $data);
-                    } elseif (strpbrk($objVarName, '0123456789') !== false) {
+                    } elseif (strpbrk($objVarName, self::NUMERIC_CHARACTERS) !== false) {
                         $warning = 'Variable "%s" contains numbers but this is discouraged';
                         $data    = [$originalVarName];
                         $phpcsFile->addWarning($warning, $stackPtr, 'ContainsNumbers', $data);
@@ -96,7 +97,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             $error = 'Variable "%s" is not in valid camel caps format';
             $data  = [$originalVarName];
             $phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $data);
-        } elseif (strpbrk($varName, '0123456789') !== false) {
+        } elseif (strpbrk($varName, self::NUMERIC_CHARACTERS) !== false) {
             $warning = 'Variable "%s" contains numbers but this is discouraged';
             $data    = [$originalVarName];
             $phpcsFile->addWarning($warning, $stackPtr, 'ContainsNumbers', $data);
@@ -151,7 +152,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             $error = 'Member variable "%s" is not in valid camel caps format';
             $data  = [$varName];
             $phpcsFile->addError($error, $stackPtr, 'MemberVarNotCamelCaps', $data);
-        } elseif (strpbrk($varName, '0123456789') !== false) {
+        } elseif (strpbrk($varName, self::NUMERIC_CHARACTERS) !== false) {
             $warning = 'Member variable "%s" contains numbers but this is discouraged';
             $data    = [$varName];
             $phpcsFile->addWarning($warning, $stackPtr, 'MemberVarContainsNumbers', $data);
@@ -183,7 +184,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                     $error = 'Variable "%s" is not in valid camel caps format';
                     $data  = [$varName];
                     $phpcsFile->addError($error, $stackPtr, 'StringVarNotCamelCaps', $data);
-                } elseif (strpbrk($varName, '0123456789') !== false) {
+                } elseif (strpbrk($varName, self::NUMERIC_CHARACTERS) !== false) {
                     $warning = 'Variable "%s" contains numbers but this is discouraged';
                     $data    = [$varName];
                     $phpcsFile->addWarning($warning, $stackPtr, 'StringVarContainsNumbers', $data);
