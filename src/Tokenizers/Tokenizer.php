@@ -210,6 +210,9 @@ abstract class Tokenizer
         $encoding         = $this->config->encoding;
         $tabWidth         = $this->config->tabWidth;
 
+        // For ASCII-compatible encodings, pure ASCII content has strlen() === iconv_strlen().
+        $asciiEncoding = (preg_match('`^(?:utf-?8|iso-?8859-\d+|windows-125\d|us-ascii|ascii)$`i', $encoding) === 1);
+
         $this->numTokens = count($this->tokens);
         for ($i = 0; $i < $this->numTokens; $i++) {
             $this->tokens[$i]['line']   = $lineNumber;
@@ -224,7 +227,9 @@ abstract class Tokenizer
                 || strpos($this->tokens[$i]['content'], "\t") === false
             ) {
                 // There are no tabs in this content, or we aren't replacing them.
-                if ($checkEncoding === true) {
+                if ($checkEncoding === true
+                    && ($asciiEncoding === false || preg_match('`[\x80-\xFF]`', $this->tokens[$i]['content']) === 1)
+                ) {
                     // Not using the default encoding, so take a bit more care.
                     $oldLevel = error_reporting();
                     error_reporting(0);
