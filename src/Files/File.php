@@ -2294,22 +2294,15 @@ class File
         ?string $value = null,
         bool $local = false
     ) {
-        $types = (array) $types;
+        $types   = array_flip((array) $types);
+        $exclude = (bool) $exclude;
 
         if ($end === null) {
             $end = 0;
         }
 
         for ($i = $start; $i >= $end; $i--) {
-            $found = (bool) $exclude;
-            foreach ($types as $type) {
-                if ($this->tokens[$i]['code'] === $type) {
-                    $found = !$exclude;
-                    break;
-                }
-            }
-
-            if ($found === true) {
+            if (isset($types[$this->tokens[$i]['code']]) !== $exclude) {
                 if ($value === null) {
                     return $i;
                 } elseif ($this->tokens[$i]['content'] === $value) {
@@ -2374,22 +2367,15 @@ class File
         ?string $value = null,
         bool $local = false
     ) {
-        $types = (array) $types;
+        $types   = array_flip((array) $types);
+        $exclude = (bool) $exclude;
 
         if ($end === null || $end > $this->numTokens) {
             $end = $this->numTokens;
         }
 
         for ($i = $start; $i < $end; $i++) {
-            $found = (bool) $exclude;
-            foreach ($types as $type) {
-                if ($this->tokens[$i]['code'] === $type) {
-                    $found = !$exclude;
-                    break;
-                }
-            }
-
-            if ($found === true) {
+            if (isset($types[$this->tokens[$i]['code']]) !== $exclude) {
                 if ($value === null) {
                     return $i;
                 } elseif ($this->tokens[$i]['content'] === $value) {
