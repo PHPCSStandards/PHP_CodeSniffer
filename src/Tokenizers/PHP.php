@@ -2280,8 +2280,7 @@ class PHP extends Tokenizer
                         // is one of these, the "?" can only be the start of a nullable type:
                         // - ":" before a return type;
                         // - "," before a parameter which is not the first one;
-                        // - "(" before the first parameter, including in property hooks (the walk would
-                        //   otherwise reach the "{" of the hook);
+                        // - "(" before the first parameter, also in property hooks where the walk would reach the hook "{";
                         // - T_ATTRIBUTE_END before a parameter with an attribute.
                         if ($tokenType === ':' || $tokenType === ',' || $tokenType === '(' || $tokenType === T_ATTRIBUTE_END) {
                             $newToken['code'] = T_NULLABLE;
