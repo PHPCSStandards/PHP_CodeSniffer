@@ -81,6 +81,16 @@ final class ClassDeclarationUnitTest extends AbstractSniffTestCase
             316 => 1,
             324 => 1,
             344 => 1,
+            351 => 2,
+            356 => 1,
+            360 => 1,
+            364 => 1,
+            378 => 1,
+            382 => 1,
+            386 => 1,
+            390 => 1,
+            394 => 1,
+            402 => 1,
         ];
     }
 
