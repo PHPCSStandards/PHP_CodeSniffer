@@ -344,3 +344,71 @@ enum BraceNotOnLineByItselfCloseTagError
 } ?>
 
 <?php
+
+/*
+ * Tests for the spacing after the OO name. This is handled by different error codes.
+ */
+class MultipleSpacesAfterName   extends Bar
+{
+}
+
+interface TrailingWhitespaceBeforeBrace   
+{
+}
+
+class TrailingWhitespaceBeforeExtends   
+extends Bar
+{
+}
+
+trait NoSpaceBeforeBrace{
+}
+
+enum BackedEnumNoSpaceBeforeColon: string
+{
+}
+
+enum BackedEnumSpaceBeforeColon : string
+{
+}
+
+/*
+ * Issue PHPCSStandards/PHP_CodeSniffer#1517: comments after the name should be handled correctly.
+ */
+class Foo/* comment */ extends Bar
+{
+}
+
+class Baz/** docblock */ implements Qaz
+{
+}
+
+enum CommentAfterNameNoExtends/* comment */
+{
+}
+
+class SlashCommentAfterName// comment
+{
+}
+
+class AnnotationAfterName// phpcs:ignore Stnd.Cat.Sniff -- For reasons.
+{
+}
+
+class SingleSpaceBeforeComment /* comment */ implements Bar
+{
+}
+
+interface MultipleSpacesBeforeComment   /* comment */ extends Bar
+{
+}
+
+class NewlineBeforeComment
+// comment
+{
+}
+
+class TrailingWhitespaceBeforeComment   
+/* comment */
+{
+}

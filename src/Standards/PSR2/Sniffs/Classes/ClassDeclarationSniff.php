@@ -177,22 +177,37 @@ class ClassDeclarationSniff extends PEARClassDeclarationSniff
             }
         }
 
-        // Check after the class/interface name.
-        if ($className !== null
-            && $tokens[($className + 2)]['line'] === $tokens[$className]['line']
-        ) {
-            $gap = $tokens[($className + 1)]['content'];
-            if (strlen($gap) !== 1) {
-                $found = strlen($gap);
+        // Check after the OO structure name.
+        if ($className !== null) {
+            $gap            = null;
+            $afterClassName = ($className + 1);
+
+            if ($tokens[$afterClassName]['code'] === T_WHITESPACE) {
+                // Whitespace before a new line is intentionally ignored here, as it is already
+                // handled by another sniff.
+                if ($tokens[$afterClassName]['length'] !== 1
+                    && strpos($tokens[$afterClassName]['content'], $phpcsFile->eolChar) === false
+                ) {
+                    $gap = $tokens[$afterClassName]['length'];
+                }
+            } elseif (isset(Tokens::COMMENT_TOKENS[$tokens[$afterClassName]['code']]) === true) {
+                $gap = 0;
+            }
+
+            if ($gap !== null) {
                 $error = 'Expected 1 space after %s name; %s found';
                 $data  = [
                     $stackPtrType,
-                    $found,
+                    $gap,
                 ];
 
                 $fix = $phpcsFile->addFixableError($error, $className, 'SpaceAfterName', $data);
                 if ($fix === true) {
-                    $phpcsFile->fixer->replaceToken(($className + 1), ' ');
+                    if ($gap === 0) {
+                        $phpcsFile->fixer->addContent($className, ' ');
+                    } else {
+                        $phpcsFile->fixer->replaceToken($afterClassName, ' ');
+                    }
                 }
             }
         }
