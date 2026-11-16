@@ -29,19 +29,19 @@
  * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/HEAD/licence.txt BSD Licence
  */
 switch (true) {
-case (PHP_VERSION_ID >= 50400 && PHP_VERSION_ID < 50445):
-case (PHP_VERSION_ID >= 50500 && PHP_VERSION_ID < 50538):
-case (PHP_VERSION_ID >= 50600 && PHP_VERSION_ID < 50640):
-case (PHP_VERSION_ID >= 70000 && PHP_VERSION_ID < 70033):
-case (PHP_VERSION_ID >= 70100 && PHP_VERSION_ID < 70133):
-case (PHP_VERSION_ID >= 70200 && PHP_VERSION_ID < 70234):
-case (PHP_VERSION_ID >= 70300 && PHP_VERSION_ID < 70333):
-case (PHP_VERSION_ID >= 70400 && PHP_VERSION_ID < 70433):
-case (PHP_VERSION_ID >= 80000 && PHP_VERSION_ID < 80030):
-case (PHP_VERSION_ID >= 80100 && PHP_VERSION_ID < 80134):
-case (PHP_VERSION_ID >= 80200):
-    exit(0);
+    case (PHP_VERSION_ID >= 50400 && PHP_VERSION_ID < 50445):
+    case (PHP_VERSION_ID >= 50500 && PHP_VERSION_ID < 50538):
+    case (PHP_VERSION_ID >= 50600 && PHP_VERSION_ID < 50640):
+    case (PHP_VERSION_ID >= 70000 && PHP_VERSION_ID < 70033):
+    case (PHP_VERSION_ID >= 70100 && PHP_VERSION_ID < 70133):
+    case (PHP_VERSION_ID >= 70200 && PHP_VERSION_ID < 70234):
+    case (PHP_VERSION_ID >= 70300 && PHP_VERSION_ID < 70333):
+    case (PHP_VERSION_ID >= 70400 && PHP_VERSION_ID < 70433):
+    case (PHP_VERSION_ID >= 80000 && PHP_VERSION_ID < 80030):
+    case (PHP_VERSION_ID >= 80100 && PHP_VERSION_ID < 80134):
+    case (PHP_VERSION_ID >= 80200):
+        exit(0);
 
-default:
-    exit(1);
+    default:
+        exit(1);
 }
