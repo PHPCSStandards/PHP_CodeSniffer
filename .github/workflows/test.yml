@@ -77,11 +77,15 @@ jobs:
           # To safeguard support for the latest libxml we need to update the library on the fly.
           # This only needs to be tested with one PHP version for each libxml minor to verify support.
           # Testing against multiple PHP versions would not yield a difference in results.
+          # Also note, the `ubuntu-24.04` is deliberate as this will (for now) fail on `ubuntu-26.04`.
+          # This should be fixed at some point: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/1526
           - php: '8.0'
-            os: 'ubuntu-latest'
+            os: 'ubuntu-24.04'
+            custom_ini: false
             libxml_minor: '2.11'
           - php: '8.3'
-            os: 'ubuntu-latest'
+            os: 'ubuntu-24.04'
+            custom_ini: false
             libxml_minor: '2.13'
 
           # Extra builds running only the unit tests with different PHP ini settings.
@@ -96,7 +100,7 @@ jobs:
             custom_ini: true
 
     # yamllint disable-line rule:line-length
-    name: "PHP: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }}${{ matrix.libxml_minor && format( ' with libxml {0}', matrix.libxml_minor ) || '' }} (${{ matrix.os == 'ubuntu-latest' && 'Linux' || 'Win'  }})"
+    name: "PHP: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }}${{ matrix.libxml_minor && format( ' with libxml {0}', matrix.libxml_minor ) || '' }} (${{ matrix.os != 'windows-latest' && 'Linux' || 'Win'  }})"
 
     continue-on-error: ${{ matrix.php == '8.6' }}
 
