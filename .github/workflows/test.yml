@@ -84,10 +84,10 @@ jobs:
           # This only needs to be tested with one PHP version for each libxml minor to verify support.
           # Testing against multiple PHP versions would not yield a difference in results.
           - php: '8.0'
-            os: 'ubuntu-latest'
+            os: 'ubuntu-24.04'
             libxml_minor: '2.11'
           - php: '8.3'
-            os: 'ubuntu-latest'
+            os: 'ubuntu-24.04'
             libxml_minor: '2.13'
 
           # Extra builds running only the unit tests with different PHP ini settings.
