@@ -60,7 +60,7 @@ final class BinaryPrefixTypecastTest extends AbstractTokenizerTestCase
                 'testMarker' => '/* testNotBinaryStringCastDoubleQuotes */',
             ],
             'ordinary text string in double quotes with interpolation' => [
-                'testMarker' => '/* testNotBinaryStringCastDoubleQuotes */',
+                'testMarker' => '/* testNotBinaryStringCastDoubleQuotesWithInterpolation */',
             ],
         ];
     }
@@ -96,7 +96,7 @@ final class BinaryPrefixTypecastTest extends AbstractTokenizerTestCase
      *
      * @see testBPrefixTypeCast()
      *
-     * @return array<string, array<string, string|int>>
+     * @return array<string, array<string, string>>
      */
     public static function dataBPrefixTypeCast()
     {

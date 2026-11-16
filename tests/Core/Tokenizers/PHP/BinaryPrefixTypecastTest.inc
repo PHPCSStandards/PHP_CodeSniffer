@@ -10,7 +10,7 @@
 $ordinary = 'b"something"';
 
 /* testNotBinaryStringCastDoubleQuotes */
-$ordinary = "b'something'";
+$ordinary = "B'something'";
 
 /* testNotBinaryStringCastDoubleQuotesWithInterpolation */
 $ordinary = "b'$something'";
