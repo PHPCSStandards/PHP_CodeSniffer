@@ -208,3 +208,6 @@ $fullyQualified = \Fully\qualified($items + 10);
 
 // The below should be ignored as adding parentheses will turn this into a parse error.
 (void) CallMeOnce() + (bool) CallMeTwice();
+
+$value = (B"binary $foo" + $blah);
+$value = (B"binary $foo" + $blah);

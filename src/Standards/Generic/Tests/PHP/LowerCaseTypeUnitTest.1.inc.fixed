@@ -144,3 +144,6 @@ interface PHP84HookedProperty {
 }
 
 (void) php85();
+
+$var = b"binary $foo";
+$var = b'binary string';
