@@ -101,6 +101,7 @@ final class LowerCaseTypeUnitTest extends AbstractSniffTestCase
                     143 => 1,
                     146 => 1,
                     149 => 1,
+                    154 => 1,
                 ];
 
             default:
