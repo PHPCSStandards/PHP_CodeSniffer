@@ -5,12 +5,12 @@ function tear_down() {
 }
 
 function is_version_supported_for_custom_message() {
-  ./tests/EndToEnd/php_version_helper.php
+  ./tests/EndToEnd/do_shutdown_functions_run_on_out_of_memory.php
   echo $?
 }
 
 function test_phpcs_out_of_memory_error_handling() {
-  OUTPUT="$( { bin/phpcs -d memory_limit=4M --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/; } 2>&1)"
+  OUTPUT="$(bin/phpcs -d memory_limit=4M --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/)"
   # Exit code may be 255 or 139 depending on the PHP version, but the exact code is not our concern, just that it's non-zero.
   assert_unsuccessful_code
 
@@ -24,7 +24,7 @@ function test_phpcs_out_of_memory_error_handling() {
 }
 
 function test_phpcbf_out_of_memory_error_handling() {
-  OUTPUT="$( { bin/phpcbf -d memory_limit=4M --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ --suffix=.fixed; } 2>&1)"
+  OUTPUT="$(bin/phpcbf -d memory_limit=4M --standard=tests/EndToEnd/Fixtures/endtoend.xml.dist tests/EndToEnd/Fixtures/ --suffix=.fixed)"
   # Exit code may be 255 or 139 depending on the PHP version, but the exact code is not our concern, just that it's non-zero.
   assert_unsuccessful_code
 
