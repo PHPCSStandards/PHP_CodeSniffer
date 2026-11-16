@@ -164,4 +164,4 @@ jobs:
     # The properties in the Tokens class have been deprecated.
     # The code in this repository should always use the constants instead.
     name: 'Find use of Tokens properties'
-    uses: PHPCSStandards/.github/.github/workflows/reusable-findtokenprops.yml@c535983699986d1c538d4e47f33e813fcfbcc8a0 # v1.2.2
+    uses: PHPCSStandards/.github/.github/workflows/reusable-findtokenprops.yml@5a8a6fcf1ac33b3ec6d7b826c0f319eaa83581ff # v1.3.1
