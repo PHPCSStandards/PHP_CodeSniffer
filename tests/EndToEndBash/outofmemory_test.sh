@@ -4,14 +4,23 @@ function tear_down() {
   rm -f tests/EndToEndBash/Fixtures/*.fixed
 }
 
+function is_version_supported_for_custom_message() {
+  ./tests/EndToEnd/do_shutdown_functions_run_on_out_of_memory.php
+  echo $?
+}
+
 function test_phpcs_out_of_memory_error_handling() {
   OUTPUT="$( { bin/phpcs -d memory_limit=4M --standard=tests/EndToEndBash/Fixtures/endtoend.xml.dist tests/EndToEndBash/Fixtures/; } 2>&1)"
   # The exact exit code is not our concern, just that it's non-zero.
   assert_unsuccessful_code
 
-  assert_contains "The PHP_CodeSniffer \"phpcs\" command ran out of memory." "$OUTPUT"
-  assert_contains "Either raise the \"memory_limit\" of PHP in the php.ini file or raise the memory limit at runtime" "$OUTPUT"
-  assert_contains "using \"phpcs -d memory_limit=512M\" (replace 512M with the desired memory limit)." "$OUTPUT"
+  assert_contains "Fatal error: Allowed memory size" "$OUTPUT"
+
+  if [[ $(is_version_supported_for_custom_message) == 0 ]]; then
+    assert_contains "The PHP_CodeSniffer \"phpcs\" command ran out of memory." "$OUTPUT"
+    assert_contains "Either raise the \"memory_limit\" of PHP in the php.ini file or raise the memory limit at runtime" "$OUTPUT"
+    assert_contains "using \"phpcs -d memory_limit=512M\" (replace 512M with the desired memory limit)." "$OUTPUT"
+  fi
 }
 
 function test_phpcbf_out_of_memory_error_handling() {
@@ -19,7 +28,11 @@ function test_phpcbf_out_of_memory_error_handling() {
   # The exact exit code is not our concern, just that it's non-zero.
   assert_unsuccessful_code
 
-  assert_contains "The PHP_CodeSniffer \"phpcbf\" command ran out of memory." "$OUTPUT"
-  assert_contains "Either raise the \"memory_limit\" of PHP in the php.ini file or raise the memory limit at runtime" "$OUTPUT"
-  assert_contains "using \"phpcbf -d memory_limit=512M\" (replace 512M with the desired memory limit)." "$OUTPUT"
+  assert_contains "Fatal error: Allowed memory size" "$OUTPUT"
+
+  if [[ $(is_version_supported_for_custom_message) == 0 ]]; then
+    assert_contains "The PHP_CodeSniffer \"phpcbf\" command ran out of memory." "$OUTPUT"
+    assert_contains "Either raise the \"memory_limit\" of PHP in the php.ini file or raise the memory limit at runtime" "$OUTPUT"
+    assert_contains "using \"phpcbf -d memory_limit=512M\" (replace 512M with the desired memory limit)." "$OUTPUT"
+  fi
 }
