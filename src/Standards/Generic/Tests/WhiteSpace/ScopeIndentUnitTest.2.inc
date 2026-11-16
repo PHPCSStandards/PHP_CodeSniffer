@@ -1653,6 +1653,13 @@ if (match ($name[0]) {
 	'g' => true,
 	default => false,
 } && !do_something($name[$i])) {
+	return $foo;
+}
+
+if (match ($name[0]) {
+	'g' => true,
+	default => false,
+} && !do_something($name[$i])) {
 	if ($obj->doSomething($name)) {
 		return $foo;
 	}

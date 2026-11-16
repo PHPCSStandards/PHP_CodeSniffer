@@ -115,6 +115,12 @@ final class RecurseScopeMapMatchBeforeScopeOpenerTest extends AbstractTokenizerT
                 'openerCode' => T_OPEN_CURLY_BRACKET,
                 'closerCode' => T_CLOSE_CURLY_BRACKET,
             ],
+            'if with match expression in the condition, no nested if'       => [
+                'testMarker' => '/* testIfMatchInConditionWithoutNestedIf */',
+                'tokenCode'  => T_IF,
+                'openerCode' => T_OPEN_CURLY_BRACKET,
+                'closerCode' => T_CLOSE_CURLY_BRACKET,
+            ],
             'if with match expression in the condition and a nested if'     => [
                 'testMarker' => '/* testIfMatchInConditionWithNestedIf */',
                 'tokenCode'  => T_IF,

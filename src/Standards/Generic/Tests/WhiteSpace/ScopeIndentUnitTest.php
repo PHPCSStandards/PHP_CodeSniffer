@@ -169,10 +169,10 @@ final class ScopeIndentUnitTest extends AbstractSniffTestCase
             1527 => 1,
             1529 => 1,
             1530 => 1,
-            1669 => 1,
-            1670 => 1,
-            1671 => 1,
-            1672 => 1,
+            1676 => 1,
+            1677 => 1,
+            1678 => 1,
+            1679 => 1,
         ];
     }
 

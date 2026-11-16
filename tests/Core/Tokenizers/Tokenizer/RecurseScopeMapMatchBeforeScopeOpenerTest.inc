@@ -39,7 +39,16 @@ $obj = new class (match ($a) { 1 => 'a', default => 'b' }) /* testAnonClassMatch
 /* testAnonClassMatchInArgumentsScopeCloser */
 };
 
-// Test for https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/1313
+// Tests for https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/1313
+/* testIfMatchInConditionWithoutNestedIf */
+if (match ($name[0]) {
+    'g' => true,
+    default => false,
+} && !do_something($name[$i])) /* testIfMatchInConditionWithoutNestedIfScopeOpener */ {
+    return $foo;
+/* testIfMatchInConditionWithoutNestedIfScopeCloser */
+}
+
 /* testIfMatchInConditionWithNestedIf */
 if (match ($name[0]) {
     'g' => true,
