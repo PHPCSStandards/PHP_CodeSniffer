@@ -62,7 +62,7 @@ class SpaceAfterCastSniff implements Sniff
         }
 
         if ($tokens[$stackPtr]['code'] === T_BINARY_CAST
-            && $tokens[$stackPtr]['content'] === 'b'
+            && strtolower($tokens[$stackPtr]['content']) === 'b'
         ) {
             // You can't replace a space after this type of binary casting.
             return;
