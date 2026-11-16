@@ -86,9 +86,12 @@ jobs:
           - php: '8.0'
             os: 'ubuntu-latest'
             libxml_minor: '2.11'
-          - php: '8.3'
+          - php: '8.2'
             os: 'ubuntu-latest'
             libxml_minor: '2.13'
+          - php: '8.3'
+            os: 'ubuntu-latest'
+            libxml_minor: '2.14'
 
           # Extra builds running only the unit tests with different PHP ini settings.
           - php: '5.5'
