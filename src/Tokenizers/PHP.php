@@ -1184,6 +1184,16 @@ class PHP extends Tokenizer
             */
 
             if ($tokenIsArray === true && $token[0] === T_START_HEREDOC) {
+                if (strtolower($token[1][0]) === 'b') {
+                    $finalTokens[$newStackPtr] = [
+                        'code'    => T_BINARY_CAST,
+                        'type'    => 'T_BINARY_CAST',
+                        'content' => $token[1][0],
+                    ];
+                    $newStackPtr++;
+                    $token[1] = substr($token[1], 1);
+                }
+
                 // Add the start heredoc token to the final array.
                 $finalTokens[$newStackPtr] = self::standardiseToken($token);
 

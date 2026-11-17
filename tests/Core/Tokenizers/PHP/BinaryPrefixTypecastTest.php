@@ -125,6 +125,28 @@ final class BinaryPrefixTypecastTest extends AbstractTokenizerTestCase
                 'expectedContent' => 'B',
                 'nextType'        => 'T_DOUBLE_QUOTED_STRING',
             ],
+
+            // Nowdoc, heredoc.
+            'b-prefix lowercase, nowdoc with whitespace in marker'                => [
+                'testMarker'      => '/* testBinaryStringCastLowercaseNowDocWithWhitespace */',
+                'expectedContent' => 'b',
+                'nextType'        => 'T_START_NOWDOC',
+            ],
+            'b-prefix uppercase, nowdoc'                                          => [
+                'testMarker'      => '/* testBinaryStringCastUppercaseNowDoc */',
+                'expectedContent' => 'B',
+                'nextType'        => 'T_START_NOWDOC',
+            ],
+            'b-prefix lowercase, quoted heredoc'                                  => [
+                'testMarker'      => '/* testBinaryStringCastLowercaseQuotedHereDoc */',
+                'expectedContent' => 'b',
+                'nextType'        => 'T_START_HEREDOC',
+            ],
+            'b-prefix uppercase, non-quoted heredoc with whitespace in marker'    => [
+                'testMarker'      => '/* testBinaryStringCastUppercaseHereDocWithWhitespace */',
+                'expectedContent' => 'B',
+                'nextType'        => 'T_START_HEREDOC',
+            ],
         ];
     }
 

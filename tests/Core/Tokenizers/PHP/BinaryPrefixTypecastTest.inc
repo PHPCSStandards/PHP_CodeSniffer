@@ -33,6 +33,26 @@ $binary = B"binary string";
 /* testBinaryStringCastUppercaseDoubleQuotesWithInterpolation */
 $binary = B"binary $string";
 
+/* testBinaryStringCastLowercaseNowDocWithWhitespace */
+$binary = b<<<  'NOW'
+binary string
+NOW;
+
+/* testBinaryStringCastUppercaseNowDoc */
+$binary = B<<<'NOW'
+binary string
+NOW;
+
+/* testBinaryStringCastLowercaseQuotedHereDoc */
+$binary = b<<<"HERE"
+binary string
+HERE;
+
+/* testBinaryStringCastUppercaseHereDocWithWhitespace */
+$binary = B<<<  HERE
+binary $string
+HERE;
+
 // Intentional parse error.
 // Whitespace between the text string and the b is not supported by PHP.
 /* testNotBinaryStringCastWithWhitespace */
