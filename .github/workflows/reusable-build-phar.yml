@@ -26,8 +26,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
     name: "Build Phar on PHP: ${{ inputs.phpVersion }}"
+    runs-on: ubuntu-latest
 
     continue-on-error: ${{ inputs.phpVersion == 'nightly' }}
 

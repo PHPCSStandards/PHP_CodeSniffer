@@ -18,10 +18,10 @@ on:
 
 jobs:
   label-new-prs:
-    runs-on: ubuntu-latest
     if: github.repository_owner == 'PHPCSStandards' && github.event_name == 'pull_request_target'
 
     name: Add labels to new PRs
+    runs-on: ubuntu-latest
 
     steps:
       - name: Label new PRs
@@ -30,10 +30,10 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
   validate-labeler-workflow:
-    runs-on: ubuntu-latest
     if: github.repository_owner == 'PHPCSStandards' && github.event_name == 'pull_request' && github.event.pull_request.merged == false
 
     name: Validate changes to Labeler logic
+    runs-on: ubuntu-latest
 
     steps:
       # Checkout is needed to use the `use_local_config` option.

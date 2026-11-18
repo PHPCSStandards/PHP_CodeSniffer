@@ -41,13 +41,12 @@ jobs:
   # failing on the parse errors instead of on the requirements check
   # (which would easily go unnoticed).
   lint:
-    runs-on: ubuntu-latest
-
     strategy:
       matrix:
         php: ['5.3', '5.4', '5.5', '5.6', '7.0', '7.1']
 
     name: "Lint: PHP ${{ matrix.php }}"
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -123,11 +122,10 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJson(needs.prepare-matrix.outputs.MATRIX) }}
 
-    # yamllint disable-line rule:line-length
-    name: "Plain: ${{ matrix.cmd == 'phpcs' && 'cs' || 'cbf' }} / ${{ matrix.php }} / ${{ matrix.name }} (${{ matrix.os == 'ubuntu-latest' && 'nix' || 'Win' }})"
-
     continue-on-error: ${{ matrix.php == 'nightly' }}
 
+    # yamllint disable-line rule:line-length
+    name: "Plain: ${{ matrix.cmd == 'phpcs' && 'cs' || 'cbf' }} / ${{ matrix.php }} / ${{ matrix.name }} (${{ matrix.os == 'ubuntu-latest' && 'nix' || 'Win' }})"
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -192,11 +190,10 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJson(needs.prepare-matrix.outputs.MATRIX) }}
 
-    # yamllint disable-line rule:line-length
-    name: "PHAR: ${{ matrix.cmd == 'phpcs' && 'cs' || 'cbf' }} / ${{ matrix.php }} / ${{ matrix.name }} (${{ matrix.os == 'ubuntu-latest' && 'nix' || 'Win' }})"
-
     continue-on-error: ${{ matrix.php == 'nightly' }}
 
+    # yamllint disable-line rule:line-length
+    name: "PHAR: ${{ matrix.cmd == 'phpcs' && 'cs' || 'cbf' }} / ${{ matrix.php }} / ${{ matrix.name }} (${{ matrix.os == 'ubuntu-latest' && 'nix' || 'Win' }})"
     runs-on: ${{ matrix.os }}
 
     steps:

@@ -17,6 +17,11 @@ on:
 
 jobs:
   build:
+    permissions:
+      id-token: write
+      contents: read
+      attestations: write
+
     # Cancels all previous runs of this particular job for the same branch that have not yet completed.
     concurrency:
       # The concurrency group contains the workflow name, job name and the branch name.
@@ -24,12 +29,6 @@ jobs:
       cancel-in-progress: true
 
     name: "Build Phar on PHP: 8.0"
-
-    permissions:
-      id-token: write
-      contents: read
-      attestations: write
-
     uses: ./.github/workflows/reusable-build-phar.yml
     with:
       uploadArtifacts: true
@@ -45,7 +44,6 @@ jobs:
       group: ${{ github.workflow }}-${{ github.job }}-${{ strategy.job-index }}-${{ github.ref }}
       cancel-in-progress: true
 
-    runs-on: ${{ matrix.os }}
     needs: build
 
     strategy:
@@ -99,10 +97,11 @@ jobs:
             os: 'ubuntu-latest'
             custom_ini: true
 
+    continue-on-error: ${{ matrix.php == '8.6' }}
+
     # yamllint disable-line rule:line-length
     name: "PHP: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }}${{ matrix.libxml_minor && format( ' with libxml {0}', matrix.libxml_minor ) || '' }} (${{ matrix.os != 'windows-latest' && 'Linux' || 'Win'  }})"
-
-    continue-on-error: ${{ matrix.php == '8.6' }}
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Prepare git to leave line endings alone
@@ -275,8 +274,6 @@ jobs:
   coverage:
     # Explicitly *NOT* setting "concurrency" for this job to allow for monitoring code coverage for all merges.
 
-    runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
         os: ['ubuntu-latest', 'windows-latest']
@@ -302,6 +299,7 @@ jobs:
 
     # yamllint disable-line rule:line-length
     name: "Coverage: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }} (${{ matrix.os == 'ubuntu-latest' && 'Linux' || 'Win'  }})"
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Prepare git to leave line endings alone
