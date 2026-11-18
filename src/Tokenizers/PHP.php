@@ -1339,6 +1339,14 @@ class PHP extends Tokenizer
                         continue;
                     }
 
+                    if ($scope === 1 && $tokens[$i][0] === T_ENUM_CASE) {
+                        // A previous "case" in the same scope has already been identified as an enum case,
+                        // so this one is an enum case too. This prevents walking back to the enum keyword
+                        // for each case, which gets very slow for enums with lots of cases.
+                        $isEnumCase = true;
+                        break;
+                    }
+
                     if ($scope !== 0) {
                         continue;
                     }
@@ -1347,7 +1355,7 @@ class PHP extends Tokenizer
                         break;
                     }
 
-                    if ($tokens[$i][0] === T_ENUM || $tokens[$i][0] === T_ENUM_CASE) {
+                    if ($tokens[$i][0] === T_ENUM) {
                         $isEnumCase = true;
                         break;
                     }
