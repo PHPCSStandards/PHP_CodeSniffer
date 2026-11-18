@@ -1355,7 +1355,7 @@ class PHP extends Tokenizer
                         break;
                     }
 
-                    if ($tokens[$i][0] === T_ENUM || $tokens[$i][0] === T_ENUM_CASE) {
+                    if ($tokens[$i][0] === T_ENUM) {
                         $isEnumCase = true;
                         break;
                     }
