@@ -15,10 +15,10 @@ on:
 
 jobs:
   check-prs:
-    runs-on: ubuntu-latest
     if: github.repository_owner == 'PHPCSStandards'
 
     name: Check PRs for merge conflicts
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check PRs for merge conflicts

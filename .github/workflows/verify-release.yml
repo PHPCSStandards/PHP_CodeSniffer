@@ -25,12 +25,11 @@ jobs:
   # Trigger an update of the schema.phpcodesniffer.com website. #
   ###############################################################
   trigger-schema-site-update:
-    runs-on: ubuntu-latest
-
     # Only run this workflow in the context of this repo, don't run for changed workflow PR dry-runs.
     if: github.repository_owner == 'PHPCSStandards' && github.event_name != 'pull_request'
 
     name: "Trigger update of schema website"
+    runs-on: ubuntu-latest
 
     steps:
       - name: Trigger schema website update
@@ -44,12 +43,11 @@ jobs:
   # Trigger an update of the documentation in the Wiki. #
   #######################################################
   trigger-wiki-update:
-    runs-on: ubuntu-latest
-
     # Only run this workflow in the context of this repo, don't run for changed workflow PR dry-runs.
     if: github.repository_owner == 'PHPCSStandards' && github.event_name != 'pull_request'
 
     name: "Trigger update of wiki"
+    runs-on: ubuntu-latest
 
     steps:
       - name: Trigger wiki update
@@ -63,8 +61,6 @@ jobs:
   # Verify the release is available in all the right places and works as expected. #
   ##################################################################################
   verify-available-downloads:
-    runs-on: ubuntu-latest
-
     # Only run this workflow in the context of this repo.
     if: github.repository_owner == 'PHPCSStandards'
 
@@ -80,6 +76,7 @@ jobs:
           - 'phpcbf'
 
     name: "${{ matrix.download_flavour }}: ${{ matrix.pharfile }}"
+    runs-on: ubuntu-latest
 
     steps:
       - name: Retrieve latest release info
@@ -183,8 +180,6 @@ jobs:
   # Verify install via PHIVE. #
   #############################
   verify-phive:
-    runs-on: ubuntu-latest
-
     # Only run this workflow in the context of this repo.
     if: github.repository_owner == 'PHPCSStandards'
 
@@ -196,6 +191,7 @@ jobs:
           - 'phpcbf'
 
     name: "PHIVE: ${{ matrix.pharfile }}"
+    runs-on: ubuntu-latest
 
     steps:
       # Phive does not support a stability flag yet, so it will always download the

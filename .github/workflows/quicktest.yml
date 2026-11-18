@@ -24,8 +24,6 @@ jobs:
   # These are basically the same builds as in the Test->Coverage workflow, but then without doing
   # the code-coverage.
   quicktest:
-    runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
         os: ['ubuntu-24.04-arm', 'windows-latest']
@@ -43,6 +41,7 @@ jobs:
             custom_ini: false
 
     name: "QuickTest: PHP ${{ matrix.php }} (${{ matrix.os == 'windows-latest' && 'Win' || 'Linux ARM' }})"
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Prepare git to leave line endings alone

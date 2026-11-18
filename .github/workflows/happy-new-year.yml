@@ -26,11 +26,12 @@ concurrency:
 
 jobs:
   update-year-in-test:
-    runs-on: ubuntu-latest
     # Don't run the cron job on forks.
     if: ${{ github.event_name != 'schedule' || github.event.repository.fork == false }}
 
     name: "Happy New Year"
+    runs-on: ubuntu-latest
+
     steps:
       - name: Set branch to use
         id: branches
