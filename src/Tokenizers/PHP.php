@@ -559,6 +559,8 @@ class PHP extends Tokenizer
         $insideUseGroup         = false;
         $insideConstDeclaration = false;
 
+        $switchCases = [];
+
         $commentTokenizer = new Comment();
 
         for ($stackPtr = 0; $stackPtr < $numTokens; $stackPtr++) {
@@ -1357,11 +1359,18 @@ class PHP extends Tokenizer
                         break;
                     }
 
+                    // Same as the enum-case above, but for switch-case.
+                    if ($scope === 1 && isset($switchCases[$i]) === true) {
+                        $switchCases[$stackPtr] = true;
+                        break;
+                    }
+
                     if ($scope !== 0) {
                         continue;
                     }
 
                     if ($tokens[$i][0] === T_SWITCH) {
+                        $switchCases[$stackPtr] = true;
                         break;
                     }
 
