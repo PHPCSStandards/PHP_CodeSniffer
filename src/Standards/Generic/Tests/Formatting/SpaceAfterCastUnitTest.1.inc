@@ -102,3 +102,10 @@ $var = (	int		)$tabsInsideParenthesis;
 (void) callMe();
 (void)callMe();
 (void)   callMe();
+
+$var = b<<<EOD
+binary $foo
+EOD;
+$var = B<<<'EOD'
+binary string
+EOD;

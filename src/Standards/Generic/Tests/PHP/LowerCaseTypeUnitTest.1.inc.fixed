@@ -147,3 +147,10 @@ interface PHP84HookedProperty {
 
 $var = b"binary $foo";
 $var = b'binary string';
+
+$var = b<<<"EOD"
+binary $foo
+EOD;
+$var = b<<<'EOD'
+binary string
+EOD;
