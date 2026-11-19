@@ -124,8 +124,11 @@ jobs:
 
     continue-on-error: ${{ matrix.php == 'nightly' }}
 
-    # yamllint disable-line rule:line-length
-    name: "Plain: ${{ matrix.cmd == 'phpcs' && 'cs' || 'cbf' }} / ${{ matrix.php }} / ${{ matrix.name }} (${{ matrix.os == 'ubuntu-latest' && 'nix' || 'Win' }})"
+    name: >
+      Plain: ${{ matrix.cmd == 'phpcs' && 'cs' || 'cbf' }}
+      / ${{ matrix.php }} / ${{ matrix.name }}
+      (${{ matrix.os == 'ubuntu-latest' && 'nix' || 'Win' }})
+
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -192,8 +195,11 @@ jobs:
 
     continue-on-error: ${{ matrix.php == 'nightly' }}
 
-    # yamllint disable-line rule:line-length
-    name: "PHAR: ${{ matrix.cmd == 'phpcs' && 'cs' || 'cbf' }} / ${{ matrix.php }} / ${{ matrix.name }} (${{ matrix.os == 'ubuntu-latest' && 'nix' || 'Win' }})"
+    name: >
+      PHAR: ${{ matrix.cmd == 'phpcs' && 'cs' || 'cbf' }}
+      / ${{ matrix.php }} / ${{ matrix.name }}
+      (${{ matrix.os == 'ubuntu-latest' && 'nix' || 'Win' }})
+
     runs-on: ${{ matrix.os }}
 
     steps:

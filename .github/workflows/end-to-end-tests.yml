@@ -29,7 +29,6 @@ jobs:
 
     continue-on-error: ${{ matrix.php == 'nightly' }}
 
-    # yamllint disable-line rule:line-length
     name: "E2E PHP: ${{ matrix.php }}"
     runs-on: 'ubuntu-latest'
 

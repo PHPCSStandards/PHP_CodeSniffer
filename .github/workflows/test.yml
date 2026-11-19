@@ -99,8 +99,11 @@ jobs:
 
     continue-on-error: ${{ matrix.php == '8.6' }}
 
-    # yamllint disable-line rule:line-length
-    name: "PHP: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }}${{ matrix.libxml_minor && format( ' with libxml {0}', matrix.libxml_minor ) || '' }} (${{ matrix.os != 'windows-latest' && 'Linux' || 'Win'  }})"
+    name: >
+      PHP: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }}
+      ${{ matrix.libxml_minor && format( ' with libxml {0}', matrix.libxml_minor ) || '' }}
+      (${{ matrix.os != 'windows-latest' && 'Linux' || 'Win'  }})
+
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -297,8 +300,10 @@ jobs:
             custom_ini: true
             extensions: ':mysqli' # Run with mysqli disabled.
 
-    # yamllint disable-line rule:line-length
-    name: "Coverage: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }} (${{ matrix.os == 'ubuntu-latest' && 'Linux' || 'Win'  }})"
+    name: >
+      Coverage: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }}
+      (${{ matrix.os == 'ubuntu-latest' && 'Linux' || 'Win'  }})
+
     runs-on: ${{ matrix.os }}
 
     steps:
