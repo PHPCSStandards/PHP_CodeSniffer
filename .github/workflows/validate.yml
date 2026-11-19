@@ -40,7 +40,36 @@ jobs:
         run: cs2pr ./phpcs-report.xml
 
   checkxml:
-    name: Check XML files
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: 'phpcs.xsd'
+            pattern: 'phpcs.xsd'
+            xsd-url: 'https://www.w3.org/2012/04/XMLSchema.xsd'
+
+          - name: 'Rulesets'
+            pattern: './src/Standards/*/ruleset.xml'
+            xsd-file: 'phpcs.xsd'
+
+          - name: 'Sniff Documentation'
+            pattern: './src/Standards/*/Docs/*/*Standard.xml'
+            xsd-url: 'https://phpcsstandards.github.io/PHPCSDevTools/phpcsdocs.xsd'
+
+          # Validate dev tool related XML files.
+          - name: 'Project ruleset'
+            pattern: 'phpcs.xml.dist'
+            xsd-file: 'phpcs.xsd'
+
+          - name: 'PHPUnit <= 9 config'
+            pattern: 'phpunit-lte9.xml.dist'
+            xsd-url: 'https://raw.githubusercontent.com/sebastianbergmann/phpunit/refs/tags/9.2.6/phpunit.xsd'
+
+          - name: 'PHPUnit 10+ config'
+            pattern: 'phpunit.xml.dist'
+            xsd-url: 'https://raw.githubusercontent.com/sebastianbergmann/phpunit/refs/heads/10.5/phpunit.xsd'
+
+    name: "Check XML files: ${{ matrix.name }}"
     runs-on: ubuntu-24.04
 
     steps:
@@ -49,43 +78,19 @@ jobs:
         with:
           persist-credentials: false
 
-      # Validate the XSD file.
-      - name: Validate XSD against schema
+      - name: Validate ${{ matrix.name }} against local schema
+        if: matrix.xsd-file != ''
         uses: phpcsstandards/xmllint-validate@d0ee207a94a9539f5d14e78e3b13a81385252c88 # v2.0.1
         with:
-          pattern: "phpcs.xsd"
-          xsd-url: "https://www.w3.org/2012/04/XMLSchema.xsd"
+          pattern: ${{ matrix.pattern }}
+          xsd-file: ${{ matrix.xsd-file }}
 
-      # Validate the XML ruleset files.
-      - name: Validate rulesets against schema
+      - name: Validate ${{ matrix.name }} against remote schema
+        if: matrix.xsd-url != ''
         uses: phpcsstandards/xmllint-validate@d0ee207a94a9539f5d14e78e3b13a81385252c88 # v2.0.1
         with:
-          pattern: "./src/Standards/*/ruleset.xml"
-          xsd-file: "phpcs.xsd"
-
-      # Validate the Documentation XML files.
-      - name: Validate documentation XML
-        uses: phpcsstandards/xmllint-validate@d0ee207a94a9539f5d14e78e3b13a81385252c88 # v2.0.1
-        with:
-          pattern: "./src/Standards/*/Docs/*/*Standard.xml"
-          xsd-url: "https://phpcsstandards.github.io/PHPCSDevTools/phpcsdocs.xsd"
-
-      # Validate dev tool related XML files.
-      - name: Validate Project PHPCS ruleset against schema
-        uses: phpcsstandards/xmllint-validate@d0ee207a94a9539f5d14e78e3b13a81385252c88 # v2.0.1
-        with:
-          pattern: "phpcs.xml.dist"
-          xsd-file: "phpcs.xsd"
-
-      - name: "Validate PHPUnit <= 9 config for well-formedness"
-        uses: phpcsstandards/xmllint-validate@5189514594c8d5f4cf21b7e5af50f54d697973d7 # v2.0.1
-        with:
-          pattern: "phpunit-lte9.xml.dist"
-
-      - name: "Validate PHPUnit 10+ config for well-formedness"
-        uses: phpcsstandards/xmllint-validate@5189514594c8d5f4cf21b7e5af50f54d697973d7 # v2.0.1
-        with:
-          pattern: "phpunit.xml.dist"
+          pattern: ${{ matrix.pattern }}
+          xsd-url: ${{ matrix.xsd-url }}
 
   xml-cs:
     name: 'XML Code style'
