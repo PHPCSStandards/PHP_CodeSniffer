@@ -88,6 +88,13 @@ final class BinaryPrefixTypecastTest extends AbstractTokenizerTestCase
 
         // Make sure the next token is still tokenized as a text string.
         $this->assertSame($nextType, $tokens[($target + 1)]['type'], 'Next token is not a text string');
+
+        // Make sure the b-prefix got removed from the text string token.
+        // A single/double quoted text string would have the quote as the first character,
+        // a heredoc/nowdoc a `<` for the heredoc/nowdoc opener, so neither should ever have the
+        // 'b' character as the first character after the tokenizer has run.
+        $this->assertNotSame('b', $tokens[($target + 1)]['content'][0]);
+        $this->assertNotSame('B', $tokens[($target + 1)]['content'][0]);
     }
 
 
@@ -124,6 +131,28 @@ final class BinaryPrefixTypecastTest extends AbstractTokenizerTestCase
                 'testMarker'      => '/* testBinaryStringCastUppercaseDoubleQuotesWithInterpolation */',
                 'expectedContent' => 'B',
                 'nextType'        => 'T_DOUBLE_QUOTED_STRING',
+            ],
+
+            // Nowdoc, heredoc.
+            'b-prefix lowercase, nowdoc with whitespace in marker'                => [
+                'testMarker'      => '/* testBinaryStringCastLowercaseNowDocWithWhitespace */',
+                'expectedContent' => 'b',
+                'nextType'        => 'T_START_NOWDOC',
+            ],
+            'b-prefix uppercase, nowdoc'                                          => [
+                'testMarker'      => '/* testBinaryStringCastUppercaseNowDoc */',
+                'expectedContent' => 'B',
+                'nextType'        => 'T_START_NOWDOC',
+            ],
+            'b-prefix lowercase, quoted heredoc'                                  => [
+                'testMarker'      => '/* testBinaryStringCastLowercaseQuotedHereDoc */',
+                'expectedContent' => 'b',
+                'nextType'        => 'T_START_HEREDOC',
+            ],
+            'b-prefix uppercase, non-quoted heredoc with whitespace in marker'    => [
+                'testMarker'      => '/* testBinaryStringCastUppercaseHereDocWithWhitespace */',
+                'expectedContent' => 'B',
+                'nextType'        => 'T_START_HEREDOC',
             ],
         ];
     }
