@@ -45,6 +45,7 @@ enum ComplexEnum: int implements SomeInterface
     public function someOtherMethod(): bool
     {
         switch (true):
+            /* testCaseInAlternativeSwitchInEnumIsNotEnumCase */
             case false:
         endswitch;
     }
@@ -75,6 +76,15 @@ switch (true) {
         <div>something</div>
     <?php
 }
+
+switch ($s):
+    /* testCaseInAlternativeSwitchIsNotEnumCase */
+    case CONSTANT:
+        break;
+    /* testCaseInAlternativeSwitchWithSemicolonIsNotEnumCase */
+    case 'b';
+        break;
+endswitch;
 
 switch ($x) {
     /* testCaseInSwitchWhenCreatingEnumInSwitch1 */
