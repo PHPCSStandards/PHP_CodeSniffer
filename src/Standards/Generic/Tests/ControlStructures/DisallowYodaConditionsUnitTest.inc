@@ -136,11 +136,11 @@ if (function() { return false;} == true){}
 if (is_array($val)
     && array($foo) === array($bar)
     && [$foo] === [$bar]
-    && array('foo', 'bar') === array($foo, $bar)
+    && array('foo', b'bar') === array($foo, $bar)
     && ['foo', 'bar'] === [$foo, $bar]
     && array('foo' => true, 'bar' => false) === array(getContents())
     && ['foo' => true, 'bar' => \false, 'baz' => null] === array(getContents())
-    && array(getContents()) === ['foo' => \true, 'bar' => false, 'baz' => \null]
+    && array(getContents()) === ['foo' => \true, B'bar' => false, 'baz' => \null]
 ) {
 }
 

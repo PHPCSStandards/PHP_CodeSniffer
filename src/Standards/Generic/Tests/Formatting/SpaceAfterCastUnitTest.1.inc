@@ -45,7 +45,7 @@ $var = (unset)$var2;
 $var = (unset)          $var2;
 
 $var = b"binary $foo";
-$var = b"binary string";
+$var = B"binary string";
 $var = b'binary string';
 $var = (binary) $string;
 $var = (binary)$string;

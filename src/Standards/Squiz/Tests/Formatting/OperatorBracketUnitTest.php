@@ -78,6 +78,7 @@ final class OperatorBracketUnitTest extends AbstractSniffTestCase
                     189 => 1,
                     193 => 1,
                     194 => 2,
+                    213 => 1,
                 ];
 
             default:
