@@ -76,18 +76,20 @@ class SwitchDeclarationSniff implements Sniff
 
         while (($nextCase = $this->findNextCase($phpcsFile, ($nextCase + 1), $switch['scope_closer'])) !== false) {
             if ($tokens[$nextCase]['code'] === T_DEFAULT) {
-                $type = 'default';
+                $type   = 'default';
+                $typeUc = 'DEFAULT';
             } else {
-                $type = 'case';
+                $type   = 'case';
+                $typeUc = 'CASE';
             }
 
-            if ($tokens[$nextCase]['content'] !== strtolower($tokens[$nextCase]['content'])) {
-                $expected = strtolower($tokens[$nextCase]['content']);
-                $error    = '%3$s keyword must be lowercase; expected "%1$s" but found "%2$s"';
-                $data     = [
+            $expected = strtolower($tokens[$nextCase]['content']);
+            if ($tokens[$nextCase]['content'] !== $expected) {
+                $error = '%3$s keyword must be lowercase; expected "%1$s" but found "%2$s"';
+                $data  = [
                     $expected,
                     $tokens[$nextCase]['content'],
-                    strtoupper($type),
+                    $typeUc,
                 ];
 
                 $fix = $phpcsFile->addFixableError($error, $nextCase, $type . 'NotLower', $data);
@@ -123,7 +125,7 @@ class SwitchDeclarationSniff implements Sniff
             if ($tokens[$opener]['code'] === T_COLON) {
                 if ($tokens[($opener - 1)]['code'] === T_WHITESPACE) {
                     $error = 'There must be no space before the colon in a %s statement';
-                    $fix   = $phpcsFile->addFixableError($error, $nextCase, 'SpaceBeforeColon' . strtoupper($type), [strtoupper($type)]);
+                    $fix   = $phpcsFile->addFixableError($error, $nextCase, 'SpaceBeforeColon' . $typeUc, [$typeUc]);
                     if ($fix === true) {
                         $phpcsFile->fixer->replaceToken(($opener - 1), '');
                     }
@@ -140,7 +142,7 @@ class SwitchDeclarationSniff implements Sniff
 
                 if ($tokens[$next]['line'] !== ($tokens[$opener]['line'] + 1)) {
                     $error = 'The %s body must start on the line following the statement';
-                    $fix   = $phpcsFile->addFixableError($error, $nextCase, 'BodyOnNextLine' . strtoupper($type), [strtoupper($type)]);
+                    $fix   = $phpcsFile->addFixableError($error, $nextCase, 'BodyOnNextLine' . $typeUc, [$typeUc]);
                     if ($fix === true) {
                         if ($tokens[$next]['line'] === $tokens[$opener]['line']) {
                             $padding = str_repeat(' ', ($caseAlignment + $this->indent - 1));
@@ -195,7 +197,7 @@ class SwitchDeclarationSniff implements Sniff
             } else {
                 $error = '%s statements must be defined using a colon';
                 if ($tokens[$opener]['code'] === T_SEMICOLON || $tokens[$opener]['code'] === T_CLOSE_TAG) {
-                    $fix = $phpcsFile->addFixableError($error, $nextCase, 'WrongOpener' . $type, [strtoupper($type)]);
+                    $fix = $phpcsFile->addFixableError($error, $nextCase, 'WrongOpener' . $type, [$typeUc]);
                     if ($fix === true) {
                         if ($tokens[$opener]['code'] === T_SEMICOLON) {
                             $phpcsFile->fixer->replaceToken($opener, ':');
@@ -209,7 +211,7 @@ class SwitchDeclarationSniff implements Sniff
                     // or T_OPEN_CURLY_BRACKET (changed from T_COLON by processAdditional() for `case x: {...}`)
                     // The first three are handled above, so the opener can only be T_OPEN_CURLY_BRACKET here.
                     $error = '%s statements must not use a braced block after the colon';
-                    $phpcsFile->addError($error, $nextCase, 'WrongOpener', [strtoupper($type)]);
+                    $phpcsFile->addError($error, $nextCase, 'WrongOpener', [$typeUc]);
                 }
             }
 
