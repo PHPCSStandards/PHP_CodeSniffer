@@ -205,12 +205,11 @@ class SwitchDeclarationSniff implements Sniff
                         }
                     }
                 } else {
-                    if ($tokens[$opener]['code'] === T_OPEN_CURLY_BRACKET) {
-                        $error = '%s statements must not use a braced block after the colon';
-                        $phpcsFile->addError($error, $nextCase, 'WrongOpener', [strtoupper($type)]);
-                    } else {
-                        $phpcsFile->addError($error, $nextCase, 'WrongOpener' . $type, [strtoupper($type)]);
-                    }
+                    // The scope opener can only be one of: T_COLON, T_SEMICOLON, T_CLOSE_TAG,
+                    // or T_OPEN_CURLY_BRACKET (changed from T_COLON by processAdditional() for `case x: {...}`)
+                    // The first three are handled above, so the opener can only be T_OPEN_CURLY_BRACKET here.
+                    $error = '%s statements must not use a braced block after the colon';
+                    $phpcsFile->addError($error, $nextCase, 'WrongOpener', [strtoupper($type)]);
                 }
             }
 
