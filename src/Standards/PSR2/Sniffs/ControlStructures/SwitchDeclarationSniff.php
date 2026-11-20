@@ -111,6 +111,13 @@ class SwitchDeclarationSniff implements Sniff
                 }
             }
 
+            if (isset($tokens[$nextCase]['scope_opener']) === false
+                || isset($tokens[$nextCase]['scope_closer']) === false
+            ) {
+                // Parse error or live coding.
+                continue;
+            }
+
             $opener     = $tokens[$nextCase]['scope_opener'];
             $nextCloser = $tokens[$nextCase]['scope_closer'];
             if ($tokens[$opener]['code'] === T_COLON) {
