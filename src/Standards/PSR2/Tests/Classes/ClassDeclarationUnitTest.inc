@@ -348,7 +348,15 @@ enum BraceNotOnLineByItselfCloseTagError
 /*
  * Tests for the spacing after the OO name. This is handled by different error codes.
  */
-class MultipleSpacesAfterName   extends Bar
+class MultipleSpacesAfterNameBeforeExtends   extends Bar
+{
+}
+
+enum MultipleSpacesAfterNameBeforeImplements   implements Bar
+{
+}
+
+class MultipleSpacesAfterNameBeforeExtendsAndImplements   extends Bar implements Baz
 {
 }
 
@@ -356,8 +364,18 @@ interface TrailingWhitespaceBeforeBrace
 {
 }
 
-class TrailingWhitespaceBeforeExtends   
+class TrailingWhitespaceAndNewlineBeforeExtends   
 extends Bar
+{
+}
+
+enum TrailingWhitespaceAndNewlineBeforeImplements   
+implements Bar
+{
+}
+
+class TrailingWhitespaceAndNewlineBeforeExtendsAndImplements   
+extends Bar implements Baz
 {
 }
 
@@ -387,11 +405,22 @@ enum CommentAfterNameNoExtends/* comment */
 {
 }
 
-class SlashCommentAfterName// comment
+class InlineCommentAfterName// comment
 {
 }
 
 class AnnotationAfterName// phpcs:ignore Stnd.Cat.Sniff -- For reasons.
+{
+}
+
+class NewlineBeforeComment
+// comment
+{
+}
+
+// Trailing whitespace after the OO name, followed by a new line, is intentionally not reported by the SpaceAfterName check as it is handled by the Squiz.WhiteSpace.SuperfluousWhitespace sniff.
+class TrailingWhitespaceBeforeComment   
+/* comment */
 {
 }
 
@@ -403,12 +432,17 @@ interface MultipleSpacesBeforeComment   /* comment */ extends Bar
 {
 }
 
-class NewlineBeforeComment
-// comment
+class InlineCommentAfterNameExtendsOnNextLine // comment
+extends Bar
 {
 }
 
-class TrailingWhitespaceBeforeComment   
-/* comment */
+interface InlineCommentDirectlyAfterNameExtendsOnNextLine# comment
+extends Bar
+{
+}
+
+class MultipleSpacesBeforeInlineCommentExtendsAndImplementsOnNextLine   // comment
+extends Bar implements Baz
 {
 }
