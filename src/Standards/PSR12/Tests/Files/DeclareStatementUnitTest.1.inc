@@ -13,10 +13,10 @@ declare(/* test */ ticks /* test */ =1);
 declare(  ticks
 =1   );
 
-    declare(ticks=1) { }
+    declare(ticks=1) { $test = true; }
 
   declare(ticks=1)
-{ }
+{ $test = true; }
 
 declare(ticks=1)
 {
@@ -48,3 +48,19 @@ declare(ticks=1) {$test = true;
 
 declare(ticks=1) {  $test = true;
 }
+
+// Ensure that we handle non-number values properly.
+declare(encoding='ISO-8859-1');
+declare ( encoding = 'ISO-8859-1' ) ;
+
+// Multi-directive statements should be handled correctly too.
+declare(strict_types=1,ticks=1);
+// Note that PSR12 makes no mention of the formatting of the comma, so all of these should be valid.
+declare(strict_types=1, ticks=1);
+declare(strict_types=1,  ticks=1);
+declare(strict_types=1,
+ticks=1);
+declare(strict_types=1,
+        ticks=1);
+declare(strict_types=1 , ticks=1);
+declare(strict_types=1 ,ticks=1);
