@@ -69,6 +69,20 @@ function matchNestedInMatch() {
     };
 }
 
+function matchInMatchSubject() {
+    $x = match (match ($y) {
+        /* testMatchArrowInMatchSubject1 */
+        1 => 2,
+        /* testMatchArrowInMatchSubject2 */
+        default => 3,
+    }) {
+        /* testMatchArrowInMatchWithMatchSubject1 */
+        2 => 'two',
+        /* testMatchArrowInMatchWithMatchSubject2 */
+        default => 'other',
+    };
+}
+
 function matchNestedInLongArrayValue() {
     $array = array(
         /* testLongArrayArrowWithNestedMatchValue1 */

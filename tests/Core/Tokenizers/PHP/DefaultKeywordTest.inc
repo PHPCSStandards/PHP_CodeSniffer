@@ -105,6 +105,18 @@ function matchWithDefaultInSwitch() {
     }
 }
 
+function matchWithMatchSubject() {
+    $x = match (match ($y) {
+        1 => 2,
+        /* testMatchDefaultInMatchSubject */
+        default => 3,
+    }) {
+        2 => 'two',
+        /* testMatchDefaultInMatchWithMatchSubject */
+        default => 'other',
+    };
+}
+
 function switchWithDefaultInMatch() {
     $x = match ($y) {
         5, 8 => function($z) {
