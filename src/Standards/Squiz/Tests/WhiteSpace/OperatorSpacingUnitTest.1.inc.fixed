@@ -500,3 +500,12 @@ $foo = $var // Comment
     ? false // Comment
     : true;
 // phpcs:set Squiz.WhiteSpace.OperatorSpacing ignoreNewlines false
+
+class NullableInPropertyHookParam
+{
+    public int $bar {
+        set(?int $value) {
+            $this->bar = $value ?? 0;
+        }
+    }
+}
