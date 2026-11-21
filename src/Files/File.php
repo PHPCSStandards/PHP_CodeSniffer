@@ -2566,6 +2566,10 @@ class File
                 && $i === $this->tokens[$i]['parenthesis_closer']
             ) {
                 $i = $this->tokens[$i]['parenthesis_opener'];
+            } elseif (isset($this->tokens[$i]['attribute_opener']) === true
+                && $i === $this->tokens[$i]['attribute_closer']
+            ) {
+                $i = $this->tokens[$i]['attribute_opener'];
             } elseif ($this->tokens[$i]['code'] === T_CLOSE_USE_GROUP) {
                 $start = $this->findPrevious(T_OPEN_USE_GROUP, ($i - 1));
                 if ($start !== false) {

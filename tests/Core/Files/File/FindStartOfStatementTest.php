@@ -947,4 +947,55 @@ final class FindStartOfStatementTest extends AbstractMethodTestCase
             ],
         ];
     }
+
+
+    /**
+     * Test finding the start of a statement which is preceded by an attribute block containing multiple attributes.
+     *
+     * @param string     $testMarker     The comment which prefaces the target token in the test file.
+     * @param int|string $target         The token to search for after the test marker.
+     * @param int|string $expectedTarget Token code of the expected start of statement stack pointer.
+     *
+     * @link https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/1524
+     *
+     * @dataProvider dataFindStartAfterAttributeBlock
+     *
+     * @return void
+     */
+    public function testFindStartAfterAttributeBlock($testMarker, $target, $expectedTarget)
+    {
+        $testToken = $this->getTargetToken($testMarker, $target);
+        $expected  = $this->getTargetToken($testMarker, $expectedTarget);
+
+        $found = self::$phpcsFile->findStartOfStatement($testToken);
+
+        $this->assertSame($expected, $found);
+    }
+
+
+    /**
+     * Data provider.
+     *
+     * @return array<string, array<string, int|string>>
+     */
+    public static function dataFindStartAfterAttributeBlock()
+    {
+        return [
+            'Attribute opener should be start for method with multi-line attribute block'  => [
+                'testMarker'     => '/* test1524MultiLineAttributeBlock */',
+                'target'         => T_FUNCTION,
+                'expectedTarget' => T_ATTRIBUTE,
+            ],
+            'Attribute opener should be start for method with single-line attribute block' => [
+                'testMarker'     => '/* test1524SingleLineAttributeBlock */',
+                'target'         => T_FUNCTION,
+                'expectedTarget' => T_ATTRIBUTE,
+            ],
+            'Attribute opener should be start for parameter with attribute block'          => [
+                'testMarker'     => '/* test1524AttributeOnParameter */',
+                'target'         => T_VARIABLE,
+                'expectedTarget' => T_ATTRIBUTE,
+            ],
+        ];
+    }
 }
