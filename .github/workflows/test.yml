@@ -100,9 +100,9 @@ jobs:
     continue-on-error: ${{ matrix.php == '8.6' }}
 
     name: >
-      PHP: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }}
-      ${{ matrix.libxml_minor && format( ' with libxml {0}', matrix.libxml_minor ) || '' }}
-      (${{ matrix.os != 'windows-latest' && 'Linux' || 'Win'  }})
+      PHP: ${{ matrix.php }}${{ matrix.custom_ini && ' with custom ini settings' || '' }}
+      ${{ matrix.libxml_minor && format( 'with libxml {0}', matrix.libxml_minor ) || '' }}
+      (${{ matrix.os != 'windows-latest' && 'Linux' || 'Win' }})
 
     runs-on: ${{ matrix.os }}
 
@@ -301,8 +301,8 @@ jobs:
             extensions: ':mysqli' # Run with mysqli disabled.
 
     name: >
-      Coverage: ${{ matrix.php }} ${{ matrix.custom_ini && ' with custom ini settings' || '' }}
-      (${{ matrix.os == 'ubuntu-latest' && 'Linux' || 'Win'  }})
+      Coverage: ${{ matrix.php }}${{ matrix.custom_ini && ' with custom ini settings' || '' }}
+      (${{ matrix.os == 'ubuntu-latest' && 'Linux' || 'Win' }})
 
     runs-on: ${{ matrix.os }}
 
