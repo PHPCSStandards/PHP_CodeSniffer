@@ -45,6 +45,7 @@ enum ComplexEnum: int implements SomeInterface
     public function someOtherMethod(): bool
     {
         switch (true):
+            /* testCaseInAlternativeSwitchInEnumIsNotEnumCase */
             case false:
         endswitch;
     }
@@ -65,17 +66,42 @@ switch (true) {
 /* testCaseConstantCloserMarker */
 }
 
+switch ($s):
+    /* testCaseInAlternativeSwitchIsNotEnumCase */
+    case CONSTANT:
+        enum Foo {
+            /* testEnumCaseNestedInAltSyntaxSwitch1 */
+            case NAME;
+        }
+        /* testCaseInAlternativeSwitchIsNotEnumCaseCloserMarker */
+        break;
+    /* testCaseInAlternativeSwitchWithSemicolonIsNotEnumCase */
+    case 'b';
+        enum Bar:int {
+            /* testEnumCaseNestedInAltSyntaxSwitch2 */
+            case NAME = 1;
+        }
+        /* testCaseInAlternativeSwitchWithSemicolonIsNotEnumCaseCloserMarker */
+        return;
+endswitch;
+
 switch ($x) {
     /* testCaseInSwitchWhenCreatingEnumInSwitch1 */
     case 'a': {
-        enum Foo {}
+        enum Foo {
+            /* testEnumCaseNestedInSwitch1 */
+            case NAME;
+        }
         break;
     /* testCaseInSwitchWhenCreatingEnumInSwitch1CloserMarker */
     }
 
     /* testCaseInSwitchWhenCreatingEnumInSwitch2 */
     case 'b';
-        enum Bar {}
+        enum Bar: int {
+            /* testEnumCaseNestedInSwitch2 */
+            case NAME = 1;
+        }
         /* testCaseInSwitchWhenCreatingEnumInSwitch2CloserMarker */
         break;
 }

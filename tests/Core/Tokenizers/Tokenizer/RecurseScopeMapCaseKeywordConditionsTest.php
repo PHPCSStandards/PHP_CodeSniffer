@@ -58,6 +58,11 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
             'enum case, keyword in mixed case'                           => ['/* testEnumCaseIsCaseInsensitive */'],
             'enum case, after switch statement'                          => ['/* testEnumCaseAfterSwitch */'],
             'enum case, after switch statement using alternative syntax' => ['/* testEnumCaseAfterSwitchWithEndSwitch */'],
+            'enum case, nested in alt syntax switch 1'                   => ['/* testEnumCaseNestedInAltSyntaxSwitch1 */'],
+            'enum case, nested in alt syntax switch 2'                   => ['/* testEnumCaseNestedInAltSyntaxSwitch2 */'],
+            'enum case, nested in switch 1'                              => ['/* testEnumCaseNestedInSwitch1 */'],
+            'enum case, nested in switch 2'                              => ['/* testEnumCaseNestedInSwitch2 */'],
+
         ];
     }
 
@@ -144,6 +149,13 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
                     'scope_closer' => T_CLOSE_CURLY_BRACKET,
                 ],
             ],
+            'alternative syntax switch case false, no break/return'             => [
+                'testMarker'     => '/* testCaseInAlternativeSwitchInEnumIsNotEnumCase */',
+                'expectedTokens' => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_ENDSWITCH,
+                ],
+            ],
             'switch case with constant, colon condition end'                    => [
                 'testMarker'       => '/* testCaseWithConstantIsNotEnumCase */',
                 'expectedTokens'   => [
@@ -175,6 +187,22 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
                     'scope_closer' => T_CLOSE_CURLY_BRACKET,
                 ],
                 'testCloserMarker' => '/* testCaseConstantCloserMarker */',
+            ],
+            'alternative syntax switch case, colon start, body declares enum'   => [
+                'testMarker'       => '/* testCaseInAlternativeSwitchIsNotEnumCase */',
+                'expectedTokens'   => [
+                    'scope_opener' => T_COLON,
+                    'scope_closer' => T_BREAK,
+                ],
+                'testCloserMarker' => '/* testCaseInAlternativeSwitchIsNotEnumCaseCloserMarker */',
+            ],
+            'alternative syntax switch case, semicolon start declares enum'     => [
+                'testMarker'       => '/* testCaseInAlternativeSwitchWithSemicolonIsNotEnumCase */',
+                'expectedTokens'   => [
+                    'scope_opener' => T_SEMICOLON,
+                    'scope_closer' => T_RETURN,
+                ],
+                'testCloserMarker' => '/* testCaseInAlternativeSwitchWithSemicolonIsNotEnumCaseCloserMarker */',
             ],
             'switch case, body in curlies declares enum'                        => [
                 'testMarker'       => '/* testCaseInSwitchWhenCreatingEnumInSwitch1 */',

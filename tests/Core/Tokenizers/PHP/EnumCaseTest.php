@@ -54,6 +54,10 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
             'enum case, keyword in mixed case'                           => ['/* testEnumCaseIsCaseInsensitive */'],
             'enum case, after switch statement'                          => ['/* testEnumCaseAfterSwitch */'],
             'enum case, after switch statement using alternative syntax' => ['/* testEnumCaseAfterSwitchWithEndSwitch */'],
+            'enum case, nested in alt syntax switch 1'                   => ['/* testEnumCaseNestedInAltSyntaxSwitch1 */'],
+            'enum case, nested in alt syntax switch 2'                   => ['/* testEnumCaseNestedInAltSyntaxSwitch2 */'],
+            'enum case, nested in switch 1'                              => ['/* testEnumCaseNestedInSwitch1 */'],
+            'enum case, nested in switch 2'                              => ['/* testEnumCaseNestedInSwitch2 */'],
         ];
     }
 
@@ -89,16 +93,19 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
     public static function dataNotEnumCases()
     {
         return [
-            'switch case with constant, semicolon condition end'     => ['/* testCaseWithSemicolonIsNotEnumCase */'],
-            'switch case with constant, colon condition end'         => ['/* testCaseWithConstantIsNotEnumCase */'],
-            'switch case with constant, comparison'                  => ['/* testCaseWithConstantAndIdenticalIsNotEnumCase */'],
-            'switch case, assignment'                                => ['/* testCaseWithAssigmentIsNotEnumCase */'],
-            'switch case with constant, keyword in mixed case'       => ['/* testIsNotEnumCaseIsCaseInsensitive */'],
-            'switch case with constant, curlies condition end'       => ['/* testIsNotEnumCaseWithCurlies */'],
-            'switch case with constant, semicolon + curlies'         => ['/* testIsNotEnumCaseWithSemicolonAndCurlies */'],
-            'switch case with constant, php close tag condition end' => ['/* testIsNotEnumCaseWithCloseTag */'],
-            'switch case, body in curlies declares enum'             => ['/* testCaseInSwitchWhenCreatingEnumInSwitch1 */'],
-            'switch case, body after semicolon declares enum'        => ['/* testCaseInSwitchWhenCreatingEnumInSwitch2 */'],
+            'switch case with constant, semicolon condition end'      => ['/* testCaseWithSemicolonIsNotEnumCase */'],
+            'alternative syntax switch case in enum method'           => ['/* testCaseInAlternativeSwitchInEnumIsNotEnumCase */'],
+            'switch case with constant, colon condition end'          => ['/* testCaseWithConstantIsNotEnumCase */'],
+            'switch case with constant, comparison'                   => ['/* testCaseWithConstantAndIdenticalIsNotEnumCase */'],
+            'switch case, assignment'                                 => ['/* testCaseWithAssigmentIsNotEnumCase */'],
+            'switch case with constant, keyword in mixed case'        => ['/* testIsNotEnumCaseIsCaseInsensitive */'],
+            'switch case with constant, curlies condition end'        => ['/* testIsNotEnumCaseWithCurlies */'],
+            'switch case with constant, semicolon + curlies'          => ['/* testIsNotEnumCaseWithSemicolonAndCurlies */'],
+            'switch case with constant, php close tag condition end'  => ['/* testIsNotEnumCaseWithCloseTag */'],
+            'alternative syntax switch case, colon condition end'     => ['/* testCaseInAlternativeSwitchIsNotEnumCase */'],
+            'alternative syntax switch case, semicolon condition end' => ['/* testCaseInAlternativeSwitchWithSemicolonIsNotEnumCase */'],
+            'switch case, body in curlies declares enum'              => ['/* testCaseInSwitchWhenCreatingEnumInSwitch1 */'],
+            'switch case, body after semicolon declares enum'         => ['/* testCaseInSwitchWhenCreatingEnumInSwitch2 */'],
         ];
     }
 
