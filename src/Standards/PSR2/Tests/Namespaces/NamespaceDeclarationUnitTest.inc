@@ -24,3 +24,10 @@ namespace Vendor\Package;
 $call = namespace\function_name();
 echo namespace\CONSTANT_NAME;
 // Something which is not a blank line.
+
+// When the next thing after a namespace declaration is a PHP close tag, don't enforce a new line as it may impact HTML display.
+namespace Vendor\NoBlankLine\EndsOnCloseTag ?>
+<?php
+namespace Vendor\HasBlankLine\EndsOnSemiColonPlusCloseTag; ?>
+
+<?php
