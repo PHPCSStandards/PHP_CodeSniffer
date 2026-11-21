@@ -81,13 +81,15 @@ class SwitchDeclarationSniff implements Sniff
                 $type = 'case';
             }
 
+            $typeUc = strtoupper($type);
+
             if ($tokens[$nextCase]['content'] !== strtolower($tokens[$nextCase]['content'])) {
                 $expected = strtolower($tokens[$nextCase]['content']);
                 $error    = '%3$s keyword must be lowercase; expected "%1$s" but found "%2$s"';
                 $data     = [
                     $expected,
                     $tokens[$nextCase]['content'],
-                    strtoupper($type),
+                    $typeUc,
                 ];
 
                 $fix = $phpcsFile->addFixableError($error, $nextCase, $type . 'NotLower', $data);
@@ -111,12 +113,19 @@ class SwitchDeclarationSniff implements Sniff
                 }
             }
 
+            if (isset($tokens[$nextCase]['scope_opener']) === false
+                || isset($tokens[$nextCase]['scope_closer']) === false
+            ) {
+                // Parse error or live coding.
+                continue;
+            }
+
             $opener     = $tokens[$nextCase]['scope_opener'];
             $nextCloser = $tokens[$nextCase]['scope_closer'];
             if ($tokens[$opener]['code'] === T_COLON) {
                 if ($tokens[($opener - 1)]['code'] === T_WHITESPACE) {
                     $error = 'There must be no space before the colon in a %s statement';
-                    $fix   = $phpcsFile->addFixableError($error, $nextCase, 'SpaceBeforeColon' . strtoupper($type), [strtoupper($type)]);
+                    $fix   = $phpcsFile->addFixableError($error, $nextCase, 'SpaceBeforeColon' . $typeUc, [$typeUc]);
                     if ($fix === true) {
                         $phpcsFile->fixer->replaceToken(($opener - 1), '');
                     }
@@ -133,7 +142,7 @@ class SwitchDeclarationSniff implements Sniff
 
                 if ($tokens[$next]['line'] !== ($tokens[$opener]['line'] + 1)) {
                     $error = 'The %s body must start on the line following the statement';
-                    $fix   = $phpcsFile->addFixableError($error, $nextCase, 'BodyOnNextLine' . strtoupper($type), [strtoupper($type)]);
+                    $fix   = $phpcsFile->addFixableError($error, $nextCase, 'BodyOnNextLine' . $typeUc, [$typeUc]);
                     if ($fix === true) {
                         if ($tokens[$next]['line'] === $tokens[$opener]['line']) {
                             $padding = str_repeat(' ', ($caseAlignment + $this->indent - 1));
@@ -188,7 +197,7 @@ class SwitchDeclarationSniff implements Sniff
             } else {
                 $error = '%s statements must be defined using a colon';
                 if ($tokens[$opener]['code'] === T_SEMICOLON || $tokens[$opener]['code'] === T_CLOSE_TAG) {
-                    $fix = $phpcsFile->addFixableError($error, $nextCase, 'WrongOpener' . $type, [strtoupper($type)]);
+                    $fix = $phpcsFile->addFixableError($error, $nextCase, 'WrongOpener' . $type, [$typeUc]);
                     if ($fix === true) {
                         if ($tokens[$opener]['code'] === T_SEMICOLON) {
                             $phpcsFile->fixer->replaceToken($opener, ':');
@@ -198,12 +207,11 @@ class SwitchDeclarationSniff implements Sniff
                         }
                     }
                 } else {
-                    if ($tokens[$opener]['code'] === T_OPEN_CURLY_BRACKET) {
-                        $error = '%s statements must not use a braced block after the colon';
-                        $phpcsFile->addError($error, $nextCase, 'WrongOpener', [strtoupper($type)]);
-                    } else {
-                        $phpcsFile->addError($error, $nextCase, 'WrongOpener' . $type, [strtoupper($type)]);
-                    }
+                    // The tokenizer can initially set a CASE/DEFAULT scope opener to T_COLON, T_SEMICOLON, or
+                    // T_CLOSE_TAG. The only exception is a braced block after the colon (`case x: { ... }`),
+                    // where processAdditional() later reassigns the opener to T_OPEN_CURLY_BRACKET.
+                    $error = '%s statements must not use a braced block after the colon';
+                    $phpcsFile->addError($error, $nextCase, 'WrongOpener', [$typeUc]);
                 }
             }
 
