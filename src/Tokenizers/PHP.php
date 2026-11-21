@@ -1365,13 +1365,13 @@ class PHP extends Tokenizer
                         break;
                     }
 
-                    if ($scope !== 0) {
-                        continue;
-                    }
-
-                    if ($tokens[$i][0] === T_SWITCH) {
+                    if (($scope === 0 || $scope === 1) && $tokens[$i][0] === T_SWITCH) {
                         $switchCases[$stackPtr] = true;
                         break;
+                    }
+
+                    if ($scope !== 0) {
+                        continue;
                     }
 
                     if ($tokens[$i][0] === T_ENUM) {
