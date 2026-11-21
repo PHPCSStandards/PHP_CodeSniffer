@@ -50,7 +50,7 @@ $var = (unset) $var2;
 
 $var = b"binary $foo";
 $var = b"binary string";
-$var = b'binary string';
+$var = B'binary string';
 $var = (binary) $string;
 $var = (binary) $string;
 $var = (binary) $string;
@@ -67,3 +67,13 @@ $var = array(
 (void) callMe();
 (void) (bool) callMe();
    (void) callMe(); // Indentation whitespace before should be and will be ignored.
+
+$var = b<<<EOD
+binary $foo
+EOD;
+$var = b<<<"EOD"
+binary $foo
+EOD;
+$var = B<<<'EOD'
+binary string
+EOD;

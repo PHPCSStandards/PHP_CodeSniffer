@@ -46,9 +46,14 @@ class SpaceBeforeCastSniff implements Sniff
             return;
         }
 
+        $errorCodeSuffix = '';
+        if ($tokens[$stackPtr]['code'] === T_BINARY_CAST && strtolower($tokens[$stackPtr]['content']) === 'b') {
+            $errorCodeSuffix = 'BeforeBinaryTextPrefix';
+        }
+
         if ($tokens[($stackPtr - 1)]['code'] !== T_WHITESPACE) {
             $error = 'A cast statement must be preceded by a single space';
-            $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'NoSpace');
+            $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'NoSpace' . $errorCodeSuffix);
             if ($fix === true) {
                 $phpcsFile->fixer->addContentBefore($stackPtr, ' ');
             }
@@ -61,7 +66,7 @@ class SpaceBeforeCastSniff implements Sniff
 
         if ($tokens[($stackPtr - 1)]['column'] !== 1 && $tokens[($stackPtr - 1)]['length'] !== 1) {
             $error = 'A cast statement must be preceded by a single space';
-            $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'TooMuchSpace');
+            $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'TooMuchSpace' . $errorCodeSuffix);
             if ($fix === true) {
                 $phpcsFile->fixer->replaceToken(($stackPtr - 1), ' ');
             }
