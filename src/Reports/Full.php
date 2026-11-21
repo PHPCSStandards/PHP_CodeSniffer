@@ -129,51 +129,34 @@ class Full implements Report
         // The maximum amount of space an error message can use.
         $maxErrorSpace = ($width - $paddingLength - 1);
 
-        $beforeMsg = '';
-        $afterMsg  = '';
-        if ($showSources === true) {
-            $beforeMsg = "\033[1m";
-            $afterMsg  = "\033[0m";
-        }
-
-        $beforeAfterLength = strlen($beforeMsg.$afterMsg);
-
         foreach ($report['messages'] as $line => $lineErrors) {
             foreach ($lineErrors as $colErrors) {
                 foreach ($colErrors as $error) {
-                    $errorMsg = wordwrap(
-                        $error['message'],
-                        $maxErrorSpace
-                    );
+                    $message       = wordwrap($error['message'], $maxErrorSpace, PHP_EOL);
+                    $paddedMessage = '';
+                    // Add padding and colors to each line of the output.
+                    foreach (explode(PHP_EOL, $message) as $i => $msgLine) {
+                        if ($i !== 0) {
+                            $paddedMessage .= PHP_EOL.$paddingLine2;
+                        }
 
-                    // Add the padding _after_ the wordwrap as the message itself may contain line breaks
-                    // and those lines will also need to receive padding.
-                    $errorMsg = str_replace("\n", $afterMsg.PHP_EOL.$paddingLine2.$beforeMsg, $errorMsg);
-                    $errorMsg = $beforeMsg.$errorMsg.$afterMsg;
+                        if ($showSources === true) {
+                            $paddedMessage .= "\033[1m".$msgLine."\033[0m";
+                        } else {
+                            $paddedMessage .= $msgLine;
+                        }
+                    }
 
                     if ($showSources === true) {
-                        $lastMsg          = $errorMsg;
-                        $startPosLastLine = strrpos($errorMsg, PHP_EOL.$paddingLine2.$beforeMsg);
-                        if ($startPosLastLine !== false) {
-                            // Message is multiline. Grab the text of last line of the message, including the color codes.
-                            $lastMsg = substr($errorMsg, ($startPosLastLine + strlen(PHP_EOL.$paddingLine2)));
-                        }
-
-                        // When show sources is used, the message itself will be bolded, so we need to correct the length.
-                        $sourceSuffix = '('.$error['source'].')';
-
-                        $lastMsgPlusSourceLength = strlen($lastMsg);
-                        // Add space + source suffix length.
-                        $lastMsgPlusSourceLength += (1 + strlen($sourceSuffix));
-                        // Correct for the color codes.
-                        $lastMsgPlusSourceLength -= $beforeAfterLength;
-
-                        if ($lastMsgPlusSourceLength > $maxErrorSpace) {
-                            $errorMsg .= PHP_EOL.$paddingLine2.$sourceSuffix;
+                        // Add sniff code, taking care to manually wrap the line if needed.
+                        if ((strlen($msgLine) + strlen($error['source']) + 3) > $maxErrorSpace) {
+                            $paddedMessage .= PHP_EOL.$paddingLine2;
                         } else {
-                            $errorMsg .= ' '.$sourceSuffix;
+                            $paddedMessage .= ' ';
                         }
-                    }//end if
+
+                        $paddedMessage .= '('.$error['source'].')';
+                    }
 
                     // The padding that goes on the front of the line.
                     $padding = ($maxLineNumLength - strlen($line));
@@ -200,7 +183,7 @@ class Full implements Report
                         echo '] ';
                     }
 
-                    echo $errorMsg.PHP_EOL;
+                    echo $paddedMessage.PHP_EOL;
                 }//end foreach
             }//end foreach
         }//end foreach
