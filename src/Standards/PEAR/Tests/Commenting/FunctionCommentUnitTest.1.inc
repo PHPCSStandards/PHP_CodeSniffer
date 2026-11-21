@@ -548,3 +548,98 @@ class HandleBlankLinesBetweenDocblockAndDeclarationWithAttributes
 
     }//end blankLineDetectionB()
 }//end class
+
+/**
+ * Multi-line param types, like array shapes, are supported.
+ *
+ * @param array{
+ *     ud: string,
+ *     id: int
+ * } $data Data to use
+ *         on multiple lines.
+ * @param int $count The count.
+ * @param array<
+ *     int,
+ *     string
+ * > $list A list.
+ *
+ * @return void
+ */
+function multiLineParamTypes($data, $count, $list)
+{
+
+}//end multiLineParamTypes()
+
+/**
+ * Multi-line param types with errors.
+ *
+ * @param array{
+ *     ud: string
+ * } $data Data to use
+ *     on multiple lines.
+ * @param array{
+ *     ud: string
+ * }
+ *
+ * @return void
+ */
+function multiLineParamTypesWithErrors($data, $other)
+{
+
+}//end multiLineParamTypesWithErrors()
+
+/**
+ * Return a multiline array shape.
+ *
+ * @return Array{
+ *     id: integer,
+ *     metadata: array{value: string|integer, marker: '}', legacy: array(integer => string)}
+ * } Description after the type.
+ */
+function multilineReturnShape() {
+    return [];
+}
+
+/**
+ * Return a multiline generic type.
+ *
+ * @return Array<
+ *     integer,
+ *     string|integer
+ * >
+ */
+function multilineReturnGeneric() {
+    return [];
+}
+
+/**
+ * Multiline types still require a return statement.
+ *
+ * @return array{
+ *     id: integer
+ * }
+ */
+function multilineReturnWithoutStatement() {
+}
+
+/**
+ * Multiline types cannot return void.
+ *
+ * @return array{
+ *     id: integer
+ * }
+ */
+function multilineReturnVoidStatement() {
+    return;
+}
+
+/**
+ * A multiline legacy array type must not be rewritten by the fixer.
+ *
+ * @return array(
+ *     int => string
+ * ) Description to preserve.
+ */
+function multilineReturnLegacyArray() {
+    return [];
+}

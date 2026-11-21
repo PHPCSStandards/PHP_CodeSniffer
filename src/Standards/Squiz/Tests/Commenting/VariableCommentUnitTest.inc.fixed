@@ -541,3 +541,28 @@ abstract class PHP84AbstractProperties {
      */
     abstract Type $hasDocblock {get;}
 }
+
+class MultilineVarTypes {
+    /**
+     * @var Array{
+     *     id: integer,
+     *     metadata: array{value: string|integer, marker: '}', legacy: array(integer => string)}
+     * } Description after the type.
+     */
+    public $shape;
+
+    /**
+     * @var Array<
+     *     integer,
+     *     string|integer
+     * >
+     */
+    public $generic;
+
+    /**
+     * @var array(
+     *     int => string
+     * ) Description to preserve.
+     */
+    public $legacyArray;
+}

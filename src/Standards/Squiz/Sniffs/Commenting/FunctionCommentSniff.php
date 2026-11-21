@@ -14,6 +14,7 @@ use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\FunctionCommentSniff as PEARFunctionCommentSniff;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\DocComment;
 
 class FunctionCommentSniff extends PEARFunctionCommentSniff
 {
@@ -82,13 +83,28 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                     return;
                 }
 
-                $returnType = $returnParts[1];
+                $returnType    = $returnParts[1];
+                $multilineType = DocComment::getMultilineType($phpcsFile, ($return + 2));
+                if ($multilineType !== null) {
+                    $returnType = $multilineType;
+                }
 
                 // Check return type (can be multiple, separated by '|').
-                $typeNames      = explode('|', $returnType);
+                $typeNames = explode('|', $returnType);
+                if ($multilineType !== null) {
+                    $typeNames = [$returnType];
+                }
+
                 $suggestedNames = [];
                 foreach ($typeNames as $typeName) {
-                    $suggestedName = Common::suggestType($typeName);
+                    // Type suggestions only understand the legacy array(...) syntax.
+                    // Do not interpret nested types inside shapes or generics as top-level types.
+                    if ($multilineType !== null && preg_match('/^array\(/i', $typeName) !== 1) {
+                        $suggestedName = $typeName;
+                    } else {
+                        $suggestedName = Common::suggestType($typeName);
+                    }
+
                     if (in_array($suggestedName, $suggestedNames, true) === false) {
                         $suggestedNames[] = $suggestedName;
                     }
@@ -101,7 +117,14 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                         $suggestedType,
                         $returnType,
                     ];
-                    $fix   = $phpcsFile->addFixableError($error, $return, 'InvalidReturn', $data);
+                    if ($multilineType !== null) {
+                        // Replacing the first line would corrupt the multi-line type.
+                        $phpcsFile->addError($error, $return, 'InvalidReturn', $data);
+                        $fix = false;
+                    } else {
+                        $fix = $phpcsFile->addFixableError($error, $return, 'InvalidReturn', $data);
+                    }
+
                     if ($fix === true) {
                         $replacement = $suggestedType;
                         if (empty($returnParts[2]) === false) {
@@ -302,33 +325,45 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                 continue;
             }
 
-            $type         = '';
-            $typeSpace    = 0;
-            $var          = '';
-            $varSpace     = 0;
-            $comment      = '';
-            $commentLines = [];
-            if ($tokens[($tag + 2)]['code'] === T_DOC_COMMENT_STRING) {
-                $matches = [];
-                preg_match('/((?:(?![$.]|&(?=\$)).)*)(?:((?:\.\.\.)?(?:\$|&)[^\s]+)(?:(\s+)(.*))?)?/', $tokens[($tag + 2)]['content'], $matches);
+            $type          = '';
+            $typeSpace     = 0;
+            $var           = '';
+            $varSpace      = 0;
+            $comment       = '';
+            $commentLines  = [];
+            $paramToken    = ($tag + 2);
+            $multiLineType = false;
+
+            // Any strings until the next tag belong to this parameter.
+            if (isset($tokens[$commentStart]['comment_tags'][($pos + 1)]) === true) {
+                $end = $tokens[$commentStart]['comment_tags'][($pos + 1)];
+            } else {
+                $end = $tokens[$commentStart]['comment_closer'];
+            }
+
+            if ($tokens[$paramToken]['code'] === T_DOC_COMMENT_STRING) {
+                $parsed        = $this->parseParamContent($phpcsFile, $paramToken, $end);
+                $matches       = $parsed['matches'];
+                $multiLineType = ($parsed['token'] !== $paramToken);
+                $paramToken    = $parsed['token'];
 
                 if (empty($matches) === false) {
                     $typeLen   = strlen($matches[1]);
                     $type      = trim($matches[1]);
                     $typeSpace = ($typeLen - strlen($type));
                     $typeLen   = strlen($type);
-                    if ($typeLen > $maxType) {
+                    if ($typeLen > $maxType && $multiLineType === false) {
                         $maxType = $typeLen;
                     }
                 }
 
-                if ($tokens[($tag + 2)]['content'][0] === '$') {
+                if ($tokens[$paramToken]['content'][0] === '$') {
                     $error = 'Missing parameter type';
                     $phpcsFile->addError($error, $tag, 'MissingParamType');
                 } elseif (isset($matches[2]) === true) {
                     $var    = $matches[2];
                     $varLen = strlen($var);
-                    if ($varLen > $maxVar) {
+                    if ($varLen > $maxVar && $multiLineType === false) {
                         $maxVar = $varLen;
                     }
 
@@ -337,18 +372,11 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                         $comment        = $matches[4];
                         $commentLines[] = [
                             'comment' => $comment,
-                            'token'   => ($tag + 2),
+                            'token'   => $paramToken,
                             'indent'  => $varSpace,
                         ];
 
-                        // Any strings until the next tag belong to this comment.
-                        if (isset($tokens[$commentStart]['comment_tags'][($pos + 1)]) === true) {
-                            $end = $tokens[$commentStart]['comment_tags'][($pos + 1)];
-                        } else {
-                            $end = $tokens[$commentStart]['comment_closer'];
-                        }
-
-                        for ($i = ($tag + 3); $i < $end; $i++) {
+                        for ($i = ($paramToken + 1); $i < $end; $i++) {
                             if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING) {
                                 $indent = 0;
                                 if ($tokens[($i - 1)]['code'] === T_DOC_COMMENT_WHITESPACE) {
@@ -378,13 +406,14 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
             }
 
             $params[] = [
-                'tag'          => $tag,
-                'type'         => $type,
-                'var'          => $var,
-                'comment'      => $comment,
-                'commentLines' => $commentLines,
-                'type_space'   => $typeSpace,
-                'var_space'    => $varSpace,
+                'tag'            => $tag,
+                'type'           => $type,
+                'var'            => $var,
+                'comment'        => $comment,
+                'commentLines'   => $commentLines,
+                'type_space'     => $typeSpace,
+                'var_space'      => $varSpace,
+                'multiline_type' => $multiLineType,
             ];
         }
 
@@ -515,7 +544,14 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                     $param['type'],
                 ];
 
-                $fix = $phpcsFile->addFixableError($error, $param['tag'], 'IncorrectParamVarName', $data);
+                if ($param['multiline_type'] === true) {
+                    // The fixer can't safely rewrite a type which spans multiple lines.
+                    $phpcsFile->addError($error, $param['tag'], 'IncorrectParamVarName', $data);
+                    $fix = false;
+                } else {
+                    $fix = $phpcsFile->addFixableError($error, $param['tag'], 'IncorrectParamVarName', $data);
+                }
+
                 if ($fix === true) {
                     $phpcsFile->fixer->beginChangeset();
 
@@ -556,7 +592,10 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
             $foundParams[] = $param['var'];
 
             // Check number of spaces after the type.
-            $this->checkSpacingAfterParamType($phpcsFile, $param, $maxType);
+            // The spacing of a multi-line type can't be aligned with the other parameters.
+            if ($param['multiline_type'] === false) {
+                $this->checkSpacingAfterParamType($phpcsFile, $param, $maxType);
+            }
 
             // Make sure the param name is correct.
             if (isset($realParams[$pos]) === true) {
@@ -611,7 +650,9 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
             }
 
             // Check number of spaces after the var name.
-            $this->checkSpacingAfterParamName($phpcsFile, $param, $maxVar);
+            if ($param['multiline_type'] === false) {
+                $this->checkSpacingAfterParamName($phpcsFile, $param, $maxVar);
+            }
 
             // Param comments must start with a capital letter and end with a full stop.
             if (preg_match('/^(\p{Ll}|\P{L})/u', $param['comment']) === 1) {

@@ -1194,3 +1194,96 @@ function doNotTruncateClassNamesContainingUnderscoresAtStartOfType() {
 function doNotTruncateClassNamesContainingUnderscoresInTheMiddelOfType() {
     return 0;
 }
+
+/**
+ * Issue PHPCSStandards/PHP_CodeSniffer#535: multi-line param types, like array shapes.
+ *
+ * @param array{
+ *     ud: string,
+ *     id: integer
+ * } $data Data to use
+ *         on multiple lines.
+ * @param integer $count The count.
+ * @param array<
+ *     integer,
+ *     string
+ * > $list A list.
+ *
+ * @return void
+ */
+function multiLineParamTypes(array $data, int $count, array $list) {
+}
+
+/**
+ * Issue PHPCSStandards/PHP_CodeSniffer#535: multi-line param types with errors.
+ *
+ * @param array{
+ *     ud: string
+ * } $data data to use
+ * @param array(
+ *     int => string
+ * ) $list A list.
+ * @param array{
+ *     ud: string
+ * }
+ *
+ * @return void
+ */
+function multiLineParamTypesWithErrors(string $data, array $list, array $other) {
+}
+
+/**
+ * Return a multiline array shape.
+ *
+ * @return Array{
+ *     id: integer,
+ *     metadata: array{value: string|integer, marker: '}', legacy: array(integer => string)}
+ * } Description after the type.
+ */
+function multilineReturnShape() {
+    return [];
+}
+
+/**
+ * Return a multiline generic type.
+ *
+ * @return Array<
+ *     integer,
+ *     string|integer
+ * >
+ */
+function multilineReturnGeneric() {
+    return [];
+}
+
+/**
+ * Multiline types still require a return statement.
+ *
+ * @return array{
+ *     id: integer
+ * }
+ */
+function multilineReturnWithoutStatement() {
+}
+
+/**
+ * Multiline types cannot return void.
+ *
+ * @return array{
+ *     id: integer
+ * }
+ */
+function multilineReturnVoidStatement() {
+    return;
+}
+
+/**
+ * A multiline legacy array type must not be rewritten by the fixer.
+ *
+ * @return array(
+ *     int => string
+ * ) Description to preserve.
+ */
+function multilineReturnLegacyArray() {
+    return [];
+}
