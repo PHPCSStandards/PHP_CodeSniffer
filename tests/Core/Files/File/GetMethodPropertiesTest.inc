@@ -221,6 +221,10 @@ $closure = function () use /*comment*/ ($a): Type {};
 /* testClosureWithUseMultiParamWithReturnType */
 $closure = function () use ($a, &$b, $c, $d, $e, $f, $g): ?array {};
 
+/* testMissingColonParseError */
+// Intentional parse error.
+$closure = function () null { return null; };
+
 /* testArrowFunctionLiveCoding */
 // Intentional parse error. This has to be the last test in the file.
 $fn = fn
