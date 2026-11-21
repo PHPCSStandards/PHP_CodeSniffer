@@ -19,6 +19,14 @@ class DisallowComparisonAssignmentSniff implements Sniff
 
 
     /**
+     * If true, no error will be thrown when T_INLINE_THEN is encountered.
+     *
+     * @var boolean
+     */
+    public $allowTernaryOperatorResultAssignment = false;
+
+
+    /**
      * Returns an array of tokens this test wants to listen for.
      *
      * @return array<int|string>
@@ -86,9 +94,15 @@ class DisallowComparisonAssignmentSniff implements Sniff
 
         $endStatement = $phpcsFile->findEndOfStatement($stackPtr);
         for ($i = ($stackPtr + 1); $i < $endStatement; $i++) {
-            if ((isset(Tokens::COMPARISON_TOKENS[$tokens[$i]['code']]) === true
-                && $tokens[$i]['code'] !== T_COALESCE)
-                || $tokens[$i]['code'] === T_INLINE_THEN
+            if (
+                (
+                    isset(Tokens::COMPARISON_TOKENS[$tokens[$i]['code']]) === true
+                    && $tokens[$i]['code'] !== T_COALESCE
+                )
+                || (
+                    $tokens[$i]['code'] === T_INLINE_THEN
+                    && $this->allowTernaryOperatorResultAssignment === true
+                )
             ) {
                 $error = 'The value of a comparison must not be assigned to a variable';
                 $phpcsFile->addError($error, $stackPtr, 'AssignedComparison');
