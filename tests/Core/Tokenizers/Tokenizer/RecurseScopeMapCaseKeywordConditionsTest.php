@@ -10,6 +10,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizers\Tokenizer;
 
+use PHP_CodeSniffer\Util\Tokens;
 use PHP_CodeSniffer\Tests\Core\Tokenizers\AbstractTokenizerTestCase;
 
 final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTestCase
@@ -38,6 +39,17 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
         $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
         $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');
         $this->assertArrayNotHasKey('scope_closer', $tokenArray, 'Scope closer is set');
+
+        // Also make sure that the name for the enum case does not have conditions set, even when it is a keyword.
+        $nextNonEmpty = $this->phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($enumCase + 1), null, true);
+        $tokenArray   = $tokens[$nextNonEmpty];
+
+        // Make sure we're looking at the right token.
+        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
+
+        $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
+        $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');
+        $this->assertArrayNotHasKey('scope_closer', $tokenArray, 'Scope closer is set');
     }
 
 
@@ -62,6 +74,14 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
             'enum case, nested in alt syntax switch 2'                   => ['/* testEnumCaseNestedInAltSyntaxSwitch2 */'],
             'enum case, nested in switch 1'                              => ['/* testEnumCaseNestedInSwitch1 */'],
             'enum case, nested in switch 2'                              => ['/* testEnumCaseNestedInSwitch2 */'],
+            'enum case, "interface" as case name'                        => ['/* testKeywordAsEnumCaseNameShouldBeString1 */'],
+            'enum case, "trait" as case name'                            => ['/* testKeywordAsEnumCaseNameShouldBeString2 */'],
+            'enum case, "enum" as case name'                             => ['/* testKeywordAsEnumCaseNameShouldBeString3 */'],
+            'enum case, "function" as case name'                         => ['/* testKeywordAsEnumCaseNameShouldBeString4 */'],
+            'enum case, "false" as case name'                            => ['/* testKeywordAsEnumCaseNameShouldBeString5 */'],
+            'enum case, "default" as case name'                          => ['/* testKeywordAsEnumCaseNameShouldBeString6 */'],
+            'enum case, "array" as case name'                            => ['/* testKeywordAsEnumCaseNameShouldBeString7 */'],
+            'enum case, "exit" as case name'                             => ['/* testKeywordAsEnumCaseNameShouldBeString8 */'],
 
         ];
     }
@@ -262,53 +282,6 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
                     'scope_closer' => T_GOTO,
                 ],
             ],
-        ];
-    }
-
-
-    /**
-     * Test that a "case" keyword which is not a switch or enum case, does not get the scope indexes.
-     *
-     * @param string $testMarker The comment which prefaces the target token in the test file.
-     *
-     * @dataProvider dataKeywordAsEnumCaseNameShouldBeString
-     * @covers       PHP_CodeSniffer\Tokenizers\Tokenizer::recurseScopeMap
-     *
-     * @return void
-     */
-    public function testKeywordAsEnumCaseNameShouldBeString($testMarker)
-    {
-        $tokens       = $this->phpcsFile->getTokens();
-        $enumCaseName = $this->getTargetToken($testMarker, [T_STRING, T_INTERFACE, T_TRAIT, T_ENUM, T_FUNCTION, T_FALSE, T_DEFAULT, T_ARRAY]);
-        $tokenArray   = $tokens[$enumCaseName];
-
-        // Make sure we're looking at the right token.
-        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
-
-        $this->assertArrayNotHasKey('scope_condition', $tokenArray, 'Scope condition is set');
-        $this->assertArrayNotHasKey('scope_opener', $tokenArray, 'Scope opener is set');
-        $this->assertArrayNotHasKey('scope_closer', $tokenArray, 'Scope closer is set');
-    }
-
-
-    /**
-     * Data provider.
-     *
-     * @see testKeywordAsEnumCaseNameShouldBeString()
-     *
-     * @return array<string, array<string>>
-     */
-    public static function dataKeywordAsEnumCaseNameShouldBeString()
-    {
-        return [
-            '"interface" as case name' => ['/* testKeywordAsEnumCaseNameShouldBeString1 */'],
-            '"trait" as case name'     => ['/* testKeywordAsEnumCaseNameShouldBeString2 */'],
-            '"enum" as case name'      => ['/* testKeywordAsEnumCaseNameShouldBeString3 */'],
-            '"function" as case name'  => ['/* testKeywordAsEnumCaseNameShouldBeString4 */'],
-            '"false" as case name'     => ['/* testKeywordAsEnumCaseNameShouldBeString5 */'],
-            '"default" as case name'   => ['/* testKeywordAsEnumCaseNameShouldBeString6 */'],
-            '"array" as case name'     => ['/* testKeywordAsEnumCaseNameShouldBeString7 */'],
-            '"exit" as case name'      => ['/* testKeywordAsEnumCaseNameShouldBeString8 */'],
         ];
     }
 }
