@@ -38,8 +38,14 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Permissions should be configured at the job level.
+permissions: {}
+
 jobs:
   build:
+    permissions:
+      contents: read # To clone the repo.
+
     strategy:
       matrix:
         # Deliberately missing PHP 8.0 as that PHAR is build and used in the test workflow.
