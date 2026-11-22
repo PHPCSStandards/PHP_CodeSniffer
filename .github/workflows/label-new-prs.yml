@@ -16,8 +16,14 @@ on:
       - '.github/workflows/label-new-prs.yml'
       - '.github/labeler.yml'
 
+# Permissions should be configured at the job level.
+permissions: {}
+
 jobs:
   label-new-prs:
+    permissions:
+      pull-requests: write # To add PR labels.
+
     if: github.repository_owner == 'PHPCSStandards' && github.event_name == 'pull_request_target'
 
     name: Add labels to new PRs
@@ -30,6 +36,9 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
   validate-labeler-workflow:
+    permissions:
+      contents: read # To clone the repo.
+
     if: github.repository_owner == 'PHPCSStandards' && github.event_name == 'pull_request' && github.event.pull_request.merged == false
 
     name: Validate changes to Labeler logic

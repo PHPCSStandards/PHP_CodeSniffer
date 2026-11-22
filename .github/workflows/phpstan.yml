@@ -17,7 +17,13 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Permissions should be configured at the job level.
+permissions: {}
+
 jobs:
   phpstan:
+    permissions:
+      contents: read # To clone the repo.
+
     name: "PHPStan"
     uses: PHPCSStandards/.github/.github/workflows/reusable-phpstan.yml@5a8a6fcf1ac33b3ec6d7b826c0f319eaa83581ff # v1.3.1

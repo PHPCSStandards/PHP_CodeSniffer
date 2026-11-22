@@ -11,8 +11,14 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Permissions should be configured at the job level.
+permissions: {}
+
 jobs:
   markdownlint:
+    permissions:
+      contents: read # To clone the repo.
+
     # Don't run the cronjob in this workflow on forks.
     if: ${{ github.event.repository.fork == false }}
 
@@ -20,6 +26,9 @@ jobs:
     uses: PHPCSStandards/.github/.github/workflows/reusable-markdownlint.yml@5a8a6fcf1ac33b3ec6d7b826c0f319eaa83581ff # v1.3.1
 
   remark:
+    permissions:
+      contents: read # To clone the repo.
+
     # Don't run the cronjob in this workflow on forks.
     if: ${{ github.event.repository.fork == false }}
 
