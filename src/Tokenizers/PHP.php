@@ -1137,7 +1137,8 @@ class PHP extends Tokenizer
                 $content = $token[0];
                 $i       = ($stackPtr + 1);
 
-                if (is_array($tokens[$i]) === true
+                if ($i < $numTokens
+                    && is_array($tokens[$i]) === true
                     && $tokens[$i][0] === T_WHITESPACE
                     && strpos($tokens[$i][1], "\n") === false
                     && strpos($tokens[$i][1], "\r") === false
@@ -1146,14 +1147,16 @@ class PHP extends Tokenizer
                     ++$i;
                 }
 
-                if (is_array($tokens[$i]) === true
+                if ($i < $numTokens
+                    && is_array($tokens[$i]) === true
                     && $tokens[$i][0] === T_STRING
                     && strtolower($tokens[$i][1]) === 'void'
                 ) {
                     $content .= $tokens[$i][1];
                     ++$i;
 
-                    if (is_array($tokens[$i]) === true
+                    if ($i < $numTokens
+                        && is_array($tokens[$i]) === true
                         && $tokens[$i][0] === T_WHITESPACE
                         && strpos($tokens[$i][1], "\n") === false
                         && strpos($tokens[$i][1], "\r") === false
@@ -1162,7 +1165,7 @@ class PHP extends Tokenizer
                         ++$i;
                     }
 
-                    if ($tokens[$i][0] === ')') {
+                    if ($i < $numTokens && $tokens[$i][0] === ')') {
                         $content .= $tokens[$i][0];
 
                         $finalTokens[$newStackPtr] = [
