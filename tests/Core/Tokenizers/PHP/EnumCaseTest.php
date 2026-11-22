@@ -10,6 +10,7 @@
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizers\PHP;
 
+use PHP_CodeSniffer\Util\Tokens;
 use PHP_CodeSniffer\Tests\Core\Tokenizers\AbstractTokenizerTestCase;
 
 final class EnumCaseTest extends AbstractTokenizerTestCase
@@ -34,6 +35,13 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
 
         $this->assertSame(T_ENUM_CASE, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_ENUM_CASE (code)');
         $this->assertSame('T_ENUM_CASE', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_ENUM_CASE (type)');
+
+        // Also make sure that the name for the enum case is always tokenized as T_STRING, even when it is a keyword.
+        $nextNonEmpty = $this->phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($enumCase + 1), null, true);
+        $tokenArray   = $tokens[$nextNonEmpty];
+
+        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
+        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (type)');
     }
 
 
@@ -58,6 +66,14 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
             'enum case, nested in alt syntax switch 2'                   => ['/* testEnumCaseNestedInAltSyntaxSwitch2 */'],
             'enum case, nested in switch 1'                              => ['/* testEnumCaseNestedInSwitch1 */'],
             'enum case, nested in switch 2'                              => ['/* testEnumCaseNestedInSwitch2 */'],
+            'enum case, "interface" as case name'                        => ['/* testKeywordAsEnumCaseNameShouldBeString1 */'],
+            'enum case, "trait" as case name'                            => ['/* testKeywordAsEnumCaseNameShouldBeString2 */'],
+            'enum case, "enum" as case name'                             => ['/* testKeywordAsEnumCaseNameShouldBeString3 */'],
+            'enum case, "function" as case name'                         => ['/* testKeywordAsEnumCaseNameShouldBeString4 */'],
+            'enum case, "false" as case name'                            => ['/* testKeywordAsEnumCaseNameShouldBeString5 */'],
+            'enum case, "default" as case name'                          => ['/* testKeywordAsEnumCaseNameShouldBeString6 */'],
+            'enum case, "array" as case name'                            => ['/* testKeywordAsEnumCaseNameShouldBeString7 */'],
+            'enum case, "exit" as case name'                             => ['/* testKeywordAsEnumCaseNameShouldBeString8 */'],
         ];
     }
 
@@ -106,49 +122,6 @@ final class EnumCaseTest extends AbstractTokenizerTestCase
             'alternative syntax switch case, semicolon condition end' => ['/* testCaseInAlternativeSwitchWithSemicolonIsNotEnumCase */'],
             'switch case, body in curlies declares enum'              => ['/* testCaseInSwitchWhenCreatingEnumInSwitch1 */'],
             'switch case, body after semicolon declares enum'         => ['/* testCaseInSwitchWhenCreatingEnumInSwitch2 */'],
-        ];
-    }
-
-
-    /**
-     * Test that "case" that is not enum case is still tokenized as `T_CASE`.
-     *
-     * @param string $testMarker The comment which prefaces the target token in the test file.
-     *
-     * @dataProvider dataKeywordAsEnumCaseNameShouldBeString
-     * @covers       PHP_CodeSniffer\Tokenizers\PHP::tokenize
-     *
-     * @return void
-     */
-    public function testKeywordAsEnumCaseNameShouldBeString($testMarker)
-    {
-        $tokens       = $this->phpcsFile->getTokens();
-        $enumCaseName = $this->getTargetToken($testMarker, [T_STRING, T_INTERFACE, T_TRAIT, T_ENUM, T_FUNCTION, T_FALSE, T_DEFAULT, T_ARRAY]);
-        $tokenArray   = $tokens[$enumCaseName];
-
-        $this->assertSame(T_STRING, $tokenArray['code'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (code)');
-        $this->assertSame('T_STRING', $tokenArray['type'], 'Token tokenized as ' . $tokenArray['type'] . ', not T_STRING (type)');
-    }
-
-
-    /**
-     * Data provider.
-     *
-     * @see testKeywordAsEnumCaseNameShouldBeString()
-     *
-     * @return array<string, array<string>>
-     */
-    public static function dataKeywordAsEnumCaseNameShouldBeString()
-    {
-        return [
-            '"interface" as case name' => ['/* testKeywordAsEnumCaseNameShouldBeString1 */'],
-            '"trait" as case name'     => ['/* testKeywordAsEnumCaseNameShouldBeString2 */'],
-            '"enum" as case name'      => ['/* testKeywordAsEnumCaseNameShouldBeString3 */'],
-            '"function" as case name'  => ['/* testKeywordAsEnumCaseNameShouldBeString4 */'],
-            '"false" as case name'     => ['/* testKeywordAsEnumCaseNameShouldBeString5 */'],
-            '"default" as case name'   => ['/* testKeywordAsEnumCaseNameShouldBeString6 */'],
-            '"array" as case name'     => ['/* testKeywordAsEnumCaseNameShouldBeString7 */'],
-            '"exit" as case name'      => ['/* testKeywordAsEnumCaseNameShouldBeString8 */'],
         ];
     }
 }
