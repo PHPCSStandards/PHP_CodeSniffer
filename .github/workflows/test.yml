@@ -52,22 +52,22 @@ jobs:
       #   code conditions.
       matrix:
         os: ['ubuntu-latest', 'windows-latest']
-        php: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5', '8.6']
+        php: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5', '8.6', '8.7']
         custom_ini: [false]
 
         include:
           # Skip test runs on builds which are also run in the coverage job.
           - php: '7.2'
             skip_tests: true
-          - php: '8.5'
+          - php: '8.6'
             skip_tests: true
 
           # Run a couple of builds with custom extensions to allow for testing ini handling within PHPCS.
           # Ref: https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/416
-          - php: '7.3'
+          - php: '7.4'
             os: 'ubuntu-latest'
             extensions: ':mysqli' # Run with mysqli disabled.
-          - php: '8.2'
+          - php: '8.3'
             os: 'ubuntu-latest'
             extensions: ':mysqli' # Run with mysqli disabled.
 
@@ -90,14 +90,14 @@ jobs:
           - php: '7.4'
             os: 'ubuntu-latest'
             custom_ini: true
-          - php: '8.1'
+          - php: '8.2'
             os: 'ubuntu-latest'
             custom_ini: true
-          - php: '8.3'
+          - php: '8.4'
             os: 'ubuntu-latest'
             custom_ini: true
 
-    continue-on-error: ${{ matrix.php == '8.6' }}
+    continue-on-error: ${{ matrix.php == '8.7' }}
 
     name: >
       PHP: ${{ matrix.php }}${{ matrix.custom_ini && ' with custom ini settings' || '' }}
@@ -211,7 +211,7 @@ jobs:
       - name: Install Composer dependencies
         uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
         with:
-          composer-options: ${{ matrix.php == '8.6' && '--ignore-platform-req=php+' || '' }}
+          composer-options: ${{ matrix.php == '8.7' && '--ignore-platform-req=php+' || '' }}
           custom-cache-suffix: $(date -u "+%Y-%m")
 
       - name: Grab PHPUnit version
@@ -243,14 +243,14 @@ jobs:
         run: php "vendor/bin/phpunit" -c ${{ steps.phpunit_config.outputs.FILE }} --no-coverage
 
       # Do one test run against the complete test suite in CBF mode to ensure all tests can run in CBF mode.
-      - name: 'PHPUnit: run the full test suite without code coverage in CBF mode (PHP 8.4 only)'
-        if: ${{ matrix.php == '8.4' }}
+      - name: 'PHPUnit: run the full test suite without code coverage in CBF mode (PHP 8.5 only)'
+        if: ${{ matrix.php == '8.5' }}
         run: php "vendor/bin/phpunit" -c ${{ steps.phpunit_config.outputs.FILE }} --exclude-group nothing --no-coverage
         env:
           PHP_CODESNIFFER_CBF: '1'
 
       - name: 'PHPUnit: run select tests in CBF mode'
-        if: ${{ matrix.skip_tests != true && matrix.php != '8.4' }}
+        if: ${{ matrix.skip_tests != true && matrix.php != '8.5' }}
         run: >
           php "vendor/bin/phpunit" -c ${{ steps.phpunit_config.outputs.FILE }} --no-coverage
           --group CBF --exclude-group nothing
@@ -280,7 +280,7 @@ jobs:
     strategy:
       matrix:
         os: ['ubuntu-latest', 'windows-latest']
-        # Note: we can only run code coverage builds against PHP 7.2 and PHP 8.5 or higher:
+        # Note: we can only run code coverage builds against PHP 7.2 and PHP 8.6 or higher:
         # - PHP 7.2 will work as it uses PHPUnit 8, which doesn't use PHP Parser yet.
         # - As of PHPUnit 9.3 (PHP 7.3+), PHPUnit started using PHP Parser for code coverage, and PHP Parser
         #   also polyfills tokens, but to different (integer) values.
@@ -288,14 +288,14 @@ jobs:
         #   non-integer values for polyfilled tokens.... _sigh_.
         # - So, aside from PHP 7.2, we can only run code coverage on the last PHP version (or higher)
         #   which added a new token, which is polyfilled by both.
-        #   At the time of writing, this means PHP 8.5 or higher.
-        php: ['7.2', '8.5']
+        #   At the time of writing, this means PHP 8.6 or higher.
+        php: ['7.2', '8.6']
         custom_ini: [false]
 
         include:
           # Also run one coverage build with custom ini settings for testing the DisallowShortOpenTag sniff.
           # Also run with a disabled extension for testing the handling of unsettable ini settings by PHPCS.
-          - php: '8.5'
+          - php: '8.6'
             os: 'ubuntu-latest'
             custom_ini: true
             extensions: ':mysqli' # Run with mysqli disabled.
