@@ -45,6 +45,8 @@ jobs:
   build:
     permissions:
       contents: read # To clone the repo.
+      attestations: write # To persist the attestation.
+      id-token: write # To mint the OIDC token necessary to request a Sigstore signing certificate.
 
     strategy:
       matrix:
