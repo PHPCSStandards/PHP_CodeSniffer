@@ -203,6 +203,9 @@ jobs:
           format: gcc
 
   find-token-properties:
+    permissions:
+      contents: read # To clone the repo.
+
     # The properties in the Tokens class have been deprecated.
     # The code in this repository should always use the constants instead.
     name: 'Find use of Tokens properties'
