@@ -10,8 +10,14 @@ on:
       - closed
       - review_requested
 
+# Permissions should be configured at the job level.
+permissions: {}
+
 jobs:
   on-issue-close:
+    permissions:
+      issues: write # To remove issue labels.
+
     if: github.repository_owner == 'PHPCSStandards' && github.event.issue.state == 'closed'
 
     name: Clean up labels on issue close
@@ -30,6 +36,9 @@ jobs:
             Status: triage
 
   on-pr-review-request:
+    permissions:
+      pull-requests: write # To remove PR labels.
+
     if: github.repository_owner == 'PHPCSStandards' && github.event.action == 'review_requested'
 
     name: "Clean up labels on PR (re-)review request"
@@ -44,6 +53,9 @@ jobs:
             Status: awaiting feedback
 
   on-pr-merge:
+    permissions:
+      pull-requests: write # To remove PR labels.
+
     if: github.repository_owner == 'PHPCSStandards' && github.event.pull_request.merged == true
 
     name: Clean up labels on PR merge
@@ -64,6 +76,9 @@ jobs:
             Status: waiting for opinions
 
   on-pr-close:
+    permissions:
+      pull-requests: write # To remove PR labels.
+
     if: ${{ github.repository_owner == 'PHPCSStandards'
       && github.event_name == 'pull_request_target'
       && github.event.action == 'closed'

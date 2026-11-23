@@ -15,8 +15,14 @@ on:
   # Allow manually triggering the workflow.
   workflow_dispatch:
 
+# Permissions should be configured at the job level.
+permissions: {}
+
 jobs:
   bash-tests:
+    permissions:
+      contents: read # To clone the repo.
+
     # Cancels all previous runs of this particular job for the same branch that have not yet completed.
     concurrency:
       # The concurrency group contains the workflow name, job name, job index and the branch name.
