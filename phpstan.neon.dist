@@ -1,7 +1,7 @@
 parameters:
     phpVersion:
         min: 70200
-        max: 80499
+        max: 80699
     level: 0
     paths:
         - requirements.php
