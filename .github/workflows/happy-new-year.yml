@@ -24,8 +24,15 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Permissions should be configured at the job level.
+permissions: {}
+
 jobs:
   update-year-in-test:
+    permissions:
+      contents: write # To clone the repo and commit the workflow result.
+      pull-requests: write # To create a PR with the changes.
+
     # Don't run the cron job on forks.
     if: ${{ github.event_name != 'schedule' || github.event.repository.fork == false }}
 

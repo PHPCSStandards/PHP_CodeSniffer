@@ -38,6 +38,9 @@ jobs:
       createAttestations: ${{ github.ref_type == 'tag' }}
 
   test:
+    permissions:
+      contents: read # To clone the repo.
+
     # Cancels all previous runs of this particular job for the same branch that have not yet completed.
     concurrency:
       # The concurrency group contains the workflow name, job name, job index and the branch name.
@@ -277,6 +280,9 @@ jobs:
         run: php phpcs.phar
 
   coverage:
+    permissions:
+      contents: read # To clone the repo.
+
     # Explicitly *NOT* setting "concurrency" for this job to allow for monitoring code coverage for all merges.
 
     strategy:

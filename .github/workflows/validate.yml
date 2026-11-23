@@ -13,8 +13,14 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Permissions should be configured at the job level.
+permissions: {}
+
 jobs:
   phpcs:
+    permissions:
+      contents: read # To clone the repo.
+
     name: Check PHP code style
     runs-on: ubuntu-latest
 
@@ -40,6 +46,9 @@ jobs:
         run: cs2pr ./phpcs-report.xml
 
   checkxml:
+    permissions:
+      contents: read # To clone the repo.
+
     strategy:
       fail-fast: false
       matrix:
@@ -89,6 +98,9 @@ jobs:
           xsd-url: ${{ matrix.xsd-url }}
 
   xml-cs:
+    permissions:
+      contents: read # To clone the repo.
+
     strategy:
       fail-fast: false
       matrix:
@@ -143,20 +155,32 @@ jobs:
         run: diff -B ${{ matrix.file }} <(xmllint --format "${{ matrix.file }}")
 
   yamllint:
+    permissions:
+      contents: read # To clone the repo.
+
     name: 'Lint Yaml'
     uses: PHPCSStandards/.github/.github/workflows/reusable-yamllint.yml@5a8a6fcf1ac33b3ec6d7b826c0f319eaa83581ff # v1.3.1
     with:
       strict: true
 
   markdownlint:
+    permissions:
+      contents: read # To clone the repo.
+
     name: 'Lint Markdown'
     uses: PHPCSStandards/.github/.github/workflows/reusable-markdownlint.yml@5a8a6fcf1ac33b3ec6d7b826c0f319eaa83581ff # v1.3.1
 
   remark:
+    permissions:
+      contents: read # To clone the repo.
+
     name: 'QA Markdown'
     uses: PHPCSStandards/.github/.github/workflows/reusable-remark.yml@5a8a6fcf1ac33b3ec6d7b826c0f319eaa83581ff # v1.3.1
 
   shellcheck:
+    permissions:
+      contents: read # To clone the repo.
+
     name: 'ShellCheck'
     runs-on: ubuntu-latest
 
