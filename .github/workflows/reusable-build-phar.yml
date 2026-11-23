@@ -24,8 +24,16 @@ on:
         required: false
         default: false
 
+# Permissions should be configured at the job level.
+permissions: {}
+
 jobs:
   build:
+    permissions:
+      contents: read # To clone the repo.
+      attestations: write # To persist the attestation.
+      id-token: write # To mint the OIDC token necessary to request a Sigstore signing certificate.
+
     name: "Build Phar on PHP: ${{ inputs.phpVersion }}"
     runs-on: ubuntu-latest
 
