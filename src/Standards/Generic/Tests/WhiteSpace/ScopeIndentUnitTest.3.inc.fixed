@@ -32,3 +32,5 @@ function test() {
     yield
     from [ 3, 4 ];
 }
+
+// phpcs:set Generic.WhiteSpace.ScopeIndent exact false
