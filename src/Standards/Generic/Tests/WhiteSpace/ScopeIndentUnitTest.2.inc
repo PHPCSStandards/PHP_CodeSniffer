@@ -1648,7 +1648,6 @@ $result = array_map(
 	$data
 );
 
-/* ADD NEW TESTS ABOVE THIS LINE AND MAKE SURE THAT THE 1 (space-based) AND 2 (tab-based) FILES ARE IN SYNC! */
 ?>
 
 	 <?php if (true) : ?>
@@ -1663,23 +1662,4 @@ $result = array_map(
 
 $a = 1;
 
-/*
-$a = array(
-	*/
-);
-
-return [
-	'lor' =>
-		<<<'INTRO'
-		lorem ipsum
-		INTRO,
-	'em' => [
-		[
-			'',
-		],
-	],
-	'abc' => [
-		'a' => 'wop wop',
-		'b' => 'ola ola.',
-	],
-];
+/* ADD NEW TESTS ABOVE THIS LINE AND MAKE SURE THAT THE .1.inc (space-based) AND .2.inc (tab-based) FILES ARE IN SYNC! */
