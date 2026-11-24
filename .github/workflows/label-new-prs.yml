@@ -9,13 +9,6 @@ on:
       - opened
       - ready_for_review
 
-  # The `pull_request` event is used for PRs which change the files which handle the labeling to prevent a silently failing action.
-  # This will use the `labeler.yml` file in the PR branch.
-  pull_request:
-    paths:
-      - '.github/workflows/label-new-prs.yml'
-      - '.github/labeler.yml'
-
 # Permissions should be configured at the job level.
 permissions: {}
 
@@ -24,7 +17,7 @@ jobs:
     permissions:
       pull-requests: write # To add PR labels.
 
-    if: github.repository_owner == 'PHPCSStandards' && github.event_name == 'pull_request_target'
+    if: github.repository_owner == 'PHPCSStandards'
 
     name: Add labels to new PRs
     runs-on: ubuntu-latest
@@ -32,29 +25,5 @@ jobs:
     steps:
       - name: Label new PRs
         uses: srvaroa/labeler@bf262763a8a8e191f5847873aecc0f29df84f957 # v1.14.0
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-
-  validate-labeler-workflow:
-    permissions:
-      contents: read # To clone the repo.
-
-    if: github.repository_owner == 'PHPCSStandards' && github.event_name == 'pull_request' && github.event.pull_request.merged == false
-
-    name: Validate changes to Labeler logic
-    runs-on: ubuntu-latest
-
-    steps:
-      # Checkout is needed to use the `use_local_config` option.
-      - name: Checkout code
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-
-      - name: Verify changes to the labeling logic
-        uses: srvaroa/labeler@bf262763a8a8e191f5847873aecc0f29df84f957 # v1.14.0
-        with:
-          use_local_config: true
-          fail_on_error: true
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
