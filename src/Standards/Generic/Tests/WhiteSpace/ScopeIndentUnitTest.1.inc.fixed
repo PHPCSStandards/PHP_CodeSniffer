@@ -1683,5 +1683,3 @@ return [
         'b' => 'ola ola.',
     ],
 ];
-
-echo ""
