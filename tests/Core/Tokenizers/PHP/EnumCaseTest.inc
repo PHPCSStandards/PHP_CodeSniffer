@@ -131,3 +131,15 @@ enum Foo: string {
     /* testKeywordAsEnumCaseNameShouldBeString8 */
     case EXIT = 'exit';
 }
+
+enum NodeKind: string
+{
+    /* testEnumCaseNamedSwitch */
+    case Switch = 'Switch';
+    /* testEnumCaseNamedSwitchBody */
+    case SwitchBody = 'SwitchBody';
+    /* testEnumCaseNamedSwitchBraceDelimitedBody */
+    case SwitchBraceDelimitedBody = 'SwitchBraceDelimitedBody';
+    /* testEnumCaseNamedDeclare */
+    case Declare = 'Declare';
+}
