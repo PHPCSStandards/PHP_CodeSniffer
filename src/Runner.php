@@ -52,6 +52,13 @@ class Runner
      */
     public $reporter = null;
 
+    /**
+     * Memory reserved for the shutdown function to use if we run out of memory.
+     *
+     * @var string|null
+     */
+    private static $reservedMemory = null;
+
 
     /**
      * Run the PHPCS script.
@@ -870,6 +877,10 @@ class Runner
     private function registerOutOfMemoryShutdownMessage(string $command)
     {
         // Allocate all needed memory beforehand as much as possible.
+        if (self::$reservedMemory === null) {
+            self::$reservedMemory = str_repeat('x', 32768);
+        }
+
         $errorMsg  = PHP_EOL . 'The PHP_CodeSniffer "%1$s" command ran out of memory.' . PHP_EOL;
         $errorMsg .= 'Either raise the "memory_limit" of PHP in the php.ini file or raise the memory limit at runtime' . PHP_EOL;
         $errorMsg .= 'using "%1$s -d memory_limit=512M" (replace 512M with the desired memory limit).' . PHP_EOL;
@@ -879,6 +890,9 @@ class Runner
             static function () use (
                 $errorMsg
             ) {
+                // Free memory so we can write the error message to STDERR.
+                self::$reservedMemory = null;
+
                 $errorArray = error_get_last();
                 if (is_array($errorArray) === true && strpos($errorArray['message'], 'Allowed memory size of') !== false) {
                     fwrite(STDERR, $errorMsg);
