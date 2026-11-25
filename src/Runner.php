@@ -870,19 +870,17 @@ class Runner
     private function registerOutOfMemoryShutdownMessage(string $command)
     {
         // Allocate all needed memory beforehand as much as possible.
-        $errorMsg    = PHP_EOL . 'The PHP_CodeSniffer "%1$s" command ran out of memory.' . PHP_EOL;
-        $errorMsg   .= 'Either raise the "memory_limit" of PHP in the php.ini file or raise the memory limit at runtime' . PHP_EOL;
-        $errorMsg   .= 'using "%1$s -d memory_limit=512M" (replace 512M with the desired memory limit).' . PHP_EOL;
-        $errorMsg    = sprintf($errorMsg, $command);
-        $memoryError = 'Allowed memory size of';
+        $errorMsg  = PHP_EOL . 'The PHP_CodeSniffer "%1$s" command ran out of memory.' . PHP_EOL;
+        $errorMsg .= 'Either raise the "memory_limit" of PHP in the php.ini file or raise the memory limit at runtime' . PHP_EOL;
+        $errorMsg .= 'using "%1$s -d memory_limit=512M" (replace 512M with the desired memory limit).' . PHP_EOL;
+        $errorMsg  = sprintf($errorMsg, $command);
 
         register_shutdown_function(
             static function () use (
-                $errorMsg,
-                $memoryError
+                $errorMsg
             ) {
                 $errorArray = error_get_last();
-                if (is_array($errorArray) === true && strpos($errorArray['message'], $memoryError) !== false) {
+                if (is_array($errorArray) === true && strpos($errorArray['message'], 'Allowed memory size of') !== false) {
                     fwrite(STDERR, $errorMsg);
                 }
             }
