@@ -1366,8 +1366,19 @@ class PHP extends Tokenizer
                     }
 
                     if (($scope === 0 || $scope === 1) && $tokens[$i][0] === T_SWITCH) {
-                        $switchCases[$stackPtr] = true;
-                        break;
+                        // T_SWITCH can also be an enum case name. Only treat it as a switch statement when followed by an opening parenthesis.
+                        for ($x = ($i + 1); $x < $numTokens; $x++) {
+                            if (is_array($tokens[$x]) === false
+                                || isset(Tokens::EMPTY_TOKENS[$tokens[$x][0]]) === false
+                            ) {
+                                break;
+                            }
+                        }
+
+                        if ($x < $numTokens && $tokens[$x] === '(') {
+                            $switchCases[$stackPtr] = true;
+                            break;
+                        }
                     }
 
                     if ($scope !== 0) {
