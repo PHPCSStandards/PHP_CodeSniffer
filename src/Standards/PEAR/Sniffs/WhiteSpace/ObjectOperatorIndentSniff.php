@@ -127,7 +127,10 @@ class ObjectOperatorIndentSniff implements Sniff
                 $conditions = $tokens[$next]['conditions'];
             }
 
-            if ($origBrackets === $brackets && $origConditions === $conditions) {
+            if ($origBrackets === $brackets
+                && $origConditions === $conditions
+                && $this->isInArrayLiteralAfter($phpcsFile, $stackPtr, $next) === false
+            ) {
                 // Make sure it starts a line, otherwise don't check indent.
                 $prev   = $phpcsFile->findPrevious(T_WHITESPACE, ($next - 1), $stackPtr, true);
                 $indent = $tokens[($next - 1)];
@@ -194,5 +197,40 @@ class ObjectOperatorIndentSniff implements Sniff
                 $end
             );
         }
+    }
+
+
+    /**
+     * Determine whether an object operator is inside an array literal which was opened after the start of the chain.
+     *
+     * Such an object operator belongs to a separate expression (for instance, an array value being assigned
+     * to a property: `$bar->prop = [ $foo->first()->second() ];`) and should not be checked as part of the chain.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param int                         $stackPtr  The position of the first object operator in the chain.
+     * @param int                         $next      The position of the object operator being checked.
+     *
+     * @return bool
+     */
+    private function isInArrayLiteralAfter(File $phpcsFile, int $stackPtr, int $next)
+    {
+        $tokens = $phpcsFile->getTokens();
+
+        for ($i = ($next - 1); $i > $stackPtr; $i--) {
+            if (($tokens[$i]['code'] === T_CLOSE_SHORT_ARRAY || $tokens[$i]['code'] === T_CLOSE_SQUARE_BRACKET)
+                && isset($tokens[$i]['bracket_opener']) === true
+            ) {
+                // Skip over a fully closed array access or literal.
+                $i = $tokens[$i]['bracket_opener'];
+                continue;
+            }
+
+            if ($tokens[$i]['code'] === T_OPEN_SHORT_ARRAY || $tokens[$i]['code'] === T_OPEN_SQUARE_BRACKET) {
+                // This bracket is still open at the position of the object operator.
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -151,3 +151,9 @@ $array = [
     $item->one()
             ->two(),
 ];
+
+// Issue https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/1159
+$bar->prop = [
+    $foo->first()
+        ->second(),
+];
