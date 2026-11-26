@@ -515,6 +515,18 @@ final class Tokens
     ];
 
     /**
+     * Tokens that open named OO structure scopes.
+     *
+     * @var array<int|string, int|string>
+     */
+    public const NAMED_OO_SCOPES = [
+        T_CLASS     => T_CLASS,
+        T_INTERFACE => T_INTERFACE,
+        T_TRAIT     => T_TRAIT,
+        T_ENUM      => T_ENUM,
+    ];
+
+    /**
      * Tokens representing PHP magic constants.
      *
      * @var array <int|string> => <int|string>
