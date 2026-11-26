@@ -130,12 +130,9 @@ class ControlStructureSpacingSniff implements Sniff
         }
 
         // We ignore spacing for some structures that tend to have their own rules.
-        $ignore = [
+        $ignore  = Tokens::NAMED_OO_SCOPES;
+        $ignore += [
             T_FUNCTION             => true,
-            T_CLASS                => true,
-            T_INTERFACE            => true,
-            T_TRAIT                => true,
-            T_ENUM                 => true,
             T_DOC_COMMENT_OPEN_TAG => true,
         ];
 

@@ -81,18 +81,15 @@ class BlockCommentSniff implements Sniff
             } while (true);
 
             $ignore  = Tokens::SCOPE_MODIFIERS;
+            $ignore += Tokens::NAMED_OO_SCOPES;
             $ignore += [
-                T_CLASS     => true,
-                T_INTERFACE => true,
-                T_TRAIT     => true,
-                T_ENUM      => true,
-                T_FUNCTION  => true,
-                T_FINAL     => true,
-                T_STATIC    => true,
-                T_ABSTRACT  => true,
-                T_CONST     => true,
-                T_VAR       => true,
-                T_READONLY  => true,
+                T_FUNCTION => true,
+                T_FINAL    => true,
+                T_STATIC   => true,
+                T_ABSTRACT => true,
+                T_CONST    => true,
+                T_VAR      => true,
+                T_READONLY => true,
             ];
             if (isset($ignore[$tokens[$nextToken]['code']]) === true) {
                 return;

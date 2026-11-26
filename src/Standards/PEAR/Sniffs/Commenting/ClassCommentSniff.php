@@ -11,6 +11,7 @@
 namespace PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Tokens;
 
 class ClassCommentSniff extends FileCommentSniff
 {
@@ -23,12 +24,7 @@ class ClassCommentSniff extends FileCommentSniff
      */
     public function register()
     {
-        return [
-            T_CLASS,
-            T_INTERFACE,
-            T_TRAIT,
-            T_ENUM,
-        ];
+        return Tokens::NAMED_OO_SCOPES;
     }
 
 

@@ -12,6 +12,7 @@ namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Files;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
 
 class FileExtensionSniff implements Sniff
 {
@@ -42,7 +43,7 @@ class FileExtensionSniff implements Sniff
         $tokens    = $phpcsFile->getTokens();
         $fileName  = $phpcsFile->getFilename();
         $extension = substr($fileName, strrpos($fileName, '.'));
-        $nextClass = $phpcsFile->findNext([T_CLASS, T_INTERFACE, T_TRAIT, T_ENUM], $stackPtr);
+        $nextClass = $phpcsFile->findNext(Tokens::NAMED_OO_SCOPES, $stackPtr);
 
         if ($nextClass !== false) {
             $phpcsFile->recordMetric($stackPtr, 'File extension for class files', $extension);

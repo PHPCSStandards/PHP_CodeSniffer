@@ -50,13 +50,7 @@ class DuplicateClassNameSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
 
         $namespace  = '';
-        $findTokens = [
-            T_CLASS,
-            T_INTERFACE,
-            T_TRAIT,
-            T_ENUM,
-            T_NAMESPACE,
-        ];
+        $findTokens = (Tokens::NAMED_OO_SCOPES + [T_NAMESPACE => T_NAMESPACE]);
 
         $stackPtr = $phpcsFile->findNext($findTokens, ($stackPtr + 1));
         while ($stackPtr !== false) {

@@ -22,13 +22,7 @@ class SideEffectsSniff implements Sniff
      *
      * @var array<int|string, int|string>
      */
-    private const SYMBOL_TOKENS = [
-        T_CLASS     => T_CLASS,
-        T_INTERFACE => T_INTERFACE,
-        T_TRAIT     => T_TRAIT,
-        T_ENUM      => T_ENUM,
-        T_FUNCTION  => T_FUNCTION,
-    ];
+    private const SYMBOL_TOKENS = (Tokens::NAMED_OO_SCOPES + [T_FUNCTION => T_FUNCTION]);
 
     /**
      * Condition tokens within which symbols may be defined.
