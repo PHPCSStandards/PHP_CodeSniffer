@@ -12,6 +12,7 @@ namespace PHP_CodeSniffer\Standards\PSR12\Sniffs\Classes;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
 
 class ClosingBraceSniff implements Sniff
 {
@@ -24,13 +25,7 @@ class ClosingBraceSniff implements Sniff
      */
     public function register()
     {
-        return [
-            T_CLASS,
-            T_INTERFACE,
-            T_TRAIT,
-            T_ENUM,
-            T_FUNCTION,
-        ];
+        return (Tokens::NAMED_OO_SCOPES + [T_FUNCTION => T_FUNCTION]);
     }
 
 

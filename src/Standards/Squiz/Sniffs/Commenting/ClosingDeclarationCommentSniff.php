@@ -12,6 +12,7 @@ namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
 
 class ClosingDeclarationCommentSniff implements Sniff
 {
@@ -24,13 +25,7 @@ class ClosingDeclarationCommentSniff implements Sniff
      */
     public function register()
     {
-        return [
-            T_CLASS,
-            T_ENUM,
-            T_FUNCTION,
-            T_INTERFACE,
-            T_TRAIT,
-        ];
+        return (Tokens::NAMED_OO_SCOPES + [T_FUNCTION => T_FUNCTION]);
     }
 
 

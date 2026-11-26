@@ -71,25 +71,22 @@ class InlineCommentSniff implements Sniff
                 break;
             } while (true);
 
-            $ignore = [
-                T_CLASS,
-                T_INTERFACE,
-                T_TRAIT,
-                T_ENUM,
-                T_FUNCTION,
-                T_CLOSURE,
-                T_PUBLIC,
-                T_PRIVATE,
-                T_PROTECTED,
-                T_FINAL,
-                T_STATIC,
-                T_ABSTRACT,
-                T_READONLY,
-                T_CONST,
-                T_INCLUDE,
-                T_INCLUDE_ONCE,
-                T_REQUIRE,
-                T_REQUIRE_ONCE,
+            $ignore  = Tokens::NAMED_OO_SCOPES;
+            $ignore += [
+                T_FUNCTION     => T_FUNCTION,
+                T_CLOSURE      => T_CLOSURE,
+                T_PUBLIC       => T_PUBLIC,
+                T_PRIVATE      => T_PRIVATE,
+                T_PROTECTED    => T_PROTECTED,
+                T_FINAL        => T_FINAL,
+                T_STATIC       => T_STATIC,
+                T_ABSTRACT     => T_ABSTRACT,
+                T_READONLY     => T_READONLY,
+                T_CONST        => T_CONST,
+                T_INCLUDE      => T_INCLUDE,
+                T_INCLUDE_ONCE => T_INCLUDE_ONCE,
+                T_REQUIRE      => T_REQUIRE,
+                T_REQUIRE_ONCE => T_REQUIRE_ONCE,
             ];
 
             if (in_array($tokens[$nextToken]['code'], $ignore, true) === true) {

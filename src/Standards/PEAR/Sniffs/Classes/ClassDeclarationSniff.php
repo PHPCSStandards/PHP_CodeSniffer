@@ -12,6 +12,7 @@ namespace PHP_CodeSniffer\Standards\PEAR\Sniffs\Classes;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
 
 class ClassDeclarationSniff implements Sniff
 {
@@ -24,12 +25,7 @@ class ClassDeclarationSniff implements Sniff
      */
     public function register()
     {
-        return [
-            T_CLASS,
-            T_INTERFACE,
-            T_TRAIT,
-            T_ENUM,
-        ];
+        return Tokens::NAMED_OO_SCOPES;
     }
 
 

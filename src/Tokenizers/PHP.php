@@ -20,16 +20,12 @@ class PHP extends Tokenizer
     /**
      * Contexts in which keywords should always be tokenized as T_STRING.
      *
-     * @var array<int|string, true>
+     * @var array<int|string, int|string|true>
      */
-    protected const T_STRING_CONTEXTS = [
+    protected const T_STRING_CONTEXTS = (Tokens::NAMED_OO_SCOPES + [
         T_OBJECT_OPERATOR          => true,
         T_NULLSAFE_OBJECT_OPERATOR => true,
         T_FUNCTION                 => true,
-        T_CLASS                    => true,
-        T_INTERFACE                => true,
-        T_TRAIT                    => true,
-        T_ENUM                     => true,
         T_ENUM_CASE                => true,
         T_EXTENDS                  => true,
         T_IMPLEMENTS               => true,
@@ -41,7 +37,7 @@ class PHP extends Tokenizer
         T_NAMESPACE                => true,
         T_PAAMAYIM_NEKUDOTAYIM     => true,
         T_GOTO                     => true,
-    ];
+    ]);
 
     /**
      * Regular expression to check if a given identifier name is valid for use in PHP.

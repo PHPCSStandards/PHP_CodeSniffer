@@ -13,6 +13,7 @@ namespace PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\Tokens;
 
 class FileCommentSniff implements Sniff
 {
@@ -166,21 +167,18 @@ class FileCommentSniff implements Sniff
             $nextToken--;
         }
 
-        $ignore = [
-            T_CLASS,
-            T_INTERFACE,
-            T_TRAIT,
-            T_ENUM,
-            T_FUNCTION,
-            T_CLOSURE,
-            T_PUBLIC,
-            T_PRIVATE,
-            T_PROTECTED,
-            T_FINAL,
-            T_STATIC,
-            T_ABSTRACT,
-            T_READONLY,
-            T_CONST,
+        $ignore  = Tokens::NAMED_OO_SCOPES;
+        $ignore += [
+            T_FUNCTION  => T_FUNCTION,
+            T_CLOSURE   => T_CLOSURE,
+            T_PUBLIC    => T_PUBLIC,
+            T_PRIVATE   => T_PRIVATE,
+            T_PROTECTED => T_PROTECTED,
+            T_FINAL     => T_FINAL,
+            T_STATIC    => T_STATIC,
+            T_ABSTRACT  => T_ABSTRACT,
+            T_READONLY  => T_READONLY,
+            T_CONST     => T_CONST,
         ];
 
         if (in_array($tokens[$nextToken]['code'], $ignore, true) === true) {
