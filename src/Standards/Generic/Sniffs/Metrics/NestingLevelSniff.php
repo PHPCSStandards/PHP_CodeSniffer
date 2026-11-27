@@ -78,16 +78,20 @@ class NestingLevelSniff implements Sniff
         // We subtract the nesting level of the function itself.
         $nestingLevel = ($nestingLevel - $tokens[$stackPtr]['level'] - 1);
 
+        $name = $phpcsFile->getDeclarationName($stackPtr);
+
         if ($nestingLevel > $this->absoluteNestingLevel) {
-            $error = 'Function\'s nesting level (%s) exceeds allowed maximum of %s';
+            $error = 'Nesting level of function %s() (%s) exceeds the allowed maximum of %s';
             $data  = [
+                $name,
                 $nestingLevel,
                 $this->absoluteNestingLevel,
             ];
             $phpcsFile->addError($error, $stackPtr, 'MaxExceeded', $data);
         } elseif ($nestingLevel > $this->nestingLevel) {
-            $warning = 'Function\'s nesting level (%s) exceeds %s; consider refactoring the function';
+            $warning = 'Nesting level of function %s() (%s) exceeds %s; consider refactoring the function';
             $data    = [
+                $name,
                 $nestingLevel,
                 $this->nestingLevel,
             ];
