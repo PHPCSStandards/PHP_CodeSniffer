@@ -832,6 +832,40 @@ class ScopeIndentSniff implements Sniff
                 $exact = false;
             }
 
+            // A comment between two CASE or DEFAULT statements that share a scope
+            // closer (fall-through cases) belongs with the following statement, so
+            // it is allowed to use that statement's indent instead of the body
+            // indent of the preceding case.
+            if ($checkToken !== null
+                && $exact === false
+                && $tokens[$checkToken]['code'] === T_COMMENT
+                && empty($tokens[$checkToken]['conditions']) === false
+            ) {
+                $lastCondition = $tokens[$checkToken]['conditions'];
+                end($lastCondition);
+                $lastCondition = key($lastCondition);
+                if (($tokens[$lastCondition]['code'] === T_CASE
+                    || $tokens[$lastCondition]['code'] === T_DEFAULT)
+                    && isset($tokens[$lastCondition]['scope_closer']) === true
+                ) {
+                    $nextStatement = $phpcsFile->findNext(Tokens::EMPTY_TOKENS, ($checkToken + 1), null, true);
+                    if ($nextStatement !== false
+                        && ($tokens[$nextStatement]['code'] === T_CASE
+                        || $tokens[$nextStatement]['code'] === T_DEFAULT)
+                        && isset($tokens[$nextStatement]['scope_closer']) === true
+                        && $tokens[$nextStatement]['scope_closer'] === $tokens[$lastCondition]['scope_closer']
+                    ) {
+                        $checkIndent = ($currentIndent - $this->indent);
+
+                        if ($this->debug === true) {
+                            $line = $tokens[$checkToken]['line'];
+                            StatusWriter::write("Comment between fall-through case statements found on line $line");
+                            StatusWriter::write("=> checking indent of $checkIndent; main indent remains at $currentIndent", 1);
+                        }
+                    }
+                }
+            }
+
             if ($checkIndent === null) {
                 $checkIndent = $currentIndent;
             }
