@@ -210,3 +210,18 @@ match ($var) {
     'a' => [ 1, 2.5, $var],
     default => false
 };
+
+class Attributes {
+    /* test1524MultiLineAttributeBlock */
+    #[
+        AttributeA(),
+        AttributeB()
+    ]
+    public function foo() {}
+
+    /* test1524SingleLineAttributeBlock */
+    #[AttributeA, AttributeB] public function bar() {}
+}
+
+/* test1524AttributeOnParameter */
+function baz(#[AttributeA, AttributeB] $param) {}

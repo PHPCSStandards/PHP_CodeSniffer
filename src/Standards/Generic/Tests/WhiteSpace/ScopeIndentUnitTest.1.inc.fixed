@@ -1648,6 +1648,28 @@ $result = array_map(
     $data
 );
 
+// Issue #1524: match expression in a method with a multi-line attribute block.
+class Issue1524
+{
+    #[
+        AttributeA(),
+        AttributeB()
+    ]
+    public function foo(): int
+    {
+        $result = match ($bar) {
+            'foo' => true,
+            default => null
+        };
+
+        if ($result === null) {
+            return 404;
+        }
+
+        return 200;
+    }
+}
+
 /* ADD NEW TESTS ABOVE THIS LINE AND MAKE SURE THAT THE 1 (space-based) AND 2 (tab-based) FILES ARE IN SYNC! */
 ?>
 
