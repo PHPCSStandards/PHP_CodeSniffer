@@ -236,11 +236,6 @@ class OperatorBracketSniff implements Sniff
 
             return;
         }
-
-        $lastAssignment = $phpcsFile->findPrevious(Tokens::ASSIGNMENT_TOKENS, $stackPtr, null, false, null, true);
-        if ($lastAssignment !== false && $lastAssignment > $lastBracket) {
-            $this->addMissingBracketsError($phpcsFile, $stackPtr);
-        }
     }
 
 
