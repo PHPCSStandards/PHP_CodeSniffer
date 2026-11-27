@@ -17,6 +17,13 @@ use PHP_CodeSniffer\Util\Tokens;
 class OperatorSpacingSniff extends SquizOperatorSpacingSniff
 {
 
+    /**
+     * The PER version to be compatible with. For backwards compatibility this is set to 1.0 by default.
+     *
+     * @var string
+     */
+    public $perCompatible = '1.0';
+
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -74,6 +81,59 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
         }
 
         $operator = $tokens[$stackPtr]['content'];
+
+        // PER-CS 3.0: Exception to the rule for pipe operators in multi-catch blocks where no space is required.
+        // As union types didn't exist when PSR-12 was created, the pipe in catch statements
+        // was originally treated as a bitwise operator. This check changes the spacing requirement
+        // for that specific case when opting in to PER-CS 3.0 or higher.
+        if ($tokens[$stackPtr]['code'] === T_BITWISE_OR
+            && isset($tokens[$stackPtr]['nested_parenthesis']) === true
+            && version_compare($this->perCompatible, '3.0', '>=') === true
+        ) {
+            // Calling array_keys() on a nested sub-array can have memory leaks, assign to a variable first.
+            // See https://github.com/squizlabs/PHP_CodeSniffer/pull/2273 .
+            $parenthesis     = $tokens[$stackPtr]['nested_parenthesis'];
+            $parenthesisKeys = array_keys($parenthesis);
+            $bracket         = array_pop($parenthesisKeys);
+            if (isset($tokens[$bracket]['parenthesis_owner']) === true
+                && $tokens[$tokens[$bracket]['parenthesis_owner']]['code'] === T_CATCH
+            ) {
+                if ($tokens[($stackPtr - 1)]['code'] === T_WHITESPACE
+                    && strpos($tokens[($stackPtr - 1)]['content'], $phpcsFile->eolChar) === false
+                    && $tokens[($stackPtr - 1)]['column'] !== 1
+                ) {
+                    $error = 'Expected 0 spaces before "%s" in multi-catch statement; %s found';
+                    $data  = [
+                        $operator,
+                        $tokens[($stackPtr - 1)]['length'],
+                    ];
+
+                    $fix = $phpcsFile->addFixableError($error, $stackPtr, 'MultiCatchSpaceBefore', $data);
+                    if ($fix === true) {
+                        $phpcsFile->fixer->replaceToken(($stackPtr - 1), '');
+                    }
+                }
+
+                if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE
+                    && strpos($tokens[($stackPtr + 1)]['content'], $phpcsFile->eolChar) === false
+                ) {
+                    $error = 'Expected 0 spaces after "%s" in multi-catch statement; %s found';
+                    $data  = [
+                        $operator,
+                        $tokens[($stackPtr + 1)]['length'],
+                    ];
+
+                    $fix = $phpcsFile->addFixableError($error, $stackPtr, 'MultiCatchSpaceAfter', $data);
+                    if ($fix === true) {
+                        $phpcsFile->fixer->replaceToken(($stackPtr + 1), '');
+                    }
+                }
+
+                // Now that this special case is handled, we can return early as we don't need to do
+                // further checks.
+                return;
+            }
+        }
 
         $checkBefore = true;
         $checkAfter  = true;
