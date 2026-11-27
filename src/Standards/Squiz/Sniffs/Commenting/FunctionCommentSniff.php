@@ -26,6 +26,13 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
     public $skipIfInheritdoc = false;
 
     /**
+     * Whether to use short forms of type keywords.
+     *
+     * @var boolean
+     */
+    public $useShortTypes = false;
+
+    /**
      * The current PHP version.
      *
      * @var integer|string|null
@@ -88,7 +95,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                 $typeNames      = explode('|', $returnType);
                 $suggestedNames = [];
                 foreach ($typeNames as $typeName) {
-                    $suggestedName = Common::suggestType($typeName);
+                    $suggestedName = Common::suggestType($typeName, $this->useShortTypes);
                     if (in_array($suggestedName, $suggestedNames, true) === false) {
                         $suggestedNames[] = $suggestedName;
                     }
@@ -419,7 +426,7 @@ class FunctionCommentSniff extends PEARFunctionCommentSniff
                     $typeName = substr($typeName, 1);
                 }
 
-                $suggestedName        = Common::suggestType($typeName);
+                $suggestedName        = Common::suggestType($typeName, $this->useShortTypes);
                 $suggestedTypeNames[] = $suggestedName;
 
                 if (count($typeNames) > 1) {

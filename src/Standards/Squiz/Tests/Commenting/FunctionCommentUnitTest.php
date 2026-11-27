@@ -181,6 +181,14 @@ final class FunctionCommentUnitTest extends AbstractSniffTestCase
                     8 => 1,
                 ];
 
+            case 'FunctionCommentUnitTest.3.inc':
+                return [
+                    8  => 1,
+                    10 => 1,
+                    25 => 1,
+                    27 => 1,
+                ];
+
             default:
                 return [];
         }
