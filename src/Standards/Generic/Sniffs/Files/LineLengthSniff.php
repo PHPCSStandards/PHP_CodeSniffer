@@ -177,21 +177,62 @@ class LineLengthSniff implements Sniff
         if ($this->absoluteLineLimit > 0
             && $lineLength > $this->absoluteLineLimit
         ) {
+            $code = 'MaxExceeded';
+            if ($this->isNamespacedNameExceedingLength($tokens, $stackPtr, $this->absoluteLineLimit) === true) {
+                $code = 'NamespacedNameMaxExceeded';
+            }
+
             $data = [
                 $this->absoluteLineLimit,
                 $lineLength,
             ];
 
             $error = 'Line exceeds maximum limit of %s characters; contains %s characters';
-            $phpcsFile->addError($error, $stackPtr, 'MaxExceeded', $data);
+            $phpcsFile->addError($error, $stackPtr, $code, $data);
         } elseif ($lineLength > $this->lineLimit) {
+            $code = 'TooLong';
+            if ($this->isNamespacedNameExceedingLength($tokens, $stackPtr, $this->lineLimit) === true) {
+                $code = 'NamespacedNameTooLong';
+            }
+
             $data = [
                 $this->lineLimit,
                 $lineLength,
             ];
 
             $warning = 'Line exceeds %s characters; contains %s characters';
-            $phpcsFile->addWarning($warning, $stackPtr, 'TooLong', $data);
+            $phpcsFile->addWarning($warning, $stackPtr, $code, $data);
         }
+    }
+
+
+    /**
+     * Checks if a line is a namespaced name
+     *
+     * @param array $tokens    The token stack.
+     * @param int   $stackPtr  The last token on the line.
+     * @param int   $lineLimit The line limit.
+     *
+     * @return bool
+     */
+    private function isNamespacedNameExceedingLength(array $tokens, int $stackPtr, int $lineLimit): bool
+    {
+        $line = $tokens[$stackPtr]['line'];
+
+        for ($i = $stackPtr; $tokens[$i]['line'] === $line; $i--) {
+            $length = ($tokens[$i]['column'] + $tokens[$i]['length'] - 1);
+
+            // Check the line limit of the namespaced name is equal or over the line length. This check accounts for the
+            // fact that namespaced names are or closed by ; or opened by ( or {.
+            if ($length >= $lineLimit
+                && ($tokens[$i]['code'] === T_NAME_QUALIFIED
+                || $tokens[$i]['code'] === T_NAME_FULLY_QUALIFIED
+                || $tokens[$i]['code'] === T_NAME_RELATIVE)
+            ) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
