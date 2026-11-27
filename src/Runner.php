@@ -20,6 +20,7 @@ use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Files\DummyFile;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Files\FileList;
+use PHP_CodeSniffer\Files\LocalFile;
 use PHP_CodeSniffer\Util\Cache;
 use PHP_CodeSniffer\Util\Common;
 use PHP_CodeSniffer\Util\ExitCode;
@@ -115,8 +116,11 @@ class Runner
 
             // Disable caching if we are processing STDIN as we can't be 100%
             // sure where the file came from or if it will change in the future.
+            // Also disable parallel processing because STDIN is a single file
+            // held in memory and the workers can't see it across the fork.
             if ($this->config->stdin === true) {
-                $this->config->cache = false;
+                $this->config->cache    = false;
+                $this->config->parallel = 1;
             }
 
             $this->run();
@@ -397,18 +401,37 @@ class Runner
             }
         } else {
             // Batching and forking.
-            $childProcs  = [];
-            $numPerBatch = ceil($numFiles / $this->config->parallel);
+            $childProcs = [];
 
-            for ($batch = 0; $batch < $this->config->parallel; $batch++) {
-                $startAt = ($batch * $numPerBatch);
-                if ($startAt >= $numFiles) {
-                    break;
+            // Distribute files round-robin in size order so each batch
+            // ends up with a similar total workload.
+            $sortedPaths = [];
+            $todo->rewind();
+            while ($todo->valid() === true) {
+                $sortedPaths[] = $todo->key();
+                $todo->next();
+            }
+
+            $sizes = [];
+            foreach ($sortedPaths as $path) {
+                $size = @filesize($path);
+                if ($size === false) {
+                    $size = 0;
                 }
 
-                $endAt = ($startAt + $numPerBatch);
-                if ($endAt > $numFiles) {
-                    $endAt = $numFiles;
+                $sizes[$path] = $size;
+            }
+
+            usort(
+                $sortedPaths,
+                static function ($a, $b) use ($sizes) {
+                    return ($sizes[$b] - $sizes[$a]);
+                }
+            );
+
+            for ($batch = 0; $batch < $this->config->parallel; $batch++) {
+                if ($batch >= $numFiles) {
+                    break;
                 }
 
                 $childOutFilename = tempnam(sys_get_temp_dir(), 'phpcs-child');
@@ -418,12 +441,6 @@ class Runner
                 } elseif ($pid !== 0) {
                     $childProcs[$pid] = $childOutFilename;
                 } else {
-                    // Move forward to the start of the batch.
-                    $todo->rewind();
-                    for ($i = 0; $i < $startAt; $i++) {
-                        $todo->next();
-                    }
-
                     // Reset the reporter to make sure only figures from this
                     // file batch are recorded.
                     $this->reporter->totalFiles           = 0;
@@ -437,12 +454,11 @@ class Runner
                     // Process the files.
                     $pathsProcessed = [];
                     ob_start();
-                    for ($i = $startAt; $i < $endAt; $i++) {
-                        $path = $todo->key();
-                        $file = $todo->current();
+                    for ($i = $batch; $i < $numFiles; $i += $this->config->parallel) {
+                        $path = $sortedPaths[$i];
+                        $file = new LocalFile($path, $this->ruleset, $this->config);
 
                         if ($file->ignored === true) {
-                            $todo->next();
                             continue;
                         }
 
@@ -458,7 +474,6 @@ class Runner
                         $this->processFile($file);
 
                         $pathsProcessed[] = $path;
-                        $todo->next();
                     }
 
                     $debugOutput = ob_get_contents();
