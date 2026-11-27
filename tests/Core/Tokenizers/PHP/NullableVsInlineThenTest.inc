@@ -16,7 +16,59 @@ abstract class Nullable
 
     /* testNullableAbstractOnly */
     abstract ?string $prop5 { get; }
+
+    public int $prop6 {
+        /* testPropertyHookParamTypeNullableInt */
+        set(?int $value) {
+            $this->prop6 = $value ?? 0;
+        }
+    }
+
+    public string $prop7 {
+        /* testShortPropertyHookParamTypeNullableString */
+        set(?string $value) => $value ?? '';
+    }
+
+    public int $prop8 {
+        set(
+            /* testPropertyHookParamTypeNullableMultiLine */
+            ?int $value
+        ) {}
+    }
+
+    public int $prop9 {
+        /* testPropertyHookParamTypeNullableWithComment */
+        set(/* comment */ ?int $value) {}
+    }
+
+    public int $prop10 {
+        /* testPropertyHookParamTypeNullableWithWhitespace */
+        set(? int $value) {}
+    }
+
+    public int $prop11 {
+        /* testFinalPropertyHookParamTypeNullable */
+        final set(?int $value) {}
+    }
+
+    public string $prop12 {
+        /* testPropertyHookParamTypeNullableWithAttribute */
+        set(#[SensitiveParameter] ?string $value) {}
+    }
+
+    public function __construct(
+        public int $promoted {
+            /* testPromotedPropertyHookParamTypeNullable */
+            set(?int $value) {}
+        },
+    ) {}
 }
+
+/* testFunctionParamTypeNullableFirstParam */
+function nullableFirstParam(?int $a) {}
+
+/* testArrowFunctionParamTypeNullableFirstParam */
+$arrow = fn(?int $a) => $a;
 
 $closure = function (
     /* testClosureParamTypeNullableInt */
@@ -37,6 +89,18 @@ class InlineThen
 {
     /* testInlineThenInPropertyDefaultValue */
     public int $prop = self::SOMECONT ? PHP_CONST ? OTHER_CONST;
+
+    public int $hookProp {
+        set(?int $value) {
+            /* testInlineThenInPropertyHook */
+            $this->hookProp = $value ? PHP_INT_MAX - $value : 0;
+        }
+    }
+
+    public string $shortHookProp {
+        /* testInlineThenInShortPropertyHook */
+        get => $this->flag ? PHP_EOL . 'yes' : 'no';
+    }
 }
 
 /* testInlineThenWithArrayDeclaration */
