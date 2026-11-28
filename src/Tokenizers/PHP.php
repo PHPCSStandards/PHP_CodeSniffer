@@ -1326,6 +1326,15 @@ class PHP extends Tokenizer
             }
 
             /*
+                Reset the switch-case cache when a new switch is encountered, so "case" keywords
+                belonging to a previous switch can never be confused with those of the current switch.
+            */
+
+            if ($tokenIsArray === true && $token[0] === T_SWITCH) {
+                $switchCases = [];
+            }
+
+            /*
                 Convert enum "case" to T_ENUM_CASE
             */
 
@@ -1379,6 +1388,8 @@ class PHP extends Tokenizer
                             $switchCases[$stackPtr] = true;
                             break;
                         }
+
+                        continue;
                     }
 
                     if ($scope !== 0) {
