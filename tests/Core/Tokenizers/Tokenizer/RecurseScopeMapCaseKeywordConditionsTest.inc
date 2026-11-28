@@ -125,6 +125,19 @@ enum Foo: string {
     case EXIT = 'exit';
 }
 
+// Related to https://github.com/PHPCSStandards/PHP_CodeSniffer/pull/1532#issuecomment-7073446480
+enum NodeKind: string
+{
+    /* testEnumCaseNamedSwitch */
+    case Switch = 'Switch';
+    /* testNameAfterKeywordEnumCaseNameShouldBeString1 */
+    case SwitchBody = 'SwitchBody';
+    /* testNameAfterKeywordEnumCaseNameShouldBeString2 */
+    case SwitchBraceDelimitedBody = 'SwitchBraceDelimitedBody';
+    /* testEnumCaseNamedDeclare */
+    case Declare = 'Declare';
+}
+
 // Test for https://github.com/squizlabs/PHP_CodeSniffer/issues/497
 switch ($value):
     /* testSwitchCaseScopeCloserSharedWithSwitch */
