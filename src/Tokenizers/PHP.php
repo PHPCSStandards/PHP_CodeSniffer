@@ -745,6 +745,9 @@ class PHP extends Tokenizer
                         StatusWriter::write("* token $stackPtr changed from $type to T_STRING", 2);
                     }
 
+                    // Modify $tokens too so we don't have to take this into account again later on.
+                    $tokens[$stackPtr][0] = T_STRING;
+
                     $finalTokens[$newStackPtr] = [
                         'code'    => T_STRING,
                         'type'    => 'T_STRING',
