@@ -86,7 +86,7 @@ final class RecurseScopeMapCaseKeywordConditionsTest extends AbstractTokenizerTe
             'enum case, name after "switch" case name 1'                 => ['/* testNameAfterKeywordEnumCaseNameShouldBeString1 */'],
             'enum case, name after "switch" case name 2'                 => ['/* testNameAfterKeywordEnumCaseNameShouldBeString2 */'],
             'enum case, "declare" as case name after "switch" case name' => ['/* testEnumCaseNamedDeclare */'],
-
+            'enum case, after enum method named switch'                  => ['/* testEnumCaseAfterSwitchAsMethodName */'],
         ];
     }
 

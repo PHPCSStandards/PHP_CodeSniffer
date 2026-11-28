@@ -138,6 +138,15 @@ enum NodeKind: string
     case Declare = 'Declare';
 }
 
+enum Issue1562: string {
+    public function switch($a) {
+        return $a;
+    }
+
+    /* testEnumCaseAfterSwitchAsMethodName */
+    case Bar = 'bar';
+}
+
 // Test for https://github.com/squizlabs/PHP_CodeSniffer/issues/497
 switch ($value):
     /* testSwitchCaseScopeCloserSharedWithSwitch */

@@ -144,3 +144,12 @@ enum NodeKind: string
     /* testEnumCaseNamedDeclare */
     case Declare = 'Declare';
 }
+
+enum Issue1562: string {
+    public function switch($a) {
+        return $a;
+    }
+
+    /* testEnumCaseAfterSwitchAsMethodName */
+    case Bar = 'bar';
+}
